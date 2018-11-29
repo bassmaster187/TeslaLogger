@@ -2,4 +2,6 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-/TeslaLogger/bin/Debug/Exception
+/TeslaLogger/bin/Debug
+/TeslaLogger/obj/Debug
+/.vs
