@@ -10,6 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TeslaLogger\sqlschema.sql = TeslaLogger\sqlschema.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grafana", "Grafana", "{4C4289D6-042B-4641-ACF7-1E2F3FD3F9CF}"
+	ProjectSection(SolutionItems) = preProject
+		TeslaLogger\Grafana\Degradation.json = TeslaLogger\Grafana\Degradation.json
+		TeslaLogger\Grafana\km Stand.json = TeslaLogger\Grafana\km Stand.json
+		TeslaLogger\Grafana\Ladehistorie.json = TeslaLogger\Grafana\Ladehistorie.json
+		TeslaLogger\Grafana\Laden.json = TeslaLogger\Grafana\Laden.json
+		TeslaLogger\Grafana\Trip.json = TeslaLogger\Grafana\Trip.json
+		TeslaLogger\Grafana\Vampir Drain.json = TeslaLogger\Grafana\Vampir Drain.json
+		TeslaLogger\Grafana\Verbrauch.json = TeslaLogger\Grafana\Verbrauch.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +34,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C4289D6-042B-4641-ACF7-1E2F3FD3F9CF} = {37F4A1BB-79C0-4358-A773-738FC7CE332A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19468AE0-9122-4697-94FD-17389927F087}
