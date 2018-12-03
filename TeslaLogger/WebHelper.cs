@@ -326,16 +326,14 @@ namespace TeslaLogger
                                 if (!string.IsNullOrEmpty(line))
                                 {
                                     var values = line.Split(',');
-                                    Tools.Log("Elevation: " + values[4]);
+                                    // Tools.Log("Elevation: " + values[4]);
 
                                     elevation = values[4];
                                     elevation_time = DateTime.Now;
                                 }
                             }
                         }
-
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -538,7 +536,6 @@ namespace TeslaLogger
                     }
                 }
             }
-
         }
 
         private double GetIdealBatteryRangekm()

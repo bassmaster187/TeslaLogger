@@ -9,7 +9,18 @@ namespace TeslaLogger
 {
     class DBHelper
     {
-        public static readonly string DBConnectionstring = ApplicationSettings.Default.DBConnectionstring; 
+        public static string DBConnectionstring
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+                    return "Server=127.0.0.1;Database=test; User ID=pi;Password=teslalogger;";
+
+                return ApplicationSettings.Default.DBConnectionstring;
+            }
+        }
+
+
 
         public static void CloseState()
         {

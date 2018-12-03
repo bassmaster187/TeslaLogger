@@ -203,7 +203,7 @@ namespace TeslaLogger
                                     }
                                     else
                                     {
-                                        Tools.Log(res);
+                                        // Tools.Log(res);
                                         System.Threading.Thread.Sleep(10000); 
                                     }
                                 }
