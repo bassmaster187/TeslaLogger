@@ -14,7 +14,7 @@ namespace TeslaLogger
             get
             {
                 if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
-                    return "Server=127.0.0.1;Database=test; User ID=pi;Password=teslalogger;";
+                    return "Server=localhost;Database=teslalogger;Uid=root;Password=teslalogger;";
 
                 return ApplicationSettings.Default.DBConnectionstring;
             }
@@ -181,7 +181,21 @@ namespace TeslaLogger
 
         }
 
-        static int GetMaxPosid()
+        public static int CountPos()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("Select count(*) from pos", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                    return Convert.ToInt32(dr[0]);
+            }
+
+            return 0;
+        }
+
+        public static int GetMaxPosid()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -207,6 +221,20 @@ namespace TeslaLogger
             }
 
             return 0;
+        }
+
+        public static string GetVersion()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT @@version", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                    return dr[0].ToString();
+            }
+
+            return "NULL";
         }
     }
 }

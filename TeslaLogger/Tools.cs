@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +43,19 @@ namespace TeslaLogger
         public static void SetThread_enUS()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
+        }
+
+        public static string GetMonoRuntimeVersion()
+        {
+            Type type = Type.GetType("Mono.Runtime");
+            if (type != null)
+            {
+                MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+                if (displayName != null)
+                    return displayName.Invoke(null, null).ToString();
+            }
+
+            return "NULL";
         }
     }
 }

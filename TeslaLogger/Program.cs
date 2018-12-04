@@ -34,7 +34,19 @@ namespace TeslaLogger
 
                 Tools.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Tools.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
-                Tools.Log("DBConnectionstring: " + ApplicationSettings.Default.DBConnectionstring);
+                Tools.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+                
+                Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
+                try
+                {
+                    Tools.Log("DB Version: " + DBHelper.GetVersion());
+                    Tools.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
+                }
+                catch (Exception ex)
+                {
+                    Tools.Log("DBCONNECTION " + ex.ToString());
+                    return;
+                }
 
                 WebHelper wh = new WebHelper();
                 wh.Tesla_token = wh.GetTokenAsync().Result;
@@ -44,7 +56,7 @@ namespace TeslaLogger
 
                 Tools.Log("TOKEN: " + wh.Tesla_token);
 
-                if (ApplicationSettings.Default.DBConnectionstring.Length == 0)
+                if (DBHelper.DBConnectionstring.Length == 0)
                     return;
 
                 wh.GetVehicles();
