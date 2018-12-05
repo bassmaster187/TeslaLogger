@@ -202,7 +202,7 @@ namespace TeslaLogger
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
+                if (dr.Read() && dr[0] != DBNull.Value)
                     return Convert.ToInt32(dr[0]);
             }
 
@@ -216,7 +216,7 @@ namespace TeslaLogger
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from charging", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
+                if (dr.Read() && dr[0] != DBNull.Value)
                     return Convert.ToInt32(dr[0]);
             }
 

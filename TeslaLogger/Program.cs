@@ -61,6 +61,12 @@ namespace TeslaLogger
 
                 wh.GetVehicles();
 
+                if (DBHelper.GetMaxPosid() == 0)
+                {
+                    Tools.Log("Insert first Pos");
+                    wh.IsDriving(true);
+                }
+
                 // Task.Factory.StartNew(() => wh.UpdateAllPosAddresses());
                 // Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 // wh.IsDriving();
