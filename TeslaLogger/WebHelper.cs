@@ -38,7 +38,10 @@ namespace TeslaLogger
                 Tools.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / 'xxxxxxxx'");
 
                 if (ApplicationSettings.Default.TeslaName.Length == 0 || ApplicationSettings.Default.TeslaPasswort.Length == 0)
+                {
+                    Tools.Log("NO Credentials");
                     throw new Exception("NO Credentials");
+                }
 
 
                 HttpClient client = new HttpClient();
@@ -59,7 +62,10 @@ namespace TeslaLogger
                 string resultContent = await result.Content.ReadAsStringAsync();
 
                 if (resultContent.Contains("authorization_required"))
+                {
+                    Tools.Log("Wrong Credentials");
                     throw new Exception("Wrong Credentials");
+                }
 
                 Tools.SetThread_enUS();
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -69,6 +75,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                Tools.Log("Error in GetTokenAsync: " + ex.Message);
                 Tools.ExceptionWriter(ex, "GetTokenAsync");
             }
 
