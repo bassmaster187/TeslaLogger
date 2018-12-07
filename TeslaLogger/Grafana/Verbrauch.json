@@ -114,7 +114,7 @@
           "alias": "",
           "format": "time_series",
           "group": [],
-          "hide": true,
+          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT\n  datum as time_sec,\n  speed as kMh, \n  power as PS, \n  ideal_battery_range_km as 'Range km', \n  outside_temp as '°C',\n  altitude as 'Höhe'\nFROM\n  pos\nWHERE\n  $__timeFilter(datum)\nORDER BY\n  Datum ASC",
@@ -312,5 +312,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 14
+  "version": 15
 }
