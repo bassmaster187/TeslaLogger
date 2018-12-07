@@ -1,1 +1,316 @@
-{"meta":{"type":"db","canSave":false,"canEdit":false,"canAdmin":false,"canStar":true,"slug":"verbrauch","url":"/grafana/d/zm7wN6Zgz/verbrauch","expires":"0001-01-01T00:00:00Z","created":"2018-11-09T15:12:51Z","updated":"2018-11-30T09:38:15Z","updatedBy":"admin","createdBy":"admin","version":29,"hasAcl":false,"isFolder":false,"folderId":0,"folderTitle":"General","folderUrl":"","provisioned":false},"dashboard":{"annotations":{"list":[{"builtIn":1,"datasource":"-- Grafana --","enable":true,"hide":true,"iconColor":"rgba(0, 211, 255, 1)","limit":100,"name":"Annotations \u0026 Alerts","showIn":0,"type":"dashboard"},{"datasource":"teslalogger","enable":true,"hide":false,"iconColor":"rgba(255, 96, 96, 1)","limit":100,"name":"Laden","rawQuery":"SELECT StartDate as time_sec,\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) \u003e 5\norder by StartDate desc\n\n\n\n ","showIn":0,"tags":[],"type":"tags"},{"datasource":"teslalogger","enable":true,"hide":false,"iconColor":"#508642","limit":100,"name":"Laden fertig","rawQuery":"SELECT EndDate as time_sec,\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) \u003e 5\norder by StartDate desc","showIn":0,"tags":[],"type":"tags"},{"datasource":"teslalogger","enable":true,"hide":false,"iconColor":"#64b0c8","limit":100,"name":"Schlafen","rawQuery":"SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep'\norder by StartDate desc\n","showIn":0,"tags":[],"type":"tags"},{"datasource":"teslalogger","enable":true,"hide":false,"iconColor":"#ba43a9","limit":100,"name":"Online","rawQuery":"SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online'\norder by StartDate desc\n","showIn":0,"tags":[],"type":"tags"}]},"editable":true,"gnetId":null,"graphTooltip":0,"id":8,"links":[],"panels":[{"aliasColors":{},"bars":false,"dashLength":10,"dashes":false,"datasource":"teslalogger","fill":1,"gridPos":{"h":19,"w":12,"x":0,"y":0},"id":2,"legend":{"avg":true,"current":false,"max":true,"min":true,"show":true,"total":false,"values":true},"lines":true,"linewidth":1,"links":[],"nullPointMode":"null","percentage":false,"pointradius":5,"points":false,"renderer":"flot","seriesOverrides":[{"alias":"Höhe","fill":0,"yaxis":2}],"spaceLength":10,"stack":false,"steppedLine":false,"targets":[{"alias":"","format":"time_series","rawSql":"SELECT\n $__timeEpoch(datum),\n speed as kMh, \n power as PS, \n ideal_battery_range_km as 'Range km', \n outside_temp as '°C',\n altitude as 'Höhe'\nFROM\n pos\nWHERE\n $__timeFilter(datum)\nORDER BY\n Datum ASC","refId":"A"}],"thresholds":[],"timeFrom":null,"timeShift":null,"title":"Verbrauch","tooltip":{"shared":true,"sort":0,"value_type":"individual"},"type":"graph","xaxis":{"buckets":null,"mode":"time","name":null,"show":true,"values":[]},"yaxes":[{"format":"short","label":null,"logBase":1,"max":null,"min":null,"show":true},{"decimals":null,"format":"short","label":null,"logBase":1,"max":null,"min":"0","show":true}],"yaxis":{"align":false,"alignLevel":null}},{"autoZoom":true,"datasource":"teslalogger","gridPos":{"h":19,"w":12,"x":12,"y":0},"id":4,"lineColor":"red","links":[],"maxDataPoints":500,"pointColor":"royalblue","targets":[{"alias":"","format":"time_series","rawSql":"SELECT\n avg(UNIX_TIMESTAMP(datum)) as time_sec,\n avg(lat) as lat,\n avg(lng) as lng\n FROM pos\nWHERE $__timeFilter(datum)\ngroup by UNIX_TIMESTAMP(datum) div least(300, greatest(10,($__interval_ms / 30000)))\nORDER BY datum ASC","refId":"A"}],"title":"Map","type":"grafana-trackmap-panel"}],"refresh":false,"schemaVersion":16,"style":"dark","tags":[],"templating":{"list":[]},"time":{"from":"now-3h","to":"now"},"timepicker":{"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"]},"timezone":"","title":"Verbrauch","uid":"zm7wN6Zgz","version":29}}
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
+        "name": "Annotations & Alerts",
+        "showIn": 0,
+        "type": "dashboard"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Laden",
+        "rawQuery": "SELECT StartDate as time_sec,\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#508642",
+        "limit": 100,
+        "name": "Laden fertig",
+        "rawQuery": "SELECT EndDate as time_sec,\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#64b0c8",
+        "limit": 100,
+        "name": "Schlafen",
+        "rawQuery": "SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep'\norder by StartDate desc\n",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#ba43a9",
+        "limit": 100,
+        "name": "Online",
+        "rawQuery": "SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online'\norder by StartDate desc\n",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 5,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "teslalogger",
+      "fill": 1,
+      "gridPos": {
+        "h": 19,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "legend": {
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Höhe",
+          "fill": 0,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "group": [],
+          "hide": true,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datum as time_sec,\n  speed as kMh, \n  power as PS, \n  ideal_battery_range_km as 'Range km', \n  outside_temp as '°C',\n  altitude as 'Höhe'\nFROM\n  pos\nWHERE\n  $__timeFilter(datum)\nORDER BY\n  Datum ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Verbrauch",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "autoZoom": true,
+      "datasource": "teslalogger",
+      "gridPos": {
+        "h": 19,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "lineColor": "red",
+      "links": [],
+      "maxDataPoints": 50000,
+      "pointColor": "royalblue",
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  UNIX_TIMESTAMP(datum) as time_sec,\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "lng"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "lat"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Map",
+      "type": "grafana-trackmap-panel"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Verbrauch",
+  "uid": "zm7wN6Zgz",
+  "version": 14
+}
