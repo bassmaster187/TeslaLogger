@@ -35,7 +35,11 @@ namespace TeslaLogger
         {
             try
             {
-                Tools.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / 'xxxxxxxx'");
+                string hiddenPassword = "";
+                for (int x = 0; x < ApplicationSettings.Default.TeslaPasswort.Length; x++)
+                    hiddenPassword += "x";
+
+                Tools.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / '"+ hiddenPassword +"'");
 
                 if (ApplicationSettings.Default.TeslaName.Length == 0 || ApplicationSettings.Default.TeslaPasswort.Length == 0)
                 {
