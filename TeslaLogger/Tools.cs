@@ -13,6 +13,14 @@ namespace TeslaLogger
         {
             try
             {
+                if (inhalt != null && inhalt.Contains("vehicle unavailable:"))
+                {
+                    Tools.Log("vehicle unavailable");
+                    System.Threading.Thread.Sleep(30000);
+
+                    return;
+                }
+
                 string temp = ex.ToString();
                 temp += "\r\n-------------------------\r\n";
 
