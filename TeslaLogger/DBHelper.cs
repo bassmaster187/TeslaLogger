@@ -125,7 +125,12 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@speed", (int)((decimal)speed * 1.60934M));
                 cmd.Parameters.AddWithValue("@power", (int)(power * 1.35962M));
                 cmd.Parameters.AddWithValue("@odometer", odometer.ToString());
-                cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+
+                if (ideal_battery_range_km == -1)
+                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+
                 cmd.Parameters.AddWithValue("@address", address);
 
                 if (outside_temp == null)

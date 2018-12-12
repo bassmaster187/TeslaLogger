@@ -560,6 +560,10 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+
+                if (r2["ideal_battery_range"] == null)
+                    return -1;
+
                 var ideal_battery_range = (decimal)r2["ideal_battery_range"];
 
                 return (double)ideal_battery_range / (double)0.62137;
@@ -568,7 +572,7 @@ namespace TeslaLogger
             {
                 Tools.ExceptionWriter(ex, resultContent);
             }
-            return 0;
+            return -1;
         }
 
         async Task<double> GetOdometerAsync()
