@@ -28,7 +28,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
-                cmd.Parameters.AddWithValue("@enddate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@EndPos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
             }
@@ -55,7 +55,7 @@ namespace TeslaLogger
                 Tools.Log("state: " + state);
 
                 MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
-                cmd.Parameters.AddWithValue("@StartDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null", con);
-                cmd.Parameters.AddWithValue("@EndDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
                 cmd.ExecuteNonQuery();
             }
@@ -80,7 +80,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID) values (@StartDate, @Pos, @StartChargingID)", con);
-                cmd.Parameters.AddWithValue("@StartDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
                 cmd.ExecuteNonQuery();
@@ -93,7 +93,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
-                cmd.Parameters.AddWithValue("@EndDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
             }
@@ -105,7 +105,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
-                cmd.Parameters.AddWithValue("@StartDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
             }
@@ -180,8 +180,9 @@ namespace TeslaLogger
 
         public static DateTime UnixToDateTime(long t)
         {
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0);
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             dt = dt.AddMilliseconds(t);
+            dt = dt.ToLocalTime();
             return dt;
 
         }

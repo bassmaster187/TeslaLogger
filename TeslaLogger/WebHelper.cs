@@ -744,7 +744,7 @@ namespace TeslaLogger
                         DataRow dr = dt.NewRow();
                         dr["name"] = realname;
                         dr["kWh"] = lastkWh;
-                        dr["Datum"] = DBHelper.UnixToDateTime((long)v2[0]).ToLocalTime();
+                        dr["Datum"] = DBHelper.UnixToDateTime((long)v2[0]);
                         dt.Rows.Add(dr);
                         break;
                     }

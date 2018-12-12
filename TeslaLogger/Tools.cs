@@ -13,12 +13,22 @@ namespace TeslaLogger
         {
             try
             {
-                if (inhalt != null && inhalt.Contains("vehicle unavailable:"))
+                if (inhalt != null)
                 {
-                    Tools.Log("vehicle unavailable");
-                    System.Threading.Thread.Sleep(30000);
+                    if (inhalt.Contains("vehicle unavailable:"))
+                    {
+                        Tools.Log("vehicle unavailable");
+                        System.Threading.Thread.Sleep(30000);
 
-                    return;
+                        return;
+                    }
+                    else if (inhalt.Contains("upstream internal error"))
+                    {
+                        Tools.Log("upstream internal error");
+                        System.Threading.Thread.Sleep(10000);
+
+                        return;
+                    }
                 }
 
                 string temp = ex.ToString();
