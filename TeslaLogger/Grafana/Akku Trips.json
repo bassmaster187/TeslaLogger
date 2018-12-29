@@ -15,15 +15,14 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 14,
   "links": [],
   "panels": [
     {
       "columns": [],
-      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
-        "h": 22,
+        "h": 21,
         "w": 24,
         "x": 0,
         "y": 0
@@ -34,7 +33,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 4,
+        "col": 0,
         "desc": true
       },
       "styles": [
@@ -45,7 +44,7 @@
           "type": "date"
         },
         {
-          "alias": "",
+          "alias": "Start Trip",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -56,12 +55,46 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "http://home.pogea.de:3000/d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_4}&to=${__cell_5}",
+          "linkUrl": "http://home.pogea.de:3000/d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}",
           "mappingType": 1,
-          "pattern": "StartDate",
+          "pattern": "StartTripUnix",
           "thresholds": [],
           "type": "date",
           "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "StartSOC",
+          "thresholds": [
+            ""
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Start km",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "StartOdometer",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
         },
         {
           "alias": "",
@@ -74,9 +107,93 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "EndDate",
+          "pattern": "secondSeq",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "End Trip",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "EndTripUnix",
           "thresholds": [],
           "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "EndSOC",
+          "thresholds": [
+            "5",
+            "10",
+            "10"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "End km",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "EndOdometer",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "alias": "SOC diff",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "socDiff",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Max Range",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "MaxRange",
+          "thresholds": [],
+          "type": "number",
           "unit": "short"
         },
         {
@@ -90,13 +207,13 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "avg_consumption_kWh_100km",
+          "pattern": "AVGConsumption",
           "thresholds": [],
           "type": "number",
           "unit": "short"
         },
         {
-          "alias": "km",
+          "alias": "Tage",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -104,162 +221,11 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 1,
           "mappingType": 1,
-          "pattern": "km_diff",
+          "pattern": "TripDays",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "lat",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "lng",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndLat",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndLng",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Verbraucht",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "consumption_kWh",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTargetBlank": true,
-          "linkUrl": "https://www.google.com/maps/?q=${__cell_0},${__cell_1}",
-          "mappingType": 1,
-          "pattern": "Start_address",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTargetBlank": true,
-          "linkTooltip": "",
-          "linkUrl": "https://www.google.com/maps/?q=${__cell_2},${__cell_3}",
-          "mappingType": 1,
-          "pattern": "End_address",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "StartUTC",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndUTC",
-          "thresholds": [],
-          "type": "hidden",
           "unit": "short"
         },
         {
@@ -279,12 +245,11 @@
       ],
       "targets": [
         {
-          "alias": "",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff\nfrom trip WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * 0.190052356 / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where EndOdometer - StartOdometer > 5\norder by StartTrip desc",
           "refId": "A",
           "select": [
             [
@@ -306,9 +271,8 @@
           ]
         }
       ],
-      "title": "Trip",
+      "title": "Akku Trips",
       "transform": "table",
-      "transparent": false,
       "type": "table"
     }
   ],
@@ -319,7 +283,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30d",
+    "from": "now-6M",
     "to": "now"
   },
   "timepicker": {
@@ -348,7 +312,7 @@
     ]
   },
   "timezone": "",
-  "title": "Trip",
-  "uid": "Y8upc6ZRk",
-  "version": 27
+  "title": "Akku Trips",
+  "uid": "Mlc06BiRk",
+  "version": 17
 }

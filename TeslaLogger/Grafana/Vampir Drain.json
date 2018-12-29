@@ -1,1 +1,183 @@
-{"meta":{"type":"db","canSave":false,"canEdit":false,"canAdmin":false,"canStar":true,"slug":"vampir-drain","url":"/grafana/d/zhHx2Fggk/vampir-drain","expires":"0001-01-01T00:00:00Z","created":"2018-11-14T08:44:50Z","updated":"2018-11-30T09:37:57Z","updatedBy":"admin","createdBy":"admin","version":5,"hasAcl":false,"isFolder":false,"folderId":0,"folderTitle":"General","folderUrl":"","provisioned":false},"dashboard":{"annotations":{"list":[{"builtIn":1,"datasource":"-- Grafana --","enable":true,"hide":true,"iconColor":"rgba(0, 211, 255, 1)","name":"Annotations \u0026 Alerts","type":"dashboard"}]},"editable":true,"gnetId":null,"graphTooltip":0,"id":13,"links":[],"panels":[{"columns":[],"datasource":"teslalogger","fontSize":"100%","gridPos":{"h":21,"w":24,"x":0,"y":0},"id":2,"pageSize":null,"scroll":true,"showHeader":true,"sort":{"col":0,"desc":true},"styles":[{"alias":"Time","dateFormat":"YYYY-MM-DD HH:mm:ss","pattern":"Time","type":"date"},{"alias":"","colorMode":null,"colors":["rgba(245, 54, 54, 0.9)","rgba(237, 129, 40, 0.89)","rgba(50, 172, 45, 0.97)"],"decimals":2,"pattern":"/.*/","thresholds":[],"type":"number","unit":"short"}],"targets":[{"alias":"","format":"table","rawSql":"SELECT T1.EndDate as StartDate, TP1.address as Adresse, TP1.ideal_battery_range_km as StartRange, \nT2.StartDate as EndDate, T2.StartPos as EndPos, TP2.ideal_battery_range_km as EndRange,\nTP1.ideal_battery_range_km - TP2.ideal_battery_range_km as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) as TimeDiffMinutes,\n(select RangeDiff / TimeDiffMinutes backup.sh home.pogea.de 60) as RangeLostPerHour\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km \u003e= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) \u003e 60","refId":"A"}],"title":"Panel Title","transform":"table","type":"table"}],"schemaVersion":16,"style":"dark","tags":[],"templating":{"list":[]},"time":{"from":"now/M","to":"now/M"},"timepicker":{"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"]},"timezone":"","title":"Vampir Drain","uid":"zhHx2Fggk","version":5}}
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 10,
+  "links": [],
+  "panels": [
+    {
+      "columns": [],
+      "datasource": "teslalogger",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 21,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "StartDate",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "EndDate",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "EndPos",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "",
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(T1.EndDate)*1000 as StartDate, TP1.address as Adresse, TP1.ideal_battery_range_km as StartRange, \nUNIX_TIMESTAMP(T2.StartDate)*1000 as EndDate, T2.StartPos as EndPos,  TP2.ideal_battery_range_km as EndRange,\nTP1.ideal_battery_range_km - TP2.ideal_battery_range_km as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) as TimeDiffMinutes,\n(select RangeDiff / TimeDiffMinutes * 60) as RangeLostPerHour\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Vampir Drain",
+      "transform": "table",
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now/M",
+    "to": "now/M"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Vampir Drain",
+  "uid": "zhHx2Fggk",
+  "version": 4
+}

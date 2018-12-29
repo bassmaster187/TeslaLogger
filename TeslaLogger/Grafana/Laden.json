@@ -71,7 +71,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  Datum as time_sec,\n  battery_level,\n  charger_power,\n  ideal_battery_range_km,\n  charger_voltage,\n  charger_phases,\n  charger_actual_current,\n  outside_temp\n  \n  \nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level,\n  charger_power,\n  ideal_battery_range_km,\n  charger_voltage,\n  charger_phases,\n  charger_actual_current,\n  outside_temp\n  \n  \nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -145,6 +145,7 @@
       },
       "id": 4,
       "lineColor": "red",
+      "links": [],
       "maxDataPoints": 500,
       "pointColor": "royalblue",
       "targets": [
@@ -154,7 +155,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__timeEpoch(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum)\nORDER BY datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum)\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -176,7 +177,7 @@
           ]
         }
       ],
-      "title": "Panel Title",
+      "title": "Map",
       "type": "grafana-trackmap-panel"
     }
   ],
@@ -219,5 +220,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 4
+  "version": 7
 }
