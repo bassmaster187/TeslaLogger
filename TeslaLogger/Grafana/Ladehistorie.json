@@ -56,7 +56,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "http://home.pogea.de:3000/d/BHhxFeZRz/laden?orgId=1&from=${__cell_2}&to=${__cell_3}",
+          "linkUrl": "d/BHhxFeZRz/laden?orgId=1&from=${__cell_2}&to=${__cell_3}",
           "mappingType": 1,
           "pattern": "StartDate",
           "thresholds": [],
@@ -250,5 +250,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 8
+  "version": 9
 }

@@ -56,7 +56,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "http://home.pogea.de:3000/d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_4}&to=${__cell_5}",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_4}&to=${__cell_5}",
           "mappingType": 1,
           "pattern": "StartDate",
           "thresholds": [],
@@ -350,5 +350,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 27
+  "version": 29
 }

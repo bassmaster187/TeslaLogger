@@ -54,6 +54,9 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
+          "link": true,
+          "linkTooltip": "",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_3}",
           "mappingType": 1,
           "pattern": "StartDate",
           "thresholds": [],
@@ -179,5 +182,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 4
+  "version": 5
 }
