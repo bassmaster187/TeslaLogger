@@ -15,12 +15,11 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
+  "id": 14,
   "links": [],
   "panels": [
     {
       "columns": [],
-      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 21,
@@ -34,7 +33,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 2,
+        "col": 0,
         "desc": true
       },
       "styles": [
@@ -45,7 +44,7 @@
           "type": "date"
         },
         {
-          "alias": "",
+          "alias": "Start Trip",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -56,9 +55,9 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "d/BHhxFeZRz/laden?orgId=1&from=${__cell_2}&to=${__cell_3}",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}",
           "mappingType": 1,
-          "pattern": "StartDate",
+          "pattern": "StartTripUnix",
           "thresholds": [],
           "type": "date",
           "unit": "short"
@@ -67,36 +66,22 @@
           "alias": "",
           "colorMode": null,
           "colors": [
-            "rgba(245, 54, 54, 0.9)",
+            "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+            "rgba(245, 54, 54, 0.9)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 0,
           "mappingType": 1,
-          "pattern": "EndDate",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "geladen kWh",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+          "pattern": "StartSOC",
+          "thresholds": [
+            ""
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "charge_energy_added",
-          "thresholds": [],
           "type": "number",
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Start km",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -104,9 +89,9 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 0,
           "mappingType": 1,
-          "pattern": "odometer",
+          "pattern": "StartOdometer",
           "thresholds": [],
           "type": "number",
           "unit": "locale"
@@ -122,13 +107,13 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "lat",
+          "pattern": "secondSeq",
           "thresholds": [],
           "type": "hidden",
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "End Trip",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -138,13 +123,81 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "lng",
+          "pattern": "EndTripUnix",
           "thresholds": [],
-          "type": "hidden",
+          "type": "date",
           "unit": "short"
         },
         {
           "alias": "",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "EndSOC",
+          "thresholds": [
+            "5",
+            "10",
+            "10"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "End km",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "EndOdometer",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "alias": "SOC diff",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "socDiff",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Max Range",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "MaxRange",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Ø Verbrauch",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -153,12 +206,24 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "link": true,
-          "linkTargetBlank": true,
-          "linkTooltip": "",
-          "linkUrl": "https://www.google.com/maps/?q=${__cell_0},${__cell_1}",
           "mappingType": 1,
-          "pattern": "address",
+          "pattern": "AVGConsumption",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Tage",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "TripDays",
           "thresholds": [],
           "type": "number",
           "unit": "short"
@@ -180,12 +245,11 @@
       ],
       "targets": [
         {
-          "alias": "",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        pos.lat, pos.lng, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\norder by StartDate desc",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * 0.190052356 / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where EndOdometer - StartOdometer > 5\norder by StartTrip desc",
           "refId": "A",
           "select": [
             [
@@ -207,7 +271,7 @@
           ]
         }
       ],
-      "title": "Ladehistorie",
+      "title": "Akku Trips",
       "transform": "table",
       "type": "table"
     }
@@ -219,7 +283,7 @@
     "list": []
   },
   "time": {
-    "from": "now-90d",
+    "from": "now-6M",
     "to": "now"
   },
   "timepicker": {
@@ -248,7 +312,7 @@
     ]
   },
   "timezone": "",
-  "title": "Ladehistorie",
-  "uid": "TSmNYvRRk",
-  "version": 9
+  "title": "Akku Trips",
+  "uid": "Mlc06BiRk",
+  "version": 18
 }

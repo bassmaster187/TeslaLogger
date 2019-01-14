@@ -19,7 +19,7 @@
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Laden",
-        "rawQuery": "SELECT StartDate as time_sec,\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
+        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -31,7 +31,7 @@
         "iconColor": "#508642",
         "limit": 100,
         "name": "Laden fertig",
-        "rawQuery": "SELECT EndDate as time_sec,\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
+        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -43,7 +43,7 @@
         "iconColor": "#64b0c8",
         "limit": 100,
         "name": "Schlafen",
-        "rawQuery": "SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep'\norder by StartDate desc\n",
+        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep'\norder by StartDate desc\n",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -55,7 +55,7 @@
         "iconColor": "#ba43a9",
         "limit": 100,
         "name": "Online",
-        "rawQuery": "SELECT StartDate as time_sec,\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online'\norder by StartDate desc\n",
+        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online'\norder by StartDate desc\n",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -83,10 +83,12 @@
       },
       "id": 2,
       "legend": {
+        "alignAsTable": false,
         "avg": true,
         "current": false,
         "max": true,
         "min": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -117,19 +119,21 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  datum as time_sec,\n  speed as kMh, \n  power as PS, \n  ideal_battery_range_km as 'Range km', \n  outside_temp as '°C',\n  altitude as 'Höhe'\nFROM\n  pos\nWHERE\n  $__timeFilter(datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as kMh,   power as PS,   ideal_battery_range_km as 'Range km',   outside_temp as '°C',  altitude as 'Höhe'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "value"
+                  "id"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "timeColumn": "time",
+          "table": "charging",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
           "where": [
             {
               "name": "$__timeFilter",
@@ -159,7 +163,8 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "decimals": 1,
+          "format": "locale",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -211,7 +216,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  UNIX_TIMESTAMP(datum) as time_sec,\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -312,5 +317,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 15
+  "version": 40
 }
