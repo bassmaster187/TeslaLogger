@@ -54,13 +54,23 @@ namespace TeslaLogger
                     }
                 }
 
+                Tools.DeleteWakeupFile();
+
                 WebHelper wh = new WebHelper();
                 wh.Tesla_token = wh.GetTokenAsync().Result;
 
                 if (wh.Tesla_token == "NULL")
                     return;
 
-                Tools.Log("TOKEN: " + wh.Tesla_token);
+                // don't show full Token in Logfile
+                string tempToken = wh.Tesla_token;
+                if (tempToken.Length > 5)
+                {
+                    tempToken = tempToken.Substring(0, tempToken.Length - 5);
+                    tempToken += "XXXXX";
+                }
+
+                Tools.Log("TOKEN: " + tempToken);
 
                 if (DBHelper.DBConnectionstring.Length == 0)
                     return;
@@ -72,6 +82,8 @@ namespace TeslaLogger
                     Tools.Log("Insert first Pos");
                     wh.IsDriving(true);
                 }
+
+                UpdateTeslalogger.Start();
 
                 // Task.Factory.StartNew(() => wh.UpdateAllPosAddresses());
                 // Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
@@ -164,6 +176,8 @@ namespace TeslaLogger
                                         wh.IsDriving(true);
                                         DBHelper.StartChargingState();
                                         currentState = TeslaState.Charge;
+
+                                        Tools.DeleteWakeupFile();
                                     }
                                     else if (wh.IsDriving())
                                     {
@@ -174,6 +188,8 @@ namespace TeslaLogger
                                         currentState = TeslaState.Drive;
                                         wh.StartStreamThread(); // für altitude
                                         DBHelper.StartDriveState();
+
+                                        Tools.DeleteWakeupFile();
                                     }
                                     else
                                     {
@@ -187,6 +203,13 @@ namespace TeslaLogger
 
                                             for (int x = 0; x < 21; x++)
                                             {
+                                                if (Tools.existsWakeupFile)
+                                                {
+                                                    Tools.Log("Wakeupfile prevents car to get sleep");
+                                                    Tools.DeleteWakeupFile();
+                                                    break;
+                                                }
+
                                                 Tools.Log("Waiting for car to go to sleep " + x.ToString());
                                                 System.Threading.Thread.Sleep(1000 * 60);
                                             }

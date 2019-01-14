@@ -75,5 +75,26 @@ namespace TeslaLogger
 
             return "NULL";
         }
+
+        public static bool IsMono()
+        {
+            return GetMonoRuntimeVersion() != "NULL";
+        }
+
+        public static bool existsWakeupFile
+        {
+            get {
+                return System.IO.File.Exists("wakeupteslalogger.txt");
+            }
+        }
+
+        public static void DeleteWakeupFile()
+        {
+            if (existsWakeupFile)
+            {
+                Log("Delete Wakeup file");
+                System.IO.File.Delete("wakeupteslalogger.txt");
+            }
+        }        
     }
 }
