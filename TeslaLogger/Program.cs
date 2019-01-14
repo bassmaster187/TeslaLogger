@@ -37,15 +37,21 @@ namespace TeslaLogger
                 Tools.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
                 
                 Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
-                try
+
+                for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
                 {
-                    Tools.Log("DB Version: " + DBHelper.GetVersion());
-                    Tools.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
-                }
-                catch (Exception ex)
-                {
-                    Tools.Log("DBCONNECTION " + ex.ToString());
-                    return;
+                    try
+                    {
+                        x++;
+                        Tools.Log("DB Version: " + DBHelper.GetVersion());
+                        Tools.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.Log("DBCONNECTION " + ex.Message);
+                        System.Threading.Thread.Sleep(10000);
+                    }
                 }
 
                 WebHelper wh = new WebHelper();
