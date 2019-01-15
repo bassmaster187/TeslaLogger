@@ -38,6 +38,8 @@ namespace TeslaLogger
                 
                 Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
+                Tools.Log("Car#:" + ApplicationSettings.Default.Car);
+
                 for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
                 {
                     try
@@ -75,7 +77,12 @@ namespace TeslaLogger
                 if (DBHelper.DBConnectionstring.Length == 0)
                     return;
 
-                wh.GetVehicles();
+                if (wh.GetVehicles() == "NULL")
+                    return;
+
+                String online = wh.IsOnline().Result;
+                Tools.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
+
 
                 if (DBHelper.GetMaxPosid() == 0)
                 {
@@ -295,6 +302,5 @@ namespace TeslaLogger
                 Tools.ExceptionWriter(ex, "While Schleife");
             }
         }
-
     }
 }

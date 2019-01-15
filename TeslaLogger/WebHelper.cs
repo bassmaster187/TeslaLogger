@@ -167,7 +167,14 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r1temp = (object[])r1;
-                var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp[0]);
+
+                if (ApplicationSettings.Default.Car >= r1temp.Length)
+                {
+                    Tools.Log("Car # " + ApplicationSettings.Default.Car + " not exists!");
+                    return "NULL";
+                }
+
+                var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp[ApplicationSettings.Default.Car]);
 
                 string OnlineState = r2["state"].ToString();
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
@@ -217,7 +224,7 @@ namespace TeslaLogger
 
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (object[])r1;
-                var r3 = r2[0];
+                var r3 = r2[ApplicationSettings.Default.Car];
                 var r4 = ((System.Collections.Generic.Dictionary<string, object>)r3);
                 var state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
@@ -310,6 +317,7 @@ namespace TeslaLogger
         {
             Tools.Log("StartStream");
             stopStreaming = false;
+            string line = "";
             while (!stopStreaming)
             {
                 try
@@ -333,9 +341,12 @@ namespace TeslaLogger
                         {
                             while (!stopStreaming && !reader.EndOfStream)
                             {
-                                string line = reader.ReadLine();
+                                line = reader.ReadLine();
                                 if (!string.IsNullOrEmpty(line))
                                 {
+                                    if (line == "Vehicle is offline")
+                                        continue;
+
                                     var values = line.Split(',');
                                     // Tools.Log("Elevation: " + values[4]);
 
@@ -349,7 +360,7 @@ namespace TeslaLogger
                 catch (Exception ex)
                 {
                     // System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    Tools.ExceptionWriter(ex, "");
+                    Tools.ExceptionWriter(ex, line);
                     System.Threading.Thread.Sleep(5000);
                 }
             }
