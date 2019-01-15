@@ -51,7 +51,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "odometer",
+          "alias": "km Stand [km]",
           "fill": 0,
           "yaxis": 2
         }
@@ -67,7 +67,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as CalculatedMaxRange,\r\n              pos.odometer\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3\r\n",
+          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3\r\n",
           "refId": "A",
           "select": [
             [
@@ -117,7 +117,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "locale",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -170,5 +170,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 4
+  "version": 5
 }
