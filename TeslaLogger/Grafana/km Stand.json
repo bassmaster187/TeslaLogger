@@ -61,7 +61,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(pos.datum), odometer \nfrom pos \nwhere pos.id in (Select StartPos from drivestate where $__timeFilter(StartDate)) and odometer > 0 order by pos.datum\n",
+          "rawSql": "SELECT $__time(pos.datum), odometer as 'km Stand [km]'\nfrom pos \nwhere pos.id in (Select StartPos from drivestate where $__timeFilter(StartDate)) and odometer > 0 order by pos.datum\n",
           "refId": "A",
           "select": [
             [
@@ -164,5 +164,5 @@
   "timezone": "",
   "title": "km Stand",
   "uid": "NjtMTFggz",
-  "version": 4
+  "version": 5
 }
