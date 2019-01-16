@@ -18,6 +18,7 @@ namespace TeslaLogger
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
+        public bool is_preconditioning = false;
         Geofence geofence;
         bool stopStreaming = false;
         string elevation = "";
@@ -623,6 +624,13 @@ namespace TeslaLogger
                     outside_temp = (decimal)r2["outside_temp"];
                 else
                     return null;
+
+                bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
+                if (preconditioning != is_preconditioning)
+                {
+                    is_preconditioning = preconditioning;
+                    Tools.Log("Preconditioning: " + preconditioning);
+                }
 
                 return (double)outside_temp;
             }

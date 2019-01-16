@@ -206,19 +206,26 @@ namespace TeslaLogger
                                         {
                                             currentState = TeslaState.Start;
 
-                                            wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern 
-
-                                            for (int x = 0; x < 21; x++)
+                                            wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima läuft.
+                                            if (wh.is_preconditioning)
                                             {
-                                                if (Tools.existsWakeupFile)
+                                                Tools.Log("preconditioning prevents car to get sleep");
+                                                lastCarUsed = DateTime.Now;
+                                            }
+                                            else
+                                            {
+                                                for (int x = 0; x < 21; x++)
                                                 {
-                                                    Tools.Log("Wakeupfile prevents car to get sleep");
-                                                    Tools.DeleteWakeupFile();
-                                                    break;
-                                                }
+                                                    if (Tools.existsWakeupFile)
+                                                    {
+                                                        Tools.Log("Wakeupfile prevents car to get sleep");
+                                                        Tools.DeleteWakeupFile();
+                                                        break;
+                                                    }
 
-                                                Tools.Log("Waiting for car to go to sleep " + x.ToString());
-                                                System.Threading.Thread.Sleep(1000 * 60);
+                                                    Tools.Log("Waiting for car to go to sleep " + x.ToString());
+                                                    System.Threading.Thread.Sleep(1000 * 60);
+                                                }
                                             }
                                         }
                                     }
