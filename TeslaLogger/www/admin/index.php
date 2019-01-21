@@ -19,6 +19,7 @@
   <button onclick="window.location.href='restartlogger.php';">Restart</button>
   <button onclick="window.location.href='backup.php';">Backup</button>
   <button onclick="window.location.href='geofencing.php';">Geofence</button>
+  <button onclick="window.location.href='/wakeup.php';">Wakeup</button>
   
   <br><br>
 <?PHP
