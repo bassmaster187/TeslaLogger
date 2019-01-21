@@ -95,6 +95,21 @@ namespace TeslaLogger
                 Log("Delete Wakeup file");
                 System.IO.File.Delete("wakeupteslalogger.txt");
             }
-        }        
+        }
+
+        public static void CopyFilesRecursively(System.IO.DirectoryInfo source, System.IO.DirectoryInfo target)
+        {
+            foreach (System.IO.DirectoryInfo dir in source.GetDirectories())
+            {
+                CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+            }
+
+            foreach (System.IO.FileInfo file in source.GetFiles())
+            {
+                string p = System.IO.Path.Combine(target.FullName, file.Name);
+                Tools.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                System.IO.File.Copy(file.FullName, p, true);
+            }
+        }
     }
 }
