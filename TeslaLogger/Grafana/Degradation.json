@@ -24,6 +24,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "teslalogger",
+      "decimals": 2,
       "fill": 1,
       "gridPos": {
         "h": 21,
@@ -109,8 +110,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "label": null,
+          "decimals": 1,
+          "format": "locale",
+          "label": "",
           "logBase": 1,
           "max": "400",
           "min": "300",
@@ -170,5 +172,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 5
+  "version": 7
 }
