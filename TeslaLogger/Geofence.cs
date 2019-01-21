@@ -31,10 +31,19 @@ namespace TeslaLogger
         {
             List<Address> list = new List<Address>();
 
-            string filename = "geofence.csv";
+            ReadGeofenceFile(list, "geofence.csv");
+            ReadGeofenceFile(list, "geofence-private.csv");
 
+            Tools.Log("Addresses inserted: " + list.Count);
+
+            sortedList = list.OrderBy(o => o.lat).ToList();
+        }
+
+        private static void ReadGeofenceFile(List<Address> list, string filename)
+        {
             if (System.IO.File.Exists(filename))
             {
+                Tools.Log("Read Geofence File: " + filename);
                 string line;
                 using (System.IO.StreamReader file = new System.IO.StreamReader(filename))
                 {
@@ -46,7 +55,7 @@ namespace TeslaLogger
                                 continue;
 
                             var args = line.Split(',');
-                            list.Add(new Address(args[0].Trim(), 
+                            list.Add(new Address(args[0].Trim(),
                                 Double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
                                 Double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat)));
 
@@ -63,10 +72,6 @@ namespace TeslaLogger
             {
                 Tools.Log("FileNotFound: " + filename);
             }
-
-            Tools.Log("Addresses inserted: " + list.Count);
-
-            sortedList = list.OrderBy(o => o.lat).ToList();
         }
 
         public Address GetPOI(double lat, double lng)
