@@ -24,6 +24,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "teslalogger",
+      "decimals": 2,
       "fill": 1,
       "gridPos": {
         "h": 20,
@@ -113,7 +114,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "locale",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -220,5 +221,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 8
+  "version": 10
 }
