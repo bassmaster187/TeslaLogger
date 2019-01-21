@@ -39,6 +39,8 @@ namespace TeslaLogger
                 Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
                 Tools.Log("Car#:" + ApplicationSettings.Default.Car);
+                Tools.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
+                Tools.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
 
                 for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
                 {
@@ -202,7 +204,7 @@ namespace TeslaLogger
                                     {
                                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
                                         TimeSpan ts = DateTime.Now - lastCarUsed;
-                                        if (ts.TotalMinutes > 15)
+                                        if (ts.TotalMinutes > ApplicationSettings.Default.KeepOnlineMinAfterUsage)
                                         {
                                             currentState = TeslaState.Start;
 
@@ -214,7 +216,7 @@ namespace TeslaLogger
                                             }
                                             else
                                             {
-                                                for (int x = 0; x < 21; x++)
+                                                for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
                                                 {
                                                     if (Tools.existsWakeupFile)
                                                     {

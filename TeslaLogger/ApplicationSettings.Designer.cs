@@ -58,5 +58,23 @@ namespace TeslaLogger {
                 return ((int)(this["Car"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int KeepOnlineMinAfterUsage {
+            get {
+                return ((int)(this["KeepOnlineMinAfterUsage"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("21")]
+        public int SuspendAPIMinutes {
+            get {
+                return ((int)(this["SuspendAPIMinutes"]));
+            }
+        }
     }
 }
