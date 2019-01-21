@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Config</title>
+    <title>Config V1.0</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -12,11 +12,28 @@
     $( "button" ).button();
 	$("#name").val("Hallo");
   } );
+  
+  function reboot()
+  {
+	  $.ajax('restartlogger.php', {
+		data: {
+			id: ''
+		}
+		})
+		.then(
+		function success(name) {
+			alert('Reboot!');
+		},
+		function fail(data, status) {
+			alert('Reboot!');
+		}
+	);
+  }
   </script>
   </head>
   <body>
   <button onclick="window.location.href='logfile.php';">Logfile</button>
-  <button onclick="window.location.href='restartlogger.php';">Restart</button>
+  <button onclick="reboot();">Restart</button>
   <button onclick="window.location.href='backup.php';">Backup</button>
   <button onclick="window.location.href='geofencing.php';">Geofence</button>
   <button onclick="window.location.href='/wakeup.php';">Wakeup</button>
