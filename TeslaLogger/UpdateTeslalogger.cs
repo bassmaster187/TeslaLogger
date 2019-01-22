@@ -29,7 +29,7 @@ namespace TeslaLogger
 
                     exec_mono("rm", "-rf /etc/teslalogger/git");
                     exec_mono("mkdir", "/etc/teslalogger/git");
-                    exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
+                    exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger/etc/teslalogger/git/");
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
                 }
 
