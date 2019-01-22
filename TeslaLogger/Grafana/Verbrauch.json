@@ -119,7 +119,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [kMh]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]',   outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]',   outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -317,5 +317,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 44
+  "version": 45
 }
