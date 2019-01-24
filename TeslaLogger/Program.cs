@@ -58,8 +58,6 @@ namespace TeslaLogger
                     }
                 }
 
-                Tools.DeleteWakeupFile();
-
                 WebHelper wh = new WebHelper();
                 wh.Tesla_token = wh.GetTokenAsync().Result;
 
@@ -91,6 +89,8 @@ namespace TeslaLogger
                     Tools.Log("Insert first Pos");
                     wh.IsDriving(true);
                 }
+
+                wh.DeleteWakeupFile();
 
                 UpdateTeslalogger.Start();
 
@@ -186,7 +186,7 @@ namespace TeslaLogger
                                         DBHelper.StartChargingState();
                                         currentState = TeslaState.Charge;
 
-                                        Tools.DeleteWakeupFile();
+                                        wh.DeleteWakeupFile();
                                     }
                                     else if (wh.IsDriving())
                                     {
@@ -198,7 +198,7 @@ namespace TeslaLogger
                                         wh.StartStreamThread(); // für altitude
                                         DBHelper.StartDriveState();
 
-                                        Tools.DeleteWakeupFile();
+                                        wh.DeleteWakeupFile();
                                     }
                                     else
                                     {
@@ -218,10 +218,10 @@ namespace TeslaLogger
                                             {
                                                 for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
                                                 {
-                                                    if (Tools.existsWakeupFile)
+                                                    if (wh.existsWakeupFile)
                                                     {
                                                         Tools.Log("Wakeupfile prevents car to get sleep");
-                                                        Tools.DeleteWakeupFile();
+                                                        wh.DeleteWakeupFile();
                                                         break;
                                                     }
 

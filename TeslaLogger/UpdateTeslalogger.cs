@@ -18,7 +18,7 @@ namespace TeslaLogger
                 {
                     chmod("/etc/teslalogger/nohup.out", 666);
 
-                    if (!exec_mono("git", "--version").Contains("git version"))
+                    if (!exec_mono("git", "--version", false).Contains("git version"))
                     {
                         exec_mono("apt-get", "-y install git");
                         exec_mono("git", "--version");
@@ -31,6 +31,7 @@ namespace TeslaLogger
                     exec_mono("mkdir", "/etc/teslalogger/git");
                     exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
                 }
 
                 Tools.Log("End update");
@@ -41,7 +42,7 @@ namespace TeslaLogger
             }
         }
 
-        public static string exec_mono(string cmd, string param)
+        public static string exec_mono(string cmd, string param, bool logging = true)
         {
             try
             {
@@ -61,20 +62,26 @@ namespace TeslaLogger
                 proc.StartInfo.Arguments = param;
                 
                 proc.Start();
+
+                proc.WaitForExit();
+
                 while (!proc.StandardOutput.EndOfStream)
                 {
                     string line = proc.StandardOutput.ReadLine();
-                    Tools.Log(" " + line);
+
+                    if (logging)
+                        Tools.Log(" " + line);
+
                     sb.AppendLine(line);
                 }
 
                 while (!proc.StandardError.EndOfStream)
                 {
                     string line = proc.StandardError.ReadLine();
-                    Tools.Log("Error: " + line);
-                }
 
-                proc.WaitForExit();
+                    if (logging)
+                        Tools.Log("Error: " + line);
+                }
 
                 return sb.ToString();
             }
