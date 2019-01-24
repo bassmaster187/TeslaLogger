@@ -18,6 +18,7 @@ namespace TeslaLogger
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
+        public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         Geofence geofence;
         bool stopStreaming = false;
@@ -191,6 +192,15 @@ namespace TeslaLogger
 
                 Tesla_vehicle_id = r2["vehicle_id"].ToString();
                 Tools.Log("vehicle_id :" + Tesla_vehicle_id);
+
+                byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+
+                TaskerHash = String.Empty;
+                var crc32 = new DamienG.Security.Cryptography.Crc32();
+                foreach (byte b in crc32.ComputeHash(tempTasker))
+                    TaskerHash += b.ToString("x2").ToLower();
+
+                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : &t=" + TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -779,6 +789,57 @@ namespace TeslaLogger
         {
             Tools.Log("Request StopStreaming");
             stopStreaming = true;
+        }
+
+        public bool TaskerWakeupfile()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+
+                var d = new Dictionary<string, string>();
+                d.Add("t",TaskerHash);
+                d.Add("v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+                var content = new FormUrlEncodedContent(d);
+                var query = content.ReadAsStringAsync().Result;
+                
+                var resultTask = client.PostAsync("http://teslalogger.de/wakefile.php", content);
+
+                HttpResponseMessage result = resultTask.Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                if (resultContent.Contains("wakeupfile"))
+                {
+                    Tools.Log("TaskerWakeupfile available! [Webservice]");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log("TaskerWakeupToken Exception: " + ex.Message);
+            }
+            
+            return false;
+        }
+
+        public void DeleteWakeupFile()
+        {
+            TaskerWakeupfile();
+
+            if (existsWakeupFile)
+            {
+                Tools.Log("Delete Wakeup file");
+                System.IO.File.Delete("wakeupteslalogger.txt");
+            }
+        }
+
+        public bool existsWakeupFile
+        {
+            get
+            {
+                return System.IO.File.Exists("wakeupteslalogger.txt") || TaskerWakeupfile();
+            }
         }
     }
 }
