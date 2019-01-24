@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
   "links": [],
   "panels": [
     {
@@ -144,7 +143,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Adresse",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -250,5 +249,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 9
+  "version": 10
 }
