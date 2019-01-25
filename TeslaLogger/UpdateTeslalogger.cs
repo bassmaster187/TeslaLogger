@@ -12,10 +12,18 @@ namespace TeslaLogger
         {
             try
             {
+                if (System.IO.File.Exists("cmd_updated.txt"))
+                {
+                    Tools.Log("Update skipped!");
+                    return;
+                }
+
+                System.IO.File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
                 Tools.Log("Start update");
 
                 if (Tools.IsMono())
                 {
+                    chmod("cmd_updated.txt", 666);
                     chmod("/etc/teslalogger/nohup.out", 666);
 
                     if (!exec_mono("git", "--version", false).Contains("git version"))
@@ -24,17 +32,27 @@ namespace TeslaLogger
                         exec_mono("git", "--version");
                     }
 
-
                     exec_mono("rm", "-rf /etc/teslalogger/git/*");
 
                     exec_mono("rm", "-rf /etc/teslalogger/git");
                     exec_mono("mkdir", "/etc/teslalogger/git");
                     exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
+
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
+
+                    if (!System.IO.Directory.Exists("/var/lib/grafana/dashboards"))
+                        System.IO.Directory.CreateDirectory("/var/lib/grafana/dashboards");
+
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
+
+                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
                 }
 
                 Tools.Log("End update");
+
+                Tools.Log("Please Reboot !!!");
             }
             catch (Exception ex)
             {
