@@ -63,7 +63,7 @@
 			
 	}
   
-  function BackgroudRun($target)
+  function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
 		data: {
@@ -72,10 +72,10 @@
 		})
 		.then(
 		function success(name) {
-			alert('Reboot!');
+			alert($text);
 		},
 		function fail(data, status) {
-			alert('Reboot!');
+			alert($text);
 		}
 	);
   }
@@ -83,11 +83,11 @@
   </head>
   <body>
   <button onclick="window.location.href='logfile.php';">Logfile</button>
-  <button onclick="BackgroudRun('restartlogger.php');">Restart</button>
-  <button onclick="BackgroudRun('update.php');">Update</button>
+  <button onclick="BackgroudRun('restartlogger.php', 'Reboot!');">Restart</button>
+  <button onclick="BackgroudRun('update.php', 'Reboot!');">Update</button>
   <button onclick="window.location.href='backup.php';">Backup</button>
   <button onclick="window.location.href='geofencing.php';">Geofence</button>
-  <button onclick="window.location.href='/wakeup.php';">Wakeup</button>
+  <button onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
   
 
   <div id="content">
