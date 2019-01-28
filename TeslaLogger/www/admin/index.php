@@ -11,8 +11,30 @@
 	<script>
   $( function() {
     $( "button" ).button();
-	$("#name").val("Hallo");
+	GetCurrentData();
+	
+	setInterval(function()
+		{
+			if ( document.hasFocus() ) 
+			{
+				GetCurrentData();
+			}
+		}
+		,10000);
   } );
+  
+	function GetCurrentData()
+	{
+		$.ajax({
+		  url: "current_json.php",
+		  dataType: "json"
+		  }).done(function( jsonData ) {
+			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1));
+			$('#odometer').text(jsonData["odometer"].toFixed(1));
+			$('#battery_level').text(jsonData["battery_level"]);
+			$('#car_version').text(jsonData["car_version"]);
+			});
+	}
   
   function BackgroudRun($target)
   {
@@ -43,6 +65,12 @@
 
   <div id="content">
   <h1>Fahrzeuginfo:</h1>
+  <table>
+  <tr><td>Typical Range:</td><td><span id="ideal_battery_range_km">---</span> km</td></tr>
+  <tr><td>KM Stand:</td><td><span id="odometer">---</span> km</td></tr>
+  <tr><td>SOC:</td><td><span id="battery_level">---</span> %</td></tr>
+  <tr><td>Car Version:</td><td><span id="car_version">---</span></td></tr>
+  </table>
   <?PHP
   echo(file_get_contents("http://teslalogger.de/teslalogger_content_index.php"));
   ?>
