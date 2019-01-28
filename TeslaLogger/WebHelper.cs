@@ -298,9 +298,9 @@ namespace TeslaLogger
                     TimeSpan tsElevation = DateTime.Now - elevation_time;
                     if (tsElevation.TotalSeconds > 30)
                         elevation = "";
-
-                    double ideal_battery_range_km = GetIdealBatteryRangekm();
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, address.Result, outside_temp.Result, elevation);
+                    int battery_level;
+                    double ideal_battery_range_km = GetIdealBatteryRangekm(out battery_level);
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, address.Result, outside_temp.Result, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                         return true;
@@ -571,9 +571,11 @@ namespace TeslaLogger
             }
         }
 
-        private double GetIdealBatteryRangekm()
+        private double GetIdealBatteryRangekm(out int battery_level)
         {
             string resultContent = "";
+            battery_level = -1;
+
             try
             {
                 resultContent = GetCommand("charge_state").Result;
@@ -587,6 +589,12 @@ namespace TeslaLogger
                     return -1;
 
                 var ideal_battery_range = (decimal)r2["ideal_battery_range"];
+
+                if (r2["battery_level"] != null)
+                {
+                    battery_level = Convert.ToInt32(r2["battery_level"]);
+                    DBHelper.current_battery_level = battery_level;
+                }
 
                 return (double)ideal_battery_range / (double)0.62137;
             }
@@ -608,6 +616,21 @@ namespace TeslaLogger
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
                 decimal odometer = (decimal)r2["odometer"];
+
+                try
+                {
+                    string car_version = r2["car_version"].ToString();
+                    if (DBHelper.current_car_version != car_version)
+                    {
+                        Tools.Log("Car Version: " + car_version);
+                        DBHelper.current_car_version = car_version;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.Log(ex.ToString());
+                }
+                
                 decimal odometerKM = odometer / 0.62137M;
                 return (double)odometerKM;
             }
@@ -641,6 +664,8 @@ namespace TeslaLogger
                     is_preconditioning = preconditioning;
                     Tools.Log("Preconditioning: " + preconditioning);
                 }
+
+                DBHelper.current_is_preconditioning = preconditioning;
 
                 return (double)outside_temp;
             }
@@ -714,7 +739,7 @@ namespace TeslaLogger
                     shift_state = r2["shift_state"].ToString();
 
                 if (shift_state == "D")
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0,0 , "", 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0 , 0, "", 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
 
                 return resultContent;
             }
