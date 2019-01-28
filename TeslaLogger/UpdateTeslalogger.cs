@@ -12,6 +12,12 @@ namespace TeslaLogger
         {
             try
             {
+                if (!DBHelper.ColumnExists("pos", "battery_level"))
+                {
+                    Tools.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                }
+
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
                     Tools.Log("Update skipped!");
@@ -52,7 +58,9 @@ namespace TeslaLogger
 
                 Tools.Log("End update");
 
-                Tools.Log("Please Reboot !!!");
+                Tools.Log("Rebooting");
+
+                exec_mono("reboot", "");
             }
             catch (Exception ex)
             {

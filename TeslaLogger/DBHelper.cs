@@ -9,6 +9,30 @@ namespace TeslaLogger
 {
     class DBHelper
     {
+        public static bool current_charging = false;
+        public static bool current_driving = false;
+        public static bool current_online = false;
+        public static bool current_sleeping = false;
+
+        public static int current_speed = 0;
+        public static int current_power = 0;
+        public static double current_odometer = 0;
+        public static double current_ideal_battery_range_km = 0;
+        public static double current_outside_temp = 0;
+        public static int current_battery_level = 0;
+
+        public static int current_charger_voltage = 0;
+        public static int current_charger_phases = 0;
+        public static int current_charger_actual_current = 0;
+        public static double current_charge_energy_added = 0;
+        public static int current_charger_power = 0;
+
+        public static bool current_is_preconditioning = false;
+
+        public static string current_car_version = "";
+
+        public static string current_json = "";
+
         public static string DBConnectionstring
         {
             get
@@ -19,8 +43,6 @@ namespace TeslaLogger
                 return ApplicationSettings.Default.DBConnectionstring;
             }
         }
-
-
 
         public static void CloseState()
         {
@@ -33,10 +55,25 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
+            CreateCurrentJSON();
         }
 
         public static void StartState(string state)
         {
+            if (state != null)
+            {
+                if (state == "online")
+                {
+                    current_online = true;
+                    current_sleeping = false;
+                }
+                else if (state == "asleep")
+                {
+                    current_online = false;
+                    current_sleeping = true;
+                }
+            }
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -49,6 +86,8 @@ namespace TeslaLogger
                         return;
                 }
                 dr.Close();
+
+                CreateCurrentJSON();
 
                 CloseState();
 
@@ -72,6 +111,13 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
                 cmd.ExecuteNonQuery();
             }
+
+            current_charging = false;
+            current_charger_power = 0;
+            current_charger_voltage = 0;
+            current_charger_phases = 0;
+            current_charger_actual_current = 0;
+            CreateCurrentJSON();
         }
 
         public static void StartChargingState()
@@ -85,6 +131,9 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
                 cmd.ExecuteNonQuery();
             }
+
+            current_charging = true;
+            CreateCurrentJSON();
         }
 
         public static void CloseDriveState()
@@ -97,6 +146,11 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
             }
+
+            current_driving = false;
+            current_speed = 0;
+            current_power = 0;
+            CreateCurrentJSON();
         }
 
         public static void StartDriveState()
@@ -109,16 +163,20 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
             }
+
+            current_driving = true;
+            current_charge_energy_added = 0;
+            CreateCurrentJSON();
         }
 
 
-        internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, string address, double? outside_temp, string altitude)
+        internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, string address, double? outside_temp, string altitude)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, address, outside_temp, altitude) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @address, @outside_temp, @altitude)", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, address, outside_temp, altitude, battery_level) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @address, @outside_temp, @altitude, @battery_level)", con);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
@@ -143,8 +201,27 @@ namespace TeslaLogger
                 else
                     cmd.Parameters.AddWithValue("@altitude", altitude);
 
+                if (battery_level == -1)
+                    cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+
                 cmd.ExecuteNonQuery();
+
+                try
+                {
+                    current_speed = (int)((decimal)speed * 1.60934M);
+                    current_power = (int)(power * 1.35962M);
+                    current_odometer = odometer;
+                    current_ideal_battery_range_km = ideal_battery_range_km;
+                }
+                catch (Exception ex)
+                {
+                    Tools.Log(ex.ToString());
+                }
             }
+
+            CreateCurrentJSON();
         }
 
         internal static void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp)
@@ -175,6 +252,22 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
 
                 cmd.ExecuteNonQuery();
+            }
+
+            try
+            {
+                current_battery_level = Convert.ToInt32(battery_level);
+                current_charge_energy_added = Convert.ToDouble(charge_energy_added);
+                current_charger_power = Convert.ToInt32(charger_power);
+                current_ideal_battery_range_km = kmRange;
+                current_charger_voltage = int.Parse(charger_voltage);
+                current_charger_phases = Convert.ToInt32(charger_phases);
+                current_charger_actual_current = Convert.ToInt32(charger_actual_current);
+                CreateCurrentJSON();
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
             }
         }
 
@@ -241,6 +334,64 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        static void CreateCurrentJSON()
+        {
+            try
+            {
+                var values = new Dictionary<string, object>
+                {
+                   { "charging", current_charging},
+                   { "driving", current_driving },
+                   { "online", current_online },
+                   { "sleeping", current_sleeping },
+                   { "speed", current_speed},
+                   { "power", current_power },
+                   { "odometer", current_odometer },
+                   { "ideal_battery_range_km", current_ideal_battery_range_km},
+                   { "outside_temp", current_outside_temp},
+                   { "battery_level", current_battery_level},
+                   { "charger_voltage", current_charger_voltage},
+                   { "charger_phases", current_charger_phases},
+                   { "charger_actual_current", current_charger_actual_current},
+                   { "charge_energy_added", current_charge_energy_added},
+                   { "charger_power", current_charger_power},
+                   { "car_version", current_car_version }
+                };
+
+                current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
+                System.IO.File.WriteAllText("current_json.txt", current_json, Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+                current_json = "";
+            }
+        }
+
+        public static bool ColumnExists(string table, string column)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `"+ table +"` LIKE '"+ column +"';", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static int ExecuteSQLQuery(string sql)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                return cmd.ExecuteNonQuery();
+            }
         }
     }
 }
