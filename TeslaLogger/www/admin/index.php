@@ -33,7 +33,34 @@
 			$('#odometer').text(jsonData["odometer"].toFixed(1));
 			$('#battery_level').text(jsonData["battery_level"]);
 			$('#car_version').text(jsonData["car_version"]);
+			
+			if (jsonData["charging"])
+			{
+				$('#car_statusLabel').text("Wird geladen:");
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
+			}
+			else if (jsonData["driving"])
+			{
+				$('#car_statusLabel').text("Fahren:");
+				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
+			}
+			else if (jsonData["online"])
+			{
+				$('#car_statusLabel').text("Online");
+				$('#car_status').text();
+			}
+			else if (jsonData["sleeping"])
+			{
+				$('#car_statusLabel').text("Schlafen");
+				$('#car_status').text();
+			}
+			else
+			{
+				$('#car_statusLabel').text("?");
+				$('#car_status').text();
+			}
 			});
+			
 	}
   
   function BackgroudRun($target)
@@ -66,10 +93,10 @@
   <div id="content">
   <h1>Fahrzeuginfo:</h1>
   <table>
-  <tr><td>Typical Range:</td><td><span id="ideal_battery_range_km">---</span> km</td></tr>
-  <tr><td>KM Stand:</td><td><span id="odometer">---</span> km</td></tr>
-  <tr><td>SOC:</td><td><span id="battery_level">---</span> %</td></tr>
-  <tr><td>Car Version:</td><td><span id="car_version">---</span></td></tr>
+  <tr><td><b><span id="car_statusLabel"></span></b></td><td><span id="car_status"></span></td></tr>
+  <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km</td></tr>
+  <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km / <span id="battery_level">---</span> %</td></tr>
+  <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
   </table>
   <?PHP
   echo(file_get_contents("http://teslalogger.de/teslalogger_content_index.php"));
