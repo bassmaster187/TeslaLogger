@@ -46,18 +46,18 @@
 			}
 			else if (jsonData["online"])
 			{
-				$('#car_statusLabel').text("Online");
-				$('#car_status').text();
+				$('#car_statusLabel').text("Status:");
+				$('#car_status').text("Online");
 			}
 			else if (jsonData["sleeping"])
 			{
-				$('#car_statusLabel').text("Schlafen");
-				$('#car_status').text();
+				$('#car_statusLabel').text("Status:");
+				$('#car_status').text("Schlafen");
 			}
 			else
 			{
-				$('#car_statusLabel').text("?");
-				$('#car_status').text();
+				$('#car_statusLabel').text("Status:");
+				$('#car_status').text("?");
 			}
 			});
 			
