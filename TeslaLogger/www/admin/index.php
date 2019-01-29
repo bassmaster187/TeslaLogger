@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Config V1.2</title>
+    <title>Teslalogger Config V1.3</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -94,8 +94,8 @@
   <h1>Fahrzeuginfo:</h1>
   <table>
   <tr><td><b><span id="car_statusLabel"></span></b></td><td><span id="car_status"></span></td></tr>
-  <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km</td></tr>
-  <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km / <span id="battery_level">---</span> %</td></tr>
+  <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
+  <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
   </table>
   <?PHP
