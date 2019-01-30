@@ -12,7 +12,7 @@
 	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script>
+	<script>	
 	<?PHP
 	$csv = array();
 	$fp = fopen('/etc/teslalogger/geofence.csv', 'rb');
@@ -32,23 +32,29 @@
   var map = new L.Map('map');
   var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 12, attribution: osmAttrib});		
+	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 19, attribution: osmAttrib});		
 	map.setView(new L.LatLng(50, 8),6);
 	map.addLayer(osm);
 	
+	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
+	var markerArray = [];
+	
 	<?PHP
-	foreach ($csv as $value)
+	foreach ($csv2 as $value)
 	{
 		if  ($value[1] =="")
 			continue;
 			
 		echo("var markerLocation = new L.LatLng($value[1], $value[2]);\r\n");
-		echo("var marker = new L.Marker(markerLocation);\r\n");
+		echo("var marker = new L.Marker(markerLocation, {icon: greenIcon});\r\n");
+		echo("markerArray.push(marker);\r\n");
 		echo("marker.bindPopup('$value[0]');\r\n");
 		echo("marker.addTo(map);\r\n");
 	}
+	echo("var group = L.featureGroup(markerArray);\r\n");
+	echo("map.fitBounds(group.getBounds());\r\n\r\n");
 	
-	foreach ($csv2 as $value)
+	foreach ($csv as $value)
 	{
 		if  ($value[1] =="")
 			continue;
