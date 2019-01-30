@@ -36,7 +36,7 @@
 	map.setView(new L.LatLng(50, 8),6);
 	map.addLayer(osm);
 	
-	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
+	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 	var markerArray = [];
 	
 	<?PHP
