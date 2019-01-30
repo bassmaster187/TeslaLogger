@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TeslaLogger
 {
@@ -53,7 +54,20 @@ namespace TeslaLogger
 
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
 
-                    Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new System.IO.DirectoryInfo("/etc/teslalogger"));
+
+                    try
+                    {
+                        if (!File.Exists("/etc/teslalogger/MQTTClient.exe.config"))
+                        {
+                            Tools.Log("Copy empty MQTTClient.exe.config file");
+                            Tools.CopyFile("/etc/teslalogger/git/MQTTClient/App.config", "/etc/teslalogger/MQTTClient.exe.config");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.Log(ex.ToString());
+                    }
                 }
 
                 Tools.Log("End update");
