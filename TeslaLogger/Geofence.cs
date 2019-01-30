@@ -59,6 +59,7 @@ namespace TeslaLogger
                                 Double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
                                 Double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat)));
 
+                            if (filename != "geofence.csv")
                             Tools.Log("Address inserted: " + args[0]);
                         }
                         catch (Exception ex)

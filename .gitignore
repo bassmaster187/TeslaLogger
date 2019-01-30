@@ -6,3 +6,6 @@
 /TeslaLogger/obj/Debug
 /.vs
 /TeslaLogger/obj/Release
+MQTTClient/bin/Debug/
+MQTTClient/obj
+packages
