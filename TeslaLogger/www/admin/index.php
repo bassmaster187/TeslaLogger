@@ -20,7 +20,7 @@
 				GetCurrentData();
 			}
 		}
-		,10000);
+		,5000);
   } );
   
 	function GetCurrentData()
