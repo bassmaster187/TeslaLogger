@@ -32,6 +32,7 @@ namespace TeslaLogger
                 {
                     chmod("cmd_updated.txt", 666);
                     chmod("/etc/teslalogger/nohup.out", 666);
+                    chmod("MQTTClient.exe.config", 666);
 
                     if (!exec_mono("git", "--version", false).Contains("git version"))
                     {
