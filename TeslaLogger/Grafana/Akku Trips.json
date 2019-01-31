@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 14,
   "links": [],
   "panels": [
     {
@@ -194,7 +193,7 @@
           "pattern": "MaxRange",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Ø Verbrauch",
@@ -249,7 +248,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * 0.190052356 / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where EndOdometer - StartOdometer > 5\norder by StartTrip desc",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * 0.190052356 / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000)\norder by StartTrip desc",
           "refId": "A",
           "select": [
             [
@@ -314,5 +313,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 18
+  "version": 24
 }
