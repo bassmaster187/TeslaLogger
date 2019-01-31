@@ -29,10 +29,18 @@ namespace MQTTClient
                     return;
                 }
 
-                Tools.Log("Connecting: " + Properties.Settings.Default.MQTTHost);
-
                 client = new MqttClient(Properties.Settings.Default.MQTTHost);
-                client.Connect(Guid.NewGuid().ToString());
+
+                if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
+                {
+                    Tools.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
+                    client.Connect(Guid.NewGuid().ToString(), Properties.Settings.Default.Name, Properties.Settings.Default.Password);
+                }
+                else
+                {
+                    Tools.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
+                    client.Connect(Guid.NewGuid().ToString());
+                }
                 Tools.Log("Connected!");
             }
             catch (Exception ex)
