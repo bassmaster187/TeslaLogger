@@ -255,7 +255,7 @@ namespace TeslaLogger
                                     else
                                     {
                                         lastCarUsed = DateTime.Now;
-                                        System.Threading.Thread.Sleep(60000);
+                                        System.Threading.Thread.Sleep(10000);
 
                                         //wh.GetCachedRollupData();
                                     }
