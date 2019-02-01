@@ -172,7 +172,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`chris8` SQL SECURITY DEFINER */
 /*!50001 VIEW `trip` AS select `drivestate`.`StartDate` AS `StartDate`,`drivestate`.`EndDate` AS `EndDate`,`pos_Start`.`ideal_battery_range_km` AS `StartRange`,`pos_End`.`ideal_battery_range_km` AS `EndRange`,`pos_Start`.`address` AS `Start_address`,`pos_End`.`address` AS `End_address`,(`pos_End`.`odometer` - `pos_Start`.`odometer`) AS `km_diff`,((`pos_Start`.`ideal_battery_range_km` - `pos_End`.`ideal_battery_range_km`) * 0.190052356) AS `consumption_kWh`,((((`pos_Start`.`ideal_battery_range_km` - `pos_End`.`ideal_battery_range_km`) * 0.190052356) / (`pos_End`.`odometer` - `pos_Start`.`odometer`)) * 100) AS `avg_consumption_kWh_100km`,timestampdiff(MINUTE,`drivestate`.`StartDate`,`drivestate`.`EndDate`) AS `DurationMinutes`,`pos_Start`.`odometer` AS `StartKm`,`pos_End`.`odometer` AS `EndKm`,`pos_Start`.`lat` AS `lat`,`pos_Start`.`lng` AS `lng`,`pos_End`.`lat` AS `EndLat`,`pos_End`.`lng` AS `EndLng` from ((`drivestate` join `pos` `pos_Start` on((`drivestate`.`StartPos` = `pos_Start`.`id`))) join `pos` `pos_End` on((`drivestate`.`EndPos` = `pos_End`.`id`))) where ((`pos_End`.`odometer` - `pos_Start`.`odometer`) > 0.1) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
