@@ -128,13 +128,16 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result);
+                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, false);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
+                    {
+                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true);
                         System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : Charging Complete");
+                    }
 
                     lastCharging_State = charging_state;
                 }
