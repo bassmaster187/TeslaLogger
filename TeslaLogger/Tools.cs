@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
@@ -113,6 +114,60 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Tools.Log("CopyFile Exception: " + ex.ToString());
+            }
+        }
+
+        internal static void EndSleeping(out int stopSleepingHour, out int stopSleepingMinute)
+        {
+            stopSleepingHour = -1;
+            stopSleepingMinute = -1;
+
+            try
+            {
+                if (!System.IO.File.Exists("settings.json"))
+                    return;
+
+                string json = System.IO.File.ReadAllText("settings.json");
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                {
+                    string start = j["SleepTimeSpanEnd"];
+                    string[] s = start.Split(':');
+
+                    stopSleepingHour = int.Parse(s[0]);
+                    stopSleepingMinute = int.Parse(s[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+        }
+
+        internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
+        {
+            startSleepingHour = -1;
+            startSleepingMinutes = -1;
+
+            try
+            {
+                if (!System.IO.File.Exists("settings.json"))
+                    return;
+
+                string json = System.IO.File.ReadAllText("settings.json");
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                {
+                    string start = j["SleepTimeSpanStart"];
+                    string[] s = start.Split(':');
+
+                    startSleepingHour = int.Parse(s[0]);
+                    startSleepingMinutes = int.Parse(s[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
             }
         }
     }
