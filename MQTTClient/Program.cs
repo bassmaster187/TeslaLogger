@@ -15,6 +15,8 @@ namespace MQTTClient
             MqttClient client = null;
             try
             {
+
+
                 Tools.Log("MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 if (Properties.Settings.Default.MQTTHost.Length == 0)

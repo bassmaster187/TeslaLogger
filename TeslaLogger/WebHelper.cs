@@ -18,6 +18,8 @@ namespace TeslaLogger
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
+        public string Tesla_Battery = "";
+        public string Tesla_Model = "";
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         Geofence geofence;
@@ -243,7 +245,26 @@ namespace TeslaLogger
                 var state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
-                
+
+                string option_codes = r4["option_codes"].ToString();
+                string[] oc = option_codes.Split(',');
+                var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
+                if (battery != null && battery.Length > 0)
+                {
+                    Tools.Log("Battery: " + battery[0]);
+                    Tesla_Battery = battery[0];
+                }
+
+                if (oc.Contains("MDLS"))
+                    Tesla_Model = "MS";
+                else if (oc.Contains("MS03"))
+                    Tesla_Model = "MS";
+                else if (oc.Contains("MDLX"))
+                    Tesla_Model = "MX";
+                else if (oc.Contains("MDL3"))
+                    Tesla_Model = "M3";
+
+
                 return state;
             }
             catch (Exception ex)
@@ -627,6 +648,8 @@ namespace TeslaLogger
                     {
                         Tools.Log("Car Version: " + car_version);
                         DBHelper.current_car_version = car_version;
+
+                        TaskerWakeupfile();
                     }
                 }
                 catch (Exception ex)
@@ -828,6 +851,9 @@ namespace TeslaLogger
                 var d = new Dictionary<string, string>();
                 d.Add("t",TaskerHash);
                 d.Add("v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                d.Add("cv", DBHelper.current_car_version);
+                d.Add("m", Tesla_Model);
+                d.Add("bt", Tesla_Battery);
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
@@ -869,5 +895,7 @@ namespace TeslaLogger
                 return System.IO.File.Exists("wakeupteslalogger.txt") || TaskerWakeupfile();
             }
         }
+
+
     }
 }

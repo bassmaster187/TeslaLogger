@@ -18,13 +18,15 @@ namespace TeslaLogger
             Charge,
             Sleep,
             WaitForSleep,
-            Online
+            Online,
+            GoSleep
         }
 
         static TeslaState currentState = TeslaState.Start;
         WebHelper wh = new WebHelper();
         static DateTime lastCarUsed = DateTime.Now;
         static DateTime lastTokenRefresh = DateTime.Now;
+        static bool goSleepWithWakeup = false;
 
         static void Main(string[] args)
         {
@@ -212,34 +214,56 @@ namespace TeslaLogger
                                     }
                                     else
                                     {
-                                        // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
-                                        TimeSpan ts = DateTime.Now - lastCarUsed;
-                                        if (ts.TotalMinutes > ApplicationSettings.Default.KeepOnlineMinAfterUsage)
+                                        int startSleepHour, startSleepMinute;
+                                        Tools.StartSleeping(out startSleepHour, out startSleepMinute);
+
+                                        if (System.IO.File.Exists("cmd_gosleep.txt"))
                                         {
-                                            currentState = TeslaState.Start;
+                                            System.IO.File.Delete("cmd_gosleep.txt");
 
-                                            wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima läuft.
-                                            if (wh.is_preconditioning)
+                                            Tools.Log("Go to Sleep Mode!");
+                                            currentState = TeslaState.GoSleep;
+                                            goSleepWithWakeup = false;
+                                        }
+                                        else if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
+                                        {
+                                            Tools.Log("Go to Timespan Sleep Mode!");
+                                            currentState = TeslaState.GoSleep;
+                                            goSleepWithWakeup = true;
+                                        }
+                                        else
+                                        {
+                                            // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
+                                            TimeSpan ts = DateTime.Now - lastCarUsed;
+                                            if (ts.TotalMinutes > ApplicationSettings.Default.KeepOnlineMinAfterUsage)
                                             {
-                                                Tools.Log("preconditioning prevents car to get sleep");
-                                                lastCarUsed = DateTime.Now;
-                                            }
-                                            else
-                                            {
-                                                for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
+                                                currentState = TeslaState.Start;
+
+                                                wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima läuft.
+                                                if (wh.is_preconditioning)
                                                 {
-                                                    if (wh.existsWakeupFile)
+                                                    Tools.Log("preconditioning prevents car to get sleep");
+                                                    lastCarUsed = DateTime.Now;
+                                                }
+                                                else
+                                                {
+                                                    for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
                                                     {
-                                                        Tools.Log("Wakeupfile prevents car to get sleep");
-                                                        wh.DeleteWakeupFile();
-                                                        break;
-                                                    }
+                                                        if (wh.existsWakeupFile)
+                                                        {
+                                                            Tools.Log("Wakeupfile prevents car to get sleep");
+                                                            wh.DeleteWakeupFile();
+                                                            break;
+                                                        }
 
-                                                    Tools.Log("Waiting for car to go to sleep " + x.ToString());
-                                                    System.Threading.Thread.Sleep(1000 * 60);
+                                                        Tools.Log("Waiting for car to go to sleep " + x.ToString());
+                                                        System.Threading.Thread.Sleep(1000 * 60);
+                                                    }
                                                 }
                                             }
                                         }
+
+                                        System.Threading.Thread.Sleep(20000);
                                     }
                                 }
                                 break;
@@ -300,6 +324,55 @@ namespace TeslaLogger
                                         // TODO: Fahrt beenden
                                         currentState = TeslaState.Start;
                                         wh.StopStreaming();
+                                    }
+                                }
+                                break;
+
+                            case TeslaState.GoSleep:
+                                {
+                                    bool KeepSleeping = true;
+                                    int round = 0;
+
+                                    while (KeepSleeping)
+                                    {
+                                        round++;
+                                        System.Threading.Thread.Sleep(5000);
+                                        if (System.IO.File.Exists("wakeupteslalogger.txt"))
+                                        {
+                                            wh.DeleteWakeupFile();
+
+                                            KeepSleeping = false;
+                                            currentState = TeslaState.Start;
+                                            break;
+                                        }
+                                        else if (round > 24)
+                                        {
+                                            round = 0;
+
+                                            if (wh.existsWakeupFile)
+                                            {
+                                                wh.DeleteWakeupFile();
+
+                                                KeepSleeping = false;
+                                                currentState = TeslaState.Start;
+                                                break;
+                                            }
+                                        }
+
+                                        if (goSleepWithWakeup)
+                                        {
+                                            int stopSleepingHour, stopSleepingMinute;
+                                            Tools.EndSleeping(out stopSleepingHour, out stopSleepingMinute);
+
+                                            if (DateTime.Now.Hour == stopSleepingHour && DateTime.Now.Minute == stopSleepingMinute)
+                                            {
+                                                Tools.Log("Restart Connecting to API");
+
+                                                KeepSleeping = false;
+                                                currentState = TeslaState.Start;
+                                                break;
+                                            }
+                                        }
                                     }
                                 }
                                 break;
