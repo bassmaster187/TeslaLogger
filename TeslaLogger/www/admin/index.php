@@ -3,9 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Config V1.4</title>
+    <title>Teslalogger Config V1.5</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -90,6 +88,8 @@
   <button onclick="window.location.href='backup.php';">Backup</button>
   <button onclick="window.location.href='geofencing.php';">Geofence</button>
   <button onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
+  <button onclick="BackgroudRun('gosleep.php', 'Sleep!');">Sleep</button>
+  <button onclick="window.location.href='settings.php';">Settings</button>
   
 
   <div id="content">
