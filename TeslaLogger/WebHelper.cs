@@ -248,12 +248,6 @@ namespace TeslaLogger
 
                 string option_codes = r4["option_codes"].ToString();
                 string[] oc = option_codes.Split(',');
-                var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
-                if (battery != null && battery.Length > 0)
-                {
-                    Tools.Log("Battery: " + battery[0]);
-                    Tesla_Battery = battery[0];
-                }
 
                 if (oc.Contains("MDLS"))
                     Tesla_Model = "MS";
@@ -264,6 +258,14 @@ namespace TeslaLogger
                 else if (oc.Contains("MDL3"))
                     Tesla_Model = "M3";
 
+                var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
+                if (battery != null && battery.Length > 0)
+                {
+                    if (Tesla_Battery != battery[0])
+                        Tools.Log("Battery: " + battery[0] + " / " + Tesla_Model);
+
+                    Tesla_Battery = battery[0];
+                }
 
                 return state;
             }
