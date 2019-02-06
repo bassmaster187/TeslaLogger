@@ -33,7 +33,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 14,
+        "col": 4,
         "desc": true
       },
       "styles": [
@@ -318,7 +318,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30d",
+    "from": "now-90d",
     "to": "now"
   },
   "timepicker": {
@@ -349,5 +349,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 30
+  "version": 31
 }
