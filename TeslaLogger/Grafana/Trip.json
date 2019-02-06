@@ -44,7 +44,7 @@
           "type": "date"
         },
         {
-          "alias": "",
+          "alias": "Start",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -63,7 +63,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Ende",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -79,7 +79,7 @@
           "unit": "short"
         },
         {
-          "alias": "Ø Verbrauch",
+          "alias": "Ø Verbrauch kWh",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -175,7 +175,7 @@
           "unit": "short"
         },
         {
-          "alias": "Verbraucht",
+          "alias": "Verbraucht kWh",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -191,7 +191,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Start Adresse",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -210,7 +210,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Ziel Adresse",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -259,6 +259,105 @@
           "pattern": "EndUTC",
           "thresholds": [],
           "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Ø °C",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "outside_temp_avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "max km/h",
+          "colorMode": "value",
+          "colors": [
+            "#d8d9da",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "speed_max",
+          "thresholds": [
+            "151",
+            "200"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "max PS",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "power_max",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "min PS",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "power_min",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Ø PS",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "power_avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Dauer Min",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "DurationMinutes",
+          "thresholds": [],
+          "type": "number",
           "unit": "short"
         },
         {
