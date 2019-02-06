@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
@@ -17,6 +18,21 @@ namespace TeslaLogger
                 {
                     Tools.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                }
+
+                if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
+                {
+                    Tools.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+
+                    DBHelper.UpdateAllDrivestateData();
+                }
+
+                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                {
+                    Tools.Log("update view: trip");
+                    DBHelper.ExecuteSQLQuery("DROP VIEW `trip`");
+                    DBHelper.ExecuteSQLQuery(DBViews.Trip);
                 }
 
                 if (System.IO.File.Exists("cmd_updated.txt"))

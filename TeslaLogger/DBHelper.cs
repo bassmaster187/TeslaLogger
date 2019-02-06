@@ -138,19 +138,105 @@ namespace TeslaLogger
 
         public static void CloseDriveState()
         {
+            int StartPos = 0;
+            int MaxPosId = GetMaxPosid();
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    StartPos = Convert.ToInt32(dr[0]);
+                }
+                dr.Close();
+            }
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
                 cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@Pos", MaxPosId);
                 cmd.ExecuteNonQuery();
             }
+
+            if (StartPos != 0)
+                UpdateDriveStatistics(StartPos, MaxPosId);
 
             current_driving = false;
             current_speed = 0;
             current_power = 0;
             CreateCurrentJSON();
+        }
+
+        private static void UpdateDriveStatistics(int startPos, int endPos)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos", con);
+                    cmd.Parameters.AddWithValue("@startpos", startPos);
+                    cmd.Parameters.AddWithValue("@endpos", endPos);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                        {
+                            con2.Open();
+                            MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2);
+                            cmd2.Parameters.AddWithValue("@StartPos", startPos);
+                            cmd2.Parameters.AddWithValue("@EndPos", endPos);
+
+                            cmd2.Parameters.AddWithValue("@outside_temp_avg", dr["outside_temp_avg"]);
+                            cmd2.Parameters.AddWithValue("@speed_max", dr["speed_max"]);
+                            cmd2.Parameters.AddWithValue("@power_max", dr["power_max"]);
+                            cmd2.Parameters.AddWithValue("@power_min", dr["power_min"]);
+                            cmd2.Parameters.AddWithValue("@power_avg", dr["power_avg"]);
+
+                            cmd2.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+        }
+
+        public static void UpdateAllDrivestateData()
+        {
+            Tools.Log("UpdateAllDrivestateData start");
+
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos from drivestate", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    try
+                    {
+                        int StartPos = Convert.ToInt32(dr[0]);
+                        int EndPos = Convert.ToInt32(dr[1]);
+
+                        DBHelper.UpdateDriveStatistics(StartPos, EndPos);
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.Log(ex.ToString());
+                    }
+                }
+            }
+
+            Tools.Log("UpdateAllDrivestateData end");
         }
 
         public static void StartDriveState()
