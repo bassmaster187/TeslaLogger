@@ -222,6 +222,8 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        int unknownStateCounter = 0;
+
         public async Task<String> IsOnline()
         {
             string resultContent = "";
@@ -246,25 +248,50 @@ namespace TeslaLogger
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
 
-                string option_codes = r4["option_codes"].ToString();
-                string[] oc = option_codes.Split(',');
-
-                if (oc.Contains("MDLS"))
-                    Tesla_Model = "MS";
-                else if (oc.Contains("MS03"))
-                    Tesla_Model = "MS";
-                else if (oc.Contains("MDLX"))
-                    Tesla_Model = "MX";
-                else if (oc.Contains("MDL3"))
-                    Tesla_Model = "M3";
-
-                var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
-                if (battery != null && battery.Length > 0)
+                try
                 {
-                    if (Tesla_Battery != battery[0])
-                        Tools.Log("Battery: " + battery[0] + " / " + Tesla_Model);
+                    string option_codes = r4["option_codes"].ToString();
+                    string[] oc = option_codes.Split(',');
 
-                    Tesla_Battery = battery[0];
+                    if (oc.Contains("MDLS"))
+                        Tesla_Model = "MS";
+                    else if (oc.Contains("MS03"))
+                        Tesla_Model = "MS";
+                    else if (oc.Contains("MDLX"))
+                        Tesla_Model = "MX";
+                    else if (oc.Contains("MDL3"))
+                        Tesla_Model = "M3";
+
+                    var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
+                    if (battery != null && battery.Length > 0)
+                    {
+                        if (Tesla_Battery != battery[0])
+                            Tools.Log("Battery: " + battery[0] + " / " + Tesla_Model);
+
+                        Tesla_Battery = battery[0];
+                    }
+
+                    if (state == "unknown")
+                    {
+                        unknownStateCounter++;
+                        Tools.ExceptionWriter(new Exception("unknown state"), resultContent);
+                        System.Threading.Thread.Sleep(10000);
+
+                        if (unknownStateCounter > 10)
+                        {
+                            unknownStateCounter = 0;
+                            string r = Wakeup().Result;
+                            Tools.Log("WakupResult: " + r);
+                        }
+                    }
+                    else
+                    {
+                        unknownStateCounter = 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.ExceptionWriter(ex, resultContent);
                 }
 
                 return state;
@@ -631,6 +658,8 @@ namespace TeslaLogger
             return -1;
         }
 
+        double lastOdometerKM = 0;
+
         async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
@@ -641,6 +670,13 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+
+                if (r2["odometer"] == null)
+                {
+                    Tools.Log("odometer = NULL");
+                    return lastOdometerKM;
+                }
+
                 decimal odometer = (decimal)r2["odometer"];
 
                 try
@@ -651,7 +687,7 @@ namespace TeslaLogger
                         Tools.Log("Car Version: " + car_version);
                         DBHelper.current_car_version = car_version;
 
-                        TaskerWakeupfile();
+                        TaskerWakeupfile(true);
                     }
                 }
                 catch (Exception ex)
@@ -660,11 +696,13 @@ namespace TeslaLogger
                 }
                 
                 decimal odometerKM = odometer / 0.62137M;
-                return (double)odometerKM;
+                lastOdometerKM = (double)odometerKM;
+                return lastOdometerKM;
             }
             catch (Exception ex)
             {
                 Tools.ExceptionWriter(ex, resultContent);
+                return lastOdometerKM;
             }
             return 0;
         }
@@ -728,6 +766,40 @@ namespace TeslaLogger
 
             return "NULL";
         }
+
+        public async Task<String> PostCommand(String cmd, String data)
+        {
+            Tools.Log("PostCommand: " + cmd + " - " + data);
+
+            string resultContent = "";
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
+
+                StringContent queryString = new StringContent(data);
+                var result = await client.PostAsync(adresse, queryString);
+
+                resultContent = await result.Content.ReadAsStringAsync();
+
+                return resultContent;
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, resultContent);
+            }
+
+            return "NULL";
+        }
+
+        public async Task<String> Wakeup()
+        {
+            return await PostCommand("wake_up", "");
+        }
+
 
         public string GetCachedRollupData()
         {
@@ -844,10 +916,20 @@ namespace TeslaLogger
             stopStreaming = true;
         }
 
-        public bool TaskerWakeupfile()
+        DateTime lastTaskerWakeupfile = DateTime.Today;
+
+        public bool TaskerWakeupfile(bool force = false)
         {
             try
             {
+                TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
+
+                if (!force && ts.TotalSeconds < 50)
+                    return false;
+
+                Tools.Log("Check Tasker Webservice");
+                lastTaskerWakeupfile = DateTime.Now;
+
                 HttpClient client = new HttpClient();
 
                 var d = new Dictionary<string, string>();
@@ -879,15 +961,20 @@ namespace TeslaLogger
             return false;
         }
 
-        public void DeleteWakeupFile()
+        public bool DeleteWakeupFile()
         {
-            TaskerWakeupfile();
+            bool ret = false;
+            if (TaskerWakeupfile())
+                ret = true;
 
             if (existsWakeupFile)
             {
                 Tools.Log("Delete Wakeup file");
                 System.IO.File.Delete("wakeupteslalogger.txt");
+                ret = true;
             }
+
+            return ret;
         }
 
         public bool existsWakeupFile
@@ -897,7 +984,5 @@ namespace TeslaLogger
                 return System.IO.File.Exists("wakeupteslalogger.txt") || TaskerWakeupfile();
             }
         }
-
-
     }
 }

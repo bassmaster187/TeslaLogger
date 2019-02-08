@@ -183,7 +183,7 @@ namespace TeslaLogger
                                     }
                                     else
                                     {
-                                        Tools.Log(res);
+                                        Tools.Log("Unhandled State: " + res);
                                     }
                                 }
                                 break;
@@ -253,6 +253,7 @@ namespace TeslaLogger
                                                         {
                                                             Tools.Log("Wakeupfile prevents car to get sleep");
                                                             wh.DeleteWakeupFile();
+                                                            string wakeup = wh.Wakeup().Result;
                                                             break;
                                                         }
 
@@ -339,7 +340,10 @@ namespace TeslaLogger
                                         System.Threading.Thread.Sleep(5000);
                                         if (System.IO.File.Exists("wakeupteslalogger.txt"))
                                         {
-                                            wh.DeleteWakeupFile();
+                                            if (wh.DeleteWakeupFile())
+                                            {
+                                                string wakeup = wh.Wakeup().Result;
+                                            }
 
                                             KeepSleeping = false;
                                             currentState = TeslaState.Start;
@@ -349,9 +353,12 @@ namespace TeslaLogger
                                         {
                                             round = 0;
 
-                                            if (wh.existsWakeupFile)
+                                            if (wh.TaskerWakeupfile())
                                             {
-                                                wh.DeleteWakeupFile();
+                                                if (wh.DeleteWakeupFile())
+                                                {
+                                                    string wakeup = wh.Wakeup().Result;
+                                                }
 
                                                 KeepSleeping = false;
                                                 currentState = TeslaState.Start;
