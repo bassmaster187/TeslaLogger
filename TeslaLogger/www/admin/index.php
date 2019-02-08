@@ -101,7 +101,35 @@
   <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
   <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
+  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
   </table>
+  
+  <?php
+
+  function checkForUpdates()
+  {
+	$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+	$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+
+	if ($installed != $onlineversion)
+	{
+		echo($installed . "<br><b>Update available: " .$onlineversion."</b>");
+	}
+	else
+	{
+		echo($installed);
+	}	
+  }
+
+function getTeslaloggerVersion($path)
+{
+	$f = file_get_contents($path);
+	preg_match('/AssemblyVersion\(\"([0-9\.]+)\"/',$f, $matches);
+	return $matches[1];
+}
+
+?>
+  
   <?PHP
   echo(file_get_contents("http://teslalogger.de/teslalogger_content_index.php"));
   ?>
