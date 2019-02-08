@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 16,
   "links": [],
   "panels": [
     {
@@ -33,7 +32,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 1,
+        "col": 5,
         "desc": true
       },
       "styles": [
@@ -103,12 +102,12 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 1,
           "mappingType": 1,
           "pattern": "geladen_kWh",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Ø geladen kWh",
@@ -298,5 +297,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 9
+  "version": 10
 }
