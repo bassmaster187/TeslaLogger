@@ -927,7 +927,8 @@ namespace TeslaLogger
                 if (!force && ts.TotalSeconds < 50)
                     return false;
 
-                Tools.Log("Check Tasker Webservice");
+                // Tools.Log("Check Tasker Webservice");
+
                 lastTaskerWakeupfile = DateTime.Now;
 
                 HttpClient client = new HttpClient();
