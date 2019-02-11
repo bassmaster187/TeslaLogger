@@ -35,7 +35,7 @@ namespace MQTTClient
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
                 {
-                    Tools.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
+                    Tools.Log("Connecting with credentials: " + Properties.Settings.Default.MQTTHost);
                     client.Connect(Guid.NewGuid().ToString(), Properties.Settings.Default.Name, Properties.Settings.Default.Password);
                 }
                 else
