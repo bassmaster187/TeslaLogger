@@ -337,7 +337,7 @@ namespace TeslaLogger
                                     while (KeepSleeping)
                                     {
                                         round++;
-                                        System.Threading.Thread.Sleep(5000);
+                                        System.Threading.Thread.Sleep(1000);
                                         if (System.IO.File.Exists("wakeupteslalogger.txt"))
                                         {
                                             if (wh.DeleteWakeupFile())
@@ -349,7 +349,7 @@ namespace TeslaLogger
                                             currentState = TeslaState.Start;
                                             break;
                                         }
-                                        else if (round > 24)
+                                        else if (round > 10)
                                         {
                                             round = 0;
 
