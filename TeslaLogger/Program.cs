@@ -398,7 +398,12 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                Tools.Log(ex.Message);
                 Tools.ExceptionWriter(ex, "While Schleife");
+            }
+            finally
+            {
+                Tools.Log("Teslalogger Stopped!");
             }
         }
 
