@@ -273,11 +273,13 @@ namespace TeslaLogger
 
                     if (state == "unknown")
                     {
+                        Tools.Log("unknown state");
+
                         unknownStateCounter++;
                         Tools.ExceptionWriter(new Exception("unknown state"), resultContent);
                         System.Threading.Thread.Sleep(10000);
 
-                        if (unknownStateCounter > 6)
+                        if (unknownStateCounter > 3)
                         {
                             unknownStateCounter = 0;
                             string r = Wakeup().Result;
