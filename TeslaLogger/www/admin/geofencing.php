@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger geofencing V1.0</title>
+    <title>Teslalogger geofencing V1.1</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
@@ -22,24 +22,44 @@
 	fclose($fp);
 	
 	$csv2 = array();
-	$fp = fopen('/etc/teslalogger/geofence-private.csv', 'rb');
-	while(!feof($fp)) {
-		$csv2[] = fgetcsv($fp);
+	if (file_exists('/etc/teslalogger/geofence-private.csv'))
+	{
+		$fp = fopen('/etc/teslalogger/geofence-private.csv', 'rb');
+		while(!feof($fp)) {
+			$csv2[] = fgetcsv($fp);
+		}
+		fclose($fp);
 	}
-	fclose($fp);
 	?>	
   $( function() {
   var map = new L.Map('map');
-  var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 19, attribution: osmAttrib});		
-	map.setView(new L.LatLng(50, 8),6);
-	map.addLayer(osm);
+  // Define layers and add them to the control widget
+    L.control.layers({
+      'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map), // Add default layer to map
+      'OpenTopoMap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        maxZoom: 17
+      }),
+      'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Imagery &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        // This map doesn't have labels so we force a label-only layer on top of it
+        forcedOverlay: L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
+          attribution: 'Labels by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          subdomains: 'abcd',
+          maxZoom: 20,
+        })
+      })
+    }).addTo(map);
 	
 	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 	var markerArray = [];
-	
 	<?PHP
+	
+	echo("<!-- Start geofence private -->\r\n");
+	$inserted = false;
 	foreach ($csv2 as $value)
 	{
 		if  ($value[1] =="")
@@ -50,10 +70,15 @@
 		echo("markerArray.push(marker);\r\n");
 		echo("marker.bindPopup('$value[0]');\r\n");
 		echo("marker.addTo(map);\r\n");
+		$inserted = true;
 	}
-	echo("var group = L.featureGroup(markerArray);\r\n");
-	echo("map.fitBounds(group.getBounds());\r\n\r\n");
+	if ($inserted)
+	{
+		echo("var group = L.featureGroup(markerArray);\r\n");
+		echo("map.fitBounds(group.getBounds());\r\n\r\n");
+	}
 	
+	echo("<!-- Start geofence -->\r\n");
 	foreach ($csv as $value)
 	{
 		if  ($value[1] =="")
@@ -64,6 +89,9 @@
 		echo("marker.bindPopup('$value[0]');\r\n");
 		echo("marker.addTo(map);\r\n");
 	}
+	
+	if (!$inserted)
+		echo("map.setView(new L.LatLng(50, 8),6);");
 	?>
     
   });
