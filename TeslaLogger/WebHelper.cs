@@ -256,7 +256,7 @@ namespace TeslaLogger
 
                     if (oc.Contains("MDLS"))
                         Tesla_Model = "MS";
-                    else if (oc.Contains("MS03"))
+                    else if (oc.Contains("MS0"))
                         Tesla_Model = "MS";
                     else if (oc.Contains("MDLX"))
                         Tesla_Model = "MX";
