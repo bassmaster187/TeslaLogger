@@ -435,7 +435,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        static void CreateCurrentJSON()
+        public static void CreateCurrentJSON()
         {
             try
             {
