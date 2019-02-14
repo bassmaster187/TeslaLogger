@@ -19,6 +19,7 @@ namespace TeslaLogger
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
         public string Tesla_Battery = "";
+        public string option_codes = "";
         public string Tesla_Model = "";
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
@@ -250,7 +251,7 @@ namespace TeslaLogger
 
                 try
                 {
-                    string option_codes = r4["option_codes"].ToString();
+                    option_codes = r4["option_codes"].ToString();
                     string[] oc = option_codes.Split(',');
 
                     if (oc.Contains("MDLS"))
@@ -945,6 +946,7 @@ namespace TeslaLogger
                 d.Add("cv", DBHelper.current_car_version);
                 d.Add("m", Tesla_Model);
                 d.Add("bt", Tesla_Battery);
+                d.Add("oc", option_codes);
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
