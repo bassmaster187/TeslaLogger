@@ -166,23 +166,29 @@ namespace TeslaLogger
                                         currentState = TeslaState.Online;
                                         wh.IsDriving(true);
                                         DBHelper.StartState(res);
-                                        
+                                        DBHelper.CreateCurrentJSON();
                                     }
                                     else if (res == "asleep")
                                     {
                                         Tools.Log(res);
                                         currentState = TeslaState.Sleep;
                                         DBHelper.StartState(res);
+                                        DBHelper.CreateCurrentJSON();
                                         System.Threading.Thread.Sleep(10000);
                                     }
                                     else if (res == "offline")
                                     {
                                         Tools.Log(res);
                                         DBHelper.StartState(res);
+                                        DBHelper.CreateCurrentJSON();
                                         System.Threading.Thread.Sleep(10000);
                                     }
                                     else
                                     {
+                                        DBHelper.current_sleeping = false;
+                                        DBHelper.current_online = false;
+                                        DBHelper.CreateCurrentJSON();
+
                                         Tools.Log("Unhandled State: " + res);
                                     }
                                 }
