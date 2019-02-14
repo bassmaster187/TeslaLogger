@@ -221,13 +221,13 @@ namespace TeslaLogger
                                         {
                                             System.IO.File.Delete("cmd_gosleep.txt");
 
-                                            Tools.Log("Go to Sleep Mode!");
+                                            Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
                                         }
                                         else if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
                                         {
-                                            Tools.Log("Go to Timespan Sleep Mode!");
+                                            Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = true;
                                         }
@@ -247,18 +247,27 @@ namespace TeslaLogger
                                                 }
                                                 else
                                                 {
-                                                    for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
+                                                    try
                                                     {
-                                                        if (wh.existsWakeupFile)
-                                                        {
-                                                            Tools.Log("Wakeupfile prevents car to get sleep");
-                                                            wh.DeleteWakeupFile();
-                                                            string wakeup = wh.Wakeup().Result;
-                                                            break;
-                                                        }
+                                                        Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
 
-                                                        Tools.Log("Waiting for car to go to sleep " + x.ToString());
-                                                        System.Threading.Thread.Sleep(1000 * 60);
+                                                        for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
+                                                        {
+                                                            if (wh.existsWakeupFile)
+                                                            {
+                                                                Tools.Log("Wakeupfile prevents car to get sleep");
+                                                                wh.DeleteWakeupFile();
+                                                                string wakeup = wh.Wakeup().Result;
+                                                                break;
+                                                            }
+
+                                                            Tools.Log("Waiting for car to go to sleep " + x.ToString());
+                                                            System.Threading.Thread.Sleep(1000 * 60);
+                                                        }
+                                                    }
+                                                    finally
+                                                    {
+                                                        Tools.Log("Restart communikation with Tesla Server!");
                                                     }
                                                 }
                                             }
@@ -334,26 +343,13 @@ namespace TeslaLogger
                                     bool KeepSleeping = true;
                                     int round = 0;
 
-                                    while (KeepSleeping)
+                                    try
                                     {
-                                        round++;
-                                        System.Threading.Thread.Sleep(1000);
-                                        if (System.IO.File.Exists("wakeupteslalogger.txt"))
+                                        while (KeepSleeping)
                                         {
-                                            if (wh.DeleteWakeupFile())
-                                            {
-                                                string wakeup = wh.Wakeup().Result;
-                                            }
-
-                                            KeepSleeping = false;
-                                            currentState = TeslaState.Start;
-                                            break;
-                                        }
-                                        else if (round > 10)
-                                        {
-                                            round = 0;
-
-                                            if (wh.TaskerWakeupfile())
+                                            round++;
+                                            System.Threading.Thread.Sleep(1000);
+                                            if (System.IO.File.Exists("wakeupteslalogger.txt"))
                                             {
                                                 if (wh.DeleteWakeupFile())
                                                 {
@@ -364,22 +360,42 @@ namespace TeslaLogger
                                                 currentState = TeslaState.Start;
                                                 break;
                                             }
-                                        }
-
-                                        if (goSleepWithWakeup)
-                                        {
-                                            int stopSleepingHour, stopSleepingMinute;
-                                            Tools.EndSleeping(out stopSleepingHour, out stopSleepingMinute);
-
-                                            if (DateTime.Now.Hour == stopSleepingHour && DateTime.Now.Minute == stopSleepingMinute)
+                                            else if (round > 10)
                                             {
-                                                Tools.Log("Restart Connecting to API");
+                                                round = 0;
 
-                                                KeepSleeping = false;
-                                                currentState = TeslaState.Start;
-                                                break;
+                                                if (wh.TaskerWakeupfile())
+                                                {
+                                                    if (wh.DeleteWakeupFile())
+                                                    {
+                                                        string wakeup = wh.Wakeup().Result;
+                                                    }
+
+                                                    KeepSleeping = false;
+                                                    currentState = TeslaState.Start;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (goSleepWithWakeup)
+                                            {
+                                                int stopSleepingHour, stopSleepingMinute;
+                                                Tools.EndSleeping(out stopSleepingHour, out stopSleepingMinute);
+
+                                                if (DateTime.Now.Hour == stopSleepingHour && DateTime.Now.Minute == stopSleepingMinute)
+                                                {
+                                                    Tools.Log("Stop Sleeping Timespan reached!");
+
+                                                    KeepSleeping = false;
+                                                    currentState = TeslaState.Start;
+                                                    break;
+                                                }
                                             }
                                         }
+                                    }
+                                    finally
+                                    {
+                                        Tools.Log("Restart communikation with Tesla Server!");
                                     }
                                 }
                                 break;
