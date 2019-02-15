@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
+
 namespace TeslaLogger
 {
     class WebHelper
@@ -18,9 +19,8 @@ namespace TeslaLogger
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
-        public string Tesla_Battery = "";
         public string option_codes = "";
-        public string Tesla_Model = "";
+        public CarSettings carSettings = null;        
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         Geofence geofence;
@@ -32,6 +32,8 @@ namespace TeslaLogger
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
+
+            carSettings = CarSettings.ReadSettings();
 
             geofence = new Geofence();
         }
@@ -254,23 +256,32 @@ namespace TeslaLogger
                     option_codes = r4["option_codes"].ToString();
                     string[] oc = option_codes.Split(',');
 
+                    carSettings.AWD = oc.Contains("DV4W");
+
                     if (oc.Contains("MDLS"))
-                        Tesla_Model = "MS";
+                        carSettings.Model = "MS";
                     else if (oc.Contains("MS0"))
-                        Tesla_Model = "MS";
+                        carSettings.Model = "MS";
                     else if (oc.Contains("MDLX"))
-                        Tesla_Model = "MX";
+                        carSettings.Model = "MX";
                     else if (oc.Contains("MDL3"))
-                        Tesla_Model = "M3";
+                        carSettings.Model = "M3";
 
                     var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
                     if (battery != null && battery.Length > 0)
                     {
-                        if (Tesla_Battery != battery[0])
-                            Tools.Log("Battery: " + battery[0] + " / " + Tesla_Model);
+                        if (carSettings.Battery != battery[0])
+                        {
+                            Tools.Log("Battery: " + battery[0] + " / " + carSettings.Model);
+                            carSettings.Battery = battery[0];
 
-                        Tesla_Battery = battery[0];
+                            carSettings.WriteSettings();
+                        }
                     }
+
+                    carSettings.Performance = oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
+
+                    UpdateEfficiency();
 
                     if (state == "unknown")
                     {
@@ -309,6 +320,148 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        private void UpdateEfficiency()
+        {
+            string eff = "";
+            string car = "";
+
+            if (carSettings.Model == "MS")
+            {
+                if (carSettings.Battery == "BTX5")
+                {
+                    if (carSettings.AWD)
+                    {
+                        eff = "0.186";
+                        car = "S 75D";
+                    }
+                    else
+                    {
+                        eff = "0.185";
+                        car = "S 75";
+                    }
+                }
+                else if (carSettings.Battery == "BTX4")
+                {
+                    if (carSettings.Performance)
+                    {
+                        eff = "0.200";
+                        car = "S P90D";
+                    }
+                    else
+                    {
+                        eff = "0.189";
+                        car = "S90D";
+                    }
+                }
+                else if (carSettings.Battery == "BTX6")
+                {
+                    if (carSettings.Performance)
+                    {
+                        eff = "0.200";
+                        car = "S P100D";
+                    }
+                    else
+                    {
+                        eff = "0.189";
+                        car = "S 100D";
+                    }
+                }
+                else if (carSettings.Battery == "BTX8")
+                {
+                    if (carSettings.AWD)
+                    {
+                        eff = "0.186";
+                        car = "S 75D (85kWh)";
+                    }
+                    else
+                    {
+                        eff = "0.185";
+                        car = "S 75 (85kWh)";
+                    }
+                }
+                else if (carSettings.Battery == "BT85")
+                {
+                    car = "S 85 ?";
+                    eff = "0.200";
+                }
+                else if (carSettings.Battery == "BT70")
+                {
+                    car = "S 70 ?";
+                    eff = "0.200";
+                }
+                else if (carSettings.Battery == "BT60")
+                {
+                    car = "S 60 ?";
+                    eff = "0.200";
+                }
+                else
+                {
+                    car = "S ???";
+                    eff = "0.200";
+                }
+            }
+            else if (carSettings.Model == "MX")
+            {
+                if (carSettings.Battery == "BTX5")
+                {
+                    eff = "0.208";
+                    car = "X 75D";
+                }
+                else if (carSettings.Battery == "BTX4")
+                {
+                    if (carSettings.Performance)
+                    {
+                        eff = "0.208";
+                        car = "X 90D";
+                    }
+                    else
+                    {
+                        eff = "0.217";
+                        car = "X P90D";
+                    }
+                }
+                else if (carSettings.Battery == "BTX6")
+                {
+                    if (carSettings.Performance)
+                    {
+                        eff = "0.226";
+                        car = "X P100D";
+                    }
+                    else
+                    {
+                        eff = "0.208";
+                        car = "X 100D";
+                    }
+                }
+                else
+                {
+                    car = "X ???";
+                    eff = "0.208";
+                }
+
+            }
+            else if (carSettings.Model == "M3")
+            {
+                if (carSettings.Battery == "BT37")
+                {
+                    eff = "0.140"; // wrong !
+                    car = "M3 LR";
+                }
+                else
+                {
+                    eff = "0.140"; // wrong !
+                    car = "M3 ???";
+                }
+            }
+
+            if (carSettings.Name != car || carSettings.Wh_TR != eff)
+            {
+                carSettings.Name = car;
+                carSettings.Wh_TR = eff;
+                carSettings.WriteSettings();
+            }
         }
 
         String lastShift_State = "P";
@@ -944,8 +1097,10 @@ namespace TeslaLogger
                 d.Add("t",TaskerHash);
                 d.Add("v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 d.Add("cv", DBHelper.current_car_version);
-                d.Add("m", Tesla_Model);
-                d.Add("bt", Tesla_Battery);
+                d.Add("m", carSettings.Model);
+                d.Add("bt", carSettings.Battery);
+                d.Add("n", carSettings.Name);
+                d.Add("eff", carSettings.Wh_TR);
                 d.Add("oc", option_codes);
 
                 var content = new FormUrlEncodedContent(d);

@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarSettings.cs" />
     <Compile Include="Crc32.cs" />
     <Compile Include="DBViews.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
