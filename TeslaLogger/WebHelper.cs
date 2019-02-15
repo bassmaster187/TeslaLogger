@@ -324,7 +324,7 @@ namespace TeslaLogger
 
         private void UpdateEfficiency()
         {
-            string eff = "";
+            string eff = "0.190052356";
             string car = "";
 
             if (carSettings.Model == "MS")

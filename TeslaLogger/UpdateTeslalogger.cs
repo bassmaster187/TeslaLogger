@@ -101,6 +101,8 @@ namespace TeslaLogger
             DBHelper.ExecuteSQLQuery("DROP VIEW `trip`");
             String s = DBViews.Trip;
             s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+
+            System.IO.File.WriteAllText("view_trip.txt",s);
             
             DBHelper.ExecuteSQLQuery(s);
         }
