@@ -10,7 +10,7 @@ namespace TeslaLogger
 {
     class UpdateTeslalogger
     {
-        public static void Start()
+        public static void Start(WebHelper wh)
         {
             try
             {
@@ -30,9 +30,7 @@ namespace TeslaLogger
 
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
-                    Tools.Log("update view: trip");
-                    DBHelper.ExecuteSQLQuery("DROP VIEW `trip`");
-                    DBHelper.ExecuteSQLQuery(DBViews.Trip);
+                    UpdateDBView(wh);
                 }
 
                 if (System.IO.File.Exists("cmd_updated.txt"))
@@ -69,8 +67,6 @@ namespace TeslaLogger
                     if (!System.IO.Directory.Exists("/var/lib/grafana/dashboards"))
                         System.IO.Directory.CreateDirectory("/var/lib/grafana/dashboards");
 
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
-
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new System.IO.DirectoryInfo("/etc/teslalogger"));
 
                     try
@@ -96,6 +92,59 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Tools.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void UpdateDBView(WebHelper wh)
+        {
+            Tools.Log("update view: trip");
+            DBHelper.ExecuteSQLQuery("DROP VIEW `trip`");
+            String s = DBViews.Trip;
+            s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+            
+            DBHelper.ExecuteSQLQuery(s);
+        }
+
+        public static void UpdateGrafana(WebHelper wh)
+        {
+            try
+            {
+                if (Tools.IsMono())
+                {
+
+                    Tools.Log("Start Grafana update");
+                    Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
+
+                    exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
+                    exec_mono("rm", "-rf /etc/teslalogger/tmp");
+
+                    exec_mono("mkdir", "/etc/teslalogger/tmp");
+                    exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
+
+                    UpdateDBView(wh);
+
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
+                    // changes to dashboards
+                    foreach (string f in System.IO.Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
+                    {
+                        Tools.Log("Update: " + f);
+                        String s = System.IO.File.ReadAllText(f);
+                        s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+                        System.IO.File.WriteAllText(f, s);
+                    }
+
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
+
+                    exec_mono("service", "grafana-server restart");
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+            finally
+            {
+                Tools.Log("End Grafana update");
             }
         }
 

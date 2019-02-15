@@ -94,7 +94,9 @@ namespace TeslaLogger
 
                 wh.DeleteWakeupFile();
 
-                UpdateTeslalogger.Start();
+                Tools.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
+                UpdateTeslalogger.Start(wh);
+                UpdateTeslalogger.UpdateGrafana(wh);
 
                 try
                 {
@@ -227,13 +229,13 @@ namespace TeslaLogger
                                         {
                                             System.IO.File.Delete("cmd_gosleep.txt");
 
-                                            Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
+                                            Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
                                         }
                                         else if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
                                         {
-                                            Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
+                                            Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = true;
                                         }
@@ -255,7 +257,7 @@ namespace TeslaLogger
                                                 {
                                                     try
                                                     {
-                                                        Tools.Log("STOP communikation with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
+                                                        Tools.Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
 
                                                         for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
                                                         {
@@ -273,7 +275,7 @@ namespace TeslaLogger
                                                     }
                                                     finally
                                                     {
-                                                        Tools.Log("Restart communikation with Tesla Server!");
+                                                        Tools.Log("Restart communication with Tesla Server!");
                                                     }
                                                 }
                                             }
@@ -401,7 +403,7 @@ namespace TeslaLogger
                                     }
                                     finally
                                     {
-                                        Tools.Log("Restart communikation with Tesla Server!");
+                                        Tools.Log("Restart communication with Tesla Server!");
                                     }
                                 }
                                 break;
