@@ -485,11 +485,19 @@ namespace TeslaLogger
 
         public static int ExecuteSQLQuery(string sql)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand(sql, con);
-                return cmd.ExecuteNonQuery();
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, sql);
+                throw;
             }
         }
     }
