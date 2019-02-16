@@ -208,7 +208,7 @@ namespace TeslaLogger
                 foreach (byte b in crc32.ComputeHash(tempTasker))
                     TaskerHash += b.ToString("x2").ToLower();
 
-                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : &t=" + TaskerHash);
+                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
