@@ -97,14 +97,21 @@ namespace TeslaLogger
 
         private static void UpdateDBView(WebHelper wh)
         {
-            Tools.Log("update view: trip");
-            DBHelper.ExecuteSQLQuery("DROP VIEW `trip`");
-            String s = DBViews.Trip;
-            s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+            try
+            {
+                Tools.Log("update view: trip");
+                DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
+                String s = DBViews.Trip;
+                s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
 
-            System.IO.File.WriteAllText("view_trip.txt",s);
-            
-            DBHelper.ExecuteSQLQuery(s);
+                System.IO.File.WriteAllText("view_trip.txt", s);
+
+                DBHelper.ExecuteSQLQuery(s);
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
         }
 
         public static void UpdateGrafana(WebHelper wh)
