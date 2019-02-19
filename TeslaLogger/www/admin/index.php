@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Config V1.5</title>
+    <title>Teslalogger Config V1.6</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -61,6 +61,21 @@
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("?");
 			}
+			
+			$("#trip_start").text(jsonData["trip_start"]);
+			$("#max_speed").text(jsonData["trip_max_speed"]);
+			$("#max_power").text(jsonData["trip_max_power"]);
+			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
+			$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
+			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
+			
+			var trip_duration_sec = jsonData["trip_duration_sec"];
+			var min = Math.floor(trip_duration_sec / 60);
+			var sec = trip_duration_sec % 60;
+			if (sec < 10)
+				sec = "0"+sec;
+			
+			$("#trip_duration_sec").text(min + ":" + sec);
 			});
 			
 	}
@@ -96,12 +111,22 @@
 
   <div id="content">
   <h1>Fahrzeuginfo:</h1>
-  <table>
-  <tr><td><b><span id="car_statusLabel"></span></b></td><td><span id="car_status"></span></td></tr>
+  
+  <table style="float: left;">
+  <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
   <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
   <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
+  </table>
+  
+  <table style="float: left;">
+  <tr><td width="120px"><b>Trip Start:</b></td><td><span id="trip_start"></span></td></tr>
+  <tr><td><b>Dauer:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
+  <tr><td><b>Distanz:</b></td><td><span id="trip_distance">---</span> km</td></tr>
+  <tr><td><b>Verbraucht:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
+  <tr><td><b>Ø Verbrauch:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
+  <tr><td><b>Max km/h / PS:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
   </table>
   
   <?php
