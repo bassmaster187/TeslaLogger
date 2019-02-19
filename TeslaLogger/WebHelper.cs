@@ -446,12 +446,12 @@ namespace TeslaLogger
             {
                 if (carSettings.Battery == "BT37")
                 {
-                    eff = "0.140"; // wrong !
+                    eff = "0.153"; 
                     car = "M3 LR";
                 }
                 else
                 {
-                    eff = "0.140"; // wrong !
+                    eff = "0.153"; 
                     car = "M3 ???";
                 }
             }
@@ -806,7 +806,7 @@ namespace TeslaLogger
                 if (r2["battery_level"] != null)
                 {
                     battery_level = Convert.ToInt32(r2["battery_level"]);
-                    DBHelper.current_battery_level = battery_level;
+                    DBHelper.currentJSON.current_battery_level = battery_level;
                 }
 
                 return (double)ideal_battery_range / (double)0.62137;
@@ -842,10 +842,10 @@ namespace TeslaLogger
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    if (DBHelper.current_car_version != car_version)
+                    if (DBHelper.currentJSON.current_car_version != car_version)
                     {
                         Tools.Log("Car Version: " + car_version);
-                        DBHelper.current_car_version = car_version;
+                        DBHelper.currentJSON.current_car_version = car_version;
 
                         TaskerWakeupfile(true);
                     }
@@ -1084,7 +1084,7 @@ namespace TeslaLogger
             {
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
-                if (!force && ts.TotalSeconds < 50)
+                if (!force && ts.TotalSeconds < 20)
                     return false;
 
                 // Tools.Log("Check Tasker Webservice");
@@ -1096,7 +1096,7 @@ namespace TeslaLogger
                 var d = new Dictionary<string, string>();
                 d.Add("t",TaskerHash);
                 d.Add("v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
-                d.Add("cv", DBHelper.current_car_version);
+                d.Add("cv", DBHelper.currentJSON.current_car_version);
                 d.Add("m", carSettings.Model);
                 d.Add("bt", carSettings.Battery);
                 d.Add("n", carSettings.Name);
@@ -1113,7 +1113,7 @@ namespace TeslaLogger
 
                 if (resultContent.Contains("wakeupfile"))
                 {
-                    Tools.Log("TaskerWakeupfile available! [Webservice]");
+                    Tools.Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
                     return true;
                 }
             }

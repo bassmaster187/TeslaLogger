@@ -9,29 +9,9 @@ namespace TeslaLogger
 {
     class DBHelper
     {
-        public static bool current_charging = false;
-        public static bool current_driving = false;
-        public static bool current_online = false;
-        public static bool current_sleeping = false;
-
-        public static int current_speed = 0;
-        public static int current_power = 0;
-        public static double current_odometer = 0;
-        public static double current_ideal_battery_range_km = 0;
-        public static double current_outside_temp = 0;
-        public static int current_battery_level = 0;
-
-        public static int current_charger_voltage = 0;
-        public static int current_charger_phases = 0;
-        public static int current_charger_actual_current = 0;
-        public static double current_charge_energy_added = 0;
-        public static int current_charger_power = 0;
+        public static CurrentJSON currentJSON = new CurrentJSON();
 
         public static bool current_is_preconditioning = false;
-
-        public static string current_car_version = "";
-
-        public static string current_json = "";
 
         public static string DBConnectionstring
         {
@@ -55,7 +35,7 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
-            CreateCurrentJSON();
+            currentJSON.CreateCurrentJSON();
         }
 
         public static void StartState(string state)
@@ -64,13 +44,13 @@ namespace TeslaLogger
             {
                 if (state == "online")
                 {
-                    current_online = true;
-                    current_sleeping = false;
+                    currentJSON.current_online = true;
+                    currentJSON.current_sleeping = false;
                 }
                 else if (state == "asleep")
                 {
-                    current_online = false;
-                    current_sleeping = true;
+                    currentJSON.current_online = false;
+                    currentJSON.current_sleeping = true;
                 }
             }
 
@@ -87,7 +67,7 @@ namespace TeslaLogger
                 }
                 dr.Close();
 
-                CreateCurrentJSON();
+                currentJSON.CreateCurrentJSON();
 
                 CloseState();
 
@@ -112,12 +92,42 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
-            current_charging = false;
-            current_charger_power = 0;
-            current_charger_voltage = 0;
-            current_charger_phases = 0;
-            current_charger_actual_current = 0;
-            CreateCurrentJSON();
+            currentJSON.current_charging = false;
+            currentJSON.current_charger_power = 0;
+            currentJSON.current_charger_voltage = 0;
+            currentJSON.current_charger_phases = 0;
+            currentJSON.current_charger_actual_current = 0;
+            currentJSON.CreateCurrentJSON();
+        }
+
+        internal static void GetLastTrip()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM trip order by StartDate desc limit 1", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        currentJSON.current_trip_start = (DateTime)dr["StartDate"];
+                        currentJSON.current_trip_end = (DateTime)dr["EndDate"];
+                        currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
+                        currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
+                        currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
+                        currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
+                        currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
+                        currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
+                        currentJSON.CreateCurrentJSON();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
         }
 
         public static void StartChargingState()
@@ -132,8 +142,8 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
-            current_charging = true;
-            CreateCurrentJSON();
+            currentJSON.current_charging = true;
+            currentJSON.CreateCurrentJSON();
         }
 
         public static void CloseDriveState()
@@ -165,10 +175,10 @@ namespace TeslaLogger
             if (StartPos != 0)
                 UpdateDriveStatistics(StartPos, MaxPosId);
 
-            current_driving = false;
-            current_speed = 0;
-            current_power = 0;
-            CreateCurrentJSON();
+            currentJSON.current_driving = false;
+            currentJSON.current_speed = 0;
+            currentJSON.current_power = 0;
+            currentJSON.CreateCurrentJSON();
         }
 
         private static void UpdateDriveStatistics(int startPos, int endPos)
@@ -250,9 +260,18 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
-            current_driving = true;
-            current_charge_energy_added = 0;
-            CreateCurrentJSON();
+            currentJSON.current_driving = true;
+            currentJSON.current_charge_energy_added = 0;
+            currentJSON.current_trip_start = DateTime.Now;
+            currentJSON.current_trip_end = DateTime.MinValue;
+            currentJSON.current_trip_km_start = 0;
+            currentJSON.current_trip_km_end = 0;
+            currentJSON.current_trip_max_speed = 0;
+            currentJSON.current_trip_max_power = 0;
+            currentJSON.current_trip_start_range = 0;
+            currentJSON.current_trip_end_range = 0;
+
+            currentJSON.CreateCurrentJSON();
         }
 
 
@@ -296,10 +315,20 @@ namespace TeslaLogger
 
                 try
                 {
-                    current_speed = (int)((decimal)speed * 1.60934M);
-                    current_power = (int)(power * 1.35962M);
-                    current_odometer = odometer;
-                    current_ideal_battery_range_km = ideal_battery_range_km;
+                    currentJSON.current_speed = (int)((decimal)speed * 1.60934M);
+                    currentJSON.current_power = (int)(power * 1.35962M);
+                    currentJSON.current_odometer = odometer;
+                    currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+
+                    if (currentJSON.current_trip_km_start == 0)
+                    {
+                        currentJSON.current_trip_km_start = odometer;
+                        currentJSON.current_trip_start_range = currentJSON.current_ideal_battery_range_km;
+                    }
+
+                    currentJSON.current_trip_max_speed = Math.Max(currentJSON.current_trip_max_speed, currentJSON.current_speed);
+                    currentJSON.current_trip_max_power = Math.Max(currentJSON.current_trip_max_power, currentJSON.current_power);
+
                 }
                 catch (Exception ex)
                 {
@@ -307,7 +336,7 @@ namespace TeslaLogger
                 }
             }
 
-            CreateCurrentJSON();
+            currentJSON.CreateCurrentJSON();
         }
 
         static DateTime lastChargingInsert = DateTime.Today;
@@ -355,14 +384,14 @@ namespace TeslaLogger
 
             try
             {
-                current_battery_level = Convert.ToInt32(battery_level);
-                current_charge_energy_added = Convert.ToDouble(charge_energy_added);
-                current_charger_power = Convert.ToInt32(charger_power);
-                current_ideal_battery_range_km = kmRange;
-                current_charger_voltage = int.Parse(charger_voltage);
-                current_charger_phases = Convert.ToInt32(charger_phases);
-                current_charger_actual_current = Convert.ToInt32(charger_actual_current);
-                CreateCurrentJSON();
+                currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
+                currentJSON.current_charger_power = Convert.ToInt32(charger_power);
+                currentJSON.current_ideal_battery_range_km = kmRange;
+                currentJSON.current_charger_voltage = int.Parse(charger_voltage);
+                currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
+                currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
+                currentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
             {
@@ -435,39 +464,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        public static void CreateCurrentJSON()
-        {
-            try
-            {
-                var values = new Dictionary<string, object>
-                {
-                   { "charging", current_charging},
-                   { "driving", current_driving },
-                   { "online", current_online },
-                   { "sleeping", current_sleeping },
-                   { "speed", current_speed},
-                   { "power", current_power },
-                   { "odometer", current_odometer },
-                   { "ideal_battery_range_km", current_ideal_battery_range_km},
-                   { "outside_temp", current_outside_temp},
-                   { "battery_level", current_battery_level},
-                   { "charger_voltage", current_charger_voltage},
-                   { "charger_phases", current_charger_phases},
-                   { "charger_actual_current", current_charger_actual_current},
-                   { "charge_energy_added", current_charge_energy_added},
-                   { "charger_power", current_charger_power},
-                   { "car_version", current_car_version }
-                };
-
-                current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
-                System.IO.File.WriteAllText("current_json.txt", current_json, Encoding.UTF8);
-            }
-            catch (Exception ex)
-            {
-                Tools.Log(ex.ToString());
-                current_json = "";
-            }
-        }
+        
 
         public static bool ColumnExists(string table, string column)
         {

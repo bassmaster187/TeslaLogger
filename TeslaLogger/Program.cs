@@ -95,6 +95,8 @@ namespace TeslaLogger
                 wh.DeleteWakeupFile();
 
                 Tools.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
+                double.TryParse(wh.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
+                DBHelper.GetLastTrip();
                 UpdateTeslalogger.Start(wh);
                 UpdateTeslalogger.UpdateGrafana(wh);
 
@@ -168,28 +170,28 @@ namespace TeslaLogger
                                         currentState = TeslaState.Online;
                                         wh.IsDriving(true);
                                         DBHelper.StartState(res);
-                                        DBHelper.CreateCurrentJSON();
+                                        DBHelper.currentJSON.CreateCurrentJSON();
                                     }
                                     else if (res == "asleep")
                                     {
                                         Tools.Log(res);
                                         currentState = TeslaState.Sleep;
                                         DBHelper.StartState(res);
-                                        DBHelper.CreateCurrentJSON();
+                                        DBHelper.currentJSON.CreateCurrentJSON();
                                         System.Threading.Thread.Sleep(10000);
                                     }
                                     else if (res == "offline")
                                     {
                                         Tools.Log(res);
                                         DBHelper.StartState(res);
-                                        DBHelper.CreateCurrentJSON();
+                                        DBHelper.currentJSON.CreateCurrentJSON();
                                         System.Threading.Thread.Sleep(10000);
                                     }
                                     else
                                     {
-                                        DBHelper.current_sleeping = false;
-                                        DBHelper.current_online = false;
-                                        DBHelper.CreateCurrentJSON();
+                                        DBHelper.currentJSON.current_sleeping = false;
+                                        DBHelper.currentJSON.current_online = false;
+                                        DBHelper.currentJSON.CreateCurrentJSON();
 
                                         Tools.Log("Unhandled State: " + res);
                                     }
@@ -259,7 +261,7 @@ namespace TeslaLogger
                                                     {
                                                         Tools.Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
 
-                                                        for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes; x++)
+                                                        for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                                         {
                                                             if (wh.existsWakeupFile)
                                                             {
@@ -269,8 +271,10 @@ namespace TeslaLogger
                                                                 break;
                                                             }
 
-                                                            Tools.Log("Waiting for car to go to sleep " + x.ToString());
-                                                            System.Threading.Thread.Sleep(1000 * 60);
+                                                            if (x%10 == 0)
+                                                                Tools.Log("Waiting for car to go to sleep " + (x/10).ToString());
+
+                                                            System.Threading.Thread.Sleep(1000 * 6);
                                                         }
                                                     }
                                                     finally
@@ -281,7 +285,7 @@ namespace TeslaLogger
                                             }
                                         }
 
-                                        System.Threading.Thread.Sleep(20000);
+                                        System.Threading.Thread.Sleep(5000);
                                     }
                                 }
                                 break;
@@ -341,6 +345,9 @@ namespace TeslaLogger
                                         // fahren aufgehört
                                         // TODO: Fahrt beenden
                                         currentState = TeslaState.Start;
+                                        DBHelper.currentJSON.current_trip_end = DateTime.Now;
+                                        DBHelper.currentJSON.current_trip_km_end = DBHelper.currentJSON.current_odometer;
+                                        DBHelper.currentJSON.current_trip_end_range = DBHelper.currentJSON.current_ideal_battery_range_km;
                                         wh.StopStreaming();
                                     }
                                 }
