@@ -104,7 +104,7 @@
   <button onclick="BackgroudRun('update.php', 'Reboot!');">Update</button>
   <button onclick="window.location.href='backup.php';">Backup</button>
   <button onclick="window.location.href='geofencing.php';">Geofence</button>
-  <button onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
+  <button onclick="BackgroudRun('wakeup.php', 'Wakeup!');">Wakeup</button>
   <button onclick="BackgroudRun('gosleep.php', 'Sleep!');">Sleep</button>
   <button onclick="window.location.href='settings.php';">Settings</button>
   
