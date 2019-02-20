@@ -58,14 +58,18 @@ namespace TeslaLogger
                         duration = (int)((TimeSpan)(DateTime.Now - current_trip_start)).TotalSeconds;
                         distance = current_odometer - current_trip_km_start;
                         trip_kwh = (current_trip_start_range - current_ideal_battery_range_km) * Wh_TR;
-                        trip_avg_wh = trip_kwh / distance * 1000;
+
+                        if (distance > 0)
+                            trip_avg_wh = trip_kwh / distance * 1000;
                     }
                     else
                     {
                         duration = (int)((TimeSpan)(current_trip_end - current_trip_start)).TotalSeconds;
                         distance = current_trip_km_end - current_trip_km_start;
                         trip_kwh = (current_trip_start_range - current_trip_end_range) * Wh_TR;
-                        trip_avg_wh = trip_kwh / distance * 1000;
+
+                        if (distance > 0)
+                            trip_avg_wh = trip_kwh / distance * 1000;
                     }
                 }
                 catch (Exception ex)

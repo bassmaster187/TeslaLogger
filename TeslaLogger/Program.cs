@@ -140,28 +140,6 @@ namespace TeslaLogger
                                     DBHelper.CloseDriveState();
 
                                     string res = wh.IsOnline().Result;
-
-                                    // xxx test
-
-                                    /*
-                                    wh.StartStreamThread();
-
-                                    System.Threading.Thread.Sleep(10000);
-                                    wh.IsDriving(true);
-                                    System.Threading.Thread.Sleep(5000);
-                                    wh.IsDriving(true);
-                                    System.Threading.Thread.Sleep(5000);
-                                    wh.IsDriving(true);
-                                    System.Threading.Thread.Sleep(5000);
-                                    wh.IsDriving(true);
-                                    System.Threading.Thread.Sleep(5000);
-                                    wh.IsDriving(true);
-                                    System.Threading.Thread.Sleep(5000);
-                                    wh.IsDriving(true);
-                                    wh.StopStreaming();
-                                    */
-
-
                                     lastCarUsed = DateTime.Now;
 
                                     if (res == "online")
@@ -170,7 +148,7 @@ namespace TeslaLogger
                                         currentState = TeslaState.Online;
                                         wh.IsDriving(true);
                                         DBHelper.StartState(res);
-                                        DBHelper.currentJSON.CreateCurrentJSON();
+                                        continue;
                                     }
                                     else if (res == "asleep")
                                     {
@@ -178,14 +156,12 @@ namespace TeslaLogger
                                         currentState = TeslaState.Sleep;
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
-                                        System.Threading.Thread.Sleep(10000);
                                     }
                                     else if (res == "offline")
                                     {
                                         Tools.Log(res);
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
-                                        System.Threading.Thread.Sleep(10000);
                                     }
                                     else
                                     {
@@ -200,7 +176,19 @@ namespace TeslaLogger
 
                             case TeslaState.Online:
                                 {
-                                    if (wh.isCharging())
+                                    if (wh.IsDriving())
+                                    {
+                                        lastCarUsed = DateTime.Now;
+                                        Tools.Log("Driving");
+                                        // TODO: StartDriving
+                                        currentState = TeslaState.Drive;
+                                        wh.StartStreamThread(); // für altitude
+                                        DBHelper.StartDriveState();
+
+                                        Task.Run(() => wh.DeleteWakeupFile());
+                                        continue;
+                                    }
+                                    else if (wh.isCharging())
                                     {
                                         lastCarUsed = DateTime.Now;
                                         Tools.Log("Charging");
@@ -210,22 +198,11 @@ namespace TeslaLogger
 
                                         wh.DeleteWakeupFile();
                                     }
-                                    else if (wh.IsDriving())
-                                    {
-                                        lastCarUsed = DateTime.Now;
-                                        Tools.Log("Driving");
-                                        // TODO: StartDriving
-                                        wh.IsDriving(true);
-                                        currentState = TeslaState.Drive;
-                                        wh.StartStreamThread(); // für altitude
-                                        DBHelper.StartDriveState();
-
-                                        wh.DeleteWakeupFile();
-                                    }
                                     else
                                     {
                                         int startSleepHour, startSleepMinute;
                                         Tools.StartSleeping(out startSleepHour, out startSleepMinute);
+                                        bool sleep = false;
 
                                         if (System.IO.File.Exists("cmd_gosleep.txt"))
                                         {
@@ -268,6 +245,7 @@ namespace TeslaLogger
                                                                 Tools.Log("Wakeupfile prevents car to get sleep");
                                                                 wh.DeleteWakeupFile();
                                                                 string wakeup = wh.Wakeup().Result;
+                                                                sleep = false;
                                                                 break;
                                                             }
 
@@ -285,7 +263,10 @@ namespace TeslaLogger
                                             }
                                         }
 
-                                        System.Threading.Thread.Sleep(5000);
+                                        if (sleep)
+                                            System.Threading.Thread.Sleep(5000);
+                                        else
+                                            continue;
                                     }
                                 }
                                 break;
