@@ -30,6 +30,13 @@ namespace TeslaLogger
 
                         return;
                     }
+                    else if (inhalt.Contains("Connection refused"))
+                    {
+                        Tools.Log("Connection refused");
+                        System.Threading.Thread.Sleep(30000);
+
+                        return;
+                    }
                 }
 
                 string temp = ex.ToString();

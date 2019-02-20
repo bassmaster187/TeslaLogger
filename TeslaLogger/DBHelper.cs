@@ -24,14 +24,14 @@ namespace TeslaLogger
             }
         }
 
-        public static void CloseState()
+        public static void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
                 cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@EndPos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@EndPos", maxPosid);
                 cmd.ExecuteNonQuery();
             }
 
@@ -67,16 +67,15 @@ namespace TeslaLogger
                 }
                 dr.Close();
 
-                currentJSON.CreateCurrentJSON();
-
-                CloseState();
+                int MaxPosid = GetMaxPosid();
+                CloseState(MaxPosid);
 
                 Tools.Log("state: " + state);
 
                 MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@state", state);
-                cmd.Parameters.AddWithValue("@StartPos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -97,7 +96,6 @@ namespace TeslaLogger
             currentJSON.current_charger_voltage = 0;
             currentJSON.current_charger_phases = 0;
             currentJSON.current_charger_actual_current = 0;
-            currentJSON.CreateCurrentJSON();
         }
 
         internal static void GetLastTrip()
@@ -178,13 +176,57 @@ namespace TeslaLogger
             currentJSON.current_driving = false;
             currentJSON.current_speed = 0;
             currentJSON.current_power = 0;
-            currentJSON.CreateCurrentJSON();
+        }
+
+        public static void UpdateAddress(int posid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select lat, lng from pos where id = @id", con);
+                    cmd.Parameters.AddWithValue("@id", posid);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        double lat = Convert.ToDouble(dr[0]);
+                        double lng = Convert.ToDouble(dr[1]);
+                        dr.Close();
+
+                        WebHelper.ReverseGecocodingAsync(lat, lng).ContinueWith(task =>
+                        {
+                            try
+                            {
+                                using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                                {
+                                    con2.Open();
+                                    MySqlCommand cmd2 = new MySqlCommand("update pos set address = @adress where id = @id", con2);
+                                    cmd2.Parameters.AddWithValue("@id", posid);
+                                    cmd2.Parameters.AddWithValue("@adress", task.Result);
+                                    cmd2.ExecuteNonQuery();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.Log(ex.ToString());
+                            }
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
         }
 
         private static void UpdateDriveStatistics(int startPos, int endPos)
         {
             try
             {
+                Tools.Log("UpdateDriveStatistics");
+
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
@@ -212,8 +254,6 @@ namespace TeslaLogger
                         }
                     }
                 }
-
-                
             }
             catch (Exception ex)
             {
@@ -251,6 +291,8 @@ namespace TeslaLogger
 
         public static void StartDriveState()
         {
+            Tools.Log("StartDriveState");
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -275,13 +317,13 @@ namespace TeslaLogger
         }
 
 
-        internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, string address, double? outside_temp, string altitude)
+        internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, address, outside_temp, altitude, battery_level) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @address, @outside_temp, @altitude, @battery_level)", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level)", con);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
@@ -293,8 +335,6 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
-
-                cmd.Parameters.AddWithValue("@address", address);
 
                 if (outside_temp == null)
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
@@ -422,7 +462,7 @@ namespace TeslaLogger
             return 0;
         }
 
-        public static int GetMaxPosid()
+        public static int GetMaxPosid(bool withReverseGeocoding = true)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -430,7 +470,13 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
-                    return Convert.ToInt32(dr[0]);
+                { 
+                    int pos = Convert.ToInt32(dr[0]);
+                    if (withReverseGeocoding)
+                        UpdateAddress(pos);
+
+                    return pos;
+                }
             }
 
             return 0;

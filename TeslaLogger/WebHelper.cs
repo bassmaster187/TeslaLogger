@@ -23,19 +23,22 @@ namespace TeslaLogger
         public CarSettings carSettings = null;        
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
-        Geofence geofence;
+        static Geofence geofence;
         bool stopStreaming = false;
         string elevation = "";
         DateTime elevation_time = DateTime.Now;
 
-        public WebHelper()
+        static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
 
-            carSettings = CarSettings.ReadSettings();
-
             geofence = new Geofence();
+        }
+
+        public WebHelper()
+        {
+            carSettings = CarSettings.ReadSettings();
         }
 
         public async Task<String> GetTokenAsync()
@@ -107,6 +110,19 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+
+                if (r2["charging_state"] == null)
+                {
+                    Tools.Log("charging_state = null");
+
+                    System.Threading.Thread.Sleep(10000);
+
+                    if (lastCharging_State == "Charging")
+                        return true;
+                    else
+                        return false;
+                }
+
                 var charging_state = r2["charging_state"].ToString();
                 var timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
@@ -455,6 +471,14 @@ namespace TeslaLogger
                     car = "M3 ???";
                 }
             }
+            else
+            {
+                if (carSettings.Battery == "BT85")
+                {
+                    car = "S 85 ?";
+                    eff = "0.200";
+                }
+            }
 
             if (carSettings.Name != car || carSettings.Wh_TR != eff)
             {
@@ -503,7 +527,7 @@ namespace TeslaLogger
 
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N")
                 {
-                    var address = ReverseGecocodingAsync(latitude, longitude);
+                    // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
                     var odometer = GetOdometerAsync();
                     var outside_temp = GetOutsideTempAsync();
@@ -513,7 +537,7 @@ namespace TeslaLogger
                         elevation = "";
                     int battery_level;
                     double ideal_battery_range_km = GetIdealBatteryRangekm(out battery_level);
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, address.Result, outside_temp.Result, elevation);
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp.Result, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                         return true;
@@ -635,7 +659,7 @@ namespace TeslaLogger
         }
 
 
-        public async Task<string> ReverseGecocodingAsync(double latitude, double longitude)
+        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude)
         {
             string url = "";
             string resultContent = "";
@@ -999,7 +1023,7 @@ namespace TeslaLogger
                     shift_state = r2["shift_state"].ToString();
 
                 if (shift_state == "D")
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0 , 0, "", 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0 , 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
 
                 return resultContent;
             }
