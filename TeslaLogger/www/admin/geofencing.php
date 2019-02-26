@@ -68,7 +68,7 @@
 		echo("var markerLocation = new L.LatLng($value[1], $value[2]);\r\n");
 		echo("var marker = new L.Marker(markerLocation, {icon: greenIcon});\r\n");
 		echo("markerArray.push(marker);\r\n");
-		echo("marker.bindPopup('$value[0]');\r\n");
+		echo("marker.bindPopup('".addslashes($value[0])."');\r\n");
 		echo("marker.addTo(map);\r\n");
 		$inserted = true;
 	}
@@ -86,7 +86,7 @@
 			
 		echo("var markerLocation = new L.LatLng($value[1], $value[2]);\r\n");
 		echo("var marker = new L.Marker(markerLocation);\r\n");
-		echo("marker.bindPopup('$value[0]');\r\n");
+		echo("marker.bindPopup('".addslashes($value[0])."');\r\n");
 		echo("marker.addTo(map);\r\n");
 	}
 	
