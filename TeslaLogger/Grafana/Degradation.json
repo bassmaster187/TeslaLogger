@@ -113,7 +113,7 @@
           "format": "locale",
           "label": "",
           "logBase": 1,
-          "max": "400",
+          "max": "550",
           "min": "300",
           "show": true
         },
