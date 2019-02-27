@@ -274,9 +274,7 @@ namespace TeslaLogger
 
                     carSettings.AWD = oc.Contains("DV4W");
 
-                    if (oc.Contains("MDLS"))
-                        carSettings.Model = "MS";
-                    else if (oc.Contains("MS0"))
+                    if (oc.Contains("MDLS") || oc.Contains("MS01") || oc.Contains("MS02") || oc.Contains("MS03"))
                         carSettings.Model = "MS";
                     else if (oc.Contains("MDLX"))
                         carSettings.Model = "MX";
@@ -904,7 +902,10 @@ namespace TeslaLogger
 
                 decimal? outside_temp = null;
                 if (r2["outside_temp"] != null)
+                {
                     outside_temp = (decimal)r2["outside_temp"];
+                    DBHelper.currentJSON.current_outside_temp = (double)outside_temp;
+                }
                 else
                     return null;
 
