@@ -105,6 +105,10 @@
           "alias": "Höhe",
           "fill": 0,
           "yaxis": 2
+        },
+        {
+          "alias": "Höhe [m]",
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -316,5 +320,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 46
+  "version": 47
 }
