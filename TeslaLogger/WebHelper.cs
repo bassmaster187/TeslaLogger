@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -777,32 +778,59 @@ namespace TeslaLogger
 
         public void UpdateAllPOIAddresses()
         {
-            Geofence g = new Geofence();
-
-            using (SqlConnection con = new SqlConnection(DBHelper.DBConnectionstring))
+            try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Select lat, lng, id from pos", con);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+                System.Threading.Thread.Sleep(60 * 1000 * 10); 
+
+                int t = Environment.TickCount;
+                int count = 0;
+                Tools.Log("UpdateAllPOIAddresses start");
+
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    double lat = (double)dr[0];
-                    double lng = (double)dr[1];
-                    int id = (int)dr[2];
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("Select lat, lng, id from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    int t2 = Environment.TickCount - t;
+                    Tools.Log($"UpdateAllPOIAddresses Select {t2}ms");
 
-                    Address a = g.GetPOI(lat, lng);
-                    if (a == null)
-                        continue;
-
-                    using (SqlConnection con2 = new SqlConnection(DBHelper.DBConnectionstring))
+                    while (dr.Read())
                     {
-                        con2.Open();
-                        SqlCommand cmd2 = new SqlCommand("update pos set address=@address where id = @id", con2);
-                        cmd2.Parameters.AddWithValue("@id", id);
-                        cmd2.Parameters.AddWithValue("@address", a.name);
-                        cmd2.ExecuteNonQuery();
+                        try
+                        {
+                            System.Threading.Thread.Sleep(100);
+                            double lat = (double)dr[0];
+                            double lng = (double)dr[1];
+                            int id = (int)dr[2];
+
+                            Address a = geofence.GetPOI(lat, lng);
+                            if (a == null)
+                                continue;
+
+                            using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                            {
+                                con2.Open();
+                                MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
+                                cmd2.Parameters.AddWithValue("@id", id);
+                                cmd2.Parameters.AddWithValue("@address", a.name);
+                                cmd2.ExecuteNonQuery();
+
+                                count++;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
+                        }
                     }
                 }
+
+                t = Environment.TickCount - t;
+                Tools.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
             }
         }
 

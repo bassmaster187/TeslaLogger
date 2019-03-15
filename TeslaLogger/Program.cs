@@ -86,7 +86,7 @@ namespace TeslaLogger
                 Tools.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
 
 
-                if (DBHelper.GetMaxPosid() == 0)
+                if (DBHelper.GetMaxPosid(false) == 0)
                 {
                     Tools.Log("Insert first Pos");
                     wh.IsDriving(true);
@@ -111,7 +111,7 @@ namespace TeslaLogger
                 }
 
                 // Task.Factory.StartNew(() => wh.UpdateAllPosAddresses());
-                // Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
+                Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
 
