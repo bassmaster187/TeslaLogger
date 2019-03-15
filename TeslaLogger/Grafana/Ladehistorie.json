@@ -44,7 +44,7 @@
           "type": "date"
         },
         {
-          "alias": "",
+          "alias": "Startdatum",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -63,7 +63,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Enddatum",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -95,7 +95,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "km Stand",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -103,7 +103,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
+          "decimals": 1,
           "mappingType": 1,
           "pattern": "odometer",
           "thresholds": [],
@@ -158,6 +158,86 @@
           "linkUrl": "https://www.google.com/maps/?q=${__cell_0},${__cell_1}",
           "mappingType": 1,
           "pattern": "address",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "TR km Start",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "SOC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "TR km Ende",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "EndSOC",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "SOC Ende",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "End_battery_level",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "100% TR",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "CalculatedMaxRange",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Minuten",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "MinuteDiff",
           "thresholds": [],
           "type": "number",
           "unit": "short"
@@ -249,5 +329,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 10
+  "version": 11
 }
