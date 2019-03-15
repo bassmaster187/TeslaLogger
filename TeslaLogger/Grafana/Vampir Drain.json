@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
   "links": [],
   "panels": [
     {
@@ -45,7 +44,7 @@
           "type": "date"
         },
         {
-          "alias": "",
+          "alias": "Startdatum",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -64,7 +63,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "Enddatum",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -80,7 +79,7 @@
           "unit": "short"
         },
         {
-          "alias": "",
+          "alias": "km Stand",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -94,6 +93,86 @@
           "thresholds": [],
           "type": "number",
           "unit": "locale"
+        },
+        {
+          "alias": "TR km Start",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "StartRange",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "TR km Ende",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "EndRange",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "TR km Verlust",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "RangeDiff",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Zeitspanne Minuten",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "TimeDiffMinutes",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "TR km Verlust pro Stunde",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "RangeLostPerHour",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
         },
         {
           "alias": "",
@@ -182,5 +261,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 6
+  "version": 7
 }
