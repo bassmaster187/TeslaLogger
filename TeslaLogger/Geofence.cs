@@ -77,18 +77,21 @@ namespace TeslaLogger
 
         public Address GetPOI(double lat, double lng)
         {
-            double range = 0.0007;
-
-            foreach (var p in sortedList)
+            lock (sortedList)
             {
-                if (p.lat - range > lat)
-                    return null; // da die liste sortiert ist, kann nichts mehr kommen
+                double range = 0.0007;
 
-                if ((p.lat - range) < lat && 
-                    lat < (p.lat + range) &&
-                    (p.lng - range) < lng &&
-                    lng < (p.lng + range))
-                    return p;
+                foreach (var p in sortedList)
+                {
+                    if (p.lat - range > lat)
+                        return null; // da die liste sortiert ist, kann nichts mehr kommen
+
+                    if ((p.lat - range) < lat &&
+                        lat < (p.lat + range) &&
+                        (p.lng - range) < lng &&
+                        lng < (p.lng + range))
+                        return p;
+                }
             }
 
             return null;
