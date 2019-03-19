@@ -79,7 +79,7 @@
           "unit": "short"
         },
         {
-          "alias": "km Stand",
+          "alias": "",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -91,7 +91,7 @@
           "mappingType": 1,
           "pattern": "EndPos",
           "thresholds": [],
-          "type": "number",
+          "type": "hidden",
           "unit": "locale"
         },
         {
@@ -175,6 +175,22 @@
           "unit": "short"
         },
         {
+          "alias": "km Stand",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "odometer",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
           "alias": "",
           "colorMode": null,
           "colors": [
@@ -196,7 +212,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.EndDate)*1000 as StartDate, TP1.address as Adresse, TP1.ideal_battery_range_km as StartRange, \nUNIX_TIMESTAMP(T2.StartDate)*1000 as EndDate, T2.StartPos as EndPos,  TP2.ideal_battery_range_km as EndRange,\nTP1.ideal_battery_range_km - TP2.ideal_battery_range_km as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) as TimeDiffMinutes,\n(select RangeDiff / TimeDiffMinutes * 60) as RangeLostPerHour\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1",
+          "rawSql": "SELECT UNIX_TIMESTAMP(T1.EndDate)*1000 as StartDate, TP1.address as Adresse, TP1.ideal_battery_range_km as StartRange, \nUNIX_TIMESTAMP(T2.StartDate)*1000 as EndDate, T2.StartPos as EndPos, TP2.odometer, TP2.ideal_battery_range_km as EndRange,\nTP1.ideal_battery_range_km - TP2.ideal_battery_range_km as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) as TimeDiffMinutes,\n(select RangeDiff / TimeDiffMinutes * 60) as RangeLostPerHour\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1",
           "refId": "A",
           "select": [
             [
@@ -230,8 +246,8 @@
     "list": []
   },
   "time": {
-    "from": "now/M",
-    "to": "now/M"
+    "from": "now-3M",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -261,5 +277,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 7
+  "version": 8
 }
