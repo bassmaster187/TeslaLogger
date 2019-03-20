@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 19,
   "links": [],
   "panels": [
     {
@@ -99,7 +98,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as anz FROM chargingstate join charging on chargingstate.EndChargingID = charging.id\nwhere $__timeFilter(StartDate)\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC desc",
+          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as anz FROM chargingstate join charging on chargingstate.EndChargingID = charging.id\nwhere $__timeFilter(StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC desc",
           "refId": "A",
           "select": [
             [
@@ -164,5 +163,5 @@
   "timezone": "",
   "title": "SOC Ladestatistik",
   "uid": "-pkIkhmRz",
-  "version": 2
+  "version": 1
 }
