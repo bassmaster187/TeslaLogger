@@ -26,6 +26,7 @@ namespace TeslaLogger
         WebHelper wh = new WebHelper();
         static DateTime lastCarUsed = DateTime.Now;
         static DateTime lastTokenRefresh = DateTime.Now;
+        static DateTime lastTryTokenRefresh = DateTime.Now;
         static bool goSleepWithWakeup = false;
 
         static void Main(string[] args)
@@ -125,15 +126,7 @@ namespace TeslaLogger
                         {
                             case TeslaState.Start:
                                 {
-                                    TimeSpan ts = DateTime.Now - lastTokenRefresh;
-                                    if (ts.TotalDays > 9)
-                                    {
-                                        wh.Tesla_token = wh.GetTokenAsync().Result;
-                                        lastTokenRefresh = DateTime.Now;
-
-                                        if (wh.Tesla_token == "NULL")
-                                            return;
-                                    }
+                                    RefreshToken(wh);
 
                                     // Alle States werden geschlossen
                                     DBHelper.CloseChargingState();
@@ -200,6 +193,8 @@ namespace TeslaLogger
                                     }
                                     else
                                     {
+                                        RefreshToken(wh);
+
                                         int startSleepHour, startSleepMinute;
                                         Tools.StartSleeping(out startSleepHour, out startSleepMinute);
                                         bool sleep = false;
@@ -416,6 +411,33 @@ namespace TeslaLogger
             finally
             {
                 Tools.Log("Teslalogger Stopped!");
+            }
+        }
+
+        private static void RefreshToken(WebHelper wh)
+        {
+            TimeSpan ts = DateTime.Now - lastTokenRefresh;
+            if (ts.TotalDays > 9)
+            {
+                TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
+                if (ts2.TotalMinutes > 30)
+                {
+                    lastTryTokenRefresh = DateTime.Now;
+                    Tools.Log("try to get new Token");
+
+                    var temp = wh.GetTokenAsync().Result;
+                    if (temp != "NULL")
+                    {
+                        Tools.Log("new Token received!");
+
+                        wh.Tesla_token = temp;
+                        lastTokenRefresh = DateTime.Now;
+                    }
+                    else
+                    {
+                        Tools.Log("Error getting new Token!");
+                    }
+                }
             }
         }
 

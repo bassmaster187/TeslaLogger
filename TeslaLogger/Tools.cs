@@ -10,6 +10,27 @@ namespace TeslaLogger
 {
     class Tools
     {
+        public static string GetPrefix(string exception)
+        {
+            try
+            {
+                if (exception == null)
+                    return "";
+                else if (exception.Contains("TeslaLogger.WebHelper.StartStream"))
+                    return "StartStream: ";
+                else if (exception.Contains("TeslaLogger.WebHelper.IsOnline"))
+                    return "IsOnline: ";
+                else if (exception.Contains("TeslaLogger.WebHelper.IsDriving"))
+                    return "IsDriving: ";
+            }
+            catch (Exception)
+            {
+            }
+
+            return "";
+        }
+
+
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
             try
@@ -40,6 +61,26 @@ namespace TeslaLogger
                 }
 
                 string temp = ex.ToString();
+                string prefix = GetPrefix(temp);
+
+                if (temp.Contains("The operation has timed out"))
+                {
+                    Tools.Log(prefix + "HTTP Timeout");
+                    System.Threading.Thread.Sleep(10000);
+                    return;
+                }
+                else if (temp.Contains("Connection refused"))
+                {
+                    Tools.Log(prefix + "Connection refused");
+                    System.Threading.Thread.Sleep(50000);
+                    return;
+                }
+                else
+                {
+
+                }
+
+
                 temp += "\r\n-------------------------\r\n";
 
                 if (inhalt == null)
