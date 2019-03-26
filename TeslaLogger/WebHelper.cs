@@ -544,7 +544,9 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (!resultContent.Contains("upstream internal error"))
+                if (resultContent == null)
+                    Tools.Log("IsDriving: ResultContent=NULL!");
+                else 
                     Tools.ExceptionWriter(ex, resultContent);
 
                 if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
@@ -607,8 +609,9 @@ namespace TeslaLogger
                 catch (Exception ex)
                 {
                     // System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    
                     Tools.ExceptionWriter(ex, line);
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(10000);
                 }
             }
 
