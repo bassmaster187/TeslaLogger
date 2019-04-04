@@ -16,6 +16,8 @@ namespace TeslaLogger
     class WebHelper
     {
         public static readonly String apiaddress = "https://owner-api.teslamotors.com/";
+        public static readonly String TeslaTokenFilename = "tesla_token.txt";
+
         public string Tesla_token = "";
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
@@ -28,6 +30,7 @@ namespace TeslaLogger
         bool stopStreaming = false;
         string elevation = "";
         DateTime elevation_time = DateTime.Now;
+        public DateTime lastTokenRefresh = DateTime.Now;
 
         static WebHelper()
         {
@@ -42,8 +45,58 @@ namespace TeslaLogger
             carSettings = CarSettings.ReadSettings();
         }
 
+        public bool RestoreToken()
+        {
+            string filecontent = "";
+
+            try
+            {
+                if (!System.IO.File.Exists(TeslaTokenFilename))
+                {
+                    Tools.Log("RestoreToken: " + TeslaTokenFilename + " File Not Found");
+                    return false;
+                }
+
+                filecontent = System.IO.File.ReadAllText(TeslaTokenFilename);
+                String [] args = filecontent.Split('|');
+                if (args.Length == 2 && args[0].Length == 64)
+                {
+                    DateTime dt = DateTime.Parse(args[1]);
+                    TimeSpan ts = DateTime.Now - dt;
+
+                    if (ts.TotalDays < 15)
+                    {
+                        Tesla_token = args[0];
+                        lastTokenRefresh = dt;
+
+                        Tools.Log("Restore Token OK. Age: " + dt.ToString());
+                        return true;
+                    }
+                    else
+                    {
+                        Tools.Log("Restore Token too old! " + dt.ToString());
+                    }
+                }
+                else
+                {
+                    if (filecontent == null)
+                        filecontent = "NULL";
+
+                    Tools.Log("Restore Token not successful. " + filecontent);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log("Error in RestoreToken: " + ex.Message);
+                Tools.ExceptionWriter(ex, filecontent);
+            }
+
+            return false;
+        }
+
         public async Task<String> GetTokenAsync()
         {
+            string resultContent = "";
             try
             {
                 string hiddenPassword = "";
@@ -74,7 +127,7 @@ namespace TeslaLogger
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                 var result = await client.PostAsync(apiaddress + "oauth/token", content);
 
-                string resultContent = await result.Content.ReadAsStringAsync();
+                resultContent = await result.Content.ReadAsStringAsync();
 
                 if (resultContent.Contains("authorization_required"))
                 {
@@ -86,12 +139,15 @@ namespace TeslaLogger
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 Tesla_token = jsonResult["access_token"];
 
+                String serializeToken = Tesla_token + "|" + DateTime.Now.ToString("s");
+                System.IO.File.WriteAllText(TeslaTokenFilename,serializeToken);
+
                 return Tesla_token;
             }
             catch (Exception ex)
             {
                 Tools.Log("Error in GetTokenAsync: " + ex.Message);
-                Tools.ExceptionWriter(ex, "GetTokenAsync");
+                Tools.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
