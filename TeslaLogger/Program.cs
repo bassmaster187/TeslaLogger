@@ -25,7 +25,6 @@ namespace TeslaLogger
         static TeslaState currentState = TeslaState.Start;
         WebHelper wh = new WebHelper();
         static DateTime lastCarUsed = DateTime.Now;
-        static DateTime lastTokenRefresh = DateTime.Now;
         static DateTime lastTryTokenRefresh = DateTime.Now;
         static bool goSleepWithWakeup = false;
 
@@ -62,7 +61,9 @@ namespace TeslaLogger
                 }
 
                 WebHelper wh = new WebHelper();
-                wh.Tesla_token = wh.GetTokenAsync().Result;
+
+                if (!wh.RestoreToken())
+                    wh.Tesla_token = wh.GetTokenAsync().Result;
 
                 if (wh.Tesla_token == "NULL")
                     return;
@@ -416,7 +417,7 @@ namespace TeslaLogger
 
         private static void RefreshToken(WebHelper wh)
         {
-            TimeSpan ts = DateTime.Now - lastTokenRefresh;
+            TimeSpan ts = DateTime.Now - wh.lastTokenRefresh;
             if (ts.TotalDays > 9)
             {
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
@@ -431,7 +432,7 @@ namespace TeslaLogger
                         Tools.Log("new Token received!");
 
                         wh.Tesla_token = temp;
-                        lastTokenRefresh = DateTime.Now;
+                        wh.lastTokenRefresh = DateTime.Now;
                     }
                     else
                     {
