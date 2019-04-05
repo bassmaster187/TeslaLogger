@@ -144,7 +144,7 @@ namespace TeslaLogger
             currentJSON.CreateCurrentJSON();
         }
 
-        public static void CloseDriveState()
+        public static void CloseDriveState(DateTime EndDate)
         {
             int StartPos = 0;
             int MaxPosId = GetMaxPosid();
@@ -165,7 +165,7 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
-                cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@EndDate", EndDate);
                 cmd.Parameters.AddWithValue("@Pos", MaxPosId);
                 cmd.ExecuteNonQuery();
             }

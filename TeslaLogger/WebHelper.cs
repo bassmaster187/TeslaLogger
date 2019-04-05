@@ -31,6 +31,7 @@ namespace TeslaLogger
         string elevation = "";
         DateTime elevation_time = DateTime.Now;
         public DateTime lastTokenRefresh = DateTime.Now;
+        public DateTime lastIsDriveTimestamp = DateTime.Now;
 
         static WebHelper()
         {
@@ -595,7 +596,10 @@ namespace TeslaLogger
                     DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp.Result, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
+                    {
+                        lastIsDriveTimestamp = DateTime.Now;
                         return true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -606,7 +610,18 @@ namespace TeslaLogger
                     Tools.ExceptionWriter(ex, resultContent);
 
                 if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
+                {
+                    TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
+
+                    if (ts.TotalMinutes > 15)
+                    {
+                        Tools.Log("No Valid IsDriving since 15min!");
+                        lastShift_State = "P";
+                        return false;
+                    }
+
                     return true;
+                }
             }
 
             return false;

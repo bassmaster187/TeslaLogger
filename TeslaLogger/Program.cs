@@ -131,7 +131,7 @@ namespace TeslaLogger
 
                                     // Alle States werden geschlossen
                                     DBHelper.CloseChargingState();
-                                    DBHelper.CloseDriveState();
+                                    DBHelper.CloseDriveState(wh.lastIsDriveTimestamp);
 
                                     string res = wh.IsOnline().Result;
                                     lastCarUsed = DateTime.Now;
