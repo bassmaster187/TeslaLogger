@@ -223,7 +223,11 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (!resultContent.Contains("upstream internal error"))
+                if (resultContent == null)
+                {
+                    Tools.Log("isCharging = NULL");
+                }
+                else if (!resultContent.Contains("upstream internal error"))
                     Tools.ExceptionWriter(ex, resultContent);
 
                 if (lastCharging_State == "Charging")
@@ -613,9 +617,9 @@ namespace TeslaLogger
                 {
                     TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
 
-                    if (ts.TotalMinutes > 15)
+                    if (ts.TotalMinutes > 10)
                     {
-                        Tools.Log("No Valid IsDriving since 15min!");
+                        Tools.Log("No Valid IsDriving since 10min!");
                         lastShift_State = "P";
                         return false;
                     }
@@ -1024,7 +1028,11 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (!resultContent.Contains("upstream internal error"))
+                if (resultContent == null)
+                {
+                    Tools.Log("GetOutsideTempAsync: NULL");
+                    return 0;   
+                } else if (!resultContent.Contains("upstream internal error"))
                     Tools.ExceptionWriter(ex, resultContent);
             }
             return 0;

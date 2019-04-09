@@ -58,6 +58,13 @@ namespace TeslaLogger
 
                         return;
                     }
+                    else if (inhalt.Contains("No route to host"))
+                    {
+                        Tools.Log("No route to host");
+                        System.Threading.Thread.Sleep(60000);
+
+                        return;
+                    }
                 }
 
                 string temp = ex.ToString();
