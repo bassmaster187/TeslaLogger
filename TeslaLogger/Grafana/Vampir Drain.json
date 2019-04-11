@@ -33,7 +33,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 8,
+        "col": 0,
         "desc": true
       },
       "styles": [
@@ -309,5 +309,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 10
+  "version": 11
 }
