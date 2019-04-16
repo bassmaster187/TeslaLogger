@@ -19,6 +19,7 @@
   "panels": [
     {
       "columns": [],
+	  "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 21,
@@ -313,5 +314,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 24
+  "version": 26
 }
