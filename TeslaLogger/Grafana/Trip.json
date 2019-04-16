@@ -337,12 +337,12 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
+          "decimals": 0,
           "mappingType": 1,
           "pattern": "power_avg",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Dauer Min",
@@ -359,6 +359,22 @@
           "thresholds": [],
           "type": "number",
           "unit": "short"
+        },
+        {
+          "alias": "Ø km/h",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "avg_kmh",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
         },
         {
           "alias": "",
@@ -382,7 +398,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg\nfrom trip WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
+          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -448,5 +464,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 31
+  "version": 32
 }
