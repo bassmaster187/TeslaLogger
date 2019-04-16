@@ -19,7 +19,7 @@
   "panels": [
     {
       "columns": [],
-	  "datasource": "teslalogger",
+      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 21,
@@ -134,7 +134,7 @@
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+            "rgb(216, 217, 218)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
@@ -142,7 +142,7 @@
           "pattern": "EndSOC",
           "thresholds": [
             "5",
-            "10",
+				 
             "10"
           ],
           "type": "number",
