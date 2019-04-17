@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Xml.Serialization;
-using System.IO;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
+    using System;
+    using System.IO;
+    using System.Text;
+    using System.Xml.Serialization;
+
     public class CarSettings
     {
         public string Name = "";
@@ -16,8 +12,7 @@ namespace TeslaLogger
         public string Battery = "";
         public string Wh_TR = "0.190052356";
         public bool AWD = false;
-        public bool Performance = false;
-        public const string car_settings_filename = "car_settings.xml";
+        public bool Performance = false;        
 
         public static CarSettings ReadSettings()
         {
@@ -26,15 +21,19 @@ namespace TeslaLogger
             try
             {
                 XmlSerializer s = new XmlSerializer(typeof(CarSettings));
-                tr = new StreamReader(car_settings_filename, System.Text.Encoding.UTF8);
-                ret = (CarSettings)s.Deserialize(tr);
-            }
-            catch (Exception ex)
-            {
-                if (tr != null)
-                    tr.Close();
 
-                Tools.Log(ex.ToString());
+                var filePath = FileManager.GetFilePath(TLFilename.CarSettings);
+
+                if (filePath != string.Empty)
+                {
+                    tr = new StreamReader(filePath, Encoding.UTF8);
+
+                    ret = (CarSettings)s.Deserialize(tr);
+                }
+            }
+            catch (Exception e)
+            {
+                Tools.Log($"ReadCarSettings Exception: {e.Message}");
                 ret = new CarSettings();
             }
             finally
@@ -52,13 +51,16 @@ namespace TeslaLogger
             try
             {
                 Tools.Log("Write car settings");
+
                 XmlSerializer s = new XmlSerializer(typeof(CarSettings));
-                tw = new StreamWriter(car_settings_filename, false, System.Text.Encoding.UTF8);
+
+                tw = new StreamWriter(FileManager.GetFilePath(TLFilename.CarSettings), false, Encoding.UTF8);
+
                 s.Serialize(tw, this);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                Tools.Log($"WriteCarSettings Exception: {e.Message}");
             }
             finally
             {
