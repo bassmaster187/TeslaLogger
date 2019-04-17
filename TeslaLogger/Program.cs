@@ -1,13 +1,8 @@
-﻿using System; 
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
+    using System;
+    using System.Threading.Tasks;
+
     class Program
     {
         enum TeslaState
@@ -200,10 +195,8 @@ namespace TeslaLogger
                                         Tools.StartSleeping(out startSleepHour, out startSleepMinute);
                                         bool sleep = false;
 
-                                        if (System.IO.File.Exists("cmd_gosleep.txt"))
+                                        if (FileManager.CheckCmdGoSleepFile())
                                         {
-                                            System.IO.File.Delete("cmd_gosleep.txt");
-
                                             Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
@@ -341,7 +334,7 @@ namespace TeslaLogger
                                         {
                                             round++;
                                             System.Threading.Thread.Sleep(1000);
-                                            if (System.IO.File.Exists("wakeupteslalogger.txt"))
+                                            if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                                             {
                                                 if (wh.DeleteWakeupFile())
                                                 {
