@@ -58,7 +58,9 @@
   }
 
 </script>
+<button onclick="window.location.href='password.php';">Zugangsdaten</button>
 
+<br><br>
 <div>
 <table>
 <tr><td><b>Sleeping:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
