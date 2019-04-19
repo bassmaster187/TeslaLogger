@@ -382,7 +382,7 @@ namespace TeslaLogger
         static DateTime lastChargingInsert = DateTime.Today;
 
 
-        internal static void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert)
+        internal static void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
         {
             Tools.SetThread_enUS();
 
@@ -403,7 +403,7 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp)", con);
+                    MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request)", con);
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@battery_level", battery_level);
                     cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
@@ -412,6 +412,18 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
                     cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                     cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
+
+                    int i = 0;
+
+                    if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out i))
+                        cmd.Parameters.AddWithValue("@charger_pilot_current", i);
+                    else
+                        cmd.Parameters.AddWithValue("@charger_pilot_current", DBNull.Value);
+
+                    if (charge_current_request != null && int.TryParse(charge_current_request, out i))
+                        cmd.Parameters.AddWithValue("@charge_current_request", i);
+                    else
+                        cmd.Parameters.AddWithValue("@charge_current_request", DBNull.Value);
 
                     if (outside_temp == null)
                         cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
