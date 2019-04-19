@@ -67,7 +67,10 @@ namespace TeslaLogger
                     }
                 }
 
-                string temp = ex.ToString();
+                string temp = "";
+                if (ex != null)
+                    temp = ex.ToString();
+
                 string prefix = GetPrefix(temp);
 
                 if (temp.Contains("The operation has timed out"))
@@ -87,8 +90,8 @@ namespace TeslaLogger
 
                 }
 
-
-                temp += "\r\n-------------------------\r\n";
+                if (temp.Length > 0)
+                    temp += "\r\n-------------------------\r\n";
 
                 if (inhalt == null)
                     temp += "NULL";
