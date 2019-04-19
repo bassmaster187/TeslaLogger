@@ -9,3 +9,4 @@
 MQTTClient/bin/Debug/
 MQTTClient/obj
 packages
+*.user
