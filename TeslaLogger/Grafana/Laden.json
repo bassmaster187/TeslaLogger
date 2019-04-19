@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 7,
   "links": [],
   "panels": [
     {
@@ -72,7 +71,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  charger_phases as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]'\n  \n  \nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  charger_phases as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  charge_current_request as 'Angefordert [A]',\n  charger_pilot_current as 'Pilot [A]'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -221,5 +220,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 10
+  "version": 11
 }
