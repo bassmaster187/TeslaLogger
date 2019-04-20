@@ -14,7 +14,9 @@
         WakeupFilename,
         CmdGoSleepFilename,
         GeofenceFilename,
-        GeofencePrivateFilename
+        GeofencePrivateFilename,
+        NewCredentialsFilename,
+        TeslaLoggerExeConfigFilename
     }
 
     /// <summary>
@@ -37,7 +39,9 @@
                 { TLFilename.WakeupFilename,            "wakeupteslalogger.txt"},
                 { TLFilename.CmdGoSleepFilename,        "cmd_gosleep.txt"},
                 { TLFilename.GeofenceFilename,          "geofence.csv"},
-                { TLFilename.GeofencePrivateFilename,   "geofence-private.csv"}
+                { TLFilename.GeofencePrivateFilename,   "geofence-private.csv"},
+                { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
+                { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"}
             };
         }
 
