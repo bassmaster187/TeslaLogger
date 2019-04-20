@@ -2,11 +2,10 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-/TeslaLogger/bin/Debug
-/TeslaLogger/obj/Debug
+*/bin/Debug
+*/bin/Release
+*obj/
 /.vs
 /TeslaLogger/obj/Release
-MQTTClient/bin/Debug/
-MQTTClient/obj
 packages
 *.user

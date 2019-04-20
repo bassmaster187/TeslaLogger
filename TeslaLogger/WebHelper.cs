@@ -17,8 +17,7 @@ namespace TeslaLogger
     class WebHelper
     {
         public static readonly String apiaddress = "https://owner-api.teslamotors.com/";
-        public static readonly String TeslaTokenFilename = "tesla_token.txt";
-
+        
         public string Tesla_token = "";
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
@@ -53,13 +52,10 @@ namespace TeslaLogger
 
             try
             {
-                if (!System.IO.File.Exists(TeslaTokenFilename))
-                {
-                    Tools.Log("RestoreToken: " + TeslaTokenFilename + " File Not Found");
+                filecontent = FileManager.GetTeslaTokenFileContent();
+                if (filecontent == string.Empty)
                     return false;
-                }
 
-                filecontent = System.IO.File.ReadAllText(TeslaTokenFilename);
                 String [] args = filecontent.Split('|');
                 if (args.Length == 2 && args[0].Length == 64)
                 {
@@ -141,8 +137,7 @@ namespace TeslaLogger
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 Tesla_token = jsonResult["access_token"];
 
-                String serializeToken = Tesla_token + "|" + DateTime.Now.ToString("s");
-                System.IO.File.WriteAllText(TeslaTokenFilename,serializeToken);
+                FileManager.WriteTeslaTokenFile(Tesla_token);
 
                 return Tesla_token;
             }
@@ -1286,14 +1281,14 @@ namespace TeslaLogger
                 if (!force && ts.TotalSeconds < 20)
                     return false;
 
-                // Tools.Log("Check Tasker Webservice");
+                //Tools.Log("Check Tasker Webservice");
 
                 lastTaskerWakeupfile = DateTime.Now;
 
                 HttpClient client = new HttpClient();
 
                 var d = new Dictionary<string, string>();
-                d.Add("t",TaskerHash);
+                d.Add("t", TaskerHash);
                 d.Add("v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 d.Add("cv", DBHelper.currentJSON.current_car_version);
                 d.Add("m", carSettings.Model);
@@ -1304,7 +1299,7 @@ namespace TeslaLogger
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
-                
+
                 var resultTask = client.PostAsync("http://teslalogger.de/wakefile.php", content);
 
                 HttpResponseMessage result = resultTask.Result;
@@ -1333,7 +1328,7 @@ namespace TeslaLogger
             if (existsWakeupFile)
             {
                 Tools.Log("Delete Wakeup file");
-                System.IO.File.Delete("wakeupteslalogger.txt");
+                System.IO.File.Delete(FileManager.GetFilePath(TLFilename.WakeupFilename));
                 ret = true;
             }
 
@@ -1344,7 +1339,7 @@ namespace TeslaLogger
         {
             get
             {
-                return System.IO.File.Exists("wakeupteslalogger.txt") || TaskerWakeupfile();
+                return System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)) || TaskerWakeupfile();
             }
         }
     }

@@ -20,5 +20,8 @@
     <Setting Name="SuspendAPIMinutes" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">21</Value>
     </Setting>
+    <Setting Name="UseMQTT" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
+    using System;
+    using System.Collections.Generic;
+
     class CurrentJSON
     {
         public bool current_charging = false;
@@ -110,7 +107,8 @@ namespace TeslaLogger
                 };
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
-                System.IO.File.WriteAllText("current_json.txt", current_json, Encoding.UTF8);
+
+                FileManager.WriteCurrentJsonFile(current_json);
             }
             catch (Exception ex)
             {

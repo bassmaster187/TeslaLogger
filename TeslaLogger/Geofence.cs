@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Address
     {
         public Address(string name, double lat, double lng)
@@ -19,9 +16,7 @@ namespace TeslaLogger
         public string name;
         public double lat;
         public double lng;
-    }
-
-    
+    }   
 
     class Geofence
     {
@@ -31,8 +26,8 @@ namespace TeslaLogger
         {
             List<Address> list = new List<Address>();
 
-            ReadGeofenceFile(list, "geofence.csv");
-            ReadGeofenceFile(list, "geofence-private.csv");
+            ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+            ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
 
             Tools.Log("Addresses inserted: " + list.Count);
 
