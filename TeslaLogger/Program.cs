@@ -5,6 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Xml;
+
+namespace TeslaLogger
+{
 
     class Program
     {
@@ -430,8 +434,8 @@ using System.Web.Script.Serialization;
 
                 doc.Save("TeslaLogger.exe.config");
 
-                if (System.IO.File.Exists(WebHelper.TeslaTokenFilename))
-                    System.IO.File.Delete(WebHelper.TeslaTokenFilename);
+                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.TeslaTokenFilename)))
+                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.TeslaTokenFilename));
 
                 System.IO.File.Delete("new_credentials.json");
 
