@@ -414,28 +414,28 @@ namespace TeslaLogger
         {
             try
             {
-                if (!System.IO.File.Exists("new_credentials.json"))
+                if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.NewCredentialsFilename)))
                     return;
 
                 Tools.Log("new_credentials.json available");
 
-                string json = System.IO.File.ReadAllText("new_credentials.json");
+                string json = System.IO.File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
                 var doc = new XmlDocument();
-                doc.Load("TeslaLogger.exe.config");
+                doc.Load(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));
                 XmlNodeList nodesTeslaName = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaName']/value");
                 nodesTeslaName.Item(0).InnerText = j["email"];
 
                 XmlNodeList nodesTeslaPasswort = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaPasswort']/value");
                 nodesTeslaPasswort.Item(0).InnerText = j["password"];
 
-                doc.Save("TeslaLogger.exe.config");
+                doc.Save(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));
 
                 if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.TeslaTokenFilename)))
                     System.IO.File.Delete(FileManager.GetFilePath(TLFilename.TeslaTokenFilename));
 
-                System.IO.File.Delete("new_credentials.json");
+                System.IO.File.Delete(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
 
                 ApplicationSettings.Default.Reload();
 
