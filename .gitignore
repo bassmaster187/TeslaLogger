@@ -8,3 +8,4 @@
 /.vs
 /TeslaLogger/obj/Release
 packages
+*.user
