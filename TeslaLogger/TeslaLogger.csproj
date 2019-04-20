@@ -59,6 +59,8 @@
     <Compile Include="Crc32.cs" />
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />
+    <Compile Include="FileManager.cs" />
+    <Compile Include="MQTTClient.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Geofence.cs" />

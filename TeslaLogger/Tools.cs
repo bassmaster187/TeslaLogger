@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Web.Script.Serialization;
+
     class Tools
     {
         public static string GetPrefix(string exception)
@@ -97,10 +94,9 @@ namespace TeslaLogger
                     temp += "NULL";
                 else
                     temp += inhalt;
-
-                string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
-
-                System.IO.File.WriteAllText(filename, temp);
+               
+                FileManager.WriteException(temp);
+                
                 System.Diagnostics.Debug.WriteLine(temp);
             }
             catch (Exception e)
@@ -140,20 +136,22 @@ namespace TeslaLogger
             return GetMonoRuntimeVersion() != "NULL";
         }
 
-        public static void CopyFilesRecursively(System.IO.DirectoryInfo source, System.IO.DirectoryInfo target)
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
             try
             { 
-                foreach (System.IO.DirectoryInfo dir in source.GetDirectories())
+                foreach (DirectoryInfo dir in source.GetDirectories())
                 {
                     CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
                 }
 
-                foreach (System.IO.FileInfo file in source.GetFiles())
+                foreach (FileInfo file in source.GetFiles())
                 {
-                    string p = System.IO.Path.Combine(target.FullName, file.Name);
+                    string p = Path.Combine(target.FullName, file.Name);
+
                     Tools.Log("Copy '" + file.FullName + "' to '" + p + "'");
-                    System.IO.File.Copy(file.FullName, p, true);
+
+                    File.Copy(file.FullName, p, true);
                 }
             }
             catch (Exception ex)
@@ -167,7 +165,7 @@ namespace TeslaLogger
             try
             {
                 Tools.Log("Copy '" + srcFile + "' to '" + directory + "'");
-                System.IO.File.Copy(srcFile, directory, true);
+                File.Copy(srcFile, directory, true);
             }
             catch (Exception ex)
             {
@@ -182,11 +180,15 @@ namespace TeslaLogger
 
             try
             {
-                if (!System.IO.File.Exists("settings.json"))
+                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
                     return;
 
-                string json = System.IO.File.ReadAllText("settings.json");
+                string json = File.ReadAllText(filePath);
+
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
                 if (Boolean.Parse(j["SleepTimeSpanEnable"]))
                 {
                     string start = j["SleepTimeSpanEnd"];
@@ -209,10 +211,12 @@ namespace TeslaLogger
 
             try
             {
-                if (!System.IO.File.Exists("settings.json"))
-                    return;
+                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
-                string json = System.IO.File.ReadAllText("settings.json");
+                if (!File.Exists(filePath))
+                    return;
+               
+                string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
                 if (Boolean.Parse(j["SleepTimeSpanEnable"]))
                 {

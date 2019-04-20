@@ -1,14 +1,11 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Xml;
 
-namespace TeslaLogger
-{
     class Program
     {
         enum TeslaState
@@ -106,17 +103,8 @@ namespace TeslaLogger
                 UpdateTeslalogger.Start(wh);
                 UpdateTeslalogger.UpdateGrafana(wh);
 
-                try
-                {
-                    System.Threading.Thread MQTTthread = new System.Threading.Thread(StartMqttClient);
-                    MQTTthread.Start();
-                }
-                catch (Exception ex)
-                {
-                    Tools.Log(ex.ToString());
-                }
-
-                // Task.Factory.StartNew(() => wh.UpdateAllPosAddresses());
+                MQTTClient.StartMQTTClient();
+                
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
@@ -205,7 +193,7 @@ namespace TeslaLogger
                                         Tools.StartSleeping(out startSleepHour, out startSleepMinute);
                                         bool sleep = false;
 
-                                        if (System.IO.File.Exists("cmd_gosleep.txt"))
+                                        if (FileManager.CheckCmdGoSleepFile())
                                         {
                                             System.IO.File.Delete("cmd_gosleep.txt");
 
@@ -346,7 +334,7 @@ namespace TeslaLogger
                                         {
                                             round++;
                                             System.Threading.Thread.Sleep(1000);
-                                            if (System.IO.File.Exists("wakeupteslalogger.txt"))
+                                            if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                                             {
                                                 if (wh.DeleteWakeupFile())
                                                 {
@@ -481,45 +469,6 @@ namespace TeslaLogger
                         Tools.Log("Error getting new Token!");
                     }
                 }
-            }
-        }
-
-        private static void StartMqttClient()
-        {
-            string MQTTClientPath = "/etc/teslalogger/MQTTClient.exe";
-
-            try
-            {
-                if (!System.IO.File.Exists(MQTTClientPath))
-                {
-                    Tools.Log("MQTTClient.exe not found!");
-                    return;
-                }
-
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.EnableRaisingEvents = false;
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.FileName = "mono";
-                proc.StartInfo.Arguments = MQTTClientPath;
-
-                proc.Start();
-                
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    string line = proc.StandardOutput.ReadLine();
-                    Tools.Log(line);
-                }
-
-                proc.WaitForExit();
-            }
-            catch (Exception ex)
-            {
-                Tools.Log(ex.ToString());
-            }
-            finally
-            {
-                Tools.Log("MQTT terminated");
             }
         }
     }
