@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -189,6 +190,8 @@ namespace TeslaLogger
                 var charger_voltage = "";
                 var charger_phases = "";
                 var charger_actual_current = "";
+                var charge_current_request = "";
+                var charger_pilot_current = "";
 
                 if (r2["charger_voltage"] != null)
                     charger_voltage = r2["charger_voltage"].ToString();
@@ -199,17 +202,23 @@ namespace TeslaLogger
                 if (r2["charger_actual_current"] != null)
                     charger_actual_current = r2["charger_actual_current"].ToString();
 
+                if (r2["charge_current_request"] != null)
+                    charge_current_request = r2["charge_current_request"].ToString();
+
+                if (r2["charger_pilot_current"] != null)
+                    charger_pilot_current = r2["charger_pilot_current"].ToString();
+
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, false);
+                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, false, charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true);
+                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : Charging Complete");
                     }
 
@@ -587,9 +596,11 @@ namespace TeslaLogger
                     var odometer = GetOdometerAsync();
                     var outside_temp = GetOutsideTempAsync();
 
+                    
                     TimeSpan tsElevation = DateTime.Now - elevation_time;
                     if (tsElevation.TotalSeconds > 30)
                         elevation = "";
+
                     int battery_level;
                     double ideal_battery_range_km = GetIdealBatteryRangekm(out battery_level);
                     DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp.Result, elevation);
@@ -628,8 +639,10 @@ namespace TeslaLogger
 
         public void StartStreamThread()
         {
+            /* StreamingAPI Doesn't work anymore
             System.Threading.Thread t = new System.Threading.Thread(() => StartStream());
             t.Start();
+            */
         }
 
         void StartStream()
@@ -642,6 +655,57 @@ namespace TeslaLogger
                 try
                 {
                     string online = IsOnline().Result;
+                                        
+                    using (var ws = new System.Net.WebSockets.ClientWebSocket())
+                    {
+                        var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
+                        Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/connect/{Tesla_vehicle_id}");
+                        //Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/{Tesla_vehicle_id}/?values=speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,est_range");
+
+                        //ws.Options.Credentials = new NetworkCredential(ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken);
+                        ws.Options.UseDefaultCredentials = false;
+                        ws.Options.SetRequestHeader("Authorization", "Basic " + Convert.ToBase64String(byteArray));
+                        
+                        var result = ws.ConnectAsync(serverUri, System.Threading.CancellationToken.None);
+
+                        while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Connecting");
+                            System.Threading.Thread.Sleep(100);
+                        }
+
+                        
+                        var bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
+                        string msg = "{\"msg_type\": \"data:subscribe\", \"value\": [\"speed\",\"odometer\",\"soc\",\"elevation\",\"est_heading\",\"est_lat\",\"est_lng\",\"est_corrected_lat\",\"est_corrected_lng\",\"native_latitude\",\"native_longitude\",\"native_heading\",\"native_type\",\"native_location_supported\",\"power\",\"shift_state\"]}";
+                        var bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(msg));
+
+                        if (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                        {
+                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+                        }
+
+                        while (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                        {
+                            System.Threading.Thread.Sleep(100);
+                            byte[] buffer = new byte[1024];
+                            var response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+                            
+                            var r = Encoding.UTF8.GetString(buffer);
+                            System.Diagnostics.Debug.WriteLine(r);
+                            System.Threading.Thread.Sleep(100);
+                            ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+                            System.Threading.Thread.Sleep(1000);
+
+                            Tools.ExceptionWriter(null, r);
+                        }
+                    }
+                    Tools.Log("StreamEnd");
+                    System.Diagnostics.Debug.WriteLine("StreamEnd");
+
+                    
+
+                    return;
 
                     using (var client = new HttpClient())
                     {

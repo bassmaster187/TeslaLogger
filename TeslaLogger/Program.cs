@@ -1,7 +1,10 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.Threading.Tasks;
+﻿using System; 
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
     class Program
     {
@@ -25,6 +28,9 @@
 
         static void Main(string[] args)
         {
+            CheckNewCredentials();
+
+
             try
             {
                 Tools.SetThread_enUS();
@@ -100,6 +106,11 @@
                 MQTTClient.StartMQTTClient();
                 
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
+                // wh.IsDriving();
+                // wh.GetCachedRollupData();
+
+                //wh.GetEnergyChartData();
+                // wh.StartStreamThread(); // xxx
 
                 while (true)
                 {
@@ -184,6 +195,8 @@
 
                                         if (FileManager.CheckCmdGoSleepFile())
                                         {
+                                            System.IO.File.Delete("cmd_gosleep.txt");
+
                                             Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
@@ -392,6 +405,43 @@
             finally
             {
                 Tools.Log("Teslalogger Stopped!");
+            }
+        }
+
+        private static void CheckNewCredentials()
+        {
+            try
+            {
+                if (!System.IO.File.Exists("new_credentials.json"))
+                    return;
+
+                Tools.Log("new_credentials.json available");
+
+                string json = System.IO.File.ReadAllText("new_credentials.json");
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                var doc = new XmlDocument();
+                doc.Load("TeslaLogger.exe.config");
+                XmlNodeList nodesTeslaName = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaName']/value");
+                nodesTeslaName.Item(0).InnerText = j["email"];
+
+                XmlNodeList nodesTeslaPasswort = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaPasswort']/value");
+                nodesTeslaPasswort.Item(0).InnerText = j["password"];
+
+                doc.Save("TeslaLogger.exe.config");
+
+                if (System.IO.File.Exists(WebHelper.TeslaTokenFilename))
+                    System.IO.File.Delete(WebHelper.TeslaTokenFilename);
+
+                System.IO.File.Delete("new_credentials.json");
+
+                ApplicationSettings.Default.Reload();
+
+                Tools.Log("credentials updated!");
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
             }
         }
 

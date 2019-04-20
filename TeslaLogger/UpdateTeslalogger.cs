@@ -28,6 +28,12 @@ namespace TeslaLogger
                     DBHelper.UpdateAllDrivestateData();
                 }
 
+                if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
+                {
+                    Tools.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                }
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView(wh);
