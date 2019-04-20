@@ -199,8 +199,6 @@ namespace TeslaLogger
 
                                         if (FileManager.CheckCmdGoSleepFile())
                                         {
-                                            System.IO.File.Delete("cmd_gosleep.txt");
-
                                             Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
