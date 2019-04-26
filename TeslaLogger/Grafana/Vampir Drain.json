@@ -215,7 +215,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
+          "decimals": 0,
           "mappingType": 1,
           "pattern": "sleeppercent",
           "thresholds": [],
@@ -309,5 +309,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 11
+  "version": 12
 }

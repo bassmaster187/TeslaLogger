@@ -123,7 +123,7 @@
           "pattern": "avg_geladen_kWh",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Ø SOC",
@@ -142,7 +142,7 @@
             "96"
           ],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Max SOC",
@@ -161,7 +161,7 @@
             "96"
           ],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Ladezeit h",
@@ -223,7 +223,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         }
       ],
       "targets": [
@@ -297,5 +297,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 10
+  "version": 11
 }
