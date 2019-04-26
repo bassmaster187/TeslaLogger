@@ -142,7 +142,6 @@
           "pattern": "EndSOC",
           "thresholds": [
             "5",
-				 
             "10"
           ],
           "type": "number",
@@ -210,7 +209,7 @@
           "pattern": "AVGConsumption",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Tage",
@@ -226,7 +225,7 @@
           "pattern": "TripDays",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "",
@@ -240,7 +239,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         }
       ],
       "targets": [
@@ -314,5 +313,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 26
+  "version": 27
 }

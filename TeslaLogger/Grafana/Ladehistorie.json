@@ -92,7 +92,7 @@
           "pattern": "charge_energy_added",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "km Stand",
@@ -176,7 +176,7 @@
           "pattern": "SOC",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "TR km Ende",
@@ -192,7 +192,7 @@
           "pattern": "EndSOC",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "SOC Ende",
@@ -254,7 +254,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         }
       ],
       "targets": [
@@ -329,5 +329,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 11
+  "version": 12
 }

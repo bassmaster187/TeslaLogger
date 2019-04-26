@@ -92,7 +92,7 @@
           "pattern": "avg_consumption_kWh_100km",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "km",
@@ -108,7 +108,7 @@
           "pattern": "km_diff",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "",
@@ -188,7 +188,7 @@
           "pattern": "consumption_kWh",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Start Adresse",
@@ -275,7 +275,7 @@
           "pattern": "outside_temp_avg",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "max km/h",
@@ -294,7 +294,7 @@
             "200"
           ],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "max PS",
@@ -310,7 +310,7 @@
           "pattern": "power_max",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "min PS",
@@ -326,7 +326,7 @@
           "pattern": "power_min",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "Ø PS",
@@ -388,7 +388,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         }
       ],
       "targets": [
@@ -464,5 +464,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 32
+  "version": 33
 }
