@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
@@ -14,7 +14,7 @@
 	
 	$( function() {
 		$( "button" ).button();
-		
+	
 		$('.timepicker').timepicker({
 			timeFormat: 'HH:mm',
 			interval: 30,
@@ -36,10 +36,29 @@
 			$start = $j->{"SleepTimeSpanStart"};			
 			$end = $j->{"SleepTimeSpanEnd"};
 			$enable = $j->{"SleepTimeSpanEnable"};
+			$power = $j->{"Power"};
+			$Temperature = $j->{"Temperature"};
+			$Length = $j->{"Length"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
 			echo ("$('#checkboxSleep')[0].checked = $enable;\r\n");
+			
+			if ($power == "kw")
+				echo ("$('#radio_kw').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_hp').prop('checked', true);\r\n");
+				
+			if ($Temperature == "fahrenheit")
+				echo ("$('#radio_fahrenheit').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_celsius').prop('checked', true);\r\n");
+				
+			if ($Length == "mile")
+				echo ("$('#radio_mile').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_km').prop('checked', true);\r\n");
+			
 		}
 		?>
 	});
@@ -50,7 +69,10 @@
 		{
 		SleepTimeSpanStart: $(".startdate").val(), 
 		SleepTimeSpanEnd: $(".enddate").val(), 
-		SleepTimeSpanEnable: $("#checkboxSleep").is(':checked')
+		SleepTimeSpanEnable: $("#checkboxSleep").is(':checked'),
+		Power: $("input:radio[name ='power']:checked").val(),
+		Temperature: $("input:radio[name ='Temperature']:checked").val(),
+		Length: $("input:radio[name ='Length']:checked").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -63,8 +85,15 @@
 <br><br>
 <div>
 <table>
+<tr><td><b>Leistung:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
+<tr><td><b>Temperatur:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
+<!--
+<tr><td><b>Längenmaß:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+-->
 <tr><td><b>Sleeping:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
+
+<tr><td></td><td>&nbsp;</td></tr>
 <tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
 </table>
 </div>

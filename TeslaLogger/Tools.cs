@@ -194,8 +194,8 @@
                     string start = j["SleepTimeSpanEnd"];
                     string[] s = start.Split(':');
 
-                    stopSleepingHour = int.Parse(s[0]);
-                    stopSleepingMinute = int.Parse(s[1]);
+                    int.TryParse(s[0], out stopSleepingHour);
+                    int.TryParse(s[1], out stopSleepingMinute);
                 }
             }
             catch (Exception ex)
@@ -223,9 +223,34 @@
                     string start = j["SleepTimeSpanStart"];
                     string[] s = start.Split(':');
 
-                    startSleepingHour = int.Parse(s[0]);
-                    startSleepingMinutes = int.Parse(s[1]);
+                    int.TryParse(s[0], out startSleepingHour);
+                    int.TryParse(s[1], out startSleepingMinutes);
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+        }
+
+        internal static void GrafanaSettings(out string power, out string temperature, out string length)
+        {
+            power = "hp";
+            temperature = "celsius";
+            length = "km";
+
+            try
+            {
+                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
+                    return;
+
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                power = j["Power"];
+                temperature = j["Temperature"];
+                // length = j["Length"];
             }
             catch (Exception ex)
             {
