@@ -53,7 +53,6 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        x++;
                         Tools.Log("DB Version: " + DBHelper.GetVersion());
                         Tools.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
                         break;
@@ -240,15 +239,27 @@ namespace TeslaLogger
                                                                 break;
                                                             }
 
-                                                            if (x%10 == 0)
-                                                                Tools.Log("Waiting for car to go to sleep " + (x/10).ToString());
+                                                            if (x % 10 == 0)
+                                                            {
+                                                                Tools.Log("Waiting for car to go to sleep " + (x / 10).ToString());
+
+                                                                Tools.StartSleeping(out startSleepHour, out startSleepMinute);
+                                                                if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
+                                                                {
+                                                                    Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
+                                                                    currentState = TeslaState.GoSleep;
+                                                                    goSleepWithWakeup = true;
+                                                                    break;
+                                                                }
+                                                            }
 
                                                             System.Threading.Thread.Sleep(1000 * 6);
                                                         }
                                                     }
                                                     finally
                                                     {
-                                                        Tools.Log("Restart communication with Tesla Server!");
+                                                        if (!goSleepWithWakeup)
+                                                            Tools.Log("Restart communication with Tesla Server!");
                                                     }
                                                 }
                                             }

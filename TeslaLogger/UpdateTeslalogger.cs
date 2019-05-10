@@ -126,6 +126,10 @@ namespace TeslaLogger
             {
                 if (Tools.IsMono())
                 {
+                    string power;
+                    string temperature;
+                    string length; 
+                    Tools.GrafanaSettings(out power, out temperature, out length);
 
                     Tools.Log("Start Grafana update");
                     Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
@@ -145,6 +149,78 @@ namespace TeslaLogger
                         Tools.Log("Update: " + f);
                         String s = System.IO.File.ReadAllText(f);
                         s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+
+                        if (power == "kw")
+                        {
+                            if (f.EndsWith("Verbrauch.json"))
+                            {
+                                s = s.Replace("power as 'Leistung [PS]'", "power/1.35962 as 'Leistung [kW]'");
+                            }
+                            else if (f.EndsWith("Trip.json"))
+                            {
+                                s = s.Replace("max PS", "max kW");
+                                s = s.Replace("min PS", "min kW");
+                                s = s.Replace("Ø PS", "Ø kW");
+
+                                s = s.Replace(" power_max", "power_max/1.35962 as power_max");
+                                s = s.Replace(" power_min", "power_min/1.35962 as power_min");
+                                s = s.Replace(" power_avg", "power_avg/1.35962 as power_avg");
+                            }
+                        }
+
+                        if (temperature == "fahrenheit")
+                        {
+                            if (f.EndsWith("Laden.json"))
+                            {
+                                s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
+                            }
+                            else if (f.EndsWith("Trip.json"))
+                            {
+                                s = s.Replace("Ø °C", "Ø °F");
+
+                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");   
+                            }
+                            else if (f.EndsWith("Verbrauch.json"))
+                            {
+                                s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
+                            }
+                        }
+
+                        if (length == "mile")
+                        {
+                            if (f.EndsWith("Akku Trips.json"))
+                            {
+                                s = s.Replace("Start km", "Start mi");
+                                s = s.Replace("End km", "End mi");
+
+                                s = s.Replace("EndOdometer - StartOdometer AS kmDiff", "(EndOdometer - StartOdometer) / 1.609 AS kmDiff");
+                                s = s.Replace("StartOdometer,", " StartOdometer / 1.609 as StartOdometer,");
+                                s = s.Replace("EndOdometer,", " EndOdometer / 1.609 as EndOdometer,");
+                                s = s.Replace("100 AS MaxRange", "100 / 1.609 AS MaxRange");
+                                s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609 - StartOdometer/1.609) * 100 AS AVGConsumption");
+                            }
+                            else if (f.EndsWith("Degradation.json"))
+                            {
+                                s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
+                                s = s.Replace("odometer as 'km Stand [km]", "odometer / 1.609 as 'km Stand [km]");
+                                s = s.Replace("\"max\": \"550\"", "\"max\": \"350\"");
+                                s = s.Replace("\"min\": \"300\"", "\"min\": \"180\"");
+                            }
+                            else if (f.EndsWith("Laden.json"))
+                            {
+                                
+                            }
+                            else if (f.EndsWith("Trip.json"))
+                            {
+                                
+                            }
+                            else if (f.EndsWith("Verbrauch.json"))
+                            {
+                                
+                            }
+
+                        }
+
                         System.IO.File.WriteAllText(f, s);
                     }
 
