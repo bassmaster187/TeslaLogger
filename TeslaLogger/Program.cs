@@ -115,6 +115,12 @@ namespace TeslaLogger
                 //wh.GetEnergyChartData();
                 // wh.StartStreamThread(); // xxx
 
+                if (DBHelper.HasIncompleteTrips())
+                {
+                    DBHelper.UpdateAllDrivestateData();
+                }
+
+
                 while (true)
                 {
                     try

@@ -221,11 +221,12 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDriveStatistics(int startPos, int endPos)
+        private static void UpdateDriveStatistics(int startPos, int endPos, bool logging = false)
         {
             try
             {
-                Tools.Log("UpdateDriveStatistics");
+                if (logging)
+                    Tools.Log("UpdateDriveStatistics");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -254,11 +255,82 @@ namespace TeslaLogger
                         }
                     }
                 }
+
+                // If Endpos doesn't have an "ideal_battery_rage_km", it will be updated from the last valid dataset
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @endpos", con);
+                    cmd.Parameters.AddWithValue("@endpos", endPos);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        if (dr["ideal_battery_range_km"] == DBNull.Value)
+                        {
+                            DateTime dt1 = (DateTime)dr["Datum"];
+                            dr.Close();
+
+                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null order by id desc limit 1", con);
+                            cmd.Parameters.AddWithValue("@endpos", endPos);
+                            dr = cmd.ExecuteReader();
+
+                            if (dr.Read())
+                            {
+                                DateTime dt2 = (DateTime)dr["Datum"];
+                                TimeSpan ts = dt1 - dt2;
+
+                                object ideal_battery_range_km = dr["ideal_battery_range_km"];
+                                object battery_level = dr["battery_level"];
+
+                                if (ts.TotalSeconds < 120)
+                                {
+                                    dr.Close();
+
+                                    cmd = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @endpos", con);
+                                    cmd.Parameters.AddWithValue("@endpos", endPos);
+                                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                                    cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                                    cmd.ExecuteNonQuery();
+
+                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                }
+                                else
+                                {
+                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Tools.Log(ex.ToString());
             }
+        }
+
+        public static bool HasIncompleteTrips()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM trip where consumption_kWh is null limit 1", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "HasIncompleteTrips");
+            }
+
+            return false;
         }
 
         public static void UpdateAllDrivestateData()
@@ -277,7 +349,7 @@ namespace TeslaLogger
                         int StartPos = Convert.ToInt32(dr[0]);
                         int EndPos = Convert.ToInt32(dr[1]);
 
-                        DBHelper.UpdateDriveStatistics(StartPos, EndPos);
+                        DBHelper.UpdateDriveStatistics(StartPos, EndPos, false);
                     }
                     catch (Exception ex)
                     {
