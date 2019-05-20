@@ -359,7 +359,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    carSettings.Performance = oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
+                    carSettings.Performance = oc.Contains("PBT85") || oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
 
                     UpdateEfficiency();
 
@@ -463,8 +463,13 @@ namespace TeslaLogger
                 }
                 else if (carSettings.Battery == "BT85")
                 {
-                    car = "S 85 ?";
+                    car = "S 85";
                     eff = "0.200";
+                }
+                else if (carSettings.Battery == "PBT85")
+                {
+                    car = "S P85";
+                    eff = "0.210";
                 }
                 else if (carSettings.Battery == "BT70")
                 {
@@ -1296,6 +1301,9 @@ namespace TeslaLogger
                 d.Add("n", carSettings.Name);
                 d.Add("eff", carSettings.Wh_TR);
                 d.Add("oc", option_codes);
+
+                d.Add("db_eff", carSettings.DB_Wh_TR);
+                d.Add("db_eff_cnt", carSettings.DB_Wh_TR_count);
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
