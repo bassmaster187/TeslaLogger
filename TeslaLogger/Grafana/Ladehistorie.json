@@ -240,7 +240,7 @@
           "pattern": "MinuteDiff",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "locale"
         },
         {
           "alias": "",
@@ -329,5 +329,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 12
+  "version": 13
 }
