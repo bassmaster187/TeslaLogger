@@ -98,6 +98,7 @@ namespace TeslaLogger
                     wh.IsDriving(true);
                 }
 
+                DBHelper.GetEconomy_Wh_km(wh);
                 wh.DeleteWakeupFile();
 
                 Tools.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
@@ -115,11 +116,7 @@ namespace TeslaLogger
                 //wh.GetEnergyChartData();
                 // wh.StartStreamThread(); // xxx
 
-                if (DBHelper.HasIncompleteTrips())
-                {
-                    DBHelper.UpdateAllDrivestateData();
-                }
-
+                DBHelper.UpdateIncompleteTrips();
 
                 while (true)
                 {
