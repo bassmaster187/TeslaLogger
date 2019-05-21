@@ -98,33 +98,33 @@
   }
   </script>
   </head>
-  <body>
-  <button onclick="window.location.href='logfile.php';">Logfile</button>
-  <button onclick="BackgroudRun('restartlogger.php', 'Reboot!');">Restart</button>
-  <button onclick="BackgroudRun('update.php', 'Reboot!');">Update</button>
-  <button onclick="window.location.href='backup.php';">Backup</button>
-  <button onclick="window.location.href='geofencing.php';">Geofence</button>
-  <button onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
-  <button onclick="BackgroudRun('gosleep.php', 'Sleep!');">Sleep</button>
-  <button onclick="window.location.href='settings.php';">Settings</button>
-  
-
+  <body style="padding-top: 5px; padding-left: 10px;">
+  <button style="width:120px;" onclick="window.location.href='logfile.php';">Logfile</button>
+  <button style="width:120px;" onclick="BackgroudRun('restartlogger.php', 'Reboot!');">Restart</button>
+  <button style="width:120px;" onclick="BackgroudRun('update.php', 'Reboot!');">Update</button>
+  <button style="width:120px;" onclick="window.location.href='backup.php';">Backup</button>
+  <button style="width:120px;" onclick="window.location.href='geofencing.php';">Geofence</button>
+  <button style="width:120px;" onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
+  <button style="width:120px;" onclick="BackgroudRun('gosleep.php', 'Sleep!');">Sleep</button>
+  <button style="width:120px;" onclick="window.location.href='settings.php';">Settings</button>
+  <br />
+  <br />
   <div id="content">
-  <h1>Fahrzeuginfo:</h1>
-  
-  <table style="float: left;">
-  <tr><td width="140px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
+  <table style="float:left;">
+  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;">Fahrzeuginfo</td></thead>
+  <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
   <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
   <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
   </table>
   
-  <table style="float: left;">
-  <tr><td width="140px"><b>Trip Start:</b></td><td><span id="trip_start"></span></td></tr>
+  <table style="float:left;">
+  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;">Letzter Trip</td></thead>
+  <tr><td width="120px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
   <tr><td><b>Dauer:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
   <tr><td><b>Distanz:</b></td><td><span id="trip_distance">---</span> km</td></tr>
-  <tr><td><b>Verbraucht:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
+  <tr><td><b>Verbrauch:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
   <tr><td><b>Ø Verbrauch:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
   <tr><td><b>Max km/h / PS:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
   </table>
@@ -156,9 +156,8 @@ function getTeslaloggerVersion($path)
 ?>
   
   <?PHP
-  echo(file_get_contents("http://teslalogger.de/teslalogger_content_index.php"));
+  echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php"));
   ?>
   </div>
-  <br><br>	
   </body>
 </html>
