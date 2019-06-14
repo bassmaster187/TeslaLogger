@@ -107,6 +107,8 @@ namespace TeslaLogger
                 UpdateTeslalogger.Start(wh);
                 UpdateTeslalogger.UpdateGrafana(wh);
 
+                DBHelper.currentJSON.current_car_version = DBHelper.GetLastCarVersion();
+
                 MQTTClient.StartMQTTClient();
                 
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
