@@ -34,6 +34,13 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
                 }
 
+                if (!DBHelper.TableExists("car_version"))
+                {
+                    Tools.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                }
+
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView(wh);

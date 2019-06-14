@@ -1039,6 +1039,8 @@ namespace TeslaLogger
                         Tools.Log("Car Version: " + car_version);
                         DBHelper.currentJSON.current_car_version = car_version;
 
+                        DBHelper.SetCarVersion(car_version);
+
                         TaskerWakeupfile(true);
                     }
                 }

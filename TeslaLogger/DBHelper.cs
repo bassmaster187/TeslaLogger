@@ -682,6 +682,51 @@ namespace TeslaLogger
             return 0;
         }
 
+        internal static void SetCarVersion(string car_version)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version) values (@StartDate, @version)", con);
+                    cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@version", car_version);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, car_version);
+            }
+        }
+
+        internal static string GetLastCarVersion()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select version from car_version order by id desc limit 1", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        return dr[0].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "GetLastCarVersion");
+                Tools.Log(ex.ToString());
+            }
+
+            return "";
+        }
+
+
+
         public static string GetVersion()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -696,7 +741,20 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        
+        public static bool TableExists(string table)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.tables where table_name = '" + table + "'", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                    return true;
+            }
+
+            return false;
+        }
+
 
         public static bool ColumnExists(string table, string column)
         {
