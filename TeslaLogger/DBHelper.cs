@@ -96,6 +96,8 @@ namespace TeslaLogger
             currentJSON.current_charger_voltage = 0;
             currentJSON.current_charger_phases = 0;
             currentJSON.current_charger_actual_current = 0;
+
+            Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(false));
         }
 
         internal static void GetEconomy_Wh_km(WebHelper wh)
@@ -785,6 +787,138 @@ namespace TeslaLogger
             {
                 Tools.ExceptionWriter(ex, sql);
                 throw;
+            }
+        }
+
+        public static void CheckForInterruptedCharging(bool logging)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(@"SELECT chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
+                      charging_End.charge_energy_added,
+                      charging.ideal_battery_range_km AS SOC,
+                      charging_End.ideal_battery_range_km AS EndSOC,
+                      charging_End.battery_level as End_battery_level,
+                      pos.odometer
+                        FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN
+                         pos ON chargingstate.pos = pos.id
+                         LEFT OUTER JOIN
+                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
+                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
+                    and charging.charge_energy_added > 1
+                    order by StartDate desc", con);
+
+                    double old_odometer = 0;
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        double odometer = (double)dr["odometer"];
+                        int chargingstate_id = (int)dr["chargingstate_id"];
+
+                        if (old_odometer != odometer)
+                        {
+                            CombineChargingifNecessary(chargingstate_id, odometer, logging);
+                            old_odometer = odometer;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "");
+                throw;
+            }
+        }
+
+        private static void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging)
+        {
+            if (logging)
+                Tools.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(@"SELECT        chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
+                      charging_End.charge_energy_added,
+                      charging.ideal_battery_range_km AS SOC,
+                      charging_End.ideal_battery_range_km AS EndSOC,
+                      charging_End.battery_level as End_battery_level,
+                      pos.odometer, chargingstate.StartChargingID, chargingstate.EndChargingID
+                        FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN
+                         pos ON chargingstate.pos = pos.id
+                         LEFT OUTER JOIN
+                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
+                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
+                    and odometer = @odometer and chargingstate.id < @chargingstate_id 
+                    order by StartDate desc", con);
+
+                cmd.Parameters.AddWithValue("@odometer", odometer);
+                cmd.Parameters.AddWithValue("@chargingstate_id", chargingstate_id);                
+
+                int newId = 0;
+                DateTime newStartdate = DateTime.MinValue;
+                int newStartChargingID = 0;
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    newId = (int)dr["chargingstate_id"];
+                    newStartdate = (DateTime)dr["StartDate"];
+                    newStartChargingID = (int)dr["StartChargingID"];
+
+                    DeleteChargingstate(newId);
+                    UpdateChargingstate(chargingstate_id, newStartdate, newStartChargingID);
+                }
+            }
+        }
+
+        private static void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID)
+        {
+            try
+            {
+                Tools.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID}");
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(@"update chargingstate set StartDate=@StartDate, StartChargingID=@StartChargingID where id = @id", con);
+                    cmd.Parameters.AddWithValue("@id", chargingstate_id);
+                    cmd.Parameters.AddWithValue("@StartDate", StartDate);
+                    cmd.Parameters.AddWithValue("@StartChargingID", StartChargingID);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, chargingstate_id.ToString());
+                Tools.Log(ex.ToString());
+            }
+        }
+
+        private static void DeleteChargingstate(int chargingstate_id)
+        {
+            try
+            {
+                Tools.Log("Delete Chargingstate " + chargingstate_id.ToString());
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(@"delete from chargingstate where id = @id", con);
+                    cmd.Parameters.AddWithValue("@id", chargingstate_id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, chargingstate_id.ToString());
+                Tools.Log(ex.ToString());
             }
         }
     }
