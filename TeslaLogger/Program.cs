@@ -112,6 +112,7 @@ namespace TeslaLogger
                 MQTTClient.StartMQTTClient();
                 
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
+                Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(true));
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
 
