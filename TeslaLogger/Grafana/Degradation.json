@@ -7,14 +7,29 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
         "name": "Annotations & Alerts",
+        "showIn": 0,
         "type": "dashboard"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Firmware",
+        "rawQuery": "SELECT UNIX_TIMESTAMP(StartDate) as time_sec, version as text FROM car_version WHERE $__timeFilter(StartDate) order by id\n  ",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 8,
   "links": [],
   "panels": [
     {
@@ -171,5 +186,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 12
+  "version": 17
 }
