@@ -12,6 +12,7 @@ namespace TeslaLogger
         public static CurrentJSON currentJSON = new CurrentJSON();
 
         public static bool current_is_preconditioning = false;
+        public static bool current_is_sentry_mode = false;
 
         public static string DBConnectionstring
         {

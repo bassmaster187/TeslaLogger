@@ -26,6 +26,7 @@ namespace TeslaLogger
         public CarSettings carSettings = null;        
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
+        public bool is_sentry_mode = false;
         static Geofence geofence;
         bool stopStreaming = false;
         string elevation = "";
@@ -1022,6 +1023,28 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+
+                if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
+                {
+                    try
+                    {
+                        bool sentry_mode = (bool)r2["sentry_mode"];
+
+                        if (sentry_mode != is_sentry_mode)
+                        {
+                            is_sentry_mode = sentry_mode;
+                            Tools.Log("sentry_mode: " + sentry_mode);
+                        }
+
+                        DBHelper.current_is_sentry_mode = sentry_mode;
+
+
+                    } catch (Exception ex)
+                    {
+                        Tools.ExceptionWriter(ex, resultContent);
+                        Tools.Log(ex.Message);
+                    }
+                }
 
                 if (r2["odometer"] == null)
                 {
