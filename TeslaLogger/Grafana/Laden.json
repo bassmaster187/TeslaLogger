@@ -51,13 +51,17 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "charger_voltage",
+          "alias": "Ladespannung [V]",
           "fill": 0,
           "yaxis": 2
         },
         {
-          "alias": "ideal_battery_range_km",
+          "alias": "Reichweite [km]",
           "yaxis": 2
+        },
+        {
+          "alias": "Ladespannung [V]",
+          "steppedLine": true
         }
       ],
       "spaceLength": 10,
@@ -220,5 +224,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 11
+  "version": 14
 }
