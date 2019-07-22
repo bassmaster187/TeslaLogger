@@ -60,6 +60,7 @@
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />

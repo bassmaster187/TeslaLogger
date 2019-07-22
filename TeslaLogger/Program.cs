@@ -158,6 +158,8 @@ namespace TeslaLogger
                                         Tools.Log(res);
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
+
+                                        System.Threading.Thread.Sleep(60000);
                                     }
                                     else
                                     {
