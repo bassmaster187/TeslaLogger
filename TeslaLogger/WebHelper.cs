@@ -800,7 +800,6 @@ namespace TeslaLogger
             */
         }
 
-
         public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude)
         {
             string url = "";
@@ -811,16 +810,40 @@ namespace TeslaLogger
                 a = geofence.GetPOI(latitude, longitude);
                 if (a != null)
                     return a.name;
+
+                String value = GeocodeCache.Instance.Search(latitude, longitude);
+                if (value != null)
+                    return value;
+
                 Tools.SetThread_enUS();
 
                 WebClient webClient = new WebClient();
 
-                webClient.Headers.Add("User-Agent: TeslaLogger");
+                webClient.Headers.Add("User-Agent: TL 1.1");
                 webClient.Encoding = Encoding.UTF8;
-                url = "http://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=";
+                
+                if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                    url = "http://open.mapquestapi.com/nominatim/v1/reverse.php";
+                else
+                    url = "http://nominatim.openstreetmap.org/reverse";
+                
+                url += "?format=jsonv2&lat=";
                 url += latitude.ToString();
                 url += "&lon=";
                 url += longitude.ToString();
+
+                if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                {
+                    url += "&key=";
+                    url += ApplicationSettings.Default.MapQuestKey;
+                }
+                else
+                {
+                    url += "&email=mail";
+                    url += "@";
+                    url += "teslalogger";
+                    url += ".de";
+                }
 
                 resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
                 
@@ -873,6 +896,8 @@ namespace TeslaLogger
 
                 System.Diagnostics.Debug.WriteLine(url + "\r\n" + adresse);
 
+                GeocodeCache.Instance.Insert(latitude, longitude, adresse);
+
                 return adresse;
             }
             catch (Exception ex)
@@ -898,6 +923,8 @@ namespace TeslaLogger
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    System.Threading.Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+
                     var lat = (double)dr[0];
                     var lng = (double)dr[1];
                     int id = (int)dr[2];

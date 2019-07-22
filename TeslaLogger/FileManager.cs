@@ -16,7 +16,8 @@
         GeofenceFilename,
         GeofencePrivateFilename,
         NewCredentialsFilename,
-        TeslaLoggerExeConfigFilename
+        TeslaLoggerExeConfigFilename,
+        GeocodeCache
     }
 
     /// <summary>
@@ -41,7 +42,8 @@
                 { TLFilename.GeofenceFilename,          "geofence.csv"},
                 { TLFilename.GeofencePrivateFilename,   "geofence-private.csv"},
                 { TLFilename.NewCredentialsFilename,    "new_credentials.json"},
-                { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"}
+                { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
+                { TLFilename.GeocodeCache,              "GeocodeCache.xml"}
             };
         }
 

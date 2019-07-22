@@ -221,6 +221,8 @@ namespace TeslaLogger
         {
             try
             {
+                System.Threading.Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
@@ -244,6 +246,8 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@id", posid);
                                     cmd2.Parameters.AddWithValue("@adress", task.Result);
                                     cmd2.ExecuteNonQuery();
+
+                                    GeocodeCache.Instance.Write();
                                 }
                             }
                             catch (Exception ex)
