@@ -34,6 +34,10 @@ namespace TeslaLogger
         public DateTime lastTokenRefresh = DateTime.Now;
         public DateTime lastIsDriveTimestamp = DateTime.Now;
 
+        static int MapQuestCount = 0;
+        static int NominatimCount = 0;
+
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -809,11 +813,17 @@ namespace TeslaLogger
                 Address a = null;
                 a = geofence.GetPOI(latitude, longitude);
                 if (a != null)
+                {
+                    Tools.Log("Reverse geocoding by Geofence");
                     return a.name;
+                }
 
                 String value = GeocodeCache.Instance.Search(latitude, longitude);
                 if (value != null)
+                {
+                    Tools.Log("Reverse geocoding by Cache");
                     return value;
+                }
 
                 Tools.SetThread_enUS();
 
@@ -898,6 +908,17 @@ namespace TeslaLogger
 
                 GeocodeCache.Instance.Insert(latitude, longitude, adresse);
 
+                if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                {
+                    MapQuestCount++;
+                    Tools.Log("Reverse geocoding by MapQuest: " + MapQuestCount);
+                }
+                else
+                {
+                    NominatimCount++;
+                    Tools.Log("Reverse geocoding by Nominatim" + NominatimCount);
+                }
+
                 return adresse;
             }
             catch (Exception ex)
@@ -930,20 +951,94 @@ namespace TeslaLogger
                     int id = (int)dr[2];
                     var adress = ReverseGecocodingAsync(lat, lng);
                     var altitude = AltitudeAsync(lat, lng);
+                    UpdateAddressByPosId(id, adress.Result, altitude.Result);
+                }
+            }
+        }
 
-                    using (SqlConnection con2 = new SqlConnection(DBHelper.DBConnectionstring))
+        private static void UpdateAddressByPosId(int id, string address, double altitude)
+        {
+            try
+            {
+                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con2.Open();
+                    MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address, altitude=@altitude where id = @id", con2);
+                    cmd2.Parameters.AddWithValue("@id", id);
+                    cmd2.Parameters.AddWithValue("@address", address);
+                    cmd2.Parameters.AddWithValue("@altitude", altitude);
+                    cmd2.ExecuteNonQuery();
+
+                    System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + address);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "UpdateAddressByPosId");
+            }
+        }
+
+        public void UpdateAllEmptyAddresses()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(@"SELECT  
+        pos_start.address AS Start_address,
+        pos_end.address AS End_address,
+        pos_start.id AS PosStartId,
+        pos_start.lat AS PosStartLat,
+        pos_start.lng AS PosStartLng,
+        pos_end.id AS PosEndId,
+        pos_end.lat AS PosEndtLat,
+        pos_end.lng AS PosEndLng
+FROM
+        drivestate
+        JOIN pos pos_start ON drivestate.StartPos = pos_start.id
+        JOIN pos pos_end ON drivestate.EndPos = pos_end.id
+    WHERE
+        ((pos_end.odometer - pos_start.odometer) > 0.1) and (pos_start.address IS null or pos_end.address IS null or pos_start.address = '' or pos_end.address = '')", con);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    System.Threading.Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                    try
                     {
-                        con2.Open();
-                        SqlCommand cmd2 = new SqlCommand("update pos set address=@address, altitude=@altitude where id = @id", con2);
-                        cmd2.Parameters.AddWithValue("@id", id);
-                        cmd2.Parameters.AddWithValue("@address", adress.Result);
-                        cmd2.Parameters.AddWithValue("@altitude", altitude.Result);
-                        cmd2.ExecuteNonQuery();
+                        if (!(dr["Start_address"] != DBNull.Value && dr["Start_address"].ToString().Length > 0))
+                        {
+                            int id = (int)dr["PosStartId"];
+                            var lat = (double)dr["PosStartLat"];
+                            var lng = (double)dr["PosStartLng"];
+                            var address = ReverseGecocodingAsync(lat, lng);
+                            var altitude = AltitudeAsync(lat, lng);
 
-                        System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + adress.Result);
+                            string addressResult = address.Result;
+                            if (!String.IsNullOrEmpty(addressResult))
+                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                        }
+
+                        if (!(dr["End_address"] != DBNull.Value && dr["End_address"].ToString().Length > 0))
+                        {
+                            int id = (int)dr["PosEndId"];
+                            var lat = (double)dr["PosEndtLat"];
+                            var lng = (double)dr["PosEndLng"];
+                            var address = ReverseGecocodingAsync(lat, lng);
+                            var altitude = AltitudeAsync(lat, lng);
+
+                            string addressResult = address.Result;
+                            if (!String.IsNullOrEmpty(addressResult))
+                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.ExceptionWriter(ex, "");
                     }
                 }
             }
+
+            GeocodeCache.Instance.Write();
         }
 
         public void UpdateAllPOIAddresses()

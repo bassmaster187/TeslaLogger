@@ -113,6 +113,7 @@ namespace TeslaLogger
                 
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(true));
+                Task.Factory.StartNew(() => wh.UpdateAllEmptyAddresses());
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
 
@@ -120,6 +121,7 @@ namespace TeslaLogger
                 // wh.StartStreamThread(); // xxx
 
                 DBHelper.UpdateIncompleteTrips();
+                
 
                 while (true)
                 {
