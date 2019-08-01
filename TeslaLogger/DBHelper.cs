@@ -1,9 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
@@ -215,6 +219,135 @@ namespace TeslaLogger
             currentJSON.current_driving = false;
             currentJSON.current_speed = 0;
             currentJSON.current_power = 0;
+
+            UpdateTripElevation(StartPos, MaxPosId);
+        }
+
+        public static void UpdateTripElevation(int startPos, int maxPosId)
+        {
+            if (startPos == 0 || maxPosId == 0)
+                return;
+
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                return;
+
+            Tools.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
+
+            String inhalt = "";
+            try
+            {
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id > {startPos} and id < {maxPosId} and speed > 0 and altitude is null and lat is not null and lng is not null and lat > 0 and lng > 0 order by id", DBConnectionstring);
+                da.Fill(dt);
+
+                if (dt.Rows.Count < 2)
+                    return;
+
+                Tools.Log($"UpdateTripElevation Count:{dt.Rows.Count}");
+                int count = 500;
+                for (int start = 0; start < dt.Rows.Count; start+=count)
+                {
+                    int end = start + count;
+                    end = Math.Min(end, dt.Rows.Count);
+
+                    UpdateTripElevationSubcall(dt, start, end);
+                    System.Threading.Thread.Sleep(5000);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, inhalt);
+                Tools.Log(ex.ToString());
+            }
+
+            Tools.Log($"UpdateTripElevation finished start:{startPos} ende:{maxPosId}");
+        }
+
+        private static void UpdateTripElevationSubcall(DataTable dt, int Start, int End)
+        {
+            string resultContent = null;
+            string url = null;
+
+            try
+            {
+                Tools.Log($"UpdateTripElevationSubcall start: {Start} end: {End} count:{dt.Rows.Count}");
+
+                var ci = CultureInfo.CreateSpecificCulture("en-US");
+                StringBuilder sb = new StringBuilder();
+                sb.Append("http://open.mapquestapi.com/elevation/v1/profile?key=");
+                sb.Append(ApplicationSettings.Default.MapQuestKey);
+                sb.Append("&latLngCollection=");
+
+                bool first = true;
+                for (int p = Start; p < End; p++)
+                {
+                    DataRow dr = dt.Rows[p];
+                    if (!first)
+                        sb.Append(",");
+
+                    first = false;
+
+                    double lat = (double)dr[1];
+                    double lng = (double)dr[2];
+
+                    sb.Append(lat.ToString(ci));
+                    sb.Append(",");
+                    sb.Append(lng.ToString(ci));
+                    // sb.Append("\r\n");
+                }
+
+                url = sb.ToString();
+
+                WebClient webClient = new WebClient();
+
+                webClient.Headers.Add("User-Agent: TeslaLogger");
+                webClient.Encoding = Encoding.UTF8;
+                resultContent = webClient.DownloadStringTaskAsync(new Uri(url)).Result;
+
+                dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                System.Diagnostics.Debug.WriteLine("decode");
+
+                if (!(resultContent.Contains("elevationProfile") && resultContent.Contains("shapePoints")))
+                {
+                    Tools.Log("Mapquest Response: " + resultContent);
+                    Tools.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
+                    return;
+                }
+
+                dynamic sp = j["shapePoints"];
+
+                object[] e = j["elevationProfile"];
+                for (int i = 0; i < e.Length; i++)
+                {
+                    dynamic ep = e[i];
+                    int height = ep["height"];
+                    if (height == -32768) // no height data for this point
+                        continue;
+
+                    decimal lat = sp[i * 2];
+                    decimal lng = sp[i * 2 + 1];
+
+                    DataRow[] drs = dt.Select($"lat={lat} and lng={lng}");
+                    foreach (DataRow dr in drs)
+                    {
+                        string sql = null;
+                        try
+                        {
+                            sql = $"update pos set altitude={height} where id={dr[0]}";
+                            ExecuteSQLQuery(sql);
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.ExceptionWriter(ex, sql);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Log("Mapquest Response: " + resultContent);
+                Tools.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
+            }
         }
 
         public static void UpdateAddress(int posid)

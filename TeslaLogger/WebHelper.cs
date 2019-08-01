@@ -1039,6 +1039,36 @@ FROM
             }
 
             GeocodeCache.Instance.Write();
+
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(@"SELECT pos.id, lat, lng FROM chargingstate join pos on chargingstate.Pos = pos.id where address IS null or pos.id = ''", con);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    System.Threading.Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                    try
+                    {
+                        int id = (int)dr[0];
+                        var lat = (double)dr[1];
+                        var lng = (double)dr[2];
+                        var address = ReverseGecocodingAsync(lat, lng);
+                        var altitude = AltitudeAsync(lat, lng);
+
+                        string addressResult = address.Result;
+                        if (!String.IsNullOrEmpty(addressResult))
+                            UpdateAddressByPosId(id, addressResult, altitude.Result);
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.ExceptionWriter(ex, "");
+                    }
+                }
+            }
+
+            GeocodeCache.Instance.Write();
         }
 
         public void UpdateAllPOIAddresses()

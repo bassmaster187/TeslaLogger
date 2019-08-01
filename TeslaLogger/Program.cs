@@ -39,6 +39,8 @@ namespace TeslaLogger
             {
                 Tools.SetThread_enUS();
 
+                // Task.Factory.StartNew(() => DBHelper.UpdateTripElevation(1, DBHelper.GetMaxPosid())); // get elevation for all points
+
                 Tools.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Tools.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
                 Tools.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
