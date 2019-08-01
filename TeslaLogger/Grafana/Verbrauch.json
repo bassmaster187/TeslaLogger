@@ -65,6 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -102,12 +103,9 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "Höhe",
-          "fill": 0,
-          "yaxis": 2
-        },
-        {
           "alias": "Höhe [m]",
+          "fill": 0,
+          "nullPointMode": "connected",
           "yaxis": 2
         }
       ],
@@ -289,8 +287,6 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
-    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -320,5 +316,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 47
+  "version": 53
 }
