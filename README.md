@@ -20,9 +20,6 @@ http://raspberry/admin/password.php
 
 Enter the same credentials as you use in your teslaaccount or app.
 
-# Donations:
-http://paypal.me/ChristianPogea
-
 ## Dashboard
 http://raspberry:3000
 
@@ -37,6 +34,12 @@ http://raspberry/admin/
 http://teslalogger.de/handbuch.php
 
 Translations are welcome :-)
+
+# Donations:
+http://paypal.me/ChristianPogea
+
+You can also use my referral code to buy a tesla: 
+http://ts.la/christian7267
 
 # Screenshots
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch.png)
