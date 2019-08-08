@@ -7,6 +7,24 @@ You can download the Raspberry image here: https://teslalogger.de/teslalogger201
 If you want to purchase a ready to go Raspberry PI 3B with TeslaLogger installed, send me an e-email: mail@pogea.de
 120€ shipped to Europa / $150 shipped to USA.
 
+# Configuration
+Connect your Raspberry PI with your router with a network cable and turn in on.
+Within 2-3 minutes the Raspberry should show up in you network.
+
+## Enter your Tesla crendentials
+Use your browser to go to:
+http://raspberry/admin/password.php 
+
+Enter the same credentials as you use in your teslaaccount or app.
+
+## Dashboard
+http://raspberry:3000
+Username: admin
+Passwort: teslalogger
+
+## Admin Panel
+http://raspberry/admin/
+
 # German maual
 http://teslalogger.de/handbuch.php
 Translations are welcome :-)
