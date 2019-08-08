@@ -13,13 +13,16 @@ Within 2-3 minutes the Raspberry should show up in you network.
 
 ## Enter your Tesla crendentials
 Use your browser to go to:
+
 http://raspberry/admin/password.php 
 
 Enter the same credentials as you use in your teslaaccount or app.
 
 ## Dashboard
 http://raspberry:3000
+
 Username: admin
+
 Passwort: teslalogger
 
 ## Admin Panel
@@ -27,6 +30,7 @@ http://raspberry/admin/
 
 # German maual
 http://teslalogger.de/handbuch.php
+
 Translations are welcome :-)
 
 # Screenshots
