@@ -7,6 +7,10 @@ You can download the Raspberry image here: https://teslalogger.de/teslalogger201
 If you want to purchase a ready to go Raspberry PI 3B with TeslaLogger installed, send me an e-email: mail@pogea.de
 120€ shipped to Europa / $150 shipped to USA.
 
+# German maual
+http://teslalogger.de/handbuch.php
+Translations are welcome :-)
+
 # Screenshots
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch.png)
 
