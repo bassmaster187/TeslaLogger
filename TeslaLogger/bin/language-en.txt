@@ -111,3 +111,16 @@ Online=Online
 #Visited.json
 Visited=Visited
 
+#web
+Fahrzeuginfo=Car Info
+Status=Status
+Typical Range=Typical Range
+KM Stand=Odometer
+Car Version=Car Version
+Letzter Trip=Last Trip
+Dauer=Duration
+Distanz=Distance
+Verbrauch=Consumption
+Ø Verbrauch=Ø Consumption
+Max km/h=Max kph
+PS=PS
