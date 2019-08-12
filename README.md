@@ -30,10 +30,11 @@ Passwort: teslalogger
 ## Admin Panel
 http://raspberry/admin/
 
-# German maual
+# German manual
 http://teslalogger.de/handbuch.php
 
 Translations are welcome :-)
+Please contact us beforehand to allow a coordinated approach for translations.
 
 # Donations:
 http://paypal.me/ChristianPogea
