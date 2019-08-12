@@ -117,7 +117,7 @@ Online=Online
 #Visited.json
 Visited=Visited
 
-#web
+#index.php
 Fahrzeuginfo=Car Info
 Status=Status
 Typical Range=Typical Range
@@ -129,9 +129,18 @@ Distanz=Distance
 Max km/h=Max kph
 PS=PS
 
+#password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
 Bitte Tesla Account Zugangsdaten eingeben=Please enter your Tesla account credentials
 Email=Email
 Passwort=Password
 Passwort wiederholen=Repeate Password
 Speichern=Save
+
+#settings.php
+Zugangsdaten=Credentials
+Language=Language
+Leistung=Power
+Temperatur=Temperature
+Längenmaß=Unit of length
+Schlafen=Sleeping
