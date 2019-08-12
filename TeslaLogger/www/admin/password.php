@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="de">
+<?php
+require("language.php");
+?>
+<html lang="<?php echo $json_data["Language"]; ?>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Tesla Zugangsdaten</title>
+    <title><?php t("Teslalogger Tesla Zugangsdaten"); ?></title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -35,10 +38,10 @@
 
 <div>
 <table>
-Bitte Tesla Account Zugangsdaten eingeben:
-<tr><td><b>Email:</b></td><td><input id="email" type="text" autocomplete="new-password"  /></td></tr>
-<tr><td>Passwort:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr><td>Passwort wiederholen:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
-<tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
+<?php t("Bitte Tesla Account Zugangsdaten eingeben"); ?>:
+<tr><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password"  /></td></tr>
+<tr><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
+<tr><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+<tr><td></td><td><button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
 </table>
 </div>
