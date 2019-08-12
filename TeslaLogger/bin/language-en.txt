@@ -1,0 +1,110 @@
+#Akku Trips.json
+Akku Trips=Akku Trips
+Start Trip=Start Trip
+End Trip=End Trip
+Time=Date
+StartSOC=StartSOC
+EndSOC=EndSOC
+SOC diff=SOC diff
+Start km=Start km
+End km=End km
+Start mi=Start mi
+End mi=End mi
+kmDiff=kmDiff
+Max Range=Max Range
+Ø Verbrauch=Ø Consumption
+Tage=Days
+
+#Degradation.json
+Degradation=Degradation
+Maximalreichweite[km]=Maxrange [km]
+Maximalreichweite [mi]=Maxrange [mi]
+km Stand [km]=Odometer [km]
+mi Stand [mi]=Odometer [mi]
+Odometer [mi]=
+
+#Ladehistorie.json
+Ladehistorie=Charging History
+Startdatum=Start Date
+Enddatum=End Date
+geladen kWh=kWh Charged
+km Stand=Odometer
+Adresse=Address
+TR km Start=TR km Start
+TR km Ende=TR km End
+SOC Ende=SOC End
+100% TR=100% TR
+Minuten=Minutes
+TR mi Start=TR mi Start
+TR mi Ende=TR mi End
+
+#Ladestatistik.json
+Ladestatistik=Charging Statistics
+Letzte Ladung=Last Charging
+Ort=Address
+Ø geladen kWh=Ø Charged kWh
+Ladezeit h=Charge Duration h
+Ø SOC=Ø SOC
+Max SOC=Max SOC
+Anzahl Ladungen=Charging Count
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=SOC Charging Statistics
+SOC [%]=SOC [%]
+
+#Laden.json
+Laden=Charging
+Ladespannung [V]=Charging Voltage [V]
+Reichweite [mi]=Range [mi]
+Leistung [kW]=Power [kW]
+Phasen=Phases
+Stromstärke [A]=Current [A]
+Angefordert [A]=Requested [A]
+Pilot [A]=Pilot [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
+TR mi Verlust=TR mi Lost
+kWh Verlust=kWh Lost
+Eur Verlust=Eur Lost
+
+#Trip.json
+Start=Start
+Ende=End
+Start Adresse=Start Address
+Ziel Adresse=Destination Address
+Ø Verbrauch kWh=Ø Consumption kWh
+Verbraucht kWh=Consumed kWh
+Dauer Min=Duration Min
+mi=mi
+Ø °C=Ø °C
+max mph=Max mph
+max PS=Max HP
+min PS=Min HP
+Ø PS=Ø HP
+Ø mph=Ø mph
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Timespan Hours
+TR mi Verlust pro Stunde=TR mi Lost per Hour
+mi Stand=Odometer
+
+#Vampir Drain.json
+Standby Stunden=Standby Hours
+Standby=Standby
+
+#Verbrauch.json
+Verbrauch=Consumption
+Höhe [m]=Altitude [m]
+Altitude [m]=Altitude [m]
+Geschwindigkeit [mph]=Speed [mph]
+Leistung [PS]=Power [HP]
+Außentemperatur [°C]=Outside Temperature [°C]
+
+Laden fertig=Charging Finished
+Schlafen=Sleeping
+Online=Online
+
+#Visited.json
+Visited=Visited
+
