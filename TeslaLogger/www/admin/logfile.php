@@ -1,5 +1,5 @@
 <?PHP
-	$output  = shell_exec('tail -n150 /etc/teslalogger/nohup.out');
+	$output  = shell_exec('tail -n300 /etc/teslalogger/nohup.out');
 	if ($output === false) {
         // Handle the error
 		echo "error";
@@ -13,6 +13,9 @@
 	$output = str_replace("Error: Cloning into '/etc/teslalogger/git'...","...", $output);
 	
 	$output = str_replace("Rebooting","<b>Rebooting</b>", $output);
+	
+	$output = str_replace("Key","<b>Key</b>", $output);
+	$output = str_replace("not translated!","<b>not translated!</b>", $output);
 	
 	$output = preg_replace("/(.*(Exception|Error).*)/", "<font color='red'>$1</font>", $output);
 	$output = preg_replace("/(state: [\w\.\/\-]+)/", "<b>$1</b>", $output);

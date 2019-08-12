@@ -359,7 +359,7 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM test.pos where altitude > 0", con);
+                    MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM pos where altitude > 0", con);
                     startid = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 

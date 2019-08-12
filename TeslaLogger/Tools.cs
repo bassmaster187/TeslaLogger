@@ -233,11 +233,12 @@
             }
         }
 
-        internal static void GrafanaSettings(out string power, out string temperature, out string length)
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language)
         {
             power = "hp";
             temperature = "celsius";
             length = "km";
+            language = "de";
 
             try
             {
@@ -251,6 +252,7 @@
                 power = j["Power"];
                 temperature = j["Temperature"];
                 length = j["Length"];
+                language = j["Language"];
             }
             catch (Exception ex)
             {

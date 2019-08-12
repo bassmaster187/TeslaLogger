@@ -113,7 +113,7 @@
         /// will write the file in / (root)
         /// </summary>
         /// <returns>the path where the application execute is located</returns>
-        private static string GetExecutingPath()
+        public static string GetExecutingPath()
         {
             //System.IO.Directory.GetCurrentDirectory() is not returning the current path of the assembly
 
