@@ -69,6 +69,7 @@ kWh Verlust=kWh Lost
 Eur Verlust=Eur Lost
 
 #Trip.json
+Trip=Trip
 Start=Start
 Ende=End
 Start Adresse=Start Address
@@ -78,6 +79,7 @@ Verbraucht kWh=Consumed kWh
 Dauer Min=Duration Min
 mi=mi
 Ø °C=Ø °C
+Ø °F=Ø °F
 max mph=Max mph
 max PS=Max HP
 min PS=Min HP
@@ -90,6 +92,7 @@ TR mi Verlust pro Stunde=TR mi Lost per Hour
 mi Stand=Odometer
 
 #Vampir Drain.json
+Vampir Drain=Vampir Drain
 Standby Stunden=Standby Hours
 Standby=Standby
 
