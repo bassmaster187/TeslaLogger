@@ -79,6 +79,7 @@
 		Power: $("input:radio[name ='power']:checked").val(),
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
+		Language: $("input:radio[name ='Language']:checked").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -91,7 +92,7 @@
 <br><br>
 <div>
 <table>
-<tr><td><b>Language:</b></td><td><input id="radio_de" type="radio" value="de" name="language" /> Deutsch<br><input id="radio_en" type="radio" value="en" name="language" /> English</td></tr>
+<tr><td><b>Language:</b></td><td><input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br><input id="radio_en" type="radio" value="en" name="Language" /> English</td></tr>
 <tr><td><b>Leistung:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 <tr><td><b>Temperatur:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
 <tr><td><b>Längenmaß:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
