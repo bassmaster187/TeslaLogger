@@ -120,7 +120,5 @@ Car Version=Car Version
 Letzter Trip=Last Trip
 Dauer=Duration
 Distanz=Distance
-Verbrauch=Consumption
-Ø Verbrauch=Ø Consumption
 Max km/h=Max kph
 PS=PS
