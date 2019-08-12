@@ -128,3 +128,10 @@ Dauer=Duration
 Distanz=Distance
 Max km/h=Max kph
 PS=PS
+
+Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
+Bitte Tesla Account Zugangsdaten eingeben=Please enter your Tesla account credentials
+Email=Email
+Passwort=Password
+Passwort wiederholen=Repeate Password
+Speichern=Save
