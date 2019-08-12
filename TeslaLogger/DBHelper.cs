@@ -350,6 +350,27 @@ namespace TeslaLogger
             }
         }
 
+        public static void UpdateElevationForAllPoints()
+        {
+            try
+            {
+                int startid = 1;
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM test.pos where altitude > 0", con);
+                    startid = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                
+                DBHelper.UpdateTripElevation(startid, DBHelper.GetMaxPosid()); // get elevation for all points
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+        }
+
         public static void UpdateAddress(int posid)
         {
             try
