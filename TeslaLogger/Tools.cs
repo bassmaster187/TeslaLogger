@@ -1,6 +1,8 @@
 ﻿namespace TeslaLogger
 {
     using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
     using System.IO;
     using System.Reflection;
     using System.Web.Script.Serialization;
@@ -249,15 +251,31 @@
 
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
-                power = j["Power"];
-                temperature = j["Temperature"];
-                length = j["Length"];
-                language = j["Language"];
+
+                if (IsPropertyExist(j, "Power"))
+                    power = j["Power"];
+
+                if (IsPropertyExist(j, "Temperature"))
+                    temperature = j["Temperature"];
+
+                if (IsPropertyExist(j, "Length"))
+                    length = j["Length"];
+
+                if (IsPropertyExist(j, "Language"))
+                    language = j["Language"];
             }
             catch (Exception ex)
             {
                 Tools.Log(ex.ToString());
             }
+        }
+
+        public static bool IsPropertyExist(dynamic settings, string name)
+        {
+            if (settings is IDictionary<string, object>)
+                return ((IDictionary<string, object>)settings).ContainsKey(name);
+
+            return false;
         }
     }
 }
