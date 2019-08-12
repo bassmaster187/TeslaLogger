@@ -56,6 +56,7 @@ SOC [%]=SOC [%]
 Laden=Charging
 Ladespannung [V]=Charging Voltage [V]
 Reichweite [mi]=Range [mi]
+Reichweite [km]=Range [km]
 Leistung [kW]=Power [kW]
 Phasen=Phases
 Stromstärke [A]=Current [A]
@@ -78,13 +79,16 @@ Ziel Adresse=Destination Address
 Verbraucht kWh=Consumed kWh
 Dauer Min=Duration Min
 mi=mi
+km=km
 Ø °C=Ø °C
 Ø °F=Ø °F
 max mph=Max mph
+max km/h=max kph
 max PS=Max HP
 min PS=Min HP
 Ø PS=Ø HP
 Ø mph=Ø mph
+Ø km/h=Ø kph
 
 #Vampir Drain Monatsstatistik.json
 Zeitspanne Stunden=Timespan Hours
@@ -95,6 +99,8 @@ mi Stand=Odometer
 Vampir Drain=Vampir Drain
 Standby Stunden=Standby Hours
 Standby=Standby
+TR km Verlust=TR km Lost
+TR km Verlust pro Stunde=TR km Lost Per Hour
 
 #Verbrauch.json
 Verbrauch=Consumption
