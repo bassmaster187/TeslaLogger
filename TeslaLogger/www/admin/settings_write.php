@@ -19,8 +19,8 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
 'SleepTimeSpanEnable' => $SleepTimeSpanEnable,
 'Power' => $Power,
-'Temperature' => $Temperature
-//,'Length' => $Length
+'Temperature' => $Temperature,
+'Length' => $Length
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));

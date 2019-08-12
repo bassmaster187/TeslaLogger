@@ -87,9 +87,7 @@
 <table>
 <tr><td><b>Leistung:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 <tr><td><b>Temperatur:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
-<!--
 <tr><td><b>Längenmaß:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
--->
 <tr><td><b>Sleeping:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 

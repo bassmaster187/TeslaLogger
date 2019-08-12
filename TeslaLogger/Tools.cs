@@ -250,7 +250,7 @@
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
                 power = j["Power"];
                 temperature = j["Temperature"];
-                // length = j["Length"];
+                length = j["Length"];
             }
             catch (Exception ex)
             {
