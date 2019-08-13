@@ -2,7 +2,7 @@
 
 TeslaLogger is a self hosted data logger for your Tesla Model S/X/3. Actually it supports RaspberryPi 3B and 3B+.
 
-You can download the Raspberry image here: https://teslalogger.de/teslalogger20190419-public.zip
+You can download the Raspberry image here: https://teslalogger.de/teslalogger20190812-public.zip
 I strongly recommand you to use an official Raspberry kit as some sd-cards and power supply will run in some serious problems.
 Amazon: https://amzn.to/2GhIcPu
 
