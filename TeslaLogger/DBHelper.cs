@@ -354,13 +354,19 @@ namespace TeslaLogger
         {
             try
             {
+                if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                    return;
+
                 int startid = 1;
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM pos where altitude > 0", con);
-                    startid = Convert.ToInt32(cmd.ExecuteScalar());
+                    object o = cmd.ExecuteScalar();
+
+                    if (o != null && o != DBNull.Value)
+                        startid = Convert.ToInt32(o);
                 }
                 
                 DBHelper.UpdateTripElevation(startid, DBHelper.GetMaxPosid()); // get elevation for all points
