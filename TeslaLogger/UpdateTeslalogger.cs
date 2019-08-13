@@ -378,7 +378,8 @@ namespace TeslaLogger
                                 s = ReplaceNameTag(s, "Online", dictLanguage);
 
                                 s = ReplaceLanguageTags(s, new string[] {
-                                    "Geschwindigkeit [mph]", "Leistung [PS]", "Reichweite [mi]", "SOC [%]", "Außentemperatur [°C]", "Höhe [m]", "Reichweite [mi]"
+                                    "Geschwindigkeit [km/h]", "Geschwindigkeit [mph]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "SOC [%]",
+                                    "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Visited.json"))
