@@ -45,7 +45,7 @@
           "type": "date"
         },
         {
-          "alias": "TR km Verlust ",
+          "alias": "TR km Verlust",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
