@@ -20,15 +20,20 @@ http://raspberry/admin/password.php
 
 Enter the same credentials as you use in your teslaaccount or app.
 
+## Settings & Language
+Change the language and units and reboot the Teslalogger.
+
+http://raspberry/admin/settings.php
+
+## Admin Panel
+http://raspberry/admin/
+
 ## Dashboard
 http://raspberry:3000
 
 Username: admin
 
 Passwort: teslalogger
-
-## Admin Panel
-http://raspberry/admin/
 
 # German manual
 http://teslalogger.de/handbuch.php
