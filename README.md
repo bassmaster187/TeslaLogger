@@ -39,7 +39,7 @@ Please contact us beforehand to allow a coordinated approach for translations.
 # Donations:
 http://paypal.me/ChristianPogea
 
-You can also use my referral code to buy a tesla: 
+You can also use my referral code to buy a Tesla: 
 http://ts.la/christian7267
 
 # Screenshots
