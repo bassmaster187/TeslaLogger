@@ -86,7 +86,10 @@ max mph=Max mph
 max km/h=max kph
 max PS=Max HP
 min PS=Min HP
+max kW=max kW
+min kW=min kW
 Ø PS=Ø HP
+Ø kW=Ø kW
 Ø mph=Ø mph
 Ø km/h=Ø kph
 
@@ -109,6 +112,7 @@ Altitude [m]=Altitude [m]
 Geschwindigkeit [mph]=Speed [mph]
 Leistung [PS]=Power [HP]
 Außentemperatur [°C]=Outside Temperature [°C]
+Außentemperatur [°F]=Outside Temperature [°F]
 
 Laden fertig=Charging Finished
 Schlafen=Sleeping
@@ -143,4 +147,3 @@ Language=Language
 Leistung=Power
 Temperatur=Temperature
 Längenmaß=Unit of length
-Schlafen=Sleeping

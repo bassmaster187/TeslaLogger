@@ -351,7 +351,8 @@ namespace TeslaLogger
                                 s = ReplaceTitleTag(s, "Laden", dictLanguage);
 
                                 s = ReplaceLanguageTags(s, new string[] {
-                                    "SOC [%]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Ladespannung [V]", "Phasen", "Stromstärke [A]", "Außentemperatur [°C]",
+                                    "SOC [%]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "Ladespannung [V]", "Phasen",
+                                    "Stromstärke [A]", "Außentemperatur [°C]", "Außentemperatur [°F]",
                                     "Angefordert [A]", "Pilot [A]"
                                 }, dictLanguage, true);
                             }
