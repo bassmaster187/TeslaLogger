@@ -110,6 +110,7 @@ Verbrauch=Consumption
 Höhe [m]=Altitude [m]
 Altitude [m]=Altitude [m]
 Geschwindigkeit [mph]=Speed [mph]
+Geschwindigkeit [km/h]=Speed [kph]
 Leistung [PS]=Power [HP]
 Außentemperatur [°C]=Outside Temperature [°C]
 Außentemperatur [°F]=Outside Temperature [°F]
