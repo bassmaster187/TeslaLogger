@@ -1,11 +1,14 @@
 ﻿<!DOCTYPE html>
-<html lang="de">
+<?php
+require("language.php");
+?>
+<html lang="<?php echo $json_data["Language"]; ?>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Config V1.6</title>
+    <title>Teslalogger Config V1.7</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -111,22 +114,22 @@
   <br />
   <div id="content">
   <table style="float:left;">
-  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;">Fahrzeuginfo</td></thead>
+  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
   <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
-  <tr><td><b>Typical Range:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
-  <tr><td><b>KM Stand:</b></td><td><span id="odometer">---</span> km</td></tr>
-  <tr><td><b>Car Version:</b></td><td><span id="car_version">---</span></td></tr>
+  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
+  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
+  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
   </table>
   
   <table style="float:left;">
-  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;">Letzter Trip</td></thead>
-  <tr><td width="120px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
-  <tr><td><b>Dauer:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
-  <tr><td><b>Distanz:</b></td><td><span id="trip_distance">---</span> km</td></tr>
-  <tr><td><b>Verbrauch:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
-  <tr><td><b>Ø Verbrauch:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
-  <tr><td><b>Max km/h / PS:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
+  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
+  <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
+  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
+  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> km</td></tr>
+  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
+  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
+  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
   </table>
   
   <?php
@@ -156,7 +159,13 @@ function getTeslaloggerVersion($path)
 ?>
   
   <?PHP
-  echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php"));
+  global $language;
+  
+  if (isset($language) && strlen($language) > 1 && $language != "de")
+	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php"));
+  else
+	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php"));
+  	
   ?>
   </div>
   </body>

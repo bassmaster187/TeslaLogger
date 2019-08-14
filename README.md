@@ -2,7 +2,7 @@
 
 TeslaLogger is a self hosted data logger for your Tesla Model S/X/3. Actually it supports RaspberryPi 3B and 3B+.
 
-You can download the Raspberry image here: https://teslalogger.de/teslalogger20190419-public.zip
+You can download the Raspberry image here: https://teslalogger.de/teslalogger20190812-public.zip
 I strongly recommand you to use an official Raspberry kit as some sd-cards and power supply will run in some serious problems.
 Amazon: https://amzn.to/2GhIcPu
 
@@ -20,6 +20,14 @@ http://raspberry/admin/password.php
 
 Enter the same credentials as you use in your teslaaccount or app.
 
+## Settings & Language
+Change the language and units and reboot the Teslalogger.
+
+http://raspberry/admin/settings.php
+
+## Admin Panel
+http://raspberry/admin/
+
 ## Dashboard
 http://raspberry:3000
 
@@ -27,40 +35,38 @@ Username: admin
 
 Passwort: teslalogger
 
-## Admin Panel
-http://raspberry/admin/
-
-# German maual
+# German manual
 http://teslalogger.de/handbuch.php
 
 Translations are welcome :-)
+Please contact us beforehand to allow a coordinated approach for translations.
 
 # Donations:
 http://paypal.me/ChristianPogea
 
-You can also use my referral code to buy a tesla: 
+You can also use my referral code to buy a Tesla: 
 http://ts.la/christian7267
 
 # Screenshots
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/trip.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/trip_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/laden.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/laden_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/ladehistorie.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/ladehistorie_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/ladestatistik.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/ladestatistik_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/akkutrips.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/akkutrips_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/degradation.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/degradation_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/SOCladestatistik.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/SOCladestatistik_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain_en.png)
 
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain_month.png)
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain_month_en.png)
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/visited.PNG)
 
