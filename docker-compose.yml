@@ -1,14 +1,21 @@
 version: "3"
 services:
+  teslalogger:
+    build: .
+    volumes:
+      - teslalogger:/etc/teslalogger
+  
   sql:
     image: mariadb:10.4.7
     environment:
-      - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
-      - "MYSQL_DATABASE=teslalogger"
-      - "MYSQL_USER=root"
-      - "MYSQL_PASSWORD=teslalogger"
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=teslalogger
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=teslalogger
     domainname: teslalogger
     hostname: teslalogger-sql
+    volumes:
+      - teslalogger-mariadb:/var/lib/mysql
   grafana:
     image: grafana/grafana:6.3.2
     environment:
@@ -25,3 +32,5 @@ services:
 
 volumes:
     teslalogger-grafana-data:
+    teslalogger-mariadb:
+    teslalogger:
