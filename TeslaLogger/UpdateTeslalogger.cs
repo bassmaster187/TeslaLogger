@@ -127,6 +127,58 @@ namespace TeslaLogger
             }
         }
 
+        static Dictionary<string, string> GetLanguageDictionary(string language)
+        {
+            System.Collections.Generic.Dictionary<string, string> ht = new Dictionary<string, string>();
+
+            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            string content = null;
+
+            if (System.IO.File.Exists(filename))
+            {
+                try
+                {
+                    String[] lines = File.ReadAllLines(filename);
+                    foreach (string line in lines)
+                    {
+                        content = line;
+
+                        if (line.Length == 0)
+                            continue;
+                        if (line.StartsWith("#"))
+                            continue;
+                        if (!line.Contains("="))
+                            continue;
+
+                        int pos = line.IndexOf("=");
+                        string key = line.Substring(0, pos).Trim();
+                        string value = line.Substring(pos + 1);
+                         
+                        // Tools.Log("Key insert: " + key);
+
+                        if (ht.ContainsKey(key))
+                        {
+                            Tools.Log($"Error Key '{key}' already in Dictionary!!!");
+                            continue;
+                        }
+
+                        if (value.Trim().Length > 0)
+                            ht.Add(key, value);
+                        else
+                            ht.Add(key, key +" xxx");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.Log(ex.Message);
+                    Tools.ExceptionWriter(ex, content);
+                }
+            }
+
+            return ht;
+        }
+
+
         public static void UpdateGrafana(WebHelper wh)
         {
             try
@@ -135,8 +187,11 @@ namespace TeslaLogger
                 {
                     string power;
                     string temperature;
-                    string length; 
-                    Tools.GrafanaSettings(out power, out temperature, out length);
+                    string length;
+                    string language;
+                    Tools.GrafanaSettings(out power, out temperature, out length, out language);
+
+                    Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
                     Tools.Log("Start Grafana update");
                     Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
@@ -159,6 +214,8 @@ namespace TeslaLogger
 
                         if (power == "kw")
                         {
+                            Tools.Log("Convert to kw");
+
                             if (f.EndsWith("Verbrauch.json"))
                             {
                                 s = s.Replace("power as 'Leistung [PS]'", "power/1.35962 as 'Leistung [kW]'");
@@ -177,6 +234,8 @@ namespace TeslaLogger
 
                         if (temperature == "fahrenheit")
                         {
+                            Tools.Log("Convert to fahrenheit");
+
                             if (f.EndsWith("Laden.json"))
                             {
                                 s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
@@ -195,6 +254,8 @@ namespace TeslaLogger
 
                         if (length == "mile")
                         {
+                            Tools.Log("Convert to mile");
+
                             if (f.EndsWith("Akku Trips.json"))
                             {
                                 s = s.Replace("Start km", "Start mi");
@@ -209,23 +270,139 @@ namespace TeslaLogger
                             else if (f.EndsWith("Degradation.json"))
                             {
                                 s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
-                                s = s.Replace("odometer as 'km Stand [km]", "odometer / 1.609 as 'km Stand [km]");
+                                s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609 as 'mi Stand [mi]'");
                                 s = s.Replace("\"max\": \"550\"", "\"max\": \"350\"");
                                 s = s.Replace("\"min\": \"300\"", "\"min\": \"180\"");
+
+                                s = s.Replace("km Stand [km]", "mi Stand [mi]");
+                                
                             }
                             else if (f.EndsWith("Laden.json"))
                             {
-                                
+                                s = s.Replace(" as 'Reichweite [km]',", " / 1.609 as 'Reichweite [mi]',");
+
+                                s = s.Replace("Reichweite [km]", "Reichweite [mi]");
                             }
                             else if (f.EndsWith("Trip.json"))
                             {
-                                
+                                s = s.Replace(" speed_max,", "speed_max / 1.609 as speed_max,");
+                                s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609 as avg_consumption_kWh_100km,");
+                                s = s.Replace(" as avg_kmh,", " / 1.609 as avg_kmh");
+                                s = s.Replace(" km_diff,", " km_diff  / 1.609 as km_diff,");
+
+                                s = s.Replace("\"max km/h\"", "\"max mph\"");
+                                s = s.Replace("\"Ø km/h\"", "\"Ø mph\"");
+                                s = s.Replace("\"km\"", "\"mi\"");
+                            }
+                            else if (f.EndsWith("Vampir Drain.json"))
+                            {
+                                s = s.Replace(" TP2.odometer,", " TP2.odometer / 1.609 as odometer,");
+                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
+
+                                s = s.Replace("\"km Stand\"", "\"mi Stand\"");
+                                s = s.Replace("\"TR km Start\"", "\"TR mi Start\"");
+                                s = s.Replace("\"TR km Ende\"", "\"TR mi Ende\"");
+                                s = s.Replace("\"TR km Verlust\"", "\"TR mi Verlust\"");
+                                s = s.Replace("\"TR km Verlust pro Stunde\"", "\"TR mi Verlust pro Stunde\"");
+                            }
+                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json"))
+                            {
+                                s = s.Replace(" as RangeLost", " / 1.609 as RangeLost");
+
+                                s = s.Replace("TR km Verlust", "TR mi Verlust");
                             }
                             else if (f.EndsWith("Verbrauch.json"))
                             {
-                                
+                                s = s.Replace(" speed as 'Geschwindigkeit [km/h]'", " speed / 1.609 as 'Geschwindigkeit [mph]'");
+                                s = s.Replace(" ideal_battery_range_km as 'Reichweite [km]'", " ideal_battery_range_km / 1.609 as 'Reichweite [mi]'");
                             }
+                            else if (f.EndsWith("Ladehistorie.json"))
+                            {
+                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
 
+                                s = s.Replace("\"TR km Start\"", "\"TR mi Start\"");
+                                s = s.Replace("\"TR km Ende\"", "\"TR mi Ende\"");
+                            }
+                        }
+
+                        if (language != "de")
+                        {
+                            Tools.Log("Convert to language: " + language);
+
+                            s = ReplaceAliasTags(s, dictLanguage);
+
+                            if (f.EndsWith("Akku Trips.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Akku Trips", dictLanguage);
+                            }
+                            else if (f.EndsWith("Degradation.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Degradation", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Maximalreichweite[km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Ladehistorie.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Ladehistorie", dictLanguage);
+                            }
+                            else if (f.EndsWith("Laden.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Laden", dictLanguage);
+
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "SOC [%]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "Ladespannung [V]", "Phasen",
+                                    "Stromstärke [A]", "Außentemperatur [°C]", "Außentemperatur [°F]",
+                                    "Angefordert [A]", "Pilot [A]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Trip.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Trip", dictLanguage);
+                            }
+                            else if (f.EndsWith("Vampir Drain.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Vampir Drain", dictLanguage);
+                            }
+                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Vampir Drain Monatsstatistik", dictLanguage);
+                            }
+                            else if (f.EndsWith("Verbrauch.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Verbrauch", dictLanguage);
+
+                                s = ReplaceNameTag(s, "Laden", dictLanguage);
+                                s = ReplaceNameTag(s, "Laden fertig", dictLanguage);
+                                s = ReplaceNameTag(s, "Schlafen", dictLanguage);
+                                s = ReplaceNameTag(s, "Online", dictLanguage);
+
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Geschwindigkeit [km/h]", "Geschwindigkeit [mph]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "SOC [%]",
+                                    "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Visited.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Visited", dictLanguage);
+                            }
+                            else if (f.EndsWith("km Stand.json"))
+                            {
+                                s = ReplaceTitleTag(s, "km Stand", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "km Stand [km]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Ladestatistik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Ladestatistik", dictLanguage);
+                            }
+                            else if (f.EndsWith("SOC Ladestatistik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
+                            }
+                            else
+                                Tools.Log("Title of " + f + " not translated!");
                         }
 
                         System.IO.File.WriteAllText(f, s);
@@ -244,6 +421,92 @@ namespace TeslaLogger
             {
                 Tools.Log("End Grafana update");
             }
+        }
+
+        private static string ReplaceAliasTags(string content, Dictionary<string, string> dictLanguage)
+        {
+            try
+            {
+                System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
+
+                var matches = regexAlias.Matches(content);
+
+                foreach (System.Text.RegularExpressions.Match match in matches)
+                    content = ReplaceAliasTag(content, match.Groups[1].Value, dictLanguage);
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+
+            return content;
+        }
+
+        private static string ReplaceAliasTag(string content, string v, Dictionary<string, string> dictLanguage)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
+            string replace = "\"alias\": \""+dictLanguage[v]+"\"";
+
+            return regexAlias.Replace(content, replace);
+        }
+
+        private static string ReplaceNameTag(string content, string v, Dictionary<string, string> dictLanguage)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"name\": \"" + dictLanguage[v] + "\"";
+
+            return regexAlias.Replace(content, replace);
+        }
+
+        private static string ReplaceTitleTag(string content, string v, Dictionary<string, string> dictLanguage)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"title\": \"" + dictLanguage[v] + "\"";
+
+            return regexAlias.Replace(content, replace);
+        }
+
+        private static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
+        {
+            foreach (string l in v)
+                content = ReplaceLanguageTag(content, l, dictLanguage, quoted);
+
+            return content;
+        }
+
+        private static string ReplaceLanguageTag(string content, string v, Dictionary<string, string> dictLanguage, bool quoted)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            if (quoted)
+            {
+                content = content.Replace("'" + v + "'", "'" + dictLanguage[v] + "'");
+                return content.Replace("\"" + v + "\"", "\"" + dictLanguage[v] + "\"");
+            }
+            else
+                return content.Replace(v, dictLanguage[v]);
         }
 
         public static string exec_mono(string cmd, string param, bool logging = true)

@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html lang="de">
+<?php
+require("language.php");
+?>
+<html lang="<?php echo $json_data["Language"]; ?>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Settings V1.3</title>
+    <title>Teslalogger Settings V1.4</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -39,6 +42,7 @@
 			$power = $j->{"Power"};
 			$Temperature = $j->{"Temperature"};
 			$Length = $j->{"Length"};
+			$Language = $j->{"Language"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
@@ -58,6 +62,11 @@
 				echo ("$('#radio_mile').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_km').prop('checked', true);\r\n");
+				
+			if($Language =="en")
+				echo ("$('#radio_en').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_de').prop('checked', true);\r\n");
 			
 		}
 		?>
@@ -73,6 +82,7 @@
 		Power: $("input:radio[name ='power']:checked").val(),
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
+		Language: $("input:radio[name ='Language']:checked").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -80,17 +90,16 @@
   }
 
 </script>
-<button onclick="window.location.href='password.php';">Zugangsdaten</button>
+<button onclick="window.location.href='password.php';"><?php t("Zugangsdaten"); ?></button>
 
 <br><br>
 <div>
 <table>
-<tr><td><b>Leistung:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
-<tr><td><b>Temperatur:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
-<!--
-<tr><td><b>Längenmaß:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
--->
-<tr><td><b>Sleeping:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
+<tr><td><b><?php t("Language"); ?>:</b></td><td><input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br><input id="radio_en" type="radio" value="en" name="Language" /> English</td></tr>
+<tr><td><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
+<tr><td><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
+<tr><td><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 
 <tr><td></td><td>&nbsp;</td></tr>
