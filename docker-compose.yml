@@ -3,7 +3,7 @@ services:
   teslalogger:
     build: .
     volumes:
-      - teslalogger:/etc/teslalogger
+      - teslalogger-bin:/etc/teslalogger
   
   sql:
     image: mariadb:10.4.7
@@ -33,4 +33,4 @@ services:
 volumes:
     teslalogger-grafana-data:
     teslalogger-mariadb:
-    teslalogger:
+    teslalogger-bin:
