@@ -13,6 +13,12 @@ If you want to purchase a ready to go Raspberry PI 3B with TeslaLogger installed
 Connect your Raspberry PI with your router with a network cable and turn in on.
 Within 2-3 minutes the Raspberry should show up in you network.
 
+Credentials for browser authorisation (htaccess).
+
+Username: tesla
+
+Password: logger.
+
 ## Enter your Tesla crendentials
 Use your browser to go to:
 
