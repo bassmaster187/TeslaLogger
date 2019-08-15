@@ -1,5 +1,9 @@
 # TeslaLogger
 
+NOTICE: This is a work in process branch for docker compose!
+
+---
+
 TeslaLogger is a self hosted data logger for your Tesla Model S/X/3. Actually it supports RaspberryPi 3B and 3B+.
 
 You can download the Raspberry image here: https://teslalogger.de/teslalogger20190812-public.zip
