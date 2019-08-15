@@ -1,0 +1,42 @@
+version: "3"
+services:
+
+  teslalogger:
+    build: container/app/.
+    volumes:
+      - teslalogger-bin:/etc/teslalogger
+    ports: 
+      - 80:80
+    depends_on:
+      - database
+  
+  database:
+    build: container/db/.
+    env_file:
+      - .env
+    volumes:
+      - teslalogger-mariadb:/var/lib/mysql
+    ports: 
+      - 3306:3306
+        
+  grafana:
+    image: grafana/grafana:6.3.2
+    environment:
+      - GF_DATABASE_USER=${MYSQL_USER}
+      - GF_DATABASE_PASSWORD=${MYSQL_PASSWORD}
+      - GF_DATABASE_NAME=${MYSQL_DATABASE}
+      - GF_DATABASE_HOST=database:3306
+      - GF_DATABASE_TYPE=mysql
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_SERVER_ROOT_URL=${GRAFANA_URL}
+    ports: 
+      - 3000:3000
+    volumes: 
+      - teslalogger-grafana-data:/var/lib/grafana
+    depends_on:
+      - teslalogger
+      
+volumes:
+    teslalogger-grafana-data:
+    teslalogger-mariadb:
+    teslalogger-bin:
