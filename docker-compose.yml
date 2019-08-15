@@ -4,7 +4,7 @@ services:
   teslalogger:
     image: mono:6.0.0.313
     volumes:
-      - ./TeslaLogger/bin/:/etc/teslalogger
+      - ./TeslaLogger/bin:/etc/teslalogger
     working_dir: /etc/teslalogger
     command: [ mono, /etc/teslalogger/TeslaLogger.exe ]
     depends_on:
@@ -29,10 +29,10 @@ services:
       - GF_DATABASE_HOST=database:3306
       - GF_DATABASE_TYPE=mysql
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
-      - GF_SERVER_ROOT_URL=${GRAFANA_URL}
     ports: 
       - 3000:3000
     volumes: 
+      - ./TeslaLogger/bin:/etc/teslalogger
       - teslalogger-grafana:/var/lib/grafana
     depends_on:
       - teslalogger
@@ -41,7 +41,7 @@ services:
     image: php:7.3-apache
     volumes:
       - ./TeslaLogger/www:/var/www/html
-      - ./TeslaLogger/bin/:/etc/teslalogger
+      - ./TeslaLogger/bin:/etc/teslalogger
     ports:
       - 80:80
             
