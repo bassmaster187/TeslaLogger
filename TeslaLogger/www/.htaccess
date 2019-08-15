@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "login"
+AuthUserFile /var/www/html/.htpasswd
+require valid-user
