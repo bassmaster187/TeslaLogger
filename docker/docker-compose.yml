@@ -5,8 +5,6 @@ services:
     build: container/app/.
     volumes:
       - teslalogger-bin:/etc/teslalogger
-    ports: 
-      - 80:80
     depends_on:
       - database
   
@@ -35,8 +33,18 @@ services:
       - teslalogger-grafana-data:/var/lib/grafana
     depends_on:
       - teslalogger
+    
+  www:
+    build: container/www/.
+    environment:
+      - WEB_DOCUMENT_ROOT:/var/www/html/
+    ports: 
+      - 8888:80
+    volumes:
+      - teslalogger-www:/var/www/html/
       
 volumes:
     teslalogger-grafana-data:
     teslalogger-mariadb:
     teslalogger-bin:
+    teslalogger-www:
