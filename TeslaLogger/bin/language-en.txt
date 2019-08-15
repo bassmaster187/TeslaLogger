@@ -148,3 +148,6 @@ Language=Language
 Leistung=Power
 Temperatur=Temperature
 Längenmaß=Unit of length
+
+#geoadd.php
+Bezeichnung=Description
