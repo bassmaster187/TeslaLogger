@@ -33,7 +33,13 @@ http://raspberry:3000
 
 Username: admin
 
-Passwort: teslalogger
+Password: teslalogger
+
+## SSH for advanced users
+
+Username: pi
+
+Password: teslalogger 
 
 # German manual
 http://teslalogger.de/handbuch.php
