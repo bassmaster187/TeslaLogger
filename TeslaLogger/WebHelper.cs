@@ -597,7 +597,18 @@ namespace TeslaLogger
                     lastShift_State = shift_state;
                 }
                 else
-                    shift_state = lastShift_State;
+				{
+					TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
+
+                    if (ts.TotalMinutes > 10)
+                    {
+                        Tools.Log("No Valid IsDriving since 10min!");
+                        lastShift_State = "P";
+                        return false;
+                    }
+					else
+						shift_state = lastShift_State;
+				}
 
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N")
                 {
