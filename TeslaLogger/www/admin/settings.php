@@ -65,6 +65,8 @@ require("language.php");
 				
 			if($Language =="en")
 				echo ("$('#radio_en').prop('checked', true);\r\n");
+			else if($Language =="no")
+				echo ("$('#radio_no').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_de').prop('checked', true);\r\n");
 			
@@ -95,10 +97,14 @@ require("language.php");
 <br><br>
 <div>
 <table>
-<tr><td><b><?php t("Language"); ?>:</b></td><td><input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br><input id="radio_en" type="radio" value="en" name="Language" /> English</td></tr>
-<tr><td><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
-<tr><td><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
-<tr><td><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
+<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
+<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
+<input id="radio_no" type="radio" value="no" name="Language" /> Norsk 
+</td></tr>
+<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
+<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
+<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 
