@@ -21,6 +21,8 @@ http://raspberry/admin/password.php
 Enter the same credentials as you use in your teslaaccount or app.
 
 ## Settings & Language
+Available languages: English, German, Norwegian - Translations are welcome
+
 Change the language and units and reboot the Teslalogger.
 
 http://raspberry/admin/settings.php
@@ -52,8 +54,6 @@ Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLog
 </setting>
 ```
 value 0 is 1st car / value 1 is 2nd car and so on...
-
-
 
 # German manual
 http://teslalogger.de/handbuch.php
