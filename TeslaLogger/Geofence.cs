@@ -21,8 +21,19 @@
     class Geofence
     {
         List<Address> sortedList;
+        System.IO.FileSystemWatcher fsw;
 
         public Geofence()
+        {
+            Init();
+            fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+            fsw.Changed += Fsw_Changed;
+            // fsw.Created += Fsw_Changed;
+            // fsw.Renamed += Fsw_Changed;
+            fsw.EnableRaisingEvents = true;
+        }
+
+        void Init()
         {
             List<Address> list = new List<Address>();
 
@@ -34,10 +45,20 @@
             sortedList = list.OrderBy(o => o.lat).ToList();
         }
 
+        private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
+        {
+            Tools.Log("CSV File changed: " + e.Name);
+
+            System.Threading.Thread.Sleep(5000);
+            Init();            
+        }
+
         private static void ReadGeofenceFile(List<Address> list, string filename)
         {
             if (System.IO.File.Exists(filename))
             {
+                
+
                 Tools.Log("Read Geofence File: " + filename);
                 string line;
                 using (System.IO.StreamReader file = new System.IO.StreamReader(filename))
