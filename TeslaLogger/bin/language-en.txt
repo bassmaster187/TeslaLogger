@@ -148,6 +148,7 @@ Language=Language
 Leistung=Power
 Temperatur=Temperature
 Längenmaß=Unit of length
+URL Admin Panel=URL Admin Panel
 
 #geoadd.php
 Bezeichnung=Description

@@ -148,6 +148,7 @@ Language=Språk
 Leistung=Effekt
 Temperatur=Temperatur
 Längenmaß=Enhet lengde
+URL Admin Panel=URL Admin Panel
 
 #geoadd.php
 Bezeichnung=Betegnelse
