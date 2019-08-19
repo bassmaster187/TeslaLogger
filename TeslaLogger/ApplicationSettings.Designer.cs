@@ -94,5 +94,14 @@ namespace TeslaLogger {
                 return ((string)(this["MapQuestKey"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TaskerPrefix {
+            get {
+                return ((string)(this["TaskerPrefix"]));
+            }
+        }
     }
 }

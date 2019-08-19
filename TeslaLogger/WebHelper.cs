@@ -295,6 +295,10 @@ namespace TeslaLogger
                 foreach (byte b in crc32.ComputeHash(tempTasker))
                     TaskerHash += b.ToString("x2").ToLower();
 
+                if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
+                    TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
+
+
                 Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
