@@ -220,13 +220,20 @@
                
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
-                if (Boolean.Parse(j["SleepTimeSpanEnable"]))
-                {
-                    string start = j["SleepTimeSpanStart"];
-                    string[] s = start.Split(':');
 
-                    int.TryParse(s[0], out startSleepingHour);
-                    int.TryParse(s[1], out startSleepingMinutes);
+                if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
+                {
+                    if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                    {
+                        string start = j["SleepTimeSpanStart"];
+                        string[] s = start.Split(':');
+
+                        if (s.Length >= 2)
+                        {
+                            int.TryParse(s[0], out startSleepingHour);
+                            int.TryParse(s[1], out startSleepingMinutes);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
