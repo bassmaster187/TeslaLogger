@@ -1473,6 +1473,8 @@ FROM
         {
             try
             {
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
+
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
                 if (!force && ts.TotalSeconds < 20)
@@ -1497,6 +1499,11 @@ FROM
                 d.Add("db_eff", carSettings.DB_Wh_TR);
                 d.Add("db_eff_cnt", carSettings.DB_Wh_TR_count);
 
+                d.Add("pw", power);
+                d.Add("temp", temperature);
+                d.Add("le", length);
+                d.Add("ln", language);
+                
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
 
