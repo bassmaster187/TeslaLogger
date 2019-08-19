@@ -242,12 +242,13 @@
             }
         }
 
-        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language)
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin)
         {
             power = "hp";
             temperature = "celsius";
             length = "km";
             language = "de";
+            URL_Admin = "";
 
             try
             {
@@ -270,6 +271,12 @@
 
                 if (IsPropertyExist(j, "Language"))
                     language = j["Language"];
+
+                if (IsPropertyExist(j, "URL_Admin"))
+                {
+                    if (j["URL_Admin"].ToString().Length > 0)
+                        URL_Admin = j["URL_Admin"];
+                }
             }
             catch (Exception ex)
             {

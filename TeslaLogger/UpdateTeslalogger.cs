@@ -189,7 +189,8 @@ namespace TeslaLogger
                     string temperature;
                     string length;
                     string language;
-                    Tools.GrafanaSettings(out power, out temperature, out length, out language);
+                    string URL_Admin;
+                    Tools.GrafanaSettings(out power, out temperature, out length, out language, out URL_Admin);
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -403,6 +404,15 @@ namespace TeslaLogger
                             }
                             else
                                 Tools.Log("Title of " + f + " not translated!");
+                        }
+
+                        if (URL_Admin.Length > 0)
+                        {
+                            string temp_URL = URL_Admin;
+                            if (!temp_URL.EndsWith("/"))
+                                temp_URL += "/";
+
+                            s = s.Replace("http://raspberry/admin/", temp_URL);
                         }
 
                         System.IO.File.WriteAllText(f, s);
