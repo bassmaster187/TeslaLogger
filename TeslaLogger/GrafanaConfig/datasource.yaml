@@ -7,4 +7,3 @@ datasources:
     database: teslalogger
     user: root
     password: teslalogger
-    

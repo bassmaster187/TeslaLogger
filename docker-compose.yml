@@ -2,17 +2,16 @@ version: "3"
 services:
 
   teslalogger:
-    image: mono:6.0.0.313
+    build: docker/teslalogger/.
+    restart: always
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
-      - ./teslalogger-grafana:/var/lib/grafana
-    working_dir: /etc/teslalogger
-    command: bash -c "mono /etc/teslalogger/TeslaLogger.exe"
     depends_on:
       - database
   
   database:
     image: mariadb:10.4.7
+    restart: always
     env_file:
       - .env
     volumes:
@@ -22,22 +21,27 @@ services:
         
   grafana:
     image: grafana/grafana:6.3.2
+    restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
     ports: 
       - 3000:3000
     volumes: 
       - ./TeslaLogger/bin:/etc/teslalogger
-      - ./teslalogger-grafana:/var/lib/grafana
-      - ./teslalogger-grafana-provisioning:/etc/grafana/provisioning/
+      - ./Teslalogger/Grafana/:/var/lib/grafana/dashboards/
+      - ./Teslalogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./Teslalogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - teslalogger-grafana:/var/lib/grafana
     depends_on:
       - database
 
   webserver:
     image: php:7.3-apache
+    restart: always
     volumes:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
+      - ./TeslaLogger/Properties/AssemblyInfo.cs:/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs
     ports:
       - 8888:80
             
