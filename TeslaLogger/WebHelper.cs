@@ -472,8 +472,32 @@ namespace TeslaLogger
                 }
                 else if (carSettings.Battery == "BT85")
                 {
-                    car = "S 85";
-                    eff = "0.200";
+                    if (carSettings.AWD)
+                    {
+                        if (carSettings.Performance)
+                        {
+                            car = "S P85D";
+                            eff = "0.201";
+                        }
+                        else
+                        {
+                            car = "S 85D";
+                            eff = "0.186";
+                        }
+                    }
+                    else
+                    {
+                        if (carSettings.Performance)
+                        {
+                            car = "S P85";
+                            eff = "0.210";
+                        }
+                        else
+                        {
+                            car = "S 85";
+                            eff = "0.201";
+                        }
+                    }
                 }
                 else if (carSettings.Battery == "PBT85")
                 {
@@ -540,8 +564,16 @@ namespace TeslaLogger
             {
                 if (carSettings.Battery == "BT37")
                 {
-                    eff = "0.153"; 
-                    car = "M3 LR";
+                    if (carSettings.Performance)
+                    {
+                        eff = "0.153";
+                        car = "M3P";
+                    }
+                    else
+                    {
+                        eff = "0.153";
+                        car = "M3";
+                    }
                 }
                 else
                 {
@@ -606,7 +638,9 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        Tools.Log("No Valid IsDriving since 10min!");
+                        if (lastShift_State != "P")
+                            Tools.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
+
                         lastShift_State = "P";
                         return false;
                     }
@@ -650,7 +684,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        Tools.Log("No Valid IsDriving since 10min!");
+                        Tools.Log("No Valid IsDriving since 10min! (Exception)");
                         lastShift_State = "P";
                         return false;
                     }
