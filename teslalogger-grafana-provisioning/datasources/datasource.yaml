@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+  - name: teslalogger
+    type: mysql
+    url: database:3306
+    database: teslalogger
+    user: root
+    password: teslalogger
+    

@@ -5,7 +5,7 @@ services:
     image: mono:6.0.0.313
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
-      - teslalogger-grafana:/var/lib/grafana
+      - ./teslalogger-grafana:/var/lib/grafana
     working_dir: /etc/teslalogger
     command: bash -c "mono /etc/teslalogger/TeslaLogger.exe"
     depends_on:
@@ -17,26 +17,21 @@ services:
       - .env
     volumes:
       - ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql
-      - teslalogger-database:/var/lib/mysql
     ports: 
       - 3306:3306
         
   grafana:
     image: grafana/grafana:6.3.2
     environment:
-      - GF_DATABASE_USER=${MYSQL_USER}
-      - GF_DATABASE_PASSWORD=${MYSQL_PASSWORD}
-      - GF_DATABASE_NAME=${MYSQL_DATABASE}
-      - GF_DATABASE_HOST=database:3306
-      - GF_DATABASE_TYPE=mysql
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_SECURITY_ADMIN_PASSWORD=teslalogger
     ports: 
       - 3000:3000
     volumes: 
       - ./TeslaLogger/bin:/etc/teslalogger
-      - teslalogger-grafana:/var/lib/grafana
+      - ./teslalogger-grafana:/var/lib/grafana
+      - ./teslalogger-grafana-provisioning:/etc/grafana/provisioning/
     depends_on:
-      - teslalogger
+      - database
 
   webserver:
     image: php:7.3-apache
@@ -48,4 +43,3 @@ services:
             
 volumes:
     teslalogger-grafana:
-    teslalogger-database:
