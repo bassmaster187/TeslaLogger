@@ -10,3 +10,14 @@
 packages
 *.user
 /-container
+teslalogger-*
+TeslaLogger/bin/car_settings.xml
+TeslaLogger/bin/cmd_updated.txt
+TeslaLogger/bin/git/
+TeslaLogger/bin/mono_crash.*
+TeslaLogger/bin/current_json.txt
+TeslaLogger/bin/nohub.out
+TeslaLogger/bin/tesla_token.txt
+TeslaLogger/bin/MQTTClient.exe.config
+TeslaLogger/bin/tmp/*
+TeslaLogger/bin/view_trip.txt
