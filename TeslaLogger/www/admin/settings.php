@@ -8,7 +8,7 @@ require("language.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teslalogger Settings V1.4</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="http://teslalogger.de/teslalogger_style.css">
+	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -43,6 +43,7 @@ require("language.php");
 			$Temperature = $j->{"Temperature"};
 			$Length = $j->{"Length"};
 			$Language = $j->{"Language"};
+			$URL_Admin = $j->{"URL_Admin"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
@@ -69,6 +70,9 @@ require("language.php");
 				echo ("$('#radio_no').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_de').prop('checked', true);\r\n");
+				
+			if (isset($URL_Admin))
+				echo ("$('#URL_Admin').val('$URL_Admin');\r\n");
 			
 		}
 		?>
@@ -85,6 +89,7 @@ require("language.php");
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
 		Language: $("input:radio[name ='Language']:checked").val(),
+		URL_Admin: $("#URL_Admin").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -107,7 +112,7 @@ require("language.php");
 <tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
-
+<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 <tr><td></td><td>&nbsp;</td></tr>
 <tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
 </table>
