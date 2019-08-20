@@ -30,3 +30,4 @@ TeslaLogger/bin/MQTTClient.exe.config
 TeslaLogger/bin/tmp/*
 TeslaLogger/bin/git/
 TeslaLogger/bin/TeslaLogger.exe
+TeslaLogger/bin/nohub.out

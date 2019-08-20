@@ -7,7 +7,7 @@ services:
       - ./TeslaLogger/bin:/etc/teslalogger
       - teslalogger-grafana:/var/lib/grafana
     working_dir: /etc/teslalogger
-    command: bash -c "apt-get update && apt-get install git -y && mono /etc/teslalogger/TeslaLogger.exe"
+    command: bash -c "mono /etc/teslalogger/TeslaLogger.exe"
     depends_on:
       - database
   
