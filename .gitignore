@@ -20,3 +20,13 @@ TeslaLogger/bin/cmd_updated.txt
 TeslaLogger/bin/car_settings.xml
 TeslaLogger/bin/TeslaLogger.exe.config
 
+TeslaLogger/bin/backup.sh
+TeslaLogger/bin/geofence.csv
+TeslaLogger/bin/backup.sh
+TeslaLogger/bin/git/*
+TeslaLogger/bin/language*.txt
+TeslaLogger/bin/mono_crash.*
+TeslaLogger/bin/MQTTClient.exe.config
+TeslaLogger/bin/tmp/*
+TeslaLogger/bin/git/
+TeslaLogger/bin/TeslaLogger.exe
