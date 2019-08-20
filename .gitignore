@@ -11,6 +11,7 @@ packages
 *.user
 /.idea
 teslalogger-database/*
+*/TeslaLogger.exe.config
 
 TeslaLogger/bin/view_trip.txt
 TeslaLogger/bin/tesla_token.txt
@@ -18,3 +19,4 @@ TeslaLogger/bin/current_json.txt
 TeslaLogger/bin/cmd_updated.txt
 TeslaLogger/bin/car_settings.xml
 TeslaLogger/bin/TeslaLogger.exe.config
+
