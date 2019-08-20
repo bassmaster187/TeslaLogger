@@ -33,3 +33,6 @@ TeslaLogger/bin/TeslaLogger.exe
 TeslaLogger/bin/nohub.out
 teslalogger-grafana/dashboards/*
 teslalogger-grafana/grafana.db
+TeslaLogger/bin/backup.sh
+TeslaLogger/bin/GeocodeCache.xml
+TeslaLogger/bin/geofence.csv
