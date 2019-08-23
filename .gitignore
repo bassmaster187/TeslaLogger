@@ -21,3 +21,5 @@ TeslaLogger/bin/tesla_token.txt
 TeslaLogger/bin/MQTTClient.exe.config
 TeslaLogger/bin/tmp/*
 TeslaLogger/bin/view_trip.txt
+TeslaLogger/bin/GeocodeCache.xml
+TeslaLogger/bin/TeslaLogger.exe.config
