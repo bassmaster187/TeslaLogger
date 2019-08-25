@@ -1,12 +1,23 @@
 # TeslaLogger
 
+<<<<<<< HEAD
+=======
+NOTICE: This is a work in process branch for docker compose!
+
+---
+
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 TeslaLogger is a self hosted data logger for your Tesla Model S/X/3. Actually it supports RaspberryPi 3B and 3B+.
 
 You can download the Raspberry image here: https://teslalogger.de/teslalogger20190812-public.zip
 I strongly recommand you to use an official Raspberry kit as some sd-cards and power supply will run in some serious problems.
 Amazon: https://amzn.to/2GhIcPu
 
+<<<<<<< HEAD
 If you want to purchase a ready to go Raspberry PI 3B+ with TeslaLogger installed, send me an e-email: mail@pogea.de
+=======
+If you want to purchase a ready to go Raspberry PI 3B with TeslaLogger installed, send me an e-email: mail@pogea.de
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 120€ shipped to Europa / $150 shipped to USA.
 
 # Configuration
@@ -21,8 +32,11 @@ http://raspberry/admin/password.php
 Enter the same credentials as you use in your teslaaccount or app.
 
 ## Settings & Language
+<<<<<<< HEAD
 Available languages: English, German, Norwegian - Translations are welcome
 
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 Change the language and units and reboot the Teslalogger.
 
 http://raspberry/admin/settings.php
@@ -35,6 +49,7 @@ http://raspberry:3000
 
 Username: admin
 
+<<<<<<< HEAD
 Password: teslalogger
 
 ## SSH for advanced users
@@ -54,6 +69,9 @@ Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLog
 </setting>
 ```
 value 0 is 1st car / value 1 is 2nd car and so on...
+=======
+Passwort: teslalogger
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 
 # German manual
 http://teslalogger.de/handbuch.php

@@ -189,8 +189,12 @@ namespace TeslaLogger
                     string temperature;
                     string length;
                     string language;
+<<<<<<< HEAD
                     string URL_Admin;
                     Tools.GrafanaSettings(out power, out temperature, out length, out language, out URL_Admin);
+=======
+                    Tools.GrafanaSettings(out power, out temperature, out length, out language);
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -372,12 +376,21 @@ namespace TeslaLogger
                             else if (f.EndsWith("Verbrauch.json"))
                             {
                                 s = ReplaceTitleTag(s, "Verbrauch", dictLanguage);
+<<<<<<< HEAD
 
                                 s = ReplaceNameTag(s, "Laden", dictLanguage);
                                 s = ReplaceNameTag(s, "Laden fertig", dictLanguage);
                                 s = ReplaceNameTag(s, "Schlafen", dictLanguage);
                                 s = ReplaceNameTag(s, "Online", dictLanguage);
 
+=======
+
+                                s = ReplaceNameTag(s, "Laden", dictLanguage);
+                                s = ReplaceNameTag(s, "Laden fertig", dictLanguage);
+                                s = ReplaceNameTag(s, "Schlafen", dictLanguage);
+                                s = ReplaceNameTag(s, "Online", dictLanguage);
+
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Geschwindigkeit [km/h]", "Geschwindigkeit [mph]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "SOC [%]",
                                     "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]"
@@ -406,6 +419,7 @@ namespace TeslaLogger
                                 Tools.Log("Title of " + f + " not translated!");
                         }
 
+<<<<<<< HEAD
                         if (URL_Admin.Length > 0)
                         {
                             string temp_URL = URL_Admin;
@@ -415,6 +429,8 @@ namespace TeslaLogger
                             s = s.Replace("http://raspberry/admin/", temp_URL);
                         }
 
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                         System.IO.File.WriteAllText(f, s);
                     }
 

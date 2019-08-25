@@ -64,6 +64,7 @@
 
                         return;
                     }
+<<<<<<< HEAD
                 }
 
                 string temp = "";
@@ -89,6 +90,33 @@
 
                 }
 
+=======
+                }
+
+                string temp = "";
+                if (ex != null)
+                    temp = ex.ToString();
+
+                string prefix = GetPrefix(temp);
+
+                if (temp.Contains("The operation has timed out"))
+                {
+                    Tools.Log(prefix + "HTTP Timeout");
+                    System.Threading.Thread.Sleep(10000);
+                    return;
+                }
+                else if (temp.Contains("Connection refused"))
+                {
+                    Tools.Log(prefix + "Connection refused");
+                    System.Threading.Thread.Sleep(50000);
+                    return;
+                }
+                else
+                {
+
+                }
+
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 if (temp.Length > 0)
                     temp += "\r\n-------------------------\r\n";
 
@@ -220,6 +248,7 @@
                
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+<<<<<<< HEAD
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
                 {
@@ -234,6 +263,15 @@
                             int.TryParse(s[1], out startSleepingMinutes);
                         }
                     }
+=======
+                if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                {
+                    string start = j["SleepTimeSpanStart"];
+                    string[] s = start.Split(':');
+
+                    int.TryParse(s[0], out startSleepingHour);
+                    int.TryParse(s[1], out startSleepingMinutes);
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 }
             }
             catch (Exception ex)
@@ -242,13 +280,20 @@
             }
         }
 
+<<<<<<< HEAD
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin)
+=======
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language)
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
         {
             power = "hp";
             temperature = "celsius";
             length = "km";
             language = "de";
+<<<<<<< HEAD
             URL_Admin = "";
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
 
             try
             {
@@ -271,12 +316,15 @@
 
                 if (IsPropertyExist(j, "Language"))
                     language = j["Language"];
+<<<<<<< HEAD
 
                 if (IsPropertyExist(j, "URL_Admin"))
                 {
                     if (j["URL_Admin"].ToString().Length > 0)
                         URL_Admin = j["URL_Admin"];
                 }
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
             }
             catch (Exception ex)
             {

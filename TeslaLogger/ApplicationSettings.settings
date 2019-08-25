@@ -26,8 +26,11 @@
     <Setting Name="MapQuestKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+<<<<<<< HEAD
     <Setting Name="TaskerPrefix" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
   </Settings>
 </SettingsFile>

@@ -295,10 +295,13 @@ namespace TeslaLogger
                 foreach (byte b in crc32.ComputeHash(tempTasker))
                     TaskerHash += b.ToString("x2").ToLower();
 
+<<<<<<< HEAD
                 if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
                     TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
 
 
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
@@ -472,6 +475,7 @@ namespace TeslaLogger
                 }
                 else if (carSettings.Battery == "BT85")
                 {
+<<<<<<< HEAD
                     if (carSettings.AWD)
                     {
                         if (carSettings.Performance)
@@ -498,6 +502,10 @@ namespace TeslaLogger
                             eff = "0.201";
                         }
                     }
+=======
+                    car = "S 85";
+                    eff = "0.200";
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 }
                 else if (carSettings.Battery == "PBT85")
                 {
@@ -564,6 +572,7 @@ namespace TeslaLogger
             {
                 if (carSettings.Battery == "BT37")
                 {
+<<<<<<< HEAD
                     if (carSettings.Performance)
                     {
                         eff = "0.153";
@@ -574,6 +583,10 @@ namespace TeslaLogger
                         eff = "0.153";
                         car = "M3";
                     }
+=======
+                    eff = "0.153"; 
+                    car = "M3 LR";
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 }
                 else
                 {
@@ -684,7 +697,11 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
+<<<<<<< HEAD
                         Tools.Log("No Valid IsDriving since 10min! (Exception)");
+=======
+                        Tools.Log("No Valid IsDriving since 10min!");
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                         lastShift_State = "P";
                         return false;
                     }
@@ -1019,6 +1036,7 @@ namespace TeslaLogger
                     cmd2.ExecuteNonQuery();
 
                     System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + address);
+<<<<<<< HEAD
                 }
             }
             catch (Exception ex)
@@ -1089,6 +1107,78 @@ FROM
 
             GeocodeCache.Instance.Write();
 
+=======
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "UpdateAddressByPosId");
+            }
+        }
+
+        public void UpdateAllEmptyAddresses()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(@"SELECT  
+        pos_start.address AS Start_address,
+        pos_end.address AS End_address,
+        pos_start.id AS PosStartId,
+        pos_start.lat AS PosStartLat,
+        pos_start.lng AS PosStartLng,
+        pos_end.id AS PosEndId,
+        pos_end.lat AS PosEndtLat,
+        pos_end.lng AS PosEndLng
+FROM
+        drivestate
+        JOIN pos pos_start ON drivestate.StartPos = pos_start.id
+        JOIN pos pos_end ON drivestate.EndPos = pos_end.id
+    WHERE
+        ((pos_end.odometer - pos_start.odometer) > 0.1) and (pos_start.address IS null or pos_end.address IS null or pos_start.address = '' or pos_end.address = '')", con);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    System.Threading.Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                    try
+                    {
+                        if (!(dr["Start_address"] != DBNull.Value && dr["Start_address"].ToString().Length > 0))
+                        {
+                            int id = (int)dr["PosStartId"];
+                            var lat = (double)dr["PosStartLat"];
+                            var lng = (double)dr["PosStartLng"];
+                            var address = ReverseGecocodingAsync(lat, lng);
+                            var altitude = AltitudeAsync(lat, lng);
+
+                            string addressResult = address.Result;
+                            if (!String.IsNullOrEmpty(addressResult))
+                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                        }
+
+                        if (!(dr["End_address"] != DBNull.Value && dr["End_address"].ToString().Length > 0))
+                        {
+                            int id = (int)dr["PosEndId"];
+                            var lat = (double)dr["PosEndtLat"];
+                            var lng = (double)dr["PosEndLng"];
+                            var address = ReverseGecocodingAsync(lat, lng);
+                            var altitude = AltitudeAsync(lat, lng);
+
+                            string addressResult = address.Result;
+                            if (!String.IsNullOrEmpty(addressResult))
+                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.ExceptionWriter(ex, "");
+                    }
+                }
+            }
+
+            GeocodeCache.Instance.Write();
+
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -1119,6 +1209,7 @@ FROM
 
             GeocodeCache.Instance.Write();
         }
+<<<<<<< HEAD
 
         public void UpdateAllPOIAddresses()
         {
@@ -1130,6 +1221,19 @@ FROM
                 int count = 0;
                 Tools.Log("UpdateAllPOIAddresses start");
 
+=======
+
+        public void UpdateAllPOIAddresses()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(60 * 1000 * 10); 
+
+                int t = Environment.TickCount;
+                int count = 0;
+                Tools.Log("UpdateAllPOIAddresses start");
+
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
@@ -1507,8 +1611,11 @@ FROM
         {
             try
             {
+<<<<<<< HEAD
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
 
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
                 if (!force && ts.TotalSeconds < 20)
@@ -1533,11 +1640,14 @@ FROM
                 d.Add("db_eff", carSettings.DB_Wh_TR);
                 d.Add("db_eff_cnt", carSettings.DB_Wh_TR_count);
 
+<<<<<<< HEAD
                 d.Add("pw", power);
                 d.Add("temp", temperature);
                 d.Add("le", length);
                 d.Add("ln", language);
                 
+=======
+>>>>>>> c57eb95ff09f78417f0d5d5e6e2f8bbafec29531
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
 
