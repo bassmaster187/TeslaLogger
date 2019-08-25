@@ -25,6 +25,9 @@ TeslaLogger/bin/view_trip.txt
 teslalogger-database/*
 */TeslaLogger.exe.config
 
+acme/
+TeslaLogger/www/.htpasswd
+
 TeslaLogger/bin/view_trip.txt
 TeslaLogger/bin/tesla_token.txt
 TeslaLogger/bin/current_json.txt

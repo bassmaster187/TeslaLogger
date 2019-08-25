@@ -26,7 +26,7 @@ services:
       - ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql
       - teslalogger-database:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3306
 
   grafana:
     image: grafana/grafana:6.3.2
@@ -35,7 +35,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
       - GF_INSTALL_PLUGINS=pr0ps-trackmap-panel
     ports:
-      - 3000:3000
+      - 3000
+    networks:
+      - proxynet
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/Grafana/:/var/lib/grafana/dashboards/
@@ -44,6 +46,14 @@ services:
       - teslalogger-grafana:/var/lib/grafana
     depends_on:
       - database
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=${COMPOSE_PROJECT_NAME}_proxynet' # you need to change pd_ to something else if you use a different stack name when starting
+      - 'traefik.port=3000'
+      - 'traefik.backend=grafana'
+      - 'traefik.backend.loadbalancer.method=drr'
+      - 'traefik.frontend.rule=Host:${FQDN_GRAFANA}' # change this to your hostname. That hostname needs to point to your server
+      - 'traefik.domain=${FQDN_GRAFANA}' # change this to your hostname. That hostname needs to point to your server
 
   webserver:
     image: php:7.3-apache
@@ -52,8 +62,53 @@ services:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/Properties/AssemblyInfo.cs:/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs
+    networks:
+      - proxynet
     ports:
-      - 8888:80
+      - 80
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=${COMPOSE_PROJECT_NAME}_proxynet' # you need to change pd_ to something else if you use a different stack name when starting
+      - 'traefik.port=80'
+      - 'traefik.backend=webserver'
+      - 'traefik.backend.loadbalancer.method=drr'
+      - 'traefik.frontend.rule=Host:${FQDN_ADMIN}' # change this to your hostname. That hostname needs to point to your server
+      - 'traefik.domain=${FQDN_ADMIN}' # change this to your hostname. That hostname needs to point to your server
+      - 'traefik.frontend.auth.basic.usersFile=/www/.htpasswd'
+
+  proxy:
+    image: traefik
+    restart: always
+    command:
+      - '--loglevel=WARN'
+      - '--api'
+      # - "--entrypoints=Name:http Address::80"
+      - '--entrypoints=Name:http Address::80 Redirect.EntryPoint:https'
+      - '--entrypoints=Name:https Address::443 TLS'
+      - '--defaultentrypoints=http,https'
+      - '--acme'
+      - '--acme.storage=/etc/acme/acme.json'
+      - '--acme.entryPoint=https'
+      - '--acme.onHostRule=true'
+      - '--acme.httpChallenge'
+      - '--acme.httpChallenge.entryPoint=http'
+      - '--acme.email=${LETSENCRYPT_EMAIL}'
+      ## comment out the next line to request a real certificate
+      #- "--acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # uncomment this line if you want to test the lets encrypt certificate generation
+      - '--docker'
+      - '--docker.exposedByDefault=false'
+      - '--docker.endpoint=unix:///var/run/docker.sock'
+      - '--docker.watch'
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./TeslaLogger/www:/www
+      - ./acme/:/etc/acme/
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxynet
+      - webgateway
 
 volumes:
     teslalogger-grafana:
