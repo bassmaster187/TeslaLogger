@@ -244,7 +244,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.EndDate)*1000 as StartDate, TP1.address as Adresse, \nUNIX_TIMESTAMP(T2.StartDate)*1000 as EndDate, T2.StartPos as EndPos, TP2.odometer, TP1.ideal_battery_range_km as StartRange,  TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\nTP1.ideal_battery_range_km - (select EndRange) as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\n(select RangeDiff / TimeDiffHours) as RangeLostPerHour,\n(SELECT sum(TIMESTAMPDIFF(MINUTE,StartDate,EndDate) / 60) FROM teslalogger.state where state = 'asleep' and StartDate >= T1.EndDate and EndDate  <= T2.StartDate) as sleephours,\n(select sleephours / TimeDiffHours * 100) as sleeppercent\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1",
+          "rawSql": "SELECT UNIX_TIMESTAMP(T1.EndDate)*1000 as StartDate, TP1.address as Adresse, \nUNIX_TIMESTAMP(T2.StartDate)*1000 as EndDate, T2.StartPos as EndPos, TP2.odometer, TP1.ideal_battery_range_km as StartRange,  TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\nTP1.ideal_battery_range_km - (select EndRange) as RangeDiff,\ntimestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\n(select RangeDiff / TimeDiffHours) as RangeLostPerHour,\n(SELECT sum(TIMESTAMPDIFF(MINUTE,StartDate,EndDate) / 60) FROM teslalogger.state where state = 'asleep' and StartDate >= T1.EndDate and EndDate  <= T2.StartDate) as sleephours,\n(select sleephours / TimeDiffHours * 100) as sleeppercent\nFROM drivestate as T1 \nleft outer join drivestate as T2 on T1.id + 1 = T2.id \nleft outer Join pos as TP1 on T1.EndPos = TP1.id \nleft outer join pos as TP2 on T2.StartPos = TP2.id\nwhere $__timeFilter(T1.EndDate) and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1 and (TP2.odometer - TP1.odometer) >= 0",
           "refId": "A",
           "select": [
             [
@@ -309,5 +309,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 12
+  "version": 39
 }
