@@ -23,7 +23,7 @@ namespace TeslaLogger
             get
             {
                 if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
-                    return "Server=localhost;Database=teslalogger;Uid=root;Password=teslalogger;";
+                    return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
 
                 return ApplicationSettings.Default.DBConnectionstring;
             }
