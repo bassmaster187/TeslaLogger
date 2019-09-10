@@ -6,6 +6,8 @@ services:
     restart: always
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
+      - ./Teslalogger/Grafana/:/var/lib/grafana/dashboards/
+      - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
     depends_on:
       - database
   
