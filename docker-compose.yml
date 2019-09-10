@@ -29,6 +29,7 @@ services:
     volumes: 
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./Teslalogger/Grafana/:/var/lib/grafana/dashboards/
+      - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
       - ./Teslalogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./Teslalogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - teslalogger-grafana:/var/lib/grafana

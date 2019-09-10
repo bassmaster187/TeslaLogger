@@ -1,0 +1,28 @@
+<div class="editor-row">
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Options</h5>
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Max data points</label>
+      <span class="max-width-10">
+        <input type="number" class="gf-form-input" ng-model="ctrl.panel.maxDataPoints" ng-change="ctrl.refresh()"/>
+      </span>
+    </div>
+    <gf-form-switch class="gf-form" label="Autozoom" label-class="width-9" tooltip="Automatically zoom the map to fit the data"
+                    checked="ctrl.panel.autoZoom" on-change="ctrl.zoomToFit()"/>
+  </div>
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Colors</h5>
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Line Color</label>
+      <span class="max-width-10">
+        <spectrum-picker class="gf-form-input" ng-model="ctrl.panel.lineColor" ng-change="ctrl.refreshColors()"/>
+      </span>
+    </div>
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Point Color</label>
+      <span class="max-width-10">
+        <spectrum-picker class="gf-form-input" ng-model="ctrl.panel.pointColor" ng-change="ctrl.refreshColors()"/>
+      </span>
+    </div>
+  </div>
+</div>
