@@ -160,14 +160,11 @@ namespace TeslaLogger
                                         Tools.Log(res);
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
-
-                                        int y = 0;
-
+                                        
                                         while (true)
                                         {
-                                            y++;
+                                            
                                             System.Threading.Thread.Sleep(30000);
-
                                             string res2 = wh.IsOnline().Result;
 
                                             if (res2 != "offline")
@@ -176,10 +173,15 @@ namespace TeslaLogger
                                                 break;
                                             }
 
-                                            if (y > 20)
+                                            if (wh.TaskerWakeupfile())
                                             {
-                                                y = 0;
-                                                string wakeup = wh.Wakeup().Result;  // is it really offline or does it pretend to be offline
+                                                if (wh.DeleteWakeupFile())
+                                                {
+                                                    string wakeup = wh.Wakeup().Result;
+                                                }
+
+                                                currentState = TeslaState.Start;
+                                                break;
                                             }
                                         }
                                     }

@@ -203,6 +203,8 @@ namespace TeslaLogger
                     exec_mono("mkdir", "/etc/teslalogger/tmp");
                     exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
+                    bool useNewTrackmapPanel = System.IO.Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
+
                     UpdateDBView(wh);
 
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
@@ -414,6 +416,9 @@ namespace TeslaLogger
 
                             s = s.Replace("http://raspberry/admin/", temp_URL);
                         }
+
+                        if (useNewTrackmapPanel)
+                            s = s.Replace("grafana-trackmap-panel", "pr0ps-trackmap-panel");
 
                         System.IO.File.WriteAllText(f, s);
                     }

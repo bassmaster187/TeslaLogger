@@ -14,7 +14,10 @@
         public string DB_Wh_TR = "";
         public string DB_Wh_TR_count = "0";
         public bool AWD = false;
-        public bool Performance = false;        
+        public bool Performance = false;
+        public string car_type = "";
+        public string car_special_type = "";
+        public string trim_badging = "";
 
         public static CarSettings ReadSettings()
         {
