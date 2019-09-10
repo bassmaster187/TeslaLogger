@@ -34,3 +34,4 @@ TeslaLogger/bin/nohub.out
 teslalogger-grafana/dashboards/*
 teslalogger-grafana/grafana.db
 TeslaLogger/bin/GeocodeCache.xml
+*.bak
