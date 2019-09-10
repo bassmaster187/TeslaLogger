@@ -93,7 +93,6 @@ namespace TeslaLogger
                 String online = wh.IsOnline().Result;
                 Tools.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
 
-
                 if (DBHelper.GetMaxPosid(false) == 0)
                 {
                     Tools.Log("Insert first Pos");
@@ -123,7 +122,6 @@ namespace TeslaLogger
                 // wh.StartStreamThread(); // xxx
 
                 DBHelper.UpdateIncompleteTrips();
-                
 
                 while (true)
                 {
