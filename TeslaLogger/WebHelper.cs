@@ -401,13 +401,13 @@ namespace TeslaLogger
                     dynamic jBadgeResult = jBadge["response"];
 
                     if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
-                        carSettings.car_type = jBadgeResult["car_type"];
+                        carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
 
                     if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
-                        carSettings.car_special_type = jBadgeResult["car_special_type"];
+                        carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
 
                     if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
-                        carSettings.trim_badging = jBadgeResult["trim_badging"];
+                        carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
 
                     UpdateEfficiency();
 
@@ -433,8 +433,12 @@ namespace TeslaLogger
             string car = "";
             if (carSettings.car_type == "models2" && carSettings.car_special_type == "base")
             {
-                
-                if (carSettings.trim_badging == "75d")
+                if (carSettings.trim_badging == "60")
+                {
+                    WriteCarSettings("0.200", "S 60");
+                    return;
+                }
+                else if (carSettings.trim_badging == "75d")
                 {
                     WriteCarSettings("0.186", "S 75D");
                     return;
@@ -447,6 +451,21 @@ namespace TeslaLogger
                 else if (carSettings.trim_badging == "90d")
                 {
                     WriteCarSettings("0.189", "S 90D");
+                    return;
+                }
+                else if (carSettings.trim_badging == "100d")
+                {
+                    WriteCarSettings("0.189", "S 100D");
+                    return;
+                }
+                else if (carSettings.trim_badging == "p100d")
+                {
+                    WriteCarSettings("0.200", "S 100D");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.190", "S ???");
                     return;
                 }
             }
@@ -482,6 +501,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.201", "S 85");
                     return;
                 }
+                else
+                {
+                    WriteCarSettings("0.200", "S ???");
+                    return;
+                }
             }
             else if (carSettings.car_type == "modelx" && carSettings.car_special_type == "base")
             {
@@ -508,6 +532,11 @@ namespace TeslaLogger
                 else if (carSettings.trim_badging == "p90d")
                 {
                     WriteCarSettings("0.217", "X P90D");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.208", "X ???");
                     return;
                 }
             }
