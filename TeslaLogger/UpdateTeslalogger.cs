@@ -204,6 +204,8 @@ namespace TeslaLogger
                         exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
 
                         exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+
+                        Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
                     Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
