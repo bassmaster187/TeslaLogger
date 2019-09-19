@@ -73,6 +73,7 @@ namespace TeslaLogger
                     exec_mono("mkdir", "/etc/teslalogger/git");
                     exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
 
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
@@ -195,6 +196,16 @@ namespace TeslaLogger
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
                     Tools.Log("Start Grafana update");
+
+                    if (Tools.GetGrafanaVersion() == "5.5.0-d3b39f39pre1")
+                    {
+                        Tools.Log("upgrade Grafana to 6.3.5!");
+
+                        exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
+
+                        exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+                    }
+
                     Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
 
                     exec_mono("rm", "-rf /etc/teslalogger/tmp/*");

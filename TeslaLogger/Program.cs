@@ -27,8 +27,10 @@ namespace TeslaLogger
         static TeslaState currentState = TeslaState.Start;
         WebHelper wh = new WebHelper();
         static DateTime lastCarUsed = DateTime.Now;
+        static DateTime lastOdometerChanged = DateTime.Now;
         static DateTime lastTryTokenRefresh = DateTime.Now;
         static bool goSleepWithWakeup = false;
+        private static double odometerLastTrip;
 
         static void Main(string[] args)
         {
@@ -44,6 +46,7 @@ namespace TeslaLogger
                 Tools.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Tools.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
                 Tools.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+                Tools.Log("Grafana Version: " + Tools.GetGrafanaVersion());
                 
                 Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
@@ -198,10 +201,22 @@ namespace TeslaLogger
 
                             case TeslaState.Online:
                                 {
-                                    if (wh.IsDriving())
+                                    if (wh.IsDriving() && DBHelper.currentJSON.current_speed > 0)
                                     {
                                         lastCarUsed = DateTime.Now;
+                                        lastOdometerChanged = DateTime.Now;
+
                                         Tools.Log("Driving");
+                                        double missingOdometer = DBHelper.currentJSON.current_odometer - odometerLastTrip;
+
+                                        if (odometerLastTrip != 0)
+                                        {
+                                            if (missingOdometer > 5)
+                                                Tools.Log($"Missing: {missingOdometer} km! - Check: https://teslalogger.de/faq-1.php");
+                                            else
+                                                Tools.Log($"Missing: {missingOdometer} km");
+                                        }
+
                                         // TODO: StartDriving
                                         currentState = TeslaState.Drive;
                                         wh.StartStreamThread(); // für altitude
@@ -359,16 +374,34 @@ namespace TeslaLogger
 
                                         if (t > 0)
                                             System.Threading.Thread.Sleep(t); // alle 5 sek eine positionsmeldung
+
+                                        if (odometerLastTrip != DBHelper.currentJSON.current_odometer)
+                                        {
+                                            odometerLastTrip = DBHelper.currentJSON.current_odometer;
+                                            lastOdometerChanged = DateTime.Now;
+                                        }
+                                        else
+                                        {
+                                            if (wh.isCharging(true))
+                                            {
+                                                Tools.Log("Charging during Drive -> Finish Trip!!!");
+                                                DriveFinished(wh);
+                                            }
+                                            else
+                                            {
+                                                // Odometer didn't change for 600 seconds 
+                                                TimeSpan ts = DateTime.Now - lastOdometerChanged;
+                                                if (ts.TotalSeconds > 600)
+                                                {
+                                                    Tools.Log("Odometer didn't change for 600 seconds  -> Finish Trip!!!");
+                                                    DriveFinished(wh);
+                                                }
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        // fahren aufgehört
-                                        // TODO: Fahrt beenden
-                                        currentState = TeslaState.Start;
-                                        DBHelper.currentJSON.current_trip_end = DateTime.Now;
-                                        DBHelper.currentJSON.current_trip_km_end = DBHelper.currentJSON.current_odometer;
-                                        DBHelper.currentJSON.current_trip_end_range = DBHelper.currentJSON.current_ideal_battery_range_km;
-                                        wh.StopStreaming();
+                                        DriveFinished(wh);
                                     }
                                 }
                                 break;
@@ -456,6 +489,18 @@ namespace TeslaLogger
             {
                 Tools.Log("Teslalogger Stopped!");
             }
+        }
+
+        private static void DriveFinished(WebHelper wh)
+        {
+            // finish trip
+            currentState = TeslaState.Start;
+            DBHelper.currentJSON.current_trip_end = DateTime.Now;
+            DBHelper.currentJSON.current_trip_km_end = DBHelper.currentJSON.current_odometer;
+            DBHelper.currentJSON.current_trip_end_range = DBHelper.currentJSON.current_ideal_battery_range_km;
+            wh.StopStreaming();
+
+            odometerLastTrip = DBHelper.currentJSON.current_odometer;
         }
 
         private static void CheckNewCredentials()
