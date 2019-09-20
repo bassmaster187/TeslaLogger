@@ -1,6 +1,6 @@
 FROM mono:6.0.0.313
 
-# timezone / date   
+# timezone / date
 RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 # install packages
@@ -9,7 +9,8 @@ RUN apt-get update && \
   apt-get clean && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/* && \
-  echo "export TERM=xterm" >> /root/.bashrc
+  echo "export TERM=xterm" >> /root/.bashrc && \
+  echo "DOCKER" >> /etc/teslalogger/DOCKER
 
 WORKDIR /etc/teslalogger
 

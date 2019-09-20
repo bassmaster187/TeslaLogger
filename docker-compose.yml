@@ -10,7 +10,7 @@ services:
       - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
     depends_on:
       - database
-  
+
   database:
     image: mariadb:10.4.7
     restart: always
@@ -18,17 +18,17 @@ services:
       - .env
     volumes:
       - ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql
-    ports: 
+    ports:
       - 3306:3306
-        
+
   grafana:
-    image: grafana/grafana:6.3.2
+    image: grafana/grafana:6.3.5
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
-    ports: 
+    ports:
       - 3000:3000
-    volumes: 
+    volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./Teslalogger/Grafana/:/var/lib/grafana/dashboards/
       - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
@@ -47,6 +47,6 @@ services:
       - ./TeslaLogger/Properties/AssemblyInfo.cs:/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs
     ports:
       - 8888:80
-            
+
 volumes:
     teslalogger-grafana:
