@@ -25,3 +25,4 @@ TeslaLogger/bin/GeocodeCache.xml
 TeslaLogger/bin/TeslaLogger.exe.config
 *.bak
 TeslaLogger/bin/nohup.out
+TeslaLogger/GrafanaDashboards/*
