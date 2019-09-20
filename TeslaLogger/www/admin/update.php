@@ -8,8 +8,6 @@
 	
 	sleep(2);
 
-	shell_exec('pkill mono');
-	
 	$output  = shell_exec('sudo /sbin/reboot');
 	if ($output === false) {
         // Handle the error
