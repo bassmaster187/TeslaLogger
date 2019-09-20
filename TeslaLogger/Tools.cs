@@ -291,5 +291,25 @@
 
             return false;
         }
+
+        public static string GetGrafanaVersion()
+        {
+            try
+            {
+                string filename = "/usr/share/grafana/VERSION";
+
+                if (File.Exists(filename))
+                {
+                    return File.ReadAllText(filename);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Tools.ExceptionWriter(ex, "GetGrafanaVersion");
+            }
+
+            return "?";
+        }
     }
 }

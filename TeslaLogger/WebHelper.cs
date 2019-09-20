@@ -157,7 +157,7 @@ namespace TeslaLogger
 
         String lastCharging_State = "";
 
-        internal bool isCharging()
+        internal bool isCharging(bool justCheck = false)
         {
             string resultContent = "";
             try
@@ -172,6 +172,9 @@ namespace TeslaLogger
 
                 if (r2["charging_state"] == null)
                 {
+                    if (justCheck)
+                        return false;
+
                     Tools.Log("charging_state = null");
 
                     System.Threading.Thread.Sleep(10000);
@@ -183,6 +186,15 @@ namespace TeslaLogger
                 }
 
                 var charging_state = r2["charging_state"].ToString();
+
+                if (justCheck)
+                {
+                    if (charging_state == "Charging")
+                        return true;
+                    else
+                        return false;
+                }
+
                 var timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 var battery_level = r2["battery_level"].ToString();
@@ -450,7 +462,7 @@ namespace TeslaLogger
                 }
                 else if (carSettings.trim_badging == "90d")
                 {
-                    WriteCarSettings("0.189", "S 90D");
+                    WriteCarSettings("0.188", "S 90D");
                     return;
                 }
                 else if (carSettings.trim_badging == "100d")
@@ -481,9 +493,19 @@ namespace TeslaLogger
                     WriteCarSettings("0.200", "S 70");
                     return;
                 }
+                else if (carSettings.trim_badging == "70d")
+                {
+                    WriteCarSettings("0.194", "S 70D");
+                    return;
+                }
                 else if (carSettings.trim_badging == "p85d")
                 {
                     WriteCarSettings("0.201", "S P85D");
+                    return;
+                }
+                else if (carSettings.trim_badging == "p85+")
+                {
+                    WriteCarSettings("0.201", "S P85+");
                     return;
                 }
                 else if (carSettings.trim_badging == "85d")
@@ -501,6 +523,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.201", "S 85");
                     return;
                 }
+                else if (carSettings.trim_badging == "90d")
+                {
+                    WriteCarSettings("0.187", "S 90D");
+                    return;
+                }
                 else
                 {
                     WriteCarSettings("0.200", "S ???");
@@ -511,17 +538,17 @@ namespace TeslaLogger
             {
                 if (carSettings.trim_badging == "75d")
                 {
-                    WriteCarSettings("0.208", "X 75D");
+                    WriteCarSettings("0.224", "X 75D");
                     return;
                 }
                 else if (carSettings.trim_badging == "100d")
                 {
-                    WriteCarSettings("0.208", "X 100D");
+                    WriteCarSettings("0.217", "X 100D");
                     return;
                 }
                 else if (carSettings.trim_badging == "90d")
                 {
-                    WriteCarSettings("0.208", "X 90D");
+                    WriteCarSettings("0.212", "X 90D");
                     return;
                 }
                 else if (carSettings.trim_badging == "p100d")
@@ -536,7 +563,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    WriteCarSettings("0.208", "X ???");
+                    WriteCarSettings("0.217", "X ???");
                     return;
                 }
             }
@@ -1671,6 +1698,8 @@ FROM
                 d.Add("CT", carSettings.car_type);
                 d.Add("CST", carSettings.car_special_type);
                 d.Add("TB", carSettings.trim_badging);
+
+                d.Add("G", Tools.GetGrafanaVersion());
 
 
                 var content = new FormUrlEncodedContent(d);
