@@ -37,3 +37,5 @@ TeslaLogger/bin/backup.sh
 TeslaLogger/bin/GeocodeCache.xml
 TeslaLogger/bin/geofence.csv
 *.bak
+TeslaLogger/bin/geofence-private.csv
+TeslaLogger/GrafanaDashboards/*
