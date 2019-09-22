@@ -148,14 +148,14 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6M",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -186,5 +186,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 17
+  "version": 45
 }
