@@ -42,8 +42,8 @@ namespace TeslaLogger
             {
                 Tools.SetThread_enUS();
 
-                Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
 
                 Tools.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Tools.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
