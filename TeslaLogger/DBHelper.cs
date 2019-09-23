@@ -225,34 +225,51 @@ namespace TeslaLogger
 
         public static void UpdateTripElevation(int startPos, int maxPosId)
         {
+            /*
             if (startPos == 0 || maxPosId == 0)
                 return;
-
-            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
-                return;
+            */
 
             Tools.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
 
             String inhalt = "";
             try
             {
+                var srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
+                
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id > {startPos} and id < {maxPosId} and speed > 0 and altitude is null and lat is not null and lng is not null and lat > 0 and lng > 0 order by id", DBConnectionstring);
                 da.Fill(dt);
 
-                if (dt.Rows.Count < 2)
-                    return;
+                int x = 0;
 
-                Tools.Log($"UpdateTripElevation Count:{dt.Rows.Count}");
-                int count = 500;
-                for (int start = 0; start < dt.Rows.Count; start+=count)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    int end = start + count;
-                    end = Math.Min(end, dt.Rows.Count);
+                    string sql = null;
+                    try
+                    {
+                        double latitude = (double)dr[1];
+                        double longitude = (double)dr[2];
 
-                    UpdateTripElevationSubcall(dt, start, end);
-                    System.Threading.Thread.Sleep(5000);
+                        int? height = srtmData.GetElevation(latitude, longitude);
+
+                        if (height != null)
+                            ExecuteSQLQuery($"update pos set altitude={height} where id={dr[0]}");
+
+                        x++;
+
+                        if (x > 100)
+                        {
+                            x = 0;
+                            Tools.Log($"UpdateTripElevation ID:{dr[0]}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.ExceptionWriter(ex, sql);
+                    }
                 }
+
             }
             catch (Exception ex)
             {

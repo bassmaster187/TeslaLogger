@@ -108,6 +108,15 @@
             File.WriteAllText(filepath, temp);
         }
 
+        internal static string GetSRTMDataPath()
+        {
+            var path = System.IO.Path.Combine(FileManager.GetExecutingPath(), "SRTM-Data");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            return path;
+        }
+
         /// <summary>
         /// This is needed for mono. On some distributions (e.g. Docker) only the filename as a path
         /// will write the file in / (root)
