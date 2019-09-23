@@ -258,7 +258,7 @@ namespace TeslaLogger
 
                         x++;
 
-                        if (x > 100)
+                        if (x > 250)
                         {
                             x = 0;
                             Tools.Log($"UpdateTripElevation ID:{dr[0]}");
