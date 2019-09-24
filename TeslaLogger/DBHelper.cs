@@ -225,10 +225,9 @@ namespace TeslaLogger
 
         public static void UpdateTripElevation(int startPos, int maxPosId)
         {
-            /*
+            
             if (startPos == 0 || maxPosId == 0)
                 return;
-            */
 
             Tools.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
 
@@ -253,7 +252,7 @@ namespace TeslaLogger
 
                         int? height = srtmData.GetElevation(latitude, longitude);
 
-                        if (height != null)
+                        if (height != null && height < 8000 && height > -428)
                             ExecuteSQLQuery($"update pos set altitude={height} where id={dr[0]}");
 
                         x++;
@@ -371,10 +370,20 @@ namespace TeslaLogger
         {
             try
             {
+                /*
                 if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     return;
+                    */
 
                 int startid = 1;
+                int count = 0;
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000");
+                if (count > 0)
+                    Tools.Log($"Positions above 8000m updated: {count}");
+
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428");
+                if (count > 0)
+                    Tools.Log($"Positions below -428m updated: {count}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
