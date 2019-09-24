@@ -38,6 +38,7 @@
             List<Address> list = new List<Address>();
 
             ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+            UpdateTeslalogger.chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
             ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
 
             Tools.Log("Addresses inserted: " + list.Count);
