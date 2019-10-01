@@ -71,7 +71,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Tools.Log(ex.ToString());
+                    Logfile.Log(ex.ToString());
                     duration = 0;
                 }
                 if (duration < 0)
@@ -112,7 +112,7 @@
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
                 current_json = "";
             }
         }

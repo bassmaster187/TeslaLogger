@@ -79,7 +79,7 @@
             }
             catch (Exception e)
             {
-                Tools.Log($"RestoreToken Exception: {e.Message}");
+                Logfile.Log($"RestoreToken Exception: {e.Message}");
 
                 return string.Empty;
             }
@@ -97,15 +97,6 @@
         internal static void WriteCurrentJsonFile(string current_json)
         {
             File.WriteAllText(GetFilePath(TLFilename.CurrentJsonFilename), current_json, Encoding.UTF8);
-        }
-
-        internal static void WriteException(string temp)
-        {
-            string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
-
-            var filepath = Path.Combine(GetExecutingPath(), filename);
-
-            File.WriteAllText(filepath, temp);
         }
 
         internal static string GetSRTMDataPath()

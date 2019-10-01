@@ -75,7 +75,7 @@ namespace TeslaLogger
                 int MaxPosid = GetMaxPosid();
                 CloseState(MaxPosid);
 
-                Tools.Log("state: " + state);
+                Logfile.Log("state: " + state);
 
                 MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
@@ -128,7 +128,7 @@ namespace TeslaLogger
                         long anz = (long)dr["anz"];
                         double wh_km = (double)dr["economy_Wh_km"];
 
-                        Tools.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
+                        Logfile.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
 
                         wh.carSettings.DB_Wh_TR = wh_km.ToString();
                         wh.carSettings.DB_Wh_TR_count = anz.ToString();
@@ -137,8 +137,30 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
+        }
+
+        internal static double getLatestOdometer()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT EndKm FROM trip order by StartDate desc Limit 1", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        return (double)dr[0];
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "getLatestOdometer");
+            }
+
+            return 0;
         }
 
         internal static void GetLastTrip()
@@ -167,7 +189,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -229,11 +251,12 @@ namespace TeslaLogger
             if (startPos == 0 || maxPosId == 0)
                 return;
 
-            Tools.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
+            Logfile.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
 
             String inhalt = "";
             try
             {
+                //SRTM.Logging.LogProvider.SetCurrentLogProvider(SRTM.Logging.Logger.)
                 var srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
                 
                 DataTable dt = new DataTable();
@@ -247,6 +270,8 @@ namespace TeslaLogger
                     string sql = null;
                     try
                     {
+                        System.Threading.Thread.Sleep(1);
+
                         double latitude = (double)dr[1];
                         double longitude = (double)dr[2];
 
@@ -260,23 +285,23 @@ namespace TeslaLogger
                         if (x > 250)
                         {
                             x = 0;
-                            Tools.Log($"UpdateTripElevation ID:{dr[0]}");
+                            Logfile.Log($"UpdateTripElevation ID:{dr[0]}");
                         }
                     }
                     catch (Exception ex)
                     {
-                        Tools.ExceptionWriter(ex, sql);
+                        Logfile.ExceptionWriter(ex, sql);
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, inhalt);
-                Tools.Log(ex.ToString());
+                Logfile.ExceptionWriter(ex, inhalt);
+                Logfile.Log(ex.ToString());
             }
 
-            Tools.Log($"UpdateTripElevation finished start:{startPos} ende:{maxPosId}");
+            Logfile.Log($"UpdateTripElevation finished start:{startPos} ende:{maxPosId}");
         }
 
         private static void UpdateTripElevationSubcall(DataTable dt, int Start, int End)
@@ -286,7 +311,7 @@ namespace TeslaLogger
 
             try
             {
-                Tools.Log($"UpdateTripElevationSubcall start: {Start} end: {End} count:{dt.Rows.Count}");
+                Logfile.Log($"UpdateTripElevationSubcall start: {Start} end: {End} count:{dt.Rows.Count}");
 
                 var ci = CultureInfo.CreateSpecificCulture("en-US");
                 StringBuilder sb = new StringBuilder();
@@ -325,8 +350,8 @@ namespace TeslaLogger
 
                 if (!(resultContent.Contains("elevationProfile") && resultContent.Contains("shapePoints")))
                 {
-                    Tools.Log("Mapquest Response: " + resultContent);
-                    Tools.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
+                    Logfile.Log("Mapquest Response: " + resultContent);
+                    Logfile.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
                     return;
                 }
 
@@ -354,15 +379,15 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            Tools.ExceptionWriter(ex, sql);
+                            Logfile.ExceptionWriter(ex, sql);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Tools.Log("Mapquest Response: " + resultContent);
-                Tools.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
+                Logfile.Log("Mapquest Response: " + resultContent);
+                Logfile.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
             }
         }
 
@@ -379,11 +404,11 @@ namespace TeslaLogger
                 int count = 0;
                 count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000");
                 if (count > 0)
-                    Tools.Log($"Positions above 8000m updated: {count}");
+                    Logfile.Log($"Positions above 8000m updated: {count}");
 
                 count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428");
                 if (count > 0)
-                    Tools.Log($"Positions below -428m updated: {count}");
+                    Logfile.Log($"Positions below -428m updated: {count}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -399,7 +424,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -438,7 +463,7 @@ namespace TeslaLogger
                             }
                             catch (Exception ex)
                             {
-                                Tools.Log(ex.ToString());
+                                Logfile.Log(ex.ToString());
                             }
                         });
                     }
@@ -446,7 +471,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -455,7 +480,7 @@ namespace TeslaLogger
             try
             {
                 if (logging)
-                    Tools.Log("UpdateDriveStatistics");
+                    Logfile.Log("UpdateDriveStatistics");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -522,11 +547,11 @@ namespace TeslaLogger
                                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
                                     cmd.ExecuteNonQuery();
 
-                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                 }
                                 else
                                 {
-                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
                                 }
                             }
                         }
@@ -571,11 +596,11 @@ namespace TeslaLogger
                                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
                                     cmd.ExecuteNonQuery();
 
-                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                 }
                                 else
                                 {
-                                    Tools.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
                                 }
                             }
                         }
@@ -584,7 +609,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -615,14 +640,14 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            Tools.Log(ex.ToString());
+                            Logfile.Log(ex.ToString());
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "UpdateIncompleteTrips");
+                Logfile.ExceptionWriter(ex, "UpdateIncompleteTrips");
             }
 
             return false;
@@ -630,7 +655,7 @@ namespace TeslaLogger
 
         public static void UpdateAllDrivestateData()
         {
-            Tools.Log("UpdateAllDrivestateData start");
+            Logfile.Log("UpdateAllDrivestateData start");
 
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
@@ -648,17 +673,17 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Tools.Log(ex.ToString());
+                        Logfile.Log(ex.ToString());
                     }
                 }
             }
 
-            Tools.Log("UpdateAllDrivestateData end");
+            Logfile.Log("UpdateAllDrivestateData end");
         }
 
         public static void StartDriveState()
         {
-            Tools.Log("StartDriveState");
+            Logfile.Log("StartDriveState");
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -739,7 +764,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    Tools.Log(ex.ToString());
+                    Logfile.Log(ex.ToString());
                 }
             }
 
@@ -814,7 +839,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -890,7 +915,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, car_version);
+                Logfile.ExceptionWriter(ex, car_version);
             }
         }
 
@@ -911,8 +936,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "GetLastCarVersion");
-                Tools.Log(ex.ToString());
+                Logfile.ExceptionWriter(ex, "GetLastCarVersion");
+                Logfile.Log(ex.ToString());
             }
 
             return "";
@@ -976,7 +1001,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, sql);
+                Logfile.ExceptionWriter(ex, sql);
                 throw;
             }
         }
@@ -1020,7 +1045,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "");
+                Logfile.ExceptionWriter(ex, "");
                 throw;
             }
         }
@@ -1028,7 +1053,7 @@ namespace TeslaLogger
         private static void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging)
         {
             if (logging)
-                Tools.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
+                Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -1071,7 +1096,7 @@ namespace TeslaLogger
         {
             try
             {
-                Tools.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID}");
+                Logfile.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1086,8 +1111,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, chargingstate_id.ToString());
-                Tools.Log(ex.ToString());
+                Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -1095,7 +1120,7 @@ namespace TeslaLogger
         {
             try
             {
-                Tools.Log("Delete Chargingstate " + chargingstate_id.ToString());
+                Logfile.Log("Delete Chargingstate " + chargingstate_id.ToString());
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1108,8 +1133,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, chargingstate_id.ToString());
-                Tools.Log(ex.ToString());
+                Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
     }

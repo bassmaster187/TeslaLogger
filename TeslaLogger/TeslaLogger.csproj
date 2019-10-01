@@ -44,10 +44,6 @@
     <Reference Include="MySql.Data">
       <HintPath>.\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SRTM, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\SRTM.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -85,6 +81,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logfile\Logfile.csproj">
+      <Project>{b6462053-a913-47b8-8719-ca08ee5b2e4e}</Project>
+      <Name>Logfile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\srtm\src\SRTM\SRTM.csproj">
+      <Project>{ae6a978e-8084-48c7-85dd-2e90fcd82f30}</Project>
+      <Name>SRTM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

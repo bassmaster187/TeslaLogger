@@ -41,14 +41,14 @@
             UpdateTeslalogger.chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
             ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
 
-            Tools.Log("Addresses inserted: " + list.Count);
+            Logfile.Log("Addresses inserted: " + list.Count);
 
             sortedList = list.OrderBy(o => o.lat).ToList();
         }
 
         private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
-            Tools.Log("CSV File changed: " + e.Name);
+            Logfile.Log("CSV File changed: " + e.Name);
 
             System.Threading.Thread.Sleep(5000);
             Init();            
@@ -60,7 +60,7 @@
             {
                 
 
-                Tools.Log("Read Geofence File: " + filename);
+                Logfile.Log("Read Geofence File: " + filename);
                 string line;
                 using (System.IO.StreamReader file = new System.IO.StreamReader(filename))
                 {
@@ -77,18 +77,18 @@
                                 Double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat)));
 
                             if (!filename.Contains("geofence.csv"))
-                                Tools.Log("Address inserted: " + args[0]);
+                                Logfile.Log("Address inserted: " + args[0]);
                         }
                         catch (Exception ex)
                         {
-                            Tools.ExceptionWriter(ex, line);
+                            Logfile.ExceptionWriter(ex, line);
                         }
                     }
                 }
             }
             else
             {
-                Tools.Log("FileNotFound: " + filename);
+                Logfile.Log("FileNotFound: " + filename);
             }
         }
 

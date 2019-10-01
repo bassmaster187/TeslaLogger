@@ -38,7 +38,7 @@
             }
             catch (Exception e)
             {
-                Tools.Log($"ReadCarSettings Exception: {e.Message}");
+                Logfile.Log($"ReadCarSettings Exception: {e.Message}");
                 ret = new CarSettings();
             }
             finally
@@ -55,7 +55,7 @@
             TextWriter tw = null;
             try
             {
-                Tools.Log("Write car settings");
+                Logfile.Log("Write car settings");
 
                 XmlSerializer s = new XmlSerializer(typeof(CarSettings));
 
@@ -65,7 +65,7 @@
             }
             catch (Exception e)
             {
-                Tools.Log($"WriteCarSettings Exception: {e.Message}");
+                Logfile.Log($"WriteCarSettings Exception: {e.Message}");
             }
             finally
             {

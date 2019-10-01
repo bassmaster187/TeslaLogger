@@ -72,12 +72,12 @@ namespace TeslaLogger
                         Tesla_token = args[0];
                         lastTokenRefresh = dt;
 
-                        Tools.Log("Restore Token OK. Age: " + dt.ToString());
+                        Logfile.Log("Restore Token OK. Age: " + dt.ToString());
                         return true;
                     }
                     else
                     {
-                        Tools.Log("Restore Token too old! " + dt.ToString());
+                        Logfile.Log("Restore Token too old! " + dt.ToString());
                     }
                 }
                 else
@@ -85,13 +85,13 @@ namespace TeslaLogger
                     if (filecontent == null)
                         filecontent = "NULL";
 
-                    Tools.Log("Restore Token not successful. " + filecontent);
+                    Logfile.Log("Restore Token not successful. " + filecontent);
                 }
             }
             catch (Exception ex)
             {
-                Tools.Log("Error in RestoreToken: " + ex.Message);
-                Tools.ExceptionWriter(ex, filecontent);
+                Logfile.Log("Error in RestoreToken: " + ex.Message);
+                Logfile.ExceptionWriter(ex, filecontent);
             }
 
             return false;
@@ -106,11 +106,11 @@ namespace TeslaLogger
                 for (int x = 0; x < ApplicationSettings.Default.TeslaPasswort.Length; x++)
                     hiddenPassword += "x";
 
-                Tools.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / '"+ hiddenPassword +"'");
+                Logfile.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / '"+ hiddenPassword +"'");
 
                 if (ApplicationSettings.Default.TeslaName.Length == 0 || ApplicationSettings.Default.TeslaPasswort.Length == 0)
                 {
-                    Tools.Log("NO Credentials");
+                    Logfile.Log("NO Credentials");
                     throw new Exception("NO Credentials");
                 }
 
@@ -134,7 +134,7 @@ namespace TeslaLogger
 
                 if (resultContent.Contains("authorization_required"))
                 {
-                    Tools.Log("Wrong Credentials");
+                    Logfile.Log("Wrong Credentials");
                     throw new Exception("Wrong Credentials");
                 }
 
@@ -148,8 +148,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log("Error in GetTokenAsync: " + ex.Message);
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.Log("Error in GetTokenAsync: " + ex.Message);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -175,7 +175,7 @@ namespace TeslaLogger
                     if (justCheck)
                         return false;
 
-                    Tools.Log("charging_state = null");
+                    Logfile.Log("charging_state = null");
 
                     System.Threading.Thread.Sleep(10000);
 
@@ -246,10 +246,10 @@ namespace TeslaLogger
             {
                 if (resultContent == null)
                 {
-                    Tools.Log("isCharging = NULL");
+                    Logfile.Log("isCharging = NULL");
                 }
                 else if (!resultContent.Contains("upstream internal error"))
-                    Tools.ExceptionWriter(ex, resultContent);
+                    Logfile.ExceptionWriter(ex, resultContent);
 
                 if (lastCharging_State == "Charging")
                     return true;
@@ -279,7 +279,7 @@ namespace TeslaLogger
 
                 if (ApplicationSettings.Default.Car >= r1temp.Length)
                 {
-                    Tools.Log("Car # " + ApplicationSettings.Default.Car + " not exists!");
+                    Logfile.Log("Car # " + ApplicationSettings.Default.Car + " not exists!");
                     return "NULL";
                 }
 
@@ -289,16 +289,16 @@ namespace TeslaLogger
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                 string display_name = r2["display_name"].ToString();
-                Tools.Log("display_name :" + display_name);
+                Logfile.Log("display_name :" + display_name);
 
                 string vin = r2["vin"].ToString();
-                Tools.Log("vin :" + vin);
+                Logfile.Log("vin :" + vin);
 
                 Tesla_id = r2["id"].ToString();
-                Tools.Log("id :" + Tesla_id);
+                Logfile.Log("id :" + Tesla_id);
 
                 Tesla_vehicle_id = r2["vehicle_id"].ToString();
-                Tools.Log("vehicle_id :" + Tesla_vehicle_id);
+                Logfile.Log("vehicle_id :" + Tesla_vehicle_id);
 
                 byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
 
@@ -311,7 +311,7 @@ namespace TeslaLogger
                     TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
 
 
-                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
+                Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -322,7 +322,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -373,7 +373,7 @@ namespace TeslaLogger
                     {
                         if (carSettings.Battery != battery[0])
                         {
-                            Tools.Log("Battery: " + battery[0] + " / " + carSettings.Model);
+                            Logfile.Log("Battery: " + battery[0] + " / " + carSettings.Model);
                             carSettings.Battery = battery[0];
 
                             carSettings.WriteSettings();
@@ -384,14 +384,14 @@ namespace TeslaLogger
 
                     if (state == "unknown")
                     {
-                        Tools.Log("unknown state " + unknownStateCounter);
+                        Logfile.Log("unknown state " + unknownStateCounter);
 
-                        Tools.ExceptionWriter(new Exception("unknown state"), resultContent);
+                        Logfile.ExceptionWriter(new Exception("unknown state"), resultContent);
 
                         if (unknownStateCounter == 0)
                         {
                             string r = Wakeup().Result;
-                            Tools.Log("WakupResult: " + r);
+                            Logfile.Log("WakupResult: " + r);
                         }
                         else
                             System.Threading.Thread.Sleep(10000);
@@ -426,14 +426,14 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    Tools.ExceptionWriter(ex, resultContent);
+                    Logfile.ExceptionWriter(ex, resultContent);
                 }
 
                 return state;
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -796,7 +796,7 @@ namespace TeslaLogger
                     if (ts.TotalMinutes > 10)
                     {
                         if (lastShift_State != "P")
-                            Tools.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
+                            Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
 
                         lastShift_State = "P";
                         return false;
@@ -831,9 +831,9 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 if (resultContent == null)
-                    Tools.Log("IsDriving: ResultContent=NULL!");
+                    Logfile.Log("IsDriving: ResultContent=NULL!");
                 else 
-                    Tools.ExceptionWriter(ex, resultContent);
+                    Logfile.ExceptionWriter(ex, resultContent);
 
                 if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
                 {
@@ -841,7 +841,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        Tools.Log("No Valid IsDriving since 10min! (Exception)");
+                        Logfile.Log("No Valid IsDriving since 10min! (Exception)");
                         lastShift_State = "P";
                         return false;
                     }
@@ -863,7 +863,7 @@ namespace TeslaLogger
 
         void StartStream()
         {
-            Tools.Log("StartStream");
+            Logfile.Log("StartStream");
             stopStreaming = false;
             string line = "";
             while (!stopStreaming)
@@ -913,10 +913,10 @@ namespace TeslaLogger
                             ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
                             System.Threading.Thread.Sleep(1000);
 
-                            Tools.ExceptionWriter(null, r);
+                            Logfile.ExceptionWriter(null, r);
                         }
                     }
-                    Tools.Log("StreamEnd");
+                    Logfile.Log("StreamEnd");
                     System.Diagnostics.Debug.WriteLine("StreamEnd");
 
                     
@@ -947,7 +947,7 @@ namespace TeslaLogger
                                         continue;
 
                                     var values = line.Split(',');
-                                    // Tools.Log("Elevation: " + values[4]);
+                                    // Logfile.Log("Elevation: " + values[4]);
 
                                     elevation = values[4];
                                     elevation_time = DateTime.Now;
@@ -960,12 +960,12 @@ namespace TeslaLogger
                 {
                     // System.Diagnostics.Debug.WriteLine(ex.ToString());
                     
-                    Tools.ExceptionWriter(ex, line);
+                    Logfile.ExceptionWriter(ex, line);
                     System.Threading.Thread.Sleep(10000);
                 }
             }
 
-            Tools.Log("StartStream Ende");
+            Logfile.Log("StartStream Ende");
         }
 
 
@@ -1004,7 +1004,7 @@ namespace TeslaLogger
                 if (resultContent == null)
                     resultContent = "NULL";
 
-                Tools.ExceptionWriter(ex, url + "\r\n" + resultContent);
+                Logfile.ExceptionWriter(ex, url + "\r\n" + resultContent);
             }
             return 0;
             */
@@ -1020,14 +1020,14 @@ namespace TeslaLogger
                 a = geofence.GetPOI(latitude, longitude);
                 if (a != null)
                 {
-                    Tools.Log("Reverse geocoding by Geofence");
+                    Logfile.Log("Reverse geocoding by Geofence");
                     return a.name;
                 }
 
                 String value = GeocodeCache.Instance.Search(latitude, longitude);
                 if (value != null)
                 {
-                    Tools.Log("Reverse geocoding by Cache");
+                    Logfile.Log("Reverse geocoding by Cache");
                     return value;
                 }
 
@@ -1117,12 +1117,12 @@ namespace TeslaLogger
                 if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                 {
                     MapQuestCount++;
-                    Tools.Log("Reverse geocoding by MapQuest: " + MapQuestCount);
+                    Logfile.Log("Reverse geocoding by MapQuest: " + MapQuestCount);
                 }
                 else
                 {
                     NominatimCount++;
-                    Tools.Log("Reverse geocoding by Nominatim" + NominatimCount);
+                    Logfile.Log("Reverse geocoding by Nominatim" + NominatimCount);
                 }
 
                 return adresse;
@@ -1135,7 +1135,7 @@ namespace TeslaLogger
                 if (resultContent == null)
                     resultContent = "NULL";
 
-                Tools.ExceptionWriter(ex, url + "\r\n"+ resultContent);
+                Logfile.ExceptionWriter(ex, url + "\r\n"+ resultContent);
             }
 
             return "";
@@ -1180,7 +1180,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "UpdateAddressByPosId");
+                Logfile.ExceptionWriter(ex, "UpdateAddressByPosId");
             }
         }
 
@@ -1239,7 +1239,7 @@ FROM
                     }
                     catch (Exception ex)
                     {
-                        Tools.ExceptionWriter(ex, "");
+                        Logfile.ExceptionWriter(ex, "");
                     }
                 }
             }
@@ -1269,7 +1269,7 @@ FROM
                     }
                     catch (Exception ex)
                     {
-                        Tools.ExceptionWriter(ex, "");
+                        Logfile.ExceptionWriter(ex, "");
                     }
                 }
             }
@@ -1285,7 +1285,7 @@ FROM
 
                 int t = Environment.TickCount;
                 int count = 0;
-                Tools.Log("UpdateAllPOIAddresses start");
+                Logfile.Log("UpdateAllPOIAddresses start");
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
@@ -1293,7 +1293,7 @@ FROM
                     MySqlCommand cmd = new MySqlCommand("Select lat, lng, id from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     int t2 = Environment.TickCount - t;
-                    Tools.Log($"UpdateAllPOIAddresses Select {t2}ms");
+                    Logfile.Log($"UpdateAllPOIAddresses Select {t2}ms");
 
                     while (dr.Read())
                     {
@@ -1321,17 +1321,17 @@ FROM
                         }
                         catch (Exception ex)
                         {
-                            Tools.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
+                            Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
                         }
                     }
                 }
 
                 t = Environment.TickCount - t;
-                Tools.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+                Logfile.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -1364,7 +1364,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
             return -1;
         }
@@ -1391,7 +1391,7 @@ FROM
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
-                            Tools.Log("sentry_mode: " + sentry_mode);
+                            Logfile.Log("sentry_mode: " + sentry_mode);
                         }
 
                         DBHelper.current_is_sentry_mode = sentry_mode;
@@ -1399,14 +1399,14 @@ FROM
 
                     } catch (Exception ex)
                     {
-                        Tools.ExceptionWriter(ex, resultContent);
-                        Tools.Log(ex.Message);
+                        Logfile.ExceptionWriter(ex, resultContent);
+                        Logfile.Log(ex.Message);
                     }
                 }
 
                 if (r2["odometer"] == null)
                 {
-                    Tools.Log("odometer = NULL");
+                    Logfile.Log("odometer = NULL");
                     return lastOdometerKM;
                 }
 
@@ -1417,7 +1417,7 @@ FROM
                     string car_version = r2["car_version"].ToString();
                     if (DBHelper.currentJSON.current_car_version != car_version)
                     {
-                        Tools.Log("Car Version: " + car_version);
+                        Logfile.Log("Car Version: " + car_version);
                         DBHelper.currentJSON.current_car_version = car_version;
 
                         DBHelper.SetCarVersion(car_version);
@@ -1427,7 +1427,7 @@ FROM
                 }
                 catch (Exception ex)
                 {
-                    Tools.Log(ex.ToString());
+                    Logfile.Log(ex.ToString());
                 }
                 
                 decimal odometerKM = odometer / 0.62137M;
@@ -1436,7 +1436,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
                 return lastOdometerKM;
             }
             return 0;
@@ -1466,7 +1466,7 @@ FROM
                 if (preconditioning != is_preconditioning)
                 {
                     is_preconditioning = preconditioning;
-                    Tools.Log("Preconditioning: " + preconditioning);
+                    Logfile.Log("Preconditioning: " + preconditioning);
                 }
 
                 DBHelper.current_is_preconditioning = preconditioning;
@@ -1477,10 +1477,10 @@ FROM
             {
                 if (resultContent == null)
                 {
-                    Tools.Log("GetOutsideTempAsync: NULL");
+                    Logfile.Log("GetOutsideTempAsync: NULL");
                     return 0;   
                 } else if (!resultContent.Contains("upstream internal error"))
-                    Tools.ExceptionWriter(ex, resultContent);
+                    Logfile.ExceptionWriter(ex, resultContent);
             }
             return 0;
         }
@@ -1503,7 +1503,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -1511,7 +1511,7 @@ FROM
 
         public async Task<String> PostCommand(String cmd, String data)
         {
-            Tools.Log("PostCommand: " + cmd + " - " + data);
+            Logfile.Log("PostCommand: " + cmd + " - " + data);
 
             string resultContent = "";
             try
@@ -1531,7 +1531,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -1587,7 +1587,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, resultContent);
+                Logfile.ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -1654,7 +1654,7 @@ FROM
 
         public void StopStreaming()
         {
-            Tools.Log("Request StopStreaming");
+            Logfile.Log("Request StopStreaming");
             stopStreaming = true;
         }
 
@@ -1671,7 +1671,7 @@ FROM
                 if (!force && ts.TotalSeconds < 20)
                     return false;
 
-                //Tools.Log("Check Tasker Webservice");
+                //Logfile.Log("Check Tasker Webservice");
 
                 lastTaskerWakeupfile = DateTime.Now;
 
@@ -1712,13 +1712,13 @@ FROM
 
                 if (resultContent.Contains("wakeupfile"))
                 {
-                    Tools.Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
+                    Logfile.Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Tools.Log("TaskerWakeupToken Exception: " + ex.Message);
+                Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
             }
             
             return false;
@@ -1732,7 +1732,7 @@ FROM
 
             if (existsWakeupFile)
             {
-                Tools.Log("Delete Wakeup file");
+                Logfile.Log("Delete Wakeup file");
                 System.IO.File.Delete(FileManager.GetFilePath(TLFilename.WakeupFilename));
                 ret = true;
             }

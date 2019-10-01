@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4B330D21-2EE5-4C34-B716-0DB1FBC58E29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C142786B-F60E-4B6B-B9F2-1D25C3A3D7B5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7E594B3F-4CA9-4198-B90D-DD16972D0481}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{71C3E43F-7206-435F-8A43-92F79B2777B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "releasenotes", "releasenotes", "{7B0DAA6C-67CD-4BCD-97AC-B81804EAA2F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM", "src\SRTM\SRTM.csproj", "{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM.Tests.Functional", "test\SRTM.Tests.Functional\SRTM.Tests.Functional.csproj", "{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B0DAA6C-67CD-4BCD-97AC-B81804EAA2F8} = {71C3E43F-7206-435F-8A43-92F79B2777B8}
+		{EB3BE394-DF15-49B8-8BC7-DA56DD0A0D67} = {4B330D21-2EE5-4C34-B716-0DB1FBC58E29}
+		{0CC09A5A-321C-4A77-B61F-4E3B14A0BACB} = {7E594B3F-4CA9-4198-B90D-DD16972D0481}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5714010C-59D1-4FFB-A854-0A4511E88222}
+	EndGlobalSection
+EndGlobal

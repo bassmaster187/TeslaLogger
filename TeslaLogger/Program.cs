@@ -45,28 +45,28 @@ namespace TeslaLogger
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
 
-                Tools.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
-                Tools.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
-                Tools.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
-                Tools.Log("Grafana Version: " + Tools.GetGrafanaVersion());
+                Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+                Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+                Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
                 
-                Tools.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
+                Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
-                Tools.Log("Car#:" + ApplicationSettings.Default.Car);
-                Tools.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
-                Tools.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
+                Logfile.Log("Car#:" + ApplicationSettings.Default.Car);
+                Logfile.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
+                Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
 
                 for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
                 {
                     try
                     {
-                        Tools.Log("DB Version: " + DBHelper.GetVersion());
-                        Tools.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
+                        Logfile.Log("DB Version: " + DBHelper.GetVersion());
+                        Logfile.Log("Count Pos: " + DBHelper.CountPos()); // test the DBConnection
                         break;
                     }
                     catch (Exception ex)
                     {
-                        Tools.Log("DBCONNECTION " + ex.Message);
+                        Logfile.Log("DBCONNECTION " + ex.Message);
                         System.Threading.Thread.Sleep(10000);
                     }
                 }
@@ -87,7 +87,7 @@ namespace TeslaLogger
                     tempToken += "XXXXX";
                 }
 
-                Tools.Log("TOKEN: " + tempToken);
+                Logfile.Log("TOKEN: " + tempToken);
 
                 if (DBHelper.DBConnectionstring.Length == 0)
                     return;
@@ -96,18 +96,18 @@ namespace TeslaLogger
                     return;
 
                 String online = wh.IsOnline().Result;
-                Tools.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
+                Logfile.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
 
                 if (DBHelper.GetMaxPosid(false) == 0)
                 {
-                    Tools.Log("Insert first Pos");
+                    Logfile.Log("Insert first Pos");
                     wh.IsDriving(true);
                 }
 
                 DBHelper.GetEconomy_Wh_km(wh);
                 wh.DeleteWakeupFile();
 
-                Tools.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
+                Logfile.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
                 double.TryParse(wh.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
                 DBHelper.GetLastTrip();
                 UpdateTeslalogger.Start(wh);
@@ -120,6 +120,10 @@ namespace TeslaLogger
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(true));
                 Task.Factory.StartNew(() => wh.UpdateAllEmptyAddresses());
+
+                DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
+                DBHelper.currentJSON.CreateCurrentJSON();
+
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
 
@@ -147,7 +151,7 @@ namespace TeslaLogger
 
                                     if (res == "online")
                                     {
-                                        Tools.Log(res);
+                                        Logfile.Log(res);
                                         currentState = TeslaState.Online;
                                         wh.IsDriving(true);
                                         DBHelper.StartState(res);
@@ -155,14 +159,14 @@ namespace TeslaLogger
                                     }
                                     else if (res == "asleep")
                                     {
-                                        Tools.Log(res);
+                                        Logfile.Log(res);
                                         currentState = TeslaState.Sleep;
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
                                     }
                                     else if (res == "offline")
                                     {
-                                        Tools.Log(res);
+                                        Logfile.Log(res);
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
                                         
@@ -174,7 +178,7 @@ namespace TeslaLogger
 
                                             if (res2 != "offline")
                                             {
-                                                Tools.Log("Back Online: " + res2);
+                                                Logfile.Log("Back Online: " + res2);
                                                 break;
                                             }
 
@@ -196,7 +200,7 @@ namespace TeslaLogger
                                         DBHelper.currentJSON.current_online = false;
                                         DBHelper.currentJSON.CreateCurrentJSON();
 
-                                        Tools.Log("Unhandled State: " + res);
+                                        Logfile.Log("Unhandled State: " + res);
                                     }
                                 }
                                 break;
@@ -208,15 +212,15 @@ namespace TeslaLogger
                                         lastCarUsed = DateTime.Now;
                                         lastOdometerChanged = DateTime.Now;
 
-                                        Tools.Log("Driving");
+                                        Logfile.Log("Driving");
                                         double missingOdometer = DBHelper.currentJSON.current_odometer - odometerLastTrip;
 
                                         if (odometerLastTrip != 0)
                                         {
                                             if (missingOdometer > 5)
-                                                Tools.Log($"Missing: {missingOdometer} km! - Check: https://teslalogger.de/faq-1.php");
+                                                Logfile.Log($"Missing: {missingOdometer} km! - Check: https://teslalogger.de/faq-1.php");
                                             else
-                                                Tools.Log($"Missing: {missingOdometer} km");
+                                                Logfile.Log($"Missing: {missingOdometer} km");
                                         }
 
                                         // TODO: StartDriving
@@ -230,7 +234,7 @@ namespace TeslaLogger
                                     else if (wh.isCharging())
                                     {
                                         lastCarUsed = DateTime.Now;
-                                        Tools.Log("Charging");
+                                        Logfile.Log("Charging");
                                         wh.IsDriving(true);
                                         DBHelper.StartChargingState();
                                         currentState = TeslaState.Charge;
@@ -247,13 +251,13 @@ namespace TeslaLogger
 
                                         if (FileManager.CheckCmdGoSleepFile())
                                         {
-                                            Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
+                                            Logfile.Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = false;
                                         }
                                         else if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
                                         {
-                                            Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
+                                            Logfile.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
                                             currentState = TeslaState.GoSleep;
                                             goSleepWithWakeup = true;
                                         }
@@ -268,25 +272,25 @@ namespace TeslaLogger
                                                 wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
                                                 if (wh.is_preconditioning)
                                                 {
-                                                    Tools.Log("preconditioning prevents car to get sleep");
+                                                    Logfile.Log("preconditioning prevents car to get sleep");
                                                     lastCarUsed = DateTime.Now;
                                                 }
                                                 else if (wh.is_sentry_mode)
                                                 {
-                                                    Tools.Log("sentry_mode prevents car to get sleep");
+                                                    Logfile.Log("sentry_mode prevents car to get sleep");
                                                     lastCarUsed = DateTime.Now;
                                                 }
                                                 else
                                                 {
                                                     try
                                                     {
-                                                        Tools.Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
+                                                        Logfile.Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
 
                                                         for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                                         {
                                                             if (wh.existsWakeupFile)
                                                             {
-                                                                Tools.Log("Wakeupfile prevents car to get sleep");
+                                                                Logfile.Log("Wakeupfile prevents car to get sleep");
                                                                 wh.DeleteWakeupFile();
                                                                 string wakeup = wh.Wakeup().Result;
                                                                 sleep = false;
@@ -295,12 +299,12 @@ namespace TeslaLogger
 
                                                             if (x % 10 == 0)
                                                             {
-                                                                Tools.Log("Waiting for car to go to sleep " + (x / 10).ToString());
+                                                                Logfile.Log("Waiting for car to go to sleep " + (x / 10).ToString());
 
                                                                 Tools.StartSleeping(out startSleepHour, out startSleepMinute);
                                                                 if (DateTime.Now.Hour == startSleepHour && DateTime.Now.Minute == startSleepMinute)
                                                                 {
-                                                                    Tools.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
+                                                                    Logfile.Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
                                                                     currentState = TeslaState.GoSleep;
                                                                     goSleepWithWakeup = true;
                                                                     break;
@@ -313,7 +317,7 @@ namespace TeslaLogger
                                                     finally
                                                     {
                                                         if (!goSleepWithWakeup)
-                                                            Tools.Log("Restart communication with Tesla Server!");
+                                                            Logfile.Log("Restart communication with Tesla Server!");
                                                     }
                                                 }
                                             }
@@ -352,14 +356,14 @@ namespace TeslaLogger
 
                                     if (res == "online")
                                     {
-                                        Tools.Log(res);
+                                        Logfile.Log(res);
                                         currentState = TeslaState.Start;
 
                                         wh.IsDriving(true); // Positionsmeldung in DB für Wechsel
                                     }
                                     else
                                     {
-                                        // Tools.Log(res);
+                                        // Logfile.Log(res);
                                         System.Threading.Thread.Sleep(10000); 
                                     }
                                 }
@@ -386,7 +390,7 @@ namespace TeslaLogger
                                         {
                                             if (wh.isCharging(true))
                                             {
-                                                Tools.Log("Charging during Drive -> Finish Trip!!!");
+                                                Logfile.Log("Charging during Drive -> Finish Trip!!!");
                                                 DriveFinished(wh);
                                             }
                                             else
@@ -395,7 +399,7 @@ namespace TeslaLogger
                                                 TimeSpan ts = DateTime.Now - lastOdometerChanged;
                                                 if (ts.TotalSeconds > 600)
                                                 {
-                                                    Tools.Log("Odometer didn't change for 600 seconds  -> Finish Trip!!!");
+                                                    Logfile.Log("Odometer didn't change for 600 seconds  -> Finish Trip!!!");
                                                     DriveFinished(wh);
                                                 }
                                             }
@@ -454,7 +458,7 @@ namespace TeslaLogger
 
                                                 if (DateTime.Now.Hour == stopSleepingHour && DateTime.Now.Minute == stopSleepingMinute)
                                                 {
-                                                    Tools.Log("Stop Sleeping Timespan reached!");
+                                                    Logfile.Log("Stop Sleeping Timespan reached!");
 
                                                     KeepSleeping = false;
                                                     currentState = TeslaState.Start;
@@ -465,7 +469,7 @@ namespace TeslaLogger
                                     }
                                     finally
                                     {
-                                        Tools.Log("Restart communication with Tesla Server!");
+                                        Logfile.Log("Restart communication with Tesla Server!");
                                     }
                                 }
                                 break;
@@ -475,7 +479,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Tools.ExceptionWriter(ex, "While Schleife");
+                        Logfile.ExceptionWriter(ex, "While Schleife");
                     }
 
                     System.Threading.Thread.Sleep(1000);
@@ -484,12 +488,12 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
-                Tools.ExceptionWriter(ex, "While Schleife");
+                Logfile.Log(ex.Message);
+                Logfile.ExceptionWriter(ex, "While Schleife");
             }
             finally
             {
-                Tools.Log("Teslalogger Stopped!");
+                Logfile.Log("Teslalogger Stopped!");
             }
         }
 
@@ -512,7 +516,7 @@ namespace TeslaLogger
                 if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.NewCredentialsFilename)))
                     return;
 
-                Tools.Log("new_credentials.json available");
+                Logfile.Log("new_credentials.json available");
 
                 string json = System.IO.File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
@@ -534,11 +538,11 @@ namespace TeslaLogger
 
                 ApplicationSettings.Default.Reload();
 
-                Tools.Log("credentials updated!");
+                Logfile.Log("credentials updated!");
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -551,19 +555,19 @@ namespace TeslaLogger
                 if (ts2.TotalMinutes > 30)
                 {
                     lastTryTokenRefresh = DateTime.Now;
-                    Tools.Log("try to get new Token");
+                    Logfile.Log("try to get new Token");
 
                     var temp = wh.GetTokenAsync().Result;
                     if (temp != "NULL")
                     {
-                        Tools.Log("new Token received!");
+                        Logfile.Log("new Token received!");
 
                         wh.Tesla_token = temp;
                         wh.lastTokenRefresh = DateTime.Now;
                     }
                     else
                     {
-                        Tools.Log("Error getting new Token!");
+                        Logfile.Log("Error getting new Token!");
                     }
                 }
             }
