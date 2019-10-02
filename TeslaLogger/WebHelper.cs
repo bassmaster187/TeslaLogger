@@ -310,6 +310,8 @@ namespace TeslaLogger
                 if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
                     TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
 
+                if (ApplicationSettings.Default.Car > 0)
+                    TaskerHash = TaskerHash +"_"+ ApplicationSettings.Default.Car;
 
                 Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 

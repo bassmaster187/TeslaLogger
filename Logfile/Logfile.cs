@@ -59,7 +59,25 @@ namespace TeslaLogger
                 if (temp.Contains("The operation has timed out"))
                 {
                     Logfile.Log(prefix + "HTTP Timeout");
-                    System.Threading.Thread.Sleep(10000);
+                    System.Threading.Thread.Sleep(15000);
+                    return;
+                }
+                if (temp.Contains("operation_timedout with 10s timeout for txid"))
+                {
+                    Logfile.Log(prefix + "Mothership Timeout");
+                    System.Threading.Thread.Sleep(20000);
+                    return;
+                }
+                if (temp.Contains("{\"response\":null,\"error\":\"not_found\",\"error_description\":\"\"}"))
+                {
+                    Logfile.Log(prefix + "Mothership response:null");
+                    System.Threading.Thread.Sleep(20000);
+                    return;
+                }
+                if (temp.Contains("502 Bad Gateway"))
+                {
+                    Logfile.Log(prefix + "Mothership 502 Bad Gateway");
+                    System.Threading.Thread.Sleep(30000);
                     return;
                 }
                 else if (temp.Contains("Connection refused"))
@@ -123,8 +141,12 @@ namespace TeslaLogger
                     return "StartStream: ";
                 else if (exception.Contains("TeslaLogger.WebHelper.IsOnline"))
                     return "IsOnline: ";
+                else if (exception.Contains("TeslaLogger.WebHelper.isCharging"))
+                    return "IsCharging: ";
                 else if (exception.Contains("TeslaLogger.WebHelper.IsDriving"))
                     return "IsDriving: ";
+                else if (exception.Contains("TeslaLogger.WebHelper.GetOutsideTempAsync"))
+                    return "GetOutsideTemp: ";
             }
             catch (Exception)
             {
