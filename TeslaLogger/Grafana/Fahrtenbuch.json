@@ -30,6 +30,7 @@
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -249,42 +250,7 @@
           "unit": "short"
         },
         {
-          "alias": "Ø °C",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "outside_temp_avg",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "max km/h",
-          "colorMode": "value",
-          "colors": [
-            "#d8d9da",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "speed_max",
-          "thresholds": [
-            "151",
-            "200"
-          ],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "max PS",
+          "alias": "Berechnete km",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -294,39 +260,7 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
           "mappingType": 1,
-          "pattern": "power_max",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "min PS",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "power_min",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Ø PS",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "power_avg",
+          "pattern": "km_diff_calc",
           "thresholds": [],
           "type": "number",
           "unit": "locale"
@@ -348,18 +282,21 @@
           "unit": "short"
         },
         {
-          "alias": "Ø km/h",
-          "colorMode": null,
+          "alias": "Differenz km",
+          "colorMode": "value",
           "colors": [
-            "rgba(245, 54, 54, 0.9)",
+            "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+            "rgba(245, 54, 54, 0.9)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
           "mappingType": 1,
-          "pattern": "avg_kmh",
-          "thresholds": [],
+          "pattern": "km_diff_calc_diff",
+          "thresholds": [
+            "1",
+            "5"
+          ],
           "type": "number",
           "unit": "locale"
         },
@@ -433,7 +370,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, StartKm, EndKm, km_diff, DurationMinutes, consumption_kWh\nfrom trip WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
+          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, StartKm, EndKm,\nEndKm - (SELECT EndKm FROM trip p_trip WHERE p_trip.StartDate < t1.StartDate ORDER BY StartDate DESC LIMIT 1) as km_diff_calc,\nkm_diff,\nEndKm - (SELECT EndKm FROM trip p_trip WHERE p_trip.StartDate < t1.StartDate ORDER BY StartDate DESC LIMIT 1) - km_diff as km_diff_calc_diff,\nDurationMinutes, consumption_kWh\nfrom trip t1 WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -457,11 +394,10 @@
       ],
       "title": "Fahrtenbuch",
       "transform": "table",
-      "transparent": false,
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -499,5 +435,5 @@
   "timezone": "",
   "title": "Fahrtenbuch",
   "uid": "p7DmwvmRz",
-  "version": 2
+  "version": 4
 }
