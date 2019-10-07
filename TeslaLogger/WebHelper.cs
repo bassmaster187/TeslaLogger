@@ -186,15 +186,6 @@ namespace TeslaLogger
                 }
 
                 var charging_state = r2["charging_state"].ToString();
-
-                if (justCheck)
-                {
-                    if (charging_state == "Charging")
-                        return true;
-                    else
-                        return false;
-                }
-
                 var timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 var battery_level = r2["battery_level"].ToString();
@@ -224,6 +215,33 @@ namespace TeslaLogger
 
                 if (r2["charger_pilot_current"] != null)
                     charger_pilot_current = r2["charger_pilot_current"].ToString();
+
+                if (justCheck)
+                {
+                    if (charging_state == "Charging")
+                    {
+                        Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp}");
+
+                        int iCharger_voltage = 0;
+                        double dPowerkW = 0.0;
+
+                        if (!int.TryParse(charger_voltage, out iCharger_voltage))
+                            return false;
+
+                        if (iCharger_voltage < 90)
+                            return false;
+
+                        if (!Double.TryParse(charger_power, out dPowerkW))
+                            return false;
+
+                        if (dPowerkW < 1.0)
+                            return false;                        
+
+                        return true;
+                    }
+                    else
+                        return false;
+                }
 
                 if (charging_state == "Charging")
                 {
@@ -450,6 +468,11 @@ namespace TeslaLogger
                 if (carSettings.trim_badging == "60")
                 {
                     WriteCarSettings("0.200", "S 60");
+                    return;
+                }
+                else if (carSettings.trim_badging == "60d")
+                {
+                    WriteCarSettings("0.187", "S 60D");
                     return;
                 }
                 else if (carSettings.trim_badging == "75d")
