@@ -220,7 +220,16 @@ namespace TeslaLogger
                 {
                     if (charging_state == "Charging")
                     {
-                        Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp}");
+                        String dtTimestamp = "?";
+                        try
+                        {
+                            dtTimestamp = DBHelper.UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                        catch (Exception)
+                        { }
+
+                        
+                        Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
 
                         int iCharger_voltage = 0;
                         double dPowerkW = 0.0;
@@ -1503,11 +1512,11 @@ FROM
                 if (resultContent == null)
                 {
                     Logfile.Log("GetOutsideTempAsync: NULL");
-                    return 0;   
+                    return null;   
                 } else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
             }
-            return 0;
+            return null;
         }
 
         public async Task<String> GetCommand(String cmd)
