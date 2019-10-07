@@ -174,7 +174,7 @@
         },
         {
           "decimals": null,
-          "format": "short",
+          "format": "locale",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -318,5 +318,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 53
+  "version": 87
 }
