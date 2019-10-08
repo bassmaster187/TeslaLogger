@@ -10,7 +10,7 @@ RUN apt-get update && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/* && \
   echo "export TERM=xterm" >> /root/.bashrc && \
-  echo "DOCKER" >> /etc/teslalogger/DOCKER
+  echo "DOCKER" >> /tmp/teslalogger-DOCKER
 
 WORKDIR /etc/teslalogger
 
