@@ -6,8 +6,8 @@ services:
     restart: always
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
-      - ./Teslalogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
-      - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
+      - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
+      - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
     depends_on:
       - database
 
@@ -30,10 +30,10 @@ services:
       - 3000:3000
     volumes:
       - ./TeslaLogger/bin:/etc/teslalogger
-      - ./Teslalogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
-      - ./Teslalogger/GrafanaPlugins/:/var/lib/grafana/plugins
-      - ./Teslalogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./Teslalogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
+      - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
+      - ./TeslaLogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./TeslaLogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - teslalogger-grafana:/var/lib/grafana
     depends_on:
       - database
