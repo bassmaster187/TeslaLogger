@@ -15,9 +15,9 @@ if(file_exists($filename))
 function t($t)
 {
 	global $ln;
-	if ($ln == null || empty($language) || $language == "de" )
+	if ($ln == null)
 		echo $t;
-		
-	echo($ln[$t]);
+	else
+		echo($ln[$t]);
 };
 ?>
