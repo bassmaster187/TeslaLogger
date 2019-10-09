@@ -39,3 +39,4 @@ TeslaLogger/bin/geofence.csv
 *.bak
 TeslaLogger/bin/geofence-private.csv
 TeslaLogger/GrafanaDashboards/*
+srtm/src/SRTM/bin/Debug/*

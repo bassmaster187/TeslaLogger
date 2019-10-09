@@ -8,6 +8,7 @@ services:
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
       - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
+      - teslalogger-grafana-usr:/usr/share/grafana/
     depends_on:
       - database
 
@@ -35,6 +36,7 @@ services:
       - ./TeslaLogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./TeslaLogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - teslalogger-grafana:/var/lib/grafana
+      - teslalogger-grafana-usr:/usr/share/grafana/
     depends_on:
       - database
 
@@ -50,3 +52,4 @@ services:
 
 volumes:
     teslalogger-grafana:
+    teslalogger-grafana-usr:
