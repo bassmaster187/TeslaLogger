@@ -9,9 +9,31 @@ namespace TeslaLogger
 {
     public class Logfile
     {
+        public static bool WriteToLogfile = false;
+        static string _logfilepath = null;
+        static string logfilepath
+        {
+            get
+            {
+                if (_logfilepath == null)
+                {
+                    _logfilepath = System.IO.Path.Combine(GetExecutingPath(), "nohup.out");
+                }
+
+                return _logfilepath;
+            }
+        }
+
+
         public static void Log(string text)
         {
-            Console.WriteLine(DateTime.Now.ToString(ciDeDE) + " : " + text);
+            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
+            Console.WriteLine(temp);
+
+            if (WriteToLogfile)
+            {
+                System.IO.File.AppendAllText(logfilepath, temp + "\r\n");
+            }
         }
 
         public static void ExceptionWriter(Exception ex, string inhalt)
