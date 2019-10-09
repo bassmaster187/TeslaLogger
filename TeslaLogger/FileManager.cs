@@ -21,7 +21,7 @@
     }
 
     /// <summary>
-    /// This Manager will handle all about Files, specially to have the correct 
+    /// This Manager will handle all about Files, specially to have the correct
     /// path for a file.
     /// For a new file add a new Enum and enter the filename in the constructor
     /// and use the GetFilePath(TLFilename) Method

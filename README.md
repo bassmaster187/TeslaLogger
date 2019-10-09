@@ -12,7 +12,7 @@ Within 2-3 minutes the Raspberry should show up in you network.
 ## Enter your Tesla crendentials
 Use your browser to go to:
 
-http://raspberry/admin/password.php 
+http://raspberry/admin/password.php
 
 Enter the same credentials as you use in your teslaaccount or app.
 
@@ -37,14 +37,14 @@ Password: teslalogger
 
 Username: pi
 
-Password: teslalogger 
+Password: teslalogger
 
 ## More than one car
 
-Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLogger.exe.config 
+Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLogger.exe.config
 ```xml
 <setting name="Car" serializeAs="String">
-  
+
 <value>0</value>
 
 </setting>
@@ -60,7 +60,7 @@ Please contact us beforehand to allow a coordinated approach for translations.
 # Donations:
 http://paypal.me/ChristianPogea
 
-You can also use my referral code to buy a Tesla: 
+You can also use my referral code to buy a Tesla:
 http://ts.la/christian7267
 
 # Screenshots
@@ -85,4 +85,3 @@ http://ts.la/christian7267
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain_month_en.png)
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/visited.PNG)
-

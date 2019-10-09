@@ -113,10 +113,10 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT  count(*) as anz, round(charging_End.charge_energy_added / (charging_End.ideal_battery_range_km - charging.ideal_battery_range_km), 3) AS economy_Wh_km
-                        FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID 
+                        FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID
                         LEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                        where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 100 
-                        and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 
+                        where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 100
+                        and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
                         and charging_End.battery_level <= 90
                         group by economy_Wh_km
                         order by anz desc
@@ -247,7 +247,7 @@ namespace TeslaLogger
 
         public static void UpdateTripElevation(int startPos, int maxPosId)
         {
-            
+
             if (startPos == 0 || maxPosId == 0)
                 return;
 
@@ -258,7 +258,7 @@ namespace TeslaLogger
             {
                 //SRTM.Logging.LogProvider.SetCurrentLogProvider(SRTM.Logging.Logger.)
                 var srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
-                
+
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id > {startPos} and id < {maxPosId} and speed > 0 and altitude is null and lat is not null and lng is not null and lat > 0 and lng > 0 order by id", DBConnectionstring);
                 da.Fill(dt);
@@ -419,7 +419,7 @@ namespace TeslaLogger
                     if (o != null && o != DBNull.Value)
                         startid = Convert.ToInt32(o);
                 }
-                
+
                 DBHelper.UpdateTripElevation(startid, DBHelper.GetMaxPosid()); // get elevation for all points
             }
             catch (Exception ex)
@@ -621,11 +621,11 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT pos_start.id as StartPos, pos_end.id as EndPos
-                     FROM drivestate 
+                     FROM drivestate
                      JOIN pos pos_start ON drivestate . StartPos = pos_start. id
-                     JOIN pos pos_end ON  drivestate . EndPos = pos_end. id 
+                     JOIN pos pos_end ON  drivestate . EndPos = pos_end. id
                      WHERE
-                     (pos_end. odometer - pos_start. odometer ) > 0.1 and 
+                     (pos_end. odometer - pos_start. odometer ) > 0.1 and
                      (( pos_start. ideal_battery_range_km is null) or ( pos_end. ideal_battery_range_km is null))", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -714,7 +714,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                
+
                 MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level)", con);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
@@ -874,7 +874,7 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
-                { 
+                {
                     int pos = Convert.ToInt32(dr[0]);
                     if (withReverseGeocoding)
                         UpdateAddress(pos);
@@ -1069,11 +1069,11 @@ namespace TeslaLogger
                          LEFT OUTER JOIN
                          charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
                     where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
-                    and odometer = @odometer and chargingstate.id < @chargingstate_id 
+                    and odometer = @odometer and chargingstate.id < @chargingstate_id
                     order by StartDate desc", con);
 
                 cmd.Parameters.AddWithValue("@odometer", odometer);
-                cmd.Parameters.AddWithValue("@chargingstate_id", chargingstate_id);                
+                cmd.Parameters.AddWithValue("@chargingstate_id", chargingstate_id);
 
                 int newId = 0;
                 DateTime newStartdate = DateTime.MinValue;

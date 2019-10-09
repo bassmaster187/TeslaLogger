@@ -17,13 +17,13 @@ namespace TeslaLogger
     class WebHelper
     {
         public static readonly String apiaddress = "https://owner-api.teslamotors.com/";
-        
+
         public string Tesla_token = "";
         public string Tesla_id = "";
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
         public string option_codes = "";
-        public CarSettings carSettings = null;        
+        public CarSettings carSettings = null;
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         public bool is_sentry_mode = false;
@@ -125,7 +125,7 @@ namespace TeslaLogger
                    { "email", ApplicationSettings.Default.TeslaName },
                    { "password", ApplicationSettings.Default.TeslaPasswort }
                 };
-                
+
                 var json = new JavaScriptSerializer().Serialize(values);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                 var result = await client.PostAsync(apiaddress + "oauth/token", content);
@@ -228,7 +228,7 @@ namespace TeslaLogger
                         catch (Exception)
                         { }
 
-                        
+
                         Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
 
                         int iCharger_voltage = 0;
@@ -244,7 +244,7 @@ namespace TeslaLogger
                             return false;
 
                         if (dPowerkW < 1.0)
-                            return false;                        
+                            return false;
 
                         return true;
                     }
@@ -341,6 +341,15 @@ namespace TeslaLogger
                     TaskerHash = TaskerHash +"_"+ ApplicationSettings.Default.Car;
 
                 Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
+
+                byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+
+                TaskerHash = String.Empty;
+                var crc32 = new DamienG.Security.Cryptography.Crc32();
+                foreach (byte b in crc32.ComputeHash(tempTasker))
+                    TaskerHash += b.ToString("x2").ToLower();
+
+                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -807,7 +816,7 @@ namespace TeslaLogger
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
-                
+
                 var timestamp = r2["timestamp"].ToString();
                 int speed = 0;
                 if (r2["speed"] != null)
@@ -846,7 +855,7 @@ namespace TeslaLogger
                     var odometer = GetOdometerAsync();
                     var outside_temp = GetOutsideTempAsync();
 
-                    
+
                     TimeSpan tsElevation = DateTime.Now - elevation_time;
                     if (tsElevation.TotalSeconds > 30)
                         elevation = "";
@@ -866,7 +875,7 @@ namespace TeslaLogger
             {
                 if (resultContent == null)
                     Logfile.Log("IsDriving: ResultContent=NULL!");
-                else 
+                else
                     Logfile.ExceptionWriter(ex, resultContent);
 
                 if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
@@ -905,7 +914,7 @@ namespace TeslaLogger
                 try
                 {
                     string online = IsOnline().Result;
-                                        
+
                     using (var ws = new System.Net.WebSockets.ClientWebSocket())
                     {
                         var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
@@ -915,7 +924,7 @@ namespace TeslaLogger
                         //ws.Options.Credentials = new NetworkCredential(ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken);
                         ws.Options.UseDefaultCredentials = false;
                         ws.Options.SetRequestHeader("Authorization", "Basic " + Convert.ToBase64String(byteArray));
-                        
+
                         var result = ws.ConnectAsync(serverUri, System.Threading.CancellationToken.None);
 
                         while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
@@ -924,7 +933,7 @@ namespace TeslaLogger
                             System.Threading.Thread.Sleep(100);
                         }
 
-                        
+
                         var bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
                         string msg = "{\"msg_type\": \"data:subscribe\", \"value\": [\"speed\",\"odometer\",\"soc\",\"elevation\",\"est_heading\",\"est_lat\",\"est_lng\",\"est_corrected_lat\",\"est_corrected_lng\",\"native_latitude\",\"native_longitude\",\"native_heading\",\"native_type\",\"native_location_supported\",\"power\",\"shift_state\"]}";
                         var bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(msg));
@@ -940,7 +949,7 @@ namespace TeslaLogger
                             byte[] buffer = new byte[1024];
                             var response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-                            
+
                             var r = Encoding.UTF8.GetString(buffer);
                             System.Diagnostics.Debug.WriteLine(r);
                             System.Threading.Thread.Sleep(100);
@@ -953,7 +962,7 @@ namespace TeslaLogger
                     Logfile.Log("StreamEnd");
                     System.Diagnostics.Debug.WriteLine("StreamEnd");
 
-                    
+
 
                     return;
 
@@ -993,7 +1002,7 @@ namespace TeslaLogger
                 catch (Exception ex)
                 {
                     // System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    
+
                     Logfile.ExceptionWriter(ex, line);
                     System.Threading.Thread.Sleep(10000);
                 }
@@ -1071,12 +1080,12 @@ namespace TeslaLogger
 
                 webClient.Headers.Add("User-Agent: TL 1.1");
                 webClient.Encoding = Encoding.UTF8;
-                
+
                 if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     url = "http://open.mapquestapi.com/nominatim/v1/reverse.php";
                 else
                     url = "http://nominatim.openstreetmap.org/reverse";
-                
+
                 url += "?format=jsonv2&lat=";
                 url += latitude.ToString();
                 url += "&lon=";
@@ -1096,7 +1105,7 @@ namespace TeslaLogger
                 }
 
                 resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
-                
+
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["address"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
@@ -1223,7 +1232,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT  
+                MySqlCommand cmd = new MySqlCommand(@"SELECT
         pos_start.address AS Start_address,
         pos_end.address AS End_address,
         pos_start.id AS PosStartId,
@@ -1315,7 +1324,7 @@ FROM
         {
             try
             {
-                System.Threading.Thread.Sleep(60 * 1000 * 10); 
+                System.Threading.Thread.Sleep(60 * 1000 * 10);
 
                 int t = Environment.TickCount;
                 int count = 0;
@@ -1463,7 +1472,7 @@ FROM
                 {
                     Logfile.Log(ex.ToString());
                 }
-                
+
                 decimal odometerKM = odometer / 0.62137M;
                 lastOdometerKM = (double)odometerKM;
                 return lastOdometerKM;
@@ -1512,7 +1521,7 @@ FROM
                 if (resultContent == null)
                 {
                     Logfile.Log("GetOutsideTempAsync: NULL");
-                    return null;   
+                    return null;
                 } else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
             }
@@ -1532,7 +1541,7 @@ FROM
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
-                
+
                 return resultContent;
             }
             catch (Exception ex)
@@ -1634,7 +1643,7 @@ FROM
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-            
+
             var resultTask = client.GetAsync("https://www.energy-charts.de/power/week_2018_46.json");
             HttpResponseMessage result = resultTask.Result;
             resultContent = result.Content.ReadAsStringAsync().Result;
@@ -1754,7 +1763,7 @@ FROM
             {
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
             }
-            
+
             return false;
         }
 

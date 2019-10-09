@@ -141,7 +141,7 @@ namespace TeslaLogger
                         Environment.Exit(0);
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -194,7 +194,7 @@ namespace TeslaLogger
                         int pos = line.IndexOf("=");
                         string key = line.Substring(0, pos).Trim();
                         string value = line.Substring(pos + 1);
-                         
+
                         // Logfile.Log("Key insert: " + key);
 
                         if (ht.ContainsKey(key))
@@ -300,7 +300,7 @@ namespace TeslaLogger
                             {
                                 s = s.Replace("Ø °C", "Ø °F");
 
-                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");   
+                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");
                             }
                             else if (f.EndsWith("Verbrauch.json"))
                             {
@@ -331,7 +331,7 @@ namespace TeslaLogger
                                 s = s.Replace("\"min\": \"300\"", "\"min\": \"180\"");
 
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
-                                
+
                             }
                             else if (f.EndsWith("Laden.json"))
                             {
@@ -595,7 +595,7 @@ namespace TeslaLogger
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.FileName = cmd;
                 proc.StartInfo.Arguments = param;
-                
+
                 proc.Start();
 
                 proc.WaitForExit();

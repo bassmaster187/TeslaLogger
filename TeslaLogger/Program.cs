@@ -1,4 +1,4 @@
-﻿using System; 
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -70,7 +70,7 @@ namespace TeslaLogger
                 Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
                 Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
                 Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
-                
+
                 Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
                 Logfile.Log("Car#:" + ApplicationSettings.Default.Car);
@@ -137,7 +137,7 @@ namespace TeslaLogger
                 DBHelper.currentJSON.current_car_version = DBHelper.GetLastCarVersion();
 
                 MQTTClient.StartMQTTClient();
-                
+
                 Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
                 Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(true));
                 Task.Factory.StartNew(() => wh.UpdateAllEmptyAddresses());
@@ -190,10 +190,10 @@ namespace TeslaLogger
                                         Logfile.Log(res);
                                         DBHelper.StartState(res);
                                         DBHelper.currentJSON.CreateCurrentJSON();
-                                        
+
                                         while (true)
                                         {
-                                            
+
                                             System.Threading.Thread.Sleep(30000);
                                             string res2 = wh.IsOnline().Result;
 
@@ -385,7 +385,7 @@ namespace TeslaLogger
                                     else
                                     {
                                         // Logfile.Log(res);
-                                        System.Threading.Thread.Sleep(10000); 
+                                        System.Threading.Thread.Sleep(10000);
                                     }
                                 }
                                 break;
@@ -416,7 +416,7 @@ namespace TeslaLogger
                                             }
                                             else
                                             {
-                                                // Odometer didn't change for 600 seconds 
+                                                // Odometer didn't change for 600 seconds
                                                 TimeSpan ts = DateTime.Now - lastOdometerChanged;
                                                 if (ts.TotalSeconds > 600)
                                                 {
@@ -495,6 +495,68 @@ namespace TeslaLogger
                                 }
                                 break;
 
+                            case TeslaState.GoSleep:
+                                {
+                                    bool KeepSleeping = true;
+                                    int round = 0;
+
+                                    try
+                                    {
+                                        while (KeepSleeping)
+                                        {
+                                            round++;
+                                            System.Threading.Thread.Sleep(1000);
+                                            if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
+                                            {
+                                                if (wh.DeleteWakeupFile())
+                                                {
+                                                    string wakeup = wh.Wakeup().Result;
+                                                }
+
+                                                KeepSleeping = false;
+                                                currentState = TeslaState.Start;
+                                                break;
+                                            }
+                                            else if (round > 10)
+                                            {
+                                                round = 0;
+
+                                                if (wh.TaskerWakeupfile())
+                                                {
+                                                    if (wh.DeleteWakeupFile())
+                                                    {
+                                                        string wakeup = wh.Wakeup().Result;
+                                                    }
+
+                                                    KeepSleeping = false;
+                                                    currentState = TeslaState.Start;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (goSleepWithWakeup)
+                                            {
+                                                int stopSleepingHour, stopSleepingMinute;
+                                                Tools.EndSleeping(out stopSleepingHour, out stopSleepingMinute);
+
+                                                if (DateTime.Now.Hour == stopSleepingHour && DateTime.Now.Minute == stopSleepingMinute)
+                                                {
+                                                    Tools.Log("Stop Sleeping Timespan reached!");
+
+                                                    KeepSleeping = false;
+                                                    currentState = TeslaState.Start;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        Tools.Log("Restart communication with Tesla Server!");
+                                    }
+                                }
+                                break;
+
                         }
 
                     }
@@ -505,7 +567,7 @@ namespace TeslaLogger
 
                     System.Threading.Thread.Sleep(1000);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -589,6 +651,74 @@ namespace TeslaLogger
                     else
                     {
                         Logfile.Log("Error getting new Token!");
+                    }
+                }
+            }
+            finally
+            {
+                Tools.Log("Teslalogger Stopped!");
+            }
+        }
+
+        private static void CheckNewCredentials()
+        {
+            try
+            {
+                if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.NewCredentialsFilename)))
+                    return;
+
+                Tools.Log("new_credentials.json available");
+
+                string json = System.IO.File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                var doc = new XmlDocument();
+                doc.Load(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));
+                XmlNodeList nodesTeslaName = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaName']/value");
+                nodesTeslaName.Item(0).InnerText = j["email"];
+
+                XmlNodeList nodesTeslaPasswort = doc.SelectNodes("/configuration/applicationSettings/TeslaLogger.ApplicationSettings/setting[@name='TeslaPasswort']/value");
+                nodesTeslaPasswort.Item(0).InnerText = j["password"];
+
+                doc.Save(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));
+
+                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.TeslaTokenFilename)))
+                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.TeslaTokenFilename));
+
+                System.IO.File.Delete(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
+
+                ApplicationSettings.Default.Reload();
+
+                Tools.Log("credentials updated!");
+            }
+            catch (Exception ex)
+            {
+                Tools.Log(ex.ToString());
+            }
+        }
+
+        private static void RefreshToken(WebHelper wh)
+        {
+            TimeSpan ts = DateTime.Now - wh.lastTokenRefresh;
+            if (ts.TotalDays > 9)
+            {
+                TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
+                if (ts2.TotalMinutes > 30)
+                {
+                    lastTryTokenRefresh = DateTime.Now;
+                    Tools.Log("try to get new Token");
+
+                    var temp = wh.GetTokenAsync().Result;
+                    if (temp != "NULL")
+                    {
+                        Tools.Log("new Token received!");
+
+                        wh.Tesla_token = temp;
+                        wh.lastTokenRefresh = DateTime.Now;
+                    }
+                    else
+                    {
+                        Tools.Log("Error getting new Token!");
                     }
                 }
             }

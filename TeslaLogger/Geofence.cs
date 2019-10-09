@@ -12,11 +12,11 @@
             this.lat = lat;
             this.lng = lng;
         }
-               
+
         public string name;
         public double lat;
         public double lng;
-    }   
+    }
 
     class Geofence
     {
@@ -71,7 +71,7 @@
         {
             if (System.IO.File.Exists(filename))
             {
-                
+
 
                 Logfile.Log("Read Geofence File: " + filename);
                 string line;

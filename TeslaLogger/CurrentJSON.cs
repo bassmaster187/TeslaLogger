@@ -76,7 +76,7 @@
                 }
                 if (duration < 0)
                     duration = 0;
-                
+
 
                 var values = new Dictionary<string, object>
                 {

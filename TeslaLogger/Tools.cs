@@ -9,7 +9,7 @@
 
     class Tools
     {
-        
+
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
         public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
 
@@ -39,7 +39,7 @@
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
             try
-            { 
+            {
                 foreach (DirectoryInfo dir in source.GetDirectories())
                 {
                     CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
@@ -115,7 +115,7 @@
 
                 if (!File.Exists(filePath))
                     return;
-               
+
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
