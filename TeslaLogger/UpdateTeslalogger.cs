@@ -119,6 +119,19 @@ namespace TeslaLogger
             {
                 if (File.Exists(cmd_restart_path))
                 {
+                    string content = File.ReadAllText(cmd_restart_path);
+                    if (content.Contains("update"))
+                    {
+                        Logfile.Log("Update Request!");
+
+                        if (System.IO.File.Exists("cmd_updated.txt"))
+                        {
+                            Logfile.Log("delete cmd_updated.txt");
+
+                            File.Delete("cmd_updated.txt");
+                        }
+                    }
+
                     File.Delete(cmd_restart_path);
 
                     if (Tools.IsDocker())
