@@ -9,8 +9,14 @@ namespace TeslaLogger
 {
     public class Logfile
     {
-        public static bool WriteToLogfile = false;
+        static bool WriteToLogfile = false;
         static string _logfilepath = null;
+        static Logfile()
+        {
+            if (IsDocker())
+                WriteToLogfile = true;
+        }
+
         static string logfilepath
         {
             get
@@ -178,6 +184,26 @@ namespace TeslaLogger
         }
 
         public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
+
+        public static bool IsDocker()
+        {
+            try
+            {
+                string filename = "/tmp/teslalogger-DOCKER";
+
+                if (File.Exists(filename))
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "IsDocker");
+            }
+
+            return false;
+        }
 
     }
 }
