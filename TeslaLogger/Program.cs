@@ -41,22 +41,9 @@ namespace TeslaLogger
             try
             {
                 Tools.SetThread_enUS();
-                
+                UpdateTeslalogger.chmod("nohup.out", 666, false);
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
-
-                try
-                {
-                    if (Tools.IsDocker())
-                    {
-                        // Logfile.WriteToLogfile = true;
-                        Logfile.Log("Docker: YES!");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logfile.Log(ex.ToString());
-                }
 
                 Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Logfile.Log("Logfile Version: " + System.Reflection.Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
@@ -68,6 +55,18 @@ namespace TeslaLogger
                 }
                 catch (Exception)
                 { }
+                try
+                {
+                    if (Tools.IsDocker())
+                        Logfile.Log("Docker: YES!");
+                    else
+                        Logfile.Log("Docker: NO!");
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+
                 Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
                 Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
                 Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());

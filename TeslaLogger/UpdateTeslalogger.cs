@@ -60,7 +60,6 @@ namespace TeslaLogger
                     chmod("VERSION", 666);
                     chmod("settings.json", 666);
                     chmod("cmd_updated.txt", 666);
-                    chmod("/etc/teslalogger/nohup.out", 666);
                     chmod("MQTTClient.exe.config", 666);
 
                     if (!exec_mono("git", "--version", false).Contains("git version"))
@@ -589,14 +588,15 @@ namespace TeslaLogger
             }
         }
 
-        public static void chmod(string filename, int chmod)
+        public static void chmod(string filename, int chmod, bool logging=true)
         {
             try
             {
                 if (!Tools.IsMono())
                     return;
 
-                Logfile.Log("chmod " + chmod + " " + filename);
+                if (logging)
+                    Logfile.Log("chmod " + chmod + " " + filename);
 
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.EnableRaisingEvents = false;
