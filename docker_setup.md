@@ -1,3 +1,5 @@
+# Docker Setup (BETA)
+
 Clone the Teslalogger repository into a new folder:
 ```
 git clone https://github.com/bassmaster187/TeslaLogger
