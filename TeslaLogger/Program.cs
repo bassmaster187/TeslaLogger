@@ -41,11 +41,33 @@ namespace TeslaLogger
             try
             {
                 Tools.SetThread_enUS();
-
+                
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
 
+                try
+                {
+                    if (Tools.IsDocker())
+                    {
+                        Logfile.WriteToLogfile = true;
+                        Logfile.Log("Docker: YES!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+
                 Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Logfile.Log("Logfile Version: " + System.Reflection.Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
+                Logfile.Log("SRTM Version: " + System.Reflection.Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
+                try
+                {
+                    string versionpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "VERSION");
+                    System.IO.File.WriteAllText(versionpath, System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                }
+                catch (Exception)
+                { }
                 Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
                 Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
                 Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());

@@ -57,6 +57,8 @@ namespace TeslaLogger
 
                 if (Tools.IsMono())
                 {
+                    chmod("VERSION", 666);
+                    chmod("settings.json", 666);
                     chmod("cmd_updated.txt", 666);
                     chmod("/etc/teslalogger/nohup.out", 666);
                     chmod("MQTTClient.exe.config", 666);
