@@ -1,6 +1,12 @@
+Clone the Teslalogger repository into a new folder:
+```
 git clone https://github.com/bassmaster187/TeslaLogger
+```
 
+Create a fresh config file:
+```
 copy TeslaLogger\app.config TeslaLogger\bin\TeslaLogger.exe.config
+```
 
 edit TeslaLogger\bin\TeslaLogger.exe.config with your favorite editor
 
@@ -27,8 +33,10 @@ The config file could look like this:
 ....
 ```
 
+```
 docker-compose build
 docker-compose up
+```
 
 after a minute or two, everything should be ready.
 
