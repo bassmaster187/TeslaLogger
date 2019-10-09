@@ -26,11 +26,15 @@
         public Geofence()
         {
             Init();
-            fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
-            fsw.Changed += Fsw_Changed;
-            // fsw.Created += Fsw_Changed;
-            // fsw.Renamed += Fsw_Changed;
-            fsw.EnableRaisingEvents = true;
+            if (fsw == null)
+            {
+                fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+                fsw.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+                fsw.Changed += Fsw_Changed;
+                // fsw.Created += Fsw_Changed;
+                // fsw.Renamed += Fsw_Changed;
+                fsw.EnableRaisingEvents = true;
+            }
         }
 
         void Init()
@@ -38,6 +42,12 @@
             List<Address> list = new List<Address>();
 
             ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+            if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
+            {
+                Logfile.Log("Create: " + FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
+                System.IO.File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
+            }
+
             UpdateTeslalogger.chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
             ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
 
@@ -49,9 +59,12 @@
         private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
             Logfile.Log("CSV File changed: " + e.Name);
+            fsw.EnableRaisingEvents = false;
 
             System.Threading.Thread.Sleep(5000);
-            Init();            
+            Init();
+
+            fsw.EnableRaisingEvents = true;
         }
 
         private static void ReadGeofenceFile(List<Address> list, string filename)
