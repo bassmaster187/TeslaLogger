@@ -6,10 +6,11 @@ RUN echo "Europe/Berlin" > /etc/timezone && dpkg-reconfigure -f noninteractive t
 # install packages
 RUN apt-get update && \
   apt-get install -y --no-install-recommends git && \
+  apt-get install -y --no-install-recommends mariadb-client && \
   apt-get clean && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/* && \
-  echo "export TERM=xterm" >> /root/.bashrc && \
+  echo "export TERM=xterm" >> /root/.bashrc  && \
   echo "DOCKER" >> /tmp/teslalogger-DOCKER
 
 WORKDIR /etc/teslalogger
