@@ -12,6 +12,8 @@ services:
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
     depends_on:
       - database
+    environment:
+      - TZ=Europe/Berlin
 
   database:
     image: mariadb:10.4.7
