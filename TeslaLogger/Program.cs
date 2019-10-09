@@ -49,7 +49,7 @@ namespace TeslaLogger
                 {
                     if (Tools.IsDocker())
                     {
-                        Logfile.WriteToLogfile = true;
+                        // Logfile.WriteToLogfile = true;
                         Logfile.Log("Docker: YES!");
                     }
                 }
