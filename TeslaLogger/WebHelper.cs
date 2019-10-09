@@ -61,7 +61,7 @@ namespace TeslaLogger
                 if (filecontent == string.Empty)
                     return false;
 
-                String [] args = filecontent.Split('|');
+                String[] args = filecontent.Split('|');
                 if (args.Length == 2 && args[0].Length == 64)
                 {
                     DateTime dt = DateTime.Parse(args[1]);
@@ -106,7 +106,7 @@ namespace TeslaLogger
                 for (int x = 0; x < ApplicationSettings.Default.TeslaPasswort.Length; x++)
                     hiddenPassword += "x";
 
-                Logfile.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / '"+ hiddenPassword +"'");
+                Logfile.Log("Login with : '" + ApplicationSettings.Default.TeslaName + "' / '" + hiddenPassword + "'");
 
                 if (ApplicationSettings.Default.TeslaName.Length == 0 || ApplicationSettings.Default.TeslaPasswort.Length == 0)
                 {
@@ -338,18 +338,9 @@ namespace TeslaLogger
                     TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
 
                 if (ApplicationSettings.Default.Car > 0)
-                    TaskerHash = TaskerHash +"_"+ ApplicationSettings.Default.Car;
+                    TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
 
                 Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
-
-                byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
-
-                TaskerHash = String.Empty;
-                var crc32 = new DamienG.Security.Cryptography.Crc32();
-                foreach (byte b in crc32.ComputeHash(tempTasker))
-                    TaskerHash += b.ToString("x2").ToLower();
-
-                Tools.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -800,7 +791,7 @@ namespace TeslaLogger
 
         String lastShift_State = "P";
 
-        public bool IsDriving(bool justinsertdb=false)
+        public bool IsDriving(bool justinsertdb = false)
         {
             string resultContent = "";
             try
@@ -833,8 +824,8 @@ namespace TeslaLogger
                     lastShift_State = shift_state;
                 }
                 else
-				{
-					TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
+                {
+                    TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
 
                     if (ts.TotalMinutes > 10)
                     {
@@ -844,9 +835,9 @@ namespace TeslaLogger
                         lastShift_State = "P";
                         return false;
                     }
-					else
-						shift_state = lastShift_State;
-				}
+                    else
+                        shift_state = lastShift_State;
+                }
 
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N")
                 {
@@ -1129,7 +1120,7 @@ namespace TeslaLogger
 
                 string house_number = "";
                 if (r2.ContainsKey("house_number"))
-                    house_number =r2["house_number"].ToString();
+                    house_number = r2["house_number"].ToString();
 
                 var name = "";
                 if (r2.ContainsKey("name") && r2["name"] != null)
@@ -1178,7 +1169,7 @@ namespace TeslaLogger
                 if (resultContent == null)
                     resultContent = "NULL";
 
-                Logfile.ExceptionWriter(ex, url + "\r\n"+ resultContent);
+                Logfile.ExceptionWriter(ex, url + "\r\n" + resultContent);
             }
 
             return "";
@@ -1232,7 +1223,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT
+                MySqlCommand cmd = new MySqlCommand(@"SELECT  
         pos_start.address AS Start_address,
         pos_end.address AS End_address,
         pos_start.id AS PosStartId,
@@ -1440,7 +1431,8 @@ FROM
                         DBHelper.current_is_sentry_mode = sentry_mode;
 
 
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Logfile.ExceptionWriter(ex, resultContent);
                         Logfile.Log(ex.Message);
@@ -1522,7 +1514,8 @@ FROM
                 {
                     Logfile.Log("GetOutsideTempAsync: NULL");
                     return null;
-                } else if (!resultContent.Contains("upstream internal error"))
+                }
+                else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
             }
             return null;
@@ -1624,7 +1617,7 @@ FROM
                     shift_state = r2["shift_state"].ToString();
 
                 if (shift_state == "D")
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0 , 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
 
                 return resultContent;
             }
@@ -1656,7 +1649,7 @@ FROM
             dt.Columns.Add("Datum", typeof(DateTime));
 
             object[] o1 = (object[])jsonResult;
-            foreach(object o2 in o1)
+            foreach (object o2 in o1)
             {
                 System.Collections.Generic.Dictionary<string, object> o3 = o2 as System.Collections.Generic.Dictionary<string, object>;
                 object[] name = o3["key"] as object[];
@@ -1669,7 +1662,7 @@ FROM
                 object[] values = o3["values"] as object[];
 
                 decimal lastkWh = 0;
-                for (int x = values.Length-1; x >= 0; x--)
+                for (int x = values.Length - 1; x >= 0; x--)
                 {
                     object[] v2 = values[x] as object[];
 
