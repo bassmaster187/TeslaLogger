@@ -9,6 +9,7 @@ services:
       - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
       - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
       - teslalogger-grafana-usr:/usr/share/grafana/
+      - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
     depends_on:
       - database
 
