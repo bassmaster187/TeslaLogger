@@ -136,7 +136,13 @@ require("language.php");
 
   function checkForUpdates()
   {
-	$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+	$installed = "?";
+	  
+	if (file_exists("/etc/teslalogger/VERSION"))
+		$installed = file_get_contents("/etc/teslalogger/VERSION");
+	else
+		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+	
 	$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
 
 	if ($installed != $onlineversion)
