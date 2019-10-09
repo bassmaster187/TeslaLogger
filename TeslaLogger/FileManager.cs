@@ -29,6 +29,7 @@
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
+        static string _ExecutingPath = null;
         static FileManager()
         {
             Filenames = new Dictionary<TLFilename, string>()
@@ -116,14 +117,19 @@
         public static string GetExecutingPath()
         {
             //System.IO.Directory.GetCurrentDirectory() is not returning the current path of the assembly
+            if (_ExecutingPath == null)
+            {
 
-            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-            var executingPath = executingAssembly.Location;
+                var executingPath = executingAssembly.Location;
 
-            executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
+                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
 
-            return executingPath;
+                _ExecutingPath = executingPath;
+            }
+
+            return _ExecutingPath;
         }
     }
 }

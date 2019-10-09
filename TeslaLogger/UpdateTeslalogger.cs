@@ -10,6 +10,7 @@ namespace TeslaLogger
 {
     class UpdateTeslalogger
     {
+        static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         public static void Start(WebHelper wh)
         {
             try
@@ -45,6 +46,8 @@ namespace TeslaLogger
                 {
                     UpdateDBView(wh);
                 }
+
+                System.Threading.Timer t = new System.Threading.Timer(FileChecker, null, 10000, 5000);
 
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
@@ -107,6 +110,29 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void FileChecker(object state)
+        {
+            try
+            {
+                if (File.Exists(cmd_restart_path))
+                {
+                    File.Delete(cmd_restart_path);
+
+                    if (Tools.IsDocker())
+                    {
+                        Logfile.Log("Restart Request!");
+
+                        Environment.Exit(0);
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
