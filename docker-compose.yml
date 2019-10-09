@@ -42,6 +42,8 @@ services:
       - teslalogger-grafana-usr:/usr/share/grafana/
     depends_on:
       - database
+    environment:
+      - TZ=Europe/Berlin
 
   webserver:
     image: php:7.3-apache
@@ -50,8 +52,11 @@ services:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/Properties/AssemblyInfo.cs:/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs
+      - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
     ports:
       - 8888:80
+    environment:
+      - TZ=Europe/Berlin
 
 volumes:
     teslalogger-grafana:
