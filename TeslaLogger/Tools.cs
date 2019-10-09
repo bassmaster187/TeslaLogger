@@ -209,5 +209,25 @@
 
             return "?";
         }
+
+        public static bool IsDocker()
+        {
+            try
+            {
+                string filename = "/tmp/teslalogger-DOCKER";
+
+                if (File.Exists(filename))
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "IsDocker");
+            }
+
+            return false;
+        }
     }
 }
