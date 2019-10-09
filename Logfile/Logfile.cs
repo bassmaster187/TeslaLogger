@@ -11,6 +11,7 @@ namespace TeslaLogger
     {
         static bool WriteToLogfile = false;
         static string _logfilepath = null;
+        static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
         static Logfile()
         {
             if (IsDocker())
@@ -38,7 +39,15 @@ namespace TeslaLogger
 
             if (WriteToLogfile)
             {
-                System.IO.File.AppendAllText(logfilepath, temp + "\r\n");
+                try
+                {
+                    mutex.WaitOne();
+                    System.IO.File.AppendAllText(logfilepath, temp + "\r\n");
+                }
+                finally
+                {
+                    mutex.ReleaseMutex();
+                }
             }
         }
 
