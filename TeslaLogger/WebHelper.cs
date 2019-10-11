@@ -37,6 +37,7 @@ namespace TeslaLogger
         static int MapQuestCount = 0;
         static int NominatimCount = 0;
 
+        ScanMyTesla scanMyTesla;
 
         static WebHelper()
         {
@@ -341,6 +342,8 @@ namespace TeslaLogger
                     TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
 
                 Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
+
+                scanMyTesla = new ScanMyTesla(TaskerHash);
 
                 /*
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
