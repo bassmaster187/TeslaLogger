@@ -37,7 +37,7 @@ namespace TeslaLogger
         static int MapQuestCount = 0;
         static int NominatimCount = 0;
 
-        ScanMyTesla scanMyTesla;
+        public ScanMyTesla scanMyTesla;
 
         static WebHelper()
         {

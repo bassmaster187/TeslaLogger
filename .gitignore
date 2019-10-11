@@ -28,3 +28,5 @@ TeslaLogger/bin/nohup.out
 TeslaLogger/GrafanaDashboards/*
 TeslaLogger/bin/VERSION
 TeslaLogger/bin/geofence-private.csv
+TeslaLogger/bin/nohup.out
+TeslaLogger/bin/SRTM-Data/*

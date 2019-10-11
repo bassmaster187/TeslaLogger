@@ -13,6 +13,7 @@ namespace TeslaLogger
     {
         string token;
         System.Threading.Thread thread;
+        bool fastmode = false;
         bool run = true;
 
         public ScanMyTesla(string token)
@@ -23,15 +24,36 @@ namespace TeslaLogger
             thread.Start();
         }
 
+        public void FastMode(bool fast)
+        {
+            Logfile.Log("ScanMyTesla FastMode: " + fast.ToString());
+            fastmode = fast;
+        }
+
         private void Start()
         {
+            string response = "";
+
             while (run)
             {
                 try
                 {
-                    string response = GetDataFromWebservice().Result;
+                    System.Threading.Thread.Sleep(5000);
+
+                    if (!fastmode && response == "not found")
+                    {
+                        for (int s = 0; s < 300; s++)
+                        {
+                            if (fastmode)
+                                break;
+
+                            System.Threading.Thread.Sleep(1000);
+                        }
+                    }
+
+                    response = GetDataFromWebservice().Result;
                     if (response.StartsWith("not found") || response.StartsWith("ERROR:"))
-                        System.Threading.Thread.Sleep(5000);
+                        System.Threading.Thread.Sleep(1000);
                     else
                     {
                         InsertData(response);

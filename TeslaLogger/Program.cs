@@ -163,6 +163,9 @@ namespace TeslaLogger
                                 {
                                     RefreshToken(wh);
 
+                                    if (wh.scanMyTesla != null)
+                                        wh.scanMyTesla.FastMode(false);
+
                                     // Alle States werden geschlossen
                                     DBHelper.CloseChargingState();
                                     DBHelper.CloseDriveState(wh.lastIsDriveTimestamp);
@@ -234,6 +237,9 @@ namespace TeslaLogger
                                         lastOdometerChanged = DateTime.Now;
 
                                         Logfile.Log("Driving");
+                                        if (wh.scanMyTesla != null)
+                                            wh.scanMyTesla.FastMode(true);
+
                                         double missingOdometer = DBHelper.currentJSON.current_odometer - odometerLastTrip;
 
                                         if (odometerLastTrip != 0)
@@ -256,6 +262,9 @@ namespace TeslaLogger
                                     {
                                         lastCarUsed = DateTime.Now;
                                         Logfile.Log("Charging");
+                                        if (wh.scanMyTesla != null)
+                                            wh.scanMyTesla.FastMode(true);
+
                                         wh.IsDriving(true);
                                         DBHelper.StartChargingState();
                                         currentState = TeslaState.Charge;
