@@ -17,17 +17,17 @@ require("language.php");
   $( function() {
     $( "button" ).button();
 	GetCurrentData();
-	
+
 	setInterval(function()
 		{
-			if ( document.hasFocus() ) 
+			if ( document.hasFocus() )
 			{
 				GetCurrentData();
 			}
 		}
 		,5000);
   } );
-  
+
 	function GetCurrentData()
 	{
 		$.ajax({
@@ -38,7 +38,7 @@ require("language.php");
 			$('#odometer').text(jsonData["odometer"].toFixed(1));
 			$('#battery_level').text(jsonData["battery_level"]);
 			$('#car_version').text(jsonData["car_version"]);
-			
+
 			if (jsonData["charging"])
 			{
 				$('#car_statusLabel').text("Wird geladen:");
@@ -64,25 +64,25 @@ require("language.php");
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("?");
 			}
-			
+
 			$("#trip_start").text(jsonData["trip_start"]);
 			$("#max_speed").text(jsonData["trip_max_speed"]);
 			$("#max_power").text(jsonData["trip_max_power"]);
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
 			$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
 			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
-			
+
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
 			var sec = trip_duration_sec % 60;
 			if (sec < 10)
 				sec = "0"+sec;
-			
+
 			$("#trip_duration_sec").text(min + ":" + sec);
 			});
-			
+
 	}
-  
+
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -121,7 +121,7 @@ require("language.php");
   <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
   </table>
-  
+
   <table style="float:left;">
   <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
   <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
@@ -131,12 +131,18 @@ require("language.php");
   <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
   <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
   </table>
-  
+
   <?php
 
   function checkForUpdates()
   {
-	$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+	$installed = "?";
+
+	if (file_exists("/etc/teslalogger/VERSION"))
+		$installed = file_get_contents("/etc/teslalogger/VERSION");
+	else
+		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+
 	$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
 
 	if ($installed != $onlineversion)
@@ -146,7 +152,7 @@ require("language.php");
 	else
 	{
 		echo($installed);
-	}	
+	}
   }
 
 function getTeslaloggerVersion($path)
@@ -157,15 +163,15 @@ function getTeslaloggerVersion($path)
 }
 
 ?>
-  
+
   <?PHP
   global $language;
-  
+
   if (isset($language) && strlen($language) > 1 && $language != "de")
 	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php"));
   else
 	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php"));
-  	
+
   ?>
   </div>
   </body>

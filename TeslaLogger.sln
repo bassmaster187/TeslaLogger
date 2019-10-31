@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grafana", "Grafana", "{4C42
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTClient", "MQTTClient\MQTTClient.csproj", "{6333ABAD-51F4-430D-9BA5-0047602612D1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM", "srtm\src\SRTM\SRTM.csproj", "{AE6A978E-8084-48C7-85DD-2E90FCD82F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logfile", "Logfile\Logfile.csproj", "{B6462053-A913-47B8-8719-CA08EE5B2E4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6333ABAD-51F4-430D-9BA5-0047602612D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6A978E-8084-48C7-85DD-2E90FCD82F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6462053-A913-47B8-8719-CA08EE5B2E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6462053-A913-47B8-8719-CA08EE5B2E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6462053-A913-47B8-8719-CA08EE5B2E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6462053-A913-47B8-8719-CA08EE5B2E4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

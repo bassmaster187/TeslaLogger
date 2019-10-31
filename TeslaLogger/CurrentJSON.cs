@@ -71,12 +71,12 @@
                 }
                 catch (Exception ex)
                 {
-                    Tools.Log(ex.ToString());
+                    Logfile.Log(ex.ToString());
                     duration = 0;
                 }
                 if (duration < 0)
                     duration = 0;
-                
+
 
                 var values = new Dictionary<string, object>
                 {
@@ -112,7 +112,7 @@
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
                 current_json = "";
             }
         }

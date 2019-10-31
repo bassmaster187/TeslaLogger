@@ -10,19 +10,20 @@ namespace TeslaLogger
 {
     class UpdateTeslalogger
     {
+        static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         public static void Start(WebHelper wh)
         {
             try
             {
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
-                    Tools.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
                 }
 
                 if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
                 {
-                    Tools.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
 
                     DBHelper.UpdateAllDrivestateData();
@@ -30,14 +31,20 @@ namespace TeslaLogger
 
                 if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
                 {
-                    Tools.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
                 }
 
                 if (!DBHelper.TableExists("car_version"))
                 {
-                    Tools.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
                     DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                }
+
+                if (!DBHelper.TableExists("candata"))
+                {
+                    Logfile.Log("CREATE TABLE `candata` (`id` int(11) NOT NULL AUTO_INCREMENT, `datum` datetime NOT NULL, `cell_temp_min` double DEFAULT NULL, `cell_temp_avg` double DEFAULT NULL, `cell_temp_max` double DEFAULT NULL, `cell_temp_diff` double DEFAULT NULL, `cell_v_min` double DEFAULT NULL, `cell_v_avg` double DEFAULT NULL, `cell_v_max` double DEFAULT NULL, `cell_v_diff` double DEFAULT NULL, PRIMARY KEY(`id`))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE `candata` (`id` int(11) NOT NULL AUTO_INCREMENT, `datum` datetime NOT NULL, `cell_temp_min` double DEFAULT NULL, `cell_temp_avg` double DEFAULT NULL, `cell_temp_max` double DEFAULT NULL, `cell_temp_diff` double DEFAULT NULL, `cell_v_min` double DEFAULT NULL, `cell_v_avg` double DEFAULT NULL, `cell_v_max` double DEFAULT NULL, `cell_v_diff` double DEFAULT NULL, PRIMARY KEY(`id`))");
                 }
 
 
@@ -46,19 +53,22 @@ namespace TeslaLogger
                     UpdateDBView(wh);
                 }
 
+                System.Threading.Timer t = new System.Threading.Timer(FileChecker, null, 10000, 5000);
+
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
-                    Tools.Log("Update skipped!");
+                    Logfile.Log("Update skipped!");
                     return;
                 }
 
                 System.IO.File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
-                Tools.Log("Start update");
+                Logfile.Log("Start update");
 
                 if (Tools.IsMono())
                 {
+                    chmod("VERSION", 666);
+                    chmod("settings.json", 666);
                     chmod("cmd_updated.txt", 666);
-                    chmod("/etc/teslalogger/nohup.out", 666);
                     chmod("MQTTClient.exe.config", 666);
 
                     if (!exec_mono("git", "--version", false).Contains("git version"))
@@ -73,6 +83,7 @@ namespace TeslaLogger
                     exec_mono("mkdir", "/etc/teslalogger/git");
                     exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
 
+                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
@@ -86,25 +97,61 @@ namespace TeslaLogger
                     {
                         if (!File.Exists("/etc/teslalogger/MQTTClient.exe.config"))
                         {
-                            Tools.Log("Copy empty MQTTClient.exe.config file");
+                            Logfile.Log("Copy empty MQTTClient.exe.config file");
                             Tools.CopyFile("/etc/teslalogger/git/MQTTClient/App.config", "/etc/teslalogger/MQTTClient.exe.config");
                         }
                     }
                     catch (Exception ex)
                     {
-                        Tools.Log(ex.ToString());
+                        Logfile.Log(ex.ToString());
                     }
                 }
 
-                Tools.Log("End update");
+                Logfile.Log("End update");
 
-                Tools.Log("Rebooting");
+                Logfile.Log("Rebooting");
 
                 exec_mono("reboot", "");
             }
             catch (Exception ex)
             {
-                Tools.Log("Error in update: " + ex.ToString());
+                Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void FileChecker(object state)
+        {
+            try
+            {
+                if (File.Exists(cmd_restart_path))
+                {
+                    string content = File.ReadAllText(cmd_restart_path);
+                    if (content.Contains("update"))
+                    {
+                        Logfile.Log("Update Request!");
+
+                        if (System.IO.File.Exists("cmd_updated.txt"))
+                        {
+                            Logfile.Log("delete cmd_updated.txt");
+
+                            File.Delete("cmd_updated.txt");
+                        }
+                    }
+
+                    File.Delete(cmd_restart_path);
+
+                    if (Tools.IsDocker())
+                    {
+                        Logfile.Log("Restart Request!");
+
+                        Environment.Exit(0);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -112,7 +159,7 @@ namespace TeslaLogger
         {
             try
             {
-                Tools.Log("update view: trip");
+                Logfile.Log("update view: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 String s = DBViews.Trip;
                 s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
@@ -123,7 +170,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -153,12 +200,12 @@ namespace TeslaLogger
                         int pos = line.IndexOf("=");
                         string key = line.Substring(0, pos).Trim();
                         string value = line.Substring(pos + 1);
-                         
-                        // Tools.Log("Key insert: " + key);
+
+                        // Logfile.Log("Key insert: " + key);
 
                         if (ht.ContainsKey(key))
                         {
-                            Tools.Log($"Error Key '{key}' already in Dictionary!!!");
+                            Logfile.Log($"Error Key '{key}' already in Dictionary!!!");
                             continue;
                         }
 
@@ -170,8 +217,8 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    Tools.Log(ex.Message);
-                    Tools.ExceptionWriter(ex, content);
+                    Logfile.Log(ex.Message);
+                    Logfile.ExceptionWriter(ex, content);
                 }
             }
 
@@ -194,8 +241,20 @@ namespace TeslaLogger
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
-                    Tools.Log("Start Grafana update");
-                    Tools.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
+                    Logfile.Log("Start Grafana update");
+
+                    if (Tools.GetGrafanaVersion() == "5.5.0-d3b39f39pre1")
+                    {
+                        Logfile.Log("upgrade Grafana to 6.3.5!");
+
+                        exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
+
+                        exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+
+                        Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
+                    }
+
+                    Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
 
                     exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
                     exec_mono("rm", "-rf /etc/teslalogger/tmp");
@@ -211,13 +270,13 @@ namespace TeslaLogger
                     // changes to dashboards
                     foreach (string f in System.IO.Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
                     {
-                        Tools.Log("Update: " + f);
+                        Logfile.Log("Update: " + f);
                         String s = System.IO.File.ReadAllText(f);
                         s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
 
                         if (power == "kw")
                         {
-                            Tools.Log("Convert to kw");
+                            Logfile.Log("Convert to kw");
 
                             if (f.EndsWith("Verbrauch.json"))
                             {
@@ -237,7 +296,7 @@ namespace TeslaLogger
 
                         if (temperature == "fahrenheit")
                         {
-                            Tools.Log("Convert to fahrenheit");
+                            Logfile.Log("Convert to fahrenheit");
 
                             if (f.EndsWith("Laden.json"))
                             {
@@ -247,7 +306,7 @@ namespace TeslaLogger
                             {
                                 s = s.Replace("Ø °C", "Ø °F");
 
-                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");   
+                                s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");
                             }
                             else if (f.EndsWith("Verbrauch.json"))
                             {
@@ -257,7 +316,7 @@ namespace TeslaLogger
 
                         if (length == "mile")
                         {
-                            Tools.Log("Convert to mile");
+                            Logfile.Log("Convert to mile");
 
                             if (f.EndsWith("Akku Trips.json"))
                             {
@@ -278,7 +337,7 @@ namespace TeslaLogger
                                 s = s.Replace("\"min\": \"300\"", "\"min\": \"180\"");
 
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
-                                
+
                             }
                             else if (f.EndsWith("Laden.json"))
                             {
@@ -330,7 +389,7 @@ namespace TeslaLogger
 
                         if (language != "de")
                         {
-                            Tools.Log("Convert to language: " + language);
+                            Logfile.Log("Convert to language: " + language);
 
                             s = ReplaceAliasTags(s, dictLanguage);
 
@@ -405,7 +464,7 @@ namespace TeslaLogger
                                 s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
                             }
                             else
-                                Tools.Log("Title of " + f + " not translated!");
+                                Logfile.Log("Title of " + f + " not translated!");
                         }
 
                         if (URL_Admin.Length > 0)
@@ -430,11 +489,11 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
             finally
             {
-                Tools.Log("End Grafana update");
+                Logfile.Log("End Grafana update");
             }
         }
 
@@ -451,7 +510,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
 
             return content;
@@ -461,7 +520,7 @@ namespace TeslaLogger
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
                 return content;
             }
 
@@ -475,7 +534,7 @@ namespace TeslaLogger
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
                 return content;
             }
 
@@ -489,7 +548,7 @@ namespace TeslaLogger
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
                 return content;
             }
 
@@ -511,7 +570,7 @@ namespace TeslaLogger
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Tools.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
                 return content;
             }
 
@@ -531,7 +590,7 @@ namespace TeslaLogger
                 if (!Tools.IsMono())
                     return "";
 
-                Tools.Log("execute: " + cmd + " " + param);
+                Logfile.Log("execute: " + cmd + " " + param);
 
                 StringBuilder sb = new StringBuilder();
 
@@ -542,7 +601,7 @@ namespace TeslaLogger
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.FileName = cmd;
                 proc.StartInfo.Arguments = param;
-                
+
                 proc.Start();
 
                 proc.WaitForExit();
@@ -552,7 +611,7 @@ namespace TeslaLogger
                     string line = proc.StandardOutput.ReadLine();
 
                     if (logging)
-                        Tools.Log(" " + line);
+                        Logfile.Log(" " + line);
 
                     sb.AppendLine(line);
                 }
@@ -562,26 +621,27 @@ namespace TeslaLogger
                     string line = proc.StandardError.ReadLine();
 
                     if (logging)
-                        Tools.Log("Error: " + line);
+                        Logfile.Log("Error: " + line);
                 }
 
                 return sb.ToString();
             }
             catch (Exception ex)
             {
-                Tools.Log("Exception " + cmd + " " + ex.Message);
+                Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
         }
 
-        public static void chmod(string filename, int chmod)
+        public static void chmod(string filename, int chmod, bool logging=true)
         {
             try
             {
                 if (!Tools.IsMono())
                     return;
 
-                Tools.Log("chmod " + chmod + " " + filename);
+                if (logging)
+                    Logfile.Log("chmod " + chmod + " " + filename);
 
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.EnableRaisingEvents = false;
@@ -592,7 +652,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log("chmod " + filename + " " + ex.Message);
+                Logfile.Log("chmod " + filename + " " + ex.Message);
             }
         }
     }

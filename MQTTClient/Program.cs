@@ -17,17 +17,17 @@ namespace MQTTClient
             MqttClient client = null;
             try
             {
-                Tools.Log("MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Logfile.Log("MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 if (Properties.Settings.Default.MQTTHost.Length == 0)
                 {
-                    Tools.Log("No MQTTHost settings -> MQTT disabled!");
+                    Logfile.Log("No MQTTHost settings -> MQTT disabled!");
                     return;
                 }
 
                 if (Properties.Settings.Default.Topic.Length == 0)
                 {
-                    Tools.Log("No Topic settings -> MQTT disabled!");
+                    Logfile.Log("No Topic settings -> MQTT disabled!");
                     return;
                 }
 
@@ -35,19 +35,19 @@ namespace MQTTClient
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
                 {
-                    Tools.Log("Connecting with credentials: " + Properties.Settings.Default.MQTTHost);
+                    Logfile.Log("Connecting with credentials: " + Properties.Settings.Default.MQTTHost);
                     client.Connect(clientid, Properties.Settings.Default.Name, Properties.Settings.Default.Password);
                 }
                 else
                 {
-                    Tools.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
+                    Logfile.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
                     client.Connect(clientid);
                 }
-                Tools.Log("Connected!");
+                Logfile.Log("Connected!");
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
+                Logfile.Log(ex.Message);
             }
 
             string lastjson = "-";
@@ -60,7 +60,7 @@ namespace MQTTClient
 
                     if (!client.IsConnected)
                     {
-                        Tools.Log("Reconnect");
+                        Logfile.Log("Reconnect");
                         client.Connect(clientid);
                     }
 
@@ -74,7 +74,7 @@ namespace MQTTClient
                 catch (Exception ex)
                 {
                     System.Threading.Thread.Sleep(30000);
-                    Tools.Log(ex.ToString());
+                    Logfile.Log(ex.ToString());
                 }
             }
         }

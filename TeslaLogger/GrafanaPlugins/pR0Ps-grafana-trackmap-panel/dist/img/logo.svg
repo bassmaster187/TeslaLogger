@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .panel {
+        fill: #f8e6c5;
+      }
+      .shade {
+        opacity: 0.2;
+      }
+      .mark,
+      .path {
+        stroke: black;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 20px;
+      }
+      .path {
+        fill: none;
+        stroke-dasharray: 20 40;
+        stroke-dashoffset: 33;
+      }
+    </style>
+  </defs>
+  <polygon class="panel" points="130 49  11 81  11 451 130 419 130 49"/>
+  <polygon class="panel" points="130 49 250 81 250 451 130 419 130 49"/>
+  <polygon class="shade" points="130 49 250 81 250 451 130 419 130 49"/>
+  <polygon class="panel" points="370 49 250 81 250 451 370 419 370 49"/>
+  <polygon class="panel" points="370 49 489 81 489 451 370 419 370 49"/>
+  <polygon class="shade" points="370 49 489 81 489 451 370 419 370 49"/>
+  <path class="path" d="M83,156 H285 a45,45,0,0,1,45,45 a45,45,0,0,1-45,45 H219 a42,42,0,0,0-42,42 a42,42,0,0,0,42,42 H428"/>
+  <line class="mark" x1="49" x2="83" y1="139" y2="173" />
+  <line class="mark" x1="49" x2="83" y1="173" y2="139" />
+  <line class="mark" x1="411" x2="445" y1="313" y2="347" />
+  <line class="mark" x1="411" x2="445" y1="347" y2="313" />
+</svg>

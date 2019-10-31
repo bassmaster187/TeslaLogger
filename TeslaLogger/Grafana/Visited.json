@@ -20,6 +20,7 @@
   "panels": [
     {
       "autoZoom": true,
+      "datasource": "teslalogger",
       "gridPos": {
         "h": 21,
         "w": 24,
@@ -30,6 +31,7 @@
       "lineColor": "red",
       "links": [],
       "maxDataPoints": 500,
+      "options": {},
       "pointColor": "royalblue",
       "targets": [
         {
@@ -66,14 +68,14 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6M",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -104,5 +106,5 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 4
+  "version": 5
 }

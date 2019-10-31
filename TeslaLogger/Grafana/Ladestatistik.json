@@ -19,6 +19,7 @@
   "panels": [
     {
       "columns": [],
+      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 20,
@@ -28,6 +29,7 @@
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -259,7 +261,7 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -297,5 +299,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 11
+  "version": 3
 }

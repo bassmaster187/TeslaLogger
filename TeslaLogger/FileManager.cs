@@ -21,7 +21,7 @@
     }
 
     /// <summary>
-    /// This Manager will handle all about Files, specially to have the correct 
+    /// This Manager will handle all about Files, specially to have the correct
     /// path for a file.
     /// For a new file add a new Enum and enter the filename in the constructor
     /// and use the GetFilePath(TLFilename) Method
@@ -29,6 +29,7 @@
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
+        static string _ExecutingPath = null;
         static FileManager()
         {
             Filenames = new Dictionary<TLFilename, string>()
@@ -79,7 +80,7 @@
             }
             catch (Exception e)
             {
-                Tools.Log($"RestoreToken Exception: {e.Message}");
+                Logfile.Log($"RestoreToken Exception: {e.Message}");
 
                 return string.Empty;
             }
@@ -99,13 +100,13 @@
             File.WriteAllText(GetFilePath(TLFilename.CurrentJsonFilename), current_json, Encoding.UTF8);
         }
 
-        internal static void WriteException(string temp)
+        internal static string GetSRTMDataPath()
         {
-            string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
+            var path = System.IO.Path.Combine(FileManager.GetExecutingPath(), "SRTM-Data");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
-            var filepath = Path.Combine(GetExecutingPath(), filename);
-
-            File.WriteAllText(filepath, temp);
+            return path;
         }
 
         /// <summary>
@@ -116,14 +117,19 @@
         public static string GetExecutingPath()
         {
             //System.IO.Directory.GetCurrentDirectory() is not returning the current path of the assembly
+            if (_ExecutingPath == null)
+            {
 
-            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-            var executingPath = executingAssembly.Location;
+                var executingPath = executingAssembly.Location;
 
-            executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
+                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
 
-            return executingPath;
+                _ExecutingPath = executingPath;
+            }
+
+            return _ExecutingPath;
         }
     }
 }

@@ -38,16 +38,16 @@ namespace TeslaLogger
                 if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCache)))
                 {
                     dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
-                    Tools.Log("GeocodeCache Items: " + dt.Rows.Count);
+                    Logfile.Log("GeocodeCache Items: " + dt.Rows.Count);
                 }
                 else
                 {
-                    Tools.Log(FileManager.GetFilePath(TLFilename.GeocodeCache) + " Not found!");
+                    Logfile.Log(FileManager.GetFilePath(TLFilename.GeocodeCache) + " Not found!");
                 }
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "");
+                Logfile.ExceptionWriter(ex, "");
             }
         }
 
@@ -71,11 +71,11 @@ namespace TeslaLogger
                 dr["value"] = value;
                 dt.Rows.Add(dr);
 
-                Tools.Log("GeocodeCache:Insert");
+                Logfile.Log("GeocodeCache:Insert");
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
+                Logfile.Log(ex.Message);
             }
         }
 
@@ -87,7 +87,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
+                Logfile.Log(ex.Message);
             }
         }
     }

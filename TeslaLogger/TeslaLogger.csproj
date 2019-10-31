@@ -62,6 +62,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />
+    <Compile Include="ScanMyTesla.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Geofence.cs" />
@@ -81,6 +82,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logfile\Logfile.csproj">
+      <Project>{b6462053-a913-47b8-8719-ca08ee5b2e4e}</Project>
+      <Name>Logfile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\srtm\src\SRTM\SRTM.csproj">
+      <Project>{ae6a978e-8084-48c7-85dd-2e90fcd82f30}</Project>
+      <Name>SRTM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
