@@ -120,6 +120,7 @@ require("language.php");
   <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
+  <tr><td><b>Last Update:</b></td><td><?php echo date ("F d Y H:i:s", filemtime("/etc/teslalogger/current_json.txt"));?></td></tr>
   </table>
 
   <table style="float:left;">
