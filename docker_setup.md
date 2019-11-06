@@ -37,7 +37,7 @@ The config file could look like this:
 ....
 ```
 
-6. fire up docker containers
+6. fire up docker containers. Make sure, you got the latest docker & docker-compose version. Many repositories comes with very old versions!
 ```
 docker-compose build
 docker-compose up
