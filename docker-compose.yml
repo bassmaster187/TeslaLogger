@@ -5,6 +5,7 @@ services:
     build: docker/teslalogger/.
     restart: always
     volumes:
+      - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
       - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
