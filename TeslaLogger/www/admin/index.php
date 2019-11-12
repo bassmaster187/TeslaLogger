@@ -13,10 +13,41 @@ require("language.php");
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 	<script>
+	var map = null;
+	var marker = null;
+	var mapInit = false;
+	
   $( function() {
     $( "button" ).button();
 	GetCurrentData();
+	
+	map = new L.Map('map');
+  // Define layers and add them to the control widget
+    L.control.layers({
+      'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map), // Add default layer to map
+      'OpenTopoMap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        maxZoom: 17
+      }),
+      'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Imagery &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        // This map doesn't have labels so we force a label-only layer on top of it
+        forcedOverlay: L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', {
+          attribution: 'Labels by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          subdomains: 'abcd',
+          maxZoom: 20,
+        })
+      })
+    }).addTo(map);
+	
+	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 
 	setInterval(function()
 		{
@@ -71,6 +102,7 @@ require("language.php");
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
 			$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
 			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
+			$("#last_update").text(jsonData["ts"]);
 
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
@@ -79,8 +111,23 @@ require("language.php");
 				sec = "0"+sec;
 
 			$("#trip_duration_sec").text(min + ":" + sec);
-			});
-
+	
+			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
+		
+			if (!mapInit)
+			{
+				map.setView(p,13);
+				mapInit = true;
+			}
+			else
+				map.panTo(p);
+			
+			if (marker != null)
+				map.removeLayer(marker)
+				
+			marker = L.marker(p);
+			marker.addTo(map);
+		});
 	}
 
   function BackgroudRun($target, $text)
@@ -119,6 +166,7 @@ require("language.php");
   <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
   <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
   <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
+  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
   <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
   </table>
 
@@ -130,6 +178,11 @@ require("language.php");
   <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
   <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
   <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
+  </table>
+  
+  <table style="float:left;">
+  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
+  <tr><td width="320px"><div id="map" style="height: 320px;" /></td></tr>
   </table>
 
   <?php
