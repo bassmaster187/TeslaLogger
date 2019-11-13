@@ -8,7 +8,7 @@ require("language.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Config V1.8</title>
+    <title>Teslalogger Config V1.9</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -159,30 +159,31 @@ require("language.php");
   <button style="width:120px;" onclick="window.location.href='settings.php';">Settings</button>
   <br />
   <br />
-  <div id="content">
-  <table style="float:left;">
-  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
-  <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
-  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
-  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
-  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
-  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
-  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
-  </table>
+  <div id="content" style="max-width:1036px;">
+  <div style="float:left;">
+	  <table class="b1">
+	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
+	  <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
+	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
+	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
+	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
+	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
+	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
 
-  <table style="float:left;">
-  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
-  <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
-  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
-  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> km</td></tr>
-  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
-  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
-  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
-  </table>
+	  <table style="float:left;">
+	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
+	  <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
+	  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
+	  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> km</td></tr>
+	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
+	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
+	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
+	  </table>
+  </div>
   
   <table style="float:left;">
   <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
-  <tr><td width="320px"><div id="map" style="height: 320px;" /></td></tr>
+  <tr><td width="680px"><div id="map" style="height: 400px;" /></td></tr>
   </table>
 
   <?php
