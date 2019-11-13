@@ -1,4 +1,14 @@
 # Docker Setup (BETA)
+Please make sure you have the latest docker and docker-compse. Many repositories comes with old docker and / or docker-compose. You can avoid a lot of problems by doblecheck it.
+
+These versions are known to work fine:
+```
+docker -v
+Docker version 19.03.2, build 6a30dfca03
+
+docker-compose -v
+docker-compose version 1.24.1, build 4667896b
+```
 
 1. Clone the Teslalogger repository into a new folder:
 ```
@@ -50,3 +60,15 @@ http://localhost:3000 (admin/admin)
 
 Try to connect to Admin-Panel
 http://localhost:8888/admin/
+
+# Docker update / upgrade
+Usually, you update the Teslalogger in admin-panel by clicking on update button.
+If there are updates of the subsystem, you have to get the latest docker-compose.yam file.
+
+```
+docker-compose stop
+git fetch
+git checkout origin/master -- docker-compose.yml
+docker-compose build
+docker-compose up
+```
