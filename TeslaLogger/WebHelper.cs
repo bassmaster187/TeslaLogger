@@ -288,7 +288,7 @@ namespace TeslaLogger
                 else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
 
-                if (lastCharging_State == "Charging")
+                if (lastCharging_State == "Charging" && !justCheck)
                     return true;
             }
 
