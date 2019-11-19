@@ -310,6 +310,11 @@ namespace TeslaLogger
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
 
+                if (result.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
+                }
+
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r1temp = (object[])r1;
@@ -384,6 +389,12 @@ namespace TeslaLogger
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+
+                if (result.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
+                    System.Threading.Thread.Sleep(30000);
+                }
 
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
 
