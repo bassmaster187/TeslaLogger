@@ -20,7 +20,24 @@ require("language.php");
 	var map = null;
 	var marker = null;
 	var mapInit = false;
-	
+        var isCPO = true; // TODO make configurable
+        var buyDate = new Date(Date.parse('02 Jul 2019 00:00:00 GMT')); // TODO make configurable
+        var buyOdo = 50815; // TODO make configurable
+          
+Date.prototype.yyyymmdd = function() {
+  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var dd = this.getDate();
+
+  return [this.getFullYear(),
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd
+         ].join('-');
+};
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+} 	
   $( function() {
     $( "button" ).button();
 	GetCurrentData();
@@ -104,6 +121,11 @@ require("language.php");
 			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
 			$("#last_update").text(jsonData["ts"]);
 
+                        $("#cpo_buy_date").text(buyDate.yyyymmdd());
+                        $("#cpo_buy_odo").text(buyOdo);
+                        $("#cpo_avg_km_per_day").text(Math.round(((jsonData["odometer"])-buyOdo)/(((new Date).getTime()-buyDate.getTime())/(1000*60*60*24))));
+                        $("#cpo_end_date").text((new Date()).addDays(Math.round((80000+buyOdo-jsonData["odometer"])/(((jsonData["odometer"])-buyOdo)/(((new Date).getTime()-buyDate.getTime())/(1000*60*60*24))))).yyyymmdd());
+
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
 			var sec = trip_duration_sec % 60;
@@ -177,6 +199,13 @@ require("language.php");
 	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
 	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
 	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
+
+          <!-- TODO toggle visibility depending on isCPO -->
+          <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("CPO"); ?></td></thead>
+          <tr><td width="130px"><b><?php t("Kauf"); ?>:</b></td><td width="180px"><span id="cpo_buy_date"></span> / <span id="cpo_buy_odo"></span> km</td></tr>
+          <tr><td><b><?php t("Ø km/Tag"); ?>:</b></td><td width="180px"><span id="cpo_avg_km_per_day"></span></td></tr>
+	  <!-- TODO check what comes first: 80000km or 4 years -->
+          <tr><td><b><?php t("Garantieende"); ?>:</b></td><td width="180px"><span id="cpo_end_date"></span></td></tr>
 	  </table>
   </div>
   
