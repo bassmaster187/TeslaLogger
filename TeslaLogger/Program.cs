@@ -76,6 +76,7 @@ namespace TeslaLogger
                 Logfile.Log("Car#:" + ApplicationSettings.Default.Car);
                 Logfile.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
                 Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
+                Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
 
                 for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
                 {
@@ -406,7 +407,7 @@ namespace TeslaLogger
                                     {
                                         lastCarUsed = DateTime.Now;
 
-                                        t = 4000 - (Environment.TickCount - t);
+                                        t = ApplicationSettings.Default.SleepPosition - 1000 - (Environment.TickCount - t);
 
                                         if (t > 0)
                                             System.Threading.Thread.Sleep(t); // alle 5 sek eine positionsmeldung

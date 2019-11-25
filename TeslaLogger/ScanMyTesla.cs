@@ -32,13 +32,14 @@ namespace TeslaLogger
 
         private void Start()
         {
+            return;
             string response = "";
 
             while (run)
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(1000);
 
                     if (!fastmode && response == "not found")
                     {
@@ -47,17 +48,16 @@ namespace TeslaLogger
                             if (fastmode)
                                 break;
 
-                            System.Threading.Thread.Sleep(1000);
+                            System.Threading.Thread.Sleep(10);
                         }
                     }
 
                     response = GetDataFromWebservice().Result;
                     if (response.StartsWith("not found") || response.StartsWith("ERROR:"))
-                        System.Threading.Thread.Sleep(1000);
+                        System.Threading.Thread.Sleep(5000);
                     else
                     {
                         InsertData(response);
-                        System.Threading.Thread.Sleep(1000);
                     }
                 }
                 catch (Exception ex)
@@ -126,13 +126,13 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@cell_temp_avg", CTav);
                     cmd.Parameters.AddWithValue("@cell_temp_max", CTma);
                     cmd.Parameters.AddWithValue("@cell_temp_diff", CTdi);
-                    cmd.Parameters.AddWithValue("@cell_v_min", CVmi);
-                    cmd.Parameters.AddWithValue("@cell_v_avg", CVav);
-                    cmd.Parameters.AddWithValue("@cell_v_max", CVma);
-                    cmd.Parameters.AddWithValue("@cell_v_diff", CVdi);
+                    cmd.Parameters.AddWithValue("@cell_v_min", CVmi > 0 ? (object)CVmi : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cell_v_avg", CVav > 0 ? (object)CVav : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cell_v_max", CVma > 0 ? (object)CVma : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cell_v_diff", CVdi > 0 ? (object)CVdi : (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
 
-                    return "insert ok";
+                    return "insert ok "+ d.ToString();
                 }
             }
             catch (Exception ex)

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     class CurrentJSON
-    {
+    {      
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
@@ -37,7 +37,13 @@
 
         public int current_trip_duration_sec = 0;
 
+        public double latitude = 0;
+        public double longitude = 0;
+        public int charge_limit_soc = 0;
+        public double current_inside_temperature = 0;
+
         public string current_json = "";
+        
 
         public void CreateCurrentJSON()
         {
@@ -102,8 +108,12 @@
                    { "trip_duration_sec", duration },
                    { "trip_kwh", trip_kwh },
                    { "trip_avg_kwh", trip_avg_wh },
-                   { "trip_distance", distance }
-
+                   { "trip_distance", distance },
+                   { "ts", DateTime.Now.ToString("t",Tools.ciDeDE) },
+                   { "latitude", latitude },
+                   { "longitude", longitude },
+                   { "charge_limit_soc", charge_limit_soc},
+                   { "inside_temperature", current_inside_temperature }
                 };
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);

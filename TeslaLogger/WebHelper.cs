@@ -217,6 +217,15 @@ namespace TeslaLogger
                 if (r2["charger_pilot_current"] != null)
                     charger_pilot_current = r2["charger_pilot_current"].ToString();
 
+                if (r2["charge_limit_soc"] != null)
+                {
+                    if (DBHelper.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
+                    {
+                        DBHelper.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        DBHelper.currentJSON.CreateCurrentJSON();
+                    }
+                }
+
                 if (justCheck)
                 {
                     if (charging_state == "Charging")
@@ -279,7 +288,7 @@ namespace TeslaLogger
                 else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
 
-                if (lastCharging_State == "Charging")
+                if (lastCharging_State == "Charging" && !justCheck)
                     return true;
             }
 
@@ -810,6 +819,9 @@ namespace TeslaLogger
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
+
+                DBHelper.currentJSON.latitude = latitude;
+                DBHelper.currentJSON.longitude = longitude;
 
                 var timestamp = r2["timestamp"].ToString();
                 int speed = 0;
@@ -1491,6 +1503,13 @@ FROM
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
                 var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
 
+                try
+                {
+                    if (r2["inside_temp"] != null)
+                        DBHelper.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                }
+                catch (Exception) { }
+
                 decimal? outside_temp = null;
                 if (r2["outside_temp"] != null)
                 {
@@ -1740,6 +1759,9 @@ FROM
 
                 d.Add("G", Tools.GetGrafanaVersion());
 
+                d.Add("D", Tools.IsDocker() ? "1" : "0");
+
+                d.Add("OS", Environment.OSVersion.ToString());
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
