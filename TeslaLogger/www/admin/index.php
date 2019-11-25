@@ -116,7 +116,7 @@ require("language.php");
 		
 			if (!mapInit)
 			{
-				map.setView(p,13);
+				map.setView(p,16);
 				mapInit = true;
 			}
 			else
