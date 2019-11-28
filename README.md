@@ -88,3 +88,16 @@ http://ts.la/christian7267
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/vampirdrain_month_en.png)
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/visited.PNG)
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Trip-Monatsstatistik.PNG)
+
+# Screenshots with ScanMyTesla integration #
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Zellspannungen_ScanMyTesla.png)
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/HVAC-ScanMyTesla.png)
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch-ScanMyTesla.png)
+
+
+
