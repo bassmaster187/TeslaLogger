@@ -77,8 +77,9 @@ namespace TeslaLogger
                 Logfile.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
                 Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
                 Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
+                Logfile.Log("UseScanMyTesla: " + ApplicationSettings.Default.UseScanMyTesla);
 
-                for (int x = 0; x < 30; x++) // try 30 times until DB is up and running
+                for (int x = 1; x <= 30; x++) // try 30 times until DB is up and running
                 {
                     try
                     {
@@ -88,7 +89,11 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Log("DBCONNECTION " + ex.Message);
+                        if (ex.Message.Contains("Connection refused"))
+                            Logfile.Log($"Wait for DB ({x}/30): Connection refused.");
+                        else 
+                            Logfile.Log("DBCONNECTION " + ex.Message);
+
                         System.Threading.Thread.Sleep(10000);
                     }
                 }
@@ -149,10 +154,12 @@ namespace TeslaLogger
                 // wh.IsDriving();
                 // wh.GetCachedRollupData();
 
-                //wh.GetEnergyChartData();
+                // wh.GetEnergyChartData();
                 // wh.StartStreamThread(); // xxx
+                // string w = wh.Wakeup().Result;
 
                 DBHelper.UpdateIncompleteTrips();
+                Address lastRacingPoint = null;
 
                 while (true)
                 {
@@ -435,6 +442,24 @@ namespace TeslaLogger
                                                 }
                                             }
                                         }
+
+                                        if (WebHelper.geofence.RacingMode)
+                                        {
+                                            Address a = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude);
+                                            if (a != null)
+                                            {
+                                                if (lastRacingPoint == null)
+                                                {
+                                                    lastRacingPoint = a;
+                                                    Logfile.Log("RACING MODE: Finish Trip!");
+                                                    DriveFinished(wh);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                lastRacingPoint = null;
+                                            }
+                                        }
                                     }
                                     else
                                     {
@@ -513,7 +538,10 @@ namespace TeslaLogger
                         Logfile.ExceptionWriter(ex, "While Schleife");
                     }
 
-                    System.Threading.Thread.Sleep(1000);
+                    if (WebHelper.geofence.RacingMode)
+                        System.Threading.Thread.Sleep(10);
+                    else
+                        System.Threading.Thread.Sleep(1000);
                 }
 
             }

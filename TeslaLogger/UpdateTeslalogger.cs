@@ -41,10 +41,10 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
                 }
 
-                if (!DBHelper.TableExists("candata"))
+                if (!DBHelper.TableExists("can"))
                 {
-                    Logfile.Log("CREATE TABLE `candata` (`id` int(11) NOT NULL AUTO_INCREMENT, `datum` datetime NOT NULL, `cell_temp_min` double DEFAULT NULL, `cell_temp_avg` double DEFAULT NULL, `cell_temp_max` double DEFAULT NULL, `cell_temp_diff` double DEFAULT NULL, `cell_v_min` double DEFAULT NULL, `cell_v_avg` double DEFAULT NULL, `cell_v_max` double DEFAULT NULL, `cell_v_diff` double DEFAULT NULL, PRIMARY KEY(`id`))");
-                    DBHelper.ExecuteSQLQuery("CREATE TABLE `candata` (`id` int(11) NOT NULL AUTO_INCREMENT, `datum` datetime NOT NULL, `cell_temp_min` double DEFAULT NULL, `cell_temp_avg` double DEFAULT NULL, `cell_temp_max` double DEFAULT NULL, `cell_temp_diff` double DEFAULT NULL, `cell_v_min` double DEFAULT NULL, `cell_v_avg` double DEFAULT NULL, `cell_v_max` double DEFAULT NULL, `cell_v_diff` double DEFAULT NULL, PRIMARY KEY(`id`))");
+                    Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
                 }
 
 

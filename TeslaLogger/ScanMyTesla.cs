@@ -32,14 +32,16 @@ namespace TeslaLogger
 
         private void Start()
         {
-            return;
+            if (!ApplicationSettings.Default.UseScanMyTesla)
+                return;
+
             string response = "";
 
             while (run)
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(2500);
 
                     if (!fastmode && response == "not found")
                     {
@@ -48,7 +50,7 @@ namespace TeslaLogger
                             if (fastmode)
                                 break;
 
-                            System.Threading.Thread.Sleep(10);
+                            System.Threading.Thread.Sleep(100);
                         }
                     }
 
@@ -100,39 +102,44 @@ namespace TeslaLogger
                 temp = temp.Substring(i+2);
 
                 i = temp.IndexOf("\r\n");
-                string datum = temp.Substring(0, i);
+                string date = temp.Substring(0, i);
                 temp = temp.Substring(i + 2);
 
                 dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                 DateTime d = DateTime.Parse(j["d"]);
-                decimal CTmi = j["CTmi"];
-                decimal CTav = j["CTav"];
-                decimal CTma = j["CTma"];
-                decimal CTdi = j["CTdi"];
-                decimal CVmi = j["CVmi"];
-                decimal CVav = j["CVav"];
-                decimal CVma = j["CVma"];
-                decimal CVdi = j["CVdi"];
+                System.Collections.Generic.Dictionary<string, Object> kv = (System.Collections.Generic.Dictionary<string, Object>)j["dict"];
 
-                string SQL = @"INSERT INTO candata (`datum`,`cell_temp_min`,`cell_temp_avg`,`cell_temp_max`,`cell_temp_diff`,`cell_v_min`,`cell_v_avg`,`cell_v_max`,`cell_v_diff`) VALUES
-                (@datum, @cell_temp_min, @cell_temp_avg, @cell_temp_max, @cell_temp_diff, @cell_v_min, @cell_v_avg, @cell_v_max , @cell_v_diff)";
+                StringBuilder sb = new StringBuilder();
+                sb.Append("INSERT INTO `can` (`datum`, `id`, `val`) VALUES ");
+                bool first = true;
+
+                String sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
+
+                foreach (var line in kv)
+                {
+                    if (first)
+                        first = false;
+                    else
+                        sb.Append(",");
+
+                    sb.Append("('");
+                    sb.Append(sqlDate);
+                    sb.Append("',");
+                    sb.Append(line.Key);
+                    sb.Append(",");
+                    sb.Append(Convert.ToDouble(line.Value).ToString(Tools.ciEnUS));
+                    sb.Append(")");
+                }
+
+
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand(SQL, con);
-                    cmd.Parameters.AddWithValue("datum", d);
-                    cmd.Parameters.AddWithValue("@cell_temp_min", CTmi);
-                    cmd.Parameters.AddWithValue("@cell_temp_avg", CTav);
-                    cmd.Parameters.AddWithValue("@cell_temp_max", CTma);
-                    cmd.Parameters.AddWithValue("@cell_temp_diff", CTdi);
-                    cmd.Parameters.AddWithValue("@cell_v_min", CVmi > 0 ? (object)CVmi : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@cell_v_avg", CVav > 0 ? (object)CVav : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@cell_v_max", CVma > 0 ? (object)CVma : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@cell_v_diff", CVdi > 0 ? (object)CVdi : (object)DBNull.Value);
+                    MySqlCommand cmd = new MySqlCommand(sb.ToString(), con);
                     cmd.ExecuteNonQuery();
 
-                    return "insert ok "+ d.ToString();
+                    return "insert ok ["+ kv.Keys.Count + "] "+  d.ToString();
                 }
             }
             catch (Exception ex)

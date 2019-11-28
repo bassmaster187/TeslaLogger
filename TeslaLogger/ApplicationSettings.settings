@@ -32,5 +32,11 @@
     <Setting Name="SleepPosition" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">5000</Value>
     </Setting>
+    <Setting Name="RacingMode" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseScanMyTesla" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

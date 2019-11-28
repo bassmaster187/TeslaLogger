@@ -112,5 +112,23 @@ namespace TeslaLogger {
                 return ((int)(this["SleepPosition"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RacingMode {
+            get {
+                return ((bool)(this["RacingMode"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseScanMyTesla {
+            get {
+                return ((bool)(this["UseScanMyTesla"]));
+            }
+        }
     }
 }

@@ -247,6 +247,8 @@ namespace TeslaLogger
 
         public static void UpdateTripElevation(int startPos, int maxPosId)
         {
+            if (WebHelper.geofence.RacingMode)
+                return;
 
             if (startPos == 0 || maxPosId == 0)
                 return;
@@ -1136,6 +1138,54 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        internal static int GetScanMyTeslaSignalsLastWeek()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY", con);
+                    var r = cmd.ExecuteReader();
+                    if (r.Read())
+                    {
+                        int count = Convert.ToInt32(r[0]);
+                        return count;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
+                Logfile.Log(ex.ToString());
+            }
+            return 0;
+        }
+
+        internal static int GetScanMyTeslaPacketsLastWeek()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con);
+                    var r = cmd.ExecuteReader();
+                    if (r.Read())
+                    {
+                        int count = Convert.ToInt32(r[0]);
+                        return count;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
+                Logfile.Log(ex.ToString());
+            }
+            return 0;
         }
     }
 }

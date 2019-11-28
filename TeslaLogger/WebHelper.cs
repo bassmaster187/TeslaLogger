@@ -27,7 +27,7 @@ namespace TeslaLogger
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         public bool is_sentry_mode = false;
-        static Geofence geofence;
+        public static Geofence geofence;
         bool stopStreaming = false;
         string elevation = "";
         DateTime elevation_time = DateTime.Now;
@@ -241,14 +241,7 @@ namespace TeslaLogger
 
                         Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
 
-                        int iCharger_voltage = 0;
                         double dPowerkW = 0.0;
-
-                        if (!int.TryParse(charger_voltage, out iCharger_voltage))
-                            return false;
-
-                        if (iCharger_voltage < 90)
-                            return false;
 
                         if (!Double.TryParse(charger_power, out dPowerkW))
                             return false;
@@ -870,8 +863,11 @@ namespace TeslaLogger
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
                     var odometer = GetOdometerAsync();
-                    var outside_temp = GetOutsideTempAsync();
+                    double? outside_temp = null;
+                    Task<double?> t_outside_temp = null;
 
+                    if (!geofence.RacingMode)
+                        t_outside_temp = GetOutsideTempAsync();
 
                     TimeSpan tsElevation = DateTime.Now - elevation_time;
                     if (tsElevation.TotalSeconds > 30)
@@ -879,7 +875,11 @@ namespace TeslaLogger
 
                     int battery_level;
                     double ideal_battery_range_km = GetIdealBatteryRangekm(out battery_level);
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp.Result, elevation);
+
+                    if (t_outside_temp != null)
+                        outside_temp = t_outside_temp.Result;
+
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -1341,6 +1341,9 @@ FROM
         {
             try
             {
+                if (!geofence.RacingMode)
+                    return;
+
                 System.Threading.Thread.Sleep(60 * 1000 * 10);
 
                 int t = Environment.TickCount;
@@ -1364,7 +1367,7 @@ FROM
                             double lng = (double)dr[1];
                             int id = (int)dr[2];
 
-                            Address a = geofence.GetPOI(lat, lng);
+                            Address a = geofence.GetPOI(lat, lng, false);
                             if (a == null)
                                 continue;
 
@@ -1771,6 +1774,9 @@ FROM
                 d.Add("G", Tools.GetGrafanaVersion());
 
                 d.Add("D", Tools.IsDocker() ? "1" : "0");
+                d.Add("SMT", ApplicationSettings.Default.UseScanMyTesla ? "1" : "0");
+                d.Add("SMTs", DBHelper.GetScanMyTeslaSignalsLastWeek().ToString());
+                d.Add("SMTp", DBHelper.GetScanMyTeslaPacketsLastWeek().ToString());
 
                 d.Add("OS", Environment.OSVersion.ToString());
 
