@@ -505,6 +505,34 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'Fr stator [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 443\nORDER BY datum ASC",
+          "refId": "P",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -682,5 +710,5 @@
   "timezone": "",
   "title": "Performance - ScanMyTesla",
   "uid": "perfN6Zgz",
-  "version": 16
+  "version": 17
 }
