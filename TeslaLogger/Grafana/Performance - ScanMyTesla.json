@@ -69,7 +69,7 @@
           "fill": 1
         },
         {
-          "alias": "Leistung [PS]",
+          "alias": "Battery power [kW]",
           "fill": 1,
           "yaxis": 1
         },
@@ -91,7 +91,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',  battery_level as 'SOC [%]'  \r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]', battery_level as 'SOC [%]'  \r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -533,6 +533,34 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]' FROM can WHERE $__timeFilter(datum) and id = 43 ORDER BY datum ASC",
+          "refId": "Q",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -710,5 +738,5 @@
   "timezone": "",
   "title": "Performance - ScanMyTesla",
   "uid": "perfN6Zgz",
-  "version": 17
+  "version": 18
 }
