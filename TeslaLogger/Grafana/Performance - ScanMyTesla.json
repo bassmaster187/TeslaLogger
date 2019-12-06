@@ -566,7 +566,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 443 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 445 ORDER BY datum ASC",
           "refId": "R",
           "select": [
             [
