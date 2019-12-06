@@ -17,7 +17,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 34,
   "links": [],
   "panels": [
     {
@@ -561,6 +560,62 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 443 ORDER BY datum ASC",
+          "refId": "R",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'Powertrain flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 444 ORDER BY datum ASC",
+          "refId": "S",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "pos",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -738,5 +793,5 @@
   "timezone": "",
   "title": "Performance - ScanMyTesla",
   "uid": "perfN6Zgz",
-  "version": 18
+  "version": 19
 }
