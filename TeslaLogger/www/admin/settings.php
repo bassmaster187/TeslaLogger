@@ -113,6 +113,37 @@ require("language.php");
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 <tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
+<tr><td valign="top"><b>Tasker Token:</b></td><td>
+<?php
+$t1 = shell_exec('grep "Attribute : t=" /etc/teslalogger/nohup.out | tail -1');
+$taskertoken = "";
+if (isset($t1) && strpos($t1,"t=") > 12)
+{
+	$taskertoken = substr($t1, strpos($t1,"t=")+2);
+	echo $taskertoken;
+}
+else
+	echo "not found!";
+?>
+</td></tr>
+<tr><td valign="top"><b>Tasker URL:</b></td><td>
+<?php
+if (strlen($taskertoken) > 7)
+	echo "https://teslalogger.de/wakeup.php?t=".$taskertoken;
+?>
+</td></tr>
+<tr><td valign="top"><b>Received Tasker Token:</b></td><td>
+<?php
+$t1 = shell_exec('grep "TaskerWakeupfile available! \[Webservice\]" /etc/teslalogger/nohup.out | tail -1');
+if (isset($t1) && strpos($t1,"Webservice") > 10)
+{
+	$t2 = substr($t1, strpos($t1,"Webservice") + 12);
+	echo $t2;
+}
+else
+	echo "not found!";
+?>
+</td></tr>
 <tr><td></td><td>&nbsp;</td></tr>
 <tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
 </table>
