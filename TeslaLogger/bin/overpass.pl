@@ -7,17 +7,20 @@ my $start1 = -90;
 my $start2 = -180;
 my $stop1 = 90;
 my $stop2 = 180;
-my $step = 4;
+my $step = 2;
+my $debug = 0;
 
 my ($regionparam) = @ARGV;
 
 if (defined $regionparam) {
     if ($regionparam eq '--debug') {
         # debug
-        $start1 = 48;
-        $stop1 = 52;
-        $start2 = 10;
+        $debug = 1;
+        $start1 = 52;
+        $stop1 = 53;
+        $start2 = 13;
         $stop2 = 14;
+        $step = 1;
     }
     elsif ($regionparam eq '--germany') {
         $start1 = 47;
@@ -51,7 +54,7 @@ for (my $i = $start1; $i <= ($stop1 - $step); $i += $step) {
                 if ($status =~ /Slot available after:.+?in ([0-9]+) seconds/) {
                     my $seconds = $1;
                     print STDERR "Slots: $slots, sleep $seconds\n";
-                    sleep($seconds);
+                    sleep($seconds + 5);
                 }
                 else {
                     print STDERR "status unavailable, sleep 5\n";
@@ -71,36 +74,55 @@ for (my $i = $start1; $i <= ($stop1 - $step); $i += $step) {
                     my $name = "";
                     my $operator = "";
                     my $network = "";
-                    foreach my $tag ($node =~ /<tag.+?k="(.+?)".+?v="(.+?)"\/>/g) {
-                        my $key = $1;
-                        my $value = $2;
-                        # clean up value
-                        $value =~ s/&amp;//g;
-                        $value =~ s/;/ /g;
-                        if ($key eq "name") {
-                            $name = $value;
+                    if ($debug) {
+                        print STDERR "NODE:", $node, "\n";
+                    }
+                    foreach my $tag ($node =~ /(<tag.+?k=".+?".+?v=".+?"\/>)/g) {
+                        if ($debug) {
+                            print STDERR "TAG:", $tag, "\n";
                         }
-                        elsif ($key eq "operator") {
-                            $operator = $value;
-                        }
-                        elsif ($key eq "network") {
-                            $network = $value;
+                        if ($tag =~/<tag.+?k="(.+?)".+?v="(.+?)"\/>/g) {
+                            my $key = $1;
+                            my $value = $2;
+                            # clean up value
+                            $value =~ s/&amp;//g;
+                            $value =~ s/;/ /g;
+                            if ($key eq "name") {
+                                $name = $value;
+                                if ($debug) {
+                                    print STDERR " NAME: $name \n";
+                                }
+                            }
+                            if ($key eq "operator") {
+                                $operator = $value;
+                                if ($debug) {
+                                    print STDERR " OPERATOR: $operator \n";
+                                }
+                            }
+                            if ($key eq "network") {
+                                $network = $value;
+                                if ($debug) {
+                                    print STDERR " NETWORK: $network \n";
+                                }
+                            }
                         }
                     }
                     if ($name && $operator) {
                         print "$name - $operator, $lat, $lon\n";
                     }
-                    elsif ($name) {
-                        print "$name, $lat, $lon\n";
-                    }
-                    elsif ($operator) {
-                        print "$operator, $lat, $lon\n";
-                    }
-                    elsif ($network) {
-                        print "$network, $lat, $lon\n";
-                    }
                     else {
-                        print STDERR "no name for $lat $lon\n";
+                        if ($name) {
+                            print "$name, $lat, $lon\n";
+                        }
+                        elsif ($operator) {
+                            print "$operator, $lat, $lon\n";
+                        }
+                        elsif ($network) {
+                            print "$network, $lat, $lon\n";
+                        }
+                        else {
+                            print STDERR "no name for $lat $lon\n";
+                        }
                     }
                 }
             }
