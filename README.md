@@ -101,3 +101,4 @@ http://ts.la/christian7267
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/performance-ScanMyTesla.png)
 
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Zelltemperaturen.PNG)
