@@ -53,7 +53,6 @@ services:
     volumes:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
-      - ./TeslaLogger/Properties/AssemblyInfo.cs:/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
       - teslalogger-tmp:/tmp/
     ports:
