@@ -56,7 +56,13 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "BMS max charge [kW]",
+          "fill": 1,
+          "yaxis": 2
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -627,6 +633,7 @@
           "metricColumn": "none",
           "rawQuery": true,
           "rawSql": "SELECT $__time(datum), val as 'Cell temp min [°C]' FROM can WHERE $__timeFilter(datum) and id = 1 ORDER BY datum ASC",
+          "refId": "W",
           "select": [
             [
               {
@@ -683,6 +690,34 @@
           "rawQuery": true,
           "rawSql": "SELECT $__time(datum), val as 'Cell temp max [°C]' FROM can WHERE $__timeFilter(datum) and id = 3 ORDER BY datum ASC",
           "refId": "V",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]' FROM can WHERE $__timeFilter(datum) and id = 28 ORDER BY datum ASC",
+          "refId": "X",
           "select": [
             [
               {
@@ -775,5 +810,5 @@
   "timezone": "",
   "title": "Zelltemperaturen 1-20",
   "uid": "iqBSiKRRz",
-  "version": 4
+  "version": 5
 }
