@@ -63,6 +63,10 @@
         {
           "alias": "Battery heater temp [°C]",
           "yaxis": 2
+        },
+        {
+          "alias": "Inside temp [°C]",
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -104,6 +108,34 @@
           "rawQuery": true,
           "rawSql": "SELECT $__time(datum), val as 'Battery heater temp [°C]' FROM can WHERE $__timeFilter(datum) and id = 31 ORDER BY datum ASC",
           "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val as 'Inside temp [°C]' FROM can WHERE $__timeFilter(datum) and id = 58 ORDER BY datum ASC",
+          "refId": "J",
           "select": [
             [
               {
@@ -394,5 +426,5 @@
   "timezone": "",
   "title": "Alle Verbräuche - ScanMyTesla",
   "uid": "eMEMotRgk",
-  "version": 11
+  "version": 12
 }
