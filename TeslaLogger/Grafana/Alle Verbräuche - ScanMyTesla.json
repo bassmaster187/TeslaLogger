@@ -15,11 +15,12 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 39,
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "Inside temp [°C]": "red"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -426,5 +427,5 @@
   "timezone": "",
   "title": "Alle Verbräuche - ScanMyTesla",
   "uid": "eMEMotRgk",
-  "version": 12
+  "version": 13
 }
