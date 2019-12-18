@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 require("language.php");
+$lat = $_REQUEST["lat"];
+$lng = $_REQUEST["lng"];
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>"">
   <head>
@@ -16,8 +18,9 @@ require("language.php");
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>	
+	var circle = null;
   $( function() {
-  var map = new L.Map('map');
+  var map = new L.Map('map', {center: [<?= $lat ?>,<?= $lng ?>], zoom:18});
   // Define layers and add them to the control widget
     L.control.layers({
       'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,55 +42,64 @@ require("language.php");
       })
     }).addTo(map);
 	
-	$( "button" ).button();
+	$("button").button();
+	$("#radius").on("change paste keyup",function()
+	{
+		circle.setRadius($("#radius").val());
+	});
 	
+	var markerLocation = new L.LatLng(<?= $lat ?>,<?= $lng ?>);
+	circle = new L.circle(markerLocation, {radius: 20.0});
+	circle.draggable = true;
+	circle.addTo(map);
 	
-	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
-	var markerArray = [];
-	<?PHP
-		$lat = $_REQUEST["lat"];
-		$lng = $_REQUEST["lng"];
-
-		if (isset($lat) && isset($lng))
-		{
-			echo("var markerLocation = new L.LatLng($lat, $lng);\r\n");
-			echo("var marker = new L.Marker(markerLocation, {icon: greenIcon});\r\n");
-			echo("markerArray.push(marker);\r\n");
-		
-			echo("marker.addTo(map);\r\n");
-			echo("var group = L.featureGroup(markerArray);\r\n");
-			echo("map.fitBounds(group.getBounds());\r\n\r\n");
-		}
-	?>
-    
+	circle.on({
+	  mousedown: function () {
+		map.on('mousemove', function (e) {
+			map.dragging.disable();
+		  circle.setLatLng(e.latlng);
+		});
+	  }
+	}); 
+	map.on('mouseup',function(e){
+	  map.removeEventListener('mousemove');
+	  map.dragging.enable();
+	}); 
   });
   
   function save()
   {
-		if (!$("#text").val())
-		{
-			alert("Error");
-			return;
-		}
-			
-		var jqxhr = $.post("geoadd_write.php", 
-		{
-		Text: $("#text").val(), 
-		lat: <?PHP echo($lat); ?>, 
-		lng: <?PHP echo($lng); ?>
-		}).always(function() {
-		alert("Saved!");
-		//location.reload();
-		});		
+	//alert("Radius: "+ circle.getRadius() + " lat: " + circle.getLatLng().lat + " lng: " + circle.getLatLng().lng);
+	// return;
+	
+	if (!$("#text").val())
+	{
+		alert("Error");
+		return;
+	}
+		
+	var jqxhr = $.post("geoadd_write.php", 
+	{
+	Text: $("#text").val(), 
+	lat: circle.getLatLng().lat, 
+	lng: circle.getLatLng().lng,
+	radius: circle.getRadius()
+	}).always(function() {
+	alert("Saved!");
+	//location.reload();
+	});		
   }
   
   </script>
 	</head>
 	<body>
 	<div>
-	<?php t("Bezeichnung"); ?>:
-	<input id="text"/>
-	<button onclick="save();" >Save</button></div>
+	<table>
+	<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text"/></td></tr>
+	<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="20" type="number"/></td></tr>
+	<tr><td></td><td><button onclick="save();" >Save</button></td></tr>
+	</table>
+	</div>
 	<div id="map" style="height:800px;"></div>
 </body>
 </html>
