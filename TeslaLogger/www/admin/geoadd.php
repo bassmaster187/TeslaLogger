@@ -87,6 +87,7 @@ $lng = $_REQUEST["lng"];
 	}).always(function() {
 	alert("Saved!");
 	//location.reload();
+	location.href = document.referrer;
 	});		
   }
   
