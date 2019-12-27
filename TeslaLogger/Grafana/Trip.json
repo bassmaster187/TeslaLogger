@@ -29,6 +29,7 @@
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -306,6 +307,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
+          "link": true,
+          "linkTargetBlank": true,
+          "linkTooltip": "Performance - ScanMyTesla",
+          "linkUrl": "d/perfN6Zgz/performance-scanmytesla?orgId=1&from=${__cell_4}&to=${__cell_5}",
           "mappingType": 1,
           "pattern": "power_max",
           "thresholds": [],
@@ -422,11 +427,10 @@
       ],
       "title": "Trip",
       "transform": "table",
-      "transparent": false,
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -464,5 +468,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 70
+  "version": 75
 }
