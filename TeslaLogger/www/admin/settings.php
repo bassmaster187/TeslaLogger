@@ -44,10 +44,16 @@ require("language.php");
 			$Length = $j->{"Length"};
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
+
+			$ScanMyTesla = "false";
+			
+			if (property_exists($j,"ScanMyTesla"))
+				$ScanMyTesla = $j->{"ScanMyTesla"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
 			echo ("$('#checkboxSleep')[0].checked = $enable;\r\n");
+			echo ("$('#checkboxScanMyTesla')[0].checked = $ScanMyTesla;\r\n");
 			
 			if ($power == "kw")
 				echo ("$('#radio_kw').prop('checked', true);\r\n");
@@ -90,6 +96,7 @@ require("language.php");
 		Length: $("input:radio[name ='Length']:checked").val(),
 		Language: $("input:radio[name ='Language']:checked").val(),
 		URL_Admin: $("#URL_Admin").val(),
+		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -113,25 +120,19 @@ require("language.php");
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 <tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
+<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td valign="top"><b>Tasker Token:</b></td><td>
 <?php
-$t1 = shell_exec('grep "Attribute : t=" /etc/teslalogger/nohup.out | tail -1');
-$taskertoken = "";
-if (isset($t1) && strpos($t1,"t=") > 12)
-{
-	$taskertoken = substr($t1, strpos($t1,"t=")+2);
-	echo $taskertoken;
-}
-else
-	echo "not found!";
+$taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
+echo $taskertoken;
 ?>
-</td></tr>
+</tr>
 <tr><td valign="top"><b>Tasker URL:</b></td><td>
 <?php
 if (strlen($taskertoken) > 7)
 	echo "https://teslalogger.de/wakeup.php?t=".$taskertoken;
 ?>
-</td></tr>
+</td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td valign="top"><b>Received Tasker Token:</b></td><td>
 <?php
 $t1 = shell_exec('grep "TaskerWakeupfile available! \[Webservice\]" /etc/teslalogger/nohup.out | tail -1');
