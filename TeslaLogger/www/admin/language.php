@@ -18,6 +18,11 @@ function t($t)
 	if ($ln == null)
 		echo $t;
 	else
-		echo($ln[$t]);
+	{
+		if (isset($ln[$t]))
+			echo($ln[$t]);
+		else
+			echo $t;
+	}
 };
 ?>
