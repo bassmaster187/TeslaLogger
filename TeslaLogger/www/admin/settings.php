@@ -31,9 +31,19 @@ require("language.php");
 		$('.timepicker').width("100px");
 		$(".timepicker").show();
 		<?PHP
-		$content = file_get_contents("/etc/teslalogger/settings.json");
 		
-		if (!($content === FALSE))
+		$content = FALSE;
+		if (file_exists("/etc/teslalogger/settings.json"))
+			$content = file_get_contents("/etc/teslalogger/settings.json");
+		
+		if ($content === FALSE)
+		{
+			echo ("$('#radio_kw').prop('checked', true);\r\n");
+			echo ("$('#radio_celsius').prop('checked', true);\r\n");
+			echo ("$('#radio_km').prop('checked', true);\r\n");
+			echo ("$('#radio_en').prop('checked', true);\r\n");			
+		}
+		else
 		{
 			$j = json_decode($content);
 			$start = $j->{"SleepTimeSpanStart"};			

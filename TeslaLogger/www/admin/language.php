@@ -1,7 +1,11 @@
 <?php
-$json = file_get_contents('/etc/teslalogger/settings.json');
-$json_data = json_decode($json,true);
-$language = $json_data["Language"];
+$language = "en";
+if (file_exists("/etc/teslalogger/settings.json"))
+{
+	$json = file_get_contents('/etc/teslalogger/settings.json');
+	$json_data = json_decode($json,true);
+	$language = $json_data["Language"];
+}
 
 $filename = "/etc/teslalogger/language-".$language.".txt";
 global $ln;
