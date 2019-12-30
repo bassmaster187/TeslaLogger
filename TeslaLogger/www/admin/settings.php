@@ -131,6 +131,18 @@ require("language.php");
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 <tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 <tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
+<tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
+<?php
+$t1 = shell_exec('grep "ScanMyTesla: insert ok" /etc/teslalogger/nohup.out | tail -1');
+if (isset($t1) && strpos($t1,"]") > 5)
+{
+	$t2 = substr($t1, 0,20);
+	echo $t2;
+}
+else
+	echo "-";
+?>
+</td></tr>
 <tr><td valign="top"><b>Tasker Token:</b></td><td>
 <?php
 $taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
