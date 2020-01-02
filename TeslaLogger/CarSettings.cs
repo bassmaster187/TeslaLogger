@@ -18,6 +18,7 @@
         public string car_type = "";
         public string car_special_type = "";
         public string trim_badging = "";
+        public bool Raven = false;
 
         public static CarSettings ReadSettings()
         {

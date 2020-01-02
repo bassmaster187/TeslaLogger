@@ -133,8 +133,11 @@ namespace TeslaLogger
 
                 DBHelper.GetEconomy_Wh_km(wh);
                 wh.DeleteWakeupFile();
+                String carName = wh.carSettings.Name;
+                if (wh.carSettings.Raven)
+                    carName += " Raven";
 
-                Logfile.Log("Car: " + wh.carSettings.Name + " - " + wh.carSettings.Wh_TR + " Wh/km");
+                Logfile.Log("Car: " + carName + " - " + wh.carSettings.Wh_TR + " Wh/km");
                 double.TryParse(wh.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
                 DBHelper.GetLastTrip();
                 UpdateTeslalogger.Start(wh);
@@ -144,9 +147,12 @@ namespace TeslaLogger
 
                 MQTTClient.StartMQTTClient();
 
-                Task.Factory.StartNew(() => wh.UpdateAllPOIAddresses());
-                Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(true));
-                Task.Factory.StartNew(() => wh.UpdateAllEmptyAddresses());
+                new System.Threading.Thread(() =>
+                {
+                    WebHelper.UpdateAllPOIAddresses();
+                    DBHelper.CheckForInterruptedCharging(true);
+                    wh.UpdateAllEmptyAddresses();
+                }).Start();
 
                 DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
                 DBHelper.currentJSON.CreateCurrentJSON();

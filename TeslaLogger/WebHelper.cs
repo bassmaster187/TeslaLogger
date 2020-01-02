@@ -189,6 +189,9 @@ namespace TeslaLogger
                 var charging_state = r2["charging_state"].ToString();
                 var timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
+                if (ideal_battery_range == 999)
+                    ideal_battery_range = (decimal)r2["battery_range"];
+
                 var battery_level = r2["battery_level"].ToString();
                 var charger_power = "";
                 if (r2["charger_power"] != null)
@@ -465,6 +468,8 @@ namespace TeslaLogger
 
                     if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
                         carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
+                    else
+                        carSettings.trim_badging = "";
 
                     UpdateEfficiency();
 
@@ -613,7 +618,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    WriteCarSettings("0.217", "X ???");
+                    WriteCarSettings("0.204", "X"); // Raven
                     return;
                 }
             }
@@ -1337,14 +1342,12 @@ FROM
             GeocodeCache.Instance.Write();
         }
 
-        public void UpdateAllPOIAddresses()
+        public static void UpdateAllPOIAddresses()
         {
             try
             {
-                if (!geofence.RacingMode)
+                if (geofence.RacingMode)
                     return;
-
-                System.Threading.Thread.Sleep(60 * 1000 * 10);
 
                 int t = Environment.TickCount;
                 int count = 0;
@@ -1353,7 +1356,7 @@ FROM
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("Select lat, lng, id from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
+                    MySqlCommand cmd = new MySqlCommand("Select lat, lng, id, address from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     int t2 = Environment.TickCount - t;
                     Logfile.Log($"UpdateAllPOIAddresses Select {t2}ms");
@@ -1362,7 +1365,7 @@ FROM
                     {
                         try
                         {
-                            System.Threading.Thread.Sleep(100);
+                            System.Threading.Thread.Sleep(2);
                             double lat = (double)dr[0];
                             double lng = (double)dr[1];
                             int id = (int)dr[2];
@@ -1371,15 +1374,18 @@ FROM
                             if (a == null)
                                 continue;
 
-                            using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                            if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
                             {
-                                con2.Open();
-                                MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
-                                cmd2.Parameters.AddWithValue("@id", id);
-                                cmd2.Parameters.AddWithValue("@address", a.name);
-                                cmd2.ExecuteNonQuery();
+                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con2.Open();
+                                    MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
+                                    cmd2.Parameters.AddWithValue("@id", id);
+                                    cmd2.Parameters.AddWithValue("@address", a.name);
+                                    cmd2.ExecuteNonQuery();
 
-                                count++;
+                                    count++;
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -1416,6 +1422,16 @@ FROM
                     return -1;
 
                 var ideal_battery_range = (decimal)r2["ideal_battery_range"];
+                if (ideal_battery_range == 999)
+                {
+                    ideal_battery_range = (decimal)r2["battery_range"];
+                    if (!carSettings.Raven)
+                    {
+                        carSettings.Raven = true;
+                        carSettings.WriteSettings();
+                        Logfile.Log("Raven Model!");
+                    }
+                }
 
                 if (r2["battery_level"] != null)
                 {
@@ -1747,6 +1763,10 @@ FROM
 
                 lastTaskerWakeupfile = DateTime.Now;
 
+                String name = carSettings.Name;
+                if (carSettings.Raven)
+                    name += " Raven";
+
                 HttpClient client = new HttpClient();
 
                 var d = new Dictionary<string, string>();
@@ -1755,7 +1775,7 @@ FROM
                 d.Add("cv", DBHelper.currentJSON.current_car_version);
                 d.Add("m", carSettings.Model);
                 d.Add("bt", carSettings.Battery);
-                d.Add("n", carSettings.Name);
+                d.Add("n", name);
                 d.Add("eff", carSettings.Wh_TR);
                 d.Add("oc", option_codes);
 

@@ -751,8 +751,12 @@ namespace TeslaLogger
                 {
                     currentJSON.current_speed = (int)((decimal)speed * 1.60934M);
                     currentJSON.current_power = (int)(power * 1.35962M);
-                    currentJSON.current_odometer = odometer;
-                    currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+
+                    if (odometer > 0)
+                        currentJSON.current_odometer = odometer;
+
+                    if (ideal_battery_range_km >= 0)
+                        currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
 
                     if (currentJSON.current_trip_km_start == 0)
                     {
@@ -830,10 +834,14 @@ namespace TeslaLogger
 
             try
             {
-                currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                if (Convert.ToInt32(battery_level) >= 0 )
+                    currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+
                 currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
                 currentJSON.current_charger_power = Convert.ToInt32(charger_power);
-                currentJSON.current_ideal_battery_range_km = kmRange;
+                if (kmRange >= 0)
+                    currentJSON.current_ideal_battery_range_km = kmRange;
+
                 currentJSON.current_charger_voltage = int.Parse(charger_voltage);
                 currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
                 currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);

@@ -333,9 +333,6 @@ namespace TeslaLogger
                             {
                                 s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
                                 s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609 as 'mi Stand [mi]'");
-                                s = s.Replace("\"max\": \"550\"", "\"max\": \"350\"");
-                                s = s.Replace("\"min\": \"300\"", "\"min\": \"180\"");
-
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
 
                             }
