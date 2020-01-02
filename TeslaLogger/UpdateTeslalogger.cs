@@ -47,6 +47,29 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
                 }
 
+                if (!DBHelper.ColumnExists("pos", "inside_temp"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                }
+
+                if (!DBHelper.ColumnExists("pos", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                }
+
+                if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                }
+
+                if (!DBHelper.ColumnExists("pos", "sentry_mode"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                }
 
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {

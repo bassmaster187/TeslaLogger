@@ -65,7 +65,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 26,
   "links": [],
   "panels": [
     {
@@ -138,7 +137,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]', inside_temp as 'Innentemperatur [°C]'\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -477,5 +476,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 88
+  "version": 97
 }

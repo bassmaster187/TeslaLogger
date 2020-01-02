@@ -15,6 +15,7 @@
         public double current_odometer = 0;
         public double current_ideal_battery_range_km = 0;
         public double current_outside_temp = 0;
+        public double current_inside_temp = 0;
         public int current_battery_level = 0;
 
         public int current_charger_voltage = 0;
@@ -41,6 +42,9 @@
         public double longitude = 0;
         public int charge_limit_soc = 0;
         public double current_inside_temperature = 0;
+        public bool current_battery_heater = false;
+        public bool current_is_sentry_mode = false;
+        public bool current_is_preconditioning = false;
 
         public string current_json = "";
         
@@ -113,7 +117,10 @@
                    { "latitude", latitude },
                    { "longitude", longitude },
                    { "charge_limit_soc", charge_limit_soc},
-                   { "inside_temperature", current_inside_temperature }
+                   { "inside_temperature", current_inside_temperature },
+                   { "battery_heater", current_battery_heater },
+                   { "is_preconditioning", current_is_preconditioning },
+                   { "sentry_mode", current_is_sentry_mode }
                 };
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);

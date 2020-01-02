@@ -82,8 +82,19 @@ require("language.php");
 			}
 			else if (jsonData["online"])
 			{
+				var text = "Online";
+				
+				if (jsonData["is_preconditioning"])
+					text = text + "<br>Preconditioning";
+					
+				if (jsonData["sentry_mode"])
+					text = text + "<br>Sentry Mode";
+					
+				if (jsonData["battery_heater"])
+					text = text + "<br>Battery Heater";
+			
 				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("Online");
+				$('#car_status').html(text);
 			}
 			else if (jsonData["sleeping"])
 			{
@@ -93,7 +104,7 @@ require("language.php");
 			else
 			{
 				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("?");
+				$('#car_status').text("Offline");
 			}
 
 			$("#trip_start").text(jsonData["trip_start"]);

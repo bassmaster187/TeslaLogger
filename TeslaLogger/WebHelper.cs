@@ -1473,9 +1473,7 @@ FROM
                             Logfile.Log("sentry_mode: " + sentry_mode);
                         }
 
-                        DBHelper.current_is_sentry_mode = sentry_mode;
-
-
+                        DBHelper.currentJSON.current_is_sentry_mode = sentry_mode;
                     }
                     catch (Exception ex)
                     {
@@ -1548,6 +1546,19 @@ FROM
                 }
                 else
                     return null;
+                try
+                {
+                    bool? battery_heater = null;
+                    if (r2["battery_heater"] != null)
+                    {
+                        battery_heater = (bool)r2["battery_heater"];
+                        DBHelper.currentJSON.current_battery_heater = (bool)battery_heater;
+                    }
+                    else
+                        return null;
+                }
+                catch (Exception) { }
+
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
                 if (preconditioning != is_preconditioning)
@@ -1556,7 +1567,7 @@ FROM
                     Logfile.Log("Preconditioning: " + preconditioning);
                 }
 
-                DBHelper.current_is_preconditioning = preconditioning;
+                DBHelper.currentJSON.current_is_preconditioning = preconditioning;
 
                 return (double)outside_temp;
             }
