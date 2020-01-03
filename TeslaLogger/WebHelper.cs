@@ -350,6 +350,14 @@ namespace TeslaLogger
 
                 Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
+                try
+                {
+                    string taskertokenpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "TASKERTOKEN");
+                    System.IO.File.WriteAllText(taskertokenpath, TaskerHash);
+                }
+                catch (Exception)
+                { }
+
                 scanMyTesla = new ScanMyTesla(TaskerHash);
 
                 /*
@@ -1774,7 +1782,7 @@ FROM
                 d.Add("G", Tools.GetGrafanaVersion());
 
                 d.Add("D", Tools.IsDocker() ? "1" : "0");
-                d.Add("SMT", ApplicationSettings.Default.UseScanMyTesla ? "1" : "0");
+                d.Add("SMT", Tools.UseScanMyTesla() ? "1" : "0");
                 d.Add("SMTs", DBHelper.GetScanMyTeslaSignalsLastWeek().ToString());
                 d.Add("SMTp", DBHelper.GetScanMyTeslaPacketsLastWeek().ToString());
 

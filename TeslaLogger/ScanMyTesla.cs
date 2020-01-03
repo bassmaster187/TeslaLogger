@@ -32,7 +32,7 @@ namespace TeslaLogger
 
         private void Start()
         {
-            if (!ApplicationSettings.Default.UseScanMyTesla)
+            if (!Tools.UseScanMyTesla())
                 return;
 
             string response = "";

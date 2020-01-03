@@ -77,7 +77,7 @@ namespace TeslaLogger
                 Logfile.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
                 Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
                 Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
-                Logfile.Log("UseScanMyTesla: " + ApplicationSettings.Default.UseScanMyTesla);
+                Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
 
                 for (int x = 1; x <= 30; x++) // try 30 times until DB is up and running
                 {

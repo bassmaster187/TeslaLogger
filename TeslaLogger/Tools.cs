@@ -140,6 +140,34 @@
             }
         }
 
+        internal static bool UseScanMyTesla()
+        {
+            try
+            {
+                if (ApplicationSettings.Default.UseScanMyTesla)
+                    return true;
+
+                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
+                    return false;
+
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                if (IsPropertyExist(j, "ScanMyTesla"))
+                {
+                    return Boolean.Parse(j["ScanMyTesla"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin)
         {
             power = "hp";
