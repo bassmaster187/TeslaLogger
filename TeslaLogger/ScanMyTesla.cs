@@ -35,6 +35,8 @@ namespace TeslaLogger
             if (!Tools.UseScanMyTesla())
                 return;
 
+            Logfile.Log("Start ScanMyTesla Thread!");
+
             string response = "";
 
             while (run)

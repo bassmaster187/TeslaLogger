@@ -1024,6 +1024,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                Logfile.Log("Error in: " + sql);
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
             }

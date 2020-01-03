@@ -43,7 +43,6 @@ namespace TeslaLogger
                 Tools.SetThread_enUS();
                 UpdateTeslalogger.chmod("nohup.out", 666, false);
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                Task.Factory.StartNew(() => DBHelper.UpdateElevationForAllPoints()); // get elevation for all points
 
                 Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Logfile.Log("Logfile Version: " + System.Reflection.Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
@@ -94,7 +93,7 @@ namespace TeslaLogger
                         else 
                             Logfile.Log("DBCONNECTION " + ex.Message);
 
-                        System.Threading.Thread.Sleep(10000);
+                        System.Threading.Thread.Sleep(15000);
                     }
                 }
 
@@ -149,9 +148,13 @@ namespace TeslaLogger
 
                 new System.Threading.Thread(() =>
                 {
+                    System.Threading.Thread.Sleep(30000);
+
+                    DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.CheckForInterruptedCharging(true);
                     wh.UpdateAllEmptyAddresses();
+                    DBHelper.UpdateIncompleteTrips();
                 }).Start();
 
                 DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
@@ -164,7 +167,6 @@ namespace TeslaLogger
                 // wh.StartStreamThread(); // xxx
                 // string w = wh.Wakeup().Result;
 
-                DBHelper.UpdateIncompleteTrips();
                 Address lastRacingPoint = null;
 
                 while (true)

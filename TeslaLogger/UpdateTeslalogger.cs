@@ -33,42 +33,49 @@ namespace TeslaLogger
                 {
                     Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.TableExists("car_version"))
                 {
                     Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
                     DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.TableExists("can"))
                 {
                     Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
                     DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "inside_temp"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "battery_heater"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "sentry_mode"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                    Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
