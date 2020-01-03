@@ -15,9 +15,6 @@ namespace TeslaLogger
     {
         public static CurrentJSON currentJSON = new CurrentJSON();
 
-        public static bool current_is_preconditioning = false;
-        public static bool current_is_sentry_mode = false;
-
         public static string DBConnectionstring
         {
             get
@@ -56,6 +53,11 @@ namespace TeslaLogger
                 {
                     currentJSON.current_online = false;
                     currentJSON.current_sleeping = true;
+                }
+                else if (state == "offline")
+                {
+                    currentJSON.current_online = false;
+                    currentJSON.current_sleeping = false;
                 }
             }
 
@@ -713,11 +715,13 @@ namespace TeslaLogger
 
         internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
+            double? inside_temp = DBHelper.currentJSON.current_inside_temperature;
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level)", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
@@ -745,14 +749,27 @@ namespace TeslaLogger
                 else
                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
 
+                if (inside_temp == null)
+                    cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
+
+                cmd.Parameters.AddWithValue("@battery_heater", DBHelper.currentJSON.current_battery_heater ? 1 : 0);
+                cmd.Parameters.AddWithValue("@is_preconditioning", DBHelper.currentJSON.current_is_preconditioning ? 1 : 0);
+                cmd.Parameters.AddWithValue("@sentry_mode", DBHelper.currentJSON.current_is_sentry_mode ? 1 : 0);
+
                 cmd.ExecuteNonQuery();
 
                 try
                 {
                     currentJSON.current_speed = (int)((decimal)speed * 1.60934M);
                     currentJSON.current_power = (int)(power * 1.35962M);
-                    currentJSON.current_odometer = odometer;
-                    currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+
+                    if (odometer > 0)
+                        currentJSON.current_odometer = odometer;
+
+                    if (ideal_battery_range_km >= 0)
+                        currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
 
                     if (currentJSON.current_trip_km_start == 0)
                     {
@@ -830,10 +847,14 @@ namespace TeslaLogger
 
             try
             {
-                currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                if (Convert.ToInt32(battery_level) >= 0 )
+                    currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+
                 currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
                 currentJSON.current_charger_power = Convert.ToInt32(charger_power);
-                currentJSON.current_ideal_battery_range_km = kmRange;
+                if (kmRange >= 0)
+                    currentJSON.current_ideal_battery_range_km = kmRange;
+
                 currentJSON.current_charger_voltage = int.Parse(charger_voltage);
                 currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
                 currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);

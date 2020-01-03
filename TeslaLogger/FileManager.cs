@@ -127,7 +127,7 @@
                 var executingPath = executingAssembly.Location;
 
                 executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
-
+                
                 _ExecutingPath = executingPath;
             }
 

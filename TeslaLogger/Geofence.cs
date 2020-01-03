@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class Address
     {
@@ -73,13 +74,28 @@
 
         private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
-            Logfile.Log("CSV File changed: " + e.Name);
-            fsw.EnableRaisingEvents = false;
+            try
+            {
+                fsw.EnableRaisingEvents = false;
+                
+                DateTime dt = System.IO.File.GetLastWriteTime(e.FullPath);
+                TimeSpan ts = DateTime.Now - dt;
 
-            System.Threading.Thread.Sleep(5000);
-            Init();
+                System.Threading.Thread.Sleep(5000);
 
-            fsw.EnableRaisingEvents = true;
+                if (ts.TotalSeconds > 5)
+                    return;
+
+                Logfile.Log($"CSV File changed: {e.Name} at {dt}");
+                
+                Init();
+
+                Task.Factory.StartNew(() => WebHelper.UpdateAllPOIAddresses());
+            }
+            finally
+            {
+                fsw.EnableRaisingEvents = true;
+            }
         }
 
         private static void ReadGeofenceFile(List<Address> list, string filename)

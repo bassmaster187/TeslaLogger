@@ -20,11 +20,11 @@ require("language.php");
 	var map = null;
 	var marker = null;
 	var mapInit = false;
-	
+
   $( function() {
     $( "button" ).button();
 	GetCurrentData();
-	
+
 	map = new L.Map('map');
   // Define layers and add them to the control widget
     L.control.layers({
@@ -46,7 +46,7 @@ require("language.php");
         })
       })
     }).addTo(map);
-	
+
 	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 
 	setInterval(function()
@@ -68,7 +68,9 @@ require("language.php");
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1));
 			$('#odometer').text(jsonData["odometer"].toFixed(1));
 			$('#battery_level').text(jsonData["battery_level"]);
-			$('#car_version').text(jsonData["car_version"]);
+      var car_version = jsonData["car_version"];
+      car_version = car_version.substring(0,car_version.lastIndexOf(" "));
+      $('#car_version').text(car_version);
 
 			if (jsonData["charging"])
 			{
@@ -82,8 +84,19 @@ require("language.php");
 			}
 			else if (jsonData["online"])
 			{
+				var text = "Online";
+
+				if (jsonData["is_preconditioning"])
+					text = text + "<br>Preconditioning";
+
+				if (jsonData["sentry_mode"])
+					text = text + "<br>Sentry Mode";
+
+				if (jsonData["battery_heater"])
+					text = text + "<br>Battery Heater";
+
 				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("Online");
+				$('#car_status').html(text);
 			}
 			else if (jsonData["sleeping"])
 			{
@@ -93,7 +106,7 @@ require("language.php");
 			else
 			{
 				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("?");
+				$('#car_status').text("Offline");
 			}
 
 			$("#trip_start").text(jsonData["trip_start"]);
@@ -111,9 +124,9 @@ require("language.php");
 				sec = "0"+sec;
 
 			$("#trip_duration_sec").text(min + ":" + sec);
-	
+
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
-		
+
 			if (!mapInit)
 			{
 				map.setView(p,13);
@@ -121,10 +134,10 @@ require("language.php");
 			}
 			else
 				map.panTo(p);
-			
+
 			if (marker != null)
 				map.removeLayer(marker)
-				
+
 			marker = L.marker(p);
 			marker.addTo(map);
 		});
@@ -163,12 +176,13 @@ require("language.php");
   <div style="float:left;">
 	  <table class="b1">
 	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
-	  <tr><td width="120px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
+	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
 	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
+    </table>
 
 	  <table style="float:left;">
 	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
@@ -180,7 +194,7 @@ require("language.php");
 	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
 	  </table>
   </div>
-  
+
   <table style="float:left;">
   <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
   <tr><td width="680px"><div id="map" style="height: 400px;" /></td></tr>
