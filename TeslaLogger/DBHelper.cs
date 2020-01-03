@@ -1011,7 +1011,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public static int ExecuteSQLQuery(string sql)
+        public static int ExecuteSQLQuery(string sql, int timeout = 30)
         {
             try
             {
@@ -1019,6 +1019,9 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(sql, con);
+                    if (timeout != 30)
+                        cmd.CommandTimeout = timeout;
+
                     return cmd.ExecuteNonQuery();
                 }
             }

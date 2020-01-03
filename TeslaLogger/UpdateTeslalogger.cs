@@ -53,28 +53,28 @@ namespace TeslaLogger
                 if (!DBHelper.ColumnExists("pos", "inside_temp"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
-                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL", 300);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "battery_heater"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
-                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL", 300);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
-                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL", 300);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (!DBHelper.ColumnExists("pos", "sentry_mode"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
-                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL", 300);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
@@ -196,7 +196,7 @@ namespace TeslaLogger
 
                 System.IO.File.WriteAllText("view_trip.txt", s);
 
-                DBHelper.ExecuteSQLQuery(s);
+                DBHelper.ExecuteSQLQuery(s, 300);
             }
             catch (Exception ex)
             {

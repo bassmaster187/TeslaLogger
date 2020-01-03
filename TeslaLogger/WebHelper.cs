@@ -1562,8 +1562,6 @@ FROM
                         battery_heater = (bool)r2["battery_heater"];
                         DBHelper.currentJSON.current_battery_heater = (bool)battery_heater;
                     }
-                    else
-                        return null;
                 }
                 catch (Exception) { }
 
