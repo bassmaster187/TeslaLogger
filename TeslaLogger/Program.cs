@@ -194,6 +194,7 @@ namespace TeslaLogger
                                         Logfile.Log(res);
                                         currentState = TeslaState.Online;
                                         wh.IsDriving(true);
+                                        wh.ResetLastChargingState();
                                         DBHelper.StartState(res);
                                         continue;
                                     }
@@ -202,6 +203,7 @@ namespace TeslaLogger
                                         Logfile.Log(res);
                                         currentState = TeslaState.Sleep;
                                         DBHelper.StartState(res);
+                                        wh.ResetLastChargingState();
                                         DBHelper.currentJSON.CreateCurrentJSON();
                                     }
                                     else if (res == "offline")
@@ -212,7 +214,6 @@ namespace TeslaLogger
 
                                         while (true)
                                         {
-
                                             System.Threading.Thread.Sleep(30000);
                                             string res2 = wh.IsOnline().Result;
 
@@ -249,6 +250,7 @@ namespace TeslaLogger
                                 {
                                     if (wh.IsDriving() && DBHelper.currentJSON.current_speed > 0)
                                     {
+                                        wh.ResetLastChargingState();
                                         lastCarUsed = DateTime.Now;
                                         lastOdometerChanged = DateTime.Now;
 
@@ -478,6 +480,7 @@ namespace TeslaLogger
 
                             case TeslaState.GoSleep:
                                 {
+                                    wh.ResetLastChargingState();
                                     bool KeepSleeping = true;
                                     int round = 0;
 

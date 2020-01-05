@@ -99,13 +99,13 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(15000);
                     return;
                 }
-                if (temp.Contains("operation_timedout with 10s timeout for txid"))
+                if (inhalt.Contains("operation_timedout with 10s timeout for txid"))
                 {
                     Logfile.Log(prefix + "Mothership Timeout");
                     System.Threading.Thread.Sleep(20000);
                     return;
                 }
-                if (temp.Contains("{\"response\":null,\"error\":\"not_found\",\"error_description\":\"\"}"))
+                if (inhalt.Contains("{\"response\":null,\"error\":\"not_found\",\"error_description\":\"\"}"))
                 {
                     Logfile.Log(prefix + "Mothership response:null");
                     System.Threading.Thread.Sleep(20000);

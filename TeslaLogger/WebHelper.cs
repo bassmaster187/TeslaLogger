@@ -158,12 +158,18 @@ namespace TeslaLogger
 
         String lastCharging_State = "";
 
+        public void ResetLastChargingState()
+        {
+            lastCharging_State = "";
+        }
+
         internal bool isCharging(bool justCheck = false)
         {
             string resultContent = "";
             try
             {
                 resultContent = GetCommand("charge_state").Result;
+
                 var outside_temp = GetOutsideTempAsync();
 
                 Tools.SetThread_enUS();
