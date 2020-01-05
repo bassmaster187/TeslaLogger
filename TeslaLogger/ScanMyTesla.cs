@@ -141,6 +141,14 @@ namespace TeslaLogger
                     MySqlCommand cmd = new MySqlCommand(sb.ToString(), con);
                     cmd.ExecuteNonQuery();
 
+                    try
+                    {
+                        string lastscanmyteslafilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTSCANMYTESLA");
+                        System.IO.File.WriteAllText(lastscanmyteslafilepaht, sqlDate);
+                    }
+                    catch (Exception)
+                    { }
+
                     return "insert ok ["+ kv.Keys.Count + "] "+  d.ToString();
                 }
             }

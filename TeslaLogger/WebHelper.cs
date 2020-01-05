@@ -1833,6 +1833,15 @@ FROM
 
                 if (resultContent.Contains("wakeupfile"))
                 {
+                    try
+                    {
+                        string lasttaskerwakeupfilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTTASKERWAKEUPFILE");
+                        var ltwf = resultContent.Replace("wakeupfile", "").Trim();
+                        System.IO.File.WriteAllText(lasttaskerwakeupfilepaht, ltwf);
+                    }
+                    catch (Exception)
+                    { }
+
                     Logfile.Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
                     return true;
                 }
