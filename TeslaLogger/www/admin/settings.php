@@ -133,14 +133,15 @@ require("language.php");
 <tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
 <?php
-$t1 = shell_exec('grep "ScanMyTesla: insert ok" /etc/teslalogger/nohup.out | tail -1');
-if (isset($t1) && strpos($t1,"]") > 5)
+if (file_exists("/etc/teslalogger/LASTSCANMYTESLA"))
 {
-	$t2 = substr($t1, 0,20);
-	echo $t2;
+	$taskertoken = file_get_contents("/etc/teslalogger/LASTSCANMYTESLA");
+	echo $taskertoken;
 }
 else
+{
 	echo "-";
+}
 ?>
 </td></tr>
 <tr><td valign="top"><b>Tasker Token:</b></td><td>
@@ -157,14 +158,13 @@ if (strlen($taskertoken) > 7)
 </td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td valign="top"><b>Received Tasker Token:</b></td><td>
 <?php
-$t1 = shell_exec('grep "TaskerWakeupfile available! \[Webservice\]" /etc/teslalogger/nohup.out | tail -1');
-if (isset($t1) && strpos($t1,"Webservice") > 10)
+if (file_exists("/etc/teslalogger/LASTTASKERWAKEUPFILE"))
 {
-	$t2 = substr($t1, strpos($t1,"Webservice") + 12);
-	echo $t2;
+	$taskertoken = file_get_contents("/etc/teslalogger/LASTTASKERWAKEUPFILE");
+	echo $taskertoken;
 }
-else
-	echo "not found!";
+else 
+	echo "never!!!";
 ?>
 </td></tr>
 <tr><td></td><td>&nbsp;</td></tr>
