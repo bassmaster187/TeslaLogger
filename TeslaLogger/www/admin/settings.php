@@ -158,13 +158,7 @@ if (strlen($taskertoken) > 7)
 </td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td valign="top"><b>Received Tasker Token:</b></td><td>
 <?php
-if (file_exists("/etc/teslalogger/LASTTASKERWAKEUPFILE"))
-{
-	$taskertoken = file_get_contents("/etc/teslalogger/LASTTASKERWAKEUPFILE");
-	echo $taskertoken;
-}
-else 
-	echo "never!!!";
+echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken);
 ?>
 </td></tr>
 <tr><td></td><td>&nbsp;</td></tr>
