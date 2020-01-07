@@ -42,7 +42,7 @@ env GITHUB_TOKEN=your_token yarn release-it patch
 
 #### Changelog
 
-##### v%VERSION%
+##### v0.0.9
 
 - Remove `dist` from master
 - Use webpack build

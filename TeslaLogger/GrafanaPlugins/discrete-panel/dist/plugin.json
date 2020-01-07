@@ -27,8 +27,8 @@
       { "name": "Options",          "path": "img/screenshot-options-1.png" },
       { "name": "Legend",           "path": "img/screenshot-options-2.png" }
     ],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "version": "0.0.9",
+    "updated": "2018-12-19"
   },
 
   "dependencies": {
