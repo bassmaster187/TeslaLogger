@@ -34,7 +34,7 @@
     "semi": true
   },
   "dependencies": {
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.1"
   },
