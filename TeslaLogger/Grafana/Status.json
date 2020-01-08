@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 40,
   "links": [],
   "panels": [
     {
@@ -243,8 +242,16 @@
           "text": "Offline"
         },
         {
-          "color": "#5794F2",
+          "color": "#FFEE52",
           "text": "Waking"
+        },
+        {
+          "color": "#8AB8FF",
+          "text": "Driving"
+        },
+        {
+          "color": "#B877D9",
+          "text": "Charging"
         }
       ],
       "crosshairColor": "#8F070C",
@@ -289,7 +296,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\nORDER BY  startdate ASC",
+          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) /* end of charging is online */\n\norder by time_sec\n",
           "refId": "A",
           "select": [
             [
@@ -390,6 +397,16 @@
           "op": "=",
           "text": "N/A",
           "value": "5"
+        },
+        {
+          "op": "=",
+          "text": "Driving",
+          "value": "6"
+        },
+        {
+          "op": "=",
+          "text": "Charging",
+          "value": "7"
         }
       ],
       "valueTextColor": "#000000",
@@ -426,5 +443,5 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 5
+  "version": 6
 }
