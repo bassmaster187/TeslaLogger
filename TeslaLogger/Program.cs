@@ -284,7 +284,7 @@ namespace TeslaLogger
                                             wh.scanMyTesla.FastMode(true);
 
                                         wh.IsDriving(true);
-                                        DBHelper.StartChargingState();
+                                        DBHelper.StartChargingState(wh);
                                         currentState = TeslaState.Charge;
 
                                         wh.DeleteWakeupFile();
