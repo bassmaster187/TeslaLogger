@@ -877,7 +877,7 @@ namespace TeslaLogger
                         shift_state = lastShift_State;
                 }
 
-                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N")
+                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || DBHelper.currentJSON.current_is_preconditioning)
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
@@ -1575,6 +1575,7 @@ FROM
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
                 if (preconditioning != is_preconditioning)
                 {
+                    IsDriving(true);
                     is_preconditioning = preconditioning;
                     Logfile.Log("Preconditioning: " + preconditioning);
                 }
