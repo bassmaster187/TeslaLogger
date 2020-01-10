@@ -27,6 +27,10 @@ namespace TeslaLogger
         public string TaskerHash = String.Empty;
         public bool is_preconditioning = false;
         public bool is_sentry_mode = false;
+        public string fast_charger_brand = "";
+        public string fast_charger_type = "";
+        public string conn_charge_cable = "";
+        public bool fast_charger_present = false;
         public static Geofence geofence;
         bool stopStreaming = false;
         string elevation = "";
@@ -191,7 +195,7 @@ namespace TeslaLogger
                     else
                         return false;
                 }
-
+                
                 var charging_state = r2["charging_state"].ToString();
                 var timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
@@ -210,6 +214,7 @@ namespace TeslaLogger
                 var charger_actual_current = "";
                 var charge_current_request = "";
                 var charger_pilot_current = "";
+                
 
                 if (r2["charger_voltage"] != null)
                     charger_voltage = r2["charger_voltage"].ToString();
@@ -225,6 +230,18 @@ namespace TeslaLogger
 
                 if (r2["charger_pilot_current"] != null)
                     charger_pilot_current = r2["charger_pilot_current"].ToString();
+
+                if (r2["fast_charger_brand"] != null)
+                    fast_charger_brand = r2["fast_charger_brand"].ToString();
+
+                if (r2["fast_charger_type"] != null)
+                    fast_charger_type = r2["fast_charger_type"].ToString();
+
+                if (r2["conn_charge_cable"] != null)
+                    conn_charge_cable = r2["conn_charge_cable"].ToString();
+
+                if (r2["fast_charger_present"] != null)
+                    fast_charger_present = Boolean.Parse(r2["fast_charger_present"].ToString());
 
                 if (r2["charge_limit_soc"] != null)
                 {

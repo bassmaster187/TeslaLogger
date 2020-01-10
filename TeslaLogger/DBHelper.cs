@@ -195,15 +195,19 @@ namespace TeslaLogger
             }
         }
 
-        public static void StartChargingState()
+        public static void StartChargingState(WebHelper wh)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID) values (@StartDate, @Pos, @StartChargingID)", con);
+                MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
+                cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
+                cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
+                cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
+                cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
                 cmd.ExecuteNonQuery();
             }
 
