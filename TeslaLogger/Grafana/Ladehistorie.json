@@ -34,7 +34,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 6,
+        "col": 2,
         "desc": true
       },
       "styles": [
