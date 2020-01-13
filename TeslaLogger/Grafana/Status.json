@@ -38,7 +38,7 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 12,
+        "w": 6,
         "x": 0,
         "y": 0
       },
@@ -79,14 +79,14 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "state",
+      "tableColumn": "case\n  WHEN status = 1 then 'Sleep'\n  WHEN status = 2 then 'Online'\n  WHEN status = 3 then 'Offline'\n  WHEN status = 4 then 'Waking'\n  WHEN status = 5 then '?'\n  WHEN status = 6 then 'Driving'\n  WHEN status = 7 then 'Charging'\nend",
       "targets": [
         {
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT state \nFROM state \nORDER BY  startdate desc limit 1",
+          "rawSql": "select \ncase\n  WHEN status = 1 then 'Sleep'\n  WHEN status = 2 then 'Online'\n  WHEN status = 3 then 'Offline'\n  WHEN status = 4 then 'Waking'\n  WHEN status = 5 then '?'\n  WHEN status = 6 then 'Driving'\n  WHEN status = 7 then 'Charging'\nend\n\nfrom (\nSELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\n) as t1\nLimit 1\n",
           "refId": "A",
           "select": [
             [
@@ -120,6 +120,436 @@
       "valueName": "avg"
     },
     {
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "green",
+                "value": 20
+              },
+              {
+                "color": "#eab839",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ],
+            "unit": "percent"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.3.5",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select battery_level\r\nFROM\r\n(\r\nSELECT $__time(datum),battery_level\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),battery_level\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "SOC",
+      "type": "gauge"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 380,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 38
+              },
+              {
+                "color": "green",
+                "value": 76
+              },
+              {
+                "color": "#eab839",
+                "value": 342
+              },
+              {
+                "color": "red",
+                "value": 361
+              }
+            ],
+            "unit": "lengthkm"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.3.5",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select ideal_battery_range_km\r\nFROM\r\n(\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Reichweite",
+      "type": "gauge"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [],
+            "max": 45,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ],
+            "unit": "celsius"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.3.5",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select outside_temp\r\nFROM\r\n(\r\nSELECT $__time(datum),outside_temp\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),outside_temp\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Außentemperatur",
+      "type": "gauge"
+    },
+    {
+      "description": "Nur verfügbar mit ScanMyTesla",
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "decimals": 1,
+            "mappings": [],
+            "max": 60,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 15
+              },
+              {
+                "color": "dark-yellow",
+                "value": 40
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 50
+              }
+            ],
+            "unit": "celsius"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.3.5",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT val as 'Zelltemperatur'\nFROM can\nWHERE $__timeFilter(datum) and id = 2 and datum > \n(\n    SELECT $__time(StartDate)\n    FROM state \n    WHERE  \n    $__timeFilter(startdate)\n    \n    union\n    SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate)\n    union \n    SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n    \n    union\n    SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) \n    union\n    SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n    \n    order by time_sec desc\n    Limit 1\n)\nORDER BY datum DESC Limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Zelltemperatur",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "teslalogger",
+      "decimals": null,
+      "format": "locale",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 6,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "km",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "odometer",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT odometer\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  id DESC \r\nLimit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "km Stand",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [],
+      "valueName": "avg"
+    },
+    {
       "cacheTimeout": null,
       "colorBackground": false,
       "colorPrefix": false,
@@ -141,9 +571,9 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 12,
-        "x": 12,
-        "y": 0
+        "w": 6,
+        "x": 0,
+        "y": 2
       },
       "id": 5,
       "interval": null,
@@ -189,7 +619,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(StartDate) \nFROM state \nORDER BY  startdate desc limit 1",
+          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\nLimit 1",
           "refId": "A",
           "select": [
             [
@@ -217,6 +647,109 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Current Status",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "teslalogger",
+      "decimals": null,
+      "format": "locale",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 8,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "text",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT LEFT(version, CHAR_LENGTH(version) - LOCATE(' ', REVERSE(version))) as text FROM car_version order by id desc limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Firmware",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [],
@@ -264,7 +797,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 2
+        "y": 4
       },
       "highlightOnMouseover": true,
       "id": 2,
@@ -296,7 +829,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) /* end of charging is online */\n\norder by time_sec\n",
+          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec\n",
           "refId": "A",
           "select": [
             [
@@ -415,7 +948,7 @@
       "writeMetricNames": false
     }
   ],
-  "refresh": false,
+  "refresh": "30s",
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
@@ -443,5 +976,5 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 6
+  "version": 7
 }
