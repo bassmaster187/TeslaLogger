@@ -67,6 +67,10 @@ You can also use my referral code to buy a Tesla:
 http://ts.la/christian7267
 
 # Screenshots
+ Dashboard: http://raspberry/admin/dashboard.php
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Dashboard.PNG)
+
+Grafana Dashboards: http://raspberry:3000
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/verbrauch_en.png)
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/trip_en.png)
