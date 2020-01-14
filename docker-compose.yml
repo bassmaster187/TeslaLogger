@@ -26,12 +26,15 @@ services:
       - ./TeslaLogger/sqlschema.sql:/docker-entrypoint-initdb.d/sqlschema.sql
     ports:
       - 3306:3306
+    environment:
+      - TZ=Europe/Berlin
 
   grafana:
     image: grafana/grafana:6.3.5
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
+      - TZ=Europe/Berlin
     ports:
       - 3000:3000
     volumes:
@@ -44,8 +47,6 @@ services:
       - teslalogger-grafana-usr:/usr/share/grafana/
     depends_on:
       - database
-    environment:
-      - TZ=Europe/Berlin
 
   webserver:
     image: php:7.3-apache
