@@ -1595,6 +1595,7 @@ FROM
                     IsDriving(true);
                     is_preconditioning = preconditioning;
                     Logfile.Log("Preconditioning: " + preconditioning);
+                    System.Threading.Thread.Sleep(10000);
                 }
 
                 DBHelper.currentJSON.current_is_preconditioning = preconditioning;

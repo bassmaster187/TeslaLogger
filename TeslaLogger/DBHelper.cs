@@ -428,6 +428,24 @@ namespace TeslaLogger
                         startid = Convert.ToInt32(o);
                 }
 
+                foreach (string f in System.IO.Directory.EnumerateFiles(FileManager.GetSRTMDataPath(), "*.txt"))
+                {
+                    try
+                    {
+                        if (new System.IO.FileInfo(f).Length < 100)
+                        {
+                            Logfile.Log("Found Empty SRTM File: " + f);
+                            startid = 1;
+
+                            System.IO.File.Delete(f);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+                }
+
                 DBHelper.UpdateTripElevation(startid, DBHelper.GetMaxPosid()); // get elevation for all points
             }
             catch (Exception ex)

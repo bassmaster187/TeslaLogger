@@ -119,6 +119,9 @@ namespace TeslaLogger
 
                 foreach (var line in kv)
                 {
+                    if (line.Value == "Infinity" || line.Value == "NaN")
+                        continue;
+
                     if (first)
                         first = false;
                     else

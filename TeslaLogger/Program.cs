@@ -295,7 +295,7 @@ namespace TeslaLogger
 
                                         int startSleepHour, startSleepMinute;
                                         Tools.StartSleeping(out startSleepHour, out startSleepMinute);
-                                        bool sleep = false;
+                                        bool sleep = true;
 
                                         if (FileManager.CheckCmdGoSleepFile())
                                         {

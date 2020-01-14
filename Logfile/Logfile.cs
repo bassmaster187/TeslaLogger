@@ -85,6 +85,13 @@ namespace TeslaLogger
 
                         return;
                     }
+                    else if (inhalt.Contains("You have been temporarily blocked for making too many requests!"))
+                    {
+                        Logfile.Log("temporarily blocked for making too many requests!");
+                        System.Threading.Thread.Sleep(30000);
+
+                        return;
+                    }
                 }
 
                 string temp = "";
