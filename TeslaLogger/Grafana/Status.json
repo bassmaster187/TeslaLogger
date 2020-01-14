@@ -120,6 +120,7 @@
       "valueName": "avg"
     },
     {
+      "datasource": "teslalogger",
       "gridPos": {
         "h": 4,
         "w": 3,
@@ -204,6 +205,7 @@
       "type": "gauge"
     },
     {
+      "datasource": "teslalogger",
       "gridPos": {
         "h": 4,
         "w": 3,
@@ -288,6 +290,7 @@
       "type": "gauge"
     },
     {
+      "datasource": "teslalogger",
       "gridPos": {
         "h": 4,
         "w": 3,
@@ -365,6 +368,7 @@
       "type": "gauge"
     },
     {
+      "datasource": "teslalogger",
       "description": "Nur verfügbar mit ScanMyTesla",
       "gridPos": {
         "h": 4,
@@ -976,5 +980,5 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 7
+  "version": 8
 }
