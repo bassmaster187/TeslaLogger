@@ -18,10 +18,10 @@ require("language.php");
 	$( function() {
 	<?php 
 		$f = scandir("wallpapers");
-		if (count($f) > 2)
+		if (count($f) > 3)
 		{
 			echo("$('#wallpaper').text('');\n");
-			echo("$('#wallpaper').css('background-image','url(\"wallpapers/" .$f[2]. "\")');\n");
+			echo("$('#wallpaper').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
 		}
 	?>
 
