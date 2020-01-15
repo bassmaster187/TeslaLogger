@@ -10,9 +10,10 @@ require("language.php");
     <meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Dashboard</title>
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="dashboard.css" />
+	<link rel="stylesheet" href="my_dashboard.css" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
 	<script>
 
 	$( function() {
@@ -20,8 +21,8 @@ require("language.php");
 		$f = scandir("wallpapers");
 		if (count($f) > 3)
 		{
-			echo("$('#wallpaper').text('');\n");
-			echo("$('#wallpaper').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
+			echo("$('#error').text('');\n");
+			echo("$('html').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
 		}
 	?>
 
@@ -101,15 +102,15 @@ require("language.php");
   </script>
   </head>
   <body>
-  <div id="wallpaper" style="color: red; background-size: cover;background-color: black; width: 100%; height: 100%; position: absolute; font-size: 20px;">
-  No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers<br>
-  </div>
-  
-  <div style="position: absolute; top: 40px; left: 0; width: 100%; text-align: center; font-size: 100px; color: white; font-family: HeiT ASC Traditional Chinese,M Hei PRC W45,AXIS Font Japanese W55,FB New Gothic,Swissra,Gotham Medium,system,sans-serif;">
-  Teslalogger Dashboard
-  <div style="margin-top: 50px; vertical-align: middle; color: #D1D1D1;font-size: 100px;"><img src="img/bat-icon.png"><span id="ideal_battery_range_km" style="margin-left:20px;">-</span><font size=24px>km</font></div>
-  <div id="car_statusLabel" style="margin-top: 50px;font-size: 60px; color:#EAEAEA; text-shadow: 4px 4px 4px #555;">-</div>
-  <div id="car_status" style="margin-top: 10px;font-size: 48px; color:#EAEAEA;">-</div>
+  <div id="panel">
+	  <div id="headline">Teslalogger Dashboard</div>
+	  <div id="rangeline"><img id="batimg" src="img/bat-icon.png">
+		  <span id="ideal_battery_range_km" style="">-</span>
+		  <font id="km">km</font>
+	  </div>
+	  <div id="car_statusLabel">-</div>
+	  <div id="car_status">-</div>
+	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
   </div>
   </body>
 </html>

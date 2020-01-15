@@ -114,6 +114,8 @@ namespace TeslaLogger
 
                 System.Threading.Timer t = new System.Threading.Timer(FileChecker, null, 10000, 5000);
 
+                chmod("/var/www/html/admin/wallpapers", 777);
+
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
                     Logfile.Log("Update skipped!");

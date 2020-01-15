@@ -119,7 +119,7 @@ namespace TeslaLogger
 
                 foreach (var line in kv)
                 {
-                    if (line.Value == "Infinity" || line.Value == "NaN")
+                    if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
                         continue;
 
                     if (first)

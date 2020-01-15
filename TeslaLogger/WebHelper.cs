@@ -25,7 +25,6 @@ namespace TeslaLogger
         public string option_codes = "";
         public CarSettings carSettings = null;
         public string TaskerHash = String.Empty;
-        public bool is_preconditioning = false;
         public bool is_sentry_mode = false;
         public string fast_charger_brand = "";
         public string fast_charger_type = "";
@@ -1577,28 +1576,44 @@ FROM
                 }
                 else
                     return null;
+
                 try
                 {
                     bool? battery_heater = null;
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-                        DBHelper.currentJSON.current_battery_heater = (bool)battery_heater;
+
+                        if (DBHelper.currentJSON.current_battery_heater != (bool)battery_heater)
+                        {
+                            DBHelper.currentJSON.current_battery_heater = (bool)battery_heater;
+
+                            Logfile.Log("Battery heater: " + battery_heater);
+                            DBHelper.currentJSON.CreateCurrentJSON();
+
+                            // write into Database
+                            System.Threading.Thread.Sleep(5000);
+                            IsDriving(true);
+                            System.Threading.Thread.Sleep(5000);
+                        }
                     }
                 }
                 catch (Exception) { }
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                if (preconditioning != is_preconditioning)
-                {
-                    IsDriving(true);
-                    is_preconditioning = preconditioning;
-                    Logfile.Log("Preconditioning: " + preconditioning);
-                    System.Threading.Thread.Sleep(10000);
-                }
-
                 DBHelper.currentJSON.current_is_preconditioning = preconditioning;
+                if (preconditioning != DBHelper.currentJSON.current_is_preconditioning)
+                {
+                    DBHelper.currentJSON.current_is_preconditioning = preconditioning;
+                    Logfile.Log("Preconditioning: " + preconditioning);
+                    DBHelper.currentJSON.CreateCurrentJSON();
+
+                    // write into Database
+                    System.Threading.Thread.Sleep(5000);
+                    IsDriving(true);
+                    System.Threading.Thread.Sleep(5000);
+                }
 
                 return (double)outside_temp;
             }

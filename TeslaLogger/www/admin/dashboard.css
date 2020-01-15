@@ -1,0 +1,92 @@
+html {
+	background-size: cover;
+	background-color: black; 
+	background-repeat: no-repeat;
+	background: center;
+	height: 100%;
+}
+
+body {
+	font-size: 20px;
+	background-color: black; 
+	font-family: Roboto;
+}
+
+#panel {
+	position: absolute; 
+	top: 40px; 
+	left: 0; 
+	width: 100%; 
+	text-align: center; 
+	font-size: 80px; 
+	color: #EAEAEA; 
+}
+
+#headline {
+	font-size: 60px;
+}
+
+#rangeline {
+	margin-top: 50px; 
+	vertical-align: middle; 
+	color: #D1D1D1;
+	font-size: 80x;
+}
+
+#range {
+	margin-left:10px;
+}
+
+#km {
+	font-size: 32px;
+}
+#car_statusLabel {
+	margin-top: 50px;
+	font-size: 60px; 
+	color:#EAEAEA; 
+	text-shadow: 4px 4px 4px #555;
+}
+#car_status {
+	margin-top: 10px;
+	font-size: 48px; 
+	color:#EAEAEA;
+}
+
+#error {
+	color:red;
+	font-size: 30px;
+}
+
+@media all and (max-width: 1000px) {
+	#panel { font-size: 60px; }
+
+	#headline { font-size: 48px; }
+
+	#rangeline { margin-top: 25px; font-size: 60px;	}
+
+	#km { font-size: 24px; }
+	
+	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
+	
+	#car_status { font-size: 36px; } 
+
+	#batimg	{ height: 50px; }
+
+}
+
+@media all and (max-width: 700px) {
+	#panel { font-size: 40px; }
+
+	#headline { font-size: 30px; }
+
+	#rangeline { margin-top: 25px; font-size: 40px;	}
+
+	#km { font-size: 16px; }
+	
+	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
+	
+	#car_status { font-size: 24px; } 
+
+	#batimg	{ height: 30px; }
+
+}

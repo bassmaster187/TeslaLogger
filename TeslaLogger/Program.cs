@@ -318,7 +318,7 @@ namespace TeslaLogger
                                                 currentState = TeslaState.Start;
 
                                                 wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                                                if (wh.is_preconditioning)
+                                                if (DBHelper.currentJSON.current_is_preconditioning)
                                                 {
                                                     Logfile.Log("preconditioning prevents car to get sleep");
                                                     lastCarUsed = DateTime.Now;
