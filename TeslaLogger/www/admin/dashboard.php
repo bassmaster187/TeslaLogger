@@ -10,8 +10,8 @@ require("language.php");
     <meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Dashboard</title>
-	<link rel="stylesheet" href="dashboard.css" />
-	<link rel="stylesheet" href="my_dashboard.css" />
+	<link rel="stylesheet" href="dashboard.css?v=<?=time()?>" />
+	<link rel="stylesheet" href="my_dashboard.css?v=<?=time()?>" />
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script>
@@ -22,7 +22,7 @@ require("language.php");
 		if (count($f) > 3)
 		{
 			echo("$('#error').text('');\n");
-			echo("$('html').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
+			echo("$('body').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
 		}
 	?>
 
