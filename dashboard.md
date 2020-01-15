@@ -1,5 +1,7 @@
-![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Dashboard.PNG)
 # Dashboard
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Dashboard.PNG)
+
 The dashboard can be accessed by: http://raspberry/admin/dashboard.php 
 
 Place your favorite image in \\RASPBERRY\teslalogger-web\admin\wallpapers
