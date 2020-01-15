@@ -29,12 +29,17 @@ http://raspberry/admin/settings.php
 ## Admin Panel
 http://raspberry/admin/
 
-## Dashboard
+## Grafana-Dashboard
 http://raspberry:3000
 
 Username: admin
 
 Password: teslalogger
+
+## Dashboard
+http://raspberry/admin/dashboard.php
+
+Customizing the Dashboard goes here: [LINK](dashboard.md)
 
 ## SSH for advanced users
 
