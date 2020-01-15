@@ -40,6 +40,11 @@ body {
 #km {
 	font-size: 32px;
 }
+
+#percent {
+	font-size: 32px;
+}
+
 #car_statusLabel {
 	margin-top: 50px;
 	font-size: 60px; 
@@ -57,6 +62,14 @@ body {
 	font-size: 30px;
 }
 
+#clock {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	font-size: 80px; 
+	color: #EAEAEA; 
+}
+
 @media all and (max-width: 1000px) {
 	#panel { font-size: 60px; }
 
@@ -65,6 +78,7 @@ body {
 	#rangeline { margin-top: 25px; font-size: 60px;	}
 
 	#km { font-size: 24px; }
+	#percent {font-size: 32px; }
 	
 	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
 	
@@ -72,6 +86,7 @@ body {
 
 	#batimg	{ height: 50px; }
 
+	#clock { font-size: 60px; }
 }
 
 @media all and (max-width: 700px) {
@@ -82,11 +97,13 @@ body {
 	#rangeline { margin-top: 25px; font-size: 40px;	}
 
 	#km { font-size: 16px; }
+	#percent {font-size: 16px; }
 	
 	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
 	
 	#car_status { font-size: 24px; } 
 
 	#batimg	{ height: 30px; }
-
+	
+	#clock { font-size: 40px; }
 }

@@ -37,11 +37,14 @@ require("language.php");
 
 	function GetCurrentData()
 	{
+		updateClock();
+	
 		$.ajax({
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(0));
+			$('#battery_level').text(jsonData["battery_level"]);
 
 			if (jsonData["charging"])
 			{
@@ -83,6 +86,20 @@ require("language.php");
 		});
 	}
 
+	function updateClock()
+	{
+		var currentTime = new Date ( );
+
+		var currentHours = currentTime.getHours ( );
+		var currentMinutes = currentTime.getMinutes ( );
+		var currentSeconds = currentTime.getSeconds ( );
+		
+		currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+		var currentTimeString = currentHours + ":" + currentMinutes;
+		
+		$('#clock').text(currentTimeString);
+	}
+
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -105,12 +122,13 @@ require("language.php");
   <div id="panel">
 	  <div id="headline">Teslalogger Dashboard</div>
 	  <div id="rangeline"><img id="batimg" src="img/bat-icon.png">
-		  <span id="ideal_battery_range_km" style="">-</span>
-		  <font id="km">km</font>
+	  <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font>
+	  <span id="battery_level" style="">-</span><font id="percent">%</font>
 	  </div>
 	  <div id="car_statusLabel">-</div>
 	  <div id="car_status">-</div>
 	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
   </div>
+  <div id="clock">00:00</div>
   </body>
 </html>

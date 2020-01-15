@@ -57,7 +57,17 @@ namespace TeslaLogger
                 try
                 {
                     if (Tools.IsDocker())
+                    {
                         Logfile.Log("Docker: YES!");
+
+                        if (!System.IO.File.Exists("/etc/teslalogger/settings.json"))
+                        {
+                            Logfile.Log("Creating empty settings.json");
+                            System.IO.File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
+                            UpdateTeslalogger.chmod("/etc/teslalogger/settings.json", 666);
+                        }
+
+                    }
                     else
                         Logfile.Log("Docker: NO!");
                 }
