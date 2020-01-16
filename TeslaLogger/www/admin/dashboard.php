@@ -18,11 +18,15 @@ require("language.php");
 
 	$( function() {
 	<?php 
-		$f = scandir("wallpapers");
-		if (count($f) > 3)
+		$files = scandir("wallpapers");
+		foreach ($files as $i => &$f)
 		{
-			echo("$('#error').text('');\n");
-			echo("$('body').css('background-image','url(\"wallpapers/" .$f[3]. "\")');\n");
+			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
+			{		
+				echo("$('#error').text('');\n");
+				echo("$('body').css('background-image','url(\"wallpapers/" .$f. "\")');\n");
+				break;
+			}
 		}
 	?>
 
