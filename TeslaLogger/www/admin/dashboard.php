@@ -39,7 +39,7 @@ require("language.php");
 		{
 			GetCurrentData();	
 		}
-		,60000);
+		,5000);
 	} );
 
 	function GetCurrentData()
@@ -52,6 +52,8 @@ require("language.php");
 		  }).done(function( jsonData ) {
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(0));
 			$('#battery_level').text(jsonData["battery_level"]);
+			
+			updateBat(jsonData["battery_level"]);
 
 			if (jsonData["charging"])
 			{
@@ -89,7 +91,6 @@ require("language.php");
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("Offline");
 			}
-			
 		});
 	}
 
@@ -106,7 +107,38 @@ require("language.php");
 		
 		$('#clock').text(currentTimeString);
 	}
-
+	
+	function updateBat($percent)
+	{
+		$batwidth = $('#batimg').width();
+		$batheight = $('#batimg').height();
+		$('#batimg_end').css('height', $batheight);
+		$('#batimg_m').css('height', $batheight );
+		
+		$newwidth = $batwidth * 0.92 * $percent / 100;
+		
+		$topspace = 4;
+		$leftspace = 7;
+		
+		if ($batwidth < 150)
+		{
+			$topspace = 8;
+			$leftspace = 3;
+		}
+		else if ($batwidth < 200)
+		{
+			$topspace = 7;
+			$leftspace = 5;
+		}
+		
+		$('#batimg_m').css('top', $topspace);
+		$('#batimg_end').css('top', $topspace);
+		
+		$('#batimg_m').css('width', $newwidth);
+		$('#batimg_m').css('left', $leftspace);
+		$('#batimg_end').css('left', $newwidth + $leftspace);
+		
+	}
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -128,7 +160,7 @@ require("language.php");
   <body>
   <div id="panel">
 	  <div id="headline">Teslalogger Dashboard</div>
-	  <div id="rangeline"><img id="batimg" src="img/bat-icon.png">
+	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
 	  <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font>
 	  <span id="battery_level" style="">-</span><font id="percent">%</font>
 	  </div>

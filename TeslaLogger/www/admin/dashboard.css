@@ -71,6 +71,22 @@ body {
 	color: #EAEAEA; 
 }
 
+#batdiv {
+    position: relative;
+}
+
+#batimg {
+	top: 0px;
+}
+
+#batimg_m {
+	position: absolute;
+}
+
+#batimg_end {
+	position: absolute;
+}
+
 @media all and (max-width: 1000px) {
 	#panel { font-size: 60px; }
 
