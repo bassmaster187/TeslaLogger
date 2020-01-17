@@ -19,8 +19,11 @@ require("language.php");
 	$( function() {
 	<?php 
 		$files = scandir("wallpapers");
-		foreach ($files as $i => &$f)
+		foreach ($files as $i => &$f)		
 		{
+			if (stripos($f,".") === 0)
+				continue;
+		
 			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
 			{		
 				echo("$('#error').text('');\n");

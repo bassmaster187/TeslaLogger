@@ -1602,7 +1602,7 @@ FROM
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                DBHelper.currentJSON.current_is_preconditioning = preconditioning;
+                
                 if (preconditioning != DBHelper.currentJSON.current_is_preconditioning)
                 {
                     DBHelper.currentJSON.current_is_preconditioning = preconditioning;
