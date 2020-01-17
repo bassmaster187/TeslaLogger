@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <?php
 require("language.php");
@@ -70,7 +70,7 @@ require("language.php");
 				var text = "Online";
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br>Preconditioning";
+					text = text + "<br>Preconditioning "+ jsonData["inside_temperature"] +"°C";
 
 				if (jsonData["sentry_mode"])
 					text = text + "<br>Sentry Mode";
