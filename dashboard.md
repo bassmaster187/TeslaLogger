@@ -31,3 +31,5 @@ You can customize it by creating an own CSS file under \\RASPBERRY\teslalogger-w
 # Custom Dashboards
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard.jpg)
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard-2.jpg)
