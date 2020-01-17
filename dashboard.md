@@ -28,3 +28,6 @@ You can customize it by creating an own CSS file under \\RASPBERRY\teslalogger-w
 #battery_level { display: none; }
 #percent { display: none; }
 ```
+# Custom Dashboards
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard.jpg)
