@@ -116,6 +116,8 @@ namespace TeslaLogger
 
                 chmod("/var/www/html/admin/wallpapers", 777);
 
+                UpdatePHPini();
+
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
                     Logfile.Log("Update skipped!");
@@ -177,6 +179,31 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void UpdatePHPini()
+        {
+            try
+            {
+                string phpinipath = "/etc/php/7.0/apache2/php.ini";
+                if (File.Exists(phpinipath))
+                {
+                    string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
+                    string newphpini = System.Text.RegularExpressions.Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
+                    newphpini = System.Text.RegularExpressions.Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
+
+                    File.WriteAllText(phpinipath, newphpini);
+
+                    if (newphpini != phpini)
+                    {
+                        Logfile.Log("PHP.ini changed!");
+                    }
+                }   
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 

@@ -29,4 +29,11 @@ function t($t)
 			echo $t;
 	}
 };
+
+function logger($t)
+{
+	$logfile = "/etc/teslalogger/nohup.out";
+	$time = date("d.m.Y H:i:s", time());
+	$ret2 =	file_put_contents($logfile, $time . " : ". $t ."\r\n", FILE_APPEND);
+}
 ?>

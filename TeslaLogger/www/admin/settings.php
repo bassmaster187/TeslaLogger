@@ -6,7 +6,7 @@ require("language.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Settings V1.4</title>
+    <title>Teslalogger Settings V1.5</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -115,8 +115,8 @@ require("language.php");
 
 </script>
 <button onclick="window.location.href='password.php';"><?php t("Zugangsdaten"); ?></button>
-
-<br><br>
+<button onclick="window.location.href='restore.php';"><?php t("Restore DB"); ?></button>
+<h1>SETTINGS</h1>
 <div>
 <table>
 <tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
