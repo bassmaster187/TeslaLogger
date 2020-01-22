@@ -37,7 +37,8 @@ You can customize it by creating an own CSS file under \\RASPBERRY\teslalogger-w
 
 ### Openweathermap Widget
 Get yourself a free openweathermap api key: https://openweathermap.org/
-Enter city and appid under: \\raspberry\teslalogger\weather.ini
+
+Enter city and appid under: \\\raspberry\teslalogger\weather.ini
 
 # Custom Dashboards
 
