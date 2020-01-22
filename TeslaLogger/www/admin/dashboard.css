@@ -24,11 +24,16 @@ body {
 }
 
 #headline {
-	font-size: 60px;
+	font-size: 30px;
+}
+
+#teslalogger {
+	font-size: 30px;
 }
 
 #display_name {
-	display: none;
+	display: block;
+	font-size: 60px;
 }
 
 #rangeline {
@@ -107,8 +112,12 @@ body {
 @media all and (max-width: 1000px) {
 	#panel { font-size: 60px; }
 
-	#headline { font-size: 48px; }
+	#headline { font-size: 25px; }
+	
+	#teslalogger { font-size: 25px; }
 
+	#display_name { 	font-size: 50px; }
+	
 	#rangeline { margin-top: 25px; font-size: 60px;	}
 
 	#km { font-size: 24px; }
@@ -130,7 +139,11 @@ body {
 @media all and (max-width: 700px) {
 	#panel { font-size: 40px; }
 
-	#headline { font-size: 30px; }
+	#headline { font-size: 20px; }
+		
+	#teslalogger { font-size: 20px; }
+
+	#display_name { 	font-size: 40px; }
 
 	#rangeline { margin-top: 25px; font-size: 40px;	}
 

@@ -281,7 +281,7 @@ require("language.php");
   </head>
   <body>
   <div id="panel">
-	  <div id="headline"><span id="teslalogger">Teslalogger Dashboard</span> <span id="display_name"></span></div>
+	  <div id="headline"><span id="display_name"> </span><span id="teslalogger">Teslalogger Dashboard</span></div>
 	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
 	  <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font>
 	  <span id="battery_level" style="">-</span><font id="percent">%</font>
