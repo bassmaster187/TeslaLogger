@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php
 require("language.php");
 ?>
@@ -15,9 +14,11 @@ require("language.php");
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script>
+	
+	var nextGetWeather = 0;
 
 	$( function() {
-	<?php 
+	<?php
 		$files = scandir("wallpapers");
 		foreach ($files as $i => &$f)		
 		{
@@ -45,6 +46,7 @@ require("language.php");
 	function GetCurrentData()
 	{
 		updateClock();
+		updateWeather();
 	
 		$.ajax({
 		  url: "current_json.php",
@@ -139,6 +141,113 @@ require("language.php");
 		$('#batimg_end').css('left', $newwidth + $leftspace);
 		
 	}
+	
+	function updateWeather()
+	{
+		if (nextGetWeather > Date.now())
+			return;
+	
+		nextGetWeather = Date.now() + 600000;
+	
+		<?php
+		if (file_exists("weather.ini"))
+		{
+			$weatherParams = parse_ini_file ("weather.ini");
+			echo("const weatherUrl='//api.openweathermap.org/data/2.5/forecast?q=" . $weatherParams['city'] . "&units=metric&APPID=" . $weatherParams['appid'] . "';");
+		}
+		else
+		{
+			echo("$('#weather').css('display','none');return; <!-- weather.ini file not found! Disable Weather Widget -->");
+		}
+		?>
+	
+		var minTemp = 100;
+		var maxTemp = -100;
+		var weatherIcon = "partlycloudy.png";
+		var forecast = 'few clouds';
+		
+		var now = new Date();
+		var dateForecast = new Date();
+		var dateTemp = new Date();
+		
+		if(now.getHours() <= 14) dateForecast.setHours(15,0,0,0);
+			else dateForecast.setHours(18,0,0,0);
+		if(now.getHours() >= 18) {
+			dateForecast.setDate(dateForecast.getDate() + 1);
+			dateForecast.setHours(15,0,0,0);
+		}
+
+		
+		
+		$.getJSON(weatherUrl, function(weatherData){
+			
+			var i = 0;
+			while(weatherData.list[i].dt < Math.round(dateForecast.getTime()/1000)) { i++;	}
+			
+			forecast = weatherData.list[i].weather[0].description;
+			console.log(weatherData.list[i].dt_txt);
+			switch (forecast) { 
+				case 'clear sky': 
+					weatherIcon = "clear.png";
+				break;
+				case 'few clouds': 
+					weatherIcon = "partlycloudy.png";
+				break;
+				case 'scattered clouds': 
+					weatherIcon = "cloudy.png";
+				break;
+				case 'broken clouds': 
+					weatherIcon = "mostlycloudy.png";
+				break;
+				case 'shower rain': 
+					weatherIcon = "rain.png";
+				break;
+				case 'rain': 
+					weatherIcon = "rain.png";
+				break;
+				case 'thunderstorm': 
+					weatherIcon = "tstorms.png";
+				break;
+				case 'snow': 
+					weatherIcon = "snow.png";
+				break;
+				case 'mist': 
+					weatherIcon = "hazy.png";
+				break;
+				default:
+					weatherIcon = "unknown.png";
+			}
+				
+			i = 0;
+
+			if(dateTemp.getHours() <= 16) {
+				dateTemp.setDate(dateTemp.getDate() + 1);
+				dateTemp.setHours(1,0,0,0);
+				while(weatherData.list[i].dt <= Math.round(dateTemp.getTime()/1000)) {
+					if(weatherData.list[i].main.temp_min < minTemp) minTemp = weatherData.list[i].main.temp_min;
+					if(weatherData.list[i].main.temp_max > maxTemp) maxTemp = weatherData.list[i].main.temp_max;
+					i++;
+				}
+			}
+			else {
+				dateTemp.setDate(dateTemp.getDate() + 1);
+				dateTemp.setHours(1,0,0,0);
+				while(weatherData.list[i].dt <= Math.round(dateTemp.getTime()/1000)) i++;
+				while(weatherData.list[i].dt <= Math.round(dateTemp.getTime()/1000) + 86400) {
+					if(weatherData.list[i].main.temp_min < minTemp) minTemp = weatherData.list[i].main.temp_min;
+					if(weatherData.list[i].main.temp_max > maxTemp) maxTemp = weatherData.list[i].main.temp_max;
+					i++;
+				}				
+			}
+		
+			$('#temp').text(Math.round(minTemp) + "°C / " + Math.round(maxTemp) + "°C");
+			$("#weather_icon").attr("src", "img/weather/" + weatherIcon);
+		}).error(function(error)
+		{
+			$('#temp').text(error.responseText);
+		});
+	}
+	
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -169,5 +278,9 @@ require("language.php");
 	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
   </div>
   <div id="clock">00:00</div>
+  <div id="weather">
+	<img id="weather_icon" src="">
+	<div id="temp">no weather data</div>
+  </div>
   </body>
 </html>
