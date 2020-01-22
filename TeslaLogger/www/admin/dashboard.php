@@ -32,6 +32,10 @@ require("language.php");
 				break;
 			}
 		}
+		
+		$display_name = file_get_contents("/etc/teslalogger/DISPLAY_NAME");
+		
+		echo("$('#display_name').text('$display_name');");
 	?>
 
 		GetCurrentData();
@@ -131,7 +135,7 @@ require("language.php");
 		{
 			$topspace = 7;
 			$leftspace = 5;
-		}
+		}	
 		
 		$('#batimg_m').css('top', $topspace);
 		$('#batimg_end').css('top', $topspace);
@@ -154,7 +158,13 @@ require("language.php");
 		if (file_exists($weahterinifile))
 		{
 			$weatherParams = parse_ini_file($weahterinifile);
-			echo("const weatherUrl='//api.openweathermap.org/data/2.5/forecast?q=" . $weatherParams['city'] . "&units=metric&APPID=" . $weatherParams['appid'] . "';");
+			
+			if ($weatherParams['appid'] =="12345678901234567890123456789012")
+			{
+				echo("$('#weather').css('display','none');return; <!-- default weather.ini file! Disable Weather Widget -->");
+			}
+			else
+				echo("const weatherUrl='//api.openweathermap.org/data/2.5/forecast?q=" . $weatherParams['city'] . "&units=metric&APPID=" . $weatherParams['appid'] . "';");
 		}
 		else
 		{
@@ -178,14 +188,13 @@ require("language.php");
 			dateForecast.setHours(15,0,0,0);
 		}
 
-		
-		
 		$.getJSON(weatherUrl, function(weatherData){
 			
 			var i = 0;
 			while(weatherData.list[i].dt < Math.round(dateForecast.getTime()/1000)) { i++;	}
 			
 			forecast = weatherData.list[i].weather[0].description;
+			console.log("forecast: " + forecast);
 			console.log(weatherData.list[i].dt_txt);
 			switch (forecast) { 
 				case 'clear sky': 
@@ -194,6 +203,9 @@ require("language.php");
 				case 'few clouds': 
 					weatherIcon = "partlycloudy.png";
 				break;
+				case 'overcast clouds':
+					weatherIcon = "cloudy.png";
+				break;				
 				case 'scattered clouds': 
 					weatherIcon = "cloudy.png";
 				break;
@@ -269,7 +281,7 @@ require("language.php");
   </head>
   <body>
   <div id="panel">
-	  <div id="headline">Teslalogger Dashboard</div>
+	  <div id="headline"><span id="teslalogger">Teslalogger Dashboard</span> <span id="display_name"></span></div>
 	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
 	  <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font>
 	  <span id="battery_level" style="">-</span><font id="percent">%</font>

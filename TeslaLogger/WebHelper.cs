@@ -351,6 +351,15 @@ namespace TeslaLogger
                 string display_name = r2["display_name"].ToString();
                 Logfile.Log("display_name :" + display_name);
 
+                try
+                {
+                    string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "DISPLAY_NAME");
+                    System.IO.File.WriteAllText(filepath, display_name);
+                    UpdateTeslalogger.chmod(filepath, 666, false);
+                }
+                catch (Exception)
+                { }
+
                 string vin = r2["vin"].ToString();
                 Logfile.Log("vin :" + vin);
 

@@ -118,6 +118,19 @@ namespace TeslaLogger
 
                 UpdatePHPini();
 
+                try
+                {
+                    // create empty weather.ini file
+                    string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
+                    if (!File.Exists(filepath))
+                        System.IO.File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
+
+                    UpdateTeslalogger.chmod(filepath, 666, false);
+                }
+                catch (Exception)
+                { }
+
+
                 if (System.IO.File.Exists("cmd_updated.txt"))
                 {
                     Logfile.Log("Update skipped!");
