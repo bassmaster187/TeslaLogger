@@ -150,9 +150,10 @@ require("language.php");
 		nextGetWeather = Date.now() + 600000;
 	
 		<?php
-		if (file_exists("weather.ini"))
+		$weahterinifile = "/etc/teslalogger/weather.ini";
+		if (file_exists($weahterinifile))
 		{
-			$weatherParams = parse_ini_file ("weather.ini");
+			$weatherParams = parse_ini_file($weahterinifile);
 			echo("const weatherUrl='//api.openweathermap.org/data/2.5/forecast?q=" . $weatherParams['city'] . "&units=metric&APPID=" . $weatherParams['appid'] . "';");
 		}
 		else
