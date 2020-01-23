@@ -45,3 +45,5 @@ Enter city and appid under: \\\raspberry\teslalogger\weather.ini
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard.jpg)
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard-2.jpg)
+
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Teslalogger-Custom-Dashboard-3.jpg)
