@@ -7,6 +7,7 @@ require("language.php");
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
+	<link href="manifest.json" rel="manifest" crossorigin="use-credentials">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Dashboard</title>
 	<link rel="stylesheet" href="dashboard.css?v=<?=time()?>" />
