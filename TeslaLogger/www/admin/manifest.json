@@ -1,5 +1,5 @@
 {
-  "short_name": "Teslalogger",
+  "short_name": "Dashboard",
   "name": "Teslalogger Dashboard",
   "start_url": "dashboard.php",
   "icons": [
@@ -10,7 +10,6 @@
     }
   ], 
   "display": "fullscreen",
-  "orientation": "landscape",
   "theme_color": "#b71c1c",
   "background_color": "#363636"
 }
