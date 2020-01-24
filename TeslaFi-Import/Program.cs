@@ -55,16 +55,49 @@ namespace TeslaFi_Import
                 }
 
                 string newChargingstate = dr["charging_state"].ToString();
-                if (oldChargingstate == "" && newChargingstate== "Charging")
-                {
-
-                }
-
                 if (newChargingstate == "Charging")
                     InsertCharging(dr);
+
+                if (oldChargingstate == "" && newChargingstate == "Charging")
+                {
+                    Console.WriteLine("Start Charging " + Date.ToString());
+                    oldChargingstate = newChargingstate;
+                    StartChargingState(dr);
+                }
+                else if (oldChargingstate == "Charging" && (newChargingstate == "Complete" || newChargingstate == "Disconnected"))
+                {
+                    Console.WriteLine("Stop Charging " + Date.ToString());
+                    oldChargingstate = "";
+                    CloseChargingState(Date);
+                }
+
+                
             }
 
             Console.WriteLine("end Parsing");
+        }
+
+        static void StartChargingState(DataRow dr)
+        {
+            DateTime Date = (DateTime)dr["Date"];
+            string fast_charger_type = dr["fast_charger_type"].ToString();
+            string fast_charger_brand = dr["fast_charger_brand"].ToString();
+            string conn_charge_cable = dr["conn_charge_cable"].ToString();
+            string fast_charger_present = dr["fast_charger_present"].ToString();
+
+            StartChargingState(Date, fast_charger_brand, fast_charger_type, conn_charge_cable, fast_charger_present);
+        }
+
+        public static void CloseChargingState(DateTime Date)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null", con);
+                cmd.Parameters.AddWithValue("@EndDate", Date);
+                cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
+                cmd.ExecuteNonQuery();
+            }
         }
 
         private static void InsertCharging(DataRow dr)
@@ -516,27 +549,30 @@ namespace TeslaFi_Import
                     cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
 
                 cmd.ExecuteNonQuery();
-            }
 
+                cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", con);
+                cmd.Parameters.Clear();
+                currentChargeid = Convert.ToInt32(cmd.ExecuteScalar());
+            }
         }
 
-        public static void StartChargingState()
+        public static void StartChargingState(DateTime date, string fast_charger_brand, string fast_charger_type, string conn_charge_cable, string fast_charger_present)
         {
-            /*
+            
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
-                cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@StartDate", date);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
-                cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
-                cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
-                cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                cmd.Parameters.AddWithValue("@fast_charger_brand", fast_charger_brand);
+                cmd.Parameters.AddWithValue("@fast_charger_type", fast_charger_type);
+                cmd.Parameters.AddWithValue("@conn_charge_cable", conn_charge_cable);
+                cmd.Parameters.AddWithValue("@fast_charger_present", fast_charger_present);
                 cmd.ExecuteNonQuery();
             }
-            */
+            
         }
 
         static int GetMaxChargeid()
