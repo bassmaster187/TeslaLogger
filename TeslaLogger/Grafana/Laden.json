@@ -118,6 +118,12 @@
         {
           "alias": "SOC [%]",
           "fill": 1
+        },
+        {
+          "alias": "Battery Heater",
+          "color": "#C4162A",
+          "fill": 1,
+          "steppedLine": true
         }
       ],
       "spaceLength": 10,
@@ -131,7 +137,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 10 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -477,5 +483,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 56
+  "version": 57
 }

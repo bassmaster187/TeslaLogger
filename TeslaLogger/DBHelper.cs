@@ -836,7 +836,7 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request)", con);
+                    MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@battery_level", battery_level);
                     cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
@@ -845,6 +845,7 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
                     cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                     cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
+                    cmd.Parameters.AddWithValue("@battery_heater", DBHelper.currentJSON.current_battery_heater ? 1 : 0);
 
                     int i = 0;
 

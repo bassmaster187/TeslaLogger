@@ -106,6 +106,12 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.ColumnExists("charging", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
 
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
