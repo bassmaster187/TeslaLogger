@@ -13,6 +13,7 @@ namespace TeslaFi_Import
         static string DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
         static int currentPosId = 0;
+        static int currentChargeid = 0;
 
         static void Main(string[] args)
         {
@@ -28,10 +29,13 @@ namespace TeslaFi_Import
             Console.WriteLine("start Parsing");
 
             string oldShiftstate = "P";
+            string oldChargingstate = "";
 
             foreach (DataRow dr in dt.Rows)
             {
                 DateTime Date = (DateTime)dr["Date"];
+
+                InsertPos(dr);
 
                 string newShiftstate = dr["shift_state"].ToString();
                 if (oldShiftstate == "P" && (newShiftstate == "D" || newShiftstate =="R"))
@@ -49,11 +53,42 @@ namespace TeslaFi_Import
                     oldShiftstate = newShiftstate;
                     CloseDriveState(Date);
                 }
-                
-                InsertPos(dr);
+
+                string newChargingstate = dr["charging_state"].ToString();
+                if (oldChargingstate == "" && newChargingstate== "Charging")
+                {
+
+                }
+
+                if (newChargingstate == "Charging")
+                    InsertCharging(dr);
             }
 
             Console.WriteLine("end Parsing");
+        }
+
+        private static void InsertCharging(DataRow dr)
+        {
+            DateTime Date = (DateTime)dr["Date"];
+            string battery_level = dr["battery_level"].ToString();
+            string charge_energy_added = dr["charge_energy_added"].ToString();
+            string charger_power = dr["charger_power"].ToString();
+
+            double ideal_battery_range = 0;
+            if (dr["ideal_battery_range"].ToString() == "999.0") // Raven
+                ideal_battery_range = Convert.ToDouble(dr["battery_range"], ciEnUS);
+            else
+                ideal_battery_range = Convert.ToDouble(dr["ideal_battery_range"], ciEnUS);
+
+            ideal_battery_range = ideal_battery_range / (double)0.62137;
+
+            string charger_voltage = dr["charger_voltage"].ToString();
+            string charger_phases = dr["charger_phases"].ToString();
+            string charger_actual_current = dr["charger_actual_current"].ToString();
+            string charger_pilot_current = dr["charger_pilot_current"].ToString();
+            string charge_current_request = dr["charge_current_request"].ToString();
+
+            InsertCharging(Date, battery_level, charge_energy_added, charger_power, ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, 0.0, true, charger_pilot_current, charge_current_request);
         }
 
         private static void InsertPos(DataRow dr)
@@ -73,8 +108,10 @@ namespace TeslaFi_Import
             double odometerKM = (Double)(Convert.ToDecimal(dr["odometer"], ciEnUS) / 0.62137M);
 
             double ideal_battery_range = 0;
-            if (Convert.ToDecimal(dr["ideal_battery_range"]) == 999) // Raven
-                ideal_battery_range = Convert.ToDouble(dr["battery_range"]);
+            if (dr["ideal_battery_range"].ToString() == "999.0") // Raven
+                ideal_battery_range = Convert.ToDouble(dr["battery_range"], ciEnUS);
+            else
+                ideal_battery_range = Convert.ToDouble(dr["ideal_battery_range"], ciEnUS);
 
             ideal_battery_range = ideal_battery_range / (double)0.62137;
 
@@ -209,7 +246,7 @@ namespace TeslaFi_Import
                 if (ideal_battery_range_km == -1)
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
                 else
-                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString(ciEnUS));
 
                 if (outside_temp == null)
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
@@ -434,6 +471,77 @@ namespace TeslaFi_Import
                 // Logfile.Log(ex.ToString());
                 System.Diagnostics.Debug.WriteLine(ex);
             }
+        }
+
+        internal static void InsertCharging(DateTime Date, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
+        {
+
+            if (charger_phases == "")
+                charger_phases = "1";
+
+            double kmRange = ideal_battery_range / (double)0.62137;
+
+            double powerkW = Convert.ToDouble(charger_power);
+            double waitbetween2pointsdb = 1000.0 / powerkW;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
+                cmd.Parameters.AddWithValue("@Datum", Date.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@battery_level", battery_level);
+                cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                cmd.Parameters.AddWithValue("@charger_power", charger_power);
+                cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmRange.ToString(ciEnUS));
+                cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
+                cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
+                cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
+                cmd.Parameters.AddWithValue("@battery_heater", "0");
+
+                int i = 0;
+
+                if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out i))
+                    cmd.Parameters.AddWithValue("@charger_pilot_current", i);
+                else
+                    cmd.Parameters.AddWithValue("@charger_pilot_current", DBNull.Value);
+
+                if (charge_current_request != null && int.TryParse(charge_current_request, out i))
+                    cmd.Parameters.AddWithValue("@charge_current_request", i);
+                else
+                    cmd.Parameters.AddWithValue("@charge_current_request", DBNull.Value);
+
+                if (outside_temp == null)
+                    cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+
+        public static void StartChargingState()
+        {
+            /*
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
+                cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
+                cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
+                cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
+                cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
+                cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                cmd.ExecuteNonQuery();
+            }
+            */
+        }
+
+        static int GetMaxChargeid()
+        {
+            return currentChargeid;
         }
     }
 }
