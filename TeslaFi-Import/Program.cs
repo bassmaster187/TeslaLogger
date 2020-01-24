@@ -14,6 +14,7 @@ namespace TeslaFi_Import
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
         static int currentPosId = 0;
         static int currentChargeid = 0;
+        static int currentStateId = 0;
 
         static void Main(string[] args)
         {
@@ -30,6 +31,7 @@ namespace TeslaFi_Import
 
             string oldShiftstate = "P";
             string oldChargingstate = "";
+            string oldState = "";
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -71,7 +73,12 @@ namespace TeslaFi_Import
                     CloseChargingState(Date);
                 }
 
-                
+                string newState = dr["state"].ToString();
+                if (newState.Length > 0 && oldState != newState)
+                {
+                    oldState = newState;
+                    StartState(newState, Date);
+                }
             }
 
             Console.WriteLine("end Parsing");
@@ -81,8 +88,8 @@ namespace TeslaFi_Import
         {
             DateTime Date = (DateTime)dr["Date"];
             string fast_charger_type = dr["fast_charger_type"].ToString();
-            string fast_charger_brand = dr["fast_charger_brand"].ToString();
-            string conn_charge_cable = dr["conn_charge_cable"].ToString();
+            string fast_charger_brand = ""; //  dr["fast_charger_brand"].ToString();
+            string conn_charge_cable = ""; //  dr["conn_charge_cable"].ToString();
             string fast_charger_present = dr["fast_charger_present"].ToString();
 
             StartChargingState(Date, fast_charger_brand, fast_charger_type, conn_charge_cable, fast_charger_present);
@@ -578,6 +585,50 @@ namespace TeslaFi_Import
         static int GetMaxChargeid()
         {
             return currentChargeid;
+        }
+
+        public static void StartState(string state, DateTime Date)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+
+                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and id < " + currentStateId, con);
+                MySqlDataReader dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    if (dr[0].ToString() == state)
+                        return;
+                }
+                dr.Close();
+
+                int MaxPosid = GetMaxPosid();
+                CloseState(MaxPosid, Date);
+
+                Console.WriteLine("state: " + state);
+
+                MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
+                cmd.Parameters.AddWithValue("@StartDate", Date);
+                cmd.Parameters.AddWithValue("@state", state);
+                cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", con);
+                cmd.Parameters.Clear();
+                currentStateId = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public static void CloseState(int maxPosid, DateTime Date)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
+                cmd.Parameters.AddWithValue("@enddate", Date);
+                cmd.Parameters.AddWithValue("@EndPos", maxPosid);
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
