@@ -12,6 +12,7 @@ namespace TeslaFi_Import
     {
         static string DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
+        static int currentPosId = 0;
 
         static void Main(string[] args)
         {
@@ -25,8 +26,30 @@ namespace TeslaFi_Import
             DeleteData(startDate, endDate);
 
             Console.WriteLine("start Parsing");
+
+            string oldShiftstate = "P";
+
             foreach (DataRow dr in dt.Rows)
             {
+                DateTime Date = (DateTime)dr["Date"];
+
+                string newShiftstate = dr["shift_state"].ToString();
+                if (oldShiftstate == "P" && (newShiftstate == "D" || newShiftstate =="R"))
+                {
+                    // Driving
+                    Console.WriteLine("Start Driving " + Date.ToString());
+                    oldShiftstate = newShiftstate;
+                    StartDriveState(Date);
+
+                }
+                else if (newShiftstate == "P" && (oldShiftstate == "D" || oldShiftstate == "R"))
+                {
+                    // End of Driving
+                    Console.WriteLine("End Driving " + Date.ToString());
+                    oldShiftstate = newShiftstate;
+                    CloseDriveState(Date);
+                }
+                
                 InsertPos(dr);
             }
 
@@ -62,7 +85,6 @@ namespace TeslaFi_Import
 
             // todo
             double ? outside_temp = null;
-            
 
             InsertPos(Date, latitude, longitude, speed, power, odometerKM, ideal_battery_range, battery_level, outside_temp, elevation, inside_temp, "0", "0","0");
         }
@@ -214,6 +236,11 @@ namespace TeslaFi_Import
                 cmd.Parameters.AddWithValue("@sentry_mode", sentry_mode);
 
                 cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", con);
+                cmd.Parameters.Clear();
+                currentPosId = Convert.ToInt32(cmd.ExecuteScalar());
+
             }
         }
 
@@ -224,6 +251,189 @@ namespace TeslaFi_Import
             dt = dt.ToLocalTime();
             return dt;
 
+        }
+
+        public static void StartDriveState(DateTime date)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
+                cmd.Parameters.AddWithValue("@StartDate", date);
+                cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void CloseDriveState(DateTime EndDate)
+        {
+            int StartPos = 0;
+            int MaxPosId = GetMaxPosid();
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    StartPos = Convert.ToInt32(dr[0]);
+                }
+                dr.Close();
+            }
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
+                cmd.Parameters.AddWithValue("@EndDate", EndDate);
+                cmd.Parameters.AddWithValue("@Pos", MaxPosId);
+                cmd.ExecuteNonQuery();
+            }
+
+            if (StartPos != 0)
+                UpdateDriveStatistics(StartPos, MaxPosId);
+        }
+
+        public static int GetMaxPosid(bool withReverseGeocoding = true)
+        {
+            return currentPosId;
+        }
+
+        private static void UpdateDriveStatistics(int startPos, int endPos, bool logging = false)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos", con);
+                    cmd.Parameters.AddWithValue("@startpos", startPos);
+                    cmd.Parameters.AddWithValue("@endpos", endPos);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                        {
+                            con2.Open();
+                            MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2);
+                            cmd2.Parameters.AddWithValue("@StartPos", startPos);
+                            cmd2.Parameters.AddWithValue("@EndPos", endPos);
+
+                            cmd2.Parameters.AddWithValue("@outside_temp_avg", dr["outside_temp_avg"]);
+                            cmd2.Parameters.AddWithValue("@speed_max", dr["speed_max"]);
+                            cmd2.Parameters.AddWithValue("@power_max", dr["power_max"]);
+                            cmd2.Parameters.AddWithValue("@power_min", dr["power_min"]);
+                            cmd2.Parameters.AddWithValue("@power_avg", dr["power_avg"]);
+
+                            cmd2.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                // If Startpos doesn't have an "ideal_battery_rage_km", it will be updated from the first valid dataset
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @startpos", con);
+                    cmd.Parameters.AddWithValue("@startpos", startPos);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        if (dr["ideal_battery_range_km"] == DBNull.Value)
+                        {
+                            DateTime dt1 = (DateTime)dr["Datum"];
+                            dr.Close();
+
+                            cmd = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null order by id asc limit 1", con);
+                            cmd.Parameters.AddWithValue("@startPos", startPos);
+                            dr = cmd.ExecuteReader();
+
+                            if (dr.Read())
+                            {
+                                DateTime dt2 = (DateTime)dr["Datum"];
+                                TimeSpan ts = dt2 - dt1;
+
+                                object ideal_battery_range_km = dr["ideal_battery_range_km"];
+                                object battery_level = dr["battery_level"];
+
+                                if (ts.TotalSeconds < 120)
+                                {
+                                    dr.Close();
+
+                                    cmd = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @startPos", con);
+                                    cmd.Parameters.AddWithValue("@startPos", startPos);
+                                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                                    cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                                    cmd.ExecuteNonQuery();
+
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                }
+                                else
+                                {
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                // If Endpos doesn't have an "ideal_battery_rage_km", it will be updated from the last valid dataset
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @endpos", con);
+                    cmd.Parameters.AddWithValue("@endpos", endPos);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        if (dr["ideal_battery_range_km"] == DBNull.Value)
+                        {
+                            DateTime dt1 = (DateTime)dr["Datum"];
+                            dr.Close();
+
+                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null order by id desc limit 1", con);
+                            cmd.Parameters.AddWithValue("@endpos", endPos);
+                            dr = cmd.ExecuteReader();
+
+                            if (dr.Read())
+                            {
+                                DateTime dt2 = (DateTime)dr["Datum"];
+                                TimeSpan ts = dt1 - dt2;
+
+                                object ideal_battery_range_km = dr["ideal_battery_range_km"];
+                                object battery_level = dr["battery_level"];
+
+                                if (ts.TotalSeconds < 120)
+                                {
+                                    dr.Close();
+
+                                    cmd = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @endpos", con);
+                                    cmd.Parameters.AddWithValue("@endpos", endPos);
+                                    cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                                    cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                                    cmd.ExecuteNonQuery();
+
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                }
+                                else
+                                {
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Logfile.Log(ex.ToString());
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
         }
     }
 }
