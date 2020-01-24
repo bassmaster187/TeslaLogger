@@ -9,6 +9,30 @@
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
         "type": "dashboard"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Laden",
+        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#56A64B",
+        "limit": 100,
+        "name": "Laden fertig",
+        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
@@ -36,6 +60,8 @@
       "legend": {
         "avg": false,
         "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
         "show": true,
@@ -105,7 +131,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  charger_phases as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  charge_current_request as 'Angefordert [A]',\n  charger_pilot_current as 'Pilot [A]'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 10 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -451,5 +477,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 48
+  "version": 56
 }
