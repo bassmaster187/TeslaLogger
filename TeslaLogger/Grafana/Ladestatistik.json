@@ -493,6 +493,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 0,
       "format": "locale",
       "gauge": {
@@ -601,6 +602,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 1,
       "format": "locale",
       "gauge": {
@@ -709,6 +711,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 0,
       "format": "none",
       "gauge": {
@@ -817,6 +820,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 1,
       "format": "locale",
       "gauge": {
@@ -925,6 +929,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 1,
       "format": "locale",
       "gauge": {
@@ -1033,6 +1038,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 1,
       "format": "locale",
       "gauge": {
@@ -1141,6 +1147,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "teslalogger",
       "decimals": 1,
       "format": "locale",
       "gauge": {
@@ -1249,6 +1256,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "teslalogger",
       "description": "",
       "fill": 0,
       "fillGradient": 0,
@@ -1417,5 +1425,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 43
+  "version": 44
 }
