@@ -12,6 +12,8 @@ namespace TeslaFi_Import
     {
         static string DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
+        static string[] columnsToCheck = new string[] { "latitude", "longitude", "speed", "power" };
+
         static int currentPosId = 0;
         static int currentChargeid = 0;
         static int currentStateId = 0;
@@ -172,12 +174,28 @@ namespace TeslaFi_Import
             InsertCharging(Date, battery_level, charge_energy_added, charger_power, ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp, true, charger_pilot_current, charge_current_request);
         }
 
-        private static bool InsertPos(DataRow dr)
+        static bool CheckColumn(string columnname, DataRow dr)
         {
-            if (dr["latitude"] == DBNull.Value || dr["latitude"].ToString().Length == 0)
+            if (dr[columnname] == DBNull.Value || dr[columnname].ToString().Length == 0 || dr[columnname].ToString() == "None")
                 return false;
 
-            if (dr["speed"] == DBNull.Value || dr["speed"].ToString().Length == 0 || dr["speed"].ToString() == "None")
+            return true;
+        }
+
+        static bool CheckAllColumns(DataRow dr)
+        {
+            foreach (var c in columnsToCheck)
+            {
+                bool ret = CheckColumn(c, dr);
+                if (!ret)
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool InsertPos(DataRow dr)
+        {
+            if (!CheckAllColumns(dr))
                 return false;
 
             DateTime Date = (DateTime)dr["Date"];
@@ -239,7 +257,7 @@ namespace TeslaFi_Import
             int dateColumnID = -1;
 
             string[] lines = System.IO.File.ReadAllLines("TeslaFi.csv");
-            string[] columns = lines[0].Split(',');
+            string[] columns = Tools.SmartSplit(lines[0]);
 
             Console.WriteLine("Write into DataTable");
             foreach (string column in columns)
@@ -255,7 +273,7 @@ namespace TeslaFi_Import
             for (int x = 1; x < lines.Length; x++)
             {
                 DataRow dr = dt.NewRow();
-                columns = lines[x].Split(',');
+                columns = Tools.SmartSplit(lines[x]);
                 for (int y = 0; y < columns.Length; y++)
                 {
                     if (y == dateColumnID)
@@ -298,7 +316,13 @@ namespace TeslaFi_Import
                 if (altitude.Length == 0)
                     cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
                 else
-                    cmd.Parameters.AddWithValue("@altitude", altitude);
+                {
+                    double tempAltituge = Convert.ToDouble(altitude, ciEnUS);
+                    if (tempAltituge < 7000)
+                        cmd.Parameters.AddWithValue("@altitude", altitude);
+                    else
+                        cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
+                }
 
                 if (battery_level == -1)
                     cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
