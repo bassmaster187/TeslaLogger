@@ -194,42 +194,33 @@ require("language.php");
 			var i = 0;
 			while(weatherData.list[i].dt < Math.round(dateForecast.getTime()/1000)) { i++;	}
 			
-			forecast = weatherData.list[i].weather[0].description;
+			forecast = weatherData.list[i].weather[0].main;
 			console.log("forecast: " + forecast);
 			console.log(weatherData.list[i].dt_txt);
-			switch (forecast) { 
-				case 'clear sky': 
-					weatherIcon = "clear.png";
+			switch (forecast) {
+				case 'Thunderstorm':
+				weatherIcon = "tstorms.png";
 				break;
-				case 'few clouds': 
-					weatherIcon = "partlycloudy.png";
+				case 'Drizzle':
+				weatherIcon = "flurries.png";
 				break;
-				case 'overcast clouds':
-					weatherIcon = "cloudy.png";
-				break;				
-				case 'scattered clouds': 
-					weatherIcon = "cloudy.png";
+				case 'Rain':
+				weatherIcon = "rain.png";
 				break;
-				case 'broken clouds': 
-					weatherIcon = "mostlycloudy.png";
+				case 'Snow':
+				weatherIcon = "snow.png";
 				break;
-				case 'shower rain': 
-					weatherIcon = "rain.png";
+				case 'Atmosphere':
+				weatherIcon = "hazy.png";
 				break;
-				case 'rain': 
-					weatherIcon = "rain.png";
+				case 'Clear':
+				weatherIcon = "clear.png";
 				break;
-				case 'thunderstorm': 
-					weatherIcon = "tstorms.png";
-				break;
-				case 'snow': 
-					weatherIcon = "snow.png";
-				break;
-				case 'mist': 
-					weatherIcon = "hazy.png";
+				case 'Clouds':
+				weatherIcon = "cloudy.png";
 				break;
 				default:
-					weatherIcon = "unknown.png";
+				weatherIcon = "unknown.png";
 			}
 				
 			i = 0;
@@ -284,7 +275,7 @@ require("language.php");
   <div id="panel">
 	  <div id="headline"><span id="display_name"> </span><span id="teslalogger">Teslalogger Dashboard</span></div>
 	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
-	  <span id="battery_level" style="">-</span><font id="percent">%</font> ~ <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font></div>
+	  <span id="battery_level" style="">-</span><font id="percent">%</font> <span id="tilde">~</span> <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font></div>
 	  <div id="car_statusLabel">-</div>
 	  <div id="car_status">-</div>
 	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
