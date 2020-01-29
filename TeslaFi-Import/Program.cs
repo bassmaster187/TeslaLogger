@@ -202,6 +202,13 @@ namespace TeslaFi_Import
 
             double latitude = Convert.ToDouble(dr["latitude"], ciEnUS);
             double longitude = Convert.ToDouble(dr["longitude"], ciEnUS);
+
+            if (latitude > 90 || latitude < -90)
+                return false;
+
+            if (longitude > 180 || longitude < -180)
+                return false;
+
             int speed = (int)(Convert.ToDecimal(dr["speed"]) * 1.60934M);
             int power = (int)(Convert.ToDecimal(dr["power"]) * 1.35962M);
             double odometerKM = (Double)(Convert.ToDecimal(dr["odometer"], ciEnUS) / 0.62137M);
