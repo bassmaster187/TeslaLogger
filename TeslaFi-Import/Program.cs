@@ -25,19 +25,24 @@ namespace TeslaFi_Import
             DateTime startDate = (DateTime)dt.Rows[0]["Date"];
             DateTime endDate = (DateTime)dt.Rows[dt.Rows.Count - 1]["Date"];
 
-            DeleteData(startDate, endDate);
+            Console.WriteLine("Delete old import");
+            String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state"};
+            foreach (var table in tables)
+                DeleteData(table);
 
             Console.WriteLine("start Parsing");
 
             string oldShiftstate = "P";
             string oldChargingstate = "";
             string oldState = "";
+            bool isCharging = false;
 
             foreach (DataRow dr in dt.Rows)
             {
                 DateTime Date = (DateTime)dr["Date"];
 
-                InsertPos(dr);
+                if (!isCharging)
+                    InsertPos(dr);
 
                 string newShiftstate = dr["shift_state"].ToString();
                 if (oldShiftstate == "P" && (newShiftstate == "D" || newShiftstate =="R"))
@@ -46,7 +51,6 @@ namespace TeslaFi_Import
                     Console.WriteLine("Start Driving " + Date.ToString());
                     oldShiftstate = newShiftstate;
                     StartDriveState(Date);
-
                 }
                 else if (newShiftstate == "P" && (oldShiftstate == "D" || oldShiftstate == "R"))
                 {
@@ -58,19 +62,25 @@ namespace TeslaFi_Import
 
                 string newChargingstate = dr["charging_state"].ToString();
                 if (newChargingstate == "Charging")
+                {
+                    isCharging = true;
                     InsertCharging(dr);
+                }
 
                 if (oldChargingstate == "" && newChargingstate == "Charging")
                 {
                     Console.WriteLine("Start Charging " + Date.ToString());
                     oldChargingstate = newChargingstate;
                     StartChargingState(dr);
+                    isCharging = true;
                 }
                 else if (oldChargingstate == "Charging" && (newChargingstate == "Complete" || newChargingstate == "Disconnected"))
                 {
                     Console.WriteLine("Stop Charging " + Date.ToString());
                     oldChargingstate = "";
                     CloseChargingState(Date);
+                    isCharging = false;
+                    InsertPos(dr);
                 }
 
                 string newState = dr["state"].ToString();
@@ -91,6 +101,11 @@ namespace TeslaFi_Import
             string fast_charger_brand = ""; //  dr["fast_charger_brand"].ToString();
             string conn_charge_cable = ""; //  dr["conn_charge_cable"].ToString();
             string fast_charger_present = dr["fast_charger_present"].ToString();
+
+            if (fast_charger_present == "False")
+                fast_charger_present = "0";
+            else if (fast_charger_present == "True")
+                fast_charger_present = "1";
 
             StartChargingState(Date, fast_charger_brand, fast_charger_type, conn_charge_cable, fast_charger_present);
         }
@@ -128,7 +143,11 @@ namespace TeslaFi_Import
             string charger_pilot_current = dr["charger_pilot_current"].ToString();
             string charge_current_request = dr["charge_current_request"].ToString();
 
-            InsertCharging(Date, battery_level, charge_energy_added, charger_power, ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, 0.0, true, charger_pilot_current, charge_current_request);
+            double? outside_temp = null;
+            if (dr["outside_temp"] != DBNull.Value && dr["outside_temp"].ToString().Length > 0)
+                outside_temp = Convert.ToDouble(dr["outside_temp"], ciEnUS);
+
+            InsertCharging(Date, battery_level, charge_energy_added, charger_power, ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp, true, charger_pilot_current, charge_current_request);
         }
 
         private static void InsertPos(DataRow dr)
@@ -136,7 +155,7 @@ namespace TeslaFi_Import
             if (dr["latitude"] == DBNull.Value || dr["latitude"].ToString().Length == 0)
                 return;
 
-            if (dr["speed"] == DBNull.Value || dr["speed"].ToString().Length == 0)
+            if (dr["speed"] == DBNull.Value || dr["speed"].ToString().Length == 0 || dr["speed"].ToString() == "None")
                 return;
 
             DateTime Date = (DateTime)dr["Date"];
@@ -160,22 +179,19 @@ namespace TeslaFi_Import
             string elevation = dr["elevation"].ToString();
             string inside_temp = dr["inside_temp"].ToString();
 
-            // todo
             double ? outside_temp = null;
+            if (dr["outside_temp"] != DBNull.Value && dr["outside_temp"].ToString().Length > 0)
+                outside_temp = Convert.ToDouble(dr["outside_temp"], ciEnUS);
 
             InsertPos(Date, latitude, longitude, speed, power, odometerKM, ideal_battery_range, battery_level, outside_temp, elevation, inside_temp, "0", "0","0");
         }
 
-        private static void DeleteData(DateTime startDate, DateTime endDate)
+        private static void DeleteData(string table)
         {
-            Console.WriteLine("Delete Data in timerange of the File");
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from car_version where StartDate >= @s and StartDate <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
+                MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS import TINYINT(1) NULL", con);
                 cmd.CommandTimeout = 300;
                 cmd.ExecuteNonQuery();
             }
@@ -183,51 +199,10 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from charging where Datum >= @s and Datum <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
+                MySqlCommand cmd = new MySqlCommand($"delete from {table} where import=1", con);
                 cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
-            }
-
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from chargingstate where StartDate >= @s and StartDate <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
-                cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
-            }
-
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from drivestate where StartDate >= @s and StartDate <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
-                cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
-            }
-
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from pos where Datum >= @s and Datum <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
-                cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
-            }
-
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from state where StartDate >= @s and StartDate <= @e", con);
-                cmd.Parameters.AddWithValue("@s", startDate);
-                cmd.Parameters.AddWithValue("@e", endDate);
-                cmd.CommandTimeout = 300;
-                cmd.ExecuteNonQuery();
+                int cnt = cmd.ExecuteNonQuery();
+                Console.WriteLine($"Deleted {cnt} Rows from Table {table }");
             }
         }
 
@@ -275,7 +250,7 @@ namespace TeslaFi_Import
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (import, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (1, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
                 cmd.Parameters.AddWithValue("@Datum", date.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString(ciEnUS));
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString(ciEnUS));
@@ -291,7 +266,7 @@ namespace TeslaFi_Import
                 if (outside_temp == null)
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
                 else
-                    cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                    cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString(ciEnUS));
 
                 if (altitude.Length == 0)
                     cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
@@ -335,7 +310,7 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert drivestate (import, StartDate, StartPos) values (1, @StartDate, @Pos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", date);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
@@ -516,7 +491,7 @@ namespace TeslaFi_Import
         internal static void InsertCharging(DateTime Date, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
         {
 
-            if (charger_phases == "")
+            if (charger_phases == "" || charger_phases == "None")
                 charger_phases = "1";
 
             double kmRange = ideal_battery_range / (double)0.62137;
@@ -527,7 +502,7 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
+                MySqlCommand cmd = new MySqlCommand("insert charging (import, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (1, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
                 cmd.Parameters.AddWithValue("@Datum", Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@battery_level", battery_level);
                 cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
@@ -553,7 +528,7 @@ namespace TeslaFi_Import
                 if (outside_temp == null)
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
                 else
-                    cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                    cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString(ciEnUS));
 
                 cmd.ExecuteNonQuery();
 
@@ -569,7 +544,7 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
+                MySqlCommand cmd = new MySqlCommand("insert chargingstate (import, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (1, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
                 cmd.Parameters.AddWithValue("@StartDate", date);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
@@ -607,7 +582,7 @@ namespace TeslaFi_Import
 
                 Console.WriteLine("state: " + state);
 
-                MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert state (import, StartDate, state, StartPos) values (1, @StartDate, @state, @StartPos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", Date);
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
