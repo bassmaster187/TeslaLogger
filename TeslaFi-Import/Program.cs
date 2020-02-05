@@ -23,7 +23,7 @@ namespace TeslaFi_Import
             int id = 0;
             try
             {
-                Tools.Log(0, "***** Start TeslaFi Impoert *****");
+                Tools.Log(0, "***** Start TeslaFi "+ System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Started *****");
                 DataTable dt = new DataTable();
                 LoadAllFiles(dt);
 
