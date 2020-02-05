@@ -180,7 +180,12 @@ namespace TeslaFi_Import
 
         private static void LoadAllFiles(DataTable dt)
         {
-            var files = System.IO.Directory.EnumerateFiles(".", "TeslaFi*.csv");            
+            var files = System.IO.Directory.EnumerateFiles(".", "TeslaFi*.csv");  
+            
+            if (files.Count() == 0)
+            {
+                Tools.Log(0,"No Teslafi files found!");
+            }
 
             foreach (var file in files)
                 LoadData(dt, file);
