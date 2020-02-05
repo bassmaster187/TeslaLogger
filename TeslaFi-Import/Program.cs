@@ -20,102 +20,170 @@ namespace TeslaFi_Import
 
         static void Main(string[] args)
         {
-            DataTable dt = new DataTable();
-            int dateColumnID = -1;
-            dateColumnID = LoadData(dt);
-
-            DateTime startDate = (DateTime)dt.Rows[0]["Date"];
-            DateTime endDate = (DateTime)dt.Rows[dt.Rows.Count - 1]["Date"];
-
-            Console.WriteLine("Delete old import");
-            String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state"};
-            foreach (var table in tables)
-                DeleteData(table);
-
-            Console.WriteLine("start Parsing");
-
-            string oldShiftstate = "P";
-            string oldChargingstate = "";
-            string oldState = "";
-            int lastMovementID = 0;
-            DateTime lastMovement = DateTime.MaxValue;
-
-            foreach (DataRow dr in dt.Rows)
+            int id = 0;
+            try
             {
-                DateTime Date = (DateTime)dr["Date"];
+                Tools.Log(0, "***** Start TeslaFi Impoert *****");
+                DataTable dt = new DataTable();
+                LoadAllFiles(dt);
 
-                if (oldChargingstate != "Charging")
+                int dateColumnID = dt.Columns["Date"].Ordinal;
+
+                Tools.Log(0, "Delete old import");
+                String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state" };
+                foreach (var table in tables)
+                    DeleteData(table);
+
+                DateTime firstTeslaloggerData = GetFirstTeslaloggerData();
+                Tools.Log(0, "First Teslalogger Data: " + firstTeslaloggerData.ToLongDateString());
+
+                Tools.Log(0, "start Parsing");
+
+                string oldShiftstate = "P";
+                string oldChargingstate = "";
+                string oldState = "";
+                int lastMovementID = 0;
+                DateTime lastMovement = DateTime.MaxValue;
+
+                DataView dv = new DataView(dt, "", "Date", DataViewRowState.CurrentRows);
+
+                foreach (DataRowView drv in dv)
                 {
-                    if (InsertPos(dr))
+                    try
                     {
-                        lastMovementID = GetMaxPosid();
-                        lastMovement = Date;
-                    }
+                        DataRow dr = drv.Row;
+                        DateTime Date = (DateTime)dr["Date"];
+                        id = Convert.ToInt32(dr["Data_id"]);
 
-                    if (oldShiftstate != "P" && lastMovement != null)
-                    {
-                        TimeSpan ts = Date - lastMovement;
-                        if (ts.TotalMinutes > 10)
+                        if (Date >= firstTeslaloggerData)
                         {
-                            Console.WriteLine("End Driving [10 Min no movement] " + lastMovement.ToString());
-                            oldShiftstate = "P";
-                            CloseDriveState(lastMovement, lastMovementID);
+                            Tools.Log(id, "First Teslalogger Data reached. TeslaFi data skipped!");
+                            break;
+                        }
+
+                        if (oldChargingstate != "Charging")
+                        {
+                            if (InsertPos(dr))
+                            {
+                                lastMovementID = GetMaxPosid();
+                                lastMovement = Date;
+                            }
+
+                            if (oldShiftstate != "P" && lastMovement != null)
+                            {
+                                TimeSpan ts = Date - lastMovement;
+                                if (ts.TotalMinutes > 10)
+                                {
+                                    Tools.Log(id, "End Driving [10 Min no movement] " + lastMovement.ToString());
+                                    oldShiftstate = "P";
+                                    CloseDriveState(lastMovement, lastMovementID);
+                                }
+                            }
+                        }
+
+                        string newShiftstate = dr["shift_state"].ToString();
+                        if (oldShiftstate == "P" && (newShiftstate == "D" || newShiftstate == "R"))
+                        {
+                            // Driving
+                            Tools.Log(id, "Start Driving " + Date.ToString());
+                            oldShiftstate = newShiftstate;
+                            StartDriveState(Date);
+                        }
+                        else if (newShiftstate == "P" && (oldShiftstate == "D" || oldShiftstate == "R"))
+                        {
+                            // End of Driving
+                            Tools.Log(id, "End Driving " + Date.ToString());
+                            oldShiftstate = newShiftstate;
+                            CloseDriveState(Date);
+                        }
+
+                        string newChargingstate = dr["charging_state"].ToString();
+                        if (newChargingstate == "Charging")
+                        {
+                            if (oldShiftstate != "P" && lastMovementID > 0)
+                            {
+                                Tools.Log(id, "End Driving [charging]" + Date.ToString());
+                                oldShiftstate = "P";
+                                CloseDriveState(lastMovement, lastMovementID);
+                            }
+
+                            InsertCharging(dr);
+                        }
+
+                        if (oldChargingstate == "" && newChargingstate == "Charging")
+                        {
+                            Tools.Log(id, "Start Charging " + Date.ToString());
+                            oldChargingstate = newChargingstate;
+                            StartChargingState(dr);
+                        }
+                        else if (oldChargingstate == "Charging" && (newChargingstate == "Complete" || newChargingstate == "Disconnected"))
+                        {
+                            Tools.Log(id, "Stop Charging " + Date.ToString());
+                            oldChargingstate = "";
+                            CloseChargingState(Date);
+                            InsertPos(dr);
+                        }
+
+                        string newState = dr["state"].ToString();
+                        if (newState.Length > 0 && oldState != newState)
+                        {
+                            oldState = newState;
+                            Tools.Log(id, "state: " + newState);
+                            StartState(newState, Date);
                         }
                     }
-                }
-
-                string newShiftstate = dr["shift_state"].ToString();
-                if (oldShiftstate == "P" && (newShiftstate == "D" || newShiftstate =="R"))
-                {
-                    // Driving
-                    Console.WriteLine("Start Driving " + Date.ToString());
-                    oldShiftstate = newShiftstate;
-                    StartDriveState(Date);
-                }
-                else if (newShiftstate == "P" && (oldShiftstate == "D" || oldShiftstate == "R"))
-                {
-                    // End of Driving
-                    Console.WriteLine("End Driving " + Date.ToString());
-                    oldShiftstate = newShiftstate;
-                    CloseDriveState(Date);
-                }
-
-                string newChargingstate = dr["charging_state"].ToString();
-                if (newChargingstate == "Charging")
-                {
-                    if (oldShiftstate != "P" && lastMovementID > 0)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("End Driving [charging]" + Date.ToString());
-                        oldShiftstate = "P";
-                        CloseDriveState(lastMovement, lastMovementID);
+                        Tools.Log(id, ex.ToString());
                     }
-
-                    InsertCharging(dr);
-                }
-
-                if (oldChargingstate == "" && newChargingstate == "Charging")
-                {
-                    Console.WriteLine("Start Charging " + Date.ToString());
-                    oldChargingstate = newChargingstate;
-                    StartChargingState(dr);
-                }
-                else if (oldChargingstate == "Charging" && (newChargingstate == "Complete" || newChargingstate == "Disconnected"))
-                {
-                    Console.WriteLine("Stop Charging " + Date.ToString());
-                    oldChargingstate = "";
-                    CloseChargingState(Date);
-                    InsertPos(dr);
-                }
-
-                string newState = dr["state"].ToString();
-                if (newState.Length > 0 && oldState != newState)
-                {
-                    oldState = newState;
-                    StartState(newState, Date);
                 }
             }
+            catch (Exception ex)
+            {
+                Tools.Log(id, ex.ToString());
+            }
 
-            Console.WriteLine("end Parsing");
+            Tools.Log(0, "end Parsing");
+        }
+
+        private static DateTime GetFirstTeslaloggerData()
+        {
+            DateTime dtMin = DateTime.Now;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT StartDate FROM drivestate where import is null order by id limit 1", con);
+                var dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    DateTime dtDrivestate = (DateTime)dr[0];
+                    if (dtDrivestate < dtMin)
+                        dtMin = dtDrivestate;
+                }
+                dr.Close();
+
+                cmd = new MySqlCommand("SELECT StartDate FROM chargingstate where import is null order by id limit 1", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    DateTime dtChargestate = (DateTime)dr[0];
+                    if (dtChargestate < dtMin)
+                        dtMin = dtChargestate;
+                }
+                dr.Close();
+
+            }
+
+            return dtMin;
+        }
+
+        private static void LoadAllFiles(DataTable dt)
+        {
+            var files = System.IO.Directory.EnumerateFiles(".", "TeslaFi*.csv");            
+
+            foreach (var file in files)
+                LoadData(dt, file);
         }
 
         static void StartChargingState(DataRow dr)
@@ -209,8 +277,8 @@ namespace TeslaFi_Import
             if (longitude > 180 || longitude < -180)
                 return false;
 
-            int speed = (int)(Convert.ToDecimal(dr["speed"]) * 1.60934M);
-            int power = (int)(Convert.ToDecimal(dr["power"]) * 1.35962M);
+            int speed = (int)(Convert.ToDecimal(dr["speed"])); 
+            int power = (int)(Convert.ToDecimal(dr["power"])); 
             double odometerKM = (Double)(Convert.ToDecimal(dr["odometer"], ciEnUS) / 0.62137M);
 
             double ideal_battery_range = 0;
@@ -254,24 +322,32 @@ namespace TeslaFi_Import
                 MySqlCommand cmd = new MySqlCommand($"delete from {table} where import=1", con);
                 cmd.CommandTimeout = 300;
                 int cnt = cmd.ExecuteNonQuery();
-                Console.WriteLine($"Deleted {cnt} Rows from Table {table }");
+                Tools.Log(0, $"Deleted {cnt} Rows from Table {table }");
             }
         }
 
-        private static int LoadData(DataTable dt)
+        private static void LoadData(DataTable dt, string Filename)
         {
-            Console.WriteLine("Load csv File");
-            int dateColumnID = -1;
+            Tools.Log(0, "Load csv File " + Filename);
 
-            string[] lines = System.IO.File.ReadAllLines("TeslaFi.csv");
+            string[] lines = System.IO.File.ReadAllLines(Filename);
             string[] columns = Tools.SmartSplit(lines[0]);
 
-            Console.WriteLine("Write into DataTable");
-            foreach (string column in columns)
+            int dateColumnID = 0;
+
+            Tools.Log(0, "Write into DataTable");
+            for (int c=0; c < columns.Length; c++)
             {
+                string column = columns[c];
+                if (column == "Date")
+                    dateColumnID = c;
+
+                if (dt.Columns.Contains(column))
+                    continue;
+
                 if (column == "Date")
                 {
-                    dateColumnID = dt.Columns.Add(column, typeof(DateTime)).Ordinal;
+                    dt.Columns.Add(column, typeof(DateTime));
                 }
                 else
                     dt.Columns.Add(column);
@@ -292,8 +368,7 @@ namespace TeslaFi_Import
             }
             dt.AcceptChanges();
 
-            Console.WriteLine("end");
-            return dateColumnID;
+            Tools.Log(0, "Load CSV File finished");
         }
 
         internal static void InsertPos(DateTime date, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude, string inside_temp, string battery_heater, string is_preconditioning, string sentry_mode)
@@ -641,8 +716,6 @@ namespace TeslaFi_Import
 
                 int MaxPosid = GetMaxPosid();
                 CloseState(MaxPosid, Date);
-
-                Console.WriteLine("state: " + state);
 
                 MySqlCommand cmd = new MySqlCommand("insert state (import, StartDate, state, StartPos) values (1, @StartDate, @state, @StartPos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", Date);

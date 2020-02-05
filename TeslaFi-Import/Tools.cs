@@ -44,5 +44,11 @@ namespace TeslaFi_Import
             return lines.ToArray();
         }
 
+        public static void Log(int id, string text)
+        {
+            string f = string.Format("{0}  {1,7:########} - {2}", DateTime.Now, id, text);
+            System.Console.WriteLine(f);
+            System.IO.File.AppendAllText("TeslaFi-Logfile.txt", f + "\r\n");
+        }
     }
 }
