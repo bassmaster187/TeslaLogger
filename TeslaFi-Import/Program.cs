@@ -636,7 +636,7 @@ namespace TeslaFi_Import
             if (charger_phases == "" || charger_phases == "None")
                 charger_phases = "1";
 
-            double kmRange = ideal_battery_range / (double)0.62137;
+            double kmRange = ideal_battery_range;
 
             double powerkW = Convert.ToDouble(charger_power);
             double waitbetween2pointsdb = 1000.0 / powerkW;
