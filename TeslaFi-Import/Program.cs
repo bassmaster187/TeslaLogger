@@ -25,6 +25,35 @@ namespace TeslaFi_Import
             {
                 Tools.Log(0, "***** Start TeslaFi "+ System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Started *****");
                 DataTable dt = new DataTable();
+                dt.Columns.Add("data_id");
+                dt.Columns.Add("Date", typeof(DateTime));
+                dt.Columns.Add("battery_level");
+                dt.Columns.Add("charge_energy_added");
+                dt.Columns.Add("ideal_battery_range");
+                dt.Columns.Add("battery_range");
+                dt.Columns.Add("charging_state");
+                dt.Columns.Add("fast_charger_present");
+                dt.Columns.Add("charger_voltage");
+                dt.Columns.Add("charge_current_request_max");
+                dt.Columns.Add("inside_temp");
+                dt.Columns.Add("longitude");
+                dt.Columns.Add("latitude");
+                dt.Columns.Add("speed");
+                dt.Columns.Add("shift_state");
+                dt.Columns.Add("outside_temp");
+                dt.Columns.Add("odometer");
+                dt.Columns.Add("power");
+                dt.Columns.Add("elevation");
+                dt.Columns.Add("state");
+                dt.Columns.Add("charger_power");
+                dt.Columns.Add("charger_phases");
+                dt.Columns.Add("charger_actual_current");
+                dt.Columns.Add("charger_pilot_current");
+                dt.Columns.Add("charge_current_request");
+                dt.Columns.Add("fast_charger_type");
+
+                
+
                 LoadAllFiles(dt);
 
                 int dateColumnID = dt.Columns["Date"].Ordinal;
@@ -335,42 +364,57 @@ namespace TeslaFi_Import
         {
             Tools.Log(0, "Load csv File " + Filename);
 
-            string[] lines = System.IO.File.ReadAllLines(Filename);
-            string[] columns = Tools.SmartSplit(lines[0]);
+            string[] columns = {""};
 
+            bool firstline = true;
             int dateColumnID = 0;
 
+            var lines = System.IO.File.ReadLines(Filename);
             Tools.Log(0, "Write into DataTable");
-            for (int c=0; c < columns.Length; c++)
+
+            foreach (var line in lines)
             {
-                string column = columns[c];
-                if (column == "Date")
-                    dateColumnID = c;
-
-                if (dt.Columns.Contains(column))
-                    continue;
-
-                if (column == "Date")
+                if (firstline)
                 {
-                    dt.Columns.Add(column, typeof(DateTime));
-                }
-                else
-                    dt.Columns.Add(column);
-            }
+                    firstline = false;
+                    columns = Tools.SmartSplit(line);
 
-            for (int x = 1; x < lines.Length; x++)
-            {
+                    for (int c = 0; c < columns.Length; c++)
+                    {
+                        string column = columns[c];
+                        if (column == "Date")
+                        {
+                            dateColumnID = c;
+                            break;
+                        }
+                    }
+
+                    continue;
+                }
+
                 DataRow dr = dt.NewRow();
-                columns = Tools.SmartSplit(lines[x]);
-                for (int y = 0; y < columns.Length; y++)
+                string l = line;
+
+                // Some files are starting with " and that's no valid CSV file
+                if (l.StartsWith("\""))
+                    l = l.Substring(1);
+
+                string[] csv = Tools.SmartSplit(l);
+                for (int y = 0; y < csv.Length; y++)
                 {
                     if (y == dateColumnID)
-                        dr[y] = DateTime.Parse(columns[y].Replace("\"", ""));
+                        dr[y] = DateTime.Parse(csv[y].Replace("\"", ""));
                     else
-                        dr[y] = columns[y];
+                    {
+                        string columnname = columns[y];
+
+                        if (dt.Columns.Contains(columnname))
+                            dr[columnname] = csv[y];
+                    }
                 }
                 dt.Rows.Add(dr);
             }
+
             dt.AcceptChanges();
 
             Tools.Log(0, "Load CSV File finished");
