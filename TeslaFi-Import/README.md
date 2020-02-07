@@ -17,11 +17,18 @@ With this importer your data from your TeslaFi account can be imported into Tesl
    Password: teslalogger
 * execute the following commands
 ```
+sudo pkill mono
+sudo service grafana-server stop
+sudo service apache2 stop
 cd /etc/teslalogger/
 mono TeslaFi-Import.exe
 ```
 
 please be patient, this may take a long time
+After it has done it's job, please reboot the Raspberry:
+```
+sudo reboot now
+```
 
 TeslaFi data are only imported up to the first data set from the Teslalogger. If both systems were running at the same time, the import ends with the first data set from the Teslalogger.
 
