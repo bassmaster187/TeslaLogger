@@ -109,6 +109,9 @@ namespace TeslaLogger
 
                 dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                 DateTime d = DateTime.Parse(j["d"]);
+                DBHelper.currentJSON.lastScanMyTeslaReceived = d;
+                DBHelper.currentJSON.CreateCurrentJSON();
+
                 System.Collections.Generic.Dictionary<string, Object> kv = (System.Collections.Generic.Dictionary<string, Object>)j["dict"];
 
                 StringBuilder sb = new StringBuilder();
@@ -121,6 +124,19 @@ namespace TeslaLogger
                 {
                     if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
                         continue;
+
+                    switch (line.Key)
+                    {
+                        case "2": DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value); break;
+                        case "5": DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value); break;
+                        case "6": DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value); break;
+                        case "7": DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value); break;
+                        case "28": DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value); break;
+                        case "29": DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value); break;
+                        case "442": DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value); break;
+                        case "43": DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value); break;
+                    }
+
 
                     if (first)
                         first = false;

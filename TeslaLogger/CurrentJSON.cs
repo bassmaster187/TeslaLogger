@@ -46,8 +46,18 @@
         public bool current_is_sentry_mode = false;
         public bool current_is_preconditioning = false;
 
+        public DateTime lastScanMyTeslaReceived = DateTime.MinValue;
+        public double? SMTCellTempAvg = null;
+        public double? SMTCellMinV = null;
+        public double? SMTCellAvgV = null;
+        public double? SMTCellMaxV = null;
+        public double? SMTBMSmaxCharge = null;
+        public double? SMTBMSmaxDischarge = null;
+
+        public double? SMTSpeed = null;
+        public double? SMTBatteryPower = null;
+
         public string current_json = "";
-        
 
         public void CreateCurrentJSON()
         {
@@ -122,6 +132,17 @@
                    { "is_preconditioning", current_is_preconditioning },
                    { "sentry_mode", current_is_sentry_mode }
                 };
+
+                TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
+                if (ts.TotalMinutes < 5)
+                {
+                    values.Add("SMTCellTempAvg", SMTCellTempAvg);
+                    values.Add("SMTCellMinV", SMTCellMinV);
+                    values.Add("SMTCellAvgV", SMTCellAvgV);
+                    values.Add("SMTCellMaxV", SMTCellMaxV);
+                    values.Add("SMTBMSmaxCharge", SMTBMSmaxCharge);
+                    values.Add("SMTBMSmaxDischarge", SMTBMSmaxDischarge);
+                }
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 

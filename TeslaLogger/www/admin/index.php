@@ -68,19 +68,23 @@ require("language.php");
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1));
 			$('#odometer').text(jsonData["odometer"].toFixed(1));
 			$('#battery_level').text(jsonData["battery_level"]);
-      var car_version = jsonData["car_version"];
-      car_version = car_version.substring(0,car_version.lastIndexOf(" "));
-      $('#car_version').text(car_version);
+			var car_version = jsonData["car_version"];
+			car_version = car_version.substring(0,car_version.lastIndexOf(" "));
+			$('#car_version').text(car_version);
 
 			if (jsonData["charging"])
 			{
 				$('#car_statusLabel').text("Wird geladen:");
 				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
+
+				updateSMT(jsonData);
 			}
 			else if (jsonData["driving"])
 			{
 				$('#car_statusLabel').text("Fahren:");
 				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
+
+				updateSMT(jsonData);
 			}
 			else if (jsonData["online"])
 			{
@@ -97,16 +101,22 @@ require("language.php");
 
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').html(text);
+
+				updateSMT(jsonData);
 			}
 			else if (jsonData["sleeping"])
 			{
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("Schlafen");
+
+				hideSMT();
 			}
 			else
 			{
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("Offline");
+
+				hideSMT();
 			}
 
 			$("#trip_start").text(jsonData["trip_start"]);
@@ -143,6 +153,59 @@ require("language.php");
 		});
 	}
 
+	function hideSMT()
+	{
+		$('#CellTempRow').hide();
+		$('#BMSMaxChargeRow').hide();
+		$('#BMSMaxDischargeRow').hide();
+		$('#CellImbalanceRow').hide();
+	}
+
+	function updateSMT(jsonData)
+	{
+		if (jsonData["SMTCellTempAvg"])
+		{
+			$('#CellTempRow').show();
+			$('#CellTemp').text(Math.round(jsonData["SMTCellTempAvg"] * 10)/10 + "°C");
+		}
+		else
+		{
+			$('#CellTempRow').hide();
+		}
+
+		if (jsonData["SMTBMSmaxCharge"])
+		{
+			$('#BMSMaxChargeRow').show();
+			$('#BMSMaxCharge').text( Math.round(jsonData["SMTBMSmaxCharge"]) +" kW");
+		}
+		else
+		{
+			$('#BMSMaxChargeRow').hide();
+		}
+
+		if (jsonData["SMTBMSmaxDischarge"])
+		{
+			$('#BMSMaxDischargeRow').show();
+			$('#BMSMaxDischarge').text( Math.round(jsonData["SMTBMSmaxDischarge"]) +" kW");
+		}
+		else
+		{
+			$('#BMSMaxDischargeRow').hide();
+		}
+
+		if (jsonData["SMTCellMaxV"] && jsonData["SMTCellMinV"])
+		{
+			var CellImbalance = Math.round((jsonData["SMTCellMaxV"] - jsonData["SMTCellMinV"]) * 1000);
+			$('#CellImbalanceRow').show();
+			$('#CellImbalance').text( CellImbalance +" mV");
+		}
+		else
+		{
+			$('#CellImbalanceRow').hide();
+		}
+
+	}
+
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -177,6 +240,10 @@ require("language.php");
 	  <table class="b1">
 	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
+	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
+	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
+	  <tr id='BMSMaxDischargeRow'><td><b><?php t("Max Discharge"); ?>:</b></td><td><span id="BMSMaxDischarge"></span></td></tr>
+	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
 	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
 	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>

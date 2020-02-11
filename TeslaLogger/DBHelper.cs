@@ -458,7 +458,7 @@ namespace TeslaLogger
         {
             try
             {
-                System.Threading.Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+                System.Threading.Thread.Sleep(5); 
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {

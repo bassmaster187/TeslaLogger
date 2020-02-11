@@ -139,6 +139,10 @@ namespace TeslaLogger
                 if (resultContent.Contains("authorization_required"))
                 {
                     Logfile.Log("Wrong Credentials");
+
+                    if (Tools.IsDocker())
+                        System.Threading.Thread.Sleep(5 * 60000);
+
                     throw new Exception("Wrong Credentials");
                 }
 
@@ -1137,6 +1141,8 @@ namespace TeslaLogger
 
                 Tools.SetThread_enUS();
 
+                System.Threading.Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add("User-Agent: TL 1.1");
@@ -1411,7 +1417,13 @@ FROM
 
                             Address a = geofence.GetPOI(lat, lng, false);
                             if (a == null)
+                            {
+                                if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
+                                {
+                                    DBHelper.UpdateAddress(id);
+                                }
                                 continue;
+                            }
 
                             if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
                             {

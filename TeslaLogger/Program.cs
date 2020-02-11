@@ -37,6 +37,9 @@ namespace TeslaLogger
         {
             CheckNewCredentials();
 
+            WriteMissingFile(7);
+
+            WriteMissingFile(19);
 
             try
             {
@@ -238,6 +241,7 @@ namespace TeslaLogger
                                                 if (wh.DeleteWakeupFile())
                                                 {
                                                     string wakeup = wh.Wakeup().Result;
+                                                    lastCarUsed = DateTime.Now;
                                                 }
 
                                                 currentState = TeslaState.Start;
@@ -273,7 +277,10 @@ namespace TeslaLogger
                                         if (odometerLastTrip != 0)
                                         {
                                             if (missingOdometer > 5)
+                                            {
                                                 Logfile.Log($"Missing: {missingOdometer} km! - Check: https://teslalogger.de/faq-1.php");
+                                                WriteMissingFile(missingOdometer);
+                                            }
                                             else
                                                 Logfile.Log($"Missing: {missingOdometer} km");
                                         }
@@ -349,6 +356,7 @@ namespace TeslaLogger
                                                             if (wh.existsWakeupFile)
                                                             {
                                                                 Logfile.Log("Wakeupfile prevents car to get sleep");
+                                                                lastCarUsed = DateTime.Now;
                                                                 wh.DeleteWakeupFile();
                                                                 string wakeup = wh.Wakeup().Result;
                                                                 sleep = false;
@@ -575,6 +583,19 @@ namespace TeslaLogger
             {
                 Logfile.Log("Teslalogger Stopped!");
             }
+        }
+
+        private static void WriteMissingFile(double missingOdometer)
+        {
+            try
+            {
+                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "MISSING");
+                System.IO.File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
+
+                UpdateTeslalogger.chmod(filepath, 666, false);
+            }
+            catch (Exception)
+            { }
         }
 
         private static void DriveFinished(WebHelper wh)
