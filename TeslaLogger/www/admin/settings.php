@@ -146,8 +146,16 @@ else
 </td></tr>
 <tr><td valign="top"><b>Tasker Token:</b></td><td>
 <?php
-$taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
-echo $taskertoken;
+$taskertoken = "";
+if (file_exists("/etc/teslalogger/TASKERTOKEN"))
+{
+	$taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
+	echo $taskertoken;
+}
+else
+{
+	echo (t("Check your Tesla Credentials!"));
+}
 ?>
 </tr>
 <tr><td valign="top"><b>Tasker URL:</b></td><td>
@@ -158,7 +166,8 @@ if (strlen($taskertoken) > 7)
 </td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td valign="top"><b>Received Tasker Token:</b></td><td>
 <?php
-echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken);
+if (strlen($taskertoken) > 7)
+	echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken);
 ?>
 </td></tr>
 <tr><td></td><td>&nbsp;</td></tr>
