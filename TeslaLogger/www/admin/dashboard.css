@@ -72,12 +72,20 @@ body {
 	font-size: 30px;
 }
 
-#clock {
+#calendar {
+	text-align: center;
 	position: absolute;
 	left: 20px;
 	bottom: 20px;
-	font-size: 80px; 
 	color: #EAEAEA; 
+}
+
+#weekday, #date {
+	font-size: 30px; 
+}
+
+#clock {
+	font-size: 60px; 
 }
 
 #batdiv {
@@ -129,7 +137,9 @@ body {
 
 	#batimg	{ height: 50px; }
 
-	#clock { font-size: 60px; }
+	#clock { font-size: 50px; }
+
+	#weekday, #date { font-size: 20px; }
 	
 	#weather { font-size: 30px; }
 	
@@ -157,6 +167,8 @@ body {
 	#batimg	{ height: 30px; }
 	
 	#clock { font-size: 40px; }
+
+	#weekday, #date { font-size: 15px; }
 	
 	#weather { font-size: 20px; }
 		

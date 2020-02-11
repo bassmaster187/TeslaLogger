@@ -113,6 +113,12 @@ require("language.php");
 		var currentTimeString = currentHours + ":" + currentMinutes;
 		
 		$('#clock').text(currentTimeString);
+
+		var currentDate = currentTime.toLocaleString('de-CH', {dateStyle: 'long'});
+		var currentWeekday = currentTime.toLocaleString('de-CH', {weekday: 'long'});
+			
+		$('#weekday').text(currentWeekday);
+		$('#date').text(currentDate.substring(0, currentDate.length - 5));
 	}
 	
 	function updateBat($percent)
@@ -280,10 +286,25 @@ require("language.php");
 	  <div id="car_status">-</div>
 	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
   </div>
-  <div id="clock">00:00</div>
+
+	<div id="calendar">
+		<span id="weekday"></span><br>
+		<span id="date"></span><br>
+		<span id="clock">00:00</span>
+	</div>
+
   <div id="weather">
 	<img id="weather_icon" src="">
 	<div id="temp">no weather data</div>
   </div>
+
+<!-- Begin of my_dashboard.php -->
+
+<?PHP
+if (file_exists("my_dashboard.php"))
+	include("my_dashboard.php");
+?>
+
+<!-- End of my_dashboard.php -->
   </body>
 </html>
