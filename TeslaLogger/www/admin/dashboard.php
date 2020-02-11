@@ -98,6 +98,14 @@ require("language.php");
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("Offline");
 			}
+
+<!-- Begin of my_dashboard_jsonData.php -->
+<?PHP
+if (file_exists("my_dashboard_jsonData.php"))
+	include("my_dashboard_jsonData.php");
+?>
+<!-- End of my_dashboard_jsonData.php -->
+
 		});
 	}
 
