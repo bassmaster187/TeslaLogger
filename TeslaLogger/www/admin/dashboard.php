@@ -17,6 +17,7 @@ require("language.php");
 	<script>
 	
 	var nextGetWeather = 0;
+	var loc;
 
 	$( function() {
 	<?php
@@ -38,6 +39,8 @@ require("language.php");
 		
 		echo("$('#display_name').text('$display_name');");
 	?>
+		if (navigator.languages != undefined) loc = navigator.languages[0]; 
+			else loc = navigator.language;
 
 		GetCurrentData();
 		
@@ -120,13 +123,9 @@ if (file_exists("my_dashboard_jsonData.php"))
 		currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
 		var currentTimeString = currentHours + ":" + currentMinutes;
 		
-		$('#clock').text(currentTimeString);
-
-		var currentDate = currentTime.toLocaleString('de-CH', {dateStyle: 'long'});
-		var currentWeekday = currentTime.toLocaleString('de-CH', {weekday: 'long'});
-			
-		$('#weekday').text(currentWeekday);
-		$('#date').text(currentDate.substring(0, currentDate.length - 5));
+		$('#clock').text(currentTimeString);			
+		$('#weekday').text(currentTime.toLocaleString(loc, { weekday: 'long'}));
+		$('#date').text(currentTime.toLocaleString(loc, { month: 'long', day: 'numeric' }));
 	}
 	
 	function updateBat($percent)
