@@ -1,5 +1,7 @@
 # Teslalogger Docker Setup on Synology NAS
 
+![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/docker-synology.PNG)
+
 I'm running on DSM 6.1.7-15284 Update 3. YMMV on other versions.
 
 
@@ -21,10 +23,10 @@ When finished, follow rest of instructions here: https://github.com/bassmaster18
 
 The above page mentions the following to test:
 
-Try to connect to Grafana with you favorite browser: http://localhost:3000 (admin/admin)
+Try to connect to Grafana with you favorite browser: http://localhost:3000 (admin/teslalogger)
 
 
-This is incorrect for Synology. The URL should be http://:3000
+This is incorrect for Synology. The URL should be http://IPofYourSynology:3000
 
 e.g. http://192.168.0.100:3000
 
