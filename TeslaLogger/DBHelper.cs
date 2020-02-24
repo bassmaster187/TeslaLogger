@@ -185,8 +185,23 @@ namespace TeslaLogger
                         currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
                         currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
                         currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
-                        currentJSON.CreateCurrentJSON();
+                        
                     }
+                    dr.Close();
+
+                    cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_level, lat, lng FROM pos order by id desc limit 1", con);
+                    dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
+                        currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
+                        currentJSON.latitude = Convert.ToDouble(dr["lat"]);
+                        currentJSON.longitude = Convert.ToDouble(dr["lng"]);
+                    }
+                    dr.Close();
+
+                    currentJSON.CreateCurrentJSON();
+
                 }
             }
             catch (Exception ex)

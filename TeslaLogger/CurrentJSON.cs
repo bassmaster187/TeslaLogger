@@ -123,7 +123,7 @@
                    { "trip_kwh", trip_kwh },
                    { "trip_avg_kwh", trip_avg_wh },
                    { "trip_distance", distance },
-                   { "ts", DateTime.Now.ToString("t",Tools.ciDeDE) },
+                   { "ts", DateTime.Now.ToString("s")},
                    { "latitude", latitude },
                    { "longitude", longitude },
                    { "charge_limit_soc", charge_limit_soc},

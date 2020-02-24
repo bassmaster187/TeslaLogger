@@ -37,10 +37,6 @@ namespace TeslaLogger
         {
             CheckNewCredentials();
 
-            WriteMissingFile(7);
-
-            WriteMissingFile(19);
-
             try
             {
                 Tools.SetThread_enUS();
@@ -589,7 +585,7 @@ namespace TeslaLogger
         {
             try
             {
-                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "MISSING");
+                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "MISSINGKM");
                 System.IO.File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
 
                 UpdateTeslalogger.chmod(filepath, 666, false);

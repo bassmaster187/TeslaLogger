@@ -20,6 +20,7 @@ require("language.php");
 	var map = null;
 	var marker = null;
 	var mapInit = false;
+	var loc;
 
   $( function() {
     $( "button" ).button();
@@ -48,6 +49,9 @@ require("language.php");
     }).addTo(map);
 
 	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
+
+	if (navigator.languages != undefined) loc = navigator.languages[0]; 
+			else loc = navigator.language;
 
 	setInterval(function()
 		{
@@ -125,7 +129,9 @@ require("language.php");
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
 			$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
 			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
-			$("#last_update").text(jsonData["ts"]);
+			
+			var ts = new Date(Date.parse(jsonData["ts"]));
+			$("#last_update").text(ts.toLocaleString(loc));
 
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
