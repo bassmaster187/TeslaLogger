@@ -383,7 +383,7 @@ namespace TeslaLogger
 
                         if (power == "kw")
                         {
-                            Logfile.Log("Convert to kw");
+                            //Logfile.Log("Convert to kw");
 
                             if (f.EndsWith("Verbrauch.json"))
                             {
@@ -403,7 +403,7 @@ namespace TeslaLogger
 
                         if (temperature == "fahrenheit")
                         {
-                            Logfile.Log("Convert to fahrenheit");
+                            //Logfile.Log("Convert to fahrenheit");
 
                             if (f.EndsWith("Laden.json"))
                             {
@@ -423,7 +423,7 @@ namespace TeslaLogger
 
                         if (length == "mile")
                         {
-                            Logfile.Log("Convert to mile");
+                            //Logfile.Log("Convert to mile");
 
                             if (f.EndsWith("Akku Trips.json"))
                             {
@@ -439,6 +439,7 @@ namespace TeslaLogger
                             else if (f.EndsWith("Degradation.json"))
                             {
                                 s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
+                                s = s.Replace(" AS 'Max. Reichweite (Monatsmittel) [km]'", " / 1.609 AS 'Max. Reichweite (Monatsmittel) [mi]'");
                                 s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609 as 'mi Stand [mi]'");
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
 
@@ -505,7 +506,7 @@ namespace TeslaLogger
                             {
                                 s = ReplaceTitleTag(s, "Degradation", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
-                                    "Maximalreichweite[km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]"
+                                    "Maximalreichweite[km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]","Max. Reichweite (Monatsmittel) [km]","Max. Reichweite (Monatsmittel) [mi]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Ladehistorie.json"))
@@ -519,7 +520,7 @@ namespace TeslaLogger
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "SOC [%]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "Ladespannung [V]", "Phasen",
                                     "Stromstärke [A]", "Außentemperatur [°C]", "Außentemperatur [°F]",
-                                    "Angefordert [A]", "Pilot [A]"
+                                    "Angefordert [A]", "Pilot [A]", "Zelltemperatur [°C]", "Zelltemperatur [°F]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Trip.json"))
@@ -545,7 +546,7 @@ namespace TeslaLogger
 
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Geschwindigkeit [km/h]", "Geschwindigkeit [mph]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "SOC [%]",
-                                    "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]"
+                                    "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]","Innentemperatur [°C]","Innentemperatur [°F]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Visited.json"))
@@ -566,6 +567,41 @@ namespace TeslaLogger
                             else if (f.EndsWith("SOC Ladestatistik.json"))
                             {
                                 s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
+                            }
+                            else if (f.EndsWith("Zellspannungen 01-20 - ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Zellspannungen 01-20 - ScanMyTesla", dictLanguage);
+                            }
+                            else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Zellspannungen 21-40 - ScanMyTesla", dictLanguage);
+                            }
+                            else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Zellspannungen 41-60 - ScanMyTesla", dictLanguage);
+                            }
+                            else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Zellspannungen 61-80 - ScanMyTesla", dictLanguage);
+                            }
+                            else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Zellspannungen 81-99 - ScanMyTesla", dictLanguage);
+                            }
+                            else if (f.EndsWith("SOC Ladestatistik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
+                            }
+                            else if (f.EndsWith("Trip Monatsstatistik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Trip Monatsstatistik", dictLanguage);
+                            }
+                            else if (f.EndsWith("Alle Verbräuche -ScanMyTesla.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Alle Verbräuche - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Außentemperatur [°C]","Zelltemperatur [°C]","Alle Verbräuche - ScanMyTesla"
+                                }, dictLanguage, true);
                             }
                             else
                                 Logfile.Log("Title of " + f + " not translated!");

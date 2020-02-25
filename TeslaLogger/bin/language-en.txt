@@ -17,11 +17,13 @@ Tage=Days
 
 #Degradation.json
 Degradation=Degradation
-Maximalreichweite[km]=Maxrange [km]
-Maximalreichweite [mi]=Maxrange [mi]
+Maximalreichweite [km]=Max Range [km]
+Maximalreichweite [mi]=Max Range [mi]
 km Stand [km]=Odometer [km]
 mi Stand [mi]=Odometer [mi]
 Odometer [mi]=
+Max. Reichweite (Monatsmittel) [km]=Max Rage (monthly avg) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max Rage (monthly avg) [mi]
 
 #Ladehistorie.json
 Ladehistorie=Charging History
@@ -37,6 +39,7 @@ SOC Ende=SOC End
 Minuten=Minutes
 TR mi Start=TR mi Start
 TR mi Ende=TR mi End
+ØkW=ØkW
 
 #Ladestatistik.json
 Ladestatistik=Charging Statistics
@@ -47,6 +50,11 @@ Ladezeit h=Charge Duration h
 Ø SOC=Ø SOC
 Max SOC=Max SOC
 Anzahl Ladungen=Charging Count
+Anzahl=Count
+Geladen=Charged
+Ladezeit=Charging Time
+Anz. Ladungen=Count
+Ladehub=Charging Range
 
 #SOC Ladestatistik.json
 SOC Ladestatistik=SOC Charging Statistics
@@ -114,6 +122,8 @@ Geschwindigkeit [km/h]=Speed [kph]
 Leistung [PS]=Power [HP]
 Außentemperatur [°C]=Outside Temperature [°C]
 Außentemperatur [°F]=Outside Temperature [°F]
+Innentemperatur [°C]=Inside Temperature [°C]
+Innentemperatur [°F]=Inside Temperature [°F]
 
 Laden fertig=Charging Finished
 Schlafen=Sleeping
@@ -152,3 +162,24 @@ URL Admin Panel=URL Admin Panel
 
 #geoadd.php
 Bezeichnung=Description
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=All consumptions - ScanMyTesla
+Zelltemperatur [°C]=Cell Temperature [°C]
+Zelltemperatur [°F]=Cell Temperature [°F]
+
+#Trip Monatsstatistik.json
+Datum=Date
+Fahrzeit [h]=Drive Time [h]
+Strecke [km]=Distance [km]
+Strecke [mi]=Distance [mi]
+Verbraucht [kWh]=Consumed kWh
+Ø Verbrauch [kWh]=Ø Consumption kWh
+Anzahl Trips=Trips Count
+Trip Monatsstatistik=Trip Monthly Statistics
+
+Zellspannungen 01-20 - ScanMyTesla=Cell Voltages 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
