@@ -592,7 +592,7 @@ namespace TeslaLogger
                                 }
                                 else
                                 {
-                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
                                 }
                             }
                         }
@@ -641,7 +641,7 @@ namespace TeslaLogger
                                 }
                                 else
                                 {
-                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
+                                    // Logfile.Log($"Trip from {dt1} ideal_battery_range_km is NULL, but last valid data is too old: {dt2}!");
                                 }
                             }
                         }
@@ -1117,8 +1117,10 @@ namespace TeslaLogger
 
         private static void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging)
         {
+            /*
             if (logging)
                 Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
+                */
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {

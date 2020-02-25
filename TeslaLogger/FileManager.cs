@@ -97,9 +97,14 @@
             File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
         }
 
+        static object SyncLock_WriteCurrentJsonFile = new object();
+
         internal static void WriteCurrentJsonFile(string current_json)
         {
-            File.WriteAllText(GetFilePath(TLFilename.CurrentJsonFilename), current_json, Encoding.UTF8);
+            lock (SyncLock_WriteCurrentJsonFile)
+            {
+                File.WriteAllText(GetFilePath(TLFilename.CurrentJsonFilename), current_json, Encoding.UTF8);
+            }
         }
 
         internal static string GetSRTMDataPath()
