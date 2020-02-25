@@ -30,3 +30,4 @@ TeslaLogger/bin/VERSION
 TeslaLogger/bin/geofence-private.csv
 TeslaLogger/bin/nohup.out
 TeslaLogger/bin/SRTM-Data/*
+TeslaLogger/bin/settings.json

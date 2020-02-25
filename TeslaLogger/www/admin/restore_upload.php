@@ -67,7 +67,12 @@ if(isset($_POST["submit"])) {
 	echo("<br>Start Restore:<br>");
 	$return_var = NULL;
 	$output = NULL;
-	$command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+
+	if (file_exists("/tmp/teslalogger-DOCKER"))
+		$command = exec("/usr/bin/mysql -hdatabase -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+	else
+		$command = exec("/usr/bin/mysql -uroot -pteslalogger -Dteslalogger < /tmp/mybackup.sql", $output, $return_var);
+
 	logger("Output from mysql: " . var_export($output));
 	echo("<br>Restore finished. Please Reboot!");	
 }

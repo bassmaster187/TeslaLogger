@@ -49,9 +49,10 @@ services:
       - database
 
   webserver:
-    image: php:7.3-apache
+    build: docker/webserver/.
     restart: always
     volumes:
+      - ./docker/webserver/php.ini:/usr/local/etc/php/php.ini
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
