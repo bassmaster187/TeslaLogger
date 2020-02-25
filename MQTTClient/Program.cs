@@ -68,7 +68,8 @@ namespace MQTTClient
                     if (temp != lastjson)
                     {
                         lastjson = temp;
-                        client.Publish(Properties.Settings.Default.Topic, Encoding.UTF8.GetBytes(lastjson));
+                        client.Publish(Properties.Settings.Default.Topic, Encoding.UTF8.GetBytes(lastjson), 
+                            uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     }
                 }
                 catch (Exception ex)
