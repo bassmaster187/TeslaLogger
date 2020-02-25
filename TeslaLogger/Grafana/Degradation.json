@@ -32,13 +32,15 @@
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "Max. Reichweite (Monatsmittel) [km]": "blue"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "teslalogger",
       "decimals": 2,
-      "fill": 1,
+      "fill": 0,
       "fillGradient": 0,
       "gridPos": {
         "h": 21,
@@ -70,8 +72,15 @@
       "seriesOverrides": [
         {
           "alias": "km Stand [km]",
-          "fill": 0,
           "yaxis": 2
+        },
+        {
+          "alias": "Max. Reichweite (Monatsmittel) [km]",
+          "color": "#5794F2"
+        },
+        {
+          "alias": "Maximalreichweite [km]",
+          "fill": 1
         }
       ],
       "spaceLength": 10,
@@ -113,6 +122,34 @@
           "rawQuery": true,
           "rawSql": "SELECT $__time(datum), val as 'Nominal full pack [kWh]' FROM can WHERE $__timeFilter(datum) and id = 71 ORDER BY datum ASC",
           "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT  $__time(chargingstate.StartDate), \r\n        AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'Max. Reichweite (Monatsmittel) [km]'\r\nFROM charging \r\nINNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\r\nINNER JOIN pos ON chargingstate.pos = pos.id \r\nLEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nWHERE $__timeFilter(chargingstate.StartDate) \r\n  AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1\r\nGROUP BY EXTRACT(YEAR_MONTH FROM chargingstate.StartDate)",
+          "refId": "C",
           "select": [
             [
               {
@@ -217,5 +254,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 48
+  "version": 55
 }
