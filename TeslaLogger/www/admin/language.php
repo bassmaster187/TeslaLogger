@@ -1,10 +1,18 @@
 <?php
+
 $language = "en";
+$TemperatureUnit = "";
+$LengthUnit = "";
+$PowerUnit = "";
+
 if (file_exists("/etc/teslalogger/settings.json"))
 {
 	$json = file_get_contents('/etc/teslalogger/settings.json');
 	$json_data = json_decode($json,true);
 	$language = $json_data["Language"];
+	$TemperatureUnit = $json_data["Temperature"];
+	$LengthUnit = $json_data["Length"];
+	$PowerUnit = $json_data["Power"];
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";

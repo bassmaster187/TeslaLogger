@@ -21,6 +21,9 @@ require("language.php");
 	var marker = null;
 	var mapInit = false;
 	var loc;
+	var LengthUnit = "<?php echo($LengthUnit); ?>";
+	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
+	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
   $( function() {
     $( "button" ).button();
@@ -69,8 +72,17 @@ require("language.php");
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
-			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1));
-			$('#odometer').text(jsonData["odometer"].toFixed(1));
+			if (LengthUnit == "mile")
+			{
+				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / 1.609).toFixed(1) + " mi");
+				$('#odometer').text((jsonData["odometer"] / 1.609).toFixed(1) + " mi");
+			}
+			else
+			{
+				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1) + " km");
+				$('#odometer').text(jsonData["odometer"].toFixed(1) + " km");
+			}
+
 			$('#battery_level').text(jsonData["battery_level"]);
 			var car_version = jsonData["car_version"];
 			car_version = car_version.substring(0,car_version.lastIndexOf(" "));
@@ -250,8 +262,8 @@ require("language.php");
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
 	  <tr id='BMSMaxDischargeRow'><td><b><?php t("Max Discharge"); ?>:</b></td><td><span id="BMSMaxDischarge"></span></td></tr>
 	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
-	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> km / <span id="battery_level">---</span> %</td></tr>
-	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span> km</td></tr>
+	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %</td></tr>
+	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
