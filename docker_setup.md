@@ -58,7 +58,7 @@ docker-compose up
 after a minute or two, everything should be ready.
 
 Try to connect to Grafana with you favorite browser:
-http://localhost:3000 (admin/admin)
+http://localhost:3000 (admin/teslalogger)
 
 Try to connect to Admin-Panel
 http://localhost:8888/admin/
