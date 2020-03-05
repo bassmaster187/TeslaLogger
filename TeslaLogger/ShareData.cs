@@ -44,7 +44,15 @@ namespace TeslaLogger
                 Logfile.Log("ShareData: Your charging data / degradation data will be shared anonymously to the community. Thank you!");
             }
 
-            SendAllUnsentData();
+            try
+            {
+                SendAllUnsentData();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error in ShareData:SendAllUnsentData " + ex.Message);
+                Logfile.WriteException(ex.ToString());
+            }
         }
 
         void UpdateDataTable(string table)
