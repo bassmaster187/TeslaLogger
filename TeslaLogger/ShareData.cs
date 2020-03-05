@@ -1,0 +1,187 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TeslaLogger
+{
+    class ShareData
+    {
+        string TaskerToken;
+        string TeslaloggerVersion;
+        static bool logwritten = false;
+
+        public ShareData(string TaskerToken)
+        {
+            this.TaskerToken = TaskerToken;
+
+            if (System.Diagnostics.Debugger.IsAttached)
+                this.TaskerToken = "00000000";
+
+            TeslaloggerVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            UpdateDataTable("chargingstate");
+
+            string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata");
+            if (!File.Exists(filepath))
+            {
+                if (!logwritten)
+                {
+                    logwritten = true;
+                    Logfile.Log("ShareData: NOT Sharing Data! :-(");
+                }
+
+                return;
+            }
+
+            if (!logwritten)
+            {
+                logwritten = true;
+                Logfile.Log("ShareData: Your charging data / degradation data will be shared anonymously to the community. Thank you!");
+            }
+
+            SendAllUnsentData();
+        }
+
+        void UpdateDataTable(string table)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con);
+                cmd.CommandTimeout = 600;
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+
+        void SendAllUnsentData()
+        {
+            Logfile.Log("ShareData: SendAllUnsentData start");
+
+            int ProtocolVersion = 3;
+            string sql = @"SELECT chargingstate.id as HostId, StartDate, EndDate, charging.charge_energy_added, conn_charge_cable, fast_charger_brand, fast_charger_type, fast_charger_present, address as pos_name, lat, lng, odometer, charging.outside_temp, StartChargingID, EndChargingID
+                FROM chargingstate
+                join pos on chargingstate.Pos = pos.id
+                join charging on charging.id = chargingstate.EndChargingID
+                where(export is null or export < " + ProtocolVersion + @") and(fast_charger_present or address like 'Supercharger%' or address like 'Ionity%')
+                order by StartDate
+                ";
+
+            DataTable dt = new DataTable();
+
+            int ms = Environment.TickCount;
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
+            da.SelectCommand.CommandTimeout = 600;
+            da.Fill(dt);
+            ms = Environment.TickCount - ms;
+            Logfile.Log("ShareData: SELECT chargingstate ms: " + ms);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int HostId = Convert.ToInt32(dr["HostId"]);
+
+                var d = new Dictionary<string, object>();
+                d.Add("ProtocolVersion", ProtocolVersion);
+                string Firmware = DBHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
+                d.Add("Firmware", Firmware);
+
+                d.Add("TaskerToken", TaskerToken); // TaskerToken and HostId is the primary key and is used to make sure data won't be imported twice
+                foreach (DataColumn col in dt.Columns)
+                {
+                    if (col.Caption.EndsWith("ChargingID"))
+                        continue;
+
+                    if (col.Caption.EndsWith("Date"))
+                        d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                    else
+                        d.Add(col.Caption, dr[col.Caption]);
+                }
+
+                int count = 0;
+                var l = GetChargingDT(Convert.ToInt32(dr["StartChargingID"]), Convert.ToInt32(dr["EndChargingID"]), out count);
+                d.Add("teslalogger_version", TeslaloggerVersion);
+                d.Add("charging", l);
+
+                var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+
+                string resultContent = "";
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
+                    var r = result.Content.ReadAsStringAsync().Result;
+
+                    //resultContent = result.Content.ReadAsStringAsync();
+                    Logfile.Log("ShareData: " + r);
+
+                    if (r.Contains("ERROR"))
+                    {
+                        Logfile.WriteException(r + "\r\n" + json );
+                    }
+                    else if (r.Contains("Insert OK:"))
+                    {
+                        DBHelper.ExecuteSQLQuery("update chargingstate set export=" + ProtocolVersion + "  where id = " + HostId);
+                    }
+
+                } catch (Exception ex)
+                {
+                    Logfile.Log("ShareData: " + ex.Message);
+                }
+            }
+
+            Logfile.Log("ShareData: SendAllUnsentData finished");
+        }
+
+        List<object> GetChargingDT(int startid, int endid, out int count)
+        {
+            count = 0;
+            string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater)
+                FROM charging
+                where id between @startid and @endid
+                group by battery_level
+                order by battery_level";
+
+            DataTable dt = new DataTable();
+            var l = new List<object>();
+
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
+            da.SelectCommand.Parameters.AddWithValue("@startid", startid);
+            da.SelectCommand.Parameters.AddWithValue("@endid", endid);
+            da.Fill(dt);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                var d = new Dictionary<string, object>();
+
+                foreach (DataColumn col in dt.Columns)
+                {
+                    string name = col.Caption;
+                    name = name.Replace("avg(","");
+                    name = name.Replace("max(","");
+                    name = name.Replace(")","");
+
+                    if (name == "Datum")
+                    {
+                        long date = Convert.ToInt64(dr[col.Caption]) * 1000;
+                        d.Add(name, DBHelper.UnixToDateTime(date).ToString("s"));
+                    }
+                    else
+                        d.Add(name, dr[col.Caption]);
+                }
+
+                l.Add(d);
+            }
+
+            count = dt.Rows.Count;
+
+            return l;
+        }
+    }
+}

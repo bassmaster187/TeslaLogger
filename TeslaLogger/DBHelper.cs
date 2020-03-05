@@ -87,6 +87,29 @@ namespace TeslaLogger
             }
         }
 
+        internal static string GetFirmwareFromDate(DateTime dateTime)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT version FROM car_version where StartDate < @date order by StartDate desc limit 1", con);
+                cmd.Parameters.AddWithValue("@date", dateTime);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    string version = dr[0].ToString();
+
+                    if (version.Contains(" "))
+                        version = version.Substring(0, version.IndexOf(" "));
+
+                    return version;
+                }
+            }
+
+            return "";
+        }
+
         public static void CloseChargingState()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))

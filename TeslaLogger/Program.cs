@@ -164,6 +164,8 @@ namespace TeslaLogger
                     DBHelper.CheckForInterruptedCharging(true);
                     wh.UpdateAllEmptyAddresses();
                     DBHelper.UpdateIncompleteTrips();
+
+                    new ShareData(wh.TaskerHash);
                 }).Start();
 
                 DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
@@ -498,6 +500,8 @@ namespace TeslaLogger
                                     else
                                     {
                                         DriveFinished(wh);
+
+                                        ShareData sd = new ShareData(wh.TaskerHash);
                                     }
                                 }
                                 break;
