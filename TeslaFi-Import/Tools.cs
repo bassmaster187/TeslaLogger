@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,26 @@ namespace TeslaFi_Import
             string f = string.Format("{0}  {1,7:########} - {2}", DateTime.Now, id, text);
             System.Console.WriteLine(f);
             System.IO.File.AppendAllText("TeslaFi-Logfile.txt", f + "\r\n");
+        }
+
+        public static bool IsDocker()
+        {
+            try
+            {
+                string filename = "/tmp/teslalogger-DOCKER";
+
+                if (File.Exists(filename))
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log(0, ex.ToString());
+            }
+
+            return false;
         }
     }
 }

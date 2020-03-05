@@ -24,6 +24,14 @@ namespace TeslaFi_Import
             try
             {
                 Tools.Log(0, "***** Start TeslaFi "+ System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Started *****");
+                if (Tools.IsDocker())
+                {
+                    Tools.Log(0, "DOCKER Version!");
+                    DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;";
+                }
+
+                Tools.Log(0, "DBConnectionstring: " + DBConnectionstring);
+
                 DataTable dt = new DataTable();
                 dt.Columns.Add("data_id");
                 dt.Columns.Add("Date", typeof(DateTime));
@@ -51,9 +59,8 @@ namespace TeslaFi_Import
                 dt.Columns.Add("charger_pilot_current");
                 dt.Columns.Add("charge_current_request");
                 dt.Columns.Add("fast_charger_type");
-
-                
-
+                dt.Columns.Add("car_version");
+                               
                 LoadAllFiles(dt);
 
                 int dateColumnID = dt.Columns["Date"].Ordinal;
@@ -71,6 +78,7 @@ namespace TeslaFi_Import
                 string oldShiftstate = "P";
                 string oldChargingstate = "";
                 string oldState = "";
+                string oldCar_version = "";
                 int lastMovementID = 0;
                 DateTime lastMovement = DateTime.MaxValue;
 
@@ -89,6 +97,13 @@ namespace TeslaFi_Import
                             Tools.Log(id, "First Teslalogger Data reached. TeslaFi data skipped!");
                             break;
                         }
+
+                        if (dr["car_version"] != DBNull.Value && dr["car_version"].ToString().Length > 4 && dr["car_version"].ToString() != oldCar_version)
+                        {
+                            oldCar_version = dr["car_version"].ToString();
+                            InsertCarVersion(id, oldCar_version, Date);
+                        }
+
 
                         if (oldChargingstate != "Charging")
                         {
@@ -173,6 +188,20 @@ namespace TeslaFi_Import
             }
 
             Tools.Log(0, "end Parsing");
+        }
+
+        private static void InsertCarVersion(int id, string Car_version, DateTime Date)
+        {
+            Tools.Log(id, "car_version: " + Car_version);
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+
+                MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, import) values (@StartDate, @version, 1)", con);
+                cmd.Parameters.AddWithValue("@StartDate", Date.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@version", Car_version);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         private static DateTime GetFirstTeslaloggerData()
