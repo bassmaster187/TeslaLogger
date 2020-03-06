@@ -94,7 +94,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1\r\n",
+          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1\r\norder by chargingstate.StartDate\r\n",
           "refId": "A",
           "select": [
             [
@@ -148,7 +148,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT  $__time(chargingstate.StartDate), \r\n        AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'Max. Reichweite (Monatsmittel) [km]'\r\nFROM charging \r\nINNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\r\nINNER JOIN pos ON chargingstate.pos = pos.id \r\nLEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nWHERE $__timeFilter(chargingstate.StartDate) \r\n  AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1\r\nGROUP BY EXTRACT(YEAR_MONTH FROM chargingstate.StartDate)",
+          "rawSql": "SELECT  $__time(chargingstate.StartDate), \r\n        AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'Max. Reichweite (Monatsmittel) [km]'\r\nFROM charging \r\nINNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\r\nINNER JOIN pos ON chargingstate.pos = pos.id \r\nLEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nWHERE $__timeFilter(chargingstate.StartDate) \r\n  AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1\r\nGROUP BY EXTRACT(YEAR_MONTH FROM chargingstate.StartDate)\r\norder by charging.Datum",
           "refId": "C",
           "select": [
             [
@@ -254,5 +254,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 58
+  "version": 59
 }
