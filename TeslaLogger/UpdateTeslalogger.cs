@@ -113,6 +113,13 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.ColumnExists("chargingstate", "max_charger_power"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView(wh);

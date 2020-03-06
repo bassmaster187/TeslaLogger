@@ -71,12 +71,12 @@ namespace TeslaLogger
         {
             Logfile.Log("ShareData: SendAllUnsentData start");
 
-            int ProtocolVersion = 3;
+            int ProtocolVersion = 4;
             string sql = @"SELECT chargingstate.id as HostId, StartDate, EndDate, charging.charge_energy_added, conn_charge_cable, fast_charger_brand, fast_charger_type, fast_charger_present, address as pos_name, lat, lng, odometer, charging.outside_temp, StartChargingID, EndChargingID
                 FROM chargingstate
                 join pos on chargingstate.Pos = pos.id
                 join charging on charging.id = chargingstate.EndChargingID
-                where(export is null or export < " + ProtocolVersion + @") and(fast_charger_present or address like 'Supercharger%' or address like 'Ionity%')
+                where(export is null or export < " + ProtocolVersion + @") and (fast_charger_present or address like 'Supercharger%' or address like 'Ionity%' or max_charger_power > 25)
                 order by StartDate
                 ";
 

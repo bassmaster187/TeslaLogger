@@ -164,7 +164,7 @@ namespace TeslaLogger
                     DBHelper.CheckForInterruptedCharging(true);
                     wh.UpdateAllEmptyAddresses();
                     DBHelper.UpdateIncompleteTrips();
-
+                    DBHelper.UpdateAllChargingMaxPower();
                     new ShareData(wh.TaskerHash);
                 }).Start();
 

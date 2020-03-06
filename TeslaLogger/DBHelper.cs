@@ -127,7 +127,56 @@ namespace TeslaLogger
             currentJSON.current_charger_phases = 0;
             currentJSON.current_charger_actual_current = 0;
 
+            UpdateMaxChargerPower();
+
             Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(false));
+        }
+
+        public static void UpdateMaxChargerPower()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate order by id desc limit 1", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        int id = Convert.ToInt32(dr["id"]);
+                        int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
+                        int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+
+                        UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.Message);
+            }
+        }
+
+        private static void UpdateMaxChargerPower(int id, int startChargingID, int endChargingID)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("select max(charger_power) from charging where id >= @startChargingID and id <= @endChargingID ", con);
+                cmd.Parameters.AddWithValue("@startChargingID", startChargingID);
+                cmd.Parameters.AddWithValue("@endChargingID", endChargingID);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    if (dr[0] != DBNull.Value)
+                    {
+                        int max_charger_power = Convert.ToInt32(dr[0]);
+                        ExecuteSQLQuery($"update chargingstate set max_charger_power={max_charger_power} where id = {id}");
+                    }
+                }
+
+            }
         }
 
         internal static void GetEconomy_Wh_km(WebHelper wh)
@@ -188,6 +237,31 @@ namespace TeslaLogger
             return 0;
         }
 
+        internal static void UpdateAllChargingMaxPower()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate where max_charger_power is null", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        int id = Convert.ToInt32(dr["id"]);
+                        int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
+                        int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+
+                        UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.Message);
+            }
+        }
+
         internal static void GetLastTrip()
         {
             try
@@ -202,13 +276,24 @@ namespace TeslaLogger
                     {
                         currentJSON.current_trip_start = (DateTime)dr["StartDate"];
                         currentJSON.current_trip_end = (DateTime)dr["EndDate"];
-                        currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
-                        currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
-                        currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
-                        currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
-                        currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
-                        currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
-                        
+
+                        if (dr["StartKm"] != DBNull.Value)
+                            currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
+
+                        if (dr["EndKm"] != DBNull.Value)
+                            currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
+
+                        if (dr["speed_max"] != DBNull.Value)
+                            currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
+
+                        if (dr["power_max"] != DBNull.Value)
+                            currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
+
+                        if (dr["StartRange"] != DBNull.Value)
+                            currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
+
+                        if (dr["EndRange"] != DBNull.Value)
+                            currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
                     }
                     dr.Close();
 
