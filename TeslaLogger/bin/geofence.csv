@@ -131,9 +131,9 @@ Ionity ES-El Hidalgo, 38.824574, -3.396857
 Ionity ES-Palleja, 41.420526, 2.00216
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
 Ionity ES-Vila Sana, 41.643444, 0.931306
-Ionity FIN-Karisto, 60.9835, 25.73731
-Ionity FIN-Paimio, 60.42587, 22.724
-Ionity FIN-Tiiriö, 61.00769, 24.42201
+Ionity FI-Karisto, 60.9835, 25.73731
+Ionity FI-Paimio, 60.42587, 22.724
+Ionity FI-Tiiriö, 61.00769, 24.42201
 Ionity FR-Aire de Darvault, 48.264072, 2.722024
 Ionity FR-Arclusaz, 45.548541, 6.158058
 Ionity FR-Baie de Somme, 50.16723, 1.755877
@@ -185,12 +185,12 @@ Ionity HU-Bábolna (dir. Budapest), 47.680553, 17.976528
 Ionity HU-Balatonkeresztúr (dir. Budapest), 46.68356, 17.37848
 Ionity HU-Balatonkeresztúr (dir. Zagreb), 46.685063, 17.37977
 Ionity HU-Kajászó (dir. Balaton), 47.307602, 18.744217
-Ionity IRL-Athlone, 53.400721, -7.827948
-Ionity IRL-Cashel, 52.50884, -7.87441
-Ionity IRL-Citynorth, 53.6376, -6.25894
-Ionity IRL-Gorey, 52.750691, -6.202153
-Ionity IRL-Kill North, 53.2482657, -6.5964347
-Ionity IRL-Kill South, 53.253234, -6.5698138
+Ionity IE-Athlone, 53.400721, -7.827948
+Ionity IE-Cashel, 52.50884, -7.87441
+Ionity IE-Citynorth, 53.6376, -6.25894
+Ionity IE-Gorey, 52.750691, -6.202153
+Ionity IE-Kill North, 53.2482657, -6.5964347
+Ionity IE-Kill South, 53.253234, -6.5698138
 Ionity IT-Binasco, 45.33552, 9.10753
 Ionity IT-Brenner, 47.00627, 11.50668
 Ionity IT-Brugnato Ovest, 44.22647, 9.72971
@@ -203,6 +203,8 @@ Ionity IT-Portogruaro, 45.79725, 12.81914
 Ionity IT-Rinovo Nord, 43.9592, 8.13416
 Ionity IT-Valdichiana Outlet Village, 43.22381, 11.80217
 Ionity IT-Via Ernesto Basile. Palermo, 38.09959, 13.34651
+Ionity LT-Garliava, 54.81854, 23.85809
+Ionity LT-Kryžkalnis, 55.48423, 22.58733
 Ionity NL-Apeldoorn-Zuid, 52.1791, 5.984281
 Ionity NL-Bodegraven, 52.066539, 4.738413
 Ionity NL-De Knoest, 52.014675, 5.12222
@@ -419,14 +421,14 @@ Supercharger ES-Tarragona,41.134294, 1.1683
 Supercharger ES-Tordesillas,41.516125, -4.943023
 Supercharger ES-Valencia,39.542965, -0.451521
 Supercharger ES-Zaragoza,41.625707, -1.009618
-Supercharger FIN-Akaa,61.181106, 23.885075
-Supercharger FIN-Jalasjärvi,62.417805, 22.792112
-Supercharger FIN-Koivisto,62.516908, 25.691666
-Supercharger FIN-Paimio,60.442961, 22.605621
-Supercharger FIN-Pyhtää,60.489054, 26.554835
-Supercharger FIN-Pyhäjärvi,63.716298, 25.920103
-Supercharger FIN-Vierumäki,61.111599, 25.928814
-Supercharger LIE-Schaan,47.165317, 9.507795
+Supercharger FI-Akaa,61.181106, 23.885075
+Supercharger FI-Jalasjärvi,62.417805, 22.792112
+Supercharger FI-Koivisto,62.516908, 25.691666
+Supercharger FI-Paimio,60.442961, 22.605621
+Supercharger FI-Pyhtää,60.489054, 26.554835
+Supercharger FI-Pyhäjärvi,63.716298, 25.920103
+Supercharger FI-Vierumäki,61.111599, 25.928814
+Supercharger LI-Schaan,47.165317, 9.507795
 Supercharger FR-Aire Reims Champagne Sud, 49.120696, 4.242712
 Supercharger FR-Aire Reims Champagne Nord, 49.119348, 4.245689
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
