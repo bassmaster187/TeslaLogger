@@ -165,7 +165,10 @@ namespace TeslaLogger
                     wh.UpdateAllEmptyAddresses();
                     DBHelper.UpdateIncompleteTrips();
                     DBHelper.UpdateAllChargingMaxPower();
-                    new ShareData(wh.TaskerHash);
+
+                    var sd = new ShareData(wh.TaskerHash);
+                    sd.SendAllChargingData();
+                    sd.SendDegradationData();
                 }).Start();
 
                 DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
@@ -502,6 +505,7 @@ namespace TeslaLogger
                                         DriveFinished(wh);
 
                                         ShareData sd = new ShareData(wh.TaskerHash);
+                                        sd.SendAllChargingData();
                                     }
                                 }
                                 break;
@@ -675,6 +679,10 @@ namespace TeslaLogger
 
                         wh.Tesla_token = temp;
                         wh.lastTokenRefresh = DateTime.Now;
+
+                        // Every 10 Days send degradataion Data
+                        var sd = new ShareData(wh.TaskerHash);
+                        sd.SendDegradationData();
                     }
                     else
                     {
