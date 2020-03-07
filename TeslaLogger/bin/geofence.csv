@@ -313,6 +313,7 @@ Supercharger CH-Rubigen, 46.891773, 7.542738
 Supercharger CH-Schaffhausen, 47.720985, 8.646664
 Supercharger CH-St. Moritz, 46.496797, 9.84272
 Supercharger CH-Steg-Hohtenn, 46.310364, 7.749565
+Supercharger CZ-Brno,49.138336, 16.630748
 Supercharger CZ-Humpolec,49.521746, 15.347476
 Supercharger CZ-Olomouc,49.561356, 17.262209
 Supercharger CZ-Vestec,49.9898398, 14.4907623
@@ -561,8 +562,12 @@ Supercharger HR-Split, 43.58737, 16.57636
 Supercharger HR-Vrgorac, 43.20407, 17.37387
 Supercharger HR-Zadar, 44.11418, 15.40711
 Supercharger HR-Zagreb, 45.76705, 16.23365
+Supercharger HU-Debrecen,47.541266, 21.583575
 Supercharger HU-Györ,47.633274, 17.660977
+Supercharger HU-Fót,47.580072, 19.16243
 Supercharger HU-Sormás,46.460543, 16.906756
+Supercharger HU-Szeged,46.274152, 20.10498
+Supercharger HU-Törökbálint,47.439444, 18.889835
 Supercharger IE-Ballacolla,52.86704, -7.481818
 Supercharger IE-Birdhill,52.757747, -8.40932
 Supercharger IE-Castlebellingham,53.924106, -6.411373
@@ -579,6 +584,7 @@ Supercharger IT-Cerignola,41.306389, 15.899738
 Supercharger IT-Dorno, 45.14719, 8.99119
 Supercharger IT-Fano,43.802874, 13.015345
 Supercharger IT-Forcola,46.165099, 9.675995
+Supercharger IT-Forlì V3,44.242877, 12.081828
 Supercharger IT-Forte dei Marmi,43.956416, 10.194539
 Supercharger IT-Imperia, 43.89266, 8.038256
 Supercharger IT-Magliano,42.372085, 12.471703
@@ -603,12 +609,15 @@ Supercharger NL-Breda, 51.577493, 4.729968
 Supercharger NL-Breukelen, 52.1672253, 4.988661
 Supercharger NL-Bunnik,52.061418, 5.20582
 Supercharger NL-Dordrecht, 51.7744542, 4.65301
-Supercharger NL-Drachten,53.105883, 6.129539											 
+Supercharger NL-Drachten,53.105883, 6.129539
+Supercharger NL-Duiven,51.958931, 6.020418
 Supercharger NL-Eindhoven, 51.4069155, 5.479269
 Supercharger NL-Emmeloord,52.727421, 5.764693
 Supercharger NL-Gouda,52.022955, 4.684605
 Supercharger NL-Hoorn,52.650769, 5.038917
 Supercharger NL-Horst,51.470008, 6.056974
+Supercharger NL-Leiderdorp,52.1601396, 4.5491453
+Supercharger NL-Naarden,52.30858, 5.141127
 Supercharger NL-Oosterhout,51.626423, 4.869517
 Supercharger NL-Rosmalen,51.720551, 5.333622
 Supercharger NL-Tilburg,51.606331, 5.005621
@@ -674,9 +683,14 @@ Supercharger PL-Ciechocinek,52.874469, 18.773758
 Supercharger PL-Katowice,50.254594, 19.046594
 Supercharger PL-Kostomłoty,51.036946, 16.583294
 Supercharger PL-Poznań,52.400285, 16.893091
+Supercharger PL-Radom	51.379569, 21.125477
+Supercharger PL-Warsaw,52.207827, 21.029574
 Supercharger PT-Alcacér do Sal,38.391941, -8.513867
+Supercharger PT-Alcantarilha,37.150529, -8.364525
 Supercharger PT-Estrada da Batalha,39.635478, -8.688469
+Supercharger PT-Fátima,39.635478, -8.688469
 Supercharger PT-Guarda,40.559107, -7.230415
+Supercharger PT-Mealhada,40.37306, -8.4805
 Supercharger PT-Montemor-o-Novo,38.645753, -8.247265
 Supercharger PT-Ribeira de Pena,41.503684, -7.801877
 Supercharger SE-Arboga,59.426307, 15.827684
