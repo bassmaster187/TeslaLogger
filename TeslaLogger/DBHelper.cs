@@ -1360,5 +1360,36 @@ namespace TeslaLogger
             }
             return 0;
         }
+        
+        public static int GetAvgMaxRage()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(@"SELECT AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'TRmax'
+                        FROM charging
+                        INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID
+                        INNER JOIN pos ON chargingstate.pos = pos.id
+                        LEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
+                        WHERE chargingstate.StartDate > SUBDATE(Now(), INTERVAL 60 DAY) AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1
+                    ", con);
+
+                    var r = cmd.ExecuteReader();
+                    if (r.Read())
+                    {
+                        int count = Convert.ToInt32(r[0]);
+                        return count;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "GetAvgMaxRage");
+                Logfile.Log(ex.ToString());
+            }
+            return 0;
+        }
     }
 }

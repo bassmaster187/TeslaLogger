@@ -536,7 +536,22 @@ namespace TeslaLogger
         {
             string eff = "0.190052356";
             string car = "";
-            if (carSettings.car_type == "models2" && carSettings.car_special_type == "base")
+
+            if (carSettings.car_type == "model3")
+            {
+                int maxRange = DBHelper.GetAvgMaxRage();
+                if (maxRange > 400)
+                {
+                    WriteCarSettings("0.152", "M3 LR");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.152", "M3 SR+");
+                    return;
+                }
+            }
+            else if (carSettings.car_type == "models2" && carSettings.car_special_type == "base")
             {
                 if (carSettings.trim_badging == "60")
                 {
