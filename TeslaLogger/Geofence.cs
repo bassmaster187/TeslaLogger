@@ -21,7 +21,7 @@
         public int radius;
     }
 
-    class Geofence
+    public class Geofence
     {
         List<Address> sortedList;
         System.IO.FileSystemWatcher fsw;
@@ -145,6 +145,10 @@
 
         public Address GetPOI(double lat, double lng, bool logDistance = true)
         {
+            Address ret = null;
+            double retDistance = 0;
+            int found = 0;
+
             lock (sortedList)
             {
                 double range = 0.2; // apprx 10km
@@ -153,7 +157,7 @@
                 {
                     
                     if (p.lat - range > lat)
-                        return null; // da die liste sortiert ist, kann nichts mehr kommen
+                        return ret; // da die liste sortiert ist, kann nichts mehr kommen
 
                     if ((p.lat - range) < lat &&
                         lat < (p.lat + range) &&
@@ -163,16 +167,29 @@
                         double distance = GetDistance(lng, lat, p.lng, p.lat);
                         if (p.radius > distance)
                         {
+                            found++;
                             if (logDistance)
                                 Logfile.Log($"Distance: {distance} - Radius: {p.radius} - {p.name}");
 
-                            return p;
+                            if (ret == null)
+                            {
+                                ret = p;
+                                retDistance = distance; 
+                            }
+                            else
+                            {
+                                if (distance < retDistance)
+                                {
+                                    ret = p;
+                                    retDistance = distance;
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            return null;
+            return ret;
         }
 
         public double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
