@@ -27,8 +27,7 @@ namespace TeslaLogger
             TeslaloggerVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             UpdateDataTable("chargingstate");
 
-            string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
-            if (!File.Exists(filepath))
+            if (!Tools.IsShareData())
             {
                 if (!logwritten)
                 {

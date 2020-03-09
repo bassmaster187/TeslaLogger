@@ -257,5 +257,27 @@
 
             return false;
         }
+
+        public static bool IsShareData()
+        {
+            try
+            {
+                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
+                if (File.Exists(filepath))
+                    return true;
+
+                filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt.txt");
+                if (File.Exists(filepath))
+                    return true;
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "IsShareData");
+            }
+
+            return false;
+
+        }
     }
 }
