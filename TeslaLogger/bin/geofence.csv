@@ -407,6 +407,7 @@ Supercharger ES-Almaraz,39.791255, -5.695668
 Supercharger ES-Ariza,41.313192, -2.002201
 Supercharger ES-Atalaya del Cañavate,39.538687, -2.254555
 Supercharger ES-Barcelona,41.498135, 2.072674
+Supercharger ES-Bembibre,42.623488,-6.453124
 Supercharger ES-Burgos,42.312365, -3.704115
 Supercharger ES-Caldes de Malavella,41.859029, 2.767237
 Supercharger ES-Cúllar,37.5540305, -2.6139444
@@ -415,14 +416,19 @@ Supercharger ES-Getafe,40.290389, -3.696302
 Supercharger ES-Girona,41.998411, 2.817295
 Supercharger ES-Granada,37.181805, -3.928417
 Supercharger ES-Guarromán,38.143021, -3.722848
+Supercharger ES-Jerez,36.692378,-6.160246
 Supercharger ES-La Seu d'Urgell,42.359108, 1.462297
 Supercharger ES-Lleida,41.663959, 0.605371
 Supercharger ES-L´Aldea,40.753019, 0.606421
+Supercharger ES-Madrid,40.443856,-3.691665
 Supercharger ES-Manzanares,39.006855, -3.382999
 Supercharger ES-Murcia,38.038172, -1.149343
 Supercharger ES-Mérida,38.921746, -6.375133
 Supercharger ES-Ponferrada,42.623851, -6.451837
+Supercharger ES-Reocín,43.356526,-4.094394
 Supercharger ES-Rivabellosa,42.701171, -2.91951
+Supercharger ES-Sant Cugat,41.498096,2.072692
+Supercharger ES-Sevilla,37.391485,-6.009627
 Supercharger ES-Tarragona,41.134294, 1.1683
 Supercharger ES-Tordesillas,41.516125, -4.943023
 Supercharger ES-Valencia,39.542965, -0.451521
@@ -715,7 +721,6 @@ Supercharger PL-Radom,51.379569, 21.125477
 Supercharger PL-Warsaw,52.207827, 21.029574
 Supercharger PT-Alcacér do Sal,38.391941, -8.513867
 Supercharger PT-Alcantarilha,37.150601,-8.364433
-Supercharger PT-Estrada da Batalha,39.635478, -8.688469
 Supercharger PT-Fátima,39.635478, -8.688469
 Supercharger PT-Guarda,40.559107, -7.230415
 Supercharger PT-Mealhada,40.37306, -8.4805
