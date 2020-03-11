@@ -257,6 +257,7 @@ Ionity SK-Senec, 48.240666, 17.360754
 Ionity UK-Baldock, 52.013772, -0.203003
 Ionity UK-Beaconsfield, 51.587934, -0.629065
 Ionity UK-Blackburn, 53.713494, -2.477038
+Ionity UK-Cambridge, 52.26907, -0.00901
 Ionity UK-Cullompton, 50.863745, -3.38449
 Ionity UK-Gretna Green, 55.00796, -3.08265
 Ionity UK-Leeds Skelton Lakes, 53.77046, -1.47691
@@ -289,11 +290,13 @@ Supercharger BE-Antwerp, 51.26821, 4.40131
 Supercharger BE-Antwerp-Aartselaar, 51.13699, 4.37719
 Supercharger BE-Arlon, 49.64796, 5.8188
 Supercharger BE-Brugge, 51.16989, 3.19666
+Supercharger BE-Edegem, 51.151055, 4.432582
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
 Supercharger BE-Lokeren, 51.09509, 4.01187
 Supercharger BE-Machelen, 50.88772, 4.453
 Supercharger BE-Nivelles-Sud, 50.5887, 4.30809
+Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
 Supercharger BE-Wavre, 50.7080753,4.5983481
 Supercharger CH-Beckenried, 46.971073, 8.459073
@@ -392,7 +395,6 @@ Supercharger DK-Aarhus,56.178223, 10.139406
 Supercharger DK-Haverslev,56.783428, 9.69082
 Supercharger DK-Hedensted,55.786395, 9.667926
 Supercharger DK-Hjørring,57.455791, 10.04227
-Supercharger DK-Kastrup,55.614459, 12.613533
 Supercharger DK-Køge,55.489273, 12.162788
 Supercharger DK-Middelfart,55.510639, 9.764306
 Supercharger DK-Nørre Alslev,54.899872, 11.896921
@@ -578,8 +580,8 @@ Supercharger HU-Szeged,46.274868,20.1024638
 Supercharger HU-Törökbálint,47.439444, 18.889835
 Supercharger IE-Ballacolla,52.86704, -7.481818
 Supercharger IE-Birdhill,52.757747, -8.40932
-Supercharger IE-Castlebellingham,53.924106, -6.411373
-Supercharger IE-Castlebellingham,53.932462, -6.417717													 
+Supercharger IE-Castlebellingham Southbound,53.924106, -6.411373
+Supercharger IE-Castlebellingham Northbound,53.932462, -6.417717													 
 Supercharger IT-Affi,45.551296, 10.787143
 Supercharger IT-Arezzo,43.437399, 11.777607
 Supercharger IT-Brennero, 46.99540, 11.50210
