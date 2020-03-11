@@ -636,8 +636,11 @@ Supercharger NL-Zwolle,52.531375, 6.157279
 Supercharger NO-Aksdal,59.423006, 5.44306
 Supercharger NO-Alvdal,62.114854, 10.616826
 Supercharger NO-Åndalsnes,62.557776,7.685321
+Supercharger NO-Arna, 60.421924, 5.46703
+Supercharger NO-Åsane, 60.484345, 5.375959
 Supercharger NO-Aspøya,63.011584, 7.977743
 Supercharger NO-Aurland,60.89863, 7.21082
+Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo,61.883135, 8.267249
 Supercharger NO-Brumunddal,60.878507,10.929387
 Supercharger NO-Bygland,58.82792, 7.796114
@@ -649,21 +652,26 @@ Supercharger NO-Flå,60.381236, 9.610003
 Supercharger NO-Gol,60.70232, 8.9862
 Supercharger NO-Gol West,60.697258,8.953551
 Supercharger NO-Grong,64.464913, 12.316532
+Supercharger NO-Gulsvik, 60.381223, 9.609859
+Supercharger NO-Hernes, 60.932103, 11.675676
 Supercharger NO-Hokksund,59.761033, 9.905583
 Supercharger NO-Holmestrand,59.490174, 10.294565
 Supercharger NO-Hovden,59.561243, 7.356849
 Supercharger NO-Indre Arna,60.421749, 5.467271
 Supercharger NO-Innhavet,67.962417, 15.929685
+Supercharger NO-Jaren, 59.617769, 11.00302
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland,59.836224, 9.579221
 Supercharger NO-Larvik,59.112393, 10.108783
 Supercharger NO-Lavik,61.103869, 5.51268
 Supercharger NO-Leinstrand,63.325319, 10.305137
-Supercharger NO-Lier,59.766259, 10.257838
-Supercharger NO-Lier,59.770833, 10.262139
+Supercharger NO-Levanger, 63.734517, 11.281552
+Supercharger NO-Lier North,59.770833, 10.262139
+Supercharger NO-Lier South,59.766259, 10.257838
 Supercharger NO-Lillehammer,61.13045, 10.43491
 Supercharger NO-Lillesand,58.236817, 8.299052
 Supercharger NO-Lyngdal,58.15653, 7.10298
+Supercharger NO-Mo i Rana, 66.307374, 14.152668
 Supercharger NO-Mosjøen,65.83483634, 13.191672563
 Supercharger NO-Nes i Ådal,60.58475, 9.985092
 Supercharger NO-Norheimsund,60.372342, 6.141213
@@ -672,13 +680,19 @@ Supercharger NO-Os,60.192788, 5.4652
 Supercharger NO-Porsgrunn,59.122098, 9.707564
 Supercharger NO-Rauma,62.558258, 7.683524
 Supercharger NO-Rennebu,62.832142, 10.010141
+Supercharger NO-Ringdalskogen, 59.112402, 10.108727
 Supercharger NO-Rolvsøy,59.324292, 10.954448
+Supercharger NO-Rugtvedt, 59.035933, 9.67402
 Supercharger NO-Rygge,59.38753, 10.751039
 Supercharger NO-Røldal,59.816824, 6.752226
 Supercharger NO-Sandane,61.7780226, 6.2131884
 Supercharger NO-Setermoen,68.860147, 18.346723
+Supercharger NO-Skarnes, 60.248841, 11.743848
+Supercharger NO-Skei, 61.575358, 6.483264
 Supercharger NO-Skibotn,69.392448, 20.268423
+Supercharger NO-Skjåk, 61.88317, 8.267157
 Supercharger NO-Skulestadmo,60.658297, 6.436256
+Supercharger NO-Solli, 59.324292, 10.954448
 Supercharger NO-Stjørdal,63.466385, 10.918098
 Supercharger NO-Storjord,66.814045, 15.401738
 Supercharger NO-Sundebru,58.820783, 9.073746
@@ -686,6 +700,7 @@ Supercharger NO-Sørkjosen,69.792498, 20.93907
 Supercharger NO-Vikeså,58.632228, 6.078935
 Supercharger NO-Vinje,59.5701306, 7.992551
 Supercharger NO-Vinstra,61.591797, 9.722393
+Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog,62.520404, 6.915983
 Supercharger NO-Øyer,61.243236, 10.434457
 Supercharger PL-Ciechocinek,52.874469, 18.773758
