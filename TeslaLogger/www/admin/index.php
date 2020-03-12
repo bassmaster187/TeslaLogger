@@ -26,7 +26,7 @@ require("language.php");
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
   $( function() {
-    $( "button" ).button();
+    $("button").button();
 	GetCurrentData();
 
 	map = new L.Map('map');
@@ -64,6 +64,8 @@ require("language.php");
 			}
 		}
 		,5000);
+
+	ShowInfo();
   } );
 
 	function GetCurrentData()
@@ -240,6 +242,22 @@ require("language.php");
 		}
 	);
   }
+  
+function ShowInfo()
+{
+	/*
+	<?php
+	if (!file_exists("/etc/teslalogger/sharedata.txt") && !file_exists("/etc/teslalogger/nosharedata.txt"))
+	{?>
+		$("#InfoText").html("<?php t("TextShare"); ?>");
+		$(".HeaderT").show();
+		$("#PositiveButton").click(function(){window.location.href='settings_share.php?a=yes';});
+		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
+	<?php
+	}
+	?>
+	*/
+}
   </script>
   </head>
   <body style="padding-top: 5px; padding-left: 10px;">
@@ -253,10 +271,18 @@ require("language.php");
   <button style="width:120px;" onclick="window.location.href='settings.php';">Settings</button>
   <br />
   <br />
+
   <div id="content" style="max-width:1036px;">
+  <div id="info">
+  <table class="HeaderT">
+	  <thead><td colspan="2" class="HeaderStyle"><?php t("Info"); ?></td></thead>
+	  <tr><td colspan="2"><span id="InfoText"></span></td></tr>
+	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("Nein"); ?></button> <button id="PositiveButton"><?php t("Ja"); ?></button></td></tr>
+    </table>
+  </div>
   <div style="float:left;">
-	  <table class="b1">
-	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Fahrzeuginfo"); ?></td></thead>
+	  <table class="b1 THeader">
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
@@ -269,8 +295,8 @@ require("language.php");
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
     </table>
 
-	  <table style="float:left;">
-	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Letzter Trip"); ?></td></thead>
+	  <table style="float:left;" class="THeader">
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Letzter Trip"); ?></td></thead>
 	  <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
 	  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
 	  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> km</td></tr>
@@ -314,7 +340,6 @@ function getTeslaloggerVersion($path)
 	preg_match('/AssemblyVersion\(\"([0-9\.]+)\"/',$f, $matches);
 	return $matches[1];
 }
-
 ?>
 
   <?PHP
