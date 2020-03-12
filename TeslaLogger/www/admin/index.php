@@ -100,7 +100,18 @@ require("language.php");
 			else if (jsonData["driving"])
 			{
 				$('#car_statusLabel').text("Fahren:");
-				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
+				var str = "";
+				if (LengthUnit == "mile")
+					str = (jsonData["speed"]/ 1.609).toFixed(0) + " mph / "
+				else
+					str = jsonData["speed"] + " km/h / ";
+
+				if (PowerUnit == "kw")
+					str += (jsonData["power"] / 1.35962).toFixed(0) +"kW";
+				else
+					str += jsonData["power"]+"PS";
+
+				$('#car_status').text(str);
 
 				updateSMT(jsonData);
 			}
