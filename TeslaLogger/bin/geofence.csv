@@ -1,5 +1,21 @@
 EnBW DE-Ulm, 48.456880, 10.029673
 
+Fastned DE-Freiwalde, 51.948979, 13.7877
+Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
+Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
+Fastned DE-Herbolzheim, 48.22685, 7.75509
+Fastned DE-Hildesheim, 52.16083, 9.99676
+Fastned DE-Limburg Süd, 50.37993, 8.09248
+Fastned DE-Melle-West, 52.19466, 8.31641
+Fastned DE-Nersingen, 48.41572, 10.09919
+Fastned DE-Paderborn-Mönkeloh, 51.68364, 8.72194
+Fastned DE-Pilsting, 48.691977, 12.673389
+Fastned DE-Plech, 49.66416, 11.47072
+Fastned DE-Schmidgaden, 49.43777, 12.05351
+Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602
+Fastned DE-Wittenburg, 53.50764, 11.09686
+Fastned DE-Wittstock, 53.15744, 12.45124
+
 Ionity AT-Angath Nord, 47.519215, 12.065526
 Ionity AT-Eisentratten, 46.919943, 13.579276
 Ionity AT-Golling, 47.584781, 13.157939
@@ -331,9 +347,10 @@ Supercharger DE-Beelitz, 52.266803, 12.922467
 Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
 Supercharger DE-Bispingen, 53.104326, 9.981842
-Supercharger DE-Blankenfelde, 52.3089548, 13.444767
+Supercharger DE-Blankenfelde-Mahlow, 52.3089548, 13.444767
 Supercharger DE-Braak, 53.6178758, 10.239352
-Supercharger DE-Busdorf,54.477896, 9.544913								   
+Supercharger DE-Busdorf, 54.477896, 9.544913								   
+Supercharger DE-Brinkum, 53.028842, 8.807035
 Supercharger DE-Bruchsal, 49.13837, 8.56242
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
 Supercharger DE-Ellwangen, 48.95587, 10.18247
@@ -342,7 +359,8 @@ Supercharger DE-Erfstadt, 50.79643, 6.78005
 Supercharger DE-Geiselwind, 49.7691564, 10.470369
 Supercharger DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176
-Supercharger DE-Hamburg Hotel Lindtner, 53.460881, 9.940546
+Supercharger DE-Gützkow, 53.943943, 13.396739
+Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger DE-Herzsprung, 53.067343, 12.533212
@@ -354,15 +372,15 @@ Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger DE-Jettingen, 48.41105, 10.4403
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger DE-Kamen, 51.5701781, 7.675317
-Supercharger DE-Kappel-Grafenhausen,48.281347, 7.77755													  
+Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755													  
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger DE-Lohne, 52.65768, 8.16927
-Supercharger DE-Motten, 50.355755, 9.75453
 Supercharger DE-Lutterberg, 51.370977, 9.633306
 Supercharger DE-Malsfeld, 51.0872578, 9.485137
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
+Supercharger DE-Motten, 50.355755, 9.75453
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.20283, 11.77663
@@ -370,6 +388,7 @@ Supercharger DE-Nempitz, 51.2901549, 12.1373954
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nossen, 51.08255, 13.27406
 Supercharger DE-Oberhonnefeld, 50.56254, 7.52542
+Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
@@ -378,10 +397,11 @@ Supercharger DE-Rhüden, 51.947221, 10.140505
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Schweitenkirchen, 48.51074, 11.58214
+Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262
 Supercharger DE-Süderholz, 54.093037, 13.085923
-Supercharger DE-Uckerfelde,53.23499, 13.98606
+Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger DE-Ulm, 48.456696, 10.030064
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
@@ -391,7 +411,7 @@ Supercharger DE-Weyarn, 47.86528, 11.79075
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
 Supercharger DE-Wilnsdorf, 50.8168944, 8.085813
 Supercharger DE-Wittenburg, 53.507361, 11.096852
-Supercharger DE-Wittlich,49.97003, 6.86175
+Supercharger DE-Wittlich, 49.97003, 6.86175
 Supercharger DE-Zella-Mehlis, 50.64387, 10.68488
 Supercharger DK-Aarhus,56.178223, 10.139406
 Supercharger DK-Haverslev,56.783428, 9.69082
@@ -446,80 +466,96 @@ Supercharger FI-Pyhtää,60.489054, 26.554835
 Supercharger FI-Pyhäjärvi,63.716298, 25.920103
 Supercharger FI-Vierumäki,61.111599, 25.928814
 Supercharger LI-Schaan,47.165317, 9.507795
-Supercharger FR-Aire Reims Champagne Sud, 49.120696, 4.242712
-Supercharger FR-Aire Reims Champagne Nord, 49.119348, 4.245689
+Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
+Supercharger FR-Aire de Châteauvillain - Orges, 48.057681, 4.96061
+Supercharger FR-Aire de Châteauvillain - Val Marnay, 48.057341, 4.959604
+Supercharger FR-Aire de la Baie de Somme, 50.167321, 1.755505
+Supercharger FR-Aire de Manissieux, 45.69848, 4.977541
+Supercharger FR-Aire du Poulet de Bresse, 46.496045, 5.310426
+Supercharger FR-Aire de Saint-Priest, 45.698042, 4.975513
+Supercharger FR-Aire de Vidauban Sud, 43.413832, 6.451177
+Supercharger FR-Aire du Caylar, 43.8645878, 3.3132671
+Supercharger FR-Aire d'Urvillers, 49.787019, 3.335626
+Supercharger FR-Aire de Reims-Champagne-Sud, 49.120696, 4.242712
+Supercharger FR-Aire de Reims-Champagne-Nord, 49.119348, 4.245689
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
 Supercharger FR-Aix-en-Provence, 43.5106478, 5.4564393
 Supercharger FR-Albaret-Sainte-Marie,44.870977, 3.252918
-Supercharger FR-Amiens,49.863492, 2.27814
-Supercharger FR-Appoigny,47.85183, 3.542802
-Supercharger FR-Archamps,46.136917, 6.124306
-Supercharger FR-Barberaz,45.56085, 5.949646
+Supercharger FR-Amiens, 49.863492, 2.27814
+Supercharger FR-Appoigny, 47.85183, 3.542802
+Supercharger FR-Archamps, 46.136917, 6.124306
+Supercharger FR-Auxerre, 47.851819, 3.542894
+Supercharger FR-Barberaz, 45.56085, 5.949646
 Supercharger FR-Bayonne, 43.4938044, -1.4524967
-Supercharger FR-Beaune,47.017089, 4.836543
-Supercharger FR-Bernin,45.265676, 5.876448
-Supercharger FR-Bourges,47.049393, 2.344843
-Supercharger FR-Bretteville-sur-Odon,49.16398, -0.424802
-Supercharger FR-Bordeaux, 44.8342076, -0.6810947
-Supercharger FR-Cagnes-sur-Mer,43.666446, 7.127372
-Supercharger FR-Caudan, 47.787895, -3.33146989
-Supercharger FR-Chambéry,45.592227, 5.899842
+Supercharger FR-Beaune, 47.017089, 4.836543
+Supercharger FR-Bernin, 45.265676, 5.876448
+Supercharger FR-Besançon, 47.234539, 5.901153
+Supercharger FR-Bourges, 47.049393, 2.344843
+Supercharger FR-Buchelay, 48.990144, 1.671559
+Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
+Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger FR-Caen, 49.16398, -0.424802
+Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
+Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
+Supercharger FR-Chambéry, 45.592227, 5.899842
+Supercharger FR-Chambéry Barberaz, 45.56085, 5.949646
 Supercharger FR-Chapelle sur Erdre, 47.2827707, -1.5500076
+Supercharger FR-Charleville-Mézières, 49.736834, 4.744095
 Supercharger FR-Chasseneuil-du-Poitou, 46.650703, 0.374772
 Supercharger FR-Chemaudin et Vaux,47.234539, 5.901153
-Supercharger FR-Châteauvillain,48.057341, 4.959604
-Supercharger FR-Châteauvillain,48.057681, 4.96061
-Supercharger FR-Clermont-Ferrand,45.785937, 3.141488
-Supercharger FR-Coings,46.863058, 1.716048
-Supercharger FR-Collégien, 48.8307897, 2.6780359
-Supercharger FR-Coquelles,50.924425, 1.80414
-Supercharger FR-Coquelles,50.935031, 1.812951
-Supercharger FR-Dommartin-lès-Cuiseaux,46.496179, 5.310394
-Supercharger FR-La Chapelle St Aubin,48.041833, 0.175342
-Supercharger FR-La Chapelle-sur-Erdre,47.282708, -1.549982
-Supercharger FR-La Léchère,45.51877, 6.482522
-Supercharger FR-La Seyne-sur-Mer,43.121199, 5.85086
+Supercharger FR-Châteauroux, 46.863047, 1.716028
+Supercharger FR-Clermont-Ferrand, 45.785937, 3.141488
+Supercharger FR-Coings, 46.863058, 1.716048
+Supercharger FR-Calais, 50.924425, 1.80414
+Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger FR-Dommartin-lès-Cuiseaux, 46.496179, 5.310394
+Supercharger FR-Eurotunnel Flexiplus Lounge, 50.929973, 1.813182
+Supercharger FR-Fontainebleau, 48.3495627, 2.6067816
+Supercharger FR-Grenoble, 45.265676, 5.876448
+Supercharger FR-La Léchère-les-Bains, 45.51877, 6.482522
+Supercharger FR-Le Mans, 48.041833, 0.175342
+Supercharger FR-La Seyne-sur-Mer, 43.121199, 5.85086
 Supercharger FR-Langon, 44.5424356, -0.2539542
-Supercharger FR-Le Caylar, 43.8645878, 3.3132671
-Supercharger FR-Lille,50.583875, 3.088602
-Supercharger FR-Mâcon,46.346653, 4.849067
-Supercharger FR-Matougues, 48.991982, 4.245320
-Supercharger FR-Merignac,44.835346, -0.681374
+Supercharger FR-Lille, 50.583875, 3.088602
+Supercharger FR-Limoges, 45.86723, 1.270344
+Supercharger FR-Lorient, 47.787895, -3.33146989
+Supercharger FR-Mâcon, 46.346653, 4.849067
+Supercharger FR-Marne-la-Vallée, 48.8307897, 2.6780359
+Supercharger FR-Merignac, 44.835346, -0.681374
 Supercharger FR-Metz, 49.216414, 6.170791
+Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
+Supercharger FR-Montélimar, 44.67524367, 4.7955284
 Supercharger FR-Mougins, 43.6036681, 7.011086
-Supercharger FR-Mulhouse,47.782016, 7.388299
-Supercharger FR-Nancy,48.638215, 6.184349
+Supercharger FR-Mulhouse, 47.782016, 7.388299
+Supercharger FR-Nancy, 48.638215, 6.184349
+Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
-Supercharger FR-Nimes, 43.81655, 4.345061
+Supercharger FR-Nîmes, 43.81655, 4.345061
 Supercharger FR-Orange, 44.1121375, 4.8517996 
-Supercharger FR-Orgeval,48.925026, 1.996508
-Supercharger FR-Ostwald,48.534041, 7.702054
+Supercharger FR-Orgeval, 48.925026, 1.996508
+Supercharger FR-Ostwald, 48.534041, 7.702054
 Supercharger FR-Orleans, 47.9488696, 1.868313
-Supercharger FR-Pau,43.332257, -0.358762
+Supercharger FR-Pau, 43.332257, -0.358762
+Supercharger FR-Poitiers, 46.670356, 0.362651
 Supercharger FR-Rennes, 48.082064, -1.684180
-Supercharger FR-Rochecorbon,47.407325, 0.744827
-Supercharger FR-Rouvignies,50.336704, 3.455931
+Supercharger FR-Rouen, 49.388964, 1.059818
+Supercharger FR-Rouvignies, 50.336704, 3.455931
 Supercharger FR-Rungis, 48.7544317, 2.3510298
-Supercharger FR-Sailly-Flibeaucourt,50.167321, 1.755505
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
-Supercharger FR-Saint-Georges-de-Gréhaigne,48.568171, -1.543283
-Supercharger FR-Saint-Parres-aux-Tertres,48.293229, 4.130685
-Supercharger FR-Saint-Priest,45.698042, 4.975513
-Supercharger FR-Saint-Priest,45.69848, 4.977541
-Supercharger FR-Saint-Étienne-du-Rouvray,49.388964, 1.059818
 Supercharger FR-Saintes, 45.7500261, -0.6616366
-Supercharger FR-Sancé,46.346553, 4.850173
-Supercharger FR-Senlis,49.208728, 2.6057883
-Supercharger FR-Sisteron,44.226199, 5.913554
+Supercharger FR-Sallanches, 45.951545, 6.62879
+Supercharger FR-Sancé, 46.346553, 4.850173
+Supercharger FR-Senlis, 49.208728, 2.6057883
+Supercharger FR-Sisteron, 44.226199, 5.913554
 Supercharger FR-Strasbourg, 48.53407, 7.70201
 Supercharger FR-Thiais, 48.7543643, 2.3730657
+Supercharger FR-Toulon, 43.121199, 5.85086
 Supercharger FR-Toulouse, 43.769238, 1.361623
-Supercharger FR-Troyes, 47.851819, 3.542894
-Supercharger FR-Urvillers,49.787019, 3.335626
-Supercharger FR-Ury,48.3495627, 2.6067816
-Supercharger FR-Ussac,45.16724, 1.483119
-Supercharger FR-Val-de-Meuse,47.99147, 5.51296
+Supercharger FR-Tours, 47.407325, 0.744827
+Supercharger FR-Troyes - Saint-Parres-aux-Tertres, 48.293229, 4.130685
+Supercharger FR-Val-de-Meuse, 47.99147, 5.51296
 Supercharger FR-Valence, 44.91894, 4.878101
+Supercharger FR-Valenciennes, 50.336704, 3.455931
 Supercharger FR-Vienne, 45.58748, 4.78751
 Supercharger GB-Abington,55.507944, -3.694786
 Supercharger GB-Aviemore,57.189774, -3.836206
@@ -580,48 +616,56 @@ Supercharger HR-Split, 43.58737, 16.57636
 Supercharger HR-Vrgorac, 43.20407, 17.37387
 Supercharger HR-Zadar, 44.11418, 15.40711
 Supercharger HR-Zagreb, 45.76705, 16.23365
-Supercharger HU-Debrecen,47.541266, 21.583575
-Supercharger HU-Györ,47.633274, 17.660977
-Supercharger HU-Fót,47.581808,19.162384
-Supercharger HU-Sormás,46.460543, 16.906756
-Supercharger HU-Szeged,46.274868,20.1024638
-Supercharger HU-Törökbálint,47.439444, 18.889835
-Supercharger IE-Ballacolla,52.86704, -7.481818
-Supercharger IE-Birdhill,52.757747, -8.40932
-Supercharger IE-Castlebellingham Southbound,53.924106, -6.411373
-Supercharger IE-Castlebellingham Northbound,53.932462, -6.417717													 
-Supercharger IT-Affi,45.551296, 10.787143
-Supercharger IT-Arezzo,43.437399, 11.777607
+Supercharger HU-Debrecen, 47.541266, 21.583575
+Supercharger HU-Györ, 47.633274, 17.660977
+Supercharger HU-Fót, 47.581808,19.162384
+Supercharger HU-Sormás, 46.460543, 16.906756
+Supercharger HU-Szeged, 46.274868,20.1024638
+Supercharger HU-Törökbálint, 47.439444, 18.889835
+Supercharger IE-Ballacolla, 52.86704, -7.481818
+Supercharger IE-Birdhill, 52.757747, -8.40932
+Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
+Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717													 
+Supercharger IT-Affi, 45.551296, 10.787143
+Supercharger IT-Aosta, 45.73745, 7.371416
+Supercharger IT-Arezzo, 43.437399, 11.777607
+Supercharger IT-Borca di Cadore, 46.435592, 12.222879
 Supercharger IT-Brennero, 46.99540, 11.50210
-Supercharger IT-Brescia,45.53224, 10.164969
-Supercharger IT-Campogalliano,44.685971, 10.851913
-Supercharger IT-Carpiano,45.34834, 9.282206
-Supercharger IT-Cavaglià,45.38967, 8.128911
-Supercharger IT-Ceprano,41.544226, 13.511958
-Supercharger IT-Cerignola,41.306389, 15.899738											
+Supercharger IT-Brescia, 45.53224, 10.164969
+Supercharger IT-Campogalliano, 44.685971, 10.851913
+Supercharger IT-Cavaglià, 45.38967, 8.128911
+Supercharger IT-Ceprano, 41.544226, 13.511958
+Supercharger IT-Cerignola, 41.306389, 15.899738											
 Supercharger IT-Dorno, 45.14719, 8.99119
-Supercharger IT-Fano,43.802874, 13.015345
-Supercharger IT-Forcola,46.165099, 9.675995
-Supercharger IT-Forlì V3,44.242877, 12.081828
-Supercharger IT-Forte dei Marmi,43.956416, 10.194539
+Supercharger IT-Fano, 43.802874, 13.015345
+Supercharger IT-Firenze, 43.810258, 11.17798
+Supercharger IT-Forcola, 46.165099, 9.675995
+Supercharger IT-Forlì V3, 44.242877, 12.081828
+Supercharger IT-Forte dei Marmi, 43.956416, 10.194539
 Supercharger IT-Imperia, 43.89266, 8.038256
-Supercharger IT-Magliano,42.372085, 12.471703
-Supercharger IT-Mercato San Severino,40.771952, 14.746048
-Supercharger IT-Modena,44.574119, 10.981157
+Supercharger IT-Magliano Sabina, 42.372085, 12.471703
+Supercharger IT-Melegnano, 45.34834, 9.282206
+Supercharger IT-Mercato San Severino, 40.771952, 14.746048
+Supercharger IT-Modena, 44.574119, 10.981157
 Supercharger IT-Mogliano Veneto, 45.58469, 12.28721
-Supercharger IT-Moncalieri,44.973333, 7.730113
-Supercharger IT-Morano Calabro,39.875989, 16.065094
-Supercharger IT-Occhiobello,44.918787, 11.594051
+Supercharger IT-Moncalieri, 44.973333, 7.730113
+Supercharger IT-Morano Calabro, 39.875989, 16.065094
+Supercharger IT-Occhiobello, 44.918787, 11.594051
 Supercharger IT-Palmanova, 45.88421, 13.34502
-Supercharger IT-Palmi,38.366929, 15.869555
-Supercharger IT-Piacenza,45.039461, 9.753871
-Supercharger IT-Pollein,45.73745, 7.371416
-Supercharger IT-San Giovanni Teatino,42.399194, 14.16396
+Supercharger IT-Palmi, 38.366929, 15.869555
+Supercharger IT-Piacenza, 45.039461, 9.753871
+Supercharger IT-Pollein, 45.73745, 7.371416
+Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
+Supercharger IT-Sondrio, 46.164535, 9.677329
+Supercharger IT-Tarquinia, 42.183306, 11.788161
 Supercharger IT-Trento, 46.11166, 11.09172
 Supercharger IT-Varazze, 44.35161, 8.56544
-Supercharger IT-Verona,45.412326, 10.970212
+Supercharger IT-Verona, 45.412326, 10.970212
+Supercharger IT-Vicenza, 45.50845, 11.626019
 Supercharger LI-Schaan, 47.16519, 9.50775
 Supercharger LU-Mënsbech, 49.6409, 6.27076
+Supercharger NL-Apeldoorn, 52.177652, 5.912803
+Supercharger NL-Assen, 52.9929,6.52447
 Supercharger NL-Badhoevedorp,52.328927, 4.78492
 Supercharger NL-Breda, 51.577493, 4.729968
 Supercharger NL-Breukelen, 52.1672253, 4.988661
@@ -638,6 +682,7 @@ Supercharger NL-Leiderdorp,52.1601396, 4.5491453
 Supercharger NL-Naarden,52.30858, 5.141127
 Supercharger NL-Oosterhout,51.626423, 4.869517
 Supercharger NL-Rosmalen,51.720551, 5.333622
+Supercharger NL-s-Hertogenbosch, 51.720357, 5.333276
 Supercharger NL-Tilburg,51.606331, 5.005621
 Supercharger NL-Ugchelen,52.177996, 5.912627
 Supercharger NL-Urmond, 50.9894104, 5.7815227
@@ -754,7 +799,7 @@ Supercharger SE-Nørre Alslev,54.899885,11.89693
 Supercharger SE-Norrköping,58.622734,16.153979
 Supercharger SE-Puoltikasvaara,67.44096 ,21.11529
 Supercharger SE-Skellefteå,64.76235, 21.002864
-Supercharger SE-Slagelse,https://maps.google.com/maps?daddr=55.388,11.3622
+Supercharger SE-Slagelse,55.388,11.3622
 Supercharger SE-Sollentuna,59.496093, 17.924441
 Supercharger SE-Stockholm,59.5006239, 17.926818000000026
 Supercharger SE-Storlien,63.310045,12.109286
