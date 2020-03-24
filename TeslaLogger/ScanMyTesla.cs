@@ -133,7 +133,15 @@ namespace TeslaLogger
                         case "7": DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value); break;
                         case "28": DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value); break;
                         case "29": DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value); break;
-                        case "442": DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value); break;
+                        case "442":
+                            if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
+                            {
+                                DBHelper.currentJSON.SMTSpeed = 0;
+                                Logfile.Log("SMT Speed: Signal not Available");
+                            }
+                            else
+                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value); 
+                            break;
                         case "43": DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value); break;
                     }
 

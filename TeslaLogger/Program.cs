@@ -355,7 +355,7 @@ namespace TeslaLogger
                                                         for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                                         {
                                                             TimeSpan tsSMT = DateTime.Now - DBHelper.currentJSON.lastScanMyTeslaReceived;
-                                                            if (DBHelper.currentJSON.SMTSpeed > 5 && tsSMT.TotalMinutes < 5)
+                                                            if (DBHelper.currentJSON.SMTSpeed > 5 && DBHelper.currentJSON.SMTSpeed < 260 && tsSMT.TotalMinutes < 5)
                                                             {
                                                                 Logfile.Log("ScanMyTesla prevents car to get sleep. Speed: " + DBHelper.currentJSON.SMTSpeed);
                                                                 lastCarUsed = DateTime.Now;
