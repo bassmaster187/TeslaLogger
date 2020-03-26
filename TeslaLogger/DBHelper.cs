@@ -1379,6 +1379,9 @@ namespace TeslaLogger
                     var r = cmd.ExecuteReader();
                     if (r.Read())
                     {
+                        if (r[0] == DBNull.Value)
+                            return 0;
+
                         int count = Convert.ToInt32(r[0]);
                         return count;
                     }
