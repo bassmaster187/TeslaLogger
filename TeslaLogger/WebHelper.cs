@@ -666,6 +666,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.201", "S P90");
                     return;
                 }
+                else if (carSettings.trim_badging == "p90d")
+                {
+                    WriteCarSettings("0.202", "S P90D");
+                    return;
+                }
                 else
                 {
                     WriteCarSettings("0.200", "S ???");
