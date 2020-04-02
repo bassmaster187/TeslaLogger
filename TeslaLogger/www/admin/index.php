@@ -256,7 +256,7 @@ require("language.php");
   
 function ShowInfo()
 {
-	/*
+	
 	<?php
 	if (!file_exists("/etc/teslalogger/sharedata.txt") && !file_exists("/etc/teslalogger/nosharedata.txt"))
 	{?>
@@ -267,7 +267,7 @@ function ShowInfo()
 	<?php
 	}
 	?>
-	*/
+	
 }
   </script>
   </head>

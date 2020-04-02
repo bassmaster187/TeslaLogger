@@ -183,3 +183,8 @@ Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
 Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
 Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
 Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
+
+Ja=Yes
+Nein=No
+
+TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
