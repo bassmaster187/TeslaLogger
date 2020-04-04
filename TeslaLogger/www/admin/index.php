@@ -136,7 +136,7 @@ require("language.php");
 			else if (jsonData["sleeping"])
 			{
 				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("Schlafen");
+				$('#car_status').text("<?php t("Schlafen"); ?>");
 
 				hideSMT();
 			}
