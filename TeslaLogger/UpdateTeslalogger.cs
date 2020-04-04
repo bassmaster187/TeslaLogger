@@ -11,10 +11,16 @@ namespace TeslaLogger
     class UpdateTeslalogger
     {
         static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        static bool shareDataOnStartup = false;
+        static System.Threading.Timer timer;
+
+
         public static void Start(WebHelper wh)
         {
             try
             {
+                shareDataOnStartup = Tools.IsShareData();
+
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
@@ -125,7 +131,7 @@ namespace TeslaLogger
                     UpdateDBView(wh);
                 }
 
-                System.Threading.Timer t = new System.Threading.Timer(FileChecker, null, 10000, 5000);
+                timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
 
                 chmod("/var/www/html/admin/wallpapers", 777);
 
@@ -237,6 +243,10 @@ namespace TeslaLogger
         {
             try
             {
+                // System.Diagnostics.Debug.WriteLine("FileChecker");
+
+                WebHelper wh = state as WebHelper;
+
                 if (File.Exists(cmd_restart_path))
                 {
                     string content = File.ReadAllText(cmd_restart_path);
@@ -259,6 +269,19 @@ namespace TeslaLogger
                         Logfile.Log("Restart Request!");
 
                         Environment.Exit(0);
+                    }
+                }
+
+                if (!shareDataOnStartup && Tools.IsShareData())
+                {
+                    if (wh != null)
+                    {
+                        shareDataOnStartup = true;
+                        Logfile.Log("ShareData turned on!");
+
+                        var sd = new ShareData(wh.TaskerHash);
+                        sd.SendAllChargingData();
+                        sd.SendDegradationData();
                     }
                 }
 

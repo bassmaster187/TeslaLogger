@@ -27,5 +27,10 @@ namespace UnitTestsTeslalogger
 
             
         }
+
+        public void TestCars()
+        {
+
+        }
     }
 }

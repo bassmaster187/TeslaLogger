@@ -262,6 +262,14 @@
         {
             try
             {
+                if (IsDocker())
+                {
+                    if (File.Exists("/tmp/sharedata.txt"))
+                        return true;
+                    else
+                        return false;
+                }
+
                 string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
                 if (File.Exists(filepath))
                     return true;
