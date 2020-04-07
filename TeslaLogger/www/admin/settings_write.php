@@ -1,4 +1,6 @@
 <?PHP
+require("tools.php");
+
 $SleepTimeSpanStart = $_POST["SleepTimeSpanStart"];
 echo($SleepTimeSpanStart);
 
@@ -29,6 +31,12 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
+
+if ($_POST["ShareData"] == "true")
+    setShareData(true);
+else
+    setShareData(false);
+
 
 // chmod('/etc/teslalogger/settings.json', 666);
 

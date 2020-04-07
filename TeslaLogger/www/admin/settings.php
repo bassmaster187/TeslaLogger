@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <?php
 require("language.php");
+require("tools.php");
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -30,6 +31,19 @@ require("language.php");
 		});
 		$('.timepicker').width("100px");
 		$(".timepicker").show();
+		$("#ShareDataHelp").click(function() {
+			$( "#dialog-confirm" ).dialog({
+				resizable: false,
+				width: "auto",
+				modal: true,
+				buttons: {
+					"OK": function() {
+					$( this ).dialog( "close" );
+					}
+				}
+				});
+		});
+
 		<?PHP
 		
 		$content = FALSE;
@@ -89,7 +103,12 @@ require("language.php");
 				
 			if (isset($URL_Admin))
 				echo ("$('#URL_Admin').val('$URL_Admin');\r\n");
-			
+
+			if (isShareData())
+				echo ("$('#checkboxSharedata')[0].checked = true;\r\n");
+			else
+				echo ("$('#checkboxSharedata')[0].checked = false;\r\n");
+
 		}
 		?>
 	});
@@ -107,6 +126,7 @@ require("language.php");
 		Language: $("input:radio[name ='Language']:checked").val(),
 		URL_Admin: $("#URL_Admin").val(),
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
+		ShareData: $('#checkboxSharedata').is(':checked'),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -127,6 +147,7 @@ require("language.php");
 <tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 <tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
 <tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 <tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
@@ -173,4 +194,8 @@ if (strlen($taskertoken) > 7)
 <tr><td></td><td>&nbsp;</td></tr>
 <tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
 </table>
+</div>
+
+<div id="dialog-confirm" title="Info" style="display:none;">
+<?php t("TextShare"); ?>
 </div>
