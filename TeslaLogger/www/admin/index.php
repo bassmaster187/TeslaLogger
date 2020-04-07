@@ -258,7 +258,11 @@ function ShowInfo()
 {
 	
 	<?php
-	if (!file_exists("/etc/teslalogger/sharedata.txt") && !file_exists("/etc/teslalogger/nosharedata.txt"))
+	if (!file_exists("/etc/teslalogger/sharedata.txt") && 
+	!file_exists("/etc/teslalogger/nosharedata.txt") &&
+	!file_exists("/tmp/sharedata.txt") && 
+	!file_exists("/tmp/nosharedata.txt")
+	)
 	{?>
 		$("#InfoText").html("<?php t("TextShare"); ?>");
 		$(".HeaderT").show();
