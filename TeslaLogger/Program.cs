@@ -65,7 +65,18 @@ namespace TeslaLogger
                             System.IO.File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
                             UpdateTeslalogger.chmod("/etc/teslalogger/settings.json", 666);
                         }
+                        
+                        if (!System.IO.Directory.Exists("/etc/teslalogger/backup"))
+                        {
+                            System.IO.Directory.CreateDirectory("/etc/teslalogger/backup");
+                            UpdateTeslalogger.chmod("/etc/teslalogger/backup", 777);
+                        }
 
+                        if (!System.IO.Directory.Exists("/etc/teslalogger/Exception"))
+                        {
+                            System.IO.Directory.CreateDirectory("/etc/teslalogger/Exception");
+                            UpdateTeslalogger.chmod("/etc/teslalogger/Exception", 777);
+                        }
                     }
                     else
                         Logfile.Log("Docker: NO!");
