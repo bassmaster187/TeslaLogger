@@ -654,7 +654,8 @@ namespace TeslaLogger
 
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
 
-                    exec_mono("service", "grafana-server restart");
+                    if (!Tools.IsDocker())
+                        exec_mono("service", "grafana-server restart");
                 }
             }
             catch (Exception ex)
