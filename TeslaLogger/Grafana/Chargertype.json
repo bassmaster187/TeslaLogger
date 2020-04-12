@@ -15,11 +15,11 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 41,
   "links": [],
   "panels": [
     {
       "columns": [],
+      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 21,
@@ -141,5 +141,5 @@
   "timezone": "",
   "title": "Chargertype",
   "uid": "AZFoEdmRk",
-  "version": 3
+  "version": 8
 }
