@@ -447,6 +447,7 @@ namespace TeslaLogger
 
                 try
                 {
+                    /* 
                     option_codes = r4["option_codes"].ToString();
                     string[] oc = option_codes.Split(',');
 
@@ -473,7 +474,11 @@ namespace TeslaLogger
 
                     carSettings.Performance = oc.Contains("PBT85") || oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
 
-                    if (state == "unknown")
+                    */
+
+                    if (state == "asleep")
+                        return state;
+                    else if (state == "unknown")
                     {
                         Logfile.Log("unknown state " + unknownStateCounter);
 
@@ -503,19 +508,21 @@ namespace TeslaLogger
 
                     dynamic jBadgeResult = jBadge["response"];
 
-                    if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
-                        carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
+                    if (jBadgeResult != null)
+                    {
+                        if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
+                            carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
 
-                    if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
-                        carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+                        if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
+                            carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
 
-                    if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
-                        carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
-                    else
-                        carSettings.trim_badging = "";
+                        if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
+                            carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
+                        else
+                            carSettings.trim_badging = "";
 
-                    UpdateEfficiency();
-
+                        UpdateEfficiency();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -595,7 +602,7 @@ namespace TeslaLogger
                 }
                 else if (carSettings.trim_badging == "p100d")
                 {
-                    WriteCarSettings("0.200", "S 100D");
+                    WriteCarSettings("0.200", "S P100D");
                     return;
                 }
                 else if (carSettings.trim_badging == "")
@@ -895,6 +902,8 @@ namespace TeslaLogger
         {
             if (carSettings.Name != car || carSettings.Wh_TR != eff)
             {
+                Logfile.Log("WriteCarSettings " + car + " eff: " + eff);
+
                 carSettings.Name = car;
                 carSettings.Wh_TR = eff;
                 carSettings.WriteSettings();
@@ -1890,7 +1899,7 @@ FROM
                 lastTaskerWakeupfile = DateTime.Now;
 
                 String name = carSettings.Name;
-                if (carSettings.Raven)
+                if (carSettings.Raven && !name.Contains("Raven"))
                     name += " Raven";
 
                 HttpClient client = new HttpClient();
