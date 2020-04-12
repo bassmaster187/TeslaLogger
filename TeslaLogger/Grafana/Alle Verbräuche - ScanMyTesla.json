@@ -24,6 +24,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "teslalogger",
       "decimals": 1,
       "fill": 0,
       "fillGradient": 0,
@@ -495,5 +496,5 @@
   "timezone": "",
   "title": "Alle Verbräuche - ScanMyTesla",
   "uid": "eMEMotRgk",
-  "version": 14
+  "version": 15
 }
