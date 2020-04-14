@@ -118,7 +118,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(20000);
                     return;
                 }
-                if (temp.Contains("502 Bad Gateway"))
+                if (inhalt.Contains("502 Bad Gateway"))
                 {
                     Logfile.Log(prefix + "Mothership 502 Bad Gateway");
                     System.Threading.Thread.Sleep(30000);
