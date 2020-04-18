@@ -4,7 +4,7 @@
 
 The dashboard can be accessed by: http://raspberry/admin/dashboard.php 
 
-Place your favorite image in \\RASPBERRY\teslalogger-web\admin\wallpapers
+Place your favorite image in \\RASPBERRY\teslalogger-web\admin\wallpapers for docker installation the images goes to: /TeslaLogger/www/admin/wallpapers
 
 # Customizing
 You can customize it by creating an own CSS file under \\RASPBERRY\teslalogger-web\admin\my_dashboard.css
