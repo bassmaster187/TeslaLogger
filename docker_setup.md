@@ -52,7 +52,7 @@ The config file could look like this:
 6. fire up docker containers. Make sure, you got the latest docker & docker-compose version. Many repositories comes with very old versions!
 ```
 docker-compose build
-docker-compose up
+docker-compose up -d
 ```
 
 after a minute or two, everything should be ready.
@@ -73,5 +73,5 @@ git fetch
 git reset --hard origin/master
 git checkout origin/master -- docker-compose.yml
 docker-compose build
-docker-compose up
+docker-compose up -d
 ```
