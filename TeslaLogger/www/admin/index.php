@@ -148,12 +148,39 @@ require("language.php");
 				hideSMT();
 			}
 
+			if (LengthUnit == "mile")
+			{
+				$("#max_speed").text((jsonData["trip_max_speed"]/ 1.609).toFixed(0));
+				$("#lt_kmh").text("mph");
+
+				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"]* 1.609*10)/10);
+				$("#lt_whkm").text("wh/mi");
+
+				$("#trip_distance").text(Math.round(jsonData["trip_distance"]/ 1.609 *10)/10);
+				$("#lt_trip_distance_km").text("mi");
+			}
+			else
+			{
+				$("#max_speed").text(jsonData["trip_max_speed"]);
+				
+				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
+				$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
+			}
+
+			if (PowerUnit == "kw")
+			{
+				$("#max_power").text((jsonData["trip_max_power"] / 1.35962).toFixed(0)); 				
+				$("#lt_trip_PS").text("<?php t("kw"); ?>");
+			}
+			else
+			{
+				$("#max_power").text(jsonData["trip_max_power"]);
+				$("#lt_trip_PS").text("<?php t("PS"); ?>");
+			}
+
+
 			$("#trip_start").text(jsonData["trip_start"]);
-			$("#max_speed").text(jsonData["trip_max_speed"]);
-			$("#max_power").text(jsonData["trip_max_power"]);
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
-			$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
-			$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
 			
 			var ts = new Date(Date.parse(jsonData["ts"]));
 			$("#last_update").text(ts.toLocaleString(loc));
@@ -314,10 +341,10 @@ function ShowInfo()
 	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Letzter Trip"); ?></td></thead>
 	  <tr><td width="130px"><b>Start:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
 	  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
-	  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> km</td></tr>
+	  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km">km</span></td></tr>
 	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
-	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> Wh/km</td></tr>
-	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> km/h / <span id="max_power">---</span> PS</td></tr>
+	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm">Wh/km</span></td></tr>
+	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh">km/h</span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
 	  </table>
   </div>
 
