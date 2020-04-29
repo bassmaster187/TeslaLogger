@@ -130,6 +130,24 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     return;
                 }
+                else if (temp.Contains("No such host is known"))
+                {
+                    Logfile.Log(prefix + "No such host is known");
+                    System.Threading.Thread.Sleep(50000);
+                    return;
+                }
+                else if (temp.Contains("Connection timed out"))
+                {
+                    Logfile.Log(prefix + "Connection timed out");
+                    System.Threading.Thread.Sleep(50000);
+                    return;
+                }
+                else if (temp.Contains("We're sorry, but something went wrong (500)"))
+                {
+                    Logfile.Log(prefix + "HTTP Error 500");
+                    System.Threading.Thread.Sleep(50000);
+                    return;
+                }
                 else
                 {
 
