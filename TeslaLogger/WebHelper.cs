@@ -36,6 +36,7 @@ namespace TeslaLogger
         DateTime elevation_time = DateTime.Now;
         public DateTime lastTokenRefresh = DateTime.Now;
         public DateTime lastIsDriveTimestamp = DateTime.Now;
+        public DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
 
         static int MapQuestCount = 0;
         static int NominatimCount = 0;
@@ -502,26 +503,32 @@ namespace TeslaLogger
                         unknownStateCounter = 0;
                     }
 
-                    string badge = GetCommand("vehicle_config").Result;
+                    TimeSpan ts = DateTime.Now - lastUpdateEfficiency;
 
-                    dynamic jBadge = new JavaScriptSerializer().DeserializeObject(badge);
-
-                    dynamic jBadgeResult = jBadge["response"];
-
-                    if (jBadgeResult != null)
+                    if (ts.TotalMinutes > 60)
                     {
-                        if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
-                            carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
+                        string badge = GetCommand("vehicle_config").Result;
 
-                        if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
-                            carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(badge);
 
-                        if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
-                            carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
-                        else
-                            carSettings.trim_badging = "";
+                        dynamic jBadgeResult = jBadge["response"];
 
-                        UpdateEfficiency();
+                        if (jBadgeResult != null)
+                        {
+                            if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
+                                carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
+
+                            if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
+                                carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+
+                            if (Tools.IsPropertyExist(jBadgeResult, "trim_badging"))
+                                carSettings.trim_badging = jBadgeResult["trim_badging"].ToString().ToLower().Trim();
+                            else
+                                carSettings.trim_badging = "";
+
+                            UpdateEfficiency();
+                            lastUpdateEfficiency = DateTime.Now;
+                        }
                     }
                 }
                 catch (Exception ex)
