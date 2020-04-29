@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Caching;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1637,6 +1638,11 @@ FROM
 
         async Task<double?> GetOutsideTempAsync()
         {
+            string cacheKey = "GetOutsideTempAsync";
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
+            if (cacheValue != null)
+                return (double)cacheValue;
+
             string resultContent = null;
             try
             {
@@ -1700,6 +1706,7 @@ FROM
                     System.Threading.Thread.Sleep(5000);
                 }
 
+                MemoryCache.Default.Add(cacheKey, (double)outside_temp, DateTime.Now.AddMinutes(1));
                 return (double)outside_temp;
             }
             catch (Exception ex)
