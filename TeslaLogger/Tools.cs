@@ -12,6 +12,10 @@
 
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
         public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
+        
+        static int _startSleepingHour = -1;
+        static int _startSleepingMinutes = -1;
+        static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
         public static void SetThread_enUS()
         {
@@ -106,6 +110,14 @@
 
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
         {
+            TimeSpan ts = DateTime.UtcNow - lastSleepingHourMinutsUpdated;
+            if (ts.TotalMinutes < 5)
+            {
+                startSleepingHour = _startSleepingHour;
+                startSleepingMinutes = _startSleepingMinutes;
+                return;
+            }
+
             startSleepingHour = -1;
             startSleepingMinutes = -1;
 
@@ -114,7 +126,10 @@
                 var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
+                {
+                    lastSleepingHourMinutsUpdated = DateTime.UtcNow;
                     return;
+                }
 
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
@@ -133,6 +148,11 @@
                         }
                     }
                 }
+                
+                _startSleepingHour = startSleepingHour;
+                _startSleepingMinutes = startSleepingMinutes;
+
+                lastSleepingHourMinutsUpdated = DateTime.UtcNow;
             }
             catch (Exception ex)
             {
