@@ -170,7 +170,7 @@ require("language.php");
 			if (PowerUnit == "kw")
 			{
 				$("#max_power").text((jsonData["trip_max_power"] / 1.35962).toFixed(0)); 				
-				$("#lt_trip_PS").text("<?php t("kw"); ?>");
+				$("#lt_trip_PS").text("<?php t("kW"); ?>");
 			}
 			else
 			{
