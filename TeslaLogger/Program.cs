@@ -305,7 +305,7 @@ namespace TeslaLogger
                                         Task.Run(() => wh.DeleteWakeupFile());
                                         continue;
                                     }
-                                    else if (wh.isCharging())
+                                    else if (wh.isCharging(true))
                                     {
                                         lastCarUsed = DateTime.Now;
                                         Logfile.Log("Charging");
