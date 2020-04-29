@@ -5,6 +5,7 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -1315,6 +1316,11 @@ namespace TeslaLogger
 
         internal static int GetScanMyTeslaSignalsLastWeek()
         {
+            string cacheKey = "GetScanMyTeslaSignalsLastWeek";
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
+            if (cacheValue != null)
+                return (int)cacheValue;
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1325,6 +1331,8 @@ namespace TeslaLogger
                     if (r.Read())
                     {
                         int count = Convert.ToInt32(r[0]);
+
+                        MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(4));
                         return count;
                     }
                 }
@@ -1339,6 +1347,11 @@ namespace TeslaLogger
 
         internal static int GetScanMyTeslaPacketsLastWeek()
         {
+            string cacheKey = "GetScanMyTeslaPacketsLastWeek";
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
+            if (cacheValue != null)
+                return (int)cacheValue;
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1349,6 +1362,8 @@ namespace TeslaLogger
                     if (r.Read())
                     {
                         int count = Convert.ToInt32(r[0]);
+
+                        MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(4));
                         return count;
                     }
                 }
@@ -1363,6 +1378,12 @@ namespace TeslaLogger
         
         public static int GetAvgMaxRage()
         {
+
+            string cacheKey = "GetAvgMaxRage";
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
+            if (cacheValue != null)
+                return (int)cacheValue;
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1380,9 +1401,13 @@ namespace TeslaLogger
                     if (r.Read())
                     {
                         if (r[0] == DBNull.Value)
+                        {
+                            MemoryCache.Default.Add(cacheKey, 0, DateTime.Now.AddMinutes(5));
                             return 0;
+                        }
 
                         int count = Convert.ToInt32(r[0]);
+                        MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(1));
                         return count;
                     }
                 }

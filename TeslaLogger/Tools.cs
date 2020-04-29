@@ -5,6 +5,7 @@
     using System.Dynamic;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.Caching;
     using System.Web.Script.Serialization;
 
     class Tools
@@ -15,6 +16,13 @@
         
         static int _startSleepingHour = -1;
         static int _startSleepingMinutes = -1;
+        static string _power = "hp";
+        static string _temperature = "celsius";
+        static string _length = "km";
+        static string _language = "de";
+        static string _URL_Admin = "";
+        static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
+
         static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
         public static void SetThread_enUS()
@@ -188,8 +196,21 @@
             return false;
         }
 
+
+
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin)
         {
+            TimeSpan ts = DateTime.UtcNow - lastGrafanaSettings;
+            if (ts.TotalMinutes < 10)
+            {
+                power = _power;
+                temperature =_temperature;
+                length =_length;
+                language =_language;
+                URL_Admin =_URL_Admin;
+                return;
+            }
+
             power = "hp";
             temperature = "celsius";
             length = "km";
@@ -201,7 +222,10 @@
                 var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
+                {
+                    lastGrafanaSettings = DateTime.UtcNow;
                     return;
+                }
 
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
@@ -223,6 +247,14 @@
                     if (j["URL_Admin"].ToString().Length > 0)
                         URL_Admin = j["URL_Admin"];
                 }
+
+                _power = power;
+                _temperature = temperature;
+                _length = length;
+                _language = language;
+                _URL_Admin = URL_Admin;
+
+                lastGrafanaSettings = DateTime.UtcNow;
             }
             catch (Exception ex)
             {
