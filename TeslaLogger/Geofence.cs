@@ -31,6 +31,7 @@
         public Geofence()
         {
             Init();
+            
             if (fsw == null)
             {
                 fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
@@ -76,6 +77,8 @@
         {
             try
             {
+                Logfile.Log($"FileSystemWatcher");
+
                 fsw.EnableRaisingEvents = false;
                 
                 DateTime dt = System.IO.File.GetLastWriteTime(e.FullPath);
