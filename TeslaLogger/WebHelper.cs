@@ -305,9 +305,10 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (resultContent == null)
+                if (resultContent == null || resultContent == "NULL")
                 {
                     Logfile.Log("isCharging = NULL");
+                    System.Threading.Thread.Sleep(10000);
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                     Logfile.ExceptionWriter(ex, resultContent);
@@ -1003,8 +1004,11 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                if (resultContent == null)
-                    Logfile.Log("IsDriving: ResultContent=NULL!");
+                if (resultContent == null || resultContent == "NULL")
+                {
+                    Logfile.Log("IsDriving = NULL!");
+                    System.Threading.Thread.Sleep(10000);
+                }
                 else
                     Logfile.ExceptionWriter(ex, resultContent);
 
