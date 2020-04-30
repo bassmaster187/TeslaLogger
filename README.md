@@ -6,7 +6,7 @@ If you want to purchase a ready to go Raspberry PI 3B+ with TeslaLogger installe
 https://www.e-mobility-driving-solutions.com/produkt/raspi-teslalogger/?lang=en
 
 Or a Teslalogger Image for a Raspberry PI 3B+: 
-https://e-mobility-driving-solutions.com/produkt/teslalogger-image-fuer-den-raspberry-pi3b-3b/
+https://e-mobility-driving-solutions.com/produkt/teslalogger-image/?lang=en
 
 You can also run it in a Docker:
 [Docker Setup](docker_setup.md)
