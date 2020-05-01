@@ -140,7 +140,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Monatsmittel [kWh]\", outside_temp_avg as \"Außentemperatur Monatsmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 0 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Monatsmittel [kWh]\", outside_temp_avg as \"Außentemperatur Monatsmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
           "refId": "B",
           "select": [
             [
@@ -168,7 +168,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Tagesmittel [kWh]\", outside_temp_avg as \"Außentemperatur Tagesmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 0 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Tagesmittel [kWh]\", outside_temp_avg as \"Außentemperatur Tagesmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
           "refId": "C",
           "select": [
             [
