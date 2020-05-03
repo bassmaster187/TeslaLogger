@@ -1069,7 +1069,7 @@ namespace TeslaLogger
                 {
                         int maxChargeId = Convert.ToInt32(dr[0]);
                                 if (maxChargeId <= 1)
-                                 maxCHargeId = 3522;
+                                 maxChargeId = 3522;
 
                         return maxChargeId;
                 }
