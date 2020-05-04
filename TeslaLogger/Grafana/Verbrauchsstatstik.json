@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:11",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -14,7 +13,6 @@
         "type": "dashboard"
       },
       {
-        "$$hashKey": "object:12",
         "datasource": "teslalogger",
         "enable": true,
         "hide": false,
@@ -76,20 +74,33 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:87",
           "alias": "km Stand",
           "yaxis": 2
         },
         {
-          "$$hashKey": "object:88",
-          "alias": "Avg Consumption (Monatsmittel)",
+          "alias": "Außentemperatur Monatsmittel [°C]",
           "color": "#5794F2",
+          "fill": 1,
           "yaxis": 1
         },
         {
-          "$$hashKey": "object:89",
-          "alias": "Avg Consumption (Tagesmittel)",
+          "alias": "Verbrauch Monatsmittel [kWh]",
+          "color": "#FFCB7D",
           "yaxis": 1
+        },
+        {
+          "alias": "Außentemperatur Tagesmittel [°C]",
+          "color": "#3274D9",
+          "yaxis": 1
+        },
+        {
+          "alias": "Verbrauch Tagesmittel [kWh]",
+          "color": "#FF780A",
+          "yaxis": 1
+        },
+        {
+          "alias": "km Stand [km]",
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -103,7 +114,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n$__time(Datum), \r\nodometer as 'km Stand'\r\nFROM pos\r\nwhere $__timeFilter(Datum) and odometer > 1\r\norder by Datum\r\n",
+          "rawSql": "SELECT\r\n$__time(Datum), \r\nodometer as 'km Stand [km]'\r\nFROM pos\r\nwhere $__timeFilter(Datum) and odometer > 1\r\norder by Datum\r\n",
           "refId": "A",
           "select": [
             [
@@ -129,7 +140,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Avg Consumption (Monatsmittel)\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 0 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Monatsmittel [kWh]\", outside_temp_avg as \"Außentemperatur Monatsmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
           "refId": "B",
           "select": [
             [
@@ -157,7 +168,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Avg Consumption (Tagesmittel)\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 0 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Tagesmittel [kWh]\", outside_temp_avg as \"Außentemperatur Tagesmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
           "refId": "C",
           "select": [
             [
@@ -201,17 +212,15 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:114",
           "decimals": 0,
-          "format": "kwatth",
+          "format": "locale",
           "label": "",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
-          "$$hashKey": "object:115",
           "decimals": 0,
           "format": "locale",
           "label": null,
@@ -228,7 +237,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 22,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -266,8 +275,5 @@
   "timezone": "",
   "title": "Verbrauchsstatstik",
   "uid": "riqUfXtRz",
-  "variables": {
-    "list": []
-  },
   "version": 1
 }
