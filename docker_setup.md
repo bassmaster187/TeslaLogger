@@ -1,6 +1,8 @@
 # Docker Setup (BETA)
 For Synology NAS users, check the hints here: [LINK](docker_setup_synology.md) 
 
+Docker on Raspberry: It won't work if you don't have a 64bit OS as MariaDB requires a 64bit OS!
+
 Please make sure you have the latest docker and docker-compse. Many repositories comes with old docker and / or docker-compose. You can avoid a lot of problems by doblecheck it.
 
 These versions are known to work fine:
