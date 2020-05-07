@@ -131,6 +131,13 @@ namespace TeslaLogger
                     UpdateDBView(wh);
                 }
 
+                if (!DBHelper.TableExists("mothership"))
+                {
+                    Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, command varchar(50) NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, command varchar(50) NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+
                 timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
 
                 chmod("/var/www/html/admin/wallpapers", 777);

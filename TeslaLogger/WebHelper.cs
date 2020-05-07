@@ -134,9 +134,13 @@ namespace TeslaLogger
 
                 var json = new JavaScriptSerializer().Serialize(values);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                DateTime start = DateTime.Now;
                 var result = await client.PostAsync(apiaddress + "oauth/token", content);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("GetTokenAsync()", duration.TotalSeconds);
 
                 if (resultContent.Contains("authorization_required"))
                 {
@@ -330,10 +334,14 @@ namespace TeslaLogger
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles";
+                DateTime start = DateTime.Now;
                 var resultTask = client.GetAsync(adresse);
 
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("GetVehicles()", duration.TotalSeconds);
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -428,9 +436,13 @@ namespace TeslaLogger
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles";
+                DateTime start = DateTime.Now;
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("IsOnline()", duration.TotalSeconds);
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -1736,9 +1748,14 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
+                DateTime start = DateTime.Now;
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                //Logfile.Log("GetCommand(" + cmd + ") took " + duration.TotalMilliseconds);
+                DBHelper.addMothershipDataToDB("GetCommand(" + cmd + ")", duration.TotalSeconds);
 
                 return resultContent;
             }
@@ -1764,10 +1781,13 @@ FROM
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 StringContent queryString = new StringContent(data);
+                DateTime start = DateTime.Now;
                 var result = await client.PostAsync(adresse, queryString);
 
                 resultContent = await result.Content.ReadAsStringAsync();
-
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("PostCommand(" + cmd + ")", duration.TotalSeconds);
                 return resultContent;
             }
             catch (Exception ex)
@@ -1794,9 +1814,13 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data";
+                DateTime start = DateTime.Now;
                 var resultTask = client.GetAsync(adresse);
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("GetCachedRollupData()", duration.TotalSeconds);
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);

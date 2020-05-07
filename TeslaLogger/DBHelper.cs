@@ -88,6 +88,19 @@ namespace TeslaLogger
             }
         }
 
+        public static void addMothershipDataToDB(string command, double duration)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert mothership (ts, command, duration) values (@ts, @command, @duration)", con);
+                cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                cmd.Parameters.AddWithValue("@command", command);
+                cmd.Parameters.AddWithValue("@duration", duration);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         internal static string GetFirmwareFromDate(DateTime dateTime)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
