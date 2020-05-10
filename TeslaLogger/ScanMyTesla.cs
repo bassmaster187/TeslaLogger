@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
-    class ScanMyTesla
+    public class ScanMyTesla
     {
         string token;
         System.Threading.Thread thread;

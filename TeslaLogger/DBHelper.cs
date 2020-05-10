@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
-    class DBHelper
+    public class DBHelper
     {
         public static CurrentJSON currentJSON = new CurrentJSON();
 
@@ -21,7 +21,7 @@ namespace TeslaLogger
             get
             {
                 if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
-                    return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;";
+                    return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;";
 
                 return ApplicationSettings.Default.DBConnectionstring;
             }
@@ -859,7 +859,7 @@ namespace TeslaLogger
         }
 
 
-        internal static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude)
+        public static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             double? inside_temp = DBHelper.currentJSON.current_inside_temperature;
 

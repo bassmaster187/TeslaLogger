@@ -103,6 +103,8 @@
 
         private static void ReadGeofenceFile(List<Address> list, string filename)
         {
+            filename = filename.Replace(@"Debug\", "");
+
             if (System.IO.File.Exists(filename))
             {
                 Logfile.Log("Read Geofence File: " + filename);
