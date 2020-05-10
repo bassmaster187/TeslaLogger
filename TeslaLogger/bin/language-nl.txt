@@ -1,0 +1,192 @@
+﻿#Akku Trips.json
+Akku Trips=Accu ritten
+Start Trip=Start rit
+End Trip=Einde rit
+Time=Datum
+StartSOC=StartSOC
+EndSOC=EindeSOC
+SOC diff=SOC verschil
+Start km=Start km
+End km=Einde km
+Start mi=Start mi
+End mi=Einde mi
+kmDiff=kmVerschil
+Max Range=Max Bereik
+Ø Verbrauch=Ø Verbruik
+Tage=Dagen
+
+#Degradation.json
+Degradation=Degredatie
+Maximalreichweite [km]=Max Bereik [km]
+Maximalreichweite [mi]=Max Bereik [mi]
+km Stand [km]=Kilometerteller [km]
+mi Stand [mi]=Kilometerteller [mi]
+Odometer [mi]=
+Max. Reichweite (Monatsmittel) [km]=Max Bereik (maandelijks gem.) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max Rage (maandelijks gem.) [mi]
+
+#Ladehistorie.json
+Ladehistorie=Laadhistorie
+Startdatum=Startdatum
+Enddatum=Einddatum
+geladen kWh=kWh geladen
+km Stand=Kilometerteller
+Adresse=Adres
+TR km Start=TR km Start
+TR km Ende=TR km Einde
+SOC Ende=SOC Einde
+100% TR=100% TR
+Minuten=Minuten
+TR mi Start=TR mi Start
+TR mi Ende=TR mi Einde
+ØkW=ØkW
+
+#Ladestatistik.json
+Ladestatistik=Laadstatistieken
+Letzte Ladung=Laatst laadbeurt
+Ort=Locatie
+Ø geladen kWh=Ø Geladen kWh
+Ladezeit h=Laadtijd h
+Ø SOC=Ø SOC
+Max SOC=Max SOC
+Anzahl Ladungen=Aantal maal geladen
+Anzahl=Aantal
+Geladen=Geladen
+Ladezeit=Laadtijd
+Anz. Ladungen=Aantal
+Ladehub=Bereik na laden
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=SOC Laadstatistieken
+SOC [%]=SOC [%]
+
+#Laden.json
+Laden=Laden
+Ladespannung [V]=Laadvoltage [V]
+Reichweite [mi]=Bereik [mi]
+Reichweite [km]=Bereik [km]
+Leistung [kW]=Vermogen [kW]
+Phasen=Fasen
+Stromstärke [A]=Huidig [A]
+Angefordert [A]=Gevraagd [A]
+Pilot [A]=Pilot [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Vampire Drain Maandelijkse statistieken
+TR mi Verlust=TR mi Verloren
+kWh Verlust=kWh Verloren
+Eur Verlust=Eur Verloren
+
+#Trip.json
+Trip=Trip
+Start=Start
+Ende=Einde
+Start Adresse=Start adres
+Ziel Adresse=Bestemming adres
+Ø Verbrauch kWh=Ø Verbruik kWh
+Verbraucht kWh=Verbruik kWh
+Dauer Min=Duur Min
+mi=mi
+km=km
+Ø °C=Ø °C
+Ø °F=Ø °F
+max mph=Max mph
+max km/h=max km/h
+max PS=Max PK
+min PS=Min PK
+max kW=max kW
+min kW=min kW
+Ø PS=Ø PK
+Ø kW=Ø kW
+Ø mph=Ø mph
+Ø km/h=Ø km/h
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Tijdspanne uren
+TR mi Verlust pro Stunde=TR mi Verloren per uur
+mi Stand=Kilometerteller
+
+#Vampir Drain.json
+Vampir Drain=Vampire Drain
+Standby Stunden=Standby Uren
+Standby=Standby
+TR km Verlust=TR km Verloren
+TR km Verlust pro Stunde=TR km Verloren per uur
+
+#Verbrauch.json
+Verbrauch=Verbruik
+Höhe [m]=Hoogte [m]
+Altitude [m]=Hoogte [m]
+Geschwindigkeit [mph]=Snelheid [mph]
+Geschwindigkeit [km/h]=Snelheid [km/h]
+Leistung [PS]=Power [PK]
+Außentemperatur [°C]=Buitentemperatuur [°C]
+Außentemperatur [°F]=Buitentemperatuur [°F]
+Innentemperatur [°C]=Binnentemperatuur [°C]
+Innentemperatur [°F]=Binnentemperatuur [°F]
+
+Laden fertig=Laden voltooid
+Schlafen=Slapen
+Online=Online
+
+#Visited.json
+Visited=Bezocht
+
+#index.php
+Fahrzeuginfo=Voertuig informatie
+Status=Status
+Typical Range=Gemiddeld bereik
+KM Stand=Kilometerteller
+Car Version=Auto versie
+Letzter Trip=Laatste rit
+Dauer=Duur
+Distanz=Afstand
+Max km/h=Max km/h
+PS=PK
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Inloggegevens
+Bitte Tesla Account Zugangsdaten eingeben=Voer altublieft de toegangsgegevens van uw Tesla account in
+Email=Email
+Passwort=Wachtwoord
+Passwort wiederholen=Wachtwoord herhalen
+Speichern=Opslaan
+
+#settings.php
+Zugangsdaten=Inloggegevens
+Language=Taal
+Leistung=Prestaties
+Temperatur=Temperatuur
+Längenmaß=Lengte-eenheid
+URL Admin Panel=URL Admin omgeving
+
+#geoadd.php
+Bezeichnung=Beschrijving
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=Alle verbruik - ScanMyTesla
+Zelltemperatur [°C]=Cell Temperatuur [°C]
+Zelltemperatur [°F]=Cell Temperatuur [°F]
+
+#Trip Monatsstatistik.json
+Datum=Date
+Fahrzeit [h]=Rijtijd [h]
+Strecke [km]=Afstand [km]
+Strecke [mi]=Afstand [mi]
+Verbraucht [kWh]=Verbruikt kWh
+Ø Verbrauch [kWh]=Ø Verbruikt kWh
+Anzahl Trips=Aantal ritten
+Trip Monatsstatistik=Maandelijkse statistieken ritten
+
+Zellspannungen 01-20 - ScanMyTesla=Celspanning 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Celspanning 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Celspanning 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Celspanning 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Celspanning 81-99 - ScanMyTesla
+
+Ja=Ja
+Nein=Nee
+
+TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
+Daten anonym teilen=Data anoniem delen
+Daten anonym teilen=Data anoniem delen
