@@ -15,7 +15,7 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
-    class WebHelper
+    public class WebHelper
     {
         public static readonly String apiaddress = "https://owner-api.teslamotors.com/";
 
@@ -323,97 +323,110 @@ namespace TeslaLogger
         public String GetVehicles()
         {
             string resultContent = "";
-            try
+            while (true)
             {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-
-                string adresse = apiaddress + "api/1/vehicles";
-                var resultTask = client.GetAsync(adresse);
-
-                HttpResponseMessage result = resultTask.Result;
-                resultContent = result.Content.ReadAsStringAsync().Result;
-
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-                }
-
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
-                var r1temp = (object[])r1;
-
-                if (ApplicationSettings.Default.Car >= r1temp.Length)
-                {
-                    Logfile.Log("Car # " + ApplicationSettings.Default.Car + " not exists!");
-                    return "NULL";
-                }
-
-                var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp[ApplicationSettings.Default.Car]);
-
-                string OnlineState = r2["state"].ToString();
-                System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
-
-                string display_name = r2["display_name"].ToString();
-                Logfile.Log("display_name :" + display_name);
-
                 try
                 {
-                    string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "DISPLAY_NAME");
-                    System.IO.File.WriteAllText(filepath, display_name);
-                    UpdateTeslalogger.chmod(filepath, 666, false);
+
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                    string adresse = apiaddress + "api/1/vehicles";
+                    var resultTask = client.GetAsync(adresse);
+
+                    HttpResponseMessage result = resultTask.Result;
+                    resultContent = result.Content.ReadAsStringAsync().Result;
+
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
+                    }
+
+                    object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                    var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
+                    var r1temp = (object[])r1;
+
+                    if (ApplicationSettings.Default.Car >= r1temp.Length)
+                    {
+                        Logfile.Log("Car # " + ApplicationSettings.Default.Car + " not exists!");
+                        return "NULL";
+                    }
+
+                    var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp[ApplicationSettings.Default.Car]);
+
+                    string OnlineState = r2["state"].ToString();
+                    System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
+
+                    string display_name = r2["display_name"].ToString();
+                    Logfile.Log("display_name :" + display_name);
+
+                    try
+                    {
+                        string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "DISPLAY_NAME");
+                        System.IO.File.WriteAllText(filepath, display_name);
+                        UpdateTeslalogger.chmod(filepath, 666, false);
+                    }
+                    catch (Exception)
+                    { }
+
+                    string vin = r2["vin"].ToString();
+                    Logfile.Log("vin :" + vin);
+
+                    Tesla_id = r2["id"].ToString();
+                    Logfile.Log("id :" + Tesla_id);
+
+                    Tesla_vehicle_id = r2["vehicle_id"].ToString();
+                    Logfile.Log("vehicle_id :" + Tesla_vehicle_id);
+
+                    byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+
+                    TaskerHash = String.Empty;
+                    var crc32 = new DamienG.Security.Cryptography.Crc32();
+                    foreach (byte b in crc32.ComputeHash(tempTasker))
+                        TaskerHash += b.ToString("x2").ToLower();
+
+                    if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
+                        TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
+
+                    if (ApplicationSettings.Default.Car > 0)
+                        TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
+
+                    Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
+
+                    try
+                    {
+                        string taskertokenpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "TASKERTOKEN");
+                        System.IO.File.WriteAllText(taskertokenpath, TaskerHash);
+                    }
+                    catch (Exception)
+                    { }
+
+                    scanMyTesla = new ScanMyTesla(TaskerHash);
+
+                    /*
+                    dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                    token = jsonResult["access_token"];
+                    */
+
+                    return resultContent;
+
                 }
-                catch (Exception)
-                { }
-
-                string vin = r2["vin"].ToString();
-                Logfile.Log("vin :" + vin);
-
-                Tesla_id = r2["id"].ToString();
-                Logfile.Log("id :" + Tesla_id);
-
-                Tesla_vehicle_id = r2["vehicle_id"].ToString();
-                Logfile.Log("vehicle_id :" + Tesla_vehicle_id);
-
-                byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
-
-                TaskerHash = String.Empty;
-                var crc32 = new DamienG.Security.Cryptography.Crc32();
-                foreach (byte b in crc32.ComputeHash(tempTasker))
-                    TaskerHash += b.ToString("x2").ToLower();
-
-                if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
-                    TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
-
-                if (ApplicationSettings.Default.Car > 0)
-                    TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
-
-                Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
-
-                try
+                catch (Exception ex)
                 {
-                    string taskertokenpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "TASKERTOKEN");
-                    System.IO.File.WriteAllText(taskertokenpath, TaskerHash);
+                    Logfile.ExceptionWriter(ex, resultContent);
+
+                    while (ex != null)
+                    {
+                        if (!(ex is AggregateException))
+                            Logfile.Log("GetVehicles Error: " + ex.Message);
+
+                        ex = ex.InnerException;
+                    }
+
+                    System.Threading.Thread.Sleep(30000);
                 }
-                catch (Exception)
-                { }
-
-                scanMyTesla = new ScanMyTesla(TaskerHash);
-
-                /*
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                token = jsonResult["access_token"];
-                */
-
-                return resultContent;
             }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, resultContent);
-            }
-
-            return "NULL";
         }
 
         int unknownStateCounter = 0;
