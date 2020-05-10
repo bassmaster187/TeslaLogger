@@ -131,6 +131,8 @@ namespace TeslaLogger
                     UpdateDBView(wh);
                 }
 
+                CheckDBCharset();
+
                 timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
 
                 chmod("/var/www/html/admin/wallpapers", 777);
@@ -211,6 +213,36 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        public static void CheckDBCharset()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        string charset = dr[0].ToString();
+
+                        if (charset != "utf8mb4")
+                        {
+                            dr.Close();
+
+                            Logfile.Log("Chage database charset to utf8mb4");
+                            cmd = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
