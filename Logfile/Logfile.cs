@@ -148,6 +148,12 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     return;
                 }
+                else if (temp.Contains("Connection reset by peer"))
+                {
+                    Logfile.Log(prefix + "Connection reset by peer");
+                    System.Threading.Thread.Sleep(30000);
+                    return;
+                }
                 else
                 {
 
