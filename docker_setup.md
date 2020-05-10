@@ -43,7 +43,7 @@ The config file could look like this:
               <value>123456</value>
             </setting>
             <setting name="DBConnectionstring" serializeAs="String">
-                <value>Server=database;Database=teslalogger;Uid=root;Password=teslalogger;</value>
+                <value>Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;</value>
             </setting>
             <setting name="Car" serializeAs="String">
                 <value>0</value>
