@@ -132,7 +132,8 @@
                 var executingPath = executingAssembly.Location;
 
                 executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
-                
+                executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
+
                 _ExecutingPath = executingPath;
             }
 

@@ -96,6 +96,8 @@ require("tools.php");
 				
 			if($Language =="en")
 				echo ("$('#radio_en').prop('checked', true);\r\n");
+			else if($Language =="nl")
+				echo ("$('#radio_nl').prop('checked', true);\r\n");
 			else if($Language =="no")
 				echo ("$('#radio_no').prop('checked', true);\r\n");
 			else
@@ -142,7 +144,8 @@ require("tools.php");
 <tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 <input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 <input id="radio_en" type="radio" value="en" name="Language" /> English<br>
-<input id="radio_no" type="radio" value="no" name="Language" /> Norsk 
+<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
+<input id="radio_no" type="radio" value="no" name="Language" /> Norsk
 </td></tr>
 <tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 <tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
