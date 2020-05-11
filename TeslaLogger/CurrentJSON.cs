@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    class CurrentJSON
+    public class CurrentJSON
     {      
         public bool current_charging = false;
         public bool current_driving = false;

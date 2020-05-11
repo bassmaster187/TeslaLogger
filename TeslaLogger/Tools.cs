@@ -8,7 +8,7 @@
     using System.Runtime.Caching;
     using System.Web.Script.Serialization;
 
-    class Tools
+    public class Tools
     {
 
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
