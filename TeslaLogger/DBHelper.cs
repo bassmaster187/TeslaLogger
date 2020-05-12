@@ -1046,8 +1046,6 @@ namespace TeslaLogger
                 if (dr.Read() && dr[0] != DBNull.Value)
                 {
                     int pos = Convert.ToInt32(dr[0]);
-                    if (pos <= 1)
-                        pos = 16141;
                     if (withReverseGeocoding)
                         UpdateAddress(pos);
 
@@ -1066,11 +1064,7 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from charging", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
-                    int maxChargeId = Convert.ToInt32(dr[0]);
-                                if (maxChargeId <= 1)
-                                 maxChargeId = 3522;
-
-                        return maxChargeId;
+                    return Convert.ToInt32(dr[0]);
             }
 
             return 0;
