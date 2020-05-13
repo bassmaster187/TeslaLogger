@@ -199,8 +199,13 @@ if (strlen($taskertoken) > 7)
 </table>
 </div>
 
+<h1>Your Data</h1>
+<button onclick="window.location.href='https://teslalogger.de/degradation_token.php?token=<?PHP echo($taskertoken); ?>';"><?php t("My Degradation"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/mycharging.php?token=<?PHP echo($taskertoken); ?>';"><?php t("My charging AVG"); ?></button>
 <h1>Fleet Data</h1>
-<button onclick="window.location.href='https://teslalogger.de/degradation_token.php?token=<?PHP echo($taskertoken); ?>';"><?php t("Degradation"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/degradation.php';"><?php t("Fleet Degradation AVG"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/charger.php';"><?php t("Fleet charging AVG"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/map.php';"><?php t("Fleet Fast Charging Map"); ?></button>
 
 <div id="dialog-confirm" title="Info" style="display:none;">
 <?php t("TextShare"); ?>
