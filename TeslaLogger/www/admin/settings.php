@@ -200,7 +200,7 @@ if (strlen($taskertoken) > 7)
 </div>
 
 <h1>Fleet Data</h1>
-<button onclick="window.location.href='http://teslalogger.de/admin/degradation_token.php?token=<?PHP echo($taskertoken); ?>';"><?php t("Degradation"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/degradation_token.php?token=<?PHP echo($taskertoken); ?>';"><?php t("Degradation"); ?></button>
 
 <div id="dialog-confirm" title="Info" style="display:none;">
 <?php t("TextShare"); ?>
