@@ -16,6 +16,9 @@ namespace TeslaLogger
     {
         public static CurrentJSON currentJSON = new CurrentJSON();
 
+        private static Dictionary<String, int> mothershipCommands = new Dictionary<string, int>();
+        private static bool mothershipEnabled = false;
+
         public static string DBConnectionstring
         {
             get
@@ -25,6 +28,11 @@ namespace TeslaLogger
 
                 return ApplicationSettings.Default.DBConnectionstring;
             }
+        }
+
+        public static void enableMothership()
+        {
+            mothershipEnabled = true;
         }
 
         public static void CloseState(int maxPosid)
@@ -85,6 +93,58 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void addMothershipDataToDB(string command, double duration)
+        {
+            if (mothershipEnabled == false)
+            {
+                return;
+            }
+            if (!mothershipCommands.ContainsKey(command))
+            {
+                addCommandToDB(command);
+                GetMothershipCommandsFromDB();
+            }
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert mothership (ts, commandid, duration) values (@ts, @commandid, @duration)", con);
+                cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
+                cmd.Parameters.AddWithValue("@duration", duration);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private static void addCommandToDB(String command)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("insert mothershipcommands (command) values (@command)", con);
+                cmd.Parameters.AddWithValue("@command", command);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private static void GetMothershipCommandsFromDB()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT id, command FROM mothershipcommands", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int id = Convert.ToInt32(dr["id"]);
+                    String command = dr[1].ToString();
+                    if (!mothershipCommands.ContainsKey(command))
+                    {
+                        mothershipCommands.Add(command, id);
+                    }
+                }
             }
         }
 
@@ -526,7 +586,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("Mapquest Response: " + resultContent);
-                Logfile.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
+                Logfile.ExceptionWriter(ex, url + "\r\n\r\nResultContent:" + resultContent);
             }
         }
 

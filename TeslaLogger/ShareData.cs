@@ -116,7 +116,7 @@ namespace TeslaLogger
 
                     var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
-                    string resultContent = "";
+                    //string resultContent = "";
                     try
                     {
                         HttpClient client = new HttpClient();

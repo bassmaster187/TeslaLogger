@@ -68,6 +68,7 @@ require("tools.php");
 			$Length = $j->{"Length"};
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
+			$ZoomLevel = $j->{"ZoomLevel"};
 
 			$ScanMyTesla = "false";
 			
@@ -105,7 +106,10 @@ require("tools.php");
 				
 			if (isset($URL_Admin))
 				echo ("$('#URL_Admin').val('$URL_Admin');\r\n");
-
+			
+			if (isset($ZoomLevel))
+				echo ("$('#ZoomLevel').val('$ZoomLevel');\r\n");
+			
 			if (isShareData())
 				echo ("$('#checkboxSharedata')[0].checked = true;\r\n");
 			else
@@ -127,6 +131,7 @@ require("tools.php");
 		Length: $("input:radio[name ='Length']:checked").val(),
 		Language: $("input:radio[name ='Language']:checked").val(),
 		URL_Admin: $("#URL_Admin").val(),
+		ZoomLevel: $("#ZoomLevel").val(),
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
 		ShareData: $('#checkboxSharedata').is(':checked'),
 		}).always(function() {
@@ -154,6 +159,7 @@ require("tools.php");
 <tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 <tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 <tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
+<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size=4"></td></tr>
 <tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 <tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
 <?php

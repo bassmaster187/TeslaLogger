@@ -197,7 +197,7 @@ require("language.php");
 
 			if (!mapInit)
 			{
-				map.setView(p,13);
+				map.setView(p, <?php echo getZoomLevel(); ?>);
 				mapInit = true;
 			}
 			else
@@ -381,6 +381,21 @@ function getTeslaloggerVersion($path)
 	$f = file_get_contents($path);
 	preg_match('/AssemblyVersion\(\"([0-9\.]+)\"/',$f, $matches);
 	return $matches[1];
+}
+function getZoomLevel()
+{
+		$content = FALSE;
+                if (file_exists("/etc/teslalogger/settings.json"))
+                        $content = file_get_contents("/etc/teslalogger/settings.json");
+
+                if ($content !== FALSE)		
+		{
+			$j = json_decode($content);
+			if (isset ($j->{"ZoomLevel"})) 
+			return $j->{"ZoomLevel"};
+			else
+			return 13;			
+		}
 }
 ?>
 
