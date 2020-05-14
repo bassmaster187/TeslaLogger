@@ -18,6 +18,7 @@ $Power = $_POST["Power"];
 $Temperature = $_POST["Temperature"];
 $Length = $_POST["Length"];
 $URL_Admin = $_POST["URL_Admin"];
+$ZoomLevel = $_POST["ZoomLevel"];
 
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
@@ -27,6 +28,7 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'Length' => $Length,
 'Language' => $Language,
 'URL_Admin' =>$URL_Admin,
+'ZoomLevel' =>$ZoomLevel,
 'ScanMyTesla' => $ScanMyTesla
 );
 
