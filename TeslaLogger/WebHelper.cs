@@ -134,13 +134,12 @@ namespace TeslaLogger
 
                 var json = new JavaScriptSerializer().Serialize(values);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                DateTime start = DateTime.Now;
+                
+                DateTime start = DateTime.UtcNow;
                 var result = await client.PostAsync(apiaddress + "oauth/token", content);
-
                 resultContent = await result.Content.ReadAsStringAsync();
-                DateTime end = DateTime.Now;
-                TimeSpan duration = end - start;
-                DBHelper.addMothershipDataToDB("GetTokenAsync()", duration.TotalSeconds);
+                
+                DBHelper.addMothershipDataToDB("GetTokenAsync()", start);
 
                 if (resultContent.Contains("authorization_required"))
                 {
@@ -336,14 +335,12 @@ namespace TeslaLogger
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                     string adresse = apiaddress + "api/1/vehicles";
-                    DateTime start = DateTime.Now;
+                    DateTime start = DateTime.UtcNow;
                     var resultTask = client.GetAsync(adresse);
 
                     HttpResponseMessage result = resultTask.Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
-                    DateTime end = DateTime.Now;
-                    TimeSpan duration = end - start;
-                    DBHelper.addMothershipDataToDB("GetVehicles()", duration.TotalSeconds);
+                    DBHelper.addMothershipDataToDB("GetVehicles()", start);
     
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
@@ -448,13 +445,11 @@ namespace TeslaLogger
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles";
-                DateTime start = DateTime.Now;
+                
+                DateTime start = DateTime.UtcNow;
                 var result = await client.GetAsync(adresse);
-
                 resultContent = await result.Content.ReadAsStringAsync();
-                DateTime end = DateTime.Now;
-                TimeSpan duration = end - start;
-                DBHelper.addMothershipDataToDB("IsOnline()", duration.TotalSeconds);
+                DBHelper.addMothershipDataToDB("IsOnline()", start);
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -1264,7 +1259,9 @@ namespace TeslaLogger
                     url += ".de";
                 }
 
+                DateTime start = DateTime.UtcNow;
                 resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
+                DBHelper.addMothershipDataToDB("ReverseGeocoding", start);
 
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["address"];
@@ -1770,14 +1767,11 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
-                DateTime start = DateTime.Now;
+                
+                DateTime start = DateTime.UtcNow;
                 var result = await client.GetAsync(adresse);
-
                 resultContent = await result.Content.ReadAsStringAsync();
-                DateTime end = DateTime.Now;
-                TimeSpan duration = end - start;
-                //Logfile.Log("GetCommand(" + cmd + ") took " + duration.TotalMilliseconds);
-                DBHelper.addMothershipDataToDB("GetCommand(" + cmd + ")", duration.TotalSeconds);
+                DBHelper.addMothershipDataToDB("GetCommand(" + cmd + ")", start);
 
                 return resultContent;
             }
@@ -1803,13 +1797,12 @@ FROM
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 StringContent queryString = new StringContent(data);
-                DateTime start = DateTime.Now;
+                
+                DateTime start = DateTime.UtcNow;
                 var result = await client.PostAsync(adresse, queryString);
-
                 resultContent = await result.Content.ReadAsStringAsync();
-                DateTime end = DateTime.Now;
-                TimeSpan duration = end - start;
-                DBHelper.addMothershipDataToDB("PostCommand(" + cmd + ")", duration.TotalSeconds);
+                DBHelper.addMothershipDataToDB("PostCommand(" + cmd + ")", start);
+
                 return resultContent;
             }
             catch (Exception ex)
@@ -1836,13 +1829,12 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data";
-                DateTime start = DateTime.Now;
+                
+                DateTime start = DateTime.UtcNow;
                 var resultTask = client.GetAsync(adresse);
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
-                DateTime end = DateTime.Now;
-                TimeSpan duration = end - start;
-                DBHelper.addMothershipDataToDB("GetCachedRollupData()", duration.TotalSeconds);
+                DBHelper.addMothershipDataToDB("GetCachedRollupData()", start);
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -2003,10 +1995,13 @@ FROM
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
 
+                DateTime start = DateTime.UtcNow;
                 var resultTask = client.PostAsync("http://teslalogger.de/wakefile.php", content);
 
                 HttpResponseMessage result = resultTask.Result;
                 string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                DBHelper.addMothershipDataToDB("teslalogger.de/wakefile.php", start);
 
                 if (resultContent.Contains("wakeupfile"))
                 {

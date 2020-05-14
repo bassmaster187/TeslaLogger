@@ -96,12 +96,17 @@ namespace TeslaLogger
             }
         }
 
-        public static void addMothershipDataToDB(string command, double duration)
+        public static void addMothershipDataToDB(string command, DateTime start)
         {
             if (mothershipEnabled == false)
             {
                 return;
             }
+
+            DateTime end = DateTime.UtcNow;
+            TimeSpan ts = end - start;
+            double duration = ts.TotalSeconds;
+
             if (!mothershipCommands.ContainsKey(command))
             {
                 addCommandToDB(command);
