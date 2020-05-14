@@ -9,13 +9,50 @@
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
         "type": "dashboard"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Status",
+        "rawQuery": "SELECT $__time(StartDate), \nstate as text\nFROM state \nWHERE  \n$__timeFilter(startdate)\n",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#96D98D",
+        "limit": 100,
+        "name": "Driving",
+        "rawQuery": "SELECT $__time(StartDate), 'driving' as text FROM trip WHERE $__timeFilter(StartDate)\norder by time_sec\n",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "teslalogger",
+        "enable": true,
+        "hide": false,
+        "iconColor": "#8AB8FF",
+        "limit": 100,
+        "name": "Charging",
+        "rawQuery": "SELECT $__time(StartDate), 'charging' as text  FROM chargingstate WHERE $__timeFilter(StartDate) \norder by time_sec\n",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1589446051624,
+  "id": 44,
+  "iteration": 1589459916940,
   "links": [],
   "panels": [
     {
@@ -68,7 +105,7 @@
           "hide": false,
           "metricColumn": "command",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id \nwhere $__timeFilter(ts) and command in ( $Commands )\nORDER BY ts ASC\n",
+          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id where command in ( $Commands )\nORDER BY ts ASC\n",
           "refId": "A",
           "select": [
             [
