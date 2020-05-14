@@ -96,12 +96,17 @@ namespace TeslaLogger
             }
         }
 
-        public static void addMothershipDataToDB(string command, double duration)
+        public static void addMothershipDataToDB(string command, DateTime start)
         {
             if (mothershipEnabled == false)
             {
                 return;
             }
+
+            DateTime end = DateTime.UtcNow;
+            TimeSpan ts = end - start;
+            double duration = ts.TotalSeconds;
+
             if (!mothershipCommands.ContainsKey(command))
             {
                 addCommandToDB(command);
@@ -362,10 +367,17 @@ namespace TeslaLogger
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
-                        currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
-                        currentJSON.latitude = Convert.ToDouble(dr["lat"]);
-                        currentJSON.longitude = Convert.ToDouble(dr["lng"]);
+                        if (dr["ideal_battery_range_km"] != DBNull.Value)
+                            currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
+
+                        if (dr["battery_level"] != DBNull.Value)
+                            currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
+
+                        if (dr["lat"] != DBNull.Value)
+                            currentJSON.latitude = Convert.ToDouble(dr["lat"]);
+
+                        if (dr["lng"] != DBNull.Value)
+                            currentJSON.longitude = Convert.ToDouble(dr["lng"]);
                     }
                     dr.Close();
 
