@@ -134,9 +134,13 @@ namespace TeslaLogger
 
                 var json = new JavaScriptSerializer().Serialize(values);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                DateTime start = DateTime.Now;
                 var result = await client.PostAsync(apiaddress + "oauth/token", content);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("GetTokenAsync()", duration.TotalSeconds);
 
                 if (resultContent.Contains("authorization_required"))
                 {
@@ -327,17 +331,20 @@ namespace TeslaLogger
             {
                 try
                 {
-
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                     string adresse = apiaddress + "api/1/vehicles";
+                    DateTime start = DateTime.Now;
                     var resultTask = client.GetAsync(adresse);
 
                     HttpResponseMessage result = resultTask.Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
-
+                    DateTime end = DateTime.Now;
+                    TimeSpan duration = end - start;
+                    DBHelper.addMothershipDataToDB("GetVehicles()", duration.TotalSeconds);
+    
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
@@ -441,9 +448,13 @@ namespace TeslaLogger
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles";
+                DateTime start = DateTime.Now;
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("IsOnline()", duration.TotalSeconds);
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -563,8 +574,8 @@ namespace TeslaLogger
 
         private void UpdateEfficiency()
         {
-            string eff = "0.190052356";
-            string car = "";
+            //string eff = "0.190052356";
+            //string car = "";
 
             if (carSettings.car_type == "model3")
             {
@@ -1113,7 +1124,7 @@ namespace TeslaLogger
 
                     return;
 
-                    using (var client = new HttpClient())
+                    /*using (var client = new HttpClient())
                     {
 
                         var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
@@ -1144,7 +1155,7 @@ namespace TeslaLogger
                                 }
                             }
                         }
-                    }
+                    }*/
                 }
                 catch (Exception ex)
                 {
@@ -1159,7 +1170,7 @@ namespace TeslaLogger
         }
 
 
-        public async Task<double> AltitudeAsync(double latitude, double longitude)
+        /*public async Task<double> AltitudeAsync(double latitude, double longitude)
         {
             return 0;
             /*
@@ -1197,8 +1208,8 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, url + "\r\n" + resultContent);
             }
             return 0;
-            */
-        }
+            
+        }*/
 
         public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude)
         {
@@ -1348,8 +1359,9 @@ namespace TeslaLogger
                     var lng = (double)dr[1];
                     int id = (int)dr[2];
                     var adress = ReverseGecocodingAsync(lat, lng);
-                    var altitude = AltitudeAsync(lat, lng);
-                    UpdateAddressByPosId(id, adress.Result, altitude.Result);
+                    //var altitude = AltitudeAsync(lat, lng);
+                    //UpdateAddressByPosId(id, adress.Result, altitude.Result);
+                    UpdateAddressByPosId(id, adress.Result, 0);
                 }
             }
         }
@@ -1409,11 +1421,14 @@ FROM
                             var lat = (double)dr["PosStartLat"];
                             var lng = (double)dr["PosStartLng"];
                             var address = ReverseGecocodingAsync(lat, lng);
-                            var altitude = AltitudeAsync(lat, lng);
+                            //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
                             if (!String.IsNullOrEmpty(addressResult))
-                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                            {
+                                //UpdateAddressByPosId(id, addressResult, altitude.Result);
+                                UpdateAddressByPosId(id, addressResult, 0);
+                            }
                         }
 
                         if (!(dr["End_address"] != DBNull.Value && dr["End_address"].ToString().Length > 0))
@@ -1422,11 +1437,14 @@ FROM
                             var lat = (double)dr["PosEndtLat"];
                             var lng = (double)dr["PosEndLng"];
                             var address = ReverseGecocodingAsync(lat, lng);
-                            var altitude = AltitudeAsync(lat, lng);
+                            //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
                             if (!String.IsNullOrEmpty(addressResult))
-                                UpdateAddressByPosId(id, addressResult, altitude.Result);
+                            {
+                                //UpdateAddressByPosId(id, addressResult, altitude.Result);
+                                UpdateAddressByPosId(id, addressResult, 0);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -1453,11 +1471,14 @@ FROM
                         var lat = (double)dr[1];
                         var lng = (double)dr[2];
                         var address = ReverseGecocodingAsync(lat, lng);
-                        var altitude = AltitudeAsync(lat, lng);
+                        //var altitude = AltitudeAsync(lat, lng);
 
                         string addressResult = address.Result;
                         if (!String.IsNullOrEmpty(addressResult))
-                            UpdateAddressByPosId(id, addressResult, altitude.Result);
+                        {
+                            //UpdateAddressByPosId(id, addressResult, altitude.Result);
+                            UpdateAddressByPosId(id, addressResult, 0);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1650,7 +1671,7 @@ FROM
                 Logfile.ExceptionWriter(ex, resultContent);
                 return lastOdometerKM;
             }
-            return 0;
+            //return 0;
         }
 
         async Task<double?> GetOutsideTempAsync()
@@ -1749,9 +1770,14 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
+                DateTime start = DateTime.Now;
                 var result = await client.GetAsync(adresse);
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                //Logfile.Log("GetCommand(" + cmd + ") took " + duration.TotalMilliseconds);
+                DBHelper.addMothershipDataToDB("GetCommand(" + cmd + ")", duration.TotalSeconds);
 
                 return resultContent;
             }
@@ -1777,10 +1803,13 @@ FROM
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 StringContent queryString = new StringContent(data);
+                DateTime start = DateTime.Now;
                 var result = await client.PostAsync(adresse, queryString);
 
                 resultContent = await result.Content.ReadAsStringAsync();
-
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("PostCommand(" + cmd + ")", duration.TotalSeconds);
                 return resultContent;
             }
             catch (Exception ex)
@@ -1807,9 +1836,13 @@ FROM
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data";
+                DateTime start = DateTime.Now;
                 var resultTask = client.GetAsync(adresse);
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                DBHelper.addMothershipDataToDB("GetCachedRollupData()", duration.TotalSeconds);
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);

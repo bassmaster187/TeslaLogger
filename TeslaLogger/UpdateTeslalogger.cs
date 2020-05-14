@@ -14,7 +14,6 @@ namespace TeslaLogger
         static bool shareDataOnStartup = false;
         static System.Threading.Timer timer;
 
-
         public static void Start(WebHelper wh)
         {
             try
@@ -130,6 +129,20 @@ namespace TeslaLogger
                 {
                     UpdateDBView(wh);
                 }
+
+                if (!DBHelper.TableExists("mothership"))
+                {
+                    Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                if (!DBHelper.TableExists("mothershipcommands"))
+                {
+                    Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                DBHelper.enableMothership();
 
                 CheckDBCharset();
 
