@@ -125,7 +125,7 @@ namespace TeslaLogger
                         DateTime start = DateTime.UtcNow;
                         var result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
                         var r = result.Content.ReadAsStringAsync().Result;
-                        DBHelper.addMothershipDataToDB("teslalogger.de/share_charging.php", start);
+                        DBHelper.addMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode);
 
                         //resultContent = result.Content.ReadAsStringAsync();
                         Logfile.Log("ShareData: " + r);
@@ -263,7 +263,7 @@ namespace TeslaLogger
                     DateTime start = DateTime.UtcNow;
                     var result = client.PostAsync("http://teslalogger.de/share_degradation.php", content).Result;
                     var r = result.Content.ReadAsStringAsync().Result;
-                    DBHelper.addMothershipDataToDB("teslalogger.de/share_degradation.php", start);
+                    DBHelper.addMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode);
 
                     //resultContent = result.Content.ReadAsStringAsync();
                     Logfile.Log("ShareData: " + r);

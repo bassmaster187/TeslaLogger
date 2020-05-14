@@ -142,7 +142,14 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
-                DBHelper.enableMothership();
+                if (!DBHelper.ColumnExists("mothership", "httpcode"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+               DBHelper.enableMothership();
 
                 CheckDBCharset();
 
