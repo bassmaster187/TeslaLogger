@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 27,
-  "iteration": 1589442367476,
+  "iteration": 1589446051624,
   "links": [],
   "panels": [
     {
@@ -69,7 +68,7 @@
           "hide": false,
           "metricColumn": "command",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id where command in ( $Commands )\nORDER BY ts ASC\n",
+          "rawSql": "SELECT\n  $__time(ts),\n  duration as value,\n  command as metric\nFROM mothership join mothershipcommands on mothership.commandid = mothershipcommands.id \nwhere $__timeFilter(ts) and command in ( $Commands )\nORDER BY ts ASC\n",
           "refId": "A",
           "select": [
             [
@@ -192,5 +191,5 @@
   "timezone": "",
   "title": "Mothership",
   "uid": "ear7TuZgz",
-  "version": 16
+  "version": 1
 }
