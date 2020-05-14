@@ -89,9 +89,11 @@ namespace TeslaLogger
                     new KeyValuePair<string, string>("t", token)
                 });
 
+                DateTime start = DateTime.UtcNow;
                 var result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
-                
                 resultContent = await result.Content.ReadAsStringAsync();
+
+                DBHelper.addMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start);
 
                 if (resultContent == "not found")
                     return "not found";
