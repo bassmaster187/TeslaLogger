@@ -35,6 +35,21 @@ namespace TeslaLogger
             mothershipEnabled = true;
         }
 
+        public static void UpdateHTTPStatusCodes()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                foreach (HttpStatusCode hsc in Enum.GetValues(typeof(HttpStatusCode)))
+                {
+                    MySqlCommand cmd = new MySqlCommand("insert IGNORE httpcodes (id, text) values (@id, @text)", con);
+                    cmd.Parameters.AddWithValue("@id", (int)hsc);
+                    cmd.Parameters.AddWithValue("@text", hsc.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))

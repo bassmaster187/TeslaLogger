@@ -363,7 +363,7 @@ namespace TeslaLogger
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                     string display_name = r2["display_name"].ToString();
-                    Logfile.Log("display_name :" + display_name);
+                    Logfile.Log("display_name: " + display_name);
 
                     try
                     {
