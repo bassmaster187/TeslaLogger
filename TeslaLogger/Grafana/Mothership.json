@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 27,
-  "iteration": 1589441479392,
+  "iteration": 1589442367476,
   "links": [],
   "panels": [
     {
@@ -25,23 +25,26 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "teslalogger",
+      "decimals": 1,
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
-        "h": 12,
+        "h": 20,
         "w": 24,
         "x": 0,
         "y": 0
       },
       "id": 2,
       "legend": {
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": false,
-        "max": false,
-        "min": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
-        "total": false,
-        "values": false
+        "total": true,
+        "values": true
       },
       "lines": false,
       "linewidth": 1,
@@ -189,5 +192,5 @@
   "timezone": "",
   "title": "Mothership",
   "uid": "ear7TuZgz",
-  "version": 13
+  "version": 16
 }
