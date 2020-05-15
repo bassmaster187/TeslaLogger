@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
@@ -570,13 +571,29 @@ namespace TeslaLogger
         private void UpdateEfficiency()
         {
             //string eff = "0.190052356";
-            //string car = "";
 
             if (carSettings.car_type == "model3")
             {
                 int maxRange = DBHelper.GetAvgMaxRage();
                 if (maxRange > 400)
                 {
+                    try
+                    {
+                        double wh = 0;
+                        if (Double.TryParse(carSettings.DB_Wh_TR, out wh))
+                        {
+                            if (wh >= 0.143 && wh <= 0.148)
+                            {
+                                WriteCarSettings("0.152", "M3 LR RWD");
+                                return;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+
                     WriteCarSettings("0.152", "M3 LR");
                     return;
                 }
