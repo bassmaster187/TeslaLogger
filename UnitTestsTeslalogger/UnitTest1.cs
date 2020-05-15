@@ -1,6 +1,7 @@
 ﻿using System;
 using TeslaLogger;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Runtime.Caching;
 
 namespace UnitTestsTeslalogger
 {
@@ -42,13 +43,35 @@ namespace UnitTestsTeslalogger
             DBHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, "0");
             int endid = DBHelper.GetMaxPosid(true);
             DBHelper.CloseDriveState(DateTime.Now);
-
-
         }
 
-
+        [TestMethod]
         public void TestCars()
         {
+            WebHelper wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            MemoryCache.Default.Add("GetAvgMaxRage", 515, DateTime.Now.AddMinutes(1));
+            wh.carSettings.car_type = "model3";
+            wh.carSettings.DB_Wh_TR = "0.145";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR RWD", wh.carSettings.Name);
+            Assert.AreEqual("0.152", wh.carSettings.Wh_TR);
+
+
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            MemoryCache.Default.Add("GetAvgMaxRage", 370, DateTime.Now.AddMinutes(1));
+            wh.carSettings.car_type = "models2";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.DB_Wh_TR = "0.145";
+            wh.carSettings.trim_badging = "75d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 75D", wh.carSettings.Name);
+            Assert.AreEqual("0.186", wh.carSettings.Wh_TR);
+
+
 
         }
     }

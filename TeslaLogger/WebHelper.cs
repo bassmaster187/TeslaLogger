@@ -568,7 +568,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private void UpdateEfficiency()
+        public void UpdateEfficiency()
         {
             //string eff = "0.190052356";
 
@@ -580,7 +580,7 @@ namespace TeslaLogger
                     try
                     {
                         double wh = 0;
-                        if (Double.TryParse(carSettings.DB_Wh_TR, out wh))
+                        if (Double.TryParse(carSettings.DB_Wh_TR, System.Globalization.NumberStyles.Any, Tools.ciEnUS, out wh))
                         {
                             if (wh >= 0.143 && wh <= 0.148)
                             {
