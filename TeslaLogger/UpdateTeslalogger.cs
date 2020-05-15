@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using MySql.Data.MySqlClient;
+using System.Net;
 
 namespace TeslaLogger
 {
@@ -142,9 +143,24 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
+                if (!DBHelper.ColumnExists("mothership", "httpcode"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.TableExists("httpcodes"))
+                {
+                    Logfile.Log("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+
                 DBHelper.enableMothership();
 
                 CheckDBCharset();
+
+                DBHelper.UpdateHTTPStatusCodes();
 
                 timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
 

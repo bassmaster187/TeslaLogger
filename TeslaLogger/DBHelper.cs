@@ -35,6 +35,21 @@ namespace TeslaLogger
             mothershipEnabled = true;
         }
 
+        public static void UpdateHTTPStatusCodes()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                foreach (HttpStatusCode hsc in Enum.GetValues(typeof(HttpStatusCode)))
+                {
+                    MySqlCommand cmd = new MySqlCommand("insert IGNORE httpcodes (id, text) values (@id, @text)", con);
+                    cmd.Parameters.AddWithValue("@id", (int)hsc);
+                    cmd.Parameters.AddWithValue("@text", hsc.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -96,7 +111,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void addMothershipDataToDB(string command, DateTime start)
+        public static void addMothershipDataToDB(string command, DateTime start, int httpcode)
         {
             if (mothershipEnabled == false)
             {
@@ -115,10 +130,11 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert mothership (ts, commandid, duration) values (@ts, @commandid, @duration)", con);
+                MySqlCommand cmd = new MySqlCommand("insert mothership (ts, commandid, duration, httpcode) values (@ts, @commandid, @duration, @httpcode)", con);
                 cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                 cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
                 cmd.Parameters.AddWithValue("@duration", duration);
+                cmd.Parameters.AddWithValue("@httpcode", httpcode);
                 cmd.ExecuteNonQuery();
             }
         }
