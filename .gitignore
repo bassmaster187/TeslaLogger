@@ -32,3 +32,4 @@ TeslaLogger/bin/nohup.out
 TeslaLogger/bin/SRTM-Data/*
 TeslaLogger/bin/settings.json
 .DS_Store
+.axoCover/settings.json

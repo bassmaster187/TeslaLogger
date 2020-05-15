@@ -1466,7 +1466,6 @@ namespace TeslaLogger
         
         public static int GetAvgMaxRage()
         {
-
             string cacheKey = "GetAvgMaxRage";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
