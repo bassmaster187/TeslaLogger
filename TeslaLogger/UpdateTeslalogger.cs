@@ -207,7 +207,7 @@ namespace TeslaLogger
 
                     exec_mono("rm", "-rf /etc/teslalogger/git");
                     exec_mono("mkdir", "/etc/teslalogger/git");
-                    exec_mono("git", "clone https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/");
+                    exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
@@ -815,7 +815,7 @@ namespace TeslaLogger
                 return content.Replace(v, dictLanguage[v]);
         }
 
-        public static string exec_mono(string cmd, string param, bool logging = true)
+        public static string exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
         {
             try
             {
@@ -836,24 +836,32 @@ namespace TeslaLogger
 
                 proc.Start();
 
-                proc.WaitForExit();
-
-                while (!proc.StandardOutput.EndOfStream)
+                while (!proc.HasExited)
                 {
-                    string line = proc.StandardOutput.ReadLine();
+                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
 
-                    if (logging)
+                    if (logging && line.Length > 0)
+                    {
                         Logfile.Log(" " + line);
+                    }
 
                     sb.AppendLine(line);
-                }
 
-                while (!proc.StandardError.EndOfStream)
-                {
-                    string line = proc.StandardError.ReadLine();
+                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
 
-                    if (logging)
-                        Logfile.Log("Error: " + line);
+                    if (logging && line.Length > 0)
+                    {
+                        if (stderr2stdout)
+                        {
+                            Logfile.Log(" " + line);
+                        }
+                        else
+                        {
+                            Logfile.Log("Error: " + line);
+                        }
+                    }
+
+                    sb.AppendLine(line);
                 }
 
                 return sb.ToString();
