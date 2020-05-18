@@ -58,7 +58,7 @@ namespace TeslaLogger
                     if (Tools.IsDocker())
                     {
                         Logfile.Log("Docker: YES!");
-
+                        UpdateTeslalogger.chmod("/etc/teslalogger", 777);
                         if (!System.IO.File.Exists("/etc/teslalogger/settings.json"))
                         {
                             Logfile.Log("Creating empty settings.json");
