@@ -23,23 +23,6 @@ namespace TeslaLogger
         // encapsulate state
         private static TeslaState _currentState = TeslaState.Start;
         static TeslaState GetCurrentState() { return _currentState; }
-        static void SetCurrentState(TeslaState _newState)
-        {
-            handleStateChange(_currentState, _newState);
-            _currentState= _newState;
-        }
-
-        // do something on state changes
-        private static void handleStateChange(TeslaState _oldState, TeslaState _newState)
-        {
-            // charging -> any
-            if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
-            {
-                // reset supercharger mode
-                supercharging = false;
-                superchargerTics = 0;
-            }
-        }
 
         WebHelper wh = new WebHelper();
         static DateTime lastCarUsed = DateTime.Now;
@@ -786,6 +769,29 @@ namespace TeslaLogger
         {
             Logfile.Log("Exit: " + _msg);
             System.Environment.Exit(_exitcode);
+        }
+
+        public static bool isSupercharging()
+        {
+            return supercharging;
+        }
+
+        static void SetCurrentState(TeslaState _newState)
+        {
+            handleStateChange(_currentState, _newState);
+            _currentState = _newState;
+        }
+
+        // do something on state changes
+        private static void handleStateChange(TeslaState _oldState, TeslaState _newState)
+        {
+            // charging -> any
+            if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
+            {
+                // reset supercharger mode
+                supercharging = false;
+                superchargerTics = 0;
+            }
         }
     }
 }
