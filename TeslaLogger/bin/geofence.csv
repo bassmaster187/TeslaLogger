@@ -110,7 +110,7 @@ Ionity DE-Lonetal Ost, 48.584287, 10.178996
 Ionity DE-Lonetal West, 48.583937, 10.175605
 Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
 Ionity DE-Lüneburger Heide West, 53.109317, 9.981663
-Ionity DE-Lutterberg, 51.370430, 9.633572
+Ionity DE-Lutterberg, 51.37035, 9.633558, 8
 Ionity DE-Mahlberg Ost, 48.308819, 7.791519
 Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
@@ -430,7 +430,8 @@ Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger DE-Lohne, 52.65768, 8.16927
-Supercharger DE-Lutterberg, 51.370977, 9.633306
+Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
+Supercharger DE-Lutterberg, 51.370213, 9.63392, 20
 Supercharger DE-Malsfeld, 51.0872578, 9.485137
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
