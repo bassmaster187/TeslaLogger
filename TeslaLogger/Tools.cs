@@ -339,5 +339,41 @@
             return false;
 
         }
+
+        internal static string GetOsVersion()
+        {
+            string ret = "";
+            try
+            {
+                ret = Environment.OSVersion.ToString();
+
+                string modelPath = "/proc/device-tree/model";
+
+                if (File.Exists(modelPath))
+                {
+                    string model = System.IO.File.ReadAllText(modelPath);
+                    Logfile.Log("Model: " + model);
+                    if (model.Contains("Raspberry Pi "))
+                    {
+                        model += " /";
+                        model = model.Replace("Raspberry Pi ", "RPI");
+                        model = model.Replace("Model", "");
+                        model = model.Replace("Rev", "");
+                        model = model.Replace("Plus", "+");
+                        model = model.Replace("  ", " ");
+
+                        model = model.Replace("RPI3 B +", "RPI3B+");
+                        model = model.Replace("RPI4 B", "RPI4B");
+
+                        ret = ret.Replace("Unix", model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return ret;
+        }
     }
 }
