@@ -45,6 +45,8 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
 
+        String _lastShift_State = "P";
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -56,6 +58,22 @@ namespace TeslaLogger
         public WebHelper()
         {
             carSettings = CarSettings.ReadSettings();
+        }
+
+        private String GetLastShiftState()
+        {
+            return _lastShift_State;
+        }
+
+        private void SetLastShiftState(String _newState)
+        {
+            handleShiftStateChange(_lastShift_State, _newState);
+            _lastShift_State = _newState;
+        }
+
+        private void handleShiftStateChange(string _oldState, string _newState)
+        {
+            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
         }
 
         public bool RestoreToken()
@@ -955,8 +973,6 @@ namespace TeslaLogger
             }
         }
 
-        String lastShift_State = "P";
-
         public bool IsDriving(bool justinsertdb = false)
         {
             string resultContent = "";
@@ -990,7 +1006,7 @@ namespace TeslaLogger
                 if (r2["shift_state"] != null)
                 {
                     shift_state = r2["shift_state"].ToString();
-                    lastShift_State = shift_state;
+                    SetLastShiftState(shift_state);
                 }
                 else
                 {
@@ -998,14 +1014,17 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        if (lastShift_State != "P")
+                        if (GetLastShiftState() != "P")
+                        {
                             Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
-
-                        lastShift_State = "P";
+                        }
+                        SetLastShiftState("P");
                         return false;
                     }
                     else
-                        shift_state = lastShift_State;
+                    {
+                        shift_state = GetLastShiftState();
+                    }
                 }
 
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || DBHelper.currentJSON.current_is_preconditioning)
@@ -1048,14 +1067,14 @@ namespace TeslaLogger
                 else
                     Logfile.ExceptionWriter(ex, resultContent);
 
-                if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
+                if (GetLastShiftState() == "D" || GetLastShiftState() == "R" || GetLastShiftState() == "N")
                 {
                     TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
 
                     if (ts.TotalMinutes > 10)
                     {
                         Logfile.Log("No Valid IsDriving since 10min! (Exception)");
-                        lastShift_State = "P";
+                        SetLastShiftState("P");
                         return false;
                     }
 
