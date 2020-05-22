@@ -74,6 +74,48 @@ namespace TeslaLogger
         private void handleShiftStateChange(string _oldState, string _newState)
         {
             Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
+            if (_oldState.Equals("D") || _oldState.Equals("R") && _newState.Equals("P"))
+            {
+                Address addr = geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                HashSet<Geofence.SpecialFlags> specialFlags = Geofence.GetSpecialFlagsForLocationName(addr.name);
+                foreach (Geofence.SpecialFlags flag in specialFlags)
+                {
+                    switch(flag)
+                    {
+                        case Geofence.SpecialFlags.OpenChargePort:
+                            String result = openChargePort().Result;
+                            Logfile.Log("openChargePort(): " + result);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private async Task<String> openChargePort()
+        {
+            string resultContent = "";
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/command/charge_port_door_open";
+
+                DateTime start = DateTime.UtcNow;
+                var result = await client.GetAsync(adresse);
+                resultContent = await result.Content.ReadAsStringAsync();
+                DBHelper.addMothershipDataToDB("openChargePort()", start, (int)result.StatusCode);
+
+                return resultContent;
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, resultContent);
+            }
+
+            return "NULL";
+
         }
 
         public bool RestoreToken()

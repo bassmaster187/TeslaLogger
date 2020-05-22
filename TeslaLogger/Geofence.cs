@@ -28,6 +28,13 @@
 
         public bool RacingMode = false;
 
+        public enum SpecialFlags
+        {
+            OpenChargePort
+        }
+
+        private static Dictionary<String, HashSet<SpecialFlags>> specialFlags = new Dictionary<String, HashSet<SpecialFlags>>();
+
         public Geofence()
         {
             Init();
@@ -127,6 +134,13 @@
                                 int.TryParse(args[3], out radius);
                             }
 
+                            if (args.Length > 4)
+                            {
+                                String flags = args[4];
+                                Logfile.Log(args[0] + ": special flags found: " + flags);
+                                parseSpecialFlags(args[0], flags);
+                            }
+
                             list.Add(new Address(args[0].Trim(),
                                 Double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
                                 Double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
@@ -146,6 +160,28 @@
             {
                 Logfile.Log("FileNotFound: " + filename);
             }
+        }
+
+        private static void parseSpecialFlags(String _locationname, String _flags)
+        {
+            if (_flags.Contains("+ocp"))
+            {
+                if (!specialFlags.ContainsKey(_locationname))
+                {
+                    specialFlags.Add(_locationname, new HashSet<SpecialFlags>());
+                }
+                specialFlags[_locationname].Add(SpecialFlags.OpenChargePort);
+            }
+        }
+
+        public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(String _locationname)
+        {
+            if (specialFlags.ContainsKey(_locationname))
+            {
+                return specialFlags[_locationname];
+            }
+
+            return new HashSet<SpecialFlags>();
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true)
