@@ -137,8 +137,8 @@
                             if (args.Length > 4)
                             {
                                 String flags = args[4];
-                                Logfile.Log(args[0] + ": special flags found: " + flags);
-                                parseSpecialFlags(args[0], flags);
+                                Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
+                                parseSpecialFlags(args[0].Trim(), flags);
                             }
 
                             list.Add(new Address(args[0].Trim(),
