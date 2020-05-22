@@ -26,5 +26,7 @@ If applicable, add screenshots to help explain your problem.
 Raspberry PI 3 / Raspberry Pi4 / Docker / Selfmade
 Did you update the Image with apt-get update & upgrade?
 
+** Do you use Tasker or iBeacon **
+
 **Additional context**
 Add any other context about the problem here.
