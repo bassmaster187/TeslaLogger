@@ -106,7 +106,7 @@ namespace TeslaLogger
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/command/charge_port_door_open";
 
                 DateTime start = DateTime.UtcNow;
-                var result = await client.GetAsync(adresse);
+                var result = await client.PostAsync(adresse, null);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.addMothershipDataToDB("openChargePort()", start, (int)result.StatusCode);
 
