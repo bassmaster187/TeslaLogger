@@ -192,10 +192,6 @@ namespace TeslaLogger
             if (wh.IsDriving())
             {
                 lastCarUsed = DateTime.Now;
-                Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
-                Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
-                Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
-                Logfile.Log("OS Version: " + Tools.GetOsVersion());
 
                 t = ApplicationSettings.Default.SleepPosition - 1000 - (Environment.TickCount - t);
 
@@ -584,6 +580,7 @@ namespace TeslaLogger
             Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
+            Logfile.Log("OS Version: " + Tools.GetOsVersion());
 
             Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
