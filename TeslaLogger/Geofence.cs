@@ -176,6 +176,7 @@
 
         public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(String _locationname)
         {
+            Logfile.Log("GetSpecialFlagsForLocationName(" + _locationname + ")");
             if (specialFlags.ContainsKey(_locationname))
             {
                 return specialFlags[_locationname];

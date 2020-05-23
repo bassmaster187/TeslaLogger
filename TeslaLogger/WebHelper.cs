@@ -77,7 +77,7 @@ namespace TeslaLogger
         private void handleShiftStateChange(string _oldState, string _newState)
         {
             Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
-            if (_oldState.Equals("D") || _oldState.Equals("R") && _newState.Equals("P"))
+            if ((_oldState.Equals("D") || _oldState.Equals("R") || _oldState.Equals("N")) && _newState.Equals("P"))
             {
                 Address addr = geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
                 HashSet<Geofence.SpecialFlags> specialFlags = Geofence.GetSpecialFlagsForLocationName(addr.name);
