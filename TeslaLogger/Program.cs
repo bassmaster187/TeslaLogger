@@ -805,7 +805,10 @@ namespace TeslaLogger
 
         static void SetCurrentState(TeslaState _newState)
         {
-            handleStateChange(_currentState, _newState);
+            if (_currentState != _newState)
+            {
+                handleStateChange(_currentState, _newState);
+            }
             _currentState = _newState;
         }
 
