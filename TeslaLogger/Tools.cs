@@ -25,6 +25,8 @@
 
         static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
+        private static String _OSVersion = String.Empty;
+
         public static void SetThread_enUS()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
@@ -342,6 +344,10 @@
 
         internal static string GetOsVersion()
         {
+            if (!_OSVersion.Equals(String.Empty))
+            {
+                return _OSVersion;
+            }
             string ret = "";
             try
             {
@@ -373,6 +379,7 @@
             {
                 Logfile.Log(ex.ToString());
             }
+            _OSVersion = ret;
             return ret;
         }
     }
