@@ -45,6 +45,8 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
 
+        String _lastShift_State = "P";
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -56,6 +58,67 @@ namespace TeslaLogger
         public WebHelper()
         {
             carSettings = CarSettings.ReadSettings();
+        }
+
+        private String GetLastShiftState()
+        {
+            return _lastShift_State;
+        }
+
+        private void SetLastShiftState(String _newState)
+        {
+            if (!_newState.Equals(_lastShift_State))
+            {
+                handleShiftStateChange(_lastShift_State, _newState);
+                _lastShift_State = _newState;
+            }
+        }
+
+        private void handleShiftStateChange(string _oldState, string _newState)
+        {
+            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
+            if ((_oldState.Equals("D") || _oldState.Equals("R") || _oldState.Equals("N")) && _newState.Equals("P"))
+            {
+                Address addr = geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                HashSet<Geofence.SpecialFlags> specialFlags = Geofence.GetSpecialFlagsForLocationName(addr.name);
+                foreach (Geofence.SpecialFlags flag in specialFlags)
+                {
+                    switch(flag)
+                    {
+                        case Geofence.SpecialFlags.OpenChargePort:
+                            String result = openChargePort().Result;
+                            Logfile.Log("openChargePort(): " + result);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private async Task<String> openChargePort()
+        {
+            string resultContent = "";
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/command/charge_port_door_open";
+
+                DateTime start = DateTime.UtcNow;
+                var result = await client.PostAsync(adresse, null);
+                resultContent = await result.Content.ReadAsStringAsync();
+                DBHelper.addMothershipDataToDB("openChargePort()", start, (int)result.StatusCode);
+
+                return resultContent;
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, resultContent);
+            }
+
+            return "NULL";
+
         }
 
         public bool RestoreToken()
@@ -955,8 +1018,6 @@ namespace TeslaLogger
             }
         }
 
-        String lastShift_State = "P";
-
         public bool IsDriving(bool justinsertdb = false)
         {
             string resultContent = "";
@@ -990,7 +1051,7 @@ namespace TeslaLogger
                 if (r2["shift_state"] != null)
                 {
                     shift_state = r2["shift_state"].ToString();
-                    lastShift_State = shift_state;
+                    SetLastShiftState(shift_state);
                 }
                 else
                 {
@@ -998,14 +1059,17 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        if (lastShift_State != "P")
+                        if (GetLastShiftState() != "P")
+                        {
                             Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
-
-                        lastShift_State = "P";
+                        }
+                        SetLastShiftState("P");
                         return false;
                     }
                     else
-                        shift_state = lastShift_State;
+                    {
+                        shift_state = GetLastShiftState();
+                    }
                 }
 
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || DBHelper.currentJSON.current_is_preconditioning)
@@ -1048,14 +1112,14 @@ namespace TeslaLogger
                 else
                     Logfile.ExceptionWriter(ex, resultContent);
 
-                if (lastShift_State == "D" || lastShift_State == "R" || lastShift_State == "N")
+                if (GetLastShiftState() == "D" || GetLastShiftState() == "R" || GetLastShiftState() == "N")
                 {
                     TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
 
                     if (ts.TotalMinutes > 10)
                     {
                         Logfile.Log("No Valid IsDriving since 10min! (Exception)");
-                        lastShift_State = "P";
+                        SetLastShiftState("P");
                         return false;
                     }
 
