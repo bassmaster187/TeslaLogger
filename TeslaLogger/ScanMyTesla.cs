@@ -11,10 +11,10 @@ namespace TeslaLogger
 {
     public class ScanMyTesla
     {
-        string token;
-        System.Threading.Thread thread;
-        bool fastmode = false;
-        bool run = true;
+        private string token;
+        private System.Threading.Thread thread;
+        private bool fastmode = false;
+        private bool run = true;
 
         public ScanMyTesla(string token)
         {

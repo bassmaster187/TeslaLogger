@@ -9,11 +9,11 @@ using System.Net;
 
 namespace TeslaLogger
 {
-    class UpdateTeslalogger
+    internal class UpdateTeslalogger
     {
-        static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
-        static bool shareDataOnStartup = false;
-        static System.Threading.Timer timer;
+        private static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private static bool shareDataOnStartup = false;
+        private static System.Threading.Timer timer;
 
         public static void Start(WebHelper wh)
         {
@@ -372,7 +372,7 @@ namespace TeslaLogger
             }
         }
 
-        static Dictionary<string, string> GetLanguageDictionary(string language)
+        private static Dictionary<string, string> GetLanguageDictionary(string language)
         {
             System.Collections.Generic.Dictionary<string, string> ht = new Dictionary<string, string>();
 

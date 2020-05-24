@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class DBViews
+    internal class DBViews
     {
         public const string Trip = 
             @"CREATE 

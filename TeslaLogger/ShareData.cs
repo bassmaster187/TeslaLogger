@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class ShareData
+    internal class ShareData
     {
-        string TaskerToken;
-        string TeslaloggerVersion;
-        static bool logwritten = false;
-        bool shareData = false;
+        private string TaskerToken;
+        private string TeslaloggerVersion;
+        private static bool logwritten = false;
+        private bool shareData = false;
 
         public ShareData(string TaskerToken)
         {
@@ -48,7 +48,7 @@ namespace TeslaLogger
             shareData = true;
         }
 
-        void UpdateDataTable(string table)
+        private void UpdateDataTable(string table)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
@@ -155,7 +155,7 @@ namespace TeslaLogger
             }
         }
 
-        List<object> GetChargingDT(int startid, int endid, out int count)
+        private List<object> GetChargingDT(int startid, int endid, out int count)
         {
             count = 0;
             string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater)

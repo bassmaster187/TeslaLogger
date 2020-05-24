@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class GeocodeCache
+    internal class GeocodeCache
     {
-        DataTable dt = new DataTable("cache");
-        static GeocodeCache _instance;
+        private DataTable dt = new DataTable("cache");
+        private static GeocodeCache _instance;
 
         public static GeocodeCache Instance
         {

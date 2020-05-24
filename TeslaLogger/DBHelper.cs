@@ -1024,7 +1024,7 @@ namespace TeslaLogger
             currentJSON.CreateCurrentJSON();
         }
 
-        static DateTime lastChargingInsert = DateTime.Today;
+        private static DateTime lastChargingInsert = DateTime.Today;
 
 
         internal static void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
@@ -1144,7 +1144,7 @@ namespace TeslaLogger
             return 0;
         }
 
-        static int GetMaxChargeid()
+        private static int GetMaxChargeid()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {

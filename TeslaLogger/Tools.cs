@@ -13,17 +13,15 @@
 
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
         public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
-        
-        static int _startSleepingHour = -1;
-        static int _startSleepingMinutes = -1;
-        static string _power = "hp";
-        static string _temperature = "celsius";
-        static string _length = "km";
-        static string _language = "de";
-        static string _URL_Admin = "";
-        static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
-
-        static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
+        private static int _startSleepingHour = -1;
+        private static int _startSleepingMinutes = -1;
+        private static string _power = "hp";
+        private static string _temperature = "celsius";
+        private static string _length = "km";
+        private static string _language = "de";
+        private static string _URL_Admin = "";
+        private static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
+        private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
         private static String _OSVersion = String.Empty;
 

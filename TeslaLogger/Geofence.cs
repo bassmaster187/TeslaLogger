@@ -23,8 +23,8 @@
 
     public class Geofence
     {
-        List<Address> sortedList;
-        System.IO.FileSystemWatcher fsw;
+        private List<Address> sortedList;
+        private System.IO.FileSystemWatcher fsw;
 
         public bool RacingMode = false;
 
@@ -57,7 +57,7 @@
             }
         }
 
-        void Init()
+        private void Init()
         {
             List<Address> list = new List<Address>();
 

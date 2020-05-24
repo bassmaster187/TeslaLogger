@@ -6,9 +6,9 @@ using System.Xml;
 
 namespace TeslaLogger
 {
-    class Program
+    internal class Program
     {
-        enum TeslaState
+        private enum TeslaState
         {
             Start,
             Drive,
@@ -22,19 +22,20 @@ namespace TeslaLogger
 
         // encapsulate state
         private static TeslaState _currentState = TeslaState.Start;
-        static TeslaState GetCurrentState() { return _currentState; }
 
-        WebHelper wh = new WebHelper();
-        static DateTime lastCarUsed = DateTime.Now;
-        static DateTime lastOdometerChanged = DateTime.Now;
-        static DateTime lastTryTokenRefresh = DateTime.Now;
-        static bool goSleepWithWakeup = false;
+        private static TeslaState GetCurrentState() { return _currentState; }
+
+        private WebHelper wh = new WebHelper();
+        private static DateTime lastCarUsed = DateTime.Now;
+        private static DateTime lastOdometerChanged = DateTime.Now;
+        private static DateTime lastTryTokenRefresh = DateTime.Now;
+        private static bool goSleepWithWakeup = false;
         private static double odometerLastTrip;
         private static bool supercharging = false;
         private static int superchargerTics = 0;
         private const int superchargerTicsLimit = 100;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CheckNewCredentials();
 
@@ -803,7 +804,7 @@ namespace TeslaLogger
             return supercharging;
         }
 
-        static void SetCurrentState(TeslaState _newState)
+        private static void SetCurrentState(TeslaState _newState)
         {
             if (_currentState != _newState)
             {

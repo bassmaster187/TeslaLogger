@@ -30,7 +30,7 @@
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
-        static string _ExecutingPath = null;
+        private static string _ExecutingPath = null;
         static FileManager()
         {
             Filenames = new Dictionary<TLFilename, string>()
@@ -97,7 +97,7 @@
             File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
         }
 
-        static object SyncLock_WriteCurrentJsonFile = new object();
+        private static object SyncLock_WriteCurrentJsonFile = new object();
 
         internal static void WriteCurrentJsonFile(string current_json)
         {

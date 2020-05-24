@@ -33,19 +33,17 @@ namespace TeslaLogger
         public string conn_charge_cable = "";
         public bool fast_charger_present = false;
         public static Geofence geofence;
-        bool stopStreaming = false;
-        string elevation = "";
-        DateTime elevation_time = DateTime.Now;
+        private bool stopStreaming = false;
+        private string elevation = "";
+        private DateTime elevation_time = DateTime.Now;
         public DateTime lastTokenRefresh = DateTime.Now;
         public DateTime lastIsDriveTimestamp = DateTime.Now;
         public DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
-
-        static int MapQuestCount = 0;
-        static int NominatimCount = 0;
+        private static int MapQuestCount = 0;
+        private static int NominatimCount = 0;
 
         public ScanMyTesla scanMyTesla;
-
-        String _lastShift_State = "P";
+        private String _lastShift_State = "P";
 
         static WebHelper()
         {
@@ -232,7 +230,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        String lastCharging_State = "";
+        private String lastCharging_State = "";
 
         public void ResetLastChargingState()
         {
@@ -497,7 +495,7 @@ namespace TeslaLogger
             }
         }
 
-        int unknownStateCounter = 0;
+        private int unknownStateCounter = 0;
 
         public async Task<String> IsOnline()
         {
@@ -1138,7 +1136,7 @@ namespace TeslaLogger
             */
         }
 
-        void StartStream()
+        private void StartStream()
         {
             Logfile.Log("StartStream");
             stopStreaming = false;
@@ -1680,9 +1678,9 @@ FROM
             return -1;
         }
 
-        double lastOdometerKM = 0;
+        private double lastOdometerKM = 0;
 
-        async Task<double> GetOdometerAsync()
+        private async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
             try
@@ -1752,7 +1750,7 @@ FROM
             //return 0;
         }
 
-        async Task<double?> GetOutsideTempAsync()
+        private async Task<double?> GetOutsideTempAsync()
         {
             string cacheKey = "GetOutsideTempAsync";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
@@ -2018,7 +2016,7 @@ FROM
             stopStreaming = true;
         }
 
-        DateTime lastTaskerWakeupfile = DateTime.Today;
+        private DateTime lastTaskerWakeupfile = DateTime.Today;
 
         public bool TaskerWakeupfile(bool force = false)
         {
