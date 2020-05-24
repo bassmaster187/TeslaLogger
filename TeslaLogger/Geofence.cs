@@ -28,6 +28,8 @@
 
         public bool RacingMode = false;
 
+        private static int FSWCounter = 0;
+
         public enum SpecialFlags
         {
             OpenChargePort
@@ -42,6 +44,11 @@
             if (fsw == null)
             {
                 fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+                FSWCounter++;
+                if (FSWCounter > 1) 
+                {
+                    Logfile.Log("ERROR: more than one FileSystemWatcher created!");
+                }
                 fsw.NotifyFilter = System.IO.NotifyFilters.LastWrite;
                 fsw.Changed += Fsw_Changed;
                 // fsw.Created += Fsw_Changed;
