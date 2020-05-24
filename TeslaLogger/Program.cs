@@ -138,6 +138,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(1000);
                     if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                     {
+
                         if (wh.DeleteWakeupFile())
                         {
                             string wakeup = wh.Wakeup().Result;
@@ -192,7 +193,6 @@ namespace TeslaLogger
             if (wh.IsDriving())
             {
                 lastCarUsed = DateTime.Now;
-
                 t = ApplicationSettings.Default.SleepPosition - 1000 - (Environment.TickCount - t);
 
                 if (t > 0)

@@ -348,6 +348,7 @@
             {
                 return _OSVersion;
             }
+          
             string ret = "";
             try
             {
@@ -379,6 +380,7 @@
             {
                 Logfile.Log(ex.ToString());
             }
+
             _OSVersion = ret;
             return ret;
         }

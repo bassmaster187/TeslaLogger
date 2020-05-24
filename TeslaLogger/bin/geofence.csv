@@ -110,13 +110,13 @@ Ionity DE-Lonetal Ost, 48.584287, 10.178996
 Ionity DE-Lonetal West, 48.583937, 10.175605
 Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
 Ionity DE-Lüneburger Heide West, 53.109317, 9.981663
-Ionity DE-Lutterberg, 51.370430, 9.633572
+Ionity DE-Lutterberg, 51.37035, 9.633558, 8
 Ionity DE-Mahlberg Ost, 48.308819, 7.791519
 Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
-Ionity DE-Nempitz, 51.290152, 12.137596, 20
+Ionity DE-Nempitz, 51.29012, 12.13759, 5
 Ionity DE-Neumarkt, 49.312948, 11.474745
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -417,7 +417,8 @@ Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger DE-Herzsprung, 53.067343, 12.533212
-Supercharger-Ve DE-Hilden, 51.191119, 6.936912
+Supercharger DE-Hilden, 51.19115, 6.9368, 30
+Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
 Supercharger DE-Hilpoltstein, 49.16121, 11.2605
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.1740692, 11.4945093
@@ -429,7 +430,8 @@ Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger DE-Lohne, 52.65768, 8.16927
-Supercharger DE-Lutterberg, 51.370977, 9.633306
+Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
+Supercharger DE-Lutterberg, 51.370213, 9.63392, 20
 Supercharger DE-Malsfeld, 51.0872578, 9.485137
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
@@ -437,7 +439,7 @@ Supercharger DE-Motten, 50.355755, 9.75453
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.20283, 11.77663
-Supercharger DE-Nempitz, 51.29008, 12.13735, 30
+Supercharger DE-Nempitz, 51.29015, 12.13725, 15
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger DE-Nossen, 51.08255, 13.27406
