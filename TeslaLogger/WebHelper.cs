@@ -2007,7 +2007,7 @@ FROM
                 d.Add("SMTp", DBHelper.GetScanMyTeslaPacketsLastWeek().ToString());
                 d.Add("TR", DBHelper.GetAvgMaxRage().ToString());
 
-                d.Add("OS", Environment.OSVersion.ToString());
+                d.Add("OS", Tools.GetOsVersion());
 
                 var content = new FormUrlEncodedContent(d);
                 var query = content.ReadAsStringAsync().Result;
