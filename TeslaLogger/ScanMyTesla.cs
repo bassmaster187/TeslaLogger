@@ -93,7 +93,7 @@ namespace TeslaLogger
                 var result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
                 resultContent = await result.Content.ReadAsStringAsync();
 
-                DBHelper.addMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
+                DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
 
                 if (resultContent == "not found")
                     return "not found";

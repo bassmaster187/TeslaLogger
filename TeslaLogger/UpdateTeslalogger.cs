@@ -156,7 +156,7 @@ namespace TeslaLogger
                     Logfile.Log("CREATE TABLE OK");
                 }
 
-                DBHelper.enableMothership();
+                DBHelper.EnableMothership();
 
                 CheckDBCharset();
 

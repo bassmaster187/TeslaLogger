@@ -1,10 +1,10 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.IO;
-    using System.Text;
-    using System.Xml.Serialization;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
+namespace TeslaLogger
+{
     public class CarSettings
     {
         public string Name = "";
@@ -28,7 +28,7 @@
             {
                 XmlSerializer s = new XmlSerializer(typeof(CarSettings));
 
-                var filePath = FileManager.GetFilePath(TLFilename.CarSettings);
+                string filePath = FileManager.GetFilePath(TLFilename.CarSettings);
 
                 if (filePath != string.Empty)
                 {
@@ -45,7 +45,9 @@
             finally
             {
                 if (tr != null)
+                {
                     tr.Close();
+                }
             }
 
             return ret;
@@ -71,7 +73,9 @@
             finally
             {
                 if (tw != null)
+                {
                     tw.Close();
+                }
             }
         }
     }

@@ -57,7 +57,7 @@ namespace TeslaLogger
 
                 UpdateDBinBackground(wh);
 
-                DBHelper.currentJSON.current_odometer = DBHelper.getLatestOdometer();
+                DBHelper.currentJSON.current_odometer = DBHelper.GetLatestOdometer();
                 DBHelper.currentJSON.CreateCurrentJSON();
 
                 Address lastRacingPoint = null;

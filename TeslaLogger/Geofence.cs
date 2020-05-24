@@ -1,10 +1,10 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
+namespace TeslaLogger
+{
     public class Address
     {
         public Address(string name, double lat, double lng, int radius)
@@ -101,7 +101,9 @@
                 System.Threading.Thread.Sleep(5000);
 
                 if (ts.TotalSeconds > 5)
+                {
                     return;
+                }
 
                 Logfile.Log($"CSV File changed: {e.Name} at {dt}");
                 
@@ -129,7 +131,9 @@
                         try
                         {
                             if (String.IsNullOrEmpty(line))
+                            {
                                 continue;
+                            }
 
                             int radius = 50;
 
@@ -153,7 +157,9 @@
                                 radius));
 
                             if (!filename.Contains("geofence.csv"))
+                            {
                                 Logfile.Log("Address inserted: " + args[0]);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -205,7 +211,9 @@
                 {
                     
                     if (p.lat - range > lat)
+                    {
                         return ret; // da die liste sortiert ist, kann nichts mehr kommen
+                    }
 
                     if ((p.lat - range) < lat &&
                         lat < (p.lat + range) &&
@@ -217,7 +225,9 @@
                         {
                             found++;
                             if (logDistance)
+                            {
                                 Logfile.Log($"Distance: {distance} - Radius: {p.radius} - {p.name}");
+                            }
 
                             if (ret == null)
                             {

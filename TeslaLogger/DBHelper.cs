@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
@@ -24,13 +23,15 @@ namespace TeslaLogger
             get
             {
                 if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+                {
                     return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;";
+                }
 
                 return ApplicationSettings.Default.DBConnectionstring;
             }
         }
 
-        public static void enableMothership()
+        public static void EnableMothership()
         {
             mothershipEnabled = true;
         }
@@ -94,7 +95,9 @@ namespace TeslaLogger
                 if (dr.Read())
                 {
                     if (dr[0].ToString() == state)
+                    {
                         return;
+                    }
                 }
                 dr.Close();
 
@@ -111,7 +114,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void addMothershipDataToDB(string command, DateTime start, int httpcode)
+        public static void AddMothershipDataToDB(string command, DateTime start, int httpcode)
         {
             if (mothershipEnabled == false)
             {
@@ -124,7 +127,7 @@ namespace TeslaLogger
 
             if (!mothershipCommands.ContainsKey(command))
             {
-                addCommandToDB(command);
+                AddCommandToDB(command);
                 GetMothershipCommandsFromDB();
             }
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -139,7 +142,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void addCommandToDB(String command)
+        private static void AddCommandToDB(String command)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -183,7 +186,9 @@ namespace TeslaLogger
                     string version = dr[0].ToString();
 
                     if (version.Contains(" "))
+                    {
                         version = version.Substring(0, version.IndexOf(" "));
+                    }
 
                     return version;
                 }
@@ -297,7 +302,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static double getLatestOdometer()
+        internal static double GetLatestOdometer()
         {
             try
             {
@@ -360,22 +365,34 @@ namespace TeslaLogger
                         currentJSON.current_trip_end = (DateTime)dr["EndDate"];
 
                         if (dr["StartKm"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
+                        }
 
                         if (dr["EndKm"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
+                        }
 
                         if (dr["speed_max"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
+                        }
 
                         if (dr["power_max"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
+                        }
 
                         if (dr["StartRange"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
+                        }
 
                         if (dr["EndRange"] != DBNull.Value)
+                        {
                             currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
+                        }
                     }
                     dr.Close();
 
@@ -384,16 +401,24 @@ namespace TeslaLogger
                     if (dr.Read())
                     {
                         if (dr["ideal_battery_range_km"] != DBNull.Value)
+                        {
                             currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
+                        }
 
                         if (dr["battery_level"] != DBNull.Value)
+                        {
                             currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
+                        }
 
                         if (dr["lat"] != DBNull.Value)
+                        {
                             currentJSON.latitude = Convert.ToDouble(dr["lat"]);
+                        }
 
                         if (dr["lng"] != DBNull.Value)
+                        {
                             currentJSON.longitude = Convert.ToDouble(dr["lng"]);
+                        }
                     }
                     dr.Close();
 
@@ -454,7 +479,9 @@ namespace TeslaLogger
             }
 
             if (StartPos != 0)
+            {
                 UpdateDriveStatistics(StartPos, MaxPosId);
+            }
 
             currentJSON.current_driving = false;
             currentJSON.current_speed = 0;
@@ -466,10 +493,14 @@ namespace TeslaLogger
         public static void UpdateTripElevation(int startPos, int maxPosId)
         {
             if (WebHelper.geofence.RacingMode)
+            {
                 return;
+            }
 
             if (startPos == 0 || maxPosId == 0)
+            {
                 return;
+            }
 
             Logfile.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
 
@@ -477,7 +508,7 @@ namespace TeslaLogger
             try
             {
                 //SRTM.Logging.LogProvider.SetCurrentLogProvider(SRTM.Logging.Logger.)
-                var srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
+                SRTM.SRTMData srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
 
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id > {startPos} and id < {maxPosId} and speed > 0 and altitude is null and lat is not null and lng is not null and lat > 0 and lng > 0 order by id", DBConnectionstring);
@@ -498,7 +529,9 @@ namespace TeslaLogger
                         int? height = srtmData.GetElevation(latitude, longitude);
 
                         if (height != null && height < 8000 && height > -428)
+                        {
                             ExecuteSQLQuery($"update pos set altitude={height} where id={dr[0]}");
+                        }
 
                         x++;
 
@@ -533,7 +566,7 @@ namespace TeslaLogger
             {
                 Logfile.Log($"UpdateTripElevationSubcall start: {Start} end: {End} count:{dt.Rows.Count}");
 
-                var ci = CultureInfo.CreateSpecificCulture("en-US");
+                CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
                 StringBuilder sb = new StringBuilder();
                 sb.Append("http://open.mapquestapi.com/elevation/v1/profile?key=");
                 sb.Append(ApplicationSettings.Default.MapQuestKey);
@@ -544,7 +577,9 @@ namespace TeslaLogger
                 {
                     DataRow dr = dt.Rows[p];
                     if (!first)
+                    {
                         sb.Append(",");
+                    }
 
                     first = false;
 
@@ -583,10 +618,12 @@ namespace TeslaLogger
                     dynamic ep = e[i];
                     int height = ep["height"];
                     if (height == -32768) // no height data for this point
+                    {
                         continue;
+                    }
 
                     decimal lat = sp[i * 2];
-                    decimal lng = sp[i * 2 + 1];
+                    decimal lng = sp[(i * 2) + 1];
 
                     DataRow[] drs = dt.Select($"lat={lat} and lng={lng}");
                     foreach (DataRow dr in drs)
@@ -624,11 +661,15 @@ namespace TeslaLogger
                 int count = 0;
                 count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000");
                 if (count > 0)
+                {
                     Logfile.Log($"Positions above 8000m updated: {count}");
+                }
 
                 count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428");
                 if (count > 0)
+                {
                     Logfile.Log($"Positions below -428m updated: {count}");
+                }
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -637,7 +678,9 @@ namespace TeslaLogger
                     object o = cmd.ExecuteScalar();
 
                     if (o != null && o != DBNull.Value)
+                    {
                         startid = Convert.ToInt32(o);
+                    }
                 }
 
                 foreach (string f in System.IO.Directory.EnumerateFiles(FileManager.GetSRTMDataPath(), "*.txt"))
@@ -718,7 +761,9 @@ namespace TeslaLogger
             try
             {
                 if (logging)
+                {
                     Logfile.Log("UpdateDriveStatistics");
+                }
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -959,34 +1004,54 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                cmd.Parameters.AddWithValue("@speed", (int)((decimal)speed * 1.60934M));
+                cmd.Parameters.AddWithValue("@speed", (int)(speed * 1.60934M));
                 cmd.Parameters.AddWithValue("@power", (int)(power * 1.35962M));
                 cmd.Parameters.AddWithValue("@odometer", odometer.ToString());
 
                 if (ideal_battery_range_km == -1)
+                {
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
+                }
                 else
+                {
                     cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                }
 
                 if (outside_temp == null)
+                {
                     cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
+                }
                 else
+                {
                     cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                }
 
                 if (altitude.Length == 0)
+                {
                     cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
+                }
                 else
+                {
                     cmd.Parameters.AddWithValue("@altitude", altitude);
+                }
 
                 if (battery_level == -1)
+                {
                     cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
+                }
                 else
+                {
                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                }
 
                 if (inside_temp == null)
+                {
                     cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
+                }
                 else
+                {
                     cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
+                }
 
                 cmd.Parameters.AddWithValue("@battery_heater", DBHelper.currentJSON.current_battery_heater ? 1 : 0);
                 cmd.Parameters.AddWithValue("@is_preconditioning", DBHelper.currentJSON.current_is_preconditioning ? 1 : 0);
@@ -996,14 +1061,18 @@ namespace TeslaLogger
 
                 try
                 {
-                    currentJSON.current_speed = (int)((decimal)speed * 1.60934M);
+                    currentJSON.current_speed = (int)(speed * 1.60934M);
                     currentJSON.current_power = (int)(power * 1.35962M);
 
                     if (odometer > 0)
+                    {
                         currentJSON.current_odometer = odometer;
+                    }
 
                     if (ideal_battery_range_km >= 0)
+                    {
                         currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+                    }
 
                     if (currentJSON.current_trip_km_start == 0)
                     {
@@ -1032,7 +1101,9 @@ namespace TeslaLogger
             Tools.SetThread_enUS();
 
             if (charger_phases == "")
+            {
                 charger_phases = "1";
+            }
 
             double kmRange = ideal_battery_range / (double)0.62137;
 
@@ -1062,19 +1133,31 @@ namespace TeslaLogger
                     int i = 0;
 
                     if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out i))
+                    {
                         cmd.Parameters.AddWithValue("@charger_pilot_current", i);
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@charger_pilot_current", DBNull.Value);
+                    }
 
                     if (charge_current_request != null && int.TryParse(charge_current_request, out i))
+                    {
                         cmd.Parameters.AddWithValue("@charge_current_request", i);
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@charge_current_request", DBNull.Value);
+                    }
 
                     if (outside_temp == null)
+                    {
                         cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                    }
 
                     cmd.ExecuteNonQuery();
                 }
@@ -1083,12 +1166,16 @@ namespace TeslaLogger
             try
             {
                 if (Convert.ToInt32(battery_level) >= 0 )
+                {
                     currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                }
 
                 currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
                 currentJSON.current_charger_power = Convert.ToInt32(charger_power);
                 if (kmRange >= 0)
+                {
                     currentJSON.current_ideal_battery_range_km = kmRange;
+                }
 
                 currentJSON.current_charger_voltage = int.Parse(charger_voltage);
                 currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
@@ -1118,7 +1205,9 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("Select count(*) from pos", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
+                {
                     return Convert.ToInt32(dr[0]);
+                }
             }
 
             return 0;
@@ -1135,7 +1224,9 @@ namespace TeslaLogger
                 {
                     int pos = Convert.ToInt32(dr[0]);
                     if (withReverseGeocoding)
+                    {
                         UpdateAddress(pos);
+                    }
 
                     return pos;
                 }
@@ -1152,7 +1243,9 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from charging", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
+                {
                     return Convert.ToInt32(dr[0]);
+                }
             }
 
             return 0;
@@ -1211,7 +1304,9 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("SELECT @@version", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
+                {
                     return dr[0].ToString();
+                }
             }
 
             return "NULL";
@@ -1225,7 +1320,9 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.tables where table_name = '" + table + "'", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
+                {
                     return true;
+                }
             }
 
             return false;
@@ -1240,7 +1337,9 @@ namespace TeslaLogger
                 MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `"+ table +"` LIKE '"+ column +"';", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
+                {
                     return true;
+                }
             }
 
             return false;
@@ -1255,7 +1354,9 @@ namespace TeslaLogger
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(sql, con);
                     if (timeout != 30)
+                    {
                         cmd.CommandTimeout = timeout;
+                    }
 
                     return cmd.ExecuteNonQuery();
                 }
@@ -1407,7 +1508,9 @@ namespace TeslaLogger
             string cacheKey = "GetScanMyTeslaSignalsLastWeek";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
+            {
                 return (int)cacheValue;
+            }
 
             try
             {
@@ -1415,7 +1518,7 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY", con);
-                    var r = cmd.ExecuteReader();
+                    MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
                         int count = Convert.ToInt32(r[0]);
@@ -1438,7 +1541,9 @@ namespace TeslaLogger
             string cacheKey = "GetScanMyTeslaPacketsLastWeek";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
+            {
                 return (int)cacheValue;
+            }
 
             try
             {
@@ -1446,7 +1551,7 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con);
-                    var r = cmd.ExecuteReader();
+                    MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
                         int count = Convert.ToInt32(r[0]);
@@ -1469,7 +1574,9 @@ namespace TeslaLogger
             string cacheKey = "GetAvgMaxRage";
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
+            {
                 return (int)cacheValue;
+            }
 
             try
             {
@@ -1484,7 +1591,7 @@ namespace TeslaLogger
                         WHERE chargingstate.StartDate > SUBDATE(Now(), INTERVAL 60 DAY) AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1
                     ", con);
 
-                    var r = cmd.ExecuteReader();
+                    MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
                         if (r[0] == DBNull.Value)
