@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,27 +113,41 @@ namespace TeslaLogger
                 DBHelper.currentJSON.lastScanMyTeslaReceived = d;
                 DBHelper.currentJSON.CreateCurrentJSON();
 
-                System.Collections.Generic.Dictionary<string, Object> kv = (System.Collections.Generic.Dictionary<string, Object>)j["dict"];
+                Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
 
                 StringBuilder sb = new StringBuilder();
                 sb.Append("INSERT INTO `can` (`datum`, `id`, `val`) VALUES ");
                 bool first = true;
 
-                String sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
+                string sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
 
-                foreach (var line in kv)
+                foreach (KeyValuePair<string, object> line in kv)
                 {
                     if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
+                    {
                         continue;
+                    }
 
                     switch (line.Key)
                     {
-                        case "2": DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value); break;
-                        case "5": DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value); break;
-                        case "6": DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value); break;
-                        case "7": DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value); break;
-                        case "28": DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value); break;
-                        case "29": DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value); break;
+                        case "2":
+                            DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
+                            break;
+                        case "5":
+                            DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
+                            break;
+                        case "6":
+                            DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
+                            break;
+                        case "7":
+                            DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
+                            break;
+                        case "28":
+                            DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
+                            break;
+                        case "29":
+                            DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
+                            break;
                         case "442":
                             if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
                             {
@@ -142,9 +155,16 @@ namespace TeslaLogger
                                 Logfile.Log("SMT Speed: Signal not Available");
                             }
                             else
-                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value); 
+                            {
+                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
+                            }
+
                             break;
-                        case "43": DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value); break;
+                        case "43":
+                            DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                            break;
+                        default:
+                            break;
                     }
 
 

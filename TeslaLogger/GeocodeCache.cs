@@ -50,10 +50,7 @@ namespace TeslaLogger
         public string Search(double lat, double lng)
         {
             DataRow dr = dt.Rows.Find(new object[] {lat, lng });
-            if (dr == null)
-                return null;
-
-            return dr["Value"].ToString();
+            return dr?["Value"].ToString();
         }
 
 

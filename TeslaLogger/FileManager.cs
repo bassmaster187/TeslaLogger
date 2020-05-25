@@ -111,7 +111,7 @@ namespace TeslaLogger
 
         internal static string GetSRTMDataPath()
         {
-            string path = System.IO.Path.Combine(FileManager.GetExecutingPath(), "SRTM-Data");
+            string path = Path.Combine(GetExecutingPath(), "SRTM-Data");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -135,7 +135,7 @@ namespace TeslaLogger
 
                 string executingPath = executingAssembly.Location;
 
-                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
+                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, string.Empty);
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
 
                 _ExecutingPath = executingPath;

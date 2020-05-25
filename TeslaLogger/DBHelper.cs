@@ -18,18 +18,9 @@ namespace TeslaLogger
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
 
-        public static string DBConnectionstring
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
-                {
-                    return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;";
-                }
-
-                return ApplicationSettings.Default.DBConnectionstring;
-            }
-        }
+        public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
+                    ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
+                    : ApplicationSettings.Default.DBConnectionstring;
 
         public static void EnableMothership()
         {

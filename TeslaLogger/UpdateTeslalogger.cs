@@ -844,8 +844,10 @@ namespace TeslaLogger
 
                 StringBuilder sb = new StringBuilder();
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.EnableRaisingEvents = false;
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                };
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.RedirectStandardError = true;

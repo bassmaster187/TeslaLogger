@@ -355,7 +355,7 @@ namespace TeslaLogger
                 {
                     if (charging_state == "Charging")
                     {
-                        String dtTimestamp = "?";
+                        string dtTimestamp = "?";
                         try
                         {
                             dtTimestamp = DBHelper.UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss");
@@ -363,16 +363,19 @@ namespace TeslaLogger
                         catch (Exception)
                         { }
 
-
                         Logfile.Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
 
                         double dPowerkW = 0.0;
 
-                        if (!Double.TryParse(charger_power, out dPowerkW))
+                        if (!double.TryParse(charger_power, out dPowerkW))
+                        {
                             return false;
+                        }
 
                         if (dPowerkW < 1.0)
+                        {
                             return false;
+                        }
 
                         return true;
                     }
@@ -402,13 +405,17 @@ namespace TeslaLogger
                 if (resultContent == null || resultContent == "NULL")
                 {
                     Logfile.Log("isCharging = NULL");
-                    System.Threading.Thread.Sleep(10000);
+                    Thread.Sleep(10000);
                 }
                 else if (!resultContent.Contains("upstream internal error"))
+                {
                     Logfile.ExceptionWriter(ex, resultContent);
+                }
 
                 if (lastCharging_State == "Charging" && !justCheck)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -439,7 +446,7 @@ namespace TeslaLogger
                     }
 
                     object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                    object r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
+                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                     object[] r1temp = (object[])r1;
 
                     if (ApplicationSettings.Default.Car >= r1temp.Length)
@@ -448,7 +455,7 @@ namespace TeslaLogger
                         return "NULL";
                     }
 
-                    Dictionary<string, object> r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp[ApplicationSettings.Default.Car]);
+                    Dictionary<string, object> r2 = ((Dictionary<string, object>)r1temp[ApplicationSettings.Default.Car]);
 
                     string OnlineState = r2["state"].ToString();
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
@@ -474,18 +481,24 @@ namespace TeslaLogger
                     Tesla_vehicle_id = r2["vehicle_id"].ToString();
                     Logfile.Log("vehicle_id :" + Tesla_vehicle_id);
 
-                    byte[] tempTasker = System.Text.Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+                    byte[] tempTasker = Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
 
                     TaskerHash = String.Empty;
                     DamienG.Security.Cryptography.Crc32 crc32 = new DamienG.Security.Cryptography.Crc32();
                     foreach (byte b in crc32.ComputeHash(tempTasker))
+                    {
                         TaskerHash += b.ToString("x2").ToLower();
+                    }
 
                     if (!String.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
+                    {
                         TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
+                    }
 
                     if (ApplicationSettings.Default.Car > 0)
+                    {
                         TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
+                    }
 
                     Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
 
@@ -514,12 +527,14 @@ namespace TeslaLogger
                     while (ex != null)
                     {
                         if (!(ex is AggregateException))
+                        {
                             Logfile.Log("GetVehicles Error: " + ex.Message);
+                        }
 
                         ex = ex.InnerException;
                     }
 
-                    System.Threading.Thread.Sleep(30000);
+                    Thread.Sleep(30000);
                 }
             }
         }
@@ -1200,7 +1215,7 @@ namespace TeslaLogger
                         ws.Options.UseDefaultCredentials = false;
                         ws.Options.SetRequestHeader("Authorization", "Basic " + Convert.ToBase64String(byteArray));
 
-                        Task result = ws.ConnectAsync(serverUri, System.Threading.CancellationToken.None);
+                        Task result = ws.ConnectAsync(serverUri, CancellationToken.None);
 
                         while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
                         {
@@ -1209,27 +1224,27 @@ namespace TeslaLogger
                         }
 
 
-                        var bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
+                        ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
                         string msg = "{\"msg_type\": \"data:subscribe\", \"value\": [\"speed\",\"odometer\",\"soc\",\"elevation\",\"est_heading\",\"est_lat\",\"est_lng\",\"est_corrected_lat\",\"est_corrected_lng\",\"native_latitude\",\"native_longitude\",\"native_heading\",\"native_type\",\"native_location_supported\",\"power\",\"shift_state\"]}";
-                        var bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(msg));
+                        ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(msg));
 
                         if (ws.State == System.Net.WebSockets.WebSocketState.Open)
                         {
-                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
                         }
 
                         while (ws.State == System.Net.WebSockets.WebSocketState.Open)
                         {
                             System.Threading.Thread.Sleep(100);
                             byte[] buffer = new byte[1024];
-                            var response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                            Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
 
-                            var r = Encoding.UTF8.GetString(buffer);
+                            string r = Encoding.UTF8.GetString(buffer);
                             System.Diagnostics.Debug.WriteLine(r);
                             System.Threading.Thread.Sleep(100);
-                            ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-                            System.Threading.Thread.Sleep(1000);
+                            ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+                            Thread.Sleep(1000);
 
                             Logfile.ExceptionWriter(null, r);
                         }
@@ -1342,7 +1357,7 @@ namespace TeslaLogger
                     return a.name;
                 }
 
-                String value = GeocodeCache.Instance.Search(latitude, longitude);
+                string value = GeocodeCache.Instance.Search(latitude, longitude);
                 if (value != null)
                 {
                     Logfile.Log("Reverse geocoding by Cache");
@@ -1351,24 +1366,23 @@ namespace TeslaLogger
 
                 Tools.SetThread_enUS();
 
-                System.Threading.Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+                Thread.Sleep(5000); // Sleep to not get banned by Nominatim
 
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add("User-Agent: TL 1.1");
                 webClient.Encoding = Encoding.UTF8;
 
-                if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
-                    url = "http://open.mapquestapi.com/nominatim/v1/reverse.php";
-                else
-                    url = "http://nominatim.openstreetmap.org/reverse";
+                url = !string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey)
+                    ? "http://open.mapquestapi.com/nominatim/v1/reverse.php"
+                    : "http://nominatim.openstreetmap.org/reverse";
 
                 url += "?format=jsonv2&lat=";
                 url += latitude.ToString();
                 url += "&lon=";
                 url += longitude.ToString();
 
-                if (!String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                 {
                     url += "&key=";
                     url += ApplicationSettings.Default.MapQuestKey;
@@ -1537,13 +1551,13 @@ FROM
                         if (!(dr["Start_address"] != DBNull.Value && dr["Start_address"].ToString().Length > 0))
                         {
                             int id = (int)dr["PosStartId"];
-                            var lat = (double)dr["PosStartLat"];
-                            var lng = (double)dr["PosStartLng"];
-                            var address = ReverseGecocodingAsync(lat, lng);
+                            double lat = (double)dr["PosStartLat"];
+                            double lng = (double)dr["PosStartLng"];
+                            Task<string> address = ReverseGecocodingAsync(lat, lng);
                             //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
-                            if (!String.IsNullOrEmpty(addressResult))
+                            if (!string.IsNullOrEmpty(addressResult))
                             {
                                 //UpdateAddressByPosId(id, addressResult, altitude.Result);
                                 UpdateAddressByPosId(id, addressResult, 0);
@@ -1553,13 +1567,13 @@ FROM
                         if (!(dr["End_address"] != DBNull.Value && dr["End_address"].ToString().Length > 0))
                         {
                             int id = (int)dr["PosEndId"];
-                            var lat = (double)dr["PosEndtLat"];
-                            var lng = (double)dr["PosEndLng"];
-                            var address = ReverseGecocodingAsync(lat, lng);
+                            double lat = (double)dr["PosEndtLat"];
+                            double lng = (double)dr["PosEndLng"];
+                            Task<string> address = ReverseGecocodingAsync(lat, lng);
                             //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
-                            if (!String.IsNullOrEmpty(addressResult))
+                            if (!string.IsNullOrEmpty(addressResult))
                             {
                                 //UpdateAddressByPosId(id, addressResult, altitude.Result);
                                 UpdateAddressByPosId(id, addressResult, 0);
@@ -1583,17 +1597,17 @@ FROM
                 MySqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    System.Threading.Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
+                    Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
                     try
                     {
                         int id = (int)dr[0];
-                        var lat = (double)dr[1];
-                        var lng = (double)dr[2];
-                        var address = ReverseGecocodingAsync(lat, lng);
+                        double lat = (double)dr[1];
+                        double lng = (double)dr[2];
+                        Task<string> address = ReverseGecocodingAsync(lat, lng);
                         //var altitude = AltitudeAsync(lat, lng);
 
                         string addressResult = address.Result;
-                        if (!String.IsNullOrEmpty(addressResult))
+                        if (!string.IsNullOrEmpty(addressResult))
                         {
                             //UpdateAddressByPosId(id, addressResult, altitude.Result);
                             UpdateAddressByPosId(id, addressResult, 0);
@@ -1632,7 +1646,7 @@ FROM
                     {
                         try
                         {
-                            System.Threading.Thread.Sleep(2);
+                            Thread.Sleep(2);
                             double lat = (double)dr[0];
                             double lng = (double)dr[1];
                             int id = (int)dr[2];
@@ -1688,13 +1702,13 @@ FROM
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
-                var r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
                 if (r2["ideal_battery_range"] == null)
                     return -1;
 
-                var ideal_battery_range = (decimal)r2["ideal_battery_range"];
+                decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
                     ideal_battery_range = (decimal)r2["battery_range"];
@@ -1905,7 +1919,7 @@ FROM
             return "NULL";
         }
 
-        public async Task<String> PostCommand(String cmd, String data)
+        public async Task<string> PostCommand(string cmd, string data)
         {
             Logfile.Log("PostCommand: " + cmd + " - " + data);
 
@@ -1935,7 +1949,7 @@ FROM
             return "NULL";
         }
 
-        public async Task<String> Wakeup()
+        public async Task<string> Wakeup()
         {
             return await PostCommand("wake_up", "");
         }
@@ -1960,11 +1974,11 @@ FROM
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
-                var r1temp = (System.Collections.Generic.Dictionary<string, object>)r1;
+                var r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                var r1temp = (Dictionary<string, object>)r1;
                 string OnlineState = r1temp["state"].ToString();
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
-                var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp["drive_state"]);
+                var r2 = ((Dictionary<string, object>)r1temp["drive_state"]);
 
                 double latitude = double.Parse(r2["latitude"].ToString());
                 double longitude = double.Parse(r2["longitude"].ToString());
