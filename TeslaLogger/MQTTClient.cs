@@ -1,13 +1,15 @@
-﻿namespace TeslaLogger
-{
-    using System;
+﻿using System;
 
+namespace TeslaLogger
+{
     internal static class MQTTClient
     {
         internal static void StartMQTTClient()
         {
             if (!ApplicationSettings.Default.UseMQTT)
+            {
                 return;
+            }
 
             try
             {

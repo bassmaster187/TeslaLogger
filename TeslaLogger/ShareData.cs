@@ -52,8 +52,10 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con);
-                cmd.CommandTimeout = 600;
+                MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
+                {
+                    CommandTimeout = 600
+                };
                 cmd.ExecuteNonQuery();
             }
 
@@ -62,7 +64,9 @@ namespace TeslaLogger
         public void SendAllChargingData()
         {
             if (!shareData)
+            {
                 return;
+            }
 
             try
             {
@@ -91,8 +95,10 @@ namespace TeslaLogger
                 {
                     int HostId = Convert.ToInt32(dr["HostId"]);
 
-                    var d = new Dictionary<string, object>();
-                    d.Add("ProtocolVersion", ProtocolVersion);
+                    Dictionary<string, object> d = new Dictionary<string, object>
+                    {
+                        { "ProtocolVersion", ProtocolVersion }
+                    };
                     string Firmware = DBHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
                     d.Add("Firmware", Firmware);
 
@@ -100,30 +106,35 @@ namespace TeslaLogger
                     foreach (DataColumn col in dt.Columns)
                     {
                         if (col.Caption.EndsWith("ChargingID"))
+                        {
                             continue;
+                        }
 
                         if (col.Caption.EndsWith("Date"))
+                        {
                             d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                        }
                         else
+                        {
                             d.Add(col.Caption, dr[col.Caption]);
+                        }
                     }
 
-                    int count = 0;
-                    var l = GetChargingDT(Convert.ToInt32(dr["StartChargingID"]), Convert.ToInt32(dr["EndChargingID"]), out count);
+                    List<object> l = GetChargingDT(Convert.ToInt32(dr["StartChargingID"]), Convert.ToInt32(dr["EndChargingID"]), out int count);
                     d.Add("teslalogger_version", TeslaloggerVersion);
                     d.Add("charging", l);
 
-                    var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+                    string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
                     //string resultContent = "";
                     try
                     {
                         HttpClient client = new HttpClient();
-                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+                        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
                         DateTime start = DateTime.UtcNow;
-                        var result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
-                        var r = result.Content.ReadAsStringAsync().Result;
+                        HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
+                        string r = result.Content.ReadAsStringAsync().Result;
                         DBHelper.AddMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode);
 
                         //resultContent = result.Content.ReadAsStringAsync();
@@ -164,7 +175,7 @@ namespace TeslaLogger
                 order by battery_level";
 
             DataTable dt = new DataTable();
-            var l = new List<object>();
+            List<object> l = new List<object>();
 
             MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
             da.SelectCommand.Parameters.AddWithValue("@startid", startid);
@@ -173,7 +184,7 @@ namespace TeslaLogger
 
             foreach (DataRow dr in dt.Rows)
             {
-                var d = new Dictionary<string, object>();
+                Dictionary<string, object> d = new Dictionary<string, object>();
 
                 foreach (DataColumn col in dt.Columns)
                 {
@@ -188,7 +199,9 @@ namespace TeslaLogger
                         d.Add(name, DBHelper.UnixToDateTime(date).ToString("s"));
                     }
                     else
+                    {
                         d.Add(name, dr[col.Caption]);
+                    }
                 }
 
                 l.Add(d);
@@ -203,7 +216,9 @@ namespace TeslaLogger
         {
 
             if (!shareData)
+            {
                 return;
+            }
 
             try
             {
@@ -232,36 +247,42 @@ namespace TeslaLogger
                 ms = Environment.TickCount - ms;
                 Logfile.Log("ShareData: SELECT degradation Data ms: " + ms);
 
-                var d1 = new Dictionary<string, object>();
-                d1.Add("ProtocolVersion", ProtocolVersion);
-                d1.Add("TaskerToken", TaskerToken); // TaskerToken is the primary key and is used to make sure data won't be imported twice
-                
-                var t = new List<object>();
+                Dictionary<string, object> d1 = new Dictionary<string, object>
+                {
+                    { "ProtocolVersion", ProtocolVersion },
+                    { "TaskerToken", TaskerToken } // TaskerToken is the primary key and is used to make sure data won't be imported twice
+                };
+
+                List<object> t = new List<object>();
                 d1.Add("T", t);
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    var d = new Dictionary<string, object>();
+                    Dictionary<string, object> d = new Dictionary<string, object>();
                     foreach (DataColumn col in dt.Columns)
                     {
                         if (col.Caption.EndsWith("Date"))
+                        {
                             d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                        }
                         else
+                        {
                             d.Add(col.Caption, dr[col.Caption]);
+                        }
                     }
                     t.Add(d);
                 }
 
-                var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d1);
+                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d1);
 
                 try
                 {
                     HttpClient client = new HttpClient();
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
                     DateTime start = DateTime.UtcNow;
-                    var result = client.PostAsync("http://teslalogger.de/share_degradation.php", content).Result;
-                    var r = result.Content.ReadAsStringAsync().Result;
+                    HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_degradation.php", content).Result;
+                    string r = result.Content.ReadAsStringAsync().Result;
                     DBHelper.AddMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode);
 
                     //resultContent = result.Content.ReadAsStringAsync();

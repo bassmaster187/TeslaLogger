@@ -21,7 +21,7 @@ namespace TeslaLogger
         private static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
-        private static String _OSVersion = String.Empty;
+        private static string _OSVersion = string.Empty;
 
         public static void SetThread_enUS()
         {
@@ -35,7 +35,9 @@ namespace TeslaLogger
             {
                 MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
                 if (displayName != null)
+                {
                     return displayName.Invoke(null, null).ToString();
+                }
             }
 
             return "NULL";
@@ -101,7 +103,7 @@ namespace TeslaLogger
 
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
-                if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                if (bool.Parse(j["SleepTimeSpanEnable"]))
                 {
                     string start = j["SleepTimeSpanEnd"];
                     string[] s = start.Split(':');
@@ -144,7 +146,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
                 {
-                    if (Boolean.Parse(j["SleepTimeSpanEnable"]))
+                    if (bool.Parse(j["SleepTimeSpanEnable"]))
                     {
                         string start = j["SleepTimeSpanStart"];
                         string[] s = start.Split(':');
@@ -189,7 +191,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "ScanMyTesla"))
                 {
-                    return Boolean.Parse(j["ScanMyTesla"]);
+                    return bool.Parse(j["ScanMyTesla"]);
                 }
             }
             catch (Exception ex)
@@ -223,7 +225,7 @@ namespace TeslaLogger
 
             try
             {
-                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
                 {
@@ -235,21 +237,31 @@ namespace TeslaLogger
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
                 if (IsPropertyExist(j, "Power"))
+                {
                     power = j["Power"];
+                }
 
                 if (IsPropertyExist(j, "Temperature"))
+                {
                     temperature = j["Temperature"];
+                }
 
                 if (IsPropertyExist(j, "Length"))
+                {
                     length = j["Length"];
+                }
 
                 if (IsPropertyExist(j, "Language"))
+                {
                     language = j["Language"];
+                }
 
                 if (IsPropertyExist(j, "URL_Admin"))
                 {
                     if (j["URL_Admin"].ToString().Length > 0)
+                    {
                         URL_Admin = j["URL_Admin"];
+                    }
                 }
 
                 _power = power;
@@ -268,12 +280,7 @@ namespace TeslaLogger
 
         public static bool IsPropertyExist(dynamic settings, string name)
         {
-            if (settings is IDictionary<string, object>)
-            {
-                return ((IDictionary<string, object>)settings).ContainsKey(name);
-            }
-
-            return false;
+            return settings is IDictionary<string, object> dictionary && dictionary.ContainsKey(name);
         }
 
         public static string GetGrafanaVersion()
@@ -322,14 +329,7 @@ namespace TeslaLogger
             {
                 if (IsDocker())
                 {
-                    if (File.Exists("/tmp/sharedata.txt"))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return File.Exists("/tmp/sharedata.txt");
                 }
 
                 string filepath = Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
@@ -355,7 +355,7 @@ namespace TeslaLogger
 
         internal static string GetOsVersion()
         {
-            if (!_OSVersion.Equals(String.Empty))
+            if (!_OSVersion.Equals(string.Empty))
             {
                 return _OSVersion;
             }
@@ -369,7 +369,7 @@ namespace TeslaLogger
 
                 if (File.Exists(modelPath))
                 {
-                    string model = System.IO.File.ReadAllText(modelPath);
+                    string model = File.ReadAllText(modelPath);
                     Logfile.Log("Model: " + model);
                     if (model.Contains("Raspberry Pi "))
                     {

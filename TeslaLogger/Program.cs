@@ -210,7 +210,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    if (wh.isCharging(true))
+                    if (wh.IsCharging(true))
                     {
                         Logfile.Log("Charging during Drive -> Finish Trip!!!");
                         DriveFinished(wh);
@@ -276,7 +276,7 @@ namespace TeslaLogger
         private static void HandleStateCharge(WebHelper wh)
         {
             {
-                if (!wh.isCharging())
+                if (!wh.IsCharging())
                 {
                     // TODO: ende des ladens in die datenbank schreiben
                     SetCurrentState(TeslaState.Start);
@@ -342,7 +342,7 @@ namespace TeslaLogger
                     Task.Run(() => wh.DeleteWakeupFile());
                     return;
                 }
-                else if (wh.isCharging(true))
+                else if (wh.IsCharging(true))
                 {
                     lastCarUsed = DateTime.Now;
                     Logfile.Log("Charging");
@@ -416,7 +416,7 @@ namespace TeslaLogger
                                             break;
                                         }
 
-                                        if (wh.existsWakeupFile)
+                                        if (wh.ExistsWakeupFile)
                                         {
                                             Logfile.Log("Wakeupfile prevents car to get sleep");
                                             lastCarUsed = DateTime.Now;
@@ -608,7 +608,7 @@ namespace TeslaLogger
         private static void IntiStage1()
         {
             Tools.SetThread_enUS();
-            UpdateTeslalogger.chmod("nohup.out", 666, false);
+            UpdateTeslalogger.Chmod("nohup.out", 666, false);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
@@ -674,19 +674,19 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Creating empty settings.json");
                         System.IO.File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
-                        UpdateTeslalogger.chmod("/etc/teslalogger/settings.json", 666);
+                        UpdateTeslalogger.Chmod("/etc/teslalogger/settings.json", 666);
                     }
 
                     if (!System.IO.Directory.Exists("/etc/teslalogger/backup"))
                     {
                         System.IO.Directory.CreateDirectory("/etc/teslalogger/backup");
-                        UpdateTeslalogger.chmod("/etc/teslalogger/backup", 777);
+                        UpdateTeslalogger.Chmod("/etc/teslalogger/backup", 777);
                     }
 
                     if (!System.IO.Directory.Exists("/etc/teslalogger/Exception"))
                     {
                         System.IO.Directory.CreateDirectory("/etc/teslalogger/Exception");
-                        UpdateTeslalogger.chmod("/etc/teslalogger/Exception", 777);
+                        UpdateTeslalogger.Chmod("/etc/teslalogger/Exception", 777);
                     }
                 }
                 else
@@ -726,7 +726,7 @@ namespace TeslaLogger
                 string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "MISSINGKM");
                 System.IO.File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
 
-                UpdateTeslalogger.chmod(filepath, 666, false);
+                UpdateTeslalogger.Chmod(filepath, 666, false);
             }
             catch (Exception)
             { }

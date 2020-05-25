@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using MySql.Data.MySqlClient;
-using System.Net;
 
 namespace TeslaLogger
 {
@@ -164,7 +161,7 @@ namespace TeslaLogger
 
                 timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
 
-                chmod("/var/www/html/admin/wallpapers", 777);
+                Chmod("/var/www/html/admin/wallpapers", 777);
 
                 UpdatePHPini();
 
@@ -177,7 +174,7 @@ namespace TeslaLogger
                         File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
                     }
 
-                    UpdateTeslalogger.chmod(filepath, 666, false);
+                    Chmod(filepath, 666, false);
                 }
                 catch (Exception)
                 { }
@@ -194,22 +191,22 @@ namespace TeslaLogger
 
                 if (Tools.IsMono())
                 {
-                    chmod("VERSION", 666);
-                    chmod("settings.json", 666);
-                    chmod("cmd_updated.txt", 666);
-                    chmod("MQTTClient.exe.config", 666);
+                    Chmod("VERSION", 666);
+                    Chmod("settings.json", 666);
+                    Chmod("cmd_updated.txt", 666);
+                    Chmod("MQTTClient.exe.config", 666);
 
-                    if (!exec_mono("git", "--version", false).Contains("git version"))
+                    if (!Exec_mono("git", "--version", false).Contains("git version"))
                     {
-                        exec_mono("apt-get", "-y install git");
-                        exec_mono("git", "--version");
+                        Exec_mono("apt-get", "-y install git");
+                        Exec_mono("git", "--version");
                     }
 
-                    exec_mono("rm", "-rf /etc/teslalogger/git/*");
+                    Exec_mono("rm", "-rf /etc/teslalogger/git/*");
 
-                    exec_mono("rm", "-rf /etc/teslalogger/git");
-                    exec_mono("mkdir", "/etc/teslalogger/git");
-                    exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
+                    Exec_mono("rm", "-rf /etc/teslalogger/git");
+                    Exec_mono("mkdir", "/etc/teslalogger/git");
+                    Exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new DirectoryInfo("/var/www/html"));
@@ -241,7 +238,7 @@ namespace TeslaLogger
 
                 Logfile.Log("Rebooting");
 
-                exec_mono("reboot", "");
+                Exec_mono("reboot", "");
             }
             catch (Exception ex)
             {
@@ -310,8 +307,6 @@ namespace TeslaLogger
             {
                 // System.Diagnostics.Debug.WriteLine("FileChecker");
 
-                WebHelper wh = state as WebHelper;
-
                 if (File.Exists(cmd_restart_path))
                 {
                     string content = File.ReadAllText(cmd_restart_path);
@@ -339,12 +334,12 @@ namespace TeslaLogger
 
                 if (!shareDataOnStartup && Tools.IsShareData())
                 {
-                    if (wh != null)
+                    if (state is WebHelper wh)
                     {
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
 
-                        var sd = new ShareData(wh.TaskerHash);
+                        ShareData sd = new ShareData(wh.TaskerHash);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
                     }
@@ -393,11 +388,19 @@ namespace TeslaLogger
                         content = line;
 
                         if (line.Length == 0)
+                        {
                             continue;
+                        }
+
                         if (line.StartsWith("#"))
+                        {
                             continue;
+                        }
+
                         if (!line.Contains("="))
+                        {
                             continue;
+                        }
 
                         int pos = line.IndexOf("=");
                         string key = line.Substring(0, pos).Trim();
@@ -412,9 +415,13 @@ namespace TeslaLogger
                         }
 
                         if (value.Trim().Length > 0)
+                        {
                             ht.Add(key, value);
+                        }
                         else
+                        {
                             ht.Add(key, key +" xxx");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -434,12 +441,7 @@ namespace TeslaLogger
             {
                 if (Tools.IsMono())
                 {
-                    string power;
-                    string temperature;
-                    string length;
-                    string language;
-                    string URL_Admin;
-                    Tools.GrafanaSettings(out power, out temperature, out length, out language, out URL_Admin);
+                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -449,22 +451,22 @@ namespace TeslaLogger
                     {
                         Logfile.Log("upgrade Grafana to 6.3.5!");
 
-                        exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
+                        Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
 
-                        exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+                        Exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
 
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
                     Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
 
-                    exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
-                    exec_mono("rm", "-rf /etc/teslalogger/tmp");
+                    Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
+                    Exec_mono("rm", "-rf /etc/teslalogger/tmp");
 
-                    exec_mono("mkdir", "/etc/teslalogger/tmp");
-                    exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
+                    Exec_mono("mkdir", "/etc/teslalogger/tmp");
+                    Exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
-                    bool useNewTrackmapPanel = System.IO.Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
+                    bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
                     UpdateDBView(wh);
 
@@ -473,7 +475,7 @@ namespace TeslaLogger
                     foreach (string f in Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
                     {
                         Logfile.Log("Update: " + f);
-                        String s = System.IO.File.ReadAllText(f);
+                        string s = File.ReadAllText(f);
                         s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
 
                         if (power == "kw")
@@ -720,14 +722,14 @@ namespace TeslaLogger
                             s = s.Replace("grafana-trackmap-panel", "pr0ps-trackmap-panel");
                         }
 
-                        System.IO.File.WriteAllText(f, s);
+                        File.WriteAllText(f, s);
                     }
 
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new DirectoryInfo("/var/lib/grafana/dashboards"));
 
                     if (!Tools.IsDocker())
                     {
-                        exec_mono("service", "grafana-server restart");
+                        Exec_mono("service", "grafana-server restart");
                     }
                 }
             }
@@ -747,10 +749,12 @@ namespace TeslaLogger
             {
                 System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
 
-                var matches = regexAlias.Matches(content);
+                System.Text.RegularExpressions.MatchCollection matches = regexAlias.Matches(content);
 
                 foreach (System.Text.RegularExpressions.Match match in matches)
+                {
                     content = ReplaceAliasTag(content, match.Groups[1].Value, dictLanguage);
+                }
             }
             catch (Exception ex)
             {
@@ -831,7 +835,7 @@ namespace TeslaLogger
             }
         }
 
-        public static string exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
+        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
         {
             try
             {
@@ -893,7 +897,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void chmod(string filename, int chmod, bool logging=true)
+        public static void Chmod(string filename, int chmod, bool logging=true)
         {
             try
             {
@@ -907,8 +911,10 @@ namespace TeslaLogger
                     Logfile.Log("chmod " + chmod + " " + filename);
                 }
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.EnableRaisingEvents = false;
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                };
                 proc.StartInfo.FileName = "chmod";
                 proc.StartInfo.Arguments = chmod + " " + filename;
                 proc.Start();

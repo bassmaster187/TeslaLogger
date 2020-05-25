@@ -78,7 +78,7 @@ namespace TeslaLogger
                     System.IO.File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
                 }
 
-                UpdateTeslalogger.chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
+                UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
                 ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
             }
             

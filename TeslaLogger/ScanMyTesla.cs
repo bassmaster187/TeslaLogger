@@ -32,7 +32,9 @@ namespace TeslaLogger
         private void Start()
         {
             if (!Tools.UseScanMyTesla())
+            {
                 return;
+            }
 
             Logfile.Log("Start ScanMyTesla Thread!");
 
@@ -49,7 +51,9 @@ namespace TeslaLogger
                         for (int s = 0; s < 300; s++)
                         {
                             if (fastmode)
+                            {
                                 break;
+                            }
 
                             System.Threading.Thread.Sleep(100);
                         }
@@ -57,7 +61,9 @@ namespace TeslaLogger
 
                     response = GetDataFromWebservice().Result;
                     if (response.StartsWith("not found") || response.StartsWith("ERROR:"))
+                    {
                         System.Threading.Thread.Sleep(5000);
+                    }
                     else
                     {
                         InsertData(response);
@@ -77,25 +83,27 @@ namespace TeslaLogger
             Logfile.Log("ScanMyTesla: " + response);
         }
 
-        public async Task<String> GetDataFromWebservice()
+        public async Task<string> GetDataFromWebservice()
         {
             string resultContent = "";
             try
             {
                 HttpClient client = new HttpClient();
-                var content = new FormUrlEncodedContent(new[]
+                FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("t", token)
                 });
 
                 DateTime start = DateTime.UtcNow;
-                var result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
+                HttpResponseMessage result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
                 resultContent = await result.Content.ReadAsStringAsync();
 
                 DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
 
                 if (resultContent == "not found")
+                {
                     return "not found";
+                }
 
                 string temp = resultContent;
                 int i = 0;
@@ -158,7 +166,6 @@ namespace TeslaLogger
                             {
                                 DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
                             }
-
                             break;
                         case "43":
                             DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
@@ -169,9 +176,13 @@ namespace TeslaLogger
 
 
                     if (first)
+                    {
                         first = false;
+                    }
                     else
+                    {
                         sb.Append(",");
+                    }
 
                     sb.Append("('");
                     sb.Append(sqlDate);
