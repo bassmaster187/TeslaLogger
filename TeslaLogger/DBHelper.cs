@@ -15,14 +15,14 @@ namespace TeslaLogger
     {
         public static CurrentJSON currentJSON = new CurrentJSON();
 
-        private static Dictionary<String, int> mothershipCommands = new Dictionary<string, int>();
+        private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
 
         public static string DBConnectionstring
         {
             get
             {
-                if (String.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+                if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
                 {
                     return "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;";
                 }
@@ -142,7 +142,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void AddCommandToDB(String command)
+        private static void AddCommandToDB(string command)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -163,7 +163,7 @@ namespace TeslaLogger
                 while (dr.Read())
                 {
                     int id = Convert.ToInt32(dr["id"]);
-                    String command = dr[1].ToString();
+                    string command = dr[1].ToString();
                     if (!mothershipCommands.ContainsKey(command))
                     {
                         mothershipCommands.Add(command, id);
@@ -216,7 +216,7 @@ namespace TeslaLogger
 
             UpdateMaxChargerPower();
 
-            Task.Factory.StartNew(() => DBHelper.CheckForInterruptedCharging(false));
+            Task.Factory.StartNew(() => CheckForInterruptedCharging(false));
         }
 
         public static void UpdateMaxChargerPower()
@@ -504,7 +504,7 @@ namespace TeslaLogger
 
             Logfile.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
 
-            String inhalt = "";
+            string inhalt = "";
             try
             {
                 //SRTM.Logging.LogProvider.SetCurrentLogProvider(SRTM.Logging.Logger.)
@@ -701,7 +701,7 @@ namespace TeslaLogger
                     }
                 }
 
-                DBHelper.UpdateTripElevation(startid, DBHelper.GetMaxPosid()); // get elevation for all points
+                UpdateTripElevation(startid, GetMaxPosid()); // get elevation for all points
             }
             catch (Exception ex)
             {
@@ -900,7 +900,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT pos_start.id as StartPos, pos_end.id as EndPos
@@ -919,7 +919,7 @@ namespace TeslaLogger
                             int StartPos = Convert.ToInt32(dr[0]);
                             int EndPos = Convert.ToInt32(dr[1]);
 
-                            DBHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                            UpdateDriveStatistics(StartPos, EndPos, false);
                         }
                         catch (Exception ex)
                         {
@@ -940,7 +940,7 @@ namespace TeslaLogger
         {
             Logfile.Log("UpdateAllDrivestateData start");
 
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos from drivestate", con);
@@ -952,7 +952,7 @@ namespace TeslaLogger
                         int StartPos = Convert.ToInt32(dr[0]);
                         int EndPos = Convert.ToInt32(dr[1]);
 
-                        DBHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                        UpdateDriveStatistics(StartPos, EndPos, false);
                     }
                     catch (Exception ex)
                     {
@@ -994,7 +994,7 @@ namespace TeslaLogger
 
         public static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
-            double? inside_temp = DBHelper.currentJSON.current_inside_temperature;
+            double? inside_temp = currentJSON.current_inside_temperature;
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -1053,9 +1053,9 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
                 }
 
-                cmd.Parameters.AddWithValue("@battery_heater", DBHelper.currentJSON.current_battery_heater ? 1 : 0);
-                cmd.Parameters.AddWithValue("@is_preconditioning", DBHelper.currentJSON.current_is_preconditioning ? 1 : 0);
-                cmd.Parameters.AddWithValue("@sentry_mode", DBHelper.currentJSON.current_is_sentry_mode ? 1 : 0);
+                cmd.Parameters.AddWithValue("@battery_heater", currentJSON.current_battery_heater ? 1 : 0);
+                cmd.Parameters.AddWithValue("@is_preconditioning", currentJSON.current_is_preconditioning ? 1 : 0);
+                cmd.Parameters.AddWithValue("@sentry_mode", currentJSON.current_is_sentry_mode ? 1 : 0);
 
                 cmd.ExecuteNonQuery();
 
@@ -1128,11 +1128,9 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
                     cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                     cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
-                    cmd.Parameters.AddWithValue("@battery_heater", DBHelper.currentJSON.current_battery_heater ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@battery_heater", currentJSON.current_battery_heater ? 1 : 0);
 
-                    int i = 0;
-
-                    if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out i))
+                    if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out int i))
                     {
                         cmd.Parameters.AddWithValue("@charger_pilot_current", i);
                     }
@@ -1414,11 +1412,11 @@ namespace TeslaLogger
         }
 
         private static void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging)
-        {
-            /*
+        { 
             if (logging)
+            {
                 Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
-                */
+            }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {

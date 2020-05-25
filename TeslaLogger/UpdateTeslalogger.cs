@@ -171,9 +171,11 @@ namespace TeslaLogger
                 try
                 {
                     // create empty weather.ini file
-                    string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
+                    string filepath = Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
                     if (!File.Exists(filepath))
-                        System.IO.File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
+                    {
+                        File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
+                    }
 
                     UpdateTeslalogger.chmod(filepath, 666, false);
                 }
@@ -181,13 +183,13 @@ namespace TeslaLogger
                 { }
 
 
-                if (System.IO.File.Exists("cmd_updated.txt"))
+                if (File.Exists("cmd_updated.txt"))
                 {
                     Logfile.Log("Update skipped!");
                     return;
                 }
 
-                System.IO.File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
+                File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
                 Logfile.Log("Start update");
 
                 if (Tools.IsMono())
@@ -209,15 +211,17 @@ namespace TeslaLogger
                     exec_mono("mkdir", "/etc/teslalogger/git");
                     exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new System.IO.DirectoryInfo("/var/www/html"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/www"), new DirectoryInfo("/var/www/html"));
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/geofence.csv", "/etc/teslalogger/geofence.csv");
                     Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/GrafanaConfig/sample.yaml", "/etc/grafana/provisioning/dashboards/sample.yaml");
 
-                    if (!System.IO.Directory.Exists("/var/lib/grafana/dashboards"))
-                        System.IO.Directory.CreateDirectory("/var/lib/grafana/dashboards");
+                    if (!Directory.Exists("/var/lib/grafana/dashboards"))
+                    {
+                        Directory.CreateDirectory("/var/lib/grafana/dashboards");
+                    }
 
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new System.IO.DirectoryInfo("/etc/teslalogger"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"));
 
                     try
                     {
@@ -315,7 +319,7 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Update Request!");
 
-                        if (System.IO.File.Exists("cmd_updated.txt"))
+                        if (File.Exists("cmd_updated.txt"))
                         {
                             Logfile.Log("delete cmd_updated.txt");
 
@@ -359,10 +363,10 @@ namespace TeslaLogger
             {
                 Logfile.Log("update view: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
-                String s = DBViews.Trip;
+                string s = DBViews.Trip;
                 s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
 
-                System.IO.File.WriteAllText("view_trip.txt", s);
+                File.WriteAllText("view_trip.txt", s);
 
                 DBHelper.ExecuteSQLQuery(s, 300);
             }
@@ -374,16 +378,16 @@ namespace TeslaLogger
 
         private static Dictionary<string, string> GetLanguageDictionary(string language)
         {
-            System.Collections.Generic.Dictionary<string, string> ht = new Dictionary<string, string>();
+            Dictionary<string, string> ht = new Dictionary<string, string>();
 
             string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
             string content = null;
 
-            if (System.IO.File.Exists(filename))
+            if (File.Exists(filename))
             {
                 try
                 {
-                    String[] lines = File.ReadAllLines(filename);
+                    string[] lines = File.ReadAllLines(filename);
                     foreach (string line in lines)
                     {
                         content = line;
@@ -449,7 +453,7 @@ namespace TeslaLogger
 
                         exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
 
-                        Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new System.IO.DirectoryInfo("/var/lib/grafana/plugins"));
+                        Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
                     Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
@@ -464,9 +468,9 @@ namespace TeslaLogger
 
                     UpdateDBView(wh);
 
-                    Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
                     // changes to dashboards
-                    foreach (string f in System.IO.Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
+                    foreach (string f in Directory.GetFiles("/etc/teslalogger/tmp/Grafana"))
                     {
                         Logfile.Log("Update: " + f);
                         String s = System.IO.File.ReadAllText(f);
@@ -695,20 +699,26 @@ namespace TeslaLogger
                                 }, dictLanguage, true);
                             }
                             else
+                            {
                                 Logfile.Log("Title of " + f + " not translated!");
+                            }
                         }
 
                         if (URL_Admin.Length > 0)
                         {
                             string temp_URL = URL_Admin;
                             if (!temp_URL.EndsWith("/"))
+                            {
                                 temp_URL += "/";
+                            }
 
                             s = s.Replace("http://raspberry/admin/", temp_URL);
                         }
 
                         if (useNewTrackmapPanel)
+                        {
                             s = s.Replace("grafana-trackmap-panel", "pr0ps-trackmap-panel");
+                        }
 
                         System.IO.File.WriteAllText(f, s);
                     }
@@ -716,7 +726,9 @@ namespace TeslaLogger
                     Tools.CopyFilesRecursively(new System.IO.DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new System.IO.DirectoryInfo("/var/lib/grafana/dashboards"));
 
                     if (!Tools.IsDocker())
+                    {
                         exec_mono("service", "grafana-server restart");
+                    }
                 }
             }
             catch (Exception ex)
@@ -793,7 +805,9 @@ namespace TeslaLogger
         private static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
         {
             foreach (string l in v)
+            {
                 content = ReplaceLanguageTag(content, l, dictLanguage, quoted);
+            }
 
             return content;
         }
@@ -812,7 +826,9 @@ namespace TeslaLogger
                 return content.Replace("\"" + v + "\"", "\"" + dictLanguage[v] + "\"");
             }
             else
+            {
                 return content.Replace(v, dictLanguage[v]);
+            }
         }
 
         public static string exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
@@ -820,7 +836,9 @@ namespace TeslaLogger
             try
             {
                 if (!Tools.IsMono())
+                {
                     return "";
+                }
 
                 Logfile.Log("execute: " + cmd + " " + param);
 
@@ -878,10 +896,14 @@ namespace TeslaLogger
             try
             {
                 if (!Tools.IsMono())
+                {
                     return;
+                }
 
                 if (logging)
+                {
                     Logfile.Log("chmod " + chmod + " " + filename);
+                }
 
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.EnableRaisingEvents = false;

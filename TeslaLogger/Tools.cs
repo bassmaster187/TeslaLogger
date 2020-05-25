@@ -1,13 +1,11 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Dynamic;
-    using System.IO;
-    using System.Reflection;
-    using System.Runtime.Caching;
-    using System.Web.Script.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Web.Script.Serialization;
 
+namespace TeslaLogger
+{
     public class Tools
     {
 
@@ -92,10 +90,12 @@
 
             try
             {
-                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
+                {
                     return;
+                }
 
                 string json = File.ReadAllText(filePath);
 
@@ -131,7 +131,7 @@
 
             try
             {
-                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
                 {
@@ -173,12 +173,16 @@
             try
             {
                 if (ApplicationSettings.Default.UseScanMyTesla)
+                {
                     return true;
+                }
 
-                var filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
                 if (!File.Exists(filePath))
+                {
                     return false;
+                }
 
                 string json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
@@ -265,7 +269,9 @@
         public static bool IsPropertyExist(dynamic settings, string name)
         {
             if (settings is IDictionary<string, object>)
+            {
                 return ((IDictionary<string, object>)settings).ContainsKey(name);
+            }
 
             return false;
         }
@@ -317,19 +323,26 @@
                 if (IsDocker())
                 {
                     if (File.Exists("/tmp/sharedata.txt"))
+                    {
                         return true;
+                    }
                     else
+                    {
                         return false;
+                    }
                 }
 
-                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
+                string filepath = Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt");
                 if (File.Exists(filepath))
+                {
                     return true;
+                }
 
-                filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt.txt");
+                filepath = Path.Combine(FileManager.GetExecutingPath(), "sharedata.txt.txt");
                 if (File.Exists(filepath))
+                {
                     return true;
-
+                }
             }
             catch (Exception ex)
             {

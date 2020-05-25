@@ -24,7 +24,7 @@ namespace TeslaLogger
         public string Tesla_Streamingtoken = "";
         public string option_codes = "";
         public CarSettings carSettings = null;
-        public string TaskerHash = String.Empty;
+        public string TaskerHash = string.Empty;
         public bool is_sentry_mode = false;
         public string fast_charger_brand = "";
         public string fast_charger_type = "";
@@ -41,7 +41,7 @@ namespace TeslaLogger
         private static int NominatimCount = 0;
 
         public ScanMyTesla scanMyTesla;
-        private String _lastShift_State = "P";
+        private string _lastShift_State = "P";
 
         static WebHelper()
         {
@@ -56,12 +56,12 @@ namespace TeslaLogger
             carSettings = CarSettings.ReadSettings();
         }
 
-        private String GetLastShiftState()
+        private string GetLastShiftState()
         {
             return _lastShift_State;
         }
 
-        private void SetLastShiftState(String _newState)
+        private void SetLastShiftState(string _newState)
         {
             if (!_newState.Equals(_lastShift_State))
             {
@@ -82,7 +82,7 @@ namespace TeslaLogger
                     switch (flag)
                     {
                         case Geofence.SpecialFlags.OpenChargePort:
-                            String result = openChargePort().Result;
+                            string result = openChargePort().Result;
                             Logfile.Log("openChargePort(): " + result);
                             break;
                         default:
@@ -93,7 +93,7 @@ namespace TeslaLogger
             }
         }
 
-        private async Task<String> openChargePort()
+        private async Task<string> openChargePort()
         {
             string resultContent = "";
             try
@@ -231,7 +231,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private String lastCharging_State = "";
+        private string lastCharging_State = "";
 
         public void ResetLastChargingState()
         {
@@ -249,8 +249,8 @@ namespace TeslaLogger
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (System.Collections.Generic.Dictionary<string, object>)r1;
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
                 if (r2["charging_state"] == null)
                 {
@@ -261,7 +261,7 @@ namespace TeslaLogger
 
                     Logfile.Log("charging_state = null");
 
-                    System.Threading.Thread.Sleep(10000);
+                    Thread.Sleep(10000);
 
                     if (lastCharging_State == "Charging")
                     {
@@ -277,7 +277,9 @@ namespace TeslaLogger
                 string timestamp = r2["timestamp"].ToString();
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
+                {
                     ideal_battery_range = (decimal)r2["battery_range"];
+                }
 
                 string battery_level = r2["battery_level"].ToString();
                 string charger_power = "";
@@ -524,7 +526,7 @@ namespace TeslaLogger
 
         private int unknownStateCounter = 0;
 
-        public async Task<String> IsOnline()
+        public async Task<string> IsOnline()
         {
             string resultContent = "";
             try
@@ -543,15 +545,15 @@ namespace TeslaLogger
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-                    System.Threading.Thread.Sleep(30000);
+                    Thread.Sleep(30000);
                 }
 
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
 
-                object r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["response"];
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 object[] r2 = (object[])r1;
                 object r3 = r2[ApplicationSettings.Default.Car];
-                Dictionary<string, object> r4 = ((System.Collections.Generic.Dictionary<string, object>)r3);
+                Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
                 string state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
@@ -588,7 +590,9 @@ namespace TeslaLogger
                     */
 
                     if (state == "asleep")
+                    {
                         return state;
+                    }
                     else if (state == "unknown")
                     {
                         Logfile.Log("unknown state " + unknownStateCounter);
@@ -601,12 +605,16 @@ namespace TeslaLogger
                             Logfile.Log("WakupResult: " + r);
                         }
                         else
-                            System.Threading.Thread.Sleep(10000);
+                        {
+                            Thread.Sleep(10000);
+                        }
 
                         unknownStateCounter++;
 
                         if (unknownStateCounter == 6)
+                        {
                             unknownStateCounter = 0;
+                        }
                     }
                     else
                     {
@@ -676,7 +684,7 @@ namespace TeslaLogger
                     try
                     {
                         double wh = 0;
-                        if (Double.TryParse(carSettings.DB_Wh_TR, System.Globalization.NumberStyles.Any, Tools.ciEnUS, out wh))
+                        if (double.TryParse(carSettings.DB_Wh_TR, System.Globalization.NumberStyles.Any, Tools.ciEnUS, out wh))
                         {
                             if (wh >= 0.143 && wh <= 0.148)
                             {
@@ -1958,23 +1966,31 @@ FROM
                 System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
                 var r2 = ((System.Collections.Generic.Dictionary<string, object>)r1temp["drive_state"]);
 
-                var latitude = Double.Parse(r2["latitude"].ToString());
-                var longitude = Double.Parse(r2["longitude"].ToString());
+                double latitude = double.Parse(r2["latitude"].ToString());
+                double longitude = double.Parse(r2["longitude"].ToString());
                 var timestamp = r2["timestamp"].ToString();
                 int speed = 0;
                 if (r2["speed"] != null)
+                {
                     speed = (int)r2["speed"];
+                }
 
                 int power = 0;
                 if (r2["power"] != null)
+                {
                     power = (int)r2["power"];
+                }
 
                 var shift_state = "";
                 if (r2["shift_state"] != null)
+                {
                     shift_state = r2["shift_state"].ToString();
+                }
 
                 if (shift_state == "D")
+                {
                     DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                }
 
                 return resultContent;
             }
@@ -1994,7 +2010,7 @@ FROM
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "C# App");
 
-            var resultTask = client.GetAsync("https://www.energy-charts.de/power/week_2018_46.json");
+            Task<HttpResponseMessage> resultTask = client.GetAsync("https://www.energy-charts.de/power/week_2018_46.json");
             HttpResponseMessage result = resultTask.Result;
             resultContent = result.Content.ReadAsStringAsync().Result;
 
@@ -2008,13 +2024,15 @@ FROM
             object[] o1 = (object[])jsonResult;
             foreach (object o2 in o1)
             {
-                System.Collections.Generic.Dictionary<string, object> o3 = o2 as System.Collections.Generic.Dictionary<string, object>;
+                Dictionary<string, object> o3 = o2 as Dictionary<string, object>;
                 object[] name = o3["key"] as object[];
-                System.Collections.Generic.Dictionary<string, object> n2 = name[0] as System.Collections.Generic.Dictionary<string, object>;
+                Dictionary<string, object> n2 = name[0] as Dictionary<string, object>;
                 string realname = n2["de"].ToString();
 
                 if (realname.Contains("geplant") || realname.Contains("Prognose"))
+                {
                     continue;
+                }
 
                 object[] values = o3["values"] as object[];
 
@@ -2026,9 +2044,13 @@ FROM
                     if (v2[1] != null)
                     {
                         if (v2[1] is decimal)
+                        {
                             lastkWh = (decimal)v2[1];
+                        }
                         else if (v2[1] is int)
+                        {
                             lastkWh = Convert.ToDecimal((int)v2[1]);
+                        }
 
                         DataRow dr = dt.NewRow();
                         dr["name"] = realname;
@@ -2062,15 +2084,19 @@ FROM
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
                 if (!force && ts.TotalSeconds < 20)
+                {
                     return false;
+                }
 
                 //Logfile.Log("Check Tasker Webservice");
 
                 lastTaskerWakeupfile = DateTime.Now;
 
-                String name = carSettings.Name;
+                string name = carSettings.Name;
                 if (carSettings.Raven && !name.Contains("Raven"))
+                {
                     name += " Raven";
+                }
 
                 HttpClient client = new HttpClient();
 
