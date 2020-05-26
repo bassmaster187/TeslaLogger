@@ -7,18 +7,25 @@ namespace TeslaLogger
 {
     public class Address
     {
-        public Address(string name, double lat, double lng, int radius)
+        public enum SpecialFlags
         {
-            this.name = name;
-            this.lat = lat;
-            this.lng = lng;
-            this.radius = radius;
+            OpenChargePort
         }
 
         public string name;
         public double lat;
         public double lng;
         public int radius;
+        public HashSet<SpecialFlags> specialFlags;
+
+        public Address(string name, double lat, double lng, int radius)
+        {
+            this.name = name;
+            this.lat = lat;
+            this.lng = lng;
+            this.radius = radius;
+            specialFlags = new HashSet<SpecialFlags>();
+        }
     }
 
     public class Geofence
@@ -29,13 +36,6 @@ namespace TeslaLogger
         public bool RacingMode = false;
 
         private static int FSWCounter = 0;
-
-        public enum SpecialFlags
-        {
-            OpenChargePort
-        }
-
-        private static Dictionary<string, HashSet<SpecialFlags>> specialFlags = new Dictionary<string, HashSet<SpecialFlags>>();
 
         public Geofence()
         {
@@ -144,17 +144,19 @@ namespace TeslaLogger
                                 int.TryParse(args[3], out radius);
                             }
 
+                            Address addr = new Address(args[0].Trim(),
+                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
+                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
+                                radius);
+
                             if (args.Length > 4)
                             {
                                 string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
-                                ParseSpecialFlags(args[0].Trim(), flags);
+                                ParseSpecialFlags(addr, flags);
                             }
 
-                            list.Add(new Address(args[0].Trim(),
-                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
-                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
-                                radius));
+                            list.Add(addr);
 
                             if (!filename.Contains("geofence.csv"))
                             {
@@ -174,22 +176,12 @@ namespace TeslaLogger
             }
         }
 
-        private static void ParseSpecialFlags(string _locationname, string _flags)
+        private static void ParseSpecialFlags(Address _addr, string _flags)
         {
             if (_flags.Contains("+ocp"))
             {
-                if (!specialFlags.ContainsKey(_locationname))
-                {
-                    specialFlags.Add(_locationname, new HashSet<SpecialFlags>());
-                }
-                specialFlags[_locationname].Add(SpecialFlags.OpenChargePort);
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort);
             }
-        }
-
-        public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(string _locationname)
-        {
-            Logfile.Log("GetSpecialFlagsForLocationName(" + _locationname + ")");
-            return specialFlags.ContainsKey(_locationname) ? specialFlags[_locationname] : new HashSet<SpecialFlags>();
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true)

@@ -76,17 +76,16 @@ namespace TeslaLogger
             if ((_oldState.Equals("D") || _oldState.Equals("R") || _oldState.Equals("N")) && _newState.Equals("P"))
             {
                 Address addr = geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-                HashSet<Geofence.SpecialFlags> specialFlags = Geofence.GetSpecialFlagsForLocationName(addr.name);
-                foreach (Geofence.SpecialFlags flag in specialFlags)
+                foreach (Address.SpecialFlags flag in addr.specialFlags)
                 {
                     switch (flag)
                     {
-                        case Geofence.SpecialFlags.OpenChargePort:
+                        case Address.SpecialFlags.OpenChargePort:
                             string result = PostCommand("command/charge_port_door_open", null).Result;
                             Logfile.Log("openChargePort(): " + result);
                             break;
                         default:
-                            Logfile.Log("handleShiftStateChange(" + _oldState + ", " + _newState + ") default");
+                            Logfile.Log("handleShiftStateChange D|R|N->P (" + _oldState + ", " + _newState + ") default");
                             break;
                     }
                 }
