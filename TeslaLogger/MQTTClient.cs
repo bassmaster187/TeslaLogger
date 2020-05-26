@@ -1,13 +1,15 @@
-﻿namespace TeslaLogger
-{
-    using System;
+﻿using System;
 
+namespace TeslaLogger
+{
     internal static class MQTTClient
     {
         internal static void StartMQTTClient()
         {
             if (!ApplicationSettings.Default.UseMQTT)
+            {
                 return;
+            }
 
             try
             {
@@ -32,8 +34,10 @@
                     return;
                 }
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.EnableRaisingEvents = false;
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                };
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.FileName = "mono";

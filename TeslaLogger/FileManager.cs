@@ -1,10 +1,10 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
+namespace TeslaLogger
+{
     internal enum TLFilename
     {
         CarSettings,
@@ -30,7 +30,7 @@
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
-        static string _ExecutingPath = null;
+        private static string _ExecutingPath = null;
         static FileManager()
         {
             Filenames = new Dictionary<TLFilename, string>()
@@ -72,9 +72,11 @@
 
             try
             {
-                var path = GetFilePath(TLFilename.TeslaTokenFilename);
+                string path = GetFilePath(TLFilename.TeslaTokenFilename);
                 if (path != string.Empty)
+                {
                     filecontent = File.ReadAllText(path);
+                }
             }
             catch (FileNotFoundException)
             {
@@ -97,7 +99,7 @@
             File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
         }
 
-        static object SyncLock_WriteCurrentJsonFile = new object();
+        private static object SyncLock_WriteCurrentJsonFile = new object();
 
         internal static void WriteCurrentJsonFile(string current_json)
         {
@@ -109,9 +111,11 @@
 
         internal static string GetSRTMDataPath()
         {
-            var path = System.IO.Path.Combine(FileManager.GetExecutingPath(), "SRTM-Data");
+            string path = Path.Combine(GetExecutingPath(), "SRTM-Data");
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
 
             return path;
         }
@@ -127,11 +131,11 @@
             if (_ExecutingPath == null)
             {
 
-                var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-                var executingPath = executingAssembly.Location;
+                string executingPath = executingAssembly.Location;
 
-                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, String.Empty);
+                executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, string.Empty);
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
 
                 _ExecutingPath = executingPath;

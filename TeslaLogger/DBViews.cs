@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeslaLogger
+﻿namespace TeslaLogger
 {
-    class DBViews
+    internal class DBViews
     {
         public const string Trip = 
             @"CREATE 

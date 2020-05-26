@@ -1,10 +1,10 @@
-﻿namespace TeslaLogger
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
+namespace TeslaLogger
+{
     public class Address
     {
         public Address(string name, double lat, double lng, int radius)
@@ -23,8 +23,8 @@
 
     public class Geofence
     {
-        List<Address> sortedList;
-        System.IO.FileSystemWatcher fsw;
+        private List<Address> sortedList;
+        private System.IO.FileSystemWatcher fsw;
 
         public bool RacingMode = false;
 
@@ -35,7 +35,7 @@
             OpenChargePort
         }
 
-        private static Dictionary<String, HashSet<SpecialFlags>> specialFlags = new Dictionary<String, HashSet<SpecialFlags>>();
+        private static Dictionary<string, HashSet<SpecialFlags>> specialFlags = new Dictionary<string, HashSet<SpecialFlags>>();
 
         public Geofence()
         {
@@ -57,7 +57,7 @@
             }
         }
 
-        void Init()
+        private void Init()
         {
             List<Address> list = new List<Address>();
 
@@ -78,7 +78,7 @@
                     System.IO.File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
                 }
 
-                UpdateTeslalogger.chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
+                UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
                 ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
             }
             
@@ -101,7 +101,9 @@
                 System.Threading.Thread.Sleep(5000);
 
                 if (ts.TotalSeconds > 5)
+                {
                     return;
+                }
 
                 Logfile.Log($"CSV File changed: {e.Name} at {dt}");
                 
@@ -128,12 +130,14 @@
                     {
                         try
                         {
-                            if (String.IsNullOrEmpty(line))
+                            if (string.IsNullOrEmpty(line))
+                            {
                                 continue;
+                            }
 
                             int radius = 50;
 
-                            var args = line.Split(',');
+                            string[] args = line.Split(',');
 
                             if (args.Length > 3)
                             {
@@ -142,18 +146,20 @@
 
                             if (args.Length > 4)
                             {
-                                String flags = args[4];
+                                string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
-                                parseSpecialFlags(args[0].Trim(), flags);
+                                ParseSpecialFlags(args[0].Trim(), flags);
                             }
 
                             list.Add(new Address(args[0].Trim(),
-                                Double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
-                                Double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
+                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
+                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
                                 radius));
 
                             if (!filename.Contains("geofence.csv"))
+                            {
                                 Logfile.Log("Address inserted: " + args[0]);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -168,7 +174,7 @@
             }
         }
 
-        private static void parseSpecialFlags(String _locationname, String _flags)
+        private static void ParseSpecialFlags(string _locationname, string _flags)
         {
             if (_flags.Contains("+ocp"))
             {
@@ -180,15 +186,10 @@
             }
         }
 
-        public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(String _locationname)
+        public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(string _locationname)
         {
             Logfile.Log("GetSpecialFlagsForLocationName(" + _locationname + ")");
-            if (specialFlags.ContainsKey(_locationname))
-            {
-                return specialFlags[_locationname];
-            }
-
-            return new HashSet<SpecialFlags>();
+            return specialFlags.ContainsKey(_locationname) ? specialFlags[_locationname] : new HashSet<SpecialFlags>();
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true)
@@ -201,11 +202,13 @@
             {
                 double range = 0.2; // apprx 10km
 
-                foreach (var p in sortedList)
+                foreach (Address p in sortedList)
                 {
                     
                     if (p.lat - range > lat)
+                    {
                         return ret; // da die liste sortiert ist, kann nichts mehr kommen
+                    }
 
                     if ((p.lat - range) < lat &&
                         lat < (p.lat + range) &&
@@ -217,7 +220,9 @@
                         {
                             found++;
                             if (logDistance)
+                            {
                                 Logfile.Log($"Distance: {distance} - Radius: {p.radius} - {p.name}");
+                            }
 
                             if (ret == null)
                             {
@@ -242,11 +247,11 @@
 
         public double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
         {
-            var d1 = latitude * (Math.PI / 180.0);
-            var num1 = longitude * (Math.PI / 180.0);
-            var d2 = otherLatitude * (Math.PI / 180.0);
-            var num2 = otherLongitude * (Math.PI / 180.0) - num1;
-            var d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0);
+            double d1 = latitude * (Math.PI / 180.0);
+            double num1 = longitude * (Math.PI / 180.0);
+            double d2 = otherLatitude * (Math.PI / 180.0);
+            double num2 = (otherLongitude * (Math.PI / 180.0)) - num1;
+            double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + (Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0));
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +10,10 @@ namespace TeslaLogger
 {
     public class ScanMyTesla
     {
-        string token;
-        System.Threading.Thread thread;
-        bool fastmode = false;
-        bool run = true;
+        private string token;
+        private System.Threading.Thread thread;
+        private bool fastmode = false;
+        private bool run = true;
 
         public ScanMyTesla(string token)
         {
@@ -33,7 +32,9 @@ namespace TeslaLogger
         private void Start()
         {
             if (!Tools.UseScanMyTesla())
+            {
                 return;
+            }
 
             Logfile.Log("Start ScanMyTesla Thread!");
 
@@ -50,7 +51,9 @@ namespace TeslaLogger
                         for (int s = 0; s < 300; s++)
                         {
                             if (fastmode)
+                            {
                                 break;
+                            }
 
                             System.Threading.Thread.Sleep(100);
                         }
@@ -58,7 +61,9 @@ namespace TeslaLogger
 
                     response = GetDataFromWebservice().Result;
                     if (response.StartsWith("not found") || response.StartsWith("ERROR:"))
+                    {
                         System.Threading.Thread.Sleep(5000);
+                    }
                     else
                     {
                         InsertData(response);
@@ -78,25 +83,27 @@ namespace TeslaLogger
             Logfile.Log("ScanMyTesla: " + response);
         }
 
-        public async Task<String> GetDataFromWebservice()
+        public async Task<string> GetDataFromWebservice()
         {
             string resultContent = "";
             try
             {
                 HttpClient client = new HttpClient();
-                var content = new FormUrlEncodedContent(new[]
+                FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("t", token)
                 });
 
                 DateTime start = DateTime.UtcNow;
-                var result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
+                HttpResponseMessage result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
                 resultContent = await result.Content.ReadAsStringAsync();
 
-                DBHelper.addMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
+                DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
 
                 if (resultContent == "not found")
+                {
                     return "not found";
+                }
 
                 string temp = resultContent;
                 int i = 0;
@@ -114,27 +121,41 @@ namespace TeslaLogger
                 DBHelper.currentJSON.lastScanMyTeslaReceived = d;
                 DBHelper.currentJSON.CreateCurrentJSON();
 
-                System.Collections.Generic.Dictionary<string, Object> kv = (System.Collections.Generic.Dictionary<string, Object>)j["dict"];
+                Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
 
                 StringBuilder sb = new StringBuilder();
                 sb.Append("INSERT INTO `can` (`datum`, `id`, `val`) VALUES ");
                 bool first = true;
 
-                String sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
+                string sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
 
-                foreach (var line in kv)
+                foreach (KeyValuePair<string, object> line in kv)
                 {
                     if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
+                    {
                         continue;
+                    }
 
                     switch (line.Key)
                     {
-                        case "2": DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value); break;
-                        case "5": DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value); break;
-                        case "6": DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value); break;
-                        case "7": DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value); break;
-                        case "28": DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value); break;
-                        case "29": DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value); break;
+                        case "2":
+                            DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
+                            break;
+                        case "5":
+                            DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
+                            break;
+                        case "6":
+                            DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
+                            break;
+                        case "7":
+                            DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
+                            break;
+                        case "28":
+                            DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
+                            break;
+                        case "29":
+                            DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
+                            break;
                         case "442":
                             if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
                             {
@@ -142,16 +163,26 @@ namespace TeslaLogger
                                 Logfile.Log("SMT Speed: Signal not Available");
                             }
                             else
-                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value); 
+                            {
+                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
+                            }
                             break;
-                        case "43": DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value); break;
+                        case "43":
+                            DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                            break;
+                        default:
+                            break;
                     }
 
 
                     if (first)
+                    {
                         first = false;
+                    }
                     else
+                    {
                         sb.Append(",");
+                    }
 
                     sb.Append("('");
                     sb.Append(sqlDate);
