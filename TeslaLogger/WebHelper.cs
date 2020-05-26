@@ -1312,25 +1312,28 @@ namespace TeslaLogger
             
         }*/
 
-        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude)
+        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude, bool forceGeocoding = false)
         {
             string url = "";
             string resultContent = "";
             try
             {
-                Address a = null;
-                a = geofence.GetPOI(latitude, longitude);
-                if (a != null)
+                if (!forceGeocoding)
                 {
-                    Logfile.Log("Reverse geocoding by Geofence");
-                    return a.name;
-                }
+                    Address a = null;
+                    a = geofence.GetPOI(latitude, longitude);
+                    if (a != null)
+                    {
+                        Logfile.Log("Reverse geocoding by Geofence");
+                        return a.name;
+                    }
 
-                string value = GeocodeCache.Instance.Search(latitude, longitude);
-                if (value != null)
-                {
-                    Logfile.Log("Reverse geocoding by Cache");
-                    return value;
+                    string value = GeocodeCache.Instance.Search(latitude, longitude);
+                    if (value != null)
+                    {
+                        Logfile.Log("Reverse geocoding by Cache");
+                        return value;
+                    }
                 }
 
                 Tools.SetThread_enUS();
@@ -1378,6 +1381,9 @@ namespace TeslaLogger
                 }
 
                 string country_code = r2["country_code"].ToString();
+
+                if (country_code.Length > 0)
+                    DBHelper.currentJSON.current_country_code = country_code;                
 
                 string road = "";
                 if (r2.ContainsKey("road"))
@@ -2151,7 +2157,8 @@ FROM
                     { "SMTp", DBHelper.GetScanMyTeslaPacketsLastWeek().ToString() },
                     { "TR", DBHelper.GetAvgMaxRage().ToString() },
 
-                    { "OS", Tools.GetOsVersion() }
+                    { "OS", Tools.GetOsVersion() },
+                    { "CC", DBHelper.currentJSON.current_country_code }
                 };
 
                 FormUrlEncodedContent content = new FormUrlEncodedContent(d);

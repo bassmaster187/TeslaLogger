@@ -46,6 +46,8 @@ namespace TeslaLogger
         public bool current_is_sentry_mode = false;
         public bool current_is_preconditioning = false;
 
+        public string current_country_code = "";
+
         public DateTime lastScanMyTeslaReceived = DateTime.MinValue;
         public double? SMTCellTempAvg = null;
         public double? SMTCellMinV = null;
@@ -135,7 +137,8 @@ namespace TeslaLogger
                    { "inside_temperature", current_inside_temperature },
                    { "battery_heater", current_battery_heater },
                    { "is_preconditioning", current_is_preconditioning },
-                   { "sentry_mode", current_is_sentry_mode }
+                   { "sentry_mode", current_is_sentry_mode },
+                   { "country_code", current_country_code }
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
