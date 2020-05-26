@@ -212,6 +212,7 @@ if (strlen($taskertoken) > 7)
 <button onclick="window.location.href='https://teslalogger.de/degradation.php';"><?php t("Fleet Degradation AVG"); ?></button>
 <button onclick="window.location.href='https://teslalogger.de/charger.php';"><?php t("Fleet charging AVG"); ?></button>
 <button onclick="window.location.href='https://teslalogger.de/map.php';"><?php t("Fleet Fast Charging Map"); ?></button>
+<button onclick="window.location.href='https://teslalogger.de/firmware.php';"><?php t("Firmware Tracker"); ?></button>
 
 <div id="dialog-confirm" title="Info" style="display:none;">
 <?php t("TextShare"); ?>

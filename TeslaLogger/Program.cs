@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml;
@@ -571,6 +572,8 @@ namespace TeslaLogger
                 Logfile.Log("Insert first Pos");
                 wh.IsDriving(true);
             }
+
+            DBHelper.UpdateCountryCode();
 
             DBHelper.GetEconomy_Wh_km(wh);
             wh.DeleteWakeupFile();

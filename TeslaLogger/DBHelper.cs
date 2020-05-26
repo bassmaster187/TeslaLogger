@@ -1602,5 +1602,35 @@ namespace TeslaLogger
             }
             return 0;
         }
+
+        public static string UpdateCountryCode()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(5);
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("select lat, lng from pos where id = (select max(id) from pos)", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        double lat = Convert.ToDouble(dr[0]);
+                        double lng = Convert.ToDouble(dr[1]);
+                        dr.Close();
+
+                        WebHelper.ReverseGecocodingAsync(lat, lng, true).Wait();
+                        return DBHelper.currentJSON.current_country_code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
+        }
     }
 }

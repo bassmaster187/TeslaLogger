@@ -27,8 +27,14 @@ namespace UnitTestsTeslalogger
             a = geofence.GetPOI(48.456888, 10.029635);
             Assert.AreEqual(a.name, "EnBW DE-Ulm");
 
+            GeocodeCache.Instance.ClearCache();
             string temp = WebHelper.ReverseGecocodingAsync(35.677121, 139.751033).Result;
-            Assert.AreEqual(temp, "警視庁, jp-100-0013 千代田区, 内堀通り ");
+            Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
+            Assert.AreEqual("jp", DBHelper.currentJSON.current_country_code);
+
+            temp = WebHelper.ReverseGecocodingAsync(48.400892, 9.970095).Result;
+            Assert.AreEqual("89077 Ulm, Beringerbrücke ", temp);
+            Assert.AreEqual("de", DBHelper.currentJSON.current_country_code);
         }
         [TestMethod]
         public void TestJapanese()

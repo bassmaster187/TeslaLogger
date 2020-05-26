@@ -83,5 +83,10 @@ namespace TeslaLogger
                 Logfile.Log(ex.Message);
             }
         }
+
+        public void ClearCache()
+        {
+            dt.Clear();
+        }
     }
 }
