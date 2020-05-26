@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -65,30 +66,8 @@ namespace TeslaLogger
         {
             if (!_newState.Equals(_lastShift_State))
             {
-                HandleShiftStateChange(_lastShift_State, _newState);
+                Program.HandleShiftStateChange(_lastShift_State, _newState);
                 _lastShift_State = _newState;
-            }
-        }
-
-        private void HandleShiftStateChange(string _oldState, string _newState)
-        {
-            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
-            if ((_oldState.Equals("D") || _oldState.Equals("R") || _oldState.Equals("N")) && _newState.Equals("P"))
-            {
-                Address addr = geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-                foreach (Address.SpecialFlags flag in addr.specialFlags)
-                {
-                    switch (flag)
-                    {
-                        case Address.SpecialFlags.OpenChargePort:
-                            string result = PostCommand("command/charge_port_door_open", null).Result;
-                            Logfile.Log("openChargePort(): " + result);
-                            break;
-                        default:
-                            Logfile.Log("handleShiftStateChange D|R|N->P (" + _oldState + ", " + _newState + ") default");
-                            break;
-                    }
-                }
             }
         }
 
@@ -357,7 +336,7 @@ namespace TeslaLogger
                     if (lastCharging_State != "Complete")
                     {
                         DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
-                        System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : Charging Complete");
+                        Logfile.Log("Charging Complete");
                     }
 
                     lastCharging_State = charging_state;

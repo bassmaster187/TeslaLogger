@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TeslaLogger
@@ -9,14 +10,16 @@ namespace TeslaLogger
     {
         public enum SpecialFlags
         {
-            OpenChargePort
+            OpenChargePort,
+            HighFrequencyLogging,
+            TriggerHomeLink
         }
 
         public string name;
         public double lat;
         public double lng;
         public int radius;
-        public HashSet<SpecialFlags> specialFlags;
+        public Dictionary<SpecialFlags, string> specialFlags;
 
         public Address(string name, double lat, double lng, int radius)
         {
@@ -24,7 +27,17 @@ namespace TeslaLogger
             this.lat = lat;
             this.lng = lng;
             this.radius = radius;
-            specialFlags = new HashSet<SpecialFlags>();
+            specialFlags = new Dictionary<SpecialFlags, string>();
+        }
+
+        public override string ToString()
+        {
+            string ret = "Address:\nname:"+name+"\nlat:"+lat+"\nlng:"+lng+"\nradius:"+radius;
+            foreach (KeyValuePair<SpecialFlags, string> flag in specialFlags)
+            {
+                ret += "\n" + flag.Key.ToString() + ":" + flag.Value;
+            }
+            return ret;
         }
     }
 
@@ -154,6 +167,10 @@ namespace TeslaLogger
                                 string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
                                 ParseSpecialFlags(addr, flags);
+                                if (Program.VERBOSE)
+                                {
+                                    Logfile.Log(addr.ToString());
+                                }
                             }
 
                             list.Add(addr);
@@ -178,9 +195,65 @@ namespace TeslaLogger
 
         private static void ParseSpecialFlags(Address _addr, string _flags)
         {
-            if (_flags.Contains("+ocp"))
+            foreach (string flag in _flags.Split('+'))
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort);
+                if (flag.StartsWith("ocp"))
+                {
+                    SpecialFlagOCP(_addr, flag);
+                }
+                else if (flag.StartsWith("hfl"))
+                {
+                    SpecialFlagHFL(_addr, flag);
+                }
+                else if (flag.StartsWith("thl"))
+                {
+                    SpecialFlagHTHL(_addr, flag);
+                }
+            }
+        }
+
+        private static void SpecialFlagHTHL(Address _addr, string _flag)
+        {
+            string pattern = "thl:([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, m.Groups[0].Captures[1].ToString() + "->" + m.Groups[0].Captures[2].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, "P->RND");
+            }
+        }
+
+        private static void SpecialFlagHFL(Address _addr, string _flag)
+        {
+            string pattern = "hfl:([0-9]+)([a-z]{0,1})";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, "100");
+            }
+        }
+
+        private static void SpecialFlagOCP(Address _addr, string _flag)
+        {
+            string pattern = "ocp:([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, "RND->P");
             }
         }
 

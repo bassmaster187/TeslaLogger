@@ -1621,7 +1621,7 @@ namespace TeslaLogger
                         dr.Close();
 
                         WebHelper.ReverseGecocodingAsync(lat, lng, true).Wait();
-                        return DBHelper.currentJSON.current_country_code;
+                        return currentJSON.current_country_code;
                     }
                 }
             }

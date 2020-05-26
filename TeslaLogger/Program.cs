@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
-using System.Threading;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml;
@@ -9,6 +10,7 @@ namespace TeslaLogger
 {
     internal class Program
     {
+        public static readonly bool VERBOSE = true;
         private enum TeslaState
         {
             Start,
@@ -26,15 +28,15 @@ namespace TeslaLogger
 
         private static TeslaState GetCurrentState() { return _currentState; }
 
-        private WebHelper wh = new WebHelper();
+        private static WebHelper webhelper;
         private static DateTime lastCarUsed = DateTime.Now;
         private static DateTime lastOdometerChanged = DateTime.Now;
         private static DateTime lastTryTokenRefresh = DateTime.Now;
         private static bool goSleepWithWakeup = false;
         private static double odometerLastTrip;
-        private static bool supercharging = false;
-        private static int superchargerTics = 0;
-        private const int superchargerTicsLimit = 100;
+        private static bool highFrequencyLogging = false;
+        private static int highFrequencyLoggingTics = 0;
+        private const int highFrequencyLoggingTicsLimit = 100;
 
         private static void Main(string[] args)
         {
@@ -50,13 +52,13 @@ namespace TeslaLogger
 
                 InitConnectToDB();
 
-                WebHelper wh = new WebHelper();
+                webhelper = new WebHelper();
 
-                InitStage3(wh);
+                InitStage3();
 
                 MQTTClient.StartMQTTClient();
 
-                UpdateDBinBackground(wh);
+                UpdateDBinBackground();
 
                 DBHelper.currentJSON.current_odometer = DBHelper.GetLatestOdometer();
                 DBHelper.currentJSON.CreateCurrentJSON();
@@ -70,27 +72,27 @@ namespace TeslaLogger
                         switch (GetCurrentState())
                         {
                             case TeslaState.Start:
-                                HandleStateStart(wh);
+                                HandleStateStart();
                                 break;
 
                             case TeslaState.Online:
-                                HandleStateOnline(wh);
+                                HandleStateOnline();
                                 break;
 
                             case TeslaState.Charge:
-                                HandleStateCharge(wh);
+                                HandleStateCharge();
                                 break;
 
                             case TeslaState.Sleep:
-                                HandleStateSleep(wh);
+                                HandleStateSleep();
                                 break;
 
                             case TeslaState.Drive:
-                                lastRacingPoint = HandleStateDrive(wh, lastRacingPoint);
+                                lastRacingPoint = HandleStateDrive(lastRacingPoint);
                                 break;
 
                             case TeslaState.GoSleep:
-                                HandleStateGoSleep(wh);
+                                HandleStateGoSleep();
                                 break;
                             case TeslaState.Park:
                                 break;
@@ -107,9 +109,9 @@ namespace TeslaLogger
                         Logfile.ExceptionWriter(ex, "While Schleife");
                     }
 
-                    if (WebHelper.geofence.RacingMode || (supercharging && superchargerTics < superchargerTicsLimit))
+                    if (WebHelper.geofence.RacingMode || (highFrequencyLogging && highFrequencyLoggingTics < highFrequencyLoggingTicsLimit))
                     {
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(1);
                     }
                     else
                     {
@@ -129,9 +131,9 @@ namespace TeslaLogger
             }
         }
 
-        private static void HandleStateGoSleep(WebHelper wh)
+        private static void HandleStateGoSleep()
         {
-            wh.ResetLastChargingState();
+            webhelper.ResetLastChargingState();
             bool KeepSleeping = true;
             int round = 0;
 
@@ -144,9 +146,9 @@ namespace TeslaLogger
                     if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                     {
 
-                        if (wh.DeleteWakeupFile())
+                        if (webhelper.DeleteWakeupFile())
                         {
-                            string wakeup = wh.Wakeup().Result;
+                            string wakeup = webhelper.Wakeup().Result;
                         }
 
                         KeepSleeping = false;
@@ -157,11 +159,11 @@ namespace TeslaLogger
                     {
                         round = 0;
 
-                        if (wh.TaskerWakeupfile())
+                        if (webhelper.TaskerWakeupfile())
                         {
-                            if (wh.DeleteWakeupFile())
+                            if (webhelper.DeleteWakeupFile())
                             {
-                                string wakeup = wh.Wakeup().Result;
+                                string wakeup = webhelper.Wakeup().Result;
                             }
 
                             KeepSleeping = false;
@@ -191,10 +193,10 @@ namespace TeslaLogger
             }
         }
 
-        private static Address HandleStateDrive(WebHelper wh, Address lastRacingPoint)
+        private static Address HandleStateDrive(Address lastRacingPoint)
         {
             int t = Environment.TickCount;
-            if (wh.IsDriving())
+            if (webhelper.IsDriving())
             {
                 lastCarUsed = DateTime.Now;
                 t = ApplicationSettings.Default.SleepPosition - 1000 - (Environment.TickCount - t);
@@ -211,10 +213,10 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    if (wh.IsCharging(true))
+                    if (webhelper.IsCharging(true))
                     {
                         Logfile.Log("Charging during Drive -> Finish Trip!!!");
-                        DriveFinished(wh);
+                        DriveFinished();
                     }
                     else
                     {
@@ -223,7 +225,7 @@ namespace TeslaLogger
                         if (ts.TotalSeconds > 600)
                         {
                             Logfile.Log("Odometer didn't change for 600 seconds  -> Finish Trip!!!");
-                            DriveFinished(wh);
+                            DriveFinished();
                         }
                     }
                 }
@@ -237,7 +239,7 @@ namespace TeslaLogger
                         {
                             lastRacingPoint = a;
                             Logfile.Log("RACING MODE: Finish Trip!");
-                            DriveFinished(wh);
+                            DriveFinished();
                         }
                     }
                     else
@@ -248,25 +250,25 @@ namespace TeslaLogger
             }
             else
             {
-                DriveFinished(wh);
+                DriveFinished();
 
-                ShareData sd = new ShareData(wh.TaskerHash);
+                ShareData sd = new ShareData(webhelper.TaskerHash);
                 sd.SendAllChargingData();
             }
 
             return lastRacingPoint;
         }
 
-        private static void HandleStateSleep(WebHelper wh)
+        private static void HandleStateSleep()
         {
-            string res = wh.IsOnline().Result;
+            string res = webhelper.IsOnline().Result;
 
             if (res == "online")
             {
                 Logfile.Log(res);
                 SetCurrentState(TeslaState.Start);
 
-                wh.IsDriving(true); // Positionsmeldung in DB für Wechsel
+                webhelper.IsDriving(true); // Positionsmeldung in DB für Wechsel
             }
             else
             {
@@ -274,25 +276,25 @@ namespace TeslaLogger
             }
         }
 
-        private static void HandleStateCharge(WebHelper wh)
+        private static void HandleStateCharge()
         {
             {
-                if (!wh.IsCharging())
+                if (!webhelper.IsCharging())
                 {
                     // TODO: ende des ladens in die datenbank schreiben
                     SetCurrentState(TeslaState.Start);
-                    wh.IsDriving(true);
+                    webhelper.IsDriving(true);
                 }
                 else
                 {
                     lastCarUsed = DateTime.Now;
                     // Logfile.Log(res);
-                    if (wh.fast_charger_brand.Equals("Tesla") && superchargerTics < superchargerTicsLimit)
+                    if (webhelper.fast_charger_brand.Equals("Tesla") && highFrequencyLoggingTics < highFrequencyLoggingTicsLimit)
                     {
                         // SuperCharger fast mode
                         Logfile.Log("Supercharging ...");
-                        superchargerTics++;
-                        supercharging = true;
+                        highFrequencyLoggingTics++;
+                        highFrequencyLogging = true;
                     }
                     else
                     {
@@ -305,19 +307,19 @@ namespace TeslaLogger
             }
         }
 
-        private static void HandleStateOnline(WebHelper wh)
+        private static void HandleStateOnline()
         {
             {
-                if (wh.IsDriving() && DBHelper.currentJSON.current_speed > 0)
+                if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
                 {
-                    wh.ResetLastChargingState();
+                    webhelper.ResetLastChargingState();
                     lastCarUsed = DateTime.Now;
                     lastOdometerChanged = DateTime.Now;
 
                     Logfile.Log("Driving");
-                    if (wh.scanMyTesla != null)
+                    if (webhelper.scanMyTesla != null)
                     {
-                        wh.scanMyTesla.FastMode(true);
+                        webhelper.scanMyTesla.FastMode(true);
                     }
 
                     double missingOdometer = DBHelper.currentJSON.current_odometer - odometerLastTrip;
@@ -337,30 +339,30 @@ namespace TeslaLogger
 
                     // TODO: StartDriving
                     SetCurrentState(TeslaState.Drive);
-                    wh.StartStreamThread(); // für altitude
+                    webhelper.StartStreamThread(); // für altitude
                     DBHelper.StartDriveState();
 
-                    Task.Run(() => wh.DeleteWakeupFile());
+                    Task.Run(() => webhelper.DeleteWakeupFile());
                     return;
                 }
-                else if (wh.IsCharging(true))
+                else if (webhelper.IsCharging(true))
                 {
                     lastCarUsed = DateTime.Now;
                     Logfile.Log("Charging");
-                    if (wh.scanMyTesla != null)
+                    if (webhelper.scanMyTesla != null)
                     {
-                        wh.scanMyTesla.FastMode(true);
+                        webhelper.scanMyTesla.FastMode(true);
                     }
 
-                    wh.IsDriving(true);
-                    DBHelper.StartChargingState(wh);
+                    webhelper.IsDriving(true);
+                    DBHelper.StartChargingState(webhelper);
                     SetCurrentState(TeslaState.Charge);
 
-                    wh.DeleteWakeupFile();
+                    webhelper.DeleteWakeupFile();
                 }
                 else
                 {
-                    RefreshToken(wh);
+                    RefreshToken();
 
                     Tools.StartSleeping(out int startSleepHour, out int startSleepMinute);
                     bool sleep = true;
@@ -385,13 +387,13 @@ namespace TeslaLogger
                         {
                             SetCurrentState(TeslaState.Start);
 
-                            wh.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
+                            webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
                             if (DBHelper.currentJSON.current_is_preconditioning)
                             {
                                 Logfile.Log("preconditioning prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
                             }
-                            else if (wh.is_sentry_mode)
+                            else if (webhelper.is_sentry_mode)
                             {
                                 Logfile.Log("sentry_mode prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
@@ -412,17 +414,17 @@ namespace TeslaLogger
                                         {
                                             Logfile.Log("ScanMyTesla prevents car to get sleep. Speed: " + DBHelper.currentJSON.SMTSpeed);
                                             lastCarUsed = DateTime.Now;
-                                            string wakeup = wh.Wakeup().Result;
+                                            string wakeup = webhelper.Wakeup().Result;
                                             sleep = false;
                                             break;
                                         }
 
-                                        if (wh.ExistsWakeupFile)
+                                        if (webhelper.ExistsWakeupFile)
                                         {
                                             Logfile.Log("Wakeupfile prevents car to get sleep");
                                             lastCarUsed = DateTime.Now;
-                                            wh.DeleteWakeupFile();
-                                            string wakeup = wh.Wakeup().Result;
+                                            webhelper.DeleteWakeupFile();
+                                            string wakeup = webhelper.Wakeup().Result;
                                             sleep = false;
                                             break;
                                         }
@@ -468,27 +470,27 @@ namespace TeslaLogger
 
         }
 
-        private static void HandleStateStart(WebHelper wh)
+        private static void HandleStateStart()
         {
-            RefreshToken(wh);
+            RefreshToken();
 
-            if (wh.scanMyTesla != null)
+            if (webhelper.scanMyTesla != null)
             {
-                wh.scanMyTesla.FastMode(false);
+                webhelper.scanMyTesla.FastMode(false);
             }
 
             // Alle States werden geschlossen
             DBHelper.CloseChargingState();
-            DBHelper.CloseDriveState(wh.lastIsDriveTimestamp);
+            DBHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
 
-            string res = wh.IsOnline().Result;
+            string res = webhelper.IsOnline().Result;
             lastCarUsed = DateTime.Now;
             if (res == "online")
             {
                 Logfile.Log(res);
                 SetCurrentState(TeslaState.Online);
-                wh.IsDriving(true);
-                wh.ResetLastChargingState();
+                webhelper.IsDriving(true);
+                webhelper.ResetLastChargingState();
                 DBHelper.StartState(res);
                 return;
             }
@@ -497,7 +499,7 @@ namespace TeslaLogger
                 Logfile.Log(res);
                 SetCurrentState(TeslaState.Sleep);
                 DBHelper.StartState(res);
-                wh.ResetLastChargingState();
+                webhelper.ResetLastChargingState();
                 DBHelper.currentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
@@ -509,7 +511,7 @@ namespace TeslaLogger
                 while (true)
                 {
                     System.Threading.Thread.Sleep(30000);
-                    string res2 = wh.IsOnline().Result;
+                    string res2 = webhelper.IsOnline().Result;
 
                     if (res2 != "offline")
                     {
@@ -517,11 +519,11 @@ namespace TeslaLogger
                         break;
                     }
 
-                    if (wh.TaskerWakeupfile())
+                    if (webhelper.TaskerWakeupfile())
                     {
-                        if (wh.DeleteWakeupFile())
+                        if (webhelper.DeleteWakeupFile())
                         {
-                            string wakeup = wh.Wakeup().Result;
+                            string wakeup = webhelper.Wakeup().Result;
                             lastCarUsed = DateTime.Now;
                         }
 
@@ -540,54 +542,54 @@ namespace TeslaLogger
             }
         }
 
-        private static void InitStage3(WebHelper wh)
+        private static void InitStage3()
         {
-            if (!wh.RestoreToken())
+            if (!webhelper.RestoreToken())
             {
-                wh.Tesla_token = wh.GetTokenAsync().Result;
+                webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
             }
 
-            if (wh.Tesla_token == "NULL")
+            if (webhelper.Tesla_token == "NULL")
             {
                 ExitTeslaLogger("Tesla_token == NULL");
             }
 
-            LogToken(wh);
+            LogToken();
 
             if (DBHelper.DBConnectionstring.Length == 0)
             {
                 ExitTeslaLogger("DBHelper.DBConnectionstring.Length == 0");
             }
 
-            if (wh.GetVehicles() == "NULL")
+            if (webhelper.GetVehicles() == "NULL")
             {
                 ExitTeslaLogger("wh.GetVehicles() == NULL");
             }
 
-            string online = wh.IsOnline().Result;
-            Logfile.Log("Streamingtoken: " + wh.Tesla_Streamingtoken);
+            string online = webhelper.IsOnline().Result;
+            Logfile.Log("Streamingtoken: " + webhelper.Tesla_Streamingtoken);
 
             if (DBHelper.GetMaxPosid(false) == 0)
             {
                 Logfile.Log("Insert first Pos");
-                wh.IsDriving(true);
+                webhelper.IsDriving(true);
             }
 
             DBHelper.UpdateCountryCode();
 
-            DBHelper.GetEconomy_Wh_km(wh);
-            wh.DeleteWakeupFile();
-            string carName = wh.carSettings.Name;
-            if (wh.carSettings.Raven)
+            DBHelper.GetEconomy_Wh_km(webhelper);
+            webhelper.DeleteWakeupFile();
+            string carName = webhelper.carSettings.Name;
+            if (webhelper.carSettings.Raven)
             {
                 carName += " Raven";
             }
 
-            Logfile.Log("Car: " + carName + " - " + wh.carSettings.Wh_TR + " Wh/km");
-            double.TryParse(wh.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
+            Logfile.Log("Car: " + carName + " - " + webhelper.carSettings.Wh_TR + " Wh/km");
+            double.TryParse(webhelper.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
             DBHelper.GetLastTrip();
-            UpdateTeslalogger.Start(wh);
-            UpdateTeslalogger.UpdateGrafana(wh);
+            UpdateTeslalogger.Start(webhelper);
+            UpdateTeslalogger.UpdateGrafana(webhelper);
 
             DBHelper.currentJSON.current_car_version = DBHelper.GetLastCarVersion();
         }
@@ -626,10 +628,10 @@ namespace TeslaLogger
             { }
         }
 
-        private static void LogToken(WebHelper wh)
+        private static void LogToken()
         {
             // don't show full Token in Logfile
-            string tempToken = wh.Tesla_token;
+            string tempToken = webhelper.Tesla_token;
             if (tempToken.Length > 5)
             {
                 tempToken = tempToken.Substring(0, tempToken.Length - 5);
@@ -703,7 +705,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDBinBackground(WebHelper wh)
+        private static void UpdateDBinBackground()
         {
             new System.Threading.Thread(() =>
             {
@@ -712,11 +714,11 @@ namespace TeslaLogger
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
                 DBHelper.CheckForInterruptedCharging(true);
-                wh.UpdateAllEmptyAddresses();
+                webhelper.UpdateAllEmptyAddresses();
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
 
-                ShareData sd = new ShareData(wh.TaskerHash);
+                ShareData sd = new ShareData(webhelper.TaskerHash);
                 sd.SendAllChargingData();
                 sd.SendDegradationData();
             }).Start();
@@ -735,14 +737,14 @@ namespace TeslaLogger
             { }
         }
 
-        private static void DriveFinished(WebHelper wh)
+        private static void DriveFinished()
         {
             // finish trip
             SetCurrentState(TeslaState.Start);
             DBHelper.currentJSON.current_trip_end = DateTime.Now;
             DBHelper.currentJSON.current_trip_km_end = DBHelper.currentJSON.current_odometer;
             DBHelper.currentJSON.current_trip_end_range = DBHelper.currentJSON.current_ideal_battery_range_km;
-            wh.StopStreaming();
+            webhelper.StopStreaming();
 
             odometerLastTrip = DBHelper.currentJSON.current_odometer;
         }
@@ -788,9 +790,9 @@ namespace TeslaLogger
             }
         }
 
-        private static void RefreshToken(WebHelper wh)
+        private static void RefreshToken()
         {
-            TimeSpan ts = DateTime.Now - wh.lastTokenRefresh;
+            TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
             if (ts.TotalDays > 9)
             {
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
@@ -799,16 +801,16 @@ namespace TeslaLogger
                     lastTryTokenRefresh = DateTime.Now;
                     Logfile.Log("try to get new Token");
 
-                    string temp = wh.GetTokenAsync().Result;
+                    string temp = webhelper.GetTokenAsync().Result;
                     if (temp != "NULL")
                     {
                         Logfile.Log("new Token received!");
 
-                        wh.Tesla_token = temp;
-                        wh.lastTokenRefresh = DateTime.Now;
+                        webhelper.Tesla_token = temp;
+                        webhelper.lastTokenRefresh = DateTime.Now;
 
                         // Every 10 Days send degradataion Data
-                        ShareData sd = new ShareData(wh.TaskerHash);
+                        ShareData sd = new ShareData(webhelper.TaskerHash);
                         sd.SendDegradationData();
                     }
                     else
@@ -827,7 +829,7 @@ namespace TeslaLogger
 
         public static bool IsSupercharging()
         {
-            return supercharging;
+            return highFrequencyLogging;
         }
 
         private static void SetCurrentState(TeslaState _newState)
@@ -847,8 +849,72 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
                 // reset supercharger mode
-                supercharging = false;
-                superchargerTics = 0;
+                highFrequencyLogging = false;
+                highFrequencyLoggingTics = 0;
+            }
+        }
+        public static void HandleShiftStateChange(string _oldState, string _newState)
+        {
+            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
+            Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+            foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
+            {
+                switch (flag.Key)
+                {
+                    case Address.SpecialFlags.OpenChargePort:
+                        HandleSpecialFlagOpenChargePort(flag.Value, _oldState, _newState);
+                        break;
+                    case Address.SpecialFlags.HighFrequencyLogging:
+                        HandleSpecialFlagHighFrequencyLogging(flag.Value);
+                        break;
+                    case Address.SpecialFlags.TriggerHomeLink:
+                        HandleSpecialFlagTriggerHomeLink(flag.Value, addr.lat, addr.lng, _oldState, _newState);
+                        break;
+                    default:
+                        Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                        break;
+                }
+            }
+        }
+
+        private static void HandleSpecialFlagHighFrequencyLogging(string _flagconfig)
+        {
+            Logfile.Log("HighFrequencyLogging not implemented yet");
+            string pattern = "([0-9]+)([a-z])";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                Logfile.Log("HighFrequencyLogging config: time mode " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                pattern = "([0-9]+)";
+                m = Regex.Match(_flagconfig, pattern);
+                if (m.Success && m.Groups.Count == 1 && m.Groups[0].Captures.Count == 2)
+                {
+                    Logfile.Log("HighFrequencyLogging config: tick mode " + m.Groups[0].Captures[1].ToString());
+                }
+            }
+        }
+
+        private static void HandleSpecialFlagOpenChargePort(string _flagconfig, string _oldState, string _newState)
+        {
+            string pattern = "([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
+            {
+                string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
+                Logfile.Log("openChargePort(): " + result);
+            }
+        }
+
+        private static void HandleSpecialFlagTriggerHomeLink(string _flagconfig, double _lat, double _lng, string _oldState, string _newState)
+        {
+            string pattern = "([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
+            {
+                Logfile.Log("TriggerHomeLink not implemented yet");
             }
         }
     }
