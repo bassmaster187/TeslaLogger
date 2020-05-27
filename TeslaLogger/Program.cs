@@ -573,7 +573,7 @@ namespace TeslaLogger
                 wh.IsDriving(true);
             }
 
-            DBHelper.UpdateCountryCode();
+            Logfile.Log("Country Code: " + DBHelper.UpdateCountryCode());
 
             DBHelper.GetEconomy_Wh_km(wh);
             wh.DeleteWakeupFile();

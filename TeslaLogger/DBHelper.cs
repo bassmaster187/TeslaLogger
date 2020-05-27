@@ -1620,7 +1620,7 @@ namespace TeslaLogger
                         double lng = Convert.ToDouble(dr[1]);
                         dr.Close();
 
-                        WebHelper.ReverseGecocodingAsync(lat, lng, true).Wait();
+                        WebHelper.ReverseGecocodingAsync(lat, lng, true, false).Wait();
                         return DBHelper.currentJSON.current_country_code;
                     }
                 }
