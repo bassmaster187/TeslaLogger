@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace TeslaLogger
 {
     public class Logfile
     {
+        public static bool VERBOSE = false;
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
@@ -30,9 +32,9 @@ namespace TeslaLogger
         }
 
 
-        public static void Log(string text)
-        {
-            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
+        public static void Log(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        { 
+            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "");
             Console.WriteLine(temp);
 
             if (WriteToLogfile)

@@ -10,7 +10,7 @@ namespace TeslaLogger
 {
     internal class Program
     {
-        public static readonly bool VERBOSE = true;
+        public static bool VERBOSE = false;
         private enum TeslaState
         {
             Start,
@@ -634,6 +634,11 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.VerboseMode))
+            {
+                VERBOSE = true;
+                Logfile.VERBOSE = true;
+            }
         }
 
         private static void LogToken()
