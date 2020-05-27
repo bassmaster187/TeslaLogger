@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -100,6 +101,7 @@ namespace TeslaLogger
             sortedList = list.OrderBy(o => o.lat).ToList();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
             try
