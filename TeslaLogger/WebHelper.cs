@@ -729,7 +729,11 @@ namespace TeslaLogger
                 }
                 else if (carSettings.trim_badging == "")
                 {
-                    WriteCarSettings("0.169", "S Raven");
+                    int maxRange = DBHelper.GetAvgMaxRage();
+                    if (maxRange > 500)
+                        WriteCarSettings("0.169", "S Raven LR");
+                    else
+                        WriteCarSettings("0.163", "S Raven SR");
                     return;
                 }
                 else
@@ -738,7 +742,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (carSettings.car_type == "models" && carSettings.car_special_type == "base")
+            else if (carSettings.car_type == "models" && (carSettings.car_special_type == "base" || carSettings.car_special_type == "signature"))
             {
                 if (carSettings.trim_badging == "60")
                 {
@@ -772,7 +776,7 @@ namespace TeslaLogger
                 }
                 else if (carSettings.trim_badging == "p85")
                 {
-                    WriteCarSettings("0.210", "S P85");
+                    WriteCarSettings("0.201", "S P85");
                     return;
                 }
                 else if (carSettings.trim_badging == "85")
@@ -1383,7 +1387,14 @@ namespace TeslaLogger
                 string country_code = r2["country_code"].ToString();
 
                 if (country_code.Length > 0)
-                    DBHelper.currentJSON.current_country_code = country_code;                
+                {
+                    DBHelper.currentJSON.current_country_code = country_code;
+
+                    if (r2.ContainsKey("state"))
+                        DBHelper.currentJSON.current_state = r2["state"].ToString();
+                    else
+                        DBHelper.currentJSON.current_state = "";
+                }
 
                 string road = "";
                 if (r2.ContainsKey("road"))
@@ -2158,7 +2169,8 @@ FROM
                     { "TR", DBHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
-                    { "CC", DBHelper.currentJSON.current_country_code }
+                    { "CC", DBHelper.currentJSON.current_country_code },
+                    { "ST", DBHelper.currentJSON.current_state }
                 };
 
                 FormUrlEncodedContent content = new FormUrlEncodedContent(d);

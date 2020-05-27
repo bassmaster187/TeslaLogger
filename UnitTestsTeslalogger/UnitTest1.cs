@@ -31,10 +31,17 @@ namespace UnitTestsTeslalogger
             string temp = WebHelper.ReverseGecocodingAsync(35.677121, 139.751033).Result;
             Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
             Assert.AreEqual("jp", DBHelper.currentJSON.current_country_code);
+            Assert.AreEqual("", DBHelper.currentJSON.current_state);
 
             temp = WebHelper.ReverseGecocodingAsync(48.400892, 9.970095).Result;
             Assert.AreEqual("89077 Ulm, Beringerbrücke ", temp);
             Assert.AreEqual("de", DBHelper.currentJSON.current_country_code);
+            Assert.AreEqual("Baden-Württemberg", DBHelper.currentJSON.current_state);
+
+            temp = WebHelper.ReverseGecocodingAsync(40.773667, -74.039867).Result;
+            Assert.AreEqual("us-07047 , Jane Street ", temp);
+            Assert.AreEqual("us", DBHelper.currentJSON.current_country_code);
+            Assert.AreEqual("New Jersey", DBHelper.currentJSON.current_state);
         }
         [TestMethod]
         public void TestJapanese()
@@ -59,6 +66,7 @@ namespace UnitTestsTeslalogger
             MemoryCache.Default.Add("GetAvgMaxRage", 515, DateTime.Now.AddMinutes(1));
             wh.carSettings.car_type = "model3";
             wh.carSettings.DB_Wh_TR = "0.145";
+            wh.carSettings.trim_badging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR RWD", wh.carSettings.Name);
@@ -67,7 +75,6 @@ namespace UnitTestsTeslalogger
 
             wh = new WebHelper();
             MemoryCache.Default.Remove("GetAvgMaxRage");
-            MemoryCache.Default.Add("GetAvgMaxRage", 370, DateTime.Now.AddMinutes(1));
             wh.carSettings.car_type = "models2";
             wh.carSettings.car_special_type = "base";
             wh.carSettings.DB_Wh_TR = "0.145";
@@ -77,8 +84,72 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("S 75D", wh.carSettings.Name);
             Assert.AreEqual("0.186", wh.carSettings.Wh_TR);
 
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            wh.carSettings.car_type = "models";
+            wh.carSettings.car_special_type = "signature";
+            wh.carSettings.trim_badging = "p85";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S P85", wh.carSettings.Name);
+            Assert.AreEqual("0.201", wh.carSettings.Wh_TR);
+
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            wh.carSettings.car_type = "models";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.trim_badging = "85d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 85D", wh.carSettings.Name);
+            Assert.AreEqual("0.186", wh.carSettings.Wh_TR);
+
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            wh.carSettings.car_type = "modelx";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.trim_badging = "100d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X 100D", wh.carSettings.Name);
+            Assert.AreEqual("0.217", wh.carSettings.Wh_TR);
 
 
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            wh.carSettings.car_type = "models2";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.trim_badging = "90d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 90D", wh.carSettings.Name);
+            Assert.AreEqual("0.188", wh.carSettings.Wh_TR);
+
+
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            MemoryCache.Default.Add("GetAvgMaxRage", 443, DateTime.Now.AddMinutes(1));
+            wh.carSettings.car_type = "models2";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.DB_Wh_TR = "0.163";
+            wh.carSettings.trim_badging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S Raven SR", wh.carSettings.Name);
+            Assert.AreEqual("0.163", wh.carSettings.Wh_TR);
+
+
+            wh = new WebHelper();
+            MemoryCache.Default.Remove("GetAvgMaxRage");
+            MemoryCache.Default.Add("GetAvgMaxRage", 560, DateTime.Now.AddMinutes(1));
+            wh.carSettings.car_type = "models2";
+            wh.carSettings.car_special_type = "base";
+            wh.carSettings.DB_Wh_TR = "0.169";
+            wh.carSettings.trim_badging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S Raven LR", wh.carSettings.Name);
+            Assert.AreEqual("0.169", wh.carSettings.Wh_TR);
         }
     }
 }
