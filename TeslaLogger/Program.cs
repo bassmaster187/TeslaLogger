@@ -35,8 +35,15 @@ namespace TeslaLogger
         private static bool goSleepWithWakeup = false;
         private static double odometerLastTrip;
         private static bool highFrequencyLogging = false;
-        private static int highFrequencyLoggingTics = 0;
-        private const int highFrequencyLoggingTicsLimit = 100;
+        private static int highFrequencyLoggingTicks = 0;
+        private static int highFrequencyLoggingTicksLimit = 100;
+        private static DateTime highFrequencyLoggingUntil = DateTime.Now;
+        private enum hflMode
+        {
+            Ticks,
+            Time
+        }
+        private static hflMode highFrequencyLoggingMode = hflMode.Ticks;
 
         private static void Main(string[] args)
         {
@@ -109,7 +116,7 @@ namespace TeslaLogger
                         Logfile.ExceptionWriter(ex, "While Schleife");
                     }
 
-                    if (WebHelper.geofence.RacingMode || (highFrequencyLogging && highFrequencyLoggingTics < highFrequencyLoggingTicsLimit))
+                    if (WebHelper.geofence.RacingMode || (highFrequencyLogging && highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit))
                     {
                         System.Threading.Thread.Sleep(1);
                     }
@@ -289,11 +296,12 @@ namespace TeslaLogger
                 {
                     lastCarUsed = DateTime.Now;
                     // Logfile.Log(res);
-                    if (webhelper.fast_charger_brand.Equals("Tesla") && highFrequencyLoggingTics < highFrequencyLoggingTicsLimit)
+                    // TODO highFrequencyLogging
+                    if (webhelper.fast_charger_brand.Equals("Tesla") && highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit)
                     {
                         // SuperCharger fast mode
                         Logfile.Log("Supercharging ...");
-                        highFrequencyLoggingTics++;
+                        highFrequencyLoggingTicks++;
                         highFrequencyLogging = true;
                     }
                     else
@@ -848,11 +856,29 @@ namespace TeslaLogger
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
-                // reset supercharger mode
-                highFrequencyLogging = false;
-                highFrequencyLoggingTics = 0;
+                ResetHighFrequencyLogging();
+            }
+            // any -> GoSleep
+            else if (_oldState != TeslaState.GoSleep && _newState == TeslaState.GoSleep)
+            {
+                DBHelper.currentJSON.current_falling_asleep = true;
+            }
+            // GoSleep -> any
+            else if (_oldState == TeslaState.GoSleep && _newState != TeslaState.GoSleep)
+            {
+                DBHelper.currentJSON.current_falling_asleep = false;
             }
         }
+
+        private static void ResetHighFrequencyLogging()
+        {
+            highFrequencyLogging = false;
+            highFrequencyLoggingMode = hflMode.Ticks;
+            highFrequencyLoggingTicks = 0;
+            highFrequencyLoggingTicksLimit = 100;
+            highFrequencyLoggingUntil = DateTime.Now;
+        }
+
         public static void HandleShiftStateChange(string _oldState, string _newState)
         {
             Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);

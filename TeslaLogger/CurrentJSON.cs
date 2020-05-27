@@ -9,6 +9,7 @@ namespace TeslaLogger
         public bool current_driving = false;
         public bool current_online = false;
         public bool current_sleeping = false;
+        public bool current_falling_asleep = false;
 
         public int current_speed = 0;
         public int current_power = 0;
@@ -112,6 +113,7 @@ namespace TeslaLogger
                    { "driving", current_driving },
                    { "online", current_online },
                    { "sleeping", current_sleeping },
+                   { "falling_asleep", current_falling_asleep },
                    { "speed", current_speed},
                    { "power", current_power },
                    { "odometer", current_odometer },

@@ -140,6 +140,13 @@ require("language.php");
 
 				hideSMT();
 			}
+			else if (jsonData["falling_asleep"])
+			{
+				$('#car_statusLabel').text("Status:");
+				$('#car_status').text("<?php t("Einschlafen"); ?>");
+
+				hideSMT();
+			}
 			else
 			{
 				$('#car_statusLabel').text("Status:");
