@@ -415,13 +415,13 @@ namespace TeslaLogger
                     { }
 
                     string vin = r2["vin"].ToString();
-                    Logfile.Log("vin :" + vin);
+                    Logfile.Log("vin: " + vin);
 
                     Tesla_id = r2["id"].ToString();
-                    Logfile.Log("id :" + Tesla_id);
+                    Logfile.Log("id: " + Tesla_id);
 
                     Tesla_vehicle_id = r2["vehicle_id"].ToString();
-                    Logfile.Log("vehicle_id :" + Tesla_vehicle_id);
+                    Logfile.Log("vehicle_id: " + Tesla_vehicle_id);
 
                     byte[] tempTasker = Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
 
