@@ -84,7 +84,7 @@ namespace TeslaLogger
             }
         }
 
-        public void ClearCache()
+        internal void ClearCache()
         {
             dt.Clear();
         }
