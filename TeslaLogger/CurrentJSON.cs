@@ -140,7 +140,7 @@ namespace TeslaLogger
                    { "is_preconditioning", current_is_preconditioning },
                    { "sentry_mode", current_is_sentry_mode },
                    { "country_code", current_country_code },
-                   { "country_code", current_state }
+                   { "state", current_state }
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
