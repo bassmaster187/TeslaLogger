@@ -141,8 +141,8 @@ namespace TeslaLogger
                    { "battery_heater", current_battery_heater },
                    { "is_preconditioning", current_is_preconditioning },
                    { "sentry_mode", current_is_sentry_mode },
-                   { "current_country_code", current_country_code },
-                   { "country_code", current_state }
+                   { "country_code", current_country_code },
+                   { "state", current_state }
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;

@@ -1294,7 +1294,7 @@ namespace TeslaLogger
             
         }*/
 
-        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude, bool forceGeocoding = false)
+        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
         {
             string url = "";
             string resultContent = "";
@@ -1433,7 +1433,8 @@ namespace TeslaLogger
 
                 System.Diagnostics.Debug.WriteLine(url + "\r\n" + adresse);
 
-                GeocodeCache.Instance.Insert(latitude, longitude, adresse);
+                if (insertGeocodecache)
+                    GeocodeCache.Instance.Insert(latitude, longitude, adresse);
 
                 if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                 {
