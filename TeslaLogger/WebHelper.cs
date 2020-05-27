@@ -442,7 +442,7 @@ namespace TeslaLogger
                         TaskerHash = TaskerHash + "_" + ApplicationSettings.Default.Car;
                     }
 
-                    Logfile.Log("Tasker Config:\r\n Server Port : https://teslalogger.de\r\n Pfad : wakeup.php\r\n Attribute : t=" + TaskerHash);
+                    Logfile.Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + TaskerHash);
 
                     try
                     {
