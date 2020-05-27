@@ -53,13 +53,19 @@ namespace TeslaLogger
 
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
+            ExceptionWriter(ex, inhalt, out _);
+        }
+
+        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred)
+        {
+            timeoutOccurred = false;
             try
             {
                 if (inhalt != null)
                 {
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
-                        Log("vehicle unavailable");
+                        Log("vehicle unavailable" + (VERBOSE ? " " + ex.StackTrace : ""));
                         System.Threading.Thread.Sleep(30000);
 
                         return;
@@ -105,12 +111,14 @@ namespace TeslaLogger
                 if (temp.Contains("The operation has timed out"))
                 {
                     Log(prefix + "HTTP Timeout");
+                    timeoutOccurred = true;
                     System.Threading.Thread.Sleep(15000);
                     return;
                 }
                 if (inhalt.Contains("operation_timedout with 10s timeout for txid"))
                 {
-                    Log(prefix + "Mothership Timeout");
+                    Log(prefix + "Mothership Timeout" + (VERBOSE ? " " + ex.StackTrace : ""));
+                    timeoutOccurred = true;
                     System.Threading.Thread.Sleep(20000);
                     return;
                 }
@@ -141,6 +149,7 @@ namespace TeslaLogger
                 else if (temp.Contains("Connection timed out"))
                 {
                     Log(prefix + "Connection timed out");
+                    timeoutOccurred = true;
                     System.Threading.Thread.Sleep(50000);
                     return;
                 }

@@ -497,7 +497,7 @@ namespace TeslaLogger
             lastCarUsed = DateTime.Now;
             if (res == "online")
             {
-                Logfile.Log(res);
+                //Logfile.Log(res);
                 SetCurrentState(TeslaState.Online);
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
@@ -506,7 +506,7 @@ namespace TeslaLogger
             }
             else if (res == "asleep")
             {
-                Logfile.Log(res);
+                //Logfile.Log(res);
                 SetCurrentState(TeslaState.Sleep);
                 DBHelper.StartState(res);
                 webhelper.ResetLastChargingState();
@@ -514,7 +514,7 @@ namespace TeslaLogger
             }
             else if (res == "offline")
             {
-                Logfile.Log(res);
+                //Logfile.Log(res);
                 DBHelper.StartState(res);
                 DBHelper.currentJSON.CreateCurrentJSON();
 
@@ -893,22 +893,24 @@ namespace TeslaLogger
         {
             Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-            foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
-            {
-                switch (flag.Key)
+            if (addr.specialFlags != null && addr.specialFlags.Count > 0) {
+                foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                 {
-                    case Address.SpecialFlags.OpenChargePort:
-                        HandleSpecialFlagOpenChargePort(flag.Value, _oldState, _newState);
-                        break;
-                    case Address.SpecialFlags.HighFrequencyLogging:
-                        HandleSpecialFlagHighFrequencyLogging(flag.Value);
-                        break;
-                    case Address.SpecialFlags.TriggerHomeLink:
-                        HandleSpecialFlagTriggerHomeLink(flag.Value, addr.lat, addr.lng, _oldState, _newState);
-                        break;
-                    default:
-                        Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
-                        break;
+                    switch (flag.Key)
+                    {
+                        case Address.SpecialFlags.OpenChargePort:
+                            HandleSpecialFlagOpenChargePort(flag.Value, _oldState, _newState);
+                            break;
+                        case Address.SpecialFlags.HighFrequencyLogging:
+                            HandleSpecialFlagHighFrequencyLogging(flag.Value);
+                            break;
+                        case Address.SpecialFlags.TriggerHomeLink:
+                            HandleSpecialFlagTriggerHomeLink(flag.Value, addr.lat, addr.lng, _oldState, _newState);
+                            break;
+                        default:
+                            Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                            break;
+                    }
                 }
             }
         }
