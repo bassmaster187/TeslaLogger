@@ -411,6 +411,8 @@ namespace TeslaLogger
                                 try
                                 {
                                     Logfile.Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
+                                    DBHelper.currentJSON.current_falling_asleep = true;
+                                    DBHelper.currentJSON.CreateCurrentJSON();
 
                                     for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                     {
@@ -634,10 +636,11 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
-            if (String.IsNullOrEmpty(ApplicationSettings.Default.VerboseMode))
+            if (ApplicationSettings.Default.VerboseMode)
             {
                 VERBOSE = true;
                 Logfile.VERBOSE = true;
+                Logfile.Log("VerboseMode ON");
             }
         }
 
