@@ -115,7 +115,7 @@ require("language.php");
 
 				updateSMT(jsonData);
 			}
-			else if (jsonData["online"])
+			else if (jsonData["online"] && !jsonData["falling_asleep"])
 			{
 				var text = "Online";
 
