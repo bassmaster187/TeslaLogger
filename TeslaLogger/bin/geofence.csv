@@ -15,6 +15,8 @@ Fastned DE-Schmidgaden, 49.43777, 12.05351
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
+Fastned NL-Fustweg, 52.385156, 4.661724
+Fastned NL-Labbegat, 51.69393, 5.01359
 
 Ionity AT-Angath Nord, 47.519215, 12.065526
 Ionity AT-Eisentratten, 46.919943, 13.579276
@@ -29,7 +31,7 @@ Ionity AT-Klösterle, 47.129066, 10.060559
 Ionity AT-Mondsee, 47.836599, 13.395919
 Ionity AT-Nassereith, 47.327313, 10.819309
 Ionity AT-Pinkafeld, 47.373952, 16.093842
-Ionity AT-St. Valentin, 48.196397, 14.52822, 20
+Ionity AT-St. Valentin, 48.196397, 14.52822, 8
 Ionity AT-Steinhäusl, 48.157839, 15.940398
 Ionity BE-Bierset, 50.651848, 5.473755
 Ionity BE-Froyennes North, 50.619572, 3.338944
@@ -92,7 +94,7 @@ Ionity DE-Haidt Süd, 49.779352, 10.246493
 Ionity DE-Himmelkron, 50.055972, 11.609148
 Ionity DE-Hohenlohe Nord, 49.207007, 9.639273
 Ionity DE-Hohenlohe Süd, 49.205379, 9.639696
-Ionity DE-Hohenwarsleben, 52.173933, 11.495112
+Ionity DE-Hohenwarsleben, 52.173913, 11.495172, 10
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219137, 10.127765
@@ -116,7 +118,7 @@ Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
-Ionity DE-Nempitz, 51.29012, 12.13759, 5
+Ionity DE-Nempitz, 51.2901, 12.13757, 5
 Ionity DE-Neumarkt, 49.312948, 11.474745
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -304,8 +306,8 @@ Supercharger AT-Graz,47.037208, 15.478644
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
-Supercharger AT-Langkampfen, 47.534597,12.092972
-Supercharger AT-Laßnitzhöhe, 47.071303, 15.577964
+Supercharger AT-Langkampfen, 47.534597, 12.092972
+Supercharger AT-Laßnitzhöhe, 47.070925, 15.578139
 Supercharger AT-Lermoos, 47.394965, 10.887519
 Supercharger AT-Liezen, 47.559370, 14.252606
 Supercharger AT-Poysdorf, 48.676534, 16.623013
@@ -313,7 +315,7 @@ Supercharger AT-Salzburg, 47.727056, 13.060672
 Supercharger AT-St. Anton, 47.130088, 10.269217
 Supercharger AT-St. Georgen, 47.929088, 13.502168
 Supercharger AT-St. Pölten, 48.205769, 15.618485
-Supercharger AT-St. Valentin, 48.196528, 14.527823, 20
+Supercharger AT-St. Valentin, 48.196507, 14.527879, 20
 Supercharger AT-Traun,48.237012, 14.240255
 Supercharger AT-Vienna,48.1574455, 16.3345536
 Supercharger AT-Villach, 46.604193, 13.869091
@@ -421,7 +423,7 @@ Supercharger DE-Hilden, 51.19115, 6.9368, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
 Supercharger DE-Hilpoltstein, 49.16121, 11.2605
 Supercharger DE-Hirschberg, 49.50738, 8.63752
-Supercharger DE-Hohenwarsleben, 52.1740692, 11.4945093
+Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
 Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger DE-Jettingen, 48.41105, 10.4403
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
@@ -439,7 +441,7 @@ Supercharger DE-Motten, 50.355755, 9.75453
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.20283, 11.77663
-Supercharger DE-Nempitz, 51.29015, 12.13725, 15
+Supercharger DE-Nempitz, 51.29012, 12.13727, 15
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger DE-Nossen, 51.08255, 13.27406
@@ -723,7 +725,7 @@ Supercharger LI-Schaan, 47.16519, 9.50775
 Supercharger LU-Mënsbech, 49.6409, 6.27076
 Supercharger NL-Apeldoorn, 52.177652, 5.912803
 Supercharger NL-Assen, 52.9929,6.52447
-Supercharger NL-Badhoevedorp, 52.328927, 4.78492
+Supercharger NL-Badhoevedorp, 52.329302, 4.78487
 Supercharger NL-Breda, 51.577493, 4.729968
 Supercharger NL-Breukelen, 52.1672253, 4.988661
 Supercharger NL-Bunnik, 52.061418, 5.20582
@@ -735,7 +737,7 @@ Supercharger NL-Emmeloord, 52.727421, 5.764693
 Supercharger NL-Gouda, 52.022955, 4.684605
 Supercharger NL-Hoorn, 52.650769, 5.038917
 Supercharger NL-Horst, 51.470008, 6.056974
-Supercharger NL-Leiderdorp, 52.1601396, 4.5491453
+Supercharger NL-Leiderdorp, 52.160766, 4.549019
 Supercharger NL-Naarden, 52.30858, 5.141127
 Supercharger NL-Oosterhout, 51.626423, 4.869517
 Supercharger NL-Rosmalen, 51.720551, 5.333622
