@@ -51,7 +51,7 @@ namespace TeslaLogger
 
             try
             {
-                IntiStage1();
+                InitStage1();
 
                 InitCheckDocker();
 
@@ -618,7 +618,7 @@ namespace TeslaLogger
             Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
         }
 
-        private static void IntiStage1()
+        private static void InitStage1()
         {
             Tools.SetThread_enUS();
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
