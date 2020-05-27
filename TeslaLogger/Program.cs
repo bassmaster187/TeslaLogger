@@ -272,7 +272,7 @@ namespace TeslaLogger
 
             if (res == "online")
             {
-                Logfile.Log(res);
+                //Logfile.Log(res);
                 SetCurrentState(TeslaState.Start);
 
                 webhelper.IsDriving(true); // Positionsmeldung in DB für Wechsel
