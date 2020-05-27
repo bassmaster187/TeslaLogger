@@ -370,7 +370,7 @@ namespace TeslaLogger
                 if (File.Exists(modelPath))
                 {
                     string model = File.ReadAllText(modelPath);
-                    Logfile.Log("Model: " + model);
+                    
                     if (model.Contains("Raspberry Pi "))
                     {
                         model += " /";
