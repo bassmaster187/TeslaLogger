@@ -862,11 +862,13 @@ namespace TeslaLogger
             else if (_oldState != TeslaState.GoSleep && _newState == TeslaState.GoSleep)
             {
                 DBHelper.currentJSON.current_falling_asleep = true;
+                DBHelper.currentJSON.CreateCurrentJSON();
             }
             // GoSleep -> any
             else if (_oldState == TeslaState.GoSleep && _newState != TeslaState.GoSleep)
             {
                 DBHelper.currentJSON.current_falling_asleep = false;
+                DBHelper.currentJSON.CreateCurrentJSON();
             }
         }
 
