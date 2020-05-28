@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace TeslaLogger
 {
@@ -31,10 +32,14 @@ namespace TeslaLogger
         }
 
 
-        // DEBUG public static void Log(string text /*, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0*/)
+        public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string temp = text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "");
+            Log(temp);
+        }
+
         public static void Log(string text)
         {
-            // DEBUG string temp = DateTime.Now.ToString(ciDeDE) + " : " + text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "")*
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
             Console.WriteLine(temp);
 
@@ -326,6 +331,5 @@ namespace TeslaLogger
 
             return false;
         }
-
     }
 }

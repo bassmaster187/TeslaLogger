@@ -38,15 +38,19 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-        private enum hflMode
+        private enum HFLMode
         {
             Ticks,
             Time
         }
-        private static hflMode highFrequencyLoggingMode = hflMode.Ticks;
+        private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
+
+        public static bool DebugLoggingAvailable { get; set; } = false;
 
         private static void Main(string[] args)
         {
+            InitDebugLogging();
+
             CheckNewCredentials();
 
             try
@@ -101,10 +105,13 @@ namespace TeslaLogger
                             case TeslaState.GoSleep:
                                 HandleStateGoSleep();
                                 break;
+
                             case TeslaState.Park:
                                 break;
+
                             case TeslaState.WaitForSleep:
                                 break;
+
                             default:
                                 Logfile.Log("Main loop default reached with state: " + GetCurrentState().ToString());
                                 break;
@@ -113,7 +120,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.ExceptionWriter(ex, "While Schleife");
+                        Logfile.ExceptionWriter(ex, "main loop");
                     }
                 }
 
@@ -121,7 +128,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.Message);
-                Logfile.ExceptionWriter(ex, "While Schleife");
+                Logfile.ExceptionWriter(ex, "main loop");
             }
             finally
             {
@@ -129,18 +136,65 @@ namespace TeslaLogger
             }
         }
 
-        private static void EnableHighFrequencyLoggingMode(hflMode _mode, int _ticklimit, DateTime _until)
+        private static void InitDebugLogging()
+        {
+            if (ApplicationSettings.Default.VerboseMode)
+            {
+                VERBOSE = true;
+                bool methodAvailable = false;
+                bool parameterCFPAvailable = false;
+                bool parameterCLNAvailable = false;
+                bool fieldAvailable = false;
+                foreach (var m in typeof(Logfile).GetMethods())
+                {
+                    if (m.Name.Equals("DebugLog"))
+                    {
+                        methodAvailable = true;
+                        foreach (var p in m.GetParameters())
+                        {
+                            if (p.Name.Equals("_cfp"))
+                            {
+                                parameterCFPAvailable = true;
+                            }
+                            else if (p.Name.Equals("_cln"))
+                            {
+                                parameterCLNAvailable = true;
+                            }
+                        }
+                    }
+                }
+                foreach (var f in typeof(Logfile).GetFields())
+                {
+                    if (f.Name.Equals("VERBOSE"))
+                    {
+                        fieldAvailable = true;
+                    }
+                }
+                Logfile.Log("VerboseMode ON");
+                if (methodAvailable && parameterCFPAvailable && parameterCLNAvailable && fieldAvailable)
+                {
+                    Logfile.Log("Debug Logging available");
+                    DebugLoggingAvailable = true;
+                }
+            }
+        }
+
+        private static void EnableHighFrequencyLoggingMode(HFLMode _mode, int _ticklimit, DateTime _until)
         {
             switch (_mode)
             {
-                case hflMode.Ticks:
+                case HFLMode.Ticks:
                     highFrequencyLogging = true;
                     highFrequencyLoggingMode = _mode;
                     highFrequencyLoggingTicksLimit = _ticklimit;
                     break;
-                case hflMode.Time:
+                case HFLMode.Time:
+                    highFrequencyLogging = true;
+                    highFrequencyLoggingMode = _mode;
+                    highFrequencyLoggingUntil = _until;
                     break;
                 default:
+                    Logfile.Log("EnableHighFrequencyLoggingMode default");
                     break;
             }
         }
@@ -300,7 +354,14 @@ namespace TeslaLogger
                 System.Threading.Thread.Sleep(10000);
                 if (VERBOSE)
                 {
-                    Logfile.Log("Sleep(10000)");
+                    if (DebugLoggingAvailable)
+                    {
+                        Logfile.DebugLog("Sleep(10000)");
+                    }
+                    else
+                    {
+                        Logfile.Log("Sleep(10000)");
+                    }
                 }
             }
         }
@@ -664,13 +725,6 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
-
-            if (ApplicationSettings.Default.VerboseMode)
-            {
-                VERBOSE = true;
-                // Logfile.VERBOSE = true;
-                Logfile.Log("VerboseMode ON");
-            }
         }
 
         private static void LogToken()
@@ -916,7 +970,7 @@ namespace TeslaLogger
         private static void ResetHighFrequencyLogging()
         {
             highFrequencyLogging = false;
-            highFrequencyLoggingMode = hflMode.Ticks;
+            highFrequencyLoggingMode = HFLMode.Ticks;
             highFrequencyLoggingTicks = 0;
             highFrequencyLoggingTicksLimit = 100;
             highFrequencyLoggingUntil = DateTime.Now;
@@ -966,7 +1020,7 @@ namespace TeslaLogger
                     Logfile.Log("HighFrequencyLogging config: tick mode " + m.Groups[0].Captures[1].ToString());
                     if (int.TryParse(m.Groups[0].Captures[1].ToString(), out int result))
                     {
-                        EnableHighFrequencyLoggingMode(hflMode.Ticks, result, DateTime.Now);
+                        EnableHighFrequencyLoggingMode(HFLMode.Ticks, result, DateTime.Now);
                     }
                 }
             }
