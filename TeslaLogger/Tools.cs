@@ -369,8 +369,8 @@ namespace TeslaLogger
 
                 if (File.Exists(modelPath))
                 {
-                    string model = File.ReadAllText(modelPath);
-                    
+                    string model = File.ReadAllText(modelPath).Trim().Replace("\r","");
+
                     if (model.Contains("Raspberry Pi "))
                     {
                         model += " /";

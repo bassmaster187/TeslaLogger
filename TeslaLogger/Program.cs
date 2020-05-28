@@ -76,6 +76,8 @@ namespace TeslaLogger
 
                 Address lastRacingPoint = null;
 
+                Logfile.Log("Init finished, now enter main loop");
+
                 while (true)
                 {
                     try
@@ -944,7 +946,17 @@ namespace TeslaLogger
         // do something on state changes
         private static void HandleStateChange(TeslaState _oldState, TeslaState _newState)
         {
-            Logfile.Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
+            if (DebugLoggingAvailable)
+            {
+                if (_oldState != null && _newState != null)
+                {
+                    Logfile.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
+                }
+                else
+                {
+                    Logfile.DebugLog("change TeslaLogger state: " + _oldState + " -> " + _newState);
+                }
+            }
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
@@ -975,9 +987,16 @@ namespace TeslaLogger
 
         public static void HandleShiftStateChange(string _oldState, string _newState)
         {
-            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
+            if (DebugLoggingAvailable)
+            {
+                Logfile.DebugLog("HandleShiftStateChange: " + _oldState + " -> " + _newState);
+            }
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-            if (addr.specialFlags != null && addr.specialFlags.Count > 0) {
+            if (DebugLoggingAvailable)
+            {
+                Logfile.DebugLog("HandleShiftStateChange GetPOI returns: <" + addr + ">");
+            }
+            if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
                 foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                 {
                     switch (flag.Key)

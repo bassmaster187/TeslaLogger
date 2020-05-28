@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -62,8 +63,12 @@ namespace TeslaLogger
             return _lastShift_State;
         }
 
-        private void SetLastShiftState(string _newState)
+        private void SetLastShiftState(string _newState, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
+            if (Program.DebugLoggingAvailable)
+            {
+                Logfile.DebugLog("SetLastShiftState _lastShift_State: " + _lastShift_State + " _newState: " + _newState + " called by " + _cfp + ":" + _cln);
+            }
             if (!_newState.Equals(_lastShift_State))
             {
                 Program.HandleShiftStateChange(_lastShift_State, _newState);
@@ -1088,7 +1093,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        if (GetLastShiftState() != "P")
+                        if (!GetLastShiftState().Equals("P"))
                         {
                             Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
                         }

@@ -34,7 +34,7 @@ namespace TeslaLogger
 
         public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
-            string temp = text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "");
+            string temp = text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
             Log(temp);
         }
 
@@ -56,14 +56,19 @@ namespace TeslaLogger
                 }
             }
         }
+
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
             ExceptionWriter(ex, inhalt, out _);
         }
 
-        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred)
+        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
             timeoutOccurred = false;
+            if (Logfile.VERBOSE)
+            {
+                DebugLog("Exception: " + ex.GetType() + " at " + _cfp + ":" + _cln);
+            }
             try
             {
                 if (inhalt != null)
