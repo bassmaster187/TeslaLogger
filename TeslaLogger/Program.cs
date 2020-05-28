@@ -636,10 +636,11 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
+
             if (ApplicationSettings.Default.VerboseMode)
             {
                 VERBOSE = true;
-                Logfile.VERBOSE = true;
+                // Logfile.VERBOSE = true;
                 Logfile.Log("VerboseMode ON");
             }
         }

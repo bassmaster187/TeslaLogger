@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace TeslaLogger
 {
     public class Logfile
     {
-        public static bool VERBOSE = false;
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
@@ -53,35 +51,15 @@ namespace TeslaLogger
             }
         }
 
-        public static void ExceptionWriter(Exception ex, string inhalt, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void ExceptionWriter(Exception ex, string inhalt)
         {
-            if (VERBOSE)
-            {
-                Log("ExceptionWriter: " + ex.GetType().ToString() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
-                VERBOSE = false;
-                ExceptionWriter(ex, inhalt, out _);
-                VERBOSE = true;
-            }
-            else
-            {
-                ExceptionWriter(ex, inhalt, out _);
-            }
-        }
-
-        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
-        {
-            if (VERBOSE)
-            {
-                Log("Exception: " + ex.GetType().ToString() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
-            }
-            timeoutOccurred = false;
             try
             {
                 if (inhalt != null)
                 {
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
-                        Log("vehicle unavailable" + (VERBOSE ? " " + ex.StackTrace : ""));
+                        Log("vehicle unavailable");
                         System.Threading.Thread.Sleep(30000);
                         if (Logfile.VERBOSE)
                         {
@@ -147,7 +125,6 @@ namespace TeslaLogger
                 if (temp.Contains("The operation has timed out"))
                 {
                     Log(prefix + "HTTP Timeout");
-                    timeoutOccurred = true;
                     System.Threading.Thread.Sleep(15000);
                     if (Logfile.VERBOSE)
                     {
@@ -157,8 +134,7 @@ namespace TeslaLogger
                 }
                 if (inhalt.Contains("operation_timedout with 10s timeout for txid"))
                 {
-                    Log(prefix + "Mothership Timeout" + (VERBOSE ? " " + ex.StackTrace : ""));
-                    timeoutOccurred = true;
+                    Log(prefix + "Mothership Timeout");
                     System.Threading.Thread.Sleep(20000);
                     if (Logfile.VERBOSE)
                     {
@@ -209,7 +185,6 @@ namespace TeslaLogger
                 else if (temp.Contains("Connection timed out"))
                 {
                     Log(prefix + "Connection timed out");
-                    timeoutOccurred = true;
                     System.Threading.Thread.Sleep(50000);
                     if (Logfile.VERBOSE)
                     {
