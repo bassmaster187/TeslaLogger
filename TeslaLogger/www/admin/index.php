@@ -115,7 +115,7 @@ require("language.php");
 
 				updateSMT(jsonData);
 			}
-			else if (jsonData["online"])
+			else if (jsonData["online"] && !jsonData["falling_asleep"])
 			{
 				var text = "Online";
 
@@ -137,6 +137,13 @@ require("language.php");
 			{
 				$('#car_statusLabel').text("Status:");
 				$('#car_status').text("<?php t("Schlafen"); ?>");
+
+				hideSMT();
+			}
+			else if (jsonData["falling_asleep"])
+			{
+				$('#car_statusLabel').text("Status:");
+				$('#car_status').text("<?php t("Einschlafen"); ?>");
 
 				hideSMT();
 			}

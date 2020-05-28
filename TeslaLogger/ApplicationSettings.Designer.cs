@@ -130,5 +130,16 @@ namespace TeslaLogger {
                 return ((bool)(this["UseScanMyTesla"]));
             }
         }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VerboseMode
+        {
+            get
+            {
+                return ((bool)(this["VerboseMode"]));
+            }
+        }
     }
 }

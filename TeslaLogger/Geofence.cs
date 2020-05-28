@@ -1,24 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
     public class Address
     {
-        public Address(string name, double lat, double lng, int radius)
+        public enum SpecialFlags
         {
-            this.name = name;
-            this.lat = lat;
-            this.lng = lng;
-            this.radius = radius;
+            OpenChargePort,
+            HighFrequencyLogging,
+            TriggerHomeLink
         }
 
         public string name;
         public double lat;
         public double lng;
         public int radius;
+        public Dictionary<SpecialFlags, string> specialFlags;
+
+        public Address(string name, double lat, double lng, int radius)
+        {
+            this.name = name;
+            this.lat = lat;
+            this.lng = lng;
+            this.radius = radius;
+            specialFlags = new Dictionary<SpecialFlags, string>();
+        }
+
+        public override string ToString()
+        {
+            string ret = "Address:\nname:"+name+"\nlat:"+lat+"\nlng:"+lng+"\nradius:"+radius;
+            foreach (KeyValuePair<SpecialFlags, string> flag in specialFlags)
+            {
+                ret += "\n" + flag.Key.ToString() + ":" + flag.Value;
+            }
+            return ret;
+        }
     }
 
     public class Geofence
@@ -29,13 +50,6 @@ namespace TeslaLogger
         public bool RacingMode = false;
 
         private static int FSWCounter = 0;
-
-        public enum SpecialFlags
-        {
-            OpenChargePort
-        }
-
-        private static Dictionary<string, HashSet<SpecialFlags>> specialFlags = new Dictionary<string, HashSet<SpecialFlags>>();
 
         public Geofence()
         {
@@ -87,6 +101,7 @@ namespace TeslaLogger
             sortedList = list.OrderBy(o => o.lat).ToList();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
             try
@@ -144,17 +159,23 @@ namespace TeslaLogger
                                 int.TryParse(args[3], out radius);
                             }
 
+                            Address addr = new Address(args[0].Trim(),
+                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
+                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
+                                radius);
+
                             if (args.Length > 4)
                             {
                                 string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
-                                ParseSpecialFlags(args[0].Trim(), flags);
+                                ParseSpecialFlags(addr, flags);
+                                if (Program.VERBOSE)
+                                {
+                                    Logfile.Log(addr.ToString());
+                                }
                             }
 
-                            list.Add(new Address(args[0].Trim(),
-                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
-                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
-                                radius));
+                            list.Add(addr);
 
                             if (!filename.Contains("geofence.csv"))
                             {
@@ -174,22 +195,68 @@ namespace TeslaLogger
             }
         }
 
-        private static void ParseSpecialFlags(string _locationname, string _flags)
+        private static void ParseSpecialFlags(Address _addr, string _flags)
         {
-            if (_flags.Contains("+ocp"))
+            foreach (string flag in _flags.Split('+'))
             {
-                if (!specialFlags.ContainsKey(_locationname))
+                if (flag.StartsWith("ocp"))
                 {
-                    specialFlags.Add(_locationname, new HashSet<SpecialFlags>());
+                    SpecialFlagOCP(_addr, flag);
                 }
-                specialFlags[_locationname].Add(SpecialFlags.OpenChargePort);
+                else if (flag.StartsWith("hfl"))
+                {
+                    SpecialFlagHFL(_addr, flag);
+                }
+                else if (flag.StartsWith("thl"))
+                {
+                    SpecialFlagHTHL(_addr, flag);
+                }
             }
         }
 
-        public static HashSet<SpecialFlags> GetSpecialFlagsForLocationName(string _locationname)
+        private static void SpecialFlagHTHL(Address _addr, string _flag)
         {
-            Logfile.Log("GetSpecialFlagsForLocationName(" + _locationname + ")");
-            return specialFlags.ContainsKey(_locationname) ? specialFlags[_locationname] : new HashSet<SpecialFlags>();
+            string pattern = "thl:([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, m.Groups[0].Captures[1].ToString() + "->" + m.Groups[0].Captures[2].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, "P->RND");
+            }
+        }
+
+        private static void SpecialFlagHFL(Address _addr, string _flag)
+        {
+            string pattern = "hfl:([0-9]+)([a-z]{0,1})";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.HighFrequencyLogging, "100");
+            }
+        }
+
+        private static void SpecialFlagOCP(Address _addr, string _flag)
+        {
+            string pattern = "ocp:([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, "RND->P");
+            }
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true)
