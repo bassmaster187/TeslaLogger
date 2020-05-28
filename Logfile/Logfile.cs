@@ -32,9 +32,11 @@ namespace TeslaLogger
         }
 
 
-        public static void Log(string text /*, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0*/)
+        // DEBUG public static void Log(string text /*, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0*/)
+        public static void Log(string text)
         {
-            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text /*+ (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "")*/;
+            // DEBUG string temp = DateTime.Now.ToString(ciDeDE) + " : " + text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "")*
+            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
             Console.WriteLine(temp);
 
             if (WriteToLogfile)
