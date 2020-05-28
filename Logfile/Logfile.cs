@@ -51,27 +51,13 @@ namespace TeslaLogger
             }
         }
 
-        public static void ExceptionWriter(Exception ex, string inhalt, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void ExceptionWriter(Exception ex, string inhalt)
         {
-            if (VERBOSE)
-            {
-                Log("ExceptionWriter: " + ex.GetType().ToString() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
-                VERBOSE = false;
-                ExceptionWriter(ex, inhalt, out _);
-                VERBOSE = true;
-            }
-            else
-            {
-                ExceptionWriter(ex, inhalt, out _);
-            }
+            ExceptionWriter(ex, inhalt, out _);
         }
 
-        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred)
         {
-            if (VERBOSE)
-            {
-                Log("Exception: " + ex.GetType().ToString() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
-            }
             timeoutOccurred = false;
             try
             {
