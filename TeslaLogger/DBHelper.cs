@@ -115,6 +115,11 @@ namespace TeslaLogger
             DateTime end = DateTime.UtcNow;
             TimeSpan ts = end - start;
             double duration = ts.TotalSeconds;
+            AddMothershipDataToDB(command, duration, httpcode);
+        }
+
+        public static void AddMothershipDataToDB(string command, double duration, int httpcode)
+        {
 
             if (!mothershipCommands.ContainsKey(command))
             {
@@ -704,7 +709,7 @@ namespace TeslaLogger
         {
             try
             {
-                System.Threading.Thread.Sleep(5); 
+                System.Threading.Thread.Sleep(5);
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {

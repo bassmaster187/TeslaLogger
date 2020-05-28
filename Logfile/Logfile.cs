@@ -7,6 +7,7 @@ namespace TeslaLogger
     {
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
+        public static bool VERBOSE = false;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
         static Logfile()
         {
@@ -50,9 +51,14 @@ namespace TeslaLogger
                 }
             }
         }
-
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
+            ExceptionWriter(ex, inhalt, out _);
+        }
+
+        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred)
+        {
+            timeoutOccurred = false;
             try
             {
                 if (inhalt != null)
