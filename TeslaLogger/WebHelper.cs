@@ -168,7 +168,7 @@ namespace TeslaLogger
                     if (Tools.IsDocker())
                     {
                         Thread.Sleep(5 * 60000);
-                        if (Program.VERBOSE)
+                        if (Program.DebugLoggingAvailable)
                         {
                             Logfile.Log("Sleep(5 * 60000)");
                         }
@@ -225,7 +225,7 @@ namespace TeslaLogger
                     Logfile.Log("charging_state = null");
 
                     Thread.Sleep(10000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(10000)");
                     }
@@ -356,7 +356,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("isCharging = NULL");
                     Thread.Sleep(10000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(10000)");
                     }
@@ -494,7 +494,7 @@ namespace TeslaLogger
                     }
 
                     Thread.Sleep(30000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(30000)");
                     }
@@ -524,7 +524,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
                     Thread.Sleep(30000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(30000)");
                     }
@@ -589,7 +589,7 @@ namespace TeslaLogger
                         else
                         {
                             Thread.Sleep(10000);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(10000)");
                             }
@@ -1142,7 +1142,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("IsDriving = NULL!");
                     Thread.Sleep(10000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(10000)");
                     }
@@ -1205,7 +1205,7 @@ namespace TeslaLogger
                         {
                             System.Diagnostics.Debug.WriteLine("Connecting");
                             Thread.Sleep(100);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(100)");
                             }
@@ -1231,13 +1231,13 @@ namespace TeslaLogger
                             string r = Encoding.UTF8.GetString(buffer);
                             System.Diagnostics.Debug.WriteLine(r);
                             Thread.Sleep(100);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(100)");
                             }
                             ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
                             Thread.Sleep(1000);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(1000)");
                             }
@@ -1291,7 +1291,7 @@ namespace TeslaLogger
 
                     Logfile.ExceptionWriter(ex, line);
                     Thread.Sleep(10000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(10000)");
                     }
@@ -1904,13 +1904,13 @@ FROM
 
                             // write into Database
                             Thread.Sleep(5000);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(5000)");
                             }
                             IsDriving(true);
                             Thread.Sleep(5000);
-                            if (Program.VERBOSE)
+                            if (Program.DebugLoggingAvailable)
                             {
                                 Logfile.Log("Sleep(5000)");
                             }
@@ -1930,13 +1930,13 @@ FROM
 
                     // write into Database
                     Thread.Sleep(5000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(5000)");
                     }
                     IsDriving(true);
                     Thread.Sleep(5000);
-                    if (Program.VERBOSE)
+                    if (Program.DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(5000)");
                     }

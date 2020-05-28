@@ -74,7 +74,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(30000);
                         if (Logfile.VERBOSE)
                         {
-                            Logfile.Log("Sleep(30000)");
+                            Logfile.DebugLog("Sleep(30000)");
                         }
 
                         return;
@@ -85,7 +85,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(10000);
                         if (Logfile.VERBOSE)
                         {
-                            Logfile.Log("Sleep(10000)");
+                            Logfile.DebugLog("Sleep(10000)");
                         }
 
                         return;
@@ -96,7 +96,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(30000);
                         if (Logfile.VERBOSE)
                         {
-                            Logfile.Log("Sleep(30000)");
+                            Logfile.DebugLog("Sleep(30000)");
                         }
 
                         return;
@@ -107,7 +107,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(60000);
                         if (Logfile.VERBOSE)
                         {
-                            Logfile.Log("Sleep(60000)");
+                            Logfile.DebugLog("Sleep(60000)");
                         }
 
                         return;
@@ -118,7 +118,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(30000);
                         if (Logfile.VERBOSE)
                         {
-                            Logfile.Log("Sleep(30000)");
+                            Logfile.DebugLog("Sleep(30000)");
                         }
 
                         return;
@@ -139,7 +139,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(15000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(15000)");
+                        Logfile.DebugLog("Sleep(15000)");
                     }
                     return;
                 }
@@ -149,7 +149,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(20000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(20000)");
+                        Logfile.DebugLog("Sleep(20000)");
                     }
                     return;
                 }
@@ -159,7 +159,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(20000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(20000)");
+                        Logfile.DebugLog("Sleep(20000)");
                     }
                     return;
                 }
@@ -179,7 +179,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(50000)");
+                        Logfile.DebugLog("Sleep(50000)");
                     }
                     return;
                 }
@@ -189,7 +189,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(50000)");
+                        Logfile.DebugLog("Sleep(50000)");
                     }
                     return;
                 }
@@ -199,7 +199,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(50000)");
+                        Logfile.DebugLog("Sleep(50000)");
                     }
                     return;
                 }
@@ -209,7 +209,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(50000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(50000)");
+                        Logfile.DebugLog("Sleep(50000)");
                     }
                     return;
                 }
@@ -219,7 +219,7 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(30000);
                     if (Logfile.VERBOSE)
                     {
-                        Logfile.Log("Sleep(30000)");
+                        Logfile.DebugLog("Sleep(30000)");
                     }
                     return;
                 }

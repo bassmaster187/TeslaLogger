@@ -145,12 +145,12 @@ namespace TeslaLogger
                 bool parameterCFPAvailable = false;
                 bool parameterCLNAvailable = false;
                 bool fieldAvailable = false;
-                foreach (var m in typeof(Logfile).GetMethods())
+                foreach (System.Reflection.MethodInfo m in typeof(Logfile).GetMethods())
                 {
                     if (m.Name.Equals("DebugLog"))
                     {
                         methodAvailable = true;
-                        foreach (var p in m.GetParameters())
+                        foreach (System.Reflection.ParameterInfo p in m.GetParameters())
                         {
                             if (p.Name.Equals("_cfp"))
                             {
@@ -163,7 +163,7 @@ namespace TeslaLogger
                         }
                     }
                 }
-                foreach (var f in typeof(Logfile).GetFields())
+                foreach (System.Reflection.FieldInfo f in typeof(Logfile).GetFields())
                 {
                     if (f.Name.Equals("VERBOSE"))
                     {
@@ -171,9 +171,13 @@ namespace TeslaLogger
                     }
                 }
                 Logfile.Log("VerboseMode ON");
+                if (fieldAvailable)
+                {
+                    Logfile.VERBOSE = VERBOSE;
+                }
                 if (methodAvailable && parameterCFPAvailable && parameterCLNAvailable && fieldAvailable)
                 {
-                    Logfile.Log("Debug Logging available");
+                    Logfile.DebugLog("Debug Logging available");
                     DebugLoggingAvailable = true;
                 }
             }
@@ -211,7 +215,7 @@ namespace TeslaLogger
                 {
                     round++;
                     System.Threading.Thread.Sleep(1000);
-                    if (VERBOSE)
+                    if (DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep(1000)");
                     }
@@ -277,7 +281,7 @@ namespace TeslaLogger
                 if (t > 0)
                 {
                     System.Threading.Thread.Sleep(t); // alle 5 sek eine positionsmeldung
-                    if (VERBOSE)
+                    if (DebugLoggingAvailable)
                     {
                         Logfile.Log("Sleep("+t+")");
                     }
@@ -352,16 +356,9 @@ namespace TeslaLogger
             else
             {
                 System.Threading.Thread.Sleep(10000);
-                if (VERBOSE)
+                if (DebugLoggingAvailable)
                 {
-                    if (DebugLoggingAvailable)
-                    {
-                        Logfile.DebugLog("Sleep(10000)");
-                    }
-                    else
-                    {
-                        Logfile.Log("Sleep(10000)");
-                    }
+                    Logfile.DebugLog("Sleep(10000)");
                 }
             }
         }
@@ -762,9 +759,9 @@ namespace TeslaLogger
                     }
 
                     System.Threading.Thread.Sleep(15000);
-                    if (VERBOSE)
+                    if (DebugLoggingAvailable)
                     {
-                        Logfile.Log("Sleep(15000)");
+                        Logfile.DebugLog("Sleep(15000)");
                     }
                 }
             }
