@@ -31,10 +31,9 @@ namespace TeslaLogger
             }
         }
 
-
-        public static void Log(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
-        { 
-            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text + (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "");
+        public static void Log(string text /*, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0*/)
+        {
+            string temp = DateTime.Now.ToString(ciDeDE) + " : " + text /*+ (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "")*/;
             Console.WriteLine(temp);
 
             if (WriteToLogfile)
@@ -81,6 +80,10 @@ namespace TeslaLogger
                     {
                         Log("vehicle unavailable" + (VERBOSE ? " " + ex.StackTrace : ""));
                         System.Threading.Thread.Sleep(30000);
+                        if (Logfile.VERBOSE)
+                        {
+                            Logfile.Log("Sleep(30000)");
+                        }
 
                         return;
                     }
@@ -88,6 +91,10 @@ namespace TeslaLogger
                     {
                         Log("upstream internal error");
                         System.Threading.Thread.Sleep(10000);
+                        if (Logfile.VERBOSE)
+                        {
+                            Logfile.Log("Sleep(10000)");
+                        }
 
                         return;
                     }
@@ -95,6 +102,10 @@ namespace TeslaLogger
                     {
                         Log("Connection refused");
                         System.Threading.Thread.Sleep(30000);
+                        if (Logfile.VERBOSE)
+                        {
+                            Logfile.Log("Sleep(30000)");
+                        }
 
                         return;
                     }
@@ -102,6 +113,10 @@ namespace TeslaLogger
                     {
                         Log("No route to host");
                         System.Threading.Thread.Sleep(60000);
+                        if (Logfile.VERBOSE)
+                        {
+                            Logfile.Log("Sleep(60000)");
+                        }
 
                         return;
                     }
@@ -109,6 +124,10 @@ namespace TeslaLogger
                     {
                         Log("temporarily blocked for making too many requests!");
                         System.Threading.Thread.Sleep(30000);
+                        if (Logfile.VERBOSE)
+                        {
+                            Logfile.Log("Sleep(30000)");
+                        }
 
                         return;
                     }
@@ -127,6 +146,10 @@ namespace TeslaLogger
                     Log(prefix + "HTTP Timeout");
                     timeoutOccurred = true;
                     System.Threading.Thread.Sleep(15000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(15000)");
+                    }
                     return;
                 }
                 if (inhalt.Contains("operation_timedout with 10s timeout for txid"))
@@ -134,30 +157,50 @@ namespace TeslaLogger
                     Log(prefix + "Mothership Timeout" + (VERBOSE ? " " + ex.StackTrace : ""));
                     timeoutOccurred = true;
                     System.Threading.Thread.Sleep(20000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(20000)");
+                    }
                     return;
                 }
                 if (inhalt.Contains("{\"response\":null,\"error\":\"not_found\",\"error_description\":\"\"}"))
                 {
                     Log(prefix + "Mothership response:null");
                     System.Threading.Thread.Sleep(20000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(20000)");
+                    }
                     return;
                 }
                 if (inhalt.Contains("502 Bad Gateway"))
                 {
                     Log(prefix + "Mothership 502 Bad Gateway");
                     System.Threading.Thread.Sleep(30000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(30000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("Connection refused"))
                 {
                     Log(prefix + "Connection refused");
                     System.Threading.Thread.Sleep(50000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(50000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("No such host is known"))
                 {
                     Log(prefix + "No such host is known");
                     System.Threading.Thread.Sleep(50000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(50000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("Connection timed out"))
@@ -165,18 +208,30 @@ namespace TeslaLogger
                     Log(prefix + "Connection timed out");
                     timeoutOccurred = true;
                     System.Threading.Thread.Sleep(50000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(50000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("We're sorry, but something went wrong (500)"))
                 {
                     Log(prefix + "HTTP Error 500");
                     System.Threading.Thread.Sleep(50000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(50000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("Connection reset by peer"))
                 {
                     Log(prefix + "Connection reset by peer");
                     System.Threading.Thread.Sleep(30000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.Log("Sleep(30000)");
+                    }
                     return;
                 }
                 else
