@@ -31,6 +31,7 @@ namespace TeslaLogger
             }
         }
 
+
         public static void Log(string text /*, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0*/)
         {
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text /*+ (VERBOSE ? " (" + Path.GetFileName(_cfp) + ":" + _cln + ")" : "")*/;
