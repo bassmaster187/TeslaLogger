@@ -185,6 +185,35 @@ namespace TeslaLogger
             }
         }
 
+        private static bool HighFrequenceLoggingEnabled(bool justcheck = false)
+        {
+            if (highFrequencyLogging)
+            {
+                switch (highFrequencyLoggingMode)
+                {
+                    case HFLMode.Ticks:
+                        if (highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit)
+                        {
+                            if (!justcheck)
+                            {
+                                highFrequencyLoggingTicks++;
+                            }
+                            return true;
+                        }
+                        break;
+                    case HFLMode.Time:
+                        if (highFrequencyLoggingUntil < DateTime.Now)
+                        {
+                            return true;
+                        } 
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return false;
+        }
+
         private static void EnableHighFrequencyLoggingMode(HFLMode _mode, int _ticklimit, DateTime _until)
         {
             switch (_mode)
@@ -377,14 +406,9 @@ namespace TeslaLogger
                 else
                 {
                     lastCarUsed = DateTime.Now;
-                    // Logfile.Log(res);
-                    // TODO highFrequencyLogging
-                    if (webhelper.fast_charger_brand.Equals("Tesla") && highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit)
+                    if (HighFrequenceLoggingEnabled())
                     {
-                        // SuperCharger fast mode
-                        Logfile.Log("Supercharging ...");
-                        highFrequencyLoggingTicks++;
-                        highFrequencyLogging = true;
+                        Logfile.Log("HighFrequenceLogging ...");
                     }
                     else
                     {
@@ -948,28 +972,15 @@ namespace TeslaLogger
         {
             if (DebugLoggingAvailable)
             {
-                if (_oldState != null && _newState != null)
-                {
-                    Logfile.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
-                }
-                else
-                {
-                    Logfile.DebugLog("change TeslaLogger state: " + _oldState + " -> " + _newState);
-                }
+                Logfile.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             }
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
                 ResetHighFrequencyLogging();
             }
-            // any -> GoSleep
-            else if (_oldState != TeslaState.GoSleep && _newState == TeslaState.GoSleep)
-            {
-                DBHelper.currentJSON.current_falling_asleep = true;
-                DBHelper.currentJSON.CreateCurrentJSON();
-            }
-            // GoSleep -> any
-            else if (_oldState == TeslaState.GoSleep && _newState != TeslaState.GoSleep)
+            // sleeping -> any
+            else if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
                 DBHelper.currentJSON.current_falling_asleep = false;
                 DBHelper.currentJSON.CreateCurrentJSON();
@@ -1025,16 +1036,45 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                Logfile.Log("HighFrequencyLogging config: time mode " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+                if (DebugLoggingAvailable)
+                {
+                    Logfile.DebugLog("HighFrequencyLogging config: time mode " + m.Groups[1].Captures[0].ToString() + ":" + m.Groups[2].Captures[0].ToString());
+                }
+                if (m.Groups[1].Captures[0] != null && m.Groups[2].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int duration))
+                {
+                    DateTime until = DateTime.Now;
+                    switch (m.Groups[2].Captures[0].ToString())
+                    {
+                        case "s":
+                            until.AddSeconds(duration);
+                            break;
+                        case "m":
+                            until.AddMinutes(duration);
+                            break;
+                        case "h":
+                            until.AddHours(duration);
+                            break;
+                        case "d":
+                            until.AddDays(duration);
+                            break;
+                        default:
+                            Logfile.Log("HandleSpecialFlagHighFrequencyLogging unhandled time parameter: " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+                            break;
+                    }
+                    EnableHighFrequencyLoggingMode(HFLMode.Time, 0, until);
+                }
             }
             else
             {
                 pattern = "([0-9]+)";
                 m = Regex.Match(_flagconfig, pattern);
-                if (m.Success && m.Groups.Count == 1 && m.Groups[0].Captures.Count == 2)
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
-                    Logfile.Log("HighFrequencyLogging config: tick mode " + m.Groups[0].Captures[1].ToString());
-                    if (int.TryParse(m.Groups[0].Captures[1].ToString(), out int result))
+                    if (DebugLoggingAvailable)
+                    {
+                        Logfile.DebugLog("HighFrequencyLogging config: tick mode " + m.Groups[1].Captures[0].ToString());
+                    }
+                    if (int.TryParse(m.Groups[1].Captures[0].ToString(), out int result))
                     {
                         EnableHighFrequencyLoggingMode(HFLMode.Ticks, result, DateTime.Now);
                     }

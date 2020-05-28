@@ -585,7 +585,6 @@ namespace TeslaLogger
                     sb.Append(lat.ToString(ci));
                     sb.Append(",");
                     sb.Append(lng.ToString(ci));
-                    // sb.Append("\r\n");
                 }
 
                 url = sb.ToString();
