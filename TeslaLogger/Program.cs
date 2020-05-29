@@ -916,6 +916,8 @@ namespace TeslaLogger
         private static void HandleStateChange(TeslaState _oldState, TeslaState _newState)
         {
             Logfile.Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
+            DBHelper.currentJSON.CreateCurrentJSON();
+
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
