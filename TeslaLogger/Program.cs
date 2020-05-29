@@ -45,8 +45,6 @@ namespace TeslaLogger
         }
         private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
 
-        public static bool DebugLoggingAvailable { get; set; } = false;
-
         private static void Main(string[] args)
         {
             InitDebugLogging();
@@ -143,45 +141,7 @@ namespace TeslaLogger
             if (ApplicationSettings.Default.VerboseMode)
             {
                 VERBOSE = true;
-                bool methodAvailable = false;
-                bool parameterCFPAvailable = false;
-                bool parameterCLNAvailable = false;
-                bool fieldAvailable = false;
-                foreach (System.Reflection.MethodInfo m in typeof(Logfile).GetMethods())
-                {
-                    if (m.Name.Equals("DebugLog"))
-                    {
-                        methodAvailable = true;
-                        foreach (System.Reflection.ParameterInfo p in m.GetParameters())
-                        {
-                            if (p.Name.Equals("_cfp"))
-                            {
-                                parameterCFPAvailable = true;
-                            }
-                            else if (p.Name.Equals("_cln"))
-                            {
-                                parameterCLNAvailable = true;
-                            }
-                        }
-                    }
-                }
-                foreach (System.Reflection.FieldInfo f in typeof(Logfile).GetFields())
-                {
-                    if (f.Name.Equals("VERBOSE"))
-                    {
-                        fieldAvailable = true;
-                    }
-                }
                 Logfile.Log("VerboseMode ON");
-                if (fieldAvailable)
-                {
-                    Logfile.VERBOSE = VERBOSE;
-                }
-                if (methodAvailable && parameterCFPAvailable && parameterCLNAvailable && fieldAvailable)
-                {
-                    Logfile.DebugLog("Debug Logging available");
-                    DebugLoggingAvailable = true;
-                }
             }
         }
 
@@ -976,10 +936,6 @@ namespace TeslaLogger
             highFrequencyLoggingTicks = 0;
             highFrequencyLoggingTicksLimit = 100;
             highFrequencyLoggingUntil = DateTime.Now;
-            if (DebugLoggingAvailable)
-            {
-                Logfile.DebugLog("ResetHighFrequencyLogging");
-            }
         }
 
         public static void HandleShiftStateChange(string _oldState, string _newState)

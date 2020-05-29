@@ -8,7 +8,6 @@ namespace TeslaLogger
     {
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
-        public static bool VERBOSE = false;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
         static Logfile()
         {
@@ -29,13 +28,6 @@ namespace TeslaLogger
 
                 return _logfilepath;
             }
-        }
-
-
-        public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
-        {
-            string temp = text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
-            Log(temp);
         }
 
         public static void Log(string text)
@@ -59,16 +51,6 @@ namespace TeslaLogger
 
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
-            ExceptionWriter(ex, inhalt, out _);
-        }
-
-        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
-        {
-            timeoutOccurred = false;
-            if (Logfile.VERBOSE)
-            {
-                DebugLog("Exception: " + ex.GetType() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
-            }
             try
             {
                 if (inhalt != null)
@@ -147,10 +129,6 @@ namespace TeslaLogger
                 {
                     Log(prefix + "No such host is known");
                     System.Threading.Thread.Sleep(50000);
-                    if (Logfile.VERBOSE)
-                    {
-                        Logfile.DebugLog("Sleep(50000)");
-                    }
                     return;
                 }
                 else if (temp.Contains("Connection timed out"))

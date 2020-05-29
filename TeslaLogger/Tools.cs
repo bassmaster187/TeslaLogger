@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
@@ -26,6 +27,12 @@ namespace TeslaLogger
         public static void SetThread_enUS()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
+        }
+
+        public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string temp = text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            Logfile.Log(temp);
         }
 
         public static string GetMonoRuntimeVersion()
