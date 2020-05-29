@@ -175,11 +175,12 @@ namespace TeslaLogger
                 Logfile.Log("VerboseMode ON");
                 if (fieldAvailable)
                 {
-                    Logfile.VERBOSE = VERBOSE;
+                    // xxx Logfile.VERBOSE = VERBOSE;
                 }
                 if (methodAvailable && parameterCFPAvailable && parameterCLNAvailable && fieldAvailable)
                 {
-                    Logfile.DebugLog("Debug Logging available");
+                    // Logfile.DebugLog("Debug Logging available");
+                    Logfile.Log("Debug Logging available");
                     DebugLoggingAvailable = true;
                 }
             }
@@ -956,6 +957,8 @@ namespace TeslaLogger
         private static void HandleStateChange(TeslaState _oldState, TeslaState _newState)
         {
             Logfile.Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
+            DBHelper.currentJSON.CreateCurrentJSON();
+
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
@@ -978,7 +981,7 @@ namespace TeslaLogger
             highFrequencyLoggingUntil = DateTime.Now;
             if (DebugLoggingAvailable)
             {
-                Logfile.DebugLog("ResetHighFrequencyLogging");
+                Logfile.Log("ResetHighFrequencyLogging");
             }
         }
 
