@@ -75,6 +75,8 @@ namespace TeslaLogger
                     currentJSON.current_online = false;
                     currentJSON.current_sleeping = false;
                 }
+
+                DBHelper.currentJSON.CreateCurrentJSON();
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
