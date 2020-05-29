@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace TeslaLogger
 {
@@ -7,6 +8,7 @@ namespace TeslaLogger
     {
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
+        public static bool VERBOSE = false;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
         static Logfile()
         {
@@ -30,6 +32,12 @@ namespace TeslaLogger
         }
 
 
+        public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string temp = text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            Log(temp);
+        }
+
         public static void Log(string text)
         {
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
@@ -51,6 +59,16 @@ namespace TeslaLogger
 
         public static void ExceptionWriter(Exception ex, string inhalt)
         {
+            ExceptionWriter(ex, inhalt, out _);
+        }
+
+        public static void ExceptionWriter(Exception ex, string inhalt, out bool timeoutOccurred, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            timeoutOccurred = false;
+            if (Logfile.VERBOSE)
+            {
+                DebugLog("Exception: " + ex.GetType() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
+            }
             try
             {
                 if (inhalt != null)
@@ -59,35 +77,30 @@ namespace TeslaLogger
                     {
                         Log("vehicle unavailable");
                         System.Threading.Thread.Sleep(30000);
-
                         return;
                     }
                     else if (inhalt.Contains("upstream internal error"))
                     {
                         Log("upstream internal error");
                         System.Threading.Thread.Sleep(10000);
-
                         return;
                     }
                     else if (inhalt.Contains("Connection refused"))
                     {
                         Log("Connection refused");
                         System.Threading.Thread.Sleep(30000);
-
                         return;
                     }
                     else if (inhalt.Contains("No route to host"))
                     {
                         Log("No route to host");
                         System.Threading.Thread.Sleep(60000);
-
                         return;
                     }
                     else if (inhalt.Contains("You have been temporarily blocked for making too many requests!"))
                     {
                         Log("temporarily blocked for making too many requests!");
                         System.Threading.Thread.Sleep(30000);
-
                         return;
                     }
                 }
@@ -134,6 +147,10 @@ namespace TeslaLogger
                 {
                     Log(prefix + "No such host is known");
                     System.Threading.Thread.Sleep(50000);
+                    if (Logfile.VERBOSE)
+                    {
+                        Logfile.DebugLog("Sleep(50000)");
+                    }
                     return;
                 }
                 else if (temp.Contains("Connection timed out"))
@@ -262,6 +279,5 @@ namespace TeslaLogger
 
             return false;
         }
-
     }
 }

@@ -169,10 +169,6 @@ namespace TeslaLogger
                                 string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
                                 ParseSpecialFlags(addr, flags);
-                                if (Program.VERBOSE)
-                                {
-                                    Logfile.Log(addr.ToString());
-                                }
                             }
 
                             list.Add(addr);

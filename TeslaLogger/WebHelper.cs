@@ -6,8 +6,8 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -62,7 +62,7 @@ namespace TeslaLogger
             return _lastShift_State;
         }
 
-        private void SetLastShiftState(string _newState)
+        private void SetLastShiftState(string _newState, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
             if (!_newState.Equals(_lastShift_State))
             {
@@ -1059,7 +1059,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        if (GetLastShiftState() != "P")
+                        if (!GetLastShiftState().Equals("P"))
                         {
                             Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
                         }
@@ -1125,7 +1125,7 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 10)
                     {
-                        Logfile.Log("No Valid IsDriving since 10min! (Exception)");
+                        Logfile.Log("No Valid IsDriving since 10min! (Exception: " + ex.GetType().ToString() + ")");
                         SetLastShiftState("P");
                         return false;
                     }
@@ -1189,7 +1189,6 @@ namespace TeslaLogger
                             Thread.Sleep(100);
                             byte[] buffer = new byte[1024];
                             Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
 
                             string r = Encoding.UTF8.GetString(buffer);
                             System.Diagnostics.Debug.WriteLine(r);
@@ -1889,7 +1888,11 @@ FROM
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    Logfile.ExceptionWriter(ex, resultContent);
+                    Logfile.ExceptionWriter(ex, resultContent, out bool timeoutOccurred);
+                    if (timeoutOccurred)
+                    {
+                        Logfile.Log("handle GetOutsideTempAsync() timeout not implemented yet");
+                    }
                 }
             }
             return null;

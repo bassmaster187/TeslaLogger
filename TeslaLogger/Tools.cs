@@ -370,7 +370,7 @@ namespace TeslaLogger
                 if (File.Exists(modelPath))
                 {
                     string model = File.ReadAllText(modelPath);
-                    
+
                     if (model.Contains("Raspberry Pi "))
                     {
                         model += " /";
@@ -391,6 +391,8 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+
+            ret = ret.Replace("\0", ""); // remove null bytes
 
             _OSVersion = ret;
             return ret;

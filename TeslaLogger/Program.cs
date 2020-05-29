@@ -38,15 +38,19 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-        private enum hflMode
+        private enum HFLMode
         {
             Ticks,
             Time
         }
-        private static hflMode highFrequencyLoggingMode = hflMode.Ticks;
+        private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
+
+        public static bool DebugLoggingAvailable { get; set; } = false;
 
         private static void Main(string[] args)
         {
+            InitDebugLogging();
+
             CheckNewCredentials();
 
             try
@@ -71,6 +75,8 @@ namespace TeslaLogger
                 DBHelper.currentJSON.CreateCurrentJSON();
 
                 Address lastRacingPoint = null;
+
+                Logfile.Log("Init finished, now enter main loop");
 
                 while (true)
                 {
@@ -101,10 +107,13 @@ namespace TeslaLogger
                             case TeslaState.GoSleep:
                                 HandleStateGoSleep();
                                 break;
+
                             case TeslaState.Park:
                                 break;
+
                             case TeslaState.WaitForSleep:
                                 break;
+
                             default:
                                 Logfile.Log("Main loop default reached with state: " + GetCurrentState().ToString());
                                 break;
@@ -113,16 +122,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.ExceptionWriter(ex, "While Schleife");
-                    }
-
-                    if (WebHelper.geofence.RacingMode || (highFrequencyLogging && highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit))
-                    {
-                        System.Threading.Thread.Sleep(1);
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(1000);
+                        Logfile.ExceptionWriter(ex, "main loop");
                     }
                 }
 
@@ -130,11 +130,108 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.Message);
-                Logfile.ExceptionWriter(ex, "While Schleife");
+                Logfile.ExceptionWriter(ex, "main loop");
             }
             finally
             {
                 Logfile.Log("Teslalogger Stopped!");
+            }
+        }
+
+        private static void InitDebugLogging()
+        {
+            if (ApplicationSettings.Default.VerboseMode)
+            {
+                VERBOSE = true;
+                bool methodAvailable = false;
+                bool parameterCFPAvailable = false;
+                bool parameterCLNAvailable = false;
+                bool fieldAvailable = false;
+                foreach (System.Reflection.MethodInfo m in typeof(Logfile).GetMethods())
+                {
+                    if (m.Name.Equals("DebugLog"))
+                    {
+                        methodAvailable = true;
+                        foreach (System.Reflection.ParameterInfo p in m.GetParameters())
+                        {
+                            if (p.Name.Equals("_cfp"))
+                            {
+                                parameterCFPAvailable = true;
+                            }
+                            else if (p.Name.Equals("_cln"))
+                            {
+                                parameterCLNAvailable = true;
+                            }
+                        }
+                    }
+                }
+                foreach (System.Reflection.FieldInfo f in typeof(Logfile).GetFields())
+                {
+                    if (f.Name.Equals("VERBOSE"))
+                    {
+                        fieldAvailable = true;
+                    }
+                }
+                Logfile.Log("VerboseMode ON");
+                if (fieldAvailable)
+                {
+                    Logfile.VERBOSE = VERBOSE;
+                }
+                if (methodAvailable && parameterCFPAvailable && parameterCLNAvailable && fieldAvailable)
+                {
+                    Logfile.DebugLog("Debug Logging available");
+                    DebugLoggingAvailable = true;
+                }
+            }
+        }
+
+        private static bool HighFrequenceLoggingEnabled(bool justcheck = false)
+        {
+            if (highFrequencyLogging)
+            {
+                switch (highFrequencyLoggingMode)
+                {
+                    case HFLMode.Ticks:
+                        if (highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit)
+                        {
+                            if (!justcheck)
+                            {
+                                highFrequencyLoggingTicks++;
+                            }
+                            return true;
+                        }
+                        break;
+                    case HFLMode.Time:
+                        if (highFrequencyLoggingUntil > DateTime.Now)
+                        {
+                            return true;
+                        } 
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return false;
+        }
+
+        private static void EnableHighFrequencyLoggingMode(HFLMode _mode, int _ticklimit, DateTime _until)
+        {
+            switch (_mode)
+            {
+                case HFLMode.Ticks:
+                    highFrequencyLogging = true;
+                    highFrequencyLoggingMode = _mode;
+                    highFrequencyLoggingTicksLimit = _ticklimit;
+                    break;
+                case HFLMode.Time:
+                    highFrequencyLogging = true;
+                    highFrequencyLoggingMode = _mode;
+                    highFrequencyLoggingUntil = _until;
+                    break;
+                default:
+                    Logfile.Log("EnableHighFrequencyLoggingMode default");
+                    break;
             }
         }
 
@@ -200,6 +297,7 @@ namespace TeslaLogger
             }
         }
 
+        // sleep for max 5 seconds
         private static Address HandleStateDrive(Address lastRacingPoint)
         {
             int t = Environment.TickCount;
@@ -266,6 +364,8 @@ namespace TeslaLogger
             return lastRacingPoint;
         }
 
+        // if online, switch state and return
+        // else sleep 10000
         private static void HandleStateSleep()
         {
             string res = webhelper.IsOnline().Result;
@@ -283,26 +383,21 @@ namespace TeslaLogger
             }
         }
 
+        // sleep 10000 unless in highFrequencyLogging mode
         private static void HandleStateCharge()
         {
             {
                 if (!webhelper.IsCharging())
                 {
-                    // TODO: ende des ladens in die datenbank schreiben
                     SetCurrentState(TeslaState.Start);
                     webhelper.IsDriving(true);
                 }
                 else
                 {
                     lastCarUsed = DateTime.Now;
-                    // Logfile.Log(res);
-                    // TODO highFrequencyLogging
-                    if (webhelper.fast_charger_brand.Equals("Tesla") && highFrequencyLoggingTicks < highFrequencyLoggingTicksLimit)
+                    if (HighFrequenceLoggingEnabled())
                     {
-                        // SuperCharger fast mode
-                        Logfile.Log("Supercharging ...");
-                        highFrequencyLoggingTicks++;
-                        highFrequencyLogging = true;
+                        Logfile.Log("HighFrequenceLogging ...");
                     }
                     else
                     {
@@ -315,6 +410,10 @@ namespace TeslaLogger
             }
         }
 
+        // if car is driving, switch state and return
+        // else if car is charging, switch state and return
+        // else if KeepOnlineMinAfterUsage is reached, sleep SuspendAPIMinutes minutes
+        // else sleep 5000
         private static void HandleStateOnline()
         {
             {
@@ -373,7 +472,7 @@ namespace TeslaLogger
                     RefreshToken();
 
                     Tools.StartSleeping(out int startSleepHour, out int startSleepMinute);
-                    bool sleep = true;
+                    bool doSleep = true;
 
                     if (FileManager.CheckCmdGoSleepFile())
                     {
@@ -425,7 +524,7 @@ namespace TeslaLogger
                                             Logfile.Log("ScanMyTesla prevents car to get sleep. Speed: " + DBHelper.currentJSON.SMTSpeed);
                                             lastCarUsed = DateTime.Now;
                                             string wakeup = webhelper.Wakeup().Result;
-                                            sleep = false;
+                                            doSleep = false;
                                             break;
                                         }
 
@@ -435,7 +534,7 @@ namespace TeslaLogger
                                             lastCarUsed = DateTime.Now;
                                             webhelper.DeleteWakeupFile();
                                             string wakeup = webhelper.Wakeup().Result;
-                                            sleep = false;
+                                            doSleep = false;
                                             break;
                                         }
 
@@ -467,7 +566,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    if (sleep)
+                    if (doSleep)
                     {
                         System.Threading.Thread.Sleep(5000);
                     }
@@ -480,6 +579,8 @@ namespace TeslaLogger
 
         }
 
+        // if offline, sleep 30000
+        // loop until wackup file or back online, sleep 30000 in loop
         private static void HandleStateStart()
         {
             RefreshToken();
@@ -636,13 +737,6 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
-
-            if (ApplicationSettings.Default.VerboseMode)
-            {
-                VERBOSE = true;
-                // Logfile.VERBOSE = true;
-                Logfile.Log("VerboseMode ON");
-            }
         }
 
         private static void LogToken()
@@ -867,14 +961,8 @@ namespace TeslaLogger
             {
                 ResetHighFrequencyLogging();
             }
-            // any -> GoSleep
-            else if (_oldState != TeslaState.GoSleep && _newState == TeslaState.GoSleep)
-            {
-                DBHelper.currentJSON.current_falling_asleep = true;
-                DBHelper.currentJSON.CreateCurrentJSON();
-            }
-            // GoSleep -> any
-            else if (_oldState == TeslaState.GoSleep && _newState != TeslaState.GoSleep)
+            // sleeping -> any
+            else if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
                 DBHelper.currentJSON.current_falling_asleep = false;
                 DBHelper.currentJSON.CreateCurrentJSON();
@@ -884,17 +972,21 @@ namespace TeslaLogger
         private static void ResetHighFrequencyLogging()
         {
             highFrequencyLogging = false;
-            highFrequencyLoggingMode = hflMode.Ticks;
+            highFrequencyLoggingMode = HFLMode.Ticks;
             highFrequencyLoggingTicks = 0;
             highFrequencyLoggingTicksLimit = 100;
             highFrequencyLoggingUntil = DateTime.Now;
+            if (DebugLoggingAvailable)
+            {
+                Logfile.DebugLog("ResetHighFrequencyLogging");
+            }
         }
 
         public static void HandleShiftStateChange(string _oldState, string _newState)
         {
-            Logfile.Log("Shift State Change: " + _oldState + " -> " + _newState);
+            Logfile.Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-            if (addr.specialFlags != null && addr.specialFlags.Count > 0) {
+            if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
                 foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                 {
                     switch (flag.Key)
@@ -923,15 +1015,40 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                Logfile.Log("HighFrequencyLogging config: time mode " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+                if (m.Groups[1].Captures[0] != null && m.Groups[2].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int duration))
+                {
+                    DateTime until = DateTime.Now;
+                    switch (m.Groups[2].Captures[0].ToString())
+                    {
+                        case "s":
+                            until.AddSeconds(duration);
+                            break;
+                        case "m":
+                            until.AddMinutes(duration);
+                            break;
+                        case "h":
+                            until.AddHours(duration);
+                            break;
+                        case "d":
+                            until.AddDays(duration);
+                            break;
+                        default:
+                            Logfile.Log("HandleSpecialFlagHighFrequencyLogging unhandled time parameter: " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
+                            break;
+                    }
+                    EnableHighFrequencyLoggingMode(HFLMode.Time, 0, until);
+                }
             }
             else
             {
                 pattern = "([0-9]+)";
                 m = Regex.Match(_flagconfig, pattern);
-                if (m.Success && m.Groups.Count == 1 && m.Groups[0].Captures.Count == 2)
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
-                    Logfile.Log("HighFrequencyLogging config: tick mode " + m.Groups[0].Captures[1].ToString());
+                    if (int.TryParse(m.Groups[1].Captures[0].ToString(), out int result))
+                    {
+                        EnableHighFrequencyLoggingMode(HFLMode.Ticks, result, DateTime.Now);
+                    }
                 }
             }
         }
