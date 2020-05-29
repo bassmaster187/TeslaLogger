@@ -1888,11 +1888,7 @@ FROM
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    Logfile.ExceptionWriter(ex, resultContent, out bool timeoutOccurred);
-                    if (timeoutOccurred)
-                    {
-                        Logfile.Log("handle GetOutsideTempAsync() timeout not implemented yet");
-                    }
+                    Logfile.ExceptionWriter(ex, resultContent);
                 }
             }
             return null;
