@@ -246,10 +246,6 @@ namespace TeslaLogger
                 {
                     round++;
                     System.Threading.Thread.Sleep(1000);
-                    if (DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(1000)");
-                    }
                     if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                     {
 
@@ -312,10 +308,6 @@ namespace TeslaLogger
                 if (t > 0)
                 {
                     System.Threading.Thread.Sleep(t); // alle 5 sek eine positionsmeldung
-                    if (DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep("+t+")");
-                    }
                 }
 
                 if (odometerLastTrip != DBHelper.currentJSON.current_odometer)
@@ -387,10 +379,6 @@ namespace TeslaLogger
             else
             {
                 System.Threading.Thread.Sleep(10000);
-                if (DebugLoggingAvailable)
-                {
-                    Logfile.DebugLog("Sleep(10000)");
-                }
             }
         }
 
@@ -785,10 +773,6 @@ namespace TeslaLogger
                     }
 
                     System.Threading.Thread.Sleep(15000);
-                    if (DebugLoggingAvailable)
-                    {
-                        Logfile.DebugLog("Sleep(15000)");
-                    }
                 }
             }
         }
@@ -970,10 +954,7 @@ namespace TeslaLogger
         // do something on state changes
         private static void HandleStateChange(TeslaState _oldState, TeslaState _newState)
         {
-            if (DebugLoggingAvailable)
-            {
-                Logfile.DebugLog("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
-            }
+            Logfile.Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
@@ -998,15 +979,8 @@ namespace TeslaLogger
 
         public static void HandleShiftStateChange(string _oldState, string _newState)
         {
-            if (DebugLoggingAvailable)
-            {
-                Logfile.DebugLog("HandleShiftStateChange: " + _oldState + " -> " + _newState);
-            }
+            Logfile.Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-            if (DebugLoggingAvailable)
-            {
-                Logfile.DebugLog("HandleShiftStateChange GetPOI returns: <" + addr + ">");
-            }
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
                 foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                 {
@@ -1036,10 +1010,6 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                if (DebugLoggingAvailable)
-                {
-                    Logfile.DebugLog("HighFrequencyLogging config: time mode " + m.Groups[1].Captures[0].ToString() + ":" + m.Groups[2].Captures[0].ToString());
-                }
                 if (m.Groups[1].Captures[0] != null && m.Groups[2].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int duration))
                 {
                     DateTime until = DateTime.Now;
@@ -1070,10 +1040,6 @@ namespace TeslaLogger
                 m = Regex.Match(_flagconfig, pattern);
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
-                    if (DebugLoggingAvailable)
-                    {
-                        Logfile.DebugLog("HighFrequencyLogging config: tick mode " + m.Groups[1].Captures[0].ToString());
-                    }
                     if (int.TryParse(m.Groups[1].Captures[0].ToString(), out int result))
                     {
                         EnableHighFrequencyLoggingMode(HFLMode.Ticks, result, DateTime.Now);

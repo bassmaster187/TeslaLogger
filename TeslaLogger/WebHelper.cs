@@ -168,10 +168,6 @@ namespace TeslaLogger
                     if (Tools.IsDocker())
                     {
                         Thread.Sleep(5 * 60000);
-                        if (Program.DebugLoggingAvailable)
-                        {
-                            Logfile.Log("Sleep(5 * 60000)");
-                        }
                     }
 
                     throw new Exception("Wrong Credentials");
@@ -225,10 +221,6 @@ namespace TeslaLogger
                     Logfile.Log("charging_state = null");
 
                     Thread.Sleep(10000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(10000)");
-                    }
 
                     return lastCharging_State == "Charging";
                 }
@@ -356,19 +348,10 @@ namespace TeslaLogger
                 {
                     Logfile.Log("isCharging = NULL");
                     Thread.Sleep(10000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(10000)");
-                    }
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    Logfile.ExceptionWriter(ex, resultContent, out bool timeoutOccurred);
-                    if (timeoutOccurred)
-                    {
-                        Logfile.Log("handle IsCharging() timeout not implemented yet");
-                    }
-
+                    Logfile.ExceptionWriter(ex, resultContent);
                 }
 
                 if (lastCharging_State == "Charging" && !justCheck)
@@ -494,10 +477,6 @@ namespace TeslaLogger
                     }
 
                     Thread.Sleep(30000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(30000)");
-                    }
                 }
             }
         }
@@ -524,10 +503,6 @@ namespace TeslaLogger
                 {
                     Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
                     Thread.Sleep(30000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(30000)");
-                    }
                 }
 
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -589,10 +564,6 @@ namespace TeslaLogger
                         else
                         {
                             Thread.Sleep(10000);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(10000)");
-                            }
                         }
 
                         unknownStateCounter++;
@@ -1142,10 +1113,6 @@ namespace TeslaLogger
                 {
                     Logfile.Log("IsDriving = NULL!");
                     Thread.Sleep(10000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(10000)");
-                    }
                 }
                 else
                 {
@@ -1205,10 +1172,6 @@ namespace TeslaLogger
                         {
                             System.Diagnostics.Debug.WriteLine("Connecting");
                             Thread.Sleep(100);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(100)");
-                            }
                         }
 
 
@@ -1227,20 +1190,11 @@ namespace TeslaLogger
                             byte[] buffer = new byte[1024];
                             Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-
                             string r = Encoding.UTF8.GetString(buffer);
                             System.Diagnostics.Debug.WriteLine(r);
                             Thread.Sleep(100);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(100)");
-                            }
                             ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
                             Thread.Sleep(1000);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(1000)");
-                            }
 
                             Logfile.ExceptionWriter(null, r);
                         }
@@ -1291,10 +1245,6 @@ namespace TeslaLogger
 
                     Logfile.ExceptionWriter(ex, line);
                     Thread.Sleep(10000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(10000)");
-                    }
                 }
             }
 
@@ -1904,16 +1854,8 @@ FROM
 
                             // write into Database
                             Thread.Sleep(5000);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(5000)");
-                            }
                             IsDriving(true);
                             Thread.Sleep(5000);
-                            if (Program.DebugLoggingAvailable)
-                            {
-                                Logfile.Log("Sleep(5000)");
-                            }
                         }
                     }
                 }
@@ -1930,16 +1872,8 @@ FROM
 
                     // write into Database
                     Thread.Sleep(5000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(5000)");
-                    }
                     IsDriving(true);
                     Thread.Sleep(5000);
-                    if (Program.DebugLoggingAvailable)
-                    {
-                        Logfile.Log("Sleep(5000)");
-                    }
                 }
 
                 MemoryCache.Default.Add(cacheKey, (double)outside_temp, DateTime.Now.AddMinutes(1));
