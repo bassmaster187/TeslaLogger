@@ -253,7 +253,9 @@ namespace TeslaLogger
             }
             finally
             {
-                Logfile.Log("Restart communication with Tesla Server!");
+                Logfile.Log("Restart communication with Tesla Server! 1");
+                DBHelper.currentJSON.current_falling_asleep = false;
+                DBHelper.currentJSON.CreateCurrentJSON();
             }
         }
 
@@ -519,7 +521,9 @@ namespace TeslaLogger
                                 {
                                     if (!goSleepWithWakeup)
                                     {
-                                        Logfile.Log("Restart communication with Tesla Server!");
+                                        Logfile.Log("Restart communication with Tesla Server! 2");
+                                        DBHelper.currentJSON.current_falling_asleep = false;
+                                        DBHelper.currentJSON.CreateCurrentJSON();
                                     }
                                 }
                             }
