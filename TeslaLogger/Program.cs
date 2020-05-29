@@ -202,7 +202,7 @@ namespace TeslaLogger
                         }
                         break;
                     case HFLMode.Time:
-                        if (highFrequencyLoggingUntil < DateTime.Now)
+                        if (highFrequencyLoggingUntil > DateTime.Now)
                         {
                             return true;
                         } 
@@ -211,6 +211,7 @@ namespace TeslaLogger
                         break;
                 }
             }
+
             return false;
         }
 
@@ -975,6 +976,10 @@ namespace TeslaLogger
             highFrequencyLoggingTicks = 0;
             highFrequencyLoggingTicksLimit = 100;
             highFrequencyLoggingUntil = DateTime.Now;
+            if (DebugLoggingAvailable)
+            {
+                Logfile.DebugLog("ResetHighFrequencyLogging");
+            }
         }
 
         public static void HandleShiftStateChange(string _oldState, string _newState)
