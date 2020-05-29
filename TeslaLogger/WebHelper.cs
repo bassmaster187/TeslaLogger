@@ -64,10 +64,6 @@ namespace TeslaLogger
 
         private void SetLastShiftState(string _newState, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
-            if (Program.DebugLoggingAvailable)
-            {
-                Logfile.DebugLog("SetLastShiftState _lastShift_State: " + _lastShift_State + " _newState: " + _newState + " called by " + _cfp + ":" + _cln);
-            }
             if (!_newState.Equals(_lastShift_State))
             {
                 Program.HandleShiftStateChange(_lastShift_State, _newState);
