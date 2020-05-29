@@ -67,7 +67,7 @@ namespace TeslaLogger
             timeoutOccurred = false;
             if (Logfile.VERBOSE)
             {
-                DebugLog("Exception: " + ex.GetType() + " at " + _cfp + ":" + _cln);
+                DebugLog("Exception: " + ex.GetType() + " at " + Path.GetFileName(_cfp) + ":" + _cln);
             }
             try
             {
