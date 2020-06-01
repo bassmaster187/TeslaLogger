@@ -928,10 +928,35 @@ namespace TeslaLogger
                 ResetHighFrequencyLogging();
             }
             // sleeping -> any
-            else if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
+            if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
                 DBHelper.currentJSON.current_falling_asleep = false;
                 DBHelper.currentJSON.CreateCurrentJSON();
+            }
+            // any -> charging
+            if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
+            {
+                ResetHighFrequencyLogging();
+                Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
+                    {
+                        switch (flag.Key)
+                        {
+                            case Address.SpecialFlags.OpenChargePort:
+                                break;
+                            case Address.SpecialFlags.HighFrequencyLogging:
+                                HandleSpecialFlagHighFrequencyLogging(flag.Value);
+                                break;
+                            case Address.SpecialFlags.TriggerHomeLink:
+                                break;
+                            default:
+                                Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                                break;
+                        }
+                    }
+                }
             }
         }
 
@@ -940,7 +965,7 @@ namespace TeslaLogger
             highFrequencyLogging = false;
             highFrequencyLoggingMode = HFLMode.Ticks;
             highFrequencyLoggingTicks = 0;
-            highFrequencyLoggingTicksLimit = 100;
+            highFrequencyLoggingTicksLimit = 0;
             highFrequencyLoggingUntil = DateTime.Now;
         }
 
@@ -948,7 +973,8 @@ namespace TeslaLogger
         {
             Logfile.Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
-            if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
+            if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+            {
                 foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                 {
                     switch (flag.Key)
@@ -957,7 +983,6 @@ namespace TeslaLogger
                             HandleSpecialFlagOpenChargePort(flag.Value, _oldState, _newState);
                             break;
                         case Address.SpecialFlags.HighFrequencyLogging:
-                            HandleSpecialFlagHighFrequencyLogging(flag.Value);
                             break;
                         case Address.SpecialFlags.TriggerHomeLink:
                             HandleSpecialFlagTriggerHomeLink(flag.Value, addr.lat, addr.lng, _oldState, _newState);
@@ -972,7 +997,7 @@ namespace TeslaLogger
 
         private static void HandleSpecialFlagHighFrequencyLogging(string _flagconfig)
         {
-            Logfile.Log("HighFrequencyLogging not implemented yet");
+            Logfile.Log("enable HighFrequencyLogging");
             string pattern = "([0-9]+)([a-z])";
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1017,6 +1042,7 @@ namespace TeslaLogger
 
         private static void HandleSpecialFlagOpenChargePort(string _flagconfig, string _oldState, string _newState)
         {
+            Logfile.Log("OpenChargePort");
             string pattern = "([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
