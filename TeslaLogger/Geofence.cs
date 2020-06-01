@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -93,7 +94,7 @@ namespace TeslaLogger
                 }
 
                 UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
-                ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
+                ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), true);
             }
             
             Logfile.Log("Addresses inserted: " + list.Count);
@@ -132,9 +133,10 @@ namespace TeslaLogger
             }
         }
 
-        private static void ReadGeofenceFile(List<Address> list, string filename)
+        private static void ReadGeofenceFile(List<Address> list, string filename, bool replaceExistiongPOIs = false)
         {
             filename = filename.Replace(@"Debug\", "");
+            List<Address> localList = new List<Address>();
             if (System.IO.File.Exists(filename))
             {
                 Logfile.Log("Read Geofence File: " + filename);
@@ -171,7 +173,7 @@ namespace TeslaLogger
                                 ParseSpecialFlags(addr, flags);
                             }
 
-                            list.Add(addr);
+                            localList.Add(addr);
 
                             if (!filename.Contains("geofence.csv"))
                             {
@@ -184,6 +186,42 @@ namespace TeslaLogger
                         }
                     }
                 }
+                if (replaceExistiongPOIs)
+                {
+                    HashSet<string> uniqueNameList = new HashSet<string>();
+                    foreach (Address addr in localList)
+                    {
+                        if (addr != null && addr.name != null)
+                        {
+                            uniqueNameList.Add(addr.name);
+                        }
+                    }
+                    if (uniqueNameList.Count > 0)
+                    {
+                        foreach (Address addr in list)
+                        {
+                            bool keepAddr = true;
+                            foreach (string localName in uniqueNameList)
+                            {
+                                if (addr != null && addr.name != null)
+                                {
+                                    if (localName.Equals(addr.name))
+                                    {
+                                        Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
+                                        keepAddr = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (keepAddr)
+                            {
+                                localList.Add(addr);
+                            }
+                        }
+                    }
+                    list.Clear();
+                }
+                list.AddRange(localList);
             }
             else
             {
@@ -255,7 +293,7 @@ namespace TeslaLogger
             }
         }
 
-        public Address GetPOI(double lat, double lng, bool logDistance = true)
+        public Address GetPOI(double lat, double lng, bool logDistance = true, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
             Address ret = null;
             double retDistance = 0;
