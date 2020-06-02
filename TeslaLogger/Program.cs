@@ -83,27 +83,27 @@ namespace TeslaLogger
                         switch (GetCurrentState())
                         {
                             case TeslaState.Start:
-                                HandleStateStart();
+                                HandleState_Start();
                                 break;
 
                             case TeslaState.Online:
-                                HandleStateOnline();
+                                HandleState_Online();
                                 break;
 
                             case TeslaState.Charge:
-                                HandleStateCharge();
+                                HandleState_Charge();
                                 break;
 
                             case TeslaState.Sleep:
-                                HandleStateSleep();
+                                HandleState_Sleep();
                                 break;
 
                             case TeslaState.Drive:
-                                lastRacingPoint = HandleStateDrive(lastRacingPoint);
+                                lastRacingPoint = HandleState_Drive(lastRacingPoint);
                                 break;
 
                             case TeslaState.GoSleep:
-                                HandleStateGoSleep();
+                                HandleState_GoSleep();
                                 break;
 
                             case TeslaState.Park:
@@ -145,7 +145,7 @@ namespace TeslaLogger
             }
         }
 
-        private static bool HighFrequenceLoggingEnabled(bool justcheck = false)
+        private static bool IsHighFrequenceLoggingEnabled(bool justcheck = false)
         {
             if (highFrequencyLogging)
             {
@@ -162,7 +162,8 @@ namespace TeslaLogger
                         }
                         break;
                     case HFLMode.Time:
-                        if (highFrequencyLoggingUntil > DateTime.Now)
+                        TimeSpan ts = highFrequencyLoggingUntil - DateTime.Now;
+                        if (ts.TotalMilliseconds > 0)
                         {
                             return true;
                         } 
@@ -171,12 +172,12 @@ namespace TeslaLogger
                         break;
                 }
             }
-
             return false;
         }
 
         private static void EnableHighFrequencyLoggingMode(HFLMode _mode, int _ticklimit, DateTime _until)
         {
+            Logfile.Log("enable HighFrequencyLogging - mode: " + _mode.ToString() + (_mode == HFLMode.Ticks ? " ticks: " + _ticklimit : " until: " + _until.ToString()));
             switch (_mode)
             {
                 case HFLMode.Ticks:
@@ -195,7 +196,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void HandleStateGoSleep()
+        private static void HandleState_GoSleep()
         {
             webhelper.ResetLastChargingState();
             bool KeepSleeping = true;
@@ -260,7 +261,7 @@ namespace TeslaLogger
         }
 
         // sleep for max 5 seconds
-        private static Address HandleStateDrive(Address lastRacingPoint)
+        private static Address HandleState_Drive(Address lastRacingPoint)
         {
             int t = Environment.TickCount;
             if (webhelper.IsDriving())
@@ -328,7 +329,7 @@ namespace TeslaLogger
 
         // if online, switch state and return
         // else sleep 10000
-        private static void HandleStateSleep()
+        private static void HandleState_Sleep()
         {
             string res = webhelper.IsOnline().Result;
 
@@ -346,7 +347,7 @@ namespace TeslaLogger
         }
 
         // sleep 10000 unless in highFrequencyLogging mode
-        private static void HandleStateCharge()
+        private static void HandleState_Charge()
         {
             {
                 if (!webhelper.IsCharging())
@@ -357,7 +358,7 @@ namespace TeslaLogger
                 else
                 {
                     lastCarUsed = DateTime.Now;
-                    if (HighFrequenceLoggingEnabled())
+                    if (IsHighFrequenceLoggingEnabled())
                     {
                         Logfile.Log("HighFrequenceLogging ...");
                     }
@@ -376,7 +377,7 @@ namespace TeslaLogger
         // else if car is charging, switch state and return
         // else if KeepOnlineMinAfterUsage is reached, sleep SuspendAPIMinutes minutes
         // else sleep 5000
-        private static void HandleStateOnline()
+        private static void HandleState_Online()
         {
             {
                 if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
@@ -545,7 +546,7 @@ namespace TeslaLogger
 
         // if offline, sleep 30000
         // loop until wackup file or back online, sleep 30000 in loop
-        private static void HandleStateStart()
+        private static void HandleState_Start()
         {
             RefreshToken();
 
@@ -902,11 +903,6 @@ namespace TeslaLogger
             Environment.Exit(_exitcode);
         }
 
-        public static bool IsSupercharging()
-        {
-            return highFrequencyLogging;
-        }
-
         private static void SetCurrentState(TeslaState _newState)
         {
             if (_currentState != _newState)
@@ -936,7 +932,6 @@ namespace TeslaLogger
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
-                ResetHighFrequencyLogging();
                 Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
@@ -947,9 +942,9 @@ namespace TeslaLogger
                             case Address.SpecialFlags.OpenChargePort:
                                 break;
                             case Address.SpecialFlags.HighFrequencyLogging:
-                                HandleSpecialFlagHighFrequencyLogging(flag.Value);
+                                HandleSpecialFlag_HighFrequencyLogging(flag.Value);
                                 break;
-                            case Address.SpecialFlags.TriggerHomeLink:
+                            case Address.SpecialFlags.EnableSentryMode:
                                 break;
                             default:
                                 Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -973,6 +968,7 @@ namespace TeslaLogger
         {
             Logfile.Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+            // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
                 foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
@@ -980,12 +976,12 @@ namespace TeslaLogger
                     switch (flag.Key)
                     {
                         case Address.SpecialFlags.OpenChargePort:
-                            HandleSpecialFlagOpenChargePort(flag.Value, _oldState, _newState);
+                            HandleSpecialFlag_OpenChargePort(flag.Value, _oldState, _newState);
                             break;
                         case Address.SpecialFlags.HighFrequencyLogging:
                             break;
-                        case Address.SpecialFlags.TriggerHomeLink:
-                            HandleSpecialFlagTriggerHomeLink(flag.Value, addr.lat, addr.lng, _oldState, _newState);
+                        case Address.SpecialFlags.EnableSentryMode:
+                            HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
                             break;
                         default:
                             Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -993,11 +989,18 @@ namespace TeslaLogger
                     }
                 }
             }
+            // execute shift state change actions independant from special flags
+            // TODO discuss!
+            /*if (_newState.Equals("D") && DBHelper.currentJSON.current_is_sentry_mode)
+            {
+                Logfile.Log("DisableSentryMode ...");
+                string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
+                Logfile.Log("DisableSentryMode(): " + result);
+            }*/
         }
 
-        private static void HandleSpecialFlagHighFrequencyLogging(string _flagconfig)
+        private static void HandleSpecialFlag_HighFrequencyLogging(string _flagconfig)
         {
-            Logfile.Log("enable HighFrequencyLogging");
             string pattern = "([0-9]+)([a-z])";
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1040,25 +1043,27 @@ namespace TeslaLogger
             }
         }
 
-        private static void HandleSpecialFlagOpenChargePort(string _flagconfig, string _oldState, string _newState)
+        private static void HandleSpecialFlag_OpenChargePort(string _flagconfig, string _oldState, string _newState)
         {
-            Logfile.Log("OpenChargePort");
             string pattern = "([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
+                Logfile.Log("OpenChargePort ...");
                 string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
                 Logfile.Log("openChargePort(): " + result);
             }
         }
 
-        private static void HandleSpecialFlagTriggerHomeLink(string _flagconfig, double _lat, double _lng, string _oldState, string _newState)
+        private static void HandleSpeciaFlag_EnableSentryMode(string _flagconfig, string _oldState, string _newState)
         {
             string pattern = "([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Logfile.Log("TriggerHomeLink not implemented yet");
+                Logfile.Log("EnableSentryMode ...");
+                string result = webhelper.PostCommand("command/set_sentry_mode?on=true", null).Result;
+                Logfile.Log("EnableSentryMode(): " + result);
             }
         }
     }
