@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -14,7 +13,7 @@ namespace TeslaLogger
         {
             OpenChargePort,
             HighFrequencyLogging,
-            TriggerHomeLink
+            EnableSentryMode
         }
 
         public string name;
@@ -235,35 +234,35 @@ namespace TeslaLogger
             {
                 if (flag.StartsWith("ocp"))
                 {
-                    SpecialFlagOCP(_addr, flag);
+                    SpecialFlag_OCP(_addr, flag);
                 }
                 else if (flag.StartsWith("hfl"))
                 {
-                    SpecialFlagHFL(_addr, flag);
+                    SpecialFlag_HFL(_addr, flag);
                 }
-                else if (flag.StartsWith("thl"))
+                else if (flag.StartsWith("esm"))
                 {
-                    SpecialFlagHTHL(_addr, flag);
+                    SpecialFlag_ESM(_addr, flag);
                 }
             }
         }
 
-        private static void SpecialFlagHTHL(Address _addr, string _flag)
+        private static void SpecialFlag_ESM(Address _addr, string _flag)
         {
-            string pattern = "thl:([PRND]+)->([PRND]+)";
+            string pattern = "esm:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, m.Groups[0].Captures[1].ToString() + "->" + m.Groups[0].Captures[2].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, m.Groups[0].Captures[1].ToString() + "->" + m.Groups[0].Captures[2].ToString());
             }
             else
             {
                 // default
-                _addr.specialFlags.Add(Address.SpecialFlags.TriggerHomeLink, "P->RND");
+                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, "RND->P");
             }
         }
 
-        private static void SpecialFlagHFL(Address _addr, string _flag)
+        private static void SpecialFlag_HFL(Address _addr, string _flag)
         {
             string pattern = "hfl:([0-9]+)([a-z]{0,1})";
             Match m = Regex.Match(_flag, pattern);
@@ -278,7 +277,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void SpecialFlagOCP(Address _addr, string _flag)
+        private static void SpecialFlag_OCP(Address _addr, string _flag)
         {
             string pattern = "ocp:([PRND]+)->([PRND]+)";
             Match m = Regex.Match(_flag, pattern);
@@ -293,7 +292,7 @@ namespace TeslaLogger
             }
         }
 
-        public Address GetPOI(double lat, double lng, bool logDistance = true, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public Address GetPOI(double lat, double lng, bool logDistance = true)
         {
             Address ret = null;
             double retDistance = 0;
