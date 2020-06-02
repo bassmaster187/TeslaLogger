@@ -11,3 +11,7 @@ else
 fi
 cd /etc/teslalogger/Exception 
 tar -czf ex_$(date +%Y%m%d%H%M%S).tar.gz --remove-files *.txt 
+
+if test -f "/etc/teslalogger/my-backup.sh"; then
+    source /etc/teslalogger/my-backup.sh
+fi
