@@ -62,7 +62,7 @@ namespace TeslaLogger
             return _lastShift_State;
         }
 
-        private void SetLastShiftState(string _newState, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        private void SetLastShiftState(string _newState)
         {
             if (!_newState.Equals(_lastShift_State))
             {
@@ -709,9 +709,14 @@ namespace TeslaLogger
                 {
                     int maxRange = DBHelper.GetAvgMaxRage();
                     if (maxRange > 500)
+                    {
                         WriteCarSettings("0.169", "S Raven LR");
+                    }
                     else
+                    {
                         WriteCarSettings("0.163", "S Raven SR");
+                    }
+
                     return;
                 }
                 else
@@ -1366,11 +1371,7 @@ namespace TeslaLogger
                 if (country_code.Length > 0)
                 {
                     DBHelper.currentJSON.current_country_code = country_code;
-
-                    if (r2.ContainsKey("state"))
-                        DBHelper.currentJSON.current_state = r2["state"].ToString();
-                    else
-                        DBHelper.currentJSON.current_state = "";
+                    DBHelper.currentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
                 }
 
                 string road = "";
@@ -1433,7 +1434,9 @@ namespace TeslaLogger
                 System.Diagnostics.Debug.WriteLine(url + "\r\n" + adresse);
 
                 if (insertGeocodecache)
+                {
                     GeocodeCache.Instance.Insert(latitude, longitude, adresse);
+                }
 
                 if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                 {
