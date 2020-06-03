@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TeslaLogger
@@ -45,7 +47,7 @@ namespace TeslaLogger
     public class Geofence
     {
         private List<Address> sortedList;
-        private System.IO.FileSystemWatcher fsw;
+        private FileSystemWatcher fsw;
 
         public bool RacingMode = false;
 
@@ -57,13 +59,13 @@ namespace TeslaLogger
             
             if (fsw == null)
             {
-                fsw = new System.IO.FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
+                fsw = new FileSystemWatcher(FileManager.GetExecutingPath(), "*.csv");
                 FSWCounter++;
                 if (FSWCounter > 1) 
                 {
                     Logfile.Log("ERROR: more than one FileSystemWatcher created!");
                 }
-                fsw.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+                fsw.NotifyFilter = NotifyFilters.LastWrite;
                 fsw.Changed += Fsw_Changed;
                 // fsw.Created += Fsw_Changed;
                 // fsw.Renamed += Fsw_Changed;
@@ -75,7 +77,7 @@ namespace TeslaLogger
         {
             List<Address> list = new List<Address>();
 
-            if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && ApplicationSettings.Default.RacingMode)
+            if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && ApplicationSettings.Default.RacingMode)
             {
                 ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
                 RacingMode = true;
@@ -86,10 +88,10 @@ namespace TeslaLogger
             {
                 RacingMode = false;
                 ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
-                if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
                 {
                     Logfile.Log("Create: " + FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
-                    System.IO.File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
+                    File.AppendAllText(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), "");
                 }
 
                 UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
@@ -102,18 +104,18 @@ namespace TeslaLogger
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private void Fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
+        private void Fsw_Changed(object sender, FileSystemEventArgs e)
         {
             try
             {
-                Logfile.Log($"FileSystemWatcher");
+                Logfile.Log("FileSystemWatcher");
 
                 fsw.EnableRaisingEvents = false;
                 
-                DateTime dt = System.IO.File.GetLastWriteTime(e.FullPath);
+                DateTime dt = File.GetLastWriteTime(e.FullPath);
                 TimeSpan ts = DateTime.Now - dt;
 
-                System.Threading.Thread.Sleep(5000);
+                Thread.Sleep(5000);
 
                 if (ts.TotalSeconds > 5)
                 {
@@ -136,11 +138,11 @@ namespace TeslaLogger
         {
             filename = filename.Replace(@"Debug\", "");
             List<Address> localList = new List<Address>();
-            if (System.IO.File.Exists(filename))
+            if (File.Exists(filename))
             {
                 Logfile.Log("Read Geofence File: " + filename);
                 string line;
-                using (System.IO.StreamReader file = new System.IO.StreamReader(filename))
+                using (StreamReader file = new StreamReader(filename))
                 {
                     while ((line = file.ReadLine()) != null)
                     {
