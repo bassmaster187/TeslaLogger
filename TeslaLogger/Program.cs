@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml;
@@ -207,8 +210,8 @@ namespace TeslaLogger
                 while (KeepSleeping)
                 {
                     round++;
-                    System.Threading.Thread.Sleep(1000);
-                    if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
+                    Thread.Sleep(1000);
+                    if (File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
                     {
 
                         if (webhelper.DeleteWakeupFile())
@@ -271,7 +274,7 @@ namespace TeslaLogger
 
                 if (t > 0)
                 {
-                    System.Threading.Thread.Sleep(t); // alle 5 sek eine positionsmeldung
+                    Thread.Sleep(t); // alle 5 sek eine positionsmeldung
                 }
 
                 if (odometerLastTrip != DBHelper.currentJSON.current_odometer)
@@ -342,7 +345,7 @@ namespace TeslaLogger
             }
             else
             {
-                System.Threading.Thread.Sleep(10000);
+                Thread.Sleep(10000);
             }
         }
 
@@ -364,7 +367,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        System.Threading.Thread.Sleep(10000);
+                        Thread.Sleep(10000);
                     }
 
                     //wh.GetCachedRollupData();
@@ -386,7 +389,6 @@ namespace TeslaLogger
                     lastCarUsed = DateTime.Now;
                     lastOdometerChanged = DateTime.Now;
 
-                    Logfile.Log("Driving");
                     if (webhelper.scanMyTesla != null)
                     {
                         webhelper.scanMyTesla.FastMode(true);
@@ -407,7 +409,6 @@ namespace TeslaLogger
                         }
                     }
 
-                    // TODO: StartDriving
                     SetCurrentState(TeslaState.Drive);
                     webhelper.StartStreamThread(); // für altitude
                     DBHelper.StartDriveState();
@@ -515,7 +516,7 @@ namespace TeslaLogger
                                             }
                                         }
 
-                                        System.Threading.Thread.Sleep(1000 * 6);
+                                        Thread.Sleep(1000 * 6);
                                     }
                                 }
                                 finally
@@ -533,7 +534,7 @@ namespace TeslaLogger
 
                     if (doSleep)
                     {
-                        System.Threading.Thread.Sleep(5000);
+                        Thread.Sleep(5000);
                     }
                     else
                     {
@@ -586,7 +587,7 @@ namespace TeslaLogger
 
                 while (true)
                 {
-                    System.Threading.Thread.Sleep(30000);
+                    Thread.Sleep(30000);
                     string res2 = webhelper.IsOnline().Result;
 
                     if (res2 != "offline")
@@ -672,7 +673,7 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
-            Logfile.Log("Current Culture: " + System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
@@ -692,13 +693,13 @@ namespace TeslaLogger
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
-            Logfile.Log("TeslaLogger Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
-            Logfile.Log("Logfile Version: " + System.Reflection.Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
-            Logfile.Log("SRTM Version: " + System.Reflection.Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
+            Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
+            Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
+            Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
             try
             {
-                string versionpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "VERSION");
-                System.IO.File.WriteAllText(versionpath, System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                string versionpath = Path.Combine(FileManager.GetExecutingPath(), "VERSION");
+                File.WriteAllText(versionpath, Assembly.GetExecutingAssembly().GetName().Version.ToString());
             }
             catch (Exception)
             { }
@@ -738,7 +739,7 @@ namespace TeslaLogger
                         Logfile.Log("DBCONNECTION " + ex.Message);
                     }
 
-                    System.Threading.Thread.Sleep(15000);
+                    Thread.Sleep(15000);
                 }
             }
         }
@@ -751,22 +752,22 @@ namespace TeslaLogger
                 {
                     Logfile.Log("Docker: YES!");
 
-                    if (!System.IO.File.Exists("/etc/teslalogger/settings.json"))
+                    if (!File.Exists("/etc/teslalogger/settings.json"))
                     {
                         Logfile.Log("Creating empty settings.json");
-                        System.IO.File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
+                        File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
                         UpdateTeslalogger.Chmod("/etc/teslalogger/settings.json", 666);
                     }
 
-                    if (!System.IO.Directory.Exists("/etc/teslalogger/backup"))
+                    if (!Directory.Exists("/etc/teslalogger/backup"))
                     {
-                        System.IO.Directory.CreateDirectory("/etc/teslalogger/backup");
+                        Directory.CreateDirectory("/etc/teslalogger/backup");
                         UpdateTeslalogger.Chmod("/etc/teslalogger/backup", 777);
                     }
 
-                    if (!System.IO.Directory.Exists("/etc/teslalogger/Exception"))
+                    if (!Directory.Exists("/etc/teslalogger/Exception"))
                     {
-                        System.IO.Directory.CreateDirectory("/etc/teslalogger/Exception");
+                        Directory.CreateDirectory("/etc/teslalogger/Exception");
                         UpdateTeslalogger.Chmod("/etc/teslalogger/Exception", 777);
                     }
                 }
@@ -783,9 +784,9 @@ namespace TeslaLogger
 
         private static void UpdateDBinBackground()
         {
-            new System.Threading.Thread(() =>
+            Thread DBUpdater = new Thread(() =>
             {
-                System.Threading.Thread.Sleep(30000);
+                Thread.Sleep(30000);
 
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
@@ -797,15 +798,19 @@ namespace TeslaLogger
                 ShareData sd = new ShareData(webhelper.TaskerHash);
                 sd.SendAllChargingData();
                 sd.SendDegradationData();
-            }).Start();
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            DBUpdater.Start();
         }
 
         private static void WriteMissingFile(double missingOdometer)
         {
             try
             {
-                string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "MISSINGKM");
-                System.IO.File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
+                string filepath = Path.Combine(FileManager.GetExecutingPath(), "MISSINGKM");
+                File.AppendAllText(filepath, DateTime.Now.ToString(Tools.ciDeDE) + " : " + $"Missing: {missingOdometer}km!\r\n");
 
                 UpdateTeslalogger.Chmod(filepath, 666, false);
             }
@@ -829,14 +834,14 @@ namespace TeslaLogger
         {
             try
             {
-                if (!System.IO.File.Exists(FileManager.GetFilePath(TLFilename.NewCredentialsFilename)))
+                if (!File.Exists(FileManager.GetFilePath(TLFilename.NewCredentialsFilename)))
                 {
                     return;
                 }
 
                 Logfile.Log("new_credentials.json available");
 
-                string json = System.IO.File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
+                string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
                 XmlDocument doc = new XmlDocument();
@@ -849,12 +854,12 @@ namespace TeslaLogger
 
                 doc.Save(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));
 
-                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.TeslaTokenFilename)))
+                if (File.Exists(FileManager.GetFilePath(TLFilename.TeslaTokenFilename)))
                 {
-                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.TeslaTokenFilename));
+                    File.Delete(FileManager.GetFilePath(TLFilename.TeslaTokenFilename));
                 }
 
-                System.IO.File.Delete(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
+                File.Delete(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
 
                 ApplicationSettings.Default.Reload();
 
