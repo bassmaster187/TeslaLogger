@@ -963,8 +963,6 @@ namespace TeslaLogger
 
         public static void StartDriveState()
         {
-            Logfile.Log("StartDriveState");
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
