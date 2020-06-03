@@ -234,6 +234,11 @@ namespace TeslaLogger
                 }
 
                 string battery_level = r2["battery_level"].ToString();
+                if (battery_level != null && Convert.ToInt32(battery_level) != DBHelper.currentJSON.current_battery_level)
+                {
+                    DBHelper.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    DBHelper.currentJSON.CreateCurrentJSON();
+                }
                 string charger_power = "";
                 if (r2["charger_power"] != null)
                 {
