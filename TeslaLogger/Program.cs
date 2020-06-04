@@ -962,7 +962,7 @@ namespace TeslaLogger
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
             if (ts.TotalDays > 9)
             {
-                // If car wasn't sleeping since 10 days, try to get a new Teslalogger update
+                // If token was not refreshed since 10 days, try to get a new Teslalogger update
                 CheckNewVersion();
 
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
