@@ -948,6 +948,8 @@ namespace TeslaLogger
                         return;
                     }
 
+                    lastVersionCheck = DateTime.UtcNow;
+
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     if (!version.Equals(currentVersion))
                     {
