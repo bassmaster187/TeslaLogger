@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace TeslaLogger
 {
     internal class UpdateTeslalogger
     {
-        private static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        readonly private static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private static bool shareDataOnStartup = false;
         private static System.Threading.Timer timer;
+
+        private static DateTime lastVersionCheck = DateTime.UtcNow;
 
         public static void Start(WebHelper wh)
         {
@@ -923,6 +927,64 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("chmod " + filename + " " + ex.Message);
+            }
+        }
+
+        public static void CheckNewVersion()
+        {
+            try
+            {
+                TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
+                if (ts.TotalMinutes > 120)
+                {
+                    Logfile.Log(" *** Check new Version ***");
+
+                    string version = WebHelper.GetOnlineTeslaloggerVersion();
+                    if (String.IsNullOrEmpty(version))
+                    {
+                        // recheck in 10 Minutes
+                        Logfile.Log("Empty Version String - recheck in 10 minutes");
+                        lastVersionCheck = lastVersionCheck.AddMinutes(10);
+                        return;
+                    }
+
+                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    if (!version.Equals(currentVersion))
+                    {
+                        // if update doesn't work, it will retry tomorrow
+                        lastVersionCheck = DateTime.UtcNow.AddDays(1);
+
+                        Logfile.Log("---------------------------------------------");
+                        Logfile.Log(" *** New Version Detected *** ");
+                        Logfile.Log("Current Version: " + currentVersion);
+                        Logfile.Log("Online Version: " + version);
+                        Logfile.Log("Start update!");
+
+                        string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
+
+                        if (File.Exists(cmd_updated))
+                        {
+                            File.Delete(cmd_updated);
+                        }
+
+                        if (Tools.IsDocker())
+                        {
+                            Logfile.Log("  Docker detected!");
+                            File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
+                        }
+                        else
+                        {
+                            Logfile.Log("Rebooting");
+                            UpdateTeslalogger.Exec_mono("reboot", "");
+                        }
+                    }
+
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -43,6 +44,7 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
+        readonly static Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         static WebHelper()
         {
@@ -2214,6 +2216,26 @@ FROM
             }
 
             return ret;
+        }
+
+        public static string GetOnlineTeslaloggerVersion()
+        {
+            try
+            {
+                string contents;
+                using (var wc = new System.Net.WebClient())
+                    contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+
+                Match m = regexAssemblyVersion.Match(contents);
+                string version = m.Groups[1].Value;
+
+                return version;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return "";
         }
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)) || TaskerWakeupfile();
