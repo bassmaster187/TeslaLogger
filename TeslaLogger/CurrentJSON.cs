@@ -182,6 +182,7 @@ namespace TeslaLogger
         }
 
         // source: https://www.limilabs.com/blog/json-net-formatter
+        // StringWalker, IndentWriter, JsonFormatter
         // license: You can do whatever you want with it. (lesnikowski@limilabs.com)
 
         private class StringWalker
