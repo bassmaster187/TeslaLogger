@@ -186,7 +186,7 @@ require("language.php");
 			}
 
 
-			$("#trip_start").text(jsonData["trip_start"]);
+			$("#trip_start").text(jsonData["trip_start_dt"]);
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
 			
 			var ts = new Date(Date.parse(jsonData["ts"]));
