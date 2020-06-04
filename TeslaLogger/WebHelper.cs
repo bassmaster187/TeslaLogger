@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -219,9 +218,13 @@ namespace TeslaLogger
                     }
 
                     if (r2["charging_state"] == null)
+                    {
                         Logfile.Log("charging_state = null");
+                    }
                     else if (resultContent != null && resultContent.Contains("vehicle unavailable"))
+                    {
                         Logfile.Log("charging_state: vehicle unavailable");
+                    }
 
                     Thread.Sleep(10000);
 

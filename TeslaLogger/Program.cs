@@ -41,8 +41,7 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-
-        readonly static Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
+        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
         private enum HFLMode
         {
             Ticks,
@@ -113,10 +112,12 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Park:
+                                // this state is currently unused
                                 Thread.Sleep(5000);
                                 break;
 
                             case TeslaState.WaitForSleep:
+                                // this state is currently unused
                                 Thread.Sleep(5000);
                                 break;
 
@@ -562,8 +563,10 @@ namespace TeslaLogger
                 if (ts.TotalMinutes > 120)
                 {
                     string version = GetOnlineTeslaloggerVersion();
-                    if (String.IsNullOrEmpty(version))
+                    if (string.IsNullOrEmpty(version))
+                    {
                         return;
+                    }
 
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     if (!version.Equals(currentVersion))
@@ -610,8 +613,10 @@ namespace TeslaLogger
             try
             {
                 string contents;
-                using (var wc = new System.Net.WebClient())
+                using (WebClient wc = new WebClient())
+                {
                     contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+                }
 
                 Match m = regexAssemblyVersion.Match(contents);
                 string version = m.Groups[1].Value;

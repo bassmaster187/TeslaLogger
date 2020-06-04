@@ -62,13 +62,15 @@ namespace TeslaLogger
         public double? SMTBatteryPower = null;
 
         public string current_json = "";
-        DateTime lastJSONwrite = DateTime.MinValue;
+        private DateTime lastJSONwrite = DateTime.MinValue;
 
         public void CheckCreateCurrentJSON()
         {
             TimeSpan ts = DateTime.UtcNow - lastJSONwrite;
             if (ts.TotalMinutes > 5)
+            {
                 CreateCurrentJSON();
+            }
         }
 
         public void CreateCurrentJSON()
