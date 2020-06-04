@@ -2197,12 +2197,9 @@ FROM
             }
             catch (Exception ex)
             {
-<<<<<<< HEAD
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
                 Logfile.ExceptionWriter(ex, "TaskerWakeupToken Exception");
-=======
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
->>>>>>> 4034ccb80f642793c9310a15afef080bd8fc2c02
             }
 
             return false;

@@ -41,11 +41,6 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-<<<<<<< HEAD
-        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
-=======
-
->>>>>>> 4034ccb80f642793c9310a15afef080bd8fc2c02
         private enum HFLMode
         {
             Ticks,
@@ -558,84 +553,6 @@ namespace TeslaLogger
 
         }
 
-<<<<<<< HEAD
-        private static void CheckNewVersion()
-        {
-            try
-            {
-                TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
-                if (ts.TotalMinutes > 120)
-                {
-                    string version = GetOnlineTeslaloggerVersion();
-                    if (string.IsNullOrEmpty(version))
-                    {
-                        return;
-                    }
-
-                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    if (!version.Equals(currentVersion))
-                    {
-                        // if update doesn't work, it will retry tomorrow
-                        lastVersionCheck = DateTime.UtcNow.AddDays(1);
-
-                        Logfile.Log("---------------------------------------------");
-                        Logfile.Log(" *** New Version Detected *** ");
-                        Logfile.Log("Current Version: " + currentVersion);
-                        Logfile.Log("Online Version: " + version);
-                        Logfile.Log("Start update!");
-
-                        string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
-
-                        if (File.Exists(cmd_updated))
-                        {
-                            File.Delete(cmd_updated);
-                        }
-
-                        if (Tools.IsDocker())
-                        {
-                            Logfile.Log("  Docker detected!");
-                            File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
-                        }
-                        else
-                        {
-                            Logfile.Log("Rebooting");
-                            UpdateTeslalogger.Exec_mono("reboot", "");
-                        }
-                    }
-
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-        }
-
-        private static string GetOnlineTeslaloggerVersion()
-        {
-            try
-            {
-                string contents;
-                using (WebClient wc = new WebClient())
-                {
-                    contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
-                }
-
-                Match m = regexAssemblyVersion.Match(contents);
-                string version = m.Groups[1].Value;
-
-                return version;
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            return "";
-        }
-
-=======
->>>>>>> 4034ccb80f642793c9310a15afef080bd8fc2c02
         // if offline, sleep 30000
         // loop until wackup file or back online, sleep 30000 in loop
         private static void HandleState_Start()
@@ -968,13 +885,8 @@ namespace TeslaLogger
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
             if (ts.TotalDays > 9)
             {
-<<<<<<< HEAD
                 // If token was not refreshed since 10 days, try to get a new Teslalogger update
-                CheckNewVersion();
-=======
-                // If car wasn't sleeping since 10 days, try to get a new Teslalogger update
                 UpdateTeslalogger.CheckNewVersion();
->>>>>>> 4034ccb80f642793c9310a15afef080bd8fc2c02
 
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
                 if (ts2.TotalMinutes > 30)
