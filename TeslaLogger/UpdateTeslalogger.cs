@@ -978,10 +978,6 @@ namespace TeslaLogger
                             UpdateTeslalogger.Exec_mono("reboot", "");
                         }
                     }
-                    else
-                    {
-                        lastVersionCheck = DateTime.UtcNow;
-                    }
 
                     return;
                 }
