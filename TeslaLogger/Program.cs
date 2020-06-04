@@ -561,9 +561,16 @@ namespace TeslaLogger
                 TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
                 if (ts.TotalMinutes > 120)
                 {
+                    Logfile.Log(" *** Check new Version ***");
+
                     string version = GetOnlineTeslaloggerVersion();
                     if (String.IsNullOrEmpty(version))
+                    {
+                        // recheck in 10 Minutes
+                        Logfile.Log("Empty Version String - recheck in 10 minutes");
+                        lastVersionCheck = lastVersionCheck.AddMinutes(10);
                         return;
+                    }
 
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     if (!version.Equals(currentVersion))

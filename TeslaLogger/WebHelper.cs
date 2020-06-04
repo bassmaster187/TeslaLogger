@@ -2105,6 +2105,8 @@ FROM
         {
             try
             {
+                Tools.SetThread_enUS();
+
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
@@ -2190,7 +2192,7 @@ FROM
             }
             catch (Exception ex)
             {
-                Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
+                Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
             }
 
             return false;
