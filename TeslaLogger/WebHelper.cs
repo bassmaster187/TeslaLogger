@@ -2194,6 +2194,7 @@ FROM
             catch (Exception ex)
             {
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
+                Logfile.ExceptionWriter(ex, "TaskerWakeupToken Exception");
             }
 
             return false;
