@@ -211,14 +211,17 @@ namespace TeslaLogger
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
-                if (r2["charging_state"] == null)
-                {
+                if (r2["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
+                { 
                     if (justCheck)
                     {
                         return false;
                     }
 
-                    Logfile.Log("charging_state = null");
+                    if (r2["charging_state"] == null)
+                        Logfile.Log("charging_state = null");
+                    else if (resultContent != null && resultContent.Contains("vehicle unavailable"))
+                        Logfile.Log("charging_state: vehicle unavailable");
 
                     Thread.Sleep(10000);
 
