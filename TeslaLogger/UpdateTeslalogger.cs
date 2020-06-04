@@ -10,7 +10,7 @@ namespace TeslaLogger
 {
     internal class UpdateTeslalogger
     {
-        readonly private static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private static readonly string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private static bool shareDataOnStartup = false;
         private static System.Threading.Timer timer;
 
@@ -289,7 +289,7 @@ namespace TeslaLogger
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
                     string newphpini = System.Text.RegularExpressions.Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
-                    newphpini = System.Text.RegularExpressions.Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
+                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
 
                     File.WriteAllText(phpinipath, newphpini);
 
@@ -751,11 +751,11 @@ namespace TeslaLogger
         {
             try
             {
-                System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
+                Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
 
-                System.Text.RegularExpressions.MatchCollection matches = regexAlias.Matches(content);
+                MatchCollection matches = regexAlias.Matches(content);
 
-                foreach (System.Text.RegularExpressions.Match match in matches)
+                foreach (Match match in matches)
                 {
                     content = ReplaceAliasTag(content, match.Groups[1].Value, dictLanguage);
                 }
@@ -776,7 +776,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
+            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
             string replace = "\"alias\": \""+dictLanguage[v]+"\"";
 
             return regexAlias.Replace(content, replace);
@@ -804,7 +804,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"title\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -940,7 +940,7 @@ namespace TeslaLogger
                     Logfile.Log(" *** Check new Version ***");
 
                     string version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (String.IsNullOrEmpty(version))
+                    if (string.IsNullOrEmpty(version))
                     {
                         // recheck in 10 Minutes
                         Logfile.Log("Empty Version String - recheck in 10 minutes");
@@ -977,7 +977,7 @@ namespace TeslaLogger
                         else
                         {
                             Logfile.Log("Rebooting");
-                            UpdateTeslalogger.Exec_mono("reboot", "");
+                            Exec_mono("reboot", "");
                         }
                     }
 

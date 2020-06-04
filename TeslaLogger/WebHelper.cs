@@ -43,7 +43,7 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
-        readonly static Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
+        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         static WebHelper()
         {
@@ -2228,8 +2228,10 @@ FROM
             try
             {
                 string contents;
-                using (var wc = new System.Net.WebClient())
+                using (WebClient wc = new WebClient())
+                {
                     contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+                }
 
                 Match m = regexAssemblyVersion.Match(contents);
                 string version = m.Groups[1].Value;
