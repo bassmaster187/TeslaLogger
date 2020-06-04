@@ -76,7 +76,7 @@ namespace TeslaLogger
                     currentJSON.current_sleeping = false;
                 }
 
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.CreateCurrentJSON();
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -963,8 +963,6 @@ namespace TeslaLogger
 
         public static void StartDriveState()
         {
-            Logfile.Log("StartDriveState");
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -1627,7 +1625,7 @@ namespace TeslaLogger
                         dr.Close();
 
                         WebHelper.ReverseGecocodingAsync(lat, lng, true, false).Wait();
-                        return DBHelper.currentJSON.current_country_code;
+                        return currentJSON.current_country_code;
                     }
                 }
             }

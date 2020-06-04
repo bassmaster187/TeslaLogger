@@ -126,7 +126,7 @@ namespace TeslaLogger
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
                    { "car_version", current_car_version },
-                   { "trip_start", current_trip_start.ToString("t",Tools.ciDeDE) },
+                   { "trip_start", current_trip_start.ToString("yyyy-MM-dd H:mm:ss",Tools.ciDeDE) },
                    { "trip_max_speed", current_trip_max_speed },
                    { "trip_max_power", current_trip_max_power },
                    { "trip_duration_sec", duration },
