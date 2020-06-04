@@ -41,14 +41,12 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
         private enum HFLMode
         {
             Ticks,
             Time
         }
         private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
-        private static DateTime lastVersionCheck = DateTime.UtcNow;
 
         private static void Main(string[] args)
         {
@@ -353,7 +351,7 @@ namespace TeslaLogger
             {
                 Thread.Sleep(10000);
 
-                CheckNewVersion();
+                UpdateTeslalogger.CheckNewVersion();
             }
         }
 
@@ -555,81 +553,6 @@ namespace TeslaLogger
 
         }
 
-        private static void CheckNewVersion()
-        {
-            try
-            {
-                TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
-                if (ts.TotalMinutes > 120)
-                {
-                    string version = GetOnlineTeslaloggerVersion();
-                    if (string.IsNullOrEmpty(version))
-                    {
-                        return;
-                    }
-
-                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    if (!version.Equals(currentVersion))
-                    {
-                        // if update doesn't work, it will retry tomorrow
-                        lastVersionCheck = DateTime.UtcNow.AddDays(1);
-
-                        Logfile.Log("---------------------------------------------");
-                        Logfile.Log(" *** New Version Detected *** ");
-                        Logfile.Log("Current Version: " + currentVersion);
-                        Logfile.Log("Online Version: " + version);
-                        Logfile.Log("Start update!");
-
-                        string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
-
-                        if (File.Exists(cmd_updated))
-                        {
-                            File.Delete(cmd_updated);
-                        }
-
-                        if (Tools.IsDocker())
-                        {
-                            Logfile.Log("  Docker detected!");
-                            File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
-                        }
-                        else
-                        {
-                            Logfile.Log("Rebooting");
-                            UpdateTeslalogger.Exec_mono("reboot", "");
-                        }
-                    }
-
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-        }
-
-        private static string GetOnlineTeslaloggerVersion()
-        {
-            try
-            {
-                string contents;
-                using (WebClient wc = new WebClient())
-                {
-                    contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
-                }
-
-                Match m = regexAssemblyVersion.Match(contents);
-                string version = m.Groups[1].Value;
-
-                return version;
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            return "";
-        }
-
         // if offline, sleep 30000
         // loop until wackup file or back online, sleep 30000 in loop
         private static void HandleState_Start()
@@ -779,7 +702,7 @@ namespace TeslaLogger
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
-            Logfile.Log("Teslalogger Online Version: " + GetOnlineTeslaloggerVersion());
+            Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
             Logfile.Log("SRTM Version: " + Assembly.GetAssembly(typeof(SRTM.SRTMData)).GetName().Version);
             try
@@ -963,7 +886,7 @@ namespace TeslaLogger
             if (ts.TotalDays > 9)
             {
                 // If token was not refreshed since 10 days, try to get a new Teslalogger update
-                CheckNewVersion();
+                UpdateTeslalogger.CheckNewVersion();
 
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
                 if (ts2.TotalMinutes > 30)
