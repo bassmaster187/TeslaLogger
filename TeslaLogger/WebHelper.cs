@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -42,6 +43,7 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
+        readonly static Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         static WebHelper()
         {
@@ -2108,6 +2110,8 @@ FROM
         {
             try
             {
+                Tools.SetThread_enUS();
+
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
@@ -2193,8 +2197,12 @@ FROM
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
                 Logfile.ExceptionWriter(ex, "TaskerWakeupToken Exception");
+=======
+                Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
+>>>>>>> 4034ccb80f642793c9310a15afef080bd8fc2c02
             }
 
             return false;
@@ -2216,6 +2224,26 @@ FROM
             }
 
             return ret;
+        }
+
+        public static string GetOnlineTeslaloggerVersion()
+        {
+            try
+            {
+                string contents;
+                using (var wc = new System.Net.WebClient())
+                    contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+
+                Match m = regexAssemblyVersion.Match(contents);
+                string version = m.Groups[1].Value;
+
+                return version;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return "";
         }
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)) || TaskerWakeupfile();
