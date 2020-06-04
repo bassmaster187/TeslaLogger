@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace TeslaLogger
 {
@@ -171,7 +172,7 @@ namespace TeslaLogger
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
-                FileManager.WriteCurrentJsonFile(current_json);
+                FileManager.WriteCurrentJsonFile(new JsonFormatter(current_json).Format());
             }
             catch (Exception ex)
             {
@@ -179,5 +180,173 @@ namespace TeslaLogger
                 current_json = "";
             }
         }
+
+        // source: https://www.limilabs.com/blog/json-net-formatter
+        // license: You can do whatever you want with it. (lesnikowski@limilabs.com)
+
+        private class StringWalker
+        {
+            private readonly string _s;
+
+            public int Index { get; private set; }
+            public bool IsEscaped { get; private set; }
+            public char CurrentChar { get; private set; }
+
+            public StringWalker(string s)
+            {
+                _s = s;
+                Index = -1;
+            }
+
+            public bool MoveNext()
+            {
+                if (Index == _s.Length - 1)
+                {
+                    return false;
+                }
+
+                IsEscaped = IsEscaped == false && CurrentChar == '\\';
+                Index++;
+                CurrentChar = _s[Index];
+                return true;
+            }
+        };
+
+        private class IndentWriter
+        {
+            private readonly StringBuilder _result = new StringBuilder();
+            private int _indentLevel;
+
+            public void Indent()
+            {
+                _indentLevel++;
+            }
+
+            public void UnIndent()
+            {
+                if (_indentLevel > 0)
+                {
+                    _indentLevel--;
+                }
+            }
+
+            public void WriteLine(string line)
+            {
+                _result.AppendLine(CreateIndent() + line);
+            }
+
+            private string CreateIndent()
+            {
+                StringBuilder indent = new StringBuilder();
+                for (int i = 0; i < _indentLevel; i++)
+                {
+                    indent.Append("    ");
+                }
+
+                return indent.ToString();
+            }
+
+            public override string ToString()
+            {
+                return _result.ToString();
+            }
+        };
+
+        private class JsonFormatter
+        {
+            private readonly StringWalker _walker;
+            private readonly IndentWriter _writer = new IndentWriter();
+            private readonly StringBuilder _currentLine = new StringBuilder();
+            private bool _quoted;
+
+            public JsonFormatter(string json)
+            {
+                _walker = new StringWalker(json);
+                ResetLine();
+            }
+
+            public void ResetLine()
+            {
+                _currentLine.Length = 0;
+            }
+
+            public string Format()
+            {
+                while (MoveNextChar())
+                {
+                    if (_quoted == false && IsOpenBracket())
+                    {
+                        WriteCurrentLine();
+                        AddCharToLine();
+                        WriteCurrentLine();
+                        _writer.Indent();
+                    }
+                    else if (_quoted == false && IsCloseBracket())
+                    {
+                        WriteCurrentLine();
+                        _writer.UnIndent();
+                        AddCharToLine();
+                    }
+                    else if (_quoted == false && IsColon())
+                    {
+                        AddCharToLine();
+                        WriteCurrentLine();
+                    }
+                    else
+                    {
+                        AddCharToLine();
+                    }
+                }
+                WriteCurrentLine();
+                return _writer.ToString();
+            }
+
+            private bool MoveNextChar()
+            {
+                bool success = _walker.MoveNext();
+                if (IsApostrophe())
+                {
+                    _quoted = !_quoted;
+                }
+                return success;
+            }
+
+            public bool IsApostrophe()
+            {
+                return _walker.CurrentChar == '"' && _walker.IsEscaped == false;
+            }
+
+            public bool IsOpenBracket()
+            {
+                return _walker.CurrentChar == '{'
+                    || _walker.CurrentChar == '[';
+            }
+
+            public bool IsCloseBracket()
+            {
+                return _walker.CurrentChar == '}'
+                    || _walker.CurrentChar == ']';
+            }
+
+            public bool IsColon()
+            {
+                return _walker.CurrentChar == ',';
+            }
+
+            private void AddCharToLine()
+            {
+                _currentLine.Append(_walker.CurrentChar);
+            }
+
+            private void WriteCurrentLine()
+            {
+                string line = _currentLine.ToString().Trim();
+                if (line.Length > 0)
+                {
+                    _writer.WriteLine(line);
+                }
+                ResetLine();
+            }
+        };
     }
 }
