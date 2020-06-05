@@ -71,9 +71,12 @@ require("tools.php");
 			$ZoomLevel = $j->{"ZoomLevel"};
 
 			$ScanMyTesla = "false";
-			
 			if (property_exists($j,"ScanMyTesla"))
 				$ScanMyTesla = $j->{"ScanMyTesla"};
+
+			$update = "all";
+			if (property_exists($j,"update"))
+				$update = $j->{"update"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
@@ -115,6 +118,13 @@ require("tools.php");
 			else
 				echo ("$('#checkboxSharedata')[0].checked = false;\r\n");
 
+			if ($update =="none")
+				echo ("$('#radio_none').prop('checked', true);\r\n");
+			else if ($update =="stable")
+				echo ("$('#radio_stable').prop('checked', true);\r\n");
+			else 
+				echo ("$('#radio_all').prop('checked', true);\r\n");
+
 		}
 		?>
 	});
@@ -134,6 +144,7 @@ require("tools.php");
 		ZoomLevel: $("#ZoomLevel").val(),
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
 		ShareData: $('#checkboxSharedata').is(':checked'),
+		update: $("input:radio[name ='update']:checked").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -146,22 +157,23 @@ require("tools.php");
 <h1>SETTINGS</h1>
 <div>
 <table>
-<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
-<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
-<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
-<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
-<input id="radio_no" type="radio" value="no" name="Language" /> Norsk
-</td></tr>
-<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
-<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
-<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
-<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
-<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
-<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
-<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
-<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size=4"></td></tr>
-<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
-<tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
+	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
+		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
+		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
+		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
+		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk
+	</td></tr>
+	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
+	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
+	<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
+	<tr><td valign="top"><b><?php t("Automatische updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> all<br><input id="radio_stable" type="radio" value="stable" name="update"> stable<br><input id="radio_none" type="radio" value="none" name="update"> none</td></tr>
+	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
+	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
+	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
+	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size=4"></td></tr>
+	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
+	<tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
 <?php
 if (file_exists("/etc/teslalogger/LASTSCANMYTESLA"))
 {
