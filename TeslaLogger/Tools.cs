@@ -228,9 +228,13 @@ namespace TeslaLogger
                 if (IsPropertyExist(j, "update"))
                 {
                     if (j["update"] == "stable")
+                    {
                         return UpdateType.stable;
+                    }
                     else if (j["update"] == "none")
+                    {
                         return UpdateType.none;
+                    }
                 }
             }
             catch (Exception ex)

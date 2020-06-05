@@ -288,7 +288,7 @@ namespace TeslaLogger
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
-                    string newphpini = System.Text.RegularExpressions.Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
+                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
                     newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
 
                     File.WriteAllText(phpinipath, newphpini);
@@ -790,7 +790,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"name\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -940,7 +940,7 @@ namespace TeslaLogger
                     Logfile.Log(" *** Check new Version ***");
 
                     string online_version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (String.IsNullOrEmpty(online_version))
+                    if (string.IsNullOrEmpty(online_version))
                     {
                         // recheck in 10 Minutes
                         Logfile.Log("Empty Version String - recheck in 10 minutes");
@@ -995,7 +995,9 @@ namespace TeslaLogger
         public static bool UpdateNeeded(string currentVersion, string online_version, Tools.UpdateType updateType)
         {
             if (updateType == Tools.UpdateType.none)
+            {
                 return false;
+            }
 
             if (updateType == Tools.UpdateType.stable || updateType == Tools.UpdateType.all)
             {
@@ -1005,10 +1007,14 @@ namespace TeslaLogger
                 if (cv.CompareTo(ov) < 0)
                 {
                     if (updateType == Tools.UpdateType.all)
+                    {
                         return true;
-                    
+                    }
+
                     if (ov.Build == 0 && ov.Revision == 0)
+                    {
                         return true;
+                    }
                 }
 
                 return false;
