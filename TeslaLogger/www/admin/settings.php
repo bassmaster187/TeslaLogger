@@ -52,10 +52,12 @@ require("tools.php");
 		
 		if ($content === FALSE)
 		{
+			// Default Values for fresh install
 			echo ("$('#radio_kw').prop('checked', true);\r\n");
 			echo ("$('#radio_celsius').prop('checked', true);\r\n");
 			echo ("$('#radio_km').prop('checked', true);\r\n");
-			echo ("$('#radio_en').prop('checked', true);\r\n");			
+			echo ("$('#radio_en').prop('checked', true);\r\n");		
+			echo ("$('#radio_all').prop('checked', true);\r\n");	
 		}
 		else
 		{
@@ -167,7 +169,7 @@ require("tools.php");
 	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
 	<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
 	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
-	<tr><td valign="top"><b><?php t("Automatische updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> all<br><input id="radio_stable" type="radio" value="stable" name="update"> stable<br><input id="radio_none" type="radio" value="none" name="update"> none</td></tr>
+	<tr><td valign="top"><b><?php t("Automatische Updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> All<br><input id="radio_stable" type="radio" value="stable" name="update"> Stable<br><input id="radio_none" type="radio" value="none" name="update"> None</td></tr>
 	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
