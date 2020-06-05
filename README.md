@@ -44,6 +44,21 @@ http://raspberry/admin/dashboard.php
 
 Customizing the Dashboard goes here: [LINK](dashboard.md)
 
+## Fleet Statistics
+Fleet Statistics can be used by anyone without Teslalogger. To compare your degradation and charging curves with the fleet, you need a Teslalogger.
+
+### Degradation Statistics
+https://teslalogger.de/degradation.php
+
+### Charging Speed Statistics
+https://teslalogger.de/charger.php
+
+### Firmware Tracker
+https://teslalogger.de/firmware.php
+
+### Map of fast chargings by Teslalogger Users
+http://teslalogger.de/map.php
+
 ## SSH for advanced users
 
 Username: pi
