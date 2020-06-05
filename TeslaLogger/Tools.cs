@@ -33,7 +33,7 @@ namespace TeslaLogger
 
         public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
-            string temp = text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
             Logfile.Log(temp);
         }
 
