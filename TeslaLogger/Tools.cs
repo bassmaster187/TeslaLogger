@@ -24,6 +24,8 @@ namespace TeslaLogger
 
         private static string _OSVersion = string.Empty;
 
+        public enum UpdateType { all, stable, none};
+
         public static void SetThread_enUS()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
@@ -209,6 +211,35 @@ namespace TeslaLogger
             return false;
         }
 
+        internal static UpdateType UpdateSettings()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
+                {
+                    return UpdateType.all;
+                }
+
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                if (IsPropertyExist(j, "update"))
+                {
+                    if (j["update"] == "stable")
+                        return UpdateType.stable;
+                    else if (j["update"] == "none")
+                        return UpdateType.none;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return UpdateType.all;
+        }
 
 
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin)

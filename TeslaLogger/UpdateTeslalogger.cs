@@ -930,7 +930,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void CheckNewVersion()
+        public static void CheckForNewVersion()
         {
             try
             {
@@ -939,8 +939,8 @@ namespace TeslaLogger
                 {
                     Logfile.Log(" *** Check new Version ***");
 
-                    string version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (string.IsNullOrEmpty(version))
+                    string online_version = WebHelper.GetOnlineTeslaloggerVersion();
+                    if (String.IsNullOrEmpty(online_version))
                     {
                         // recheck in 10 Minutes
                         Logfile.Log("Empty Version String - recheck in 10 minutes");
@@ -951,7 +951,9 @@ namespace TeslaLogger
                     lastVersionCheck = DateTime.UtcNow;
 
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    if (!version.Equals(currentVersion))
+                    Tools.UpdateType updateType = Tools.UpdateSettings();
+
+                    if (UpdateNeeded(currentVersion, online_version, updateType))
                     {
                         // if update doesn't work, it will retry tomorrow
                         lastVersionCheck = DateTime.UtcNow.AddDays(1);
@@ -959,7 +961,7 @@ namespace TeslaLogger
                         Logfile.Log("---------------------------------------------");
                         Logfile.Log(" *** New Version Detected *** ");
                         Logfile.Log("Current Version: " + currentVersion);
-                        Logfile.Log("Online Version: " + version);
+                        Logfile.Log("Online Version: " + online_version);
                         Logfile.Log("Start update!");
 
                         string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
@@ -988,6 +990,31 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        public static bool UpdateNeeded(string currentVersion, string online_version, Tools.UpdateType updateType)
+        {
+            if (updateType == Tools.UpdateType.none)
+                return false;
+
+            if (updateType == Tools.UpdateType.stable || updateType == Tools.UpdateType.all)
+            {
+                Version cv = new Version(currentVersion);
+                Version ov = new Version(online_version);
+
+                if (cv.CompareTo(ov) < 0)
+                {
+                    if (updateType == Tools.UpdateType.all)
+                        return true;
+                    
+                    if (ov.Build == 0 && ov.Revision == 0)
+                        return true;
+                }
+
+                return false;
+            }
+
+            return false;
         }
     }
 }

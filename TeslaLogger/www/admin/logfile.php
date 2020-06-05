@@ -1,5 +1,5 @@
 <?PHP
-	$output  = shell_exec('tail -n300 /etc/teslalogger/nohup.out');
+	$output  = shell_exec('tail -n1000 /etc/teslalogger/nohup.out');
 	if ($output === false) {
         // Handle the error
 		echo "error";
@@ -18,7 +18,7 @@
 	$output = str_replace("not translated!","<b>not translated!</b>", $output);
 	
 	$output = preg_replace("/(.*(Exception|Error).*)/", "<font color='red'>$1</font>", $output);
-	$output = preg_replace("/(state: [\w\.\/\-]+)/", "<b>$1</b>", $output);
+	$output = preg_replace("/(state: .*)/", "<b>$1</b>", $output);
 	$output = preg_replace("/(http[s]?:\/\/[\w\.\/\-]+)/", "<a href='$1'>$1</a>", $output);
 	
 	echo nl2br($output);
