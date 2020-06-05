@@ -351,7 +351,7 @@ namespace TeslaLogger
             {
                 Thread.Sleep(10000);
 
-                UpdateTeslalogger.CheckNewVersion();
+                UpdateTeslalogger.CheckForNewVersion();
             }
         }
 
@@ -685,6 +685,7 @@ namespace TeslaLogger
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
+            Logfile.Log("Update Settings: " + Tools.UpdateSettings().ToString());
 
             Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
@@ -885,8 +886,8 @@ namespace TeslaLogger
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
             if (ts.TotalDays > 9)
             {
-                // If token was not refreshed since 10 days, try to get a new Teslalogger update
-                UpdateTeslalogger.CheckNewVersion();
+                // If car wasn't sleeping since 10 days, try to get a new Teslalogger update
+                UpdateTeslalogger.CheckForNewVersion();
 
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
                 if (ts2.TotalMinutes > 30)
