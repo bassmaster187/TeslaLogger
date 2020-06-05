@@ -185,9 +185,9 @@ require("language.php");
 				$("#lt_trip_PS").text("<?php t("PS"); ?>");
 			}
 
-
 			var ts2 = new Date(Date.parse(jsonData["trip_start_dt"]));
- 			$("#trip_start").text(ts2.toLocaleString(loc));
+			$("#trip_start").text(ts2.toLocaleString(loc));
+
 			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
 			
 			var ts = new Date(Date.parse(jsonData["ts"]));
