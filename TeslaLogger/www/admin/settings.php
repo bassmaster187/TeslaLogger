@@ -13,11 +13,12 @@ require("tools.php");
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script>
 	
 	$( function() {
-		$( "button" ).button();
+		//$( "button" ).button();
 	
 		$('.timepicker').timepicker({
 			timeFormat: 'HH:mm',
@@ -154,11 +155,16 @@ require("tools.php");
   }
 
 </script>
-<button onclick="window.location.href='password.php';"><?php t("Zugangsdaten"); ?></button>
-<button onclick="window.location.href='restore.php';"><?php t("Restore DB"); ?></button>
-<h1>SETTINGS</h1>
+<body style="padding-top: 5px; padding-left: 10px;">
+<?php 
+include "menu.php";
+echo(menu("Logfile"));
+?>
 <div>
 <table>
+<tr><td><h1 style="margin-top:0px;"><?php t("Zugangsdaten"); ?></h1></td><td></td></tr>
+<tr><td></td><td><button onclick="window.location.href='password.php';"  style="float: right;"><?php t("Zugangsdaten"); ?></button></td></tr>
+<tr><td><h1>SETTINGS</h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
@@ -219,6 +225,7 @@ if (strlen($taskertoken) > 7)
 </table>
 </div>
 
+<!--
 <h1>Your Data</h1>
 <button onclick="window.location.href='https://teslalogger.de/degradation_token.php?token=<?PHP echo($taskertoken); ?>';"><?php t("My Degradation"); ?></button>
 <button onclick="window.location.href='https://teslalogger.de/mycharging.php?token=<?PHP echo($taskertoken); ?>';"><?php t("My charging AVG"); ?></button>
@@ -227,6 +234,7 @@ if (strlen($taskertoken) > 7)
 <button onclick="window.location.href='https://teslalogger.de/charger.php';"><?php t("Fleet charging AVG"); ?></button>
 <button onclick="window.location.href='https://teslalogger.de/map.php';"><?php t("Fleet Fast Charging Map"); ?></button>
 <button onclick="window.location.href='https://teslalogger.de/firmware.php';"><?php t("Firmware Tracker"); ?></button>
+-->
 
 <div id="dialog-confirm" title="Info" style="display:none;">
 <?php t("TextShare"); ?>

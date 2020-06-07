@@ -13,7 +13,9 @@ require("language.php");
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 	<script>
@@ -26,7 +28,7 @@ require("language.php");
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
   $( function() {
-    $("button").button();
+    // $("button").button();
 	GetCurrentData();
 
 	map = new L.Map('map');
@@ -271,23 +273,6 @@ require("language.php");
 		}
 
 	}
-
-  function BackgroudRun($target, $text)
-  {
-	  $.ajax($target, {
-		data: {
-			id: ''
-		}
-		})
-		.then(
-		function success(name) {
-			alert($text);
-		},
-		function fail(data, status) {
-			alert($text);
-		}
-	);
-  }
   
 function ShowInfo()
 {
@@ -309,18 +294,13 @@ function ShowInfo()
 	
 }
   </script>
+
   </head>
   <body style="padding-top: 5px; padding-left: 10px;">
-  <button style="width:120px;" onclick="window.location.href='logfile.php';">Logfile</button>
-  <button style="width:120px;" onclick="BackgroudRun('restartlogger.php', 'Reboot!');">Restart</button>
-  <button style="width:120px;" onclick="BackgroudRun('update.php', 'Reboot!');">Update</button>
-  <button style="width:120px;" onclick="window.location.href='backup.php';">Backup</button>
-  <button style="width:120px;" onclick="window.location.href='geofencing.php';">Geofence</button>
-  <button style="width:120px;" onclick="BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup</button>
-  <button style="width:120px;" onclick="BackgroudRun('gosleep.php', 'Sleep!');">Sleep</button>
-  <button style="width:120px;" onclick="window.location.href='settings.php';">Settings</button>
-  <br />
-  <br />
+  <?php 
+    include "menu.php";
+    echo(menu("Teslalogger"));
+?>
 
   <div id="content" style="max-width:1036px;">
   <div id="info">
@@ -358,7 +338,7 @@ function ShowInfo()
 
   <table style="float:left;">
   <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
-  <tr><td width="680px"><div id="map" style="height: 400px;" /></td></tr>
+  <tr><td width="680px"><div id="map" style="height: 400px; z-index:0;" /></td></tr>
   </table>
 
   <?php
