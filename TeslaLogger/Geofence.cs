@@ -23,6 +23,31 @@ namespace TeslaLogger
         public double lng;
         public int radius;
         public Dictionary<SpecialFlags, string> specialFlags;
+        private bool isHome = false;
+        private bool isWork = false;
+
+        public bool IsHome
+        {
+            get => isHome; set
+            {
+                isHome = value;
+                if (value)
+                {
+                    isWork = false;
+                }
+            }
+        }
+        public bool IsWork
+        {
+            get => isWork; set
+            {
+                isWork = value;
+                if (value)
+                {
+                    isHome = false;
+                }
+            }
+        }
 
         public Address(string name, double lat, double lng, int radius)
         {
@@ -245,6 +270,14 @@ namespace TeslaLogger
                 else if (flag.StartsWith("esm"))
                 {
                     SpecialFlag_ESM(_addr, flag);
+                }
+                else if (flag.Equals("home"))
+                {
+                    _addr.IsHome = true;
+                }
+                else if (flag.Equals("work"))
+                {
+                    _addr.IsWork = true;
                 }
             }
         }
