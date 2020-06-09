@@ -1,3 +1,11 @@
+Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298
+Allego DE-Hohenwarsleben, 52.174039, 11.495273, 3
+Allego DE-Kleinostheim, 49.994504, 9.070058
+Allego DE-Münchberg, 50.202763, 11.77689, 7
+Allego DE-Schweitenkirchen, 48.510717, 11.582345, 5
+
+EnBW DE-Hohenwarsleben, 52,175060, 11,495039, 10
+EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Ulm, 48.456880, 10.029673
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
@@ -94,7 +102,7 @@ Ionity DE-Haidt Süd, 49.779352, 10.246493
 Ionity DE-Himmelkron, 50.055972, 11.609148
 Ionity DE-Hohenlohe Nord, 49.207007, 9.639273
 Ionity DE-Hohenlohe Süd, 49.205379, 9.639696
-Ionity DE-Hohenwarsleben, 52.173913, 11.495172, 10
+Ionity DE-Hohenwarsleben, 52.173913, 11.495172, 11
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219137, 10.127765
@@ -119,7 +127,7 @@ Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
 Ionity DE-Nempitz, 51.2901, 12.13757, 5
-Ionity DE-Neumarkt, 49.312948, 11.474745
+Ionity DE-Neumarkt, 49.312948, 11.474745, 20
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
 Ionity DE-Ohrenbach Ost, 49.485555, 10.213267
@@ -312,7 +320,7 @@ Supercharger AT-Lermoos, 47.394965, 10.887519
 Supercharger AT-Liezen, 47.559370, 14.252606
 Supercharger AT-Poysdorf, 48.676534, 16.623013
 Supercharger AT-Salzburg, 47.727056, 13.060672
-Supercharger AT-St. Anton, 47.130088, 10.269217
+Supercharger AT-St. Anton, 47.131123, 10.271497
 Supercharger AT-St. Georgen, 47.929088, 13.502168
 Supercharger AT-St. Pölten, 48.205769, 15.618485
 Supercharger AT-St. Valentin, 48.196507, 14.527879, 20
@@ -437,10 +445,10 @@ Supercharger DE-Lutterberg, 51.370213, 9.63392, 20
 Supercharger DE-Malsfeld, 51.0872578, 9.485137
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
-Supercharger DE-Motten, 50.355755, 9.75453
+Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
-Supercharger DE-Münchberg-Nord, 50.20283, 11.77663
+Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
 Supercharger DE-Nempitz, 51.29012, 12.13727, 15
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
@@ -454,7 +462,7 @@ Supercharger DE-Regensburg, 48.9947224, 12.150609
 Supercharger DE-Rhüden, 51.947221, 10.140505
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger DE-Satteldorf, 49.18119, 10.06933
-Supercharger DE-Schweitenkirchen, 48.51074, 11.58214
+Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 15
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262
@@ -465,7 +473,7 @@ Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
 Supercharger DE-Wernberg-Köblitz, 49.53226, 12.13497
 Supercharger DE-Wertheim, 49.770559, 9.576456
-Supercharger DE-Weyarn, 47.86528, 11.79075
+Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
 Supercharger DE-Wilnsdorf, 50.8168944, 8.085813
 Supercherger-V3 DE-Wismar, 53.878850, 11.454748
