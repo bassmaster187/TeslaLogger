@@ -34,6 +34,12 @@ Supercharger DE-Blankenfelde-Mahlow,52.308921402353334,13.444712162017824,20,+oc
 * Radius: 20
 * special flags: +ocp:R->P+hfl:5m
 
+## replacing TeslaLogger POIs
+
+Records in geofence-private.csv will replace all POIs included in TeslaLogger (eg Superchargers) with the **same name**.
+
+In the example above the POI *Supercharger DE-Blankenfelde-Mahlow* that comes with TeslaLogger by default is replaced with a custom entry with slightly different coordinates, different radius and special flags.
+
 ## special flags for POIs
 
 More than one special flag for each POI is possible. Special flags are not separated by comma, each flag starts with a +. Some flags have configuration parameters after a :
