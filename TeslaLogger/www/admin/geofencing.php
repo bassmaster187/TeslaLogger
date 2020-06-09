@@ -12,6 +12,8 @@
 	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<script>	
 	<?PHP
 	$csv = array();
@@ -97,7 +99,11 @@
   });
   </script>
 	</head>
-	<body>
-	<div id="map" style="height:800px;"></div>
+	<body style="padding-top: 5px; padding-left: 10px;">
+	<?php 
+    include "menu.php";
+    echo(menu("Geofencing"));
+?>
+	<div id="map" style="height:800px; max-width: 1260px; z-index:0;"></div>
 </body>
 </html>

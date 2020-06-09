@@ -11,12 +11,10 @@ require("language.php");
 	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+
 	<script>
-
-	$( function() {
-		$( "button" ).button();
-	});
-
 	function save() {
 		if ($("#email").val() == null || $("#email").val() == "") {
 			alert("Bitte Email eingeben!");
@@ -35,6 +33,12 @@ require("language.php");
 		}
 	}
 </script>
+</head>
+<body style="padding-top: 5px; padding-left: 10px;">
+<?php 
+include "menu.php";
+menu("Credentials");
+?>
 
 <div>
 <table>
