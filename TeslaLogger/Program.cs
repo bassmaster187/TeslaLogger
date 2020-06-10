@@ -1029,16 +1029,16 @@ namespace TeslaLogger
                     switch (m.Groups[2].Captures[0].ToString())
                     {
                         case "s":
-                            until.AddSeconds(duration);
+                            until = until.AddSeconds(duration);
                             break;
                         case "m":
-                            until.AddMinutes(duration);
+                            until = until.AddMinutes(duration);
                             break;
                         case "h":
-                            until.AddHours(duration);
+                            until = until.AddHours(duration);
                             break;
                         case "d":
-                            until.AddDays(duration);
+                            until = until.AddDays(duration);
                             break;
                         default:
                             Logfile.Log("HandleSpecialFlagHighFrequencyLogging unhandled time parameter: " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());
