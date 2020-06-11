@@ -10,8 +10,25 @@ function GetTaskerToken()
     return $taskertoken;
 }
 
+function full_path()
+{
+    $s = &$_SERVER;
+    $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true:false;
+    $sp = strtolower($s['SERVER_PROTOCOL']);
+    $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+    $port = $s['SERVER_PORT'];
+    $port = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
+    $host = isset($s['HTTP_X_FORWARDED_HOST']) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
+    $host = isset($host) ? $host : $s['SERVER_NAME'] . $port;
+    $uri = $protocol . '://' . $host . $s['REQUEST_URI'];
+    $segments = explode('?', $uri, 2);
+    $url = $segments[0];
+    return $url;
+}
+
 function menu($title)
 {
+    $ref = "?token=" . GetTaskerToken() . "&ref=" . full_path();
 ?>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
@@ -35,12 +52,13 @@ function menu($title)
                     <li id="menu-item-4" class="page_item_has_children">
                         <a href="#">Fleet Statistic</a>
                         <ul class='children'>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation_token.php?token=<?PHP echo(GetTaskerToken()); ?>">My Degradation</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/mycharging.php?token=<?PHP echo(GetTaskerToken()); ?>">My Charging AVG</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation.php">Fleet Degradation AVG</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger.php">Fleet Charging AVG</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/map.php">Fleet Fast Charging Map</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/firmware.php">Firmware Tracker</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation_token.php<?PHP echo($ref); ?>">My Degradation</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/mycharging.php<?PHP echo($ref); ?>">My Charging AVG</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation.php<?PHP echo($ref); ?>">Fleet Degradation AVG</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger.php<?PHP echo($ref); ?>">Fleet Charging AVG</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger_fw.php<?PHP echo($ref); ?>">Fleet Charging MAX (Firmware)</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/map.php<?PHP echo($ref); ?>">Fleet Fast Charging Map</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/firmware.php<?PHP echo($ref); ?>">Firmware Tracker</a></li>
 						</ul>
                     </li>
 					<li id="menu-item-5" class="page_item_has_children">
