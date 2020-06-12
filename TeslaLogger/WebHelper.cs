@@ -1826,6 +1826,13 @@ FROM
             try
             {
                 resultContent = await GetCommand("climate_state");
+
+                if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
+                {
+                    Logfile.Log("GetOutsideTempAsync: NULL");
+                    return null;
+                }
+
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
