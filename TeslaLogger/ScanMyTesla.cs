@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
@@ -60,7 +61,7 @@ namespace TeslaLogger
                     }
 
                     response = GetDataFromWebservice().Result;
-                    if (response.StartsWith("not found") || response.StartsWith("ERROR:"))
+                    if (response.StartsWith("not found") || response.StartsWith("ERROR:") || response.Contains("Resource Limit Is Reached"))
                     {
                         System.Threading.Thread.Sleep(5000);
                     }
@@ -103,6 +104,13 @@ namespace TeslaLogger
                 if (resultContent == "not found")
                 {
                     return "not found";
+                }
+
+                if (resultContent.Contains("Resource Limit Is Reached"))
+                {
+                    Logfile.Log("SMT: Resource Limit Is Reached");
+                    Thread.Sleep(25000);
+                    return "Resource Limit Is Reached";
                 }
 
                 string temp = resultContent;
@@ -215,6 +223,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, resultContent);
+                Thread.Sleep(10000);
             }
 
             return "NULL";
