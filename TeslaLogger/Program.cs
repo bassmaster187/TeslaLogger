@@ -324,6 +324,8 @@ namespace TeslaLogger
             }
             else
             {
+                webhelper.IsDriving(true); // insert a last position. Maybe the last one is too old
+
                 DriveFinished();
 
                 ShareData sd = new ShareData(webhelper.TaskerHash);
