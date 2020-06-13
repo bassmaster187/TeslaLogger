@@ -15,7 +15,8 @@ namespace TeslaLogger
         {
             OpenChargePort,
             HighFrequencyLogging,
-            EnableSentryMode
+            EnableSentryMode,
+            SetChargeLimit
         }
 
         public string name;
@@ -279,6 +280,10 @@ namespace TeslaLogger
                 {
                     _addr.IsWork = true;
                 }
+                else if (flag.StartsWith("scl"))
+                {
+                    SpecialFlag_SCL(_addr, flag);
+                }
             }
         }
 
@@ -288,12 +293,27 @@ namespace TeslaLogger
             Match m = Regex.Match(_flag, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, m.Groups[0].Captures[1].ToString() + "->" + m.Groups[0].Captures[2].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
             }
             else
             {
                 // default
                 _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, "RND->P");
+            }
+        }
+
+        private static void SpecialFlag_SCL(Address _addr, string _flag)
+        {
+            string pattern = "scl:([0-9]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, m.Groups[1].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, "80");
             }
         }
 
