@@ -129,6 +129,11 @@ This flag is executed when charing starts. It will set the charge limit.
 
 Warning: in case of network issues or other communication problems, charge limit will not be set!
 
+This setting will always be set when TelsaLogger changes into state charging. You can change the charge
+limit again in the car and/or in the app after TeslaLogger has set the charge limit. Your manual
+override will not be changed, except in case TeslaLogger restarts (then TL will set TL's charge limit 
+again).
+
 Configuration parameters: limit
 
 Example: +scl:75 (set charge limit to 75%)
