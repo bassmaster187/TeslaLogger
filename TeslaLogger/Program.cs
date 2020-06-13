@@ -26,6 +26,14 @@ namespace TeslaLogger
             GoSleep
         }
 
+        public enum TLMemCacheKey
+        {
+            OdometerMustNotBeNull,
+            WaitingForCarToGoToSleep,
+            HttpClientTimeOuts,
+            GetOutsideTempAsync
+        }
+
         // encapsulate state
         private static TeslaState _currentState = TeslaState.Start;
 
