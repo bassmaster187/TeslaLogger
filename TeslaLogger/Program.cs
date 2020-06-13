@@ -1069,9 +1069,17 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Logfile.Log("OpenChargePort ...");
-                string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
-                Logfile.Log("openChargePort(): " + result);
+                Thread ChargePortOpener = new Thread(() =>
+                {
+
+                    Logfile.Log("OpenChargePort ...");
+                    string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
+                    Logfile.Log("openChargePort(): " + result);
+                })
+                {
+                    Priority = ThreadPriority.Normal
+                };
+                ChargePortOpener.Start();
             }
         }
 
