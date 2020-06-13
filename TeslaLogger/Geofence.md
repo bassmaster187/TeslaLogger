@@ -56,7 +56,7 @@ Configuration parameters: from->to
 
 One or more shift states P N R D are valid for from and to.
 
-Example: R->P when shifting from R to P the command Open charge Port is sent to your car
+Example: +ocp:R->P when shifting from R to P the command Open charge Port is sent to your car
 
 Default: RND->P
 
@@ -64,7 +64,8 @@ Default: RND->P
 
 +hfl
 
-This flag is executed during charging.
+This flag is executed when charing starts. It will enable high frequency logging which tries to poll
+the Tesla API as often as possible.
 
 Configuration parameters: duration
 
@@ -72,10 +73,68 @@ or
 
 Configuration parameters: count
 
-Example: 5m (log as fast as possible for 5 minutes)
+Example: +hfl:5m (log as fast as possible for 5 minutes)
 
 Valid configuration parameters: 
 
 count: integer
 
 duration: integer + one character (s: seconds, m: minutes, h: hours, d: days)
+
+Default: count 100
+
+# Enable Sentry Mode
+
++esm
+
+Turn Sentry Mode on
+
+Warning: in case of network issues or other communication problems, Sentry Mode will not be turned on!
+
+This flag is executed when the shift state of your car changes, eg. when shifting from D to R.
+
+Configuration parameters: from->to
+
+One or more shift states P N R D are valid for from and to.
+
+Example: +esm:R->P when shifting from R to P the command Enable Sentry Mode is sent to your car
+
+Default: RND->P
+
+# Home Address
+
++home
+
+Marks this POI as your home address.
+
+TODO: useful application
+
+Home cannot be work.
+
+# Work Address
+
++work
+
+Marks this POI as you work address.
+
+TODO: useful application
+
+Work cannot be home.
+
+# Set Charge Limit
+
++scl
+
+This flag is executed when charing starts. It will set the charge limit.
+
+Warning: in case of network issues or other communication problems, charge limit will not be set!
+
+Configuration parameters: limit
+
+Example: +scl:75 (set charge limit to 75%)
+
+Valid configuration parameters: 
+
+limit: integer
+
+Default: limit 80
