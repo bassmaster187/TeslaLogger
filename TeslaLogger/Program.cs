@@ -31,7 +31,8 @@ namespace TeslaLogger
             OdometerMustNotBeNull,
             WaitingForCarToGoToSleep,
             HttpClientTimeOuts,
-            GetOutsideTempAsync
+            GetOutsideTempAsync,
+            LastSetChargeLimitAddressName
         }
 
         // encapsulate state
