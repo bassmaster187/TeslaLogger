@@ -25,7 +25,7 @@ geofence-private.csv contains data records. One line is one record. Records cons
 4. Radius. Optional. Integer. Value in meters. Default: 50
 5. special flags. Optional. List of special flags and parameters, each flag starts with + Default: nothing
 
-Example
+Example 1
 
 Supercharger DE-Blankenfelde-Mahlow,52.308921402353334,13.444712162017824,20,+ocp:R->P+hfl:5m
 * Name: Supercharger DE-Blankenfelde-Mahlow
@@ -33,6 +33,14 @@ Supercharger DE-Blankenfelde-Mahlow,52.308921402353334,13.444712162017824,20,+oc
 * Longitude: 13.444712162017824
 * Radius: 20
 * special flags: +ocp:R->P+hfl:5m
+
+Example 2
+My Home,52.39408202469785,13.542231917381288,,+scl:75
+* Name: My Home
+* Latitude: 52.39408202469785
+* Longitude: 13.542231917381288
+* Radius: empty, default of 50 is applied
+* special flags: +scl:75
 
 ## replacing TeslaLogger POIs
 
