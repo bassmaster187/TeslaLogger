@@ -43,6 +43,7 @@ namespace TeslaLogger
         private static DateTime lastCarUsed = DateTime.Now;
         private static DateTime lastOdometerChanged = DateTime.Now;
         private static DateTime lastTryTokenRefresh = DateTime.Now;
+        private static string lastSetChargeLimitAddressName = string.Empty;
         private static bool goSleepWithWakeup = false;
         private static double odometerLastTrip;
         private static bool highFrequencyLogging = false;
@@ -975,7 +976,7 @@ namespace TeslaLogger
                             case Address.SpecialFlags.EnableSentryMode:
                                 break;
                             case Address.SpecialFlags.SetChargeLimit:
-                                HandleSpecialFlag_SetChargeLimit(flag.Value);
+                                HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
                                 break;
                             case Address.SpecialFlags.ClimateOff:
                                 break;
@@ -1037,7 +1038,7 @@ namespace TeslaLogger
             }*/
         }
 
-        private static void HandleSpecialFlag_SetChargeLimit(string _flagconfig)
+        private static void HandleSpecialFlag_SetChargeLimit(Address _addr, string _flagconfig)
         {
             string pattern = "([0-9]+)";
             Match m = Regex.Match(_flagconfig, pattern);
@@ -1045,16 +1046,20 @@ namespace TeslaLogger
             {
                 if (m.Groups[1].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int chargelimit))
                 {
-                    Thread ChargeLimitSetter = new Thread(() =>
+                    if (!lastSetChargeLimitAddressName.Equals(_addr.name))
                     {
-                        Logfile.Log($"SetChargeLimit to {chargelimit} ...");
-                        string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
-                        Logfile.Log("set_charge_limit(): " + result);
-                    })
-                    {
-                        Priority = ThreadPriority.Normal
-                    };
-                    ChargeLimitSetter.Start();
+                        Thread ChargeLimitSetter = new Thread(() =>
+                        {
+                            Logfile.Log($"SetChargeLimit to {chargelimit} ...");
+                            string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                            Logfile.Log("set_charge_limit(): " + result);
+                        })
+                        {
+                            Priority = ThreadPriority.Normal
+                        };
+                        ChargeLimitSetter.Start();
+                        lastSetChargeLimitAddressName = _addr.name;
+                    }
                 }
             }
         }
