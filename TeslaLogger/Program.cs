@@ -152,7 +152,7 @@ namespace TeslaLogger
             }
         }
 
-        private static bool IsHighFrequenceLoggingEnabled(bool justcheck = false)
+        public static bool IsHighFrequenceLoggingEnabled(bool justcheck = false)
         {
             if (highFrequencyLogging)
             {
