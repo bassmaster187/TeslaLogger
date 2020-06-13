@@ -969,6 +969,8 @@ namespace TeslaLogger
                             case Address.SpecialFlags.SetChargeLimit:
                                 HandleSpecialFlag_SetChargeLimit(flag.Value);
                                 break;
+                            case Address.SpecialFlags.ClimateOff:
+                                break;
                             default:
                                 Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
                                 break;
@@ -1005,6 +1007,11 @@ namespace TeslaLogger
                             break;
                         case Address.SpecialFlags.EnableSentryMode:
                             HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
+                            break;
+                        case Address.SpecialFlags.SetChargeLimit:
+                            break;
+                        case Address.SpecialFlags.ClimateOff:
+                            HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
                             break;
                         default:
                             Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -1116,13 +1123,32 @@ namespace TeslaLogger
                 Thread SentryModeEnabler = new Thread(() =>
                 {
                     Logfile.Log("EnableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode?on=true", null).Result;
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
                     Logfile.Log("set_sentry_mode(): " + result);
                 })
                 {
                     Priority = ThreadPriority.Normal
                 };
                 SentryModeEnabler.Start();
+            }
+        }
+
+        private static void HandleSpeciaFlag_ClimateOff(string _flagconfig, string _oldState, string _newState)
+        {
+            string pattern = "([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
+            {
+                Thread ClimateOffThread = new Thread(() =>
+                {
+                    Logfile.Log("ClimateOff ...");
+                    string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                    Logfile.Log("auto_conditioning_stop(): " + result);
+                })
+                {
+                    Priority = ThreadPriority.Normal
+                };
+                ClimateOffThread.Start();
             }
         }
     }

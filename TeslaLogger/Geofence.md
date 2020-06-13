@@ -138,3 +138,21 @@ Valid configuration parameters:
 limit: integer
 
 Default: limit 80
+
+# Turn HVAC off
+
++cof
+
+This will turn HVAC off.
+
+Warning: in case of network issues or other communication problems, HVAC will not be turned off!
+
+This flag is executed when the shift state of your car changes, eg. when shifting from D to R.
+
+Configuration parameters: from->to
+
+One or more shift states P N R D are valid for from and to.
+
+Example: +cof:R->P when shifting from R to P the command HVAC off is sent to your car
+
+Default: RND->P
