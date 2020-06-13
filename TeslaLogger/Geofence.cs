@@ -182,9 +182,9 @@ namespace TeslaLogger
 
                             int radius = 50;
 
-                            string[] args = line.Split(',');
+                            string[] args = Regex.Split(line, ",");
 
-                            if (args.Length > 3)
+                            if (args.Length > 3 && args[3] != null && args[3].Length > 0)
                             {
                                 int.TryParse(args[3], out radius);
                             }
@@ -194,7 +194,7 @@ namespace TeslaLogger
                                 double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
                                 radius);
 
-                            if (args.Length > 4)
+                            if (args.Length > 4 && args[4] != null)
                             {
                                 string flags = args[4];
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
