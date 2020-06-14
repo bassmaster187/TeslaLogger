@@ -61,6 +61,7 @@ Ionity CH-Lully, 46.832458, 6.859379
 Ionity CH-Martigny, 46.127822, 7.059829
 Ionity CH-Neuenkirch, 47.113372, 8.232328
 Ionity CZ-Beroun (dir. Prague), 49.95581, 14.062759
+Ionity CZ-Nupaky, 49.984404, 14.602629
 Ionity DE-Aachener Land Nord, 50.817668, 6.213854
 Ionity DE-Aachener Land Süd, 50.817306, 6.216629
 Ionity DE-Aalbek West, 54.092671, 9.92914
@@ -175,6 +176,8 @@ Ionity FR-Boismandé Ouest, 46.313348, 1.416566
 Ionity FR-Bonneville, 46.064687, 6.409478
 Ionity FR-Bréguières Nord, 43.59197, 7.036228
 Ionity FR-Cambarette Nord, 43.423464, 5.993311
+Ionity FR-Centre de la France Nord, 46.751937, 2.417075
+Ionity FR-Centre de la France Sud, 46.751623, 2.417606
 Ionity FR-Chartres Bois Paris, 48.467, 1.579341
 Ionity FR-Chartres Gasville, 48.468541, 1.580005
 Ionity FR-Fontaine Colette, 47.16577, 0.63161
@@ -185,6 +188,7 @@ Ionity FR-Gevrey-Chambertin Est, 47.223166, 5.010984
 Ionity FR-Glanon, 47.032073, 5.109707
 Ionity FR-Gueux, 49.244484, 3.923935
 Ionity FR-Jura, 46.774589, 5.523009
+Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
 Ionity FR-La Réserve, 47.974493, 3.197267
 Ionity FR-Labenne Est, 43.586191, -1.419585
 Ionity FR-Labenne Ouest, 43.586073, -1.420776
@@ -200,6 +204,7 @@ Ionity FR-Mionnay Saint Galmier, 45.885078, 4.894234
 Ionity FR-Montbartier, 43.915744, 1.309462
 Ionity FR-Montelimar Est, 44.5131, 4.782
 Ionity FR-Montelimar Ouest, 44.5149, 4.78
+Ionity FR-Morières, 43.922931, 4.912040
 Ionity FR-Nemours, 48.262403, 2.722228
 Ionity FR-Parcé sur Sarthe Nord, 47.8077, -0.1659
 Ionity FR-Parcé sur Sarthe Sud, 47.802, -0.1699
@@ -211,6 +216,7 @@ Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tours La Longue Vue, 47.47574, 0.77685
 Ionity FR-Val Gelon, 45.547331, 6.154824
 Ionity FR-Vidauban Sud, 43.413842, 6.451935
+Ionity FR-Villaines la Gonais, 48.125475, 0.622302
 Ionity FR-Volvestre, 43.3368, 1.2449
 Ionity FR-Vrigny, 49.242989, 3.919106
 Ionity HR-Sop, 45.78376, 16.150672
@@ -234,6 +240,7 @@ Ionity IT-Monselice, 45.2374, 11.76287
 Ionity IT-Montecchio Maggiore, 45.50105, 11.43627
 Ionity IT-Piacenza, 45.02694, 9.73478
 Ionity IT-Portogruaro, 45.79725, 12.81914
+Ionity IT-Potenza, 40.63193, 15.81358
 Ionity IT-Rinovo Nord, 43.9592, 8.13416
 Ionity IT-Trento, 46.08704, 11.1111
 Ionity IT-Valdichiana Outlet Village, 43.22381, 11.80217
@@ -261,6 +268,7 @@ Ionity NO-Elverum, 60.88007, 11.55093
 Ionity NO-Gol, 60.70205, 8.94337
 Ionity NO-Høydalsmo, 59.49497, 8.2027
 Ionity NO-Kjerlingland, 58.23655, 8.29948
+Ionity NO-Klett, 63.324643, 10.306073
 Ionity NO-Leirvik, 59.77503, 5.48611
 Ionity NO-Lura, 58.87322, 5.72126
 Ionity NO-Øyer, 61.24266, 10.4335
