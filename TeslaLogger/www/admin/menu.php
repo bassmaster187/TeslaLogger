@@ -28,7 +28,18 @@ function full_path()
 
 function menu($title)
 {
-    $ref = "?token=" . GetTaskerToken() . "&ref=" . full_path();
+    $car = "";
+    
+    if (file_exists("/etc/teslalogger/car_settings.xml"))
+    {
+        $doc =  file_get_contents("/etc/teslalogger/car_settings.xml");
+        if (preg_match("/<Name>([\s\S]*?)<\/Name>/", $doc, $matches) == 1)
+        {
+            $car = $matches[1];
+        }
+    }
+
+    $ref = "?token=" . GetTaskerToken() . "&ref=" . full_path()."&car=".$car;
 ?>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
