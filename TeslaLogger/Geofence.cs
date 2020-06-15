@@ -75,11 +75,13 @@ namespace TeslaLogger
         private FileSystemWatcher fsw;
 
         public bool RacingMode = false;
+        bool _RacingMode = false;
 
         private static int FSWCounter = 0;
 
-        public Geofence()
+        public Geofence(bool RacingMode)
         {
+            _RacingMode = RacingMode;
             Init();
             
             if (fsw == null)
@@ -102,7 +104,7 @@ namespace TeslaLogger
         {
             List<Address> list = new List<Address>();
 
-            if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && ApplicationSettings.Default.RacingMode)
+            if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && _RacingMode)
             {
                 ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
                 RacingMode = true;
