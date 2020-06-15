@@ -51,7 +51,7 @@ namespace TeslaLogger
             //Damit Mono keine Zertifikatfehler wirft :-(
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
 
-            geofence = new Geofence();
+            geofence = new Geofence(ApplicationSettings.Default.RacingMode);
         }
 
         public WebHelper()
