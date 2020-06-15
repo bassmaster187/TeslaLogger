@@ -11,7 +11,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestMethodGeocode()
         {
-            var geofence = new TeslaLogger.Geofence();
+            var geofence = new TeslaLogger.Geofence(false);
             var a = geofence.GetPOI(48.456708, 10.029897);
             Assert.AreEqual(a.name, "Supercharger DE-Ulm");
 
