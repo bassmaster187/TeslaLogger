@@ -682,7 +682,6 @@ Supercharger GB-Newcastle Staffordshire, 52.993, -2.2903
 Supercharger GB-Newcastle Staffordshire, 52.99413, -2.290797
 Supercharger GB-Newport Pagnell, 52.084312, -0.748467
 Supercharger GB-Northampton, 52.185729, -0.89127
-Supercharger GB-Orton, 4.453104, -2.605743
 Supercharger GB-Oxford, 51.7374, -1.0948
 Supercharger GB-Perth, 56.386, -3.4792
 Supercharger GB-Potters Bar, 51.687536, -0.223548
@@ -691,6 +690,7 @@ Supercharger GB-Richmond, 54.4421, -1.6713
 Supercharger GB-Sarn, 51.535351, -3.577637
 Supercharger GB-Sheffield, 53.314145, -1.281904
 Supercharger GB-Slough, 51.478181, -0.515753
+Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
 Supercharger GB-Warrington, 53.339515, -2.569358
 Supercharger GB-Warwick, 52.216831, -1.50513
@@ -860,23 +860,23 @@ Supercharger PL-Radom, 51.379569, 21.125477
 Supercharger PL-Trzebownisko, 50.089376, 22.047152
 Supercharger PL-Warsaw, 52.207827, 21.029574
 Supercharger PT-Alcacér do Sal, 38.391941, -8.513867
-Supercharger PT-Alcantarilha, 37.150601,-8.364433
+Supercharger PT-Alcantarilha, 37.150601, -8.364433
 Supercharger PT-Fátima, 39.635478, -8.688469
 Supercharger PT-Guarda, 40.559107, -7.230415
 Supercharger PT-Mealhada, 40.37306, -8.4805
 Supercharger PT-Montemor-o-Novo, 38.645753, -8.247265
-Supercharger PT-Ribeira de Pena, 41.503392,-7.80134
+Supercharger PT-Ribeira de Pena, 41.503392, -7.80134
 Supercharger RS-Aleksinac, 43.528816, 21.709413
 Supercharger RS-Belgrade, 44.710065, 20.561113
 Supercharger SE-Arboga, 59.426307, 15.827684
-Supercharger SE-Arvidsjaur, 5.589922,19.184091
-Supercharger SE-Borlänge, 60.478804,15.438655
+Supercharger SE-Arvidsjaur, 65.589922, 19.184091
+Supercharger SE-Borlänge, 60.478804, 15.438655
 Supercharger SE-Edsbruk, 57.97985, 16.482407
 Supercharger SE-Enköping, 59.658468, 17.076533
 Supercharger SE-Falkenberg, 56.93167, 12.51805
 Supercharger SE-Grums, 59.367618, 13.144922
 Supercharger SE-Gävle, 60.648513, 17.120583
-Supercharger SE-Hudiksvall, 61.714854,17.042692
+Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
 Supercharger SE-Jäckvik, 66.39067, 16.964868
 Supercharger SE-Kalmar, 56.673228, 16.321408
@@ -884,23 +884,23 @@ Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
 Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
-Supercharger SE-Køge, 55.489365,12.162954
+Supercharger SE-Køge, 55.489365, 12.162954
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
-Supercharger SE-Markaryd, 56.444825,13.603916
+Supercharger SE-Markaryd, 56.444825, 13.603916
 Supercharger SE-Mellbystrand, 56.500904, 12.9573
 Supercharger SE-Mora, 61.005921, 14.54418
-Supercharger SE-Nørre Alslev, 54.899885,11.89693
-Supercharger SE-Norrköping, 58.622734,16.153979
+Supercharger SE-Nørre Alslev, 54.899885, 11.89693
+Supercharger SE-Norrköping, 58.622734, 16.153979
 Supercharger SE-Puoltikasvaara, 67.44096 ,21.11529
 Supercharger SE-Skellefteå, 64.76235, 21.002864
-Supercharger SE-Slagelse, 55.388,11.3622
+Supercharger SE-Slagelse, 55.388, 11.3622
 Supercharger SE-Sollentuna, 59.496093, 17.924441
 Supercharger SE-Stockholm, 59.5006239, 17.926818000000026
 Supercharger SE-Storlien, 63.310045,12.109286
 Supercharger SE-Storuman, 65.092642, 17.107984
 Supercharger SE-Sundsvall, 62.398271, 17.339795
-Supercharger SE-Sveg, 62.034484,14.366261
+Supercharger SE-Sveg, 62.034484, 14.366261
 Supercharger SE-Tanum, 58.72117, 11.34538
 Supercharger SE-Torsby, 60.129704, 12.998069
 Supercharger SE-Tystberga, 58.918156, 17.367987
