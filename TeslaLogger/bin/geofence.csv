@@ -522,7 +522,7 @@ Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger DK-Køge, 55.489273, 12.162788
-Supercharger DK-Middelfart, 55.510639, 9.764306
+Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
 Supercharger DK-Rødekro, 55.067331, 9.361081
@@ -804,16 +804,16 @@ Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger NO-Brumunddal, 60.878507,10.929387
 Supercharger NO-Bygland, 58.82792, 7.796114
-Supercharger NO-Dombås, 62.073923, 9.125562
+Supercharger NO-Dombås, 62.074749, 9.12783
 Supercharger NO-Eidfjord, 60.467438, 7.068209
 Supercharger NO-Eidsvoll Verk, 60.312269, 11.145104
-Supercharger NO-Elverum, 60.884145, 11.540043
+Supercharger NO-Elverum, 60.884053, 11.541698
 Supercharger NO-Flå, 60.381236, 9.610003
 Supercharger NO-Gol, 60.70232, 8.9862
 Supercharger NO-Gol West, 60.697258,8.953551
 Supercharger NO-Grong, 64.464913, 12.316532
 Supercharger NO-Gulsvik, 60.381223, 9.609859
-Supercharger NO-Hernes, 60.932103, 11.675676
+Supercharger NO-Hernes, 60.933109, 11.676209
 Supercharger NO-Hokksund, 59.761033, 9.905583
 Supercharger NO-Holmestrand, 59.490174, 10.294565
 Supercharger NO-Hovden, 59.561243, 7.356849
@@ -831,7 +831,7 @@ Supercharger NO-Lier South, 59.766259, 10.257838
 Supercharger-V3 NO-Liertoppen, 59.80906, 10.299437
 Supercharger NO-Lillehammer, 61.13045, 10.43491
 Supercharger NO-Lillesand, 58.236817, 8.299052
-Supercharger NO-Lyngdal, 58.15653, 7.10298
+Supercharger NO-Lyngdal, 58.155643, 7.101816
 Supercharger NO-Mo i Rana, 66.307374, 14.152668
 Supercharger NO-Mosjøen, 65.83483634, 13.191672563
 Supercharger NO-Mosjøen North, 65.841627, 13.187939
@@ -859,9 +859,9 @@ Supercharger NO-Stjørdal, 63.466385, 10.918098
 Supercharger NO-Storjord, 66.814045, 15.401738
 Supercharger NO-Sundebru, 58.820783, 9.073746
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
-Supercharger NO-Vikeså, 58.632228, 6.078935
+Supercharger NO-Vikeså, 58.631954, 6.077949
 Supercharger NO-Vinje, 59.5701306, 7.992551
-Supercharger NO-Vinstra, 61.591797, 9.722393
+Supercharger NO-Vinstra, 61.59049, 9.72166
 Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer, 61.243236, 10.434457
@@ -888,7 +888,7 @@ Supercharger SE-Borlänge, 60.478804, 15.438655
 Supercharger SE-Edsbruk, 57.97985, 16.482407
 Supercharger SE-Enköping, 59.658468, 17.076533
 Supercharger SE-Falkenberg, 56.93167, 12.51805
-Supercharger SE-Grums, 59.367618, 13.144922
+Supercharger SE-Grums, 59.365749, 13.14537
 Supercharger SE-Gävle, 60.648513, 17.120583
 Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
@@ -906,14 +906,14 @@ Supercharger SE-Mellbystrand, 56.500904, 12.9573
 Supercharger SE-Mora, 61.005921, 14.54418
 Supercharger SE-Nørre Alslev, 54.899885, 11.89693
 Supercharger SE-Norrköping, 58.622734, 16.153979
-Supercharger SE-Puoltikasvaara, 67.44096 ,21.11529
+Supercharger SE-Puoltikasvaara, 67.440201, 21.115515
 Supercharger SE-Skellefteå, 64.76235, 21.002864
 Supercharger SE-Slagelse, 55.388, 11.3622
 Supercharger SE-Sollentuna, 59.496093, 17.924441
 Supercharger SE-Stockholm, 59.5006239, 17.926818000000026
 Supercharger SE-Storlien, 63.310045,12.109286
 Supercharger SE-Storuman, 65.092642, 17.107984
-Supercharger SE-Sundsvall, 62.398271, 17.339795
+Supercharger SE-Sundsvall, 62.398468, 17.338902
 Supercharger SE-Sveg, 62.034484, 14.366261
 Supercharger SE-Tanum, 58.72117, 11.34538
 Supercharger SE-Torsby, 60.129704, 12.998069
@@ -922,7 +922,7 @@ Supercharger SE-Töcksfors, 59.509437, 11.822381
 Supercharger SE-Töre,65.911639, 22.65727
 Supercharger SE-Uddevalla, 58.3516862, 11.8116943
 Supercharger SE-Ulricehamn, 57.814003, 13.418759
-Supercharger SE-Umeå, 63.811159, 20.250153
+Supercharger SE-Umeå, 63.810547, 20.250437
 Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
