@@ -3,6 +3,7 @@ Allego DE-Hannover-Lahe, 52.419121, 9.832369, 20
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 3
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Münchberg, 50.202763, 11.77689, 7
+Allego DE-Regensburg, 48,995373, 12,151138, 15
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 5
 
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
@@ -10,6 +11,7 @@ EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
 EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
 EnBW DE-Hohenwarsleben, 52,175060, 11,495039, 10
+EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
@@ -21,6 +23,8 @@ EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Wonnegau Ost, 49.647041, 8.293444
+EnBW DE-Wonnegau West, 49,644547, 8,290185
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
@@ -142,7 +146,7 @@ Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
-Ionity DE-Nempitz, 51.2901, 12.13757, 5
+Ionity DE-Nempitz, 51.290114,12.137547, 5
 Ionity DE-Neumarkt, 49.312948, 11.474745, 20
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -333,6 +337,7 @@ Ionity UK-Peterborough, 52.532663, -0.32065
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Fürholzen West, 48.33747, 11.6081
+Innogy DE-Hunsrück Ost, 49.963783, 7.768701
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
 Innogy DE-Münsterland West, 51.945622, 7.547827
 Innogy DE-Münsterland OSt, 51.942185, 7.551096
@@ -481,7 +486,9 @@ Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
-Supercharger DE-Nempitz, 51.29012, 12.13727, 15
+Supercharger DE-Nempitz, 51.290154,12.137387, 4
+Supercharger DE-Nempitz, 51.290095,12.137335, 4
+Supercharger DE-Nempitz, 51.290039,12.137335, 6
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger DE-Nossen, 51.08255, 13.27406
@@ -517,7 +524,7 @@ Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger DK-Køge, 55.489273, 12.162788
-Supercharger DK-Middelfart, 55.510639, 9.764306
+Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
 Supercharger DK-Rødekro, 55.067331, 9.361081
@@ -799,16 +806,16 @@ Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger NO-Brumunddal, 60.878507,10.929387
 Supercharger NO-Bygland, 58.82792, 7.796114
-Supercharger NO-Dombås, 62.073923, 9.125562
+Supercharger NO-Dombås, 62.074749, 9.12783
 Supercharger NO-Eidfjord, 60.467438, 7.068209
 Supercharger NO-Eidsvoll Verk, 60.312269, 11.145104
-Supercharger NO-Elverum, 60.884145, 11.540043
+Supercharger NO-Elverum, 60.884053, 11.541698
 Supercharger NO-Flå, 60.381236, 9.610003
 Supercharger NO-Gol, 60.70232, 8.9862
 Supercharger NO-Gol West, 60.697258,8.953551
 Supercharger NO-Grong, 64.464913, 12.316532
 Supercharger NO-Gulsvik, 60.381223, 9.609859
-Supercharger NO-Hernes, 60.932103, 11.675676
+Supercharger NO-Hernes, 60.933109, 11.676209
 Supercharger NO-Hokksund, 59.761033, 9.905583
 Supercharger NO-Holmestrand, 59.490174, 10.294565
 Supercharger NO-Hovden, 59.561243, 7.356849
@@ -826,7 +833,7 @@ Supercharger NO-Lier South, 59.766259, 10.257838
 Supercharger-V3 NO-Liertoppen, 59.80906, 10.299437
 Supercharger NO-Lillehammer, 61.13045, 10.43491
 Supercharger NO-Lillesand, 58.236817, 8.299052
-Supercharger NO-Lyngdal, 58.15653, 7.10298
+Supercharger NO-Lyngdal, 58.155643, 7.101816
 Supercharger NO-Mo i Rana, 66.307374, 14.152668
 Supercharger NO-Mosjøen, 65.83483634, 13.191672563
 Supercharger NO-Mosjøen North, 65.841627, 13.187939
@@ -854,9 +861,9 @@ Supercharger NO-Stjørdal, 63.466385, 10.918098
 Supercharger NO-Storjord, 66.814045, 15.401738
 Supercharger NO-Sundebru, 58.820783, 9.073746
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
-Supercharger NO-Vikeså, 58.632228, 6.078935
+Supercharger NO-Vikeså, 58.631954, 6.077949
 Supercharger NO-Vinje, 59.5701306, 7.992551
-Supercharger NO-Vinstra, 61.591797, 9.722393
+Supercharger NO-Vinstra, 61.59049, 9.72166
 Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer, 61.243236, 10.434457
@@ -883,7 +890,7 @@ Supercharger SE-Borlänge, 60.478804, 15.438655
 Supercharger SE-Edsbruk, 57.97985, 16.482407
 Supercharger SE-Enköping, 59.658468, 17.076533
 Supercharger SE-Falkenberg, 56.93167, 12.51805
-Supercharger SE-Grums, 59.367618, 13.144922
+Supercharger SE-Grums, 59.365749, 13.14537
 Supercharger SE-Gävle, 60.648513, 17.120583
 Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
@@ -901,14 +908,14 @@ Supercharger SE-Mellbystrand, 56.500904, 12.9573
 Supercharger SE-Mora, 61.005921, 14.54418
 Supercharger SE-Nørre Alslev, 54.899885, 11.89693
 Supercharger SE-Norrköping, 58.622734, 16.153979
-Supercharger SE-Puoltikasvaara, 67.44096 ,21.11529
+Supercharger SE-Puoltikasvaara, 67.440201, 21.115515
 Supercharger SE-Skellefteå, 64.76235, 21.002864
 Supercharger SE-Slagelse, 55.388, 11.3622
 Supercharger SE-Sollentuna, 59.496093, 17.924441
 Supercharger SE-Stockholm, 59.5006239, 17.926818000000026
 Supercharger SE-Storlien, 63.310045,12.109286
 Supercharger SE-Storuman, 65.092642, 17.107984
-Supercharger SE-Sundsvall, 62.398271, 17.339795
+Supercharger SE-Sundsvall, 62.398468, 17.338902
 Supercharger SE-Sveg, 62.034484, 14.366261
 Supercharger SE-Tanum, 58.72117, 11.34538
 Supercharger SE-Torsby, 60.129704, 12.998069
@@ -917,7 +924,7 @@ Supercharger SE-Töcksfors, 59.509437, 11.822381
 Supercharger SE-Töre,65.911639, 22.65727
 Supercharger SE-Uddevalla, 58.3516862, 11.8116943
 Supercharger SE-Ulricehamn, 57.814003, 13.418759
-Supercharger SE-Umeå, 63.811159, 20.250153
+Supercharger SE-Umeå, 63.810547, 20.250437
 Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
