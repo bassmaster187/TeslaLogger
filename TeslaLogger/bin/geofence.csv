@@ -3,6 +3,7 @@ Allego DE-Hannover-Lahe, 52.419121, 9.832369, 20
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 3
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Münchberg, 50.202763, 11.77689, 7
+Allego DE-Regensburg, 48,995373, 12,151138, 15
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 5
 
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
@@ -10,6 +11,7 @@ EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
 EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
 EnBW DE-Hohenwarsleben, 52,175060, 11,495039, 10
+EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
@@ -21,6 +23,8 @@ EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Wonnegau Ost, 49.647041, 8.293444
+EnBW DE-Wonnegau West, 49,644547, 8,290185
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
@@ -333,6 +337,7 @@ Ionity UK-Peterborough, 52.532663, -0.32065
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Fürholzen West, 48.33747, 11.6081
+Innogy DE-Hunsrück Ost, 49.963783, 7.768701
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
 Innogy DE-Münsterland West, 51.945622, 7.547827
 Innogy DE-Münsterland OSt, 51.942185, 7.551096
