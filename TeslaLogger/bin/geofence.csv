@@ -16,6 +16,7 @@ EnBW DE-Lonetal West, 48.584012, 10.175805, 6
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
+EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
@@ -38,6 +39,7 @@ Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
 Fastned NL-Fustweg, 52.385156, 4.661724
 Fastned NL-Labbegat, 51.69393, 5.01359
+Fastned NL-Ooiendonk, 51.556297, 5.361872
 
 Ionity AT-Angath Nord, 47.519215, 12.065526
 Ionity AT-Eisentratten, 46.919943, 13.579276
@@ -328,7 +330,14 @@ Ionity UK-Milton Keynes, 52.05561, -0.6987
 Ionity UK-Perth, 56.419402, -3.463082
 Ionity UK-Peterborough, 52.532663, -0.32065
 
+Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
+Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Fürholzen West, 48.33747, 11.6081
+Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
+Innogy DE-Münsterland West, 51.945622, 7.547827
+Innogy DE-Münsterland OSt, 51.942185, 7.551096
+Innogy DE-Ruraue West, 50.929795, 6.337327
+
 
 Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488643, 9.740260
@@ -758,7 +767,7 @@ Supercharger NL-Assen, 52.9929,6.52447
 Supercharger NL-Badhoevedorp, 52.329302, 4.78487
 Supercharger NL-Breda, 51.577493, 4.729968
 Supercharger NL-Breukelen, 52.1672253, 4.988661
-Supercharger NL-Bunnik, 52.061418, 5.20582
+Supercharger NL-Bunnik, 52.061077, 5.2055
 Supercharger NL-Dordrecht, 51.7744542, 4.65301
 Supercharger NL-Drachten, 53.105883, 6.129539
 Supercharger NL-Duiven, 51.958931, 6.020418
@@ -778,7 +787,7 @@ Supercharger NL-Urmond, 50.9894104, 5.7815227
 Supercharger NL-Vuren, 51.838827, 5.090846
 Supercharger NL-Zaltbommel, 51.796330, 5.254697
 Supercharger NL-Zevenaar, 51.940585, 6.081817
-Supercharger NL-Zwolle, 52.531375, 6.157279
+Supercharger NL-Zwolle, 52.531928, 6.157031
 Supercharger NO-Aksdal, 59.423006, 5.44306
 Supercharger NO-Alvdal, 62.114854, 10.616826
 Supercharger NO-Åndalsnes, 62.557776,7.685321
