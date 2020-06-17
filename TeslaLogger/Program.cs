@@ -417,9 +417,9 @@ namespace TeslaLogger
                         }
                     }
 
-                    SetCurrentState(TeslaState.Drive);
                     webhelper.StartStreamThread(); // für altitude
                     DBHelper.StartDriveState();
+                    SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
                     return;
@@ -1017,7 +1017,7 @@ namespace TeslaLogger
                 string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
                 Logfile.Log("DisableSentryMode(): " + result);
             }*/
-        }
+         }
 
         private static void HandleSpecialFlag_HighFrequencyLogging(string _flagconfig)
         {
