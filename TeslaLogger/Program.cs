@@ -391,7 +391,8 @@ namespace TeslaLogger
         private static void HandleState_Online()
         {
             {
-                if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
+                //if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
+                if (webhelper.IsDriving())
                 {
                     webhelper.ResetLastChargingState();
                     lastCarUsed = DateTime.Now;
