@@ -156,6 +156,12 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
+                	if (!DBHelper.ColumnExists("chargingstate", "costs"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN costs decimal(3,2) NULL");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN costs decimal(3,2) NULL", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
 
                 DBHelper.EnableMothership();
 
