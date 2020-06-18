@@ -10,7 +10,7 @@ namespace TeslaLogger
 {
     internal class UpdateTeslalogger
     {
-        readonly private static string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private static readonly string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private static bool shareDataOnStartup = false;
         private static System.Threading.Timer timer;
 
@@ -288,8 +288,8 @@ namespace TeslaLogger
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
-                    string newphpini = System.Text.RegularExpressions.Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
-                    newphpini = System.Text.RegularExpressions.Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
+                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
+                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
 
                     File.WriteAllText(phpinipath, newphpini);
 
@@ -751,11 +751,11 @@ namespace TeslaLogger
         {
             try
             {
-                System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
+                Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"(.+)\\\"");
 
-                System.Text.RegularExpressions.MatchCollection matches = regexAlias.Matches(content);
+                MatchCollection matches = regexAlias.Matches(content);
 
-                foreach (System.Text.RegularExpressions.Match match in matches)
+                foreach (Match match in matches)
                 {
                     content = ReplaceAliasTag(content, match.Groups[1].Value, dictLanguage);
                 }
@@ -776,7 +776,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
+            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
             string replace = "\"alias\": \""+dictLanguage[v]+"\"";
 
             return regexAlias.Replace(content, replace);
@@ -790,7 +790,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"name\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"name\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -804,7 +804,7 @@ namespace TeslaLogger
                 return content;
             }
 
-            System.Text.RegularExpressions.Regex regexAlias = new System.Text.RegularExpressions.Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
+            Regex regexAlias = new Regex("\\\"title\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"title\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
@@ -940,7 +940,7 @@ namespace TeslaLogger
                     Logfile.Log(" *** Check new Version ***");
 
                     string online_version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (String.IsNullOrEmpty(online_version))
+                    if (string.IsNullOrEmpty(online_version))
                     {
                         // recheck in 10 Minutes
                         Logfile.Log("Empty Version String - recheck in 10 minutes");
@@ -979,7 +979,7 @@ namespace TeslaLogger
                         else
                         {
                             Logfile.Log("Rebooting");
-                            UpdateTeslalogger.Exec_mono("reboot", "");
+                            Exec_mono("reboot", "");
                         }
                     }
 
@@ -995,7 +995,9 @@ namespace TeslaLogger
         public static bool UpdateNeeded(string currentVersion, string online_version, Tools.UpdateType updateType)
         {
             if (updateType == Tools.UpdateType.none)
+            {
                 return false;
+            }
 
             if (updateType == Tools.UpdateType.stable || updateType == Tools.UpdateType.all)
             {
@@ -1005,10 +1007,14 @@ namespace TeslaLogger
                 if (cv.CompareTo(ov) < 0)
                 {
                     if (updateType == Tools.UpdateType.all)
+                    {
                         return true;
-                    
+                    }
+
                     if (ov.Build == 0 && ov.Revision == 0)
+                    {
                         return true;
+                    }
                 }
 
                 return false;

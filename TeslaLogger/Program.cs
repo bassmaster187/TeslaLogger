@@ -41,7 +41,6 @@ namespace TeslaLogger
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-
         private enum HFLMode
         {
             Ticks,
@@ -111,10 +110,12 @@ namespace TeslaLogger
                                 break;
 
                             case TeslaState.Park:
+                                // this state is currently unused
                                 Thread.Sleep(5000);
                                 break;
 
                             case TeslaState.WaitForSleep:
+                                // this state is currently unused
                                 Thread.Sleep(5000);
                                 break;
 
@@ -151,7 +152,7 @@ namespace TeslaLogger
             }
         }
 
-        private static bool IsHighFrequenceLoggingEnabled(bool justcheck = false)
+        public static bool IsHighFrequenceLoggingEnabled(bool justcheck = false)
         {
             if (highFrequencyLogging)
             {
@@ -1030,16 +1031,16 @@ namespace TeslaLogger
                     switch (m.Groups[2].Captures[0].ToString())
                     {
                         case "s":
-                            until.AddSeconds(duration);
+                            until = until.AddSeconds(duration);
                             break;
                         case "m":
-                            until.AddMinutes(duration);
+                            until = until.AddMinutes(duration);
                             break;
                         case "h":
-                            until.AddHours(duration);
+                            until = until.AddHours(duration);
                             break;
                         case "d":
-                            until.AddDays(duration);
+                            until = until.AddDays(duration);
                             break;
                         default:
                             Logfile.Log("HandleSpecialFlagHighFrequencyLogging unhandled time parameter: " + m.Groups[1].Captures[0].ToString() + m.Groups[2].Captures[0].ToString());

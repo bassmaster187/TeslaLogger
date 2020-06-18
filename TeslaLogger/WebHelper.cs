@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -44,7 +43,7 @@ namespace TeslaLogger
 
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
-        readonly static Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
+        private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         static WebHelper()
         {
@@ -221,9 +220,13 @@ namespace TeslaLogger
                     }
 
                     if (r2["charging_state"] == null)
+                    {
                         Logfile.Log("charging_state = null");
+                    }
                     else if (resultContent != null && resultContent.Contains("vehicle unavailable"))
+                    {
                         Logfile.Log("charging_state: vehicle unavailable");
+                    }
 
                     Thread.Sleep(10000);
 
@@ -338,7 +341,7 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, false, charger_pilot_current, charge_current_request);
+                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, Program.IsHighFrequenceLoggingEnabled(true) ? true : false, charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
@@ -2202,6 +2205,8 @@ FROM
             }
             catch (Exception ex)
             {
+                Logfile.Log("TaskerWakeupToken Exception: " + ex.Message);
+                Logfile.ExceptionWriter(ex, "TaskerWakeupToken Exception");
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
             }
 
@@ -2231,8 +2236,10 @@ FROM
             try
             {
                 string contents;
-                using (var wc = new System.Net.WebClient())
+                using (WebClient wc = new WebClient())
+                {
                     contents = wc.DownloadString("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+                }
 
                 Match m = regexAssemblyVersion.Match(contents);
                 string version = m.Groups[1].Value;

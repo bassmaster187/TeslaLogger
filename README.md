@@ -77,6 +77,10 @@ Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLog
 ```
 value 0 is 1st car / value 1 is 2nd car and so on...
 
+## Custom Points of Interest (POI)
+
+Details how to add / manage your own Points of Interest (POI) are [described here](TeslaLogger/Geofence.md)
+
 # German manual
 http://teslalogger.de/handbuch.php
 
