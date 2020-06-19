@@ -17,7 +17,14 @@ namespace TeslaLogger
         public void ParseGeofenceLine1()
         {
             List<Address> list = new List<Address>();
-            Geofence.ParseGeofenceLine("filename", list, "line", 50);
+            Geofence.ParseGeofenceLine("filename", list, "", 50);
+        }
+
+        [Test()]
+        public void ParseGeofenceLine2()
+        {
+            List<Address> list = new List<Address>();
+            Geofence.ParseGeofenceLine("filename", list, "gdsgdfgdfgfgdggd", 50);
         }
     }
 }
