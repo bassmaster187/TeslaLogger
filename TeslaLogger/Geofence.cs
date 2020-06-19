@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("TLNUnit")]
+
 namespace TeslaLogger
 {
     public class Address
@@ -243,7 +245,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void ParseGeofenceLine(string filename, List<Address> localList, string line, int radius)
+        internal static void ParseGeofenceLine(string filename, List<Address> localList, string line, int radius)
         {
             string[] args = Regex.Split(line, ",");
 
