@@ -1,13 +1,16 @@
 ﻿using NUnit.Framework;
-using System;
+using TeslaLogger;
+
 namespace TLNUnit
 {
     [TestFixture()]
     public class Test
     {
         [Test()]
-        public void TestCase()
+        public void GeofenceInitTest()
         {
+            Geofence geofence = new Geofence(false);
+            Assert.NotNull(geofence);
         }
     }
 }
