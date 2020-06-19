@@ -263,7 +263,7 @@ namespace TeslaLogger
                 double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
                 radius);
 
-            if (args.Length > 4 && args[4] != null)
+            if (args.Length > 4 && args[4] != null && args[4].Length > 0)
             {
                 string flags = args[4];
                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
