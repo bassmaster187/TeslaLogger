@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeofenceTest.cs" />
+    <Compile Include="AutoUpdateTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
