@@ -212,7 +212,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void ReadGeofenceFile(string filename, List<Address> localList)
+        internal static void ReadGeofenceFile(string filename, List<Address> localList)
         {
             Logfile.Log("Read Geofence File: " + filename);
             string line;

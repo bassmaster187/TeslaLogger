@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 
 namespace TeslaLogger
@@ -126,6 +127,50 @@ namespace TeslaLogger
             Geofence.ParseGeofenceLine("geofence.csv", list, "Supercharger DE-Herzsprung, 53.067343, 12.533212,25,", 50);
             Assert.IsNotEmpty(list);
             Assert.AreEqual(list[0].radius, 25);
+        }
+
+        [Test()]
+        public void ParseEmptyGeofenceFile1()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence.csv";
+            Geofence.ReadGeofenceFile(file, list);
+            Assert.IsEmpty(list);
+        }
+
+        [Test()]
+        public void ParseEmptyGeofenceFile2()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence-private.csv";
+            Geofence.ReadGeofenceFile(file, list);
+            Assert.IsEmpty(list);
+        }
+
+        [Test()]
+        public void ParseNotExistingGeofenceFile()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "this-file-does-not-exist.csv";
+            Assert.Throws<FileNotFoundException>(delegate { Geofence.ReadGeofenceFile(file, list); });
+        }
+
+        [Test()]
+        public void ParseValidGeofenceFile1()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            Geofence.ReadGeofenceFile(file, list);
+            Assert.IsNotEmpty(list);
+        }
+
+        [Test()]
+        public void ParseValidGeofenceFile2()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            Geofence.ReadGeofenceFile(file, list);
+            Assert.IsNotEmpty(list);
         }
     }
 }
