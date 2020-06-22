@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace TeslaLogger
@@ -11,6 +12,58 @@ namespace TeslaLogger
         {
             Geofence geofence = new Geofence(false);
             Assert.NotNull(geofence);
+        }
+
+        [Test()]
+        public void GeofenceTest1() {
+            Geofence geofence = new Geofence(false);
+            // Supercharger DE-Ulm, 48.456714, 10.030097, 18
+            Address a = geofence.GetPOI(48.456714, 10.030097);
+            Assert.NotNull(a);
+            Assert.NotNull(a.name);
+            Assert.AreEqual(a.name, "Supercharger DE-Ulm");
+        }
+
+        [Test()]
+        public void GeofenceTest2()
+        {
+            Geofence geofence = new Geofence(false);
+            Address a = geofence.GetPOI(48.456616, 10.030200);
+            Assert.NotNull(a);
+            Assert.NotNull(a.name);
+            Assert.AreEqual(a.name, "Supercharger DE-Ulm");
+        }
+
+        [Test()]
+        public void GeofenceTest3()
+        {
+            Geofence geofence = new Geofence(false);
+            Address a = geofence.GetPOI(48.456790, 10.030014);
+            Assert.NotNull(a);
+            Assert.NotNull(a.name);
+            Assert.AreEqual(a.name, "Supercharger DE-Ulm");
+        }
+
+        [Test()]
+        public void GeofenceTest4()
+        {
+            Geofence geofence = new Geofence(false);
+            Address a = geofence.GetPOI(48.456691, 10.030241);
+            Assert.NotNull(a);
+            Assert.NotNull(a.name);
+            Assert.AreEqual(a.name, "Supercharger DE-Ulm");
+        }
+
+        [Test()]
+        public void GeofenceTest5()
+        {
+            Geofence geofence = new Geofence(false);
+            // EnBW DE-Ulm, 48.456880, 10.029673, 15
+            Address a = geofence.GetPOI(48.456888, 10.029635);
+            Assert.NotNull(a);
+            Assert.NotNull(a.name);
+            Console.WriteLine(a);
+            Assert.AreEqual(a.name, "EnBW DE-Ulm");
         }
 
         [Test()]

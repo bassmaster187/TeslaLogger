@@ -30,11 +30,14 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeofenceTest.cs" />
     <Compile Include="AutoUpdateTest.cs" />
     <Compile Include="ReverseGecocodingAsyncTest.cs" />
+    <Compile Include="JapaneseTest.cs" />
+    <Compile Include="CarTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
