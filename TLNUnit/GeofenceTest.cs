@@ -220,5 +220,35 @@ namespace TeslaLogger
             int count_geofence_private = list.Count;
             Assert.Greater(count_geofence_private, count_geofence);
         }
+
+        [Test()]
+        public void ParseValidGeofenceFiles5()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence.csv";
+            Geofence.ReadGeofenceFiles(list, file);
+            Assert.IsEmpty(list);
+            int count_geofence = list.Count;
+            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            Geofence.ReadGeofenceFiles(list, file, true);
+            Assert.IsNotEmpty(list);
+            int count_geofence_private = list.Count;
+            Assert.Greater(count_geofence_private, count_geofence);
+        }
+
+        [Test()]
+        public void ParseValidGeofenceFiles6()
+        {
+            List<Address> list = new List<Address>();
+            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            Geofence.ReadGeofenceFiles(list, file);
+            Assert.IsNotEmpty(list);
+            int count_geofence = list.Count;
+            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence-private.csv";
+            Geofence.ReadGeofenceFiles(list, file, true);
+            Assert.IsNotEmpty(list);
+            int count_geofence_private = list.Count;
+            Assert.GreaterOrEqual(count_geofence_private, count_geofence);
+        }
     }
 }
