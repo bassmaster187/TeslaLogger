@@ -26,6 +26,14 @@ namespace TeslaLogger
             GoSleep
         }
 
+        public enum TLMemCacheKey
+        {
+            OdometerMustNotBeNull,
+            WaitingForCarToGoToSleep,
+            HttpClientTimeOuts,
+            GetOutsideTempAsync
+        }
+
         // encapsulate state
         private static TeslaState _currentState = TeslaState.Start;
 
@@ -35,6 +43,7 @@ namespace TeslaLogger
         private static DateTime lastCarUsed = DateTime.Now;
         private static DateTime lastOdometerChanged = DateTime.Now;
         private static DateTime lastTryTokenRefresh = DateTime.Now;
+        private static string lastSetChargeLimitAddressName = string.Empty;
         private static bool goSleepWithWakeup = false;
         private static double odometerLastTrip;
         private static bool highFrequencyLogging = false;
@@ -173,7 +182,7 @@ namespace TeslaLogger
                         if (ts.TotalMilliseconds > 0)
                         {
                             return true;
-                        } 
+                        }
                         break;
                     default:
                         break;
@@ -967,6 +976,11 @@ namespace TeslaLogger
                                 break;
                             case Address.SpecialFlags.EnableSentryMode:
                                 break;
+                            case Address.SpecialFlags.SetChargeLimit:
+                                HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
+                                break;
+                            case Address.SpecialFlags.ClimateOff:
+                                break;
                             default:
                                 Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
                                 break;
@@ -1004,6 +1018,11 @@ namespace TeslaLogger
                         case Address.SpecialFlags.EnableSentryMode:
                             HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
                             break;
+                        case Address.SpecialFlags.SetChargeLimit:
+                            break;
+                        case Address.SpecialFlags.ClimateOff:
+                            HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
+                            break;
                         default:
                             Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
                             break;
@@ -1019,6 +1038,32 @@ namespace TeslaLogger
                 Logfile.Log("DisableSentryMode(): " + result);
             }*/
          }
+
+        private static void HandleSpecialFlag_SetChargeLimit(Address _addr, string _flagconfig)
+        {
+            string pattern = "([0-9]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                if (m.Groups[1].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int chargelimit))
+                {
+                    if (!lastSetChargeLimitAddressName.Equals(_addr.name))
+                    {
+                        Thread ChargeLimitSetter = new Thread(() =>
+                        {
+                            Logfile.Log($"SetChargeLimit to {chargelimit} ...");
+                            string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                            Logfile.Log("set_charge_limit(): " + result);
+                        })
+                        {
+                            Priority = ThreadPriority.Normal
+                        };
+                        ChargeLimitSetter.Start();
+                        lastSetChargeLimitAddressName = _addr.name;
+                    }
+                }
+            }
+        }
 
         private static void HandleSpecialFlag_HighFrequencyLogging(string _flagconfig)
         {
@@ -1070,9 +1115,16 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Logfile.Log("OpenChargePort ...");
-                string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
-                Logfile.Log("openChargePort(): " + result);
+                Thread ChargePortOpener = new Thread(() =>
+                {
+                    Logfile.Log("OpenChargePort ...");
+                    string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
+                    Logfile.Log("charge_port_door_open(): " + result);
+                })
+                {
+                    Priority = ThreadPriority.Normal
+                };
+                ChargePortOpener.Start();
             }
         }
 
@@ -1082,9 +1134,35 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Logfile.Log("EnableSentryMode ...");
-                string result = webhelper.PostCommand("command/set_sentry_mode?on=true", null).Result;
-                Logfile.Log("EnableSentryMode(): " + result);
+                Thread SentryModeEnabler = new Thread(() =>
+                {
+                    Logfile.Log("EnableSentryMode ...");
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
+                    Logfile.Log("set_sentry_mode(): " + result);
+                })
+                {
+                    Priority = ThreadPriority.Normal
+                };
+                SentryModeEnabler.Start();
+            }
+        }
+
+        private static void HandleSpeciaFlag_ClimateOff(string _flagconfig, string _oldState, string _newState)
+        {
+            string pattern = "([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
+            {
+                Thread ClimateOffThread = new Thread(() =>
+                {
+                    Logfile.Log("ClimateOff ...");
+                    string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
+                    Logfile.Log("auto_conditioning_stop(): " + result);
+                })
+                {
+                    Priority = ThreadPriority.Normal
+                };
+                ClimateOffThread.Start();
             }
         }
     }
