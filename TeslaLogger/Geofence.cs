@@ -163,7 +163,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void ReadGeofenceFiles(List<Address> list, string filename, bool replaceExistingPOIs = false)
+        internal static void ReadGeofenceFiles(List<Address> list, string filename, bool replaceExistingPOIs = false)
         {
             filename = filename.Replace(@"Debug\", "");
             List<Address> localList = new List<Address>();
