@@ -229,14 +229,11 @@ namespace TeslaLogger
                         bool keepAddr = true;
                         foreach (string localName in uniqueNameList)
                         {
-                            if (addr != null && addr.name != null)
+                            if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
                             {
-                                if (localName != null && localName.Equals(addr.name))
-                                {
-                                    Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
-                                    keepAddr = false;
-                                    break;
-                                }
+                                Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
+                                keepAddr = false;
+                                break;
                             }
                         }
                         if (keepAddr)
