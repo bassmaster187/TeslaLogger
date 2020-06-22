@@ -28,9 +28,6 @@ namespace TeslaLogger
 
         public enum TLMemCacheKey
         {
-            OdometerMustNotBeNull,
-            WaitingForCarToGoToSleep,
-            HttpClientTimeOuts,
             GetOutsideTempAsync
         }
 
