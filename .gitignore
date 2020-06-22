@@ -33,3 +33,7 @@ TeslaLogger/bin/SRTM-Data/*
 TeslaLogger/bin/settings.json
 .DS_Store
 .axoCover/settings.json
+TeslaLogger/bin/Exception/*
+TeslaLogger/bin/DISPLAY_NAME
+TeslaLogger/bin/TASKERTOKEN
+TeslaLogger/bin/weather.ini
