@@ -16,7 +16,8 @@ namespace TeslaLogger
         }
 
         [Test()]
-        public void GeofenceTest1() {
+        public void GeofenceTest1()
+        {
             Geofence geofence = new Geofence(false);
             // Supercharger DE-Ulm, 48.456714, 10.030097, 18
             Address a = geofence.GetPOI(48.456714, 10.030097);
@@ -127,13 +128,14 @@ namespace TeslaLogger
             Geofence.ParseGeofenceLine("geofence.csv", list, "Supercharger DE-Herzsprung, 53.067343, 12.533212,25,", 50);
             Assert.IsNotEmpty(list);
             Assert.AreEqual(list[0].radius, 25);
+            Assert.AreEqual(list.Count, 1);
         }
 
         [Test()]
         public void ParseEmptyGeofenceFile1()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/empty-files/geofence.csv";
             Geofence.ReadGeofenceFile(file, list);
             Assert.IsEmpty(list);
         }
@@ -142,7 +144,7 @@ namespace TeslaLogger
         public void ParseEmptyGeofenceFile2()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence-private.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/empty-files/geofence-private.csv";
             Geofence.ReadGeofenceFile(file, list);
             Assert.IsEmpty(list);
         }
@@ -159,7 +161,7 @@ namespace TeslaLogger
         public void ParseValidGeofenceFile1()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence.csv";
             Geofence.ReadGeofenceFile(file, list);
             Assert.IsNotEmpty(list);
         }
@@ -168,7 +170,7 @@ namespace TeslaLogger
         public void ParseValidGeofenceFile2()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence-private.csv";
             Geofence.ReadGeofenceFile(file, list);
             Assert.IsNotEmpty(list);
         }
@@ -177,7 +179,7 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles1()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
         }
@@ -186,7 +188,7 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles2()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence-private.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
         }
@@ -195,11 +197,11 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles3()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
             int count_geofence = list.Count;
-            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence-private.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
             int count_geofence_private = list.Count;
@@ -210,11 +212,11 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles4()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
             int count_geofence = list.Count;
-            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence-private.csv";
             Geofence.ReadGeofenceFiles(list, file, true);
             Assert.IsNotEmpty(list);
             int count_geofence_private = list.Count;
@@ -225,11 +227,11 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles5()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/empty-files/geofence.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsEmpty(list);
             int count_geofence = list.Count;
-            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence-private.csv";
+            file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence-private.csv";
             Geofence.ReadGeofenceFiles(list, file, true);
             Assert.IsNotEmpty(list);
             int count_geofence_private = list.Count;
@@ -240,15 +242,33 @@ namespace TeslaLogger
         public void ParseValidGeofenceFiles6()
         {
             List<Address> list = new List<Address>();
-            string file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/valid-files/geofence.csv";
+            string file = FileManager.GetExecutingPath() + "../../NUnit/testdata/valid-files/geofence.csv";
             Geofence.ReadGeofenceFiles(list, file);
             Assert.IsNotEmpty(list);
             int count_geofence = list.Count;
-            file = FileManager.GetExecutingPath() + "/../../NUnit/testdata/empty-files/geofence-private.csv";
+            file = FileManager.GetExecutingPath() + "../../NUnit/testdata/empty-files/geofence-private.csv";
             Geofence.ReadGeofenceFiles(list, file, true);
             Assert.IsNotEmpty(list);
             int count_geofence_private = list.Count;
             Assert.GreaterOrEqual(count_geofence_private, count_geofence);
+        }
+
+        [Test()]
+        public void SpecialFlags1()
+        {
+            List<Address> list = new List<Address>();
+            Geofence.ParseGeofenceLine("filename", list, "Supercharger DE-Blankenfelde-Mahlow,52.308921402353334,13.444712162017824,20,+ocp:R->P+hfl:5m+scl:90", 50);
+            Assert.IsNotEmpty(list);
+            Assert.IsNotEmpty(list[0].specialFlags);
+        }
+
+        [Test()]
+        public void SpecialFlags2()
+        {
+            List<Address> list = new List<Address>();
+            Geofence.ParseGeofenceLine("filename", list, "Supercharger DE-Blankenfelde-Mahlow,52.308921402353334,13.444712162017824,,+ocp:R->P+hfl:5m+scl:90", 50);
+            Assert.IsNotEmpty(list);
+            Assert.IsNotEmpty(list[0].specialFlags);
         }
     }
 }
