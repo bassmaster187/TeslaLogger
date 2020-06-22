@@ -391,7 +391,8 @@ namespace TeslaLogger
         private static void HandleState_Online()
         {
             {
-                if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
+                //if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
+                if (webhelper.IsDriving())
                 {
                     webhelper.ResetLastChargingState();
                     lastCarUsed = DateTime.Now;
@@ -417,9 +418,9 @@ namespace TeslaLogger
                         }
                     }
 
-                    SetCurrentState(TeslaState.Drive);
                     webhelper.StartStreamThread(); // für altitude
                     DBHelper.StartDriveState();
+                    SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
                     return;
@@ -1017,7 +1018,7 @@ namespace TeslaLogger
                 string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
                 Logfile.Log("DisableSentryMode(): " + result);
             }*/
-        }
+         }
 
         private static void HandleSpecialFlag_HighFrequencyLogging(string _flagconfig)
         {
