@@ -127,6 +127,7 @@ Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219137, 10.127765
 Ionity DE-Katzenfurt Süd, 50.620347, 8.362918
+Ionity DE-Kirchheim (Tal), 50.833837, 9.570775
 Ionity DE-Köschinger Forst Ost, 48.836599, 11.472234
 Ionity DE-Köschinger Forst West, 48.837085, 11.469313
 Ionity DE-Lechwiesen Nord, 48.059266, 10.846791
@@ -146,7 +147,7 @@ Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
-Ionity DE-Nempitz, 51.290114,12.137547, 5
+Ionity DE-Nempitz, 51.290114,12.137547, 6
 Ionity DE-Neumarkt, 49.312948, 11.474745, 20
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -154,6 +155,7 @@ Ionity DE-Ohrenbach Ost, 49.485555, 10.213267
 Ionity DE-Ohrenbach West, 49.484491, 10.211978
 Ionity DE-Ostetal Nord, 53.299981, 9.532557
 Ionity DE-Ostetal Süd, 53.299087, 9.53517
+Ionity DE-Pilsting, 48.692530, 12.672979
 Ionity DE-Reinhardshain Nord, 50.622937, 8.894846
 Ionity DE-Reinhardshain Süd, 50.622096, 8.897196
 Ionity DE-Remscheid Ost, 51.158407, 7.230332
@@ -178,7 +180,9 @@ Ionity DK-Nyborg, 55.30933, 10.80495
 Ionity DK-Skanderborg, 56.06861, 9.97816
 Ionity ES-Ariza Norte, 41.31261, -2.00133
 Ionity ES-Ariza Sur, 41.311642, -2.002738
+Ionity ES-Campo de las Naciones, 40.458398, -3.616092
 Ionity ES-El Hidalgo, 38.824574, -3.396857
+Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
 Ionity ES-Vila Sana, 41.643444, 0.931306
@@ -206,10 +210,13 @@ Ionity FR-Gevrey-Chambertin Est, 47.223166, 5.010984
 Ionity FR-Glanon, 47.032073, 5.109707
 Ionity FR-Gueux, 49.244484, 3.923935
 Ionity FR-Jura, 46.774589, 5.523009
+Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
 Ionity FR-La Réserve, 47.974493, 3.197267
 Ionity FR-Labenne Est, 43.586191, -1.419585
 Ionity FR-Labenne Ouest, 43.586073, -1.420776
+Ionity FR-Lacq Audéjos Nord, 43.418629, -0.584799
+Ionity FR-Lacq Audéjos Sud, 43.421850, -0.598593
 Ionity FR-Langres Noidant, 47.813347, 5.22459
 Ionity FR-Langres Perrogney, 47.815184, 5.223172
 Ionity FR-Lochères, 47.30968, 4.501811
@@ -333,6 +340,7 @@ Ionity UK-Maidstone, 51.26566, 0.61576
 Ionity UK-Milton Keynes, 52.05561, -0.6987
 Ionity UK-Perth, 56.419402, -3.463082
 Ionity UK-Peterborough, 52.532663, -0.32065
+Ionity UK-Polmadie, 55.837232, -4.242494
 
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
