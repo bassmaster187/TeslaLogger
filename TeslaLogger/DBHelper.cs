@@ -25,6 +25,7 @@ namespace TeslaLogger
 
         public static void EnableMothership()
         {
+            GetMothershipCommandsFromDB();
             mothershipEnabled = true;
         }
 
