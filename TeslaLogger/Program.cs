@@ -380,7 +380,7 @@ namespace TeslaLogger
                     lastCarUsed = DateTime.Now;
                     if (IsHighFrequenceLoggingEnabled())
                     {
-                        Logfile.Log("HighFrequenceLogging ...");
+                        Logfile.Log("HighFrequencyLogging ...");
                     }
                     else
                     {
