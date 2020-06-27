@@ -224,27 +224,21 @@ namespace TeslaLogger
                             uniqueNameList.Add(addr.name);
                         }
                     }
-                    if (uniqueNameList.Count > 0)
+                    foreach (Address addr in list)
                     {
-                        foreach (Address addr in list)
+                        bool keepAddr = true;
+                        foreach (string localName in uniqueNameList)
                         {
-                            bool keepAddr = true;
-                            foreach (string localName in uniqueNameList)
+                            if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
                             {
-                                if (addr != null && addr.name != null)
-                                {
-                                    if (localName.Equals(addr.name))
-                                    {
-                                        Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
-                                        keepAddr = false;
-                                        break;
-                                    }
-                                }
+                                Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
+                                keepAddr = false;
+                                break;
                             }
-                            if (keepAddr)
-                            {
-                                localList.Add(addr);
-                            }
+                        }
+                        if (keepAddr)
+                        {
+                            localList.Add(addr);
                         }
                     }
                     list.Clear();
