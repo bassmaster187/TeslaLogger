@@ -1,4 +1,7 @@
 <?PHP
+
+	unlink("/etc/teslalogger/wakeupteslalogger.txt");
+
 	$filename = "/etc/teslalogger/cmd_gosleep.txt";
 	
 	$ret =	file_put_contents ($filename,".");
