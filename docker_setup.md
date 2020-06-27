@@ -57,7 +57,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-after a minute or two, everything should be ready.
+after a minute or two, everything should be ready. On some slow machines or NAS, that could take more than 10 Minutes. Especially the database may take longer, so don't give up, if Teslalogger can't connect to the DB at the first startup. 
 
 Try to connect to Grafana with you favorite browser:
 http://localhost:3000 (admin/teslalogger)
