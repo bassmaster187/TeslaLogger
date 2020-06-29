@@ -78,11 +78,9 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php">Backup</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php">Restore</a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php">Geofence</a></li>
-                            <?PHP if (file_exists("/etc/teslalogger/cmd_gosleep.txt"))
-                            {?>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('/wakeup.php', 'Wakeup!', true);">Wakeup Teslalogger!</a></li>
-                            <?PHP 
-                            } else { ?>
+                            <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep.txt"))
+                            {?>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('gosleep.php', 'Sleep!', true);">Suspend Teslalogger</a></li>
                             <?PHP 
                             } ?>
