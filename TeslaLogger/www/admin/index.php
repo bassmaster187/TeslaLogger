@@ -27,6 +27,11 @@ require("language.php");
 	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
+	var perfEntries = performance.getEntriesByType("navigation");
+	if (perfEntries && perfEntries.length > 0 && perfEntries[0].type === "back_forward") {
+		location.reload(true);
+	}
+
   $( function() {
     // $("button").button();
 	GetCurrentData();
@@ -275,10 +280,18 @@ require("language.php");
 	}
   
 function ShowInfo()
-{
-	
+{	
+	<?php	
+	if (file_exists("/etc/teslalogger/cmd_gosleep.txt"))
+	{?>
+		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
+		$(".HeaderT").show();
+		$("#PositiveButton").text("<?php t("Resume Teslalogger"); ?>");
+		$("#PositiveButton").click(function(){BackgroudRun('/wakeup.php', 'Wakeup!', true);});
+		$("#NegativeButton").hide();
 	<?php
-	if (!file_exists("/etc/teslalogger/sharedata.txt") && 
+	}
+	else if (!file_exists("/etc/teslalogger/sharedata.txt") && 
 	!file_exists("/etc/teslalogger/nosharedata.txt") &&
 	!file_exists("/tmp/sharedata.txt") && 
 	!file_exists("/tmp/nosharedata.txt")

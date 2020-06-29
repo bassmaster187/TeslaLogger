@@ -158,7 +158,7 @@ require("tools.php");
 <body style="padding-top: 5px; padding-left: 10px;">
 <?php 
 include "menu.php";
-echo(menu("Logfile"));
+echo(menu("Settings"));
 ?>
 <div>
 <table>
@@ -179,7 +179,7 @@ echo(menu("Logfile"));
 	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
-	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size=4"></td></tr>
+	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
 	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 	<tr><td><b><?php t("ScanMyTesla last received"); ?>:</b></td><td>
 <?php
