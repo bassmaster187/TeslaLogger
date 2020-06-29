@@ -28,7 +28,7 @@ require("language.php");
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
 	var perfEntries = performance.getEntriesByType("navigation");
-	if (typeof perfEntries !== "undefined" && perfEntries[0].type === "back_forward") {
+	if (perfEntries && perfEntries[0].type === "back_forward") {
 		location.reload(true);
 	}
 
