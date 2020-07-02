@@ -1,7 +1,7 @@
 Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
 Allego DE-Hannover-Lahe, 52.419121, 9.832369, 20
-Allego DE-Hilpoltstein, 49.161085, 11.26027, 8
-Allego DE-Hilpoltstein, 49.161068, 11.260205, 8
+Allego DE-Hilpoltstein, 49.161085, 11.26027, 2
+Allego DE-Hilpoltstein, 49.161068, 11.260205, 2
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 3
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Münchberg, 50.202763, 11.77689, 7
@@ -240,8 +240,10 @@ Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
 Ionity FR-Taponas, 46.134416, 4.766841
+Ionity FR-Tavel Nord, 44.004071, 4.703626
 Ionity FR-Tours La Longue Vue, 47.47574, 0.77685
 Ionity FR-Val Gelon, 45.547331, 6.154824
+Ionity FR-Vendée, 46.573538, -1.118014
 Ionity FR-Vidauban Sud, 43.413842, 6.451935
 Ionity FR-Villaines la Gonais, 48.125475, 0.622302
 Ionity FR-Volvestre, 43.3368, 1.2449
@@ -257,6 +259,7 @@ Ionity IE-Citynorth, 53.6376, -6.25894
 Ionity IE-Gorey, 52.750691, -6.202153
 Ionity IE-Kill North, 53.2482657, -6.5964347
 Ionity IE-Kill South, 53.253234, -6.5698138
+Ionity IT-Agira, 37.57169, 14.4797
 Ionity IT-Binasco, 45.33552, 9.10753
 Ionity IT-Brenner, 47.00627, 11.50668
 Ionity IT-Brugnato Ovest, 44.22647, 9.72971
@@ -476,9 +479,9 @@ Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.19115, 6.9368, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
-Supercharger DE-Hilpoltstein, 49.161179, 11.260067, 15
-Supercharger DE-Hilpoltstein, 49.161183, 11.260289, 15
-Supercharger DE-Hilpoltstein, 49.161205, 11.260561, 30
+Supercharger DE-Hilpoltstein, 49.161179, 11.260067, 12
+Supercharger DE-Hilpoltstein, 49.161183, 11.260289, 10
+Supercharger DE-Hilpoltstein, 49.161205, 11.260561, 21
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
 Supercharger DE-Irschenberg, 47.82648, 11.89831
