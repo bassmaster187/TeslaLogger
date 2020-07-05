@@ -33,3 +33,11 @@ TeslaLogger/bin/SRTM-Data/*
 TeslaLogger/bin/settings.json
 .DS_Store
 .axoCover/settings.json
+TeslaLogger/bin/Exception/*
+TeslaLogger/bin/DISPLAY_NAME
+TeslaLogger/bin/MySql.Data.EntityFramework.xml
+TeslaLogger/bin/MySQL.Data.EntityFrameworkCore.xml
+TeslaLogger/bin/MySql.Data.xml
+TeslaLogger/bin/MySql.Web.xml
+TeslaLogger/bin/TASKERTOKEN
+TeslaLogger/bin/weather.ini
