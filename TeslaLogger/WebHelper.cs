@@ -58,7 +58,7 @@ namespace TeslaLogger
             carSettings = CarSettings.ReadSettings();
         }
 
-        private string GetLastShiftState()
+        internal string GetLastShiftState()
         {
             return _lastShift_State;
         }

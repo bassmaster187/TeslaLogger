@@ -398,7 +398,7 @@ namespace TeslaLogger
         {
             {
                 //if (webhelper.IsDriving() && DBHelper.currentJSON.current_speed > 0)
-                if (webhelper.IsDriving())
+                if (webhelper.IsDriving() && (webhelper.GetLastShiftState().Equals("R") || webhelper.GetLastShiftState().Equals("N") || webhelper.GetLastShiftState().Equals("D")))
                 {
                     webhelper.ResetLastChargingState();
                     lastCarUsed = DateTime.Now;
