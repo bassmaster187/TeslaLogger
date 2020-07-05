@@ -1,5 +1,5 @@
 <?PHP
-	require("tools.php");
+	require("admin/tools.php");
 
 	$prefix = "/etc/teslalogger/";
     if (isDocker())
