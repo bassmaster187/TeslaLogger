@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <?php
 require("language.php");
+require("tools.php");
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -282,7 +283,11 @@ require("language.php");
 function ShowInfo()
 {	
 	<?php	
-	if (file_exists("/etc/teslalogger/cmd_gosleep.txt"))
+	$prefix = "/etc/teslalogger/";
+    if (isDocker())
+		$prefix = "/tmp/";
+		
+	if (file_exists($prefix."cmd_gosleep.txt"))
 	{?>
 		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
 		$(".HeaderT").show();

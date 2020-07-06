@@ -1,8 +1,12 @@
 <?PHP
+	require("admin/tools.php");
 
-	unlink("/etc/teslalogger/cmd_gosleep.txt");
+	$prefix = "/etc/teslalogger/";
+    if (isDocker())
+        $prefix = "/tmp/";
 
-	$filename = "/etc/teslalogger/wakeupteslalogger.txt";
+	unlink($prefix."cmd_gosleep.txt");
+	$filename = $prefix."wakeupteslalogger.txt";
 	
 	$ret =	file_put_contents ($filename,".");
 	chmod ($filename, 0666);
