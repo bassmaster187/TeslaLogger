@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <?php
 require("language.php");
+require("tools.php");
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -26,6 +27,11 @@ require("language.php");
 	var LengthUnit = "<?php echo($LengthUnit); ?>";
 	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
+
+	var perfEntries = performance.getEntriesByType("navigation");
+	if (perfEntries && perfEntries.length > 0 && perfEntries[0].type === "back_forward") {
+		location.reload(true);
+	}
 
   $( function() {
     // $("button").button();
@@ -275,10 +281,22 @@ require("language.php");
 	}
   
 function ShowInfo()
-{
-	
+{	
+	<?php	
+	$prefix = "/etc/teslalogger/";
+    if (isDocker())
+		$prefix = "/tmp/";
+		
+	if (file_exists($prefix."cmd_gosleep.txt"))
+	{?>
+		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
+		$(".HeaderT").show();
+		$("#PositiveButton").text("<?php t("Resume Teslalogger"); ?>");
+		$("#PositiveButton").click(function(){BackgroudRun('/wakeup.php', 'Wakeup!', true);});
+		$("#NegativeButton").hide();
 	<?php
-	if (!file_exists("/etc/teslalogger/sharedata.txt") && 
+	}
+	else if (!file_exists("/etc/teslalogger/sharedata.txt") && 
 	!file_exists("/etc/teslalogger/nosharedata.txt") &&
 	!file_exists("/tmp/sharedata.txt") && 
 	!file_exists("/tmp/nosharedata.txt")
