@@ -137,6 +137,8 @@ namespace TeslaLogger
 
                 executingPath = executingPath.Replace(executingAssembly.ManifestModule.Name, string.Empty);
                 executingPath = executingPath.Replace("UnitTestsTeslalogger", "TeslaLogger");
+                executingPath = executingPath.Replace("TLNUnit", "TeslaLogger");
+                executingPath = executingPath.Replace("/Debug", "");
 
                 _ExecutingPath = executingPath;
             }

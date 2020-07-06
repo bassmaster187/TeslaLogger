@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("TLNUnit")]
+
 namespace TeslaLogger
 {
     public class Address
@@ -108,7 +110,7 @@ namespace TeslaLogger
 
             if (File.Exists(FileManager.GetFilePath(TLFilename.GeofenceRacingFilename)) && _RacingMode)
             {
-                ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
+                ReadGeofenceFiles(list, FileManager.GetFilePath(TLFilename.GeofenceRacingFilename));
                 RacingMode = true;
 
                 Logfile.Log("*** RACING MODE ***");
@@ -116,7 +118,7 @@ namespace TeslaLogger
             else
             {
                 RacingMode = false;
-                ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
+                ReadGeofenceFiles(list, FileManager.GetFilePath(TLFilename.GeofenceFilename));
                 if (!File.Exists(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
                 {
                     Logfile.Log("Create: " + FileManager.GetFilePath(TLFilename.GeofencePrivateFilename));
@@ -124,7 +126,7 @@ namespace TeslaLogger
                 }
 
                 UpdateTeslalogger.Chmod(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), 666);
-                ReadGeofenceFile(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), true);
+                ReadGeofenceFiles(list, FileManager.GetFilePath(TLFilename.GeofencePrivateFilename), true);
             }
             
             Logfile.Log("Addresses inserted: " + list.Count);
@@ -163,68 +165,77 @@ namespace TeslaLogger
             }
         }
 
-        private static void ReadGeofenceFile(List<Address> list, string filename, bool replaceExistiongPOIs = false)
+        internal static void ReadGeofenceFiles(List<Address> list, string filename, bool replaceExistingPOIs = false)
         {
             filename = filename.Replace(@"Debug\", "");
             List<Address> localList = new List<Address>();
             if (File.Exists(filename))
             {
-                Logfile.Log("Read Geofence File: " + filename);
-                string line;
-                using (StreamReader file = new StreamReader(filename))
+                ReadGeofenceFile(filename, localList);
+                if (replaceExistingPOIs)
                 {
-                    while ((line = file.ReadLine()) != null)
+                    ReplacePOIs(list, filename, localList);
+                    list.Clear();
+                }
+                list.AddRange(localList);
+            }
+            else
+            {
+                Logfile.Log("ReadGeofenceFile FileNotFound: " + filename);
+            }
+        }
+
+        private static void ReplacePOIs(List<Address> list, string filename, List<Address> localList)
+        {
+            HashSet<string> uniqueNameList = new HashSet<string>();
+            foreach (Address addr in localList)
+            {
+                if (addr != null && addr.name != null)
+                {
+                    uniqueNameList.Add(addr.name);
+                }
+            }
+            foreach (Address addr in list)
+            {
+                bool keepAddr = true;
+                foreach (string localName in uniqueNameList)
+                {
+                    if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
                     {
-                        try
-                        {
-                            if (string.IsNullOrEmpty(line))
-                            {
-                                continue;
-                            }
-
-                            int radius = 50;
-
-                            string[] args = Regex.Split(line, ",");
-
-                            if (args.Length > 3 && args[3] != null && args[3].Length > 0)
-                            {
-                                int.TryParse(args[3], out radius);
-                            }
-
-                            Address addr = new Address(args[0].Trim(),
-                                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
-                                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
-                                radius);
-
-                            if (args.Length > 4 && args[4] != null)
-                            {
-                                string flags = args[4];
-                                Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
-                                ParseSpecialFlags(addr, flags);
-                            }
-
-                            localList.Add(addr);
-
-                            if (!filename.Contains("geofence.csv"))
-                            {
-                                Logfile.Log("Address inserted: " + args[0]);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logfile.ExceptionWriter(ex, line);
-                        }
+                        Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
+                        keepAddr = false;
+                        break;
                     }
                 }
-                if (replaceExistiongPOIs)
+                if (keepAddr)
                 {
-                    HashSet<string> uniqueNameList = new HashSet<string>();
-                    foreach (Address addr in localList)
+                    localList.Add(addr);
+                }
+            }
+        }
+
+        internal static void ReadGeofenceFile(string filename, List<Address> localList)
+        {
+            Logfile.Log("Read Geofence File: " + filename);
+            string line;
+            using (StreamReader file = new StreamReader(filename))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    try
                     {
-                        if (addr != null && addr.name != null)
+                        if (string.IsNullOrEmpty(line))
                         {
-                            uniqueNameList.Add(addr.name);
+                            continue;
                         }
+
+                        int radius = 50;
+
+                        ParseGeofenceLine(filename, localList, line, radius);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.ExceptionWriter(ex, line);
                     }
                     foreach (Address addr in list)
                     {
@@ -243,13 +254,42 @@ namespace TeslaLogger
                             localList.Add(addr);
                         }
                     }
-                    list.Clear();
                 }
-                list.AddRange(localList);
             }
-            else
+        }
+
+        internal static void ParseGeofenceLine(string filename, List<Address> localList, string line, int radius)
+        {
+            string[] args = Regex.Split(line, ",");
+
+            if (args == null || args.Length < 3)
             {
-                Logfile.Log("ReadGeofenceFile FileNotFound: " + filename);
+                Logfile.Log("Malformed line <" + line + "> in file " + filename);
+                return;
+            }
+
+            if (args.Length > 3 && args[3] != null && args[3].Length > 0)
+            {
+                int.TryParse(args[3], out radius);
+            }
+
+            Address addr = new Address(args[0].Trim(),
+                double.Parse(args[1].Trim(), Tools.ciEnUS.NumberFormat),
+                double.Parse(args[2].Trim(), Tools.ciEnUS.NumberFormat),
+                radius);
+
+            if (args.Length > 4 && args[4] != null && args[4].Length > 0)
+            {
+                string flags = args[4];
+                Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
+                ParseSpecialFlags(addr, flags);
+            }
+
+            localList.Add(addr);
+
+            if (!filename.Contains("geofence.csv"))
+            {
+                Logfile.Log("Address inserted: " + args[0]);
             }
         }
 
