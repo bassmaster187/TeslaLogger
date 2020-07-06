@@ -58,7 +58,7 @@ namespace TeslaLogger
             carSettings = CarSettings.ReadSettings();
         }
 
-        internal string GetLastShiftState()
+        private string GetLastShiftState()
         {
             return _lastShift_State;
         }
@@ -501,10 +501,7 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                HttpClient client = new HttpClient
-                {
-                    Timeout = TimeSpan.FromSeconds(11)
-                };
+                HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
@@ -1821,7 +1818,8 @@ FROM
 
         private async Task<double?> GetOutsideTempAsync()
         {
-            object cacheValue = MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString());
+            string cacheKey = "GetOutsideTempAsync";
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
                 return (double)cacheValue;
@@ -1901,7 +1899,7 @@ FROM
                     Thread.Sleep(5000);
                 }
 
-                MemoryCache.Default.Add(Program.TLMemCacheKey.GetOutsideTempAsync.ToString(), (double)outside_temp, DateTime.Now.AddMinutes(1));
+                MemoryCache.Default.Add(cacheKey, (double)outside_temp, DateTime.Now.AddMinutes(1));
                 return (double)outside_temp;
             }
             catch (Exception ex)
@@ -1924,10 +1922,7 @@ FROM
             string resultContent = "";
             try
             {
-                HttpClient client = new HttpClient
-                {
-                    Timeout = TimeSpan.FromSeconds(11)
-                };
+                HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
@@ -1948,7 +1943,7 @@ FROM
             return "NULL";
         }
 
-        public async Task<string> PostCommand(string cmd, string data, bool _json = false)
+        public async Task<string> PostCommand(string cmd, string data)
         {
             Logfile.Log("PostCommand: " + cmd + " - " + data);
 
@@ -1958,19 +1953,10 @@ FROM
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                //if (_json)
-                //{
-                //    client.DefaultRequestHeaders.TryAddWithoutValidation("contenttype", "application/json");
-                //}
 
                 string url = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 StringContent queryString = data != null ? new StringContent(data) : null;
-
-                if (_json && data != null)
-                {
-                    queryString = new StringContent(data, Encoding.UTF8, "application/json");
-                }
                 
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.PostAsync(url, data != null ? queryString : null);
