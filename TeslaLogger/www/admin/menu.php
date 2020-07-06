@@ -78,12 +78,8 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php">Backup</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php">Restore</a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php">Geofence</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('/wakeup.php', 'Wakeup!', true);">Wakeup Teslalogger!</a></li>
-                            <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep.txt"))
-                            {?>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('gosleep.php', 'Sleep!', true);">Suspend Teslalogger</a></li>
-                            <?PHP 
-                            } ?>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('/wakeup.php', 'Wakeup!');">Wakeup!</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('gosleep.php', 'Sleep!');">Sleep</a></li>
 						</ul>
                     </li>
                     <li id="menu-item-6" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6">
@@ -95,7 +91,7 @@ function menu($title)
     </div>
 </header>
 <script>
-function BackgroudRun($target, $text, $reload=false)
+function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
 		data: {
@@ -105,15 +101,9 @@ function BackgroudRun($target, $text, $reload=false)
 		.then(
 		function success(name) {
 			alert($text);
-
-            if ($reload)
-                location.reload(true);
 		},
 		function fail(data, status) {
 			alert($text);
-
-            if ($reload)
-                location.reload(true);
 		}
 	);
   }
