@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -24,6 +25,7 @@ namespace TeslaLogger
 
         public static void EnableMothership()
         {
+            GetMothershipCommandsFromDB();
             mothershipEnabled = true;
         }
 
@@ -485,7 +487,14 @@ namespace TeslaLogger
             currentJSON.current_speed = 0;
             currentJSON.current_power = 0;
 
-            UpdateTripElevation(StartPos, MaxPosId);
+            Thread TripElevationUpdater = new Thread(() =>
+            {
+                UpdateTripElevation(StartPos, MaxPosId);
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            TripElevationUpdater.Start();
         }
 
         public static void UpdateTripElevation(int startPos, int maxPosId)
@@ -519,8 +528,6 @@ namespace TeslaLogger
                     string sql = null;
                     try
                     {
-                        System.Threading.Thread.Sleep(1);
-
                         double latitude = (double)dr[1];
                         double longitude = (double)dr[2];
 
@@ -710,8 +717,6 @@ namespace TeslaLogger
         {
             try
             {
-                System.Threading.Thread.Sleep(5);
-
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
@@ -1611,8 +1616,6 @@ namespace TeslaLogger
         {
             try
             {
-                System.Threading.Thread.Sleep(5);
-
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();

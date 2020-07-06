@@ -5,9 +5,6 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("TLNUnit")]
 
 namespace TeslaLogger
 {
@@ -213,6 +210,7 @@ namespace TeslaLogger
 
                     Exec_mono("rm", "-rf /etc/teslalogger/git");
                     Exec_mono("mkdir", "/etc/teslalogger/git");
+                    Exec_mono("mozroots", "--import --sync --machine");
                     Exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
