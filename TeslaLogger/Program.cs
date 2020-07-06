@@ -221,7 +221,7 @@ namespace TeslaLogger
                 {
                     round++;
                     Thread.Sleep(1000);
-                    if (File.Exists(FileManager.GetFilePath(TLFilename.WakeupFilename)))
+                    if (File.Exists(FileManager.GetWakeupTeslaloggerPath))
                     {
 
                         if (webhelper.DeleteWakeupFile())
@@ -709,6 +709,7 @@ namespace TeslaLogger
         {
             Tools.SetThread_enUS();
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
+            UpdateTeslalogger.Chmod("backup.sh", 777, false);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);

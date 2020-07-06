@@ -57,13 +57,35 @@ namespace TeslaLogger
 
         internal static bool CheckCmdGoSleepFile()
         {
-            if (File.Exists(GetFilePath(TLFilename.CmdGoSleepFilename)))
+
+            if (File.Exists(GetGoSleepPath))
             {
-                File.Delete(GetFilePath(TLFilename.CmdGoSleepFilename));
+                File.Delete(GetGoSleepPath);
                 return true;
             }
-
             return false;
+        }
+
+        static string GetGoSleepPath
+        {
+            get
+            {
+                if (Tools.IsDocker())
+                    return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
+                else
+                    return GetFilePath(TLFilename.CmdGoSleepFilename);
+            }
+        }
+
+        internal static string GetWakeupTeslaloggerPath
+        {
+            get
+            {
+                if (Tools.IsDocker())
+                    return Path.Combine("/tmp/", Filenames[TLFilename.WakeupFilename]);
+                else
+                    return GetFilePath(TLFilename.WakeupFilename);
+            }
         }
 
         internal static string GetTeslaTokenFileContent()
