@@ -37,3 +37,7 @@ TeslaLogger/bin/Exception/Exception*
 TeslaLogger/bin/DISPLAY_NAME
 TeslaLogger/bin/TASKERTOKEN
 TeslaLogger/bin/weather.ini
+TeslaLogger/bin/MySql.Data.EntityFramework.xml
+TeslaLogger/bin/MySQL.Data.EntityFrameworkCore.xml
+TeslaLogger/bin/MySql.Data.xml
+TeslaLogger/bin/MySql.Web.xml
