@@ -962,14 +962,14 @@ namespace TeslaLogger
             Logfile.Log("UpdateAllDrivestateData end");
         }
 
-        public static void StartDriveState()
+        public static void StartDriveState(int MaxPosID = 0)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@Pos", MaxPosID == 0 ? GetMaxPosid() : MaxPosID);
                 cmd.ExecuteNonQuery();
             }
 
