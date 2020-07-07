@@ -46,7 +46,7 @@ namespace TeslaLogger
         private static bool highFrequencyLogging = false;
         private static int highFrequencyLoggingTicks = 0;
         private static int highFrequencyLoggingTicksLimit = 100;
-        private static int ShiftStateDriveMaxPosID = 0;
+        private static int ShiftStateDriveMaxPosID = -1;
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
         private enum HFLMode
         {
@@ -576,7 +576,7 @@ namespace TeslaLogger
 
             // Alle States werden geschlossen
             DBHelper.CloseChargingState();
-            ShiftStateDriveMaxPosID = 0;
+            ShiftStateDriveMaxPosID = -1;
             DBHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
