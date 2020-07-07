@@ -1047,17 +1047,13 @@ namespace TeslaLogger
                 {
                     if (!lastSetChargeLimitAddressName.Equals(_addr.name))
                     {
-                        Thread ChargeLimitSetter = new Thread(() =>
+                        Task.Factory.StartNew(() =>
                         {
                             Logfile.Log($"SetChargeLimit to {chargelimit} ...");
                             string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                             Logfile.Log("set_charge_limit(): " + result);
-                        })
-                        {
-                            Priority = ThreadPriority.Normal
-                        };
-                        ChargeLimitSetter.Start();
-                        lastSetChargeLimitAddressName = _addr.name;
+                            lastSetChargeLimitAddressName = _addr.name;
+                        });
                     }
                 }
             }
@@ -1113,16 +1109,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Thread ChargePortOpener = new Thread(() =>
+                Task.Factory.StartNew(() =>
                 {
                     Logfile.Log("OpenChargePort ...");
                     string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
                     Logfile.Log("charge_port_door_open(): " + result);
-                })
-                {
-                    Priority = ThreadPriority.Normal
-                };
-                ChargePortOpener.Start();
+                });
             }
         }
 
@@ -1132,16 +1124,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Thread SentryModeEnabler = new Thread(() =>
+                Task.Factory.StartNew(() =>
                 {
                     Logfile.Log("EnableSentryMode ...");
                     string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
                     Logfile.Log("set_sentry_mode(): " + result);
-                })
-                {
-                    Priority = ThreadPriority.Normal
-                };
-                SentryModeEnabler.Start();
+                });
             }
         }
 
@@ -1151,16 +1139,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Thread ClimateOffThread = new Thread(() =>
+                Task.Factory.StartNew(() =>
                 {
                     Logfile.Log("ClimateOff ...");
                     string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
                     Logfile.Log("auto_conditioning_stop(): " + result);
-                })
-                {
-                    Priority = ThreadPriority.Normal
-                };
-                ClimateOffThread.Start();
+                });
             }
         }
     }
