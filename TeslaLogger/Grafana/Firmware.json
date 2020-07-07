@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 45,
+  "id": 65,
   "links": [],
   "panels": [
     {
@@ -60,7 +60,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.StartDate)*1000 as DateInstalled, T1.version as Firmware, Datediff(T1.StartDate, T2.StartDate) as DaysSincePreviousUpdate from car_version as T1 left join car_version as T2 on T1.id = T2.id+1 \nwhere $__timeFilter(T1.StartDate)\norder by T1.StartDate desc",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as 'Date Installed', T1a.Firmware, Datediff(T1a.StartDate, T2a.StartDate) as 'Days since previous update'\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -158,7 +158,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.StartDate)*1000 as time_sec, Datediff(T1.StartDate, T2.StartDate) as DaysDiff from car_version as T1 left join car_version as T2 on T1.id = T2.id+1 \nwhere $__timeFilter(T1.StartDate)\norder by T1.StartDate desc",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -266,7 +266,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.StartDate)*1000 as time_sec, Datediff(T1.StartDate, T2.StartDate) as DaysDiff from car_version as T1 left join car_version as T2 on T1.id = T2.id+1 \nwhere $__timeFilter(T1.StartDate)\norder by T1.StartDate desc",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -374,7 +374,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(T1.StartDate)*1000 as time_sec, Datediff(T1.StartDate, T2.StartDate) as DaysDiff from car_version as T1 left join car_version as T2 on T1.id = T2.id+1 \nwhere $__timeFilter(T1.StartDate)\norder by T1.StartDate desc",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -421,7 +421,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1y",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {
