@@ -22,7 +22,7 @@ EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
-EnBW DE-Nürnberg Eibach, 49,399141, 11,038350, 50
+EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
@@ -551,7 +551,8 @@ Supercharger DK-Køge, 55.489273, 12.162788
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
-Supercharger DK-Rødekro, 55.067331, 9.361081
+Supercharger DK-Rødekro, 55.067331, 9.361081, 20
+Supercharger DK-Rødekro, 55.068085, 9.360869, 20
 Supercharger DK-Slagelse, 55.387922, 11.361762
 Supercharger ES-Aguadulce, 37.256871, -4.986068
 Supercharger ES-Albacete, 39.134675, -2.039013
@@ -695,6 +696,7 @@ Supercharger GB-Bristol, 51.477207, -2.706308
 Supercharger GB-Bristol, 51.526694, -2.599806
 Supercharger GB-Burtonwood, 53.417605, -2.639522
 Supercharger GB-Chorley, 53.630562, -2.692578
+Supercharger GB-Colchester, 51.88071, 0.788574
 Supercharger GB-Dundee, 56.466428, -3.062962
 Supercharger GB-Dursley, 51.656431, -2.434545
 Supercharger GB-Edinburgh, 55.945361, -3.366667
@@ -765,7 +767,8 @@ Supercharger IT-Campogalliano, 44.685971, 10.851913
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
 Supercharger IT-Cerignola, 41.306389, 15.899738											
-Supercharger IT-Dorno, 45.14719, 8.99119
+Supercharger IT-Dorno Ost, 45.147263, 8.991257, 15
+Supercharger IT-Dorno West, 45.147743, 8.990631, 15
 Supercharger IT-Fano, 43.802874, 13.015345
 Supercharger IT-Firenze, 43.810258, 11.17798
 Supercharger IT-Forcola, 46.165099, 9.675995
@@ -827,6 +830,7 @@ Supercharger NO-Arna, 60.421924, 5.46703
 Supercharger NO-Åsane, 60.484345, 5.375959
 Supercharger NO-Aspøya, 63.011584, 7.977743
 Supercharger NO-Aurland, 60.89863, 7.21082
+Supercharger-V3 NO-Bamble, 58.9713, 9.51278, 15
 Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger NO-Brumunddal, 60.878507,10.929387
@@ -849,7 +853,6 @@ Supercharger NO-Innhavet, 67.962417, 15.929685
 Supercharger NO-Jaren, 59.617769, 11.00302
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland, 59.836224, 9.579221
-Supercharger-V3 NO-Langrønningen, 58.972051, 9.512636
 Supercharger NO-Larvik, 59.112393, 10.108783
 Supercharger NO-Lavik, 61.103869, 5.51268
 Supercharger NO-Leinstrand, 63.325319, 10.305137
