@@ -1059,8 +1059,10 @@ TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Kaarst, 51.218956, 6.633498
 Aldi DE-Kelsterbach, 50.058617, 8.521086
 Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
+Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Leonberg, 48.798462, 8.999601
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
@@ -1072,8 +1074,10 @@ Aldi DE-Wetzendorf, 49.496251, 11.262201
 IKEA DE-Dortmund, 51.491557, 7.371048
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
+IKEA DE-Kaarst, 51.210824, 6.639237
 IKEA DE-Sindelfinden, 48.701416, 9.005396
 IKEA DE-Regensburg, 49.001518, 12.177472
+IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
@@ -1099,11 +1103,22 @@ Kaufland DE-Sindelfingen, 48.704964, 9.017844
 Kaufland DE-Stuttgart, 48.840477, 9.229187
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
 Kaufland DE-Wendelstein, 49.334844, 11.114895
+Kaufland RO-Brasov, 45.658141, 25.588721
+Kaufland RO-Bucuresti, 44.431985, 26.005614
+KAufland RO-Craiova, 44.300888, 23.796626
+Kaufland RO-Deva, 45.873371, 22.919387
+Kaufland RO-Sebes, 45.961182, 23.551254
+Kaufland RO-Sibiu, 45.793864, 24.133525
+Kaufland RO-Timisoara, 45.764274, 21.245244
 
+Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
+Lidl AT-Wien Quadenstr.,  48.237596, 16.478042
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+
 
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
@@ -1114,3 +1129,5 @@ Stuttgart Flughafen P12, 48.691895, 9.195894
 Offenbach Honda, 50.08437, 8.839102
 Bochum Ruhrpark, 51.494065, 7.28446
 Essen Hauptbahnhof, 51.452362, 7.013726
+Köln Leonardo Hotel, 50.926801, 6.904346
+Neuss Esso Tankstelle, 51.199058, 6.711012
