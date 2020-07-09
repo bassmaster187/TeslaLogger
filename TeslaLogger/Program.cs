@@ -946,6 +946,11 @@ namespace TeslaLogger
             Logfile.Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             DBHelper.currentJSON.CreateCurrentJSON();
 
+            // any -> Start
+            if (_oldState != TeslaState.Start && _newState == TeslaState.Start)
+            {
+                webhelper.SetLastShiftState("P"); // reset shift state to default "P"
+            }
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
