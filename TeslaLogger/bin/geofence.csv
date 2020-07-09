@@ -22,7 +22,7 @@ EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
-EnBW DE-Nürnberg Eibach, 49,399141, 11,038350, 50
+EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
@@ -551,7 +551,8 @@ Supercharger DK-Køge, 55.489273, 12.162788
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
-Supercharger DK-Rødekro, 55.067331, 9.361081
+Supercharger DK-Rødekro, 55.067331, 9.361081, 20
+Supercharger DK-Rødekro, 55.068085, 9.360869, 20
 Supercharger DK-Slagelse, 55.387922, 11.361762
 Supercharger ES-Aguadulce, 37.256871, -4.986068
 Supercharger ES-Albacete, 39.134675, -2.039013
@@ -695,6 +696,7 @@ Supercharger GB-Bristol, 51.477207, -2.706308
 Supercharger GB-Bristol, 51.526694, -2.599806
 Supercharger GB-Burtonwood, 53.417605, -2.639522
 Supercharger GB-Chorley, 53.630562, -2.692578
+Supercharger GB-Colchester, 51.88071, 0.788574
 Supercharger GB-Dundee, 56.466428, -3.062962
 Supercharger GB-Dursley, 51.656431, -2.434545
 Supercharger GB-Edinburgh, 55.945361, -3.366667
@@ -765,7 +767,8 @@ Supercharger IT-Campogalliano, 44.685971, 10.851913
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
 Supercharger IT-Cerignola, 41.306389, 15.899738											
-Supercharger IT-Dorno, 45.14719, 8.99119
+Supercharger IT-Dorno Ost, 45.147263, 8.991257, 15
+Supercharger IT-Dorno West, 45.147743, 8.990631, 15
 Supercharger IT-Fano, 43.802874, 13.015345
 Supercharger IT-Firenze, 43.810258, 11.17798
 Supercharger IT-Forcola, 46.165099, 9.675995
@@ -827,6 +830,7 @@ Supercharger NO-Arna, 60.421924, 5.46703
 Supercharger NO-Åsane, 60.484345, 5.375959
 Supercharger NO-Aspøya, 63.011584, 7.977743
 Supercharger NO-Aurland, 60.89863, 7.21082
+Supercharger-V3 NO-Bamble, 58.9713, 9.51278, 15
 Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger NO-Brumunddal, 60.878507,10.929387
@@ -849,7 +853,6 @@ Supercharger NO-Innhavet, 67.962417, 15.929685
 Supercharger NO-Jaren, 59.617769, 11.00302
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland, 59.836224, 9.579221
-Supercharger-V3 NO-Langrønningen, 58.972051, 9.512636
 Supercharger NO-Larvik, 59.112393, 10.108783
 Supercharger NO-Lavik, 61.103869, 5.51268
 Supercharger NO-Leinstrand, 63.325319, 10.305137
@@ -1053,29 +1056,78 @@ E.ON-DK Karlslunde Ost, 55.560657, 12.231491
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 
+Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
+Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Kaarst, 51.218956, 6.633498
+Aldi DE-Kelsterbach, 50.058617, 8.521086
+Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
+Aldi DE-Köln, 50.906526, 6.934391
+Aldi DE-Leonberg, 48.798462, 8.999601
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
 Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
+Aldi DE-Pforzheim, 48.902632, 8.663465
+Aldi DE-Rastatt, 48.85911, 8.238882, 20
 Aldi DE-Wetzendorf, 49.496251, 11.262201
 
+IKEA DE-Dortmund, 51.491557, 7.371048
 IKEA DE-Fürth, 49.484779, 11.008938
+IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
+IKEA DE-Kaarst, 51.210824, 6.639237
+IKEA DE-Sindelfinden, 48.701416, 9.005396
 IKEA DE-Regensburg, 49.001518, 12.177472
+IKEA DE-Wetzlar, 50.568262, 8.498073
+IKEA DE-Würzburg, 49.821812, 9.982398
 
+Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
+Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
+Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
+Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
+Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
 Kaufland DE-Erding, 48.305332, 11.881886
+Kaufland DE-Erlangen, 49.593323, 11.026181
+Kaufland DE-Frankfurt, 50.132218, 8.749362
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
+Kaufland DE-Fellbach, 48.813484, 9.266494
+Kaufland DE-Münchberg, 50.190847, 11.783391
+Kaufland DE-Leonberg, 48.797085, 9.006616
+Kaufland DE-Offenburg, 48.470007, 7.925176
+Kaufland DE-Pforzheim, 48.886253, 8.668658
+Kaufland DE-Ravensburg, 47.767777, 9.604267
 Kaufland DE-Schwaigern, 49.13824, 9.064656
+Kaufland DE-Schwetzingen, 49.38544, 8.577604
+Kaufland DE-Sindelfingen, 48.704964, 9.017844
+Kaufland DE-Stuttgart, 48.840477, 9.229187
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
+Kaufland DE-Wendelstein, 49.334844, 11.114895
+Kaufland RO-Brasov, 45.658141, 25.588721
+Kaufland RO-Bucuresti, 44.431985, 26.005614
+KAufland RO-Craiova, 44.300888, 23.796626
+Kaufland RO-Deva, 45.873371, 22.919387
+Kaufland RO-Sebes, 45.961182, 23.551254
+Kaufland RO-Sibiu, 45.793864, 24.133525
+Kaufland RO-Timisoara, 45.764274, 21.245244
 
+Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
+Lidl AT-Wien Quadenstr.,  48.237596, 16.478042
+Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+
 
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 Gerstetten Netto, 48.58969, 10.128094
 Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
+Ingolstadt Audi Forum, 48.783595, 11.413007
 Stuttgart Flughafen P12, 48.691895, 9.195894
 Offenbach Honda, 50.08437, 8.839102
+Bochum Ruhrpark, 51.494065, 7.28446
+Essen Hauptbahnhof, 51.452362, 7.013726
+Köln Leonardo Hotel, 50.926801, 6.904346
+Neuss Esso Tankstelle, 51.199058, 6.711012
