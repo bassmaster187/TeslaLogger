@@ -244,6 +244,22 @@ namespace TeslaLogger
             }
         }
 
+        internal static bool IndexExists(string index, string table)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.statistics where table_name = '" + table + "' and INDEX_NAME ='" + index +"'", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private static void UpdateMaxChargerPower(int id, int startChargingID, int endChargingID)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))

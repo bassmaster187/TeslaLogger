@@ -72,7 +72,7 @@ namespace TeslaLogger
             {
                 Logfile.Log("ShareData: SendAllChargingData start");
 
-                int ProtocolVersion = 4;
+                int ProtocolVersion = 5;
                 string sql = @"SELECT chargingstate.id as HostId, StartDate, EndDate, charging.charge_energy_added, conn_charge_cable, fast_charger_brand, fast_charger_type, fast_charger_present, address as pos_name, lat, lng, odometer, charging.outside_temp, StartChargingID, EndChargingID
                 FROM chargingstate
                 join pos on chargingstate.Pos = pos.id
@@ -168,7 +168,8 @@ namespace TeslaLogger
         private List<object> GetChargingDT(int startid, int endid, out int count)
         {
             count = 0;
-            string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater)
+            string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater),
+                (SELECT val FROM can WHERE can.datum < charging.Datum and can.datum > date_add(charging.Datum, INTERVAL -8 MINUTE) and id = 3 ORDER BY can.datum DESC limit 1) as cell_temp
                 FROM charging
                 where id between @startid and @endid
                 group by battery_level
@@ -180,6 +181,7 @@ namespace TeslaLogger
             MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
             da.SelectCommand.Parameters.AddWithValue("@startid", startid);
             da.SelectCommand.Parameters.AddWithValue("@endid", endid);
+            da.SelectCommand.CommandTimeout = 300;
             da.Fill(dt);
 
             foreach (DataRow dr in dt.Rows)
