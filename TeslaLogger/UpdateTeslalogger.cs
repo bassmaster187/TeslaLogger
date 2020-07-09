@@ -157,6 +157,14 @@ namespace TeslaLogger
                     Logfile.Log("CREATE TABLE OK");
                 }
 
+                if (!DBHelper.IndexExists("can_ix","can"))
+                {
+                    Logfile.Log("alter table can add index can_ix (id,datum)");
+                    DBHelper.ExecuteSQLQuery("alter table can add index can_ix (id,datum)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();
