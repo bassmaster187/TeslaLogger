@@ -1044,6 +1044,7 @@ namespace TeslaLogger
             }*/
             if (_oldState.Equals("P") && !_newState.Equals("P"))
             {
+                webhelper.IsDriving(true);
                 ShiftStateDriveMaxPosID = DBHelper.GetMaxPosid();
             }
 
