@@ -436,8 +436,12 @@ Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
 Supercharger BE-Wavre, 50.7080753,4.5983481
 Supercharger BG-Plovdiv, 42.144727, 24.768828
+Supercharger CA-Baie-Saint-Paul QC, 47.435844,-70.506266
+Supercharger CA-Cornwall ON, 45.023651, -74.748071
+Supercharger CA-Laval QC, 45.570329, -73.747584
 Supercharger CA-Levis QC, 46.730448, -71.268418
-Supercharger CA-Yamachiche QC, 46.262256, -72.876893
+Supercharger CA-Sainte Eulalie QC, 46.058345, -72.313283
+Supercharger CA-Yamachiche QC, 46.262234, -72.876919
 Supercharger CH-Beckenried, 46.971073, 8.459073
 Supercharger CH-Bussigny, 46.556699, 6.561557
 Supercharger CH-Dietikon, 47.418041, 8.396577
@@ -981,7 +985,7 @@ Supercharger US-Lake Elsinore CA, 33.698631, -117.349266
 Supercharger US-Las Vegas NV, 36.165906, -115.138655
 Supercharger US-Louisville KY, 38.211971, -85.673251
 Supercharger-V3 US-Las Vegas NV - Linq High Roller, 36.116648, -115.168277
-Supercharger US-Las Vegas NV - Blvd South
+Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
 Supercharger US-Little Rock AR, 34.661548, -92.410467
 Supercharger US-Memphis TN, 35.097843, -89.859007
@@ -989,19 +993,21 @@ Supercharger US-Menifee CA, 33.679638, -117.173752
 Supercharger US-Mojave CA, 35.068596, -118.174568
 Supercharger US-Nacogdoches TX, 31.652005, -94.679586
 Supercharger US-Primm NV, 35.610592, -115.387932
+Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-Southlake TX, 32.943636, -97.133889
 Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
+Supercharger US-Watterloo NY, 42.969202, -76.846107
 Supercharger US-Watertown NY, 43.979582, -75.954102
 Supercharger US-Webster TX, 29.519295, -95.122049
 Urbancharger US-Anaheim CA, 33.805187, -117.882111
 Urbancharger US-Carlsbad CA, 33.084042, -117.266273
 Urbancharger US-Corona CA, 33.826435, -117.515366
 Urbancharger US-Fontana CA, 34.150982, -117.471046
-Urbancharger US-San Bernardino CA, 34.084202,-117.299095
+Urbancharger US-San Bernardino CA, 34.084202, -117.299095
 Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
 Urbancharger US-Las Vegas NV - Tivoli Village, 36.168785, -115.286674
 Urbancharger US-Pasadena CA, 34.144859, -118.146439
@@ -1111,7 +1117,9 @@ Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
+Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
 Lidl AT-Wien Quadenstr.,  48.237596, 16.478042
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
@@ -1122,6 +1130,9 @@ Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
+Garbsen Nord, 52.422338, 9.554441
+Garbsen Süd,  52.421211, 9.565703
+PZH IFA Uni Hannover, 52.426875, 9.618212
 Gerstetten Netto, 48.58969, 10.128094
 Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 Ingolstadt Audi Forum, 48.783595, 11.413007
@@ -1131,3 +1142,6 @@ Bochum Ruhrpark, 51.494065, 7.28446
 Essen Hauptbahnhof, 51.452362, 7.013726
 Köln Leonardo Hotel, 50.926801, 6.904346
 Neuss Esso Tankstelle, 51.199058, 6.711012
+Elmshorn Teppich Kibek, 53.741661, 9.707776
+Tornesch Aral Tankstelle, 53.717968, 9.759639
+Tornesch Pendlerparkplatz, 53.718479, 9.759092
