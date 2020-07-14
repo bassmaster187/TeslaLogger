@@ -1,0 +1,268 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:450",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 30,
+  "iteration": 1594681192894,
+  "links": [],
+  "panels": [
+    {
+      "columns": [],
+      "datasource": "teslalogger",
+      "description": "",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 21,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "pageSize": null,
+      "pluginVersion": "6.7.3",
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:671",
+          "alias": "Last Driven",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "LastDriven",
+          "type": "date"
+        },
+        {
+          "$$hashKey": "object:1244",
+          "alias": "Speed km/h",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Speed",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:1255",
+          "alias": "",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Count",
+          "thresholds": [],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:3292",
+          "alias": "Ø Outside Temp C°",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "avg_temp",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "$$hashKey": "object:3424",
+          "alias": "Ø Consumption kWh",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "mappingType": 1,
+          "pattern": "avg_kWh",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "$$hashKey": "object:672",
+          "alias": "",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select min(avgspeed) div 10 * 10 as Speed, max(lastTime) as 'LastDriven', count(*) as 'Count', avg(Verbrauch) as avg_kWh, avg(avg_temp) as avg_temp\nfrom\n(\nSELECT count(*) as anz,max(Datum) as lastTime, min(speed) as minspeed, avg(speed) as avgspeed, max(speed) as maxspeed, \nmax(odometer) - min(odometer) as km, (max(ideal_battery_range_km)-min(ideal_battery_range_km)) * 0.190052356 as kWh\n,((max(ideal_battery_range_km)-min(ideal_battery_range_km)) * 0.190052356) / (max(odometer) - min(odometer)) * 100 as Verbrauch, avg(outside_temp) as avg_temp\nFROM pos\nwhere $__timeFilter(Datum) and speed is not null and odometer is not null and ideal_battery_range_km is not null\ngroup by odometer DIV $MINDISTANCE\nhaving anz > 5 and minspeed > avgspeed - 5 and maxspeed < avgspeed + 5 and avgspeed > 9 and km > 0.3 and kWh >=0.2\n) T\ngroup by avgspeed div 10\nhaving Count > 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "shiftstate",
+          "timeColumn": "StartDate",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Speed Consumption",
+      "transform": "table",
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "2",
+          "value": "2"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Min Distance [km]",
+        "multi": false,
+        "name": "MINDISTANCE",
+        "options": [
+          {
+            "selected": false,
+            "text": "1",
+            "value": "1"
+          },
+          {
+            "selected": true,
+            "text": "2",
+            "value": "2"
+          },
+          {
+            "selected": false,
+            "text": "3",
+            "value": "3"
+          },
+          {
+            "selected": false,
+            "text": "4",
+            "value": "4"
+          },
+          {
+            "selected": false,
+            "text": "5",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "6",
+            "value": "6"
+          },
+          {
+            "selected": false,
+            "text": "7",
+            "value": "7"
+          },
+          {
+            "selected": false,
+            "text": "8",
+            "value": "8"
+          },
+          {
+            "selected": false,
+            "text": "9",
+            "value": "9"
+          },
+          {
+            "selected": false,
+            "text": "10",
+            "value": "10"
+          }
+        ],
+        "query": "1,2,3,4,5,6,7,8,9,10",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-2y",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      ""
+    ]
+  },
+  "timezone": "",
+  "title": "Speed Consumption",
+  "uid": "4EDf3Skgk",
+  "variables": {
+    "list": []
+  },
+  "version": 4
+}
