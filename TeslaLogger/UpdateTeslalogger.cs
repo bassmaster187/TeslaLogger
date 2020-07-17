@@ -502,6 +502,7 @@ namespace TeslaLogger
                         Logfile.Log("Update: " + f);
                         string s = File.ReadAllText(f);
                         s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+                        s = s.Replace("TASKERTOKEN", wh.TaskerHash);
 
                         if (power == "kw")
                         {
