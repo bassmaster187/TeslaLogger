@@ -1102,6 +1102,7 @@ Kaufland DE-Frankfurt, 50.132218, 8.749362
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Fellbach, 48.813484, 9.266494
+Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
 Kaufland DE-Leonberg, 48.797085, 9.006616
 Kaufland DE-Oberasbach, 49.435136, 10.967694
@@ -1109,6 +1110,7 @@ Kaufland DE-Offenburg, 48.470007, 7.925176
 Kaufland DE-Pforzheim, 48.886253, 8.668658
 Kaufland DE-Pfungstadt, 49.813881, 8.619769
 Kaufland DE-Ravensburg, 47.767777, 9.604267
+Kaufland De-Radebeul, 51.09958, 13.6543
 Kaufland DE-Schwaigern, 49.13824, 9.064656
 Kaufland DE-Schwetzingen, 49.38544, 8.577604
 Kaufland DE-Sindelfingen, 48.704964, 9.017844
@@ -1130,31 +1132,43 @@ Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Klagenfurt, 46.614056, 14.339549
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
-Lidl AT-Wien Quadenstr.,  48.237596, 16.478042
+Lidl AT-Wien Quadenstr., 48.237596, 16.478042
+Lidl CH-Volketswil, 47.379012, 8.67739
+Lidl CH-Wädenswil, 47.236483, 8.635798
+Lidl CH-Winterthur, 47.486514, 8.70397
+Lidl DE-Berlin Steglitzer Damm, 52.449291, 13.354343
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
+Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 
+Familia DE-Hamburg, 53.608366, 10.044162
+Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
+
+REWE DE-Bremen, 53.136455, 8.739926
 
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
+CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
+CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
-Bielefeld Green Station Sieker, 52.005329, 8.559438
-Bochum Ruhrpark, 51.494065, 7.28446
-Elmshorn Teppich Kibek, 53.741661, 9.707776
-Essen Hauptbahnhof, 51.452362, 7.013726
-Garbsen Nord, 52.422338, 9.554441
-Garbsen Süd,  52.421211, 9.565703
-Gerstetten Netto, 48.58969, 10.128094
-Hannover PZH IFA Uni, 52.426875, 9.618212
-Ingolstadt Audi Forum, 48.783595, 11.413007
-Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
-Köln Leonardo Hotel, 50.926801, 6.904346
-Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
-Neuss Esso Tankstelle, 51.199058, 6.711012
-Offenbach Honda, 50.08437, 8.839102
-Rheydt New AG, 51.157497, 6.448055
-Stuttgart Flughafen P12, 48.691895, 9.195894
-Tornesch Aral Tankstelle, 53.717968, 9.759639
-Tornesch Pendlerparkplatz, 53.718479, 9.759092
+DE Bielefeld Green Station Sieker, 52.005329, 8.559438
+DE Bochum Ruhrpark, 51.494065, 7.28446
+DE Elmshorn Teppich Kibek, 53.741661, 9.707776
+DE Essen Hauptbahnhof, 51.452362, 7.013726
+DE Garbsen Nord, 52.422338, 9.554441
+DE Garbsen Süd,  52.421211, 9.565703
+DE Gerstetten Netto, 48.58969, 10.128094
+DE Hannover PZH IFA Uni, 52.426875, 9.618212
+DE Ingolstadt Audi Forum, 48.783595, 11.413007
+DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
+DE Köln Leonardo Hotel, 50.926801, 6.904346
+DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
+DE Neumünster Polize, 54.07617, 9.96679
+DE Neuss Esso Tankstelle, 51.199058, 6.711012
+DE Offenbach Honda, 50.08437, 8.839102
+DE Rheydt New AG, 51.157497, 6.448055
+DE Stuttgart Flughafen P12, 48.691895, 9.195894
+DE Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
+DE Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
