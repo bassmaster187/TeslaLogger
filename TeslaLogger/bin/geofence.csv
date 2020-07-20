@@ -1056,12 +1056,14 @@ ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Uelzen, 52.99585, 10.539363
 
 Comfortcharge DE-Bremen, 53.095621, 8.791384
+Comfortcharge DE-Cloppenburg, 52.844864, 8.047866
 Comfortcharge DE-Nürnberg, 49.426495, 11.03906
 Comfortcharge DE-München, 48.174976, 11.553374
 
 E.ON-DE Essen, 51.425112, 6.993249
 E.ON-DK Karlslunde West, 55.560857, 12.229259
 E.ON-DK Karlslunde Ost, 55.560657, 12.231491
+E.ON-DK Korsør, 55.347704, 11.120238
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 
@@ -1122,7 +1124,7 @@ Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
 Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
-KAufland RO-Craiova, 44.300888, 23.796626
+Kaufland RO-Craiova, 44.300888, 23.796626
 Kaufland RO-Deva, 45.873371, 22.919387
 Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
@@ -1136,27 +1138,39 @@ Lidl AT-Wien Quadenstr., 48.237596, 16.478042
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
+Lidl DE Aschaffenburg Spessartstr., 49.965614,9.154857
 Lidl DE-Berlin Steglitzer Damm, 52.449291, 13.354343
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
 Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+Lidl FI-Vantaa, 60.261581, 24.87252
 
 Familia DE-Hamburg, 53.608366, 10.044162
 Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
+Familia DE-Reihenfeld, 53.822247, 10.502483
 
 REWE DE-Bremen, 53.136455, 8.739926
 
+
+AT Lermoos Hochmoos-Express, 47.395975, 10.887217
+
+CH Baden ABB Research, 47.458503, 8.278454
+CH Moosseedorf Shoppyland, 47.017507, 7.492498
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
+DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
+DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bochum Ruhrpark, 51.494065, 7.28446
+DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
 DE Elmshorn Teppich Kibek, 53.741661, 9.707776
 DE Essen Hauptbahnhof, 51.452362, 7.013726
+DE Frankenthal ATU, 49.545836, 8.352769
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Gerstetten Netto, 48.58969, 10.128094
@@ -1169,6 +1183,7 @@ DE Neumünster Polize, 54.07617, 9.96679
 DE Neuss Esso Tankstelle, 51.199058, 6.711012
 DE Offenbach Honda, 50.08437, 8.839102
 DE Rheydt New AG, 51.157497, 6.448055
+DE Schönefeld Total, 52.370738, 13.526929
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
 DE Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
