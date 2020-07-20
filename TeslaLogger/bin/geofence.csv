@@ -198,6 +198,7 @@ Ionity FI-Karisto, 60.9835, 25.73731
 Ionity FI-Paimio, 60.42587, 22.724
 Ionity FI-Tiiriö, 61.00769, 24.42201
 Ionity FR-Aire de Darvault, 48.264072, 2.722024
+Ionity FR-Agen, 44.171306, 0.609660
 Ionity FR-Arclusaz, 45.548541, 6.158058
 Ionity FR-Baie de Somme, 50.16723, 1.755877
 Ionity FR-Bois Guillerot, 47.030917, 5.10791
@@ -227,6 +228,7 @@ Ionity FR-Lacq Audéjos Nord, 43.418629, -0.584799
 Ionity FR-Lacq Audéjos Sud, 43.421850, -0.598593
 Ionity FR-Langres Noidant, 47.813347, 5.22459
 Ionity FR-Langres Perrogney, 47.815184, 5.223172
+Ionity FR-Larzac, 43.985279, 3.183078
 Ionity FR-Lochères, 47.30968, 4.501811
 Ionity FR-Longué la Couaille, 47.4189, -0.1343
 Ionity FR-Longué-les-Cossonnières, 47.4186, -0.1315
@@ -467,8 +469,8 @@ Supercharger CZ-Humpolec, 49.521746, 15.347476
 Supercharger CZ-Olomouc, 49.561356, 17.262209
 Supercharger CZ-Vestec, 49.9898398, 14.4907623
 Supercharger DE-Achern, 48.6413, 8.03774
-Supercharger DE-Aichstetten, 47.880376, 10.040434, 15
-Supercharger DE-Aichstetten, 47.880299,10.04052, 15
+Supercharger DE-Aichstetten, 47.880376, 10.040434, 7
+Supercharger DE-Aichstetten, 47.880299, 10.04052, 10
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
 Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
@@ -1054,12 +1056,14 @@ ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Uelzen, 52.99585, 10.539363
 
 Comfortcharge DE-Bremen, 53.095621, 8.791384
+Comfortcharge DE-Cloppenburg, 52.844864, 8.047866
 Comfortcharge DE-Nürnberg, 49.426495, 11.03906
 Comfortcharge DE-München, 48.174976, 11.553374
 
 E.ON-DE Essen, 51.425112, 6.993249
 E.ON-DK Karlslunde West, 55.560857, 12.229259
 E.ON-DK Karlslunde Ost, 55.560657, 12.231491
+E.ON-DK Korsør, 55.347704, 11.120238
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 
@@ -1087,6 +1091,7 @@ IKEA DE-Regensburg, 49.001518, 12.177472
 IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
+Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
@@ -1099,20 +1104,27 @@ Kaufland DE-Frankfurt, 50.132218, 8.749362
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Fellbach, 48.813484, 9.266494
+Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
 Kaufland DE-Leonberg, 48.797085, 9.006616
+Kaufland DE-Oberasbach, 49.435136, 10.967694
 Kaufland DE-Offenburg, 48.470007, 7.925176
 Kaufland DE-Pforzheim, 48.886253, 8.668658
+Kaufland DE-Pfungstadt, 49.813881, 8.619769
 Kaufland DE-Ravensburg, 47.767777, 9.604267
+Kaufland De-Radebeul, 51.09958, 13.6543
 Kaufland DE-Schwaigern, 49.13824, 9.064656
 Kaufland DE-Schwetzingen, 49.38544, 8.577604
 Kaufland DE-Sindelfingen, 48.704964, 9.017844
 Kaufland DE-Stuttgart, 48.840477, 9.229187
+Kaufland DE-Tübingen, 48.514286, 9.066617
+Kaufland DE-Uhingen, 48.714102, 9.56216
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
+Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
 Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
-KAufland RO-Craiova, 44.300888, 23.796626
+Kaufland RO-Craiova, 44.300888, 23.796626
 Kaufland RO-Deva, 45.873371, 22.919387
 Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
@@ -1122,27 +1134,56 @@ Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Klagenfurt, 46.614056, 14.339549
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
-Lidl AT-Wien Quadenstr.,  48.237596, 16.478042
+Lidl AT-Wien Quadenstr., 48.237596, 16.478042
+Lidl CH-Volketswil, 47.379012, 8.67739
+Lidl CH-Wädenswil, 47.236483, 8.635798
+Lidl CH-Winterthur, 47.486514, 8.70397
+Lidl DE Aschaffenburg Spessartstr., 49.965614,9.154857
+Lidl DE-Berlin Steglitzer Damm, 52.449291, 13.354343
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
+Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+Lidl FI-Vantaa, 60.261581, 24.87252
+
+Familia DE-Hamburg, 53.608366, 10.044162
+Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
+Familia DE-Reihenfeld, 53.822247, 10.502483
+
+REWE DE-Bremen, 53.136455, 8.739926
 
 
+AT Lermoos Hochmoos-Express, 47.395975, 10.887217
+
+CH Baden ABB Research, 47.458503, 8.278454
+CH Moosseedorf Shoppyland, 47.017507, 7.492498
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
-Garbsen Nord, 52.422338, 9.554441
-Garbsen Süd,  52.421211, 9.565703
-PZH IFA Uni Hannover, 52.426875, 9.618212
-Gerstetten Netto, 48.58969, 10.128094
-Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
-Ingolstadt Audi Forum, 48.783595, 11.413007
-Stuttgart Flughafen P12, 48.691895, 9.195894
-Offenbach Honda, 50.08437, 8.839102
-Bochum Ruhrpark, 51.494065, 7.28446
-Essen Hauptbahnhof, 51.452362, 7.013726
-Köln Leonardo Hotel, 50.926801, 6.904346
-Neuss Esso Tankstelle, 51.199058, 6.711012
-Elmshorn Teppich Kibek, 53.741661, 9.707776
-Tornesch Aral Tankstelle, 53.717968, 9.759639
-Tornesch Pendlerparkplatz, 53.718479, 9.759092
+CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
+CH Zürich ABB Oerlikon, 47.411564, 8.54106
+
+DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
+DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
+DE Bielefeld Green Station Sieker, 52.005329, 8.559438
+DE Bochum Ruhrpark, 51.494065, 7.28446
+DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
+DE Elmshorn Teppich Kibek, 53.741661, 9.707776
+DE Essen Hauptbahnhof, 51.452362, 7.013726
+DE Frankenthal ATU, 49.545836, 8.352769
+DE Garbsen Nord, 52.422338, 9.554441
+DE Garbsen Süd,  52.421211, 9.565703
+DE Gerstetten Netto, 48.58969, 10.128094
+DE Hannover PZH IFA Uni, 52.426875, 9.618212
+DE Ingolstadt Audi Forum, 48.783595, 11.413007
+DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
+DE Köln Leonardo Hotel, 50.926801, 6.904346
+DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
+DE Neumünster Polize, 54.07617, 9.96679
+DE Neuss Esso Tankstelle, 51.199058, 6.711012
+DE Offenbach Honda, 50.08437, 8.839102
+DE Rheydt New AG, 51.157497, 6.448055
+DE Schönefeld Total, 52.370738, 13.526929
+DE Stuttgart Flughafen P12, 48.691895, 9.195894
+DE Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
+DE Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
