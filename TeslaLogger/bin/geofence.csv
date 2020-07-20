@@ -198,6 +198,7 @@ Ionity FI-Karisto, 60.9835, 25.73731
 Ionity FI-Paimio, 60.42587, 22.724
 Ionity FI-Tiiriö, 61.00769, 24.42201
 Ionity FR-Aire de Darvault, 48.264072, 2.722024
+Ionity FR-Agen, 44.171306, 0.609660
 Ionity FR-Arclusaz, 45.548541, 6.158058
 Ionity FR-Baie de Somme, 50.16723, 1.755877
 Ionity FR-Bois Guillerot, 47.030917, 5.10791
@@ -227,6 +228,7 @@ Ionity FR-Lacq Audéjos Nord, 43.418629, -0.584799
 Ionity FR-Lacq Audéjos Sud, 43.421850, -0.598593
 Ionity FR-Langres Noidant, 47.813347, 5.22459
 Ionity FR-Langres Perrogney, 47.815184, 5.223172
+Ionity FR-Larzac, 43.985279, 3.183078
 Ionity FR-Lochères, 47.30968, 4.501811
 Ionity FR-Longué la Couaille, 47.4189, -0.1343
 Ionity FR-Longué-les-Cossonnières, 47.4186, -0.1315
@@ -1087,6 +1089,7 @@ IKEA DE-Regensburg, 49.001518, 12.177472
 IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
+Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
@@ -1101,14 +1104,18 @@ Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Fellbach, 48.813484, 9.266494
 Kaufland DE-Münchberg, 50.190847, 11.783391
 Kaufland DE-Leonberg, 48.797085, 9.006616
+Kaufland DE-Oberasbach, 49.435136, 10.967694
 Kaufland DE-Offenburg, 48.470007, 7.925176
 Kaufland DE-Pforzheim, 48.886253, 8.668658
+Kaufland DE-Pfungstadt, 49.813881, 8.619769
 Kaufland DE-Ravensburg, 47.767777, 9.604267
 Kaufland DE-Schwaigern, 49.13824, 9.064656
 Kaufland DE-Schwetzingen, 49.38544, 8.577604
 Kaufland DE-Sindelfingen, 48.704964, 9.017844
 Kaufland DE-Stuttgart, 48.840477, 9.229187
+Kaufland DE-Uhingen, 48.714102, 9.56216
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
+Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
 Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
@@ -1131,18 +1138,21 @@ Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 
 CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
+
+Bielefeld Green Station Sieker, 52.005329, 8.559438
+Bochum Ruhrpark, 51.494065, 7.28446
+Elmshorn Teppich Kibek, 53.741661, 9.707776
+Essen Hauptbahnhof, 51.452362, 7.013726
 Garbsen Nord, 52.422338, 9.554441
 Garbsen Süd,  52.421211, 9.565703
-PZH IFA Uni Hannover, 52.426875, 9.618212
 Gerstetten Netto, 48.58969, 10.128094
-Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
+Hannover PZH IFA Uni, 52.426875, 9.618212
 Ingolstadt Audi Forum, 48.783595, 11.413007
-Stuttgart Flughafen P12, 48.691895, 9.195894
-Offenbach Honda, 50.08437, 8.839102
-Bochum Ruhrpark, 51.494065, 7.28446
-Essen Hauptbahnhof, 51.452362, 7.013726
+Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
 Köln Leonardo Hotel, 50.926801, 6.904346
+Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 Neuss Esso Tankstelle, 51.199058, 6.711012
-Elmshorn Teppich Kibek, 53.741661, 9.707776
+Offenbach Honda, 50.08437, 8.839102
+Stuttgart Flughafen P12, 48.691895, 9.195894
 Tornesch Aral Tankstelle, 53.717968, 9.759639
 Tornesch Pendlerparkplatz, 53.718479, 9.759092
