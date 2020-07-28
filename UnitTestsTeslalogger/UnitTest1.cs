@@ -49,11 +49,11 @@ namespace UnitTestsTeslalogger
             Tools.SetThread_enUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
-            DBHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, "0");
+            DBHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
             int startid = DBHelper.GetMaxPosid(true);
             DBHelper.StartDriveState();
 
-            DBHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, "0");
+            DBHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
             int endid = DBHelper.GetMaxPosid(true);
             DBHelper.CloseDriveState(DateTime.Now);
         }

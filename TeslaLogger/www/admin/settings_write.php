@@ -20,6 +20,7 @@ $Length = $_POST["Length"];
 $URL_Admin = $_POST["URL_Admin"];
 $ZoomLevel = $_POST["ZoomLevel"];
 $update = $_POST["update"];
+$Range = $_POST["Range"];
 
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
@@ -31,7 +32,8 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'URL_Admin' =>$URL_Admin,
 'ZoomLevel' =>$ZoomLevel,
 'ScanMyTesla' => $ScanMyTesla,
-'update' => $update
+'update' => $update,
+'Range' => $Range
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));

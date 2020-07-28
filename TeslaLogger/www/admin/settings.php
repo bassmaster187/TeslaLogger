@@ -58,7 +58,8 @@ require("tools.php");
 			echo ("$('#radio_celsius').prop('checked', true);\r\n");
 			echo ("$('#radio_km').prop('checked', true);\r\n");
 			echo ("$('#radio_en').prop('checked', true);\r\n");		
-			echo ("$('#radio_all').prop('checked', true);\r\n");	
+			echo ("$('#radio_all').prop('checked', true);\r\n");
+			echo ("$('#radio_Ideal').prop('checked', true);\r\n");
 		}
 		else
 		{
@@ -72,7 +73,7 @@ require("tools.php");
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
 			$ZoomLevel = $j->{"ZoomLevel"};
-
+			
 			$ScanMyTesla = "false";
 			if (property_exists($j,"ScanMyTesla"))
 				$ScanMyTesla = $j->{"ScanMyTesla"};
@@ -80,11 +81,20 @@ require("tools.php");
 			$update = "all";
 			if (property_exists($j,"update"))
 				$update = $j->{"update"};
+
+			$Range = "IR";
+			if (property_exists($j,"Range"))
+				$Range = $j->{"Range"};
 			
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
 			echo ("$('#checkboxSleep')[0].checked = $enable;\r\n");
 			echo ("$('#checkboxScanMyTesla')[0].checked = $ScanMyTesla;\r\n");
+
+			if ($Range == "IR")
+				echo ("$('#radio_Ideal').prop('checked', true);\r\n");
+			else
+				echo ("$('#radio_Rated').prop('checked', true);\r\n");
 			
 			if ($power == "kw")
 				echo ("$('#radio_kw').prop('checked', true);\r\n");
@@ -148,6 +158,7 @@ require("tools.php");
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
 		ShareData: $('#checkboxSharedata').is(':checked'),
 		update: $("input:radio[name ='update']:checked").val(),
+		Range: $("input:radio[name ='Range']:checked").val(),
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -174,6 +185,7 @@ echo(menu("Settings"));
 	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
 	<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
+	<tr><td valign="top"><b><?php t("Reichweite"); ?>:</b></td><td><input id="radio_Ideal" type="radio" value="IR" name="Range"> Ideal<br><input id="radio_Rated" type="radio" value="RR" name="Range"> Rated</td></tr>
 	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 	<tr><td valign="top"><b><?php t("Automatische Updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> All<br><input id="radio_stable" type="radio" value="stable" name="update"> Stable<br><input id="radio_none" type="radio" value="none" name="update"> None</td></tr>
 	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>

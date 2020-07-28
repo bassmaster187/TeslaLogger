@@ -16,6 +16,7 @@ namespace TeslaLogger
         public int current_power = 0;
         public double current_odometer = 0;
         public double current_ideal_battery_range_km = 0;
+        public double current_battery_range_km = 0;
         public double current_outside_temp = 0;
         public double current_inside_temp = 0;
         public int current_battery_level = 0;
@@ -131,6 +132,7 @@ namespace TeslaLogger
                    { "power", current_power },
                    { "odometer", current_odometer },
                    { "ideal_battery_range_km", current_ideal_battery_range_km},
+                   { "battery_range_km", current_battery_range_km},
                    { "outside_temp", current_outside_temp},
                    { "battery_level", current_battery_level},
                    { "charger_voltage", current_charger_voltage},
