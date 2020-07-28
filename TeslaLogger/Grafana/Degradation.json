@@ -120,7 +120,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Nominal full pack [kWh]' FROM can WHERE $__timeFilter(datum) and id = 71 and val > 30 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Nominal full pack [kWh]' FROM can WHERE $__timeFilter(datum) and id = 71 and val > 30 and val < 110 ORDER BY datum ASC",
           "refId": "B",
           "select": [
             [
@@ -251,7 +251,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1y",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {
@@ -282,5 +282,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 71
+  "version": 74
 }

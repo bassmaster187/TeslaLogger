@@ -230,7 +230,7 @@ namespace TeslaLogger
 
                     Exec_mono("rm", "-rf /etc/teslalogger/git");
                     Exec_mono("mkdir", "/etc/teslalogger/git");
-                    Exec_mono("mozroots", "--import --sync --machine");
+                    Exec_mono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
                     for (int x = 1; x < 10; x++)
                     {
                         Logfile.Log("git clone: try " + x);
