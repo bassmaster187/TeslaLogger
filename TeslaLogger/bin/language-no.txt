@@ -163,3 +163,4 @@ TextShare=<h1> Del ladekurver / nedbrytningskurver anonymt </h1> Vi ønsker å s
 Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
 Resume Teslalogger=Fortsett Teslalogger
+Reichweite=Range
