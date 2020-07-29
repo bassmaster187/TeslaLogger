@@ -194,3 +194,4 @@ TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would 
 Daten anonym teilen=Share data anonymously
 TextSuspendTeslalogger=Teslalogger has been stopped! Data will not be logged!
 Resume Teslalogger=Resume Teslalogger
+Reichweite=Range
