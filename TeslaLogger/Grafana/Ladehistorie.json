@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
   "links": [],
   "panels": [
     {
@@ -295,7 +294,7 @@
           "link": true,
           "linkTargetBlank": true,
           "linkTooltip": "Create shareable link to this charging session",
-          "linkUrl": "https://teslalogger.de/charging_time.php?hostid=${__cell_15}&token=TASKERTOKEN",
+          "linkUrl": "https://teslalogger.de/charging_time.php?hostid=${__cell_4}&token=TASKERTOKEN",
           "mappingType": 1,
           "pattern": "Share",
           "thresholds": [],
@@ -319,6 +318,22 @@
           "unit": "short"
         },
         {
+          "alias": "SOC Start",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Start_battery_level",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
           "alias": "",
           "colorMode": null,
           "colors": [
@@ -340,7 +355,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        pos.lat, pos.lng, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 as kW_avg,\r\n              max_charger_power,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share, chargingstate.id as HostId\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\norder by StartDate desc",
+          "rawSql": "SELECT        pos.lat, pos.lng, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, chargingstate.id as HostId,\r\n              pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 as kW_avg,\r\n              max_charger_power,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging.battery_level as Start_battery_level,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\norder by StartDate desc",
           "refId": "A",
           "select": [
             [
@@ -405,5 +420,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 67
+  "version": 69
 }

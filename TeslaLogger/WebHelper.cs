@@ -241,6 +241,8 @@ namespace TeslaLogger
                     ideal_battery_range = (decimal)r2["battery_range"];
                 }
 
+                decimal battery_range = (decimal)r2["battery_range"];
+
                 string battery_level = r2["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != DBHelper.currentJSON.current_battery_level)
                 {
@@ -341,14 +343,14 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, Program.IsHighFrequenceLoggingEnabled(true) ? true : false, charger_pilot_current, charge_current_request);
+                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, Program.IsHighFrequenceLoggingEnabled(true) ? true : false, charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Logfile.Log("Charging Complete");
                     }
 
@@ -1121,14 +1123,15 @@ namespace TeslaLogger
                         elevation = "";
                     }
 
-                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level);
+                    double battery_range_km;
+                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level, out battery_range_km);
 
                     if (t_outside_temp != null)
                     {
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_level, outside_temp, elevation);
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -1710,10 +1713,11 @@ FROM
             }
         }
 
-        private double GetIdealBatteryRangekm(out int battery_level)
+        private double GetIdealBatteryRangekm(out int battery_level, out double battery_range_km)
         {
             string resultContent = "";
             battery_level = -1;
+            battery_range_km = -1;
 
             try
             {
@@ -1740,6 +1744,10 @@ FROM
                         Logfile.Log("Raven Model!");
                     }
                 }
+
+                if (r2["battery_range"] != null)
+                    battery_range_km = Convert.ToDouble(r2["battery_range"]) / (double)0.62137;
+
 
                 if (r2["battery_level"] != null)
                 {
@@ -2050,7 +2058,7 @@ FROM
 
                 if (shift_state == "D")
                 {
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
                 }
 
                 return resultContent;
@@ -2142,7 +2150,7 @@ FROM
             {
                 Tools.SetThread_enUS();
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
