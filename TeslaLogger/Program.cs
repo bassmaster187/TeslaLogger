@@ -1031,6 +1031,7 @@ namespace TeslaLogger
         public static void HandleShiftStateChange(string _oldState, string _newState)
         {
             Logfile.Log("ShiftStateChange: " + _oldState + " -> " + _newState);
+            lastCarUsed = DateTime.Now;
             Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
