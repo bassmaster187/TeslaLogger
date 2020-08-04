@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -97,6 +98,23 @@ namespace TeslaLogger
             {
                 Logfile.Log("CopyFile Exception: " + ex.ToString());
             }
+        }
+
+        public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+        {
+            JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+            Dictionary<string, object> childRow;
+            foreach (DataRow row in table.Rows)
+            {
+                childRow = new Dictionary<string, object>();
+                foreach (DataColumn col in table.Columns)
+                {
+                    childRow.Add(col.ColumnName, row[col]);
+                }
+                parentRow.Add(childRow);
+            }
+            return jsSerializer.Serialize(parentRow);
         }
 
         internal static void EndSleeping(out int stopSleepingHour, out int stopSleepingMinute)

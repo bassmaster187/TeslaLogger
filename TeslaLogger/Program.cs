@@ -56,6 +56,8 @@ namespace TeslaLogger
 
         private static void Main(string[] args)
         {
+            CheckArgs(args);
+
             InitDebugLogging();
 
             CheckNewCredentials();
@@ -146,6 +148,28 @@ namespace TeslaLogger
             finally
             {
                 Logfile.Log("Teslalogger Stopped!");
+            }
+        }
+
+        private static void CheckArgs(string[] args)
+        {
+            if (args.Length > 0)
+            {
+                if (String.Compare(args[0], "setcost", true) == 0)
+                {
+                    DBHelper.SetCost(args);
+                    System.Environment.Exit(0);
+                }
+
+            }
+
+            if (args.Length > 1)
+            {
+                if (String.Compare(args[0], "getchargingstate",true) == 0)
+                {
+                    DBHelper.GetChargingstateStdOut(args);
+                    System.Environment.Exit(0);
+                }
             }
         }
 
@@ -710,6 +734,8 @@ namespace TeslaLogger
             Tools.SetThread_enUS();
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
+            UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
+
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
