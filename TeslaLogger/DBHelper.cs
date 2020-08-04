@@ -142,6 +142,69 @@ namespace TeslaLogger
             }
         }
 
+        internal static void SetCost(string[] args)
+        {
+            try
+            {
+                Logfile.Log("SetCost");
+
+
+                string json = System.IO.File.ReadAllText(FileManager.GetSetCostPath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total where id= @id", con);
+                    
+                    if (j["cost_total"] == null || j["cost_total"] == "" || j["cost_total"] == "0" || j["cost_total"] == "0.00")
+                        cmd.Parameters.AddWithValue("@cost_total", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@cost_total", j["cost_total"]);
+
+                    cmd.Parameters.AddWithValue("@cost_currency", j["cost_currency"]);
+                    cmd.Parameters.AddWithValue("@cost_per_kwh", j["cost_per_kwh"]);
+                    cmd.Parameters.AddWithValue("@cost_per_session", j["cost_per_session"]);
+                    cmd.Parameters.AddWithValue("@cost_per_minute", j["cost_per_minute"]);
+                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", j["cost_idle_fee_total"]);
+                    cmd.Parameters.AddWithValue("@id", j["id"]);
+                    int done = cmd.ExecuteNonQuery();
+
+                    Logfile.Log("SetCost OK: " + done);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        internal static void GetChargingstateStdOut(string[] args)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBConnectionstring);
+                da.SelectCommand.Parameters.AddWithValue("@id", args[1]);
+                da.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    string json = Tools.DataTableToJSONWithJavaScriptSerializer(dt);
+                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.WriteLine(json);
+                }
+                else
+                {
+                    Console.WriteLine("not found!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         private static void AddCommandToDB(string command)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
