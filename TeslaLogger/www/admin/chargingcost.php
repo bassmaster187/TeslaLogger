@@ -21,8 +21,19 @@ require("tools.php");
 
 	<script>	
 <?php
+
+    $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
+    if (isDocker())
+        $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
+
+    $output = file_get_contents($url);
+    echo("var json = JSON.parse('$output');\n");
+/*
     $output = exec("/etc/teslalogger/TeslaLogger.exe getchargingstate ". $_REQUEST["id"]);
     echo("var json = JSON.parse('".substr($output, 3)."');\n");
+    */
+
+    
 ?>
     var minutes;
     var kwh;
