@@ -195,3 +195,12 @@ Daten anonym teilen=Share data anonymously
 TextSuspendTeslalogger=Teslalogger has been stopped! Data will not be logged!
 Resume Teslalogger=Resume Teslalogger
 Reichweite=Range
+
+Ladekosten=Charging Costs
+Ladesäule=Charging Station
+Währung=Currency
+Kosten pro kWh=Cost per kWh
+Kosten pro Ladung=Cost per charge
+Kosten pro Minute=Cost per minute
+Kosten Blockiergebühr=Idle cost per minute
+Summe=Total
