@@ -178,7 +178,7 @@ namespace TeslaLogger
 
                 if (!DBHelper.ColumnExists("chargingstate", "cost_total"))
                 {
-                    Logfile.Log("ALTER TABLE chargingstate ADD Co");
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_total");
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                         ADD COLUMN `cost_total` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_currency` VARCHAR(3) NULL DEFAULT NULL,
@@ -186,6 +186,13 @@ namespace TeslaLogger
                         ADD COLUMN `cost_per_session` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_minute` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_idle_fee_total` DOUBLE NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("chargingstate", "cost_kwh_meter_invoice"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_kwh_meter_invoice");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                        ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
                 }
 
                 DBHelper.EnableMothership();

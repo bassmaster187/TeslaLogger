@@ -204,3 +204,5 @@ Kosten pro Ladung=Cost per charge
 Kosten pro Minute=Cost per minute
 Kosten Blockiergebühr=Idle cost per minute
 Summe=Total
+kWh laut Zähler / Rechnung=kWh according to meter / invoice
+Wirkungsgrad=Efficiency

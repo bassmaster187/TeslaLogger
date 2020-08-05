@@ -118,9 +118,15 @@ namespace TeslaLogger
                 Logfile.Log("SetCost");
 
                 string json;
-                using (var reader = new StreamReader(request.InputStream,request.ContentEncoding))
+
+                if (request.QueryString["JSON"] != null)
+                    json = request.QueryString["JSON"];
+                else
                 {
-                    json = reader.ReadToEnd();
+                    using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
+                    {
+                        json = reader.ReadToEnd();
+                    }
                 }
 
                 Logfile.Log("JSON: " + json);
@@ -130,18 +136,20 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total where id= @id", con);
+                    MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con);
 
-                    if (j["cost_total"] == null || j["cost_total"] == "" || j["cost_total"] == "0" || j["cost_total"] == "0.00")
-                        cmd.Parameters.AddWithValue("@cost_total", DBNull.Value);
+                    if (DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && IsZero(j["cost_per_session"]))
+                        cmd.Parameters.AddWithValue("@cost_total", 0);
                     else
-                        cmd.Parameters.AddWithValue("@cost_total", j["cost_total"]);
+                        cmd.Parameters.AddWithValue("@cost_total", DBNullIfEmptyOrZero(j["cost_total"]));
 
-                    cmd.Parameters.AddWithValue("@cost_currency", j["cost_currency"]);
-                    cmd.Parameters.AddWithValue("@cost_per_kwh", j["cost_per_kwh"]);
-                    cmd.Parameters.AddWithValue("@cost_per_session", j["cost_per_session"]);
-                    cmd.Parameters.AddWithValue("@cost_per_minute", j["cost_per_minute"]);
-                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", j["cost_idle_fee_total"]);
+                    cmd.Parameters.AddWithValue("@cost_currency", DBNullIfEmpty(j["cost_currency"]));
+                    cmd.Parameters.AddWithValue("@cost_per_kwh", DBNullIfEmpty(j["cost_per_kwh"]));
+                    cmd.Parameters.AddWithValue("@cost_per_session", DBNullIfEmpty(j["cost_per_session"]));
+                    cmd.Parameters.AddWithValue("@cost_per_minute", DBNullIfEmpty(j["cost_per_minute"]));
+                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNullIfEmpty(j["cost_idle_fee_total"]));
+                    cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
+
                     cmd.Parameters.AddWithValue("@id", j["id"]);
                     int done = cmd.ExecuteNonQuery();
 
@@ -154,6 +162,37 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 WriteString(response, "ERROR");
             }
+        }
+
+        object DBNullIfEmptyOrZero(string val)
+        {
+            if (val == null || val == "" || val == "0" || val == "0.00")
+                return DBNull.Value;
+
+            return val;
+        }
+
+        object DBNullIfEmpty(string val)
+        {
+            if (val == null || val == "")
+                return DBNull.Value;
+
+            return val;
+        }
+
+        bool IsZero(string val)
+        {
+            if (val == null || val == "")
+                return false;
+
+            double v;
+            if (Double.TryParse(val, out v))
+            {
+                if (v == 0)
+                    return true;
+            }
+
+            return false;
         }
 
         private void getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
