@@ -22,7 +22,7 @@ require("tools.php");
 	<script>	
 <?php
 
-    $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
+    $url = "http://localhost:5000/getchargingstate?id=". $_REQUEST["id"];
     if (isDocker())
         $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
 
