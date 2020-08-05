@@ -88,12 +88,15 @@ Ionity CH-Martigny, 46.127822, 7.059829
 Ionity CH-Neuenkirch, 47.113372, 8.232328
 Ionity CZ-Beroun (dir. Prague), 49.95581, 14.062759
 Ionity CZ-Nupaky, 49.984404, 14.602629
+Ionity CZ-Pávov (dir. Brno), 49.453814, 15.591480
+Ionity CZ-Pávov (dir. Prague), 49.455104, 15.593272
 Ionity DE-Aachener Land Nord, 50.817668, 6.213854
 Ionity DE-Aachener Land Süd, 50.817306, 6.216629
 Ionity DE-Aalbek West, 54.092671, 9.92914
 Ionity DE-Altenburger Land Nord, 50.860662, 12.307977
 Ionity DE-Altenburger Land Süd, 50.85675, 12.3132
 Ionity DE-Am Fichtenplan Nord, 52.318183, 13.494709
+Ionity DE-Am Fichtenplan Süd, 52.315620, 13.494702
 Ionity DE-Auetal Nord, 52.223703, 9.221469
 Ionity DE-Auetal Süd, 52.226977, 9.232545
 Ionity DE-Augsburg Ost, 48.411614, 10.914898
@@ -127,10 +130,13 @@ Ionity DE-Goldbach Süd, 52.998531, 9.181213
 Ionity DE-Gruibingen Süd, 48.605321, 9.632807
 Ionity DE-Haidt Nord, 49.780852, 10.244797
 Ionity DE-Haidt Süd, 49.779352, 10.246493
+Ionity DE-Harz Ost, 51.926279, 10.143238
+Ionity DE-Harz West, 51.928028, 10.141730
 Ionity DE-Himmelkron, 50.055972, 11.609148
 Ionity DE-Hohenlohe Nord, 49.207007, 9.639273
 Ionity DE-Hohenlohe Süd, 49.205379, 9.639696
 Ionity DE-Hohenwarsleben, 52.173898, 11.49512, 11
+Ionity DE-Holzheim, 48.381890, 10.086035
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219137, 10.127765
@@ -189,6 +195,7 @@ Ionity DK-Skanderborg, 56.06861, 9.97816
 Ionity ES-Ariza Norte, 41.31261, -2.00133
 Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
+Ionity ES-Casabermeja, 36.8982555, 4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
@@ -218,6 +225,8 @@ Ionity FR-Garonne, 43.3348, 1.245
 Ionity FR-Gevrey-Chambertin Est, 47.223166, 5.010984
 Ionity FR-Glanon, 47.032073, 5.109707
 Ionity FR-Gueux, 49.244484, 3.923935
+Ionity FR-Hauconcourt, 49.215116, 6.171845
+Ionity FR-Jardin des arbres, 47.852405, 2.684731
 Ionity FR-Jura, 46.774589, 5.523009
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
@@ -250,6 +259,7 @@ Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
 Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tavel Nord, 44.004071, 4.703626
+Ionity FR-Tavel Sud, 43.999633, 4.700191
 Ionity FR-Tours La Longue Vue, 47.47574, 0.77685
 Ionity FR-Val Gelon, 45.547331, 6.154824
 Ionity FR-Vendée, 46.573538, -1.118014
@@ -1058,8 +1068,19 @@ ARAL DE-Uelzen, 52.99585, 10.539363
 
 Comfortcharge DE-Bremen, 53.095621, 8.791384
 Comfortcharge DE-Cloppenburg, 52.844864, 8.047866
+Comfortcharge DE-Hannover Am Immenkampe, 52.357492, 9.671864
+Comfortcharge DE-Hannover Dünenweg, 52.396052, 9.675816
+Comfortcharge DE-Hannover Tillystr., 52.33748, 9.719157
 Comfortcharge DE-Nürnberg, 49.426495, 11.03906
 Comfortcharge DE-München, 48.174976, 11.553374
+
+Drewag DE-Dresden Elbepark, 51.086258, 13.693972
+Drewag DE-Dresden Mohnstr., 51.077856,13.717185
+Drewag DE-Dresden Neustadt Bahnhof, 51.064753, 13.739622
+Drewag DE-Dresden Park&Ride Prohilis, 50.999325, 13.799299
+Drewag DE-Dresden Pirnaischer Platz, 51.048762, 13.744022
+Drewag DE-Dresden Sarrasaniparkplatz, 51.057835, 13.745202
+Drewag DE-Dresden Schillergalerie, 51.051405, 13.804725
 
 E.ON-DE Essen, 51.425112, 6.993249
 E.ON-DK Karlslunde West, 55.560857, 12.229259
@@ -1127,6 +1148,7 @@ Kaufland DE-Stuttgart, 48.840477, 9.229187
 Kaufland DE-Tübingen, 48.514286, 9.066617
 Kaufland DE-Uhingen, 48.714102, 9.56216
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
+Kaufland DE-Weimar, 50.96384, 11.311157
 Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
 Kaufland RO-Brasov, 45.658141, 25.588721
@@ -1181,14 +1203,19 @@ DE Bochum Ruhrpark, 51.494065, 7.28446
 DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
 DE Burgdorf Burger King, 52.45928, 9.992822
 DE Elmshorn Teppich Kibek, 53.741661, 9.707776
+DE Dresden ATU, 51.079151, 13.691018
+DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
 DE Essen Hauptbahnhof, 51.452362, 7.013726
 DE Frankenthal ATU, 49.545836, 8.352769
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
+DE Garching Parking 19, 48.251597, 11.63772
 DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hannover A2 Center, 52.42332, 9.835401
+DE Hannover Finca & Bar Celona, 52.414286, 9.642024
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
+DE Hannover Volkswagen Kahle, 52.417529, 9.634326
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
@@ -1201,6 +1228,7 @@ DE Offenbach Honda, 50.08437, 8.839102
 DE Rheydt New AG, 51.157497, 6.448055
 DE Roth Autohaus, 49.245669, 11.119321
 DE Pforzen LEW Ladestation, 47.933544, 10.607971
+DE Schafstritt Nord, 52.257481, 9.306448
 DE Schönefeld Total, 52.370738, 13.526929
 DE Schleiz Autohof, 50.551565, 11.789977
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
