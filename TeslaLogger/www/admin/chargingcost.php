@@ -21,8 +21,19 @@ require("tools.php");
 
 	<script>	
 <?php
+
+    $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
+    if (isDocker())
+        $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
+
+    $output = file_get_contents($url);
+    echo("var json = JSON.parse('$output');\n");
+/*
     $output = exec("/etc/teslalogger/TeslaLogger.exe getchargingstate ". $_REQUEST["id"]);
     echo("var json = JSON.parse('".substr($output, 3)."');\n");
+    */
+
+    
 ?>
     var minutes;
     var kwh;
@@ -51,6 +62,7 @@ require("tools.php");
         $("#cost_per_session").val(json[0]["cost_per_session"]);
         $("#cost_per_minute").val(json[0]["cost_per_minute"]);
         $("#cost_idle_fee_total").val(json[0]["cost_idle_fee_total"]);
+        $("#cost_kwh_meter_invoice").val(json[0]["cost_kwh_meter_invoice"]);
 
 		updatecalculation();
 
@@ -64,29 +76,44 @@ require("tools.php");
         return Math.abs(Math.round(diff));
     }
 
+    function parseLocalNum(num) {
+        return +(num.replace(",", "."));
+    }
+
     function updatecalculation()
     {
-        $("#kwh_charged").text(kwh);
         $("#minutes_charged").text(minutes);
+        var kwh_calc = kwh;
 
-        var cost_per_kwh_sum = kwh * $("#cost_per_kwh").val();
+        var cost_kwh_meter_invoice = $("#cost_kwh_meter_invoice").val();
+        if (cost_kwh_meter_invoice !== "")
+        {
+            cost_kwh_meter_invoice = parseLocalNum($("#cost_kwh_meter_invoice").val());
+            var efficiency = kwh_calc / cost_kwh_meter_invoice * 100;
+            $("#charge_efficiency").text(efficiency.toFixed(1) + " %");    
+            kwh_calc = cost_kwh_meter_invoice;
+        }
+        else
+            $("#charge_efficiency").text("");
+
+        $("#kwh_charged").text(kwh_calc);
+        var cost_per_kwh_sum = kwh_calc * parseLocalNum($("#cost_per_kwh").val());
         $("#cost_per_kwh_sum").text(cost_per_kwh_sum.toFixed(2));
 
-        var cost_per_session_sum = $("#cost_per_session").val();
+        var cost_per_session_sum = parseLocalNum($("#cost_per_session").val());
         if (cost_per_session_sum === "")
             cost_per_session_sum = 0;
 
         $("#cost_per_session_sum").text(Number(cost_per_session_sum).toFixed(2));
 
-
-        var cost_idle_fee_total_sum = $("#cost_idle_fee_total").val();
+        var cost_idle_fee_total_sum = parseLocalNum($("#cost_idle_fee_total").val());
         if (cost_idle_fee_total_sum === "")
             cost_idle_fee_total_sum = 0;
         
         $("#cost_idle_fee_total_sum").text(Number(cost_idle_fee_total_sum).toFixed(2));
         
 
-        var cost_per_minute_sum = minutes * $("#cost_per_minute").val();
+        var cost_per_minute_sum = minutes * parseLocalNum($("#cost_per_minute").val());
         $("#cost_per_minute_sum").text(cost_per_minute_sum.toFixed(2));
 
         var cost_total = Number(cost_per_kwh_sum) + Number(cost_per_minute_sum) + Number(cost_per_session_sum) + Number(cost_idle_fee_total_sum);
@@ -104,10 +131,11 @@ require("tools.php");
         var jj = {
             "id" : <?php echo($_REQUEST["id"]); ?>,
             "cost_currency" : $("#cost_currency").val(),
-            "cost_per_kwh" : $("#cost_per_kwh").val(),
-            "cost_per_session" : $("#cost_per_session").val(),
-            "cost_per_minute" : $("#cost_per_minute").val(),
-            "cost_idle_fee_total" : $("#cost_idle_fee_total").val(),
+            "cost_per_kwh" : $("#cost_per_kwh").val().replace(",", "."),
+            "cost_per_session" : $("#cost_per_session").val().replace(",", "."),
+            "cost_per_minute" : $("#cost_per_minute").val().replace(",", "."),
+            "cost_idle_fee_total" : $("#cost_idle_fee_total").val().replace(",", "."),
+            "cost_kwh_meter_invoice" : $("#cost_kwh_meter_invoice").val().replace(",", "."),
             "cost_total" : total,
         }
        
@@ -137,8 +165,10 @@ echo(menu("Charging Cost"));
 <tr><td><?php t("Datum"); ?>:</td><td colspan="4"><span id="StartDate"></span></td></tr>
 <tr><td><?php t("Dauer"); ?>:</td><td colspan="4"><span id="minutes"></span></td></tr>
 <tr><td><?php t("Geladen"); ?>:</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
-
+<tr><td><?php t("Wirkungsgrad"); ?>:</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
+<tr><td>&nbsp;</td></tr>
 <tr><td><?php t("Währung"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR"></span></td><td></td><td></td></tr>
+<tr><td><?php t("kWh laut Zähler / Rechnung"); ?>:</td><td><input id="cost_kwh_meter_invoice" size="4"></span></td></tr>
 <tr><td><?php t("Kosten pro kWh"); ?>:</td><td><input id="cost_per_kwh" size="4"></span></td><td> * <span id="kwh_charged"></span> kWh</td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
 <tr><td><?php t("Kosten pro Ladung"); ?>:</td><td><input id="cost_per_session" size="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
 <tr><td><?php t("Kosten pro Minute"); ?>:</td><td><input id="cost_per_minute" size="4"></span></td><td> * <span id="minutes_charged"></span> Minutes</td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
