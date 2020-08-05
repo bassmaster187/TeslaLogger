@@ -54,6 +54,7 @@ namespace TeslaLogger
             Time
         }
         private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
+        private static WebServer webServer;
 
         private static void Main(string[] args)
         {
@@ -712,6 +713,20 @@ namespace TeslaLogger
             UpdateTeslalogger.UpdateGrafana(webhelper);
 
             DBHelper.currentJSON.current_car_version = DBHelper.GetLastCarVersion();
+
+            try
+            {
+                Thread threadWebserver = new Thread(() =>
+                {
+                    webServer = new WebServer();
+                });
+                threadWebserver.Name = "WebserverThread";
+                threadWebserver.Start();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void InitStage2()
