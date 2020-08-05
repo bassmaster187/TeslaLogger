@@ -35,7 +35,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 5,
+        "col": 7,
         "desc": true
       },
       "styles": [
@@ -1755,5 +1755,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 65
+  "version": 66
 }
