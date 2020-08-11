@@ -177,12 +177,22 @@ namespace TeslaLogger
 
         private object DBNullIfEmptyOrZero(string val)
         {
-            return val == null || val == "" || val == "0" || val == "0.00" ? DBNull.Value : (object)val;
+            if (val == null || val == "" || val == "0" || val == "0.00")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
         }
 
         private object DBNullIfEmpty(string val)
         {
-            return val == null || val == "" ? DBNull.Value : (object)val;
+            if (val == null || val == "")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
         }
 
         private bool IsZero(string val)
@@ -206,7 +216,7 @@ namespace TeslaLogger
         private void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
         {
             string id = request.QueryString["id"];
-            string respone = "";
+            string responseString = "";
 
             try
             {
@@ -216,14 +226,14 @@ namespace TeslaLogger
                 da.SelectCommand.Parameters.AddWithValue("@id", id);
                 da.Fill(dt);
 
-                respone = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
             }
 
-            WriteString(response, respone);
+            WriteString(response, responseString);
         }
 
         private static void WriteString(HttpListenerResponse response, string responseString)
