@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
@@ -45,6 +46,9 @@ namespace TeslaLogger
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
+
+        internal static string TeslaAPI_verhicles; // synchronized automatically https://stackoverflow.com/questions/541194/c-sharp-version-of-javas-synchronized-keyword
+        internal static ConcurrentDictionary<string, string> TeslaAPI_GetCommand = new ConcurrentDictionary<string, string>();
 
         static WebHelper()
         {
@@ -516,8 +520,8 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
-                TeslaAPI_verhicles = resultContent;
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                TeslaAPI_verhicles = resultContent;
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -1956,6 +1960,15 @@ FROM
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                if (TeslaAPI_GetCommand.ContainsKey(cmd))
+                {
+                    TeslaAPI_GetCommand.TryGetValue("drive_state", out string drive_state);
+                    TeslaAPI_GetCommand.TryUpdate(cmd, resultContent, drive_state);
+                }
+                else
+                {
+                    TeslaAPI_GetCommand.TryAdd(cmd, resultContent);
+                }
 
                 return resultContent;
             }
@@ -2287,12 +2300,5 @@ FROM
         }
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath) || TaskerWakeupfile();
-
-        internal static string TeslaAPI_verhicles {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get;
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set;
-        }
     }
 }

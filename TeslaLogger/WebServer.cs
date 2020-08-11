@@ -106,6 +106,12 @@ namespace TeslaLogger
                     case @"/debug/TeslaAPI/vehicles":
                         Debug_vehicles(request, response);
                         break;
+                    case @"/debug/TeslaAPI/drive_state":
+                        Debug_drive_state(request, response);
+                        break;
+                    case @"/debug/TeslaAPI/charge_state":
+                        Debug_charge_state(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -121,8 +127,22 @@ namespace TeslaLogger
 
         private void Debug_vehicles(HttpListenerRequest request, HttpListenerResponse response)
         {
-            response.AddHeader("Content-Type:", "application/json");
+            response.AddHeader("Content-Type", "application/json");
             WriteString(response, WebHelper.TeslaAPI_verhicles);
+        }
+
+        private void Debug_drive_state(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            response.AddHeader("Content-Type", "application/json");
+            WebHelper.TeslaAPI_GetCommand.TryGetValue("drive_state", out string drive_state);
+            WriteString(response, drive_state);
+        }
+
+        private void Debug_charge_state(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            response.AddHeader("Content-Type", "application/json");
+            WebHelper.TeslaAPI_GetCommand.TryGetValue("charge_state", out string charge_state);
+            WriteString(response, charge_state);
         }
 
         private void Setcost(HttpListenerRequest request, HttpListenerResponse response)
