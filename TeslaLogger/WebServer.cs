@@ -1,8 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Runtime.Caching;
 using System.Threading;
 using System.Web.Script.Serialization;
 
@@ -114,6 +117,9 @@ namespace TeslaLogger
                     case @"/debug/TeslaAPI/command/set_charge_limit":
                         Debug_TeslaAPI(request.Url.LocalPath, request, response);
                         break;
+                    case @"/debug/TeslaLogger/states":
+                        Debug_TeslaLoggerStates(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -125,6 +131,32 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            values.Add("Program._currentState", Program.GetCurrentState().ToString());
+            values.Add("WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState());
+            values.Add("Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString());
+            values.Add("Program.highFrequencyLoggingTicks", Program.GetHighFrequencyLoggingTicks().ToString());
+            values.Add("Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString());
+            values.Add("Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString());
+            values.Add("Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString());
+            values.Add("TLMemCacheKey.GetOutsideTempAsync</td><td>",
+                (MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
+                ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
+                : "null"));
+            values.Add("Program.lastCarUsed", Program.GetLastCarUsed().ToString());
+            values.Add("Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString());
+            values.Add("Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString());
+            values.Add("Program.lastSetChargeLimitAddressName", Program.GetLastSetChargeLimitAddressName());
+            values.Add("Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString());
+            values.Add("Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString());
+            values.Add("WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString());
+            values.Add("WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString());
+            IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
+            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
         }
 
         private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)

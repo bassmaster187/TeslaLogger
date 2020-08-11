@@ -14,7 +14,7 @@ namespace TeslaLogger
     internal class Program
     {
         public static bool VERBOSE = false;
-        private enum TeslaState
+        internal enum TeslaState
         {
             Start,
             Drive,
@@ -33,26 +33,36 @@ namespace TeslaLogger
 
         // encapsulate state
         private static TeslaState _currentState = TeslaState.Start;
-
-        private static TeslaState GetCurrentState() { return _currentState; }
-
+        internal static TeslaState GetCurrentState() { return _currentState; }
         private static WebHelper webhelper;
+        internal static WebHelper GetWebHelper() { return webhelper; }
         private static DateTime lastCarUsed = DateTime.Now;
+        internal static DateTime GetLastCarUsed() { return lastCarUsed; }
         private static DateTime lastOdometerChanged = DateTime.Now;
+        internal static DateTime GetLastOdometerChanged() { return lastOdometerChanged; }
         private static DateTime lastTryTokenRefresh = DateTime.Now;
+        internal static DateTime GetLastTryTokenRefresh() { return lastTryTokenRefresh; }
         private static string lastSetChargeLimitAddressName = string.Empty;
+        internal static string GetLastSetChargeLimitAddressName() { return lastSetChargeLimitAddressName; }
         private static bool goSleepWithWakeup = false;
+        internal static bool GetGoSleepWithWakeup() { return goSleepWithWakeup; }
         private static double odometerLastTrip;
+        internal static double GetOdometerLastTrip() { return odometerLastTrip; }
         private static bool highFrequencyLogging = false;
+        internal static bool GetHighFreequencyLogging() { return highFrequencyLogging; }
         private static int highFrequencyLoggingTicks = 0;
+        internal static int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private static int highFrequencyLoggingTicksLimit = 100;
+        internal static int GetHighFrequencyLoggingTicksLimit() { return highFrequencyLoggingTicksLimit; }
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
-        private enum HFLMode
+        internal static DateTime GetHighFrequencyLoggingUntil() { return highFrequencyLoggingUntil; }
+        internal enum HFLMode
         {
             Ticks,
             Time
         }
         private static HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
+        internal static HFLMode GetHighFrequencyLoggingMode() { return highFrequencyLoggingMode; }
         private static WebServer webServer;
 
         private static void Main(string[] args)
