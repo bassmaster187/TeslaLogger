@@ -143,14 +143,17 @@ namespace TeslaLogger
             values.Add("Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString());
             values.Add("Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString());
             values.Add("Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString());
-            values.Add("TLMemCacheKey.GetOutsideTempAsync</td><td>",
-                (MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
+            values.Add("TLMemCacheKey.GetOutsideTempAsync",
+                MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
                 ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
-                : "null"));
+                : "null");
             values.Add("Program.lastCarUsed", Program.GetLastCarUsed().ToString());
             values.Add("Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString());
             values.Add("Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString());
-            values.Add("Program.lastSetChargeLimitAddressName", Program.GetLastSetChargeLimitAddressName());
+            values.Add("Program.lastSetChargeLimitAddressName",
+                Program.GetLastSetChargeLimitAddressName().Equals(string.Empty)
+                ? "&lt;&gt;"
+                : Program.GetLastSetChargeLimitAddressName());
             values.Add("Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString());
             values.Add("Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString());
             values.Add("WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString());
