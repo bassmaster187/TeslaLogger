@@ -1,20 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
     public class WebServer
     {
-        HttpListener listener = null;
+        private HttpListener listener = null;
 
         public WebServer()
         {
@@ -38,7 +34,9 @@ namespace TeslaLogger
                     Logfile.Log("HTTPListener access denied. Check https://stackoverflow.com/questions/4019466/httplistener-access-denied");
                 }
                 else
+                {
                     Logfile.Log(hlex.ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -65,7 +63,9 @@ namespace TeslaLogger
                     Logfile.Log("HTTPListener access denied. Check https://stackoverflow.com/questions/4019466/httplistener-access-denied");
                 }
                 else
+                {
                     Logfile.Log(hlex.ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace TeslaLogger
             }
         }
 
-        void OnContext(object o)
+        private void OnContext(object o)
         {
             try
             {
@@ -95,15 +95,20 @@ namespace TeslaLogger
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
-                if (request.Url.LocalPath == @"/getchargingstate")
-                    getchargingstate(request, response);
-                else if (request.Url.LocalPath == @"/setcost")
-                    setcost(request, response);
-                else
+                switch (request.Url.LocalPath)
                 {
-                    string responseString = "URL Not Found!";
-                    WriteString(response, responseString);
+                    case @"/getchargingstate":
+                        Getchargingstate(request, response);
+                        break;
+                    case @"/setcost":
+                        Setcost(request, response);
+                        break;
+                    default:
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"URL Not Found!");
+                        break;
                 }
+
             }
             catch (Exception ex)
             {
@@ -111,7 +116,7 @@ namespace TeslaLogger
             }
         }
 
-        private void setcost(HttpListenerRequest request, HttpListenerResponse response)
+        private void Setcost(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -120,10 +125,12 @@ namespace TeslaLogger
                 string json;
 
                 if (request.QueryString["JSON"] != null)
+                {
                     json = request.QueryString["JSON"];
+                }
                 else
                 {
-                    using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
+                    using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
                     {
                         json = reader.ReadToEnd();
                     }
@@ -139,9 +146,13 @@ namespace TeslaLogger
                     MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con);
 
                     if (DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && IsZero(j["cost_per_session"]))
+                    {
                         cmd.Parameters.AddWithValue("@cost_total", 0);
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@cost_total", DBNullIfEmptyOrZero(j["cost_total"]));
+                    }
 
                     cmd.Parameters.AddWithValue("@cost_currency", DBNullIfEmpty(j["cost_currency"]));
                     cmd.Parameters.AddWithValue("@cost_per_kwh", DBNullIfEmpty(j["cost_per_kwh"]));
@@ -164,38 +175,35 @@ namespace TeslaLogger
             }
         }
 
-        object DBNullIfEmptyOrZero(string val)
+        private object DBNullIfEmptyOrZero(string val)
         {
-            if (val == null || val == "" || val == "0" || val == "0.00")
-                return DBNull.Value;
-
-            return val;
+            return val == null || val == "" || val == "0" || val == "0.00" ? DBNull.Value : (object)val;
         }
 
-        object DBNullIfEmpty(string val)
+        private object DBNullIfEmpty(string val)
         {
-            if (val == null || val == "")
-                return DBNull.Value;
-
-            return val;
+            return val == null || val == "" ? DBNull.Value : (object)val;
         }
 
-        bool IsZero(string val)
+        private bool IsZero(string val)
         {
             if (val == null || val == "")
+            {
                 return false;
+            }
 
-            double v;
-            if (Double.TryParse(val, out v))
+            if (double.TryParse(val, out double v))
             {
                 if (v == 0)
+                {
                     return true;
+                }
             }
 
             return false;
         }
 
-        private void getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
+        private void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
         {
             string id = request.QueryString["id"];
             string respone = "";
@@ -208,14 +216,7 @@ namespace TeslaLogger
                 da.SelectCommand.Parameters.AddWithValue("@id", id);
                 da.Fill(dt);
 
-                if (dt.Rows.Count > 0)
-                {
-                    respone = Tools.DataTableToJSONWithJavaScriptSerializer(dt);
-                }
-                else
-                {
-                    respone = "not found!";
-                }
+                respone = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
             }
             catch (Exception ex)
             {
@@ -230,7 +231,7 @@ namespace TeslaLogger
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
-            System.IO.Stream output = response.OutputStream;
+            Stream output = response.OutputStream;
             output.Write(buffer, 0, buffer.Length);
             // You must close the output stream.
             output.Close();

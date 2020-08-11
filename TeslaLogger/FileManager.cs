@@ -66,38 +66,13 @@ namespace TeslaLogger
             return false;
         }
 
-        public static string GetSetCostPath
-        {
-            get
-            {
-                if (Tools.IsDocker())
-                    return Path.Combine("/tmp/", "SetCost.txt");
-                else
-                    return Path.Combine(GetExecutingPath(), "SetCost.txt");
-            }
-        }
+        public static string GetSetCostPath => Tools.IsDocker() ? Path.Combine("/tmp/", "SetCost.txt") : Path.Combine(GetExecutingPath(), "SetCost.txt");
 
-        static string GetGoSleepPath
-        {
-            get
-            {
-                if (Tools.IsDocker())
-                    return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
-                else
-                    return GetFilePath(TLFilename.CmdGoSleepFilename);
-            }
-        }
+        private static string GetGoSleepPath => Tools.IsDocker()
+                    ? Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename])
+                    : GetFilePath(TLFilename.CmdGoSleepFilename);
 
-        internal static string GetWakeupTeslaloggerPath
-        {
-            get
-            {
-                if (Tools.IsDocker())
-                    return Path.Combine("/tmp/", Filenames[TLFilename.WakeupFilename]);
-                else
-                    return GetFilePath(TLFilename.WakeupFilename);
-            }
-        }
+        internal static string GetWakeupTeslaloggerPath => Tools.IsDocker() ? Path.Combine("/tmp/", Filenames[TLFilename.WakeupFilename]) : GetFilePath(TLFilename.WakeupFilename);
 
         internal static string GetTeslaTokenFileContent()
         {
