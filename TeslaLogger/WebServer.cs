@@ -135,29 +135,35 @@ namespace TeslaLogger
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
         {
-            Dictionary<string, string> values = new Dictionary<string, string>();
-            values.Add("Program._currentState", Program.GetCurrentState().ToString());
-            values.Add("WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState());
-            values.Add("Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString());
-            values.Add("Program.highFrequencyLoggingTicks", Program.GetHighFrequencyLoggingTicks().ToString());
-            values.Add("Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString());
-            values.Add("Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString());
-            values.Add("Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString());
-            values.Add("TLMemCacheKey.GetOutsideTempAsync",
-                MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
-                ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
-                : "null");
-            values.Add("Program.lastCarUsed", Program.GetLastCarUsed().ToString());
-            values.Add("Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString());
-            values.Add("Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString());
-            values.Add("Program.lastSetChargeLimitAddressName",
-                Program.GetLastSetChargeLimitAddressName().Equals(string.Empty)
-                ? "&lt;&gt;"
-                : Program.GetLastSetChargeLimitAddressName());
-            values.Add("Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString());
-            values.Add("Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString());
-            values.Add("WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString());
-            values.Add("WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString());
+            Dictionary<string, string> values = new Dictionary<string, string>
+            {
+                { "Program._currentState", Program.GetCurrentState().ToString() },
+                { "WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState() },
+                { "Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString() },
+                { "Program.highFrequencyLoggingTicks", Program.GetHighFrequencyLoggingTicks().ToString() },
+                { "Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString() },
+                { "Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString() },
+                { "Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString() },
+                {
+                    "TLMemCacheKey.GetOutsideTempAsync",
+                    MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
+                        ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
+                        : "null"
+                },
+                { "Program.lastCarUsed", Program.GetLastCarUsed().ToString() },
+                { "Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString() },
+                { "Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString() },
+                {
+                    "Program.lastSetChargeLimitAddressName",
+                    Program.GetLastSetChargeLimitAddressName().Equals(string.Empty)
+                        ? "&lt;&gt;"
+                        : Program.GetLastSetChargeLimitAddressName()
+                },
+                { "Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString() },
+                { "Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString() },
+                { "WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString() },
+                { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() }
+            };
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
         }
