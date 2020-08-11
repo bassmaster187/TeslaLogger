@@ -103,6 +103,9 @@ namespace TeslaLogger
                     case @"/setcost":
                         Setcost(request, response);
                         break;
+                    case @"/debug/TeslaAPI/vehicles":
+                        Debug_vehicles(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -114,6 +117,12 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private void Debug_vehicles(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            response.AddHeader("Content-Type:", "application/json");
+            WriteString(response, WebHelper.TeslaAPI_verhicles);
         }
 
         private void Setcost(HttpListenerRequest request, HttpListenerResponse response)

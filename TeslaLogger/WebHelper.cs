@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -515,6 +516,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
+                TeslaAPI_verhicles = resultContent;
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
@@ -2285,5 +2287,12 @@ FROM
         }
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath) || TaskerWakeupfile();
+
+        internal static string TeslaAPI_verhicles {
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            get;
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            set;
+        }
     }
 }
