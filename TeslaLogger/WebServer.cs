@@ -104,13 +104,15 @@ namespace TeslaLogger
                         Setcost(request, response);
                         break;
                     case @"/debug/TeslaAPI/vehicles":
-                        Debug_vehicles(request, response);
-                        break;
-                    case @"/debug/TeslaAPI/drive_state":
-                        Debug_drive_state(request, response);
-                        break;
                     case @"/debug/TeslaAPI/charge_state":
-                        Debug_charge_state(request, response);
+                    case @"/debug/TeslaAPI/climate_state":
+                    case @"/debug/TeslaAPI/drive_state":
+                    case @"/debug/TeslaAPI/vehicle_config":
+                    case @"/debug/TeslaAPI/vehicle_state":
+                    case @"/debug/TeslaAPI/command/auto_conditioning_stop":
+                    case @"/debug/TeslaAPI/command/charge_port_door_open":
+                    case @"/debug/TeslaAPI/command/set_charge_limit":
+                        Debug_TeslaAPI(request.Url.LocalPath, request, response);
                         break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -125,24 +127,18 @@ namespace TeslaLogger
             }
         }
 
-        private void Debug_vehicles(HttpListenerRequest request, HttpListenerResponse response)
+        private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)
         {
-            response.AddHeader("Content-Type", "application/json");
-            WriteString(response, WebHelper.TeslaAPI_verhicles);
-        }
-
-        private void Debug_drive_state(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            response.AddHeader("Content-Type", "application/json");
-            WebHelper.TeslaAPI_GetCommand.TryGetValue("drive_state", out string drive_state);
-            WriteString(response, drive_state);
-        }
-
-        private void Debug_charge_state(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            response.AddHeader("Content-Type", "application/json");
-            WebHelper.TeslaAPI_GetCommand.TryGetValue("charge_state", out string charge_state);
-            WriteString(response, charge_state);
+            int position = path.LastIndexOf('/');
+            if (position > -1)
+            {
+                path = path.Substring(position + 1);
+                if (path.Length > 0 && WebHelper.TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                {
+                    response.AddHeader("Content-Type", "application/json");
+                    WriteString(response, TeslaAPIJSON);
+                }
+            }
         }
 
         private void Setcost(HttpListenerRequest request, HttpListenerResponse response)

@@ -47,8 +47,7 @@ namespace TeslaLogger
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
-        internal static string TeslaAPI_verhicles; // synchronized automatically https://stackoverflow.com/questions/541194/c-sharp-version-of-javas-synchronized-keyword
-        internal static ConcurrentDictionary<string, string> TeslaAPI_GetCommand = new ConcurrentDictionary<string, string>();
+        internal static ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
 
         static WebHelper()
         {
@@ -401,7 +400,16 @@ namespace TeslaLogger
                     HttpResponseMessage result = resultTask.Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
                     DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
-    
+                    if (TeslaAPI_Commands.ContainsKey("vehicles"))
+                    {
+                        TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
+                        TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
+                    }
+                    else
+                    {
+                        TeslaAPI_Commands.TryAdd("vehicles", resultContent);
+                    }
+
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
@@ -521,7 +529,16 @@ namespace TeslaLogger
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
-                TeslaAPI_verhicles = resultContent;
+                if (TeslaAPI_Commands.ContainsKey("vehicles"))
+                {
+                    TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
+                    TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
+                }
+                else
+                {
+                    TeslaAPI_Commands.TryAdd("vehicles", resultContent);
+                }
+
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -1960,14 +1977,14 @@ FROM
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
-                if (TeslaAPI_GetCommand.ContainsKey(cmd))
+                if (TeslaAPI_Commands.ContainsKey(cmd))
                 {
-                    TeslaAPI_GetCommand.TryGetValue("drive_state", out string drive_state);
-                    TeslaAPI_GetCommand.TryUpdate(cmd, resultContent, drive_state);
+                    TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
+                    TeslaAPI_Commands.TryUpdate(cmd, resultContent, drive_state);
                 }
                 else
                 {
-                    TeslaAPI_GetCommand.TryAdd(cmd, resultContent);
+                    TeslaAPI_Commands.TryAdd(cmd, resultContent);
                 }
 
                 return resultContent;
@@ -2008,6 +2025,20 @@ FROM
                 HttpResponseMessage result = await client.PostAsync(url, data != null ? queryString : null);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("PostCommand(" + cmd + ")", start, (int)result.StatusCode);
+                int position = cmd.LastIndexOf('/');
+                if (position > -1)
+                {
+                    string command = cmd.Substring(position + 1);
+                    if (TeslaAPI_Commands.ContainsKey(command))
+                    {
+                        TeslaAPI_Commands.TryGetValue(command, out string drive_state);
+                        TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
+                    }
+                    else
+                    {
+                        TeslaAPI_Commands.TryAdd(command, resultContent);
+                    }
+                }
 
                 return resultContent;
             }
