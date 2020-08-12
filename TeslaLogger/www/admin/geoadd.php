@@ -83,7 +83,8 @@ $lng = $_REQUEST["lng"];
 	Text: $("#text").val(), 
 	lat: circle.getLatLng().lat, 
 	lng: circle.getLatLng().lng,
-	radius: circle.getRadius()
+	radius: circle.getRadius(),
+	flag: $("#flag").val()       
 	}).always(function() {
 	alert("Saved!");
 	//location.reload();
@@ -98,6 +99,7 @@ $lng = $_REQUEST["lng"];
 	<table>
 	<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text"/></td></tr>
 	<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="20" type="number"/></td></tr>
+	<tr><td><?php t("Special Flag"); ?>:</td><td><input id="flag"/></td></tr>
 	<tr><td></td><td><button onclick="save();" >Save</button></td></tr>
 	</table>
 	</div>

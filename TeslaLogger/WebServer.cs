@@ -29,6 +29,8 @@ namespace TeslaLogger
                 listener = new HttpListener();
                 listener.Prefixes.Add("http://*:5000/");
                 listener.Start();
+
+                Logfile.Log("HttpListener bound to http://*:5000/");
             }
             catch (HttpListenerException hlex)
             {
