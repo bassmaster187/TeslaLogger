@@ -1002,7 +1002,8 @@ namespace TeslaLogger
                 TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
                 if (ts.TotalMinutes > 120)
                 {
-                    Logfile.Log(" *** Check new Version ***");
+                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
 
                     string online_version = WebHelper.GetOnlineTeslaloggerVersion();
                     if (string.IsNullOrEmpty(online_version))
@@ -1015,8 +1016,7 @@ namespace TeslaLogger
 
                     lastVersionCheck = DateTime.UtcNow;
 
-                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    Tools.UpdateType updateType = Tools.UpdateSettings();
+                    Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
 
                     if (UpdateNeeded(currentVersion, online_version, updateType))
                     {
@@ -1046,6 +1046,10 @@ namespace TeslaLogger
                             Logfile.Log("Rebooting");
                             Exec_mono("reboot", "");
                         }
+                    }
+                    else
+                    {
+                        Logfile.Log($"TeslaLogger is up to date (current version: {currentVersion}, latest version online: {online_version}, update policy: {updateType})");
                     }
 
                     return;

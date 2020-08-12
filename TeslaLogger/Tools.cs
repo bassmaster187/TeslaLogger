@@ -234,7 +234,7 @@ namespace TeslaLogger
             return false;
         }
 
-        internal static UpdateType UpdateSettings()
+        internal static UpdateType GetOnlineUpdateSettings()
         {
             try
             {
