@@ -15,6 +15,7 @@ namespace TeslaLogger
         private static System.Threading.Timer timer;
 
         private static DateTime lastVersionCheck = DateTime.UtcNow;
+        internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }
 
         public static void Start(WebHelper wh)
         {

@@ -164,7 +164,8 @@ namespace TeslaLogger
                 { "Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString() },
                 { "Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString() },
                 { "WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString() },
-                { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() }
+                { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() },
+                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() }
             };
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
