@@ -105,6 +105,9 @@ namespace TeslaLogger
                     case @"/setcost":
                         Setcost(request, response);
                         break;
+                    case @"/admin/UpdateElevation":
+                        Admin_UpdateElevation(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -247,6 +250,16 @@ namespace TeslaLogger
             output.Write(buffer, 0, buffer.Length);
             // You must close the output stream.
             output.Close();
+        }
+
+        private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int from = 1;
+            int to = DBHelper.GetMaxPosid();
+            Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
+            WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
+            DBHelper.UpdateTripElevation(from, to);
+            Logfile.Log("Admin: UpdateElevation done");
         }
     }
 }
