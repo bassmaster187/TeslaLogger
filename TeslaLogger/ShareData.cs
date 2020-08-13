@@ -93,6 +93,16 @@ namespace TeslaLogger
 
                 foreach (DataRow dr in dt.Rows)
                 {
+                    // lat, lng
+                    if (double.TryParse(dr["lat"].ToString(), out double lat) && double.TryParse(dr["lng"].ToString(), out double lng))
+                    {
+                        Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
+                        if (addr != null && addr.IsHome)
+                        {
+                            Logfile.Log("Do not share ChargingData for +home (" + addr.name + ")");
+                            continue;
+                        }
+                    }
                     int HostId = Convert.ToInt32(dr["HostId"]);
 
                     Dictionary<string, object> d = new Dictionary<string, object>
