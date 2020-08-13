@@ -1005,6 +1005,11 @@ namespace TeslaLogger
                 DBHelper.currentJSON.current_falling_asleep = false;
                 DBHelper.currentJSON.CreateCurrentJSON();
             }
+            // Start -> Online - Update Car Version after Update
+            if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
+            {
+                _ = webhelper.GetOdometerAsync();
+            }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
