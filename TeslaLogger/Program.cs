@@ -746,7 +746,7 @@ namespace TeslaLogger
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
-            Logfile.Log("Update Settings: " + Tools.UpdateSettings().ToString());
+            Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
 
             Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
