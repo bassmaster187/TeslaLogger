@@ -2205,7 +2205,7 @@ FROM
                     { "OS", Tools.GetOsVersion() },
                     { "CC", DBHelper.currentJSON.current_country_code },
                     { "ST", DBHelper.currentJSON.current_state },
-                    { "UP", Tools.UpdateSettings().ToString() }
+                    { "UP", Tools.GetOnlineUpdateSettings().ToString() }
                 };
 
                 FormUrlEncodedContent content = new FormUrlEncodedContent(d);
