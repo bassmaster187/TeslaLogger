@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Threading;
@@ -161,6 +163,7 @@ namespace TeslaLogger
                 },
                 { "Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString() },
                 { "Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString() },
+                { "Program.ShiftStateDriveMaxPosID", Program.GetShiftStateDriveMaxPosID().ToString() },
                 { "WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString() },
                 { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() },
                 { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() }

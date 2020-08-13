@@ -54,6 +54,8 @@ namespace TeslaLogger
         internal static int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private static int highFrequencyLoggingTicksLimit = 100;
         internal static int GetHighFrequencyLoggingTicksLimit() { return highFrequencyLoggingTicksLimit; }
+        private static int ShiftStateDriveMaxPosID = -1;
+        internal static object GetShiftStateDriveMaxPosID() { return ShiftStateDriveMaxPosID; }
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
         internal static DateTime GetHighFrequencyLoggingUntil() { return highFrequencyLoggingUntil; }
         internal enum HFLMode
