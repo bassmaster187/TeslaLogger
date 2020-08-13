@@ -148,7 +148,6 @@ namespace TeslaLogger
             {
                 Logfile.Log("SetCost");
 
-
                 string json = System.IO.File.ReadAllText(FileManager.GetSetCostPath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
@@ -158,9 +157,13 @@ namespace TeslaLogger
                     MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total where id= @id", con);
                     
                     if (j["cost_total"] == null || j["cost_total"] == "" || j["cost_total"] == "0" || j["cost_total"] == "0.00")
+                    {
                         cmd.Parameters.AddWithValue("@cost_total", DBNull.Value);
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@cost_total", j["cost_total"]);
+                    }
 
                     cmd.Parameters.AddWithValue("@cost_currency", j["cost_currency"]);
                     cmd.Parameters.AddWithValue("@cost_per_kwh", j["cost_per_kwh"]);

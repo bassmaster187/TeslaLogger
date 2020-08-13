@@ -77,7 +77,7 @@ namespace TeslaLogger
         private FileSystemWatcher fsw;
 
         public bool RacingMode = false;
-        bool _RacingMode = false;
+        private bool _RacingMode = false;
 
         private static int FSWCounter = 0;
 
