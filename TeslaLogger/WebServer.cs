@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Net;
+using System.Runtime.Caching;
 using System.Threading;
 using System.Web.Script.Serialization;
 
@@ -105,6 +106,20 @@ namespace TeslaLogger
                     case @"/setcost":
                         Setcost(request, response);
                         break;
+                    case @"/debug/TeslaAPI/vehicles":
+                    case @"/debug/TeslaAPI/charge_state":
+                    case @"/debug/TeslaAPI/climate_state":
+                    case @"/debug/TeslaAPI/drive_state":
+                    case @"/debug/TeslaAPI/vehicle_config":
+                    case @"/debug/TeslaAPI/vehicle_state":
+                    case @"/debug/TeslaAPI/command/auto_conditioning_stop":
+                    case @"/debug/TeslaAPI/command/charge_port_door_open":
+                    case @"/debug/TeslaAPI/command/set_charge_limit":
+                        Debug_TeslaAPI(request.Url.LocalPath, request, response);
+                        break;
+                    case @"/debug/TeslaLogger/states":
+                        Debug_TeslaLoggerStates(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -115,6 +130,55 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>
+            {
+                { "Program._currentState", Program.GetCurrentState().ToString() },
+                { "WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState() },
+                { "Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString() },
+                { "Program.highFrequencyLoggingTicks", Program.GetHighFrequencyLoggingTicks().ToString() },
+                { "Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString() },
+                { "Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString() },
+                { "Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString() },
+                {
+                    "TLMemCacheKey.GetOutsideTempAsync",
+                    MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
+                        ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
+                        : "null"
+                },
+                { "Program.lastCarUsed", Program.GetLastCarUsed().ToString() },
+                { "Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString() },
+                { "Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString() },
+                {
+                    "Program.lastSetChargeLimitAddressName",
+                    Program.GetLastSetChargeLimitAddressName().Equals(string.Empty)
+                        ? "&lt;&gt;"
+                        : Program.GetLastSetChargeLimitAddressName()
+                },
+                { "Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString() },
+                { "Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString() },
+                { "WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString() },
+                { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() }
+            };
+            IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
+            WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
+        }
+
+        private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int position = path.LastIndexOf('/');
+            if (position > -1)
+            {
+                path = path.Substring(position + 1);
+                if (path.Length > 0 && WebHelper.TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                {
+                    response.AddHeader("Content-Type", "application/json");
+                    WriteString(response, TeslaAPIJSON);
+                }
             }
         }
 
