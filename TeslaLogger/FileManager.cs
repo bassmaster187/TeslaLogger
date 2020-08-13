@@ -77,6 +77,17 @@ namespace TeslaLogger
             }
         }
 
+        static string GetGoSleepPath
+        {
+            get
+            {
+                if (Tools.IsDocker())
+                    return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
+                else
+                    return GetFilePath(TLFilename.CmdGoSleepFilename);
+            }
+        }
+
         internal static string GetWakeupTeslaloggerPath
         {
             get
@@ -85,17 +96,6 @@ namespace TeslaLogger
                     return Path.Combine("/tmp/", Filenames[TLFilename.WakeupFilename]);
                 else
                     return GetFilePath(TLFilename.WakeupFilename);
-            }
-        }
-
-        internal static string GetGoSleepPath
-        {
-            get
-            {
-                if (Tools.IsDocker())
-                    return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
-                else
-                    return GetFilePath(TLFilename.CmdGoSleepFilename);
             }
         }
 
