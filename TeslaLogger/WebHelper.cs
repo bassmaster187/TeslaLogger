@@ -343,7 +343,7 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, Program.IsHighFrequenceLoggingEnabled(true) ? true : false, charger_pilot_current, charge_current_request);
+                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, Program.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
@@ -1123,8 +1123,7 @@ namespace TeslaLogger
                         elevation = "";
                     }
 
-                    double battery_range_km;
-                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level, out battery_range_km);
+                    double ideal_battery_range_km = GetIdealBatteryRangekm(out int battery_level, out double battery_range_km);
 
                     if (t_outside_temp != null)
                     {
@@ -1746,8 +1745,9 @@ FROM
                 }
 
                 if (r2["battery_range"] != null)
+                {
                     battery_range_km = Convert.ToDouble(r2["battery_range"]) / (double)0.62137;
-
+                }
 
                 if (r2["battery_level"] != null)
                 {
@@ -1766,7 +1766,7 @@ FROM
 
         private double lastOdometerKM = 0;
 
-        private async Task<double> GetOdometerAsync()
+        internal async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
             try

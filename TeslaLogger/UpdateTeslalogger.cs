@@ -544,7 +544,9 @@ namespace TeslaLogger
                         if (Range == "RR")
                         {
                             if (!(f.EndsWith("Akku Trips.json") || f.EndsWith("Speed Consumption.json")))
+                            {
                                 s = s.Replace("ideal_battery_range_km", "battery_range_km");
+                            }
                         }
 
                         if (power == "kw")
