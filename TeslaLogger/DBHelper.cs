@@ -576,11 +576,11 @@ namespace TeslaLogger
 
             Task.Factory.StartNew(() =>
               {
-                  UpdateTripElevation(StartPos, MaxPosId);
+                  UpdateTripElevation(StartPos, MaxPosId, " (Task)");
               });
         }
 
-        public static void UpdateTripElevation(int startPos, int maxPosId)
+        public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
         {
             if (WebHelper.geofence.RacingMode)
             {
@@ -592,7 +592,7 @@ namespace TeslaLogger
                 return;
             }
 
-            Logfile.Log($"UpdateTripElevation start:{startPos} ende:{maxPosId}");
+            Logfile.Log($"UpdateTripElevation{comment} start:{startPos} ende:{maxPosId}");
 
             string inhalt = "";
             try
@@ -1049,14 +1049,14 @@ namespace TeslaLogger
             Logfile.Log("UpdateAllDrivestateData end");
         }
 
-        public static void StartDriveState()
+        public static void StartDriveState(int MaxPosID = -1)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@Pos", MaxPosID == -1 ? GetMaxPosid() : MaxPosID);
                 cmd.ExecuteNonQuery();
             }
 

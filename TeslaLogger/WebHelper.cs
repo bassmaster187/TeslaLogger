@@ -1789,7 +1789,7 @@ FROM
 
         private double lastOdometerKM = 0;
 
-        private async Task<double> GetOdometerAsync()
+        internal async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
             try
