@@ -139,6 +139,9 @@ namespace TeslaLogger
         {
             Dictionary<string, string> values = new Dictionary<string, string>
             {
+                { "System.DateTime.Now", DateTime.Now.ToString() },
+                { "System.DateTime.UtcNow", DateTime.UtcNow.ToString() },
+                { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString() },
                 { "Program._currentState", Program.GetCurrentState().ToString() },
                 { "WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState() },
                 { "Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString() },
