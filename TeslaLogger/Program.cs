@@ -54,8 +54,6 @@ namespace TeslaLogger
         internal static int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private static int highFrequencyLoggingTicksLimit = 100;
         internal static int GetHighFrequencyLoggingTicksLimit() { return highFrequencyLoggingTicksLimit; }
-        private static int ShiftStateDriveMaxPosID = -1;
-        internal static object GetShiftStateDriveMaxPosID() { return ShiftStateDriveMaxPosID; }
         private static DateTime highFrequencyLoggingUntil = DateTime.Now;
         internal static DateTime GetHighFrequencyLoggingUntil() { return highFrequencyLoggingUntil; }
         internal enum HFLMode
@@ -462,7 +460,7 @@ namespace TeslaLogger
                     }
 
                     webhelper.StartStreamThread(); // für altitude
-                    DBHelper.StartDriveState(ShiftStateDriveMaxPosID);
+                    DBHelper.StartDriveState();
                     SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
@@ -612,7 +610,6 @@ namespace TeslaLogger
 
             // Alle States werden geschlossen
             DBHelper.CloseChargingState();
-            ShiftStateDriveMaxPosID = -1;
             DBHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
@@ -1100,12 +1097,6 @@ namespace TeslaLogger
                 string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
                 Logfile.Log("DisableSentryMode(): " + result);
             }*/
-            if (_oldState.Equals("P") && !_newState.Equals("P"))
-            {
-                webhelper.IsDriving(true);
-                ShiftStateDriveMaxPosID = DBHelper.GetMaxPosid();
-            }
-
          }
 
         private static void HandleSpecialFlag_SetChargeLimit(Address _addr, string _flagconfig)
