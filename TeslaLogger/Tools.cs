@@ -150,6 +150,11 @@ namespace TeslaLogger
             }
         }
 
+        internal static int GetHttpPort()
+        {
+            return 5000; // default
+        }
+
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
         {
             TimeSpan ts = DateTime.UtcNow - lastSleepingHourMinutsUpdated;
