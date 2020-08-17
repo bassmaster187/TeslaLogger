@@ -34,6 +34,11 @@ namespace TeslaLogger
             System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
         }
 
+        public static long ToUnixTime(DateTime dateTime)
+        {
+            return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
+        }
+
         public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
             if (Program.VERBOSE)

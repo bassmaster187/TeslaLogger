@@ -1,11 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -44,6 +46,8 @@ namespace TeslaLogger
         public ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
+
+        internal static ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
 
         static WebHelper()
         {
@@ -396,7 +400,16 @@ namespace TeslaLogger
                     HttpResponseMessage result = resultTask.Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
                     DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
-    
+                    if (TeslaAPI_Commands.ContainsKey("vehicles"))
+                    {
+                        TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
+                        TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
+                    }
+                    else
+                    {
+                        TeslaAPI_Commands.TryAdd("vehicles", resultContent);
+                    }
+
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         Logfile.Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
@@ -516,6 +529,16 @@ namespace TeslaLogger
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                if (TeslaAPI_Commands.ContainsKey("vehicles"))
+                {
+                    TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
+                    TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
+                }
+                else
+                {
+                    TeslaAPI_Commands.TryAdd("vehicles", resultContent);
+                }
+
 
                 if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -1954,6 +1977,15 @@ FROM
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                if (TeslaAPI_Commands.ContainsKey(cmd))
+                {
+                    TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
+                    TeslaAPI_Commands.TryUpdate(cmd, resultContent, drive_state);
+                }
+                else
+                {
+                    TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                }
 
                 return resultContent;
             }
@@ -1993,6 +2025,20 @@ FROM
                 HttpResponseMessage result = await client.PostAsync(url, data != null ? queryString : null);
                 resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("PostCommand(" + cmd + ")", start, (int)result.StatusCode);
+                int position = cmd.LastIndexOf('/');
+                if (position > -1)
+                {
+                    string command = cmd.Substring(position + 1);
+                    if (TeslaAPI_Commands.ContainsKey(command))
+                    {
+                        TeslaAPI_Commands.TryGetValue(command, out string drive_state);
+                        TeslaAPI_Commands.TryUpdate(command, resultContent, drive_state);
+                    }
+                    else
+                    {
+                        TeslaAPI_Commands.TryAdd(command, resultContent);
+                    }
+                }
 
                 return resultContent;
             }
