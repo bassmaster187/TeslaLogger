@@ -152,7 +152,30 @@ namespace TeslaLogger
 
         internal static int GetHttpPort()
         {
-            return 5000; // default
+            int httpport = 5000; // default
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return httpport;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "HTTPPort"))
+                {
+                    if (int.Parse(j["HTTPPort"]))
+                    {
+                        int.TryParse(j, out httpport);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return httpport;
         }
 
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
