@@ -1094,8 +1094,8 @@ namespace TeslaLogger
                         if (!GetLastShiftState().Equals("P"))
                         {
                             Logfile.Log("No Valid IsDriving since 10min! (shift_state=NULL)");
+                            SetLastShiftState("P");
                         }
-                        SetLastShiftState("P");
                         return false;
                     }
                     else
