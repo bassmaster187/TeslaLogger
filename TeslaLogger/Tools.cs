@@ -165,10 +165,7 @@ namespace TeslaLogger
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
                 if (IsPropertyExist(j, "HTTPPort"))
                 {
-                    if (int.Parse(j["HTTPPort"]))
-                    {
-                        int.TryParse(j, out httpport);
-                    }
+                    int.TryParse(j["HTTPPort"], out httpport);
                 }
             }
             catch (Exception ex)
