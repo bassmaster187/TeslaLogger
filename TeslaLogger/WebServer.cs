@@ -22,11 +22,12 @@ namespace TeslaLogger
             
             try
             {
+                int httpport = Tools.GetHttpPort();
                 listener = new HttpListener();
-                listener.Prefixes.Add("http://*:5000/");
+                listener.Prefixes.Add($"http://*:{httpport}/");
                 listener.Start();
 
-                Logfile.Log("HttpListener bound to http://*:5000/");
+                Logfile.Log($"HttpListener bound to http://*:{httpport}/");
             }
             catch (HttpListenerException hlex)
             {
@@ -50,11 +51,12 @@ namespace TeslaLogger
             {
                 if (listener == null)
                 {
+                    int httpport = Tools.GetHttpPort();
                     listener = new HttpListener();
-                    listener.Prefixes.Add("http://localhost:5000/");
+                    listener.Prefixes.Add($"http://localhost:{httpport}/");
                     listener.Start();
 
-                    Logfile.Log("HTTPListener only bound to Localhost!");
+                    Logfile.Log($"HTTPListener only bound to Localhost:{httpport}!");
                 }
             }
             catch (HttpListenerException hlex)
