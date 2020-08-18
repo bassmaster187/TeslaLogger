@@ -127,6 +127,12 @@ namespace TeslaLogger
                     case @"/admin/UpdateElevation":
                         Admin_UpdateElevation(request, response);
                         break;
+                    case @"/soc":
+                        soc(request, response);
+                        break;
+                    case @"/charge_watt":
+                        charge_watt(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -138,6 +144,19 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            //int Watt = DBHelper.currentJSON.current_charger_voltage * DBHelper.currentJSON.current_charger_phases * DBHelper.currentJSON.current_charger_actual_current;
+            double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
+            WriteString(response, ((int)Watt).ToString());
+        }
+
+        private void soc(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int soc = DBHelper.currentJSON.current_battery_level;
+            WriteString(response, soc.ToString());
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)

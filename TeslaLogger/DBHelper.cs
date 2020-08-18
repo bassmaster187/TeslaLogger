@@ -279,6 +279,7 @@ namespace TeslaLogger
             currentJSON.current_charger_voltage = 0;
             currentJSON.current_charger_phases = 0;
             currentJSON.current_charger_actual_current = 0;
+            currentJSON.current_charge_rate_km = 0;
 
             UpdateMaxChargerPower();
 

@@ -185,6 +185,7 @@ Ionity DE-Spessart Nord, 49.898302, 9.394346
 Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
+Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 1
 Ionity DE-Wunnenstein Ost, 49.045334, 9.266223
 Ionity DE-Wunnenstein West, 49.044276, 9.261639
 Ionity DK-Aabenraa, 55.065192, 9.366167
@@ -273,6 +274,7 @@ Ionity HU-Bábolna (dir. Budapest), 47.680553, 17.976528
 Ionity HU-Balatonkeresztúr (dir. Budapest), 46.68356, 17.37848
 Ionity HU-Balatonkeresztúr (dir. Zagreb), 46.685063, 17.37977
 Ionity HU-Kajászó (dir. Balaton), 47.307602, 18.744217
+Ionity HU-Szigetszentmiklós, 47.380371, 19.055785
 Ionity IE-Athlone, 53.400721, -7.827948
 Ionity IE-Cashel, 52.50884, -7.87441
 Ionity IE-Citynorth, 53.6376, -6.25894
@@ -381,7 +383,7 @@ Innogy DE-Ruraue West, 50.929795, 6.337327
 Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
-Supercharger AT-Graz,47.037208, 15.478644
+Supercharger AT-Graz, 47.037208, 15.478644
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
@@ -395,8 +397,7 @@ Supercharger AT-St. Anton, 47.131123, 10.271497
 Supercharger AT-St. Georgen, 47.929088, 13.502168
 Supercharger AT-St. Pölten, 48.205769, 15.618485
 Supercharger AT-St. Valentin, 48.196507, 14.527879, 20
-Supercharger AT-Traun,48.237012, 14.240255
-Supercharger AT-Vienna,48.1574455, 16.3345536
+Supercharger AT-Vienna, 48.1574455, 16.3345536
 Supercharger AT-Villach, 46.604193, 13.869091
 Supercharger AT-Wiener Neustadt, 47.804724, 16.210564
 Supercharger AU-Adelaide, -34.927592, 138.595240
@@ -553,7 +554,7 @@ Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
-Supercharger DE-Wernberg-Köblitz, 49.53226, 12.13497
+Supercharger DE-Wernberg-Köblitz, 49.532246, 12.134974, 10
 Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
@@ -993,6 +994,7 @@ Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
+Suoercharger US-Bristol TN, 36.591663, -82.261292
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Childress TX, 34.432503,-100.218625
 Supercharger US-Corsicana TX, 32.0686, -96.448217
@@ -1105,6 +1107,7 @@ TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Friedberg, 48.406611, 10.951264
 Aldi DE-Kaarst, 51.218956, 6.633498
 Aldi DE-Kelsterbach, 50.058617, 8.521086
 Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
@@ -1136,16 +1139,18 @@ Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
 Kaufland DE-Erding, 48.305332, 11.881886
 Kaufland DE-Erlangen, 49.593323, 11.026181
+Kaufland DE-Fellbach, 48.813484, 9.266494
 Kaufland DE-Frankfurt, 50.132218, 8.749362
+Kaufland DE-Göüüingen, 48.704563, 9.647031
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
-Kaufland DE-Fellbach, 48.813484, 9.266494
 Kaufland DE-Hattingen, 51.397722, 7.182943
+Kaufland DE-Kaufbeuren, 47.884276, 10.636879
+Kaufland DE-Lichtenfels, 50.137785, 11.074773
+Kaufland DE-Leonberg, 48.797085, 9.006616
 Kaufland DE-Marbach am Neckar, 48.943393, 9.266666
 Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
-Kaufland DE-Lichtenfels, 50.137785, 11.074773
-Kaufland DE-Leonberg, 48.797085, 9.006616
 Kaufland DE-Oberasbach, 49.435136, 10.967694
 Kaufland DE-Offenburg, 48.470007, 7.925176
 Kaufland DE-Pforzheim, 48.886253, 8.668658
@@ -1194,6 +1199,7 @@ Lidl FI-Vantaa, 60.261581, 24.87252
 Familia DE-Hamburg, 53.608366, 10.044162
 Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
 Familia DE-Reihenfeld, 53.822247, 10.502483
+Familia DE-Quickborn, 53.743005, 9.940652
 
 REWE DE-Bremen, 53.136455, 8.739926
 
@@ -1209,6 +1215,7 @@ CH Zürich ABB Oerlikon, 47.411564, 8.54106
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
+DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bitterfeld-Wolfen enviaM, 51.624576, 12.307812
@@ -1220,6 +1227,8 @@ DE Dresden ATU, 51.079151, 13.691018
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
 DE Essen Hauptbahnhof, 51.452362, 7.013726
 DE Frankenthal ATU, 49.545836, 8.352769
+DE Friedberg, 48.406472, 10.952051
+DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
@@ -1244,6 +1253,10 @@ DE Pforzen LEW Ladestation, 47.933544, 10.607971
 DE Schafstritt Nord, 52.257481, 9.306448
 DE Schönefeld Total, 52.370738, 13.526929
 DE Schleiz Autohof, 50.551565, 11.789977
+DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
 DE Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
+DE Wetzlar Leica, 50.553084, 8.533377
+DE Worms EWR AG, 49.630936, 8.356603
+ES Gandia, 38.969986, -0.178789
