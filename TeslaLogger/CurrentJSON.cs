@@ -26,6 +26,7 @@ namespace TeslaLogger
         public int current_charger_actual_current = 0;
         public double current_charge_energy_added = 0;
         public int current_charger_power = 0;
+        public double current_charge_rate_km = 0;
 
         public string current_car_version = "";
 
@@ -140,6 +141,7 @@ namespace TeslaLogger
                    { "charger_actual_current", current_charger_actual_current},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
+                   { "charge_rate_km", current_charge_rate_km},
                    { "car_version", current_car_version },
                    { "trip_start", current_trip_start.ToString("t",Tools.ciDeDE) },
                    { "trip_start_dt", current_trip_start.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ") },

@@ -25,11 +25,12 @@ namespace TeslaLogger
             
             try
             {
+                int httpport = Tools.GetHttpPort();
                 listener = new HttpListener();
-                listener.Prefixes.Add("http://*:5000/");
+                listener.Prefixes.Add($"http://*:{httpport}/");
                 listener.Start();
 
-                Logfile.Log("HttpListener bound to http://*:5000/");
+                Logfile.Log($"HttpListener bound to http://*:{httpport}/");
             }
             catch (HttpListenerException hlex)
             {
@@ -53,11 +54,12 @@ namespace TeslaLogger
             {
                 if (listener == null)
                 {
+                    int httpport = Tools.GetHttpPort();
                     listener = new HttpListener();
-                    listener.Prefixes.Add("http://localhost:5000/");
+                    listener.Prefixes.Add($"http://localhost:{httpport}/");
                     listener.Start();
 
-                    Logfile.Log("HTTPListener only bound to Localhost!");
+                    Logfile.Log($"HTTPListener only bound to Localhost:{httpport}!");
                 }
             }
             catch (HttpListenerException hlex)
@@ -108,7 +110,8 @@ namespace TeslaLogger
                     case @"/setcost":
                         Setcost(request, response);
                         break;
-                    case @"/debug/TeslaAPI/vehicles":
+
+                  case @"/debug/TeslaAPI/vehicles":
                     case @"/debug/TeslaAPI/charge_state":
                     case @"/debug/TeslaAPI/climate_state":
                     case @"/debug/TeslaAPI/drive_state":
@@ -121,6 +124,14 @@ namespace TeslaLogger
                         break;
                     case @"/debug/TeslaLogger/states":
                         Debug_TeslaLoggerStates(request, response);
+                    case @"/admin/UpdateElevation":
+                        Admin_UpdateElevation(request, response);
+                        break;
+                    case @"/soc":
+                        soc(request, response);
+                        break;
+                    case @"/charge_watt":
+                        charge_watt(request, response);
                         break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -133,6 +144,19 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            //int Watt = DBHelper.currentJSON.current_charger_voltage * DBHelper.currentJSON.current_charger_phases * DBHelper.currentJSON.current_charger_actual_current;
+            double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
+            WriteString(response, ((int)Watt).ToString());
+        }
+
+        private void soc(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int soc = DBHelper.currentJSON.current_battery_level;
+            WriteString(response, soc.ToString());
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
@@ -317,6 +341,16 @@ namespace TeslaLogger
             output.Write(buffer, 0, buffer.Length);
             // You must close the output stream.
             output.Close();
+        }
+
+        private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int from = 1;
+            int to = DBHelper.GetMaxPosid();
+            Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
+            WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
+            DBHelper.UpdateTripElevation(from, to);
+            Logfile.Log("Admin: UpdateElevation done");
         }
     }
 }

@@ -313,6 +313,12 @@ namespace TeslaLogger
                     fast_charger_present = bool.Parse(r2["fast_charger_present"].ToString());
                 }
 
+                if (r2["charge_rate"] != null)
+                {
+                    DBHelper.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
+
+                }
+
                 if (r2["charge_limit_soc"] != null)
                 {
                     if (DBHelper.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
