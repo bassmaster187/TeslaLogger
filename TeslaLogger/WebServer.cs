@@ -110,8 +110,7 @@ namespace TeslaLogger
                     case @"/setcost":
                         Setcost(request, response);
                         break;
-
-                  case @"/debug/TeslaAPI/vehicles":
+                    case @"/debug/TeslaAPI/vehicles":
                     case @"/debug/TeslaAPI/charge_state":
                     case @"/debug/TeslaAPI/climate_state":
                     case @"/debug/TeslaAPI/drive_state":
@@ -124,6 +123,7 @@ namespace TeslaLogger
                         break;
                     case @"/debug/TeslaLogger/states":
                         Debug_TeslaLoggerStates(request, response);
+                        break;
                     case @"/admin/UpdateElevation":
                         Admin_UpdateElevation(request, response);
                         break;
