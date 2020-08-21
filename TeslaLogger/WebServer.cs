@@ -127,6 +127,9 @@ namespace TeslaLogger
                     case @"/admin/UpdateElevation":
                         Admin_UpdateElevation(request, response);
                         break;
+                    case @"/admin/ReloadGeofence":
+                        Admin_ReloadGeofence(request, response);
+                        break;
                     case @"/soc":
                         soc(request, response);
                         break;
@@ -144,6 +147,15 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static void Admin_ReloadGeofence(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Logfile.Log("Admin: ReloadGeofence ...");
+            WriteString(response, "Admin: ReloadGeofence ...");
+            WebHelper.geofence.Init();
+            WebHelper.UpdateAllPOIAddresses();
+            Logfile.Log("Admin: ReloadGeofence done");
         }
 
         private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)

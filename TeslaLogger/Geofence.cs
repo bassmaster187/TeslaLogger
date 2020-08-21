@@ -102,7 +102,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Init()
+        internal void Init()
         {
             List<Address> list = new List<Address>();
 
