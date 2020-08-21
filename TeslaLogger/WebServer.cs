@@ -128,6 +128,7 @@ namespace TeslaLogger
                         Admin_UpdateElevation(request, response);
                         break;
                     case @"/admin/ReloadGeofence":
+                        // optional query parameter: html --> returns html instead of JSON
                         Admin_ReloadGeofence(request, response);
                         break;
                     case @"/soc":
@@ -152,8 +153,28 @@ namespace TeslaLogger
         private static void Admin_ReloadGeofence(HttpListenerRequest request, HttpListenerResponse response)
         {
             Logfile.Log("Admin: ReloadGeofence ...");
-            WriteString(response, "Admin: ReloadGeofence ...");
             WebHelper.geofence.Init();
+            
+            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
+            {
+                IEnumerable<string> trs = WebHelper.geofence.sortedList.Select(
+                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>",
+                    a.name,
+                    a.lat,
+                    a.lng,
+                    a.radius,
+                    string.Concat(a.specialFlags.Select(
+                        sp => string.Format("{0}<br/>",
+                        sp.ToString())))
+                    )
+                );
+                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(trs) + "</table></body></html>");
+            }
+            else
+            {
+                // TODO return JSON response success/error message like Tesla API
+                WriteString(response, "Admin: ReloadGeofence ...");
+            }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
         }
