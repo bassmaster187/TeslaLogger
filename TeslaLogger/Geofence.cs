@@ -23,8 +23,7 @@ namespace TeslaLogger
         public enum GeofenceSource
         {
             Geofence,
-            GeofencePrivate,
-            GeofencePrivateReplace
+            GeofencePrivate
         }
 
         public string name;
@@ -242,8 +241,6 @@ namespace TeslaLogger
                     foreach (Address addr in list)
                     {
                         bool keepAddr = true;
-                        // set all adresses from geofence to replaced, see comment below
-                        addr.geofenceSource = Address.GeofenceSource.GeofencePrivateReplace;
                         foreach (string localName in uniqueNameList)
                         {
                             if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
@@ -255,8 +252,6 @@ namespace TeslaLogger
                         }
                         if (keepAddr)
                         {
-                            // reset source to geofence
-                            addr.geofenceSource = Address.GeofenceSource.Geofence;
                             localList.Add(addr);
                         }
                     }
