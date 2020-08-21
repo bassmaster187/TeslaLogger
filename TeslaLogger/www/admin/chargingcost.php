@@ -19,24 +19,29 @@ require("tools.php");
 .sum {padding-left: 20px; text-align: right;}
 </style>
 
-	<script>	
+	<script>
+    var minutes;
+    var kwh;
+    var errortext;
 <?php
 
     $url = "http://localhost:5000/getchargingstate?id=". $_REQUEST["id"];
     if (isDocker())
         $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
 
-    $output = file_get_contents($url);
-    echo("var json = JSON.parse('$output');\n");
-/*
-    $output = exec("/etc/teslalogger/TeslaLogger.exe getchargingstate ". $_REQUEST["id"]);
-    echo("var json = JSON.parse('".substr($output, 3)."');\n");
-    */
-
-    
-?>
-    var minutes;
-    var kwh;
+    $output = @file_get_contents($url);
+    if ($output === false)
+    {
+        $error = error_get_last();
+        $error = explode(': ', $error['message']);
+        $error = trim($error[2]);
+        echo("errortext = 'Error: $error - URL: $url'");
+    }
+    else
+    {
+        echo("    var json = JSON.parse('$output');\n");
+    }
+?>    
 
 	$( function() {
         var loc;
@@ -45,7 +50,14 @@ require("tools.php");
 		else
             loc = navigator.language;
 
-        $("#address").text(json[0]["address"]);
+        if (errortext != undefined)
+        {
+            $("#errortext").text(errortext);
+        }
+        else
+        {
+            $("#address").text(json[0]["address"]);
+        }
 
         kwh = Number(json[0]["kWh"]);
         $("#charge_energy_added").text(kwh + " kWh");   
@@ -159,6 +171,7 @@ include "menu.php";
 echo(menu("Charging Cost"));
 ?>
 <div>
+<h1 style="color: red;"><span id="errortext"></span></h1>
 <table>
 <tr><td><h1><?php t("Ladekosten"); ?></h1></td><td></td></tr>
 <tr><td><?php t("Ladesäule"); ?>:</td><td colspan="4"><span id="address"></span></td></tr>
