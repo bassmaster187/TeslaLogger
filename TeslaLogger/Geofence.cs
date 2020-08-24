@@ -17,7 +17,8 @@ namespace TeslaLogger
             HighFrequencyLogging,
             EnableSentryMode,
             SetChargeLimit,
-            ClimateOff
+            ClimateOff,
+            CopyChargePrice
         }
 
         public string name;
@@ -285,6 +286,10 @@ namespace TeslaLogger
                 {
                     SpecialFlag_COF(_addr, flag);
                 }
+                else if (flag.Equals("ccp"))
+                {
+                    SpecialFlag_CCP(_addr, flag);
+                }
             }
         }
 
@@ -316,6 +321,11 @@ namespace TeslaLogger
                 // default
                 _addr.specialFlags.Add(Address.SpecialFlags.ClimateOff, "RND->P");
             }
+        }
+
+        private static void SpecialFlag_CCP(Address _addr, string _flag)
+        {
+            _addr.specialFlags.Add(Address.SpecialFlags.CopyChargePrice, "");
         }
 
         private static void SpecialFlag_SCL(Address _addr, string _flag)
