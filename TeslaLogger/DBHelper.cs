@@ -284,6 +284,17 @@ namespace TeslaLogger
             UpdateMaxChargerPower();
 
             Task.Factory.StartNew(() => CheckForInterruptedCharging(false));
+
+            Task.Factory.StartNew(() =>
+            {
+                Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice)) {
+                        Program.HandleSpecialFlag_CopyChargePrice(addr);
+                    }
+                }
+            });
         }
 
         public static void UpdateMaxChargerPower()

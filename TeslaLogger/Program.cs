@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
@@ -1073,15 +1074,16 @@ namespace TeslaLogger
                         case Address.SpecialFlags.OpenChargePort:
                             HandleSpecialFlag_OpenChargePort(flag.Value, _oldState, _newState);
                             break;
-                        case Address.SpecialFlags.HighFrequencyLogging:
-                            break;
                         case Address.SpecialFlags.EnableSentryMode:
                             HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
                             break;
-                        case Address.SpecialFlags.SetChargeLimit:
-                            break;
                         case Address.SpecialFlags.ClimateOff:
                             HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
+                            break;
+                        case Address.SpecialFlags.HighFrequencyLogging:
+                        case Address.SpecialFlags.CopyChargePrice:
+                        case Address.SpecialFlags.SetChargeLimit:
+                            // nothing to do when shift state changes
                             break;
                         default:
                             Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -1097,7 +1099,77 @@ namespace TeslaLogger
                 string result = webhelper.PostCommand("command/set_sentry_mode?on=false", null).Result;
                 Logfile.Log("DisableSentryMode(): " + result);
             }*/
-         }
+        }
+
+        // this should be called from a task
+        internal static void HandleSpecialFlag_CopyChargePrice(Address _addr)
+        {
+            Logfile.Log("HandleSpecialFlag_CopyChargePrice");
+            // find charging session at Address with cost_total != NULL and cost_kwh_meter_invoice == NULL and cost_idle_fee_total == NULL
+            long referenceID = 0;
+            double cost_total = -1.0;
+            string cost_currency = "";
+            double cost_per_kwh = 0.0;
+            double cost_per_session = 0.0;
+            double cost_per_minute = 0.0;
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id, chargingstate.cost_total, chargingstate.cost_currency, chargingstate.cost_per_kwh, chargingstate.cost_per_session, chargingstate.cost_per_minute FROM chargingstate, pos WHERE chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NOT NULL AND chargingstate.cost_kwh_meter_invoice IS NULL and chargingstate.cost_idle_fee_total IS NULL ORDER BY id DESC LIMIT 1", con);
+                cmd.Parameters.AddWithValue("@address", _addr.name);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 6)
+                {
+                    referenceID = long.Parse(dr[0].ToString());
+                    cost_total = double.Parse(dr[1].ToString());
+                    cost_currency = dr[2].ToString();
+                    cost_per_kwh = double.Parse(dr[3].ToString());
+                    cost_per_session = double.Parse(dr[4].ToString());
+                    cost_per_minute = double.Parse(dr[5].ToString());
+                }
+                con.Close();
+            }
+            if (cost_total != -1.0)
+            {
+                // reference charging costs for addr found, now get latest charging session at addr
+                Logfile.Log($"CopyChargePrice: reference charging session  at {_addr.name} found, ID {referenceID}");
+                long chargeID = 0;
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id FROM chargingstate, pos WHERE chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NULL ORDER BY id DESC LIMIT 1", con);
+                    cmd.Parameters.AddWithValue("@address", _addr.name);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value)
+                    {
+                        chargeID = long.Parse(dr[0].ToString());
+                        Logfile.Log($"CopyChargePrice: latest charging session at {_addr.name} has ID {chargeID}");
+                    }
+                    con.Close();
+                }
+                if (chargeID != 0)
+                {
+                    // update charge session with id chargeID
+                    if (cost_total == 0.0 && cost_per_session == 0.0)
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET cost_total = @cost_total, cost_per_session=@cost_per_session where id=@id", con);
+                            cmd.Parameters.AddWithValue("@cost_total", cost_total);
+                            cmd.Parameters.AddWithValue("@cost_per_session", cost_per_session);
+                            cmd.Parameters.AddWithValue("@id", chargeID);
+                            _ = cmd.ExecuteNonQuery();
+                            Logfile.Log($"CopyChargePrice: update charging session at {_addr.name}, ID {chargeID}: cost_total 0.0");
+                        }
+                    }
+                    else
+                    {
+                        // TODO implement different calculation cases for non-free charging sessions
+                    }
+                }
+            }
+        }
 
         private static void HandleSpecialFlag_SetChargeLimit(Address _addr, string _flagconfig)
         {
