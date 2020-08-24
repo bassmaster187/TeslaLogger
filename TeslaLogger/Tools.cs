@@ -5,7 +5,9 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Web.Script.Serialization;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
@@ -229,6 +231,68 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
+        {
+            try
+            {
+                if (!Tools.IsMono())
+                {
+                    return "";
+                }
+
+                Logfile.Log("execute: " + cmd + " " + param);
+
+                StringBuilder sb = new StringBuilder();
+
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                };
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.FileName = cmd;
+                proc.StartInfo.Arguments = param;
+
+                proc.Start();
+
+                while (!proc.HasExited)
+                {
+                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+
+                    if (logging && line.Length > 0)
+                    {
+                        Logfile.Log(" " + line);
+                    }
+
+                    sb.AppendLine(line);
+
+                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
+
+                    if (logging && line.Length > 0)
+                    {
+                        if (stderr2stdout)
+                        {
+                            Logfile.Log(" " + line);
+                        }
+                        else
+                        {
+                            Logfile.Log("Error: " + line);
+                        }
+                    }
+
+                    sb.AppendLine(line);
+                }
+
+                return sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Exception " + cmd + " " + ex.Message);
+                return "Exception";
             }
         }
 
@@ -671,6 +735,132 @@ namespace TeslaLogger
                 }
                 ResetLine();
             }
-        };
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static void Housekeeping()
+        {
+            // df and du before cleanup
+            LogDiskUsage();
+            // cleanup Exceptions
+            CleanupExceptionsDir();
+            // cleanup database
+            CleanupDatabaseTableMothership();
+        }
+
+        private static void CleanupDatabaseTableMothership()
+        {
+            long mothershipCount = 0;
+            long mothershipMaxId = 0;
+            long mothershipMinId = 0;
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id), MAX(id), MIN(id) FROM mothership WHERE ts < @tsdate", con);
+                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                try
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        _ = long.TryParse(dr[0].ToString(), out mothershipCount);
+                        _ = long.TryParse(dr[1].ToString(), out mothershipMaxId);
+                        _ = long.TryParse(dr[2].ToString(), out mothershipMinId);
+                        Logfile.Log($"Housekeeping: database.mothership older than 90 days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+                con.Close();
+            }
+            // split into chunks to keep database load low
+            for (long dbupdate = mothershipMinId + 1000; dbupdate <= mothershipMaxId; dbupdate += 1000)
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    Logfile.Log($"Housekeeping: delete database.mothership chunk {dbupdate}");
+                    con.Open();
+                    string SQLcmd = "DELETE FROM mothership where id < @maxid";
+                    MySqlCommand cmd = new MySqlCommand(SQLcmd, con);
+                    cmd.Parameters.AddWithValue("@maxid", dbupdate);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+                    con.Close();
+                }
+                Thread.Sleep(5000);
+            }
+            // report again
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con);
+                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                try
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        _ = long.TryParse(dr[0].ToString(), out mothershipCount);
+                        Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+                con.Close();
+            }
+        }
+
+        private static void CleanupExceptionsDir()
+        {
+            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            {
+                foreach (string fs in Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                {
+                    if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
+                    {
+                        try
+                        {
+                            Logfile.Log("Housekeeping: delete file " + fs);
+                            File.Delete(fs);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                }
+            }
+            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            {
+                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+            }
+        }
+
+        private static void LogDiskUsage()
+        {
+            Exec_mono("/bin/df", "-k", true, true);
+            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/backup"))
+            {
+                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+            }
+            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            {
+                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+            }
+            if (File.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
+            {
+                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
+            }
+        }
     }
 }
