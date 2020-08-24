@@ -179,6 +179,12 @@ namespace TeslaLogger
                         ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
                         : "null"
                 },
+                {
+                    "TLMemCacheKey.Housekeeping",
+                    MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
+                        ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString()
+                        : "null"
+                },
                 { "Program.lastCarUsed", Program.GetLastCarUsed().ToString() },
                 { "Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString() },
                 { "Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString() },

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -746,6 +747,33 @@ namespace TeslaLogger
             CleanupExceptionsDir();
             // cleanup database
             CleanupDatabaseTableMothership();
+            // run housekeeping regularly:
+            // - after 24h
+            // - but only if car is asleep, otherwise wait another hour
+            CreateMemoryCacheItem();
+        }
+
+        private static void CreateMemoryCacheItem(int hours = 24)
+        {
+            CacheItemPolicy policy = new CacheItemPolicy();
+            policy.AbsoluteExpiration = DateTime.Now.AddHours(hours);
+            CacheEntryRemovedCallback removeCallback = new CacheEntryRemovedCallback(HousekeepingCallback);
+            policy.RemovedCallback = removeCallback;
+            _ = MemoryCache.Default.Add(Program.TLMemCacheKey.Housekeeping.ToString(), policy, policy);
+        }
+
+        private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
+        {
+            if (Program.GetCurrentState() == Program.TeslaState.Sleep)
+            {
+                // CacheItem was removed and car is asleep, so run housekeeping
+                Program.RunHousekeepingInBackground();
+            }
+            else
+            {
+                // wait another hour to try again
+                CreateMemoryCacheItem(1);
+            }
         }
 
         private static void CleanupDatabaseTableMothership()
@@ -775,19 +803,44 @@ namespace TeslaLogger
                 }
                 con.Close();
             }
-            // split into chunks to keep database load low
-            for (long dbupdate = mothershipMinId + 1000; dbupdate <= mothershipMaxId; dbupdate += 1000)
+            if (mothershipCount >= 1000)
             {
+                // split into chunks to keep database load low
+                for (long dbupdate = mothershipMinId + 1000; dbupdate <= mothershipMaxId; dbupdate += 1000)
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        Logfile.Log($"Housekeeping: delete database.mothership chunk {dbupdate}");
+                        con.Open();
+                        string SQLcmd = "DELETE FROM mothership where id < @maxid";
+                        MySqlCommand cmd = new MySqlCommand(SQLcmd, con);
+                        cmd.Parameters.AddWithValue("@maxid", dbupdate);
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                        con.Close();
+                    }
+                    Thread.Sleep(5000);
+                }
+                // report again
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    Logfile.Log($"Housekeeping: delete database.mothership chunk {dbupdate}");
                     con.Open();
-                    string SQLcmd = "DELETE FROM mothership where id < @maxid";
-                    MySqlCommand cmd = new MySqlCommand(SQLcmd, con);
-                    cmd.Parameters.AddWithValue("@maxid", dbupdate);
+                    MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con);
+                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
                     try
                     {
-                        cmd.ExecuteNonQuery();
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            _ = long.TryParse(dr[0].ToString(), out mothershipCount);
+                            Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -795,33 +848,12 @@ namespace TeslaLogger
                     }
                     con.Close();
                 }
-                Thread.Sleep(5000);
-            }
-            // report again
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-            {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con);
-                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
-                try
-                {
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
-                    {
-                        _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                        Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logfile.Log(ex.ToString());
-                }
-                con.Close();
             }
         }
 
         private static void CleanupExceptionsDir()
         {
+            bool filesFoundForDeletion = false;
             if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
                 foreach (string fs in Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
@@ -832,6 +864,7 @@ namespace TeslaLogger
                         {
                             Logfile.Log("Housekeeping: delete file " + fs);
                             File.Delete(fs);
+                            filesFoundForDeletion = true;
                         }
                         catch (Exception ex)
                         {
@@ -840,9 +873,12 @@ namespace TeslaLogger
                     }
                 }
             }
-            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (filesFoundForDeletion)
             {
-                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                {
+                    Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                }
             }
         }
 

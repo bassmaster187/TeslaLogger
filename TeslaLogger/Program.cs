@@ -28,7 +28,8 @@ namespace TeslaLogger
 
         public enum TLMemCacheKey
         {
-            GetOutsideTempAsync
+            GetOutsideTempAsync,
+            Housekeeping
         }
 
         // encapsulate state
@@ -879,7 +880,7 @@ namespace TeslaLogger
             DBUpdater.Start();
         }
 
-        private static void RunHousekeepingInBackground()
+        internal static void RunHousekeepingInBackground()
         {
             Thread Housekeeper = new Thread(() =>
             {
