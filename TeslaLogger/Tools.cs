@@ -750,10 +750,10 @@ namespace TeslaLogger
             // run housekeeping regularly:
             // - after 24h
             // - but only if car is asleep, otherwise wait another hour
-            CreateMemoryCacheItem();
+            CreateMemoryCacheItem(24);
         }
 
-        private static void CreateMemoryCacheItem(int hours = 24)
+        private static void CreateMemoryCacheItem(double hours = 24.0)
         {
             CacheItemPolicy policy = new CacheItemPolicy();
             policy.AbsoluteExpiration = DateTime.Now.AddHours(hours);
