@@ -1040,9 +1040,11 @@ namespace TeslaLogger
                                 HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
                                 break;
                             case Address.SpecialFlags.ClimateOff:
+                            case Address.SpecialFlags.CopyChargePrice:
+                                // nothing to do when tesla logger / vehicle state changes
                                 break;
                             default:
-                                Logfile.Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                                Logfile.Log("handleStateChange unhandled special flag " + flag.ToString());
                                 break;
                         }
                     }
@@ -1119,8 +1121,31 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id, chargingstate.cost_total, chargingstate.cost_currency, chargingstate.cost_per_kwh, chargingstate.cost_per_session, chargingstate.cost_per_minute, chargingstate.startdate, chargingstate.enddate, charging.charge_energy_added FROM chargingstate, pos, charging WHERE chargingstate.endchargingid = charging.id chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NOT NULL AND chargingstate.cost_kwh_meter_invoice IS NULL and chargingstate.cost_idle_fee_total IS NULL ORDER BY id DESC LIMIT 1", con);
-                cmd.Parameters.AddWithValue("@address", _addr.name);
+                MySqlCommand cmd = new MySqlCommand($"" +
+$"SELECT " +
+$"  chargingstate.id, " +
+$"  chargingstate.cost_total, " +
+$"  chargingstate.cost_currency, " +
+$"  chargingstate.cost_per_kwh, " +
+$"  chargingstate.cost_per_session, " +
+$"  chargingstate.cost_per_minute, " +
+$"  chargingstate.startdate, " +
+$"  chargingstate.enddate, " +
+$"  charging.charge_energy_added " +
+$"FROM " +
+$"  chargingstate, " +
+$"  pos, " +
+$"  charging " +
+$"WHERE " +
+$"  chargingstate.endchargingid = charging.id " +
+$"  AND chargingstate.pos = pos.id " +
+$"  AND pos.address = '{_addr.name}' " +
+$"  AND chargingstate.cost_total IS NOT NULL " +
+$"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
+$"  AND chargingstate.cost_idle_fee_total IS NULL " +
+$"ORDER BY id DESC " +
+$"LIMIT 1", con);
+                Tools.DebugLog("SQL:" + cmd.CommandText);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
                 {
@@ -1144,8 +1169,19 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id FROM chargingstate, pos WHERE chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NULL ORDER BY id DESC LIMIT 1", con);
-                    cmd.Parameters.AddWithValue("@address", _addr.name);
+                    MySqlCommand cmd = new MySqlCommand($"" +
+$"SELECT " +
+$"  chargingstate.id " +
+$"FROM " +
+$"  chargingstate, " +
+$"  pos " +
+$"WHERE " +
+$"  chargingstate.pos = pos.id " +
+$"  AND pos.address = '{_addr.name}' " +
+$"  AND chargingstate.cost_total IS NULL " +
+$"ORDER BY id DESC " +
+$"LIMIT 1", con);
+                    Tools.DebugLog("SQL:" + cmd.CommandText);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
@@ -1162,7 +1198,19 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
-                            MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice WHERE id=@id", con);
+                            MySqlCommand cmd = new MySqlCommand($"" +
+$"UPDATE " +
+$"  chargingstate " +
+$"SET " +
+$"  cost_total = @cost_total, " +
+$"  cost_currency=@cost_currency, " +
+$"  cost_per_kwh=@cost_per_kwh, " +
+$"  cost_per_session=@cost_per_session, " +
+$"  cost_per_minute=@cost_per_minute, " +
+$"  cost_idle_fee_total=@cost_idle_fee_total, " +
+$"  cost_kwh_meter_invoice=@cost_kwh_meter_invoice " +
+$"WHERE " +
+$"  id=@id", con);
                             cmd.Parameters.AddWithValue("@cost_total", cost_total);
                             cmd.Parameters.AddWithValue("@cost_per_session", cost_per_session);
                             cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(cost_currency.ToString()));
@@ -1171,6 +1219,7 @@ namespace TeslaLogger
                             cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
                             cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
                             cmd.Parameters.AddWithValue("@id", chargeID);
+                            Tools.DebugLog("SQL:" + cmd.CommandText);
                             _ = cmd.ExecuteNonQuery();
                             Logfile.Log($"CopyChargePrice: update charging session at {_addr.name}, ID {chargeID}: cost_total 0.0");
                         }
@@ -1211,7 +1260,7 @@ namespace TeslaLogger
                     {
                         Task.Factory.StartNew(() =>
                         {
-                            Logfile.Log($"SetChargeLimit to {chargelimit} ...");
+                            Logfile.Log($"SetChargeLimit to {chargelimit}% ...");
                             string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                             Logfile.Log("set_charge_limit(): " + result);
                             lastSetChargeLimitAddressName = _addr.name;
