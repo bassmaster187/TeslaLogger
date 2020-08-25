@@ -1112,20 +1112,27 @@ namespace TeslaLogger
             double cost_per_kwh = 0.0;
             double cost_per_session = 0.0;
             double cost_per_minute = 0.0;
+            DateTime chargeStart = DateTime.Now;
+            DateTime chargeEnd = chargeStart;
+            string charge_energy_added = "";
+
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id, chargingstate.cost_total, chargingstate.cost_currency, chargingstate.cost_per_kwh, chargingstate.cost_per_session, chargingstate.cost_per_minute FROM chargingstate, pos WHERE chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NOT NULL AND chargingstate.cost_kwh_meter_invoice IS NULL and chargingstate.cost_idle_fee_total IS NULL ORDER BY id DESC LIMIT 1", con);
+                MySqlCommand cmd = new MySqlCommand("SELECT chargingstate.id, chargingstate.cost_total, chargingstate.cost_currency, chargingstate.cost_per_kwh, chargingstate.cost_per_session, chargingstate.cost_per_minute, chargingstate.startdate, chargingstate.enddate, charging.charge_energy_added FROM chargingstate, pos, charging WHERE chargingstate.endchargingid = charging.id chargingstate.pos = pos.id AND pos.address = @address AND chargingstate.cost_total IS NOT NULL AND chargingstate.cost_kwh_meter_invoice IS NULL and chargingstate.cost_idle_fee_total IS NULL ORDER BY id DESC LIMIT 1", con);
                 cmd.Parameters.AddWithValue("@address", _addr.name);
                 MySqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 6)
+                if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
                 {
-                    referenceID = long.Parse(dr[0].ToString());
-                    cost_total = double.Parse(dr[1].ToString());
+                    long.TryParse(dr[0].ToString(), out referenceID);
+                    double.TryParse(dr[1].ToString(), out cost_total);
                     cost_currency = dr[2].ToString();
-                    cost_per_kwh = double.Parse(dr[3].ToString());
-                    cost_per_session = double.Parse(dr[4].ToString());
-                    cost_per_minute = double.Parse(dr[5].ToString());
+                    double.TryParse(dr[3].ToString(), out cost_per_kwh);
+                    double.TryParse(dr[4].ToString(), out cost_per_session);
+                    double.TryParse(dr[5].ToString(), out cost_per_minute);
+                    chargeStart = (DateTime)dr[6];
+                    chargeEnd = (DateTime)dr[7];
+                    charge_energy_added = dr[8].ToString();
                 }
                 con.Close();
             }
@@ -1155,9 +1162,14 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
-                            MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET cost_total = @cost_total, cost_per_session=@cost_per_session where id=@id", con);
+                            MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice WHERE id=@id", con);
                             cmd.Parameters.AddWithValue("@cost_total", cost_total);
                             cmd.Parameters.AddWithValue("@cost_per_session", cost_per_session);
+                            cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(cost_currency.ToString()));
+                            cmd.Parameters.AddWithValue("@cost_per_kwh", DBNull.Value);
+                            cmd.Parameters.AddWithValue("@cost_per_minute", DBNull.Value);
+                            cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
+                            cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
                             cmd.Parameters.AddWithValue("@id", chargeID);
                             _ = cmd.ExecuteNonQuery();
                             Logfile.Log($"CopyChargePrice: update charging session at {_addr.name}, ID {chargeID}: cost_total 0.0");
@@ -1165,7 +1177,23 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        // TODO implement different calculation cases for non-free charging sessions
+                        double calculated_total_cost = 0.0;
+                        if ((chargeEnd - chargeStart).TotalMinutes != 0 && cost_per_minute != 0.0)
+                        {
+                            calculated_total_cost += (chargeEnd - chargeStart).TotalMinutes * cost_per_minute;
+                            Logfile.Log($"CopyChargePrice: cost_per_minute: {(chargeEnd - chargeStart).TotalMinutes * cost_per_minute}");
+                        }
+                        if (cost_per_kwh != 0.0 && double.TryParse(charge_energy_added, out double dcharge_energy_added))
+                        {
+                            calculated_total_cost += dcharge_energy_added * cost_per_kwh;
+                            Logfile.Log($"CopyChargePrice: cost_per_kwh: {dcharge_energy_added * cost_per_kwh}");
+                        }
+                        if (cost_per_session != 0.0)
+                        {
+                            calculated_total_cost += cost_per_session;
+                            Logfile.Log($"CopyChargePrice: cost_per_session: {cost_per_session}");
+                        }
+                        Logfile.Log($"CopyChargePrice: calculated_total_cost: {calculated_total_cost}");
                     }
                 }
             }
