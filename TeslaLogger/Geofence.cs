@@ -20,6 +20,12 @@ namespace TeslaLogger
             ClimateOff
         }
 
+        public enum GeofenceSource
+        {
+            Geofence,
+            GeofencePrivate
+        }
+
         public string name;
         public double lat;
         public double lng;
@@ -27,6 +33,7 @@ namespace TeslaLogger
         public Dictionary<SpecialFlags, string> specialFlags;
         private bool isHome = false;
         private bool isWork = false;
+        internal GeofenceSource geofenceSource;
 
         public bool IsHome
         {
@@ -51,12 +58,13 @@ namespace TeslaLogger
             }
         }
 
-        public Address(string name, double lat, double lng, int radius)
+        public Address(string name, double lat, double lng, int radius, GeofenceSource source = GeofenceSource.Geofence)
         {
             this.name = name;
             this.lat = lat;
             this.lng = lng;
             this.radius = radius;
+            geofenceSource = source;
             specialFlags = new Dictionary<SpecialFlags, string>();
         }
 
@@ -73,7 +81,7 @@ namespace TeslaLogger
 
     public class Geofence
     {
-        private List<Address> sortedList;
+        internal List<Address> sortedList;
         private FileSystemWatcher fsw;
 
         public bool RacingMode = false;
@@ -102,7 +110,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Init()
+        internal void Init()
         {
             List<Address> list = new List<Address>();
 
@@ -202,10 +210,14 @@ namespace TeslaLogger
                                 Logfile.Log(args[0].Trim() + ": special flags found: " + flags);
                                 ParseSpecialFlags(addr, flags);
                             }
+                            if (filename.Equals(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
+                            {
+                                addr.geofenceSource = Address.GeofenceSource.GeofencePrivate;
+                            }
 
                             localList.Add(addr);
 
-                            if (!filename.Contains("geofence.csv"))
+                            if (!filename.Contains(FileManager.GetFilePath(TLFilename.GeofenceFilename)))
                             {
                                 Logfile.Log("Address inserted: " + args[0]);
                             }
@@ -233,7 +245,7 @@ namespace TeslaLogger
                         {
                             if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
                             {
-                                Logfile.Log("replace " + addr.name + " with value(s) from " + filename);
+                                Logfile.Log("replace " + addr.name + " with POI(s) from " + filename);
                                 keepAddr = false;
                                 break;
                             }
@@ -243,8 +255,10 @@ namespace TeslaLogger
                             localList.Add(addr);
                         }
                     }
+                    // all entries from geofence that are not overwritten by geofence-private are now copied to locallist
                     list.Clear();
                 }
+                // copy locallist to list
                 list.AddRange(localList);
             }
             else
