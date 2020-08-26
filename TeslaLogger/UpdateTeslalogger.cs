@@ -239,21 +239,21 @@ namespace TeslaLogger
                     Chmod("cmd_updated.txt", 666);
                     Chmod("MQTTClient.exe.config", 666);
 
-                    if (!Exec_mono("git", "--version", false).Contains("git version"))
+                    if (!Tools.Exec_mono("git", "--version", false).Contains("git version"))
                     {
-                        Exec_mono("apt-get", "-y install git");
-                        Exec_mono("git", "--version");
+                        Tools.Exec_mono("apt-get", "-y install git");
+                        Tools.Exec_mono("git", "--version");
                     }
 
-                    Exec_mono("rm", "-rf /etc/teslalogger/git/*");
+                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
 
-                    Exec_mono("rm", "-rf /etc/teslalogger/git");
-                    Exec_mono("mkdir", "/etc/teslalogger/git");
-                    Exec_mono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/git");
+                    Tools.Exec_mono("mkdir", "/etc/teslalogger/git");
+                    Tools.Exec_mono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
                     for (int x = 1; x < 10; x++)
                     {
                         Logfile.Log("git clone: try " + x);
-                        Exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
+                        Tools.Exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                         if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                         {
@@ -294,7 +294,7 @@ namespace TeslaLogger
 
                 Logfile.Log("Rebooting");
 
-                Exec_mono("reboot", "");
+                Tools.Exec_mono("reboot", "");
             }
             catch (Exception ex)
             {
@@ -514,20 +514,20 @@ namespace TeslaLogger
                     {
                         Logfile.Log("upgrade Grafana to 6.3.5!");
 
-                        Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
+                        Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
 
-                        Exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+                        Tools.Exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
 
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
                     Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
 
-                    Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
-                    Exec_mono("rm", "-rf /etc/teslalogger/tmp");
+                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
+                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp");
 
-                    Exec_mono("mkdir", "/etc/teslalogger/tmp");
-                    Exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
+                    Tools.Exec_mono("mkdir", "/etc/teslalogger/tmp");
+                    Tools.Exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
@@ -801,7 +801,7 @@ namespace TeslaLogger
 
                     if (!Tools.IsDocker())
                     {
-                        Exec_mono("service", "grafana-server restart");
+                        Tools.Exec_mono("service", "grafana-server restart");
                     }
                 }
             }
@@ -907,67 +907,6 @@ namespace TeslaLogger
             }
         }
 
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
-        {
-            try
-            {
-                if (!Tools.IsMono())
-                {
-                    return "";
-                }
-
-                Logfile.Log("execute: " + cmd + " " + param);
-
-                StringBuilder sb = new StringBuilder();
-
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
-                {
-                    EnableRaisingEvents = false
-                };
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.FileName = cmd;
-                proc.StartInfo.Arguments = param;
-
-                proc.Start();
-
-                while (!proc.HasExited)
-                {
-                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
-
-                    if (logging && line.Length > 0)
-                    {
-                        Logfile.Log(" " + line);
-                    }
-
-                    sb.AppendLine(line);
-
-                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
-
-                    if (logging && line.Length > 0)
-                    {
-                        if (stderr2stdout)
-                        {
-                            Logfile.Log(" " + line);
-                        }
-                        else
-                        {
-                            Logfile.Log("Error: " + line);
-                        }
-                    }
-
-                    sb.AppendLine(line);
-                }
-
-                return sb.ToString();
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log("Exception " + cmd + " " + ex.Message);
-                return "Exception";
-            }
-        }
 
         public static void Chmod(string filename, int chmod, bool logging=true)
         {
@@ -1047,7 +986,7 @@ namespace TeslaLogger
                         else
                         {
                             Logfile.Log("Rebooting");
-                            Exec_mono("reboot", "");
+                            Tools.Exec_mono("reboot", "");
                         }
                     }
                     else

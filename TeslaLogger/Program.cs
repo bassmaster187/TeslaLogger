@@ -28,7 +28,8 @@ namespace TeslaLogger
 
         public enum TLMemCacheKey
         {
-            GetOutsideTempAsync
+            GetOutsideTempAsync,
+            Housekeeping
         }
 
         // encapsulate state
@@ -89,8 +90,8 @@ namespace TeslaLogger
 
                 MQTTClient.StartMQTTClient();
 
-                UpdateDBinBackground();
-
+                UpdateDbInBackground();
+                
                 DBHelper.currentJSON.current_odometer = DBHelper.GetLatestOdometer();
                 DBHelper.currentJSON.CreateCurrentJSON();
 
@@ -853,12 +854,13 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDBinBackground()
+        private static void UpdateDbInBackground()
         {
             Thread DBUpdater = new Thread(() =>
             {
                 Thread.Sleep(30000);
-
+                DateTime start = DateTime.Now;
+                Logfile.Log("UpdateDbInBackground started");
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
                 DBHelper.CheckForInterruptedCharging(true);
@@ -869,11 +871,29 @@ namespace TeslaLogger
                 ShareData sd = new ShareData(webhelper.TaskerHash);
                 sd.SendAllChargingData();
                 sd.SendDegradationData();
+                Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+                RunHousekeepingInBackground();
             })
             {
                 Priority = ThreadPriority.BelowNormal
             };
             DBUpdater.Start();
+        }
+
+        internal static void RunHousekeepingInBackground()
+        {
+            Thread Housekeeper = new Thread(() =>
+            {
+                Thread.Sleep(30000);
+                DateTime start = DateTime.Now;
+                Logfile.Log("RunHousekeepingInBackground started");
+                Tools.Housekeeping();
+                Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            Housekeeper.Start();
         }
 
         private static void WriteMissingFile(double missingOdometer)
