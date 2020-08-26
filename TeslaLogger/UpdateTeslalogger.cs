@@ -196,6 +196,15 @@ namespace TeslaLogger
                         ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
                 }
 
+                InsertCarID_Column("can");
+                InsertCarID_Column("car_version");
+                InsertCarID_Column("charging");
+                InsertCarID_Column("chargingstate");
+                InsertCarID_Column("drivestate");
+                InsertCarID_Column("pos");
+                InsertCarID_Column("shiftstate");
+                InsertCarID_Column("state");
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();
@@ -299,6 +308,16 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void InsertCarID_Column(string table)
+        {
+            if (!DBHelper.ColumnExists(table, "CarID"))
+            {
+                Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` int NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
             }
         }
 
