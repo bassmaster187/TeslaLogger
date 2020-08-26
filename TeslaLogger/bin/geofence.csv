@@ -74,7 +74,7 @@ Ionity BE-Froyennes South, 50.619058, 3.341152
 Ionity BE-Le Roeulx / Thieu North, 50.491028, 4.095774
 Ionity BE-Le Roeulx / Thieu South, 50.487429, 4.096217
 Ionity BE-Tignee, 50.655355, 5.710963
-Ionity BE-Veurne, 1.064410, 2.673611
+Ionity BE-Veurne, 51.064410, 2.673611
 Ionity BE-Wetteren Noord, 50.970743, 3.844233
 Ionity BE-Wetteren Zuid, 50.969463, 3.841574
 Ionity CH-Bellinzona Nord, 46.209502, 9.026603
@@ -197,7 +197,7 @@ Ionity DK-Skanderborg, 56.06861, 9.97816
 Ionity ES-Ariza Norte, 41.31261, -2.00133
 Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
-Ionity ES-Casabermeja, 36.8982555, 4.4298849
+Ionity ES-Casabermeja, 36.8982555, -4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
@@ -245,6 +245,7 @@ Ionity FR-Longué la Couaille, 47.4189, -0.1343
 Ionity FR-Longué-les-Cossonnières, 47.4186, -0.1315
 Ionity FR-Lyon-Dagneux Sud, 45.843868, 5.070508
 Ionity FR-Macon Saint-Albain, 46.420537, 4.865333
+Ionity FR-Mayenne, 48.095180, -0.693474
 Ionity FR-Mionnay Chatanay, 45.889238, 4.893502
 Ionity FR-Mionnay Saint Galmier, 45.885078, 4.894234
 Ionity FR-Montbartier, 43.915744, 1.309462
@@ -311,6 +312,7 @@ Ionity NL-Overbroek, 51.921616, 5.603749
 Ionity NL-Sandeligen West, 51.834832, 4.618082
 Ionity NL-Sevenum, 51.38008, 5.985541
 Ionity NL-Tolnegen Noord, 52.184387, 5.670553
+Ionity NO-Alvdal, 62.11837, 10.61407
 Ionity NO-Aurland, 60.89896, 7.2108
 Ionity NO-Bagn, 60.82244, 9.55347
 Ionity NO-Bergen, 60.48457, 5.37679
@@ -346,6 +348,7 @@ Ionity SE-Spekerød, 58.0244, 11.84746
 Ionity SE-Strømstad, 58.91483, 11.26034
 Ionity SE-Sundsvall, 62.33874, 17.3538
 Ionity SE-Ulricehamn, 57.81289, 13.41947
+Ionity SE-Uppsala, 47.16577, 0.63161
 Ionity SE-Varberg, 57.168, 12.2774
 Ionity SE-Värnamo, 57.1645, 14.07578
 Ionity SE-Ytterån, 63.31709, 14.1692
@@ -559,7 +562,7 @@ Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
 Supercharger DE-Wilnsdorf, 50.8168944, 8.085813
-Supercherger-V3 DE-Wismar, 53.878850, 11.454748
+Supercherger-V3 DE-Wismar, 53.879307, 11.454047
 Supercharger DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittlich, 49.97003, 6.86175
 Supercharger DE-Zella-Mehlis, 50.64387, 10.68488
@@ -781,7 +784,7 @@ Supercharger IE-Ballacolla, 52.86704, -7.481818
 Supercharger IE-Birdhill, 52.757747, -8.40932
 Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
 Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717		
-Supercharger IS-Fossvogur, 64.117994,,-21.899666
+Supercharger IS-Fossvogur, 64.117994, -21.899666
 Supercharger IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
 Supercharger IT-Arezzo, 43.436801, 11.779599
@@ -936,6 +939,7 @@ Supercharger PT-Alcacér do Sal, 38.391941, -8.513867
 Supercharger PT-Alcantarilha, 37.150601, -8.364433
 Supercharger PT-Fátima, 39.635478, -8.688469
 Supercharger PT-Guarda, 40.559107, -7.230415
+Supercharger-V3 PT-Loulé, 37.097586, -7.997867
 Supercharger PT-Mealhada, 40.37306, -8.4805
 Supercharger PT-Montemor-o-Novo, 38.645753, -8.247265
 Supercharger PT-Ribeira de Pena, 41.503392, -7.80134
