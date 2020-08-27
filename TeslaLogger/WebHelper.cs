@@ -80,53 +80,35 @@ namespace TeslaLogger
 
         public bool RestoreToken()
         {
-            /* TODO
-             
-            string filecontent = "";
-
             try
             {
-                filecontent = FileManager.GetTeslaTokenFileContent();
-                if (filecontent == string.Empty)
+                if (String.IsNullOrEmpty(car.Tesla_Token))
                 {
                     return false;
                 }
 
-                string[] args = filecontent.Split('|');
-                if (args.Length == 2 && args[0].Length == 64)
+               
+                TimeSpan ts = DateTime.Now - car.Tesla_Token_Expire;
+
+                if (ts.TotalDays < 15)
                 {
-                    DateTime dt = DateTime.Parse(args[1]);
-                    TimeSpan ts = DateTime.Now - dt;
+                    Tesla_token = car.Tesla_Token;
+                    lastTokenRefresh = car.Tesla_Token_Expire;
 
-                    if (ts.TotalDays < 15)
-                    {
-                        Tesla_token = args[0];
-                        lastTokenRefresh = dt;
-
-                        Log("Restore Token OK. Age: " + dt.ToString());
-                        return true;
-                    }
-                    else
-                    {
-                        Log("Restore Token too old! " + dt.ToString());
-                    }
+                    Log("Restore Token OK. Age: " + car.Tesla_Token_Expire.ToString());
+                    return true;
                 }
                 else
                 {
-                    if (filecontent == null)
-                    {
-                        filecontent = "NULL";
-                    }
-
-                    Log("Restore Token not successful. " + filecontent);
+                    Log("Restore Token too old! " + car.Tesla_Token_Expire.ToString());
                 }
+                
             }
             catch (Exception ex)
             {
                 Log("Error in RestoreToken: " + ex.Message);
-                Logfile.ExceptionWriter(ex, filecontent);
             }
-            */
+            
 
             return false;
         }
@@ -187,7 +169,7 @@ namespace TeslaLogger
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 Tesla_token = jsonResult["access_token"];
 
-                FileManager.WriteTeslaTokenFile(Tesla_token);
+                DBHelper.UpdateTeslaToken(car.CarInDB, Tesla_token);
 
                 return Tesla_token;
             }
@@ -1164,7 +1146,7 @@ namespace TeslaLogger
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    DBHelper.InsertPos(car.CarInDB, timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -2115,7 +2097,7 @@ FROM
 
                 if (shift_state == "D")
                 {
-                    DBHelper.InsertPos(timestamp, latitude, longitude, speed, power, 0, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(car.CarInDB, timestamp, latitude, longitude, speed, power, 0, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
                 }
 
                 return resultContent;
@@ -2345,7 +2327,7 @@ FROM
 
         void Log(string text)
         {
-            string temp = "#" + car.CarInList + ": " + text;
+            string temp = "#" + car.CarInDB + ": " + text;
             Logfile.Log(temp);
         }
     }

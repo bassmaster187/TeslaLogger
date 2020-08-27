@@ -182,6 +182,29 @@ namespace TeslaLogger
             }
         }
 
+        internal static void UpdateTeslaToken(int carInDB, string tesla_token)
+        {
+            try
+            {
+                Logfile.Log("UpdateTeslaToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con);
+                    cmd.Parameters.AddWithValue("@id", carInDB);
+                    cmd.Parameters.AddWithValue("@tesla_token", tesla_token);
+                    cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                    int done = cmd.ExecuteNonQuery();
+
+                    Logfile.Log("update tesla_token OK: " + done);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         internal static void GetChargingstateStdOut(string[] args)
         {
             try
@@ -1076,7 +1099,7 @@ namespace TeslaLogger
         }
 
 
-        public static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
+        public static void InsertPos(int CarID, string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             double? inside_temp = currentJSON.current_inside_temperature;
 
@@ -1084,7 +1107,8 @@ namespace TeslaLogger
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                cmd.Parameters.AddWithValue("@CarID", CarID);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
@@ -1752,6 +1776,23 @@ namespace TeslaLogger
             }
 
             return "";
+        }
+
+        public static DataTable GetCars()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {    
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT *from cars order by id", DBConnectionstring);
+                da.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return dt;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -50,7 +51,7 @@ namespace TeslaLogger
                 Logfile.Log("Init finished, now enter main loop");
 
                 GetFirstCar();
-                GetAllOtherCars();
+                GetAllCars();
 
             }
             catch (Exception ex)
@@ -61,28 +62,27 @@ namespace TeslaLogger
             }
         }
 
-        private static void GetAllOtherCars()
+        private static void GetAllCars()
         {
-            if (File.Exists("cars.json"))
+            DataTable dt = DBHelper.GetCars();
+            foreach (DataRow r in dt.Rows)
             {
-                string json = File.ReadAllText("cars.json");
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
-
-                foreach (dynamic r in j)
-                {
-                    String Name = r["Name"];
-                    String Password = r["Password"];
-                    int ID = Convert.ToInt32(r["ID"]);
-                    // System.Diagnostics.Debug.WriteLine($"Name: {Name} Passwort: {Password} ID: {ID}");
-                    new Car(Name, Password, ID);
-                }
+                int id = Convert.ToInt32(r["id"]);
+                String Name = r["tesla_name"].ToString();
+                String Password = r["tesla_password"].ToString();
+                int carid = Convert.ToInt32(r["tesla_carid"]);
+                string tesla_token = r["tesla_token"].ToString();
+                DateTime tesla_token_expire = DateTime.MinValue;
+                if (r["tesla_token_expire"] is DateTime)
+                    tesla_token_expire = (DateTime)r["tesla_token_expire"];
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire);
             }
             
         }
 
         static Car GetFirstCar()
         {
-            return new Car(ApplicationSettings.Default.TeslaName, ApplicationSettings.Default.TeslaPasswort, ApplicationSettings.Default.Car);
+            return null; // TODO return new Car(1, ApplicationSettings.Default.TeslaName, ApplicationSettings.Default.TeslaPasswort, ApplicationSettings.Default.Car);
         }
 
         private static void InitWebserver()

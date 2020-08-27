@@ -66,25 +66,30 @@ namespace TeslaLogger
 
         internal string TeslaName;
         internal string TeslaPasswort;
+        internal string Tesla_Token;
+        internal DateTime Tesla_Token_Expire;
         internal int CarInAccount;
-        internal int CarInList;
+        internal int CarInDB;
+
 
         static List<Car> allcars = new List<Car>();
 
-        public Car(string TeslaName, string TeslaPasswort, int CarInAccount)
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
         {
             lock (typeof(Car))
             {
                 this.TeslaName = TeslaName;
                 this.TeslaPasswort = TeslaPasswort;
                 this.CarInAccount = CarInAccount;
-                this.CarInList = allcars.Count;
+                this.CarInDB = CarInDB;
+                this.Tesla_Token = Tesla_Token;
+                this.Tesla_Token_Expire = Tesla_Token_Expire;
                 allcars.Add(this);
 
                 webhelper = new WebHelper(this);
 
                 thread = new Thread(Loop);
-                thread.Name = "Car" + CarInList;
+                thread.Name = "Car" + CarInDB;
                 thread.Start();
             }
         }
@@ -1039,7 +1044,7 @@ namespace TeslaLogger
 
         void Log(string text)
         {
-            string temp = "#" + CarInList + ": " + text;
+            string temp = "#" + CarInDB + ": " + text;
             Logfile.Log(temp);
         }
     }

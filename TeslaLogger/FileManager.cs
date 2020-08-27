@@ -125,15 +125,6 @@ namespace TeslaLogger
             return filecontent;
         }
 
-        internal static void WriteTeslaTokenFile(string tesla_token)
-        {
-            /* TODO
-            string serializeToken = tesla_token + "|" + DateTime.Now.ToString("s");
-
-            File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
-            */
-        }
-
         private static object SyncLock_WriteCurrentJsonFile = new object();
 
         internal static void WriteCurrentJsonFile(string current_json)
