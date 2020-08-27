@@ -1091,7 +1091,7 @@ namespace TeslaLogger
         }
 
         // this should be called from a task
-        internal static void HandleSpecialFlag_CopyChargePrice(Address _addr)
+        internal void HandleSpecialFlag_CopyChargePrice(Address _addr)
         {
             Logfile.Log("HandleSpecialFlag_CopyChargePrice");
             // find charging session at Address with cost_total != NULL and cost_kwh_meter_invoice == NULL and cost_idle_fee_total == NULL
@@ -1130,6 +1130,7 @@ $"  AND pos.address = '{_addr.name}' " +
 $"  AND chargingstate.cost_total IS NOT NULL " +
 $"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
 $"  AND chargingstate.cost_idle_fee_total IS NULL " +
+$"  AND CarID = {CarInDB}" +
 $"ORDER BY id DESC " +
 $"LIMIT 1", con);
                 Tools.DebugLog("SQL:" + cmd.CommandText);
@@ -1166,6 +1167,7 @@ $"WHERE " +
 $"  chargingstate.pos = pos.id " +
 $"  AND pos.address = '{_addr.name}' " +
 $"  AND chargingstate.cost_total IS NULL " +
+$"  AND CarID = {CarInDB}" +
 $"ORDER BY id DESC " +
 $"LIMIT 1", con);
                     Tools.DebugLog("SQL:" + cmd.CommandText);
@@ -1197,7 +1199,8 @@ $"  cost_per_minute=@cost_per_minute, " +
 $"  cost_idle_fee_total=@cost_idle_fee_total, " +
 $"  cost_kwh_meter_invoice=@cost_kwh_meter_invoice " +
 $"WHERE " +
-$"  id=@id", con);
+$"  id=@id" +
+$"  AND CarID = {CarInDB}", con);
                             cmd.Parameters.AddWithValue("@cost_total", cost_total);
                             cmd.Parameters.AddWithValue("@cost_per_session", cost_per_session);
                             cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(cost_currency.ToString()));
