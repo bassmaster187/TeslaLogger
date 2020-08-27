@@ -1832,7 +1832,7 @@ namespace TeslaLogger
             return dt;
         }
 
-        public object DBNullIfEmptyOrZero(string val)
+        public static object DBNullIfEmptyOrZero(string val)
         {
             if (val == null || val == "" || val == "0" || val == "0.00")
             {
@@ -1842,7 +1842,7 @@ namespace TeslaLogger
             return val;
         }
 
-        public object DBNullIfEmpty(string val)
+        public static object DBNullIfEmpty(string val)
         {
             if (val == null || val == "")
             {
@@ -1852,7 +1852,7 @@ namespace TeslaLogger
             return val;
         }
 
-        public bool IsZero(string val)
+        public static bool IsZero(string val)
         {
             if (val == null || val == "")
             {
