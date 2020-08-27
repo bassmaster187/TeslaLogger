@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "iteration": 1598539735808,
   "links": [],
   "panels": [
     {
@@ -23,7 +23,7 @@
       "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
-        "h": 16,
+        "h": 15,
         "w": 18,
         "x": 0,
         "y": 0
@@ -273,7 +273,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select avg(lat) as lat, avg(lng) as lng, address, count(*) as Anzahl, max(StartDate) as LetzteLadung, sum(cost_total) as Cost, \r\n(\r\n  select sum(cost_total) / sum(charging.charge_energy_added) as cost\r\n  FROM chargingstate join pos as pos2 on chargingstate.pos = pos2.id join charging on chargingstate.EndChargingID = charging.id\r\n  where pos2.address = T1.address and cost_total is not null\r\n) as 'Ø Price / kWh', \r\n(\r\n  select sum(charging.charge_energy_added) / sum(cost_kwh_meter_invoice) * 100 as eff\r\n  FROM chargingstate join pos as pos3 on chargingstate.pos = pos3.id join charging on chargingstate.EndChargingID = charging.id\r\n  where pos3.address = T1.address and cost_kwh_meter_invoice is not null\r\n) as 'Eff', \r\nsum(charge_energy_added) as geladen_kWh, avg(charge_energy_added) as avg_geladen_kWh, sum(charge_energy_added) / sum(MinuteDiff) * 60 as avg_kW, avg(End_battery_level) as AvgSOC, max(End_battery_level) as MaxSOC, sum(MinuteDiff) / 60 as LadezeitStunden from \r\n(\r\nSELECT        pos.lat, pos.lng,cost_total, chargingstate.StartDate as StartDate, pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\n) as T1\r\ngroup by address\r\norder by Anzahl desc",
+          "rawSql": "select avg(lat) as lat, avg(lng) as lng, address, count(*) as Anzahl, max(StartDate) as LetzteLadung, sum(cost_total) as Cost, \r\n(\r\n  select sum(cost_total) / sum(charging.charge_energy_added) as cost\r\n  FROM chargingstate join pos as pos2 on chargingstate.pos = pos2.id join charging on chargingstate.EndChargingID = charging.id\r\n  where pos2.address = T1.address and cost_total is not null and chargingstate.carid=$Car\r\n) as 'Ø Price / kWh', \r\n(\r\n  select sum(charging.charge_energy_added) / sum(cost_kwh_meter_invoice) * 100 as eff\r\n  FROM chargingstate join pos as pos3 on chargingstate.pos = pos3.id join charging on chargingstate.EndChargingID = charging.id and chargingstate.carid=$Car\r\n  where pos3.address = T1.address and cost_kwh_meter_invoice is not null\r\n) as 'Eff', \r\nsum(charge_energy_added) as geladen_kWh, avg(charge_energy_added) as avg_geladen_kWh, sum(charge_energy_added) / sum(MinuteDiff) * 60 as avg_kW, avg(End_battery_level) as AvgSOC, max(End_battery_level) as MaxSOC, sum(MinuteDiff) / 60 as LadezeitStunden from \r\n(\r\nSELECT        pos.lat, pos.lng,cost_total, chargingstate.StartDate as StartDate, pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging_End.battery_level as End_battery_level,\r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4  and chargingstate.carid=$Car\r\n) as T1\r\ngroup by address\r\norder by Anzahl desc",
           "refId": "A",
           "select": [
             [
@@ -304,7 +304,7 @@
       "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 3,
         "x": 18,
         "y": 0
@@ -382,7 +382,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as anz FROM chargingstate join charging on chargingstate.EndChargingID = charging.id\nwhere $__timeFilter(StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC desc",
+          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as anz FROM chargingstate join charging on chargingstate.EndChargingID = charging.id\nwhere $__timeFilter(StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.carid=$Car\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC desc",
           "refId": "A",
           "select": [
             [
@@ -413,7 +413,7 @@
       "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 3,
         "x": 21,
         "y": 0
@@ -477,7 +477,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as Anzahl FROM chargingstate join charging on chargingstate.StartChargingID = charging.id\nwhere $__timeFilter(StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC",
+          "rawSql": "SELECT ROUND(battery_level / 5,0) * 5 as SOC, count(*) as Anzahl FROM chargingstate join charging on chargingstate.StartChargingID = charging.id\nwhere $__timeFilter(StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.carid=$Car\ngroup by ROUND(battery_level / 5,0) * 5\norder by SOC",
           "refId": "A",
           "select": [
             [
@@ -527,7 +527,7 @@
         "h": 2,
         "w": 2,
         "x": 18,
-        "y": 8
+        "y": 7
       },
       "id": 8,
       "interval": null,
@@ -573,7 +573,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        chargingstate.StartDate as time,charging_End.charge_energy_added\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\n",
+          "rawSql": "SELECT        chargingstate.StartDate as time,charging_End.charge_energy_added\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.carid=$Car\r\n",
           "refId": "A",
           "select": [
             [
@@ -636,7 +636,7 @@
         "h": 2,
         "w": 2,
         "x": 20,
-        "y": 8
+        "y": 7
       },
       "id": 9,
       "interval": null,
@@ -682,7 +682,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        chargingstate.StartDate as time, \r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) / 60 as HourDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\n",
+          "rawSql": "SELECT        chargingstate.StartDate as time, \r\n              TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) / 60 as HourDiff\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.carid=$Car\r\n",
           "refId": "A",
           "select": [
             [
@@ -745,7 +745,7 @@
         "h": 2,
         "w": 2,
         "x": 22,
-        "y": 8
+        "y": 7
       },
       "id": 12,
       "interval": null,
@@ -791,7 +791,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        chargingstate.StartDate as time,count(*)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\n",
+          "rawSql": "SELECT        chargingstate.StartDate as time,count(*)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.carid=$Car\r\n",
           "refId": "A",
           "select": [
             [
@@ -854,7 +854,7 @@
         "h": 2,
         "w": 3,
         "x": 18,
-        "y": 10
+        "y": 9
       },
       "id": 13,
       "interval": null,
@@ -900,7 +900,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_present = 0 or \r\n(fast_charger_present is null and (address not like '%supercharger%' or address not like '%ionity%') and (charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) < 23 )\r\n)\r\n",
+          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_present = 0 or \r\n(fast_charger_present is null and (address not like '%supercharger%' or address not like '%ionity%') and (charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) < 23 )\r\n)\r\n",
           "refId": "A",
           "select": [
             [
@@ -963,7 +963,7 @@
         "h": 2,
         "w": 3,
         "x": 21,
-        "y": 10
+        "y": 9
       },
       "id": 14,
       "interval": null,
@@ -1009,7 +1009,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_present = 1 or \r\n(fast_charger_present is null and address like '%supercharger%') or\r\n(fast_charger_present is null and (charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) > 23) \r\n)\r\n",
+          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_present = 1 or \r\n(fast_charger_present is null and address like '%supercharger%') or\r\n(fast_charger_present is null and (charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) > 23) \r\n)\r\n",
           "refId": "A",
           "select": [
             [
@@ -1072,7 +1072,7 @@
         "h": 2,
         "w": 2,
         "x": 18,
-        "y": 12
+        "y": 11
       },
       "id": 15,
       "interval": null,
@@ -1118,7 +1118,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and \r\naddress like '%supercharger%'\r\n\r\n",
+          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and \r\naddress like '%supercharger%' and chargingstate.carid=$Car\r\n\r\n",
           "refId": "A",
           "select": [
             [
@@ -1181,7 +1181,7 @@
         "h": 2,
         "w": 2,
         "x": 20,
-        "y": 12
+        "y": 11
       },
       "id": 19,
       "interval": null,
@@ -1227,7 +1227,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_type = 'Combo') and address not like '%supercharger%'\r\n",
+          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_type = 'Combo') and address not like '%supercharger%' and chargingstate.carid=$Car\r\n",
           "refId": "A",
           "select": [
             [
@@ -1290,7 +1290,7 @@
         "h": 2,
         "w": 2,
         "x": 22,
-        "y": 12
+        "y": 11
       },
       "id": 16,
       "interval": null,
@@ -1336,7 +1336,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_type = 'CHAdeMO')\r\n",
+          "rawSql": "SELECT sum(charging_End.charge_energy_added)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and\r\n(fast_charger_type = 'CHAdeMO') and chargingstate.carid=$Car\r\n",
           "refId": "A",
           "select": [
             [
@@ -1400,7 +1400,7 @@
         "h": 2,
         "w": 3,
         "x": 18,
-        "y": 14
+        "y": 13
       },
       "id": 17,
       "interval": null,
@@ -1446,7 +1446,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 9\nORDER BY datum DESC LIMIT 1",
+          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 9 and carid=$Car\nORDER BY datum DESC LIMIT 1",
           "refId": "A",
           "select": [
             [
@@ -1510,7 +1510,7 @@
         "h": 2,
         "w": 3,
         "x": 21,
-        "y": 14
+        "y": 13
       },
       "id": 18,
       "interval": null,
@@ -1556,7 +1556,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 11\nORDER BY datum DESC LIMIT 1",
+          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 11 and carid=$Car\nORDER BY datum DESC LIMIT 1",
           "refId": "A",
           "select": [
             [
@@ -1613,7 +1613,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 15
       },
       "id": 11,
       "legend": {
@@ -1651,7 +1651,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        chargingstate.StartDate as time, \n              charging.battery_level AS 'Start SOC %', \n              charging_End.battery_level as 'End SOC %'\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \n                         LEFT OUTER JOIN\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\norder by StartDate desc",
+          "rawSql": "SELECT        chargingstate.StartDate as time, \n              charging.battery_level AS 'Start SOC %', \n              charging_End.battery_level as 'End SOC %'\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID \n                         LEFT OUTER JOIN\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\norder by StartDate desc",
           "refId": "A",
           "select": [
             [
@@ -1740,7 +1740,34 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-2y",
@@ -1774,5 +1801,5 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 67
+  "version": 68
 }
