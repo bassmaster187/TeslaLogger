@@ -1821,24 +1821,7 @@ namespace TeslaLogger
 
             try
             {    
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT *from cars order by id", DBConnectionstring);
-                da.Fill(dt);
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-
-            return dt;
-        }
-
-        public static DataTable GetCars()
-        {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT *from cars order by id", DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", DBConnectionstring);
                 da.Fill(dt);
             }
             catch (Exception ex)
