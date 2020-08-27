@@ -1039,6 +1039,21 @@ namespace TeslaLogger
             {
                 _ = webhelper.GetOdometerAsync();
             }
+            // charging -> any
+            if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
+            {
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                    if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                    {
+                        if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
+                        {
+                            HandleSpecialFlag_CopyChargePrice(addr);
+                        }
+                    }
+                });
+            }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
@@ -1049,19 +1064,17 @@ namespace TeslaLogger
                     {
                         switch (flag.Key)
                         {
-                            case Address.SpecialFlags.OpenChargePort:
-                                break;
                             case Address.SpecialFlags.HighFrequencyLogging:
                                 HandleSpecialFlag_HighFrequencyLogging(flag.Value);
-                                break;
-                            case Address.SpecialFlags.EnableSentryMode:
                                 break;
                             case Address.SpecialFlags.SetChargeLimit:
                                 HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
                                 break;
+                            case Address.SpecialFlags.OpenChargePort:
+                            case Address.SpecialFlags.EnableSentryMode:
                             case Address.SpecialFlags.ClimateOff:
                             case Address.SpecialFlags.CopyChargePrice:
-                                // nothing to do when tesla logger / vehicle state changes
+                                // nothing to do when tesla logger / vehicle state changes any -> charging
                                 break;
                             default:
                                 Logfile.Log("handleStateChange unhandled special flag " + flag.ToString());
