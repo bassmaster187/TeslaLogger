@@ -166,7 +166,7 @@ namespace TeslaLogger
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 Tesla_token = jsonResult["access_token"];
 
-                DBHelper.UpdateTeslaToken(car.CarInDB, Tesla_token);
+                car.dbHelper.UpdateTeslaToken();
 
                 return Tesla_token;
             }

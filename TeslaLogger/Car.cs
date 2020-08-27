@@ -92,6 +92,8 @@ namespace TeslaLogger
 
         static List<Car> allcars = new List<Car>();
 
+        public DBHelper dbHelper;
+
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
         {
             lock (typeof(Car))
@@ -105,6 +107,7 @@ namespace TeslaLogger
                 this.Tesla_Token_Expire = Tesla_Token_Expire;
                 allcars.Add(this);
 
+                dbHelper = new DBHelper(this);
                 webhelper = new WebHelper(this);
 
                 thread = new Thread(Loop);
@@ -612,21 +615,21 @@ namespace TeslaLogger
                 SetCurrentState(TeslaState.Online);
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
-                DBHelper.StartState(this, res);
+                dbHelper.StartState(res);
                 return;
             }
             else if (res == "asleep")
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Sleep);
-                DBHelper.StartState(this, res);
+                dbHelper.StartState(res);
                 webhelper.ResetLastChargingState();
                 currentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
             {
                 //Log(res);
-                DBHelper.StartState(this, res);
+                dbHelper.StartState(res);
                 currentJSON.CreateCurrentJSON();
 
                 while (true)
@@ -1065,7 +1068,7 @@ namespace TeslaLogger
 
         public void WriteSettings()
         {
-            DBHelper.WriteCarSettings(this);
+            dbHelper.WriteCarSettings();
         }
 
         void Log(string text)

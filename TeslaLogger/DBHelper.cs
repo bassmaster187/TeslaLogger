@@ -17,9 +17,16 @@ namespace TeslaLogger
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
 
+        Car car;
+
         public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
                     ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
                     : ApplicationSettings.Default.DBConnectionstring;
+
+        public DBHelper(Car car)
+        {
+            this.car = car;
+        }
 
         public static void EnableMothership()
         {
@@ -42,48 +49,49 @@ namespace TeslaLogger
             }
         }
 
-        public static void CloseState(Car c, int maxPosid)
+        public void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null and CarID=@CarID", con);
                 cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@EndPos", maxPosid);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
 
-            c.currentJSON.CreateCurrentJSON();
+            car.currentJSON.CreateCurrentJSON();
         }
 
-        public static void StartState(Car c, string state)
+        public void StartState(string state)
         {
             if (state != null)
             {
                 if (state == "online")
                 {
-                    c.currentJSON.current_online = true;
-                    c.currentJSON.current_sleeping = false;
+                    car.currentJSON.current_online = true;
+                    car.currentJSON.current_sleeping = false;
                 }
                 else if (state == "asleep")
                 {
-                    c.currentJSON.current_online = false;
-                    c.currentJSON.current_sleeping = true;
+                    car.currentJSON.current_online = false;
+                    car.currentJSON.current_sleeping = true;
                 }
                 else if (state == "offline")
                 {
-                    c.currentJSON.current_online = false;
-                    c.currentJSON.current_sleeping = false;
+                    car.currentJSON.current_online = false;
+                    car.currentJSON.current_sleeping = false;
                 }
 
-                c.currentJSON.CreateCurrentJSON();
+                car.currentJSON.CreateCurrentJSON();
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
 
-                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and CarID ="+c.CarInDB, con);
+                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and CarID ="+car.CarInDB, con);
                 MySqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.Read())
                 {
@@ -94,8 +102,8 @@ namespace TeslaLogger
                 }
                 dr.Close();
 
-                int MaxPosid = GetMaxPosid(c);
-                CloseState(c, MaxPosid);
+                int MaxPosid = GetMaxPosid(car);
+                CloseState(MaxPosid);
 
                 //Logfile.Log("state: " + state);
 
@@ -103,7 +111,7 @@ namespace TeslaLogger
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
-                cmd.Parameters.AddWithValue("@CarID", c.CarInDB);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -181,7 +189,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static void UpdateTeslaToken(int carInDB, string tesla_token)
+        internal void UpdateTeslaToken()
         {
             try
             {
@@ -190,8 +198,8 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con);
-                    cmd.Parameters.AddWithValue("@id", carInDB);
-                    cmd.Parameters.AddWithValue("@tesla_token", tesla_token);
+                    cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@tesla_token", car.Tesla_Token);
                     cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                     int done = cmd.ExecuteNonQuery();
 
@@ -204,7 +212,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static void WriteCarSettings(Car c)
+        internal void WriteCarSettings()
         {
             try
             {
@@ -213,18 +221,18 @@ namespace TeslaLogger
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash where id=@id", con);
-                    cmd.Parameters.AddWithValue("@id", c.CarInDB);
-                    cmd.Parameters.AddWithValue("@Raven", c.Raven);
-                    cmd.Parameters.AddWithValue("@Wh_TR", c.Wh_TR);
-                    cmd.Parameters.AddWithValue("@DB_Wh_TR", c.DB_Wh_TR);
-                    cmd.Parameters.AddWithValue("@DB_Wh_TR_count", c.DB_Wh_TR_count);
-                    cmd.Parameters.AddWithValue("@car_type", c.car_type);
-                    cmd.Parameters.AddWithValue("@car_special_type", c.car_special_type);
-                    cmd.Parameters.AddWithValue("@trim_badging", c.trim_badging);
-                    cmd.Parameters.AddWithValue("@model_name", c.ModelName);
-                    cmd.Parameters.AddWithValue("@Battery", c.Battery);
-                    cmd.Parameters.AddWithValue("@display_name", c.display_name);
-                    cmd.Parameters.AddWithValue("@tasker_hash", c.TaskerHash);
+                    cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@Raven", car.Raven);
+                    cmd.Parameters.AddWithValue("@Wh_TR", car.Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR", car.DB_Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR_count", car.DB_Wh_TR_count);
+                    cmd.Parameters.AddWithValue("@car_type", car.car_type);
+                    cmd.Parameters.AddWithValue("@car_special_type", car.car_special_type);
+                    cmd.Parameters.AddWithValue("@trim_badging", car.trim_badging);
+                    cmd.Parameters.AddWithValue("@model_name", car.ModelName);
+                    cmd.Parameters.AddWithValue("@Battery", car.Battery);
+                    cmd.Parameters.AddWithValue("@display_name", car.display_name);
+                    cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
 
                     int done = cmd.ExecuteNonQuery();
 
