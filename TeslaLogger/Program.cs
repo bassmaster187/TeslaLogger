@@ -45,9 +45,6 @@ namespace TeslaLogger
 
                 UpdateDbInBackground();
 
-                DBHelper.currentJSON.current_odometer = DBHelper.GetLatestOdometer();
-                DBHelper.currentJSON.CreateCurrentJSON();
-
                 Logfile.Log("Init finished, now enter main loop");
 
                 GetFirstCar();

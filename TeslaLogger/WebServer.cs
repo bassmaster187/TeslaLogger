@@ -183,15 +183,18 @@ namespace TeslaLogger
 
         private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
         {
-            //int Watt = DBHelper.currentJSON.current_charger_voltage * DBHelper.currentJSON.current_charger_phases * DBHelper.currentJSON.current_charger_actual_current;
+            /* TODO
             double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
             WriteString(response, ((int)Watt).ToString());
+            */
         }
 
         private void soc(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
             int soc = DBHelper.currentJSON.current_battery_level;
             WriteString(response, soc.ToString());
+            */
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)

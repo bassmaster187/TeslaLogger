@@ -232,10 +232,10 @@ namespace TeslaLogger
                 decimal battery_range = (decimal)r2["battery_range"];
 
                 string battery_level = r2["battery_level"].ToString();
-                if (battery_level != null && Convert.ToInt32(battery_level) != DBHelper.currentJSON.current_battery_level)
+                if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
                 {
-                    DBHelper.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
-                    DBHelper.currentJSON.CreateCurrentJSON();
+                    car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.currentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
                 if (r2["charger_power"] != null)
@@ -299,16 +299,16 @@ namespace TeslaLogger
 
                 if (r2["charge_rate"] != null)
                 {
-                    DBHelper.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
+                    car.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
 
                 }
 
                 if (r2["charge_limit_soc"] != null)
                 {
-                    if (DBHelper.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
+                    if (car.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
                     {
-                        DBHelper.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
-                        DBHelper.currentJSON.CreateCurrentJSON();
+                        car.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        car.currentJSON.CreateCurrentJSON();
                     }
                 }
 
@@ -475,7 +475,7 @@ namespace TeslaLogger
                     { }
                     */
 
-                    scanMyTesla = new ScanMyTesla(car.CarInDB, car.TaskerHash);
+                    scanMyTesla = new ScanMyTesla(car);
 
                     /*
                     dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -1076,8 +1076,8 @@ namespace TeslaLogger
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
-                DBHelper.currentJSON.latitude = latitude;
-                DBHelper.currentJSON.longitude = longitude;
+                car.currentJSON.latitude = latitude;
+                car.currentJSON.longitude = longitude;
 
                 string timestamp = r2["timestamp"].ToString();
                 int speed = 0;
@@ -1117,7 +1117,7 @@ namespace TeslaLogger
                     }
                 }
 
-                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || DBHelper.currentJSON.current_is_preconditioning)
+                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.currentJSON.current_is_preconditioning)
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
@@ -1143,7 +1143,7 @@ namespace TeslaLogger
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    DBHelper.InsertPos(car.CarInDB, timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    DBHelper.InsertPos(car, timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -1338,7 +1338,7 @@ namespace TeslaLogger
             
         }*/
 
-        public static async Task<string> ReverseGecocodingAsync(double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
+        public static async Task<string> ReverseGecocodingAsync(Car c, double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
         {
             string url = "";
             string resultContent = "";
@@ -1408,10 +1408,10 @@ namespace TeslaLogger
 
                 string country_code = r2["country_code"].ToString();
 
-                if (country_code.Length > 0)
+                if (country_code.Length > 0 && c != null)
                 {
-                    DBHelper.currentJSON.current_country_code = country_code;
-                    DBHelper.currentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
+                    c.currentJSON.current_country_code = country_code;
+                    c.currentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
                 }
 
                 string road = "";
@@ -1523,7 +1523,7 @@ namespace TeslaLogger
                     double lat = (double)dr[0];
                     double lng = (double)dr[1];
                     int id = (int)dr[2];
-                    Task<string> adress = ReverseGecocodingAsync(lat, lng);
+                    Task<string> adress = ReverseGecocodingAsync(car, lat, lng);
                     //var altitude = AltitudeAsync(lat, lng);
                     //UpdateAddressByPosId(id, adress.Result, altitude.Result);
                     UpdateAddressByPosId(id, adress.Result, 0);
@@ -1585,7 +1585,7 @@ FROM
                             int id = (int)dr["PosStartId"];
                             double lat = (double)dr["PosStartLat"];
                             double lng = (double)dr["PosStartLng"];
-                            Task<string> address = ReverseGecocodingAsync(lat, lng);
+                            Task<string> address = ReverseGecocodingAsync(car, lat, lng);
                             //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
@@ -1601,7 +1601,7 @@ FROM
                             int id = (int)dr["PosEndId"];
                             double lat = (double)dr["PosEndtLat"];
                             double lng = (double)dr["PosEndLng"];
-                            Task<string> address = ReverseGecocodingAsync(lat, lng);
+                            Task<string> address = ReverseGecocodingAsync(car, lat, lng);
                             //var altitude = AltitudeAsync(lat, lng);
 
                             string addressResult = address.Result;
@@ -1635,7 +1635,7 @@ FROM
                         int id = (int)dr[0];
                         double lat = (double)dr[1];
                         double lng = (double)dr[2];
-                        Task<string> address = ReverseGecocodingAsync(lat, lng);
+                        Task<string> address = ReverseGecocodingAsync(car, lat, lng);
                         //var altitude = AltitudeAsync(lat, lng);
 
                         string addressResult = address.Result;
@@ -1690,7 +1690,7 @@ FROM
                             {
                                 if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
                                 {
-                                    DBHelper.UpdateAddress(id);
+                                    DBHelper.UpdateAddress(null, id);
                                 }
                                 continue;
                             }
@@ -1765,7 +1765,7 @@ FROM
                 if (r2["battery_level"] != null)
                 {
                     battery_level = Convert.ToInt32(r2["battery_level"]);
-                    DBHelper.currentJSON.current_battery_level = battery_level;
+                    car.currentJSON.current_battery_level = battery_level;
                 }
 
                 return (double)ideal_battery_range / (double)0.62137;
@@ -1802,7 +1802,7 @@ FROM
                             Log("sentry_mode: " + sentry_mode);
                         }
 
-                        DBHelper.currentJSON.current_is_sentry_mode = sentry_mode;
+                        car.currentJSON.current_is_sentry_mode = sentry_mode;
                     }
                     catch (Exception ex)
                     {
@@ -1822,10 +1822,10 @@ FROM
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    if (DBHelper.currentJSON.current_car_version != car_version)
+                    if (car.currentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
-                        DBHelper.currentJSON.current_car_version = car_version;
+                        car.currentJSON.current_car_version = car_version;
 
                         DBHelper.SetCarVersion(car_version);
 
@@ -1877,7 +1877,7 @@ FROM
                 {
                     if (r2["inside_temp"] != null)
                     {
-                        DBHelper.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                        car.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
                     }
                 }
                 catch (Exception) { }
@@ -1886,7 +1886,7 @@ FROM
                 if (r2["outside_temp"] != null)
                 {
                     outside_temp = (decimal)r2["outside_temp"];
-                    DBHelper.currentJSON.current_outside_temp = (double)outside_temp;
+                    car.currentJSON.current_outside_temp = (double)outside_temp;
                 }
                 else
                 {
@@ -1900,12 +1900,12 @@ FROM
                     {
                         battery_heater = (bool)r2["battery_heater"];
 
-                        if (DBHelper.currentJSON.current_battery_heater != battery_heater)
+                        if (car.currentJSON.current_battery_heater != battery_heater)
                         {
-                            DBHelper.currentJSON.current_battery_heater = (bool)battery_heater;
+                            car.currentJSON.current_battery_heater = (bool)battery_heater;
 
                             Log("Battery heater: " + battery_heater);
-                            DBHelper.currentJSON.CreateCurrentJSON();
+                            car.currentJSON.CreateCurrentJSON();
 
                             // write into Database
                             Thread.Sleep(5000);
@@ -1919,11 +1919,11 @@ FROM
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
                 
-                if (preconditioning != DBHelper.currentJSON.current_is_preconditioning)
+                if (preconditioning != car.currentJSON.current_is_preconditioning)
                 {
-                    DBHelper.currentJSON.current_is_preconditioning = preconditioning;
+                    car.currentJSON.current_is_preconditioning = preconditioning;
                     Log("Preconditioning: " + preconditioning);
-                    DBHelper.currentJSON.CreateCurrentJSON();
+                    car.currentJSON.CreateCurrentJSON();
 
                     // write into Database
                     Thread.Sleep(5000);
@@ -2048,6 +2048,7 @@ FROM
 
         public string GetCachedRollupData()
         {
+            /*
             string resultContent = "";
             try
             {
@@ -2094,7 +2095,7 @@ FROM
 
                 if (shift_state == "D")
                 {
-                    DBHelper.InsertPos(car.CarInDB, timestamp, latitude, longitude, speed, power, 0, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
+                    DBHelper.InsertPos(car, timestamp, latitude, longitude, speed, power, 0, 0, 0, 0, 0.0, "0"); // TODO: ODOMETER, ideal battery range, address
                 }
 
                 return resultContent;
@@ -2104,6 +2105,7 @@ FROM
                 Logfile.ExceptionWriter(ex, resultContent);
             }
 
+            */
             return "NULL";
         }
 
@@ -2211,7 +2213,7 @@ FROM
                 {
                     { "t", car.TaskerHash },
                     { "v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() },
-                    { "cv", DBHelper.currentJSON.current_car_version },
+                    { "cv", car.currentJSON.current_car_version },
                     { "m", car.Model },
                     { "bt", car.Battery },
                     { "n", name },
@@ -2239,8 +2241,8 @@ FROM
                     { "TR", DBHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
-                    { "CC", DBHelper.currentJSON.current_country_code },
-                    { "ST", DBHelper.currentJSON.current_state },
+                    { "CC", car.currentJSON.current_country_code },
+                    { "ST", car.currentJSON.current_state },
                     { "UP", Tools.GetOnlineUpdateSettings().ToString() }
                 };
 

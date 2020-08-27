@@ -88,6 +88,7 @@ namespace TeslaLogger
 
         public string TaskerHash = "";
 
+        public CurrentJSON currentJSON = new CurrentJSON();
 
         static List<Car> allcars = new List<Car>();
 
@@ -95,6 +96,7 @@ namespace TeslaLogger
         {
             lock (typeof(Car))
             {
+                currentJSON.CarID = CarInDB;
                 this.TeslaName = TeslaName;
                 this.TeslaPasswort = TeslaPasswort;
                 this.CarInAccount = CarInAccount;
@@ -113,6 +115,9 @@ namespace TeslaLogger
 
         private void Loop()
         {
+            currentJSON.current_odometer = DBHelper.GetLatestOdometer(this);
+            currentJSON.CreateCurrentJSON();
+
             lock (typeof(Car))
             {
                 CheckNewCredentials();
@@ -206,7 +211,7 @@ namespace TeslaLogger
                 webhelper.IsDriving(true);
             }
 
-            Log("Country Code: " + DBHelper.UpdateCountryCode());
+            Log("Country Code: " + DBHelper.UpdateCountryCode(this));
 
             DBHelper.GetEconomy_Wh_km(webhelper);
             webhelper.DeleteWakeupFile();
@@ -217,11 +222,11 @@ namespace TeslaLogger
             }
 
             Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
-            DBHelper.GetLastTrip();
+            DBHelper.GetLastTrip(this);
             UpdateTeslalogger.Start(webhelper);
             UpdateTeslalogger.UpdateGrafana(webhelper);
 
-            DBHelper.currentJSON.current_car_version = DBHelper.GetLastCarVersion();
+            currentJSON.current_car_version = DBHelper.GetLastCarVersion(this);
 
         }
 
@@ -290,8 +295,8 @@ namespace TeslaLogger
             finally
             {
                 Log("Restart communication with Tesla Server! 1");
-                DBHelper.currentJSON.current_falling_asleep = false;
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.current_falling_asleep = false;
+                currentJSON.CreateCurrentJSON();
             }
         }
 
@@ -309,9 +314,9 @@ namespace TeslaLogger
                     Thread.Sleep(t); // alle 5 sek eine positionsmeldung
                 }
 
-                if (odometerLastTrip != DBHelper.currentJSON.current_odometer)
+                if (odometerLastTrip != currentJSON.current_odometer)
                 {
-                    odometerLastTrip = DBHelper.currentJSON.current_odometer;
+                    odometerLastTrip = currentJSON.current_odometer;
                     lastOdometerChanged = DateTime.Now;
                 }
                 else
@@ -335,7 +340,7 @@ namespace TeslaLogger
 
                 if (WebHelper.geofence.RacingMode)
                 {
-                    Address a = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude);
+                    Address a = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude);
                     if (a != null)
                     {
                         if (lastRacingPoint == null)
@@ -431,7 +436,7 @@ namespace TeslaLogger
                         webhelper.scanMyTesla.FastMode(true);
                     }
 
-                    double missingOdometer = DBHelper.currentJSON.current_odometer - odometerLastTrip;
+                    double missingOdometer = currentJSON.current_odometer - odometerLastTrip;
 
                     if (odometerLastTrip != 0)
                     {
@@ -496,7 +501,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                            if (DBHelper.currentJSON.current_is_preconditioning)
+                            if (currentJSON.current_is_preconditioning)
                             {
                                 Log("preconditioning prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
@@ -511,18 +516,18 @@ namespace TeslaLogger
                                 try
                                 {
                                     Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
-                                    DBHelper.currentJSON.current_falling_asleep = true;
-                                    DBHelper.currentJSON.CreateCurrentJSON();
+                                    currentJSON.current_falling_asleep = true;
+                                    currentJSON.CreateCurrentJSON();
 
                                     for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                     {
-                                        TimeSpan tsSMT = DateTime.Now - DBHelper.currentJSON.lastScanMyTeslaReceived;
-                                        if (DBHelper.currentJSON.SMTSpeed > 5 &&
-                                            DBHelper.currentJSON.SMTSpeed < 260 &&
-                                            DBHelper.currentJSON.SMTBatteryPower > 2 &&
+                                        TimeSpan tsSMT = DateTime.Now - currentJSON.lastScanMyTeslaReceived;
+                                        if (currentJSON.SMTSpeed > 5 &&
+                                            currentJSON.SMTSpeed < 260 &&
+                                            currentJSON.SMTBatteryPower > 2 &&
                                             tsSMT.TotalMinutes < 5)
                                         {
-                                            Log("ScanMyTesla prevents car to get sleep. Speed: " + DBHelper.currentJSON.SMTSpeed);
+                                            Log("ScanMyTesla prevents car to get sleep. Speed: " + currentJSON.SMTSpeed);
                                             lastCarUsed = DateTime.Now;
                                             string wakeup = webhelper.Wakeup().Result;
                                             doSleep = false;
@@ -561,15 +566,15 @@ namespace TeslaLogger
                                     if (!goSleepWithWakeup)
                                     {
                                         Log("Restart communication with Tesla Server! 2");
-                                        DBHelper.currentJSON.current_falling_asleep = false;
-                                        DBHelper.currentJSON.CreateCurrentJSON();
+                                        currentJSON.current_falling_asleep = false;
+                                        currentJSON.CreateCurrentJSON();
                                     }
                                 }
                             }
                         }
                     }
 
-                    DBHelper.currentJSON.CheckCreateCurrentJSON();
+                    currentJSON.CheckCreateCurrentJSON();
 
                     if (doSleep)
                     {
@@ -596,7 +601,7 @@ namespace TeslaLogger
             }
 
             // Alle States werden geschlossen
-            DBHelper.CloseChargingState();
+            DBHelper.CloseChargingState(this);
             DBHelper.CloseDriveState(this, webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
@@ -616,13 +621,13 @@ namespace TeslaLogger
                 SetCurrentState(TeslaState.Sleep);
                 DBHelper.StartState(this, res);
                 webhelper.ResetLastChargingState();
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
             {
                 //Log(res);
                 DBHelper.StartState(this, res);
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.CreateCurrentJSON();
 
                 while (true)
                 {
@@ -650,9 +655,9 @@ namespace TeslaLogger
             }
             else
             {
-                DBHelper.currentJSON.current_sleeping = false;
-                DBHelper.currentJSON.current_online = false;
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.current_sleeping = false;
+                currentJSON.current_online = false;
+                currentJSON.CreateCurrentJSON();
 
                 Log("Unhandled State: " + res);
             }
@@ -676,12 +681,12 @@ namespace TeslaLogger
         {
             // finish trip
             SetCurrentState(TeslaState.Start);
-            DBHelper.currentJSON.current_trip_end = DateTime.Now;
-            DBHelper.currentJSON.current_trip_km_end = DBHelper.currentJSON.current_odometer;
-            DBHelper.currentJSON.current_trip_end_range = DBHelper.currentJSON.current_ideal_battery_range_km;
+            currentJSON.current_trip_end = DateTime.Now;
+            currentJSON.current_trip_km_end = currentJSON.current_odometer;
+            currentJSON.current_trip_end_range = currentJSON.current_ideal_battery_range_km;
             webhelper.StopStreaming();
 
-            odometerLastTrip = DBHelper.currentJSON.current_odometer;
+            odometerLastTrip = currentJSON.current_odometer;
         }
 
 
@@ -767,7 +772,7 @@ namespace TeslaLogger
         {
             Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             lastCarUsed = DateTime.Now;
-            Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+            Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
@@ -928,7 +933,7 @@ namespace TeslaLogger
         private void HandleStateChange(TeslaState _oldState, TeslaState _newState)
         {
             Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
-            DBHelper.currentJSON.CreateCurrentJSON();
+            currentJSON.CreateCurrentJSON();
 
             // any -> Start
             if (_oldState != TeslaState.Start && _newState == TeslaState.Start)
@@ -943,8 +948,8 @@ namespace TeslaLogger
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
-                DBHelper.currentJSON.current_falling_asleep = false;
-                DBHelper.currentJSON.CreateCurrentJSON();
+                currentJSON.current_falling_asleep = false;
+                currentJSON.CreateCurrentJSON();
             }
             // Start -> Online - Update Car Version after Update
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
@@ -954,7 +959,7 @@ namespace TeslaLogger
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
-                Address addr = WebHelper.geofence.GetPOI(DBHelper.currentJSON.latitude, DBHelper.currentJSON.longitude, false);
+                Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
