@@ -1831,5 +1831,44 @@ namespace TeslaLogger
 
             return dt;
         }
+
+        public object DBNullIfEmptyOrZero(string val)
+        {
+            if (val == null || val == "" || val == "0" || val == "0.00")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
+        }
+
+        public object DBNullIfEmpty(string val)
+        {
+            if (val == null || val == "")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
+        }
+
+        public bool IsZero(string val)
+        {
+            if (val == null || val == "")
+            {
+                return false;
+            }
+
+            if (double.TryParse(val, out double v))
+            {
+                if (v == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }
