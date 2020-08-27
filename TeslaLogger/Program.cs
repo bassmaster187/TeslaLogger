@@ -15,14 +15,13 @@ namespace TeslaLogger
     internal class Program
     {
         public static bool VERBOSE = false;
-      
+
         public enum TLMemCacheKey
         {
             GetOutsideTempAsync,
             Housekeeping
         }
 
-        
         private static WebServer webServer;
 
         private static void Main(string[] args)
@@ -38,7 +37,7 @@ namespace TeslaLogger
                 InitStage2();
 
                 InitConnectToDB();
-                
+
                 InitWebserver();
 
                 MQTTClient.StartMQTTClient();
@@ -74,7 +73,6 @@ namespace TeslaLogger
                     tesla_token_expire = (DateTime)r["tesla_token_expire"];
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire);
             }
-            
         }
 
         static Car GetFirstCar()
@@ -258,7 +256,6 @@ namespace TeslaLogger
         {
             Logfile.Log("Exit: " + _msg);
             Environment.Exit(_exitcode);
-        }    
-      
+        }
     }
 }

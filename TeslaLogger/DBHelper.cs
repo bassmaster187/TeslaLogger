@@ -1820,7 +1820,7 @@ namespace TeslaLogger
             DataTable dt = new DataTable();
 
             try
-            {    
+            {
                 MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", DBConnectionstring);
                 da.Fill(dt);
             }
