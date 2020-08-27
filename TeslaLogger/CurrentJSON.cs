@@ -5,7 +5,8 @@ using System.Text;
 namespace TeslaLogger
 {
     public class CurrentJSON
-    {      
+    {
+        public int CarID = 0;
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
@@ -176,7 +177,7 @@ namespace TeslaLogger
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
-                FileManager.WriteCurrentJsonFile(current_json);
+                FileManager.WriteCurrentJsonFile(CarID, current_json);
                 //FileManager.WriteCurrentJsonFile(new Tools.JsonFormatter(current_json).Format());
             }
             catch (Exception ex)

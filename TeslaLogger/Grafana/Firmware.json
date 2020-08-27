@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 65,
+  "iteration": 1598539322429,
   "links": [],
   "panels": [
     {
@@ -60,7 +60,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as 'Date Installed', T1a.Firmware, Datediff(T1a.StartDate, T2a.StartDate) as 'Days since previous update'\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as 'Date Installed', T1a.Firmware, Datediff(T1a.StartDate, T2a.StartDate) as 'Days since previous update'\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -158,7 +158,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -266,7 +266,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -374,7 +374,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version \n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as time_sec, Datediff(T1a.StartDate, T2a.StartDate) as DaysDiff\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -418,7 +418,34 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-2y",
@@ -441,5 +468,5 @@
   "timezone": "",
   "title": "Firmware",
   "uid": "URrZhLZgk",
-  "version": 1
+  "version": 3
 }
