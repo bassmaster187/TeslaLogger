@@ -434,7 +434,7 @@ namespace TeslaLogger
                 Logfile.Log("update view: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
-                s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+                s = s.Replace("0.190052356", wh.car.Wh_TR.ToString(Tools.ciEnUS));
 
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
                 if (Range == "RR")
@@ -540,7 +540,7 @@ namespace TeslaLogger
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
-                    Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
+                    Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp");
@@ -558,7 +558,7 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Update: " + f);
                         string s = File.ReadAllText(f);
-                        s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+                        s = s.Replace("0.190052356", wh.car.Wh_TR.ToString(Tools.ciEnUS));
                         s = s.Replace("TASKERTOKEN", wh.TaskerHash);
 
                         if (Range == "RR")

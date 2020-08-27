@@ -205,6 +205,39 @@ namespace TeslaLogger
             }
         }
 
+        internal static void WriteCarSettings(Car c)
+        {
+            try
+            {
+                Logfile.Log("UpdateTeslaToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, Model=@Model, Battery=@Battery  where id=@id", con);
+                    cmd.Parameters.AddWithValue("@id", c.CarInDB);
+                    cmd.Parameters.AddWithValue("@Raven", c.Raven);
+                    cmd.Parameters.AddWithValue("@Wh_TR", c.Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR", c.DB_Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR_count", c.DB_Wh_TR_count);
+                    cmd.Parameters.AddWithValue("@car_type", c.car_type);
+                    cmd.Parameters.AddWithValue("@car_special_type", c.car_special_type);
+                    cmd.Parameters.AddWithValue("@trim_badging", c.trim_badging);
+                    cmd.Parameters.AddWithValue("@Model", c.Model);
+                    cmd.Parameters.AddWithValue("@Battery", c.Battery);
+                    cmd.Parameters.AddWithValue("@display_name", c.display_name);
+                    
+
+                    int done = cmd.ExecuteNonQuery();
+
+                    Logfile.Log("update tesla_token OK: " + done);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         internal static void GetChargingstateStdOut(string[] args)
         {
             try
@@ -392,13 +425,13 @@ namespace TeslaLogger
 
                     if (dr.Read())
                     {
-                        long anz = (long)dr["anz"];
+                        int anz = Convert.ToInt32(dr["anz"]);
                         double wh_km = (double)dr["economy_Wh_km"];
 
                         Logfile.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
 
-                        wh.carSettings.DB_Wh_TR = wh_km.ToString();
-                        wh.carSettings.DB_Wh_TR_count = anz.ToString();
+                        wh.car.DB_Wh_TR = wh_km;
+                        wh.car.DB_Wh_TR_count = anz;
                     }
                 }
             }

@@ -71,6 +71,21 @@ namespace TeslaLogger
         internal int CarInAccount;
         internal int CarInDB;
 
+        public string ModelName;
+        public bool Raven = false;
+        public double Wh_TR = 0.190052356;
+        public double DB_Wh_TR = 0;
+        public int DB_Wh_TR_count = 0;
+
+        public string car_type = "";
+        public string car_special_type = "";
+        public string trim_badging = "";
+
+        public string Model = "";
+        public string Battery = "";
+
+        public string display_name = "";
+
 
         static List<Car> allcars = new List<Car>();
 
@@ -193,14 +208,13 @@ namespace TeslaLogger
 
             DBHelper.GetEconomy_Wh_km(webhelper);
             webhelper.DeleteWakeupFile();
-            string carName = webhelper.carSettings.Name;
-            if (webhelper.carSettings.Raven)
+            
+            if (Raven)
             {
-                carName += " Raven";
+                ModelName += " Raven";
             }
 
-            Log("Car: " + carName + " - " + webhelper.carSettings.Wh_TR + " Wh/km");
-            double.TryParse(webhelper.carSettings.Wh_TR, out DBHelper.currentJSON.Wh_TR);
+            Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
             DBHelper.GetLastTrip();
             UpdateTeslalogger.Start(webhelper);
             UpdateTeslalogger.UpdateGrafana(webhelper);
@@ -1040,6 +1054,11 @@ namespace TeslaLogger
                     Log("EnableHighFrequencyLoggingMode default");
                     break;
             }
+        }
+
+        public void WriteSettings()
+        {
+            DBHelper.WriteCarSettings(this);
         }
 
         void Log(string text)

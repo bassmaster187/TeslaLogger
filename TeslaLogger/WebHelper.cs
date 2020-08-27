@@ -26,7 +26,6 @@ namespace TeslaLogger
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
         public string option_codes = "";
-        public CarSettings carSettings = null;
         public string TaskerHash = string.Empty;
         public bool is_sentry_mode = false;
         public string fast_charger_brand = "";
@@ -48,7 +47,7 @@ namespace TeslaLogger
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
         internal static ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
-        private Car car;
+        internal Car car;
 
         static WebHelper()
         {
@@ -60,7 +59,6 @@ namespace TeslaLogger
 
         public WebHelper(Car car)
         {
-            carSettings = CarSettings.ReadSettings();
             this.car = car;
         }
 
@@ -424,8 +422,10 @@ namespace TeslaLogger
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                     string display_name = r2["display_name"].ToString();
+                    car.display_name = display_name;
                     Log("display_name: " + display_name);
 
+                    /* TODO not needed anymore?
                     try
                     {
                         string filepath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "DISPLAY_NAME");
@@ -434,6 +434,7 @@ namespace TeslaLogger
                     }
                     catch (Exception)
                     { }
+                    */
 
                     string vin = r2["vin"].ToString();
                     Log("vin: " + vin);
@@ -555,28 +556,28 @@ namespace TeslaLogger
                     option_codes = r4["option_codes"].ToString();
                     string[] oc = option_codes.Split(',');
 
-                    carSettings.AWD = oc.Contains("DV4W");
+                    car.AWD = oc.Contains("DV4W");
 
                     if (oc.Contains("MDLS") || oc.Contains("MS01") || oc.Contains("MS02") || oc.Contains("MS03"))
-                        carSettings.Model = "MS";
+                        car.Model = "MS";
                     else if (oc.Contains("MDLX"))
-                        carSettings.Model = "MX";
+                        car.Model = "MX";
                     else if (oc.Contains("MDL3"))
-                        carSettings.Model = "M3";
+                        car.Model = "M3";
 
                     var battery = oc.Where(r => r.StartsWith("BT")).ToArray();
                     if (battery != null && battery.Length > 0)
                     {
-                        if (carSettings.Battery != battery[0])
+                        if (car.Battery != battery[0])
                         {
-                            Log("Battery: " + battery[0] + " / " + carSettings.Model);
-                            carSettings.Battery = battery[0];
+                            Log("Battery: " + battery[0] + " / " + car.Model);
+                            car.Battery = battery[0];
 
-                            carSettings.WriteSettings();
+                            car.WriteSettings();
                         }
                     }
 
-                    carSettings.Performance = oc.Contains("PBT85") || oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
+                    car.Performance = oc.Contains("PBT85") || oc.Contains("PX01") || oc.Contains("P85D") || oc.Contains("PX6D") || oc.Contains("X024") | oc.Contains("PBT8") | oc.Contains("PF01");
 
                     */
 
@@ -626,15 +627,15 @@ namespace TeslaLogger
                         {
                             if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
                             {
-                                carSettings.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
+                                car.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
                             }
 
                             if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
                             {
-                                carSettings.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+                                car.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
                             }
 
-                            carSettings.trim_badging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
+                            car.trim_badging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
                                 ? (string)jBadgeResult["trim_badging"].ToString().ToLower().Trim()
                                 : "";
 
@@ -662,20 +663,17 @@ namespace TeslaLogger
         {
             //string eff = "0.190052356";
 
-            if (carSettings.car_type == "model3")
+            if (car.car_type == "model3")
             {
                 int maxRange = DBHelper.GetAvgMaxRage();
                 if (maxRange > 400)
                 {
                     try
                     {
-                        if (double.TryParse(carSettings.DB_Wh_TR, System.Globalization.NumberStyles.Any, Tools.ciEnUS, out double wh))
+                        if (car.DB_Wh_TR >= 0.143 && car.DB_Wh_TR <= 0.148)
                         {
-                            if (wh >= 0.143 && wh <= 0.148)
-                            {
-                                WriteCarSettings("0.152", "M3 LR RWD");
-                                return;
-                            }
+                            WriteCarSettings("0.152", "M3 LR RWD");
+                            return;
                         }
                     }
                     catch (Exception ex)
@@ -692,65 +690,62 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (carSettings.car_type == "models2" && carSettings.car_special_type == "base")
+            else if (car.car_type == "models2" && car.car_special_type == "base")
             {
-                if (carSettings.trim_badging == "60")
+                if (car.trim_badging == "60")
                 {
                     WriteCarSettings("0.200", "S 60");
                     return;
                 }
-                else if (carSettings.trim_badging == "60d")
+                else if (car.trim_badging == "60d")
                 {
                     WriteCarSettings("0.187", "S 60D");
                     return;
                 }
-                else if (carSettings.trim_badging == "75d")
+                else if (car.trim_badging == "75d")
                 {
                     WriteCarSettings("0.186", "S 75D");
                     return;
                 }
-                else if (carSettings.trim_badging == "75")
+                else if (car.trim_badging == "75")
                 {
                     WriteCarSettings("0.195", "S 75");
                     return;
                 }
-                else if (carSettings.trim_badging == "90d")
+                else if (car.trim_badging == "90d")
                 {
                     WriteCarSettings("0.188", "S 90D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p90")
+                else if (car.trim_badging == "p90")
                 {
                     WriteCarSettings("0.201", "S P90");
                     return;
                 }
-                else if (carSettings.trim_badging == "p90d")
+                else if (car.trim_badging == "p90d")
                 {
                     WriteCarSettings("0.201", "S P90D");
                     return;
                 }
-                else if (carSettings.trim_badging == "100d")
+                else if (car.trim_badging == "100d")
                 {
                     WriteCarSettings("0.189", "S 100D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p100d")
+                else if (car.trim_badging == "p100d")
                 {
                     WriteCarSettings("0.200", "S P100D");
                     return;
                 }
-                else if (carSettings.trim_badging == "")
+                else if (car.trim_badging == "")
                 {
                     int maxRange = DBHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
-                        if (double.TryParse(carSettings.DB_Wh_TR, System.Globalization.NumberStyles.Any, Tools.ciEnUS, out double wh))
+                        if (car.DB_Wh_TR >= 0.174 && car.DB_Wh_TR <= 0.181)
                         {
-                            if (wh >= 0.174 && wh <= 0.181)
-                            {
-                                WriteCarSettings("0.178", "S Raven LR P");
-                                return;
-                            }
+                            WriteCarSettings("0.178", "S Raven LR P");
+                            return;
                         }
 
                         WriteCarSettings("0.169", "S Raven LR");
@@ -768,64 +763,64 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (carSettings.car_type == "models" && (carSettings.car_special_type == "base" || carSettings.car_special_type == "signature"))
+            else if (car.car_type == "models" && (car.car_special_type == "base" || car.car_special_type == "signature"))
             {
-                if (carSettings.trim_badging == "60")
+                if (car.trim_badging == "60")
                 {
                     WriteCarSettings("0.200", "S 60");
                     return;
                 }
-                else if (carSettings.trim_badging == "70")
+                else if (car.trim_badging == "70")
                 {
                     WriteCarSettings("0.200", "S 70");
                     return;
                 }
-                else if (carSettings.trim_badging == "70d")
+                else if (car.trim_badging == "70d")
                 {
                     WriteCarSettings("0.194", "S 70D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p85d")
+                else if (car.trim_badging == "p85d")
                 {
                     WriteCarSettings("0.201", "S P85D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p85+")
+                else if (car.trim_badging == "p85+")
                 {
                     WriteCarSettings("0.201", "S P85+");
                     return;
                 }
-                else if (carSettings.trim_badging == "85d")
+                else if (car.trim_badging == "85d")
                 {
                     WriteCarSettings("0.186", "S 85D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p85")
+                else if (car.trim_badging == "p85")
                 {
                     WriteCarSettings("0.201", "S P85");
                     return;
                 }
-                else if (carSettings.trim_badging == "85")
+                else if (car.trim_badging == "85")
                 {
                     WriteCarSettings("0.201", "S 85");
                     return;
                 }
-                else if (carSettings.trim_badging == "90")
+                else if (car.trim_badging == "90")
                 {
                     WriteCarSettings("0.201", "S 90");
                     return;
                 }
-                else if (carSettings.trim_badging == "90d")
+                else if (car.trim_badging == "90d")
                 {
                     WriteCarSettings("0.187", "S 90D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p90")
+                else if (car.trim_badging == "p90")
                 {
                     WriteCarSettings("0.201", "S P90");
                     return;
                 }
-                else if (carSettings.trim_badging == "p90d")
+                else if (car.trim_badging == "p90d")
                 {
                     WriteCarSettings("0.202", "S P90D");
                     return;
@@ -836,29 +831,29 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (carSettings.car_type == "modelx" && carSettings.car_special_type == "base")
+            else if (car.car_type == "modelx" && car.car_special_type == "base")
             {
-                if (carSettings.trim_badging == "75d")
+                if (car.trim_badging == "75d")
                 {
                     WriteCarSettings("0.224", "X 75D");
                     return;
                 }
-                else if (carSettings.trim_badging == "100d")
+                else if (car.trim_badging == "100d")
                 {
                     WriteCarSettings("0.217", "X 100D");
                     return;
                 }
-                else if (carSettings.trim_badging == "90d")
+                else if (car.trim_badging == "90d")
                 {
                     WriteCarSettings("0.212", "X 90D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p100d")
+                else if (car.trim_badging == "p100d")
                 {
                     WriteCarSettings("0.226", "X P100D");
                     return;
                 }
-                else if (carSettings.trim_badging == "p90d")
+                else if (car.trim_badging == "p90d")
                 {
                     WriteCarSettings("0.217", "X P90D");
                     return;
@@ -872,11 +867,11 @@ namespace TeslaLogger
 
             return;
             /*
-            if (carSettings.Model == "MS")
+            if (car.Model == "MS")
             {
-                if (carSettings.Battery == "BTX5")
+                if (car.Battery == "BTX5")
                 {
-                    if (carSettings.AWD)
+                    if (car.AWD)
                     {
                         eff = "0.186";
                         car = "S 75D";
@@ -887,9 +882,9 @@ namespace TeslaLogger
                         car = "S 75";
                     }
                 }
-                else if (carSettings.Battery == "BTX4")
+                else if (car.Battery == "BTX4")
                 {
-                    if (carSettings.Performance)
+                    if (car.Performance)
                     {
                         eff = "0.200";
                         car = "S P90D";
@@ -900,9 +895,9 @@ namespace TeslaLogger
                         car = "S90D";
                     }
                 }
-                else if (carSettings.Battery == "BTX6")
+                else if (car.Battery == "BTX6")
                 {
-                    if (carSettings.Performance)
+                    if (car.Performance)
                     {
                         eff = "0.200";
                         car = "S P100D";
@@ -913,9 +908,9 @@ namespace TeslaLogger
                         car = "S 100D";
                     }
                 }
-                else if (carSettings.Battery == "BTX8")
+                else if (car.Battery == "BTX8")
                 {
-                    if (carSettings.AWD)
+                    if (car.AWD)
                     {
                         eff = "0.186";
                         car = "S 75D (85kWh)";
@@ -926,11 +921,11 @@ namespace TeslaLogger
                         car = "S 75 (85kWh)";
                     }
                 }
-                else if (carSettings.Battery == "BT85")
+                else if (car.Battery == "BT85")
                 {
-                    if (carSettings.AWD)
+                    if (car.AWD)
                     {
-                        if (carSettings.Performance)
+                        if (car.Performance)
                         {
                             car = "S P85D";
                             eff = "0.201";
@@ -943,7 +938,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        if (carSettings.Performance)
+                        if (car.Performance)
                         {
                             car = "S P85";
                             eff = "0.210";
@@ -955,17 +950,17 @@ namespace TeslaLogger
                         }
                     }
                 }
-                else if (carSettings.Battery == "PBT85")
+                else if (car.Battery == "PBT85")
                 {
                     car = "S P85";
                     eff = "0.210";
                 }
-                else if (carSettings.Battery == "BT70")
+                else if (car.Battery == "BT70")
                 {
                     car = "S 70 ?";
                     eff = "0.200";
                 }
-                else if (carSettings.Battery == "BT60")
+                else if (car.Battery == "BT60")
                 {
                     car = "S 60 ?";
                     eff = "0.200";
@@ -976,16 +971,16 @@ namespace TeslaLogger
                     eff = "0.200";
                 }
             }
-            else if (carSettings.Model == "MX")
+            else if (car.Model == "MX")
             {
-                if (carSettings.Battery == "BTX5")
+                if (car.Battery == "BTX5")
                 {
                     eff = "0.208";
                     car = "X 75D";
                 }
-                else if (carSettings.Battery == "BTX4")
+                else if (car.Battery == "BTX4")
                 {
-                    if (!carSettings.Performance)
+                    if (!car.Performance)
                     {
                         eff = "0.208";
                         car = "X 90D";
@@ -996,9 +991,9 @@ namespace TeslaLogger
                         car = "X P90D";
                     }
                 }
-                else if (carSettings.Battery == "BTX6")
+                else if (car.Battery == "BTX6")
                 {
-                    if (carSettings.Performance)
+                    if (car.Performance)
                     {
                         eff = "0.226";
                         car = "X P100D";
@@ -1016,11 +1011,11 @@ namespace TeslaLogger
                 }
 
             }
-            else if (carSettings.Model == "M3")
+            else if (car.Model == "M3")
             {
-                if (carSettings.Battery == "BT37")
+                if (car.Battery == "BT37")
                 {
-                    if (carSettings.Performance)
+                    if (car.Performance)
                     {
                         eff = "0.153";
                         car = "M3P";
@@ -1039,7 +1034,7 @@ namespace TeslaLogger
             }
             else
             {
-                if (carSettings.Battery == "BT85")
+                if (car.Battery == "BT85")
                 {
                     car = "S 85 ?";
                     eff = "0.200";
@@ -1050,15 +1045,16 @@ namespace TeslaLogger
             */
         }
 
-        private void WriteCarSettings(string eff, string car)
-        {
-            if (carSettings.Name != car || carSettings.Wh_TR != eff)
+        private void WriteCarSettings(string eff, string ModelName)
+        { 
+            // TODO eff in double
+            if (car.ModelName != ModelName || car.Wh_TR.ToString(Tools.ciEnUS) != eff)
             {
-                Log("WriteCarSettings " + car + " eff: " + eff);
+                Log("Writecar " + ModelName + " eff: " + eff);
 
-                carSettings.Name = car;
-                carSettings.Wh_TR = eff;
-                carSettings.WriteSettings();
+                car.ModelName = ModelName;
+                car.Wh_TR = Convert.ToDouble(eff, Tools.ciEnUS);
+                car.WriteSettings();
             }
         }
 
@@ -1752,10 +1748,10 @@ FROM
                 if (ideal_battery_range == 999)
                 {
                     ideal_battery_range = (decimal)r2["battery_range"];
-                    if (!carSettings.Raven)
+                    if (!car.Raven)
                     {
-                        carSettings.Raven = true;
-                        carSettings.WriteSettings();
+                        car.Raven = true;
+                        car.WriteSettings();
                         Log("Raven Model!");
                     }
                 }
@@ -2202,8 +2198,8 @@ FROM
 
                 lastTaskerWakeupfile = DateTime.Now;
 
-                string name = carSettings.Name;
-                if (carSettings.Raven && !name.Contains("Raven"))
+                string name = car.ModelName;
+                if (car.Raven && !name.Contains("Raven"))
                 {
                     name += " Raven";
                 }
@@ -2215,23 +2211,23 @@ FROM
                     { "t", TaskerHash },
                     { "v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() },
                     { "cv", DBHelper.currentJSON.current_car_version },
-                    { "m", carSettings.Model },
-                    { "bt", carSettings.Battery },
+                    { "m", car.Model },
+                    { "bt", car.Battery },
                     { "n", name },
-                    { "eff", carSettings.Wh_TR },
+                    { "eff", car.Wh_TR.ToString(Tools.ciEnUS) },
                     { "oc", option_codes },
 
-                    { "db_eff", carSettings.DB_Wh_TR },
-                    { "db_eff_cnt", carSettings.DB_Wh_TR_count },
+                    { "db_eff", car.DB_Wh_TR.ToString(Tools.ciEnUS)},
+                    { "db_eff_cnt", car.DB_Wh_TR_count.ToString(Tools.ciEnUS) },
 
                     { "pw", power },
                     { "temp", temperature },
                     { "le", length },
                     { "ln", language },
 
-                    { "CT", carSettings.car_type },
-                    { "CST", carSettings.car_special_type },
-                    { "TB", carSettings.trim_badging },
+                    { "CT", car.car_type },
+                    { "CST", car.car_special_type },
+                    { "TB", car.trim_badging },
 
                     { "G", Tools.GetGrafanaVersion() },
 
