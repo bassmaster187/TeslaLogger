@@ -46,6 +46,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestJapanese()
         {
+            /* TODO
             Tools.SetThread_enUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
@@ -56,6 +57,7 @@ namespace UnitTestsTeslalogger
             DBHelper.InsertPos(1, unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
             int endid = DBHelper.GetMaxPosid(true);
             DBHelper.CloseDriveState(DateTime.Now);
+            /*
         }
 
         [TestMethod]

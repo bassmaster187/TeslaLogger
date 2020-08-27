@@ -86,6 +86,8 @@ namespace TeslaLogger
 
         public string display_name = "";
 
+        public string TaskerHash = "";
+
 
         static List<Car> allcars = new List<Car>();
 
@@ -198,7 +200,7 @@ namespace TeslaLogger
             string online = webhelper.IsOnline().Result;
             Log("Streamingtoken: " + webhelper.Tesla_Streamingtoken);
 
-            if (DBHelper.GetMaxPosid(false) == 0)
+            if (DBHelper.GetMaxPosid(this, false) == 0)
             {
                 Log("Insert first Pos");
                 webhelper.IsDriving(true);
@@ -355,7 +357,7 @@ namespace TeslaLogger
 
                 DriveFinished();
 
-                ShareData sd = new ShareData(webhelper.TaskerHash);
+                ShareData sd = new ShareData(TaskerHash);
                 sd.SendAllChargingData();
             }
 
@@ -445,7 +447,7 @@ namespace TeslaLogger
                     }
 
                     webhelper.StartStreamThread(); // für altitude
-                    DBHelper.StartDriveState();
+                    DBHelper.StartDriveState(this);
                     SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
@@ -595,7 +597,7 @@ namespace TeslaLogger
 
             // Alle States werden geschlossen
             DBHelper.CloseChargingState();
-            DBHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
+            DBHelper.CloseDriveState(this, webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
             lastCarUsed = DateTime.Now;
@@ -605,21 +607,21 @@ namespace TeslaLogger
                 SetCurrentState(TeslaState.Online);
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
-                DBHelper.StartState(res);
+                DBHelper.StartState(this, res);
                 return;
             }
             else if (res == "asleep")
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Sleep);
-                DBHelper.StartState(res);
+                DBHelper.StartState(this, res);
                 webhelper.ResetLastChargingState();
                 DBHelper.currentJSON.CreateCurrentJSON();
             }
             else if (res == "offline")
             {
                 //Log(res);
-                DBHelper.StartState(res);
+                DBHelper.StartState(this, res);
                 DBHelper.currentJSON.CreateCurrentJSON();
 
                 while (true)
@@ -750,7 +752,7 @@ namespace TeslaLogger
                         webhelper.lastTokenRefresh = DateTime.Now;
 
                         // Every 10 Days send degradataion Data
-                        ShareData sd = new ShareData(webhelper.TaskerHash);
+                        ShareData sd = new ShareData(TaskerHash);
                         sd.SendDegradationData();
                     }
                     else

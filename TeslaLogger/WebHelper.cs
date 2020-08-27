@@ -26,7 +26,6 @@ namespace TeslaLogger
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
         public string option_codes = "";
-        public string TaskerHash = string.Empty;
         public bool is_sentry_mode = false;
         public string fast_charger_brand = "";
         public string fast_charger_type = "";
@@ -338,14 +337,14 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    DBHelper.InsertCharging(car, timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        DBHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        DBHelper.InsertCharging(car, timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Log("Charging Complete");
                     }
 
@@ -447,25 +446,26 @@ namespace TeslaLogger
 
                     byte[] tempTasker = Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
 
-                    TaskerHash = string.Empty;
+                    car.TaskerHash = string.Empty;
                     DamienG.Security.Cryptography.Crc32 crc32 = new DamienG.Security.Cryptography.Crc32();
                     foreach (byte b in crc32.ComputeHash(tempTasker))
                     {
-                        TaskerHash += b.ToString("x2").ToLower();
+                        car.TaskerHash += b.ToString("x2").ToLower();
                     }
 
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.TaskerPrefix))
                     {
-                        TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + TaskerHash;
+                        car.TaskerHash = ApplicationSettings.Default.TaskerPrefix + "_" + car.TaskerHash;
                     }
 
                     if (car.CarInAccount > 0)
                     {
-                        TaskerHash = TaskerHash + "_" + car.CarInAccount;
+                        car.TaskerHash = car.TaskerHash + "_" + car.CarInAccount;
                     }
 
-                    Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + TaskerHash);
+                    Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + car.TaskerHash);
 
+                    /*
                     try
                     {
                         string taskertokenpath = System.IO.Path.Combine(FileManager.GetExecutingPath(), "TASKERTOKEN");
@@ -473,8 +473,9 @@ namespace TeslaLogger
                     }
                     catch (Exception)
                     { }
+                    */
 
-                    scanMyTesla = new ScanMyTesla(TaskerHash);
+                    scanMyTesla = new ScanMyTesla(car.CarInDB, car.TaskerHash);
 
                     /*
                     dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -2208,7 +2209,7 @@ FROM
 
                 Dictionary<string, string> d = new Dictionary<string, string>
                 {
-                    { "t", TaskerHash },
+                    { "t", car.TaskerHash },
                     { "v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() },
                     { "cv", DBHelper.currentJSON.current_car_version },
                     { "m", car.Model },

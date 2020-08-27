@@ -414,7 +414,7 @@ namespace TeslaLogger
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
 
-                        ShareData sd = new ShareData(wh.TaskerHash);
+                        ShareData sd = new ShareData(wh.car.TaskerHash);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
                     }
@@ -559,7 +559,7 @@ namespace TeslaLogger
                         Logfile.Log("Update: " + f);
                         string s = File.ReadAllText(f);
                         s = s.Replace("0.190052356", wh.car.Wh_TR.ToString(Tools.ciEnUS));
-                        s = s.Replace("TASKERTOKEN", wh.TaskerHash);
+                        s = s.Replace("TASKERTOKEN", wh.car.TaskerHash);
 
                         if (Range == "RR")
                         {

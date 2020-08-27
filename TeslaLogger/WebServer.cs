@@ -389,12 +389,15 @@ namespace TeslaLogger
 
         private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
+             
             int from = 1;
-            int to = DBHelper.GetMaxPosid();
+            int to = DBHelper.GetMaxPosid(this);
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to);
             Logfile.Log("Admin: UpdateElevation done");
+            */
         }
     }
 }

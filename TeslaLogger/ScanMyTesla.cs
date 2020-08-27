@@ -15,10 +15,12 @@ namespace TeslaLogger
         private System.Threading.Thread thread;
         private bool fastmode = false;
         private bool run = true;
+        int CarID;
 
-        public ScanMyTesla(string token)
+        public ScanMyTesla(int CarID, string token)
         {
             this.token = token;
+            this.CarID = CarID;
 
             thread = new System.Threading.Thread(new System.Threading.ThreadStart(Start));
             thread.Start();
@@ -132,7 +134,7 @@ namespace TeslaLogger
                 Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
 
                 StringBuilder sb = new StringBuilder();
-                sb.Append("INSERT INTO `can` (`datum`, `id`, `val`) VALUES ");
+                sb.Append("INSERT INTO `can` (`datum`, `id`, `val`, CarId) VALUES ");
                 bool first = true;
 
                 string sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
@@ -198,10 +200,10 @@ namespace TeslaLogger
                     sb.Append(line.Key);
                     sb.Append(",");
                     sb.Append(Convert.ToDouble(line.Value).ToString(Tools.ciEnUS));
+                    sb.Append(",");
+                    sb.Append(CarID);
                     sb.Append(")");
                 }
-
-
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
