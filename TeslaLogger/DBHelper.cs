@@ -1523,7 +1523,7 @@ namespace TeslaLogger
         { 
             if (logging)
             {
-                Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
+                // TODO Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))

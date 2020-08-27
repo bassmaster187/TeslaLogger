@@ -219,7 +219,7 @@ namespace TeslaLogger
 
                             if (!filename.Contains(FileManager.GetFilePath(TLFilename.GeofenceFilename)))
                             {
-                                Logfile.Log("Address inserted: " + args[0]);
+                                // TODO Logfile.Log("Address inserted: " + args[0]);
                             }
                         }
                         catch (Exception ex)

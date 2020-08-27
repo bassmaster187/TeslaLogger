@@ -196,6 +196,7 @@ namespace TeslaLogger
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                 { "System.DateTime.Now", DateTime.Now.ToString() },
@@ -237,6 +238,8 @@ namespace TeslaLogger
             };
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
+            
+             */
         }
 
         private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)

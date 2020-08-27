@@ -127,9 +127,11 @@ namespace TeslaLogger
 
         internal static void WriteTeslaTokenFile(string tesla_token)
         {
+            /* TODO
             string serializeToken = tesla_token + "|" + DateTime.Now.ToString("s");
 
             File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
+            */
         }
 
         private static object SyncLock_WriteCurrentJsonFile = new object();

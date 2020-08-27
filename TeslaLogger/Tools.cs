@@ -764,6 +764,7 @@ namespace TeslaLogger
 
         private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
         {
+            /* TODO
             if (Program.GetCurrentState() == Program.TeslaState.Sleep)
             {
                 // CacheItem was removed and car is asleep, so run housekeeping
@@ -774,6 +775,7 @@ namespace TeslaLogger
                 // wait another hour to try again
                 CreateMemoryCacheItem(1);
             }
+            */
         }
 
         private static void CleanupDatabaseTableMothership()
