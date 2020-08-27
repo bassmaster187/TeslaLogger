@@ -1832,6 +1832,23 @@ namespace TeslaLogger
             return dt;
         }
 
+        public static DataTable GetCars()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT *from cars order by id", DBConnectionstring);
+                da.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return dt;
+        }
+
         public static object DBNullIfEmptyOrZero(string val)
         {
             if (val == null || val == "" || val == "0" || val == "0.00")
