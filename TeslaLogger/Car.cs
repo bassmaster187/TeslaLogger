@@ -90,8 +90,7 @@ namespace TeslaLogger
         public string TaskerHash = "";
 
         public CurrentJSON currentJSON = new CurrentJSON();
-
-        static List<Car> allcars = new List<Car>();
+        private static List<Car> allcars = new List<Car>();
 
         public DBHelper dbHelper;
 
@@ -116,6 +115,8 @@ namespace TeslaLogger
                 thread.Start();
             }
         }
+
+        internal static List<Car> GetAllCars() { return allcars.ToList(); }
 
         private void Loop()
         {
