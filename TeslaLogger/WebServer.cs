@@ -229,7 +229,7 @@ namespace TeslaLogger
                 {
                     { $"Car #{car.CarInDB} GetCurrentState()", car.GetCurrentState().ToString() },
                     { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFreequencyLogging().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString() },
                     { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString() },
                     { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString() },
                     { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString() },
