@@ -383,7 +383,7 @@ namespace TeslaLogger
             {
                 Logfile.Log("HTTP GetAllCars");
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash FROM cars order by display_name", DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name FROM cars order by display_name", DBHelper.DBConnectionstring);
                 da.Fill(dt);
 
                 responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
