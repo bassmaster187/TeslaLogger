@@ -183,19 +183,23 @@ namespace TeslaLogger
 
         private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
         {
-            //int Watt = DBHelper.currentJSON.current_charger_voltage * DBHelper.currentJSON.current_charger_phases * DBHelper.currentJSON.current_charger_actual_current;
+            /* TODO
             double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
             WriteString(response, ((int)Watt).ToString());
+            */
         }
 
         private void soc(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
             int soc = DBHelper.currentJSON.current_battery_level;
             WriteString(response, soc.ToString());
+            */
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                 { "System.DateTime.Now", DateTime.Now.ToString() },
@@ -237,6 +241,8 @@ namespace TeslaLogger
             };
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
+            
+             */
         }
 
         private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)
@@ -282,21 +288,21 @@ namespace TeslaLogger
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con);
 
-                    if (DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && IsZero(j["cost_per_session"]))
+                    if (DBHelper.DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && DBHelper.IsZero(j["cost_per_session"]))
                     {
                         cmd.Parameters.AddWithValue("@cost_total", 0);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@cost_total", DBNullIfEmptyOrZero(j["cost_total"]));
+                        cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"]));
                     }
 
-                    cmd.Parameters.AddWithValue("@cost_currency", DBNullIfEmpty(j["cost_currency"]));
-                    cmd.Parameters.AddWithValue("@cost_per_kwh", DBNullIfEmpty(j["cost_per_kwh"]));
-                    cmd.Parameters.AddWithValue("@cost_per_session", DBNullIfEmpty(j["cost_per_session"]));
-                    cmd.Parameters.AddWithValue("@cost_per_minute", DBNullIfEmpty(j["cost_per_minute"]));
-                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNullIfEmpty(j["cost_idle_fee_total"]));
-                    cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
+                    cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"]));
+                    cmd.Parameters.AddWithValue("@cost_per_kwh", DBHelper.DBNullIfEmpty(j["cost_per_kwh"]));
+                    cmd.Parameters.AddWithValue("@cost_per_session", DBHelper.DBNullIfEmpty(j["cost_per_session"]));
+                    cmd.Parameters.AddWithValue("@cost_per_minute", DBHelper.DBNullIfEmpty(j["cost_per_minute"]));
+                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"]));
+                    cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
 
                     cmd.Parameters.AddWithValue("@id", j["id"]);
                     int done = cmd.ExecuteNonQuery();
@@ -310,44 +316,6 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 WriteString(response, "ERROR");
             }
-        }
-
-        private object DBNullIfEmptyOrZero(string val)
-        {
-            if (val == null || val == "" || val == "0" || val == "0.00")
-            {
-                return DBNull.Value;
-            }
-
-            return val;
-        }
-
-        private object DBNullIfEmpty(string val)
-        {
-            if (val == null || val == "")
-            {
-                return DBNull.Value;
-            }
-
-            return val;
-        }
-
-        private bool IsZero(string val)
-        {
-            if (val == null || val == "")
-            {
-                return false;
-            }
-
-            if (double.TryParse(val, out double v))
-            {
-                if (v == 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
@@ -386,12 +354,15 @@ namespace TeslaLogger
 
         private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
         {
+            /* TODO
+             
             int from = 1;
-            int to = DBHelper.GetMaxPosid();
+            int to = DBHelper.GetMaxPosid(this);
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to);
             Logfile.Log("Admin: UpdateElevation done");
+            */
         }
     }
 }

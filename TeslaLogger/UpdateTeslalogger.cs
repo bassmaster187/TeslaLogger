@@ -196,6 +196,15 @@ namespace TeslaLogger
                         ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
                 }
 
+                InsertCarID_Column("can");
+                InsertCarID_Column("car_version");
+                InsertCarID_Column("charging");
+                InsertCarID_Column("chargingstate");
+                InsertCarID_Column("drivestate");
+                InsertCarID_Column("pos");
+                InsertCarID_Column("shiftstate");
+                InsertCarID_Column("state");
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();
@@ -302,6 +311,16 @@ namespace TeslaLogger
             }
         }
 
+        private static void InsertCarID_Column(string table)
+        {
+            if (!DBHelper.ColumnExists(table, "CarID"))
+            {
+                Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` int NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
+            }
+        }
+
         public static void CheckDBCharset()
         {
             try
@@ -395,7 +414,7 @@ namespace TeslaLogger
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
 
-                        ShareData sd = new ShareData(wh.TaskerHash);
+                        ShareData sd = new ShareData(wh.car.TaskerHash);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
                     }
@@ -415,7 +434,7 @@ namespace TeslaLogger
                 Logfile.Log("update view: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
-                s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
+                s = s.Replace("0.190052356", wh.car.Wh_TR.ToString(Tools.ciEnUS));
 
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
                 if (Range == "RR")
@@ -521,7 +540,7 @@ namespace TeslaLogger
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
-                    Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
+                    Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp");
@@ -539,8 +558,8 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Update: " + f);
                         string s = File.ReadAllText(f);
-                        s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
-                        s = s.Replace("TASKERTOKEN", wh.TaskerHash);
+                        s = s.Replace("0.190052356", wh.car.Wh_TR.ToString(Tools.ciEnUS));
+                        s = s.Replace("TASKERTOKEN", wh.car.TaskerHash);
 
                         if (Range == "RR")
                         {

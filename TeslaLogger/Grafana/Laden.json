@@ -17,7 +17,7 @@
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Laden",
-        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
+        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5  and CarID = $Car\norder by StartDate desc\n\n\n\n  ",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -29,7 +29,7 @@
         "iconColor": "#56A64B",
         "limit": 100,
         "name": "Laden fertig",
-        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
+        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5  and CarID = $Car\norder by StartDate desc",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -39,6 +39,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1598534144145,
   "links": [],
   "panels": [
     {
@@ -137,7 +138,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum)\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum) and CarID = $Car\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -418,7 +419,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum)\nORDER BY datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum) and CarID = $Car\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -449,7 +450,45 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": "2"
+          },
+          {
+            "selected": false,
+            "text": "",
+            "value": "1"
+          }
+        ],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now/d",
@@ -483,5 +522,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 57
+  "version": 58
 }

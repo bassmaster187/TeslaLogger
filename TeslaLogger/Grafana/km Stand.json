@@ -25,6 +25,7 @@
       "dashes": false,
       "datasource": "teslalogger",
       "fill": 1,
+      "fillGradient": 1,
       "gridPos": {
         "h": 21,
         "w": 24,
@@ -33,18 +34,23 @@
       },
       "id": 2,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
-        "min": false,
+        "min": true,
+        "rightSide": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -61,7 +67,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(pos.datum), odometer as 'km Stand [km]'\nfrom pos \nwhere pos.id in (Select StartPos from drivestate where $__timeFilter(StartDate)) and odometer > 0 order by pos.datum\n",
+          "rawSql": "SELECT $__time(pos.datum), odometer as value, + concat(display_name,' [km]') as metric\nfrom pos join cars on pos.carid = cars.id\nwhere pos.id in (Select StartPos from drivestate where $__timeFilter(StartDate)) and odometer > 0 order by pos.datum\n",
           "refId": "A",
           "select": [
             [
@@ -126,7 +132,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
