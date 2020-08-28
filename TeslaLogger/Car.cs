@@ -119,7 +119,7 @@ namespace TeslaLogger
 
         private void Loop()
         {
-            currentJSON.current_odometer = DBHelper.GetLatestOdometer(this);
+            currentJSON.current_odometer = dbHelper.GetLatestOdometer();
             currentJSON.CreateCurrentJSON();
 
             lock (typeof(Car))
@@ -209,15 +209,15 @@ namespace TeslaLogger
             string online = webhelper.IsOnline().Result;
             Log("Streamingtoken: " + webhelper.Tesla_Streamingtoken);
 
-            if (DBHelper.GetMaxPosid(this, false) == 0)
+            if (dbHelper.GetMaxPosid(false) == 0)
             {
                 Log("Insert first Pos");
                 webhelper.IsDriving(true);
             }
 
-            Log("Country Code: " + DBHelper.UpdateCountryCode(this));
+            Log("Country Code: " + dbHelper.UpdateCountryCode());
 
-            DBHelper.GetEconomy_Wh_km(webhelper);
+            dbHelper.GetEconomy_Wh_km(webhelper);
             webhelper.DeleteWakeupFile();
             
             if (Raven)
@@ -226,11 +226,11 @@ namespace TeslaLogger
             }
 
             Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
-            DBHelper.GetLastTrip(this);
+            dbHelper.GetLastTrip();
             UpdateTeslalogger.Start(webhelper);
             UpdateTeslalogger.UpdateGrafana(webhelper);
 
-            currentJSON.current_car_version = DBHelper.GetLastCarVersion(this);
+            currentJSON.current_car_version = dbHelper.GetLastCarVersion();
 
         }
 
@@ -366,7 +366,7 @@ namespace TeslaLogger
 
                 DriveFinished();
 
-                ShareData sd = new ShareData(TaskerHash);
+                ShareData sd = new ShareData(this);
                 sd.SendAllChargingData();
             }
 
@@ -456,7 +456,7 @@ namespace TeslaLogger
                     }
 
                     webhelper.StartStreamThread(); // für altitude
-                    DBHelper.StartDriveState(this);
+                    dbHelper.StartDriveState();
                     SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
@@ -472,7 +472,7 @@ namespace TeslaLogger
                     }
 
                     webhelper.IsDriving(true);
-                    DBHelper.StartChargingState(webhelper);
+                    dbHelper.StartChargingState(webhelper);
                     SetCurrentState(TeslaState.Charge);
 
                     webhelper.DeleteWakeupFile();
@@ -605,8 +605,8 @@ namespace TeslaLogger
             }
 
             // Alle States werden geschlossen
-            DBHelper.CloseChargingState(this);
-            DBHelper.CloseDriveState(this, webhelper.lastIsDriveTimestamp);
+            dbHelper.CloseChargingState();
+            dbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
             lastCarUsed = DateTime.Now;
@@ -761,7 +761,7 @@ namespace TeslaLogger
                         webhelper.lastTokenRefresh = DateTime.Now;
 
                         // Every 10 Days send degradataion Data
-                        ShareData sd = new ShareData(TaskerHash);
+                        ShareData sd = new ShareData(this);
                         sd.SendDegradationData();
                     }
                     else
@@ -1087,7 +1087,7 @@ namespace TeslaLogger
             dbHelper.WriteCarSettings();
         }
 
-        void Log(string text)
+        public void Log(string text)
         {
             string temp = "#" + CarInDB + ": " + text;
             Logfile.Log(temp);

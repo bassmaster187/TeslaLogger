@@ -13,10 +13,13 @@ namespace TeslaLogger
         private string TeslaloggerVersion;
         private static bool logwritten = false;
         private bool shareData = false;
+        Car car;
 
-        public ShareData(string TaskerToken)
+        public ShareData(Car car)
         {
-            this.TaskerToken = TaskerToken;
+            this.TaskerToken = car.TaskerHash;
+            this.car = car;
+
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -109,7 +112,7 @@ namespace TeslaLogger
                     {
                         { "ProtocolVersion", ProtocolVersion }
                     };
-                    string Firmware = DBHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
+                    string Firmware = car.dbHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
                     d.Add("Firmware", Firmware);
 
                     d.Add("TaskerToken", TaskerToken); // TaskerToken and HostId is the primary key and is used to make sure data won't be imported twice

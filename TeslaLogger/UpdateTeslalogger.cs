@@ -414,7 +414,7 @@ namespace TeslaLogger
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
 
-                        ShareData sd = new ShareData(wh.car.TaskerHash);
+                        ShareData sd = new ShareData(wh.car);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
                     }
