@@ -1851,7 +1851,8 @@ FROM
 
         private async Task<double?> GetOutsideTempAsync()
         {
-            object cacheValue = MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString());
+            string cacheKey = Program.TLMemCacheKey.GetOutsideTempAsync.ToString() + car.CarInDB;
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
                 return (double)cacheValue;
@@ -1931,7 +1932,7 @@ FROM
                     Thread.Sleep(5000);
                 }
 
-                MemoryCache.Default.Add(Program.TLMemCacheKey.GetOutsideTempAsync.ToString(), (double)outside_temp, DateTime.Now.AddMinutes(1));
+                MemoryCache.Default.Add(cacheKey, (double)outside_temp, DateTime.Now.AddMinutes(1));
                 return (double)outside_temp;
             }
             catch (Exception ex)

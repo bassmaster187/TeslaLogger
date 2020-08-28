@@ -168,6 +168,9 @@ namespace TeslaLogger
                     Thread.Sleep(15000);
                 }
             }
+
+            UpdateTeslalogger.Start();
+            UpdateTeslalogger.UpdateGrafana();
         }
 
         private static void InitCheckDocker()
@@ -217,16 +220,21 @@ namespace TeslaLogger
                 Logfile.Log("UpdateDbInBackground started");
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
-                // TODO DBHelper.CheckForInterruptedCharging(true);
-                // TODO webhelper.UpdateAllEmptyAddresses();
+                foreach (Car c in Car.allcars)
+                {
+                    c.dbHelper.CheckForInterruptedCharging(true);
+                    c.webhelper.UpdateAllEmptyAddresses();
+                }
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
 
-                /* TODO
-                ShareData sd = new ShareData(webhelper.TaskerHash);
-                sd.SendAllChargingData();
-                sd.SendDegradationData();
-                */
+                foreach (Car c in Car.allcars)
+                {
+                    ShareData sd = new ShareData(c);
+                    sd.SendAllChargingData();
+                    sd.SendDegradationData();
+                }
+
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
             })

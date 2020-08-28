@@ -17,7 +17,7 @@ namespace TeslaLogger
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
         Address lastRacingPoint = null;
-        private WebHelper webhelper;
+        internal WebHelper webhelper;
 
         internal enum TeslaState
         {
@@ -91,7 +91,7 @@ namespace TeslaLogger
 
         public CurrentJSON currentJSON = new CurrentJSON();
 
-        static List<Car> allcars = new List<Car>();
+        public static List<Car> allcars = new List<Car>();
 
         public DBHelper dbHelper;
 
@@ -227,8 +227,6 @@ namespace TeslaLogger
 
             Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
             dbHelper.GetLastTrip();
-            UpdateTeslalogger.Start(webhelper);
-            UpdateTeslalogger.UpdateGrafana(webhelper);
 
             currentJSON.current_car_version = dbHelper.GetLastCarVersion();
 
@@ -1112,30 +1110,30 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"" +
-$"SELECT " +
-$"  chargingstate.id, " +
-$"  chargingstate.cost_total, " +
-$"  chargingstate.cost_currency, " +
-$"  chargingstate.cost_per_kwh, " +
-$"  chargingstate.cost_per_session, " +
-$"  chargingstate.cost_per_minute, " +
-$"  chargingstate.startdate, " +
-$"  chargingstate.enddate, " +
-$"  charging.charge_energy_added " +
-$"FROM " +
-$"  chargingstate, " +
-$"  pos, " +
-$"  charging " +
-$"WHERE " +
-$"  chargingstate.endchargingid = charging.id " +
-$"  AND chargingstate.pos = pos.id " +
-$"  AND pos.address = '{_addr.name}' " +
-$"  AND chargingstate.cost_total IS NOT NULL " +
-$"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
-$"  AND chargingstate.cost_idle_fee_total IS NULL " +
-$"  AND CarID = {CarInDB}" +
-$"ORDER BY id DESC " +
-$"LIMIT 1", con);
+                    $"SELECT " +
+                    $"  chargingstate.id, " +
+                    $"  chargingstate.cost_total, " +
+                    $"  chargingstate.cost_currency, " +
+                    $"  chargingstate.cost_per_kwh, " +
+                    $"  chargingstate.cost_per_session, " +
+                    $"  chargingstate.cost_per_minute, " +
+                    $"  chargingstate.startdate, " +
+                    $"  chargingstate.enddate, " +
+                    $"  charging.charge_energy_added " +
+                    $"FROM " +
+                    $"  chargingstate, " +
+                    $"  pos, " +
+                    $"  charging " +
+                    $"WHERE " +
+                    $"  chargingstate.endchargingid = charging.id " +
+                    $"  AND chargingstate.pos = pos.id " +
+                    $"  AND pos.address = '{_addr.name}' " +
+                    $"  AND chargingstate.cost_total IS NOT NULL " +
+                    $"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
+                    $"  AND chargingstate.cost_idle_fee_total IS NULL " +
+                    $"  AND CarID = {CarInDB}" +
+                    $"ORDER BY id DESC " +
+                    $"LIMIT 1", con);
                 Tools.DebugLog("SQL:" + cmd.CommandText);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
@@ -1243,15 +1241,7 @@ $"  AND CarID = {CarInDB}", con);
 
         public static Car GetCarByID(int carid)
         {
-            try
-            {
-                return allcars.Where(car => car.CarInDB == carid).ToList().First();
-            }
-            catch (Exception)
-            {
-                // .First will throw InvalidOperationException if list is empty
-            }
-            return null;
+            return allcars.FirstOrDefault(car => car.CarInDB == carid);
         }
     }
 }

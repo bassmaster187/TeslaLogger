@@ -550,7 +550,8 @@ namespace TeslaLogger
                     }
                     dr.Close();
 
-                    cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_range_km, battery_level, lat, lng FROM pos order by id desc limit 1", con);
+                    cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_range_km, battery_level, lat, lng FROM pos where CarID=@CarID order by id desc limit 1", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -1104,7 +1105,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos from drivestate", con);
+                MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -1112,8 +1113,11 @@ namespace TeslaLogger
                     {
                         int StartPos = Convert.ToInt32(dr[0]);
                         int EndPos = Convert.ToInt32(dr[1]);
+                        int CarId = Convert.ToInt32(dr[2]);
 
-                        // TODO UpdateDriveStatistics(StartPos, EndPos, false);
+                        Car c = Car.GetCarByID(CarId);
+                        if (c != null)
+                            c.dbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
                     }
                     catch (Exception ex)
                     {
@@ -1734,7 +1738,7 @@ namespace TeslaLogger
 
         internal int GetScanMyTeslaPacketsLastWeek()
         {
-            string cacheKey = "GetScanMyTeslaPacketsLastWeek";
+            string cacheKey = "GetScanMyTeslaPacketsLastWeek_"+car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
