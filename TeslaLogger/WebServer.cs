@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.Script.Serialization;
 
@@ -102,40 +103,32 @@ namespace TeslaLogger
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
 
-                switch (request.Url.LocalPath)
+                switch (true)
                 {
-                    case @"/getchargingstate":
+                    // commands
+                    case bool _ when request.Url.LocalPath.Equals("/getchargingstate"):
                         Getchargingstate(request, response);
                         break;
-                    case @"/setcost":
+                    case bool _ when request.Url.LocalPath.Equals("/setcost"):
                         Setcost(request, response);
                         break;
-                    case @"/debug/TeslaAPI/vehicles":
-                    case @"/debug/TeslaAPI/charge_state":
-                    case @"/debug/TeslaAPI/climate_state":
-                    case @"/debug/TeslaAPI/drive_state":
-                    case @"/debug/TeslaAPI/vehicle_config":
-                    case @"/debug/TeslaAPI/vehicle_state":
-                    case @"/debug/TeslaAPI/command/auto_conditioning_stop":
-                    case @"/debug/TeslaAPI/command/charge_port_door_open":
-                    case @"/debug/TeslaAPI/command/set_charge_limit":
-                        Debug_TeslaAPI(request.Url.LocalPath, request, response);
+                    // car values
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
+                        Get_CarValue(request, response);
                         break;
-                    case @"/debug/TeslaLogger/states":
-                        Debug_TeslaLoggerStates(request, response);
-                        break;
-                    case @"/admin/UpdateElevation":
+                    case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
-                    case @"/admin/ReloadGeofence":
+                    case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
                         // optional query parameter: html --> returns html instead of JSON
                         Admin_ReloadGeofence(request, response);
                         break;
-                    case @"/soc":
-                        soc(request, response);
+                    // Tesla API debug
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
+                        Debug_TeslaAPI(request.Url.LocalPath, request, response);
                         break;
-                    case @"/charge_watt":
-                        charge_watt(request, response);
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaLogger/[0-9]+/states"):
+                        Debug_TeslaLoggerStates(request, response);
                         break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -147,6 +140,36 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                string value = m.Groups[1].Captures[0].ToString();
+                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                if (value.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        if (car.currentJSON.GetType().GetProperty(value) != null)
+                        {
+                            object val = car.currentJSON.GetType().GetProperty(value).GetValue(car.currentJSON);
+                            Logfile.Log($"GetCarValue: {request.Url.LocalPath} - {value} - {CarID} -- {val}");
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
+                            {
+                                WriteString(response, val.ToString());
+                            }
+                            else
+                            {
+                                // TODO return JSON
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -179,22 +202,6 @@ namespace TeslaLogger
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
-        }
-
-        private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            /* TODO
-            double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
-            WriteString(response, ((int)Watt).ToString());
-            */
-        }
-
-        private void soc(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            /* TODO
-            int soc = DBHelper.currentJSON.current_battery_level;
-            WriteString(response, soc.ToString());
-            */
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
