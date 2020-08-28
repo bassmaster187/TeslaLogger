@@ -112,6 +112,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setcost"):
                         Setcost(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/getallcars"):
+                        GetAllCars(request, response);
+                        break;
                     // car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -360,6 +363,27 @@ namespace TeslaLogger
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring);
                 da.SelectCommand.Parameters.AddWithValue("@id", id);
+                da.Fill(dt);
+
+                responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            WriteString(response, responseString);
+        }
+
+        private void GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string responseString = "";
+
+            try
+            {
+                Logfile.Log("HTTP GetAllCars");
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash FROM cars order by display_name", DBHelper.DBConnectionstring);
                 da.Fill(dt);
 
                 responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
