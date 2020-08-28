@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -45,7 +44,7 @@ namespace TeslaLogger
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
-        internal static ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
+        internal ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
         internal Car car;
 
         static WebHelper()

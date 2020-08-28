@@ -5,7 +5,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Caching;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.Script.Serialization;
@@ -254,15 +253,32 @@ namespace TeslaLogger
 
         private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)
         {
-            int position = path.LastIndexOf('/');
-            if (position > -1)
+            Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                path = path.Substring(position + 1);
-                if (path.Length > 0 && WebHelper.TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                string value = m.Groups[1].Captures[0].ToString();
+                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                if (value.Length > 0 && CarID > 0)
                 {
-                    response.AddHeader("Content-Type", "application/json");
-                    WriteString(response, TeslaAPIJSON);
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                    {
+                        response.AddHeader("Content-Type", "application/json");
+                        WriteString(response, TeslaAPIJSON);
+                    }
+                    else
+                    {
+                        WriteString(response, "");
+                    }
                 }
+                else
+                {
+                    WriteString(response, "");
+                }
+            }
+            else
+            {
+                WriteString(response, "");
             }
         }
 
