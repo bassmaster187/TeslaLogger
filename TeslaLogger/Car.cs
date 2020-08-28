@@ -46,7 +46,7 @@ namespace TeslaLogger
         private double odometerLastTrip;
         internal double GetOdometerLastTrip() { return odometerLastTrip; }
         private bool highFrequencyLogging = false;
-        internal bool GetHighFreequencyLogging() { return highFrequencyLogging; }
+        internal bool GetHighFrequencyLogging() { return highFrequencyLogging; }
         private int highFrequencyLoggingTicks = 0;
         internal int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private int highFrequencyLoggingTicksLimit = 100;
@@ -1244,15 +1244,7 @@ $"  AND CarID = {CarInDB}", con);
 
         public static Car GetCarByID(int carid)
         {
-            try
-            {
-                return allcars.Where(car => car.CarInDB == carid).ToList().First();
-            }
-            catch (Exception)
-            {
-                // .First will throw InvalidOperationException if list is empty
-            }
-            return null;
+            return allcars.FirstOrDefault(car => car.CarInDB == carid);
         }
     }
 }
