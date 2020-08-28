@@ -17,7 +17,7 @@ namespace TeslaLogger
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
         Address lastRacingPoint = null;
-        private WebHelper webhelper;
+        internal WebHelper webhelper;
 
         internal enum TeslaState
         {
@@ -90,7 +90,7 @@ namespace TeslaLogger
         public string TaskerHash = "";
 
         public CurrentJSON currentJSON = new CurrentJSON();
-        private static List<Car> allcars = new List<Car>();
+        public static List<Car> allcars = new List<Car>();
 
         public DBHelper dbHelper;
 
@@ -228,8 +228,6 @@ namespace TeslaLogger
 
             Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
             dbHelper.GetLastTrip();
-            UpdateTeslalogger.Start(webhelper);
-            UpdateTeslalogger.UpdateGrafana(webhelper);
 
             currentJSON.current_car_version = dbHelper.GetLastCarVersion();
 
