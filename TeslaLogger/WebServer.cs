@@ -114,10 +114,7 @@ namespace TeslaLogger
                         break;
                     // car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
-                        GetCarValue(request, response);
-                        break;
-                    case bool _ when request.Url.LocalPath.Equals("/charge_watt"):
-                        charge_watt(request, response);
+                        Get_CarValue(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
@@ -146,7 +143,7 @@ namespace TeslaLogger
             }
         }
 
-        private void GetCarValue(HttpListenerRequest request, HttpListenerResponse response)
+        private void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -162,6 +159,14 @@ namespace TeslaLogger
                         {
                             object val = car.currentJSON.GetType().GetProperty(value).GetValue(car.currentJSON);
                             Logfile.Log($"GetCarValue: {request.Url.LocalPath} - {value} - {CarID} -- {val}");
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
+                            {
+                                WriteString(response, val.ToString());
+                            }
+                            else
+                            {
+                                // TODO return JSON
+                            }
                         }
                     }
                 }
@@ -197,22 +202,6 @@ namespace TeslaLogger
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
-        }
-
-        private void charge_watt(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            /* TODO
-            double Watt = DBHelper.currentJSON.Wh_TR * DBHelper.currentJSON.current_charge_rate_km * 1000.0;
-            WriteString(response, ((int)Watt).ToString());
-            */
-        }
-
-        private void soc(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            /* TODO
-            int soc = DBHelper.currentJSON.current_battery_level;
-            WriteString(response, soc.ToString());
-            */
         }
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
