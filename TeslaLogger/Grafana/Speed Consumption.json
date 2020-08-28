@@ -143,7 +143,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select min(avgspeed) div 10 * 10 as Speed, max(lastTime) as 'LastDriven', count(*) as 'Count', avg(Verbrauch) as avg_kWh, avg(avg_temp) as avg_temp\nfrom\n(\nSELECT count(*) as anz,max(Datum) as lastTime, min(speed) as minspeed, avg(speed) as avgspeed, max(speed) as maxspeed, \nmax(odometer) - min(odometer) as km, (max(ideal_battery_range_km)-min(ideal_battery_range_km)) * 0.190052356 as kWh\n,((max(ideal_battery_range_km)-min(ideal_battery_range_km)) * 0.190052356) / (max(odometer) - min(odometer)) * 100 as Verbrauch, avg(outside_temp) as avg_temp\nFROM pos\nwhere $__timeFilter(Datum) and speed is not null and odometer is not null and ideal_battery_range_km is not null\ngroup by odometer DIV $MINDISTANCE\nhaving anz > 5 and minspeed > avgspeed - 5 and maxspeed < avgspeed + 5 and avgspeed > 9 and km > 0.3 and kWh >=0.2\n) T\ngroup by avgspeed div 10\nhaving Count > 1",
+          "rawSql": "select min(avgspeed) div 10 * 10 as Speed, max(lastTime) as 'LastDriven', count(*) as 'Count', avg(Verbrauch) as avg_kWh, avg(avg_temp) as avg_temp\nfrom\n(\n  SELECT count(*) as anz,max(Datum) as lastTime, min(speed) as minspeed, avg(speed) as avgspeed, max(speed) as maxspeed, \n    max(odometer) - min(odometer) as km, (max(ideal_battery_range_km)-min(ideal_battery_range_km)) * cars.wh_tr as kWh,\n    ((max(ideal_battery_range_km)-min(ideal_battery_range_km)) * cars.wh_tr) / (max(odometer) - min(odometer)) * 100 as Verbrauch, avg(outside_temp) as avg_temp\n  FROM pos join cars on pos.carid = cars.id\n  where $__timeFilter(Datum) and pos.carid=$Car and speed is not null and odometer is not null and ideal_battery_range_km is not null\ngroup by odometer DIV $MINDISTANCE\nhaving anz > 5 and minspeed > avgspeed - 5 and maxspeed < avgspeed + 5 and avgspeed > 9 and km > 0.3 and kWh >=0.2\n) T\ngroup by avgspeed div 10\nhaving Count > 1",
           "refId": "A",
           "select": [
             [
@@ -179,10 +179,35 @@
   "tags": [],
   "templating": {
     "list": [
+	  {
+        "allValue": null,
+        "current": {
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "2",
           "value": "2"
         },
@@ -261,8 +286,5 @@
   "timezone": "",
   "title": "Speed Consumption",
   "uid": "4EDf3Skgk",
-  "variables": {
-    "list": []
-  },
-  "version": 4
+  "version": 54
 }

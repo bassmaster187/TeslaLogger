@@ -419,7 +419,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum)\nORDER BY datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum) and CarID = $Car\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [

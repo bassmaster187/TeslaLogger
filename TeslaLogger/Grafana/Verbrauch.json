@@ -65,7 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1598537131087,
+  "iteration": 1598599925606,
   "links": [],
   "panels": [
     {
@@ -391,7 +391,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\n\r\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -519,5 +519,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 119
+  "version": 120
 }
