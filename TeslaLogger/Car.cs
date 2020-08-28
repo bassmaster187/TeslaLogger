@@ -1240,5 +1240,18 @@ $"  AND CarID = {CarInDB}", con);
                 }
             }
         }
+
+        public static Car GetCarByID(int carid)
+        {
+            try
+            {
+                return allcars.Where(car => car.CarInDB == carid).ToList().First();
+            }
+            catch (Exception)
+            {
+                // .First will throw InvalidOperationException if list is empty
+            }
+            return null;
+        }
     }
 }
