@@ -46,7 +46,7 @@ namespace TeslaLogger
         private double odometerLastTrip;
         internal double GetOdometerLastTrip() { return odometerLastTrip; }
         private bool highFrequencyLogging = false;
-        internal bool GetHighFreequencyLogging() { return highFrequencyLogging; }
+        internal bool GetHighFrequencyLogging() { return highFrequencyLogging; }
         private int highFrequencyLoggingTicks = 0;
         internal int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private int highFrequencyLoggingTicksLimit = 100;
@@ -63,7 +63,7 @@ namespace TeslaLogger
 
         Thread thread;
         bool run = true;
-        
+
 
         internal string TeslaName;
         internal string TeslaPasswort;
@@ -219,7 +219,7 @@ namespace TeslaLogger
 
             dbHelper.GetEconomy_Wh_km(webhelper);
             webhelper.DeleteWakeupFile();
-            
+
             if (Raven)
             {
                 ModelName += " Raven";

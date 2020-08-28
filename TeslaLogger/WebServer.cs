@@ -209,63 +209,87 @@ namespace TeslaLogger
 
         private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
         {
-            /* TODO
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                 { "System.DateTime.Now", DateTime.Now.ToString() },
                 { "System.DateTime.UtcNow", DateTime.UtcNow.ToString() },
                 { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString() },
-                { "Program._currentState", Program.GetCurrentState().ToString() },
-                { "WebHelper._lastShift_State", Program.GetWebHelper().GetLastShiftState() },
-                { "Program.highFreequencyLogging", Program.GetHighFreequencyLogging().ToString() },
-                { "Program.highFrequencyLoggingTicks", Program.GetHighFrequencyLoggingTicks().ToString() },
-                { "Program.highFrequencyLoggingTicksLimit", Program.GetHighFrequencyLoggingTicksLimit().ToString() },
-                { "Program.highFrequencyLoggingUntil", Program.GetHighFrequencyLoggingUntil().ToString() },
-                { "Program.highFrequencyLoggingMode", Program.GetHighFrequencyLoggingMode().ToString() },
+                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() },
                 {
-                    "TLMemCacheKey.GetOutsideTempAsync",
-                    MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
-                        ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
-                        : "null"
+                "TLMemCacheKey.Housekeeping",
+                MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
+                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString()
+                    : "null"
                 },
-                {
-                    "TLMemCacheKey.Housekeeping",
-                    MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
-                        ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString()
-                        : "null"
-                },
-                { "Program.lastCarUsed", Program.GetLastCarUsed().ToString() },
-                { "Program.lastOdometerChanged", Program.GetLastOdometerChanged().ToString() },
-                { "Program.lastTryTokenRefresh", Program.GetLastTryTokenRefresh().ToString() },
-                {
-                    "Program.lastSetChargeLimitAddressName",
-                    Program.GetLastSetChargeLimitAddressName().Equals(string.Empty)
-                        ? "&lt;&gt;"
-                        : Program.GetLastSetChargeLimitAddressName()
-                },
-                { "Program.goSleepWithWakeup", Program.GetGoSleepWithWakeup().ToString() },
-                { "Program.odometerLastTrip", Program.GetOdometerLastTrip().ToString() },
-                { "WebHelper.lastIsDriveTimestamp", Program.GetWebHelper().lastIsDriveTimestamp.ToString() },
-                { "WebHelper.lastUpdateEfficiency", Program.GetWebHelper().lastUpdateEfficiency.ToString() },
-                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() }
             };
+
+            foreach (Car car in Car.allcars)
+            {
+                Dictionary<string, string> carvalues = new Dictionary<string, string>
+                {
+                    { $"Car #{car.CarInDB} GetCurrentState()", car.GetCurrentState().ToString() },
+                    { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString() },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingMode()", car.GetHighFrequencyLoggingMode().ToString() },
+                    { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString() },
+                    { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString() },
+                    { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString() },
+                    { "Program.lastSetChargeLimitAddressName",
+                        car.GetLastSetChargeLimitAddressName().Equals(string.Empty)
+                        ? "&lt;&gt;"
+                        : car.GetLastSetChargeLimitAddressName()
+                    },
+                    { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString() },
+                    { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
+                    { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
+                    { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
+                };
+                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
+                values.Add($"Car #{car.CarInDB}", carHTMLtable);
+            }
+
+            /*{
+                "TLMemCacheKey.GetOutsideTempAsync",
+                MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString()) != null
+                    ? ((double)MemoryCache.Default.Get(Program.TLMemCacheKey.GetOutsideTempAsync.ToString())).ToString()
+                    : "null"
+            },*/
+
             IEnumerable<string> trs = values.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value));
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
-            
-             */
         }
 
         private void Debug_TeslaAPI(string path, HttpListenerRequest request, HttpListenerResponse response)
         {
-            int position = path.LastIndexOf('/');
-            if (position > -1)
+            Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                path = path.Substring(position + 1);
-                if (path.Length > 0 && WebHelper.TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                string value = m.Groups[1].Captures[0].ToString();
+                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                if (value.Length > 0 && CarID > 0)
                 {
-                    response.AddHeader("Content-Type", "application/json");
-                    WriteString(response, TeslaAPIJSON);
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                    {
+                        response.AddHeader("Content-Type", "application/json");
+                        WriteString(response, TeslaAPIJSON);
+                    }
+                    else
+                    {
+                        WriteString(response, "");
+                    }
                 }
+                else
+                {
+                    WriteString(response, "");
+                }
+            }
+            else
+            {
+                WriteString(response, "");
             }
         }
 
