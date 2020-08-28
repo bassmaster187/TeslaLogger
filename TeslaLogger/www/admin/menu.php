@@ -1,15 +1,5 @@
 <?PHP
-function GetTaskerToken()
-{
-    $taskertoken = "";
-    if (file_exists("/etc/teslalogger/TASKERTOKEN"))
-    {
-        $taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
-    }
-
-    return $taskertoken;
-}
-
+require_once("tools.php");
 function full_path()
 {
     $s = &$_SERVER;
@@ -36,7 +26,7 @@ function menu($title)
     if (!isset($current_carid))
         $current_carid = 1;
 
-    $allcars = file_get_contents("http://teslalogger:5000/getallcars");
+    $allcars = file_get_contents(GetTeslaloggerURL("getallcars"));
     $jcars = json_decode($allcars);
 
     foreach ($jcars as $k => $v) {
