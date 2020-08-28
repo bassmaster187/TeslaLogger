@@ -46,7 +46,7 @@ namespace TeslaLogger
         private double odometerLastTrip;
         internal double GetOdometerLastTrip() { return odometerLastTrip; }
         private bool highFrequencyLogging = false;
-        internal bool GetHighFrequencyLogging() { return highFrequencyLogging; }
+        internal bool GetHighFreequencyLogging() { return highFrequencyLogging; }
         private int highFrequencyLoggingTicks = 0;
         internal int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private int highFrequencyLoggingTicksLimit = 100;
@@ -63,7 +63,7 @@ namespace TeslaLogger
 
         Thread thread;
         bool run = true;
-        
+
 
         internal string TeslaName;
         internal string TeslaPasswort;
@@ -90,6 +90,7 @@ namespace TeslaLogger
         public string TaskerHash = "";
 
         public CurrentJSON currentJSON = new CurrentJSON();
+
         public static List<Car> allcars = new List<Car>();
 
         public DBHelper dbHelper;
@@ -115,8 +116,6 @@ namespace TeslaLogger
                 thread.Start();
             }
         }
-
-        internal static List<Car> GetAllCars() { return allcars.ToList(); }
 
         private void Loop()
         {
@@ -220,7 +219,7 @@ namespace TeslaLogger
 
             dbHelper.GetEconomy_Wh_km(webhelper);
             webhelper.DeleteWakeupFile();
-            
+
             if (Raven)
             {
                 ModelName += " Raven";
@@ -1111,30 +1110,30 @@ namespace TeslaLogger
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"" +
-$"SELECT " +
-$"  chargingstate.id, " +
-$"  chargingstate.cost_total, " +
-$"  chargingstate.cost_currency, " +
-$"  chargingstate.cost_per_kwh, " +
-$"  chargingstate.cost_per_session, " +
-$"  chargingstate.cost_per_minute, " +
-$"  chargingstate.startdate, " +
-$"  chargingstate.enddate, " +
-$"  charging.charge_energy_added " +
-$"FROM " +
-$"  chargingstate, " +
-$"  pos, " +
-$"  charging " +
-$"WHERE " +
-$"  chargingstate.endchargingid = charging.id " +
-$"  AND chargingstate.pos = pos.id " +
-$"  AND pos.address = '{_addr.name}' " +
-$"  AND chargingstate.cost_total IS NOT NULL " +
-$"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
-$"  AND chargingstate.cost_idle_fee_total IS NULL " +
-$"  AND CarID = {CarInDB}" +
-$"ORDER BY id DESC " +
-$"LIMIT 1", con);
+                    $"SELECT " +
+                    $"  chargingstate.id, " +
+                    $"  chargingstate.cost_total, " +
+                    $"  chargingstate.cost_currency, " +
+                    $"  chargingstate.cost_per_kwh, " +
+                    $"  chargingstate.cost_per_session, " +
+                    $"  chargingstate.cost_per_minute, " +
+                    $"  chargingstate.startdate, " +
+                    $"  chargingstate.enddate, " +
+                    $"  charging.charge_energy_added " +
+                    $"FROM " +
+                    $"  chargingstate, " +
+                    $"  pos, " +
+                    $"  charging " +
+                    $"WHERE " +
+                    $"  chargingstate.endchargingid = charging.id " +
+                    $"  AND chargingstate.pos = pos.id " +
+                    $"  AND pos.address = '{_addr.name}' " +
+                    $"  AND chargingstate.cost_total IS NOT NULL " +
+                    $"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
+                    $"  AND chargingstate.cost_idle_fee_total IS NULL " +
+                    $"  AND CarID = {CarInDB}" +
+                    $"ORDER BY id DESC " +
+                    $"LIMIT 1", con);
                 Tools.DebugLog("SQL:" + cmd.CommandText);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
