@@ -337,14 +337,14 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    DBHelper.InsertCharging(car, timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        DBHelper.InsertCharging(car, timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Log("Charging Complete");
                     }
 
@@ -666,7 +666,7 @@ namespace TeslaLogger
 
             if (car.car_type == "model3")
             {
-                int maxRange = DBHelper.GetAvgMaxRage();
+                int maxRange = car.dbHelper.GetAvgMaxRage();
                 if (maxRange > 400)
                 {
                     try
@@ -740,7 +740,7 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging == "")
                 {
-                    int maxRange = DBHelper.GetAvgMaxRage();
+                    int maxRange = car.dbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
                         if (car.DB_Wh_TR >= 0.174 && car.DB_Wh_TR <= 0.181)
@@ -1143,7 +1143,7 @@ namespace TeslaLogger
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    DBHelper.InsertPos(car, timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -1827,7 +1827,7 @@ FROM
                         Log("Car Version: " + car_version);
                         car.currentJSON.current_car_version = car_version;
 
-                        DBHelper.SetCarVersion(car_version);
+                        car.dbHelper.SetCarVersion(car_version);
 
                         TaskerWakeupfile(true);
                     }
@@ -2236,9 +2236,9 @@ FROM
 
                     { "D", Tools.IsDocker() ? "1" : "0" },
                     { "SMT", Tools.UseScanMyTesla() ? "1" : "0" },
-                    { "SMTs", DBHelper.GetScanMyTeslaSignalsLastWeek().ToString() },
-                    { "SMTp", DBHelper.GetScanMyTeslaPacketsLastWeek().ToString() },
-                    { "TR", DBHelper.GetAvgMaxRage().ToString() },
+                    { "SMTs", car.dbHelper.GetScanMyTeslaSignalsLastWeek().ToString() },
+                    { "SMTp", car.dbHelper.GetScanMyTeslaPacketsLastWeek().ToString() },
+                    { "TR", car.dbHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
                     { "CC", car.currentJSON.current_country_code },

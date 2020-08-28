@@ -217,7 +217,7 @@ namespace TeslaLogger
                 Logfile.Log("UpdateDbInBackground started");
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
-                DBHelper.CheckForInterruptedCharging(true);
+                // TODO DBHelper.CheckForInterruptedCharging(true);
                 // TODO webhelper.UpdateAllEmptyAddresses();
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
