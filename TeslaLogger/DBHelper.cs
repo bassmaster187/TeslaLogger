@@ -220,7 +220,7 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash where id=@id", con);
+                    MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con);
                     cmd.Parameters.AddWithValue("@id", car.CarInDB);
                     cmd.Parameters.AddWithValue("@Raven", car.Raven);
                     cmd.Parameters.AddWithValue("@Wh_TR", car.Wh_TR);
@@ -233,6 +233,7 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@Battery", car.Battery);
                     cmd.Parameters.AddWithValue("@display_name", car.display_name);
                     cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
+                    cmd.Parameters.AddWithValue("@vin", car.vin);
 
                     int done = cmd.ExecuteNonQuery();
 

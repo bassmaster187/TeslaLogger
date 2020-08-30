@@ -436,6 +436,7 @@ namespace TeslaLogger
 
                     string vin = r2["vin"].ToString();
                     Log("vin: " + vin);
+                    car.vin = vin;
 
                     Tesla_id = r2["id"].ToString();
                     Log("id: " + Tesla_id);
@@ -1789,6 +1790,7 @@ FROM
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
+                car.Log("Check Sentry Mode");
                 if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
                 {
                     try
