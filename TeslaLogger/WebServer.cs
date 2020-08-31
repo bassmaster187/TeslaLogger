@@ -199,8 +199,7 @@ namespace TeslaLogger
             }
             else
             {
-                // TODO return JSON response success/error message like Tesla API
-                WriteString(response, "Admin: ReloadGeofence ...");
+                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}");
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
