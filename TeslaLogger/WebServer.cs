@@ -115,15 +115,15 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/getallcars"):
                         GetAllCars(request, response);
                         break;
-                    // car values
-                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
-                        Get_CarValue(request, response);
-                        break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
                         Admin_ReloadGeofence(request, response);
+                        break;
+                    // get car values
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
+                        Get_CarValue(request, response);
                         break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
