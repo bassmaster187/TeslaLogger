@@ -2326,10 +2326,9 @@ FROM
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath) || TaskerWakeupfile();
 
-        void Log(string text)
+        private void Log(string text)
         {
-            string temp = "#" + car.CarInDB + ": " + text;
-            Logfile.Log(temp);
+            car.Log(text);
         }
     }
 }
