@@ -406,15 +406,27 @@ namespace TeslaLogger
 
         private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
         {
-            /* TODO
-             
             int from = 1;
-            int to = DBHelper.GetMaxPosid(this);
+            int to = 1;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value)
+                    {
+                        int.TryParse(dr[0].ToString(), out to);
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception) { }
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
-            DBHelper.UpdateTripElevation(from, to);
+            DBHelper.UpdateTripElevation(from, to, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
-            */
         }
     }
 }
