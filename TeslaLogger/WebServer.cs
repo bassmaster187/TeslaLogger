@@ -105,7 +105,7 @@ namespace TeslaLogger
 
                 switch (true)
                 {
-                    // commands
+                    // commands for admin UI
                     case bool _ when request.Url.LocalPath.Equals("/getchargingstate"):
                         Getchargingstate(request, response);
                         break;
@@ -123,7 +123,6 @@ namespace TeslaLogger
                         Admin_UpdateElevation(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
-                        // optional query parameter: html --> returns html instead of JSON
                         Admin_ReloadGeofence(request, response);
                         break;
                     // Tesla API debug
@@ -168,7 +167,7 @@ namespace TeslaLogger
                             }
                             else
                             {
-                                // TODO return JSON
+                                WriteString(response, "{\"response\":{ \"value\":\"" + val + "\"} }");
                             }
                         }
                     }
