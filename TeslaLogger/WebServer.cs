@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Web;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
@@ -115,6 +117,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/getallcars"):
                         GetAllCars(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/setpassword"):
+                        SetPassword(request, response);
+                        break;
                     // car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -143,6 +148,61 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void SetPassword(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Logfile.Log("SetPassword");
+
+            string data;
+            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            {
+                data = reader.ReadToEnd();
+            }
+
+            NameValueCollection r = HttpUtility.ParseQueryString(data);
+            string email = r["email"];
+            string password = r["password"];
+            string carid = r["carid"];
+            string id = r["id"];
+            if (id != null && id.Length > 0)
+            {
+                if (id == "-1")
+                {
+                    Logfile.Log("Insert Password ID:" + id);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
+                        int newid = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid) values (@id, @tesla_name, @tesla_password, @tesla_carid)", con);
+                        cmd.Parameters.AddWithValue("@id", newid);
+                        cmd.Parameters.AddWithValue("@tesla_name", email);
+                        cmd.Parameters.AddWithValue("@tesla_password", password);
+                        cmd.Parameters.AddWithValue("@tesla_carid", carid);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    Logfile.Log("Update Password ID:" + id);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@ where id=@id", con);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@tesla_name", email);
+                        cmd.Parameters.AddWithValue("@tesla_password", password);
+                        cmd.Parameters.AddWithValue("@tesla_carid", carid);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
         }
 
