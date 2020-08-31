@@ -856,6 +856,7 @@ namespace TeslaLogger
         private static void CleanupExceptionsDir()
         {
             bool filesFoundForDeletion = false;
+            int countDeletedFiles = 0;
             if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
                 foreach (string fs in Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
@@ -864,9 +865,10 @@ namespace TeslaLogger
                     {
                         try
                         {
-                            Logfile.Log("Housekeeping: delete file " + fs);
+                            //Logfile.Log("Housekeeping: delete file " + fs);
                             File.Delete(fs);
                             filesFoundForDeletion = true;
+                            countDeletedFiles++;
                         }
                         catch (Exception ex)
                         {
@@ -877,6 +879,7 @@ namespace TeslaLogger
             }
             if (filesFoundForDeletion)
             {
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception direcotry");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
                     Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
