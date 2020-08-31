@@ -480,6 +480,8 @@ namespace TeslaLogger
                 {
                     RefreshToken();
 
+                    // check sentry mode state
+                    _ = webhelper.GetOdometerAsync().Result;
                     Tools.StartSleeping(out int startSleepHour, out int startSleepMinute);
                     bool doSleep = true;
 

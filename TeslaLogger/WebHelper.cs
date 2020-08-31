@@ -1790,13 +1790,11 @@ FROM
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
-                car.Log("Check Sentry Mode");
                 if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
                 {
                     try
                     {
                         bool sentry_mode = (bool)r2["sentry_mode"];
-
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
