@@ -125,6 +125,10 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
                         break;
+                    // send car commands
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
+                        SendCarCommand(request, response);
+                        break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request.Url.LocalPath, request, response);
@@ -145,13 +149,30 @@ namespace TeslaLogger
             }
         }
 
+        private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                string command = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                if (command.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                    }
+                }
+            }
+        }
+
         private void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[1].Captures[0].ToString();
-                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                string value = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
