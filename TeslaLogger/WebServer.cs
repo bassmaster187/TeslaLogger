@@ -174,10 +174,20 @@ namespace TeslaLogger
                             switch(command)
                             {
                                 case "auto_conditioning_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
                                     break;
                                 case "auto_conditioning_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
                                     break;
                                 case "auto_conditioning_toggle":
+                                    if (car.currentJSON.current_is_preconditioning)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    }
                                     break;
                             }
                         }
