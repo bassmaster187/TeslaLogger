@@ -16,6 +16,13 @@ namespace TeslaLogger
     {
         private HttpListener listener = null;
 
+        private List<string> AllowedTeslaAPICommands = new List<string>()
+        {
+            "auto_conditioning_start",
+            "auto_conditioning_stop",
+            "auto_conditioning_toggle"
+        };
+
         public WebServer()
         {
             if (!HttpListener.IsSupported)
@@ -161,6 +168,19 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
+                        // check if command is in list of allowed commands
+                        if (AllowedTeslaAPICommands.Contains(command))
+                        {
+                            switch(command)
+                            {
+                                case "auto_conditioning_start":
+                                    break;
+                                case "auto_conditioning_stop":
+                                    break;
+                                case "auto_conditioning_toggle":
+                                    break;
+                            }
+                        }
                     }
                 }
             }
