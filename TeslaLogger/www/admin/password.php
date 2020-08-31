@@ -38,14 +38,48 @@ require("language.php");
 <?php 
 include "menu.php";
 menu("Credentials");
+if (isset($_REQUEST["id"]))
+{
 ?>
-
 <div>
+<h1><?php t("Bitte Tesla Account Zugangsdaten eingeben"); ?>:</h1>
 <table>
-<?php t("Bitte Tesla Account Zugangsdaten eingeben"); ?>:
 <tr><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password"  /></td></tr>
 <tr><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
 <tr><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 <tr><td></td><td><button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
 </table>
 </div>
+<?php
+}
+else
+{
+?>
+<div>
+<h1><?php t("Bitte Fahrzeug auswählen"); ?>:</h1>
+<table>
+<tr><th>DB ID</th><th>Email</th><th>Car in Account</th><th>Name</th><th>Model</th><th>VIN</th><th>Tasker Token</th></tr>
+<?php
+	$url = GetTeslaloggerURL("getallcars");
+	$allcars = file_get_contents($url);
+	$jcars = json_decode($allcars);
+	// var_dump($url);
+
+	foreach ($jcars as $k => $v) {
+		$email = $v->{"tesla_name"};
+		$display_name = $v->{"display_name"};
+		$tasker_token = $v->{"tasker_hash"};    
+		$car = $v->{"model_name"};  
+		$id = $v->{"id"};
+		$vin = $v->{"vin"};
+		$tesla_carid = $v->{"tesla_carid"};
+		
+		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td><a href='password.php?id=$id'>EDIT</a></td></tr>\r\n");
+	}
+?>
+<tr><td><a href='password.php?id=-1'>NEUS FAHRZEUG</a></td><td></td><td></td><td></td></tr>
+</table>
+</div>
+<?php
+}
+

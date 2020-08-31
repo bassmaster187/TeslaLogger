@@ -55,7 +55,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}&var-Car=$Car",
           "mappingType": 1,
           "pattern": "StartTripUnix",
           "thresholds": [],
@@ -340,5 +340,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 27
+  "version": 28
 }

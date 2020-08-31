@@ -6,6 +6,15 @@ function isDocker()
     return file_exists($dockerfile);
 }
 
+function GetTeslaloggerURL($path)
+{
+    $url = "http://localhost:5000/";
+    if (isDocker())
+        $url = "http://teslalogger:5000/";
+
+    return $url.$path;
+}
+
 function isShareData()
 {
     $prefix = "/etc/teslalogger/";

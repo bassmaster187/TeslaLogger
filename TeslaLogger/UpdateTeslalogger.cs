@@ -235,7 +235,7 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
-                            MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid) values (1, @tesla_name, @tesla_password, @tesla_carid)", con);
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con);
                             cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                             cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                             cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
@@ -246,6 +246,13 @@ namespace TeslaLogger
                     {
                         Logfile.Log(ex.ToString());
                     }
+                }
+
+                if (!DBHelper.ColumnExists("cars", "vin"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column vin");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
+                        ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
                 }
 
                 DBHelper.EnableMothership();

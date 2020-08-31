@@ -88,6 +88,7 @@ namespace TeslaLogger
         public string display_name = "";
 
         public string TaskerHash = "";
+        public string vin;
 
         public CurrentJSON currentJSON = new CurrentJSON();
 
