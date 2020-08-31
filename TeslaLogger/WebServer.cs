@@ -22,7 +22,10 @@ namespace TeslaLogger
         {
             "auto_conditioning_start",
             "auto_conditioning_stop",
-            "auto_conditioning_toggle"
+            "auto_conditioning_toggle",
+            "sentry_mode_on",
+            "sentry_mode_off",
+            "sentry_mode_toggle"
         };
 
         public WebServer()
@@ -192,6 +195,22 @@ namespace TeslaLogger
                                     else
                                     {
                                         WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    }
+                                    break;
+                                case "sentry_mode_on":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    break;
+                                case "sentry_mode_off":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    break;
+                                case "sentry_mode_toggle":
+                                    if (car.webhelper.is_sentry_mode)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
                                     }
                                     break;
                             }
