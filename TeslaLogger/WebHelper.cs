@@ -1078,8 +1078,11 @@ namespace TeslaLogger
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
+                car.AddValueToTeslaAPIState("latitude", "decimal", dLatitude, ts, "drive_state");
                 decimal dLongitude = (decimal)r2["longitude"];
+                car.AddValueToTeslaAPIState("longitude", "decimal", dLongitude, ts, "drive_state");
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
@@ -1087,30 +1090,32 @@ namespace TeslaLogger
                 car.currentJSON.latitude = latitude;
                 car.currentJSON.longitude = longitude;
 
-                string timestamp = r2["timestamp"].ToString();
                 int speed = 0;
                 if (r2["speed"] != null)
                 {
                     speed = (int)r2["speed"];
+                    car.AddValueToTeslaAPIState("speed", "int", speed, ts, "drive_state");
                 }
 
                 int power = 0;
                 if (r2["power"] != null)
                 {
                     power = (int)r2["power"];
+                    car.AddValueToTeslaAPIState("power", "int", power, ts, "drive_state");
                 }
 
                 string shift_state = "";
                 if (r2["shift_state"] != null)
                 {
                     shift_state = r2["shift_state"].ToString();
+                    car.AddValueToTeslaAPIState("shift_state", "string", shift_state, ts, "drive_state");
                     SetLastShiftState(shift_state);
                 }
                 else
                 {
-                    TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
+                    TimeSpan timespan = DateTime.Now - lastIsDriveTimestamp;
 
-                    if (ts.TotalMinutes > 10)
+                    if (timespan.TotalMinutes > 10)
                     {
                         if (!GetLastShiftState().Equals("P"))
                         {
@@ -1151,7 +1156,7 @@ namespace TeslaLogger
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    car.dbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
