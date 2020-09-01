@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Xml;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -16,7 +13,8 @@ namespace TeslaLogger
     {
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
-        Address lastRacingPoint = null;
+
+        private Address lastRacingPoint = null;
         internal WebHelper webhelper;
 
         internal enum TeslaState
@@ -61,9 +59,8 @@ namespace TeslaLogger
         private HFLMode highFrequencyLoggingMode = HFLMode.Ticks;
         internal HFLMode GetHighFrequencyLoggingMode() { return highFrequencyLoggingMode; }
 
-        Thread thread;
-        bool run = true;
-
+        private Thread thread;
+        private bool run = true;
 
         internal string TeslaName;
         internal string TeslaPasswort;
@@ -112,8 +109,10 @@ namespace TeslaLogger
                 dbHelper = new DBHelper(this);
                 webhelper = new WebHelper(this);
 
-                thread = new Thread(Loop);
-                thread.Name = "Car" + CarInDB;
+                thread = new Thread(Loop)
+                {
+                    Name = "Car" + CarInDB
+                };
                 thread.Start();
             }
         }
@@ -235,6 +234,7 @@ namespace TeslaLogger
 
         private void ExitTeslaLogger(string v)
         {
+            Log("Abort()");
             run = false;
             thread.Abort();
         }
@@ -788,15 +788,15 @@ namespace TeslaLogger
                         case Address.SpecialFlags.OpenChargePort:
                             HandleSpecialFlag_OpenChargePort(flag.Value, _oldState, _newState);
                             break;
-                        case Address.SpecialFlags.HighFrequencyLogging:
-                            break;
                         case Address.SpecialFlags.EnableSentryMode:
                             HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
                             break;
-                        case Address.SpecialFlags.SetChargeLimit:
-                            break;
                         case Address.SpecialFlags.ClimateOff:
                             HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
+                            break;
+                        case Address.SpecialFlags.SetChargeLimit:
+                        case Address.SpecialFlags.CopyChargePrice:
+                        case Address.SpecialFlags.HighFrequencyLogging:
                             break;
                         default:
                             Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -986,17 +986,16 @@ namespace TeslaLogger
                     {
                         switch (flag.Key)
                         {
-                            case Address.SpecialFlags.OpenChargePort:
-                                break;
                             case Address.SpecialFlags.HighFrequencyLogging:
                                 HandleSpecialFlag_HighFrequencyLogging(flag.Value);
-                                break;
-                            case Address.SpecialFlags.EnableSentryMode:
                                 break;
                             case Address.SpecialFlags.SetChargeLimit:
                                 HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
                                 break;
                             case Address.SpecialFlags.ClimateOff:
+                            case Address.SpecialFlags.OpenChargePort:
+                            case Address.SpecialFlags.EnableSentryMode:
+                            case Address.SpecialFlags.CopyChargePrice:
                                 break;
                             default:
                                 Log("handleShiftStateChange unhandled special flag " + flag.ToString());

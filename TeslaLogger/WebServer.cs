@@ -18,6 +18,16 @@ namespace TeslaLogger
     {
         private HttpListener listener = null;
 
+        private List<string> AllowedTeslaAPICommands = new List<string>()
+        {
+            "auto_conditioning_start",
+            "auto_conditioning_stop",
+            "auto_conditioning_toggle",
+            "sentry_mode_on",
+            "sentry_mode_off",
+            "sentry_mode_toggle"
+        };
+
         public WebServer()
         {
             if (!HttpListener.IsSupported)
@@ -107,7 +117,7 @@ namespace TeslaLogger
 
                 switch (true)
                 {
-                    // commands
+                    // commands for admin UI
                     case bool _ when request.Url.LocalPath.Equals("/getchargingstate"):
                         Getchargingstate(request, response);
                         break;
@@ -120,16 +130,19 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setpassword"):
                         SetPassword(request, response);
                         break;
-                    // car values
-                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
-                        Get_CarValue(request, response);
-                        break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
-                        // optional query parameter: html --> returns html instead of JSON
                         Admin_ReloadGeofence(request, response);
+                        break;
+                    // get car values
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
+                        Get_CarValue(request, response);
+                        break;
+                    // send car commands
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
+                        SendCarCommand(request, response);
                         break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
@@ -148,6 +161,62 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                string command = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                if (command.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        // check if command is in list of allowed commands
+                        if (AllowedTeslaAPICommands.Contains(command))
+                        {
+                            switch(command)
+                            {
+                                case "auto_conditioning_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    break;
+                                case "auto_conditioning_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    break;
+                                case "auto_conditioning_toggle":
+                                    if (car.currentJSON.current_is_preconditioning)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    }
+                                    break;
+                                case "sentry_mode_on":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    break;
+                                case "sentry_mode_off":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    break;
+                                case "sentry_mode_toggle":
+                                    if (car.webhelper.is_sentry_mode)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -211,8 +280,8 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[1].Captures[0].ToString();
-                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                string value = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
@@ -228,7 +297,7 @@ namespace TeslaLogger
                             }
                             else
                             {
-                                // TODO return JSON
+                                WriteString(response, "{\"response\":{ \"value\":\"" + val + "\"} }");
                             }
                         }
                     }
@@ -260,8 +329,7 @@ namespace TeslaLogger
             }
             else
             {
-                // TODO return JSON response success/error message like Tesla API
-                WriteString(response, "Admin: ReloadGeofence ...");
+                WriteString(response, "{\"response\":{\"reason\":\"\", \"result\":true}}");
             }
             WebHelper.UpdateAllPOIAddresses();
             Logfile.Log("Admin: ReloadGeofence done");
@@ -468,15 +536,27 @@ namespace TeslaLogger
 
         private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
         {
-            /* TODO
-             
             int from = 1;
-            int to = DBHelper.GetMaxPosid(this);
+            int to = 1;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value)
+                    {
+                        int.TryParse(dr[0].ToString(), out to);
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception) { }
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
-            DBHelper.UpdateTripElevation(from, to);
+            DBHelper.UpdateTripElevation(from, to, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
-            */
         }
     }
 }
