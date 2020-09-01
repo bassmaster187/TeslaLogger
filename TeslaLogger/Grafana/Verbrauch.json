@@ -87,6 +87,8 @@
         "alignAsTable": false,
         "avg": true,
         "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
         "rightSide": false,
@@ -153,7 +155,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]', inside_temp as 'Innentemperatur [°C]', \r\nbattery_heater * 100 as 'Battery Heater',\r\nis_preconditioning * 100 as 'Preconditioning',\r\nsentry_mode * 100 as 'Sentry Mode',\r\nodometer -  (select min(odometer) from pos WHERE  $__timeFilter(datum)) as km\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and CarID = $Car\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]', inside_temp as 'Innentemperatur [°C]', \r\nbattery_heater * 100 as 'Battery Heater',\r\nis_preconditioning * 100 as 'Preconditioning',\r\nsentry_mode * 100 as 'Sentry Mode',\r\nodometer -  (select min(odometer) from pos WHERE  $__timeFilter(datum) and CarID = $Car) as km\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and CarID = $Car\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -519,5 +521,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 120
+  "version": 121
 }
