@@ -245,7 +245,7 @@ namespace TeslaLogger
 
             if (id == -1)
             {
-                Logfile.Log("Insert Password ID:" + id);
+                Logfile.Log("Insert Password");
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
@@ -261,7 +261,7 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
                     cmd.ExecuteNonQuery();
 
-                    Car nc = new Car(id, email, password, teslacarid, "", DateTime.MinValue);
+                    Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue);
                 }
             }
             else
