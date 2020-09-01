@@ -93,6 +93,16 @@ namespace TeslaLogger
 
         public DBHelper dbHelper;
 
+        internal enum TeslaAPIKey
+        {
+            Type,
+            Value,
+            Timestamp,
+            Source
+        }
+
+        private Dictionary<string, Dictionary<TeslaAPIKey, object>> TeslaAPIState = new Dictionary<string, Dictionary<TeslaAPIKey, object>>();
+
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
         {
             lock (typeof(Car))
@@ -115,6 +125,18 @@ namespace TeslaLogger
                 };
                 thread.Start();
             }
+        }
+
+        internal void AddValueToTeslaAPIState(string _name, string _type, object _value, long _timestamp, string _source)
+        {
+            if (!TeslaAPIState.ContainsKey(_name))
+            {
+                TeslaAPIState.Add(_name, new Dictionary<TeslaAPIKey, object>());
+            }
+            TeslaAPIState[_name][TeslaAPIKey.Type] = _type;
+            TeslaAPIState[_name][TeslaAPIKey.Value] = _value;
+            TeslaAPIState[_name][TeslaAPIKey.Timestamp] = _timestamp;
+            TeslaAPIState[_name][TeslaAPIKey.Source] = _source;
         }
 
         private void Loop()
@@ -1245,6 +1267,33 @@ $"  AND CarID = {CarInDB}", con);
         public static Car GetCarByID(int carid)
         {
             return allcars.FirstOrDefault(car => car.CarInDB == carid);
+        }
+
+        public bool IsInService()
+        {
+            if (TeslaAPIState.ContainsKey("in_service"))
+            {
+                if (bool.TryParse(TeslaAPIState["in_service"][TeslaAPIKey.Value].ToString(), out bool is_in_service)) {
+                    return is_in_service;
+                }
+            }
+            return false;
+        }
+
+        public bool TLUpdatePossible()
+        {
+            if (GetCurrentState() == Car.TeslaState.Sleep)
+            {
+                return true;
+            }
+            if (TeslaAPIState.ContainsKey("locked") && TeslaAPIState.ContainsKey("is_user_present") && webhelper.GetLastShiftState().Equals("P"))
+            {
+                if ((bool)TeslaAPIState["locked"][TeslaAPIKey.Value] && !(bool)TeslaAPIState["is_user_present"][TeslaAPIKey.Value])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

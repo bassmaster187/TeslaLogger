@@ -551,6 +551,14 @@ namespace TeslaLogger
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
 
+                if (r4.ContainsKey("in_service"))
+                {
+                    if (bool.TryParse(r4["in_service"].ToString(), out bool is_in_service))
+                    {
+                        car.AddValueToTeslaAPIState("in_service", "bool", is_in_service, 0, "vehicles");
+                    }
+                }
+
                 try
                 {
                     /* 
@@ -1789,12 +1797,14 @@ FROM
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
 
                 if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
                 {
                     try
                     {
                         bool sentry_mode = (bool)r2["sentry_mode"];
+                        car.AddValueToTeslaAPIState("sentry_mode", "bool", sentry_mode, ts, "vehicle_state");
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
@@ -1817,10 +1827,28 @@ FROM
                 }
 
                 decimal odometer = (decimal)r2["odometer"];
+                car.AddValueToTeslaAPIState("odometer", "decimal", odometer, ts, "vehicle_state");
+
+                if (r2.ContainsKey("locked"))
+                {
+                    if (bool.TryParse(r2["locked"].ToString(), out bool locked))
+                    {
+                        car.AddValueToTeslaAPIState("locked", "bool", locked, ts, "vehicle_state");
+                    }
+                }
+
+                if (r2.ContainsKey("is_user_present"))
+                {
+                    if (bool.TryParse(r2["is_user_present"].ToString(), out bool is_user_present))
+                    {
+                        car.AddValueToTeslaAPIState("is_user_present", "bool", is_user_present, ts, "vehicle_state");
+                    }
+                }
 
                 try
                 {
                     string car_version = r2["car_version"].ToString();
+                    car.AddValueToTeslaAPIState("car_version", "string", car_version, ts, "vehicle_state");
                     if (car.currentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
