@@ -553,7 +553,10 @@ namespace TeslaLogger
 
                 if (r4.ContainsKey("in_service"))
                 {
-                    _ = bool.TryParse(r4["in_service"].ToString(), out car.is_in_service);
+                    if (bool.TryParse(r4["in_service"].ToString(), out bool is_in_service))
+                    {
+                        car.AddValueToTeslaAPIState("in_service", "bool", is_in_service, 0, "vehicles");
+                    }
                 }
 
                 try
