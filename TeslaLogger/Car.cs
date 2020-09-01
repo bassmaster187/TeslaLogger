@@ -389,7 +389,6 @@ namespace TeslaLogger
             else
             {
                 Thread.Sleep(10000);
-
                 UpdateTeslalogger.CheckForNewVersion();
             }
         }
@@ -746,6 +745,7 @@ namespace TeslaLogger
             if (ts.TotalDays > 9)
             {
                 // If car wasn't sleeping since 10 days, try to get a new Teslalogger update
+                // TODO don't work anymore!
                 UpdateTeslalogger.CheckForNewVersion();
 
                 TimeSpan ts2 = DateTime.Now - lastTryTokenRefresh;
