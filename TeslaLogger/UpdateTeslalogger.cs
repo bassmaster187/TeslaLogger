@@ -1008,6 +1008,13 @@ namespace TeslaLogger
         {
             try
             {
+                for (int x = 0; x < Car.allcars.Count; x++)
+                {
+                    Car c = Car.allcars[x];
+                    if (c.GetCurrentState() != Car.TeslaState.Sleep)
+                        return;
+                }
+
                 TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
                 if (ts.TotalMinutes > 120)
                 {
