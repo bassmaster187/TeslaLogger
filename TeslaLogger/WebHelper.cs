@@ -551,6 +551,11 @@ namespace TeslaLogger
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
 
+                if (r4.ContainsKey("in_service"))
+                {
+                    _ = bool.TryParse(r4["in_service"].ToString(), out car.is_in_service);
+                }
+
                 try
                 {
                     /* 

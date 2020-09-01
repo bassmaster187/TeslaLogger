@@ -92,6 +92,7 @@ namespace TeslaLogger
         public static List<Car> allcars = new List<Car>();
 
         public DBHelper dbHelper;
+        internal bool is_in_service;
 
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
         {
@@ -1249,11 +1250,15 @@ $"  AND CarID = {CarInDB}", con);
 
         public bool IsInService()
         {
-            return false;
+            return is_in_service;
         }
 
         public bool TLUpdatePossible()
         {
+            if (GetCurrentState() == Car.TeslaState.Sleep)
+            {
+                return true;
+            }
             return false;
         }
     }
