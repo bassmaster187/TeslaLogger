@@ -25,14 +25,17 @@ EnBW DE-Lonetal West, 48.584012, 10.175805, 6
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
+EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
@@ -199,6 +202,7 @@ Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
 Ionity ES-Casabermeja, 36.8982555, -4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
+Ionity Es-Martin de Yeltes, 40.769662, -6.286721
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
@@ -232,6 +236,7 @@ Ionity FR-Jardin des arbres, 47.852405, 2.684731
 Ionity FR-Jura, 46.774589, 5.523009
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
+Ionity FR-La Garde, 44.870544, 3.253033
 Ionity FR-La Réserve, 47.974493, 3.197267
 Ionity FR-Labenne Est, 43.586191, -1.419585
 Ionity FR-Labenne Ouest, 43.586073, -1.420776
@@ -260,6 +265,7 @@ Ionity FR-Poitiers Chincé, 46.701811, 0.371062
 Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
+Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tavel Nord, 44.004071, 4.703626
 Ionity FR-Tavel Sud, 43.999633, 4.700191
@@ -508,6 +514,7 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
+Supercharger-V3 Hermsdorf, 50.89012, 11.87284
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
@@ -1242,6 +1249,7 @@ DE Hannover A2 Center, 52.42332, 9.835401
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
+DE Hermsdorf-OSt McDonnalds, 50.889717,11.872576
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
