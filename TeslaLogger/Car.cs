@@ -1286,6 +1286,13 @@ $"  AND CarID = {CarInDB}", con);
             {
                 return true;
             }
+            if (TeslaAPIState.ContainsKey("locked") && TeslaAPIState.ContainsKey("is_user_present") && webhelper.GetLastShiftState().Equals("P"))
+            {
+                if ((bool)TeslaAPIState["locked"][TeslaAPIKey.Value] && !(bool)TeslaAPIState["is_user_present"][TeslaAPIKey.Value])
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
