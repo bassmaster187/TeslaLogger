@@ -35,6 +35,9 @@ function menu($title)
             $display_name = $v->{"display_name"};
             $tasker_token = $v->{"tasker_hash"};    
             $car = $v->{"model_name"};  
+
+            if (strlen($display_name) == 0)
+                $display_name = "Car ".$v->{"id"};
         }
     }
 
@@ -54,6 +57,10 @@ function menu($title)
                         foreach($jcars as $k => $v) {
                             $dn = $v->{"display_name"};
                             $carid = $v->{"id"};
+
+                            if (strlen($dn) == 0)
+                                $dn = "Car ".$carid;
+                            
                             echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="index.php?carid='.$carid.'">'.$dn.'</a></li>');
                         }      
 ?>
