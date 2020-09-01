@@ -41,7 +41,6 @@ namespace TeslaLogger
 
                 Logfile.Log("Init finished, now enter main loop");
 
-                GetFirstCar();
                 GetAllCars();
 
             }
@@ -71,11 +70,6 @@ namespace TeslaLogger
 
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire);
             }
-        }
-
-        static Car GetFirstCar()
-        {
-            return null; // TODO return new Car(1, ApplicationSettings.Default.TeslaName, ApplicationSettings.Default.TeslaPasswort, ApplicationSettings.Default.Car);
         }
 
         private static void InitWebserver()
