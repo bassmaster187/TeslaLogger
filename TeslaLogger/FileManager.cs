@@ -71,20 +71,28 @@ namespace TeslaLogger
             get
             {
                 if (Tools.IsDocker())
+                {
                     return Path.Combine("/tmp/", "SetCost.txt");
+                }
                 else
+                {
                     return Path.Combine(GetExecutingPath(), "SetCost.txt");
+                }
             }
         }
 
-        static string GetGoSleepPath
+        private static string GetGoSleepPath
         {
             get
             {
                 if (Tools.IsDocker())
+                {
                     return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
+                }
                 else
+                {
                     return GetFilePath(TLFilename.CmdGoSleepFilename);
+                }
             }
         }
 

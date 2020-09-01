@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -16,8 +15,7 @@ namespace TeslaLogger
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
-
-        Car car;
+        private Car car;
 
         public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
                     ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
@@ -1118,7 +1116,9 @@ namespace TeslaLogger
 
                         Car c = Car.GetCarByID(CarId);
                         if (c != null)
+                        {
                             c.dbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                        }
                     }
                     catch (Exception ex)
                     {

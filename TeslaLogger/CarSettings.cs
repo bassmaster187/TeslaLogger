@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace TeslaLogger
 {
-    class CarSettings
+    internal class CarSettings
     {
         /* TODO Class is not used anymore
          

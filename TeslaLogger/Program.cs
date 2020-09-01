@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Net;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Xml;
 
 namespace TeslaLogger
 {
@@ -70,7 +65,10 @@ namespace TeslaLogger
                 string tesla_token = r["tesla_token"].ToString();
                 DateTime tesla_token_expire = DateTime.MinValue;
                 if (r["tesla_token_expire"] is DateTime)
+                {
                     tesla_token_expire = (DateTime)r["tesla_token_expire"];
+                }
+
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire);
             }
         }
@@ -87,8 +85,10 @@ namespace TeslaLogger
                 Thread threadWebserver = new Thread(() =>
                 {
                     webServer = new WebServer();
-                });
-                threadWebserver.Name = "WebserverThread";
+                })
+                {
+                    Name = "WebserverThread"
+                };
                 threadWebserver.Start();
             }
             catch (Exception ex)
