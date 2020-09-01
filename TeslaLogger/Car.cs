@@ -395,6 +395,11 @@ namespace TeslaLogger
             return lastRacingPoint;
         }
 
+        internal Dictionary<TeslaAPIKey, object> GetTeslaAPIState(string _name)
+        {
+            return TeslaAPIState[_name];
+        }
+
         // if online, switch state and return
         // else sleep 10000
         private void HandleState_Sleep()
@@ -1306,6 +1311,24 @@ $"  AND CarID = {CarInDB}", con);
             }
             _value = false;
             return false;
+        }
+
+        public bool HasTeslaAPIState(string _name)
+        {
+            if (TeslaAPIState.ContainsKey(_name))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string GetTeslaAPIStateType(string _name)
+        {
+            if (TeslaAPIState.ContainsKey(_name))
+            {
+                return TeslaAPIState[_name][TeslaAPIKey.Type].ToString();
+            }
+            return string.Empty;
         }
     }
 }
