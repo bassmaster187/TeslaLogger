@@ -232,11 +232,12 @@ namespace TeslaLogger
 
         }
 
-        private void ExitTeslaLogger(string v)
+        internal void ExitTeslaLogger(string v)
         {
-            Log("Abort()");
+            Log("Abort: " + v);
             run = false;
             thread.Abort();
+            allcars.Remove(this);
         }
 
         private void HandleState_GoSleep()
