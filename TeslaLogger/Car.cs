@@ -87,7 +87,7 @@ namespace TeslaLogger
         public string TaskerHash = "";
         public string vin;
 
-        public CurrentJSON currentJSON = new CurrentJSON();
+        public CurrentJSON currentJSON;
 
         public static List<Car> allcars = new List<Car>();
 
@@ -97,7 +97,7 @@ namespace TeslaLogger
         {
             lock (typeof(Car))
             {
-                currentJSON.CarID = CarInDB;
+                currentJSON = new CurrentJSON(this);
                 this.TeslaName = TeslaName;
                 this.TeslaPasswort = TeslaPasswort;
                 this.CarInAccount = CarInAccount;
