@@ -1246,5 +1246,15 @@ $"  AND CarID = {CarInDB}", con);
         {
             return allcars.FirstOrDefault(car => car.CarInDB == carid);
         }
+
+        public bool IsInService()
+        {
+            return false;
+        }
+
+        public bool TLUpdatePossible()
+        {
+            return false;
+        }
     }
 }
