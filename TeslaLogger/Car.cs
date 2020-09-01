@@ -1271,11 +1271,8 @@ $"  AND CarID = {CarInDB}", con);
 
         public bool IsInService()
         {
-            if (TeslaAPIState.ContainsKey("in_service"))
-            {
-                if (bool.TryParse(TeslaAPIState["in_service"][TeslaAPIKey.Value].ToString(), out bool is_in_service)) {
-                    return is_in_service;
-                }
+            if (GetBoolFromTeslaAPIState("in_service", out bool in_service)) {
+                return in_service;
             }
             return false;
         }
@@ -1286,13 +1283,28 @@ $"  AND CarID = {CarInDB}", con);
             {
                 return true;
             }
-            if (TeslaAPIState.ContainsKey("locked") && TeslaAPIState.ContainsKey("is_user_present") && webhelper.GetLastShiftState().Equals("P"))
+            if (GetBoolFromTeslaAPIState("locked", out bool locked)
+                && GetBoolFromTeslaAPIState("is_user_present", out bool is_user_present)
+                && webhelper.GetLastShiftState().Equals("P"))
             {
-                if ((bool)TeslaAPIState["locked"][TeslaAPIKey.Value] && !(bool)TeslaAPIState["is_user_present"][TeslaAPIKey.Value])
+                if (locked && !is_user_present)
                 {
                     return true;
                 }
             }
+            return false;
+        }
+
+        public bool GetBoolFromTeslaAPIState(string _name, out bool _value)
+        {
+            if (TeslaAPIState.ContainsKey(_name))
+            {
+                if (TeslaAPIState[_name][TeslaAPIKey.Type].Equals("bool"))
+                {
+                    return bool.TryParse(TeslaAPIState[_name][TeslaAPIKey.Value].ToString(), out _value);
+                }
+            }
+            _value = false;
             return false;
         }
     }
