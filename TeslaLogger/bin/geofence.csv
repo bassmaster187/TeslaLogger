@@ -514,7 +514,7 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
-Supercharger-V3 Hermsdorf, 50.8899, 11.87162, 20
+Supercharger-V3 DE-Hermsdorf, 50.8899, 11.87162, 20
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
@@ -1144,7 +1144,9 @@ IKEA DE-Würzburg, 49.821812, 9.982398
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
+Kaufland DE-Berlin Prenzlauer Berg, 52.533964, 13.457147
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
+Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
@@ -1215,6 +1217,7 @@ Familia DE-Quickborn, 53.743005, 9.940652
 REWE DE-Bremen, 53.136455, 8.739926
 
 AT Lermoos Hochmoos-Express, 47.395975, 10.887217
+AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
@@ -1223,10 +1226,12 @@ CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
+DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
 DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
+DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bitterfeld-Wolfen enviaM, 51.624576, 12.307812
@@ -1243,13 +1248,14 @@ DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
+DE Germering Hagebaumarkt, 48.141285, 11.371643
 DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hannover A2 Center, 52.42332, 9.835401
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
-DE Hermsdorf-Ost McDonnalds, 50.889717, 11.872576, 10
+DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
@@ -1257,6 +1263,7 @@ DE Köln Leonardo Hotel, 50.926801, 6.904346
 DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 DE Neumünster Polizei, 54.07617, 9.96679
 DE Neuss Esso Tankstelle, 51.199058, 6.711012
+DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
 DE Rheydt New AG, 51.157497, 6.448055
