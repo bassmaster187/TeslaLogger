@@ -34,7 +34,7 @@ namespace TeslaLogger
 
         public static void SetThread_enUS()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = ciEnUS;
+            Thread.CurrentThread.CurrentCulture = ciEnUS;
         }
 
         public static long ToUnixTime(DateTime dateTime)
@@ -764,6 +764,7 @@ namespace TeslaLogger
 
         private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
         {
+            /* TODO
             if (Program.GetCurrentState() == Program.TeslaState.Sleep)
             {
                 // CacheItem was removed and car is asleep, so run housekeeping
@@ -774,6 +775,7 @@ namespace TeslaLogger
                 // wait another hour to try again
                 CreateMemoryCacheItem(1);
             }
+            */
         }
 
         private static void CleanupDatabaseTableMothership()
@@ -854,17 +856,19 @@ namespace TeslaLogger
         private static void CleanupExceptionsDir()
         {
             bool filesFoundForDeletion = false;
-            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            int countDeletedFiles = 0;
+            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
-                foreach (string fs in Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+                foreach (string fs in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
                     if ((DateTime.Now - File.GetLastWriteTime(fs)).TotalDays > 30)
                     {
                         try
                         {
-                            Logfile.Log("Housekeeping: delete file " + fs);
+                            //Logfile.Log("Housekeeping: delete file " + fs);
                             File.Delete(fs);
                             filesFoundForDeletion = true;
+                            countDeletedFiles++;
                         }
                         catch (Exception ex)
                         {
@@ -875,6 +879,7 @@ namespace TeslaLogger
             }
             if (filesFoundForDeletion)
             {
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception direcotry");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
                     Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
@@ -884,18 +889,18 @@ namespace TeslaLogger
 
         private static void LogDiskUsage()
         {
-            Exec_mono("/bin/df", "-k", true, true);
-            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/backup"))
+            _ = Exec_mono("/bin/df", "-k", true, true);
+            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
             {
-                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
             }
-            if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
+            if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
-                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
             }
-            if (File.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
+            if (File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
             {
-                Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
+                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
             }
         }
     }

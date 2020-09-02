@@ -15,10 +15,12 @@ namespace TeslaLogger
         private System.Threading.Thread thread;
         private bool fastmode = false;
         private bool run = true;
+        Car car;
 
-        public ScanMyTesla(string token)
+        public ScanMyTesla(Car c)
         {
-            this.token = token;
+            this.token = c.TaskerHash;
+            this.car = c;
 
             thread = new System.Threading.Thread(new System.Threading.ThreadStart(Start));
             thread.Start();
@@ -26,7 +28,7 @@ namespace TeslaLogger
 
         public void FastMode(bool fast)
         {
-            Logfile.Log("ScanMyTesla FastMode: " + fast.ToString());
+            car.Log("ScanMyTesla FastMode: " + fast.ToString());
             fastmode = fast;
         }
 
@@ -37,7 +39,7 @@ namespace TeslaLogger
                 return;
             }
 
-            Logfile.Log("Start ScanMyTesla Thread!");
+            car.Log("Start ScanMyTesla Thread!");
 
             string response = "";
 
@@ -72,7 +74,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    Logfile.Log("Scanmytesla: " + ex.Message);
+                    car.Log("Scanmytesla: " + ex.Message);
                     Logfile.WriteException(ex.ToString());
                     System.Threading.Thread.Sleep(20000);
                 }
@@ -81,7 +83,7 @@ namespace TeslaLogger
 
         private void InsertData(string response)
         {
-            Logfile.Log("ScanMyTesla: " + response);
+            car.Log("ScanMyTesla: " + response);
         }
 
         public async Task<string> GetDataFromWebservice()
@@ -108,7 +110,7 @@ namespace TeslaLogger
 
                 if (resultContent.Contains("Resource Limit Is Reached"))
                 {
-                    Logfile.Log("SMT: Resource Limit Is Reached");
+                    car.Log("SMT: Resource Limit Is Reached");
                     Thread.Sleep(25000);
                     return "Resource Limit Is Reached";
                 }
@@ -126,13 +128,13 @@ namespace TeslaLogger
 
                 dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                 DateTime d = DateTime.Parse(j["d"]);
-                DBHelper.currentJSON.lastScanMyTeslaReceived = d;
-                DBHelper.currentJSON.CreateCurrentJSON();
+                car.currentJSON.lastScanMyTeslaReceived = d;
+                car.currentJSON.CreateCurrentJSON();
 
                 Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
 
                 StringBuilder sb = new StringBuilder();
-                sb.Append("INSERT INTO `can` (`datum`, `id`, `val`) VALUES ");
+                sb.Append("INSERT INTO `can` (`datum`, `id`, `val`, CarId) VALUES ");
                 bool first = true;
 
                 string sqlDate =  d.ToString("yyyy-MM-dd HH:mm:ss");
@@ -147,36 +149,36 @@ namespace TeslaLogger
                     switch (line.Key)
                     {
                         case "2":
-                            DBHelper.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
                             break;
                         case "5":
-                            DBHelper.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
                             break;
                         case "6":
-                            DBHelper.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
                             break;
                         case "7":
-                            DBHelper.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
                             break;
                         case "28":
-                            DBHelper.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
                             break;
                         case "29":
-                            DBHelper.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
                             break;
                         case "442":
                             if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
                             {
-                                DBHelper.currentJSON.SMTSpeed = 0;
-                                Logfile.Log("SMT Speed: Signal not Available");
+                                car.currentJSON.SMTSpeed = 0;
+                                car.Log("SMT Speed: Signal not Available");
                             }
                             else
                             {
-                                DBHelper.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
+                                car.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
                             }
                             break;
                         case "43":
-                            DBHelper.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                            car.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
                             break;
                         default:
                             break;
@@ -198,10 +200,10 @@ namespace TeslaLogger
                     sb.Append(line.Key);
                     sb.Append(",");
                     sb.Append(Convert.ToDouble(line.Value).ToString(Tools.ciEnUS));
+                    sb.Append(",");
+                    sb.Append(car.CarInDB);
                     sb.Append(")");
                 }
-
-
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {

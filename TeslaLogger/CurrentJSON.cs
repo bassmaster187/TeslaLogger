@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TeslaLogger
 {
     public class CurrentJSON
-    {      
+    {
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
@@ -66,6 +65,12 @@ namespace TeslaLogger
 
         public string current_json = "";
         private DateTime lastJSONwrite = DateTime.MinValue;
+        Car car;
+
+        public CurrentJSON(Car car)
+        {
+            this.car = car;
+        }
 
         public void CheckCreateCurrentJSON()
         {
@@ -160,7 +165,8 @@ namespace TeslaLogger
                    { "is_preconditioning", current_is_preconditioning },
                    { "sentry_mode", current_is_sentry_mode },
                    { "country_code", current_country_code },
-                   { "state", current_state }
+                   { "state", current_state },
+                   { "display_name", car.display_name}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
@@ -176,7 +182,7 @@ namespace TeslaLogger
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
-                FileManager.WriteCurrentJsonFile(current_json);
+                FileManager.WriteCurrentJsonFile(car.CarInDB, current_json);
                 //FileManager.WriteCurrentJsonFile(new Tools.JsonFormatter(current_json).Format());
             }
             catch (Exception ex)

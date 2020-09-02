@@ -169,3 +169,9 @@ One or more shift states P N R D are valid for from and to.
 Example: +cof:R->P when shifting from R to P the command HVAC off is sent to your car
 
 Default: RND->P
+
+# Copy Charging Costs
+
++ccp
+
+When charging stops, this will try to find a previous charging session at the current location and apply charging price settings from the previous session to the latest charging session.

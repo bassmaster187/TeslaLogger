@@ -1,6 +1,10 @@
 ﻿<!DOCTYPE html>
 <?php
 require("language.php");
+
+session_start();
+if (isset($_REQUEST["carid"]))
+	$_SESSION["carid"] = $_REQUEST["carid"];
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -21,7 +25,7 @@ require("language.php");
 
 	$( function() {
 	<?php
-		$files = scandir("wallpapers");
+		$files = scandir("wallpapers/".$_REQUEST["carid"]);
 		foreach ($files as $i => &$f)		
 		{
 			if (stripos($f,".") === 0)
@@ -30,14 +34,10 @@ require("language.php");
 			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
 			{		
 				echo("$('#error').text('');\n");
-				echo("$('body').css('background-image','url(\"wallpapers/" .$f. "\")');\n");
+				echo("$('body').css('background-image','url(\"wallpapers/".$_REQUEST["carid"]."/".$f. "\")');\n");
 				break;
 			}
 		}
-		
-		$display_name = file_get_contents("/etc/teslalogger/DISPLAY_NAME");
-		
-		echo("$('#display_name').text('$display_name');");
 	?>
 		if (navigator.languages != undefined) loc = navigator.languages[0]; 
 			else loc = navigator.language;
@@ -60,6 +60,7 @@ require("language.php");
 		  url: "current_json.php",
 		  dataType: "json"
 		  }).done(function( jsonData ) {
+			$('#display_name').text(jsonData["display_name"]);
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(0));
 			$('#battery_level').text(jsonData["battery_level"]);
 			
