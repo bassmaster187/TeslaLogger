@@ -191,6 +191,7 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("charge_state").Result;
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "charge_state");
 
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
@@ -222,33 +223,27 @@ namespace TeslaLogger
 
                 string charging_state = r2["charging_state"].ToString();
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
-                car.AddValueToTeslaAPIState("is_preconditioning", "string", charging_state, ts, "charge_state");
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
                     ideal_battery_range = (decimal)r2["battery_range"];
-                    car.AddValueToTeslaAPIState("ideal_battery_range", "decimal", ideal_battery_range, ts, "charge_state");
                 }
 
                 decimal battery_range = (decimal)r2["battery_range"];
-                car.AddValueToTeslaAPIState("battery_range", "decimal", battery_range, ts, "charge_state");
 
                 string battery_level = r2["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
                 {
                     car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
-                    car.AddValueToTeslaAPIState("battery_level", "int", Convert.ToInt32(battery_level), ts, "charge_state");
                     car.currentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
                 if (r2["charger_power"] != null)
                 {
                     charger_power = r2["charger_power"].ToString();
-                    car.AddValueToTeslaAPIState("charger_power", "string", charger_power, ts, "charge_state");
                 }
 
                 string charge_energy_added = r2["charge_energy_added"].ToString();
-                car.AddValueToTeslaAPIState("charge_energy_added", "string", charge_energy_added, ts, "charge_state");
 
                 string charger_voltage = "";
                 string charger_phases = "";
@@ -259,61 +254,51 @@ namespace TeslaLogger
                 if (r2["charger_voltage"] != null)
                 {
                     charger_voltage = r2["charger_voltage"].ToString();
-                    car.AddValueToTeslaAPIState("charger_voltage", "string", charger_voltage, ts, "charge_state");
                 }
 
                 if (r2["charger_phases"] != null)
                 {
                     charger_phases = r2["charger_phases"].ToString();
-                    car.AddValueToTeslaAPIState("charger_phases", "string", charger_phases, ts, "charge_state");
                 }
 
                 if (r2["charger_actual_current"] != null)
                 {
                     charger_actual_current = r2["charger_actual_current"].ToString();
-                    car.AddValueToTeslaAPIState("charger_actual_current", "string", charger_actual_current, ts, "charge_state");
                 }
 
                 if (r2["charge_current_request"] != null)
                 {
                     charge_current_request = r2["charge_current_request"].ToString();
-                    car.AddValueToTeslaAPIState("charge_current_request", "string", charge_current_request, ts, "charge_state");
                 }
 
                 if (r2["charger_pilot_current"] != null)
                 {
                     charger_pilot_current = r2["charger_pilot_current"].ToString();
-                    car.AddValueToTeslaAPIState("charger_pilot_current", "string", charger_pilot_current, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_brand"] != null)
                 {
                     fast_charger_brand = r2["fast_charger_brand"].ToString();
-                    car.AddValueToTeslaAPIState("fast_charger_brand", "string", fast_charger_brand, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_type"] != null)
                 {
                     fast_charger_type = r2["fast_charger_type"].ToString();
-                    car.AddValueToTeslaAPIState("fast_charger_type", "string", fast_charger_type, ts, "charge_state");
                 }
 
                 if (r2["conn_charge_cable"] != null)
                 {
                     conn_charge_cable = r2["conn_charge_cable"].ToString();
-                    car.AddValueToTeslaAPIState("conn_charge_cable", "string", conn_charge_cable, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_present"] != null)
                 {
                     fast_charger_present = bool.Parse(r2["fast_charger_present"].ToString());
-                    car.AddValueToTeslaAPIState("fast_charger_present", "bool", bool.Parse(r2["fast_charger_present"].ToString()), ts, "charge_state");
                 }
 
                 if (r2["charge_rate"] != null)
                 {
                     car.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
-                    car.AddValueToTeslaAPIState("charge_rate", "double", Convert.ToDouble(r2["charge_rate"]) * 1.609344, ts, "charge_state");
                 }
 
                 if (r2["charge_limit_soc"] != null)
@@ -321,7 +306,6 @@ namespace TeslaLogger
                     if (car.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
                     {
                         car.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
-                        car.AddValueToTeslaAPIState("charge_limit_soc", "int", Convert.ToInt32(r2["charge_limit_soc"]), ts, "charge_state");
                         car.currentJSON.CreateCurrentJSON();
                     }
                 }
@@ -538,6 +522,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
                 if (TeslaAPI_Commands.ContainsKey("vehicles"))
                 {
@@ -565,14 +550,6 @@ namespace TeslaLogger
                 string state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
-
-                if (r4.ContainsKey("in_service"))
-                {
-                    if (bool.TryParse(r4["in_service"].ToString(), out bool is_in_service))
-                    {
-                        car.AddValueToTeslaAPIState("in_service", "bool", is_in_service, 0, "vehicles");
-                    }
-                }
 
                 try
                 {
@@ -641,9 +618,10 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 60)
                     {
-                        string badge = GetCommand("vehicle_config").Result;
+                        string resultContent2 = GetCommand("vehicle_config").Result;
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent2, "vehicle_config");
 
-                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(badge);
+                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
 
                         dynamic jBadgeResult = jBadge["response"];
 
@@ -1088,6 +1066,7 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("drive_state").Result;
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "drive_state");
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -1095,9 +1074,7 @@ namespace TeslaLogger
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
-                car.AddValueToTeslaAPIState("latitude", "decimal", dLatitude, ts, "drive_state");
                 decimal dLongitude = (decimal)r2["longitude"];
-                car.AddValueToTeslaAPIState("longitude", "decimal", dLongitude, ts, "drive_state");
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
@@ -1109,21 +1086,18 @@ namespace TeslaLogger
                 if (r2["speed"] != null)
                 {
                     speed = (int)r2["speed"];
-                    car.AddValueToTeslaAPIState("speed", "int", speed, ts, "drive_state");
                 }
 
                 int power = 0;
                 if (r2["power"] != null)
                 {
                     power = (int)r2["power"];
-                    car.AddValueToTeslaAPIState("power", "int", power, ts, "drive_state");
                 }
 
                 string shift_state = "";
                 if (r2["shift_state"] != null)
                 {
                     shift_state = r2["shift_state"].ToString();
-                    car.AddValueToTeslaAPIState("shift_state", "string", shift_state, ts, "drive_state");
                     SetLastShiftState(shift_state);
                 }
                 else
@@ -1813,6 +1787,7 @@ FROM
             try
             {
                 resultContent = await GetCommand("vehicle_state");
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicle_state");
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
@@ -1824,7 +1799,6 @@ FROM
                     try
                     {
                         bool sentry_mode = (bool)r2["sentry_mode"];
-                        car.AddValueToTeslaAPIState("sentry_mode", "bool", sentry_mode, ts, "vehicle_state");
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
@@ -1847,28 +1821,11 @@ FROM
                 }
 
                 decimal odometer = (decimal)r2["odometer"];
-                car.AddValueToTeslaAPIState("odometer", "decimal", odometer, ts, "vehicle_state");
 
-                if (r2.ContainsKey("locked"))
-                {
-                    if (bool.TryParse(r2["locked"].ToString(), out bool locked))
-                    {
-                        car.AddValueToTeslaAPIState("locked", "bool", locked, ts, "vehicle_state");
-                    }
-                }
-
-                if (r2.ContainsKey("is_user_present"))
-                {
-                    if (bool.TryParse(r2["is_user_present"].ToString(), out bool is_user_present))
-                    {
-                        car.AddValueToTeslaAPIState("is_user_present", "bool", is_user_present, ts, "vehicle_state");
-                    }
-                }
 
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    car.AddValueToTeslaAPIState("car_version", "string", car_version, ts, "vehicle_state");
                     if (car.currentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
@@ -1909,7 +1866,7 @@ FROM
             try
             {
                 resultContent = await GetCommand("climate_state");
-
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "climate_state");
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
                     Log("GetOutsideTempAsync: NULL");
@@ -1926,7 +1883,6 @@ FROM
                     if (r2["inside_temp"] != null)
                     {
                         car.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
-                        car.AddValueToTeslaAPIState("inside_temp", "double", Convert.ToDouble(r2["inside_temp"]), ts, "climate_state");
                     }
                 }
                 catch (Exception) { }
@@ -1936,7 +1892,6 @@ FROM
                 {
                     outside_temp = (decimal)r2["outside_temp"];
                     car.currentJSON.current_outside_temp = (double)outside_temp;
-                    car.AddValueToTeslaAPIState("outside_temp", "double", (double)outside_temp, ts, "climate_state");
                 }
                 else
                 {
@@ -1949,7 +1904,6 @@ FROM
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-                        car.AddValueToTeslaAPIState("battery_heater", "bool", (bool)r2["battery_heater"], ts, "climate_state");
                         if (car.currentJSON.current_battery_heater != battery_heater)
                         {
                             car.currentJSON.current_battery_heater = (bool)battery_heater;
@@ -1968,7 +1922,6 @@ FROM
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                car.AddValueToTeslaAPIState("is_preconditioning", "bool", preconditioning, ts, "climate_state");
                 if (preconditioning != car.currentJSON.current_is_preconditioning)
                 {
                     car.currentJSON.current_is_preconditioning = preconditioning;

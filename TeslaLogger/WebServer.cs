@@ -304,39 +304,7 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        if (car.HasTeslaAPIState(value))
-                        {
-                            Dictionary<Car.TeslaAPIKey, object> state = car.GetTeslaAPIState(value);
-                            switch (state[Car.TeslaAPIKey.Type])
-                                {
-                                case "bool":
-                                    if (car.GetBoolFromTeslaAPIState(value, out bool _value))
-                                    {
-                                        if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
-                                        {
-                                            WriteString(response, _value.ToString());
-                                        }
-                                        else
-                                        {
-                                            WriteString(response, "{\"response\":{ \"value\":\"" + _value + "\", \"timestamp:\"" + state[Car.TeslaAPIKey.Timestamp] + "} }");
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                        else if (car.currentJSON.GetType().GetProperty(value) != null)
-                        {
-                            object val = car.currentJSON.GetType().GetProperty(value).GetValue(car.currentJSON);
-                            Logfile.Log($"GetCarValue: {request.Url.LocalPath} - {value} - {CarID} -- {val}");
-                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
-                            {
-                                WriteString(response, val.ToString());
-                            }
-                            else
-                            {
-                                WriteString(response, "{\"response\":{ \"value\":\"" + val + "\"} }");
-                            }
-                        }
+                        // TODO
                     }
                 }
             }

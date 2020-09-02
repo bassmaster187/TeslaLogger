@@ -541,6 +541,8 @@ namespace TeslaLogger
                             case "remote_start":
                             case "remote_start_enabled":
                             case "remote_start_supported":
+                            case "sentry_mode":
+                            case "sentry_mode_available":
                             case "smart_summon_available":
                             case "summon_standby_mode_enabled":
                             case "valet_mode":
