@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -93,15 +94,10 @@ namespace TeslaLogger
 
         public DBHelper dbHelper;
 
-        internal enum TeslaAPIKey
-        {
-            Type,
-            Value,
-            Timestamp,
-            Source
-        }
+        private TeslaAPIState teslaAPIState = new TeslaAPIState();
 
-        private Dictionary<string, Dictionary<TeslaAPIKey, object>> TeslaAPIState = new Dictionary<string, Dictionary<TeslaAPIKey, object>>();
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
         {
@@ -125,18 +121,6 @@ namespace TeslaLogger
                 };
                 thread.Start();
             }
-        }
-
-        internal void AddValueToTeslaAPIState(string _name, string _type, object _value, long _timestamp, string _source)
-        {
-            if (!TeslaAPIState.ContainsKey(_name))
-            {
-                TeslaAPIState.Add(_name, new Dictionary<TeslaAPIKey, object>());
-            }
-            TeslaAPIState[_name][TeslaAPIKey.Type] = _type;
-            TeslaAPIState[_name][TeslaAPIKey.Value] = _value;
-            TeslaAPIState[_name][TeslaAPIKey.Timestamp] = _timestamp;
-            TeslaAPIState[_name][TeslaAPIKey.Source] = _source;
         }
 
         private void Loop()
@@ -1271,11 +1255,8 @@ $"  AND CarID = {CarInDB}", con);
 
         public bool IsInService()
         {
-            if (TeslaAPIState.ContainsKey("in_service"))
-            {
-                if (bool.TryParse(TeslaAPIState["in_service"][TeslaAPIKey.Value].ToString(), out bool is_in_service)) {
-                    return is_in_service;
-                }
+            if (teslaAPIState.GetBool("in_service", out bool in_service)) {
+                return in_service;
             }
             return false;
         }
@@ -1286,14 +1267,17 @@ $"  AND CarID = {CarInDB}", con);
             {
                 return true;
             }
-            if (TeslaAPIState.ContainsKey("locked") && TeslaAPIState.ContainsKey("is_user_present") && webhelper.GetLastShiftState().Equals("P"))
+            if (teslaAPIState.GetBool("locked", out bool locked)
+                && teslaAPIState.GetBool("is_user_present", out bool is_user_present)
+                && webhelper.GetLastShiftState().Equals("P"))
             {
-                if ((bool)TeslaAPIState["locked"][TeslaAPIKey.Value] && !(bool)TeslaAPIState["is_user_present"][TeslaAPIKey.Value])
+                if (locked && !is_user_present)
                 {
                     return true;
                 }
             }
             return false;
         }
+
     }
 }

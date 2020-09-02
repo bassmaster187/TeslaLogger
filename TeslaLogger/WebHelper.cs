@@ -191,6 +191,7 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("charge_state").Result;
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "charge_state");
 
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
@@ -221,7 +222,7 @@ namespace TeslaLogger
                 }
 
                 string charging_state = r2["charging_state"].ToString();
-                string timestamp = r2["timestamp"].ToString();
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
@@ -249,7 +250,6 @@ namespace TeslaLogger
                 string charger_actual_current = "";
                 string charge_current_request = "";
                 string charger_pilot_current = "";
-                
 
                 if (r2["charger_voltage"] != null)
                 {
@@ -299,7 +299,6 @@ namespace TeslaLogger
                 if (r2["charge_rate"] != null)
                 {
                     car.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
-
                 }
 
                 if (r2["charge_limit_soc"] != null)
@@ -318,12 +317,12 @@ namespace TeslaLogger
                         string dtTimestamp = "?";
                         try
                         {
-                            dtTimestamp = DBHelper.UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss");
+                            dtTimestamp = DBHelper.UnixToDateTime(long.Parse(ts.ToString())).ToString("yyyy-MM-dd HH:mm:ss");
                         }
                         catch (Exception)
                         { }
 
-                        Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
+                        Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {ts} / Date: {dtTimestamp}");
 
                         return double.TryParse(charger_power, out double dPowerkW) && dPowerkW >= 1.0;
                     }
@@ -336,14 +335,14 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Log("Charging Complete");
                     }
 
@@ -523,6 +522,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);
                 resultContent = await result.Content.ReadAsStringAsync();
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                 DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
                 if (TeslaAPI_Commands.ContainsKey("vehicles"))
                 {
@@ -550,14 +550,6 @@ namespace TeslaLogger
                 string state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
-
-                if (r4.ContainsKey("in_service"))
-                {
-                    if (bool.TryParse(r4["in_service"].ToString(), out bool is_in_service))
-                    {
-                        car.AddValueToTeslaAPIState("in_service", "bool", is_in_service, 0, "vehicles");
-                    }
-                }
 
                 try
                 {
@@ -626,9 +618,10 @@ namespace TeslaLogger
 
                     if (ts.TotalMinutes > 60)
                     {
-                        string badge = GetCommand("vehicle_config").Result;
+                        string resultContent2 = GetCommand("vehicle_config").Result;
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent2, "vehicle_config");
 
-                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(badge);
+                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
 
                         dynamic jBadgeResult = jBadge["response"];
 
@@ -1073,11 +1066,13 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("drive_state").Result;
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "drive_state");
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
                 decimal dLongitude = (decimal)r2["longitude"];
 
@@ -1087,7 +1082,6 @@ namespace TeslaLogger
                 car.currentJSON.latitude = latitude;
                 car.currentJSON.longitude = longitude;
 
-                string timestamp = r2["timestamp"].ToString();
                 int speed = 0;
                 if (r2["speed"] != null)
                 {
@@ -1108,9 +1102,9 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    TimeSpan ts = DateTime.Now - lastIsDriveTimestamp;
+                    TimeSpan timespan = DateTime.Now - lastIsDriveTimestamp;
 
-                    if (ts.TotalMinutes > 10)
+                    if (timespan.TotalMinutes > 10)
                     {
                         if (!GetLastShiftState().Equals("P"))
                         {
@@ -1151,7 +1145,7 @@ namespace TeslaLogger
                         outside_temp = t_outside_temp.Result;
                     }
 
-                    car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    car.dbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -1793,6 +1787,7 @@ FROM
             try
             {
                 resultContent = await GetCommand("vehicle_state");
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicle_state");
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
@@ -1804,7 +1799,6 @@ FROM
                     try
                     {
                         bool sentry_mode = (bool)r2["sentry_mode"];
-                        car.AddValueToTeslaAPIState("sentry_mode", "bool", sentry_mode, ts, "vehicle_state");
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
@@ -1827,28 +1821,11 @@ FROM
                 }
 
                 decimal odometer = (decimal)r2["odometer"];
-                car.AddValueToTeslaAPIState("odometer", "decimal", odometer, ts, "vehicle_state");
 
-                if (r2.ContainsKey("locked"))
-                {
-                    if (bool.TryParse(r2["locked"].ToString(), out bool locked))
-                    {
-                        car.AddValueToTeslaAPIState("locked", "bool", locked, ts, "vehicle_state");
-                    }
-                }
-
-                if (r2.ContainsKey("is_user_present"))
-                {
-                    if (bool.TryParse(r2["is_user_present"].ToString(), out bool is_user_present))
-                    {
-                        car.AddValueToTeslaAPIState("is_user_present", "bool", is_user_present, ts, "vehicle_state");
-                    }
-                }
 
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    car.AddValueToTeslaAPIState("car_version", "string", car_version, ts, "vehicle_state");
                     if (car.currentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
@@ -1889,7 +1866,7 @@ FROM
             try
             {
                 resultContent = await GetCommand("climate_state");
-
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "climate_state");
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
                     Log("GetOutsideTempAsync: NULL");
@@ -1900,7 +1877,7 @@ FROM
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 try
                 {
                     if (r2["inside_temp"] != null)
@@ -1927,7 +1904,6 @@ FROM
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-
                         if (car.currentJSON.current_battery_heater != battery_heater)
                         {
                             car.currentJSON.current_battery_heater = (bool)battery_heater;
@@ -1946,7 +1922,6 @@ FROM
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                
                 if (preconditioning != car.currentJSON.current_is_preconditioning)
                 {
                     car.currentJSON.current_is_preconditioning = preconditioning;
