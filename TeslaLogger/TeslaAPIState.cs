@@ -67,19 +67,6 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetDecimal(string _name, out decimal _value)
-        {
-            if (storage.ContainsKey(_name))
-            {
-                if (storage[_name][Key.Type].Equals("decimal"))
-                {
-                    return decimal.TryParse(storage[_name][Key.Value].ToString(), out _value);
-                }
-            }
-            _value = decimal.MinValue;
-            return false;
-        }
-
         public bool GetString(string _name, out string _value)
         {
             if (storage.ContainsKey(_name))
@@ -100,9 +87,137 @@ namespace TeslaLogger
             {
                 case "climate_state":
                     return ParseClimateState(_JSON);
+                case "vehicle_state":
+                    return ParseVehicleState(_JSON);
             }
             return false;
         }
+
+        private bool ParseVehicleState(string _JSON)
+        {
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                /*
+                 * {"response":
+                 *     {
+                 *      "api_version":10,
+                 *      "autopark_state_v2":"ready",
+                 *      "autopark_style":"dead_man",
+                 *      "calendar_supported":true,
+                 *      "car_version":"2020.32.3 b9bd4364fd17",
+                 *      "center_display_state":0,
+                 *      "df":0,
+                 *      "dr":0,
+                 *      "ft":0,
+                 *      "homelink_device_count":0,
+                 *      "homelink_nearby":false,
+                 *      "is_user_present":false,
+                 *      "last_autopark_error":"no_error",
+                 *      "locked":true,
+                 *      "media_state":
+                 *          {
+                 *           "remote_control_enabled":true
+                 *          },
+                 *      "notifications_supported":true,
+                 *      "odometer":47743.589221,
+                 *      "parsed_calendar_supported":true,
+                 *      "pf":0,
+                 *      "pr":0,
+                 *      "remote_start":false,
+                 *      "remote_start_enabled":false,
+                 *      "remote_start_supported":true,
+                 *      "rt":0,
+                 *      "smart_summon_available":false,
+                 *      "software_update":
+                 *         {
+                 *          "download_perc":0,
+                 *          "expected_duration_sec":2700,
+                 *          "install_perc":1,
+                 *          "status":"",
+                 *          "version":""
+                 *         },
+                 *      "speed_limit_mode":
+                 *         {
+                 *          "active":false,
+                 *          "current_limit_mph":85.0,
+                 *          "max_limit_mph":90,
+                 *          "min_limit_mph":50,
+                 *          "pin_code_set":false
+                 *         },
+                 *      "summon_standby_mode_enabled":false,
+                 *      "sun_roof_percent_open":0,
+                 *      "sun_roof_state":"closed",
+                 *      "timestamp":1598862368166,
+                 *      "valet_mode":false,
+                 *      "valet_pin_needed":true,
+                 *      "vehicle_name":"Tessi"
+                 *     }
+                 * }
+                 */
+                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
+                    foreach (string key in r2.Keys)
+                    {
+                        switch (key)
+                        {
+                            // bool
+                            case "calendar_supported":
+                            case "homelink_nearby":
+                            case "is_user_present":
+                            case "locked":
+                            case "notifications_supported":
+                            case "parsed_calendar_supported":
+                            case "remote_start":
+                            case "remote_start_enabled":
+                            case "remote_start_supported":
+                            case "smart_summon_available":
+                            case "summon_standby_mode_enabled":
+                            case "valet_mode":
+                            case "valet_pin_needed":
+                                AddValue(key, "bool", r2[key], timestamp, "vehicle_state");
+                                break;
+                            // string
+                            case "autopark_state_v2":
+                            case "autopark_style":
+                            case "car_version":
+                            case "last_autopark_error":
+                            case "sun_roof_state":
+                            case "vehicle_name":
+                                AddValue(key, "string", r2[key], timestamp, "climate_state");
+                                break;
+                            // int
+                            case "api_version":
+                            case "center_display_state":
+                            case "df":
+                            case "dr":
+                            case "ft":
+                            case "homelink_device_count":
+                            case "pf":
+                            case "pr":
+                            case "rt":
+                            case "sun_roof_percent_open":
+                                AddValue(key, "int", r2[key], timestamp, "climate_state");
+                                break;
+                            // double
+                            case "odometer":
+                                AddValue(key, "double", r2[key], timestamp, "climate_state");
+                                break;
+                            // TODO
+                            case "media_state":
+                            case "software_update":
+                            case "speed_limit_mode":
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+
 
         private bool ParseClimateState(string _JSON)
         {
@@ -171,6 +286,13 @@ namespace TeslaLogger
                             // int
                             case "defrost_mode":
                             case "fan_status":
+                            case "left_temp_direction":
+                            case "right_temp_direction":
+                            case "seat_heater_left":
+                            case "seat_heater_rear_center":
+                            case "seat_heater_rear_left":
+                            case "seat_heater_rear_right":
+                            case "seat_heater_right":
                                 AddValue(key, "int", r2[key], timestamp, "climate_state");
                                 break;
                             // double
@@ -182,18 +304,9 @@ namespace TeslaLogger
                             case "passenger_temp_setting":
                                 AddValue(key, "double", r2[key], timestamp, "climate_state");
                                 break;
-                            // decimal
-                            case "left_temp_direction":
-                            case "right_temp_direction":
-                            case "seat_heater_left":
-                            case "seat_heater_rear_center":
-                            case "seat_heater_rear_left":
-                            case "seat_heater_rear_right":
-                            case "seat_heater_right":
-                                AddValue(key, "decimal", r2[key], timestamp, "climate_state");
-                                break;
                         }
                     }
+                    return true;
                 }
             }
             catch (Exception) { }
