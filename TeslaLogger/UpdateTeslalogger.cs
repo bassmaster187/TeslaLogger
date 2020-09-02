@@ -369,6 +369,11 @@ namespace TeslaLogger
                 DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` int NULL DEFAULT NULL", 600);
                 DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
             }
+            if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
+            {
+                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 600);
+            }
         }
 
         public static void CheckDBCharset()
