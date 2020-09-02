@@ -1517,6 +1517,21 @@ namespace TeslaLogger
             return false;
         }
 
+        public static string GetColumnType(string table, string column)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{table}' AND COLUMN_NAME = '{column}'", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return dr[0].ToString();
+                }
+            }
+
+            return string.Empty;
+        }
 
         public static bool ColumnExists(string table, string column)
         {
