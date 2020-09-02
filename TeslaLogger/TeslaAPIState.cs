@@ -81,17 +81,296 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool ParseAPI(string _source, string _JSON)
+        public bool ParseAPI(string _source, string _JSON, int CarInAccount = 0)
         {
             switch (_source)
             {
+                case "charge_state":
+                    return ParseChargeState(_JSON);
                 case "climate_state":
                     return ParseClimateState(_JSON);
-                case "vehicle_state":
-                    return ParseVehicleState(_JSON);
+                case "drive_state":
+                    return ParseDriveState(_JSON);
                 case "vehicle_config":
                     return ParseVehicleConfig(_JSON);
+                case "vehicle_state":
+                    return ParseVehicleState(_JSON);
+                case "vehicles":
+                    return ParseVehicles(_JSON, CarInAccount);
+                default:
+                    Logfile.Log($"ParseAPI: unknown source {_source}");
+                    break;
             }
+            return false;
+        }
+
+        private bool ParseVehicles(string _JSON, int CarInAccount)
+        {
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                object[] r2 = (object[])r1;
+                object r3 = r2[CarInAccount];
+                Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
+                /* {"response":
+                 *      [
+                 *         {
+                 *          "id":24342078186123456,
+                 *          "vehicle_id":1154123456,
+                 *          "vin":"5YJSA7H17FF123456",
+                 *          "display_name":"Tessi",
+                 *          "option_codes":"AD15,MDL3,PBSB,RENA,BT37,ID3W,RF3G,S3PB,DRLH,DV2W,W39B,APF0,COUS,BC3B,CH07,PC30,FC3P,FG31,GLFR,HL31,HM31,IL31,LTPB,MR31,FM3B,RS3H,SA3P,STCP,SC04,SU3C,T3CA,TW00,TM00,UT3P,WR00,AU3P,APH3,AF00,ZCST,MI00,CDM0",
+                 *          "color":null,
+                 *          "access_type":"OWNER",
+                 *          "tokens":
+                 *             [
+                 *              "d5e62570d352asdf",
+                 *              "919f1b2a7f73asdf"
+                 *             ],
+                 *          "state":"asleep",
+                 *          "in_service":false,
+                 *          "id_s":"24342078186123456",
+                 *          "calendar_enabled":true,
+                 *          "api_version":10,
+                 *          "backseat_token":null,
+                 *          "backseat_token_updated_at":null,
+                 *          "vehicle_config":null
+                 *         }
+                 *      ],
+                 *      "count":1
+                 * }
+                 */
+                foreach (string key in r4.Keys)
+                {
+                    switch (key)
+                    {
+                        // bool
+                        case "in_service":
+                        case "calendar_enabled":
+                            AddValue(key, "bool", r4[key], 0, "vehicles");
+                            break;
+                        // string
+                        case "id":
+                        case "vehicle_id":
+                        case "vin":
+                        case "display_name":
+                        case "option_codes":
+                        case "color":
+                        case "access_type":
+                        case "state":
+                        case "id_s":
+                        case "backseat_token":
+                        case "backseat_token_updated_at":
+                        case "vehicle_config":
+                            AddValue(key, "string", r4[key], 0, "vehicles");
+                            break;
+                        // int
+                        case "api_version":
+                            AddValue(key, "int", r4[key], 0, "vehicles");
+                            break;
+                        // TODO
+                        case "tokens":
+                            break;
+                        default:
+                            Logfile.Log($"ParseVehicles: unknown key {key}");
+                            break;
+                    }
+                }
+                return true;
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        private bool ParseChargeState(string _JSON)
+        {
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                /*
+                 * {"response":
+                 *     {
+                 *      "battery_heater_on":false,
+                 *      "battery_level":51,
+                 *      "battery_range":148.56,
+                 *      "charge_current_request":16,
+                 *      "charge_current_request_max":16,
+                 *      "charge_enable_request":true,
+                 *      "charge_energy_added":0.0,
+                 *      "charge_limit_soc":85,
+                 *      "charge_limit_soc_max":100,
+                 *      "charge_limit_soc_min":50,
+                 *      "charge_limit_soc_std":90,
+                 *      "charge_miles_added_ideal":0.0,
+                 *      "charge_miles_added_rated":0.0,
+                 *      "charge_port_cold_weather_mode":null,
+                 *      "charge_port_door_open":false,
+                 *      "charge_port_latch":"Blocking",
+                 *      "charge_rate":0.0,
+                 *      "charge_to_max_range":false,
+                 *      "charger_actual_current":0,
+                 *      "charger_phases":null,
+                 *      "charger_pilot_current":16,
+                 *      "charger_power":0,
+                 *      "charger_voltage":0,
+                 *      "charging_state":"Disconnected",
+                 *      "conn_charge_cable":"<invalid>",
+                 *      "est_battery_range":142.78,
+                 *      "fast_charger_brand":"<invalid>",
+                 *      "fast_charger_present":false,
+                 *      "fast_charger_type":"<invalid>",
+                 *      "ideal_battery_range":118.85,
+                 *      "managed_charging_active":false,
+                 *      "managed_charging_start_time":null,
+                 *      "managed_charging_user_canceled":false,
+                 *      "max_range_charge_counter":1,
+                 *      "minutes_to_full_charge":0,
+                 *      "not_enough_power_to_heat":false,
+                 *      "scheduled_charging_pending":false,
+                 *      "scheduled_charging_start_time":null,
+                 *      "time_to_full_charge":0.0,
+                 *      "timestamp":1598862369327,
+                 *      "trip_charging":false,
+                 *      "usable_battery_level":51,
+                 *      "user_charge_enable_request":null
+                 *     }
+                 * }
+                 */
+                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
+                    foreach (string key in r2.Keys)
+                    {
+                        switch (key)
+                        {
+                            // bool
+                            case "battery_heater_on":
+                            case "charge_enable_request":
+                            case "charge_port_door_open":
+                            case "charge_to_max_range":
+                            case "fast_charger_present":
+                            case "managed_charging_active":
+                            case "managed_charging_user_canceled":
+                            case "not_enough_power_to_heat":
+                            case "scheduled_charging_pending":
+                            case "trip_charging":
+                                AddValue(key, "bool", r2[key], timestamp, "charge_state");
+                                break;
+                            // string
+                            case "charge_port_cold_weather_mode":
+                            case "charge_port_latch":
+                            case "charger_phases":
+                            case "charging_state":
+                            case "conn_charge_cable":
+                            case "fast_charger_brand":
+                            case "fast_charger_type":
+                            case "managed_charging_start_time":
+                            case "scheduled_charging_start_time":
+                            case "user_charge_enable_request":
+                                AddValue(key, "string", r2[key], timestamp, "charge_state");
+                                break;
+                            // int
+                            case "battery_level":
+                            case "charge_current_request":
+                            case "charge_current_request_max":
+                            case "charge_limit_soc":
+                            case "charge_limit_soc_max":
+                            case "charge_limit_soc_min":
+                            case "charge_limit_soc_std":
+                            case "charger_actual_current":
+                            case "charger_pilot_current":
+                            case "charger_power":
+                            case "charger_voltage":
+                            case "max_range_charge_counter":
+                            case "minutes_to_full_charge":
+                            case "usable_battery_level":
+                                AddValue(key, "int", r2[key], timestamp, "charge_state");
+                                break;
+                            // double
+                            case "battery_range":
+                            case "charge_energy_added":
+                            case "charge_miles_added_ideal":
+                            case "charge_miles_added_rated":
+                            case "charge_rate":
+                            case "est_battery_range":
+                            case "ideal_battery_range":
+                            case "time_to_full_charge":
+                                AddValue(key, "double", r2[key], timestamp, "charge_state");
+                                break;
+                            default:
+                                Logfile.Log($"ParseChargeState: unknown key {key}");
+                                break;
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        private bool ParseDriveState(string _JSON)
+        {
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                /*
+                 * {"response":
+                 *     {
+                 *      "gps_as_of":1599039106,
+                 *      "heading":253,
+                 *      "latitude":123.577843,
+                 *      "longitude":123.314109,
+                 *      "native_latitude":123.577843,
+                 *      "native_location_supported":1,
+                 *      "native_longitude":123.314109,
+                 *      "native_type":"wgs",
+                 *      "power":0,
+                 *      "shift_state":null,
+                 *      "speed":null,
+                 *      "timestamp":1599039108406
+                 *     }
+                 * }
+                 */
+                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
+                    foreach (string key in r2.Keys)
+                    {
+                        switch (key)
+                        {
+                            // string
+                            case "native_type":
+                            case "shift_state":
+                                AddValue(key, "string", r2[key], timestamp, "drive_state");
+                                break;
+                            // int
+                            case "gps_as_of":
+                            case "heading":
+                            case "native_location_supported":
+                            case "power":
+                            case "speed":
+                                AddValue(key, "int", r2[key], timestamp, "drive_state");
+                                break;
+                            // double
+                            case "latitude":
+                            case "longitude":
+                            case "native_latitude":
+                            case "native_longitude":
+                                AddValue(key, "double", r2[key], timestamp, "drive_state");
+                                break;
+                            default:
+                                Logfile.Log($"ParseDriveState: unknown key {key}");
+                                break;
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch (Exception) { }
             return false;
         }
 
@@ -149,7 +428,7 @@ namespace TeslaLogger
                             case "plg":
                             case "rhd":
                             case "use_range_badging":
-                                AddValue(key, "bool", r2[key], timestamp, "vehicle_state");
+                                AddValue(key, "bool", r2[key], timestamp, "vehicle_config");
                                 break;
                             // string
                             case "car_special_type":
@@ -161,20 +440,21 @@ namespace TeslaLogger
                             case "third_row_seats":
                             case "trim_badging":
                             case "wheel_type":
-                                AddValue(key, "string", r2[key], timestamp, "climate_state");
+                                AddValue(key, "string", r2[key], timestamp, "vehicle_config");
                                 break;
                             // int
                             case "rear_seat_heaters":
                             case "rear_seat_type":
                             case "seat_type":
                             case "sun_roof_installed":
-                                AddValue(key, "int", r2[key], timestamp, "climate_state");
+                                AddValue(key, "int", r2[key], timestamp, "vehicle_config");
                                 break;
                             default:
                                 Logfile.Log($"ParseVehicleConfig: unknown key {key}");
                                 break;
                         }
                     }
+                    return true;
                 }
             }
             catch (Exception) { }
@@ -274,7 +554,7 @@ namespace TeslaLogger
                             case "last_autopark_error":
                             case "sun_roof_state":
                             case "vehicle_name":
-                                AddValue(key, "string", r2[key], timestamp, "climate_state");
+                                AddValue(key, "string", r2[key], timestamp, "vehicle_state");
                                 break;
                             // int
                             case "api_version":
@@ -287,11 +567,11 @@ namespace TeslaLogger
                             case "pr":
                             case "rt":
                             case "sun_roof_percent_open":
-                                AddValue(key, "int", r2[key], timestamp, "climate_state");
+                                AddValue(key, "int", r2[key], timestamp, "vehicle_state");
                                 break;
                             // double
                             case "odometer":
-                                AddValue(key, "double", r2[key], timestamp, "climate_state");
+                                AddValue(key, "double", r2[key], timestamp, "vehicle_state");
                                 break;
                             // TODO
                             case "media_state":
@@ -299,10 +579,11 @@ namespace TeslaLogger
                             case "speed_limit_mode":
                                 break;
                             default:
-                                Logfile.Log($"ParseVehicleConfig: unknown key {key}");
+                                Logfile.Log($"ParseVehicleState: unknown key {key}");
                                 break;
                         }
                     }
+                    return true;
                 }
             }
             catch (Exception) { }
@@ -396,7 +677,7 @@ namespace TeslaLogger
                                 AddValue(key, "double", r2[key], timestamp, "climate_state");
                                 break;
                             default:
-                                Logfile.Log($"ParseVehicleConfig: unknown key {key}");
+                                Logfile.Log($"ParseClimateState: unknown key {key}");
                                 break;
                         }
                     }
