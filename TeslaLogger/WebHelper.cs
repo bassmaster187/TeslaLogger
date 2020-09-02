@@ -221,85 +221,99 @@ namespace TeslaLogger
                 }
 
                 string charging_state = r2["charging_state"].ToString();
-                string timestamp = r2["timestamp"].ToString();
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+                car.AddValueToTeslaAPIState("is_preconditioning", "string", charging_state, ts, "charge_state");
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
                     ideal_battery_range = (decimal)r2["battery_range"];
+                    car.AddValueToTeslaAPIState("ideal_battery_range", "decimal", ideal_battery_range, ts, "charge_state");
                 }
 
                 decimal battery_range = (decimal)r2["battery_range"];
+                car.AddValueToTeslaAPIState("battery_range", "decimal", battery_range, ts, "charge_state");
 
                 string battery_level = r2["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
                 {
                     car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.AddValueToTeslaAPIState("battery_level", "int", Convert.ToInt32(battery_level), ts, "charge_state");
                     car.currentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
                 if (r2["charger_power"] != null)
                 {
                     charger_power = r2["charger_power"].ToString();
+                    car.AddValueToTeslaAPIState("charger_power", "string", charger_power, ts, "charge_state");
                 }
 
                 string charge_energy_added = r2["charge_energy_added"].ToString();
+                car.AddValueToTeslaAPIState("charge_energy_added", "string", charge_energy_added, ts, "charge_state");
 
                 string charger_voltage = "";
                 string charger_phases = "";
                 string charger_actual_current = "";
                 string charge_current_request = "";
                 string charger_pilot_current = "";
-                
 
                 if (r2["charger_voltage"] != null)
                 {
                     charger_voltage = r2["charger_voltage"].ToString();
+                    car.AddValueToTeslaAPIState("charger_voltage", "string", charger_voltage, ts, "charge_state");
                 }
 
                 if (r2["charger_phases"] != null)
                 {
                     charger_phases = r2["charger_phases"].ToString();
+                    car.AddValueToTeslaAPIState("charger_phases", "string", charger_phases, ts, "charge_state");
                 }
 
                 if (r2["charger_actual_current"] != null)
                 {
                     charger_actual_current = r2["charger_actual_current"].ToString();
+                    car.AddValueToTeslaAPIState("charger_actual_current", "string", charger_actual_current, ts, "charge_state");
                 }
 
                 if (r2["charge_current_request"] != null)
                 {
                     charge_current_request = r2["charge_current_request"].ToString();
+                    car.AddValueToTeslaAPIState("charge_current_request", "string", charge_current_request, ts, "charge_state");
                 }
 
                 if (r2["charger_pilot_current"] != null)
                 {
                     charger_pilot_current = r2["charger_pilot_current"].ToString();
+                    car.AddValueToTeslaAPIState("charger_pilot_current", "string", charger_pilot_current, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_brand"] != null)
                 {
                     fast_charger_brand = r2["fast_charger_brand"].ToString();
+                    car.AddValueToTeslaAPIState("fast_charger_brand", "string", fast_charger_brand, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_type"] != null)
                 {
                     fast_charger_type = r2["fast_charger_type"].ToString();
+                    car.AddValueToTeslaAPIState("fast_charger_type", "string", fast_charger_type, ts, "charge_state");
                 }
 
                 if (r2["conn_charge_cable"] != null)
                 {
                     conn_charge_cable = r2["conn_charge_cable"].ToString();
+                    car.AddValueToTeslaAPIState("conn_charge_cable", "string", conn_charge_cable, ts, "charge_state");
                 }
 
                 if (r2["fast_charger_present"] != null)
                 {
                     fast_charger_present = bool.Parse(r2["fast_charger_present"].ToString());
+                    car.AddValueToTeslaAPIState("fast_charger_present", "bool", bool.Parse(r2["fast_charger_present"].ToString()), ts, "charge_state");
                 }
 
                 if (r2["charge_rate"] != null)
                 {
                     car.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
-
+                    car.AddValueToTeslaAPIState("charge_rate", "double", Convert.ToDouble(r2["charge_rate"]) * 1.609344, ts, "charge_state");
                 }
 
                 if (r2["charge_limit_soc"] != null)
@@ -307,6 +321,7 @@ namespace TeslaLogger
                     if (car.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
                     {
                         car.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        car.AddValueToTeslaAPIState("charge_limit_soc", "int", Convert.ToInt32(r2["charge_limit_soc"]), ts, "charge_state");
                         car.currentJSON.CreateCurrentJSON();
                     }
                 }
@@ -318,12 +333,12 @@ namespace TeslaLogger
                         string dtTimestamp = "?";
                         try
                         {
-                            dtTimestamp = DBHelper.UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss");
+                            dtTimestamp = DBHelper.UnixToDateTime(long.Parse(ts.ToString())).ToString("yyyy-MM-dd HH:mm:ss");
                         }
                         catch (Exception)
                         { }
 
-                        Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {timestamp} / Date: {dtTimestamp}");
+                        Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {ts} / Date: {dtTimestamp}");
 
                         return double.TryParse(charger_power, out double dPowerkW) && dPowerkW >= 1.0;
                     }
@@ -336,14 +351,14 @@ namespace TeslaLogger
                 if (charging_state == "Charging")
                 {
                     lastCharging_State = charging_state;
-                    car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        car.dbHelper.InsertCharging(timestamp, battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Log("Charging Complete");
                     }
 
@@ -1905,12 +1920,13 @@ FROM
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-
+                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 try
                 {
                     if (r2["inside_temp"] != null)
                     {
                         car.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                        car.AddValueToTeslaAPIState("inside_temp", "double", Convert.ToDouble(r2["inside_temp"]), ts, "climate_state");
                     }
                 }
                 catch (Exception) { }
@@ -1920,6 +1936,7 @@ FROM
                 {
                     outside_temp = (decimal)r2["outside_temp"];
                     car.currentJSON.current_outside_temp = (double)outside_temp;
+                    car.AddValueToTeslaAPIState("outside_temp", "double", (double)outside_temp, ts, "climate_state");
                 }
                 else
                 {
@@ -1932,7 +1949,7 @@ FROM
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-
+                        car.AddValueToTeslaAPIState("battery_heater", "bool", (bool)r2["battery_heater"], ts, "climate_state");
                         if (car.currentJSON.current_battery_heater != battery_heater)
                         {
                             car.currentJSON.current_battery_heater = (bool)battery_heater;
@@ -1951,7 +1968,7 @@ FROM
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                
+                car.AddValueToTeslaAPIState("is_preconditioning", "bool", preconditioning, ts, "climate_state");
                 if (preconditioning != car.currentJSON.current_is_preconditioning)
                 {
                     car.currentJSON.current_is_preconditioning = preconditioning;
