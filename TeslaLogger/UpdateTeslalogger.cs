@@ -371,8 +371,8 @@ namespace TeslaLogger
             }
             if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
             {
-                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT", 600);
+                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT(1)");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT(1)", 600);
             }
         }
 
