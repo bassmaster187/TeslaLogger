@@ -89,7 +89,95 @@ namespace TeslaLogger
                     return ParseClimateState(_JSON);
                 case "vehicle_state":
                     return ParseVehicleState(_JSON);
+                case "vehicle_config":
+                    return ParseVehicleConfig(_JSON);
             }
+            return false;
+        }
+
+        private bool ParseVehicleConfig(string _JSON)
+        {
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                /*
+                 * {"response":
+                 *     {
+                 *      "can_accept_navigation_requests":true,
+                 *      "can_actuate_trunks":true,
+                 *      "car_special_type":"base",
+                 *      "car_type":"models",
+                 *      "charge_port_type":"EU",
+                 *      "ece_restrictions":true,
+                 *      "eu_vehicle":true,
+                 *      "exterior_color":"Red",
+                 *      "has_air_suspension":false,
+                 *      "has_ludicrous_mode":false,
+                 *      "motorized_charge_port":false,
+                 *      "plg":true,
+                 *      "rear_seat_heaters":1,
+                 *      "rear_seat_type":1,
+                 *      "rhd":false,
+                 *      "roof_color":"None",
+                 *      "seat_type":1,
+                 *      "spoiler_type":"None",
+                 *      "sun_roof_installed":2,
+                 *      "third_row_seats":"None",
+                 *      "timestamp":1598862351936,
+                 *      "trim_badging":"85",
+                 *      "use_range_badging":false,
+                 *      "wheel_type":"Base19"
+                 *     }
+                 * }
+                 */
+                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
+                    foreach (string key in r2.Keys)
+                    {
+                        switch (key)
+                        {
+                            // bool
+                            case "can_accept_navigation_requests":
+                            case "can_actuate_trunks":
+                            case "ece_restrictions":
+                            case "eu_vehicle":
+                            case "has_air_suspension":
+                            case "has_ludicrous_mode":
+                            case "motorized_charge_port":
+                            case "plg":
+                            case "rhd":
+                            case "use_range_badging":
+                                AddValue(key, "bool", r2[key], timestamp, "vehicle_state");
+                                break;
+                            // string
+                            case "car_special_type":
+                            case "car_type":
+                            case "charge_port_type":
+                            case "exterior_color":
+                            case "roof_color":
+                            case "spoiler_type":
+                            case "third_row_seats":
+                            case "trim_badging":
+                            case "wheel_type":
+                                AddValue(key, "string", r2[key], timestamp, "climate_state");
+                                break;
+                            // int
+                            case "rear_seat_heaters":
+                            case "rear_seat_type":
+                            case "seat_type":
+                            case "sun_roof_installed":
+                                AddValue(key, "int", r2[key], timestamp, "climate_state");
+                                break;
+                            default:
+                                Logfile.Log($"ParseVehicleConfig: unknown key {key}");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
             return false;
         }
 
@@ -210,6 +298,9 @@ namespace TeslaLogger
                             case "software_update":
                             case "speed_limit_mode":
                                 break;
+                            default:
+                                Logfile.Log($"ParseVehicleConfig: unknown key {key}");
+                                break;
                         }
                     }
                 }
@@ -303,6 +394,9 @@ namespace TeslaLogger
                             case "outside_temp":
                             case "passenger_temp_setting":
                                 AddValue(key, "double", r2[key], timestamp, "climate_state");
+                                break;
+                            default:
+                                Logfile.Log($"ParseVehicleConfig: unknown key {key}");
                                 break;
                         }
                     }
