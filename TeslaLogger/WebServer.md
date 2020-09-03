@@ -21,7 +21,9 @@ TODO
 ### /admin/UpdateElevation
 
 TODO
+
 request: GET /admin/UpdateElevation
+
 response: plain text
 
 Updates elevation data for all empty positions in the database
@@ -29,6 +31,7 @@ Updates elevation data for all empty positions in the database
 ### /admin/ReloadGeofence
 
 request: GET /admin/ReloadGeofence[?html]
+
 response: JSON or HTML
 
 Reloads geofence.csv and geofence-private.csv
@@ -40,6 +43,7 @@ If optional query parameter html is present, the response will be a table contai
 ### /get/_CarID_/_name_
 
 request: GET /get/_CarID_/_name_[?raw]
+
 response: JSON or plain text
 
 Get the latest value for property _name_ from car _CarID_.
@@ -51,6 +55,7 @@ Example: /get/1/car_version?raw --> 2020.32.3 b9bd4364fd17
 ### /command/_CarID_/_name_
 
 request: GET /command/_CarID_/_name_
+
 response: JSON (forwarded from Tesla API)
 
 Allowed commands:
@@ -66,6 +71,7 @@ Allowed commands:
 ### /debug/TeslaAPI/_CarID_/_name_
 
 request: GET /debug/TeslaAPI/_CarID_/_name_
+
 response: JSON
 
 Gets the latest Tesla API repsonse for endpoint name for car with CarID
@@ -75,6 +81,7 @@ Example: /debug/TeslaAPI/1/drive_state
 ### /debug/TeslaLogger/states
 
 request: GET /debug/TeslaLogger/states
+
 response: HTML
 
 Outputs lots of TeslaLogger internal state as HTML table.
