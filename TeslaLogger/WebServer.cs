@@ -370,7 +370,7 @@ namespace TeslaLogger
                     { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString() },
                     { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString() },
                     { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString() },
-                    { "Program.lastSetChargeLimitAddressName",
+                    { $"Car #{car.CarInDB} lastSetChargeLimitAddressName",
                         car.GetLastSetChargeLimitAddressName().Equals(string.Empty)
                         ? "&lt;&gt;"
                         : car.GetLastSetChargeLimitAddressName()
