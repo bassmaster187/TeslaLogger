@@ -237,7 +237,7 @@ namespace TeslaLogger
                 data = reader.ReadToEnd();
             }
 
-            NameValueCollection r = HttpUtility.ParseQueryString(data);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
             string email = r["email"];
             string password = r["password"];
             int teslacarid = Convert.ToInt32(r["carid"]);
