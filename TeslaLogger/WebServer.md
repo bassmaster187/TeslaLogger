@@ -1,24 +1,24 @@
 # TeslaLogger internal web server
 
-# endpoints for admin UI
+## endpoints for admin UI
 
-/getchargingstate
-
-TODO
-
-/setcost
+### /getchargingstate
 
 TODO
 
-/getallcars
+### /setcost
 
 TODO
 
-/setpassword
+### /getallcars
 
 TODO
 
-/admin/UpdateElevation
+### /setpassword
+
+TODO
+
+### /admin/UpdateElevation
 
 TODO
 request: GET /admin/UpdateElevation
@@ -26,7 +26,7 @@ response: plain text
 
 Updates elevation data for all empty positions in the database
 
-/admin/ReloadGeofence
+### /admin/ReloadGeofence
 
 request: GET /admin/ReloadGeofence[?html]
 response: JSON or HTML
@@ -35,9 +35,9 @@ Reloads geofence.csv and geofence-private.csv
 
 If optional query parameter html is present, the response will be a table containing all POIs.
 
-# get car values
+## get car values
 
-/get/_CarID_/_name_
+### /get/_CarID_/_name_
 
 request: GET /get/_CarID_/_name_[?raw]
 response: JSON or plain text
@@ -46,9 +46,9 @@ Get the latest value for property _name_ from car _CarID_.
 
 Example: /get/1/car_version?raw --> 2020.32.3 b9bd4364fd17
 
-# send commands to car
+## send commands to car
 
-/command/_CarID_/_name_
+### /command/_CarID_/_name_
 
 request: GET /command/_CarID_/_name_
 response: JSON (forwarded from Tesla API)
@@ -61,16 +61,18 @@ Allowed commands:
 * sentry_mode_off
 * sentry_mode_toggle
 
-# debugging TeslaLogger
+## debugging TeslaLogger
 
-/debug/TeslaAPI/_CarID_/_name_
+### /debug/TeslaAPI/_CarID_/_name_
 
 request: GET /debug/TeslaAPI/_CarID_/_name_
 response: JSON
 
 Gets the latest Tesla API repsonse for endpoint name for car with CarID
 
-/debug/TeslaLogger/states
+Example: /debug/TeslaAPI/1/drive_state
+
+### /debug/TeslaLogger/states
 
 request: GET /debug/TeslaLogger/states
 response: HTML
