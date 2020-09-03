@@ -28,20 +28,16 @@ require_once("tools.php");
 			alert("Bitte Passwort eingeben!");
 		} else if ($("#password1").val() != $("#password2").val()) {
 			alert("Passwörter stimmen nicht überein!");
-		} else {
-			var address = "<?php echo(GetTeslaloggerURL("setpassword"));?>";
-			// address = "http://host.docker.internal:5000/setpassword"; // for debugging
-
-			var data = {
+		} else {			
+			var d = {
 					email: $("#email").val(),
 					password: $("#password1").val(),
 					carid: $("#carid").val(),
 					id: dbid,
 				};
 
-			var jqxhr = $.post(
-				address, data).always(function () {
-					alert("Bitte eine Minute warten!");
+			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
+					alert("Check Logfile in one minute!");
 					window.location.href='index.php';
 				});
 		}
