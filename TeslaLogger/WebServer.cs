@@ -297,17 +297,31 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[2].Captures[0].ToString();
                 int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
-                if (value.Length > 0 && CarID > 0)
+                string name = m.Groups[2].Captures[0].ToString();
+                if (name.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        // TODO
+                        if (car.GetTeslaAPIState().GetState(name, out Dictionary<TeslaAPIState.Key, object> state))
+                        {
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
+                            {
+                                WriteString(response, state[TeslaAPIState.Key.Value].ToString());
+                                return;
+                            }
+                            else
+                            {
+                                response.AddHeader("Content-Type", "application/json");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                return;
+                            }
+                        }
                     }
                 }
             }
+            WriteString(response, "");
         }
 
         private static void Admin_ReloadGeofence(HttpListenerRequest request, HttpListenerResponse response)

@@ -29,6 +29,17 @@ namespace TeslaLogger
             storage[_name][Key.Source] = _source;
         }
 
+        public bool GetState(string _name, out Dictionary<Key, object> _state)
+        {
+            if (storage.ContainsKey(_name))
+            {
+                _state = storage[_name];
+                return true;
+            }
+            _state = new Dictionary<Key, object>();
+            return false;
+        }
+
         public bool GetBool(string _name, out bool _value)
         {
             if (storage.ContainsKey(_name))
@@ -725,6 +736,16 @@ namespace TeslaLogger
             }
             catch (Exception) { }
             return false;
+        }
+
+        public override string ToString()
+        {
+            string str = string.Empty;
+            foreach (string key in storage.Keys)
+            {
+                str += string.Concat($"{key} => v:{storage[key][Key.Value]} t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
+            }
+            return str;
         }
     }
 }
