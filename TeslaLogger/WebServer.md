@@ -37,35 +37,35 @@ If optional query parameter html is present, the response will be a table contai
 
 # get car values
 
-/get/<CarID>/<name>
+/get/_CarID_/_name_
 
-request: GET /get/<CarID>/<name>[?raw]
+request: GET /get/_CarID_/_name_[?raw]
 response: JSON or plain text
 
-Get the latest value for property name from car.
+Get the latest value for property _name_ from car _CarID_.
 
 Example: /get/1/car_version?raw --> 2020.32.3 b9bd4364fd17
 
 # send commands to car
 
-/command/<CarID>/<name>
+/command/_CarID_/_name_
 
-request: GET /command/<CarID>/<name>
+request: GET /command/_CarID_/_name_
 response: JSON (forwarded from Tesla API)
 
 Allowed commands:
-auto_conditioning_start
-auto_conditioning_stop
-auto_conditioning_toggle
-sentry_mode_on
-sentry_mode_off
-sentry_mode_toggle
+* auto_conditioning_start
+* auto_conditioning_stop
+* auto_conditioning_toggle
+* sentry_mode_on
+* sentry_mode_off
+* sentry_mode_toggle
 
 # debugging TeslaLogger
 
-/debug/TeslaAPI/<CarID>/<name>
+/debug/TeslaAPI/_CarID_/_name_
 
-request: GET /debug/TeslaAPI/<CarID>/<name>
+request: GET /debug/TeslaAPI/_CarID_/_name_
 response: JSON
 
 Gets the latest Tesla API repsonse for endpoint name for car with CarID
