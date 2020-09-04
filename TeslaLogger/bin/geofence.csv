@@ -25,14 +25,17 @@ EnBW DE-Lonetal West, 48.584012, 10.175805, 6
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
+EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
@@ -199,6 +202,7 @@ Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
 Ionity ES-Casabermeja, 36.8982555, -4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
+Ionity Es-Martin de Yeltes, 40.769662, -6.286721
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
@@ -232,6 +236,7 @@ Ionity FR-Jardin des arbres, 47.852405, 2.684731
 Ionity FR-Jura, 46.774589, 5.523009
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
+Ionity FR-La Garde, 44.870544, 3.253033
 Ionity FR-La Réserve, 47.974493, 3.197267
 Ionity FR-Labenne Est, 43.586191, -1.419585
 Ionity FR-Labenne Ouest, 43.586073, -1.420776
@@ -260,6 +265,7 @@ Ionity FR-Poitiers Chincé, 46.701811, 0.371062
 Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
+Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tavel Nord, 44.004071, 4.703626
 Ionity FR-Tavel Sud, 43.999633, 4.700191
@@ -508,6 +514,7 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
+Supercharger-V3 DE-Hermsdorf, 50.8899, 11.87162, 20
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
@@ -1137,7 +1144,9 @@ IKEA DE-Würzburg, 49.821812, 9.982398
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
+Kaufland DE-Berlin Prenzlauer Berg, 52.533964, 13.457147
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
+Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
@@ -1208,6 +1217,7 @@ Familia DE-Quickborn, 53.743005, 9.940652
 REWE DE-Bremen, 53.136455, 8.739926
 
 AT Lermoos Hochmoos-Express, 47.395975, 10.887217
+AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
@@ -1216,10 +1226,12 @@ CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
+DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
 DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
+DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bitterfeld-Wolfen enviaM, 51.624576, 12.307812
@@ -1236,12 +1248,14 @@ DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
+DE Germering Hagebaumarkt, 48.141285, 11.371643
 DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hannover A2 Center, 52.42332, 9.835401
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
+DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
@@ -1249,6 +1263,7 @@ DE Köln Leonardo Hotel, 50.926801, 6.904346
 DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 DE Neumünster Polizei, 54.07617, 9.96679
 DE Neuss Esso Tankstelle, 51.199058, 6.711012
+DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
 DE Rheydt New AG, 51.157497, 6.448055
