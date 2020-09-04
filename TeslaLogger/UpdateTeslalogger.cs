@@ -366,7 +366,7 @@ namespace TeslaLogger
             if (!DBHelper.ColumnExists(table, "CarID"))
             {
                 Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` int NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 600);
                 DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
             }
             if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
