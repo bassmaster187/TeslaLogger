@@ -128,11 +128,6 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
-                {
-                    UpdateDBView();
-                }
-
                 if (!DBHelper.TableExists("mothership"))
                 {
                     Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
@@ -253,6 +248,11 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE cars ADD Column vin");
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                {
+                    UpdateDBView();
                 }
 
                 DBHelper.EnableMothership();
