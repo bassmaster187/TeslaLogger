@@ -1993,7 +1993,15 @@ FROM
         public async Task<string> PostCommand(string cmd, string data, bool _json = false)
         {
             Log("PostCommand: " + cmd + " - " + data);
-
+            string cacheKey = "PostCommand" + car.CarInDB;
+            object cacheValue = MemoryCache.Default.Get(cacheKey);
+            // prevent parallel execution of command
+            while (cacheValue != null)
+            {
+                Log($"waiting ... another command is still running: {cacheValue.ToString()}");
+                Thread.Sleep(1000);
+            }
+            MemoryCache.Default.Add(cacheKey, cmd, DateTime.Now.AddSeconds(2.5));
             string resultContent = "";
             try
             {
