@@ -41,3 +41,4 @@ TeslaLogger/bin/MySql.Data.xml
 TeslaLogger/bin/MySql.Web.xml
 TeslaLogger/bin/TASKERTOKEN
 TeslaLogger/bin/weather.ini
+TeslaLogger/copytodocker.cmd
