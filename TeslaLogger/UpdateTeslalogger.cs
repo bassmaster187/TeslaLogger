@@ -366,13 +366,13 @@ namespace TeslaLogger
             if (!DBHelper.ColumnExists(table, "CarID"))
             {
                 Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 600);
-                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 6000);
+                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 6000);
             }
             if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
             {
                 Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 600);
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 6000);
             }
         }
 

@@ -57,7 +57,7 @@ namespace TeslaLogger
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
                 {
-                    CommandTimeout = 600
+                    CommandTimeout = 6000
                 };
                 cmd.ExecuteNonQuery();
             }
