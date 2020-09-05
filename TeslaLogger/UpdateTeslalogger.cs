@@ -128,11 +128,6 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
-                {
-                    UpdateDBView();
-                }
-
                 if (!DBHelper.TableExists("mothership"))
                 {
                     Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
@@ -255,6 +250,11 @@ namespace TeslaLogger
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
                 }
 
+                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                {
+                    UpdateDBView();
+                }
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();
@@ -366,13 +366,13 @@ namespace TeslaLogger
             if (!DBHelper.ColumnExists(table, "CarID"))
             {
                 Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 600);
-                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 600);
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 6000);
+                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 6000);
             }
             if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
             {
                 Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 600);
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 6000);
             }
         }
 

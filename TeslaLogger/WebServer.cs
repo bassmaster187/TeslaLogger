@@ -229,67 +229,76 @@ namespace TeslaLogger
 
         private void SetPassword(HttpListenerRequest request, HttpListenerResponse response)
         {
-            Logfile.Log("SetPassword");
-
-            string data;
-            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            try
             {
-                data = reader.ReadToEnd();
-            }
+                Logfile.Log("SetPassword");
 
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
-            string email = r["email"];
-            string password = r["password"];
-            int teslacarid = Convert.ToInt32(r["carid"]);
-            int id = Convert.ToInt32(r["id"]);
-
-            if (id == -1)
-            {
-                Logfile.Log("Insert Password");
-
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                string data;
+                using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
                 {
-                    con.Open();
-
-                    MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
-                    int newid = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid) values (@id, @tesla_name, @tesla_password, @tesla_carid)", con);
-                    cmd.Parameters.AddWithValue("@id", newid);
-                    cmd.Parameters.AddWithValue("@tesla_name", email);
-                    cmd.Parameters.AddWithValue("@tesla_password", password);
-                    cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
-                    cmd.ExecuteNonQuery();
-
-                    Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue);
+                    data = reader.ReadToEnd();
                 }
-            }
-            else
-            {
-                Logfile.Log("Update Password ID:" + id);
-                int dbID = Convert.ToInt32(id);
 
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                string email = r["email"];
+                string password = r["password"];
+                int teslacarid = Convert.ToInt32(r["carid"]);
+                int id = Convert.ToInt32(r["id"]);
+
+                if (id == -1)
                 {
-                    con.Open();
+                    Logfile.Log("Insert Password");
 
-                    MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@ where id=@id", con);
-                    cmd.Parameters.AddWithValue("@id", dbID);
-                    cmd.Parameters.AddWithValue("@tesla_name", email);
-                    cmd.Parameters.AddWithValue("@tesla_password", password);
-                    cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
-                    cmd.ExecuteNonQuery();
-
-                    Car c = Car.GetCarByID(dbID);
-                    if (c != null)
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        c.ExitTeslaLogger("Credentials changed!");
-                    }
+                        con.Open();
 
-                    Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue);
+                        MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
+                        int newid = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid) values (@id, @tesla_name, @tesla_password, @tesla_carid)", con);
+                        cmd.Parameters.AddWithValue("@id", newid);
+                        cmd.Parameters.AddWithValue("@tesla_name", email);
+                        cmd.Parameters.AddWithValue("@tesla_password", password);
+                        cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                        cmd.ExecuteNonQuery();
+
+                        Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue);
+
+                        WriteString(response, "OK");
+                    }
+                }
+                else
+                {
+                    Logfile.Log("Update Password ID:" + id);
+                    int dbID = Convert.ToInt32(id);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@ where id=@id", con);
+                        cmd.Parameters.AddWithValue("@id", dbID);
+                        cmd.Parameters.AddWithValue("@tesla_name", email);
+                        cmd.Parameters.AddWithValue("@tesla_password", password);
+                        cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                        cmd.ExecuteNonQuery();
+
+                        Car c = Car.GetCarByID(dbID);
+                        if (c != null)
+                        {
+                            c.ExitTeslaLogger("Credentials changed!");
+                        }
+
+                        Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue);
+                        WriteString(response, "OK");
+                    }
                 }
             }
-            
+            catch (Exception ex)
+            {
+                WriteString(response, "ERROR");
+            }
         }
 
         private void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)

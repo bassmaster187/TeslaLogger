@@ -8,7 +8,7 @@ $fullurl = 'http://localhost:5000/'.$URL;
 if (isDocker())
     $fullurl = 'http://teslalogger:5000/'.$URL;
 
-$fullurl = 'http://host.docker.internal:5000/'.$URL;
+// $fullurl = 'http://host.docker.internal:5000/'.$URL;
 
 echo file_get_contents($fullurl, false, stream_context_create([
     'http' => [
