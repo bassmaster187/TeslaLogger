@@ -166,6 +166,7 @@ Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
 Ionity DE-Nempitz, 51.290114,12.137547, 6
+Ionity DE-Nempitz, 51.290159,12.1376, 6
 Ionity DE-Neumarkt, 49.312948, 11.474745, 20
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -541,7 +542,7 @@ Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
-Supercharger DE-Nempitz, 51.290095,12.137335, 4
+Supercharger DE-Nempitz, 51.290095,12.137335, 6
 Supercharger DE-Nempitz, 51.290039,12.137335, 6
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
@@ -578,7 +579,7 @@ Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger-V3 DK-Ikast, 56.122196, 9.172572
-Supercharger DK-Køge, 55.489273, 12.162788
+Supercharger DK-Køge, 55.489014, 12.163153
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
@@ -968,7 +969,6 @@ Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
 Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
-Supercharger SE-Køge, 55.489365, 12.162954
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
 Supercharger SE-Markaryd, 56.444825, 13.603916
