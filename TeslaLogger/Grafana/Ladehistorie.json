@@ -346,7 +346,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "Set or edit cost of charging session",
-          "linkUrl": "http://localhost:8888/admin/chargingcost.php?id=${__cell_4}",
+          "linkUrl": "http://raspberry/admin/chargingcost.php?id=${__cell_4}",
           "mappingType": 1,
           "pattern": "cost_total",
           "thresholds": [],
