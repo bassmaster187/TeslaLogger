@@ -86,7 +86,7 @@ namespace TeslaLogger
         public string display_name = "";
 
         public string TaskerHash = "";
-        public string vin;
+        public string vin = "";
 
         public CurrentJSON currentJSON;
 
@@ -99,7 +99,7 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire)
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire, string Model_Name, string car_type, string car_special_type, string display_name, string vin, string TaskerHash)
         {
             lock (typeof(Car))
             {
@@ -110,6 +110,12 @@ namespace TeslaLogger
                 this.CarInDB = CarInDB;
                 this.Tesla_Token = Tesla_Token;
                 this.Tesla_Token_Expire = Tesla_Token_Expire;
+                this.ModelName = Model_Name;
+                this.car_type = car_type;
+                this.car_special_type = car_special_type;
+                this.display_name = display_name;
+                this.vin = vin;
+                this.TaskerHash = TaskerHash;
                 allcars.Add(this);
 
                 dbHelper = new DBHelper(this);
