@@ -472,6 +472,7 @@ namespace TeslaLogger
                             case "third_row_seats":
                             case "trim_badging":
                             case "wheel_type":
+                            case "perf_config":
                                 AddValue(key, "string", r2[key], timestamp, "vehicle_config");
                                 break;
                             // int
@@ -695,6 +696,7 @@ namespace TeslaLogger
                             case "side_mirror_heaters":
                             case "steering_wheel_heater":
                             case "wiper_blade_heater":
+                            case "smart_preconditioning":
                                 AddValue(key, "bool", r2[key], timestamp, "climate_state");
                                 break;
                             // string

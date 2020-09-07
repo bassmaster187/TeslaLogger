@@ -298,6 +298,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
             }
         }
 

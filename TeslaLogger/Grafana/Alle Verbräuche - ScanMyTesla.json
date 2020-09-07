@@ -92,7 +92,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]' FROM can WHERE $__timeFilter(datum) and id = 43 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and carid=$Car and id = 43 ORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -120,7 +120,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery heater temp [°C]' FROM can WHERE $__timeFilter(datum) and id = 31 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery heater temp [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 31 ORDER BY datum ASC",
           "refId": "B",
           "select": [
             [
@@ -148,7 +148,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Inside temp [°C]' FROM can WHERE $__timeFilter(datum) and id = 58 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Inside temp [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 58 ORDER BY datum ASC",
           "refId": "J",
           "select": [
             [
@@ -176,7 +176,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Thermal controller 400V [kW]' FROM can WHERE $__timeFilter(datum) and id = 83 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Thermal controller 400V [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 83 ORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -204,7 +204,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Thermal controller 12V [kW]' FROM can WHERE $__timeFilter(datum) and id = 85 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Thermal controller 12V [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 85 ORDER BY datum ASC",
           "refId": "D",
           "select": [
             [
@@ -232,7 +232,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Thermal controller [kW]' FROM can WHERE $__timeFilter(datum) and id = 84 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Thermal controller [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 84 ORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -260,7 +260,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val / 1000 as '12v systems [kW]' FROM can WHERE $__timeFilter(datum) and id = 32 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val / 1000 as '12v systems [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 32 ORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -288,7 +288,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as '400V systems [kW]' FROM can WHERE $__timeFilter(datum) and id = 39 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as '400V systems [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 39 ORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -316,7 +316,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Propulsion [kW]' FROM can WHERE $__timeFilter(datum) and id = 418 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Propulsion [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 418 ORDER BY datum ASC",
           "refId": "H",
           "select": [
             [
@@ -344,7 +344,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Speed [km/h]' FROM can WHERE $__timeFilter(datum) and id = 442 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Speed [km/h]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 442 ORDER BY datum ASC",
           "refId": "I",
           "select": [
             [
@@ -372,7 +372,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  outside_temp as 'Außentemperatur [°C]',  battery_heater * 100 as 'Battery Heater', is_preconditioning * 100 as 'Preconditioning'\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  outside_temp as 'Außentemperatur [°C]',  battery_heater * 100 as 'Battery Heater', is_preconditioning * 100 as 'Preconditioning'\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\nORDER BY  Datum ASC",
           "refId": "K",
           "select": [
             [
@@ -400,7 +400,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 2\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car and id = 2\nORDER BY datum ASC",
           "refId": "L",
           "select": [
             [
@@ -473,7 +473,34 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-3h",
@@ -496,5 +523,5 @@
   "timezone": "",
   "title": "Alle Verbräuche - ScanMyTesla",
   "uid": "eMEMotRgk",
-  "version": 15
+  "version": 16
 }

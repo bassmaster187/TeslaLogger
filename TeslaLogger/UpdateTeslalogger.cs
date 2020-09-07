@@ -250,6 +250,13 @@ namespace TeslaLogger
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
                 }
 
+                if (!DBHelper.IndexExists("can_ix2", "can"))
+                {
+                    Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
+                    DBHelper.ExecuteSQLQuery("alter table can add index can_ix2 (id,carid,datum)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
