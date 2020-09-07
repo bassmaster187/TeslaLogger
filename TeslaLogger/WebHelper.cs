@@ -2021,6 +2021,7 @@ FROM
             {
                 Log($"waiting ... another command is still running: {cacheValue.ToString()}");
                 Thread.Sleep(1000);
+                cacheValue = MemoryCache.Default.Get(cacheKey);
             }
             MemoryCache.Default.Add(cacheKey, cmd, DateTime.Now.AddSeconds(2.5));
             string resultContent = "";
