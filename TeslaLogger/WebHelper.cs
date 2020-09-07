@@ -420,6 +420,13 @@ namespace TeslaLogger
 
                     string display_name = r2["display_name"].ToString();
                     car.display_name = display_name;
+                    
+                    if (car.display_name != display_name)
+                    {
+                        Log("WriteCarSettings -> Display_Name");
+                        car.WriteSettings();
+                    }
+
                     Log("display_name: " + display_name);
 
                     /* TODO not needed anymore?
@@ -435,7 +442,13 @@ namespace TeslaLogger
 
                     string vin = r2["vin"].ToString();
                     Log("vin: " + vin);
-                    car.vin = vin;
+
+                    if (car.vin != vin)
+                    {
+                        car.vin = vin;
+                        Log("WriteCarsettings -> VIN");
+                        car.WriteSettings();
+                    }
 
                     Tesla_id = r2["id"].ToString();
                     Log("id: " + Tesla_id);
@@ -444,6 +457,8 @@ namespace TeslaLogger
                     Log("vehicle_id: " + Tesla_vehicle_id);
 
                     byte[] tempTasker = Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+
+                    string oldTaskerHash = car.TaskerHash;
 
                     car.TaskerHash = string.Empty;
                     DamienG.Security.Cryptography.Crc32 crc32 = new DamienG.Security.Cryptography.Crc32();
@@ -460,6 +475,12 @@ namespace TeslaLogger
                     if (car.CarInAccount > 0)
                     {
                         car.TaskerHash = car.TaskerHash + "_" + car.CarInAccount;
+                    }
+
+                    if (oldTaskerHash != car.TaskerHash)
+                    {
+                        Log("WriteCarsettings -> TaskerToken");
+                        car.WriteSettings();
                     }
 
                     Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + car.TaskerHash);
@@ -1052,7 +1073,7 @@ namespace TeslaLogger
             // TODO eff in double
             if (car.ModelName != ModelName || car.Wh_TR.ToString(Tools.ciEnUS) != eff)
             {
-                Log("Writecar " + ModelName + " eff: " + eff);
+                Log("WriteCarSettings -> ModelName: " + ModelName + " eff: " + eff);
 
                 car.ModelName = ModelName;
                 car.Wh_TR = Convert.ToDouble(eff, Tools.ciEnUS);

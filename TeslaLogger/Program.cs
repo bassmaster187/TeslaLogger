@@ -75,7 +75,31 @@ namespace TeslaLogger
                         tesla_token_expire = (DateTime)r["tesla_token_expire"];
                     }
 
-                    Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire);
+                    string Model_Name = "";
+                    if (r["Model_Name"] != DBNull.Value)
+                        Model_Name = r["Model_Name"].ToString();
+
+                    string car_type = "";
+                    if (r["car_type"] != DBNull.Value)
+                        car_type = r["car_type"].ToString();
+
+                    string car_special_type = "";
+                    if (r["car_special_type"] != DBNull.Value)
+                        car_special_type = r["car_special_type"].ToString();
+
+                    string display_name = "";
+                    if (r["display_name"] != DBNull.Value)
+                        display_name = r["display_name"].ToString();
+
+                    string vin = "";
+                    if (r["vin"] != DBNull.Value)
+                        vin = r["vin"].ToString();
+
+                    string tasker_hash = "";
+                    if (r["tasker_hash"] != DBNull.Value)
+                        tasker_hash = r["tasker_hash"].ToString();
+
+                    Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash);
                 }
                 catch (Exception ex)
                 {
