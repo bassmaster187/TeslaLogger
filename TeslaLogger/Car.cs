@@ -94,7 +94,7 @@ namespace TeslaLogger
 
         public DBHelper dbHelper;
 
-        private TeslaAPIState teslaAPIState = new TeslaAPIState();
+        private TeslaAPIState teslaAPIState;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -104,6 +104,7 @@ namespace TeslaLogger
             lock (typeof(Car))
             {
                 currentJSON = new CurrentJSON(this);
+                teslaAPIState = new TeslaAPIState(this);
                 this.TeslaName = TeslaName;
                 this.TeslaPasswort = TeslaPasswort;
                 this.CarInAccount = CarInAccount;
