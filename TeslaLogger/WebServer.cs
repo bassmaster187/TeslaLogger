@@ -424,12 +424,12 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[1].Captures[0].ToString();
-                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                string value = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
-                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(value, out string TeslaAPIJSON))
                     {
                         response.AddHeader("Content-Type", "application/json");
                         WriteString(response, TeslaAPIJSON);
