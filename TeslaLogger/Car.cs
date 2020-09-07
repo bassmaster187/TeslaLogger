@@ -1147,8 +1147,8 @@ namespace TeslaLogger
                     $"  AND chargingstate.cost_kwh_meter_invoice IS NULL " +
                     $"  AND chargingstate.cost_idle_fee_total IS NULL " +
                     $"  AND CarID = {CarInDB}" +
-                    $"ORDER BY id DESC " +
-                    $"LIMIT 1", con);
+                    $" ORDER BY id DESC " +
+                    $" LIMIT 1", con);
                 Tools.DebugLog("SQL:" + cmd.CommandText);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
@@ -1184,8 +1184,8 @@ $"  chargingstate.pos = pos.id " +
 $"  AND pos.address = '{_addr.name}' " +
 $"  AND chargingstate.cost_total IS NULL " +
 $"  AND CarID = {CarInDB}" +
-$"ORDER BY id DESC " +
-$"LIMIT 1", con);
+$" ORDER BY id DESC " +
+$" LIMIT 1", con);
                     Tools.DebugLog("SQL:" + cmd.CommandText);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
