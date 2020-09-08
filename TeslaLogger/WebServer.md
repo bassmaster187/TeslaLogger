@@ -38,6 +38,14 @@ Reloads geofence.csv and geofence-private.csv
 
 If optional query parameter html is present, the response will be a table containing all POIs.
 
+### /admin/GetPOI?lat=_latitude_&lng=_longitude_
+
+request: GET /admin/GetPOI?lat=_latitude_&lng=_longitude_
+
+response: JSON
+
+Gives geofence.csv and geofence-private.csv info as JSON, eg to find out if a position is tagged with +home.
+
 ## get car values
 
 ### /get/_CarID_/_name_
