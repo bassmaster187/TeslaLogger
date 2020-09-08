@@ -16,6 +16,12 @@ namespace TeslaLogger
 
         private readonly Dictionary<string, Dictionary<Key, object>> storage = new Dictionary<string, Dictionary<Key, object>>();
         private HashSet<string> unknownKeys = new HashSet<string>();
+        private Car car;
+
+        public TeslaAPIState(Car car)
+        {
+            this.car = car;
+        }
 
         private void AddValue(string _name, string _type, object _value, long _timestamp, string _source)
         {
@@ -23,10 +29,33 @@ namespace TeslaLogger
             {
                 storage.Add(_name, new Dictionary<Key, object>());
             }
+            else
+            {
+                HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
+            }
             storage[_name][Key.Type] = _type;
             storage[_name][Key.Value] = _value;
             storage[_name][Key.Timestamp] = _timestamp;
             storage[_name][Key.Source] = _source;
+        }
+
+        private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
+        {
+            // TODO
+            if (oldvalue != null && newvalue != null && !oldvalue.ToString().Equals(newvalue.ToString()))
+            {
+                switch (name)
+                {
+                    case "battery_level":
+                        car.Log($"TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        if (car.GetCurrentState() == Car.TeslaState.Online && car.GetWebHelper().GetLastShiftState().Equals("P"))
+                        {
+                            // write car data to DB eg to update Grafana Dashboard status
+                            car.GetWebHelper().IsDriving(true);
+                        }
+                        break;
+                }
+            }
         }
 
         public bool GetState(string _name, out Dictionary<Key, object> _state)

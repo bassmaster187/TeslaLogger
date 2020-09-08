@@ -1650,6 +1650,10 @@ namespace TeslaLogger
                 int newStartChargingID = 0;
 
                 MySqlDataReader dr = cmd.ExecuteReader();
+                if (!dr.HasRows)
+                {
+                    Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer} cannot be combined (no rows returned)");
+                }
                 while (dr.Read())
                 {
                     newId = (int)dr["chargingstate_id"];
@@ -1663,6 +1667,10 @@ namespace TeslaLogger
                     {
                         DeleteChargingstate(newId);
                         UpdateChargingstate(chargingstate_id, newStartdate, newStartChargingID, charge_energy_added, lastCharging_start_charge_energy_added);
+                    }
+                    else
+                    {
+                        Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer} cannot be combined (charge_energy_added comparison)");
                     }
                 }
             }

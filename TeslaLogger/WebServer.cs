@@ -143,6 +143,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
                         Admin_ReloadGeofence(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/GetPOI"):
+                        Admin_GetPOI(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -425,12 +428,12 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string value = m.Groups[1].Captures[0].ToString();
-                int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                string value = m.Groups[2].Captures[0].ToString();
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
-                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(path, out string TeslaAPIJSON))
+                    if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(value, out string TeslaAPIJSON))
                     {
                         response.AddHeader("Content-Type", "application/json");
                         WriteString(response, TeslaAPIJSON);
@@ -562,6 +565,57 @@ namespace TeslaLogger
             output.Write(buffer, 0, buffer.Length);
             // You must close the output stream.
             output.Close();
+        }
+
+        private void Admin_GetPOI(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
+            {
+                double lat = double.NaN;
+                double lng = double.NaN;
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "lat":
+                                double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                break;
+                            case "lng":
+                                double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                break;
+                        }
+                    }
+                }
+                if (lat != double.NaN && lng != double.NaN)
+                {
+                    Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
+                    if (addr != null)
+                    {
+                        Dictionary<string, object> data = new Dictionary<string, object>()
+                        {
+                            { "name", addr.name },
+                            { "lat", addr.lat },
+                            { "lng", addr.lng },
+                            { "radius", addr.radius },
+                            { "IsHome", addr.IsHome },
+                            { "IsWork", addr.IsWork }
+                        };
+                        Dictionary<string, object> specialflags = new Dictionary<string, object>();
+                        foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
+                        {
+                            specialflags.Add(flag.Key.ToString(), flag.Value);
+                        }
+                        data.Add("SpecialFlags", specialflags);
+                        response.AddHeader("Content-Type", "application/json");
+                        WriteString(response, new JavaScriptSerializer().Serialize(data));
+                        return;
+                    }
+                }
+            }
+            // finally close response
+            WriteString(response, "");
         }
 
         private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)

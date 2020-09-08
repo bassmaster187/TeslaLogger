@@ -191,7 +191,6 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("charge_state").Result;
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "charge_state");
 
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
@@ -640,10 +639,8 @@ namespace TeslaLogger
                     if (ts.TotalMinutes > 60)
                     {
                         string resultContent2 = GetCommand("vehicle_config").Result;
-                        _ = car.GetTeslaAPIState().ParseAPI(resultContent2, "vehicle_config");
 
                         dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
-
                         dynamic jBadgeResult = jBadge["response"];
 
                         if (jBadgeResult != null)
@@ -1087,7 +1084,6 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("drive_state").Result;
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "drive_state");
 
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -1808,7 +1804,6 @@ FROM
             try
             {
                 resultContent = await GetCommand("vehicle_state");
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicle_state");
                 Tools.SetThread_enUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
@@ -1887,7 +1882,6 @@ FROM
             try
             {
                 resultContent = await GetCommand("climate_state");
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "climate_state");
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
                     Log("GetOutsideTempAsync: NULL");
@@ -2000,7 +1994,7 @@ FROM
                 {
                     TeslaAPI_Commands.TryAdd(cmd, resultContent);
                 }
-
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                 return resultContent;
             }
             catch (Exception ex)
