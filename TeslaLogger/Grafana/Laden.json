@@ -454,8 +454,7 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "",
+          "text": data[0][0],
           "value": "1"
         },
         "datasource": "teslalogger",
@@ -465,18 +464,7 @@
         "label": "Car",
         "multi": false,
         "name": "Car",
-        "options": [
-          {
-            "selected": true,
-            "text": "",
-            "value": "2"
-          },
-          {
-            "selected": false,
-            "text": "",
-            "value": "1"
-          }
-        ],
+        "options": [],
         "query": "select display_name as __text, id as __value from cars order by display_name",
         "refresh": 1,
         "regex": "",

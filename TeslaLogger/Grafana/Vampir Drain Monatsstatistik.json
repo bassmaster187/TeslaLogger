@@ -164,8 +164,7 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "Teslarossa",
+          "text": data[0][0],
           "value": "1"
         },
         "datasource": "teslalogger",

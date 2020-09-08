@@ -182,7 +182,7 @@
 	  {
         "allValue": null,
         "current": {
-          "text": "",
+          "text": data[0][0],
           "value": "1"
         },
         "datasource": "teslalogger",
