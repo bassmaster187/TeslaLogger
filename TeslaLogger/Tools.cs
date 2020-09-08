@@ -789,9 +789,10 @@ namespace TeslaLogger
 
         private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
         {
-            bool allCarsAsleep = false;
+            bool allCarsAsleep = true;
             foreach (Car car in Car.allcars)
             {
+                // first car to return false will set allCarsAsleep to false and it'll stay false
                 allCarsAsleep &= car.TLUpdatePossible();
             }
             if (allCarsAsleep)

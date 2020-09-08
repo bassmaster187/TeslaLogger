@@ -50,6 +50,7 @@ namespace TeslaLogger
                         car.Log($"TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                         if (car.GetCurrentState() == Car.TeslaState.Online && car.GetWebHelper().GetLastShiftState().Equals("P"))
                         {
+                            // write car data to DB eg to update Grafana Dashboard status
                             car.GetWebHelper().IsDriving(true);
                         }
                         break;
