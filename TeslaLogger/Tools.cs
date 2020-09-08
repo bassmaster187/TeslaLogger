@@ -743,6 +743,8 @@ namespace TeslaLogger
         {
             // df and du before cleanup
             LogDiskUsage();
+            // log DB usage
+            LogDBUsage();
             // cleanup Exceptions
             CleanupExceptionsDir();
             // cleanup database
@@ -751,6 +753,29 @@ namespace TeslaLogger
             // - after 24h
             // - but only if car is asleep, otherwise wait another hour
             CreateMemoryCacheItem(24);
+        }
+
+        private static void LogDBUsage()
+        {
+            /*
+             * https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/
+             */
+            Logfile.Log("Housekeeping: database usage");
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT TABLE_NAME, ROUND(DATA_LENGTH / 1024 / 1024), ROUND(INDEX_LENGTH / 1024 / 1024), TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"teslalogger\" AND TABLE_TYPE = \"BASE TABLE\"", con);
+                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                try
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Logfile.Log($"Table: {dr[0],20} data:{dr[1],5}MB index:{dr[2],5}MB rows:{dr[3],10}");
+                    }
+                }
+                catch (Exception) { }
+            }
         }
 
         private static void CreateMemoryCacheItem(double hours = 24.0)
@@ -764,10 +789,14 @@ namespace TeslaLogger
 
         private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
         {
-            /* TODO
-            if (Program.GetCurrentState() == Program.TeslaState.Sleep)
+            bool allCarsAsleep = false;
+            foreach (Car car in Car.allcars)
             {
-                // CacheItem was removed and car is asleep, so run housekeeping
+                allCarsAsleep &= car.TLUpdatePossible();
+            }
+            if (allCarsAsleep)
+            {
+                // CacheItem was removed and all cars are asleep, so run housekeeping
                 Program.RunHousekeepingInBackground();
             }
             else
@@ -775,7 +804,6 @@ namespace TeslaLogger
                 // wait another hour to try again
                 CreateMemoryCacheItem(1);
             }
-            */
         }
 
         private static void CleanupDatabaseTableMothership()
