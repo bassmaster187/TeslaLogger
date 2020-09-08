@@ -2,6 +2,7 @@
 using TeslaLogger;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Runtime.Caching;
+using System.Net;
 
 namespace UnitTestsTeslalogger
 {
@@ -11,7 +12,9 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestMethodGeocode()
         {
-            /* TODO
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             var geofence = new TeslaLogger.Geofence(false);
             var a = geofence.GetPOI(48.456708, 10.029897);
             Assert.AreEqual(a.name, "Supercharger DE-Ulm");
@@ -29,21 +32,23 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(a.name, "EnBW DE-Ulm");
 
             GeocodeCache.Instance.ClearCache();
-            string temp = WebHelper.ReverseGecocodingAsync(35.677121, 139.751033).Result;
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "");
+
+            string temp = WebHelper.ReverseGecocodingAsync(c, 35.677121, 139.751033).Result;
             Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
-            Assert.AreEqual("jp", DBHelper.currentJSON.current_country_code);
-            Assert.AreEqual("", DBHelper.currentJSON.current_state);
+            Assert.AreEqual("jp", c.currentJSON.current_country_code);
+            Assert.AreEqual("", c.currentJSON.current_state);
 
-            temp = WebHelper.ReverseGecocodingAsync(48.400892, 9.970095).Result;
+            temp = WebHelper.ReverseGecocodingAsync(c, 48.400892, 9.970095).Result;
             Assert.AreEqual("89077 Ulm, Beringerbrücke ", temp);
-            Assert.AreEqual("de", DBHelper.currentJSON.current_country_code);
-            Assert.AreEqual("Baden-Württemberg", DBHelper.currentJSON.current_state);
+            Assert.AreEqual("de", c.currentJSON.current_country_code);
+            Assert.AreEqual("Baden-Württemberg", c.currentJSON.current_state);
 
-            temp = WebHelper.ReverseGecocodingAsync(40.773667, -74.039867).Result;
-            Assert.AreEqual("us-07047 , Jane Street ", temp);
-            Assert.AreEqual("us", DBHelper.currentJSON.current_country_code);
-            Assert.AreEqual("New Jersey", DBHelper.currentJSON.current_state);
-            */
+            temp = WebHelper.ReverseGecocodingAsync(c, 40.773667, -74.039867).Result;
+            Assert.AreEqual("us-07047 North Bergen, Jane Street ", temp);
+            Assert.AreEqual("us", c.currentJSON.current_country_code);
+            Assert.AreEqual("New Jersey", c.currentJSON.current_state);
+            
         }
         [TestMethod]
         public void TestJapanese()
