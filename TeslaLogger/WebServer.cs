@@ -609,6 +609,7 @@ namespace TeslaLogger
                         data.Add("SpecialFlags", specialflags);
                         response.AddHeader("Content-Type", "application/json");
                         WriteString(response, new JavaScriptSerializer().Serialize(data));
+                        return;
                     }
                 }
             }
