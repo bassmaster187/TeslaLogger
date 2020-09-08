@@ -259,11 +259,12 @@ namespace TeslaLogger
                         MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
                         int newid = Convert.ToInt32(cmd.ExecuteScalar());
 
-                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid) values (@id, @tesla_name, @tesla_password, @tesla_carid)", con);
+                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name)", con);
                         cmd.Parameters.AddWithValue("@id", newid);
                         cmd.Parameters.AddWithValue("@tesla_name", email);
                         cmd.Parameters.AddWithValue("@tesla_password", password);
                         cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                        cmd.Parameters.AddWithValue("@display_name", "Car " + newid);
                         cmd.ExecuteNonQuery();
 
                         Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "");

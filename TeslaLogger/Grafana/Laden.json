@@ -164,7 +164,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 2\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 2\nORDER BY datum ASC\n",
           "refId": "B",
           "select": [
             [
@@ -192,7 +192,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 28\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 28\nORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -220,7 +220,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and id = 27\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 27\nORDER BY datum ASC\n",
           "refId": "D",
           "select": [
             [
@@ -248,7 +248,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * -1 as 'Battery charge Power [kW]' FROM can WHERE $__timeFilter(datum) and id = 43 and val < 0 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * -1 as 'Battery charge Power [kW]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 43 and val < 0 ORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -276,7 +276,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]' FROM can WHERE $__timeFilter(datum) and id = 5 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 5 ORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -304,7 +304,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]' FROM can WHERE $__timeFilter(datum) and id = 7 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 7 ORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -332,7 +332,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 445 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 445 ORDER BY datum ASC",
           "refId": "H",
           "select": [
             [
@@ -454,8 +454,7 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "",
+          "text": data[0][0],
           "value": "1"
         },
         "datasource": "teslalogger",
@@ -465,18 +464,7 @@
         "label": "Car",
         "multi": false,
         "name": "Car",
-        "options": [
-          {
-            "selected": true,
-            "text": "",
-            "value": "2"
-          },
-          {
-            "selected": false,
-            "text": "",
-            "value": "1"
-          }
-        ],
+        "options": [],
         "query": "select display_name as __text, id as __value from cars order by display_name",
         "refresh": 1,
         "regex": "",
@@ -522,5 +510,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 58
+  "version": 59
 }
