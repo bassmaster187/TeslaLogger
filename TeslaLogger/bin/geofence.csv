@@ -22,6 +22,7 @@ EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
+EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
@@ -823,7 +824,7 @@ Supercharger IT-Occhiobello, 44.918787, 11.594051
 Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
 Supercharger IT-Piacenza, 45.039461, 9.753871
-Supercharger IT-Pollein, 45.73745, 7.371416
+Supercharger IT-Pollein, 45.737122, 7.372441
 Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
 Supercharger IT-Sondrio, 46.164535, 9.677329
 Supercharger IT-Tarquinia, 42.183306, 11.788161
@@ -1006,7 +1007,10 @@ Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
-Suoercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger US-Buford GA, 34.061649, -83.994602
+Supercharger US-Cambridge OH, 40.003559, -81.574903
+Supercharger US-Catoosa OK, 36.167589, -95.766032
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Childress TX, 34.432503,-100.218625
 Supercharger US-Corsicana TX, 32.0686, -96.448217
@@ -1015,11 +1019,13 @@ Supercharger US-Dickson TN, 36.018432, -87.332851
 Supercharger US-Dublin OH, 40.093198, -83.092261
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Giddings TX, 30.178965, -96.906996
+Supercharger US-Glen Allen VA, 37.669845, -77.461682
 Supercharger US-Houston-North TX, 29.980302, -95.421564
 Supercharger US-Houston TX - Northwest Freeway, 29.867279, -95.538107
 Supercharger US-Huntsville TX, 30.716159, -95.565965
 Supercharger US-Jackson TN, 35.660411, -88.855634
 Supercharger US-Kuttawa KY, 37.073581, -88.124831
+Supercharger US-La Vale MD, 39.63615, -78.845823
 Supercharger US-Lake Elsinore CA, 33.698631, -117.349266
 Supercharger US-Las Vegas NV, 36.165906, -115.138655
 Supercharger US-Louisville KY, 38.211971, -85.673251
@@ -1027,6 +1033,7 @@ Supercharger-V3 US-Las Vegas NV - Linq High Roller, 36.116648, -115.168277
 Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
 Supercharger US-Little Rock AR, 34.661548, -92.410467
+Supercharger US-Lowell AR, 36.255397,-94.152674
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Menifee CA, 33.679638, -117.173752
 Supercharger US-Mojave CA, 35.068596, -118.174568
@@ -1036,23 +1043,28 @@ Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-Southlake TX, 32.943636, -97.133889
+Supercharger US-Staunton VA, 38.133369, -79.043456
 Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
+Supercharger US-Tupelo MS, 34.311517, -88.70099
 Supercharger US-Watterloo NY, 42.969202, -76.846107
 Supercharger US-Watertown NY, 43.979582, -75.954102
 Supercharger US-Webster TX, 29.519295, -95.122049
 Supercharger US-Weatherford OK, 35.538718, -98.660132
+Supercharger US-Wytheville VA, 36.945711, -81.054562
 Urbancharger US-Anaheim CA, 33.805187, -117.882111
 Urbancharger US-Carlsbad CA, 33.084042, -117.266273
 Urbancharger US-Chicago IL North Broadway, 41.937486, -87.644921
 Urbancharger US-Corona CA, 33.826435, -117.515366
 Urbancharger US-Fontana CA, 34.150982, -117.471046
 Urbancharger US-Glendale CA, 34.145145, -118.257072
-Urbancharger US-San Bernardino CA, 34.084202, -117.299095
-Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
 Urbancharger US-Las Vegas NV - Tivoli Village, 36.168785, -115.286674
 Urbancharger US-Pasadena CA, 34.144859, -118.146439
+Urbancharger US-San Bernardino CA, 34.084202, -117.299095
+Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
+Urbancharger US-Tigard OR, 45.450027,-122.78289
+
 Tesla Service Center AT-Graz, 47.037072, 15.478325
 Tesla Service Center AT-Linz, 48.236730, 14.240654
 Tesla Service Center AT-Salzburg, 47.787926, 12.980254
