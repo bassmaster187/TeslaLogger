@@ -771,7 +771,7 @@ namespace TeslaLogger
                     MySqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Logfile.Log($"Table: {dr[0],20} data:{dr[1],5}MB index:{dr[2],5}MB rows:{dr[3],10}");
+                        Logfile.Log($"Table: {dr[0],20} data:{dr[1],5} MB index:{dr[2],5} MB rows:{dr[3],10}");
                     }
                 }
                 catch (Exception) { }
