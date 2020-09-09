@@ -289,10 +289,12 @@ namespace TeslaLogger
                 else if (flag.Equals("home"))
                 {
                     _addr.IsHome = true;
+                    _addr.name = "🏠 " + _addr.name;
                 }
                 else if (flag.Equals("work"))
                 {
                     _addr.IsWork = true;
+                    _addr.name = "🏢 " + _addr.name;
                 }
                 else if (flag.StartsWith("scl"))
                 {
