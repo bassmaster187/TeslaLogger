@@ -233,6 +233,10 @@ namespace TeslaLogger
                             {
                                 addr.name = "⚡⚡ " + addr.name;
                             }
+                            else if (addr.name.StartsWith("Urbancharger "))
+                            {
+                                addr.name = "⚡ " + addr.name;
+                            }
 
                             localList.Add(addr);
                         }
