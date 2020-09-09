@@ -22,17 +22,21 @@ EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal West, 48.584012, 10.175805, 6
+EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
+EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+
 
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
@@ -163,6 +167,7 @@ Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
 Ionity DE-Nempitz, 51.290114,12.137547, 6
+Ionity DE-Nempitz, 51.290159,12.1376, 6
 Ionity DE-Neumarkt, 49.312948, 11.474745, 20
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
@@ -199,6 +204,7 @@ Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
 Ionity ES-Casabermeja, 36.8982555, -4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
+Ionity Es-Martin de Yeltes, 40.769662, -6.286721
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
@@ -232,6 +238,7 @@ Ionity FR-Jardin des arbres, 47.852405, 2.684731
 Ionity FR-Jura, 46.774589, 5.523009
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
+Ionity FR-La Garde, 44.870544, 3.253033
 Ionity FR-La Réserve, 47.974493, 3.197267
 Ionity FR-Labenne Est, 43.586191, -1.419585
 Ionity FR-Labenne Ouest, 43.586073, -1.420776
@@ -249,7 +256,7 @@ Ionity FR-Mayenne, 48.095180, -0.693474
 Ionity FR-Mionnay Chatanay, 45.889238, 4.893502
 Ionity FR-Mionnay Saint Galmier, 45.885078, 4.894234
 Ionity FR-Montbartier, 43.915744, 1.309462
-Ionity FR-Montelimar Est, 44.5131, 4.782
+Ionity FR-Montelimar Est, 44.513818, 4.781396
 Ionity FR-Montelimar Ouest, 44.5149, 4.78
 Ionity FR-Morières, 43.922931, 4.912040
 Ionity FR-Mouxy, 45.673865, 5.929976
@@ -260,6 +267,7 @@ Ionity FR-Poitiers Chincé, 46.701811, 0.371062
 Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
+Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tavel Nord, 44.004071, 4.703626
 Ionity FR-Tavel Sud, 43.999633, 4.700191
@@ -509,6 +517,7 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
+Supercharger-V3 DE-Hermsdorf, 50.8899, 11.87162, 20
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.1918, 6.9363, 30
@@ -535,7 +544,7 @@ Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
-Supercharger DE-Nempitz, 51.290095,12.137335, 4
+Supercharger DE-Nempitz, 51.290095,12.137335, 6
 Supercharger DE-Nempitz, 51.290039,12.137335, 6
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
@@ -572,7 +581,7 @@ Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger-V3 DK-Ikast, 56.122196, 9.172572
-Supercharger DK-Køge, 55.489273, 12.162788
+Supercharger DK-Køge, 55.489014, 12.163153
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
 Supercharger DK-Randers, 56.433685, 10.055412
@@ -815,7 +824,7 @@ Supercharger IT-Occhiobello, 44.918787, 11.594051
 Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
 Supercharger IT-Piacenza, 45.039461, 9.753871
-Supercharger IT-Pollein, 45.73745, 7.371416
+Supercharger IT-Pollein, 45.737122, 7.372441
 Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
 Supercharger IT-Sondrio, 46.164535, 9.677329
 Supercharger IT-Tarquinia, 42.183306, 11.788161
@@ -962,7 +971,6 @@ Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
 Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
-Supercharger SE-Køge, 55.489365, 12.162954
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
 Supercharger SE-Markaryd, 56.444825, 13.603916
@@ -999,7 +1007,10 @@ Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
-Suoercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger US-Buford GA, 34.061649, -83.994602
+Supercharger US-Cambridge OH, 40.003559, -81.574903
+Supercharger US-Catoosa OK, 36.167589, -95.766032
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Childress TX, 34.432503,-100.218625
 Supercharger US-Corsicana TX, 32.0686, -96.448217
@@ -1008,11 +1019,13 @@ Supercharger US-Dickson TN, 36.018432, -87.332851
 Supercharger US-Dublin OH, 40.093198, -83.092261
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Giddings TX, 30.178965, -96.906996
+Supercharger US-Glen Allen VA, 37.669845, -77.461682
 Supercharger US-Houston-North TX, 29.980302, -95.421564
 Supercharger US-Houston TX - Northwest Freeway, 29.867279, -95.538107
 Supercharger US-Huntsville TX, 30.716159, -95.565965
 Supercharger US-Jackson TN, 35.660411, -88.855634
 Supercharger US-Kuttawa KY, 37.073581, -88.124831
+Supercharger US-La Vale MD, 39.63615, -78.845823
 Supercharger US-Lake Elsinore CA, 33.698631, -117.349266
 Supercharger US-Las Vegas NV, 36.165906, -115.138655
 Supercharger US-Louisville KY, 38.211971, -85.673251
@@ -1020,6 +1033,7 @@ Supercharger-V3 US-Las Vegas NV - Linq High Roller, 36.116648, -115.168277
 Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
 Supercharger US-Little Rock AR, 34.661548, -92.410467
+Supercharger US-Lowell AR, 36.255397,-94.152674
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Menifee CA, 33.679638, -117.173752
 Supercharger US-Mojave CA, 35.068596, -118.174568
@@ -1029,23 +1043,28 @@ Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-Southlake TX, 32.943636, -97.133889
+Supercharger US-Staunton VA, 38.133369, -79.043456
 Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
+Supercharger US-Tupelo MS, 34.311517, -88.70099
 Supercharger US-Watterloo NY, 42.969202, -76.846107
 Supercharger US-Watertown NY, 43.979582, -75.954102
 Supercharger US-Webster TX, 29.519295, -95.122049
 Supercharger US-Weatherford OK, 35.538718, -98.660132
+Supercharger US-Wytheville VA, 36.945711, -81.054562
 Urbancharger US-Anaheim CA, 33.805187, -117.882111
 Urbancharger US-Carlsbad CA, 33.084042, -117.266273
 Urbancharger US-Chicago IL North Broadway, 41.937486, -87.644921
 Urbancharger US-Corona CA, 33.826435, -117.515366
 Urbancharger US-Fontana CA, 34.150982, -117.471046
 Urbancharger US-Glendale CA, 34.145145, -118.257072
-Urbancharger US-San Bernardino CA, 34.084202, -117.299095
-Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
 Urbancharger US-Las Vegas NV - Tivoli Village, 36.168785, -115.286674
 Urbancharger US-Pasadena CA, 34.144859, -118.146439
+Urbancharger US-San Bernardino CA, 34.084202, -117.299095
+Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
+Urbancharger US-Tigard OR, 45.450027,-122.78289
+
 Tesla Service Center AT-Graz, 47.037072, 15.478325
 Tesla Service Center AT-Linz, 48.236730, 14.240654
 Tesla Service Center AT-Salzburg, 47.787926, 12.980254
@@ -1138,7 +1157,9 @@ IKEA DE-Würzburg, 49.821812, 9.982398
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
+Kaufland DE-Berlin Prenzlauer Berg, 52.533964, 13.457147
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
+Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
@@ -1208,7 +1229,22 @@ Familia DE-Quickborn, 53.743005, 9.940652
 
 REWE DE-Bremen, 53.136455, 8.739926
 
+Grønn Kontakt NO-Leknes, 68.14874, 13.612729
+Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
+
+Fortum NO-Alta, 69.966743, 23.268569
+Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
+Fortum NO-Sortland, 68.704914, 15.414759
+
+EON CZ-Jenišov, 50.218688, 12.806822
+CEZ CZ-Jenišov, 50.222744, 12.805259
+CEZ CZ-Jaroměř, 50.342834, 15.904088
+CEZ CZ-Plzeň, 49.742046, 13.393453
+
+Iberdrola ES-Huelva, 37.306245, -6.87322
+
 AT Lermoos Hochmoos-Express, 47.395975, 10.887217
+AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
@@ -1217,10 +1253,12 @@ CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
+DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
 DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
+DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bitterfeld-Wolfen enviaM, 51.624576, 12.307812
@@ -1237,12 +1275,14 @@ DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
+DE Germering Hagebaumarkt, 48.141285, 11.371643
 DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hannover A2 Center, 52.42332, 9.835401
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
+DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
@@ -1250,6 +1290,7 @@ DE Köln Leonardo Hotel, 50.926801, 6.904346
 DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 DE Neumünster Polizei, 54.07617, 9.96679
 DE Neuss Esso Tankstelle, 51.199058, 6.711012
+DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
 DE Rheydt New AG, 51.157497, 6.448055
