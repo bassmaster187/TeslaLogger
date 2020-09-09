@@ -17,7 +17,7 @@ namespace TeslaLogger
         private static DateTime lastVersionCheck = DateTime.UtcNow;
         internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }
 
-        public static void Start(WebHelper wh)
+        public static void Start()
         {
             try
             {
@@ -128,11 +128,6 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
-                {
-                    UpdateDBView(wh);
-                }
-
                 if (!DBHelper.TableExists("mothership"))
                 {
                     Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
@@ -196,13 +191,84 @@ namespace TeslaLogger
                         ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
                 }
 
+                InsertCarID_Column("can");
+                InsertCarID_Column("car_version");
+                InsertCarID_Column("charging");
+                InsertCarID_Column("chargingstate");
+                InsertCarID_Column("drivestate");
+                InsertCarID_Column("pos");
+                InsertCarID_Column("shiftstate");
+                InsertCarID_Column("state");
+
+                if (!DBHelper.TableExists("cars"))
+                {
+                    Logfile.Log("crate table cars");
+                    DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
+                          `id` int(11) NOT NULL,
+                          `tesla_name` varchar(45) DEFAULT NULL,
+                          `tesla_password` varchar(45) DEFAULT NULL,
+                          `tesla_carid` int(11) DEFAULT NULL,
+                          `tesla_token` varchar(100) DEFAULT NULL,
+                          `tesla_token_expire` datetime DEFAULT NULL,
+                          `tasker_hash` varchar(10) DEFAULT NULL,
+                          `model` varchar(45) DEFAULT NULL,
+                          `model_name` varchar(45) DEFAULT NULL,
+                          `wh_tr` double DEFAULT NULL,
+                          `db_wh_tr` double DEFAULT NULL,
+                          `db_wh_tr_count` int(11) DEFAULT NULL,
+                          `car_type` varchar(45) DEFAULT NULL,
+                          `car_special_type` varchar(45) DEFAULT NULL,
+                          `car_trim_badging` varchar(45) DEFAULT NULL,
+                          `display_name` varchar(45) DEFAULT NULL,
+                          `raven` bit(1) DEFAULT NULL,
+                          `Battery` varchar(45) DEFAULT NULL,
+                          PRIMARY KEY (`id`)
+                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", 600);
+
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con);
+                            cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
+                            cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
+                            cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+                }
+
+                if (!DBHelper.ColumnExists("cars", "vin"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column vin");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
+                        ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.IndexExists("can_ix2", "can"))
+                {
+                    Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
+                    DBHelper.ExecuteSQLQuery("alter table can add index can_ix2 (id,carid,datum)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                {
+                    UpdateDBView();
+                }
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();
 
                 DBHelper.UpdateHTTPStatusCodes();
 
-                timer = new System.Threading.Timer(FileChecker, wh, 10000, 5000);
+                timer = new System.Threading.Timer(FileChecker, null, 10000, 5000);
 
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
@@ -302,6 +368,21 @@ namespace TeslaLogger
             }
         }
 
+        private static void InsertCarID_Column(string table)
+        {
+            if (!DBHelper.ColumnExists(table, "CarID"))
+            {
+                Logfile.Log($"ALTER TABLE {table} ADD Column CarID");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 6000);
+                DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 6000);
+            }
+            if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
+            {
+                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 6000);
+            }
+        }
+
         public static void CheckDBCharset()
         {
             try
@@ -390,12 +471,12 @@ namespace TeslaLogger
 
                 if (!shareDataOnStartup && Tools.IsShareData())
                 {
-                    if (state is WebHelper wh)
+                    foreach (Car c in Car.allcars)
                     {
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
 
-                        ShareData sd = new ShareData(wh.TaskerHash);
+                        ShareData sd = new ShareData(c);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
                     }
@@ -408,14 +489,13 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDBView(WebHelper wh)
+        private static void UpdateDBView()
         {
             try
             {
                 Logfile.Log("update view: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
-                s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
 
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
                 if (Range == "RR")
@@ -498,7 +578,7 @@ namespace TeslaLogger
         }
 
 
-        public static void UpdateGrafana(WebHelper wh)
+        public static void UpdateGrafana()
         {
             try
             {
@@ -521,7 +601,7 @@ namespace TeslaLogger
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
 
-                    Logfile.Log(" Wh/TR km: " + wh.carSettings.Wh_TR);
+                    // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp");
@@ -531,7 +611,7 @@ namespace TeslaLogger
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
-                    UpdateDBView(wh);
+                    UpdateDBView();
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
                     // changes to dashboards
@@ -539,8 +619,7 @@ namespace TeslaLogger
                     {
                         Logfile.Log("Update: " + f);
                         string s = File.ReadAllText(f);
-                        s = s.Replace("0.190052356", wh.carSettings.Wh_TR);
-                        s = s.Replace("TASKERTOKEN", wh.TaskerHash);
+                        // TODO s = s.Replace("TASKERTOKEN", wh.car.TaskerHash);
 
                         if (Range == "RR")
                         {
@@ -941,6 +1020,13 @@ namespace TeslaLogger
         {
             try
             {
+                for (int x = 0; x < Car.allcars.Count; x++)
+                {
+                    Car c = Car.allcars[x];
+                    if (c.GetCurrentState() != Car.TeslaState.Sleep)
+                        return;
+                }
+
                 TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
                 if (ts.TotalMinutes > 120)
                 {

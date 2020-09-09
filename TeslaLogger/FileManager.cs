@@ -71,20 +71,28 @@ namespace TeslaLogger
             get
             {
                 if (Tools.IsDocker())
+                {
                     return Path.Combine("/tmp/", "SetCost.txt");
+                }
                 else
+                {
                     return Path.Combine(GetExecutingPath(), "SetCost.txt");
+                }
             }
         }
 
-        static string GetGoSleepPath
+        private static string GetGoSleepPath
         {
             get
             {
                 if (Tools.IsDocker())
+                {
                     return Path.Combine("/tmp/", Filenames[TLFilename.CmdGoSleepFilename]);
+                }
                 else
+                {
                     return GetFilePath(TLFilename.CmdGoSleepFilename);
+                }
             }
         }
 
@@ -125,20 +133,14 @@ namespace TeslaLogger
             return filecontent;
         }
 
-        internal static void WriteTeslaTokenFile(string tesla_token)
-        {
-            string serializeToken = tesla_token + "|" + DateTime.Now.ToString("s");
-
-            File.WriteAllText(GetFilePath(TLFilename.TeslaTokenFilename), serializeToken);
-        }
-
         private static object SyncLock_WriteCurrentJsonFile = new object();
 
-        internal static void WriteCurrentJsonFile(string current_json)
+        internal static void WriteCurrentJsonFile(int CarID, string current_json)
         {
             lock (SyncLock_WriteCurrentJsonFile)
             {
-                File.WriteAllText(GetFilePath(TLFilename.CurrentJsonFilename), current_json, Encoding.UTF8);
+                string filepath = Path.Combine(GetExecutingPath(), $"current_json_{CarID}.txt");
+                File.WriteAllText(filepath, current_json, Encoding.UTF8);
             }
         }
 

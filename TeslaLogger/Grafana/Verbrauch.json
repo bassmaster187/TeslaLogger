@@ -19,7 +19,7 @@
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Laden",
-        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc\n\n\n\n  ",
+        "rawQuery": "SELECT $__time(StartDate),\nconcat('Laden: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \nWHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5 and CarID = $Car\norder by StartDate desc\n\n\n\n  ",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -31,7 +31,7 @@
         "iconColor": "#508642",
         "limit": 100,
         "name": "Laden fertig",
-        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5\norder by StartDate desc",
+        "rawQuery": "SELECT $__time(EndDate),\nconcat('Laden fertig: ', (select address from pos where pos.id = chargingstate.Pos), ' / ' , (select charging.charge_energy_added from  charging where chargingstate.EndChargingID = charging.id), ' kWh') as text \nFROM chargingstate \n  WHERE $__timeFilter(StartDate) and timestampdiff(MINUTE, StartDate, Enddate) > 5 and CarID = $Car\norder by StartDate desc",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -43,7 +43,7 @@
         "iconColor": "#64b0c8",
         "limit": 100,
         "name": "Schlafen",
-        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep'\norder by StartDate desc\n",
+        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'asleep' and CarID = $Car\norder by StartDate desc\n",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -55,7 +55,7 @@
         "iconColor": "#ba43a9",
         "limit": 100,
         "name": "Online",
-        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online'\norder by StartDate desc\n",
+        "rawQuery": "SELECT $__time(StartDate),\nstate as text \nFROM state\nWHERE $__timeFilter(StartDate) and state = 'online' and CarID = $Car\norder by StartDate desc\n",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -65,6 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1598599925606,
   "links": [],
   "panels": [
     {
@@ -86,6 +87,8 @@
         "alignAsTable": false,
         "avg": true,
         "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
         "max": true,
         "min": true,
         "rightSide": false,
@@ -152,7 +155,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]', inside_temp as 'Innentemperatur [°C]', \r\nbattery_heater * 100 as 'Battery Heater',\r\nis_preconditioning * 100 as 'Preconditioning',\r\nsentry_mode * 100 as 'Sentry Mode',\r\nodometer -  (select min(odometer) from pos WHERE  $__timeFilter(datum)) as km\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]',   power as 'Leistung [PS]',   ideal_battery_range_km as 'Reichweite [km]', battery_level as 'SOC [%]',  outside_temp as 'Außentemperatur [°C]',  altitude as 'Höhe [m]', inside_temp as 'Innentemperatur [°C]', \r\nbattery_heater * 100 as 'Battery Heater',\r\nis_preconditioning * 100 as 'Preconditioning',\r\nsentry_mode * 100 as 'Sentry Mode',\r\nodometer -  (select min(odometer) from pos WHERE  $__timeFilter(datum) and CarID = $Car) as km\r\n\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and CarID = $Car\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -180,7 +183,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 2\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 2 and CarID = $Car\nORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -208,7 +211,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and id = 27\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and id = 27 and CarID = $Car\nORDER BY datum ASC\n",
           "refId": "B",
           "select": [
             [
@@ -236,7 +239,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 28\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 28 and CarID = $Car\nORDER BY datum ASC",
           "refId": "D",
           "select": [
             [
@@ -264,7 +267,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'BMS max discharge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 29\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'BMS max discharge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 29 and CarID = $Car\nORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -292,7 +295,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 5\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 5 and CarID = $Car\nORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -390,7 +393,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\n\r\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -457,7 +460,33 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": data[0][0],
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-3h",
@@ -491,5 +520,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 118
+  "version": 121
 }

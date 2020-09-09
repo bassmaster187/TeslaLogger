@@ -78,7 +78,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 81 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 181\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 81 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 181\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -107,7 +107,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 82 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 182\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 82 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 182\nORDER BY datum ASC",
           "refId": "B",
           "select": [
             [
@@ -136,7 +136,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 83 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 183\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 83 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 183\nORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -165,7 +165,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 84 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 184\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 84 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 184\nORDER BY datum ASC",
           "refId": "D",
           "select": [
             [
@@ -194,7 +194,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 85 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 185\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 85 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 185\nORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -222,7 +222,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 86 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 186\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 86 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 186\nORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -250,7 +250,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 87 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 187\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 87 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 187\nORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -278,7 +278,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 88 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 188\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 88 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 188\nORDER BY datum ASC",
           "refId": "H",
           "select": [
             [
@@ -306,7 +306,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 89 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 189\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 89 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 189\nORDER BY datum ASC",
           "refId": "I",
           "select": [
             [
@@ -334,7 +334,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 90 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 190\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 90 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 190\nORDER BY datum ASC",
           "refId": "J",
           "select": [
             [
@@ -362,7 +362,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 91 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 191\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 91 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 191\nORDER BY datum ASC",
           "refId": "K",
           "select": [
             [
@@ -390,7 +390,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 92 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 192\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 92 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 192\nORDER BY datum ASC",
           "refId": "L",
           "select": [
             [
@@ -418,7 +418,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 93 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 193\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 93 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 193\nORDER BY datum ASC",
           "refId": "M",
           "select": [
             [
@@ -446,7 +446,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 94 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 194\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 94 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 194\nORDER BY datum ASC",
           "refId": "N",
           "select": [
             [
@@ -474,7 +474,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 95 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 195\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 95 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 195\nORDER BY datum ASC",
           "refId": "O",
           "select": [
             [
@@ -502,7 +502,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 96 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 196\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 96 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 196\nORDER BY datum ASC",
           "refId": "P",
           "select": [
             [
@@ -530,7 +530,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 97 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 197\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 97 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 197\nORDER BY datum ASC",
           "refId": "Q",
           "select": [
             [
@@ -558,7 +558,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 98 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 198\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 98 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 198\nORDER BY datum ASC",
           "refId": "R",
           "select": [
             [
@@ -586,7 +586,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 99 [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 199\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zellspannung 99 [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 199\nORDER BY datum ASC",
           "refId": "S",
           "select": [
             [
@@ -614,7 +614,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 5\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 5\nORDER BY datum ASC",
           "refId": "Z",
           "select": [
             [
@@ -642,7 +642,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell avg [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 6\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell avg [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 6\nORDER BY datum ASC",
           "refId": "U",
           "select": [
             [
@@ -670,7 +670,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 7\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 7\nORDER BY datum ASC",
           "refId": "V",
           "select": [
             [
@@ -698,7 +698,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 43\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]'\nFROM can\nWHERE $__timeFilter(datum)  and carid=$Car  and id = 43\nORDER BY datum ASC",
           "refId": "T",
           "select": [
             [
@@ -770,7 +770,33 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": data[0][0],
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-1h",

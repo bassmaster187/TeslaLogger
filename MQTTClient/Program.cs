@@ -64,7 +64,7 @@ namespace MQTTClient
                         client.Connect(clientid);
                     }
 
-                    string temp = System.IO.File.ReadAllText("/etc/teslalogger/current_json.txt");
+                    string temp = System.IO.File.ReadAllText("/etc/teslalogger/current_json_1.txt");
                     if (temp != lastjson)
                     {
                         lastjson = temp;
