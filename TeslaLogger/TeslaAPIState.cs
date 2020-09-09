@@ -49,7 +49,7 @@ namespace TeslaLogger
                     case "battery_level":
                         if (car.GetCurrentState() == Car.TeslaState.Online && car.GetWebHelper().GetLastShiftState().Equals("P"))
                         {
-                            car.Log($"TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                            Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                             // write car data to DB eg to update Grafana Dashboard status
                             car.GetWebHelper().IsDriving(true);
                         }
