@@ -90,7 +90,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]', battery_level as 'SOC [%]'  \r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  Datum ASC",
+          "rawSql": "SELECT   $__time(datum),  speed as 'Geschwindigkeit [km/h]', battery_level as 'SOC [%]'  \r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car\r\nORDER BY  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -118,7 +118,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 2\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 2\nORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -146,7 +146,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and id = 27\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 27\nORDER BY datum ASC\n",
           "refId": "B",
           "select": [
             [
@@ -174,7 +174,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'BMS max discharge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 29\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'BMS max discharge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 29\nORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -202,7 +202,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum) and id = 5\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 5\nORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -230,7 +230,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Fr torque measured [Nm]'\nFROM can\nWHERE $__timeFilter(datum) and id = 400\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Fr torque measured [Nm]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 400\nORDER BY datum ASC",
           "refId": "D",
           "select": [
             [
@@ -258,7 +258,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Rr torque measuredd [Nm]'\nFROM can\nWHERE $__timeFilter(datum) and id = 403\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Rr torque measuredd [Nm]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 403\nORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -286,7 +286,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Rr/Fr torque bias [%]'\nFROM can\nWHERE $__timeFilter(datum) and id = 401\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Rr/Fr torque bias [%]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 401\nORDER BY datum ASC",
           "refId": "H",
           "select": [
             [
@@ -314,7 +314,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Watt pedal [%]'\nFROM can\nWHERE $__timeFilter(datum) and id = 404\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Watt pedal [%]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 404\nORDER BY datum ASC",
           "refId": "I",
           "select": [
             [
@@ -342,7 +342,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Brake pedal [%]'\nFROM can\nWHERE $__timeFilter(datum) and id = 435\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Brake pedal [%]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 435\nORDER BY datum ASC",
           "refId": "J",
           "select": [
             [
@@ -370,7 +370,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Powertrain pump [%]'\nFROM can\nWHERE $__timeFilter(datum) and id = 78\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Powertrain pump [%]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 78\nORDER BY datum ASC",
           "refId": "K",
           "select": [
             [
@@ -398,7 +398,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Powertrain pump 2 [%]'\nFROM can\nWHERE $__timeFilter(datum) and id = 90\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Powertrain pump 2 [%]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 90\nORDER BY datum ASC",
           "refId": "L",
           "select": [
             [
@@ -426,7 +426,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Rr stator [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 429\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Rr stator [°C]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 429\nORDER BY datum ASC",
           "refId": "M",
           "select": [
             [
@@ -454,7 +454,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Fr mech power [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 405\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Fr mech power [kW]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 405\nORDER BY datum ASC",
           "refId": "N",
           "select": [
             [
@@ -482,7 +482,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Rr mech power [kW]'\nFROM can\nWHERE $__timeFilter(datum) and id = 415\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Rr mech power [kW]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 415\nORDER BY datum ASC",
           "refId": "O",
           "select": [
             [
@@ -510,7 +510,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Fr stator [°C]'\nFROM can\nWHERE $__timeFilter(datum) and id = 443\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Fr stator [°C]'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car and id = 443\nORDER BY datum ASC",
           "refId": "P",
           "select": [
             [
@@ -538,7 +538,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]' FROM can WHERE $__timeFilter(datum) and id = 43 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery power [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 43 ORDER BY datum ASC",
           "refId": "Q",
           "select": [
             [
@@ -566,7 +566,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 445 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Battery flow [lpm]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 445 ORDER BY datum ASC",
           "refId": "R",
           "select": [
             [
@@ -594,7 +594,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Powertrain flow [lpm]' FROM can WHERE $__timeFilter(datum) and id = 444 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Powertrain flow [lpm]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 444 ORDER BY datum ASC",
           "refId": "S",
           "select": [
             [
@@ -692,7 +692,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum)\r\n\r\nORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid=$Car\r\n\r\nORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -758,8 +758,34 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
-  "templating": {
-    "list": []
+   "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": data[0][0],
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-3h",

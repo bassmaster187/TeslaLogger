@@ -86,7 +86,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select \ncase\n  WHEN status = 1 then 'Sleep'\n  WHEN status = 2 then 'Online'\n  WHEN status = 3 then 'Offline'\n  WHEN status = 4 then 'Waking'\n  WHEN status = 5 then '?'\n  WHEN status = 6 then 'Driving'\n  WHEN status = 7 then 'Charging'\nend\n\nfrom (\nSELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\n) as t1\nLimit 1\n",
+          "rawSql": "select \ncase\n  WHEN status = 1 then 'Sleep'\n  WHEN status = 2 then 'Online'\n  WHEN status = 3 then 'Offline'\n  WHEN status = 4 then 'Waking'\n  WHEN status = 5 then '?'\n  WHEN status = 6 then 'Driving'\n  WHEN status = 7 then 'Charging'\nend\n\nfrom (\nSELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate) and carid=$Car \n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\n) as t1\nLimit 1\n",
           "refId": "A",
           "select": [
             [
@@ -175,7 +175,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select battery_level\r\nFROM\r\n(\r\nSELECT $__time(datum),battery_level\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),battery_level\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "rawSql": "select battery_level\r\nFROM\r\n(\r\nSELECT $__time(datum),battery_level\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\nunion\r\nSELECT $__time(datum),battery_level\r\nFROM  charging\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
           "refId": "A",
           "select": [
             [
@@ -260,7 +260,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select ideal_battery_range_km\r\nFROM\r\n(\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "rawSql": "select ideal_battery_range_km\r\nFROM\r\n(\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\nunion\r\nSELECT $__time(datum),ideal_battery_range_km\r\nFROM  charging\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
           "refId": "A",
           "select": [
             [
@@ -338,7 +338,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select outside_temp\r\nFROM\r\n(\r\nSELECT $__time(datum),outside_temp\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nunion\r\nSELECT $__time(datum),outside_temp\r\nFROM  charging\r\nWHERE  $__timeFilter(datum)\r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
+          "rawSql": "select outside_temp\r\nFROM\r\n(\r\nSELECT $__time(datum),outside_temp\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\nunion\r\nSELECT $__time(datum),outside_temp\r\nFROM  charging\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\norder by time_sec desc\r\n) as t1\r\nLimit 1\r\n\r\n",
           "refId": "A",
           "select": [
             [
@@ -421,7 +421,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT val as 'Zelltemperatur'\nFROM can\nWHERE $__timeFilter(datum) and id = 2 and datum > \n(\n    SELECT $__time(StartDate)\n    FROM state \n    WHERE  \n    $__timeFilter(startdate)\n    \n    union\n    SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate)\n    union \n    SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n    \n    union\n    SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) \n    union\n    SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n    \n    order by time_sec desc\n    Limit 1\n)\nORDER BY datum DESC Limit 1",
+          "rawSql": "SELECT val as 'Zelltemperatur'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car  and id = 2 and datum > \n(\n    SELECT $__time(StartDate)\n    FROM state \n    WHERE  \n    $__timeFilter(startdate) and carid=$Car \n    \n    union\n    SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \n    union \n    SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n    \n    union\n    SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \n    union\n    SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n    \n    order by time_sec desc\n    Limit 1\n)\nORDER BY datum DESC Limit 1",
           "refId": "A",
           "select": [
             [
@@ -520,7 +520,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT odometer\r\nFROM  pos\r\nWHERE  $__timeFilter(datum)\r\nORDER BY  id DESC \r\nLimit 1",
+          "rawSql": "SELECT odometer\r\nFROM  pos\r\nWHERE  $__timeFilter(datum) and carid=$Car \r\nORDER BY  id DESC \r\nLimit 1",
           "refId": "A",
           "select": [
             [
@@ -623,7 +623,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\nLimit 1",
+          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate) and carid=$Car \n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec desc\nLimit 1",
           "refId": "A",
           "select": [
             [
@@ -726,7 +726,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT LEFT(version, CHAR_LENGTH(version) - LOCATE(' ', REVERSE(version))) as text FROM car_version order by id desc limit 1",
+          "rawSql": "SELECT LEFT(version, CHAR_LENGTH(version) - LOCATE(' ', REVERSE(version))) as text FROM car_version where carid=$Car order by id desc limit 1",
           "refId": "A",
           "select": [
             [
@@ -833,7 +833,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate)\n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate)\nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate) \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec\n",
+          "rawSql": "SELECT $__time(StartDate), \n(case \n\tWHEN state = 'asleep' then 1 \n\tWHEN state = 'online' then 2 \n    WHEN state = 'offline' then 3 \n    WHEN state = 'waking' then 4 \n    else 5 \nend) as status\nFROM state \nWHERE  \n$__timeFilter(startdate) and carid=$Car \n\nunion\nSELECT $__time(StartDate), 6 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \nunion \nSELECT $__time(EndDate), 2 as status FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n\nunion\nSELECT $__time(StartDate), 7 as status FROM chargingstate WHERE $__timeFilter(StartDate)  and carid=$Car \nunion\nSELECT $__time(EndDate), 2 as status FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n\norder by time_sec\n",
           "refId": "A",
           "select": [
             [
@@ -956,8 +956,34 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
-  "templating": {
-    "list": []
+   "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": data[0][0],
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-2d",

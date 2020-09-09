@@ -71,7 +71,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Heater L [°C]' FROM can WHERE $__timeFilter(datum) and id = 41 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Heater L [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 41 ORDER BY datum ASC",
           "refId": "A",
           "select": [
             [
@@ -99,7 +99,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Heater R [°C]' FROM can WHERE $__timeFilter(datum) and id = 42 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Heater R [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 42 ORDER BY datum ASC",
           "refId": "B",
           "select": [
             [
@@ -127,7 +127,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'HVAC temp left [°C]' FROM can WHERE $__timeFilter(datum) and id = 49 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'HVAC temp left [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 49 ORDER BY datum ASC",
           "refId": "D",
           "select": [
             [
@@ -155,7 +155,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'HVAC temp right [°C]' FROM can WHERE $__timeFilter(datum) and id = 50 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'HVAC temp right [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 50 ORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -183,7 +183,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC window [%]' FROM can WHERE $__timeFilter(datum) and id = 48 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC window [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 48 ORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -211,7 +211,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC mid [%]' FROM can WHERE $__timeFilter(datum) and id = 51 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC mid [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 51 ORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -239,7 +239,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC floor [%]' FROM can WHERE $__timeFilter(datum) and id = 52 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * 100 as 'HVAC floor [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 52 ORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -267,7 +267,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Mid vent L [°C]' FROM can WHERE $__timeFilter(datum) and id = 53 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Mid vent L [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 53 ORDER BY datum ASC",
           "refId": "H",
           "select": [
             [
@@ -295,7 +295,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Floor vent L [°C]' FROM can WHERE $__timeFilter(datum) and id = 54 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Floor vent L [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 54 ORDER BY datum ASC",
           "refId": "I",
           "select": [
             [
@@ -323,7 +323,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Mid vent R [°C]' FROM can WHERE $__timeFilter(datum) and id = 55 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Mid vent R [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 55 ORDER BY datum ASC",
           "refId": "J",
           "select": [
             [
@@ -351,7 +351,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Floor vent R [°C]' FROM can WHERE $__timeFilter(datum) and id = 56 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Floor vent R [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 56 ORDER BY datum ASC",
           "refId": "K",
           "select": [
             [
@@ -379,7 +379,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Inside temp [°C]' FROM can WHERE $__timeFilter(datum) and id = 58 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Inside temp [°C]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 58 ORDER BY datum ASC",
           "refId": "L",
           "select": [
             [
@@ -407,7 +407,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Thermal controller [kW]' FROM can WHERE $__timeFilter(datum) and id = 84 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Thermal controller [kW]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 84 ORDER BY datum ASC",
           "refId": "M",
           "select": [
             [
@@ -435,7 +435,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'PTC air heater [%]' FROM can WHERE $__timeFilter(datum) and id = 81 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'PTC air heater [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 81 ORDER BY datum ASC",
           "refId": "N",
           "select": [
             [
@@ -463,7 +463,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'HVAC fan speed' FROM can WHERE $__timeFilter(datum) and id = 47 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'HVAC fan speed' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 47 ORDER BY datum ASC",
           "refId": "O",
           "select": [
             [
@@ -491,7 +491,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 1 [%]' FROM can WHERE $__timeFilter(datum) and id = 91 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 1 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 91 ORDER BY datum ASC",
           "refId": "P",
           "select": [
             [
@@ -519,7 +519,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 2 [%]' FROM can WHERE $__timeFilter(datum) and id = 92 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 2 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 92 ORDER BY datum ASC",
           "refId": "Q",
           "select": [
             [
@@ -547,7 +547,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 3 [%]' FROM can WHERE $__timeFilter(datum) and id = 93 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 3 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 93 ORDER BY datum ASC",
           "refId": "R",
           "select": [
             [
@@ -575,7 +575,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 4 [%]' FROM can WHERE $__timeFilter(datum) and id = 94 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 4 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 94 ORDER BY datum ASC",
           "refId": "S",
           "select": [
             [
@@ -603,7 +603,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 5 [%]' FROM can WHERE $__timeFilter(datum) and id = 95 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 5 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 95 ORDER BY datum ASC",
           "refId": "T",
           "select": [
             [
@@ -631,7 +631,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Louver 6 [%]' FROM can WHERE $__timeFilter(datum) and id = 96 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Louver 6 [%]' FROM can WHERE $__timeFilter(datum) and carid=$Car and id = 96 ORDER BY datum ASC",
           "refId": "U",
           "select": [
             [
@@ -701,8 +701,34 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
-  "templating": {
-    "list": []
+   "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": data[0][0],
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-3h",

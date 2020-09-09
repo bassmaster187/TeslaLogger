@@ -1,15 +1,5 @@
 <?PHP
-function GetTaskerToken()
-{
-    $taskertoken = "";
-    if (file_exists("/etc/teslalogger/TASKERTOKEN"))
-    {
-        $taskertoken = file_get_contents("/etc/teslalogger/TASKERTOKEN");
-    }
-
-    return $taskertoken;
-}
-
+require_once("tools.php");
 function full_path()
 {
     $s = &$_SERVER;
@@ -29,17 +19,29 @@ function full_path()
 function menu($title)
 {
     $car = "";
-    
-    if (file_exists("/etc/teslalogger/car_settings.xml"))
-    {
-        $doc =  file_get_contents("/etc/teslalogger/car_settings.xml");
-        if (preg_match("/<Name>([\s\S]*?)<\/Name>/", $doc, $matches) == 1)
+    $tasker_token = "";
+    $display_name = "";
+
+    $current_carid = $_SESSION["carid"];
+    if (!isset($current_carid))
+        $current_carid = 1;
+
+    $allcars = file_get_contents(GetTeslaloggerURL("getallcars"));
+    $jcars = json_decode($allcars);
+
+    foreach ($jcars as $k => $v) {
+        if ($v->{"id"} == $current_carid)
         {
-            $car = $matches[1];
+            $display_name = $v->{"display_name"};
+            $tasker_token = $v->{"tasker_hash"};    
+            $car = $v->{"model_name"};  
+
+            if (strlen($display_name) == 0)
+                $display_name = "Car ".$v->{"id"};
         }
     }
 
-    $ref = "?token=" . GetTaskerToken() . "&ref=" . full_path()."&car=".$car;
+    $ref = "?token=" . $tasker_token . "&ref=" . full_path()."&car=".$car;
 ?>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
@@ -48,9 +50,22 @@ function menu($title)
             <button class="menu-toggle">Primary Menu</button>
             <div class="menu-menuoben-container">
                 <ul id="primary-menu" class="nav-menu">
-                    <!--<li id="menu-item-0" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-0">
-                        <a href="index.php">Home</a>
-                    </li> -->
+                    <li id="menu-item-0" class="page_item_has_children">
+                        <a href="index.php"><?PHP echo($display_name);?></a>
+                        <ul class='children'>
+<?PHP                  
+                        foreach($jcars as $k => $v) {
+                            $dn = $v->{"display_name"};
+                            $carid = $v->{"id"};
+
+                            if (strlen($dn) == 0)
+                                $dn = "Car ".$carid;
+                            
+                            echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="index.php?carid='.$carid.'">'.$dn.'</a></li>');
+                        }      
+?>
+						</ul>
+                    </li>
                     <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1">
                         <a href="logfile.php">Logfile</a>
                     </li>

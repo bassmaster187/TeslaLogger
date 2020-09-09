@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -14,14 +13,18 @@ namespace TeslaLogger
 {
     public class DBHelper
     {
-        public static CurrentJSON currentJSON = new CurrentJSON();
-
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
+        private Car car;
 
         public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
                     ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
                     : ApplicationSettings.Default.DBConnectionstring;
+
+        public DBHelper(Car car)
+        {
+            this.car = car;
+        }
 
         public static void EnableMothership()
         {
@@ -44,48 +47,49 @@ namespace TeslaLogger
             }
         }
 
-        public static void CloseState(int maxPosid)
+        public void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null and CarID=@CarID", con);
                 cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@EndPos", maxPosid);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
 
-            currentJSON.CreateCurrentJSON();
+            car.currentJSON.CreateCurrentJSON();
         }
 
-        public static void StartState(string state)
+        public void StartState(string state)
         {
             if (state != null)
             {
                 if (state == "online")
                 {
-                    currentJSON.current_online = true;
-                    currentJSON.current_sleeping = false;
+                    car.currentJSON.current_online = true;
+                    car.currentJSON.current_sleeping = false;
                 }
                 else if (state == "asleep")
                 {
-                    currentJSON.current_online = false;
-                    currentJSON.current_sleeping = true;
+                    car.currentJSON.current_online = false;
+                    car.currentJSON.current_sleeping = true;
                 }
                 else if (state == "offline")
                 {
-                    currentJSON.current_online = false;
-                    currentJSON.current_sleeping = false;
+                    car.currentJSON.current_online = false;
+                    car.currentJSON.current_sleeping = false;
                 }
 
-                currentJSON.CreateCurrentJSON();
+                car.currentJSON.CreateCurrentJSON();
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
 
-                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null", con);
+                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and CarID ="+car.CarInDB, con);
                 MySqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.Read())
                 {
@@ -99,12 +103,13 @@ namespace TeslaLogger
                 int MaxPosid = GetMaxPosid();
                 CloseState(MaxPosid);
 
-                //Logfile.Log("state: " + state);
+                car.Log("state: " + state);
 
-                MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos) values (@StartDate, @state, @StartPos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos, CarID) values (@StartDate, @state, @StartPos, @CarID)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -182,6 +187,63 @@ namespace TeslaLogger
             }
         }
 
+        internal void UpdateTeslaToken()
+        {
+            try
+            {
+                car.Log("UpdateTeslaToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con);
+                    cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@tesla_token", car.Tesla_Token);
+                    cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                    int done = cmd.ExecuteNonQuery();
+
+                    car.Log("update tesla_token OK: " + done);
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+        }
+
+        internal void WriteCarSettings()
+        {
+            try
+            {
+                car.Log("UpdateTeslaToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con);
+                    cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@Raven", car.Raven);
+                    cmd.Parameters.AddWithValue("@Wh_TR", car.Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR", car.DB_Wh_TR);
+                    cmd.Parameters.AddWithValue("@DB_Wh_TR_count", car.DB_Wh_TR_count);
+                    cmd.Parameters.AddWithValue("@car_type", car.car_type);
+                    cmd.Parameters.AddWithValue("@car_special_type", car.car_special_type);
+                    cmd.Parameters.AddWithValue("@trim_badging", car.trim_badging);
+                    cmd.Parameters.AddWithValue("@model_name", car.ModelName);
+                    cmd.Parameters.AddWithValue("@Battery", car.Battery);
+                    cmd.Parameters.AddWithValue("@display_name", car.display_name);
+                    cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
+                    cmd.Parameters.AddWithValue("@vin", car.vin);
+
+                    int done = cmd.ExecuteNonQuery();
+
+                    car.Log("update tesla_token OK: " + done);
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+        }
+
         internal static void GetChargingstateStdOut(string[] args)
         {
             try
@@ -238,13 +300,14 @@ namespace TeslaLogger
             }
         }
 
-        internal static string GetFirmwareFromDate(DateTime dateTime)
+        internal string GetFirmwareFromDate(DateTime dateTime)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT version FROM car_version where StartDate < @date order by StartDate desc limit 1", con);
+                MySqlCommand cmd = new MySqlCommand("SELECT version FROM car_version where StartDate < @date and CarID=@CarID order by StartDate desc limit 1", con);
                 cmd.Parameters.AddWithValue("@date", dateTime);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -263,37 +326,39 @@ namespace TeslaLogger
             return "";
         }
 
-        public static void CloseChargingState()
+        public void CloseChargingState()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null and CarID=@CarID", con);
                 cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
 
-            currentJSON.current_charging = false;
-            currentJSON.current_charger_power = 0;
-            currentJSON.current_charger_voltage = 0;
-            currentJSON.current_charger_phases = 0;
-            currentJSON.current_charger_actual_current = 0;
-            currentJSON.current_charge_rate_km = 0;
+            car.currentJSON.current_charging = false;
+            car.currentJSON.current_charger_power = 0;
+            car.currentJSON.current_charger_voltage = 0;
+            car.currentJSON.current_charger_phases = 0;
+            car.currentJSON.current_charger_actual_current = 0;
+            car.currentJSON.current_charge_rate_km = 0;
 
             UpdateMaxChargerPower();
 
             Task.Factory.StartNew(() => CheckForInterruptedCharging(false));
         }
 
-        public static void UpdateMaxChargerPower()
+        public void UpdateMaxChargerPower()
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate order by id desc limit 1", con);
+                    MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate where CarID=@CarID order by id desc limit 1", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -307,7 +372,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.Message);
+                car.Log(ex.Message);
             }
         }
 
@@ -327,14 +392,15 @@ namespace TeslaLogger
             return false;
         }
 
-        private static void UpdateMaxChargerPower(int id, int startChargingID, int endChargingID)
+        private void UpdateMaxChargerPower(int id, int startChargingID, int endChargingID)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("select max(charger_power) from charging where id >= @startChargingID and id <= @endChargingID ", con);
+                MySqlCommand cmd = new MySqlCommand("select max(charger_power) from charging where id >= @startChargingID and id <= @endChargingID and CarID=@CarID", con);
                 cmd.Parameters.AddWithValue("@startChargingID", startChargingID);
                 cmd.Parameters.AddWithValue("@endChargingID", endChargingID);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -349,7 +415,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static void GetEconomy_Wh_km(WebHelper wh)
+        internal void GetEconomy_Wh_km(WebHelper wh)
         {
             try
             {
@@ -362,37 +428,39 @@ namespace TeslaLogger
                         where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 100
                         and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
                         and charging_End.battery_level <= 90
+                        and chargingstate.CarID = @CarID
                         group by economy_Wh_km
                         order by anz desc
                         limit 1 ", con);
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
+                    MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        long anz = (long)dr["anz"];
+                        int anz = Convert.ToInt32(dr["anz"]);
                         double wh_km = (double)dr["economy_Wh_km"];
 
-                        Logfile.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
+                        car.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
 
-                        wh.carSettings.DB_Wh_TR = wh_km.ToString();
-                        wh.carSettings.DB_Wh_TR_count = anz.ToString();
+                        wh.car.DB_Wh_TR = wh_km;
+                        wh.car.DB_Wh_TR_count = anz;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
-        internal static double GetLatestOdometer()
+        internal double GetLatestOdometer()
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT EndKm FROM trip order by StartDate desc Limit 1", con);
+                    MySqlCommand cmd = new MySqlCommand($"SELECT EndKm FROM trip where CarID = {car.CarInDB} order by StartDate desc Limit 1", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -409,6 +477,7 @@ namespace TeslaLogger
 
         internal static void UpdateAllChargingMaxPower()
         {
+            /* TODO
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -430,102 +499,104 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.Message);
             }
+            */
         }
 
-        internal static void GetLastTrip()
+        internal void GetLastTrip()
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM trip order by StartDate desc limit 1", con);
+                    MySqlCommand cmd = new MySqlCommand($"SELECT * FROM trip where CarID = {car.CarInDB} order by StartDate desc limit 1", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
 
                     if (dr.Read())
                     {
-                        currentJSON.current_trip_start = (DateTime)dr["StartDate"];
-                        currentJSON.current_trip_end = (DateTime)dr["EndDate"];
+                        car.currentJSON.current_trip_start = (DateTime)dr["StartDate"];
+                        car.currentJSON.current_trip_end = (DateTime)dr["EndDate"];
 
                         if (dr["StartKm"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
+                            car.currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
                         }
 
                         if (dr["EndKm"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
+                            car.currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
                         }
 
                         if (dr["speed_max"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
+                            car.currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
                         }
 
                         if (dr["power_max"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
+                            car.currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
                         }
 
                         if (dr["StartRange"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
+                            car.currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
                         }
 
                         if (dr["EndRange"] != DBNull.Value)
                         {
-                            currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
+                            car.currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
                         }
                     }
                     dr.Close();
 
-                    cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_range_km, battery_level, lat, lng FROM pos order by id desc limit 1", con);
+                    cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_range_km, battery_level, lat, lng FROM pos where CarID=@CarID order by id desc limit 1", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
                         if (dr["ideal_battery_range_km"] != DBNull.Value)
                         {
-                            currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
+                            car.currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
                         }
 
                         if (dr["battery_range_km"] != DBNull.Value)
                         {
-                            currentJSON.current_battery_range_km = Convert.ToDouble(dr["battery_range_km"]);
+                            car.currentJSON.current_battery_range_km = Convert.ToDouble(dr["battery_range_km"]);
                         }
 
                         if (dr["battery_level"] != DBNull.Value)
                         {
-                            currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
+                            car.currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
                         }
 
                         if (dr["lat"] != DBNull.Value)
                         {
-                            currentJSON.latitude = Convert.ToDouble(dr["lat"]);
+                            car.currentJSON.latitude = Convert.ToDouble(dr["lat"]);
                         }
 
                         if (dr["lng"] != DBNull.Value)
                         {
-                            currentJSON.longitude = Convert.ToDouble(dr["lng"]);
+                            car.currentJSON.longitude = Convert.ToDouble(dr["lng"]);
                         }
                     }
                     dr.Close();
 
-                    currentJSON.CreateCurrentJSON();
-
+                    car.currentJSON.CreateCurrentJSON();
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
-        public static void StartChargingState(WebHelper wh)
+        public void StartChargingState(WebHelper wh)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert chargingstate (StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
+                MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
+                cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
@@ -536,11 +607,11 @@ namespace TeslaLogger
                 cmd.ExecuteNonQuery();
             }
 
-            currentJSON.current_charging = true;
-            currentJSON.CreateCurrentJSON();
+            wh.car.currentJSON.current_charging = true;
+            wh.car.currentJSON.CreateCurrentJSON();
         }
 
-        public static void CloseDriveState(DateTime EndDate)
+        public void CloseDriveState(DateTime EndDate)
         {
             int StartPos = 0;
             int MaxPosId = GetMaxPosid();
@@ -548,7 +619,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null and CarID="+car.CarInDB, con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -560,9 +631,10 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null and CarID=@CarID", con);
                 cmd.Parameters.AddWithValue("@EndDate", EndDate);
                 cmd.Parameters.AddWithValue("@Pos", MaxPosId);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
 
@@ -571,9 +643,9 @@ namespace TeslaLogger
                 UpdateDriveStatistics(StartPos, MaxPosId);
             }
 
-            currentJSON.current_driving = false;
-            currentJSON.current_speed = 0;
-            currentJSON.current_power = 0;
+            car.currentJSON.current_driving = false;
+            car.currentJSON.current_speed = 0;
+            car.currentJSON.current_power = 0;
 
             Task.Factory.StartNew(() =>
               {
@@ -789,7 +861,7 @@ namespace TeslaLogger
                     }
                 }
 
-                UpdateTripElevation(startid, GetMaxPosid()); // get elevation for all points
+                // TODO UpdateTripElevation(startid, GetMaxPosid(this)); // get elevation for all points
             }
             catch (Exception ex)
             {
@@ -797,7 +869,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void UpdateAddress(int posid)
+        public static void UpdateAddress(Car c, int posid)
         {
             try
             {
@@ -813,7 +885,7 @@ namespace TeslaLogger
                         double lng = Convert.ToDouble(dr[1]);
                         dr.Close();
 
-                        WebHelper.ReverseGecocodingAsync(lat, lng).ContinueWith(task =>
+                        WebHelper.ReverseGecocodingAsync(c, lat, lng).ContinueWith(task =>
                         {
                             try
                             {
@@ -842,21 +914,22 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDriveStatistics(int startPos, int endPos, bool logging = false)
+        private void UpdateDriveStatistics(int startPos, int endPos, bool logging = false)
         {
             try
             {
                 if (logging)
                 {
-                    Logfile.Log("UpdateDriveStatistics");
+                    car.Log("UpdateDriveStatistics");
                 }
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos", con);
+                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos and CarID=@CarID", con);
                     cmd.Parameters.AddWithValue("@startpos", startPos);
                     cmd.Parameters.AddWithValue("@endpos", endPos);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
@@ -894,8 +967,9 @@ namespace TeslaLogger
                             DateTime dt1 = (DateTime)dr["Datum"];
                             dr.Close();
 
-                            cmd = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null order by id asc limit 1", con);
+                            cmd = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id asc limit 1", con);
                             cmd.Parameters.AddWithValue("@startPos", startPos);
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                             dr = cmd.ExecuteReader();
 
                             if (dr.Read())
@@ -916,7 +990,7 @@ namespace TeslaLogger
                                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
                                     cmd.ExecuteNonQuery();
 
-                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                    car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                 }
                                 else
                                 {
@@ -943,8 +1017,9 @@ namespace TeslaLogger
                             DateTime dt1 = (DateTime)dr["Datum"];
                             dr.Close();
 
-                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null order by id desc limit 1", con);
+                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id desc limit 1", con);
                             cmd.Parameters.AddWithValue("@endpos", endPos);
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                             dr = cmd.ExecuteReader();
 
                             if (dr.Read())
@@ -965,7 +1040,7 @@ namespace TeslaLogger
                                     cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
                                     cmd.ExecuteNonQuery();
 
-                                    Logfile.Log($"Trip from {dt1} ideal_battery_range_km updated!");
+                                    car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                 }
                                 else
                                 {
@@ -978,7 +1053,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
@@ -1005,7 +1080,7 @@ namespace TeslaLogger
                             int StartPos = Convert.ToInt32(dr[0]);
                             int EndPos = Convert.ToInt32(dr[1]);
 
-                            UpdateDriveStatistics(StartPos, EndPos, false);
+                            // TODO UpdateDriveStatistics(StartPos, EndPos, false);
                         }
                         catch (Exception ex)
                         {
@@ -1029,7 +1104,7 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos from drivestate", con);
+                MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate", con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -1037,8 +1112,13 @@ namespace TeslaLogger
                     {
                         int StartPos = Convert.ToInt32(dr[0]);
                         int EndPos = Convert.ToInt32(dr[1]);
+                        int CarId = Convert.ToInt32(dr[2]);
 
-                        UpdateDriveStatistics(StartPos, EndPos, false);
+                        Car c = Car.GetCarByID(CarId);
+                        if (c != null)
+                        {
+                            c.dbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1050,41 +1130,43 @@ namespace TeslaLogger
             Logfile.Log("UpdateAllDrivestateData end");
         }
 
-        public static void StartDriveState()
+        public void StartDriveState()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos) values (@StartDate, @Pos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con);
                 cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.ExecuteNonQuery();
             }
 
-            currentJSON.current_driving = true;
-            currentJSON.current_charge_energy_added = 0;
-            currentJSON.current_trip_start = DateTime.Now;
-            currentJSON.current_trip_end = DateTime.MinValue;
-            currentJSON.current_trip_km_start = 0;
-            currentJSON.current_trip_km_end = 0;
-            currentJSON.current_trip_max_speed = 0;
-            currentJSON.current_trip_max_power = 0;
-            currentJSON.current_trip_start_range = 0;
-            currentJSON.current_trip_end_range = 0;
+            car.currentJSON.current_driving = true;
+            car.currentJSON.current_charge_energy_added = 0;
+            car.currentJSON.current_trip_start = DateTime.Now;
+            car.currentJSON.current_trip_end = DateTime.MinValue;
+            car.currentJSON.current_trip_km_start = 0;
+            car.currentJSON.current_trip_km_end = 0;
+            car.currentJSON.current_trip_max_speed = 0;
+            car.currentJSON.current_trip_max_power = 0;
+            car.currentJSON.current_trip_start_range = 0;
+            car.currentJSON.current_trip_end_range = 0;
 
-            currentJSON.CreateCurrentJSON();
+            car.currentJSON.CreateCurrentJSON();
         }
 
 
-        public static void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
+        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
-            double? inside_temp = currentJSON.current_inside_temperature;
+            double? inside_temp = car.currentJSON.current_inside_temperature;
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert pos (Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString());
@@ -1147,55 +1229,55 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
                 }
 
-                cmd.Parameters.AddWithValue("@battery_heater", currentJSON.current_battery_heater ? 1 : 0);
-                cmd.Parameters.AddWithValue("@is_preconditioning", currentJSON.current_is_preconditioning ? 1 : 0);
-                cmd.Parameters.AddWithValue("@sentry_mode", currentJSON.current_is_sentry_mode ? 1 : 0);
+                cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
+                cmd.Parameters.AddWithValue("@is_preconditioning", car.currentJSON.current_is_preconditioning ? 1 : 0);
+                cmd.Parameters.AddWithValue("@sentry_mode", car.currentJSON.current_is_sentry_mode ? 1 : 0);
 
                 cmd.ExecuteNonQuery();
 
                 try
                 {
-                    currentJSON.current_speed = (int)(speed * 1.60934M);
-                    currentJSON.current_power = (int)(power * 1.35962M);
+                    car.currentJSON.current_speed = (int)(speed * 1.60934M);
+                    car.currentJSON.current_power = (int)(power * 1.35962M);
 
                     if (odometer > 0)
                     {
-                        currentJSON.current_odometer = odometer;
+                        car.currentJSON.current_odometer = odometer;
                     }
 
                     if (ideal_battery_range_km >= 0)
                     {
-                        currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+                        car.currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
                     }
 
                     if (battery_range_km >= 0)
                     {
-                        currentJSON.current_battery_range_km = battery_range_km;
+                        car.currentJSON.current_battery_range_km = battery_range_km;
                     }
 
-                    if (currentJSON.current_trip_km_start == 0)
+                    if (car.currentJSON.current_trip_km_start == 0)
                     {
-                        currentJSON.current_trip_km_start = odometer;
-                        currentJSON.current_trip_start_range = currentJSON.current_ideal_battery_range_km;
+                        car.currentJSON.current_trip_km_start = odometer;
+                        car.currentJSON.current_trip_start_range = car.currentJSON.current_ideal_battery_range_km;
                     }
 
-                    currentJSON.current_trip_max_speed = Math.Max(currentJSON.current_trip_max_speed, currentJSON.current_speed);
-                    currentJSON.current_trip_max_power = Math.Max(currentJSON.current_trip_max_power, currentJSON.current_power);
+                    car.currentJSON.current_trip_max_speed = Math.Max(car.currentJSON.current_trip_max_speed, car.currentJSON.current_speed);
+                    car.currentJSON.current_trip_max_power = Math.Max(car.currentJSON.current_trip_max_power, car.currentJSON.current_power);
 
                 }
                 catch (Exception ex)
                 {
-                    Logfile.Log(ex.ToString());
+                    car.Log(ex.ToString());
                 }
             }
 
-            currentJSON.CreateCurrentJSON();
+            car.currentJSON.CreateCurrentJSON();
         }
 
-        private static DateTime lastChargingInsert = DateTime.Today;
+        private DateTime lastChargingInsert = DateTime.Today;
 
 
-        internal static void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
+        internal void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
         {
             Tools.SetThread_enUS();
 
@@ -1219,7 +1301,8 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert charging (Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
+                    MySqlCommand cmd = new MySqlCommand("insert charging (CarID, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@CarID, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@battery_level", battery_level);
                     cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
@@ -1229,7 +1312,7 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
                     cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                     cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
-                    cmd.Parameters.AddWithValue("@battery_heater", currentJSON.current_battery_heater ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
 
                     if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out int i))
                     {
@@ -1266,29 +1349,29 @@ namespace TeslaLogger
             {
                 if (Convert.ToInt32(battery_level) >= 0 )
                 {
-                    currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
                 }
 
-                currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
-                currentJSON.current_charger_power = Convert.ToInt32(charger_power);
+                car.currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
+                car.currentJSON.current_charger_power = Convert.ToInt32(charger_power);
                 if (kmIdeal_Battery_Range >= 0)
                 {
-                    currentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
+                    car.currentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
                 }
 
                 if (kmBattery_Range >= 0)
                 {
-                    currentJSON.current_battery_range_km = kmBattery_Range;
+                    car.currentJSON.current_battery_range_km = kmBattery_Range;
                 }
 
-                currentJSON.current_charger_voltage = int.Parse(charger_voltage);
-                currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
-                currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
-                currentJSON.CreateCurrentJSON();
+                car.currentJSON.current_charger_voltage = int.Parse(charger_voltage);
+                car.currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
+                car.currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
+                car.currentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
@@ -1317,19 +1400,19 @@ namespace TeslaLogger
             return 0;
         }
 
-        public static int GetMaxPosid(bool withReverseGeocoding = true)
+        public int GetMaxPosid(bool withReverseGeocoding = true)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
+                MySqlCommand cmd = new MySqlCommand("Select max(id) from pos where CarID=" + car.CarInDB, con);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
                 {
                     int pos = Convert.ToInt32(dr[0]);
                     if (withReverseGeocoding)
                     {
-                        UpdateAddress(pos);
+                        UpdateAddress(car, pos);
                     }
 
                     return pos;
@@ -1339,12 +1422,13 @@ namespace TeslaLogger
             return 0;
         }
 
-        private static int GetMaxChargeid()
+        private int GetMaxChargeid()
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("Select max(id) from charging", con);
+                MySqlCommand cmd = new MySqlCommand("Select max(id) from charging where CarID=@CarID", con);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value)
                 {
@@ -1355,16 +1439,17 @@ namespace TeslaLogger
             return 0;
         }
 
-        internal static void SetCarVersion(string car_version)
+        internal void SetCarVersion(string car_version)
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version) values (@StartDate, @version)", con);
+                    MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, CarID) values (@StartDate, @version, @CarID)", con);
                     cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@version", car_version);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -1374,14 +1459,14 @@ namespace TeslaLogger
             }
         }
 
-        internal static string GetLastCarVersion()
+        internal string GetLastCarVersion()
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select version from car_version order by id desc limit 1", con);
+                    MySqlCommand cmd = new MySqlCommand($"select version from car_version where CarId={car.CarInDB} order by id desc limit 1", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -1392,7 +1477,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, "GetLastCarVersion");
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
 
             return "";
@@ -1432,6 +1517,21 @@ namespace TeslaLogger
             return false;
         }
 
+        public static string GetColumnType(string table, string column)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand($"SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{table}' AND COLUMN_NAME = '{column}'", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return dr[0].ToString();
+                }
+            }
+
+            return string.Empty;
+        }
 
         public static bool ColumnExists(string table, string column)
         {
@@ -1473,7 +1573,7 @@ namespace TeslaLogger
             }
         }
 
-        public static void CheckForInterruptedCharging(bool logging)
+        public void CheckForInterruptedCharging(bool logging)
         {
             try
             {
@@ -1490,11 +1590,12 @@ namespace TeslaLogger
                          pos ON chargingstate.pos = pos.id
                          LEFT OUTER JOIN
                          charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
+                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.CarId = @CarID
                     and charging.charge_energy_added > 1
                     order by StartDate desc", con);
 
                     double old_odometer = 0;
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                     MySqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -1519,12 +1620,9 @@ namespace TeslaLogger
             }
         }
 
-        private static void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging, double lastCharging_start_charge_energy_added)
+        private void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging, double lastCharging_start_charge_energy_added)
         { 
-            if (logging)
-            {
-                Logfile.Log($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
-            }
+            Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -1539,18 +1637,23 @@ namespace TeslaLogger
                          pos ON chargingstate.pos = pos.id
                          LEFT OUTER JOIN
                          charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
+                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.CarId = @CarID
                     and odometer = @odometer and chargingstate.id < @chargingstate_id
                     order by StartDate desc", con);
 
                 cmd.Parameters.AddWithValue("@odometer", odometer);
                 cmd.Parameters.AddWithValue("@chargingstate_id", chargingstate_id);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                 int newId = 0;
                 DateTime newStartdate = DateTime.MinValue;
                 int newStartChargingID = 0;
 
                 MySqlDataReader dr = cmd.ExecuteReader();
+                if (!dr.HasRows)
+                {
+                    Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer} cannot be combined (no rows returned)");
+                }
                 while (dr.Read())
                 {
                     newId = (int)dr["chargingstate_id"];
@@ -1565,15 +1668,19 @@ namespace TeslaLogger
                         DeleteChargingstate(newId);
                         UpdateChargingstate(chargingstate_id, newStartdate, newStartChargingID, charge_energy_added, lastCharging_start_charge_energy_added);
                     }
+                    else
+                    {
+                        Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer} cannot be combined (charge_energy_added comparison)");
+                    }
                 }
             }
         }
 
-        private static void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID, double charge_energy_added, double lastCharging_start_charge_energy_added)
+        private void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID, double charge_energy_added, double lastCharging_start_charge_energy_added)
         {
             try
             {
-                Logfile.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID} / charge_energy_added: {charge_energy_added} / lastCharging_start_charge_energy_added: {lastCharging_start_charge_energy_added}");
+                car.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID} / charge_energy_added: {charge_energy_added} / lastCharging_start_charge_energy_added: {lastCharging_start_charge_energy_added}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1589,15 +1696,15 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
-        private static void DeleteChargingstate(int chargingstate_id)
+        private void DeleteChargingstate(int chargingstate_id)
         {
             try
             {
-                Logfile.Log("Delete Chargingstate " + chargingstate_id.ToString());
+                car.Log("Delete Chargingstate " + chargingstate_id.ToString());
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1611,13 +1718,13 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 
-        internal static int GetScanMyTeslaSignalsLastWeek()
+        internal int GetScanMyTeslaSignalsLastWeek()
         {
-            string cacheKey = "GetScanMyTeslaSignalsLastWeek";
+            string cacheKey = "GetScanMyTeslaSignalsLastWeek_"+car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -1629,7 +1736,9 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY", con);
+                    MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
                     MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
@@ -1643,14 +1752,14 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
             return 0;
         }
 
-        internal static int GetScanMyTeslaPacketsLastWeek()
+        internal int GetScanMyTeslaPacketsLastWeek()
         {
-            string cacheKey = "GetScanMyTeslaPacketsLastWeek";
+            string cacheKey = "GetScanMyTeslaPacketsLastWeek_"+car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -1662,7 +1771,8 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM teslalogger.can where datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con);
+                    MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
@@ -1676,14 +1786,14 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
             return 0;
         }
         
-        public static int GetAvgMaxRage()
+        public int GetAvgMaxRage()
         {
-            string cacheKey = "GetAvgMaxRage";
+            string cacheKey = "GetAvgMaxRage_"+car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
             if (cacheValue != null)
             {
@@ -1700,8 +1810,9 @@ namespace TeslaLogger
                         INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID
                         INNER JOIN pos ON chargingstate.pos = pos.id
                         LEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                        WHERE chargingstate.StartDate > SUBDATE(Now(), INTERVAL 60 DAY) AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1
+                        WHERE chargingstate.CarID=@CarID and chargingstate.StartDate > SUBDATE(Now(), INTERVAL 60 DAY) AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1
                     ", con);
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                     MySqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
@@ -1721,19 +1832,19 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.ExceptionWriter(ex, "GetAvgMaxRage");
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
             return 0;
         }
 
-        public static string UpdateCountryCode()
+        public string UpdateCountryCode()
         {
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("select lat, lng from pos where id = (select max(id) from pos)", con);
+                    MySqlCommand cmd = new MySqlCommand($"select lat, lng from pos where id = (select max(id) from pos where CarID={car.CarInDB})", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -1741,17 +1852,73 @@ namespace TeslaLogger
                         double lng = Convert.ToDouble(dr[1]);
                         dr.Close();
 
-                        WebHelper.ReverseGecocodingAsync(lat, lng, true, false).Wait();
-                        return currentJSON.current_country_code;
+                        WebHelper.ReverseGecocodingAsync(car, lat, lng, true, false).Wait();
+                        return car.currentJSON.current_country_code;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+
+            return "";
+        }
+
+        public static DataTable GetCars()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", DBConnectionstring);
+                da.Fill(dt);
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
             }
 
-            return "";
+            return dt;
         }
+
+        public static object DBNullIfEmptyOrZero(string val)
+        {
+            if (val == null || val == "" || val == "0" || val == "0.00")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
+        }
+
+        public static object DBNullIfEmpty(string val)
+        {
+            if (val == null || val == "")
+            {
+                return DBNull.Value;
+            }
+
+            return val;
+        }
+
+        public static bool IsZero(string val)
+        {
+            if (val == null || val == "")
+            {
+                return false;
+            }
+
+            if (double.TryParse(val, out double v))
+            {
+                if (v == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }

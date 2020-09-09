@@ -2,6 +2,10 @@
 <?php
 require("language.php");
 require("tools.php");
+session_start();
+if (isset($_REQUEST["carid"]))
+	$_SESSION["carid"] = $_REQUEST["carid"];
+
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>

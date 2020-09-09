@@ -25,10 +25,8 @@ require("tools.php");
     var errortext;
 <?php
 
-    $url = "http://localhost:5000/getchargingstate?id=". $_REQUEST["id"];
-    if (isDocker())
-        $url = "http://teslalogger:5000/getchargingstate?id=". $_REQUEST["id"];
-
+    $url = GetTeslaloggerURL("getchargingstate?id=". $_REQUEST["id"]);
+    
     $output = @file_get_contents($url);
     if ($output === false)
     {
