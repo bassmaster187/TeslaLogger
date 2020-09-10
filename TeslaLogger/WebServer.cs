@@ -600,7 +600,8 @@ namespace TeslaLogger
                             { "lng", addr.lng },
                             { "radius", addr.radius },
                             { "IsHome", addr.IsHome },
-                            { "IsWork", addr.IsWork }
+                            { "IsWork", addr.IsWork },
+                            { "Source", addr.geofenceSource.ToString() },
                         };
                         Dictionary<string, object> specialflags = new Dictionary<string, object>();
                         foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
