@@ -15,7 +15,17 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "columns": [],
@@ -164,7 +174,7 @@
       {
         "allValue": null,
         "current": {
-          "text": data[0][0],
+          "text": "",
           "value": "1"
         },
         "datasource": "teslalogger",

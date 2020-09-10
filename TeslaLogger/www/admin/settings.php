@@ -72,6 +72,7 @@ require("tools.php");
 			$Length = $j->{"Length"};
 			$Language = $j->{"Language"};
 			$URL_Admin = $j->{"URL_Admin"};
+			$URL_Grafana = $j->{"URL_Grafana"};
 			$ZoomLevel = $j->{"ZoomLevel"};
 			
 			$HTTPPort = 5000;
@@ -126,6 +127,9 @@ require("tools.php");
 				
 			if (isset($URL_Admin))
 				echo ("$('#URL_Admin').val('$URL_Admin');\r\n");
+
+			if (isset($URL_Grafana))
+				echo ("$('#URL_Grafana').val('$URL_Grafana');\r\n");
 			
 			if (isset($HTTPPort))
 				echo ("$('#HTTPPort').val('$HTTPPort');\r\n");
@@ -161,6 +165,7 @@ require("tools.php");
 		Length: $("input:radio[name ='Length']:checked").val(),
 		Language: $("input:radio[name ='Language']:checked").val(),
 		URL_Admin: $("#URL_Admin").val(),
+		URL_Grafana: $("#URL_Grafana").val(),
 		HTTPPort: $("#HTTPPort").val(),
 		ZoomLevel: $("#ZoomLevel").val(),
 		ScanMyTesla: $("#checkboxScanMyTesla").is(':checked'),
@@ -199,6 +204,7 @@ echo(menu("Settings"));
 	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
+	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
 	<tr><td valign="top"><b><?php t("TeslaLogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
 	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
 	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>

@@ -200,5 +200,15 @@ namespace UnitTestsTeslalogger
             Assert.IsFalse(UpdateTeslalogger.UpdateNeeded("1.0.0.1", "1.0.0.0", Tools.UpdateType.none));
         }
 
+        [TestMethod]
+        public void ParseDashboard()
+        {
+            string dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauch.json");
+            string title, uid, link;
+            UpdateTeslalogger.GrafanaGetTitleAndLink(dashboard, "http://raspberry:3000/", out title, out uid, out link);
+            Assert.AreEqual("Verbrauch", title);
+            Assert.AreEqual("zm7wN6Zgz", uid);
+            Assert.AreEqual("http://raspberry:3000/d/zm7wN6Zgz/Verbrauch", link);
+        }
     }
 }
