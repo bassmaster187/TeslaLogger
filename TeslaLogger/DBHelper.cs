@@ -40,6 +40,7 @@ namespace TeslaLogger
                     _DBConnectionstring = DBConnectionstring;
                 }
             }
+            _DBConnectionstring = DBConnectionstring;
             return _DBConnectionstring;
         }
 
