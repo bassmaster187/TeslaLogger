@@ -53,7 +53,17 @@
   "graphTooltip": 0,
   "id": 44,
   "iteration": 1589459916940,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "aliasColors": {},

@@ -18,7 +18,17 @@
   "graphTooltip": 0,
   "id": 30,
   "iteration": 1594681192894,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "columns": [],
@@ -182,7 +192,7 @@
 	  {
         "allValue": null,
         "current": {
-          "text": data[0][0],
+          "text": "",
           "value": "1"
         },
         "datasource": "teslalogger",

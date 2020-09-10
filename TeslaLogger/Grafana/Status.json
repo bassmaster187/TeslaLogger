@@ -15,7 +15,18 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "iteration": 1599717906763,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "cacheTimeout": null,
@@ -956,12 +967,12 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
-   "templating": {
+  "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "text": data[0][0],
+          "text": "",
           "value": "1"
         },
         "datasource": "teslalogger",
@@ -1006,5 +1017,5 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 8
+  "version": 16
 }
