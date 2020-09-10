@@ -18,7 +18,7 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
-        public static string DBConnectionstring = GetDBConnectionstring();
+        public static string DBConnectionstring => GetDBConnectionstring();
 
         private static string _DBConnectionstring = string.Empty;
         private static string GetDBConnectionstring()
@@ -30,15 +30,29 @@ namespace TeslaLogger
             string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
 ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
 : ApplicationSettings.Default.DBConnectionstring;
+            Tools.DebugLog($"DBConnectionstring {DBConnectionstring}");
             if (DBConnectionstring.ToLower().Contains("charset="))
             {
-                Match m = Regex.Match(DBConnectionstring.ToLower(), "charset=(.+)[;<]");
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+?);");
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
+                    Tools.DebugLog("regex match: <" + m.Groups[1].Captures[0].ToString() + ">");
                     Tools.DebugLog($"old DBConnectionstring {DBConnectionstring}");
-                    DBConnectionstring = DBConnectionstring.Replace("=" + m.Groups[1].Captures[0].ToString(), "=utf8mb4");
+                    DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
                     Tools.DebugLog($"new DBConnectionstring {DBConnectionstring}");
                     _DBConnectionstring = DBConnectionstring;
+                }
+                else
+                {
+                    m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+)$");
+                    if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                    {
+                        Tools.DebugLog("regex match: <" + m.Groups[1].Captures[0].ToString() + ">");
+                        Tools.DebugLog($"old DBConnectionstring {DBConnectionstring}");
+                        DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
+                        Tools.DebugLog($"new DBConnectionstring {DBConnectionstring}");
+                        _DBConnectionstring = DBConnectionstring;
+                    }
                 }
             }
             _DBConnectionstring = DBConnectionstring;
