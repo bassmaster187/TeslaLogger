@@ -18,7 +18,7 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
-        public static string DBConnectionstring => GetDBConnectionstring();
+        public static string DBConnectionstring = GetDBConnectionstring();
 
         private static string _DBConnectionstring = string.Empty;
         private static string GetDBConnectionstring()
