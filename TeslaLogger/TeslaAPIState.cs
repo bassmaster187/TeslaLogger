@@ -58,6 +58,10 @@ namespace TeslaLogger
             {
                 switch (name)
                 {
+                    case "car_version":
+                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        _ = car.GetWebHelper().GetOdometerAsync();
+                        break;
                     case "battery_level":
                         if (car.IsParked())
                         {
@@ -141,6 +145,28 @@ namespace TeslaLogger
 
         public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
         {
+            if (string.IsNullOrEmpty(_JSON))
+            {
+               
+                return false;
+            }
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                if (jsonResult == null
+                    || jsonResult.GetType() != typeof(Dictionary<string, object>)
+                    || !((Dictionary<string, object>)jsonResult).ContainsKey("response")
+                    || ((Dictionary<string, object>)jsonResult)["response"] == null
+                    || string.IsNullOrEmpty(((Dictionary<string, object>)jsonResult)["response"].ToString()))
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+                return false;
+            }
             switch (_source)
             {
                 case "charge_state":
@@ -167,8 +193,6 @@ namespace TeslaLogger
             try
             {
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
-                {
                     object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                     object[] r2 = (object[])r1;
                     object r3 = r2[CarInAccount];
@@ -244,7 +268,6 @@ namespace TeslaLogger
                         }
                     }
                     return true;
-                }
             }
             catch (Exception ex)
             {
@@ -257,132 +280,128 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>)) {
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-                    /*
-                     * {"response":
-                     *     {
-                     *      "battery_heater_on":false,
-                     *      "battery_level":51,
-                     *      "battery_range":148.56,
-                     *      "charge_current_request":16,
-                     *      "charge_current_request_max":16,
-                     *      "charge_enable_request":true,
-                     *      "charge_energy_added":0.0,
-                     *      "charge_limit_soc":85,
-                     *      "charge_limit_soc_max":100,
-                     *      "charge_limit_soc_min":50,
-                     *      "charge_limit_soc_std":90,
-                     *      "charge_miles_added_ideal":0.0,
-                     *      "charge_miles_added_rated":0.0,
-                     *      "charge_port_cold_weather_mode":null,
-                     *      "charge_port_door_open":false,
-                     *      "charge_port_latch":"Blocking",
-                     *      "charge_rate":0.0,
-                     *      "charge_to_max_range":false,
-                     *      "charger_actual_current":0,
-                     *      "charger_phases":null,
-                     *      "charger_pilot_current":16,
-                     *      "charger_power":0,
-                     *      "charger_voltage":0,
-                     *      "charging_state":"Disconnected",
-                     *      "conn_charge_cable":"<invalid>",
-                     *      "est_battery_range":142.78,
-                     *      "fast_charger_brand":"<invalid>",
-                     *      "fast_charger_present":false,
-                     *      "fast_charger_type":"<invalid>",
-                     *      "ideal_battery_range":118.85,
-                     *      "managed_charging_active":false,
-                     *      "managed_charging_start_time":null,
-                     *      "managed_charging_user_canceled":false,
-                     *      "max_range_charge_counter":1,
-                     *      "minutes_to_full_charge":0,
-                     *      "not_enough_power_to_heat":false,
-                     *      "scheduled_charging_pending":false,
-                     *      "scheduled_charging_start_time":null,
-                     *      "time_to_full_charge":0.0,
-                     *      "timestamp":1598862369327,
-                     *      "trip_charging":false,
-                     *      "usable_battery_level":51,
-                     *      "user_charge_enable_request":null
-                     *     }
-                     * }
-                     */
-                    if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                /*
+                 * {"response":
+                 *     {
+                 *      "battery_heater_on":false,
+                 *      "battery_level":51,
+                 *      "battery_range":148.56,
+                 *      "charge_current_request":16,
+                 *      "charge_current_request_max":16,
+                 *      "charge_enable_request":true,
+                 *      "charge_energy_added":0.0,
+                 *      "charge_limit_soc":85,
+                 *      "charge_limit_soc_max":100,
+                 *      "charge_limit_soc_min":50,
+                 *      "charge_limit_soc_std":90,
+                 *      "charge_miles_added_ideal":0.0,
+                 *      "charge_miles_added_rated":0.0,
+                 *      "charge_port_cold_weather_mode":null,
+                 *      "charge_port_door_open":false,
+                 *      "charge_port_latch":"Blocking",
+                 *      "charge_rate":0.0,
+                 *      "charge_to_max_range":false,
+                 *      "charger_actual_current":0,
+                 *      "charger_phases":null,
+                 *      "charger_pilot_current":16,
+                 *      "charger_power":0,
+                 *      "charger_voltage":0,
+                 *      "charging_state":"Disconnected",
+                 *      "conn_charge_cable":"<invalid>",
+                 *      "est_battery_range":142.78,
+                 *      "fast_charger_brand":"<invalid>",
+                 *      "fast_charger_present":false,
+                 *      "fast_charger_type":"<invalid>",
+                 *      "ideal_battery_range":118.85,
+                 *      "managed_charging_active":false,
+                 *      "managed_charging_start_time":null,
+                 *      "managed_charging_user_canceled":false,
+                 *      "max_range_charge_counter":1,
+                 *      "minutes_to_full_charge":0,
+                 *      "not_enough_power_to_heat":false,
+                 *      "scheduled_charging_pending":false,
+                 *      "scheduled_charging_start_time":null,
+                 *      "time_to_full_charge":0.0,
+                 *      "timestamp":1598862369327,
+                 *      "trip_charging":false,
+                 *      "usable_battery_level":51,
+                 *      "user_charge_enable_request":null
+                 *     }
+                 * }
+                 */
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
+                    foreach (string key in r2.Keys)
                     {
-                        foreach (string key in r2.Keys)
+                        switch (key)
                         {
-                            switch (key)
-                            {
-                                case "timestamp":
-                                    break;
-                                // bool
-                                case "battery_heater_on":
-                                case "charge_enable_request":
-                                case "charge_port_door_open":
-                                case "charge_to_max_range":
-                                case "fast_charger_present":
-                                case "managed_charging_active":
-                                case "managed_charging_user_canceled":
-                                case "not_enough_power_to_heat":
-                                case "scheduled_charging_pending":
-                                case "trip_charging":
-                                    AddValue(key, "bool", r2[key], timestamp, "charge_state");
-                                    break;
-                                // string
-                                case "charge_port_cold_weather_mode":
-                                case "charge_port_latch":
-                                case "charger_phases":
-                                case "charging_state":
-                                case "conn_charge_cable":
-                                case "fast_charger_brand":
-                                case "fast_charger_type":
-                                case "managed_charging_start_time":
-                                case "scheduled_charging_start_time":
-                                case "user_charge_enable_request":
-                                    AddValue(key, "string", r2[key], timestamp, "charge_state");
-                                    break;
-                                // int
-                                case "battery_level":
-                                case "charge_current_request":
-                                case "charge_current_request_max":
-                                case "charge_limit_soc":
-                                case "charge_limit_soc_max":
-                                case "charge_limit_soc_min":
-                                case "charge_limit_soc_std":
-                                case "charger_actual_current":
-                                case "charger_pilot_current":
-                                case "charger_power":
-                                case "charger_voltage":
-                                case "max_range_charge_counter":
-                                case "minutes_to_full_charge":
-                                case "usable_battery_level":
-                                    AddValue(key, "int", r2[key], timestamp, "charge_state");
-                                    break;
-                                // double
-                                case "battery_range":
-                                case "charge_energy_added":
-                                case "charge_miles_added_ideal":
-                                case "charge_miles_added_rated":
-                                case "charge_rate":
-                                case "est_battery_range":
-                                case "ideal_battery_range":
-                                case "time_to_full_charge":
-                                    AddValue(key, "double", r2[key], timestamp, "charge_state");
-                                    break;
-                                default:
-                                    if (!unknownKeys.Contains(key))
-                                    {
-                                        Logfile.Log($"ParseChargeState: unknown key {key}");
-                                        unknownKeys.Add(key);
-                                    }
-                                    break;
-                            }
+                            case "timestamp":
+                                break;
+                            // bool
+                            case "battery_heater_on":
+                            case "charge_enable_request":
+                            case "charge_port_door_open":
+                            case "charge_to_max_range":
+                            case "fast_charger_present":
+                            case "managed_charging_active":
+                            case "managed_charging_user_canceled":
+                            case "not_enough_power_to_heat":
+                            case "scheduled_charging_pending":
+                            case "trip_charging":
+                                AddValue(key, "bool", r2[key], timestamp, "charge_state");
+                                break;
+                            // string
+                            case "charge_port_cold_weather_mode":
+                            case "charge_port_latch":
+                            case "charger_phases":
+                            case "charging_state":
+                            case "conn_charge_cable":
+                            case "fast_charger_brand":
+                            case "fast_charger_type":
+                            case "managed_charging_start_time":
+                            case "scheduled_charging_start_time":
+                            case "user_charge_enable_request":
+                                AddValue(key, "string", r2[key], timestamp, "charge_state");
+                                break;
+                            // int
+                            case "battery_level":
+                            case "charge_current_request":
+                            case "charge_current_request_max":
+                            case "charge_limit_soc":
+                            case "charge_limit_soc_max":
+                            case "charge_limit_soc_min":
+                            case "charge_limit_soc_std":
+                            case "charger_actual_current":
+                            case "charger_pilot_current":
+                            case "charger_power":
+                            case "charger_voltage":
+                            case "max_range_charge_counter":
+                            case "minutes_to_full_charge":
+                            case "usable_battery_level":
+                                AddValue(key, "int", r2[key], timestamp, "charge_state");
+                                break;
+                            // double
+                            case "battery_range":
+                            case "charge_energy_added":
+                            case "charge_miles_added_ideal":
+                            case "charge_miles_added_rated":
+                            case "charge_rate":
+                            case "est_battery_range":
+                            case "ideal_battery_range":
+                            case "time_to_full_charge":
+                                AddValue(key, "double", r2[key], timestamp, "charge_state");
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseChargeState: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -392,72 +411,75 @@ namespace TeslaLogger
             return false;
         }
 
+        private static Dictionary<string, object> ExtractResponse(string _JSON)
+        {
+            object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+            Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+            return r2;
+        }
+
         private bool ParseDriveState(string _JSON)
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                /*
+                 * {"response":
+                 *     {
+                 *      "gps_as_of":1599039106,
+                 *      "heading":253,
+                 *      "latitude":123.577843,
+                 *      "longitude":123.314109,
+                 *      "native_latitude":123.577843,
+                 *      "native_location_supported":1,
+                 *      "native_longitude":123.314109,
+                 *      "native_type":"wgs",
+                 *      "power":0,
+                 *      "shift_state":null,
+                 *      "speed":null,
+                 *      "timestamp":1599039108406
+                 *     }
+                 * }
+                 */
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-                    /*
-                     * {"response":
-                     *     {
-                     *      "gps_as_of":1599039106,
-                     *      "heading":253,
-                     *      "latitude":123.577843,
-                     *      "longitude":123.314109,
-                     *      "native_latitude":123.577843,
-                     *      "native_location_supported":1,
-                     *      "native_longitude":123.314109,
-                     *      "native_type":"wgs",
-                     *      "power":0,
-                     *      "shift_state":null,
-                     *      "speed":null,
-                     *      "timestamp":1599039108406
-                     *     }
-                     * }
-                     */
-                    if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                    foreach (string key in r2.Keys)
                     {
-                        foreach (string key in r2.Keys)
+                        switch (key)
                         {
-                            switch (key)
-                            {
-                                case "timestamp":
-                                    break;
-                                // string
-                                case "native_type":
-                                case "shift_state":
-                                    AddValue(key, "string", r2[key], timestamp, "drive_state");
-                                    break;
-                                // int
-                                case "gps_as_of":
-                                case "heading":
-                                case "native_location_supported":
-                                case "power":
-                                case "speed":
-                                    AddValue(key, "int", r2[key], timestamp, "drive_state");
-                                    break;
-                                // double
-                                case "latitude":
-                                case "longitude":
-                                case "native_latitude":
-                                case "native_longitude":
-                                    AddValue(key, "double", r2[key], timestamp, "drive_state");
-                                    break;
-                                default:
-                                    if (!unknownKeys.Contains(key))
-                                    {
-                                        Logfile.Log($"ParseDriveState: unknown key {key}");
-                                        unknownKeys.Add(key);
-                                    }
-                                    break;
-                            }
+                            case "timestamp":
+                                break;
+                            // string
+                            case "native_type":
+                            case "shift_state":
+                                AddValue(key, "string", r2[key], timestamp, "drive_state");
+                                break;
+                            // int
+                            case "gps_as_of":
+                            case "heading":
+                            case "native_location_supported":
+                            case "power":
+                            case "speed":
+                                AddValue(key, "int", r2[key], timestamp, "drive_state");
+                                break;
+                            // double
+                            case "latitude":
+                            case "longitude":
+                            case "native_latitude":
+                            case "native_longitude":
+                                AddValue(key, "double", r2[key], timestamp, "drive_state");
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseDriveState: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -471,93 +493,88 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                /*
+                 * {"response":
+                 *     {
+                 *      "can_accept_navigation_requests":true,
+                 *      "can_actuate_trunks":true,
+                 *      "car_special_type":"base",
+                 *      "car_type":"models",
+                 *      "charge_port_type":"EU",
+                 *      "ece_restrictions":true,
+                 *      "eu_vehicle":true,
+                 *      "exterior_color":"Red",
+                 *      "has_air_suspension":false,
+                 *      "has_ludicrous_mode":false,
+                 *      "motorized_charge_port":false,
+                 *      "plg":true,
+                 *      "rear_seat_heaters":1,
+                 *      "rear_seat_type":1,
+                 *      "rhd":false,
+                 *      "roof_color":"None",
+                 *      "seat_type":1,
+                 *      "spoiler_type":"None",
+                 *      "sun_roof_installed":2,
+                 *      "third_row_seats":"None",
+                 *      "timestamp":1598862351936,
+                 *      "trim_badging":"85",
+                 *      "use_range_badging":false,
+                 *      "wheel_type":"Base19"
+                 *     }
+                 * }
+                 */
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-                    /*
-                     * {"response":
-                     *     {
-                     *      "can_accept_navigation_requests":true,
-                     *      "can_actuate_trunks":true,
-                     *      "car_special_type":"base",
-                     *      "car_type":"models",
-                     *      "charge_port_type":"EU",
-                     *      "ece_restrictions":true,
-                     *      "eu_vehicle":true,
-                     *      "exterior_color":"Red",
-                     *      "has_air_suspension":false,
-                     *      "has_ludicrous_mode":false,
-                     *      "motorized_charge_port":false,
-                     *      "plg":true,
-                     *      "rear_seat_heaters":1,
-                     *      "rear_seat_type":1,
-                     *      "rhd":false,
-                     *      "roof_color":"None",
-                     *      "seat_type":1,
-                     *      "spoiler_type":"None",
-                     *      "sun_roof_installed":2,
-                     *      "third_row_seats":"None",
-                     *      "timestamp":1598862351936,
-                     *      "trim_badging":"85",
-                     *      "use_range_badging":false,
-                     *      "wheel_type":"Base19"
-                     *     }
-                     * }
-                     */
-                    if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                    foreach (string key in r2.Keys)
                     {
-                        foreach (string key in r2.Keys)
+                        switch (key)
                         {
-                            switch (key)
-                            {
-                                case "timestamp":
-                                    break;
-                                // bool
-                                case "can_accept_navigation_requests":
-                                case "can_actuate_trunks":
-                                case "ece_restrictions":
-                                case "eu_vehicle":
-                                case "has_air_suspension":
-                                case "has_ludicrous_mode":
-                                case "motorized_charge_port":
-                                case "plg":
-                                case "rhd":
-                                case "use_range_badging":
-                                    AddValue(key, "bool", r2[key], timestamp, "vehicle_config");
-                                    break;
-                                // string
-                                case "car_special_type":
-                                case "car_type":
-                                case "charge_port_type":
-                                case "exterior_color":
-                                case "roof_color":
-                                case "spoiler_type":
-                                case "third_row_seats":
-                                case "trim_badging":
-                                case "wheel_type":
-                                case "perf_config":
-                                    AddValue(key, "string", r2[key], timestamp, "vehicle_config");
-                                    break;
-                                // int
-                                case "rear_seat_heaters":
-                                case "rear_seat_type":
-                                case "seat_type":
-                                case "sun_roof_installed":
-                                    AddValue(key, "int", r2[key], timestamp, "vehicle_config");
-                                    break;
-                                default:
-                                    if (!unknownKeys.Contains(key))
-                                    {
-                                        Logfile.Log($"ParseVehicleConfig: unknown key {key}");
-                                        unknownKeys.Add(key);
-                                    }
-                                    break;
-                            }
+                            case "timestamp":
+                                break;
+                            // bool
+                            case "can_accept_navigation_requests":
+                            case "can_actuate_trunks":
+                            case "ece_restrictions":
+                            case "eu_vehicle":
+                            case "has_air_suspension":
+                            case "has_ludicrous_mode":
+                            case "motorized_charge_port":
+                            case "plg":
+                            case "rhd":
+                            case "use_range_badging":
+                                AddValue(key, "bool", r2[key], timestamp, "vehicle_config");
+                                break;
+                            // string
+                            case "car_special_type":
+                            case "car_type":
+                            case "charge_port_type":
+                            case "exterior_color":
+                            case "roof_color":
+                            case "spoiler_type":
+                            case "third_row_seats":
+                            case "trim_badging":
+                            case "wheel_type":
+                            case "perf_config":
+                                AddValue(key, "string", r2[key], timestamp, "vehicle_config");
+                                break;
+                            // int
+                            case "rear_seat_heaters":
+                            case "rear_seat_type":
+                            case "seat_type":
+                            case "sun_roof_installed":
+                                AddValue(key, "int", r2[key], timestamp, "vehicle_config");
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseVehicleConfig: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -571,136 +588,133 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                /*
+                 * {"response":
+                 *     {
+                 *      "api_version":10,
+                 *      "autopark_state_v2":"ready",
+                 *      "autopark_style":"dead_man",
+                 *      "calendar_supported":true,
+                 *      "car_version":"2020.32.3 b9bd4364fd17",
+                 *      "center_display_state":0,
+                 *      "df":0,
+                 *      "dr":0,
+                 *      "ft":0,
+                 *      "homelink_device_count":0,
+                 *      "homelink_nearby":false,
+                 *      "is_user_present":false,
+                 *      "last_autopark_error":"no_error",
+                 *      "locked":true,
+                 *      "media_state":
+                 *          {
+                 *           "remote_control_enabled":true
+                 *          },
+                 *      "notifications_supported":true,
+                 *      "odometer":47743.589221,
+                 *      "parsed_calendar_supported":true,
+                 *      "pf":0,
+                 *      "pr":0,
+                 *      "remote_start":false,
+                 *      "remote_start_enabled":false,
+                 *      "remote_start_supported":true,
+                 *      "rt":0,
+                 *      "smart_summon_available":false,
+                 *      "software_update":
+                 *         {
+                 *          "download_perc":0,
+                 *          "expected_duration_sec":2700,
+                 *          "install_perc":1,
+                 *          "status":"",
+                 *          "version":""
+                 *         },
+                 *      "speed_limit_mode":
+                 *         {
+                 *          "active":false,
+                 *          "current_limit_mph":85.0,
+                 *          "max_limit_mph":90,
+                 *          "min_limit_mph":50,
+                 *          "pin_code_set":false
+                 *         },
+                 *      "summon_standby_mode_enabled":false,
+                 *      "sun_roof_percent_open":0,
+                 *      "sun_roof_state":"closed",
+                 *      "timestamp":1598862368166,
+                 *      "valet_mode":false,
+                 *      "valet_pin_needed":true,
+                 *      "vehicle_name":"Tessi"
+                 *     }
+                 * }
+                 */
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-                    /*
-                     * {"response":
-                     *     {
-                     *      "api_version":10,
-                     *      "autopark_state_v2":"ready",
-                     *      "autopark_style":"dead_man",
-                     *      "calendar_supported":true,
-                     *      "car_version":"2020.32.3 b9bd4364fd17",
-                     *      "center_display_state":0,
-                     *      "df":0,
-                     *      "dr":0,
-                     *      "ft":0,
-                     *      "homelink_device_count":0,
-                     *      "homelink_nearby":false,
-                     *      "is_user_present":false,
-                     *      "last_autopark_error":"no_error",
-                     *      "locked":true,
-                     *      "media_state":
-                     *          {
-                     *           "remote_control_enabled":true
-                     *          },
-                     *      "notifications_supported":true,
-                     *      "odometer":47743.589221,
-                     *      "parsed_calendar_supported":true,
-                     *      "pf":0,
-                     *      "pr":0,
-                     *      "remote_start":false,
-                     *      "remote_start_enabled":false,
-                     *      "remote_start_supported":true,
-                     *      "rt":0,
-                     *      "smart_summon_available":false,
-                     *      "software_update":
-                     *         {
-                     *          "download_perc":0,
-                     *          "expected_duration_sec":2700,
-                     *          "install_perc":1,
-                     *          "status":"",
-                     *          "version":""
-                     *         },
-                     *      "speed_limit_mode":
-                     *         {
-                     *          "active":false,
-                     *          "current_limit_mph":85.0,
-                     *          "max_limit_mph":90,
-                     *          "min_limit_mph":50,
-                     *          "pin_code_set":false
-                     *         },
-                     *      "summon_standby_mode_enabled":false,
-                     *      "sun_roof_percent_open":0,
-                     *      "sun_roof_state":"closed",
-                     *      "timestamp":1598862368166,
-                     *      "valet_mode":false,
-                     *      "valet_pin_needed":true,
-                     *      "vehicle_name":"Tessi"
-                     *     }
-                     * }
-                     */
-                    if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                    foreach (string key in r2.Keys)
                     {
-                        foreach (string key in r2.Keys)
+                        switch (key)
                         {
-                            switch (key)
-                            {
-                                case "timestamp":
-                                    break;
-                                // bool
-                                case "calendar_supported":
-                                case "homelink_nearby":
-                                case "is_user_present":
-                                case "locked":
-                                case "notifications_supported":
-                                case "parsed_calendar_supported":
-                                case "remote_start":
-                                case "remote_start_enabled":
-                                case "remote_start_supported":
-                                case "sentry_mode":
-                                case "sentry_mode_available":
-                                case "smart_summon_available":
-                                case "summon_standby_mode_enabled":
-                                case "valet_mode":
-                                case "valet_pin_needed":
-                                    AddValue(key, "bool", r2[key], timestamp, "vehicle_state");
-                                    break;
-                                // string
-                                case "autopark_state_v2":
-                                case "autopark_style":
-                                case "car_version":
-                                case "last_autopark_error":
-                                case "sun_roof_state":
-                                case "vehicle_name":
-                                    AddValue(key, "string", r2[key], timestamp, "vehicle_state");
-                                    break;
-                                // int
-                                case "api_version":
-                                case "center_display_state":
-                                case "df":
-                                case "dr":
-                                case "ft":
-                                case "homelink_device_count":
-                                case "pf":
-                                case "pr":
-                                case "rt":
-                                case "sun_roof_percent_open":
-                                    AddValue(key, "int", r2[key], timestamp, "vehicle_state");
-                                    break;
-                                // double
-                                case "odometer":
-                                    AddValue(key, "double", r2[key], timestamp, "vehicle_state");
-                                    break;
-                                // TODO
-                                case "media_state":
-                                case "software_update":
-                                case "speed_limit_mode":
-                                    break;
-                                default:
-                                    if (!unknownKeys.Contains(key))
-                                    {
-                                        Logfile.Log($"ParseVehicleState: unknown key {key}");
-                                        unknownKeys.Add(key);
-                                    }
-                                    break;
-                            }
+                            case "timestamp":
+                                break;
+                            // bool
+                            case "calendar_supported":
+                            case "homelink_nearby":
+                            case "is_user_present":
+                            case "locked":
+                            case "notifications_supported":
+                            case "parsed_calendar_supported":
+                            case "remote_start":
+                            case "remote_start_enabled":
+                            case "remote_start_supported":
+                            case "sentry_mode":
+                            case "sentry_mode_available":
+                            case "smart_summon_available":
+                            case "summon_standby_mode_enabled":
+                            case "valet_mode":
+                            case "valet_pin_needed":
+                                AddValue(key, "bool", r2[key], timestamp, "vehicle_state");
+                                break;
+                            // string
+                            case "autopark_state_v2":
+                            case "autopark_style":
+                            case "car_version":
+                            case "last_autopark_error":
+                            case "sun_roof_state":
+                            case "vehicle_name":
+                                AddValue(key, "string", r2[key], timestamp, "vehicle_state");
+                                break;
+                            // int
+                            case "api_version":
+                            case "center_display_state":
+                            case "df":
+                            case "dr":
+                            case "ft":
+                            case "homelink_device_count":
+                            case "pf":
+                            case "pr":
+                            case "rt":
+                            case "sun_roof_percent_open":
+                                AddValue(key, "int", r2[key], timestamp, "vehicle_state");
+                                break;
+                            // double
+                            case "odometer":
+                                AddValue(key, "double", r2[key], timestamp, "vehicle_state");
+                                break;
+                            case "software_update":
+                                ParseSoftwareUpdate(r2[key], timestamp);
+                                break;
+                            // TODO
+                            case "media_state":
+                            case "speed_limit_mode":
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseVehicleState: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -710,109 +724,139 @@ namespace TeslaLogger
             return false;
         }
 
+        private void ParseSoftwareUpdate(object software_update, long timestamp)
+        {
+            /*
+             * "software_update":{
+             *   "download_perc":100,
+             *   "expected_duration_sec":3000,
+             *   "install_perc":60,
+             *   "status":"installing",
+             *   "version":"2020.36.3.1"
+             *  }
+             */
+            if (software_update != null
+                && software_update.GetType() == typeof(Dictionary<string, object>)
+                && ((Dictionary<string, object>)software_update).Count > 0)
+            {
+                Dictionary<string, object> su = (Dictionary<string, object>)software_update;
+                foreach (string key in su.Keys)
+                {
+                    switch (key)
+                    {
+                        // int
+                        case "download_perc":
+                        case "expected_duration_sec":
+                        case "install_perc":
+                            AddValue(key, "int", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            break;
+                        // string
+                        case "status":
+                        case "version":
+                            AddValue(key, "string", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            break;
+                    }
+                }
+            }
+        }
 
         private bool ParseClimateState(string _JSON)
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                /*
+                 * {"response":
+                 *     {
+                 *      "battery_heater":false,
+                 *      "battery_heater_no_power":false,
+                 *      "climate_keeper_mode":"off",
+                 *      "defrost_mode":0,
+                 *      "driver_temp_setting":21.0,
+                 *      "fan_status":0,
+                 *      "inside_temp":26.5,
+                 *      "is_auto_conditioning_on":false,
+                 *      "is_climate_on":false,
+                 *      "is_front_defroster_on":false,
+                 *      "is_preconditioning":false,
+                 *      "is_rear_defroster_on":false,
+                 *      "left_temp_direction":-267,
+                 *      "max_avail_temp":28.0,
+                 *      "min_avail_temp":15.0,
+                 *      "outside_temp":15.5,
+                 *      "passenger_temp_setting":21.0,
+                 *      "remote_heater_control_enabled":false,
+                 *      "right_temp_direction":-267,
+                 *      "seat_heater_left":0,
+                 *      "seat_heater_rear_center":0,
+                 *      "seat_heater_rear_left":0,
+                 *      "seat_heater_rear_right":0,
+                 *      "seat_heater_right":0,
+                 *      "side_mirror_heaters":false,
+                 *      "steering_wheel_heater":false,
+                 *      "timestamp":1598862369248,
+                 *      "wiper_blade_heater":false
+                 *     }
+                 * }
+                 */
+            if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-                    /*
-                     * {"response":
-                     *     {
-                     *      "battery_heater":false,
-                     *      "battery_heater_no_power":false,
-                     *      "climate_keeper_mode":"off",
-                     *      "defrost_mode":0,
-                     *      "driver_temp_setting":21.0,
-                     *      "fan_status":0,
-                     *      "inside_temp":26.5,
-                     *      "is_auto_conditioning_on":false,
-                     *      "is_climate_on":false,
-                     *      "is_front_defroster_on":false,
-                     *      "is_preconditioning":false,
-                     *      "is_rear_defroster_on":false,
-                     *      "left_temp_direction":-267,
-                     *      "max_avail_temp":28.0,
-                     *      "min_avail_temp":15.0,
-                     *      "outside_temp":15.5,
-                     *      "passenger_temp_setting":21.0,
-                     *      "remote_heater_control_enabled":false,
-                     *      "right_temp_direction":-267,
-                     *      "seat_heater_left":0,
-                     *      "seat_heater_rear_center":0,
-                     *      "seat_heater_rear_left":0,
-                     *      "seat_heater_rear_right":0,
-                     *      "seat_heater_right":0,
-                     *      "side_mirror_heaters":false,
-                     *      "steering_wheel_heater":false,
-                     *      "timestamp":1598862369248,
-                     *      "wiper_blade_heater":false
-                     *     }
-                     * }
-                     */
-                    if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                    foreach (string key in r2.Keys)
                     {
-                        foreach (string key in r2.Keys)
+                        switch (key)
                         {
-                            switch (key)
-                            {
-                                case "timestamp":
-                                    break;
-                                // bool
-                                case "battery_heater":
-                                case "battery_heater_no_power":
-                                case "is_auto_conditioning_on":
-                                case "is_climate_on":
-                                case "is_front_defroster_on":
-                                case "is_preconditioning":
-                                case "is_rear_defroster_on":
-                                case "remote_heater_control_enabled":
-                                case "side_mirror_heaters":
-                                case "steering_wheel_heater":
-                                case "wiper_blade_heater":
-                                case "smart_preconditioning":
-                                    AddValue(key, "bool", r2[key], timestamp, "climate_state");
-                                    break;
-                                // string
-                                case "climate_keeper_mode":
-                                    AddValue(key, "string", r2[key], timestamp, "climate_state");
-                                    break;
-                                // int
-                                case "defrost_mode":
-                                case "fan_status":
-                                case "left_temp_direction":
-                                case "right_temp_direction":
-                                case "seat_heater_left":
-                                case "seat_heater_rear_center":
-                                case "seat_heater_rear_left":
-                                case "seat_heater_rear_right":
-                                case "seat_heater_right":
-                                    AddValue(key, "int", r2[key], timestamp, "climate_state");
-                                    break;
-                                // double
-                                case "driver_temp_setting":
-                                case "inside_temp":
-                                case "max_avail_temp":
-                                case "min_avail_temp":
-                                case "outside_temp":
-                                case "passenger_temp_setting":
-                                    AddValue(key, "double", r2[key], timestamp, "climate_state");
-                                    break;
-                                default:
-                                    if (!unknownKeys.Contains(key))
-                                    {
-                                        Logfile.Log($"ParseClimateState: unknown key {key}");
-                                        unknownKeys.Add(key);
-                                    }
-                                    break;
-                            }
+                            case "timestamp":
+                                break;
+                            // bool
+                            case "battery_heater":
+                            case "battery_heater_no_power":
+                            case "is_auto_conditioning_on":
+                            case "is_climate_on":
+                            case "is_front_defroster_on":
+                            case "is_preconditioning":
+                            case "is_rear_defroster_on":
+                            case "remote_heater_control_enabled":
+                            case "side_mirror_heaters":
+                            case "steering_wheel_heater":
+                            case "wiper_blade_heater":
+                            case "smart_preconditioning":
+                                AddValue(key, "bool", r2[key], timestamp, "climate_state");
+                                break;
+                            // string
+                            case "climate_keeper_mode":
+                                AddValue(key, "string", r2[key], timestamp, "climate_state");
+                                break;
+                            // int
+                            case "defrost_mode":
+                            case "fan_status":
+                            case "left_temp_direction":
+                            case "right_temp_direction":
+                            case "seat_heater_left":
+                            case "seat_heater_rear_center":
+                            case "seat_heater_rear_left":
+                            case "seat_heater_rear_right":
+                            case "seat_heater_right":
+                                AddValue(key, "int", r2[key], timestamp, "climate_state");
+                                break;
+                            // double
+                            case "driver_temp_setting":
+                            case "inside_temp":
+                            case "max_avail_temp":
+                            case "min_avail_temp":
+                            case "outside_temp":
+                            case "passenger_temp_setting":
+                                AddValue(key, "double", r2[key], timestamp, "climate_state");
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseClimateState: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
