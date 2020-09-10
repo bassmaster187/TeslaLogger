@@ -262,6 +262,8 @@ namespace TeslaLogger
                     UpdateDBView();
                 }
 
+                DBHelper.Enable_utf8mb4();
+
                 DBHelper.EnableMothership();
 
                 CheckDBCharset();

@@ -358,6 +358,7 @@ namespace TeslaLogger
                         a.geofenceSource.ToString()
                     )
                 );
+                response.AddHeader("Content-Type", "text/html; charset=utf-8");
                 WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(trs) + "</table></body></html>");
             }
             else
@@ -558,6 +559,7 @@ namespace TeslaLogger
 
         private static void WriteString(HttpListenerResponse response, string responseString)
         {
+            response.ContentEncoding = System.Text.Encoding.UTF8;
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
@@ -600,7 +602,8 @@ namespace TeslaLogger
                             { "lng", addr.lng },
                             { "radius", addr.radius },
                             { "IsHome", addr.IsHome },
-                            { "IsWork", addr.IsWork }
+                            { "IsWork", addr.IsWork },
+                            { "Source", addr.geofenceSource.ToString() },
                         };
                         Dictionary<string, object> specialflags = new Dictionary<string, object>();
                         foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
