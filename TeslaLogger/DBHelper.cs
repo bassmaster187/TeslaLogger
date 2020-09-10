@@ -1622,8 +1622,6 @@ namespace TeslaLogger
 
         private void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging, double lastCharging_start_charge_energy_added)
         { 
-            Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
