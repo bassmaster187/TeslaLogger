@@ -379,7 +379,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -448,7 +451,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -542,7 +548,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -679,7 +688,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -784,7 +796,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
