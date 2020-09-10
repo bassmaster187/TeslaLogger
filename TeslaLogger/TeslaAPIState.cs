@@ -14,7 +14,7 @@ namespace TeslaLogger
             Source
         }
 
-        private readonly Dictionary<string, Dictionary<Key, object>> storage = new Dictionary<string, Dictionary<Key, object>>();
+        private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private HashSet<string> unknownKeys = new HashSet<string>();
         private Car car;
 
@@ -27,14 +27,26 @@ namespace TeslaLogger
         {
             if (!storage.ContainsKey(_name))
             {
-                storage.Add(_name, new Dictionary<Key, object>());
+                storage.Add(_name, new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.Source , "undef" }
+                });
             }
             else
             {
                 HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
             }
             storage[_name][Key.Type] = _type;
-            storage[_name][Key.Value] = _value;
+            if (_type.Equals("string") && (_value == null || string.IsNullOrEmpty(_value.ToString())))
+            {
+                storage[_name][Key.Value] = string.Empty;
+            }
+            else
+            {
+                storage[_name][Key.Value] = _value;
+            }
             storage[_name][Key.Timestamp] = _timestamp;
             storage[_name][Key.Source] = _source;
         }
@@ -47,7 +59,7 @@ namespace TeslaLogger
                 switch (name)
                 {
                     case "battery_level":
-                        if (car.GetCurrentState() == Car.TeslaState.Online && car.GetWebHelper().GetLastShiftState().Equals("P"))
+                        if (car.IsParked())
                         {
                             Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                             // write car data to DB eg to update Grafana Dashboard status
@@ -65,7 +77,12 @@ namespace TeslaLogger
                 _state = storage[_name];
                 return true;
             }
-            _state = new Dictionary<Key, object>();
+            _state = new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.Source , "undef" }
+                };
             return false;
         }
 
@@ -226,7 +243,9 @@ namespace TeslaLogger
                 }
                 return true;
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
