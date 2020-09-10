@@ -1280,6 +1280,15 @@ $"  AND CarID = {CarInDB}", con);
             return false;
         }
 
+        public bool IsInstallingSoftwareUpdate()
+        {
+            if (teslaAPIState.GetString("software_update.status", out string status))
+            {
+                return status.Equals("installing");
+            }
+            return false;
+        }
+
         public bool TLUpdatePossible()
         {
             if (GetCurrentState() == Car.TeslaState.Sleep)
