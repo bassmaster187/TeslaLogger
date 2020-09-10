@@ -40,7 +40,17 @@
   "gnetId": null,
   "graphTooltip": 0,
   "iteration": 1598534144145,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "aliasColors": {},
@@ -454,7 +464,7 @@
       {
         "allValue": null,
         "current": {
-          "text": data[0][0],
+          "text": "",
           "value": "1"
         },
         "datasource": "teslalogger",
