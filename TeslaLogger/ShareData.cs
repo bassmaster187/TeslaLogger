@@ -52,7 +52,7 @@ namespace TeslaLogger
 
         private void UpdateDataTable(string table)
         {
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
@@ -88,7 +88,7 @@ namespace TeslaLogger
 
                 int ms = Environment.TickCount;
 
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.GetDBConnectionstring());
                 da.SelectCommand.CommandTimeout = 600;
                 da.Fill(dt);
                 ms = Environment.TickCount - ms;
@@ -191,7 +191,7 @@ namespace TeslaLogger
             DataTable dt = new DataTable();
             List<object> l = new List<object>();
 
-            MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
+            MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.GetDBConnectionstring());
             da.SelectCommand.Parameters.AddWithValue("@startid", startid);
             da.SelectCommand.Parameters.AddWithValue("@endid", endid);
             da.SelectCommand.CommandTimeout = 300;
@@ -276,7 +276,7 @@ namespace TeslaLogger
 
                 int ms = Environment.TickCount;
 
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.GetDBConnectionstring());
                 da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
                 da.SelectCommand.CommandTimeout = 600;
                 da.Fill(dt);

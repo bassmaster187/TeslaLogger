@@ -309,15 +309,6 @@ namespace TeslaLogger
                     }
                 }
 
-                if (r2["time_to_full_charge"] != null)
-                {
-                    if (car.currentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
-                    {
-                        car.currentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
-                        car.currentJSON.CreateCurrentJSON();
-                    }
-                }
-
                 if (justCheck)
                 {
                     if (charging_state == "Charging")
@@ -1539,7 +1530,7 @@ namespace TeslaLogger
 
         public void UpdateAllPosAddresses()
         {
-            using (SqlConnection con = new SqlConnection(DBHelper.DBConnectionstring))
+            using (SqlConnection con = new SqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Select lat, lng, id from pos where address = ''", con);
@@ -1563,7 +1554,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con2 = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con2.Open();
                     MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address, altitude=@altitude where id = @id", con2);
@@ -1583,7 +1574,7 @@ namespace TeslaLogger
 
         public void UpdateAllEmptyAddresses()
         {
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand(@"SELECT  
@@ -1649,7 +1640,7 @@ FROM
 
             GeocodeCache.Instance.Write();
 
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand(@"SELECT pos.id, lat, lng FROM chargingstate join pos on chargingstate.Pos = pos.id where address IS null OR address = '' or pos.id = ''", con);
@@ -1696,7 +1687,7 @@ FROM
                 int count = 0;
                 Logfile.Log("UpdateAllPOIAddresses start");
 
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("Select lat, lng, id, address from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
@@ -1725,7 +1716,7 @@ FROM
 
                             if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
                             {
-                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                                 {
                                     con2.Open();
                                     MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
@@ -2224,7 +2215,7 @@ FROM
             {
                 Tools.SetThread_enUS();
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 

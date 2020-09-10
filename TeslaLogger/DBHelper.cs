@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -17,9 +18,30 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
-        public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
-                    ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
-                    : ApplicationSettings.Default.DBConnectionstring;
+        private static string _DBConnectionstring = string.Empty;
+
+        public static string GetDBConnectionstring()
+        {
+            if (!string.IsNullOrEmpty(_DBConnectionstring))
+            {
+                return _DBConnectionstring;
+            }
+            string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
+? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
+: ApplicationSettings.Default.DBConnectionstring;
+            if (DBConnectionstring.ToLower().Contains("charset="))
+            {
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "charset=(.+)[;<]");
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    Tools.DebugLog($"old DBConnectionstring {DBConnectionstring}");
+                    DBConnectionstring = DBConnectionstring.Replace("=" + m.Groups[1].Captures[0].ToString(), "=utf8mb4");
+                    Tools.DebugLog($"new DBConnectionstring {DBConnectionstring}");
+                    _DBConnectionstring = DBConnectionstring;
+                }
+            }
+            return _DBConnectionstring;
+        }
 
         public DBHelper(Car car)
         {
@@ -34,7 +56,7 @@ namespace TeslaLogger
 
         public static void UpdateHTTPStatusCodes()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 foreach (HttpStatusCode hsc in Enum.GetValues(typeof(HttpStatusCode)))
@@ -49,7 +71,7 @@ namespace TeslaLogger
 
         public void CloseState(int maxPosid)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null and CarID=@CarID", con);
@@ -85,7 +107,7 @@ namespace TeslaLogger
                 car.currentJSON.CreateCurrentJSON();
             }
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
 
@@ -135,7 +157,7 @@ namespace TeslaLogger
                 AddCommandToDB(command);
                 GetMothershipCommandsFromDB();
             }
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert mothership (ts, commandid, duration, httpcode) values (@ts, @commandid, @duration, @httpcode)", con);
@@ -156,7 +178,7 @@ namespace TeslaLogger
                 string json = System.IO.File.ReadAllText(FileManager.GetSetCostPath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total where id= @id", con);
@@ -192,7 +214,7 @@ namespace TeslaLogger
             try
             {
                 car.Log("UpdateTeslaToken");
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con);
@@ -215,7 +237,7 @@ namespace TeslaLogger
             try
             {
                 car.Log("UpdateTeslaToken");
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con);
@@ -249,7 +271,7 @@ namespace TeslaLogger
             try
             {
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", GetDBConnectionstring());
                 da.SelectCommand.Parameters.AddWithValue("@id", args[1]);
                 da.Fill(dt);
 
@@ -272,7 +294,7 @@ namespace TeslaLogger
 
         private static void AddCommandToDB(string command)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert mothershipcommands (command) values (@command)", con);
@@ -283,7 +305,7 @@ namespace TeslaLogger
 
         private static void GetMothershipCommandsFromDB()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT id, command FROM mothershipcommands", con);
@@ -302,7 +324,7 @@ namespace TeslaLogger
 
         internal string GetFirmwareFromDate(DateTime dateTime)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT version FROM car_version where StartDate < @date and CarID=@CarID order by StartDate desc limit 1", con);
@@ -328,7 +350,7 @@ namespace TeslaLogger
 
         public void CloseChargingState()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null and CarID=@CarID", con);
@@ -354,7 +376,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate where CarID=@CarID order by id desc limit 1", con);
@@ -378,7 +400,7 @@ namespace TeslaLogger
 
         internal static bool IndexExists(string index, string table)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.statistics where table_name = '" + table + "' and INDEX_NAME ='" + index +"'", con);
@@ -394,7 +416,7 @@ namespace TeslaLogger
 
         private void UpdateMaxChargerPower(int id, int startChargingID, int endChargingID)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select max(charger_power) from charging where id >= @startChargingID and id <= @endChargingID and CarID=@CarID", con);
@@ -419,7 +441,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT  count(*) as anz, round(charging_End.charge_energy_added / (charging_End.ideal_battery_range_km - charging.ideal_battery_range_km), 3) AS economy_Wh_km
@@ -457,7 +479,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"SELECT EndKm FROM trip where CarID = {car.CarInDB} order by StartDate desc Limit 1", con);
@@ -506,7 +528,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"SELECT * FROM trip where CarID = {car.CarInDB} order by StartDate desc limit 1", con);
@@ -592,7 +614,7 @@ namespace TeslaLogger
 
         public void StartChargingState(WebHelper wh)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
@@ -616,7 +638,7 @@ namespace TeslaLogger
             int StartPos = 0;
             int MaxPosId = GetMaxPosid();
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null and CarID="+car.CarInDB, con);
@@ -628,7 +650,7 @@ namespace TeslaLogger
                 dr.Close();
             }
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null and CarID=@CarID", con);
@@ -674,7 +696,7 @@ namespace TeslaLogger
                 SRTM.SRTMData srtmData = new SRTM.SRTMData(FileManager.GetSRTMDataPath());
 
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id >= {startPos} and id <= {maxPosId} and altitude is null and lat is not null and lng is not null and speed > 0", DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id >= {startPos} and id <= {maxPosId} and altitude is null and lat is not null and lng is not null and speed > 0", GetDBConnectionstring());
                 da.Fill(dt);
 
                 int x = 0;
@@ -831,7 +853,7 @@ namespace TeslaLogger
                     Logfile.Log($"Positions below -428m updated: {count}");
                 }
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM pos where altitude > 0", con);
@@ -873,7 +895,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("select lat, lng from pos where id = @id", con);
@@ -889,7 +911,7 @@ namespace TeslaLogger
                         {
                             try
                             {
-                                using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                                using (MySqlConnection con2 = new MySqlConnection(GetDBConnectionstring()))
                                 {
                                     con2.Open();
                                     MySqlCommand cmd2 = new MySqlCommand("update pos set address = @adress where id = @id", con2);
@@ -923,7 +945,7 @@ namespace TeslaLogger
                     car.Log("UpdateDriveStatistics");
                 }
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos and CarID=@CarID", con);
@@ -934,7 +956,7 @@ namespace TeslaLogger
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                        using (MySqlConnection con2 = new MySqlConnection(GetDBConnectionstring()))
                         {
                             con2.Open();
                             MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2);
@@ -953,7 +975,7 @@ namespace TeslaLogger
                 }
 
                 // If Startpos doesn't have an "ideal_battery_rage_km", it will be updated from the first valid dataset
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @startpos", con);
@@ -1003,7 +1025,7 @@ namespace TeslaLogger
 
 
                 // If Endpos doesn't have an "ideal_battery_rage_km", it will be updated from the last valid dataset
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @endpos", con);
@@ -1061,7 +1083,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT pos_start.id as StartPos, pos_end.id as EndPos
@@ -1101,7 +1123,7 @@ namespace TeslaLogger
         {
             Logfile.Log("UpdateAllDrivestateData start");
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate", con);
@@ -1132,7 +1154,7 @@ namespace TeslaLogger
 
         public void StartDriveState()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con);
@@ -1161,7 +1183,7 @@ namespace TeslaLogger
         {
             double? inside_temp = car.currentJSON.current_inside_temperature;
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
 
@@ -1298,7 +1320,7 @@ namespace TeslaLogger
             {
                 lastChargingInsert = DateTime.Now;
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("insert charging (CarID, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@CarID, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
@@ -1386,7 +1408,7 @@ namespace TeslaLogger
 
         public static int CountPos()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select count(*) from pos", con);
@@ -1402,7 +1424,7 @@ namespace TeslaLogger
 
         public int GetMaxPosid(bool withReverseGeocoding = true)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from pos where CarID=" + car.CarInDB, con);
@@ -1424,7 +1446,7 @@ namespace TeslaLogger
 
         private int GetMaxChargeid()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select max(id) from charging where CarID=@CarID", con);
@@ -1443,7 +1465,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, CarID) values (@StartDate, @version, @CarID)", con);
@@ -1463,7 +1485,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"select version from car_version where CarId={car.CarInDB} order by id desc limit 1", con);
@@ -1487,7 +1509,7 @@ namespace TeslaLogger
 
         public static string GetVersion()
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT @@version", con);
@@ -1503,7 +1525,7 @@ namespace TeslaLogger
 
         public static bool TableExists(string table)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.tables where table_name = '" + table + "'", con);
@@ -1519,7 +1541,7 @@ namespace TeslaLogger
 
         public static string GetColumnType(string table, string column)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{table}' AND COLUMN_NAME = '{column}'", con);
@@ -1535,7 +1557,7 @@ namespace TeslaLogger
 
         public static bool ColumnExists(string table, string column)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `"+ table +"` LIKE '"+ column +"';", con);
@@ -1553,7 +1575,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(sql, con);
@@ -1577,7 +1599,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
@@ -1624,7 +1646,7 @@ namespace TeslaLogger
         { 
             Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand(@"SELECT        chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
@@ -1682,7 +1704,7 @@ namespace TeslaLogger
             {
                 car.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID} / charge_energy_added: {charge_energy_added} / lastCharging_start_charge_energy_added: {lastCharging_start_charge_energy_added}");
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"update chargingstate set StartDate=@StartDate, StartChargingID=@StartChargingID where id = @id", con);
@@ -1706,7 +1728,7 @@ namespace TeslaLogger
             {
                 car.Log("Delete Chargingstate " + chargingstate_id.ToString());
 
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"delete from chargingstate where id = @id", con);
@@ -1733,7 +1755,7 @@ namespace TeslaLogger
 
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con);
@@ -1768,7 +1790,7 @@ namespace TeslaLogger
 
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con);
@@ -1802,7 +1824,7 @@ namespace TeslaLogger
 
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(@"SELECT AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'TRmax'
@@ -1841,7 +1863,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"select lat, lng from pos where id = (select max(id) from pos where CarID={car.CarInDB})", con);
@@ -1871,7 +1893,7 @@ namespace TeslaLogger
 
             try
             {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", GetDBConnectionstring());
                 da.Fill(dt);
             }
             catch (Exception ex)
@@ -1934,7 +1956,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"SELECT default_character_set_name, default_collation_name FROM information_schema.schemata WHERE schema_name = '{dbname}'", con);
@@ -1963,7 +1985,7 @@ namespace TeslaLogger
             // ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     Logfile.Log($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci");
@@ -1980,7 +2002,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"SELECT TABLE_NAME, TABLE_COLLATION FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{dbname}' AND TABLE_TYPE = 'BASE TABLE'", con);
@@ -2011,7 +2033,7 @@ namespace TeslaLogger
             // ALTER TABLE table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
@@ -2028,7 +2050,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"SELECT COLUMN_NAME, CHARACTER_SET_NAME, COLLATION_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA = '{dbname}' AND TABLE_NAME = '{tablename}' AND DATA_TYPE = 'varchar'", con);
@@ -2057,7 +2079,7 @@ namespace TeslaLogger
             // ALTER TABLE `shiftstate` CHANGE `state` `state` VARCHAR(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(GetDBConnectionstring()))
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL");

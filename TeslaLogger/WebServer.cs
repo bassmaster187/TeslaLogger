@@ -252,7 +252,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("Insert Password");
 
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                     {
                         con.Open();
 
@@ -277,7 +277,7 @@ namespace TeslaLogger
                     Logfile.Log("Update Password ID:" + id);
                     int dbID = Convert.ToInt32(id);
 
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                     {
                         con.Open();
 
@@ -408,6 +408,7 @@ namespace TeslaLogger
                     { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
+                    { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString().Replace(Environment.NewLine, "<br />") },
                 };
                 string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);
@@ -479,7 +480,7 @@ namespace TeslaLogger
 
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con);
@@ -523,7 +524,7 @@ namespace TeslaLogger
             {
                 Logfile.Log("HTTP getchargingstate");                
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.GetDBConnectionstring());
                 da.SelectCommand.Parameters.AddWithValue("@id", id);
                 da.Fill(dt);
 
@@ -544,7 +545,7 @@ namespace TeslaLogger
             try
             {
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid FROM cars order by display_name", DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid FROM cars order by display_name", DBHelper.GetDBConnectionstring());
                 da.Fill(dt);
 
                 responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
@@ -627,7 +628,7 @@ namespace TeslaLogger
             int to = 1;
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);

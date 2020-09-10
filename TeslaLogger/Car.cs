@@ -209,7 +209,7 @@ namespace TeslaLogger
 
             LogToken();
 
-            if (DBHelper.DBConnectionstring.Length == 0)
+            if (DBHelper.GetDBConnectionstring().Length == 0)
             {
                 ExitTeslaLogger("DBHelper.DBConnectionstring.Length == 0");
             }
@@ -1122,7 +1122,7 @@ namespace TeslaLogger
             DateTime chargeEnd = chargeStart;
             string charge_energy_added = "";
 
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"" +
@@ -1171,7 +1171,7 @@ namespace TeslaLogger
                 // reference charging costs for addr found, now get latest charging session at addr
                 Logfile.Log($"CopyChargePrice: reference charging session  at {_addr.name} found, ID {referenceID}");
                 long chargeID = 0;
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand($"" +
@@ -1201,7 +1201,7 @@ $" LIMIT 1", con);
                     // update charge session with id chargeID
                     if (cost_total == 0.0 && cost_per_session == 0.0)
                     {
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                         {
                             con.Open();
                             MySqlCommand cmd = new MySqlCommand($"" +

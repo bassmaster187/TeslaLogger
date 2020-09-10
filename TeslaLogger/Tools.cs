@@ -24,7 +24,6 @@ namespace TeslaLogger
         private static string _length = "km";
         private static string _language = "de";
         private static string _URL_Admin = "";
-        private static string _URL_Grafana = "http://raspberry:3000/";
         private static string _Range = "IR";
         private static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
@@ -365,7 +364,7 @@ namespace TeslaLogger
         }
 
 
-        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana)
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range)
         {
             TimeSpan ts = DateTime.UtcNow - lastGrafanaSettings;
             if (ts.TotalMinutes < 10)
@@ -376,7 +375,6 @@ namespace TeslaLogger
                 language =_language;
                 URL_Admin =_URL_Admin;
                 Range = _Range;
-                URL_Grafana = _URL_Grafana;
                 return;
             }
 
@@ -386,7 +384,6 @@ namespace TeslaLogger
             language = "de";
             URL_Admin = "";
             Range = "IR";
-            URL_Grafana = "http://raspberry:3000/";
 
             try
             {
@@ -437,21 +434,12 @@ namespace TeslaLogger
                     }
                 }
 
-                if (IsPropertyExist(j, "URL_Grafana"))
-                {
-                    if (j["URL_Grafana"].ToString().Length > 0)
-                    {
-                        URL_Grafana = j["URL_Grafana"];
-                    }
-                }
-
                 _power = power;
                 _temperature = temperature;
                 _length = length;
                 _language = language;
                 _URL_Admin = URL_Admin;
                 _Range = Range;
-                _URL_Grafana = URL_Grafana;
 
                 lastGrafanaSettings = DateTime.UtcNow;
             }
@@ -773,7 +761,7 @@ namespace TeslaLogger
              * https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/
              */
             Logfile.Log("Housekeeping: database usage");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT TABLE_NAME, ROUND(DATA_LENGTH / 1024 / 1024), ROUND(INDEX_LENGTH / 1024 / 1024), TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"teslalogger\" AND TABLE_TYPE = \"BASE TABLE\"", con);
@@ -824,7 +812,7 @@ namespace TeslaLogger
             long mothershipCount = 0;
             long mothershipMaxId = 0;
             long mothershipMinId = 0;
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id), MAX(id), MIN(id) FROM mothership WHERE ts < @tsdate", con);
@@ -851,7 +839,7 @@ namespace TeslaLogger
                 // split into chunks to keep database load low
                 for (long dbupdate = mothershipMinId + 1000; dbupdate <= mothershipMaxId; dbupdate += 1000)
                 {
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                     {
                         Logfile.Log($"Housekeeping: delete database.mothership chunk {dbupdate}");
                         con.Open();
@@ -871,7 +859,7 @@ namespace TeslaLogger
                     Thread.Sleep(5000);
                 }
                 // report again
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con);

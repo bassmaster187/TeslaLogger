@@ -205,7 +205,7 @@ namespace TeslaLogger
                     sb.Append(")");
                 }
 
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand(sb.ToString(), con);

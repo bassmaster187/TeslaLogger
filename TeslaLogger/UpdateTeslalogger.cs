@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Web.Script.Serialization;
+using System.Threading;
 
 namespace TeslaLogger
 {
@@ -228,7 +229,7 @@ namespace TeslaLogger
 
                     try
                     {
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                         {
                             con.Open();
                             MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con);
@@ -300,6 +301,36 @@ namespace TeslaLogger
 
                 File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
                 Logfile.Log("Start update");
+
+                // update may take quite a while, especially if we ALTER TABLEs
+                // start a thread that puts comforting messages into the log
+                Thread ComfortingMessages = new Thread(() =>
+                {
+                    Random rnd = new Random();
+                    while (true)
+                    {
+                        Thread.Sleep(15000 + rnd.Next(15000));
+                        switch(rnd.Next(3))
+                        {
+                            case 0:
+                                Logfile.Log("TeslaLogger update is still running, please be patient");
+                                break;
+                            case 1:
+                                Logfile.Log("TeslaLogger update is still running, this may take a while");
+                                break;
+                            case 2:
+                                Logfile.Log("TeslaLogger update is still running, this is fine");
+                                break;
+                            case 3:
+                                Logfile.Log("TeslaLogger update is still running, thank you for your patience");
+                                break;
+                        }
+                    }
+                })
+                {
+                    Priority = ThreadPriority.BelowNormal
+                };
+                ComfortingMessages.Start();
 
                 if (Tools.IsMono())
                 {
@@ -390,7 +421,7 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.GetDBConnectionstring()))
                 {
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con);
@@ -500,7 +531,7 @@ namespace TeslaLogger
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
                 if (Range == "RR")
                 {
                     s = s.Replace("`pos_start`.`ideal_battery_range_km` AS `StartRange`,", "`pos_start`.`battery_range_km` AS `StartRange`,");
@@ -587,7 +618,7 @@ namespace TeslaLogger
             {
                 if (Tools.IsMono())
                 {
-                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana);
+                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -615,8 +646,6 @@ namespace TeslaLogger
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
                     UpdateDBView();
-
-                    List<String> dashboardlinks = new List<String>();
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/Grafana"), new DirectoryInfo("/etc/teslalogger/tmp/Grafana"));
                     // changes to dashboards
@@ -877,25 +906,8 @@ namespace TeslaLogger
                         {
                             s = s.Replace("grafana-trackmap-panel", "pr0ps-trackmap-panel");
                         }
-                        
-                        string title, uid, link;
-                        GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
-                        dashboardlinks.Add(title+"|"+link);
 
                         File.WriteAllText(f, s);
-                    }
-
-                    try
-                    {
-                        dashboardlinks.Sort();
-
-                        StringBuilder sb = new StringBuilder();
-                        dashboardlinks.ForEach((s) => sb.Append(s).Append("\r\n"));
-
-                        System.IO.File.WriteAllText("/etc/teslalogger/dashboardlinks.txt", sb.ToString(), Encoding.UTF8);
-                    } catch (Exception ex)
-                    {
-                        Logfile.Log(ex.ToString());
                     }
 
                     Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/tmp/Grafana"), new DirectoryInfo("/var/lib/grafana/dashboards"));
@@ -913,28 +925,6 @@ namespace TeslaLogger
             finally
             {
                 Logfile.Log("End Grafana update");
-            }
-        }
-
-        internal static void GrafanaGetTitleAndLink(string json, string URL_Grafana, out string title, out string uid, out string link)
-        {
-            title = "";
-            uid = "";
-            link = "";
-            try
-            {
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
-                title = j["title"];
-                uid = j["uid"];
-
-                if (!URL_Grafana.EndsWith("/"))
-                    URL_Grafana += "/";
-
-                link = URL_Grafana + "d/" + uid + "/" + title;
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, "");
             }
         }
 
