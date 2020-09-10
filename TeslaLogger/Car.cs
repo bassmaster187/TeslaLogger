@@ -1268,6 +1268,18 @@ $"  AND CarID = {CarInDB}", con);
             return false;
         }
 
+        public bool IsParked()
+        {
+            if (teslaAPIState.GetString("state", out string state) && state.Equals("online")
+                && (teslaAPIState.GetString("shift_state", out string shift_state)
+                    && (shift_state.Equals("P") || shift_state.Equals("undef")))
+               )
+            { 
+                return true;
+            }
+            return false;
+        }
+
         public bool TLUpdatePossible()
         {
             if (GetCurrentState() == Car.TeslaState.Sleep)
