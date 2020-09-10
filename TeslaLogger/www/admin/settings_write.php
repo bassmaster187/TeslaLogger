@@ -18,6 +18,7 @@ $Power = $_POST["Power"];
 $Temperature = $_POST["Temperature"];
 $Length = $_POST["Length"];
 $URL_Admin = $_POST["URL_Admin"];
+$URL_Grafana = $_POST["URL_Grafana"];
 $HTTPPort = $_POST["HTTPPort"];
 $ZoomLevel = $_POST["ZoomLevel"];
 $update = $_POST["update"];
@@ -31,6 +32,7 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'Length' => $Length,
 'Language' => $Language,
 'URL_Admin' =>$URL_Admin,
+'URL_Grafana' =>$URL_Grafana,
 'HTTPPort' =>$HTTPPort,
 'ZoomLevel' =>$ZoomLevel,
 'ScanMyTesla' => $ScanMyTesla,

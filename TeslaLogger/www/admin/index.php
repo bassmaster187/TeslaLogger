@@ -104,8 +104,12 @@ if (isset($_REQUEST["carid"]))
 
 			if (jsonData["charging"])
 			{
+				var ttfc = jsonData["time_to_full_charge"];
+				var hour = parseInt(ttfc);
+				var minute = Math.round((ttfc - hour) *60);
+
 				$('#car_statusLabel').text("Wird geladen:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m");
 
 				updateSMT(jsonData);
 			}

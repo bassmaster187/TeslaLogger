@@ -309,6 +309,15 @@ namespace TeslaLogger
                     }
                 }
 
+                if (r2["time_to_full_charge"] != null)
+                {
+                    if (car.currentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
+                    {
+                        car.currentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
+                        car.currentJSON.CreateCurrentJSON();
+                    }
+                }
+
                 if (justCheck)
                 {
                     if (charging_state == "Charging")
@@ -2215,7 +2224,7 @@ FROM
             {
                 Tools.SetThread_enUS();
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
