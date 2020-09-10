@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Threading;
+using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
