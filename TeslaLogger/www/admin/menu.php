@@ -26,6 +26,8 @@ function menu($title)
     if (!isset($current_carid))
         $current_carid = 1;
 
+    $alldashboards = file_get_contents("/etc/teslalogger/dashboardlinks.txt");
+
     $allcars = file_get_contents(GetTeslaloggerURL("getallcars"));
     $jcars = json_decode($allcars);
 
@@ -75,6 +77,21 @@ function menu($title)
                     <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3">
                         <a href="javascript:BackgroudRun('update.php', 'Reboot!')">Update</a>
                     </li>
+                    <li id="menu-item-7" class="page_item_has_children">
+                        <a href="#">Dashboards</a>
+                        <ul class='children'>
+<?PHP                  
+                        $d = explode("\r\n", $alldashboards);
+
+                        foreach($d as $dl) {
+                            $dlargs = explode("|", $dl);
+                            if (strlen($dlargs[0]) > 0)
+                                echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="'.$dlargs[1] .'">'.$dlargs[0].'</a></li>');
+                        }      
+?>
+						</ul>
+                    </li>
+
                     <li id="menu-item-4" class="page_item_has_children">
                         <a href="#">Fleet Statistic</a>
                         <ul class='children'>
