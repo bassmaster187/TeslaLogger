@@ -327,7 +327,7 @@ namespace TeslaLogger
                             }
                             else
                             {
-                                response.AddHeader("Content-Type", "application/json");
+                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
                                 WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
                                 return;
                             }
@@ -437,7 +437,7 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null && car.GetWebHelper().TeslaAPI_Commands.TryGetValue(value, out string TeslaAPIJSON))
                     {
-                        response.AddHeader("Content-Type", "application/json");
+                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
                         WriteString(response, TeslaAPIJSON);
                     }
                     else
@@ -612,7 +612,7 @@ namespace TeslaLogger
                             specialflags.Add(flag.Key.ToString(), flag.Value);
                         }
                         data.Add("SpecialFlags", specialflags);
-                        response.AddHeader("Content-Type", "application/json");
+                        response.AddHeader("Content-Type", "application/json; charset=utf-8");
                         WriteString(response, new JavaScriptSerializer().Serialize(data));
                         return;
                     }
