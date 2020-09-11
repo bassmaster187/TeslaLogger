@@ -14,7 +14,7 @@ namespace TeslaLogger
             Source
         }
 
-        private readonly Dictionary<string, Dictionary<Key, object>> storage = new Dictionary<string, Dictionary<Key, object>>();
+        private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private HashSet<string> unknownKeys = new HashSet<string>();
         private Car car;
 
@@ -27,14 +27,26 @@ namespace TeslaLogger
         {
             if (!storage.ContainsKey(_name))
             {
-                storage.Add(_name, new Dictionary<Key, object>());
+                storage.Add(_name, new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.Source , "undef" }
+                });
             }
             else
             {
                 HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
             }
             storage[_name][Key.Type] = _type;
-            storage[_name][Key.Value] = _value;
+            if (_type.Equals("string") && (_value == null || string.IsNullOrEmpty(_value.ToString())))
+            {
+                storage[_name][Key.Value] = string.Empty;
+            }
+            else
+            {
+                storage[_name][Key.Value] = _value;
+            }
             storage[_name][Key.Timestamp] = _timestamp;
             storage[_name][Key.Source] = _source;
         }
@@ -46,8 +58,12 @@ namespace TeslaLogger
             {
                 switch (name)
                 {
+                    case "car_version":
+                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        _ = car.GetWebHelper().GetOdometerAsync();
+                        break;
                     case "battery_level":
-                        if (car.GetCurrentState() == Car.TeslaState.Online && car.GetWebHelper().GetLastShiftState().Equals("P"))
+                        if (car.IsParked())
                         {
                             Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                             // write car data to DB eg to update Grafana Dashboard status
@@ -65,7 +81,12 @@ namespace TeslaLogger
                 _state = storage[_name];
                 return true;
             }
-            _state = new Dictionary<Key, object>();
+            _state = new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.Source , "undef" }
+                };
             return false;
         }
 
@@ -124,6 +145,28 @@ namespace TeslaLogger
 
         public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
         {
+            if (string.IsNullOrEmpty(_JSON))
+            {
+               
+                return false;
+            }
+            try
+            {
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                if (jsonResult == null
+                    || jsonResult.GetType() != typeof(Dictionary<string, object>)
+                    || !((Dictionary<string, object>)jsonResult).ContainsKey("response")
+                    || ((Dictionary<string, object>)jsonResult)["response"] == null
+                    || string.IsNullOrEmpty(((Dictionary<string, object>)jsonResult)["response"].ToString()))
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+                return false;
+            }
             switch (_source)
             {
                 case "charge_state":
@@ -150,83 +193,86 @@ namespace TeslaLogger
             try
             {
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                object[] r2 = (object[])r1;
-                object r3 = r2[CarInAccount];
-                Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
-                /* {"response":
-                 *      [
-                 *         {
-                 *          "id":24342078186123456,
-                 *          "vehicle_id":1154123456,
-                 *          "vin":"5YJSA7H17FF123456",
-                 *          "display_name":"Tessi",
-                 *          "option_codes":"AD15,MDL3,PBSB,RENA,BT37,ID3W,RF3G,S3PB,DRLH,DV2W,W39B,APF0,COUS,BC3B,CH07,PC30,FC3P,FG31,GLFR,HL31,HM31,IL31,LTPB,MR31,FM3B,RS3H,SA3P,STCP,SC04,SU3C,T3CA,TW00,TM00,UT3P,WR00,AU3P,APH3,AF00,ZCST,MI00,CDM0",
-                 *          "color":null,
-                 *          "access_type":"OWNER",
-                 *          "tokens":
-                 *             [
-                 *              "d5e62570d352asdf",
-                 *              "919f1b2a7f73asdf"
-                 *             ],
-                 *          "state":"asleep",
-                 *          "in_service":false,
-                 *          "id_s":"24342078186123456",
-                 *          "calendar_enabled":true,
-                 *          "api_version":10,
-                 *          "backseat_token":null,
-                 *          "backseat_token_updated_at":null,
-                 *          "vehicle_config":null
-                 *         }
-                 *      ],
-                 *      "count":1
-                 * }
-                 */
-                foreach (string key in r4.Keys)
-                {
-                    switch (key)
+                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+                    object[] r2 = (object[])r1;
+                    object r3 = r2[CarInAccount];
+                    Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
+                    /* {"response":
+                     *      [
+                     *         {
+                     *          "id":24342078186123456,
+                     *          "vehicle_id":1154123456,
+                     *          "vin":"5YJSA7H17FF123456",
+                     *          "display_name":"Tessi",
+                     *          "option_codes":"AD15,MDL3,PBSB,RENA,BT37,ID3W,RF3G,S3PB,DRLH,DV2W,W39B,APF0,COUS,BC3B,CH07,PC30,FC3P,FG31,GLFR,HL31,HM31,IL31,LTPB,MR31,FM3B,RS3H,SA3P,STCP,SC04,SU3C,T3CA,TW00,TM00,UT3P,WR00,AU3P,APH3,AF00,ZCST,MI00,CDM0",
+                     *          "color":null,
+                     *          "access_type":"OWNER",
+                     *          "tokens":
+                     *             [
+                     *              "d5e62570d352asdf",
+                     *              "919f1b2a7f73asdf"
+                     *             ],
+                     *          "state":"asleep",
+                     *          "in_service":false,
+                     *          "id_s":"24342078186123456",
+                     *          "calendar_enabled":true,
+                     *          "api_version":10,
+                     *          "backseat_token":null,
+                     *          "backseat_token_updated_at":null,
+                     *          "vehicle_config":null
+                     *         }
+                     *      ],
+                     *      "count":1
+                     * }
+                     */
+                    foreach (string key in r4.Keys)
                     {
-                        case "timestamp":
-                            break;
-                        // bool
-                        case "in_service":
-                        case "calendar_enabled":
-                            AddValue(key, "bool", r4[key], 0, "vehicles");
-                            break;
-                        // string
-                        case "id":
-                        case "vehicle_id":
-                        case "vin":
-                        case "display_name":
-                        case "option_codes":
-                        case "color":
-                        case "access_type":
-                        case "state":
-                        case "id_s":
-                        case "backseat_token":
-                        case "backseat_token_updated_at":
-                        case "vehicle_config":
-                            AddValue(key, "string", r4[key], 0, "vehicles");
-                            break;
-                        // int
-                        case "api_version":
-                            AddValue(key, "int", r4[key], 0, "vehicles");
-                            break;
-                        // TODO
-                        case "tokens":
-                            break;
-                        default:
-                            if (!unknownKeys.Contains(key))
-                            {
-                                Logfile.Log($"ParseVehicles: unknown key {key}");
-                                unknownKeys.Add(key);
-                            }
-                            break;
+                        switch (key)
+                        {
+                            case "timestamp":
+                                break;
+                            // bool
+                            case "in_service":
+                            case "calendar_enabled":
+                                AddValue(key, "bool", r4[key], 0, "vehicles");
+                                break;
+                            // string
+                            case "id":
+                            case "vehicle_id":
+                            case "vin":
+                            case "display_name":
+                            case "option_codes":
+                            case "color":
+                            case "access_type":
+                            case "state":
+                            case "id_s":
+                            case "backseat_token":
+                            case "backseat_token_updated_at":
+                            case "vehicle_config":
+                                AddValue(key, "string", r4[key], 0, "vehicles");
+                                break;
+                            // int
+                            case "api_version":
+                                AddValue(key, "int", r4[key], 0, "vehicles");
+                                break;
+                            // TODO
+                            case "tokens":
+                                break;
+                            default:
+                                if (!unknownKeys.Contains(key))
+                                {
+                                    Logfile.Log($"ParseVehicles: unknown key {key}");
+                                    unknownKeys.Add(key);
+                                }
+                                break;
+                        }
                     }
-                }
-                return true;
+                    return true;
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -234,9 +280,7 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
                 /*
                  * {"response":
                  *     {
@@ -286,7 +330,7 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
-                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
                     foreach (string key in r2.Keys)
                     {
@@ -360,17 +404,26 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
+        }
+
+        private static Dictionary<string, object> ExtractResponse(string _JSON)
+        {
+            object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+            Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+            return r2;
         }
 
         private bool ParseDriveState(string _JSON)
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
                 /*
                  * {"response":
                  *     {
@@ -389,7 +442,7 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
-                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
                     foreach (string key in r2.Keys)
                     {
@@ -429,7 +482,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -437,9 +493,7 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
                 /*
                  * {"response":
                  *     {
@@ -470,7 +524,7 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
-                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
                     foreach (string key in r2.Keys)
                     {
@@ -523,7 +577,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
@@ -531,9 +588,7 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
                 /*
                  * {"response":
                  *     {
@@ -591,7 +646,7 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
-                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
                     foreach (string key in r2.Keys)
                     {
@@ -643,9 +698,11 @@ namespace TeslaLogger
                             case "odometer":
                                 AddValue(key, "double", r2[key], timestamp, "vehicle_state");
                                 break;
+                            case "software_update":
+                                ParseSoftwareUpdate(r2[key], timestamp);
+                                break;
                             // TODO
                             case "media_state":
-                            case "software_update":
                             case "speed_limit_mode":
                                 break;
                             default:
@@ -660,18 +717,54 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
+        private void ParseSoftwareUpdate(object software_update, long timestamp)
+        {
+            /*
+             * "software_update":{
+             *   "download_perc":100,
+             *   "expected_duration_sec":3000,
+             *   "install_perc":60,
+             *   "status":"installing",
+             *   "version":"2020.36.3.1"
+             *  }
+             */
+            if (software_update != null
+                && software_update.GetType() == typeof(Dictionary<string, object>)
+                && ((Dictionary<string, object>)software_update).Count > 0)
+            {
+                Dictionary<string, object> su = (Dictionary<string, object>)software_update;
+                foreach (string key in su.Keys)
+                {
+                    switch (key)
+                    {
+                        // int
+                        case "download_perc":
+                        case "expected_duration_sec":
+                        case "install_perc":
+                            AddValue(key, "int", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            break;
+                        // string
+                        case "status":
+                        case "version":
+                            AddValue(key, "string", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            break;
+                    }
+                }
+            }
+        }
 
         private bool ParseClimateState(string _JSON)
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                Dictionary<string, object> r2 = ExtractResponse(_JSON);
                 /*
                  * {"response":
                  *     {
@@ -706,7 +799,8 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
-                if (long.TryParse(r2["timestamp"].ToString(), out long timestamp)) {
+            if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
+                {
                     foreach (string key in r2.Keys)
                     {
                         switch (key)
@@ -765,7 +859,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
             return false;
         }
 
