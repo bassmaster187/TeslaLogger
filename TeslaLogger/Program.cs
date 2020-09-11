@@ -63,41 +63,19 @@ namespace TeslaLogger
                     id = Convert.ToInt32(r["id"]);
                     String Name = r["tesla_name"].ToString();
                     String Password = r["tesla_password"].ToString();
+
+                    if (r["tesla_carid"] == DBNull.Value)
+                        continue;
+
                     int carid = Convert.ToInt32(r["tesla_carid"]);
-
-                    String tesla_token = "";
-                    if (r["tesla_token"] != DBNull.Value)
-                        tesla_token = r["tesla_token"].ToString();
-
-                    DateTime tesla_token_expire = DateTime.MinValue;
-                    if (r["tesla_token_expire"] is DateTime)
-                    {
-                        tesla_token_expire = (DateTime)r["tesla_token_expire"];
-                    }
-
-                    string Model_Name = "";
-                    if (r["Model_Name"] != DBNull.Value)
-                        Model_Name = r["Model_Name"].ToString();
-
-                    string car_type = "";
-                    if (r["car_type"] != DBNull.Value)
-                        car_type = r["car_type"].ToString();
-
-                    string car_special_type = "";
-                    if (r["car_special_type"] != DBNull.Value)
-                        car_special_type = r["car_special_type"].ToString();
-
-                    string display_name = "";
-                    if (r["display_name"] != DBNull.Value)
-                        display_name = r["display_name"].ToString();
-
-                    string vin = "";
-                    if (r["vin"] != DBNull.Value)
-                        vin = r["vin"].ToString();
-
-                    string tasker_hash = "";
-                    if (r["tasker_hash"] != DBNull.Value)
-                        tasker_hash = r["tasker_hash"].ToString();
+                    String tesla_token = r["tesla_token"] as String ?? "";
+                    DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
+                    string Model_Name = r["Model_Name"] as String ?? "";
+                    string car_type = r["car_type"] as String ?? "";
+                    string car_special_type = r["car_special_type"] as String ?? "";
+                    string display_name = r["display_name"] as String ?? "";
+                    string vin = r["vin"] as String ?? "";
+                    string tasker_hash = r["tasker_hash"] as String ?? "";
 
                     Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash);
                 }
