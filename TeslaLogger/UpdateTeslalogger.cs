@@ -259,6 +259,13 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.IndexExists("chargingsate_ix_pos", "chargingstate"))
+                {
+                    Logfile.Log("alter table chargingstate add index chargingsate_ix_pos (Pos)");
+                    DBHelper.ExecuteSQLQuery("alter table chargingstate add index chargingsate_ix_pos (Pos)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
@@ -911,7 +918,9 @@ namespace TeslaLogger
                         
                         string title, uid, link;
                         GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
-                        dashboardlinks.Add(title+"|"+link);
+                        
+                        if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
+                            dashboardlinks.Add(title+"|"+link);
 
                         File.WriteAllText(f, s);
                     }

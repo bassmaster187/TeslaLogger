@@ -1698,49 +1698,18 @@ FROM
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand("Select lat, lng, id, address from pos where id in (SELECT Pos FROM chargingstate) or id in (SELECT StartPos FROM drivestate) or id in (SELECT EndPos FROM drivestate)", con);
+                    con.Open(); 
+                    MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
+                        from pos    
+                        left join chargingstate on pos.id = chargingstate.pos
+                        where pos.id in (SELECT Pos FROM chargingstate) or pos.id in (SELECT StartPos FROM drivestate) or pos.id in (SELECT EndPos FROM drivestate)", con);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     int t2 = Environment.TickCount - t;
                     Logfile.Log($"UpdateAllPOIAddresses Select {t2}ms");
 
                     while (dr.Read())
                     {
-                        try
-                        {
-                            Thread.Sleep(2);
-                            double lat = (double)dr[0];
-                            double lng = (double)dr[1];
-                            int id = (int)dr[2];
-
-                            Address a = geofence.GetPOI(lat, lng, false);
-                            if (a == null)
-                            {
-                                if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
-                                {
-                                    DBHelper.UpdateAddress(null, id);
-                                }
-                                continue;
-                            }
-
-                            if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
-                            {
-                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
-                                {
-                                    con2.Open();
-                                    MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
-                                    cmd2.Parameters.AddWithValue("@id", id);
-                                    cmd2.Parameters.AddWithValue("@address", a.name);
-                                    cmd2.ExecuteNonQuery();
-
-                                    count++;
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
-                        }
+                        count = UpdatePOIAdress(count, dr);
                     }
                 }
 
@@ -1751,6 +1720,69 @@ FROM
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        internal void UpdateLastChargingAdress()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
+                        from chargingstate join pos on pos.id = chargingstate.pos
+                        where chargingstate.CarID=@CarID 
+                        order by chargingstate.id desc limit 1", con);
+                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+                int count = 0;
+                while (dr.Read())
+                {
+                    count = UpdatePOIAdress(count, dr);
+                }
+            }
+        }
+
+        private static int UpdatePOIAdress(int count, MySqlDataReader dr)
+        {
+            try
+            {
+                Thread.Sleep(1);
+                double lat = (double)dr["lat"];
+                double lng = (double)dr["lng"];
+                int id = (int)dr["id"];
+                string brand = dr["fast_charger_brand"] as String ?? "";
+                int max_power = dr["max_charger_power"] as int? ?? 0;
+
+                Address a = geofence.GetPOI(lat, lng, false, brand, max_power);
+                if (a == null)
+                {
+                    if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
+                    {
+                        DBHelper.UpdateAddress(null, id);
+                    }
+                    return count;
+                }
+
+                if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
+                {
+                    using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con2.Open();
+                        MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2);
+                        cmd2.Parameters.AddWithValue("@id", id);
+                        cmd2.Parameters.AddWithValue("@address", a.name);
+                        cmd2.ExecuteNonQuery();
+
+                        count++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
+            }
+
+            return count;
         }
 
         private double GetIdealBatteryRangekm(out int battery_level, out double battery_range_km)
