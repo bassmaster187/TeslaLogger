@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -17,9 +18,46 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
-        public static string DBConnectionstring => string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
-                    ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;"
-                    : ApplicationSettings.Default.DBConnectionstring;
+        public static string DBConnectionstring => GetDBConnectionstring();
+
+        private static string _DBConnectionstring = string.Empty;
+        private static string GetDBConnectionstring()
+        {
+            if (!string.IsNullOrEmpty(_DBConnectionstring))
+            {
+                return _DBConnectionstring;
+            }
+            string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
+? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
+: ApplicationSettings.Default.DBConnectionstring;
+            Tools.DebugLog($"DBConnectionstring {DBConnectionstring}");
+            if (DBConnectionstring.ToLower().Contains("charset="))
+            {
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+?);");
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    Tools.DebugLog("regex match: <" + m.Groups[1].Captures[0].ToString() + ">");
+                    Tools.DebugLog($"old DBConnectionstring {DBConnectionstring}");
+                    DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
+                    Tools.DebugLog($"new DBConnectionstring {DBConnectionstring}");
+                    _DBConnectionstring = DBConnectionstring;
+                }
+                else
+                {
+                    m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+)$");
+                    if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                    {
+                        Tools.DebugLog("regex match: <" + m.Groups[1].Captures[0].ToString() + ">");
+                        Tools.DebugLog($"old DBConnectionstring {DBConnectionstring}");
+                        DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
+                        Tools.DebugLog($"new DBConnectionstring {DBConnectionstring}");
+                        _DBConnectionstring = DBConnectionstring;
+                    }
+                }
+            }
+            _DBConnectionstring = DBConnectionstring;
+            return _DBConnectionstring;
+        }
 
         public DBHelper(Car car)
         {
@@ -1622,8 +1660,6 @@ namespace TeslaLogger
 
         private void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging, double lastCharging_start_charge_energy_added)
         { 
-            Tools.DebugLog($"CombineChargingifNecessary ID: {chargingstate_id} / Odometer: {odometer}");
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();

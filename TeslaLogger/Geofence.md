@@ -129,6 +129,12 @@ TODO: useful application
 
 Work cannot be home.
 
+# Charger
+
++charger
+
+Marks this POI as "has a charger".
+
 # Set Charge Limit
 
 +scl
