@@ -204,7 +204,7 @@ namespace TeslaLogger
 
                 if (!DBHelper.TableExists("cars"))
                 {
-                    Logfile.Log("crate table cars");
+                    Logfile.Log("create table cars");
                     DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
                           `id` int(11) NOT NULL,
                           `tesla_name` varchar(45) DEFAULT NULL,
