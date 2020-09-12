@@ -243,6 +243,8 @@ namespace TeslaLogger
                     sd.SendDegradationData();
                 }
 
+                DBHelper.UpdateCarIDNull();
+
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
             })
