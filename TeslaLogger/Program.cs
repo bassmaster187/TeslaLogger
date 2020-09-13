@@ -63,11 +63,7 @@ namespace TeslaLogger
                     id = Convert.ToInt32(r["id"]);
                     String Name = r["tesla_name"].ToString();
                     String Password = r["tesla_password"].ToString();
-
-                    if (r["tesla_carid"] == DBNull.Value)
-                        continue;
-
-                    int carid = Convert.ToInt32(r["tesla_carid"]);
+                    int carid = r["tesla_carid"] as Int32? ?? 0;
                     String tesla_token = r["tesla_token"] as String ?? "";
                     DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
                     string Model_Name = r["Model_Name"] as String ?? "";

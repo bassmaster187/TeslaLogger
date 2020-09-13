@@ -63,8 +63,9 @@ if (isset($_REQUEST["id"]))
 			$tesla_carid = $v->{"tesla_carid"};
 			$vin = $v->{"vin"};
 			if (isset($vin) && strlen($vin)>14)
-				$disablecarid = " disabled ";
-
+			{
+				// $disablecarid = " disabled ";
+			}
 		}
 	}
 

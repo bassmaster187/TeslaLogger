@@ -286,7 +286,7 @@ namespace TeslaLogger
                     {
                         con.Open();
 
-                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@ where id=@id", con);
+                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid where id=@id", con);
                         cmd.Parameters.AddWithValue("@id", dbID);
                         cmd.Parameters.AddWithValue("@tesla_name", email);
                         cmd.Parameters.AddWithValue("@tesla_password", password);
