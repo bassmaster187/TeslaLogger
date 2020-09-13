@@ -21,6 +21,36 @@ namespace TeslaLogger
 
         public static void Start()
         {
+            // update may take quite a while, especially if we ALTER TABLEs
+            // start a thread that puts comforting messages into the log
+            Thread ComfortingMessages = new Thread(() =>
+            {
+                Random rnd = new Random();
+                while (true)
+                {
+                    Thread.Sleep(15000 + rnd.Next(15000));
+                    switch (rnd.Next(3))
+                    {
+                        case 0:
+                            Logfile.Log("TeslaLogger update is still running, please be patient");
+                            break;
+                        case 1:
+                            Logfile.Log("TeslaLogger update is still running, this may take a while");
+                            break;
+                        case 2:
+                            Logfile.Log("TeslaLogger update is still running, this is fine");
+                            break;
+                        case 3:
+                            Logfile.Log("TeslaLogger update is still running, thank you for your patience");
+                            break;
+                    }
+                }
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            ComfortingMessages.Start();
+
             try
             {
                 shareDataOnStartup = Tools.IsShareData();
@@ -204,7 +234,7 @@ namespace TeslaLogger
 
                 if (!DBHelper.TableExists("cars"))
                 {
-                    Logfile.Log("crate table cars");
+                    Logfile.Log("create table cars");
                     DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
                           `id` int(11) NOT NULL,
                           `tesla_name` varchar(45) DEFAULT NULL,
@@ -299,45 +329,19 @@ namespace TeslaLogger
                 catch (Exception)
                 { }
 
-
                 if (File.Exists("cmd_updated.txt"))
                 {
                     Logfile.Log("Update skipped!");
+                    try
+                    {
+                        ComfortingMessages.Abort();
+                    }
+                    catch (Exception) { }
                     return;
                 }
 
                 File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
                 Logfile.Log("Start update");
-
-                // update may take quite a while, especially if we ALTER TABLEs
-                // start a thread that puts comforting messages into the log
-                Thread ComfortingMessages = new Thread(() =>
-                {
-                    Random rnd = new Random();
-                    while (true)
-                    {
-                        Thread.Sleep(15000 + rnd.Next(15000));
-                        switch(rnd.Next(3))
-                        {
-                            case 0:
-                                Logfile.Log("TeslaLogger update is still running, please be patient");
-                                break;
-                            case 1:
-                                Logfile.Log("TeslaLogger update is still running, this may take a while");
-                                break;
-                            case 2:
-                                Logfile.Log("TeslaLogger update is still running, this is fine");
-                                break;
-                            case 3:
-                                Logfile.Log("TeslaLogger update is still running, thank you for your patience");
-                                break;
-                        }
-                    }
-                })
-                {
-                    Priority = ThreadPriority.BelowNormal
-                };
-                ComfortingMessages.Start();
 
                 if (Tools.IsMono())
                 {
