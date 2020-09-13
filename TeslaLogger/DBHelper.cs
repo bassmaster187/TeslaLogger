@@ -225,6 +225,19 @@ namespace TeslaLogger
             }
         }
 
+        internal static void UpdateCarIDNull()
+        {
+            string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
+            foreach (string table in tables) {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null", con);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         internal void UpdateTeslaToken()
         {
             try

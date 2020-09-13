@@ -1270,6 +1270,7 @@ $"  AND CarID = {CarInDB}", con);
 
         public bool IsParked()
         {
+            // online and parked
             if (teslaAPIState.GetString("state", out string state) && state.Equals("online")
                 && (teslaAPIState.GetString("shift_state", out string shift_state)
                     && (shift_state.Equals("P") || shift_state.Equals("undef")))
@@ -1277,6 +1278,11 @@ $"  AND CarID = {CarInDB}", con);
             { 
                 return true;
             }
+            // asleep
+            if (teslaAPIState.GetString("state", out state) && state.Equals("asleep"))
+            {
+                return true;
+            }    
             return false;
         }
 
