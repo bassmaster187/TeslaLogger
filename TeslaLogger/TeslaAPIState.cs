@@ -70,9 +70,33 @@ namespace TeslaLogger
                             car.GetWebHelper().IsDriving(true);
                         }
                         break;
+                    case "charge_port_door_open":
+                        if (bool.TryParse(oldvalue.ToString(), out bool oldv) && bool.TryParse(newvalue.ToString(), out bool newv) && !oldv && newv)
+                        {
+                            Tools.DebugLog($"TeslaAPIHandleStateChange start charging!");
+                            string timestamp = storage[name][Key.Timestamp].ToString();
+                            GetDouble("latitude", out double latitude);
+                            GetDouble("longitude", out double longitude);
+                            GetInt("speed", out int speed);
+                            GetInt("power", out int power);
+                            GetDouble("odometer", out double odometer);
+                            double odometerKM = (double)((decimal)odometer / 0.62137M);
+                            GetDouble("ideal_battery_range", out double ideal_battery_range);
+                            if (ideal_battery_range == 999)
+                            {
+                                GetDouble("battery_range", out ideal_battery_range);
+                            }
+                            double ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
+                            GetDouble("battery_range", out double battery_range);
+                            GetInt("battery_level", out int battery_level);
+                            GetDouble("outside_temp", out double outside_temp);
+                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
+                            //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
+                        }
+                        break;
                     case "charging_state":
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        if (!oldvalue.Equals("Charging") && newvalue.Equals("Charging"))
+                        if (!oldvalue.ToString().Equals("Charging") && newvalue.ToString().Equals("Charging"))
                         {
                             Tools.DebugLog($"TeslaAPIHandleStateChange start charging!");
                             string timestamp = storage[name][Key.Timestamp].ToString();
