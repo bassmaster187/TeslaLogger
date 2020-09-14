@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -225,17 +226,25 @@ namespace TeslaLogger
             }
         }
 
+        // do not run in main thread, use as task!
         internal static void UpdateCarIDNull()
         {
+            Logfile.Log("UpdateCarIDNull() start ... this may take a while");
             string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
             foreach (string table in tables) {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                while (GetCarIDNullCount(table) > 0)
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null LIMIT 100000", con);
-                    cmd.ExecuteNonQuery();
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null LIMIT 10000", con);
+                        Logfile.Log($"UpdateCarIDNull({table}) ... this may take a while");
+                        cmd.ExecuteNonQuery();
+                        Thread.Sleep(5000);
+                    }
                 }
             }
+            Logfile.Log("UpdateCarIDNull() done");
         }
 
         internal void UpdateTeslaToken()
@@ -1491,6 +1500,24 @@ namespace TeslaLogger
                 }
             }
 
+            return 0;
+        }
+
+        private static long GetCarIDNullCount(string table)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand($"Select count(id) from {table} where CarID IS NULL", con);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read() && dr[0] != DBNull.Value)
+                {
+                    if (long.TryParse(dr[0].ToString(), out long count))
+                    {
+                        return count;
+                    }
+                }
+            }
             return 0;
         }
 
