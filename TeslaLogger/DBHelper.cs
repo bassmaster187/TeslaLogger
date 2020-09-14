@@ -232,7 +232,7 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null", con);
+                    MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null LIMIT 100000", con);
                     cmd.ExecuteNonQuery();
                 }
             }
