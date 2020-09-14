@@ -70,6 +70,16 @@ namespace TeslaLogger
                             car.GetWebHelper().IsDriving(true);
                         }
                         break;
+                    case "charging_state":
+                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        if (!oldvalue.Equals("Charging") && newvalue.Equals("Charging"))
+                        {
+                            Tools.DebugLog($"TeslaAPIHandleStateChange start charging!");
+                            car.GetWebHelper().IsDriving(true);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
