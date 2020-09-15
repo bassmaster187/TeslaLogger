@@ -229,11 +229,26 @@ namespace TeslaLogger
         {
             string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
             foreach (string table in tables) {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                try
                 {
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null", con);
-                    cmd.ExecuteNonQuery();
+                    int rows = 0;
+                    int t = Environment.TickCount;
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null", con);
+                        cmd.CommandTimeout = 6000;
+                        rows = cmd.ExecuteNonQuery();
+                    }
+                    t = Environment.TickCount - t;
+
+                    if (rows > 0)
+                        Logfile.Log($"update {table} set carid = 1 where carid is null; ms: {t} / Rows: {rows}");
+
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
                 }
             }
         }
