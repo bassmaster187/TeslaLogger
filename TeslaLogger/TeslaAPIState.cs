@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
@@ -17,6 +19,31 @@ namespace TeslaLogger
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private HashSet<string> unknownKeys = new HashSet<string>();
         private Car car;
+        private bool dumpJSON = false;
+
+        internal bool DumpJSON {
+            get => dumpJSON;
+            set {
+                if (value)
+                {
+                    try
+                    {
+                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.Now.ToString("yyyyMMddHHmmssfff")}");
+                        if (!Directory.Exists(DumpJSONSessionDir))
+                        {
+                            Directory.CreateDirectory(DumpJSONSessionDir);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog(ex.ToString());
+                    }
+                }
+                car.Log($"DumpJSON {value}");
+                dumpJSON = value;
+            }
+        }
+        private string DumpJSONSessionDir = string.Empty;
 
         public TeslaAPIState(Car car)
         {
@@ -196,9 +223,24 @@ namespace TeslaLogger
 
         public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
         {
+            if (dumpJSON)
+            {
+                string filename = $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
+                string filepath = Path.Combine(DumpJSONSessionDir, filename);
+                Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        File.WriteAllText(filepath, new Tools.JsonFormatter(_JSON).Format());
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog(ex.ToString());
+                    }
+                });
+            }
             if (string.IsNullOrEmpty(_JSON))
             {
-               
                 return false;
             }
             try

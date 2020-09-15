@@ -163,6 +163,13 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
+                    // developer features
+                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/on"):
+                        Dev_DumpJSON(response, true);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off"):
+                        Dev_DumpJSON(response, false);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -174,6 +181,15 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Dev_DumpJSON(HttpListenerResponse response, bool v)
+        {
+            foreach (Car car in Car.allcars)
+            {
+                car.GetTeslaAPIState().DumpJSON = v;
+            }
+            WriteString(response, $"DumpJSON {v}");
         }
 
         private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
