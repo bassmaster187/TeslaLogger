@@ -237,7 +237,8 @@ namespace TeslaLogger
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
                         con.Open();
-                        MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null LIMIT 10000", con);
+                        MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null LIMIT 100000", con);
+                        cmd.CommandTimeout = 600;
                         Logfile.Log($"UpdateCarIDNull({table}) ... this may take a while");
                         cmd.ExecuteNonQuery();
                         Thread.Sleep(5000);
