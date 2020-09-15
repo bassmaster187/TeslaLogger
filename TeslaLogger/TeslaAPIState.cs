@@ -94,6 +94,10 @@ namespace TeslaLogger
                             GetDouble("battery_range", out double battery_range);
                             GetInt("battery_level", out int battery_level);
                             GetDouble("outside_temp", out double outside_temp);
+                            if (outside_temp == double.MinValue)
+                            {
+                                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
+                            }
                             Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
                             //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
                         }
@@ -122,6 +126,10 @@ namespace TeslaLogger
                             GetDouble("battery_range", out double battery_range);
                             GetInt("battery_level", out int battery_level);
                             GetDouble("outside_temp", out double outside_temp);
+                            if (outside_temp == double.MinValue)
+                            {
+                                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
+                            }
                             Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
                             //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
                         }
