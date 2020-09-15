@@ -647,6 +647,7 @@ namespace TeslaLogger
 
         public void StartChargingState(WebHelper wh)
         {
+            Tools.DebugLog($"DBHelper.StartChargingState()");
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
