@@ -65,18 +65,6 @@ Username: pi
 
 Password: teslalogger
 
-## More than one car
-
-Go to \\RASPBERRY\teslalogger with your file Explorer. There is a File: TeslaLogger.exe.config
-```xml
-<setting name="Car" serializeAs="String">
-
-<value>0</value>
-
-</setting>
-```
-value 0 is 1st car / value 1 is 2nd car and so on...
-
 ## Custom Points of Interest (POI)
 
 Details how to add / manage your own Points of Interest (POI) are [described here](TeslaLogger/Geofence.md)
