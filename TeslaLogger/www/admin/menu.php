@@ -28,7 +28,7 @@ function menu($title)
 
     $alldashboards = file_get_contents("/etc/teslalogger/dashboardlinks.txt");
 
-    $allcars = file_get_contents(GetTeslaloggerURL("getallcars"));
+    $allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
     $jcars = json_decode($allcars);
 
     foreach ($jcars as $k => $v) {
