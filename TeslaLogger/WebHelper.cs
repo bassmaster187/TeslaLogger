@@ -1910,7 +1910,7 @@ FROM
             //return 0;
         }
 
-        private async Task<double?> GetOutsideTempAsync()
+        internal async Task<double?> GetOutsideTempAsync()
         {
             string cacheKey = Program.TLMemCacheKey.GetOutsideTempAsync.ToString() + car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
