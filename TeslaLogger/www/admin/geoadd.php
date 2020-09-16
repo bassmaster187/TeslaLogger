@@ -43,6 +43,10 @@ $lng = $_REQUEST["lng"];
     }).addTo(map);
 	
 	$("button").button();
+
+	$("input").change(function(){OnSpecialFlagsChanged();});
+	$("select").change(function(){OnSpecialFlagsChanged();});
+
 	$("#radius").on("change paste keyup",function()
 	{
 		circle.setRadius($("#radius").val());
@@ -66,6 +70,70 @@ $lng = $_REQUEST["lng"];
 	  map.dragging.enable();
 	}); 
   });
+
+  function OnSpecialFlagsChanged()
+  {
+
+	var f = "";
+	if ($("#home").is(':checked'))
+		f += "+home";
+
+	if ($("#work").is(':checked'))
+		f += "+work";
+
+	if ($("#charger").is(':checked'))
+		f += "+charger";
+
+	if ($("#ccp").is(':checked'))
+		f += "+ccp";
+
+	if ($("#scl").is(':checked'))
+	{
+		f += "+scl:";
+		if ($("#scl_limit").val().length == 0)
+			f += "100";
+		else
+			f += $("#scl_limit").val();
+	}
+
+	if ($("#ocp").is(':checked'))
+	{
+		f += "+ocp:"+$("#ocp_gear").val();
+	}
+
+	if ($("#hfl_minutes").val().length > 0)
+		$("#hfl_count").prop("disabled", true);
+	else if ($("#hfl_count").val().length > 0)
+		$("#hfl_minutes").prop("disabled", true);
+	else
+	{
+		$("#hfl_count").prop("disabled", false);
+		$("#hfl_minutes").prop("disabled", false);
+	}
+
+	if ($("#hfl").is(':checked'))
+	{
+		f += "+hfl:";
+		if ($("#hfl_minutes").val().length > 0)
+			f += $("#hfl_minutes").val() + "m";
+		else if ($("#hfl_count").val().length > 0)
+			f += $("#hfl_count").val() + "c";
+		else
+			f += "100c";
+	}
+
+	if ($("#esm").is(':checked'))
+	{
+		f += "+esm:"+$("#esm_gear").val();
+	}
+
+	if ($("#cof").is(':checked'))
+	{
+		f += "+cof:"+$("#cof_gear").val();
+	}		
+
+	$("#flag").val(f);
+  }
   
   function save()
   {
@@ -93,16 +161,73 @@ $lng = $_REQUEST["lng"];
   }
   
   </script>
+  <style>
+  	td {padding-right:10px}
+	@media screen and (max-width: 1055px) {
+		#map { 
+			float:left;
+			width: -webkit-fill-available;
+			margin-top: 36px;
+		}
+	}
+  </style>
 	</head>
 	<body>
-	<div>
-	<table>
-	<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text"/></td></tr>
-	<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="20" type="number"/></td></tr>
-	<tr><td><?php t("Special Flag"); ?>:</td><td><input id="flag"/></td></tr>
-	<tr><td></td><td><button onclick="save();" >Save</button></td></tr>
-	</table>
+<?php 
+    include "menu.php";
+    echo(menu("Geofence"));
+?>
+	<div style="float:left;">
+		<div>
+  			<h2 style="margin-top: 0px;">Name & Position</h2>
+			<table>
+				<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text"/></td></tr>
+				<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="20" type="number"/></td></tr>
+			</table>
+		</div>
+		<div>
+  			<h2>Special Flags</h2>
+			<table>
+				<tr><td><h4 style="margin-top: 0px;">Type</h4></td></tr>
+				<tr><td>🏠 Home</td><td><input id="home" type="checkbox" value="home" /></td></tr>
+				<tr><td>💼 Work</td><td> <input id="work" type="checkbox" value="work" /></td></tr>
+				<tr><td>🔌 Charger</td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
+				<tr><td><h4 style="margin-top: 20px;">Charging</h4></td></tr>
+				<tr><td>Copy Charging Costs</td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
+				<tr><td>Set Charge Limit</td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="scl_limit" placeholder="100"/>%</td></tr>
+				<tr><td>Open Charge Port</td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td>Gear</td>
+					<td>
+  						<select id="ocp_gear">
+						  <option value="DR->P">D/R → P</option>
+						  <option value="D->P">D → P</option>
+						  <option value="R->P">R → P</option>
+						</select>
+					</td></tr>
+				<tr><td>High Frequency Logging</td><td> <input id="hfl" type="checkbox" value=""/></td><td>&nbsp;</td><td>Duration</td><td><input size="6" id="hfl_minutes"/>Minutes</td></tr>
+				<tr><td></td><td></td><td>&nbsp;</td><td>Count</td><td><input size="6" id="hfl_count" placeholder="100"/>Count</td></tr>
+				<tr><td><h4 style="margin-top: 20px;">Features</h4></td></tr>
+				<tr><td>Sentry Mode</td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+					<td>
+						<select id="esm_gear">
+						  <option value="DR->P">D/R → P</option>
+						  <option value="D->P">D → P</option>
+						  <option value="R->P">R → P</option>
+						</select>
+					</td></tr>
+				<tr><td>Turn HVAC off</td><td> <input id="cof" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+					<td>
+						<select id="cof_gear">
+						  <option value="DR->P">D/R → P</option>
+						  <option value="D->P">D → P</option>
+						  <option value="R->P">R → P</option>
+						</select>
+					</td></tr>
+
+				<tr><td colspan=5 ><input style="width: 100%" id="flag"/></td></tr>
+			</table>
+		</div>
+		<button onclick="save();">Save</button>
 	</div>
-	<div id="map" style="height:800px;"></div>
+	<div id="map" style="height:700px;"></div>
 </body>
 </html>
