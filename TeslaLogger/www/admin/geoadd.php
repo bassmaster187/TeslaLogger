@@ -3,8 +3,42 @@
 require("language.php");
 $lat = $_REQUEST["lat"];
 $lng = $_REQUEST["lng"];
+$radius = 20.0;
+$poiname = "";
+$id = $_REQUEST["id"];
+$csv = null;
+$sf = null;
+
+
+if (isset($id))
+{
+	$n = 0;
+	$fp = fopen("/etc/teslalogger/geofence-private.csv", "r+");
+	while ($line = stream_get_line($fp, 1024 * 1024, "\r")) {
+		if ($n == $id)
+		{
+			echo($line);
+			$csv = explode(",", $line);
+			$lat = $csv[1];
+			$lng = $csv[2];
+			$poiname = $csv[0];
+			
+			if (isset($csv[3]) && strlen($csv[3]) > 0)
+				$radius = $csv[3];
+
+			if (isset($csv[4]) && strlen($csv[4]) > 0)
+				$sf = explode("+", $csv[4]);
+
+			break;
+		}
+
+		$n++;
+	}
+	fclose($fp);
+}
+
 ?>
-<html lang="<?php echo $json_data["Language"]; ?>"">
+<html lang="<?php echo $json_data["Language"]; ?>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,10 +87,76 @@ $lng = $_REQUEST["lng"];
 	});
 	
 	var markerLocation = new L.LatLng(<?= $lat ?>,<?= $lng ?>);
-	circle = new L.circle(markerLocation, {radius: 20.0});
+
+	circle = new L.circle(markerLocation, {radius: <?= $radius ?>});
 	circle.draggable = true;
 	circle.addTo(map);
-	
+
+	<?PHP
+	if ($sf != null)
+		echo("var sf = ". json_encode($sf).";\n");
+	else 
+		echo('var sf = [""];');
+		echo("\n")
+	?>
+
+	sf.forEach(function(e) {
+		if (e.startsWith("home"))
+			$("#home").attr('checked', 'checked');
+		else if (e.startsWith("work"))
+			$("#work").attr('checked', 'checked');
+		else if (e.startsWith("charger"))
+			$("#charger").attr('checked', 'checked');
+		else if (e.startsWith("ccp"))
+			$("#ccp").attr('checked', 'checked');
+		else if (e.startsWith("scl"))
+		{
+			$("#scl").attr('checked', 'checked');
+			$("#scl_limit").val(e.substring(4));
+		}
+		else if (e.startsWith("ocp"))
+		{
+			$("#ocp").attr('checked', 'checked');
+			if (e.length == 0)
+				$("#ocp_gear").val("DR->P");
+			else
+				$("#ocp_gear").val(e.substring(4));
+		}
+		else if (e.startsWith("hfl"))
+		{
+			$("#hfl").attr('checked', 'checked');
+			if (e.substring(4).includes("m"))
+			{
+				$("#hfl_minutes").val(e.substring(4));
+				$("#hfl_count").prop("disabled", true);		
+			}
+			else
+			{
+				$("#hfl_count").val(e.substring(4));
+				$("#hfl_minutes").prop("disabled", true);
+			}
+		}
+		else if (e.startsWith("esm"))
+		{
+			$("#esm").attr('checked', 'checked');
+			if (e.substring(4).length == 0)
+				$("#esm_gear").val("DR->P");
+			else
+				$("#esm_gear").val(e.substring(4));
+		}
+		else if (e.startsWith("cof"))
+		{
+			$("#cof").attr('checked', 'checked');
+			if (e.substring(4).length == 0)
+				$("#cof_gear").val("DR->P");
+			else
+				$("#cof_gear").val(e.substring(4));
+		}
+    	
+	});
+
+
+
 	circle.on({
 	  mousedown: function () {
 		map.on('mousemove', function (e) {
@@ -175,14 +275,14 @@ $lng = $_REQUEST["lng"];
 	<body>
 <?php 
     include "menu.php";
-    echo(menu("Geofence"));
+    //echo(menu("Geofence"));
 ?>
 	<div style="float:left;">
 		<div>
   			<h2 style="margin-top: 0px;">Name & Position</h2>
 			<table>
-				<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text"/></td></tr>
-				<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="20" type="number"/></td></tr>
+				<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text" value="<?= $poiname ?>"/></td></tr>
+				<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="<?= intval($radius) ?>" type="number"/></td></tr>
 			</table>
 		</div>
 		<div>
