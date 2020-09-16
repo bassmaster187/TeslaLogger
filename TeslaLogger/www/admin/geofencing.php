@@ -104,6 +104,20 @@
     include "menu.php";
     echo(menu("Geofencing"));
 ?>
+<div style="max-width: 1260px;">
+	<div style="height:800px; overflow: auto; float: left;">
+	<table>
+	<?PHP 
+	$id = 0;
+	foreach ($csv2 as $v)
+	{
+		echo("<tr><td>".$v[0]."</td><td><a href='geoadd.php?id=". $id ."'>EDIT</a></td></tr>\n");
+		$id++;
+	}
+	?>
+	</table>
+	</div>
 	<div id="map" style="height:800px; max-width: 1260px; z-index:0;"></div>
+</div>
 </body>
 </html>
