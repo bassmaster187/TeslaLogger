@@ -14,27 +14,46 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<script>	
+	<script>
+	var map = null;	
+	var greenIcon = null;
+	var markerArray = [];
+
 	<?PHP
 	$csv = array();
 	$fp = fopen('/etc/teslalogger/geofence.csv', 'rb');
+	
 	while(!feof($fp)) {
-		$csv[] = fgetcsv($fp);
+		$v = fgetcsv($fp);
+			
+		if (count($v) >= 3)
+		{
+			$csv[] = array($v[0],$v[1],$v[2]);
+		}
+		
 	}
 	fclose($fp);
 	
+	$i = 0;
 	$csv2 = array();
 	if (file_exists('/etc/teslalogger/geofence-private.csv'))
 	{
 		$fp = fopen('/etc/teslalogger/geofence-private.csv', 'rb');
 		while(!feof($fp)) {
-			$csv2[] = fgetcsv($fp);
+			$v = fgetcsv($fp);
+			
+			if (count($v) >= 3)
+			{
+				$t = trim( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', mb_convert_encoding( $v[0], "UTF-8" ) ) ); // remove all smileys for sorting purpose
+				$csv2[] = array($v[0],$v[1],$v[2],$i, $t);
+			}
+			$i++;
 		}
 		fclose($fp);
 	}
 	?>	
   $( function() {
-  var map = new L.Map('map');
+  map = new L.Map('map');
   // Define layers and add them to the control widget
     L.control.layers({
       'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -56,8 +75,7 @@
       })
     }).addTo(map);
 	
-	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
-	var markerArray = [];
+	greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 	<?PHP
 	
 	echo("<!-- Start geofence private -->\r\n");
@@ -66,12 +84,9 @@
 	{
 		if  ($value[1] =="")
 			continue;
-			
-		echo("var markerLocation = new L.LatLng($value[1], $value[2]);\r\n");
-		echo("var marker = new L.Marker(markerLocation, {icon: greenIcon});\r\n");
-		echo("markerArray.push(marker);\r\n");
-		echo("marker.bindPopup('".addslashes($value[0])."');\r\n");
-		echo("marker.addTo(map);\r\n");
+		
+		$name = addslashes($value[0]);
+		echo("ig('$name',$value[1],$value[2]);\r\n");
 		$inserted = true;
 	}
 	if ($inserted)
@@ -85,11 +100,9 @@
 	{
 		if  ($value[1] =="")
 			continue;
-			
-		echo("var markerLocation = new L.LatLng($value[1], $value[2]);\r\n");
-		echo("var marker = new L.Marker(markerLocation);\r\n");
-		echo("marker.bindPopup('".addslashes($value[0])."');\r\n");
-		echo("marker.addTo(map);\r\n");
+		
+		$name = addslashes($value[0]);
+		echo("im('$name',$value[1],$value[2]);\r\n");
 	}
 	
 	if (!$inserted)
@@ -97,6 +110,28 @@
 	?>
     
   });
+function ig(name, lat, lng)
+{
+	var markerLocation = new L.LatLng(lat, lng);
+	var marker = new L.Marker(markerLocation, {icon: greenIcon});
+	markerArray.push(marker);
+	marker.bindPopup(name);
+	marker.addTo(map);
+}
+
+function im(name, lat, lng)
+{
+	var markerLocation = new L.LatLng(lat, lng);
+	var marker = new L.Marker(markerLocation);
+	marker.bindPopup(name);
+	marker.addTo(map);
+}
+
+function sf(lat, lng)
+{
+	map.setView(new L.LatLng(lat, lng),17);
+}
+
   </script>
 	</head>
 	<body style="padding-top: 5px; padding-left: 10px;">
@@ -109,10 +144,11 @@
 	<table>
 	<?PHP 
 	$id = 0;
+	usort($csv2, function ($a, $b) { return strcmp($a[4], $b[4]); });
+
 	foreach ($csv2 as $v)
 	{
-		echo("<tr><td>".$v[0]."</td><td><a href='geoadd.php?id=". $id ."'>EDIT</a></td></tr>\n");
-		$id++;
+		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>EDIT</a> <a href='javascript:sf($v[1],$v[2]);'>SHOW</a></td></tr>\n");
 	}
 	?>
 	</table>

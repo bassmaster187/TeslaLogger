@@ -17,7 +17,7 @@ if (isset($id))
 	while ($line = stream_get_line($fp, 1024 * 1024, "\r")) {
 		if ($n == $id)
 		{
-			echo($line);
+			//echo($line);
 			$csv = explode(",", $line);
 			$lat = $csv[1];
 			$lng = $csv[2];
@@ -153,6 +153,7 @@ if (isset($id))
 				$("#cof_gear").val(e.substring(4));
 		}
     	
+		OnSpecialFlagsChanged();
 	});
 
 
@@ -248,11 +249,15 @@ if (isset($id))
 		
 	var jqxhr = $.post("geoadd_write.php", 
 	{
-	Text: $("#text").val(), 
-	lat: circle.getLatLng().lat, 
-	lng: circle.getLatLng().lng,
-	radius: circle.getRadius(),
-	flag: $("#flag").val()       
+		Text: $("#text").val(), 
+		lat: circle.getLatLng().lat, 
+		lng: circle.getLatLng().lng,
+		radius: circle.getRadius(),
+		flag: $("#flag").val(),
+<?PHP 
+		if (isset($_REQUEST["id"]))
+			echo("id: $id");
+		?>     
 	}).always(function() {
 	alert("Saved!");
 	//location.reload();
@@ -275,8 +280,9 @@ if (isset($id))
 	<body>
 <?php 
     include "menu.php";
-    //echo(menu("Geofence"));
+    echo(menu("Geofence"));
 ?>
+<div style="max-width: 1260px;">
 	<div style="float:left;">
 		<div>
   			<h2 style="margin-top: 0px;">Name & Position</h2>
@@ -323,11 +329,12 @@ if (isset($id))
 						</select>
 					</td></tr>
 
-				<tr><td colspan=5 ><input style="width: 100%" id="flag"/></td></tr>
+				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
 			</table>
 		</div>
 		<button onclick="save();">Save</button>
 	</div>
-	<div id="map" style="height:700px;"></div>
+	<div id="map" style="height:700px; z-index:0;"></div>
+</div>
 </body>
 </html>
