@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
@@ -43,13 +45,67 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(string text, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
             if (Program.VERBOSE)
             {
                 string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
                 Logfile.Log(temp);
+                if (ex != null)
+                {
+
+                }
             }
+        }
+
+        // source: https://stackoverflow.com/questions/6994852
+        private static void TraceException(Exception e)
+        {
+            try
+            {
+                MethodBase site = e.TargetSite;//Get the methodname from the exception.
+                string methodName = site == null ? "" : site.Name;//avoid null ref if it's null.
+                methodName = ExtractBracketed(methodName);
+
+                StackTrace stkTrace = new System.Diagnostics.StackTrace(e, true);
+                for (int i = 0; i < 3; i++)
+                {
+                    //In most cases GetFrame(0) will contain valid information, but not always. That's why a small loop is needed. 
+                    var frame = stkTrace.GetFrame(i);
+                    int lineNum = frame.GetFileLineNumber();//get the line and column numbers
+                    int colNum = frame.GetFileColumnNumber();
+                    string className = ExtractBracketed(frame.GetMethod().ReflectedType.FullName);
+                    Logfile.Log(ThreadAndDateInfo + "Exception: " + className + "." + methodName + ", Ln " + lineNum + " Col " + colNum + ": " + e.Message);
+                    if (lineNum + colNum > 0)
+                        break; //exit the for loop if you have valid info. If not, try going up one frame...
+                }
+
+            }
+            catch (Exception ee)
+            {
+                //Avoid any situation that the Trace is what crashes you application. While trace can log to a file. Console normally not output to the same place.
+                Logfile.Log("Tracing exception in TraceException(Exception e)" + ee.Message);
+            }
+        }
+
+        private static string ExtractBracketed(string str)
+        {
+            string s;
+            if (str.IndexOf('<') > -1) //using the Regex when the string does not contain <brackets> returns an empty string.
+                s = Regex.Match(str, @"\<([^>]*)\>").Groups[1].Value;
+            else
+                s = str;
+            if (s == "")
+                return "'Emtpy'"; //for log visibility we want to know if something it's empty.
+            else
+                return s;
+
+        }
+
+        private static string ThreadAndDateInfo
+        {
+            //returns thread number and precise date and time.
+            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff") + "] "; }
         }
 
         public static string GetMonoRuntimeVersion()

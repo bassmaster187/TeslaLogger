@@ -63,7 +63,14 @@ namespace TeslaLogger
             }
             else
             {
-                HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
+                try
+                {
+                    HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
             }
             storage[_name][Key.Type] = _type;
             if (_type.Equals("string") && (_value == null || string.IsNullOrEmpty(_value.ToString())))
@@ -94,37 +101,21 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                             // write car data to DB eg to update Grafana Dashboard status
-                            car.GetWebHelper().IsDriving(true);
+                            string timestamp;
+                            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+                            int speed, power, battery_level;
+                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
+                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
                         }
                         break;
                     case "charge_port_door_open":
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                         if (bool.TryParse(oldvalue.ToString(), out bool oldv) && bool.TryParse(newvalue.ToString(), out bool newv) && !oldv && newv)
                         {
-                            string timestamp = storage[name][Key.Timestamp].ToString();
-                            GetDouble("latitude", out double latitude);
-                            GetDouble("longitude", out double longitude);
-                            GetInt("speed", out int speed);
-                            if (speed == int.MinValue)
-                            {
-                                speed = 0;
-                            }
-                            GetInt("power", out int power);
-                            GetDouble("odometer", out double odometer);
-                            double odometerKM = (double)((decimal)odometer / 0.62137M);
-                            GetDouble("ideal_battery_range", out double ideal_battery_range);
-                            if (ideal_battery_range == 999)
-                            {
-                                GetDouble("battery_range", out ideal_battery_range);
-                            }
-                            double ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
-                            GetDouble("battery_range", out double battery_range);
-                            GetInt("battery_level", out int battery_level);
-                            GetDouble("outside_temp", out double outside_temp);
-                            if (outside_temp == double.MinValue)
-                            {
-                                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
-                            }
+                            string timestamp;
+                            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+                            int speed, power, battery_level;
+                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
                             Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
                             //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
                         }
@@ -133,30 +124,10 @@ namespace TeslaLogger
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                         if (!oldvalue.ToString().Equals("Charging") && newvalue.ToString().Equals("Charging"))
                         {
-                            string timestamp = storage[name][Key.Timestamp].ToString();
-                            GetDouble("latitude", out double latitude);
-                            GetDouble("longitude", out double longitude);
-                            GetInt("speed", out int speed);
-                            if (speed == int.MinValue)
-                            {
-                                speed = 0;
-                            }
-                            GetInt("power", out int power);
-                            GetDouble("odometer", out double odometer);
-                            double odometerKM = (double)((decimal)odometer / 0.62137M);
-                            GetDouble("ideal_battery_range", out double ideal_battery_range);
-                            if (ideal_battery_range == 999)
-                            {
-                                GetDouble("battery_range", out ideal_battery_range);
-                            }
-                            double ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
-                            GetDouble("battery_range", out double battery_range);
-                            GetInt("battery_level", out int battery_level);
-                            GetDouble("outside_temp", out double outside_temp);
-                            if (outside_temp == double.MinValue)
-                            {
-                                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
-                            }
+                            string timestamp;
+                            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+                            int speed, power, battery_level;
+                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
                             Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
                             //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
                         }
@@ -164,6 +135,34 @@ namespace TeslaLogger
                     default:
                         break;
                 }
+            }
+        }
+
+        private void GetPosition(string name, out string timestamp, out double latitude, out double longitude, out int speed, out int power, out double odometerKM, out double ideal_battery_range_km, out double battery_range, out int battery_level, out double outside_temp)
+        {
+            timestamp = storage[name][Key.Timestamp].ToString();
+            GetDouble("latitude", out latitude);
+            GetDouble("longitude", out longitude);
+            GetInt("speed", out speed);
+            if (speed == int.MinValue)
+            {
+                speed = 0;
+            }
+            GetInt("power", out power);
+            GetDouble("odometer", out double odometer);
+            odometerKM = (double)((decimal)odometer / 0.62137M);
+            GetDouble("ideal_battery_range", out double ideal_battery_range);
+            if (ideal_battery_range == 999)
+            {
+                GetDouble("battery_range", out ideal_battery_range);
+            }
+            ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
+            GetDouble("battery_range", out battery_range);
+            GetInt("battery_level", out battery_level);
+            GetDouble("outside_temp", out outside_temp);
+            if (outside_temp == double.MinValue)
+            {
+                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
             }
         }
 
@@ -197,7 +196,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             _value = false;
             return false;
@@ -217,7 +216,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             _value = int.MinValue;
             return false;
@@ -237,7 +236,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             _value = double.MinValue;
             return false;
@@ -258,7 +257,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             _value = string.Empty;
             return false;
@@ -278,7 +277,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Tools.DebugLog(ex.ToString());
+                        Tools.DebugLog("Exception", ex);
                     }
                 });
             }
@@ -300,7 +299,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
                 return false;
             }
             switch (_source)
@@ -407,7 +406,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -542,7 +541,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -620,7 +619,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -715,7 +714,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -855,7 +854,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -997,7 +996,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.DebugLog(ex.ToString());
+                Tools.DebugLog("Exception", ex);
             }
             return false;
         }
@@ -1007,7 +1006,7 @@ namespace TeslaLogger
             string str = string.Empty;
             foreach (string key in storage.Keys)
             {
-                str += string.Concat($"{key} => v:{storage[key][Key.Value]} t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
+                str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
             }
             return str;
         }
