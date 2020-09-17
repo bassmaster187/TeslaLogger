@@ -28,6 +28,7 @@ namespace TeslaLogger
         }
 
         public string name;
+        public string rawName;
         public double lat;
         public double lng;
         public int radius;
@@ -66,6 +67,7 @@ namespace TeslaLogger
         public Address(string name, double lat, double lng, int radius, GeofenceSource source = GeofenceSource.Geofence)
         {
             this.name = name;
+            this.rawName = name;
             this.lat = lat;
             this.lng = lng;
             this.radius = radius;
