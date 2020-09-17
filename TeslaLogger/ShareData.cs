@@ -105,7 +105,13 @@ namespace TeslaLogger
                             car.Log("Do not share ChargingData for +home (" + addr.name + ")");
                             continue;
                         }
+                        // get raw address w/o automatically added unicode characters
+                        if (dr["pos_name"] != null && addr != null)
+                        {
+                            dr["pos_name"] = addr.rawName;
+                        }
                     }
+
                     int HostId = Convert.ToInt32(dr["HostId"]);
 
                     Dictionary<string, object> d = new Dictionary<string, object>

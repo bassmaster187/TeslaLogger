@@ -411,6 +411,14 @@ namespace TeslaLogger
             {
                 Logfile.Log("Error in update: " + ex.ToString());
             }
+            finally
+            {
+                try
+                {
+                    ComfortingMessages.Abort();
+                }
+                catch (Exception) { }
+            }
         }
 
         private static void InsertCarID_Column(string table)
