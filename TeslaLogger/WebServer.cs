@@ -148,6 +148,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/GetPOI"):
                         Admin_GetPOI(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/update"):
+                        Admin_Update(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -181,6 +184,12 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Admin_Update(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // TODO copy what update.php does
+            WriteString(response, "");
         }
 
         private void Dev_DumpJSON(HttpListenerResponse response, bool v)
