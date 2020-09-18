@@ -1,0 +1,1 @@
+xcopy "C:\dev\TeslaLogger\TeslaLogger\bin\Debug\TeslaLogger.exe" "\\ds718plus\docker\TeslaLogger\TeslaLogger\bin\"
