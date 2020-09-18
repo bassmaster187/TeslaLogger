@@ -332,7 +332,7 @@ if (isset($id))
 				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
 			</table>
 		</div>
-		<button onclick="save();">Save</button>
+		<button id="btn_save" onclick="save();">Save</button>
 	</div>
 	<div id="map" style="height:700px; z-index:0;"></div>
 </div>

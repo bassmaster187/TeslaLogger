@@ -141,7 +141,7 @@ function sf(lat, lng)
 ?>
 <div style="max-width: 1260px;">
 	<div style="height:800px; overflow: auto; float: left;">
-	<table>
+	<table id="locations">
 	<?PHP 
 	$id = 0;
 	usort($csv2, function ($a, $b) { return strcmp($a[4], $b[4]); });
