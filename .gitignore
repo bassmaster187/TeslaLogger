@@ -49,3 +49,4 @@ TeslaLogger/copytonas.cmd
 UnitTestsTeslalogger/bin/Debug/*
 !UnitTestsTeslalogger/bin/Debug/geofence-private.csv
 TeslaLogger/copytoraspberry.cmd
+TeslaLogger/copytoRPI4.cmd
