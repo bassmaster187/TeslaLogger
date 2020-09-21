@@ -213,8 +213,14 @@ namespace TeslaLogger
 
                     try
                     {
-                        string lastscanmyteslafilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTSCANMYTESLA");
-                        System.IO.File.WriteAllText(lastscanmyteslafilepaht, sqlDate);
+                        using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con2.Open();
+                            MySqlCommand cmd2 = new MySqlCommand("update cars set lastscanmytesla=@lastscanmytesla where id=@id", con2);
+                            cmd2.Parameters.AddWithValue("@id", car.CarInDB);
+                            cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
+                            cmd2.ExecuteNonQuery();
+                        }
                     }
                     catch (Exception)
                     { }

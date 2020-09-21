@@ -148,6 +148,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/GetPOI"):
                         Admin_GetPOI(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/update"):
+                        Admin_Update(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -181,6 +184,12 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Admin_Update(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // TODO copy what update.php does
+            WriteString(response, "");
         }
 
         private void Dev_DumpJSON(HttpListenerResponse response, bool v)
@@ -566,7 +575,7 @@ namespace TeslaLogger
             try
             {
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid FROM cars order by display_name", DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla FROM cars order by display_name", DBHelper.DBConnectionstring);
                 da.Fill(dt);
 
                 responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";

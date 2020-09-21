@@ -132,66 +132,74 @@ namespace TeslaLogger
 
         private void Loop()
         {
-            currentJSON.current_odometer = dbHelper.GetLatestOdometer();
-            currentJSON.CreateCurrentJSON();
-
-            lock (typeof(Car))
+            try
             {
-                CheckNewCredentials();
+                currentJSON.current_odometer = dbHelper.GetLatestOdometer();
+                currentJSON.CreateCurrentJSON();
 
-                InitStage3();
-            }
-
-            while (run)
-            {
-                try
+                lock (typeof(Car))
                 {
-                    switch (GetCurrentState())
+                    CheckNewCredentials();
+
+                    InitStage3();
+                }
+
+                while (run)
+                {
+                    try
                     {
-                        case TeslaState.Start:
-                            HandleState_Start();
-                            break;
+                        switch (GetCurrentState())
+                        {
+                            case TeslaState.Start:
+                                HandleState_Start();
+                                break;
 
-                        case TeslaState.Online:
-                            HandleState_Online();
-                            break;
+                            case TeslaState.Online:
+                                HandleState_Online();
+                                break;
 
-                        case TeslaState.Charge:
-                            HandleState_Charge();
-                            break;
+                            case TeslaState.Charge:
+                                HandleState_Charge();
+                                break;
 
-                        case TeslaState.Sleep:
-                            HandleState_Sleep();
-                            break;
+                            case TeslaState.Sleep:
+                                HandleState_Sleep();
+                                break;
 
-                        case TeslaState.Drive:
-                            lastRacingPoint = HandleState_Drive(lastRacingPoint);
-                            break;
+                            case TeslaState.Drive:
+                                lastRacingPoint = HandleState_Drive(lastRacingPoint);
+                                break;
 
-                        case TeslaState.GoSleep:
-                            HandleState_GoSleep();
-                            break;
+                            case TeslaState.GoSleep:
+                                HandleState_GoSleep();
+                                break;
 
-                        case TeslaState.Park:
-                            // this state is currently unused
-                            Thread.Sleep(5000);
-                            break;
+                            case TeslaState.Park:
+                                // this state is currently unused
+                                Thread.Sleep(5000);
+                                break;
 
-                        case TeslaState.WaitForSleep:
-                            // this state is currently unused
-                            Thread.Sleep(5000);
-                            break;
+                            case TeslaState.WaitForSleep:
+                                // this state is currently unused
+                                Thread.Sleep(5000);
+                                break;
 
-                        default:
-                            Log("Main loop default reached with state: " + GetCurrentState().ToString());
-                            break;
+                            default:
+                                Log("Main loop default reached with state: " + GetCurrentState().ToString());
+                                break;
+                        }
+
                     }
-
+                    catch (Exception ex)
+                    {
+                        Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
+                        System.Threading.Thread.Sleep(10000);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Logfile.ExceptionWriter(ex, "main loop");
-                }
+            }
+            finally
+            {
+                Log("*** Exit Loop !!!");
             }
         }
 

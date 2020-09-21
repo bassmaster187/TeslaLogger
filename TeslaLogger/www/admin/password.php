@@ -49,8 +49,26 @@ require_once("tools.php");
 include "menu.php";
 menu("Credentials");
 	$url = GetTeslaloggerURL("getallcars");
-	$allcars = file_get_contents($url);
+
+	$allcars = @file_get_contents($url);
+	if ($allcars === false)
+    {
+        $error = error_get_last();
+        $error = explode(': ', $error['message']);
+        $error = trim($error[2]);
+		echo("<h1>errortext = 'Error: $error - URL: $url'</h1>");
+		return;
+    }
+	
 	$jcars = json_decode($allcars);
+
+	if ($jcars == NULL)
+	{
+		echo("<h1>JSON Parse Error!</h1>");
+		echo("JSON: ". htmlspecialchars($allcars));
+		return;
+	}
+
 if (isset($_REQUEST["id"]))
 {
 	$email = "";

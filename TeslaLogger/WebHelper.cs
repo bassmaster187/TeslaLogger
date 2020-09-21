@@ -464,7 +464,7 @@ namespace TeslaLogger
                     Tesla_vehicle_id = r2["vehicle_id"].ToString();
                     Log("vehicle_id: " + Tesla_vehicle_id);
 
-                    byte[] tempTasker = Encoding.UTF8.GetBytes(vin + ApplicationSettings.Default.TeslaName);
+                    byte[] tempTasker = Encoding.UTF8.GetBytes(vin + car.TeslaName);
 
                     string oldTaskerHash = car.TaskerHash;
 
@@ -1220,6 +1220,7 @@ namespace TeslaLogger
 
         private void StartStream()
         {
+            /*
             Log("StartStream");
             stopStreaming = false;
             string line = "";
@@ -1310,7 +1311,7 @@ namespace TeslaLogger
                                 }
                             }
                         }
-                    }*/
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -1322,6 +1323,7 @@ namespace TeslaLogger
             }
 
             Log("StartStream Ende");
+            */
         }
 
 

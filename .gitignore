@@ -42,3 +42,9 @@ TeslaLogger/bin/MySql.Web.xml
 TeslaLogger/bin/TASKERTOKEN
 TeslaLogger/bin/weather.ini
 TeslaLogger/copytodocker.cmd
+TeslaLogger/copytonas.cmd
+
+
+!UnitTestsTeslalogger/bin/Debug/
+UnitTestsTeslalogger/bin/Debug/*
+!UnitTestsTeslalogger/bin/Debug/geofence-private.csv

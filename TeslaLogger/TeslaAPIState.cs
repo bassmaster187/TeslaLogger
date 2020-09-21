@@ -698,6 +698,7 @@ namespace TeslaLogger
                             case "rear_seat_type":
                             case "seat_type":
                             case "sun_roof_installed":
+                            case "key_version":
                                 AddValue(key, "int", r2[key], timestamp, "vehicle_config");
                                 break;
                             default:
