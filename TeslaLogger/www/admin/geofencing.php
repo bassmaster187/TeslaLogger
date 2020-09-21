@@ -18,6 +18,7 @@
 	var map = null;	
 	var greenIcon = null;
 	var markerArray = [];
+	var circle = null;
 
 	<?PHP
 	$csv = array();
@@ -45,7 +46,11 @@
 			if (count($v) >= 3)
 			{
 				$t = trim( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', mb_convert_encoding( $v[0], "UTF-8" ) ) ); // remove all smileys for sorting purpose
-				$csv2[] = array($v[0],$v[1],$v[2],$i, $t);
+				$radius = trim($v[3]);
+				if (strlen($radius) == 0)
+					$radius = "20";
+
+				$csv2[] = array($v[0],$v[1],$v[2],$i, $t, $radius);
 			}
 			$i++;
 		}
@@ -127,9 +132,15 @@ function im(name, lat, lng)
 	marker.addTo(map);
 }
 
-function sf(lat, lng)
+function sf(lat, lng, radius)
 {
+	if (circle != null)
+		map.removeLayer(circle);
+
+	var markerLocation = new L.LatLng(lat, lng);
 	map.setView(new L.LatLng(lat, lng),17);
+	circle = new L.circle(markerLocation, {radius: radius});
+	circle.addTo(map);
 }
 
   </script>
@@ -148,7 +159,7 @@ function sf(lat, lng)
 
 	foreach ($csv2 as $v)
 	{
-		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>EDIT</a> <a href='javascript:sf($v[1],$v[2]);'>SHOW</a></td></tr>\n");
+		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>EDIT</a> <a href='javascript:sf($v[1],$v[2], $v[5]);'>SHOW</a></td></tr>\n");
 	}
 	?>
 	</table>
