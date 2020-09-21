@@ -8,7 +8,7 @@ You can use it to
 
 All POIs are stored in a comma separated values file (CSV): geofence-private.csv
 
-You can edit the geofences in admin panlen / extras / geofence 
+You can edit the geofences in admin panel / extras / geofence 
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/geofence.png)
 
