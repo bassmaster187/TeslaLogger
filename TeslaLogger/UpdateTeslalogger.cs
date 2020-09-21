@@ -187,7 +187,7 @@ namespace TeslaLogger
                     Logfile.Log("CREATE TABLE OK");
                 }
 
-                if (!DBHelper.IndexExists("can_ix","can"))
+                if (!DBHelper.IndexExists("can_ix", "can"))
                 {
                     Logfile.Log("alter table can add index can_ix (id,datum)");
                     DBHelper.ExecuteSQLQuery("alter table can add index can_ix (id,datum)", 600);
@@ -322,20 +322,8 @@ namespace TeslaLogger
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
                 UpdatePHPini();
-
-                try
-                {
-                    // create empty weather.ini file
-                    string filepath = Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
-                    if (!File.Exists(filepath))
-                    {
-                        File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
-                    }
-
-                    Chmod(filepath, 666, false);
-                }
-                catch (Exception)
-                { }
+                CreateEmptyWeatherIniFile();
+                CheckBackupCrontab();
 
                 if (File.Exists("cmd_updated.txt"))
                 {
@@ -494,6 +482,46 @@ namespace TeslaLogger
                 }
                 catch (Exception) { }
             }
+        }
+
+        private static void CheckBackupCrontab()
+        {
+            try
+            {
+                // Logfile.Log("check crontab!");
+
+                if (Tools.GetOsVersion().Contains("RPI4"))
+                {
+                    string crontab = "/etc/crontab";
+
+                    if (File.ReadAllText(crontab).Contains("/etc/teslalogger/backup.sh"))
+                        return;
+
+                    Logfile.Log("append backup.sh to crontab!");
+                    File.AppendAllText(crontab, "0 1 * * * root /bin/bash /etc/teslalogger/backup.sh\n");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void CreateEmptyWeatherIniFile()
+        {
+            try
+            {
+                // create empty weather.ini file
+                string filepath = Path.Combine(FileManager.GetExecutingPath(), "weather.ini");
+                if (!File.Exists(filepath))
+                {
+                    File.WriteAllText(filepath, "city = \"Berlin, de\"\r\nappid = \"12345678901234567890123456789012\"");
+                }
+
+                Chmod(filepath, 666, false);
+            }
+            catch (Exception)
+            { }
         }
 
         private static void InsertCarID_Column(string table)
