@@ -8,6 +8,7 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
@@ -151,6 +152,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/update"):
                         Admin_Update(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana"):
+                        updategrafana(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -184,6 +188,12 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
+            WriteString(response, @"OK");
         }
 
         private void Admin_Update(HttpListenerRequest request, HttpListenerResponse response)
