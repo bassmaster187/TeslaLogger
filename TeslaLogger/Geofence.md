@@ -117,8 +117,6 @@ Marks this POI as your home address.
 
 TODO: useful application
 
-Home cannot be work.
-
 # Work Address
 
 +work
@@ -127,13 +125,17 @@ Marks this POI as you work address.
 
 TODO: useful application
 
-Work cannot be home.
-
 # Charger
 
 +charger
 
 Marks this POI as "has a charger".
+
+# Keep car awake
+
++nosleep
+
+TeslaLogger will not stop to get car data at this POI which will prevent the car from falling asleep.
 
 # Set Charge Limit
 
