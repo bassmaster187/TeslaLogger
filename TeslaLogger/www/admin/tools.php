@@ -43,4 +43,11 @@ function setShareData($share)
             unlink($prefix."sharedata.txt");
     }
 }
+
+function JSONDatetoString($jsondate)
+{
+    $ts = preg_replace( '/[^0-9]/', '', $jsondate);
+    $date = date("Y-m-d H:i:s", $ts / 1000);
+    return $date;
+}
 ?>

@@ -298,6 +298,12 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
+                }
+
                 if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
