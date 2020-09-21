@@ -75,6 +75,23 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(d.FindElement(By.Id("charger")).GetAttribute("checked"), "true");
             Assert.AreEqual(d.FindElement(By.Id("ccp")).GetAttribute("checked"), "true");
 
+            // Insert new geofence
+            d.Navigate().GoToUrl("http://localhost:8888/admin/geoadd.php?lat=48.82705&lng=9.0998");
+            d.FindElement(By.Id("text")).Clear();
+            d.FindElement(By.Id("text")).SendKeys("Tesla Service Center Stuttgart");
+            d.FindElement(By.Id("radius")).Clear();
+            d.FindElement(By.Id("radius")).SendKeys("55");
+
+            // save
+            d.FindElement(By.Id("btn_save")).Click();
+            waitForAlert(d);
+            d.SwitchTo().Alert().Accept();
+
+            d.Navigate().GoToUrl("http://localhost:8888/admin/geofencing.php");
+
+            String[] itemsNew = { "Beavers Stadion", "Burger King BC", "Flughafen Stuttgart P0", "Ikea Ulm Ladestation", "Ladestation Bauhaus Ulm", "Ladestation Norma Ulm", "Tesla Service Center Stuttgart" };
+            CheckGeofenceItems(itemsNew, d);
+
 
         }
 
