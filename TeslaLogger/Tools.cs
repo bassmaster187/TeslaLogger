@@ -28,7 +28,7 @@ namespace TeslaLogger
         private static string _URL_Admin = "";
         private static string _URL_Grafana = "http://raspberry:3000/";
         private static string _Range = "IR";
-        private static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
+        public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
         private static string _OSVersion = string.Empty;
