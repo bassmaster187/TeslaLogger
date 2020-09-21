@@ -54,6 +54,10 @@ require("language.php");
 	$output = preg_replace("/(.*(Exception|Error).*)/", "<font color='red'>$1</font>", $output);
 	$output = preg_replace("/(state: .*)/", "<b>$1</b>", $output);
 	$output = preg_replace("/(http[s]?:\/\/[\w\.\/\-]+)/", "<a href='$1'>$1</a>", $output);
+	$output = preg_replace("/(.*\*\*\* Exit Loop !!!)/", "<font color='red'>$1</font>", $output);
+
+	$output = preg_replace("/<font color='red'>(.*)(.*execute: \/usr\/bin\/du -sk \/etc\/teslalogger\/Exception.*)<\/font>/", "$1$2", $output);
+	$output = preg_replace("/<font color='red'>(.*)(\/etc\/teslalogger\/Exception)<\/font>/", "$1$2", $output);
 	
 	echo nl2br($output);
 ?>
