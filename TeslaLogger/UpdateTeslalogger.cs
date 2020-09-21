@@ -710,8 +710,6 @@ namespace TeslaLogger
         {
             try
             {
-                Logfile.Log("Start Grafana update");
-
                 if (Tools.IsMono())
                 {
                     Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana);
