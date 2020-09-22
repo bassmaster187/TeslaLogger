@@ -36,6 +36,7 @@ namespace TeslaLogger
         private bool isHome = false;
         private bool isWork = false;
         private bool isCharger = false;
+        private bool noSleep = false;
         internal GeofenceSource geofenceSource;
 
         public bool IsHome
@@ -63,6 +64,7 @@ namespace TeslaLogger
         }
 
         public bool IsCharger { get => isCharger; set { isCharger = value; } }
+        public bool NoSleep { get => noSleep; set { noSleep = value; } }
 
         public Address(string name, double lat, double lng, int radius, GeofenceSource source = GeofenceSource.Geofence)
         {
@@ -304,6 +306,7 @@ namespace TeslaLogger
                 else if (flag.StartsWith("esm"))
                 {
                     SpecialFlag_ESM(_addr, flag);
+                    _addr.name = "👀 " + _addr.name;
                 }
                 else if (flag.Equals("home"))
                 {
@@ -319,6 +322,11 @@ namespace TeslaLogger
                 {
                     _addr.IsCharger = true;
                     _addr.name = "🔌 " + _addr.name;
+                }
+                else if (flag.Equals("nosleep"))
+                {
+                    _addr.NoSleep = true;
+                    _addr.name = "☕ " + _addr.name;
                 }
                 else if (flag.StartsWith("scl"))
                 {

@@ -527,6 +527,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
+                            Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                             if (currentJSON.current_is_preconditioning)
                             {
                                 Log("preconditioning prevents car to get sleep");
@@ -535,6 +536,11 @@ namespace TeslaLogger
                             else if (webhelper.is_sentry_mode)
                             {
                                 Log("sentry_mode prevents car to get sleep");
+                                lastCarUsed = DateTime.Now;
+                            }
+                            else if (addr != null && addr.NoSleep)
+                            {
+                                Log($"POI {addr.name} has +nosleep");
                                 lastCarUsed = DateTime.Now;
                             }
                             else
