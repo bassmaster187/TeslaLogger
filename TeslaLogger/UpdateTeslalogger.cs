@@ -284,6 +284,12 @@ namespace TeslaLogger
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
                 }
 
+                if (!DBHelper.ColumnExists("cars", "freesuc"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column freesuc");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `freesuc` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+                }
+
                 if (!DBHelper.IndexExists("can_ix2", "can"))
                 {
                     Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
