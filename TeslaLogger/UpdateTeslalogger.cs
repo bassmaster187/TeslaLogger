@@ -21,6 +21,10 @@ namespace TeslaLogger
         private static DateTime lastVersionCheck = DateTime.UtcNow;
         internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }
 
+        private static bool _done = false;
+
+        public static bool Done { get => _done;}
+
         public static void Start()
         {
             // update may take quite a while, especially if we ALTER TABLEs
@@ -28,7 +32,7 @@ namespace TeslaLogger
             Thread ComfortingMessages = new Thread(() =>
             {
                 Random rnd = new Random();
-                while (true)
+                while (!Done)
                 {
                     Thread.Sleep(15000 + rnd.Next(15000));
                     switch (rnd.Next(3))
@@ -56,6 +60,7 @@ namespace TeslaLogger
             try
             {
                 shareDataOnStartup = Tools.IsShareData();
+                bool updateAllDrivestateData = false;
 
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
@@ -67,8 +72,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
                     DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
-
-                    DBHelper.UpdateAllDrivestateData();
+                    updateAllDrivestateData = true;
                 }
 
                 if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
@@ -310,7 +314,10 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
                 }
 
-                if (!DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                if (updateAllDrivestateData)
+                    DBHelper.UpdateAllDrivestateData();
+
+                if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
                 }
@@ -322,6 +329,8 @@ namespace TeslaLogger
                 CheckDBCharset();
 
                 DBHelper.UpdateHTTPStatusCodes();
+
+                Logfile.Log("DBUpdate finished.");
 
                 timer = new System.Threading.Timer(FileChecker, null, 10000, 5000);
 
@@ -484,6 +493,7 @@ namespace TeslaLogger
             {
                 try
                 {
+                    _done = true;
                     ComfortingMessages.Abort();
                 }
                 catch (Exception) { }
