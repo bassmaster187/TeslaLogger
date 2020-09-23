@@ -692,6 +692,8 @@ namespace TeslaLogger
                 currentJSON.CreateCurrentJSON();
 
                 Log("Unhandled State: " + res);
+
+                Thread.Sleep(30000); 
             }
         }
 
