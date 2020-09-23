@@ -872,11 +872,10 @@ namespace TeslaLogger
              *  }
              */
             if (software_update != null
-                && software_update.GetType() == typeof(Dictionary<string, object>)
-                && ((Dictionary<string, object>)software_update).Count > 0)
+                && software_update is Dictionary<string, object> dictionary
+                && dictionary.Count > 0)
             {
-                Dictionary<string, object> su = (Dictionary<string, object>)software_update;
-                foreach (string key in su.Keys)
+                foreach (string key in dictionary.Keys)
                 {
                     switch (key)
                     {
@@ -884,12 +883,14 @@ namespace TeslaLogger
                         case "download_perc":
                         case "expected_duration_sec":
                         case "install_perc":
-                            AddValue(key, "int", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            AddValue($"software_update.{key}", "int", dictionary[key], timestamp, "vehicle_state.software_update");
                             break;
                         // string
                         case "status":
                         case "version":
-                            AddValue(key, "string", $"software_update.{key}", timestamp, "vehicle_state.software_update");
+                            AddValue($"software_update.{key}", "string", dictionary[key], timestamp, "vehicle_state.software_update");
+                            break;
+                        default:
                             break;
                     }
                 }

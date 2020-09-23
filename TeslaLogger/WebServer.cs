@@ -214,7 +214,7 @@ namespace TeslaLogger
 
         private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
         {
-            Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
+            Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
                 string command = m.Groups[2].Captures[0].ToString();
@@ -265,10 +265,12 @@ namespace TeslaLogger
                                     WriteString(response, "");
                                     break;
                             }
+                            return;
                         }
                     }
                 }
             }
+            WriteString(response, "");
         }
 
         private void SetPassword(HttpListenerRequest request, HttpListenerResponse response)

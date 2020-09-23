@@ -14,20 +14,20 @@ if (isset($id))
 {
 	$n = 0;
 	$fp = fopen("/etc/teslalogger/geofence-private.csv", "r+");
-	while ($line = stream_get_line($fp, 1024 * 1024, "\r")) {
+	while ($line = stream_get_line($fp, 1024 * 1024, "\n")) {
 		if ($n == $id)
 		{
 			//echo($line);
 			$csv = explode(",", $line);
-			$lat = $csv[1];
-			$lng = $csv[2];
-			$poiname = $csv[0];
+			$lat = trim($csv[1]);
+			$lng = trim($csv[2]);
+			$poiname = trim($csv[0]);
 			
-			if (isset($csv[3]) && strlen($csv[3]) > 0)
-				$radius = $csv[3];
+			if (isset($csv[3]) && strlen(trim($csv[3])) > 0)
+				$radius = trim($csv[3]);
 
-			if (isset($csv[4]) && strlen($csv[4]) > 0)
-				$sf = explode("+", $csv[4]);
+			if (isset($csv[4]) && strlen(trim($csv[4])) > 0)
+				$sf = explode("+", trim($csv[4]));
 
 			break;
 		}

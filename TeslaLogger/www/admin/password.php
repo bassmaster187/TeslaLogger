@@ -13,13 +13,18 @@ require_once("tools.php");
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+	<link rel='stylesheet' href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 
 	<script>
 	<?php
 	if (isset($_REQUEST["id"]))
 		echo("var dbid=".$_REQUEST["id"]);
 	?>
+	$(document).ready(function(){
+		$("#cars").DataTable();
+	});
 
 	function save() {
 		if ($("#email").val() == null || $("#email").val() == "") {
@@ -45,6 +50,7 @@ require_once("tools.php");
 </script>
 </head>
 <body style="padding-top: 5px; padding-left: 10px;">
+<div style="max-width: 1260px;">
 <?php 
 include "menu.php";
 menu("Credentials");
@@ -105,8 +111,9 @@ else
 ?>
 <div>
 <h1><?php t("Bitte Fahrzeug auswählen"); ?>:</h1>
-<table>
-<tr><th>DB ID</th><th>Email</th><th>Car in Account</th><th>Name</th><th>Model</th><th>VIN</th><th>Tasker Token</th></tr>
+<table id="cars" class="">
+<thead><tr><th>ID</th><th>Email</th><th>#</th><th>Name</th><th>Model</th><th>VIN</th><th>Tasker Token</th><th>Edit</th></tr></thead>
+<tbody>
 <?php
 	// var_dump($url);
 
@@ -122,9 +129,11 @@ else
 		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td><a href='password.php?id=$id'>EDIT</a></td></tr>\r\n");
 	}
 ?>
-<tr><td><a href='password.php?id=-1'>NEUS FAHRZEUG</a></td><td></td><td></td><td></td></tr>
+<tr><td colspan="5"><button onclick="location.href='password.php?id=-1'">NEW CAR</button></td><td></td><td></td><td></td></tr>
+</tbody>
 </table>
 </div>
 <?php
 }
-
+?>
+</div>
