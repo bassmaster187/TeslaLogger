@@ -219,6 +219,10 @@ namespace TeslaLogger
         {
             Thread DBUpdater = new Thread(() =>
             {
+                // wait for DB updates
+                while (!UpdateTeslalogger.Done)
+                    Thread.Sleep(5000);
+
                 Thread.Sleep(30000);
                 DateTime start = DateTime.Now;
                 Logfile.Log("UpdateDbInBackground started");
@@ -254,7 +258,10 @@ namespace TeslaLogger
         {
             Thread Housekeeper = new Thread(() =>
             {
-                Thread.Sleep(30000);
+                // wait for DB updates
+                while (!UpdateTeslalogger.Done)
+                    Thread.Sleep(5000);
+
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
