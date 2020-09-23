@@ -428,7 +428,10 @@ $"  AND fast_charger_brand = 'Tesla'", con);
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
                         Tools.DebugLog("SQL:" + cmd.CommandText);
                         int rowsUpdated = cmd.ExecuteNonQuery();
-                        Logfile.Log($"CloseChargingState: car has FreeSuC - update open charging sessions ({rowsUpdated}): cost_total 0.0");
+                        if (rowsUpdated > 0)
+                        {
+                            Logfile.Log($"CloseChargingState: car has FreeSuC - update open charging sessions ({rowsUpdated}): cost_total 0.0");
+                        }
                     }
 
                 }
