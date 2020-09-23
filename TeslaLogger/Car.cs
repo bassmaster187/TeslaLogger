@@ -1334,16 +1334,21 @@ $"  AND CarID = {CarInDB}", con);
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"Select freesuc from cars where CarID={CarInDB}", con);
+                    MySqlCommand cmd = new MySqlCommand($"Select freesuc from cars where ID={CarInDB}", con);
+                    Tools.DebugLog("HasFreeSuC() SQL:" + cmd.CommandText);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                     {
+                        Tools.DebugLog($"HasFreeSuC() dr[0]:{dr[0]}");
+                        Tools.DebugLog($"HasFreeSuC() freesuc:{freesuc}");
+                        Tools.DebugLog($"HasFreeSuC() return:{freesuc == 1}");
                         return freesuc == 1;
                     }
                 }
             }
             catch (Exception ex)
             {
+                Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
             return false;
