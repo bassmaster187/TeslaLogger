@@ -451,7 +451,7 @@ namespace TeslaLogger
                     { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
-                    { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString().Replace(Environment.NewLine, "<br />") },
+                    { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString(true).Replace(Environment.NewLine, "<br />") },
                 };
                 string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);

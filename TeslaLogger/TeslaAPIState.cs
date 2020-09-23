@@ -1003,12 +1003,20 @@ namespace TeslaLogger
             return false;
         }
 
-        public override string ToString()
+        public string ToString(bool compareTs = false)
         {
             string str = string.Empty;
             foreach (string key in storage.Keys)
             {
-                str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
+                if (compareTs && storage[key][Key.Timestamp] != null && long.TryParse(storage[key][Key.Timestamp].ToString(), out long ts) && ts != 0)
+                {
+                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                    str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]} now:{now} diff:{now - ts}ms", Environment.NewLine);
+                }
+                else
+                {
+                    str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]}", Environment.NewLine);
+                }
             }
             return str;
         }
