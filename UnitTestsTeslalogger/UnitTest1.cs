@@ -32,7 +32,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(a.name, "EnBW DE-Ulm");
 
             GeocodeCache.Instance.ClearCache();
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "");
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", null);
 
             string temp = WebHelper.ReverseGecocodingAsync(c, 35.677121, 139.751033).Result;
             Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
@@ -53,7 +53,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestJapanese()
         {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "");
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", null);
 
             Tools.SetThread_enUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -70,7 +70,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void TestCars()
         {
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "");
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", null);
 
             WebHelper wh = c.webhelper;
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
