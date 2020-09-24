@@ -310,7 +310,7 @@ namespace TeslaLogger
                         cmd.Parameters.AddWithValue("@display_name", "Car " + newid);
                         cmd.ExecuteNonQuery();
 
-                        Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "");
+                        Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
 
                         WriteString(response, "OK");
                     }
@@ -337,7 +337,7 @@ namespace TeslaLogger
                             c.ExitTeslaLogger("Credentials changed!");
                         }
 
-                        Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "");
+                        Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
                         WriteString(response, "OK");
                     }
                 }

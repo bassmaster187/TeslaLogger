@@ -20,7 +20,7 @@ require_once("tools.php");
 	<script>
 	<?php
 	if (isset($_REQUEST["id"]))
-		echo("var dbid=".$_REQUEST["id"]);
+		echo("var dbid=".$_REQUEST["id"].";\n");
 	?>
 	$(document).ready(function(){
 		$("#cars").DataTable();

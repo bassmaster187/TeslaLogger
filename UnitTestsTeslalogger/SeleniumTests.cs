@@ -37,10 +37,8 @@ namespace UnitTestsTeslalogger
             var ikeaLinks = ikea[1].FindElements(By.TagName("a"));
 
             // click on show
-            Assert.AreEqual(ikeaLinks[1].Text, "SHOW");
             ikeaLinks[1].Click();
 
-            Assert.AreEqual(ikeaLinks[0].Text, "EDIT");
             ikeaLinks[0].Click();
 
             // compare entries 

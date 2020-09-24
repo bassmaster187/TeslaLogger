@@ -72,8 +72,9 @@ namespace TeslaLogger
                     string display_name = r["display_name"] as String ?? "";
                     string vin = r["vin"] as String ?? "";
                     string tasker_hash = r["tasker_hash"] as String ?? "";
+                    double? wh_tr = r["wh_tr"] as double?;
 
-                    Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash);
+                    Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash, wh_tr);
                 }
                 catch (Exception ex)
                 {
