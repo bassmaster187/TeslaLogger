@@ -292,8 +292,9 @@ if (isset($id))
 			</table>
 		</div>
 		<div>
-  			<h2>Special Flags</h2>
+  			 
 			<table>
+				<tr><td><h2>Special Flags</h2></td><td><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#special-flags-for-pois"><img src="img/icon-help-24.png" /></a></td></tr>
 				<tr><td><h4 style="margin-top: 0px;">Type</h4></td></tr>
 				<tr><td>🏠 Home</td><td><input id="home" type="checkbox" value="home" /></td></tr>
 				<tr><td>💼 Work</td><td> <input id="work" type="checkbox" value="work" /></td></tr>
