@@ -14,6 +14,9 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+	<style>
+	.icon {font-size:30px; color: #2b2b2b; height: 40px; margin-right: 15px;}
+	</style>
 	<script>
 	var map = null;	
 	var greenIcon = null;
@@ -159,7 +162,11 @@ function sf(lat, lng, radius)
 
 	foreach ($csv2 as $v)
 	{
-		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>EDIT</a> <a href='javascript:sf($v[1],$v[2], $v[5]);'>SHOW</a></td></tr>\n");
+		echo("<tr><td>$v[0]</td><td><a href='geoadd.php?id=$v[3]'>");
+		echo('<span class="icon genericon genericon-edit" />');
+		echo("</a> <a href='javascript:sf($v[1],$v[2], $v[5]);'>");
+		echo('<span class="icon genericon genericon-search" />');
+		echo("</a></td></tr>\n");
 	}
 	?>
 	</table>

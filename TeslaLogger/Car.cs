@@ -72,7 +72,7 @@ namespace TeslaLogger
 
         public string ModelName;
         public bool Raven = false;
-        public double Wh_TR = 0.190052356;
+        private double _wh_TR = 0.190052356;
         public double DB_Wh_TR = 0;
         public int DB_Wh_TR_count = 0;
 
@@ -96,10 +96,17 @@ namespace TeslaLogger
 
         private TeslaAPIState teslaAPIState;
 
+        public double Wh_TR { get => _wh_TR;
+            set { 
+                _wh_TR = value;
+                currentJSON.Wh_TR = value;
+            } 
+        }
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire, string Model_Name, string car_type, string car_special_type, string display_name, string vin, string TaskerHash)
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire, string Model_Name, string car_type, string car_special_type, string display_name, string vin, string TaskerHash, double? Wh_TR)
         {
             lock (typeof(Car))
             {
@@ -117,6 +124,8 @@ namespace TeslaLogger
                 this.display_name = display_name;
                 this.vin = vin;
                 this.TaskerHash = TaskerHash;
+                this.Wh_TR = Wh_TR ?? 0.190;
+
                 allcars.Add(this);
 
                 dbHelper = new DBHelper(this);
@@ -273,7 +282,7 @@ namespace TeslaLogger
                 {
                     round++;
                     Thread.Sleep(1000);
-                    if (File.Exists(FileManager.GetWakeupTeslaloggerPath))
+                    if (File.Exists(FileManager.GetWakeupTeslaloggerPath(CarInDB)))
                     {
 
                         if (webhelper.DeleteWakeupFile())
@@ -692,6 +701,8 @@ namespace TeslaLogger
                 currentJSON.CreateCurrentJSON();
 
                 Log("Unhandled State: " + res);
+
+                Thread.Sleep(30000); 
             }
         }
 

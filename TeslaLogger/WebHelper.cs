@@ -2331,7 +2331,7 @@ FROM
                 {
                     try
                     {
-                        string lasttaskerwakeupfilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTTASKERWAKEUPFILE");
+                        string lasttaskerwakeupfilepaht = System.IO.Path.Combine(FileManager.GetExecutingPath(), "LASTTASKERWAKEUPFILE_"+car.CarInDB);
                         string ltwf = resultContent.Replace("wakeupfile", "").Trim();
                         System.IO.File.WriteAllText(lasttaskerwakeupfilepaht, ltwf);
                     }
@@ -2363,7 +2363,7 @@ FROM
             if (ExistsWakeupFile)
             {
                 Logfile.Log("Delete Wakeup file");
-                System.IO.File.Delete(FileManager.GetWakeupTeslaloggerPath);
+                System.IO.File.Delete(FileManager.GetWakeupTeslaloggerPath(car.CarInDB));
                 ret = true;
             }
 
@@ -2392,7 +2392,7 @@ FROM
             return "";
         }
 
-        public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath) || TaskerWakeupfile();
+        public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath(car.CarInDB)) || TaskerWakeupfile();
 
         private void Log(string text)
         {
