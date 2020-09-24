@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -46,6 +47,16 @@ namespace TeslaLogger
         public static long ToUnixTime(DateTime dateTime)
         {
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
+        }
+
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string msg = cmd.CommandText;
+            foreach (SqlParameter p in cmd.Parameters)
+            {
+                msg = msg.Replace(p.ParameterName, p.Value.ToString());
+            }
+            DebugLog(msg, null, _cfp, _cln);
         }
 
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
