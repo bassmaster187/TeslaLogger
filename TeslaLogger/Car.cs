@@ -515,7 +515,7 @@ namespace TeslaLogger
                     Tools.StartSleeping(out int startSleepHour, out int startSleepMinute);
                     bool doSleep = true;
 
-                    if (FileManager.CheckCmdGoSleepFile())
+                    if (FileManager.CheckCmdGoSleepFile(CarInDB))
                     {
                         Log("STOP communication with Tesla Server to enter sleep Mode! (Sleep Button)  https://teslalogger.de/faq-1.php");
                         SetCurrentState(TeslaState.GoSleep);
