@@ -179,10 +179,12 @@ namespace TeslaLogger
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on"):
                         Program.VERBOSE = true;
+                        Logfile.Log("VERBOSE on");
                         WriteString(response, "VERBOSE on");
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/verbose/off"):
                         Program.VERBOSE = false;
+                        Logfile.Log("VERBOSE off");
                         WriteString(response, "VERBOSE off");
                         break;
                     default:
