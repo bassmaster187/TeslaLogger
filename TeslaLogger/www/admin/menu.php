@@ -20,7 +20,7 @@ function menu($title)
 {
     $car = "";
     $tasker_token = "";
-    global $display_name;
+    $display_name = "";
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
@@ -110,10 +110,10 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php">Backup</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php">Restore</a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php">Geofence</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('/wakeup.php', 'Wakeup!', true);">Wakeup Teslalogger!</a></li>
-                            <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep.txt"))
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wakeup.php?id=<?= $current_carid ?>">Wakeup Teslalogger!</a></li>
+                            <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep_$current_carid.txt"))
                             {?>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="javascript:BackgroudRun('gosleep.php', 'Sleep!', true);">Suspend Teslalogger</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="gosleep.php?id=<?= $current_carid ?>">Suspend Teslalogger</a></li>
                             <?PHP 
                             } ?>
 						</ul>
