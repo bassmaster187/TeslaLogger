@@ -3,10 +3,16 @@
 require("language.php");
 require("tools.php");
 session_start();
-global $display_name;
-
+$carid = 1;
 if (isset($_REQUEST["carid"]))
+{
 	$_SESSION["carid"] = $_REQUEST["carid"];
+	$carid = $_REQUEST["carid"];
+}
+else
+{
+	$_SESSION["carid"] = $carid;
+}
 
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
@@ -17,7 +23,7 @@ if (isset($_REQUEST["carid"]))
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Config V1.9</title>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css?v=1">
+	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
@@ -109,16 +115,9 @@ if (isset($_REQUEST["carid"]))
 				var ttfc = jsonData["time_to_full_charge"];
 				var hour = parseInt(ttfc);
 				var minute = Math.round((ttfc - hour) *60);
-				var at = new Date();
-				at.setMinutes(at.getMinutes() + minute);
-				at.setHours(at.getHours() + hour);
-
-				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("Wird geladen:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + 
-				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ 
-				jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m <br>At: " + datetime);
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m");
 
 				updateSMT(jsonData);
 			}
@@ -304,12 +303,12 @@ function ShowInfo()
     if (isDocker())
 		$prefix = "/tmp/";
 		
-	if (file_exists($prefix."cmd_gosleep.txt"))
+	if (file_exists($prefix."cmd_gosleep_$carid.txt"))
 	{?>
 		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
 		$(".HeaderT").show();
 		$("#PositiveButton").text("<?php t("Resume Teslalogger"); ?>");
-		$("#PositiveButton").click(function(){BackgroudRun('/wakeup.php', 'Wakeup!', true);});
+		$("#PositiveButton").click(function(){window.location.href='/wakeup.php?id=' + <?= $carid ?>;});
 		$("#NegativeButton").hide();
 	<?php
 	}
@@ -326,6 +325,7 @@ function ShowInfo()
 	<?php
 	}
 	?>
+	
 }
   </script>
 
@@ -346,7 +346,7 @@ function ShowInfo()
   </div>
   <div style="float:left;">
 	  <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
