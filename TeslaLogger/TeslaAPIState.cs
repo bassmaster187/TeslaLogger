@@ -546,7 +546,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private static Dictionary<string, object> ExtractResponse(string _JSON)
+        private Dictionary<string, object> ExtractResponse(string _JSON)
         {
             object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
             object r1 = ((Dictionary<string, object>)jsonResult)["response"];
