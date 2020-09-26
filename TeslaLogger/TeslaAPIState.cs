@@ -65,7 +65,12 @@ namespace TeslaLogger
             {
                 try
                 {
-                    HandleStateChange(_name, storage[_name][Key.Value], _value, long.Parse(storage[_name][Key.Timestamp].ToString()), _timestamp);
+                    if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
+                        && dict.TryGetValue(Key.Value, out object oldvalue)
+                        && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
+                    {
+                        HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                    }
                 }
                 catch (Exception ex)
                 {
