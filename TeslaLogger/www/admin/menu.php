@@ -20,7 +20,7 @@ function menu($title)
 {
     $car = "";
     $tasker_token = "";
-    $display_name = "";
+    global $display_name;
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))

@@ -3,6 +3,7 @@
 require("language.php");
 require("tools.php");
 session_start();
+global $display_name;
 $carid = 1;
 if (isset($_REQUEST["carid"]))
 {
@@ -115,9 +116,16 @@ else
 				var ttfc = jsonData["time_to_full_charge"];
 				var hour = parseInt(ttfc);
 				var minute = Math.round((ttfc - hour) *60);
+				var at = new Date();
+				at.setMinutes(at.getMinutes() + minute);
+				at.setHours(at.getHours() + hour);
+
+				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("Wird geladen:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m");
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + 
+				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ 
+				jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m <br>At: " + datetime);
 
 				updateSMT(jsonData);
 			}
@@ -346,7 +354,7 @@ function ShowInfo()
   </div>
   <div style="float:left;">
 	  <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
