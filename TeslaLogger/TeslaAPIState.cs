@@ -78,7 +78,7 @@ namespace TeslaLogger
                 }
             }
             storage[_name][Key.Type] = _type;
-            if (_type.Equals("string") && (_value == null || string.IsNullOrEmpty(_value.ToString())))
+            if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
             {
                 storage[_name][Key.Value] = string.Empty;
             }
