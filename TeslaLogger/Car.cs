@@ -1168,13 +1168,15 @@ namespace TeslaLogger
                     $"WHERE " +
                     $"  chargingstate.endchargingid = charging.id " +
                     $"  AND chargingstate.pos = pos.id " +
-                    $"  AND pos.address = '{_addr.name}' " +
+                    $"  AND pos.address = @addr " +
                     $"  AND chargingstate.cost_total IS NOT NULL " +
-                    $"  AND (chargingstate.cost_kwh_meter_invoice IS NULL OR chargingstate.cost_kwh_meter_invoice = 0)" +
-                    $"  AND (chargingstate.cost_idle_fee_total IS NULL OR chargingstate.cost_idle_fee_total = 0)" +
-                    $"  AND chargingstate.CarID = {CarInDB}" +
+                    $"  AND (chargingstate.cost_kwh_meter_invoice IS NULL OR chargingstate.cost_kwh_meter_invoice = 0) " +
+                    $"  AND (chargingstate.cost_idle_fee_total IS NULL OR chargingstate.cost_idle_fee_total = 0) " +
+                    $"  AND chargingstate.CarID = @CarID " +
                     $" ORDER BY id DESC " +
                     $" LIMIT 1", con);
+                cmd.Parameters.AddWithValue("@addr", _addr.name);
+                cmd.Parameters.AddWithValue("@CarID", CarInDB);
                 Tools.DebugLog("SQL:" + cmd.CommandText);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 9)
