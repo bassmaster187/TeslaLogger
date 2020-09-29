@@ -9,7 +9,6 @@ services:
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./TeslaLogger/GrafanaDashboards/:/var/lib/grafana/dashboards/
       - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
-      - teslalogger-grafana-usr:/usr/share/grafana/
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
       - teslalogger-tmp:/tmp/
     depends_on:
@@ -30,7 +29,7 @@ services:
       - TZ=Europe/Berlin
 
   grafana:
-    image: grafana/grafana:6.3.5
+    image: grafana/grafana:7.2.0
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
@@ -43,8 +42,6 @@ services:
       - ./TeslaLogger/GrafanaPlugins/:/var/lib/grafana/plugins
       - ./TeslaLogger/GrafanaConfig/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./TeslaLogger/GrafanaConfig/sample.yaml:/etc/grafana/provisioning/dashboards/dashboards.yml
-      - teslalogger-grafana:/var/lib/grafana
-      - teslalogger-grafana-usr:/usr/share/grafana/
     depends_on:
       - database
 
@@ -63,6 +60,4 @@ services:
       - TZ=Europe/Berlin
 
 volumes:
-    teslalogger-grafana:
-    teslalogger-grafana-usr:
     teslalogger-tmp:
