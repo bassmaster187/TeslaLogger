@@ -289,6 +289,8 @@ namespace TeslaLogger
                 string email = r["email"];
                 string password = r["password"];
                 int teslacarid = Convert.ToInt32(r["carid"]);
+                bool freesuc = r["freesuc"];
+
                 int id = Convert.ToInt32(r["id"]);
 
                 if (id == -1)
@@ -302,12 +304,13 @@ namespace TeslaLogger
                         MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
                         int newid = Convert.ToInt32(cmd.ExecuteScalar());
 
-                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name)", con);
+                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc)", con);
                         cmd.Parameters.AddWithValue("@id", newid);
                         cmd.Parameters.AddWithValue("@tesla_name", email);
                         cmd.Parameters.AddWithValue("@tesla_password", password);
                         cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
                         cmd.Parameters.AddWithValue("@display_name", "Car " + newid);
+                        cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                         cmd.ExecuteNonQuery();
 
                         Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
@@ -324,11 +327,12 @@ namespace TeslaLogger
                     {
                         con.Open();
 
-                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid where id=@id", con);
+                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc where id=@id", con);
                         cmd.Parameters.AddWithValue("@id", dbID);
                         cmd.Parameters.AddWithValue("@tesla_name", email);
                         cmd.Parameters.AddWithValue("@tesla_password", password);
                         cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                        cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                         cmd.ExecuteNonQuery();
 
                         Car c = Car.GetCarByID(dbID);
@@ -588,7 +592,7 @@ namespace TeslaLogger
             try
             {
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla FROM cars order by display_name", DBHelper.DBConnectionstring);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring);
                 da.Fill(dt);
 
                 responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";

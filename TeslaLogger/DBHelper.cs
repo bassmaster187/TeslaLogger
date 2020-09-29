@@ -264,7 +264,7 @@ namespace TeslaLogger
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("update cars set tesla_token = @tesla_token, tesla_token_expire=@tesla_token_expire where id=@id", con);
                     cmd.Parameters.AddWithValue("@id", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@tesla_token", car.Tesla_Token);
+                    cmd.Parameters.AddWithValue("@tesla_token", car.webhelper.Tesla_token);
                     cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                     int done = cmd.ExecuteNonQuery();
 
