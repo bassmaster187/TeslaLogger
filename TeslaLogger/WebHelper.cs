@@ -31,7 +31,7 @@ namespace TeslaLogger
         public string conn_charge_cable = "";
         public bool fast_charger_present = false;
         public static Geofence geofence;
-        private bool stopStreaming = false;
+        //private bool stopStreaming = false;
         private string elevation = "";
         private DateTime elevation_time = DateTime.Now;
         public DateTime lastTokenRefresh = DateTime.Now;
@@ -2247,7 +2247,7 @@ FROM
         public void StopStreaming()
         {
             Log("Request StopStreaming");
-            stopStreaming = true;
+            //stopStreaming = true;
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
