@@ -317,6 +317,13 @@ namespace TeslaLogger
                 if (updateAllDrivestateData)
                     DBHelper.UpdateAllDrivestateData();
 
+                if (!DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
+                {
+                    Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");
+                    DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
