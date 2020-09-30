@@ -477,8 +477,6 @@ namespace TeslaLogger
                         Directory.CreateDirectory("/var/lib/grafana/dashboards");
                     }
 
-                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"));
-
                     try
                     {
                         if (!File.Exists("/etc/teslalogger/MQTTClient.exe.config"))
@@ -486,6 +484,17 @@ namespace TeslaLogger
                             Logfile.Log("Copy empty MQTTClient.exe.config file");
                             Tools.CopyFile("/etc/teslalogger/git/MQTTClient/App.config", "/etc/teslalogger/MQTTClient.exe.config");
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/bin"), new DirectoryInfo("/etc/teslalogger"), "TeslaLogger.exe");
+
+                    try
+                    {
+                            Tools.CopyFile("/etc/teslalogger/git/TeslaLogger/bin/TeslaLogger.exe", "/etc/teslalogger/TeslaLogger.exe");
                     }
                     catch (Exception ex)
                     {
