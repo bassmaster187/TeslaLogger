@@ -324,6 +324,13 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
+                {
+                    Logfile.Log("alter table charging add index IX_charging_carid_datum (CarId, Datum)");
+                    DBHelper.ExecuteSQLQuery("alter table charging add index IX_charging_carid_datum (CarId, Datum)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
                     UpdateDBView();
