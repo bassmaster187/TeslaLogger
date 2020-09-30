@@ -128,7 +128,7 @@ namespace TeslaLogger
             return GetMonoRuntimeVersion() != "NULL";
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
         {
             try
             {
@@ -139,11 +139,16 @@ namespace TeslaLogger
 
                 foreach (FileInfo file in source.GetFiles())
                 {
-                    string p = Path.Combine(target.FullName, file.Name);
-
-                    Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
-
-                    File.Copy(file.FullName, p, true);
+                    if (excludeFile != null && file.Name.Equals(excludeFile))
+                    {
+                        Logfile.Log($"CopyFilesRecursively: skip {excludeFile}");
+                    }
+                    else
+                    {
+                        string p = Path.Combine(target.FullName, file.Name);
+                        Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                        File.Copy(file.FullName, p, true);
+                    }
                 }
             }
             catch (Exception ex)
