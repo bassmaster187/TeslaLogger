@@ -191,12 +191,13 @@ namespace TeslaLogger
                     Logfile.Log("CREATE TABLE OK");
                 }
 
+                /*
                 if (!DBHelper.IndexExists("can_ix", "can"))
                 {
                     Logfile.Log("alter table can add index can_ix (id,datum)");
                     DBHelper.ExecuteSQLQuery("alter table can add index can_ix (id,datum)", 600);
                     Logfile.Log("ALTER TABLE OK");
-                }
+                }*/
 
                 if (!DBHelper.ColumnExists("pos", "battery_range_km"))
                 {
@@ -319,10 +320,32 @@ namespace TeslaLogger
 
                 if (!DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
                 {
-                    Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");
+                    Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
                     DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
+
+                if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
+                {
+                    Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
+                    DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (DBHelper.IndexExists("idx_pos_datum", "pos"))
+                {
+                    Logfile.Log("alter table pos drop index idx_pos_datum");
+                    DBHelper.ExecuteSQLQuery("alter table pos drop index idx_pos_datum", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (DBHelper.IndexExists("can_ix", "can"))
+                {
+                    Logfile.Log("alter table can drop index can_ix");
+                    DBHelper.ExecuteSQLQuery("alter table can drop index can_ix", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
 
                 if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
                 {
@@ -330,6 +353,8 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery("alter table charging add index IX_charging_carid_datum (CarId, Datum)", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
+
+
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
@@ -785,13 +810,14 @@ namespace TeslaLogger
 
                     Logfile.Log("Start Grafana update");
 
-                    if (Tools.GetGrafanaVersion() == "5.5.0-d3b39f39pre1")
+                    string GrafanaVersion = Tools.GetGrafanaVersion();
+                    if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5")
                     {
-                        Logfile.Log("upgrade Grafana to 6.3.5!");
+                        Logfile.Log("upgrade Grafana to 7.2.0!");
 
-                        Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_6.3.5_armhf.deb");
+                        Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb");
 
-                        Tools.Exec_mono("dpkg", "-i grafana_6.3.5_armhf.deb");
+                        Tools.Exec_mono("dpkg", "-i grafana_7.2.0_armhf.deb");
 
                         Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
                     }
