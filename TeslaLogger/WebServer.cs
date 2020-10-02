@@ -163,6 +163,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
                         SendCarCommand(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
+                        GetCurrentJson(request, response);
+                        break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
@@ -187,6 +190,34 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/currentjson/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
+                    {
+                        WriteString(response, json);
+                    }
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"URL Not Found!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
             }
         }
 

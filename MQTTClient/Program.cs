@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TeslaLogger;
@@ -64,7 +65,13 @@ namespace MQTTClient
                         client.Connect(clientid);
                     }
 
-                    string temp = System.IO.File.ReadAllText("/etc/teslalogger/current_json_1.txt");
+                    // string temp = System.IO.File.ReadAllText("/etc/teslalogger/current_json_1.txt");
+                    string temp = null;
+                    using (WebClient wc = new WebClient())
+                    {
+                        temp = wc.DownloadString("http://localhost:5000/currentjson/1");
+                    }
+
                     if (temp != lastjson)
                     {
                         lastjson = temp;
