@@ -58,6 +58,8 @@ require("language.php");
 
 	$output = preg_replace("/<font color='red'>(.*)(.*execute: \/usr\/bin\/du -sk \/etc\/teslalogger\/Exception.*)<\/font>/", "$1$2", $output);
 	$output = preg_replace("/<font color='red'>(.*)(\/etc\/teslalogger\/Exception)<\/font>/", "$1$2", $output);
+
+	$output = preg_replace("/<font color='red'>(.*)(deleted in Exception direcotry)<\/font>/", "$1$2", $output);
 	
 	echo nl2br($output);
 ?>
