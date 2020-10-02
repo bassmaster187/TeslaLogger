@@ -423,7 +423,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car\n\norder by StartDate desc\n",
+          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -479,6 +479,26 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "label": "Textfilter",
+        "name": "Textfilter",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
       }
     ]
   },
@@ -514,5 +534,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 78
+  "version": 79
 }
