@@ -257,7 +257,7 @@ namespace TeslaLogger
                     {
                         if (addr != null && addr.name != null)
                         {
-                            uniqueNameList.Add(addr.name);
+                            uniqueNameList.Add(addr.rawName);
                         }
                     }
                     foreach (Address addr in list)
@@ -265,9 +265,9 @@ namespace TeslaLogger
                         bool keepAddr = true;
                         foreach (string localName in uniqueNameList)
                         {
-                            if (addr != null && addr.name != null && localName != null && localName.Equals(addr.name))
+                            if (addr != null && addr.rawName != null && localName != null && localName.Equals(addr.rawName))
                             {
-                                Logfile.Log("replace " + addr.name + " with POI(s) from " + filename);
+                                Logfile.Log("replace '" + addr.rawName + "' with POI(s) from " + filename);
                                 replaceCount++;
                                 keepAddr = false;
                                 break;
@@ -318,15 +318,15 @@ namespace TeslaLogger
                     _addr.IsWork = true;
                     _addr.name = "💼 " + _addr.name;
                 }
-                else if (flag.Equals("charger"))
-                {
-                    _addr.IsCharger = true;
-                    _addr.name = "🔌 " + _addr.name;
-                }
                 else if (flag.Equals("nosleep"))
                 {
                     _addr.NoSleep = true;
                     _addr.name = "☕ " + _addr.name;
+                }
+                else if (flag.Equals("charger"))
+                {
+                    _addr.IsCharger = true;
+                    _addr.name = "🔌 " + _addr.name;
                 }
                 else if (flag.StartsWith("scl"))
                 {
