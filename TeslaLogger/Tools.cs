@@ -297,7 +297,9 @@ namespace TeslaLogger
             }
         }
 
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
+        // timeout in seconds
+        // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
+        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
             try
             {
@@ -306,51 +308,63 @@ namespace TeslaLogger
                     return "";
                 }
 
-                Logfile.Log("execute: " + cmd + " " + param);
+                Logfile.Log("Exec_mono: " + cmd + " " + param);
 
                 StringBuilder sb = new StringBuilder();
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                using (Process proc = new Process())
                 {
-                    EnableRaisingEvents = false
-                };
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.FileName = cmd;
-                proc.StartInfo.Arguments = param;
+                    proc.EnableRaisingEvents = false;
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.FileName = cmd;
+                    proc.StartInfo.Arguments = param;
 
-                proc.Start();
+                    proc.Start();
 
-                while (!proc.HasExited)
-                {
-                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
-
-                    if (logging && line.Length > 0)
+                    do
                     {
-                        Logfile.Log(" " + line);
-                    }
-
-                    sb.AppendLine(line);
-
-                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
-
-                    if (logging && line.Length > 0)
-                    {
-                        if (stderr2stdout)
+                        if (!proc.HasExited)
                         {
-                            Logfile.Log(" " + line);
-                        }
-                        else
-                        {
-                            Logfile.Log("Error: " + line);
-                        }
-                    }
+                            proc.Refresh();
 
-                    sb.AppendLine(line);
+                            if (timeout > 0 && (DateTime.Now - proc.StartTime).TotalSeconds > timeout)
+                            {
+                                proc.Kill();
+                                return "Timeout";
+                            }
+
+                            string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+
+                            if (logging && line.Length > 0)
+                            {
+                                Logfile.Log(" " + line);
+                            }
+
+                            sb.AppendLine(line);
+
+                            line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
+
+                            if (logging && line.Length > 0)
+                            {
+                                if (stderr2stdout)
+                                {
+                                    Logfile.Log(" " + line);
+                                }
+                                else
+                                {
+                                    Logfile.Log("Error: " + line);
+                                }
+                            }
+
+                            sb.AppendLine(line);
+                        }
+
+                        return sb.ToString();
+                    }
+                    while (!proc.WaitForExit(100));
                 }
-
-                return sb.ToString();
             }
             catch (Exception ex)
             {
