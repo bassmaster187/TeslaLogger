@@ -244,9 +244,8 @@ namespace TeslaLogger
                 {
                     ExitTeslaLogger("wh.GetVehicles() == NULL");
                 }
-
                 string online = webhelper.IsOnline().Result;
-                Log("Streamingtoken: " + webhelper.Tesla_Streamingtoken);
+                Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
                 if (dbHelper.GetMaxPosid(false) == 0)
                 {
@@ -732,7 +731,8 @@ namespace TeslaLogger
                 tempToken += "XXXXX";
             }
 
-            Log("TOKEN: " + tempToken);
+            //Log("TOKEN: " + tempToken);
+            Log("TOKEN: " + Tools.ObfuscateString(webhelper.Tesla_token));
         }
 
         private void DriveFinished()
