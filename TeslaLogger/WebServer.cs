@@ -177,6 +177,16 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off"):
                         Dev_DumpJSON(response, false);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on"):
+                        Program.VERBOSE = true;
+                        Logfile.Log("VERBOSE on");
+                        WriteString(response, "VERBOSE on");
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/off"):
+                        Program.VERBOSE = false;
+                        Logfile.Log("VERBOSE off");
+                        WriteString(response, "VERBOSE off");
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
