@@ -178,12 +178,12 @@ echo(menu("Charging Cost"));
 <tr><td><?php t("Geladen"); ?>:</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
 <tr><td><?php t("Wirkungsgrad"); ?>:</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td><?php t("Währung"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR"></span></td><td></td><td></td></tr>
-<tr><td><?php t("kWh laut Zähler / Rechnung"); ?>:</td><td><input id="cost_kwh_meter_invoice" size="4"></span></td></tr>
-<tr><td><?php t("Kosten pro kWh"); ?>:</td><td><input id="cost_per_kwh" size="4"></span></td><td> * <span id="kwh_charged"></span> kWh</td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Ladung"); ?>:</td><td><input id="cost_per_session" size="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Minute"); ?>:</td><td><input id="cost_per_minute" size="4"></span></td><td> * <span id="minutes_charged"></span> Minutes</td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
-<tr><td><?php t("Kosten Blockiergebühr"); ?>:</td><td><input id="cost_idle_fee_total" size="4"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
+<tr><td><?php t("Währung"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
+<tr><td><?php t("kWh laut Zähler / Rechnung"); ?>:</td><td><input id="cost_kwh_meter_invoice" size="4" tabindex="2"></span></td></tr>
+<tr><td><?php t("Kosten pro kWh"); ?>:</td><td><input id="cost_per_kwh" size="4" tabindex="3"></span></td><td> * <span id="kwh_charged"></span> kWh</td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
+<tr><td><?php t("Kosten pro Ladung"); ?>:</td><td><input id="cost_per_session" size="4" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
+<tr><td><?php t("Kosten pro Minute"); ?>:</td><td><input id="cost_per_minute" size="4" tabindex="5"></span></td><td> * <span id="minutes_charged"></span> Minutes</td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
+<tr><td><?php t("Kosten Blockiergebühr"); ?>:</td><td><input id="cost_idle_fee_total" size="4" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
 <tr><td colspan="4"><hr></td></tr>
 <tr><td><b><?php t("Summe"); ?>:</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
 <tr><td></td><td></td><td></td><td>&nbsp;</td></tr>

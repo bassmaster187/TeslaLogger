@@ -206,6 +206,13 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                string temp = ex.ToString();
+
+                if (!temp.Contains("ThreadAbortException"))
+                    Log(temp);
+            }
             finally
             {
                 Log("*** Exit Loop !!!");
@@ -214,52 +221,59 @@ namespace TeslaLogger
 
         private void InitStage3()
         {
-            if (!webhelper.RestoreToken())
+            try
             {
-                webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
-            }
+                if (!webhelper.RestoreToken())
+                {
+                    webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
+                }
 
-            if (webhelper.Tesla_token == "NULL")
+                if (webhelper.Tesla_token == "NULL")
+                {
+                    ExitTeslaLogger("Tesla_token == NULL");
+                }
+
+                LogToken();
+
+                if (DBHelper.DBConnectionstring.Length == 0)
+                {
+                    ExitTeslaLogger("DBHelper.DBConnectionstring.Length == 0");
+                }
+
+                if (webhelper.GetVehicles() == "NULL")
+                {
+                    ExitTeslaLogger("wh.GetVehicles() == NULL");
+                }
+                string online = webhelper.IsOnline().Result;
+                Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
+
+                if (dbHelper.GetMaxPosid(false) == 0)
+                {
+                    Log("Insert first Pos");
+                    webhelper.IsDriving(true);
+                }
+
+                Log("Country Code: " + dbHelper.UpdateCountryCode());
+
+                dbHelper.GetEconomy_Wh_km(webhelper);
+                webhelper.DeleteWakeupFile();
+
+                if (Raven)
+                {
+                    ModelName += " Raven";
+                }
+
+                Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
+                dbHelper.GetLastTrip();
+
+                currentJSON.current_car_version = dbHelper.GetLastCarVersion();
+            }
+            catch (Exception ex)
             {
-                ExitTeslaLogger("Tesla_token == NULL");
+                string temp = ex.ToString();
+                if (!temp.Contains("ThreadAbortException"))
+                    Log(ex.ToString());
             }
-
-            LogToken();
-
-            if (DBHelper.DBConnectionstring.Length == 0)
-            {
-                ExitTeslaLogger("DBHelper.DBConnectionstring.Length == 0");
-            }
-
-            if (webhelper.GetVehicles() == "NULL")
-            {
-                ExitTeslaLogger("wh.GetVehicles() == NULL");
-            }
-
-            string online = webhelper.IsOnline().Result;
-            Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
-
-            if (dbHelper.GetMaxPosid(false) == 0)
-            {
-                Log("Insert first Pos");
-                webhelper.IsDriving(true);
-            }
-
-            Log("Country Code: " + dbHelper.UpdateCountryCode());
-
-            dbHelper.GetEconomy_Wh_km(webhelper);
-            webhelper.DeleteWakeupFile();
-
-            if (Raven)
-            {
-                ModelName += " Raven";
-            }
-
-            Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
-            dbHelper.GetLastTrip();
-
-            currentJSON.current_car_version = dbHelper.GetLastCarVersion();
-
         }
 
         internal void ExitTeslaLogger(string v)
@@ -1335,6 +1349,33 @@ $"  AND CarID = {CarInDB}", con);
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        public bool HasFreeSuC()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand($"Select freesuc from cars where ID={CarInDB}", con);
+                    Tools.DebugLog("HasFreeSuC() SQL:" + cmd.CommandText);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
+                    {
+                        Tools.DebugLog($"HasFreeSuC() dr[0]:{dr[0]}");
+                        Tools.DebugLog($"HasFreeSuC() freesuc:{freesuc}");
+                        Tools.DebugLog($"HasFreeSuC() return:{freesuc == 1}");
+                        return freesuc == 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
             return false;
         }

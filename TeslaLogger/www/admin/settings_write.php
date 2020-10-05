@@ -47,6 +47,7 @@ if ($_POST["ShareData"] == "true")
 else
     setShareData(false);
 
+file_get_contents(GetTeslaloggerURL("admin/updategrafana"),0, stream_context_create(["http"=>["timeout"=>2]]));
 
 // chmod('/etc/teslalogger/settings.json', 666);
 

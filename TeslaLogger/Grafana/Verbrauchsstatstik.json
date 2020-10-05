@@ -124,7 +124,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n$__time(Datum), \r\nodometer as 'km Stand [km]'\r\nFROM pos\r\nwhere $__timeFilter(Datum) and odometer > 1 and carid=$Car \r\norder by Datum\r\n",
+          "rawSql": "SELECT $__time(Datum), \r\nodometer as 'km Stand [km]' \r\nFROM drivestate join pos on startpos = pos.id \r\nwhere $__timeFilter(StartDate) and odometer > 1 and drivestate.carid=$Car \r\norder by Datum\r\n",
           "refId": "A",
           "select": [
             [
@@ -280,7 +280,7 @@
     ]
   },
   "time": {
-    "from": "now-1y",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {
@@ -311,5 +311,5 @@
   "timezone": "",
   "title": "Verbrauchsstatstik",
   "uid": "riqUfXtRz",
-  "version": 2
+  "version": 26
 }
