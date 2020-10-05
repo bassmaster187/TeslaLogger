@@ -80,12 +80,22 @@ namespace TeslaLogger
 
         private static void AddToBuffer(string msg)
         {
-            debugBuffer.Add(DateTime.Now, msg);
-            if (debugBuffer.Count > 500)
+            DateTime dt = DateTime.Now;
+            if (debugBuffer.ContainsKey(dt))
             {
-                DateTime firstKey = debugBuffer.Keys.First();
-                debugBuffer.Remove(firstKey);
+                dt = dt.AddMilliseconds(1);
             }
+            try
+            {
+                debugBuffer.Add(DateTime.Now, msg);
+                if (debugBuffer.Count > 500)
+                {
+                    DateTime firstKey = debugBuffer.Keys.First();
+                    debugBuffer.Remove(firstKey);
+                }
+            }
+            // ignore failed inserts
+            catch (Exception) {  }
         }
 
         // source: https://stackoverflow.com/questions/6994852
