@@ -37,7 +37,7 @@ namespace TeslaLogger
 
         public enum UpdateType { all, stable, none};
 
-        internal static SortedDictionary<DateTime, string> debugBuffer = new SortedDictionary<DateTime, string>();
+        internal static SortedList<DateTime, string> debugBuffer = new SortedList<DateTime, string>();
 
         public static void SetThread_enUS()
         {
