@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
@@ -35,6 +37,8 @@ namespace TeslaLogger
 
         public enum UpdateType { all, stable, none};
 
+        internal static SortedList<DateTime, string> debugBuffer = new SortedList<DateTime, string>();
+
         public static void SetThread_enUS()
         {
             Thread.CurrentThread.CurrentCulture = ciEnUS;
@@ -45,17 +49,53 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string msg = cmd.CommandText;
+            foreach (SqlParameter p in cmd.Parameters)
+            {
+                msg = msg.Replace(p.ParameterName, p.Value.ToString());
+            }
+            DebugLog(msg, null, _cfp, _cln);
+        }
+
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
+            string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            AddToBuffer(temp);
             if (Program.VERBOSE)
             {
-                string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
                 Logfile.Log(temp);
-                if (ex != null)
+            }
+            if (ex != null)
+            {
+                string exmsg = $"DEBUG : Exception {ex.GetType()} {ex}";
+                AddToBuffer(exmsg);
+                if (Program.VERBOSE)
                 {
-
+                    Logfile.Log(exmsg);
                 }
             }
+        }
+
+        private static void AddToBuffer(string msg)
+        {
+            DateTime dt = DateTime.Now;
+            if (debugBuffer.ContainsKey(dt))
+            {
+                dt = dt.AddMilliseconds(1);
+            }
+            try
+            {
+                debugBuffer.Add(DateTime.Now, msg);
+                if (debugBuffer.Count > 500)
+                {
+                    DateTime firstKey = debugBuffer.Keys.First();
+                    debugBuffer.Remove(firstKey);
+                }
+            }
+            // ignore failed inserts
+            catch (Exception) {  }
         }
 
         // source: https://stackoverflow.com/questions/6994852
@@ -1018,6 +1058,23 @@ namespace TeslaLogger
             {
                 _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
             }
+        }
+
+        public static string ObfuscateString(string input)
+        {
+            string obfuscated = string.Empty;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i % 3 == 0 || i % 5 == 0)
+                {
+                    obfuscated += "X";
+                }
+                else
+                {
+                    obfuscated += input[i];
+                }
+            }
+            return obfuscated;
         }
     }
 }

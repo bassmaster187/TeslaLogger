@@ -35,6 +35,8 @@ namespace TeslaLogger
 
                 InitWebserver();
 
+                UpdateTeslalogger.StopComfortingMessagesThread();
+
                 MQTTClient.StartMQTTClient();
 
                 UpdateDbInBackground();

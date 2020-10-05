@@ -34,7 +34,7 @@ namespace TeslaLogger
                 Logfile.Log("HttpListener is not Supported!!!");
                 return;
             }
-            
+
             try
             {
                 int httpport = Tools.GetHttpPort();
@@ -163,6 +163,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
                         SendCarCommand(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
+                        GetCurrentJson(request, response);
+                        break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
@@ -170,12 +173,25 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/messages"):
+                        Debug_TeslaLoggerMessages(request, response);
+                        break;
                     // developer features
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/on"):
                         Dev_DumpJSON(response, true);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off"):
                         Dev_DumpJSON(response, false);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on"):
+                        Program.VERBOSE = true;
+                        Logfile.Log("VERBOSE on");
+                        WriteString(response, "VERBOSE on");
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/off"):
+                        Program.VERBOSE = false;
+                        Logfile.Log("VERBOSE off");
+                        WriteString(response, "VERBOSE off");
                         break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -187,6 +203,41 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+
+        private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
+        }
+
+        private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/currentjson/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
+                    {
+                        WriteString(response, json);
+                    }
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"URL Not Found!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
             }
         }
 
@@ -389,24 +440,35 @@ namespace TeslaLogger
         {
             Logfile.Log("Admin: ReloadGeofence ...");
             WebHelper.geofence.Init();
-            
+
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
             {
-                IEnumerable<string> trs = WebHelper.geofence.sortedList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>",
+                IEnumerable<string> geofence = WebHelper.geofence.geofenceList.Select(
+                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
                         a.name,
                         a.lat,
-                        a.lng, 
+                        a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
                             sp => string.Format("{0}<br/>",
                             sp.ToString()))
-                        ),
-                        a.geofenceSource.ToString()
+                        )
+                    )
+                );
+                IEnumerable<string> geofenceprivate = WebHelper.geofence.geofenceList.Select(
+                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
+                        a.name,
+                        a.lat,
+                        a.lng,
+                        a.radius,
+                        string.Concat(a.specialFlags.Select(
+                            sp => string.Format("{0}<br/>",
+                            sp.ToString()))
+                        )
                     )
                 );
                 response.AddHeader("Content-Type", "text/html; charset=utf-8");
-                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(trs) + "</table></body></html>");
+                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>");
             }
             else
             {
@@ -455,7 +517,7 @@ namespace TeslaLogger
                     { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
                     { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
-                    { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString().Replace(Environment.NewLine, "<br />") },
+                    { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString(true).Replace(Environment.NewLine, "<br />") },
                 };
                 string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);
@@ -569,7 +631,7 @@ namespace TeslaLogger
 
             try
             {
-                Logfile.Log("HTTP getchargingstate");                
+                Logfile.Log("HTTP getchargingstate");
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring);
                 da.SelectCommand.Parameters.AddWithValue("@id", id);
@@ -648,12 +710,14 @@ namespace TeslaLogger
                         Dictionary<string, object> data = new Dictionary<string, object>()
                         {
                             { "name", addr.name },
+                            { "rawName", addr.rawName },
                             { "lat", addr.lat },
                             { "lng", addr.lng },
                             { "radius", addr.radius },
                             { "IsHome", addr.IsHome },
                             { "IsWork", addr.IsWork },
-                            { "Source", addr.geofenceSource.ToString() },
+                            { "IsCharger", addr.IsCharger },
+                            { "NoSleep", addr.NoSleep },
                         };
                         Dictionary<string, object> specialflags = new Dictionary<string, object>();
                         foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
