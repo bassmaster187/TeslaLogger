@@ -1005,5 +1005,22 @@ namespace TeslaLogger
                 _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
             }
         }
+
+        public static string ObfuscateString(string input)
+        {
+            string obfuscated = string.Empty;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i % 3 == 0 || i % 5 == 0)
+                {
+                    obfuscated += "X";
+                }
+                else
+                {
+                    obfuscated += input[i];
+                }
+            }
+            return obfuscated;
+        }
     }
 }
