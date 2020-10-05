@@ -107,9 +107,11 @@ Ionity DE-Am Fichtenplan Süd, 52.315620, 13.494702
 Ionity DE-Auetal Nord, 52.223703, 9.221469
 Ionity DE-Auetal Süd, 52.226977, 9.232545
 Ionity DE-Augsburg Ost, 48.411614, 10.914898
+Ionity DE-Bad Camberg West, 50.299926, 8.234700
 Ionity DE-Bad Honnef, 50.647664, 7.334521
 Ionity DE-Bayerischer Wald Nord, 48.931751, 12.708247
 Ionity DE-Bayerischer Wald Süd, 48.931044, 12.705416
+Ionity DE-Bochum, 51.474082, 7.151429
 Ionity DE-Brohltal Ost, 50.440471, 7.225629
 Ionity DE-Brohltal West, 50.441534, 7.223985
 Ionity DE-Brokenlande Ost, 54.014217, 9.93325
@@ -193,6 +195,7 @@ Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
 Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 1
+Ionity DE-Wolfsburg Forum AutoVision, 52.424872, 10.745689
 Ionity DE-Wunnenstein Ost, 49.045334, 9.266223
 Ionity DE-Wunnenstein West, 49.044276, 9.261639
 Ionity DK-Aabenraa, 55.065192, 9.366167
@@ -201,14 +204,18 @@ Ionity DK-Greve, 55.58492, 12.258
 Ionity DK-Nørager, 56.78302, 9.69481
 Ionity DK-Nyborg, 55.30933, 10.80495
 Ionity DK-Skanderborg, 56.06861, 9.97816
+Ionity DK-Vordingborg, 54.99774, 12.0007
 Ionity ES-Ariza Norte, 41.31261, -2.00133
 Ionity ES-Ariza Sur, 41.311642, -2.002738
 Ionity ES-Campo de las Naciones, 40.458398, -3.616092
 Ionity ES-Casabermeja, 36.8982555, -4.4298849
 Ionity ES-El Hidalgo, 38.824574, -3.396857
-Ionity Es-Martin de Yeltes, 40.769662, -6.286721
+Ionity ES-Imarcoain, 42.732379, -1.618726
+Ionity ES-Martin de Yeltes, 40.769662, -6.286721
+Ionity ES-Trigueros Norte 37.334097, -6.789422
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
+Ionity ES-Pola de Lena, 43.182391, -5.811289
 Ionity ES-Puerto Lumbreras, 37.575694, -1.800833
 Ionity ES-Vila Sana, 41.643444, 0.931306
 Ionity FI-Karisto, 60.9835, 25.73731
@@ -218,6 +225,8 @@ Ionity FR-Aire de Darvault, 48.264072, 2.722024
 Ionity FR-Agen, 44.171306, 0.609660
 Ionity FR-Arclusaz, 45.548541, 6.158058
 Ionity FR-Baie de Somme, 50.16723, 1.755877
+Ionity FR-Blois Ménars, 47.664023, 1.387813
+Ionity FR-Blois Villerbon, 47.665885, 1.387757
 Ionity FR-Bois Guillerot, 47.030917, 5.10791
 Ionity FR-Boismandé Est, 46.314271, 1.419247
 Ionity FR-Boismandé Ouest, 46.313348, 1.416566
@@ -265,10 +274,14 @@ Ionity FR-Mouxy, 45.673865, 5.929976
 Ionity FR-Nemours, 48.262403, 2.722228
 Ionity FR-Parcé sur Sarthe Nord, 47.8077, -0.1659
 Ionity FR-Parcé sur Sarthe Sud, 47.802, -0.1699
+Ionity FR-Pech Montat Est, 45.030878, 1.525098
+Ionity FR-Pech Montat Ouest, 45.030881, 1.524313
 Ionity FR-Poitiers Chincé, 46.701811, 0.371062
 Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
+Ionity FR-Saint Léger Est, 45.610095, -0.598651
+Ionity FR-Saint-Rambert Ouest, 45.275563, 4.825571
 Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
 Ionity FR-Tavel Nord, 44.004071, 4.703626
@@ -276,8 +289,11 @@ Ionity FR-Tavel Sud, 43.999633, 4.700191
 Ionity FR-Tours La Longue Vue, 47.47574, 0.77685
 Ionity FR-Val Gelon, 45.547331, 6.154824
 Ionity FR-Vendée, 46.573538, -1.118014
+Ionity FR-Veyre, 45.660128, 3.153525
 Ionity FR-Vidauban Sud, 43.413842, 6.451935
 Ionity FR-Villaines la Gonais, 48.125475, 0.622302
+Ionity FR-Village Catalan Est, 42.578429, 2.846994
+Ionity FR-Village Catalan Ouest, 42.577784, 2.848341
 Ionity FR-Volvestre, 43.3368, 1.2449
 Ionity FR-Vrigny, 49.242989, 3.919106
 Ionity HR-Sop, 45.78376, 16.150672
@@ -286,6 +302,8 @@ Ionity HU-Balatonkeresztúr (dir. Budapest), 46.68356, 17.37848
 Ionity HU-Balatonkeresztúr (dir. Zagreb), 46.685063, 17.37977
 Ionity HU-Kajászó (dir. Balaton), 47.307602, 18.744217
 Ionity HU-Szigetszentmiklós, 47.380371, 19.055785
+Ionity EE-Häädemeeste, 58.07469, 24.51278
+Ionity EE-Märjamaa, 58.92126, 24.45761
 Ionity IE-Athlone, 53.400721, -7.827948
 Ionity IE-Cashel, 52.50884, -7.87441
 Ionity IE-Citynorth, 53.6376, -6.25894
@@ -299,6 +317,7 @@ Ionity IT-Brugnato Ovest, 44.22647, 9.72971
 Ionity IT-Carpi, 44.77544, 10.86072
 Ionity IT-Ceriale Sud, 44.08777, 8.20626
 Ionity IT-Forli, 44.24289, 12.08182
+Ionity IT-Battipaglia, 40.6147, 14.96799
 Ionity IT-Monselice, 45.2374, 11.76287
 Ionity IT-Montecchio Maggiore, 45.50105, 11.43627
 Ionity IT-Piacenza, 45.02694, 9.73478
@@ -313,6 +332,7 @@ Ionity LT-Aplinkkelis, 55.67309, 24.33591
 Ionity LT-Garliava, 54.81854, 23.85809
 Ionity LT-Kryžkalnis, 55.48423, 22.58733
 Ionity NL-Apeldoorn-Zuid, 52.1791, 5.984281
+Ionity NL-Best, 51.503064, 5.414372
 Ionity NL-Bodegraven, 52.066539, 4.738413
 Ionity NL-De Knoest, 52.014675, 5.12222
 Ionity NL-De Kroon, 52.014276, 5.119229
@@ -340,9 +360,12 @@ Ionity NO-Ringdalskogen, 59.11234, 10.11033
 Ionity NO-Røldal, 59.83325, 6.81375
 Ionity NO-Rygge, 59.3871, 10.75119
 Ionity NO-Sira, 58.40599, 6.62316
+Ionity NO-Skei, 61.57475, 6.48347
 Ionity NO-Vik, 60.083312, 10.287055
+Ionity PL-Kaszewy Kóscielne (Kutno), 52.219064, 19.461939
 Ionity SE-Enköping, 59.65339, 17.08324
 Ionity SE-Gräna, 58.00147, 14.45086
+Ionity SE-Hudiksvall, 61.74251, 17.07861
 Ionity SE-Helsingborg, 56.01699, 12.75934
 Ionity SE-Karlskrona, 56.20688, 15.64293
 Ionity SE-Karlstad, 59.38093, 13.46529
@@ -372,6 +395,7 @@ Ionity UK-Baldock, 52.013772, -0.203003
 Ionity UK-Beaconsfield, 51.587934, -0.629065
 Ionity UK-Blackburn, 53.713494, -2.477038
 Ionity UK-Cambridge, 52.26907, -0.00901
+Ionity UK-Channel Gateway, 51.094411, 1.046777
 Ionity UK-Cobham, 51.305255, -0.406730
 Ionity UK-Cullompton, 50.863745, -3.38449
 Ionity UK-Gretna Green, 55.00796, -3.08265
@@ -1158,6 +1182,7 @@ IKEA DE-Regensburg, 49.001518, 12.177472
 IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
+Kaufland CZ-Praha,50.092464, 14.499563
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
@@ -1257,6 +1282,8 @@ CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
+
+CZ Praha Limuzská, 50.079548, 14.509048
 
 DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
