@@ -34,7 +34,7 @@ namespace TeslaLogger
                 Logfile.Log("HttpListener is not Supported!!!");
                 return;
             }
-            
+
             try
             {
                 int httpport = Tools.GetHttpPort();
@@ -163,6 +163,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
                         SendCarCommand(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
+                        GetCurrentJson(request, response);
+                        break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
@@ -203,10 +206,39 @@ namespace TeslaLogger
             }
         }
 
+
         private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
+        }
+
+        private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/currentjson/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
+                    {
+                        WriteString(response, json);
+                    }
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"URL Not Found!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
+            }
         }
 
         private void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
@@ -408,7 +440,7 @@ namespace TeslaLogger
         {
             Logfile.Log("Admin: ReloadGeofence ...");
             WebHelper.geofence.Init();
-            
+
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
             {
                 IEnumerable<string> geofence = WebHelper.geofence.geofenceList.Select(
@@ -599,7 +631,7 @@ namespace TeslaLogger
 
             try
             {
-                Logfile.Log("HTTP getchargingstate");                
+                Logfile.Log("HTTP getchargingstate");
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring);
                 da.SelectCommand.Parameters.AddWithValue("@id", id);

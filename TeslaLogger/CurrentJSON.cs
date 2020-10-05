@@ -5,6 +5,8 @@ namespace TeslaLogger
 {
     public class CurrentJSON
     {
+        public static Dictionary<int, string> jsonStringHolder = new Dictionary<int, string>();
+
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
@@ -184,8 +186,9 @@ namespace TeslaLogger
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
-                FileManager.WriteCurrentJsonFile(car.CarInDB, current_json);
-                //FileManager.WriteCurrentJsonFile(new Tools.JsonFormatter(current_json).Format());
+                jsonStringHolder[car.CarInDB] = current_json;
+
+                // FileManager.WriteCurrentJsonFile(car.CarInDB, current_json);
             }
             catch (Exception ex)
             {
