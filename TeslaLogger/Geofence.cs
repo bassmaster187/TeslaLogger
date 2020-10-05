@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -63,7 +61,7 @@ namespace TeslaLogger
         public Address(string name, double lat, double lng, int radius)
         {
             this.name = name;
-            this.rawName = name;
+            rawName = name;
             this.lat = lat;
             this.lng = lng;
             this.radius = radius;
@@ -319,7 +317,7 @@ namespace TeslaLogger
                 }
                 else if (flag.Equals("ccp"))
                 {
-                    SpecialFlag_CCP(_addr, flag);
+                    SpecialFlag_CCP(_addr);
                 }
             }
         }
@@ -354,7 +352,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void SpecialFlag_CCP(Address _addr, string _flag)
+        private static void SpecialFlag_CCP(Address _addr)
         {
             _addr.specialFlags.Add(Address.SpecialFlags.CopyChargePrice, "");
         }
