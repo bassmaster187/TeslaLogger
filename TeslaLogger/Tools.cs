@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
@@ -35,6 +37,8 @@ namespace TeslaLogger
 
         public enum UpdateType { all, stable, none};
 
+        internal static SortedDictionary<DateTime, string> debugBuffer = new SortedDictionary<DateTime, string>();
+
         public static void SetThread_enUS()
         {
             Thread.CurrentThread.CurrentCulture = ciEnUS;
@@ -45,16 +49,42 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        {
+            string msg = cmd.CommandText;
+            foreach (SqlParameter p in cmd.Parameters)
+            {
+                msg = msg.Replace(p.ParameterName, p.Value.ToString());
+            }
+            DebugLog(msg, null, _cfp, _cln);
+        }
+
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
+            string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            AddToBuffer(temp);
             if (Program.VERBOSE)
             {
-                string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
                 Logfile.Log(temp);
-                if (ex != null)
+            }
+            if (ex != null)
+            {
+                string exmsg = $"DEBUG : Exception {ex.GetType()} {ex}";
+                AddToBuffer(exmsg);
+                if (Program.VERBOSE)
                 {
-
+                    Logfile.Log(exmsg);
                 }
+            }
+        }
+
+        private static void AddToBuffer(string msg)
+        {
+            debugBuffer.Add(DateTime.Now, msg);
+            if (debugBuffer.Count > 500)
+            {
+                DateTime firstKey = debugBuffer.Keys.First();
+                debugBuffer.Remove(firstKey);
             }
         }
 
