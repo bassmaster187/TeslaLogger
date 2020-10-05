@@ -56,6 +56,14 @@ namespace TeslaLogger
                     }
                 }
             }
+            if (!DBConnectionstring.ToLower().Contains("charset="))
+            {
+                if (!DBConnectionstring.EndsWith(";"))
+                {
+                    DBConnectionstring += ";";
+                }
+                DBConnectionstring += "charset=utf8mb4";
+            }
             _DBConnectionstring = DBConnectionstring;
             return _DBConnectionstring;
         }
