@@ -392,21 +392,32 @@ namespace TeslaLogger
             
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
             {
-                IEnumerable<string> trs = WebHelper.geofence.sortedList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>",
+                IEnumerable<string> geofence = WebHelper.geofence.geofenceList.Select(
+                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
                         a.name,
                         a.lat,
-                        a.lng, 
+                        a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
                             sp => string.Format("{0}<br/>",
                             sp.ToString()))
-                        ),
-                        a.geofenceSource.ToString()
+                        )
+                    )
+                );
+                IEnumerable<string> geofenceprivate = WebHelper.geofence.geofenceList.Select(
+                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
+                        a.name,
+                        a.lat,
+                        a.lng,
+                        a.radius,
+                        string.Concat(a.specialFlags.Select(
+                            sp => string.Format("{0}<br/>",
+                            sp.ToString()))
+                        )
                     )
                 );
                 response.AddHeader("Content-Type", "text/html; charset=utf-8");
-                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(trs) + "</table></body></html>");
+                WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(geofence) + string.Concat(geofenceprivate) + "</table></body></html>");
             }
             else
             {
@@ -648,12 +659,14 @@ namespace TeslaLogger
                         Dictionary<string, object> data = new Dictionary<string, object>()
                         {
                             { "name", addr.name },
+                            { "rawName", addr.rawName },
                             { "lat", addr.lat },
                             { "lng", addr.lng },
                             { "radius", addr.radius },
                             { "IsHome", addr.IsHome },
                             { "IsWork", addr.IsWork },
-                            { "Source", addr.geofenceSource.ToString() },
+                            { "IsCharger", addr.IsCharger },
+                            { "NoSleep", addr.NoSleep },
                         };
                         Dictionary<string, object> specialflags = new Dictionary<string, object>();
                         foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
