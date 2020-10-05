@@ -93,3 +93,11 @@ request: GET /debug/TeslaLogger/states
 response: HTML
 
 Outputs lots of TeslaLogger internal state as HTML table.
+
+### /debug/TeslaLogger/messages
+
+request: GET /debug/TeslaLogger/messages
+
+response: HTML
+
+Outputs the last 500 lines of DEBUG log

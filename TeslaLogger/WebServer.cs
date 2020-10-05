@@ -170,6 +170,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/messages"):
+                        Debug_TeslaLoggerMessages(request, response);
+                        break;
                     // developer features
                     case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/on"):
                         Dev_DumpJSON(response, true);
@@ -198,6 +201,12 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
         }
 
         private void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
