@@ -8,6 +8,6 @@
     if (!isset($current_carid))
         $current_carid = 1;
 
-  echo(file_get_contents("/etc/teslalogger/current_json_$current_carid.txt"));
-  // echo file_get_contents(GetTeslaloggerURL("currentjson/".$current_carid),0, stream_context_create(["http"=>["timeout"=>2]])); 
+  // echo(file_get_contents("/etc/teslalogger/current_json_$current_carid.txt"));
+  echo file_get_contents(GetTeslaloggerURL("currentjson/".$current_carid),0, stream_context_create(["http"=>["timeout"=>2]])); 
 ?>
