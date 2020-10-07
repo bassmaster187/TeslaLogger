@@ -276,6 +276,9 @@ namespace TeslaLogger
                 if (IsPropertyExist(j, "HTTPPort"))
                 {
                     int.TryParse(j["HTTPPort"], out httpport);
+
+                    if (httpport == 0)
+                        httpport = 5000;
                 }
             }
             catch (Exception ex)

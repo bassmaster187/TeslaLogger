@@ -174,7 +174,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 2\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Zelltemperatur [°C]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 2 and val between -50 and 100\nORDER BY datum ASC\n",
           "refId": "B",
           "select": [
             [
@@ -202,7 +202,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 28\nORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'BMS max charge [kW]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 28 and val between 0 and 300\nORDER BY datum ASC",
           "refId": "C",
           "select": [
             [
@@ -230,7 +230,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 27\nORDER BY datum ASC\n",
+          "rawSql": "SELECT $__time(datum), val as 'Cell imbalance [mV]'\nFROM can\nWHERE $__timeFilter(datum) and CarID = $Car and id = 27 and val between 0 and 3000\nORDER BY datum ASC\n",
           "refId": "D",
           "select": [
             [
@@ -258,7 +258,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * -1 as 'Battery charge Power [kW]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 43 and val < 0 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * -1 as 'Battery charge Power [kW]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 43  and val between -300 and 0 ORDER BY datum ASC",
           "refId": "E",
           "select": [
             [
@@ -286,7 +286,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 5 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell min [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 5  and val between 2 and 4.5 ORDER BY datum ASC",
           "refId": "F",
           "select": [
             [
@@ -314,7 +314,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 7 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val as 'Cell max [v]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 7 and val between 2 and 4.5 ORDER BY datum ASC",
           "refId": "G",
           "select": [
             [
@@ -520,5 +520,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 59
+  "version": 97
 }

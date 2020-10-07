@@ -2385,6 +2385,10 @@ FROM
 
                 return version;
             }
+            catch (WebException wex)
+            {
+                return "Error during online version check: " + wex.Message;
+            }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
