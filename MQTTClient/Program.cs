@@ -79,6 +79,12 @@ namespace MQTTClient
                             uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     }
                 }
+                catch (WebException wex)
+                {
+                    Logfile.Log(wex.Message);
+                    System.Threading.Thread.Sleep(60000);
+
+                }
                 catch (Exception ex)
                 {
                     System.Threading.Thread.Sleep(30000);
