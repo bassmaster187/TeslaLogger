@@ -340,8 +340,16 @@ namespace TeslaLogger
             }
         }
 
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
+        // timeout in seconds
+        // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
+        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
+            Logfile.Log("Exec_mono: " + cmd + " " + param);
+
+            StringBuilder sb = new StringBuilder();
+
+            bool bTimeout = false;
+
             try
             {
                 if (!Tools.IsMono())
@@ -349,24 +357,32 @@ namespace TeslaLogger
                     return "";
                 }
 
-                Logfile.Log("execute: " + cmd + " " + param);
-
-                StringBuilder sb = new StringBuilder();
-
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                using (Process proc = new Process())
                 {
-                    EnableRaisingEvents = false
-                };
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.FileName = cmd;
-                proc.StartInfo.Arguments = param;
+                    proc.EnableRaisingEvents = false;
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.FileName = cmd;
+                    proc.StartInfo.Arguments = param;
 
-                proc.Start();
+                    proc.Start();
 
-                while (!proc.HasExited)
-                {
+                    do
+                    {
+                        if (!proc.HasExited)
+                        {
+                            proc.Refresh();
+
+                            if (timeout > 0 && (DateTime.Now - proc.StartTime).TotalSeconds > timeout)
+                            {
+                                proc.Kill();
+                                bTimeout = true;
+                            }
+                        }
+                    }
+                    while (!proc.WaitForExit(100));
+
                     string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
 
                     if (logging && line.Length > 0)
@@ -375,7 +391,6 @@ namespace TeslaLogger
                     }
 
                     sb.AppendLine(line);
-
                     line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
 
                     if (logging && line.Length > 0)
@@ -392,14 +407,13 @@ namespace TeslaLogger
 
                     sb.AppendLine(line);
                 }
-
-                return sb.ToString();
             }
             catch (Exception ex)
             {
                 Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
+            return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
         }
 
         internal static bool UseScanMyTesla()
