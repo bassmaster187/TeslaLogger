@@ -6,11 +6,28 @@ function isDocker()
     return file_exists($dockerfile);
 }
 
+function GetTeslaloggerHTTPPort()
+{
+    $port = 5000;
+
+    if (file_exists("/etc/teslalogger/settings.json"))
+	{
+		$content = file_get_contents("/etc/teslalogger/settings.json");
+		$j = json_decode($content);
+		if (!empty($j->{"HTTPPort"})) 
+            $port = $j->{"HTTPPort"};	
+    }
+    
+    return $port;
+}
+
 function GetTeslaloggerURL($path)
 {
-    $url = "http://localhost:5000/";
+    $port = GetTeslaloggerHTTPPort();
+
+    $url = "http://localhost:$port/";
     if (isDocker())
-        $url = "http://teslalogger:5000/";
+        $url = "http://teslalogger:$port/";
 
     return $url.$path;
 }

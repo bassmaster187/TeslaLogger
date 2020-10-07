@@ -4,11 +4,13 @@ require("tools.php");
 $data = $_REQUEST["data"];
 $URL = $_REQUEST["url"];
 
-$fullurl = 'http://localhost:5000/'.$URL;
-if (isDocker())
-    $fullurl = 'http://teslalogger:5000/'.$URL;
+$port = GetTeslaloggerHTTPPort();
 
-// $fullurl = 'http://host.docker.internal:5000/'.$URL;
+$fullurl = "http://localhost:$port/$URL";
+if (isDocker())
+    $fullurl = "http://teslalogger:$port/$URL";
+
+// $fullurl = "http://host.docker.internal:$port/$URL";
 
 echo file_get_contents($fullurl, false, stream_context_create([
     'http' => [

@@ -3,9 +3,11 @@ require("tools.php");
 
 $JSON = $_REQUEST["JSON"];
 
-$url = 'http://localhost:5000/setcost';
+$port = GetTeslaloggerHTTPPort();
+
+$url = "http://localhost:$port/setcost";
 if (isDocker())
-    $url = 'http://teslalogger:5000/setcost';
+    $url = "http://teslalogger:$port/setcost";
 
 echo file_get_contents($url, false, stream_context_create([
     'http' => [
