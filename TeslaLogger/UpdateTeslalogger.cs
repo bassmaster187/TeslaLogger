@@ -550,7 +550,7 @@ namespace TeslaLogger
 
                 Logfile.Log("Rebooting");
 
-                Tools.Exec_mono("reboot", "");
+                Tools.Exec_mono("/sbin/reboot", "");
             }
             catch (Exception ex)
             {
@@ -1355,7 +1355,7 @@ namespace TeslaLogger
                         else
                         {
                             Logfile.Log("Rebooting");
-                            Tools.Exec_mono("reboot", "");
+                            Tools.Exec_mono("/sbin/reboot", "");
                         }
                     }
                     else
