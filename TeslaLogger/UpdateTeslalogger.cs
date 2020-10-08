@@ -832,13 +832,22 @@ namespace TeslaLogger
                     string GrafanaVersion = Tools.GetGrafanaVersion();
                     if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5")
                     {
-                        Logfile.Log("upgrade Grafana to 7.2.0!");
+                        Thread threadGrafanaUpdate = new Thread(() =>
+                        {
+                            Logfile.Log("upgrade Grafana to 7.2.0!");
 
-                        Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb");
+                            Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb  --show-progress");
 
-                        Tools.Exec_mono("dpkg", "-i grafana_7.2.0_armhf.deb");
+                            Tools.Exec_mono("dpkg", "-i grafana_7.2.0_armhf.deb");
 
-                        Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                            Logfile.Log("upgrade Grafana DONE!");
+
+                            Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                        })
+                        {
+                            Name = "GrafanaUpdate"
+                        };
+                        threadGrafanaUpdate.Start();
                     }
 
                     // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
