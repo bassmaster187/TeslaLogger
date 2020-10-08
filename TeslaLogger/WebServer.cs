@@ -352,21 +352,25 @@ namespace TeslaLogger
                     {
                         con.Open();
 
-                        MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con);
-                        int newid = Convert.ToInt32(cmd.ExecuteScalar());
+                        using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
+                        {
+                            int newid = Convert.ToInt32(cmd.ExecuteScalar());
 
-                        cmd = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc)", con);
-                        cmd.Parameters.AddWithValue("@id", newid);
-                        cmd.Parameters.AddWithValue("@tesla_name", email);
-                        cmd.Parameters.AddWithValue("@tesla_password", password);
-                        cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
-                        cmd.Parameters.AddWithValue("@display_name", "Car " + newid);
-                        cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
-                        cmd.ExecuteNonQuery();
+                            using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc)", con))
+                            {
+                                cmd2.Parameters.AddWithValue("@id", newid);
+                                cmd2.Parameters.AddWithValue("@tesla_name", email);
+                                cmd2.Parameters.AddWithValue("@tesla_password", password);
+                                cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                                cmd2.Parameters.AddWithValue("@display_name", "Car " + newid);
+                                cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                                cmd2.ExecuteNonQuery();
 
-                        Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
+                                Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
 
-                        WriteString(response, "OK");
+                                WriteString(response, "OK");
+                            }
+                        }
                     }
                 }
                 else
@@ -378,22 +382,24 @@ namespace TeslaLogger
                     {
                         con.Open();
 
-                        MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc where id=@id", con);
-                        cmd.Parameters.AddWithValue("@id", dbID);
-                        cmd.Parameters.AddWithValue("@tesla_name", email);
-                        cmd.Parameters.AddWithValue("@tesla_password", password);
-                        cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
-                        cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
-                        cmd.ExecuteNonQuery();
-
-                        Car c = Car.GetCarByID(dbID);
-                        if (c != null)
+                        using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc where id=@id", con))
                         {
-                            c.ExitTeslaLogger("Credentials changed!");
-                        }
+                            cmd.Parameters.AddWithValue("@id", dbID);
+                            cmd.Parameters.AddWithValue("@tesla_name", email);
+                            cmd.Parameters.AddWithValue("@tesla_password", password);
+                            cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                            cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                            cmd.ExecuteNonQuery();
 
-                        Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
-                        WriteString(response, "OK");
+                            Car c = Car.GetCarByID(dbID);
+                            if (c != null)
+                            {
+                                c.ExitTeslaLogger("Credentials changed!");
+                            }
+
+                            Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
+                            WriteString(response, "OK");
+                        }
                     }
                 }
             }
@@ -592,29 +598,31 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con);
-
-                    if (DBHelper.DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && DBHelper.IsZero(j["cost_per_session"]))
+                    using (MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con))
                     {
-                        cmd.Parameters.AddWithValue("@cost_total", 0);
+
+                        if (DBHelper.DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && DBHelper.IsZero(j["cost_per_session"]))
+                        {
+                            cmd.Parameters.AddWithValue("@cost_total", 0);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"]));
+                        }
+
+                        cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"]));
+                        cmd.Parameters.AddWithValue("@cost_per_kwh", DBHelper.DBNullIfEmpty(j["cost_per_kwh"]));
+                        cmd.Parameters.AddWithValue("@cost_per_session", DBHelper.DBNullIfEmpty(j["cost_per_session"]));
+                        cmd.Parameters.AddWithValue("@cost_per_minute", DBHelper.DBNullIfEmpty(j["cost_per_minute"]));
+                        cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"]));
+                        cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
+
+                        cmd.Parameters.AddWithValue("@id", j["id"]);
+                        int done = cmd.ExecuteNonQuery();
+
+                        Logfile.Log("SetCost OK: " + done);
+                        WriteString(response, "OK");
                     }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"]));
-                    }
-
-                    cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"]));
-                    cmd.Parameters.AddWithValue("@cost_per_kwh", DBHelper.DBNullIfEmpty(j["cost_per_kwh"]));
-                    cmd.Parameters.AddWithValue("@cost_per_session", DBHelper.DBNullIfEmpty(j["cost_per_session"]));
-                    cmd.Parameters.AddWithValue("@cost_per_minute", DBHelper.DBNullIfEmpty(j["cost_per_minute"]));
-                    cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"]));
-                    cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
-
-                    cmd.Parameters.AddWithValue("@id", j["id"]);
-                    int done = cmd.ExecuteNonQuery();
-
-                    Logfile.Log("SetCost OK: " + done);
-                    WriteString(response, "OK");
                 }
             }
             catch (Exception ex)
@@ -632,12 +640,16 @@ namespace TeslaLogger
             try
             {
                 Logfile.Log("HTTP getchargingstate");
-                DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring);
-                da.SelectCommand.Parameters.AddWithValue("@id", id);
-                da.Fill(dt);
+                using (DataTable dt = new DataTable())
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@id", id);
+                        da.Fill(dt);
 
-                responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -653,11 +665,15 @@ namespace TeslaLogger
 
             try
             {
-                DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring);
-                da.Fill(dt);
+                using (DataTable dt = new DataTable())
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
+                    {
+                        da.Fill(dt);
 
-                responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -744,13 +760,15 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con);
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read() && dr[0] != DBNull.Value)
+                    using (MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con))
                     {
-                        int.TryParse(dr[0].ToString(), out to);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            int.TryParse(dr[0].ToString(), out to);
+                        }
+                        con.Close();
                     }
-                    con.Close();
                 }
             }
             catch (Exception) { }

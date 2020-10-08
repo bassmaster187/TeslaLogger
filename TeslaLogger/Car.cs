@@ -1165,40 +1165,42 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand(
-"SELECT " +
-"  chargingstate.id, " +
-"  chargingstate.cost_total, " +
-"  chargingstate.cost_currency, " +
-"  chargingstate.cost_per_kwh, " +
-"  chargingstate.cost_per_session, " +
-"  chargingstate.cost_per_minute " +
-"FROM " +
-"  chargingstate, " +
-"  pos" +
-"WHERE " +
-"  chargingstate.pos = pos.id " +
-"  AND pos.address = @addr " +
-"  AND chargingstate.cost_total IS NOT NULL " +
-"  AND (chargingstate.cost_kwh_meter_invoice IS NULL OR chargingstate.cost_kwh_meter_invoice = 0) " +
-"  AND (chargingstate.cost_idle_fee_total IS NULL OR chargingstate.cost_idle_fee_total = 0) " +
-"  AND chargingstate.CarID = @CarID " +
-"ORDER BY id DESC " +
-"LIMIT 1", con);
-                cmd.Parameters.AddWithValue("@addr", _addr.name);
-                cmd.Parameters.AddWithValue("@CarID", CarInDB);
-                Tools.DebugLog("SQL:" + cmd.CommandText);
-                MySqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 6)
+                using (MySqlCommand cmd = new MySqlCommand(
+                    "SELECT " +
+                    "  chargingstate.id, " +
+                    "  chargingstate.cost_total, " +
+                    "  chargingstate.cost_currency, " +
+                    "  chargingstate.cost_per_kwh, " +
+                    "  chargingstate.cost_per_session, " +
+                    "  chargingstate.cost_per_minute " +
+                    "FROM " +
+                    "  chargingstate, " +
+                    "  pos" +
+                    "WHERE " +
+                    "  chargingstate.pos = pos.id " +
+                    "  AND pos.address = @addr " +
+                    "  AND chargingstate.cost_total IS NOT NULL " +
+                    "  AND (chargingstate.cost_kwh_meter_invoice IS NULL OR chargingstate.cost_kwh_meter_invoice = 0) " +
+                    "  AND (chargingstate.cost_idle_fee_total IS NULL OR chargingstate.cost_idle_fee_total = 0) " +
+                    "  AND chargingstate.CarID = @CarID " +
+                    "ORDER BY id DESC " +
+                    "LIMIT 1", con))
                 {
-                    long.TryParse(dr[0].ToString(), out referenceID);
-                    double.TryParse(dr[1].ToString(), out ref_cost_total);
-                    ref_cost_currency = dr[2].ToString();
-                    double.TryParse(dr[3].ToString(), out ref_cost_per_kwh);
-                    double.TryParse(dr[4].ToString(), out ref_cost_per_session);
-                    double.TryParse(dr[5].ToString(), out ref_cost_per_minute);
+                    cmd.Parameters.AddWithValue("@addr", _addr.name);
+                    cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                    Tools.DebugLog("SQL:" + cmd.CommandText);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 6)
+                    {
+                        long.TryParse(dr[0].ToString(), out referenceID);
+                        double.TryParse(dr[1].ToString(), out ref_cost_total);
+                        ref_cost_currency = dr[2].ToString();
+                        double.TryParse(dr[3].ToString(), out ref_cost_per_kwh);
+                        double.TryParse(dr[4].ToString(), out ref_cost_per_session);
+                        double.TryParse(dr[5].ToString(), out ref_cost_per_minute);
+                    }
+                    con.Close();
                 }
-                con.Close();
             }
             if (ref_cost_total != -1.0)
             {
@@ -1208,41 +1210,44 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand(
-"SELECT " +
-"  chargingstate.id, " +
-"  charging.charge_energy_added, " +
-"  chargingstate.startdate, " +
-"  chargingstate.enddate " +
-"FROM " +
-"  chargingstate, " +
-"  pos, " +
-"  charging " +
-"WHERE " +
-"  chargingstate.pos = pos.id " +
-"  AND chargingstate.endchargingid = charging.id " +
-"  AND pos.address = @addr " +
-"  AND chargingstate.cost_total IS NULL " +
-"  AND chargingstate.CarID = @CarID " +
-"ORDER BY id DESC " +
-"LIMIT 1", con);
-                    cmd.Parameters.AddWithValue("@addr", _addr.name);
-                    cmd.Parameters.AddWithValue("@CarID", CarInDB);
-                    Tools.DebugLog("SQL:" + cmd.CommandText);
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read() && dr[0] != DBNull.Value)
+                    using (MySqlCommand cmd = new MySqlCommand(
+                        "SELECT " +
+                        "  chargingstate.id, " +
+                        "  charging.charge_energy_added, " +
+                        "  chargingstate.startdate, " +
+                        "  chargingstate.enddate " +
+                        "FROM " +
+                        "  chargingstate, " +
+                        "  pos, " +
+                        "  charging " +
+                        "WHERE " +
+                        "  chargingstate.pos = pos.id " +
+                        "  AND chargingstate.endchargingid = charging.id " +
+                        "  AND pos.address = @addr " +
+                        "  AND chargingstate.cost_total IS NULL " +
+                        "  AND chargingstate.CarID = @CarID " +
+                        "ORDER BY id DESC " +
+                        "LIMIT 1", con))
                     {
-                        if (
-                            dr[0] != null && long.TryParse(dr[0].ToString(), out chargeID)
-                            && dr[1] != null && double.TryParse(dr[1].ToString(), out charge_energy_added)
-                            && dr[2] != null && DateTime.TryParse(dr[2].ToString(), out chargeStart)
-                            && dr[3] != null && DateTime.TryParse(dr[3].ToString(), out chargeEnd)
-                            )
+                        cmd.Parameters.AddWithValue("@addr", _addr.name);
+                        cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                        Tools.DebugLog("SQL:" + cmd.CommandText);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Logfile.Log($"CopyChargePrice: latest charging session at {_addr.name} has ID {chargeID} - charge_energy_added:{charge_energy_added} chargeStart:{chargeStart} chargeEnd:{chargeEnd}");
+                            if (
+                                dr[0] != null && long.TryParse(dr[0].ToString(), out chargeID)
+                                && dr[1] != null && double.TryParse(dr[1].ToString(), out charge_energy_added)
+                                && dr[2] != null && DateTime.TryParse(dr[2].ToString(), out chargeStart)
+                                && dr[3] != null && DateTime.TryParse(dr[3].ToString(), out chargeEnd)
+                                )
+                            {
+                                Logfile.Log($"CopyChargePrice: latest charging session at {_addr.name} has ID {chargeID} - charge_energy_added:{charge_energy_added} chargeStart:{chargeStart} chargeEnd:{chargeEnd}");
+                            }
                         }
                     }
                     con.Close();
+                    
                 }
                 if (chargeID != 0)
                 {
@@ -1253,32 +1258,34 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
-                            MySqlCommand cmd = new MySqlCommand(
-"UPDATE " +
-"  chargingstate " +
-"SET " +
-"  cost_total = @cost_total, " +
-"  cost_currency = @cost_currency, " +
-"  cost_per_kwh = @cost_per_kwh, " +
-"  cost_per_session = @cost_per_session, " +
-"  cost_per_minute = @cost_per_minute, " +
-"  cost_idle_fee_total = @cost_idle_fee_total, " +
-"  cost_kwh_meter_invoice = @cost_kwh_meter_invoice " +
-"WHERE " +
-"  id = @id " +
-"  AND CarID = @CarID", con);
-                            cmd.Parameters.AddWithValue("@cost_total", ref_cost_total);
-                            cmd.Parameters.AddWithValue("@cost_per_session", ref_cost_per_session);
-                            cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency.ToString()));
-                            cmd.Parameters.AddWithValue("@cost_per_kwh", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_per_minute", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@id", chargeID);
-                            cmd.Parameters.AddWithValue("@CarID", CarInDB);
-                            Tools.DebugLog("SQL:" + cmd.CommandText);
-                            _ = cmd.ExecuteNonQuery();
-                            Logfile.Log($"CopyChargePrice: update charging session at {_addr.name}, ID {chargeID}: cost_total 0.0");
+                            using (MySqlCommand cmd = new MySqlCommand(
+                                "UPDATE " +
+                                "  chargingstate " +
+                                "SET " +
+                                "  cost_total = @cost_total, " +
+                                "  cost_currency = @cost_currency, " +
+                                "  cost_per_kwh = @cost_per_kwh, " +
+                                "  cost_per_session = @cost_per_session, " +
+                                "  cost_per_minute = @cost_per_minute, " +
+                                "  cost_idle_fee_total = @cost_idle_fee_total, " +
+                                "  cost_kwh_meter_invoice = @cost_kwh_meter_invoice " +
+                                "WHERE " +
+                                "  id = @id " +
+                                "  AND CarID = @CarID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@cost_total", ref_cost_total);
+                                cmd.Parameters.AddWithValue("@cost_per_session", ref_cost_per_session);
+                                cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency.ToString()));
+                                cmd.Parameters.AddWithValue("@cost_per_kwh", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@cost_per_minute", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@id", chargeID);
+                                cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                                Tools.DebugLog("SQL:" + cmd.CommandText);
+                                _ = cmd.ExecuteNonQuery();
+                                Logfile.Log($"CopyChargePrice: update charging session at {_addr.name}, ID {chargeID}: cost_total 0.0");
+                            }
                         }
                     }
                     else
@@ -1372,15 +1379,18 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"Select freesuc from cars where ID={CarInDB}", con);
-                    Tools.DebugLog("HasFreeSuC() SQL:" + cmd.CommandText);
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
+                    using (MySqlCommand cmd = new MySqlCommand($"Select freesuc from cars where ID=@carid", con))
                     {
-                        Tools.DebugLog($"HasFreeSuC() dr[0]:{dr[0]}");
-                        Tools.DebugLog($"HasFreeSuC() freesuc:{freesuc}");
-                        Tools.DebugLog($"HasFreeSuC() return:{freesuc == 1}");
-                        return freesuc == 1;
+                        cmd.Parameters.AddWithValue("@carid", CarInDB);
+                        Tools.DebugLog("HasFreeSuC() SQL:" + cmd.CommandText);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
+                        {
+                            Tools.DebugLog($"HasFreeSuC() dr[0]:{dr[0]}");
+                            Tools.DebugLog($"HasFreeSuC() freesuc:{freesuc}");
+                            Tools.DebugLog($"HasFreeSuC() return:{freesuc == 1}");
+                            return freesuc == 1;
+                        }
                     }
                 }
             }
