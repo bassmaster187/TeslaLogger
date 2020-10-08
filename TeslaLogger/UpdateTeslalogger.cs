@@ -286,11 +286,13 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
-                            MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con);
-                            cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
-                            cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
-                            cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            cmd.ExecuteNonQuery();
+                            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con))
+                            {
+                                cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
+                                cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
+                                cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
+                                cmd.ExecuteNonQuery();
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -444,11 +446,13 @@ namespace TeslaLogger
                         {
                             File.Delete(updatepackage);
                         }
-                        WebClient wc = new WebClient();
-                        Logfile.Log($"downloading update package from {GitHubURL}");
-                        wc.DownloadFile(GitHubURL, updatepackage);
-                        Logfile.Log($"update package downloaded to {updatepackage}");
-                        httpDownloadSuccessful = true;
+                        using (WebClient wc = new WebClient())
+                        {
+                            Logfile.Log($"downloading update package from {GitHubURL}");
+                            wc.DownloadFile(GitHubURL, updatepackage);
+                            Logfile.Log($"update package downloaded to {updatepackage}");
+                            httpDownloadSuccessful = true;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -629,19 +633,23 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con);
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                     {
-                        string charset = dr[0].ToString();
-
-                        if (charset != "utf8mb4")
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
                         {
-                            dr.Close();
+                            string charset = dr[0].ToString();
 
-                            Logfile.Log("Chage database charset to utf8mb4");
-                            cmd = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con);
-                            cmd.ExecuteNonQuery();
+                            if (charset != "utf8mb4")
+                            {
+                                dr.Close();
+
+                                Logfile.Log("Chage database charset to utf8mb4");
+                                using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                {
+                                    cmd2.ExecuteNonQuery();
+                                }
+                            }
                         }
                     }
                 }
@@ -1293,14 +1301,16 @@ namespace TeslaLogger
                     Logfile.Log("chmod " + chmod + " " + filename);
                 }
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                using (System.Diagnostics.Process proc = new System.Diagnostics.Process
                 {
                     EnableRaisingEvents = false
-                };
-                proc.StartInfo.FileName = "chmod";
-                proc.StartInfo.Arguments = chmod + " " + filename;
-                proc.Start();
-                proc.WaitForExit();
+                })
+                {
+                    proc.StartInfo.FileName = "chmod";
+                    proc.StartInfo.Arguments = chmod + " " + filename;
+                    proc.Start();
+                    proc.WaitForExit();
+                }
             }
             catch (Exception ex)
             {

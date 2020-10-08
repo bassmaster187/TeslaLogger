@@ -89,6 +89,7 @@
     <Compile Include="WebHelper.cs" />
     <Compile Include="WebServer.cs" />
     <Compile Include="TeslaAPIState.cs" />
+    <Compile Include="TLStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

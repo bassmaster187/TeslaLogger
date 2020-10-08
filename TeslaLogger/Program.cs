@@ -25,6 +25,8 @@ namespace TeslaLogger
 
             try
             {
+                InitTLStats();
+
                 InitStage1();
 
                 InitCheckDocker();
@@ -56,31 +58,33 @@ namespace TeslaLogger
 
         private static void GetAllCars()
         {
-            DataTable dt = DBHelper.GetCars();
-            foreach (DataRow r in dt.Rows)
+            using (DataTable dt = DBHelper.GetCars())
             {
-                int id = 0;
-                try
+                foreach (DataRow r in dt.Rows)
                 {
-                    id = Convert.ToInt32(r["id"]);
-                    String Name = r["tesla_name"].ToString();
-                    String Password = r["tesla_password"].ToString();
-                    int carid = r["tesla_carid"] as Int32? ?? 0;
-                    String tesla_token = r["tesla_token"] as String ?? "";
-                    DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
-                    string Model_Name = r["Model_Name"] as String ?? "";
-                    string car_type = r["car_type"] as String ?? "";
-                    string car_special_type = r["car_special_type"] as String ?? "";
-                    string display_name = r["display_name"] as String ?? "";
-                    string vin = r["vin"] as String ?? "";
-                    string tasker_hash = r["tasker_hash"] as String ?? "";
-                    double? wh_tr = r["wh_tr"] as double?;
+                    int id = 0;
+                    try
+                    {
+                        id = Convert.ToInt32(r["id"]);
+                        String Name = r["tesla_name"].ToString();
+                        String Password = r["tesla_password"].ToString();
+                        int carid = r["tesla_carid"] as Int32? ?? 0;
+                        String tesla_token = r["tesla_token"] as String ?? "";
+                        DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
+                        string Model_Name = r["Model_Name"] as String ?? "";
+                        string car_type = r["car_type"] as String ?? "";
+                        string car_special_type = r["car_special_type"] as String ?? "";
+                        string display_name = r["display_name"] as String ?? "";
+                        string vin = r["vin"] as String ?? "";
+                        string tasker_hash = r["tasker_hash"] as String ?? "";
+                        double? wh_tr = r["wh_tr"] as double?;
 
-                    Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash, wh_tr);
-                }
-                catch (Exception ex)
-                {
-                    Logfile.Log(id + "# :" + ex.ToString());
+                        Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, display_name, vin, tasker_hash, wh_tr);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(id + "# :" + ex.ToString());
+                    }
                 }
             }
         }
@@ -97,6 +101,25 @@ namespace TeslaLogger
                     Name = "WebserverThread"
                 };
                 threadWebserver.Start();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void InitTLStats()
+        {
+            try
+            {
+                Thread threadTLStats = new Thread(() =>
+                {
+                    TLStats.GetInstance().run();
+                })
+                {
+                    Name = "TLStatsThread"
+                };
+                threadTLStats.Start();
             }
             catch (Exception ex)
             {

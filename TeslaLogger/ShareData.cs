@@ -55,11 +55,13 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
+                using (MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
                 {
                     CommandTimeout = 6000
-                };
-                cmd.ExecuteNonQuery();
+                })
+                {
+                    cmd.ExecuteNonQuery();
+                }
             }
 
         }
@@ -80,102 +82,110 @@ namespace TeslaLogger
                 FROM chargingstate
                 join pos on chargingstate.Pos = pos.id
                 join charging on charging.id = chargingstate.EndChargingID
-                where chargingstate.carid = "+ car.CarInDB +" and (export is null or export < " + ProtocolVersion + @") and (fast_charger_present or address like 'Supercharger%' or address like 'Ionity%' or max_charger_power > 25)
+                where chargingstate.carid = " + car.CarInDB + " and (export is null or export < " + ProtocolVersion + @") and (fast_charger_present or address like 'Supercharger%' or address like 'Ionity%' or max_charger_power > 25)
                 order by StartDate
                 ";
 
-                DataTable dt = new DataTable();
-
-                int ms = Environment.TickCount;
-
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
-                da.SelectCommand.CommandTimeout = 600;
-                da.Fill(dt);
-                ms = Environment.TickCount - ms;
-                car.Log("ShareData: SELECT chargingstate ms: " + ms);
-
-                foreach (DataRow dr in dt.Rows)
+                using (DataTable dt = new DataTable())
                 {
-                    // lat, lng
-                    if (double.TryParse(dr["lat"].ToString(), out double lat) && double.TryParse(dr["lng"].ToString(), out double lng))
+
+                    int ms = Environment.TickCount;
+
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
                     {
-                        Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
-                        if (addr != null && addr.IsHome)
-                        {
-                            car.Log("Do not share ChargingData for +home (" + addr.name + ")");
-                            continue;
-                        }
-                        // get raw address w/o automatically added unicode characters
-                        if (dr["pos_name"] != null && addr != null)
-                        {
-                            dr["pos_name"] = addr.rawName;
-                        }
-                    }
+                        da.SelectCommand.CommandTimeout = 600;
+                        da.Fill(dt);
+                        ms = Environment.TickCount - ms;
+                        car.Log("ShareData: SELECT chargingstate ms: " + ms);
 
-                    int HostId = Convert.ToInt32(dr["HostId"]);
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            // lat, lng
+                            if (double.TryParse(dr["lat"].ToString(), out double lat) && double.TryParse(dr["lng"].ToString(), out double lng))
+                            {
+                                Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
+                                if (addr != null && addr.IsHome)
+                                {
+                                    car.Log("Do not share ChargingData for +home (" + addr.name + ")");
+                                    continue;
+                                }
+                                // get raw address w/o automatically added unicode characters
+                                if (dr["pos_name"] != null && addr != null)
+                                {
+                                    dr["pos_name"] = addr.rawName;
+                                }
+                            }
 
-                    Dictionary<string, object> d = new Dictionary<string, object>
+                            int HostId = Convert.ToInt32(dr["HostId"]);
+
+                            Dictionary<string, object> d = new Dictionary<string, object>
                     {
                         { "ProtocolVersion", ProtocolVersion }
                     };
-                    string Firmware = car.dbHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
-                    d.Add("Firmware", Firmware);
+                            string Firmware = car.dbHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
+                            d.Add("Firmware", Firmware);
 
-                    d.Add("TaskerToken", TaskerToken); // TaskerToken and HostId is the primary key and is used to make sure data won't be imported twice
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        if (col.Caption.EndsWith("ChargingID"))
-                        {
-                            continue;
+                            d.Add("TaskerToken", TaskerToken); // TaskerToken and HostId is the primary key and is used to make sure data won't be imported twice
+                            foreach (DataColumn col in dt.Columns)
+                            {
+                                if (col.Caption.EndsWith("ChargingID"))
+                                {
+                                    continue;
+                                }
+
+                                if (col.Caption.EndsWith("Date"))
+                                {
+                                    d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                                }
+                                else
+                                {
+                                    d.Add(col.Caption, dr[col.Caption]);
+                                }
+                            }
+
+                            List<object> l = GetChargingDT(Convert.ToInt32(dr["StartChargingID"]), Convert.ToInt32(dr["EndChargingID"]), out int count);
+                            d.Add("teslalogger_version", TeslaloggerVersion);
+                            d.Add("charging", l);
+
+                            string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+
+                            //string resultContent = "";
+                            try
+                            {
+                                using (HttpClient client = new HttpClient())
+                                {
+                                    using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+                                    {
+
+                                        DateTime start = DateTime.UtcNow;
+                                        HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
+                                        string r = result.Content.ReadAsStringAsync().Result;
+                                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode);
+
+                                        //resultContent = result.Content.ReadAsStringAsync();
+                                        car.Log("ShareData: " + r);
+
+                                        if (r.Contains("ERROR"))
+                                        {
+                                            Logfile.WriteException(r + "\r\n" + json);
+                                        }
+                                        else if (r.Contains("Insert OK:"))
+                                        {
+                                            DBHelper.ExecuteSQLQuery("update chargingstate set export=" + ProtocolVersion + "  where id = " + HostId);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                car.Log("ShareData: " + ex.Message);
+                            }
                         }
 
-                        if (col.Caption.EndsWith("Date"))
-                        {
-                            d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
-                        }
-                        else
-                        {
-                            d.Add(col.Caption, dr[col.Caption]);
-                        }
-                    }
-
-                    List<object> l = GetChargingDT(Convert.ToInt32(dr["StartChargingID"]), Convert.ToInt32(dr["EndChargingID"]), out int count);
-                    d.Add("teslalogger_version", TeslaloggerVersion);
-                    d.Add("charging", l);
-
-                    string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
-
-                    //string resultContent = "";
-                    try
-                    {
-                        HttpClient client = new HttpClient();
-                        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                        DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_charging.php", content).Result;
-                        string r = result.Content.ReadAsStringAsync().Result;
-                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_charging.php", start, (int)result.StatusCode);
-
-                        //resultContent = result.Content.ReadAsStringAsync();
-                        car.Log("ShareData: " + r);
-
-                        if (r.Contains("ERROR"))
-                        {
-                            Logfile.WriteException(r + "\r\n" + json);
-                        }
-                        else if (r.Contains("Insert OK:"))
-                        {
-                            DBHelper.ExecuteSQLQuery("update chargingstate set export=" + ProtocolVersion + "  where id = " + HostId);
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        car.Log("ShareData: " + ex.Message);
+                        car.Log("ShareData: SendAllChargingData finished");
                     }
                 }
-
-                car.Log("ShareData: SendAllChargingData finished");
+            
             }
             catch (Exception ex)
             {
@@ -190,47 +200,52 @@ namespace TeslaLogger
             string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater),
                 (SELECT val FROM can WHERE can.datum < charging.Datum and can.datum > date_add(charging.Datum, INTERVAL -3 MINUTE) and id = 3 ORDER BY can.datum DESC limit 1) as cell_temp
                 FROM charging
-                where id between @startid and @endid and carid = "+ car.CarInDB +@" 
+                where id between @startid and @endid and carid = @CarID 
                 group by battery_level
                 order by battery_level";
 
-            DataTable dt = new DataTable();
-            List<object> l = new List<object>();
-
-            MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
-            da.SelectCommand.Parameters.AddWithValue("@startid", startid);
-            da.SelectCommand.Parameters.AddWithValue("@endid", endid);
-            da.SelectCommand.CommandTimeout = 300;
-            da.Fill(dt);
-
-            foreach (DataRow dr in dt.Rows)
+            using (DataTable dt = new DataTable())
             {
-                Dictionary<string, object> d = new Dictionary<string, object>();
+                List<object> l = new List<object>();
 
-                foreach (DataColumn col in dt.Columns)
+                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
                 {
-                    string name = col.Caption;
-                    name = name.Replace("avg(","");
-                    name = name.Replace("max(","");
-                    name = name.Replace(")","");
+                    da.SelectCommand.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    da.SelectCommand.Parameters.AddWithValue("@startid", startid);
+                    da.SelectCommand.Parameters.AddWithValue("@endid", endid);
+                    da.SelectCommand.CommandTimeout = 300;
+                    da.Fill(dt);
 
-                    if (name == "Datum")
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        long date = Convert.ToInt64(dr[col.Caption]) * 1000;
-                        d.Add(name, DBHelper.UnixToDateTime(date).ToString("s"));
+                        Dictionary<string, object> d = new Dictionary<string, object>();
+
+                        foreach (DataColumn col in dt.Columns)
+                        {
+                            string name = col.Caption;
+                            name = name.Replace("avg(", "");
+                            name = name.Replace("max(", "");
+                            name = name.Replace(")", "");
+
+                            if (name == "Datum")
+                            {
+                                long date = Convert.ToInt64(dr[col.Caption]) * 1000;
+                                d.Add(name, DBHelper.UnixToDateTime(date).ToString("s"));
+                            }
+                            else
+                            {
+                                d.Add(name, dr[col.Caption]);
+                            }
+                        }
+
+                        l.Add(d);
                     }
-                    else
-                    {
-                        d.Add(name, dr[col.Caption]);
-                    }
+
+                    count = dt.Rows.Count;
+
+                    return l;
                 }
-
-                l.Add(d);
             }
-
-            count = dt.Rows.Count;
-
-            return l;
         }
 
         public void SendDegradationData()
@@ -278,63 +293,71 @@ namespace TeslaLogger
                 group by odo
                 ";
 
-                DataTable dt = new DataTable();
+                using (DataTable dt = new DataTable())
+                {
 
-                int ms = Environment.TickCount;
+                    int ms = Environment.TickCount;
 
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring);
-                da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
-                da.SelectCommand.CommandTimeout = 600;
-                da.Fill(dt);
-                ms = Environment.TickCount - ms;
-                car.Log("ShareData: SELECT degradation Data ms: " + ms);
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
+                        da.SelectCommand.CommandTimeout = 600;
+                        da.Fill(dt);
+                        ms = Environment.TickCount - ms;
+                        car.Log("ShareData: SELECT degradation Data ms: " + ms);
 
-                Dictionary<string, object> d1 = new Dictionary<string, object>
+                        Dictionary<string, object> d1 = new Dictionary<string, object>
                 {
                     { "ProtocolVersion", ProtocolVersion },
                     { "TaskerToken", TaskerToken } // TaskerToken is the primary key and is used to make sure data won't be imported twice
                 };
 
-                List<object> t = new List<object>();
-                d1.Add("T", t);
+                        List<object> t = new List<object>();
+                        d1.Add("T", t);
 
-                foreach (DataRow dr in dt.Rows)
-                {
-                    Dictionary<string, object> d = new Dictionary<string, object>();
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        if (col.Caption.EndsWith("Date"))
+                        foreach (DataRow dr in dt.Rows)
                         {
-                            d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                            Dictionary<string, object> d = new Dictionary<string, object>();
+                            foreach (DataColumn col in dt.Columns)
+                            {
+                                if (col.Caption.EndsWith("Date"))
+                                {
+                                    d.Add(col.Caption, ((DateTime)dr[col.Caption]).ToString("s"));
+                                }
+                                else
+                                {
+                                    d.Add(col.Caption, dr[col.Caption]);
+                                }
+                            }
+                            t.Add(d);
                         }
-                        else
+
+                        string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d1);
+
+                        try
                         {
-                            d.Add(col.Caption, dr[col.Caption]);
+                            using (HttpClient client = new HttpClient())
+                            {
+                                using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+                                {
+
+                                    DateTime start = DateTime.UtcNow;
+                                    HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_degradation.php", content).Result;
+                                    string r = result.Content.ReadAsStringAsync().Result;
+                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode);
+
+                                    //resultContent = result.Content.ReadAsStringAsync();
+                                    car.Log("ShareData: " + r);
+
+                                    car.Log("ShareData: SendDegradationData end");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                         }
                     }
-                    t.Add(d);
-                }
-
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d1);
-
-                try
-                {
-                    HttpClient client = new HttpClient();
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_degradation.php", content).Result;
-                    string r = result.Content.ReadAsStringAsync().Result;
-                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_degradation.php", start, (int)result.StatusCode);
-
-                    //resultContent = result.Content.ReadAsStringAsync();
-                    car.Log("ShareData: " + r);
-
-                    car.Log("ShareData: SendDegradationData end");
-                }
-                catch (Exception ex)
-                {
-                    car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                 }
 
             }

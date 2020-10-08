@@ -353,47 +353,49 @@ namespace TeslaLogger
 
                 StringBuilder sb = new StringBuilder();
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                using (Process proc = new Process
                 {
                     EnableRaisingEvents = false
-                };
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.FileName = cmd;
-                proc.StartInfo.Arguments = param;
-
-                proc.Start();
-
-                while (!proc.HasExited)
+                })
                 {
-                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.FileName = cmd;
+                    proc.StartInfo.Arguments = param;
 
-                    if (logging && line.Length > 0)
+                    proc.Start();
+
+                    while (!proc.HasExited)
                     {
-                        Logfile.Log(" " + line);
-                    }
+                        string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
 
-                    sb.AppendLine(line);
-
-                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
-
-                    if (logging && line.Length > 0)
-                    {
-                        if (stderr2stdout)
+                        if (logging && line.Length > 0)
                         {
                             Logfile.Log(" " + line);
                         }
-                        else
+
+                        sb.AppendLine(line);
+
+                        line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
+
+                        if (logging && line.Length > 0)
                         {
-                            Logfile.Log("Error: " + line);
+                            if (stderr2stdout)
+                            {
+                                Logfile.Log(" " + line);
+                            }
+                            else
+                            {
+                                Logfile.Log("Error: " + line);
+                            }
                         }
+
+                        sb.AppendLine(line);
                     }
 
-                    sb.AppendLine(line);
+                    return sb.ToString();
                 }
-
-                return sb.ToString();
             }
             catch (Exception ex)
             {
@@ -880,17 +882,20 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT TABLE_NAME, ROUND(DATA_LENGTH / 1024 / 1024), ROUND(INDEX_LENGTH / 1024 / 1024), TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"teslalogger\" AND TABLE_TYPE = \"BASE TABLE\"", con);
-                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
-                try
+                using (MySqlCommand cmd = new MySqlCommand("SELECT TABLE_NAME, ROUND(DATA_LENGTH / 1024 / 1024), ROUND(INDEX_LENGTH / 1024 / 1024), TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_SCHEMA = \"teslalogger\" AND TABLE_TYPE = \"BASE TABLE\"", con))
                 {
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
+                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                    try
                     {
-                        Logfile.Log($"Table: {dr[0],20} data:{dr[1],5} MB index:{dr[2],5} MB rows:{dr[3],10}");
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            Logfile.Log($"Table: {dr[0],20} data:{dr[1],5} MB index:{dr[2],5} MB rows:{dr[3],10}");
+                        }
                     }
+                    catch (Exception) { }
+
                 }
-                catch (Exception) { }
             }
         }
 
@@ -931,24 +936,26 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id), MAX(id), MIN(id) FROM mothership WHERE ts < @tsdate", con);
-                cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
-                try
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id), MAX(id), MIN(id) FROM mothership WHERE ts < @tsdate", con))
                 {
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
+                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                    try
                     {
-                        _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                        _ = long.TryParse(dr[1].ToString(), out mothershipMaxId);
-                        _ = long.TryParse(dr[2].ToString(), out mothershipMinId);
-                        Logfile.Log($"Housekeeping: database.mothership older than 90 days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            _ = long.TryParse(dr[0].ToString(), out mothershipCount);
+                            _ = long.TryParse(dr[1].ToString(), out mothershipMaxId);
+                            _ = long.TryParse(dr[2].ToString(), out mothershipMinId);
+                            Logfile.Log($"Housekeeping: database.mothership older than 90 days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                    }
+                    con.Close();
                 }
-                catch (Exception ex)
-                {
-                    Logfile.Log(ex.ToString());
-                }
-                con.Close();
             }
             if (mothershipCount >= 1000)
             {
@@ -960,17 +967,19 @@ namespace TeslaLogger
                         Logfile.Log($"Housekeeping: delete database.mothership chunk {dbupdate}");
                         con.Open();
                         string SQLcmd = "DELETE FROM mothership where id < @maxid";
-                        MySqlCommand cmd = new MySqlCommand(SQLcmd, con);
-                        cmd.Parameters.AddWithValue("@maxid", dbupdate);
-                        try
+                        using (MySqlCommand cmd = new MySqlCommand(SQLcmd, con))
                         {
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@maxid", dbupdate);
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                Logfile.Log(ex.ToString());
+                            }
+                            con.Close();
                         }
-                        catch (Exception ex)
-                        {
-                            Logfile.Log(ex.ToString());
-                        }
-                        con.Close();
                     }
                     Thread.Sleep(5000);
                 }
@@ -978,22 +987,24 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con);
-                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
-                    try
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
+                        cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                        try
                         {
-                            _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                            Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read())
+                            {
+                                _ = long.TryParse(dr[0].ToString(), out mothershipCount);
+                                Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                        con.Close();
                     }
-                    catch (Exception ex)
-                    {
-                        Logfile.Log(ex.ToString());
-                    }
-                    con.Close();
                 }
             }
         }
