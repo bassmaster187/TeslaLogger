@@ -55,6 +55,7 @@ namespace TeslaLogger
                 _ = sb.Append($"PeakWorkingSet64:    {proc.PeakWorkingSet64,12}{Environment.NewLine}");
                 _ = sb.Append($"PrivateMemorySize64: {proc.PrivateMemorySize64,12}{Environment.NewLine}");
                 _ = sb.Append($"VirtualMemorySize64: {proc.VirtualMemorySize64,12}{Environment.NewLine}");
+                _ = sb.Append($"HandleCount:         {proc.HandleCount,12}{Environment.NewLine}");
                 _ = sb.Append($"StartTime: {proc.StartTime}");
             }
             catch (Exception) { }
