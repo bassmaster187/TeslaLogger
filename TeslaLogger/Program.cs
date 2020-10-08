@@ -25,6 +25,8 @@ namespace TeslaLogger
 
             try
             {
+                InitTLStats();
+
                 InitStage1();
 
                 InitCheckDocker();
@@ -97,6 +99,25 @@ namespace TeslaLogger
                     Name = "WebserverThread"
                 };
                 threadWebserver.Start();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void InitTLStats()
+        {
+            try
+            {
+                Thread threadTLStats = new Thread(() =>
+                {
+                    TLStats.GetInstance().run();
+                })
+                {
+                    Name = "TLStatsThread"
+                };
+                threadTLStats.Start();
             }
             catch (Exception ex)
             {
