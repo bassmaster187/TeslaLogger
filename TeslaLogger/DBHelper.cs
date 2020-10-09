@@ -866,7 +866,7 @@ namespace TeslaLogger
 
                 using (DataTable dt = new DataTable())
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id >= @startPos and id <= @maxPosId and altitude is null and lat is not null and lng is not null", DBConnectionstring))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng FROM pos where id >= @startPos and id <= @maxPosId and altitude is null and lat is not null and lng is not null", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@startPos", startPos);
                         da.SelectCommand.Parameters.AddWithValue("@maxPosId", maxPosId);
