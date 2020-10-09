@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Caching;
@@ -247,6 +248,7 @@ namespace TeslaLogger
             }
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         internal static void UpdateCarIDNull()
         {
             string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
@@ -537,6 +539,7 @@ namespace TeslaLogger
             }
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         internal static bool IndexExists(string index, string table)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1506,7 +1509,7 @@ namespace TeslaLogger
         {
             Tools.SetThread_enUS();
 
-            if (charger_phases == "")
+            if (charger_phases.Length == 0)
             {
                 charger_phases = "1";
             }
@@ -1742,6 +1745,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         public static bool TableExists(string table)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1760,6 +1764,7 @@ namespace TeslaLogger
             return false;
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         public static string GetColumnType(string table, string column)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1778,6 +1783,7 @@ namespace TeslaLogger
             return string.Empty;
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         public static bool ColumnExists(string table, string column)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -2142,7 +2148,7 @@ namespace TeslaLogger
 
         public static object DBNullIfEmptyOrZero(string val)
         {
-            if (val == null || val == "" || val == "0" || val == "0.00")
+            if (val == null || val.Length == 0 || val == "0" || val == "0.00")
             {
                 return DBNull.Value;
             }
@@ -2152,7 +2158,7 @@ namespace TeslaLogger
 
         public static object DBNullIfEmpty(string val)
         {
-            if (val == null || val == "")
+            if (val == null || val.Length == 0)
             {
                 return DBNull.Value;
             }
@@ -2162,7 +2168,7 @@ namespace TeslaLogger
 
         public static bool IsZero(string val)
         {
-            if (val == null || val == "")
+            if (val == null || val.Length == 0)
             {
                 return false;
             }
@@ -2188,6 +2194,7 @@ namespace TeslaLogger
             Enable_utf8mb4_check_tables("teslalogger");
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         private static void Enable_utf8mb4_check_database(string dbname)
         {
             try
@@ -2236,6 +2243,7 @@ namespace TeslaLogger
             }
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         private static void Enable_utf8mb4_check_tables(string dbname)
         {
             try
@@ -2286,6 +2294,7 @@ namespace TeslaLogger
             }
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         private static void Enable_utf8mb4_check_columns(string dbname, string tablename)
         {
             try
