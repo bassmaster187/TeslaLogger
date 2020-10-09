@@ -113,7 +113,7 @@ namespace TeslaLogger
                                                 if (double.TryParse(location["lat"].ToString(), out double lat)
                                                     && double.TryParse(location["lng"].ToString(), out double lng))
                                                 {
-                                                    Tools.DebugLog($"OpenTopoDataService: OpenTopoData {lat}{lng} - {elevation}");
+                                                    Tools.DebugLog($"OpenTopoDataService: OpenTopoData {lat},{lng} - {elevation}");
                                                     // find posID(s) in items
                                                     foreach (Tuple<long, double, double> item in items)
                                                     {
