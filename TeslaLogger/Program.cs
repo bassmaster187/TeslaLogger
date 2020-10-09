@@ -37,6 +37,8 @@ namespace TeslaLogger
 
                 InitWebserver();
 
+                InitOpenTopoDataService();
+
                 UpdateTeslalogger.StopComfortingMessagesThread();
 
                 MQTTClient.StartMQTTClient();
@@ -120,6 +122,25 @@ namespace TeslaLogger
                     Name = "TLStatsThread"
                 };
                 threadTLStats.Start();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void InitOpenTopoDataService()
+        {
+            try
+            {
+                Thread threadOpenTopoDataService = new Thread(() =>
+                {
+                    OpenTopoDataService.GetSingleton().Run();
+                })
+                {
+                    Name = "OpenTopoServiceThread"
+                };
+                threadOpenTopoDataService.Start();
             }
             catch (Exception ex)
             {
