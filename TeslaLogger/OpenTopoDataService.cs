@@ -105,7 +105,8 @@ namespace TeslaLogger
                                     if(((Dictionary<string, object>)result).ContainsKey("elevation")
                                         && ((Dictionary<string, object>)result).ContainsKey("location"))
                                     {
-                                        if (double.TryParse(((Dictionary<string, object>)result)["elevation"].ToString(), out double elevation))
+                                        if (double.TryParse(((Dictionary<string, object>)result)["elevation"].ToString(), out double elevation)
+                                            && elevation != null && !double.IsNaN(elevation))
                                         {
                                             Dictionary<string, object> location = (Dictionary<string, object>)((Dictionary<string, object>)result)["location"];
                                             if (location.ContainsKey("lat") && location.ContainsKey("lng"))
