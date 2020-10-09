@@ -176,7 +176,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Log("Error in GetTokenAsync: " + ex.Message);
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -370,7 +370,7 @@ namespace TeslaLogger
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    Logfile.ExceptionWriter(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
                 }
 
                 if (lastCharging_State == "Charging" && !justCheck)
@@ -523,7 +523,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    Logfile.ExceptionWriter(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
 
                     while (ex != null)
                     {
@@ -628,7 +628,7 @@ namespace TeslaLogger
                         {
                             Log("unknown state " + unknownStateCounter);
 
-                            Logfile.ExceptionWriter(new Exception("unknown state"), resultContent);
+                            ExceptionWriter(new Exception("unknown state"), resultContent);
 
                             if (unknownStateCounter == 0)
                             {
@@ -684,7 +684,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.ExceptionWriter(ex, resultContent);
+                        ExceptionWriter(ex, resultContent);
                     }
 
                     return state;
@@ -692,7 +692,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -776,7 +776,7 @@ namespace TeslaLogger
                     WriteCarSettings("0.200", "S P100D");
                     return;
                 }
-                else if (car.trim_badging == "")
+                else if (car.trim_badging.Length == 0)
                 {
                     int maxRange = car.dbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
@@ -1199,7 +1199,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    Logfile.ExceptionWriter(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
                 }
 
                 if (GetLastShiftState() == "D" || GetLastShiftState() == "R" || GetLastShiftState() == "N")
@@ -1218,6 +1218,52 @@ namespace TeslaLogger
             }
 
             return false;
+        }
+
+        private void ExceptionWriter(Exception ex, string inhalt)
+        {
+            try
+            {
+                if (inhalt != null)
+                {
+                    if (inhalt.Contains("vehicle unavailable:"))
+                    {
+                        Log("vehicle unavailable");
+                        System.Threading.Thread.Sleep(30000);
+                        return;
+                    }
+                    else if (inhalt.Contains("upstream internal error"))
+                    {
+                        Log("upstream internal error");
+                        System.Threading.Thread.Sleep(10000);
+                        return;
+                    }
+                    else if (inhalt.Contains("Connection refused"))
+                    {
+                        Log("Connection refused");
+                        System.Threading.Thread.Sleep(30000);
+                        return;
+                    }
+                    else if (inhalt.Contains("No route to host"))
+                    {
+                        Log("No route to host");
+                        System.Threading.Thread.Sleep(60000);
+                        return;
+                    }
+                    else if (inhalt.Contains("You have been temporarily blocked for making too many requests!"))
+                    {
+                        Log("temporarily blocked for making too many requests!");
+                        System.Threading.Thread.Sleep(30000);
+                        return;
+                    }
+                }
+
+                Logfile.ExceptionWriter(ex, inhalt);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
         }
 
         public void StartStreamThread()
@@ -1661,7 +1707,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            Logfile.ExceptionWriter(ex, "");
+                            ExceptionWriter(ex, "");
                         }
                     }
                 }
@@ -1696,7 +1742,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            Logfile.ExceptionWriter(ex, "");
+                            ExceptionWriter(ex, "");
                         }
                     }
                 }
@@ -1860,7 +1906,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
             }
             return -1;
         }
@@ -1894,7 +1940,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Logfile.ExceptionWriter(ex, resultContent);
+                        ExceptionWriter(ex, resultContent);
                         Log(ex.Message);
                     }
                 }
@@ -1932,7 +1978,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
                 return lastOdometerKM;
             }
             //return 0;
@@ -2030,7 +2076,7 @@ namespace TeslaLogger
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    Logfile.ExceptionWriter(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
                 }
             }
             return null;
@@ -2070,7 +2116,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -2143,7 +2189,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, resultContent);
+                ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
@@ -2390,7 +2436,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Log("TaskerWakeupToken Exception: " + ex.Message);
-                Logfile.ExceptionWriter(ex, "TaskerWakeupToken Exception");
+                ExceptionWriter(ex, "TaskerWakeupToken Exception");
                 Logfile.Log("TaskerWakeupToken Exception: " + ex.ToString());
             }
 
