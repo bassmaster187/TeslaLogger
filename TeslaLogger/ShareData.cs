@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 
@@ -50,6 +51,7 @@ namespace TeslaLogger
             shareData = true;
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         private void UpdateDataTable(string table)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -66,6 +68,7 @@ namespace TeslaLogger
 
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
         public void SendAllChargingData()
         {
             if (!shareData)
