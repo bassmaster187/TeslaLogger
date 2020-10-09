@@ -866,7 +866,7 @@ namespace TeslaLogger
 
                 using (DataTable dt = new DataTable())
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id >= @startPos and id <= @maxPosId and altitude is null and lat is not null and lng is not null and speed > 0", DBConnectionstring))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng, odometer FROM pos where id >= @startPos and id <= @maxPosId and altitude is null and lat is not null and lng is not null", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@startPos", startPos);
                         da.SelectCommand.Parameters.AddWithValue("@maxPosId", maxPosId);
@@ -887,6 +887,13 @@ namespace TeslaLogger
                                 if (height != null && height < 8000 && height > -428)
                                 {
                                     ExecuteSQLQuery($"update pos set altitude={height} where id={dr[0]}");
+                                }
+                                else
+                                {
+                                    if (long.TryParse($"{dr[0]}", out long posID))
+                                    {
+                                        OpenTopoDataService.GetSingleton().Enqueue(posID, latitude, longitude);
+                                    }
                                 }
 
                                 x++;
