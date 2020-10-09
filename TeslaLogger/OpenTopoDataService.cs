@@ -86,7 +86,7 @@ namespace TeslaLogger
                     {
                         client.DefaultRequestHeaders.Add("User-Agent", "C# App");
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = client.GetAsync(queryString).Result;
+                        HttpResponseMessage result = client.GetAsync(new Uri(queryString)).Result;
                         resultContent = result.Content.ReadAsStringAsync().Result;
                         DBHelper.AddMothershipDataToDB("OpenTopoData.Query", start, (int)result.StatusCode);
                     }
@@ -106,7 +106,7 @@ namespace TeslaLogger
                                         && ((Dictionary<string, object>)result).ContainsKey("location"))
                                     {
                                         if (double.TryParse(((Dictionary<string, object>)result)["elevation"].ToString(), out double elevation)
-                                            && elevation != null && !double.IsNaN(elevation))
+                                            && !double.IsNaN(elevation))
                                         {
                                             Dictionary<string, object> location = (Dictionary<string, object>)((Dictionary<string, object>)result)["location"];
                                             if (location.ContainsKey("lat") && location.ContainsKey("lng"))
@@ -122,7 +122,7 @@ namespace TeslaLogger
                                                         {
                                                             // finally update DB
                                                             Tools.DebugLog($"OpenTopoDataService: SQL: " + $"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
-                                                            DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
+                                                            _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
                                                         }
                                                     }
                                                 }
