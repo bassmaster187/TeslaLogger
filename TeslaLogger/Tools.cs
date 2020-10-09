@@ -135,7 +135,7 @@ namespace TeslaLogger
                 s = Regex.Match(str, @"\<([^>]*)\>").Groups[1].Value;
             else
                 s = str;
-            if (s == "")
+            if (s.Length == 0)
                 return "'Emtpy'"; //for log visibility we want to know if something it's empty.
             else
                 return s;
@@ -1062,6 +1062,9 @@ namespace TeslaLogger
 
         public static string ObfuscateString(string input)
         {
+            if (input == null)
+                return null;
+
             string obfuscated = string.Empty;
             for (int i = 0; i < input.Length; i++)
             {
