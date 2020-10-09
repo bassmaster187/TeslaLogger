@@ -51,7 +51,7 @@ namespace TeslaLogger
             shareData = true;
         }
 
-        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         private void UpdateDataTable(string table)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -68,7 +68,7 @@ namespace TeslaLogger
 
         }
 
-        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen")]
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public void SendAllChargingData()
         {
             if (!shareData)
