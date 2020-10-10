@@ -51,12 +51,69 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
-            string msg = cmd.CommandText;
-            foreach (SqlParameter p in cmd.Parameters)
+            try
             {
-                msg = msg.Replace(p.ParameterName, p.Value.ToString());
+                string msg = cmd.CommandText;
+                foreach (MySqlParameter p in cmd.Parameters)
+                {
+                    string pValue = "";
+                    switch (p.DbType)
+                    {
+                        case DbType.AnsiString:
+                        case DbType.AnsiStringFixedLength:
+                        case DbType.Date:
+                        case DbType.DateTime:
+                        case DbType.DateTime2:
+                        case DbType.Guid:
+                        case DbType.String:
+                        case DbType.StringFixedLength:
+                        case DbType.Time:
+                            if (p.Value != null)
+                            {
+                                pValue = $"'{p.Value.ToString().Replace("'", "\\'")}'";
+                            }
+                            else
+                            {
+                                pValue = "'NULL'";
+                            }
+                            break;
+                        case DbType.Decimal:
+                        case DbType.Double:
+                        case DbType.Int16:
+                        case DbType.Int32:
+                        case DbType.Int64:
+                        case DbType.UInt16:
+                        case DbType.UInt32:
+                        case DbType.UInt64:
+                        case DbType.VarNumeric:
+                        case DbType.Object:
+                        case DbType.SByte:
+                        case DbType.Single:
+                        case DbType.Binary:
+                        case DbType.Boolean:
+                        case DbType.Byte:
+                        case DbType.Currency:
+                        case DbType.DateTimeOffset:
+                        case DbType.Xml:
+                        default:
+                            if (p.Value != null)
+                            {
+                                pValue = p.Value.ToString();
+                            }
+                            else
+                            {
+                                pValue = "NULL";
+                            }
+                            break;
+                    }
+                    msg = msg.Replace(p.ParameterName, pValue);
+                }
+                DebugLog(msg, null, _cfp, _cln);
             }
-            DebugLog(msg, null, _cfp, _cln);
+            catch (Exception ex)
+            {
+                DebugLog("Exception in SQL DEBUG", ex);
+            }
         }
 
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
