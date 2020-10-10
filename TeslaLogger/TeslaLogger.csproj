@@ -90,6 +90,7 @@
     <Compile Include="WebServer.cs" />
     <Compile Include="TeslaAPIState.cs" />
     <Compile Include="TLStats.cs" />
+    <Compile Include="OpenTopoDataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

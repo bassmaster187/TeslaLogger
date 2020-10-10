@@ -51,12 +51,69 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
         {
-            string msg = cmd.CommandText;
-            foreach (SqlParameter p in cmd.Parameters)
+            try
             {
-                msg = msg.Replace(p.ParameterName, p.Value.ToString());
+                string msg = cmd.CommandText;
+                foreach (MySqlParameter p in cmd.Parameters)
+                {
+                    string pValue = "";
+                    switch (p.DbType)
+                    {
+                        case DbType.AnsiString:
+                        case DbType.AnsiStringFixedLength:
+                        case DbType.Date:
+                        case DbType.DateTime:
+                        case DbType.DateTime2:
+                        case DbType.Guid:
+                        case DbType.String:
+                        case DbType.StringFixedLength:
+                        case DbType.Time:
+                            if (p.Value != null)
+                            {
+                                pValue = $"'{p.Value.ToString().Replace("'", "\\'")}'";
+                            }
+                            else
+                            {
+                                pValue = "'NULL'";
+                            }
+                            break;
+                        case DbType.Decimal:
+                        case DbType.Double:
+                        case DbType.Int16:
+                        case DbType.Int32:
+                        case DbType.Int64:
+                        case DbType.UInt16:
+                        case DbType.UInt32:
+                        case DbType.UInt64:
+                        case DbType.VarNumeric:
+                        case DbType.Object:
+                        case DbType.SByte:
+                        case DbType.Single:
+                        case DbType.Binary:
+                        case DbType.Boolean:
+                        case DbType.Byte:
+                        case DbType.Currency:
+                        case DbType.DateTimeOffset:
+                        case DbType.Xml:
+                        default:
+                            if (p.Value != null)
+                            {
+                                pValue = p.Value.ToString();
+                            }
+                            else
+                            {
+                                pValue = "NULL";
+                            }
+                            break;
+                    }
+                    msg = msg.Replace(p.ParameterName, pValue);
+                }
+                DebugLog(msg, null, _cfp, _cln);
             }
-            DebugLog(msg, null, _cfp, _cln);
+            catch (Exception ex)
+            {
+                DebugLog("Exception in SQL DEBUG", ex);
+            }
         }
 
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
@@ -340,8 +397,16 @@ namespace TeslaLogger
             }
         }
 
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false)
+        // timeout in seconds
+        // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
+        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
+            Logfile.Log("Exec_mono: " + cmd + " " + param);
+
+            StringBuilder sb = new StringBuilder();
+
+            bool bTimeout = false;
+
             try
             {
                 if (!Tools.IsMono())
@@ -349,15 +414,9 @@ namespace TeslaLogger
                     return "";
                 }
 
-                Logfile.Log("execute: " + cmd + " " + param);
-
-                StringBuilder sb = new StringBuilder();
-
-                using (Process proc = new Process
+                using (Process proc = new Process())
                 {
-                    EnableRaisingEvents = false
-                })
-                {
+                    proc.EnableRaisingEvents = false;
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.RedirectStandardOutput = true;
                     proc.StartInfo.RedirectStandardError = true;
@@ -366,35 +425,44 @@ namespace TeslaLogger
 
                     proc.Start();
 
-                    while (!proc.HasExited)
+                    do
                     {
-                        string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+                        if (!proc.HasExited)
+                        {
+                            proc.Refresh();
 
-                        if (logging && line.Length > 0)
+                            if (timeout > 0 && (DateTime.Now - proc.StartTime).TotalSeconds > timeout)
+                            {
+                                proc.Kill();
+                                bTimeout = true;
+                            }
+                        }
+                    }
+                    while (!proc.WaitForExit(100));
+
+                    string line = proc.StandardOutput.ReadToEnd().Replace('\r', '\n');
+
+                    if (logging && line.Length > 0)
+                    {
+                        Logfile.Log(" " + line);
+                    }
+
+                    sb.AppendLine(line);
+                    line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
+
+                    if (logging && line.Length > 0)
+                    {
+                        if (stderr2stdout)
                         {
                             Logfile.Log(" " + line);
                         }
-
-                        sb.AppendLine(line);
-
-                        line = proc.StandardError.ReadToEnd().Replace('\r', '\n');
-
-                        if (logging && line.Length > 0)
+                        else
                         {
-                            if (stderr2stdout)
-                            {
-                                Logfile.Log(" " + line);
-                            }
-                            else
-                            {
-                                Logfile.Log("Error: " + line);
-                            }
+                            Logfile.Log("Error: " + line);
                         }
-
-                        sb.AppendLine(line);
                     }
 
-                    return sb.ToString();
+                    sb.AppendLine(line);
                 }
             }
             catch (Exception ex)
@@ -402,6 +470,7 @@ namespace TeslaLogger
                 Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
+            return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
         }
 
         internal static bool UseScanMyTesla()
