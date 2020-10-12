@@ -144,6 +144,10 @@ namespace TeslaLogger
                     };
                     threadOpenTopoDataService.Start();
                 }
+                else
+                {
+                    Logfile.Log("OpenTopoData disabled (enable in settings)");
+                }
             }
             catch (Exception ex)
             {
