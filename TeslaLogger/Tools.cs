@@ -53,7 +53,7 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = cmd.CommandText;
+                string msg = "SQL" + Environment.NewLine + cmd.CommandText;
                 foreach (MySqlParameter p in cmd.Parameters)
                 {
                     string pValue = "";
