@@ -890,7 +890,7 @@ namespace TeslaLogger
                                 }
                                 else
                                 {
-                                    if (long.TryParse($"{dr[0]}", out long posID))
+                                    if (Tools.UseOpenTopoData() && long.TryParse($"{dr[0]}", out long posID))
                                     {
                                         OpenTopoDataService.GetSingleton().Enqueue(posID, latitude, longitude);
                                     }

@@ -133,14 +133,17 @@ namespace TeslaLogger
         {
             try
             {
-                Thread threadOpenTopoDataService = new Thread(() =>
+                if (Tools.UseOpenTopoData())
                 {
-                    OpenTopoDataService.GetSingleton().Run();
-                })
-                {
-                    Name = "OpenTopoServiceThread"
-                };
-                threadOpenTopoDataService.Start();
+                    Thread threadOpenTopoDataService = new Thread(() =>
+                    {
+                        OpenTopoDataService.GetSingleton().Run();
+                    })
+                    {
+                        Name = "OpenTopoServiceThread"
+                    };
+                    threadOpenTopoDataService.Start();
+                }
             }
             catch (Exception ex)
             {
