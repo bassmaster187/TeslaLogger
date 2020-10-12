@@ -1155,7 +1155,7 @@ namespace TeslaLogger
         // this should be called from a task
         internal void HandleSpecialFlag_CopyChargePrice(Address _addr)
         {
-            Logfile.Log($"HandleSpecialFlag_CopyChargePrice ({_addr.name})");
+            Logfile.Log($"HandleSpecialFlag_CopyChargePrice '{_addr.name}'");
             // find charging session at Address with cost_total != NULL and cost_kwh_meter_invoice == NULL or 0 and cost_idle_fee_total == NULL or 0
             long referenceID = 0;
             double ref_cost_total = -1.0;
