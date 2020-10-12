@@ -553,7 +553,7 @@ namespace TeslaLogger
                             Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                             if (!CanFallAsleep(out string reason))
                             {
-                                Log($"CanFallAsleep: False reason:{reason}");
+                                Log($"Reason:{reason} prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
                             }
                             else if (currentJSON.current_is_preconditioning)
@@ -1409,52 +1409,61 @@ namespace TeslaLogger
 
         public bool CanFallAsleep(out string reason)
         {
-            reason = string.Empty;
-            if (teslaAPIState.GetBool("is_user_present", out bool is_user_present) && is_user_present)
+            try
             {
-                reason = "is_user_present";
-                return false;
+                reason = string.Empty;
+                if (teslaAPIState.GetBool("is_user_present", out bool is_user_present) && is_user_present)
+                {
+                    reason = "is_user_present";
+                    return false;
+                }
+                if (teslaAPIState.GetBool("is_preconditioning", out bool is_preconditioning) && is_preconditioning)
+                {
+                    reason = "is_preconditioning";
+                    return false;
+                }
+                if (teslaAPIState.GetBool("sentry_mode", out bool sentry_mode) && sentry_mode)
+                {
+                    reason = "sentry_mode";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("df", out int df) && df > 0)
+                {
+                    reason = $"Driver Front Door {df}";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("pf", out int pf) && pf > 0)
+                {
+                    reason = $"Passenger Front Door {pf}";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("dr", out int dr) && dr > 0)
+                {
+                    reason = $"Driver Rear Door {dr}";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("pr", out int pr) && pr > 0)
+                {
+                    reason = $"Passenger Rear Door {pr}";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("ft", out int ft) && ft > 0)
+                {
+                    reason = $"Fron Trunk {ft}";
+                    return false;
+                }
+                if (teslaAPIState.GetInt("rt", out int rt) && rt > 0)
+                {
+                    reason = $"Rear Trunk {rt}";
+                    return false;
+                }
             }
-            if (teslaAPIState.GetBool("is_preconditioning", out bool is_preconditioning) && is_preconditioning)
+            catch (Exception ex)
             {
-                reason = "is_preconditioning";
-                return false;
+                Log(ex.ToString());
             }
-            if (teslaAPIState.GetBool("sentry_mode", out bool sentry_mode) && sentry_mode)
-            {
-                reason = "sentry_mode";
-                return false;
-            }
-            if (teslaAPIState.GetInt("df", out int df) && df > 0)
-            {
-                reason = $"df {df}";
-                return false;
-            }
-            if (teslaAPIState.GetInt("pf", out int pf) && pf > 0)
-            {
-                reason = $"pf {pf}";
-                return false;
-            }
-            if (teslaAPIState.GetInt("dr", out int dr) && dr > 0)
-            {
-                reason = $"dr {dr}";
-                return false;
-            }
-            if (teslaAPIState.GetInt("pr", out int pr) && pr > 0)
-            {
-                reason = $"pr {pr}";
-                return false;
-            }
-            if (teslaAPIState.GetInt("ft", out int ft) && ft > 0)
-            {
-                reason = $"ft {ft}";
-                return false;
-            }
-            if (teslaAPIState.GetInt("rt", out int rt) && rt > 0)
-            {
-                reason = $"rt {rt}";
-                return false;
-            }
+
+            reason = "";
             return true;
         }
     }
