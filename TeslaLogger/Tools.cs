@@ -335,7 +335,9 @@ namespace TeslaLogger
                     int.TryParse(j["HTTPPort"], out httpport);
 
                     if (httpport == 0)
+                    {
                         httpport = 5000;
+                    }
                 }
             }
             catch (Exception ex)
@@ -343,6 +345,32 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
             }
             return httpport;
+        }
+
+        internal static bool UseOpenTopoData()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return false;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "UseOpenTopoData"))
+                {
+                    if(bool.TryParse(j["UseOpenTopoData"], out bool useOpenTopoData)) {
+                        return useOpenTopoData;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
         }
 
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
