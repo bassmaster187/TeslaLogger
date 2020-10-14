@@ -383,7 +383,7 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
               if (coord.type == 1) {
                 var superchargerIcon = L.icon({
                   iconUrl: 'public/plugins/pr0ps-trackmap-panel/img/tesla_pin.png',
-                  iconAnchor: [12, 32],
+                  iconAnchor: [6, 16],
                   popupAnchor: [0, 0]
                 });
                 var p = new L.latLng(coord.position);
@@ -396,7 +396,20 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
               } else if (coord.type == 2) {
                 var superchargerIcon = L.icon({
                   iconUrl: 'public/plugins/pr0ps-trackmap-panel/img/charger_pin.png',
-                  iconAnchor: [12, 32],
+                  iconAnchor: [6, 16],
+                  popupAnchor: [0, 0]
+                });
+                var p = new L.latLng(coord.position);
+                var marker = new L.marker(p, {
+                  icon: superchargerIcon
+                });
+                marker.addTo(_this5.leafMap);
+
+                _this5.superchargerMarks.push(marker);
+              } else if (coord.type == 3) {
+                var superchargerIcon = L.icon({
+                  iconUrl: 'public/plugins/pr0ps-trackmap-panel/img/ac_pin.png',
+                  iconAnchor: [6, 16],
                   popupAnchor: [0, 0]
                 });
                 var p = new L.latLng(coord.position);
