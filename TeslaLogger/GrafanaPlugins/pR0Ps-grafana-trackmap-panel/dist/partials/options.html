@@ -4,11 +4,28 @@
     <div class="gf-form">
       <label class="gf-form-label width-9">Max data points</label>
       <span class="max-width-10">
-        <input type="number" class="gf-form-input" ng-model="ctrl.panel.maxDataPoints" ng-change="ctrl.refresh()"/>
+        <input type="number" class="gf-form-input" ng-model="ctrl.panel.maxDataPoints" ng-model-options="{ debounce: 3000 }" ng-change="ctrl.refreshPolylines()"/>
       </span>
     </div>
-    <gf-form-switch class="gf-form" label="Autozoom" label-class="width-9" tooltip="Automatically zoom the map to fit the data"
+    <div class="gf-form">
+      <label class="gf-form-label width-16">Max data point time delta <info-popover>In seconds, 0 to disable. Start a new track if the time difference between a data point and previous data point is greater than the value.</info-popover></label>
+      <span class="max-width-10">
+        <input type="number" class="gf-form-input" ng-model="ctrl.panel.maxDataPointDelta" ng-model-options="{ debounce: 3000 }" ng-change="ctrl.refreshPolylines()"/>
+      </span>
+    </div>
+    <gf-form-switch class="gf-form" label="Autozoom" label-class="width-11" tooltip="Automatically zoom the map to fit the data?"
                     checked="ctrl.panel.autoZoom" on-change="ctrl.zoomToFit()"/>
+    <gf-form-switch class="gf-form" label="Zoom with scroll wheel" label-class="width-11"
+                    checked="ctrl.panel.scrollWheelZoom" on-change="ctrl.applyScrollZoom()"/>
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Default map style</label>
+      <div class="gf-form-select-wrapper max-width-11">
+        <select class="gf-form-input" ng-model="ctrl.panel.defaultLayer" ng-options="key as key for (key, value) in ctrl.layers"
+                ng-change="ctrl.applyDefaultLayer()"></select>
+      </div>
+    </div>
+    <gf-form-switch class="gf-form" label="Show layer changer" label-class="width-11" tooltip="Allow viewers to change the map style?"
+                    checked="ctrl.panel.showLayerChanger" on-change="ctrl.applyDefaultLayer()"/>
   </div>
   <div class="section gf-form-group">
     <h5 class="section-heading">Colors</h5>
