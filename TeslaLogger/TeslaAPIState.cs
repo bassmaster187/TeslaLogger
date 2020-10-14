@@ -21,6 +21,7 @@ namespace TeslaLogger
         private HashSet<string> unknownKeys = new HashSet<string>();
         private Car car;
         private bool dumpJSON = false;
+        private readonly object TeslaAPIStateLock = new object();
 
         internal bool DumpJSON {
             get => dumpJSON;
@@ -53,47 +54,50 @@ namespace TeslaLogger
 
         private void AddValue(string _name, string _type, object _value, long _timestamp, string _source)
         {
-            if (!storage.ContainsKey(_name))
+            lock (TeslaAPIStateLock)
             {
-                storage.Add(_name, new Dictionary<Key, object>() {
+                if (!storage.TryGetValue(_name, out Dictionary<Key, object> _))
+                {
+                    storage.Add(_name, new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
                     { Key.ValueLastUpdate , long.MinValue },
                     { Key.Timestamp , long.MinValue },
                     { Key.Source , "undef" }
                 });
-            }
-            else
-            {
-                try
+                }
+                else
                 {
-                    if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
-                        && dict.TryGetValue(Key.Value, out object oldvalue)
-                        && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
+                    try
                     {
-                        if (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                        if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
+                            && dict.TryGetValue(Key.Value, out object oldvalue)
+                            && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
                         {
-                            storage[_name][Key.ValueLastUpdate] = _timestamp;
-                            HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                            if (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                            {
+                                storage[_name][Key.ValueLastUpdate] = _timestamp;
+                                HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog("Exception", ex);
+                    }
                 }
-                catch (Exception ex)
+                storage[_name][Key.Type] = _type;
+                if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
                 {
-                    Tools.DebugLog("Exception", ex);
+                    storage[_name][Key.Value] = string.Empty;
                 }
+                else
+                {
+                    storage[_name][Key.Value] = _value;
+                }
+                storage[_name][Key.Timestamp] = _timestamp;
+                storage[_name][Key.Source] = _source;
             }
-            storage[_name][Key.Type] = _type;
-            if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
-            {
-                storage[_name][Key.Value] = string.Empty;
-            }
-            else
-            {
-                storage[_name][Key.Value] = _value;
-            }
-            storage[_name][Key.Timestamp] = _timestamp;
-            storage[_name][Key.Source] = _source;
         }
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
@@ -125,51 +129,74 @@ namespace TeslaLogger
 
         public bool GetState(string _name, out Dictionary<Key, object> _state, int maxage = 0)
         {
-            if (storage.ContainsKey(_name))
+            lock (TeslaAPIStateLock)
             {
-                _state = storage[_name];
-                if (maxage != 0)
+                try
                 {
-                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                    if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                    if (storage.ContainsKey(_name))
                     {
-                        return false;
+                        _state = storage[_name];
+                        if (maxage != 0)
+                        {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                return false;
+                            }
+                        }
+                        return true;
                     }
-                }
-                return true;
-            }
-            _state = new Dictionary<Key, object>() {
+                    _state = new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
                     { Key.Timestamp , long.MinValue },
+                    { Key.ValueLastUpdate , long.MinValue },
                     { Key.Source , "undef" }
                 };
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _state = new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.ValueLastUpdate , long.MinValue },
+                    { Key.Source , "undef" }
+                };
+            }
             return false;
         }
 
         public bool GetBool(string _name, out bool _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        if (maxage != 0) {
-                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                        if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
+                        {
+                            if (maxage != 0)
                             {
-                                _value = false;
-                                return false;
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = false;
+                                    return false;
+                                }
                             }
+                            return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
                         }
-                        return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
             }
             _value = false;
             return false;
@@ -177,57 +204,63 @@ namespace TeslaLogger
 
         public bool GetInt(string _name, out int _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        if (maxage != 0)
+                        if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
                         {
-                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            if (maxage != 0)
                             {
-                                _value = int.MinValue;
-                                return false;
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = int.MinValue;
+                                    return false;
+                                }
                             }
+                            return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
                         }
-                        return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _value = int.MinValue;
+                return false;
             }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
-            }
-            _value = int.MinValue;
-            return false;
         }
 
         public bool GetDouble(string _name, out double _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        if (maxage != 0)
+                        if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
                         {
-                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            if (maxage != 0)
                             {
-                                _value = double.NaN;
-                                return false;
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = double.NaN;
+                                    return false;
+                                }
                             }
+                            return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
                         }
-                        return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
             }
             _value = double.MinValue;
             return false;
@@ -235,32 +268,35 @@ namespace TeslaLogger
 
         public bool GetString(string _name, out string _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        if (maxage != 0)
+                        if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
                         {
-                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            if (maxage != 0)
                             {
-                                _value = string.Empty;
-                                return false;
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = string.Empty;
+                                    return false;
+                                }
                             }
+                            _value = storage[_name][Key.Value].ToString();
+                            return true;
                         }
-                        _value = storage[_name][Key.Value].ToString();
-                        return true;
                     }
                 }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _value = string.Empty;
+                return false;
             }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
-            }
-            _value = string.Empty;
-            return false;
         }
 
         public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
