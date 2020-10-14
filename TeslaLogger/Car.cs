@@ -1167,6 +1167,7 @@ namespace TeslaLogger
             DateTime chargeEnd = chargeStart;
             double charge_energy_added = 0.0;
 
+            // find reference charging session
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -1185,8 +1186,6 @@ WHERE
   chargingstate.pos = pos.id
   AND pos.address = @addr
   AND chargingstate.cost_total IS NOT NULL
-  AND (chargingstate.cost_kwh_meter_invoice IS NULL OR chargingstate.cost_kwh_meter_invoice = 0)
-  AND (chargingstate.cost_idle_fee_total IS NULL OR chargingstate.cost_idle_fee_total = 0)
   AND chargingstate.CarID = @CarID
 ORDER BY id DESC
 LIMIT 1", con))
@@ -1195,14 +1194,18 @@ LIMIT 1", con))
                     cmd.Parameters.AddWithValue("@CarID", CarInDB);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read() && dr[0] != DBNull.Value && dr.FieldCount == 6)
+                    if (dr.Read() && dr[1] != DBNull.Value)
                     {
                         long.TryParse(dr[0].ToString(), out referenceID);
-                        double.TryParse(dr[1].ToString(), out ref_cost_total);
+                        if (!double.TryParse(dr[1].ToString(), out ref_cost_total))
+                        {
+                            ref_cost_total = -1.0;
+                        }
                         ref_cost_currency = dr[2].ToString();
                         double.TryParse(dr[3].ToString(), out ref_cost_per_kwh);
                         double.TryParse(dr[4].ToString(), out ref_cost_per_session);
                         double.TryParse(dr[5].ToString(), out ref_cost_per_minute);
+                        Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}> <{dr[5]}>");
                     }
                     con.Close();
                 }
@@ -1240,6 +1243,7 @@ LIMIT 1", con))
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
+                            Tools.DebugLog($"find latest charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}>");
                             if (
                                 dr[0] != null && long.TryParse(dr[0].ToString(), out chargeID)
                                 && dr[1] != null && double.TryParse(dr[1].ToString(), out charge_energy_added)
@@ -1396,7 +1400,7 @@ WHERE
   freesuc
 FROM
   cars
-WHeRE
+WHERE
 id = @carid", con))
                     {
                         cmd.Parameters.AddWithValue("@carid", CarInDB);
