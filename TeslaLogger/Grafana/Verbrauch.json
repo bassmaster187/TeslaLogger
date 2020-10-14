@@ -65,7 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1602703091556,
+  "iteration": 1602703590414,
   "links": [
     {
       "icon": "external link",
@@ -112,7 +112,7 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
       "pointradius": 5,
@@ -390,12 +390,12 @@
         "y": 0
       },
       "id": 4,
-      "lineColor": "red",
+      "lineColor": "#1F60C4",
       "links": [],
-      "maxDataPointDelta": 0,
+      "maxDataPointDelta": 300,
       "maxDataPoints": 50000,
       "pointColor": "royalblue",
-      "scrollWheelZoom": false,
+      "scrollWheelZoom": true,
       "showLayerChanger": true,
       "targets": [
         {
@@ -540,5 +540,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 136
+  "version": 137
 }
