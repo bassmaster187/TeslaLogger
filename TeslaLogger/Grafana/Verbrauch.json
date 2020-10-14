@@ -65,7 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1602703590414,
+  "iteration": 1602711572965,
   "links": [
     {
       "icon": "external link",
@@ -413,7 +413,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 3 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -540,5 +540,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 137
+  "version": 138
 }
