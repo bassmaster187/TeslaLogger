@@ -39,7 +39,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1598534144145,
+  "iteration": 1602712985648,
   "links": [
     {
       "icon": "external link",
@@ -67,6 +67,7 @@
         "x": 0,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "avg": false,
@@ -84,7 +85,7 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
       "pointradius": 5,
@@ -410,6 +411,13 @@
     {
       "autoZoom": true,
       "datasource": "teslalogger",
+      "defaultLayer": "OpenStreetMap",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 20,
         "w": 8,
@@ -419,9 +427,12 @@
       "id": 4,
       "lineColor": "red",
       "links": [],
+      "maxDataPointDelta": 0,
       "maxDataPoints": 500,
       "options": {},
       "pointColor": "royalblue",
+      "scrollWheelZoom": true,
+      "showLayerChanger": true,
       "targets": [
         {
           "alias": "",
@@ -429,7 +440,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n   lat,\n   lng\n   FROM pos\nWHERE  $__timeFilter(Datum) and CarID = $Car\nORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  $__time(Datum),\r\n   lat,\r\n   lng,\r\n   0 as type\r\n   FROM pos\r\nWHERE  $__timeFilter(Datum) and CarID = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 3 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -452,11 +463,11 @@
         }
       ],
       "title": "Map",
-      "type": "grafana-trackmap-panel"
+      "type": "pr0ps-trackmap-panel"
     }
   ],
   "refresh": false,
-  "schemaVersion": 19,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -520,5 +531,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 97
+  "version": 98
 }
