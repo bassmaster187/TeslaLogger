@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:598",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,8 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 47,
-  "iteration": 1602690851953,
+  "iteration": 1602704596631,
   "links": [
     {
       "icon": "external link",
@@ -50,9 +50,8 @@
       "links": [],
       "maxDataPointDelta": 300,
       "maxDataPoints": 500,
-      "options": {},
       "pointColor": "royalblue",
-      "scrollWheelZoom": false,
+      "scrollWheelZoom": true,
       "showLayerChanger": true,
       "targets": [
         {
@@ -60,7 +59,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n\r\n ORDER BY time_sec ASC",
+          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -89,7 +88,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -118,11 +117,42 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "ON",
+          "value": "ON"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Charger",
+        "options": [
+          {
+            "$$hashKey": "object:1099",
+            "selected": true,
+            "text": "ON",
+            "value": "ON"
+          },
+          {
+            "$$hashKey": "object:1100",
+            "selected": false,
+            "text": "OFF",
+            "value": "OFF"
+          }
+        ],
+        "query": "ON,OFF",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -153,5 +183,8 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 10
+  "variables": {
+    "list": []
+  },
+  "version": 11
 }
