@@ -785,7 +785,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                     cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
-                    cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
+                    cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid());
                     cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
