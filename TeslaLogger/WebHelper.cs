@@ -1229,7 +1229,7 @@ namespace TeslaLogger
                     if (inhalt.Contains("vehicle unavailable:"))
                     {
                         Log("vehicle unavailable");
-                        System.Threading.Thread.Sleep(30000);
+                        System.Threading.Thread.Sleep(5000);
                         return;
                     }
                     else if (inhalt.Contains("upstream internal error"))
