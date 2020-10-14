@@ -12,6 +12,7 @@ namespace TeslaLogger
         {
             Type,
             Value,
+            ValueLastUpdate,
             Timestamp,
             Source
         }
@@ -57,6 +58,7 @@ namespace TeslaLogger
                 storage.Add(_name, new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
+                    { Key.ValueLastUpdate , long.MinValue },
                     { Key.Timestamp , long.MinValue },
                     { Key.Source , "undef" }
                 });
@@ -69,7 +71,11 @@ namespace TeslaLogger
                         && dict.TryGetValue(Key.Value, out object oldvalue)
                         && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
                     {
-                        HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                        if (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                        {
+                            storage[_name][Key.ValueLastUpdate] = _timestamp;
+                            HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -92,82 +98,28 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
-            // TODO
-            if (oldvalue != null && newvalue != null && !oldvalue.ToString().Equals(newvalue.ToString()))
+            string timestamp;
+            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+            int speed, power, battery_level;
+            switch (name)
             {
-                string timestamp;
-                double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
-                int speed, power, battery_level;
-                switch (name)
-                {
-                    case "car_version":
+                case "car_version":
+                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    _ = car.GetWebHelper().GetOdometerAsync();
+                    break;
+                case "locked":
+                case "charge_port_door_open":
+                case "charging_state":
+                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    break;
+                case "battery_level":
+                    if (car.IsParked())
+                    {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        _ = car.GetWebHelper().GetOdometerAsync();
-                        break;
-                    case "locked":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        // write car data to DB eg to update Grafana Dashboard status
-                        GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                        Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                        break;
-                    case "battery_level":
-                        if (car.IsParked())
-                        {
-                            Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                            // write car data to DB eg to update Grafana Dashboard status
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                        }
-                        break;
-                    case "charge_port_door_open":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        if (bool.TryParse(oldvalue.ToString(), out bool oldv) && bool.TryParse(newvalue.ToString(), out bool newv) && !oldv && newv)
-                        {
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                            //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
-                        }
-                        break;
-                    case "charging_state":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        if (!oldvalue.ToString().Equals("Charging") && newvalue.ToString().Equals("Charging"))
-                        {
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                            //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private void GetPosition(string name, out string timestamp, out double latitude, out double longitude, out int speed, out int power, out double odometerKM, out double ideal_battery_range_km, out double battery_range, out int battery_level, out double outside_temp)
-        {
-            timestamp = storage[name][Key.Timestamp].ToString();
-            GetDouble("latitude", out latitude);
-            GetDouble("longitude", out longitude);
-            GetInt("speed", out speed);
-            if (speed == int.MinValue)
-            {
-                speed = 0;
-            }
-            GetInt("power", out power);
-            GetDouble("odometer", out double odometer);
-            odometerKM = (double)((decimal)odometer / 0.62137M);
-            GetDouble("ideal_battery_range", out double ideal_battery_range);
-            if (ideal_battery_range == 999)
-            {
-                GetDouble("battery_range", out ideal_battery_range);
-            }
-            ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
-            GetDouble("battery_range", out battery_range);
-            GetInt("battery_level", out battery_level);
-            GetDouble("outside_temp", out outside_temp);
-            if (outside_temp == double.MinValue)
-            {
-                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
