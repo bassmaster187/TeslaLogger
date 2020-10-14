@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 12,
+  "id": 47,
+  "iteration": 1602690851953,
   "links": [
     {
       "icon": "external link",
@@ -31,6 +32,13 @@
     {
       "autoZoom": true,
       "datasource": "teslalogger",
+      "defaultLayer": "OpenStreetMap",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 21,
         "w": 24,
@@ -38,18 +46,21 @@
         "y": 0
       },
       "id": 2,
-      "lineColor": "red",
+      "lineColor": "#1F60C4",
       "links": [],
+      "maxDataPointDelta": 300,
       "maxDataPoints": 500,
       "options": {},
       "pointColor": "royalblue",
+      "scrollWheelZoom": false,
+      "showLayerChanger": true,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng)\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 120\r\n ORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(datum) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -74,11 +85,11 @@
         }
       ],
       "title": "MAP",
-      "type": "grafana-trackmap-panel"
+      "type": "pr0ps-trackmap-panel"
     }
   ],
   "refresh": false,
-  "schemaVersion": 19,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -142,5 +153,5 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 5
+  "version": 10
 }
