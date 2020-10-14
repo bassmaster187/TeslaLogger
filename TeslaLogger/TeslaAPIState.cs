@@ -171,11 +171,19 @@ namespace TeslaLogger
             }
         }
 
-        public bool GetState(string _name, out Dictionary<Key, object> _state)
+        public bool GetState(string _name, out Dictionary<Key, object> _state, int maxage = 0)
         {
             if (storage.ContainsKey(_name))
             {
                 _state = storage[_name];
+                if (maxage != 0)
+                {
+                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                    if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                    {
+                        return false;
+                    }
+                }
                 return true;
             }
             _state = new Dictionary<Key, object>() {
@@ -187,7 +195,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetBool(string _name, out bool _value)
+        public bool GetBool(string _name, out bool _value, int maxage = 0)
         {
             try
             {
@@ -195,6 +203,14 @@ namespace TeslaLogger
                 {
                     if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
                     {
+                        if (maxage != 0) {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                _value = false;
+                                return false;
+                            }
+                        }
                         return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
@@ -207,7 +223,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetInt(string _name, out int _value)
+        public bool GetInt(string _name, out int _value, int maxage = 0)
         {
             try
             {
@@ -215,6 +231,15 @@ namespace TeslaLogger
                 {
                     if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
                     {
+                        if (maxage != 0)
+                        {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                _value = int.MinValue;
+                                return false;
+                            }
+                        }
                         return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
@@ -227,7 +252,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetDouble(string _name, out double _value)
+        public bool GetDouble(string _name, out double _value, int maxage = 0)
         {
             try
             {
@@ -235,6 +260,15 @@ namespace TeslaLogger
                 {
                     if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
                     {
+                        if (maxage != 0)
+                        {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                _value = double.NaN;
+                                return false;
+                            }
+                        }
                         return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
                     }
                 }
@@ -247,7 +281,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetString(string _name, out string _value)
+        public bool GetString(string _name, out string _value, int maxage = 0)
         {
             try
             {
@@ -255,6 +289,15 @@ namespace TeslaLogger
                 {
                     if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
                     {
+                        if (maxage != 0)
+                        {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                _value = string.Empty;
+                                return false;
+                            }
+                        }
                         _value = storage[_name][Key.Value].ToString();
                         return true;
                     }
