@@ -448,13 +448,7 @@ namespace TeslaLogger
 @"UPDATE 
   chargingstate 
 SET 
-  cost_total= @cost_total, 
-  cost_currency=@cost_currency, 
-  cost_per_kwh=@cost_per_kwh, 
-  cost_per_session=@cost_per_session, 
-  cost_per_minute=@cost_per_minute, 
-  cost_idle_fee_total=@cost_idle_fee_total, 
-  cost_kwh_meter_invoice=@cost_kwh_meter_invoice 
+  cost_total= @cost_total
 WHERE 
   CarID = @carid 
   AND EndDate is null 
@@ -462,12 +456,6 @@ WHERE
                         {
                             cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                             cmd.Parameters.AddWithValue("@cost_total", 0.0);
-                            cmd.Parameters.AddWithValue("@cost_per_session", 0.0);
-                            cmd.Parameters.AddWithValue("@cost_currency", DBNullIfEmpty(string.Empty));
-                            cmd.Parameters.AddWithValue("@cost_per_kwh", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_per_minute", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
                             Tools.DebugLog(cmd);
                             int rowsUpdated = cmd.ExecuteNonQuery();
                             if (rowsUpdated > 0)
@@ -651,6 +639,7 @@ WHERE
 
         internal static void UpdateAllChargingMaxPower()
         {
+            Tools.DebugLog("UpdateAllChargingMaxPower");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1287,6 +1276,7 @@ WHERE
 
         public static bool UpdateIncompleteTrips()
         {
+            Tools.DebugLog("UpdateIncompleteTrips");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
