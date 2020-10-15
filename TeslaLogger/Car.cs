@@ -1190,8 +1190,8 @@ WHERE
 ORDER BY id DESC
 LIMIT 1", con))
                 {
-                    cmd.Parameters.AddWithValue("@addr", _addr.name);
-                    cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                    cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = _addr.name;
+                    cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[1] != DBNull.Value)
@@ -1237,8 +1237,8 @@ AND chargingstate.CarID = @CarID
 ORDER BY id DESC
 LIMIT 1", con))
                     {
-                        cmd.Parameters.AddWithValue("@addr", _addr.name);
-                        cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                        cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = _addr.name;
+                        cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
@@ -1289,7 +1289,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@cost_idle_fee_total", 0.0);
                                 cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
                                 cmd.Parameters.AddWithValue("@id", chargeID);
-                                cmd.Parameters.AddWithValue("@CarID", CarInDB);
+                                cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
                                 Tools.DebugLog(cmd);
                                 _ = cmd.ExecuteNonQuery();
                                 Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total 0.0");
@@ -1403,7 +1403,7 @@ FROM
 WHERE
 id = @carid", con))
                     {
-                        cmd.Parameters.AddWithValue("@carid", CarInDB);
+                        cmd.Parameters.Add("@carid", MySqlDbType.UByte).Value = CarInDB;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
