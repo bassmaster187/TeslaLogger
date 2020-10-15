@@ -1394,18 +1394,18 @@ WHERE
         public bool IsParked()
         {
             // online and parked
-            if (teslaAPIState.GetString("state", out string state) && state.Equals("online")
-                && (teslaAPIState.GetString("shift_state", out string shift_state)
+            if (teslaAPIState.GetString("state", out string state) && state != null && state.Equals("online")
+                && (teslaAPIState.GetString("shift_state", out string shift_state) && shift_state != null
                     && (shift_state.Equals("P") || shift_state.Equals("undef")))
                )
-            { 
+            {
                 return true;
             }
             // asleep
             if (teslaAPIState.GetString("state", out state) && state.Equals("asleep"))
             {
                 return true;
-            }    
+            }
             return false;
         }
 
