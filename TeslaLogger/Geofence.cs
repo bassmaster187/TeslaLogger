@@ -199,6 +199,7 @@ namespace TeslaLogger
 
         private static int ReadGeofenceFile(SortedSet<Address> list, string filename)
         {
+            list.Clear();
             filename = filename.Replace(@"Debug\", "");
             int replaceCount = 0;
             if (File.Exists(filename))
