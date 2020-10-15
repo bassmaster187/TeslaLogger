@@ -1418,6 +1418,16 @@ WHERE
             return false;
         }
 
+        internal bool IsCharging()
+        {
+            if (teslaAPIState.GetString("charging_state", out string charging_state)
+                && charging_state != null && charging_state.Equals("Charging"))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool TLUpdatePossible()
         {
             if (GetCurrentState() == Car.TeslaState.Sleep)
