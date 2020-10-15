@@ -1384,7 +1384,8 @@ WHERE
 
         public bool IsInService()
         {
-            if (teslaAPIState.GetBool("in_service", out bool in_service)) {
+            if (teslaAPIState.GetBool("in_service", out bool in_service))
+            {
                 return in_service;
             }
             return false;
