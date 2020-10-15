@@ -39,7 +39,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1602750815806,
+  "iteration": 1602763899448,
   "links": [
     {
       "icon": "external link",
@@ -435,11 +435,11 @@
       "targets": [
         {
           "alias": "",
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(Datum),\r\n   lat,\r\n   lng,\r\n   0 as type\r\n   FROM pos\r\nWHERE  datum between FROM_UNIXTIME($__unixEpochFrom() - 200) and CarID = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 1 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE datum between FROM_UNIXTIME($__unixEpochFrom() - 200) and FROM_UNIXTIME($__unixEpochTo())  and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 2 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE datum between FROM_UNIXTIME($__unixEpochFrom() - 200) and FROM_UNIXTIME($__unixEpochTo()) and chargingstate.CarID = $Car and ((fast_charger_brand <> 'Tesla' and fast_charger_present = 1) or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(datum) as time_sec, lat, lng, 3 as type FROM chargingstate join pos on chargingstate.Pos = pos.id\r\n  WHERE datum between FROM_UNIXTIME($__unixEpochFrom() - 200) and FROM_UNIXTIME($__unixEpochTo()) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type,\r\n   null as address\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 3 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -530,5 +530,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 99
+  "version": 100
 }
