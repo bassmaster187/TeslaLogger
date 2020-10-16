@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
@@ -1516,7 +1517,35 @@ WHERE
             double kmBattery_Range = battery_range / (double)0.62137;
 
             double powerkW = Convert.ToDouble(charger_power);
+
+            // default waitbetween2pointsdb
             double waitbetween2pointsdb = 1000.0 / powerkW;
+            // if charging started less than 5 minutes ago, insert one charging data point every ~60 seconds
+            try
+            {
+                // get charging_state, must not be older than 5 minutes = 300 seconds = 300000 milliseconds
+                if (car.GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 300000)) {
+                    if (charging_state[TeslaAPIState.Key.Value].ToString().Equals("Charging"))
+                    {
+                        // check if charging_state value Charging is not older than 5 minutes
+                        long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                        if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
+                        {
+                            if (now - valueLastUpdate < 300000)
+                            {
+                                // charging_state changed to Charging less than 5 minutes ago
+                                // set waitbetween2pointsdb to 60 seconds
+                                Tools.DebugLog($"waitbetween2pointsdb:{waitbetween2pointsdb}");
+                                waitbetween2pointsdb = 60;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog("Exception waitbetween2pointsdb", ex);
+            }
 
             double deltaSeconds = (DateTime.Now - lastChargingInsert).TotalSeconds;
 
