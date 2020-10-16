@@ -1531,6 +1531,7 @@ WHERE
                         long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
                         if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                         {
+                            Tools.DebugLog($"ValueLastUpdate: {now - valueLastUpdate}");
                             if (now - valueLastUpdate < 300000)
                             {
                                 // charging_state changed to Charging less than 5 minutes ago
