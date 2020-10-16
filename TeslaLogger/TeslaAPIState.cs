@@ -12,6 +12,7 @@ namespace TeslaLogger
         {
             Type,
             Value,
+            ValueLastUpdate,
             Timestamp,
             Source
         }
@@ -20,6 +21,7 @@ namespace TeslaLogger
         private HashSet<string> unknownKeys = new HashSet<string>();
         private Car car;
         private bool dumpJSON = false;
+        private readonly object TeslaAPIStateLock = new object();
 
         internal bool DumpJSON {
             get => dumpJSON;
@@ -52,24 +54,143 @@ namespace TeslaLogger
 
         private void AddValue(string _name, string _type, object _value, long _timestamp, string _source)
         {
-            if (!storage.ContainsKey(_name))
+            lock (TeslaAPIStateLock)
             {
-                storage.Add(_name, new Dictionary<Key, object>() {
+                if (!storage.TryGetValue(_name, out Dictionary<Key, object> _))
+                {
+                    storage.Add(_name, new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
+                    { Key.ValueLastUpdate , long.MinValue },
                     { Key.Timestamp , long.MinValue },
                     { Key.Source , "undef" }
                 });
+                }
+                else
+                {
+                    try
+                    {
+                        if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
+                            && dict.TryGetValue(Key.Value, out object oldvalue)
+                            && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
+                        {
+                            if (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                            {
+                                storage[_name][Key.ValueLastUpdate] = _timestamp;
+                                HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog("Exception", ex);
+                    }
+                }
+                storage[_name][Key.Type] = _type;
+                if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
+                {
+                    storage[_name][Key.Value] = string.Empty;
+                }
+                else
+                {
+                    storage[_name][Key.Value] = _value;
+                }
+                storage[_name][Key.Timestamp] = _timestamp;
+                storage[_name][Key.Source] = _source;
             }
-            else
+        }
+
+        private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
+        {
+            string timestamp;
+            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+            int speed, power, battery_level;
+            switch (name)
+            {
+                case "car_version":
+                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    _ = car.GetWebHelper().GetOdometerAsync();
+                    break;
+                case "locked":
+                case "charge_port_door_open":
+                case "charging_state":
+                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    break;
+                case "battery_level":
+                    if (car.IsParked())
+                    {
+                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public bool GetState(string _name, out Dictionary<Key, object> _state, int maxage = 0)
+        {
+            lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
-                        && dict.TryGetValue(Key.Value, out object oldvalue)
-                        && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
+                    if (storage.ContainsKey(_name))
                     {
-                        HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                        _state = storage[_name];
+                        if (maxage != 0)
+                        {
+                            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                    _state = new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.ValueLastUpdate , long.MinValue },
+                    { Key.Source , "undef" }
+                };
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _state = new Dictionary<Key, object>() {
+                    { Key.Type , "undef" },
+                    { Key.Value , "undef" },
+                    { Key.Timestamp , long.MinValue },
+                    { Key.ValueLastUpdate , long.MinValue },
+                    { Key.Source , "undef" }
+                };
+            }
+            return false;
+        }
+
+        public bool GetBool(string _name, out bool _value, int maxage = 0)
+        {
+            lock (TeslaAPIStateLock)
+            {
+                try
+                {
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                    {
+                        if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
+                        {
+                            if (maxage != 0)
+                            {
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = false;
+                                    return false;
+                                }
+                            }
+                            return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -77,195 +198,105 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
-            storage[_name][Key.Type] = _type;
-            if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
-            {
-                storage[_name][Key.Value] = string.Empty;
-            }
-            else
-            {
-                storage[_name][Key.Value] = _value;
-            }
-            storage[_name][Key.Timestamp] = _timestamp;
-            storage[_name][Key.Source] = _source;
-        }
-
-        private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
-        {
-            // TODO
-            if (oldvalue != null && newvalue != null && !oldvalue.ToString().Equals(newvalue.ToString()))
-            {
-                string timestamp;
-                double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
-                int speed, power, battery_level;
-                switch (name)
-                {
-                    case "car_version":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        _ = car.GetWebHelper().GetOdometerAsync();
-                        break;
-                    case "locked":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        // write car data to DB eg to update Grafana Dashboard status
-                        GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                        Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                        break;
-                    case "battery_level":
-                        if (car.IsParked())
-                        {
-                            Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                            // write car data to DB eg to update Grafana Dashboard status
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                        }
-                        break;
-                    case "charge_port_door_open":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        if (bool.TryParse(oldvalue.ToString(), out bool oldv) && bool.TryParse(newvalue.ToString(), out bool newv) && !oldv && newv)
-                        {
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                            //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
-                        }
-                        break;
-                    case "charging_state":
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                        if (!oldvalue.ToString().Equals("Charging") && newvalue.ToString().Equals("Charging"))
-                        {
-                            GetPosition(name, out timestamp, out latitude, out longitude, out speed, out power, out odometerKM, out ideal_battery_range_km, out battery_range, out battery_level, out outside_temp);
-                            Tools.DebugLog($"TeslaAPIHandleStateChange InsertPos timestamp {timestamp} latitude {latitude} longitude {longitude} speed {speed} power {power} odometerKM {odometerKM} ideal_battery_range_km {ideal_battery_range_km} battery_range {battery_range} battery_level {battery_level} outside_temp {outside_temp}");
-                            //car.dbHelper.InsertPos(timestamp, latitude, longitude, speed, power, odometerKM, ideal_battery_range_km, battery_range, battery_level, outside_temp, "");
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private void GetPosition(string name, out string timestamp, out double latitude, out double longitude, out int speed, out int power, out double odometerKM, out double ideal_battery_range_km, out double battery_range, out int battery_level, out double outside_temp)
-        {
-            timestamp = storage[name][Key.Timestamp].ToString();
-            GetDouble("latitude", out latitude);
-            GetDouble("longitude", out longitude);
-            GetInt("speed", out speed);
-            if (speed == int.MinValue)
-            {
-                speed = 0;
-            }
-            GetInt("power", out power);
-            GetDouble("odometer", out double odometer);
-            odometerKM = (double)((decimal)odometer / 0.62137M);
-            GetDouble("ideal_battery_range", out double ideal_battery_range);
-            if (ideal_battery_range == 999)
-            {
-                GetDouble("battery_range", out ideal_battery_range);
-            }
-            ideal_battery_range_km = (double)ideal_battery_range / (double)0.62137;
-            GetDouble("battery_range", out battery_range);
-            GetInt("battery_level", out battery_level);
-            GetDouble("outside_temp", out outside_temp);
-            if (outside_temp == double.MinValue)
-            {
-                outside_temp = (double)car.GetWebHelper().GetOutsideTempAsync().Result;
-            }
-        }
-
-        public bool GetState(string _name, out Dictionary<Key, object> _state)
-        {
-            if (storage.ContainsKey(_name))
-            {
-                _state = storage[_name];
-                return true;
-            }
-            _state = new Dictionary<Key, object>() {
-                    { Key.Type , "undef" },
-                    { Key.Value , "undef" },
-                    { Key.Timestamp , long.MinValue },
-                    { Key.Source , "undef" }
-                };
-            return false;
-        }
-
-        public bool GetBool(string _name, out bool _value)
-        {
-            try
-            {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
-                {
-                    if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
-                    {
-                        return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
-            }
             _value = false;
             return false;
         }
 
-        public bool GetInt(string _name, out int _value)
+        public bool GetInt(string _name, out int _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                        if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
+                        {
+                            if (maxage != 0)
+                            {
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = int.MinValue;
+                                    return false;
+                                }
+                            }
+                            return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _value = int.MinValue;
+                return false;
             }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
-            }
-            _value = int.MinValue;
-            return false;
         }
 
-        public bool GetDouble(string _name, out double _value)
+        public bool GetDouble(string _name, out double _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                        if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
+                        {
+                            if (maxage != 0)
+                            {
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = double.NaN;
+                                    return false;
+                                }
+                            }
+                            return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
             }
             _value = double.MinValue;
             return false;
         }
 
-        public bool GetString(string _name, out string _value)
+        public bool GetString(string _name, out string _value, int maxage = 0)
         {
-            try
+            lock (TeslaAPIStateLock)
             {
-                if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                try
                 {
-                    if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
+                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
                     {
-                        _value = storage[_name][Key.Value].ToString();
-                        return true;
+                        if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
+                        {
+                            if (maxage != 0)
+                            {
+                                long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                {
+                                    _value = string.Empty;
+                                    return false;
+                                }
+                            }
+                            _value = storage[_name][Key.Value].ToString();
+                            return true;
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception", ex);
+                }
+                _value = string.Empty;
+                return false;
             }
-            catch (Exception ex)
-            {
-                Tools.DebugLog("Exception", ex);
-            }
-            _value = string.Empty;
-            return false;
         }
 
         public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
