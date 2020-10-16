@@ -1362,6 +1362,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@id", chargeID);
                                 Tools.DebugLog(cmd);
                                 _ = cmd.ExecuteNonQuery();
+                                Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total {calculated_total_cost}");
                             }
                         }
                     }
