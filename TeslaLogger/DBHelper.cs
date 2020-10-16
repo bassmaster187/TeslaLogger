@@ -1535,8 +1535,8 @@ WHERE
                             {
                                 // charging_state changed to Charging less than 5 minutes ago
                                 // set waitbetween2pointsdb to 60 seconds
-                                Tools.DebugLog($"waitbetween2pointsdb:{waitbetween2pointsdb}");
                                 waitbetween2pointsdb = 60;
+                                Tools.DebugLog($"waitbetween2pointsdb:{waitbetween2pointsdb}");
                             }
                         }
                     }
