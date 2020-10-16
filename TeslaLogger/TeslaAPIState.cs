@@ -61,8 +61,8 @@ namespace TeslaLogger
                     storage.Add(_name, new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
-                    { Key.ValueLastUpdate , long.MinValue },
-                    { Key.Timestamp , long.MinValue },
+                    { Key.ValueLastUpdate , _timestamp },
+                    { Key.Timestamp , _timestamp },
                     { Key.Source , "undef" }
                 });
                 }
