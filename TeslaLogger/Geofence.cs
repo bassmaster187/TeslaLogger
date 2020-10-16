@@ -28,8 +28,6 @@ namespace TeslaLogger
         public Dictionary<SpecialFlags, string> specialFlags;
         private bool isHome = false;
         private bool isWork = false;
-        private bool isCharger = false;
-        private bool noSleep = false;
 
         public bool IsHome
         {
@@ -55,8 +53,8 @@ namespace TeslaLogger
             }
         }
 
-        public bool IsCharger { get => isCharger; set { isCharger = value; } }
-        public bool NoSleep { get => noSleep; set { noSleep = value; } }
+        public bool IsCharger { get; set; } = false;
+        public bool NoSleep { get; set; } = false;
 
         public Address(string name, double lat, double lng, int radius)
         {
@@ -199,6 +197,7 @@ namespace TeslaLogger
 
         private static int ReadGeofenceFile(SortedSet<Address> list, string filename)
         {
+            list.Clear();
             filename = filename.Replace(@"Debug\", "");
             int replaceCount = 0;
             if (File.Exists(filename))
@@ -243,15 +242,15 @@ namespace TeslaLogger
 
                             if (addr.name.StartsWith("Supercharger-V3 ") || addr.name.StartsWith("Ionity "))
                             {
-                                addr.name = "⚡⚡⚡ " + addr.name;
+                                addr.name = "\u26A1\u26A1\u26A1 " + addr.name;
                             }
                             else if (addr.name.StartsWith("Supercharger "))
                             {
-                                addr.name = "⚡⚡ " + addr.name;
+                                addr.name = "\u26A1\u26A1 " + addr.name;
                             }
                             else if (addr.name.StartsWith("Urbancharger "))
                             {
-                                addr.name = "⚡ " + addr.name;
+                                addr.name = "\u26A1 " + addr.name;
                             }
 
                             list.Add(addr);
@@ -285,27 +284,27 @@ namespace TeslaLogger
                 else if (flag.StartsWith("esm"))
                 {
                     SpecialFlag_ESM(_addr, flag);
-                    _addr.name = "👀 " + _addr.name;
+                    _addr.name = "\uD83D\uDC40 " + _addr.name;
                 }
                 else if (flag.Equals("home"))
                 {
                     _addr.IsHome = true;
-                    _addr.name = "🏠 " + _addr.name;
+                    _addr.name = "\uD83C\uDFE0 " + _addr.name;
                 }
                 else if (flag.Equals("work"))
                 {
                     _addr.IsWork = true;
-                    _addr.name = "💼 " + _addr.name;
+                    _addr.name = "\uD83D\uDCBC " + _addr.name;
                 }
                 else if (flag.Equals("nosleep"))
                 {
                     _addr.NoSleep = true;
-                    _addr.name = "☕ " + _addr.name;
+                    _addr.name = "\u2615 " + _addr.name;
                 }
                 else if (flag.Equals("charger"))
                 {
                     _addr.IsCharger = true;
-                    _addr.name = "🔌 " + _addr.name;
+                    _addr.name = "\uD83D\uDD0C " + _addr.name;
                 }
                 else if (flag.StartsWith("scl"))
                 {

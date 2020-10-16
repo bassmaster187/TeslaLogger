@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/module.js"],"names":["TrackMapCtrl"],"mappings":";;;;;;AAAQA,MAAAA,Y,kBAAAA,Y;;;2BAGNA,Y","sourcesContent":["import {TrackMapCtrl} from './trackmap_ctrl';\n\nexport {\n  TrackMapCtrl as PanelCtrl\n};\n"],"file":"module.js"}
+{"version":3,"sources":["../src/module.js"],"names":["TrackMapCtrl"],"mappings":";;;;;;AAAQA,MAAAA,Y,kBAAAA,Y;;;2BAGNA,Y","sourcesContent":["import {TrackMapCtrl} from './trackmap_ctrl';\r\n\r\nexport {\r\n  TrackMapCtrl as PanelCtrl\r\n};\r\n"],"file":"module.js"}

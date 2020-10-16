@@ -12,7 +12,7 @@ namespace TeslaLogger
 
         private TLStats ()
         {
-
+            Logfile.Log("TLStats initialized");
         }
 
         public static TLStats GetInstance()
@@ -28,6 +28,7 @@ namespace TeslaLogger
         {
             try
             {
+                Logfile.Log(Dump());
                 while (true)
                 {
                     if (DateTime.Now.Minute == 0)

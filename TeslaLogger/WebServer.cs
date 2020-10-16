@@ -461,7 +461,7 @@ namespace TeslaLogger
                         )
                     )
                 );
-                IEnumerable<string> geofenceprivate = WebHelper.geofence.geofenceList.Select(
+                IEnumerable<string> geofenceprivate = WebHelper.geofence.geofencePrivateList.Select(
                     a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
                         a.name,
                         a.lat,

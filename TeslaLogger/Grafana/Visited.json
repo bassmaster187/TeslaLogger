@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:598",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 12,
+  "iteration": 1602762491585,
   "links": [
     {
       "icon": "external link",
@@ -31,6 +32,13 @@
     {
       "autoZoom": true,
       "datasource": "teslalogger",
+      "defaultLayer": "OpenStreetMap",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 21,
         "w": 24,
@@ -38,18 +46,20 @@
         "y": 0
       },
       "id": 2,
-      "lineColor": "red",
+      "lineColor": "#1F60C4",
       "links": [],
+      "maxDataPointDelta": 300,
       "maxDataPoints": 500,
-      "options": {},
       "pointColor": "royalblue",
+      "scrollWheelZoom": true,
+      "showLayerChanger": true,
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng)\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 120\r\n ORDER BY datum ASC",
+          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -74,11 +84,11 @@
         }
       ],
       "title": "MAP",
-      "type": "grafana-trackmap-panel"
+      "type": "pr0ps-trackmap-panel"
     }
   ],
   "refresh": false,
-  "schemaVersion": 19,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -107,6 +117,37 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "ON",
+          "value": "ON"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Charger",
+        "options": [
+          {
+            "$$hashKey": "object:1099",
+            "selected": true,
+            "text": "ON",
+            "value": "ON"
+          },
+          {
+            "$$hashKey": "object:1100",
+            "selected": false,
+            "text": "OFF",
+            "value": "OFF"
+          }
+        ],
+        "query": "ON,OFF",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -142,5 +183,5 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 5
+  "version": 28
 }

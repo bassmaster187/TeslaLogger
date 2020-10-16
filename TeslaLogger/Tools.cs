@@ -49,11 +49,11 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
         {
             try
             {
-                string msg = cmd.CommandText;
+                string msg = "SQL" + Environment.NewLine + cmd.CommandText;
                 foreach (MySqlParameter p in cmd.Parameters)
                 {
                     string pValue = "";
@@ -108,7 +108,7 @@ namespace TeslaLogger
                     }
                     msg = msg.Replace(p.ParameterName, pValue);
                 }
-                DebugLog(msg, null, _cfp, _cln);
+                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
             catch (Exception ex)
             {
@@ -335,7 +335,9 @@ namespace TeslaLogger
                     int.TryParse(j["HTTPPort"], out httpport);
 
                     if (httpport == 0)
+                    {
                         httpport = 5000;
+                    }
                 }
             }
             catch (Exception ex)
@@ -343,6 +345,32 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
             }
             return httpport;
+        }
+
+        internal static bool UseOpenTopoData()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return false;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "UseOpenTopoData"))
+                {
+                    if(bool.TryParse(j["UseOpenTopoData"], out bool useOpenTopoData)) {
+                        return useOpenTopoData;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
         }
 
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
