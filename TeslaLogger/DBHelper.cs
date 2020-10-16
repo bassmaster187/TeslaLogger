@@ -434,8 +434,9 @@ namespace TeslaLogger
 
         public void CloseChargingState()
         {
-            Tools.DebugLog($"CloseChargingState() car.HasFreeSuC(): {car.HasFreeSuC()}");
-            if (car.HasFreeSuC())
+            bool hasFreeSuc = car.HasFreeSuC();
+            Tools.DebugLog($"CloseChargingState() car.HasFreeSuC(): {hasFreeSuc}");
+            if (hasFreeSuc)
             {
                 // get open SuC charging sessions and apply HasFreeSuC
                 try
@@ -444,30 +445,18 @@ namespace TeslaLogger
                     {
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(
-                            @"UPDATE 
-                              chargingstate 
-                            SET 
-                              cost_total= @cost_total, 
-                              cost_currency=@cost_currency, 
-                              cost_per_kwh=@cost_per_kwh, 
-                              cost_per_session=@cost_per_session, 
-                              cost_per_minute=@cost_per_minute, 
-                              cost_idle_fee_total=@cost_idle_fee_total, 
-                              cost_kwh_meter_invoice=@cost_kwh_meter_invoice 
-                            WHERE 
-                              CarID = @carid 
-                              AND EndDate is null 
-                              AND fast_charger_brand = 'Tesla'", con))
+@"UPDATE 
+  chargingstate 
+SET 
+  cost_total= @cost_total
+WHERE 
+  CarID = @carid 
+  AND EndDate is null 
+  AND fast_charger_brand = 'Tesla'", con))
                         {
                             cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                             cmd.Parameters.AddWithValue("@cost_total", 0.0);
-                            cmd.Parameters.AddWithValue("@cost_per_session", 0.0);
-                            cmd.Parameters.AddWithValue("@cost_currency", DBNullIfEmpty(string.Empty));
-                            cmd.Parameters.AddWithValue("@cost_per_kwh", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_per_minute", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBNull.Value);
-                            Tools.DebugLog("SQL:" + cmd.CommandText);
+                            Tools.DebugLog(cmd);
                             int rowsUpdated = cmd.ExecuteNonQuery();
                             if (rowsUpdated > 0)
                             {
@@ -650,6 +639,7 @@ namespace TeslaLogger
 
         internal static void UpdateAllChargingMaxPower()
         {
+            Tools.DebugLog("UpdateAllChargingMaxPower");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -784,7 +774,7 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                     cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
-                    cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
+                    cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid());
                     cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
@@ -1286,6 +1276,7 @@ namespace TeslaLogger
 
         public static bool UpdateIncompleteTrips()
         {
+            Tools.DebugLog("UpdateIncompleteTrips");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
