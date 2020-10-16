@@ -49,7 +49,7 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace TeslaLogger
                     }
                     msg = msg.Replace(p.ParameterName, pValue);
                 }
-                DebugLog(msg, null, _cfp, _cln);
+                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
             catch (Exception ex)
             {
