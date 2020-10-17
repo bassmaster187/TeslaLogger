@@ -1463,13 +1463,9 @@ WHERE
 id = @carid", con))
                     {
                         cmd.Parameters.Add("@carid", MySqlDbType.UByte).Value = CarInDB;
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                         {
-                            Tools.DebugLog($"HasFreeSuC() dr[0]:{dr[0]}");
-                            Tools.DebugLog($"HasFreeSuC() freesuc:{freesuc}");
-                            Tools.DebugLog($"HasFreeSuC() return:{freesuc == 1}");
                             return freesuc == 1;
                         }
                     }

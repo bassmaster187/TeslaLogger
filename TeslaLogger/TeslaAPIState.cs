@@ -38,7 +38,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        Tools.DebugLog(ex.ToString());
+                        Tools.DebugLog("DumpJSON", ex);
                     }
                 }
                 car.Log($"DumpJSON {value}");
@@ -117,7 +117,7 @@ namespace TeslaLogger
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     break;
                 case "battery_level":
-                    if (car.IsParked())
+                    if (car.IsParked() && !car.IsCharging())
                     {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     }
