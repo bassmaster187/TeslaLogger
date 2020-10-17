@@ -1121,10 +1121,12 @@ namespace TeslaLogger
             string str = string.Empty;
             foreach (string key in storage.Keys)
             {
-                if (compareTs && storage[key][Key.Timestamp] != null && long.TryParse(storage[key][Key.Timestamp].ToString(), out long ts) && ts != 0)
+                if (compareTs && storage[key][Key.Timestamp] != null
+                    && long.TryParse(storage[key][Key.Timestamp].ToString(), out long ts) && ts != 0
+                    && long.TryParse(storage[key][Key.ValueLastUpdate].ToString(), out long vlu) && vlu != 0)
                 {
                     long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                    str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]} now:{now} diff:{now - ts}ms", Environment.NewLine);
+                    str += string.Concat($"{key} => v:[{storage[key][Key.Value]}] t:{storage[key][Key.Type]} s:{storage[key][Key.Source]} ts:{storage[key][Key.Timestamp]} now:{now} diff:{now - ts}ms vlu:{storage[key][Key.ValueLastUpdate]} now:{now} diff:{now - vlu}ms", Environment.NewLine);
                 }
                 else
                 {
