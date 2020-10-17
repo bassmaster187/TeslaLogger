@@ -1020,6 +1020,13 @@ namespace TeslaLogger
             {
                 _ = webhelper.GetOdometerAsync();
             }
+            // any -> Driving
+            if (_oldState != TeslaState.Drive && _newState == TeslaState.Drive)
+            {
+                // reset lastSetChargeLimitAddressName
+                lastSetChargeLimitAddressName = string.Empty;
+            }
+
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
