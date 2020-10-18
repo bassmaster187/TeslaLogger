@@ -283,95 +283,127 @@ namespace TeslaLogger
         {
             // TODO this should only run once - persist completed migration somehow
 
-            // migrate floor round error for pos.speed
-
-            for (int speed_mph = 1; speed_mph < 300; speed_mph++)
+            if (true)
             {
-                int speed_floor = (int)(speed_mph * 1.60934);
-                int speed_round = Convert.ToInt32(speed_mph * 1.60934);
-                if (speed_floor != speed_round)
+                try
                 {
-                    DateTime start = DateTime.Now;
-                    Logfile.Log($"MigrateFloorRound(): speed {speed_floor} -> {speed_round}");
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    Logfile.Log("MigrateFloorRound() start");
+
+                    // add indexes to speed up things
+                    Logfile.Log("MigrateFloorRound() ADD INDEX speed");
+                    ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_speed (speed)", 6000);
+                    Logfile.Log("MigrateFloorRound() ADD INDEX power");
+                    ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_power (power)", 6000);
+
+                    // migrate floor round error for pos.speed
+
+                    for (int speed_mph = 1; speed_mph < 300; speed_mph++)
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
+                        int speed_floor = (int)(speed_mph * 1.60934);
+                        int speed_round = Convert.ToInt32(speed_mph * 1.60934);
+                        if (speed_floor != speed_round)
+                        {
+                            DateTime start = DateTime.Now;
+                            Logfile.Log($"MigrateFloorRound(): speed {speed_floor} -> {speed_round}");
+                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                            {
+                                con.Open();
+                                using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE
   pos
 SET
   speed = @speedround
 WHERE
   speed = @speedfloor", con))
-                        {
-                            cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
-                            cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
-                            int updated_rows = cmd.ExecuteNonQuery();
-                            Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                {
+                                    cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
+                                    cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
+                                    int updated_rows = cmd.ExecuteNonQuery();
+                                    Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                }
+                                con.Close();
+                            }
                         }
-                        con.Close();
                     }
-                }
-            }
 
-            // migrate floor round error for pos.power
-            for (int power_ps = 1; power_ps < 900; power_ps++)
-            {
-                int power_floor = (int)(power_ps * 1.35962);
-                int power_round = Convert.ToInt32(power_ps * 1.35962);
-                if (power_floor != power_round)
-                {
-                    DateTime start = DateTime.Now;
-                    Logfile.Log($"MigrateFloorRound(): power {power_floor} -> {power_round}");
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    // migrate floor round error for pos.power
+                    for (int power_ps = 1; power_ps < 1500; power_ps++)
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
+                        int power_floor = (int)(power_ps * 1.35962);
+                        int power_round = Convert.ToInt32(power_ps * 1.35962);
+                        if (power_floor != power_round)
+                        {
+                            DateTime start = DateTime.Now;
+                            Logfile.Log($"MigrateFloorRound(): power {power_floor} -> {power_round}");
+                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                            {
+                                con.Open();
+                                using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE
   pos
 SET
   power = @powerround
 WHERE
   power = @powerfloor", con))
-                        {
-                            cmd.Parameters.Add("powerround", MySqlDbType.Int32).Value = power_round;
-                            cmd.Parameters.Add("powerfloor", MySqlDbType.Int32).Value = power_floor;
-                            int updated_rows = cmd.ExecuteNonQuery();
-                            Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                {
+                                    cmd.Parameters.Add("powerround", MySqlDbType.Int32).Value = power_round;
+                                    cmd.Parameters.Add("powerfloor", MySqlDbType.Int32).Value = power_floor;
+                                    int updated_rows = cmd.ExecuteNonQuery();
+                                    Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                }
+                                con.Close();
+                            }
                         }
-                        con.Close();
                     }
-                }
-            }
 
-            // update all drivestate statistics
-            foreach (Car c in Car.allcars)
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(
-    @"SELECT
+                    // update all drivestate statistics
+                    foreach (Car c in Car.allcars)
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+            @"SELECT
   StartPos,
   EndPos
 FROM
   drivestate
 WHERE
   CarID = @CarID", con))
-                    {
-                        cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = c.CarInDB;
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        while (dr.Read())
-                        {
-                            if (dr[0] != null && int.TryParse(dr[0].ToString(), out int startpos)
-                                && dr[1] != null && int.TryParse(dr[1].ToString(), out int endpos))
                             {
-                                DateTime start = DateTime.Now;
-                                c.dbHelper.UpdateDriveStatistics(startpos, endpos, false);
-                                c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = c.CarInDB;
+                                MySqlDataReader dr = cmd.ExecuteReader();
+                                while (dr.Read())
+                                {
+                                    if (dr[0] != null && int.TryParse(dr[0].ToString(), out int startpos)
+                                        && dr[1] != null && int.TryParse(dr[1].ToString(), out int endpos))
+                                    {
+                                        DateTime start = DateTime.Now;
+                                        c.dbHelper.UpdateDriveStatistics(startpos, endpos, false);
+                                        c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                    }
+                                }
                             }
                         }
                     }
+
+                    // remove indexes
+                    Logfile.Log("MigrateFloorRound() DROP INDEX speed");
+                    ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_speed", 6000);
+                    Logfile.Log("MigrateFloorRound() DROP INDEX power");
+                    ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_power", 6000);
+
+                    // cleanup DB files
+                    Logfile.Log("MigrateFloorRound() REBUILD");
+                    ExecuteSQLQuery("ALTER TABLE pos FORCE", 6000);
+
+                    // TODO persist that migration ran successful to prevent another run
+
+                    Logfile.Log("MigrateFloorRound() finished");
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception MigrateFloorRound()", ex);
                 }
             }
         }
