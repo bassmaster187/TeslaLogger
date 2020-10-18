@@ -299,6 +299,9 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
+                // TODO this should only run once!
+                DBHelper.MigrateFloorRound();
+
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
             })
