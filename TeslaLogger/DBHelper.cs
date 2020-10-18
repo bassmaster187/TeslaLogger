@@ -1395,10 +1395,9 @@ WHERE
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                    cmd.Parameters.AddWithValue("@speed", (int)(speed * 1.60934M));
-                    cmd.Parameters.AddWithValue("@power", (int)(power * 1.35962M));
-                    cmd.Parameters.AddWithValue("@odometer", odometer.ToString());
-
+                    cmd.Parameters.AddWithValue("@speed", Convert.ToInt32(speed * 1.60934M));
+                    cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
+                    cmd.Parameters.AddWithValue("@odometer", odometer);
 
                     if (ideal_battery_range_km == -1)
                     {
