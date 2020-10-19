@@ -284,18 +284,18 @@ namespace TeslaLogger
                 {
                     StringBuilder migrationlog = new StringBuilder();
                     Logfile.Log("MigrateFloorRound() start");
-                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() start");
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() start" + Environment.NewLine);
 
                     // add indexes to speed up things
                     Logfile.Log("MigrateFloorRound() ADD INDEX speed");
-                    migrationlog.Append($"{DateTime.Now} ADD INDEX speed");
+                    migrationlog.Append($"{DateTime.Now} ADD INDEX speed" + Environment.NewLine);
                     int sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_speed (speed)", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}");
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     Logfile.Log("MigrateFloorRound() ADD INDEX power");
-                    migrationlog.Append($"{DateTime.Now} ADD INDEX power");
+                    migrationlog.Append($"{DateTime.Now} ADD INDEX power" + Environment.NewLine);
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_power (power)", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}");
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     // migrate floor round error for pos.speed
 
@@ -307,7 +307,7 @@ namespace TeslaLogger
                         {
                             DateTime start = DateTime.Now;
                             Logfile.Log($"MigrateFloorRound(): speed {speed_floor} -> {speed_round}");
-                            migrationlog.Append($"{DateTime.Now} speed {speed_floor} -> {speed_round}");
+                            migrationlog.Append($"{DateTime.Now} speed {speed_floor} -> {speed_round}" + Environment.NewLine);
                             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                             {
                                 con.Open();
@@ -323,7 +323,7 @@ WHERE
                                     cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
                                     int updated_rows = cmd.ExecuteNonQuery();
                                     Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
                                 }
                                 con.Close();
                             }
@@ -355,7 +355,7 @@ WHERE
                                     cmd.Parameters.Add("powerfloor", MySqlDbType.Int32).Value = power_floor;
                                     int updated_rows = cmd.ExecuteNonQuery();
                                     Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
                                 }
                                 con.Close();
                             }
@@ -387,7 +387,7 @@ WHERE
                                         DateTime start = DateTime.Now;
                                         c.dbHelper.UpdateDriveStatistics(startpos, endpos, false);
                                         c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                        migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                        migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
                                     }
                                 }
                             }
@@ -396,23 +396,23 @@ WHERE
 
                     // remove indexes
                     Logfile.Log("MigrateFloorRound() DROP INDEX speed");
-                    migrationlog.Append($"{DateTime.Now} DROP INDEX speed");
+                    migrationlog.Append($"{DateTime.Now} DROP INDEX speed" + Environment.NewLine);
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_speed", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}");
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     Logfile.Log("MigrateFloorRound() DROP INDEX power");
-                    migrationlog.Append($"{DateTime.Now} DROP INDEX power");
+                    migrationlog.Append($"{DateTime.Now} DROP INDEX power" + Environment.NewLine);
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_power", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}");
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     // cleanup DB files
                     Logfile.Log("MigrateFloorRound() REBUILD");
-                    migrationlog.Append($"{DateTime.Now} REBUILD");
+                    migrationlog.Append($"{DateTime.Now} REBUILD" + Environment.NewLine);
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos FORCE", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}");
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     Logfile.Log("MigrateFloorRound() finished");
-                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() finished");
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() finished" + Environment.NewLine);
 
                     // persist that migration ran successful to prevent another run
                     File.WriteAllText(migrationstatusfile, migrationlog.ToString());
