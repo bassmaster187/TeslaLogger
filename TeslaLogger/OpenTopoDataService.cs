@@ -47,7 +47,6 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Tools.DebugLog($"OpenTopoDataService: sleep 30 queue.Count: {queue.Count}");
                         Thread.Sleep(30000); // sleep 30 seconds
                     }
                 }
@@ -60,7 +59,6 @@ namespace TeslaLogger
 
         private void Work()
         {
-            Tools.DebugLog($"OpenTopoDataService: work() queue.IsEmpty: {queue.IsEmpty} queue.Count: {queue.Count}");
             // is there something in the queue?
             if (!queue.IsEmpty)
             {
@@ -76,7 +74,6 @@ namespace TeslaLogger
                         latlng[i] = $"{items[i].Item2},{items[i].Item3}";
                     }
                     string queryString = "https://api.opentopodata.org/v1/mapzen?locations=" + string.Join("|", latlng);
-                    Tools.DebugLog($"OpenTopoDataService: queryString: " + queryString);
                     // query opentopodata.org API
                     string resultContent = string.Empty;
                     using (HttpClient client = new HttpClient
@@ -114,14 +111,12 @@ namespace TeslaLogger
                                                 if (double.TryParse(location["lat"].ToString(), out double lat)
                                                     && double.TryParse(location["lng"].ToString(), out double lng))
                                                 {
-                                                    Tools.DebugLog($"OpenTopoDataService: OpenTopoData {lat},{lng} - {elevation}");
                                                     // find posID(s) in items
                                                     foreach (Tuple<long, double, double> item in items)
                                                     {
                                                         if (item.Item2 == lat && item.Item3 == lng)
                                                         {
                                                             // finally update DB
-                                                            Tools.DebugLog($"OpenTopoDataService: SQL: " + $"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
                                                             _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
                                                         }
                                                     }
@@ -133,13 +128,11 @@ namespace TeslaLogger
                             }
                         }
                     }
-                    Tools.DebugLog($"OpenTopoDataService: sleep 90 queue.Count: {queue.Count}");
                     Thread.Sleep(90000); // sleep 90 seconds (safety marging)
                 }
             }
             else
             {
-                Tools.DebugLog($"OpenTopoDataService: sleep 60 queue.Count: {queue.Count}");
                 Thread.Sleep(60000); // sleep 60 seconds
             }
         }
