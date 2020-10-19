@@ -58,6 +58,45 @@ namespace TeslaLogger
         public WebHelper(Car car)
         {
             this.car = car;
+
+            CheckUseTaskerToken();
+        }
+
+        private void CheckUseTaskerToken()
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(car.TaskerHash))
+                    return;
+
+                using (WebClient client = new WebClient())
+                {
+                    DateTime start = DateTime.UtcNow;
+                    string reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
+                    DBHelper.AddMothershipDataToDB("tasker_date.php", start, 200);
+
+                    if (reply.Contains("not found"))
+                    {
+                        Log("LastTaskerToken not found - Stop using fast TaskerToken request!");
+                        car.useTaskerToken = false;
+                        return;
+                    }
+
+                    DateTime dt = DateTime.Parse(reply, Tools.ciEnUS);
+                    var ts = DateTime.Now - dt;
+                    if (ts.TotalDays > 2)
+                    {
+                        Log("LastTaskerToken: " + reply + " Stop using fast TaskerToken request!");
+                        car.useTaskerToken = false;
+                    }
+                    else
+                        car.useTaskerToken = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.Message);
+            }
         }
 
         internal string GetLastShiftState()
@@ -2352,7 +2391,11 @@ namespace TeslaLogger
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
-                if (!force && ts.TotalSeconds < 20)
+                int secBetweenTaskerWakeupFile = 20;
+                if (!car.useTaskerToken)
+                    secBetweenTaskerWakeupFile = 120;
+
+                if (!force && ts.TotalSeconds < secBetweenTaskerWakeupFile)
                 {
                     return false;
                 }
@@ -2431,6 +2474,7 @@ namespace TeslaLogger
                             { }
 
                             Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
+                            car.useTaskerToken = true;
                             return true;
                         }
                     }

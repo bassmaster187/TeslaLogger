@@ -125,7 +125,7 @@ else
 				$('#car_statusLabel').text("Wird geladen:");
 				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + 
 				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ 
-				jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m <br>At: " + datetime);
+				jsonData["charger_phases"]+"P<br>Done: "+ hour +"h "+minute+"m <br>At: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
 
 				updateSMT(jsonData);
 			}
