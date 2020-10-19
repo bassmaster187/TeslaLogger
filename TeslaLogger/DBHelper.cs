@@ -5,12 +5,10 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -302,7 +300,7 @@ namespace TeslaLogger
                     for (int speed_mph = 1; speed_mph < 300; speed_mph++)
                     {
                         int speed_floor = (int)(speed_mph * 1.60934);
-                        int speed_round = Convert.ToInt32(speed_mph * 1.60934);
+                        int speed_round = MphToKmhRounded(speed_mph);
                         if (speed_floor != speed_round)
                         {
                             DateTime start = DateTime.Now;
@@ -339,7 +337,7 @@ WHERE
                         {
                             DateTime start = DateTime.Now;
                             Logfile.Log($"MigrateFloorRound(): power {power_floor} -> {power_round}");
-                            migrationlog.Append($"{DateTime.Now} power {power_floor} -> {power_round}");
+                            migrationlog.Append($"{DateTime.Now} power {power_floor} -> {power_round}" + Environment.NewLine);
                             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                             {
                                 con.Open();
@@ -1535,7 +1533,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                    cmd.Parameters.AddWithValue("@speed", Convert.ToInt32(speed * 1.60934M));
+                    cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
                     cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
@@ -2501,6 +2499,23 @@ WHERE
             {
                 Logfile.ExceptionWriter(ex, "");
             }
+        }
+
+        private static int MphToKmhRounded(double speed_mph)
+        {
+            int speed_floor = (int)(speed_mph * 1.60934);
+            // handle special speed_floor as Math.Round is off by +1
+            if (
+                speed_floor == 30
+                || speed_floor == 33
+                || speed_floor == 83
+                || speed_floor == 123
+                || speed_floor == 133
+                )
+            {
+                return speed_floor;
+            }
+            return (int)Math.Round(speed_mph / 0.62137119223733);
         }
     }
 }
