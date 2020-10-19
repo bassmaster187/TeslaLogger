@@ -25,8 +25,6 @@ namespace TeslaLogger
 
             try
             {
-                InitTLStats();
-
                 InitStage1();
 
                 InitCheckDocker();
@@ -42,6 +40,8 @@ namespace TeslaLogger
                 UpdateTeslalogger.StopComfortingMessagesThread();
 
                 MQTTClient.StartMQTTClient();
+
+                InitTLStats();
 
                 UpdateDbInBackground();
 
