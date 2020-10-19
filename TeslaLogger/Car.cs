@@ -653,8 +653,8 @@ namespace TeslaLogger
                                     {
                                         if (now - valueLastUpdate < 60000)
                                         {
-                                            // charging_state changed to Charging less than 5 minutes ago
-                                            // set waitbetween2pointsdb to 60 seconds
+                                            // charging_state changed to Charging less than 1 minute ago
+                                            // reduce sleepduration to 1 second
                                             sleepduration = 1000;
                                             Tools.DebugLog($"sleepduration:{sleepduration}");
                                         }
