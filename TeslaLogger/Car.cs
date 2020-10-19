@@ -96,6 +96,8 @@ namespace TeslaLogger
 
         private TeslaAPIState teslaAPIState;
 
+        public bool useTaskerToken = true;
+
         public double Wh_TR { get => _wh_TR;
             set { 
                 _wh_TR = value;
