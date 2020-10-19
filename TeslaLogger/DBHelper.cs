@@ -295,9 +295,46 @@ namespace TeslaLogger
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_power (power)", 6000);
                     migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
+                    // get max speed & power
+
+                    int maxspeed_kmh = 0;
+                    int maxpower_ps = 0;
+
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(
+@"SELECT
+  MAX(speed),
+  MAX(power)
+FROM
+pos", con))
+                        {
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                            {
+                                int.TryParse(dr[0].ToString(), out maxspeed_kmh);
+                                int.TryParse(dr[1].ToString(), out maxpower_ps);
+                            }
+                        }
+                        con.Close();
+                    }
+
+                    if (maxspeed_kmh == 0)
+                    {
+                        maxspeed_kmh = 500;
+                    }
+                    if (maxpower_ps == 0)
+                    {
+                        maxpower_ps = 2000;
+                    }
+
+                    Logfile.Log($"maxspeed_kmh: {maxspeed_kmh} maxpower_ps: {maxpower_ps}");
+                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh} maxpower_ps: {maxpower_ps}" + Environment.NewLine);
+
                     // migrate floor round error for pos.speed
 
-                    for (int speed_mph = 1; speed_mph < 300; speed_mph++)
+                    for (int speed_mph = (int)Math.Round(maxspeed_kmh / 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
                         int speed_floor = (int)(speed_mph * 1.60934);
                         int speed_round = MphToKmhRounded(speed_mph);
@@ -329,7 +366,7 @@ WHERE
                     }
 
                     // migrate floor round error for pos.power
-                    for (int power_ps = 1; power_ps < 1500; power_ps++)
+                    for (int power_ps =  maxpower_ps + 1; power_ps > 0; power_ps--)
                     {
                         int power_floor = (int)(power_ps * 1.35962);
                         int power_round = Convert.ToInt32(power_ps * 1.35962);
