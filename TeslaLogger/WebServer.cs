@@ -24,7 +24,8 @@ namespace TeslaLogger
             "auto_conditioning_toggle",
             "sentry_mode_on",
             "sentry_mode_off",
-            "sentry_mode_toggle"
+            "sentry_mode_toggle",
+            "wake_up"
         };
 
         public WebServer()
@@ -268,8 +269,8 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                string command = m.Groups[2].Captures[0].ToString();
                 int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string command = m.Groups[2].Captures[0].ToString();
                 if (command.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
@@ -311,6 +312,9 @@ namespace TeslaLogger
                                     {
                                         WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
                                     }
+                                    break;
+                                case "wake_up":
+                                    WriteString(response, car.webhelper.Wakeup().Result);
                                     break;
                                 default:
                                     WriteString(response, "");

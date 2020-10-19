@@ -22,7 +22,7 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
   function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
   function log(msg) {// uncomment for debugging
-    //console.log(msg);
+    // console.log(msg);
   }
 
   return {
@@ -117,9 +117,9 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
           value: function onRender() {
             var _this2 = this;
 
-            log("onRender"); // Wait until there is at least one GridLayer with fully loaded
+            //log("onRender")
+            // Wait until there is at least one GridLayer with fully loaded
             // tiles before calling renderingCompleted
-
             if (this.leafMap) {
               this.leafMap.eachLayer(function (l) {
                 if (l instanceof L.GridLayer) {
@@ -153,8 +153,7 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
         }, {
           key: "onPanelHover",
           value: function onPanelHover(evt) {
-            log("onPanelHover");
-
+            // log("onPanelHover");
             if (this.coords.length === 0) {
               return;
             } // check if we are already showing the correct hoverMarker
@@ -434,6 +433,8 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
             });
             log("addDataToMap");
             coords.forEach(function (polyline) {
+              log("polyline: " + polyline.length);
+
               _this5.polylines.push(L.polyline(polyline, {
                 color: _this5.panel.lineColor,
                 weight: 3
@@ -493,8 +494,11 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
           value: function onDataReceived(data) {
             log("onDataReceived");
             this.setupMap();
+            this.coords.length = 0;
 
             if (data[0].columns != null && data[0].rows != null) {
+              log("Rows: " + data[0].rows.length);
+
               for (var i = 0; i < data[0].rows.length; i++) {
                 var row = data[0].rows[i];
                 if (row[0] == null || row[1] == null || row[0] == 0 || row[1] == 0) continue;

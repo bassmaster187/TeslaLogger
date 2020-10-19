@@ -232,7 +232,6 @@ namespace TeslaLogger
                             if (args.Length > 4 && args[4] != null)
                             {
                                 string flags = args[4];
-                                Tools.DebugLog(args[0].Trim() + ": special flags found: " + flags);
                                 ParseSpecialFlags(addr, flags);
                             }
                             if (filename.Equals(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
