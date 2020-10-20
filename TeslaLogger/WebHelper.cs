@@ -69,6 +69,8 @@ namespace TeslaLogger
                 if (String.IsNullOrEmpty(car.TaskerHash))
                     return;
 
+                Log("CheckUseTaskerToken");
+
                 using (WebClient client = new WebClient())
                 {
                     DateTime start = DateTime.UtcNow;
@@ -90,7 +92,13 @@ namespace TeslaLogger
                         car.useTaskerToken = false;
                     }
                     else
-                        car.useTaskerToken = true;
+                    {
+                        if (!car.useTaskerToken)
+                        {
+                            Log("LastTaskerToken: " + reply + " Start using fast TaskerToken request!");
+                            car.useTaskerToken = true;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -537,6 +545,8 @@ namespace TeslaLogger
                             {
                                 Log("WriteCarsettings -> TaskerToken");
                                 car.WriteSettings();
+
+                                CheckUseTaskerToken();
                             }
 
                             Log("Tasker Config:\r\n Server Port: https://teslalogger.de\r\n Path: wakeup.php\r\n Attribute: t=" + car.TaskerHash);
@@ -2474,7 +2484,11 @@ namespace TeslaLogger
                             { }
 
                             Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
-                            car.useTaskerToken = true;
+                            if (!car.useTaskerToken)
+                            {
+                                Log("Start using fast TaskerToken request!");
+                                car.useTaskerToken = true;
+                            }
                             return true;
                         }
                     }

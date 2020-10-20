@@ -21,10 +21,10 @@ namespace TeslaLogger
 
         private static void Main(string[] args)
         {
-            InitDebugLogging();
-
             try
             {
+                InitDebugLogging();
+
                 InitStage1();
 
                 InitCheckDocker();
