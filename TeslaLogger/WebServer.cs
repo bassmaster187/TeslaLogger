@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
@@ -106,6 +107,36 @@ namespace TeslaLogger
             }
         }
 
+        void WriteFile(HttpListenerResponse response, string path)
+        {
+            using (FileStream fs = File.OpenRead(path))
+            {
+                string filename = Path.GetFileName(path);
+                //response is HttpListenerContext.Response...
+                response.ContentLength64 = fs.Length;
+                response.SendChunked = false;
+                response.ContentType = System.Net.Mime.MediaTypeNames.Application.Octet;
+                response.AddHeader("Content-disposition", "attachment; filename=" + filename);
+
+                byte[] buffer = new byte[64 * 1024];
+                int read;
+                using (BinaryWriter bw = new BinaryWriter(response.OutputStream))
+                {
+                    while ((read = fs.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        bw.Write(buffer, 0, read);
+                        bw.Flush(); //seems to have no effect
+                    }
+
+                    bw.Close();
+                }
+
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.StatusDescription = "OK";
+                response.OutputStream.Close();
+            }
+        }
+
         private void OnContext(object o)
         {
             string localpath = "";
@@ -194,6 +225,9 @@ namespace TeslaLogger
                         Logfile.Log("VERBOSE off");
                         WriteString(response, "VERBOSE off");
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/logfile"):
+                        GetLogfile(response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -207,6 +241,31 @@ namespace TeslaLogger
             }
         }
 
+        private void GetLogfile(HttpListenerResponse response)
+        {
+            try
+            {
+                string logfilePath = Path.Combine(FileManager.GetExecutingPath(), "nohup.out");
+
+                if (Directory.Exists("zip"))
+                    Directory.Delete("zip", true);
+
+                Directory.CreateDirectory("zip");
+                File.Copy(logfilePath, "zip/logfile.txt");
+
+                if (File.Exists("logfile.zip"))
+                    File.Delete("logfile.zip");
+
+                ZipFile.CreateFromDirectory("zip", "logfile.zip");
+
+                WriteFile(response, "logfile.zip");
+            }
+            catch (Exception ex)
+            {
+                WriteString(response, ex.ToString());
+                Logfile.Log(ex.ToString());
+            }
+        }
 
         private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
