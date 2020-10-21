@@ -152,7 +152,9 @@ if (isset($id))
 			else
 				$("#cof_gear").val(e.substring(4));
 		}
-    	
+    	        else if (e.startsWith("nosleep"))
+			$("#nosleep").attr('checked', 'checked');
+		
 		OnSpecialFlagsChanged();
 	});
 
@@ -232,7 +234,9 @@ if (isset($id))
 	{
 		f += "+cof:"+$("#cof_gear").val();
 	}		
-
+        if ($("#nosleep").is(':checked'))
+		f += "+nosleep";
+	  
 	$("#flag").val(f);
   }
   
@@ -329,7 +333,7 @@ if (isset($id))
 						  <option value="R->P">R → P</option>
 						</select>
 					</td></tr>
-
+                                <tr><td>No sleep</td><td> <input id="nosleep" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
 			</table>
 		</div>
