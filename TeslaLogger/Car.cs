@@ -645,10 +645,16 @@ namespace TeslaLogger
                         try
                         {
                             // get charging_state, must not be older than 2 minutes = 120 seconds = 1200000 milliseconds
-                            if (GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 120000))
+                            // get charge_port_door_open, must not be older than 2 minutes = 120 seconds = 1200000 milliseconds
+                            if (GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 120000)
+                                && GetTeslaAPIState().GetState("charge_port_door_open", out Dictionary<TeslaAPIState.Key, object> charge_port_door_open, 120000))
                             {
-                                if (charging_state[TeslaAPIState.Key.Value] != null
-                                    && charging_state[TeslaAPIState.Key.Value].ToString().Equals("Starting")
+                                // charging_state == Starting?
+                                // charge_port_door_open == true?
+                                if ((charging_state[TeslaAPIState.Key.Value] != null
+                                    && charging_state[TeslaAPIState.Key.Value].ToString().Equals("Starting"))
+                                    || (charge_port_door_open[TeslaAPIState.Key.Value] != null
+                                    && charge_port_door_open[TeslaAPIState.Key.Value].ToString().Equals("True"))
                                     )
                                 {
                                     // check if charging_state value Starting is not older than 1 minute
@@ -660,7 +666,18 @@ namespace TeslaLogger
                                             // charging_state changed to Charging less than 1 minute ago
                                             // reduce sleepduration to 0.5 second
                                             sleepduration = 500;
-                                            Tools.DebugLog($"sleepduration:{sleepduration}");
+                                            Tools.DebugLog($"charging_state sleepduration: {sleepduration}");
+                                        }
+                                    }
+                                    // check if charge_port_door_open value True is not older than 1 minute
+                                    else if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out valueLastUpdate))
+                                    {
+                                        if (now - valueLastUpdate < 60000)
+                                        {
+                                            // charge_port_door_open changed to Charging less than 1 minute ago
+                                            // reduce sleepduration to 0.5 second
+                                            sleepduration = 500;
+                                            Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
                                         }
                                     }
                                 }
