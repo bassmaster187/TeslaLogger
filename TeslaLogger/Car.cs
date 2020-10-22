@@ -640,7 +640,37 @@ namespace TeslaLogger
 
                     if (doSleep)
                     {
-                        Thread.Sleep(5000);
+                        int sleepduration = 5000;
+                        // if charging is starting just now, decrease sleepduration to 1 second
+                        try
+                        {
+                            // get charging_state, must not be older than 2 minutes = 120 seconds = 1200000 milliseconds
+                            if (GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 120000))
+                            {
+                                if (charging_state[TeslaAPIState.Key.Value] != null
+                                    && charging_state[TeslaAPIState.Key.Value].ToString().Equals("Starting")
+                                    )
+                                {
+                                    // check if charging_state value Starting is not older than 1 minute
+                                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                    if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
+                                    {
+                                        if (now - valueLastUpdate < 60000)
+                                        {
+                                            // charging_state changed to Charging less than 1 minute ago
+                                            // reduce sleepduration to 0.5 second
+                                            sleepduration = 500;
+                                            Tools.DebugLog($"sleepduration:{sleepduration}");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.DebugLog("Exception sleepduration", ex);
+                        }
+                        Thread.Sleep(sleepduration);
                     }
                     else
                     {

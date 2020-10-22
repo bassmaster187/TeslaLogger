@@ -74,7 +74,12 @@ namespace TeslaLogger
                             && dict.TryGetValue(Key.Value, out object oldvalue)
                             && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
                         {
-                            if (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                            if (
+                                // olvalue != null and value changed
+                                (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                                // oldvalue was null and newvalue is not null
+                                || (oldvalue == null && _value != null)
+                                )
                             {
                                 storage[_name][Key.ValueLastUpdate] = _timestamp;
                                 HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
