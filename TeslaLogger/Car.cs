@@ -1255,11 +1255,13 @@ AND chargingstate.endchargingid = charging.id
 AND pos.address = @addr
 AND chargingstate.cost_total IS NULL
 AND chargingstate.CarID = @CarID
+AND chargingstate.id > @referenceID
 ORDER BY id DESC
 LIMIT 1", con))
                     {
                         cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = _addr.name;
                         cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
+                        cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = referenceID;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
@@ -1273,65 +1275,60 @@ LIMIT 1", con))
                                 )
                             {
                                 Logfile.Log($"CopyChargePrice: latest charging session at '{_addr.name}' has ID {chargeID} - charge_energy_added:{charge_energy_added} chargeStart:{chargeStart} chargeEnd:{chargeEnd} duration:{(chargeEnd - chargeStart).TotalMinutes} minutes");
-                            }
-                        }
-                    }
-                    con.Close();
-                }
-                if (chargeID != 0)
-                {
-                    // update charge session with id chargeID
-                    if (ref_cost_total == 0.0)
-                    {
-                        // free charging
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                        {
-                            con.Open();
-                            using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
+                                if (chargeID != 0)
+                                {
+                                    // update charge session with id chargeID
+                                    if (ref_cost_total == 0.0)
+                                    {
+                                        // free charging
+                                        using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                        {
+                                            con2.Open();
+                                            using (MySqlCommand cmd2 = new MySqlCommand(
+                @"UPDATE
   chargingstate
 SET
   cost_total = @cost_total,
   cost_currency = @cost_currency
 WHERE
   id = @id
-  AND CarID = @CarID", con))
-                            {
-                                cmd.Parameters.AddWithValue("@cost_total", ref_cost_total);
-                                cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency));
-                                cmd.Parameters.AddWithValue("@id", chargeID);
-                                cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
-                                Tools.DebugLog(cmd);
-                                _ = cmd.ExecuteNonQuery();
-                                Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total 0.0");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // calculate costs
-                        double calculated_total_cost = 0.0;
-                        if ((chargeEnd - chargeStart).TotalMinutes != 0 && ref_cost_per_minute != 0.0)
-                        {
-                            calculated_total_cost += (chargeEnd - chargeStart).TotalMinutes * ref_cost_per_minute;
-                            Logfile.Log($"CopyChargePrice: cost_per_minute:{(chargeEnd - chargeStart).TotalMinutes * ref_cost_per_minute} - total:{calculated_total_cost}");
-                        }
-                        if (ref_cost_per_kwh != 0.0)
-                        {
-                            calculated_total_cost += charge_energy_added * ref_cost_per_kwh;
-                            Logfile.Log($"CopyChargePrice: cost_per_kwh:{charge_energy_added * ref_cost_per_kwh} - total:{calculated_total_cost}");
-                        }
-                        if (ref_cost_per_session != 0.0)
-                        {
-                            calculated_total_cost += ref_cost_per_session;
-                            Logfile.Log($"CopyChargePrice: cost_per_session:{ref_cost_per_session} - total:{calculated_total_cost}");
-                        }
-                        Logfile.Log($"CopyChargePrice: calculated_total_cost:{calculated_total_cost}");
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                        {
-                            con.Open();
-                            using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
+  AND CarID = @CarID", con2))
+                                            {
+                                                cmd2.Parameters.AddWithValue("@cost_total", ref_cost_total);
+                                                cmd2.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency));
+                                                cmd2.Parameters.AddWithValue("@id", chargeID);
+                                                cmd2.Parameters.Add("@CarID", MySqlDbType.UByte).Value = CarInDB;
+                                                Tools.DebugLog(cmd2);
+                                                _ = cmd2.ExecuteNonQuery();
+                                                Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total 0.0");
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // calculate costs
+                                        double calculated_total_cost = 0.0;
+                                        if ((chargeEnd - chargeStart).TotalMinutes != 0 && ref_cost_per_minute != 0.0)
+                                        {
+                                            calculated_total_cost += (chargeEnd - chargeStart).TotalMinutes * ref_cost_per_minute;
+                                            Logfile.Log($"CopyChargePrice: cost_per_minute:{(chargeEnd - chargeStart).TotalMinutes * ref_cost_per_minute} - total:{calculated_total_cost}");
+                                        }
+                                        if (ref_cost_per_kwh != 0.0)
+                                        {
+                                            calculated_total_cost += charge_energy_added * ref_cost_per_kwh;
+                                            Logfile.Log($"CopyChargePrice: cost_per_kwh:{charge_energy_added * ref_cost_per_kwh} - total:{calculated_total_cost}");
+                                        }
+                                        if (ref_cost_per_session != 0.0)
+                                        {
+                                            calculated_total_cost += ref_cost_per_session;
+                                            Logfile.Log($"CopyChargePrice: cost_per_session:{ref_cost_per_session} - total:{calculated_total_cost}");
+                                        }
+                                        Logfile.Log($"CopyChargePrice: calculated_total_cost:{calculated_total_cost}");
+                                        using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                        {
+                                            con2.Open();
+                                            using (MySqlCommand cmd2 = new MySqlCommand(
+                @"UPDATE
   chargingstate
 SET
   cost_total = @cost_total,
@@ -1340,45 +1337,50 @@ SET
   cost_per_session = @cost_per_session,
   cost_per_minute = @cost_per_minute
 WHERE
-  id = @id", con))
-                            {
-                                cmd.Parameters.AddWithValue("@cost_total", calculated_total_cost);
-                                cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency));
-                                if (ref_cost_per_kwh_found)
-                                {
-                                    cmd.Parameters.Add("@cost_per_kwh", MySqlDbType.Double).Value = ref_cost_per_kwh;
+  id = @id", con2))
+                                            {
+                                                cmd2.Parameters.AddWithValue("@cost_total", calculated_total_cost);
+                                                cmd2.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(ref_cost_currency));
+                                                if (ref_cost_per_kwh_found)
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_kwh", MySqlDbType.Double).Value = ref_cost_per_kwh;
+                                                }
+                                                else
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_kwh", MySqlDbType.Double).Value = DBNull.Value;
+                                                }
+                                                if (ref_cost_per_session_found)
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_session", MySqlDbType.Double).Value = ref_cost_per_session;
+                                                }
+                                                else
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_session", MySqlDbType.Double).Value = DBNull.Value;
+                                                }
+                                                if (ref_cost_per_minute_found)
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_minute", MySqlDbType.Double).Value = ref_cost_per_minute;
+                                                }
+                                                else
+                                                {
+                                                    cmd2.Parameters.Add("@cost_per_minute", MySqlDbType.Double).Value = DBNull.Value;
+                                                }
+                                                cmd2.Parameters.AddWithValue("@id", chargeID);
+                                                Tools.DebugLog(cmd2);
+                                                _ = cmd2.ExecuteNonQuery();
+                                                Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total {calculated_total_cost}");
+                                            }
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    cmd.Parameters.Add("@cost_per_kwh", MySqlDbType.Double).Value = DBNull.Value;
+                                    Logfile.Log($"CopyChargePrice: no cost_total IS NULL charging session found for '{_addr.name}'");
                                 }
-                                if (ref_cost_per_session_found)
-                                {
-                                    cmd.Parameters.Add("@cost_per_session", MySqlDbType.Double).Value = ref_cost_per_session;
-                                }
-                                else
-                                {
-                                    cmd.Parameters.Add("@cost_per_session", MySqlDbType.Double).Value = DBNull.Value;
-                                }
-                                if (ref_cost_per_minute_found)
-                                {
-                                    cmd.Parameters.Add("@cost_per_minute", MySqlDbType.Double).Value = ref_cost_per_minute;
-                                }
-                                else
-                                {
-                                    cmd.Parameters.Add("@cost_per_minute", MySqlDbType.Double).Value = DBNull.Value;
-                                }
-                                cmd.Parameters.AddWithValue("@id", chargeID);
-                                Tools.DebugLog(cmd);
-                                _ = cmd.ExecuteNonQuery();
-                                Logfile.Log($"CopyChargePrice: update charging session at '{_addr.name}', ID {chargeID}: cost_total {calculated_total_cost}");
                             }
                         }
                     }
-                }
-                else
-                {
-                    Logfile.Log($"CopyChargePrice: no cost_total IS NULL charging session found for '{_addr.name}'");
+                    con.Close();
                 }
             }
             else
