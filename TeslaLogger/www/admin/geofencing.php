@@ -30,7 +30,7 @@
 	while(!feof($fp)) {
 		$v = fgetcsv($fp);
 			
-		if (count($v) >= 3)
+		if ($v != FALSE && count($v) >= 3)
 		{
 			$csv[] = array($v[0],$v[1],$v[2]);
 		}
@@ -46,13 +46,17 @@
 		while(!feof($fp)) {
 			$v = fgetcsv($fp);
 			
-			if (count($v) >= 3)
+			if ($v != FALSE && count($v) >= 3)
 			{
 				$t = trim( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', mb_convert_encoding( $v[0], "UTF-8" ) ) ); // remove all smileys for sorting purpose
-				$radius = trim($v[3]);
-				if (strlen($radius) == 0)
-					$radius = "20";
+				$radius = "20";
 
+				if (count($v) > 3)
+				{
+					$radius = trim($v[3]);
+					if (strlen($radius) == 0)
+						$radius = "20";
+				}
 				$csv2[] = array($v[0],$v[1],$v[2],$i, $t, $radius);
 			}
 			$i++;

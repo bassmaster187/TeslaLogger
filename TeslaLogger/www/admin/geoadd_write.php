@@ -23,7 +23,7 @@ if (isset($id) && strlen($id) > 0)
         copy($file, "/etc/teslalogger/geofence-private-$date.csv");
 
         $fp = fopen($filename, "r+");
-        while ($line = stream_get_line($fp, 1024 * 1024, "\n")) {
+        while ($line = fgets($fp)) {
                 if ($i == $id)
                         break;
 
@@ -46,7 +46,7 @@ if (isset($id) && strlen($id) > 0)
 {
         $csvtext .= trim($tmp)."\r\n";
 
-        while ($line = stream_get_line($fp, 1024 * 1024, "\n")) {
+        while ($line = fgets($fp)) {
                 $csvtext .= trim($line)."\r\n";
         }
         fclose($fp);
