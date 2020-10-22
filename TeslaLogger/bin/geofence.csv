@@ -414,6 +414,7 @@ Ionity UK-Polmadie, 55.837232, -4.242494
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
+Innogy DE-Duisburg, 51.484186, 6.763764
 Innogy DE-Fürholzen West, 48.33747, 11.6081
 Innogy DE-Hunsrück Ost, 49.963783, 7.768701
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
@@ -1191,6 +1192,7 @@ Comfortcharge DE-Hannover Dünenweg, 52.396052, 9.675816
 Comfortcharge DE-Hannover Tillystr., 52.33748, 9.719157
 Comfortcharge DE-Nürnberg, 49.426495, 11.03906
 Comfortcharge DE-München, 48.174976, 11.553374
+Comfortcharge DE-Springe, 52.217937, 9.567155
 
 Drewag DE-Dresden Elbepark, 51.086258, 13.693972
 Drewag DE-Dresden Mohnstr., 51.077856,13.717185
@@ -1223,9 +1225,11 @@ Aldi DE-Petersberg, 50.553999, 9.712663
 Aldi DE-Pforzheim, 48.902632, 8.663465
 Aldi DE-Rastatt, 48.85911, 8.238882, 20
 Aldi DE-Wetzendorf, 49.496251, 11.262201
+Alid DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
 
 IKEA DE-Berlin-Tempelhof, 52.469900100103025,13.367646041278036, 20
 IKEA DE-Dortmund, 51.491557, 7.371048
+IKEA DE-Frankfurt am Main, 50.196023, 8.654631
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
 IKEA DE-Kaarst, 51.210824, 6.639237
@@ -1368,9 +1372,11 @@ DE Hannover Volkswagen Kahle, 52.417529, 9.634326
 DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
+DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
 DE Köln Leonardo Hotel, 50.926801, 6.904346
 DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
+DE Münster ATU, 51.92794, 7.587932
 DE Neumünster Polizei, 54.07617, 9.96679
 DE Neuss Esso Tankstelle, 51.199058, 6.711012
 DE Neuwied SWN, 50.431649, 7.457607
