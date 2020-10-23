@@ -842,17 +842,24 @@ namespace TeslaLogger
                     {
                         Thread threadGrafanaUpdate = new Thread(() =>
                         {
-                            if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
-                                Tools.Exec_mono("dpkg", "-r grafana-rpi");
+                            string GrafanaFilename = "grafana_7.2.0_armhf.deb";
 
                             Logfile.Log("upgrade Grafana to 7.2.0!");
 
-                            if (File.Exists("grafana_7.2.0_armhf.deb"))
-                                File.Delete("grafana_7.2.0_armhf.deb");
+                            if (File.Exists(GrafanaFilename))
+                                File.Delete(GrafanaFilename);
 
                             Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb  --show-progress");
 
-                            Tools.Exec_mono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
+                            if (File.Exists(GrafanaFilename))
+                            {
+                                Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
+
+                                if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
+                                    Tools.Exec_mono("dpkg", "-r grafana-rpi");
+
+                                Tools.Exec_mono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
+                            }
 
                             Logfile.Log("upgrade Grafana DONE!");
 
