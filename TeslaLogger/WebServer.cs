@@ -417,7 +417,7 @@ namespace TeslaLogger
 
                         using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
                         {
-                            int newid = Convert.ToInt32(cmd.ExecuteScalar());
+                            long newid = cmd.ExecuteScalar() as long? ?? 1;
 
                             using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc)", con))
                             {
@@ -429,7 +429,7 @@ namespace TeslaLogger
                                 cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd2.ExecuteNonQuery();
 
-                                Car nc = new Car(newid, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
+                                Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
 
                                 WriteString(response, "OK");
                             }

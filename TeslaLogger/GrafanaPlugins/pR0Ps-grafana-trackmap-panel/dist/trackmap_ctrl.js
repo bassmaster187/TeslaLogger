@@ -421,6 +421,20 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
                 marker.addTo(_this5.leafMap);
 
                 _this5.superchargerMarks.push(marker);
+              } else if (coord.type == 4) {
+                var superchargerIcon = L.icon({
+                  iconUrl: 'public/plugins/pr0ps-trackmap-panel/img/p_pin.png',
+                  iconAnchor: [6, 16],
+                  popupAnchor: [0, 0]
+                });
+                var p = new L.latLng(coord.position);
+                var marker = new L.marker(p, {
+                  icon: superchargerIcon
+                });
+                marker.bindPopup(coord.text);
+                marker.addTo(_this5.leafMap);
+
+                _this5.superchargerMarks.push(marker);
               } else if (index !== 0 && _this5.panel.maxDataPointDelta !== 0) {
                 var prevTimestamp = _this5.coords[index - 1].timestamp;
 
