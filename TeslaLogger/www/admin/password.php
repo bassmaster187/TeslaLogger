@@ -69,17 +69,20 @@ menu("Credentials");
         $error = trim($error[2]);
 		echo("<h1>errortext = 'Error: $error - URL: $url'</h1>");
 		return;
-    }
+	}
 	
-	$jcars = json_decode($allcars);
-	//var_dump($allcars);
-	//var_dump($jcars);
-
-	if ($jcars == NULL)
+	if (strpos($allcars, "not found!") === false)
 	{
-		echo("<h1>JSON Parse Error!</h1>");
-		echo("JSON: ". htmlspecialchars($allcars));
-		return;
+		$jcars = json_decode($allcars);
+		//var_dump($allcars);
+		//var_dump($jcars);
+
+		if ($jcars == NULL)
+		{
+			echo("<h1>JSON Parse Error!</h1>");
+			echo("JSON: ". htmlspecialchars($allcars));
+			return;
+		}
 	}
 
 if (isset($_REQUEST["id"]))
