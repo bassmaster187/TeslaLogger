@@ -40,7 +40,8 @@ EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
 
-
+Fastned BE-Oostende luchthaven, 51.205610, 2.871165
+Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
 Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
@@ -54,12 +55,57 @@ Fastned DE-Paderborn-Mönkeloh, 51.68364, 8.72194
 Fastned DE-Pilsting, 48.691977, 12.673389
 Fastned DE-Plech, 49.66416, 11.47072
 Fastned DE-Schmidgaden, 49.43777, 12.05351
-Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602
+Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602 
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
+Fastned NL-Aalscholver, 52.436005, 5.424898
+Fastned NL-Akermaat, 52.498623, 4.698793
+Fastned NL-Bloemheuvel, 52.049890, 5.461548
+Fastned NL-Bospoort, 52.16278, 4.55405
+Fastned NL-Bovenboer, 52.752832, 6.186554
+Fastned NL-De Beerze, 51.324273, 5.223084
+Fastned NL-De Hackerlaar, 52.322064, 5.084425
+Fastned NL-De Knoest, 52.014226, 5.122142
+Fastned NL-De Kroon, 52.016089, 5.120814
+Fastned NL-De Slenk, 52.007451, 5.812322
+Fastned NL-De Watering, 52.442250, 4.854528
+Fastned NL-Den Hoek, 51.662581, 4.678008
+Fastned NL-Den Ruygen Hoek-Oost, 52.258294, 4.686117
+Fastned NL-Den Ruygen Hoek-West, 52.261416, 4.686326
+Fastned NL-Eigenblok, 51.849062, 5.191405
 Fastned NL-Fustweg, 52.385156, 4.661724
+Fastned NL-GelreDome, 51.964670, 5.892364
+Fastned NL-Hazeldonk-Oost, 51.497862, 4.743228&
+Fastned NL-Hazeldonk-West, 51.500096, 4.740994
+Fastned NL-Hendriksbos, 52.363044, 5.767970
+Fastned NL-Her Goor, 51.321341, 5.219179
+Fastned NL-Het Gevlocht, 51.404412, 5.810961
+Fastned NL-Hoezaar, 51.54884, 4.529072
+Fastned NL-Hoge Kwel, 52.857402, 5.021431
+Fastned NL-Honswijck, 52.320129, 5.077844
+Fastned NL-Jutphaas, 52.017667,5.068278
 Fastned NL-Labbegat, 51.69393, 5.01359
+Fastned NL-Laerd, 53.051399 ,5.553802
+Fastned NL-Lemsterhop, 52.818501, 5.742350
+Fastned NL-Lepelaar, 52.432869, 5.422989
+Fastned NL-Mastpolder, 51.547724, 4.530389
+Fastned NL-Molenkamp, 51.847553, 5.190689
 Fastned NL-Ooiendonk, 51.556297, 5.361872
+Fastned NL-Ooiendonk, 51.556380, 5.361840
+Fastned NL-Oudenhorst, 52.051171, 5.464007
+Fastned NL-Portland, 51.862667, 4.459778
+Fastned NL-Prinses Máximaplein, 52.055171, 4.391199
+Fastned NL-Ravensewetering, 52.049847, 5.122276
+Fastned NL-Sandelingen-Oost, 51.834753, 4.620995
+Fastned NL-Selnisse, 51.498750, 3.772270
+Fastned NL-Stadionweg, 51.896540, 4.539005
+Fastned NL-Tafelbergweg, 52.292076, 4.945501
+Fastned NL-Velder, 51.559136, 5.356800
+Fastned NL-Vliedberg, 51.484310, 3.850840
+Fastned NL-Vrijenban, 51.983412, 4.392855
+Fastned NL-Wellerzand, 52.784360, 5.759275
+Fastned NL-Willemsbos, 52.360573, 5.766818
+Fastned-NL Swentibold, 51.010590, 5.800570
 
 Ionity AT-Angath Nord, 47.519215, 12.065526
 Ionity AT-Eisentratten, 46.919943, 13.579276
@@ -411,6 +457,7 @@ Ionity UK-Perth, 56.419402, -3.463082
 Ionity UK-Peterborough, 52.532663, -0.32065
 Ionity UK-Polmadie, 55.837232, -4.242494
 
+Innogy DE-Berlin Avus, 52.501775, 13.277211
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
@@ -1036,6 +1083,7 @@ Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
 Supercharger SI-Kozina, 45.60492, 13.928521
+Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
 Supercharger SI-Maribor, 46.533247845, 15.6993663311
 Supercharger SK-Bratislava, 48.132138, 17.108438
@@ -1227,12 +1275,15 @@ Aldi DE-Rastatt, 48.85911, 8.238882, 20
 Aldi DE-Wetzendorf, 49.496251, 11.262201
 Alid DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
 
-IKEA DE-Berlin-Tempelhof, 52.469900100103025,13.367646041278036, 20
+IKEA DE-Berlin-Spandau, 52.528313, 13.21686
+IKEA DE-Berlin-Tempelhof, 52.469887, 13.367944, 20
+IKEA DE-Berlin-Waltersdorf, 52.367137, 13.557252
 IKEA DE-Dortmund, 51.491557, 7.371048
 IKEA DE-Frankfurt am Main, 50.196023, 8.654631
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
 IKEA DE-Kaarst, 51.210824, 6.639237
+IKEA DE-Leuna, 51.348073, 12.181915
 IKEA DE-Sindelfinden, 48.701416, 9.005396
 IKEA DE-Regensburg, 49.001518, 12.177472
 IKEA DE-Wetzlar, 50.568262, 8.498073
@@ -1240,7 +1291,11 @@ IKEA DE-Würzburg, 49.821812, 9.982398
 
 Kaufland CZ-Praha,50.092464, 14.499563
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
+Kaufland DE-Berlin Grünhofer Weg, 52.533887, 13.188849
+Kaufland DE-Berlin Gutschmidtstraße, 52.436452, 13.447838
+Kaufland DE-Berlin Ollenhauerstraße, 52.567428, 13.328217
 Kaufland DE-Berlin Markthalle Alexanderplatz, 52.522205,13.407149
+Kaufland DE-Berlin Residenzstraße, 52.558806, 13.372718
 Kaufland DE-Berlin Rummelsburgerstr., 52.499526,13.496195
 Kaufland DE-Berlin Prenzlauer Berg, 52.533964, 13.457147
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
@@ -1252,7 +1307,8 @@ Kaufland DE-Erding, 48.305332, 11.881886
 Kaufland DE-Erlangen, 49.593323, 11.026181
 Kaufland DE-Fellbach, 48.813484, 9.266494
 Kaufland DE-Frankfurt, 50.132218, 8.749362
-Kaufland DE-Göüüingen, 48.704563, 9.647031
+Kaufland DE-Fredersdorf-Vogelsdorf, 52.497356, 13.744505
+Kaufland DE-Göingen, 48.704563, 9.647031
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
@@ -1260,6 +1316,7 @@ Kaufland DE-Kaufbeuren, 47.884276, 10.636879
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
 Kaufland DE-Leonberg, 48.797085, 9.006616
 Kaufland DE-Marbach am Neckar, 48.943393, 9.266666
+Kaufland DE-Mitweida, 50.99454, 12.96435
 Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
 Kaufland DE-Oberasbach, 49.435136, 10.967694
@@ -1298,10 +1355,16 @@ Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
 Lidl DE-Aschaffenburg Spessartstr., 49.965614, 9.154857
 Lidl DE-Berlin Buckower Damm, 52.426346, 13.435003
+Lidl DE-Berlin Einbecker Straße, 52.509057, 13.50636
+Lidl DE-Berlin Gervinusstraße, 52.503379, 13.300403
+Lidl DE-Berlin Nonnendammallee, 52.539659, 13.232845
+Lidl DE-Berlin Sonnenallee, 52.475563, 13.451759
 Lidl DE-Berlin Steglitzer Damm, 52.449291, 13.354343
+Lidl DE-Berlin Quickborner Straße, 52.603467, 13.367476
 Lidl DE-Berlin Vorarlberger Damm, 52.470054, 13.349763
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
+Lidl DE-Hoppegarten, 52.540585, 13.63869
 Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-Sassenberg, 51.981949, 8.036272
@@ -1345,13 +1408,18 @@ DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
 DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
+DE Berlin Burger King Tempelhof, 52.480339, 13.38459
+DE Berlin Burger King Nahmitzer Damm, 52.409047, 13.370429
 DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
+DE Berlin Südkreuz, 52.475697, 13.364082
+DE Berlin VW Franklinstr., 52.519344, 13.326864
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
 DE Bielefeld Green Station Sieker, 52.005329, 8.559438
 DE Bitterfeld-Wolfen enviaM, 51.624576, 12.307812
 DE Bochum Ruhrpark, 51.494065, 7.28446
 DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
 DE Burgdorf Burger King, 52.45928, 9.992822
+DE Chemnitz HEOS Solar-Carport, 50.802484, 12.852011
 DE Elmshorn Teppich Kibek, 53.741661, 9.707776
 DE Dresden ATU, 51.079151, 13.691018
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
