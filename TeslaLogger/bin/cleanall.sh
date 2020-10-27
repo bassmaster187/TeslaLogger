@@ -1,6 +1,6 @@
 #!/bin/bash
 pkill mono
-mysql -u root -pteslalogger teslalogger -Bse "delete from pos;delete from charging;delete from chargingstate; delete from drivestate;delete from shiftstate;delete from state;delete from can;delete from car_version;" 
+mysql -u root -pteslalogger teslalogger -Bse "delete from pos;delete from charging;delete from chargingstate; delete from drivestate;delete from shiftstate;delete from state;delete from can;delete from car_version;delete from cars;" 
 rm -rf /etc/teslalogger/Exception/
 rm -rf /etc/teslalogger/backup/*
 rm -f /etc/teslalogger/current_json.txt

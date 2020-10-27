@@ -14,7 +14,15 @@ if (isset($id))
 {
 	$n = 0;
 	$fp = fopen("/etc/teslalogger/geofence-private.csv", "r+");
-	while ($line = stream_get_line($fp, 1024 * 1024, "\n")) {
+
+	if ($fp === FALSE)
+	{
+		echo("Error open geofence-private.csv");
+		return;
+	}
+
+	while ($line = fgets ($fp)) {
+		// echo("Line : $n : $line <br>");
 		if ($n == $id)
 		{
 			//echo($line);
@@ -152,7 +160,9 @@ if (isset($id))
 			else
 				$("#cof_gear").val(e.substring(4));
 		}
-    	
+		else if (e.startsWith("nosleep"))
+			$("#nosleep").attr('checked', 'checked');
+		
 		OnSpecialFlagsChanged();
 	});
 
@@ -231,7 +241,9 @@ if (isset($id))
 	if ($("#cof").is(':checked'))
 	{
 		f += "+cof:"+$("#cof_gear").val();
-	}		
+	}	
+	if ($("#nosleep").is(':checked'))
+		f += "+nosleep";
 
 	$("#flag").val(f);
   }
@@ -329,7 +341,7 @@ if (isset($id))
 						  <option value="R->P">R → P</option>
 						</select>
 					</td></tr>
-
+				<tr><td>No sleep</td><td> <input id="nosleep" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
 			</table>
 		</div>
