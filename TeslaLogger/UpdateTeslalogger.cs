@@ -849,7 +849,14 @@ namespace TeslaLogger
                             if (File.Exists(GrafanaFilename))
                                 File.Delete(GrafanaFilename);
 
-                            Tools.Exec_mono("wget", @"https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb  --show-progress");
+                            // use internal downloader
+                            const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb";
+                            const string grafanaFile = "grafana_7.2.0_armhf.deb";
+                            if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result) {
+                                // fallback to wget
+                                Logfile.Log($"fallback o wget to download {grafanaUrl}");
+                                Tools.Exec_mono("wget", $"{grafanaUrl}  --show-progress");
+                            }
 
                             if (File.Exists(GrafanaFilename))
                             {
