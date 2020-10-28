@@ -508,11 +508,11 @@ namespace TeslaLogger
         private static void Admin_ReloadGeofence(HttpListenerRequest request, HttpListenerResponse response)
         {
             Logfile.Log("Admin: ReloadGeofence ...");
-            WebHelper.geofence.Init();
+            Geofence.GetInstance().Init();
 
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
             {
-                IEnumerable<string> geofence = WebHelper.geofence.geofenceList.Select(
+                IEnumerable<string> geofence = Geofence.GetInstance().geofenceList.Select(
                     a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
                         a.name,
                         a.lat,
@@ -524,7 +524,7 @@ namespace TeslaLogger
                         )
                     )
                 );
-                IEnumerable<string> geofenceprivate = WebHelper.geofence.geofencePrivateList.Select(
+                IEnumerable<string> geofenceprivate = Geofence.GetInstance().geofencePrivateList.Select(
                     a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
                         a.name,
                         a.lat,
@@ -783,7 +783,7 @@ namespace TeslaLogger
                 }
                 if (lat != double.NaN && lng != double.NaN)
                 {
-                    Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
+                    Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
                     if (addr != null)
                     {
                         Dictionary<string, object> data = new Dictionary<string, object>()
