@@ -5,12 +5,14 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
 
@@ -1185,6 +1187,65 @@ namespace TeslaLogger
                 }
             }
             return obfuscated;
+        }
+
+        internal async static Task<bool> DownloadToFile(string url, string path, int timeout = 60, bool overwrite = false)
+        {
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+            {
+                return await DownloadToFile(uri, path, timeout, overwrite);
+            }
+            return false;
+        }
+
+        internal async static Task<bool> DownloadToFile(Uri uri, string path, int timeout = 60, bool overwrite = false)
+        {
+            if (string.IsNullOrEmpty(path) || string.IsNullOrWhiteSpace(path))
+            {
+                return false;
+            }
+            if (File.Exists(path) && !overwrite)
+            {
+                return false;
+            }
+            using (HttpClient httpClient = new HttpClient
+            {
+                Timeout = TimeSpan.FromSeconds(timeout)
+            })
+            {
+                try
+                {
+                    if (File.Exists(path) && overwrite)
+                    {
+                        File.Decrypt(path);
+                    }
+                    FileInfo fileInfo = new FileInfo(path);
+                    HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
+                    _ = response.EnsureSuccessStatusCode();
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false)) {
+                        using (FileStream outputFileStream = File.Create(fileInfo.FullName)) {
+                            responseContentStream.Seek(0, SeekOrigin.Begin);
+                            responseContentStream.CopyTo(outputFileStream);
+                            outputFileStream.Close();
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    DebugLog("DownloadToFile exception:", ex);
+                    try
+                    {
+                        // clean up in case of error
+                        File.Delete(path);
+                    }
+                    catch (Exception ex2)
+                    {
+                        DebugLog("DownloadToFile exception:", ex);
+                    }
+                }
+            }
+            return false;
         }
     }
 }
