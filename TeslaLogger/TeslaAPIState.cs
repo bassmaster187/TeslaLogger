@@ -102,6 +102,9 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
+            string timestamp;
+            double latitude, longitude, odometerKM, ideal_battery_range_km, battery_range, outside_temp;
+            int speed, power, battery_level;
             switch (name)
             {
                 case "car_version":
@@ -110,17 +113,6 @@ namespace TeslaLogger
                     break;
                 case "locked":
                 case "charge_port_door_open":
-                case "is_user_present":
-                case "df":
-                case "pf":
-                case "dr":
-                case "pr":
-                case "ft":
-                case "rt":
-                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                    // car was used, eg. door opened/closed
-                    car.SetLastCarUsed(DateTime.Now);
-                    break;
                 case "charging_state":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     break;

@@ -34,11 +34,6 @@ namespace TeslaLogger
         internal WebHelper GetWebHelper() { return webhelper; }
         private DateTime lastCarUsed = DateTime.Now;
         internal DateTime GetLastCarUsed() { return lastCarUsed; }
-        internal void SetLastCarUsed(DateTime dt)
-        {
-            lastCarUsed = dt;
-            Tools.DebugLog($"lastCarUsed: {lastCarUsed}");
-        }
         private DateTime lastOdometerChanged = DateTime.Now;
         internal DateTime GetLastOdometerChanged() { return lastOdometerChanged; }
         private DateTime lastTryTokenRefresh = DateTime.Now;
