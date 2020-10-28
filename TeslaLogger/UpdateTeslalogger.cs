@@ -981,8 +981,9 @@ namespace TeslaLogger
                             {
                                 s = s.Replace(" speed_max,", "speed_max / 1.609 as speed_max,");
                                 s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609 as avg_consumption_kWh_100km,");
-                                s = s.Replace(" as avg_kmh,", " / 1.609 as avg_kmh");
+                                s = s.Replace(" as avg_kmh", " / 1.609 as avg_kmh");
                                 s = s.Replace(" km_diff,", " km_diff  / 1.609 as km_diff,");
+                                s = s.Replace("StartRange - EndRange as RangeDiff", "(StartRange - EndRange) / 1.609 as RangeDiff");
 
                                 s = s.Replace("\"max km/h\"", "\"max mph\"");
                                 s = s.Replace("\"Ø km/h\"", "\"Ø mph\"");
