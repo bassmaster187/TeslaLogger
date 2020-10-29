@@ -10,3 +10,12 @@ If you want to debug the internal WebServer of Teslalogger (HttpListener in WebS
 use http://host.docker.internal on linux and macos it is any other address: https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
 
 
+# Automated testing
+There are a couple of unit tests in the Project UnitTestsTeslalogger. As far as I know they don't work on Visual Studio for MacOS.
+Feel free to add tests for your contribution or any other. Make sure you have backup everything as the tests may alter your data. 
+
+You can start the tests with the Test-Explorer. 
+
+For automated UI tests Selenium and Selenium Chrome Driver is used. You need to install latest Chrome Browser.
+https://www.youtube.com/watch?v=hIYyDMiWXkw
+
