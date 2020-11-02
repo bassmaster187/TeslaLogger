@@ -30,7 +30,7 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.Now.ToString("yyyyMMddHHmmssfff")}");
+                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}");
                         if (!Directory.Exists(DumpJSONSessionDir))
                         {
                             Directory.CreateDirectory(DumpJSONSessionDir);
@@ -311,7 +311,7 @@ namespace TeslaLogger
         {
             if (dumpJSON)
             {
-                string filename = $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
+                string filename = $"{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
                 string filepath = Path.Combine(DumpJSONSessionDir, filename);
                 Task.Factory.StartNew(() =>
                 {
