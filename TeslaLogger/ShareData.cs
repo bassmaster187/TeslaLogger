@@ -106,7 +106,7 @@ namespace TeslaLogger
                             // lat, lng
                             if (double.TryParse(dr["lat"].ToString(), out double lat) && double.TryParse(dr["lng"].ToString(), out double lng))
                             {
-                                Address addr = WebHelper.geofence.GetPOI(lat, lng, false);
+                                Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
                                 if (addr != null && addr.IsHome)
                                 {
                                     car.Log("Do not share ChargingData for +home (" + addr.name + ")");

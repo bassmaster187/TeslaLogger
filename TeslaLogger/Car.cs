@@ -393,9 +393,9 @@ namespace TeslaLogger
                     }
                 }
 
-                if (WebHelper.geofence.RacingMode)
+                if (Geofence.GetInstance().RacingMode)
                 {
-                    Address a = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude);
+                    Address a = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude);
                     if (a != null)
                     {
                         if (lastRacingPoint == null)
@@ -557,7 +557,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                            Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
+                            Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                             if (!CanFallAsleep(out string reason))
                             {
                                 Log($"Reason:{reason} prevents car to get sleep");
@@ -899,7 +899,7 @@ namespace TeslaLogger
         {
             Log("ShiftStateChange: " + _oldState + " -> " + _newState);
             lastCarUsed = DateTime.Now;
-            Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
+            Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
@@ -1095,7 +1095,7 @@ namespace TeslaLogger
             {
                 _ = Task.Factory.StartNew(() =>
                 {
-                    Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
+                    Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                     if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                     {
                         if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
@@ -1110,7 +1110,7 @@ namespace TeslaLogger
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
-                Address addr = WebHelper.geofence.GetPOI(currentJSON.latitude, currentJSON.longitude, false);
+                Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
