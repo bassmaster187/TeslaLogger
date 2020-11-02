@@ -55,7 +55,21 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = "SQL" + Environment.NewLine + cmd.CommandText;
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd);
+                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
+            }
+            catch (Exception ex)
+            {
+                DebugLog("Exception in SQL DEBUG", ex);
+            }
+        }
+
+        internal static string ExpandSQLCommand(MySqlCommand cmd)
+        {
+            string msg = string.Empty;
+            if (cmd != null && cmd.Parameters != null)
+            {
+                msg = cmd.CommandText;
                 foreach (MySqlParameter p in cmd.Parameters)
                 {
                     string pValue = "";
@@ -110,12 +124,8 @@ namespace TeslaLogger
                     }
                     msg = msg.Replace(p.ParameterName, pValue);
                 }
-                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
-            catch (Exception ex)
-            {
-                DebugLog("Exception in SQL DEBUG", ex);
-            }
+            return msg;
         }
 
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
