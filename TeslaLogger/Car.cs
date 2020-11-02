@@ -1100,6 +1100,8 @@ namespace TeslaLogger
                     {
                         if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
                         {
+                            // allow some time to close charging session before updating price
+                            Thread.Sleep(30000);
                             HandleSpecialFlag_CopyChargePrice(addr);
                         }
                     }
