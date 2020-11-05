@@ -291,11 +291,10 @@ else
 			$('#BMSMaxDischargeRow').hide();
 		}
 
-		if (jsonData["SMTCellMaxV"] && jsonData["SMTCellMinV"])
+		if (jsonData["SMTCellImbalance"])
 		{
-			var CellImbalance = Math.round((jsonData["SMTCellMaxV"] - jsonData["SMTCellMinV"]) * 1000);
 			$('#CellImbalanceRow').show();
-			$('#CellImbalance').text( CellImbalance +" mV");
+			$('#CellImbalance').text(Math.round(jsonData["SMTCellImbalance"]) +" mV");
 		}
 		else
 		{
