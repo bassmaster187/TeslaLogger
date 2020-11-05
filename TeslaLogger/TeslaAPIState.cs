@@ -119,7 +119,10 @@ namespace TeslaLogger
                 case "rt":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     // car was used, eg. door opened/closed
-                    car.SetLastCarUsed(DateTime.Now);
+                    if (oldvalue != null && newvalue != null && oldvalue != newvalue)
+                    {
+                        car.SetLastCarUsed(DateTime.Now);
+                    }
                     break;
                 case "charging_state":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
