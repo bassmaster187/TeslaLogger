@@ -172,7 +172,18 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S Raven LR P", wh.car.ModelName);
-            Assert.AreEqual(0.178, wh.car.Wh_TR);   
+            Assert.AreEqual(0.178, wh.car.Wh_TR);
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+            wh.car.car_type = "modely";
+            wh.car.car_special_type = "base";
+            wh.car.DB_Wh_TR = 0.148;
+            wh.car.trim_badging = "74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Y LR AWD", wh.car.ModelName);
+            Assert.AreEqual(0.148, wh.car.Wh_TR);
         }
 
         [TestMethod]

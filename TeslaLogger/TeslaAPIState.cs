@@ -30,7 +30,7 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.Now.ToString("yyyyMMddHHmmssfff")}");
+                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}");
                         if (!Directory.Exists(DumpJSONSessionDir))
                         {
                             Directory.CreateDirectory(DumpJSONSessionDir);
@@ -124,7 +124,10 @@ namespace TeslaLogger
                 case "rt":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     // car was used, eg. door opened/closed
-                    car.SetLastCarUsed(DateTime.Now);
+                    if (oldvalue != null && newvalue != null && oldvalue != newvalue)
+                    {
+                        car.SetLastCarUsed(DateTime.Now);
+                    }
                     break;
                 case "charging_state":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
@@ -316,7 +319,7 @@ namespace TeslaLogger
         {
             if (dumpJSON)
             {
-                string filename = $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
+                string filename = $"{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
                 string filepath = Path.Combine(DumpJSONSessionDir, filename);
                 Task.Factory.StartNew(() =>
                 {

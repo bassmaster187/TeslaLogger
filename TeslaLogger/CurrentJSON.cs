@@ -60,6 +60,7 @@ namespace TeslaLogger
         public double? SMTCellMinV = null;
         public double? SMTCellAvgV = null;
         public double? SMTCellMaxV = null;
+        public double? SMTCellImbalance = null;
         public double? SMTBMSmaxCharge = null;
         public double? SMTBMSmaxDischarge = null;
 
@@ -180,6 +181,7 @@ namespace TeslaLogger
                     values.Add("SMTCellMinV", SMTCellMinV);
                     values.Add("SMTCellAvgV", SMTCellAvgV);
                     values.Add("SMTCellMaxV", SMTCellMaxV);
+                    values.Add("SMTCellImbalance", SMTCellImbalance);
                     values.Add("SMTBMSmaxCharge", SMTBMSmaxCharge);
                     values.Add("SMTBMSmaxDischarge", SMTBMSmaxDischarge);
                 }
