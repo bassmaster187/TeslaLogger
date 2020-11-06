@@ -955,6 +955,14 @@ namespace TeslaLogger
                     return;
                 }
             }
+            else if (car.car_type == "modely" && car.car_special_type == "base")
+            {
+                if (car.trim_badging == "74d")
+                {
+                    WriteCarSettings("0.148", "Y LR AWD");
+                    return;
+                }
+            }
 
             return;
             /*
