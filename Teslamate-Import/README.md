@@ -43,7 +43,7 @@ Make sure your database connection string to teslamate and teslalogger is valid 
   If everything is finished, inspect the Logfile for errors (Teslamate-Logfile.txt). If there are Exceptions, feel free to open a bug in github.
   The tool created a geofence file  (geofence-private.csv). Copy it to your Teslalogger.exe folder.
   
-  Restart Teslalogger. Make sure your credentials for your car are already entered. 
+  Restart Teslalogger. Make sure your credentials for your car are already entered. Make sure the IDs are matching Teslalogger and Teslamate car id. If you have just one car, ID should be 1.
   
   Now it starts to geocode all destinations. This may take a very long time as Nominatim / OpenStreetMap is limited to one geocode all 5 seconds. 
   Meanwile you can take a look at Visited, Trips and Chargings Dashboard.
