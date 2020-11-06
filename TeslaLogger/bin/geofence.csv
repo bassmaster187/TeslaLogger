@@ -1108,8 +1108,10 @@ Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
+Supercharger US-Ardmore OK,34.179246,-97.1656
 Supercharger US-Arlington TX, 32.754621, -97.082784
 Supercharger US-Asheville NC, 35.531388, -82.604514
+Supercharger US-Austin TX,30.329202,-97.706266
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bay City MI, 43.622212, -83.932216
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
@@ -1127,10 +1129,12 @@ Supercharger US-Cincinnati OH, 39.162772, -84.426492
 Supercharger US-Cookeville TN, 36.155752,-85.515201
 Supercharger US-Corsicana TX, 32.0686, -96.448217
 Supercharger US-Cranberry Township PA, 40.683579, -80.108262
+Supercharger US-Dallas TX - North Central Expressway,32.88102,-96.769588
 Supercharger US-Dayton OH, 39.858615, -84.276928
 Supercharger US-Denton TX, 33.231528, -97.166391
 Supercharger US-Dickson TN, 36.018432, -87.332851
 Supercharger US-Dublin OH, 40.093198, -83.092261
+Supercharger US-Effingham IL,39.13713,-88.563387
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
 Supercharger US-Gaylord MI, 45.025599, -84.722179
@@ -1144,6 +1148,7 @@ Supercharger US-Huntsville TX, 30.716159, -95.565965
 Supercharger US-Howard WI, 44.536272,-88.077732
 Supercharger US-Inyokern CA, 35.646456, -117.812561
 Supercharger US-Jackson TN, 35.660411, -88.855634
+Supercharger US-Kingston NY,41.9419,-74.027369
 Supercharger US-Knoxville TN, 35.901323,-84.149622
 Supercharger US-Kuttawa KY, 37.073581, -88.124831
 Supercharger US-La Vale MD, 39.63615, -78.845823
@@ -1206,6 +1211,7 @@ Supercharger US-Weatherford OK, 35.538718, -98.660132
 Supercharger US-Wytheville VA, 36.945711, -81.054562
 
 Urbancharger US-Anaheim CA, 33.805187, -117.882111
+Urbancharger US-Austin TX - Research Boulevard,30.38944,-97.73977
 Urbancharger US-Carlsbad CA, 33.084042, -117.266273
 Urbancharger US-Chicago IL North Broadway, 41.937486, -87.644921
 Urbancharger US-Corona CA, 33.826435, -117.515366
@@ -1420,6 +1426,10 @@ Familia DE-Quickborn, 53.743005, 9.940652
 
 REWE DE-Bremen, 53.136455, 8.739926
 
+da-emobil AT-Guntramsdorf, 48.033848,16.337711,20
+da-emobil AT-Pettau, 47.284483,11.164263,20
+da-emobil AT-St. Pölten, 48.177086,15.553222
+
 Grønn Kontakt NO-Leknes, 68.14874, 13.612729
 Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
 
@@ -1434,6 +1444,9 @@ CEZ CZ-Plzeň, 49.742046, 13.393453
 
 Iberdrola ES-Huelva, 37.306245, -6.87322
 
+AT Eugendorf Center, 47.860013,13.126857,20
+AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
+AT Salzburg Mooncity, 47.808874,13.055885,20
 AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
@@ -1504,6 +1517,7 @@ DE Offenbach Honda, 50.08437, 8.839102
 DE Offenburg Shell Tankstelle, 48.464972, 7.931808
 DE Oldenburg Media Markt, 53.161348, 8.172719
 DE Passau Media Markt, 48.574479, 13.414943
+DE Paderborn Westfalen Weser Netz, 51.725959, 8.756923, 5
 DE Rheydt New AG, 51.157497, 6.448055
 DE Ritterhude HEM, 53.185475,8.706381
 DE Roth Autohaus, 49.245669, 11.119321

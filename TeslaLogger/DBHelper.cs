@@ -20,6 +20,8 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
+        internal static string Database = "teslalogger";
+
         public static string DBConnectionstring => GetDBConnectionstring();
 
         private static string _DBConnectionstring = string.Empty;
@@ -57,6 +59,14 @@ namespace TeslaLogger
                     DBConnectionstring += ";";
                 }
                 DBConnectionstring += "charset=utf8mb4";
+            }
+            if (DBConnectionstring.ToLower().Contains("database="))
+            {
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "database=(.+?);");
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    Database = m.Groups[1].Captures[0].ToString();
+                }
             }
             _DBConnectionstring = DBConnectionstring;
             return _DBConnectionstring;
