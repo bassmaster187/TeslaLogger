@@ -318,7 +318,10 @@ namespace TeslaLogger
         {
             foreach (Car car in Car.allcars)
             {
-                car.GetTeslaAPIState().DumpJSON = v;
+                if (car.GetTeslaAPIState().DumpJSON != v)
+                {
+                    car.GetTeslaAPIState().DumpJSON = v;
+                }
             }
             WriteString(response, $"DumpJSON {v}");
         }
