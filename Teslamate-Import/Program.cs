@@ -17,6 +17,7 @@ namespace Teslamate_Import
         static string pgConnectionString = Settings1.Default.TeslamateDB;
         static string DBConnectionstring = Settings1.Default.TeslaloggerDB;
         public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
+        static DateTime firstTeslaloggerData;
 
         static void Main(string[] args)
         {
@@ -25,6 +26,9 @@ namespace Teslamate_Import
             {
                 Tools.Log(0,"Teslamate DB:" + pgConnectionString);
                 Tools.Log(0,"Teslalogger DB:" + DBConnectionstring);
+
+                firstTeslaloggerData = GetFirstTeslaloggerData();
+                Tools.Log(0, "First Teslalogger Data: " + firstTeslaloggerData.ToString());
 
                 CopyPositions();
                 CopyTrips();
@@ -66,6 +70,13 @@ namespace Teslamate_Import
                                     VALUES(@StartDate, @StartPos, @EndDate, @EndPos, @outside_temp_avg, @speed_max, @power_max, @power_min, @power_avg, 3, @CarID);", conTL))
                                 {
                                     int carid = Convert.ToInt32(dr["Car_ID"]);
+
+                                    DateTime Date = (DateTime)dr["start_date"];
+                                    if (Date >= firstTeslaloggerData)
+                                    {
+                                        Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                        break;
+                                    }
 
                                     cmdTL.Parameters.AddWithValue("@StartDate", dr["start_date"]);
                                     cmdTL.Parameters.AddWithValue("@EndDate", dr["end_date"]);
@@ -121,6 +132,13 @@ namespace Teslamate_Import
                             try
                             {
                                 id = (int)dr["id"];
+
+                                DateTime Date = (DateTime)dr["start_date"];
+                                if (Date >= firstTeslaloggerData)
+                                {
+                                    Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                    break;
+                                }
 
                                 using (var cmdTL = new MySqlCommand(@"INSERT INTO car_version (StartDate, version, import, CarID) 
                                 VALUES(@StartDate, @version, 3, @CarID);", conTL))
@@ -188,6 +206,14 @@ namespace Teslamate_Import
                                 VALUES(@StartDate, @EndDate, @UnplugDate, @Pos, @charge_energy_added, @StartChargingID, @EndChargingID, @conn_charge_cable, @fast_charger_brand, @fast_charger_type, @fast_charger_present, 3, @max_charger_power, @cost_total, @cost_per_session, @CarID);", conTL))
                                 {
                                     int carid = Convert.ToInt32(dr["Car_ID"]);
+
+                                    DateTime Date = (DateTime)dr["start_date"];
+                                    if (Date >= firstTeslaloggerData)
+                                    {
+                                        Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                        break;
+                                    }
+
                                     cmdTL.Parameters.AddWithValue("@StartDate", dr["start_date"]);
                                     cmdTL.Parameters.AddWithValue("@EndDate", dr["end_date"]);
                                     cmdTL.Parameters.AddWithValue("@UnplugDate", DBNull.Value);
@@ -350,6 +376,14 @@ namespace Teslamate_Import
                             {
                                 id = (int)dr["id"];
 
+                                DateTime Date = (DateTime)dr["date"];
+                                if (Date >= firstTeslaloggerData)
+                                {
+                                    Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                    break;
+                                }
+
+
                                 using (var cmdTL = new MySqlCommand(@"INSERT INTO charging (battery_level, charge_energy_added, charger_power, Datum, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater, import, battery_range_km, CarID) 
                                     VALUES(@battery_level, @charge_energy_added, @charger_power, @Datum, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater, 3, @battery_range_km, @CarID);", conTL))
                                 {
@@ -409,6 +443,13 @@ namespace Teslamate_Import
                             try
                             {
                                 id = (int)dr["id"];
+
+                                DateTime Date = (DateTime)dr["Date"];
+                                if (Date >= firstTeslaloggerData)
+                                {
+                                    Tools.Log(id, "First Teslalogger Data reached. Import skipped!");
+                                    break;
+                                }
 
                                 lastIdeal_battery_range_km = dr["ideal_battery_range_km"] as decimal? ?? lastIdeal_battery_range_km;
 
@@ -514,6 +555,38 @@ namespace Teslamate_Import
                     cmdTL.ExecuteNonQuery();
                 }
             }
+        }
+
+        private static DateTime GetFirstTeslaloggerData()
+        {
+            DateTime dtMin = DateTime.Now;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT StartDate FROM drivestate where import is null order by id limit 1", con);
+                var dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    DateTime dtDrivestate = (DateTime)dr[0];
+                    if (dtDrivestate < dtMin)
+                        dtMin = dtDrivestate;
+                }
+                dr.Close();
+
+                cmd = new MySqlCommand("SELECT StartDate FROM chargingstate where import is null order by id limit 1", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    DateTime dtChargestate = (DateTime)dr[0];
+                    if (dtChargestate < dtMin)
+                        dtMin = dtChargestate;
+                }
+                dr.Close();
+
+            }
+
+            return dtMin;
         }
     }
 }
