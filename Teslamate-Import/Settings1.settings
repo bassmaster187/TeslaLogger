@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Teslamate_Import" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="TeslaloggerDB" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;</Value>
+    </Setting>
+    <Setting Name="TeslamateDB" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Host=localhost;Username=teslamate;Password=secret;Database=teslamate</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
