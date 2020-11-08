@@ -78,6 +78,9 @@ Please contact us beforehand to allow a coordinated approach for translations.
 # TeslaFi Import
 You can import your TeslaFi data [here](TeslaFi-Import/README.md).
 
+# Teslamate Import
+You can import your Teslamate data [here](Teslamate-Import/README.md).
+
 # Donations:
 http://paypal.me/ChristianPogea
 
