@@ -157,6 +157,7 @@ namespace TeslaLogger
                             {
                                 using (HttpClient client = new HttpClient())
                                 {
+                                    client.Timeout = TimeSpan.FromSeconds(30);
                                     using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                                     {
 
@@ -341,6 +342,7 @@ namespace TeslaLogger
                         {
                             using (HttpClient client = new HttpClient())
                             {
+                                client.Timeout = TimeSpan.FromSeconds(30);
                                 using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                                 {
 
