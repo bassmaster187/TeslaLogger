@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySql.Data.EntityFrameworkCore</name>
+    </assembly>
+    <members>
+        <member name="T:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCharsetAttribute">
+            <summary>
+            Establishes the character set of an entity property.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCharsetAttribute.Charset">
+            <summary>
+            Character set to use for the attribute.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCharsetAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCharsetAttribute"/> class.
+            </summary>
+            <param name="charset">Character set to use.</param>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollationAttribute">
+            <summary>
+            Sets the collation in an entity property.
+            </summary>
+        </member>
+        <member name="P:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollationAttribute.Collation">
+            <summary>
+            Collation set in the attribute.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollationAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollationAttribute"/> class.
+            </summary>
+            <param name="collation">Collation to use.</param>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions">
+            <summary>
+            Represents the implementation of MySQL property-builder extensions used in Fluent API.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.UseMySQLAutoIncrementColumn(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder,System.String)">
+            <summary>
+            Defines a MySQL auto-increment column.
+            </summary>
+            <param name="propertyBuilder">Entity property to be set.</param>
+            <param name="typeName">MySQL column type as string.</param>
+            <returns>Property builder of the auto-increment column.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasDefaultValueSql(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder,System.String)">
+            <summary>
+            Defines a column default value expression.
+            </summary>
+            <param name="propertyBuilder">Entity property to be set.</param>
+            <param name="sql">Default value expression.</param>
+            <returns>Property builder of a MySQL column with a default value.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasDefaultValue(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder,System.Object)">
+            <summary>
+            Defines a column default value.
+            </summary>
+            <param name="propertyBuilder">Entity property to be set.</param>
+            <param name="sql">Default value.</param>
+            <returns>Property builder of a MySQL column with a default value.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasCharset(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder,System.String)">
+            <summary>
+            Adds the character set to an entity property.
+            </summary>
+            <param name="propertyBuilder">Property builder.</param>
+            <param name="charset">MySQL character set to use.</param>
+            <returns>Property builder with a character set.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasCharset(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder,System.String)">
+            <summary>
+            Adds the character set to an entity.
+            </summary>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="charset">MySQL character set to use.</param>
+            <returns>Entity type builder with a character set.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasCollation(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder,System.String)">
+            <summary>
+            Adds the collation to an entity property.
+            </summary>
+            <param name="propertyBuilder">Property builder.</param>
+            <param name="collation">MySQL collation to use.</param>
+            <returns>Property builder with a collation.</returns>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLPropertyBuilderExtensions.ForMySQLHasCollation(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder,System.String)">
+            <summary>
+            Adds the collation to an entity.
+            </summary>
+            <param name="entityTypeBuilder">Entity type builder.</param>
+            <param name="collation">MySQL collation to use.</param>
+            <returns>Entity type builder with a collation.</returns>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Extensions.MySQLServiceCollectionExtensions">
+            <summary>
+            MySQL extension class for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Extensions.MySQLServiceCollectionExtensions.AddEntityFrameworkMySQL(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Extension method used to configure all MySQL services.
+            </summary>
+            <param name="services">Collection of service descriptors.</param>
+            <returns>Collection of MySQL services descriptors.</returns>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Infraestructure.MySQLDbContextOptionsBuilder">
+            <summary>
+            Represents the <see cref="T:Microsoft.EntityFrameworkCore.Infrastructure.RelationalDbContextOptionsBuilder`2" /> implemented for MySQL.
+            </summary>
+            <summary>
+            Represents the <see cref="T:Microsoft.EntityFrameworkCore.Infrastructure.RelationalDbContextOptionsBuilder`2" /> implementation for MySQL.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Infraestructure.MySQLOptionsExtension">
+            <summary>
+            Represents the <see cref="T:Microsoft.EntityFrameworkCore.Infrastructure.RelationalOptionsExtension"/> implementation for MySQL.
+            </summary>
+            <summary>
+            Represents the <see cref="T:Microsoft.EntityFrameworkCore.Infrastructure.RelationalOptionsExtension"/> implementation for MySQL.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Infraestructure.MySQLOptionsExtension.ApplyServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                This method supports the Entity Framework Core infrastructure and is not intended to be used
+                directly from your code. This method may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Metadata.MySQLAnnotationProvider">
+            <summary>
+            Annotation Provider implementation
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Metadata.Internal.MySQLFullAnnotationNames">
+            <summary>
+            RelationalFullAnnotationNames for MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Metadata.Internal.MySQLAnnotationNames">
+            <summary>
+            Names for MySQL annotations.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Migrations.MySQLMigrationsSqlGenerator">
+            <summary>
+            MigrationSqlGenerator implementation for MySQL
+            </summary>
+            <summary>
+            MigrationSqlGenerator implementation for MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Migrations.Operations.MySQLCreateDatabaseOperation">
+            <summary>
+            Create database operation class for migrations
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Migrations.Operations.MySQLDropDatabaseOperation">
+            <summary>
+            Drop database operation for migrations.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.MySQLCompositeMethodCallTranslator">
+            <summary>
+            RelationalCompositeMethodCallTranslator implementation for MySQL
+            </summary>
+            <summary>
+            RelationalCompositeMethodCallTranslator implementation for MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Query.MySQLQueryGeneratorFactory">
+            <summary>
+            Implementation for QuerySqlGeneratorFactoryBase
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Storage.Internal.MySQLCommandBuilder.Build">
+            <summary>
+                This API supports the Entity Framework Core infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="M:MySql.Data.EntityFrameworkCore.Storage.Internal.MySQLCommandBuilder.ToString">
+            <summary>
+                This API supports the Entity Framework Core infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.MySQLDatabaseCreator">
+            <summary>
+            Relational Database creator implementation in MySQL
+            </summary>
+            <summary>
+            Relational Database creator implementation in MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.MySQLDatabaseProviderServices">
+            <summary>
+            RelationalDatabaseProviderServices implementation for MySQL 
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.MySQLCompositeMemberTranslator">
+            <summary>
+            RelationalCompositeMemberTranslator implementation for MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Update.MySQLModificationCommandBatch">
+            <summary>
+            AffectedCountModificationCommandBatch implementation for MySQL
+            </summary>
+        </member>
+        <member name="T:MySql.Data.EntityFrameworkCore.Update.MySQLModificationCommandBatchFactory">
+            <summary>
+            IModificationCommandBatchFactory implemntation for MySQL
+            </summary>
+        </member>
+        <member name="T:Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions">
+            <summary>
+            Represents the context-option extensions implemented for MySQL.
+            </summary>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions.UseMySQL(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String,System.Action{MySql.Data.EntityFrameworkCore.Infraestructure.MySQLDbContextOptionsBuilder})">
+            <summary>
+            Configures the <see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> to use MySQL Sever.
+            </summary>
+            <param name="optionsBuilder">DbContext option builder.</param>
+            <param name="connectionString">MySQL connection string.</param>
+            <param name="MySQLOptionsAction">DbContext option builder action.</param>
+            <returns>DbContext option builder using MySQL.</returns>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions.UseMySQL(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.Data.Common.DbConnection,System.Action{MySql.Data.EntityFrameworkCore.Infraestructure.MySQLDbContextOptionsBuilder})">
+            <summary>
+            Configures the <see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> to use MySQL Sever.
+            </summary>
+            <param name="optionsBuilder">DbContext option builder.</param>
+            <param name="connection">MySQL connection object.</param>
+            <param name="MySQLOptionsAction">DbContext option builder action.</param>
+            <returns>DbContext option builder using MySQL.</returns>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions.UseMySQL``1(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder{``0},System.String,System.Action{MySql.Data.EntityFrameworkCore.Infraestructure.MySQLDbContextOptionsBuilder})">
+            <summary>
+            Configures the <see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> to use MySQL Sever.
+            </summary>
+            <typeparam name="TContext"><see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> type.</typeparam>
+            <param name="optionsBuilder">DbContext option builder.</param>
+            <param name="connectionString">MySQL connection string.</param>
+            <param name="MySQLOptionsAction">DbContext option builder action.</param>
+            <returns>DbContext option builder using MySQL.</returns>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions.UseMySQL``1(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder{``0},System.Data.Common.DbConnection,System.Action{MySql.Data.EntityFrameworkCore.Infraestructure.MySQLDbContextOptionsBuilder})">
+            <summary>
+            Configures the <see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> to use MySQL Sever.
+            </summary>
+            <typeparam name="TContext"><see cref="T:Microsoft.EntityFrameworkCore.DbContext" /> type.</typeparam>
+            <param name="optionsBuilder">DbContext option builder.</param>
+            <param name="connection">MySQL connection object.</param>
+            <param name="MySQLOptionsAction">DbContext option builder action.</param>
+            <returns>DbContext option builder using MySQL.</returns>
+        </member>
+    </members>
+</doc>

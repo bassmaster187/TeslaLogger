@@ -6,8 +6,8 @@ I think the best way to setup a dev enviroment is to run a docker on local machi
 
 If you want to debug the internal WebServer of Teslalogger (HttpListener in WebServer.cs) you have to change some files:
 - GetTeslaloggerURL() in tools.php
-- Teslaloggerstrem.php
-use http://host.docker.internal on linux and macos it is any other address: https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
+- teslaloggerstream.php
+use http://host.docker.internal on Windows. On linux and macos it may be another address: https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
 
 
 # Automated testing
