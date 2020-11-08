@@ -418,7 +418,10 @@ namespace TeslaLogger
                 DriveFinished();
 
                 ShareData sd = new ShareData(this);
-                sd.SendAllChargingData();
+                _ = Task.Factory.StartNew(() =>
+                {
+                    sd.SendAllChargingData();
+                });
             }
 
             return lastRacingPoint;
@@ -885,7 +888,10 @@ namespace TeslaLogger
 
                         // Every 10 Days send degradataion Data
                         ShareData sd = new ShareData(this);
-                        sd.SendDegradationData();
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            sd.SendDegradationData();
+                        });
                     }
                     else
                     {
