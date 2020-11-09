@@ -209,7 +209,7 @@ namespace TeslaLogger
                     catch (Exception ex)
                     {
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
-                        System.Threading.Thread.Sleep(10000);
+                        Thread.Sleep(10000);
                     }
                 }
             }

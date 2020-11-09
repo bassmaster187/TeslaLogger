@@ -490,7 +490,7 @@ namespace TeslaLogger
             }
         }
 
-        public double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
+        public static double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
         {
             double d1 = latitude * (Math.PI / 180.0);
             double num1 = longitude * (Math.PI / 180.0);
