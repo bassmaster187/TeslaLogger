@@ -807,16 +807,19 @@ WHERE
                         {
                             double distance = Geofence.GetDistance(poslng, poslat, chglng, chglat);
                             Tools.DebugLog($"StartChargingState Task distance: {distance}");
-                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                            if (distance > 10)
                             {
-                                con.Open();
-                                using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
+                                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                                 {
-                                    cmd.Parameters.AddWithValue("@latestPos", latestPos);
-                                    cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
-                                    Tools.DebugLog(cmd);
-                                    int updatedRows = cmd.ExecuteNonQuery();
-                                    car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                    con.Open();
+                                    using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
+                                    {
+                                        cmd.Parameters.AddWithValue("@latestPos", latestPos);
+                                        cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
+                                        Tools.DebugLog(cmd);
+                                        int updatedRows = cmd.ExecuteNonQuery();
+                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                    }
                                 }
                             }
                         }
