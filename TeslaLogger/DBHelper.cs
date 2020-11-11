@@ -782,6 +782,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
                     cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                    Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -1749,13 +1750,17 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select max(id), datum from charging where CarID=@CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT id, datum FROM charging WHERE CarID=@CarID ORDER BY datum DESC LIMIT 1", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                     {
-                        DateTime.TryParse(dr[1].ToString(), out chargeStart);
+                        if (!DateTime.TryParse(dr[1].ToString(), out chargeStart))
+                        {
+                            chargeStart = DateTime.Now;
+                        }
                         return Convert.ToInt32(dr[0]);
                     }
                 }
