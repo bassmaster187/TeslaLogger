@@ -450,7 +450,9 @@ namespace TeslaLogger
 
                         HttpResponseMessage result = resultTask.Result;
                         resultContent = result.Content.ReadAsStringAsync().Result;
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                         DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
+
                         if (TeslaAPI_Commands.ContainsKey("vehicles"))
                         {
                             TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
@@ -2161,6 +2163,7 @@ namespace TeslaLogger
                     HttpResponseMessage result = await client.GetAsync(adresse);
                     resultContent = await result.Content.ReadAsStringAsync();
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     if (TeslaAPI_Commands.ContainsKey(cmd))
                     {
                         TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
@@ -2170,7 +2173,6 @@ namespace TeslaLogger
                     {
                         TeslaAPI_Commands.TryAdd(cmd, resultContent);
                     }
-                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     return resultContent;
                 }
             }
