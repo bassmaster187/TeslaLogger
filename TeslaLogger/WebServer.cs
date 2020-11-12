@@ -314,16 +314,21 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-        private void Dev_DumpJSON(HttpListenerResponse response, bool v)
+        private void Dev_DumpJSON(HttpListenerResponse response, bool dumpJSON)
         {
             foreach (Car car in Car.allcars)
             {
-                if (car.GetTeslaAPIState().DumpJSON != v)
+                if (car.GetTeslaAPIState().DumpJSON != dumpJSON)
                 {
-                    car.GetTeslaAPIState().DumpJSON = v;
+                    car.GetTeslaAPIState().DumpJSON = dumpJSON;
+                    if (dumpJSON)
+                    {
+                        // get /vehicles at session start
+                        _ = car.webhelper.IsOnline().Result;
+                    }
                 }
             }
-            WriteString(response, $"DumpJSON {v}");
+            WriteString(response, $"DumpJSON {dumpJSON}");
         }
 
         private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
