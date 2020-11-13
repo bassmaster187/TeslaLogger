@@ -291,6 +291,12 @@ namespace TeslaLogger
             allcars.Remove(this);
         }
 
+        public void ThreadJoin()
+        {
+            if (thread != null)
+                thread.Join();
+        }
+
         private void HandleState_GoSleep()
         {
             webhelper.ResetLastChargingState();

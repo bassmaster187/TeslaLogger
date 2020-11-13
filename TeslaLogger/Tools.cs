@@ -361,6 +361,9 @@ namespace TeslaLogger
 
         internal static bool UseOpenTopoData()
         {
+            return true; // Use by default
+
+            /*
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -383,6 +386,7 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
             }
             return false;
+            */
         }
 
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
