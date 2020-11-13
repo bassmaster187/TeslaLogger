@@ -30,7 +30,6 @@ namespace TeslaLogger
         public string fast_charger_type = "";
         public string conn_charge_cable = "";
         public bool fast_charger_present = false;
-        public static Geofence geofence;
         //private bool stopStreaming = false;
         private string elevation = "";
         private DateTime elevation_time = DateTime.Now;
@@ -51,8 +50,6 @@ namespace TeslaLogger
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
-
-            geofence = new Geofence(ApplicationSettings.Default.RacingMode);
         }
 
         public WebHelper(Car car)
@@ -450,7 +447,9 @@ namespace TeslaLogger
 
                         HttpResponseMessage result = resultTask.Result;
                         resultContent = result.Content.ReadAsStringAsync().Result;
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                         DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
+
                         if (TeslaAPI_Commands.ContainsKey("vehicles"))
                         {
                             TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
@@ -1223,7 +1222,7 @@ namespace TeslaLogger
                     double? outside_temp = null;
                     Task<double?> t_outside_temp = null;
 
-                    if (!geofence.RacingMode)
+                    if (!Geofence.GetInstance().RacingMode)
                     {
                         t_outside_temp = GetOutsideTempAsync();
                     }
@@ -1493,7 +1492,7 @@ namespace TeslaLogger
                 if (!forceGeocoding)
                 {
                     Address a = null;
-                    a = geofence.GetPOI(latitude, longitude);
+                    a = Geofence.GetInstance().GetPOI(latitude, longitude);
                     if (a != null)
                     {
                         Logfile.Log("Reverse geocoding by Geofence");
@@ -1503,7 +1502,7 @@ namespace TeslaLogger
                     string value = GeocodeCache.Instance.Search(latitude, longitude);
                     if (value != null)
                     {
-                        Logfile.Log("Reverse geocoding by Cache");
+                        Logfile.Log("Reverse geocoding by GeocodeCache");
                         return value;
                     }
                 }
@@ -1815,7 +1814,7 @@ namespace TeslaLogger
         {
             try
             {
-                if (geofence.RacingMode)
+                if (Geofence.GetInstance().RacingMode)
                 {
                     return;
                 }
@@ -1885,7 +1884,7 @@ namespace TeslaLogger
                 string brand = dr["fast_charger_brand"] as String ?? "";
                 int max_power = dr["max_charger_power"] as int? ?? 0;
 
-                Address a = geofence.GetPOI(lat, lng, false, brand, max_power);
+                Address a = Geofence.GetInstance().GetPOI(lat, lng, false, brand, max_power);
                 if (a == null)
                 {
                     if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
@@ -2161,6 +2160,7 @@ namespace TeslaLogger
                     HttpResponseMessage result = await client.GetAsync(adresse);
                     resultContent = await result.Content.ReadAsStringAsync();
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     if (TeslaAPI_Commands.ContainsKey(cmd))
                     {
                         TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
@@ -2170,7 +2170,6 @@ namespace TeslaLogger
                     {
                         TeslaAPI_Commands.TryAdd(cmd, resultContent);
                     }
-                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     return resultContent;
                 }
             }
