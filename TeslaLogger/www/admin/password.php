@@ -52,8 +52,40 @@ require_once("tools.php");
 				});
 		}
 	}
+	function deleteCar()
+	{
+		if (confirm("Do you want to delete?"))
+		{
+			var d = {
+					id: dbid,
+					deletecar: 1
+				};
+
+			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
+					alert("Check Logfile in one minute!");
+					window.location.href='index.php';
+				});
+		}
+	}
+
+	function reconnect()
+	{
+		var d = {
+					id: dbid,
+					reconnect: 1
+				};
+
+		var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
+				alert("Check Logfile in one minute!");
+				window.location.href='index.php';
+			});
+	}
 </script>
 </head>
+<style>
+.redbutton{background-color:#890d24;float: left;}
+.redbutton:hover, .redbutton:focus{background-color:#A62A41;}
+</style>
 <body style="padding-top: 5px; padding-left: 10px;">
 <div style="max-width: 1260px;">
 <?php 
@@ -115,7 +147,13 @@ if (isset($_REQUEST["id"]))
 <tr><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 <tr><td><?php t("Car # in account"); ?>:</td><td><input id="carid" value="<?php echo($tesla_carid) ?>" <?php echo($disablecarid) ?>/></td><td>0 = first car!</td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
-<tr><td></td><td><button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
+<tr><td colspan="2">
+<?PHP if ($_REQUEST["id"] != -1)
+	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Löschen"); ?></button>
+	&nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp;
+	<?PHP }
+?>
+<button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
 </table>
 </div>
 <?php

@@ -879,7 +879,7 @@ WHERE
 
         public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
         {
-            if (WebHelper.geofence.RacingMode)
+            if (Geofence.GetInstance().RacingMode)
             {
                 return;
             }

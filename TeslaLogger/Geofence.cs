@@ -107,6 +107,17 @@ namespace TeslaLogger
 
     public class Geofence
     {
+        private static Geofence _geofence = null;
+
+        public static Geofence GetInstance()
+        {
+            if (_geofence == null)
+            {
+                _geofence = new Geofence(ApplicationSettings.Default.RacingMode);
+            }
+            return _geofence;
+        }
+
         internal SortedSet<Address> geofenceList = new SortedSet<Address>(new AddressByLatLng());
         internal SortedSet<Address> geofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
         private FileSystemWatcher fsw;
@@ -116,9 +127,10 @@ namespace TeslaLogger
 
         private static int FSWCounter = 0;
 
-        public Geofence(bool RacingMode)
+        private Geofence(bool RacingMode)
         {
             _RacingMode = RacingMode;
+            Logfile.Log("Geofence initialized");
             Init();
             
             if (fsw == null)
