@@ -27,6 +27,8 @@ namespace Teslamate_Import
                 Tools.Log(0,"Teslamate DB:" + pgConnectionString);
                 Tools.Log(0,"Teslalogger DB:" + DBConnectionstring);
 
+                AlterTables();
+
                 firstTeslaloggerData = GetFirstTeslaloggerData();
                 Tools.Log(0, "First Teslalogger Data: " + firstTeslaloggerData.ToString());
 
@@ -587,6 +589,28 @@ namespace Teslamate_Import
             }
 
             return dtMin;
+        }
+
+        private static void AlterTables()
+        {
+            String[] tables = new String[] { "car_version", "charging", "chargingstate", "drivestate", "pos", "state" };
+            foreach (var table in tables)
+            {
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS import TINYINT(1) NULL", con);
+                        cmd.CommandTimeout = 300;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.Log(0, ex.ToString());
+                }
+            }
         }
     }
 }
