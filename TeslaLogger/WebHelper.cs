@@ -454,7 +454,7 @@ namespace TeslaLogger
                         if (car.LoginRetryCounter < 1)
                         {
                             car.LoginRetryCounter++;
-                            _ = GetTokenAsync().Result;
+                            Tesla_token = GetTokenAsync().Result;
                             DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
                         }
 
