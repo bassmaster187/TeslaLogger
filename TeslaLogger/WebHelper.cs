@@ -455,6 +455,8 @@ namespace TeslaLogger
                         {
                             car.LoginRetryCounter++;
                             Tesla_token = GetTokenAsync().Result;
+                            client.DefaultRequestHeaders.Remove("Authorization");
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
                             DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
                         }
 
