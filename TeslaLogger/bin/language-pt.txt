@@ -1,0 +1,208 @@
+#Akku Trips.json
+Akku Trips=Viagens
+Start Trip=Início da Viagem
+End Trip=Fim da Viagem
+Time=Data/Hora
+StartSOC=SoC Inicial
+EndSOC=SoC Final
+SOC diff=Diferença de SoC
+Start km=Km Iniciais
+End km=Km Finais
+Start mi=Mi Iniciais
+End mi=Mi Finais
+kmDiff=Diferença de Km
+Max Range=Autonomia Máxima
+Ø Verbrauch=Ø Consumo
+Tage=Dias
+
+#Degradation.json
+Degradation=Degradação
+Maximalreichweite [km]=Autonomia Máxima [km]
+Maximalreichweite [mi]=Autonomia Máxima [mi]
+km Stand [km]=Odómetro [km]
+mi Stand [mi]=Odómetro [mi]
+Odometer [mi]=Odómetro [mi]
+Max. Reichweite (Monatsmittel) [km]=Autonomia Máxima (média mensal) [km]
+Max. Reichweite (Monatsmittel) [mi]=Autonomia Máxima (média mensal) [mi]
+
+#Ladehistorie.json
+Ladehistorie=Historial de Carregamentos
+Startdatum=Data/Hora Inicial
+Enddatum=Data/Hora Final
+geladen kWh=kWh Carregados
+km Stand=Odómetro
+Adresse=Endereço
+TR km Start=TR km Iniciais
+TR km Ende=TR km Finais
+SOC Ende=SoC Final
+100% TR=100% TR
+Minuten=Minutos
+TR mi Start=TR mi Iniciais
+TR mi Ende=TR mi Finais
+ØkW=ØkW
+
+#Ladestatistik.json
+Ladestatistik=Estatísticas de Carregamento
+Letzte Ladung=Último Carregamento
+Ort=Endereço
+Ø geladen kWh=Ø kWh Carregados
+Ladezeit h=Duração do Carregamento h
+Ø SOC=Ø SoC
+Max SOC=SoC Máximo
+Anzahl Ladungen=Contagem de Carregamentos
+Anzahl=Contagem
+Geladen=Carregado
+Ladezeit=Tempo de Carregamento
+Anz. Ladungen=Countagem
+Ladehub=Autonomia do Carregamento
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=Estatísticas de SoC
+SOC [%]=SoC [%]
+
+#Laden.json
+Laden=Carregamento
+Ladespannung [V]=Voltagem [V]
+Reichweite [mi]=Autonomia [mi]
+Reichweite [km]=Autonomia [km]
+Leistung [kW]=Potência [kW]
+Phasen=Fases
+Stromstärke [A]=Corrente [A]
+Angefordert [A]=Requeridos [A]
+Pilot [A]=Piloto [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Estatísticas Perdas Residuais
+TR mi Verlust=TR mi Perdidas
+kWh Verlust=kWh Perdidos 
+Eur Verlust=EUR Perdidos
+
+#Trip.json
+Trip=Viagem
+Start=Início
+Ende=Fim
+Start Adresse=Endereço Inicial
+Ziel Adresse=Endereço Final
+Ø Verbrauch kWh=Ø Consumo kWh
+Verbraucht kWh=kWh Consumidos
+Dauer Min=Duração Min
+mi=mi
+km=km
+Ø °C=Ø °C
+Ø °F=Ø °F
+max mph=Max mph
+max km/h=Max km/h
+max PS=Max CV
+min PS=Min CV
+max kW=max kW
+min kW=min kW
+Ø PS=Ø CV
+Ø kW=Ø kW
+Ø mph=Ø mph
+Ø km/h=Ø km/h
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Horas de Duração
+TR mi Verlust pro Stunde=TR mi Perdidas por Hora
+mi Stand=Odómetro
+
+#Vampir Drain.json
+Vampir Drain=Perdas Residuais
+Standby Stunden=Horas em Standby
+Standby=Standby
+TR km Verlust=TR km Perdidos
+TR km Verlust pro Stunde=TR km Perdidos por Hora
+
+#Verbrauch.json
+Verbrauch=Consumo
+Höhe [m]=Altitude [m]
+Altitude [m]=Altitude [m]
+Geschwindigkeit [mph]=Velocidade [mph]
+Geschwindigkeit [km/h]=Velocidade [km/h]
+Leistung [PS]=Potência [CV]
+Außentemperatur [°C]=Temperatura Exterior [°C]
+Außentemperatur [°F]=Temperatura Exterior [°F]
+Innentemperatur [°C]=Temperatura Interior [°C]
+Innentemperatur [°F]=Temperatura Interior [°F]
+
+Laden fertig=Carregamento Terminado
+Schlafen=Adormecido
+Online=Ligado
+
+#Visited.json
+Visited=Visitado
+
+#index.php
+Fahrzeuginfo=Informação do Veículo
+Status=Estado
+Typical Range=Autonomia Típica
+KM Stand=Odómetro
+Car Version=Versão do Veículo
+Letzter Trip=Última Viagem
+Dauer=Duração
+Distanz=Distância
+Max km/h=km/h Máximos
+PS=CV
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger Credenciais Tesla
+Bitte Tesla Account Zugangsdaten eingeben=Por favor, insira as suas credenciais da conta Tesla
+Email=Email
+Passwort=Palavra-passe
+Passwort wiederholen=Repita Palavra-passe
+Speichern=Guardar
+
+#settings.php
+Zugangsdaten=Credenciais
+Language=Língua
+Leistung=Potência
+Temperatur=Temperatura
+Längenmaß=Unidade de distância
+URL Admin Panel=URL Painel Administração 
+
+#geoadd.php
+Bezeichnung=Descrição
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=Consumos Totais - ScanMyTesla
+Zelltemperatur [°C]=Temperatura das Células [°C]
+Zelltemperatur [°F]=Temperatura das Células [°F]
+
+#Trip Monatsstatistik.json
+Datum=Data
+Fahrzeit [h]=Tempo de Viagem [h]
+Strecke [km]=Distância [km]
+Strecke [mi]=Distância [mi]
+Verbraucht [kWh]=Consumo [kWh]
+Ø Verbrauch [kWh]=Ø Consumo [kWh]
+Anzahl Trips=Número de Viagens
+Trip Monatsstatistik=Estatísticas Mensais de Viagens
+
+Zellspannungen 01-20 - ScanMyTesla=Voltagem das Células 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Voltagem das Células 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Voltagem das Células 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Voltagem das Células 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Voltagem das Células 81-99 - ScanMyTesla
+
+Ja=Sim
+Nein=Não
+
+Einschlafen=Adormecer
+Automatische Updates=Actualizações Automáticas
+
+TextShare=<h1>Partilhar curvas de carregamento e degradação anonimamente</h1>Gostaríamos de criar uma base de dados anónima para comparar curvas de carregamento e de degradação das baterias. Isto permite que compare o seu veículo com outros a qualquer momento e detectar antecipadamente qualquer desvio fora do habitual. A funcionalidade também poderá ser usada para justificar o bom estado da bateria numa venda no future. Ou, em sentido contrário, poder provar junto da Tesla no caso de performance reduzida.<br><br>Gostaria de partilhar as suas curvas de carregamentos rápidos e curvas de degradação com outros utilizadores de Teslas de forma totalmente anónima? Esta decisão pode ser alterada a qualquer momento no ecrã de configuração.
+Daten anonym teilen=Partilhar dados anonimamente
+TextSuspendTeslalogger=O Teslalogger foi interrompido! Os dados não serão guardados!
+Resume Teslalogger=Retomar o Teslalogger
+Reichweite=Autonomia
+
+Ladekosten=Custos de Carregamento
+Ladesäule=Estação de Carregamento
+Währung=Moeda
+Kosten pro kWh=Custo por kWh
+Kosten pro Ladung=Custo por Carregamento
+Kosten pro Minute=Custo por Minuto
+Kosten Blockiergebühr=Custo de Ociosidade por Minuto
+Summe=Total
+kWh laut Zähler / Rechnung=kWh de acordo com contador/factura
+Wirkungsgrad=Eficiência 
