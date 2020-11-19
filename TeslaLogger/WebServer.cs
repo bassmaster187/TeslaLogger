@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -187,6 +188,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana"):
                         updategrafana(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/export/trip"):
+                        ExportTrip(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -238,6 +242,111 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void ExportTrip(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // source: https://github.com/rowich/Teslalogger2gpx/blob/master/Teslalogger2GPX.ps1
+            // parse request
+            if (request.QueryString.Count == 3 && request.QueryString.HasKeys())
+            {
+                long from = long.MinValue;
+                long to = long.MinValue;
+                int carID = int.MinValue;
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "from":
+                                long.TryParse(request.QueryString.GetValues(key)[0], out from);
+                                break;
+                            case "to":
+                                long.TryParse(request.QueryString.GetValues(key)[0], out to);
+                                break;
+                            case "carID":
+                                int.TryParse(request.QueryString.GetValues(key)[0], out carID);
+                                break;
+                        }
+                    }
+                }
+                if (from != long.MinValue && to != long.MinValue && carID != int.MinValue)
+                {
+                    // request parsed successfully
+                    // create GPX header
+                    StringBuilder GPX = new StringBuilder();
+                    GPX.Append(@"<?xml version=""1.0"" encoding=""UTF-8""?>
+<gpx version=""1.1"" creator=""Teslalogger GPX Export"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:gpxtpx=""http://www.garmin.com/xmlschemas/TrackPointExtension/v1"" xmlns:gpxx=""http://www.garmin.com/xmlschemas/GpxExtensions/v3"" elementFormDefault=""qualified"">
+<metadata>
+    <name>teslalogger.gpx</name>
+</metadata>
+");
+                    string DateLast = "n/a";
+                    string PosLast = "n/a";
+                    // now get pos data
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT lat,lng,Datum,altitude FROM pos WHERE datum BETWEEN FROM_UNIXTIME(@from/1000) AND FROM_UNIXTIME(@to/1000) and CarID = @CarID ORDER BY Datum ASC", con))
+                        {
+                            cmd.Parameters.AddWithValue("@from", from);
+                            cmd.Parameters.AddWithValue("@to", to);
+                            cmd.Parameters.AddWithValue("@CarID", carID);
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            while (dr.Read())
+                            {
+                               if (double.TryParse(dr[0].ToString(), out double lat)
+                                    && double.TryParse(dr[1].ToString(), out double lng)
+                                    && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
+                                {
+                                    string Pos = ($"lat=\"{lat}\" lon=\"{lng}\"");
+                                    if (!Pos.Equals(PosLast))
+                                    {
+                                        // convert date/time into GPX format (insert a "T")
+                                        // 2020-01-30 09:19:55 --> 2020-01-30T09:19:55
+                                        string Date = Datum.ToString("yyyy-MM-dd") + "T" + Datum.ToString("HH:mm:ss");
+                                        string alt = "";
+                                        if (double.TryParse(dr[3].ToString(), out double altitude))
+                                        {
+                                            alt = $"<ele>{altitude}</ele>";
+                                        }
+                                        // create new Track element if day has changed since last element. New track node gets the name of the day (allows filtering for days later on)
+                                        if (!DateLast.Equals(Date.Substring(0, 10))) {
+                                            if (!DateLast.Equals("n/a"))
+                                            {
+                                                GPX.Append("</trkseg></trk>" + Environment.NewLine);
+                                            }
+                                            DateLast = Date.Substring(0, 10);
+                                            GPX.Append($"<trk><name>{DateLast}</name><trkseg>" + Environment.NewLine);
+                                        }
+                                        GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time></trkpt>" + Environment.NewLine);
+                                        PosLast = Pos;
+                                     }
+                                } 
+                            }
+                        }
+                    }
+                    // create GPX footer
+                    GPX.Append(@"</trkseg>
+</trk>
+</gpx>
+");
+                    response.AddHeader("Content-Type", "application/gpx+xml; charset=utf-8");
+                    response.AddHeader("Content-Disposition", "inline; filename=\"trip.gpx\"");
+                    Tools.DebugLog("GPX:" + Environment.NewLine + GPX.ToString());
+                    WriteString(response, GPX.ToString());
+                }
+                else
+                {
+                    WriteString(response, "error parsing request");
+                }
+            }
+            else
+            {
+                WriteString(response, "malformed request");
             }
         }
 
