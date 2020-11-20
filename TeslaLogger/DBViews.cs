@@ -26,6 +26,8 @@ VIEW `trip` AS
         `pos_start`.`lng` AS `lng`,
         `pos_end`.`lat` AS `EndLat`,
         `pos_end`.`lng` AS `EndLng`,
+        `pos_start`.`id` AS `StartPosID`,
+        `pos_end`.`id` AS `EndPosID`,
         `drivestate`.`outside_temp_avg` AS `outside_temp_avg`,
         `drivestate`.`speed_max` AS `speed_max`,
         `drivestate`.`power_max` AS `power_max`,
