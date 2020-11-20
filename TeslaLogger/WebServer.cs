@@ -289,7 +289,7 @@ namespace TeslaLogger
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
                         con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT lat,lng,Datum,altitude FROM pos WHERE datum BETWEEN FROM_UNIXTIME(@from/1000) AND FROM_UNIXTIME(@to/1000) and CarID = @CarID ORDER BY Datum ASC", con))
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT lat,lng,Datum,altitude,address FROM pos WHERE id >= @from AND id <= @to and CarID = @CarID ORDER BY Datum ASC", con))
                         {
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@to", to);
@@ -313,6 +313,11 @@ namespace TeslaLogger
                                         {
                                             alt = $"<ele>{altitude}</ele>";
                                         }
+                                        string name = "";
+                                        if (dr[4] != null && dr[4] != DBNull.Value)
+                                        {
+                                            name = $"<name>{dr[4]}</name>";
+                                        }
                                         // create new Track element if day has changed since last element. New track node gets the name of the day (allows filtering for days later on)
                                         if (!DateLast.Equals(Date.Substring(0, 10))) {
                                             if (!DateLast.Equals("n/a"))
@@ -322,7 +327,7 @@ namespace TeslaLogger
                                             DateLast = Date.Substring(0, 10);
                                             GPX.Append($"<trk><name>{DateLast}</name><trkseg>" + Environment.NewLine);
                                         }
-                                        GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time></trkpt>" + Environment.NewLine);
+                                        GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time>{name}</trkpt>" + Environment.NewLine);
                                         PosLast = Pos;
                                      }
                                 } 
