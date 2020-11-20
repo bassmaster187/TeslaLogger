@@ -18,6 +18,14 @@ TODO
 
 TODO
 
+### /export/trip
+
+request: GET /export/trip?from=...&to=...&carID=
+
+response: GPX file
+
+from=... and to=... are pos.id's
+
 ### /admin/UpdateElevation
 
 TODO
