@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
+using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -316,7 +317,7 @@ namespace TeslaLogger
                                         string name = "";
                                         if (dr[4] != null && dr[4] != DBNull.Value)
                                         {
-                                            name = $"<name>{dr[4]}</name>";
+                                            name = $"<name>{SecurityElement.Escape(dr[4].ToString())}</name>";
                                         }
                                         // create new Track element if day has changed since last element. New track node gets the name of the day (allows filtering for days later on)
                                         if (!DateLast.Equals(Date.Substring(0, 10))) {

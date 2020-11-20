@@ -24,7 +24,7 @@ request: GET /export/trip?from=...&to=...&carID=
 
 response: GPX file
 
-from=... and to=... are in timestamp*1000 format like StartDate and EndDate in Grafana Trip
+from=... and to=... are pos.id's
 
 ### /admin/UpdateElevation
 
