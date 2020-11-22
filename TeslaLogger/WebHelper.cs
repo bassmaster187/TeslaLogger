@@ -61,6 +61,8 @@ namespace TeslaLogger
 
         private void CheckUseTaskerToken()
         {
+            string reply = "";
+
             try
             {
                 if (String.IsNullOrEmpty(car.TaskerHash))
@@ -71,12 +73,12 @@ namespace TeslaLogger
                 using (WebClient client = new WebClient())
                 {
                     DateTime start = DateTime.UtcNow;
-                    string reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
+                    reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
                     DBHelper.AddMothershipDataToDB("tasker_date.php", start, 200);
 
-                    if (reply.Contains("not found"))
+                    if (reply.Contains("not found") || reply.Contains("never!"))
                     {
-                        Log("LastTaskerToken not found - Stop using fast TaskerToken request!");
+                        Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
                         car.useTaskerToken = false;
                         return;
                     }
@@ -100,7 +102,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Log(ex.Message);
+                reply = reply ?? "NULL";
+                Log("Reply: " + reply + "\r\n" + ex.Message);
             }
         }
 
@@ -212,6 +215,8 @@ namespace TeslaLogger
                         Tesla_token = jsonResult["access_token"];
 
                         car.dbHelper.UpdateTeslaToken();
+
+                        car.LoginRetryCounter = 0;
 
                         return Tesla_token;
                     }
@@ -449,15 +454,17 @@ namespace TeslaLogger
                         if (result.StatusCode == HttpStatusCode.Unauthorized)
                         {
                             Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-                        }
 
-                        if (car.LoginRetryCounter < 1)
-                        {
-                            car.LoginRetryCounter++;
-                            Tesla_token = GetTokenAsync().Result;
-                            client.DefaultRequestHeaders.Remove("Authorization");
-                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                            if (car.LoginRetryCounter < 2)
+                            {
+                                System.Threading.Thread.Sleep(60000);
+
+                                car.LoginRetryCounter++;
+                                Tesla_token = GetTokenAsync().Result;
+                                client.DefaultRequestHeaders.Remove("Authorization");
+                                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                                DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                            }
                         }
 
                         object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
