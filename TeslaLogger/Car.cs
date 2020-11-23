@@ -110,6 +110,8 @@ namespace TeslaLogger
             } 
         }
 
+        internal int LoginRetryCounter = 0;
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 

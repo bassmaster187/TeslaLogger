@@ -61,6 +61,8 @@ namespace TeslaLogger
 
         private void CheckUseTaskerToken()
         {
+            string reply = "";
+
             try
             {
                 if (String.IsNullOrEmpty(car.TaskerHash))
@@ -71,12 +73,12 @@ namespace TeslaLogger
                 using (WebClient client = new WebClient())
                 {
                     DateTime start = DateTime.UtcNow;
-                    string reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
+                    reply = client.DownloadString("https://teslalogger.de/tasker_date.php?t=" + car.TaskerHash);
                     DBHelper.AddMothershipDataToDB("tasker_date.php", start, 200);
 
-                    if (reply.Contains("not found"))
+                    if (reply.Contains("not found") || reply.Contains("never!"))
                     {
-                        Log("LastTaskerToken not found - Stop using fast TaskerToken request!");
+                        Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
                         car.useTaskerToken = false;
                         return;
                     }
@@ -100,7 +102,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Log(ex.Message);
+                reply = reply ?? "NULL";
+                Log("Reply: " + reply + "\r\n" + ex.Message);
             }
         }
 
@@ -127,7 +130,7 @@ namespace TeslaLogger
                     return false;
                 }
 
-               
+
                 TimeSpan ts = DateTime.Now - car.Tesla_Token_Expire;
 
                 if (ts.TotalDays < 15)
@@ -142,13 +145,13 @@ namespace TeslaLogger
                 {
                     Log("Restore Token too old! " + car.Tesla_Token_Expire.ToString());
                 }
-                
+
             }
             catch (Exception ex)
             {
                 Log("Error in RestoreToken: " + ex.Message);
             }
-            
+
 
             return false;
         }
@@ -213,6 +216,8 @@ namespace TeslaLogger
 
                         car.dbHelper.UpdateTeslaToken();
 
+                        car.LoginRetryCounter = 0;
+
                         return Tesla_token;
                     }
                 }
@@ -248,7 +253,7 @@ namespace TeslaLogger
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
 
                 if (r2["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
-                { 
+                {
                     if (justCheck)
                     {
                         return false;
@@ -442,27 +447,24 @@ namespace TeslaLogger
                         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
 
                         string adresse = apiaddress + "api/1/vehicles";
-                        DateTime start = DateTime.UtcNow;
-                        Task<HttpResponseMessage> resultTask = client.GetAsync(adresse);
-
-                        HttpResponseMessage result = resultTask.Result;
-                        resultContent = result.Content.ReadAsStringAsync().Result;
-                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
-                        DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
-
-                        if (TeslaAPI_Commands.ContainsKey("vehicles"))
-                        {
-                            TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
-                            TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
-                        }
-                        else
-                        {
-                            TeslaAPI_Commands.TryAdd("vehicles", resultContent);
-                        }
+                        Task<HttpResponseMessage> resultTask;
+                        HttpResponseMessage result;
+                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
 
                         if (result.StatusCode == HttpStatusCode.Unauthorized)
                         {
                             Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
+
+                            if (car.LoginRetryCounter < 2)
+                            {
+                                System.Threading.Thread.Sleep(60000);
+
+                                car.LoginRetryCounter++;
+                                Tesla_token = GetTokenAsync().Result;
+                                client.DefaultRequestHeaders.Remove("Authorization");
+                                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                                DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                            }
                         }
 
                         object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -588,6 +590,26 @@ namespace TeslaLogger
 
                     Thread.Sleep(30000);
                 }
+            }
+        }
+
+        private void DoGetVehiclesRequest(out string resultContent, HttpClient client, string adresse, out Task<HttpResponseMessage> resultTask, out HttpResponseMessage result)
+        {
+            DateTime start = DateTime.UtcNow;
+            resultTask = client.GetAsync(adresse);
+            result = resultTask.Result;
+            resultContent = result.Content.ReadAsStringAsync().Result;
+            _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
+            DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
+
+            if (TeslaAPI_Commands.ContainsKey("vehicles"))
+            {
+                TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
+                TeslaAPI_Commands.TryUpdate("vehicles", resultContent, drive_state);
+            }
+            else
+            {
+                TeslaAPI_Commands.TryAdd("vehicles", resultContent);
             }
         }
 
@@ -1144,7 +1166,7 @@ namespace TeslaLogger
         }
 
         private void WriteCarSettings(string eff, string ModelName)
-        { 
+        {
             // TODO eff in double
             if (car.ModelName != ModelName || car.Wh_TR.ToString(Tools.ciEnUS) != eff)
             {
