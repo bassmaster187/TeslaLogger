@@ -657,10 +657,10 @@ namespace TeslaLogger
                     if (doSleep)
                     {
                         int sleepduration = 5000;
-                        // if charging is starting just now, decrease sleepduration to 1 second
+                        // if charging is starting just now, decrease sleepduration to 0.5 second
                         try
                         {
-                            // get charging_state, must not be older than 2 minutes = 120 seconds = 1200000 milliseconds
+                            // get charging_state, must not be older than 2 minutes = 120 seconds = 120000 milliseconds
                             if (GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 120000))
                             {
                                 // charging_state == Starting?
