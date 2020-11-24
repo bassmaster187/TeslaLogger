@@ -803,7 +803,7 @@ WHERE
                     wh.IsDriving(true);
                     // get lat, lng from max pos id
                     int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
-                    if (!double.IsNaN(poslat) && !double.IsNaN(poslat))
+                    if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
                         int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
                         if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
