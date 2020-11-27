@@ -28,7 +28,8 @@ namespace TeslaLogger
             "sentry_mode_on",
             "sentry_mode_off",
             "sentry_mode_toggle",
-            "wake_up"
+            "wake_up",
+            "set_charge_limit"
         };
 
         public WebServer()
@@ -498,6 +499,18 @@ namespace TeslaLogger
                                 case "wake_up":
                                     WriteString(response, car.webhelper.Wakeup().Result);
                                     break;
+                                case "set_charge_limit":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
+                                            car.LastSetChargeLimitAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
+                                    }
+                                    break;
                                 default:
                                     WriteString(response, "");
                                     break;
@@ -759,9 +772,9 @@ namespace TeslaLogger
                     { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString() },
                     { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString() },
                     { $"Car #{car.CarInDB} lastSetChargeLimitAddressName",
-                        car.GetLastSetChargeLimitAddressName().Equals(string.Empty)
+                        car.LastSetChargeLimitAddressName.Equals(string.Empty)
                         ? "&lt;&gt;"
-                        : car.GetLastSetChargeLimitAddressName()
+                        : car.LastSetChargeLimitAddressName
                     },
                     { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString() },
                     { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },

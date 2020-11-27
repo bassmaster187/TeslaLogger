@@ -1246,7 +1246,7 @@ WHERE
                     }
                     catch (Exception ex2)
                     {
-                        DebugLog("DownloadToFile exception:", ex);
+                        DebugLog("DownloadToFile exception:", ex2);
                     }
                 }
             }
