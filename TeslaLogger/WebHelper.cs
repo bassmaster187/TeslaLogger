@@ -632,6 +632,24 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.UtcNow;
                     HttpResponseMessage result = await client.GetAsync(adresse);
+
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
+
+                        if (car.LoginRetryCounter < 2)
+                        {
+                            System.Threading.Thread.Sleep(60000);
+
+                            car.LoginRetryCounter++;
+                            Tesla_token = GetTokenAsync().Result;
+                            client.DefaultRequestHeaders.Remove("Authorization");
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                            return "NULL";
+                        }
+                    }
+
                     resultContent = await result.Content.ReadAsStringAsync();
                     _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                     DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
@@ -643,13 +661,6 @@ namespace TeslaLogger
                     else
                     {
                         TeslaAPI_Commands.TryAdd("vehicles", resultContent);
-                    }
-
-
-                    if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-                        Thread.Sleep(30000);
                     }
 
                     object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
