@@ -44,7 +44,7 @@ namespace TeslaLogger
         private DateTime lastTryTokenRefresh = DateTime.Now;
         internal DateTime GetLastTryTokenRefresh() { return lastTryTokenRefresh; }
         private string lastSetChargeLimitAddressName = string.Empty;
-        internal string GetLastSetChargeLimitAddressName() { return lastSetChargeLimitAddressName; }
+        
         private bool goSleepWithWakeup = false;
         internal bool GetGoSleepWithWakeup() { return goSleepWithWakeup; }
         private double odometerLastTrip;
@@ -109,6 +109,8 @@ namespace TeslaLogger
                 currentJSON.Wh_TR = value;
             } 
         }
+
+        public string LastSetChargeLimitAddressName { get => lastSetChargeLimitAddressName; set => lastSetChargeLimitAddressName = value; }
 
         internal int LoginRetryCounter = 0;
 
@@ -1047,14 +1049,14 @@ namespace TeslaLogger
             {
                 if (m.Groups[1].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int chargelimit))
                 {
-                    if (!lastSetChargeLimitAddressName.Equals(_addr.name))
+                    if (!LastSetChargeLimitAddressName.Equals(_addr.name))
                     {
                         Task.Factory.StartNew(() =>
                         {
                             Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
                             string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                             Log("set_charge_limit(): " + result);
-                            lastSetChargeLimitAddressName = _addr.name;
+                            LastSetChargeLimitAddressName = _addr.name;
                         });
                     }
                 }
@@ -1101,7 +1103,7 @@ namespace TeslaLogger
             if (_oldState != TeslaState.Drive && _newState == TeslaState.Drive)
             {
                 // reset lastSetChargeLimitAddressName
-                lastSetChargeLimitAddressName = string.Empty;
+                LastSetChargeLimitAddressName = string.Empty;
             }
 
             // charging -> any
