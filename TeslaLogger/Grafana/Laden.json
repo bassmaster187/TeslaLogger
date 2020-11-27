@@ -39,7 +39,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1602763899448,
+  "iteration": 1606137037293,
   "links": [
     {
       "icon": "external link",
@@ -136,6 +136,10 @@
           "color": "#C4162A",
           "fill": 1,
           "steppedLine": true
+        },
+        {
+          "alias": "Battery charge Ampere [A]",
+          "yaxis": 2
         }
       ],
       "spaceLength": 10,
@@ -365,6 +369,34 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val * -1 * 1000 / (select charger_voltage from charging where charging.Datum <= can.datum order by id desc Limit 1) as 'Battery charge Ampere [A]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 43  and val between -300 and 0 ORDER BY datum ASC",
+          "refId": "I",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -530,5 +562,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 100
+  "version": 109
 }
