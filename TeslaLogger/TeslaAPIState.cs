@@ -771,6 +771,8 @@ namespace TeslaLogger
                             case "trim_badging":
                             case "wheel_type":
                             case "perf_config":
+                            case "default_charge_to_max":
+                            case "exterior_trim":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_config");
@@ -920,6 +922,10 @@ namespace TeslaLogger
                             case "pr":
                             case "rt":
                             case "sun_roof_percent_open":
+                            case "fd_window":
+                            case "fp_window":
+                            case "rd_window":
+                            case "rp_window":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_state");
