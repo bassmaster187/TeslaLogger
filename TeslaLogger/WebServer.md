@@ -81,6 +81,7 @@ Allowed commands:
 * sentry_mode_on
 * sentry_mode_off
 * sentry_mode_toggle
+* wake_up
 
 ## debugging TeslaLogger
 
