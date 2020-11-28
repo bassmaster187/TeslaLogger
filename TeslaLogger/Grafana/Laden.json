@@ -39,7 +39,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1606137037293,
+  "iteration": 1606521851980,
   "links": [
     {
       "icon": "external link",
@@ -153,7 +153,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  charger_voltage as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum) and CarID = $Car\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  CASE WHEN charger_voltage > 10 THEN charger_voltage else null end as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10  THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum) and CarID = $Car\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -375,8 +375,36 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val * -1 * 1000 / (select charger_voltage from charging where charging.Datum <= can.datum order by id desc Limit 1) as 'Battery charge Ampere [A]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 43  and val between -300 and 0 ORDER BY datum ASC",
+          "rawSql": "SELECT $__time(datum), val * -1 'Battery charge Ampere [A]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 44 and val between -1000 and 0 ORDER BY datum ASC",
           "refId": "I",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val 'Ladespannung [V]' FROM can WHERE $__timeFilter(datum) and CarID = $Car and id = 30 and val between 260 and 500 ORDER BY datum ASC",
+          "refId": "J",
           "select": [
             [
               {
@@ -562,5 +590,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 109
+  "version": 110
 }
