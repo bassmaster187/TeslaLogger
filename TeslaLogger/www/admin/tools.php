@@ -67,4 +67,14 @@ function JSONDatetoString($jsondate)
     $date = date("Y-m-d H:i:s", $ts / 1000);
     return $date;
 }
+
+function GrafanaVersion()
+{
+    $content = file_get_contents("http://grafana:3000/api/health");
+    $j = json_decode($content);
+    if (!empty($j->{"version"})) 
+        return $j->{"version"};	
+
+    return "?";
+}
 ?>
