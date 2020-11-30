@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Caching;
@@ -694,6 +695,21 @@ namespace TeslaLogger
                 if (File.Exists(filename))
                 {
                     return File.ReadAllText(filename);
+                }
+                else
+                {
+                    if (Tools.IsDocker())
+                    {
+                        Logfile.Log("GrafanaVersion: IsDocker");
+
+                        string temp = null;
+                        using (WebClient wc = new WebClient())
+                        {
+                            temp = wc.DownloadString("http://grafana:3000/api/health");
+                            dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
+                            return j["version"];
+                        }
+                    }
                 }
 
             }
