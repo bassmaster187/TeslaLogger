@@ -104,7 +104,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1 and chargingstate.CarID = $Car \r\norder by chargingstate.StartDate\r\n",
+          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1 and charging_End.battery_level >= 80 and chargingstate.CarID = $Car \r\norder by chargingstate.StartDate\r\n",
           "refId": "A",
           "select": [
             [
@@ -318,5 +318,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 74
+  "version": 99
 }

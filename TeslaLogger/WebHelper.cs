@@ -795,7 +795,7 @@ namespace TeslaLogger
                     {
                         if (car.DB_Wh_TR >= 0.143 && car.DB_Wh_TR <= 0.148)
                         {
-                            WriteCarSettings("0.152", "M3 LR RWD");
+                            WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
                     }
@@ -992,6 +992,11 @@ namespace TeslaLogger
                 if (car.trim_badging == "74d")
                 {
                     WriteCarSettings("0.148", "Y LR AWD");
+                    return;
+                }
+                else if (car.trim_badging == "p74d")
+                {
+                    WriteCarSettings("0.148", "Y P");
                     return;
                 }
             }
