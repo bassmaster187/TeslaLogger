@@ -798,6 +798,11 @@ namespace TeslaLogger
                             WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
+                        else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142)
+                        {
+                            WriteCarSettings("0.139", "M3 LR FL");
+                            return;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -2201,13 +2206,43 @@ namespace TeslaLogger
                     _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     if (TeslaAPI_Commands.ContainsKey(cmd))
                     {
-                        TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
-                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, drive_state);
+                        TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
                     }
                     else
                     {
                         TeslaAPI_Commands.TryAdd(cmd, resultContent);
                     }
+                    return resultContent;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionWriter(ex, resultContent);
+            }
+
+            return "NULL";
+        }
+
+        public async Task<string> GetNearbyChargingSites()
+        {
+            string resultContent = "";
+            try
+            {
+                using (HttpClient client = new HttpClient
+                {
+                    Timeout = TimeSpan.FromSeconds(11)
+                })
+                {
+                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                    string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/nearby_charging_sites";
+
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await client.GetAsync(new Uri(adresse)).ConfigureAwait(false);
+                    resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    DBHelper.AddMothershipDataToDB("GetCommand(nearby_charging_sites)", start, (int)result.StatusCode);
                     return resultContent;
                 }
             }

@@ -79,6 +79,8 @@ namespace TeslaLogger
                 shareDataOnStartup = Tools.IsShareData();
                 bool updateAllDrivestateData = false;
 
+                // start schema update
+
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
@@ -335,7 +337,9 @@ namespace TeslaLogger
                 }
 
                 if (updateAllDrivestateData)
+                {
                     DBHelper.UpdateAllDrivestateData();
+                }
 
                 if (!DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
                 {
@@ -373,7 +377,38 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.TableExists("superchargers"))
+                {
+                    string sql = @"
+CREATE TABLE superchargers(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(250) NOT NULL,
+    lat DOUBLE NOT NULL,
+    lng DOUBLE NOT NULL,
+    PRIMARY KEY(id)
+)";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
 
+                if (!DBHelper.TableExists("superchargerstate"))
+                {
+                    string sql = @"
+CREATE TABLE superchargerstate(
+    id INT NOT NULL AUTO_INCREMENT,
+    nameid INT NOT NULL,
+    ts datetime NOT NULL,
+    available_stalls TINYINT NOT NULL,
+    total_stalls TINYINT NOT NULL,
+    PRIMARY KEY(id)
+)";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+
+                // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                 {
