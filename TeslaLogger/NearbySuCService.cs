@@ -49,6 +49,9 @@ namespace TeslaLogger
             // nearby_charging_sites
             foreach (Car car in Car.allcars)
             {
+                if (car.IsInService())
+                    continue;
+
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
                     || car.GetCurrentState() == Car.TeslaState.Online)
