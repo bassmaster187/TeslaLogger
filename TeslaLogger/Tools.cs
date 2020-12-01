@@ -690,8 +690,6 @@ namespace TeslaLogger
                 {
                     if (Tools.IsDocker())
                     {
-                        Logfile.Log("GrafanaVersion: IsDocker");
-
                         string temp = null;
                         using (WebClient wc = new WebClient())
                         {

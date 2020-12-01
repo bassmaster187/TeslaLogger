@@ -798,6 +798,11 @@ namespace TeslaLogger
                             WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
+                        else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142)
+                        {
+                            WriteCarSettings("0.139", "M3 LR FL");
+                            return;
+                        }
                     }
                     catch (Exception ex)
                     {
