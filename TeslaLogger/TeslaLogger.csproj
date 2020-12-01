@@ -91,6 +91,7 @@
     <Compile Include="TeslaAPIState.cs" />
     <Compile Include="TLStats.cs" />
     <Compile Include="OpenTopoDataService.cs" />
+    <Compile Include="NearbySuCService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

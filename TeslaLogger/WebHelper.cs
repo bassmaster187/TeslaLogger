@@ -2224,6 +2224,36 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        public async Task<string> GetNearbyChargingSites()
+        {
+            string resultContent = "";
+            try
+            {
+                using (HttpClient client = new HttpClient
+                {
+                    Timeout = TimeSpan.FromSeconds(11)
+                })
+                {
+                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+
+                    string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/nearby_charging_sites";
+
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await client.GetAsync(new Uri(adresse)).ConfigureAwait(false);
+                    resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    DBHelper.AddMothershipDataToDB("GetCommand(nearby_charging_sites)", start, (int)result.StatusCode);
+                    return resultContent;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionWriter(ex, resultContent);
+            }
+
+            return "NULL";
+        }
+
         public async Task<string> PostCommand(string cmd, string data, bool _json = false)
         {
             Log("PostCommand: " + cmd + " - " + data);
