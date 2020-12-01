@@ -36,6 +36,12 @@ namespace TeslaLogger
         public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
+        internal static bool UseNearbySuCService()
+        {
+            // TODO
+            return true;
+        }
+
         private static string _OSVersion = string.Empty;
 
         public enum UpdateType { all, stable, none};
@@ -700,8 +706,6 @@ namespace TeslaLogger
                 {
                     if (Tools.IsDocker())
                     {
-                        Logfile.Log("GrafanaVersion: IsDocker");
-
                         string temp = null;
                         using (WebClient wc = new WebClient())
                         {
