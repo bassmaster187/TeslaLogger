@@ -127,7 +127,7 @@ namespace TeslaLogger
 
         private static int FSWCounter = 0;
 
-        private Geofence(bool RacingMode)
+        internal Geofence(bool RacingMode)
         {
             _RacingMode = RacingMode;
             Logfile.Log("Geofence initialized");

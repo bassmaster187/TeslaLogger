@@ -19,6 +19,11 @@ namespace TeslaLogger
             Logfile.Log("OpenTopoDataService initialized");
         }
 
+        public int GetQueueLength()
+        {
+            return queue.Count;
+        }
+
         public static OpenTopoDataService GetSingleton()
         {
             if (_OpenTopoDataService == null)
