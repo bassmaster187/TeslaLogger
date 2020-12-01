@@ -2206,8 +2206,8 @@ namespace TeslaLogger
                     _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     if (TeslaAPI_Commands.ContainsKey(cmd))
                     {
-                        TeslaAPI_Commands.TryGetValue("drive_state", out string drive_state);
-                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, drive_state);
+                        TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
                     }
                     else
                     {
