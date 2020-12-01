@@ -178,6 +178,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/OpenTopoDataQueue"):
+                        Admin_OpenTopoDataQueue(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
                         Admin_ReloadGeofence(request, response);
                         break;
@@ -244,6 +247,21 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void Admin_OpenTopoDataQueue(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Logfile.Log($"Admin: OpenTopoDataQueue ...");
+            if (Tools.UseOpenTopoData())
+            {
+                double queue = OpenTopoDataService.GetSingleton().GetQueueLength();
+                // 100 pos every 2 Minutes
+                WriteString(response, $"OpenTopoData Queue contains {queue} positions. It will take approx {Math.Ceiling(queue / 100) * 2} minutes to process.");
+            }
+            else
+            {
+                WriteString(response, "OpenTopoData is disabled");
             }
         }
 
