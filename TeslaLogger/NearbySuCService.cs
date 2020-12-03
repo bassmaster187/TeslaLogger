@@ -124,20 +124,30 @@ namespace TeslaLogger
                     && site_closed == false)
                 {
                     Tools.DebugLog($"SuC: <{suc["name"]}> <{suc["available_stalls"]}> <{suc["total_stalls"]}>");
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con.Open();
-                        // find internal ID of supercharger by name
-                        using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
+                    if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls)
+                        && int.TryParse(suc["total_stalls"].ToString(), out int total_stalls)) {
+                        if (total_stalls > 0)
                         {
-                            cmd.Parameters.AddWithValue("@nameid", sucID);
-                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@available_stalls", int.Parse(suc["available_stalls"].ToString()));
-                            cmd.Parameters.AddWithValue("@total_stalls", int.Parse(suc["total_stalls"].ToString()));
-                            Tools.DebugLog(cmd);
-                            cmd.ExecuteNonQuery();
+                            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                            {
+                                con.Open();
+                                // find internal ID of supercharger by name
+                                using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
+                                {
+                                    cmd.Parameters.AddWithValue("@nameid", sucID);
+                                    cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                                    cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
+                                    cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
+                                    Tools.DebugLog(cmd);
+                                    cmd.ExecuteNonQuery();
+                                }
+                                con.Close();
+                            }
                         }
-                        con.Close();
+                        else
+                        {
+                            // TODO how do we handle total_stalls == 0 ?
+                        }
                     }
                 }
                 else if (suc.ContainsKey("site_closed")
