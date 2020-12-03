@@ -828,14 +828,18 @@ Allego DE-Essen Messeplatz, 51.431545, 7.000548, 15
 Allego DE-Garten von Ehren, 53.430268, 9.935228
 Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
 Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
+Allego DE-Hermsdorf McDonalds, 50.889717, 11.872576, 10
 Allego DE-Heppenheim, 49.643165, 8.624373
 Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
 Allego DE-Hilpoltstein, 49.161068, 11.260205, 5
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
+Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Münchberg, 50.202775, 11.7769, 7
 Allego DE-Münster ATU, 51.92794, 7.587932
+Allego DE-Neumarkt Authof, 49.312989, 11.475396, 5
 Allego DE-Regensburg, 48.995373, 12.151138, 15
+Allego DE-Schleiz, 50.549278, 11.789369
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 3
 Allego DE-Quirla, 50.865762, 11.772602
 
@@ -887,6 +891,7 @@ E.ON CZ-Jenišov, 50.218688, 12.806822
 E.ON DE-Ascheberg, 51.774488, 7.6394
 E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
+E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
 E.ON DK-Karlslunde West, 55.560857, 12.229259
@@ -905,6 +910,7 @@ EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
+EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
 EnBW DE-Hunsrück West, 49.963341, 7.765829
@@ -1402,6 +1408,7 @@ Innogy DE-Neuss Esso Tankstelle, 51.199058, 6.711012
 Innogy DE-Ruraue West, 50.929795, 6.337327
 Innogy DE-Spreyer, 49.303853, 8.448678
 Innogy DE-Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
+Innogy DE-Treuen, 50.549113, 12.286336
 
 Familia DE-Hamburg, 53.608366, 10.044162
 Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
@@ -1507,7 +1514,10 @@ Lidl FI-Vantaa, 60.261581, 24.87252
 
 REWE DE-Bremen, 53.136455, 8.739926
 
+ShellRecharge DE-Berg, 50.372, 11.787795
+
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
+TEAG DE-Schleiz Autohof, 50.551565, 11.789977
 
 AT Eugendorf Center, 47.860013,13.126857,20
 AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
@@ -1535,7 +1545,6 @@ DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
 DE Berlin Südkreuz, 52.475697, 13.364082
 DE Berlin VW Franklinstr., 52.519344, 13.326864
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
-
 DE Bitterfeld-Wolfen envia, 51.624576, 12.307812
 DE Bochum Ruhrpark, 51.494065, 7.28446
 DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
@@ -1559,7 +1568,6 @@ DE Hannover-Lahe, 52.419121, 9.832369, 20
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024, 20
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
-DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314
@@ -1569,7 +1577,6 @@ DE Leipzig Porsche Kundenzentrum, 51.407016, 12.296726, 30
 DE Malsfeld Autohof, 51.086861, 9.485483, 5
 DE Mölln Baumarkt Werkers Welt, 53.622883, 10.682333
 DE Mölln VW Riemer, 53.623707, 10.678989
-DE Neumarkt Authof, 49.312989, 11.475396, 5
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
@@ -1583,7 +1590,6 @@ DE Roth Autohaus, 49.245669, 11.119321
 DE Pforzen LEW Ladestation, 47.933544, 10.607971
 DE Schafstritt Nord, 52.257481, 9.306448
 DE Schönefeld Total, 52.370738, 13.526929
-DE Schleiz Autohof, 50.551565, 11.789977
 DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Wetzlar Leica, 50.553084, 8.533377
