@@ -1291,8 +1291,31 @@ Tesla Service Center NL-Rotterdam, 51.8648704, 4.4548565
 Tesla Service Center NL-Tilburg, 51.6060617, 4.9964002
 Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 
+Aldi DE-Bad Camberg, 50.296238, 8.254424
+Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
+Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Friedberg, 48.406611, 10.951264
+Aldi DE-Hünxe, 51.642562, 6.758384
+Aldi DE-Kaarst, 51.218956, 6.633498
+Aldi DE-Kelsterbach, 50.058617, 8.521086
+Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
+Aldi DE-Köln, 50.906526, 6.934391
+Aldi DE-Leonberg, 48.798462, 8.999601
+Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
+Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
+Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
+Aldi DE-Petersberg, 50.553999, 9.712663
+Aldi DE-Pforzheim, 48.902632, 8.663465
+Aldi DE-Rastatt, 48.85911, 8.238882, 20
+Aldi DE-Wetzendorf, 49.496251, 11.262201
+Alid DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
+
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Uelzen, 52.99585, 10.539363
+
+CEZ CZ-Jenišov, 50.222744, 12.805259
+CEZ CZ-Jaroměř, 50.342834, 15.904088
+CEZ CZ-Plzeň, 49.742046, 13.393453
 
 Clever DK-Bakkebølle, 54.948667, 11.988156
 
@@ -1309,6 +1332,10 @@ Comfortcharge DE-München, 48.174976, 11.553374
 Comfortcharge DE-Offenburg, 48.463588, 7.929831
 Comfortcharge DE-Springe, 52.217937, 9.567155
 
+da-emobil AT-Guntramsdorf, 48.033848,16.337711,20
+da-emobil AT-Pettau, 47.284483,11.164263,20
+da-emobil AT-St. Pölten, 48.177086,15.553222
+
 Drewag DE-Dresden Elbepark, 51.086258, 13.693972
 Drewag DE-Dresden Mohnstr., 51.077856,13.717185
 Drewag DE-Dresden Neustadt Bahnhof, 51.064753, 13.739622
@@ -1317,31 +1344,30 @@ Drewag DE-Dresden Pirnaischer Platz, 51.048762, 13.744022
 Drewag DE-Dresden Sarrasaniparkplatz, 51.057835, 13.745202
 Drewag DE-Dresden Schillergalerie, 51.051405, 13.804725
 
-E.ON-DE Ascheberg, 51.774488, 7.6394
-E.ON-DE Essen, 51.425112, 6.993249
-E.ON-DK Karlslunde West, 55.560857, 12.229259
-E.ON-DK Karlslunde Ost, 55.560657, 12.231491
-E.ON-DK Korsør, 55.347704, 11.120238
+E.ON CZ-Jenišov, 50.218688, 12.806822
+E.ON DE-Ascheberg, 51.774488, 7.6394
+E.ON DE-Essen, 51.425112, 6.993249
+E.ON DE-Neumünster Polizei, 54.07617, 9.96679
+E.ON DK-Karlslunde West, 55.560857, 12.229259
+E.ON DK-Karlslunde Ost, 55.560657, 12.231491
+E.ON DK-Korsør, 55.347704, 11.120238
 
-TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
+Familia DE-Hamburg, 53.608366, 10.044162
+Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
+Familia DE-Reihenfeld, 53.822247, 10.502483
+Familia DE-Tarp, 54.669585, 9.395309
+Familia DE-Quickborn, 53.743005, 9.940652
 
-Aldi DE-Bad Camberg, 50.296238, 8.254424
-Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
-Aldi DE-Böblingen, 48.685646, 8.993401
-Aldi DE-Friedberg, 48.406611, 10.951264
-Aldi DE-Kaarst, 51.218956, 6.633498
-Aldi DE-Kelsterbach, 50.058617, 8.521086
-Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
-Aldi DE-Köln, 50.906526, 6.934391
-Aldi DE-Leonberg, 48.798462, 8.999601
-Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
-Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
-Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
-Aldi DE-Petersberg, 50.553999, 9.712663
-Aldi DE-Pforzheim, 48.902632, 8.663465
-Aldi DE-Rastatt, 48.85911, 8.238882, 20
-Aldi DE-Wetzendorf, 49.496251, 11.262201
-Alid DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
+Fortum NO-Alta, 69.966743, 23.268569
+Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
+Fortum NO-Sortland, 68.704914, 15.414759
+
+Grønn Kontakt NO-Leknes, 68.14874, 13.612729
+Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
+
+Iberdrola ES-Huelva, 37.306245, -6.87322
+
+Innogy DE-Neuss Esso Tankstelle, 51.199058, 6.711012
 
 IKEA DE-Berlin-Spandau, 52.528313, 13.21686
 IKEA DE-Berlin-Tempelhof, 52.469887, 13.367944, 20
@@ -1446,31 +1472,9 @@ Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 Lidl FI-Vantaa, 60.261581, 24.87252
 
-Familia DE-Hamburg, 53.608366, 10.044162
-Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
-Familia DE-Reihenfeld, 53.822247, 10.502483
-Familia DE-Tarp, 54.669585, 9.395309
-Familia DE-Quickborn, 53.743005, 9.940652
-
 REWE DE-Bremen, 53.136455, 8.739926
 
-da-emobil AT-Guntramsdorf, 48.033848,16.337711,20
-da-emobil AT-Pettau, 47.284483,11.164263,20
-da-emobil AT-St. Pölten, 48.177086,15.553222
-
-Grønn Kontakt NO-Leknes, 68.14874, 13.612729
-Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
-
-Fortum NO-Alta, 69.966743, 23.268569
-Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
-Fortum NO-Sortland, 68.704914, 15.414759
-
-EON CZ-Jenišov, 50.218688, 12.806822
-CEZ CZ-Jenišov, 50.222744, 12.805259
-CEZ CZ-Jaroměř, 50.342834, 15.904088
-CEZ CZ-Plzeň, 49.742046, 13.393453
-
-Iberdrola ES-Huelva, 37.306245, -6.87322
+TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 
 AT Eugendorf Center, 47.860013,13.126857,20
 AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
@@ -1536,8 +1540,6 @@ DE Malsfeld Autohof, 51.086861, 9.485483, 5
 DE Mölln Baumarkt Werkers Welt, 53.622883, 10.682333
 DE Mölln VW Riemer, 53.623707, 10.678989
 DE Münster ATU, 51.92794, 7.587932
-DE Neumünster Polizei, 54.07617, 9.96679
-DE Neuss Esso Tankstelle, 51.199058, 6.711012
 DE Neumarkt Authof, 49.312989, 11.475396, 5
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
