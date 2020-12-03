@@ -809,6 +809,7 @@ Aldi DE-Kelsterbach, 50.058617, 8.521086
 Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
 Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Leonberg, 48.798462, 8.999601
+Aldi DE-Merchweiler, 49.349395, 7.050618
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
 Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
@@ -864,6 +865,7 @@ CEZ CZ-Třinec, 49.660275, 18.672079
 
 Clever DK-Bakkebølle, 54.948667, 11.988156
 Clever DK-Snoghøj, 55.5357, 9.718562
+Clever DK-Roskilde, 55.637276, 12.082219
 
 Comfortcharge DE-Bonn, 50.708151, 7.128949
 Comfortcharge DE-Bremen Fernmeldeturm, 53.095621, 8.791384
@@ -1450,6 +1452,7 @@ Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
+Kaufland DE-Erfurt, 50.955663, 11.069766
 Kaufland DE-Essen, 51.473618, 6.999701
 Kaufland DE-Essen-Borbeck, 51.473133, 6.952699
 Kaufland DE-Erding, 48.305332, 11.881886
@@ -1458,6 +1461,7 @@ Kaufland DE-Eppingen, 49.137519, 8.915462
 Kaufland DE-Fellbach, 48.813484, 9.266494
 Kaufland DE-Frankfurt, 50.132218, 8.749362
 Kaufland DE-Fredersdorf-Vogelsdorf, 52.497356, 13.744505
+Kaufland DE-Giengen an der Brenz, 48.621067, 10.250653
 Kaufland DE-Göppingen, 48.704563, 9.647031
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
@@ -1497,11 +1501,15 @@ Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
 Lidl AT-Ansfelden, 48.214815, 14.276056
+Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
 Lidl AT-Klagenfurt, 46.614056, 14.339549
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Hall in Tirol, 47.277601, 11.495474
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
 Lidl AT-Wien Quadenstr., 48.237596, 16.478042
+Lidl CH-Böckten, 47.462469, 7.838388
+Lidl CH-Dübendorf, 47.395056, 8.638741
+Lidl CH-Schlieren, 47.399469, 8.432234
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
