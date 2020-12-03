@@ -179,7 +179,8 @@ Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
-Supercharger DE-Wernberg-Köblitz, 49.532246, 12.134974, 10
+Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 7
+Supercharger-V3 DE-Wernberg-Köblitz, 49.532242,12.135071, 7
 Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
@@ -825,6 +826,7 @@ Allego DE-Eichenzell, 50.488462, 9.708748, 5
 Allego DE-Essen Hauptbahnhof, 51.452362, 7.013726, 20
 Allego DE-Essen Grugahalle, 51.431229, 6.999253, 15
 Allego DE-Essen Messeplatz, 51.431545, 7.000548, 15
+Allego DE-Feldkirchen, 48.141049, 11.73682, 15
 Allego DE-Garten von Ehren, 53.430268, 9.935228
 Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
 Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
@@ -839,8 +841,10 @@ Allego DE-Münchberg, 50.202775, 11.7769, 7
 Allego DE-Münster ATU, 51.92794, 7.587932
 Allego DE-Neumarkt Authof, 49.312989, 11.475396, 5
 Allego DE-Regensburg, 48.995373, 12.151138, 15
+Allego DE-Rostock, 54.111209, 12.16426
 Allego DE-Schleiz, 50.549278, 11.789369
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 3
+Allego DE-Trier Wasserweg, 49.76327, 6.65785
 Allego DE-Quirla, 50.865762, 11.772602
 
 ARAL DE-Bochum, 51.501513, 7.258011
@@ -859,6 +863,7 @@ CEZ CZ-Frýdek-Místek, 49.681595, 18.347128
 CEZ CZ-Třinec, 49.660275, 18.672079
 
 Clever DK-Bakkebølle, 54.948667, 11.988156
+Clever DK-Snoghøj, 55.5357, 9.718562
 
 Comfortcharge DE-Bonn, 50.708151, 7.128949
 Comfortcharge DE-Bremen Fernmeldeturm, 53.095621, 8.791384
@@ -894,6 +899,8 @@ E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
+E.ON DE-Soltau Raststätte Wietzenbruch West, 52.961271, 9.893783
+E.ON DE-Quickborn Ladepark HanseWerk, 53.745537, 9.942607
 E.ON DK-Karlslunde West, 55.560857, 12.229259
 E.ON DK-Karlslunde Ost, 55.560657, 12.231491
 E.ON DK-Korsør, 55.347704, 11.120238
@@ -901,6 +908,7 @@ E.ON DK-Korsør, 55.347704, 11.120238
 EnBW DE-Allgäuer Tor Ost,47.847519,10.282904,20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
 EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
+EnBW DE-Bobingen, 48.263993, 10.840595, 20
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Ebersberg, 48.096569, 11.961316
@@ -911,6 +919,7 @@ EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Hirschberg, 50.427867, 11.795703
+EnBW DE-Reinsfeld Hochwald Ost, 49.690638, 6.899393
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
 EnBW DE-Hunsrück West, 49.963341, 7.765829
@@ -934,6 +943,7 @@ EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
+EnBW DE-Porta Westfalica, 52.26012,8.90345
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Rutesheim, 48.811969, 8.922083
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
@@ -944,6 +954,7 @@ EnBW DE-Ulm, 48.456880, 10.029673, 15
 EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+EnBW DE-Urbach, 48.810151, 9.570358
 
 Fastned BE-Oostende luchthaven, 51.205610, 2.871165
 Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
@@ -1166,7 +1177,7 @@ Ionity DE-Spessart Nord, 49.898302, 9.394346
 Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
-Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 1
+Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 13
 Ionity DE-Wolfsburg Allerpark, 52.437710, 10.809069
 Ionity DE-Wolfsburg Detmeroder Markt, 52.392241, 10.753713
 Ionity DE-Wolfsburg Forum AutoVision, 52.424872, 10.745689
@@ -1406,6 +1417,7 @@ Innogy DE-Münsterland West, 51.945622, 7.547827
 Innogy DE-Münsterland OSt, 51.942185, 7.551096
 Innogy DE-Neuss Esso Tankstelle, 51.199058, 6.711012
 Innogy DE-Ruraue West, 50.929795, 6.337327
+Innogy DE-Soltau, 52.98422, 9.838614
 Innogy DE-Spreyer, 49.303853, 8.448678
 Innogy DE-Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
 Innogy DE-Treuen, 50.549113, 12.286336
@@ -1515,6 +1527,8 @@ Lidl FI-Vantaa, 60.261581, 24.87252
 REWE DE-Bremen, 53.136455, 8.739926
 
 ShellRecharge DE-Berg, 50.372, 11.787795
+
+Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
