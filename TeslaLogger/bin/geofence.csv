@@ -1058,6 +1058,7 @@ Ionity CH-Lully, 46.832458, 6.859379
 Ionity CH-Martigny, 46.127822, 7.059829
 Ionity CH-Neuenkirch, 47.113372, 8.232328
 Ionity CZ-Beroun (dir. Prague), 49.95581, 14.062759
+Ionity CZ-Lovosice, 50.511752, 14.052646
 Ionity CZ-Nupaky, 49.984404, 14.602629
 Ionity CZ-Pávov (dir. Brno), 49.453814, 15.591480
 Ionity CZ-Pávov (dir. Prague), 49.455104, 15.593272
@@ -1103,6 +1104,7 @@ Ionity DE-Goldbach Süd, 52.998531, 9.181213
 Ionity DE-Gruibingen Süd, 48.605321, 9.632807
 Ionity DE-Haidt Nord, 49.780852, 10.244797
 Ionity DE-Haidt Süd, 49.779352, 10.246493
+Ionity DE-Hamminkeln, 51.739103, 6.595180
 Ionity DE-Harz Ost, 51.926279, 10.143238
 Ionity DE-Harz West, 51.928028, 10.141730
 Ionity DE-Himmelkron, 50.055972, 11.609148
@@ -1159,6 +1161,8 @@ Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
 Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 1
+Ionity DE-Wolfsburg Allerpark, 52.437710, 10.809069
+Ionity DE-Wolfsburg Detmeroder Markt, 52.392241, 10.753713
 Ionity DE-Wolfsburg Forum AutoVision, 52.424872, 10.745689
 Ionity DE-Wunnenstein Ost, 49.045334, 9.266223
 Ionity DE-Wunnenstein West, 49.044276, 9.261639
@@ -1177,6 +1181,9 @@ Ionity ES-El Hidalgo, 38.824574, -3.396857
 Ionity ES-Imarcoain, 42.732379, -1.618726
 Ionity ES-Martin de Yeltes, 40.769662, -6.286721
 Ionity ES-Merida, 38.933955, -6.343053
+Ionity ES-Milagros, 41.593947, -3.698254
+Ionity ES-O Corgo Norte, 42.965803, -7.454554
+Ionity ES-O Corgo Sur, 42.964918, -7.457615
 Ionity ES-Trigueros Norte, 37.334097, -6.789422
 Ionity ES-Trigueros Sur, 37.331672, -6.802211
 Ionity ES-Palleja, 41.420526, 2.00216
@@ -1214,6 +1221,7 @@ Ionity FR-Haut Koenigsbourg, 48.231920, 7.402639
 Ionity FR-Jardin des arbres, 47.852405, 2.684731
 Ionity FR-Jura, 46.774589, 5.523009
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
+Ionity FR-Kergoët, 48.273976, -2.187471
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
 Ionity FR-La Garde, 44.870544, 3.253033
 Ionity FR-La Réserve, 47.974493, 3.197267
@@ -1292,6 +1300,7 @@ Ionity IT-Potenza, 40.63193, 15.81358
 Ionity IT-Rinovo Nord, 43.9592, 8.13416
 Ionity IT-Trento, 46.08704, 11.1111
 Ionity IT-Valdichiana Outlet Village, 43.22381, 11.80217
+Ionity IT-Versilia Est, 43.9292, 10.22384
 Ionity IT-Versilia Ovest, 43.92911, 10.22261
 Ionity IT-Via Ernesto Basile. Palermo, 38.09959, 13.34651
 Ionity LT-Aplinkkelis, 55.67309, 24.33591 
@@ -1309,6 +1318,7 @@ Ionity NL-Sandeligen West, 51.834832, 4.618082
 Ionity NL-Sevenum, 51.38008, 5.985541
 Ionity NL-Tolnegen Noord, 52.184387, 5.670553
 Ionity NO-Alvdal, 62.11837, 10.61407
+Ionity NO-Aspøya, 63.01096, 7.97538
 Ionity NO-Aurland, 60.89896, 7.2108
 Ionity NO-Bagn, 60.82244, 9.55347
 Ionity NO-Bergen, 60.48457, 5.37679
@@ -1329,6 +1339,8 @@ Ionity NO-Sira, 58.40599, 6.62316
 Ionity NO-Skei, 61.57475, 6.48347
 Ionity NO-Vik, 60.083312, 10.287055
 Ionity PL-Kaszewy Kóscielne (Kutno), 52.219064, 19.461939
+Ionity PT-Almodovar L, 37.536329, -8.182924
+Ionity PT-Almodovar O, 37.535858, -8.184742
 Ionity SE-Enköping, 59.65339, 17.08324
 Ionity SE-Gräna, 58.00147, 14.45086
 Ionity SE-Hudiksvall, 61.74251, 17.07861
