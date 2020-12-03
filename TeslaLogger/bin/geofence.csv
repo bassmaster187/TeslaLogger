@@ -820,8 +820,11 @@ Aldi DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
 Allego DE-Aichstetten, 47.88045, 10.0406, 7
 Allego DE-Bernau am Chiemsee, 47.813788,12.366477, 20
 Allego DE-Bühler Höhe, 50.912825, 7.910041
+Allego DE-Dresden ATU, 51.079151, 13.691018
 Allego DE-Eichenzell, 50.488462, 9.708748, 5
-Allego DE-Essen, 51.431545, 7.000548, 15
+Allego DE-Essen Hauptbahnhof, 51.452362, 7.013726, 20
+Allego DE-Essen Grugahalle, 51.431229, 6.999253, 15
+Allego DE-Essen Messeplatz, 51.431545, 7.000548, 15
 Allego DE-Garten von Ehren, 53.430268, 9.935228
 Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
 Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
@@ -839,9 +842,17 @@ Allego DE-Quirla, 50.865762, 11.772602
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Uelzen, 52.99585, 10.539363
 
+CEZ CZ-Děčín, 50.770023, 14.207249
 CEZ CZ-Jenišov, 50.222744, 12.805259
 CEZ CZ-Jaroměř, 50.342834, 15.904088
 CEZ CZ-Plzeň, 49.742046, 13.393453
+CEZ CZ-Praha Corso Karlín, 50.091751, 14.45122
+CEZ CZ-Praha Visionary, 0.107087, 14.442063
+CEZ CZ-Trmice, 50.646149, 13.986876
+CEZ CZ-Stráž nad Nisou, 50.783638, 15.023201
+CEZ CZ-Vrchlabí, 50.62006,15.599216
+CEZ CZ-Frýdek-Místek, 49.681595, 18.347128
+CEZ CZ-Třinec, 49.660275, 18.672079
 
 Clever DK-Bakkebølle, 54.948667, 11.988156
 
@@ -849,6 +860,7 @@ Comfortcharge DE-Bonn, 50.708151, 7.128949
 Comfortcharge DE-Bremen Fernmeldeturm, 53.095621, 8.791384
 Comfortcharge DE-Bremen Hohle Straße, 53.173716, 8.629969
 Comfortcharge DE-Cloppenburg, 52.844864, 8.047866
+Comfortcharge DE-Essen, 51.451473, 7.09393
 Comfortcharge DE-Hameln, 52.104262, 9.377806
 Comfortcharge DE-Hannover Am Immenkampe, 52.357492, 9.671864
 Comfortcharge DE-Hannover Dünenweg, 52.396052, 9.675816
@@ -856,6 +868,7 @@ Comfortcharge DE-Hannover Tillystr., 52.33748, 9.719157
 Comfortcharge DE-Nürnberg, 49.426495, 11.03906
 Comfortcharge DE-München, 48.174976, 11.553374
 Comfortcharge DE-Offenburg, 48.463588, 7.929831
+Comfortcharge DE-Riesa, 51.307878, 13.292329
 Comfortcharge DE-Springe, 52.217937, 9.567155
 
 da-emobil AT-Guntramsdorf, 48.033848,16.337711,20
@@ -872,6 +885,7 @@ Drewag DE-Dresden Schillergalerie, 51.051405, 13.804725
 
 E.ON CZ-Jenišov, 50.218688, 12.806822
 E.ON DE-Ascheberg, 51.774488, 7.6394
+E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
@@ -890,6 +904,7 @@ EnBW DE-Gelsenkirchen, 51.521451, 7.073921
 EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
+EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
 EnBW DE-Hunsrück West, 49.963341, 7.765829
@@ -1358,7 +1373,10 @@ Ionity UK-Perth, 56.419402, -3.463082
 Ionity UK-Peterborough, 52.532663, -0.32065
 Ionity UK-Polmadie, 55.837232, -4.242494
 
+Innogy CZ-Praha Limuzská, 50.079548, 14.509048
+Innogy CZ-Praha Dřevčická, 50.080402, 14.510758
 Innogy DE-Berlin Avus, 52.501775, 13.277211
+Innogy DE-Bielefeld Green Station Sieker, 52.005329, 8.559438
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
@@ -1401,6 +1419,8 @@ Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
+Kaufland DE-Essen, 51.473618, 6.999701
+Kaufland DE-Essen-Borbeck, 51.473133, 6.952699
 Kaufland DE-Erding, 48.305332, 11.881886
 Kaufland DE-Erlangen, 49.593323, 11.026181
 Kaufland DE-Eppingen, 49.137519, 8.915462
@@ -1489,7 +1509,8 @@ CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
-CZ Praha Limuzská, 50.079548, 14.509048
+CZ Praha Cinestar, 50.070897, 14.401644
+CZ Praha Siemens, 50.04811, 14.306508
 
 DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
@@ -1502,18 +1523,14 @@ DE Berlin Landesvertretung Niedersachsen, 52.512375, 13.377664
 DE Berlin Südkreuz, 52.475697, 13.364082
 DE Berlin VW Franklinstr., 52.519344, 13.326864
 DE Bertelsdorf Mediamarkt, 50.287221, 10.985319
-DE Bielefeld Green Station Sieker, 52.005329, 8.559438
+
 DE Bitterfeld-Wolfen envia, 51.624576, 12.307812
 DE Bochum Ruhrpark, 51.494065, 7.28446
 DE Bremen Konsul-Smidt-Straße, 53.089439, 8.778173
 DE Brunnthal Hofoldinger Fors, 47.997213, 11.675992, 5
 DE Burgdorf Burger King, 52.45928, 9.992822
 DE Chemnitz HEOS Solar-Carport, 50.802484, 12.852011
-DE Elmshorn Teppich Kibek, 53.741661, 9.707776
-DE Dresden ATU, 51.079151, 13.691018
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
-DE Essen Hauptbahnhof, 51.452362, 7.013726
-DE Essen Grugahalle, 51.431229, 6.999253, 15
 DE Frankenthal ATU, 49.545836, 8.352769
 DE Freising Audi Training Center, 48.356508, 11.770911
 DE Friedberg, 48.406472, 10.952051
@@ -1527,7 +1544,7 @@ DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hamburg Deichstr., 53.545081, 9.986616
 DE Hannover A2 Center, 52.42332, 9.835401
 DE Hannover-Lahe, 52.419121, 9.832369, 20
-DE Hannover Finca & Bar Celona, 52.414286, 9.642024
+DE Hannover Finca & Bar Celona, 52.414286, 9.642024, 20
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
 DE Hermsdorf-Ost McDonalds, 50.889717, 11.872576, 10
