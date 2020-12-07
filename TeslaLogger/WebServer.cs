@@ -193,6 +193,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana"):
                         updategrafana(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/admin/downloadlogs"):
+                        Admin_DownloadLogs(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/export/trip"):
                         ExportTrip(request, response);
                         break;
@@ -250,9 +253,81 @@ namespace TeslaLogger
             }
         }
 
+        private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Queue<string> result = new Queue<string>();
+            // TODO parse query string
+            DateTime startdt = DateTime.Now.AddHours(-48);
+            DateTime enddt = DateTime.Now.AddSeconds(1);
+            if (File.Exists(Path.Combine(Logfile.GetExecutingPath(), "nohup.out")))
+            {
+                System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
+                int linenumber = 0;
+                int startlinenumber = 0;
+                int endlinennumber = 0;
+                int TLstartlinenumber = 0;
+                string startdate = startdt.ToString(ciDeDE);
+                string enddate = enddt.ToString(ciDeDE);
+                Tools.DebugLog($"startdate {startdate}");
+                Tools.DebugLog($"enddate {enddate}");
+                // parse nohup.out
+                foreach (string line in File.ReadAllLines(Path.Combine(Logfile.GetExecutingPath(), "nohup.out")))
+                {
+                    if (startlinenumber == 0)
+                    {
+                        if (line.Contains(" : TeslaLogger Version: "))
+                        {
+                            TLstartlinenumber = linenumber;
+                        }
+                    }
+                    if (startlinenumber == 0 && line.Length > startdate.Length && DateTime.TryParse(line.Substring(0, startdate.Length), ciDeDE, System.Globalization.DateTimeStyles.AssumeLocal, out DateTime linedt) && linedt >= startdt) 
+                    {
+                        startlinenumber = linenumber;
+                    }
+                    if (endlinennumber == 0 && line.Length > startdate.Length && DateTime.TryParse(line.Substring(0, enddate.Length), ciDeDE, System.Globalization.DateTimeStyles.AssumeLocal, out linedt) && linedt >= enddt)
+                    {
+                        endlinennumber = linenumber;
+                    }
+                    linenumber++;
+                }
+                Tools.DebugLog($"linenumber {linenumber}");
+                if (endlinennumber == 0)
+                {
+                    endlinennumber = linenumber - 1;
+                }
+                Tools.DebugLog($"TLstartlinenumber {TLstartlinenumber}");
+                Tools.DebugLog($"startlinenumber {startlinenumber}");
+                Tools.DebugLog($"endlinennumber {endlinennumber}");
+                // grab line from nohup.out
+                linenumber = 0;
+                // do TLstartlinenumber + 17 and startlinenumber overlap?
+                if (startlinenumber - TLstartlinenumber < 17)
+                {
+                    startlinenumber += 17 - (TLstartlinenumber - startlinenumber);
+                }
+                foreach (string line in File.ReadAllLines(Path.Combine(Logfile.GetExecutingPath(), "nohup.out")))
+                {
+                    // TL start was before startlinenumber
+                    if (TLstartlinenumber < startlinenumber)
+                    {
+                        if (linenumber >= TLstartlinenumber && linenumber <= TLstartlinenumber + 17)
+                        {
+                            result.Enqueue(line);
+                        }
+                    }
+                    if (linenumber >= startlinenumber && linenumber <= endlinennumber)
+                    {
+                        result.Enqueue(line);
+                    }
+                    linenumber++;
+                }
+            }
+            WriteString(response, string.Join(Environment.NewLine, result));
+        }
+
         private void Admin_OpenTopoDataQueue(HttpListenerRequest request, HttpListenerResponse response)
         {
-            Logfile.Log($"Admin: OpenTopoDataQueue ...");
+            Logfile.Log("Admin: OpenTopoDataQueue ...");
             if (Tools.UseOpenTopoData())
             {
                 double queue = OpenTopoDataService.GetSingleton().GetQueueLength();
