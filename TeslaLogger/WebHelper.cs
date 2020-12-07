@@ -453,14 +453,8 @@ namespace TeslaLogger
 
                         if (result.StatusCode == HttpStatusCode.Unauthorized)
                         {
-                            Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-
-                            if (car.LoginRetryCounter < 2)
+                            if (LoginRetry(result))
                             {
-                                System.Threading.Thread.Sleep(60000);
-
-                                car.LoginRetryCounter++;
-                                Tesla_token = GetTokenAsync().Result;
                                 client.DefaultRequestHeaders.Remove("Authorization");
                                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
                                 DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
@@ -635,19 +629,8 @@ namespace TeslaLogger
 
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        Log("HttpStatusCode = Unauthorized. Password changed or still valid?");
-
-                        if (car.LoginRetryCounter < 2)
-                        {
-                            System.Threading.Thread.Sleep(60000);
-
-                            car.LoginRetryCounter++;
-                            Tesla_token = GetTokenAsync().Result;
-                            client.DefaultRequestHeaders.Remove("Authorization");
-                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-
+                        if (LoginRetry(result))
                             return "NULL";
-                        }
                     }
 
                     resultContent = await result.Content.ReadAsStringAsync();
@@ -741,6 +724,9 @@ namespace TeslaLogger
                         if (ts.TotalMinutes > 60)
                         {
                             string resultContent2 = GetCommand("vehicle_config").Result;
+
+                            if (resultContent2 == "INSERVICE")
+                                return "INSERVICE";
 
                             dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
                             dynamic jBadgeResult = jBadge["response"];
@@ -2201,19 +2187,42 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.UtcNow;
                     HttpResponseMessage result = await client.GetAsync(adresse);
-                    resultContent = await result.Content.ReadAsStringAsync();
-                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
-                    _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
-                    if (TeslaAPI_Commands.ContainsKey(cmd))
+
+                    if (result.IsSuccessStatusCode)
                     {
-                        TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
-                        TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+
+                        resultContent = await result.Content.ReadAsStringAsync();
+                        DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
+                        if (TeslaAPI_Commands.ContainsKey(cmd))
+                        {
+                            TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                            TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+                        }
+                        else
+                        {
+                            TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                        }
+
+
+                        return resultContent;
+                    }
+                    else if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        LoginRetry(result);
+                    }
+                    else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
+                    {
+                        if (car.IsInService())
+                            return "INSERVICE";
+                        else
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " cmd: " + cmd);
+
                     }
                     else
                     {
-                        TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " cmd: " + cmd);
                     }
-                    return resultContent;
                 }
             }
             catch (Exception ex)
@@ -2222,6 +2231,28 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        public bool LoginRetry(HttpResponseMessage result)
+        {
+            if (result?.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                Log("HttpStatusCode = Unauthorized. Password changed or still valid? " + car.LoginRetryCounter);
+
+                if (car.LoginRetryCounter < 2)
+                {
+                    System.Threading.Thread.Sleep(60000);
+
+                    car.LoginRetryCounter++;
+                    Tesla_token = GetTokenAsync().Result;
+                    return true;
+                }
+                else
+                {
+                    car.ExitTeslaLogger("Login retrys exeeded!");
+                }
+            }
+            return false;
         }
 
         public async Task<string> GetNearbyChargingSites()
