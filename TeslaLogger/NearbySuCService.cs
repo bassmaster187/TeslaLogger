@@ -34,7 +34,7 @@ namespace TeslaLogger
                 {
                     Work();
                     // sleep 10 Minutes
-                    Thread.Sleep(600000);
+                    Thread.Sleep(300000);
                 }
             }
             catch (Exception ex)

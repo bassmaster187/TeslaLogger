@@ -733,6 +733,12 @@ namespace TeslaLogger
                     }
                 }
             }
+            else if (res == "INSERVICE")
+            {
+                SetCurrentState(TeslaState.Start);
+                Log("IS IN SERVICE");
+                Thread.Sleep(1000 * 60 * 30);
+            }
             else
             {
                 currentJSON.current_sleeping = false;
