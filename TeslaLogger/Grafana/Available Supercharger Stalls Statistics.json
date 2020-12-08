@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 33,
-  "iteration": 1607444999260,
+  "iteration": 1607444999266,
   "links": [],
   "panels": [
     {
@@ -115,8 +115,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "Weimar, Germany",
-          "value": "1"
+          "text": "Ulm, Germany",
+          "value": "25"
         },
         "datasource": "teslalogger",
         "definition": "Select name as __text, id as __value from superchargers",
@@ -130,7 +130,7 @@
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 3,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -143,12 +143,10 @@
           "selected": true,
           "tags": [],
           "text": [
-            "Sunday",
-            "Saturday"
+            "All"
           ],
           "value": [
-            "1",
-            "7"
+            "$__all"
           ]
         },
         "datasource": "teslalogger",
@@ -174,8 +172,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "MIN",
-          "value": "MIN"
+          "text": "AVG",
+          "value": "AVG"
         },
         "hide": 0,
         "includeAll": false,
@@ -184,12 +182,12 @@
         "name": "Mode",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "AVG",
             "value": "AVG"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "MIN",
             "value": "MIN"
           }
@@ -209,5 +207,5 @@
   "timezone": "",
   "title": "Available Supercharger Stalls Statistics",
   "uid": "NjcHFGJGz",
-  "version": 1
+  "version": 3
 }
