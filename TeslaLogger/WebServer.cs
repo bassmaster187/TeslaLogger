@@ -261,7 +261,7 @@ namespace TeslaLogger
             DateTime startdt = DateTime.Now.AddHours(-48);
             DateTime enddt = DateTime.Now.AddSeconds(1);
             // parse query string
-            if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
+            if (request.QueryString.Count > 0 && request.QueryString.HasKeys())
             {
                 foreach (string key in request.QueryString.AllKeys)
                 {
@@ -270,12 +270,14 @@ namespace TeslaLogger
                         switch (key)
                         {
                             case "from":
+                                Tools.DebugLog($"from {request.QueryString.GetValues(key)[0]}");
                                 if (!DateTime.TryParse(request.QueryString.GetValues(key)[0], out startdt))
                                 {
                                     startdt = DateTime.Now.AddHours(-48);
                                 }
                                 break;
                             case "to":
+                                Tools.DebugLog($"to {request.QueryString.GetValues(key)[0]}");
                                 if (!DateTime.TryParse(request.QueryString.GetValues(key)[0], out enddt))
                                 {
                                     enddt = DateTime.Now.AddSeconds(1);
