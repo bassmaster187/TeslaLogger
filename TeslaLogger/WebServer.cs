@@ -16,11 +16,12 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
-    public class WebServer
+    public class WebServer : IDisposable
     {
         private HttpListener listener = null;
+        private bool isDisposed;
 
-        private List<string> AllowedTeslaAPICommands = new List<string>()
+        private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
             "auto_conditioning_start",
             "auto_conditioning_stop",
@@ -256,9 +257,34 @@ namespace TeslaLogger
         private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
         {
             Queue<string> result = new Queue<string>();
-            // TODO parse query string
+            // set defaults
             DateTime startdt = DateTime.Now.AddHours(-48);
             DateTime enddt = DateTime.Now.AddSeconds(1);
+            // parse query string
+            if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "from":
+                                if (!DateTime.TryParse(request.QueryString.GetValues(key)[0], out startdt))
+                                {
+                                    startdt = DateTime.Now.AddHours(-48);
+                                }
+                                break;
+                            case "to":
+                                if (!DateTime.TryParse(request.QueryString.GetValues(key)[0], out enddt))
+                                {
+                                    enddt = DateTime.Now.AddSeconds(1);
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
             if (File.Exists(Path.Combine(Logfile.GetExecutingPath(), "nohup.out")))
             {
                 System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
@@ -280,7 +306,7 @@ namespace TeslaLogger
                             TLstartlinenumber = linenumber;
                         }
                     }
-                    if (startlinenumber == 0 && line.Length > startdate.Length && DateTime.TryParse(line.Substring(0, startdate.Length), ciDeDE, System.Globalization.DateTimeStyles.AssumeLocal, out DateTime linedt) && linedt >= startdt) 
+                    if (startlinenumber == 0 && line.Length > startdate.Length && DateTime.TryParse(line.Substring(0, startdate.Length), ciDeDE, System.Globalization.DateTimeStyles.AssumeLocal, out DateTime linedt) && linedt >= startdt)
                     {
                         startlinenumber = linenumber;
                     }
@@ -393,9 +419,9 @@ namespace TeslaLogger
                             MySqlDataReader dr = cmd.ExecuteReader();
                             while (dr.Read())
                             {
-                               if (double.TryParse(dr[0].ToString(), out double lat)
-                                    && double.TryParse(dr[1].ToString(), out double lng)
-                                    && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
+                                if (double.TryParse(dr[0].ToString(), out double lat)
+                                     && double.TryParse(dr[1].ToString(), out double lng)
+                                     && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
                                 {
                                     string Pos = ($"lat=\"{lat}\" lon=\"{lng}\"");
                                     if (!Pos.Equals(PosLast))
@@ -414,7 +440,8 @@ namespace TeslaLogger
                                             name = $"<name>{SecurityElement.Escape(dr[4].ToString())}</name>";
                                         }
                                         // create new Track element if day has changed since last element. New track node gets the name of the day (allows filtering for days later on)
-                                        if (!DateLast.Equals(Date.Substring(0, 10))) {
+                                        if (!DateLast.Equals(Date.Substring(0, 10)))
+                                        {
                                             if (!DateLast.Equals("n/a"))
                                             {
                                                 GPX.Append("</trkseg></trk>" + Environment.NewLine);
@@ -424,8 +451,8 @@ namespace TeslaLogger
                                         }
                                         GPX.Append($"    <trkpt {Pos}>{alt}<time>{Date}</time>{name}</trkpt>" + Environment.NewLine);
                                         PosLast = Pos;
-                                     }
-                                } 
+                                    }
+                                }
                             }
                         }
                     }
@@ -629,7 +656,7 @@ namespace TeslaLogger
                 }
 
                 dynamic r = new JavaScriptSerializer().DeserializeObject(data);
-                
+
                 int id = Convert.ToInt32(r["id"]);
 
                 if (Tools.IsPropertyExist(r, "deletecar"))
@@ -681,7 +708,7 @@ namespace TeslaLogger
 
                                 Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.car_type, c.car_special_type, c.display_name, c.vin, c.TaskerHash, c.Wh_TR);
                             }
-                            
+
                             WriteString(response, "OK");
                         }
                     }
@@ -1126,6 +1153,26 @@ namespace TeslaLogger
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (isDisposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                listener.Close();
+            }
+            isDisposed = true;
         }
     }
 }
