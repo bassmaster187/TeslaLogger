@@ -2219,9 +2219,14 @@ namespace TeslaLogger
                             Log("Result.Statuscode: " + (int)result.StatusCode + " ("+ result.StatusCode.ToString() +") cmd: " + cmd);
 
                     }
+                    else if (result.StatusCode == HttpStatusCode.RequestTimeout)
+                    {
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+                        Thread.Sleep(30000);
+                    }
                     else
                     {
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " cmd: " + cmd);
+                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     }
                 }
             }
