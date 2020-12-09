@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
@@ -46,6 +49,9 @@ namespace TeslaLogger
         private void Work()
         {
             Tools.DebugLog("NearbySuCService: Work");
+
+            ArrayList send = new ArrayList();
+
             // nearby_charging_sites
             foreach (Car car in Car.allcars)
             {
@@ -83,10 +89,11 @@ namespace TeslaLogger
         "site_closed": false
       }
                                  */
+
                                 Dictionary<string, object> suc = (Dictionary<string, object>)supercharger;
                                 try
                                 {
-                                    AddSuperchargerState(suc);
+                                    AddSuperchargerState(suc, send);
                                 }
                                 catch (Exception ex)
                                 {
@@ -94,6 +101,9 @@ namespace TeslaLogger
                                 }
                             }
                         }
+
+                        ShareSuc(send);
+
                         Thread.Sleep(30000);
                     }
                     catch (Exception ex)
@@ -105,7 +115,33 @@ namespace TeslaLogger
             }
         }
 
-        private void AddSuperchargerState(Dictionary<string, object> suc)
+        private void ShareSuc(ArrayList send)
+        {
+            try
+            {
+                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(send);
+
+                using (HttpClient client = new HttpClient())
+                {
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                    using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+                    {
+                        DateTime start = DateTime.UtcNow;
+                        HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_supercharger.php", content).Result;
+                        string r = result.Content.ReadAsStringAsync().Result;
+                        DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode);
+
+                        Tools.DebugLog("ShareSuc: " + r);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog("ShareSuc: " + ex.Message);
+            }
+        }
+
+        private void AddSuperchargerState(Dictionary<string, object> suc, ArrayList send)
         {
             int sucID = int.MinValue;
             bool SuCfound = GetSuperchargerByName(suc["name"].ToString(), out sucID);
@@ -115,19 +151,28 @@ namespace TeslaLogger
                 Dictionary<string, object> location = (Dictionary<string, object>)suc["location"];
                 sucID = AddNewSupercharger(suc["name"].ToString(), double.Parse(location["lat"].ToString()), double.Parse(location["long"].ToString()));
             }
-            else
+            
+            if (suc.ContainsKey("available_stalls")
+                && suc.ContainsKey("total_stalls")
+                && suc.ContainsKey("site_closed")
+                && bool.TryParse(suc["site_closed"].ToString(), out bool site_closed)
+                && site_closed == false)
             {
-                if (suc.ContainsKey("available_stalls")
-                    && suc.ContainsKey("total_stalls")
-                    && suc.ContainsKey("site_closed")
-                    && bool.TryParse(suc["site_closed"].ToString(), out bool site_closed)
-                    && site_closed == false)
-                {
-                    Tools.DebugLog($"SuC: <{suc["name"]}> <{suc["available_stalls"]}> <{suc["total_stalls"]}>");
-                    if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls)
-                        && int.TryParse(suc["total_stalls"].ToString(), out int total_stalls)) {
-                        if (total_stalls > 0)
+
+                Tools.DebugLog($"SuC: <{suc["name"]}> <{suc["available_stalls"]}> <{suc["total_stalls"]}>");
+                if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls)
+                    && int.TryParse(suc["total_stalls"].ToString(), out int total_stalls)) {
+                    if (total_stalls > 0)
+                    {
+                        if (!ContainsSupercharger(send, suc["name"].ToString()))
                         {
+                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                            send.Add(sendKV);
+                            sendKV.Add("n", suc["name"]);
+                            sendKV.Add("ts", DateTime.UtcNow.ToString("s"));
+                            sendKV.Add("a", available_stalls);
+                            sendKV.Add("t", total_stalls);
+
                             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                             {
                                 con.Open();
@@ -144,45 +189,59 @@ namespace TeslaLogger
                                 con.Close();
                             }
                         }
-                        else
-                        {
-                            // TODO how do we handle total_stalls == 0 ?
-                        }
                     }
-                }
-                else if (suc.ContainsKey("site_closed")
-                    && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
-                    && site_closed)
-                {
-                    Tools.DebugLog($"SuC: <{suc["name"]}> site_closed");
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    else
                     {
-                        con.Open();
-                        // find internal ID of supercharger by name
-                        using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
-                        {
-                            cmd.Parameters.AddWithValue("@nameid", sucID);
-                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@available_stalls", -1);
-                            cmd.Parameters.AddWithValue("@total_stalls", -1);
-                            Tools.DebugLog(cmd);
-                            cmd.ExecuteNonQuery();
-                        }
-                        con.Close();
+                        // TODO how do we handle total_stalls == 0 ?
                     }
-                }
-                else if (suc.ContainsKey("site_closed")
-                    && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
-                    && !site_closed)
-                {
-                    Tools.DebugLog($"SuC: <{suc["name"]}> no info (fields available: available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")})");
-                    Tools.DebugLog(new Tools.JsonFormatter(new JavaScriptSerializer().Serialize(suc)).Format());
-                }
-                else
-                {
-                    Tools.DebugLog($"suc ContainsKey available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")} site_closed {suc.ContainsKey("site_closed")}");
                 }
             }
+            else if (suc.ContainsKey("site_closed")
+                && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
+                && site_closed)
+            {
+                Tools.DebugLog($"SuC: <{suc["name"]}> site_closed");
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    // find internal ID of supercharger by name
+                    using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
+                    {
+                        cmd.Parameters.AddWithValue("@nameid", sucID);
+                        cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@available_stalls", -1);
+                        cmd.Parameters.AddWithValue("@total_stalls", -1);
+                        Tools.DebugLog(cmd);
+                        cmd.ExecuteNonQuery();
+                    }
+                    con.Close();
+                }
+            }
+            else if (suc.ContainsKey("site_closed")
+                && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
+                && !site_closed)
+            {
+                Tools.DebugLog($"SuC: <{suc["name"]}> no info (fields available: available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")})");
+                Tools.DebugLog(new Tools.JsonFormatter(new JavaScriptSerializer().Serialize(suc)).Format());
+            }
+            else
+            {
+                Tools.DebugLog($"suc ContainsKey available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")} site_closed {suc.ContainsKey("site_closed")}");
+            }
+            
+        }
+
+        private bool ContainsSupercharger(ArrayList send, string name)
+        {
+            foreach (object a in send)
+            {
+                Dictionary<string, object> b = a as Dictionary<string, object>;
+
+                if (b?["n"].ToString() == name)
+                    return true;
+            }
+
+            return false;
         }
 
         private int AddNewSupercharger(string name, double lat, double lng)
