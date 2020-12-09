@@ -2216,7 +2216,7 @@ namespace TeslaLogger
                         if (car.IsInService())
                             return "INSERVICE";
                         else
-                            Log("Result.Statuscode: " + (int)result.StatusCode + " cmd: " + cmd);
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " ("+ result.StatusCode.ToString() +") cmd: " + cmd);
 
                     }
                     else

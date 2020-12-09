@@ -119,7 +119,7 @@ Supercharger DE-Ellwangen, 48.95587, 10.18247
 Supercharger DE-Emsbüren, 52.359338, 7.26476
 Supercharger DE-Erfstadt, 50.796478, 6.77994
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
-Supercharger DE-Geiselwind, 49.7691564, 10.470369
+Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176
 Supercharger DE-Gützkow, 53.943943, 13.396739
@@ -133,8 +133,9 @@ Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
 Supercharger-V3 DE-Hilden, 51.192013, 6.935892, 10 
 Supercharger-V3 DE-Hilden, 51.191944, 6.936024, 10
 Supercharger-V3 DE-Hilden, 51.191835,6.936129, 10
+Supercharger-V3 DE-Hilpoltstein, 49.161135, 11.2599, 12
 Supercharger DE-Hilpoltstein, 49.161171, 11.260012, 12
-Supercharger DE-Hilpoltstein, 49.161213, 11.260289, 10
+Supercharger DE-Hilpoltstein, 49.161213, 11.260278, 10
 Supercharger DE-Hilpoltstein, 49.161205, 11.260561, 18
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
@@ -180,7 +181,7 @@ Supercharger DE-Ulm, 48.456714, 10.030097, 18
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
 Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 7
-Supercharger-V3 DE-Wernberg-Köblitz, 49.532242,12.135071, 7
+Supercharger-V3 DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
 Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
@@ -588,7 +589,7 @@ Supercharger SE-Kungälv, 57.8581639, 11.9982719
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
 Supercharger SE-Markaryd, 56.444825, 13.603916
-Supercharger SE-Mellbystrand, 56.500904, 12.9573
+Supercharger SE-Mellbystrand, 56.501606,12.95763
 Supercharger SE-Mora, 61.005921, 14.54418
 Supercharger SE-Nørre Alslev, 54.899885, 11.89693
 Supercharger SE-Norrköping, 58.62191, 16.154806
@@ -899,6 +900,7 @@ E.ON DE-Ascheberg, 51.774488, 7.6394
 E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
+E.ON DE-Geiselwind, 49.769102, 10.470809, 5
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
 E.ON DE-Soltau Raststätte Wietzenbruch West, 52.961271, 9.893783
@@ -1179,7 +1181,7 @@ Ionity DE-Spessart Nord, 49.898302, 9.394346
 Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
-Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 13
+Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 3
 Ionity DE-Wolfsburg Allerpark, 52.437710, 10.809069
 Ionity DE-Wolfsburg Detmeroder Markt, 52.392241, 10.753713
 Ionity DE-Wolfsburg Forum AutoVision, 52.424872, 10.745689

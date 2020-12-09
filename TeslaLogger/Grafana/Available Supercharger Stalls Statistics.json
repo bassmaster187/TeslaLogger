@@ -1,0 +1,211 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 33,
+  "iteration": 1607444999266,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "teslalogger",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "green",
+                "value": 50
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT ts as time, concat(hour(ts),':00') as metric, $Mode(available_stalls) as value\nFROM superchargerstate join superchargers on superchargers.id = superchargerstate.nameid\nwhere nameid = $Supercharger and $__timeFilter(ts) and DAYOFWEEK(ts) in ($DOW)\ngroup by hour(ts)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Available Supercharger Stalls ",
+      "type": "bargauge"
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "Ulm, Germany",
+          "value": "25"
+        },
+        "datasource": "teslalogger",
+        "definition": "Select name as __text, id as __value from superchargers",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Supercharger",
+        "multi": false,
+        "name": "Supercharger",
+        "options": [],
+        "query": "Select name as __text, id as __value from superchargers",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "teslalogger",
+        "definition": "select 'Sunday' as __text, 1 as __value\nunion select 'Monday' as __text, 2 as __value\nunion select 'Tuesday' as __text, 3 as __value\nunion select 'Wednesday' as __text, 4 as __value\nunion select 'Thursday' as __text, 5 as __value\nunion select 'Friday' as __text, 6 as __value\nunion select 'Saturday' as __text, 7 as __value",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Day of week",
+        "multi": true,
+        "name": "DOW",
+        "options": [],
+        "query": "select 'Sunday' as __text, 1 as __value\nunion select 'Monday' as __text, 2 as __value\nunion select 'Tuesday' as __text, 3 as __value\nunion select 'Wednesday' as __text, 4 as __value\nunion select 'Thursday' as __text, 5 as __value\nunion select 'Friday' as __text, 6 as __value\nunion select 'Saturday' as __text, 7 as __value",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "AVG",
+          "value": "AVG"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mode",
+        "multi": false,
+        "name": "Mode",
+        "options": [
+          {
+            "selected": true,
+            "text": "AVG",
+            "value": "AVG"
+          },
+          {
+            "selected": false,
+            "text": "MIN",
+            "value": "MIN"
+          }
+        ],
+        "query": "AVG,MIN",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-2y",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Available Supercharger Stalls Statistics",
+  "uid": "NjcHFGJGz",
+  "version": 3
+}
