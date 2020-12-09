@@ -1742,7 +1742,7 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select max(id), lat, lng from pos where CarID=@CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand("select lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader dr = cmd.ExecuteReader();
@@ -1788,7 +1788,7 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT MAX(chargingstate.id), pos.lat, pos.lng FROM chargingstate, pos where chargingstate.CarID=@CarID AND chargingstate.pos = pos.id", con))
+                using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader dr = cmd.ExecuteReader();
