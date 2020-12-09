@@ -213,7 +213,7 @@ namespace TeslaLogger
                     catch (Exception ex)
                     {
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
-                        System.Threading.Thread.Sleep(10000);
+                        Thread.Sleep(10000);
                     }
                 }
             }
@@ -658,7 +658,63 @@ namespace TeslaLogger
 
                     if (doSleep)
                     {
-                        Thread.Sleep(5000);
+                        int sleepduration = 5000;
+                        // if charging is starting just now, decrease sleepduration to 0.5 second
+                        try
+                        {
+                            // get charging_state, must not be older than 2 minutes = 120 seconds = 120000 milliseconds
+                            if (GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 120000))
+                            {
+                                // charging_state == Starting?
+                                if (charging_state[TeslaAPIState.Key.Value] != null
+                                    && (charging_state[TeslaAPIState.Key.Value].ToString().Equals("Starting")
+                                        || charging_state[TeslaAPIState.Key.Value].ToString().Equals("NoPower"))
+                                    )
+                                {
+                                    Tools.DebugLog($"charging_state: {charging_state[TeslaAPIState.Key.Value]}");
+                                    // check if charging_state value is not older than 1 minute
+                                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                    if (long.TryParse(charging_state[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
+                                    {
+                                        Tools.DebugLog($"charging_state now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
+                                        if (now - valueLastUpdate < 60000)
+                                        {
+                                            // charging_state changed to Charging less than 1 minute ago
+                                            // reduce sleepduration to 0.5 second
+                                            sleepduration = 500;
+                                            Tools.DebugLog($"charging_state sleepduration: {sleepduration}");
+                                        }
+                                    }
+                                }
+                            }
+                            // get charge_port_door_open, must not be older than 2 minutes = 120 seconds = 1200000 milliseconds
+                            if (GetTeslaAPIState().GetState("charge_port_door_open", out Dictionary<TeslaAPIState.Key, object> charge_port_door_open, 120000))
+                            {
+                                // charge_port_door_open == true?
+                                if (GetTeslaAPIState().GetBool("charge_port_door_open", out bool bcharge_port_door_open) && bcharge_port_door_open)
+                                {
+                                    Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
+                                    long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                                    // check if charge_port_door_open value True is not older than 1 minute
+                                    if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
+                                    {
+                                        Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
+                                        if (now - valueLastUpdate < 60000)
+                                        {
+                                            // charge_port_door_open changed to Charging less than 1 minute ago
+                                            // reduce sleepduration to 0.5 second
+                                            sleepduration = 500;
+                                            Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.DebugLog("Exception sleepduration", ex);
+                        }
+                        Thread.Sleep(sleepduration);
                     }
                     else
                     {

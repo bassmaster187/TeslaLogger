@@ -662,13 +662,14 @@ WHERE
                 }
             }
 
+            int chargeID = GetMaxChargeid(out DateTime chargeEnd);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null and CarID=@CarID", con))
                 {
-                    cmd.Parameters.AddWithValue("@EndDate", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
+                    cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
+                    cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.ExecuteNonQuery();
                 }
@@ -953,25 +954,80 @@ WHERE
 
         public void StartChargingState(WebHelper wh)
         {
+            int chargeID = GetMaxChargeid(out DateTime chargeStart);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
-                    cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@StartDate", chargeStart);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
-                    cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid());
+                    cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
                     cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
                     cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                    Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
             }
 
             wh.car.currentJSON.current_charging = true;
             wh.car.currentJSON.CreateCurrentJSON();
+
+            #pragma warning disable CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
+            _ = Task.Factory.StartNew(() =>
+            {
+                // give TL some time to enter charge state
+                Thread.Sleep(30000);
+                // try to update chargingstate.pos
+                // are we still charging?
+                if (car.GetCurrentState() == Car.TeslaState.Charge)
+                {
+                    // now get a new entry in pos
+                    wh.IsDriving(true);
+                    // get lat, lng from max pos id
+                    int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                    if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
+                    {
+                        int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
+                        if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
+                        {
+                            double distance = Geofence.GetDistance(poslng, poslat, chglng, chglat);
+                            Tools.DebugLog($"StartChargingState Task distance: {distance}");
+                            if (distance > 10)
+                            {
+                                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                                {
+                                    con.Open();
+                                    using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
+                                    {
+                                        cmd.Parameters.AddWithValue("@latestPos", latestPos);
+                                        cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
+                                        Tools.DebugLog(cmd);
+                                        int updatedRows = cmd.ExecuteNonQuery();
+                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Tools.DebugLog($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
+                        }
+                    }
+                    else
+                    {
+                        Tools.DebugLog($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
+                    }
+                }
+                else
+                {
+                    Tools.DebugLog($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
+                }
+            });
+            #pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
         }
 
         public void CloseDriveState(DateTime EndDate)
@@ -1867,22 +1923,71 @@ WHERE
             return 0;
         }
 
-        private int GetMaxChargeid()
+        public int GetMaxPosidLatLng(out double lat, out double lng)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select max(id) from charging where CarID=@CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand("select lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
+                        double.TryParse(dr[1].ToString(), out lat);
+                        double.TryParse(dr[2].ToString(), out lng);
                         return Convert.ToInt32(dr[0]);
                     }
                 }
             }
+            lat = double.NaN;
+            lng = double.NaN;
+            return 0;
+        }
 
+        private int GetMaxChargeid(out DateTime chargeStart)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SELECT id, datum FROM charging WHERE CarID=@CarID ORDER BY datum DESC LIMIT 1", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                    {
+                        if (!DateTime.TryParse(dr[1].ToString(), out chargeStart))
+                        {
+                            chargeStart = DateTime.Now;
+                        }
+                        return Convert.ToInt32(dr[0]);
+                    }
+                }
+            }
+            chargeStart = DateTime.Now;
+            return 0;
+        }
+
+        private int GetMaxChargingstateId(out double lat, out double lng)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
+                    {
+                        double.TryParse(dr[1].ToString(), out lat);
+                        double.TryParse(dr[2].ToString(), out lng);
+                        return Convert.ToInt32(dr[0]);
+                    }
+                }
+            }
+            lat = double.NaN;
+            lng = double.NaN;
             return 0;
         }
 
