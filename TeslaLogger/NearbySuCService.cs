@@ -145,11 +145,15 @@ namespace TeslaLogger
         {
             int sucID = int.MinValue;
             bool SuCfound = GetSuperchargerByName(suc["name"].ToString(), out sucID);
+            Dictionary<string, object> location = (Dictionary<string, object>)suc["location"];
+            double lat = double.Parse(location["lat"].ToString());
+            double lng = double.Parse(location["long"].ToString());
+
             if (!SuCfound)
             {
                 // add new entry to supercharger list in DB
-                Dictionary<string, object> location = (Dictionary<string, object>)suc["location"];
-                sucID = AddNewSupercharger(suc["name"].ToString(), double.Parse(location["lat"].ToString()), double.Parse(location["long"].ToString()));
+                
+                sucID = AddNewSupercharger(suc["name"].ToString(), lat, lng);
             }
             
             if (suc.ContainsKey("available_stalls")
@@ -169,6 +173,8 @@ namespace TeslaLogger
                             Dictionary<string, object> sendKV = new Dictionary<string, object>();
                             send.Add(sendKV);
                             sendKV.Add("n", suc["name"]);
+                            sendKV.Add("lat", lat);
+                            sendKV.Add("lng", lng);
                             sendKV.Add("ts", DateTime.UtcNow.ToString("s"));
                             sendKV.Add("a", available_stalls);
                             sendKV.Add("t", total_stalls);
