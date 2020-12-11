@@ -864,7 +864,7 @@ CEZ CZ-Jenišov, 50.222744, 12.805259
 CEZ CZ-Jaroměř, 50.342834, 15.904088
 CEZ CZ-Plzeň, 49.742046, 13.393453
 CEZ CZ-Praha Corso Karlín, 50.091751, 14.45122
-CEZ CZ-Praha Visionary, 0.107087, 14.442063
+CEZ CZ-Praha Visionary, 50.107087, 14.442063
 CEZ CZ-Trmice, 50.646149, 13.986876
 CEZ CZ-Stráž nad Nisou, 50.783638, 15.023201
 CEZ CZ-Vrchlabí, 50.62006,15.599216
@@ -1522,15 +1522,21 @@ Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
 Kaufland RO-Craiova, 44.300888, 23.796626
 Kaufland RO-Deva, 45.873371, 22.919387
+Kaufland RO-Pitești, 44.842275, 24.87965
 Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
 Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
+Lidl AT-Gleisdorf, 47.111567, 15.708227
+Lidl AT-Gmunden, 47.929019, 13.788997
+Lidl AT-Graz, 47.099401, 15.417457
 Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-Linz, 48.25415, 14.282992
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Hall in Tirol, 47.277601, 11.495474
+Lidl AT-Wien Davidgasse, 48.173558, 16.366361
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
 Lidl AT-Wien Quadenstr., 48.237596, 16.478042
 Lidl CH-Böckten, 47.462469, 7.838388
