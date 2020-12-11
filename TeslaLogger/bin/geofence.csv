@@ -76,6 +76,7 @@ Supercharger CA-Laval QC, 45.570329, -73.747584
 Supercharger CA-Levis QC, 46.730448, -71.268418
 Supercharger CA-Sainte Eulalie QC, 46.058345, -72.313283
 Supercharger CA-Yamachiche QC, 46.262234, -72.876919
+Supercharger-V3 Affoltern, 47.271118, 8.439714, 20
 Supercharger CH-Beckenried, 46.971073, 8.459073
 Supercharger CH-Bussigny, 46.556699, 6.561557
 Supercharger CH-Dietikon, 47.418041, 8.396577
@@ -88,6 +89,7 @@ Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
 Supercharger CH-Melide, 45.95423, 8.95051
 Supercharger CH-Monte Ceneri, 46.13924, 8.9070614
+Supercharger-V3 CH-Obfelden, 47.271985, 8.437783, 20
 Supercharger CH-Oftringen, 47.310793,7.935012
 Supercharger CH-Pratteln, 47.524888, 7.680418
 Supercharger CH-Quinto, 46.51521, 8.67063
@@ -1539,8 +1541,10 @@ Lidl AT-Hall in Tirol, 47.277601, 11.495474
 Lidl AT-Wien Davidgasse, 48.173558, 16.366361
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
 Lidl AT-Wien Quadenstr., 48.237596, 16.478042
+Lidl CH-Allendorf, 47.193323, 8.818533
 Lidl CH-Böckten, 47.462469, 7.838388
 Lidl CH-Dübendorf, 47.395056, 8.638741
+Lidl CH-Einsideln, 47.138634, 8.745218
 Lidl CH-Schlieren, 47.399469, 8.432234
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
@@ -1582,8 +1586,8 @@ AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
-CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
-CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
+CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 7
+CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 6
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
