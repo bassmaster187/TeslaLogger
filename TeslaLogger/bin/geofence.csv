@@ -76,7 +76,9 @@ Supercharger CA-Laval QC, 45.570329, -73.747584
 Supercharger CA-Levis QC, 46.730448, -71.268418
 Supercharger CA-Sainte Eulalie QC, 46.058345, -72.313283
 Supercharger CA-Yamachiche QC, 46.262234, -72.876919
+Supercharger-V3 CH-Affoltern, 47.271118, 8.439714, 20
 Supercharger CH-Beckenried, 46.971073, 8.459073
+Supercharger-V3 CH-Bulle, 46.625016, 7.037488
 Supercharger CH-Bussigny, 46.556699, 6.561557
 Supercharger CH-Dietikon, 47.418041, 8.396577
 Supercharger CH-Dietlikon, 47.413095, 8.616785
@@ -88,6 +90,7 @@ Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
 Supercharger CH-Melide, 45.95423, 8.95051
 Supercharger CH-Monte Ceneri, 46.13924, 8.9070614
+Supercharger-V3 CH-Obfelden, 47.271985, 8.437783, 20
 Supercharger CH-Oftringen, 47.310793,7.935012
 Supercharger CH-Pratteln, 47.524888, 7.680418
 Supercharger CH-Quinto, 46.51521, 8.67063
@@ -118,6 +121,8 @@ Supercharger DE-Dettelbach, 49.7788313, 10.0686375
 Supercharger DE-Ellwangen, 48.95587, 10.18247
 Supercharger DE-Emsbüren, 52.359338, 7.26476
 Supercharger DE-Erfstadt, 50.796478, 6.77994
+Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
+Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger DE-Gensingen, 49.90202, 7.929759
@@ -164,7 +169,9 @@ Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger DE-Nossen, 51.08255, 13.27406
 Supercharger DE-Oberhonnefeld, 50.56254, 7.52542
+Supercharger-V3 DE-Oberhonnefeld, 50.562506, 7.525452
 Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
+Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
@@ -183,6 +190,7 @@ Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
 Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 7
 Supercharger-V3 DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
+Supercharger-V3 DE-Weibersbrunn, 49.9342848, 9.353982
 Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
@@ -467,17 +475,20 @@ Supercharger NL-Gouda, 52.022465, 4.684526
 Supercharger NL-Hoorn, 52.650769, 5.038917
 Supercharger NL-Horst, 51.470008, 6.056974
 Supercharger NL-Leiderdorp, 52.160766, 4.549019
+Supercharger-V3 NL-Leusden, 52.144022, 5.416976
 Supercharger-V3 NL-Middelburg, 51.480275, 3.636485
 Supercharger NL-Naarden, 52.30858, 5.141127
 Supercharger NL-Oosterhout, 51.626423, 4.869517
 Supercharger-V3 NL-Rijswijk, 52.048276, 4.349078
 Supercharger NL-s-Hertogenbosch, 51.7205, 5.3334
 Supercharger NL-Tilburg, 51.606331, 5.005621
+Supercharger-V3 NL-Uden, 51.671308, 5.60267
 Supercharger NL-Ugchelen, 52.177996, 5.912627
 Supercharger NL-Urmond, 50.9894104, 5.7815227
 Supercharger NL-Vuren, 51.838827, 5.090846
 Supercharger NL-Zaltbommel, 51.796330, 5.254697
 Supercharger NL-Zevenaar, 51.940585, 6.081817
+Supercharger-V3 NL-Zuidbroek, 53.169567, 6.852949
 Supercharger NL-Zwolle, 52.531928, 6.157031
 Supercharger NO-Aksdal, 59.423006, 5.44306
 Supercharger NO-Alvdal, 62.114854, 10.616826
@@ -811,6 +822,7 @@ Aldi DE-Kelsterbach, 50.058617, 8.521086
 Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
 Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Leonberg, 48.798462, 8.999601
+Aldi DE-Mainaschaff, 49.986603, 9.084044, 10
 Aldi DE-Merchweiler, 49.349395, 7.050618
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
@@ -858,7 +870,7 @@ CEZ CZ-Jenišov, 50.222744, 12.805259
 CEZ CZ-Jaroměř, 50.342834, 15.904088
 CEZ CZ-Plzeň, 49.742046, 13.393453
 CEZ CZ-Praha Corso Karlín, 50.091751, 14.45122
-CEZ CZ-Praha Visionary, 0.107087, 14.442063
+CEZ CZ-Praha Visionary, 50.107087, 14.442063
 CEZ CZ-Trmice, 50.646149, 13.986876
 CEZ CZ-Stráž nad Nisou, 50.783638, 15.023201
 CEZ CZ-Vrchlabí, 50.62006,15.599216
@@ -901,11 +913,17 @@ E.ON DE-Ascheberg, 51.774488, 7.6394
 E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
-E.ON DE-Geiselwind, 49.769102, 10.470809, 5
+E.ON DE-Geiselwind, 49.769102, 10.470809, 7
+E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
-E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
+E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
+E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
+E.ON DE-Siegburg Ost, 50.809464, 7.220046, 10
+E.ON DE-Siegburg West, 50.806709, 7.219551, 10
 E.ON DE-Soltau Raststätte Wietzenbruch West, 52.961271, 9.893783
+E.ON DE-Tornesch Aral Tankstelle, 53.717968, 9.759639, 15
 E.ON DE-Quickborn Ladepark HanseWerk, 53.745537, 9.942607
+E.ON DE-Weiskirchen, 50.056419, 8.908221, 5
 E.ON DK-Karlslunde West, 55.560857, 12.229259
 E.ON DK-Karlslunde Ost, 55.560657, 12.231491
 E.ON DK-Korsør, 55.347704, 11.120238
@@ -958,6 +976,8 @@ EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 10
 EnBW DE-Ulm, 48.456880, 10.029673, 15
 EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
+EnBW DE-Winningen Moseltal Ost, 50.316586, 7.4988, 10
+EnBW DE-Winningen Moseltal West, 50.317548, 7.4978, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
 EnBW DE-Urbach, 48.810151, 9.570358
@@ -1034,6 +1054,7 @@ IKEA DE-Berlin-Spandau, 52.528313, 13.21686
 IKEA DE-Berlin-Tempelhof, 52.469887, 13.367944, 20
 IKEA DE-Berlin-Waltersdorf, 52.367137, 13.557252
 IKEA DE-Dortmund, 51.491557, 7.371048
+IKEA DE-Erfurt, 50.95872, 10.948097
 IKEA DE-Frankfurt am Main, 50.196023, 8.654631
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
@@ -1173,7 +1194,7 @@ Ionity DE-Reinhardshain Nord, 50.622937, 8.894846
 Ionity DE-Reinhardshain Süd, 50.622096, 8.897196
 Ionity DE-Remscheid Ost, 51.158407, 7.230332
 Ionity DE-Riedener Wald Ost, 49.944184, 10.019955
-Ionity DE-Riedener Wald West, 49.944645, 10.016529
+Ionity DE-Riedener Wald West, 49.945693, 10.016739
 Ionity DE-Salzbergen, 52.326149, 7.430067
 Ionity DE-Samerberg Nord, 47.802835, 12.178503
 Ionity DE-Samerberg Süd, 47.801229, 12.177198
@@ -1442,6 +1463,7 @@ Grønn Kontakt NO-Leknes, 68.14874, 13.612729
 Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
 
 Kaufland CZ-Praha,50.092464, 14.499563
+Kaufland DE-Aachen, 50.769387, 6.058244
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Berlin Grünhofer Weg, 52.533887, 13.188849
 Kaufland DE-Berlin Gutschmidtstraße, 52.436452, 13.447838
@@ -1471,11 +1493,13 @@ Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
 Kaufland DE-Kaufbeuren, 47.884276, 10.636879
+Kaufland DE-Leipzig, 51.33711, 12.336445
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
 Kaufland DE-Leonberg, 48.797085, 9.006616
 Kaufland DE-Marbach am Neckar, 48.943393, 9.266666
-Kaufland DE-Mönchengladbach, 51.182896, 6.411377
+Kaufland DE-Meerane, 50.835734, 12.449844
 Kaufland DE-Mitweida, 50.99454, 12.96435
+Kaufland DE-Mönchengladbach, 51.182896, 6.411377
 Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
 Kaufland DE-Oberasbach, 49.435136, 10.967694
@@ -1484,35 +1508,47 @@ Kaufland DE-Pforzheim, 48.886253, 8.668658
 Kaufland DE-Pfungstadt, 49.813881, 8.619769
 Kaufland DE-Ravensburg, 47.767777, 9.604267
 Kaufland DE-Radebeul, 51.09958, 13.6543
+Kaufland DE-Sangerhausen, 51.470027, 11.294025
 Kaufland DE-Sankt Ingbert, 49.281439, 7.10554
 Kaufland DE-Schwaigern, 49.13824, 9.064656
 Kaufland DE-Schwetzingen, 49.38544, 8.577604
 Kaufland DE-Sindelfingen, 48.704964, 9.017844
 Kaufland DE-Steinheim an der Murr, 48.970356, 9.267212
 Kaufland DE-Stuttgart, 48.840477, 9.229187
+Kaufland DE-Troisdorf, 50.813239, 7.1557
 Kaufland DE-Tübingen, 48.514286, 9.066617
 Kaufland DE-Uhingen, 48.714102, 9.56216
+Kaufland DE-Velbert, 51.335796, 7.049863
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
 Kaufland DE-Weimar, 50.96384, 11.311157
 Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
+Kaufland DE-Witten, 51.439311, 7.329356
 Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
 Kaufland RO-Craiova, 44.300888, 23.796626
 Kaufland RO-Deva, 45.873371, 22.919387
+Kaufland RO-Pitești, 44.842275, 24.87965
 Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
 Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
+Lidl AT-Gleisdorf, 47.111567, 15.708227
+Lidl AT-Gmunden, 47.929019, 13.788997
+Lidl AT-Graz, 47.099401, 15.417457
 Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-Linz, 48.25415, 14.282992
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Hall in Tirol, 47.277601, 11.495474
+Lidl AT-Wien Davidgasse, 48.173558, 16.366361
 Lidl AT-Wien Laxenburgerstr., 48.163719, 16.36824
 Lidl AT-Wien Quadenstr., 48.237596, 16.478042
+Lidl CH-Allendorf, 47.193323, 8.818533
 Lidl CH-Böckten, 47.462469, 7.838388
 Lidl CH-Dübendorf, 47.395056, 8.638741
+Lidl CH-Einsideln, 47.138634, 8.745218
 Lidl CH-Schlieren, 47.399469, 8.432234
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
@@ -1528,10 +1564,12 @@ Lidl DE-Berlin Quickborner Straße, 52.603467, 13.367476
 Lidl DE-Berlin Vorarlberger Damm, 52.470054, 13.349763
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
+Lidl DE-Herne, 51.524427, 7.18621
 Lidl DE-Hoppegarten, 52.540585, 13.63869
 Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-Sassenberg, 51.981949, 8.036272
+Lidl DE-Limbach-Oberfrohna, 50.854838, 12.77829
 Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 Lidl FI-Vantaa, 60.261581, 24.87252
@@ -1552,8 +1590,8 @@ AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
-CH Raststätte A4 My Stop Nord, 47.271401, 8.439151, 20
-CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 20
+CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 7
+CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 6
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
