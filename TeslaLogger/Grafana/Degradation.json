@@ -29,6 +29,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1608024189606,
   "links": [
     {
       "icon": "external link",
@@ -50,6 +51,13 @@
       "dashes": false,
       "datasource": "teslalogger",
       "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -58,6 +66,7 @@
         "x": 0,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "avg": true,
@@ -73,24 +82,29 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.2.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:189",
           "alias": "km Stand [km]",
           "yaxis": 2
         },
         {
+          "$$hashKey": "object:190",
           "alias": "Max. Reichweite (Monatsmittel) [km]",
           "color": "#5794F2"
         },
         {
+          "$$hashKey": "object:191",
           "alias": "Maximalreichweite [km]",
-          "fill": 1
+          "fill": 1,
+          "fillGradient": 2
         }
       ],
       "spaceLength": 10,
@@ -104,7 +118,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1 and charging_End.battery_level >= 80 and chargingstate.CarID = $Car \r\norder by chargingstate.StartDate\r\n",
+          "rawSql": "SELECT        $__time(chargingstate.StartDate), \r\n              charging_End.ideal_battery_range_km / charging_End.battery_level* 100  as 'Maximalreichweite [km]',\r\n              pos.odometer as 'km Stand [km]'\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1 and charging_End.battery_level >= $SOC and chargingstate.CarID = $Car \r\norder by chargingstate.StartDate\r\n",
           "refId": "A",
           "select": [
             [
@@ -254,7 +268,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 19,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -283,11 +297,80 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "70",
+          "value": "70"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Min Charging SOC",
+        "multi": false,
+        "name": "SOC",
+        "options": [
+          {
+            "selected": false,
+            "text": "100",
+            "value": "100"
+          },
+          {
+            "selected": false,
+            "text": "90",
+            "value": "90"
+          },
+          {
+            "selected": false,
+            "text": "80",
+            "value": "80"
+          },
+          {
+            "selected": true,
+            "text": "70",
+            "value": "70"
+          },
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": false,
+            "text": "50",
+            "value": "50"
+          },
+          {
+            "selected": false,
+            "text": "40",
+            "value": "40"
+          },
+          {
+            "selected": false,
+            "text": "30",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "20",
+            "value": "20"
+          },
+          {
+            "selected": false,
+            "text": "10",
+            "value": "10"
+          }
+        ],
+        "query": "100,90,80,70,60,50,40,30,20,10",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-30M",
     "to": "now"
   },
   "timepicker": {
@@ -318,5 +401,5 @@
   "timezone": "",
   "title": "Degradation",
   "uid": "riqUfXgRz",
-  "version": 99
+  "version": 101
 }
