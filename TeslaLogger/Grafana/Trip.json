@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1598536031830,
+  "iteration": 1608067582905,
   "links": [
     {
       "icon": "external link",
@@ -24,13 +24,19 @@
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "http://raspberry/admin/"
+      "url": "http://teslalogger/admin/"
     }
   ],
   "panels": [
     {
       "columns": [],
       "datasource": "teslalogger",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fontSize": "100%",
       "gridPos": {
         "h": 22,
@@ -40,7 +46,6 @@
       },
       "id": 2,
       "links": [],
-      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -50,13 +55,17 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:2303",
           "alias": "Time",
+          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "date"
         },
         {
+          "$$hashKey": "object:2304",
           "alias": "Start",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -75,7 +84,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2305",
           "alias": "Ende",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -91,7 +102,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2306",
           "alias": "Ø Verbrauch kWh",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -107,7 +120,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2307",
           "alias": "km",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -123,7 +138,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2308",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -139,7 +156,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2309",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -155,7 +174,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2310",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -171,7 +192,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2311",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -187,7 +210,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2312",
           "alias": "Verbraucht kWh",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -207,7 +232,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2313",
           "alias": "Start Adresse",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -219,7 +246,7 @@
           "link": true,
           "linkTargetBlank": true,
           "linkTooltip": "Add Geofence ",
-          "linkUrl": "http://raspberry/admin/geoadd.php?lat=${__cell_0}&lng=${__cell_1}",
+          "linkUrl": "http://teslalogger/admin/geoadd.php?lat=${__cell_0}&lng=${__cell_1}",
           "mappingType": 1,
           "pattern": "Start_address",
           "thresholds": [],
@@ -227,7 +254,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2314",
           "alias": "Ziel Adresse",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -239,7 +268,7 @@
           "link": true,
           "linkTargetBlank": true,
           "linkTooltip": "Add Geofence",
-          "linkUrl": "http://raspberry/admin/geoadd.php?lat=${__cell_2}&lng=${__cell_3}",
+          "linkUrl": "http://teslalogger/admin/geoadd.php?lat=${__cell_2}&lng=${__cell_3}",
           "mappingType": 1,
           "pattern": "End_address",
           "thresholds": [],
@@ -247,7 +276,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2315",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -263,7 +294,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2316",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -279,7 +312,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2317",
           "alias": "Ø °C",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -299,7 +334,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2318",
           "alias": "max km/h",
+          "align": "auto",
           "colorMode": "value",
           "colors": [
             "#d8d9da",
@@ -318,7 +355,9 @@
           "unit": "locale"
         },
         {
-          "alias": "max PS",
+          "$$hashKey": "object:2319",
+          "alias": "max kW",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -338,7 +377,9 @@
           "unit": "locale"
         },
         {
-          "alias": "min PS",
+          "$$hashKey": "object:2320",
+          "alias": "min kW",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -354,7 +395,9 @@
           "unit": "locale"
         },
         {
-          "alias": "Ø PS",
+          "$$hashKey": "object:2321",
+          "alias": "Ø kW",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -370,7 +413,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2322",
           "alias": "Dauer Min",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -386,7 +431,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2323",
           "alias": "Ø km/h",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -402,7 +449,27 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:2804",
           "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2324",
+          "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -410,10 +477,48 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "decimals": 2,
-          "pattern": "/.*/",
+          "pattern": "StartPosID",
           "thresholds": [],
-          "type": "number",
+          "type": "hidden",
           "unit": "locale"
+        },
+        {
+          "$$hashKey": "object:2880",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "EndPosID",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2891",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": true,
+          "linkUrl": "http://teslalogger:5000/export/trip?from=${__cell_20}&to=${__cell_21}&carID=$Car",
+          "mappingType": 1,
+          "pattern": "GPX",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
         }
       ],
       "targets": [
@@ -423,7 +528,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, (CASE\n WHEN StartRange - EndRange > km_diff*1.2 THEN '⬇️'\n  WHEN StartRange - EndRange > km_diff*1.1 THEN '↘️'\n  WHEN StartRange - EndRange < km_diff*0.9 THEN '↗️'\n  WHEN StartRange - EndRange < km_diff*0.8 THEN '⬆️'\n ELSE '➡️'\n END) AS ↕️, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
+          "rawSql": "SELECT \n  lat, \n  lng, \n  EndLat, \n  EndLng, \n  UNIX_TIMESTAMP(StartDate)*1000 as StartDate, \n  UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \n  Start_address, \n  End_address, \n  avg_consumption_kWh_100km, \n  consumption_kWh, \n  DurationMinutes, \n  km_diff, StartRange - EndRange as RangeDiff,\n  (CASE \n    WHEN StartRange - EndRange > km_diff*1.2 THEN '⬇️'\n    WHEN StartRange - EndRange > km_diff*1.1 THEN '↘️'\n    WHEN StartRange - EndRange < km_diff*0.9 THEN '↗️'\n    WHEN StartRange - EndRange < km_diff*0.8 THEN '⬆️'\n    ELSE '➡️'\n  END) AS ↕️,  \n  outside_temp_avg, \n  speed_max,power_max/1.35962 as power_max,\n  power_min/1.35962 as power_min,\n  power_avg/1.35962 as power_avg, \n  (select km_diff / DurationMinutes * 60) as avg_kmh, \n  startposid, \n  endposid, \n  'GPX'\nFROM \n  trip \nWHERE \n  $__timeFilter(StartDate) \n  AND km_diff < 1000 \n  AND CarID = $Car \n  AND (Start_address like '%$Textfilter%' OR End_address like '%$Textfilter%')\nORDER BY \n  StartDate DESC\n",
           "refId": "A",
           "select": [
             [
@@ -447,10 +552,10 @@
       ],
       "title": "Trip",
       "transform": "table",
-      "type": "table"
+      "type": "table-old"
     }
   ],
-  "schemaVersion": 19,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -458,7 +563,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "",
+          "selected": false,
+          "text": "Tessi",
           "value": "1"
         },
         "datasource": "teslalogger",
@@ -534,5 +640,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 79
+  "version": 45
 }
