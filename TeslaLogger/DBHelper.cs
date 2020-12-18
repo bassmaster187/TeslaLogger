@@ -797,21 +797,22 @@ WHERE
                 Thread.Sleep(30000);
                 // try to update chargingstate.pos
                 // are we still charging?
+                car.Log($"StartChargingState Task start");
                 if (car.GetCurrentState() == Car.TeslaState.Charge)
                 {
                     // now get a new entry in pos
                     wh.IsDriving(true);
                     // get lat, lng from max pos id
                     int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
-                    Tools.DebugLog($"StartChargingState Task latestPos {latestPos}");
+                    car.Log($"StartChargingState Task latestPos {latestPos}");
                     if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
                         int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
                         if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
                         {
-                            Tools.DebugLog($"StartChargingState Task (poslng, poslat, chglng, chglat) ({poslng}, {poslat}, {chglng}, {chglat})");
+                            car.Log($"StartChargingState Task (poslng, poslat, chglng, chglat) ({poslng}, {poslat}, {chglng}, {chglat})");
                             double distance = Geofence.GetDistance(poslng, poslat, chglng, chglat);
-                            Tools.DebugLog($"StartChargingState Task distance: {distance}");
+                            car.Log($"StartChargingState Task distance: {distance}");
                             if (distance > 10)
                             {
                                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -830,17 +831,17 @@ WHERE
                         }
                         else
                         {
-                            Tools.DebugLog($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
+                            car.Log($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
                         }
                     }
                     else
                     {
-                        Tools.DebugLog($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
+                        car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
                 }
                 else
                 {
-                    Tools.DebugLog($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
+                    car.Log($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
                 }
             });
             #pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
