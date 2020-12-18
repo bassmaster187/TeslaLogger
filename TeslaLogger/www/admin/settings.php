@@ -2,6 +2,22 @@
 <?php
 require("language.php");
 require("tools.php");
+
+function CarsCombobox($cars, $selected)
+{
+	echo "\r\n<select id='defaultcar' style='width:100%'>";
+	foreach ($cars as $k => $v) {
+		$displayname = $v->{"display_name"};
+		$id = $v->{"id"};
+		$s = "";
+		if ($displayname == $selected)
+			$s = 'selected="selected"';
+
+		echo "\r\n   <option $s value='$id'>$displayname</option>";
+	}
+	echo "\r\n</select>\r\n";
+}
+
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -74,6 +90,7 @@ require("tools.php");
 			$URL_Admin = $j->{"URL_Admin"};
 			$URL_Grafana = $j->{"URL_Grafana"};
 			$ZoomLevel = $j->{"ZoomLevel"};
+			$defaultcar = $j->{"defaultcar"};
 			
 			$HTTPPort = 5000;
 			if (property_exists($j,"HTTPPort"))
@@ -174,6 +191,9 @@ require("tools.php");
 		ShareData: $('#checkboxSharedata').is(':checked'),
 		update: $("input:radio[name ='update']:checked").val(),
 		Range: $("input:radio[name ='Range']:checked").val(),
+		defaultcar: $("#defaultcar").find("option:selected").text(),
+		defaultcarid: $("#defaultcar").find("option:selected").val()
+
 		}).always(function() {
 		alert("Saved!");
 		location.reload();
@@ -217,8 +237,7 @@ echo(menu("Settings"));
 	
 <?php
 
-$url = GetTeslaloggerURL("getallcars");
-
+	$url = GetTeslaloggerURL("getallcars");
 	$allcars = @file_get_contents($url);
 	if ($allcars === false)
     {
@@ -232,6 +251,9 @@ $url = GetTeslaloggerURL("getallcars");
 	$jcars = json_decode($allcars);
 
 	//var_dump($jcars);
+?>
+<tr><td><b>Main Car:</b></td><td><?PHP CarsCombobox($jcars, $defaultcar); ?></td></tr>
+<?php
 	
 	foreach ($jcars as $k => $v) {
 		$displayname = $v->{"display_name"};
