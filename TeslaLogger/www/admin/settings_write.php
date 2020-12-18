@@ -23,6 +23,9 @@ $HTTPPort = $_POST["HTTPPort"];
 $ZoomLevel = $_POST["ZoomLevel"];
 $update = $_POST["update"];
 $Range = $_POST["Range"];
+$defaultcar = $_POST["defaultcar"];
+$defaultcarid = $_POST["defaultcarid"];
+
 
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
@@ -37,7 +40,9 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'ZoomLevel' =>$ZoomLevel,
 'ScanMyTesla' => $ScanMyTesla,
 'update' => $update,
-'Range' => $Range
+'Range' => $Range,
+'defaultcar' => $defaultcar,
+'defaultcarid' => $defaultcarid
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
