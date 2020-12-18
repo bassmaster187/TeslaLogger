@@ -33,6 +33,8 @@ namespace TeslaLogger
         private static string _URL_Admin = "";
         private static string _URL_Grafana = "http://raspberry:3000/";
         private static string _Range = "IR";
+        private static string _defaultcar = "";
+        private static string _defaultcarid = "";
         public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
 
@@ -581,7 +583,7 @@ namespace TeslaLogger
         }
 
 
-        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana)
+        internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid)
         {
             TimeSpan ts = DateTime.UtcNow - lastGrafanaSettings;
             if (ts.TotalMinutes < 10)
@@ -593,6 +595,8 @@ namespace TeslaLogger
                 URL_Admin =_URL_Admin;
                 Range = _Range;
                 URL_Grafana = _URL_Grafana;
+                defaultcar = _defaultcar;
+                defaultcarid = _defaultcarid;
                 return;
             }
 
@@ -603,6 +607,8 @@ namespace TeslaLogger
             URL_Admin = "";
             Range = "IR";
             URL_Grafana = "http://raspberry:3000/";
+            defaultcar = "";
+            defaultcarid = "";
 
             try
             {
@@ -661,6 +667,22 @@ namespace TeslaLogger
                     }
                 }
 
+                if (IsPropertyExist(j, "defaultcar"))
+                {
+                    if (j["defaultcar"].ToString().Length > 0)
+                    {
+                        defaultcar = j["defaultcar"];
+                    }
+                }
+
+                if (IsPropertyExist(j, "defaultcarid"))
+                {
+                    if (j["defaultcarid"].ToString().Length > 0)
+                    {
+                        defaultcarid = j["defaultcarid"];
+                    }
+                }
+
                 _power = power;
                 _temperature = temperature;
                 _length = length;
@@ -668,6 +690,8 @@ namespace TeslaLogger
                 _URL_Admin = URL_Admin;
                 _Range = Range;
                 _URL_Grafana = URL_Grafana;
+                _defaultcar = defaultcar;
+                _defaultcarid = defaultcarid;
 
                 lastGrafanaSettings = DateTime.UtcNow;
             }
