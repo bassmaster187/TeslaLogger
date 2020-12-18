@@ -233,5 +233,19 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("zm7wN6Zgz", uid);
             Assert.AreEqual("http://raspberry:3000/d/zm7wN6Zgz/Verbrauch", link);
         }
+
+        [TestMethod]
+        public void UpdateDefaultCar()
+        {
+            string dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauch.json");
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2");
+
+            Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
+
+            dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2");
+
+            Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
+        }
     }
 }

@@ -779,7 +779,7 @@ CREATE TABLE superchargerstate(
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
                 if (Range == "RR")
                 {
                     s = s.Replace("`pos_start`.`ideal_battery_range_km` AS `StartRange`,", "`pos_start`.`battery_range_km` AS `StartRange`,");
@@ -866,7 +866,7 @@ CREATE TABLE superchargerstate(
             {
                 if (Tools.IsMono())
                 {
-                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana);
+                    Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
 
                     Dictionary<string, string> dictLanguage = GetLanguageDictionary(language);
 
@@ -1190,6 +1190,8 @@ CREATE TABLE superchargerstate(
                         
                         string title, uid, link;
                         GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
+
+                        s = UpdateDefaultCar(s, defaultcar, defaultcarid);
                         
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
                             dashboardlinks.Add(title+"|"+link);
@@ -1226,6 +1228,25 @@ CREATE TABLE superchargerstate(
             {
                 Logfile.Log("End Grafana update");
             }
+        }
+
+        internal static string UpdateDefaultCar(string s, string name, string id)
+        {
+            try
+            {
+                if (name == null || name.Length == 0)
+                    return s;
+
+                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)", RegexOptions.Singleline | RegexOptions.Multiline);
+                var m = regexAlias.Match(s);
+                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}$5");
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return s;
         }
 
         internal static void GrafanaGetTitleAndLink(string json, string URL_Grafana, out string title, out string uid, out string link)

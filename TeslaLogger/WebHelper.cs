@@ -2513,7 +2513,7 @@ namespace TeslaLogger
             {
                 Tools.SetThread_enUS();
 
-                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _);
+                Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
 
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
