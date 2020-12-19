@@ -798,13 +798,15 @@ WHERE
                 // try to update chargingstate.pos
                 // are we still charging?
                 car.Log($"StartChargingState Task start");
+                int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                car.Log($"StartChargingState Task latestPos: {latestPos}");
                 if (car.GetCurrentState() == Car.TeslaState.Charge)
                 {
                     // now get a new entry in pos
                     wh.IsDriving(true);
                     // get lat, lng from max pos id
-                    int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
-                    car.Log($"StartChargingState Task latestPos {latestPos}");
+                    int newPos = GetMaxPosidLatLng(out poslat, out poslng);
+                    car.Log($"StartChargingState Task newPos: {newPos}");
                     if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
                         int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
@@ -820,11 +822,11 @@ WHERE
                                     con.Open();
                                     using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
                                     {
-                                        cmd.Parameters.AddWithValue("@latestPos", latestPos);
+                                        cmd.Parameters.AddWithValue("@latestPos", newPos);
                                         cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
                                         Tools.DebugLog(cmd);
                                         int updatedRows = cmd.ExecuteNonQuery();
-                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {newPos}");
                                     }
                                 }
                             }
