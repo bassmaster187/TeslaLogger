@@ -275,6 +275,7 @@ namespace TeslaLogger
                 }
 
                 Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
+                Log($"VIN decoder: {Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _)}");
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
