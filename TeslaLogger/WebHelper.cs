@@ -499,7 +499,7 @@ namespace TeslaLogger
                         */
 
                         string vin = r2["vin"].ToString();
-                        Log("vin: " + Tools.ObfuscateString(vin));
+                        Log("vin: " + Tools.ObfuscateVIN(vin));
 
                         if (car.vin != vin)
                         {
@@ -775,7 +775,7 @@ namespace TeslaLogger
             if (car.car_type == "model3")
             {
                 int maxRange = car.dbHelper.GetAvgMaxRage();
-                if (maxRange > 400)
+                if (maxRange > 430)
                 {
                     try
                     {
@@ -800,7 +800,12 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    WriteCarSettings("0.137", "M3 SR+");
+                    Tools.VINDecoder(car.vin, out _, out _, out _, out _, out string battery, out _);
+
+                    if (battery == "LFP")
+                        WriteCarSettings("0.133", "M3 SR+ LFP");
+                    else 
+                        WriteCarSettings("0.137", "M3 SR+");
                     return;
                 }
             }

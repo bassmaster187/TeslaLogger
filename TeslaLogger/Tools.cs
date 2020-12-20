@@ -265,6 +265,119 @@ namespace TeslaLogger
             }
         }
 
+        internal static object VINDecoder(string vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor)
+        {
+            year = 0;
+            carType = "";
+            AWD = false;
+            MIC = false;
+            battery = "";
+            motor = "";
+
+            try
+            {
+                // source https://github.com/mseminatore/TeslaJS/blob/master/teslajs.js
+                int dateCode = (int)vin[9];
+                year = 2010 + dateCode - (int)'A';
+                carType = "n/a";
+                AWD = false;
+                MIC = false;
+                battery = "n/a";
+                motor = "n/a";
+                // handle the skipped 'I' code. We may also need to skip 'O'
+                if (dateCode > 73)
+                {
+                    year--;
+                }
+                switch (vin[3])
+                {
+                    case 'S':
+                        carType = "Model S";
+                        break;
+                    case '3':
+                        carType = "Model 3";
+                        break;
+                    case 'X':
+                        carType = "Model X";
+                        break;
+                    case 'Y':
+                        carType = "Model Y";
+                        break;
+                    case 'R':
+                        carType = "Roadster";
+                        break;
+                }
+                // Check for AWD config 2, 4 or B
+                if (
+                        vin[7] == '2' || // Dual Motor (standard) (Designated for Model S & Model X)
+                        vin[7] == '4' || // Dual Motor (performance) (Designated for Model S & Model X)
+                        vin[7] == 'B' || // Dual motor - standard Model 3
+                        vin[7] == 'C' || // Dual motor - performance Model 3
+                        vin[7] == 'E'    // Dual motor - Model Y
+                    )
+                {
+                    AWD = true;
+                }
+                // check made in China
+                if (vin.StartsWith("LRW"))
+                {
+                    MIC = true;
+                }
+                // battery type, source https://teslawissen.ch/tesla-vin-nummer-des-fahrzeugs-dekodieren/
+                switch (vin[6])
+                {
+                    case 'E':
+                        battery = "NMC";
+                        break;
+                    case 'F':
+                        battery = "LFP";
+                        break;
+                    case 'H':
+                        battery = "hcNMC";
+                        break;
+                    case 'S':
+                        battery = "stdNMC";
+                        break;
+                    case 'V':
+                        battery = "uhcNMC";
+                        break;
+                }
+                // motor, source https://teslawissen.ch/tesla-vin-nummer-des-fahrzeugs-dekodieren/
+                switch (vin[7])
+                {
+                    case '1':
+                        motor = "single";
+                        break;
+                    case '2':
+                        motor = "dual";
+                        break;
+                    case '3':
+                        motor = "single performance";
+                        break;
+                    case '4':
+                        motor = "dual performance";
+                        break;
+                    case 'B':
+                        motor = "3 dual";
+                        break;
+                    case 'C':
+                        motor = "3 dual performance";
+                        break;
+                    case 'E':
+                        motor = "Y dual";
+                        break;
+                }
+
+                return $"{carType} {year} AWD:{AWD} MIC:{MIC} battery:{battery} motor:{motor}";
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return "?";
+        }
+
         public static void CopyFile(string srcFile, string directory)
         {
             try
@@ -514,6 +627,26 @@ namespace TeslaLogger
                 return "Exception";
             }
             return bTimeout ? "Timeout! " + sb.ToString() : sb.ToString();
+        }
+
+        internal static string ObfuscateVIN(string input)
+        {
+            if (input == null)
+                return null;
+
+            string obfuscated = string.Empty;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i >= 11) // Obfuscate Serial Number of VIN
+                {
+                    obfuscated += "X";
+                }
+                else
+                {
+                    obfuscated += input[i];
+                }
+            }
+            return obfuscated;
         }
 
         internal static bool UseScanMyTesla()

@@ -65,6 +65,7 @@ Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
 Supercharger BE-Lokeren, 51.09509, 4.01187
 Supercharger BE-Machelen, 50.88772, 4.453
+Supercharger-V3 BE-Namur, 50.486021, 4.797235
 Supercharger BE-Nivelles-Sud, 50.5887, 4.30809
 Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
@@ -118,7 +119,8 @@ Supercharger DE-Busdorf, 54.477896, 9.544913
 Supercharger DE-Brinkum, 53.028326, 8.808758
 Supercharger DE-Bruchsal, 49.13837, 8.56242
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
-Supercharger DE-Ellwangen, 48.95587, 10.18247
+Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
+Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Emsbüren, 52.359338, 7.26476
 Supercharger DE-Erfstadt, 50.796478, 6.77994
 Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
@@ -248,6 +250,7 @@ Supercharger ES-Zaragoza, 41.625707, -1.009618
 Supercharger FI-Äänekoski, 62.516741, 25.6913
 Supercharger FI-Akaa, 61.181106, 23.885075
 Supercharger FI-Huittinen, 61.168436, 22.680099
+Supercharger-V3 FI-Huittinen, 61.168436, 22.680099
 Supercharger FI-Jalasjärvi, 62.417805, 22.792112
 Supercharger FI-Koivisto, 62.516908, 25.691666
 Supercharger FI-Kokkola, 63.829282, 23.148487
@@ -268,6 +271,7 @@ Supercharger FR-Aire du Caylar, 43.8645878, 3.3132671
 Supercharger FR-Aire d'Urvillers, 49.787019, 3.335626
 Supercharger FR-Aire de Reims-Champagne-Sud, 49.120696, 4.242712
 Supercharger FR-Aire de Reims-Champagne-Nord, 49.119348, 4.245689
+Supercharger-V3 FR-Aire de la Vendée, 46.573233, -1.11793
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
 Supercharger FR-Aix-en-Provence, 43.5106478, 5.4564393
 Supercharger FR-Albaret-Sainte-Marie,44.870977, 3.252918
@@ -306,7 +310,9 @@ Supercharger FR-Grenoble, 45.265676, 5.876448
 Supercharger FR-La Léchère-les-Bains, 45.51877, 6.482522
 Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger FR-La Seyne-sur-Mer, 43.121199, 5.85086
+Supercharger-V3 FR-Labouheyre, 44.202799, -0.92682
 Supercharger FR-Langon, 44.5424356, -0.2539542
+Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
 Supercharger FR-Limoges, 45.86723, 1.270344
 Supercharger FR-Lorient, 47.787895, -3.33146989
@@ -316,6 +322,7 @@ Supercharger FR-Merignac, 44.835346, -0.681374
 Supercharger FR-Metz, 49.216512, 6.171239
 Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
 Supercharger FR-Montélimar, 44.676319, 4.795763
+Supercharger-V3 FR-Montluçon, 46.378453, 2.586523
 Supercharger FR-Mougins, 43.6036681, 7.011086
 Supercharger FR-Mulhouse, 47.782016, 7.388299
 Supercharger FR-Nancy, 48.638215, 6.184349
@@ -327,7 +334,9 @@ Supercharger FR-Orgeval, 48.925026, 1.996508
 Supercharger FR-Ostwald, 48.534041, 7.702054
 Supercharger FR-Orleans, 47.9488696, 1.868313
 Supercharger FR-Pau, 43.332257, -0.358762
+Supercharger-V3 FR-Perigueux, 45.152424, 0.789938
 Supercharger FR-Poitiers, 46.670356, 0.362651
+Supercharger-V3 FR-Reims-Tinqueux, 49.252931, 3.975959
 Supercharger FR-Rennes, 48.082064, -1.684180
 Supercharger FR-Rouen, 49.388964, 1.059818
 Supercharger FR-Rouvignies, 50.336704, 3.455931
@@ -491,6 +500,7 @@ Supercharger NL-Zevenaar, 51.940585, 6.081817
 Supercharger-V3 NL-Zuidbroek, 53.169567, 6.852949
 Supercharger NL-Zwolle, 52.531928, 6.157031
 Supercharger NO-Aksdal, 59.423006, 5.44306
+Supercharger-V3 NO-Aksdal South, 59.421206, 5.4435
 Supercharger NO-Alvdal, 62.114854, 10.616826
 Supercharger NO-Åndalsnes, 62.557776,7.685321
 Supercharger NO-Arna, 60.421924, 5.46703
@@ -523,6 +533,7 @@ Supercharger NO-Lampeland, 59.836224, 9.579221
 Supercharger NO-Larvik, 59.112393, 10.108783
 Supercharger NO-Lavik, 61.103869, 5.51268
 Supercharger NO-Leinstrand, 63.325319, 10.305137
+Supercharger-V3 NO-Leira, 60.969163, 9.29164
 Supercharger NO-Levanger, 63.734517, 11.281552
 Supercharger NO-Lier North, 59.770833, 10.262139
 Supercharger NO-Lier South, 59.766259, 10.257838
@@ -530,10 +541,12 @@ Supercharger-V3 NO-Liertoppen, 59.80906, 10.299437
 Supercharger NO-Lillehammer, 61.13045, 10.43491
 Supercharger NO-Lillesand, 58.236817, 8.299052
 Supercharger NO-Lyngdal, 58.155643, 7.102354
+Supercharger-V3 NO-Maurset, 60.410401, 7.325072
 Supercharger NO-Mo i Rana, 66.307374, 14.152668
 Supercharger NO-Mosjøen, 65.83483634, 13.191672563
 Supercharger NO-Mosjøen North, 65.841627, 13.187939
 Supercharger NO-Nes i Ådal, 60.58475, 9.985092
+Supercharger-V3 NO-Notodden, 59.566312, 9.219309
 Supercharger NO-Norheimsund, 60.372342, 6.141213
 Supercharger NO-Nyborg, 60.484297, 5.375426
 Supercharger NO-Os, 60.192788, 5.4652
@@ -547,6 +560,7 @@ Supercharger NO-Rygge, 59.38753, 10.751039
 Supercharger NO-Røldal, 59.816824, 6.752226
 Supercharger NO-Sandane, 61.7780226, 6.2131884
 Supercharger NO-Setermoen, 68.860147, 18.346723
+Supercharger-V3 NO-Skaidi, 70.431954, 24.50683
 Supercharger NO-Skarnes, 60.248841, 11.743848
 Supercharger NO-Skei, 61.575358, 6.483264
 Supercharger NO-Skibotn, 69.392448, 20.268423
@@ -596,6 +610,7 @@ Supercharger SE-Jäckvik, 66.39067, 16.964868
 Supercharger SE-Kalmar, 56.673228, 16.321408
 Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
+Supercharger-V3 SE-Kristinehamn, 59.31478, 14.147392
 Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
 Supercharger SE-Lagan, 57.028956, 14.014744
@@ -631,6 +646,7 @@ Supercharger SI-Ljubljana, 46.051778, 14.452056
 Supercharger SI-Maribor, 46.533005, 15.699246
 Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
+Supercharger-V3 SK-Košice, 48.694399, 21.235726
 Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Ardmore OK,34.179246,-97.1656
@@ -913,11 +929,13 @@ E.ON DE-Ascheberg, 51.774488, 7.6394
 E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
+E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
+E.ON DE-Schallstadt Breisgau Ost, 47.970558, 7.72173, 20
 E.ON DE-Siegburg Ost, 50.809464, 7.220046, 10
 E.ON DE-Siegburg West, 50.806709, 7.219551, 10
 E.ON DE-Soltau Raststätte Wietzenbruch West, 52.961271, 9.893783
@@ -928,15 +946,20 @@ E.ON DK-Karlslunde West, 55.560857, 12.229259
 E.ON DK-Karlslunde Ost, 55.560657, 12.231491
 E.ON DK-Korsør, 55.347704, 11.120238
 
-EnBW DE-Allgäuer Tor Ost,47.847519,10.282904,20
+EnBW DE-Allgäuer Tor Ost, 47.847519, 10.282904, 20
+EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
 EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
 EnBW DE-Bobingen, 48.263993, 10.840595, 20
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
+EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Ebersberg, 48.096569, 11.961316
+EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
+EnBW DE-Gammertingen Bahnhof, 48.250595,9.217022
+EnBW DE-Gammertingen Norma, 48.246655,9.222877
 EnBW DE-Gelsenkirchen, 51.521451, 7.073921
 EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Illertal West,48.125496,10.10963,20
@@ -967,10 +990,12 @@ EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
+EnBW DE-Ostfildern, 48.70475, 9.249091
 EnBW DE-Porta Westfalica, 52.26012,8.90345
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Rutesheim, 48.811969, 8.922083
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
+EnBW DE-Schongau, 47.808188, 10.877717
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 10
@@ -1034,6 +1059,7 @@ Fastned NL-Mastpolder, 51.547724, 4.530389
 Fastned NL-Molenkamp,  51.84753, 5.19078
 Fastned NL-Ooiendonk, 51.556297, 5.361872
 Fastned NL-Oudenhorst, 52.051171, 5.464007
+Fastned NL-Palmpol, 52.162998, 5.536445
 Fastned NL-Portland, 51.862667, 4.459778
 Fastned NL-Prinses Máximaplein, 52.055171, 4.391199
 Fastned NL-Ravensewetering, 52.049847, 5.122276
@@ -1059,6 +1085,7 @@ IKEA DE-Frankfurt am Main, 50.196023, 8.654631
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
 IKEA DE-Kaarst, 51.210824, 6.639237
+IKEA DE-Karlsruhe, 49.00518, 8.441285, 20
 IKEA DE-München-Brunnthal, 48.040515, 11.65732
 IKEA DE-Leuna, 51.348073, 12.181915
 IKEA DE-Oldenburg, 53.139408, 8.256087
@@ -1170,7 +1197,7 @@ Ionity DE-Lehrter See Süd, 52.386433, 9.998919
 Ionity DE-Lichtendorf Nord, 51.468319, 7.594014
 Ionity DE-Lichtendorf Süd, 51.467751, 7.596959
 Ionity DE-Lippetal, 51.695845, 7.966201
-Ionity DE-Lonetal Ost, 48.584287, 10.178996, 10
+Ionity DE-Lonetal Ost, 48.584246, 10.178939, 10
 Ionity DE-Lonetal West, 48.583937, 10.175605, 10
 Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
 Ionity DE-Lüneburger Heide West, 53.109317, 9.981663

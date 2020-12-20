@@ -797,19 +797,24 @@ WHERE
                 Thread.Sleep(30000);
                 // try to update chargingstate.pos
                 // are we still charging?
+                car.Log($"StartChargingState Task start");
+                int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                car.Log($"StartChargingState Task latestPos: {latestPos}");
                 if (car.GetCurrentState() == Car.TeslaState.Charge)
                 {
                     // now get a new entry in pos
                     wh.IsDriving(true);
                     // get lat, lng from max pos id
-                    int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                    int newPos = GetMaxPosidLatLng(out poslat, out poslng);
+                    car.Log($"StartChargingState Task newPos: {newPos}");
                     if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
                         int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
                         if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
                         {
+                            car.Log($"StartChargingState Task (poslng, poslat, chglng, chglat) ({poslng}, {poslat}, {chglng}, {chglat})");
                             double distance = Geofence.GetDistance(poslng, poslat, chglng, chglat);
-                            Tools.DebugLog($"StartChargingState Task distance: {distance}");
+                            car.Log($"StartChargingState Task distance: {distance}");
                             if (distance > 10)
                             {
                                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -817,28 +822,28 @@ WHERE
                                     con.Open();
                                     using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
                                     {
-                                        cmd.Parameters.AddWithValue("@latestPos", latestPos);
+                                        cmd.Parameters.AddWithValue("@latestPos", newPos);
                                         cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
                                         Tools.DebugLog(cmd);
                                         int updatedRows = cmd.ExecuteNonQuery();
-                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {newPos}");
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            Tools.DebugLog($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
+                            car.Log($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
                         }
                     }
                     else
                     {
-                        Tools.DebugLog($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
+                        car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
                 }
                 else
                 {
-                    Tools.DebugLog($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
+                    car.Log($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
                 }
             });
             #pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
@@ -1745,6 +1750,7 @@ WHERE
                 using (MySqlCommand cmd = new MySqlCommand("select lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
@@ -1791,6 +1797,7 @@ WHERE
                 using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
                     {
