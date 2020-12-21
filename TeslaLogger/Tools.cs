@@ -1139,18 +1139,83 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static void Housekeeping()
         {
-            // df and du before cleanup
-            LogDiskUsage();
-            // log DB usage
-            LogDBUsage();
-            // cleanup Exceptions
-            CleanupExceptionsDir();
-            // cleanup database
-            CleanupDatabaseTableMothership();
-            // run housekeeping regularly:
-            // - after 24h
-            // - but only if car is asleep, otherwise wait another hour
-            CreateMemoryCacheItem(24);
+            try
+            {
+                // df and du before cleanup
+                LogDiskUsage();
+                // log DB usage
+                LogDBUsage();
+                // cleanup Exceptions
+                CleanupExceptionsDir();
+                // cleanup database
+                CleanupDatabaseTableMothership();
+                // cleanup backup folder
+                CleanupBackupFolder();
+
+                // run housekeeping regularly:
+                // - after 24h
+                // - but only if car is asleep, otherwise wait another hour
+                CreateMemoryCacheItem(24);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        public static void CleanupBackupFolder()
+        {
+            if (Tools.IsDocker())
+                return;
+
+            bool filesFoundForDeletion = false;
+            int countDeletedFiles = 0;
+            long freeDiskSpaceNeeded = 1024;
+
+            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 1GB of free disk space
+                return;
+
+
+            DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "backup"));
+
+            if (di.Exists)
+            {
+                var ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
+
+                foreach (var fi in ds)
+                {
+                    if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // already deleted enough?
+                        return;
+
+                    if ((DateTime.Now - fi.LastWriteTime).TotalDays > 30)
+                    {
+                        try
+                        {
+                            Logfile.Log("Housekeeping: delete file " + fi.Name);
+                            fi.Delete();
+                            filesFoundForDeletion = true;
+                            countDeletedFiles++;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                }
+            }
+            if (filesFoundForDeletion)
+            {
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup direcotry Free Disk Space: {FreeDiskSpaceMB()} MB");
+            }
+        }
+
+        private static long FreeDiskSpaceMB()
+        {
+            DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+            DriveInfo driveinfo = new DriveInfo(di.Root.FullName);
+            long freeMB = driveinfo.AvailableFreeSpace / 1024 / 1024;
+            return freeMB;
         }
 
         private static void LogDBUsage()
