@@ -1,3 +1,4 @@
+Supercharger-V3 AT-Asten, 48.2201223, 14.407405
 Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
@@ -154,6 +155,7 @@ Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Leonberg, 48.78523, 9.01755
+Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
@@ -164,11 +166,13 @@ Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
+Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
 Supercharger DE-Nempitz, 51.290095,12.137335, 6
 Supercharger DE-Nempitz, 51.290039,12.137335, 6
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
+Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
 Supercharger DE-Nossen, 51.08255, 13.27406
 Supercharger DE-Oberhonnefeld, 50.56254, 7.52542
 Supercharger-V3 DE-Oberhonnefeld, 50.562506, 7.525452
@@ -357,10 +361,12 @@ Supercharger FR-Valence, 44.91894, 4.878101
 Supercharger FR-Valenciennes, 50.336704, 3.455931
 Supercharger FR-Vienne, 45.58748, 4.78751
 Supercharger GB-Abington, 55.507944, -3.694786
+Supercharger-V3 GB-Amesbury, 51.177215, -1.756282
 Supercharger GB-Aviemore, 57.189774, -3.836206
 Supercharger GB-Barnsley, 53.489393, -1.486223
 Supercharger GB-Birchanger Green, 51.871619, 0.193886
 Supercharger GB-Birmingham, 52.363197, -1.945572
+Supercharger-V3 GB-Braintree, 51.852568, 0.522422
 Supercharger GB-Bristol, 51.477207, -2.706308
 Supercharger GB-Bristol, 51.526694, -2.599806
 Supercharger GB-Burtonwood, 53.417605, -2.639522
@@ -377,8 +383,8 @@ Supercharger GB-Grantham, 52.948794, -0.677802
 Supercharger GB-Gretna Green, 55.0078, -3.083018
 Supercharger GB-Havant, 50.847773, -0.991137
 Supercharger GB-Hilton Park Northbound, 52.644021, -2.058587
-Supercharger GB-Hungerford, 51.481584, -1.557043
-Supercharger GB-Hungerford, 51.483992, -1.558115
+Supercharger GB-Membury Eastbound, 51.48391, -1.556821
+Supercharger GB-Membury Westbound, 51.481293, -1.556196
 Supercharger GB-Leeds, 53.732769, -1.585628
 Supercharger GB-Lifton, 50.643377, -4.284553
 Supercharger GB-Liphook, 51.076281, -0.831807
@@ -389,9 +395,11 @@ Supercharger GB-London, 51.507022, 0.015928
 Supercharger GB-London, 51.507888, -0.221972
 Supercharger GB-London, 51.511647, -0.461166
 Supercharger GB-London, 51.57753, -0.223753
+Supercharger-V3 GB-London-Chelmsford, 51.7501215, 0.5106861
+Supercharger-V3 GB-London-Gatwick, 51.135175, -0.191298
 Supercharger GB-Maidstone, 51.286224, 0.545783
-Supercharger GB-Newcastle Staffordshire, 52.993, -2.2903
-Supercharger GB-Newcastle Staffordshire, 52.99413, -2.290797
+Supercharger GB-Keele Northbound, 52.993, -2.2903
+Supercharger GB-Keele Southbound, 52.99413, -2.290797
 Supercharger GB-Newport Pagnell, 52.084312, -0.748467
 Supercharger GB-Northampton, 52.185729, -0.89127
 Supercharger GB-Oxford, 51.7374, -1.0948
@@ -405,10 +413,11 @@ Supercharger GB-Slough, 51.478181, -0.515753
 Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
 Supercharger GB-Warrington, 53.339515, -2.569358
-Supercharger GB-Warwick, 52.216831, -1.50513
-Supercharger GB-Warwick, 52.219105, -1.502085
+Supercharger GB-Warwick Northbound, 52.216118, -1.504695
+Supercharger GB-Warwick Southbound, 52.219048, -1.50126
 Supercharger GB-Washington, 54.88762, -1.557413
 Supercharger GB-Winchester, 51.16725, -1.328024
+Supercharger GB-Wokingham, 51.42849, -0.898897
 Supercharger HR-Karlovac, 45.51297, 15.54748
 Supercharger HR-Otočac, 44.89321, 15.18425
 Supercharger HR-Senj, 44.989403, 14.897517
@@ -425,8 +434,8 @@ Supercharger HU-Szeged, 46.274868,20.1024638
 Supercharger HU-Törökbálint, 47.439444, 18.889835
 Supercharger IE-Ballacolla, 52.86704, -7.481818
 Supercharger IE-Birdhill, 52.757747, -8.40932
+Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717
 Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
-Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717		
 Supercharger IS-Fossvogur, 64.117994, -21.899666
 Supercharger IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
@@ -866,13 +875,16 @@ Allego DE-Heppenheim, 49.643165, 8.624373
 Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
 Allego DE-Hilpoltstein, 49.161068, 11.260205, 5
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
+Allego DE-Itzehoe, 53.959309, 9.495976, 10
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Münchberg, 50.202775, 11.7769, 7
 Allego DE-Münster ATU, 51.92794, 7.587932
 Allego DE-Neumarkt Authof, 49.312989, 11.475396, 5
 Allego DE-Regensburg, 48.995373, 12.151138, 15
-Allego DE-Rostock, 54.111209, 12.16426
+Allego DE-Rostok ATU, 54.081492, 12.192205
+Allego DE-Rostock Euromaster, 54.111209, 12.16426
+Allego DE-Rostok Hagebaumarkt, 54.099039, 12.176245
 Allego DE-Schleiz, 50.549278, 11.789369
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 3
 Allego DE-Trier Wasserweg, 49.76327, 6.65785
@@ -926,12 +938,14 @@ Drewag DE-Dresden Schillergalerie, 51.051405, 13.804725
 
 E.ON CZ-Jenišov, 50.218688, 12.806822
 E.ON DE-Ascheberg, 51.774488, 7.6394
+E.ON DE-Bad Segeberg Wasserwerk, 53.938991, 10.28695
 E.ON DE-Elmshorn Teppich Kibek, 53.741661, 9.707776
 E.ON DE-Essen, 51.425112, 6.993249
 E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
 E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
+E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
@@ -958,6 +972,7 @@ EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Ebersberg, 48.096569, 11.961316
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
+EnBW DE-Friesoythe, 53.016216, 7.852262, 20
 EnBW DE-Gammertingen Bahnhof, 48.250595,9.217022
 EnBW DE-Gammertingen Norma, 48.246655,9.222877
 EnBW DE-Gelsenkirchen, 51.521451, 7.073921
@@ -1006,6 +1021,11 @@ EnBW DE-Winningen Moseltal West, 50.317548, 7.4978, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
 EnBW DE-Urbach, 48.810151, 9.570358
+
+EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
+EWE-SWB DE-Burgwedel, 52.485739, 9.844603
+EWE-SWB DE-Friesoythe, 53.014858, 7.851011
+EWE-SWB DE-Moormerland, 53.311881, 7.456651
 
 Fastned BE-Oostende luchthaven, 51.205610, 2.871165
 Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
@@ -1519,6 +1539,7 @@ Kaufland DE-Göppingen, 48.704563, 9.647031
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
+Kaufland DE-Hussenhofen, 48.803978, 9.839545
 Kaufland DE-Kaufbeuren, 47.884276, 10.636879
 Kaufland DE-Leipzig, 51.33711, 12.336445
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
@@ -1576,6 +1597,7 @@ Lidl CH-Allendorf, 47.193323, 8.818533
 Lidl CH-Böckten, 47.462469, 7.838388
 Lidl CH-Dübendorf, 47.395056, 8.638741
 Lidl CH-Einsideln, 47.138634, 8.745218
+Lidl CH-Lausen, 47.470612, 7.765637
 Lidl CH-Schlieren, 47.399469, 8.432234
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
@@ -1589,14 +1611,19 @@ Lidl DE-Berlin Sonnenallee, 52.475563, 13.451759
 Lidl DE-Berlin Steglitzer Damm, 52.449291, 13.354343
 Lidl DE-Berlin Quickborner Straße, 52.603467, 13.367476
 Lidl DE-Berlin Vorarlberger Damm, 52.470054, 13.349763
+Lidl DE-Cloppenburg, 52.842381, 8.057783
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
 Lidl DE-Heilbronn, 49.152479, 9.222602
 Lidl DE-Herne, 51.524427, 7.18621
+Lidl DE-Homburg, 49.332477, 7.339518
 Lidl DE-Hoppegarten, 52.540585, 13.63869
 Lidl DE-Huerth, 50.89371, 6.903387
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
+Lidl DE-Rostok, 54.07674, 12.099895
 Lidl DE-Sassenberg, 51.981949, 8.036272
+Lidl DE-Karlsruhe, 49.0446, 8.393927
 Lidl DE-Limbach-Oberfrohna, 50.854838, 12.77829
+Lidl DE-Saterland, 53.103539, 7.674501
 Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 Lidl FI-Vantaa, 60.261581, 24.87252
@@ -1606,6 +1633,8 @@ REWE DE-Bremen, 53.136455, 8.739926
 ShellRecharge DE-Berg, 50.372, 11.787795
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
+
+swisscharge CH-Turbenthal, 47.4351, 8.850689
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977

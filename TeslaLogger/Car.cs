@@ -1263,6 +1263,7 @@ namespace TeslaLogger
             bool ref_cost_per_minute_found = false;
             DateTime chargeStart = DateTime.Now;
             DateTime chargeEnd = chargeStart;
+            DateTime ref_start_date = DateTime.MinValue;
             double charge_energy_added = 0.0;
 
             // find reference charging session
@@ -1276,7 +1277,8 @@ namespace TeslaLogger
   chargingstate.cost_currency,
   chargingstate.cost_per_kwh,
   chargingstate.cost_per_session,
-  chargingstate.cost_per_minute
+  chargingstate.cost_per_minute,
+  chargingstate.StartDate
 FROM
   chargingstate,
   pos  
@@ -1284,6 +1286,8 @@ WHERE
   chargingstate.pos = pos.id
   AND pos.address = @addr
   AND chargingstate.cost_total IS NOT NULL
+  AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
+  AND chargingstate.EndChargingID - chargingstate.StartChargingID > 4
   AND chargingstate.CarID = @CarID
 ORDER BY id DESC
 LIMIT 1", con))
@@ -1312,6 +1316,10 @@ LIMIT 1", con))
                         {
                             ref_cost_per_minute_found = true;
                         }
+                        if (DateTime.TryParse(dr[6].ToString(), out ref_start_date))
+                        {
+                            ref_cost_per_minute_found = true;
+                        }
                         Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}> <{dr[5]}>");
                     }
                     con.Close();
@@ -1320,7 +1328,7 @@ LIMIT 1", con))
             if (ref_cost_total != -1.0)
             {
                 // reference charging costs for addr found, now get latest charging session at addr
-                Logfile.Log($"CopyChargePrice: reference charging session found for '{_addr.name}', ID {referenceID} - cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
+                Logfile.Log($"CopyChargePrice: reference charging session found for '{_addr.name}', ID {referenceID} - cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute} started: {ref_start_date}");
                 int chargeID = 0;
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
