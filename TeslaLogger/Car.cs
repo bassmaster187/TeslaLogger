@@ -1316,10 +1316,7 @@ LIMIT 1", con))
                         {
                             ref_cost_per_minute_found = true;
                         }
-                        if (DateTime.TryParse(dr[6].ToString(), out ref_start_date))
-                        {
-                            ref_cost_per_minute_found = true;
-                        }
+                        _ = DateTime.TryParse(dr[6].ToString(), out ref_start_date);
                         Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}> <{dr[5]}>");
                     }
                     con.Close();
