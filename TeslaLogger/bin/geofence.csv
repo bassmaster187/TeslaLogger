@@ -969,6 +969,7 @@ EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
+EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
 EnBW DE-Ebersberg, 48.096569, 11.961316
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
@@ -990,6 +991,7 @@ EnBW DE-Ingolstadt Goethestraße, 48.772272, 11.45188
 EnBW DE-Jagsttal Ost, 49.322951,9.415858, 20
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
+EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
@@ -1183,7 +1185,7 @@ Ionity DE-Donautal Ost, 48.588065, 13.366667
 Ionity DE-Donautal West, 48.589422, 13.365369
 Ionity DE-Dresdner Tor Nord, 51.063214, 13.571071
 Ionity DE-Dresdner Tor Süd, 51.060227, 13.571959
-Ionity DE-Dollenberg Ost, 50.688524, 8.295916
+Ionity DE-Dollenberg Ost, 50.688524, 8.295916, 5
 Ionity DE-Eichenzell, 50.488366, 9.708621, 8
 Ionity DE-Eifel Ost, 50.070186, 6.880905
 Ionity DE-Eifel West, 50.068492, 6.880212
@@ -1206,7 +1208,7 @@ Ionity DE-Holzheim, 48.381890, 10.086035
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219137, 10.127765
-Ionity DE-Katzenfurt Süd, 50.620347, 8.362918
+Ionity DE-Katzenfurt Süd, 50.620347, 8.362918, 5
 Ionity DE-Kirchheim (Tal), 50.833837, 9.570775
 Ionity DE-Köschinger Forst Ost, 48.836599, 11.472234
 Ionity DE-Köschinger Forst West, 48.837085, 11.469313
