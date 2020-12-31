@@ -468,6 +468,7 @@ namespace TeslaLogger
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
                             Tools.DebugLog($"UpdateChargingState: id:{openChargingState} to startDate:{startDate} startID:{startdID} posID:{posID}");
+                            UpdateChargingstate(openChargingState, startDate, startdID, 0.0, 0.0);
                             // delete all older charging states
                             foreach (int chargingState in chargingStates)
                             {
@@ -877,18 +878,11 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-  charge_energy_added
-FROM
-  charging,
-  chargingstate
-WHERE
-  chargingstate.CarId=@CarID
-  AND chargingstate.@column=charging.id", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT charging.charge_energy_added FROM charging, chargingstate WHERE chargingstate.CarId = @CarID AND chargingstate.{column} = charging.id and chargingstate.id=@ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@column", column);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -2864,7 +2858,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
                         cmd.Parameters.AddWithValue("@StartDate", StartDate);
                         cmd.Parameters.AddWithValue("@StartChargingID", StartChargingID);
-
+                        Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -2888,7 +2882,7 @@ WHERE
                     using (MySqlCommand cmd = new MySqlCommand(@"delete from chargingstate where id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
-
+                        Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
                 }
