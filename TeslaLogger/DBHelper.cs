@@ -472,6 +472,7 @@ namespace TeslaLogger
                             foreach (int chargingState in chargingStates)
                             {
                                 Tools.DebugLog($"delete combined chargingState id:{chargingState}");
+                                // DEBUG DeleteChargingstate(chargingState);
                             }
                         }
                     }
@@ -560,11 +561,12 @@ SELECT
 FROM
   chargingstate
 WHERE
-  AND CarID = @CarID
+  CarID = @CarID
   AND id = @referenceID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@referenceID", openChargingState);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                         {
