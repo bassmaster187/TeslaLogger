@@ -1107,7 +1107,7 @@ FROM
  chargingstate
 WHERE
  CarID=@CarID
- AND EndDate IS NULL ORDER BY datum ASC", con))
+ AND EndDate IS NULL ORDER BY StartDate ASC", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         Tools.DebugLog(cmd);
