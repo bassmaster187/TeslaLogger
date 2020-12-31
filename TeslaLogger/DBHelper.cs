@@ -438,6 +438,7 @@ namespace TeslaLogger
 
         internal void CloseChargingStates()
         {
+            DateTime dtstart = DateTime.UtcNow;
             // find open charging states (EndDate == NULL) order by oldest first
             Queue<int> openchargingstates = FindOpenChargingStates();
 
@@ -485,12 +486,15 @@ namespace TeslaLogger
 
                     if (car.HasFreeSuC())
                     {
-                        ref_cost_per_kwh = 0.0;
-                        ref_cost_per_kwh_found = true;
-                        ref_cost_per_minute = 0.0;
-                        ref_cost_per_minute_found = true;
-                        ref_cost_per_session = 0.0;
-                        ref_cost_per_session_found = true;
+                        if (ChargingStateLocationIsSuC(openChargingState))
+                        {
+                            ref_cost_per_kwh = 0.0;
+                            ref_cost_per_kwh_found = true;
+                            ref_cost_per_minute = 0.0;
+                            ref_cost_per_minute_found = true;
+                            ref_cost_per_session = 0.0;
+                            ref_cost_per_session_found = true;
+                        }
                     }
                     else
                     {
@@ -517,6 +521,279 @@ namespace TeslaLogger
                     UpdateChargeEnergyAdded(openChargingState);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
+                    UpdateChargePrice(openChargingState, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                }
+            }
+
+            car.currentJSON.current_charging = false;
+            car.currentJSON.current_charger_power = 0;
+            car.currentJSON.current_charger_voltage = 0;
+            car.currentJSON.current_charger_phases = 0;
+            car.currentJSON.current_charger_actual_current = 0;
+            car.currentJSON.current_charge_rate_km = 0;
+
+            UpdateMaxChargerPower();
+
+            // As charging point name is depending on the max charger power, it will be updated after "MaxChargerPower" was computed
+            car.webhelper.UpdateLastChargingAdress();
+
+            DateTime dtend = DateTime.UtcNow;
+            TimeSpan ts = dtend - dtstart;
+            Tools.DebugLog($"CloseChargingStates took {ts.TotalMilliseconds}ms");
+            if (ts.TotalMilliseconds > 1000)
+            {
+                car.Log($"CloseChargingStates took {ts.TotalMilliseconds}ms");
+            }
+        }
+
+        private bool ChargingStateLocationIsSuC(int openChargingState)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateChargePrice(int openChargingState, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
+        {
+            if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
+            {
+                double cost_total = double.NaN;
+                double cost_per_kwh = 0.0;
+                double cost_per_minute = 0.0;
+                double cost_per_session = 0.0;
+                double charge_energy_added = double.NaN;
+                DateTime startDate = DateTime.MinValue;
+                DateTime endDate = DateTime.MinValue;
+
+                // read values from openChargingState
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charge_energy_added,
+  startdate,
+  enddate
+FROM
+  chargingstate
+WHERE
+AND CarID = @CarID
+AND id = @referenceID", con))
+                        {
+                            cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
+                            cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = openChargingState;
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value) {
+                                if (double.TryParse(dr[0].ToString(), out charge_energy_added)
+                                    && DateTime.TryParse(dr[1].ToString(), out startDate)
+                                    && DateTime.TryParse(dr[2].ToString(), out endDate))
+                                {
+                                    cost_total = 0.0;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                }
+
+                // calculate and update cost_per_kwh
+                if (ref_cost_per_kwh_found)
+                {
+                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_kwh:{charge_energy_added}kWh * {ref_cost_per_kwh}{ref_cost_currency} = {ref_cost_per_kwh * charge_energy_added}");
+                    if (!double.IsNaN(cost_total))
+                    {
+                        cost_total += ref_cost_per_kwh * charge_energy_added;
+                    }
+                    else
+                    {
+                        cost_total = ref_cost_per_kwh * charge_energy_added;
+                    }
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE 
+  chargingstate 
+SET 
+  cost_per_kwh=@cost_per_kwh
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@cost_per_kwh", ref_cost_per_kwh * charge_energy_added);
+                                Tools.DebugLog(cmd);
+                                int rowsUpdated = cmd.ExecuteNonQuery();
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_kwh {ref_cost_per_kwh * charge_energy_added}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                        Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                    }
+                }
+
+                // calculate and update cost_per_minute
+                if (ref_cost_per_minute_found)
+                {
+                    double duration = (endDate - startDate).TotalMinutes;
+                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_minute:{duration}min * {ref_cost_per_minute}{ref_cost_currency} = {ref_cost_per_minute * duration}");
+                    if (!double.IsNaN(cost_total))
+                    {
+                        cost_total += ref_cost_per_minute * duration;
+                    }
+                    else
+                    {
+                        cost_total = ref_cost_per_minute * duration;
+                    }
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE 
+  chargingstate 
+SET 
+  cost_per_minute=@cost_per_minute
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@cost_per_minute", ref_cost_per_minute * duration);
+                                Tools.DebugLog(cmd);
+                                int rowsUpdated = cmd.ExecuteNonQuery();
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_minute {ref_cost_per_minute * duration}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                        Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                    }
+                }
+
+                // calculate and update cost_per_session
+                if (ref_cost_per_session_found)
+                {
+                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_session:{ref_cost_per_session}{ref_cost_currency}");
+                    if (!double.IsNaN(cost_total))
+                    {
+                        cost_total += ref_cost_per_session;
+                    }
+                    else
+                    {
+                        cost_total = ref_cost_per_session;
+                    }
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE 
+  chargingstate 
+SET 
+  cost_per_session=@cost_per_session
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@cost_per_session", ref_cost_per_session);
+                                Tools.DebugLog(cmd);
+                                int rowsUpdated = cmd.ExecuteNonQuery();
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_session {ref_cost_per_session}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                        Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                    }
+                }
+
+                // update cost_total
+                if (!double.IsNaN(cost_total))
+                {
+                    car.Log($"UpdateChargePrice id:{openChargingState} cost_total:{cost_total}{ref_cost_currency}");
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE 
+  chargingstate 
+SET 
+  cost_total=@cost_total
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@cost_total", cost_total);
+                                Tools.DebugLog(cmd);
+                                int rowsUpdated = cmd.ExecuteNonQuery();
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_total {cost_total}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                        Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                    }
+                }
+
+                // update cost_currency
+                if (!string.IsNullOrEmpty(ref_cost_currency))
+                {
+                    car.Log($"UpdateChargePrice id:{openChargingState} cost_currency:{ref_cost_currency}");
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+        @"UPDATE 
+  chargingstate 
+SET 
+  cost_currency=@cost_currency
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@cost_currency", ref_cost_currency);
+                                Tools.DebugLog(cmd);
+                                int rowsUpdated = cmd.ExecuteNonQuery();
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_currency {ref_cost_currency}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                        Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                    }
                 }
             }
         }
@@ -550,7 +827,6 @@ WHERE
                         car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
                     }
                 }
-
             }
             catch (Exception ex)
             {

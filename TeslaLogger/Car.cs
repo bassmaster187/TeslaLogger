@@ -739,7 +739,7 @@ namespace TeslaLogger
 
             // Alle States werden geschlossen
             dbHelper.CloseChargingStates();
-            dbHelper.CloseChargingState();
+            //dbHelper.CloseChargingState();
             dbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
 
             string res = webhelper.IsOnline().Result;
