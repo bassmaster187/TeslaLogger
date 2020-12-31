@@ -473,7 +473,7 @@ namespace TeslaLogger
                             foreach (int chargingState in chargingStates)
                             {
                                 Tools.DebugLog($"delete combined chargingState id:{chargingState}");
-                                // DEBUG DeleteChargingstate(chargingState);
+                                DeleteChargingstate(chargingState);
                             }
                         }
                     }
