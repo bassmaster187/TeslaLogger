@@ -457,7 +457,7 @@ namespace TeslaLogger
                     {
                         Tools.DebugLog($"openChargingState id:{openChargingState} odometer:{odometer}");
                         // find charging state(s) with identical pos.odometer
-                        Queue<int> chargingStates = FindChargingStatesByOdometer(odometer);
+                        Queue<int> chargingStates = FindChargingStatesByOdometer(openChargingState);
                         foreach (int chargingState in chargingStates)
                         {
                             Tools.DebugLog($"FindChargingStatesByOdometer: {chargingState}:{odometer}");
@@ -1131,7 +1131,7 @@ WHERE
             return openChargingStates;
         }
 
-        private Queue<int> FindChargingStatesByOdometer(double odometer)
+        private Queue<int> FindChargingStatesByOdometer(int referenceID)
         {
             Queue<int> chargingStates = new Queue<int>();
             try
@@ -1148,10 +1148,19 @@ FROM
 WHERE
  chargingstate.CarID=@CarID
  AND chargingstate.Pos = pos.id
- AND pos.odometer=@odometer", con))
+ AND pos.odometer=(
+   SELECT
+     pos.odometer
+   FROM
+     chargingstate,
+     pos
+   WHERE
+    pos.CarID=1
+    AND chargingstate.id=@referenceID
+    AND chargingstate.Pos = pos.id)", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@odometer", odometer);
+                        cmd.Parameters.AddWithValue("@referenceID", referenceID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
