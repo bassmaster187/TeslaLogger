@@ -1074,11 +1074,10 @@ SET
  EndDate = @EndDate,
  EndChargingID = @EndChargingID
 WHERE
- EndDate IS NULL
+ id=@ChargingStateID
  AND CarID=@CarID", con))
                     {
-                        cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
-                        cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
