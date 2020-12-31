@@ -475,9 +475,22 @@ namespace TeslaLogger
                         }
                     }
 
+                    string ref_cost_currency = string.Empty;
+                    double ref_cost_per_kwh = double.NaN;
+                    bool ref_cost_per_kwh_found = false;
+                    double ref_cost_per_minute = double.NaN;
+                    bool ref_cost_per_minute_found = false;
+                    double ref_cost_per_session = double.NaN;
+                    bool ref_cost_per_session_found = false;
+
                     if (car.HasFreeSuC())
                     {
-                        // apply free supercharging
+                        ref_cost_per_kwh = 0.0;
+                        ref_cost_per_kwh_found = true;
+                        ref_cost_per_minute = 0.0;
+                        ref_cost_per_minute_found = true;
+                        ref_cost_per_session = 0.0;
+                        ref_cost_per_session_found = true;
                     }
                     else
                     {
@@ -490,7 +503,7 @@ namespace TeslaLogger
                             {
                                 car.Log($"CopyChargePrice at '{addr.name}'");
                                 // find reference charge session for addr
-                                int refChargingState = FindReferenceChargingState(addr.name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found);
+                                int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
                                 // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
                                 if (refChargingState != int.MinValue)
                                 {
@@ -499,11 +512,90 @@ namespace TeslaLogger
                             }
                         }
                     }
+
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
+                    UpdateChargeEnergyAdded(openChargingState);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
                 }
             }
+        }
+
+        private void UpdateChargeEnergyAdded(int openChargingState)
+        {
+            double startEnergyAdded = GetChargeEnergyAdded(openChargingState, "StartChargingID");
+            double endEnergyAdded = GetChargeEnergyAdded(openChargingState, "EndChargingID");
+
+            double charge_energy_added = endEnergyAdded - startEnergyAdded;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(
+@"UPDATE 
+  chargingstate 
+SET 
+  charge_energy_added=@charge_energy_added
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
+            }
+        }
+
+        private double GetChargeEnergyAdded(int openChargingState, string column)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charge_energy_added
+FROM
+  charging,
+  chargingstate
+WHERE
+  chargingstate.CarId=@CarID
+  AND chargingstate.@column=charging.id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@column", column);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double charge_energy_added))
+                            {
+                                return charge_energy_added;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "GetLastCarVersion");
+                car.Log(ex.ToString());
+            }
+
+            return -1.0;
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)

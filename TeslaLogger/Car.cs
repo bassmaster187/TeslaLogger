@@ -1117,7 +1117,8 @@ namespace TeslaLogger
             // charging -> any
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
-                _ = Task.Factory.StartNew(() =>
+                // moved to DBHelper.CloseChargingStates()
+                /*_ = Task.Factory.StartNew(() =>
                 {
                     Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                     if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
@@ -1129,7 +1130,7 @@ namespace TeslaLogger
                             HandleSpecialFlag_CopyChargePrice(addr);
                         }
                     }
-                });
+                });*/
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
