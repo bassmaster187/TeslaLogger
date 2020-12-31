@@ -1077,8 +1077,10 @@ WHERE
  id=@ChargingStateID
  AND CarID=@CarID", con))
                     {
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
+                        cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
