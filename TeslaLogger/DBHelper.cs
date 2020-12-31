@@ -548,7 +548,40 @@ namespace TeslaLogger
 
         private bool ChargingStateLocationIsSuC(int openChargingState)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  fast_charger_brand,
+  fast_charger_type
+FROM
+  chargingstate
+WHERE
+  AND CarID = @CarID
+  AND id = @referenceID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@referenceID", openChargingState);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                        {
+                            if (dr[0].ToString().Equals("Tesla") && dr[1].ToString().Equals("Tesla"))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.ChargingStateLocationIsSuC(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.ChargingStateLocationIsSuC()");
+            }
+            return false;
         }
 
         private void UpdateChargePrice(int openChargingState, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
