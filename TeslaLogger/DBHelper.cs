@@ -436,6 +436,340 @@ namespace TeslaLogger
             return "";
         }
 
+        internal void CloseChargingStates()
+        {
+            // find open charging states (EndDate == NULL) order by oldest first
+            Queue<int> openchargingstates = FindOpenChargingStates();
+
+            // foreach open charging state (identified by id)
+            foreach (int openChargingState in openchargingstates)
+            {
+                // close charging state with enddate, endID from max charging
+                CloseChargingState(openChargingState);
+
+                // if combine is enabled
+                if (Tools.CombineChargingStates())
+                {
+                    // get pos.odometer from openChargingState
+                    double odometer = GetOdometerFromChargingstate(openChargingState);
+                    if (!double.IsNaN(odometer))
+                    {
+                        Tools.DebugLog($"openChargingState id:{openChargingState} odometer:{odometer}");
+                        // find charging state(s) with identical pos.odometer
+                        Queue<int> chargingStates = FindChargingStatesByOdometer(odometer);
+                        foreach (int chargingState in chargingStates)
+                        {
+                            Tools.DebugLog($"FindChargingStatesByOdometer: {chargingState}:{odometer}");
+                        }
+                        // get startdate, startID, posID from oldest
+                        if (GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
+                        {
+                            Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
+                            // update current charging state with startdate, startID, pos
+                            Tools.DebugLog($"UpdateChargingState: id:{openChargingState} to startDate:{startDate} startID:{startdID} posID:{posID}");
+                            // delete all older charging states
+                            foreach (int chargingState in chargingStates)
+                            {
+                                Tools.DebugLog($"delete combined chargingState id:{chargingState}");
+                            }
+                        }
+                    }
+
+                    if (car.HasFreeSuC())
+                    {
+                        // apply free supercharging
+                    }
+                    else
+                    {
+                        // get addr for chargingstate.pos
+                        Address addr = GetAddressFromChargingState(openChargingState);
+                        if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                        {
+                            // check if +ccp is enabled
+                            if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
+                            {
+                                car.Log($"CopyChargePrice at '{addr.name}'");
+                                // find reference charge session for addr
+                                int refChargingState = FindReferenceChargingState(addr.name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found);
+                                // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
+                                if (refChargingState != int.MinValue)
+                                {
+                                    car.Log($"CopyChargePrice: reference charging session found for '{addr.name}', ID {refChargingState} - cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
+                                }
+                            }
+                        }
+                    }
+                    // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
+
+                    // calculate charging price if per_kwh and/or per_minute and/or per_session is available
+                }
+            }
+        }
+
+        private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
+        {
+            int referenceID = int.MinValue;
+            ref_cost_currency = string.Empty;
+            ref_cost_per_kwh = double.NaN;
+            ref_cost_per_kwh_found = false;
+            ref_cost_per_minute = double.NaN;
+            ref_cost_per_minute_found = false;
+            ref_cost_per_session = double.NaN;
+            ref_cost_per_session_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id, 
+  chargingstate.cost_currency,
+  chargingstate.cost_per_kwh,
+  chargingstate.cost_per_session,
+  chargingstate.cost_per_minute
+FROM
+  chargingstate,
+  pos  
+WHERE
+  chargingstate.pos = pos.id
+  AND pos.address = @addr
+  AND chargingstate.cost_total IS NOT NULL
+  AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
+  AND chargingstate.EndChargingID - chargingstate.StartChargingID > 4
+  AND chargingstate.CarID = @CarID
+ORDER BY id DESC
+LIMIT 1", con))
+                    {
+                        cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[1] != DBNull.Value)
+                        {
+                            int.TryParse(dr[0].ToString(), out referenceID);
+                            ref_cost_currency = dr[1].ToString();
+                            if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
+                            {
+                                ref_cost_per_kwh_found = true;
+                            }
+                            if (double.TryParse(dr[3].ToString(), out ref_cost_per_session))
+                            {
+                                ref_cost_per_session_found = true;
+                            }
+                            if (double.TryParse(dr[4].ToString(), out ref_cost_per_minute))
+                            {
+                                ref_cost_per_minute_found = true;
+                            }
+                            Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}>");
+                        }
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+            }
+            return referenceID;
+        }
+
+        private bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ StartDate,
+ StartChargingID,
+ Pos
+FROM
+ chargingstate
+WHERE
+ id=@ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (DateTime.TryParse(dr[0].ToString(), out startDate)
+                                && int.TryParse(dr[1].ToString(), out startdID)
+                                && int.TryParse(dr[2].ToString(), out posID))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+            }
+            startDate = DateTime.MinValue;
+            startdID = int.MinValue;
+            posID = int.MinValue;
+            return false;
+        }
+
+        private double GetOdometerFromChargingstate(int openChargingState)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ pos.odometer
+FROM
+ chargingstate,
+ pos
+WHERE
+ pos.CarID=@CarID
+ AND chargingstate.id=@ChargingStateID
+ AND chargingstate.Pos = pos.id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double odometer))
+                            {
+                                return odometer;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+            }
+            return double.NaN;
+        }
+
+        private void CloseChargingState(int openChargingState)
+        {
+            try
+            {
+                int chargeID = GetMaxChargeid(out DateTime chargeEnd);
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+ chargingstate
+SET
+ EndDate = @EndDate,
+ EndChargingID = @EndChargingID
+WHERE
+ EndDate IS NULL
+ AND CarID=@CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
+                        cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+            }
+        }
+
+        private Queue<int> FindOpenChargingStates()
+        {
+            Queue<int> openChargingStates = new Queue<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ id
+FROM
+ chargingstate
+WHERE
+ CarID=@CarID
+ AND EndDate IS NULL ORDER BY datum ASC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                openChargingStates.Enqueue(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during FindOpenChargingStates(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during FindOpenChargingStates()");
+            }
+            return openChargingStates;
+        }
+
+        private Queue<int> FindChargingStatesByOdometer(double odometer)
+        {
+            Queue<int> chargingStates = new Queue<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ chargingstate.id
+FROM
+ chargingstate,
+ pos
+WHERE
+ chargingstate.CarID=@CarID
+ AND chargingstate.Pos = pos.id
+ AND pos.odometer=@odometer", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@odometer", odometer);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                chargingStates.Enqueue(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during FindChargingStatesByOdometer(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during FindChargingStatesByOdometer()");
+            }
+            return chargingStates;
+        }
+
         public void CloseChargingState()
         {
             car.Log("CloseChargingState()");
@@ -1558,6 +1892,48 @@ WHERE
             }
 
             car.currentJSON.CreateCurrentJSON();
+        }
+
+        private Address GetAddressFromChargingState(int openChargingState)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ pos.lat,
+ pos.lng
+FROM
+ chargingstate,
+ pos
+WHERE
+ chargingstate.CarID=@CarID
+ AND chargingstate.Pos = pos.id
+ AND chargingstate.id=@ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double lat)
+                                && double.TryParse(dr[1].ToString(), out double lng))
+                            {
+                                return Geofence.GetInstance().GetPOI(lat, lng, false);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during GetAddressFromChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during GetAddressFromChargingState()");
+            }
+            return null;
         }
 
         private DateTime lastChargingInsert = DateTime.Today;
