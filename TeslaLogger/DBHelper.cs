@@ -462,8 +462,9 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog($"FindChargingStatesByOdometer: {chargingState}:{odometer}");
                         }
+                        // chargingStates will contain current state, so only act if >1 states are found
                         // get startdate, startID, posID from oldest
-                        if (GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
+                        if (chargingStates.Count > 1 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
                         {
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
