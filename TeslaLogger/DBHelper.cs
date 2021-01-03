@@ -1110,7 +1110,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] != DBNull.Value)
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
@@ -1160,7 +1160,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@referenceID", referenceID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        while (dr.Read() && dr[0] != DBNull.Value)
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
