@@ -593,7 +593,7 @@ Supercharger PL-Katowice-E.Leclerc, 50.219000, 18.990329
 Supercharger PL-Kostomłoty, 51.037361, 16.584208
 Supercharger PL-Poznań, 52.400285, 16.893091
 Supercharger PL-Radom, 51.379569, 21.125477
-Supercharger PL-Trzebownisko, 50.089376, 22.047152
+Supercharger PL-Trzebownisko, 50.089252,22.04566
 Supercharger PL-Warsaw, 52.207827, 21.029574
 Supercharger PT-Alcacér do Sal, 38.391941, -8.513867
 Supercharger PT-Alcantarilha, 37.150601, -8.364433
@@ -692,7 +692,7 @@ Supercharger US-Dublin OH, 40.093198, -83.092261
 Supercharger US-Dubuque IA, 42.487438, -90.664024
 Supercharger US-Duluth MN, 46.784582, -92.102298
 Supercharger US-Effingham IL,39.13713,-88.563387
-Supercharger SU-Elko NV, 40.836298, -115.790796
+Supercharger US-Elko NV, 40.836298, -115.790796
 Supercharger US-Evanston WY, 41.26299,-110.985504
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
@@ -1507,6 +1507,12 @@ Familia DE-Quickborn, 53.743005, 9.940652
 Fortum NO-Alta, 69.966743, 23.268569
 Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
 Fortum NO-Sortland, 68.704914, 15.414759
+
+Greenway PL-Grajewo, 53.632866,22.475282
+Greenway PL-Kowale,54.309147,18.561917
+Greenway PL-Lublin,51.282566,22.570069
+Greenway PL-Ryki, 51.639735,21.913078
+Greenway PL-Warszawa BMW, 52.18526,21.00287
 
 Grønn Kontakt NO-Leknes, 68.14874, 13.612729
 Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
