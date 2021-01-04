@@ -285,6 +285,47 @@ namespace TeslaLogger
             }
         }
 
+        internal void UpdateEmptyChargeEnergy()
+        {
+            Queue<int> emptyChargeEnergy = new Queue<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id
+FROM
+  chargingstate
+WHERE
+  CarID=@CarID
+  AND charge_energy_added IS NULL", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                emptyChargeEnergy.Enqueue(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during UpdateEmptyChargeEnergy(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during UpdateEmptyChargeEnergy()");
+            }
+            foreach (int ID in emptyChargeEnergy)
+            {
+                UpdateChargeEnergyAdded(ID);
+            }
+        }
+
         internal void CombineChangingStates()
         {
             // find candidates to combine
@@ -634,11 +675,11 @@ HAVING
             }
         }
 
-        private void GetChargeCostData(int openChargingState, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
+        private void GetChargeCostData(int ChargingStateID, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
         {
             if (car.HasFreeSuC())
             {
-                if (ChargingStateLocationIsSuC(openChargingState))
+                if (ChargingStateLocationIsSuC(ChargingStateID))
                 {
                     ref_cost_per_kwh = 0.0;
                     ref_cost_per_kwh_found = true;
@@ -651,7 +692,7 @@ HAVING
             else
             {
                 // get addr for chargingstate.pos
-                Address addr = GetAddressFromChargingState(openChargingState);
+                Address addr = GetAddressFromChargingState(ChargingStateID);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     // check if +ccp is enabled
@@ -670,7 +711,7 @@ HAVING
             }
         }
 
-        private bool ChargingStateLocationIsSuC(int openChargingState)
+        private bool ChargingStateLocationIsSuC(int ChargingStateID)
         {
             try
             {
@@ -688,7 +729,7 @@ WHERE
   AND id = @referenceID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@referenceID", openChargingState);
+                        cmd.Parameters.AddWithValue("@referenceID", ChargingStateID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
@@ -709,7 +750,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int openChargingState, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
+        private void UpdateChargePrice(int ChargingStateID, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
         {
             if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
@@ -739,7 +780,7 @@ AND CarID = @CarID
 AND id = @referenceID", con))
                         {
                             cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
-                            cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = openChargingState;
+                            cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = ChargingStateID;
                             Tools.DebugLog(cmd);
                             MySqlDataReader dr = cmd.ExecuteReader();
                             if (dr.Read() && dr[0] != DBNull.Value) {
@@ -762,7 +803,7 @@ AND id = @referenceID", con))
                 // calculate and update cost_per_kwh
                 if (ref_cost_per_kwh_found)
                 {
-                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_kwh:{charge_energy_added}kWh * {ref_cost_per_kwh}{ref_cost_currency} = {ref_cost_per_kwh * charge_energy_added}");
+                    car.Log($"UpdateChargePrice id:{ChargingStateID} cost_per_kwh:{charge_energy_added}kWh * {ref_cost_per_kwh}{ref_cost_currency} = {ref_cost_per_kwh * charge_energy_added}");
                     if (!double.IsNaN(cost_total))
                     {
                         cost_total += ref_cost_per_kwh * charge_energy_added;
@@ -786,7 +827,7 @@ WHERE
   AND id=@ChargingStateID", con))
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_kwh", ref_cost_per_kwh * charge_energy_added);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
@@ -805,7 +846,7 @@ WHERE
                 if (ref_cost_per_minute_found)
                 {
                     double duration = (endDate - startDate).TotalMinutes;
-                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_minute:{duration}min * {ref_cost_per_minute}{ref_cost_currency} = {ref_cost_per_minute * duration}");
+                    car.Log($"UpdateChargePrice id:{ChargingStateID} cost_per_minute:{duration}min * {ref_cost_per_minute}{ref_cost_currency} = {ref_cost_per_minute * duration}");
                     if (!double.IsNaN(cost_total))
                     {
                         cost_total += ref_cost_per_minute * duration;
@@ -829,7 +870,7 @@ WHERE
   AND id=@ChargingStateID", con))
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_minute", ref_cost_per_minute * duration);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
@@ -847,7 +888,7 @@ WHERE
                 // calculate and update cost_per_session
                 if (ref_cost_per_session_found)
                 {
-                    car.Log($"UpdateChargePrice id:{openChargingState} cost_per_session:{ref_cost_per_session}{ref_cost_currency}");
+                    car.Log($"UpdateChargePrice id:{ChargingStateID} cost_per_session:{ref_cost_per_session}{ref_cost_currency}");
                     if (!double.IsNaN(cost_total))
                     {
                         cost_total += ref_cost_per_session;
@@ -871,7 +912,7 @@ WHERE
   AND id=@ChargingStateID", con))
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_session", ref_cost_per_session);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
@@ -889,7 +930,7 @@ WHERE
                 // update cost_total
                 if (!double.IsNaN(cost_total))
                 {
-                    car.Log($"UpdateChargePrice id:{openChargingState} cost_total:{cost_total}{ref_cost_currency}");
+                    car.Log($"UpdateChargePrice id:{ChargingStateID} cost_total:{cost_total}{ref_cost_currency}");
                     try
                     {
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -905,7 +946,7 @@ WHERE
   AND id=@ChargingStateID", con))
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_total", cost_total);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
@@ -923,7 +964,7 @@ WHERE
                 // update cost_currency
                 if (!string.IsNullOrEmpty(ref_cost_currency))
                 {
-                    car.Log($"UpdateChargePrice id:{openChargingState} cost_currency:{ref_cost_currency}");
+                    car.Log($"UpdateChargePrice id:{ChargingStateID} cost_currency:{ref_cost_currency}");
                     try
                     {
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -939,7 +980,7 @@ WHERE
   AND id=@ChargingStateID", con))
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                                cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                                cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_currency", ref_cost_currency);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
@@ -956,40 +997,47 @@ WHERE
             }
         }
 
-        private void UpdateChargeEnergyAdded(int openChargingState)
+        private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
-            double startEnergyAdded = GetChargeEnergyAdded(openChargingState, "StartChargingID");
-            double endEnergyAdded = GetChargeEnergyAdded(openChargingState, "EndChargingID");
+            double startEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "StartChargingID");
+            double endEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "EndChargingID");
 
             double charge_energy_added = endEnergyAdded - startEnergyAdded;
 
-            try
+            if (charge_energy_added >= 0)
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE 
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(
+    @"UPDATE 
   chargingstate 
 SET 
   charge_energy_added=@charge_energy_added
 WHERE 
   CarID = @CarID
   AND id=@ChargingStateID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        int rowsUpdated = cmd.ExecuteNonQuery();
-                        car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                            cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                            cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                            Tools.DebugLog(cmd);
+                            int rowsUpdated = cmd.ExecuteNonQuery();
+                            car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
+                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID}");
             }
         }
 
