@@ -286,7 +286,54 @@ namespace TeslaLogger
         internal void CombineChangingStates()
         {
             // find candidates to combine
-            // TODO
+            // find chargingstates with exaclty the same odometer -> car did no move between charging states
+            foreach (int candidate in FindCombineCandidates())
+            {
+                Tools.DebugLog($"FindCombineCandidates: {candidate}");
+            }
+        }
+
+        private Queue<int> FindCombineCandidates()
+        {
+                Queue<int> combineCandidates = new Queue<int>();
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  pos.odometer
+FROM
+  chargingstate,
+  pos
+WHERE
+  chargingstate.pos = pos.id
+  AND pos.CarID=@CarID
+GROUP BY
+  pos.odometer
+HAVING
+  COUNT(chargingstate.id) > 1", con))
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            while (dr.Read() && dr[0] != DBNull.Value)
+                            {
+                                if (int.TryParse(dr[0].ToString(), out int id))
+                                {
+                                combineCandidates.Enqueue(id);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog($"Exception during FindCombineCandidates(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during FindCombineCandidates()");
+                }
+                return combineCandidates;
         }
 
         internal void UpdateTeslaToken()
@@ -463,14 +510,13 @@ namespace TeslaLogger
                     {
                         Tools.DebugLog($"openChargingState id:{openChargingState} odometer:{odometer}");
                         // find charging state(s) with identical pos.odometer
-                        Queue<int> chargingStates = FindChargingStatesByOdometer(openChargingState);
+                        Queue<int> chargingStates = FindSimilarChargingStates(openChargingState);
                         foreach (int chargingState in chargingStates)
                         {
-                            Tools.DebugLog($"FindChargingStatesByOdometer: {chargingState}:{odometer}");
+                            Tools.DebugLog($"FindSimilarChargingStates: {chargingState}:{odometer}");
                         }
-                        // chargingStates will contain current state, so only act if >1 states are found
                         // get startdate, startID, posID from oldest
-                        if (chargingStates.Count > 1 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
+                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
                         {
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
@@ -1134,7 +1180,7 @@ WHERE
             return openChargingStates;
         }
 
-        private Queue<int> FindChargingStatesByOdometer(int referenceID)
+        private Queue<int> FindSimilarChargingStates(int referenceID)
         {
             Queue<int> chargingStates = new Queue<int>();
             try
@@ -1149,8 +1195,9 @@ FROM
  chargingstate,
  pos
 WHERE
- chargingstate.CarID=@CarID
+ chargingstate.CarID=@CarID1
  AND chargingstate.Pos = pos.id
+ AND chargingstate.id<>@referenceID1
  AND pos.odometer=(
    SELECT
      pos.odometer
@@ -1158,12 +1205,25 @@ WHERE
      chargingstate,
      pos
    WHERE
-    pos.CarID=1
-    AND chargingstate.id=@referenceID
-    AND chargingstate.Pos = pos.id)", con))
+    pos.CarID=@CarID2
+    AND chargingstate.id=@referenceID2
+    AND chargingstate.Pos = pos.id)
+AND chargingstate.conn_charge_cable = (
+  SELECT
+    conn_charge_cable
+  FROM
+    chargingstate
+  WHERE
+    chargingstate.CarID=@CarID3
+    AND id=@referenceID3)
+ORDER BY chargingstate.id ASC", con))
                     {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@referenceID", referenceID);
+                        cmd.Parameters.AddWithValue("@CarID1", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@CarID2", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@CarID3", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@referenceID1", referenceID);
+                        cmd.Parameters.AddWithValue("@referenceID2", referenceID);
+                        cmd.Parameters.AddWithValue("@referenceID3", referenceID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read() && dr[0] != DBNull.Value)
