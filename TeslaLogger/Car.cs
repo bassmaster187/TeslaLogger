@@ -1113,25 +1113,6 @@ namespace TeslaLogger
                 // reset lastSetChargeLimitAddressName
                 LastSetChargeLimitAddressName = string.Empty;
             }
-
-            // charging -> any
-            if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
-            {
-                // moved to DBHelper.CloseChargingStates()
-                /*_ = Task.Factory.StartNew(() =>
-                {
-                    Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
-                    if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
-                    {
-                        if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
-                        {
-                            // allow some time to close charging session before updating price
-                            Thread.Sleep(30000);
-                            HandleSpecialFlag_CopyChargePrice(addr);
-                        }
-                    }
-                });*/
-            }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
@@ -1152,9 +1133,11 @@ namespace TeslaLogger
                             case Address.SpecialFlags.OpenChargePort:
                             case Address.SpecialFlags.EnableSentryMode:
                             case Address.SpecialFlags.CopyChargePrice:
+                            case Address.SpecialFlags.CombineChargingStates:
+                            case Address.SpecialFlags.DoNotCombineChargingStates:
                                 break;
                             default:
-                                Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                                Log("HandleStateChange unhandled special flag " + flag.ToString());
                                 break;
                         }
                     }
