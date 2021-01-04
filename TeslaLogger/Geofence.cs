@@ -17,7 +17,9 @@ namespace TeslaLogger
             EnableSentryMode,
             SetChargeLimit,
             ClimateOff,
-            CopyChargePrice
+            CopyChargePrice,
+            CombineChargingStates,
+            DoNotCombineChargingStates
         }
 
         public string name;
