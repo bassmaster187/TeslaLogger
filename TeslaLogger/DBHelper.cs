@@ -330,10 +330,37 @@ WHERE
         internal void CombineChangingStates()
         {
             // find candidates to combine
-            // find chargingstates with exaclty the same odometer -> car did no move between charging states
+            // find chargingstates with exactly the same odometer -> car did no move between charging states
             foreach (int candidate in FindCombineCandidates())
             {
                 Tools.DebugLog($"FindCombineCandidates: {candidate}");
+
+                Address addr = GetAddressFromChargingState(candidate);
+
+                // check if combine is disabled globally
+                if (!Tools.CombineChargingStates())
+                {
+                    // combine disabled, but check pos for special flag do combine
+                    if (addr == null || addr.specialFlags == null || addr.specialFlags.Count == 0)
+                    {
+                        continue;
+                    }
+                    else if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && !addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
+                    {
+                        continue;
+                    }
+                }
+
+                // check pos for special flag do not combine
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    // check if DoNotCombineChargingStates is enabled
+                    if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
+                    {
+                        continue;
+                    }
+                }
+
                 Queue<int> similarChargingStates = FindSimilarChargingStates(candidate);
                 foreach (int similarChargingState in similarChargingStates)
                 {
@@ -1038,7 +1065,7 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID}");
+                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID} startEnergyAdded:{startEnergyAdded} endEnergyAdded:{endEnergyAdded} ");
             }
         }
 
@@ -2438,7 +2465,7 @@ ORDER BY chargingstate.id ASC", con))
             car.currentJSON.CreateCurrentJSON();
         }
 
-        private Address GetAddressFromChargingState(int openChargingState)
+        private Address GetAddressFromChargingState(int ChargingStateID)
         {
             try
             {
@@ -2458,7 +2485,7 @@ WHERE
  AND chargingstate.id=@ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
