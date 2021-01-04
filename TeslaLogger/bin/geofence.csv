@@ -595,7 +595,7 @@ Supercharger PL-Katowice-E.Leclerc, 50.219000, 18.990329
 Supercharger PL-Kostomłoty, 51.037361, 16.584208
 Supercharger PL-Poznań, 52.400285, 16.893091
 Supercharger PL-Radom, 51.379569, 21.125477
-Supercharger PL-Trzebownisko, 50.089376, 22.047152
+Supercharger PL-Trzebownisko, 50.089252,22.04566
 Supercharger PL-Warsaw, 52.207827, 21.029574
 Supercharger PT-Alcacér do Sal, 38.391941, -8.513867
 Supercharger PT-Alcantarilha, 37.150601, -8.364433
@@ -1539,6 +1539,22 @@ Innogy DE-Soltau, 52.98422, 9.838614
 Innogy DE-Spreyer, 49.303853, 8.448678
 Innogy DE-Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
 Innogy DE-Treuen, 50.549113, 12.286336
+
+Familia DE-Hamburg, 53.608366, 10.044162
+Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
+Familia DE-Reihenfeld, 53.822247, 10.502483
+Familia DE-Tarp, 54.669585, 9.395309
+Familia DE-Quickborn, 53.743005, 9.940652
+
+Fortum NO-Alta, 69.966743, 23.268569
+Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
+Fortum NO-Sortland, 68.704914, 15.414759
+
+Greenway PL-Grajewo, 53.632866,22.475282
+Greenway PL-Kowale,54.309147,18.561917
+Greenway PL-Lublin,51.282566,22.570069
+Greenway PL-Ryki, 51.639735,21.913078
+Greenway PL-Warszawa BMW, 52.18526,21.00287
 
 Grønn Kontakt NO-Leknes, 68.14874, 13.612729
 Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
