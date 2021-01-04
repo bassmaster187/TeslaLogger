@@ -273,7 +273,9 @@ namespace TeslaLogger
                     t = Environment.TickCount - t;
 
                     if (rows > 0)
+                    {
                         Logfile.Log($"update {table} set carid = 1 where carid is null; ms: {t} / Rows: {rows}");
+                    }
 
                 }
                 catch (Exception ex)
@@ -290,6 +292,67 @@ namespace TeslaLogger
             foreach (int candidate in FindCombineCandidates())
             {
                 Tools.DebugLog($"FindCombineCandidates: {candidate}");
+                Queue<int> similarChargingStates = FindSimilarChargingStates(candidate);
+                foreach (int similarChargingState in similarChargingStates)
+                {
+                    Tools.DebugLog($"FindSimilarChargingStates: {similarChargingState}");
+                }
+                if (similarChargingStates.Count > 0)
+                {
+                    // find max ID in similarChargingStates and candidate
+                    int maxID = candidate;
+                    foreach (int similarChargingState in similarChargingStates)
+                    {
+                        maxID = Math.Max(maxID, similarChargingState);
+                    }
+                    // find min ID in similarChargingStates and candidate
+                    int minID = candidate;
+                    foreach (int similarChargingState in similarChargingStates)
+                    {
+                        minID = Math.Min(minID, similarChargingState);
+                    }
+                    // build deletion list: all IDs from minID to maxID including minID excluding maxID
+                    List<int> IDsToDelete = new List<int>();
+                    if (candidate != maxID)
+                    {
+                        IDsToDelete.Add(candidate);
+                    }
+                    foreach (int similarChargingState in similarChargingStates)
+                    {
+                        if (similarChargingState != maxID)
+                        {
+                            IDsToDelete.Add(similarChargingState);
+                        }
+                    }
+                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
+                    car.Log($"Combine charging states {string.Join(", ", IDsToDelete)} into {maxID}");
+                    Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
+                    // update current charging state with startdate, startID, pos
+                    Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
+                    UpdateChargingstate(maxID, startDate, startdID, 0.0, 0.0);
+                    // delete all older charging states
+                    foreach (int chargingState in IDsToDelete)
+                    {
+                        Tools.DebugLog($"delete combined chargingState id:{chargingState}");
+                        DeleteChargingstate(chargingState);
+                    }
+
+                    // get charging cost calculation data
+                    string ref_cost_currency = string.Empty;
+                    double ref_cost_per_kwh = double.NaN;
+                    bool ref_cost_per_kwh_found = false;
+                    double ref_cost_per_minute = double.NaN;
+                    bool ref_cost_per_minute_found = false;
+                    double ref_cost_per_session = double.NaN;
+                    bool ref_cost_per_session_found = false;
+                    GetChargeCostData(maxID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+
+                    // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
+                    UpdateChargeEnergyAdded(maxID);
+
+                    // calculate charging price if per_kwh and/or per_minute and/or per_session is available
+                    UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                }
             }
         }
 
@@ -303,7 +366,7 @@ namespace TeslaLogger
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  pos.odometer
+  chargingstate.id
 FROM
   chargingstate,
   pos
@@ -322,7 +385,7 @@ HAVING
                             {
                                 if (int.TryParse(dr[0].ToString(), out int id))
                                 {
-                                combineCandidates.Enqueue(id);
+                                    combineCandidates.Enqueue(id);
                                 }
                             }
                         }
@@ -518,6 +581,7 @@ HAVING
                         // get startdate, startID, posID from oldest
                         if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
                         {
+                            car.Log($"Combine charging states {string.Join(", ", chargingStates)} into {openChargingState}");
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
                             Tools.DebugLog($"UpdateChargingState: id:{openChargingState} to startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -531,6 +595,7 @@ HAVING
                         }
                     }
 
+                    // get charging cost calculation data
                     string ref_cost_currency = string.Empty;
                     double ref_cost_per_kwh = double.NaN;
                     bool ref_cost_per_kwh_found = false;
@@ -538,39 +603,7 @@ HAVING
                     bool ref_cost_per_minute_found = false;
                     double ref_cost_per_session = double.NaN;
                     bool ref_cost_per_session_found = false;
-
-                    if (car.HasFreeSuC())
-                    {
-                        if (ChargingStateLocationIsSuC(openChargingState))
-                        {
-                            ref_cost_per_kwh = 0.0;
-                            ref_cost_per_kwh_found = true;
-                            ref_cost_per_minute = 0.0;
-                            ref_cost_per_minute_found = true;
-                            ref_cost_per_session = 0.0;
-                            ref_cost_per_session_found = true;
-                        }
-                    }
-                    else
-                    {
-                        // get addr for chargingstate.pos
-                        Address addr = GetAddressFromChargingState(openChargingState);
-                        if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
-                        {
-                            // check if +ccp is enabled
-                            if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
-                            {
-                                car.Log($"CopyChargePrice at '{addr.name}'");
-                                // find reference charge session for addr
-                                int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
-                                // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
-                                if (refChargingState != int.MinValue)
-                                {
-                                    car.Log($"CopyChargePrice: reference charging session found for '{addr.name}', ID {refChargingState} - cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
-                                }
-                            }
-                        }
-                    }
+                    GetChargeCostData(openChargingState, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
 
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
                     UpdateChargeEnergyAdded(openChargingState);
@@ -601,6 +634,42 @@ HAVING
             }
         }
 
+        private void GetChargeCostData(int openChargingState, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
+        {
+            if (car.HasFreeSuC())
+            {
+                if (ChargingStateLocationIsSuC(openChargingState))
+                {
+                    ref_cost_per_kwh = 0.0;
+                    ref_cost_per_kwh_found = true;
+                    ref_cost_per_minute = 0.0;
+                    ref_cost_per_minute_found = true;
+                    ref_cost_per_session = 0.0;
+                    ref_cost_per_session_found = true;
+                }
+            }
+            else
+            {
+                // get addr for chargingstate.pos
+                Address addr = GetAddressFromChargingState(openChargingState);
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    // check if +ccp is enabled
+                    if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
+                    {
+                        car.Log($"CopyChargePrice at '{addr.name}'");
+                        // find reference charge session for addr
+                        int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
+                        // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
+                        if (refChargingState != int.MinValue)
+                        {
+                            car.Log($"CopyChargePrice: reference charging session found for '{addr.name}', ID {refChargingState} - cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
+                        }
+                    }
+                }
+            }
+        }
+
         private bool ChargingStateLocationIsSuC(int openChargingState)
         {
             try
@@ -624,7 +693,7 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                         {
-                            if (dr[0].ToString().Equals("Tesla") && dr[1].ToString().Equals("Tesla"))
+                            if (dr[0].ToString().Equals("Tesla") && (dr[1].ToString().Equals("Tesla") || dr[1].ToString().Equals("Combo")))
                             {
                                 return true;
                             }
@@ -1216,14 +1285,34 @@ AND chargingstate.conn_charge_cable = (
   WHERE
     chargingstate.CarID=@CarID3
     AND id=@referenceID3)
+AND chargingstate.fast_charger_brand = (
+  SELECT
+    fast_charger_brand
+  FROM
+    chargingstate
+  WHERE
+    chargingstate.CarID=@CarID4
+    AND id=@referenceID4)
+AND chargingstate.fast_charger_type = (
+  SELECT
+    fast_charger_type
+  FROM
+    chargingstate
+  WHERE
+    chargingstate.CarID=@CarID5
+    AND id=@referenceID5)
 ORDER BY chargingstate.id ASC", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID1", car.CarInDB);
                         cmd.Parameters.AddWithValue("@CarID2", car.CarInDB);
                         cmd.Parameters.AddWithValue("@CarID3", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@CarID4", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@CarID5", car.CarInDB);
                         cmd.Parameters.AddWithValue("@referenceID1", referenceID);
                         cmd.Parameters.AddWithValue("@referenceID2", referenceID);
                         cmd.Parameters.AddWithValue("@referenceID3", referenceID);
+                        cmd.Parameters.AddWithValue("@referenceID4", referenceID);
+                        cmd.Parameters.AddWithValue("@referenceID5", referenceID);
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read() && dr[0] != DBNull.Value)

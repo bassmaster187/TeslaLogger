@@ -312,7 +312,10 @@ namespace TeslaLogger
                 WebHelper.UpdateAllPOIAddresses();
                 foreach (Car c in Car.allcars)
                 {
-                    c.dbHelper.CombineChangingStates();
+                    if (Tools.CombineChargingStates())
+                    {
+                        c.dbHelper.CombineChangingStates();
+                    }
                     c.webhelper.UpdateAllEmptyAddresses();
                 }
                 DBHelper.UpdateIncompleteTrips();
