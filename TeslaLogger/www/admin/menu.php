@@ -47,7 +47,7 @@ function menu($title)
 ?>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
-        <h1 class="site-title"><a href="index.php" rel="home"><img src="logo.jpg" alt="Logo"> <?PHP echo($title); ?></a></h1>
+        <h1 class="site-title"><a href="index.php?carid=<?=$current_carid?>" rel="home"><img src="logo.jpg" alt="Logo"> <?PHP echo($title); ?></a></h1>
         <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
             <button class="menu-toggle">Primary Menu</button>
             <div class="menu-menuoben-container">
