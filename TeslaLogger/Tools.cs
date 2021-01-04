@@ -1209,7 +1209,7 @@ namespace TeslaLogger
             }
         }
 
-        private static long FreeDiskSpaceMB()
+        internal static long FreeDiskSpaceMB()
         {
             DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
