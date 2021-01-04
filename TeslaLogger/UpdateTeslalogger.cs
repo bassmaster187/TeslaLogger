@@ -460,6 +460,12 @@ CREATE TABLE superchargerstate(
                         Tools.Exec_mono("git", "--version");
                     }
 
+                    if (!Tools.Exec_mono("lzma", "-V", false).Contains("LZMA"))
+                    {
+                        Tools.Exec_mono("apt-get", "-y install lzma");
+                        Tools.Exec_mono("lzma", "-V");
+                    }
+
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
 
                     Tools.Exec_mono("rm", "-rf /etc/teslalogger/git");
