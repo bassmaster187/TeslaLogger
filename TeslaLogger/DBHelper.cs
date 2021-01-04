@@ -283,6 +283,12 @@ namespace TeslaLogger
             }
         }
 
+        internal void CombineChangingStates()
+        {
+            // find candidates to combine
+            // TODO
+        }
+
         internal void UpdateTeslaToken()
         {
             try
@@ -1176,74 +1182,6 @@ WHERE
                 Logfile.ExceptionWriter(ex, "Exception during FindChargingStatesByOdometer()");
             }
             return chargingStates;
-        }
-
-        public void CloseChargingState()
-        {
-            car.Log("CloseChargingState()");
-            bool hasFreeSuc = car.HasFreeSuC();
-            if (hasFreeSuc)
-            {
-                // get open SuC charging sessions and apply HasFreeSuC
-                try
-                {
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE 
-  chargingstate 
-SET 
-  cost_total= @cost_total
-WHERE 
-  CarID = @carid 
-  AND EndDate is null 
-  AND fast_charger_brand = 'Tesla'", con))
-                        {
-                            cmd.Parameters.AddWithValue("@carid", car.CarInDB);
-                            cmd.Parameters.AddWithValue("@cost_total", 0.0);
-                            int rowsUpdated = cmd.ExecuteNonQuery();
-                            if (rowsUpdated > 0)
-                            {
-                                Logfile.Log($"CloseChargingState: car has FreeSuC - update open charging sessions ({rowsUpdated}): cost_total 0.0");
-                            }
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Tools.DebugLog($"Exception during DBHelper.CloseChargingState(): {ex}");
-                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.CloseChargingState()");
-                }
-            }
-
-            int chargeID = GetMaxChargeid(out DateTime chargeEnd);
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null and CarID=@CarID", con))
-                {
-                    cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
-                    cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            car.currentJSON.current_charging = false;
-            car.currentJSON.current_charger_power = 0;
-            car.currentJSON.current_charger_voltage = 0;
-            car.currentJSON.current_charger_phases = 0;
-            car.currentJSON.current_charger_actual_current = 0;
-            car.currentJSON.current_charge_rate_km = 0;
-
-            UpdateMaxChargerPower();
-
-            // As charging point name is depending on the max charger power, it will be updated after "MaxChargerPower" was computed
-            car.webhelper.UpdateLastChargingAdress();
-
-            Task.Factory.StartNew(() => CheckForInterruptedCharging(false));
         }
 
         public void UpdateMaxChargerPower()
