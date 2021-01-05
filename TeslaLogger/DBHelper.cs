@@ -803,8 +803,8 @@ SELECT
 FROM
   chargingstate
 WHERE
-AND CarID = @CarID
-AND id = @referenceID", con))
+  CarID = @CarID
+  AND id = @referenceID", con))
                         {
                             cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                             cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = ChargingStateID;
