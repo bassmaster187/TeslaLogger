@@ -10,5 +10,8 @@ $con=new mysqli($mysqlhost, $mysqluser, $mysqlpwd, $mysqldb);
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
+} elseif {
+    printf("Connection to DB sucessful.");
 }
+
 ?>
