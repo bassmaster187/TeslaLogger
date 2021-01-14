@@ -1,13 +1,15 @@
-﻿namespace TeslaLogger
-{
-    using System;
+﻿using System;
 
+namespace TeslaLogger
+{
     internal static class MQTTClient
     {
         internal static void StartMQTTClient()
         {
             if (!ApplicationSettings.Default.UseMQTT)
+            {
                 return;
+            }
 
             try
             {
@@ -16,7 +18,7 @@
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -28,12 +30,14 @@
             {
                 if (!System.IO.File.Exists(MQTTClientPath))
                 {
-                    Tools.Log("MQTTClient.exe not found!");
+                    Logfile.Log("MQTTClient.exe not found!");
                     return;
                 }
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.EnableRaisingEvents = false;
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                };
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.FileName = "mono";
@@ -44,18 +48,18 @@
                 while (!proc.StandardOutput.EndOfStream)
                 {
                     string line = proc.StandardOutput.ReadLine();
-                    Tools.Log(line);
+                    Logfile.Log(line);
                 }
 
                 proc.WaitForExit();
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.ToString());
+                Logfile.Log(ex.ToString());
             }
             finally
             {
-                Tools.Log("MQTT terminated");
+                Logfile.Log("MQTT terminated");
             }
         }
     }

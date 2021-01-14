@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class GeocodeCache
+    internal class GeocodeCache
     {
-        DataTable dt = new DataTable("cache");
-        static GeocodeCache _instance;
+        private DataTable dt = new DataTable("cache");
+        private static GeocodeCache _instance;
 
         public static GeocodeCache Instance
         {
@@ -38,26 +34,23 @@ namespace TeslaLogger
                 if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCache)))
                 {
                     dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
-                    Tools.Log("GeocodeCache Items: " + dt.Rows.Count);
+                    Logfile.Log("GeocodeCache Items: " + dt.Rows.Count);
                 }
                 else
                 {
-                    Tools.Log(FileManager.GetFilePath(TLFilename.GeocodeCache) + " Not found!");
+                    Logfile.Log(FileManager.GetFilePath(TLFilename.GeocodeCache) + " Not found!");
                 }
             }
             catch (Exception ex)
             {
-                Tools.ExceptionWriter(ex, "");
+                Logfile.ExceptionWriter(ex, "");
             }
         }
 
         public string Search(double lat, double lng)
         {
             DataRow dr = dt.Rows.Find(new object[] {lat, lng });
-            if (dr == null)
-                return null;
-
-            return dr["Value"].ToString();
+            return dr?["Value"].ToString();
         }
 
 
@@ -71,11 +64,11 @@ namespace TeslaLogger
                 dr["value"] = value;
                 dt.Rows.Add(dr);
 
-                Tools.Log("GeocodeCache:Insert");
+                Logfile.Log("GeocodeCache:Insert");
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
+                Logfile.Log(ex.Message);
             }
         }
 
@@ -87,8 +80,13 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Tools.Log(ex.Message);
+                Logfile.Log(ex.Message);
             }
+        }
+
+        internal void ClearCache()
+        {
+            dt.Clear();
         }
     }
 }

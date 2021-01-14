@@ -15,10 +15,21 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "columns": [],
+      "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
         "h": 19,
@@ -28,6 +39,7 @@
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -125,7 +137,7 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -163,5 +175,5 @@
   "timezone": "",
   "title": "SOC Ladestatistik",
   "uid": "-pkIkhmRz",
-  "version": 1
+  "version": 4
 }

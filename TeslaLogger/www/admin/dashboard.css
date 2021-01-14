@@ -1,0 +1,176 @@
+html {
+	height: 100%;	
+}
+
+body {
+	font-size: 20px;
+	background-color: black; 
+	font-family: Roboto;
+	
+	background-size: cover;
+	background-color: black; 
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#panel {
+	position: absolute; 
+	top: 40px; 
+	left: 0; 
+	width: 100%; 
+	text-align: center; 
+	font-size: 80px; 
+	color: #EAEAEA;	
+}
+
+#headline {
+	font-size: 30px;
+}
+
+#teslalogger {
+	font-size: 30px;
+}
+
+#display_name {
+	display: block;
+	font-size: 60px;
+}
+
+#rangeline {
+	margin-top: 50px; 
+	vertical-align: middle; 
+	color: #D1D1D1;
+	font-size: 80x;
+}
+
+#range {
+	margin-left:10px;
+}
+
+#km {
+	font-size: 32px;
+}
+
+#percent {
+	font-size: 32px;
+}
+
+#car_statusLabel {
+	margin-top: 50px;
+	font-size: 60px; 
+	color:#EAEAEA; 
+	text-shadow: 4px 4px 4px #555;
+}
+#car_status {
+	margin-top: 10px;
+	font-size: 48px; 
+	color:#EAEAEA;
+}
+
+#error {
+	color:red;
+	font-size: 30px;
+}
+
+#calendar {
+	text-align: center;
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	color: #EAEAEA; 
+}
+
+#weekday, #date {
+	font-size: 30px; 
+}
+
+#clock {
+	font-size: 60px; 
+}
+
+#batdiv {
+    position: relative;
+}
+
+#batimg {
+	top: 0px;
+}
+
+#batimg_m {
+	position: absolute;
+}
+
+#batimg_end {
+	position: absolute;
+}
+
+#weather {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	font-size: 40px; 
+	text-align: center;
+	color: #EAEAEA; 
+}
+
+#weather_icon {
+	width: 180px;
+}
+
+@media all and (max-width: 1000px) {
+	#panel { font-size: 60px; }
+
+	#headline { font-size: 25px; }
+	
+	#teslalogger { font-size: 25px; }
+
+	#display_name { 	font-size: 50px; }
+	
+	#rangeline { margin-top: 25px; font-size: 60px;	}
+
+	#km { font-size: 24px; }
+	#percent {font-size: 32px; }
+	
+	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
+	
+	#car_status { font-size: 36px; } 
+
+	#batimg	{ height: 50px; }
+
+	#clock { font-size: 50px; }
+
+	#weekday, #date { font-size: 20px; }
+	
+	#weather { font-size: 30px; }
+	
+	#weather_icon {	width: 100px; }
+}
+
+@media all and (max-width: 700px) {
+	#panel { font-size: 40px; }
+
+	#headline { font-size: 20px; }
+		
+	#teslalogger { font-size: 20px; }
+
+	#display_name { 	font-size: 40px; }
+
+	#rangeline { margin-top: 25px; font-size: 40px;	}
+
+	#km { font-size: 16px; }
+	#percent {font-size: 16px; }
+	
+	#car_statusLabel { margin-top: 25px; font-size: 30px; 	}
+	
+	#car_status { font-size: 24px; } 
+
+	#batimg	{ height: 30px; }
+	
+	#clock { font-size: 40px; }
+
+	#weekday, #date { font-size: 15px; }
+	
+	#weather { font-size: 20px; }
+		
+	#weather_icon {	width: 80px; }
+}

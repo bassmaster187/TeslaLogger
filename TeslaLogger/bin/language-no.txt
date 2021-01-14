@@ -1,0 +1,166 @@
+#Akku Trips.json
+Akku Trips=Akku Trips
+Start Trip=Start Trip
+End Trip=End Trip
+Time=Date
+StartSOC=StartSOC
+EndSOC=EndSOC
+SOC diff=SOC diff
+Start km=Start km
+End km=Ende km
+Start mi=Start mi
+End mi=Ende mi
+kmDiff=kmDiff
+Max Range=Maks Range
+Ø Verbrauch=Ø forbruk
+Tage=Dager
+
+#Degradation.json
+Degradation=Degradering
+Maximalreichweite[km]=Maks range [km]
+Maximalreichweite [mi]=Maks range [mi]
+km Stand [km]=Kilometerteller [km]
+mi Stand [mi]=Kilometerteller [mi]
+Odometer [mi]=
+
+#Ladehistorie.json
+Ladehistorie=Ladehistorie
+Startdatum=Start dato
+Enddatum=End dato
+geladen kWh=kWt ladet
+km Stand=Kilometerteller
+Adresse=Adresse
+TR km Start=TR km Start
+TR km Ende=TR km End
+SOC Ende=SoC End
+100% TR=100% TR
+Minuten=Minutter
+TR mi Start=TR mi Start
+TR mi Ende=TR mi End
+
+#Ladestatistik.json
+Ladestatistik=Ladestatistikk
+Letzte Ladung=Siste lading
+Ort=Adresse
+Ø geladen kWh=Ø ladet kWt
+Ladezeit h=Ladetid h
+Ø SOC=Ø SoC
+Max SOC=Maks SoC
+Anzahl Ladungen=Antall ladinger
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=SoC Ladestatistikk
+SOC [%]=SOC [%]
+
+#Laden.json
+Laden=Lade
+Ladespannung [V]=Ladespenning [V]
+Reichweite [mi]=Rekkevidde [mi]
+Reichweite [km]=Rekkevidde [km]
+Leistung [kW]=Effekt [kW]
+Phasen=Phaser
+Stromstärke [A]=Strømstyrke [A]
+Angefordert [A]=Forespurt [A]
+Pilot [A]=Pilot [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Vampir Drain statistikk mnd.
+TR mi Verlust=TR mi tap
+kWh Verlust=kWt tapt
+Eur Verlust=kr tapt
+
+#Trip.json
+Trip=Trip
+Start=Start
+Ende=Ende
+Start Adresse=Startadresse
+Ziel Adresse=Destinasjonadresse
+Ø Verbrauch kWh=Ø forbruk kWt
+Verbraucht kWh=brukt kWt
+Dauer Min=Tid Min
+mi=mi
+km=km
+Ø °C=Ø °C
+Ø °F=Ø °F
+max mph=Maks mph
+max km/h=maks km/t
+max PS=Maks HP
+min PS=Min HP
+max kW=maks kW
+min kW=min kW
+Ø PS=Ø HP
+Ø kW=Ø kW
+Ø mph=Ø mph
+Ø km/h=Ø kph
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Varighet Hours
+TR mi Verlust pro Stunde=TR mi tapt per time       
+mi Stand=Kilometerteller
+
+#Vampir Drain.json
+Vampir Drain=Vampir Drain
+Standby Stunden=Standby timer
+Standby=Standby
+TR km Verlust=TR km tap
+TR km Verlust pro Stunde=TR km tapt per time
+
+#Verbrauch.json
+Verbrauch=Forbruk
+Höhe [m]=Høyde [m]
+Altitude [m]=Høyde [m]
+Geschwindigkeit [mph]=Hastighet [mph]
+Geschwindigkeit [km/h]=Hastighet [km/t]
+Leistung [PS]=Effekt [HP]
+Außentemperatur [°C]=Utetemperatur [°C]
+Außentemperatur [°F]=Utetemperatur [°F]
+
+Laden fertig=Lade avsluttet
+Schlafen=Sover
+Online=Online
+
+#Visited.json
+Visited=Besøkt
+
+#index.php
+Fahrzeuginfo=Bilinfo
+Status=Status
+Typical Range=Typical Range
+KM Stand=Kilometerteller
+Car Version=Bil versjon
+Letzter Trip=Siste Trip
+Dauer=Varighet
+Distanz=Distanse
+Max km/h=Maks km/t
+PS=PS
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
+Bitte Tesla Account Zugangsdaten eingeben=Dine Tesla account credentials
+Email=Epost
+Passwort=Passord
+Passwort wiederholen=Gjenta passordet
+Speichern=Lagre
+
+#settings.php
+Zugangsdaten=Credentials
+Language=Språk
+Leistung=Effekt
+Temperatur=Temperatur
+Längenmaß=Enhet lengde
+URL Admin Panel=URL Admin Panel
+
+#geoadd.php
+Bezeichnung=Betegnelse
+
+Ja=Ja
+Nein=Ikke
+
+Einschlafen=Sovne
+Automatische Updates=Automatiske oppdateringer
+
+TextShare=<h1> Del ladekurver / nedbrytningskurver anonymt </h1> Vi ønsker å sette opp en anonym database som du kan sammenligne degraderingskurver og ladekurver med. Så du kan sammenligne kjøretøyet ditt med andre når som helst og identifisere et uvanlig avvik tidlig. Dette kan også brukes senere for å kunne bevise på salgshøyden at batteriet fremdeles er fullt effektivt. I negativt tilfelle er det lettere å bevise en redusert ytelse sammenlignet med Tesla Motors. <br> <br> Vil du dele hurtigladekurver og degraderingskurver anonymt med andre Tesla-drivere? Denne avgjørelsen kan endres når som helst i innstillingene.
+Daten anonym teilen=Del data anonymt
+TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
+Resume Teslalogger=Fortsett Teslalogger
+Reichweite=Range

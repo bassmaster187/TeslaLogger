@@ -1,4 +1,6 @@
 <?PHP
+require("tools.php");
+
 $SleepTimeSpanStart = $_POST["SleepTimeSpanStart"];
 echo($SleepTimeSpanStart);
 
@@ -8,13 +10,22 @@ echo($SleepTimeSpanEnd);
 $SleepTimeSpanEnable = $_POST["SleepTimeSpanEnable"];
 echo($SleepTimeSpanEnable);
 
-$SleepTimeSpanEnable = $_POST["SleepTimeSpanEnable"];
-echo($SleepTimeSpanEnable);
+$ScanMyTesla = $_POST["ScanMyTesla"];
+echo($ScanMyTesla);
 
 $Language = $_POST["Language"];
 $Power = $_POST["Power"];
 $Temperature = $_POST["Temperature"];
 $Length = $_POST["Length"];
+$URL_Admin = $_POST["URL_Admin"];
+$URL_Grafana = $_POST["URL_Grafana"];
+$HTTPPort = $_POST["HTTPPort"];
+$ZoomLevel = $_POST["ZoomLevel"];
+$update = $_POST["update"];
+$Range = $_POST["Range"];
+$defaultcar = $_POST["defaultcar"];
+$defaultcarid = $_POST["defaultcarid"];
+
 
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
@@ -22,10 +33,26 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'Power' => $Power,
 'Temperature' => $Temperature,
 'Length' => $Length,
-'Language' => $Language
+'Language' => $Language,
+'URL_Admin' =>$URL_Admin,
+'URL_Grafana' =>$URL_Grafana,
+'HTTPPort' =>$HTTPPort,
+'ZoomLevel' =>$ZoomLevel,
+'ScanMyTesla' => $ScanMyTesla,
+'update' => $update,
+'Range' => $Range,
+'defaultcar' => $defaultcar,
+'defaultcarid' => $defaultcarid
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
+
+if ($_POST["ShareData"] == "true")
+    setShareData(true);
+else
+    setShareData(false);
+
+file_get_contents(GetTeslaloggerURL("admin/updategrafana"),0, stream_context_create(["http"=>["timeout"=>2]]));
 
 // chmod('/etc/teslalogger/settings.json', 666);
 

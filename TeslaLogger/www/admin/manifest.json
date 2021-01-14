@@ -1,0 +1,15 @@
+{
+  "short_name": "Dashboard",
+  "name": "Teslalogger Dashboard",
+  "start_url": "dashboard.php",
+  "icons": [
+    {
+      "src": "img/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ], 
+  "display": "fullscreen",
+  "theme_color": "#b71c1c",
+  "background_color": "#363636"
+}

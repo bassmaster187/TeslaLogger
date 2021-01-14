@@ -62,5 +62,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logfile\Logfile.csproj">
+      <Project>{b6462053-a913-47b8-8719-ca08ee5b2e4e}</Project>
+      <Name>Logfile</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

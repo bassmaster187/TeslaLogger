@@ -15,17 +15,352 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "iteration": 1602141114699,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
+    {
+      "datasource": "teslalogger",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "lengthkm"
+        },
+        "overrides": []
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as time_sec,\n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "cars",
+          "timeColumn": "tesla_token_expire",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AVG Max Range",
+      "type": "stat"
+    },
+    {
+      "datasource": "teslalogger",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as time_sec,\n    (StartRange - EndRange) * wh_tr / (EndOdometer - StartOdometer) * 100 AS AVGConsumption\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "cars",
+          "timeColumn": "tesla_token_expire",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AVG Consumption",
+      "type": "stat"
+    },
+    {
+      "datasource": "teslalogger",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "d"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as time_sec,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "cars",
+          "timeColumn": "tesla_token_expire",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AVG Trip Days",
+      "type": "stat"
+    },
+    {
+      "datasource": "teslalogger",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as time_sec,\n    StartSOC - EndSOC AS socDiff\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "cars",
+          "timeColumn": "tesla_token_expire",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AVG SOC Diff",
+      "type": "stat"
+    },
     {
       "columns": [],
       "datasource": "teslalogger",
       "fontSize": "100%",
       "gridPos": {
-        "h": 21,
+        "h": 19,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 2,
       "links": [],
@@ -38,13 +373,17 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:141",
           "alias": "Time",
+          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "date"
         },
         {
+          "$$hashKey": "object:142",
           "alias": "Start Trip",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -55,7 +394,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "",
-          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}&var-Car=$Car",
           "mappingType": 1,
           "pattern": "StartTripUnix",
           "thresholds": [],
@@ -63,7 +402,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:143",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -81,7 +422,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:144",
           "alias": "Start km",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -97,7 +440,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:145",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -113,7 +458,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:146",
           "alias": "End Trip",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -129,7 +476,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:147",
           "alias": "",
+          "align": "auto",
           "colorMode": "value",
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -148,7 +497,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:148",
           "alias": "End km",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -164,7 +515,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:149",
           "alias": "SOC diff",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -180,7 +533,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:150",
           "alias": "Max Range",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -196,7 +551,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:151",
           "alias": "Ø Verbrauch",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -212,7 +569,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:152",
           "alias": "Tage",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -228,7 +587,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:153",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -248,7 +609,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * 0.190052356 / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10\norder by StartTrip desc",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * wh_tr / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
           "refId": "A",
           "select": [
             [
@@ -279,10 +640,36 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
-    "from": "now-6M",
+    "from": "now-2y",
     "to": "now"
   },
   "timepicker": {
@@ -313,5 +700,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 27
+  "version": 29
 }

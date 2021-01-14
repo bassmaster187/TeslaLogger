@@ -15,7 +15,18 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "iteration": 1598536031830,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
       "columns": [],
@@ -29,6 +40,7 @@
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -54,8 +66,8 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "link": true,
-          "linkTooltip": "",
-          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_4}&to=${__cell_5}",
+          "linkTooltip": "Verbrauch",
+          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_4}&to=${__cell_5}&var-Car=$Car",
           "mappingType": 1,
           "pattern": "StartDate",
           "thresholds": [],
@@ -184,6 +196,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
+          "link": true,
+          "linkTargetBlank": true,
+          "linkTooltip": "Alle Verbr&auml;uche - ScanMyTesla",
+          "linkUrl": "d/eMEMotRgk/alle-verbrauche-scanmytesla?orgId=1&from=${__cell_4}&to=${__cell_5}",
           "mappingType": 1,
           "pattern": "consumption_kWh",
           "thresholds": [],
@@ -202,7 +218,8 @@
           "decimals": 2,
           "link": true,
           "linkTargetBlank": true,
-          "linkUrl": "https://www.google.com/maps/?q=${__cell_0},${__cell_1}",
+          "linkTooltip": "Add Geofence ",
+          "linkUrl": "http://raspberry/admin/geoadd.php?lat=${__cell_0}&lng=${__cell_1}",
           "mappingType": 1,
           "pattern": "Start_address",
           "thresholds": [],
@@ -221,8 +238,8 @@
           "decimals": 2,
           "link": true,
           "linkTargetBlank": true,
-          "linkTooltip": "",
-          "linkUrl": "https://www.google.com/maps/?q=${__cell_2},${__cell_3}",
+          "linkTooltip": "Add Geofence",
+          "linkUrl": "http://raspberry/admin/geoadd.php?lat=${__cell_2}&lng=${__cell_3}",
           "mappingType": 1,
           "pattern": "End_address",
           "thresholds": [],
@@ -271,6 +288,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 1,
+          "link": true,
+          "linkTargetBlank": true,
+          "linkTooltip": "HVAC - ScanMyTesla",
+          "linkUrl": "d/dL76LVmRk/hvac-scanmytesla?orgId=1&from=${__cell_4}&to=${__cell_5}",
           "mappingType": 1,
           "pattern": "outside_temp_avg",
           "thresholds": [],
@@ -306,6 +327,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
+          "link": true,
+          "linkTargetBlank": true,
+          "linkTooltip": "Performance - ScanMyTesla",
+          "linkUrl": "d/perfN6Zgz/performance-scanmytesla?orgId=1&from=${__cell_4}&to=${__cell_5}",
           "mappingType": 1,
           "pattern": "power_max",
           "thresholds": [],
@@ -398,7 +423,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) order by StartDate desc\n",
+          "rawSql": "SELECT lat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, outside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -422,15 +447,60 @@
       ],
       "title": "Trip",
       "transform": "table",
-      "transparent": false,
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "",
+          "value": "1"
+        },
+        "datasource": "teslalogger",
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Car",
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "label": "Textfilter",
+        "name": "Textfilter",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
   },
   "time": {
     "from": "now-90d",
@@ -464,5 +534,5 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 33
+  "version": 79
 }
