@@ -212,6 +212,8 @@ echo(menu("Settings"));
 		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
 		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
 		<input id="radio_pt" type="radio" value="pt" name="Language" /> Português<br>
+		<input id="radio_ru" type="radio" value="ru" name="Language" /> Русский<br>
+		
 	</td></tr>
 	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
