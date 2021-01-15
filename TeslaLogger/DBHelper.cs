@@ -662,23 +662,22 @@ HAVING
                             }
                         }
                     }
-
-                    // get charging cost calculation data
-                    string ref_cost_currency = string.Empty;
-                    double ref_cost_per_kwh = double.NaN;
-                    bool ref_cost_per_kwh_found = false;
-                    double ref_cost_per_minute = double.NaN;
-                    bool ref_cost_per_minute_found = false;
-                    double ref_cost_per_session = double.NaN;
-                    bool ref_cost_per_session_found = false;
-                    GetChargeCostData(openChargingState, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-
-                    // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                    UpdateChargeEnergyAdded(openChargingState);
-
-                    // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                    UpdateChargePrice(openChargingState, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
                 }
+                // get charging cost calculation data
+                string ref_cost_currency = string.Empty;
+                double ref_cost_per_kwh = double.NaN;
+                bool ref_cost_per_kwh_found = false;
+                double ref_cost_per_minute = double.NaN;
+                bool ref_cost_per_minute_found = false;
+                double ref_cost_per_session = double.NaN;
+                bool ref_cost_per_session_found = false;
+                GetChargeCostData(openChargingState, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+
+                // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
+                UpdateChargeEnergyAdded(openChargingState);
+
+                // calculate charging price if per_kwh and/or per_minute and/or per_session is available
+                UpdateChargePrice(openChargingState, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
             }
 
             car.currentJSON.current_charging = false;
@@ -704,17 +703,14 @@ HAVING
 
         private void GetChargeCostData(int ChargingStateID, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
         {
-            if (car.HasFreeSuC())
+            if (car.HasFreeSuC() && ChargingStateLocationIsSuC(ChargingStateID))
             {
-                if (ChargingStateLocationIsSuC(ChargingStateID))
-                {
-                    ref_cost_per_kwh = 0.0;
-                    ref_cost_per_kwh_found = true;
-                    ref_cost_per_minute = 0.0;
-                    ref_cost_per_minute_found = true;
-                    ref_cost_per_session = 0.0;
-                    ref_cost_per_session_found = true;
-                }
+                ref_cost_per_kwh = 0.0;
+                ref_cost_per_kwh_found = true;
+                ref_cost_per_minute = 0.0;
+                ref_cost_per_minute_found = true;
+                ref_cost_per_session = 0.0;
+                ref_cost_per_session_found = true;
             }
             else
             {
@@ -803,8 +799,8 @@ SELECT
 FROM
   chargingstate
 WHERE
-AND CarID = @CarID
-AND id = @referenceID", con))
+  CarID = @CarID
+  AND id = @referenceID", con))
                         {
                             cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                             cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = ChargingStateID;
