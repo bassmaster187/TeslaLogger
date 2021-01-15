@@ -133,14 +133,8 @@ function CarsCombobox($cars, $selected)
 			else
 				echo ("$('#radio_km').prop('checked', true);\r\n");
 				
-			if($Language =="en")
-				echo ("$('#radio_en').prop('checked', true);\r\n");
-			else if($Language =="nl")
-				echo ("$('#radio_nl').prop('checked', true);\r\n");
-			else if($Language =="no")
-				echo ("$('#radio_no').prop('checked', true);\r\n");
-			else if($Language =="pt")
-				echo ("$('#radio_pt').prop('checked', true);\r\n");
+			if(!empty($Language))
+				echo ("$('#radio_$Language').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_de').prop('checked', true);\r\n");
 				
@@ -214,9 +208,12 @@ echo(menu("Settings"));
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
+		<input id="radio_it" type="radio" value="it" name="Language" /> Italiano<br>
 		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
 		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
 		<input id="radio_pt" type="radio" value="pt" name="Language" /> Português<br>
+		<input id="radio_ru" type="radio" value="ru" name="Language" /> Русский<br>
+		
 	</td></tr>
 	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
