@@ -143,6 +143,29 @@ Dauer=Durata
 Distanz=Distanza
 Max km/h= Max Km/h
 PS=HP
+Current Pos=Posizione attuale
+Last Update=Ultimo aggiornamento
+Wird geladen=Caricamento in corso
+Done=Fatto
+Done at=Fatto a
+Battery Heater=Riscaldatore della batteria
+Sentry Mode=Sentry Mode
+Preconditioning=Precondizionamento
+Offline=Disconnesso
+
+#menu.php
+Logfile=File di registro
+Restart=Ricomincia
+Update=Aggiornare
+Dashboards=Dashboard
+Fleet Statistic=Statistica della flotta
+Extras=Extra
+Settings=Impostazioni
+Backup=Backup
+Restore=Ristabilire
+Geofence=Geofence
+Suspend Teslalogger=Sospendi Teslalogger
+Wakeup Teslalogger=Wake Up Teslalogger
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger tredenziali Tesla
