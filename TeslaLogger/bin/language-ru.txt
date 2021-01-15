@@ -142,6 +142,29 @@ Dauer=Продолжительность
 Distanz=дистaнция
 Max km/h=Максимум км/ч
 PS=PS
+Current Pos=Текущая позиция
+Last Update=Последнее обновление
+Wird geladen=Загрузка
+Done=Готово
+Done at=Готово в
+Battery Heater=Нагреватель батареи
+Sentry Mode=Sentry Mode
+Preconditioning=предварительная подготовка
+Offline=Не в сети
+
+#menu.php
+Logfile=Лог-файл
+Restart=Рестарт
+Update=Обновить
+Dashboards=Дашборды
+Fleet Statistic=Статистика флота
+Extras=Дополнительно
+Settings=Настройки
+Backup=Резервное копирование
+Restore=Восстановить
+Geofence=Геозона
+Suspend Teslalogger=Приостановить Teslalogger
+Wakeup Teslalogger=Просыпайся Teslalogger
 
 #password.php
 Teslalogger Tesla Zugangsdaten= Teslaлоггер данные для доступа в Tesla
