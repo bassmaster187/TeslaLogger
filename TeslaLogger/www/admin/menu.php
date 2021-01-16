@@ -113,6 +113,7 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php"><?php t("Backup"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php"><?php t("Restore"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php"><?php t("Geofence"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="dashboard.php?carid=<?php echo $carid; ?>"><?php t("Dashboard"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wakeup.php?id=<?= $current_carid ?>"><?php t("Wakeup Teslalogger"); ?>!</a></li>
                             <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep_$current_carid.txt"))
                             {?>
