@@ -1,10 +1,19 @@
 ﻿<!DOCTYPE html>
 <?php
 require("language.php");
-
+require("tools.php");
 session_start();
+$carid = 1;
 if (isset($_REQUEST["carid"]))
+{
 	$_SESSION["carid"] = $_REQUEST["carid"];
+	$carid = $_REQUEST["carid"];
+}
+else
+{
+	$_SESSION["carid"] = 1;
+}
+
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -25,7 +34,7 @@ if (isset($_REQUEST["carid"]))
 
 	$( function() {
 	<?php
-		$files = scandir("wallpapers/".$_REQUEST["carid"]);
+		$files = scandir("wallpapers/".$carid);
 		foreach ($files as $i => &$f)		
 		{
 			if (stripos($f,".") === 0)
@@ -34,7 +43,7 @@ if (isset($_REQUEST["carid"]))
 			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
 			{		
 				echo("$('#error').text('');\n");
-				echo("$('body').css('background-image','url(\"wallpapers/".$_REQUEST["carid"]."/".$f. "\")');\n");
+				echo("$('body').css('background-image','url(\"wallpapers/".$carid."/".$f. "\")');\n");
 				break;
 			}
 		}
@@ -68,39 +77,44 @@ if (isset($_REQUEST["carid"]))
 
 			if (jsonData["charging"])
 			{
-				$('#car_statusLabel').text("Wird geladen:");
+				$('#car_statusLabel').text("<?php t("Wird geladen"); ?>:");
 				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
 			}
 			else if (jsonData["driving"])
 			{
-				$('#car_statusLabel').text("Fahren:");
+				$('#car_statusLabel').text("<?php t("Fahren"); ?>:");
 				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
 			}
 			else if (jsonData["online"])
 			{
-				var text = "Online";
+				var text = "<?php t("Online"); ?>";
 
 				if (jsonData["is_preconditioning"])
-					text = text + "<br>Preconditioning "+ jsonData["inside_temperature"] +"°C";
+					text = text + "<br><?php t("Preconditioning"); ?> "+ jsonData["inside_temperature"] +"°C";
 
 				if (jsonData["sentry_mode"])
-					text = text + "<br>Sentry Mode";
+					text = text + "<br><?php t("Sentry Mode"); ?>";
 
 				if (jsonData["battery_heater"])
-					text = text + "<br>Battery Heater";
+					text = text + "<br><?php t("Battery Heater"); ?>";
 
-				$('#car_statusLabel').text("Status:");
+				$('#car_statusLabel').text("<?php t("Status"); ?>:");
 				$('#car_status').html(text);
 			}
 			else if (jsonData["sleeping"])
 			{
-				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("Schlafen");
+				$('#car_statusLabel').text("<?php t("Status"); ?>:");
+				$('#car_status').text("<?php t("Schlafen"); ?>");
+			}
+			else if (jsonData["falling_asleep"])
+			{
+				$('#car_statusLabel').text("<?php t("Status"); ?>:");
+				$('#car_status').text("<?php t("Einschlafen"); ?>");
 			}
 			else
 			{
-				$('#car_statusLabel').text("Status:");
-				$('#car_status').text("Offline");
+				$('#car_statusLabel').text("<?php t("Status"); ?>:");
+				$('#car_status').text("<?php t("Offline"); ?>");
 			}
 
 <!-- Begin of my_dashboard_jsonData.php -->
@@ -292,7 +306,14 @@ if (file_exists("my_dashboard_jsonData.php"))
 	  <span id="battery_level" style="">-</span><font id="percent">%</font> <span id="tilde">~</span> <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font></div>
 	  <div id="car_statusLabel">-</div>
 	  <div id="car_status">-</div>
-	  <div id="error">No wallpapers found in \\raspberry\teslalogger-web\admin\wallpapers</div>
+	  <div id="error">
+<?PHP
+	  	if (isDocker())
+			echo ("No wallpapers found in \\TeslaLogger\\www\\admin\\wallpapers\\$carid\\");
+		else
+			echo ("No wallpapers found in \\\\raspberry\\teslalogger-web\\admin\\wallpapers\\$carid\\");
+?>
+		</div>
   </div>
 
 	<div id="calendar">

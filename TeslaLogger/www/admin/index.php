@@ -131,7 +131,7 @@ else
 			}
 			else if (jsonData["driving"])
 			{
-				$('#car_statusLabel').text("Fahren:");
+				$('#car_statusLabel').text("<?php t("Fahren"); ?>:");
 				var str = "";
 				if (LengthUnit == "mile")
 					str = (jsonData["speed"]/ 1.609).toFixed(0) + " mph / "
