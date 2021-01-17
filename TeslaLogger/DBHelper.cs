@@ -393,7 +393,7 @@ WHERE
                         }
                     }
                     GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
-                    car.Log($"Combine charging states {string.Join(", ", IDsToDelete)} into {maxID}");
+                    car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
                     Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -1252,6 +1252,7 @@ WHERE
         {
             try
             {
+                car.Log($"CloseChargingState id:{openChargingState}");
                 int chargeID = GetMaxChargeid(out DateTime chargeEnd);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
