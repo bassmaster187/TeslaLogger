@@ -1072,6 +1072,13 @@ CREATE TABLE superchargerstate(
                                     "Maximalreichweite[km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]","Max. Reichweite (Monatsmittel) [km]","Max. Reichweite (Monatsmittel) [mi]"
                                 }, dictLanguage, true);
                             }
+                            else if (f.EndsWith("Firmware.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Degradation", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Firmware","Date Installed","Days since previous update","Min Days Between Updates","AVG Days Between Updates","Max Days Between Updates"
+                                }, dictLanguage, true);
+                            }
                             else if (f.EndsWith("Ladehistorie.json"))
                             {
                                 s = ReplaceTitleTag(s, "Ladehistorie", dictLanguage);
