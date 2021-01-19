@@ -1065,6 +1065,9 @@ CREATE TABLE superchargerstate(
                             if (f.EndsWith("Akku Trips.json"))
                             {
                                 s = ReplaceTitleTag(s, "Akku Trips", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "AVG Max Range","AVG Consumption","AVG Trip Days","AVG SOC Diff"
+                                }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Degradation.json"))
                             {
