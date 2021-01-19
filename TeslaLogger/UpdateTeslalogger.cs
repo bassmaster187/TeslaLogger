@@ -1094,6 +1094,10 @@ CREATE TABLE superchargerstate(
                                     "Angefordert [A]", "Pilot [A]", "Zelltemperatur [°C]", "Zelltemperatur [°F]"
                                 }, dictLanguage, true);
                             }
+                            else if (f.EndsWith("Speed Consumption.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Speed Consumption", dictLanguage);
+                            }
                             else if (f.EndsWith("Trip.json"))
                             {
                                 s = ReplaceTitleTag(s, "Trip", dictLanguage);
