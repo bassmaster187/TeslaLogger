@@ -14,6 +14,10 @@ kmDiff=км разница
 Max Range=макс Диапазон
 Ø Verbrauch=Ø потребление
 Tage=Дней
+AVG Max Range=Средний максимальный диапазон
+AVG Consumption=Среднее потребление
+AVG Trip Days=Среднее количество дней в пути
+AVG SOC Diff=Средняя разница SOC
 
 #Degradation.json
 Degradation=Деградация
@@ -68,6 +72,17 @@ Ladehub=зарядочный ход
 SOC Ladestatistik=SOC статистика зарядки
 SOC [%]=SOC [%]
 
+#Status.json
+#SOC=SOC%
+Außentemperatur=Наружная температура
+Zelltemperatur=Ячейка батареи температура
+Current Status=Текущий статус
+Nur verfügbar mit ScanMyTesla=Доступно только со ScanMyTesla
+Asleep=Спит
+Waking=Просыпаться
+Driving=Вождение
+Charging=Зарядка
+
 #Laden.json
 Laden=зарядкa
 Ladespannung [V]=Напряжение зарядки [V]
@@ -84,6 +99,14 @@ Vampir Drain Monatsstatistik=Потеря вампира ежемесячная 
 TR mi Verlust=типичнaя дальность миля потеряннo
 kWh Verlust=кВтч потеряннo
 Eur Verlust=EUR потеряннo
+
+#Speed Consumption.json
+Speed Consumption=Расход скорости
+Last Driven=Последний раз
+Speed km/h=Скорость км/ч
+Ø Outside Temp C°=Ø Наружная температура C °
+Ø Consumption kWh=Ø Потребление кВтч
+Count=Считать
 
 #Trip.json
 Trip=Поездка
