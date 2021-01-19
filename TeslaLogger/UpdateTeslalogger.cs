@@ -1098,6 +1098,13 @@ CREATE TABLE superchargerstate(
                             {
                                 s = ReplaceTitleTag(s, "Speed Consumption", dictLanguage);
                             }
+                            else if (f.EndsWith("Status.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Status", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Current Status","SOC","Reichweite","Außentemperatur","Zelltemperatur","km Stand","Firmware","Nur verfügbar mit ScanMyTesla","N/A","Asleep","Online","Offline","Waking","Driving","Charging"
+                                }, dictLanguage, true);
+                            }
                             else if (f.EndsWith("Trip.json"))
                             {
                                 s = ReplaceTitleTag(s, "Trip", dictLanguage);
