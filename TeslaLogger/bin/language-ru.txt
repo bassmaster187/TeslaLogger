@@ -136,6 +136,15 @@ Laden fertig=Загрузка закончена
 Schlafen=Спать
 Online=онлайн
 
+#Verbrauchsstatstik.json
+Verbrauchsstatistik=Статистика потребления
+Verbrauch Monatsmittel [kWh]=Среднемесячное потребление
+Außentemperatur Monatsmittel [°C]=Среднемесячная наружная температура [°C]
+Außentemperatur Monatsmittel [°F]=Среднемесячная наружная температура [°F]
+Verbrauch Tagesmittel [kWh]=Среднесуточное потребление [kWh]
+Außentemperatur Tagesmittel [°C]=Среднесуточная наружная температура [°C]
+Außentemperatur Tagesmittel [°F]=Среднесуточная наружная температура [°F]
+
 #Visited.json
 Visited=Посетили
 

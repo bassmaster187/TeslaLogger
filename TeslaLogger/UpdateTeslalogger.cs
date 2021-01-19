@@ -796,11 +796,12 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        private static Dictionary<string, string> GetLanguageDictionary(string language)
+        internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
             Dictionary<string, string> ht = new Dictionary<string, string>();
 
             string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            filename = filename.Replace("\\bin\\Debug", "\\bin");
             string content = null;
 
             if (File.Exists(filename))
@@ -1119,6 +1120,13 @@ CREATE TABLE superchargerstate(
                                     "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]","Innentemperatur [°C]","Innentemperatur [°F]"
                                 }, dictLanguage, true);
                             }
+                            else if (f.EndsWith("Verbrauchsstatstik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Verbrauchsstatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "km Stand[km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Außentemperatur Monatsmittel [°C]","Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Außentemperatur Tagesmittel [°C]", "Außentemperatur Tagesmittel [°F]"
+                                }, dictLanguage, true);
+                            }
                             else if (f.EndsWith("Visited.json"))
                             {
                                 s = ReplaceTitleTag(s, "Visited", dictLanguage);
@@ -1198,7 +1206,10 @@ CREATE TABLE superchargerstate(
                         string title, uid, link;
                         GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
 
-                        s = UpdateDefaultCar(s, defaultcar, defaultcarid);
+                        string carLabel = "Car";
+                        dictLanguage.TryGetValue("Car", out carLabel);
+
+                        s = UpdateDefaultCar(s, defaultcar, defaultcarid, carLabel);
                         
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
                             dashboardlinks.Add(title+"|"+link);
@@ -1237,16 +1248,16 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        internal static string UpdateDefaultCar(string s, string name, string id)
+        internal static string UpdateDefaultCar(string s, string name, string id, string carLabel)
         {
             try
             {
                 if (name == null || name.Length == 0)
                     return s;
 
-                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)", RegexOptions.Singleline | RegexOptions.Multiline);
+                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}$5");
+                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}"+carLabel+"${8}");
                 return ret;
             }
             catch (Exception ex)
@@ -1327,7 +1338,7 @@ CREATE TABLE superchargerstate(
             return regexAlias.Replace(content, replace);
         }
 
-        private static string ReplaceTitleTag(string content, string v, Dictionary<string, string> dictLanguage)
+        internal static string ReplaceTitleTag(string content, string v, Dictionary<string, string> dictLanguage)
         {
             if (!dictLanguage.ContainsKey(v))
             {
@@ -1341,7 +1352,7 @@ CREATE TABLE superchargerstate(
             return regexAlias.Replace(content, replace);
         }
 
-        private static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
+        internal static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
         {
             foreach (string l in v)
             {
