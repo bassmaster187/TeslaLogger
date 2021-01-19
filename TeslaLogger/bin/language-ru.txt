@@ -25,6 +25,14 @@ Odometer [mi]=Одометр [миля]
 Max. Reichweite (Monatsmittel) [km]=макс Диапазон (В среднем за месяц) [км]
 Max. Reichweite (Monatsmittel) [mi]=макс Диапазон (В среднем за месяцg) [миля]
 
+#Firmware.json
+Firmware=прошивка
+Date Installed=Дата установки
+Days since previous update=Дней с момента предыдущего обновления
+Min Days Between Updates=Мин. Дней между обновлениями
+AVG Days Between Updates=Среднее количество дней между обновлениями
+Max Days Between Updates=Максимальное количество дней между обновлениями
+
 #Ladehistorie.json
 Ladehistorie=История загрузки
 Startdatum=дата началo
@@ -225,6 +233,8 @@ Zellspannungen 81-99 - ScanMyTesla=Напряжение ячейки 81-99 - Sca
 
 Ja=да
 Nein=Нет
+
+Car=Автомобиль
 
 Einschlafen=Заснуть
 Automatische Updates=Автоматические обновления
