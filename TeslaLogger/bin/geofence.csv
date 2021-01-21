@@ -900,6 +900,7 @@ Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
 Allego DE-Hilpoltstein, 49.161068, 11.260205, 5
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Itzehoe, 53.959309, 9.495976, 10
+Allego DE-Jettingen-Scheppach, 48.410996 10.439835
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Münchberg, 50.202775, 11.7769, 7
@@ -1536,7 +1537,9 @@ Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
 Innogy DE-Duisburg, 51.484186, 6.763764
 Innogy DE-Fürholzen West, 48.33747, 11.6081
 Innogy DE-Hunsrück Ost, 49.963783, 7.768701
+Innogy DE-Jettingen-Scheppach, 48.411054, 10.440180
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
+Innogy DE-Leipheim, 48.437494, 10.213398
 Innogy DE-Münsterland West, 51.945622, 7.547827
 Innogy DE-Münsterland OSt, 51.942185, 7.551096
 Innogy DE-Neuss Esso Tankstelle, 51.199058, 6.711012
@@ -1636,6 +1639,12 @@ Kaufland RO-Pitești, 44.842275, 24.87965
 Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
+
+LEW DE-Günzburg, 48.433701, 10.292805
+LEW-DE Ichenhausen, 48.372040, 10.304691
+LEW-DE Illertissen, 48.223241, 10.102807
+LEW-DE Krumbach, 48.244262, 10.362560
+
 
 Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
