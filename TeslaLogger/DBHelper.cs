@@ -1018,6 +1018,10 @@ WHERE
                     }
                 }
             }
+            else
+            {
+                Tools.DebugLog($"UpdateChargePrice: nothing to do ref_cost_per_kwh_found:{ref_cost_per_kwh_found} ref_cost_per_minute_found:{ref_cost_per_minute_found} ref_cost_per_session_found:{ref_cost_per_session_found}");
+            }
         }
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
@@ -1135,10 +1139,13 @@ LIMIT 1", con))
                         cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read() && dr[1] != DBNull.Value)
+                        if (dr.Read() && dr[0] != DBNull.Value)
                         {
                             int.TryParse(dr[0].ToString(), out referenceID);
-                            ref_cost_currency = dr[1].ToString();
+                            if (dr[1] != DBNull.Value)
+                            {
+                                ref_cost_currency = dr[1].ToString();
+                            }
                             if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
                             {
                                 ref_cost_per_kwh_found = true;
