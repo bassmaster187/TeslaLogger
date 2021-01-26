@@ -722,7 +722,7 @@ HAVING
                     // check if +ccp is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
                     {
-                        car.Log($"CopyChargePrice at '{addr.name}'");
+                        car.Log($"CopyChargePrice enabled for '{addr.name}'");
                         // find reference charge session for addr
                         int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
                         // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
@@ -760,6 +760,7 @@ WHERE
                         {
                             if (dr[0].ToString().Equals("Tesla") && (dr[1].ToString().Equals("Tesla") || dr[1].ToString().Equals("Combo")))
                             {
+                                Tools.DebugLog("ChargingStateLocationIsSuC: true");
                                 return true;
                             }
                         }
@@ -771,6 +772,7 @@ WHERE
                 Tools.DebugLog($"Exception during DBHelper.ChargingStateLocationIsSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.ChargingStateLocationIsSuC()");
             }
+            Tools.DebugLog("ChargingStateLocationIsSuC: false");
             return false;
         }
 
@@ -2501,7 +2503,9 @@ WHERE
                             if (double.TryParse(dr[0].ToString(), out double lat)
                                 && double.TryParse(dr[1].ToString(), out double lng))
                             {
-                                return Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Tools.DebugLog("GetAddressFromChargingState: " + addr);
+                                return addr;
                             }
                         }
                     }
