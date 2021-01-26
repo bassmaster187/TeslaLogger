@@ -1139,12 +1139,12 @@ LIMIT 1", con))
                         cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read())
                         {
                             int.TryParse(dr[0].ToString(), out referenceID);
                             if (dr[1] != DBNull.Value)
                             {
-                                ref_cost_currency = dr[1].ToString();
+                                ref_cost_currency = dr.GetString(1);
                             }
                             if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
                             {
@@ -1158,7 +1158,11 @@ LIMIT 1", con))
                             {
                                 ref_cost_per_minute_found = true;
                             }
-                            Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}>");
+                            Tools.DebugLog($"FindReferenceChargingState id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
+                        }
+                        else
+                        {
+                            Tools.DebugLog("FindReferenceChargingState dr.read failed");
                         }
                         con.Close();
                     }
@@ -1166,8 +1170,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
-                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+                Tools.DebugLog($"Exception during FindReferenceChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during FindReferenceChargingState()");
             }
             return referenceID;
         }
