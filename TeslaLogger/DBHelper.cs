@@ -759,6 +759,7 @@ WHERE
                         {
                             if (dr[0].ToString().Equals("Tesla") && (dr[1].ToString().Equals("Tesla") || dr[1].ToString().Equals("Combo")))
                             {
+                                Tools.DebugLog("ChargingStateLocationIsSuC: true");
                                 return true;
                             }
                         }
@@ -770,6 +771,7 @@ WHERE
                 Tools.DebugLog($"Exception during DBHelper.ChargingStateLocationIsSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.ChargingStateLocationIsSuC()");
             }
+            Tools.DebugLog("ChargingStateLocationIsSuC: false");
             return false;
         }
 
