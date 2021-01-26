@@ -2502,7 +2502,9 @@ WHERE
                             if (double.TryParse(dr[0].ToString(), out double lat)
                                 && double.TryParse(dr[1].ToString(), out double lng))
                             {
-                                return Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Tools.DebugLog("GetAddressFromChargingState: " + addr);
+                                return addr;
                             }
                         }
                     }
