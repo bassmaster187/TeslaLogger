@@ -14,6 +14,10 @@ kmDiff=км разница
 Max Range=макс Диапазон
 Ø Verbrauch=Ø потребление
 Tage=Дней
+AVG Max Range=Средний максимальный диапазон
+AVG Consumption=Среднее потребление
+AVG Trip Days=Среднее количество дней в пути
+AVG SOC Diff=Средняя разница SOC
 
 #Degradation.json
 Degradation=Деградация
@@ -24,6 +28,14 @@ mi Stand [mi]=Одометр [миля]
 Odometer [mi]=Одометр [миля]
 Max. Reichweite (Monatsmittel) [km]=макс Диапазон (В среднем за месяц) [км]
 Max. Reichweite (Monatsmittel) [mi]=макс Диапазон (В среднем за месяцg) [миля]
+
+#Firmware.json
+Firmware=прошивка
+Date Installed=Дата установки
+Days since previous update=Дней с момента предыдущего обновления
+Min Days Between Updates=Мин. Дней между обновлениями
+AVG Days Between Updates=Среднее количество дней между обновлениями
+Max Days Between Updates=Максимальное количество дней между обновлениями
 
 #Ladehistorie.json
 Ladehistorie=История загрузки
@@ -60,6 +72,17 @@ Ladehub=зарядочный ход
 SOC Ladestatistik=SOC статистика зарядки
 SOC [%]=SOC [%]
 
+#Status.json
+#SOC=SOC%
+Außentemperatur=Наружная температура
+Zelltemperatur=Ячейка батареи температура
+Current Status=Текущий статус
+Nur verfügbar mit ScanMyTesla=Доступно только со ScanMyTesla
+Asleep=Спит
+Waking=Просыпаться
+Driving=Вождение
+Charging=Зарядка
+
 #Laden.json
 Laden=зарядкa
 Ladespannung [V]=Напряжение зарядки [V]
@@ -76,6 +99,14 @@ Vampir Drain Monatsstatistik=Потеря вампира ежемесячная 
 TR mi Verlust=типичнaя дальность миля потеряннo
 kWh Verlust=кВтч потеряннo
 Eur Verlust=EUR потеряннo
+
+#Speed Consumption.json
+Speed Consumption=Расход скорости
+Last Driven=Последний раз
+Speed km/h=Скорость км/ч
+Ø Outside Temp C°=Ø Наружная температура C °
+Ø Consumption kWh=Ø Потребление кВтч
+Count=Считать
 
 #Trip.json
 Trip=Поездка
@@ -127,6 +158,15 @@ Innentemperatur [°F]=Внутренная температура [°F]
 Laden fertig=Загрузка закончена
 Schlafen=Спать
 Online=онлайн
+
+#Verbrauchsstatstik.json
+Verbrauchsstatistik=Статистика потребления
+Verbrauch Monatsmittel [kWh]=Среднемесячное потребление
+Außentemperatur Monatsmittel [°C]=Среднемесячная наружная температура [°C]
+Außentemperatur Monatsmittel [°F]=Среднемесячная наружная температура [°F]
+Verbrauch Tagesmittel [kWh]=Среднесуточное потребление [kWh]
+Außentemperatur Tagesmittel [°C]=Среднесуточная наружная температура [°C]
+Außentemperatur Tagesmittel [°F]=Среднесуточная наружная температура [°F]
 
 #Visited.json
 Visited=Посетили
@@ -225,6 +265,8 @@ Zellspannungen 81-99 - ScanMyTesla=Напряжение ячейки 81-99 - Sca
 
 Ja=да
 Nein=Нет
+
+Car=Автомобиль
 
 Einschlafen=Заснуть
 Automatische Updates=Автоматические обновления

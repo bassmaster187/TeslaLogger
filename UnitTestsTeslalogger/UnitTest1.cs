@@ -3,6 +3,7 @@ using TeslaLogger;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Runtime.Caching;
 using System.Net;
+using System.Collections.Generic;
 
 namespace UnitTestsTeslalogger
 {
@@ -250,14 +251,32 @@ namespace UnitTestsTeslalogger
         public void UpdateDefaultCar()
         {
             string dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauch.json");
-            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2");
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
 
             Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
+            Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
+
 
             dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
-            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2");
+            dashboard = UpdateTeslalogger.UpdateDefaultCar(dashboard, "BATmobil", "2", "Fahrzeug");
 
             Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
+            Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
+        }
+
+        [TestMethod]
+        public void UpdateLanguage()
+        {
+            Dictionary<string, string> dictLanguage = UpdateTeslalogger.GetLanguageDictionary("ru");
+
+            string s = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Verbrauchsstatstik.json");
+            s = UpdateTeslalogger.ReplaceTitleTag(s, "Verbrauchsstatistik", dictLanguage);
+            s = UpdateTeslalogger.ReplaceLanguageTags(s, new string[] {
+                                    "km Stand [km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Außentemperatur Monatsmittel [°C]","Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Außentemperatur Tagesmittel [°C]", "Außentemperatur Tagesmittel [°F]"
+                                }, dictLanguage, true);
+
+            Assert.IsFalse(s.Contains("km Stand [km]"));
+            
         }
     }
 }
