@@ -721,7 +721,7 @@ HAVING
                     // check if +ccp is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
                     {
-                        car.Log($"CopyChargePrice at '{addr.name}'");
+                        car.Log($"CopyChargePrice enabled for '{addr.name}'");
                         // find reference charge session for addr
                         int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
                         // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
