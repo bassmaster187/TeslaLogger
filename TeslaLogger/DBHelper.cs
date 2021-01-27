@@ -2282,7 +2282,7 @@ WHERE
             return dt;
         }
 
-        public static void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm, int carid)
+        public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
         {
             sumkm = 0;
             avgkm = 0;
@@ -2297,7 +2297,7 @@ WHERE
                     FROM trip 
                     join pos on trip.startposid = pos.id 
                     join pos as posend on trip.endposid = posend.id
-                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + carid;
+                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
 
                 using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                 {
@@ -2313,13 +2313,13 @@ WHERE
                         avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
                         maxkm = Math.Round((double)r["maxkm"], 1);
 
-                        Logfile.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
+                        car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                car.Log(ex.ToString());
             }
         }
 

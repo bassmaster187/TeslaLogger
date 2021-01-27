@@ -239,7 +239,7 @@ namespace TeslaLogger
         {
             try
             {
-                DBHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm, CarInDB);
+                dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
                 if (!webhelper.RestoreToken())
                 {
@@ -841,7 +841,7 @@ namespace TeslaLogger
 
             odometerLastTrip = currentJSON.current_odometer;
 
-            DBHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm, CarInDB);
+            dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
         }
 
 
