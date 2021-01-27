@@ -470,8 +470,10 @@ namespace TeslaLogger
                             Log("Car # " + car.CarInAccount + " not exists!");
                             return "NULL";
                         }
+                        Dictionary<string, object> r2 = SearchCarDictionary(r1temp);
 
-                        Dictionary<string, object> r2 = (Dictionary<string, object>)r1temp[car.CarInAccount];
+                        if (r2 == null)
+                            return "NULL";
 
                         string OnlineState = r2["state"].ToString();
                         System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
@@ -585,6 +587,26 @@ namespace TeslaLogger
                     Thread.Sleep(30000);
                 }
             }
+        }
+
+        private Dictionary<string, object> SearchCarDictionary(object[] cars)
+        {
+            if (car.vin?.Length > 0)
+            {
+                for (int x = 0; x < cars.Length; x++)
+                {
+                    var cc = (Dictionary<string, object>)cars[x];
+                    var ccVin = cc["vin"].ToString();
+
+                    if (ccVin == car.vin)
+                        return cc;
+                }
+
+                Logfile.Log("Car with VIN: " + car.vin + " not found!");
+                return null;
+            }
+            else
+                return (Dictionary<string, object>)cars[car.CarInAccount];
         }
 
         private void DoGetVehiclesRequest(out string resultContent, HttpClient client, string adresse, out Task<HttpResponseMessage> resultTask, out HttpResponseMessage result)
@@ -2578,7 +2600,12 @@ namespace TeslaLogger
                     { "OS", Tools.GetOsVersion() },
                     { "CC", car.currentJSON.current_country_code },
                     { "ST", car.currentJSON.current_state },
-                    { "UP", Tools.GetOnlineUpdateSettings().ToString() }
+                    { "UP", Tools.GetOnlineUpdateSettings().ToString() },
+                    { "sumkm", car.sumkm.ToString() },
+                    { "avgkm", car.avgkm.ToString() },
+                    { "kwh100km", car.kwh100km.ToString() },
+                    { "avgsocdiff", car.avgsocdiff.ToString() },
+                    { "maxkm", car.maxkm.ToString() }
                 };
 
                     using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
