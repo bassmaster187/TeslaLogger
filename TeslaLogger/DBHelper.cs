@@ -2282,6 +2282,47 @@ WHERE
             return dt;
         }
 
+        public static void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm, int carid)
+        {
+            sumkm = 0;
+            avgkm = 0;
+            kwh100km = 0;
+            avgsocdiff = 0;
+            maxkm = 0;
+            
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
+                    FROM trip 
+                    join pos on trip.startposid = pos.id 
+                    join pos as posend on trip.endposid = posend.id
+                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + carid;
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
+                {
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        var r = dt.Rows[0];
+
+                        sumkm = Math.Round((double)r["sumkm"],1);
+                        avgkm = Math.Round((double)r["avgkm"], 1);
+                        kwh100km = Math.Round((double)r["kwh100km"], 1);
+                        avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
+                        maxkm = Math.Round((double)r["maxkm"], 1);
+
+                        Logfile.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         public static object DBNullIfEmptyOrZero(string val)
         {
             if (val == null || val.Length == 0 || val == "0" || val == "0.00")
