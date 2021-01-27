@@ -871,12 +871,14 @@ Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Leonberg, 48.798462, 8.999601
 Aldi DE-Mainaschaff, 49.986603, 9.084044, 10
 Aldi DE-Merchweiler, 49.349395, 7.050618
+Aldi DE-Memmingen, 47.972183, 10.184331
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
 Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
 Aldi DE-Petersberg, 50.553999, 9.712663
 Aldi DE-Pforzheim, 48.902632, 8.663465
 Aldi DE-Rastatt, 48.85911, 8.238882, 20
+Aldi DE-Ulm, 48.400669, 9.971991
 Aldi DE-Wetzendorf, 49.496251, 11.262201
 Aldi DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
 
@@ -898,6 +900,7 @@ Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
 Allego DE-Hilpoltstein, 49.161068, 11.260205, 5
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Itzehoe, 53.959309, 9.495976, 10
+Allego DE-Jettingen-Scheppach, 48.410996 10.439835
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Münchberg, 50.202775, 11.7769, 7
@@ -998,6 +1001,7 @@ EnBW DE-Bobingen, 48.263993, 10.840595, 20
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
+EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
 EnBW DE-Ebersberg, 48.096569, 11.961316
@@ -1027,6 +1031,7 @@ EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
 EnBW DE-Lorsch Ost, 49.644328, 8.554109
 EnBW DE-Lorsch West, 49.643044, 8.551967
+EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
 EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
@@ -1157,6 +1162,7 @@ IKEA DE-Leuna, 51.348073, 12.181915
 IKEA DE-Oldenburg, 53.139408, 8.256087
 IKEA DE-Sindelfinden, 48.701416, 9.005396
 IKEA DE-Regensburg, 49.001518, 12.177472
+IKEA DE-Ulm, 48.403572, 9.976047
 IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
@@ -1532,7 +1538,9 @@ Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
 Innogy DE-Duisburg, 51.484186, 6.763764
 Innogy DE-Fürholzen West, 48.33747, 11.6081
 Innogy DE-Hunsrück Ost, 49.963783, 7.768701
+Innogy DE-Jettingen-Scheppach, 48.411054, 10.440180
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
+Innogy DE-Leipheim, 48.437494, 10.213398
 Innogy DE-Münsterland West, 51.945622, 7.547827
 Innogy DE-Münsterland OSt, 51.942185, 7.551096
 Innogy DE-Neuss Esso Tankstelle, 51.199058, 6.711012
@@ -1633,6 +1641,12 @@ Kaufland RO-Sebes, 45.961182, 23.551254
 Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
+LEW DE-Günzburg Legoland, 48.4240751, 10.298451
+LEW DE-Deffingen, 48.433701, 10.292805
+LEW-DE Ichenhausen, 48.372040, 10.304691
+LEW-DE Illertissen, 48.223241, 10.102807
+LEW-DE Krumbach, 48.244262, 10.362560
+
 Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
 Lidl AT-Gleisdorf, 47.111567, 15.708227
@@ -1670,9 +1684,12 @@ Lidl DE-Herne, 51.524427, 7.18621
 Lidl DE-Homburg, 49.332477, 7.339518
 Lidl DE-Hoppegarten, 52.540585, 13.63869
 Lidl DE-Huerth, 50.89371, 6.903387
+Lidl DE-Jettingen-Scheppach, 48.408456, 10.435950
+Lidl DE-Ravensburg, 47.787096, 9.609862
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-Rostok, 54.07674, 12.099895
 Lidl DE-Sassenberg, 51.981949, 8.036272
+Lidl DE-Senden, 48.333704, 10.039548
 Lidl DE-Karlsruhe, 49.0446, 8.393927
 Lidl DE-Limbach-Oberfrohna, 50.854838, 12.77829
 Lidl DE-Saterland, 53.103539, 7.674501
@@ -1686,6 +1703,7 @@ MOL CZ-Velké Němčice, 49.010451,16.686846,10
 REWE DE-Bremen, 53.136455, 8.739926
 
 ShellRecharge DE-Berg, 50.372, 11.787795
+ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
 
