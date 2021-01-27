@@ -113,6 +113,11 @@ namespace TeslaLogger
         public string LastSetChargeLimitAddressName { get => lastSetChargeLimitAddressName; set => lastSetChargeLimitAddressName = value; }
 
         internal int LoginRetryCounter = 0;
+        public double sumkm = 0;
+        public double avgkm = 0;
+        public double kwh100km = 0;
+        public double avgsocdiff = 0;
+        public double maxkm = 0;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -234,6 +239,8 @@ namespace TeslaLogger
         {
             try
             {
+                dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
+
                 if (!webhelper.RestoreToken())
                 {
                     webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
@@ -833,6 +840,8 @@ namespace TeslaLogger
             webhelper.StopStreaming();
 
             odometerLastTrip = currentJSON.current_odometer;
+
+            dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
         }
 
 
