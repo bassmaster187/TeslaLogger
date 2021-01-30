@@ -2551,8 +2551,8 @@ WHERE
                             if (now - valueLastUpdate < 300000)
                             {
                                 // charging_state changed to Charging less than 5 minutes ago
-                                // set waitbetween2pointsdb to 60 seconds
-                                waitbetween2pointsdb = 60;
+                                // set waitbetween2pointsdb to 15 seconds
+                                waitbetween2pointsdb = 15;
                             }
                         }
                     }
