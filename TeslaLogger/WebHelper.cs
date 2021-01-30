@@ -168,10 +168,22 @@ namespace TeslaLogger
 
         public static string ComputeSHA256Hash(string text)
         {
-            using (var sha256 = new SHA256Managed())
+            string hashString;
+            using (var sha256 = SHA256Managed.Create())
             {
-                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", "");
+                var hash = sha256.ComputeHash(Encoding.Default.GetBytes(text));
+                hashString = ToHex(hash, false);
             }
+
+            return hashString;
+        }
+
+        private static string ToHex(byte[] bytes, bool upperCase)
+        {
+            StringBuilder result = new StringBuilder(bytes.Length * 2);
+            for (int i = 0; i < bytes.Length; i++)
+                result.Append(bytes[i].ToString(upperCase ? "X2" : "x2"));
+            return result.ToString();
         }
 
         string GetNameValue(string text, string name)
@@ -206,13 +218,14 @@ namespace TeslaLogger
                 }
 
                 var code_verifier = RandomString(86);
+                car.Log("code_verifier:" + code_verifier);
+
                 var code_challenge_SHA256 = ComputeSHA256Hash(code_verifier);
-                var code_challenge = Convert.ToBase64String(Encoding.UTF8.GetBytes(code_challenge_SHA256)); //.TrimEnd(padding); //.Replace('+', '-').Replace('/', '_'); ;
-                code_verifier = Convert.ToBase64String(Encoding.UTF8.GetBytes(code_verifier)); //.TrimEnd(padding); // .Replace('+', '-').Replace('/', '_'); ;
+                var code_challenge = Convert.ToBase64String(Encoding.Default.GetBytes(code_challenge_SHA256)); 
+                code_verifier = Convert.ToBase64String(Encoding.Default.GetBytes(code_verifier)); 
 
                 var state = RandomString(20);
-
-                car.Log("code_verifier:" + code_verifier);
+                
                 car.Log("code_challenge:" + code_challenge);
                 car.Log("state:" + state);
 
