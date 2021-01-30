@@ -780,9 +780,6 @@ WHERE
             if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
                 double cost_total = double.NaN;
-                double cost_per_kwh = 0.0;
-                double cost_per_minute = 0.0;
-                double cost_per_session = 0.0;
                 double charge_energy_added = double.NaN;
                 DateTime startDate = DateTime.MinValue;
                 DateTime endDate = DateTime.MinValue;
