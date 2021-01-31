@@ -243,7 +243,7 @@ namespace TeslaLogger
 
                 if (!webhelper.RestoreToken())
                 {
-                    webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
+                    webhelper.Tesla_token = webhelper.GetToken();
                 }
 
                 if (webhelper.Tesla_token == "NULL")
@@ -904,7 +904,7 @@ namespace TeslaLogger
                     lastTryTokenRefresh = DateTime.Now;
                     Log("try to get new Token");
 
-                    string temp = webhelper.GetTokenAsync().Result;
+                    string temp = webhelper.GetToken();
                     if (temp != "NULL")
                     {
                         Log("new Token received!");
