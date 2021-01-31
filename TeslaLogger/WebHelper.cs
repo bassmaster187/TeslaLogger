@@ -201,6 +201,9 @@ namespace TeslaLogger
         public async Task<string> GetTokenAsync()
         {
             string resultContent = "";
+            string cookie = "";
+            MatchCollection m;
+
             try
             {
                 string hiddenPassword = "";
@@ -263,14 +266,14 @@ namespace TeslaLogger
                         HttpResponseMessage result = await client.GetAsync(url);
                         resultContent = await result.Content.ReadAsStringAsync();
 
-                        var m = Regex.Matches(resultContent, "type=\\\"hidden\\\" name=\\\"(.*?)\\\" value=\\\"(.*?)\\\"");
+                        m = Regex.Matches(resultContent, "type=\\\"hidden\\\" name=\\\"(.*?)\\\" value=\\\"(.*?)\\\"");
 
                         IEnumerable<string> cookies = result.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
 
                         DBHelper.AddMothershipDataToDB("GetTokenAsync()", start, (int)result.StatusCode);
 
                         
-                        string cookie = cookies.ToList()[0];
+                        cookie = cookies.ToList()[0];
                         cookie = cookie.Substring(0, cookie.IndexOf(" "));
                         cookie = cookie.Trim();
                         
@@ -281,9 +284,7 @@ namespace TeslaLogger
 
 
                         car.Log("cookie:" + cookie);
-
-                        GetTokenAsync2Async(code_challenge, cookie, m, state, cookies2).Wait();
-
+                        
                         if (resultContent.Contains("authorization_required"))
                         {
                             Log("Wrong Credentials");
@@ -296,6 +297,7 @@ namespace TeslaLogger
                             throw new Exception("Wrong Credentials");
                         }
 
+                        /*
                         Tools.SetThread_enUS();
                         dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                         Tesla_token = jsonResult["access_token"];
@@ -305,8 +307,13 @@ namespace TeslaLogger
                         car.LoginRetryCounter = 0;
 
                         return Tesla_token;
+                        */
                     }
                 }
+
+                GetTokenAsync2Async(code_challenge, cookie, m, state, cookies2, code_verifier).Wait();
+
+                return "";
             }
             catch (Exception ex)
             {
@@ -317,7 +324,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private async Task GetTokenAsync2Async(string code_challenge, string cookie, MatchCollection mc, string state, CookieContainer cookies2)
+        private async Task GetTokenAsync2Async(string code_challenge, string cookie, MatchCollection mc, string state, CookieContainer cookies2, string code_verifier)
         {
             int length = 0;
 
@@ -341,9 +348,13 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-
-                using (HttpClient client = new HttpClient())
+                HttpClientHandler ch = new HttpClientHandler();
+                ch.AllowAutoRedirect = false;
+                ch.UseCookies = false;
+                using (HttpClient client = new HttpClient(ch))
                 {
+                    // client.Timeout = TimeSpan.FromSeconds(10);
+                    client.BaseAddress = new Uri("https://auth.tesla.com");
                     client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
                     client.DefaultRequestHeaders.Add("Cookie", cookie);
 
@@ -368,11 +379,19 @@ namespace TeslaLogger
 
                         car.Log("URL: " + url);
 
-                        HttpResponseMessage result = await client.PostAsync(url, content);
-                        
+                        HttpResponseMessage result = await client.PostAsync(url, content);                        
                         resultContent = await result.Content.ReadAsStringAsync();
 
                         Uri location = result.Headers.Location;
+
+                        if (result.StatusCode == HttpStatusCode.Redirect && location != null)
+                        {
+                            string code = HttpUtility.ParseQueryString(location.Query).Get("code");
+                            car.Log("Code: " + code);
+                            GetTokenAsync3Async(code, code_verifier);
+                            return; 
+
+                        }
 
                         if (location == null)
                         {
@@ -401,7 +420,46 @@ namespace TeslaLogger
             }
             
         }
-            
+
+        private async Task GetTokenAsync3Async(string code, string code_verifier)
+        {
+            try
+            {
+                var d = new Dictionary<string, string>();
+                d.Add("grant_type", "authorization_code");
+                d.Add("client_id", "ownerapi");
+                d.Add("code", code);
+                d.Add("code_verifier", code_verifier);
+                d.Add("redirect_uri", "https://auth.tesla.com/void/callback");
+
+                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://auth.tesla.com");
+                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+
+                    using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
+                    {
+                        HttpResponseMessage result = await client.PostAsync("https://auth.tesla.com//oauth2/v3/token", content);
+                        string resultContent = await result.Content.ReadAsStringAsync();
+
+                        car.Log("HttpStatus: " + result.StatusCode.ToString());
+
+                        dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        string refresh_token = jsonResult["refresh_token"];
+
+
+                        car.Log(resultContent);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+
+        }
 
         private string lastCharging_State = "";
 
