@@ -222,14 +222,17 @@ namespace TeslaLogger
 
                 var code_challenge_SHA256 = ComputeSHA256Hash(code_verifier);
                 var code_challenge = Convert.ToBase64String(Encoding.Default.GetBytes(code_challenge_SHA256)); 
-                code_verifier = Convert.ToBase64String(Encoding.Default.GetBytes(code_verifier)); 
 
                 var state = RandomString(20);
                 
                 car.Log("code_challenge:" + code_challenge);
                 car.Log("state:" + state);
 
-                using (HttpClient client = new HttpClient())
+                CookieContainer cookies2 = new CookieContainer();
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.CookieContainer = cookies2;
+
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
                     Dictionary<string, string> values = new Dictionary<string, string>
@@ -266,13 +269,20 @@ namespace TeslaLogger
 
                         DBHelper.AddMothershipDataToDB("GetTokenAsync()", start, (int)result.StatusCode);
 
+                        
                         string cookie = cookies.ToList()[0];
                         cookie = cookie.Substring(0, cookie.IndexOf(" "));
                         cookie = cookie.Trim();
+                        
+                        /*
+                        var c2 = cookies2.GetCookies(new Uri("https://auth.tesla.com"));
+                        string cookie = c2[0].Value;
+                        */
+
 
                         car.Log("cookie:" + cookie);
 
-                        GetTokenAsync2Async(code_challenge, cookie, m, state);
+                        GetTokenAsync2Async(code_challenge, cookie, m, state, cookies2).Wait();
 
                         if (resultContent.Contains("authorization_required"))
                         {
@@ -307,7 +317,7 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private async Task GetTokenAsync2Async(string code_challenge, string cookie, MatchCollection mc, string state)
+        private async Task GetTokenAsync2Async(string code_challenge, string cookie, MatchCollection mc, string state, CookieContainer cookies2)
         {
             int length = 0;
 
@@ -331,15 +341,6 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                /*
-                var cookieContainer = new CookieContainer();
-                string cookievalue = cookie.Substring(cookie.IndexOf("=") + 1);
-                cookieContainer.Add(new Uri("https://auth.tesla.com"), new Cookie("tesla-auth.sid", cookievalue));
-                
-
-                HttpClientHandler ch = new HttpClientHandler();
-                ch.CookieContainer = cookieContainer;
-                */
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -361,18 +362,21 @@ namespace TeslaLogger
                         b.Query = q.ToString();
                         string url = b.ToString();
 
-                        // var temp = content.ReadAsStringAsync().Result;
+                        var temp = content.ReadAsStringAsync().Result;
+
+                        car.Log("FormUrlEncodedContent: " + temp.Substring(0, temp.Length - 6));
 
                         car.Log("URL: " + url);
 
                         HttpResponseMessage result = await client.PostAsync(url, content);
+                        
                         resultContent = await result.Content.ReadAsStringAsync();
 
                         Uri location = result.Headers.Location;
 
                         if (location == null)
                         {
-                            car.Log("Scheiße");
+                            car.Log("Location = null");
                         }
                         else
                         {
@@ -384,6 +388,8 @@ namespace TeslaLogger
                             car.Log("HttpStatusCode.Redirect");
 
                         }
+
+                        car.Log("HttpStatus: " + result.StatusCode.ToString());
 
                         car.Log(resultContent);
                     }
