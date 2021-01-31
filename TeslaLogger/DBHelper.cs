@@ -781,9 +781,6 @@ WHERE
             if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
                 double cost_total = double.NaN;
-                double cost_per_kwh = 0.0;
-                double cost_per_minute = 0.0;
-                double cost_per_session = 0.0;
                 double charge_energy_added = double.NaN;
                 DateTime startDate = DateTime.MinValue;
                 DateTime endDate = DateTime.MinValue;
@@ -2552,8 +2549,8 @@ WHERE
                             if (now - valueLastUpdate < 300000)
                             {
                                 // charging_state changed to Charging less than 5 minutes ago
-                                // set waitbetween2pointsdb to 60 seconds
-                                waitbetween2pointsdb = 60;
+                                // set waitbetween2pointsdb to 15 seconds
+                                waitbetween2pointsdb = 15;
                             }
                         }
                     }
@@ -3265,6 +3262,12 @@ WHERE
                     if (dt.Rows.Count == 1)
                     {
                         var r = dt.Rows[0];
+
+                        if (r["sumkm"] == DBNull.Value)
+                        {
+                            car.Log($"GetAvgConsumption: nothing found!!!");
+                            return;
+                        }
 
                         sumkm = Math.Round((double)r["sumkm"],1);
                         avgkm = Math.Round((double)r["avgkm"], 1);

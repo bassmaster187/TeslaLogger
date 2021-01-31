@@ -243,7 +243,7 @@ namespace TeslaLogger
 
                 if (!webhelper.RestoreToken())
                 {
-                    webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
+                    webhelper.Tesla_token = webhelper.GetToken();
                 }
 
                 if (webhelper.Tesla_token == "NULL")
@@ -687,7 +687,7 @@ namespace TeslaLogger
                                         Tools.DebugLog($"charging_state now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
                                         if (now - valueLastUpdate < 60000)
                                         {
-                                            // charging_state changed to Charging less than 1 minute ago
+                                            // charging_state changed to Starting or NoPower less than 1 minute ago
                                             // reduce sleepduration to 0.5 second
                                             sleepduration = 500;
                                             Tools.DebugLog($"charging_state sleepduration: {sleepduration}");
@@ -905,7 +905,7 @@ namespace TeslaLogger
                     lastTryTokenRefresh = DateTime.Now;
                     Log("try to get new Token");
 
-                    string temp = webhelper.GetTokenAsync().Result;
+                    string temp = webhelper.GetToken();
                     if (temp != "NULL")
                     {
                         Log("new Token received!");
