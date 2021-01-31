@@ -3262,6 +3262,12 @@ WHERE
                     {
                         var r = dt.Rows[0];
 
+                        if (r["sumkm"] == DBNull.Value)
+                        {
+                            car.Log($"GetAvgConsumption: nothing found!!!");
+                            return;
+                        }
+
                         sumkm = Math.Round((double)r["sumkm"],1);
                         avgkm = Math.Round((double)r["avgkm"], 1);
                         kwh100km = Math.Round((double)r["kwh100km"], 1);
