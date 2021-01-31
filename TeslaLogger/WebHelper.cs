@@ -367,12 +367,12 @@ namespace TeslaLogger
                             
                             if (result.StatusCode != HttpStatusCode.Redirect)
                             {
-                                car.Log("GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!! ERROR!");
+                                car.Log("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!");
                             }
 
                             if (location == null)
                             {
-                                car.Log("GetTokenAsync2 Redirect Location = null!!! Wrong credentials? ERROR!");
+                                car.Log("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?");
                                 // car.Log(resultContent);
                             }
 
