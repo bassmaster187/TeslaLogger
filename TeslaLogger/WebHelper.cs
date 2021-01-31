@@ -364,27 +364,27 @@ namespace TeslaLogger
                             string resultContent = result.Content.ReadAsStringAsync().Result;
 
                             Uri location = result.Headers.Location;
+                            
+                            if (result.StatusCode != HttpStatusCode.Redirect)
+                            {
+                                car.Log("GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!! ERROR!");
+                            }
+
+                            if (location == null)
+                            {
+                                car.Log("GetTokenAsync2 Redirect Location = null!!! Wrong credentials? ERROR!");
+                                // car.Log(resultContent);
+                            }
 
                             if (result.StatusCode == HttpStatusCode.Redirect && location != null)
                             {
                                 code = HttpUtility.ParseQueryString(location.Query).Get("code");
                                 // car.Log("Code: " + code);
                             }
-
-                            if (location == null)
-                            {
-                                car.Log("Redirect Location = null");
-
-                                return "NULL";
-                            }
                             else
                             {
-                                // car.Log("Location: " + result.Headers.Location.ToString());
+                                return "NULL";
                             }
-
-                            // car.Log("HttpStatus: " + result.StatusCode.ToString());
-
-                            // car.Log(resultContent);
                         }
                     }
                 }
