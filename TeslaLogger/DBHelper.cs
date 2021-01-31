@@ -394,7 +394,7 @@ WHERE
                         }
                     }
                     GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
-                    car.Log($"Combine charging states {string.Join(", ", IDsToDelete)} into {maxID}");
+                    car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
                     Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -722,7 +722,7 @@ HAVING
                     // check if +ccp is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.CopyChargePrice))
                     {
-                        car.Log($"CopyChargePrice at '{addr.name}'");
+                        car.Log($"CopyChargePrice enabled for '{addr.name}'");
                         // find reference charge session for addr
                         int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
                         // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
@@ -760,6 +760,7 @@ WHERE
                         {
                             if (dr[0].ToString().Equals("Tesla") && (dr[1].ToString().Equals("Tesla") || dr[1].ToString().Equals("Combo")))
                             {
+                                Tools.DebugLog("ChargingStateLocationIsSuC: true");
                                 return true;
                             }
                         }
@@ -771,6 +772,7 @@ WHERE
                 Tools.DebugLog($"Exception during DBHelper.ChargingStateLocationIsSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.ChargingStateLocationIsSuC()");
             }
+            Tools.DebugLog("ChargingStateLocationIsSuC: false");
             return false;
         }
 
@@ -779,9 +781,6 @@ WHERE
             if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
                 double cost_total = double.NaN;
-                double cost_per_kwh = 0.0;
-                double cost_per_minute = 0.0;
-                double cost_per_session = 0.0;
                 double charge_energy_added = double.NaN;
                 DateTime startDate = DateTime.MinValue;
                 DateTime endDate = DateTime.MinValue;
@@ -1019,6 +1018,10 @@ WHERE
                     }
                 }
             }
+            else
+            {
+                Tools.DebugLog($"UpdateChargePrice: nothing to do ref_cost_per_kwh_found:{ref_cost_per_kwh_found} ref_cost_per_minute_found:{ref_cost_per_minute_found} ref_cost_per_session_found:{ref_cost_per_session_found}");
+            }
         }
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
@@ -1136,10 +1139,13 @@ LIMIT 1", con))
                         cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                         Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read() && dr[1] != DBNull.Value)
+                        if (dr.Read())
                         {
                             int.TryParse(dr[0].ToString(), out referenceID);
-                            ref_cost_currency = dr[1].ToString();
+                            if (dr[1] != DBNull.Value)
+                            {
+                                ref_cost_currency = dr.GetString(1);
+                            }
                             if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
                             {
                                 ref_cost_per_kwh_found = true;
@@ -1152,7 +1158,11 @@ LIMIT 1", con))
                             {
                                 ref_cost_per_minute_found = true;
                             }
-                            Tools.DebugLog($"find ref charge session: <{dr[0]}> <{dr[1]}> <{dr[2]}> <{dr[3]}> <{dr[4]}>");
+                            Tools.DebugLog($"FindReferenceChargingState id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
+                        }
+                        else
+                        {
+                            Tools.DebugLog("FindReferenceChargingState dr.read failed");
                         }
                         con.Close();
                     }
@@ -1160,8 +1170,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
-                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+                Tools.DebugLog($"Exception during FindReferenceChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during FindReferenceChargingState()");
             }
             return referenceID;
         }
@@ -1253,6 +1263,7 @@ WHERE
         {
             try
             {
+                car.Log($"CloseChargingState id:{openChargingState}");
                 int chargeID = GetMaxChargeid(out DateTime chargeEnd);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -2489,7 +2500,9 @@ WHERE
                             if (double.TryParse(dr[0].ToString(), out double lat)
                                 && double.TryParse(dr[1].ToString(), out double lng))
                             {
-                                return Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
+                                Tools.DebugLog("GetAddressFromChargingState: " + addr);
+                                return addr;
                             }
                         }
                     }
@@ -2536,8 +2549,8 @@ WHERE
                             if (now - valueLastUpdate < 300000)
                             {
                                 // charging_state changed to Charging less than 5 minutes ago
-                                // set waitbetween2pointsdb to 60 seconds
-                                waitbetween2pointsdb = 60;
+                                // set waitbetween2pointsdb to 15 seconds
+                                waitbetween2pointsdb = 15;
                             }
                         }
                     }
@@ -3223,6 +3236,53 @@ WHERE
             }
 
             return dt;
+        }
+
+        public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
+        {
+            sumkm = 0;
+            avgkm = 0;
+            kwh100km = 0;
+            avgsocdiff = 0;
+            maxkm = 0;
+            
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
+                    FROM trip 
+                    join pos on trip.startposid = pos.id 
+                    join pos as posend on trip.endposid = posend.id
+                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
+                {
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        var r = dt.Rows[0];
+
+                        if (r["sumkm"] == DBNull.Value)
+                        {
+                            car.Log($"GetAvgConsumption: nothing found!!!");
+                            return;
+                        }
+
+                        sumkm = Math.Round((double)r["sumkm"],1);
+                        avgkm = Math.Round((double)r["avgkm"], 1);
+                        kwh100km = Math.Round((double)r["kwh100km"], 1);
+                        avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
+                        maxkm = Math.Round((double)r["maxkm"], 1);
+
+                        car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
         }
 
         public static object DBNullIfEmptyOrZero(string val)

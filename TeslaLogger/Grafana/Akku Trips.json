@@ -403,7 +403,7 @@
         },
         {
           "$$hashKey": "object:143",
-          "alias": "",
+          "alias": "StartSOC",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -477,7 +477,7 @@
         },
         {
           "$$hashKey": "object:147",
-          "alias": "",
+          "alias": "EndSOC",
           "align": "auto",
           "colorMode": "value",
           "colors": [
@@ -587,7 +587,7 @@
           "unit": "locale"
         },
         {
-          "$$hashKey": "object:153",
+          "$$hashKey": "object:240",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -596,8 +596,44 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "pattern": "/.*/",
+          "mappingType": 1,
+          "pattern": "",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:251",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:153",
+          "alias": "kmDiff",
+          "align": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "kmDiff",
           "thresholds": [],
           "type": "number",
           "unit": "locale"
@@ -700,5 +736,5 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 29
+  "version": 204
 }

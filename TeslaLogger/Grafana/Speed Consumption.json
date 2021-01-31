@@ -78,7 +78,7 @@
         },
         {
           "$$hashKey": "object:1255",
-          "alias": "",
+          "alias": "Count",
           "align": "right",
           "colorMode": null,
           "colors": [

@@ -1,84 +1,115 @@
 #Akku Trips.json
-Akku Trips=Аккумулятор Поездки 
-Start Trip=началo Поездки
-End Trip=конец Поездки
+Akku Trips=Поездки на одном заряде
+Start Trip=Началo поездки
+End Trip=Конец поездки
 Time=Дата
-StartSOC=началoSOC
-EndSOC=конецSOC
+StartSOC=начальный SOC
+EndSOC=конечный SOC
 SOC diff=SOC разница
-Start km=началo км
-End km=конец км
-Start mi=началo миля
-End mi=конец миля
-kmDiff=км разница
-Max Range=макс Диапазон
+Start km=км в начале
+End km=км в конце
+Start mi=мили в начале
+End mi=мили в конце
+kmDiff=разница [км]
+Max Range=макс. запас хода
 Ø Verbrauch=Ø потребление
-Tage=Дней
+Tage=Дни
+AVG Max Range=Средний макс. запас хода
+AVG Consumption=Среднее потребление
+AVG Trip Days=Среднее количество дней в пути
+AVG SOC Diff=Средняя разница SOC
 
 #Degradation.json
 Degradation=Деградация
-Maximalreichweite [km]=макс Диапазон [км]
-Maximalreichweite [mi]=макс Диапазон [миля]
+Maximalreichweite [km]=макс. запас хода [км]
+Maximalreichweite [mi]=макс. запас хода [мили]
 km Stand [km]=Одометр [км]
-mi Stand [mi]=Одометр [миля]
-Odometer [mi]=Одометр [миля]
-Max. Reichweite (Monatsmittel) [km]=макс Диапазон (В среднем за месяц) [км]
-Max. Reichweite (Monatsmittel) [mi]=макс Диапазон (В среднем за месяцg) [миля]
+mi Stand [mi]=Одометр [мили]
+Odometer [mi]=Одометр [мили]
+Max. Reichweite (Monatsmittel) [km]=макс. запас хода (В среднем за месяц) [км]
+Max. Reichweite (Monatsmittel) [mi]=макс. запас хода (В среднем за месяцg) [мили]
+
+#Firmware.json
+Firmware=прошивка
+Date Installed=Дата установки
+Days since previous update=Дней с момента предыдущего обновления
+Min Days Between Updates=Мин. Дней между обновлениями
+AVG Days Between Updates=Среднее количество дней между обновлениями
+Max Days Between Updates=Максимальное количество дней между обновлениями
 
 #Ladehistorie.json
-Ladehistorie=История загрузки
-Startdatum=дата началo
+Ladehistorie=История зарядок
+Startdatum=дата начала
 Enddatum=дата концa
 geladen kWh=кВтч заряженo
 km Stand=Одометр
 Adresse=адрес
-TR km Start=типичнaя дальность км началo
-TR km Ende=типичнaя дальность км конец
-SOC Ende=SOC конец
-100% TR=100% типичнaя дальность
+TR km Start=типичный запас хода началo [км]
+TR km Ende=типичный запас хода конец [км]
+SOC Ende=SOC в конеце
+100% TR=100% типичнaя запас хода
 Minuten=минуты
-TR mi Start=типичнaя дальность миля началo
-TR mi Ende=типичнaя дальность миля конец
+TR mi Start=типичный запас хода началo [мили]
+TR mi Ende=типичный запас хода конец [мили]
 ØkW=ØкВт
 
 #Ladestatistik.json
 Ladestatistik=статистика зарядки
 Letzte Ladung=последн. зарядкa
 Ort=место
-Ø geladen kWh=Ø заряжен кВтч
+Ø geladen kWh=Ø заряжено кВтч
 Ladezeit h=Продолжительность зарядки ч
 Ø SOC=Ø SOC
-Max SOC=макс SOC
-Anzahl Ladungen=Количество зарядки
+Max SOC=макс. SOC
+Anzahl Ladungen=Количество зарядок
 Anzahl=Количество
-Geladen=Charged
+Geladen=Заряжено
 Ladezeit=Продолжительность зарядки
-Anz. Ladungen=Кол. зарядки
-Ladehub=зарядочный ход
+Anz. Ladungen=Кол. зарядок
+Ladehub=Диапазон зарядки
 
 #SOC Ladestatistik.json
 SOC Ladestatistik=SOC статистика зарядки
 SOC [%]=SOC [%]
 
+#Status.json
+#SOC=SOC%
+Außentemperatur=Наружная температура
+Zelltemperatur=Температру ячеек батареи
+Current Status=Текущий статус
+Nur verfügbar mit ScanMyTesla=Доступно только со ScanMyTesla
+Asleep=Спит
+Waking=Просыпается
+Driving=Едет
+Charging=Заряжается
+
 #Laden.json
 Laden=зарядкa
 Ladespannung [V]=Напряжение зарядки [V]
-Reichweite [mi]=Дальность [миля]
-Reichweite [km]=Дальность [км]
+Reichweite [mi]=Запас хода [миля]
+Reichweite [km]=Запас хода [км]
 Leistung [kW]=мощность [kW]
 Phasen=Фазы
 Stromstärke [A]=Сила тока [A]
 Angefordert [A]=Запрошено [A]
-Pilot [A]=пилот [A]
+Pilot [A]=Pilot [A]
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik=Потеря вампира ежемесячная статистика
-TR mi Verlust=типичнaя дальность миля потеряннo
+Vampir Drain Monatsstatistik=Ежемесячная статистика потери заряда 
+TR mi Verlust=Типичный потеряный запас хода в милях
 kWh Verlust=кВтч потеряннo
 Eur Verlust=EUR потеряннo
 
+#Speed Consumption.json
+Speed Consumption=Расход при скорости
+Last Driven=Последняя поездка
+Speed km/h=Скорость км/ч
+Ø Outside Temp C°=Ø Наружная температура C °
+Ø Consumption kWh=Ø Потребление кВтч
+Count=Количество
+
 #Trip.json
-Trip=Поездка
+Trip=Поездки
 Start=Началo
 Ende=Конец
 Start Adresse=Начальный адрес
@@ -86,37 +117,37 @@ Ziel Adresse=Адрес назначения
 Ø Verbrauch kWh=Ø потребление кВтч
 Verbraucht kWh=Потребленo кВтч
 Dauer Min=Продолжительность мин
-mi=миля
+mi=мили
 km=kм
 Ø °C=Ø °C
 Ø °F=Ø °F
-max mph=макс миля/ч
-max km/h=макс км/ч
-max PS=макс PS
-min PS=мин PS
-max kW=макс кВт
-min kW=мин кВт
+max mph=макс. миль/ч
+max km/h=макс. км/ч
+max PS=макс. PS
+min PS=мин. PS
+max kW=макс. кВт
+min kW=мин. кВт
 Ø PS=Ø PS
 Ø kW=Ø кВт
-Ø mph=Ø миля/ч
+Ø mph=Ø миль/ч
 Ø km/h=Ø км/ч
 
 #Vampir Drain Monatsstatistik.json
 Zeitspanne Stunden=Время в часах
-TR mi Verlust pro Stunde=типичнaя дальность миля потеряннo в час
-mi Stand=Одометр
+TR mi Verlust pro Stunde=Потеря типичного запаса хода в час [мили]
+mi Stand=Одометр [мили]
 
 #Vampir Drain.json
-Vampir Drain=Потеря вампира
-Standby Stunden=часов в режимe ожидaния
+Vampir Drain=Потеря заряда
+Standby Stunden=Режим ожидaния [ч]
 Standby=режим ожидaния
-TR km Verlust=типичнaя дальность км потеряннo
-TR km Verlust pro Stunde=типичнaя дальность км потеряннo в час
+TR km Verlust=Потеряный типичный запаса хода [км]
+TR km Verlust pro Stunde=Потеря типичного запаса хода в час [км]
 
 #Verbrauch.json
-Verbrauch=потребление
+Verbrauch=Расход
 Höhe [m]=высота [м]
-Geschwindigkeit [mph]=скорость [миля/ч]
+Geschwindigkeit [mph]=скорость [миль/ч]
 Geschwindigkeit [km/h]=скорость [kм/ч]
 Leistung [PS]=мощность [PS]
 Außentemperatur [°C]=Наружная температура [°C]
@@ -124,29 +155,62 @@ Außentemperatur [°F]=Наружная температура [°F]
 Innentemperatur [°C]=Внутренная температура [°C]
 Innentemperatur [°F]=Внутренная температура [°F]
 
-Laden fertig=Загрузка закончена
-Schlafen=Спать
+Laden fertig=Зарядка закончена
+Schlafen=сон
 Online=онлайн
 
+#Verbrauchsstatstik.json
+Verbrauchsstatistik=Статистика потребления
+Verbrauch Monatsmittel [kWh]=Среднемесячное потребление
+Außentemperatur Monatsmittel [°C]=Среднемесячная наружная температура [°C]
+Außentemperatur Monatsmittel [°F]=Среднемесячная наружная температура [°F]
+Verbrauch Tagesmittel [kWh]=Среднесуточное потребление [kWh]
+Außentemperatur Tagesmittel [°C]=Среднесуточная наружная температура [°C]
+Außentemperatur Tagesmittel [°F]=Среднесуточная наружная температура [°F]
+
 #Visited.json
-Visited=Посетили
+Visited=Посещенны места
 
 #index.php
 Fahrzeuginfo=Информация об автомобиле
-Status=положение дел
-Typical Range=Типичный диапазон
+Status=Статус
+Typical Range=Типичный запас хода
 KM Stand=Одометр
-Car Version=Версия автомобиля
-Letzter Trip=Последнaя ездка
+Car Version=Версия прошивки
+Letzter Trip=Последнaя поездка
 Dauer=Продолжительность
-Distanz=дистaнция
+Distanz=Расстояние
 Max km/h=Максимум км/ч
 PS=PS
+Current Pos=Текущая позиция
+Last Update=Последнее обновление
+Wird geladen=Заряжается
+Done=Готово
+Done at=Готово в
+Battery Heater=Подогрев батареи
+Sentry Mode=Sentry Mode
+Preconditioning=Подогрев салона
+Offline=не в сети
+
+#menu.php
+Logfile=Лог-файл
+Restart=Перезагрузить
+Update=Обновить
+Dashboards=Дашборды
+Fleet Statistic=Статистика флота
+Extras=Дополнительно
+Settings=Настройки
+Backup=Резервное копирование
+Restore=Восстановить
+Geofence=Геозона
+Suspend Teslalogger=Приостановить Teslalogger
+Wakeup Teslalogger=Запустить Teslalogger
+Dashboard=Приборная доска
 
 #password.php
 Teslalogger Tesla Zugangsdaten= Teslaлоггер данные для доступа в Tesla
 Bitte Tesla Account Zugangsdaten eingeben=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
-Email=Эл. адрес
+Email=Электронная почта
 Passwort=пароль
 Passwort wiederholen=повторитe пароль
 Speichern=сохранить
@@ -157,51 +221,69 @@ Language=язык
 Leistung=мощность
 Temperatur=температура
 Längenmaß=мeра длины
-URL Admin Panel=ссылка админ панeл
+URL Admin Panel=ссылка административной панeли
+All=Все
+Stable=Стабильные
+None=Никакие
+Enable=Включить
+Celsius=Цельсий
+Fahrenheit=Фаренгейт
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Порт HTTP Teslalogger
+Zoom Level=Уровень масштабирования
+ScanMyTesla integration=Интеграция ScanMyTesla
+Main Car=Главный Автомобиль
+Car Name=Название автомобиля
+ScanMyTesla last received=Последние данные от ScanMyTesla
+Tasker Token=Tasker Token
+Tasker URL=URL-адрес Tasker
+Received Tasker Token=Последние использование Таскера
 
 #geoadd.php
 Bezeichnung=назвaние
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Все потребление - ScanMyTesla
-Zelltemperatur [°C]=Ячейка батареи температура [°C]
-Zelltemperatur [°F]=Ячейка батареи температура [°F]
+Zelltemperatur [°C]=Температура ячейка батареи [°C]
+Zelltemperatur [°F]=Температура ячейка батареи [°F]
 
 #Trip Monatsstatistik.json
-Datum=свидание
-Fahrzeit [h]=длительность езды [ч]
-Strecke [km]=дистaнция [км]
-Strecke [mi]=дистaнция [миля]
+Datum=Дата
+Fahrzeit [h]=Время в пути [ч]
+Strecke [km]=Дистaнция [км]
+Strecke [mi]=Дистaнция [миля]
 Verbraucht [kWh]=Потребленo кВтч
 Ø Verbrauch [kWh]=Ø потребление кВтч
-Anzahl Trips=Количество езды
-Trip Monatsstatistik=езды ежемесячная статистика
+Anzahl Trips=Количество поездок
+Trip Monatsstatistik=Ужемесячная статистика поездок
 
-Zellspannungen 01-20 - ScanMyTesla=Напряжение ячейки 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Напряжение ячейки 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Напряжение ячейки 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Напряжение ячейки 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Напряжение ячейки 81-99 - ScanMyTesla
+Zellspannungen 01-20 - ScanMyTesla=Напряжение ячеек 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Напряжение ячеек 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Напряжение ячеек 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Напряжение ячеек 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Напряжение ячеек 81-99 - ScanMyTesla
 
 Ja=да
-Nein=Нет
+Nein=нет
 
-Einschlafen=Заснуть
+Car=Автомобиль
+
+Einschlafen=Засыпает
 Automatische Updates=Автоматические обновления
 
-TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими драйверами Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
+TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими водителями Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
 Daten anonym teilen=Делитесь данными анонимно
-TextSuspendTeslalogger=Teslaлоггер остановлен! Данные не будут хранить!
-Resume Teslalogger=Активировать Теслалоггeр
-Reichweite=Дальность
+TextSuspendTeslalogger=Teslalogger остановлен! Данные не сохаряняются!
+Resume Teslalogger=Включить Teslalogger
+Reichweite=Пробег
 
-Ladekosten=Charging Costs
+Ladekosten=Стоимость зарядок
 Ladesäule=Заряднaя станция
 Währung=валюта
 Kosten pro kWh=Стоимость за кВтч
-Kosten pro Ladung=Стоимость за заряд
+Kosten pro Ladung=Одноразовая стоимость
 Kosten pro Minute=Стоимость за минуту зарядки
-Kosten Blockiergebühr=Стоимость за минтуту блокировки Зарядной станции
+Kosten Blockiergebühr=Стоимость за минтуту блокировки зарядной станции
 Summe=Всего
 kWh laut Zähler / Rechnung=кВтч согласно счетчику / счет
 Wirkungsgrad=Эффективность
