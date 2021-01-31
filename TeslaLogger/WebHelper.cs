@@ -338,6 +338,7 @@ namespace TeslaLogger
                         client.BaseAddress = new Uri("https://auth.tesla.com");
                         client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
                         client.DefaultRequestHeaders.Add("Cookie", cookie);
+                        DateTime start = DateTime.UtcNow;
 
                         using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
                         {
@@ -362,6 +363,8 @@ namespace TeslaLogger
 
                             HttpResponseMessage result = client.PostAsync(url, content).Result;
                             string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                            DBHelper.AddMothershipDataToDB("GetTokenAsync2()", start, (int)result.StatusCode);
 
                             Uri location = result.Headers.Location;
                             
@@ -415,6 +418,8 @@ namespace TeslaLogger
 
                 string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
+                DateTime start = DateTime.UtcNow;
+
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("https://auth.tesla.com");
@@ -424,6 +429,8 @@ namespace TeslaLogger
                     {
                         HttpResponseMessage result = client.PostAsync("https://auth.tesla.com/oauth2/v3/token", content).Result;
                         string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                        DBHelper.AddMothershipDataToDB("GetTokenAsync3()", start, (int)result.StatusCode);
 
                         // car.Log("HttpStatus: " + result.StatusCode.ToString());
 
@@ -457,6 +464,8 @@ namespace TeslaLogger
 
                 string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
+                DateTime start = DateTime.UtcNow;
+
                 using (HttpClient client = new HttpClient())
                 {
                     client.Timeout = TimeSpan.FromSeconds(5);
@@ -467,6 +476,8 @@ namespace TeslaLogger
                     {
                         HttpResponseMessage result = client.PostAsync("https://owner-api.teslamotors.com/oauth/token", content).Result;
                         string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                        DBHelper.AddMothershipDataToDB("GetTokenAsync4()", start, (int)result.StatusCode);
 
                         car.Log("HttpStatus: " + result.StatusCode.ToString());
 
