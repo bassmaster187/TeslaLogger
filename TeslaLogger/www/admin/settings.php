@@ -208,6 +208,7 @@ echo(menu("Settings"));
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
+		<input id="radio_es" type="radio" value="es" name="Language" /> Español<br>
 		<input id="radio_it" type="radio" value="it" name="Language" /> Italiano<br>
 		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
 		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
