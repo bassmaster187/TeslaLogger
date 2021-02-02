@@ -471,6 +471,33 @@ namespace TeslaLogger
             return httpport;
         }
 
+        internal static bool CombineChargingStates()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return false;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "CombineChargingStates"))
+                {
+                    if (bool.TryParse(j["CombineChargingStates"], out bool combineChargingStates))
+                    {
+                        return combineChargingStates;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
         internal static bool UseOpenTopoData()
         {
             return true; // Use by default

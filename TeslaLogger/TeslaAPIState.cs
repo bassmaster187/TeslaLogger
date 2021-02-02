@@ -136,6 +136,7 @@ namespace TeslaLogger
                     if (car.IsParked() && !car.IsCharging())
                     {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        car.webhelper.IsDriving(true);
                     }
                     break;
                 default:
