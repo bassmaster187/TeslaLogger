@@ -487,7 +487,6 @@ HAVING
                 }
                 return combineCandidates;
         }
-        }
 
         internal void UpdateTeslaToken()
         {
