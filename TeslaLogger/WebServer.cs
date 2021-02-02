@@ -215,6 +215,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mfa/[0-9]+/.+"):
+                        Set_MFA(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
@@ -252,6 +255,25 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mfa/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string mfa = m.Groups[2].Captures[0].ToString();
+                if (mfa.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        car.MFA_Code = mfa;
+                    }
+                }
+            }
+            WriteString(response, "");
         }
 
         private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)

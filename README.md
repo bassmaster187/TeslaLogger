@@ -23,7 +23,7 @@ http://raspberry/admin/password.php
 Enter the same credentials as you use in your teslaaccount or app.
 
 ## Settings & Language
-Available languages: English, German, Norwegian, Nederlands - Translations are welcome
+Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome
 
 Change the language and units and reboot the Teslalogger.
 
