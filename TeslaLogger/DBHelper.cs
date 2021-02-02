@@ -286,6 +286,27 @@ namespace TeslaLogger
             }
         }
 
+        internal string GetRefreshToken()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token FROM cars where id = @CarID", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        string refresh_token = dr[0].ToString();
+                        return refresh_token;
+                    }
+                }
+            }
+
+            return "";
+}
+      
         internal void UpdateEmptyChargeEnergy()
         {
             Queue<int> emptyChargeEnergy = new Queue<int>();
@@ -590,6 +611,30 @@ HAVING
                         }
                     }
                 }
+            }
+        }
+
+        internal void UpdateRefreshToken(string refresh_token)
+        {
+            try
+            {
+                car.Log("UpdateRefreshToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set refresh_token = @refresh_token where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
+                        int done = cmd.ExecuteNonQuery();
+
+                        car.Log("UpdateRefreshToken OK: " + done);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
             }
         }
 
