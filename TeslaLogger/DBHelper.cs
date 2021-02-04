@@ -351,7 +351,9 @@ WHERE
         {
             // find candidates to combine
             // find chargingstates with exactly the same odometer -> car did no move between charging states
-            foreach (int candidate in FindCombineCandidates())
+            Queue<int> combineCandidates = FindCombineCandidates();
+            AnalyzeCombineCandidates(combineCandidates);
+            foreach (int candidate in combineCandidates)
             {
                 Tools.DebugLog($"FindCombineCandidates: {candidate}");
 
@@ -443,6 +445,69 @@ WHERE
                     UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
                 }
             }
+        }
+
+        private void AnalyzeCombineCandidates(Queue<int> combineCandidates)
+        {
+            // analyze time passed between n.end and n+1.start
+            if (combineCandidates.Count > 1)
+            {
+                Queue<Tuple<int, DateTime, DateTime>> tuples = new Queue<Tuple<int, DateTime, DateTime>>();
+                foreach (int candidate in combineCandidates)
+                {
+                    tuples.Enqueue(GetStartEndFromCharginState(candidate));
+                }
+                if (tuples.Count > 1)
+                {
+                    for (int i = 1; i < tuples.Count; i++)
+                    {
+                        Tools.DebugLog($"time between id {tuples.ElementAt(i-1).Item1} and id {tuples.ElementAt(i).Item1}: {(tuples.ElementAt(i - 1).Item3 - tuples.ElementAt(i).Item2).TotalSeconds} seconds");
+                    }
+                }
+            }
+        }
+
+        private Tuple<int, DateTime, DateTime> GetStartEndFromCharginState(int id)
+        {
+            Tuple<int, DateTime, DateTime> tuple = Tuple.Create(-1, DateTime.MinValue, DateTime.MinValue);
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id,
+  chargingstate.StartDate,
+  chargingstate.EndDate
+FROM
+  chargingstate
+WHERE
+  chargingstate.CarId = @CarID
+  AND chargingstate.id = @ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", id);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            if (DateTime.TryParse(dr[1].ToString(), out DateTime StartDate)
+                                && DateTime.TryParse(dr[2].ToString(), out DateTime EndDate))
+                            {
+                                tuple = Tuple.Create(id, StartDate, EndDate);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "GetStartEndFromCharginState");
+                car.Log(ex.ToString());
+            }
+
+            return tuple;
         }
 
         private Queue<int> FindCombineCandidates()
