@@ -206,14 +206,6 @@ namespace TeslaLogger
             Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
             Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
             Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
-            try
-            {
-                Logfile.Log($"Free disk space: {Tools.FreeDiskSpaceMB()}mb");
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, ex.ToString());
-            }
         }
 
         private static void InitStage1()
@@ -335,8 +327,6 @@ namespace TeslaLogger
                 }
 
                 DBHelper.UpdateCarIDNull();
-
-                DBHelper.MigrateFloorRound();
 
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
