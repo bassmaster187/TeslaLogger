@@ -352,7 +352,6 @@ WHERE
             // find candidates to combine
             // find chargingstates with exactly the same odometer -> car did no move between charging states
             Queue<int> combineCandidates = FindCombineCandidates();
-            AnalyzeCombineCandidates(combineCandidates);
             foreach (int candidate in combineCandidates)
             {
                 Tools.DebugLog($"FindCombineCandidates: {candidate}");
@@ -416,6 +415,10 @@ WHERE
                         }
                     }
                     GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
+                    List<int> toBeAnalyzed = new List<int>();
+                    toBeAnalyzed.AddRange(IDsToDelete);
+                    toBeAnalyzed.Add(maxID);
+                    AnalyzeCombineCandidates(toBeAnalyzed);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
@@ -447,7 +450,7 @@ WHERE
             }
         }
 
-        private void AnalyzeCombineCandidates(Queue<int> combineCandidates)
+        private void AnalyzeCombineCandidates(List<int> combineCandidates)
         {
             // analyze time passed between n.end and n+1.start
             if (combineCandidates.Count > 1)
@@ -461,7 +464,10 @@ WHERE
                 {
                     for (int i = 1; i < tuples.Count; i++)
                     {
-                        Tools.DebugLog($"time between id {tuples.ElementAt(i-1).Item1} and id {tuples.ElementAt(i).Item1}: {(tuples.ElementAt(i - 1).Item3 - tuples.ElementAt(i).Item2).TotalSeconds} seconds");
+                        if (tuples.ElementAt(i - 1).Item1 != -1 && tuples.ElementAt(i).Item1 != -1)
+                        {
+                            Tools.DebugLog($"time between id {tuples.ElementAt(i - 1).Item1} and id {tuples.ElementAt(i).Item1}: {(tuples.ElementAt(i - 1).Item3 - tuples.ElementAt(i).Item2).TotalSeconds} seconds");
+                        }
                     }
                 }
             }
