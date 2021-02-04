@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -111,8 +112,16 @@ namespace TeslaLogger
         }
 
         public string LastSetChargeLimitAddressName { get => lastSetChargeLimitAddressName; set => lastSetChargeLimitAddressName = value; }
+        public string MFA_Code;
 
         internal int LoginRetryCounter = 0;
+        public double sumkm = 0;
+        public double avgkm = 0;
+        public double kwh100km = 0;
+        public double avgsocdiff = 0;
+        public double maxkm = 0;
+
+        public StringBuilder passwortinfo = new StringBuilder();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -234,9 +243,11 @@ namespace TeslaLogger
         {
             try
             {
+                dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
+
                 if (!webhelper.RestoreToken())
                 {
-                    webhelper.Tesla_token = webhelper.GetTokenAsync().Result;
+                    webhelper.Tesla_token = webhelper.GetToken();
                 }
 
                 if (webhelper.Tesla_token == "NULL")
@@ -279,6 +290,8 @@ namespace TeslaLogger
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
+
+                webhelper.StartStreamThread();
             }
             catch (Exception ex)
             {
@@ -833,6 +846,8 @@ namespace TeslaLogger
             webhelper.StopStreaming();
 
             odometerLastTrip = currentJSON.current_odometer;
+
+            dbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
         }
 
 
@@ -895,7 +910,7 @@ namespace TeslaLogger
                     lastTryTokenRefresh = DateTime.Now;
                     Log("try to get new Token");
 
-                    string temp = webhelper.GetTokenAsync().Result;
+                    string temp = webhelper.GetToken();
                     if (temp != "NULL")
                     {
                         Log("new Token received!");

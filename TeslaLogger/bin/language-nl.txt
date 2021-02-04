@@ -143,6 +143,29 @@ Dauer=Duur
 Distanz=Afstand
 Max km/h=Max km/h
 PS=PK
+Current Pos=Huidige positie
+Last Update=Laatste update
+Wird geladen=Bezig met laden
+Done=Gedaan
+Done at=Klaar om
+Battery Heater=Batterijverwarmer
+Sentry Mode=Sentry Mode
+Preconditioning=Voorconditionering
+Offline=Offline
+
+#menu.php
+Logfile=Logbestand
+Restart=Herstarten
+Update=Bijwerken
+Dashboards=Dashboards
+Fleet Statistic=Vlootstatistiek
+Extras=Extra's
+Settings=Instellingen
+Backup=Back-up
+Restore=Herstellen
+Geofence=Geofence
+Suspend Teslalogger=Teslalogger opschorten
+Wakeup Teslalogger=Teslalogger wakker maken
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Inloggegevens

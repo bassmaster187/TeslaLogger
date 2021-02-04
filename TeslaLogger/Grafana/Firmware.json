@@ -58,7 +58,7 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "pattern": "/Date.*/",
+          "pattern": "Date Installed",
           "thresholds": [],
           "type": "date",
           "unit": "short"
@@ -70,7 +70,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as 'Date Installed', T1a.Firmware, Datediff(T1a.StartDate, T2a.StartDate) as 'Days since previous update'\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
+          "rawSql": "select UNIX_TIMESTAMP(T1a.StartDate) * 1000 as 'Date Installed', T1a.Firmware as 'Firmware', Datediff(T1a.StartDate, T2a.StartDate) as 'Days since previous update'\nfrom (SELECT (@rowid1:=@rowid1 + 1) as rowid,T1.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T1, (SELECT @rowid1:=0) a\n) as T1a\nLEFT OUTER JOIN \n(SELECT (@rowid2:=@rowid2 + 1) as rowid,T2.* from\n\t(SELECT min(StartDate) as StartDate, version as Firmware\n\tfrom car_version  where carid=$Car\n\tgroup by version\n\torder by StartDate desc\n\t) as T2, (SELECT @rowid2:=0) a\n) as T2a on T1a.rowid = T2a.rowid-1",
           "refId": "A",
           "select": [
             [
@@ -195,7 +195,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Min Days Between updates",
+      "title": "Min Days Between Updates",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -303,7 +303,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "AVG Days Between updates",
+      "title": "AVG Days Between Updates",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -411,7 +411,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Max Days Between updates",
+      "title": "Max Days Between Updates",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -477,5 +477,5 @@
   "timezone": "",
   "title": "Firmware",
   "uid": "URrZhLZgk",
-  "version": 3
+  "version": 16
 }
