@@ -1133,6 +1133,7 @@ namespace TeslaLogger
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
+                // evaluate +hfl special flag
                 Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
@@ -1156,6 +1157,13 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+                }
+                // enable +hfl:1m for fast charger
+                if (GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present) && fast_charger_present)
+                {
+                    DateTime until = DateTime.Now;
+                    until = until.AddMinutes(1);
+                    EnableHighFrequencyLoggingMode(HFLMode.Time, 0, until);
                 }
             }
         }
