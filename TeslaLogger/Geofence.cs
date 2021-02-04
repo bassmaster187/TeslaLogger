@@ -370,19 +370,19 @@ namespace TeslaLogger
 
         private static void SpecialFlag_SCL(Address _addr, string _flag)
         {
-            string pattern = "scl:([0-9]+)";
+            string pattern = "scl:([0-9]+):A";
             Match m = Regex.Match(_flag, pattern);
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, m.Groups[1].Captures[0].ToString());
+                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimitOnArrival, m.Groups[1].Captures[0].ToString());
             }
             else
             {
-                pattern = "scl:([0-9]+):A";
+                pattern = "scl:([0-9]+)";
                 m = Regex.Match(_flag, pattern);
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
-                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimitOnArrival, m.Groups[1].Captures[0].ToString());
+                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, m.Groups[1].Captures[0].ToString());
                 }
                 else
                 {
