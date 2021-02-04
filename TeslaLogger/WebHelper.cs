@@ -209,6 +209,8 @@ namespace TeslaLogger
 
             try
             {
+                car.passwortinfo.Append("Start getting Token<br>");
+
                 string tempToken = UpdateTeslaTokenFromRefreshToken();
 
                 if (!String.IsNullOrEmpty(tempToken))
@@ -225,6 +227,7 @@ namespace TeslaLogger
 
                 if (car.TeslaName.Length == 0 || car.TeslaPasswort.Length == 0)
                 {
+                    car.passwortinfo.Append("ERROR: NO Credentials!<br>");
                     Log("NO Credentials");
                     throw new Exception("NO Credentials");
                 }
@@ -285,6 +288,8 @@ namespace TeslaLogger
 
                         if (resultContent.Contains("authorization_required"))
                         {
+                            car.passwortinfo.Append("ERROR: Wrong Credentials!<br>");
+
                             Log("Wrong Credentials");
 
                             if (Tools.IsDocker())
@@ -301,6 +306,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                car.passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
                 Log("Error in GetTokenAsync: " + ex.Message);
                 ExceptionWriter(ex, resultContent);
             }
@@ -314,6 +320,7 @@ namespace TeslaLogger
 
             if (String.IsNullOrEmpty(refresh_token))
             {
+                car.passwortinfo.Append("No Refresh Token<br>");
                 Log("No Refresh Token");
                 return "";
             }
@@ -441,19 +448,24 @@ namespace TeslaLogger
                                 if (result.StatusCode == HttpStatusCode.OK && resultContent.Contains("passcode"))
                                 {
                                     isMFA = true;
+                                    car.passwortinfo.Append("Wait for MFA code<br>");
                                     code = WaitForMFA_Code(cookie, transaction_id, code_challenge, state);
 
                                     if (String.IsNullOrEmpty(code))
                                         return "NULL";
                                 }
                                 else
+                                {
+                                    car.passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
                                     car.Log("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!");
+                                }
                             }
 
                             if (!isMFA)
                             {
                                 if (location == null)
                                 {
+                                    car.passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
                                     car.Log("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?");
                                     // car.Log(resultContent);
                                 }
@@ -1923,17 +1935,21 @@ namespace TeslaLogger
             }
         }
 
+        Thread streamThread = null;
         public void StartStreamThread()
         {
-            /* StreamingAPI Doesn't work anymore
-            System.Threading.Thread t = new System.Threading.Thread(() => StartStream());
-            t.Start();
-            */
+            if (streamThread == null)
+            {
+                streamThread = new System.Threading.Thread(() => StartStream());
+                streamThread.Start();
+            }
         }
 
         private void StartStream()
         {
-            /*
+            string resultContent = null;
+
+
             Log("StartStream");
             stopStreaming = false;
             string line = "";
@@ -1941,34 +1957,36 @@ namespace TeslaLogger
             {
                 try
                 {
-                    string online = IsOnline().Result;
+                    // string online = IsOnline().Result;
 
                     using (System.Net.WebSockets.ClientWebSocket ws = new System.Net.WebSockets.ClientWebSocket())
                     {
                         byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
-                        Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/connect/{Tesla_vehicle_id}");
-                        //Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/{Tesla_vehicle_id}/?values=speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,est_range");
+                        Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/");
 
-                        //ws.Options.Credentials = new NetworkCredential(ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken);
-                        ws.Options.UseDefaultCredentials = false;
-                        ws.Options.SetRequestHeader("Authorization", "Basic " + Convert.ToBase64String(byteArray));
+                        string connectmsg = "{\n" +
+                            "    \"msg_type\": \"data:subscribe_oauth\",\n" +
+                            "    \"token\": \"" + Tesla_token + "\",\n" +
+                            "    \"tag\": \"" + Tesla_vehicle_id + "\",\n" +
+                            "    \"value\": \"speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,range,est_range,heading\"\n" +
+                            "}";
+
 
                         Task result = ws.ConnectAsync(serverUri, CancellationToken.None);
 
                         while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
                         {
                             System.Diagnostics.Debug.WriteLine("Connecting");
-                            Thread.Sleep(100);
+                            Thread.Sleep(250);
                         }
 
 
                         ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
-                        string msg = "{\"msg_type\": \"data:subscribe\", \"value\": [\"speed\",\"odometer\",\"soc\",\"elevation\",\"est_heading\",\"est_lat\",\"est_lng\",\"est_corrected_lat\",\"est_corrected_lng\",\"native_latitude\",\"native_longitude\",\"native_heading\",\"native_type\",\"native_location_supported\",\"power\",\"shift_state\"]}";
-                        ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(msg));
+                        ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(connectmsg));
 
                         if (ws.State == System.Net.WebSockets.WebSocketState.Open)
                         {
-                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait();
                         }
 
                         while (ws.State == System.Net.WebSockets.WebSocketState.Open)
@@ -1976,59 +1994,57 @@ namespace TeslaLogger
                             Thread.Sleep(100);
                             byte[] buffer = new byte[1024];
                             Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                            response.Wait();
 
-                            string r = Encoding.UTF8.GetString(buffer);
-                            System.Diagnostics.Debug.WriteLine(r);
-                            Thread.Sleep(100);
-                            ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
-                            Thread.Sleep(1000);
+                            resultContent = Encoding.UTF8.GetString(buffer);
 
-                            Logfile.ExceptionWriter(null, r);
-                        }
-                    }
-                    Log("StreamEnd");
-                    System.Diagnostics.Debug.WriteLine("StreamEnd");
-
-
-
-                    return;
-
-                    /*using (var client = new HttpClient())
-                    {
-
-                        var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
-                        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-
-                        client.Timeout = TimeSpan.FromMilliseconds(System.Threading.Timeout.Infinite);
-
-                        string url = "https://streaming.vn.teslamotors.com/stream/" + Tesla_vehicle_id + "/?values=speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,est_range";
-
-                        // var stream = client.GetStreamAsync(url).Result; -> funktioniert nicht in MONO - bekannter bug
-                        var stream = client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead).Result.Content.ReadAsStreamAsync().Result;
-
-                        using (var reader = new System.IO.StreamReader(stream))
-                        {
-                            while (!stopStreaming && !reader.EndOfStream)
+                            if (!String.IsNullOrEmpty(resultContent))
                             {
-                                line = reader.ReadLine();
-                                if (!string.IsNullOrEmpty(line))
+                                resultContent = resultContent.Trim('\0');
+                                // System.Diagnostics.Debug.WriteLine("Stream: " + resultContent);
+
+                                dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+
+                                string msg_type = j["msg_type"];
+
+                                switch (msg_type)
                                 {
-                                    if (line == "Vehicle is offline")
-                                        continue;
+                                    case "control:hello":
+                                        car.Log("Stream Hello");
+                                        break;
+                                    case "data:error":
+                                        car.Log("Stream Data Error: " + resultContent);
 
-                                    var values = line.Split(',');
-                                    // Log("Elevation: " + values[4]);
+                                        string error_type = j["error_type"];
 
-                                    elevation = values[4];
-                                    elevation_time = DateTime.Now;
+                                        if (error_type == "vehicle_disconnected")
+                                            throw new Exception("vehicle_disconnected");
+                                        else
+                                            throw new Exception("unhandled error_type: " + error_type);
+
+                                        break;
+                                    case "data:update":
+                                        string value = j["value"];
+                                        StreamDataUpdate(value);
+                                        break;
+                                    default:
+                                        car.Log("unhandled: " + resultContent);
+                                        break;
                                 }
                             }
+                            
+                            Thread.Sleep(10);
+                            //ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+                            // Logfile.ExceptionWriter(null, r);
                         }
                     }
+
+                    Log("StreamEnd");
+                    System.Diagnostics.Debug.WriteLine("StreamEnd");
                 }
                 catch (Exception ex)
                 {
-                    // System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
 
                     Logfile.ExceptionWriter(ex, line);
                     Thread.Sleep(10000);
@@ -2036,7 +2052,28 @@ namespace TeslaLogger
             }
 
             Log("StartStream Ende");
-            */
+            
+        }
+
+        private void StreamDataUpdate(string data)
+        {
+            string[] v = data.Split(',');
+            string speed = v[1];
+            string odometer = v[2];
+            string soc = v[3];
+            string elevation = v[4];
+            string est_heading = v[5];
+            string est_lat = v[6];
+            string est_lng = v[7];
+            string power = v[8];
+            string shift_state = v[9];
+            string range = v[10];
+            string est_range = v[11];
+            string heading = v[12];
+
+            DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
+
+            Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString());
         }
 
 
@@ -3075,6 +3112,7 @@ namespace TeslaLogger
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
+        private bool stopStreaming = false;
 
         public bool TaskerWakeupfile(bool force = false)
         {
