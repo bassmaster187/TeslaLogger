@@ -200,6 +200,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/export/trip"):
                         ExportTrip(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/passwortinfo"):
+                        passwortinfo(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -531,6 +534,23 @@ namespace TeslaLogger
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
+        }
+        
+        private void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string data;
+            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            {
+                data = reader.ReadToEnd();
+            }
+
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int id = Convert.ToInt32(r["id"]);
+
+            var c = Car.GetCarByID(id);
+            
+            WriteString(response, c.passwortinfo.ToString());
         }
 
         private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
