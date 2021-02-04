@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -119,6 +120,8 @@ namespace TeslaLogger
         public double kwh100km = 0;
         public double avgsocdiff = 0;
         public double maxkm = 0;
+
+        public StringBuilder passwortinfo = new StringBuilder();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -287,6 +290,8 @@ namespace TeslaLogger
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
+
+                webhelper.StartStreamThread();
             }
             catch (Exception ex)
             {
