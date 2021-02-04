@@ -1163,6 +1163,35 @@ namespace TeslaLogger
                                 break;
                             case Address.SpecialFlags.ClimateOff:
                             case Address.SpecialFlags.OpenChargePort:
+                            case Address.SpecialFlags.SetChargeLimitOnArrival:
+                            case Address.SpecialFlags.EnableSentryMode:
+                            case Address.SpecialFlags.CopyChargePrice:
+                                break;
+                            default:
+                                Log("handleShiftStateChange unhandled special flag " + flag.ToString());
+                                break;
+                        }
+                    }
+                }
+            }
+            // driving -> any
+            if (_oldState == TeslaState.Drive && _newState != TeslaState.Drive)
+            {
+                Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
+                    {
+                        switch (flag.Key)
+                        {
+                            case Address.SpecialFlags.SetChargeLimitOnArrival:
+                                Tools.DebugLog($"SetChargeLimitOnArrival: {flag.Value}");
+                                HandleSpecialFlag_SetChargeLimit(addr, flag.Value);
+                                break;
+                            case Address.SpecialFlags.SetChargeLimit:
+                            case Address.SpecialFlags.ClimateOff:
+                            case Address.SpecialFlags.HighFrequencyLogging:
+                            case Address.SpecialFlags.OpenChargePort:
                             case Address.SpecialFlags.EnableSentryMode:
                             case Address.SpecialFlags.CopyChargePrice:
                                 break;

@@ -16,6 +16,7 @@ namespace TeslaLogger
             HighFrequencyLogging,
             EnableSentryMode,
             SetChargeLimit,
+            SetChargeLimitOnArrival,
             ClimateOff,
             CopyChargePrice
         }
@@ -377,8 +378,17 @@ namespace TeslaLogger
             }
             else
             {
-                // default
-                _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, "80");
+                pattern = "scl:([0-9]+):A";
+                m = Regex.Match(_flag, pattern);
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimitOnArrival, m.Groups[1].Captures[0].ToString());
+                }
+                else
+                {
+                    // default
+                    _addr.specialFlags.Add(Address.SpecialFlags.SetChargeLimit, "80");
+                }
             }
         }
 
