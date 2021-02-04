@@ -955,6 +955,7 @@ namespace TeslaLogger
                             HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
                             break;
                         case Address.SpecialFlags.SetChargeLimit:
+                        case Address.SpecialFlags.SetChargeLimitOnArrival:
                         case Address.SpecialFlags.CopyChargePrice:
                         case Address.SpecialFlags.HighFrequencyLogging:
                             break;
