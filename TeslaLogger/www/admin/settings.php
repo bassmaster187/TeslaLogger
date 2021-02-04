@@ -133,14 +133,8 @@ function CarsCombobox($cars, $selected)
 			else
 				echo ("$('#radio_km').prop('checked', true);\r\n");
 				
-			if($Language =="en")
-				echo ("$('#radio_en').prop('checked', true);\r\n");
-			else if($Language =="nl")
-				echo ("$('#radio_nl').prop('checked', true);\r\n");
-			else if($Language =="no")
-				echo ("$('#radio_no').prop('checked', true);\r\n");
-			else if($Language =="pt")
-				echo ("$('#radio_pt').prop('checked', true);\r\n");
+			if(!empty($Language))
+				echo ("$('#radio_$Language').prop('checked', true);\r\n");
 			else
 				echo ("$('#radio_de').prop('checked', true);\r\n");
 				
@@ -210,27 +204,31 @@ echo(menu("Settings"));
 <table>
 <tr><td><h1 style="margin-top:0px;"><?php t("Zugangsdaten"); ?></h1></td><td></td></tr>
 <tr><td></td><td><button onclick="window.location.href='password.php';"  style="float: right;"><?php t("Zugangsdaten"); ?></button></td></tr>
-<tr><td><h1>SETTINGS</h1></td><td></td></tr>
+<tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
+		<input id="radio_es" type="radio" value="es" name="Language" /> Español<br>
+		<input id="radio_it" type="radio" value="it" name="Language" /> Italiano<br>
 		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
 		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
 		<input id="radio_pt" type="radio" value="pt" name="Language" /> Português<br>
+		<input id="radio_ru" type="radio" value="ru" name="Language" /> Русский<br>
+		
 	</td></tr>
 	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
-	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> Celsius<br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> Fahrenheit </td></tr>
+	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <?php t("Celsius"); ?><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <?php t("Fahrenheit"); ?> </td></tr>
 	<tr><td valign="top"><b><?php t("Längenmaß"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
 	<tr><td valign="top"><b><?php t("Reichweite"); ?>:</b></td><td><input id="radio_Ideal" type="radio" value="IR" name="Range"> Ideal<br><input id="radio_Rated" type="radio" value="RR" name="Range"> Rated</td></tr>
-	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> Enable</td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
-	<tr><td valign="top"><b><?php t("Automatische Updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> All<br><input id="radio_stable" type="radio" value="stable" name="update"> Stable<br><input id="radio_none" type="radio" value="none" name="update"> None</td></tr>
-	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> Enable</td></tr>
+	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> <?php t("Enable"); ?></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
+	<tr><td valign="top"><b><?php t("Automatische Updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> <?php t("All"); ?><br><input id="radio_stable" type="radio" value="stable" name="update"> <?php t("Stable"); ?><br><input id="radio_none" type="radio" value="none" name="update"> <?php t("None"); ?></td></tr>
+	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> <?php t("Enable"); ?></td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
-	<tr><td valign="top"><b><?php t("TeslaLogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
+	<tr><td valign="top"><b><?php t("Teslalogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
 	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
-	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> Enable</td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
+	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <?php t("Enable"); ?></td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
 	
 	
 	
@@ -252,7 +250,7 @@ echo(menu("Settings"));
 
 	//var_dump($jcars);
 ?>
-<tr><td><b>Main Car:</b></td><td><?PHP CarsCombobox($jcars, $defaultcar); ?></td></tr>
+<tr><td><b><?php t("Main Car"); ?>:</b></td><td><?PHP CarsCombobox($jcars, $defaultcar); ?></td></tr>
 <?php
 	
 	foreach ($jcars as $k => $v) {
@@ -266,16 +264,16 @@ echo(menu("Settings"));
 ?>
 
 <tr><td>&nbsp;</td><td></td></tr>
-<tr><td><b>Car Name:</b></td><td><?= $displayname ?></td></tr>
+<tr><td><b><?php t("Car Name"); ?>:</b></td><td><?= $displayname ?></td></tr>
 <tr><td style="padding-left:20px;"><b><?php t("ScanMyTesla last received"); ?>:</b></td><td><?= $lastscanmytesla ?></td></tr>
-<tr><td style="padding-left:20px;"valign="top"><b>Tasker Token:</b></td><td><?= $taskertoken ?></td></tr>
-<tr><td style="padding-left:20px;"valign="top"><b>Tasker URL:</b></td><td>
+<tr><td style="padding-left:20px;"valign="top"><b><?php t("Tasker Token"); ?>:</b></td><td><?= $taskertoken ?></td></tr>
+<tr><td style="padding-left:20px;"valign="top"><b><?php t("Tasker URL"); ?>:</b></td><td>
 <?php
 if (strlen($taskertoken) > 7)
 	echo "https://teslalogger.de/wakeup.php?t=".$taskertoken;
 ?>
 </td></td><td><a href="https://teslalogger.de/faq-1.php" target=”_blank”><img src="img/icon-help-24.png" /></a></td></tr>
-<tr><td style="padding-left:20px;" valign="top"><b>Received Tasker Token:</b></td><td>
+<tr><td style="padding-left:20px;" valign="top"><b><?php t("Received Tasker Token"); ?>:</b></td><td>
 <?php
 if (strlen($taskertoken) > 7)
 	echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken);

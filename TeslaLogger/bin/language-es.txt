@@ -1,0 +1,248 @@
+#Akku Trips.json
+Akku Trips=Trayectos entre Cargas
+Start Trip=Iniciar Viaje
+End Trip=Finalizar Viaje
+Time=Fecha
+StartSOC=SoC inicial
+EndSOC=SoC final
+SOC diff=Diferencia de SoC
+Start km=Kms iniciales
+End km=Kms finales
+Start mi=Millas iniciales
+End mi=Millas finales
+kmDiff=Dif. de kms
+Max Range=Autonomía máx.
+Ø Verbrauch=Consumo medio
+Tage=Días
+
+#Degradation.json
+Degradation=Degradación
+Maximalreichweite [km]=Autonomía máx. [km]
+Maximalreichweite [mi]=Autonomía máx. [mi]
+km Stand [km]=Odómetro [km]
+mi Stand [mi]=Odómetro [mi]
+Odometer [mi]=
+Max. Reichweite (Monatsmittel) [km]=Autonomía máx. (media mensual) [km]
+Max. Reichweite (Monatsmittel) [mi]=Autonomía máx. (media mensual) [mi]
+
+#Ladehistorie.json
+Ladehistorie=Historial de Cargas
+Startdatum=Fecha de Inicio
+Enddatum=Fecha de Fin
+geladen kWh=kWh Cargados
+km Stand=Odómetro
+Adresse=Dirección
+TR km Start=Aut.Estim.Inicio [km]
+TR km Ende=Aut. Estim.Fin [km]
+SOC Ende=SoC Final
+100% TR=Aut.Estim. 100%
+Minuten=Minutos
+TR mi Start=Aut.Estim. Inicio [mi]
+TR mi Ende=Aut. Estim. Fin [mi]
+ØkW=Media kW
+
+#Ladestatistik.json
+Ladestatistik=Estadísticas de Carga
+Letzte Ladung=Última Carga
+Ort=Dirección
+Ø geladen kWh=Media de kWh cargados
+Ladezeit h=Duración de la carga (h)
+Ø SOC=SoC Medio
+Max SOC=SoC Máximo
+Anzahl Ladungen=Número de cargas
+Anzahl=Cuenta
+Geladen=Cargado
+Ladezeit=Tiempo de Carga
+Anz. Ladungen=Cuenta
+Ladehub=% Carga
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=Estadísticas de carga - SoC
+SOC [%]=SoC [%]
+
+#Laden.json
+Laden=Cargando
+Ladespannung [V]=Voltaje de Carga [V]
+Reichweite [mi]=Autonomía [mi]
+Reichweite [km]=Autonomía[km]
+Leistung [kW]=Potencia [kW]
+Phasen=Fases
+Stromstärke [A]=Intensidad [A]
+Angefordert [A]=Int. solicitada [A]
+Pilot [A]=Int.Cargador [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Estadísticas Mensuales de Consumo Fantasma
+TR mi Verlust=Aut.Estim. Perdida [mi]
+kWh Verlust=kWh Perdidos
+Eur Verlust=Euros Perdidos
+
+#Trip.json
+Trip=Viaje
+Start=Inicio
+Ende=Fin
+Start Adresse=Dirección de Inicio
+Ziel Adresse=Dirección de Destino
+Ø Verbrauch kWh=Consumo medio (kWh)
+Verbraucht kWh=kWh Consumidos
+Dauer Min=Duración (min)
+mi=mi
+km=km
+Ø °C=°C medios
+Ø °F=°F medios
+max mph=Máx mph
+max km/h=Máx km/h
+max PS=Cv Máx
+min PS=Cv Mín
+max kW=kW Máx
+min kW=kW Mín
+Ø PS=Cv. medios
+Ø kW=kW medios
+Ø mph=mph medias
+Ø km/h=Km/h medios
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Periodo (horas)
+TR mi Verlust pro Stunde=Aut.Estim.Perdida por hora [mi]
+mi Stand=Odómetro
+
+#Vampir Drain.json
+Vampir Drain=Consumo Fantasma
+Standby Stunden=Horas en Espera
+Standby=En Espera
+TR km Verlust=Aut.Estim.Perdida [km]
+TR km Verlust pro Stunde=Aut.Estim.Perdida por hora [km]
+
+#Verbrauch.json
+Verbrauch=Consumo
+Höhe [m]=Altitud [m]
+Altitude [m]=Altitud [m]
+Geschwindigkeit [mph]=Velocidad [mph]
+Geschwindigkeit [km/h]=Velocidad[km/h]
+Leistung [PS]=Potencia [Cv]
+Außentemperatur [°C]=Temperatura Exterior [°C]
+Außentemperatur [°F]=Temperatura Exterior [°F]
+Innentemperatur [°C]=Temperatura Interior [°C]
+Innentemperatur [°F]=Temperatura Interior [°F]
+
+Laden fertig=Carga Terminada
+Schlafen=Durmiendo
+Online=Online
+
+#Visited.json
+Visited=Visitado
+
+#index.php
+Fahrzeuginfo=Información del coche
+Status=Estado
+Typical Range=Autonomía típica
+KM Stand=Odómetro
+Car Version=Versión del coche
+Letzter Trip=Último Viaje
+Dauer=Duración
+Distanz=Distancia
+Max km/h=Km/h máximos
+PS=Cv
+Current Pos=Pos. Actual
+Last Update=Última actualización
+Wird geladen=Cargando
+Done=Hecho
+Done at=Hecho a
+Battery Heater=Acondicionador de batería
+Sentry Mode=Modo Centinela
+Preconditioning=Preacondicionando
+Offline=Offline
+
+#menu.php
+Logfile=Fichero de log
+Restart=Reiniciar
+Update=Actualizar
+Dashboards=Dashboards
+Fleet Statistic=Estadísticas de Flota
+Extras=Extras
+Settings=Configuración
+Backup=Backup
+Restore=Restaurar
+Geofence=Geoperimetraje
+Suspend Teslalogger=Suspender Teslalogger
+Wakeup Teslalogger=Despertar a Teslalogger
+Dashboard=Dashboard
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger Credenciales Tesla
+Bitte Tesla Account Zugangsdaten eingeben=Por favor, introduce tus credenciales de Tesla
+Email=Email
+Passwort=Contraseña
+Passwort wiederholen=Repite Contraseña
+Speichern=Guardar
+
+#settings.php
+Zugangsdaten=Credenciales
+Language=Idioma
+Leistung=Potencia
+Temperatur=Temperatura
+Längenmaß=Unidad de longitud
+URL Admin Panel=URL Panel Admin
+All=Todas
+Stable=Estable
+None=Ninguna
+Enable=Activar
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Puerto HTTP Teslalogger
+Zoom Level=Nivel de Zoom
+ScanMyTesla integration=Integración ScanMyTesla
+Main Car=Coche Principal
+Car Name=Nombre del Coche
+ScanMyTesla last received=ScanMyTesla última recepción
+Tasker Token=Token Tasker
+Tasker URL=URL Tasker
+Received Tasker Token=Tasker Token Recibido
+
+#geoadd.php
+Bezeichnung=Descripción
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=Todos los consumos - ScanMyTesla
+Zelltemperatur [°C]=Temperatura de Celdas [°C]
+Zelltemperatur [°F]=Temperatura de Celdas [°F]
+
+#Trip Monatsstatistik.json
+Datum=Fecha
+Fahrzeit [h]=Tiempo de Conducción [h]
+Strecke [km]=Distancia [km]
+Strecke [mi]=Distancia [mi]
+Verbraucht [kWh]=kWh Consumidos
+Ø Verbrauch [kWh]=kWh Medios Consumidos
+Anzahl Trips=Número de viajes
+Trip Monatsstatistik=Estadísticas Mensuales de Viajes
+
+Zellspannungen 01-20 - ScanMyTesla=Voltajes de Celdas 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Voltajes de Celdas 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Voltajes de Celdas 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Voltajes de Celdas 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Voltajes de Celdas 81-99 - ScanMyTesla
+
+Ja=Sí
+Nein=No
+
+Einschlafen=Intentando dormir
+Automatische Updates=Actualizaciones automáticas
+
+TextShare=<h1>Comparte curvas de carga / degracación de forma anónima</h1>Nos gustaría crear una base de datos anónima para comparar curvas de degradación y carga. Esto permite comparar tu vehículo con otros en cualquier momento y detectar cualquier desviación anómala de forma prematura. Esto también se puede usar más adelante para probar que tu batería aún es plenamente eficiente a la hora de vender el vehículo. En caso contrario, puedes probar un peor rendimiento a Tesla Motors.<br><br>¿Querrías compartir tus curvas de carga rápida y degradación con otros conductores de Tesla de forma completamente anónima? Esta decisión se puede cambiar en cualquier momento en la pantalla de configuración.
+Daten anonym teilen=Compartir datos de forma anónima
+TextSuspendTeslalogger=¡Teslalogger se ha detenido! ¡No se registrarán datos!
+Resume Teslalogger=Rearrancar Teslalogger
+Reichweite=Autonomía
+
+Ladekosten=Costes de Carga
+Ladesäule=Estación de Carga
+Währung=Divisa
+Kosten pro kWh=Coste por kWh
+Kosten pro Ladung=Coste por carga
+Kosten pro Minute=Coste por minuto
+Kosten Blockiergebühr=Coste de inactividad por minuto
+Summe=Total
+kWh laut Zähler / Rechnung=kWh según contador / factura
+Wirkungsgrad=Eficiencia

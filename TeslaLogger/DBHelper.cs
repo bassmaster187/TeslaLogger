@@ -283,6 +283,27 @@ namespace TeslaLogger
             }
         }
 
+        internal string GetRefreshToken()
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token FROM cars where id = @CarID", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        string refresh_token = dr[0].ToString();
+                        return refresh_token;
+                    }
+                }
+            }
+
+            return "";
+        }
+
         internal void UpdateTeslaToken()
         {
             try
@@ -405,6 +426,30 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+        }
+
+        internal void UpdateRefreshToken(string refresh_token)
+        {
+            try
+            {
+                car.Log("UpdateRefreshToken");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set refresh_token = @refresh_token where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
+                        int done = cmd.ExecuteNonQuery();
+
+                        car.Log("UpdateRefreshToken OK: " + done);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
             }
         }
 
@@ -797,19 +842,24 @@ WHERE
                 Thread.Sleep(30000);
                 // try to update chargingstate.pos
                 // are we still charging?
+                car.Log($"StartChargingState Task start");
+                int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                car.Log($"StartChargingState Task latestPos: {latestPos}");
                 if (car.GetCurrentState() == Car.TeslaState.Charge)
                 {
                     // now get a new entry in pos
                     wh.IsDriving(true);
                     // get lat, lng from max pos id
-                    int latestPos = GetMaxPosidLatLng(out double poslat, out double poslng);
+                    int newPos = GetMaxPosidLatLng(out poslat, out poslng);
+                    car.Log($"StartChargingState Task newPos: {newPos}");
                     if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
                         int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
                         if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
                         {
+                            car.Log($"StartChargingState Task (poslng, poslat, chglng, chglat) ({poslng}, {poslat}, {chglng}, {chglat})");
                             double distance = Geofence.GetDistance(poslng, poslat, chglng, chglat);
-                            Tools.DebugLog($"StartChargingState Task distance: {distance}");
+                            car.Log($"StartChargingState Task distance: {distance}");
                             if (distance > 10)
                             {
                                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -817,28 +867,28 @@ WHERE
                                     con.Open();
                                     using (MySqlCommand cmd = new MySqlCommand("UPDATE chargingstate SET Pos = @latestPos WHERE chargingstate.id = @chargingstateId", con))
                                     {
-                                        cmd.Parameters.AddWithValue("@latestPos", latestPos);
+                                        cmd.Parameters.AddWithValue("@latestPos", newPos);
                                         cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
                                         Tools.DebugLog(cmd);
                                         int updatedRows = cmd.ExecuteNonQuery();
-                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {latestPos}");
+                                        car.Log($"updated chargingstate {chargingstateId} to pos.id {newPos}");
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            Tools.DebugLog($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
+                            car.Log($"StartChargingState Task chglat: {chglat} chglng: {chglng}");
                         }
                     }
                     else
                     {
-                        Tools.DebugLog($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
+                        car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
                 }
                 else
                 {
-                    Tools.DebugLog($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
+                    car.Log($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
                 }
             });
             #pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
@@ -1742,9 +1792,10 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("select lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand("select id,lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
@@ -1791,6 +1842,7 @@ WHERE
                 using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
                     {
@@ -2273,6 +2325,53 @@ WHERE
             }
 
             return dt;
+        }
+
+        public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
+        {
+            sumkm = 0;
+            avgkm = 0;
+            kwh100km = 0;
+            avgsocdiff = 0;
+            maxkm = 0;
+            
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
+                    FROM trip 
+                    join pos on trip.startposid = pos.id 
+                    join pos as posend on trip.endposid = posend.id
+                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
+                {
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        var r = dt.Rows[0];
+
+                        if (r["sumkm"] == DBNull.Value)
+                        {
+                            car.Log($"GetAvgConsumption: nothing found!!!");
+                            return;
+                        }
+
+                        sumkm = Math.Round((double)r["sumkm"],1);
+                        avgkm = Math.Round((double)r["avgkm"], 1);
+                        kwh100km = Math.Round((double)r["kwh100km"], 1);
+                        avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
+                        maxkm = Math.Round((double)r["maxkm"], 1);
+
+                        car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
         }
 
         public static object DBNullIfEmptyOrZero(string val)

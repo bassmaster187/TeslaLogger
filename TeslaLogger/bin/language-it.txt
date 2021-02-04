@@ -1,0 +1,231 @@
+﻿#Akku Trips.json
+Akku Trips=Batteria viaggi
+Start Trip=Inizio viaggio
+End Trip=Fine viaggio
+Time=Data
+StartSOC=InizioSOC
+EndSOC=FineSOC
+SOC diff=Differenza SOC
+Start km=Inizio km
+End km= Fine km
+Start mi=Inizio mi
+End mi=Fine mi
+kmDiff=DifferenzaKm
+Max Range=Max autonomia
+Ø Verbrauch= Ø Consumo
+Tage=Giorni
+
+#Degradation.json
+Degradation=Degradazione
+Maximalreichweite [km]= Autonomia massima [km]
+Maximalreichweite [mi]= Autonomia massima [mi]
+km Stand [km]=Contachilometri [km]
+mi Stand [mi]=Contamiglia [mi]
+Odometer [mi]=Contamiglia [mi]
+Max. Reichweite (Monatsmittel) [km]=Max autonomia (media mensile) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max autonomia (media mensile) [mi]
+
+#Ladehistorie.json
+Ladehistorie=Storia di ricarica
+Startdatum= Data inizio
+Enddatum= Data fine
+geladen kWh= KWh caricati
+km Stand=Contachilometri
+Adresse=Indirizzo
+TR km Start=TR km Inizio
+TR km Ende=TR km Fine
+SOC Ende=Fine SOC
+100% TR=100% TR
+Minuten=Minuti
+TR mi Start=TR mi Inizio
+TR mi Ende=TR mi Fine
+ØkW=ØkW
+
+#Ladestatistik.json
+Ladestatistik=Statistiche di ricarica
+Letzte Ladung=Ultima ricarica
+Ort=Indirizzo
+Ø geladen kWh=Ø Ricaricato KWh
+Ladezeit h= Durata di ricarica h
+Ø SOC=Ø SOC
+Max SOC=Max SOC
+Anzahl Ladungen=Numero di ricariche
+Anzahl=Conta
+Geladen=Caricato
+Ladezeit=Tempo di ricarica
+Anz. Ladungen=Conta
+Ladehub= Range di ricarica
+
+#SOC Ladestatistik.json
+SOC Ladestatistik= Statistica di ricarica SOC
+SOC [%]=SOC [%]
+
+#Laden.json
+Laden=Ricarica
+Ladespannung [V]= Tensione di ricarica [V]
+Reichweite [mi]=Autonomia [mi]
+Reichweite [km]=Autonomia [km]
+Leistung [kW]= Potenza [KW]
+Phasen=Fasi
+Stromstärke [A]=Corrente [A]
+Angefordert [A]=Corrente richiesta [A]
+Pilot [A]=Pilota [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
+TR mi Verlust= TR mi persa
+kWh Verlust= KWh perso
+Eur Verlust= EUR perso
+
+#Trip.json
+Trip=Viaggio
+Start=Inizio
+Ende=Fine
+Start Adresse=Indirizzo di partenza
+Ziel Adresse=Indirizzo di destinazione
+Ø Verbrauch kWh=Ø Consumo KWh
+Verbraucht kWh=Ø Consumato KWh
+Dauer Min= Durata Min.
+mi=mi
+km=km
+Ø °C=Ø °C
+Ø °F=Ø °F
+max mph=Max mph
+max km/h=Max Km/h
+max PS=Max HP
+min PS=Min HP
+max kW=max kW
+min kW=min kW
+Ø PS=Ø HP
+Ø kW=Ø kW
+Ø mph=Ø mph
+Ø km/h=Ø km/h
+ 
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Periodo Ore
+TR mi Verlust pro Stunde=TR mi perse per ora
+mi Stand=Contachilometri
+
+#Vampir Drain.json
+Vampir Drain=Consumo fantasma
+Standby Stunden=Standby ore
+Standby=Standby
+TR km Verlust=TR km perso
+TR km Verlust pro Stunde=TR km perso per ora
+
+#Verbrauch.json
+Verbrauch=Consumi
+Höhe [m]=Altezza [m]
+Altitude [m]=Altezza [m]
+Geschwindigkeit [mph]=Velocità [mph]
+Geschwindigkeit [km/h]=Velocità [Km/h]
+Leistung [PS]=Potenza [HP]
+Außentemperatur [°C]=Temperatura esterna [°C]
+Außentemperatur [°F]=Temperatura esterna [°F]
+Innentemperatur [°C]=Temperatura interna [°C]
+Innentemperatur [°F]=Temperatura interna [°F]
+
+Laden fertig=Ricarica finita
+Schlafen=Dormiente
+Online=Online
+
+#Visited.json
+Visited=Visitato
+
+#index.php
+Fahrzeuginfo=Informazioni autovettura
+Status=Status
+Typical Range=Autonomia tipica
+KM Stand=Contachilometri
+Car Version= Versione autovettura
+Letzter Trip=Ultimo viaggio
+Dauer=Durata
+Distanz=Distanza
+Max km/h= Max Km/h
+PS=HP
+Current Pos=Posizione attuale
+Last Update=Ultimo aggiornamento
+Wird geladen=Caricamento in corso
+Done=Fatto
+Done at=Fatto a
+Battery Heater=Riscaldatore della batteria
+Sentry Mode=Sentry Mode
+Preconditioning=Precondizionamento
+Offline=Disconnesso
+
+#menu.php
+Logfile=File di registro
+Restart=Ricomincia
+Update=Aggiornare
+Dashboards=Dashboard
+Fleet Statistic=Statistica della flotta
+Extras=Extra
+Settings=Impostazioni
+Backup=Backup
+Restore=Ristabilire
+Geofence=Geofence
+Suspend Teslalogger=Sospendi Teslalogger
+Wakeup Teslalogger=Wake Up Teslalogger
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger tredenziali Tesla
+Bitte Tesla Account Zugangsdaten eingeben=Inserite le vostre credenziali Tesla
+Email=Email
+Passwort=Password
+Passwort wiederholen=Ripeti la password
+Speichern=Salva
+
+#settings.php
+Zugangsdaten=Credenziali
+Language=Lingua
+Leistung=Potenza
+Temperatur=Temperatura
+Längenmaß=Unità di misura
+URL Admin Panel=Pannello di controllo
+
+#geoadd.php
+Bezeichnung=Descrizione
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla= Tutti i consumi - ScanMyTesla
+Zelltemperatur [°C]=Temperatura cella [°C]
+Zelltemperatur [°F]=Temperature cella [°F]
+
+#Trip Monatsstatistik.json
+Datum=Date
+Fahrzeit [h]=Tempo di viaggio [h]
+Strecke [km]=Distanza [Km]
+Strecke [mi]=Distanza [mi]
+Verbraucht [kWh]=Consumo KWh
+Ø Verbrauch [kWh]=Ø Consumo KWh
+Anzahl Trips=Conteggio viaggi
+Trip Monatsstatistik=Conteggio viaggi mensile
+
+Zellspannungen 01-20 - ScanMyTesla=Voltaggio cella 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Voltaggio cella 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Voltaggio cella 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Voltaggio cella 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Voltaggio cella 81-99 - ScanMyTesla
+
+Ja=Si
+Nein=No
+
+Einschlafen=Dormiente
+Automatische Updates=Aggiornamenti automatici
+
+TextShare=<h1>Condividere curve di carica / degradazione in modo anonimo</h1>Vorremmo creare un database anonimo per confrontare le curve di degrado e le curve di carica. Ciò ti consente di confrontare il tuo veicolo con gli altri in qualsiasi momento e di rilevare qualsiasi deviazione insolita in una fase iniziale. Questo può essere utilizzato anche in seguito per dimostrare, durante una eventuale vendita del veicolo, che la batteria è ancora completamente efficiente. In caso negativo, puoi dimostrare più facilmente una prestazione ridotta rispetto a Tesla Motors. <br> <br> Ti piacerebbe condividere le tue curve di ricarica rapida e le curve di degrado con altri proprietari Tesla in modo completamente anonimo? Questa decisione può essere modificata in qualsiasi momento nella schermata delle impostazioni.
+Daten anonym teilen=Condividi i dati anonimamente
+TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzati!
+Resume Teslalogger=Riprendi Teslalogger
+Reichweite=Range
+
+Ladekosten=Costi di ricarica
+Ladesäule=Stazione di ricarica
+Währung=Valuta
+Kosten pro kWh=Costo per KWh
+Kosten pro Ladung= Costo per ricarica
+Kosten pro Minute=Costo per minuto
+Kosten Blockiergebühr=Costo per minuto inattivo
+Summe=Totale
+kWh laut Zähler / Rechnung=Costo per KWh come da fattura
+Wirkungsgrad=Efficienza

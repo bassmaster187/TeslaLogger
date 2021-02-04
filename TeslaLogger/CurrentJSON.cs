@@ -29,6 +29,7 @@ namespace TeslaLogger
         public int current_charger_power = 0;
         public double current_charge_rate_km = 0;
         public double current_time_to_full_charge = 0;
+        public bool current_charge_port_door_open = false;
 
         public string current_car_version = "";
 
@@ -131,6 +132,8 @@ namespace TeslaLogger
                     duration = 0;
                 }
 
+                car.GetTeslaAPIState().GetBool("charge_port_door_open", out current_charge_port_door_open);
+
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
                    { "charging", current_charging},
@@ -151,6 +154,7 @@ namespace TeslaLogger
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
                    { "charge_rate_km", current_charge_rate_km},
+                   { "charge_port_door_open", current_charge_port_door_open },
                    { "time_to_full_charge", current_time_to_full_charge},
                    { "car_version", current_car_version },
                    { "trip_start", current_trip_start.ToString("t",Tools.ciDeDE) },
