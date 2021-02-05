@@ -272,6 +272,7 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
+                        car.passwortinfo.Append("Send MFA to Tesla server<br>");
                         car.MFA_Code = mfa;
                     }
                 }
@@ -538,19 +539,27 @@ namespace TeslaLogger
         
         private void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string data;
-            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
-            {
-                data = reader.ReadToEnd();
-            }
+            System.Diagnostics.Debug.WriteLine("passwortinfo");
+            string data = GetDataFromRequestInputStream(request);
 
             dynamic r = new JavaScriptSerializer().DeserializeObject(data);
 
             int id = Convert.ToInt32(r["id"]);
 
             var c = Car.GetCarByID(id);
-            
+
             WriteString(response, c.passwortinfo.ToString());
+        }
+
+        private static string GetDataFromRequestInputStream(HttpListenerRequest request)
+        {
+            string data;
+            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            {
+                data = reader.ReadToEnd();
+            }
+
+            return data;
         }
 
         private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
@@ -693,11 +702,7 @@ namespace TeslaLogger
             {
                 Logfile.Log("SetPassword");
 
-                string data;
-                using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
-                {
-                    data = reader.ReadToEnd();
-                }
+                string data = GetDataFromRequestInputStream(request);
 
                 dynamic r = new JavaScriptSerializer().DeserializeObject(data);
 
@@ -736,7 +741,7 @@ namespace TeslaLogger
                         con.Open();
 
 
-                        using (var cmd2 = new MySqlCommand("update cars set tesla_token='' where id = @id", con))
+                        using (var cmd2 = new MySqlCommand("update cars set tesla_token='', refresh_token='' where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
                             cmd2.ExecuteNonQuery();
@@ -745,6 +750,7 @@ namespace TeslaLogger
                             if (c != null)
                             {
                                 c.ExitTeslaLogger("Reconnect!");
+                                c.passwortinfo = new StringBuilder();
 
                                 c.ThreadJoin();
 
@@ -788,7 +794,7 @@ namespace TeslaLogger
 
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
 
-                                    WriteString(response, "OK");
+                                    WriteString(response, "ID:"+newid);
                                 }
                             }
                         }
@@ -802,7 +808,7 @@ namespace TeslaLogger
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc,  tesla_token='', refresh_token='' where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@tesla_name", email);
@@ -1006,10 +1012,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
-                    {
-                        json = reader.ReadToEnd();
-                    }
+                    json = GetDataFromRequestInputStream(request);
                 }
 
                 Logfile.Log("JSON: " + json);
