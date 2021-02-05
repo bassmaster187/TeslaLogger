@@ -2588,6 +2588,15 @@ WHERE
         {
             string migrationstatusfile = "migrate_floor_round.txt";
 
+            /*
+             * DB stores speed in km/h
+             * API has speed in mph
+             * rounding takes place twice: car display in km/h -> API speed in mph -> mpt to km/h in TeslaLogger
+             * 
+             * migrate errors coming from older versions originating from floor() vs. round()
+             * 
+             */
+
             if (!File.Exists(migrationstatusfile))
             {
                 try
@@ -2602,15 +2611,9 @@ WHERE
                     int sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_speed (speed)", 6000);
                     migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
-                    Logfile.Log("MigrateFloorRound() ADD INDEX power");
-                    migrationlog.Append($"{DateTime.Now} ADD INDEX power" + Environment.NewLine);
-                    sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_power (power)", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
-
-                    // get max speed & power
+                    // get max speed
 
                     int maxspeed_kmh = 0;
-                    int maxpower_ps = 0;
 
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
@@ -2630,42 +2633,20 @@ pos", con))
                         con.Close();
                     }
 
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                    {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(
-@"SELECT
-  MAX(power)
-FROM
-pos", con))
-                        {
-                            MySqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read() && dr[0] != DBNull.Value)
-                            {
-                                int.TryParse(dr[0].ToString(), out maxpower_ps);
-                            }
-                        }
-                        con.Close();
-                    }
-
                     if (maxspeed_kmh == 0)
                     {
                         maxspeed_kmh = 500;
                     }
-                    if (maxpower_ps == 0)
-                    {
-                        maxpower_ps = 2000;
-                    }
 
-                    Logfile.Log($"maxspeed_kmh: {maxspeed_kmh} maxpower_ps: {maxpower_ps}");
-                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh} maxpower_ps: {maxpower_ps}" + Environment.NewLine);
+                    Logfile.Log($"maxspeed_kmh: {maxspeed_kmh}");
+                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh}" + Environment.NewLine);
 
                     // migrate floor round error for pos.speed
 
-                    for (int speed_mph = (int)Math.Round(maxspeed_kmh / 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
+                    for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
-                        int speed_floor = (int)(speed_mph * 1.60934);
-                        int speed_round = MphToKmhRounded(speed_mph);
+                        int speed_floor = (int)(speed_mph * 1.60934); // old conversion
+                        int speed_round = MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {
                             DateTime start = DateTime.Now;
@@ -2684,38 +2665,6 @@ WHERE
                                 {
                                     cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
                                     cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
-                                    int updated_rows = cmd.ExecuteNonQuery();
-                                    Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
-                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
-                                }
-                                con.Close();
-                            }
-                        }
-                    }
-
-                    // migrate floor round error for pos.power
-                    for (int power_ps = maxpower_ps + 1; power_ps > 0; power_ps--)
-                    {
-                        int power_floor = (int)(power_ps * 1.35962);
-                        int power_round = Convert.ToInt32(power_ps * 1.35962);
-                        if (power_floor != power_round)
-                        {
-                            DateTime start = DateTime.Now;
-                            Logfile.Log($"MigrateFloorRound(): power {power_floor} -> {power_round}");
-                            migrationlog.Append($"{DateTime.Now} power {power_floor} -> {power_round}" + Environment.NewLine);
-                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                            {
-                                con.Open();
-                                using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
-  pos
-SET
-  power = @powerround
-WHERE
-  power = @powerfloor", con))
-                                {
-                                    cmd.Parameters.Add("powerround", MySqlDbType.Int32).Value = power_round;
-                                    cmd.Parameters.Add("powerfloor", MySqlDbType.Int32).Value = power_floor;
                                     int updated_rows = cmd.ExecuteNonQuery();
                                     Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
                                     migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
@@ -2761,11 +2710,6 @@ WHERE
                     Logfile.Log("MigrateFloorRound() DROP INDEX speed");
                     migrationlog.Append($"{DateTime.Now} DROP INDEX speed" + Environment.NewLine);
                     sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_speed", 6000);
-                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
-
-                    Logfile.Log("MigrateFloorRound() DROP INDEX power");
-                    migrationlog.Append($"{DateTime.Now} DROP INDEX power" + Environment.NewLine);
-                    sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_power", 6000);
                     migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
 
                     // cleanup DB files
