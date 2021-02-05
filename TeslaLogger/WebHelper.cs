@@ -363,7 +363,7 @@ namespace TeslaLogger
                         else
                             car.dbHelper.UpdateRefreshToken(new_refresh_token);
 
-                        return GetTokenAsync4Async(access_token);
+                        return GetTokenAsync4(access_token);
                     }
                 }
             }
@@ -524,6 +524,8 @@ namespace TeslaLogger
                 if (code.Length > 0)
                     return code;
 
+                car.passwortinfo.Append("Code received from Tesla server<br>");
+
                 System.Threading.Thread.Sleep(500);
             }
         }
@@ -559,6 +561,8 @@ namespace TeslaLogger
                     try
                     {
                         factor_id = jsonResult["data"][0]["id"];
+
+                        car.passwortinfo.Append("factor_id received from Tesla server<br>");
                     }
                     catch (Exception ex)
                     {
@@ -612,6 +616,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
+                            car.passwortinfo.Append("Error: MFA2! <br>");
                             car.Log("Error: MFA2 : " + resultContent);
                         }
                     }
@@ -716,26 +721,39 @@ namespace TeslaLogger
                         // car.Log("HttpStatus: " + result.StatusCode.ToString());
 
                         dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                        string refresh_token = jsonResult["refresh_token"];
-                        access_token = jsonResult["access_token"];
 
-                        car.dbHelper.UpdateRefreshToken(refresh_token);
+                        if (Tools.IsPropertyExist(jsonResult, "error"))
+                        {
+                            string error = jsonResult["error"];
+                            car.passwortinfo.Append("Error: " + error + " <br>");
+                            car.Log("Error: GetTokenAsync3(): " + error);
+                        }
+                        else
+                        {
+                            string refresh_token = jsonResult["refresh_token"];
+                            access_token = jsonResult["access_token"];
+
+                            car.dbHelper.UpdateRefreshToken(refresh_token);
+
+                            car.passwortinfo.Append("Access Token received. Everything is OK!!!<br>");
+                        }
 
                         // car.Log(resultContent);
                     }
                 }
 
-                return GetTokenAsync4Async(access_token);
+                return GetTokenAsync4(access_token);
             }
             catch (Exception ex)
             {
+                car.passwortinfo.Append("Error: GetTokenAsync3! <br>");
                 car.Log(ex.ToString());
             }
 
             return "";
         }
 
-        private string GetTokenAsync4Async(string access_token)
+        private string GetTokenAsync4(string access_token)
         {
             try
             {
@@ -765,18 +783,25 @@ namespace TeslaLogger
                         car.Log("HttpStatus: " + result.StatusCode.ToString());
 
                         dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                        
-                        string access_token2 = jsonResult["access_token"];
-                        int created_at = jsonResult["created_at"];
-                        int expires_in = jsonResult["expires_in"];
+                        if (Tools.IsPropertyExist(jsonResult, "error"))
+                        {
+                            string error = jsonResult["error"];
+                            car.passwortinfo.Append("Error: " + error + " <br>");
+                            car.Log("Error: GetTokenAsync4(): " + error);
+                            return "NULL";
+                        }
+                        else
+                        {
 
-                        Tesla_token = jsonResult["access_token"];
-                        car.dbHelper.UpdateTeslaToken();
-                        car.LoginRetryCounter = 0;
+                            string access_token2 = jsonResult["access_token"];
+                            int created_at = jsonResult["created_at"];
+                            int expires_in = jsonResult["expires_in"];
 
-                        // car.Log(resultContent);
-
-                        return Tesla_token;
+                            Tesla_token = jsonResult["access_token"];
+                            car.dbHelper.UpdateTeslaToken();
+                            car.LoginRetryCounter = 0;
+                            return Tesla_token;
+                        }
                     }
                 }
             }
@@ -1940,6 +1965,8 @@ namespace TeslaLogger
         Thread streamThread = null;
         public void StartStreamThread()
         {
+            return;
+
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
