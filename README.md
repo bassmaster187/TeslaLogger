@@ -8,6 +8,9 @@ https://www.e-mobility-driving-solutions.com/produkt/raspi-teslalogger/?lang=en
 Or a Teslalogger Image for a Raspberry PI 3B+: 
 https://e-mobility-driving-solutions.com/produkt/teslalogger-image/?lang=en
 
+Or a Teslalogger Image for a Raspberry PI 4B:
+https://e-mobility-driving-solutions.com/produkt/teslalogger-image-for-raspberrypi-4/?lang=en
+
 You can also run it for free in a Docker / Synology:
 [Docker Setup](docker_setup.md)
 
@@ -23,7 +26,7 @@ http://raspberry/admin/password.php
 Enter the same credentials as you use in your teslaaccount or app.
 
 ## Settings & Language
-Available languages: English, German, Norwegian, Nederlands - Translations are welcome
+Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome
 
 Change the language and units and reboot the Teslalogger.
 

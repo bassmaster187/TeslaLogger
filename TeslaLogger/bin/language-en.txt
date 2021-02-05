@@ -143,6 +143,30 @@ Dauer=Duration
 Distanz=Distance
 Max km/h=Max kph
 PS=PS
+Current Pos=Current Pos
+Last Update=Last Update
+Wird geladen=Charging
+Done=Done
+Done at=Done at
+Battery Heater=Battery Heater
+Sentry Mode=Sentry Mode
+Preconditioning=Preconditioning
+Offline=Offline
+
+#menu.php
+Logfile=Logfile
+Restart=Restart
+Update=Update
+Dashboards=Dashboards
+Fleet Statistic=Fleet Statistic
+Extras=Extras
+Settings=Settings
+Backup=Backup
+Restore=Restore
+Geofence=Geofence
+Suspend Teslalogger=Suspend Teslalogger
+Wakeup Teslalogger=Wakeup Teslalogger
+Dashboard=Dashboard
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
@@ -159,6 +183,22 @@ Leistung=Power
 Temperatur=Temperature
 Längenmaß=Unit of length
 URL Admin Panel=URL Admin Panel
+All=All
+Stable=Stable
+None=None
+Enable=Enable
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Teslalogger HTTP Port
+Zoom Level=Zoom Level
+ScanMyTesla integration=ScanMyTesla integration
+Main Car=Main Car
+Car Name=Car Name
+ScanMyTesla last received=ScanMyTesla last received
+Tasker Token=Tasker Token
+Tasker URL=Tasker URL
+Received Tasker Token=Received Tasker Token
 
 #geoadd.php
 Bezeichnung=Description

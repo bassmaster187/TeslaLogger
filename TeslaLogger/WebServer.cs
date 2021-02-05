@@ -200,6 +200,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/export/trip"):
                         ExportTrip(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/passwortinfo"):
+                        passwortinfo(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -214,6 +217,9 @@ namespace TeslaLogger
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mfa/[0-9]+/.+"):
+                        Set_MFA(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
@@ -252,6 +258,25 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mfa/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string mfa = m.Groups[2].Captures[0].ToString();
+                if (mfa.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        car.MFA_Code = mfa;
+                    }
+                }
+            }
+            WriteString(response, "");
         }
 
         private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
@@ -509,6 +534,23 @@ namespace TeslaLogger
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
+        }
+        
+        private void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string data;
+            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            {
+                data = reader.ReadToEnd();
+            }
+
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int id = Convert.ToInt32(r["id"]);
+
+            var c = Car.GetCarByID(id);
+            
+            WriteString(response, c.passwortinfo.ToString());
         }
 
         private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)

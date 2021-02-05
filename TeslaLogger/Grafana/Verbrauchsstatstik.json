@@ -29,6 +29,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1611059014413,
   "links": [
     {
       "icon": "external link",
@@ -84,7 +85,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "km Stand",
+          "alias": "km Stand [km]",
           "yaxis": 2
         },
         {
@@ -150,7 +151,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Monatsmittel [kWh]\", outside_temp_avg as \"Außentemperatur Monatsmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and carid=$Car and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as 'Verbrauch Monatsmittel [kWh]', outside_temp_avg as 'Außentemperatur Monatsmittel [°C]'\nFROM trip\nWHERE $__timeFilter(StartDate) and carid=$Car and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m\")\norder by StartDate",
           "refId": "B",
           "select": [
             [
@@ -178,7 +179,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as \"Verbrauch Tagesmittel [kWh]\", outside_temp_avg as \"Außentemperatur Tagesmittel [°C]\"\nFROM trip\nWHERE $__timeFilter(StartDate) and carid=$Car  and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
+          "rawSql": "SELECT\n  $__time(StartDate), \n  AVG(avg_consumption_kWh_100km) as 'Verbrauch Tagesmittel [kWh]', outside_temp_avg as 'Außentemperatur Tagesmittel [°C]'\nFROM trip\nWHERE $__timeFilter(StartDate) and carid=$Car  and avg_consumption_kWh_100km > 2 and km_diff > 5\nGROUP BY DATE_FORMAT(StartDate, \"%Y%m%d\")\norder by StartDate",
           "refId": "C",
           "select": [
             [
@@ -206,7 +207,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Verbrauchsstatstik",
+      "title": "Verbrauchsstatistik",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -309,7 +310,7 @@
     ]
   },
   "timezone": "",
-  "title": "Verbrauchsstatstik",
+  "title": "Verbrauchsstatistik",
   "uid": "riqUfXtRz",
-  "version": 26
+  "version": 60
 }

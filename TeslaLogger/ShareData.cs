@@ -202,7 +202,7 @@ namespace TeslaLogger
         {
             count = 0;
             string sql = @"SELECT avg(unix_timestamp(Datum)) as Datum, avg(battery_level), avg(charger_power), avg(ideal_battery_range_km), avg(charger_voltage), avg(charger_phases), avg(charger_actual_current), max(battery_heater),
-                (SELECT val FROM can WHERE can.datum < charging.Datum and can.datum > date_add(charging.Datum, INTERVAL -3 MINUTE) and id = 3 ORDER BY can.datum DESC limit 1) as cell_temp
+                (SELECT val FROM can WHERE can.carid = @CarID and can.datum < charging.Datum and can.datum > date_add(charging.Datum, INTERVAL -3 MINUTE) and id = 3 ORDER BY can.datum DESC limit 1) as cell_temp
                 FROM charging
                 where id between @startid and @endid and carid = @CarID 
                 group by battery_level
