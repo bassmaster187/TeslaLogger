@@ -368,7 +368,7 @@ WHERE
                         Tools.DebugLog("CombineChargingStates disabled globally");
                         continue;
                     }
-                    else if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && !addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
+                    else if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
                     {
                         Tools.DebugLog($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
                         continue;
