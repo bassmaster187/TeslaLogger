@@ -614,6 +614,14 @@ namespace TeslaLogger
 
                                     for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                     {
+                                        if (webhelper.DrivingOrChargingByStream)
+                                        {
+                                            Log("StreamAPI prevents car to get sleep.");
+                                            lastCarUsed = DateTime.Now;
+                                            string wakeup = webhelper.Wakeup().Result;
+                                            doSleep = false;
+                                        }
+
                                         TimeSpan tsSMT = DateTime.Now - currentJSON.lastScanMyTeslaReceived;
                                         if (currentJSON.SMTSpeed > 5 &&
                                             currentJSON.SMTSpeed < 260 &&
