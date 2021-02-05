@@ -7,10 +7,10 @@ $URL = $_REQUEST["url"];
 $port = GetTeslaloggerHTTPPort();
 
 $fullurl = "http://localhost:$port/$URL";
-if (isDocker())
+if (isRedirectDockerToHost())
+    $fullurl = "http://host.docker.internal:$port/$URL";
+else if (isDocker())
     $fullurl = "http://teslalogger:$port/$URL";
-
-// $fullurl = "http://host.docker.internal:$port/$URL";
 
 echo file_get_contents($fullurl, false, stream_context_create([
     'http' => [
