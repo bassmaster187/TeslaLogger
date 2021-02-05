@@ -41,7 +41,7 @@ namespace TeslaLogger
         private static int MapQuestCount = 0;
         private static int NominatimCount = 0;
 
-        public bool DrivingOrChargingByStream = false;
+        private bool _drivingOrChargingByStream = false;
 
         static readonly string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         static readonly string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
@@ -1965,8 +1965,6 @@ namespace TeslaLogger
         Thread streamThread = null;
         public void StartStreamThread()
         {
-            return;
-
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
@@ -3326,6 +3324,19 @@ namespace TeslaLogger
         }
 
         public bool ExistsWakeupFile => System.IO.File.Exists(FileManager.GetWakeupTeslaloggerPath(car.CarInDB)) || TaskerWakeupfile();
+
+        public bool DrivingOrChargingByStream
+        {
+            get => _drivingOrChargingByStream;
+            set
+            {
+                if (_drivingOrChargingByStream != value)
+                {
+                    _drivingOrChargingByStream = value;
+                    car.Log("DrivingOrChargingByStream: " + _drivingOrChargingByStream.ToString());
+                }
+            }
+        }
 
         private void Log(string text)
         {
