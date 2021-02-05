@@ -408,6 +408,12 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("CREATE TABLE OK");
                 }
 
+                if (!DBHelper.ColumnExists("cars", "refresh_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column refresh_token");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
@@ -796,11 +802,12 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        private static Dictionary<string, string> GetLanguageDictionary(string language)
+        internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
             Dictionary<string, string> ht = new Dictionary<string, string>();
 
             string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            filename = filename.Replace("\\bin\\Debug", "\\bin");
             string content = null;
 
             if (File.Exists(filename))
@@ -1064,12 +1071,22 @@ CREATE TABLE superchargerstate(
                             if (f.EndsWith("Akku Trips.json"))
                             {
                                 s = ReplaceTitleTag(s, "Akku Trips", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "AVG Max Range","AVG Consumption","AVG Trip Days","AVG SOC Diff"
+                                }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Degradation.json"))
                             {
                                 s = ReplaceTitleTag(s, "Degradation", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Maximalreichweite[km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]","Max. Reichweite (Monatsmittel) [km]","Max. Reichweite (Monatsmittel) [mi]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Firmware.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Degradation", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Firmware","Date Installed","Days since previous update","Min Days Between Updates","AVG Days Between Updates","Max Days Between Updates"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Ladehistorie.json"))
@@ -1084,6 +1101,17 @@ CREATE TABLE superchargerstate(
                                     "SOC [%]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "Ladespannung [V]", "Phasen",
                                     "Stromstärke [A]", "Außentemperatur [°C]", "Außentemperatur [°F]",
                                     "Angefordert [A]", "Pilot [A]", "Zelltemperatur [°C]", "Zelltemperatur [°F]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Speed Consumption.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Speed Consumption", dictLanguage);
+                            }
+                            else if (f.EndsWith("Status.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Status", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Current Status","SOC","Reichweite","Außentemperatur","Zelltemperatur","km Stand","Firmware","Nur verfügbar mit ScanMyTesla","N/A","Asleep","Online","Offline","Waking","Driving","Charging"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Trip.json"))
@@ -1110,6 +1138,13 @@ CREATE TABLE superchargerstate(
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Geschwindigkeit [km/h]", "Geschwindigkeit [mph]", "Leistung [PS]", "Leistung [kW]", "Reichweite [mi]", "Reichweite [km]", "SOC [%]",
                                     "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]","Innentemperatur [°C]","Innentemperatur [°F]"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Verbrauchsstatstik.json"))
+                            {
+                                s = ReplaceTitleTag(s, "Verbrauchsstatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "km Stand[km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Außentemperatur Monatsmittel [°C]","Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Außentemperatur Tagesmittel [°C]", "Außentemperatur Tagesmittel [°F]"
                                 }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Visited.json"))
@@ -1191,7 +1226,10 @@ CREATE TABLE superchargerstate(
                         string title, uid, link;
                         GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
 
-                        s = UpdateDefaultCar(s, defaultcar, defaultcarid);
+                        string carLabel = "Car";
+                        dictLanguage.TryGetValue("Car", out carLabel);
+
+                        s = UpdateDefaultCar(s, defaultcar, defaultcarid, carLabel);
                         
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
                             dashboardlinks.Add(title+"|"+link);
@@ -1230,16 +1268,16 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        internal static string UpdateDefaultCar(string s, string name, string id)
+        internal static string UpdateDefaultCar(string s, string name, string id, string carLabel)
         {
             try
             {
                 if (name == null || name.Length == 0)
                     return s;
 
-                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)", RegexOptions.Singleline | RegexOptions.Multiline);
+                Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}$5");
+                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}"+carLabel+"${8}");
                 return ret;
             }
             catch (Exception ex)
@@ -1320,7 +1358,7 @@ CREATE TABLE superchargerstate(
             return regexAlias.Replace(content, replace);
         }
 
-        private static string ReplaceTitleTag(string content, string v, Dictionary<string, string> dictLanguage)
+        internal static string ReplaceTitleTag(string content, string v, Dictionary<string, string> dictLanguage)
         {
             if (!dictLanguage.ContainsKey(v))
             {
@@ -1334,7 +1372,7 @@ CREATE TABLE superchargerstate(
             return regexAlias.Replace(content, replace);
         }
 
-        private static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
+        internal static string ReplaceLanguageTags(string content, string[] v, Dictionary<string, string> dictLanguage, bool quoted)
         {
             foreach (string l in v)
             {

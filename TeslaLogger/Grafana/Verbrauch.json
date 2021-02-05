@@ -65,7 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1604703152465,
+  "iteration": 1608549484299,
   "links": [
     {
       "icon": "external link",
@@ -129,12 +129,14 @@
         {
           "$$hashKey": "object:151",
           "alias": "Geschwindigkeit [km/h]",
-          "fill": 1
+          "fill": 1,
+          "fillGradient": 1
         },
         {
           "$$hashKey": "object:152",
           "alias": "Leistung [PS]",
-          "fill": 1
+          "fill": 1,
+          "fillGradient": 1
         },
         {
           "$$hashKey": "object:153",
@@ -147,18 +149,21 @@
           "$$hashKey": "object:154",
           "alias": "Battery Heater",
           "fill": 1,
+          "fillGradient": 1,
           "steppedLine": true
         },
         {
           "$$hashKey": "object:155",
           "alias": "Preconditioning",
           "fill": 1,
+          "fillGradient": 1,
           "steppedLine": true
         },
         {
           "$$hashKey": "object:156",
           "alias": "Sentry Mode",
           "fill": 1,
+          "fillGradient": 1,
           "steppedLine": true
         }
       ],
@@ -547,5 +552,5 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 140
+  "version": 149
 }
