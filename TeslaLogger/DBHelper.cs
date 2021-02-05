@@ -2617,16 +2617,32 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(
 @"SELECT
-  MAX(speed),
+  MAX(speed)
+FROM
+pos", con))
+                        {
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value)
+                            {
+                                int.TryParse(dr[0].ToString(), out maxspeed_kmh);
+                            }
+                        }
+                        con.Close();
+                    }
+
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(
+@"SELECT
   MAX(power)
 FROM
 pos", con))
                         {
                             MySqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
+                            if (dr.Read() && dr[0] != DBNull.Value)
                             {
-                                int.TryParse(dr[0].ToString(), out maxspeed_kmh);
-                                int.TryParse(dr[1].ToString(), out maxpower_ps);
+                                int.TryParse(dr[0].ToString(), out maxpower_ps);
                             }
                         }
                         con.Close();
