@@ -365,10 +365,12 @@ WHERE
                     // combine disabled, but check pos for special flag do combine
                     if (addr == null || addr.specialFlags == null || addr.specialFlags.Count == 0)
                     {
+                        Tools.DebugLog("CombineChargingStates disabled globally");
                         continue;
                     }
                     else if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && !addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
                     {
+                        Tools.DebugLog($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
                         continue;
                     }
                 }
@@ -379,6 +381,7 @@ WHERE
                     // check if DoNotCombineChargingStates is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
                     {
+                        Tools.DebugLog($"CombineChargingStates disabled at POI '{addr.name}'");
                         continue;
                     }
                 }
