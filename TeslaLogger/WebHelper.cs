@@ -41,6 +41,8 @@ namespace TeslaLogger
         private static int MapQuestCount = 0;
         private static int NominatimCount = 0;
 
+        public bool DrivingOrChargingByStream = false;
+
         static readonly string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         static readonly string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 
@@ -1977,7 +1979,7 @@ namespace TeslaLogger
                         while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
                         {
                             System.Diagnostics.Debug.WriteLine("Connecting");
-                            Thread.Sleep(250);
+                            Thread.Sleep(1000);
                         }
 
 
@@ -1993,7 +1995,7 @@ namespace TeslaLogger
                         {
                             Thread.Sleep(100);
                             byte[] buffer = new byte[1024];
-                            Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                            Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), new CancellationTokenSource(60000).Token);
                             response.Wait();
 
                             resultContent = Encoding.UTF8.GetString(buffer);
@@ -2017,6 +2019,7 @@ namespace TeslaLogger
 
                                         string error_type = j["error_type"];
 
+                                        
                                         if (error_type == "vehicle_disconnected")
                                             throw new Exception("vehicle_disconnected");
                                         else
@@ -2042,8 +2045,15 @@ namespace TeslaLogger
                     Log("StreamEnd");
                     System.Diagnostics.Debug.WriteLine("StreamEnd");
                 }
+                catch (TaskCanceledException e)
+                {
+                    DrivingOrChargingByStream = false;
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    Thread.Sleep(10000);
+                }
                 catch (Exception ex)
                 {
+                    DrivingOrChargingByStream = false;
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
 
                     Logfile.ExceptionWriter(ex, line);
@@ -2054,7 +2064,7 @@ namespace TeslaLogger
             Log("StartStream Ende");
             
         }
-
+        
         private void StreamDataUpdate(string data)
         {
             string[] v = data.Split(',');
@@ -2074,6 +2084,18 @@ namespace TeslaLogger
             DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
 
             Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString());
+
+            if (int.TryParse(power, out int iPower))
+            {
+                if (iPower > 0 || iPower < 0)
+                    DrivingOrChargingByStream = true;
+            }
+            else if (shift_state != null && (shift_state == "D" || shift_state == "R" || shift_state == "N"))
+            {
+                DrivingOrChargingByStream = true;
+            }
+            else
+                DrivingOrChargingByStream = false; 
         }
 
 
