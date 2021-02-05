@@ -1,5 +1,10 @@
 <?PHP 
 
+function isRedirectDockerToHost()
+{
+    return file_exists("REDIRECTDOCKERTOHOST");
+}
+
 function isDocker()
 {
     $dockerfile = "/tmp/teslalogger-DOCKER";
@@ -26,7 +31,10 @@ function GetTeslaloggerURL($path)
     $port = GetTeslaloggerHTTPPort();
 
     $url = "http://localhost:$port/";
-    if (isDocker())
+    
+    if (isRedirectDockerToHost())
+        $url = "http://host.docker.internal:$port/";
+    else if (isDocker())
         $url = "http://teslalogger:$port/";
 
     return $url.$path;

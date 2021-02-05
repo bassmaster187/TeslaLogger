@@ -532,7 +532,6 @@ namespace TeslaLogger
                         }
                     }
 
-                    webhelper.StartStreamThread(); // für altitude
                     dbHelper.StartDriveState();
                     SetCurrentState(TeslaState.Drive);
 

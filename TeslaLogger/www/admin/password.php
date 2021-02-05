@@ -46,12 +46,20 @@ require_once("tools.php");
 					freesuc: $("#freesuc").is(':checked'),
 				};
 
-			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
-					alert("Check Logfile in one minute!");
-					window.location.href='index.php';
+			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)})
+			.always(function (data) {
+				if (data.includes("ID:"))
+				{
+					window.location.href='password_info.php?id='+data.substr(3);
+				}
+				else
+				{
+					window.location.href='password_info.php?id='+dbid;
+				}
 				});
 		}
 	}
+
 	function deleteCar()
 	{
 		if (confirm("Do you want to delete?"))
@@ -76,8 +84,7 @@ require_once("tools.php");
 				};
 
 		var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
-				alert("Check Logfile in one minute!");
-				window.location.href='index.php';
+				window.location.href='password_info.php?id='+dbid;
 			});
 	}
 </script>
