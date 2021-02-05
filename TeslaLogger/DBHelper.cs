@@ -348,6 +348,38 @@ WHERE
             }
         }
 
+        internal bool CombineChangingStatesAt(int sessionid)
+        {
+            bool doCombine = Tools.CombineChargingStates(); // use default
+            // check if combine is disabled globally
+            if (!doCombine)
+            {
+                Tools.DebugLog("CombineChargingStates disabled globally");
+                Address addr = GetAddressFromChargingState(sessionid);
+                // combine disabled, but check pos for special flag do combine
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
+                {
+                    Tools.DebugLog($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
+                    doCombine = true;
+                }
+            }
+            else
+            {
+                Address addr = GetAddressFromChargingState(sessionid);
+                // check pos for special flag do not combine
+                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
+                {
+                    // check if DoNotCombineChargingStates is enabled
+                    if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
+                    {
+                        Tools.DebugLog($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
+                        doCombine = false;
+                    }
+                }
+            }
+            return doCombine;
+        }
+
         internal void CombineChangingStates()
         {
             // find candidates to combine
@@ -357,33 +389,10 @@ WHERE
             {
                 Tools.DebugLog($"FindCombineCandidates: {candidate}");
 
-                Address addr = GetAddressFromChargingState(candidate);
-
-                // check if combine is disabled globally
-                if (!Tools.CombineChargingStates())
+                // check if combine is disabled globally or locally
+                if (!CombineChangingStatesAt(candidate))
                 {
-                    // combine disabled, but check pos for special flag do combine
-                    if (addr == null || addr.specialFlags == null || addr.specialFlags.Count == 0)
-                    {
-                        Tools.DebugLog("CombineChargingStates disabled globally");
-                        continue;
-                    }
-                    else if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
-                    {
-                        Tools.DebugLog($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
-                        continue;
-                    }
-                }
-
-                // check pos for special flag do not combine
-                if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
-                {
-                    // check if DoNotCombineChargingStates is enabled
-                    if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
-                    {
-                        Tools.DebugLog($"CombineChargingStates disabled at POI '{addr.name}'");
-                        continue;
-                    }
+                    continue;
                 }
 
                 Queue<int> similarChargingStates = FindSimilarChargingStates(candidate);
@@ -752,8 +761,8 @@ HAVING
                 // close charging state with enddate, endID from max charging
                 CloseChargingState(openChargingState);
 
-                // if combine is enabled
-                if (Tools.CombineChargingStates())
+                // if charging was interrupted, maybe combine it with the previous session
+                if (CombineChangingStatesAt(openChargingState))
                 {
                     // get pos.odometer from openChargingState
                     double odometer = GetOdometerFromChargingstate(openChargingState);
