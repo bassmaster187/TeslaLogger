@@ -2148,12 +2148,13 @@ namespace TeslaLogger
             {
                 // TODO proper speed conversion mph to km/h from "off by one patch"
                 int speed_kmh = (int)(ispeed * 1.60934M);
-                // ideal_battery_range_km = range in ml to km
-                double ideal_battery_range_km = (irange / 0.62137);
-                // battery_range_km = ideal_battery_range_km * 0.8
+                // battery_range_km = range in ml to km
+                // TODO proper speed conversion mph to km/h from "off by one patch"
+                double battery_range_km = (irange / 0.62137);
+                // ideal_battery_range_km = ideal_battery_range_km * 0.8
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
                 // TODO remove - <-- marker for testing to mark pos from streaming api
-                double battery_range_km = -ideal_battery_range_km * 0.8000000416972936;
+                double ideal_battery_range_km = -battery_range_km * 0.8000000416972936;
                 double? outside_temp = car.currentJSON.current_outside_temp;
                 if (latitude != last_latitude || longitude != last_longitude)
                 {
