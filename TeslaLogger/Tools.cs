@@ -471,36 +471,6 @@ namespace TeslaLogger
             return httpport;
         }
 
-        internal static int GetMothershipKeepDays()
-        {
-            int days = 30; // default
-            try
-            {
-                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
-                if (!File.Exists(filePath))
-                {
-                    Logfile.Log("settings file not found at " + filePath);
-                    return days;
-                }
-                string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
-                if (IsPropertyExist(j, "MothershipKeepDays"))
-                {
-                    int.TryParse(j["MothershipKeepDays"], out days);
-
-                    if (days == 0)
-                    {
-                        days = 30; // default
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            return days;
-        }
-
         internal static bool UseOpenTopoData()
         {
             return true; // Use by default
@@ -1524,5 +1494,36 @@ WHERE
             }
             return false;
         }
+
+        internal static int GetMothershipKeepDays()
+        {
+            int days = 30; // default
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return days;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "MothershipKeepDays"))
+                {
+                    int.TryParse(j["MothershipKeepDays"], out days);
+
+                    if (days == 0)
+                    {
+                        days = 30; // default
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return days;
+        }
+
     }
 }
