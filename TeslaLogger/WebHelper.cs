@@ -2040,15 +2040,17 @@ namespace TeslaLogger
                                         car.Log("Stream Hello");
                                         break;
                                     case "data:error":
-                                        car.Log("Stream Data Error: " + resultContent);
-
                                         string error_type = j["error_type"];
 
-                                        
                                         if (error_type == "vehicle_disconnected")
+                                        {
                                             throw new Exception("vehicle_disconnected");
+                                        }
                                         else
+                                        {
+                                            car.Log("Stream Data Error: " + resultContent);
                                             throw new Exception("unhandled error_type: " + error_type);
+                                        }
 
                                         break;
                                     case "data:update":
@@ -2079,9 +2081,17 @@ namespace TeslaLogger
                 catch (Exception ex)
                 {
                     DrivingOrChargingByStream = false;
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
 
-                    Logfile.ExceptionWriter(ex, line);
+                    if (ex.Message == "vehicle_disconnected")
+                    {
+                        car.Log("Stream Data Error: vehicle_disconnected");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        Logfile.ExceptionWriter(ex, line);
+                    }
+                    
                     Thread.Sleep(10000);
                 }
             }
