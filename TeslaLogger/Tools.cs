@@ -1497,7 +1497,7 @@ WHERE
 
         internal static int GetMothershipKeepDays()
         {
-            int days = 30; // default
+            int days = 14; // default
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -1514,7 +1514,7 @@ WHERE
 
                     if (days == 0)
                     {
-                        days = 30; // default
+                        days = 14; // default
                     }
                 }
             }
