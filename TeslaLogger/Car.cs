@@ -532,7 +532,6 @@ namespace TeslaLogger
                         }
                     }
 
-                    webhelper.StartStreamThread(); // für altitude
                     dbHelper.StartDriveState();
                     SetCurrentState(TeslaState.Drive);
 
@@ -615,6 +614,14 @@ namespace TeslaLogger
 
                                     for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
                                     {
+                                        if (webhelper.DrivingOrChargingByStream)
+                                        {
+                                            Log("StreamAPI prevents car to get sleep.");
+                                            lastCarUsed = DateTime.Now;
+                                            doSleep = false;
+                                            break;
+                                        }
+
                                         TimeSpan tsSMT = DateTime.Now - currentJSON.lastScanMyTeslaReceived;
                                         if (currentJSON.SMTSpeed > 5 &&
                                             currentJSON.SMTSpeed < 260 &&
