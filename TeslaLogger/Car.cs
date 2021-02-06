@@ -618,8 +618,8 @@ namespace TeslaLogger
                                         {
                                             Log("StreamAPI prevents car to get sleep.");
                                             lastCarUsed = DateTime.Now;
-                                            string wakeup = webhelper.Wakeup().Result;
                                             doSleep = false;
+                                            break;
                                         }
 
                                         TimeSpan tsSMT = DateTime.Now - currentJSON.lastScanMyTeslaReceived;
