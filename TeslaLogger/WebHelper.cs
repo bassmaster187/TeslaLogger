@@ -2146,13 +2146,14 @@ namespace TeslaLogger
                 && decimal.TryParse(power, out decimal dpower)
                 && int.TryParse(range, out int irange))
             {
-                // TODO proper conversion mph to km/h from "off by one patch"
-                int speed_kmh = (int)(ispeed * 1.60934M);
+                // speed is converted by InsertPos
+                // power is converted by InsertPos
                 // TODO proper conversion ml to km from "off by one patch"
                 double dodometer_km = dodometer * 1.60934;
                 // battery_range_km = range in ml to km
                 // TODO proper conversion ml to km from "off by one patch"
-                double battery_range_km = (irange / 0.62137);
+                // TODO remove - <-- marker for testing to mark pos from streaming api
+                double battery_range_km = -(irange / 0.62137);
                 // ideal_battery_range_km = ideal_battery_range_km * 0.8
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
                 // TODO remove - <-- marker for testing to mark pos from streaming api
@@ -2162,10 +2163,8 @@ namespace TeslaLogger
                 {
                     last_latitude = latitude;
                     last_longitude = longitude;
-                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {speed_kmh}, {(int)(dpower * 1.35962M)}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, {elevation})");
-                    car.dbHelper.InsertPos(v[0], latitude, longitude, speed_kmh, (int)(dpower * 1.35962M), dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, elevation);
-
-
+                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, {elevation})");
+                    car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, elevation);
                 }
             }
         }
