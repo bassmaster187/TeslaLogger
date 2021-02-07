@@ -2152,19 +2152,17 @@ namespace TeslaLogger
                 double dodometer_km = dodometer * 1.60934;
                 // battery_range_km = range in ml to km
                 // TODO proper conversion ml to km from "off by one patch"
-                // TODO remove - <-- marker for testing to mark pos from streaming api
-                double battery_range_km = -(irange / 0.62137);
+                double battery_range_km = (irange / 0.62137);
                 // ideal_battery_range_km = ideal_battery_range_km * 0.8
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
-                // TODO remove - <-- marker for testing to mark pos from streaming api
-                double ideal_battery_range_km = -battery_range_km * 0.8000000416972936;
+                double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
                 double? outside_temp = car.currentJSON.current_outside_temp;
                 if (latitude != last_latitude || longitude != last_longitude)
                 {
                     last_latitude = latitude;
                     last_longitude = longitude;
-                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, {elevation})");
-                    car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, elevation);
+                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
+                    car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
             }
         }
