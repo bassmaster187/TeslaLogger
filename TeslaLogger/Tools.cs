@@ -1304,7 +1304,7 @@ WHERE
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id), MAX(id), MIN(id) FROM mothership WHERE ts < @tsdate", con))
                 {
-                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
                     try
                     {
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -1313,7 +1313,7 @@ WHERE
                             _ = long.TryParse(dr[0].ToString(), out mothershipCount);
                             _ = long.TryParse(dr[1].ToString(), out mothershipMaxId);
                             _ = long.TryParse(dr[2].ToString(), out mothershipMinId);
-                            Logfile.Log($"Housekeeping: database.mothership older than 90 days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
+                            Logfile.Log($"Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
                         }
                     }
                     catch (Exception ex)
@@ -1347,7 +1347,7 @@ WHERE
                             con.Close();
                         }
                     }
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1000);
                 }
                 // report again
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -1355,14 +1355,14 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con))
                     {
-                        cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
+                        cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
                         try
                         {
                             MySqlDataReader dr = cmd.ExecuteReader();
                             if (dr.Read())
                             {
                                 _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                                Logfile.Log("Housekeeping: database.mothership older than 90 days count: " + mothershipCount);
+                                Logfile.Log("Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: " + mothershipCount);
                             }
                         }
                         catch (Exception ex)
@@ -1504,5 +1504,36 @@ WHERE
             }
             return false;
         }
+
+        internal static int GetMothershipKeepDays()
+        {
+            int days = 14; // default
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return days;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "MothershipKeepDays"))
+                {
+                    int.TryParse(j["MothershipKeepDays"], out days);
+
+                    if (days == 0)
+                    {
+                        days = 14; // default
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return days;
+        }
+
     }
 }
