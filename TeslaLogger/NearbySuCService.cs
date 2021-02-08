@@ -71,38 +71,40 @@ namespace TeslaLogger
                             return;
                         }
                         object jsonResult = new JavaScriptSerializer().DeserializeObject(result);
-                        Dictionary<string, object> response = (Dictionary<string, object>)((Dictionary<string, object>)jsonResult)["response"];
-                        if (response.ContainsKey("superchargers"))
+                        if (((Dictionary<string, object>)((Dictionary<string, object>)jsonResult)).ContainsKey("response"))
                         {
-                            System.Object[] superchargers = (System.Object[])response["superchargers"];
-                            foreach (object supercharger in superchargers)
+                            Dictionary<string, object> response = (Dictionary<string, object>)((Dictionary<string, object>)jsonResult)["response"];
+                            if (response.ContainsKey("superchargers"))
                             {
-                                /*
-      {
-        "location": { "lat": 33.848756, "long": -84.36434 },
-        "name": "Atlanta, GA - Peachtree Road",
-        "type": "supercharger",
-        "distance_miles": 10.868304,
-        "available_stalls": 4,
-        "total_stalls": 5,
-        "site_closed": false
-      }
-                                 */
+                                System.Object[] superchargers = (System.Object[])response["superchargers"];
+                                foreach (object supercharger in superchargers)
+                                {
+                                    /*
+          {
+            "location": { "lat": 33.848756, "long": -84.36434 },
+            "name": "Atlanta, GA - Peachtree Road",
+            "type": "supercharger",
+            "distance_miles": 10.868304,
+            "available_stalls": 4,
+            "total_stalls": 5,
+            "site_closed": false
+          }
+                                     */
 
-                                Dictionary<string, object> suc = (Dictionary<string, object>)supercharger;
-                                try
-                                {
-                                    AddSuperchargerState(suc, send);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logfile.Log(ex.ToString());
+                                    Dictionary<string, object> suc = (Dictionary<string, object>)supercharger;
+                                    try
+                                    {
+                                        AddSuperchargerState(suc, send);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Logfile.Log(ex.ToString());
+                                    }
                                 }
                             }
+
+                            ShareSuc(send);
                         }
-
-                        ShareSuc(send);
-
                         Thread.Sleep(30000);
                     }
                     catch (Exception ex)

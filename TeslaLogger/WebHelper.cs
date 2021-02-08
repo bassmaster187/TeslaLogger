@@ -1326,6 +1326,9 @@ namespace TeslaLogger
 
                         if (ts.TotalMinutes > 60)
                         {
+                            if (state == "offline" || state == "asleep")
+                                return state;
+
                             string resultContent2 = GetCommand("vehicle_config").Result;
 
                             if (resultContent2 == "INSERVICE")
