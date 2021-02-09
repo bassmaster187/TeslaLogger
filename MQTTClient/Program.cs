@@ -133,9 +133,13 @@ namespace MQTTClient
                 {
                     int id = car["id"];
                     string vin = car["vin"];
+                    string display_name = car["display_name"];
 
                     if (!String.IsNullOrEmpty(vin))
+                    {
+                        Logfile.Log("MQTT: Found Car: " + display_name);
                         h.Add(id);
+                    }
                 }
             }
             catch (Exception ex)
