@@ -77,3 +77,18 @@ git checkout origin/master -- docker-compose.yml
 docker-compose build
 docker-compose up -d
 ```
+
+# Trouble shooting
+1. Init scripts like DB table setup not working
+
+On slower devices like NAS devices, the init scripts of Teslalogger might not run successful during the first run. What you can do is restart the teslalogger_teslalogger_1 container after ~ 5 minutes. This should fix missing tables in the database and can easily be obsorved via the log files. Repeat a couple of times if required. A helpful command is:
+```
+docker restart teslalogger_teslalogger_1 # or use the beginning of the container ID instead of the name, e.g. r2d2
+```
+
+2. Messed up container images or build caches
+
+If you are not running anything else in containers and are stuck with strange behaviour or errors, try cleaning up your existing container images, networks and build caches:
+```
+docker system prune # make sure all running containers are stopped before
+```
