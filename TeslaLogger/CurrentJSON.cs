@@ -190,6 +190,15 @@ namespace TeslaLogger
                     values.Add("SMTBMSmaxDischarge", SMTBMSmaxDischarge);
                 }
 
+                Address addr = Geofence.GetInstance().GetPOI(latitude, longitude);
+                if (addr != null && addr.rawName != null)
+                {
+                    values.Add("TLGeofence", addr.rawName);
+                    values.Add("TLGeofenceIsHome", addr.IsHome);
+                    values.Add("TLGeofenceIsCharger", addr.IsCharger);
+                    values.Add("TLGeofenceIsWork", addr.IsWork);
+                }
+
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
                 jsonStringHolder[car.CarInDB] = current_json;

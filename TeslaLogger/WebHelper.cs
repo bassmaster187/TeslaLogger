@@ -2049,6 +2049,17 @@ namespace TeslaLogger
                                         {
                                             throw new Exception("vehicle_disconnected");
                                         }
+                                        else if (error_type == "vehicle_error")
+                                        {
+                                            string v = j["value"];
+                                            if (v == "Vehicle is offline")
+                                                throw new Exception("Vehicle is offline");
+                                            else
+                                            {
+                                                car.Log("Stream Data Error: " + resultContent);
+                                                throw new Exception("unhandled vehicle_error: " + v);
+                                            }
+                                        }
                                         else
                                         {
                                             car.Log("Stream Data Error: " + resultContent);
@@ -2088,6 +2099,11 @@ namespace TeslaLogger
                     if (ex.Message == "vehicle_disconnected")
                     {
                         car.Log("Stream Data Error: vehicle_disconnected");
+                    }
+                    else if (ex.Message == "Vehicle is offline")
+                    {
+                        car.Log("Stream Data Error: Vehicle is offline");
+                        Thread.Sleep(30000);
                     }
                     else
                     {
