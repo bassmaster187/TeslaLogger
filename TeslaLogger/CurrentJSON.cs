@@ -190,7 +190,7 @@ namespace TeslaLogger
                     values.Add("SMTBMSmaxDischarge", SMTBMSmaxDischarge);
                 }
 
-                Address addr = Geofence.GetInstance().GetPOI(latitude, longitude);
+                Address addr = Geofence.GetInstance().GetPOI(latitude, longitude, false);
                 if (addr != null && addr.rawName != null)
                 {
                     values.Add("TLGeofence", addr.rawName);
