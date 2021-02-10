@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using TeslaLogger;
 using uPLibrary.Networking.M2Mqtt;
 
@@ -51,7 +52,9 @@ namespace MQTTClient
                 Logfile.Log(ex.Message);
             }
 
-            string lastjson = "-";
+            System.Collections.Generic.HashSet<int> allCars = GetAllcars();
+            System.Collections.Generic.Dictionary<int, string> lastjson = new Dictionary<int, string>();
+
 
             while (true)
             {
@@ -65,18 +68,25 @@ namespace MQTTClient
                         client.Connect(clientid);
                     }
 
-                    // string temp = System.IO.File.ReadAllText("/etc/teslalogger/current_json_1.txt");
-                    string temp = null;
-                    using (WebClient wc = new WebClient())
+                    foreach (int car in allCars)
                     {
-                        temp = wc.DownloadString("http://localhost:5000/currentjson/1");
-                    }
+                        string temp = null;
+                        using (WebClient wc = new WebClient())
+                        {
+                            temp = wc.DownloadString("http://localhost:5000/currentjson/" + car);
+                        }
 
-                    if (temp != lastjson)
-                    {
-                        lastjson = temp;
-                        client.Publish(Properties.Settings.Default.Topic, Encoding.UTF8.GetBytes(lastjson), 
-                            uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                        if (!lastjson.ContainsKey(car) || temp != lastjson[car])
+                        {
+                            lastjson[car] = temp;
+                            string topic = Properties.Settings.Default.Topic;
+
+                            if (allCars.Count > 1)
+                                topic += "-" + car;
+
+                            client.Publish(topic, Encoding.UTF8.GetBytes(lastjson[car]),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                        }
                     }
                 }
                 catch (WebException wex)
@@ -91,6 +101,58 @@ namespace MQTTClient
                     Logfile.Log(ex.ToString());
                 }
             }
+        }
+
+        private static HashSet<int> GetAllcars()
+        {
+            HashSet<int> h = new HashSet<int>();
+            string json = "";
+
+            for (int retry=0; retry < 20; retry++) // wait for teslalogger to start
+            {
+                try
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        json = wc.DownloadString("http://localhost:5000/getallcars");
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log("GetAllCars: " + ex.Message);
+                    System.Threading.Thread.Sleep(20000);
+                }
+            }
+
+            try
+            {
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                object[] cars = j;
+                foreach (dynamic car in cars)
+                {
+                    int id = car["id"];
+                    string vin = car["vin"];
+                    string display_name = car["display_name"];
+
+                    if (!String.IsNullOrEmpty(vin))
+                    {
+                        Logfile.Log("MQTT: Found Car: " + display_name);
+                        h.Add(id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.Message);
+                System.Threading.Thread.Sleep(20000);
+            }
+
+            if (h.Count == 0)
+                h.Add(1);
+
+            return h;
+
         }
     }
 }
