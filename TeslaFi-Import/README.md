@@ -1,4 +1,4 @@
-# TeslaFi Import Tool (Beta)
+# TeslaFi Import Tool
 
 With this importer your data from your TeslaFi account can be imported into TeslaLogger.
 
