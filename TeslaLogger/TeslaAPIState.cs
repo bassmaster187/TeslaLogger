@@ -439,6 +439,7 @@ namespace TeslaLogger
                         case "backseat_token":
                         case "backseat_token_updated_at":
                         case "vehicle_config":
+                        case "command_signing":
                             if (r4.TryGetValue(key, out value))
                             {
                                 AddValue(key, "string", value, 0, "vehicles");
