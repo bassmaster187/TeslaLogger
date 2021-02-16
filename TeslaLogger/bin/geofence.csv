@@ -932,6 +932,11 @@ be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
 
+chargeIT DE-Memmingerberg, 47.990153, 10.230113
+chargeIT DE-Ungerhausen, 48.017723, 10.270062
+chargeIT DE-Nördlingen, 48.843866, 10.503327
+chargeIT DE-Petershausen, 48.416818, 11.478081
+
 CEZ CZ-Děčín, 50.770023, 14.207249
 CEZ CZ-Jenišov, 50.222744, 12.805259
 CEZ CZ-Jaroměř, 50.342834, 15.904088
@@ -1044,6 +1049,7 @@ EnBW DE-Lorsch Ost, 49.644328, 8.554109
 EnBW DE-Lorsch West, 49.643044, 8.551967
 EnBW DE-Naumburg Euronics, 51.145178,11.83287
 EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
+EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
 EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
