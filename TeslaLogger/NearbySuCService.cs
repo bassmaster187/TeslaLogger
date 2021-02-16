@@ -70,10 +70,15 @@ namespace TeslaLogger
                             Tools.DebugLog("NearbySuCService: Retry later");
                             return;
                         }
-                        object jsonResult = new JavaScriptSerializer().DeserializeObject(result);
-                        if (((Dictionary<string, object>)((Dictionary<string, object>)jsonResult)).ContainsKey("response"))
+                        else if (result.Contains("vehicle unavailable"))
                         {
-                            Dictionary<string, object> response = (Dictionary<string, object>)((Dictionary<string, object>)jsonResult)["response"];
+                            Tools.DebugLog("NearbySuCService: vehicle unavailable");
+                            return;
+                        }
+                        Dictionary<string, object> jsonResult = (Dictionary<string, object>)new JavaScriptSerializer().DeserializeObject(result);
+                        if (jsonResult.ContainsKey("response"))
+                        {
+                            Dictionary<string, object> response = (Dictionary<string, object>)(jsonResult)["response"];
                             if (response.ContainsKey("superchargers"))
                             {
                                 System.Object[] superchargers = (System.Object[])response["superchargers"];
