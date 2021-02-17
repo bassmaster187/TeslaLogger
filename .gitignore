@@ -11,6 +11,7 @@ packages
 *.user
 /-container
 teslalogger-*
+!teslalogger-timeline-panel
 TeslaLogger/bin/car_settings.xml
 TeslaLogger/bin/cmd_updated.txt
 TeslaLogger/bin/git/
