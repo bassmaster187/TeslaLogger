@@ -30,6 +30,9 @@ namespace TeslaFi_Import
                     DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;";
                 }
 
+                if (Settings1.Default.DBConnectionstring.Length > 0)
+                    DBConnectionstring = Settings1.Default.DBConnectionstring;
+
                 Tools.Log(0, "DBConnectionstring: " + DBConnectionstring);
 
                 DataTable dt = new DataTable();
@@ -197,7 +200,8 @@ namespace TeslaFi_Import
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, import) values (@StartDate, @version, 1)", con);
+                MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, import, carid) values (@StartDate, @version, 1, @carid)", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@StartDate", Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@version", Car_version);
                 cmd.ExecuteNonQuery();
@@ -211,7 +215,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT StartDate FROM drivestate where import is null order by id limit 1", con);
+                MySqlCommand cmd = new MySqlCommand("SELECT StartDate FROM drivestate where import is null and carid=@carid order by id limit 1", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 var dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -221,7 +226,8 @@ namespace TeslaFi_Import
                 }
                 dr.Close();
 
-                cmd = new MySqlCommand("SELECT StartDate FROM chargingstate where import is null order by id limit 1", con);
+                cmd = new MySqlCommand("SELECT StartDate FROM chargingstate where import is null and carid=@carid  order by id limit 1", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -270,7 +276,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update chargingstate set EndDate = @EndDate, EndChargingID = @EndChargingID where EndDate is null  and carid=@carid ", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@EndDate", Date);
                 cmd.Parameters.AddWithValue("@EndChargingID", GetMaxChargeid());
                 cmd.ExecuteNonQuery();
@@ -455,7 +462,8 @@ namespace TeslaFi_Import
             {
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("insert pos (import, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (1, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con);
+                MySqlCommand cmd = new MySqlCommand("insert pos (import, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode, carid) values (1, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode, @carid )", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@Datum", date.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@lat", latitude.ToString(ciEnUS));
                 cmd.Parameters.AddWithValue("@lng", longitude.ToString(ciEnUS));
@@ -521,7 +529,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert drivestate (import, StartDate, StartPos) values (1, @StartDate, @Pos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert drivestate (import, StartDate, StartPos, carid) values (1, @StartDate, @Pos, @carid)", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@StartDate", date);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.ExecuteNonQuery();
@@ -540,7 +549,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("select StartPos from drivestate where EndDate is null and carid=@carid ", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -552,7 +562,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update drivestate set EndDate = @EndDate, EndPos = @Pos where EndDate is null  and carid=@carid ", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@EndDate", EndDate);
                 cmd.Parameters.AddWithValue("@Pos", posId);
                 cmd.ExecuteNonQuery();
@@ -574,7 +585,8 @@ namespace TeslaFi_Import
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos", con);
+                    MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos  and carid=@carid ", con);
+                    cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                     cmd.Parameters.AddWithValue("@startpos", startPos);
                     cmd.Parameters.AddWithValue("@endpos", endPos);
 
@@ -584,7 +596,8 @@ namespace TeslaFi_Import
                         using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
                         {
                             con2.Open();
-                            MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2);
+                            MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos and carid=@carid ", con2);
+                            cmd2.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                             cmd2.Parameters.AddWithValue("@StartPos", startPos);
                             cmd2.Parameters.AddWithValue("@EndPos", endPos);
 
@@ -614,7 +627,8 @@ namespace TeslaFi_Import
                             DateTime dt1 = (DateTime)dr["Datum"];
                             dr.Close();
 
-                            cmd = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null order by id asc limit 1", con);
+                            cmd = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null and carid=@carid  order by id asc limit 1", con);
+                            cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                             cmd.Parameters.AddWithValue("@startPos", startPos);
                             dr = cmd.ExecuteReader();
 
@@ -663,7 +677,8 @@ namespace TeslaFi_Import
                             DateTime dt1 = (DateTime)dr["Datum"];
                             dr.Close();
 
-                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null order by id desc limit 1", con);
+                            cmd = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null  and carid=@carid order by id desc limit 1", con);
+                            cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                             cmd.Parameters.AddWithValue("@endpos", endPos);
                             dr = cmd.ExecuteReader();
 
@@ -717,7 +732,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert charging (import, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (1, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con);
+                MySqlCommand cmd = new MySqlCommand("insert charging (import, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater, carid) values (1, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater, @carid)", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@Datum", Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@battery_level", battery_level);
                 cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
@@ -759,7 +775,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("insert chargingstate (import, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (1, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con);
+                MySqlCommand cmd = new MySqlCommand("insert chargingstate (import, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present, carid ) values (1, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present, @carid)", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@StartDate", date);
                 cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                 cmd.Parameters.AddWithValue("@StartChargingID", GetMaxChargeid() + 1);
@@ -783,7 +800,8 @@ namespace TeslaFi_Import
             {
                 con.Open();
 
-                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and id < " + currentStateId, con);
+                MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null  and carid=@carid and id < " + currentStateId, con);
+                cmd1.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 MySqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.Read())
                 {
@@ -795,7 +813,8 @@ namespace TeslaFi_Import
                 int MaxPosid = GetMaxPosid();
                 CloseState(MaxPosid, Date);
 
-                MySqlCommand cmd = new MySqlCommand("insert state (import, StartDate, state, StartPos) values (1, @StartDate, @state, @StartPos)", con);
+                MySqlCommand cmd = new MySqlCommand("insert state (import, StartDate, state, StartPos, carid) values (1, @StartDate, @state, @StartPos, @carid)", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@StartDate", Date);
                 cmd.Parameters.AddWithValue("@state", state);
                 cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
@@ -812,7 +831,8 @@ namespace TeslaFi_Import
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null", con);
+                MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null  and carid=@carid", con);
+                cmd.Parameters.AddWithValue("@carid", Settings1.Default.CarId);
                 cmd.Parameters.AddWithValue("@enddate", Date);
                 cmd.Parameters.AddWithValue("@EndPos", maxPosid);
                 cmd.ExecuteNonQuery();
