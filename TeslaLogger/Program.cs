@@ -351,6 +351,7 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
+                MapQuest.createAllParkingMaps();
                 MapQuest.createAllChargigMaps();
                 MapQuest.createAllTripMaps();
 
