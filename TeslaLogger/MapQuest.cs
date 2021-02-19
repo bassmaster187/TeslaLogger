@@ -378,7 +378,7 @@ namespace TeslaLogger
 
             try
             {
-                Logfile.Log("CreateParkingMapFromPosid");
+                Logfile.Log("CreateParkingMapFromPosid: " + Posid);
 
                 DataTable dt = new DataTable();
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
