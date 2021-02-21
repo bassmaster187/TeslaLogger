@@ -2,25 +2,31 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
     public class StaticMapService
     {
+        public enum StaticMapType
+        {
+            Trip,
+            Charge,
+            Park
+        }
 
         private static StaticMapService _StaticMapService = null;
 
-        private readonly ConcurrentQueue<List<Tuple<double, double>>> queue = new ConcurrentQueue<List<Tuple<double, double>>>();
+        private readonly ConcurrentQueue<Tuple<int, int, StaticMapType>> queue = new ConcurrentQueue<Tuple<int, int, StaticMapType>>();
 
         private StaticMapService()
         {
             Logfile.Log("StaticMapService initialized");
-            List<Tuple<double, double>> testlist = new List<Tuple<double, double>>();
-            testlist.Add(new Tuple<double, double>(52.446453, 13.357752));
-            testlist.Add(new Tuple<double, double>(52.449295, 13.35435));
-            Enqueue(testlist);
+            Enqueue(new Tuple<int, int, StaticMapType>(465292, 471276, StaticMapType.Trip));
         }
 
         public static StaticMapService GetSingleton()
@@ -37,9 +43,9 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(List<Tuple<double, double>> list)
+        public void Enqueue(Tuple<int, int, StaticMapType> request)
         {
-            queue.Enqueue(list);
+            queue.Enqueue(request);
         }
 
         public void Run()
@@ -65,25 +71,26 @@ namespace TeslaLogger
         private void Work()
         {
             Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count);
-            if (queue.TryDequeue(out List<Tuple<double, double>> polyList))
+            if (queue.TryDequeue(out Tuple<int, int, StaticMapType> request))
             {
-                Tools.DebugLog("StaticMapService:Work() polyList:" + polyList.Count);
+                Tools.DebugLog("StaticMapService:Work() request:" + request.Item3);
                 int padding_x = 8;
                 int padding_y = 8;
                 int width = 240;
                 int height = (int)(width / 1.618033);
                 int tileSize = 256;
-                if (polyList.Count == 1)
+                List<Tuple<double, double>> coords = TripToCoords(request);
+                if (coords.Count == 1 && (request.Item3 == StaticMapType.Park || request.Item3 == StaticMapType.Charge))
                 {
                     // park or charge
                     int zoom = 19; // max zoom
                 }
-                else if (polyList.Count > 1)
+                else if (request.Item3 == StaticMapType.Trip && coords.Count > 1)
                 {
                     // trip
-                    int zoom = CalculateZoom(polyList, padding_x, padding_y, width, height, tileSize);
+                    int zoom = CalculateZoom(coords, padding_x, padding_y, width, height, tileSize);
                     Tools.DebugLog("StaticMapService:Work() zoom:" + zoom);
-                    Tuple<double, double, double, double> extent = DetermineExtent(polyList);
+                    Tuple<double, double, double, double> extent = DetermineExtent(coords);
                     // calculate center point of map
                     double lat_center = (extent.Item1 + extent.Item3) / 2;
                     double lng_center = (extent.Item2 + extent.Item4) / 2;
@@ -96,9 +103,74 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    Tools.DebugLog("StaticMapService:Work() polyList is empty");
+                    Tools.DebugLog("StaticMapService:Work() request unknown type: " + request.Item3);
                 }
             }
+        }
+
+        private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType> request)
+        {
+            List<Tuple<double, double>> coords = new List<Tuple<double, double>>();
+            int CarID = int.MinValue;
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  CarID
+FROM
+  pos
+WHERE
+  id = @startID ", con))
+                {
+                    cmd.Parameters.AddWithValue("@startID", request.Item1);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        int.TryParse(dr[0].ToString(), out CarID);
+                    }
+                }
+            }
+            if (CarID != int.MinValue && CarID > 0)
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  lat,
+  lng
+FROM
+  pos
+WHERE
+  CarID = @CarID
+  AND id >= @startID
+  AND id <= @endID
+ORDER BY
+  Datum", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        cmd.Parameters.AddWithValue("@startID", request.Item1);
+                        cmd.Parameters.AddWithValue("@endID", request.Item2);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double lat)
+                                && double.TryParse(dr[1].ToString(), out double lng))
+                            {
+                                coords.Add(new Tuple<double, double>(lat, lng));
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Tools.DebugLog($"TripToCoords: could not find CarID for pos {request.Item1}");
+            }
+            return coords;
         }
 
         private void DrawMapLayer(Bitmap image, int width, int height, double x_center, double y_center, int tileSize, int zoom)
@@ -110,9 +182,9 @@ namespace TeslaLogger
             int y_max = (int)(Math.Ceiling(y_center + (0.5 * height / tileSize)));
             // assemble all map tiles needed for the map
             List<Tuple<int, int, Uri>> tiles = new List<Tuple<int, int, Uri>>();
-            for (int x = x_min; x <= x_max; x++)
+            for (int x = x_min; x < x_max; x++)
             {
-                for (int y = y_min; y <= y_max; y++)
+                for (int y = y_min; y < y_max; y++)
                 {
                     Tools.DebugLog($"StaticMapService:DrawMapLayer() x:{x} y:{y}");
                     // x and y may have crossed the date line
@@ -127,14 +199,25 @@ namespace TeslaLogger
             foreach (Tuple<int, int, Uri> tile in tiles)
             {
                 Tools.DebugLog("StaticMapService:Download " + tile.Item3);
+                using (HttpClient client = new HttpClient
+                {
+                    Timeout = TimeSpan.FromSeconds(15)
+                })
+                {
+                    using (HttpResponseMessage response = client.GetAsync(tile.Item3).Result)
+                    using (Stream streamToReadFrom = response.Content.ReadAsStreamAsync().Result)
+                    {
+
+                    }
+                }
             }
         }
 
-        private int CalculateZoom(List<Tuple<double, double>> polyList, int padding_x, int padding_y, int width, int height, int tileSize)
+        private int CalculateZoom(List<Tuple<double, double>> coords, int padding_x, int padding_y, int width, int height, int tileSize)
         {
             for (int zoom = 17; zoom > 0; zoom--)
             {
-                Tuple<double, double, double, double> extent = DetermineExtent(polyList);
+                Tuple<double, double, double, double> extent = DetermineExtent(coords);
                 double _width = (LonToX(extent.Item3, zoom) - LonToX(extent.Item1, zoom)) * tileSize;
                 if (_width > (width - padding_x * 2)) {
                     continue;
@@ -170,13 +253,13 @@ namespace TeslaLogger
             return (1 - Math.Log(Math.Tan(lat * Math.PI / 180) + 1 / Math.Cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.Pow(2, zoom);
         }
 
-        private Tuple<double, double, double, double> DetermineExtent(List<Tuple<double, double>> polyList)
+        private Tuple<double, double, double, double> DetermineExtent(List<Tuple<double, double>> coords)
         {
-            double min_lat = polyList.First().Item1;
-            double min_lng = polyList.First().Item2;
-            double max_lat = polyList.First().Item1;
-            double max_lng = polyList.First().Item2;
-            foreach (Tuple<double, double> coord in polyList)
+            double min_lat = coords.First().Item1;
+            double min_lng = coords.First().Item2;
+            double max_lat = coords.First().Item1;
+            double max_lng = coords.First().Item2;
+            foreach (Tuple<double, double> coord in coords)
             {
                 min_lat = Math.Min(min_lat, coord.Item1);
                 min_lng = Math.Min(min_lng, coord.Item2);
