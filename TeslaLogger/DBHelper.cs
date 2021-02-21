@@ -3782,6 +3782,7 @@ WHERE
             try
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
+                MapQuest.CreateChargingMapOnChargingCompleted(car.CarInDB);
                 int chargeID = GetMaxChargeid(out DateTime chargeEnd);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
