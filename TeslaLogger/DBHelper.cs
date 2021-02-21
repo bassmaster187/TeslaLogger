@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Linq;
+using System.IO;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
@@ -1506,8 +1506,8 @@ namespace TeslaLogger
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                    cmd.Parameters.AddWithValue("@speed", (int)(speed * 1.60934M));
-                    cmd.Parameters.AddWithValue("@power", (int)(power * 1.35962M));
+                    cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
+                    cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
                     if (ideal_battery_range_km == -1)
@@ -2571,5 +2571,170 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "");
             }
         }
+
+        private static int MphToKmhRounded(double speed_mph)
+        {
+            int speed_floor = (int)(speed_mph * 1.60934);
+            // handle special speed_floor as Math.Round is off by +1
+            if (
+                speed_floor == 30
+                || speed_floor == 33
+                || speed_floor == 83
+                || speed_floor == 123
+                || speed_floor == 133
+                )
+            {
+                return speed_floor;
+            }
+            return (int)Math.Round(speed_mph / 0.62137119223733);
+        }
+
+        internal static void MigrateFloorRound()
+        {
+            string migrationstatusfile = "migrate_floor_round.txt";
+
+            /*
+             * DB stores speed in km/h
+             * API has speed in mph
+             * rounding takes place twice: car display in km/h -> API speed in mph -> mpt to km/h in TeslaLogger
+             * 
+             * migrate errors coming from older versions originating from floor() vs. round()
+             * 
+             */
+
+            if (!File.Exists(migrationstatusfile))
+            {
+                try
+                {
+                    StringBuilder migrationlog = new StringBuilder();
+                    Logfile.Log("MigrateFloorRound() start");
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() start" + Environment.NewLine);
+
+                    // add indexes to speed up things
+                    Logfile.Log("MigrateFloorRound() ADD INDEX speed");
+                    migrationlog.Append($"{DateTime.Now} ADD INDEX speed" + Environment.NewLine);
+                    int sqlresult = ExecuteSQLQuery("ALTER TABLE pos ADD INDEX idx_migration_speed (speed)", 6000);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+
+                    // get max speed
+
+                    int maxspeed_kmh = 0;
+
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(
+@"SELECT
+  MAX(speed)
+FROM
+pos", con))
+                        {
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value)
+                            {
+                                int.TryParse(dr[0].ToString(), out maxspeed_kmh);
+                            }
+                        }
+                        con.Close();
+                    }
+
+                    if (maxspeed_kmh == 0)
+                    {
+                        maxspeed_kmh = 500;
+                    }
+
+                    Logfile.Log($"maxspeed_kmh: {maxspeed_kmh}");
+                    migrationlog.Append($"maxspeed_kmh: {maxspeed_kmh}" + Environment.NewLine);
+
+                    // migrate floor round error for pos.speed
+
+                    for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
+                    {
+                        int speed_floor = (int)(speed_mph * 1.60934); // old conversion
+                        int speed_round = MphToKmhRounded(speed_mph); // new conversion
+                        if (speed_floor != speed_round)
+                        {
+                            DateTime start = DateTime.Now;
+                            Logfile.Log($"MigrateFloorRound(): speed {speed_floor} -> {speed_round}");
+                            migrationlog.Append($"{DateTime.Now} speed {speed_floor} -> {speed_round}" + Environment.NewLine);
+                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                            {
+                                con.Open();
+                                using (MySqlCommand cmd = new MySqlCommand(
+@"UPDATE
+  pos
+SET
+  speed = @speedround
+WHERE
+  speed = @speedfloor", con))
+                                {
+                                    cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
+                                    cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
+                                    int updated_rows = cmd.ExecuteNonQuery();
+                                    Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                    migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
+                                }
+                                con.Close();
+                            }
+                        }
+                    }
+
+                    // update all drivestate statistics
+                    foreach (Car c in Car.allcars)
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(
+@"SELECT
+  StartPos,
+  EndPos
+FROM
+  drivestate
+WHERE
+  CarID = @CarID", con))
+                            {
+                                cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = c.CarInDB;
+                                MySqlDataReader dr = cmd.ExecuteReader();
+                                while (dr.Read())
+                                {
+                                    if (dr[0] != null && int.TryParse(dr[0].ToString(), out int startpos)
+                                        && dr[1] != null && int.TryParse(dr[1].ToString(), out int endpos))
+                                    {
+                                        DateTime start = DateTime.Now;
+                                        c.dbHelper.UpdateDriveStatistics(startpos, endpos, false);
+                                        c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
+                                        migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // remove indexes
+                    Logfile.Log("MigrateFloorRound() DROP INDEX speed");
+                    migrationlog.Append($"{DateTime.Now} DROP INDEX speed" + Environment.NewLine);
+                    sqlresult = ExecuteSQLQuery("ALTER TABLE pos DROP INDEX idx_migration_speed", 6000);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+
+                    // cleanup DB files
+                    Logfile.Log("MigrateFloorRound() REBUILD");
+                    migrationlog.Append($"{DateTime.Now} REBUILD" + Environment.NewLine);
+                    sqlresult = ExecuteSQLQuery("ALTER TABLE pos FORCE", 6000);
+                    migrationlog.Append($"{DateTime.Now} sqlresult {sqlresult}" + Environment.NewLine);
+
+                    Logfile.Log("MigrateFloorRound() finished");
+                    migrationlog.Append($"{DateTime.Now} MigrateFloorRound() finished" + Environment.NewLine);
+
+                    // persist that migration ran successful to prevent another run
+                    File.WriteAllText(migrationstatusfile, migrationlog.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog("Exception MigrateFloorRound()", ex);
+                }
+            }
+        }
+
     }
 }
