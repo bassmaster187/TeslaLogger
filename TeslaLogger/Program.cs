@@ -352,6 +352,10 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
+                MapQuest.createAllParkingMaps();
+                MapQuest.createAllChargigMaps();
+                MapQuest.createAllTripMaps();
+
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
             })

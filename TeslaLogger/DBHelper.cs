@@ -1900,6 +1900,10 @@ ORDER BY chargingstate.id ASC", con))
             Task.Factory.StartNew(() =>
               {
                   UpdateTripElevation(StartPos, MaxPosId, " (Task)");
+
+                  MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
+                  MapQuest.CreateParkingMapFromPosid(StartPos);
+                  MapQuest.CreateParkingMapFromPosid(MaxPosId);
               });
         }
 
