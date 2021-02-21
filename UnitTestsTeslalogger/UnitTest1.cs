@@ -79,6 +79,7 @@ namespace UnitTestsTeslalogger
             wh.car.car_type = "model3";
             wh.car.DB_Wh_TR = 0.145;
             wh.car.trim_badging = "";
+            wh.car.vin = "5YJ3E7EA9KFxxxxxx"; 
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
@@ -189,6 +190,7 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 535, DateTime.Now.AddMinutes(1));
+            wh.car.vin = "5YJ3E7EA9KFxxxxxx"; 
             wh.car.car_type = "model3";
             wh.car.car_special_type = "base";
             wh.car.DB_Wh_TR = 0.139;
@@ -200,7 +202,7 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "LRW3E7FA9LC123456";
+            wh.car.vin = "5YJ3E7EB4KFxxxxxx";
             wh.car.car_type = "model3";
             wh.car.car_special_type = "base";
             wh.car.DB_Wh_TR = 0.133;
@@ -278,5 +280,12 @@ namespace UnitTestsTeslalogger
             Assert.IsFalse(s.Contains("km Stand [km]"));
             
         }
+
+        [TestMethod]
+        public void CreateMap()
+        {
+            
+        }
+
     }
 }

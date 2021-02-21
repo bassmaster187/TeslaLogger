@@ -11,6 +11,7 @@ packages
 *.user
 /-container
 teslalogger-*
+!teslalogger-timeline-panel
 TeslaLogger/bin/car_settings.xml
 TeslaLogger/bin/cmd_updated.txt
 TeslaLogger/bin/git/
@@ -51,3 +52,4 @@ UnitTestsTeslalogger/bin/Debug/*
 TeslaLogger/copytoraspberry.cmd
 TeslaLogger/copytoRPI4.cmd
 Teslamate-Import/.vs
+TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/maps/*

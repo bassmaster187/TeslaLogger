@@ -484,6 +484,7 @@ namespace TeslaLogger
         public void CloseChargingState()
         {
             car.Log("CloseChargingState()");
+            MapQuest.CreateChargingMapOnChargingCompleted(car.CarInDB);
             bool hasFreeSuc = car.HasFreeSuC();
             if (hasFreeSuc)
             {
@@ -494,14 +495,14 @@ namespace TeslaLogger
                     {
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE 
-  chargingstate 
-SET 
-  cost_total= @cost_total
-WHERE 
-  CarID = @carid 
-  AND EndDate is null 
-  AND fast_charger_brand = 'Tesla'", con))
+                            @"UPDATE 
+                              chargingstate 
+                            SET 
+                              cost_total= @cost_total
+                            WHERE 
+                              CarID = @carid 
+                              AND EndDate is null 
+                              AND fast_charger_brand = 'Tesla'", con))
                         {
                             cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                             cmd.Parameters.AddWithValue("@cost_total", 0.0);
@@ -938,6 +939,10 @@ WHERE
             Task.Factory.StartNew(() =>
               {
                   UpdateTripElevation(StartPos, MaxPosId, " (Task)");
+
+                  MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
+                  MapQuest.CreateParkingMapFromPosid(StartPos);
+                  MapQuest.CreateParkingMapFromPosid(MaxPosId);
               });
         }
 

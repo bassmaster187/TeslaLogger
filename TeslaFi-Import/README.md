@@ -1,4 +1,4 @@
-# TeslaFi Import Tool (Beta)
+# TeslaFi Import Tool
 
 With this importer your data from your TeslaFi account can be imported into TeslaLogger.
 
@@ -33,6 +33,8 @@ sudo reboot now
 ```
 
 ## Docker edition
+Copy all CSV files into the subdirectory of your docker-compose.yml file : TeslaLogger\bin
+
 Get the container name of Teslalogger.
 ```
 Docker PS

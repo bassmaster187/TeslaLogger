@@ -560,9 +560,29 @@ namespace TeslaLogger
                     string factor_id = null;
                     try
                     {
-                        factor_id = jsonResult["data"][0]["id"];
+                        var authentificatorDevices = jsonResult["data"];
+                        car.passwortinfo.Append("Found " + authentificatorDevices.Length + " Authentificator Devices<br>");
+                        
+                        for (int ad = 0; ad < authentificatorDevices.Length; ad++)
+                        {
+                            try
+                            {
+                                car.passwortinfo.Append("Try Device:  " + jsonResult["data"][ad]["name"] + "<br>");
+                                factor_id = jsonResult["data"][ad]["id"];
+                                string c = MFA2(cookie, code_challenge, state, transaction_id, factor_id);
 
-                        car.passwortinfo.Append("factor_id received from Tesla server<br>");
+                                if (c.Length > 10)
+                                {
+                                    car.passwortinfo.Append("factor_id received from Tesla server<br>");
+                                    return c;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                car.Log("MFA1 ResultContent: " + resultContent);
+                                car.Log(ex.ToString());
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -570,8 +590,7 @@ namespace TeslaLogger
                         car.Log(ex.ToString());
                     }
 
-
-                    return MFA2(cookie, code_challenge, state, transaction_id, factor_id);
+                    return "";
                     
                 }
             }
@@ -624,7 +643,6 @@ namespace TeslaLogger
             }
 
             return "NULL";
-
         }
 
         private string MFA3(string cookie, string code_challenge, string state, string transaction_id)
@@ -1326,7 +1344,7 @@ namespace TeslaLogger
 
                         if (ts.TotalMinutes > 60)
                         {
-                            if (state == "offline" || state == "asleep")
+                            if (state == "offline" || state == "asleep" || state == "online")
                                 return state;
 
                             string resultContent2 = GetCommand("vehicle_config").Result;
@@ -1380,17 +1398,19 @@ namespace TeslaLogger
 
             if (car.car_type == "model3")
             {
+                Tools.VINDecoder(car.vin, out _, out _, out bool AWD, out _, out string battery, out _);
+
                 int maxRange = car.dbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
                 {
                     try
                     {
-                        if (car.DB_Wh_TR >= 0.143 && car.DB_Wh_TR <= 0.148)
+                        if (!AWD)
                         {
                             WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
-                        else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142)
+                        else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142 && AWD)
                         {
                             WriteCarSettings("0.139", "M3 LR FL");
                             return;
@@ -1406,8 +1426,6 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    Tools.VINDecoder(car.vin, out _, out _, out _, out _, out string battery, out _);
-
                     if (battery == "LFP")
                         WriteCarSettings("0.133", "M3 SR+ LFP");
                     else 
@@ -2040,7 +2058,7 @@ namespace TeslaLogger
                                 switch (msg_type)
                                 {
                                     case "control:hello":
-                                        car.Log("Stream Hello");
+                                        // car.Log("Stream Hello");
                                         break;
                                     case "data:error":
                                         string error_type = j["error_type"];
@@ -2137,7 +2155,7 @@ namespace TeslaLogger
 
             DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
 
-            Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString());
+            Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString(Tools.ciDeDE));
 
             if (int.TryParse(power, out int iPower))
             {

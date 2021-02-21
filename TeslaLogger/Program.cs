@@ -57,6 +57,22 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "main loop");
                 Logfile.Log("Teslalogger Stopped!");
             }
+            finally
+            {
+                if (!UpdateTeslalogger.DownloadUpdateAndInstallStarted)
+                {
+                    try
+                    {
+                        Logfile.Log("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
+                        UpdateTeslalogger.DownloadUpdateAndInstall();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.Message);
+                        Logfile.ExceptionWriter(ex, "Emergency DownloadUpdateAndInstall()");
+                    }
+                }
+            }
         }
 
         private static void InitNearbySuCService()
@@ -335,6 +351,9 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
+                MapQuest.createAllParkingMaps();
+                MapQuest.createAllChargigMaps();
+                MapQuest.createAllTripMaps();
                 DBHelper.MigrateFloorRound();
 
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
