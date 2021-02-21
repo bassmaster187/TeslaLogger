@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
+using System.Net;
 using System.Threading;
 using MySql.Data.MySqlClient;
 
@@ -18,6 +18,8 @@ namespace TeslaLogger
             Charge,
             Park
         }
+
+        private static Random random = new Random();
 
         private static StaticMapService _StaticMapService = null;
 
@@ -191,25 +193,50 @@ ORDER BY
                     int max_tile = (int)Math.Pow(2, zoom);
                     int tile_x = (x + max_tile) % max_tile;
                     int tile_y = (y + max_tile) % max_tile;
-                    Uri url = new Uri($"http://a.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
-                    tiles.Add(new Tuple<int, int, Uri>(x, y, url));
+                    int num = random.Next(0, 3);
+                    char abc = (char)('a' + num);
+                    Uri url = new Uri($"http://{abc}.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
+                    tiles.Add(new Tuple<int, int, Uri>(x - x_min, y - y_min, url));
                 }
             }
             Tools.DebugLog("StaticMapService:DrawMapLayer() tiles:" + tiles.Count);
-            foreach (Tuple<int, int, Uri> tile in tiles)
+            using (Bitmap tempImage = new Bitmap(tileSize * (int)Math.Sqrt(tiles.Count), tileSize * (int)Math.Sqrt(tiles.Count)))
             {
-                Tools.DebugLog("StaticMapService:Download " + tile.Item3);
-                using (HttpClient client = new HttpClient
+                foreach (Tuple<int, int, Uri> tile in tiles)
                 {
-                    Timeout = TimeSpan.FromSeconds(15)
-                })
-                {
-                    using (HttpResponseMessage response = client.GetAsync(tile.Item3).Result)
-                    using (Stream streamToReadFrom = response.Content.ReadAsStreamAsync().Result)
+                    using (Bitmap tileImage = DownloadTile(tile.Item3))
                     {
-
+                        Tools.DebugLog("StaticMapService:DrawMapLayer() tileImage:" + tileImage);
+                        Tools.DebugLog($"StaticMapService:DrawMapLayer() x:{tile.Item1} y:{tile.Item2}");
+                        Rectangle sRect = new Rectangle(0, 0, tileImage.Width, tileImage.Height);
+                        Tools.DebugLog($"StaticMapService:DrawMapLayer() sRect:{sRect}");
+                        Rectangle dRect = new Rectangle(tileImage.Width * tile.Item1, tileImage.Height * tile.Item2, tileImage.Width, tileImage.Height);
+                        Tools.DebugLog($"StaticMapService:DrawMapLayer() dRect:{dRect}");
+                        CopyRegionIntoImage(tileImage, sRect, tempImage, dRect);
                     }
                 }
+                tempImage.Save("/var/www/html/maptile.png");
+            }
+        }
+
+        private Bitmap DownloadTile(Uri url)
+        {
+            Tools.DebugLog("StaticMapService:DownloadTile() url: " + url);
+            using (WebClient wc = new WebClient())
+            {
+                wc.Headers["User-Agent"] = "TeslaLogger StaticMapService";
+                using (MemoryStream ms = new MemoryStream(wc.DownloadData(url)))
+                {
+                    return new Bitmap(Image.FromStream(ms));
+                }
+            }
+        }
+
+        private void CopyRegionIntoImage(Bitmap srcBitmap, Rectangle srcRegion, Bitmap destBitmap, Rectangle destRegion)
+        {
+            using (Graphics grD = Graphics.FromImage(destBitmap))
+            {
+                grD.DrawImage(srcBitmap, destRegion, srcRegion, GraphicsUnit.Pixel);
             }
         }
 
