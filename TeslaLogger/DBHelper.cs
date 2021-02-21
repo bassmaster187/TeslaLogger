@@ -1388,41 +1388,6 @@ WHERE
             return double.NaN;
         }
 
-        private void CloseChargingState(int openChargingState)
-        {
-            try
-            {
-                car.Log($"CloseChargingState id:{openChargingState}");
-                int chargeID = GetMaxChargeid(out DateTime chargeEnd);
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE
- chargingstate
-SET
- EndDate = @EndDate,
- EndChargingID = @EndChargingID
-WHERE
- id=@ChargingStateID
- AND CarID=@CarID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
-                        cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
-            }
-        }
-
         private Queue<int> FindOpenChargingStates()
         {
             Queue<int> openChargingStates = new Queue<int>();
@@ -3809,6 +3774,41 @@ WHERE
                 {
                     Tools.DebugLog("Exception MigrateFloorRound()", ex);
                 }
+            }
+        }
+
+        private void CloseChargingState(int openChargingState)
+        {
+            try
+            {
+                car.Log($"CloseChargingState id:{openChargingState}");
+                int chargeID = GetMaxChargeid(out DateTime chargeEnd);
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+ chargingstate
+SET
+ EndDate = @EndDate,
+ EndChargingID = @EndChargingID
+WHERE
+ id=@ChargingStateID
+ AND CarID=@CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
+                        cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        Tools.DebugLog(cmd);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
         }
 
