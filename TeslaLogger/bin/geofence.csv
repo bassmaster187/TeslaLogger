@@ -924,6 +924,7 @@ Allego DE-Trier Wasserweg, 49.76327, 6.65785
 Allego DE-Quirla, 50.865762, 11.772602
 
 ARAL DE-Bochum, 51.501513, 7.258011
+ARAL DE-Braunschweig, 52.322159, 10.478146
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Aral Autohof, 53.502361,11.097974
@@ -1566,6 +1567,7 @@ Innogy DE-Soltau, 52.98422, 9.838614
 Innogy DE-Spreyer, 49.303853, 8.448678
 Innogy DE-Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
 Innogy DE-Treuen, 50.549113, 12.286336
+Innogy DE-Worms EWR AG, 49.630936, 8.356603
 
 Familia DE-Hamburg, 53.608366, 10.044162
 Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
@@ -1600,6 +1602,7 @@ Kaufland DE-Berlin Tempelhof,52.468372,13.377201,20
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
 Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
+Kaufland DE-Bergheim, 50.952842, 6.641612
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
 Kaufland DE-Erfurt, 50.955663, 11.069766
@@ -1798,6 +1801,7 @@ DE Malsfeld Autohof, 51.086861, 9.485483, 5
 DE Mölln Baumarkt Werkers Welt, 53.622883, 10.682333
 DE Mölln Euronics, 53.640516,10.695056
 DE Mölln VW Riemer, 53.623707, 10.678989
+DE München Messe, 48.136766, 11.691608
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
@@ -1814,5 +1818,4 @@ DE Schönefeld Total, 52.370738, 13.526929
 DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Wetzlar Leica, 50.553084, 8.533377
-DE Worms EWR AG, 49.630936, 8.356603
 ES Gandia, 38.969986, -0.178789
