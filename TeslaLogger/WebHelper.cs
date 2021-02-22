@@ -21,6 +21,7 @@ namespace TeslaLogger
     public class WebHelper
     {
         public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
+        public const string TeslaloggerUserAgent = "TL V1";
 
         public string Tesla_token = "";
         public string Tesla_id = "";
@@ -247,7 +248,7 @@ namespace TeslaLogger
 
                 using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                     Dictionary<string, string> values = new Dictionary<string, string>
                 {
                    { "client_id", "ownerapi" },
@@ -338,12 +339,19 @@ namespace TeslaLogger
 
                 string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                };
+
                 DateTime start = DateTime.UtcNow;
 
-                using (HttpClient client = new HttpClient())
+                using (HttpClient client = new HttpClient(handler))
                 {
-                    client.Timeout = TimeSpan.FromSeconds(5);
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Connection.Add("keep-alive");
 
                     using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                     {
@@ -411,7 +419,7 @@ namespace TeslaLogger
                     {
                         // client.Timeout = TimeSpan.FromSeconds(10);
                         client.BaseAddress = new Uri("https://auth.tesla.com");
-                        client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                        client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                         client.DefaultRequestHeaders.Add("Cookie", cookie);
                         DateTime start = DateTime.UtcNow;
 
@@ -491,6 +499,10 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.Message + "<br>");
+                if (ex.InnerException != null)
+                    car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
+
                 car.Log(ex.ToString());
             }
 
@@ -538,9 +550,10 @@ namespace TeslaLogger
                 ch.UseCookies = false;
                 using (HttpClient client = new HttpClient(ch))
                 {
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                     client.DefaultRequestHeaders.Add("Cookie", cookie);
-                    
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
                     UriBuilder b = new UriBuilder("https://auth.tesla.com/oauth2/v3/authorize/mfa/factors");
                     b.Port = -1;
 
@@ -579,6 +592,11 @@ namespace TeslaLogger
                             }
                             catch (Exception ex)
                             {
+                                car.passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.Message + "<br>");
+                                
+                                if (ex.InnerException != null)
+                                    car.passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.InnerException.Message + "<br>");
+
                                 car.Log("MFA1 ResultContent: " + resultContent);
                                 car.Log(ex.ToString());
                             }
@@ -586,6 +604,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        car.passwortinfo.Append("Exception in MFA1 : "+ ex.Message + "<br>");
                         car.Log("MFA1 ResultContent: " + resultContent);
                         car.Log(ex.ToString());
                     }
@@ -607,8 +626,10 @@ namespace TeslaLogger
                 {
                     // client.Timeout = TimeSpan.FromSeconds(10);
                     client.BaseAddress = new Uri("https://auth.tesla.com");
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                     client.DefaultRequestHeaders.Add("Cookie", cookie);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Referrer = new Uri("https://auth.tesla.com");
                     DateTime start = DateTime.UtcNow;
 
                     Dictionary<string, string> d = new Dictionary<string, string>();
@@ -655,7 +676,7 @@ namespace TeslaLogger
                 {
                     // client.Timeout = TimeSpan.FromSeconds(10);
                     client.BaseAddress = new Uri("https://auth.tesla.com");
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                     client.DefaultRequestHeaders.Add("Cookie", cookie);
                     DateTime start = DateTime.UtcNow;
 
@@ -722,12 +743,19 @@ namespace TeslaLogger
 
                 string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
 
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                };
+
                 DateTime start = DateTime.UtcNow;
 
-                using (HttpClient client = new HttpClient())
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.BaseAddress = new Uri("https://auth.tesla.com");
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Connection.Add("keep-alive");
 
                     using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                     {
@@ -788,7 +816,7 @@ namespace TeslaLogger
                 using (HttpClient client = new HttpClient())
                 {
                     client.Timeout = TimeSpan.FromSeconds(5);
-                    client.DefaultRequestHeaders.Add("User-Agent", "TeslaLogger");
+                    client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + access_token);
 
                     using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
@@ -2136,6 +2164,9 @@ namespace TeslaLogger
             Log("StartStream Ende");
             
         }
+
+        string lastStreamingAPIShiftState = null;
+        DateTime lastStreamingAPILog = DateTime.UtcNow;
         
         private void StreamDataUpdate(string data)
         {
@@ -2155,7 +2186,12 @@ namespace TeslaLogger
 
             DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
 
-            Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString(Tools.ciDeDE));
+            if (lastStreamingAPIShiftState != shift_state || (DateTime.UtcNow - lastStreamingAPILog).TotalSeconds > 60)
+            {
+                Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString(Tools.ciDeDE));
+                lastStreamingAPILog = DateTime.UtcNow;
+                lastStreamingAPIShiftState = shift_state;
+            }            
 
             if (int.TryParse(power, out int iPower))
             {
