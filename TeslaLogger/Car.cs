@@ -905,9 +905,9 @@ namespace TeslaLogger
         private void RefreshToken()
         {
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
-            if (ts.TotalDays > 9)
+            if (ts.TotalDays > 20)
             {
-                // If car wasn't sleeping since 10 days, try to get a new Teslalogger update
+                // If car wasn't sleeping since 20 days, try to get a new Teslalogger update
                 // TODO don't work anymore!
                 UpdateTeslalogger.CheckForNewVersion();
 
