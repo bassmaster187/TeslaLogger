@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1603880798696,
+  "iteration": 1613126201022,
   "links": [
     {
       "icon": "external link",
@@ -463,7 +463,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        pos.lat, pos.lng, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, chargingstate.id as HostId, cars.tasker_hash,\r\n              pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.charge_energy_added / cost_kwh_meter_invoice * 100 as Eff,\r\n              charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 as kW_avg,\r\n              max_charger_power,\r\n              ifnull(round(cost_total,2), 'set') as cost_total,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging.battery_level as Start_battery_level,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\n                         join cars on cars.id = chargingstate.carid\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\nand chargingstate.CarId = $Car and (pos.address like '%$Textfilter%') \r\norder by StartDate desc",
+          "rawSql": "SELECT        pos.lat, pos.lng, UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, chargingstate.id as HostId, cars.tasker_hash,\r\n              pos.address, \r\n              charging_End.charge_energy_added, \r\n              charging_End.charge_energy_added / cost_kwh_meter_invoice * 100 as Eff,\r\n              CASE WHEN (charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) > max_charger_power\r\n                  THEN NULL \r\n                  ELSE\r\n                  charging_End.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 \r\n                  END as kW_avg,\r\n              max_charger_power,\r\n              ifnull(round(cost_total,2), 'set') as cost_total,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging.battery_level as Start_battery_level,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\n                         join cars on cars.id = chargingstate.carid\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\nand chargingstate.CarId = $Car and (pos.address like '%$Textfilter%') \r\norder by StartDate desc",
           "refId": "A",
           "select": [
             [
@@ -574,5 +574,5 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 95
+  "version": 137
 }

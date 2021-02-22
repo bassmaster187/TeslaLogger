@@ -541,10 +541,17 @@ namespace TeslaLogger
         {
             System.Diagnostics.Debug.WriteLine("passwortinfo");
             string data = GetDataFromRequestInputStream(request);
+            int id = 0;
 
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
-
-            int id = Convert.ToInt32(r["id"]);
+            if (String.IsNullOrEmpty(data))
+            {
+                id = Convert.ToInt32(request.QueryString["id"]);
+            }
+            else
+            {
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                id = Convert.ToInt32(r["id"]);
+            }
 
             var c = Car.GetCarByID(id);
 

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "Teslalogger Timeline",
+  "id": "teslalogger-timeline-panel",
+
+  "info": {
+    "description": "Teslalogger Timeline",
+    "author": {
+      "name": "Christian Pogea"
+    },
+    "keywords": ["panel", "template"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {"name": "Website", "url": "https://teslalogger.de"},
+      {"name": "License", "url": "https://teslalogger.de"}
+    ],
+    "screenshots": [],
+    "version": "1.0.0",
+    "updated": "2021-02-22"
+  },
+
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}
