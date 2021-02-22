@@ -215,7 +215,16 @@ ORDER BY
                         CopyRegionIntoImage(tileImage, sRect, tempImage, dRect);
                     }
                 }
+                Tools.DebugLog($"StaticMapService:DrawMapLayer() x_center:{x_center} y_center:{y_center}");
+                using (Graphics g = Graphics.FromImage(tempImage))
+                {
+                    Pen skyBluePen = new Pen(Brushes.DeepSkyBlue);
+                    skyBluePen.Width = 1.0F;
+                    g.DrawRectangle(skyBluePen, new Rectangle((int)(width - y_center), (int)(height - x_center), width, height));
+                }
+                CopyRegionIntoImage(tempImage, new Rectangle((int)(width-x_center), (int)(height-y_center), width, height), image, new Rectangle(0, 0, width, height));
                 tempImage.Save("/var/www/html/maptile.png");
+                image.Save("/var/www/html/map.png");
             }
         }
 
