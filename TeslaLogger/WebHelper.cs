@@ -2167,6 +2167,8 @@ namespace TeslaLogger
 
         string lastStreamingAPIShiftState = null;
         DateTime lastStreamingAPILog = DateTime.UtcNow;
+        private double last_latitude = double.NaN;
+        private double last_longitude = double.NaN;
         
         private void StreamDataUpdate(string data)
         {
@@ -2196,14 +2198,45 @@ namespace TeslaLogger
             if (int.TryParse(power, out int iPower))
             {
                 if (iPower > 0 || iPower < 0)
+                {
                     DrivingOrChargingByStream = true;
+                }
             }
             else if (shift_state != null && (shift_state == "D" || shift_state == "R" || shift_state == "N"))
             {
                 DrivingOrChargingByStream = true;
             }
             else
-                DrivingOrChargingByStream = false; 
+            {
+                DrivingOrChargingByStream = false;
+            }
+            if (int.TryParse(speed, out int ispeed)
+                && double.TryParse(odometer, out double dodometer)
+                && int.TryParse(soc, out int isoc)
+                && double.TryParse(est_lat, out double latitude)
+                && double.TryParse(est_lng, out double longitude)
+                && decimal.TryParse(power, out decimal dpower)
+                && int.TryParse(range, out int irange))
+            {
+                // speed is converted by InsertPos
+                // power is converted by InsertPos
+                // TODO proper conversion ml to km from "off by one patch"
+                double dodometer_km = dodometer * 1.60934;
+                // battery_range_km = range in ml to km
+                // TODO proper conversion ml to km from "off by one patch"
+                double battery_range_km = (irange / 0.62137);
+                // ideal_battery_range_km = ideal_battery_range_km * 0.8
+                // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
+                double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
+                double? outside_temp = car.currentJSON.current_outside_temp;
+                if (latitude != last_latitude || longitude != last_longitude)
+                {
+                    last_latitude = latitude;
+                    last_longitude = longitude;
+                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
+                    car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
+                }
+            }
         }
 
 
