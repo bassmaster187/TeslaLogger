@@ -98,11 +98,13 @@ else
 			if (LengthUnit == "mile")
 			{
 				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / 1.609).toFixed(1) + " mi");
+				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/1.609).toFixed(1) + " mi");
 				$('#odometer').text((jsonData["odometer"] / 1.609).toFixed(1) + " mi");
 			}
 			else
 			{
 				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1) + " km");
+				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toFixed(1) + " km");
 				$('#odometer').text(jsonData["odometer"].toFixed(1) + " km");
 			}
 
@@ -367,7 +369,8 @@ function ShowInfo()
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
 	  <tr id='BMSMaxDischargeRow'><td><b><?php t("Max Discharge"); ?>:</b></td><td><span id="BMSMaxDischarge"></span></td></tr>
 	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
-	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %</td></tr>
+	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<br>= <span id="full_battery_range_km">---</span> / 100 %
+</td></tr>
 	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
