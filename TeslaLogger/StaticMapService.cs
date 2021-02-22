@@ -101,11 +101,31 @@ namespace TeslaLogger
                     using (Bitmap image = new Bitmap(width, height))
                     {
                         DrawMapLayer(image, width, height, x_center, y_center, tileSize, zoom);
+                        DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
+                        image.Save("/var/www/html/map.png");
                     }
                 }
                 else
                 {
                     Tools.DebugLog("StaticMapService:Work() request unknown type: " + request.Item3);
+                }
+            }
+        }
+
+        private void DrawTrip(Bitmap image, List<Tuple<double, double>> coords, int zoom, double x_center, double y_center, int tileSize)
+        {
+            using (Graphics graphics = Graphics.FromImage(image))
+            {
+                Pen bluePen = new Pen(Color.Blue, 1);
+                for (int index = 1; index < coords.Count; index++)
+                {
+                    Tools.DebugLog($"coord {coords[index - 1].Item2},{coords[index - 1].Item1}->{LonToX(coords[index - 1].Item2, zoom)}{LatToY(coords[index - 1].Item1, zoom)}");
+                    graphics.DrawLine(bluePen,
+                        (int)LonToX(coords[index - 1].Item2, zoom),
+                        (int)LatToY(coords[index - 1].Item1, zoom),
+                        (int)LonToX(coords[index].Item2, zoom),
+                        (int)LatToY(coords[index].Item1, zoom)
+                        );
                 }
             }
         }
@@ -196,36 +216,29 @@ ORDER BY
                     int num = random.Next(0, 3);
                     char abc = (char)('a' + num);
                     Uri url = new Uri($"http://{abc}.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
-                    tiles.Add(new Tuple<int, int, Uri>(x - x_min, y - y_min, url));
+                    tiles.Add(new Tuple<int, int, Uri>(x, y, url));
                 }
             }
             Tools.DebugLog("StaticMapService:DrawMapLayer() tiles:" + tiles.Count);
-            using (Bitmap tempImage = new Bitmap(tileSize * (int)Math.Sqrt(tiles.Count), tileSize * (int)Math.Sqrt(tiles.Count)))
+            foreach (Tuple<int, int, Uri> tile in tiles)
             {
-                foreach (Tuple<int, int, Uri> tile in tiles)
+                using (Bitmap tileImage = DownloadTile(tile.Item3))
                 {
-                    using (Bitmap tileImage = DownloadTile(tile.Item3))
-                    {
-                        Tools.DebugLog("StaticMapService:DrawMapLayer() tileImage:" + tileImage);
-                        Tools.DebugLog($"StaticMapService:DrawMapLayer() x:{tile.Item1} y:{tile.Item2}");
-                        Rectangle sRect = new Rectangle(0, 0, tileImage.Width, tileImage.Height);
-                        Tools.DebugLog($"StaticMapService:DrawMapLayer() sRect:{sRect}");
-                        Rectangle dRect = new Rectangle(tileImage.Width * tile.Item1, tileImage.Height * tile.Item2, tileImage.Width, tileImage.Height);
-                        Tools.DebugLog($"StaticMapService:DrawMapLayer() dRect:{dRect}");
-                        CopyRegionIntoImage(tileImage, sRect, tempImage, dRect);
-                    }
+                    Rectangle box = new Rectangle(XtoPx(tile.Item1, x_center, tileSize, width), YtoPx(tile.Item2, y_center, tileSize, height), tileSize, tileSize);
+                    CopyRegionIntoImage(tileImage, new Rectangle(0, 0, tileSize, tileSize), image, box);
                 }
-                Tools.DebugLog($"StaticMapService:DrawMapLayer() x_center:{x_center} y_center:{y_center}");
-                using (Graphics g = Graphics.FromImage(tempImage))
-                {
-                    Pen skyBluePen = new Pen(Brushes.DeepSkyBlue);
-                    skyBluePen.Width = 1.0F;
-                    g.DrawRectangle(skyBluePen, new Rectangle((int)(width - y_center), (int)(height - x_center), width, height));
-                }
-                CopyRegionIntoImage(tempImage, new Rectangle((int)(width-x_center), (int)(height-y_center), width, height), image, new Rectangle(0, 0, width, height));
-                tempImage.Save("/var/www/html/maptile.png");
-                image.Save("/var/www/html/map.png");
             }
+        }
+
+        private int YtoPx(int y, double y_center, int tileSize, int height)
+        {
+            double px = (y - y_center) * tileSize + height / 2;
+            return (int)(Math.Round(px));
+        }
+
+        private int XtoPx(int x, double x_center, int tileSize, int width) {
+            double px = (x - x_center) * tileSize + width / 2;
+            return (int)(Math.Round(px));
         }
 
         private Bitmap DownloadTile(Uri url)
