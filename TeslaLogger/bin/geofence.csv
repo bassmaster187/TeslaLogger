@@ -924,6 +924,7 @@ Allego DE-Trier Wasserweg, 49.76327, 6.65785
 Allego DE-Quirla, 50.865762, 11.772602
 
 ARAL DE-Bochum, 51.501513, 7.258011
+ARAL DE-Braunschweig, 52.322159, 10.478146
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Aral Autohof, 53.502361,11.097974
@@ -931,6 +932,11 @@ ARAL DE-Wittenburg Aral Autohof, 53.502361,11.097974
 be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
+
+chargeIT DE-Memmingerberg, 47.990153, 10.230113
+chargeIT DE-Ungerhausen, 48.017723, 10.270062
+chargeIT DE-Nördlingen, 48.843866, 10.503327
+chargeIT DE-Petershausen, 48.416818, 11.478081
 
 CEZ CZ-Děčín, 50.770023, 14.207249
 CEZ CZ-Jenišov, 50.222744, 12.805259
@@ -1024,7 +1030,7 @@ EnBW DE-Gelsenkirchen, 51.521451, 7.073921
 EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Großberg, 48.972829,12.065386
 EnBW DE-Illertal West,48.125496,10.10963,20
-EnBW DE-Im Hegau West, 47.861479, 8.786121, 20
+EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
 EnBW DE-Hirschberg, 50.427867, 11.795703
@@ -1044,6 +1050,7 @@ EnBW DE-Lorsch Ost, 49.644328, 8.554109
 EnBW DE-Lorsch West, 49.643044, 8.551967
 EnBW DE-Naumburg Euronics, 51.145178,11.83287
 EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
+EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
 EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
@@ -1566,6 +1573,7 @@ Innogy DE-Soltau, 52.98422, 9.838614
 Innogy DE-Spreyer, 49.303853, 8.448678
 Innogy DE-Tornesch Pendlerparkplatz, 53.718479, 9.759092, 15
 Innogy DE-Treuen, 50.549113, 12.286336
+Innogy DE-Worms EWR AG, 49.630936, 8.356603
 
 Familia DE-Hamburg, 53.608366, 10.044162
 Familia DE-Osterholz-Scharmbeck, 53.232695, 8.754733
@@ -1600,6 +1608,7 @@ Kaufland DE-Berlin Tempelhof,52.468372,13.377201,20
 Kaufland DE-Baden-Baden, 48.782543, 8.20803, 20
 Kaufland DE-Bad Friedrichshall, 49.230394, 9.21173
 Kaufland DE-Bad Rappenau, 49.2362, 9.096765, 60
+Kaufland DE-Bergheim, 50.952842, 6.641612
 Kaufland DE-Dortmund Bornstr., 51.528575, 7.470953
 Kaufland DE-Dortmund Luisenglück, 51.477365, 7.432908
 Kaufland DE-Erfurt, 50.955663, 11.069766
@@ -1798,6 +1807,7 @@ DE Malsfeld Autohof, 51.086861, 9.485483, 5
 DE Mölln Baumarkt Werkers Welt, 53.622883, 10.682333
 DE Mölln Euronics, 53.640516,10.695056
 DE Mölln VW Riemer, 53.623707, 10.678989
+DE München Messe, 48.136766, 11.691608
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
 DE Offenbach Honda, 50.08437, 8.839102
@@ -1814,5 +1824,4 @@ DE Schönefeld Total, 52.370738, 13.526929
 DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Wetzlar Leica, 50.553084, 8.533377
-DE Worms EWR AG, 49.630936, 8.356603
 ES Gandia, 38.969986, -0.178789
