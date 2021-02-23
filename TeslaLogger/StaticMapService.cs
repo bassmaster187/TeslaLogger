@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -19,20 +20,26 @@ namespace TeslaLogger
             Park
         }
 
+        public enum StaticMapMode
+        {
+            Regular,
+            Dark
+        }
+
         private static Random random = new Random();
 
         private static StaticMapService _StaticMapService = null;
 
-        private readonly ConcurrentQueue<Tuple<int, int, StaticMapType>> queue = new ConcurrentQueue<Tuple<int, int, StaticMapType>>();
+        private readonly ConcurrentQueue<Tuple<int, int, StaticMapType, StaticMapMode>> queue = new ConcurrentQueue<Tuple<int, int, StaticMapType, StaticMapMode>>();
 
         private StaticMapService()
         {
             Logfile.Log("StaticMapService initialized");
-            Enqueue(new Tuple<int, int, StaticMapType>(465292, 471276, StaticMapType.Trip));
+            Enqueue(new Tuple<int, int, StaticMapType, StaticMapMode>(465292, 471276, StaticMapType.Trip, StaticMapMode.Dark));
         }
 
         public static StaticMapService GetSingleton()
-        { 
+        {
             if (_StaticMapService == null)
             {
                 _StaticMapService = new StaticMapService();
@@ -45,7 +52,7 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(Tuple<int, int, StaticMapType> request)
+        public void Enqueue(Tuple<int, int, StaticMapType, StaticMapMode> request)
         {
             queue.Enqueue(request);
         }
@@ -55,7 +62,7 @@ namespace TeslaLogger
             Tools.DebugLog("StaticMapService:Run()");
             try
             {
-                while(true)
+                while (true)
                 {
                     if (!queue.IsEmpty)
                     {
@@ -73,7 +80,7 @@ namespace TeslaLogger
         private void Work()
         {
             Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count);
-            if (queue.TryDequeue(out Tuple<int, int, StaticMapType> request))
+            if (queue.TryDequeue(out Tuple<int, int, StaticMapType, StaticMapMode> request))
             {
                 Tools.DebugLog("StaticMapService:Work() request:" + request.Item3);
                 int padding_x = 8;
@@ -91,23 +98,146 @@ namespace TeslaLogger
                 {
                     // trip
                     int zoom = CalculateZoom(coords, padding_x, padding_y, width, height, tileSize);
-                    Tools.DebugLog("StaticMapService:Work() zoom:" + zoom);
                     Tuple<double, double, double, double> extent = DetermineExtent(coords);
                     // calculate center point of map
                     double lat_center = (extent.Item1 + extent.Item3) / 2;
                     double lng_center = (extent.Item2 + extent.Item4) / 2;
                     double x_center = LonToX(lng_center, zoom);
                     double y_center = LatToY(lat_center, zoom);
+                    Tools.DebugLog($"StaticMapService:Work() zoom:{zoom} extent:{extent} lat_center:{lat_center} lng_center:{lng_center} x_center:{x_center} y_center:{y_center}");
                     using (Bitmap image = new Bitmap(width, height))
                     {
                         DrawMapLayer(image, width, height, x_center, y_center, tileSize, zoom);
-                        DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
+                        if (request.Item4 == StaticMapMode.Dark)
+                        {
+                            ApplyDarkMode(image);
+                        }
+                        //DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
                         image.Save("/var/www/html/map.png");
                     }
                 }
                 else
                 {
                     Tools.DebugLog("StaticMapService:Work() request unknown type: " + request.Item3);
+                }
+            }
+        }
+
+        private void ApplyDarkMode(Bitmap image)
+        {
+            AdjustBrightness(image, 0.6f);
+            InvertImage(image);
+            AdjustContrast(image, 1.3f);
+            HueRotate(image, -160);
+            AdjustSaturation(image, 0.3f);
+            AdjustBrightness(image, 0.7f);
+        }
+
+        // https://web.archive.org/web/20140825114946/http://bobpowell.net/image_contrast.aspx
+        private void AdjustContrast(Bitmap image, float contrast)
+        {
+            using (ImageAttributes ia = new ImageAttributes())
+            {
+                //create the scaling matrix
+                ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                new float[]{contrast, 0f,0f,0f,0f},
+                new float[]{0f, contrast, 0f,0f,0f},
+                new float[]{0f,0f, contrast, 0f,0f},
+                new float[]{0f,0f,0f,1f,0f},
+                new float[]{0.001f,0.001f,0.001f,0f,1f}
+                });
+                ia.SetColorMatrix(cm);
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                }
+            }
+        }
+
+        // https://github.com/madebits/msnet-colormatrix-hue-saturation/blob/master/C%23/QColorMatrix.cs
+        private void AdjustSaturation(Bitmap image, float saturation)
+        {
+            float satCompl = 1.0f - saturation;
+            float satComplR = 0.3086f * satCompl;
+            float satComplG = 0.6094f * satCompl;
+            float satComplB = 0.0820f * satCompl;
+
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] { satComplR + saturation, satComplR, satComplR, 0, 0 },
+                  new float[] { satComplG, satComplG + saturation, satComplG, 0, 0},
+                  new float[] { satComplB, satComplB, satComplB + saturation, 0, 0},
+                  new float[] {0, 0, 0, 1, 0},
+                  new float[] {0, 0, 0, 0, 1}
+            });
+            using (ImageAttributes ia = new ImageAttributes())
+            {
+                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                }
+            }
+        }
+
+        // https://stackoverflow.com/questions/29787258/how-do-i-rotate-hue-in-a-picturebox-image
+        private void HueRotate(Bitmap image, float degrees)
+        {
+            double r = degrees * System.Math.PI / 180; // degrees to radians
+            float[][] colorMatrixElements = {
+            new float[] {(float)Math.Cos(r),  (float)Math.Sin(r),  0,  0, 0},
+            new float[] {(float)-Math.Sin(r),  (float)-Math.Cos(r),  0,  0, 0},
+            new float[] {0,  0,  2,  0, 0},
+            new float[] {0,  0,  0,  1, 0},
+            new float[] {0, 0, 0, 0, 1}};
+
+            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+            using (ImageAttributes ia = new ImageAttributes())
+            {
+                ia.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                }
+            }
+        }
+
+        // https://mariusbancila.ro/blog/2009/11/13/using-colormatrix-for-creating-negative-image/
+        private void InvertImage(Bitmap image)
+        {
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                // create the negative color matrix
+                ColorMatrix colorMatrix = new ColorMatrix();
+                colorMatrix.Matrix00 = colorMatrix.Matrix11 = colorMatrix.Matrix22 = -1f;
+                colorMatrix.Matrix33 = colorMatrix.Matrix44 = 1f;
+                // create some image attributes
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetColorMatrix(colorMatrix);
+                g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
+                0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+            }
+        }
+
+        // http://csharphelper.com/blog/2014/10/use-an-imageattributes-object-to-adjust-an-images-brightness-in-c/
+        private void AdjustBrightness(Image image, float brightness)
+        {
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {brightness, 0, 0, 0, 0},
+                new float[] {0, brightness, 0, 0, 0},
+                new float[] {0, 0, brightness, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1},
+            });
+            using (ImageAttributes ia = new ImageAttributes())
+            {
+                ia.SetColorMatrix(cm);
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
                 }
             }
         }
@@ -130,7 +260,7 @@ namespace TeslaLogger
             }
         }
 
-        private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType> request)
+        private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType, StaticMapMode> request)
         {
             List<Tuple<double, double>> coords = new List<Tuple<double, double>>();
             int CarID = int.MinValue;
@@ -236,7 +366,8 @@ ORDER BY
             return (int)(Math.Round(px));
         }
 
-        private int XtoPx(int x, double x_center, int tileSize, int width) {
+        private int XtoPx(int x, double x_center, int tileSize, int width)
+        {
             double px = (x - x_center) * tileSize + width / 2;
             return (int)(Math.Round(px));
         }
@@ -264,16 +395,18 @@ ORDER BY
 
         private int CalculateZoom(List<Tuple<double, double>> coords, int padding_x, int padding_y, int width, int height, int tileSize)
         {
+            Tuple<double, double, double, double> extent = DetermineExtent(coords);
             for (int zoom = 17; zoom > 0; zoom--)
             {
-                Tuple<double, double, double, double> extent = DetermineExtent(coords);
                 double _width = (LonToX(extent.Item3, zoom) - LonToX(extent.Item1, zoom)) * tileSize;
-                if (_width > (width - padding_x * 2)) {
+                if (_width > (width - padding_x * 2))
+                {
                     continue;
                 }
 
                 double _height = (LatToY(extent.Item2, zoom) - LatToY(extent.Item4, zoom)) * tileSize;
-                if (_height > (height - padding_y * 2)) {
+                if (_height > (height - padding_y * 2))
+                {
                     continue;
                 }
 
