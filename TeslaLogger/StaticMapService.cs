@@ -26,6 +26,14 @@ namespace TeslaLogger
             Dark
         }
 
+        private enum StaticMapIcon
+        {
+            Start,
+            End,
+            Park,
+            Charge
+        }
+
         private static Random random = new Random();
 
         private static StaticMapService _StaticMapService = null;
@@ -102,9 +110,10 @@ namespace TeslaLogger
                     // calculate center point of map
                     double lat_center = (extent.Item1 + extent.Item3) / 2;
                     double lng_center = (extent.Item2 + extent.Item4) / 2;
-                    double x_center = LonToX(lng_center, zoom);
-                    double y_center = LatToY(lat_center, zoom);
-                    Tools.DebugLog($"StaticMapService:Work() zoom:{zoom} extent:{extent} lat_center:{lat_center} lng_center:{lng_center} x_center:{x_center} y_center:{y_center}");
+                    double x_center = LonToTileX(lng_center, zoom);
+                    double y_center = LatToTileY(lat_center, zoom);
+                    Tools.DebugLog($"StaticMapService:Work() zoom:{zoom} extent:{extent} lat_center:{lat_center} lng_center:{lng_center} x_center:{x_center} y_center:{y_center} width:{width} height:{height}");
+                    Tools.DebugLog($"extent {extent.Item2} LonToX:{LonToTileX(extent.Item2, zoom)} intLonToX:{(int)LonToTileX(extent.Item2, zoom)} XtoPx:{XtoPx((int)LonToTileX(extent.Item2, zoom), x_center, tileSize, width)}");
                     using (Bitmap image = new Bitmap(width, height))
                     {
                         DrawMapLayer(image, width, height, x_center, y_center, tileSize, zoom);
@@ -112,7 +121,7 @@ namespace TeslaLogger
                         {
                             ApplyDarkMode(image);
                         }
-                        //DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
+                        DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
                         image.Save("/var/www/html/map.png");
                     }
                 }
@@ -128,9 +137,10 @@ namespace TeslaLogger
             AdjustBrightness(image, 0.6f);
             InvertImage(image);
             AdjustContrast(image, 1.3f);
-            HueRotate(image, -160);
+            HueRotate(image, -170);
             AdjustSaturation(image, 0.3f);
             AdjustBrightness(image, 0.7f);
+            AdjustContrast(image, 1.3f);
         }
 
         // https://web.archive.org/web/20140825114946/http://bobpowell.net/image_contrast.aspx
@@ -246,18 +256,47 @@ namespace TeslaLogger
         {
             using (Graphics graphics = Graphics.FromImage(image))
             {
+                // draw Trip line
                 Pen bluePen = new Pen(Color.Blue, 1);
+                bluePen.Width = 2;
                 for (int index = 1; index < coords.Count; index++)
                 {
-                    Tools.DebugLog($"coord {coords[index - 1].Item2},{coords[index - 1].Item1}->{LonToX(coords[index - 1].Item2, zoom)}{LatToY(coords[index - 1].Item1, zoom)}");
-                    graphics.DrawLine(bluePen,
-                        (int)LonToX(coords[index - 1].Item2, zoom),
-                        (int)LatToY(coords[index - 1].Item1, zoom),
-                        (int)LonToX(coords[index].Item2, zoom),
-                        (int)LatToY(coords[index].Item1, zoom)
-                        );
+                    int x1 = XtoPx(LonToTileX(coords[index - 1].Item2, zoom), x_center, tileSize, image.Width);
+                    int y1 = YtoPx(LatToTileY(coords[index - 1].Item1, zoom), y_center, tileSize, image.Height);
+                    int x2 = XtoPx(LonToTileX(coords[index].Item2, zoom), x_center, tileSize, image.Width);
+                    int y2 = YtoPx(LatToTileY(coords[index].Item1, zoom), y_center, tileSize, image.Height);
+                    if (x1 != x2 || y1 != y2)
+                    {
+                        Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
+                        graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                    }
                 }
+                DrawIcon(image, coords.First(), StaticMapIcon.Start, zoom, x_center, y_center, tileSize);
+                DrawIcon(image, coords.Last(), StaticMapIcon.End, zoom, x_center, y_center, tileSize);
             }
+        }
+
+        private void DrawIcon(Bitmap image, Tuple<double, double> coord, StaticMapIcon icon, int zoom, double x_center, double y_center, int tileSize)
+        {
+            SolidBrush brush;
+            switch (icon)
+            {
+                case StaticMapIcon.Charge:
+                    brush = new SolidBrush(Color.Yellow);
+                    break;
+                case StaticMapIcon.End:
+                    brush = new SolidBrush(Color.Green);
+                    break;
+                case StaticMapIcon.Park:
+                    brush = new SolidBrush(Color.Blue);
+                    break;
+                case StaticMapIcon.Start:
+                    brush = new SolidBrush(Color.Red);
+                    break;
+            }
+            int x = XtoPx(LonToTileX(coord.Item2, zoom), x_center, tileSize, image.Width);
+            int y = YtoPx(LatToTileY(coord.Item1, zoom), y_center, tileSize, image.Height);
+            Rectangle rect = new Rectangle(x-4, y-4, 8, 8);
         }
 
         private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType, StaticMapMode> request)
@@ -360,15 +399,17 @@ ORDER BY
             }
         }
 
-        private int YtoPx(int y, double y_center, int tileSize, int height)
+        // transform tile number to pixel on image canvas
+        private int YtoPx(double y, double y_center, int tileSize, int height)
         {
-            double px = (y - y_center) * tileSize + height / 2;
+            double px = (y - y_center) * tileSize + height / 2.0;
             return (int)(Math.Round(px));
         }
 
-        private int XtoPx(int x, double x_center, int tileSize, int width)
+        // transform tile number to pixel on image canvas
+        private int XtoPx(double x, double x_center, int tileSize, int width)
         {
-            double px = (x - x_center) * tileSize + width / 2;
+            double px = (x - x_center) * tileSize + width / 2.0;
             return (int)(Math.Round(px));
         }
 
@@ -398,13 +439,13 @@ ORDER BY
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
             for (int zoom = 17; zoom > 0; zoom--)
             {
-                double _width = (LonToX(extent.Item3, zoom) - LonToX(extent.Item1, zoom)) * tileSize;
+                double _width = (LonToTileX(extent.Item3, zoom) - LonToTileX(extent.Item1, zoom)) * tileSize;
                 if (_width > (width - padding_x * 2))
                 {
                     continue;
                 }
 
-                double _height = (LatToY(extent.Item2, zoom) - LatToY(extent.Item4, zoom)) * tileSize;
+                double _height = (LatToTileY(extent.Item2, zoom) - LatToTileY(extent.Item4, zoom)) * tileSize;
                 if (_height > (height - padding_y * 2))
                 {
                     continue;
@@ -416,23 +457,16 @@ ORDER BY
             return 0;
         }
 
-        private double LonToX(double lon, int zoom)
+        // transform longitude to tile number
+        private double LonToTileX(double lon, int zoom)
         {
-            if (lon < -180 || lon > 180)
-            {
-                lon = (lon + 180) % 360 - 180;
-            }
-
-            return ((lon + 180.0) / 360) * Math.Pow(2, zoom);
+            return ((lon + 180.0) / 360.0) * Math.Pow(2.0, zoom);
         }
 
-        private double LatToY(double lat, int zoom)
+        // transform latitude to tile number
+        private double LatToTileY(double lat, int zoom)
         {
-            if (lat < -90 || lat > 90)
-            {
-                lat = (lat + 90) % 180 - 90;
-            }
-            return (1 - Math.Log(Math.Tan(lat * Math.PI / 180) + 1 / Math.Cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.Pow(2, zoom);
+            return (1.0 - Math.Log(Math.Tan(lat * Math.PI / 180.0) + 1 / Math.Cos(lat * Math.PI / 180.0)) / Math.PI) / 2.0 * Math.Pow(2.0, zoom);
         }
 
         private Tuple<double, double, double, double> DetermineExtent(List<Tuple<double, double>> coords)
