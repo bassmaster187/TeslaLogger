@@ -980,10 +980,10 @@ WHERE
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                                cmd.Parameters.AddWithValue("@cost_per_kwh", ref_cost_per_kwh * charge_energy_added);
+                                cmd.Parameters.AddWithValue("@cost_per_kwh", ref_cost_per_kwh);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
-                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_kwh {ref_cost_per_kwh * charge_energy_added}");
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_kwh {ref_cost_per_kwh}");
                             }
                         }
                     }
@@ -1023,10 +1023,10 @@ WHERE
                             {
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                                cmd.Parameters.AddWithValue("@cost_per_minute", ref_cost_per_minute * duration);
+                                cmd.Parameters.AddWithValue("@cost_per_minute", ref_cost_per_minute);
                                 Tools.DebugLog(cmd);
                                 int rowsUpdated = cmd.ExecuteNonQuery();
-                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_minute {ref_cost_per_minute * duration}");
+                                car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_minute {ref_cost_per_minute}");
                             }
                         }
                     }
