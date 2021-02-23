@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace TeslaLogger
         private StaticMapService()
         {
             Logfile.Log("StaticMapService initialized");
-            Enqueue(new Tuple<int, int, StaticMapType, StaticMapMode>(465292, 471276, StaticMapType.Trip, StaticMapMode.Dark));
+            Enqueue(new Tuple<int, int, StaticMapType, StaticMapMode>(465292, 471276, StaticMapType.Trip, StaticMapMode.Regular));
         }
 
         public static StaticMapService GetSingleton()
@@ -256,23 +257,29 @@ namespace TeslaLogger
         {
             using (Graphics graphics = Graphics.FromImage(image))
             {
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 // draw Trip line
-                Pen bluePen = new Pen(Color.Blue, 1);
-                bluePen.Width = 2;
-                for (int index = 1; index < coords.Count; index++)
+                using (Pen bluePen = new Pen(Color.Blue, 2))
                 {
-                    int x1 = XtoPx(LonToTileX(coords[index - 1].Item2, zoom), x_center, tileSize, image.Width);
-                    int y1 = YtoPx(LatToTileY(coords[index - 1].Item1, zoom), y_center, tileSize, image.Height);
-                    int x2 = XtoPx(LonToTileX(coords[index].Item2, zoom), x_center, tileSize, image.Width);
-                    int y2 = YtoPx(LatToTileY(coords[index].Item1, zoom), y_center, tileSize, image.Height);
-                    if (x1 != x2 || y1 != y2)
+                    using (Pen whitePen = new Pen(Color.White, 4))
                     {
-                        Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
-                        graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                        for (int index = 1; index < coords.Count; index++)
+                        {
+                            int x1 = XtoPx(LonToTileX(coords[index - 1].Item2, zoom), x_center, tileSize, image.Width);
+                            int y1 = YtoPx(LatToTileY(coords[index - 1].Item1, zoom), y_center, tileSize, image.Height);
+                            int x2 = XtoPx(LonToTileX(coords[index].Item2, zoom), x_center, tileSize, image.Width);
+                            int y2 = YtoPx(LatToTileY(coords[index].Item1, zoom), y_center, tileSize, image.Height);
+                            if (x1 != x2 || y1 != y2)
+                            {
+                                Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
+                                graphics.DrawLine(whitePen, x1, y1, x2, y2);
+                                graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                            }
+                        }
+                        DrawIcon(image, coords.First(), StaticMapIcon.Start, zoom, x_center, y_center, tileSize);
+                        DrawIcon(image, coords.Last(), StaticMapIcon.End, zoom, x_center, y_center, tileSize);
                     }
                 }
-                DrawIcon(image, coords.First(), StaticMapIcon.Start, zoom, x_center, y_center, tileSize);
-                DrawIcon(image, coords.Last(), StaticMapIcon.End, zoom, x_center, y_center, tileSize);
             }
         }
 
@@ -293,10 +300,28 @@ namespace TeslaLogger
                 case StaticMapIcon.Start:
                     brush = new SolidBrush(Color.Red);
                     break;
+                default:
+                    brush = new SolidBrush(Color.White);
+                    break;
             }
             int x = XtoPx(LonToTileX(coord.Item2, zoom), x_center, tileSize, image.Width);
             int y = YtoPx(LatToTileY(coord.Item1, zoom), y_center, tileSize, image.Height);
-            Rectangle rect = new Rectangle(x-4, y-4, 8, 8);
+            Rectangle rect = new Rectangle(x - 4, y - 10, 8, 8);
+            Point[] triangle = new Point[] { new Point(x - 4, y - 6), new Point(x, y), new Point(x + 4, y - 6) };
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                using (Pen whitePen = new Pen(Color.White, 1))
+                {
+                    g.PixelOffsetMode = PixelOffsetMode.Half;
+                    g.FillPie(brush, rect, 180, 180);
+                    g.FillPolygon(brush, triangle);
+                    g.DrawArc(whitePen, rect, 180, 180);
+                    g.DrawLine(whitePen, triangle[0], triangle[1]);
+                    g.DrawLine(whitePen, triangle[1], triangle[2]);
+                }
+            }
+            brush.Dispose();
         }
 
         private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType, StaticMapMode> request)
