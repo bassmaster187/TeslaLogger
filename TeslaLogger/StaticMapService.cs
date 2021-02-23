@@ -39,12 +39,11 @@ namespace TeslaLogger
 
         private static StaticMapService _StaticMapService = null;
 
-        private readonly ConcurrentQueue<Tuple<int, int, StaticMapType, StaticMapMode>> queue = new ConcurrentQueue<Tuple<int, int, StaticMapType, StaticMapMode>>();
+        private readonly ConcurrentQueue<Tuple<int, int, int, int, StaticMapType, StaticMapMode>> queue = new ConcurrentQueue<Tuple<int, int, int, int, StaticMapType, StaticMapMode>>();
 
         private StaticMapService()
         {
             Logfile.Log("StaticMapService initialized");
-            Enqueue(new Tuple<int, int, StaticMapType, StaticMapMode>(465292, 471276, StaticMapType.Trip, StaticMapMode.Regular));
         }
 
         public static StaticMapService GetSingleton()
@@ -61,7 +60,12 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(Tuple<int, int, StaticMapType, StaticMapMode> request)
+        public void Enqueue(int startPosID, int endPosID, int width, int height, StaticMapType type, StaticMapMode mode)
+        {
+            Enqueue(new Tuple<int, int, int, int, StaticMapType, StaticMapMode>(startPosID, endPosID, width, height, type, mode));
+        }
+
+        private void Enqueue(Tuple<int, int, int, int, StaticMapType, StaticMapMode> request)
         {
             queue.Enqueue(request);
         }
@@ -89,46 +93,94 @@ namespace TeslaLogger
         private void Work()
         {
             Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count);
-            if (queue.TryDequeue(out Tuple<int, int, StaticMapType, StaticMapMode> request))
+            if (queue.TryDequeue(out Tuple<int, int, int, int, StaticMapType, StaticMapMode> request))
             {
-                Tools.DebugLog("StaticMapService:Work() request:" + request.Item3);
-                int padding_x = 8;
-                int padding_y = 8;
-                int width = 240;
-                int height = (int)(width / 1.618033);
+                Tools.DebugLog($"StaticMapService:Work() request:{request.Item5} {request.Item1}->{request.Item2}");
+                int padding_x = 12;
+                int padding_y = 12;
+                int width = request.Item3 > 0 ? request.Item3 : 240;
+                int height = request.Item4 > 0 ? request.Item4 : (int)(width / 1.618033);
                 int tileSize = 256;
                 List<Tuple<double, double>> coords = TripToCoords(request);
-                if (coords.Count == 1 && (request.Item3 == StaticMapType.Park || request.Item3 == StaticMapType.Charge))
-                {
-                    // park or charge
-                    int zoom = 19; // max zoom
-                }
-                else if (request.Item3 == StaticMapType.Trip && coords.Count > 1)
+                Tuple<double, double, double, double> extent = DetermineExtent(coords);
+                // calculate center point of map
+                double lat_center = (extent.Item1 + extent.Item3) / 2;
+                double lng_center = (extent.Item2 + extent.Item4) / 2;
+                int zoom = 19; // max zoom
+                double x_center = LonToTileX(lng_center, zoom);
+                double y_center = LatToTileY(lat_center, zoom);
+                if (request.Item5 == StaticMapType.Trip && coords.Count > 1)
                 {
                     // trip
-                    int zoom = CalculateZoom(coords, padding_x, padding_y, width, height, tileSize);
-                    Tuple<double, double, double, double> extent = DetermineExtent(coords);
-                    // calculate center point of map
-                    double lat_center = (extent.Item1 + extent.Item3) / 2;
-                    double lng_center = (extent.Item2 + extent.Item4) / 2;
-                    double x_center = LonToTileX(lng_center, zoom);
-                    double y_center = LatToTileY(lat_center, zoom);
-                    Tools.DebugLog($"StaticMapService:Work() zoom:{zoom} extent:{extent} lat_center:{lat_center} lng_center:{lng_center} x_center:{x_center} y_center:{y_center} width:{width} height:{height}");
-                    Tools.DebugLog($"extent {extent.Item2} LonToX:{LonToTileX(extent.Item2, zoom)} intLonToX:{(int)LonToTileX(extent.Item2, zoom)} XtoPx:{XtoPx((int)LonToTileX(extent.Item2, zoom), x_center, tileSize, width)}");
-                    using (Bitmap image = new Bitmap(width, height))
+                    zoom = CalculateZoom(coords, padding_x, padding_y, width, height, tileSize);
+                    x_center = LonToTileX(lng_center, zoom);
+                    y_center = LatToTileY(lat_center, zoom);
+                }
+                using (Bitmap map = DrawMap(request, width, height, tileSize, coords, zoom, x_center, y_center))
+                {
+                    if (coords.Count == 1 && (request.Item5 == StaticMapType.Park || request.Item5 == StaticMapType.Charge))
                     {
-                        DrawMapLayer(image, width, height, x_center, y_center, tileSize, zoom);
-                        if (request.Item4 == StaticMapMode.Dark)
+                        // park or charge
+                        StaticMapIcon icon = StaticMapIcon.Charge;
+                        if (request.Item5 == StaticMapType.Park)
                         {
-                            ApplyDarkMode(image);
+                            icon = StaticMapIcon.Park;
                         }
-                        DrawTrip(image, coords, zoom, x_center, y_center, tileSize);
-                        image.Save("/var/www/html/map.png");
+                        DrawIcon(map, coords.First(), icon, zoom, x_center, y_center, tileSize);
+                    }
+                    else if (request.Item5 == StaticMapType.Trip && coords.Count > 1)
+                    {
+                        // trip
+                        DrawTrip(map, coords, zoom, x_center, y_center, tileSize);
+                    }
+                    else
+                    {
+                        Tools.DebugLog("StaticMapService:Work() request unknown type: " + request.Item5);
+                        return;
+                    }
+                    try
+                    {
+                        map.Save(FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png.tmp");
+                        File.Move(FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png.tmp", FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
                     }
                 }
-                else
+            }
+        }
+
+        private Bitmap DrawMap(Tuple<int, int, int, int, StaticMapType, StaticMapMode> request, int width, int height, int tileSize, List<Tuple<double, double>> coords, int zoom, double x_center, double y_center)
+        {
+            Bitmap image = new Bitmap(width, height);
+            {
+                DrawMapLayer(image, width, height, x_center, y_center, tileSize, zoom);
+                if (request.Item6 == StaticMapMode.Dark)
                 {
-                    Tools.DebugLog("StaticMapService:Work() request unknown type: " + request.Item3);
+                    ApplyDarkMode(image);
+                }
+                DrawAttribution(image);
+            }
+            return image;
+        }
+
+        private void DrawAttribution(Bitmap image)
+        {
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                string attribution = "(C) OpenStreetMap";
+                using (Font drawFont = new Font("Arial", 8))
+                {
+                    using (SolidBrush drawBrush = new SolidBrush(Color.Black))
+                    {
+                        using (StringFormat drawFormat = new StringFormat())
+                        {
+                            SizeF size = g.MeasureString(attribution, drawFont);
+                            g.DrawString(attribution, drawFont, drawBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                        }
+                    }
                 }
             }
         }
@@ -271,11 +323,12 @@ namespace TeslaLogger
                             int y2 = YtoPx(LatToTileY(coords[index].Item1, zoom), y_center, tileSize, image.Height);
                             if (x1 != x2 || y1 != y2)
                             {
-                                Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
+                                // Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
                                 graphics.DrawLine(whitePen, x1, y1, x2, y2);
                                 graphics.DrawLine(bluePen, x1, y1, x2, y2);
                             }
                         }
+                        // start and end icon
                         DrawIcon(image, coords.First(), StaticMapIcon.Start, zoom, x_center, y_center, tileSize);
                         DrawIcon(image, coords.Last(), StaticMapIcon.End, zoom, x_center, y_center, tileSize);
                     }
@@ -324,7 +377,7 @@ namespace TeslaLogger
             brush.Dispose();
         }
 
-        private List<Tuple<double, double>> TripToCoords(Tuple<int, int, StaticMapType, StaticMapMode> request)
+        private List<Tuple<double, double>> TripToCoords(Tuple<int, int, int, int, StaticMapType, StaticMapMode> request)
         {
             List<Tuple<double, double>> coords = new List<Tuple<double, double>>();
             int CarID = int.MinValue;
@@ -462,15 +515,15 @@ ORDER BY
         private int CalculateZoom(List<Tuple<double, double>> coords, int padding_x, int padding_y, int width, int height, int tileSize)
         {
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
-            for (int zoom = 17; zoom > 0; zoom--)
+            for (int zoom = 18; zoom > 0; zoom--)
             {
-                double _width = (LonToTileX(extent.Item3, zoom) - LonToTileX(extent.Item1, zoom)) * tileSize;
+                double _width = (LonToTileX(extent.Item4, zoom) - LonToTileX(extent.Item2, zoom)) * tileSize;
                 if (_width > (width - padding_x * 2))
                 {
                     continue;
                 }
 
-                double _height = (LatToTileY(extent.Item2, zoom) - LatToTileY(extent.Item4, zoom)) * tileSize;
+                double _height = (LatToTileY(extent.Item1, zoom) - LatToTileY(extent.Item3, zoom)) * tileSize;
                 if (_height > (height - padding_y * 2))
                 {
                     continue;
