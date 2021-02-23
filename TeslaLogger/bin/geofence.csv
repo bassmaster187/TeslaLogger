@@ -594,7 +594,7 @@ Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer, 61.243236, 10.434457
 Supercharger PL-Ciechocinek, 52.874469, 18.773758
 Supercharger PL-Katowice, 50.254594, 19.046594
-Supercharger PL-Katowice-E.Leclerc, 50.219000, 18.990329
+Supercharger PL-Katowice-E.Leclerc, 50.220135, 18.990248
 Supercharger PL-Kostomłoty, 51.037361, 16.584208
 Supercharger PL-Poznań, 52.400285, 16.893091
 Supercharger PL-Radom, 51.379569, 21.125477
@@ -1013,6 +1013,7 @@ EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
 EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
 EnBW DE-Beckum Vellern Süd,51.79106,8.073932
+EnBW DE-Bitterfeld, 51.636289,12.19907
 EnBW DE-Bobingen, 48.263993, 10.840595, 20
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
@@ -1021,8 +1022,10 @@ EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
 EnBW DE-Ebersberg, 48.096569, 11.961316
+EnBW DE-Edelzell, 50.529549,9.690535
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
+EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
 EnBW DE-Friesoythe, 53.016216, 7.852262, 20
 EnBW DE-Gammertingen Bahnhof, 48.250595,9.217022
 EnBW DE-Gammertingen Norma, 48.246655,9.222877
@@ -1033,6 +1036,7 @@ EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
+EnBW DE-Hirschaid, 49.819734,11.000681
 EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
@@ -1061,6 +1065,7 @@ EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
+EnBW DE-Oberpfälzer Alp Nord, 49.424438,11.690378
 EnBW DE-Ostfildern, 48.70475, 9.249091
 EnBW DE-Porta Westfalica, 52.26012,8.90345
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
@@ -1072,6 +1077,8 @@ EnBW DE-Schongau, 47.808188, 10.877717
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Sindelfingen Sindelfinger Wald, 48.741321,9.033325
+EnBW DE-Straubing Landshuter Straße, 48.867521,12.573991
+EnBW DE-Straubing Ratiborstraße, 48.886335,12.615851
 EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 10
 EnBW DE-Taufkirchen, 48.352605,12.129578,10
 EnBW DE-Ulm, 48.456880, 10.029673, 15
@@ -1082,6 +1089,7 @@ EnBW DE-Winningen Moseltal Ost, 50.316586, 7.4988, 10
 EnBW DE-Winningen Moseltal West, 50.317548, 7.4978, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+EnBW DE-Wülferode West, 52.338094,9.86385
 EnBW DE-Urbach, 48.810151, 9.570358
 
 EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
@@ -1585,6 +1593,8 @@ Fortum NO-Alta, 69.966743, 23.268569
 Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
 Fortum NO-Sortland, 68.704914, 15.414759
 
+Greenway PL-Bielsko-Biała, 49.803432,19.049971
+Greenway PL-Góra Libertowska, 49.980812,19.909254
 Greenway PL-Grajewo, 53.632866,22.475282
 Greenway PL-Kowale,54.309147,18.561917
 Greenway PL-Lublin,51.282566,22.570069
@@ -1695,6 +1705,7 @@ Lidl CH-Schlieren, 47.399469, 8.432234
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
+Lidl DE-Altenmelle, 52.192974,8.353423
 Lidl DE-Aschaffenburg Spessartstr., 49.965614, 9.154857
 Lidl DE-Berlin Buckower Damm, 52.426346, 13.435003
 Lidl DE-Berlin Einbecker Straße, 52.509057, 13.50636
@@ -1728,6 +1739,7 @@ Lidl SE-Falkenberg, 56.91611,12.502524
 
 MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
+MOL CZ-Velké Meziříčí, 49.345539,16.040024
 
 REWE DE-Bremen, 53.136455, 8.739926
 
