@@ -925,6 +925,7 @@ Allego DE-Quirla, 50.865762, 11.772602
 
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Braunschweig, 52.322159, 10.478146
+ARAL DE-Merklingen, 48.516282, 9.759379
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Aral Autohof, 53.502361,11.097974
@@ -1030,6 +1031,7 @@ EnBW DE-Gelsenkirchen, 51.521451, 7.073921
 EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Großberg, 48.972829,12.065386
 EnBW DE-Illertal West,48.125496,10.10963,20
+ENBW DE-Illertal Ost, 48.124722, 10.112120, 20
 EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
@@ -1730,6 +1732,15 @@ MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
 
 REWE DE-Bremen, 53.136455, 8.739926
+
+schneller-strom-tanken, DE-Ehingen, 48.284649, 9.721507
+schneller-strom-tanken, DE-Dillingen, 48.579583, 10.496334
+schneller-strom-tanken, DE-Schelklingen, 48.375628, 9.733888
+schneller-strom-tanken, DE-Staig, 48.299474, 9.990759
+schneller-strom-tanken, DE-Oberstadion, 48.188065, 9.691077
+schneller-strom-tanken, DE-Herrsching, 47.998208, 11.171261
+schneller-strom-tanken, DE-Singen, 47.753819, 8.854614
+schneller-strom-tanken, DE-Villingen-Schwenningen, 48.060895, 8.454762
 
 ShellRecharge DE-Berg, 50.372, 11.787795
 ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
