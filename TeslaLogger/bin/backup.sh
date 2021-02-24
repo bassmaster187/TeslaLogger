@@ -9,8 +9,11 @@ if test -f "/tmp/teslalogger-DOCKER"; then
 else
     mysqldump -uroot -pteslalogger  --single-transaction --routines --triggers teslalogger | gzip > /etc/teslalogger/backup/mysqldump$NOW.gz
 fi
+
 cd /etc/teslalogger/Exception 
-tar -czf ex_$(date +%Y%m%d%H%M%S).tar.gz --remove-files *.txt 
+if ls *.txt >/dev/null 2>&1; then
+    tar -czf ex_$(date +%Y%m%d%H%M%S).tar.gz --remove-files *.txt
+fi
 
 if test -f "/etc/teslalogger/my-backup.sh"; then
     source /etc/teslalogger/my-backup.sh

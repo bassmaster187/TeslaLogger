@@ -160,6 +160,17 @@ namespace TeslaLogger
             return path;
         }
 
+        internal static string GetMapCachePath()
+        {
+            string path = Path.Combine(GetExecutingPath(), "MAP-Data");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
+        }
+
         /// <summary>
         /// This is needed for mono. On some distributions (e.g. Docker) only the filename as a path
         /// will write the file in / (root)
