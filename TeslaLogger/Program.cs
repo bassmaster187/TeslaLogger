@@ -37,6 +37,8 @@ namespace TeslaLogger
 
                 InitOpenTopoDataService();
 
+                InitStaticMapService();
+
                 UpdateTeslalogger.StopComfortingMessagesThread();
 
                 MQTTClient.StartMQTTClient();
@@ -389,6 +391,26 @@ namespace TeslaLogger
         {
             Logfile.Log("Exit: " + _msg);
             Environment.Exit(_exitcode);
+        }
+
+        private static void InitStaticMapService()
+        {
+            try
+            {
+                Thread threadStaticMapService = new Thread(() =>
+                {
+                    StaticMapService.GetSingleton().Run();
+                })
+                {
+                    Name = "StaticMapServiceThread"
+                };
+                threadStaticMapService.Start();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
         }
     }
 }
