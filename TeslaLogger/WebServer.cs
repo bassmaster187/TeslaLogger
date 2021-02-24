@@ -207,6 +207,10 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
                         break;
+                    // static map service
+                    case bool _ when request.Url.LocalPath.Equals("/get/map"):
+                        GetStaticMap(request, response);
+                        break;
                     // send car commands
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
                         SendCarCommand(request, response);
@@ -258,6 +262,121 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            int startPosID = 0;
+            int endPosID = 0;
+            int width = 240;
+            int height = 0;
+            StaticMapService.StaticMapType type = StaticMapService.StaticMapType.Trip;
+            StaticMapService.StaticMapMode mode = StaticMapService.StaticMapMode.Regular;
+            if (request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    switch (key)
+                    {
+                        case "start":
+                            _ = int.TryParse(request.QueryString.GetValues(key)[0], out startPosID);
+                            break;
+                        case "end":
+                            _ = int.TryParse(request.QueryString.GetValues(key)[0], out endPosID);
+                            break;
+                        case "width":
+                            _ = int.TryParse(request.QueryString.GetValues(key)[0], out width);
+                            break;
+                        case "height":
+                            _ = int.TryParse(request.QueryString.GetValues(key)[0], out height);
+                            break;
+                        case "mode":
+                            if ("dark".Equals(request.QueryString.GetValues(key)[0]))
+                            {
+                                mode = StaticMapService.StaticMapMode.Dark;
+                            }
+                            break;
+                        case "type":
+                            if ("park".Equals(request.QueryString.GetValues(key)[0]))
+                            {
+                                type = StaticMapService.StaticMapType.Park;
+                            }
+                            else if ("charge".Equals(request.QueryString.GetValues(key)[0]))
+                            {
+                                type = StaticMapService.StaticMapType.Charge;
+                            }
+                            break;
+                    }
+                }
+            }
+            if (startPosID != 0 && endPosID != 0)
+            {
+                try
+                {
+                    string path = FileManager.GetMapCachePath() + $"map_{startPosID}_{endPosID}.png";
+                    // check file age
+                    if (File.Exists(path))
+                    {
+                        if ((DateTime.UtcNow - File.GetCreationTimeUtc(path)).TotalDays > 90)
+                        {
+                            File.Delete(path);
+                        }
+                    }
+                    if (File.Exists(path))
+                    {
+                        using (FileStream fs = File.OpenRead(path))
+                        {
+                            WritePNGStream(response, fs);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // order static map generation
+                        StaticMapService.GetSingleton().Enqueue(startPosID, endPosID, width, height, type, mode);
+                        // wait
+                        for (int i = 0; i < 30; i++)
+                        {
+                            Thread.Sleep(1000);
+                            if (File.Exists(path))
+                            {
+                                using (FileStream fs = File.OpenRead(path))
+                                {
+                                    WritePNGStream(response, fs);
+                                    return;
+                                }
+                            }
+                        }
+                        WriteString(response, "Error generating map took too long");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+            }
+            else
+            {
+                try
+                {
+                    WriteString(response, "Error in map request");
+                }
+                catch (Exception ex)
+                {
+                    // ignore
+                }
+            }
+        }
+
+        private static void WritePNGStream(HttpListenerResponse response, Stream fs)
+        {
+            response.ContentLength64 = fs.Length;
+            response.SendChunked = false;
+            response.ContentType = "image/png";
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.StatusDescription = "OK";
+            fs.CopyTo(response.OutputStream);
+            response.OutputStream.Close();
         }
 
         private void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
