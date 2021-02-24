@@ -281,10 +281,12 @@ namespace TeslaLogger
                 colorMatrix.Matrix00 = colorMatrix.Matrix11 = colorMatrix.Matrix22 = -1f;
                 colorMatrix.Matrix33 = colorMatrix.Matrix44 = 1f;
                 // create some image attributes
-                ImageAttributes attributes = new ImageAttributes();
-                attributes.SetColorMatrix(colorMatrix);
-                g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
-                0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+                using (ImageAttributes attributes = new ImageAttributes())
+                {
+                    attributes.SetColorMatrix(colorMatrix);
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
+                    0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+                }
             }
         }
 
