@@ -171,14 +171,18 @@ namespace TeslaLogger
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 string attribution = "(C) OpenStreetMap";
-                using (Font drawFont = new Font("Arial", 8))
+                using (Font drawFont = new Font(FontFamily.GenericSansSerif, 8))
                 {
-                    using (SolidBrush drawBrush = new SolidBrush(Color.Black))
+                    SizeF size = g.MeasureString(attribution, drawFont);
+                    using (SolidBrush fillBrush = new SolidBrush(Color.FromArgb(128, 128, 128, 128)))
                     {
-                        using (StringFormat drawFormat = new StringFormat())
+                        g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
+                        using (SolidBrush textBrush = new SolidBrush(Color.Black))
                         {
-                            SizeF size = g.MeasureString(attribution, drawFont);
-                            g.DrawString(attribution, drawFont, drawBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                            using (StringFormat drawFormat = new StringFormat())
+                            {
+                                g.DrawString(attribution, drawFont, textBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                            }
                         }
                     }
                 }
@@ -339,16 +343,19 @@ namespace TeslaLogger
         private void DrawIcon(Bitmap image, Tuple<double, double> coord, StaticMapIcon icon, int zoom, double x_center, double y_center, int tileSize)
         {
             SolidBrush brush;
+            int scale = 1;
             switch (icon)
             {
                 case StaticMapIcon.Charge:
-                    brush = new SolidBrush(Color.Yellow);
+                    brush = new SolidBrush(Color.OrangeRed);
+                    scale = 3;
                     break;
                 case StaticMapIcon.End:
                     brush = new SolidBrush(Color.Green);
                     break;
                 case StaticMapIcon.Park:
                     brush = new SolidBrush(Color.Blue);
+                    scale = 3;
                     break;
                 case StaticMapIcon.Start:
                     brush = new SolidBrush(Color.Red);
@@ -359,8 +366,8 @@ namespace TeslaLogger
             }
             int x = XtoPx(LonToTileX(coord.Item2, zoom), x_center, tileSize, image.Width);
             int y = YtoPx(LatToTileY(coord.Item1, zoom), y_center, tileSize, image.Height);
-            Rectangle rect = new Rectangle(x - 4, y - 10, 8, 8);
-            Point[] triangle = new Point[] { new Point(x - 4, y - 6), new Point(x, y), new Point(x + 4, y - 6) };
+            Rectangle rect = new Rectangle(x - 4 * scale, y - 10 * scale, 8 * scale, 8 * scale);
+            Point[] triangle = new Point[] { new Point(x - 4 * scale, y - 6 * scale), new Point(x, y), new Point(x + 4 * scale, y - 6 * scale) };
             using (Graphics g = Graphics.FromImage(image))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -372,6 +379,21 @@ namespace TeslaLogger
                     g.DrawArc(whitePen, rect, 180, 180);
                     g.DrawLine(whitePen, triangle[0], triangle[1]);
                     g.DrawLine(whitePen, triangle[1], triangle[2]);
+                }
+                if (icon == StaticMapIcon.Park || icon == StaticMapIcon.Charge)
+                {
+                    string text = icon == StaticMapIcon.Park ? "P" : "\u26A1";
+                    using (Font drawFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold))
+                    {
+                        SizeF size = g.MeasureString(text, drawFont);
+                        using (SolidBrush textBrush = new SolidBrush(Color.White))
+                        {
+                            using (StringFormat drawFormat = new StringFormat())
+                            {
+                                g.DrawString(text, drawFont, textBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
+                            }
+                        }
+                    }
                 }
             }
             brush.Dispose();
