@@ -2074,6 +2074,7 @@ namespace TeslaLogger
                             var cts = new CancellationTokenSource(60000);
                             try
                             {
+                                Array.Clear(buffer, 0, buffer.Length);
                                 Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
                                 response.Wait();
                                 cts.Dispose();
@@ -2152,7 +2153,26 @@ namespace TeslaLogger
                 {
                     DrivingOrChargingByStream = false;
                     System.Diagnostics.Debug.WriteLine(e.Message);
+                    Log("Stream: Timeout");
                     Thread.Sleep(10000);
+                }
+                catch (AggregateException e)
+                {
+                    e.Handle(ex =>
+                    {
+                        if (ex is TaskCanceledException)
+                        {
+                            DrivingOrChargingByStream = false;
+                            System.Diagnostics.Debug.WriteLine(e.Message);
+                            Log("Stream: Timeout");
+                            Thread.Sleep(10000);
+                        }
+                        else
+                            Logfile.Log("Streaming Error: " + ex.Message);
+
+                        return true;
+                    });
+
                 }
                 catch (Exception ex)
                 {
@@ -2173,6 +2193,10 @@ namespace TeslaLogger
                     else
                     {
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        Logfile.Log("Streaming Error: " + ex.Message);
+                        if (ex.InnerException != null)
+                            Logfile.Log("Streaming Error: " + ex.InnerException.Message);
+
                         Logfile.ExceptionWriter(ex, line);
                     }
                     
