@@ -2021,6 +2021,7 @@ namespace TeslaLogger
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
+                streamThread.Name = "StreamAPIThread";
                 streamThread.Start();
             }
         }
