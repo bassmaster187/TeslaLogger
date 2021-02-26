@@ -1303,7 +1303,7 @@ WHERE
                             _ = long.TryParse(dr[0].ToString(), out mothershipCount);
                             _ = long.TryParse(dr[1].ToString(), out mothershipMaxId);
                             _ = long.TryParse(dr[2].ToString(), out mothershipMinId);
-                            Logfile.Log($"Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
+                            Logfile.Log($"Housekeeping: database.mothership older than {(GetMothershipKeepDays())} days count: {mothershipCount} minID:{mothershipMinId} maxID:{mothershipMaxId}");
                         }
                     }
                     catch (Exception ex)
