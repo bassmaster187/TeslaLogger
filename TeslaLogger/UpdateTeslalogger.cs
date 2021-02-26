@@ -1450,12 +1450,12 @@ CREATE TABLE superchargerstate(
                 for (int x = 0; x < Car.allcars.Count; x++)
                 {
                     Car c = Car.allcars[x];
-                    if (c.GetCurrentState() != Car.TeslaState.Sleep)
+                    if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
                         return;
                 }
 
                 TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
-                if (ts.TotalMinutes > 120)
+                if (ts.TotalMinutes > 240)
                 {
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
