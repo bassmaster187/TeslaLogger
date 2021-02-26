@@ -54,6 +54,9 @@ namespace TeslaLogger
         internal ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
         internal Car car;
 
+        private double last_latitude_streaming = double.NaN;
+        private double last_longitude_streaming = double.NaN;
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -2167,8 +2170,6 @@ namespace TeslaLogger
 
         string lastStreamingAPIShiftState = null;
         DateTime lastStreamingAPILog = DateTime.UtcNow;
-        private double last_latitude = double.NaN;
-        private double last_longitude = double.NaN;
         
         private void StreamDataUpdate(string data)
         {
@@ -2229,10 +2230,10 @@ namespace TeslaLogger
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
                 double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
                 double? outside_temp = car.currentJSON.current_outside_temp;
-                if (latitude != last_latitude || longitude != last_longitude)
+                if (latitude != last_latitude_streaming || longitude != last_longitude_streaming)
                 {
-                    last_latitude = latitude;
-                    last_longitude = longitude;
+                    last_latitude_streaming = latitude;
+                    last_longitude_streaming = longitude;
                     Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
                     car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
