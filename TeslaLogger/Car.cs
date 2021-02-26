@@ -556,6 +556,7 @@ namespace TeslaLogger
                 else
                 {
                     RefreshToken();
+                    UpdateTeslalogger.CheckForNewVersion();
 
                     // check sentry mode state
                     _ = webhelper.GetOdometerAsync().Result;
@@ -905,7 +906,7 @@ namespace TeslaLogger
         private void RefreshToken()
         {
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
-            if (ts.TotalDays > 20)
+            if (ts.TotalDays > 30)
             {
                 // If car wasn't sleeping since 20 days, try to get a new Teslalogger update
                 // TODO don't work anymore!
