@@ -266,7 +266,7 @@ Supercharger FI-Kokkola, 63.829282, 23.148487
 Supercharger FI-Paimio, 60.442961, 22.605621
 Supercharger FI-Pyhtää, 60.489054, 26.554835
 Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
-Supercharger FI-Vierumäki, 61.111599, 25.928814
+Supercharger FI-Vierumäki, 61.112472,25.929927
 Supercharger LI-Schaan, 47.165317, 9.507795
 Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
 Supercharger FR-Aire de Châteauvillain - Orges, 48.057681, 4.96061
@@ -747,6 +747,7 @@ Supercharger US-Lowell AR, 36.255397, -94.152674
 Supercharger-V3 US-Mackinaw City MI, 45.772228, -84.72645
 Supercharger US-Madison WI - E. Washington Ave., 43.11915,-89.319102
 Supercharger US-Madison WI – East Towne Mall, 43.126624,-89.30686
+Supercharger US-Manteca CA, 37.782562,-121.228676
 Supercharger US-Mammoth Lakes CA, 37.644533, -118.96555
 Supercharger US-Marshall MI, 42.292068, -84.96416
 Supercharger US-Maumee OH, 41.578401, -83.664689
@@ -754,6 +755,7 @@ Supercharger US-Mauston WI, 43.795476,-90.059363
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
 Supercharger US-Menifee CA, 33.679638, -117.173752
+Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
 Supercharger US-Mojave CA, 35.068596, -118.174568
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
@@ -762,6 +764,7 @@ Supercharger US-Mt. Vernon IL, 38.316210, -88.955901
 Supercharger US-Nacogdoches TX, 31.652005, -94.679586
 Supercharger US-Newport News VA, 37.114579, -76.496197
 Supercharger US-Oak Creek WI, 42.900051,-87.913746
+Supercharger US-Oakdale MN, 44.964849,-92.961271
 Supercharger US-Oshkosh WI, 44.028786,-88.592554
 Supercharger-V3 US-Ozark AR, 35.523836, -93.863559
 Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
@@ -794,6 +797,7 @@ Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Terre Haute IN, 39.443344, -87.331722
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
+Supercharger-V3 US-Traver CA, 36.448943,-119.486536
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
 Supercharger US-Tupelo MS, 34.311517, -88.70099
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive, 45.659599, -122.583534
