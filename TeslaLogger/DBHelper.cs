@@ -3019,6 +3019,32 @@ WHERE
             }
         }
 
+        public static object ExecuteSQLScalar(string sql, int timeout = 30)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                    {
+                        if (timeout != 30)
+                        {
+                            cmd.CommandTimeout = timeout;
+                        }
+
+                        return cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Error in: " + sql);
+                Logfile.ExceptionWriter(ex, sql);
+                throw;
+            }
+        }
+
         public void CheckForInterruptedCharging(bool logging)
         {
             try

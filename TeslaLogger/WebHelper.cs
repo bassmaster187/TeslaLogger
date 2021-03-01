@@ -321,6 +321,10 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 car.passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
+                
+                if (ex.InnerException != null)
+                    car.passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
+
                 Log("Error in GetTokenAsync: " + ex.Message);
                 ExceptionWriter(ex, resultContent);
             }
@@ -1448,10 +1452,13 @@ namespace TeslaLogger
         public void UpdateEfficiency()
         {
             //string eff = "0.190052356";
+            String vinCarType = "";
+            if (String.IsNullOrEmpty(car.car_type))
+                Tools.VINDecoder(car.vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _);
 
-            if (car.car_type == "model3")
+            if (car.car_type == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.vin, out _, out _, out bool AWD, out _, out string battery, out _);
+                Tools.VINDecoder(car.vin, out int year, out _, out bool AWD, out _, out string battery, out _);
 
                 int maxRange = car.dbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
@@ -1481,7 +1488,9 @@ namespace TeslaLogger
                 {
                     if (battery == "LFP")
                         WriteCarSettings("0.133", "M3 SR+ LFP");
-                    else 
+                    else if (year == 2021)
+                        WriteCarSettings("0.126", "M3 SR+ 2021");
+                    else
                         WriteCarSettings("0.137", "M3 SR+");
                     return;
                 }
@@ -2057,122 +2066,125 @@ namespace TeslaLogger
             string line = "";
             while (!stopStreaming)
             {
+                System.Net.WebSockets.ClientWebSocket ws = null;
                 try
                 {
+                    /* xxx
                     if (!car.currentJSON.current_falling_asleep)
                     {
                         Thread.Sleep(1000);
                         continue;
                     }
+                    */
 
                     // string online = IsOnline().Result;
 
-                    using (System.Net.WebSockets.ClientWebSocket ws = new System.Net.WebSockets.ClientWebSocket())
+                    ws = new System.Net.WebSockets.ClientWebSocket();
+
+                    byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
+                    Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/");
+
+                    string connectmsg = "{\n" +
+                        "    \"msg_type\": \"data:subscribe_oauth\",\n" +
+                        "    \"token\": \"" + Tesla_token + "\",\n" +
+                        "    \"tag\": \"" + Tesla_vehicle_id + "\",\n" +
+                        "    \"value\": \"speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,range,est_range,heading\"\n" +
+                        "}";
+
+
+                    Task result = ws.ConnectAsync(serverUri, CancellationToken.None);
+
+                    while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
                     {
-                        byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
-                        Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/");
+                        System.Diagnostics.Debug.WriteLine("Connecting");
+                        Thread.Sleep(1000);
+                    }
 
-                        string connectmsg = "{\n" +
-                            "    \"msg_type\": \"data:subscribe_oauth\",\n" +
-                            "    \"token\": \"" + Tesla_token + "\",\n" +
-                            "    \"tag\": \"" + Tesla_vehicle_id + "\",\n" +
-                            "    \"value\": \"speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,range,est_range,heading\"\n" +
-                            "}";
+                    ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
+                    ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(connectmsg));
 
+                    if (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                    {
+                        ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait();
+                    }
 
-                        Task result = ws.ConnectAsync(serverUri, CancellationToken.None);
-
-                        while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Connecting)
+                    while (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                    {
+                        Thread.Sleep(100);
+                        var cts = new CancellationTokenSource(10000);
+                        try
                         {
-                            System.Diagnostics.Debug.WriteLine("Connecting");
-                            Thread.Sleep(1000);
-                        }
+                            Array.Clear(buffer, 0, buffer.Length);
+                            Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
+                            response.Wait();
+                            cts.Dispose();
+                            cts = null;
 
-                        ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
-                        ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(connectmsg));
+                            resultContent = Encoding.UTF8.GetString(buffer);
 
-                        if (ws.State == System.Net.WebSockets.WebSocketState.Open)
-                        {
-                            ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait();
-                        }
-
-                        while (ws.State == System.Net.WebSockets.WebSocketState.Open)
-                        {
-                            Thread.Sleep(100);
-                            var cts = new CancellationTokenSource(10000);
-                            try
+                            if (!String.IsNullOrEmpty(resultContent))
                             {
-                                Array.Clear(buffer, 0, buffer.Length);
-                                Task<System.Net.WebSockets.WebSocketReceiveResult> response = ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
-                                response.Wait();
-                                cts.Dispose();
-                                cts = null;
+                                resultContent = resultContent.Trim('\0');
+                                // System.Diagnostics.Debug.WriteLine("Stream: " + resultContent);
 
-                                resultContent = Encoding.UTF8.GetString(buffer);
+                                dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
 
-                                if (!String.IsNullOrEmpty(resultContent))
+                                string msg_type = j["msg_type"];
+
+                                switch (msg_type)
                                 {
-                                    resultContent = resultContent.Trim('\0');
-                                    // System.Diagnostics.Debug.WriteLine("Stream: " + resultContent);
+                                    case "control:hello":
+                                        // car.Log("Stream Hello");
+                                        break;
+                                    case "data:error":
+                                        string error_type = j["error_type"];
 
-                                    dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
-
-                                    string msg_type = j["msg_type"];
-
-                                    switch (msg_type)
-                                    {
-                                        case "control:hello":
-                                            // car.Log("Stream Hello");
-                                            break;
-                                        case "data:error":
-                                            string error_type = j["error_type"];
-
-                                            if (error_type == "vehicle_disconnected")
-                                            {
-                                                throw new Exception("vehicle_disconnected");
-                                            }
-                                            else if (error_type == "vehicle_error")
-                                            {
-                                                string v = j["value"];
-                                                if (v == "Vehicle is offline")
-                                                    throw new Exception("Vehicle is offline");
-                                                else
-                                                {
-                                                    car.Log("Stream Data Error: " + resultContent);
-                                                    throw new Exception("unhandled vehicle_error: " + v);
-                                                }
-                                            }
+                                        if (error_type == "vehicle_disconnected")
+                                        {
+                                            throw new Exception("vehicle_disconnected");
+                                        }
+                                        else if (error_type == "vehicle_error")
+                                        {
+                                            string v = j["value"];
+                                            if (v == "Vehicle is offline")
+                                                throw new Exception("Vehicle is offline");
                                             else
                                             {
                                                 car.Log("Stream Data Error: " + resultContent);
-                                                throw new Exception("unhandled error_type: " + error_type);
+                                                throw new Exception("unhandled vehicle_error: " + v);
                                             }
+                                        }
+                                        else
+                                        {
+                                            car.Log("Stream Data Error: " + resultContent);
+                                            throw new Exception("unhandled error_type: " + error_type);
+                                        }
 
-                                            break;
-                                        case "data:update":
-                                            string value = j["value"];
-                                            StreamDataUpdate(value);
-                                            break;
-                                        default:
-                                            car.Log("unhandled: " + resultContent);
-                                            break;
-                                    }
+                                        break;
+                                    case "data:update":
+                                        string value = j["value"];
+                                        StreamDataUpdate(value);
+                                        break;
+                                    default:
+                                        car.Log("unhandled: " + resultContent);
+                                        break;
                                 }
                             }
-                            finally
-                            {
-                                if (cts != null)
-                                {
-                                    cts.Dispose();
-                                    cts = null;
-                                }
-                            }
-                            
-                            Thread.Sleep(10);
-                            //ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
-                            // Logfile.ExceptionWriter(null, r);
                         }
+                        finally
+                        {
+                            if (cts != null)
+                            {
+                                cts.Dispose();
+                                cts = null;
+                            }
+                        }
+
+                        Thread.Sleep(10);
+                        //ws.SendAsync(bufferPing, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+                        // Logfile.ExceptionWriter(null, r);
                     }
+
 
                     Log("StreamEnd");
                     System.Diagnostics.Debug.WriteLine("StreamEnd");
@@ -2210,7 +2222,7 @@ namespace TeslaLogger
                     {
                         vehicleDisconnectedCounter++;
 
-                        if ( (DateTime.UtcNow - lastStreamingAPIData).TotalSeconds > 180 || vehicleDisconnectedCounter % 10 == 0)
+                        if ((DateTime.UtcNow - lastStreamingAPIData).TotalSeconds > 180 || vehicleDisconnectedCounter % 10 == 0)
                             car.Log("Stream Data Error: vehicle_disconnected " + vehicleDisconnectedCounter);
                     }
                     else if (ex.Message == "Vehicle is offline")
@@ -2227,8 +2239,16 @@ namespace TeslaLogger
 
                         Logfile.ExceptionWriter(ex, line);
                     }
-                    
+
                     Thread.Sleep(10000);
+                }
+                finally
+                {
+                    if (ws != null)
+                    {
+                        ws.Abort();
+                        ws.Dispose();
+                    }
                 }
             }
 
