@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Runtime.Caching;
 using System.Net;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace UnitTestsTeslalogger
 {
@@ -193,16 +195,16 @@ namespace UnitTestsTeslalogger
             wh.car.vin = "5YJ3E7EA9KFxxxxxx"; 
             wh.car.car_type = "model3";
             wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.139;
+            wh.car.DB_Wh_TR = 0.145;
             wh.car.trim_badging = "";
             wh.UpdateEfficiency();
 
-            Assert.AreEqual("M3 LR FL", wh.car.ModelName);
-            Assert.AreEqual(0.139, wh.car.Wh_TR);
+            Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
+            Assert.AreEqual(0.145, wh.car.Wh_TR);
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJ3E7EB4KFxxxxxx";
+            wh.car.vin = "LRW3E7FA9LCxxxxxx";
             wh.car.car_type = "model3";
             wh.car.car_special_type = "base";
             wh.car.DB_Wh_TR = 0.133;
@@ -211,6 +213,19 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("M3 SR+ LFP", wh.car.ModelName);
             Assert.AreEqual(0.133, wh.car.Wh_TR);
+
+            //2021 Model 3 SR+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
+            wh.car.vin = "5YJ3E7EA3MFXXXXXX";
+            wh.car.car_type = "";
+            wh.car.car_special_type = "base";
+            wh.car.DB_Wh_TR = 0.126;
+            wh.car.trim_badging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 SR+ 2021", wh.car.ModelName);
+            Assert.AreEqual(0.126, wh.car.Wh_TR);
         }
 
         [TestMethod]
@@ -282,9 +297,53 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void CreateMap()
+        public void CreateAuthTokenFromRefreshToken()
         {
+            DBHelper.ExecuteSQLQuery("update cars set tesla_token = '', tesla_token_expire='2020-01-01' where id = 1");
             
+            Thread t = new Thread(() => Program.GetAllCars());
+            t.Start();
+
+            for (int x = 0; x < 300; x++)
+            {
+                string tt = DBHelper.ExecuteSQLScalar("Select tesla_token from cars where id=1").ToString();
+                if (tt.Length > 10)
+                {
+                    t.Abort();
+                    return;
+                }
+
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            t.Abort();
+
+            Assert.Fail("could not get Auth Token from Refresh Token!");
+        }
+
+        [TestMethod]
+        public void CreateAuthTokenWithoutRefreshToken()
+        {
+            DBHelper.ExecuteSQLQuery("update cars set tesla_token = '', refresh_token = '', tesla_token_expire='2020-01-01' where id = 1");
+
+            Thread t = new Thread(() => Program.GetAllCars());
+            t.Start();
+
+            for (int x = 0; x < 300; x++)
+            {
+                string tt = DBHelper.ExecuteSQLScalar("Select tesla_token from cars where id=1").ToString();
+                if (tt.Length > 10)
+                {
+                    t.Abort();
+                    return;
+                }
+
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            t.Abort();
+
+            Assert.Fail("could not get Auth Token from Refresh Token!");
         }
 
     }

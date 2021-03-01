@@ -104,7 +104,7 @@ namespace TeslaLogger
 
         }
 
-        private static void GetAllCars()
+        internal static void GetAllCars()
         {
             using (DataTable dt = DBHelper.GetCars())
             {
