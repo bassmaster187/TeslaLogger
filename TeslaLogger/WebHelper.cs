@@ -2093,13 +2093,11 @@ namespace TeslaLogger
                 System.Net.WebSockets.ClientWebSocket ws = null;
                 try
                 {
-                    /* xxx
                     if (!car.currentJSON.current_falling_asleep)
                     {
                         Thread.Sleep(1000);
                         continue;
-                    }
-                    */
+                    }   
 
                     // string online = IsOnline().Result;
 
