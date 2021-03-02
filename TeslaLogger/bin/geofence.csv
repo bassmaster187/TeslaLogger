@@ -940,10 +940,12 @@ be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
 
+chargeIT DE-Coburg Arena, 50.287087, 10.980806
+chargeIT DE-Coburg Audi Gelder & Sorg, 50.271384,10.968691
 chargeIT DE-Memmingerberg, 47.990153, 10.230113
-chargeIT DE-Ungerhausen, 48.017723, 10.270062
 chargeIT DE-Nördlingen, 48.843866, 10.503327
 chargeIT DE-Petershausen, 48.416818, 11.478081
+chargeIT DE-Ungerhausen, 48.017723, 10.270062
 
 CEZ CZ-Děčín, 50.770023, 14.207249
 CEZ CZ-Jenišov, 50.222744, 12.805259
@@ -1001,6 +1003,7 @@ E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
 E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
+E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Nord, 50.42368,10.349982
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
@@ -1645,6 +1648,7 @@ Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
 Kaufland DE-Hussenhofen, 48.803978, 9.839545
+Kaufland DE-Ilmenau, 50.683092,10.919349
 Kaufland DE-Kaufbeuren, 47.884276, 10.636879
 Kaufland DE-Leipzig, 51.33711, 12.336445
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
