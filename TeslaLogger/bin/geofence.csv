@@ -377,6 +377,7 @@ Supercharger GB-Bristol, 51.526694, -2.599806
 Supercharger GB-Burtonwood, 53.417605, -2.639522
 Supercharger GB-Chorley, 53.630562, -2.692578
 Supercharger GB-Colchester, 51.88071, 0.788574
+Supercharger GB-Dartford, 51.438052, 0.26879
 Supercharger GB-Dundee, 56.466428, -3.062962
 Supercharger GB-Dursley, 51.656431, -2.434545
 Supercharger GB-Edinburgh, 55.945361, -3.366667
@@ -387,34 +388,34 @@ Supercharger GB-Folkestone, 51.095988, 1.120931
 Supercharger GB-Grantham, 52.948794, -0.677802
 Supercharger GB-Gretna Green, 55.0078, -3.083018
 Supercharger GB-Havant, 50.847773, -0.991137
+Supercharger GB-Heathrow, 51.478181, -0.515753
 Supercharger GB-Hilton Park Northbound, 52.644021, -2.058587
 Supercharger GB-Membury Eastbound, 51.48391, -1.556821
 Supercharger GB-Membury Westbound, 51.481293, -1.556196
 Supercharger GB-Leeds, 53.732769, -1.585628
 Supercharger GB-Lifton, 50.643377, -4.284553
 Supercharger GB-Liphook, 51.076281, -0.831807
-Supercharger GB-London, 51.438052, 0.26879
-Supercharger GB-London, 51.504346, -0.016146
-Supercharger GB-London, 51.506333, -0.072778
-Supercharger GB-London, 51.507022, 0.015928
-Supercharger GB-London, 51.507888, -0.221972
-Supercharger GB-London, 51.511647, -0.461166
-Supercharger GB-London, 51.57753, -0.223753
+Supercharger GB-London-Canary Wharf, 51.504346, -0.016146
+Supercharger GB-London-Tower, 51.506333, -0.072778
+Supercharger GB-London-Westfield London, 51.507888, -0.221972
+Supercharger GB-London-Brent Cross, 51.57753, -0.223753
 Supercharger-V3 GB-London-Chelmsford, 51.7501215, 0.5106861
 Supercharger-V3 GB-London-Gatwick, 51.135175, -0.191298
+Supercharger GB-London-Heathrow, 51.51099,-0.460461
 Supercharger GB-Maidstone, 51.286224, 0.545783
 Supercharger GB-Keele Northbound, 52.993, -2.2903
 Supercharger GB-Keele Southbound, 52.99413, -2.290797
 Supercharger GB-Newport Pagnell, 52.084312, -0.748467
 Supercharger GB-Northampton, 52.185729, -0.89127
+Supercharger GB-North Greenwich, 51.507022, 0.015928
 Supercharger GB-Oxford, 51.7374, -1.0948
+Supercharger-V3 GB-Park Royal, 51.52681,-0.283526
 Supercharger GB-Perth, 56.386, -3.4792
-Supercharger GB-Potters Bar, 51.687536, -0.223548
 Supercharger GB-Reading, 51.420611, -0.988028
 Supercharger GB-Richmond, 54.4421, -1.6713
 Supercharger GB-Sarn, 51.535351, -3.577637
 Supercharger GB-Sheffield, 53.314145, -1.281904
-Supercharger GB-Slough, 51.478181, -0.515753
+Supercharger GB-South Mimms, 51.687536, -0.223548
 Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
 Supercharger GB-Warrington, 53.339515, -2.569358
