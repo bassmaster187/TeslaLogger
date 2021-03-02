@@ -231,6 +231,7 @@ Supercharger ES-Ariza, 41.313192, -2.002201
 Supercharger ES-Atalaya del Cañavate, 39.538687, -2.254555
 Supercharger ES-Barcelona, 41.498135, 2.072674
 Supercharger ES-Bembibre, 42.623488,-6.453124
+Supercharger-V3 ES-Benavente, 42.007749,-5.663257
 Supercharger ES-Burgos, 42.312365, -3.704115
 Supercharger ES-Caldes de Malavella, 41.859029, 2.767237
 Supercharger ES-Cúllar, 37.5540305, -2.6139444
@@ -243,8 +244,9 @@ Supercharger ES-Jerez, 36.692378,-6.160246
 Supercharger ES-La Seu d'Urgell, 42.358898, 1.462893
 Supercharger ES-Lleida, 41.663959, 0.605371
 Supercharger ES-L´Aldea, 40.753019, 0.606421
+Supercharger ES-Lugo, 43.03653,-7.568994
 Supercharger ES-Madrid, 40.443856,-3.691665
-Supercharger ES-Manzanares, 39.006855, -3.382999
+Supercharger ES-Manzanares, 39.006325,-3.383318
 Supercharger ES-Murcia, 38.038172, -1.149343
 Supercharger ES-Mérida, 38.921746, -6.375133
 Supercharger ES-Ponferrada, 42.623851, -6.451837
@@ -266,7 +268,7 @@ Supercharger FI-Kokkola, 63.829282, 23.148487
 Supercharger FI-Paimio, 60.442961, 22.605621
 Supercharger FI-Pyhtää, 60.489054, 26.554835
 Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
-Supercharger FI-Vierumäki, 61.111599, 25.928814
+Supercharger FI-Vierumäki, 61.112472,25.929927
 Supercharger LI-Schaan, 47.165317, 9.507795
 Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
 Supercharger FR-Aire de Châteauvillain - Orges, 48.057681, 4.96061
@@ -377,6 +379,7 @@ Supercharger GB-Bristol, 51.526694, -2.599806
 Supercharger GB-Burtonwood, 53.417605, -2.639522
 Supercharger GB-Chorley, 53.630562, -2.692578
 Supercharger GB-Colchester, 51.88071, 0.788574
+Supercharger GB-Dartford, 51.438052, 0.26879
 Supercharger GB-Dundee, 56.466428, -3.062962
 Supercharger GB-Dursley, 51.656431, -2.434545
 Supercharger GB-Edinburgh, 55.945361, -3.366667
@@ -387,34 +390,34 @@ Supercharger GB-Folkestone, 51.095988, 1.120931
 Supercharger GB-Grantham, 52.948794, -0.677802
 Supercharger GB-Gretna Green, 55.0078, -3.083018
 Supercharger GB-Havant, 50.847773, -0.991137
+Supercharger GB-Heathrow, 51.478181, -0.515753
 Supercharger GB-Hilton Park Northbound, 52.644021, -2.058587
 Supercharger GB-Membury Eastbound, 51.48391, -1.556821
 Supercharger GB-Membury Westbound, 51.481293, -1.556196
 Supercharger GB-Leeds, 53.732769, -1.585628
 Supercharger GB-Lifton, 50.643377, -4.284553
 Supercharger GB-Liphook, 51.076281, -0.831807
-Supercharger GB-London, 51.438052, 0.26879
-Supercharger GB-London, 51.504346, -0.016146
-Supercharger GB-London, 51.506333, -0.072778
-Supercharger GB-London, 51.507022, 0.015928
-Supercharger GB-London, 51.507888, -0.221972
-Supercharger GB-London, 51.511647, -0.461166
-Supercharger GB-London, 51.57753, -0.223753
+Supercharger GB-London-Canary Wharf, 51.504346, -0.016146
+Supercharger GB-London-Tower, 51.506333, -0.072778
+Supercharger GB-London-Westfield London, 51.507888, -0.221972
+Supercharger GB-London-Brent Cross, 51.57753, -0.223753
 Supercharger-V3 GB-London-Chelmsford, 51.7501215, 0.5106861
 Supercharger-V3 GB-London-Gatwick, 51.135175, -0.191298
+Supercharger GB-London-Heathrow, 51.51099,-0.460461
 Supercharger GB-Maidstone, 51.286224, 0.545783
 Supercharger GB-Keele Northbound, 52.993, -2.2903
 Supercharger GB-Keele Southbound, 52.99413, -2.290797
 Supercharger GB-Newport Pagnell, 52.084312, -0.748467
 Supercharger GB-Northampton, 52.185729, -0.89127
+Supercharger GB-North Greenwich, 51.507022, 0.015928
 Supercharger GB-Oxford, 51.7374, -1.0948
+Supercharger-V3 GB-Park Royal, 51.52681,-0.283526
 Supercharger GB-Perth, 56.386, -3.4792
-Supercharger GB-Potters Bar, 51.687536, -0.223548
 Supercharger GB-Reading, 51.420611, -0.988028
 Supercharger GB-Richmond, 54.4421, -1.6713
 Supercharger GB-Sarn, 51.535351, -3.577637
 Supercharger GB-Sheffield, 53.314145, -1.281904
-Supercharger GB-Slough, 51.478181, -0.515753
+Supercharger GB-South Mimms, 51.687536, -0.223548
 Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
 Supercharger GB-Warrington, 53.339515, -2.569358
@@ -565,7 +568,6 @@ Supercharger NO-Norheimsund, 60.372342, 6.141213
 Supercharger NO-Nyborg, 60.484297, 5.375426
 Supercharger NO-Os, 60.192788, 5.4652
 Supercharger NO-Porsgrunn, 59.122098, 9.707564
-Supercharger NO-Rauma, 62.558258, 7.683524
 Supercharger NO-Rennebu, 62.832142, 10.010141
 Supercharger NO-Ringdalskogen, 59.112402, 10.108727
 Supercharger NO-Rolvsøy, 59.324292, 10.954448
@@ -660,7 +662,7 @@ Supercharger SI-Ljubljana, 46.051778, 14.452056
 Supercharger SI-Maribor, 46.533005, 15.699246
 Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
-Supercharger-V3 SK-Košice, 48.694399, 21.235726
+Supercharger-V3 SK-Košice, 48.695151,21.235604
 Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Ardmore OK,34.179246,-97.1656
@@ -747,6 +749,7 @@ Supercharger US-Lowell AR, 36.255397, -94.152674
 Supercharger-V3 US-Mackinaw City MI, 45.772228, -84.72645
 Supercharger US-Madison WI - E. Washington Ave., 43.11915,-89.319102
 Supercharger US-Madison WI – East Towne Mall, 43.126624,-89.30686
+Supercharger US-Manteca CA, 37.782562,-121.228676
 Supercharger US-Mammoth Lakes CA, 37.644533, -118.96555
 Supercharger US-Marshall MI, 42.292068, -84.96416
 Supercharger US-Maumee OH, 41.578401, -83.664689
@@ -754,6 +757,7 @@ Supercharger US-Mauston WI, 43.795476,-90.059363
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
 Supercharger US-Menifee CA, 33.679638, -117.173752
+Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
 Supercharger US-Mojave CA, 35.068596, -118.174568
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
@@ -762,6 +766,7 @@ Supercharger US-Mt. Vernon IL, 38.316210, -88.955901
 Supercharger US-Nacogdoches TX, 31.652005, -94.679586
 Supercharger US-Newport News VA, 37.114579, -76.496197
 Supercharger US-Oak Creek WI, 42.900051,-87.913746
+Supercharger US-Oakdale MN, 44.964849,-92.961271
 Supercharger US-Oshkosh WI, 44.028786,-88.592554
 Supercharger-V3 US-Ozark AR, 35.523836, -93.863559
 Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
@@ -794,6 +799,7 @@ Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Terre Haute IN, 39.443344, -87.331722
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
+Supercharger-V3 US-Traver CA, 36.448943,-119.486536
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
 Supercharger US-Tupelo MS, 34.311517, -88.70099
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive, 45.659599, -122.583534
@@ -934,10 +940,12 @@ be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
 
+chargeIT DE-Coburg Arena, 50.287087, 10.980806
+chargeIT DE-Coburg Audi Gelder & Sorg, 50.271384,10.968691
 chargeIT DE-Memmingerberg, 47.990153, 10.230113
-chargeIT DE-Ungerhausen, 48.017723, 10.270062
 chargeIT DE-Nördlingen, 48.843866, 10.503327
 chargeIT DE-Petershausen, 48.416818, 11.478081
+chargeIT DE-Ungerhausen, 48.017723, 10.270062
 
 CEZ CZ-Děčín, 50.770023, 14.207249
 CEZ CZ-Jenišov, 50.222744, 12.805259
@@ -995,6 +1003,7 @@ E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
 E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
+E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Nord, 50.42368,10.349982
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
@@ -1639,6 +1648,7 @@ Kaufland DE-Gröbenzell, 48.186468, 11.38609
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
 Kaufland DE-Hussenhofen, 48.803978, 9.839545
+Kaufland DE-Ilmenau, 50.683092,10.919349
 Kaufland DE-Kaufbeuren, 47.884276, 10.636879
 Kaufland DE-Leipzig, 51.33711, 12.336445
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
