@@ -286,12 +286,14 @@ namespace TeslaLogger
             }
         }
 
-        internal string GetRefreshToken()
+        internal string GetRefreshToken(out string tesla_token)
         {
+            tesla_token = "";
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token FROM cars where id = @CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
@@ -299,6 +301,7 @@ namespace TeslaLogger
                     if (dr.Read())
                     {
                         string refresh_token = dr[0].ToString();
+                        tesla_token = dr[1].ToString();
                         return refresh_token;
                     }
                 }
