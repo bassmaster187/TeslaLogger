@@ -103,7 +103,7 @@ function menu($title)
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger_fw.php<?PHP echo($ref); ?>">Fleet Charging MAX (Firmware)</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charging_locations.php<?PHP echo($ref); ?>">Fleet Charging Locations</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/map.php<?PHP echo($ref); ?>">Fleet Fast Charging Map</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/suc-map2.php<?PHP echo($ref); ?>">Supercharger Usage</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/suc-map.php<?PHP echo($ref); ?>">Supercharger Usage</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/firmware.php<?PHP echo($ref); ?>">Firmware Tracker</a></li>
 						</ul>
                     </li>
