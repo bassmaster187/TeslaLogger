@@ -313,7 +313,7 @@ namespace TeslaLogger
             {
                 try
                 {
-                    string path = FileManager.GetMapCachePath() + $"map_{startPosID}_{endPosID}.png";
+                    string path = FileManager.GetMapCachePath() + Path.DirectorySeparatorChar + $"map_{startPosID}_{endPosID}.png";
                     // check file age
                     if (File.Exists(path))
                     {
