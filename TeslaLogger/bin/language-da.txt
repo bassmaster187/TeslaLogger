@@ -1,0 +1,248 @@
+#Akku Trips.json
+Akku Trips=Siden sidste opladning
+Start Trip=Start Tur
+End Trip=Stop Tur
+Time=Dato
+StartSOC=Start SOC
+EndSOC=Stop SOC
+SOC diff=SOC diff
+Start km=Start km
+End km=Stop km
+Start mi=Start mi
+End mi=Stop mi
+kmDiff=kmDiff
+Max Range=Max Rækkevidde
+Ø Verbrauch=Ø Forbrug
+Tage=Dage
+
+#Degradation.json
+Degradation=Degradation
+Maximalreichweite [km]=Max Rækkevidde [km]
+Maximalreichweite [mi]=Max Rækkevidde [mi]
+km Stand [km]=Kilometertæller [km]
+mi Stand [mi]=Kilometertæller [mi]
+Odometer [mi]=
+Max. Reichweite (Monatsmittel) [km]=Max Rækkevidde (månedlig gennemsnit) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max Rækkevidde (månedlig gennemsnit) [mi]
+
+#Ladehistorie.json
+Ladehistorie=Opladningshistorik
+Startdatum=Start Dato
+Enddatum=End Dato
+geladen kWh=kWh opladet
+km Stand= Kilometertæller
+Adresse=Adresse
+TR km Start=TR km Start
+TR km Ende=TR km Stop
+SOC Ende=SOC Stop
+100% TR=100% TR
+Minuten=Minuter
+TR mi Start=TR mi Start
+TR mi Ende=TR mi Stop
+ØkW=ØkW
+
+#Ladestatistik.json
+Ladestatistik=Opladningsstatistik
+Letzte Ladung=Seneste opladning
+Ort=Adresse
+Ø geladen kWh=Ø Opladet kWh
+Ladezeit h=Opladningsvarighed t
+Ø SOC=Ø SOC
+Max SOC=Max SOC
+Anzahl Ladungen=Antal opladninger
+Anzahl=Antal
+Geladen=Opladet
+Ladezeit=Lade tid
+Anz. Ladungen=Antal
+Ladehub=Opladningsområde
+
+#SOC Ladestatistik.json
+SOC Ladestatistik=SOC Opladningsstatistik
+SOC [%]=SOC [%]
+
+#Laden.json
+Laden=Charging
+Ladespannung [V]=Opladningsspænding [V]
+Reichweite [mi]=Rækkevidde [mi]
+Reichweite [km]=Rækkevidde [km]
+Leistung [kW]=Effekt [kW]
+Phasen=Faser
+Stromstärke [A]=Strømstyrke [A]
+Angefordert [A]=Anmodet [A]
+Pilot [A]=Pilot [A]
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik=Vampire Drain Månedlige statistikker
+TR mi Verlust=TR mi Tabt
+kWh Verlust=kWh Tabt
+Eur Verlust=Eur Tabt
+
+#Trip.json
+Trip=Trip
+Start=Start
+Ende=End
+Start Adresse=Start Adresse
+Ziel Adresse=Destinationsadresse
+Ø Verbrauch kWh=Ø Forbrug kWh
+Verbraucht kWh=Brugt kWh
+Dauer Min=Varighed Min
+mi=mi
+km=km
+Ø °C=Ø °C
+Ø °F=Ø °F
+max mph=Max mph
+max km/h=max km/t
+max PS=Max HK
+min PS=Min HK
+max kW=max kW
+min kW=min kW
+Ø PS=Ø HK
+Ø kW=Ø kW
+Ø mph=Ø mph
+Ø km/h=Ø km/t
+
+#Vampir Drain Monatsstatistik.json
+Zeitspanne Stunden=Tidsrum
+TR mi Verlust pro Stunde=TR mi Tabt pr time
+mi Stand= Kilometertæller
+
+#Vampir Drain.json
+Vampir Drain=Vampire Drain
+Standby Stunden=Standby tid
+Standby=Standby
+TR km Verlust=TR km Tabt
+TR km Verlust pro Stunde=TR km Tabt pr time
+
+#Verbrauch.json
+Verbrauch=Forbrug
+Höhe [m]=Højde [m]
+Altitude [m]=Højde [m]
+Geschwindigkeit [mph]=Hastighed [mph]
+Geschwindigkeit [km/h]=Hastighed [km/t]
+Leistung [PS]=Power [HP]
+Außentemperatur [°C]=Temperatur udendørs [°C]
+Außentemperatur [°F]=Temperatur udendørs [°F]
+Innentemperatur [°C]=Temperatur i bilen [°C]
+Innentemperatur [°F]=Temperatur i bilen [°F]
+
+Laden fertig=Opladning færdig
+Schlafen=Sover
+Online=Online
+
+#Visited.json
+Visited=Visited
+
+#index.php
+Fahrzeuginfo=Køretøjsinfo
+Status=Status
+Typical Range=Typical Range
+KM Stand=Kilometertæller
+Car Version=Firmware Version
+Letzter Trip=Seneste tur
+Dauer=Varighed
+Distanz=Distance
+Max km/h=Max km/t
+PS=HK
+Current Pos=Aktuel position
+Last Update=Senest opdateret
+Wird geladen=Lader
+Done=Færdig
+Done at=Færdig kl.
+Battery Heater=Batterivarmer
+Sentry Mode=Sentry Mode
+Preconditioning=Forvarmer
+Offline=Offline
+
+#menu.php
+Logfile=Logfile
+Restart=Genstart
+Update=Opdatér
+Dashboards=Dashboards
+Fleet Statistic=Flåde Statistik
+Extras=Ekstra
+Settings=Indstillinger
+Backup=Backup
+Restore=Genskab
+Geofence=Geofence
+Suspend Teslalogger=Paus Teslalogger
+Wakeup Teslalogger=Væk Teslalogger
+Dashboard=Dashboard
+
+#password.php
+Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
+Bitte Tesla Account Zugangsdaten eingeben=Indtast dine Tesla account credentials
+Email=Email
+Passwort=Password
+Passwort wiederholen=Gentag Password
+Speichern=Gem
+
+#settings.php
+Zugangsdaten=Credentials
+Language=Sprog
+Leistung=Effekt
+Temperatur=Temperatur
+Längenmaß=Længdemål
+URL Admin Panel=URL Admin Panel
+All=Alle
+Stable=Stabile
+None=Ingen
+Enable=Aktiver
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Teslalogger HTTP Port
+Zoom Level=Zoom Niveau
+ScanMyTesla integration=ScanMyTesla integration
+Main Car=Primært køretøj
+Car Name=Køretøjets navn
+ScanMyTesla last received=Seneste ScanMyTesla
+Tasker Token=Tasker Token
+Tasker URL=Tasker URL
+Received Tasker Token=Modtaget Tasker Token
+
+#geoadd.php
+Bezeichnung=Description
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla=Alt forbore - ScanMyTesla
+Zelltemperatur [°C]=Celle Temperatur [°C]
+Zelltemperatur [°F]=Celle Temperatur [°F]
+
+#Trip Monatsstatistik.json
+Datum=Dato
+Fahrzeit [h]=Rejsetid [t]
+Strecke [km]=Distance [km]
+Strecke [mi]=Distance [mi]
+Verbraucht [kWh]=Forbrug kWh
+Ø Verbrauch [kWh]=Ø Forbrug kWh
+Anzahl Trips=Antal ture
+Trip Monatsstatistik=Månedlig rejse-statistik
+
+Zellspannungen 01-20 - ScanMyTesla=Cell Voltages 01-20 - ScanMyTesla
+Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
+Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
+Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
+Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
+
+Ja=Ja
+Nein=Nej
+
+Einschlafen=Dvale
+Automatische Updates=Automatiske opdateringer
+
+TextShare=<h1>Del opladningskurver / degraderingskurver anonymt </h1> Vi vil gerne oprette en anonym database for at sammenligne degraderingskurver og opladningskurver. Dette giver dig mulighed for at sammenligne dit køretøj med andre til enhver tid og opdage enhver usædvanlig afvigelse på et tidligt tidspunkt. Denne information kan være nyttig i en salgssituation som dokumentation for batteriets helbred. Ligeledes giver det dig værdifuld information i en eventuel dialog Tesla Motors hvis du oplever reduceret ydelse på batteriet. <br> <br> Vil du dele dine hurtige opladningskurver og degraderingskurver med andre Tesla ejere helt anonymt? Denne beslutning kan når som helst ændres under indstillingsmenuen.
+Daten anonym teilen=Del data anonymt
+TextSuspendTeslalogger=Teslalogger er blevet stoppet! Data vil ikke blive gemt!
+Resume Teslalogger=Genoptag Teslalogger
+Reichweite=Rækkevidde
+
+Ladekosten=Opladningspris
+Ladesäule=Opladningssted
+Währung=Valuta
+Kosten pro kWh=Pris per kWh
+Kosten pro Ladung=Pris per opladning
+Kosten pro Minute=Pris per minut
+Kosten Blockiergebühr=Blokeringsgebyr per minut
+Summe=I alt
+kWh laut Zähler / Rechnung=kWh i følge tæller / faktura
+Wirkungsgrad=Effektivitet

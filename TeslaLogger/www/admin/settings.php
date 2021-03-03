@@ -206,6 +206,7 @@ echo(menu("Settings"));
 <tr><td></td><td><button onclick="window.location.href='password.php';"  style="float: right;"><?php t("Zugangsdaten"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
+		<input id="radio_da" type="radio" value="da" name="Language" /> Dansk<br>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
 		<input id="radio_es" type="radio" value="es" name="Language" /> Español<br>
