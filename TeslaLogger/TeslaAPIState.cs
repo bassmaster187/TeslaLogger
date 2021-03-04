@@ -1081,6 +1081,7 @@ namespace TeslaLogger
                             case "steering_wheel_heater":
                             case "wiper_blade_heater":
                             case "smart_preconditioning":
+                            case "bioweapon_mode":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "climate_state");

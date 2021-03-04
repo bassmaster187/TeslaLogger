@@ -206,6 +206,7 @@ echo(menu("Settings"));
 <tr><td></td><td><button onclick="window.location.href='password.php';"  style="float: right;"><?php t("Zugangsdaten"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
+		<input id="radio_da" type="radio" value="da" name="Language" /> Dansk<br>
 		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
 		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
 		<input id="radio_es" type="radio" value="es" name="Language" /> Español<br>
@@ -214,7 +215,7 @@ echo(menu("Settings"));
 		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
 		<input id="radio_pt" type="radio" value="pt" name="Language" /> Português<br>
 		<input id="radio_ru" type="radio" value="ru" name="Language" /> Русский<br>
-		
+		<input id="radio_cn" type="radio" value="cn" name="Language" /> 漢語<br>		
 	</td></tr>
 	<tr><td valign="top"><b><?php t("Leistung"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 	<tr><td valign="top"><b><?php t("Temperatur"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <?php t("Celsius"); ?><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <?php t("Fahrenheit"); ?> </td></tr>
