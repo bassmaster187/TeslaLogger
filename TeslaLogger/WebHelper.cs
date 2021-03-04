@@ -1425,7 +1425,7 @@ namespace TeslaLogger
 
                         if (ts.TotalMinutes > 60)
                         {
-                            if (state == "offline" || state == "asleep" || state == "online")
+                            if (state == "offline" || state == "asleep")
                                 return state;
 
                             string resultContent2 = GetCommand("vehicle_config").Result;
@@ -1438,6 +1438,11 @@ namespace TeslaLogger
 
                             if (jBadgeResult != null)
                             {
+                                string car_type = car.car_type;
+                                string car_special_type = car.car_special_type;
+                                string trim_badging = car.trim_badging;
+
+
                                 if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
                                 {
                                     car.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
@@ -1454,6 +1459,9 @@ namespace TeslaLogger
 
                                 UpdateEfficiency();
                                 lastUpdateEfficiency = DateTime.Now;
+
+                                if (car_type != car.car_type || car_special_type != car.car_special_type || trim_badging != car.trim_badging)
+                                    car.dbHelper.WriteCarSettings();
                             }
                         }
                     }
@@ -1568,16 +1576,17 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging.Length == 0)
                 {
+                    Tools.VINDecoder(car.vin, out _, out _, out bool AWD, out _, out _, out string motor);
                     int maxRange = car.dbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
-                        if (car.DB_Wh_TR >= 0.174 && car.DB_Wh_TR <= 0.181)
+                        if (motor == "dual performance")
                         {
-                            WriteCarSettings("0.178", "S Raven LR P");
+                            WriteCarSettings("0.173", "S Raven LR P");
                             return;
                         }
 
-                        WriteCarSettings("0.169", "S Raven LR");
+                        WriteCarSettings("0.173", "S Raven LR");
                     }
                     else
                     {
@@ -3433,7 +3442,8 @@ namespace TeslaLogger
                     { "avgkm", car.avgkm.ToString() },
                     { "kwh100km", car.kwh100km.ToString() },
                     { "avgsocdiff", car.avgsocdiff.ToString() },
-                    { "maxkm", car.maxkm.ToString() }
+                    { "maxkm", car.maxkm.ToString() },
+                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()}
                 };
 
                     using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
