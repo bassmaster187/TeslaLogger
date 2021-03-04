@@ -341,25 +341,25 @@ ORDER BY
                 case StaticMapProvider.MapType.Trip:
                     break;
                 case StaticMapProvider.MapType.Charge:
-                    return "C-" + name + ".png";
+                    return "C-" + name + ".jpg";
                     break;
                 case StaticMapProvider.MapType.Park:
-                    return "P-" + name + ".png";
+                    return "P-" + name + ".jpg";
                     break;
             }
-            return "error.png";
+            return "error.jpg";
         }
 
         public static string GetMapFileName(int carID, int startpos, int endpos)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("T-");
+            sb.Append("T");
             sb.Append(carID);
             sb.Append("-");
             sb.Append(startpos);
             sb.Append("-");
             sb.Append(endpos);
-            sb.Append(".png");
+            sb.Append(".jpg");
             return sb.ToString();
         }
 

@@ -73,6 +73,7 @@ namespace TeslaLogger
             try
             {
                 image.Save(filename);
+                Logfile.Log("Create File: " + filename);
             }
             catch (Exception ex)
             {

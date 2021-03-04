@@ -419,7 +419,6 @@ namespace TeslaLogger
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
                 DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
-                Tools.DebugLog("CreateParkingMap save to " + filename);
                 SaveImage(map, filename);
             }
         }
