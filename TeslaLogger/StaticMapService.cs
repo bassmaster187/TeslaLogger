@@ -51,6 +51,7 @@ namespace TeslaLogger
             if (_StaticMapService == null)
             {
                 _StaticMapService = new StaticMapService();
+                StaticMapProvider smp = StaticMapProvider.GetInstance();
             }
             return _StaticMapService;
         }
