@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 
@@ -12,6 +13,29 @@ namespace TeslaLogger
         {
             Regular,
             Dark
+        }
+
+        public enum MapSpecial
+        {
+            None,
+            TripHeatMap,
+            TripSpeedMap,
+            TripPowerMap
+        }
+
+        public enum MapType
+        {
+            Trip,
+            Charge,
+            Park
+        }
+
+        public enum MapIcon
+        {
+            Start,
+            End,
+            Park,
+            Charge
         }
 
         private static StaticMapProvider _StaticMapProvider = null;
@@ -34,25 +58,43 @@ namespace TeslaLogger
                         {
                             object classInstance = Activator.CreateInstance(type);
                             _StaticMapProvider = (StaticMapProvider)methodInfo.Invoke(classInstance, null);
-                            if (_StaticMapProvider != null)
-                            {
-                                Logfile.Log("selected MapProvider: " + _StaticMapProvider.GetType());
-                            }
                         }
                     }
                 }
                 if (_StaticMapProvider == null)
                 {
                     _StaticMapProvider = OSMMapProvider.GetSingleton(); // default
-                    Logfile.Log("selected MapProvider (default): " + _StaticMapProvider.GetType());
                 }
             }
             return _StaticMapProvider;
         }
 
         internal abstract StaticMapProvider GetInstance();
-        public abstract void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, string filename);
-        public abstract void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, string filename);
-        public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, string filename);
+        public abstract void CreateChargingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+        public abstract void CreateParkingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+        public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+
+        public static void SaveImage(Bitmap image, string filename)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog("Exception", ex);
+            }
+        }
+
+        protected Tuple<double, double, double, double> DetermineExtent(DataTable coords)
+        {
+            double min_lat = (double)coords.Compute("Min(lat)", "");
+            double min_lng = (double)coords.Compute("Min(lng)", "");
+            double max_lat = (double)coords.Compute("Max(lat)", "");
+            double max_lng = (double)coords.Compute("Max(lng)", "");
+            Tools.DebugLog($"DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
+            return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
+        }
+
     }
 }

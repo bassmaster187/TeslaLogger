@@ -11,8 +11,8 @@ namespace TeslaLogger
 {
     class MapQuest
     {
-
-        static string mapdir = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/maps";
+        static string mapdir = "";
+        
         const string addressfilter = "replace(replace(replace(replace(replace(convert(address USING ascii), '?',''),' ',''),'/',''),'&',''),',','') as name";
 
         static MapQuest()
