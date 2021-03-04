@@ -23,5 +23,14 @@ namespace TeslaLogger
         {
             throw new NotImplementedException();
         }
+
+        internal override StaticMapProvider GetInstance()
+        {
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+            {
+                return null;
+            }
+            return new MapQuestMapProvider();
+        }
     }
 }

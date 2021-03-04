@@ -5,7 +5,7 @@ namespace TeslaLogger
 {
     public class OSMMapProvider : StaticMapProvider
     {
-        protected OSMMapProvider()
+        private OSMMapProvider()
         {
         }
 
@@ -22,6 +22,11 @@ namespace TeslaLogger
         public override void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, string filename)
         {
             throw new NotImplementedException();
+        }
+
+        internal override StaticMapProvider GetInstance()
+        {
+            return new OSMMapProvider();
         }
     }
 }

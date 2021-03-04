@@ -51,7 +51,7 @@ namespace TeslaLogger
             if (_StaticMapService == null)
             {
                 _StaticMapService = new StaticMapService();
-                StaticMapProvider smp = StaticMapProvider.GetInstance();
+                StaticMapProvider smp = StaticMapProvider.GetSingleton();
             }
             return _StaticMapService;
         }
@@ -587,6 +587,26 @@ ORDER BY
             }
             Tools.DebugLog($"StaticMapService:DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
             return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
+        }
+
+        public static void CreateAllChargigMaps()
+        {
+            CreateAllMaps(StaticMapType.Charge);
+        }
+
+        public static void CreateAllParkingMaps()
+        {
+            CreateAllMaps(StaticMapType.Park);
+        }
+
+        public static void CreateAllTripMaps()
+        {
+            CreateAllMaps(StaticMapType.Trip);
+        }
+
+        private static void CreateAllMaps(StaticMapType mapType)
+        {
+
         }
     }
 }
