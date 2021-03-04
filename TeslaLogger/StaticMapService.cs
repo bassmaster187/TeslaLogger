@@ -66,7 +66,7 @@ namespace TeslaLogger
 
         private readonly ConcurrentQueue<Request> queue = new ConcurrentQueue<Request>();
 
-        const string addressfilter = "replace(replace(replace(replace(replace(convert(address USING ascii), '?',''),' ',''),'/',''),'&',''),',','') as name";
+        const string addressfilter = "replace(replace(replace(replace(replace(convert(address USING ascii), '?',''),' ',''),'/',''),'&',''),',','') AS addr";
 
         private StaticMapService()
         {
@@ -222,7 +222,7 @@ ORDER BY
 SELECT
   AVG(lat) AS lat,
   AVG(lng) AS lng,
-  {addressfilter} AS addr
+  {addressfilter}
 FROM
   chargingstate
 JOIN pos ON
@@ -247,7 +247,7 @@ GROUP BY
 SELECT
   AVG(lat) AS lat,
   AVG(lng) AS lng,
-  {addressfilter} as addr
+  {addressfilter}
 FROM
   pos    
 LEFT JOIN
@@ -384,6 +384,92 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
             return false;
+        }
+
+        internal void CreateChargingMapOnChargingCompleted(int CarID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+  lat,
+  lng,
+  {addressfilter}
+FROM
+ chargingstate
+JOIN pos ON
+  chargingstate.pos = pos.id
+WHERE
+  EndDate IS NULL
+  AND chargingstate.CarID = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+
+                        try
+                        {
+                            while (dr.Read())
+                            {
+                                GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        internal void CreateParkingMapFromPosid(int posID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+  lat,
+  lng,
+  {addressfilter}
+FROM
+  pos
+WHERE
+  id = @id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", posID);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+
+                        try
+                        {
+                            while (dr.Read())
+                            {
+                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), dr["name"].ToString());
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
     }
 }
