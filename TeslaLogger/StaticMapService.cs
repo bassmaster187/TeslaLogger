@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
@@ -46,16 +47,16 @@ namespace TeslaLogger
         {
             private string name = "invalid";
 
-            public POIRequest(MapType charge, double lat, double lng, string filename)
+            public POIRequest(MapType charge, double lat, double lng, string name)
             {
                 Charge = charge;
                 Lat = lat;
                 Lng = lng;
-                Filename = filename;
+                Name = name;
             }
 
             public MapType Charge { get; }
-            public string Filename { get; }
+            public string Name { get; }
             public double Lat { get; }
             public double Lng { get; }
         }
@@ -88,14 +89,14 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(int startPosID, int endPosID, int width, int height, MapType type, MapMode mode, MapSpecial special)
+        public void Enqueue(int startPosID, int endPosID, int width, int height, MapMode mode, MapSpecial special)
         {
-            queue.Enqueue(new TripRequest(startPosID, endPosID, width, height, type, mode, special));
+            queue.Enqueue(new TripRequest(startPosID, endPosID, width, height, MapType.Trip, mode, special));
         }
 
-        private void Enqueue(MapType charge, double lat, double lng, string filename)
+        private void Enqueue(MapType type, double lat, double lng, string name)
         {
-            queue.Enqueue(new POIRequest(MapType.Charge, lat, lng, filename));
+            queue.Enqueue(new POIRequest(type, lat, lng, name));
         }
 
         public void Run()
@@ -125,15 +126,35 @@ namespace TeslaLogger
             {
                 if (queue.TryDequeue(out Request request))
                 {
+                    int width = request.Width > 0 ? request.Width : 240;
+                    int height = request.Height > 0 ? request.Height : (int)(width / 1.618033);
                     if (request is TripRequest)
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
-                        int width = request.Width > 0 ? request.Width : 240;
-                        int height = request.Height > 0 ? request.Height : (int)(width / 1.618033);
                         using (DataTable dt = TripToCoords((TripRequest)request, out int CarID))
                         {
                             string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
-                            _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
+                            if (DeleteOldMapFile(filename))
+                            {
+                                _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
+                            }
+                        }
+                    }
+                    else if (request is POIRequest)
+                    {
+                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Name}");
+                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Type, ((POIRequest)request).Name));
+                        if (DeleteOldMapFile(filename))
+                        {
+                            switch (request.Type)
+                            {
+                                case MapType.Charge:
+                                    _StaticMapProvider.CreateChargingMap(((POIRequest)request).Lat, ((POIRequest)request).Lng, width, height, request.Mode, request.Special, filename);
+                                    break;
+                                case MapType.Park:
+                                    _StaticMapProvider.CreateParkingMap(((POIRequest)request).Lat, ((POIRequest)request).Lng, width, height, request.Mode, request.Special, filename);
+                                    break;
+                            }
                         }
                     }
                 }
@@ -199,9 +220,9 @@ ORDER BY
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter($@"
 SELECT
-  avg(lat) as lat,
-  avg(lng) as lng,
-  {addressfilter} as addr
+  AVG(lat) AS lat,
+  AVG(lng) AS lng,
+  {addressfilter} AS addr
 FROM
   chargingstate
 JOIN pos ON
@@ -213,18 +234,87 @@ GROUP BY
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(MapType.Charge, dr["addr"].ToString()));
-                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], filename);
+                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
                 }
             }
         }
 
         public static void CreateAllParkingMaps()
         {
+            using (DataTable dt = new DataTable())
+            {
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
+SELECT
+  AVG(lat) AS lat,
+  AVG(lng) AS lng,
+  {addressfilter} as addr
+FROM
+  pos    
+LEFT JOIN
+  chargingstate ON pos.id = chargingstate.pos
+WHERE
+  pos.id IN (
+  SELECT
+    pos
+  FROM
+    chargingstate
+  )
+  OR pos.id IN (
+  SELECT
+    StartPos
+  FROM
+    drivestate
+  )
+  OR pos.id IN (
+  SELECT
+    EndPos
+  FROM
+    drivestate
+  )
+GROUP BY
+  address", DBHelper.DBConnectionstring))
+                {
+                    da.Fill(dt);
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
+                }
+            }
         }
 
         public static void CreateAllTripMaps()
         {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  startposid,
+  endposid,
+  carid
+FROM
+  trip
+ORDER BY
+  startdate DESC ", con))
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
+                    try
+                    {
+                        while (dr.Read())
+                        {
+                            GetSingleton().Enqueue(Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, MapMode.Dark, MapSpecial.None);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        Logfile.Log(ex.ToString());
+                    }
+                }
+            }
         }
 
         public static string GetMapDir()
@@ -273,5 +363,27 @@ GROUP BY
             return sb.ToString();
         }
 
+
+
+        private static bool DeleteOldMapFile(string filename)
+        {
+            try
+            {
+                // check file age
+                if (File.Exists(filename))
+                {
+                    if ((DateTime.UtcNow - File.GetCreationTimeUtc(filename)).TotalDays > 90)
+                    {
+                        File.Delete(filename);
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
+        }
     }
 }

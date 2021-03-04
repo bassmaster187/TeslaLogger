@@ -333,7 +333,7 @@ namespace TeslaLogger
                     else
                     {
                         // order static map generation
-                        StaticMapService.GetSingleton().Enqueue(startPosID, endPosID, width, height, type, mode, StaticMapProvider.MapSpecial.None);
+                        StaticMapService.GetSingleton().Enqueue(startPosID, endPosID, width, height, mode, StaticMapProvider.MapSpecial.None);
                         // wait
                         for (int i = 0; i < 30; i++)
                         {

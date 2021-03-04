@@ -70,8 +70,8 @@ namespace TeslaLogger
         }
 
         internal abstract StaticMapProvider GetInstance();
-        public abstract void CreateChargingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
-        public abstract void CreateParkingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+        public abstract void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+        public abstract void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
 
         public static void SaveImage(Bitmap image, string filename)

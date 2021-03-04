@@ -73,7 +73,6 @@
     <Compile Include="DBViews.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
-    <Compile Include="MapQuest.cs" />
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />

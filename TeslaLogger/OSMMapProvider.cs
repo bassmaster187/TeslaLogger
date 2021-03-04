@@ -343,7 +343,7 @@ namespace TeslaLogger
             }
         }
 
-        private void DrawIcon(Bitmap image, DataRow coord, MapIcon icon, int zoom, double x_center, double y_center)
+        private void DrawIcon(Bitmap image, double lat, double lng, MapIcon icon, int zoom, double x_center, double y_center)
         {
             SolidBrush brush;
             int scale = 1;
@@ -367,8 +367,8 @@ namespace TeslaLogger
                     brush = new SolidBrush(Color.White);
                     break;
             }
-            int x = XtoPx(LonToTileX((double)coord["lng"], zoom), x_center, image.Width);
-            int y = YtoPx(LatToTileY((double)coord["lat"], zoom), y_center, image.Height);
+            int x = XtoPx(LonToTileX(lng, zoom), x_center, image.Width);
+            int y = YtoPx(LatToTileY(lat, zoom), y_center, image.Height);
             Rectangle rect = new Rectangle(x - 4 * scale, y - 10 * scale, 8 * scale, 8 * scale);
             Point[] triangle = new Point[] { new Point(x - 4 * scale, y - 6 * scale), new Point(x, y), new Point(x + 4 * scale, y - 6 * scale) };
             using (Graphics g = Graphics.FromImage(image))
@@ -402,14 +402,31 @@ namespace TeslaLogger
             brush.Dispose();
         }
 
-        public override void CreateChargingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
+        private void DrawIcon(Bitmap image, DataRow coord, MapIcon icon, int zoom, double x_center, double y_center)
         {
-            throw new NotImplementedException();
+            DrawIcon(image, (double)coord["lat"], (double)coord["lng"], icon, zoom, x_center, y_center);
         }
 
-        public override void CreateParkingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
+        public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
-            throw new NotImplementedException();
+            double x_center = LonToTileX(lng, 19);
+            double y_center = LatToTileY(lat, 19);
+            using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
+            {
+                // map has background tiles, OSM attribution and dark mode, if enabled
+                DrawIcon(map, lat, lng, MapIcon.Charge, 19, x_center, y_center);
+            }
+        }
+
+        public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
+        {
+            double x_center = LonToTileX(lng, 19);
+            double y_center = LatToTileY(lat, 19);
+            using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
+            {
+                // map has background tiles, OSM attribution and dark mode, if enabled
+                DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
+            }
         }
     }
 }

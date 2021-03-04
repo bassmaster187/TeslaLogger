@@ -11,17 +11,17 @@ namespace TeslaLogger
         {
         }
 
-        public override void CreateChargingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
+        public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
             sb.Append("&center=");
-            sb.Append(((double)coords["lat"]).ToString(Tools.ciEnUS)).Append(",");
-            sb.Append(((double)coords["lng"]).ToString(Tools.ciEnUS));
+            sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
+            sb.Append(lng.ToString(Tools.ciEnUS));
             sb.Append("&size=200,150&type=dark");
             sb.Append("&locations=");
-            sb.Append(((double)coords["lat"]).ToString(Tools.ciEnUS)).Append(",").Append(((double)coords["lng"]).ToString(Tools.ciEnUS));
+            sb.Append(lat.ToString(Tools.ciEnUS)).Append(",").Append(lng.ToString(Tools.ciEnUS));
             sb.Append("|marker-E3AE32|");
 
             string url = sb.ToString();
@@ -50,17 +50,17 @@ namespace TeslaLogger
 
         }
 
-        public override void CreateParkingMap(DataRow coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
+        public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
             sb.Append("&center=");
-            sb.Append(((double)coords["lat"]).ToString(Tools.ciEnUS)).Append(",");
-            sb.Append(((double)coords["lng"]).ToString(Tools.ciEnUS));
+            sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
+            sb.Append(lng.ToString(Tools.ciEnUS));
             sb.Append("&size=200,150&type=dark");
             sb.Append("&locations=");
-            sb.Append(((double)coords["lat"]).ToString(Tools.ciEnUS)).Append(",").Append(((double)coords["lng"]).ToString(Tools.ciEnUS));
+            sb.Append(lat.ToString(Tools.ciEnUS)).Append(",").Append(lng.ToString(Tools.ciEnUS));
             sb.Append("|marker-3E72B1|");
 
             string url = sb.ToString();
