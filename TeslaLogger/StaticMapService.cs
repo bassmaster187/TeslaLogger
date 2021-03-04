@@ -4,15 +4,68 @@ using System.Data;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
+using static TeslaLogger.StaticMapProvider;
 
 namespace TeslaLogger
 {
     public class StaticMapService
     {
+        internal abstract class Request
+        {
+            private MapMode mode = MapMode.Regular;
+            private MapSpecial special = MapSpecial.None;
+            private MapType type = MapType.Trip;
+            private int width = 0;
+            private int height = 0;
+
+            internal MapType Type { get => type; set => type = value; }
+            internal int Width { get => width; set => width = value; }
+            internal int Height { get => height; set => height = value; }
+            internal MapMode Mode { get => mode; set => mode = value; }
+            internal MapSpecial Special { get => special; set => special = value; }
+        }
+
+        internal class TripRequest : Request
+        {
+            public TripRequest(int startPosID, int endPosID, int width, int height, MapType type, MapMode mode, MapSpecial special)
+            {
+                StartPosID = startPosID;
+                EndPosID = endPosID;
+                Width = width;
+                Height = height;
+                Type = type;
+                Mode = mode;
+                Special = special;
+            }
+
+            public int StartPosID { get; }
+            public int EndPosID { get; }
+        }
+
+        internal class POIRequest : Request
+        {
+            private string name = "invalid";
+
+            public POIRequest(MapType charge, double lat, double lng, string filename)
+            {
+                Charge = charge;
+                Lat = lat;
+                Lng = lng;
+                Filename = filename;
+            }
+
+            public MapType Charge { get; }
+            public string Filename { get; }
+            public double Lat { get; }
+            public double Lng { get; }
+        }
+
         private static StaticMapService _StaticMapService = null;
         private static StaticMapProvider _StaticMapProvider = null;
 
-        private readonly ConcurrentQueue<Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial>> queue = new ConcurrentQueue<Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial>>();
+        private readonly ConcurrentQueue<Request> queue = new ConcurrentQueue<Request>();
+
+        const string addressfilter = "replace(replace(replace(replace(replace(convert(address USING ascii), '?',''),' ',''),'/',''),'&',''),',','') as name";
 
         private StaticMapService()
         {
@@ -35,14 +88,14 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(int startPosID, int endPosID, int width, int height, StaticMapProvider.MapType type, StaticMapProvider.MapMode mode, StaticMapProvider.MapSpecial special)
+        public void Enqueue(int startPosID, int endPosID, int width, int height, MapType type, MapMode mode, MapSpecial special)
         {
-            Enqueue(new Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial>(startPosID, endPosID, width, height, type, mode, special));
+            queue.Enqueue(new TripRequest(startPosID, endPosID, width, height, type, mode, special));
         }
 
-        private void Enqueue(Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial> request)
+        private void Enqueue(MapType charge, double lat, double lng, string filename)
         {
-            queue.Enqueue(request);
+            queue.Enqueue(new POIRequest(MapType.Charge, lat, lng, filename));
         }
 
         public void Run()
@@ -70,32 +123,24 @@ namespace TeslaLogger
             Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count);
             if (_StaticMapProvider != null)
             {
-                if (queue.TryDequeue(out Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial> request))
+                if (queue.TryDequeue(out Request request))
                 {
-                    Tools.DebugLog($"StaticMapService:Work() request:{request.Item5} {request.Item1}->{request.Item2}");
-                    int width = request.Item3 > 0 ? request.Item3 : 240;
-                    int height = request.Item4 > 0 ? request.Item4 : (int)(width / 1.618033);
-                    using (DataTable dt = TripToCoords(request, out int CarID))
+                    if (request is TripRequest)
                     {
-                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Item5, CarID, request.Item1, request.Item2));
-                        switch (request.Item5)
+                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
+                        int width = request.Width > 0 ? request.Width : 240;
+                        int height = request.Height > 0 ? request.Height : (int)(width / 1.618033);
+                        using (DataTable dt = TripToCoords((TripRequest)request, out int CarID))
                         {
-                            case StaticMapProvider.MapType.Trip:
-                                _StaticMapProvider.CreateTripMap(dt, width, height, request.Item6 == StaticMapProvider.MapMode.Dark ? StaticMapProvider.MapMode.Dark : StaticMapProvider.MapMode.Regular, StaticMapProvider.MapSpecial.None, filename);
-                                break;
-                            case StaticMapProvider.MapType.Park:
-                                _StaticMapProvider.CreateParkingMap(dt.Rows[0], width, height, request.Item6 == StaticMapProvider.MapMode.Dark ? StaticMapProvider.MapMode.Dark : StaticMapProvider.MapMode.Regular, StaticMapProvider.MapSpecial.None, filename);
-                                break;
-                            case StaticMapProvider.MapType.Charge:
-                                _StaticMapProvider.CreateChargingMap(dt.Rows[0], width, height, request.Item6 == StaticMapProvider.MapMode.Dark ? StaticMapProvider.MapMode.Dark : StaticMapProvider.MapMode.Regular, StaticMapProvider.MapSpecial.None, filename);
-                                break;
+                            string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
+                            _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
                         }
                     }
                 }
             }
         }
 
-        private DataTable TripToCoords(Tuple<int, int, int, int, StaticMapProvider.MapType, StaticMapProvider.MapMode, StaticMapProvider.MapSpecial> request, out int CarID)
+        private DataTable TripToCoords(TripRequest request, out int CarID)
         {
             DataTable dt = new DataTable();
             CarID = int.MinValue;
@@ -110,7 +155,7 @@ FROM
 WHERE
   id = @startID ", con))
                 {
-                    cmd.Parameters.AddWithValue("@startID", request.Item1);
+                    cmd.Parameters.AddWithValue("@startID", request.StartPosID);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
@@ -121,7 +166,7 @@ WHERE
             }
             if (CarID != int.MinValue && CarID > 0)
             {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
 SELECT
   lat,
   lng
@@ -135,21 +180,43 @@ ORDER BY
   Datum", DBHelper.DBConnectionstring))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
-                    da.SelectCommand.Parameters.AddWithValue("@startID", request.Item1);
-                    da.SelectCommand.Parameters.AddWithValue("@endID", request.Item2);
+                    da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);
+                    da.SelectCommand.Parameters.AddWithValue("@endID", request.EndPosID);
                     Tools.DebugLog(da.SelectCommand);
                     da.Fill(dt);
                 }
             }
             else
             {
-                Tools.DebugLog($"TripToCoords: could not find CarID for pos {request.Item1}");
+                Tools.DebugLog($"TripToCoords: could not find CarID for pos {request.StartPosID}");
             }
             return dt;
         }
 
-        public static void CreateAllChargigMaps()
+        public static void CreateAllChargingMaps()
         {
+            using (DataTable dt = new DataTable())
+            {
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
+SELECT
+  avg(lat) as lat,
+  avg(lng) as lng,
+  {addressfilter} as addr
+FROM
+  chargingstate
+JOIN pos ON
+  chargingstate.pos = pos.id
+GROUP BY
+  address", DBHelper.DBConnectionstring))
+                {
+                    da.Fill(dt);
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(MapType.Charge, dr["addr"].ToString()));
+                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], filename);
+                }
+            }
         }
 
         public static void CreateAllParkingMaps()
@@ -177,21 +244,26 @@ ORDER BY
             return mapdir;
         }
 
-        public static string GetMapFileName(StaticMapProvider.MapType type, int carID, int startpos, int endpos)
+        private static string GetMapFileName(StaticMapProvider.MapType type, string name)
         {
-            StringBuilder sb = new StringBuilder();
             switch (type)
             {
                 case StaticMapProvider.MapType.Trip:
-                    sb.Append("T-");
                     break;
                 case StaticMapProvider.MapType.Charge:
-                    sb.Append("C-");
+                    return "C-" + name + ".png";
                     break;
                 case StaticMapProvider.MapType.Park:
-                    sb.Append("P-");
+                    return "P-" + name + ".png";
                     break;
             }
+            return "error.png";
+        }
+
+        public static string GetMapFileName(int carID, int startpos, int endpos)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("T-");
             sb.Append(carID);
             sb.Append("-");
             sb.Append(startpos);
