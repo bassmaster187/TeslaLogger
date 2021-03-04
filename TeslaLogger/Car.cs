@@ -266,6 +266,9 @@ namespace TeslaLogger
                 {
                     ExitTeslaLogger("wh.GetVehicles() == NULL");
                 }
+
+                dbHelper.GetEconomy_Wh_km(webhelper);
+
                 string online = webhelper.IsOnline().Result;
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
@@ -275,9 +278,7 @@ namespace TeslaLogger
                     webhelper.IsDriving(true);
                 }
 
-                Log("Country Code: " + dbHelper.UpdateCountryCode());
-
-                dbHelper.GetEconomy_Wh_km(webhelper);
+                Log("Country Code: " + dbHelper.UpdateCountryCode());                
                 webhelper.DeleteWakeupFile();
 
                 if (Raven)
