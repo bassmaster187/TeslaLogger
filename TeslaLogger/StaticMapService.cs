@@ -47,9 +47,9 @@ namespace TeslaLogger
         {
             private string name = "invalid";
 
-            public POIRequest(MapType charge, double lat, double lng, string name)
+            public POIRequest(MapType type, double lat, double lng, string name)
             {
-                Charge = charge;
+                Type = type;
                 Lat = lat;
                 Lng = lng;
                 Name = name;
@@ -78,7 +78,7 @@ namespace TeslaLogger
             if (_StaticMapService == null)
             {
                 _StaticMapService = new StaticMapService();
-                StaticMapProvider _StaticMapProvider = StaticMapProvider.GetSingleton();
+                _StaticMapProvider = StaticMapProvider.GetSingleton();
                 Logfile.Log("selected MapProvider: " + _StaticMapProvider.GetType());
             }
             return _StaticMapService;
@@ -121,7 +121,7 @@ namespace TeslaLogger
 
         private void Work()
         {
-            Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count);
+            Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
             if (_StaticMapProvider != null)
             {
                 if (queue.TryDequeue(out Request request))
@@ -377,6 +377,10 @@ ORDER BY
                         File.Delete(filename);
                         return true;
                     }
+                }
+                else
+                {
+                    return true;
                 }
             }
             catch (Exception ex)

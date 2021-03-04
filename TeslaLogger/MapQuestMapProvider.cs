@@ -7,12 +7,12 @@ namespace TeslaLogger
 {
     public class MapQuestMapProvider : StaticMapProvider
     {
-        protected MapQuestMapProvider()
-        {
-        }
-
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+            {
+                return;
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
@@ -52,6 +52,10 @@ namespace TeslaLogger
 
         public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+            {
+                return;
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
@@ -91,6 +95,10 @@ namespace TeslaLogger
 
         public override void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+            {
+                return;
+            }
             // https://open.mapquestapi.com/staticmap/v5/map?key=ulMOOlevG9FunIVobQB2BG2GA0EdCjjH&boundingBox=38.915,-77.072,38.876,-77.001&size=200,150&type=dark
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
             StringBuilder sb = new StringBuilder();
@@ -167,15 +175,6 @@ namespace TeslaLogger
                 Logfile.Log("Rows count: " + coords.Rows.Count + " posquery= " + posquery + "\r\n" + ex.ToString());
             }
 
-        }
-
-        internal override StaticMapProvider GetInstance()
-        {
-            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
-            {
-                return null;
-            }
-            return new MapQuestMapProvider();
         }
     }
 }

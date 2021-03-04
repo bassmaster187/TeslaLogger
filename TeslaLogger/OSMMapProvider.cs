@@ -12,10 +12,6 @@ namespace TeslaLogger
 {
     public class OSMMapProvider : StaticMapProvider
     {
-        private OSMMapProvider()
-        {
-        }
-
         private static Random random = new Random();
         private static int padding_x = 12;
         private static int padding_y = 12;
@@ -39,12 +35,8 @@ namespace TeslaLogger
                 DrawTrip(map, coords, zoom, x_center, y_center);
                 DrawIcon(map, coords.Rows[0], MapIcon.Start, zoom, x_center, y_center);
                 DrawIcon(map, coords.Rows[coords.Rows.Count - 1], MapIcon.End, zoom, x_center, y_center);
+                SaveImage(map, filename);
             }
-        }
-
-        internal override StaticMapProvider GetInstance()
-        {
-            return new OSMMapProvider();
         }
 
         // transform longitude to tile number
@@ -415,6 +407,7 @@ namespace TeslaLogger
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
                 DrawIcon(map, lat, lng, MapIcon.Charge, 19, x_center, y_center);
+                SaveImage(map, filename);
             }
         }
 
@@ -426,6 +419,8 @@ namespace TeslaLogger
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
                 DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
+                Tools.DebugLog("CreateParkingMap save to " + filename);
+                SaveImage(map, filename);
             }
         }
     }

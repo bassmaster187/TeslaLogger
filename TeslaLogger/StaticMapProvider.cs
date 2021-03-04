@@ -53,23 +53,17 @@ namespace TeslaLogger
                     Logfile.Log("available MapProvider: " + type);
                     if (type.ToString().Contains(Tools.GetMapProvider()))
                     {
-                        MethodInfo methodInfo = type.GetMethod("GetInstance");
-                        if (methodInfo != null)
-                        {
-                            object classInstance = Activator.CreateInstance(type);
-                            _StaticMapProvider = (StaticMapProvider)methodInfo.Invoke(classInstance, null);
-                        }
+                        _StaticMapProvider = (StaticMapProvider)Activator.CreateInstance(type);
                     }
                 }
                 if (_StaticMapProvider == null)
                 {
-                    _StaticMapProvider = OSMMapProvider.GetSingleton(); // default
+                    _StaticMapProvider = new OSMMapProvider(); // default
                 }
             }
             return _StaticMapProvider;
         }
 
-        internal abstract StaticMapProvider GetInstance();
         public abstract void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
@@ -78,7 +72,7 @@ namespace TeslaLogger
         {
             try
             {
-
+                image.Save(filename);
             }
             catch (Exception ex)
             {
