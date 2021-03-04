@@ -97,6 +97,7 @@
     <Compile Include="StaticMapProvider.cs" />
     <Compile Include="OSMMapProvider.cs" />
     <Compile Include="MapQuestMapProvider.cs" />
+    <Compile Include="MapQuest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
