@@ -941,11 +941,14 @@ namespace TeslaLogger
 
             Task.Factory.StartNew(() =>
               {
-                  UpdateTripElevation(StartPos, MaxPosId, " (Task)");
+                  if (StartPos > 0)
+                  {
+                      UpdateTripElevation(StartPos, MaxPosId, " (Task)");
 
-                  StaticMapService.GetSingleton().Enqueue(StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
-                  StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
-                  StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
+                      StaticMapService.GetSingleton().Enqueue(StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
+                  }
               });
         }
 
