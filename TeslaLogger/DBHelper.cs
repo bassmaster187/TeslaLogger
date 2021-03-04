@@ -941,11 +941,14 @@ namespace TeslaLogger
 
             Task.Factory.StartNew(() =>
               {
-                  UpdateTripElevation(StartPos, MaxPosId, " (Task)");
+                  if (StartPos > 0)
+                  {
+                      UpdateTripElevation(StartPos, MaxPosId, " (Task)");
 
-                  MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
-                  MapQuest.CreateParkingMapFromPosid(StartPos);
-                  MapQuest.CreateParkingMapFromPosid(MaxPosId);
+                      MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
+                      MapQuest.CreateParkingMapFromPosid(StartPos);
+                      MapQuest.CreateParkingMapFromPosid(MaxPosId);
+                  }
               });
         }
 

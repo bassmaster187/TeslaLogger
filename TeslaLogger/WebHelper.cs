@@ -1425,7 +1425,7 @@ namespace TeslaLogger
 
                         if (ts.TotalMinutes > 60)
                         {
-                            if (state == "offline" || state == "asleep" || state == "online")
+                            if (state == "offline" || state == "asleep")
                                 return state;
 
                             string resultContent2 = GetCommand("vehicle_config").Result;
@@ -1438,6 +1438,11 @@ namespace TeslaLogger
 
                             if (jBadgeResult != null)
                             {
+                                string car_type = car.car_type;
+                                string car_special_type = car.car_special_type;
+                                string trim_badging = car.trim_badging;
+
+
                                 if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
                                 {
                                     car.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
@@ -1454,6 +1459,9 @@ namespace TeslaLogger
 
                                 UpdateEfficiency();
                                 lastUpdateEfficiency = DateTime.Now;
+
+                                if (car_type != car.car_type || car_special_type != car.car_special_type || trim_badging != car.trim_badging)
+                                    car.dbHelper.WriteCarSettings();
                             }
                         }
                     }
