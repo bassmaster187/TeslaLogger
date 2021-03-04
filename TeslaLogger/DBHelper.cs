@@ -2411,6 +2411,65 @@ namespace TeslaLogger
             }
         }
 
+        DataTable GetLatestDC_Charging_with_50PercentSOC()
+        {
+            DataTable dt = new DataTable();
+            string sql = @"select c1.Datum as sd, c2.Datum as ed, chargingstate.carid from chargingstate 
+                join charging c1 on c1.id = startchargingid 
+                join charging c2 on c2.id = endchargingid
+                where max_charger_power > 30 and c1.battery_level < 50 and c2.battery_level > 50 and chargingstate.carid = @carid
+                order by chargingstate.startdate desc
+                limit 5";
+
+            using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
+            {
+                da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
+                da.Fill(dt);
+            }
+
+            return dt;
+        }
+
+        public double GetVoltageAt50PercentSOC(out DateTime start, out DateTime ende)
+        {
+            start = DateTime.MinValue;
+            ende = DateTime.MinValue;
+
+            try
+            {
+                DataTable dt = GetLatestDC_Charging_with_50PercentSOC();
+                string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
+
+                foreach(DataRow dr in dt.Rows)
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                        {
+                            start = (DateTime)dr["sd"];
+                            ende = (DateTime)dr["ed"];
+
+                            cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                            cmd.Parameters.AddWithValue("@start", start);
+                            cmd.Parameters.AddWithValue("@ende", ende);
+                            object ret = cmd.ExecuteScalar();
+
+                            if (ret == DBNull.Value)
+                                continue;
+                            
+                            return Convert.ToDouble(ret);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return 0;
+        }
+
         public static object DBNullIfEmptyOrZero(string val)
         {
             if (val == null || val.Length == 0 || val == "0" || val == "0.00")
