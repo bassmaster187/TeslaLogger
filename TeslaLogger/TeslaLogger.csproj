@@ -73,7 +73,6 @@
     <Compile Include="DBViews.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
-    <Compile Include="MapQuest.cs" />
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
@@ -95,6 +94,10 @@
     <Compile Include="OpenTopoDataService.cs" />
     <Compile Include="NearbySuCService.cs" />
     <Compile Include="StaticMapService.cs" />
+    <Compile Include="StaticMapProvider.cs" />
+    <Compile Include="OSMMapProvider.cs" />
+    <Compile Include="MapQuestMapProvider.cs" />
+    <Compile Include="MapQuest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

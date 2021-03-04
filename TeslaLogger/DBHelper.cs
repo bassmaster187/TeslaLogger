@@ -487,7 +487,7 @@ namespace TeslaLogger
         public void CloseChargingState()
         {
             car.Log("CloseChargingState()");
-            MapQuest.CreateChargingMapOnChargingCompleted(car.CarInDB);
+            StaticMapService.GetSingleton().CreateChargingMapOnChargingCompleted(car.CarInDB);
             bool hasFreeSuc = car.HasFreeSuC();
             if (hasFreeSuc)
             {
@@ -945,9 +945,9 @@ namespace TeslaLogger
                   {
                       UpdateTripElevation(StartPos, MaxPosId, " (Task)");
 
-                      MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
-                      MapQuest.CreateParkingMapFromPosid(StartPos);
-                      MapQuest.CreateParkingMapFromPosid(MaxPosId);
+                      StaticMapService.GetSingleton().Enqueue(StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }
               });
         }
