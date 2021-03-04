@@ -120,8 +120,10 @@ namespace TeslaLogger
         public double kwh100km = 0;
         public double avgsocdiff = 0;
         public double maxkm = 0;
+        public double carVoltageAt50SOC = 0;
 
         public StringBuilder passwortinfo = new StringBuilder();
+        
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -278,7 +280,10 @@ namespace TeslaLogger
                     webhelper.IsDriving(true);
                 }
 
-                Log("Country Code: " + dbHelper.UpdateCountryCode());                
+                Log("Country Code: " + dbHelper.UpdateCountryCode());
+                carVoltageAt50SOC = dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende);
+                Log("Voltage at 50% SOC:" + carVoltageAt50SOC + "V Date:" + startdate.ToString());
+
                 webhelper.DeleteWakeupFile();
 
                 if (Raven)

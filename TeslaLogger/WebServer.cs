@@ -749,6 +749,9 @@ namespace TeslaLogger
                     sb.Append("car_type:").Append(c.car_type).Append("\r\n");
                     sb.Append("car_special_type:").Append(c.car_special_type).Append("\r\n");
                     sb.Append("trim_badging:").Append(c.trim_badging).Append("\r\n");
+                    
+                    c.GetTeslaAPIState().GetBool("has_ludicrous_mode", out bool has_ludicrous_mode);
+                    sb.Append("has_ludicrous_mode:").Append(has_ludicrous_mode).Append("\r\n");
                     sb.Append("DB_Wh_TR:").Append(c.DB_Wh_TR).Append("\r\n").Append("\r\n");
 
                     Tools.VINDecoder(c.vin, out int year, out string carType, out bool AWD, out bool MIC, out string batery, out string motor);
@@ -759,7 +762,20 @@ namespace TeslaLogger
                     sb.Append("VIN batery:").Append(batery).Append("\r\n");
                     sb.Append("VIN motor:").Append(motor).Append("\r\n");
 
-                    sb.Append("Vehicle Config:").Append("\r\n").Append(c.webhelper.GetCommand("vehicle_config").Result).Append("\r\n");
+                    sb.Append("Voltage at 50% SOC:").Append(c.dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende)).Append("V Date:").Append(startdate).Append("\r\n");
+
+                    string vehicle_config = "";
+
+                    for (int retry = 0; retry < 10; retry++)
+                    {
+                        vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
+                        if (vehicle_config?.Trim()?.StartsWith("{") == true)
+                            break;
+
+                        System.Threading.Thread.Sleep(2000);
+                    }
+
+                    sb.Append("Vehicle Config:").Append("\r\n").Append(vehicle_config).Append("\r\n");
 
                     WriteString(response, sb.ToString());
                 }
