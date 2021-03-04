@@ -2438,7 +2438,7 @@ namespace TeslaLogger
             try
             {
                 DataTable dt = GetLatestDC_Charging_with_50PercentSOC();
-                string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende";
+                string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
 
                 foreach(DataRow dr in dt.Rows)
                 {
@@ -2455,6 +2455,9 @@ namespace TeslaLogger
                             cmd.Parameters.AddWithValue("@ende", ende);
                             object ret = cmd.ExecuteScalar();
 
+                            if (ret == DBNull.Value)
+                                continue;
+                            
                             return Convert.ToDouble(ret);
                         }
                     }
