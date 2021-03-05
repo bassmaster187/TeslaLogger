@@ -2371,37 +2371,39 @@ namespace TeslaLogger
             kwh100km = 0;
             avgsocdiff = 0;
             maxkm = 0;
-            
+
             try
             {
-                DataTable dt = new DataTable();
-                string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
+                using (DataTable dt = new DataTable())
+                {
+                    string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
                     FROM trip 
                     join pos on trip.startposid = pos.id 
                     join pos as posend on trip.endposid = posend.id
                     where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
 
-                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
-                {
-                    da.Fill(dt);
-
-                    if (dt.Rows.Count == 1)
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                     {
-                        var r = dt.Rows[0];
+                        da.Fill(dt);
 
-                        if (r["sumkm"] == DBNull.Value)
+                        if (dt.Rows.Count == 1)
                         {
-                            car.Log($"GetAvgConsumption: nothing found!!!");
-                            return;
+                            var r = dt.Rows[0];
+
+                            if (r["sumkm"] == DBNull.Value)
+                            {
+                                car.Log($"GetAvgConsumption: nothing found!!!");
+                                return;
+                            }
+
+                            sumkm = Math.Round((double)r["sumkm"], 1);
+                            avgkm = Math.Round((double)r["avgkm"], 1);
+                            kwh100km = Math.Round((double)r["kwh100km"], 1);
+                            avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
+                            maxkm = Math.Round((double)r["maxkm"], 1);
+
+                            car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                         }
-
-                        sumkm = Math.Round((double)r["sumkm"],1);
-                        avgkm = Math.Round((double)r["avgkm"], 1);
-                        kwh100km = Math.Round((double)r["kwh100km"], 1);
-                        avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
-                        maxkm = Math.Round((double)r["maxkm"], 1);
-
-                        car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                     }
                 }
             }
@@ -2437,28 +2439,30 @@ namespace TeslaLogger
 
             try
             {
-                DataTable dt = GetLatestDC_Charging_with_50PercentSOC();
-                string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
-
-                foreach(DataRow dr in dt.Rows)
+                using (DataTable dt = GetLatestDC_Charging_with_50PercentSOC())
                 {
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
+
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                         {
-                            start = (DateTime)dr["sd"];
-                            ende = (DateTime)dr["ed"];
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                            {
+                                start = (DateTime)dr["sd"];
+                                ende = (DateTime)dr["ed"];
 
-                            cmd.Parameters.AddWithValue("@carid", car.CarInDB);
-                            cmd.Parameters.AddWithValue("@start", start);
-                            cmd.Parameters.AddWithValue("@ende", ende);
-                            object ret = cmd.ExecuteScalar();
+                                cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@start", start);
+                                cmd.Parameters.AddWithValue("@ende", ende);
+                                object ret = cmd.ExecuteScalar();
 
-                            if (ret == DBNull.Value)
-                                continue;
-                            
-                            return Convert.ToDouble(ret);
+                                if (ret == DBNull.Value)
+                                    continue;
+
+                                return Convert.ToDouble(ret);
+                            }
                         }
                     }
                 }

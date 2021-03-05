@@ -28,7 +28,7 @@ namespace TeslaLogger
 
         internal class TripRequest : Request
         {
-            public TripRequest(int startPosID, int endPosID, int width, int height, MapType type, MapMode mode, MapSpecial special)
+            public TripRequest(int startPosID, int endPosID, MapType type, MapMode mode, MapSpecial special, int width = 0, int height = 0)
             {
                 StartPosID = startPosID;
                 EndPosID = endPosID;
@@ -45,14 +45,14 @@ namespace TeslaLogger
 
         internal class POIRequest : Request
         {
-            private string name = "invalid";
-
-            public POIRequest(MapType type, double lat, double lng, string name)
+            public POIRequest(MapType type, double lat, double lng, string name, int width = 0, int height = 0)
             {
                 Type = type;
                 Lat = lat;
                 Lng = lng;
                 Name = name;
+                Width = width;
+                Height = height;
             }
 
             public MapType Charge { get; }
@@ -91,7 +91,7 @@ namespace TeslaLogger
 
         public void Enqueue(int startPosID, int endPosID, int width, int height, MapMode mode, MapSpecial special)
         {
-            queue.Enqueue(new TripRequest(startPosID, endPosID, width, height, MapType.Trip, mode, special));
+            queue.Enqueue(new TripRequest(startPosID, endPosID, MapType.Trip, mode, special, width, height));
         }
 
         private void Enqueue(MapType type, double lat, double lng, string name)
@@ -334,18 +334,14 @@ ORDER BY
             return mapdir;
         }
 
-        private static string GetMapFileName(StaticMapProvider.MapType type, string name)
+        private static string GetMapFileName(MapType type, string name)
         {
             switch (type)
             {
-                case StaticMapProvider.MapType.Trip:
-                    break;
-                case StaticMapProvider.MapType.Charge:
+                case MapType.Charge:
                     return "C-" + name + ".jpg";
-                    break;
-                case StaticMapProvider.MapType.Park:
+                case MapType.Park:
                     return "P-" + name + ".jpg";
-                    break;
             }
             return "error.jpg";
         }
@@ -362,8 +358,6 @@ ORDER BY
             sb.Append(".jpg");
             return sb.ToString();
         }
-
-
 
         private static bool DeleteOldMapFile(string filename)
         {

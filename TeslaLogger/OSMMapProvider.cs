@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
 
 namespace TeslaLogger
@@ -24,11 +23,9 @@ namespace TeslaLogger
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;
             int zoom = 19; // max zoom
+            zoom = CalculateZoom(coords, width, height);
             double x_center = LonToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
-            zoom = CalculateZoom(coords, width, height);
-            x_center = LonToTileX(lng_center, zoom);
-            y_center = LatToTileY(lat_center, zoom);
             using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
@@ -36,6 +33,7 @@ namespace TeslaLogger
                 DrawIcon(map, coords.Rows[0], MapIcon.Start, zoom, x_center, y_center);
                 DrawIcon(map, coords.Rows[coords.Rows.Count - 1], MapIcon.End, zoom, x_center, y_center);
                 SaveImage(map, filename);
+                map.Dispose();
             }
         }
 
@@ -90,7 +88,10 @@ namespace TeslaLogger
                 wc.Headers["User-Agent"] = this.GetType().ToString();
                 using (MemoryStream ms = new MemoryStream(wc.DownloadData(url)))
                 {
-                    return new Bitmap(Image.FromStream(ms));
+                    Bitmap bmp = new Bitmap(Image.FromStream(ms));
+                    wc.Dispose();
+                    ms.Close();
+                    return bmp;
                 }
             }
         }
@@ -111,7 +112,7 @@ namespace TeslaLogger
 
         private void DrawMapLayer(Bitmap image, int width, int height, double x_center, double y_center, int zoom)
         {
-            Tools.DebugLog("StaticMapService:DrawMapLayer()");
+            Tools.DebugLog("DrawMapLayer()");
             int x_min = (int)(Math.Floor(x_center - (0.5 * width / tileSize)));
             int y_min = (int)(Math.Floor(y_center - (0.5 * height / tileSize)));
             int x_max = (int)(Math.Ceiling(x_center + (0.5 * width / tileSize)));
@@ -122,7 +123,7 @@ namespace TeslaLogger
             {
                 for (int y = y_min; y < y_max; y++)
                 {
-                    Tools.DebugLog($"StaticMapService:DrawMapLayer() x:{x} y:{y}");
+                    Tools.DebugLog($"DrawMapLayer() x:{x} y:{y}");
                     // x and y may have crossed the date line
                     int max_tile = (int)Math.Pow(2, zoom);
                     int tile_x = (x + max_tile) % max_tile;
@@ -133,13 +134,14 @@ namespace TeslaLogger
                     tiles.Add(new Tuple<int, int, Uri>(x, y, url));
                 }
             }
-            Tools.DebugLog("StaticMapService:DrawMapLayer() tiles:" + tiles.Count);
+            Tools.DebugLog("DrawMapLayer() tiles:" + tiles.Count);
             foreach (Tuple<int, int, Uri> tile in tiles)
             {
                 using (Bitmap tileImage = DownloadTile(tile.Item3))
                 {
                     Rectangle box = new Rectangle(XtoPx(tile.Item1, x_center, width), YtoPx(tile.Item2, y_center, height), tileSize, tileSize);
                     CopyRegionIntoImage(tileImage, new Rectangle(0, 0, tileSize, tileSize), image, box);
+                    tileImage.Dispose();
                 }
             }
         }
@@ -181,12 +183,13 @@ namespace TeslaLogger
                     using (SolidBrush fillBrush = new SolidBrush(Color.FromArgb(128, 128, 128, 128)))
                     {
                         g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
+                        fillBrush.Dispose();
                         using (SolidBrush textBrush = new SolidBrush(Color.Black))
                         {
-                            using (StringFormat drawFormat = new StringFormat())
-                            {
-                                g.DrawString(attribution, drawFont, textBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
-                            }
+                            g.DrawString(attribution, drawFont, textBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                            textBrush.Dispose();
+                            drawFont.Dispose();
+                            g.Dispose();
                         }
                     }
                 }
@@ -211,6 +214,8 @@ namespace TeslaLogger
                 using (Graphics g = Graphics.FromImage(image))
                 {
                     g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                    ia.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -237,6 +242,8 @@ namespace TeslaLogger
                 using (Graphics g = Graphics.FromImage(image))
                 {
                     g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                    ia.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -256,10 +263,11 @@ namespace TeslaLogger
             using (ImageAttributes ia = new ImageAttributes())
             {
                 ia.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
                 using (Graphics g = Graphics.FromImage(image))
                 {
                     g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                    ia.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -277,8 +285,9 @@ namespace TeslaLogger
                 using (ImageAttributes attributes = new ImageAttributes())
                 {
                     attributes.SetColorMatrix(colorMatrix);
-                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
-                    0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+                    attributes.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -300,6 +309,8 @@ namespace TeslaLogger
                 using (Graphics g = Graphics.FromImage(image))
                 {
                     g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+                    ia.Dispose();
+                    g.Dispose();
                 }
             }
         }
@@ -325,6 +336,9 @@ namespace TeslaLogger
                                 // Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
                                 graphics.DrawLine(whitePen, x1, y1, x2, y2);
                                 graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                                graphics.Dispose();
+                                whitePen.Dispose();
+                                bluePen.Dispose();
                             }
                         }
                         // start and end icon
@@ -374,6 +388,7 @@ namespace TeslaLogger
                     g.DrawArc(whitePen, rect, 180, 180);
                     g.DrawLine(whitePen, triangle[0], triangle[1]);
                     g.DrawLine(whitePen, triangle[1], triangle[2]);
+                    whitePen.Dispose();
                 }
                 if (icon == MapIcon.Park || icon == MapIcon.Charge)
                 {
@@ -383,10 +398,10 @@ namespace TeslaLogger
                         SizeF size = g.MeasureString(text, drawFont);
                         using (SolidBrush textBrush = new SolidBrush(Color.White))
                         {
-                            using (StringFormat drawFormat = new StringFormat())
-                            {
-                                g.DrawString(text, drawFont, textBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
-                            }
+                            g.DrawString(text, drawFont, textBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
+                            g.Dispose();
+                            textBrush.Dispose();
+                            drawFont.Dispose();
                         }
                     }
                 }
@@ -408,6 +423,7 @@ namespace TeslaLogger
                 // map has background tiles, OSM attribution and dark mode, if enabled
                 DrawIcon(map, lat, lng, MapIcon.Charge, 19, x_center, y_center);
                 SaveImage(map, filename);
+                map.Dispose();
             }
         }
 
@@ -420,6 +436,7 @@ namespace TeslaLogger
                 // map has background tiles, OSM attribution and dark mode, if enabled
                 DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
                 SaveImage(map, filename);
+                map.Dispose();
             }
         }
     }
