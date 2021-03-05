@@ -439,5 +439,10 @@ namespace TeslaLogger
                 map.Dispose();
             }
         }
+
+        public override int GetDelayMS()
+        {
+            return 500;
+        }
     }
 }

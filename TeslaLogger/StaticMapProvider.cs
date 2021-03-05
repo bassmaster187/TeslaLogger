@@ -67,6 +67,7 @@ namespace TeslaLogger
         public abstract void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
+        public abstract int GetDelayMS();
 
         public static void SaveImage(Bitmap image, string filename)
         {

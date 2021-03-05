@@ -19,7 +19,7 @@ namespace TeslaLogger
             sb.Append("&center=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
             sb.Append(lng.ToString(Tools.ciEnUS));
-            sb.Append("&size=200,150&type=dark");
+            sb.Append($"&size={width},{height}&type=dark");
             sb.Append("&locations=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",").Append(lng.ToString(Tools.ciEnUS));
             sb.Append("|marker-E3AE32|");
@@ -62,7 +62,7 @@ namespace TeslaLogger
             sb.Append("&center=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
             sb.Append(lng.ToString(Tools.ciEnUS));
-            sb.Append("&size=200,150&type=dark");
+            sb.Append($"&size={width},{height}&type=dark");
             sb.Append("&locations=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",").Append(lng.ToString(Tools.ciEnUS));
             sb.Append("|marker-3E72B1|");
@@ -109,7 +109,7 @@ namespace TeslaLogger
             sb.Append(extent.Item2.ToString(Tools.ciEnUS)).Append(",");
             sb.Append(extent.Item3.ToString(Tools.ciEnUS)).Append(",");
             sb.Append(extent.Item4.ToString(Tools.ciEnUS));
-            sb.Append("&size=200,150&type=dark");
+            sb.Append($"&size={width},{height}&type=dark");
             sb.Append("&locations=");
             sb.Append(Convert.ToDouble(coords.Rows[0]["lat"]).ToString(Tools.ciEnUS)).Append(",").Append(Convert.ToDouble(coords.Rows[0]["lng"]).ToString(Tools.ciEnUS));
             sb.Append("|marker-start||");
@@ -175,6 +175,11 @@ namespace TeslaLogger
                 Logfile.Log("Rows count: " + coords.Rows.Count + " posquery= " + posquery + "\r\n" + ex.ToString());
             }
 
+        }
+
+        public override int GetDelayMS()
+        {
+            return 0;
         }
     }
 }
