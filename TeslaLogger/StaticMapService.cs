@@ -109,14 +109,6 @@ namespace TeslaLogger
                     {
                         Work();
                     }
-                    if (_StaticMapProvider != null)
-                    {
-                        Thread.Sleep(_StaticMapProvider.GetDelayMS());
-                    }
-                    else
-                    {
-                        Thread.Sleep(1000);
-                    }
                 }
             }
             catch (Exception ex)
@@ -137,15 +129,23 @@ namespace TeslaLogger
                     if (request is TripRequest)
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
-                        using (DataTable dt = TripToCoords((TripRequest)request, out int CarID))
+                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
+                        if (DeleteOldMapFile(filename))
                         {
-                            if (dt != null & dt.Rows.Count > 1)
+                            using (DataTable dt = TripToCoords((TripRequest)request))
                             {
-                                string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
-                                if (DeleteOldMapFile(filename))
+                                if (dt != null & dt.Rows.Count > 1)
                                 {
                                     _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
                                     dt.Clear();
+                                    if (_StaticMapProvider != null)
+                                    {
+                                        Thread.Sleep(_StaticMapProvider.GetDelayMS());
+                                    }
+                                    else
+                                    {
+                                        Thread.Sleep(1000);
+                                    }
                                 }
                             }
                         }
@@ -165,16 +165,24 @@ namespace TeslaLogger
                                     _StaticMapProvider.CreateParkingMap(((POIRequest)request).Lat, ((POIRequest)request).Lng, width, height, request.Mode, request.Special, filename);
                                     break;
                             }
+                            if (_StaticMapProvider != null)
+                            {
+                                Thread.Sleep(_StaticMapProvider.GetDelayMS());
+                            }
+                            else
+                            {
+                                Thread.Sleep(1000);
+                            }
                         }
                     }
                 }
             }
         }
 
-        private DataTable TripToCoords(TripRequest request, out int CarID)
+        private DataTable TripToCoords(TripRequest request)
         {
             DataTable dt = new DataTable();
-            CarID = int.MinValue;
+            int CarID = int.MinValue;
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -358,12 +366,10 @@ ORDER BY
             return "error.jpg";
         }
 
-        public static string GetMapFileName(int carID, int startpos, int endpos)
+        public static string GetMapFileName(int startpos, int endpos)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("T");
-            sb.Append(carID);
-            sb.Append("-");
+            sb.Append("T-");
             sb.Append(startpos);
             sb.Append("-");
             sb.Append(endpos);

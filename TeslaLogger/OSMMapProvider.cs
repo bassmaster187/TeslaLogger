@@ -23,15 +23,15 @@ namespace TeslaLogger
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;
             int zoom = 19; // max zoom
-            zoom = CalculateZoom(coords, width, height);
+            zoom = CalculateZoom(extent, width, height);
             double x_center = LonToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
             using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
-                DrawTrip(map, coords, zoom, x_center, y_center);
-                DrawIcon(map, coords.Rows[0], MapIcon.Start, zoom, x_center, y_center);
-                DrawIcon(map, coords.Rows[coords.Rows.Count - 1], MapIcon.End, zoom, x_center, y_center);
+                //DrawTrip(map, coords, zoom, x_center, y_center);
+                DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
+                DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
                 SaveImage(map, filename);
                 map.Dispose();
             }
@@ -49,9 +49,8 @@ namespace TeslaLogger
             return (1.0 - Math.Log(Math.Tan(lat * Math.PI / 180.0) + 1 / Math.Cos(lat * Math.PI / 180.0)) / Math.PI) / 2.0 * Math.Pow(2.0, zoom);
         }
 
-        private int CalculateZoom(DataTable coords, int width, int height)
+        private int CalculateZoom(Tuple<double, double, double, double> extent, int width, int height)
         {
-            Tuple<double, double, double, double> extent = DetermineExtent(coords);
             for (int zoom = 18; zoom > 0; zoom--)
             {
                 double _width = (LonToTileX(extent.Item4, zoom) - LonToTileX(extent.Item2, zoom)) * tileSize;
@@ -95,13 +94,24 @@ namespace TeslaLogger
                     char abc = (char)('a' + num);
                     Uri url = new Uri($"http://{abc}.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
                     Tools.DebugLog("DownloadTile() url: " + url);
-                    using (WebClient wc = new WebClient())
+                    try
                     {
-                        wc.Headers["User-Agent"] = this.GetType().ToString();
-                        wc.DownloadFile(url, localMapCacheFilePath);
-                        wc.Dispose();
+                        using (WebClient wc = new WebClient())
+                        {
+                            wc.Headers["User-Agent"] = this.GetType().ToString();
+                            wc.DownloadFile(url, localMapCacheFilePath);
+                            wc.Dispose();
+                        }
+                    }
+                    catch (WebException)
+                    {
+                        Tools.DebugLog("DownloadTile() failed for url: " + url);
                     }
                 }
+            }
+            else
+            {
+                Tools.DebugLog("DownloadTile() use cached local file " + localMapCacheFilePath);
             }
             try
             {
@@ -347,10 +357,10 @@ namespace TeslaLogger
                     {
                         for (int index = 1; index < coords.Rows.Count; index++)
                         {
-                            int x1 = XtoPx(LonToTileX((double)coords.Rows[index - 1]["lng"], zoom), x_center, image.Width);
-                            int y1 = YtoPx(LatToTileY((double)coords.Rows[index - 1]["lat"], zoom), y_center, image.Height);
-                            int x2 = XtoPx(LonToTileX((double)coords.Rows[index]["lng"], zoom), x_center, image.Width);
-                            int y2 = YtoPx(LatToTileY((double)coords.Rows[index]["lat"], zoom), y_center, image.Height);
+                            int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                            int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
+                            int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                            int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
                             if (x1 != x2 || y1 != y2)
                             {
                                 // Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
@@ -358,9 +368,9 @@ namespace TeslaLogger
                                 graphics.DrawLine(bluePen, x1, y1, x2, y2);
                             }
                         }
-                        graphics.Dispose();
                         whitePen.Dispose();
                         bluePen.Dispose();
+                        graphics.Dispose();
                     }
                 }
             }
@@ -424,11 +434,6 @@ namespace TeslaLogger
                 }
             }
             brush.Dispose();
-        }
-
-        private void DrawIcon(Bitmap image, DataRow coord, MapIcon icon, int zoom, double x_center, double y_center)
-        {
-            DrawIcon(image, (double)coord["lat"], (double)coord["lng"], icon, zoom, x_center, y_center);
         }
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)

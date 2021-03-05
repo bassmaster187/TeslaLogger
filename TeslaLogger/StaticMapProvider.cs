@@ -83,12 +83,12 @@ namespace TeslaLogger
             }
         }
 
-        protected Tuple<double, double, double, double> DetermineExtent(DataTable coords)
+        protected static Tuple<double, double, double, double> DetermineExtent(DataTable coords)
         {
-            double min_lat = (double)coords.Compute("Min(lat)", "");
-            double min_lng = (double)coords.Compute("Min(lng)", "");
-            double max_lat = (double)coords.Compute("Max(lat)", "");
-            double max_lng = (double)coords.Compute("Max(lng)", "");
+            double min_lat = Convert.ToDouble(coords.Compute("min(lat)", string.Empty));
+            double min_lng = Convert.ToDouble(coords.Compute("min(lng)", string.Empty));
+            double max_lat = Convert.ToDouble(coords.Compute("max(lat)", string.Empty));
+            double max_lng = Convert.ToDouble(coords.Compute("max(lng)", string.Empty));
             Tools.DebugLog($"DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
             return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
         }
