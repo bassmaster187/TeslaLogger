@@ -141,7 +141,7 @@ namespace TeslaLogger
 
         private void DrawMapLayer(Bitmap image, int width, int height, double x_center, double y_center, int zoom)
         {
-            Tools.DebugLog("DrawMapLayer()");
+            Tools.DebugLog($"DrawMapLayer() width:{width} height:{height}");
             int x_min = (int)(Math.Floor(x_center - (0.5 * width / tileSize)));
             int y_min = (int)(Math.Floor(y_center - (0.5 * height / tileSize)));
             int x_max = (int)(Math.Ceiling(x_center + (0.5 * width / tileSize)));
