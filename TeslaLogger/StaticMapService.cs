@@ -140,7 +140,7 @@ namespace TeslaLogger
                             {
                                 if (dt != null & dt.Rows.Count > 1)
                                 {
-                                    _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
+                                    _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode, request.Special, filename);
                                     dt.Clear();
                                     if (_StaticMapProvider != null)
                                     {

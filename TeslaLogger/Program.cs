@@ -354,9 +354,9 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
+                StaticMapService.CreateAllChargingMaps();
                 StaticMapService.CreateAllTripMaps();
                 StaticMapService.CreateAllParkingMaps();
-                StaticMapService.CreateAllChargingMaps();
 
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();

@@ -22,14 +22,13 @@ namespace TeslaLogger
             // calculate center point of map
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;
-            int zoom = 19; // max zoom
-            zoom = CalculateZoom(extent, width, height);
+            int zoom = CalculateZoom(extent, width, height);
             double x_center = LonToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
             using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
-                //DrawTrip(map, coords, zoom, x_center, y_center);
+                DrawTrip(map, coords, zoom, x_center, y_center);
                 DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
                 DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
                 SaveImage(map, filename);
@@ -347,33 +346,39 @@ namespace TeslaLogger
 
         private void DrawTrip(Bitmap image, DataTable coords, int zoom, double x_center, double y_center)
         {
-            using (Graphics graphics = Graphics.FromImage(image))
+            Graphics graphics = Graphics.FromImage(image);
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            // draw Trip line
+            Pen bluePen = new Pen(Color.Blue, 2);
+            Pen whitePen = new Pen(Color.White, 4);
+            for (int index = 1; index < coords.Rows.Count; index++)
             {
-                graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                // draw Trip line
-                using (Pen bluePen = new Pen(Color.Blue, 2))
+                int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
+                int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
+                if (x1 != x2 || y1 != y2)
                 {
-                    using (Pen whitePen = new Pen(Color.White, 4))
-                    {
-                        for (int index = 1; index < coords.Rows.Count; index++)
-                        {
-                            int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
-                            int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
-                            int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
-                            int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
-                            if (x1 != x2 || y1 != y2)
-                            {
-                                // Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
-                                graphics.DrawLine(whitePen, x1, y1, x2, y2);
-                                graphics.DrawLine(bluePen, x1, y1, x2, y2);
-                            }
-                        }
-                        whitePen.Dispose();
-                        bluePen.Dispose();
-                        graphics.Dispose();
-                    }
+                    graphics.DrawLine(whitePen, x1, y1, x2, y2);
                 }
             }
+            for (int index = 1; index < coords.Rows.Count; index++)
+            {
+                int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
+                int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
+                if (x1 != x2 || y1 != y2)
+                {
+                    graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                }
+            }
+            whitePen.Dispose();
+            bluePen.Dispose();
+            graphics.Dispose();
+            whitePen = null;
+            bluePen = null;
+            graphics = null;
         }
 
         private void DrawIcon(Bitmap image, double lat, double lng, MapIcon icon, int zoom, double x_center, double y_center)
