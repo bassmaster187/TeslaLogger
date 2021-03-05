@@ -352,14 +352,11 @@ namespace TeslaLogger
                                 // Tools.DebugLog($"line ({x1},{y1})->({x2},{y2})");
                                 graphics.DrawLine(whitePen, x1, y1, x2, y2);
                                 graphics.DrawLine(bluePen, x1, y1, x2, y2);
-                                graphics.Dispose();
-                                whitePen.Dispose();
-                                bluePen.Dispose();
                             }
                         }
-                        // start and end icon
-                        DrawIcon(image, coords.Rows[0], MapIcon.Start, zoom, x_center, y_center);
-                        DrawIcon(image, coords.Rows[coords.Rows.Count - 1], MapIcon.End, zoom, x_center, y_center);
+                        graphics.Dispose();
+                        whitePen.Dispose();
+                        bluePen.Dispose();
                     }
                 }
             }
