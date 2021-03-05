@@ -80,19 +80,35 @@ namespace TeslaLogger
             }
         }
 
-        private Bitmap DownloadTile(Uri url)
+        private Bitmap DownloadTile(int zoom, int tile_x, int tile_y)
         {
-            Tools.DebugLog("DownloadTile() url: " + url);
-            using (WebClient wc = new WebClient())
+            string localMapCacheFilePath = Path.Combine(FileManager.GetMapCachePath(), $"{zoom}_{tile_x}_{tile_y}.png");
+            if (DeleteOldMapFile(localMapCacheFilePath, 8))
             {
-                wc.Headers["User-Agent"] = this.GetType().ToString();
-                using (MemoryStream ms = new MemoryStream(wc.DownloadData(url)))
+                // cached file too old or does not exist yet
+                int retries = 0;
+                while (!File.Exists(localMapCacheFilePath) && retries < 10)
                 {
-                    Bitmap bmp = new Bitmap(Image.FromStream(ms));
-                    wc.Dispose();
-                    ms.Close();
-                    return bmp;
+                    retries++;
+                    int num = random.Next(0, 3);
+                    char abc = (char)('a' + num);
+                    Uri url = new Uri($"http://{abc}.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
+                    Tools.DebugLog("DownloadTile() url: " + url);
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.Headers["User-Agent"] = this.GetType().ToString();
+                        wc.DownloadFile(url, localMapCacheFilePath);
+                        wc.Dispose();
+                    }
                 }
+            }
+            try
+            {
+                return new Bitmap(Image.FromFile(localMapCacheFilePath));
+            }
+            catch (Exception)
+            {
+                return new Bitmap(tileSize, tileSize);
             }
         }
 
@@ -118,7 +134,7 @@ namespace TeslaLogger
             int x_max = (int)(Math.Ceiling(x_center + (0.5 * width / tileSize)));
             int y_max = (int)(Math.Ceiling(y_center + (0.5 * height / tileSize)));
             // assemble all map tiles needed for the map
-            List<Tuple<int, int, Uri>> tiles = new List<Tuple<int, int, Uri>>();
+            List<Tuple<int, int, int, int, int>> tiles = new List<Tuple<int, int, int, int, int>>();
             for (int x = x_min; x < x_max; x++)
             {
                 for (int y = y_min; y < y_max; y++)
@@ -128,20 +144,20 @@ namespace TeslaLogger
                     int max_tile = (int)Math.Pow(2, zoom);
                     int tile_x = (x + max_tile) % max_tile;
                     int tile_y = (y + max_tile) % max_tile;
-                    int num = random.Next(0, 3);
-                    char abc = (char)('a' + num);
-                    Uri url = new Uri($"http://{abc}.tile.osm.org/{zoom}/{tile_x}/{tile_y}.png");
-                    tiles.Add(new Tuple<int, int, Uri>(x, y, url));
+                    tiles.Add(new Tuple<int, int, int, int, int>(x, y, zoom, tile_x, tile_y));
                 }
             }
             Tools.DebugLog("DrawMapLayer() tiles:" + tiles.Count);
-            foreach (Tuple<int, int, Uri> tile in tiles)
+            foreach (Tuple<int, int, int, int, int> tile in tiles)
             {
-                using (Bitmap tileImage = DownloadTile(tile.Item3))
+                using (Bitmap tileImage = DownloadTile(tile.Item3, tile.Item4, tile.Item5))
                 {
-                    Rectangle box = new Rectangle(XtoPx(tile.Item1, x_center, width), YtoPx(tile.Item2, y_center, height), tileSize, tileSize);
-                    CopyRegionIntoImage(tileImage, new Rectangle(0, 0, tileSize, tileSize), image, box);
-                    tileImage.Dispose();
+                    if (tileImage != null)
+                    {
+                        Rectangle box = new Rectangle(XtoPx(tile.Item1, x_center, width), YtoPx(tile.Item2, y_center, height), tileSize, tileSize);
+                        CopyRegionIntoImage(tileImage, new Rectangle(0, 0, tileSize, tileSize), image, box);
+                        tileImage.Dispose();
+                    }
                 }
             }
         }

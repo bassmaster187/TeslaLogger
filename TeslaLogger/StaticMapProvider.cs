@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -90,6 +91,31 @@ namespace TeslaLogger
             double max_lng = (double)coords.Compute("Max(lng)", "");
             Tools.DebugLog($"DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
             return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
+        }
+
+        internal static bool DeleteOldMapFile(string filename, int days = 90)
+        {
+            try
+            {
+                // check file age
+                if (File.Exists(filename))
+                {
+                    if ((DateTime.UtcNow - File.GetCreationTimeUtc(filename)).TotalDays > days)
+                    {
+                        File.Delete(filename);
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
         }
 
     }

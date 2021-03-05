@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
-using System.IO;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
@@ -110,7 +109,14 @@ namespace TeslaLogger
                     {
                         Work();
                     }
-                    Thread.Sleep(1000);
+                    if (_StaticMapProvider != null)
+                    {
+                        Thread.Sleep(_StaticMapProvider.GetDelayMS());
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
             }
             catch (Exception ex)
@@ -133,10 +139,13 @@ namespace TeslaLogger
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
                         using (DataTable dt = TripToCoords((TripRequest)request, out int CarID))
                         {
-                            string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
-                            if (DeleteOldMapFile(filename))
+                            if (dt != null & dt.Rows.Count > 1)
                             {
-                                _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
+                                string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
+                                if (DeleteOldMapFile(filename))
+                                {
+                                    _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
+                                }
                             }
                         }
                     }
@@ -357,31 +366,6 @@ ORDER BY
             sb.Append(endpos);
             sb.Append(".jpg");
             return sb.ToString();
-        }
-
-        private static bool DeleteOldMapFile(string filename)
-        {
-            try
-            {
-                // check file age
-                if (File.Exists(filename))
-                {
-                    if ((DateTime.UtcNow - File.GetCreationTimeUtc(filename)).TotalDays > 90)
-                    {
-                        File.Delete(filename);
-                        return true;
-                    }
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            return false;
         }
 
         internal void CreateChargingMapOnChargingCompleted(int CarID)
