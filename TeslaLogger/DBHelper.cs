@@ -390,6 +390,7 @@ namespace TeslaLogger
                             Console.WriteLine("not found!");
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -1018,6 +1019,7 @@ namespace TeslaLogger
                             }
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -2405,6 +2407,7 @@ namespace TeslaLogger
                             car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -2465,6 +2468,7 @@ namespace TeslaLogger
                             }
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)

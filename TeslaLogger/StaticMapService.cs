@@ -145,7 +145,7 @@ namespace TeslaLogger
                                 if (DeleteOldMapFile(filename))
                                 {
                                     _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode == MapMode.Dark ? MapMode.Dark : MapMode.Regular, request.Special, filename);
-                                    dt.Dispose();
+                                    dt.Clear();
                                 }
                             }
                         }
@@ -246,6 +246,7 @@ GROUP BY
                 {
                     GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
                 }
+                dt.Clear();
             }
         }
 
@@ -290,6 +291,7 @@ GROUP BY
                 {
                     GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
                 }
+                dt.Clear();
             }
         }
 

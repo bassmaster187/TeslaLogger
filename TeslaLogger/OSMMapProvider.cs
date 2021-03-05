@@ -77,6 +77,7 @@ namespace TeslaLogger
             using (Graphics grD = Graphics.FromImage(destBitmap))
             {
                 grD.DrawImage(srcBitmap, destRegion, srcRegion, GraphicsUnit.Pixel);
+                grD.Dispose();
             }
         }
 
@@ -104,7 +105,10 @@ namespace TeslaLogger
             }
             try
             {
-                return new Bitmap(Image.FromFile(localMapCacheFilePath));
+                using (Image img = Image.FromFile(localMapCacheFilePath))
+                {
+                    return new Bitmap(img);
+                }
             }
             catch (Exception)
             {

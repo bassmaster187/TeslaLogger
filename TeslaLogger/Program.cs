@@ -134,6 +134,7 @@ namespace TeslaLogger
                         Logfile.Log(id + "# :" + ex.ToString());
                     }
                 }
+                dt.Clear();
             }
         }
 
