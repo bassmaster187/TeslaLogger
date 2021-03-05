@@ -53,3 +53,4 @@ TeslaLogger/copytoraspberry.cmd
 TeslaLogger/copytoRPI4.cmd
 Teslamate-Import/.vs
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/maps/*
+KML_Import/.vs/*
