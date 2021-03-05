@@ -109,6 +109,10 @@ namespace TeslaLogger
                     {
                         Work();
                     }
+                    else
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
             }
             catch (Exception ex)
