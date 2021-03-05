@@ -54,7 +54,6 @@ namespace TeslaLogger
                 Height = height;
             }
 
-            public MapType Charge { get; }
             public string Name { get; }
             public double Lat { get; }
             public double Lng { get; }
