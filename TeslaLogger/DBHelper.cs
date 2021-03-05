@@ -946,7 +946,7 @@ namespace TeslaLogger
                   {
                       UpdateTripElevation(StartPos, MaxPosId, " (Task)");
 
-                      StaticMapService.GetSingleton().Enqueue(StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                      StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }

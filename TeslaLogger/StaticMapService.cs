@@ -27,7 +27,7 @@ namespace TeslaLogger
 
         internal class TripRequest : Request
         {
-            public TripRequest(int startPosID, int endPosID, MapType type, MapMode mode, MapSpecial special, int width = 0, int height = 0)
+            public TripRequest(int carID, int startPosID, int endPosID, MapType type, MapMode mode, MapSpecial special, int width = 0, int height = 0)
             {
                 StartPosID = startPosID;
                 EndPosID = endPosID;
@@ -36,10 +36,12 @@ namespace TeslaLogger
                 Type = type;
                 Mode = mode;
                 Special = special;
+                CarID = carID;
             }
 
             public int StartPosID { get; }
             public int EndPosID { get; }
+            public int CarID { get; }
         }
 
         internal class POIRequest : Request
@@ -87,9 +89,9 @@ namespace TeslaLogger
             return queue.Count;
         }
 
-        public void Enqueue(int startPosID, int endPosID, int width, int height, MapMode mode, MapSpecial special)
+        public void Enqueue(int CarID, int startPosID, int endPosID, int width, int height, MapMode mode, MapSpecial special)
         {
-            queue.Enqueue(new TripRequest(startPosID, endPosID, MapType.Trip, mode, special, width, height));
+            queue.Enqueue(new TripRequest(CarID, startPosID, endPosID, MapType.Trip, mode, special, width, height));
         }
 
         private void Enqueue(MapType type, double lat, double lng, string name)
@@ -132,7 +134,7 @@ namespace TeslaLogger
                     if (request is TripRequest)
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
-                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
+                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
                         if (DeleteOldMapFile(filename))
                         {
                             using (DataTable dt = TripToCoords((TripRequest)request))
@@ -328,7 +330,7 @@ ORDER BY
                     {
                         while (dr.Read())
                         {
-                            GetSingleton().Enqueue(Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, MapMode.Dark, MapSpecial.None);
+                            GetSingleton().Enqueue(Convert.ToInt32(dr["carid"]), Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, MapMode.Dark, MapSpecial.None);
                         }
                     }
                     catch (Exception ex)
@@ -369,10 +371,12 @@ ORDER BY
             return "error.jpg";
         }
 
-        public static string GetMapFileName(int startpos, int endpos)
+        public static string GetMapFileName(int CarID, int startpos, int endpos)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("T-");
+            sb.Append("T");
+            sb.Append(CarID);
+            sb.Append("-");
             sb.Append(startpos);
             sb.Append("-");
             sb.Append(endpos);
