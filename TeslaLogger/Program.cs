@@ -354,7 +354,7 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
-                //StaticMapService.CreateAllTripMaps();
+                StaticMapService.CreateAllTripMaps();
                 StaticMapService.CreateAllChargingMaps();
                 StaticMapService.CreateAllParkingMaps();
 

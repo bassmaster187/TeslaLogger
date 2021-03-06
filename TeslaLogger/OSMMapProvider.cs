@@ -38,15 +38,15 @@ namespace TeslaLogger
             int zoom = CalculateZoom(extent, width, height);
             double x_center = LonToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
-            using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
-            {
-                // map has background tiles, OSM attribution and dark mode, if enabled
-                DrawTrip(map, coords, zoom, x_center, y_center);
-                DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
-                DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
-                SaveImage(map, filename);
-                map.Dispose();
-            }
+            //using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
+            //{
+            //    // map has background tiles, OSM attribution and dark mode, if enabled
+            //    DrawTrip(map, coords, zoom, x_center, y_center);
+            //    DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
+            //    DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
+            //    SaveImage(map, filename);
+            //    map.Dispose();
+            //}
         }
 
         // transform longitude to tile number
