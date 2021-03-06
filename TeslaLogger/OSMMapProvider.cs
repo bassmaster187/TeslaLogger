@@ -16,6 +16,19 @@ namespace TeslaLogger
         private static int padding_y = 12;
         private static int tileSize = 256;
 
+        private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
+        private static Font drawFont12b = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
+        private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(128, 128, 128, 128));
+        private static SolidBrush blackBrush = new SolidBrush(Color.Black);
+        private static SolidBrush whiteBrush = new SolidBrush(Color.White);
+        private static SolidBrush orangeBrush = new SolidBrush(Color.OrangeRed);
+        private static SolidBrush greenBrush = new SolidBrush(Color.Green);
+        private static SolidBrush blueBrush = new SolidBrush(Color.Blue);
+        private static SolidBrush redBrush = new SolidBrush(Color.Red);
+        private static Pen bluePen = new Pen(Color.Blue, 2);
+        private static Pen whitePen = new Pen(Color.White, 4);
+        private static Pen thinWhitePen = new Pen(Color.White, 1);
+
         public override void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
@@ -206,22 +219,9 @@ namespace TeslaLogger
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 string attribution = "(C) OpenStreetMap";
-                using (Font drawFont = new Font(FontFamily.GenericSansSerif, 8))
-                {
-                    SizeF size = g.MeasureString(attribution, drawFont);
-                    using (SolidBrush fillBrush = new SolidBrush(Color.FromArgb(128, 128, 128, 128)))
-                    {
-                        g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
-                        fillBrush.Dispose();
-                        using (SolidBrush textBrush = new SolidBrush(Color.Black))
-                        {
-                            g.DrawString(attribution, drawFont, textBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
-                            textBrush.Dispose();
-                            drawFont.Dispose();
-                            g.Dispose();
-                        }
-                    }
-                }
+                SizeF size = g.MeasureString(attribution, drawFont8);
+                g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
+                g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
             }
         }
 
@@ -346,63 +346,43 @@ namespace TeslaLogger
 
         private void DrawTrip(Bitmap image, DataTable coords, int zoom, double x_center, double y_center)
         {
-            Graphics graphics = Graphics.FromImage(image);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            // draw Trip line
-            Pen bluePen = new Pen(Color.Blue, 2);
-            Pen whitePen = new Pen(Color.White, 4);
-            for (int index = 1; index < coords.Rows.Count; index++)
+            using (Graphics graphics = Graphics.FromImage(image))
             {
-                int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
-                int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
-                int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
-                int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
-                if (x1 != x2 || y1 != y2)
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                // draw Trip line
+                for (int index = 1; index < coords.Rows.Count; index++)
                 {
-                    graphics.DrawLine(whitePen, x1, y1, x2, y2);
+                    int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                    int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
+                    int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                    int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
+                    if (x1 != x2 || y1 != y2)
+                    {
+                        graphics.DrawLine(whitePen, x1, y1, x2, y2);
+                    }
+                }
+                for (int index = 1; index < coords.Rows.Count; index++)
+                {
+                    int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                    int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
+                    int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                    int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
+                    if (x1 != x2 || y1 != y2)
+                    {
+                        graphics.DrawLine(bluePen, x1, y1, x2, y2);
+                    }
                 }
             }
-            for (int index = 1; index < coords.Rows.Count; index++)
-            {
-                int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
-                int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
-                int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
-                int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
-                if (x1 != x2 || y1 != y2)
-                {
-                    graphics.DrawLine(bluePen, x1, y1, x2, y2);
-                }
-            }
-            whitePen.Dispose();
-            bluePen.Dispose();
-            graphics.Dispose();
-            whitePen = null;
-            bluePen = null;
-            graphics = null;
         }
 
         private void DrawIcon(Bitmap image, double lat, double lng, MapIcon icon, int zoom, double x_center, double y_center)
         {
-            SolidBrush brush;
             int scale = 1;
             switch (icon)
             {
                 case MapIcon.Charge:
-                    brush = new SolidBrush(Color.OrangeRed);
-                    scale = 3;
-                    break;
-                case MapIcon.End:
-                    brush = new SolidBrush(Color.Green);
-                    break;
                 case MapIcon.Park:
-                    brush = new SolidBrush(Color.Blue);
                     scale = 3;
-                    break;
-                case MapIcon.Start:
-                    brush = new SolidBrush(Color.Red);
-                    break;
-                default:
-                    brush = new SolidBrush(Color.White);
                     break;
             }
             int x = XtoPx(LonToTileX(lng, zoom), x_center, image.Width);
@@ -412,33 +392,37 @@ namespace TeslaLogger
             using (Graphics g = Graphics.FromImage(image))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
-                using (Pen whitePen = new Pen(Color.White, 1))
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                switch (icon)
                 {
-                    g.PixelOffsetMode = PixelOffsetMode.Half;
-                    g.FillPie(brush, rect, 180, 180);
-                    g.FillPolygon(brush, triangle);
-                    g.DrawArc(whitePen, rect, 180, 180);
-                    g.DrawLine(whitePen, triangle[0], triangle[1]);
-                    g.DrawLine(whitePen, triangle[1], triangle[2]);
-                    whitePen.Dispose();
+                    case MapIcon.Start:
+                        g.FillPie(greenBrush, rect, 180, 180);
+                        g.FillPolygon(greenBrush, triangle);
+                        break;
+                    case MapIcon.End:
+                        g.FillPie(redBrush, rect, 180, 180);
+                        g.FillPolygon(redBrush, triangle);
+                        break;
+                    case MapIcon.Park:
+                        g.FillPie(blueBrush, rect, 180, 180);
+                        g.FillPolygon(blueBrush, triangle);
+                        break;
+                    case MapIcon.Charge:
+                        g.FillPie(orangeBrush, rect, 180, 180);
+                        g.FillPolygon(orangeBrush, triangle);
+                        break;
                 }
+                g.DrawArc(thinWhitePen, rect, 180, 180);
+                g.DrawLine(thinWhitePen, triangle[0], triangle[1]);
+                g.DrawLine(thinWhitePen, triangle[1], triangle[2]);
                 if (icon == MapIcon.Park || icon == MapIcon.Charge)
                 {
                     string text = icon == MapIcon.Park ? "P" : "\u26A1";
-                    using (Font drawFont = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold))
-                    {
-                        SizeF size = g.MeasureString(text, drawFont);
-                        using (SolidBrush textBrush = new SolidBrush(Color.White))
-                        {
-                            g.DrawString(text, drawFont, textBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
-                            g.Dispose();
-                            textBrush.Dispose();
-                            drawFont.Dispose();
-                        }
-                    }
+                    SizeF size = g.MeasureString(text, drawFont12b);
+                    g.DrawString(text, drawFont12b, whiteBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
+                    g.Dispose();
                 }
             }
-            brush.Dispose();
         }
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
