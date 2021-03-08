@@ -38,15 +38,15 @@ namespace TeslaLogger
             int zoom = CalculateZoom(extent, width, height);
             double x_center = LonToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
-            //using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
-            //{
-            //    // map has background tiles, OSM attribution and dark mode, if enabled
-            //    DrawTrip(map, coords, zoom, x_center, y_center);
-            //    DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
-            //    DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
-            //    SaveImage(map, filename);
-            //    map.Dispose();
-            //}
+            using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
+            {
+                //    // map has background tiles, OSM attribution and dark mode, if enabled
+                DrawTrip(map, coords, zoom, x_center, y_center);
+                DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
+                DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
+                SaveImage(map, filename);
+                map.Dispose();
+            }
         }
 
         // transform longitude to tile number
@@ -85,9 +85,19 @@ namespace TeslaLogger
 
         private void CopyRegionIntoImage(Bitmap srcBitmap, Rectangle srcRegion, Bitmap destBitmap, Rectangle destRegion)
         {
+            int srcX = destRegion.X < 0 ? Math.Abs(destRegion.X) : 0;
+            int srcY = destRegion.Y < 0 ? Math.Abs(destRegion.Y) : 0;
+            int srcW = srcRegion.Width - Math.Abs(destRegion.X);
+            int srcH = srcRegion.Height - Math.Abs(destRegion.Y);
+            int destX = destRegion.X < 0 ? 0 : destRegion.X;
+            int destY = destRegion.Y < 0 ? 0 : destRegion.Y;
+            int destW = srcW;
+            int destH = srcH;
+            Rectangle src = new Rectangle(srcX, srcY, srcW, srcH);
+            Rectangle dest = new Rectangle(destX, destY, destW, destH);
             using (Graphics grD = Graphics.FromImage(destBitmap))
             {
-                grD.DrawImage(srcBitmap, destRegion, srcRegion, GraphicsUnit.Pixel);
+                grD.DrawImage(srcBitmap, dest, src, GraphicsUnit.Pixel);
                 grD.Dispose();
             }
         }
@@ -182,7 +192,6 @@ namespace TeslaLogger
                     {
                         Rectangle box = new Rectangle(XtoPx(tile.Item1, x_center, width), YtoPx(tile.Item2, y_center, height), tileSize, tileSize);
                         CopyRegionIntoImage(tileImage, new Rectangle(0, 0, tileSize, tileSize), image, box);
-                        tileImage.Dispose();
                     }
                 }
             }
@@ -193,7 +202,7 @@ namespace TeslaLogger
             AdjustBrightness(image, 0.6f);
             InvertImage(image);
             AdjustContrast(image, 1.3f);
-            HueRotate(image, -170);
+            HueRotate(image, 200);
             AdjustSaturation(image, 0.3f);
             AdjustBrightness(image, 0.7f);
             AdjustContrast(image, 1.3f);
@@ -225,20 +234,23 @@ namespace TeslaLogger
             }
         }
 
-        // https://web.archive.org/web/20140825114946/http://bobpowell.net/image_contrast.aspx
-        private void AdjustContrast(Bitmap image, float contrast)
+        // https://github.com/JimBobSquarePants/ImageProcessor/blob/release/3.0.0/src/ImageProcessor/Processing/KnownColorMatrices.cs
+        private void AdjustContrast(Bitmap image, float amount)
         {
             using (ImageAttributes ia = new ImageAttributes())
             {
                 //create the scaling matrix
-                ColorMatrix cm = new ColorMatrix(new float[][]
+                float contrast = (-.5F * amount) + .5F;
+                ColorMatrix cm = new ColorMatrix
                 {
-                new float[]{contrast, 0f,0f,0f,0f},
-                new float[]{0f, contrast, 0f,0f,0f},
-                new float[]{0f,0f, contrast, 0f,0f},
-                new float[]{0f,0f,0f,1f,0f},
-                new float[]{0.001f,0.001f,0.001f,0f,1f}
-                });
+                    Matrix00 = amount,
+                    Matrix11 = amount,
+                    Matrix22 = amount,
+                    Matrix33 = 1F,
+                    Matrix40 = contrast,
+                    Matrix41 = contrast,
+                    Matrix42 = contrast
+                };
                 ia.SetColorMatrix(cm);
                 using (Graphics g = Graphics.FromImage(image))
                 {
@@ -249,25 +261,25 @@ namespace TeslaLogger
             }
         }
 
-        // https://github.com/madebits/msnet-colormatrix-hue-saturation/blob/master/C%23/QColorMatrix.cs
-        private void AdjustSaturation(Bitmap image, float saturation)
+        // https://github.com/JimBobSquarePants/ImageProcessor/blob/release/3.0.0/src/ImageProcessor/Processing/KnownColorMatrices.cs
+        private void AdjustSaturation(Bitmap image, float amount)
         {
-            float satCompl = 1.0f - saturation;
-            float satComplR = 0.3086f * satCompl;
-            float satComplG = 0.6094f * satCompl;
-            float satComplB = 0.0820f * satCompl;
+            ColorMatrix m = new ColorMatrix();
+            m.Matrix00 = .213F + (.787F * amount);
+            m.Matrix10 = .715F - (.715F * amount);
+            m.Matrix20 = 1F - (m.Matrix00 + m.Matrix10);
 
-            ColorMatrix cm = new ColorMatrix(new float[][]
-            {
-                new float[] { satComplR + saturation, satComplR, satComplR, 0, 0 },
-                  new float[] { satComplG, satComplG + saturation, satComplG, 0, 0},
-                  new float[] { satComplB, satComplB, satComplB + saturation, 0, 0},
-                  new float[] {0, 0, 0, 1, 0},
-                  new float[] {0, 0, 0, 0, 1}
-            });
+            m.Matrix01 = .213F - (.213F * amount);
+            m.Matrix11 = .715F + (.285F * amount);
+            m.Matrix21 = 1F - (m.Matrix01 + m.Matrix11);
+
+            m.Matrix02 = .213F - (.213F * amount);
+            m.Matrix12 = .715F - (.715F * amount);
+            m.Matrix22 = 1F - (m.Matrix02 + m.Matrix12);
+            m.Matrix33 = 1F;
             using (ImageAttributes ia = new ImageAttributes())
             {
-                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                ia.SetColorMatrix(m, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 using (Graphics g = Graphics.FromImage(image))
                 {
                     g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
@@ -277,18 +289,33 @@ namespace TeslaLogger
             }
         }
 
-        // https://stackoverflow.com/questions/29787258/how-do-i-rotate-hue-in-a-picturebox-image
+        // https://github.com/JimBobSquarePants/ImageProcessor/blob/release/3.0.0/src/ImageProcessor/Processing/KnownColorMatrices.cs
+        public static float DegreeToRadian(float degree) => degree * (float)(Math.PI / 180F);
         private void HueRotate(Bitmap image, float degrees)
         {
-            double r = degrees * System.Math.PI / 180; // degrees to radians
-            float[][] colorMatrixElements = {
-            new float[] {(float)Math.Cos(r),  (float)Math.Sin(r),  0,  0, 0},
-            new float[] {(float)-Math.Sin(r),  (float)-Math.Cos(r),  0,  0, 0},
-            new float[] {0,  0,  2,  0, 0},
-            new float[] {0,  0,  0,  1, 0},
-            new float[] {0, 0, 0, 0, 1}};
+            degrees %= 360;
+            while (degrees < 0)
+            {
+                degrees += 360;
+            }
+            float radian = DegreeToRadian(degrees);
+            float cosRadian = (float)Math.Cos(radian);
+            float sinRadian = (float)Math.Sin(radian);
+            ColorMatrix colorMatrix = new ColorMatrix
+            {
+                Matrix00 = .213F + (cosRadian * .787F) - (sinRadian * .213F),
+                Matrix10 = .715F - (cosRadian * .715F) - (sinRadian * .715F),
+                Matrix20 = .072F - (cosRadian * .072F) + (sinRadian * .928F),
 
-            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+                Matrix01 = .213F - (cosRadian * .213F) + (sinRadian * .143F),
+                Matrix11 = .715F + (cosRadian * .285F) + (sinRadian * .140F),
+                Matrix21 = .072F - (cosRadian * .072F) - (sinRadian * .283F),
+
+                Matrix02 = .213F - (cosRadian * .213F) - (sinRadian * .787F),
+                Matrix12 = .715F - (cosRadian * .715F) + (sinRadian * .715F),
+                Matrix22 = .072F + (cosRadian * .928F) + (sinRadian * .072F),
+                Matrix33 = 1F
+            };
             using (ImageAttributes ia = new ImageAttributes())
             {
                 ia.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
@@ -321,17 +348,16 @@ namespace TeslaLogger
             }
         }
 
-        // http://csharphelper.com/blog/2014/10/use-an-imageattributes-object-to-adjust-an-images-brightness-in-c/
-        private void AdjustBrightness(Image image, float brightness)
+        // https://github.com/JimBobSquarePants/ImageProcessor/blob/release/3.0.0/src/ImageProcessor/Processing/KnownColorMatrices.cs
+        private void AdjustBrightness(Image image, float amount)
         {
-            ColorMatrix cm = new ColorMatrix(new float[][]
+            ColorMatrix cm = new ColorMatrix
             {
-                new float[] {brightness, 0, 0, 0, 0},
-                new float[] {0, brightness, 0, 0, 0},
-                new float[] {0, 0, brightness, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1},
-            });
+                Matrix00 = amount,
+                Matrix11 = amount,
+                Matrix22 = amount,
+                Matrix33 = 1F
+            }; 
             using (ImageAttributes ia = new ImageAttributes())
             {
                 ia.SetColorMatrix(cm);
