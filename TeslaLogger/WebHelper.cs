@@ -1186,6 +1186,7 @@ namespace TeslaLogger
                         if (car.vin != vin)
                         {
                             car.vin = vin;
+                            Tools.VINDecoder(vin, out car.year, out _, out car.AWD, out car.MIC, out _, out car.motor);
                             Log("WriteCarsettings -> VIN");
                             car.WriteSettings();
                         }
@@ -3443,7 +3444,12 @@ namespace TeslaLogger
                     { "kwh100km", car.kwh100km.ToString() },
                     { "avgsocdiff", car.avgsocdiff.ToString() },
                     { "maxkm", car.maxkm.ToString() },
-                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()}
+                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()},
+                    { "AWD" , car.AWD ? "1" : "0" },
+                    { "MIC" , car.MIC ? "1" : "0" },
+                    { "year" , car.year.ToString() },
+                    { "motor" , car.motor }
+
                 };
 
                     using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
