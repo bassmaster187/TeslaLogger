@@ -287,21 +287,28 @@ namespace TeslaLogger
         {
             tesla_token = "";
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
                     {
-                        string refresh_token = dr[0].ToString();
-                        tesla_token = dr[1].ToString();
-                        return refresh_token;
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            string refresh_token = dr[0].ToString();
+                            tesla_token = dr[1].ToString();
+                            return refresh_token;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
 
             return "";
