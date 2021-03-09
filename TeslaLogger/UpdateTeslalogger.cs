@@ -358,15 +358,15 @@ namespace TeslaLogger
 
                 if (DBHelper.IndexExists("idx_pos_datum", "pos"))
                 {
-                    Logfile.Log("alter table pos drop index idx_pos_datum");
-                    DBHelper.ExecuteSQLQuery("alter table pos drop index idx_pos_datum", 600);
+                    Logfile.Log("alter table pos drop index if exists idx_pos_datum");
+                    DBHelper.ExecuteSQLQuery("alter table pos drop index if exists idx_pos_datum", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (DBHelper.IndexExists("can_ix", "can"))
                 {
-                    Logfile.Log("alter table can drop index can_ix");
-                    DBHelper.ExecuteSQLQuery("alter table can drop index can_ix", 600);
+                    Logfile.Log("alter table can drop index if exists can_ix");
+                    DBHelper.ExecuteSQLQuery("alter table can drop index if exists can_ix", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
