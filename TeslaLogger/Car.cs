@@ -123,7 +123,10 @@ namespace TeslaLogger
         public double carVoltageAt50SOC = 0;
 
         public StringBuilder passwortinfo = new StringBuilder();
-        
+        public int year = 0;
+        public bool AWD = false;
+        public bool MIC = false;
+        public string motor = "";
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -284,6 +287,8 @@ namespace TeslaLogger
                 carVoltageAt50SOC = dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende);
                 Log("Voltage at 50% SOC:" + carVoltageAt50SOC + "V Date:" + startdate.ToString());
 
+                string vindecoder = Tools.VINDecoder(vin, out year, out _, out AWD, out MIC, out _, out motor).ToString();
+
                 webhelper.DeleteWakeupFile();
 
                 if (Raven)
@@ -292,7 +297,8 @@ namespace TeslaLogger
                 }
 
                 Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
-                Log($"VIN decoder: {Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _)}");
+                Log($"VIN decoder: {vindecoder}");
+
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();

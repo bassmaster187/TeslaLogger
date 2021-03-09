@@ -1,16 +1,16 @@
 #Akku Trips.json
 Akku Trips=充电行程
-Start Trip=行程开始
-End Trip=行程结束
+Start Trip=行程开始时间
+End Trip=行程结束时间
 Time=时间
 StartSOC=初始SOC
 EndSOC=最终SOC
 SOC diff=SOC 差值
-Start km=起始 km
-End km=最终 km
-Start mi=起始 mi
-End mi=最终 mi
-kmDiff=km差异
+Start km=起始公里数
+End km=最终公里数
+Start mi=起始英里数
+End mi=最终英里数
+kmDiff=公里数差异
 Max Range=最长续航里程
 Ø Verbrauch=Ø 电量消耗
 Tage=天数
@@ -27,33 +27,33 @@ Max. Reichweite (Monatsmittel) [mi]=最大里程数 (月平均) [mi]
 
 #Ladehistorie.json
 Ladehistorie=充电记录
-Startdatum=起始日期
-Enddatum=结束日期
+Startdatum=起始时间
+Enddatum=结束时间
 geladen kWh=已充电数值(kWh）
 km Stand=里程表
 Adresse=地址
-TR km Start=TR km 起始
-TR km Ende=TR km 最终
-SOC Ende=SOC 结束
-100% TR=100% TR
+TR km Start=起始剩余公里数
+TR km Ende=最终剩余公里数
+SOC Ende=结束SOC
+100% TR=100%续航里程
 Minuten=分钟数
-TR mi Start=TR mi 起始
-TR mi Ende=TR mi 最终
-ØkW=ØkW
+TR mi Start=起始剩余英里数
+TR mi Ende=最终剩余英里数
+ØkW=平均充电功率KW
 
 #Ladestatistik.json
 Ladestatistik=充电统计
-Letzte Ladung=上一次充电
-Ort=地址
-Ø geladen kWh=Ø 已冲电 kWh
-Ladezeit h=充电时长 单位（小时）
-Ø SOC=Ø SOC
-Max SOC=最大 SOC
+Letzte Ladung=上一次充电时间
+Ort=充电桩地址
+Ø geladen kWh=平均冲电量（kWh）
+Ladezeit h=总计充电时长（小时）
+Ø SOC=平均SOC
+Max SOC=最大SOC
 Anzahl Ladungen=充电次数
-Anzahl=计数
+Anzahl=次数
 Geladen=已充电
 Ladezeit=充电时长
-Anz. Ladungen=计数
+Anz. Ladungen=次数
 Ladehub=充电里程数
 
 #SOC Ladestatistik.json
@@ -73,33 +73,33 @@ Pilot [A]=试点 [A]
 
 #Vampir Drain Monatsstatistik.json
 Vampir Drain Monatsstatistik=电量流失 月统计
-TR mi Verlust=TR 英里数流失
-kWh Verlust=kWh 流失
-Eur Verlust=金额流失
+TR mi Verlust=里程英里数流失
+kWh Verlust=kWh流失
+Eur Verlust=流失电量金额
 
 #Trip.json
 Trip=行程
-Start=起始
-Ende=终止
+Start=起始时间
+Ende=终止时间
 Start Adresse=起始地址
 Ziel Adresse=目的地地址
-Ø Verbrauch kWh=Ø 消耗 kWh
+Ø Verbrauch kWh=平均消耗 kWh
 Verbraucht kWh=已消耗 kWh
-Dauer Min=时长 分钟
-mi=mi
-km=km
-Ø °C=Ø °C
-Ø °F=Ø °F
-max mph=最大 mph
-max km/h=最大 kph
+Dauer Min=时长分钟
+mi=英里数
+km=公里数
+Ø °C=平均温度°C
+Ø °F=平均温度°F
+max mph=最大时速（英里）
+max km/h=最大时速（公里）
 max PS=最大 HP
 min PS=最小 HP
 max kW=最大 kW
 min kW=最小 kW
 Ø PS=Ø HP
 Ø kW=Ø kW
-Ø mph=Ø mph
-Ø km/h=Ø kph
+Ø mph=平均时速（英里）
+Ø km/h=平均时速（公里）
 
 #Vampir Drain Monatsstatistik.json
 Zeitspanne Stunden=时间段 小时
@@ -108,9 +108,9 @@ mi Stand=里程表
 
 #Vampir Drain.json
 Vampir Drain=电量流失
-Standby Stunden=待机 小时数
+Standby Stunden=待机小时数
 Standby=待机
-TR km Verlust=TR km 流失
+TR km Verlust=里程流失公里数
 TR km Verlust pro Stunde=TR 每小时里程流失公里数
 
 #Verbrauch.json
@@ -130,7 +130,7 @@ Schlafen=休眠
 Online=在线
 
 #Visited.json
-Visited=行驶记录
+Visited=行驶轨迹记录
 
 #index.php
 Fahrzeuginfo=车辆信息
@@ -170,14 +170,14 @@ Dashboard=仪表盘
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla 账号信息
-Bitte Tesla Account Zugangsdaten eingeben=Please 请输入Tesla账号信息
+Bitte Tesla Account Zugangsdaten eingeben=请输入Tesla账号信息
 Email=邮箱地址
 Passwort=密码
 Passwort wiederholen=再次输入密码
 Speichern=保存
 
 #settings.php
-Zugangsdaten=账号信息
+Zugangsdaten=账号信息设置
 Language=语言
 Leistung=功率
 Temperatur=温度
@@ -186,7 +186,7 @@ URL Admin Panel=管理页面网址
 All=全部
 Stable=稳定
 None=空
-Enable=打开
+Enable=开启
 Celsius=摄氏度
 Fahrenheit=华氏度
 URL Grafana=Grafana网址
@@ -214,7 +214,7 @@ Fahrzeit [h]=驾驶时长 [小时]
 Strecke [km]=距离 [公里]
 Strecke [mi]=距离 [英里]
 Verbraucht [kWh]=已消耗 kWh
-Ø Verbrauch [kWh]=Ø 电量消耗 kWh
+Ø Verbrauch [kWh]=平均电量消耗 kWh
 Anzahl Trips=行程计数
 Trip Monatsstatistik=行程月统计
 
@@ -230,11 +230,11 @@ Nein=否
 Einschlafen=进入休眠
 Automatische Updates=自动更新
 
-TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
-Daten anonym teilen=Share data anonymously
-TextSuspendTeslalogger=Teslalogger has been stopped! Data will not be logged!
-Resume Teslalogger=Resume Teslalogger
-Reichweite=Range
+TextShare=<h1>匿名共享充电与电池损耗曲线</h1>我们希望建立一个充电与电池损耗的数据库.便于让用户对比参考，及时发现自己车辆与平均值的异常偏离.这个数据也可以作为车辆二手交易时，电池续航能力良好的证明. 也可以用于向Tesla证明自己车辆性能的下降。<br><br>你是否愿意匿名共享充电与电池损耗曲线给其他Tesla用户？这个设置可以在设置页面随时进行变更.
+Daten anonym teilen=匿名共享数据
+TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
+Resume Teslalogger=继续Teslalogger
+Reichweite=里程
 
 Ladekosten=充电成本
 Ladesäule=充电站
