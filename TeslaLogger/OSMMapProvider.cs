@@ -18,7 +18,7 @@ namespace TeslaLogger
 
         private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
         private static Font drawFont12b = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
-        private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(128, 128, 128, 128));
+        private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(192, 192, 192, 128));
         private static SolidBrush blackBrush = new SolidBrush(Color.Black);
         private static SolidBrush whiteBrush = new SolidBrush(Color.White);
         private static SolidBrush orangeBrush = new SolidBrush(Color.OrangeRed);
@@ -36,7 +36,7 @@ namespace TeslaLogger
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;
             int zoom = CalculateZoom(extent, width, height);
-            double x_center = LonToTileX(lng_center, zoom);
+            double x_center = LngToTileX(lng_center, zoom);
             double y_center = LatToTileY(lat_center, zoom);
             using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
             {
@@ -50,7 +50,7 @@ namespace TeslaLogger
         }
 
         // transform longitude to tile number
-        private double LonToTileX(double lon, int zoom)
+        private double LngToTileX(double lon, int zoom)
         {
             return ((lon + 180.0) / 360.0) * Math.Pow(2.0, zoom);
         }
@@ -65,7 +65,7 @@ namespace TeslaLogger
         {
             for (int zoom = 18; zoom > 0; zoom--)
             {
-                double _width = (LonToTileX(extent.Item4, zoom) - LonToTileX(extent.Item2, zoom)) * tileSize;
+                double _width = (LngToTileX(extent.Item4, zoom) - LngToTileX(extent.Item2, zoom)) * tileSize;
                 if (_width > (width - padding_x * 2))
                 {
                     continue;
@@ -227,7 +227,7 @@ namespace TeslaLogger
             using (Graphics g = Graphics.FromImage(image))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
-                string attribution = "(C) OpenStreetMap";
+                string attribution = "© OpenStreetMap";
                 SizeF size = g.MeasureString(attribution, drawFont8);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
                 g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
@@ -378,9 +378,9 @@ namespace TeslaLogger
                 // draw Trip line
                 for (int index = 1; index < coords.Rows.Count; index++)
                 {
-                    int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                    int x1 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
                     int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
-                    int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                    int x2 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
                     int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
                     if (x1 != x2 || y1 != y2)
                     {
@@ -389,9 +389,9 @@ namespace TeslaLogger
                 }
                 for (int index = 1; index < coords.Rows.Count; index++)
                 {
-                    int x1 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
+                    int x1 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
                     int y1 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index - 1]["lat"]), zoom), y_center, image.Height);
-                    int x2 = XtoPx(LonToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
+                    int x2 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index]["lng"]), zoom), x_center, image.Width);
                     int y2 = YtoPx(LatToTileY(Convert.ToDouble(coords.Rows[index]["lat"]), zoom), y_center, image.Height);
                     if (x1 != x2 || y1 != y2)
                     {
@@ -411,7 +411,7 @@ namespace TeslaLogger
                     scale = 3;
                     break;
             }
-            int x = XtoPx(LonToTileX(lng, zoom), x_center, image.Width);
+            int x = XtoPx(LngToTileX(lng, zoom), x_center, image.Width);
             int y = YtoPx(LatToTileY(lat, zoom), y_center, image.Height);
             Rectangle rect = new Rectangle(x - 4 * scale, y - 10 * scale, 8 * scale, 8 * scale);
             Point[] triangle = new Point[] { new Point(x - 4 * scale, y - 6 * scale), new Point(x, y), new Point(x + 4 * scale, y - 6 * scale) };
@@ -453,7 +453,7 @@ namespace TeslaLogger
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
-            double x_center = LonToTileX(lng, 19);
+            double x_center = LngToTileX(lng, 19);
             double y_center = LatToTileY(lat, 19);
             using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
             {
@@ -466,7 +466,7 @@ namespace TeslaLogger
 
         public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
-            double x_center = LonToTileX(lng, 19);
+            double x_center = LngToTileX(lng, 19);
             double y_center = LatToTileY(lat, 19);
             using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
             {
