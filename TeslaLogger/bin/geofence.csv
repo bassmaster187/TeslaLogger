@@ -876,6 +876,9 @@ Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
+Aldi DE-Böblingen Süd Bahnhof, 48.677525,9.011909
+Aldi DE-Darmstadt-Arheilgen, 49.906825,8.648799
+Aldi DE-Echterdingen, 48.695676,9.168745
 Aldi DE-Friedberg, 48.406611, 10.951264
 Aldi DE-Hünxe, 51.642562, 6.758384
 Aldi DE-Kaarst, 51.218956, 6.633498
@@ -883,16 +886,23 @@ Aldi DE-Kelsterbach, 50.058617, 8.521086
 Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
 Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Leonberg, 48.798462, 8.999601
+Aldi DE-Lorsch, 49.65359,8.555596
 Aldi DE-Mainaschaff, 49.986603, 9.084044, 10
 Aldi DE-Merchweiler, 49.349395, 7.050618
 Aldi DE-Memmingen, 47.972183, 10.184331
+Aldi DE-München-Taufkirchen, 48.056601,11.603513
+Adli DE-München-Unternaching, 48.06821,11.619124
 Aldi DE-Nürnberg Geisseestr., 49.434974, 11.041029
 Aldi DE-Nürnberg Münchenerstr., 49.400938, 11.117048
 Aldi DE-Nürnberg Wiesbadenerstr., 49.522306, 11.007037
 Aldi DE-Petersberg, 50.553999, 9.712663
+Aldi DE-Piding, 47.75726,12.898753
 Aldi DE-Pforzheim, 48.902632, 8.663465
+Aldi DE-Putzbrunn, 48.081192,11.692257
 Aldi DE-Rastatt, 48.85911, 8.238882, 20
+Aldi DE-Seeheim, 49.774399,8.636451
 Aldi DE-Ulm, 48.400669, 9.971991
+Aldi DE-Weilimdorf, 48.821298,9.098822
 Aldi DE-Wetzendorf, 49.496251, 11.262201
 Aldi DE-Wiesbaden Hagenauerstr., 50.048155, 8.217388
 Aldi DE-Wörnitz, 49.2593663, 10.241920
@@ -1197,10 +1207,14 @@ Fortum NO-Sortland, 68.704914, 15.414759
 
 Iberdrola ES-Huelva, 37.306245, -6.87322
 
+IKEA DE-Augsburg, 48.4042,10.871911
 IKEA DE-Berlin-Spandau, 52.528313, 13.21686
 IKEA DE-Berlin-Tempelhof, 52.469887, 13.367944, 20
 IKEA DE-Berlin-Waltersdorf, 52.367137, 13.557252
+IKEA DE-Bielefeld, 51.98159,8.491787
+IKEA DE-Butzweilerhof, 50.984528,6.89835
 IKEA DE-Dortmund, 51.491557, 7.371048
+IKEA DE-Duisburg, 51.48278,6.764671
 IKEA DE-Erfurt, 50.95872, 10.948097
 IKEA DE-Frankfurt am Main, 50.196023, 8.654631
 IKEA DE-Fürth, 49.484779, 11.008938
@@ -1210,9 +1224,12 @@ IKEA DE-Karlsruhe, 49.00518, 8.441285, 20
 IKEA DE-München-Brunnthal, 48.040515, 11.65732
 IKEA DE-Leuna, 51.348073, 12.181915
 IKEA DE-Oldenburg, 53.139408, 8.256087
+IKEA DE-Scharhof, 49.555776,8.444968
+IKEA DE-Schnelsen, 53.648095,9.929439
 IKEA DE-Sindelfinden, 48.701416, 9.005396
 IKEA DE-Regensburg, 49.001518, 12.177472
 IKEA DE-Ulm, 48.403572, 9.976047
+IKEA DE-Walldorf, 49.30499,8.629349
 IKEA DE-Wetzlar, 50.568262, 8.498073
 IKEA DE-Würzburg, 49.821812, 9.982398
 
@@ -1626,6 +1643,7 @@ Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
 Kaufland CZ-Praha,50.092464, 14.499563
 Kaufland DE-Aachen, 50.769387, 6.058244
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
+Kaufland DE-Backnang, 48.962571,9.43141
 Kaufland DE-Berlin Grünhofer Weg, 52.533887, 13.188849
 Kaufland DE-Berlin Gutschmidtstraße, 52.436452, 13.447838
 Kaufland DE-Berlin Ollenhauerstraße, 52.567428, 13.328217
@@ -1653,6 +1671,7 @@ Kaufland DE-Fredersdorf-Vogelsdorf, 52.497356, 13.744505
 Kaufland DE-Giengen an der Brenz, 48.621067, 10.250653
 Kaufland DE-Göppingen, 48.704563, 9.647031
 Kaufland DE-Gröbenzell, 48.186468, 11.38609
+Kaufland DE-Hechingen, 48.354134,8.974779
 Kaufland DE-Heilbronn, 49.12452, 9.223451
 Kaufland DE-Hattingen, 51.397722, 7.182943
 Kaufland DE-Hussenhofen, 48.803978, 9.839545
@@ -1661,16 +1680,19 @@ Kaufland DE-Kaufbeuren, 47.884276, 10.636879
 Kaufland DE-Leipzig, 51.33711, 12.336445
 Kaufland DE-Lichtenfels, 50.137785, 11.074773
 Kaufland DE-Leonberg, 48.797085, 9.006616
+Kaufland DE-Lohmar,50.839312,7.206288
 Kaufland DE-Marbach am Neckar, 48.943393, 9.266666
 Kaufland DE-Meerane, 50.835734, 12.449844
 Kaufland DE-Mitweida, 50.99454, 12.96435
+Kaufland DE-Möhringen, 48.731015,9.150352
 Kaufland DE-Mönchengladbach, 51.182896, 6.411377
 Kaufland DE-Monheim, 51.087347, 6.889933
 Kaufland DE-Münchberg, 50.190847, 11.783391
+Kaufland DE-Mödrath, 50.880153,6.693018
 Kaufland DE-Oberasbach, 49.435136, 10.967694
 Kaufland DE-Offenburg, 48.470007, 7.925176
 Kaufland DE-Pforzheim, 48.886253, 8.668658
-Kaufland DE-Pfungstadt, 49.813881, 8.619769
+Kaufland DE-Pfungstadt, 49.813871,8.61979
 Kaufland DE-Ravensburg, 47.767777, 9.604267
 Kaufland DE-Radebeul, 51.09958, 13.6543
 Kaufland DE-Sangerhausen, 51.470027, 11.294025
@@ -1691,6 +1713,7 @@ Kaufland DE-Weimar, 50.96384, 11.311157
 Kaufland DE-Weiterstadt, 49.902437, 8.608824
 Kaufland DE-Wendelstein, 49.334844, 11.114895
 Kaufland DE-Witten, 51.439311, 7.329356
+Kaufland DE-Wuppertal, 51.233376,7.074497
 Kaufland RO-Brasov, 45.658141, 25.588721
 Kaufland RO-Bucuresti, 44.431985, 26.005614
 Kaufland RO-Craiova, 44.300888, 23.796626
@@ -1707,8 +1730,10 @@ Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
 Lidl AT-Gleisdorf, 47.111567, 15.708227
 Lidl AT-Gmunden, 47.929019, 13.788997
 Lidl AT-Graz, 47.099401, 15.417457
-Lidl AT-Klagenfurt, 46.614056, 14.339549
+Lidl AT-Klagenfurt Ebentaler Straße, 46.614056,14.339549 
+Lidl AT-Klagenfurt Flatschacher Straße, 46.608313,14.311609
 Lidl AT-Linz, 48.25415, 14.282992
+Lidl AT-Niederalm, 47.733169,13.064658
 Lidl AT-St. Pölten, 48.205618, 15.638888
 Lidl AT-Hall in Tirol, 47.277601, 11.495474
 Lidl AT-Wien Davidgasse, 48.173558, 16.366361
@@ -1718,12 +1743,15 @@ Lidl CH-Allendorf, 47.193323, 8.818533
 Lidl CH-Böckten, 47.462469, 7.838388
 Lidl CH-Dübendorf, 47.395056, 8.638741
 Lidl CH-Einsideln, 47.138634, 8.745218
+Lidl CH-Grenchen, 47.193146,7.399561, 60
 Lidl CH-Lausen, 47.470612, 7.765637
 Lidl CH-Schlieren, 47.399469, 8.432234
+Lidl CH-Thusis, 46.710497,9.436249
 Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
 Lidl DE-Altenmelle, 52.192974,8.353423
+Lidl DE-Anzing, 48.15883,11.854494
 Lidl DE-Aschaffenburg Spessartstr., 49.965614, 9.154857
 Lidl DE-Berlin Buckower Damm, 52.426346, 13.435003
 Lidl DE-Berlin Einbecker Straße, 52.509057, 13.50636
@@ -1735,6 +1763,7 @@ Lidl DE-Berlin Quickborner Straße, 52.603467, 13.367476
 Lidl DE-Berlin Vorarlberger Damm, 52.470054, 13.349763
 Lidl DE-Cloppenburg, 52.842381, 8.057783
 Lidl DE-Frankfurt Niederrad, 50.084076, 8.629857
+Lidl DE-Frechen, 50.923133,6.817081
 Lidl DE-Heilbronn, 49.152479, 9.222602
 Lidl DE-Herne, 51.524427, 7.18621
 Lidl DE-Homburg, 49.332477, 7.339518
@@ -1744,14 +1773,18 @@ Lidl DE-Jettingen-Scheppach, 48.408456, 10.435950
 Lidl DE-Ravensburg, 47.787096, 9.609862
 Lidl DE-Regensburg Donauersrt., 49.025227, 12.150028
 Lidl DE-Rostok, 54.07674, 12.099895
+Lidl DE-Saarwellingen, 49.351568,6.807247
 Lidl DE-Sassenberg, 51.981949, 8.036272
 Lidl DE-Senden, 48.333704, 10.039548
+Lidl DE-Stuttgart Hofener Straße, 48.81485,9.226418
 Lidl DE-Karlsruhe, 49.0446, 8.393927
 Lidl DE-Limbach-Oberfrohna, 50.854838, 12.77829
 Lidl DE-Saterland, 53.103539, 7.674501
 Lidl DE-Magdeburg, 52.097918,11.621397
 Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+Lidl DE-Lorch, 48.79715,9.674889
+Lidl DE-Winterthur, 47.498986,8.763822
 Lidl FI-Vantaa, 60.261581, 24.87252
 Lidl SE-Falkenberg, 56.91611,12.502524
 
