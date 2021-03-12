@@ -719,8 +719,8 @@ CREATE TABLE superchargerstate(
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
-                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
-                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
+                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 150M");
+                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 150M");
 
                     File.WriteAllText(phpinipath, newphpini);
 
