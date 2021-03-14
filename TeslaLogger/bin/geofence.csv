@@ -877,7 +877,7 @@ Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
-Aldi DE-Friedberg, 48.406611, 10.951264
+Aldi DE-Friedberg, 48.406611, 10.951264, 10
 Aldi DE-Hünxe, 51.642562, 6.758384
 Aldi DE-Kaarst, 51.218956, 6.633498
 Aldi DE-Kelsterbach, 50.058617, 8.521086
@@ -1706,7 +1706,8 @@ Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
 LEW DE-Deffingen, 48.433701, 10.292805
-LEW DE-Friedberg, 
+LEW DE-Friedberg, 48.4064614, 10.952062, 10
+LEW DE-Friedberg McDonald´s, 48.4073617, 10.952510, 10
 LEW DE-Jengen, 48.0034128, 10.721623
 LEW DE-Pfaffenhausen, 48.120746, 10.457604
 LEW DE-Pforzen, 47.933544, 10.607971
@@ -1838,8 +1839,6 @@ DE Chemnitz HEOS Solar-Carport, 50.802484, 12.852011
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
 DE Frankenthal ATU, 49.545836, 8.352769
 DE Freising Audi Training Center, 48.356508, 11.770911
-DE Friedberg, 48.406472, 10.952051
-DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
