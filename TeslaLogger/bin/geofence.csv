@@ -2,7 +2,7 @@ Supercharger-V3 AT-Asten, 48.221323,14.406747
 Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
-Supercharger AT-Graz, 47.037208, 15.478644
+Supercharger AT-Graz, 47.037058,15.478501
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
@@ -77,9 +77,10 @@ Supercharger CA-Baie-Saint-Paul QC, 47.435844,-70.506266
 Supercharger CA-Cornwall ON, 45.023651, -74.748071
 Supercharger CA-Laval QC, 45.570329, -73.747584
 Supercharger CA-Levis QC, 46.730448, -71.268418
+Supercharger CA-Mascouche QC, 45.723065,-73.618514
 Supercharger CA-Sainte Eulalie QC, 46.058345, -72.313283
 Supercharger CA-Yamachiche QC, 46.262234, -72.876919
-Supercharger-V3 CH-Affoltern, 47.271118, 8.439714, 20
+Supercharger-V3 CH-Affoltern, 47.271118, 8.439714, 30
 Supercharger CH-Beckenried, 46.971073, 8.459073
 Supercharger-V3 CH-Bulle, 46.625016, 7.037488
 Supercharger CH-Bussigny, 46.556699, 6.561557
@@ -191,7 +192,8 @@ Supercharger DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
-Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262
+Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262, 30
+Supercharger-V3 DE-Sulz-Vöhringen, 48.343461,8.663791, 30
 Supercharger DE-Süderholz, 54.093037, 13.085923
 Supercharger-V3 DE-Türkheim, 48.04251558, 10.6201373
 Supercharger DE-Uckerfelde, 53.23499, 13.98606
@@ -306,7 +308,7 @@ Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
 Supercharger FR-Caen, 49.16398, -0.424802
 Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
 Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
-Supercharger FR-Chambéry, 45.592227, 5.899842
+Supercharger FR-Chambéry, 45.593128,5.898171
 Supercharger FR-Chambéry Barberaz, 45.56085, 5.949646
 Supercharger FR-Chapelle sur Erdre, 47.2827707, -1.5500076
 Supercharger FR-Charleville-Mézières, 49.736834, 4.744095
@@ -790,6 +792,7 @@ Supercharger US-San Jose CA - Coleman Avenue, 37.339758,-121.903654
 Supercharger US-Santa Ana CA, 33.775828,-117.872036
 Supercharger US-Silverthorne CO, 39.631417, -106.070817
 Supercharger US-Sioux Falls SD, 43.527636,-96.790581
+Supercharger US-Skokie IL, 42.009046,-87.763186
 Supercharger US-Southlake TX, 32.943636, -97.133889
 Supercharger US-Springfield IL, 39.748851, -89.671111
 Supercharger US-Springfield MO, 37.252146, -93.265243
@@ -1484,7 +1487,7 @@ Ionity IE-Kill North, 53.2482657, -6.5964347
 Ionity IE-Kill South, 53.253234, -6.5698138
 Ionity IT-Agira, 37.57169, 14.4797
 Ionity IT-Binasco, 45.33552, 9.10753
-Ionity IT-Brenner, 47.00627, 11.50668
+Ionity IT-Brenner, 47.006881, 11.50667
 Ionity IT-Brugnato Ovest, 44.22647, 9.72971
 Ionity IT-Carpi, 44.77544, 10.86072
 Ionity IT-Ceriale Sud, 44.08777, 8.20626
@@ -1810,7 +1813,7 @@ AT Wien Billa Brünner Straße, 48.267452, 16.402954
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
-CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 7
+CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 8
 CH Raststääte A4 My Stop Süd, 47.27173, 8.437637, 6
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
