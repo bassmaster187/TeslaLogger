@@ -193,6 +193,7 @@ Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262
 Supercharger DE-Süderholz, 54.093037, 13.085923
+Supercharger-V3 DE-Türkheim, 48.04251558, 10.6201373
 Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
@@ -876,7 +877,7 @@ Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
-Aldi DE-Friedberg, 48.406611, 10.951264
+Aldi DE-Friedberg, 48.406611, 10.951264, 10
 Aldi DE-Hünxe, 51.642562, 6.758384
 Aldi DE-Kaarst, 51.218956, 6.633498
 Aldi DE-Kelsterbach, 50.058617, 8.521086
@@ -921,6 +922,7 @@ Allego DE-Jettingen-Scheppach, 48.410996, 10.439835
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Memmingen Media-Markt, 48.0023077, 10.167253
+Allego DE-Mindelheim, 48.0352942, 10.501454
 Allego DE-Münchberg, 50.202775, 11.7769, 7
 Allego DE-Münster ATU, 51.92794, 7.587932
 Allego DE-Neumarkt Authof, 49.312989, 11.475396, 5
@@ -1026,6 +1028,7 @@ EnBW DE-Allgäuer Tor Ost, 47.847519, 10.282904, 20
 EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
 EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
+EnBW DE-Bad Wörishofen, 48.010187, 10.599257
 EnBW DE-Beckum Vellern Süd,51.79106,8.073932
 EnBW DE-Bitterfeld, 51.636289,12.19907
 EnBW DE-Bobingen, 48.263993, 10.840595, 20
@@ -1076,6 +1079,8 @@ EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
+EnbW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
+EnbW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
 EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-Mending, 50.382236, 7.269514
 EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
@@ -1701,6 +1706,11 @@ Kaufland RO-Sibiu, 45.793864, 24.133525
 Kaufland RO-Timisoara, 45.764274, 21.245244
 
 LEW DE-Deffingen, 48.433701, 10.292805
+LEW DE-Friedberg Bäckerei Scharold, 48.4064614, 10.952062, 10
+LEW DE-Friedberg McDonald´s, 48.4073617, 10.952510, 10
+LEW DE-Jengen, 48.0034128, 10.721623
+LEW DE-Pfaffenhausen, 48.120746, 10.457604
+LEW DE-Pforzen, 47.933544, 10.607971
 
 Lidl AT-Ansfelden, 48.214815, 14.276056
 Lidl AT-Gemeinde Mistelbach, 48.562883, 16.577442
@@ -1747,11 +1757,13 @@ Lidl DE-Rostok, 54.07674, 12.099895
 Lidl DE-Sassenberg, 51.981949, 8.036272
 Lidl DE-Senden, 48.333704, 10.039548
 Lidl DE-Karlsruhe, 49.0446, 8.393927
+Lidl DE-Kaufbeuren, 47.8752442, 10.627542
 Lidl DE-Limbach-Oberfrohna, 50.854838, 12.77829
 Lidl DE-Saterland, 53.103539, 7.674501
 Lidl DE-Magdeburg, 52.097918,11.621397
 Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
+Lidl DE-Türkheim, 48.0557035, 10.63498977
 Lidl FI-Vantaa, 60.261581, 24.87252
 Lidl SE-Falkenberg, 56.91611,12.502524
 
@@ -1827,8 +1839,6 @@ DE Chemnitz HEOS Solar-Carport, 50.802484, 12.852011
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
 DE Frankenthal ATU, 49.545836, 8.352769
 DE Freising Audi Training Center, 48.356508, 11.770911
-DE Friedberg, 48.406472, 10.952051
-DE Friedberg McDonalds's, 48.4073, 10.9524
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
@@ -1844,7 +1854,6 @@ DE Hannover Messeschnellweg Wes,52.323175,9.814137
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
-DE Jengen Shell Tankstelle, 48.003415, 10.721634
 DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
 DE Köln Leonardo Hotel, 50.926801, 6.904346
@@ -1864,7 +1873,6 @@ DE Paderborn Westfalen Weser Netz, 51.725959, 8.756923, 5
 DE Rheydt New AG, 51.157497, 6.448055
 DE Ritterhude HEM, 53.185475,8.706381
 DE Roth Autohaus, 49.245669, 11.119321
-DE Pforzen LEW Ladestation, 47.933544, 10.607971
 DE Schafstritt Nord, 52.257481, 9.306448
 DE Schönefeld Total, 52.370738, 13.526929
 DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
