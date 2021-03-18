@@ -49,7 +49,7 @@
       },
       "styles": [
         {
-          "alias": "Datum",
+          "alias": "Jahr/Monat",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -66,6 +66,7 @@
         },
         {
           "alias": "Fahrzeit [h]",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -82,6 +83,7 @@
         },
         {
           "alias": "Strecke [km]",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -97,7 +99,8 @@
           "unit": "locale"
         },
         {
-          "alias": "Verbraucht [kWh]",
+          "alias": "Verbrauch [kWh]",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -114,6 +117,7 @@
         },
         {
           "alias": "Ø Verbrauch [kWh]",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -130,6 +134,7 @@
         },
         {
           "alias": "Ø °C",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -146,6 +151,7 @@
         },
         {
           "alias": "Anzahl Trips",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
