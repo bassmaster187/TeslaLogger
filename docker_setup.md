@@ -21,7 +21,7 @@ git clone https://github.com/bassmaster187/TeslaLogger
 
 2. Create a fresh config file:
 ```
-cp TeslaLogger/App.config TeslaLogger/bin/TeslaLogger.exe.config
+cp TeslaLogger/TeslaLogger/App.config TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config
 ```
 
 3. edit TeslaLogger\bin\TeslaLogger.exe.config with your favorite editor
