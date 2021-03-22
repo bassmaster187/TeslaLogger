@@ -21,10 +21,10 @@ git clone https://github.com/bassmaster187/TeslaLogger
 
 2. Create a fresh config file:
 ```
-cp TeslaLogger/App.config TeslaLogger/bin/TeslaLogger.exe.config
+cp TeslaLogger/TeslaLogger/App.config TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config
 ```
 
-3. edit TeslaLogger\bin\TeslaLogger.exe.config with your favorite editor
+3. edit TeslaLogger\TeslaLogger\bin\TeslaLogger.exe.config with your favorite editor
 
 4. enter your My-Tesla credentials in TeslaName and TeslaPass
 
@@ -53,6 +53,7 @@ The config file could look like this:
 
 6. fire up docker containers. Make sure, you got the latest docker & docker-compose version. Many repositories comes with very old versions!
 ```
+cd TeslaLogger
 docker-compose build
 docker-compose up -d
 ```

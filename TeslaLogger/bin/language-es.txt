@@ -246,3 +246,10 @@ Kosten Blockiergebühr=Coste de inactividad por minuto
 Summe=Total
 kWh laut Zähler / Rechnung=kWh según contador / factura
 Wirkungsgrad=Eficiencia
+
+#Timeline Plugin.json
+Parking=Aparcando
+Driving=Conduciendo
+Charging=Cargando
+Missing=Perdiendo
+Ø Temperatur=Ø Temperatura
