@@ -812,12 +812,12 @@ CREATE TABLE superchargerstate(
             }
         }
 
+        
+
         internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
             Dictionary<string, string> ht = new Dictionary<string, string>();
-
-            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
-            filename = filename.Replace("\\bin\\Debug", "\\bin");
+            string filename = GetLanguageFilepath(language);
             string content = null;
 
             if (File.Exists(filename))
@@ -862,7 +862,7 @@ CREATE TABLE superchargerstate(
                         }
                         else
                         {
-                            ht.Add(key, key +" xxx");
+                            ht.Add(key, key + " xxx");
                         }
                     }
                 }
@@ -876,6 +876,12 @@ CREATE TABLE superchargerstate(
             return ht;
         }
 
+        private static string GetLanguageFilepath(string language)
+        {
+            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            filename = filename.Replace("\\bin\\Debug", "\\bin");
+            return filename;
+        }
 
         public static void UpdateGrafana()
         {
@@ -1265,6 +1271,21 @@ CREATE TABLE superchargerstate(
                     if (!Tools.IsDocker())
                     {
                         Tools.Exec_mono("service", "grafana-server restart");
+                    }
+
+                    try
+                    {
+                        string languageFilepath = GetLanguageFilepath(language);
+                        if (File.Exists(languageFilepath))
+                        {
+                            string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
+                            Logfile.Log("Copy " + languageFilepath + " to " + dst);
+                            File.Copy(languageFilepath, dst, true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
                     }
                 }
             }
