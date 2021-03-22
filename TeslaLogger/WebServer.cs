@@ -218,6 +218,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
                         GetCurrentJson(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/decodecar/[0-9]+"):
+                        DecodeCar(request, response);
+                        break;
                     // Tesla API debug
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/debug/TeslaAPI/[0-9]+/.+"):
                         Debug_TeslaAPI(request, response);
@@ -313,7 +316,7 @@ namespace TeslaLogger
             {
                 try
                 {
-                    string path = FileManager.GetMapCachePath() + $"map_{startPosID}_{endPosID}.png";
+                    string path = FileManager.GetMapCachePath() + Path.DirectorySeparatorChar + $"map_{startPosID}_{endPosID}.png";
                     // check file age
                     if (File.Exists(path))
                     {
@@ -707,6 +710,74 @@ namespace TeslaLogger
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
+            }
+        }
+
+        private void DecodeCar(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/decodecar/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    Car c = Car.GetCarByID(CarID);
+
+                    c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
+                    string s = c.webhelper.Wakeup().Result;
+                    string io = c.webhelper.IsOnline().Result;
+
+                    c.webhelper.UpdateEfficiency();
+
+                    sb.Append("ModelName:").Append(c.ModelName).Append("\r\n");
+                    sb.Append("Wh_TR:").Append(c.Wh_TR).Append("\r\n").Append("\r\n");
+
+                    int maxRange = c.dbHelper.GetAvgMaxRage();
+                    sb.Append("AvgMaxRage:").Append(maxRange).Append("\r\n").Append("\r\n");
+
+                    sb.Append("display_name:").Append(c.display_name).Append("\r\n");
+                    sb.Append("vin:").Append(c.vin.Substring(0,11)).Append("XXXXXX").Append("\r\n");
+                    sb.Append("car_type:").Append(c.car_type).Append("\r\n");
+                    sb.Append("car_special_type:").Append(c.car_special_type).Append("\r\n");
+                    sb.Append("trim_badging:").Append(c.trim_badging).Append("\r\n");
+                    
+                    c.GetTeslaAPIState().GetBool("has_ludicrous_mode", out bool has_ludicrous_mode);
+                    sb.Append("has_ludicrous_mode:").Append(has_ludicrous_mode).Append("\r\n");
+                    sb.Append("DB_Wh_TR:").Append(c.DB_Wh_TR).Append("\r\n").Append("\r\n");
+
+                    Tools.VINDecoder(c.vin, out int year, out string carType, out bool AWD, out bool MIC, out string batery, out string motor);
+                    sb.Append("VIN Year:").Append(year).Append("\r\n");
+                    sb.Append("VIN carType:").Append(carType).Append("\r\n");
+                    sb.Append("VIN AWD:").Append(AWD).Append("\r\n");
+                    sb.Append("VIN MIC:").Append(MIC).Append("\r\n");
+                    sb.Append("VIN batery:").Append(batery).Append("\r\n");
+                    sb.Append("VIN motor:").Append(motor).Append("\r\n");
+
+                    sb.Append("Voltage at 50% SOC:").Append(c.dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende)).Append("V Date:").Append(startdate).Append("\r\n");
+
+                    string vehicle_config = "";
+
+                    for (int retry = 0; retry < 10; retry++)
+                    {
+                        vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
+                        if (vehicle_config?.Trim()?.StartsWith("{") == true)
+                            break;
+
+                        System.Threading.Thread.Sleep(2000);
+                    }
+
+                    sb.Append("Vehicle Config:").Append("\r\n").Append(vehicle_config).Append("\r\n");
+
+                    WriteString(response, sb.ToString());
                 }
                 catch (Exception ex)
                 {

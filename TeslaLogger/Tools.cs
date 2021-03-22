@@ -1389,7 +1389,7 @@ WHERE
                             if (dr.Read())
                             {
                                 _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                                Logfile.Log("Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: " + mothershipCount);
+                                Logfile.Log($"Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: " + mothershipCount);
                             }
                         }
                         catch (Exception ex)

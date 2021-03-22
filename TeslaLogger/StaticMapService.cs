@@ -140,8 +140,8 @@ namespace TeslaLogger
                     }
                     try
                     {
-                        map.Save(FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png.tmp");
-                        File.Move(FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png.tmp", FileManager.GetMapCachePath() + $"map_{request.Item1}_{request.Item2}.png");
+                        map.Save(FileManager.GetMapCachePath() + Path.DirectorySeparatorChar + $"map_{request.Item1}_{request.Item2}.png.tmp");
+                        File.Move(FileManager.GetMapCachePath() + Path.DirectorySeparatorChar + $"map_{request.Item1}_{request.Item2}.png.tmp", FileManager.GetMapCachePath() + Path.DirectorySeparatorChar + $"map_{request.Item1}_{request.Item2}.png");
                     }
                     catch (Exception ex)
                     {

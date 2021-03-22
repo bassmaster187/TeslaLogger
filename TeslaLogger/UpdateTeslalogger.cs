@@ -358,15 +358,15 @@ namespace TeslaLogger
 
                 if (DBHelper.IndexExists("idx_pos_datum", "pos"))
                 {
-                    Logfile.Log("alter table pos drop index idx_pos_datum");
-                    DBHelper.ExecuteSQLQuery("alter table pos drop index idx_pos_datum", 600);
+                    Logfile.Log("alter table pos drop index if exists idx_pos_datum");
+                    DBHelper.ExecuteSQLQuery("alter table pos drop index if exists idx_pos_datum", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
                 if (DBHelper.IndexExists("can_ix", "can"))
                 {
-                    Logfile.Log("alter table can drop index can_ix");
-                    DBHelper.ExecuteSQLQuery("alter table can drop index can_ix", 600);
+                    Logfile.Log("alter table can drop index if exists can_ix");
+                    DBHelper.ExecuteSQLQuery("alter table can drop index if exists can_ix", 600);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
@@ -719,8 +719,8 @@ CREATE TABLE superchargerstate(
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
-                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 50M");
-                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 50M");
+                    string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 150M");
+                    newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 150M");
 
                     File.WriteAllText(phpinipath, newphpini);
 
@@ -812,12 +812,12 @@ CREATE TABLE superchargerstate(
             }
         }
 
+        
+
         internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
             Dictionary<string, string> ht = new Dictionary<string, string>();
-
-            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
-            filename = filename.Replace("\\bin\\Debug", "\\bin");
+            string filename = GetLanguageFilepath(language);
             string content = null;
 
             if (File.Exists(filename))
@@ -862,7 +862,7 @@ CREATE TABLE superchargerstate(
                         }
                         else
                         {
-                            ht.Add(key, key +" xxx");
+                            ht.Add(key, key + " xxx");
                         }
                     }
                 }
@@ -876,6 +876,12 @@ CREATE TABLE superchargerstate(
             return ht;
         }
 
+        private static string GetLanguageFilepath(string language)
+        {
+            string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
+            filename = filename.Replace("\\bin\\Debug", "\\bin");
+            return filename;
+        }
 
         public static void UpdateGrafana()
         {
@@ -1265,6 +1271,21 @@ CREATE TABLE superchargerstate(
                     if (!Tools.IsDocker())
                     {
                         Tools.Exec_mono("service", "grafana-server restart");
+                    }
+
+                    try
+                    {
+                        string languageFilepath = GetLanguageFilepath(language);
+                        if (File.Exists(languageFilepath))
+                        {
+                            string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
+                            Logfile.Log("Copy " + languageFilepath + " to " + dst);
+                            File.Copy(languageFilepath, dst, true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
                     }
                 }
             }
