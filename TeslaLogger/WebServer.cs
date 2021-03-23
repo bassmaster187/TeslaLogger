@@ -676,11 +676,11 @@ namespace TeslaLogger
                 id = Convert.ToInt32(r["id"]);
             }
 
-            throw new Exception("hallo");
-
             var c = Car.GetCarByID(id);
-
-            WriteString(response, c.passwortinfo.ToString());
+            if (c != null)
+                WriteString(response, c.passwortinfo.ToString());
+            else
+                WriteString(response, "CarId not found: " + id);
         }
 
         private static string GetDataFromRequestInputStream(HttpListenerRequest request)
