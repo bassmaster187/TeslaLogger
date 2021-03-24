@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 $language = "en";
 $TemperatureUnit = "";
 $LengthUnit = "";

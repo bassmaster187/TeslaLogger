@@ -127,6 +127,7 @@ namespace TeslaLogger
         public bool AWD = false;
         public bool MIC = false;
         public string motor = "";
+        internal bool waitForMFACode;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }

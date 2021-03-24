@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require("language.php");
+require_once("language.php");
 $lines = 1000;
 if (isset($_REQUEST["lines"]))
 	$lines = $_REQUEST["lines"];

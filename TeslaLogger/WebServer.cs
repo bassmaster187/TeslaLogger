@@ -396,6 +396,7 @@ namespace TeslaLogger
                     {
                         car.passwortinfo.Append("Send MFA to Tesla server<br>");
                         car.MFA_Code = mfa;
+                        car.waitForMFACode = false;
                     }
                 }
             }
@@ -676,8 +677,10 @@ namespace TeslaLogger
             }
 
             var c = Car.GetCarByID(id);
-
-            WriteString(response, c.passwortinfo.ToString());
+            if (c != null)
+                WriteString(response, c.passwortinfo.ToString());
+            else
+                WriteString(response, "CarId not found: " + id);
         }
 
         private static string GetDataFromRequestInputStream(HttpListenerRequest request)
@@ -1286,13 +1289,21 @@ namespace TeslaLogger
 
             try
             {
-                using (DataTable dt = new DataTable())
+                Car c = Car.allcars.FirstOrDefault(r => r.waitForMFACode);
+                if (c != null)
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
+                    responseString = "WAITFORMFA:" + c.CarInDB;
+                }
+                else
+                {
+                    using (DataTable dt = new DataTable())
                     {
-                        da.Fill(dt);
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        {
+                            da.Fill(dt);
 
-                        responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                            responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
+                        }
                     }
                 }
             }
