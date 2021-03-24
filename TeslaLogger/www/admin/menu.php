@@ -30,17 +30,20 @@ function menu($title)
     $alldashboards = file_get_contents("/etc/teslalogger/dashboardlinks.txt");
 
     $allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
+    
     $jcars = json_decode($allcars);
+    if ($jcars !== null)
+    {
+        foreach ($jcars as $k => $v) {
+            if ($v->{"id"} == $current_carid)
+            {
+                $display_name = $v->{"display_name"};
+                $tasker_token = $v->{"tasker_hash"};    
+                $car = $v->{"model_name"};  
 
-    foreach ($jcars as $k => $v) {
-        if ($v->{"id"} == $current_carid)
-        {
-            $display_name = $v->{"display_name"};
-            $tasker_token = $v->{"tasker_hash"};    
-            $car = $v->{"model_name"};  
-
-            if (strlen($display_name) == 0)
-                $display_name = "Car ".$v->{"id"};
+                if (strlen($display_name) == 0)
+                    $display_name = "Car ".$v->{"id"};
+            }
         }
     }
 
@@ -57,15 +60,18 @@ function menu($title)
                         <a href="index.php"><?PHP echo($display_name);?></a>
                         <ul class='children'>
 <?PHP                  
-                        foreach($jcars as $k => $v) {
-                            $dn = $v->{"display_name"};
-                            $carid = $v->{"id"};
+                        if ($jcars !== null)
+                        {
+                            foreach($jcars as $k => $v) {
+                                $dn = $v->{"display_name"};
+                                $carid = $v->{"id"};
 
-                            if (strlen($dn) == 0)
-                                $dn = "Car ".$carid;
-                            
-                            echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="index.php?carid='.$carid.'">'.$dn.'</a></li>');
-                        }      
+                                if (strlen($dn) == 0)
+                                    $dn = "Car ".$carid;
+                                
+                                echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="index.php?carid='.$carid.'">'.$dn.'</a></li>');
+                            }  
+                        }    
 ?>
 						</ul>
                     </li>

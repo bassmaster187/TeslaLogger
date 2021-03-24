@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require("language.php");
+require_once("language.php");
 $lat = $_REQUEST["lat"];
 $lng = $_REQUEST["lng"];
 $radius = 20.0;

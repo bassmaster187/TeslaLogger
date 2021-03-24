@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require("language.php");
+require_once("language.php");
 require_once("tools.php");
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">

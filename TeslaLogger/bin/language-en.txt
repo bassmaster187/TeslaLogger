@@ -246,3 +246,10 @@ Kosten Blockiergebühr=Idle cost per minute
 Summe=Total
 kWh laut Zähler / Rechnung=kWh according to meter / invoice
 Wirkungsgrad=Efficiency
+
+#Timeline Plugin.json
+Parking=Parking
+Driving=Driving
+Charging=Charging
+Missing=Missing
+Ø Temperatur=Ø Temperatur

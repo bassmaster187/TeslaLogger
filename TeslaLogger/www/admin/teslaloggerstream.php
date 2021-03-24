@@ -1,5 +1,5 @@
 <?PHP
-require("tools.php");
+require_once("tools.php");
 
 $data = $_REQUEST["data"];
 $URL = $_REQUEST["url"];
