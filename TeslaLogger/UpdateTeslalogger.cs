@@ -910,7 +910,8 @@ CREATE TABLE superchargerstate(
                             // use internal downloader
                             const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb";
                             const string grafanaFile = "grafana_7.2.0_armhf.deb";
-                            if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result) {
+                            if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
+                            {
                                 // fallback to wget
                                 Logfile.Log($"fallback o wget to download {grafanaUrl}");
                                 Tools.Exec_mono("wget", $"{grafanaUrl}  --show-progress");
@@ -1238,7 +1239,7 @@ CREATE TABLE superchargerstate(
                         {
                             s = s.Replace("grafana-trackmap-panel", "pr0ps-trackmap-panel");
                         }
-                        
+
                         string title, uid, link;
                         GrafanaGetTitleAndLink(s, URL_Grafana, out title, out uid, out link);
 
@@ -1246,9 +1247,9 @@ CREATE TABLE superchargerstate(
                         dictLanguage.TryGetValue("Car", out carLabel);
 
                         s = UpdateDefaultCar(s, defaultcar, defaultcarid, carLabel);
-                        
+
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
-                            dashboardlinks.Add(title+"|"+link);
+                            dashboardlinks.Add(title + "|" + link);
 
                         File.WriteAllText(f, s);
                     }
@@ -1261,7 +1262,8 @@ CREATE TABLE superchargerstate(
                         dashboardlinks.ForEach((s) => sb.Append(s).Append("\r\n"));
 
                         System.IO.File.WriteAllText("/etc/teslalogger/dashboardlinks.txt", sb.ToString(), Encoding.UTF8);
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Logfile.Log(ex.ToString());
                     }
@@ -1273,20 +1275,9 @@ CREATE TABLE superchargerstate(
                         Tools.Exec_mono("service", "grafana-server restart");
                     }
 
-                    try
-                    {
-                        string languageFilepath = GetLanguageFilepath(language);
-                        if (File.Exists(languageFilepath))
-                        {
-                            string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
-                            Logfile.Log("Copy " + languageFilepath + " to " + dst);
-                            File.Copy(languageFilepath, dst, true);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logfile.Log(ex.ToString());
-                    }
+                    CopyLanguageFileToTimelinePanel(language);
+
+                    CopySettingsToTimelinePanel();
                 }
             }
             catch (Exception ex)
@@ -1296,6 +1287,42 @@ CREATE TABLE superchargerstate(
             finally
             {
                 Logfile.Log("End Grafana update");
+            }
+        }
+
+        private static void CopyLanguageFileToTimelinePanel(string language)
+        {
+            try
+            {
+                string languageFilepath = GetLanguageFilepath(language);
+                if (File.Exists(languageFilepath))
+                {
+                    string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/language.txt";
+                    Logfile.Log("Copy " + languageFilepath + " to " + dst);
+                    File.Copy(languageFilepath, dst, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void CopySettingsToTimelinePanel()
+        {
+            try
+            {
+                string settingsFilepath = "/etc/teslalogger/settings.json";
+                if (File.Exists(settingsFilepath))
+                {
+                    string dst = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/settings.json";
+                    Logfile.Log("Copy " + settingsFilepath + " to " + dst);
+                    File.Copy(settingsFilepath, dst, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 

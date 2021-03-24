@@ -21,7 +21,6 @@ namespace TeslaLogger
     public class WebHelper
     {
         public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
-        public const string TeslaloggerUserAgent = "curl/2.7";
 
         public string Tesla_token = "";
         public string Tesla_id = "";
@@ -213,7 +212,7 @@ namespace TeslaLogger
         {
             HttpClient client = new HttpClient(handler);
             client.Timeout = TimeSpan.FromSeconds(10);
-            client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
+            client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
             //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
             client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             client.DefaultRequestHeaders.Add("Accept", "*/*");
@@ -396,7 +395,7 @@ namespace TeslaLogger
                     using (HttpClient client = new HttpClient(handler))
                     {
                         client.Timeout = TimeSpan.FromSeconds(30);
-                        client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
+                        client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         client.DefaultRequestHeaders.Connection.Add("keep-alive");
 
@@ -508,6 +507,7 @@ namespace TeslaLogger
                                 {
                                     isMFA = true;
                                     car.passwortinfo.Append("Wait for MFA code<br>");
+                                    car.waitForMFACode = true;
                                     code = WaitForMFA_Code(transaction_id, code_challenge, state);
 
                                     if (String.IsNullOrEmpty(code))

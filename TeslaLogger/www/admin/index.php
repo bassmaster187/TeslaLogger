@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
-<?php
-require("language.php");
-require("tools.php");
+﻿<?php
+require_once("redirect.php");
+require_once("language.php");
+require_once("tools.php");
 session_start();
 global $display_name;
 $carid = 1;
@@ -14,8 +14,8 @@ else
 {
 	$_SESSION["carid"] = $carid;
 }
-
 ?>
+<!DOCTYPE html>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
     <meta charset="utf-8" />

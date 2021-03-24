@@ -1,5 +1,5 @@
 <?PHP
-require("tools.php");
+require_once("tools.php");
 
 $JSON = $_REQUEST["JSON"];
 

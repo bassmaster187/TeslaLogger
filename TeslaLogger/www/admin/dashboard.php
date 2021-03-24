@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <?php
-require("language.php");
-require("tools.php");
+require_once("language.php");
+require_once("tools.php");
 session_start();
 $carid = 1;
 if (isset($_REQUEST["carid"]))

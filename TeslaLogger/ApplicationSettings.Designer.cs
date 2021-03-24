@@ -12,7 +12,7 @@ namespace TeslaLogger {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class ApplicationSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static ApplicationSettings defaultInstance = ((ApplicationSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ApplicationSettings())));
@@ -130,14 +130,21 @@ namespace TeslaLogger {
                 return ((bool)(this["UseScanMyTesla"]));
             }
         }
-
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("curl/2.7")]
+        public string UserAgent {
+            get {
+                return ((string)(this["UserAgent"]));
+            }
+        }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool VerboseMode
-        {
-            get
-            {
+        public bool VerboseMode {
+            get {
                 return ((bool)(this["VerboseMode"]));
             }
         }
