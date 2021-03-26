@@ -119,3 +119,19 @@ request: GET /debug/TeslaLogger/messages
 response: HTML
 
 Outputs the last 500 lines of DEBUG log
+
+### /get/map
+
+request: GET /get/map?[urlparams]
+
+response: image/png
+
+mandatory urlparams
+* start=*int* pos.id
+* end=*int* pos.id
+
+optional urlparams
+* width=*int* in pixels; if omitted defaults to defaults to 240
+* height=*int* in pixels; if omitted defaults to defaults to width / 1.618033 (golden ratio)
+* mode=*string*, possible values: dark; if omitted defaults to regular
+* type=*string*, possible values: park, charge; if omitted defaults to trip
