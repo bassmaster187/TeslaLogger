@@ -134,6 +134,7 @@ namespace TeslaLogger
                         Logfile.Log(id + "# :" + ex.ToString());
                     }
                 }
+                dt.Clear();
             }
         }
 
@@ -354,10 +355,9 @@ namespace TeslaLogger
 
                 DBHelper.UpdateCarIDNull();
 
-                MapQuest.createAllParkingMaps();
-                MapQuest.createAllChargigMaps();
-                MapQuest.createAllTripMaps();
-                DBHelper.MigrateFloorRound();
+                StaticMapService.CreateAllTripMaps();
+                StaticMapService.CreateAllChargingMaps();
+                StaticMapService.CreateAllParkingMaps();
 
                 Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                 RunHousekeepingInBackground();
