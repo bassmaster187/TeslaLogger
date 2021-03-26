@@ -130,8 +130,8 @@ namespace TeslaLogger
             {
                 if (queue.TryDequeue(out Request request))
                 {
-                    int width = request.Width > 0 ? request.Width : 240;
-                    int height = request.Height > 0 ? request.Height : (int)(width / 1.618033);
+                    int width = request.Width > 0 ? request.Width : 200;
+                    int height = request.Height > 0 ? request.Height : 150;
                     if (request is TripRequest)
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
