@@ -46,7 +46,7 @@ namespace TeslaLogger
 
         internal class POIRequest : Request
         {
-            public POIRequest(MapType type, double lat, double lng, string name, int width = 0, int height = 0)
+            public POIRequest(MapType type, double lat, double lng, string name, MapMode mode, int width = 0, int height = 0)
             {
                 Type = type;
                 Lat = lat;
@@ -54,6 +54,7 @@ namespace TeslaLogger
                 Name = name;
                 Width = width;
                 Height = height;
+                Mode = mode;
             }
 
             public string Name { get; }
@@ -94,9 +95,9 @@ namespace TeslaLogger
             queue.Enqueue(new TripRequest(CarID, startPosID, endPosID, MapType.Trip, mode, special, width, height));
         }
 
-        private void Enqueue(MapType type, double lat, double lng, string name)
+        private void Enqueue(MapType type, double lat, double lng, string name, MapMode mode)
         {
-            queue.Enqueue(new POIRequest(type, lat, lng, name));
+            queue.Enqueue(new POIRequest(type, lat, lng, name, mode));
         }
 
         public void Run()
@@ -258,7 +259,7 @@ GROUP BY
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
+                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
                 }
                 dt.Clear();
             }
@@ -303,7 +304,7 @@ GROUP BY
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
+                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
                 }
                 dt.Clear();
             }
@@ -414,7 +415,7 @@ WHERE
                         {
                             while (dr.Read())
                             {
-                                GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString());
+                                GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
                             }
                         }
                         catch (Exception ex)
@@ -455,7 +456,7 @@ WHERE
                         {
                             while (dr.Read())
                             {
-                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), dr["name"].ToString());
+                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), dr["name"].ToString(), MapMode.Dark);
                             }
                         }
                         catch (Exception ex)
