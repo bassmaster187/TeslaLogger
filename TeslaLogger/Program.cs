@@ -366,50 +366,50 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
+        }
 
-            private static void UpdateDbInBackground()
+        private static void UpdateDbInBackground()
+        {
+            Thread DBUpdater = new Thread(() =>
             {
-                Thread DBUpdater = new Thread(() =>
-                {
                     // wait for DB updates
                     while (!UpdateTeslalogger.Done)
-                        Thread.Sleep(5000);
+                    Thread.Sleep(5000);
 
-                    Thread.Sleep(30000);
-                    DateTime start = DateTime.Now;
-                    Logfile.Log("UpdateDbInBackground started");
-                    DBHelper.UpdateElevationForAllPoints();
-                    WebHelper.UpdateAllPOIAddresses();
-                    foreach (Car c in Car.allcars)
-                    {
-                        c.dbHelper.CheckForInterruptedCharging(true);
-                        c.webhelper.UpdateAllEmptyAddresses();
-                    }
-                    DBHelper.UpdateIncompleteTrips();
-                    DBHelper.UpdateAllChargingMaxPower();
-
-                    foreach (Car c in Car.allcars)
-                    {
-                        ShareData sd = new ShareData(c);
-                        sd.SendAllChargingData();
-                        sd.SendDegradationData();
-                    }
-
-                    DBHelper.UpdateCarIDNull();
-
-                    StaticMapService.CreateAllTripMaps();
-                    StaticMapService.CreateAllChargingMaps();
-                    StaticMapService.CreateAllParkingMaps();
-
-                    Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
-                    RunHousekeepingInBackground();
-                })
+                Thread.Sleep(30000);
+                DateTime start = DateTime.Now;
+                Logfile.Log("UpdateDbInBackground started");
+                DBHelper.UpdateElevationForAllPoints();
+                WebHelper.UpdateAllPOIAddresses();
+                foreach (Car c in Car.allcars)
                 {
-                    Priority = ThreadPriority.BelowNormal
-                };
-                DBUpdater.Start();
-            }
+                    c.dbHelper.CheckForInterruptedCharging(true);
+                    c.webhelper.UpdateAllEmptyAddresses();
+                }
+                DBHelper.UpdateIncompleteTrips();
+                DBHelper.UpdateAllChargingMaxPower();
 
+                foreach (Car c in Car.allcars)
+                {
+                    ShareData sd = new ShareData(c);
+                    sd.SendAllChargingData();
+                    sd.SendDegradationData();
+                }
+
+                DBHelper.UpdateCarIDNull();
+
+                StaticMapService.CreateAllTripMaps();
+                StaticMapService.CreateAllChargingMaps();
+                StaticMapService.CreateAllParkingMaps();
+
+                Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+                RunHousekeepingInBackground();
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            DBUpdater.Start();
         }
+
     }
 }
