@@ -273,8 +273,8 @@ namespace TeslaLogger
             int endPosID = 0;
             int width = 240;
             int height = 0;
-            StaticMapService.StaticMapType type = StaticMapService.StaticMapType.Trip;
-            StaticMapService.StaticMapMode mode = StaticMapService.StaticMapMode.Regular;
+            StaticMapProvider.MapType type = StaticMapProvider.MapType.Trip;
+            StaticMapProvider.MapMode mode = StaticMapProvider.MapMode.Regular;
             if (request.QueryString.HasKeys())
             {
                 foreach (string key in request.QueryString.AllKeys)
@@ -296,17 +296,17 @@ namespace TeslaLogger
                         case "mode":
                             if ("dark".Equals(request.QueryString.GetValues(key)[0]))
                             {
-                                mode = StaticMapService.StaticMapMode.Dark;
+                                mode = StaticMapProvider.MapMode.Dark;
                             }
                             break;
                         case "type":
                             if ("park".Equals(request.QueryString.GetValues(key)[0]))
                             {
-                                type = StaticMapService.StaticMapType.Park;
+                                type = StaticMapProvider.MapType.Park;
                             }
                             else if ("charge".Equals(request.QueryString.GetValues(key)[0]))
                             {
-                                type = StaticMapService.StaticMapType.Charge;
+                                type = StaticMapProvider.MapType.Charge;
                             }
                             break;
                     }
@@ -336,7 +336,7 @@ namespace TeslaLogger
                     else
                     {
                         // order static map generation
-                        StaticMapService.GetSingleton().Enqueue(startPosID, endPosID, width, height, type, mode);
+                        StaticMapService.GetSingleton().Enqueue(1, startPosID, endPosID, width, height, mode, StaticMapProvider.MapSpecial.None);
                         // wait
                         for (int i = 0; i < 30; i++)
                         {
@@ -1273,6 +1273,7 @@ namespace TeslaLogger
 
                         responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -1304,6 +1305,7 @@ namespace TeslaLogger
 
                             responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                         }
+                        dt.Clear();
                     }
                 }
             }
