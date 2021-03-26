@@ -1,3 +1,11 @@
 TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten eine anonyme Datenbank aufbauen mit der man Degradationskurven und Ladekurven vergleichen kann. So können Sie jederzeit Ihr Fahrzeug mit anderen vergleichen und eine ungewöhnliche Abweichung frühzeitig feststellen. Diese kann auch später dazu dienen um beim Verkaufsgespräch nachweisen zu können, dass Ihre Batterie noch voll leistungsfähig ist. Im negativen Fall, können Sie eine verminderte Leistungsfähigkeit einfacher gegenüber Tesla Motors nachweisen.<br><br>Möchten Sie vollkommen Anonym ihre Schnellladekurven und Degradationskurven mit anderen Teslafahrer teilen? Diese Entscheidung kann jederzeit in den Einstellungen geändert werden.  
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Resume Teslalogger=Teslalogger Starten
+Typical Range=Reichweite
+
+#Timeline Plugin.json
+Parking=Parken
+Driving=Fahren
+Charging=Laden
+Missing=Fehlen
+Ø Temperatur=Ø Temperatur

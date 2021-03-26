@@ -996,6 +996,8 @@ namespace TeslaLogger
                         case "download_perc":
                         case "expected_duration_sec":
                         case "install_perc":
+                        case "scheduled_time_ms":
+                        case "warning_time_remaining_ms":
                             if (dictionary.TryGetValue(key, out object value))
                             {
                                 AddValue($"software_update.{key}", "int", value, timestamp, "vehicle_state.software_update");
@@ -1081,6 +1083,7 @@ namespace TeslaLogger
                             case "steering_wheel_heater":
                             case "wiper_blade_heater":
                             case "smart_preconditioning":
+                            case "bioweapon_mode":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "climate_state");

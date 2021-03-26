@@ -120,8 +120,14 @@ namespace TeslaLogger
         public double kwh100km = 0;
         public double avgsocdiff = 0;
         public double maxkm = 0;
+        public double carVoltageAt50SOC = 0;
 
         public StringBuilder passwortinfo = new StringBuilder();
+        public int year = 0;
+        public bool AWD = false;
+        public bool MIC = false;
+        public string motor = "";
+        internal bool waitForMFACode;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -266,6 +272,9 @@ namespace TeslaLogger
                 {
                     ExitTeslaLogger("wh.GetVehicles() == NULL");
                 }
+
+                dbHelper.GetEconomy_Wh_km(webhelper);
+
                 string online = webhelper.IsOnline().Result;
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
@@ -276,8 +285,11 @@ namespace TeslaLogger
                 }
 
                 Log("Country Code: " + dbHelper.UpdateCountryCode());
+                carVoltageAt50SOC = dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende);
+                Log("Voltage at 50% SOC:" + carVoltageAt50SOC + "V Date:" + startdate.ToString());
 
-                dbHelper.GetEconomy_Wh_km(webhelper);
+                string vindecoder = Tools.VINDecoder(vin, out year, out _, out AWD, out MIC, out _, out motor).ToString();
+
                 webhelper.DeleteWakeupFile();
 
                 if (Raven)
@@ -286,7 +298,8 @@ namespace TeslaLogger
                 }
 
                 Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
-                Log($"VIN decoder: {Tools.VINDecoder(vin, out _, out _, out _, out _, out _, out _)}");
+                Log($"VIN decoder: {vindecoder}");
+
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
@@ -556,6 +569,7 @@ namespace TeslaLogger
                 else
                 {
                     RefreshToken();
+                    UpdateTeslalogger.CheckForNewVersion();
 
                     // check sentry mode state
                     _ = webhelper.GetOdometerAsync().Result;
@@ -906,7 +920,7 @@ namespace TeslaLogger
         private void RefreshToken()
         {
             TimeSpan ts = DateTime.Now - webhelper.lastTokenRefresh;
-            if (ts.TotalDays > 20)
+            if (ts.TotalDays > 30)
             {
                 // If car wasn't sleeping since 20 days, try to get a new Teslalogger update
                 // TODO don't work anymore!
