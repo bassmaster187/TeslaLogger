@@ -93,7 +93,7 @@ namespace TeslaLogger
             return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
         }
 
-        internal static bool DeleteOldMapFile(string filename, int days = 90)
+        internal static bool MapFileExistsOrIsTooOld(string filename, int days = 90)
         {
             try
             {

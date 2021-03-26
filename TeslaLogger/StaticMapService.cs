@@ -135,7 +135,7 @@ namespace TeslaLogger
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
                         string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
-                        if (DeleteOldMapFile(filename))
+                        if (MapFileExistsOrIsTooOld(filename))
                         {
                             using (DataTable dt = TripToCoords((TripRequest)request))
                             {
@@ -143,6 +143,7 @@ namespace TeslaLogger
                                 {
                                     _StaticMapProvider.CreateTripMap(dt, width, height, request.Mode, request.Special, filename);
                                     dt.Clear();
+                                    dt.Dispose();
                                     if (_StaticMapProvider != null)
                                     {
                                         Thread.Sleep(_StaticMapProvider.GetDelayMS());
@@ -159,7 +160,7 @@ namespace TeslaLogger
                     {
                         Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Name}");
                         string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Type, ((POIRequest)request).Name));
-                        if (DeleteOldMapFile(filename))
+                        if (MapFileExistsOrIsTooOld(filename))
                         {
                             switch (request.Type)
                             {

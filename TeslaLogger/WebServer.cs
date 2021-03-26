@@ -1305,8 +1305,8 @@ namespace TeslaLogger
 
                             responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                         }
+                        dt.Clear();
                     }
-                    dt.Clear();
                 }
             }
             catch (Exception ex)

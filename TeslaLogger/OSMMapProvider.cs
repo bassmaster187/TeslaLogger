@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace TeslaLogger
 {
@@ -16,7 +18,7 @@ namespace TeslaLogger
         private static int padding_y = 12;
         private static int tileSize = 256;
 
-        private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
+        private static Font drawFont6 = new Font(FontFamily.GenericSansSerif, 6);
         private static Font drawFont12b = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
         private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(192, 192, 192, 128));
         private static SolidBrush blackBrush = new SolidBrush(Color.Black);
@@ -31,13 +33,58 @@ namespace TeslaLogger
 
         public override void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            // workaround for linux mono libgdiplus memory leak
+            // serialize request
+            Dictionary<string, object> job = new Dictionary<string, object>();
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
             // calculate center point of map
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;
             int zoom = CalculateZoom(extent, width, height);
+            job.Add("zoom", zoom);
             double x_center = LngToTileX(lng_center, zoom);
+            job.Add("x_center", x_center);
             double y_center = LatToTileY(lat_center, zoom);
+            job.Add("y_center", y_center);
+            job.Add("filename", filename);
+            job.Add("width", width);
+            job.Add("height", height);
+            job.Add("mapmode", mapmode);
+            job.Add("tileSize", tileSize);
+            job.Add("MapCachePath", FileManager.GetMapCachePath());
+            List<double> latlng = new List<double>();
+            for (int row = 0; row < coords.Rows.Count; row++)
+            {
+                latlng.Add(Convert.ToDouble(coords.Rows[row]["lat"]));
+                latlng.Add(Convert.ToDouble(coords.Rows[row]["lng"]));
+            }
+            job.Add("latlng", latlng.ToArray());
+            string tempfile = Path.GetTempFileName();
+            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            using (Process process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "/usr/bin/mono",
+                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            })
+            {
+                process.Start();
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    Logfile.Log(process.StandardOutput.ReadLine());
+                }
+                process.WaitForExit();
+            }
+            if (File.Exists(tempfile))
+            {
+                File.Delete(tempfile);
+            }
+            /*
             using (Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode))
             {
                 //    // map has background tiles, OSM attribution and dark mode, if enabled
@@ -47,6 +94,7 @@ namespace TeslaLogger
                 SaveImage(map, filename);
                 map.Dispose();
             }
+            */
         }
 
         // transform longitude to tile number
@@ -105,7 +153,7 @@ namespace TeslaLogger
         private Bitmap DownloadTile(int zoom, int tile_x, int tile_y)
         {
             string localMapCacheFilePath = Path.Combine(FileManager.GetMapCachePath(), $"{zoom}_{tile_x}_{tile_y}.png");
-            if (DeleteOldMapFile(localMapCacheFilePath, 8))
+            if (MapFileExistsOrIsTooOld(localMapCacheFilePath, 8))
             {
                 // cached file too old or does not exist yet
                 int retries = 0;
@@ -228,9 +276,9 @@ namespace TeslaLogger
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 string attribution = "© OpenStreetMap";
-                SizeF size = g.MeasureString(attribution, drawFont8);
+                SizeF size = g.MeasureString(attribution, drawFont6);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
-                g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                g.DrawString(attribution, drawFont6, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
             }
         }
 
