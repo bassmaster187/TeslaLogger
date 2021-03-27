@@ -119,12 +119,7 @@ namespace TeslaLogger
         {
             try
             {
-                Bitmap clone = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
-                using (Graphics gr = Graphics.FromImage(clone))
-                {
-                    gr.DrawImage(image, new Rectangle(0, 0, clone.Width, clone.Height));
-                }
-                clone.Save(filename);
+                image.Save(filename);
                 if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + filename); }
                 if (File.Exists("/usr/bin/optipng"))
                 {
@@ -133,7 +128,7 @@ namespace TeslaLogger
                         StartInfo = new ProcessStartInfo
                         {
                             FileName = "/usr/bin/optipng",
-                            Arguments = "-o3 -silent " + filename,
+                            Arguments = "-o4 -silent " + filename,
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
                             CreateNoWindow = true
