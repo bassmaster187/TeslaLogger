@@ -119,7 +119,7 @@ namespace TeslaLogger
         {
             try
             {
-                Bitmap clone = new Bitmap(image.Width, image.Height, PixelFormat.Format8bppIndexed);
+                Bitmap clone = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
                 using (Graphics gr = Graphics.FromImage(clone))
                 {
                     gr.DrawImage(image, new Rectangle(0, 0, clone.Width, clone.Height));
