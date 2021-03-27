@@ -46,18 +46,16 @@ namespace TeslaLogger
 
         internal class POIRequest : Request
         {
-            public POIRequest(MapType type, double lat, double lng, string name, MapMode mode, int width = 0, int height = 0)
+            public POIRequest(MapType type, double lat, double lng, MapMode mode, int width = 0, int height = 0)
             {
                 Type = type;
                 Lat = lat;
                 Lng = lng;
-                Name = name;
                 Width = width;
                 Height = height;
                 Mode = mode;
             }
 
-            public string Name { get; }
             public double Lat { get; }
             public double Lng { get; }
         }
@@ -66,8 +64,6 @@ namespace TeslaLogger
         private static StaticMapProvider _StaticMapProvider = null;
 
         private readonly ConcurrentQueue<Request> queue = new ConcurrentQueue<Request>();
-
-        const string addressfilter = "replace(replace(replace(replace(replace(convert(address USING ascii), '?',''),' ',''),'/',''),'&',''),',','') AS addr";
 
         private StaticMapService()
         {
@@ -95,9 +91,9 @@ namespace TeslaLogger
             queue.Enqueue(new TripRequest(CarID, startPosID, endPosID, MapType.Trip, mode, special, width, height));
         }
 
-        private void Enqueue(MapType type, double lat, double lng, string name, MapMode mode)
+        private void Enqueue(MapType type, double lat, double lng, MapMode mode)
         {
-            queue.Enqueue(new POIRequest(type, lat, lng, name, mode));
+            queue.Enqueue(new POIRequest(type, lat, lng, mode));
         }
 
         public void Run()
@@ -159,8 +155,8 @@ namespace TeslaLogger
                     }
                     else if (request is POIRequest)
                     {
-                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Name}");
-                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Type, ((POIRequest)request).Name));
+                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Lat},{((POIRequest)request).Lng}");
+                        string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Type, ((POIRequest)request).Lat, ((POIRequest)request).Lng));
                         if (MapFileExistsOrIsTooOld(filename))
                         {
                             switch (request.Type)
@@ -244,22 +240,20 @@ ORDER BY
             using (DataTable dt = new DataTable())
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter($@"
-SELECT
-  AVG(lat) AS lat,
-  AVG(lng) AS lng,
-  {addressfilter}
+SELECT DISTINCT
+  round(lat, 4) as lat,
+  round(lng, 4) as lng
 FROM
   chargingstate
 JOIN pos ON
   chargingstate.pos = pos.id
-GROUP BY
-  address", DBHelper.DBConnectionstring))
+", DBHelper.DBConnectionstring))
                 {
                     da.Fill(dt);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
+                    GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
                 }
                 dt.Clear();
             }
@@ -270,10 +264,9 @@ GROUP BY
             using (DataTable dt = new DataTable())
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter($@"
-SELECT
-  AVG(lat) AS lat,
-  AVG(lng) AS lng,
-  {addressfilter}
+SELECT DISTINCT
+  round(lat, 4) as lat,
+  round(lng, 4) as lng
 FROM
   pos    
 LEFT JOIN
@@ -296,15 +289,13 @@ WHERE
     EndPos
   FROM
     drivestate
-  )
-GROUP BY
-  address", DBHelper.DBConnectionstring))
+  )", DBHelper.DBConnectionstring))
                 {
                     da.Fill(dt);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
+                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
                 }
                 dt.Clear();
             }
@@ -361,14 +352,14 @@ ORDER BY
             return mapdir;
         }
 
-        private static string GetMapFileName(MapType type, string name)
+        private static string GetMapFileName(MapType type, double lat, double lng)
         {
             switch (type)
             {
                 case MapType.Charge:
-                    return "C-" + name + ".jpg";
+                    return "C-" + lat + "-" + lng + ".png";
                 case MapType.Park:
-                    return "P-" + name + ".jpg";
+                    return "P-" + lat + "-" + lng + ".png";
             }
             return "error.jpg";
         }
@@ -382,7 +373,7 @@ ORDER BY
             sb.Append(startpos);
             sb.Append("-");
             sb.Append(endpos);
-            sb.Append(".jpg");
+            sb.Append(".png");
             return sb.ToString();
         }
 
@@ -396,9 +387,8 @@ ORDER BY
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
 SELECT
-  lat,
-  lng,
-  {addressfilter}
+  round(lat, 4) as lat,
+  round(lng, 4) as lng
 FROM
  chargingstate
 JOIN pos ON
@@ -415,7 +405,7 @@ WHERE
                         {
                             while (dr.Read())
                             {
-                                GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], dr["addr"].ToString(), MapMode.Dark);
+                                GetSingleton().Enqueue(MapType.Charge, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
                             }
                         }
                         catch (Exception ex)
@@ -441,9 +431,8 @@ WHERE
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
 SELECT
-  lat,
-  lng,
-  {addressfilter}
+  round(lat, 4) as lat,
+  round(lng, 4) as lng
 FROM
   pos
 WHERE
@@ -456,7 +445,7 @@ WHERE
                         {
                             while (dr.Read())
                             {
-                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), dr["name"].ToString(), MapMode.Dark);
+                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), MapMode.Dark);
                             }
                         }
                         catch (Exception ex)
