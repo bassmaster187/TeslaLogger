@@ -52,7 +52,7 @@
       "styles": [
         {
           "$$hashKey": "object:671",
-          "alias": "Last Driven * * * *",
+          "alias": "Last Driven",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm",
           "pattern": "LastDriven",
@@ -96,7 +96,7 @@
         },
         {
           "$$hashKey": "object:3292",
-          "alias": "Ø Outside C°",
+          "alias": "Ø Outside Temp C°",
           "align": "right",
           "colorMode": null,
           "colors": [
@@ -114,7 +114,7 @@
         },
         {
           "$$hashKey": "object:3424",
-          "alias": "Ø kWh",
+          "alias": "Ø Consumption kWh",
           "align": "right",
           "colorMode": null,
           "colors": [

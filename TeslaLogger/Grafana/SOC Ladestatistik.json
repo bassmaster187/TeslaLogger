@@ -56,7 +56,7 @@
         },
         {
           "alias": "SOC [%]",
-          "align": "right",
+		  "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -76,7 +76,7 @@
         },
         {
           "alias": "Anzahl Ladungen",
-          "align": "right",
+		  "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",

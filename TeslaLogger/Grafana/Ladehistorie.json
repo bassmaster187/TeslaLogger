@@ -228,7 +228,7 @@
         {
           "$$hashKey": "object:161",
           "alias": "SOC Ende",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",

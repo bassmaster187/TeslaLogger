@@ -73,7 +73,7 @@
         },
         {
           "alias": "",
-          "align": "right",
+		  "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -109,7 +109,7 @@
         },
         {
           "alias": "geladen kWh",
-          "align": "right",
+		  "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -126,7 +126,7 @@
         },
         {
           "alias": "Ø geladen kWh",
-          "align": "right",
+		  "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -143,7 +143,7 @@
         },
         {
           "alias": "Ø SOC",
-          "align": "right",
+		  "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -163,7 +163,7 @@
         },
         {
           "alias": "Max SOC",
-          "align": "right",
+		  "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -183,7 +183,7 @@
         },
         {
           "alias": "Ladezeit h",
-          "align": "right",
+		  "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -232,7 +232,7 @@
         },
         {
           "alias": "Ø kW",
-          "align": "right",
+		  "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
