@@ -18,7 +18,7 @@ namespace TeslaLogger
         private static int padding_y = 12;
         private static int tileSize = 256;
 
-        private static Font drawFont6 = new Font(FontFamily.GenericSansSerif, 6);
+        private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
         private static Font drawFont12b = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
         private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(192, 192, 192, 128));
         private static SolidBrush blackBrush = new SolidBrush(Color.Black);
@@ -34,7 +34,6 @@ namespace TeslaLogger
         public override void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
             // workaround for linux mono libgdiplus memory leak
-            // serialize request
             Dictionary<string, object> job = new Dictionary<string, object>();
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
             // calculate center point of map
@@ -276,9 +275,9 @@ namespace TeslaLogger
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 string attribution = "© OpenStreetMap";
-                SizeF size = g.MeasureString(attribution, drawFont6);
+                SizeF size = g.MeasureString(attribution, drawFont8);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
-                g.DrawString(attribution, drawFont6, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
             }
         }
 
@@ -501,8 +500,48 @@ namespace TeslaLogger
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            // workaround for linux mono libgdiplus memory leak
+            Dictionary<string, object> job = new Dictionary<string, object>();
             double x_center = LngToTileX(lng, 19);
             double y_center = LatToTileY(lat, 19);
+            job.Add("zoom", 19);
+            job.Add("x_center", x_center);
+            job.Add("y_center", y_center);
+            job.Add("filename", filename);
+            job.Add("width", width);
+            job.Add("height", height);
+            job.Add("mapmode", mapmode);
+            job.Add("tileSize", tileSize);
+            job.Add("poi", "charge");
+            job.Add("lat", lat);
+            job.Add("lng", lng);
+            job.Add("MapCachePath", FileManager.GetMapCachePath());
+            string tempfile = Path.GetTempFileName();
+            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            using (Process process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "/usr/bin/mono",
+                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            })
+            {
+                process.Start();
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    Logfile.Log(process.StandardOutput.ReadLine());
+                }
+                process.WaitForExit();
+            }
+            if (File.Exists(tempfile))
+            {
+                File.Delete(tempfile);
+            }
+            /*
             using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
@@ -510,12 +549,53 @@ namespace TeslaLogger
                 SaveImage(map, filename);
                 map.Dispose();
             }
+            */
         }
 
         public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            // workaround for linux mono libgdiplus memory leak
+            Dictionary<string, object> job = new Dictionary<string, object>();
             double x_center = LngToTileX(lng, 19);
             double y_center = LatToTileY(lat, 19);
+            job.Add("zoom", 19);
+            job.Add("x_center", x_center);
+            job.Add("y_center", y_center);
+            job.Add("filename", filename);
+            job.Add("width", width);
+            job.Add("height", height);
+            job.Add("mapmode", mapmode);
+            job.Add("tileSize", tileSize);
+            job.Add("MapCachePath", FileManager.GetMapCachePath());
+            job.Add("poi", "park");
+            job.Add("lat", lat);
+            job.Add("lng", lng);
+            string tempfile = Path.GetTempFileName();
+            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            using (Process process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "/usr/bin/mono",
+                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            })
+            {
+                process.Start();
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    Logfile.Log(process.StandardOutput.ReadLine());
+                }
+                process.WaitForExit();
+            }
+            if (File.Exists(tempfile))
+            {
+                File.Delete(tempfile);
+            }
+            /*
             using (Bitmap map = DrawMap(width, height, 19, x_center, y_center, mapmode))
             {
                 // map has background tiles, OSM attribution and dark mode, if enabled
@@ -523,6 +603,7 @@ namespace TeslaLogger
                 SaveImage(map, filename);
                 map.Dispose();
             }
+            */
         }
 
         public override int GetDelayMS()
