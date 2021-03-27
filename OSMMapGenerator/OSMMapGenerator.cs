@@ -119,8 +119,13 @@ namespace TeslaLogger
         {
             try
             {
-                image.Save(filename);
-                if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + job["filename"].ToString()); }
+                Bitmap clone = new Bitmap(image.Width, image.Height, PixelFormat.Format8bppIndexed);
+                using (Graphics gr = Graphics.FromImage(clone))
+                {
+                    gr.DrawImage(image, new Rectangle(0, 0, clone.Width, clone.Height));
+                }
+                clone.Save(filename);
+                if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + filename); }
                 if (File.Exists("/usr/bin/optipng"))
                 {
                     using (Process process = new Process
