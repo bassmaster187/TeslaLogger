@@ -93,7 +93,6 @@ namespace TeslaLogger
                             DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
                             if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
                             DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
-                            if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + job["filename"].ToString()); }
                         }
                         else if (job.ContainsKey("poi"))
                         {
@@ -121,6 +120,7 @@ namespace TeslaLogger
             try
             {
                 image.Save(filename);
+                if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + job["filename"].ToString()); }
                 if (File.Exists("/usr/bin/optipng"))
                 {
                     using (Process process = new Process
