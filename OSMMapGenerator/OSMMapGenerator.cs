@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -31,7 +32,7 @@ namespace TeslaLogger
         private static int tileSize = 256;
         private static string MapCachePath = string.Empty;
         private static Random random = new Random();
-        private static Font drawFont6 = new Font(FontFamily.GenericSansSerif, 6);
+        private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
         private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(192, 192, 192, 128));
         private static SolidBrush blackBrush = new SolidBrush(Color.Black);
         private static Pen bluePen = new Pen(Color.Blue, 2);
@@ -67,30 +68,47 @@ namespace TeslaLogger
                         MapCachePath = job["MapCachePath"].ToString();
                         if (debug) { Console.WriteLine($"OSMMapGenerator - DrawMap(width:{width}, height:{height}, zoom:{zoom}, x_center:{x_center}, y_center:{y_center}, mapmode:{mapmode})"); }
                         Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode);
-                        DataTable coords = new DataTable();
-                        DataColumn column = new DataColumn();
-                        column.DataType = System.Type.GetType("System.Double");
-                        column.ColumnName = "lat";
-                        coords.Columns.Add(column);
-                        column = new DataColumn();
-                        column.DataType = Type.GetType("System.Double");
-                        column.ColumnName = "lng";
-                        coords.Columns.Add(column);
-                        if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + ((object[])job["latlng"]).Length); }
-                        for (int index = 0; index < ((object[])job["latlng"]).Length; index += 2)
+                        if (job.ContainsKey("latlng"))
                         {
-                            DataRow drow = coords.NewRow();
-                            drow["lat"] = ((object[])job["latlng"])[index];
-                            drow["lng"] = ((object[])job["latlng"])[index + 1];
-                            coords.Rows.Add(drow);
+                            DataTable coords = new DataTable();
+                            DataColumn column = new DataColumn();
+                            column.DataType = System.Type.GetType("System.Double");
+                            column.ColumnName = "lat";
+                            coords.Columns.Add(column);
+                            column = new DataColumn();
+                            column.DataType = Type.GetType("System.Double");
+                            column.ColumnName = "lng";
+                            coords.Columns.Add(column);
+                            if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + ((object[])job["latlng"]).Length); }
+                            for (int index = 0; index < ((object[])job["latlng"]).Length; index += 2)
+                            {
+                                DataRow drow = coords.NewRow();
+                                drow["lat"] = ((object[])job["latlng"])[index];
+                                drow["lng"] = ((object[])job["latlng"])[index + 1];
+                                coords.Rows.Add(drow);
+                            }
+                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawTrip"); }
+                            DrawTrip(map, coords, zoom, x_center, y_center);
+                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
+                            DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
+                            if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
+                            DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
+                            if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + job["filename"].ToString()); }
                         }
-                        if (debug) { Console.WriteLine("OSMMapGenerator - DrawTrip"); }
-                        DrawTrip(map, coords, zoom, x_center, y_center);
-                        if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
-                        DrawIcon(map, Convert.ToDouble(coords.Rows[0]["lat"]), Convert.ToDouble(coords.Rows[0]["lng"]), MapIcon.Start, zoom, x_center, y_center);
-                        if (debug) { Console.WriteLine("OSMMapGenerator - DrawIcon"); }
-                        DrawIcon(map, Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lat"]), Convert.ToDouble(coords.Rows[coords.Rows.Count - 1]["lng"]), MapIcon.End, zoom, x_center, y_center);
-                        if (debug) { Console.WriteLine("OSMMapGenerator - SaveImage: " + job["filename"].ToString()); }
+                        else if (job.ContainsKey("poi"))
+                        {
+                            double lat = Convert.ToDouble(job["lat"]);
+                            double lng = Convert.ToDouble(job["lng"]);
+                            switch (job["poi"].ToString())
+                            {
+                                case "park":
+                                    DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
+                                    break;
+                                case "charge":
+                                    DrawIcon(map, lat, lng, MapIcon.Charge, 19, x_center, y_center);
+                                    break;
+                            }
+                        }
                         SaveImage(map, job["filename"].ToString());
                     }
                 }
@@ -103,6 +121,24 @@ namespace TeslaLogger
             try
             {
                 image.Save(filename);
+                if (File.Exists("/usr/bin/optipng"))
+                {
+                    using (Process process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "/usr/bin/optipng",
+                            Arguments = "-o3 -silent " + filename,
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            CreateNoWindow = true
+                        }
+                    })
+                    {
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
             }
             catch (Exception) { }
         }
@@ -426,9 +462,9 @@ namespace TeslaLogger
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 string attribution = "© OpenStreetMap";
-                SizeF size = g.MeasureString(attribution, drawFont6);
+                SizeF size = g.MeasureString(attribution, drawFont8);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
-                g.DrawString(attribution, drawFont6, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
             }
         }
 
