@@ -131,6 +131,7 @@ namespace TeslaLogger
                     break;
                 case "charging_state":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    // charging_state Charging -> Complete
                     break;
                 case "battery_level":
                     if (car.IsParked() && !car.IsCharging())
