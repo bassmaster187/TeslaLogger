@@ -221,7 +221,7 @@ namespace UnitTestsTeslalogger
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
             wh.car.vin = "5YJ3E7EA3MFXXXXXX";
-            wh.car.car_type = "";
+            wh.car.car_type = ""; // sometimes empty !!!
             wh.car.car_special_type = "base";
             wh.car.DB_Wh_TR = 0.126;
             wh.car.trim_badging = "";
@@ -229,6 +229,19 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("M3 SR+ 2021", wh.car.ModelName);
             Assert.AreEqual(0.126, wh.car.Wh_TR);
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
+            wh.car.vin = "5YJ3E7EC2MFXXXXXX";
+            wh.car.car_type = "model3";
+            wh.car.car_special_type = "base";
+            wh.car.DB_Wh_TR = 0.158;
+            wh.car.trim_badging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P 2021", wh.car.ModelName);
+            Assert.AreEqual(0.158, wh.car.Wh_TR);
         }
 
         [TestMethod]
