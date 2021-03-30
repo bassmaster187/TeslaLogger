@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logfile", "Logfile\Logfile.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsTeslalogger", "UnitTestsTeslalogger\UnitTestsTeslalogger.csproj", "{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMMapGenerator", "OSMMapGenerator\OSMMapGenerator.csproj", "{852390A2-450B-43B3-A79A-F6C1DD988AE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{852390A2-450B-43B3-A79A-F6C1DD988AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
