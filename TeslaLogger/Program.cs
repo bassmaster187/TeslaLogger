@@ -324,49 +324,6 @@ namespace TeslaLogger
             }
         }
 
-        private static void UpdateDbInBackground()
-        {
-            Thread DBUpdater = new Thread(() =>
-            {
-                // wait for DB updates
-                while (!UpdateTeslalogger.Done)
-                    Thread.Sleep(5000);
-
-                Thread.Sleep(30000);
-                DateTime start = DateTime.Now;
-                Logfile.Log("UpdateDbInBackground started");
-                DBHelper.UpdateElevationForAllPoints();
-                WebHelper.UpdateAllPOIAddresses();
-                foreach (Car c in Car.allcars)
-                {
-                    c.dbHelper.CheckForInterruptedCharging(true);
-                    c.webhelper.UpdateAllEmptyAddresses();
-                }
-                DBHelper.UpdateIncompleteTrips();
-                DBHelper.UpdateAllChargingMaxPower();
-
-                foreach (Car c in Car.allcars)
-                {
-                    ShareData sd = new ShareData(c);
-                    sd.SendAllChargingData();
-                    sd.SendDegradationData();
-                }
-
-                DBHelper.UpdateCarIDNull();
-
-                MapQuest.createAllParkingMaps();
-                MapQuest.createAllChargigMaps();
-                MapQuest.createAllTripMaps();
-
-                Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
-                RunHousekeepingInBackground();
-            })
-            {
-                Priority = ThreadPriority.BelowNormal
-            };
-            DBUpdater.Start();
-        }
-
         internal static void RunHousekeepingInBackground()
         {
             Thread Housekeeper = new Thread(() =>
@@ -409,7 +366,52 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
-
         }
+
+        private static void UpdateDbInBackground()
+        {
+            Thread DBUpdater = new Thread(() =>
+            {
+                // wait for DB updates
+                while (!UpdateTeslalogger.Done)
+                    Thread.Sleep(5000);
+
+                Thread.Sleep(30000);
+                DateTime start = DateTime.Now;
+                Logfile.Log("UpdateDbInBackground started");
+                DBHelper.UpdateElevationForAllPoints();
+                WebHelper.UpdateAllPOIAddresses();
+                foreach (Car c in Car.allcars)
+                {
+                    c.dbHelper.CombineChangingStates();
+                    c.webhelper.UpdateAllEmptyAddresses();
+                    c.dbHelper.UpdateEmptyChargeEnergy();
+                }
+                DBHelper.UpdateIncompleteTrips();
+                DBHelper.UpdateAllChargingMaxPower();
+
+                foreach (Car c in Car.allcars)
+                {
+                    ShareData sd = new ShareData(c);
+                    sd.SendAllChargingData();
+                    sd.SendDegradationData();
+                }
+
+                DBHelper.UpdateCarIDNull();
+
+                MapQuest.createAllParkingMaps();
+                MapQuest.createAllChargigMaps();
+                MapQuest.createAllTripMaps();
+                DBHelper.MigrateFloorRound();
+
+                Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
+                RunHousekeepingInBackground();
+            })
+            {
+                Priority = ThreadPriority.BelowNormal
+            };
+            DBUpdater.Start();
+        }
+        
     }
 }
