@@ -778,7 +778,6 @@ namespace TeslaLogger
             return UpdateType.all;
         }
 
-
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid)
         {
             TimeSpan ts = DateTime.UtcNow - lastGrafanaSettings;
@@ -1586,6 +1585,37 @@ WHERE
                 Logfile.Log(ex.ToString());
             }
             return days;
+        }
+
+        internal static string GetMapProvider()
+        {
+            string mapProvider = "OSMMapProvider"; // default
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
+                {
+                    return mapProvider;
+                }
+
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                if (IsPropertyExist(j, "MapProvider"))
+                {
+                    if (j["MapProvider"] == "MapQuest")
+                    {
+                        return "MapQuest";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return mapProvider;
         }
 
     }
