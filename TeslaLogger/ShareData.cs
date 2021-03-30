@@ -91,7 +91,6 @@ namespace TeslaLogger
 
                 using (DataTable dt = new DataTable())
                 {
-
                     int ms = Environment.TickCount;
 
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
@@ -188,6 +187,7 @@ namespace TeslaLogger
 
                         car.Log("ShareData: SendAllChargingData finished");
                     }
+                    dt.Clear();
                 }
             
             }
@@ -249,6 +249,7 @@ namespace TeslaLogger
 
                     return l;
                 }
+                dt.Clear();
             }
         }
 
@@ -363,6 +364,7 @@ namespace TeslaLogger
                             car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                         }
                     }
+                    dt.Clear();
                 }
 
             }

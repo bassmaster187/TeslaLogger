@@ -34,24 +34,26 @@ namespace TeslaLogger
                     return;
                 }
 
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                using (System.Diagnostics.Process proc = new System.Diagnostics.Process
                 {
                     EnableRaisingEvents = false
-                };
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.FileName = "mono";
-                proc.StartInfo.Arguments = MQTTClientPath;
-
-                proc.Start();
-
-                while (!proc.StandardOutput.EndOfStream)
+                })
                 {
-                    string line = proc.StandardOutput.ReadLine();
-                    Logfile.Log(line);
-                }
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.FileName = "mono";
+                    proc.StartInfo.Arguments = MQTTClientPath;
 
-                proc.WaitForExit();
+                    proc.Start();
+
+                    while (!proc.StandardOutput.EndOfStream)
+                    {
+                        string line = proc.StandardOutput.ReadLine();
+                        Logfile.Log(line);
+                    }
+
+                    proc.WaitForExit();
+                }
             }
             catch (Exception ex)
             {
