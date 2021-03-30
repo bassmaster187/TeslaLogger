@@ -538,6 +538,32 @@ namespace TeslaLogger
             */
         }
 
+        internal static bool StreamingPos()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return false;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "StreamingPos"))
+                {
+                    if(bool.TryParse(j["StreamingPos"], out bool streamingPos)) {
+                        return streamingPos;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
+        }
+
         internal static void StartSleeping(out int startSleepingHour, out int startSleepingMinutes)
         {
             TimeSpan ts = DateTime.UtcNow - lastSleepingHourMinutsUpdated;
