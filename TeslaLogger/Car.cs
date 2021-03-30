@@ -132,7 +132,7 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire, string Model_Name, string car_type, string car_special_type, string display_name, string vin, string TaskerHash, double? Wh_TR)
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string Tesla_Token, DateTime Tesla_Token_Expire, string Model_Name, string car_type, string car_special_type, string car_trim_badging, string display_name, string vin, string TaskerHash, double? Wh_TR)
         {
             lock (typeof(Car))
             {
@@ -147,6 +147,7 @@ namespace TeslaLogger
                 this.ModelName = Model_Name;
                 this.car_type = car_type;
                 this.car_special_type = car_special_type;
+                this.trim_badging = car_trim_badging;
                 this.display_name = display_name;
                 this.vin = vin;
                 this.TaskerHash = TaskerHash;
@@ -299,6 +300,7 @@ namespace TeslaLogger
 
                 Log("Car: " + ModelName + " - " + Wh_TR + " Wh/km");
                 Log($"VIN decoder: {vindecoder}");
+                Log($"Vehicle Config: car_type:'{car_type}' car_special_type:'{car_special_type}' trim_badging:'{trim_badging}'");
 
                 dbHelper.GetLastTrip();
 
