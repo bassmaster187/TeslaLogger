@@ -188,8 +188,20 @@ Example: +cof:R->P when shifting from R to P the command HVAC off is sent to you
 
 Default: RND->P
 
-# Copy Charging Costs
+# Copy Charging Price
 
 +ccp
 
 When charging stops, this will try to find a previous charging session at the current location and apply charging price settings from the previous session to the latest charging session.
+
+# Combine Charging Sessions
+
++ccs
+
+When CombineChargingStates is globally disabled, it can be enabled for this POI.
+
+# Do Not Combine Chargin Sessions
+
++dnc
+
+When CombineChargingStates is Globally enabled (default), charging sessions will not be combined at this POI.

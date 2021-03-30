@@ -373,8 +373,8 @@ namespace TeslaLogger
         {
             Thread DBUpdater = new Thread(() =>
             {
-                    // wait for DB updates
-                    while (!UpdateTeslalogger.Done)
+                // wait for DB updates
+                while (!UpdateTeslalogger.Done)
                     Thread.Sleep(5000);
 
                 Thread.Sleep(30000);
@@ -384,8 +384,9 @@ namespace TeslaLogger
                 WebHelper.UpdateAllPOIAddresses();
                 foreach (Car c in Car.allcars)
                 {
-                    c.dbHelper.CheckForInterruptedCharging(true);
+                    c.dbHelper.CombineChangingStates();
                     c.webhelper.UpdateAllEmptyAddresses();
+                    c.dbHelper.UpdateEmptyChargeEnergy();
                 }
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
@@ -411,6 +412,5 @@ namespace TeslaLogger
             };
             DBUpdater.Start();
         }
-
     }
 }
