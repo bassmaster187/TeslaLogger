@@ -470,6 +470,9 @@ WHERE
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
                     UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+
+                    // update chargingsession stats
+                    UpdateMaxChargerPower(maxID);
                 }
             }
         }
@@ -1531,6 +1534,45 @@ ORDER BY chargingstate.id ASC", con))
                     using (MySqlCommand cmd = new MySqlCommand("select id, StartChargingID, EndChargingID from chargingstate where CarID=@CarID order by id desc limit 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            int id = Convert.ToInt32(dr["id"]);
+                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
+                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+
+                            UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.Message);
+            }
+        }
+
+        public void UpdateMaxChargerPower(int chargingstateid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  StartChargingID,
+  EndChargingID
+FROM
+  chargingstate
+WHERE
+  CarID=@CarID
+  AND id=@id
+ORDER BY id DESC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@id", chargingstateid);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
