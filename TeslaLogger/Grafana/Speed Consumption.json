@@ -54,7 +54,7 @@
           "$$hashKey": "object:671",
           "alias": "Last Driven",
           "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "dateFormat": "YYYY-MM-DD HH:mm",
           "pattern": "LastDriven",
           "type": "date"
         },
