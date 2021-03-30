@@ -2198,7 +2198,6 @@ namespace TeslaLogger
                                             car.Log("Stream Data Error: " + resultContent);
                                             throw new Exception("unhandled error_type: " + error_type);
                                         }
-
                                         break;
                                     case "data:update":
                                         string value = j["value"];
