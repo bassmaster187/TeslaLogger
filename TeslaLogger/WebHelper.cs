@@ -2102,7 +2102,12 @@ namespace TeslaLogger
                 System.Net.WebSockets.ClientWebSocket ws = null;
                 try
                 {
-                    if (!car.currentJSON.current_falling_asleep)
+                    // get streaming data if
+                    // * car is fallig asleep to interrupt the "let the car fall asleep" cycle
+                    // or
+                    // * StreamingPos is true in settings.json and the car is driving
+                    // otherwise skip
+                    if (!car.currentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.currentJSON.current_driving))
                     {
                         Thread.Sleep(1000);
                         continue;
@@ -2354,7 +2359,7 @@ namespace TeslaLogger
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
                 double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
                 double? outside_temp = car.currentJSON.current_outside_temp;
-                if (latitude != last_latitude_streaming || longitude != last_longitude_streaming)
+                if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") && (latitude != last_latitude_streaming || longitude != last_longitude_streaming))
                 {
                     last_latitude_streaming = latitude;
                     last_longitude_streaming = longitude;
