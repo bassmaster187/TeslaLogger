@@ -956,7 +956,7 @@ namespace TeslaLogger
 
                                 Logfile.Log("Start Reconnect!");
 
-                                Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.car_type, c.car_special_type, c.display_name, c.vin, c.TaskerHash, c.Wh_TR);
+                                Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.car_type, c.car_special_type, c.trim_badging, c.display_name, c.vin, c.TaskerHash, c.Wh_TR);
                             }
 
                             WriteString(response, "OK");
@@ -992,7 +992,7 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.ExecuteNonQuery();
 
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
+                                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", "", null);
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -1023,7 +1023,7 @@ namespace TeslaLogger
                                     c.ExitTeslaLogger("Credentials changed!");
                                 }
 
-                                Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", null);
+                                Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", "", null);
                                 WriteString(response, "OK");
                             }
                         }
