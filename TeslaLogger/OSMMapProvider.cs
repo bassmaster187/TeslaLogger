@@ -274,7 +274,7 @@ namespace TeslaLogger
             using (Graphics g = Graphics.FromImage(image))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
-                string attribution = "© OpenStreetMap";
+                string attribution = "©OSM";
                 SizeF size = g.MeasureString(attribution, drawFont8);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
                 g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
