@@ -639,5 +639,10 @@ namespace TeslaLogger
         {
             return 500;
         }
+
+        public override bool UseIt()
+        {
+            return true;
+        }
     }
 }

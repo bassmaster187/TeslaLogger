@@ -181,5 +181,13 @@ namespace TeslaLogger
         {
             return 0;
         }
+
+        public override bool UseIt()
+        {
+            if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
+                return false;
+
+            return true;
+        }
     }
 }
