@@ -21,7 +21,7 @@ namespace UnitTestsTeslalogger
             if (fi.Exists) fi.Delete();
 
             var x = new OSMMapProvider();
-            x.CreateParkingMap(48.4006448, 9.9697401, 200, 150, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None, "temp.png");
+            x.CreateParkingMap(51.1262, 13.7845, 200, 150, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None, "temp.png");
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void CreateAllTripMaps()
         {
-            StaticMapService.CreateAllTripMaps();
+            StaticMapService.CreateAllTripMaps(StaticMapProvider.MapMode.Dark);
 
             var inst = StaticMapService.GetSingleton();
 
