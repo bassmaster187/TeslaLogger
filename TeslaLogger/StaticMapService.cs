@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
@@ -105,7 +106,15 @@ namespace TeslaLogger
                 {
                     if (!queue.IsEmpty)
                     {
-                        Work();
+                        try
+                        {
+                            Work();
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.DebugLog("StaticMapService: Exception", ex);
+                        }
+
                     }
                     else
                     {
@@ -338,6 +347,10 @@ ORDER BY
         public static string GetMapDir()
         {
             string mapdir = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/maps";
+
+            if (!Tools.IsMono())
+                mapdir = new DirectoryInfo("maps").FullName;
+
             try
             {
                 if (!System.IO.Directory.Exists(mapdir))

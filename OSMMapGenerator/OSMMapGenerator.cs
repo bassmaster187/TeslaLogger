@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
-    class OSMMapGenerator
+    public class OSMMapGenerator
     {
         public enum MapMode
         {
@@ -564,7 +564,5 @@ namespace TeslaLogger
                 }
             }
         }
-
-
     }
 }
