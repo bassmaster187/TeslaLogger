@@ -33,14 +33,14 @@ namespace TeslaLogger
         private static string MapCachePath = string.Empty;
         private static Random random = new Random();
         private static Font drawFont8 = new Font(FontFamily.GenericSansSerif, 8);
-        private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(192, 192, 192, 128));
-        private static SolidBrush blackBrush = new SolidBrush(Color.Black);
-        private static Pen bluePen = new Pen(Color.Blue, 2);
+        private static SolidBrush fillBrush = new SolidBrush(Color.FromArgb(51, 51, 51));
+        private static SolidBrush grayBrush = new SolidBrush(Color.FromArgb(226,226,226));
+        private static Pen bluePen = new Pen(Color.FromArgb(88,130,249), 3);
         private static Pen whitePen = new Pen(Color.White, 4);
         private static SolidBrush orangeBrush = new SolidBrush(Color.OrangeRed);
-        private static SolidBrush greenBrush = new SolidBrush(Color.Green);
-        private static SolidBrush blueBrush = new SolidBrush(Color.Blue);
-        private static SolidBrush redBrush = new SolidBrush(Color.Red);
+        private static SolidBrush greenBrush = new SolidBrush(Color.FromArgb(126, 178, 109));
+        private static SolidBrush blueBrush = new SolidBrush(Color.FromArgb(62, 114, 177));
+        private static SolidBrush redBrush = new SolidBrush(Color.FromArgb(226,77,66));
         private static SolidBrush whiteBrush = new SolidBrush(Color.White);
         private static Font drawFont12b = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold);
         private static Pen thinWhitePen = new Pen(Color.White, 1);
@@ -461,10 +461,11 @@ namespace TeslaLogger
             using (Graphics g = Graphics.FromImage(image))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
-                string attribution = "© OpenStreetMap";
+                string attribution = "©OSM";
                 SizeF size = g.MeasureString(attribution, drawFont8);
                 g.FillRectangle(fillBrush, new Rectangle((int)(image.Width - size.Width - 3), (int)(image.Height - size.Height - 3), (int)(size.Width + 6), (int)(size.Height + 6)));
-                g.DrawString(attribution, drawFont8, blackBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                g.DrawString(attribution, drawFont8, grayBrush, image.Width - size.Width - 2, image.Height - size.Height - 2);
             }
         }
 
@@ -474,6 +475,7 @@ namespace TeslaLogger
             {
                 graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 // draw Trip line
+                /*
                 for (int index = 1; index < coords.Rows.Count; index++)
                 {
                     int x1 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
@@ -485,6 +487,7 @@ namespace TeslaLogger
                         graphics.DrawLine(whitePen, x1, y1, x2, y2);
                     }
                 }
+                */
                 for (int index = 1; index < coords.Rows.Count; index++)
                 {
                     int x1 = XtoPx(LngToTileX(Convert.ToDouble(coords.Rows[index - 1]["lng"]), zoom), x_center, image.Width);
@@ -555,6 +558,7 @@ namespace TeslaLogger
                 {
                     string text = icon == MapIcon.Park ? "P" : "\u26A1";
                     SizeF size = g.MeasureString(text, drawFont12b);
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
                     g.DrawString(text, drawFont12b, whiteBrush, x - size.Width / 2, y - 6 * scale - size.Height / 2);
                     g.Dispose();
                 }
