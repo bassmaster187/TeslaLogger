@@ -310,7 +310,7 @@ WHERE
             }
         }
 
-        public static void CreateAllTripMaps()
+        public static void CreateAllTripMaps(MapMode mapMode = MapMode.Dark)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
@@ -332,7 +332,7 @@ ORDER BY
                     {
                         while (dr.Read())
                         {
-                            GetSingleton().Enqueue(Convert.ToInt32(dr["carid"]), Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, MapMode.Dark, MapSpecial.None);
+                            GetSingleton().Enqueue(Convert.ToInt32(dr["carid"]), Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, mapMode, MapSpecial.None);
                         }
                     }
                     catch (Exception ex)

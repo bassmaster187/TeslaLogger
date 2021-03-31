@@ -108,7 +108,14 @@ namespace TeslaLogger
                                     break;
                             }
                         }
-                        SaveImage(map, job["filename"].ToString());
+                        string filename = job["filename"].ToString();
+                        if (mapmode == MapMode.Regular)
+                        {
+                            var f = new FileInfo(filename);
+                            filename = Path.Combine(f.DirectoryName, "L_" + f.Name);
+                        }
+
+                        SaveImage(map, filename);
                     }
                 }
                 catch (Exception ex) { if (debug) { Console.WriteLine("OSMMapGenerator - Exception: " + ex.Message + " " + ex.StackTrace); } }
@@ -235,6 +242,7 @@ namespace TeslaLogger
 
         private static void ApplyDarkMode(Bitmap image)
         {
+            FilterForest(image);
             AdjustBrightness(image, 0.6f);
             InvertImage(image);
             AdjustContrast(image, 1.3f);
@@ -266,9 +274,98 @@ namespace TeslaLogger
             }
         }
 
+        static Color cNeutral = Color.FromArgb(224, 223, 223);
+
+        private static void FilterForest(Bitmap image)
+        {
+            for (int y = 0; (y <= (image.Height - 1)); y++)
+            {
+                for (int x = 0; (x <= (image.Width - 1)); x++)
+                {
+                    Color inv = image.GetPixel(x, y);
+
+                    if (
+                        (inv.R == 233 && inv.G == 238 && inv.B == 214) ||
+                        (inv.R == 235 && inv.G == 219 && inv.B == 232) ||
+                        (inv.R == 236 && inv.G == 236 && inv.B == 228) ||
+                        (inv.R == 237 && inv.G == 242 && inv.B == 219) ||
+                        (inv.R == 238 && inv.G == 240 && inv.B == 213) ||
+                        (inv.R == 239 && inv.G == 226 && inv.B == 237) ||
+                        (inv.R == 241 && inv.G == 243 && inv.B == 221) ||
+                        (inv.R == 242 && inv.G == 238 && inv.B == 233) ||
+                        (inv.R == 242 && inv.G == 239 && inv.B == 233)
+                        )
+                        image.SetPixel(x, y, cNeutral);
+                    else if ( // Dreiecke
+                            (inv.R == 208 && inv.G == 144 && inv.B == 86)
+                        )
+                        image.SetPixel(x, y, cNeutral);
+                    else if (
+                        (inv.R == 150 && inv.G == 184 && inv.B == 136) ||
+                        (inv.R == 150 && inv.G == 185 && inv.B == 136) ||
+                        (inv.R == 154 && inv.G == 198 && inv.B == 142) ||
+                        (inv.R == 156 && inv.G == 192 && inv.B == 142) ||
+                        (inv.R == 167 && inv.G == 201 && inv.B == 153) ||
+                        (inv.R == 167 && inv.G == 202 && inv.B == 153) ||
+                        (inv.R == 167 && inv.G == 210 && inv.B == 159) ||
+                        (inv.R == 173 && inv.G == 209 && inv.B == 158) ||
+                        (inv.R == 174 && inv.G == 206 && inv.B == 161) ||
+                        (inv.R == 174 && inv.G == 210 && inv.B == 161) ||
+                        (inv.R == 174 && inv.G == 223 && inv.B == 163) ||
+                        (inv.R == 174 && inv.G == 221 && inv.B == 161) ||
+                        (inv.R == 174 && inv.G == 222 && inv.B == 163) ||
+                        (inv.R == 176 && inv.G == 210 && inv.B == 159) ||
+                        (inv.R == 177 && inv.G == 221 && inv.B == 165) ||
+                        (inv.R == 178 && inv.G == 211 && inv.B == 164) ||
+                        (inv.R == 179 && inv.G == 188 && inv.B == 148) ||
+                        (inv.R == 183 && inv.G == 198 && inv.B == 154) ||
+                        (inv.R == 183 && inv.G == 214 && inv.B == 165) ||
+                        (inv.R == 185 && inv.G == 198 && inv.B == 142) ||
+                        (inv.R == 186 && inv.G == 212 && inv.B == 165) ||
+                        (inv.R == 186 && inv.G == 213 && inv.B == 173) ||
+                        (inv.R == 188 && inv.G == 213 && inv.B == 181) ||
+                        (inv.R == 189 && inv.G == 218 && inv.B == 177) ||
+                        (inv.R == 190 && inv.G == 229 && inv.B == 181) ||
+                        (inv.R == 200 && inv.G == 215 && inv.B == 171) ||
+                        (inv.R == 200 && inv.G == 228 && inv.B == 173) ||
+                        (inv.R == 200 && inv.G == 250 && inv.B == 204) ||
+                        (inv.R == 201 && inv.G == 225 && inv.B == 191) ||
+                        (inv.R == 201 && inv.G == 249 && inv.B == 204) ||
+                        (inv.R == 202 && inv.G == 225 && inv.B == 190) ||
+                        (inv.R == 204 && inv.G == 213 && inv.B == 200) ||
+                        (inv.R == 205 && inv.G == 235 && inv.B == 176) ||
+                        (inv.R == 210 && inv.G == 234 && inv.B == 186) ||
+                        (inv.R == 214 && inv.G == 237 && inv.B == 193) ||
+                        (inv.R == 215 && inv.G == 238 && inv.B == 192) ||
+                        (inv.R == 217 && inv.G == 238 && inv.B == 196) ||
+                        (inv.R == 220 && inv.G == 244 && inv.B == 196) ||
+                        (inv.R == 222 && inv.G == 237 && inv.B == 205) ||
+                        (inv.R == 223 && inv.G == 250 && inv.B == 226) ||
+                        (inv.R == 223 && inv.G == 251 && inv.B == 226) ||
+                        (inv.R == 223 && inv.G == 252 && inv.B == 226) ||
+                        (inv.R == 238 && inv.G == 240 && inv.B == 213) 
+                        )
+                        image.SetPixel(x, y, cNeutral);
+
+                }
+            }
+        }
+
         // https://mariusbancila.ro/blog/2009/11/13/using-colormatrix-for-creating-negative-image/
         private static void InvertImage(Bitmap image)
         {
+            for (int y = 0; (y <= (image.Height - 1)); y++)
+            {
+                for (int x = 0; (x <= (image.Width - 1)); x++)
+                {
+                    Color inv = image.GetPixel(x, y);
+                    inv = Color.FromArgb(255, (255 - inv.R), (255 - inv.G), (255 - inv.B));
+                    image.SetPixel(x, y, inv);
+                }
+            }
+            
+            /*
+
             using (Graphics g = Graphics.FromImage(image))
             {
                 // create the negative color matrix
@@ -284,6 +381,7 @@ namespace TeslaLogger
                     g.Dispose();
                 }
             }
+            */
         }
 
         // https://github.com/JimBobSquarePants/ImageProcessor/blob/release/3.0.0/src/ImageProcessor/Processing/KnownColorMatrices.cs
