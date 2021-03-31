@@ -101,10 +101,10 @@ namespace TeslaLogger
                             switch (job["poi"].ToString())
                             {
                                 case "park":
-                                    DrawIcon(map, lat, lng, MapIcon.Park, 19, x_center, y_center);
+                                    DrawIcon(map, lat, lng, MapIcon.Park, zoom, x_center, y_center);
                                     break;
                                 case "charge":
-                                    DrawIcon(map, lat, lng, MapIcon.Charge, 19, x_center, y_center);
+                                    DrawIcon(map, lat, lng, MapIcon.Charge, zoom, x_center, y_center);
                                     break;
                             }
                         }

@@ -504,7 +504,7 @@ namespace TeslaLogger
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
-            int zoom = 19;
+            int zoom = 16;
 
             // workaround for linux mono libgdiplus memory leak
             Dictionary<string, object> job = new Dictionary<string, object>();
@@ -564,7 +564,7 @@ namespace TeslaLogger
 
         public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
-            int zoom = 19;
+            int zoom = 16;
 
             // workaround for linux mono libgdiplus memory leak
             Dictionary<string, object> job = new Dictionary<string, object>();

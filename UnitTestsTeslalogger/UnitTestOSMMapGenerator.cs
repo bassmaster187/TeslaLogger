@@ -64,6 +64,23 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void ParkingP4()
+        {
+            var f = new FileInfo("../../Testfile-P4.txt");
+            string tempfile = Path.GetTempFileName();
+            f.CopyTo(tempfile, true);
+
+            var map = new FileInfo("maps/P-51,1576-13,6364.png");
+            if (map.Exists)
+                map.Delete();
+
+            string p = f.FullName;
+
+            string[] args = { "-jobfile", tempfile, "-debug" };
+            OSMMapGenerator.Main(args);
+        }
+
+        [TestMethod]
         public void TripT1()
         {
             var f = new FileInfo("../../Testfile-T1.txt");
