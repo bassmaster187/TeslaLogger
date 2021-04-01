@@ -309,6 +309,8 @@ namespace TeslaLogger
                                 type = StaticMapProvider.MapType.Charge;
                             }
                             break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -432,6 +434,8 @@ namespace TeslaLogger
                                     enddt = DateTime.Now.AddSeconds(1);
                                 }
                                 break;
+                            default:
+                                break;
                         }
                     }
                 }
@@ -540,6 +544,8 @@ namespace TeslaLogger
                                 break;
                             case "carID":
                                 int.TryParse(request.QueryString.GetValues(key)[0], out carID);
+                                break;
+                            default:
                                 break;
                         }
                     }

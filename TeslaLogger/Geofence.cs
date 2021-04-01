@@ -20,7 +20,8 @@ namespace TeslaLogger
             ClimateOff,
             CopyChargePrice,
             CombineChargingStates,
-            DoNotCombineChargingStates
+            DoNotCombineChargingStates,
+            OnChargeComplete
         }
 
         public string name;
@@ -202,7 +203,7 @@ namespace TeslaLogger
                 
                 Init();
 
-                Task.Factory.StartNew(() => WebHelper.UpdateAllPOIAddresses());
+                _ = Task.Factory.StartNew(() => WebHelper.UpdateAllPOIAddresses(), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
             finally
             {
@@ -320,6 +321,10 @@ namespace TeslaLogger
                     _addr.IsCharger = true;
                     _addr.name = "\uD83D\uDD0C " + _addr.name;
                 }
+                else if (flag.StartsWith("occ"))
+                {
+                    SpecialFlag_OCC(_addr, flag);
+                }
                 else if (flag.StartsWith("scl"))
                 {
                     SpecialFlag_SCL(_addr, flag);
@@ -386,6 +391,16 @@ namespace TeslaLogger
         private static void SpecialFlag_CCP(Address _addr)
         {
             _addr.specialFlags.Add(Address.SpecialFlags.CopyChargePrice, "");
+        }
+
+        private static void SpecialFlag_OCC(Address _addr, string _flag)
+        {
+            string pattern = "occ:([0-9]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.OnChargeComplete, m.Groups[1].Captures[0].ToString());
+            }
         }
 
         private static void SpecialFlag_SCL(Address _addr, string _flag)
