@@ -67,6 +67,8 @@ namespace TeslaLogger
                         case 3:
                             Logfile.Log("TeslaLogger update is still running, thank you for your patience");
                             break;
+                        default:
+                            break;
                     }
                 }
             })

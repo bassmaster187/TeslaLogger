@@ -1949,7 +1949,7 @@ ORDER BY id DESC", con))
             car.currentJSON.current_speed = 0;
             car.currentJSON.current_power = 0;
 
-            Task.Factory.StartNew(() =>
+            _ = Task.Factory.StartNew(() =>
               {
                   if (StartPos > 0)
                   {
@@ -1959,7 +1959,7 @@ ORDER BY id DESC", con))
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }
-              });
+              }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
