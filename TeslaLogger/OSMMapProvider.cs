@@ -60,12 +60,16 @@ namespace TeslaLogger
             job.Add("latlng", latlng.ToArray());
             string tempfile = Path.GetTempFileName();
             File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+
+            GetOSMMapGeneratorFilename(out string fileName, out string arguments);
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+
             using (Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "/usr/bin/mono",
-                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    FileName = fileName,
+                    Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -500,11 +504,13 @@ namespace TeslaLogger
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            int zoom = 16;
+
             // workaround for linux mono libgdiplus memory leak
             Dictionary<string, object> job = new Dictionary<string, object>();
-            double x_center = LngToTileX(lng, 19);
-            double y_center = LatToTileY(lat, 19);
-            job.Add("zoom", 19);
+            double x_center = LngToTileX(lng, zoom);
+            double y_center = LatToTileY(lat, zoom);
+            job.Add("zoom", zoom);
             job.Add("x_center", x_center);
             job.Add("y_center", y_center);
             job.Add("filename", filename);
@@ -518,12 +524,16 @@ namespace TeslaLogger
             job.Add("MapCachePath", FileManager.GetMapCachePath());
             string tempfile = Path.GetTempFileName();
             File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+
+            GetOSMMapGeneratorFilename(out string fileName, out string arguments);
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+
             using (Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "/usr/bin/mono",
-                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    FileName = fileName,
+                    Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -554,11 +564,13 @@ namespace TeslaLogger
 
         public override void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
+            int zoom = 16;
+
             // workaround for linux mono libgdiplus memory leak
             Dictionary<string, object> job = new Dictionary<string, object>();
-            double x_center = LngToTileX(lng, 19);
-            double y_center = LatToTileY(lat, 19);
-            job.Add("zoom", 19);
+            double x_center = LngToTileX(lng, zoom);
+            double y_center = LatToTileY(lat, zoom);
+            job.Add("zoom", zoom);
             job.Add("x_center", x_center);
             job.Add("y_center", y_center);
             job.Add("filename", filename);
@@ -570,14 +582,18 @@ namespace TeslaLogger
             job.Add("poi", "park");
             job.Add("lat", lat);
             job.Add("lng", lng);
+
             string tempfile = Path.GetTempFileName();
+            GetOSMMapGeneratorFilename(out string fileName, out string arguments);
+            arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
+
             File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
             using (Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "/usr/bin/mono",
-                    Arguments = "/etc/teslalogger/OSMMapGenerator.exe -jobfile " + tempfile + (Program.VERBOSE ? " -debug" : ""),
+                    FileName = fileName,
+                    Arguments = arguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -606,9 +622,27 @@ namespace TeslaLogger
             */
         }
 
+        void GetOSMMapGeneratorFilename(out string fileName, out string arguments)
+        {
+            fileName = "/usr/bin/mono";
+            arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
+
+            if (!Tools.IsMono())
+            {
+                var f = new FileInfo("../../../OSMMapGenerator/bin/Debug/OSMMapGenerator.exe");
+                fileName = f.FullName;
+                arguments = "";
+            }
+        }
+
         public override int GetDelayMS()
         {
             return 500;
+        }
+
+        public override bool UseIt()
+        {
+            return true;
         }
     }
 }
