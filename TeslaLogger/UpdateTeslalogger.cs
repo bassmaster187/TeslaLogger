@@ -489,6 +489,12 @@ CREATE TABLE superchargerstate(
                     Tools.Exec_mono("git", "--version");
                 }
 
+                if (!Tools.Exec_mono("optipng", "-version", false).Contains("OptiPNG version"))
+                {
+                    Tools.Exec_mono("apt-get", "-y install optipng");
+                    Tools.Exec_mono("optipng", "-version");
+                }
+
                 Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
 
                 Tools.Exec_mono("rm", "-rf /etc/teslalogger/git");

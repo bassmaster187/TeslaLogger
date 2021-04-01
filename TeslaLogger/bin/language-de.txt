@@ -9,3 +9,8 @@ Driving=Fahren
 Charging=Laden
 Missing=Fehlen
 Ø Temperatur=Ø Temperatur
+
+#Speed Consumption.json
+Last Driven=Letzte Fahrt  * * * 
+Ø Outside Temp C°=Ø Aussen °C
+Ø Consumption kWh=Ø kWh

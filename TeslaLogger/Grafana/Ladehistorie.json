@@ -98,7 +98,7 @@
         {
           "$$hashKey": "object:154",
           "alias": "geladen kWh",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -116,7 +116,7 @@
         {
           "$$hashKey": "object:155",
           "alias": "km Stand",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -124,7 +124,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
+          "decimals": 0,
           "mappingType": 1,
           "pattern": "odometer",
           "thresholds": [],
@@ -134,7 +134,7 @@
         {
           "$$hashKey": "object:156",
           "alias": "",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -152,7 +152,7 @@
         {
           "$$hashKey": "object:157",
           "alias": "",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -192,7 +192,7 @@
         {
           "$$hashKey": "object:159",
           "alias": "TR km Start",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -200,7 +200,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
+          "decimals": 0,
           "mappingType": 1,
           "pattern": "SOC",
           "thresholds": [],
@@ -210,7 +210,7 @@
         {
           "$$hashKey": "object:160",
           "alias": "TR km Ende",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -218,7 +218,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
+          "decimals": 0,
           "mappingType": 1,
           "pattern": "EndSOC",
           "thresholds": [],
@@ -228,7 +228,7 @@
         {
           "$$hashKey": "object:161",
           "alias": "SOC Ende",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -246,7 +246,7 @@
         {
           "$$hashKey": "object:162",
           "alias": "100% TR",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -264,7 +264,7 @@
         {
           "$$hashKey": "object:163",
           "alias": "Minuten",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -282,7 +282,7 @@
         {
           "$$hashKey": "object:164",
           "alias": "ØkW",
-          "align": "auto",
+          "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -303,7 +303,7 @@
         {
           "$$hashKey": "object:165",
           "alias": "max kW",
-          "align": "auto",
+          "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -364,7 +364,7 @@
         {
           "$$hashKey": "object:168",
           "alias": "SOC Start",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -382,7 +382,7 @@
         {
           "$$hashKey": "object:169",
           "alias": "Cost",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",

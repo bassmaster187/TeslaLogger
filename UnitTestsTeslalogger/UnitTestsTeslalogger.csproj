@@ -58,11 +58,17 @@
     <Compile Include="SeleniumTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestMapProvider.cs" />
+    <Compile Include="UnitTestOSMMapGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OSMMapGenerator\OSMMapGenerator.csproj">
+      <Project>{852390a2-450b-43b3-a79a-f6c1dd988ae5}</Project>
+      <Name>OSMMapGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeslaLogger\TeslaLogger.csproj">
       <Project>{9932f717-1bee-4d0f-b5b0-fb8665ffe647}</Project>
       <Name>TeslaLogger</Name>

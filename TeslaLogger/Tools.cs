@@ -64,7 +64,21 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = "SQL" + Environment.NewLine + cmd.CommandText;
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd);
+                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
+            }
+            catch (Exception ex)
+            {
+                DebugLog("Exception in SQL DEBUG", ex);
+            }
+        }
+
+        internal static string ExpandSQLCommand(MySqlCommand cmd)
+        {
+            string msg = string.Empty;
+            if (cmd != null && cmd.Parameters != null)
+            {
+                msg = cmd.CommandText;
                 foreach (MySqlParameter p in cmd.Parameters)
                 {
                     string pValue = "";
@@ -119,12 +133,8 @@ namespace TeslaLogger
                     }
                     msg = msg.Replace(p.ParameterName, pValue);
                 }
-                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
-            catch (Exception ex)
-            {
-                DebugLog("Exception in SQL DEBUG", ex);
-            }
+            return msg;
         }
 
         public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
@@ -471,6 +481,33 @@ namespace TeslaLogger
             return httpport;
         }
 
+        internal static bool CombineChargingStates()
+        {
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return false;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, "CombineChargingStates"))
+                {
+                    if (bool.TryParse(j["CombineChargingStates"], out bool combineChargingStates))
+                    {
+                        return combineChargingStates;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
         internal static bool UseOpenTopoData()
         {
             return true; // Use by default
@@ -714,7 +751,6 @@ namespace TeslaLogger
 
             return UpdateType.all;
         }
-
 
         internal static void GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid)
         {
@@ -1523,6 +1559,37 @@ WHERE
                 Logfile.Log(ex.ToString());
             }
             return days;
+        }
+
+        internal static string GetMapProvider()
+        {
+            string mapProvider = "OSMMapProvider"; // default
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
+                if (!File.Exists(filePath))
+                {
+                    return mapProvider;
+                }
+
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+
+                if (IsPropertyExist(j, "MapProvider"))
+                {
+                    if (j["MapProvider"] == "MapQuest")
+                    {
+                        return "MapQuest";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return mapProvider;
         }
 
     }

@@ -404,7 +404,7 @@
         {
           "$$hashKey": "object:143",
           "alias": "StartSOC",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -424,7 +424,7 @@
         {
           "$$hashKey": "object:144",
           "alias": "Start km",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -478,7 +478,7 @@
         {
           "$$hashKey": "object:147",
           "alias": "EndSOC",
-          "align": "auto",
+          "align": "right",
           "colorMode": "value",
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -499,7 +499,7 @@
         {
           "$$hashKey": "object:148",
           "alias": "End km",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -517,7 +517,7 @@
         {
           "$$hashKey": "object:149",
           "alias": "SOC diff",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -535,7 +535,7 @@
         {
           "$$hashKey": "object:150",
           "alias": "Max Range",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -553,7 +553,7 @@
         {
           "$$hashKey": "object:151",
           "alias": "Ø Verbrauch",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -571,7 +571,7 @@
         {
           "$$hashKey": "object:152",
           "alias": "Tage",
-          "align": "auto",
+          "align": "right",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
