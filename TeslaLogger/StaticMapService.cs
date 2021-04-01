@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
@@ -105,7 +106,15 @@ namespace TeslaLogger
                 {
                     if (!queue.IsEmpty)
                     {
-                        Work();
+                        try
+                        {
+                            Work();
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.DebugLog("StaticMapService: Exception", ex);
+                        }
+
                     }
                     else
                     {
@@ -301,7 +310,7 @@ WHERE
             }
         }
 
-        public static void CreateAllTripMaps()
+        public static void CreateAllTripMaps(MapMode mapMode = MapMode.Dark)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
@@ -323,7 +332,7 @@ ORDER BY
                     {
                         while (dr.Read())
                         {
-                            GetSingleton().Enqueue(Convert.ToInt32(dr["carid"]), Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, MapMode.Dark, MapSpecial.None);
+                            GetSingleton().Enqueue(Convert.ToInt32(dr["carid"]), Convert.ToInt32(dr["startposid"]), Convert.ToInt32(dr["endposid"]), 0, 0, mapMode, MapSpecial.None);
                         }
                     }
                     catch (Exception ex)
@@ -338,6 +347,10 @@ ORDER BY
         public static string GetMapDir()
         {
             string mapdir = "/var/lib/grafana/plugins/teslalogger-timeline-panel/dist/maps";
+
+            if (!Tools.IsMono())
+                mapdir = new DirectoryInfo("maps").FullName;
+
             try
             {
                 if (!System.IO.Directory.Exists(mapdir))
