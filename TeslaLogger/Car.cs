@@ -1126,7 +1126,8 @@ namespace TeslaLogger
                           Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
                           string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                           Log("set_charge_limit(): " + result);
-                          LastSetChargeLimitAddressName = _addr.name;
+                          // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
+                          LastSetChargeLimitAddressName = string.Empty; 
                       }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
             }
