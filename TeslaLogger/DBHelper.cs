@@ -290,21 +290,28 @@ namespace TeslaLogger
         {
             tesla_token = "";
 
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
                     {
-                        string refresh_token = dr[0].ToString();
-                        tesla_token = dr[1].ToString();
-                        return refresh_token;
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            string refresh_token = dr[0].ToString();
+                            tesla_token = dr[1].ToString();
+                            return refresh_token;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
 
             return "";
@@ -463,6 +470,9 @@ WHERE
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
                     UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+
+                    // update chargingsession stats
+                    UpdateMaxChargerPower(maxID);
                 }
             }
         }
@@ -1542,6 +1552,45 @@ ORDER BY chargingstate.id ASC", con))
             }
         }
 
+        public void UpdateMaxChargerPower(int chargingstateid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  StartChargingID,
+  EndChargingID
+FROM
+  chargingstate
+WHERE
+  CarID=@CarID
+  AND id=@id
+ORDER BY id DESC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@id", chargingstateid);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            int id = Convert.ToInt32(dr["id"]);
+                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
+                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+
+                            UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.Message);
+            }
+        }
+
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         internal static bool IndexExists(string index, string table)
         {
@@ -1900,17 +1949,17 @@ ORDER BY chargingstate.id ASC", con))
             car.currentJSON.current_speed = 0;
             car.currentJSON.current_power = 0;
 
-            Task.Factory.StartNew(() =>
+            _ = Task.Factory.StartNew(() =>
               {
                   if (StartPos > 0)
                   {
                       UpdateTripElevation(StartPos, MaxPosId, " (Task)");
 
-                      MapQuest.CreateTripMap(StartPos, MaxPosId, car.CarInDB);
-                      MapQuest.CreateParkingMapFromPosid(StartPos);
-                      MapQuest.CreateParkingMapFromPosid(MaxPosId);
+                      StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
+                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }
-              });
+              }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
@@ -1979,6 +2028,7 @@ ORDER BY chargingstate.id ASC", con))
                             }
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -3376,38 +3426,41 @@ WHERE
             kwh100km = 0;
             avgsocdiff = 0;
             maxkm = 0;
-            
+
             try
             {
-                DataTable dt = new DataTable();
-                string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
+                using (DataTable dt = new DataTable())
+                {
+                    string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
                     FROM trip 
                     join pos on trip.startposid = pos.id 
                     join pos as posend on trip.endposid = posend.id
                     where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
 
-                using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
-                {
-                    da.Fill(dt);
-
-                    if (dt.Rows.Count == 1)
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                     {
-                        var r = dt.Rows[0];
+                        da.Fill(dt);
 
-                        if (r["sumkm"] == DBNull.Value)
+                        if (dt.Rows.Count == 1)
                         {
-                            car.Log($"GetAvgConsumption: nothing found!!!");
-                            return;
+                            var r = dt.Rows[0];
+
+                            if (r["sumkm"] == DBNull.Value)
+                            {
+                                car.Log($"GetAvgConsumption: nothing found!!!");
+                                return;
+                            }
+
+                            sumkm = Math.Round((double)r["sumkm"], 1);
+                            avgkm = Math.Round((double)r["avgkm"], 1);
+                            kwh100km = Math.Round((double)r["kwh100km"], 1);
+                            avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
+                            maxkm = Math.Round((double)r["maxkm"], 1);
+
+                            car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                         }
-
-                        sumkm = Math.Round((double)r["sumkm"],1);
-                        avgkm = Math.Round((double)r["avgkm"], 1);
-                        kwh100km = Math.Round((double)r["kwh100km"], 1);
-                        avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
-                        maxkm = Math.Round((double)r["maxkm"], 1);
-
-                        car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -3442,30 +3495,33 @@ WHERE
 
             try
             {
-                DataTable dt = GetLatestDC_Charging_with_50PercentSOC();
-                string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
-
-                foreach(DataRow dr in dt.Rows)
+                using (DataTable dt = GetLatestDC_Charging_with_50PercentSOC())
                 {
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
+
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                         {
-                            start = (DateTime)dr["sd"];
-                            ende = (DateTime)dr["ed"];
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                            {
+                                start = (DateTime)dr["sd"];
+                                ende = (DateTime)dr["ed"];
 
-                            cmd.Parameters.AddWithValue("@carid", car.CarInDB);
-                            cmd.Parameters.AddWithValue("@start", start);
-                            cmd.Parameters.AddWithValue("@ende", ende);
-                            object ret = cmd.ExecuteScalar();
+                                cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                                cmd.Parameters.AddWithValue("@start", start);
+                                cmd.Parameters.AddWithValue("@ende", ende);
+                                object ret = cmd.ExecuteScalar();
 
-                            if (ret == DBNull.Value)
-                                continue;
-                            
-                            return Convert.ToDouble(ret);
+                                if (ret == DBNull.Value)
+                                    continue;
+
+                                return Convert.ToDouble(ret);
+                            }
                         }
                     }
+                    dt.Clear();
                 }
             }
             catch (Exception ex)
@@ -3837,7 +3893,7 @@ WHERE
             try
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
-                MapQuest.CreateChargingMapOnChargingCompleted(car.CarInDB);
+                StaticMapService.GetSingleton().CreateChargingMapOnChargingCompleted(car.CarInDB);
                 int chargeID = GetMaxChargeid(out DateTime chargeEnd);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {

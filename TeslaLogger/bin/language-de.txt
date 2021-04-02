@@ -2,3 +2,15 @@ TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten ein
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Resume Teslalogger=Teslalogger Starten
 Typical Range=Reichweite
+
+#Timeline Plugin.json
+Parking=Parken
+Driving=Fahren
+Charging=Laden
+Missing=Fehlen
+Ø Temperatur=Ø Temperatur
+
+#Speed Consumption.json
+Last Driven=Letzte Fahrt  * * * 
+Ø Outside Temp C°=Ø Aussen °C
+Ø Consumption kWh=Ø kWh

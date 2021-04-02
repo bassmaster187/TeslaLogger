@@ -1,0 +1,1 @@
+﻿{"zoom":19,"x_center":282003.44689777779,"y_center":175154.50058177218,"filename":"temp.png","width":200,"height":150,"mapmode":1,"tileSize":256,"MapCachePath":"C:\\dev\\TeslaLogger\\TeslaLogger\\bin\\Debug\\MAP-Data","poi":"park","lat":51.1576,"lng":13.6364}

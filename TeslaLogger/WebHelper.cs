@@ -21,7 +21,6 @@ namespace TeslaLogger
     public class WebHelper
     {
         public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
-        public const string TeslaloggerUserAgent = "TL V1";
 
         public string Tesla_token = "";
         public string Tesla_id = "";
@@ -43,6 +42,7 @@ namespace TeslaLogger
         private static int NominatimCount = 0;
 
         string authHost = "https://auth.tesla.com";
+        CookieContainer tokenCookieContainer;
 
         private bool _drivingOrChargingByStream = false;
 
@@ -56,6 +56,7 @@ namespace TeslaLogger
         internal ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
         internal Car car;
 
+        bool getTokenDebugVerbose = false;
         private double last_latitude_streaming = double.NaN;
         private double last_longitude_streaming = double.NaN;
 
@@ -209,10 +210,24 @@ namespace TeslaLogger
             return "";
         }
 
+        HttpClient GetDefaultHttpClientForAuthentification(HttpMessageHandler handler)
+        {
+            HttpClient client = new HttpClient(handler);
+            client.Timeout = TimeSpan.FromSeconds(10);
+            client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
+            //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            client.DefaultRequestHeaders.Add("Accept", "*/*");
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            // client.DefaultRequestHeaders.ConnectionClose = true;
+            client.BaseAddress = new Uri(authHost);
+
+            return client;
+        }
+
         public string GetToken()
         {
             string resultContent = "";
-            string cookie = "";
             MatchCollection m;
 
             try
@@ -251,20 +266,18 @@ namespace TeslaLogger
                 // car.Log("code_challenge:" + code_challenge);
                 // car.Log("state:" + state);
 
+                tokenCookieContainer = new CookieContainer();
+
                 using (HttpClientHandler handler = new HttpClientHandler()
                 {
+                    CookieContainer = tokenCookieContainer,
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                    AllowAutoRedirect = false
+                    AllowAutoRedirect = false,
+                    UseCookies = true
                 })
                 {
-
-                    using (HttpClient client = new HttpClient(handler))
+                    using (HttpClient client = GetDefaultHttpClientForAuthentification(handler))
                     {
-                        client.Timeout = TimeSpan.FromSeconds(30);
-                        // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        client.DefaultRequestHeaders.Connection.Add("keep-alive");
-
                         Dictionary<string, string> values = new Dictionary<string, string>
                         {
                            { "client_id", "ownerapi" },
@@ -291,20 +304,19 @@ namespace TeslaLogger
                             string url = b.ToString();
 
                             DateTime start = DateTime.UtcNow;
+
+                            if (getTokenDebugVerbose) Log("GetToken url:" + url);
+
                             HttpResponseMessage result = client.GetAsync(url).Result;
                             resultContent = result.Content.ReadAsStringAsync().Result;
 
+                            if (getTokenDebugVerbose) Log("GetToken resultContent Length:" + resultContent.Length);
+
                             m = Regex.Matches(resultContent, "type=\\\"hidden\\\" name=\\\"(.*?)\\\" value=\\\"(.*?)\\\"");
 
-                            IEnumerable<string> cookies = result.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
+                            if (getTokenDebugVerbose) Log("GetToken resultContent Regex Matches:" + m.Count);
 
                             DBHelper.AddMothershipDataToDB("GetTokenAsync()", start, (int)result.StatusCode);
-
-                            cookie = cookies.ToList()[0];
-                            cookie = cookie.Substring(0, cookie.IndexOf(" "));
-                            cookie = cookie.Trim();
-
-                            // car.Log("cookie:" + cookie);
 
                             if (resultContent.Contains("authorization_required"))
                             {
@@ -332,7 +344,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    return GetTokenAsync2(code_challenge, cookie, m, state, code_verifier);
+                    return GetTokenAsync2(code_challenge, m, state, code_verifier);
                 }
             }
             catch (Exception ex)
@@ -385,7 +397,7 @@ namespace TeslaLogger
                     using (HttpClient client = new HttpClient(handler))
                     {
                         client.Timeout = TimeSpan.FromSeconds(30);
-                        // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
+                        client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         client.DefaultRequestHeaders.Connection.Add("keep-alive");
 
@@ -419,8 +431,10 @@ namespace TeslaLogger
             return "";
         }
 
-        private string GetTokenAsync2(string code_challenge, string cookie, MatchCollection mc, string state, string code_verifier)
+        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier)
         {
+            Log("GetTokenAsync2");
+
             int length = 0;
             string transaction_id = "";
 
@@ -452,15 +466,11 @@ namespace TeslaLogger
                 {
                     ch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                     ch.AllowAutoRedirect = false;
-                    ch.UseCookies = false;
-                    using (HttpClient client = new HttpClient(ch))
+                    ch.UseCookies = true;
+                    ch.CookieContainer = tokenCookieContainer;
+
+                    using (HttpClient client = GetDefaultHttpClientForAuthentification(ch))
                     {
-                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        client.DefaultRequestHeaders.Connection.Add("keep-alive");
-                        // client.Timeout = TimeSpan.FromSeconds(10);
-                        client.BaseAddress = new Uri(authHost);
-                        // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                        client.DefaultRequestHeaders.Add("Cookie", cookie);
                         DateTime start = DateTime.UtcNow;
 
                         using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
@@ -499,7 +509,8 @@ namespace TeslaLogger
                                 {
                                     isMFA = true;
                                     car.passwortinfo.Append("Wait for MFA code<br>");
-                                    code = WaitForMFA_Code(cookie, transaction_id, code_challenge, state);
+                                    car.waitForMFACode = true;
+                                    code = WaitForMFA_Code(transaction_id, code_challenge, state);
 
                                     if (String.IsNullOrEmpty(code))
                                         return "NULL";
@@ -549,7 +560,7 @@ namespace TeslaLogger
             return "";            
         }
 
-        private string WaitForMFA_Code(string cookie, string transaction_id, string code_challenge, string state)
+        private string WaitForMFA_Code(string transaction_id, string code_challenge, string state)
         {
             car.Log("Start waiting for MFA code !!!");
             DateTime timeout = DateTime.UtcNow;
@@ -571,7 +582,7 @@ namespace TeslaLogger
             {
                 Log("transaction_id: " + transaction_id);
 
-                string code = MFA1(cookie, transaction_id, code_challenge, state);
+                string code = MFA1( transaction_id, code_challenge, state);
 
                 if (code.Length > 0)
                     return code;
@@ -584,18 +595,17 @@ namespace TeslaLogger
             return "";
         }
 
-        private string MFA1(string cookie, string transaction_id, string code_challenge, string state)
+        private string MFA1(string transaction_id, string code_challenge, string state)
         {
             string resultContent;
             using (HttpClientHandler ch = new HttpClientHandler())
             {
-                ch.UseCookies = false;
-                using (HttpClient client = new HttpClient(ch))
-                {
-                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                    client.DefaultRequestHeaders.Add("Cookie", cookie);
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                ch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                ch.CookieContainer = tokenCookieContainer;
+                ch.UseCookies = true;
 
+                using (HttpClient client = GetDefaultHttpClientForAuthentification(ch))
+                {
                     UriBuilder b = new UriBuilder("https://auth.tesla.com/oauth2/v3/authorize/mfa/factors");
                     b.Port = -1;
 
@@ -624,7 +634,7 @@ namespace TeslaLogger
                             {
                                 car.passwortinfo.Append("Try Device:  " + jsonResult["data"][ad]["name"] + "<br>");
                                 factor_id = jsonResult["data"][ad]["id"];
-                                string c = MFA2(cookie, code_challenge, state, transaction_id, factor_id);
+                                string c = MFA2(code_challenge, state, transaction_id, factor_id);
 
                                 if (c.Length > 10)
                                 {
@@ -658,20 +668,17 @@ namespace TeslaLogger
             return "";
         }
 
-        private string MFA2(string cookie, string code_challenge, string state, string transaction_id, string factor_id)
+        private string MFA2(string code_challenge, string state, string transaction_id, string factor_id)
         {
             using (HttpClientHandler ch = new HttpClientHandler())
             {
+                ch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                ch.CookieContainer = tokenCookieContainer;
                 ch.AllowAutoRedirect = false;
-                ch.UseCookies = false;
-                using (HttpClient client = new HttpClient(ch))
+                ch.UseCookies = true;
+
+                using (HttpClient client = GetDefaultHttpClientForAuthentification(ch))
                 {
-                    // client.Timeout = TimeSpan.FromSeconds(10);
-                    client.BaseAddress = new Uri("https://auth.tesla.com");
-                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                    client.DefaultRequestHeaders.Add("Cookie", cookie);
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Referrer = new Uri("https://auth.tesla.com");
                     DateTime start = DateTime.UtcNow;
 
                     Dictionary<string, string> d = new Dictionary<string, string>();
@@ -694,7 +701,7 @@ namespace TeslaLogger
                             object o = jsonResult["data"]["valid"];
                             
                             if ((bool)o)
-                                return MFA3(cookie, code_challenge, state, transaction_id);
+                                return MFA3(code_challenge, state, transaction_id);
                         }
                         catch (Exception ex)
                         {
@@ -708,23 +715,17 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        private string MFA3(string cookie, string code_challenge, string state, string transaction_id)
+        private string MFA3(string code_challenge, string state, string transaction_id)
         {
             using (HttpClientHandler ch = new HttpClientHandler())
             {
                 ch.AllowAutoRedirect = false;
-                ch.UseCookies = false;
+                ch.UseCookies = true;
                 ch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                ch.CookieContainer = tokenCookieContainer;
 
-                using (HttpClient client = new HttpClient(ch))
+                using (HttpClient client = GetDefaultHttpClientForAuthentification(ch))
                 {
-                    // client.Timeout = TimeSpan.FromSeconds(10);
-                    client.BaseAddress = new Uri("https://auth.tesla.com");
-                    // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                    client.DefaultRequestHeaders.Add("Cookie", cookie);
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Connection.Add("keep-alive");
-
                     DateTime start = DateTime.UtcNow;
 
                     Dictionary<string, string> d = new Dictionary<string, string>();
@@ -798,13 +799,8 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.UtcNow;
 
-                    using (HttpClient client = new HttpClient(handler))
+                    using (HttpClient client = GetDefaultHttpClientForAuthentification(handler))
                     {
-                        client.BaseAddress = new Uri("https://auth.tesla.com");
-                        // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
-                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        client.DefaultRequestHeaders.Connection.Add("keep-alive");
-
                         using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                         {
                             HttpResponseMessage result = client.PostAsync(authHost + "/oauth2/v3/token", content).Result;
@@ -867,7 +863,7 @@ namespace TeslaLogger
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 })
                 {
-                    using (HttpClient client = new HttpClient(handler))
+                    using (HttpClient client = GetDefaultHttpClientForAuthentification(handler))
                     {
                         client.Timeout = TimeSpan.FromSeconds(30);
                         // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
@@ -1189,6 +1185,7 @@ namespace TeslaLogger
                         if (car.vin != vin)
                         {
                             car.vin = vin;
+                            Tools.VINDecoder(vin, out car.year, out _, out car.AWD, out car.MIC, out _, out car.motor);
                             Log("WriteCarsettings -> VIN");
                             car.WriteSettings();
                         }
@@ -1493,7 +1490,7 @@ namespace TeslaLogger
 
             if (car.car_type == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.vin, out int year, out _, out bool AWD, out _, out string battery, out _);
+                Tools.VINDecoder(car.vin, out int year, out _, out bool AWD, out _, out string battery, out string motor);
 
                 int maxRange = car.dbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
@@ -1503,6 +1500,16 @@ namespace TeslaLogger
                         if (!AWD)
                         {
                             WriteCarSettings("0.145", "M3 LR RWD");
+                            return;
+                        }
+                        else if (motor == "3 dual performance" && year == 2021)
+                        {
+                            WriteCarSettings("0.158", "M3 LR P 2021");
+                            return;
+                        }
+                        else if (motor == "3 dual performance" && year < 2021)
+                        {
+                            WriteCarSettings("0.158", "M3 LR P");
                             return;
                         }
                         else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142 && AWD)
@@ -2105,7 +2112,12 @@ namespace TeslaLogger
                 System.Net.WebSockets.ClientWebSocket ws = null;
                 try
                 {
-                    if (!car.currentJSON.current_falling_asleep)
+                    // get streaming data if
+                    // * car is fallig asleep to interrupt the "let the car fall asleep" cycle
+                    // or
+                    // * StreamingPos is true in settings.json and the car is driving
+                    // otherwise skip
+                    if (!car.currentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.currentJSON.current_driving))
                     {
                         Thread.Sleep(1000);
                         continue;
@@ -2193,7 +2205,6 @@ namespace TeslaLogger
                                             car.Log("Stream Data Error: " + resultContent);
                                             throw new Exception("unhandled error_type: " + error_type);
                                         }
-
                                         break;
                                     case "data:update":
                                         string value = j["value"];
@@ -2357,7 +2368,7 @@ namespace TeslaLogger
                 // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
                 double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
                 double? outside_temp = car.currentJSON.current_outside_temp;
-                if (latitude != last_latitude_streaming || longitude != last_longitude_streaming)
+                if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") && (latitude != last_latitude_streaming || longitude != last_longitude_streaming))
                 {
                     last_latitude_streaming = latitude;
                     last_longitude_streaming = longitude;
@@ -3072,58 +3083,67 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                using (HttpClient client = new HttpClient
+                using (HttpClientHandler handler = new HttpClientHandler()
                 {
-                    Timeout = TimeSpan.FromSeconds(11)
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                    AllowAutoRedirect = false,
                 })
                 {
-                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-
-                    string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
-
-                    DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await client.GetAsync(adresse);
-
-                    if (result.IsSuccessStatusCode)
+                    using (HttpClient client = new HttpClient(handler)
                     {
+                        Timeout = TimeSpan.FromSeconds(11)
+                    })
+                    {
+                        client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
+                        client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
+                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                        resultContent = await result.Content.ReadAsStringAsync();
-                        DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
-                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
-                        if (TeslaAPI_Commands.ContainsKey(cmd))
+                        string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
+
+                        DateTime start = DateTime.UtcNow;
+                        HttpResponseMessage result = await client.GetAsync(adresse);
+
+                        if (result.IsSuccessStatusCode)
                         {
-                            TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
-                            TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+
+                            resultContent = await result.Content.ReadAsStringAsync();
+                            DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                            _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
+                            if (TeslaAPI_Commands.ContainsKey(cmd))
+                            {
+                                TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                                TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+                            }
+                            else
+                            {
+                                TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                            }
+
+
+                            return resultContent;
+                        }
+                        else if (result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            LoginRetry(result);
+                        }
+                        else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
+                        {
+                            if (car.IsInService())
+                                return "INSERVICE";
+                            else
+                                Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+
+                        }
+                        else if (result.StatusCode == HttpStatusCode.RequestTimeout)
+                        {
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+                            Thread.Sleep(30000);
                         }
                         else
                         {
-                            TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                         }
-
-
-                        return resultContent;
-                    }
-                    else if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        LoginRetry(result);
-                    }
-                    else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
-                    {
-                        if (car.IsInService())
-                            return "INSERVICE";
-                        else
-                            Log("Result.Statuscode: " + (int)result.StatusCode + " ("+ result.StatusCode.ToString() +") cmd: " + cmd);
-
-                    }
-                    else if (result.StatusCode == HttpStatusCode.RequestTimeout)
-                    {
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                        Thread.Sleep(30000);
-                    }
-                    else
-                    {
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     }
                 }
             }
@@ -3477,7 +3497,12 @@ namespace TeslaLogger
                     { "kwh100km", car.kwh100km.ToString() },
                     { "avgsocdiff", car.avgsocdiff.ToString() },
                     { "maxkm", car.maxkm.ToString() },
-                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()}
+                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()},
+                    { "AWD" , car.AWD ? "1" : "0" },
+                    { "MIC" , car.MIC ? "1" : "0" },
+                    { "year" , car.year.ToString() },
+                    { "motor" , car.motor }
+
                 };
 
                     using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
