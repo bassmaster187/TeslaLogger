@@ -466,7 +466,7 @@ WHERE
                         {
                             while (dr.Read())
                             {
-                                GetSingleton().Enqueue(MapType.Charge, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), MapMode.Dark);
+                                GetSingleton().Enqueue(MapType.Park, Convert.ToDouble(dr["lat"]), Convert.ToDouble(dr["lng"]), MapMode.Dark);
                             }
                         }
                         catch (Exception ex)
