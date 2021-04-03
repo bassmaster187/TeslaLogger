@@ -3083,13 +3083,14 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
+                /*
                 using (HttpClientHandler handler = new HttpClientHandler()
                 {
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                     AllowAutoRedirect = false,
                 })
-                {
-                    using (HttpClient client = new HttpClient(handler)
+                {*/
+                    using (HttpClient client = new HttpClient()
                     {
                         Timeout = TimeSpan.FromSeconds(11)
                     })
@@ -3145,7 +3146,7 @@ namespace TeslaLogger
                             Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                         }
                     }
-                }
+                //}
             }
             catch (Exception ex)
             {
