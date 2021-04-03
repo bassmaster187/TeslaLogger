@@ -3083,60 +3083,70 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                using (HttpClient client = new HttpClient
+                /*
+                using (HttpClientHandler handler = new HttpClientHandler()
                 {
-                    Timeout = TimeSpan.FromSeconds(11)
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                    AllowAutoRedirect = false,
                 })
-                {
-                    client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-
-                    string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
-
-                    DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await client.GetAsync(adresse);
-
-                    if (result.IsSuccessStatusCode)
+                {*/
+                    using (HttpClient client = new HttpClient()
                     {
+                        Timeout = TimeSpan.FromSeconds(11)
+                    })
+                    {
+                        client.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
+                        client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 8.1.0; Pixel XL Build/OPM4.171019.021.D1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36");
+                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                        resultContent = await result.Content.ReadAsStringAsync();
-                        DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
-                        _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
-                        if (TeslaAPI_Commands.ContainsKey(cmd))
+                        string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
+
+                        DateTime start = DateTime.UtcNow;
+                        HttpResponseMessage result = await client.GetAsync(adresse);
+
+                        if (result.IsSuccessStatusCode)
                         {
-                            TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
-                            TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+
+                            resultContent = await result.Content.ReadAsStringAsync();
+                            DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
+                            _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
+                            if (TeslaAPI_Commands.ContainsKey(cmd))
+                            {
+                                TeslaAPI_Commands.TryGetValue(cmd, out string old_value);
+                                TeslaAPI_Commands.TryUpdate(cmd, resultContent, old_value);
+                            }
+                            else
+                            {
+                                TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                            }
+
+
+                            return resultContent;
+                        }
+                        else if (result.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            LoginRetry(result);
+                        }
+                        else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
+                        {
+                            if (car.IsInService())
+                                return "INSERVICE";
+                            else
+                                Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+
+                        }
+                        else if (result.StatusCode == HttpStatusCode.RequestTimeout)
+                        {
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
+                            Thread.Sleep(30000);
                         }
                         else
                         {
-                            TeslaAPI_Commands.TryAdd(cmd, resultContent);
+                            Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                         }
-
-
-                        return resultContent;
                     }
-                    else if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        LoginRetry(result);
-                    }
-                    else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
-                    {
-                        if (car.IsInService())
-                            return "INSERVICE";
-                        else
-                            Log("Result.Statuscode: " + (int)result.StatusCode + " ("+ result.StatusCode.ToString() +") cmd: " + cmd);
-
-                    }
-                    else if (result.StatusCode == HttpStatusCode.RequestTimeout)
-                    {
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                        Thread.Sleep(30000);
-                    }
-                    else
-                    {
-                        Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    }
-                }
+                //}
             }
             catch (Exception ex)
             {

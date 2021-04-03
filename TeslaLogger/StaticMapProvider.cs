@@ -52,10 +52,20 @@ namespace TeslaLogger
                 foreach (Type type in Assembly.GetAssembly(typeof(StaticMapProvider)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(StaticMapProvider))))
                 {
                     Logfile.Log("available MapProvider: " + type);
-                    if (type.ToString().Contains(Tools.GetMapProvider()))
+
+                    if (type.Name == "OSMMapProvider")
+                        continue;
+
+                    var a = (StaticMapProvider)Activator.CreateInstance(type);
+                    if (a.UseIt())
+                    {
+                        return a;
+                    }
+
+                    /*if (type.ToString().Contains(Tools.GetMapProvider()))
                     {
                         _StaticMapProvider = (StaticMapProvider)Activator.CreateInstance(type);
-                    }
+                    }*/
                 }
                 if (_StaticMapProvider == null)
                 {
@@ -69,6 +79,8 @@ namespace TeslaLogger
         public abstract void CreateParkingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract void CreateTripMap(DataTable coords, int width, int height, MapMode mapmode, MapSpecial special, string filename);
         public abstract int GetDelayMS();
+
+        public abstract bool UseIt();
 
         public static void SaveImage(Bitmap image, string filename)
         {

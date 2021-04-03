@@ -491,8 +491,14 @@ CREATE TABLE superchargerstate(
 
                 if (!Tools.Exec_mono("optipng", "-version", false).Contains("OptiPNG version"))
                 {
-                    Tools.Exec_mono("apt-get", "-y install optipng");
-                    Tools.Exec_mono("optipng", "-version");
+                    if (Tools.Exec_mono("apt-get", "-y install optipng", false).Contains("apt --fix-broken"))
+                    {
+                        Logfile.Log("Info: apt-get cannot install optipng");
+                    }
+                    else
+                    {
+                        Tools.Exec_mono("optipng", "-version");
+                    }
                 }
 
                 Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
