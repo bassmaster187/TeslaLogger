@@ -27,7 +27,12 @@ e.g. if your Car to import is 2 it should look like:
 ...
 ```
 ## Import from a external device
-Sometimes the import will fail, if you have very large import files especially on Raspberries because of the lack of enough RAM. To connect the TeslaFi Import Tool to Teslalogger's database you have to change the DBConnectionstring in TeslaFi-Import.exe.config. 
+Sometimes the import will fail, if you have very large import files especially on Raspberries because of the lack of enough RAM. 
+
+* Get the latest Teslalogger and TeslaFi Import tool from: https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/master.zip
+* Unzip it
+* Go to TeslaLogger/bin
+* To connect the TeslaFi Import Tool to Teslalogger's database you have to change the DBConnectionstring in TeslaFi-Import.exe.config :
 
 ```
 ...
@@ -36,6 +41,8 @@ Sometimes the import will fail, if you have very large import files especially o
 </setting>
 ...
 ```
+* Copy all CSV files into the directory with Tesla-Fi-Import.exe
+* Start the Tesla-Fi-Import.exe (on Windows just double click it / on MacOS you need Mono to start it)
 
 
 # Importing TeslaFi data into the TeslaLogger
