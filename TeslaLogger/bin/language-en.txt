@@ -253,3 +253,4 @@ Driving=Driving
 Charging=Charging
 Missing=Missing
 Ø Temperatur=Ø Temperatur
+Verbraucht=Consumed
