@@ -177,11 +177,11 @@ Passwort wiederholen=Repite Contraseña
 Speichern=Guardar
 
 #settings.php
-Zugangsdaten=Credenciales
+Credentials=Credenciales
 Language=Idioma
-Leistung=Potencia
+Power=Potencia
 Temperatur=Temperatura
-Längenmaß=Unidad de longitud
+Unit of length=Unidad de longitud
 URL Admin Panel=URL Panel Admin
 All=Todas
 Stable=Estable
@@ -228,13 +228,13 @@ Ja=Sí
 Nein=No
 
 Einschlafen=Intentando dormir
-Automatische Updates=Actualizaciones automáticas
+Automatic updates=Actualizaciones automáticas
 
 TextShare=<h1>Comparte curvas de carga / degracación de forma anónima</h1>Nos gustaría crear una base de datos anónima para comparar curvas de degradación y carga. Esto permite comparar tu vehículo con otros en cualquier momento y detectar cualquier desviación anómala de forma prematura. Esto también se puede usar más adelante para probar que tu batería aún es plenamente eficiente a la hora de vender el vehículo. En caso contrario, puedes probar un peor rendimiento a Tesla Motors.<br><br>¿Querrías compartir tus curvas de carga rápida y degradación con otros conductores de Tesla de forma completamente anónima? Esta decisión se puede cambiar en cualquier momento en la pantalla de configuración.
 Daten anonym teilen=Compartir datos de forma anónima
 TextSuspendTeslalogger=¡Teslalogger se ha detenido! ¡No se registrarán datos!
 Resume Teslalogger=Rearrancar Teslalogger
-Reichweite=Autonomía
+Range=Autonomía
 
 Ladekosten=Costes de Carga
 Ladesäule=Estación de Carga
