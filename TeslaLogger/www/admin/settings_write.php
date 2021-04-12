@@ -10,6 +10,9 @@ echo($SleepTimeSpanEnd);
 $SleepTimeSpanEnable = $_POST["SleepTimeSpanEnable"];
 echo($SleepTimeSpanEnable);
 
+$Display100pctEnable = $_POST["Display100pctEnable"];
+echo($Display100pctEnable);
+
 $ScanMyTesla = $_POST["ScanMyTesla"];
 echo($ScanMyTesla);
 
@@ -30,6 +33,7 @@ $defaultcarid = $_POST["defaultcarid"];
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
 'SleepTimeSpanEnable' => $SleepTimeSpanEnable,
+'Display100pctEnable' => $Display100pctEnable,
 'Power' => $Power,
 'Temperature' => $Temperature,
 'Length' => $Length,

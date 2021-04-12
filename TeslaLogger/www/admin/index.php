@@ -41,6 +41,8 @@ else
 	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
 
+	var Display100pctEnable = "<?php echo($Display100pctEnable); ?>";
+
 	var perfEntries = performance.getEntriesByType("navigation");
 	if (perfEntries && perfEntries.length > 0 && perfEntries[0].type === "back_forward") {
 		location.reload(true);
@@ -106,6 +108,15 @@ else
 				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1) + " km");
 				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toFixed(1) + " km");
 				$('#odometer').text(jsonData["odometer"].toFixed(1) + " km");
+			}
+
+			if (Display100pctEnable == "true") 
+			{
+				$('#full_battery_range_km_span').show();
+			}
+			else
+			{
+				$('#full_battery_range_km_span').hide();
 			}
 
 			$('#battery_level').text(jsonData["battery_level"]);
@@ -369,7 +380,7 @@ function ShowInfo()
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
 	  <tr id='BMSMaxDischargeRow'><td><b><?php t("Max Discharge"); ?>:</b></td><td><span id="BMSMaxDischarge"></span></td></tr>
 	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
-	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<br>= <span id="full_battery_range_km">---</span> / 100 %
+	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<span id="full_battery_range_km_span"><br>= <span id="full_battery_range_km">---</span> / 100 %</span>
 </td></tr>
 	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
