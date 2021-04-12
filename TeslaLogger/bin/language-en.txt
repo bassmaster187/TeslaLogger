@@ -199,6 +199,7 @@ ScanMyTesla last received=ScanMyTesla last received
 Tasker Token=Tasker Token
 Tasker URL=Tasker URL
 Received Tasker Token=Received Tasker Token
+Zeige errechnete 100%=Display calculated range at 100%
 
 #geoadd.php
 Bezeichnung=Description
@@ -253,3 +254,4 @@ Driving=Driving
 Charging=Charging
 Missing=Missing
 Ø Temperatur=Ø Temperatur
+Verbraucht=Consumed
