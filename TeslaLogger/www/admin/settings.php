@@ -83,6 +83,11 @@ function CarsCombobox($cars, $selected)
 			$start = $j->{"SleepTimeSpanStart"};			
 			$end = $j->{"SleepTimeSpanEnd"};
 			$enable = $j->{"SleepTimeSpanEnable"};
+			
+			$display100pctEnable = "false";
+			if (property_exists($j,"Display100pctEnable"))
+				$display100pctEnable = $j->{"Display100pctEnable"};
+		
 			$power = $j->{"Power"};
 			$Temperature = $j->{"Temperature"};
 			$Length = $j->{"Length"};
@@ -111,6 +116,7 @@ function CarsCombobox($cars, $selected)
 			echo ("$('.startdate').val('$start');\r\n");
 			echo ("$('.enddate').val('$end');\r\n");
 			echo ("$('#checkboxSleep')[0].checked = $enable;\r\n");
+			echo ("$('#checkbox100pct')[0].checked = $display100pctEnable;\r\n");
 			echo ("$('#checkboxScanMyTesla')[0].checked = $ScanMyTesla;\r\n");
 
 			if ($Range == "IR")
@@ -173,6 +179,7 @@ function CarsCombobox($cars, $selected)
 		SleepTimeSpanStart: $(".startdate").val(), 
 		SleepTimeSpanEnd: $(".enddate").val(), 
 		SleepTimeSpanEnable: $("#checkboxSleep").is(':checked'),
+		Display100pctEnable: $("#checkbox100pct").is(':checked'),
 		Power: $("input:radio[name ='power']:checked").val(),
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
@@ -224,6 +231,7 @@ echo(menu("Settings"));
 	<tr><td><b><?php t("Daten anonym teilen"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> <?php t("Enable"); ?></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 	<tr><td valign="top"><b><?php t("Automatische Updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> <?php t("All"); ?><br><input id="radio_stable" type="radio" value="stable" name="update"> <?php t("Stable"); ?><br><input id="radio_none" type="radio" value="none" name="update"> <?php t("None"); ?></td></tr>
 	<tr><td><b><?php t("Schlafen"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> <?php t("Enable"); ?></td></tr>
+	<tr><td><b><?php t("Zeige errechnete 100%"); ?>:</b></td><td><input id="checkbox100pct" type="checkbox" value="100pct"> <?php t("Enable"); ?></td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
