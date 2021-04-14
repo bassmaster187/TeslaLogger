@@ -62,6 +62,7 @@ Supercharger BE-Antwerp, 51.268051, 4.4024, 70
 Supercharger BE-Antwerp-Aartselaar, 51.13699, 4.37719
 Supercharger BE-Arlon, 49.64796, 5.8188
 Supercharger BE-Brugge, 51.16989, 3.19666
+Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
@@ -129,7 +130,7 @@ Supercharger DE-Erfstadt, 50.796478, 6.77994
 Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
 Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
-Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 10
+Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176
@@ -144,7 +145,7 @@ Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
 Supercharger-V3 DE-Hilden, 51.192013, 6.935892, 10 
 Supercharger-V3 DE-Hilden, 51.191944, 6.936024, 10
 Supercharger-V3 DE-Hilden, 51.191835,6.936129, 10
-Supercharger-V3 DE-Hilpoltstein, 49.161135, 11.2599, 12
+Supercharger-V3 DE-Hilpoltstein, 49.161119,11.259744, 12
 Supercharger DE-Hilpoltstein, 49.161171, 11.260012, 12
 Supercharger DE-Hilpoltstein, 49.161213, 11.260278, 10
 Supercharger DE-Hilpoltstein, 49.161205, 11.260561, 18
@@ -170,7 +171,8 @@ Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
-Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 15
+Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 16
+Supercharger-V3 DE-Münchberg-Nord, 50.202824,11.776593, 16
 Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
@@ -191,6 +193,7 @@ Supercharger DE-Regensburg, 48.9947224, 12.150609
 Supercharger DE-Rhüden, 51.947221, 10.140505, 23
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger DE-Satteldorf, 49.18119, 10.06933
+Supercharger-V3 DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
@@ -202,6 +205,7 @@ Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
+Supercharger-V3 DE-Weiterstadt, 49.89679,8.614198
 Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 7
 Supercharger DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
 Supercharger DE-Wernberg-Köblitz, 49.532255,12.135223, 7
@@ -930,7 +934,7 @@ Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
 Allego DE-Hermsdorf McDonalds, 50.889717, 11.872576, 10
 Allego DE-Heppenheim, 49.643165, 8.624373
 Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
-Allego DE-Hilpoltstein, 49.161068, 11.260205, 5
+Allego DE-Hilpoltstein, 49.161067,11.260181, 5
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Ingolstadt Factory Outlet, 48.783821,11.478067
 Allego DE-Itzehoe, 53.959309, 9.495976, 10
@@ -939,9 +943,9 @@ Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Memmingen Media-Markt, 48.0023077, 10.167253
 Allego DE-Mindelheim, 48.0352942, 10.501454
-Allego DE-Münchberg, 50.202775, 11.7769, 7
+Allego DE-Münchberg, 50.202775, 11.7769, 6
 Allego DE-Münster ATU, 51.92794, 7.587932
-Allego DE-Neumarkt Authof, 49.312989, 11.475396, 5
+Allego DE-Neumarkt Autohof, 49.312989, 11.475396, 5
 Allego DE-Regensburg, 48.995373, 12.151138, 15
 Allego DE-Rostok ATU, 54.081492, 12.192205
 Allego DE-Rostock Euromaster, 54.111209, 12.16426
