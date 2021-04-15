@@ -952,13 +952,19 @@ namespace TeslaLogger
 
                 string charging_state = r2["charging_state"].ToString();
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+
+
+                decimal battery_range = (decimal)r2["battery_range"];
+
                 decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
-                    ideal_battery_range = (decimal)r2["battery_range"];
+                    ideal_battery_range = battery_range;                    
                 }
 
-                decimal battery_range = (decimal)r2["battery_range"];
+                car.currentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
+                //car.currentJSON.CreateCurrentJSON();
+
 
                 string battery_level = r2["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
@@ -966,6 +972,12 @@ namespace TeslaLogger
                     car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
                     car.currentJSON.CreateCurrentJSON();
                 }
+
+
+                Log($"####-----API!         ideal_battery_range: {ideal_battery_range * (decimal)1.609344}km / battery_level: {battery_level}%");
+                Log($"####-----CurrentJSON! ideal_battery_range: {car.currentJSON.current_ideal_battery_range_km}km / battery_level: {car.currentJSON.current_battery_level}%");
+
+
                 string charger_power = "";
                 if (r2["charger_power"] != null)
                 {
