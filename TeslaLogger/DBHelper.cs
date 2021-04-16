@@ -324,15 +324,15 @@ namespace TeslaLogger
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.Now) / 1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow)*1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
 
-                if (abrp_mode == -1)
+                if (car.ABRP_mode == -1)
                     return false;
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set ABRP_token = @token, ABRP_mode = @mode FROM cars where id = @CarID", con))
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set ABRP_token = @token, ABRP_mode = @mode where id = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@token", abrp_token);
