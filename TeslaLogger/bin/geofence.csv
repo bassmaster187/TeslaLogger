@@ -133,7 +133,8 @@ Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger DE-Gensingen, 49.90202, 7.929759
-Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176
+Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
+Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
@@ -676,6 +677,7 @@ Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger-V3 SK-Košice, 48.695151,21.235604
 Supercharger SK-Zvolen, 48.627379, 19.103481
 Supercharger US-Amarillo TX, 35.189094, -101.931492
+Supercharger US-Annapolis MD, 38.980072,-76.540796
 Supercharger US-Ardmore OK,34.179246,-97.1656
 Supercharger US-Arlington TX, 32.754621, -97.082784
 Supercharger US-Altoona IA, 41.6642, -93.465622
@@ -721,6 +723,7 @@ Supercharger US-Evanston WY, 41.26299,-110.985504
 Supercharger US-Eau Claire WI, 44.770877,-91.437202
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
+Supercharger US-Gaithersburg MD, 39.118133,-77.202291
 Supercharger US-Gardnerville NV, 38.696494,-119.548509
 Supercharger US-Gaylord MI, 45.025599, -84.722179
 Supercharger US-Giddings TX, 30.178965, -96.906996
@@ -753,6 +756,7 @@ Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
 Supercharger US-Limon CO, 39.268995, -103.708624
 Supercharger US-Little Rock AR, 34.661548, -92.410467
+Supercharger-V3 US-Littleton MA, 42.553046,-71.474114
 Supercharger US-Livonia MI, 42.379355, -83.329502
 Supercharger US-London KY, 37.149148, -84.11394
 Supercharger US-Lovelock NV, 40.179476, -118.472197
@@ -1028,6 +1032,7 @@ E.ON DE-Fränkische Schweiz-Pegnitz Ost, 49.74854, 11.514097
 E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
+E.ON DE-Gütersloh Süd, 51.864908,8.369761
 E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
 E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Nord, 50.42368,10.349982
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
@@ -1050,6 +1055,7 @@ EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
 EnBW DE-Am Hockenheimring West, 49.320793, 8.567899, 20
 EnBW DE-Bad Wörishofen, 48.010187, 10.599257
 EnBW DE-Beckum Vellern Süd,51.79106,8.073932
+EnBW DE-Bielefeld Detmolder Straße, 51.996108,8.59518
 EnBW DE-Bitterfeld, 51.636289,12.19907
 EnBW DE-Bobingen, 48.263993, 10.840595, 20
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
@@ -1059,10 +1065,12 @@ EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
 EnBW DE-Ebersberg, 48.096569, 11.961316
+EnBW DE-Ebelsbach, 49.9848745, 10.668505
 EnBW DE-Edelzell, 50.529549,9.690535
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
 EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
+EnBW DE-Essen Krablerstraße, 51.485605, 6.9962673
 EnBW DE-Friesoythe, 53.016216, 7.852262, 20
 EnBW DE-Gammertingen Bahnhof, 48.250595,9.217022
 EnBW DE-Gammertingen Norma, 48.246655,9.222877
@@ -1079,11 +1087,13 @@ EnBW DE-Hirschaid, 49.819734,11.000681
 EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
+EnBW DE-Höhr-Grenzhausen, 50.439177,7.647429
 EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Hurlach, 48.12758, 10.834338
 EnBW DE-Immenstaad am Bodensee, 47.66649133, 9.3666571
 EnBW DE-Ingolstadt Goethestraße, 48.772272, 11.45188
 EnBW DE-Jagsttal Ost, 49.322951,9.415858, 20
+EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
@@ -1109,6 +1119,8 @@ EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
 EnBW DE-Oberpfälzer Alp Nord, 49.424438,11.690378
 EnBW DE-Ostfildern, 48.70475, 9.249091
+EnBW DE-Pfungstadt Ost, 49.812106,8.579272
+EnBW DE-Pfungstadt West, 49.8124703, 8.5769616
 EnBW DE-Porta Westfalica, 52.26012,8.90345
 EnBW DE-Reichenau, 47.689002, 9.1260333
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
@@ -1148,7 +1160,7 @@ Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
 Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
 Fastned DE-Herbolzheim, 48.22685, 7.75509
-Fastned DE-Hilden, 51.192039, 6.936433, 8
+Fastned DE-Hilden, 51.192201,6.935931, 3
 Fastned DE-Hildesheim, 52.16083, 9.99676
 Fastned DE-Limburg Süd, 50.37993, 8.09248
 Fastned DE-Melle-West, 52.19466, 8.31641
