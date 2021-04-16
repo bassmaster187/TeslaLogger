@@ -317,6 +317,38 @@ namespace TeslaLogger
             return "";
 }
 
+        internal bool SetABRP(string abrp_token, int abrp_mode)
+        {
+            car.ABRP_token = abrp_token;
+            car.ABRP_mode = abrp_mode;
+
+            try
+            {
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.Now) / 1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
+
+                if (abrp_mode == -1)
+                    return false;
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set ABRP_token = @token, ABRP_mode = @mode FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@token", abrp_token);
+                        cmd.Parameters.AddWithValue("@mode", abrp_mode);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
         internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
         {
             ABRP_token = "";
