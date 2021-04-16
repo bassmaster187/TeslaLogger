@@ -316,7 +316,39 @@ namespace TeslaLogger
 
             return "";
 }
-      
+
+        internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
+        {
+            ABRP_token = "";
+            ABRP_mode = 0;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT ABRP_token, ABRP_mode FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            ABRP_token = dr[0].ToString();
+                            ABRP_mode = Convert.ToInt32(dr[1]);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
         internal void UpdateEmptyChargeEnergy()
         {
             Queue<int> emptyChargeEnergy = new Queue<int>();

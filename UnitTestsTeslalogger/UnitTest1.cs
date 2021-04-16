@@ -462,5 +462,16 @@ namespace UnitTestsTeslalogger
             Assert.Fail("could not get Auth Token from Refresh Token!");
             */
         }
+
+        [TestMethod]
+        public void SendDataToAbetterrouteplanner()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            long ts = Tools.ToUnixTime(DateTime.Now) / 1000;
+
+            wh.SendDataToAbetterrouteplannerAsync(ts, 55, 0, false, 0, 0, 0).Wait();
+        }
     }
 }
