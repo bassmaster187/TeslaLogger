@@ -1048,6 +1048,11 @@ namespace TeslaLogger
                     }
                 }
 
+               double power = 0;
+                if (Double.TryParse(charger_power, out power))
+                    power *= -1;
+                
+
                 if (justCheck)
                 {
                     if (charging_state == "Charging")
@@ -1075,6 +1080,8 @@ namespace TeslaLogger
 
                 if (charging_state == "Charging")
                 {
+                    _ = SendDataToAbetterrouteplannerAsync(ts, car.currentJSON.current_battery_level, 0, true, power, car.currentJSON.latitude, car.currentJSON.longitude);
+
                     lastCharging_State = charging_state;
                     car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
@@ -1975,6 +1982,7 @@ namespace TeslaLogger
                     }
                 }
 
+
                 if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.currentJSON.current_is_preconditioning)
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
@@ -2000,6 +2008,8 @@ namespace TeslaLogger
                     {
                         outside_temp = t_outside_temp.Result;
                     }
+
+                    _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, power, (double)dLatitude, (double)dLongitude);
 
                     car.dbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
@@ -3574,6 +3584,65 @@ namespace TeslaLogger
         private void Log(string text)
         {
             car.Log(text);
+        }
+
+        HttpClient httpClientABRP = null;
+        internal async Task SendDataToAbetterrouteplannerAsync(long utc, int soc, double speed, bool is_charging, double power, double lat, double lon)
+        {
+            try
+            {
+                if (car.ABRP_mode == 0 || String.IsNullOrEmpty(car.ABRP_token))
+                    return;
+
+                if (httpClientABRP == null)
+                {
+                    HttpClient c = new HttpClient();
+                    c.Timeout = TimeSpan.FromSeconds(10);
+                    c.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
+                    c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    c.DefaultRequestHeaders.Connection.Add("keep-alive");
+                    c.DefaultRequestHeaders.Add("Authorization", "APIKEY 54ac054f-0412-4747-b788-bcc8c6b60f27");
+                    httpClientABRP = c;
+
+                    Logfile.Log("ABRP initialized!");
+                }
+
+                Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "utc", utc / 1000 },
+                        { "soc", soc },
+                        { "speed", speed },
+                        { "is_charging", is_charging ? 1 : 0},
+                        { "power", power },
+                        { "lat", lat },
+                        { "lon", lon },
+                    };
+
+                string json = new JavaScriptSerializer().Serialize(values);
+
+                DateTime start = DateTime.UtcNow;
+                using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
+                {
+                    var result = await httpClientABRP.PostAsync("https://api.iternio.com/1/tlm/send?token="  + car.ABRP_token + "&tlm="+ json, null);
+
+                    DBHelper.AddMothershipDataToDB("SendDataToAbetterrouteplanner", start, (int)result.StatusCode);
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        string response = result.Content.ReadAsStringAsync().Result;
+                        Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                        car.ABRP_mode = -1; 
+                    }
+                    else if (result.StatusCode != HttpStatusCode.OK)
+                    {
+                        string response = result.Content.ReadAsStringAsync().Result;
+                        Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                    }
+                }
+            }
+            catch (Exception x)
+            {
+                Logfile.Log(x.ToString());
+            }
         }
     }
 }
