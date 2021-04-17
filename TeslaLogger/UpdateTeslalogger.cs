@@ -662,6 +662,25 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("append backup.sh to crontab!");
                     File.AppendAllText(crontab, "0 1 * * * root /bin/bash /etc/teslalogger/backup.sh\n");
                 }
+
+                else if (Tools.IsDocker())
+                {
+                    Logfile.Log("DOCKER: check crontab!");
+
+                    string crontab = "/etc/crontab";
+
+                    if (!File.Exists(crontab))
+                    {
+                        Logfile.Log("DOCKER: It seems that there is no cron installed in your Teslalogger Docker Container - please recreate the container!");
+                        return;
+                    }
+
+                    if (File.ReadAllText(crontab).Contains("/etc/teslalogger/backup.sh"))
+                        return;
+
+                    Logfile.Log("DOCKER: append backup.sh to crontab!");
+                    File.AppendAllText(crontab, "0 1 * * * root /bin/bash /etc/teslalogger/backup.sh\n");
+                }
             }
             catch (Exception ex)
             {
