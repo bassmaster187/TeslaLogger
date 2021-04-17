@@ -963,8 +963,6 @@ namespace TeslaLogger
                 }
 
                 car.currentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
-                //car.currentJSON.CreateCurrentJSON();
-
 
                 string battery_level = r2["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
