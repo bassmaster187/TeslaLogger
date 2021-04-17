@@ -972,12 +972,6 @@ namespace TeslaLogger
                     car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
                     car.currentJSON.CreateCurrentJSON();
                 }
-
-
-                Log($"####-----API!         ideal_battery_range: {ideal_battery_range * (decimal)1.609344}km / battery_level: {battery_level}%");
-                Log($"####-----CurrentJSON! ideal_battery_range: {car.currentJSON.current_ideal_battery_range_km}km / battery_level: {car.currentJSON.current_battery_level}%");
-
-
                 string charger_power = "";
                 if (r2["charger_power"] != null)
                 {
