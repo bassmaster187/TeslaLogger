@@ -82,7 +82,7 @@ You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving you
     <li>Insert the token in Teslalogger</li>
     <li>Check if the Teslalogger is connected</li>
 </ul>
-Check YouTube tutorial for live demo: <a href="https://youtu.be/S5H6MFlB5Mo">YouTube</a>
+Check YouTube tutorial for live demo: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a>
 <h1>Settings</h1>
 <table>
 <tr>
