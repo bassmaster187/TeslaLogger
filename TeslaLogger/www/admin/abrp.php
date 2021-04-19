@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <?php
 require_once("language.php");
+session_start();
+global $display_name;
+$carid = 1;
+if (isset($_REQUEST["carid"]))
+{
+	$_SESSION["carid"] = $_REQUEST["carid"];
+	$carid = $_REQUEST["carid"];
+}
+else
+{
+	$_SESSION["carid"] = $carid;
+}
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -32,7 +44,7 @@ require_once("language.php");
     $token = $jabrp->{"token"};
     $mode = $jabrp->{"mode"};
 
-    echo("<!-- Response of abrp/car/info:\n"); 
+    echo("<!-- Response of abrp/$current_carid/info:\n"); 
     var_dump($abrpinfo);
     echo ("-->\n");
 ?>
