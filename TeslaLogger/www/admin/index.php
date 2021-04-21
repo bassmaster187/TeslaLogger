@@ -355,9 +355,9 @@ function ShowInfo()
 		$("#NegativeButton").hide();
 	<?php
 	} 
-	else if (!file_exists("/tmp/changelogversion") || file_get_contents("/tmp/changelogversion") != file_get_contents("/etc/teslalogger/VERSION") )
+	else if (!files_are_equal("/etc/teslalogger/changelog.md","/tmp/changelog.md"))
 	{?>
-		$.get("changelog.php").success(function(data){
+		$.get("changelog_plain.php").success(function(data){
 			$("#InfoText").html(data);
 		});
 		

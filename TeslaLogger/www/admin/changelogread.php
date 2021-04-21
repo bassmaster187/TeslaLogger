@@ -1,11 +1,7 @@
 <?php
 $installed = "?";
 
-if (file_exists("/etc/teslalogger/VERSION"))
-{
-    $installed = file_get_contents("/etc/teslalogger/VERSION");
-    
-    file_put_contents("/tmp/changelogversion",$installed);
-}
+copy("/etc/teslalogger/changelog.md", "/tmp/changelog.md");
+
 header("Location: index.php");
 ?>
