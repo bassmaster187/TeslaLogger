@@ -32,6 +32,9 @@ else
 	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	<style>
+		#changelog{height:350px; overflow: auto;}
+	</style>
 	<script>
 	var map = null;
 	var marker = null;
@@ -349,6 +352,18 @@ function ShowInfo()
 		$("#InfoText").html("<h1>Please update to latest docker-compose.yml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
+		$("#NegativeButton").hide();
+	<?php
+	} 
+	else if (!file_exists("/tmp/changelogversion") || file_get_contents("/tmp/changelogversion") != file_get_contents("/etc/teslalogger/VERSION") )
+	{?>
+		$.get("changelog.php").success(function(data){
+			$("#InfoText").html(data);
+		});
+		
+		$(".HeaderT").show();
+		$("#PositiveButton").text("<?php t("OK"); ?>");
+		$("#PositiveButton").click(function(){window.location.href='changelogread.php';});
 		$("#NegativeButton").hide();
 	<?php
 	}
