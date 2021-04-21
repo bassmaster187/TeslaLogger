@@ -10,6 +10,7 @@
    - distance
    - Multilingual / using units from settings page
    - links to geofence and set carging costs
+   - Text and action filter  
 - Model 3 LR P 2021 detection
 - dectect wating for MFA code and automatic redirecting to MFA entering page
 - redirect to password.php if cars table is empty
