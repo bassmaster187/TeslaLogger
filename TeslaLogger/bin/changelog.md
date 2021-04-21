@@ -17,7 +17,7 @@
 - New Language: chinese
 - merge interrupted chargings
 
-BF: 
+ BF: 
 - Authentification in USA & China
 
 # Version 1.47.0
@@ -31,7 +31,7 @@ BF:
 
 # Version 1.46.2
 - Using the streaming API to wakeup Teslalogger, so no tricks with tasker are necessary anymore
-- Timeline Dashboard & Timeline Panel Dashboard https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/timeline.png
+- Timeline Dashboard & Timeline Panel Dashboard [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/timeline.png)
 
 If you want to display the small maps in Timeline Panel Dashboard, you have to optain a free MapQuest Key:
 Go to: https://developer.mapquest.com/
@@ -92,12 +92,12 @@ Restart Teslalogger
 - Admin-Panel shows miles and °F if chosen in settings
 - ScanMyTesla wakeup teslalogger if detects speed > 5kph
 - ScanMyTEsla signals in admin-page
-- TeslaFi import : https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaFi-Import/README.md
+- TeslaFi import : [Readme](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaFi-Import/README.md)
 - Battery Heater in Grafana dashboard charging 
 - Webapp for full screen dashboard
 
 # Version V1.37.5.0
-- A nice dashboard for the livingroom https://github.com/bassmaster187/TeslaLogger/blob/master/dashboard.md
+- A nice dashboard for the livingroom [Readme](https://github.com/bassmaster187/TeslaLogger/blob/master/dashboard.md)
 - Restore database in Settings
 - inside temperature during preconditioning in admin panel and dashboard
 - Grafana Status Dashboard
