@@ -1,3 +1,6 @@
+# Version 1.48.8
+- BF: Abetterrouteplanner wrong calibrated consumption
+
 # Version 1.47.7
 - Abetterrouteplanner integration. Check menu/extras/abetterrouteplanner in admin panel.
 - Textfilter and action filter for Timeline Plugin Dashboard
