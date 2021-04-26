@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <?php
 require_once("language.php");
+session_start();
+global $display_name;
+$carid = 1;
+if (isset($_REQUEST["carid"]))
+{
+	$_SESSION["carid"] = $_REQUEST["carid"];
+	$carid = $_REQUEST["carid"];
+}
+else
+{
+	$_SESSION["carid"] = $carid;
+}
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -32,7 +44,7 @@ require_once("language.php");
     $token = $jabrp->{"token"};
     $mode = $jabrp->{"mode"};
 
-    echo("<!-- Response of abrp/car/info:\n"); 
+    echo("<!-- Response of abrp/$current_carid/info:\n"); 
     var_dump($abrpinfo);
     echo ("-->\n");
 ?>
@@ -82,7 +94,7 @@ You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving you
     <li>Insert the token in Teslalogger</li>
     <li>Check if the Teslalogger is connected</li>
 </ul>
-Check YouTube tutorial for live demo: <a href="https://youtu.be/S5H6MFlB5Mo">YouTube</a>
+Check YouTube tutorial for live demo: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a>
 <h1>Settings</h1>
 <table>
 <tr>

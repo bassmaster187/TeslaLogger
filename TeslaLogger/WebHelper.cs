@@ -3587,7 +3587,7 @@ namespace TeslaLogger
         }
 
         HttpClient httpClientABRP = null;
-        internal async Task SendDataToAbetterrouteplannerAsync(long utc, int soc, double speed, bool is_charging, double power, double lat, double lon)
+        internal async Task SendDataToAbetterrouteplannerAsync(long utc, int soc, double speed_mph, bool is_charging, double power, double lat, double lon)
         {
             try
             {
@@ -3607,11 +3607,13 @@ namespace TeslaLogger
                     Logfile.Log("ABRP initialized!");
                 }
 
+                double speed_kmh = speed_mph / 0.62137119223733;
+
                 Dictionary<string, object> values = new Dictionary<string, object>
                     {
                         { "utc", utc / 1000 },
                         { "soc", soc },
-                        { "speed", speed },
+                        { "speed", speed_kmh },
                         { "is_charging", is_charging ? 1 : 0},
                         { "power", power },
                         { "lat", lat },
