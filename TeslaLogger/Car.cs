@@ -1128,7 +1128,7 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                       {
-                          Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
+                          Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
                           string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                           Log("set_charge_limit(): " + result);
                           // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
