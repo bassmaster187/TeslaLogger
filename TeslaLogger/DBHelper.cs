@@ -396,7 +396,7 @@ FROM
   chargingstate
 WHERE
   CarID=@CarID
-  AND charge_energy_added IS NULL
+  AND (charge_energy_added IS NULL OR charge_energy_added = 0)
   AND EndDate IS NOT NULL", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
