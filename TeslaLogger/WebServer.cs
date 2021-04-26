@@ -228,6 +228,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mfa/[0-9]+/.+"):
                         Set_MFA(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/info"):
+                        ABRP_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/set"):
+                        ABRP_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
@@ -265,6 +271,67 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    int abrp_mode = 0;
+                    string abrp_token = "";
+
+                    if (String.IsNullOrEmpty(data))
+                    {
+                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"]);
+                        abrp_token = request.QueryString["abrp_token"];
+                    }
+                    else
+                    {
+                        dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                        abrp_mode = Convert.ToInt32(r["abrp_mode"]);
+                        abrp_token = r["abrp_token"];
+                    }
+
+                    if (!car.dbHelper.SetABRP(abrp_token, abrp_mode))
+                        WriteString(response, "Wrong ABRP Token!");
+                    else
+                        WriteString(response, "OK");
+
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/info");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    car.dbHelper.GetABRP(out string abrp_token, out int abrp_mode);
+                    var t = new
+                    {
+                        token = abrp_token,
+                        mode = abrp_mode
+                    };
+
+                    string json = new JavaScriptSerializer().Serialize(t);
+                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                    WriteString(response, json);
+                    return;
+                }
+            }
+            WriteString(response, "");
         }
 
         private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)

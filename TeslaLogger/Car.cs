@@ -94,6 +94,9 @@ namespace TeslaLogger
         public string TaskerHash = "";
         public string vin = "";
 
+        public string ABRP_token = "";
+        public int ABRP_mode = 0;
+
         public CurrentJSON currentJSON;
 
         public static List<Car> allcars = new List<Car>();
@@ -305,6 +308,8 @@ namespace TeslaLogger
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
+
+                dbHelper.GetABRP(out ABRP_token, out ABRP_mode);
 
                 webhelper.StartStreamThread();
             }
