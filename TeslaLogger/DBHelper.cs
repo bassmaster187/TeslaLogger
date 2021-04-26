@@ -1232,12 +1232,52 @@ WHERE
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
-            double startEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "StartChargingID");
-            double endEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "EndChargingID");
+            double charge_energy_added = 0.0;
+            bool charge_energy_added_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charging.charge_energy_added
+FROM
+  charging
+WHERE
+  charging.CarId = @CarID
+  AND charging.id >= (SELECT StartChargingID FROM chargingstate WHERE id = @ChargingStateID)
+  AND charging.id <= (SELECT EndChargingID FROM chargingstate WHERE id = @ChargingStateID)
+ORDER BY id ASC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        double last_charge_energy_added = 0.0;
+                        while (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double new_charge_energy_added))
+                            {
+                                if (new_charge_energy_added < last_charge_energy_added)
+                                {
+                                    charge_energy_added += last_charge_energy_added;
+                                }
+                                last_charge_energy_added = new_charge_energy_added;
+                            }
+                        }
+                        charge_energy_added += last_charge_energy_added;
+                        charge_energy_added_found = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "UpdateChargeEnergyAdded");
+                car.Log(ex.ToString());
+            }
 
-            double charge_energy_added = endEnergyAdded - startEnergyAdded;
-
-            if (charge_energy_added >= 0)
+            if (charge_energy_added_found)
             {
                 try
                 {
@@ -1270,40 +1310,8 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID} startEnergyAdded:{startEnergyAdded} endEnergyAdded:{endEnergyAdded} ");
+                Tools.DebugLog($"UpdateChargeEnergyAdded error - could not calculate charge_energy_added for ID {ChargingStateID}");
             }
-        }
-
-        private double GetChargeEnergyAdded(int openChargingState, string column)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT charging.charge_energy_added FROM charging, chargingstate WHERE chargingstate.CarId = @CarID AND chargingstate.{column} = charging.id and chargingstate.id=@ChargingStateID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
-                        {
-                            if (double.TryParse(dr[0].ToString(), out double charge_energy_added))
-                            {
-                                return charge_energy_added;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, "GetLastCarVersion");
-                car.Log(ex.ToString());
-            }
-
-            return -1.0;
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
