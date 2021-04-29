@@ -415,6 +415,18 @@ CREATE TABLE superchargerstate(
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
                 }
 
+                if (!DBHelper.ColumnExists("cars", "ABRP_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
