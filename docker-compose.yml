@@ -16,7 +16,7 @@ services:
     environment:
       - TZ=Europe/Berlin
     ports:
-      - 5000:5000
+      - 5010:5000
 
   database:
     image: mariadb:10.4.7
