@@ -153,6 +153,7 @@ namespace TeslaLogger
                                     case Address.SpecialFlags.CopyChargePrice:
                                     case Address.SpecialFlags.CombineChargingStates:
                                     case Address.SpecialFlags.DoNotCombineChargingStates:
+                                        break;
                                     default:
                                         car.Log("TeslaAPIHandleStateChange unhandled special flag " + flag.ToString());
                                         break;
