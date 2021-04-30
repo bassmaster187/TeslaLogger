@@ -22,8 +22,6 @@ namespace TeslaLogger
         private static bool mothershipEnabled = false;
         private Car car;
 
-        private DateTime LastPosTimestamp = DateTime.Now;
-
         internal static string Database = "teslalogger";
 
         public static string DBConnectionstring => GetDBConnectionstring();
@@ -2586,124 +2584,118 @@ ORDER BY id DESC", con))
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             double? inside_temp = car.currentJSON.current_inside_temperature;
-            DateTime ts = UnixToDateTime(long.Parse(timestamp));
-            // check if we already have a pos for this timestamp
-            if (!LastPosTimestamp.Equals(ts))
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
-                LastPosTimestamp = ts;
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con))
                 {
-                    con.Open();
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
+                    cmd.Parameters.AddWithValue("@lat", latitude.ToString());
+                    cmd.Parameters.AddWithValue("@lng", longitude.ToString());
+                    cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
+                    cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
+                    cmd.Parameters.AddWithValue("@odometer", odometer);
 
-                    using (MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con))
+                    if (ideal_battery_range_km == -1)
                     {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@Datum", ts);
-                        cmd.Parameters.AddWithValue("@lat", latitude.ToString());
-                        cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                        cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
-                        cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
-                        cmd.Parameters.AddWithValue("@odometer", odometer);
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                    }
 
-                        if (ideal_battery_range_km == -1)
+                    if (battery_range_km == -1)
+                    {
+                        cmd.Parameters.AddWithValue("@battery_range_km", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@battery_range_km", battery_range_km.ToString());
+                    }
+
+                    if (outside_temp == null)
+                    {
+                        cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                    }
+
+                    if (altitude.Length == 0)
+                    {
+                        cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@altitude", altitude);
+                    }
+
+                    if (battery_level == -1)
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                    }
+
+                    if (inside_temp == null)
+                    {
+                        cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
+                    }
+
+                    cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@is_preconditioning", car.currentJSON.current_is_preconditioning ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@sentry_mode", car.currentJSON.current_is_sentry_mode ? 1 : 0);
+
+                    cmd.ExecuteNonQuery();
+
+                    try
+                    {
+                        car.currentJSON.current_speed = (int)(speed * 1.60934M);
+                        car.currentJSON.current_power = (int)(power * 1.35962M);
+
+                        if (odometer > 0)
                         {
-                            cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
+                            car.currentJSON.current_odometer = odometer;
                         }
-                        else
+
+                        if (ideal_battery_range_km >= 0)
                         {
-                            cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                            car.currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
                         }
 
-                        if (battery_range_km == -1)
+                        if (battery_range_km >= 0)
                         {
-                            cmd.Parameters.AddWithValue("@battery_range_km", DBNull.Value);
+                            car.currentJSON.current_battery_range_km = battery_range_km;
                         }
-                        else
+
+                        if (car.currentJSON.current_trip_km_start == 0)
                         {
-                            cmd.Parameters.AddWithValue("@battery_range_km", battery_range_km.ToString());
+                            car.currentJSON.current_trip_km_start = odometer;
+                            car.currentJSON.current_trip_start_range = car.currentJSON.current_ideal_battery_range_km;
                         }
 
-                        if (outside_temp == null)
-                        {
-                            cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
-                        }
+                        car.currentJSON.current_trip_max_speed = Math.Max(car.currentJSON.current_trip_max_speed, car.currentJSON.current_speed);
+                        car.currentJSON.current_trip_max_power = Math.Max(car.currentJSON.current_trip_max_power, car.currentJSON.current_power);
 
-                        if (altitude.Length == 0)
-                        {
-                            cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@altitude", altitude);
-                        }
-
-                        if (battery_level == -1)
-                        {
-                            cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
-                        }
-
-                        if (inside_temp == null)
-                        {
-                            cmd.Parameters.AddWithValue("@inside_temp", DBNull.Value);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
-                        }
-
-                        cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
-                        cmd.Parameters.AddWithValue("@is_preconditioning", car.currentJSON.current_is_preconditioning ? 1 : 0);
-                        cmd.Parameters.AddWithValue("@sentry_mode", car.currentJSON.current_is_sentry_mode ? 1 : 0);
-
-                        cmd.ExecuteNonQuery();
-
-                        try
-                        {
-                            car.currentJSON.current_speed = (int)(speed * 1.60934M);
-                            car.currentJSON.current_power = (int)(power * 1.35962M);
-
-                            if (odometer > 0)
-                            {
-                                car.currentJSON.current_odometer = odometer;
-                            }
-
-                            if (ideal_battery_range_km >= 0)
-                            {
-                                car.currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
-                            }
-
-                            if (battery_range_km >= 0)
-                            {
-                                car.currentJSON.current_battery_range_km = battery_range_km;
-                            }
-
-                            if (car.currentJSON.current_trip_km_start == 0)
-                            {
-                                car.currentJSON.current_trip_km_start = odometer;
-                                car.currentJSON.current_trip_start_range = car.currentJSON.current_ideal_battery_range_km;
-                            }
-
-                            car.currentJSON.current_trip_max_speed = Math.Max(car.currentJSON.current_trip_max_speed, car.currentJSON.current_speed);
-                            car.currentJSON.current_trip_max_power = Math.Max(car.currentJSON.current_trip_max_power, car.currentJSON.current_power);
-
-                        }
-                        catch (Exception ex)
-                        {
-                            car.Log(ex.ToString());
-                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        car.Log(ex.ToString());
                     }
                 }
-
-                car.currentJSON.CreateCurrentJSON();
             }
+
+            car.currentJSON.CreateCurrentJSON();
         }
 
         private Address GetAddressFromChargingState(int ChargingStateID)
