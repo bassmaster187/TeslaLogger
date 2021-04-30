@@ -2132,7 +2132,7 @@ namespace TeslaLogger
                     // otherwise skip
                     if (!car.currentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.currentJSON.current_driving))
                     {
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
                         continue;
                     }   
 
