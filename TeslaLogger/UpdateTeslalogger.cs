@@ -23,7 +23,7 @@ namespace TeslaLogger
 
         private static bool _done = false;
 
-        public static bool Done { get => _done;}
+        public static bool Done { get => _done; }
 
         private static Thread ComfortingMessages = null;
         public static bool DownloadUpdateAndInstallStarted = false;
@@ -372,7 +372,6 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-
                 if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
                 {
                     Logfile.Log("alter table charging add index IX_charging_carid_datum (CarId, Datum)");
@@ -427,6 +426,36 @@ CREATE TABLE superchargerstate(
                 {
                     Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
+                }
+
+                // check datetime precision in pos
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
+                        {
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value)
+                            {
+                                if (int.TryParse(dr[0].ToString(), out int datetime_precision))
+                                {
+                                    if (datetime_precision != 3)
+                                    {
+                                        // update table
+                                        Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
+                                        DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
                 }
 
                 // end of schema update
@@ -754,7 +783,7 @@ CREATE TABLE superchargerstate(
                     {
                         Logfile.Log("PHP.ini changed!");
                     }
-                }   
+                }
             }
             catch (Exception ex)
             {
@@ -838,7 +867,7 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        
+
 
         internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
@@ -1361,7 +1390,7 @@ CREATE TABLE superchargerstate(
 
                 Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}"+carLabel+"${8}");
+                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}" + carLabel + "${8}");
                 return ret;
             }
             catch (Exception ex)
@@ -1422,8 +1451,8 @@ CREATE TABLE superchargerstate(
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
-            string replace = "\"alias\": \""+dictLanguage[v]+"\"";
+            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -1486,7 +1515,7 @@ CREATE TABLE superchargerstate(
         }
 
 
-        public static void Chmod(string filename, int chmod, bool logging=true)
+        public static void Chmod(string filename, int chmod, bool logging = true)
         {
             try
             {
