@@ -3788,7 +3788,7 @@ WHERE
             }
         }
 
-        private static int MphToKmhRounded(double speed_mph)
+        internal static int MphToKmhRounded(double speed_mph)
         {
             int speed_floor = (int)(speed_mph * 1.60934);
             // handle special speed_floor as Math.Round is off by +1

@@ -59,6 +59,9 @@ namespace TeslaLogger
         bool getTokenDebugVerbose = false;
         private double last_latitude_streaming = double.NaN;
         private double last_longitude_streaming = double.NaN;
+        private decimal last_power_streaming = 0;
+
+        private double battery_range2ideal_battery_range = 0.8000000416972936;
 
         static WebHelper()
         {
@@ -2359,29 +2362,28 @@ namespace TeslaLogger
             {
                 DrivingOrChargingByStream = false;
             }
-            if (int.TryParse(speed, out int ispeed)
-                && double.TryParse(odometer, out double dodometer)
+            if (int.TryParse(speed, out int ispeed) // speed in mph
+                && double.TryParse(odometer, out double dodometer) // odometer in miles
                 && int.TryParse(soc, out int isoc)
                 && double.TryParse(est_lat, out double latitude)
                 && double.TryParse(est_lng, out double longitude)
-                && decimal.TryParse(power, out decimal dpower)
+                && decimal.TryParse(power, out decimal dpower) // power in kW
                 && int.TryParse(range, out int irange))
             {
                 // speed is converted by InsertPos
                 // power is converted by InsertPos
-                // TODO proper conversion ml to km from "off by one patch"
-                double dodometer_km = dodometer * 1.60934;
+                double dodometer_km = DBHelper.MphToKmhRounded(dodometer);
                 // battery_range_km = range in ml to km
-                // TODO proper conversion ml to km from "off by one patch"
-                double battery_range_km = (irange / 0.62137);
-                // ideal_battery_range_km = ideal_battery_range_km * 0.8
-                // TODO get for this car from database: select avg(ideal_battery_range_km/battery_range_km) from pos
-                double ideal_battery_range_km = battery_range_km * 0.8000000416972936;
+                double battery_range_km = DBHelper.MphToKmhRounded(irange);
+                // ideal_battery_range_km = ideal_battery_range_km * car specific factor
+                double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
                 double? outside_temp = car.currentJSON.current_outside_temp;
-                if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") && (latitude != last_latitude_streaming || longitude != last_longitude_streaming))
+                if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") &&
+                    (latitude != last_latitude_streaming || longitude != last_longitude_streaming || dpower != last_power_streaming))
                 {
                     last_latitude_streaming = latitude;
                     last_longitude_streaming = longitude;
+                    last_power_streaming = dpower;
                     Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
                     car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
@@ -2907,7 +2909,7 @@ namespace TeslaLogger
                     battery_level = Convert.ToInt32(r2["battery_level"]);
                     car.currentJSON.current_battery_level = battery_level;
                 }
-
+                battery_range2ideal_battery_range = (double)ideal_battery_range / Convert.ToDouble(r2["battery_range"]);
                 return (double)ideal_battery_range / (double)0.62137;
             }
             catch (Exception ex)
