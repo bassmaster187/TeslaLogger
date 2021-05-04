@@ -176,6 +176,10 @@ namespace TeslaLogger
                                 case MapType.Park:
                                     _StaticMapProvider.CreateParkingMap(((POIRequest)request).Lat, ((POIRequest)request).Lng, width, height, request.Mode, request.Special, filename);
                                     break;
+                                case MapType.Trip:
+                                    break;
+                                default:
+                                    break;
                             }
                             if (_StaticMapProvider != null)
                             {
@@ -373,6 +377,10 @@ ORDER BY
                     return "C-" + lat + "-" + lng + ".png";
                 case MapType.Park:
                     return "P-" + lat + "-" + lng + ".png";
+                case MapType.Trip:
+                    break;
+                default:
+                    break;
             }
             return "error.jpg";
         }
