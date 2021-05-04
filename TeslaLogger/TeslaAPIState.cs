@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
@@ -30,7 +31,7 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}");
+                        DumpJSONSessionDir = Path.Combine(Logfile.GetExecutingPath(), $"JSON/{DateTime.UtcNow:yyyyMMddHHmmssfff}");
                         if (!Directory.Exists(DumpJSONSessionDir))
                         {
                             Directory.CreateDirectory(DumpJSONSessionDir);
@@ -52,17 +53,17 @@ namespace TeslaLogger
             this.car = car;
         }
 
-        private void AddValue(string _name, string _type, object _value, long _timestamp, string _source)
+        private void AddValue(string name, string type, object value, long timestamp, string source)
         {
             lock (TeslaAPIStateLock)
             {
-                if (!storage.TryGetValue(_name, out Dictionary<Key, object> _))
+                if (!storage.TryGetValue(name, out Dictionary<Key, object> _))
                 {
-                    storage.Add(_name, new Dictionary<Key, object>() {
+                    storage.Add(name, new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
-                    { Key.ValueLastUpdate , _timestamp },
-                    { Key.Timestamp , _timestamp },
+                    { Key.ValueLastUpdate , timestamp },
+                    { Key.Timestamp , timestamp },
                     { Key.Source , "undef" }
                 });
                 }
@@ -70,19 +71,19 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        if (storage.TryGetValue(_name, out Dictionary<Key, object> dict)
+                        if (storage.TryGetValue(name, out Dictionary<Key, object> dict)
                             && dict.TryGetValue(Key.Value, out object oldvalue)
                             && dict.TryGetValue(Key.Timestamp, out object oldTS) && oldTS != null)
                         {
                             if (
                                 // olvalue != null and value changed
-                                (oldvalue != null && _value != null && !oldvalue.ToString().Equals(_value.ToString()))
+                                !(oldvalue == null || value == null || oldvalue.ToString().Equals(value.ToString()))
                                 // oldvalue was null and newvalue is not null
-                                || (oldvalue == null && _value != null)
+                                || (oldvalue == null && value != null)
                                 )
                             {
-                                storage[_name][Key.ValueLastUpdate] = _timestamp;
-                                HandleStateChange(_name, oldvalue, _value, long.Parse(oldTS.ToString()), _timestamp);
+                                storage[name][Key.ValueLastUpdate] = timestamp;
+                                HandleStateChange(name, oldvalue, value, long.Parse(oldTS.ToString()), timestamp);
                             }
                         }
                     }
@@ -91,17 +92,17 @@ namespace TeslaLogger
                         Tools.DebugLog("Exception", ex);
                     }
                 }
-                storage[_name][Key.Type] = _type;
-                if (_type.Equals("string") && (_value == null || (_value != null && string.IsNullOrEmpty(_value.ToString()))))
+                storage[name][Key.Type] = type;
+                if (type.Equals("string", StringComparison.Ordinal) && (value == null || (value != null && string.IsNullOrEmpty(value.ToString()))))
                 {
-                    storage[_name][Key.Value] = string.Empty;
+                    storage[name][Key.Value] = string.Empty;
                 }
                 else
                 {
-                    storage[_name][Key.Value] = _value;
+                    storage[name][Key.Value] = value;
                 }
-                storage[_name][Key.Timestamp] = _timestamp;
-                storage[_name][Key.Source] = _source;
+                storage[name][Key.Timestamp] = timestamp;
+                storage[name][Key.Source] = source;
             }
         }
 
@@ -131,6 +132,35 @@ namespace TeslaLogger
                     break;
                 case "charging_state":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    // charging_state Charging -> Complete - evaluate +occ special flag
+                    if (oldvalue.Equals("Charging") && newvalue.Equals("Complete"))
+                    {
+                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                        if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
+                            foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
+                            {
+                                switch (flag.Key)
+                                {
+                                    case Address.SpecialFlags.OnChargeComplete:
+                                        car.HandleSpecialFlag_OnChargeComplete(addr, flag.Value);
+                                        break;
+                                    case Address.SpecialFlags.OpenChargePort:
+                                    case Address.SpecialFlags.HighFrequencyLogging:
+                                    case Address.SpecialFlags.EnableSentryMode:
+                                    case Address.SpecialFlags.SetChargeLimit:
+                                    case Address.SpecialFlags.SetChargeLimitOnArrival:
+                                    case Address.SpecialFlags.ClimateOff:
+                                    case Address.SpecialFlags.CopyChargePrice:
+                                    case Address.SpecialFlags.CombineChargingStates:
+                                    case Address.SpecialFlags.DoNotCombineChargingStates:
+                                        break;
+                                    default:
+                                        car.Log("TeslaAPIHandleStateChange unhandled special flag " + flag.ToString());
+                                        break;
+                                }
+                            }
+                        }
+                    }
                     break;
                 case "battery_level":
                     if (car.IsParked() && !car.IsCharging())
@@ -143,26 +173,26 @@ namespace TeslaLogger
             }
         }
 
-        public bool GetState(string _name, out Dictionary<Key, object> _state, int maxage = 0)
+        public bool GetState(string name, out Dictionary<Key, object> state, int maxage = 0)
         {
             lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.ContainsKey(_name))
+                    if (storage.ContainsKey(name))
                     {
-                        _state = storage[_name];
+                        state = storage[name];
                         if (maxage != 0)
                         {
                             long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                            if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                            if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                             {
                                 return false;
                             }
                         }
                         return true;
                     }
-                    _state = new Dictionary<Key, object>() {
+                    state = new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
                     { Key.Timestamp , long.MinValue },
@@ -175,7 +205,7 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog("Exception", ex);
                 }
-                _state = new Dictionary<Key, object>() {
+                state = new Dictionary<Key, object>() {
                     { Key.Type , "undef" },
                     { Key.Value , "undef" },
                     { Key.Timestamp , long.MinValue },
@@ -186,26 +216,26 @@ namespace TeslaLogger
             return false;
         }
 
-        public bool GetBool(string _name, out bool _value, int maxage = 0)
+        public bool GetBool(string name, out bool value, int maxage = 0)
         {
             lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                    if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
                     {
-                        if (storage[_name][Key.Type].Equals("bool") && storage[_name][Key.Value] != null)
+                        if (storage[name][Key.Type].Equals("bool") && storage[name][Key.Value] != null)
                         {
                             if (maxage != 0)
                             {
                                 long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
-                                    _value = false;
+                                    value = false;
                                     return false;
                                 }
                             }
-                            return bool.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                            return bool.TryParse(storage[name][Key.Value].ToString(), out value);
                         }
                     }
                 }
@@ -214,30 +244,30 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
-            _value = false;
+            value = false;
             return false;
         }
 
-        public bool GetInt(string _name, out int _value, int maxage = 0)
+        public bool GetInt(string name, out int value, int maxage = 0)
         {
             lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                    if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
                     {
-                        if (storage[_name][Key.Type].Equals("int") && storage[_name][Key.Value] != null)
+                        if (storage[name][Key.Type].Equals("int") && storage[name][Key.Value] != null)
                         {
                             if (maxage != 0)
                             {
                                 long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
-                                    _value = int.MinValue;
+                                    value = int.MinValue;
                                     return false;
                                 }
                             }
-                            return int.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                            return int.TryParse(storage[name][Key.Value].ToString(), out value);
                         }
                     }
                 }
@@ -245,31 +275,31 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog("Exception", ex);
                 }
-                _value = int.MinValue;
+                value = int.MinValue;
                 return false;
             }
         }
 
-        public bool GetDouble(string _name, out double _value, int maxage = 0)
+        public bool GetDouble(string name, out double value, int maxage = 0)
         {
             lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                    if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
                     {
-                        if (storage[_name][Key.Type].Equals("double") && storage[_name][Key.Value] != null)
+                        if (storage[name][Key.Type].Equals("double") && storage[name][Key.Value] != null)
                         {
                             if (maxage != 0)
                             {
                                 long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
-                                    _value = double.NaN;
+                                    value = double.NaN;
                                     return false;
                                 }
                             }
-                            return double.TryParse(storage[_name][Key.Value].ToString(), out _value);
+                            return double.TryParse(storage[name][Key.Value].ToString(), out value);
                         }
                     }
                 }
@@ -278,30 +308,30 @@ namespace TeslaLogger
                     Tools.DebugLog("Exception", ex);
                 }
             }
-            _value = double.MinValue;
+            value = double.MinValue;
             return false;
         }
 
-        public bool GetString(string _name, out string _value, int maxage = 0)
+        public bool GetString(string name, out string value, int maxage = 0)
         {
             lock (TeslaAPIStateLock)
             {
                 try
                 {
-                    if (storage.ContainsKey(_name) && storage[_name].ContainsKey(Key.Type) && storage[_name].ContainsKey(Key.Value))
+                    if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
                     {
-                        if (storage[_name][Key.Type].Equals("string") && storage[_name][Key.Value] != null)
+                        if (storage[name][Key.Type].Equals("string") && storage[name][Key.Value] != null)
                         {
                             if (maxage != 0)
                             {
                                 long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-                                if (long.TryParse(storage[_name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
+                                if (long.TryParse(storage[name][Key.Timestamp].ToString(), out long ts) && now - ts > maxage)
                                 {
-                                    _value = string.Empty;
+                                    value = string.Empty;
                                     return false;
                                 }
                             }
-                            _value = storage[_name][Key.Value].ToString();
+                            value = storage[name][Key.Value].ToString();
                             return true;
                         }
                     }
@@ -310,36 +340,36 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog("Exception", ex);
                 }
-                _value = string.Empty;
+                value = string.Empty;
                 return false;
             }
         }
 
-        public bool ParseAPI(string _JSON, string _source, int CarInAccount = 0)
+        public bool ParseAPI(string JSON, string source, int CarInAccount = 0)
         {
             if (dumpJSON)
             {
-                string filename = $"{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}_{_source}_{car.CarInDB}.json";
+                string filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{source}_{car.CarInDB}.json";
                 string filepath = Path.Combine(DumpJSONSessionDir, filename);
-                Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(() =>
                 {
                     try
                     {
-                        File.WriteAllText(filepath, new Tools.JsonFormatter(_JSON).Format());
+                        File.WriteAllText(filepath, new Tools.JsonFormatter(JSON).Format());
                     }
                     catch (Exception ex)
                     {
                         Tools.DebugLog("Exception", ex);
                     }
-                });
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
-            if (string.IsNullOrEmpty(_JSON))
+            if (string.IsNullOrEmpty(JSON))
             {
                 return false;
             }
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object jsonResult = new JavaScriptSerializer().DeserializeObject(JSON);
                 if (jsonResult == null
                     || jsonResult.GetType() != typeof(Dictionary<string, object>)
                     || !((Dictionary<string, object>)jsonResult).ContainsKey("response")
@@ -354,22 +384,22 @@ namespace TeslaLogger
                 Tools.DebugLog("Exception", ex);
                 return false;
             }
-            switch (_source)
+            switch (source)
             {
                 case "charge_state":
-                    return ParseChargeState(_JSON);
+                    return ParseChargeState(JSON);
                 case "climate_state":
-                    return ParseClimateState(_JSON);
+                    return ParseClimateState(JSON);
                 case "drive_state":
-                    return ParseDriveState(_JSON);
+                    return ParseDriveState(JSON);
                 case "vehicle_config":
-                    return ParseVehicleConfig(_JSON);
+                    return ParseVehicleConfig(JSON);
                 case "vehicle_state":
-                    return ParseVehicleState(_JSON);
+                    return ParseVehicleState(JSON);
                 case "vehicles":
-                    return ParseVehicles(_JSON, CarInAccount);
+                    return ParseVehicles(JSON, CarInAccount);
                 default:
-                    Logfile.Log($"ParseAPI: unknown source {_source}");
+                    Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
             }
             return false;

@@ -396,7 +396,7 @@ FROM
   chargingstate
 WHERE
   CarID=@CarID
-  AND charge_energy_added IS NULL
+  AND (charge_energy_added IS NULL OR charge_energy_added = 0)
   AND EndDate IS NOT NULL", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -1232,12 +1232,52 @@ WHERE
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
-            double startEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "StartChargingID");
-            double endEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "EndChargingID");
+            double charge_energy_added = 0.0;
+            bool charge_energy_added_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charging.charge_energy_added
+FROM
+  charging
+WHERE
+  charging.CarId = @CarID
+  AND charging.id >= (SELECT StartChargingID FROM chargingstate WHERE id = @ChargingStateID)
+  AND charging.id <= (SELECT EndChargingID FROM chargingstate WHERE id = @ChargingStateID)
+ORDER BY id ASC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        double last_charge_energy_added = 0.0;
+                        while (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double new_charge_energy_added))
+                            {
+                                if (new_charge_energy_added < last_charge_energy_added)
+                                {
+                                    charge_energy_added += last_charge_energy_added;
+                                }
+                                last_charge_energy_added = new_charge_energy_added;
+                            }
+                        }
+                        charge_energy_added += last_charge_energy_added;
+                        charge_energy_added_found = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "UpdateChargeEnergyAdded");
+                car.Log(ex.ToString());
+            }
 
-            double charge_energy_added = endEnergyAdded - startEnergyAdded;
-
-            if (charge_energy_added >= 0)
+            if (charge_energy_added_found)
             {
                 try
                 {
@@ -1270,40 +1310,8 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID} startEnergyAdded:{startEnergyAdded} endEnergyAdded:{endEnergyAdded} ");
+                Tools.DebugLog($"UpdateChargeEnergyAdded error - could not calculate charge_energy_added for ID {ChargingStateID}");
             }
-        }
-
-        private double GetChargeEnergyAdded(int openChargingState, string column)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT charging.charge_energy_added FROM charging, chargingstate WHERE chargingstate.CarId = @CarID AND chargingstate.{column} = charging.id and chargingstate.id=@ChargingStateID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
-                        {
-                            if (double.TryParse(dr[0].ToString(), out double charge_energy_added))
-                            {
-                                return charge_energy_added;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, "GetLastCarVersion");
-                car.Log(ex.ToString());
-            }
-
-            return -1.0;
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
@@ -2013,7 +2021,7 @@ ORDER BY id DESC", con))
             car.currentJSON.current_speed = 0;
             car.currentJSON.current_power = 0;
 
-            Task.Factory.StartNew(() =>
+            _ = Task.Factory.StartNew(() =>
               {
                   if (StartPos > 0)
                   {
@@ -2023,7 +2031,7 @@ ORDER BY id DESC", con))
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }
-              });
+              }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
@@ -2576,7 +2584,6 @@ ORDER BY id DESC", con))
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             double? inside_temp = car.currentJSON.current_inside_temperature;
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -2584,7 +2591,7 @@ ORDER BY id DESC", con))
                 using (MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
                     cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
@@ -3788,7 +3795,7 @@ WHERE
             }
         }
 
-        private static int MphToKmhRounded(double speed_mph)
+        internal static int MphToKmhRounded(double speed_mph)
         {
             int speed_floor = (int)(speed_mph * 1.60934);
             // handle special speed_floor as Math.Round is off by +1
