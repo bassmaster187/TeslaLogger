@@ -1143,7 +1143,7 @@ namespace TeslaLogger
         {
             lock (httpClientLock)
             {
-                if (forceNewClient && httpclientTeslaAPI == null)
+                if (forceNewClient && httpclientTeslaAPI != null)
                 {
                     httpclientTeslaAPI.Dispose();
                     httpclientTeslaAPI = null;
