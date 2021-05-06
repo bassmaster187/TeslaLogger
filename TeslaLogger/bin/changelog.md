@@ -1,7 +1,7 @@
-# Version 1.49.0
+# Version 1.48.0
 - Stable, well tested major release. Contains all features and bug fixes since 1.48.0
 
-# Version 1.48.8
+# Version 1.47.8
 - BF: Abetterrouteplanner wrong calibrated consumption
 
 # Version 1.47.7
