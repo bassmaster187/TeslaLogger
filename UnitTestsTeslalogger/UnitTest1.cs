@@ -473,5 +473,21 @@ namespace UnitTestsTeslalogger
 
             wh.SendDataToAbetterrouteplannerAsync(ts, 55, 0, false, 0, 0, 0).Wait();
         }
+
+        [TestMethod]
+        public void UpdateApacheConfig()
+        {
+            var temp = UpdateTeslalogger.UpdateApacheConfig("../../apache2.conf", false);
+            var expected = System.IO.File.ReadAllText("../../apache2-ready.conf");
+            Assert.AreEqual(expected, temp);
+        }
+
+        [TestMethod]
+        public void UpdateApacheConfigUnchanged()
+        {
+            var temp = UpdateTeslalogger.UpdateApacheConfig("../../apache2-ready.conf", false);
+            var expected = System.IO.File.ReadAllText("../../apache2-ready.conf");
+            Assert.AreEqual(expected, temp);
+        }
     }
 }

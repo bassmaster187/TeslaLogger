@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -176,6 +177,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setpassword"):
                         SetPassword(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword"):
+                        SetAdminPanelPassword(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
@@ -270,6 +274,57 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("SetAdminPanelPassword");
+
+                string data = GetDataFromRequestInputStream(request);
+                string file_htaccess = "/var/www/html/.htaccess";
+
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+                if (Tools.IsPropertyExist(r, "delete"))
+                {
+                    Logfile.Log("delete Admin Panel Password");
+                    
+                    if (File.Exists(file_htaccess))
+                    {
+                        File.Delete(file_htaccess);
+                        Logfile.Log("delete: " + file_htaccess);
+                    }
+                    WriteString(response, "ERROR");
+                }
+                else if (Tools.IsPropertyExist(r, "password"))
+                {
+                    Logfile.Log("set Admin Panel Password");
+
+                    string content = "AuthType Basic\n";
+                    content += "AuthName \"Restricted Area\"\n";
+                    content += "AuthUserFile /etc/teslalogger/.htpasswd\n";
+                    content += "Require valid-user\n";
+
+                    File.WriteAllText(file_htaccess, content);
+
+                    string password = r["password"];
+                    using (var sha1 = SHA1.Create())
+                    {
+                        var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+                        content = string.Format("{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
+                    }
+                    string filename_htpasswd = "/etc/teslalogger/.htpasswd";
+                    File.WriteAllText(filename_htpasswd, content);
+                    WriteString(response, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
             }
         }
 

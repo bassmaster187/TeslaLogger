@@ -1,3 +1,6 @@
+# Version 1.48.1
+- Admin Panel can now be proteced by password. Check menu/settings/Teslalogger Adminpanel credentials
+
 # Version 1.48.0
 - Stable, well tested major release. Contains all features and bug fixes since 1.48.0
 

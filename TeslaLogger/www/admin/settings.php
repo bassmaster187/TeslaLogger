@@ -210,7 +210,8 @@ echo(menu("Settings"));
 <div>
 <table>
 <tr><td><h1 style="margin-top:0px;"><?php t("Zugangsdaten"); ?></h1></td><td></td></tr>
-<tr><td></td><td><button onclick="window.location.href='password.php';"  style="float: right;"><?php t("Zugangsdaten"); ?></button></td></tr>
+<tr><td>MyTesla</td><td><button onclick="window.location.href='password.php';"><?php t("Zugangsdaten"); ?></button></td></tr>
+<tr><td>Teslalogger Adminpanel</td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Zugangsdaten"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 		<input id="radio_da" type="radio" value="da" name="Language" /> Dansk<br>

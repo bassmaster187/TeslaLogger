@@ -480,6 +480,7 @@ CREATE TABLE superchargerstate(
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
                 UpdatePHPini();
+                UpdateApacheConfig();
                 CreateEmptyWeatherIniFile();
                 CheckBackupCrontab();
 
@@ -499,6 +500,37 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception) { }
             }
+        }
+
+        public static string UpdateApacheConfig(string path = "/etc/apache2/apache2.conf", bool write = true)
+        {
+            string temp = File.ReadAllText(path);
+            if (temp.Contains("<Directory /var/www/>"))
+            {
+                string pattern = "(<Directory \\/var\\/www\\/>)(.+?)(AllowOverride [A-Za-z]+)(.+?)(<\\/Directory>)";
+                Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+                var m = r.Match(temp);
+                if (!m.Success)
+                {
+                    Logfile.Log("Apache Config AllowOverride not found!!!");
+                    return temp;
+                }
+                else if (m.Groups.Count != 6 || m.Groups[3].Value != "AllowOverride All")
+                {
+                    string oldValue = "";
+                    if (m.Groups.Count > 3)
+                        oldValue = m.Groups[3].Value;
+
+                    Logfile.Log("Apache Config changed! Old: " + oldValue);
+                }
+                       
+                temp = r.Replace(temp, "$1$2AllowOverride All$4$5");
+            }
+            
+            if (write)
+                File.WriteAllText(path, temp);
+
+            return temp;
         }
 
         public static void DownloadUpdateAndInstall()
