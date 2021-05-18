@@ -62,6 +62,8 @@
     <Compile Include="UnitTestOSMMapGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="apache2-ready.conf" />
+    <None Include="apache2.conf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
