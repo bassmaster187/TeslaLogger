@@ -1,7 +1,7 @@
 # Version 1.48.1
 - Admin Panel can now be proteced by password. Check menu/settings/Teslalogger Adminpanel credentials
-- new special flag (no UI in settings.php yet): +occ "on charge complete" sets target soc on charge complete, see https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md 
-- new settings in settings.json (no UI in settings.php yet): StreamingPos (bool) enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every fiv seconds on normal mode), this will increase your database's size a lot
+- new special flag (no UI in geoadd.php yet): +occ "on charge complete" sets target soc on charge complete, see https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md 
+- new settings in settings.json (no UI in settings.php yet): StreamingPos (bool) enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every fiv seconds on normal mode), this will increase your database's size a lot, ill increase wear on the SD card and result in huge backups
 
 # Version 1.48.0
 - Stable, well tested major release. Contains all features and bug fixes since 1.48.0
