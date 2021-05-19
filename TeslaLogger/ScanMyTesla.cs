@@ -162,6 +162,12 @@ namespace TeslaLogger
                                 case "7":
                                     car.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
                                     break;
+                                case "9":
+                                    car.currentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value);
+                                    break;
+                                case "11":
+                                    car.currentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value);
+                                    break;
                                 case "27":
                                     car.currentJSON.SMTCellImbalance = Convert.ToDouble(line.Value);
                                     break;
@@ -184,6 +190,9 @@ namespace TeslaLogger
                                     break;
                                 case "43":
                                     car.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                                    break;
+                                case "71":
+                                    car.currentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value);
                                     break;
                                 default:
                                     break;
