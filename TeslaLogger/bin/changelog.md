@@ -1,10 +1,13 @@
+# Version 1.48.3
+- UI for geofence / "on charge complete" [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#set-new-charge-limit-when-charging-is-complete)
+- UI for geofence / Don't combine charging sessions [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#do-not-combine-chargin-sessions)
+- UI for StreamingPos in settings. Enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+
 # Version 1.48.2
 - BF: Authentification to Tesla's server not possible
 
 # Version 1.48.1
 - Admin Panel can now be proteced by password. Check menu/settings/Teslalogger Adminpanel credentials
-- new special flag (no UI in geoadd.php yet): +occ "on charge complete" sets target soc on charge complete, see [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md)
-- new settings in settings.json (no UI in settings.php yet): StreamingPos (bool) enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 
 # Version 1.48.0
 - Stable, well tested major release. Contains all features and bug fixes since 1.48.0

@@ -104,6 +104,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="bin\changelog.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
