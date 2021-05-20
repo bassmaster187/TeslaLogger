@@ -255,3 +255,5 @@ Charging=Charging
 Missing=Missing
 Ø Temperatur=Ø Temperatur
 Verbraucht=Consumed
+
+StreamingPosHelp=<h1>Position by StreamingAPI</h1> enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every fiv seconds on normal mode), this will increase your database's size a lot, ill increase wear on the SD card and result in huge backups

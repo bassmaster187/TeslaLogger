@@ -46,7 +46,8 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'update' => $update,
 'Range' => $Range,
 'defaultcar' => $defaultcar,
-'defaultcarid' => $defaultcarid
+'defaultcarid' => $defaultcarid,
+'StreamingPos' => $_POST["StreamingPos"]
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
