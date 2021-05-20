@@ -922,6 +922,7 @@ namespace TeslaLogger
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
             Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
+            Tools._StreamingPos = null;
             WriteString(response, @"OK");
         }
 
