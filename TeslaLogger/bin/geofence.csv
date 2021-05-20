@@ -978,7 +978,7 @@ be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
 
 chargeIT DE-Coburg Arena, 50.287087, 10.980806
 chargeIT DE-Coburg Audi Gelder & Sorg, 50.271384,10.968691
-chargeID DE-Kaufbeuren, 47.88613,10.638898, 10
+chargeIT DE-Kaufbeuren, 47.88613,10.638898, 10
 chargeIT DE-Memmingerberg, 47.990153, 10.230113
 chargeIT DE-Nördlingen, 48.843866, 10.503327
 chargeIT DE-Petershausen, 48.416818, 11.478081
@@ -1790,6 +1790,7 @@ Lidl CH-Allendorf, 47.193323, 8.818533
 Lidl CH-Böckten, 47.462469, 7.838388
 Lidl CH-Dübendorf, 47.395056, 8.638741
 Lidl CH-Einsideln, 47.138634, 8.745218
+Lidl CH-Frauenfeld, 47.56601, 8.90789, 15
 Lidl CH-Grenchen, 47.193146,7.399561, 60
 Lidl CH-Lausen, 47.470612, 7.765637
 Lidl CH-Schlieren, 47.399469, 8.432234
@@ -1860,6 +1861,7 @@ ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
 
+swisscharge CH-Chur,46.847542,9.501609, 10
 swisscharge CH-Neftenbach, 47.521195,8.657516
 swisscharge CH-Rossens, 46.721205,7.089191
 swisscharge CH-Turbenthal, 47.4351, 8.850689
@@ -1940,6 +1942,7 @@ DE Mölln VW Riemer, 53.623707, 10.678989
 DE München Messe, 48.136766, 11.691608
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
+DE Offenbach Betriebshof OVB, 50.1025541, 8.7788451, 20
 DE Offenbach Honda, 50.08437, 8.839102
 DE Offenburg Shell Tankstelle, 48.464972, 7.931808
 DE Oldenburg Media Markt, 53.161348, 8.172719
