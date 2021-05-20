@@ -37,6 +37,7 @@ namespace TeslaLogger
         private static string _defaultcarid = "";
         public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
+        public static bool? _StreamingPos = null;
 
         internal static bool UseNearbySuCService()
         {
@@ -542,6 +543,9 @@ namespace TeslaLogger
         {
             try
             {
+                if (_StreamingPos != null)
+                    return (bool)_StreamingPos;
+
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
                 if (!File.Exists(filePath))
                 {
@@ -553,14 +557,19 @@ namespace TeslaLogger
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
                     if(bool.TryParse(j["StreamingPos"], out bool streamingPos)) {
+                        Logfile.Log("StreamingPos: " + streamingPos);
+                        _StreamingPos = streamingPos;
                         return streamingPos;
                     }
                 }
+
+                Logfile.Log("StreamingPos not found in settings.json");
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
             }
+            _StreamingPos = false;
             return false;
         }
 
