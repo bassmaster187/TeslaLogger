@@ -192,6 +192,7 @@ Einschlafen=Adormecer
 Automatic updates=Actualizações Automáticas
 
 TextShare=<h1>Partilhar curvas de carregamento e degradação anonimamente</h1>Gostaríamos de criar uma base de dados anónima para comparar curvas de carregamento e de degradação das baterias. Isto permite que compare o seu veículo com outros a qualquer momento e detectar antecipadamente qualquer desvio fora do habitual. A funcionalidade também poderá ser usada para justificar o bom estado da bateria numa venda no future. Ou, em sentido contrário, poder provar junto da Tesla no caso de performance reduzida.<br><br>Gostaria de partilhar as suas curvas de carregamentos rápidos e curvas de degradação com outros utilizadores de Teslas de forma totalmente anónima? Esta decisão pode ser alterada a qualquer momento no ecrã de configuração.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Partilhar dados anonimamente
 TextSuspendTeslalogger=O Teslalogger foi interrompido! Os dados não serão guardados!
 Resume Teslalogger=Retomar o Teslalogger

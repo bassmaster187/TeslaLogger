@@ -215,6 +215,7 @@ Einschlafen=Dormiente
 Automatic updates=Aggiornamenti automatici
 
 TextShare=<h1>Condividere curve di carica / degradazione in modo anonimo</h1>Vorremmo creare un database anonimo per confrontare le curve di degrado e le curve di carica. Ciò ti consente di confrontare il tuo veicolo con gli altri in qualsiasi momento e di rilevare qualsiasi deviazione insolita in una fase iniziale. Questo può essere utilizzato anche in seguito per dimostrare, durante una eventuale vendita del veicolo, che la batteria è ancora completamente efficiente. In caso negativo, puoi dimostrare più facilmente una prestazione ridotta rispetto a Tesla Motors. <br> <br> Ti piacerebbe condividere le tue curve di ricarica rapida e le curve di degrado con altri proprietari Tesla in modo completamente anonimo? Questa decisione può essere modificata in qualsiasi momento nella schermata delle impostazioni.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Condividi i dati anonimamente
 TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzati!
 Resume Teslalogger=Riprendi Teslalogger
