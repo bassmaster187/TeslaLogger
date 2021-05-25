@@ -154,7 +154,7 @@ Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
 Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
-Supercharger-V3 DE-Illertissen, 48.21852454, 10.1273538, 15
+Supercharger-V3 DE-Illertissen, 48.21882, 10.1276145, 15
 Supercharger DE-Jettingen, 48.41105, 10.4403
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger DE-Kamen, 51.5701781, 7.675317
@@ -173,7 +173,7 @@ Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
-Supercharger DE-Münchberg-Nord, 50.202824,11.776593, 18
+Supercharger DE-Münchberg-Nord, 50.202822,11.776626, 18
 Supercharger-V3 DE-Münchberg-Nord, 50.202824,11.776593, 18
 Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
@@ -328,6 +328,7 @@ Supercharger FR-Clermont-Ferrand, 45.785937, 3.141488
 Supercharger FR-Coings, 46.863058, 1.716048
 Supercharger FR-Calais, 50.924425, 1.80414
 Supercharger FR-Calais - Eurotunnel Terminal, 50.935031, 1.812951
+Supercharger-V3 FR-Dardilly, 45.820165,4.760176
 Supercharger FR-Dommartin-lès-Cuiseaux, 46.496179, 5.310394
 Supercharger FR-Eurotunnel Flexiplus Lounge, 50.929973, 1.813182
 Supercharger FR-Fontainebleau, 48.3495627, 2.6067816
@@ -949,7 +950,7 @@ Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Memmingen Media-Markt, 48.0023077, 10.167253
 Allego DE-Mindelheim, 48.0352942, 10.501454
-Allego DE-Münchberg, 50.202775, 11.7769, 4
+Allego DE-Münchberg, 50.20277, 11.77692, 4
 Allego DE-Münster ATU, 51.92794, 7.587932
 Allego DE-Neumarkt Autohof, 49.312989, 11.475396, 5
 Allego DE-Osnabrück, 52.2757328, 8.0739587, 10
@@ -1109,6 +1110,7 @@ EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
+EnBW DE-Kirchheim Trigema, 50.832535,9.573169, 5
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
@@ -1366,9 +1368,9 @@ Ionity DE-Hohenwarsleben, 52.173898, 11.49512, 11
 Ionity DE-Holzheim, 48.381890, 10.086035
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
-Ionity DE-Illertissen, 48.219137, 10.127765, 10
+Ionity DE-Illertissen, 48.219287,10.127852, 10
 Ionity DE-Katzenfurt Süd, 50.620347, 8.362918, 5
-Ionity DE-Kirchheim (Tal), 50.833837, 9.570775
+Ionity DE-Kirchheim (Tal), 50.833695, 9.5707772, 20
 Ionity DE-Köschinger Forst Ost, 48.836599, 11.472234
 Ionity DE-Köschinger Forst West, 48.837085, 11.469313
 Ionity DE-Lechwiesen Nord, 48.059266, 10.846791
