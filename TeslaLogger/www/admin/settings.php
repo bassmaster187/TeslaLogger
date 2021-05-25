@@ -232,7 +232,7 @@ echo(menu("Settings"));
 <table>
 <tr><td><h1 style="margin-top:0px;"><?php t("Credentials"); ?></h1></td><td></td></tr>
 <tr><td>MyTesla</td><td><button onclick="window.location.href='password.php';"><?php t("Credentials"); ?></button></td></tr>
-<tr><td>Teslalogger Adminpanel</td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Zugangsdaten"); ?></button></td></tr>
+<tr><td>Teslalogger Adminpanel</td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 	<select id="Language">
