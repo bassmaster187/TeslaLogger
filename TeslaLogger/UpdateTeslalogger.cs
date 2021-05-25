@@ -504,6 +504,9 @@ CREATE TABLE superchargerstate(
 
         public static string UpdateApacheConfig(string path = "/etc/apache2/apache2.conf", bool write = true)
         {
+            if (!File.Exists(path))
+                return "";
+
             string temp = File.ReadAllText(path);
             if (temp.Contains("<Directory /var/www/>"))
             {
