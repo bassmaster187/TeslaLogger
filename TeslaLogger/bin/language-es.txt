@@ -133,25 +133,26 @@ Online=Online
 Visited=Visitado
 
 #index.php
-Fahrzeuginfo=Información del coche
+Car Info=Información del coche
 Status=Estado
 Typical Range=Autonomía típica
-KM Stand=Odómetro
+Odometer=Odómetro
 Car Version=Versión del coche
-Letzter Trip=Último Viaje
-Dauer=Duración
-Distanz=Distancia
-Max km/h=Km/h máximos
+Last Trip=Último Viaje
+Duration=Duración
+Distance=Distancia
+Max kph=Km/h máximos
 PS=Cv
 Current Pos=Pos. Actual
 Last Update=Última actualización
-Wird geladen=Cargando
+Charging=Cargando
 Done=Hecho
 Done at=Hecho a
 Battery Heater=Acondicionador de batería
 Sentry Mode=Modo Centinela
 Preconditioning=Preacondicionando
 Offline=Offline
+Falling asleep=Intentando dormir
 
 #menu.php
 Logfile=Fichero de log

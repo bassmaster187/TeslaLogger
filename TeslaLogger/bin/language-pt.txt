@@ -133,16 +133,17 @@ Online=Ligado
 Visited=Visitado
 
 #index.php
-Fahrzeuginfo=Informação do Veículo
+Car Info=Informação do Veículo
 Status=Estado
 Typical Range=Autonomia Típica
-KM Stand=Odómetro
+Odometer=Odómetro
 Car Version=Versão do Veículo
-Letzter Trip=Última Viagem
-Dauer=Duração
-Distanz=Distância
-Max km/h=km/h Máximos
+Last Trip=Última Viagem
+Duration=Duração
+Distance=Distância
+Max kph=km/h Máximos
 PS=CV
+Falling asleep=Adormecer
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Credenciais Tesla

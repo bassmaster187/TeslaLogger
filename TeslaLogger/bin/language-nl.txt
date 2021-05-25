@@ -133,25 +133,26 @@ Online=Online
 Visited=Bezocht
 
 #index.php
-Fahrzeuginfo=Voertuig informatie
+Car Info=Voertuig informatie
 Status=Status
 Typical Range=Gemiddeld bereik
-KM Stand=Kilometerteller
+Odometer=Kilometerteller
 Car Version=Auto versie
-Letzter Trip=Laatste rit
-Dauer=Duur
-Distanz=Afstand
-Max km/h=Max km/h
+Last Trip=Laatste rit
+Duration=Duur
+Distance=Afstand
+Max kph=Max km/h
 PS=PK
 Current Pos=Huidige positie
 Last Update=Laatste update
-Wird geladen=Bezig met laden
+Charging=Bezig met laden
 Done=Gedaan
 Done at=Klaar om
 Battery Heater=Batterijverwarmer
 Sentry Mode=Sentry Mode
 Preconditioning=Voorconditionering
 Offline=Offline
+Falling asleep=In slaap vallen
 
 #menu.php
 Logfile=Logbestand

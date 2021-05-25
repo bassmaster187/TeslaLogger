@@ -133,25 +133,26 @@ Online=Online
 Visited=Visited
 
 #index.php
-Fahrzeuginfo=Car Info
+Car Info=Car Info
 Status=Status
 Typical Range=Typical Range
-KM Stand=Odometer
+Odometer=Odometer
 Car Version=Car Version
-Letzter Trip=Last Trip
-Dauer=Duration
-Distanz=Distance
-Max km/h=Max kph
+Last Trip=Last Trip
+Duration=Duration
+Distance=Distance
+Max kph=Max kph
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
-Wird geladen=Charging
+Charging=Charging
 Done=Done
 Done at=Done at
 Battery Heater=Battery Heater
 Sentry Mode=Sentry Mode
 Preconditioning=Preconditioning
 Offline=Offline
+Falling asleep=Falling asleep
 
 #menu.php
 Logfile=Logfile

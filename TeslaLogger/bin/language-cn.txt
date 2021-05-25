@@ -133,25 +133,27 @@ Online=在线
 Visited=行驶轨迹记录
 
 #index.php
-Fahrzeuginfo=车辆信息
+Car Info=车辆信息
 Status=状态
 Typical Range=典型续航里程
-KM Stand=里程表
+Odometer=里程表
 Car Version=车辆版本
-Letzter Trip=上一次行程
-Dauer=时长
-Distanz=距离
-Max km/h=最大速度（公里每小时）
+Last Trip=上一次行程
+Duration=时长
+Distance=距离
+Max kph=最大速度（公里每小时）
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
-Wird geladen=充电
+Charging=充电
 Done=完成
 Done at=完成时间
 Battery Heater=电池加热器
 Sentry Mode=哨兵模式
 Preconditioning=预处理
 Offline=离线
+Falling asleep=进入休眠
+
 
 #menu.php
 Logfile=日志

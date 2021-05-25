@@ -14,3 +14,21 @@ Missing=Fehlen
 Last Driven=Letzte Fahrt  * * * 
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
+
+#Index.php
+Battery Heater=Batterie-Heizung
+Car Version=Fahrzeug Version
+Cell Imbalance=Zellen-Imbalance
+Cell Temp=Zell Temperatur
+Current Pos=Aktuelle Position
+Duration=Dauer
+Distance=Distanz
+Done=Fertig
+Done at=Fertig um
+Falling asleep=Einschlafen
+Car Info=Fahrzeuginfo
+Odometer=KM Stand
+Last Update=Letztes Update
+Last Trip=Letzter Trip
+Charging=Wird geladen
+Max kph=Max km/h

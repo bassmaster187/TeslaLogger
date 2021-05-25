@@ -123,16 +123,17 @@ Online=Online
 Visited=Besøkt
 
 #index.php
-Fahrzeuginfo=Bilinfo
+Car Info=Bilinfo
 Status=Status
 Typical Range=Typical Range
-KM Stand=Kilometerteller
+Odometer=Kilometerteller
 Car Version=Bil versjon
-Letzter Trip=Siste Trip
-Dauer=Varighet
-Distanz=Distanse
-Max km/h=Maks km/t
+Last Trip=Siste Trip
+Duration=Varighet
+Distance=Distanse
+Max kph=Maks km/t
 PS=PS
+Falling asleep=Sovne
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
