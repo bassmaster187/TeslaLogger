@@ -160,9 +160,9 @@ function CarsCombobox($cars, $selected)
 				echo ("$('#radio_km').prop('checked', true);\r\n");
 				
 			if(!empty($Language))
-				echo ("$('#radio_$Language').prop('checked', true);\r\n");
-			else
-				echo ("$('#radio_de').prop('checked', true);\r\n");
+				echo ("$('#Language').val('$Language');\r\n");
+			else			
+				echo ("$('#Language').val('de');\r\n");
 				
 			if (isset($URL_Admin))
 				echo ("$('#URL_Admin').val('$URL_Admin');\r\n");
@@ -203,7 +203,7 @@ function CarsCombobox($cars, $selected)
 		Power: $("input:radio[name ='power']:checked").val(),
 		Temperature: $("input:radio[name ='Temperature']:checked").val(),
 		Length: $("input:radio[name ='Length']:checked").val(),
-		Language: $("input:radio[name ='Language']:checked").val(),
+		Language: $("#Language").find("option:selected").val(),
 		URL_Admin: $("#URL_Admin").val(),
 		URL_Grafana: $("#URL_Grafana").val(),
 		HTTPPort: $("#HTTPPort").val(),
@@ -235,16 +235,18 @@ echo(menu("Settings"));
 <tr><td>Teslalogger Adminpanel</td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Zugangsdaten"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
-		<input id="radio_da" type="radio" value="da" name="Language" /> Dansk<br>
-		<input id="radio_de" type="radio" value="de" name="Language" /> Deutsch<br>
-		<input id="radio_en" type="radio" value="en" name="Language" /> English<br>
-		<input id="radio_es" type="radio" value="es" name="Language" /> Español<br>
-		<input id="radio_it" type="radio" value="it" name="Language" /> Italiano<br>
-		<input id="radio_nl" type="radio" value="nl" name="Language" /> Nederlands<br>
-		<input id="radio_no" type="radio" value="no" name="Language" /> Norsk<br>
-		<input id="radio_pt" type="radio" value="pt" name="Language" /> Português<br>
-		<input id="radio_ru" type="radio" value="ru" name="Language" /> Русский<br>
-		<input id="radio_cn" type="radio" value="cn" name="Language" /> 漢語<br>		
+	<select id="Language">
+		<option value="da">Dansk</option>
+		<option value="de">Deutsch</option>
+		<option value="en">English</option>
+		<option value="es">Español</option>
+		<option value="it">Italiano</option>
+		<option value="nl">Nederlands</option>
+		<option value="no">Norsk</option>
+		<option value="pt">Português</option>
+		<option value="ru">Русский</option>
+		<option value="cn">漢語</option>
+	</select>
 	</td></tr>
 	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
 	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <?php t("Celsius"); ?><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <?php t("Fahrenheit"); ?> </td></tr>
@@ -261,10 +263,6 @@ echo(menu("Settings"));
 	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
 	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <?php t("Enable"); ?></td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png"/></a></td></tr>
 	<tr><td><b><?php t("Position by StreamingAPI"); ?>:</b></td><td><input id="StreamingPos" type="checkbox" value="StreamingPos"> <?php t("Enable"); ?></td><td><img id="StreamingPosHelp" src="img/icon-help-24.png" class="pointer"/></td></tr>
-	
-	
-	
-	
 <?php
 
 	$url = GetTeslaloggerURL("getallcars");
