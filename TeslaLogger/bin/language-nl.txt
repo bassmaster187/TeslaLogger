@@ -133,25 +133,26 @@ Online=Online
 Visited=Bezocht
 
 #index.php
-Fahrzeuginfo=Voertuig informatie
+Car Info=Voertuig informatie
 Status=Status
 Typical Range=Gemiddeld bereik
-KM Stand=Kilometerteller
+Odometer=Kilometerteller
 Car Version=Auto versie
-Letzter Trip=Laatste rit
-Dauer=Duur
-Distanz=Afstand
-Max km/h=Max km/h
+Last Trip=Laatste rit
+Duration=Duur
+Distance=Afstand
+Max kph=Max km/h
 PS=PK
 Current Pos=Huidige positie
 Last Update=Laatste update
-Wird geladen=Bezig met laden
+Charging=Bezig met laden
 Done=Gedaan
 Done at=Klaar om
 Battery Heater=Batterijverwarmer
 Sentry Mode=Sentry Mode
 Preconditioning=Voorconditionering
 Offline=Offline
+Falling asleep=In slaap vallen
 
 #menu.php
 Logfile=Logbestand
@@ -176,11 +177,11 @@ Passwort wiederholen=Wachtwoord herhalen
 Speichern=Opslaan
 
 #settings.php
-Zugangsdaten=Inloggegevens
+Credentials=Inloggegevens
 Language=Taal
-Leistung=Prestaties
+Power=Prestaties
 Temperatur=Temperatuur
-Längenmaß=Lengte-eenheid
+Unit of length=Lengte-eenheid
 URL Admin Panel=URL Admin omgeving
 
 #geoadd.php
@@ -211,10 +212,11 @@ Ja=Ja
 Nein=Nee
 
 Einschlafen=In slaap vallen
-Automatische Updates=Automatiske oppdateringer
+Automatic updates=Automatiske oppdateringer
 
 TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Data anoniem delen
 TextSuspendTeslalogger=Teslalogger is gestopt! De gegevens worden niet gelogd!
 Resume Teslalogger=Start Teslalogger
-Reichweite=Bereik
+Range=Bereik

@@ -49,7 +49,7 @@ namespace TeslaLogger
 
         public enum UpdateType { all, stable, none};
 
-        internal static SortedList<DateTime, string> debugBuffer = new SortedList<DateTime, string>();
+        internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
 
         public static void SetThread_enUS()
         {
@@ -160,17 +160,12 @@ namespace TeslaLogger
         private static void AddToBuffer(string msg)
         {
             DateTime dt = DateTime.Now;
-            if (debugBuffer.ContainsKey(dt))
-            {
-                dt = dt.AddMilliseconds(1);
-            }
             try
             {
-                debugBuffer.Add(DateTime.Now, msg);
-                if (debugBuffer.Count > 500)
+                debugBuffer.Enqueue(new Tuple<DateTime, string>(DateTime.Now, msg));
+                while (debugBuffer.Count > 500)
                 {
-                    DateTime firstKey = debugBuffer.Keys.First();
-                    debugBuffer.Remove(firstKey);
+                    _ = debugBuffer.Dequeue();
                 }
             }
             // ignore failed inserts

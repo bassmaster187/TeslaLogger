@@ -64,6 +64,9 @@ namespace TeslaLogger
         public double? SMTCellImbalance = null;
         public double? SMTBMSmaxCharge = null;
         public double? SMTBMSmaxDischarge = null;
+        public double? SMTACChargeTotal = null;
+        public double? SMTDCChargeTotal = null;
+        public double? SMTNominalFullPack = null;
 
         public double? SMTSpeed = null;
         public double? SMTBatteryPower = null;
@@ -188,6 +191,9 @@ namespace TeslaLogger
                     values.Add("SMTCellImbalance", SMTCellImbalance);
                     values.Add("SMTBMSmaxCharge", SMTBMSmaxCharge);
                     values.Add("SMTBMSmaxDischarge", SMTBMSmaxDischarge);
+                    values.Add("SMTACChargeTotal", SMTACChargeTotal);
+                    values.Add("SMTDCChargeTotal", SMTDCChargeTotal);
+                    values.Add("SMTNominalFullPack", SMTNominalFullPack);
                 }
 
                 Address addr = Geofence.GetInstance().GetPOI(latitude, longitude, false);

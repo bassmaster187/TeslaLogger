@@ -138,7 +138,7 @@ else
 
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
-				$('#car_statusLabel').text("<?php t("Wird geladen"); ?>:");
+				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
 				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + 
 				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ 
 				jsonData["charger_phases"]+"P<br><?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
@@ -147,7 +147,7 @@ else
 			}
 			else if (jsonData["driving"])
 			{
-				$('#car_statusLabel').text("<?php t("Fahren"); ?>:");
+				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
 				var str = "";
 				if (LengthUnit == "mile")
 					str = (jsonData["speed"]/ 1.609).toFixed(0) + " mph / "
@@ -191,7 +191,7 @@ else
 			else if (jsonData["falling_asleep"])
 			{
 				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Einschlafen"); ?>");
+				$('#car_status').text("<?php t("Falling asleep"); ?>");
 
 				hideSMT();
 			}
@@ -389,7 +389,7 @@ function ShowInfo()
   </div>
   <div style="float:left;">
 	  <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Fahrzeuginfo"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
@@ -397,20 +397,20 @@ function ShowInfo()
 	  <tr id='CellImbalanceRow'><td><b><?php t("Cell Imbalance"); ?>:</b></td><td><span id="CellImbalance"></span></td></tr>
 	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<span id="full_battery_range_km_span"><br>= <span id="full_battery_range_km">---</span> / 100 %</span>
 </td></tr>
-	  <tr><td><b><?php t("KM Stand"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
+	  <tr><td><b><?php t("Odometer"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
     </table>
 
 	  <table style="float:left;" class="THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Letzter Trip"); ?></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Last Trip"); ?></td></thead>
 	  <tr><td width="130px"><b><?php t("Start"); ?>:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
-	  <tr><td><b><?php t("Dauer"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
-	  <tr><td><b><?php t("Distanz"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km">km</span></td></tr>
+	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
+	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km">km</span></td></tr>
 	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
 	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm">Wh/km</span></td></tr>
-	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh">km/h</span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
+	  <tr><td><b><?php t("Max kph"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh">km/h</span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
 	  </table>
   </div>
 

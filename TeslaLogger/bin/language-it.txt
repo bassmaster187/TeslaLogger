@@ -133,25 +133,26 @@ Online=Online
 Visited=Visitato
 
 #index.php
-Fahrzeuginfo=Informazioni autovettura
+Car Info=Informazioni autovettura
 Status=Status
 Typical Range=Autonomia tipica
-KM Stand=Contachilometri
+Odometer=Contachilometri
 Car Version= Versione autovettura
-Letzter Trip=Ultimo viaggio
-Dauer=Durata
-Distanz=Distanza
-Max km/h= Max Km/h
+Last Trip=Ultimo viaggio
+Duration=Durata
+Distance=Distanza
+Max kph= Max Km/h
 PS=HP
 Current Pos=Posizione attuale
 Last Update=Ultimo aggiornamento
-Wird geladen=Caricamento in corso
+Charging=Caricamento in corso
 Done=Fatto
 Done at=Fatto a
 Battery Heater=Riscaldatore della batteria
 Sentry Mode=Sentry Mode
 Preconditioning=Precondizionamento
 Offline=Disconnesso
+Falling asleep=Dormiente
 
 #menu.php
 Logfile=File di registro
@@ -176,11 +177,11 @@ Passwort wiederholen=Ripeti la password
 Speichern=Salva
 
 #settings.php
-Zugangsdaten=Credenziali
+Credentials=Credenziali
 Language=Lingua
-Leistung=Potenza
+Power=Potenza
 Temperatur=Temperatura
-Längenmaß=Unità di misura
+Unit of length=Unità di misura
 URL Admin Panel=Pannello di controllo
 
 #geoadd.php
@@ -211,13 +212,14 @@ Ja=Si
 Nein=No
 
 Einschlafen=Dormiente
-Automatische Updates=Aggiornamenti automatici
+Automatic updates=Aggiornamenti automatici
 
 TextShare=<h1>Condividere curve di carica / degradazione in modo anonimo</h1>Vorremmo creare un database anonimo per confrontare le curve di degrado e le curve di carica. Ciò ti consente di confrontare il tuo veicolo con gli altri in qualsiasi momento e di rilevare qualsiasi deviazione insolita in una fase iniziale. Questo può essere utilizzato anche in seguito per dimostrare, durante una eventuale vendita del veicolo, che la batteria è ancora completamente efficiente. In caso negativo, puoi dimostrare più facilmente una prestazione ridotta rispetto a Tesla Motors. <br> <br> Ti piacerebbe condividere le tue curve di ricarica rapida e le curve di degrado con altri proprietari Tesla in modo completamente anonimo? Questa decisione può essere modificata in qualsiasi momento nella schermata delle impostazioni.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Condividi i dati anonimamente
 TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzati!
 Resume Teslalogger=Riprendi Teslalogger
-Reichweite=Range
+Range=Range
 
 Ladekosten=Costi di ricarica
 Ladesäule=Stazione di ricarica

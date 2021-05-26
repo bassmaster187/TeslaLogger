@@ -172,25 +172,26 @@ Außentemperatur Tagesmittel [°F]=Среднесуточная наружная
 Visited=Посещенны места
 
 #index.php
-Fahrzeuginfo=Информация об автомобиле
+Car Info=Информация об автомобиле
 Status=Статус
 Typical Range=Типичный запас хода
-KM Stand=Одометр
+Odometer=Одометр
 Car Version=Версия прошивки
-Letzter Trip=Последнaя поездка
-Dauer=Продолжительность
-Distanz=Расстояние
-Max km/h=Максимум км/ч
+Last Trip=Последнaя поездка
+Duration=Продолжительность
+Distance=Расстояние
+Max kph=Максимум км/ч
 PS=PS
 Current Pos=Текущая позиция
 Last Update=Последнее обновление
-Wird geladen=Заряжается
+Charging=Заряжается
 Done=Готово
 Done at=Готово в
 Battery Heater=Подогрев батареи
 Sentry Mode=Sentry Mode
 Preconditioning=Подогрев салона
 Offline=не в сети
+Falling asleep=Засыпает
 
 #menu.php
 Logfile=Лог-файл
@@ -216,11 +217,11 @@ Passwort wiederholen=повторитe пароль
 Speichern=сохранить
 
 #settings.php
-Zugangsdaten=дaнные для авторизaции
+Credentials=дaнные для авторизaции
 Language=язык
-Leistung=мощность
+Power=мощность
 Temperatur=температура
-Längenmaß=мeра длины
+Unit of length=мeра длины
 URL Admin Panel=ссылка административной панeли
 All=Все
 Stable=Стабильные
@@ -269,13 +270,14 @@ Nein=нет
 Car=Автомобиль
 
 Einschlafen=Засыпает
-Automatische Updates=Автоматические обновления
+Automatic updates=Автоматические обновления
 
 TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими водителями Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Делитесь данными анонимно
 TextSuspendTeslalogger=Teslalogger остановлен! Данные не сохаряняются!
 Resume Teslalogger=Включить Teslalogger
-Reichweite=Пробег
+Range=Пробег
 
 Ladekosten=Стоимость зарядок
 Ladesäule=Заряднaя станция

@@ -123,16 +123,17 @@ Online=Online
 Visited=Besøkt
 
 #index.php
-Fahrzeuginfo=Bilinfo
+Car Info=Bilinfo
 Status=Status
 Typical Range=Typical Range
-KM Stand=Kilometerteller
+Odometer=Kilometerteller
 Car Version=Bil versjon
-Letzter Trip=Siste Trip
-Dauer=Varighet
-Distanz=Distanse
-Max km/h=Maks km/t
+Last Trip=Siste Trip
+Duration=Varighet
+Distance=Distanse
+Max kph=Maks km/t
 PS=PS
+Falling asleep=Sovne
 
 #password.php
 Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
@@ -143,11 +144,11 @@ Passwort wiederholen=Gjenta passordet
 Speichern=Lagre
 
 #settings.php
-Zugangsdaten=Credentials
+Credentials=Credentials
 Language=Språk
-Leistung=Effekt
+Power=Effekt
 Temperatur=Temperatur
-Längenmaß=Enhet lengde
+Unit of length=Enhet lengde
 URL Admin Panel=URL Admin Panel
 
 #geoadd.php
@@ -157,10 +158,11 @@ Ja=Ja
 Nein=Ikke
 
 Einschlafen=Sovne
-Automatische Updates=Automatiske oppdateringer
+Automatic updates=Automatiske oppdateringer
 
 TextShare=<h1> Del ladekurver / nedbrytningskurver anonymt </h1> Vi ønsker å sette opp en anonym database som du kan sammenligne degraderingskurver og ladekurver med. Så du kan sammenligne kjøretøyet ditt med andre når som helst og identifisere et uvanlig avvik tidlig. Dette kan også brukes senere for å kunne bevise på salgshøyden at batteriet fremdeles er fullt effektivt. I negativt tilfelle er det lettere å bevise en redusert ytelse sammenlignet med Tesla Motors. <br> <br> Vil du dele hurtigladekurver og degraderingskurver anonymt med andre Tesla-drivere? Denne avgjørelsen kan endres når som helst i innstillingene.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
 Resume Teslalogger=Fortsett Teslalogger
-Reichweite=Range
+Range=Range

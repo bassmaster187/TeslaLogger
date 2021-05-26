@@ -332,7 +332,7 @@ if (isset($id))
 				<tr><td>🔌 Charger</td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
 				<tr><td><h4 style="margin-top: 20px;">Charging</h4></td></tr>
 				<tr><td>Copy Charging Costs</td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td>Don't Combine Chargin Sessions</td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
+				<tr><td>Don't Combine Charging Sessions</td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td>Set Charge Limit</td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="scl_limit" placeholder="100"/>%</td></tr>
 				<tr><td>Set Charge Limit After Charging</td><td> <input id="occ" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="occ_limit" placeholder="75"/>%</td></tr>
 				<tr><td>Open Charge Port</td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td>Gear</td>
