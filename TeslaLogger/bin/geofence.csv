@@ -692,6 +692,7 @@ Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bay City MI, 43.622212, -83.932216
 Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
+Supercharger US-Brewer ME, 44.775854,-68.734722
 Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
 Supercharger US-Bristol TN, 36.591663, -82.261292
 Supercharger US-Burleson TX, 32.464365,-97.26451
@@ -701,6 +702,7 @@ Supercharger US-Cabazon CA,33.931388,-116.820265
 Supercharger US-Cambridge OH, 40.003559, -81.574903
 Supercharger US-Catoosa OK, 36.167589, -95.766032
 Supercharger US-Channelview TX, 29.784662, -95.110606
+Supercharger US-Chantilly VA, 38.913606,-77.486836
 Supercharger US-Charleston WV, 38.35475, -81.642864
 Supercharger-V3 US-Chestertown NY, 43.665431,-73.784933
 Supercharger-V3 US-Chillicothe OH, 39.358367, -82.977389
@@ -727,6 +729,7 @@ Supercharger US-Evanston WY, 41.26299,-110.985504
 Supercharger US-Eau Claire WI, 44.770877,-91.437202
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
+Supercharger US-Freeport ME, 43.858727,-70.104076
 Supercharger US-Gaithersburg MD, 39.118133,-77.202291
 Supercharger US-Gardnerville NV, 38.696494,-119.548509
 Supercharger US-Gaylord MI, 45.025599, -84.722179
@@ -745,6 +748,7 @@ Supercharger US-Howard WI, 44.536272,-88.077732
 Supercharger US-Independence MO, 39.040819, -94.36928
 Supercharger US-Inyokern CA, 35.646456, -117.812561
 Supercharger US-Jackson TN, 35.660411, -88.855634
+Supercharger US-Kennebunk ME, 43.409428,-70.558581
 Supercharger US-Kingston NY,41.9419,-74.027369
 Supercharger US-Knoxville TN, 35.901323,-84.149622
 Supercharger US-Kuttawa KY, 37.073581, -88.124831
@@ -774,6 +778,7 @@ Supercharger US-Mammoth Lakes CA, 37.644533, -118.96555
 Supercharger US-Marshall MI, 42.292068, -84.96416
 Supercharger US-Maumee OH, 41.578401, -83.664689
 Supercharger US-Mauston WI, 43.795476,-90.059363
+Supercharger US-Medway ME, 45.609342,-68.522743
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
 Supercharger US-Menifee CA, 33.679638, -117.173752
@@ -793,6 +798,7 @@ Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
 Supercharger US-Primm NV, 35.610592, -115.387932
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
 Supercharger US-Rawlins WY, 41.79092, -107.210242
+Supercharger US-Raleigh NC, 35.83554,-78.642814
 Supercharger-V3 US-Richmond IN, 39.867882, -84.887238
 Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Richmond VA, 37.529808, -77.353916
@@ -800,6 +806,7 @@ Supercharger US-Rock Springs WY, 41.580713, -109.262277
 Supercharger US-Rolla MO, 37.939942, -91.801636
 Supercharger US-Roseville CA - Galleria Boulevard, 38.768016, -121.263461
 Supercharger-V3 US-Rolling Meadows IL, 42.049748, -87.994922
+Supercharger US-Portland ME, 43.664543,-70.269452
 Supercharger US-Salina KS, 38.877354, -97.618643
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-San Diego CA, 32.902115,-117.193604
@@ -811,6 +818,7 @@ Supercharger US-Skokie IL, 42.009046,-87.763186
 Supercharger US-Southlake TX, 32.943636, -97.133889
 Supercharger US-Springfield IL, 39.748851, -89.671111
 Supercharger US-Springfield MO, 37.252146, -93.265243
+Supercharger US-Springfield VA, 38.774594,-77.177393
 Supercharger US-Staunton VA, 38.133369, -79.043456
 Supercharger US-Strongsville OH, 41.343339, -81.824921
 Supercharger US-St. Charles MO, 38.78214, -90.532841
@@ -847,6 +855,7 @@ Urbancharger US-Glendale CA, 34.145145, -118.257072
 Urbancharger US-Irvine CA - Michelson Drive,33.673052,-117.844639
 Urbancharger US-Las Vegas NV - Tivoli Village, 36.168785, -115.286674
 Urbancharger US-Pasadena CA, 34.144859, -118.146439
+Urbancharger US-Rockville MD, 39.086813,-77.149977
 Urbancharger US-San Bernardino CA, 34.084202, -117.299095
 Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
 Urbancharger US-Tigard OR, 45.450027,-122.78289
@@ -892,6 +901,7 @@ Tesla Service Center NL-Rotterdam, 51.8648704, 4.4548565
 Tesla Service Center NL-Tilburg, 51.6060617, 4.9964002
 Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 
+Aldi DE-Ansbach, 49.293465,10.603837, 20
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
 Aldi DE-Böblingen, 48.685646, 8.993401
@@ -1687,6 +1697,7 @@ Grønn Kontakt NO-Stryn Extra Markt, 61.902547, 6.715027
 
 Kaufland CZ-Praha,50.092464, 14.499563
 Kaufland DE-Aachen, 50.769387, 6.058244
+Kaufland DE-Anbach, 49.305557,10.588955
 Kaufland DE-Aschaffenburg, 49.968144, 9.165434
 Kaufland DE-Backnang, 48.962571,9.43141
 Kaufland DE-Berlin Grünhofer Weg, 52.533887, 13.188849
@@ -1802,6 +1813,7 @@ Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Wädenswil, 47.236483, 8.635798
 Lidl CH-Winterthur, 47.486514, 8.70397
 Lidl DE-Altenmelle, 52.192974,8.353423
+Lidl DE-Ansbach, 49.295687,10.570223, 20
 Lidl DE-Anzing, 48.15883,11.854494
 Lidl DE-Aschaffenburg Spessartstr., 49.965614, 9.154857
 Lidl DE-Berlin Buckower Damm, 52.426346, 13.435003
@@ -1882,6 +1894,7 @@ TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
 
 AT Eugendorf Center, 47.860013,13.126857,20
+AT Mistelbach Autohaus Wiesinger, 48.557928,16.562185, 10
 AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
 AT Salzburg Mooncity, 47.808874,13.055885,20
 AT Wien Billa Brünner Straße, 48.267452, 16.402954
