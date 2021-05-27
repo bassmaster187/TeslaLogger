@@ -1000,6 +1000,7 @@ chargeIT DE-Landshut, 48.546125,12.17756, 20
 chargeIT DE-Memmingerberg, 47.990153, 10.230113
 chargeIT DE-Nördlingen, 48.843866, 10.503327
 chargeIT DE-Petershausen, 48.416818, 11.478081
+chargeID DE-Saarlouis, 49.290288,6.758827, 20
 chargeIT DE-Ungerhausen, 48.017723, 10.270062
 
 CEZ CZ-Děčín, 50.770023, 14.207249
@@ -1127,6 +1128,8 @@ EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
 EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
+EnBW DE-Kehring Elztal Nord, 50.266953,7.224861, 20
+EnBW DE-Kehring Elztal Süd, 50.26568,7.22722, 20
 EnBW DE-Kirchheim Trigema, 50.832535,9.573169, 5
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
@@ -1160,6 +1163,7 @@ EnBW DE-Rutesheim, 48.811969, 8.922083
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Reinsfeld Hochwald Ost, 49.690638, 6.899393
 EnBW DE-Rosenheim, 47.843389,12.08216
+EnBW DE-Saarbrücken Rasthof Goldene Bremm Nord, 49.209456,6.966372
 EnBW DE-Schongau, 47.808188, 10.877717
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
@@ -1174,6 +1178,7 @@ EnBW DE-Vilsbiburg, 48.454281,12.334936
 EnBW DE-Waldmohr Raststätte Waldmohr, 49.37322,7.374279
 EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wangen im Allgäu, 47.6876032, 9.8384064, 10
+EnBW DE-Wattenheim Rastanlage Pfalz, 49.527487,8.072581
 EnBW DE-Winningen Moseltal Ost, 50.316586, 7.4988, 10
 EnBW DE-Winningen Moseltal West, 50.317548, 7.4978, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
@@ -1286,6 +1291,7 @@ IKEA DE-Karlsruhe, 49.00518, 8.441285, 20
 IKEA DE-München-Brunnthal, 48.040515, 11.65732
 IKEA DE-Leuna, 51.348073, 12.181915
 IKEA DE-Oldenburg, 53.139408, 8.256087
+IKEA DE-Saarlouis, 49.293727,6.759122
 IKEA DE-Scharhof, 49.555776,8.444968
 IKEA DE-Schnelsen, 53.648095,9.929439
 IKEA DE-Sindelfinden, 48.701416, 9.005396
@@ -1771,6 +1777,7 @@ Kaufland DE-Troisdorf, 50.813239, 7.1557
 Kaufland DE-Tübingen, 48.514286, 9.066617
 Kaufland DE-Uhingen, 48.714102, 9.56216
 Kaufland DE-Velbert, 51.335796, 7.049863
+Kaufland DE-Völklingen, 49.243299,6.840921
 Kaufland DE-Weißenburg i.Bay, 49.0271, 10.9853, 60
 Kaufland DE-Weimar, 50.96384, 11.311157
 Kaufland DE-Weiterstadt, 49.902437, 8.608824
