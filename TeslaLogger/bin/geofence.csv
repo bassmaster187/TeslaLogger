@@ -41,7 +41,6 @@ Supercharger AU-Goulburn, -34.755597, 149.720984
 Supercharger AU-Gundagai, -35.002106, 148.109934
 Supercharger AU-Gympie, -26.188745, 152.661613
 Supercharger AU-Heatherbrae, -32.787812, 151.727704
-Supercharger AU-Heatherbrae, -32.787812, 151.727704
 Supercharger AU-Hollydene, -32.447359, 150.83232
 Supercharger AU-Horsham, -36.716125, 142.193301
 Supercharger AU-Keith, -36.099082, 140.355645
@@ -103,6 +102,11 @@ Supercharger CH-Rubigen, 46.891773, 7.542738
 Supercharger CH-Schaffhausen, 47.720985, 8.646664
 Supercharger CH-St. Moritz, 46.496797, 9.84272
 Supercharger CH-Steg-Hohtenn, 46.310364, 7.749565
+Supercharger CN-DoubleTree by Hilton Hotel Guangzhou Huihua, 23.183827,113.470749
+Supercharger CN-Guangzhou International Finance Center, 23.121138,113.317477, 70
+Supercharger CN-Guangzhou Jockey Club Home Furnishing,23.120633,113.340501
+Supercharger CN-Guangzhou Zhongzhou Trading Center, 23.098796,113.367040
+Supercharger CN-Hualuxe Hotel Wuxi Taihu, 31.481455,120.303066
 Supercharger CZ-Brno, 49.138336, 16.630748
 Supercharger CZ-Humpolec, 49.521746, 15.347476
 Supercharger-V3 CZ-Kamenný Újezd, 48.8877538, 14.436229
@@ -471,7 +475,7 @@ Supercharger IT-Arezzo, 43.436801, 11.779599
 Supercharger IT-Borca di Cadore, 46.435592, 12.222879
 Supercharger IT-Brennero, 46.99540, 11.50210
 Supercharger IT-Brescia, 45.53224, 10.164969
-Supercharger IT-Campogalliano, 44.685971, 10.851913
+Supercharger IT-Campogalliano, 44.686638,10.851342
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
 Supercharger IT-Cerignola, 41.306389, 15.899738											
@@ -637,7 +641,7 @@ Supercharger SE-Arboga, 59.426307, 15.827684
 Supercharger SE-Arvidsjaur, 65.589922, 19.184091
 Supercharger SE-Borlänge, 60.478804, 15.438655
 Supercharger SE-Edsbruk, 57.97985, 16.482407
-Supercharger SE-Enköping, 59.658468, 17.076533
+Supercharger SE-Enköping, 59.659057,17.076919
 Supercharger SE-Falkenberg, 56.931922,12.518628
 Supercharger SE-Grums, 59.365749, 13.14537
 Supercharger SE-Gävle, 60.648513, 17.120583
@@ -677,6 +681,7 @@ Supercharger SE-Umeå, 63.810547, 20.250437
 Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
+Supercharger-V3 SE-Varberg, 57.167879,12.27554
 Supercharger SI-Kozina, 45.60492, 13.928521
 Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
