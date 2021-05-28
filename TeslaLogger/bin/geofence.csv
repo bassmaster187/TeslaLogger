@@ -18,7 +18,7 @@ Supercharger AT-St. Anton, 47.130092, 10.269231
 Supercharger AT-St. Georgen, 47.929088, 13.502168
 Supercharger AT-St. Pölten, 48.205769, 15.618485
 Supercharger AT-St. Valentin, 48.196507, 14.527879, 20
-Supercharger AT-Vienna, 48.1574455, 16.3345536
+Supercharger AT-Vienna, 48.157246,16.334045
 Supercharger AT-Villach, 46.604193, 13.869091
 Supercharger AT-Wiener Neustadt, 47.804724, 16.210564
 Supercharger AU-Adelaide, -34.927592, 138.595240
@@ -40,7 +40,6 @@ Supercharger AU-Gold Coast, -28.035361, 153.427306
 Supercharger AU-Goulburn, -34.755597, 149.720984
 Supercharger AU-Gundagai, -35.002106, 148.109934
 Supercharger AU-Gympie, -26.188745, 152.661613
-Supercharger AU-Heatherbrae, -32.787812, 151.727704
 Supercharger AU-Heatherbrae, -32.787812, 151.727704
 Supercharger AU-Hollydene, -32.447359, 150.83232
 Supercharger AU-Horsham, -36.716125, 142.193301
@@ -95,7 +94,7 @@ Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
 Supercharger CH-Melide, 45.95423, 8.95051
 Supercharger CH-Monte Ceneri, 46.13924, 8.9070614
-Supercharger-V3 CH-Obfelden, 47.271985, 8.437783, 20
+Supercharger-V3 CH-Obfelden, 47.271985,8.437783, 24
 Supercharger CH-Oftringen, 47.310793,7.935012
 Supercharger CH-Pratteln, 47.524888, 7.680418
 Supercharger CH-Quinto, 46.51521, 8.67063
@@ -103,8 +102,14 @@ Supercharger CH-Rubigen, 46.891773, 7.542738
 Supercharger CH-Schaffhausen, 47.720985, 8.646664
 Supercharger CH-St. Moritz, 46.496797, 9.84272
 Supercharger CH-Steg-Hohtenn, 46.310364, 7.749565
+Supercharger CN-DoubleTree by Hilton Hotel Guangzhou Huihua, 23.183827,113.470749
+Supercharger CN-Guangzhou International Finance Center, 23.121138,113.317477, 70
+Supercharger CN-Guangzhou Jockey Club Home Furnishing,23.120633,113.340501
+Supercharger CN-Guangzhou Zhongzhou Trading Center, 23.098796,113.367040
+Supercharger CN-Hualuxe Hotel Wuxi Taihu, 31.481455,120.303066
 Supercharger CZ-Brno, 49.138336, 16.630748
 Supercharger CZ-Humpolec, 49.521746, 15.347476
+Supercharger-V3 CZ-Kamenný Újezd, 48.8877538, 14.436229
 Supercharger CZ-Olomouc, 49.560857, 17.262371
 Supercharger CZ-Vestec, 49.9898398, 14.4907623
 Supercharger DE-Achern, 48.6413, 8.03774
@@ -145,7 +150,7 @@ Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
 Supercharger-V3 DE-Hilden, 51.192013, 6.935892, 10 
 Supercharger-V3 DE-Hilden, 51.191944, 6.936024, 10
-Supercharger-V3 DE-Hilden, 51.191835,6.936129, 10
+Supercharger-V3 DE-Hilden, 51.191795,6.936142, 13
 Supercharger-V3 DE-Hilpoltstein, 49.161119,11.259744, 12
 Supercharger DE-Hilpoltstein, 49.161171, 11.260012, 12
 Supercharger DE-Hilpoltstein, 49.161213, 11.260278, 10
@@ -270,6 +275,8 @@ Supercharger ES-Sant Cugat, 41.498096,2.072692
 Supercharger ES-Sevilla, 37.391485,-6.009627
 Supercharger ES-Tarragona, 41.134294, 1.1683
 Supercharger ES-Tordesillas, 41.516125, -4.943023
+Supercharger ES-Torrent Northbound, 39.400528,-0.491639, 20
+Supercharger ES-Torrent Southbound, 39.400668,-0.493125, 20
 Supercharger ES-Valencia, 39.542965, -0.451521
 Supercharger ES-Zaragoza, 41.625707, -1.009618
 Supercharger FI-Äänekoski, 62.516741, 25.6913
@@ -305,6 +312,7 @@ Supercharger-V3 FR-Angoulême, 45.69444, 0.178841
 Supercharger FR-Appoigny, 47.85183, 3.542802
 Supercharger FR-Archamps, 46.136917, 6.124306
 Supercharger FR-Auxerre, 47.851819, 3.542894
+Supercharger-V3 FR-Avallon, 47.502121,3.984249
 Supercharger FR-Barberaz, 45.56085, 5.949646
 Supercharger FR-Bayonne, 43.4938044, -1.4524967
 Supercharger FR-Beaune, 47.017319, 4.83779
@@ -462,11 +470,12 @@ Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
 Supercharger IS-Fossvogur, 64.117994, -21.899666
 Supercharger IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
+Supercharger-V3 IT-Arese, 45.561371, 9.055905
 Supercharger IT-Arezzo, 43.436801, 11.779599
 Supercharger IT-Borca di Cadore, 46.435592, 12.222879
 Supercharger IT-Brennero, 46.99540, 11.50210
 Supercharger IT-Brescia, 45.53224, 10.164969
-Supercharger IT-Campogalliano, 44.685971, 10.851913
+Supercharger IT-Campogalliano, 44.686638,10.851342
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
 Supercharger IT-Cerignola, 41.306389, 15.899738											
@@ -632,7 +641,7 @@ Supercharger SE-Arboga, 59.426307, 15.827684
 Supercharger SE-Arvidsjaur, 65.589922, 19.184091
 Supercharger SE-Borlänge, 60.478804, 15.438655
 Supercharger SE-Edsbruk, 57.97985, 16.482407
-Supercharger SE-Enköping, 59.658468, 17.076533
+Supercharger SE-Enköping, 59.659057,17.076919
 Supercharger SE-Falkenberg, 56.931922,12.518628
 Supercharger SE-Grums, 59.365749, 13.14537
 Supercharger SE-Gävle, 60.648513, 17.120583
@@ -672,6 +681,7 @@ Supercharger SE-Umeå, 63.810547, 20.250437
 Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
+Supercharger-V3 SE-Varberg, 57.167879,12.27554
 Supercharger SI-Kozina, 45.60492, 13.928521
 Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
@@ -1200,7 +1210,8 @@ Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
 Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
 Fastned DE-Herbolzheim, 48.22685, 7.75509
-Fastned DE-Hilden, 51.192201,6.935931, 3
+Fastned DE-Hilden, 51.192201,6.935931,3
+Fastned DE-Hilden, 51.192203,6.936076,3
 Fastned DE-Hildesheim, 52.16083, 9.99676
 Fastned DE-Limburg Süd, 50.37993, 8.09248
 Fastned DE-Melle-West, 52.19466, 8.31641
