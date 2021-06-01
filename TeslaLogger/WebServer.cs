@@ -232,6 +232,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mfa/[0-9]+/.+"):
                         Set_MFA(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captcha/[0-9]+/.+"):
+                        Set_Captcha(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captchapic/[0-9]+"):
+                        CaptchaPic(request, response);
+                        break;
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/info"):
                         ABRP_Info(request, response);
                         break;
@@ -522,6 +528,48 @@ namespace TeslaLogger
                         car.MFA_Code = mfa;
                         car.waitForMFACode = false;
                     }
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/captcha/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string captcha = m.Groups[2].Captures[0].ToString();
+                if (captcha.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        car.passwortinfo.Append($"Set Captcha: {captcha}<br>");
+                        car.Captcha_String = captcha;
+                    }
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/captchapic/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    response.ContentType = "image/svg+xml";
+                    while (car.Captcha == null)
+                    {
+                        System.Threading.Thread.Sleep(250);
+                    }
+
+                    WriteString(response, car.Captcha);
+                    return;
                 }
             }
             WriteString(response, "");
