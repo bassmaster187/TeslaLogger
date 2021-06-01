@@ -359,6 +359,8 @@ namespace TeslaLogger
                         }
                     }
 
+                    GetCaptcha();
+
                     return GetTokenAsync2(code_challenge, m, state, code_verifier);
                 }
             }
@@ -374,6 +376,17 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        private void GetCaptcha()
+        {
+            car.Captcha_String = null;
+            HttpClient client = GetDefaultHttpClientForAuthentification();
+            string url = authHost + "/captcha";
+            HttpResponseMessage result = client.GetAsync(url).Result;
+            string resultContent = result.Content.ReadAsStringAsync().Result;
+            car.Captcha = resultContent;
+            System.IO.File.WriteAllText("captcha.svg", resultContent);
         }
 
         private string UpdateTeslaTokenFromRefreshToken()
@@ -448,6 +461,8 @@ namespace TeslaLogger
 
         private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier)
         {
+            WaitForCaptcha();
+
             Log("GetTokenAsync2");
 
             int length = 0;
@@ -472,6 +487,7 @@ namespace TeslaLogger
 
             d.Add("identity", car.TeslaName);
             d.Add("credential", car.TeslaPasswort);
+            d.Add("captcha", car.Captcha_String);
 
             try
             {
@@ -506,6 +522,9 @@ namespace TeslaLogger
 
                     HttpResponseMessage result = client.PostAsync(url, content).Result;
                     string resultContent = result.Content.ReadAsStringAsync().Result;
+
+                    if (resultContent.Contains("Captcha does not match"))
+                        car.passwortinfo.Append("Captcha does not match !!!<br>");
 
                     DBHelper.AddMothershipDataToDB("GetTokenAsync2()", start, (int)result.StatusCode);
 
@@ -566,6 +585,24 @@ namespace TeslaLogger
             }
 
             return "";            
+        }
+
+        private void WaitForCaptcha()
+        {
+            car.Log("Start waiting for captcha code !!!");
+            DateTime timeout = DateTime.UtcNow;
+
+            while (car.Captcha_String == null)
+            {
+                Thread.Sleep(10);
+
+                if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
+                {
+                    timeout = DateTime.UtcNow;
+                    car.Log("Wait for captcha code !!!");
+                }
+            }
+            car.Log("Captcha Code: " + car.Captcha_String);
         }
 
         private string WaitForMFA_Code(string transaction_id, string code_challenge, string state)
@@ -829,6 +866,7 @@ namespace TeslaLogger
 
                 DateTime start = DateTime.UtcNow;
 
+                httpClientForAuthentification = null;
                 HttpClient client = GetDefaultHttpClientForAuthentification();
                         
                 // client.DefaultRequestHeaders.Add("User-Agent", TeslaloggerUserAgent);
