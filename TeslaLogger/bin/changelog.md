@@ -1,3 +1,6 @@
+# Version 1.48.5
+- Tesla turned off captcha, so we did it as well
+
 # Version 1.48.4
 - Supporting the new Tesla authentification proccess with captcha
 

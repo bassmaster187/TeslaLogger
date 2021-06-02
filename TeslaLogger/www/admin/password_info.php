@@ -53,7 +53,10 @@ require_once("tools.php");
         .done(function(data) {
             $("#info").html(data);
             if (data.includes("Wait for MFA code"))
+            {
                 $("#mfapanel").show();           
+                $("#captchapanel").hide();           
+            }
             
             setTimeout(updateInfo, 1000);
         })
