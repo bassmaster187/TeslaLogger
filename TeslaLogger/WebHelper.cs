@@ -69,6 +69,8 @@ namespace TeslaLogger
         HttpClient httpclientTeslaAPI = null;
         static object httpClientLock = new object();
 
+        static bool useCaptcha = false;
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -359,7 +361,8 @@ namespace TeslaLogger
                         }
                     }
 
-                    GetCaptcha();
+                    if (useCaptcha)
+                        GetCaptcha();
 
                     return GetTokenAsync2(code_challenge, m, state, code_verifier);
                 }
@@ -461,7 +464,8 @@ namespace TeslaLogger
 
         private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier)
         {
-            WaitForCaptcha();
+            if (useCaptcha)
+                WaitForCaptcha();
 
             Log("GetTokenAsync2");
 
@@ -866,6 +870,7 @@ namespace TeslaLogger
 
                 DateTime start = DateTime.UtcNow;
 
+                httpClientForAuthentification?.Dispose();
                 httpClientForAuthentification = null;
                 HttpClient client = GetDefaultHttpClientForAuthentification();
                         

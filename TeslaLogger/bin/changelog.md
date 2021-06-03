@@ -1,3 +1,9 @@
+# Version 1.48.5
+- Tesla turned off captcha, so we did it as well
+
+# Version 1.48.4
+- Supporting the new Tesla authentification proccess with captcha
+
 # Version 1.48.3
 - UI for geofence / "on charge complete" [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#set-new-charge-limit-when-charging-is-complete)
 - UI for geofence / Don't combine charging sessions [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#do-not-combine-chargin-sessions)
