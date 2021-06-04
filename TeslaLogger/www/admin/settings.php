@@ -255,8 +255,8 @@ echo(menu("Settings"));
 	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> <?php t("Enable"); ?></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> <?php t("All"); ?><br><input id="radio_stable" type="radio" value="stable" name="update"> <?php t("Stable"); ?><br><input id="radio_none" type="radio" value="none" name="update"> <?php t("None"); ?></td></tr>
 	<tr><td><b><?php t("Sleep"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> <?php t("Enable"); ?></td></tr>
-	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td><input id="checkbox100pct" type="checkbox" value="100pct"> <?php t("Enable"); ?></td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
+	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td><input id="checkbox100pct" type="checkbox" value="100pct"> <?php t("Enable"); ?></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
 	<tr><td valign="top"><b><?php t("Teslalogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
