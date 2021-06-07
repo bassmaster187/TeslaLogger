@@ -204,6 +204,13 @@ namespace TeslaLogger
                     values.Add("TLGeofenceIsCharger", addr.IsCharger);
                     values.Add("TLGeofenceIsWork", addr.IsWork);
                 }
+                else
+                {
+                    values.Add("TLGeofence", "-");
+                    values.Add("TLGeofenceIsHome", false);
+                    values.Add("TLGeofenceIsCharger", false);
+                    values.Add("TLGeofenceIsWork", false);
+                }
 
                 current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
 
