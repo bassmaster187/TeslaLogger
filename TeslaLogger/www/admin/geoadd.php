@@ -120,7 +120,17 @@ if (isset($id))
 		else if (e.startsWith("scl"))
 		{
 			$("#scl").attr('checked', 'checked');
-			$("#scl_limit").val(e.substring(4));
+			var limit = e.substring(4);
+			var lpos = limit.indexOf(":");
+			if (lpos > 0)
+			{
+				var sclend = limit.substring(lpos);
+				limit = limit.substring(0,lpos);
+
+				if (sclend.startsWith(":A"))
+					$("#scl_soa").attr('checked', 'checked');
+			}
+			$("#scl_limit").val(limit);
 		}
 		else if (e.startsWith("ocp"))
 		{
@@ -215,6 +225,9 @@ if (isset($id))
 			f += "100";
 		else
 			f += $("#scl_limit").val();
+
+		if ($("#scl_soa").is(':checked'))
+			f += ":A";
 	}
 
 	if ($("#occ").is(':checked'))
@@ -333,7 +346,7 @@ if (isset($id))
 				<tr><td><h4 style="margin-top: 20px;">Charging</h4></td></tr>
 				<tr><td>Copy Charging Costs</td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td>Don't Combine Charging Sessions</td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td>Set Charge Limit</td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="scl_limit" placeholder="100"/>%</td></tr>
+				<tr><td>Set Charge Limit</td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="scl_limit" placeholder="100"/>%</td><td><input id="scl_soa" type="checkbox" value=""/> Set on arrival</td></tr>
 				<tr><td>Set Charge Limit After Charging</td><td> <input id="occ" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="occ_limit" placeholder="75"/>%</td></tr>
 				<tr><td>Open Charge Port</td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td>Gear</td>
 					<td>
