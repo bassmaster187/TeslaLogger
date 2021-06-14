@@ -1755,6 +1755,11 @@ namespace TeslaLogger
                     WriteCarSettings("0.148", "Y P");
                     return;
                 }
+                else if (car.trim_badging == "50")
+                {
+                    WriteCarSettings("0.136", "Y SR+");
+                    return;
+                }
             }
 
             return;

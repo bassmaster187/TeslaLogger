@@ -1,3 +1,6 @@
+# Version 1.48.6
+- Detecting Model Y SR+
+
 # Version 1.48.5
 - Tesla turned off captcha, so we did it as well
 
