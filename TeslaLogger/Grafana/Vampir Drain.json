@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1598540560490,
+  "iteration": 1624025382169,
   "links": [
     {
       "icon": "external link",
@@ -40,7 +40,6 @@
       },
       "id": 2,
       "links": [],
-      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -50,13 +49,17 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:143",
           "alias": "Time",
+          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "date"
         },
         {
+          "$$hashKey": "object:144",
           "alias": "Startdatum",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -75,7 +78,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:145",
           "alias": "Enddatum",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -91,7 +96,9 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:146",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -107,7 +114,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:147",
           "alias": "TR km Start",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -123,7 +132,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:148",
           "alias": "TR km Ende",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -139,7 +150,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:149",
           "alias": "TR km Verlust",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -155,7 +168,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:150",
           "alias": "Zeitspanne Stunden",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -171,7 +186,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:151",
           "alias": "TR km Verlust pro Stunde",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -187,7 +204,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:152",
           "alias": "km Stand",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -203,7 +222,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:153",
           "alias": "Standby Stunden",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -219,7 +240,9 @@
           "unit": "locale"
         },
         {
+          "$$hashKey": "object:154",
           "alias": "Standby",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -235,7 +258,9 @@
           "unit": "percent"
         },
         {
+          "$$hashKey": "object:155",
           "alias": "",
+          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -256,7 +281,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n    UNIX_TIMESTAMP(T1.EndDate) * 1000 as StartDate,\r\n    TP1.address as Adresse,\r\n    UNIX_TIMESTAMP(T2.StartDate) * 1000 as EndDate,\r\n    T2.StartPos as EndPos,\r\n    TP2.odometer,\r\n    TP1.ideal_battery_range_km as StartRange,\r\n    TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\r\n    TP1.ideal_battery_range_km - (\r\n        select\r\n            EndRange\r\n    ) as RangeDiff,\r\n    timestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\r\n    (\r\n        select\r\n            RangeDiff / TimeDiffHours\r\n    ) as RangeLostPerHour,\r\n    (\r\n        SELECT\r\n            sum(TIMESTAMPDIFF(MINUTE, StartDate, EndDate) / 60)\r\n        FROM\r\n            state\r\n        where\r\n            state = 'asleep'\r\n            and StartDate >= T1.EndDate\r\n            and EndDate <= T2.StartDate\r\n            and EndDate > StartDate\r\n            and carid=$Car \r\n    ) as sleephours,\r\n    (\r\n        select\r\n            sleephours / TimeDiffHours * 100\r\n    ) as sleeppercent\r\nFROM\r\n    drivestate as T1\r\n    left outer join drivestate as T2 on T1.id + 1 = T2.id\r\n    left outer Join pos as TP1 on T1.EndPos = TP1.id\r\n    left outer join pos as TP2 on T2.StartPos = TP2.id\r\nwhere\r\n    $__timeFilter(T1.EndDate) and T1.carid=$Car \r\n    and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0\r\n    and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60\r\n    and TP2.odometer - TP1.odometer < 1\r\n    and (TP2.odometer - TP1.odometer) >= 0\r\n    and TP2.carid=$Car \r\n    and TP1.carid=$Car \r\norder by T1.EndDate",
+          "rawSql": "SELECT\r\n    UNIX_TIMESTAMP(T1.EndDate) * 1000 as StartDate,\r\n    TP1.address as Adresse,\r\n    UNIX_TIMESTAMP(T2.StartDate) * 1000 as EndDate,\r\n    T2.StartPos as EndPos,\r\n    TP2.odometer,\r\n    TP1.ideal_battery_range_km as StartRange,\r\n    TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\r\n    TP1.ideal_battery_range_km - (\r\n        select\r\n            EndRange\r\n    ) as RangeDiff,\r\n    timestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\r\n    (\r\n        select\r\n            RangeDiff / TimeDiffHours\r\n    ) as RangeLostPerHour,\r\n    (\r\n        SELECT\r\n            sum(TIMESTAMPDIFF(MINUTE, StartDate, EndDate) / 60)\r\n        FROM\r\n            state\r\n        where\r\n            (state = 'asleep' or state = 'offline')\r\n            and StartDate >= T1.EndDate\r\n            and EndDate <= T2.StartDate\r\n            and EndDate > StartDate\r\n            and carid=$Car \r\n    ) as sleephours,\r\n    (\r\n        select\r\n            sleephours / TimeDiffHours * 100\r\n    ) as sleeppercent\r\nFROM\r\n    drivestate as T1\r\n    left outer join drivestate as T2 on T1.id + 1 = T2.id\r\n    left outer Join pos as TP1 on T1.EndPos = TP1.id\r\n    left outer join pos as TP2 on T2.StartPos = TP2.id\r\nwhere\r\n    $__timeFilter(T1.EndDate) and T1.carid=$Car \r\n    and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0\r\n    and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60\r\n    and TP2.odometer - TP1.odometer < 1\r\n    and (TP2.odometer - TP1.odometer) >= 0\r\n    and TP2.carid=$Car \r\n    and TP1.carid=$Car \r\norder by T1.EndDate",
           "refId": "A",
           "select": [
             [
@@ -347,5 +372,5 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 42
+  "version": 159
 }

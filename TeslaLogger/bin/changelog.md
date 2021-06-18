@@ -1,3 +1,5 @@
+- Offline is now also considered as sleeping in Dashboards: Vampir Drain, Vampir Dran Monthly Statistics and Timeline Plugin
+
 # Version 1.48.6
 - Detecting Model Y SR+
 
