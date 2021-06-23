@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <DefineConstants>LIBLOG_PORTABLE</DefineConstants>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Authors>Ben Abelshausen</Authors>
     <Company>Itinero</Company>
     <Description>A library to read SRTM data, loads missing files on-the-fly.</Description>

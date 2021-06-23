@@ -6,6 +6,7 @@ using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using SRTM;
 
 namespace UnitTestsTeslalogger
 {
@@ -489,5 +490,36 @@ namespace UnitTestsTeslalogger
             var expected = System.IO.File.ReadAllText("../../apache2-ready.conf");
             Assert.AreEqual(expected, temp);
         }
+
+        [TestMethod]
+        public void Srtm()
+        {
+            string path = "srtmcache";
+            if (System.IO.Directory.Exists(path))
+                System.IO.Directory.Delete(path, true);
+
+            System.IO.Directory.CreateDirectory(path);
+
+            var srtmData = new SRTMData(path);
+
+            // get elevations for some locations
+            int? elevation = srtmData.GetElevation(47.267222, 11.392778);
+            Console.WriteLine("Elevation of Innsbruck: {0}m", elevation);
+            Assert.AreEqual(584, elevation);
+
+            elevation = srtmData.GetElevation(-16.5, -68.15);
+            Console.WriteLine("Elevation of La Paz: {0}m", elevation);
+            Assert.AreEqual(3782, elevation);
+
+            elevation = srtmData.GetElevation(27.702983735525862f, 85.2978515625f);
+            Console.WriteLine("Elevation of Kathmandu {0}m", elevation);
+            Assert.AreEqual(1312, elevation);
+
+            elevation = srtmData.GetElevation(21.030673628606102f, 105.853271484375f);
+            Console.WriteLine("Elevation of Ha Noi {0}m", elevation);
+            Assert.AreEqual(14, elevation);
+        }
+
+
     }
 }

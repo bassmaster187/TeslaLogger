@@ -33,7 +33,9 @@ namespace SRTM.Sources.USGS
         /// <summary>
         /// The source of the data.
         /// </summary>
-        public const string SOURCE = @"https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/";
+
+        // public const string SOURCE = @"https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/";
+        public const string SOURCE = @"https://srtm.kurviger.de/SRTM3/";
 
         /// <summary>
         /// The continents to try.

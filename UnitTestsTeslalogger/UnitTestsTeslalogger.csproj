@@ -71,6 +71,10 @@
       <Project>{852390a2-450b-43b3-a79a-f6c1dd988ae5}</Project>
       <Name>OSMMapGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\srtm\src\SRTM\SRTM.csproj">
+      <Project>{AE6A978E-8084-48C7-85DD-2E90FCD82F30}</Project>
+      <Name>SRTM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeslaLogger\TeslaLogger.csproj">
       <Project>{9932f717-1bee-4d0f-b5b0-fb8665ffe647}</Project>
       <Name>TeslaLogger</Name>
