@@ -200,7 +200,7 @@ When charging stops, this will try to find a previous charging session at the cu
 
 When CombineChargingStates is globally disabled, it can be enabled for this POI.
 
-# Do Not Combine Chargin Sessions
+# Do Not Combine Charging Sessions
 
 +dnc
 
