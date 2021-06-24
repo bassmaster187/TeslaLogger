@@ -1969,12 +1969,14 @@ namespace TeslaLogger
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
                 decimal dLongitude = (decimal)r2["longitude"];
+                int heading = (int)r2["heading"];
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
                 car.currentJSON.latitude = latitude;
                 car.currentJSON.longitude = longitude;
+                car.currentJSON.heading = heading;
 
                 int speed = 0;
                 if (r2["speed"] != null)
@@ -3654,6 +3656,11 @@ namespace TeslaLogger
                         { "lat", lat },
                         { "lon", lon },
                     };
+
+                if (car.GetTeslaAPIState().GetInt("heading", out int heading))
+                {
+                    values.Add("heading", heading);
+                }
 
                 string json = new JavaScriptSerializer().Serialize(values);
 

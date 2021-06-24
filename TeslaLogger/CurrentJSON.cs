@@ -48,6 +48,7 @@ namespace TeslaLogger
         public double latitude = 0;
         public double longitude = 0;
         public int charge_limit_soc = 0;
+        public int heading = 0;
         public double current_inside_temperature = 0;
         public bool current_battery_heater = false;
         public bool current_is_sentry_mode = false;
