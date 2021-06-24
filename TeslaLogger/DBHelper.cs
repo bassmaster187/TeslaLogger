@@ -21,6 +21,7 @@ namespace TeslaLogger
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
         private Car car;
+        bool CleanPasswortDone = false;
 
         internal static string Database = "teslalogger";
 
@@ -792,6 +793,34 @@ HAVING
                         car.Log("UpdateRefreshToken OK: " + done);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+        }
+
+        internal void CleanPasswort()
+        {
+            try
+            {
+                if (CleanPasswortDone)
+                    return;
+
+                car.Log("CleanPasswort");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_password = '' where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        int done = cmd.ExecuteNonQuery();
+
+                        car.Log("CleanPasswort OK: " + done);
+                        CleanPasswortDone = true;
+                    }
+                }
+
             }
             catch (Exception ex)
             {

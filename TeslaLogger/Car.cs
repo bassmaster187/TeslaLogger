@@ -794,6 +794,7 @@ namespace TeslaLogger
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 dbHelper.StartState(res);
+                dbHelper.CleanPasswort();
                 return;
             }
             else if (res == "asleep")

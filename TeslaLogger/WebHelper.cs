@@ -857,6 +857,7 @@ namespace TeslaLogger
             return "";
         }
 
+
         private string GetTokenAsync4(string access_token)
         {
             try
