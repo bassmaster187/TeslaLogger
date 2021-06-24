@@ -1111,6 +1111,8 @@ CREATE TABLE superchargerstate(
                                 s = s.Replace("EndOdometer,", " EndOdometer / 1.609 as EndOdometer,");
                                 s = s.Replace("100 AS MaxRange", "100 / 1.609 AS MaxRange");
                                 s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609 - StartOdometer/1.609) * 100 AS AVGConsumption");
+
+                                s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
                             }
                             else if (f.EndsWith("Degradation.json"))
                             {
