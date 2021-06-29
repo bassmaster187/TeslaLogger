@@ -71,6 +71,9 @@
     <Compile Include="Crc32.cs" />
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />
+    <Compile Include="ElectricityMeterBase.cs" />
+    <Compile Include="ElectricityMeterGoE.cs" />
+    <Compile Include="ElectricityMeterOpenWB.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />

@@ -520,6 +520,28 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(14, elevation);
         }
 
+        [TestMethod]
+        public void OpenWBMeter()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "LP1");
+            string ret =  v.ToString();
+            Console.WriteLine(ret);
+        }
 
+        [TestMethod]
+        public void OpenWBMeterConstructor()
+        {
+            var v = ElectricityMeterBase.Instance(1);
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void GoEMeter()
+        {
+            var v = new ElectricityMeterGoE("http://192.168.1.222", "LP1");
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
     }
 }

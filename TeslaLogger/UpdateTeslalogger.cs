@@ -458,6 +458,22 @@ CREATE TABLE superchargerstate(
                     Logfile.Log(ex.ToString());
                 }
 
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
+                    Logfile.Log(sql); 
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.ColumnExists("cars", "meter_type"))
+                {
+                    string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
