@@ -53,13 +53,19 @@ namespace TeslaLogger
             return null;
         }
 
+        public virtual string GetVersion()
+        {
+            return null;
+        }
+
         public override string ToString()
         {
             var isCharging = IsCharging();
             var vm = GetVehicleMeterReading_kWh();
             var evu = GetUtilityMeterReading_kWh();
+            var version = GetVersion();
 
-            string ret = $"IsCharging: {isCharging} / Vehicle Meter: {vm} kWh / Utility Meter: {evu ?? Double.NaN} kWh";
+            string ret = $"IsCharging: {isCharging} / Vehicle Meter: {vm} kWh / Utility Meter: {evu ?? Double.NaN} kWh / Class: {this.GetType().Name} / Version: {version}";
             return ret;
         }
 

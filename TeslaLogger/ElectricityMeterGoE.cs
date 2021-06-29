@@ -69,7 +69,7 @@ namespace TeslaLogger
                 string value = jsonResult[key];
 
                 double v = Double.Parse(value, Tools.ciEnUS);
-                v = v / 10.0;
+                v = v / (double)10.0;
 
                 return v;
             }
@@ -100,6 +100,27 @@ namespace TeslaLogger
             }
 
             return null;
+        }
+
+        public override string GetVersion()
+        {
+            string j = null;
+            try
+            {
+                j = GetCurrentData();
+
+                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                string key = "fwv";
+                string value = jsonResult[key];
+
+                return value;
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, j);
+            }
+
+            return "";
         }
     }
 }

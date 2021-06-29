@@ -118,5 +118,22 @@ namespace TeslaLogger
 
             return null;
         }
+
+        public override string GetVersion()
+        {
+            try
+            {
+                string url = host + "/openWB/web/version?t="+new Guid().ToString();
+                string v = client.DownloadString(url).Trim();
+                return v;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
+
+        }
     }
 }
