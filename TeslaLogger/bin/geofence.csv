@@ -153,10 +153,15 @@ Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
 Supercharger-V3 DE-Hilden, 51.192013, 6.935892, 10 
 Supercharger-V3 DE-Hilden, 51.191944, 6.936024, 10
 Supercharger-V3 DE-Hilden, 51.191795,6.936142, 13
-Supercharger-V3 DE-Hilpoltstein, 49.161119,11.259744, 12
-Supercharger DE-Hilpoltstein, 49.161171, 11.260012, 12
-Supercharger DE-Hilpoltstein, 49.161213, 11.260278, 10
-Supercharger DE-Hilpoltstein, 49.161205, 11.260561, 18
+Supercharger-V3 DE-Hilpoltstein,49.161096,11.259709,8
+Supercharger-V3 DE-Hilpoltstein,49.161109,11.259794,8
+Supercharger-V3 DE-Hilpoltstein,49.161146,11.259941,8
+Supercharger DE-Hilpoltstein,49.161163,11.260043,8
+Supercharger DE-Hilpoltstein,49.161198,11.260154,8
+Supercharger DE-Hilpoltstein,49.161209,11.260301,8
+Supercharger DE-Hilpoltstein,49.161206,11.260424,8
+Supercharger DE-Hilpoltstein,49.161213,11.260555,8
+Supercharger DE-Hilpoltstein,49.161201,11.260685,12
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
 Supercharger DE-Irschenberg, 47.82648, 11.89831
@@ -999,8 +1004,8 @@ Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
 Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
 Allego DE-Hermsdorf McDonalds, 50.889717, 11.872576, 10
 Allego DE-Heppenheim, 49.643165, 8.624373
-Allego DE-Hilpoltstein, 49.161056, 11.260274, 5
-Allego DE-Hilpoltstein, 49.161067,11.260181, 5
+Allego DE-Hilpoltstein, 49.161056, 11.260274, 7
+Allego DE-Hilpoltstein, 49.161067,11.260181, 8
 Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Ingolstadt Factory Outlet, 48.783821,11.478067
 Allego DE-Itzehoe, 53.959309, 9.495976, 10
