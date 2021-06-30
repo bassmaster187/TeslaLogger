@@ -577,7 +577,7 @@ CREATE TABLE superchargerstate(
                 Chmod("cmd_updated.txt", 666);
                 Chmod("MQTTClient.exe.config", 666);
 
-                Logfile.Log("Create backup.sh before update");
+                Logfile.Log("Create backup");
                 Tools.Exec_mono("/bin/bash", "/etc/teslalogger/backup.sh");
                 
                 if (!Tools.Exec_mono("git", "--version", false).Contains("git version"))
