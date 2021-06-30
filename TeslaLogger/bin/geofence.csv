@@ -124,17 +124,18 @@ Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
 Supercharger DE-Bispingen, 53.104326, 9.981842
 Supercharger DE-Blankenfelde-Mahlow, 52.3089548, 13.444767
-Supercharger DE-Braak, 53.6178758, 10.239352
 Supercharger-V3 DE-Braak, 53.6178758, 10.239352
+Supercharger DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Busdorf, 54.477896, 9.544913								   
 Supercharger DE-Brinkum, 53.028326, 8.808758
 Supercharger DE-Bruchsal, 49.13837, 8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
-Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
+Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
 Supercharger DE-Erfstadt, 50.796478, 6.77994
+Supercharger-V3 DE-Erfstadt, 50.796478, 6.77994
 Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
 Supercharger-V3 DE-Erharting, 48.282664, 12.554758
 Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
@@ -197,22 +198,23 @@ Supercharger DE-Nempitz,  51.290012,12.137346, 7
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
-Supercharger DE-Nossen, 51.08255, 13.27406
-Supercharger DE-Oberhonnefeld, 50.562609,7.525362
+Supercharger-V3 DE-Nossen, 51.08255, 13.27406,30
+Supercharger DE-Nossen, 51.08255, 13.27406,30
 Supercharger-V3 DE-Oberhonnefeld, 50.562609,7.525362
-Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
+Supercharger DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
+Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
 Supercharger DE-Regensburg, 48.9947224, 12.150609
-Supercharger DE-Rhüden, 51.947221, 10.140505, 12
 Supercharger-V3 DE-Rhüden,51.947273, 10.1409618, 9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
+Supercharger DE-Rhüden, 51.947221, 10.140505, 12
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
-Supercharger DE-Satteldorf, 49.18119, 10.06933
 Supercharger-V3 DE-Satteldorf, 49.18119, 10.06933
+Supercharger DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
