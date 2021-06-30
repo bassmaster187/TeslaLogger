@@ -1934,10 +1934,23 @@ ORDER BY id DESC", con))
             try
             {
                 var v = ElectricityMeterBase.Instance(wh.car.CarInDB);
-                if (v != null && v.IsCharging() == true)
+                if (v != null)
                 {
-                    meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
-                    meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
+                    if (v.IsCharging() == true)
+                    {
+                        meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
+                        meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
+
+                        car.Log("Meter: " + v.ToString());
+                    }
+                    else if (v.IsCharging() == false)
+                    {
+                        car.Log("Meter: Not Charging!");
+                    }
+                    else
+                    {
+                        car.Log("Meter: IsCharging() == NULL");
+                    }
                 }
             }
             catch (Exception ex)

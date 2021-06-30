@@ -13,7 +13,7 @@ namespace TeslaLogger
     {
         string host;
         string parameter;
-        int LP = 1;
+        internal int LP = 1;
 
         Guid guid = new Guid();
         static WebClient client; 
@@ -25,6 +25,15 @@ namespace TeslaLogger
 
             this.host = host;
             this.parameter = parameter;
+
+            var args = parameter.Split('|');
+            foreach (var p in args)
+            {
+                if (p.StartsWith("LP", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    LP = int.Parse(p.Substring(2));
+                }
+            }
         }
 
         string GetCurrentData()

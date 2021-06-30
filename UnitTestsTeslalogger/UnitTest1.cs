@@ -521,10 +521,29 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void OpenWBMeter()
+        public void OpenWBMeterLP1Param()
         {
             var v = new ElectricityMeterOpenWB("http://openwb", "LP1");
+            Assert.AreEqual(1, v.LP);
             string ret =  v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterLP2Param()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "LP2");
+            Assert.AreEqual(2, v.LP);
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterNoParam()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "");
+            Assert.AreEqual(1, v.LP);
+            string ret = v.ToString();
             Console.WriteLine(ret);
         }
 
@@ -532,7 +551,7 @@ namespace UnitTestsTeslalogger
         public void OpenWBMeterConstructor()
         {
             var v = ElectricityMeterBase.Instance(1);
-            string ret = v.ToString();
+            var ret = v.ToString();
             Console.WriteLine(ret);
         }
 
