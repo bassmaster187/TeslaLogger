@@ -142,7 +142,14 @@ namespace TeslaLogger
             }
 
             return "";
+        }
 
+        public override string ToString()
+        {
+            string b = base.ToString();
+            b += " / LP" + LP;
+
+            return b;
         }
     }
 }
