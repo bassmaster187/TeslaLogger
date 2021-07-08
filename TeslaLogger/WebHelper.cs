@@ -69,7 +69,7 @@ namespace TeslaLogger
         HttpClient httpclientTeslaAPI = null;
         static object httpClientLock = new object();
 
-        static bool useCaptcha = false;
+        bool useCaptcha = false;
 
         static WebHelper()
         {
@@ -252,6 +252,12 @@ namespace TeslaLogger
             return httpClientForAuthentification;
         }
 
+        void LogGetToken(string resultContent, string name)
+        {
+            if (System.IO.File.Exists("LOGGETTOKEN"))
+                System.IO.File.WriteAllText("Logfile_GetToken_" + name + ".txt", resultContent);
+        }
+
         public string GetToken()
         {
             string resultContent = "";
@@ -328,6 +334,11 @@ namespace TeslaLogger
 
                     HttpResponseMessage result = client.GetAsync(url).Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
+
+                    if (resultContent.Contains("name=\"captcha\""))
+                        useCaptcha = true;
+
+                    LogGetToken(resultContent, "GetToken");
 
                     if (getTokenDebugVerbose) Log("GetToken resultContent Length:" + resultContent.Length);
 
@@ -529,6 +540,8 @@ namespace TeslaLogger
                     HttpResponseMessage result = client.PostAsync(url, content).Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
 
+                    LogGetToken(resultContent, "GetTokenAsync2");
+
                     if (resultContent.Contains("Captcha does not match"))
                     {
                         car.passwortinfo.Append("Captcha does not match !!!<br>");
@@ -674,6 +687,8 @@ namespace TeslaLogger
             HttpResponseMessage result = client.GetAsync(url).Result;
             resultContent = result.Content.ReadAsStringAsync().Result;
 
+            LogGetToken(resultContent, "MFA1");
+
             Log("MFA1 Result: " + resultContent);
 
             dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
@@ -739,6 +754,8 @@ namespace TeslaLogger
                 HttpResponseMessage result = client.PostAsync("https://auth.tesla.com/oauth2/v3/authorize/mfa/verify", content).Result;
                 string resultContent = result.Content.ReadAsStringAsync().Result;
 
+                LogGetToken(resultContent, "MFA2");
+
                 DBHelper.AddMothershipDataToDB("MFA2()", start, (int)result.StatusCode);
 
                 try
@@ -794,6 +811,8 @@ namespace TeslaLogger
                 HttpResponseMessage result = client.PostAsync(url, content).Result;
                 string resultContent = result.Content.ReadAsStringAsync().Result;
 
+                LogGetToken(resultContent, "MFA3");
+
                 DBHelper.AddMothershipDataToDB("MFA3()", start, (int)result.StatusCode);
 
                 Uri location = result.Headers.Location;
@@ -837,6 +856,8 @@ namespace TeslaLogger
                 {
                     HttpResponseMessage result = client.PostAsync(authHost + "/oauth2/v3/token", content).Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
+                    LogGetToken(resultContent, "GetTokenAsync3");
+
 
                     DBHelper.AddMothershipDataToDB("GetTokenAsync3()", start, (int)result.StatusCode);
 
@@ -904,6 +925,7 @@ namespace TeslaLogger
                 {
                     HttpResponseMessage result = client.PostAsync("https://owner-api.teslamotors.com/oauth/token", content).Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
+                    LogGetToken(resultContent, "GetTokenAsync4");
 
                     DBHelper.AddMothershipDataToDB("GetTokenAsync4()", start, (int)result.StatusCode);
 
