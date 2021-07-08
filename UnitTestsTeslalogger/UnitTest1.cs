@@ -562,5 +562,15 @@ namespace UnitTestsTeslalogger
             string ret = v.ToString();
             Console.WriteLine(ret);
         }
+
+        [TestMethod]
+        public void TeslaGen3WCMeter()
+        {
+            var v = new ElectricityMeterTeslaGen3WallConnector("", "");
+            v.mockup_lifetime = "{\"contactor_cycles\":32 \"contactor_cycles_loaded\":0 \"alert_count\":5 \"thermal_foldbacks\":0 \"avg_startup_temp\":5199147.0 \"charge_starts\":32 \"energy_wh\":89012 \"connector_cycles\":5 \"uptime_s\":1297280 \"charging_time_s\":33152}";
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
     }
 }

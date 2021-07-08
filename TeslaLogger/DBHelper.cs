@@ -1936,7 +1936,7 @@ ORDER BY id DESC", con))
                 var v = ElectricityMeterBase.Instance(wh.car.CarInDB);
                 if (v != null)
                 {
-                    if (v.IsCharging() == true)
+                    if (true) // xxx if (v.IsCharging() == true)
                     {
                         meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
                         meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
@@ -4051,7 +4051,7 @@ WHERE
             try
             {
                 var v = ElectricityMeterBase.Instance(car.CarInDB);
-                if (v != null && v.IsCharging() == true)
+//                 if (v != null && v.IsCharging() == true)
                 {
                     meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
                     meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
