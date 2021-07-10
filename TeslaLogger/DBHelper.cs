@@ -21,6 +21,7 @@ namespace TeslaLogger
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
         private Car car;
+        bool CleanPasswortDone = false;
 
         internal static string Database = "teslalogger";
 
@@ -799,6 +800,34 @@ HAVING
             }
         }
 
+        internal void CleanPasswort()
+        {
+            try
+            {
+                if (CleanPasswortDone)
+                    return;
+
+                car.Log("CleanPasswort");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_password = '' where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        int done = cmd.ExecuteNonQuery();
+
+                        car.Log("CleanPasswort OK: " + done);
+                        CleanPasswortDone = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+        }
+
         internal string GetFirmwareFromDate(DateTime dateTime)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1240,15 +1269,15 @@ WHERE
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-  charging.charge_energy_added
-FROM
-  charging
-WHERE
-  charging.CarId = @CarID
-  AND charging.id >= (SELECT StartChargingID FROM chargingstate WHERE id = @ChargingStateID)
-  AND charging.id <= (SELECT EndChargingID FROM chargingstate WHERE id = @ChargingStateID)
-ORDER BY id ASC", con))
+                        SELECT
+                          charging.charge_energy_added
+                        FROM
+                          charging
+                        WHERE
+                          charging.CarId = @CarID
+                          AND charging.id >= (SELECT StartChargingID FROM chargingstate WHERE id = @ChargingStateID)
+                          AND charging.id <= (SELECT EndChargingID FROM chargingstate WHERE id = @ChargingStateID)
+                        ORDER BY id ASC", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
@@ -1899,11 +1928,41 @@ ORDER BY id DESC", con))
 
         public void StartChargingState(WebHelper wh)
         {
+            object meter_vehicle_kwh_start = DBNull.Value;
+            object meter_utility_kwh_start = DBNull.Value;
+
+            try
+            {
+                var v = ElectricityMeterBase.Instance(wh.car.CarInDB);
+                if (v != null)
+                {
+                    if (true) // xxx if (v.IsCharging() == true)
+                    {
+                        meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
+                        meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
+
+                        car.Log("Meter: " + v.ToString());
+                    }
+                    else if (v.IsCharging() == false)
+                    {
+                        car.Log("Meter: Not Charging!");
+                    }
+                    else
+                    {
+                        car.Log("Meter: IsCharging() == NULL");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con))
+                using (MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present, meter_vehicle_kwh_start, meter_utility_kwh_start) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present, @meter_vehicle_kwh_start, @meter_utility_kwh_start)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                     cmd.Parameters.AddWithValue("@StartDate", chargeStart);
@@ -1913,6 +1972,8 @@ ORDER BY id DESC", con))
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
                     cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                    cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
+                    cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                     Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
@@ -3490,6 +3551,29 @@ WHERE
             return dt;
         }
 
+        public static DataRow GetCar(int id)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars where id = @id", DBConnectionstring))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@id", id);
+
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                        return dt.Rows[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return null;
+        }
+
         public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
         {
             sumkm = 0;
@@ -3961,6 +4045,24 @@ WHERE
 
         private void CloseChargingState(int openChargingState)
         {
+            object meter_vehicle_kwh_end = DBNull.Value;
+            object meter_utility_kwh_end = DBNull.Value;
+
+            try
+            {
+                var v = ElectricityMeterBase.Instance(car.CarInDB);
+//                 if (v != null && v.IsCharging() == true)
+                {
+                    meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
+                    meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+
             try
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
@@ -3970,19 +4072,24 @@ WHERE
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE
- chargingstate
-SET
- EndDate = @EndDate,
- EndChargingID = @EndChargingID
-WHERE
- id=@ChargingStateID
- AND CarID=@CarID", con))
+                        UPDATE
+                         chargingstate
+                        SET
+                         EndDate = @EndDate,
+                         EndChargingID = @EndChargingID,
+                         meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
+                         meter_utility_kwh_end = @meter_utility_kwh_end
+
+                        WHERE
+                         id=@ChargingStateID
+                         AND CarID=@CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
                         cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
+                        cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }

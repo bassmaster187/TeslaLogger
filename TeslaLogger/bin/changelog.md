@@ -1,3 +1,8 @@
+# Version 1.48.8
+- Delete password from database after successful login.
+- Show if your account is locked during authentification process
+- Use Captach if asked by Tesla mothership
+
 # Version 1.48.7
 - New source of SRTM files as dds.cr.usgs.gov doesn't provide them anymore [Bug #596](https://github.com/bassmaster187/TeslaLogger/issues/596)
 - Offline is now also considered as sleeping in Dashboards: Vampir Drain, Vampir Dran Monthly Statistics and Timeline Plugin

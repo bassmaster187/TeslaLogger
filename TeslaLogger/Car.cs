@@ -307,6 +307,8 @@ namespace TeslaLogger
                 Log($"VIN decoder: {vindecoder}");
                 Log($"Vehicle Config: car_type:'{car_type}' car_special_type:'{car_special_type}' trim_badging:'{trim_badging}'");
 
+                InitMeter();
+
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
@@ -320,6 +322,26 @@ namespace TeslaLogger
                 string temp = ex.ToString();
                 if (!temp.Contains("ThreadAbortException"))
                     Log(ex.ToString());
+            }
+        }
+
+        private void InitMeter()
+        {
+            try
+            {
+                var v = ElectricityMeterBase.Instance(CarInDB);
+                if (v != null)
+                {
+                    Log("Meter Status: " + v.ToString());
+                }
+                else
+                {
+                    Log("No meter config");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -794,6 +816,7 @@ namespace TeslaLogger
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 dbHelper.StartState(res);
+                dbHelper.CleanPasswort();
                 return;
             }
             else if (res == "asleep")
