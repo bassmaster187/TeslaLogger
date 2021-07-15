@@ -1,3 +1,9 @@
+# Version 1.48.9
+- Skip inactive cars from authentification to server
+- Don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile
+- List cars in account if car id not found
+- Wrong captcha has been showed for car id > 1
+
 # Version 1.48.8
 - Delete password from database after successful login.
 - Show if your account is locked during authentification process
