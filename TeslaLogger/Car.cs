@@ -133,6 +133,7 @@ namespace TeslaLogger
         public bool MIC = false;
         public string motor = "";
         internal bool waitForMFACode;
+        public static object InitCredentialsLock = new object();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -178,11 +179,16 @@ namespace TeslaLogger
                 currentJSON.current_odometer = dbHelper.GetLatestOdometer();
                 currentJSON.CreateCurrentJSON();
 
-                lock (typeof(Car))
+                Monitor.Enter(InitCredentialsLock);
+                try
                 {
                     CheckNewCredentials();
 
                     InitStage3();
+                }
+                finally
+                {
+                    Monitor.Exit(InitCredentialsLock);
                 }
 
                 while (run)

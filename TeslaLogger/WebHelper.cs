@@ -280,6 +280,13 @@ namespace TeslaLogger
                 }
 
                 Log("Login with : '" + Tools.ObfuscateString(car.TeslaName) + "' / '" + hiddenPassword + "'");
+                 
+                if (car.TeslaName.Length == 0 || !car.TeslaName.Contains("@"))
+                {
+                    car.passwortinfo.Append("Car inactive!<br>");
+                    Log("Car inactive");
+                    throw new Exception("Car inactive");
+                }
 
                 if (car.TeslaName.Length == 0 || car.TeslaPasswort.Length == 0)
                 {
@@ -619,52 +626,78 @@ namespace TeslaLogger
 
         private void WaitForCaptcha()
         {
-            car.Log("Start waiting for captcha code !!!");
-            DateTime timeout = DateTime.UtcNow;
-
-            while (car.Captcha_String == null)
+            bool hasLock = Monitor.IsEntered(Car.InitCredentialsLock);
+            try
             {
-                Thread.Sleep(10);
+                // don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile
+                if (hasLock)
+                    Monitor.Exit(Car.InitCredentialsLock);
 
-                if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
+                car.Log("Start waiting for captcha code !!!");
+                DateTime timeout = DateTime.UtcNow;
+
+                while (car.Captcha_String == null)
                 {
-                    timeout = DateTime.UtcNow;
-                    car.Log("Wait for captcha code !!!");
+                    Thread.Sleep(10);
+
+                    if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
+                    {
+                        timeout = DateTime.UtcNow;
+                        car.Log("Wait for captcha code !!!");
+                    }
                 }
+                car.Log("Captcha Code: " + car.Captcha_String);
             }
-            car.Log("Captcha Code: " + car.Captcha_String);
+            finally
+            {
+                if (hasLock)
+                    Monitor.Enter(Car.InitCredentialsLock);
+            }
         }
 
         private string WaitForMFA_Code(string transaction_id, string code_challenge, string state)
         {
             car.Log("Start waiting for MFA code !!!");
-            DateTime timeout = DateTime.UtcNow;
-
-            while (car.MFA_Code == null || car.MFA_Code.Length != 6)
+            bool hasLock = Monitor.IsEntered(Car.InitCredentialsLock);
+            try
             {
-                Thread.Sleep(10);
+                // don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile
+                if (hasLock)
+                    Monitor.Exit(Car.InitCredentialsLock);
 
-                if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
+                DateTime timeout = DateTime.UtcNow;
+
+                while (car.MFA_Code == null || car.MFA_Code.Length != 6)
                 {
-                    timeout = DateTime.UtcNow;
-                    car.Log("Wait for MFA code !!!");
+                    Thread.Sleep(10);
+
+                    if (DateTime.UtcNow - timeout > TimeSpan.FromSeconds(10))
+                    {
+                        timeout = DateTime.UtcNow;
+                        car.Log("Wait for MFA code !!!");
+                    }
+                }
+
+                car.Log("MFA Code: " + car.MFA_Code);
+
+                // while (true)
+                {
+                    Log("transaction_id: " + transaction_id);
+
+                    string code = MFA1(transaction_id, code_challenge, state);
+
+                    if (code.Length > 0)
+                        return code;
+
+                    car.passwortinfo.Append("Code received from Tesla server<br>");
+
+                    System.Threading.Thread.Sleep(500);
                 }
             }
-
-            car.Log("MFA Code: " + car.MFA_Code);
-
-            // while (true)
+            finally
             {
-                Log("transaction_id: " + transaction_id);
-
-                string code = MFA1( transaction_id, code_challenge, state);
-
-                if (code.Length > 0)
-                    return code;
-
-                car.passwortinfo.Append("Code received from Tesla server<br>");
-
-                System.Threading.Thread.Sleep(500);
+                if (hasLock)
+                    Monitor.Enter(Car.InitCredentialsLock);
             }
 
             return "";
@@ -1231,6 +1264,8 @@ namespace TeslaLogger
                     if (car.CarInAccount >= r1temp.Length)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
+                        ListCarsInAccount(r1temp);
+
                         return "NULL";
                     }
                     Dictionary<string, object> r2 = SearchCarDictionary(r1temp);
@@ -1349,6 +1384,27 @@ namespace TeslaLogger
 
                     Thread.Sleep(30000);
                 }
+            }
+        }
+
+        private void ListCarsInAccount(object[] cars)
+        {
+            try
+            {
+                Log("Existig Cars in Account:");
+
+                for (int x = 0; x < cars.Length; x++)
+                {
+                    var cc = (Dictionary<string, object>)cars[x];
+                    var ccVin = cc["vin"].ToString();
+                    var ccDisplayName = cc["display_name"].ToString();
+
+                    Log($"   Car # {x} / Vin: {ccVin} / Name: {ccDisplayName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
