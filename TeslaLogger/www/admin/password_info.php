@@ -99,7 +99,12 @@ menu("Credentials");
 <h1><?php t("Credentials Info"); ?>:</h1>
 <div id="captchapanel">
     <h2>Captcha:<h2> <br>
-    <img src="teslaloggerstream_svg.php?url=captchapic/1" alt=""/>
+    <img src="teslaloggerstream_svg.php?url=captchapic/<?php
+	if (isset($_REQUEST["id"]))
+        echo($_REQUEST["id"]);
+    else
+        echo("-1");
+?>" alt=""/>
     <input id="captcha" type="text" /> <button onclick="btn_captcha_click();"><?php t("OK"); ?>
 </div>
 <div id="mfapanel" style="display: none;">
