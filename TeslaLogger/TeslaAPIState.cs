@@ -163,9 +163,11 @@ namespace TeslaLogger
                     }
                     break;
                 case "battery_level":
+                    // car is idle and battery level changed -> update ABRP
                     if (car.IsParked() && !car.IsCharging())
                     {
-                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                        Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} ({oldTS}) -> {newvalue} ({newTS})");
+                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString()), 0, false, 0, car.currentJSON.latitude, car.currentJSON.longitude);
                     }
                     break;
                 default:
@@ -347,6 +349,14 @@ namespace TeslaLogger
 
         public bool ParseAPI(string JSON, string source, int CarInAccount = 0)
         {
+            if (string.IsNullOrEmpty(JSON))
+            {
+                return false;
+            }
+            if (!JSON.Contains("{"))
+            {
+                return false;
+            }
             if (dumpJSON)
             {
                 string filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{source}_{car.CarInDB}.json";
@@ -363,10 +373,6 @@ namespace TeslaLogger
                     }
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
-            if (string.IsNullOrEmpty(JSON))
-            {
-                return false;
-            }
             try
             {
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(JSON);
@@ -378,6 +384,12 @@ namespace TeslaLogger
                 {
                     return false;
                 }
+            }
+            catch (ArgumentException aex)
+            {
+                Tools.DebugLog("ArgumentException", aex);
+                Tools.DebugLog("JSON: <" + JSON + ">");
+                return false;
             }
             catch (Exception ex)
             {
