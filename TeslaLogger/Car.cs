@@ -1204,6 +1204,8 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
                 _ = webhelper.GetOdometerAsync();
+                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, currentJSON.current_battery_level, 0, false, 0, currentJSON.latitude, currentJSON.longitude);
+
             }
             // any -> Driving
             if (_oldState != TeslaState.Drive && _newState == TeslaState.Drive)
