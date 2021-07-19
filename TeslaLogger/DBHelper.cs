@@ -1327,7 +1327,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                             Tools.DebugLog(cmd);
                             int rowsUpdated = cmd.ExecuteNonQuery();
-                            car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                            car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
                         }
                     }
                 }
