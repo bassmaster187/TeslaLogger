@@ -1193,6 +1193,7 @@ EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
 EnBW DE-Kehring Elztal Nord, 50.266953,7.224861, 20
 EnBW DE-Kehring Elztal Süd, 50.26568,7.22722, 20
 EnBW DE-Kirchheim Trigema, 50.832535,9.573169, 5
+EnBW DE-Koblenz Autohof Rübenacher Wald, 50.212926, 7.539208
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
@@ -1247,6 +1248,8 @@ EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
 EnBW DE-Wülferode West, 52.338094,9.86385
 EnBW DE-Urbach, 48.810151, 9.570358
+
+EVM DE-Koblenz Autohof Rübenacher Wald, 50.212926, 7.539208
 
 EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
 EWE-SWB DE-Burgwedel, 52.485739, 9.844603
@@ -1732,6 +1735,7 @@ Innogy CZ-Praha Limuzská, 50.079548, 14.509048
 Innogy CZ-Praha Dřevčická, 50.080402, 14.510758
 Innogy DE-Berlin Avus, 52.501775, 13.277211
 Innogy DE-Bielefeld Green Station Sieker, 52.005329, 8.559438
+Innogy DE-Boppard-Buchholz Heidestraße, 50.212926, 7.539208
 Innogy DE-Cloerbruch Nord, 51.237662, 6.513529
 Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
@@ -2057,6 +2061,7 @@ DE Offenburg Shell Tankstelle, 48.464972, 7.931808
 DE Oldenburg Media Markt, 53.161348, 8.172719
 DE Passau Media Markt, 48.574479, 13.414943
 DE Paderborn Westfalen Weser Netz, 51.725959, 8.756923, 5
+DE Plaidt Alterauge GmbH, 50.405837, 7.472896
 DE Rheydt New AG, 51.157497, 6.448055
 DE Ritterhude HEM, 53.185475,8.706381
 DE Roth Autohaus, 49.245669, 11.119321
