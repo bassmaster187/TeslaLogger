@@ -1198,7 +1198,7 @@ EnBW DE-Katzenfurt Süd, 50.620318, 8.36309, 5
 EnBW DE-Kehring Elztal Nord, 50.266953,7.224861, 20
 EnBW DE-Kehring Elztal Süd, 50.26568,7.22722, 20
 EnBW DE-Kirchheim Trigema, 50.832535,9.573169, 5
-EnBW DE-Koblenz Autohof Rübenacher Wald, 50.212926, 7.539208
+EnBW DE-Koblenz Autohof Rübenacher Wald, 50.347123, 7.507522
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
@@ -1254,7 +1254,10 @@ EnBW DE-Wonnegau West, 49.644547, 8.290185
 EnBW DE-Wülferode West, 52.338094,9.86385
 EnBW DE-Urbach, 48.810151, 9.570358
 
-EVM DE-Koblenz Autohof Rübenacher Wald, 50.212926, 7.539208
+EVM DE-Cochem Bahnhofsvorplatz, 50.153328, 7.167515
+EVM DE-Koblenz Altstadt, 50.359981, 7.598084
+EVM DE-Koblenz Autohof Rübenacher Wald, 50.346812, 7.507836
+EVM DE-Koblenz Contel Hotel, 50.365908, 7.577220
 
 EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
 EWE-SWB DE-Burgwedel, 52.485739, 9.844603
