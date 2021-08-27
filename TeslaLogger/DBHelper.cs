@@ -4079,7 +4079,7 @@ WHERE
                          EndChargingID = @EndChargingID,
                          meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
                          meter_utility_kwh_end = @meter_utility_kwh_end
-
+                         "+((car.GetTeslaAPIState().GetString("charging_state", out string chargingState, 5000) && chargingState.Equals("Disconnected")) ? ",UnplugDate = @UnplugDate" : "")+@"
                         WHERE
                          id=@ChargingStateID
                          AND CarID=@CarID", con))
@@ -4090,6 +4090,9 @@ WHERE
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
+                        if (car.GetTeslaAPIState().GetString("charging_state", out chargingState, 5000) && chargingState.Equals("Disconnected")) {
+                            cmd.Parameters.AddWithValue("@UnplugDate", chargeEnd);
+                        }
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
