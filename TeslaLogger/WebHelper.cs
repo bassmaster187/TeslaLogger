@@ -3726,6 +3726,12 @@ namespace TeslaLogger
         {
             try
             {
+                // plausibility check
+                if (soc < 0)
+                {
+                    throw new Exception($"SoC < 0! soc:{soc}");
+                }
+
                 if (car.ABRP_mode <= 0 || String.IsNullOrEmpty(car.ABRP_token))
                     return;
 
@@ -3745,7 +3751,7 @@ namespace TeslaLogger
                     }
                 }
 
-                double speed_kmh = speed_mph / 0.62137119223733;
+                double speed_kmh = DBHelper.MphToKmhRounded(speed_mph);
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                     {
@@ -3784,9 +3790,10 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (Exception x)
+            catch (Exception ex)
             {
-                Logfile.Log(x.ToString());
+                Logfile.Log(ex.ToString());
+                Tools.DebugLog("SendDataToAbetterrouteplannerAsync exception: " + ex.ToString() + Environment.NewLine + ex.StackTrace);
             }
         }
     }
