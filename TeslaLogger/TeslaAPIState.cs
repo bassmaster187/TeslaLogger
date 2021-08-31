@@ -1258,5 +1258,19 @@ namespace TeslaLogger
             }
             return str;
         }
+
+        internal long GetTimestampAge(string source)
+        {
+            long maxTS = 0;
+            foreach (string property in storage.Keys)
+            {
+                if (string.IsNullOrEmpty(source) || source.Equals(property))
+                {
+                    maxTS = (long)((maxTS < (long)storage[property][Key.Timestamp]) ? storage[property][Key.Timestamp] : maxTS);
+                }
+            }
+            long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+            return maxTS > 0 ? now - maxTS : 0;
+        }
     }
 }
