@@ -3273,7 +3273,7 @@ namespace TeslaLogger
                 {
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", -1, (int)result.StatusCode);
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    Thread.Sleep(30000);
+                    Thread.Sleep(5000);
                 }
                 else
                 {
