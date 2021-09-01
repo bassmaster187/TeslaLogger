@@ -3264,6 +3264,7 @@ namespace TeslaLogger
                 }
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
+                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", -1, (int)result.StatusCode);
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     Thread.Sleep(30000);
                 }
