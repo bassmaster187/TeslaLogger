@@ -317,9 +317,14 @@ namespace TeslaLogger
                 if (
                         vin[7] == '2' || // Dual Motor (standard) (Designated for Model S & Model X)
                         vin[7] == '4' || // Dual Motor (performance) (Designated for Model S & Model X)
+                        vin[7] == '5' || // Dual Motor Models S und Model X 2021 Refresh
+                        vin[7] == '6' || // Triple Motor Models S und Model X 2021 Plaid
                         vin[7] == 'B' || // Dual motor - standard Model 3
                         vin[7] == 'C' || // Dual motor - performance Model 3
-                        vin[7] == 'E'    // Dual motor - Model Y
+                        vin[7] == 'E' || // Dual motor - Model Y
+                        vin[7] == 'F' || // Dual motor - Model Y P
+                        vin[7] == 'K' || // Dual motor - Model Y
+                        vin[7] == 'L'    // Dual motor - Model Y P
                     )
                 {
                     AWD = true;
@@ -363,14 +368,32 @@ namespace TeslaLogger
                     case '4':
                         motor = "dual performance";
                         break;
+                    case '5':
+                        motor = "dual 2021 refresh";
+                        break;
+                    case '6':
+                        motor = "triple 2021 plaid";
+                        break;
+                    case 'A':
+                        motor = "3 single";
+                        break;
                     case 'B':
                         motor = "3 dual";
                         break;
                     case 'C':
                         motor = "3 dual performance";
                         break;
+                    case 'D':
+                    case 'J':
+                        motor = "Y single";
+                        break;
                     case 'E':
+                    case 'K':
+                    case 'L':
                         motor = "Y dual";
+                        break;
+                    case 'F':
+                        motor = "Y dual performance";
                         break;
                 }
 
