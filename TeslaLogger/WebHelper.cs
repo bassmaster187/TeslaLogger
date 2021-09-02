@@ -1469,7 +1469,14 @@ namespace TeslaLogger
 
                 resultContent = await result.Content.ReadAsStringAsync();
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
-                DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                if (result.IsSuccessStatusCode)
+                {
+                    DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                }
+                else
+                {
+                    DBHelper.AddMothershipDataToDB("IsOnline()", -1, (int)result.StatusCode);
+                }
                 if (TeslaAPI_Commands.ContainsKey("vehicles"))
                 {
                     TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
@@ -3264,8 +3271,9 @@ namespace TeslaLogger
                 }
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
+                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", -1, (int)result.StatusCode);
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    Thread.Sleep(30000);
+                    Thread.Sleep(5000);
                 }
                 else
                 {
