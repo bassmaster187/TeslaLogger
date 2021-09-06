@@ -76,14 +76,25 @@ Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
 Supercharger BE-Wavre, 50.7080753,4.5983481
 Supercharger BG-Plovdiv, 42.144727, 24.768828
+Supercharger CA-Aulac NB,45.871352,-64.280378
 Supercharger CA-Baie-Saint-Paul QC, 47.435844,-70.506266
+Supercharger CA-Belleville ON,44.187802,-77.399167
 Supercharger CA-Brossard QC,45.44196,-73.440895
 Supercharger CA-Cornwall ON, 45.023651, -74.748071
+Supercharger CA-Drummondville QC,45.899101,-72.519329
+Supercharger CA-Kingston ON, 44.267265,-76.503148
 Supercharger CA-Laval QC, 45.570329, -73.747584
 Supercharger CA-Levis QC, 46.730448, -71.268418
+Supercharger CA-Lincoln NB,45.851583,-66.560574
 Supercharger CA-Mascouche QC, 45.723065,-73.618514
+Supercharger-V3 CA-Niagara Falls ON, 43.116773,-79.124108
+Supercharger CA-Pickering ON,43.846083,-79.072921
 Supercharger CA-Pointe-Claire QC,45.464219,-73.827997
+Supercharger CA-Rivière-du-Loup QC,47.820207,-69.558775
 Supercharger CA-Sainte Eulalie QC, 46.058345, -72.313283
+Supercharger CA-Saint Leonard NB, 47.168726,-67.918016
+Supercharger CA-Salisbury NB,46.050222,-65.061501
+Supercharger CA-Woodstock NB, 46.123038,-67.606375
 Supercharger CA-Yamachiche QC, 46.262234, -72.876919
 Supercharger-V3 CH-Affoltern, 47.271118, 8.439714, 30
 Supercharger CH-Beckenried, 46.971073, 8.459073
@@ -315,6 +326,7 @@ Supercharger FI-Akaa, 61.181106, 23.885075
 Supercharger FI-Huittinen, 61.168436, 22.680099
 Supercharger-V3 FI-Huittinen, 61.168436, 22.680099
 Supercharger FI-Jalasjärvi, 62.417805, 22.792112
+Supercharger-V3 FI-Karesuvanto, 68.450226,22.4814
 Supercharger FI-Koivisto, 62.516908, 25.691666
 Supercharger FI-Kokkola, 63.829282, 23.148487
 Supercharger FI-Paimio, 60.442961, 22.605621
@@ -498,7 +510,11 @@ Supercharger IE-Ballacolla, 52.86704, -7.481818
 Supercharger IE-Birdhill, 52.757747, -8.40932
 Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717
 Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
+Supercharger-V3 IS-Egilsstaðir, 65.259368,-14.406532
 Supercharger IS-Fossvogur, 64.117994, -21.899666
+Supercharger-V3 IS-Kirkjubæjarklaustur, 63.789025,-18.052187
+Supercharger-V3 IS-Staðarskáli, 65.14475,-21.084813
+Supercharger-V3 IS-Vatnagardar, 64.14496,-21.854711
 Supercharger IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
 Supercharger-V3 IT-Arese, 45.561371, 9.055905
@@ -656,10 +672,11 @@ Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer, 61.243236, 10.434457
 Supercharger NZ-Auckland-Ponsonby, -36.858347,174.754238
-Supercharger PL-Ciechocinek, 52.874469, 18.773758
+Supercharger PL-Ciechocinek, 52.875248,18.774952
 Supercharger PL-Katowice, 50.254594, 19.046594
 Supercharger PL-Katowice-E.Leclerc, 50.220135, 18.990248
 Supercharger PL-Kostomłoty, 51.037361, 16.584208
+Supercharger-V3 PL-Lucmierz, 51.886814,19.384378
 Supercharger PL-Poznań, 52.400285, 16.893091
 Supercharger PL-Radom, 51.379569, 21.125477
 Supercharger PL-Trzebownisko, 50.089252,22.04566
@@ -689,6 +706,7 @@ Supercharger SE-Gävle, 60.648513, 17.120583
 Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
 Supercharger SE-Jäckvik, 66.39067, 16.964868
+Supercharger-V3 SE-Jokkmokk, 66.605774,19.824993
 Supercharger SE-Kalmar, 56.673228, 16.321408
 Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
@@ -768,6 +786,7 @@ Supercharger-V3 US-Colfax NC, 36.09507,-79.994715
 Supercharger US-Columbia MO, 38.957869, -92.252786
 Supercharger-V3 US-Conifer CO - Conifer Road, 39.54408, -105.290051
 Supercharger US-Cincinnati OH, 39.162772, -84.426492
+Supercharger US-Clearwater MN, 45.411954,-94.054901
 Supercharger US-Council Bluffs IA, 41.22093,-95.835632
 Supercharger US-Cookeville TN, 36.155752,-85.515201
 Supercharger US-Coralville IA, 41.680508, -91.591347
@@ -788,6 +807,7 @@ Supercharger US-Elko NV, 40.836298, -115.790796
 Supercharger US-Evanston WY, 41.26299,-110.985504
 Supercharger US-Eau Claire WI, 44.770877,-91.437202
 Supercharger US-El Paso TX,31.883934,-106.583629
+Supercharger US-Erie PA, 42.049606,-80.086404
 Supercharger-V3 US-Firebaugh CA,36.639163,-120.625873
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
@@ -839,6 +859,7 @@ Supercharger US-Livonia MI, 42.379355, -83.329502
 Supercharger US-London KY, 37.149148, -84.11394
 Supercharger US-Lovelock NV, 40.179476, -118.472197
 Supercharger US-Lowell AR, 36.255397, -94.152674
+Supercharger US-Macedonia OH,41.313652,-81.51703
 Supercharger-V3 US-Mackinaw City MI, 45.772228, -84.72645
 Supercharger US-Madison WI - E. Washington Ave., 43.11915,-89.319102
 Supercharger US-Madison WI – East Towne Mall, 43.126624,-89.30686
@@ -853,6 +874,7 @@ Supercharger US-Mehlville MO, 38.507468, -90.32907
 Supercharger US-Menifee CA, 33.679638, -117.173752
 Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
+Supercharger US-Mishawaka IN, 41.717332,-86.188565
 Supercharger US-Mojave CA, 35.068596, -118.174568
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
 Supercharger US-Mt. Hope WV, 37.846882, -81.195869
