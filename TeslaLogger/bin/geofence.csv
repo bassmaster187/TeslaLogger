@@ -751,6 +751,7 @@ Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger-V3 SK-Košice, 48.695151,21.235604
 Supercharger SK-Zvolen, 48.627379, 19.103481
+Supercharger US-Acworth GA,34.075813,-84.652334
 Supercharger US-Amarillo TX, 35.189094, -101.931492
 Supercharger US-Annapolis MD, 38.980072,-76.540796
 Supercharger US-Ardmore OK,34.179246,-97.1656
@@ -760,10 +761,13 @@ Supercharger US-Altoona IA, 41.6642, -93.465622
 Supercharger US-Asheville NC, 35.531388, -82.604514
 Supercharger US-Atascadero CA,35.486605,-120.666411
 Supercharger US-Auburn MA, 42.203788, -71.832927
+Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
 Supercharger US-Austin TX,30.329202,-97.706266
 Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bay City MI, 43.622212, -83.932216
 Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
+Supercharger US-Birmingham AL, 33.525915,-86.806862
+Supercharger-V3 US-Beaver UT - 525 W,38.248718,-112.653139
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
 Supercharger US-Brewer ME, 44.775854,-68.734722
 Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
@@ -776,17 +780,21 @@ Supercharger US-Cabazon CA,33.931388,-116.820265
 Supercharger US-Cambridge OH, 40.003559, -81.574903
 Supercharger US-Cary NC,35.843593,-78.886314
 Supercharger US-Catoosa OK, 36.167589, -95.766032
+Supercharger US-Cedar City UT,37.605961,-113.1612
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Chantilly VA, 38.913606,-77.486836
 Supercharger US-Charleston WV, 38.35475, -81.642864
+Supercharger US-Chattanooga TN,35.038706,-85.195937
 Supercharger-V3 US-Chestertown NY, 43.665431,-73.784933
 Supercharger-V3 US-Chillicothe OH, 39.358367, -82.977389
 Supercharger US-Childress TX, 34.432503, -100.218625
 Supercharger-V3 US-Colfax NC, 36.09507,-79.994715
+Supercharger US-Colorado Springs CO,38.837485,-104.824858
 Supercharger US-Columbia MO, 38.957869, -92.252786
 Supercharger-V3 US-Conifer CO - Conifer Road, 39.54408, -105.290051
 Supercharger US-Cincinnati OH, 39.162772, -84.426492
 Supercharger US-Clearwater MN, 45.411954,-94.054901
+Supercharger-V3 US-Clayton NM, 36.449444,-103.181929
 Supercharger US-Council Bluffs IA, 41.22093,-95.835632
 Supercharger US-Cookeville TN, 36.155752,-85.515201
 Supercharger US-Coralville IA, 41.680508, -91.591347
@@ -802,6 +810,7 @@ Supercharger US-Dublin-Amador Plaza CA,37.702516,-121.924675
 Supercharger US-Dublin OH, 40.093198, -83.092261
 Supercharger US-Dubuque IA, 42.487438, -90.664024
 Supercharger US-Duluth MN, 46.784582, -92.102298
+Supercharger-V3 US-Douglasville GA,33.726865,-84.735714
 Supercharger US-Effingham IL,39.13713,-88.563387
 Supercharger US-Elko NV, 40.836298, -115.790796
 Supercharger US-Evanston WY, 41.26299,-110.985504
@@ -809,6 +818,7 @@ Supercharger US-Eau Claire WI, 44.770877,-91.437202
 Supercharger US-El Paso TX,31.883934,-106.583629
 Supercharger US-Erie PA, 42.049606,-80.086404
 Supercharger-V3 US-Firebaugh CA,36.639163,-120.625873
+Supercharger US-Florence SC,34.190258,-79.832607
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
 Supercharger US-Freeport ME, 43.858727,-70.104076
@@ -826,6 +836,7 @@ Supercharger US-Grove City OH, 39.877185, -83.063419
 Supercharger US-Guilderland NY, 42.688555,-73.85295
 Supercharger US-Hays KS, 38.900536, -99.319335
 Supercharger US-Haymarket VA,38.815126, -77.6427411, 30
+Supercharger US-Henrietta TX,33.800589,-98.196653
 Supercharger US-Houston-North TX, 29.980302, -95.421564
 Supercharger US-Houston TX - Northwest Freeway, 29.867279, -95.538107
 Supercharger US-Huntington WV, 38.410909, -82.487255
@@ -846,6 +857,7 @@ Supercharger US-Lake Elsinore CA, 33.698631, -117.349266
 Supercharger US-Las Vegas NV, 36.165906, -115.138655
 Supercharger US-Lexington KY, 38.017734, -84.421103
 Supercharger US-Lexington VA, 37.79696, -79.419029
+Supercharger US-Lindale TX,32.470712,-95.450594
 Supercharger-V3 US-Long Pine CA, 36.600623, -118.062336
 Supercharger US-Loveland CO, 40.441433,-104.991188
 Supercharger US-Louisville KY, 38.211971, -85.673251
@@ -868,6 +880,7 @@ Supercharger US-Mammoth Lakes CA, 37.644533, -118.96555
 Supercharger US-Marshall MI, 42.292068, -84.96416
 Supercharger US-Maumee OH, 41.578401, -83.664689
 Supercharger US-Mauston WI, 43.795476,-90.059363
+Supercharger-V3 US-McDonough GA,33.425901,-84.187713
 Supercharger US-Medway ME, 45.609342,-68.522743
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
@@ -876,17 +889,22 @@ Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
 Supercharger US-Mishawaka IN, 41.717332,-86.188565
 Supercharger US-Mojave CA, 35.068596, -118.174568
+Supercharger US-Monroe LA, 32.496447,-92.05509
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
 Supercharger US-Mt. Hope WV, 37.846882, -81.195869
 Supercharger US-Mt. Vernon IL, 38.316210, -88.955901
 Supercharger US-Nacogdoches TX, 31.652005, -94.679586
+Supercharger-V3 US-Nashville TN, 36.110553,-86.723791
+Supercharger US-Nephi UT,39.678046,-111.84082
 Supercharger US-Newport News VA, 37.114579, -76.496197
+Supercharger-V3 US-North Charleston SC,32.872514,-80.015414
 Supercharger US-Oak Creek WI, 42.900051,-87.913746
 Supercharger US-Oakdale MN, 44.964849,-92.961271
 Supercharger US-Ocala FL,29.140929,-82.19403
 Supercharger US-Oshkosh WI, 44.028786,-88.592554
 Supercharger-V3 US-Ozark AR, 35.523836, -93.863559
 Supercharger US-Ozona TX,30.706676,-101.196059
+Supercharger US-Pearl MS, 32.274117,-90.151055
 Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
 Supercharger US-Primm NV, 35.610592, -115.387932
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
@@ -908,6 +926,7 @@ Supercharger US-San Jose CA - Coleman Avenue, 37.339758,-121.903654
 Supercharger US-Santa Ana CA, 33.775828,-117.872036
 Supercharger US-Santa Fe NM,35.6116,-106.031465
 Supercharger US-Santa Rosa NM,34.94717,-104.648025
+Supercharger US-Shreveport LA,32.478711,-93.754368
 Supercharger US-Silverthorne CO, 39.631417, -106.070817
 Supercharger US-Sioux Falls SD, 43.527636,-96.790581
 Supercharger US-Skokie IL, 42.009046,-87.763186
@@ -925,6 +944,7 @@ Supercharger US-Terre Haute IN, 39.443344, -87.331722
 Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
 Supercharger-V3 US-Traver CA, 36.448943,-119.486536
+Supercharger US-Trinidad CO,37.134148,-104.519374
 Supercharger US-Truth or Consequences NM,33.15523,-107.251652
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
 Supercharger US-Tupelo MS, 34.311517, -88.70099
