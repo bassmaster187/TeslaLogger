@@ -34,9 +34,11 @@ Supercharger AU-Canberra, -35.294304, 149.190322
 Supercharger AU-Central Coast, -33.310177, 151.420578
 Supercharger AU-Clare Valley, -33.8485, 138.618157
 Supercharger AU-Coffs Harbour, -30.281439, 153.131666
+Supercharger-V3 AU-Colac, -38.34131,143.593036
 Supercharger AU-Cooma, -36.235522, 149.126794
 Supercharger AU-Dubbo, -32.24995, 148.609182
 Supercharger AU-Euroa, -36.752887, 145.573418
+Supercharger-V3 AU-Geelong, -38.06514,144.382538
 Supercharger AU-Gold Coast, -28.035361, 153.427306
 Supercharger AU-Goulburn, -34.755597, 149.720984
 Supercharger AU-Gundagai, -35.002106, 148.109934
@@ -60,7 +62,7 @@ Supercharger AU-Wodonga, -36.12386, 146.889963
 Supercharger BE-Aalst, 50.92147, 4.03275
 Supercharger BE-Antwerp, 51.268051, 4.4024, 70
 Supercharger BE-Antwerp-Aartselaar, 51.13699, 4.37719
-Supercharger BE-Arlon, 49.64796, 5.8188
+Supercharger BE-Arlon, 49.648129,5.818957
 Supercharger BE-Brugge, 51.16989, 3.19666
 Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
@@ -113,7 +115,9 @@ Supercharger CN-Hualuxe Hotel Wuxi Taihu, 31.481455,120.303066
 Supercharger CZ-Brno, 49.138336, 16.630748
 Supercharger CZ-Humpolec, 49.521746, 15.347476
 Supercharger-V3 CZ-Kamenný Újezd, 48.8877538, 14.436229
+Supercharger-V3 CZ-Lovosice, 50.511713, 14.052644, 15
 Supercharger CZ-Olomouc, 49.560857, 17.262371
+Supercharger CZ-Plzeň, 49.725120, 13.326045
 Supercharger CZ-Vestec, 49.9898398, 14.4907623
 Supercharger DE-Achern, 48.6413, 8.03774
 Supercharger DE-Aichstetten, 47.880376, 10.040434, 7
@@ -125,6 +129,7 @@ Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
 Supercharger DE-Bispingen, 53.104326, 9.981842
 Supercharger DE-Blankenfelde-Mahlow, 52.3089548, 13.444767
+Supercharger-V3 DE-Bochum - Ruhr Park, 51.49506,7.28483
 Supercharger-V3 DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Busdorf, 54.477896, 9.544913								   
@@ -143,6 +148,7 @@ Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
 Supercharger-V3 DE-Gelnhausen,50.188644,9.186141
+Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
@@ -151,6 +157,7 @@ Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
+Supercharger-V3 DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Herzsprung, 53.067343, 12.533212
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
@@ -173,12 +180,15 @@ Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
 Supercharger-V3 DE-Illertissen, 48.21882, 10.1276145, 15
 Supercharger DE-Jettingen, 48.41105, 10.4403
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
+Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
+Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
+Supercharger-V3 DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
@@ -186,6 +196,7 @@ Supercharger DE-Malsfeld, 51.0872578, 9.485137, 20
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
 Supercharger DE-Motten, 50.355621, 9.75384
+Supercharger-V3 DE-Murr, 48.956119,9.245459
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
@@ -207,9 +218,12 @@ Supercharger-V3 DE-Panketal, 52.620716, 13.541721
 Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
 Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
+Supercharger-V3 DE-Plauen, 50.497406,12.170422
+Supercharger-V3 DE-Posthausen, 53.057578,9.165257
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
 Supercharger DE-Regensburg, 48.9947224, 12.150609
+Supercharger-V3 DE-Reinfeld, 53.8232, 10.50352
 Supercharger-V3 DE-Rhüden,51.947273, 10.1409618, 9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
@@ -241,6 +255,7 @@ Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
 Supercharger DE-Wilnsdorf, 50.8168944, 8.085813
 Supercharger-V3 DE-Wismar, 53.879307, 11.454047
+Supercharger-V3 DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittlich, 49.97003, 6.86175
 Supercharger-V3 DE-Wörth an der Isar, 48.625626, 12.320216
@@ -559,6 +574,7 @@ Supercharger NL-Zwolle, 52.531928, 6.157031
 Supercharger NO-Aksdal, 59.423006, 5.44306
 Supercharger-V3 NO-Aksdal South, 59.421206, 5.4435
 Supercharger NO-Alvdal, 62.114854, 10.616826
+Supercharger-V3 NO-Alta, 69.961145,23.232869,
 Supercharger NO-Åndalsnes, 62.557776,7.685321
 Supercharger NO-Arna, 60.421924, 5.46703
 Supercharger NO-Åsane, 60.484345, 5.375959
@@ -567,6 +583,7 @@ Supercharger NO-Aurland, 60.89863, 7.21082
 Supercharger-V3 NO-Bamble, 58.9713, 9.51278, 15
 Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
+Supercharger-V3 NO-Brekkvasselv, 64.847611,13.015797
 Supercharger NO-Brumunddal, 60.878507,10.929387
 Supercharger NO-Bygland, 58.82792, 7.796114
 Supercharger NO-Dombås, 62.074749, 9.12783
@@ -581,6 +598,7 @@ Supercharger NO-Gulsvik, 60.381223, 9.609859
 Supercharger NO-Hernes, 60.933109, 11.676209
 Supercharger NO-Hokksund, 59.761033, 9.905583
 Supercharger NO-Holmestrand, 59.490174, 10.294565
+Supercharger-V3 NO-Honningsvåg, 70.999642,25.967133
 Supercharger NO-Hovden, 59.561243, 7.356849
 Supercharger NO-Indre Arna, 60.421749, 5.467271
 Supercharger NO-Innhavet, 67.962417, 15.929685
@@ -600,6 +618,7 @@ Supercharger NO-Lillesand, 58.236817, 8.299052
 Supercharger NO-Lyngdal, 58.155643, 7.102354
 Supercharger-V3 NO-Maurset, 60.410401, 7.325072
 Supercharger NO-Mo i Rana, 66.307374, 14.152668
+Supercharger-V3 NO-Molde, 62.739453,7.19985
 Supercharger NO-Mosjøen, 65.83483634, 13.191672563
 Supercharger NO-Mosjøen North, 65.841627, 13.187939
 Supercharger NO-Nes i Ådal, 60.58475, 9.985092
@@ -625,6 +644,7 @@ Supercharger NO-Skulestadmo, 60.658297, 6.436256
 Supercharger NO-Svolvær, 68.233132, 14.559828
 Supercharger NO-Solli, 59.324292, 10.954448
 Supercharger NO-Stjørdal, 63.466385, 10.918098
+Supercharger-V3 NO-Stryn, 61.904677,6.7258
 Supercharger NO-Storjord, 66.814045, 15.401738
 Supercharger NO-Sundebru, 58.820783, 9.073746
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
@@ -635,6 +655,7 @@ Supercharger NO-Vinstra, 61.59049, 9.72166
 Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog, 62.520404, 6.915983
 Supercharger NO-Øyer, 61.243236, 10.434457
+Supercharger NZ-Auckland-Ponsonby, -36.858347,174.754238
 Supercharger PL-Ciechocinek, 52.874469, 18.773758
 Supercharger PL-Katowice, 50.254594, 19.046594
 Supercharger PL-Katowice-E.Leclerc, 50.220135, 18.990248
@@ -677,6 +698,7 @@ Supercharger SE-Kungälv, 57.8581639, 11.9982719
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
 Supercharger-V3 SE-Mariestad,58.677066,13.815005
+Supercharger-V3 SE-Markaryd, 56.444825, 13.603916
 Supercharger SE-Markaryd, 56.444825, 13.603916
 Supercharger SE-Mellbystrand, 56.501606,12.95763
 Supercharger SE-Mora, 61.005921, 14.54418
@@ -1416,7 +1438,7 @@ Ionity CH-Lully, 46.832458, 6.859379
 Ionity CH-Martigny, 46.127822, 7.059829
 Ionity CH-Neuenkirch, 47.113372, 8.232328
 Ionity CZ-Beroun (dir. Prague), 49.95581, 14.062759
-Ionity CZ-Lovosice, 50.511752, 14.052646
+Ionity CZ-Lovosice, 50.51188, 14.0527, 5
 Ionity CZ-Nupaky, 49.984404, 14.602629
 Ionity CZ-Pávov (dir. Brno), 49.453814, 15.591480
 Ionity CZ-Pávov (dir. Prague), 49.455104, 15.593272
@@ -2064,7 +2086,7 @@ DE Hannover Messeschnellweg Wes,52.323175,9.814137
 DE Hannover PZH IFA Uni, 52.426875, 9.618212
 DE Hannover Volkswagen Kahle, 52.417529, 9.634326
 DE Ingolstadt Audi Forum, 48.783595, 11.413007
-DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314
+DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314, 10
 DE Kettig Alterauge GmbH, 50.405837, 7.472896
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
 DE Köln Leonardo Hotel, 50.926801, 6.904346
