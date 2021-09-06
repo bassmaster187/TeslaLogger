@@ -179,7 +179,8 @@ namespace TeslaLogger
                    { "sentry_mode", current_is_sentry_mode },
                    { "country_code", current_country_code },
                    { "state", current_state },
-                   { "display_name", car.display_name}
+                   { "display_name", car.display_name},
+                   { "heading", heading}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;

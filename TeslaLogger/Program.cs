@@ -10,6 +10,8 @@ namespace TeslaLogger
     internal class Program
     {
         public static bool VERBOSE = false;
+        public static int KeepOnlineMinAfterUsage = 1;
+        public static int SuspendAPIMinutes = 30;
 
         public enum TLMemCacheKey
         {
@@ -214,6 +216,9 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
+            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", 1);
+            SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", 30);
+
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
@@ -222,8 +227,8 @@ namespace TeslaLogger
 
             Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
 
-            Logfile.Log("KeepOnlineMinAfterUsage: " + ApplicationSettings.Default.KeepOnlineMinAfterUsage);
-            Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
+            Logfile.Log("KeepOnlineMinAfterUsage: " + KeepOnlineMinAfterUsage);
+            Logfile.Log("SuspendAPIMinutes: " + SuspendAPIMinutes);
             Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
             Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
             Logfile.Log("StreamingPos: " + Tools.StreamingPos());

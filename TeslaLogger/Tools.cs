@@ -321,10 +321,10 @@ namespace TeslaLogger
                         vin[7] == '6' || // Triple Motor Models S und Model X 2021 Plaid
                         vin[7] == 'B' || // Dual motor - standard Model 3
                         vin[7] == 'C' || // Dual motor - performance Model 3
-                        vin[7] == 'E' || // Dual motor - Model Y
-                        vin[7] == 'F' || // Dual motor - Model Y P
-                        vin[7] == 'K' || // Dual motor - Model Y
-                        vin[7] == 'L'    // Dual motor - Model Y P
+                        vin[7] == 'E' ||  // Dual motor - Model Y
+                        vin[7] == 'F' ||  // Dual motor Performance - Model Y
+                        vin[7] == 'K' ||  // Dual motor Standard "Hairpin Windings"
+                        vin[7] == 'L'   // Dual motor Performance "Hairpin Windings"
                     )
                 {
                     AWD = true;
@@ -1612,6 +1612,32 @@ WHERE
                 Logfile.Log(ex.ToString());
             }
             return days;
+        }
+
+        internal static int GetSettingsInt(string name, int Default)
+        {
+            int value = 0;
+            try
+            {
+                string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
+                if (!File.Exists(filePath))
+                {
+                    Logfile.Log("settings file not found at " + filePath);
+                    return Default;
+                }
+                string json = File.ReadAllText(filePath);
+                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                if (IsPropertyExist(j, name))
+                {
+                    if (int.TryParse(j[name], out value))
+                        return value;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("GetSettingsInt:" + name +"\r\n"+  ex.ToString());
+            }
+            return Default;
         }
 
         internal static string GetMapProvider()

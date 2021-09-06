@@ -1,3 +1,8 @@
+# Version 1.48.10
+- BF: new authentification
+- combine charging is disabled per default, can be enabled for Geofences, but will fail if the car stays plugged in all the time
+- VIN decoder now decodes more vehicles
+
 # Version 1.48.9
 - Skip inactive cars from authentification to server
 - Don't wait (forever) for user input. Give other Cars a chance to authentificate meanwile

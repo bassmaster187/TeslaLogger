@@ -21,7 +21,9 @@ namespace TeslaLogger
         public ElectricityMeterOpenWB(string host, string parameter)
         {
             if (client == null)
+            {
                 client = new WebClient();
+            }
 
             this.host = host;
             this.parameter = parameter;

@@ -848,6 +848,7 @@ namespace TeslaLogger
                             case "perf_config":
                             case "default_charge_to_max":
                             case "exterior_trim":
+                            case "front_drive_unit":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_config");

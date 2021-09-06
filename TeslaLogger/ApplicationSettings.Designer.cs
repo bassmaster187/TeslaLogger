@@ -133,7 +133,8 @@ namespace TeslaLogger {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("curl/2.7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+            "Chrome/93.0.4577.63 Safari/537.36")]
         public string UserAgent {
             get {
                 return ((string)(this["UserAgent"]));

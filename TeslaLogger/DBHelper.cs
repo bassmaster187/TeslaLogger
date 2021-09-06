@@ -1931,25 +1931,18 @@ ORDER BY id DESC", con))
             object meter_vehicle_kwh_start = DBNull.Value;
             object meter_utility_kwh_start = DBNull.Value;
 
+            ElectricityMeterBase v = null;
             try
             {
-                var v = ElectricityMeterBase.Instance(wh.car.CarInDB);
-                if (v != null)
+                if (!wh.fast_charger_present)
                 {
-                    if (true) // xxx if (v.IsCharging() == true)
+                    v = ElectricityMeterBase.Instance(wh.car.CarInDB);
+                    if (v != null)
                     {
                         meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
                         meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
 
                         car.Log("Meter: " + v.ToString());
-                    }
-                    else if (v.IsCharging() == false)
-                    {
-                        car.Log("Meter: Not Charging!");
-                    }
-                    else
-                    {
-                        car.Log("Meter: IsCharging() == NULL");
                     }
                 }
             }
@@ -1959,6 +1952,7 @@ ORDER BY id DESC", con))
             }
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
+            int chargingstateid = 0;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -1976,13 +1970,46 @@ ORDER BY id DESC", con))
                     cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                     Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT LAST_INSERT_ID();";
+                    chargingstateid = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
 
             wh.car.currentJSON.current_charging = true;
             wh.car.currentJSON.CreateCurrentJSON();
 
-            #pragma warning disable CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
+            // Check for one minute if meter claims car is really not charging 
+            if  (v != null && v.IsCharging() != true)
+            {
+                Task.Run(() =>
+                {
+                    for (int x = 0; x < 10; x++)
+                    {
+                        if (v.IsCharging() == true)
+                        {
+                            car.Log("Meter: Charging!");
+                            return;
+                        }
+
+                        car.Log("Meter: Not Charging!");
+                        Thread.Sleep(6000);
+                    }
+
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("update chargingstate set meter_vehicle_kwh_start=NULL, meter_utility_kwh_start=NULL where id=@id ", con))
+                        {
+                            cmd.Parameters.AddWithValue("@id", chargingstateid);
+                            Tools.DebugLog(cmd);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                });
+            }
+
+#pragma warning disable CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
             _ = Task.Factory.StartNew(() =>
             {
                 // give TL some time to enter charge state

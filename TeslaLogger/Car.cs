@@ -629,7 +629,7 @@ namespace TeslaLogger
                     {
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
                         TimeSpan ts = DateTime.Now - lastCarUsed;
-                        if (ts.TotalMinutes > ApplicationSettings.Default.KeepOnlineMinAfterUsage)
+                        if (ts.TotalMinutes > Program.KeepOnlineMinAfterUsage)
                         {
                             SetCurrentState(TeslaState.Start);
 
