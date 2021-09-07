@@ -1,3 +1,6 @@
+# Version 1.48.11
+- authentification with access token & refresh token as a fallback if email & password doesn't work
+
 # Version 1.48.10
 - BF: new authentification
 - combine charging is disabled per default, can be enabled for Geofences, but will fail if the car stays plugged in all the time

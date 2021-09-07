@@ -1147,6 +1147,9 @@ namespace TeslaLogger
                     string password = r["password"];
                     bool freesuc = r["freesuc"];
 
+                    string access_token = r["access_token"];
+                    string refresh_token = r["refresh_token"];
+
                     if (id == -1)
                     {
                         Logfile.Log("Insert Password");
@@ -1159,7 +1162,7 @@ namespace TeslaLogger
                             {
                                 long newid = cmd.ExecuteScalar() as long? ?? 1;
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -1167,9 +1170,11 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
                                     cmd2.Parameters.AddWithValue("@display_name", "Car " + newid);
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                                    cmd2.Parameters.AddWithValue("@tesla_token", access_token);
+                                    cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                                     cmd2.ExecuteNonQuery();
 
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", "", null);
+                                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -1185,13 +1190,15 @@ namespace TeslaLogger
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc,  tesla_token='', refresh_token='' where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@tesla_name", email);
                                 cmd.Parameters.AddWithValue("@tesla_password", password);
                                 cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                                cmd.Parameters.AddWithValue("@tesla_token", access_token);
+                                cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                                 cmd.ExecuteNonQuery();
 
                                 Car c = Car.GetCarByID(dbID);
@@ -1200,7 +1207,7 @@ namespace TeslaLogger
                                     c.ExitTeslaLogger("Credentials changed!");
                                 }
 
-                                Car nc = new Car(dbID, email, password, teslacarid, "", DateTime.MinValue, "", "", "", "", "", "", "", null);
+                                Car nc = new Car(dbID, email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
                                 WriteString(response, "OK");
                             }
                         }
