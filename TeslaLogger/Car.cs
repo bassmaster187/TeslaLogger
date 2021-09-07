@@ -1124,7 +1124,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     Log("DisableSentryMode ...");
-                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"off\":true}", true).Result;
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
                     Log("set_sentry_mode(): " + result);
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
