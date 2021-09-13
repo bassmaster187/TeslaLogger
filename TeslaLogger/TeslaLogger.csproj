@@ -66,6 +66,8 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaptchaSolver.cs" />
+    <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="CarSettings.cs" />
     <Compile Include="Crc32.cs" />

@@ -11,10 +11,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Collections;
+using System.Reflection;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
@@ -82,6 +84,28 @@ namespace TeslaLogger
             this.car = car;
 
             CheckUseTaskerToken();
+        }
+
+        public static string getTLSVersion()
+        {
+            /*
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    DateTime start = DateTime.UtcNow;
+                    string reply = client.DownloadString("https://www.howsmyssl.com/a/check");
+                    Logfile.Log("TLS: "+ reply);
+                    return reply;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            */
+
+            return "";
         }
 
         private void CheckUseTaskerToken()
@@ -240,9 +264,10 @@ namespace TeslaLogger
                     httpClientForAuthentification = new HttpClient(handler);
                     httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(10);
                     httpClientForAuthentification.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
                     //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
-                    httpClientForAuthentification.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-                    httpClientForAuthentification.DefaultRequestHeaders.Add("Accept", "*/*");
+                    //httpClientForAuthentification.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
                     httpClientForAuthentification.DefaultRequestHeaders.Add("Connection", "keep-alive");
                     // client.DefaultRequestHeaders.ConnectionClose = true;
                     httpClientForAuthentification.BaseAddress = new Uri(authHost);
@@ -382,7 +407,7 @@ namespace TeslaLogger
                     if (useCaptcha)
                         GetCaptcha();
 
-                    return GetTokenAsync2(code_challenge, m, state, code_verifier);
+                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri);
                 }
             }
             catch (Exception ex)
@@ -480,7 +505,7 @@ namespace TeslaLogger
             return "";
         }
 
-        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier)
+        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer)
         {
             if (useCaptcha)
                 WaitForCaptcha();
@@ -509,7 +534,15 @@ namespace TeslaLogger
 
             d.Add("identity", car.TeslaName);
             d.Add("credential", car.TeslaPasswort);
-            d.Add("captcha", car.Captcha_String);
+            
+            if (car.Captcha_String != null)
+                d.Add("captcha", car.Captcha_String);
+
+            if (car.ReCaptcha_Code != null)
+            {
+                d.Add("g-recaptcha-response", car.ReCaptcha_Code);
+                d.Add("recaptcha", car.ReCaptcha_Code);
+            }
 
             string resultContent = "";
 
@@ -520,12 +553,15 @@ namespace TeslaLogger
                
 
                 HttpClient client = GetDefaultHttpClientForAuthentification();
-                    
+                HttpResponseMessage result = null;
+
+
                 DateTime start = DateTime.UtcNow;
+                UriBuilder b;
 
                 using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))
                 {
-                    UriBuilder b = new UriBuilder(authHost +"/oauth2/v3/authorize");
+                    b = new UriBuilder(authHost +"/oauth2/v3/authorize");
                     b.Port = -1;
                     var q = HttpUtility.ParseQueryString(b.Query);
                     q["client_id"] = "ownerapi";
@@ -544,10 +580,47 @@ namespace TeslaLogger
 
                     // car.Log("URL: " + url);
 
-                    HttpResponseMessage result = client.PostAsync(url, content).Result;
+                    client.DefaultRequestHeaders.Referrer = Referer;
+
+                    /*
+                    var cs = GetAllCookies(tokenCookieContainer);
+                    foreach (Cookie c in cs)
+                    {
+                        car.Log("Cookie: " + c.ToString());
+                    }
+                    */
+
+                    result = client.PostAsync(url, content).Result;
                     resultContent = result.Content.ReadAsStringAsync().Result;
 
+                    /*
+                    car.Log("Request:\r\n" + result.RequestMessage.ToString());
+                    car.Log("Request Headers:\r\n" + result.RequestMessage.Headers.ToString());
+                    car.Log("Response:\r\n" + result.ToString());
+                    */
+
                     LogGetToken(resultContent, "GetTokenAsync2");
+
+                    if (resultContent.Contains("www.recaptcha.net"))
+                    {
+                        car.passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
+                        // car.passwortinfo.Append("*** try to use access token & refresh token instead of email & password!!! ***<br>");
+                        car.Log("Waiting for Recaptcha solver!");
+
+                        car.waitForRecaptcha = true;
+                        CaptchaSolver cs = new CaptchaSolver(car);
+                        string sitekey = cs.SearchForSitekey(resultContent);
+
+                        cs.Send(sitekey, b.ToString());
+                        car.ReCaptcha_Code = cs.Get();
+
+                        if (car.ReCaptcha_Code != null)
+                        {
+                            car.passwortinfo.Append("Recaptcha code received<br>");
+
+                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer);
+                        }
+                    }
 
                     if (resultContent.Contains("Captcha does not match"))
                     {
@@ -608,7 +681,7 @@ namespace TeslaLogger
                     }
                 }
 
-                return GetTokenAsync3(code, code_verifier);
+                return GetTokenAsync3(code, code_verifier, b.Uri);
 
             }
             catch (Exception ex)
@@ -622,6 +695,23 @@ namespace TeslaLogger
             }
 
             return "";            
+        }
+
+        public static IEnumerable<Cookie> GetAllCookies(CookieContainer c)
+        {
+            Hashtable k = (Hashtable)c.GetType().GetField("m_domainTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(c);
+            foreach (DictionaryEntry element in k)
+            {
+                SortedList l = (SortedList)element.Value.GetType().GetField("m_list", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(element.Value);
+                foreach (var e in l)
+                {
+                    var cl = (CookieCollection)((DictionaryEntry)e).Value;
+                    foreach (Cookie fc in cl)
+                    {
+                        yield return fc;
+                    }
+                }
+            }
         }
 
         private void WaitForCaptcha()
@@ -865,7 +955,7 @@ namespace TeslaLogger
             }
         }
 
-        private string GetTokenAsync3(string code, string code_verifier)
+        private string GetTokenAsync3(string code, string code_verifier, Uri Referrer)
         {
             string resultContent = "";
             try
@@ -884,6 +974,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
 
                 HttpClient client = GetDefaultHttpClientForAuthentification();
+                client.DefaultRequestHeaders.Referrer = Referrer;
                 
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
@@ -1654,6 +1745,11 @@ namespace TeslaLogger
                         else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142 && AWD)
                         {
                             WriteCarSettings("0.139", "M3 LR FL");
+                            return;
+                        }
+                        else if (car.trim_badging == "p74d")
+                        {
+                            WriteCarSettings("0.158", "M3 LR P 2021");
                             return;
                         }
                     }

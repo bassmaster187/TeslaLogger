@@ -49,6 +49,8 @@ namespace TeslaLogger
 
                 UpdateDbInBackground();
 
+                WebHelper.getTLSVersion();
+
                 Logfile.Log("Init finished, now enter main loop");
 
                 GetAllCars();

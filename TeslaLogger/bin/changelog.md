@@ -1,3 +1,6 @@
+# Version 1.48.12
+- Using 2Captcha for resolving ReCaptchas
+
 # Version 1.48.11
 - authentification with access token & refresh token as a fallback if email & password doesn't work
 

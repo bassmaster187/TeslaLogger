@@ -118,6 +118,7 @@ namespace TeslaLogger
         public string MFA_Code;
         public string Captcha;
         public string Captcha_String;
+        public string ReCaptcha_Code;
 
         internal int LoginRetryCounter = 0;
         public double sumkm = 0;
@@ -133,6 +134,7 @@ namespace TeslaLogger
         public bool MIC = false;
         public string motor = "";
         internal bool waitForMFACode;
+        internal bool waitForRecaptcha;
         public static object InitCredentialsLock = new object();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
