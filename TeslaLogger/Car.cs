@@ -1213,6 +1213,7 @@ namespace TeslaLogger
             {
                 // reset lastSetChargeLimitAddressName
                 LastSetChargeLimitAddressName = string.Empty;
+                dbHelper.UpdateUnplugDate();
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
