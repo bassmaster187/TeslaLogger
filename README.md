@@ -2,8 +2,8 @@
 
 TeslaLogger is a self hosted data logger for your Tesla Model S/3/X/Y. Actually it supports RaspberryPi 3B, 3B+, 4B, Docker and Synology NAS.
 
-Check the full documentation in several languages here:
-https://github.com/bassmaster187/teslalogger/doc/index.md
+Check the full documentation an reference manuals in several languages here:
+https://github.com/rowich/TeslaLogger/tree/documentation
 
 If you want to purchase a ready to go Raspberry PI 3B+ with TeslaLogger installed follow this link:
 https://www.e-mobility-driving-solutions.com/produkt/raspi-teslalogger/?lang=en
