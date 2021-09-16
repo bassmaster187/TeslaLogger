@@ -133,25 +133,27 @@ Online=在线
 Visited=行驶轨迹记录
 
 #index.php
-Fahrzeuginfo=车辆信息
+Car Info=车辆信息
 Status=状态
 Typical Range=典型续航里程
-KM Stand=里程表
+Odometer=里程表
 Car Version=车辆版本
-Letzter Trip=上一次行程
-Dauer=时长
-Distanz=距离
-Max km/h=最大速度（公里每小时）
+Last Trip=上一次行程
+Duration=时长
+Distance=距离
+Max kph=最大速度（公里每小时）
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
-Wird geladen=充电
+Charging=充电
 Done=完成
 Done at=完成时间
 Battery Heater=电池加热器
 Sentry Mode=哨兵模式
 Preconditioning=预处理
 Offline=离线
+Falling asleep=进入休眠
+
 
 #menu.php
 Logfile=日志
@@ -177,11 +179,11 @@ Passwort wiederholen=再次输入密码
 Speichern=保存
 
 #settings.php
-Zugangsdaten=账号信息设置
+Credentials=账号信息设置
 Language=语言
-Leistung=功率
-Temperatur=温度
-Längenmaß=长度单位
+Power=功率
+Temperature=温度
+Unit of length=长度单位
 URL Admin Panel=管理页面网址
 All=全部
 Stable=稳定
@@ -228,13 +230,14 @@ Ja=是
 Nein=否
 
 Einschlafen=进入休眠
-Automatische Updates=自动更新
+Automatic updates=自动更新
 
 TextShare=<h1>匿名共享充电与电池损耗曲线</h1>我们希望建立一个充电与电池损耗的数据库.便于让用户对比参考，及时发现自己车辆与平均值的异常偏离.这个数据也可以作为车辆二手交易时，电池续航能力良好的证明. 也可以用于向Tesla证明自己车辆性能的下降。<br><br>你是否愿意匿名共享充电与电池损耗曲线给其他Tesla用户？这个设置可以在设置页面随时进行变更.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=匿名共享数据
 TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
 Resume Teslalogger=继续Teslalogger
-Reichweite=里程
+Range=里程
 
 Ladekosten=充电成本
 Ladesäule=充电站

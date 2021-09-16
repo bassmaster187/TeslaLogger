@@ -200,8 +200,16 @@ When charging stops, this will try to find a previous charging session at the cu
 
 When CombineChargingStates is globally disabled, it can be enabled for this POI.
 
-# Do Not Combine Chargin Sessions
+# Do Not Combine Charging Sessions
 
 +dnc
 
 When CombineChargingStates is Globally enabled (default), charging sessions will not be combined at this POI.
+
+# set new charge limit when charging is complete
+
++occ
+
+When charging is complete, set a new charge limit. Useful for cars that are usually always plugged in at home and restart charging every few hours.
+
+Example: +occ:75

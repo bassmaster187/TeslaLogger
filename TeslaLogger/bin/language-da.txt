@@ -133,25 +133,26 @@ Online=Online
 Visited=Visited
 
 #index.php
-Fahrzeuginfo=Køretøjsinfo
+Car Info=Køretøjsinfo
 Status=Status
 Typical Range=Typical Range
-KM Stand=Kilometertæller
+Odometer=Kilometertæller
 Car Version=Firmware Version
-Letzter Trip=Seneste tur
-Dauer=Varighed
-Distanz=Distance
-Max km/h=Max km/t
+Last Trip=Seneste tur
+Duration=Varighed
+Distance=Distance
+Max kph=Max km/t
 PS=HK
 Current Pos=Aktuel position
 Last Update=Senest opdateret
-Wird geladen=Lader
+Charging=Lader
 Done=Færdig
 Done at=Færdig kl.
 Battery Heater=Batterivarmer
 Sentry Mode=Sentry Mode
 Preconditioning=Forvarmer
 Offline=Offline
+Falling asleep=Dvale
 
 #menu.php
 Logfile=Logfile
@@ -177,11 +178,11 @@ Passwort wiederholen=Gentag Password
 Speichern=Gem
 
 #settings.php
-Zugangsdaten=Credentials
+Credentials=Credentials
 Language=Sprog
-Leistung=Effekt
+Power=Effekt
 Temperatur=Temperatur
-Längenmaß=Længdemål
+Unit of length=Længdemål
 URL Admin Panel=URL Admin Panel
 All=Alle
 Stable=Stabile
@@ -228,13 +229,14 @@ Ja=Ja
 Nein=Nej
 
 Einschlafen=Dvale
-Automatische Updates=Automatiske opdateringer
+Automatic updates=Automatiske opdateringer
 
 TextShare=<h1>Del opladningskurver / degraderingskurver anonymt </h1> Vi vil gerne oprette en anonym database for at sammenligne degraderingskurver og opladningskurver. Dette giver dig mulighed for at sammenligne dit køretøj med andre til enhver tid og opdage enhver usædvanlig afvigelse på et tidligt tidspunkt. Denne information kan være nyttig i en salgssituation som dokumentation for batteriets helbred. Ligeledes giver det dig værdifuld information i en eventuel dialog Tesla Motors hvis du oplever reduceret ydelse på batteriet. <br> <br> Vil du dele dine hurtige opladningskurver og degraderingskurver med andre Tesla ejere helt anonymt? Denne beslutning kan når som helst ændres under indstillingsmenuen.
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger er blevet stoppet! Data vil ikke blive gemt!
 Resume Teslalogger=Genoptag Teslalogger
-Reichweite=Rækkevidde
+Range=Rækkevidde
 
 Ladekosten=Opladningspris
 Ladesäule=Opladningssted

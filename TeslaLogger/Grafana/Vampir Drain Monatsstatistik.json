@@ -15,6 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1624025774081,
   "links": [
     {
       "icon": "external link",
@@ -39,7 +40,6 @@
       },
       "id": 2,
       "links": [],
-      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -139,7 +139,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select DATE_FORMAT(StartDate, '%Y / %m') as Monat, sum(RangeDiff) as RangeLost, sum(RangeDiff) * wh_tr as kWh_lost, sum(RangeDiff) * wh_tr * 0.30 as Eur_lost, sum(sleephours) as SleepHours from\n(\nSELECT T1.EndDate as StartDate, \nTP1.ideal_battery_range_km - (TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer)) as RangeDiff,\n(\n  SELECT sum(TIMESTAMPDIFF(MINUTE,StartDate,EndDate) / 60) FROM state where state = 'asleep' and StartDate >= T1.EndDate and EndDate  <= T2.StartDate and EndDate > StartDate) as sleephours, wh_tr\n  FROM drivestate as T1 \n  join cars on cars.id = T1.CarId\n  left outer join drivestate as T2 on T1.id + 1 = T2.id \n  left outer Join pos as TP1 on T1.EndPos = TP1.id \n  left outer join pos as TP2 on T2.StartPos = TP2.id\n  where $__timeFilter(T1.EndDate) and T1.CarID =$Car and T2.CarID=$Car and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1 and (TP2.odometer - TP1.odometer) >= 0\n) as td\ngroup by DATE_FORMAT(StartDate, '%Y-%m')",
+          "rawSql": "select DATE_FORMAT(StartDate, '%Y / %m') as Monat, sum(RangeDiff) as RangeLost, sum(RangeDiff) * wh_tr as kWh_lost, sum(RangeDiff) * wh_tr * 0.30 as Eur_lost, sum(sleephours) as SleepHours from\n(\nSELECT T1.EndDate as StartDate, \nTP1.ideal_battery_range_km - (TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer)) as RangeDiff,\n(\n  SELECT sum(TIMESTAMPDIFF(MINUTE,StartDate,EndDate) / 60) FROM state where (state = 'asleep' or state = 'offline') and StartDate >= T1.EndDate and EndDate  <= T2.StartDate and EndDate > StartDate) as sleephours, wh_tr\n  FROM drivestate as T1 \n  join cars on cars.id = T1.CarId\n  left outer join drivestate as T2 on T1.id + 1 = T2.id \n  left outer Join pos as TP1 on T1.EndPos = TP1.id \n  left outer join pos as TP2 on T2.StartPos = TP2.id\n  where $__timeFilter(T1.EndDate) and T1.CarID =$Car and T2.CarID=$Car and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0 and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60 and TP2.odometer - TP1.odometer < 1 and (TP2.odometer - TP1.odometer) >= 0\n) as td\ngroup by DATE_FORMAT(StartDate, '%Y-%m')",
           "refId": "A",
           "select": [
             [
@@ -230,5 +230,5 @@
   "timezone": "",
   "title": "Vampir Drain Monatsstatistik",
   "uid": "r2IKRuzRk",
-  "version": 76
+  "version": 190
 }

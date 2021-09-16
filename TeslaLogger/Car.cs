@@ -94,6 +94,9 @@ namespace TeslaLogger
         public string TaskerHash = "";
         public string vin = "";
 
+        public string ABRP_token = "";
+        public int ABRP_mode = 0;
+
         public CurrentJSON currentJSON;
 
         public static List<Car> allcars = new List<Car>();
@@ -113,6 +116,8 @@ namespace TeslaLogger
 
         public string LastSetChargeLimitAddressName { get => lastSetChargeLimitAddressName; set => lastSetChargeLimitAddressName = value; }
         public string MFA_Code;
+        public string Captcha;
+        public string Captcha_String;
 
         internal int LoginRetryCounter = 0;
         public double sumkm = 0;
@@ -128,6 +133,7 @@ namespace TeslaLogger
         public bool MIC = false;
         public string motor = "";
         internal bool waitForMFACode;
+        public static object InitCredentialsLock = new object();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -173,11 +179,16 @@ namespace TeslaLogger
                 currentJSON.current_odometer = dbHelper.GetLatestOdometer();
                 currentJSON.CreateCurrentJSON();
 
-                lock (typeof(Car))
+                Monitor.Enter(InitCredentialsLock);
+                try
                 {
                     CheckNewCredentials();
 
                     InitStage3();
+                }
+                finally
+                {
+                    Monitor.Exit(InitCredentialsLock);
                 }
 
                 while (run)
@@ -302,9 +313,13 @@ namespace TeslaLogger
                 Log($"VIN decoder: {vindecoder}");
                 Log($"Vehicle Config: car_type:'{car_type}' car_special_type:'{car_special_type}' trim_badging:'{trim_badging}'");
 
+                InitMeter();
+
                 dbHelper.GetLastTrip();
 
                 currentJSON.current_car_version = dbHelper.GetLastCarVersion();
+
+                dbHelper.GetABRP(out ABRP_token, out ABRP_mode);
 
                 webhelper.StartStreamThread();
             }
@@ -313,6 +328,26 @@ namespace TeslaLogger
                 string temp = ex.ToString();
                 if (!temp.Contains("ThreadAbortException"))
                     Log(ex.ToString());
+            }
+        }
+
+        private void InitMeter()
+        {
+            try
+            {
+                var v = ElectricityMeterBase.Instance(CarInDB);
+                if (v != null)
+                {
+                    Log("Meter Status: " + v.ToString());
+                }
+                else
+                {
+                    Log("No meter config");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -460,7 +495,7 @@ namespace TeslaLogger
                 _ = Task.Factory.StartNew(() =>
                 {
                     sd.SendAllChargingData();
-                });
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
 
             return lastRacingPoint;
@@ -787,6 +822,7 @@ namespace TeslaLogger
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 dbHelper.StartState(res);
+                dbHelper.CleanPasswort();
                 return;
             }
             else if (res == "asleep")
@@ -947,7 +983,7 @@ namespace TeslaLogger
                         _ = Task.Factory.StartNew(() =>
                         {
                             sd.SendDegradationData();
-                        });
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                     }
                     else
                     {
@@ -957,9 +993,9 @@ namespace TeslaLogger
             }
         }
 
-        public void HandleShiftStateChange(string _oldState, string _newState)
+        public void HandleShiftStateChange(string oldState, string newState)
         {
-            Log("ShiftStateChange: " + _oldState + " -> " + _newState);
+            Log("ShiftStateChange: " + oldState + " -> " + newState);
             lastCarUsed = DateTime.Now;
             Address addr = Geofence.GetInstance().GetPOI(currentJSON.latitude, currentJSON.longitude, false);
             // process special flags for POI
@@ -970,18 +1006,21 @@ namespace TeslaLogger
                     switch (flag.Key)
                     {
                         case Address.SpecialFlags.OpenChargePort:
-                            HandleSpecialFlag_OpenChargePort(flag.Value, _oldState, _newState);
+                            HandleSpecialFlag_OpenChargePort(flag.Value, oldState, newState);
                             break;
                         case Address.SpecialFlags.EnableSentryMode:
-                            HandleSpeciaFlag_EnableSentryMode(flag.Value, _oldState, _newState);
+                            HandleSpeciaFlag_EnableSentryMode(flag.Value, oldState, newState);
                             break;
                         case Address.SpecialFlags.ClimateOff:
-                            HandleSpeciaFlag_ClimateOff(flag.Value, _oldState, _newState);
+                            HandleSpeciaFlag_ClimateOff(flag.Value, oldState, newState);
                             break;
                         case Address.SpecialFlags.SetChargeLimit:
                         case Address.SpecialFlags.SetChargeLimitOnArrival:
                         case Address.SpecialFlags.CopyChargePrice:
                         case Address.SpecialFlags.HighFrequencyLogging:
+                        case Address.SpecialFlags.CombineChargingStates:
+                        case Address.SpecialFlags.DoNotCombineChargingStates:
+                        case Address.SpecialFlags.OnChargeComplete:
                             break;
                         default:
                             Log("handleShiftStateChange unhandled special flag " + flag.ToString());
@@ -1049,12 +1088,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(() =>
                 {
                     Log("OpenChargePort ...");
                     string result = webhelper.PostCommand("command/charge_port_door_open", null).Result;
                     Log("charge_port_door_open(): " + result);
-                });
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
         }
 
@@ -1064,12 +1103,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(() =>
                 {
                     Log("EnableSentryMode ...");
                     string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result;
                     Log("set_sentry_mode(): " + result);
-                });
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
         }
 
@@ -1079,12 +1118,12 @@ namespace TeslaLogger
             Match m = Regex.Match(_flagconfig, pattern);
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
             {
-                Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(() =>
                 {
                     Log("ClimateOff ...");
                     string result = webhelper.PostCommand("command/auto_conditioning_stop", null).Result;
                     Log("auto_conditioning_stop(): " + result);
-                });
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
         }
 
@@ -1098,14 +1137,34 @@ namespace TeslaLogger
                 {
                     if (!LastSetChargeLimitAddressName.Equals(_addr.name))
                     {
-                        Task.Factory.StartNew(() =>
+                        _ = Task.Factory.StartNew(() =>
                         {
                             Log($"SetChargeLimit to {chargelimit} at '{_addr.name}' ...");
                             string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
                             Log("set_charge_limit(): " + result);
                             LastSetChargeLimitAddressName = _addr.name;
-                        });
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                     }
+                }
+            }
+        }
+
+        internal void HandleSpecialFlag_OnChargeComplete(Address _addr, string _flagconfig)
+        {
+            string pattern = "([0-9]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                if (m.Groups[1].Captures[0] != null && int.TryParse(m.Groups[1].Captures[0].ToString(), out int chargelimit))
+                {
+                    _ = Task.Factory.StartNew(() =>
+                      {
+                          Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
+                          string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                          Log("set_charge_limit(): " + result);
+                          // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
+                          LastSetChargeLimitAddressName = string.Empty; 
+                      }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
             }
         }
@@ -1145,6 +1204,9 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
                 _ = webhelper.GetOdometerAsync();
+                Tools.DebugLog($"Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{currentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{currentJSON.latitude}, lon:{currentJSON.longitude})");
+                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, currentJSON.current_battery_level, 0, false, 0, currentJSON.latitude, currentJSON.longitude);
+
             }
             // any -> Driving
             if (_oldState != TeslaState.Drive && _newState == TeslaState.Drive)
@@ -1176,6 +1238,7 @@ namespace TeslaLogger
                             case Address.SpecialFlags.CopyChargePrice:
                             case Address.SpecialFlags.CombineChargingStates:
                             case Address.SpecialFlags.DoNotCombineChargingStates:
+                            case Address.SpecialFlags.OnChargeComplete:
                                 break;
                             default:
                                 Log("HandleStateChange unhandled special flag " + flag.ToString());
@@ -1204,6 +1267,9 @@ namespace TeslaLogger
                             case Address.SpecialFlags.OpenChargePort:
                             case Address.SpecialFlags.EnableSentryMode:
                             case Address.SpecialFlags.CopyChargePrice:
+                            case Address.SpecialFlags.CombineChargingStates:
+                            case Address.SpecialFlags.DoNotCombineChargingStates:
+                            case Address.SpecialFlags.OnChargeComplete:
                                 break;
                             default:
                                 Log("handleShiftStateChange unhandled special flag " + flag.ToString());

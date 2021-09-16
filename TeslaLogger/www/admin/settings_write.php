@@ -10,6 +10,9 @@ echo($SleepTimeSpanEnd);
 $SleepTimeSpanEnable = $_POST["SleepTimeSpanEnable"];
 echo($SleepTimeSpanEnable);
 
+$Display100pctEnable = $_POST["Display100pctEnable"];
+echo($Display100pctEnable);
+
 $ScanMyTesla = $_POST["ScanMyTesla"];
 echo($ScanMyTesla);
 
@@ -30,6 +33,7 @@ $defaultcarid = $_POST["defaultcarid"];
 $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'SleepTimeSpanEnd' => $SleepTimeSpanEnd,
 'SleepTimeSpanEnable' => $SleepTimeSpanEnable,
+'Display100pctEnable' => $Display100pctEnable,
 'Power' => $Power,
 'Temperature' => $Temperature,
 'Length' => $Length,
@@ -42,7 +46,8 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'update' => $update,
 'Range' => $Range,
 'defaultcar' => $defaultcar,
-'defaultcarid' => $defaultcarid
+'defaultcarid' => $defaultcarid,
+'StreamingPos' => $_POST["StreamingPos"]
 );
 
 file_put_contents('/etc/teslalogger/settings.json', json_encode($j));

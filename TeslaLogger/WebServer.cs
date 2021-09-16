@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -176,6 +177,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setpassword"):
                         SetPassword(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword"):
+                        SetAdminPanelPassword(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
                         Admin_UpdateElevation(request, response);
                         break;
@@ -228,6 +232,18 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mfa/[0-9]+/.+"):
                         Set_MFA(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captcha/[0-9]+/.+"):
+                        Set_Captcha(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/captchapic/[0-9]+"):
+                        CaptchaPic(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/info"):
+                        ABRP_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/set"):
+                        ABRP_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
                         Debug_TeslaLoggerStates(request, response);
                         break;
@@ -265,6 +281,118 @@ namespace TeslaLogger
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("SetAdminPanelPassword");
+
+                string data = GetDataFromRequestInputStream(request);
+                string file_htaccess = "/var/www/html/.htaccess";
+
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+                if (Tools.IsPropertyExist(r, "delete"))
+                {
+                    Logfile.Log("delete Admin Panel Password");
+                    
+                    if (File.Exists(file_htaccess))
+                    {
+                        File.Delete(file_htaccess);
+                        Logfile.Log("delete: " + file_htaccess);
+                    }
+                    WriteString(response, "ERROR");
+                }
+                else if (Tools.IsPropertyExist(r, "password"))
+                {
+                    Logfile.Log("set Admin Panel Password");
+
+                    string content = "AuthType Basic\n";
+                    content += "AuthName \"Restricted Area\"\n";
+                    content += "AuthUserFile /etc/teslalogger/.htpasswd\n";
+                    content += "Require valid-user\n";
+
+                    File.WriteAllText(file_htaccess, content);
+
+                    string password = r["password"];
+                    using (var sha1 = SHA1.Create())
+                    {
+                        var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+                        content = string.Format("{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
+                    }
+                    string filename_htpasswd = "/etc/teslalogger/.htpasswd";
+                    File.WriteAllText(filename_htpasswd, content);
+                    WriteString(response, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    int abrp_mode = 0;
+                    string abrp_token = "";
+
+                    if (String.IsNullOrEmpty(data))
+                    {
+                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"]);
+                        abrp_token = request.QueryString["abrp_token"];
+                    }
+                    else
+                    {
+                        dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                        abrp_mode = Convert.ToInt32(r["abrp_mode"]);
+                        abrp_token = r["abrp_token"];
+                    }
+
+                    if (!car.dbHelper.SetABRP(abrp_token, abrp_mode))
+                        WriteString(response, "Wrong ABRP Token!");
+                    else
+                        WriteString(response, "OK");
+
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/info");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    car.dbHelper.GetABRP(out string abrp_token, out int abrp_mode);
+                    var t = new
+                    {
+                        token = abrp_token,
+                        mode = abrp_mode
+                    };
+
+                    string json = new JavaScriptSerializer().Serialize(t);
+                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                    WriteString(response, json);
+                    return;
+                }
+            }
+            WriteString(response, "");
         }
 
         private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
@@ -308,6 +436,8 @@ namespace TeslaLogger
                             {
                                 type = StaticMapProvider.MapType.Charge;
                             }
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -403,6 +533,48 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
+        private void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/captcha/([0-9]+)/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string captcha = m.Groups[2].Captures[0].ToString();
+                if (captcha.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        car.passwortinfo.Append($"Set Captcha: {captcha}<br>");
+                        car.Captcha_String = captcha;
+                    }
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/captchapic/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    response.ContentType = "image/svg+xml";
+                    while (car.Captcha == null)
+                    {
+                        System.Threading.Thread.Sleep(250);
+                    }
+
+                    WriteString(response, car.Captcha);
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
         private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
         {
             Queue<string> result = new Queue<string>();
@@ -431,6 +603,8 @@ namespace TeslaLogger
                                 {
                                     enddt = DateTime.Now.AddSeconds(1);
                                 }
+                                break;
+                            default:
                                 break;
                         }
                     }
@@ -540,6 +714,8 @@ namespace TeslaLogger
                                 break;
                             case "carID":
                                 int.TryParse(request.QueryString.GetValues(key)[0], out carID);
+                                break;
+                            default:
                                 break;
                         }
                     }
@@ -657,7 +833,7 @@ namespace TeslaLogger
         private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Key, a.Value))) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
         }
         
         private void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -757,12 +933,12 @@ namespace TeslaLogger
                     sb.Append("has_ludicrous_mode:").Append(has_ludicrous_mode).Append("\r\n");
                     sb.Append("DB_Wh_TR:").Append(c.DB_Wh_TR).Append("\r\n").Append("\r\n");
 
-                    Tools.VINDecoder(c.vin, out int year, out string carType, out bool AWD, out bool MIC, out string batery, out string motor);
+                    Tools.VINDecoder(c.vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor);
                     sb.Append("VIN Year:").Append(year).Append("\r\n");
                     sb.Append("VIN carType:").Append(carType).Append("\r\n");
                     sb.Append("VIN AWD:").Append(AWD).Append("\r\n");
                     sb.Append("VIN MIC:").Append(MIC).Append("\r\n");
-                    sb.Append("VIN batery:").Append(batery).Append("\r\n");
+                    sb.Append("VIN battery:").Append(battery).Append("\r\n");
                     sb.Append("VIN motor:").Append(motor).Append("\r\n");
 
                     sb.Append("Voltage at 50% SOC:").Append(c.dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende)).Append("V Date:").Append(startdate).Append("\r\n");
@@ -778,7 +954,7 @@ namespace TeslaLogger
                         System.Threading.Thread.Sleep(2000);
                     }
 
-                    sb.Append("Vehicle Config:").Append("\r\n").Append(vehicle_config).Append("\r\n");
+                    sb.Append("Vehicle Config:").Append("\r\n").Append(new Tools.JsonFormatter(vehicle_config).Format()).Append("\r\n");
 
                     WriteString(response, sb.ToString());
                 }
@@ -794,6 +970,7 @@ namespace TeslaLogger
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
             Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
+            Tools._StreamingPos = null;
             WriteString(response, @"OK");
         }
 

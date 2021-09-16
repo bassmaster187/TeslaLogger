@@ -226,6 +226,7 @@ namespace TeslaLogger
             Logfile.Log("SuspendAPIMinutes: " + ApplicationSettings.Default.SuspendAPIMinutes);
             Logfile.Log("SleepPositions: " + ApplicationSettings.Default.SleepPosition);
             Logfile.Log("UseScanMyTesla: " + Tools.UseScanMyTesla());
+            Logfile.Log("StreamingPos: " + Tools.StreamingPos());
             try
             {
                 Logfile.Log($"Free disk space: {Tools.FreeDiskSpaceMB()}mb");

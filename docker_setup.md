@@ -24,7 +24,7 @@ git clone https://github.com/bassmaster187/TeslaLogger
 cp TeslaLogger/TeslaLogger/App.config TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config
 ```
 
-3. edit TeslaLogger\TeslaLogger\bin\TeslaLogger.exe.config with your favorite editor
+3. edit TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config with your favorite editor
 
 4. enter your My-Tesla credentials in TeslaName and TeslaPass
 

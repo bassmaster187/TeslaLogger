@@ -6,6 +6,7 @@ using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using SRTM;
 
 namespace UnitTestsTeslalogger
 {
@@ -461,6 +462,115 @@ namespace UnitTestsTeslalogger
 
             Assert.Fail("could not get Auth Token from Refresh Token!");
             */
+        }
+
+        [TestMethod]
+        public void SendDataToAbetterrouteplanner()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            long ts = Tools.ToUnixTime(DateTime.Now) / 1000;
+
+            wh.SendDataToAbetterrouteplannerAsync(ts, 55, 0, false, 0, 0, 0).Wait();
+        }
+
+        [TestMethod]
+        public void UpdateApacheConfig()
+        {
+            var temp = UpdateTeslalogger.UpdateApacheConfig("../../apache2.conf", false);
+            var expected = System.IO.File.ReadAllText("../../apache2-ready.conf");
+            Assert.AreEqual(expected, temp);
+        }
+
+        [TestMethod]
+        public void UpdateApacheConfigUnchanged()
+        {
+            var temp = UpdateTeslalogger.UpdateApacheConfig("../../apache2-ready.conf", false);
+            var expected = System.IO.File.ReadAllText("../../apache2-ready.conf");
+            Assert.AreEqual(expected, temp);
+        }
+
+        [TestMethod]
+        public void Srtm()
+        {
+            string path = "srtmcache";
+            if (System.IO.Directory.Exists(path))
+                System.IO.Directory.Delete(path, true);
+
+            System.IO.Directory.CreateDirectory(path);
+
+            var srtmData = new SRTMData(path);
+
+            // get elevations for some locations
+            int? elevation = srtmData.GetElevation(47.267222, 11.392778);
+            Console.WriteLine("Elevation of Innsbruck: {0}m", elevation);
+            Assert.AreEqual(584, elevation);
+
+            elevation = srtmData.GetElevation(-16.5, -68.15);
+            Console.WriteLine("Elevation of La Paz: {0}m", elevation);
+            Assert.AreEqual(3782, elevation);
+
+            elevation = srtmData.GetElevation(27.702983735525862f, 85.2978515625f);
+            Console.WriteLine("Elevation of Kathmandu {0}m", elevation);
+            Assert.AreEqual(1312, elevation);
+
+            elevation = srtmData.GetElevation(21.030673628606102f, 105.853271484375f);
+            Console.WriteLine("Elevation of Ha Noi {0}m", elevation);
+            Assert.AreEqual(14, elevation);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterLP1Param()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "LP1");
+            Assert.AreEqual(1, v.LP);
+            string ret =  v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterLP2Param()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "LP2");
+            Assert.AreEqual(2, v.LP);
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterNoParam()
+        {
+            var v = new ElectricityMeterOpenWB("http://openwb", "");
+            Assert.AreEqual(1, v.LP);
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void OpenWBMeterConstructor()
+        {
+            var v = ElectricityMeterBase.Instance(1);
+            var ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void GoEMeter()
+        {
+            var v = new ElectricityMeterGoE("http://192.168.1.222", "");
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void TeslaGen3WCMeter()
+        {
+            var v = new ElectricityMeterTeslaGen3WallConnector("", "");
+            v.mockup_lifetime = "{\"contactor_cycles\":32 \"contactor_cycles_loaded\":0 \"alert_count\":5 \"thermal_foldbacks\":0 \"avg_startup_temp\":5199147.0 \"charge_starts\":32 \"energy_wh\":89012 \"connector_cycles\":5 \"uptime_s\":1297280 \"charging_time_s\":33152}";
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
         }
     }
 }

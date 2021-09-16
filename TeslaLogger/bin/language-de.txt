@@ -1,4 +1,5 @@
 TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten eine anonyme Datenbank aufbauen mit der man Degradationskurven und Ladekurven vergleichen kann. So können Sie jederzeit Ihr Fahrzeug mit anderen vergleichen und eine ungewöhnliche Abweichung frühzeitig feststellen. Diese kann auch später dazu dienen um beim Verkaufsgespräch nachweisen zu können, dass Ihre Batterie noch voll leistungsfähig ist. Im negativen Fall, können Sie eine verminderte Leistungsfähigkeit einfacher gegenüber Tesla Motors nachweisen.<br><br>Möchten Sie vollkommen Anonym ihre Schnellladekurven und Degradationskurven mit anderen Teslafahrer teilen? Diese Entscheidung kann jederzeit in den Einstellungen geändert werden.  
+StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Resume Teslalogger=Teslalogger Starten
 Typical Range=Reichweite
@@ -14,3 +15,48 @@ Missing=Fehlen
 Last Driven=Letzte Fahrt  * * * 
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
+
+#Index.php
+Battery Heater=Batterie-Heizung
+Car Version=Fahrzeug Version
+Cell Imbalance=Zellen-Imbalance
+Cell Temp=Zell Temperatur
+Current Pos=Aktuelle Position
+Duration=Dauer
+Distance=Distanz
+Done=Fertig
+Done at=Fertig um
+Falling asleep=Einschlafen
+Car Info=Fahrzeuginfo
+Odometer=KM Stand
+Last Update=Letztes Update
+Last Trip=Letzter Trip
+Charging=Wird geladen
+Max kph=Max km/h
+
+#settings.php
+Credentials=Zugangsdaten
+Power=Leistung
+Unit of length=Längenmaß
+Automatic updates=Automatische Updates
+Range=Reichweite
+Show calc. 100% range=Zeige errechnete 100%
+Car Name=Fahrzeug Name
+Enable=Enable
+Fahrenheit=Fahrenheit
+Language=Sprache
+Main Car=Haupt Fahrzeug
+None=Keine
+Received Tasker Token=Empfangenes Tasker Token
+Settings=Einstellungen
+ScanMyTesla last received=ScanMyTesla zuletzt empfangen
+Tasker Token=Tasker Token
+Tasker URL=Tasker URL
+Teslalogger HTTP Port=Teslalogger HTTP Port
+TextShare=TextShare
+URL Admin Panel=URL Admin Panel
+URL Grafana=URL Grafana
+Zoom Level=Zoom Level
+Share data anonymously=Daten anonym teilen
+Sleep=Schlafen
+Temperature=Temperatur

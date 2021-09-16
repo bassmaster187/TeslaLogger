@@ -21,6 +21,7 @@ namespace TeslaLogger
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
         private static bool mothershipEnabled = false;
         private Car car;
+        bool CleanPasswortDone = false;
 
         internal static string Database = "teslalogger";
 
@@ -316,7 +317,71 @@ namespace TeslaLogger
 
             return "";
 }
-      
+
+        internal bool SetABRP(string abrp_token, int abrp_mode)
+        {
+            car.ABRP_token = abrp_token;
+            car.ABRP_mode = abrp_mode;
+
+            try
+            {
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow)*1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
+
+                if (car.ABRP_mode == -1)
+                    return false;
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set ABRP_token = @token, ABRP_mode = @mode where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@token", abrp_token);
+                        cmd.Parameters.AddWithValue("@mode", abrp_mode);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
+        internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
+        {
+            ABRP_token = "";
+            ABRP_mode = 0;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT ABRP_token, ABRP_mode FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            ABRP_token = dr[0].ToString();
+                            ABRP_mode = Convert.ToInt32(dr[1]);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
         internal void UpdateEmptyChargeEnergy()
         {
             Queue<int> emptyChargeEnergy = new Queue<int>();
@@ -332,7 +397,7 @@ FROM
   chargingstate
 WHERE
   CarID=@CarID
-  AND charge_energy_added IS NULL
+  AND (charge_energy_added IS NULL OR charge_energy_added = 0)
   AND EndDate IS NOT NULL", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -728,6 +793,34 @@ HAVING
                         car.Log("UpdateRefreshToken OK: " + done);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+            }
+        }
+
+        internal void CleanPasswort()
+        {
+            try
+            {
+                if (CleanPasswortDone)
+                    return;
+
+                car.Log("CleanPasswort");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_password = '' where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        int done = cmd.ExecuteNonQuery();
+
+                        car.Log("CleanPasswort OK: " + done);
+                        CleanPasswortDone = true;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -1168,12 +1261,52 @@ WHERE
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
-            double startEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "StartChargingID");
-            double endEnergyAdded = GetChargeEnergyAdded(ChargingStateID, "EndChargingID");
+            double charge_energy_added = 0.0;
+            bool charge_energy_added_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+                        SELECT
+                          charging.charge_energy_added
+                        FROM
+                          charging
+                        WHERE
+                          charging.CarId = @CarID
+                          AND charging.id >= (SELECT StartChargingID FROM chargingstate WHERE id = @ChargingStateID)
+                          AND charging.id <= (SELECT EndChargingID FROM chargingstate WHERE id = @ChargingStateID)
+                        ORDER BY id ASC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        double last_charge_energy_added = 0.0;
+                        while (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out double new_charge_energy_added))
+                            {
+                                if (new_charge_energy_added < last_charge_energy_added)
+                                {
+                                    charge_energy_added += last_charge_energy_added;
+                                }
+                                last_charge_energy_added = new_charge_energy_added;
+                            }
+                        }
+                        charge_energy_added += last_charge_energy_added;
+                        charge_energy_added_found = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, "UpdateChargeEnergyAdded");
+                car.Log(ex.ToString());
+            }
 
-            double charge_energy_added = endEnergyAdded - startEnergyAdded;
-
-            if (charge_energy_added >= 0)
+            if (charge_energy_added_found)
             {
                 try
                 {
@@ -1194,7 +1327,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                             Tools.DebugLog(cmd);
                             int rowsUpdated = cmd.ExecuteNonQuery();
-                            car.Log($"UpdateChargeEnergyAdded: {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                            car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
                         }
                     }
                 }
@@ -1206,40 +1339,8 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"UpdateChargeEnergyAdded error - calculated {charge_energy_added} for ID {ChargingStateID} startEnergyAdded:{startEnergyAdded} endEnergyAdded:{endEnergyAdded} ");
+                Tools.DebugLog($"UpdateChargeEnergyAdded error - could not calculate charge_energy_added for ID {ChargingStateID}");
             }
-        }
-
-        private double GetChargeEnergyAdded(int openChargingState, string column)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT charging.charge_energy_added FROM charging, chargingstate WHERE chargingstate.CarId = @CarID AND chargingstate.{column} = charging.id and chargingstate.id=@ChargingStateID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
-                        {
-                            if (double.TryParse(dr[0].ToString(), out double charge_energy_added))
-                            {
-                                return charge_energy_added;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, "GetLastCarVersion");
-                car.Log(ex.ToString());
-            }
-
-            return -1.0;
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
@@ -1827,11 +1928,41 @@ ORDER BY id DESC", con))
 
         public void StartChargingState(WebHelper wh)
         {
+            object meter_vehicle_kwh_start = DBNull.Value;
+            object meter_utility_kwh_start = DBNull.Value;
+
+            try
+            {
+                var v = ElectricityMeterBase.Instance(wh.car.CarInDB);
+                if (v != null)
+                {
+                    if (true) // xxx if (v.IsCharging() == true)
+                    {
+                        meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
+                        meter_utility_kwh_start = v.GetUtilityMeterReading_kWh();
+
+                        car.Log("Meter: " + v.ToString());
+                    }
+                    else if (v.IsCharging() == false)
+                    {
+                        car.Log("Meter: Not Charging!");
+                    }
+                    else
+                    {
+                        car.Log("Meter: IsCharging() == NULL");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present ) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present)", con))
+                using (MySqlCommand cmd = new MySqlCommand("insert chargingstate (CarID, StartDate, Pos, StartChargingID, fast_charger_brand, fast_charger_type, conn_charge_cable , fast_charger_present, meter_vehicle_kwh_start, meter_utility_kwh_start) values (@CarID, @StartDate, @Pos, @StartChargingID, @fast_charger_brand, @fast_charger_type, @conn_charge_cable , @fast_charger_present, @meter_vehicle_kwh_start, @meter_utility_kwh_start)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
                     cmd.Parameters.AddWithValue("@StartDate", chargeStart);
@@ -1841,6 +1972,8 @@ ORDER BY id DESC", con))
                     cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
                     cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
                     cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                    cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
+                    cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                     Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
@@ -1949,7 +2082,7 @@ ORDER BY id DESC", con))
             car.currentJSON.current_speed = 0;
             car.currentJSON.current_power = 0;
 
-            Task.Factory.StartNew(() =>
+            _ = Task.Factory.StartNew(() =>
               {
                   if (StartPos > 0)
                   {
@@ -1959,7 +2092,7 @@ ORDER BY id DESC", con))
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
                   }
-              });
+              }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
@@ -2512,7 +2645,6 @@ ORDER BY id DESC", con))
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
             double? inside_temp = car.currentJSON.current_inside_temperature;
-
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -2520,7 +2652,7 @@ ORDER BY id DESC", con))
                 using (MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
                     cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
@@ -3419,6 +3551,29 @@ WHERE
             return dt;
         }
 
+        public static DataRow GetCar(int id)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars where id = @id", DBConnectionstring))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@id", id);
+
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                        return dt.Rows[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return null;
+        }
+
         public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
         {
             sumkm = 0;
@@ -3724,7 +3879,7 @@ WHERE
             }
         }
 
-        private static int MphToKmhRounded(double speed_mph)
+        internal static int MphToKmhRounded(double speed_mph)
         {
             int speed_floor = (int)(speed_mph * 1.60934);
             // handle special speed_floor as Math.Round is off by +1
@@ -3890,6 +4045,24 @@ WHERE
 
         private void CloseChargingState(int openChargingState)
         {
+            object meter_vehicle_kwh_end = DBNull.Value;
+            object meter_utility_kwh_end = DBNull.Value;
+
+            try
+            {
+                var v = ElectricityMeterBase.Instance(car.CarInDB);
+//                 if (v != null && v.IsCharging() == true)
+                {
+                    meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
+                    meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+
             try
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
@@ -3899,19 +4072,27 @@ WHERE
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE
- chargingstate
-SET
- EndDate = @EndDate,
- EndChargingID = @EndChargingID
-WHERE
- id=@ChargingStateID
- AND CarID=@CarID", con))
+                        UPDATE
+                         chargingstate
+                        SET
+                         EndDate = @EndDate,
+                         EndChargingID = @EndChargingID,
+                         meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
+                         meter_utility_kwh_end = @meter_utility_kwh_end
+                         "+((car.GetTeslaAPIState().GetString("charging_state", out string chargingState, 5000) && chargingState.Equals("Disconnected")) ? ",UnplugDate = @UnplugDate" : "")+@"
+                        WHERE
+                         id=@ChargingStateID
+                         AND CarID=@CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
                         cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
+                        cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
+                        if (car.GetTeslaAPIState().GetString("charging_state", out chargingState, 5000) && chargingState.Equals("Disconnected")) {
+                            cmd.Parameters.AddWithValue("@UnplugDate", chargeEnd);
+                        }
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }

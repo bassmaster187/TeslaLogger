@@ -71,6 +71,10 @@
     <Compile Include="Crc32.cs" />
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />
+    <Compile Include="ElectricityMeterBase.cs" />
+    <Compile Include="ElectricityMeterGoE.cs" />
+    <Compile Include="ElectricityMeterOpenWB.cs" />
+    <Compile Include="ElectricityMeterTeslaGen3WallConnector.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />
@@ -104,7 +108,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="bin\changelog.md" />
     <None Include="packages.config" />
+    <None Include="www\admin\language.php.bak" />
+    <None Include="www\admin\manifest.json" />
+    <None Include="www\admin\settings.php.bak" />
+    <None Include="www\admin\Teslalogger.odt" />
+    <None Include="www\admin\Teslalogger.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logfile\Logfile.csproj">
@@ -126,6 +136,75 @@
     <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\admin\abrp.php" />
+    <Content Include="www\admin\adminpanelpassword.php" />
+    <Content Include="www\admin\backup.php" />
+    <Content Include="www\admin\changelog.php" />
+    <Content Include="www\admin\changelogread.php" />
+    <Content Include="www\admin\changelog_plain.php" />
+    <Content Include="www\admin\chargingcost.php" />
+    <Content Include="www\admin\chargingcost_write.php" />
+    <Content Include="www\admin\current_json.php" />
+    <Content Include="www\admin\dashboard.css" />
+    <Content Include="www\admin\dashboard.php" />
+    <Content Include="www\admin\db.php" />
+    <Content Include="www\admin\geoadd.php" />
+    <Content Include="www\admin\geoadd_write.php" />
+    <Content Include="www\admin\geofencing.php" />
+    <Content Include="www\admin\gosleep.php" />
+    <Content Include="www\admin\img\apple-touch-icon.png" />
+    <Content Include="www\admin\img\bat-icon-end.png" />
+    <Content Include="www\admin\img\bat-icon-gr.png" />
+    <Content Include="www\admin\img\bat-icon.png" />
+    <Content Include="www\admin\img\icon-help-24.png" />
+    <Content Include="www\admin\img\marker-icon-green.png" />
+    <Content Include="www\admin\img\weather\chanceflurries.png" />
+    <Content Include="www\admin\img\weather\chancerain.png" />
+    <Content Include="www\admin\img\weather\chancesleat.png" />
+    <Content Include="www\admin\img\weather\chancesnow.png" />
+    <Content Include="www\admin\img\weather\chancetstorms.png" />
+    <Content Include="www\admin\img\weather\clear.png" />
+    <Content Include="www\admin\img\weather\cloudy.png" />
+    <Content Include="www\admin\img\weather\flurries.png" />
+    <Content Include="www\admin\img\weather\hazy.png" />
+    <Content Include="www\admin\img\weather\mostlycloudy.png" />
+    <Content Include="www\admin\img\weather\mostlysunny.png" />
+    <Content Include="www\admin\img\weather\partlycloudy.png" />
+    <Content Include="www\admin\img\weather\partlysunny.png" />
+    <Content Include="www\admin\img\weather\rain.png" />
+    <Content Include="www\admin\img\weather\sleet.png" />
+    <Content Include="www\admin\img\weather\snow.png" />
+    <Content Include="www\admin\img\weather\sunny.png" />
+    <Content Include="www\admin\img\weather\tstorms.png" />
+    <Content Include="www\admin\img\weather\unknown.png" />
+    <Content Include="www\admin\index.php" />
+    <Content Include="www\admin\language.php" />
+    <Content Include="www\admin\log.php" />
+    <Content Include="www\admin\logfile - Kopie.php" />
+    <Content Include="www\admin\logfile.php" />
+    <Content Include="www\admin\logfileweb.php" />
+    <Content Include="www\admin\logo.jpg" />
+    <Content Include="www\admin\menu.php" />
+    <Content Include="www\admin\Parsedown.php" />
+    <Content Include="www\admin\password.php" />
+    <Content Include="www\admin\password_info.php" />
+    <Content Include="www\admin\password_write.php" />
+    <Content Include="www\admin\redirect.php" />
+    <Content Include="www\admin\restartlogger.php" />
+    <Content Include="www\admin\restore.php" />
+    <Content Include="www\admin\restore_upload.php" />
+    <Content Include="www\admin\settings.php" />
+    <Content Include="www\admin\settings_share.php" />
+    <Content Include="www\admin\settings_write.php" />
+    <Content Include="www\admin\status.php" />
+    <Content Include="www\admin\teslaloggerstream.php" />
+    <Content Include="www\admin\tools.php" />
+    <Content Include="www\admin\update.php" />
+    <Content Include="www\admin\wallpapers\.gitignore" />
+    <Content Include="www\index.php" />
+    <Content Include="www\wakeup.php" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

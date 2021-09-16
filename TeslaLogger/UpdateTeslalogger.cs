@@ -23,7 +23,7 @@ namespace TeslaLogger
 
         private static bool _done = false;
 
-        public static bool Done { get => _done;}
+        public static bool Done { get => _done; }
 
         private static Thread ComfortingMessages = null;
         public static bool DownloadUpdateAndInstallStarted = false;
@@ -66,6 +66,8 @@ namespace TeslaLogger
                             break;
                         case 3:
                             Logfile.Log("TeslaLogger update is still running, thank you for your patience");
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -370,7 +372,6 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-
                 if (!DBHelper.IndexExists("IX_charging_carid_datum", "charging"))
                 {
                     Logfile.Log("alter table charging add index IX_charging_carid_datum (CarId, Datum)");
@@ -415,6 +416,64 @@ CREATE TABLE superchargerstate(
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
                 }
 
+                if (!DBHelper.ColumnExists("cars", "ABRP_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
+                }
+
+                // check datetime precision in pos
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
+                        {
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = cmd.ExecuteReader();
+                            if (dr.Read() && dr[0] != DBNull.Value)
+                            {
+                                if (int.TryParse(dr[0].ToString(), out int datetime_precision))
+                                {
+                                    if (datetime_precision != 3)
+                                    {
+                                        // update table
+                                        Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
+                                        DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
+                    Logfile.Log(sql); 
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.ColumnExists("cars", "meter_type"))
+                {
+                    string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
@@ -437,6 +496,7 @@ CREATE TABLE superchargerstate(
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
                 UpdatePHPini();
+                UpdateApacheConfig();
                 CreateEmptyWeatherIniFile();
                 CheckBackupCrontab();
 
@@ -456,6 +516,40 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception) { }
             }
+        }
+
+        public static string UpdateApacheConfig(string path = "/etc/apache2/apache2.conf", bool write = true)
+        {
+            if (!File.Exists(path))
+                return "";
+
+            string temp = File.ReadAllText(path);
+            if (temp.Contains("<Directory /var/www/>"))
+            {
+                string pattern = "(<Directory \\/var\\/www\\/>)(.+?)(AllowOverride [A-Za-z]+)(.+?)(<\\/Directory>)";
+                Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+                var m = r.Match(temp);
+                if (!m.Success)
+                {
+                    Logfile.Log("Apache Config AllowOverride not found!!!");
+                    return temp;
+                }
+                else if (m.Groups.Count != 6 || m.Groups[3].Value != "AllowOverride All")
+                {
+                    string oldValue = "";
+                    if (m.Groups.Count > 3)
+                        oldValue = m.Groups[3].Value;
+
+                    Logfile.Log("Apache Config changed! Old: " + oldValue);
+                }
+                       
+                temp = r.Replace(temp, "$1$2AllowOverride All$4$5");
+            }
+            
+            if (write)
+                File.WriteAllText(path, temp);
+
+            return temp;
         }
 
         public static void DownloadUpdateAndInstall()
@@ -491,8 +585,14 @@ CREATE TABLE superchargerstate(
 
                 if (!Tools.Exec_mono("optipng", "-version", false).Contains("OptiPNG version"))
                 {
-                    Tools.Exec_mono("apt-get", "-y install optipng");
-                    Tools.Exec_mono("optipng", "-version");
+                    if (Tools.Exec_mono("apt-get", "-y install optipng", false).Contains("apt --fix-broken"))
+                    {
+                        Logfile.Log("Info: apt-get cannot install optipng");
+                    }
+                    else
+                    {
+                        Tools.Exec_mono("optipng", "-version");
+                    }
                 }
 
                 Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
@@ -734,7 +834,7 @@ CREATE TABLE superchargerstate(
                     {
                         Logfile.Log("PHP.ini changed!");
                     }
-                }   
+                }
             }
             catch (Exception ex)
             {
@@ -818,7 +918,7 @@ CREATE TABLE superchargerstate(
             }
         }
 
-        
+
 
         internal static Dictionary<string, string> GetLanguageDictionary(string language)
         {
@@ -1027,6 +1127,8 @@ CREATE TABLE superchargerstate(
                                 s = s.Replace("EndOdometer,", " EndOdometer / 1.609 as EndOdometer,");
                                 s = s.Replace("100 AS MaxRange", "100 / 1.609 AS MaxRange");
                                 s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609 - StartOdometer/1.609) * 100 AS AVGConsumption");
+
+                                s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
                             }
                             else if (f.EndsWith("Degradation.json"))
                             {
@@ -1341,7 +1443,7 @@ CREATE TABLE superchargerstate(
 
                 Regex regexAlias = new Regex("(templating.*\\\"text\\\":\\s\\\")(\\\".*?value\\\":\\s\\\")(.*?)(\\\")(.*?display_name)(.*?label\\\":\\s\\\")(.*?)(\\\")", RegexOptions.Singleline | RegexOptions.Multiline);
                 var m = regexAlias.Match(s);
-                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}"+carLabel+"${8}");
+                string ret = regexAlias.Replace(s, "${1}" + name + "${2}" + id + "${4}${5}${6}" + carLabel + "${8}");
                 return ret;
             }
             catch (Exception ex)
@@ -1402,8 +1504,8 @@ CREATE TABLE superchargerstate(
                 return content;
             }
 
-            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\""+ v +"\\\"");
-            string replace = "\"alias\": \""+dictLanguage[v]+"\"";
+            Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
         }
@@ -1466,7 +1568,7 @@ CREATE TABLE superchargerstate(
         }
 
 
-        public static void Chmod(string filename, int chmod, bool logging=true)
+        public static void Chmod(string filename, int chmod, bool logging = true)
         {
             try
             {

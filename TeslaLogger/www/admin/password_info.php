@@ -53,8 +53,10 @@ require_once("tools.php");
         .done(function(data) {
             $("#info").html(data);
             if (data.includes("Wait for MFA code"))
-                $("#mfapanel").show();
-            
+            {
+                $("#mfapanel").show();           
+                $("#captchapanel").hide();           
+            }
             
             setTimeout(updateInfo, 1000);
         })
@@ -73,6 +75,18 @@ require_once("tools.php");
             window.location.href='password.php';
     }
 
+    function btn_captcha_click()
+    {
+        $("#captcha" ).prop( "disabled", true );
+        var value = $("#captcha").val();
+        console.log("captcha entered");
+        var url = "captcha/"+dbid+"/"+value;
+        console.log("url: " + url);
+        var jqxhr = $.post("teslaloggerstream.php", {url: url, data: ''}).always(function () {
+            
+        });
+    }
+
 </script>
 </head>
 <body style="padding-top: 5px; padding-left: 10px;">
@@ -83,11 +97,23 @@ menu("Credentials");
 ?>
 <div>
 <h1><?php t("Credentials Info"); ?>:</h1>
-</div>
-<div id="info" style="overflow: auto; height: 400px; max-width: 1260px;">
+<div id="captchapanel">
+    <h2>Captcha:<h2> <br>
+    <img src="teslaloggerstream_svg.php?url=captchapic/<?php
+	if (isset($_REQUEST["id"]))
+        echo($_REQUEST["id"]);
+    else
+        echo("-1");
+?>" alt=""/>
+    <input id="captcha" type="text" /> <button onclick="btn_captcha_click();"><?php t("OK"); ?>
 </div>
 <div id="mfapanel" style="display: none;">
-    MFA: <input id="MFA" type="text" autocomplete="new-password" />
+    <h2>MFA:</h2> 
+    <input id="MFA" type="text" autocomplete="new-password" />
+</div>
+</div>
+<h1>Info:</h1>
+<div id="info" style="overflow: auto; height: 400px; max-width: 1260px;">
 </div>
 <button onclick="btn_ok_click();" style="float: right;"><?php t("OK"); ?>
 </body>

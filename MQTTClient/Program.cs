@@ -14,7 +14,7 @@ namespace MQTTClient
     {
         static void Main(string[] args)
         {
-            string clientid = Guid.NewGuid().ToString();
+            string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
 
             MqttClient client = null;
             try
