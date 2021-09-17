@@ -2696,6 +2696,7 @@ ORDER BY id DESC", con))
                     cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -3112,7 +3113,26 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng, UnplugDate from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id,
+  lat,
+  lng,
+  UnplugDate,
+  EndDate
+FROM
+  chargingstate
+JOIN pos ON
+  chargingstate.pos = pos.id
+WHERE
+  chargingstate.id IN (
+    SELECT
+      MAX(id)
+    FROM
+      chargingstate
+    WHERE
+      carid=@CarID
+  )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     Tools.DebugLog(cmd);
