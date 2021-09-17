@@ -2684,14 +2684,16 @@ ORDER BY id DESC", con))
             Logfile.Log("UpdateAllDrivestateData end");
         }
 
-        public void StartDriveState()
+        public void StartDriveState(DateTime now)
         {
+            // driving means that charging must be over
+            UpdateUnplugDate();
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con))
                 {
-                    cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.ExecuteNonQuery();

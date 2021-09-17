@@ -584,7 +584,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    dbHelper.StartDriveState();
+                    dbHelper.StartDriveState(DateTime.Now);
                     SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());
@@ -1215,7 +1215,6 @@ namespace TeslaLogger
             {
                 // reset lastSetChargeLimitAddressName
                 LastSetChargeLimitAddressName = string.Empty;
-                dbHelper.UpdateUnplugDate();
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
