@@ -1,4 +1,4 @@
-# Installation von PHPMYADMIN
+# Installation of PHPMYADMIN inside TeslaLogger
 
 #### 1. connect via "ssh"
   * sudo apt-get install phpmyadmin
