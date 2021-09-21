@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
 
@@ -1671,5 +1672,27 @@ WHERE
             return mapProvider;
         }
 
+        internal static void ExternalLog(string text)
+        {
+            try
+            {
+                var c = WebHelper.httpclient_teslalogger_de;
+
+                UriBuilder b = new UriBuilder("https://teslalogger.de/log.php");
+                b.Port = -1;
+                var q = HttpUtility.ParseQueryString(b.Query);
+                q["t"] = text;
+                b.Query = q.ToString();
+                string url = b.ToString();
+
+                var result = c.GetAsync(url).Result;
+                var resultContent = result.Content.ReadAsStringAsync().Result;
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
     }
 }

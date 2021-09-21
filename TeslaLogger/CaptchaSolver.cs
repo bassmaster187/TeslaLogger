@@ -13,6 +13,7 @@ namespace TeslaLogger
         private static string API_KEY = CaptchaSolverKey.key;
         static HttpClient client = null;
         string captcha_id;
+        DateTime start = DateTime.Now;
         Car car;
 
         public CaptchaSolver(Car c)
@@ -37,6 +38,8 @@ namespace TeslaLogger
             {
                 car.Log("Get Recaptcha (in)");
 
+                car.ExternalLog("2captcha in");
+
                 var response = client.PostAsync("http://2captcha.com/in.php", formContent).Result;
                 string result = response.Content.ReadAsStringAsync().Result;
 
@@ -44,6 +47,7 @@ namespace TeslaLogger
                 captcha_id = r[1];
 
                 car.Log("2Captcha in: " + r[0]+ " ID: " + r[1]);
+                start = DateTime.Now;
 
                 return captcha_id;
             }
@@ -76,7 +80,9 @@ namespace TeslaLogger
 
                     string[] ret = result2.Split('|');
 
-                    car.Log("2Captcha res: " + captcha_id[0] + " ID: " + captcha_id[1]);
+                    car.Log("2Captcha res: " + ret[0] + " ID: " + ret[1]);
+                    TimeSpan ts = DateTime.Now - start;
+                    car.ExternalLog("2captcha res: " + ret[0] + " / " + ts.TotalMilliseconds + "ms");
 
                     return ret[1];
                 }

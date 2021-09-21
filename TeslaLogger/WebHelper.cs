@@ -65,7 +65,7 @@ namespace TeslaLogger
 
         private double battery_range2ideal_battery_range = 0.8000000416972936;
 
-        static HttpClient httpclient_teslalogger_de = new HttpClient();
+        public static HttpClient httpclient_teslalogger_de = new HttpClient();
         static HttpClient httpClientForAuthentification;
         static HttpClient httpClientABRP = null;
         HttpClient httpclientTeslaAPI = null;
@@ -417,6 +417,9 @@ namespace TeslaLogger
                 if (ex.InnerException != null)
                     car.passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
 
+                if (ex.Message != "NO Credentials")
+                    car.ExternalLog("GetToken: " + ex.ToString());
+
                 Log("Error in GetTokenAsync: " + ex.Message);
                 ExceptionWriter(ex, resultContent);
             }
@@ -501,6 +504,8 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
+
+                car.ExternalLog("UpdateTeslaTokenFromRefreshToken: " + ex.ToString());
             }
             return "";
         }
@@ -690,6 +695,8 @@ namespace TeslaLogger
                 if (ex.InnerException != null)
                     car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
 
+                car.ExternalLog("GetTokenAsync2: " + ex.ToString());
+
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
             }
@@ -845,6 +852,8 @@ namespace TeslaLogger
 
                         car.Log("MFA1 ResultContent: " + resultContent);
                         car.Log(ex.ToString());
+
+                        car.ExternalLog("MFA1 Try Device: " + ex.ToString());
                     }
                 }
             }
@@ -854,6 +863,8 @@ namespace TeslaLogger
                 car.Log("MFA1 ResultContent: " + resultContent);
                 car.Log(ex.ToString());
                 ExceptionWriter(null, resultContent);
+
+                car.ExternalLog("MFA1: " + ex.ToString());
             }
 
             return "";
@@ -1016,6 +1027,8 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
 
                 ExceptionWriter(ex, resultContent);
+
+                car.ExternalLog("GetTokenAsync3: " + ex.ToString());
             }
 
             return "";
@@ -1081,6 +1094,8 @@ namespace TeslaLogger
             {
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
+
+                car.ExternalLog("GetTokenAsync4: " + ex.ToString());
             }
             return "";
         }

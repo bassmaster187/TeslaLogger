@@ -62,6 +62,7 @@ namespace TeslaLogger
                 Logfile.Log(ex.Message);
                 Logfile.ExceptionWriter(ex, "main loop");
                 Logfile.Log("Teslalogger Stopped!");
+                Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
             }
             finally
             {
