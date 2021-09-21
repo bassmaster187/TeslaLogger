@@ -36,7 +36,7 @@ Make sure your database connection string to teslamate and teslalogger is valid 
   Make a backup of Teslamate and Teslalogger database and move it to a safe place!!!
   
   Start the tool bin/Teslamate-Import.exe
-  On Windows 10 it should run without installing .net Framework. On macOS and Linux you may need to download .net Framework https://dotnet.microsoft.com/download 
+  On Windows 10 it should run without installing .net Framework. On macOS and Linux you may need to download and use Mono: https://www.mono-project.com/download/stable/ 
   
   This process may take a long time depending on the power of your machine, network and storage....
   
