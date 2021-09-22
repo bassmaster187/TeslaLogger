@@ -1,3 +1,6 @@
+# Version 1.48.14
+- BF: prevent endless loop in reCaptcha service
+
 # Version 1.48.13
 - Tesla Wallbox Gen 3 first support
 

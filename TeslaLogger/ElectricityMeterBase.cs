@@ -34,6 +34,9 @@ namespace TeslaLogger
                 return new ElectricityMeterOpenWB(host, paramater);
             else if (type == "go-e")
                 return new ElectricityMeterGoE(host, paramater);
+            else if (type == "tesla-gen3")
+                return new ElectricityMeterTeslaGen3WallConnector(host, paramater);
+
             return null;
         }
 

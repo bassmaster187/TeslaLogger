@@ -407,7 +407,7 @@ namespace TeslaLogger
                     if (useCaptcha)
                         GetCaptcha();
 
-                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri);
+                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri, true);
                 }
             }
             catch (Exception ex)
@@ -509,8 +509,19 @@ namespace TeslaLogger
             }
             return "";
         }
-
-        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code_challenge"></param>
+        /// <param name="mc"></param>
+        /// <param name="state"></param>
+        /// <param name="code_verifier"></param>
+        /// <param name="Referer"></param>
+        /// <param name="firstIteration">
+        /// Will prevent an endless loop if something went wrong with reCaptacha as it will call GetTokenAsync2 again!
+        /// </param>
+        /// <returns></returns>
+        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer, bool firstIteration)
         {
             if (useCaptcha)
                 WaitForCaptcha();
@@ -608,6 +619,13 @@ namespace TeslaLogger
 
                     if (resultContent.Contains("www.recaptcha.net"))
                     {
+                        if (!firstIteration)
+                        {
+                            car.Log("Error!!! There is still a reCaptcha. Prevent endless loop!");
+                            car.ExternalLog("Error!!! There is still a reCaptcha. Prevent endless loop!");
+                            return "NULL";
+                        }
+
                         car.passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
                         // car.passwortinfo.Append("*** try to use access token & refresh token instead of email & password!!! ***<br>");
                         car.Log("Waiting for Recaptcha solver!");
@@ -623,7 +641,7 @@ namespace TeslaLogger
                         {
                             car.passwortinfo.Append("Recaptcha code received<br>");
 
-                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer);
+                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer, false);
                         }
                     }
 
