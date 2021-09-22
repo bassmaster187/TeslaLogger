@@ -1676,6 +1676,7 @@ WHERE
         {
             try
             {
+                text = "V:" + Assembly.GetExecutingAssembly().GetName().Version + " - " + text;
                 var c = WebHelper.httpclient_teslalogger_de;
 
                 UriBuilder b = new UriBuilder("https://teslalogger.de/log.php");
