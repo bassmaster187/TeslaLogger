@@ -65,7 +65,7 @@ namespace TeslaLogger
 
         private double battery_range2ideal_battery_range = 0.8000000416972936;
 
-        static HttpClient httpclient_teslalogger_de = new HttpClient();
+        public static HttpClient httpclient_teslalogger_de = new HttpClient();
         static HttpClient httpClientForAuthentification;
         static HttpClient httpClientABRP = null;
         HttpClient httpclientTeslaAPI = null;
@@ -407,7 +407,7 @@ namespace TeslaLogger
                     if (useCaptcha)
                         GetCaptcha();
 
-                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri);
+                    return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri, true);
                 }
             }
             catch (Exception ex)
@@ -416,6 +416,9 @@ namespace TeslaLogger
                 
                 if (ex.InnerException != null)
                     car.passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
+
+                if (ex.Message != "NO Credentials")
+                    car.ExternalLog("GetToken: " + ex.ToString());
 
                 Log("Error in GetTokenAsync: " + ex.Message);
                 ExceptionWriter(ex, resultContent);
@@ -501,11 +504,24 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
+
+                car.ExternalLog("UpdateTeslaTokenFromRefreshToken: " + ex.ToString());
             }
             return "";
         }
-
-        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code_challenge"></param>
+        /// <param name="mc"></param>
+        /// <param name="state"></param>
+        /// <param name="code_verifier"></param>
+        /// <param name="Referer"></param>
+        /// <param name="firstIteration">
+        /// Will prevent an endless loop if something went wrong with reCaptacha as it will call GetTokenAsync2 again!
+        /// </param>
+        /// <returns></returns>
+        private string GetTokenAsync2(string code_challenge, MatchCollection mc, string state, string code_verifier, Uri Referer, bool firstIteration)
         {
             if (useCaptcha)
                 WaitForCaptcha();
@@ -603,6 +619,13 @@ namespace TeslaLogger
 
                     if (resultContent.Contains("www.recaptcha.net"))
                     {
+                        if (!firstIteration)
+                        {
+                            car.Log("Error!!! There is still a reCaptcha. Prevent endless loop!");
+                            car.ExternalLog("Error!!! There is still a reCaptcha. Prevent endless loop!");
+                            return "NULL";
+                        }
+
                         car.passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
                         // car.passwortinfo.Append("*** try to use access token & refresh token instead of email & password!!! ***<br>");
                         car.Log("Waiting for Recaptcha solver!");
@@ -618,7 +641,7 @@ namespace TeslaLogger
                         {
                             car.passwortinfo.Append("Recaptcha code received<br>");
 
-                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer);
+                            return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer, false);
                         }
                     }
 
@@ -689,6 +712,8 @@ namespace TeslaLogger
                 car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.Message + "<br>");
                 if (ex.InnerException != null)
                     car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
+
+                car.ExternalLog("GetTokenAsync2: " + ex.ToString());
 
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
@@ -845,6 +870,8 @@ namespace TeslaLogger
 
                         car.Log("MFA1 ResultContent: " + resultContent);
                         car.Log(ex.ToString());
+
+                        car.ExternalLog("MFA1 Try Device: " + ex.ToString());
                     }
                 }
             }
@@ -854,6 +881,8 @@ namespace TeslaLogger
                 car.Log("MFA1 ResultContent: " + resultContent);
                 car.Log(ex.ToString());
                 ExceptionWriter(null, resultContent);
+
+                car.ExternalLog("MFA1: " + ex.ToString());
             }
 
             return "";
@@ -1016,6 +1045,8 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
 
                 ExceptionWriter(ex, resultContent);
+
+                car.ExternalLog("GetTokenAsync3: " + ex.ToString());
             }
 
             return "";
@@ -1081,6 +1112,8 @@ namespace TeslaLogger
             {
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
+
+                car.ExternalLog("GetTokenAsync4: " + ex.ToString());
             }
             return "";
         }

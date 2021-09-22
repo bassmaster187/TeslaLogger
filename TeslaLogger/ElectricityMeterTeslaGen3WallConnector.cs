@@ -75,7 +75,7 @@ namespace TeslaLogger
                 if (mockup_version != null)
                     return mockup_version;
 
-                string url = host + "/api/1/vitals";
+                string url = host + "/api/1/version";
                 string lastJSON = client.DownloadString(url);
 
                 return lastJSON;
@@ -100,10 +100,11 @@ namespace TeslaLogger
             try
             {
                 j = GetCurrentDataLifetime();
+                j = j.Replace("nan,", "null,");
 
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
                 string key = "energy_wh";
-                string value = jsonResult[key];
+                string value = jsonResult[key].ToString();
 
                 double v = Double.Parse(value, Tools.ciEnUS);
                 v = v / 1000.0;
@@ -124,12 +125,13 @@ namespace TeslaLogger
             try
             {
                 j = GetCurrentDataVitals();
+                j = j.Replace("nan,", "null,");
 
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
-                string key = "session_s";
-                string value = jsonResult[key];
 
-                return value == "1";
+                bool vehicle_connected = jsonResult["vehicle_connected"];
+
+                return vehicle_connected;
             }
             catch (Exception ex)
             {
@@ -143,9 +145,12 @@ namespace TeslaLogger
         {
             try
             {
-                string url = host + "/openWB/web/version?t=" + new Guid().ToString();
-                string v = client.DownloadString(url).Trim();
-                return v;
+                string j = GetCurrentDataVersion();
+
+                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                string key = "firmware_version";
+                string value = jsonResult[key];
+                return value;
             }
             catch (Exception ex)
             {

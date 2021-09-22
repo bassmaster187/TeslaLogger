@@ -1376,6 +1376,12 @@ namespace TeslaLogger
             Logfile.Log(temp);
         }
 
+        public void ExternalLog(string text)
+        {
+            string temp = TaskerHash + ": " + text;
+            Tools.ExternalLog(temp);
+        }
+
         public static Car GetCarByID(int carid)
         {
             return allcars.FirstOrDefault(car => car.CarInDB == carid);
