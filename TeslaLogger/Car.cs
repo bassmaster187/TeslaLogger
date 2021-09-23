@@ -584,7 +584,7 @@ namespace TeslaLogger
                         }
                     }
 
-                    dbHelper.StartDriveState();
+                    dbHelper.StartDriveState(DateTime.Now);
                     SetCurrentState(TeslaState.Drive);
 
                     Task.Run(() => webhelper.DeleteWakeupFile());

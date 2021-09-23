@@ -75,6 +75,16 @@ namespace TeslaLogger
             }
         }
 
+        public static void DebugLog(MySqlDataReader dr)
+        {
+            string msg = "RAWSQL:";
+            for (int column = 0; column < dr.FieldCount; column++)
+            {
+                msg += (column==0?"":"|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+            }
+            Logfile.Log(msg);
+        }
+
         internal static string ExpandSQLCommand(MySqlCommand cmd)
         {
             string msg = string.Empty;
