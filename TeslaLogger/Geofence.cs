@@ -15,6 +15,7 @@ namespace TeslaLogger
             OpenChargePort,
             HighFrequencyLogging,
             EnableSentryMode,
+            DisableSentryMode,
             SetChargeLimit,
             SetChargeLimitOnArrival,
             ClimateOff,
@@ -301,6 +302,10 @@ namespace TeslaLogger
                     SpecialFlag_ESM(_addr, flag);
                     _addr.name = "\uD83D\uDC40 " + _addr.name;
                 }
+                else if (flag.StartsWith("dsm"))
+                {
+                    SpecialFlag_DSM(_addr, flag);
+                }
                 else if (flag.Equals("home"))
                 {
                     _addr.IsHome = true;
@@ -370,6 +375,21 @@ namespace TeslaLogger
             {
                 // default
                 _addr.specialFlags.Add(Address.SpecialFlags.EnableSentryMode, "RND->P");
+            }
+        }
+        
+        private static void SpecialFlag_DSM(Address _addr, string _flag)
+        {
+            string pattern = "dsm:([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flag, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                _addr.specialFlags.Add(Address.SpecialFlags.DisableSentryMode, m.Groups[1].Captures[0].ToString() + "->" + m.Groups[2].Captures[0].ToString());
+            }
+            else
+            {
+                // default
+                _addr.specialFlags.Add(Address.SpecialFlags.DisableSentryMode, "RND->P");
             }
         }
 

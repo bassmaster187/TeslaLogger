@@ -1013,6 +1013,9 @@ namespace TeslaLogger
                         case Address.SpecialFlags.EnableSentryMode:
                             HandleSpeciaFlag_EnableSentryMode(flag.Value, oldState, newState);
                             break;
+                        case Address.SpecialFlags.DisableSentryMode:
+                            HandleSpeciaFlag_DisableSentryMode(flag.Value, oldState, newState);
+                            break;
                         case Address.SpecialFlags.ClimateOff:
                             HandleSpeciaFlag_ClimateOff(flag.Value, oldState, newState);
                             break;
@@ -1114,6 +1117,21 @@ namespace TeslaLogger
             }
         }
 
+        private void HandleSpeciaFlag_DisableSentryMode(string _flagconfig, string _oldState, string _newState)
+        {
+            string pattern = "([PRND]+)->([PRND]+)";
+            Match m = Regex.Match(_flagconfig, pattern);
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1 && m.Groups[1].Captures[0].ToString().Contains(_oldState) && m.Groups[2].Captures[0].ToString().Contains(_newState))
+            {
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Log("DisableSentryMode ...");
+                    string result = webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result;
+                    Log("set_sentry_mode(): " + result);
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }
+        }
+        
         private void HandleSpeciaFlag_ClimateOff(string _flagconfig, string _oldState, string _newState)
         {
             string pattern = "([PRND]+)->([PRND]+)";
