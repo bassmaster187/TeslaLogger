@@ -3491,7 +3491,7 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
