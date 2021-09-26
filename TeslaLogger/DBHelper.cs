@@ -350,6 +350,177 @@ namespace TeslaLogger
             return true;
         }
 
+        // find gaps in chargingstate.id
+        internal void AnalyzeCombinedChargingStates()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id
+FROM
+  chargingstate
+WHERE
+  CarID = @CarID
+  AND id < (
+    SELECT
+      MIN(id)
+    FROM
+      chargingstate
+    WHERE
+      CarID = @CarID
+      AND UnplugDate IS NOT NULL
+  )", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int lastID = 0;
+                        if (dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            lastID = (int)dr[0];
+                        }
+                        while(dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            if ((int)dr[0] - lastID > 1)
+                            {
+                                RecalculateChargeEnergyAdded((int)dr[0]);
+                            }
+                            lastID = (int)dr[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private void RecalculateChargeEnergyAdded(int ChargingStateID)
+        {
+            List<Tuple<int, int>> segments = new List<Tuple<int, int>>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  charge_energy_added
+FROM
+  charging
+WHERE
+  CarID = @CarID
+  AND id >= (
+    SELECT
+      StartChargingID
+    FROM
+      chargingstate
+    WHERE
+      CarID = @CarID
+      AND id = @ChargingID
+  )
+  AND id <= (
+    SELECT
+      EndChargingID
+    FROM
+      chargingstate
+    WHERE
+      CarID = @CarID
+      AND id = @ChargingID
+  )", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingID", ChargingStateID);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int index = 0;
+                        double lastCEA = 0;
+                        // first row
+                        if (dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            index = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                        // all rows
+                        while (dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            if (
+                                // charge_energy_added is lower than in the row before
+                                (double)dr[1] < lastCEA
+                                &&
+                                // and the current row is zero or near zero
+                                (double)dr[1] < 0.5)
+                            {
+                                segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
+                                index = ((int)dr[0]);
+                            }
+                            lastCEA = (double)dr[1];
+                        }
+                        segments.Add(new Tuple<int, int>(index, (int)dr[0]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            if (segments.Count > 1)
+            {
+                Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
+                double sum = 0.0;
+                foreach (Tuple<int, int> segment in segments)
+                {
+                    double segmentCEA = GetChargeEnergyAddedFromCharging(segment.Item2);
+                    Tools.DebugLog($"RecalculateChargeEnergyAdded segment:{segment.Item2} c_e_a:{segmentCEA}");
+                    sum += segmentCEA;
+                }
+                Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
+            }
+        }
+
+        internal double GetChargeEnergyAddedFromCharging(int ChargingID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charge_energy_added
+FROM
+  charging
+WHERE
+  id = @ChargingID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@ChargingID", ChargingID);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        if (dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            return (double)dr[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return double.NaN;
+        }
+
         internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
         {
             ABRP_token = "";
@@ -504,13 +675,12 @@ WHERE
                         }
                     }
                     GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
-                    List<int> toBeAnalyzed = new List<int>();
-                    toBeAnalyzed.AddRange(IDsToDelete);
-                    toBeAnalyzed.Add(maxID);
-                    AnalyzeCombineCandidates(toBeAnalyzed);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
+                    // TODO analyze how to update charge_energy_added (consider unplug date)
+                    // TODO create new charging state
+                    // TODO mark original states as hidden and update combined_into
                     Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
                     UpdateChargingstate(maxID, startDate, startdID, 0.0, 0.0);
                     // delete all older charging states
@@ -538,29 +708,6 @@ WHERE
 
                     // update chargingsession stats
                     UpdateMaxChargerPower(maxID);
-                }
-            }
-        }
-
-        private void AnalyzeCombineCandidates(List<int> combineCandidates)
-        {
-            // analyze time passed between n.end and n+1.start
-            if (combineCandidates.Count > 1)
-            {
-                Queue<Tuple<int, DateTime, DateTime>> tuples = new Queue<Tuple<int, DateTime, DateTime>>();
-                foreach (int candidate in combineCandidates)
-                {
-                    tuples.Enqueue(GetStartEndFromCharginState(candidate));
-                }
-                if (tuples.Count > 1)
-                {
-                    for (int i = 1; i < tuples.Count; i++)
-                    {
-                        if (tuples.ElementAt(i - 1).Item1 != -1 && tuples.ElementAt(i).Item1 != -1)
-                        {
-                            Tools.DebugLog($"time between id {tuples.ElementAt(i - 1).Item1} and id {tuples.ElementAt(i).Item1}: {(tuples.ElementAt(i - 1).Item3 - tuples.ElementAt(i).Item2).TotalSeconds} seconds");
-                        }
-                    }
                 }
             }
         }
