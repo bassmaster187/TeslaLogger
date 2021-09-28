@@ -485,6 +485,7 @@ WHERE
                     sum += segmentCEA;
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
+                UpdateChargeEnergyAdded(ChargingStateID, sum);
             }
         }
 
@@ -690,21 +691,11 @@ WHERE
                         DeleteChargingstate(chargingState);
                     }
 
-                    // get charging cost calculation data
-                    string ref_cost_currency = string.Empty;
-                    double ref_cost_per_kwh = double.NaN;
-                    bool ref_cost_per_kwh_found = false;
-                    double ref_cost_per_minute = double.NaN;
-                    bool ref_cost_per_minute_found = false;
-                    double ref_cost_per_session = double.NaN;
-                    bool ref_cost_per_session_found = false;
-                    GetChargeCostData(maxID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
                     UpdateChargeEnergyAdded(maxID);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                    UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                    UpdateChargePrice(maxID);
 
                     // update chargingsession stats
                     UpdateMaxChargerPower(maxID);
@@ -1047,21 +1038,11 @@ HAVING
                         }
                     }
                 }
-                // get charging cost calculation data
-                string ref_cost_currency = string.Empty;
-                double ref_cost_per_kwh = double.NaN;
-                bool ref_cost_per_kwh_found = false;
-                double ref_cost_per_minute = double.NaN;
-                bool ref_cost_per_minute_found = false;
-                double ref_cost_per_session = double.NaN;
-                bool ref_cost_per_session_found = false;
-                GetChargeCostData(openChargingState, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
                 UpdateChargeEnergyAdded(openChargingState);
 
                 // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                UpdateChargePrice(openChargingState, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                UpdateChargePrice(openChargingState);
             }
 
             car.currentJSON.current_charging = false;
@@ -1158,6 +1139,19 @@ WHERE
             }
             Tools.DebugLog("ChargingStateLocationIsSuC: false");
             return false;
+        }
+
+        private void UpdateChargePrice(int ChargingStateID)
+        {
+            string ref_cost_currency = string.Empty;
+            double ref_cost_per_kwh = double.NaN;
+            bool ref_cost_per_kwh_found = false;
+            double ref_cost_per_minute = double.NaN;
+            bool ref_cost_per_minute_found = false;
+            double ref_cost_per_session = double.NaN;
+            bool ref_cost_per_session_found = false;
+            GetChargeCostData(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+            UpdateChargePrice(ChargingStateID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
         }
 
         private void UpdateChargePrice(int ChargingStateID, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
@@ -1445,6 +1439,39 @@ WHERE
             }
         }
 
+        private void UpdateChargeEnergyAdded(int ChargingStateID, double charge_energy_added)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  charge_energy_added=@charge_energy_added
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
+            }
+
+        }
+
         private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
             double charge_energy_added = 0.0;
@@ -1528,6 +1555,7 @@ WHERE
             {
                 Tools.DebugLog($"UpdateChargeEnergyAdded error - could not calculate charge_energy_added for ID {ChargingStateID}");
             }
+            RecalculateChargeEnergyAdded(ChargingStateID);
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
@@ -2494,13 +2522,13 @@ ORDER BY id DESC", con))
 
                 int startid = 1;
                 int count = 0;
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000");
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000", 600);
                 if (count > 0)
                 {
                     Logfile.Log($"Positions above 8000m updated: {count}");
                 }
 
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428");
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428", 600);
                 if (count > 0)
                 {
                     Logfile.Log($"Positions below -428m updated: {count}");
