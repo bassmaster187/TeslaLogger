@@ -277,7 +277,7 @@ namespace TeslaLogger
             return httpClientForAuthentification;
         }
 
-        void LogGetToken(string resultContent, string name)
+        internal static void LogGetToken(string resultContent, string name)
         {
             if (System.IO.File.Exists("LOGGETTOKEN"))
                 System.IO.File.WriteAllText("Logfile_GetToken_" + name + ".txt", resultContent);
