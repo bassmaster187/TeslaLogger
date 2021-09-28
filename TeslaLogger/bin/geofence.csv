@@ -1122,6 +1122,7 @@ ARAL DE-Schwarmstedt Autohof, 52.673543, 9.688409
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Autohof, 53.502361,11.097974
 
+be.energised AT-Salzburg Flughafen, 47.794119,12.997795
 be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
@@ -1209,6 +1210,14 @@ E.ON DE-Weiskirchen, 50.056419, 8.908221, 5
 E.ON DK-Karlslunde West, 55.560857, 12.229259
 E.ON DK-Karlslunde Ost, 55.560657, 12.231491
 E.ON DK-Korsør, 55.347704, 11.120238
+
+ELEN HR-Kanfanar, 45.12281,1383895
+ELEN HR-Motovun, 45.331222,13.824982
+ELEN HR-Opatija Štangerova, 45.347349,14.319122
+ELEN HR-Pula, 44.83862,1383365
+ELEN HR-Poreč, 45.22419,1359817
+ELEN HR-Rijeka Gomila, 45.32812,14.442247
+ELEN HR-Vižinada, 45.33017,13.75735
 
 EnBW DE-Allgäuer Tor Ost, 47.847519, 10.282904, 20
 EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
@@ -1312,6 +1321,7 @@ EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 10
 EnBW DE-Stuhr Proppstraße, 53.011943, 8.7045393, 10
 EnBW DE-Taufkirchen, 48.352605,12.129578,10
 EnBW DE-Ulm, 48.456880, 10.029673, 15
+EnBW DE-Unterhaching, 48.056003,11.601168
 EnBW DE-Vilsbiburg, 48.454281,12.334936
 EnBW DE-Waldmohr Raststätte Waldmohr, 49.37322,7.374279
 EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
