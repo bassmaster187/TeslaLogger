@@ -1819,7 +1819,10 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging == "75d")
                 {
-                    WriteCarSettings("0.186", "S 75D");
+                    if (car.carVoltageAt50SOC > 350)
+                        WriteCarSettings("0.186", "S 75D 400V");
+                    else
+                        WriteCarSettings("0.186", "S 75D");
                     return;
                 }
                 else if (car.trim_badging == "75")
