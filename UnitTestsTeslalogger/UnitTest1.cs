@@ -64,7 +64,7 @@ namespace UnitTestsTeslalogger
             unixTimestamp *= 1000;
             c.dbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
             int startid = c.dbHelper.GetMaxPosid(true);
-            c.dbHelper.StartDriveState();
+            c.dbHelper.StartDriveState(DateTime.Now);
 
             c.dbHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
             int endid = c.dbHelper.GetMaxPosid(true);
@@ -306,6 +306,25 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("S Raven LR", wh.car.ModelName);
             Assert.AreEqual(0.173, wh.car.Wh_TR);
+        }
+
+        [TestMethod]
+        public void Car_S_100D_Raven()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 594, DateTime.Now.AddMinutes(1));
+            wh.car.vin = "5YJSA7E28LFXXXXXX";
+            wh.car.car_type = "models2";
+            wh.car.car_special_type = "base";
+            wh.car.DB_Wh_TR = 0.162;
+            wh.car.trim_badging = "100d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 100D Raven", wh.car.ModelName);
+            Assert.AreEqual(0.162, wh.car.Wh_TR);
         }
 
         [TestMethod]
