@@ -1844,7 +1844,13 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging == "100d")
                 {
-                    WriteCarSettings("0.189", "S 100D");
+                    if (car.DB_Wh_TR <= 0.165)
+                    {
+                        WriteCarSettings("0.162", "S 100D Raven");
+                        return;
+                    }
+                        
+                    WriteCarSettings("0.193", "S 100D");
                     return;
                 }
                 else if (car.trim_badging == "p100d")

@@ -2099,6 +2099,7 @@ ORDER BY id DESC", con))
                         and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
                         and charging_End.battery_level <= 90
                         and chargingstate.CarID = @CarID
+                        and charging_End.charge_energy_added > 5
                         group by economy_Wh_km
                         order by anz desc
                         limit 1 ", con))
