@@ -66,7 +66,7 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd);
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
                 DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
             catch (Exception ex)
