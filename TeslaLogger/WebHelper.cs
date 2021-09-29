@@ -1917,7 +1917,10 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging == "85d")
                 {
-                    WriteCarSettings("0.186", "S 85D");
+                    if (car.carVoltageAt50SOC > 300 && car.carVoltageAt50SOC < 350)
+                        WriteCarSettings("0.186", "S 85D 350V");
+                    else
+                        WriteCarSettings("0.186", "S 85D");
                     return;
                 }
                 else if (car.trim_badging == "p85")
@@ -1927,7 +1930,10 @@ namespace TeslaLogger
                 }
                 else if (car.trim_badging == "85")
                 {
-                    WriteCarSettings("0.201", "S 85");
+                    if (car.carVoltageAt50SOC > 300 && car.carVoltageAt50SOC < 350)
+                        WriteCarSettings("0.201", "S 85 350V");
+                    else
+                        WriteCarSettings("0.201", "S 85");
                     return;
                 }
                 else if (car.trim_badging == "90")

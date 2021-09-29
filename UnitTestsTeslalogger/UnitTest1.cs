@@ -89,6 +89,23 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_S85D_350V()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.car_type = "models";
+            wh.car.car_special_type = "base";
+            wh.car.trim_badging = "85d";
+            wh.car.carVoltageAt50SOC = 336;
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("S 85D 350V", wh.car.ModelName);
+            Assert.AreEqual(0.186, wh.car.Wh_TR);
+        }
+
+        [TestMethod]
         public void Car_S_P85()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
