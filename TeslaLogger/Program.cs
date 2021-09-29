@@ -396,7 +396,8 @@ namespace TeslaLogger
                     c.dbHelper.CombineChangingStates();
                     c.webhelper.UpdateAllEmptyAddresses();
                     c.dbHelper.UpdateEmptyChargeEnergy();
-                    c.dbHelper.AnalyzeCombinedChargingStates();
+                    c.dbHelper.UpdateEmptyUnplugDate();
+                    c.dbHelper.AnalyzeChargingStates();
                 }
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
