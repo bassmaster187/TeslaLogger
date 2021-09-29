@@ -350,9 +350,11 @@ namespace TeslaLogger
             return true;
         }
 
-        // find gaps in chargingstate.id
-        internal void AnalyzeCombinedChargingStates()
+        // find gaps in chargingstate.id or drops in charging.charge_energy_added
+        internal void AnalyzeChargingStates()
         {
+            List<int> recalculate = new List<int>();
+            // find gaps in chargingstate.id
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -364,16 +366,7 @@ SELECT
 FROM
   chargingstate
 WHERE
-  CarID = @CarID
-  AND id < (
-    SELECT
-      MIN(id)
-    FROM
-      chargingstate
-    WHERE
-      CarID = @CarID
-      AND UnplugDate IS NOT NULL
-  )", con))
+  CarID = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = cmd.ExecuteReader();
@@ -381,15 +374,17 @@ WHERE
                         int lastID = 0;
                         if (dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             lastID = (int)dr[0];
                         }
                         while(dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             if ((int)dr[0] - lastID > 1)
                             {
-                                RecalculateChargeEnergyAdded((int)dr[0]);
+                                if (!recalculate.Contains((int)dr[0]))
+                                {
+                                    recalculate.Add((int)dr[0]);
+                                    Tools.DebugLog($"AnalyzeChargingStates: ID gap found:{dr[0]}");
+                                }
                             }
                             lastID = (int)dr[0];
                         }
@@ -399,6 +394,66 @@ WHERE
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+            }
+            // find drops in charging.charge_energy_added
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id,
+  charging.charge_energy_added,
+  charging.Datum
+FROM
+  chargingstate,
+  charging
+WHERE
+    charging.id >= chargingstate.StartChargingID
+    AND charging.id <= chargingstate.EndChargingID
+    AND chargingstate.CarID = @CarID
+    AND charging.CarID = @CarID
+    AND chargingstate.id NOT IN (@NotIdInParameter)
+ORDER BY
+  chargingstate.id,
+  charging.datum", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
+                        cmd.CommandTimeout = 600;
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int lastID = 0;
+                        double lastCEA = 0.0;
+                        if (dr.Read())
+                        {
+                            lastID = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                        while (dr.Read())
+                        {
+                            if ((int)dr[0] == lastID && (double)dr[1] < lastCEA)
+                            {
+                                if (!recalculate.Contains((int)dr[0]))
+                                {
+                                    recalculate.Add((int)dr[0]);
+                                    Tools.DebugLog($"AnalyzeChargingStates: drop during charging found:{dr[0]}");
+                                }
+                            }
+                            lastID = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            foreach (int ChargingStateID in recalculate)
+            {
+                RecalculateChargeEnergyAdded(ChargingStateID);
             }
         }
 
@@ -446,14 +501,12 @@ WHERE
                         // first row
                         if (dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             index = (int)dr[0];
                             lastCEA = (double)dr[1];
                         }
                         // all rows
                         while (dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             if (
                                 // charge_energy_added is lower than in the row before
                                 (double)dr[1] < lastCEA
@@ -474,7 +527,7 @@ WHERE
             {
                 Logfile.Log(ex.ToString());
             }
-            if (segments.Count > 1)
+            if (segments.Count > 0)
             {
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
                 double sum = 0.0;
@@ -596,6 +649,85 @@ WHERE
             }
         }
 
+        internal void UpdateEmptyUnplugDate()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  EndDate
+FROM
+  chargingstate
+WHERE
+  CarID = @CarID
+  AND UnplugDate IS NULL
+  AND EndDate IS NOT NULL
+  AND EndDate < (
+    SELECT
+      MAX(EndDate)
+    FROM
+      drivestate
+    WHERE
+      EndDate IS NOT NULL
+  )", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int ChargingStateID)
+                                && DateTime.TryParse(dr[1].ToString(), out DateTime UnplugDate))
+                            {
+                                FillEmptyUnplugDate(ChargingStateID, UnplugDate);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during UpdateEmptyUnplugDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during UpdateEmptyUnplugDate()");
+            }
+        }
+
+        private void FillEmptyUnplugDate(int ChargingStateID, DateTime UnplugDate)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  UnplugDate = @UnplugDate
+WHERE 
+  CarID = @CarID
+  AND id = @ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        cmd.Parameters.AddWithValue("@UnplugDate", UnplugDate);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"FillEmptyUnplugDate({ChargingStateID}): {rowsUpdated} rows updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.FillEmptyUnplugDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FillEmptyUnplugDate()");
+            }
+        }
+
         internal bool CombineChangingStatesAt(int sessionid)
         {
             bool doCombine = Tools.CombineChargingStates(); // use default
@@ -692,7 +824,7 @@ WHERE
                     }
 
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                    UpdateChargeEnergyAdded(maxID);
+                    RecalculateChargeEnergyAdded(maxID);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
                     UpdateChargePrice(maxID);
@@ -1039,7 +1171,7 @@ HAVING
                     }
                 }
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                UpdateChargeEnergyAdded(openChargingState);
+                RecalculateChargeEnergyAdded(openChargingState);
 
                 // calculate charging price if per_kwh and/or per_minute and/or per_session is available
                 UpdateChargePrice(openChargingState);
@@ -1469,7 +1601,6 @@ WHERE
                 Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
             }
-
         }
 
         private void UpdateChargeEnergyAdded(int ChargingStateID)
@@ -1499,11 +1630,11 @@ WHERE
                         double last_charge_energy_added = 0.0;
                         while (dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             if (double.TryParse(dr[0].ToString(), out double new_charge_energy_added))
                             {
                                 if (new_charge_energy_added < last_charge_energy_added)
                                 {
+                                    Tools.DebugLog($"UpdateChargeEnergyAdded c_e_a dropped from {last_charge_energy_added} to {new_charge_energy_added}");
                                     charge_energy_added += last_charge_energy_added;
                                 }
                                 last_charge_energy_added = new_charge_energy_added;
