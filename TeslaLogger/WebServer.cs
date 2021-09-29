@@ -31,7 +31,8 @@ namespace TeslaLogger
             "sentry_mode_off",
             "sentry_mode_toggle",
             "wake_up",
-            "set_charge_limit"
+            "set_charge_limit",
+            "set_charging_amps"
         };
 
         public WebServer()
@@ -1059,6 +1060,18 @@ namespace TeslaLogger
                                             car.LastSetChargeLimitAddressName = addr.name;
                                         }
                                         WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
+                                    }
+                                    break;
+                                case "set_charging_amps":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
+                                            car.LastSetChargeLimitAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
                                     }
                                     break;
                                 default:
