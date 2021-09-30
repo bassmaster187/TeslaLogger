@@ -82,7 +82,7 @@ namespace TeslaLogger
             {
                 msg += (column==0?"":"|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
             }
-            Logfile.Log(msg);
+            DebugLog(msg);
         }
 
         internal static string ExpandSQLCommand(MySqlCommand cmd)
