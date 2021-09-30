@@ -474,6 +474,23 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                // chargingstate hidden:bool and combined_into:int
+
+                if (!DBHelper.ColumnExists("chargingstate", "hidden"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
