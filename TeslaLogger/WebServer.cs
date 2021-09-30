@@ -17,6 +17,7 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
     public class WebServer : IDisposable
     {
         private HttpListener listener = null;
@@ -165,46 +166,46 @@ namespace TeslaLogger
                 switch (true)
                 {
                     // commands for admin UI
-                    case bool _ when request.Url.LocalPath.Equals("/getchargingstate"):
+                    case bool _ when request.Url.LocalPath.Equals("/getchargingstate", System.StringComparison.Ordinal):
                         Getchargingstate(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/setcost"):
+                    case bool _ when request.Url.LocalPath.Equals("/setcost", System.StringComparison.Ordinal):
                         Setcost(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/getallcars"):
+                    case bool _ when request.Url.LocalPath.Equals("/getallcars", System.StringComparison.Ordinal):
                         GetAllCars(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/setpassword"):
+                    case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword"):
+                    case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword", System.StringComparison.Ordinal):
                         SetAdminPanelPassword(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation", System.StringComparison.Ordinal):
                         Admin_UpdateElevation(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/OpenTopoDataQueue"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/OpenTopoDataQueue", System.StringComparison.Ordinal):
                         Admin_OpenTopoDataQueue(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/ReloadGeofence", System.StringComparison.Ordinal):
                         Admin_ReloadGeofence(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/GetPOI"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/GetPOI", System.StringComparison.Ordinal):
                         Admin_GetPOI(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/update"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/update", System.StringComparison.Ordinal):
                         Admin_Update(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana", System.StringComparison.Ordinal):
                         updategrafana(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/admin/downloadlogs"):
+                    case bool _ when request.Url.LocalPath.Equals("/admin/downloadlogs", System.StringComparison.Ordinal):
                         Admin_DownloadLogs(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/export/trip"):
+                    case bool _ when request.Url.LocalPath.Equals("/export/trip", System.StringComparison.Ordinal):
                         ExportTrip(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/passwortinfo"):
+                    case bool _ when request.Url.LocalPath.Equals("/passwortinfo", System.StringComparison.Ordinal):
                         passwortinfo(request, response);
                         break;
                     // get car values
@@ -212,7 +213,7 @@ namespace TeslaLogger
                         Get_CarValue(request, response);
                         break;
                     // static map service
-                    case bool _ when request.Url.LocalPath.Equals("/get/map"):
+                    case bool _ when request.Url.LocalPath.Equals("/get/map", System.StringComparison.Ordinal):
                         GetStaticMap(request, response);
                         break;
                     // send car commands
@@ -244,30 +245,30 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/set"):
                         ABRP_Set(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states"):
+                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states", System.StringComparison.Ordinal):
                         Debug_TeslaLoggerStates(request, response);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/messages"):
+                    case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/messages", System.StringComparison.Ordinal):
                         Debug_TeslaLoggerMessages(request, response);
                         break;
                     // developer features
-                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/on"):
+                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/on", System.StringComparison.Ordinal):
                         Dev_DumpJSON(response, true);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off"):
+                    case bool _ when request.Url.LocalPath.Equals("/dev/dumpJSON/off", System.StringComparison.Ordinal):
                         Dev_DumpJSON(response, false);
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on"):
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/on", System.StringComparison.Ordinal):
                         Program.VERBOSE = true;
                         Logfile.Log("VERBOSE on");
                         WriteString(response, "VERBOSE on");
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/off"):
+                    case bool _ when request.Url.LocalPath.Equals("/dev/verbose/off", System.StringComparison.Ordinal):
                         Program.VERBOSE = false;
                         Logfile.Log("VERBOSE off");
                         WriteString(response, "VERBOSE off");
                         break;
-                    case bool _ when request.Url.LocalPath.Equals("/logfile"):
+                    case bool _ when request.Url.LocalPath.Equals("/logfile", System.StringComparison.Ordinal):
                         GetLogfile(response);
                         break;
                     default:
@@ -339,7 +340,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 Car car = Car.GetCarByID(CarID);
                 if (car != null)
                 {
@@ -375,7 +376,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/info");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 Car car = Car.GetCarByID(CarID);
                 if (car != null)
                 {
@@ -422,17 +423,17 @@ namespace TeslaLogger
                             _ = int.TryParse(request.QueryString.GetValues(key)[0], out height);
                             break;
                         case "mode":
-                            if ("dark".Equals(request.QueryString.GetValues(key)[0]))
+                            if ("dark".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
                             {
                                 mode = StaticMapProvider.MapMode.Dark;
                             }
                             break;
                         case "type":
-                            if ("park".Equals(request.QueryString.GetValues(key)[0]))
+                            if ("park".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
                             {
                                 type = StaticMapProvider.MapType.Park;
                             }
-                            else if ("charge".Equals(request.QueryString.GetValues(key)[0]))
+                            else if ("charge".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
                             {
                                 type = StaticMapProvider.MapType.Charge;
                             }
@@ -517,7 +518,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/mfa/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 string mfa = m.Groups[2].Captures[0].ToString();
                 if (mfa.Length > 0 && CarID > 0)
                 {
@@ -538,7 +539,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/captcha/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 string captcha = m.Groups[2].Captures[0].ToString();
                 if (captcha.Length > 0 && CarID > 0)
                 {
@@ -558,7 +559,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/captchapic/([0-9]+)");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 Car car = Car.GetCarByID(CarID);
                 if (car != null)
                 {
@@ -575,7 +576,7 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-        private void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_DownloadLogs(HttpListenerRequest request, HttpListenerResponse response)
         {
             Queue<string> result = new Queue<string>();
             // set defaults
@@ -676,7 +677,7 @@ namespace TeslaLogger
             WriteString(response, string.Join(Environment.NewLine, result));
         }
 
-        private void Admin_OpenTopoDataQueue(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_OpenTopoDataQueue(HttpListenerRequest request, HttpListenerResponse response)
         {
             Logfile.Log("Admin: OpenTopoDataQueue ...");
             if (Tools.UseOpenTopoData())
@@ -691,7 +692,7 @@ namespace TeslaLogger
             }
         }
 
-        private void ExportTrip(HttpListenerRequest request, HttpListenerResponse response)
+        private static void ExportTrip(HttpListenerRequest request, HttpListenerResponse response)
         {
             // source: https://github.com/rowich/Teslalogger2gpx/blob/master/Teslalogger2GPX.ps1
             // parse request
@@ -707,13 +708,13 @@ namespace TeslaLogger
                         switch (key)
                         {
                             case "from":
-                                long.TryParse(request.QueryString.GetValues(key)[0], out from);
+                                _ = long.TryParse(request.QueryString.GetValues(key)[0], out from);
                                 break;
                             case "to":
-                                long.TryParse(request.QueryString.GetValues(key)[0], out to);
+                                _ = long.TryParse(request.QueryString.GetValues(key)[0], out to);
                                 break;
                             case "carID":
-                                int.TryParse(request.QueryString.GetValues(key)[0], out carID);
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out carID);
                                 break;
                             default:
                                 break;
@@ -751,7 +752,7 @@ namespace TeslaLogger
                                      && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
                                 {
                                     string Pos = ($"lat=\"{lat}\" lon=\"{lng}\"");
-                                    if (!Pos.Equals(PosLast))
+                                    if (!Pos.Equals(PosLast, System.StringComparison.Ordinal))
                                     {
                                         // convert date/time into GPX format (insert a "T")
                                         // 2020-01-30 09:19:55 --> 2020-01-30T09:19:55
@@ -767,9 +768,9 @@ namespace TeslaLogger
                                             name = $"<name>{SecurityElement.Escape(dr[4].ToString())}</name>";
                                         }
                                         // create new Track element if day has changed since last element. New track node gets the name of the day (allows filtering for days later on)
-                                        if (!DateLast.Equals(Date.Substring(0, 10)))
+                                        if (!DateLast.Equals(Date.Substring(0, 10), System.StringComparison.Ordinal))
                                         {
-                                            if (!DateLast.Equals("n/a"))
+                                            if (!DateLast.Equals("n/a", System.StringComparison.Ordinal))
                                             {
                                                 GPX.Append("</trkseg></trk>" + Environment.NewLine);
                                             }
@@ -830,13 +831,13 @@ namespace TeslaLogger
             }
         }
 
-        private void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
         }
-        
-        private void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
+
+        private static void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine("passwortinfo");
             string data = GetDataFromRequestInputStream(request);
@@ -870,14 +871,14 @@ namespace TeslaLogger
             return data;
         }
 
-        private void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
 
             Match m = Regex.Match(request.Url.LocalPath, @"/currentjson/([0-9]+)");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 try
                 {
                     if (CurrentJSON.jsonStringHolder.TryGetValue(CarID, out string json))
@@ -898,14 +899,14 @@ namespace TeslaLogger
             }
         }
 
-        private void DecodeCar(HttpListenerRequest request, HttpListenerResponse response)
+        private static void DecodeCar(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
 
             Match m = Regex.Match(request.Url.LocalPath, @"/decodecar/([0-9]+)");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 try
                 {
                     StringBuilder sb = new StringBuilder();
@@ -948,7 +949,7 @@ namespace TeslaLogger
                     for (int retry = 0; retry < 10; retry++)
                     {
                         vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
-                        if (vehicle_config?.Trim()?.StartsWith("{") == true)
+                        if (vehicle_config?.Trim()?.StartsWith("{", System.StringComparison.Ordinal) == true)
                             break;
 
                         System.Threading.Thread.Sleep(2000);
@@ -966,7 +967,7 @@ namespace TeslaLogger
             }
         }
 
-        private void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
+        private static void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
             Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
@@ -974,13 +975,13 @@ namespace TeslaLogger
             WriteString(response, @"OK");
         }
 
-        private void Admin_Update(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_Update(HttpListenerRequest request, HttpListenerResponse response)
         {
             // TODO copy what update.php does
             WriteString(response, "");
         }
 
-        private void Dev_DumpJSON(HttpListenerResponse response, bool dumpJSON)
+        private static void Dev_DumpJSON(HttpListenerResponse response, bool dumpJSON)
         {
             foreach (Car car in Car.allcars)
             {
@@ -1002,7 +1003,7 @@ namespace TeslaLogger
             Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 string command = m.Groups[2].Captures[0].ToString();
                 if (command.Length > 0 && CarID > 0)
                 {
@@ -1073,7 +1074,7 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-        private void SetPassword(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SetPassword(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1221,12 +1222,12 @@ namespace TeslaLogger
             }
         }
 
-        private void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 string name = m.Groups[2].Captures[0].ToString();
                 if (name.Length > 0 && CarID > 0)
                 {
@@ -1235,7 +1236,7 @@ namespace TeslaLogger
                     {
                         if (car.GetTeslaAPIState().GetState(name, out Dictionary<TeslaAPIState.Key, object> state))
                         {
-                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw"))
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw", System.StringComparison.Ordinal))
                             {
                                 WriteString(response, state[TeslaAPIState.Key.Value].ToString());
                                 return;
@@ -1258,7 +1259,7 @@ namespace TeslaLogger
             Logfile.Log("Admin: ReloadGeofence ...");
             Geofence.GetInstance().Init();
 
-            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html"))
+            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html", System.StringComparison.Ordinal))
             {
                 IEnumerable<string> geofence = Geofence.GetInstance().geofenceList.Select(
                     a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
@@ -1295,7 +1296,7 @@ namespace TeslaLogger
             Logfile.Log("Admin: ReloadGeofence done");
         }
 
-        private void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Debug_TeslaLoggerStates(HttpListenerRequest request, HttpListenerResponse response)
         {
             Dictionary<string, string> values = new Dictionary<string, string>
             {
@@ -1351,13 +1352,13 @@ namespace TeslaLogger
             WriteString(response, "<html><head></head><body><table>" + string.Concat(trs) + "</table></body></html>");
         }
 
-        private void Debug_TeslaAPI(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Debug_TeslaAPI(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/debug/TeslaAPI/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
                 string value = m.Groups[2].Captures[0].ToString();
-                int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 if (value.Length > 0 && CarID > 0)
                 {
                     Car car = Car.GetCarByID(CarID);
@@ -1382,7 +1383,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Setcost(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Setcost(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1440,7 +1441,7 @@ namespace TeslaLogger
             }
         }
 
-        private void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
         {
             string id = request.QueryString["id"];
             string responseString = "";
@@ -1468,7 +1469,7 @@ namespace TeslaLogger
             WriteString(response, responseString);
         }
 
-        private void GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
         {
             string responseString = "";
 
@@ -1513,7 +1514,7 @@ namespace TeslaLogger
             output.Close();
         }
 
-        private void Admin_GetPOI(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_GetPOI(HttpListenerRequest request, HttpListenerResponse response)
         {
             if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
             {
@@ -1526,17 +1527,17 @@ namespace TeslaLogger
                         switch (key)
                         {
                             case "lat":
-                                double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lat);
                                 break;
                             case "lng":
-                                double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lng);
                                 break;
                             default:
                                 break;
                         }
                     }
                 }
-                if (lat != double.NaN && lng != double.NaN)
+                if (!double.IsNaN(lat) && !double.IsNaN(lng))
                 {
                     Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
                     if (addr != null)
@@ -1569,7 +1570,7 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-        private void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_UpdateElevation(HttpListenerRequest request, HttpListenerResponse response)
         {
             int from = 1;
             int to = 1;
@@ -1583,7 +1584,7 @@ namespace TeslaLogger
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            int.TryParse(dr[0].ToString(), out to);
+                            _ = int.TryParse(dr[0].ToString(), out to);
                         }
                         con.Close();
                     }
