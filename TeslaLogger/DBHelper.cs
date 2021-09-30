@@ -531,11 +531,25 @@ WHERE
             {
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
                 double sum = 0.0;
+                bool firstSegment = true; 
                 foreach (Tuple<int, int> segment in segments)
                 {
                     double segmentCEA = GetChargeEnergyAddedFromCharging(segment.Item2);
                     Tools.DebugLog($"RecalculateChargeEnergyAdded segment:{segment.Item2} c_e_a:{segmentCEA}");
-                    sum += segmentCEA;
+                    if (firstSegment)
+                    {
+                        double firstSegmentCEA = GetChargeEnergyAddedFromCharging(segment.Item1);
+                        Tools.DebugLog($"RecalculateChargeEnergyAdded 1stsegment:{segment.Item1} c_e_a:{firstSegmentCEA}");
+                        firstSegment = false;
+                        if (segmentCEA - firstSegmentCEA > 0)
+                        {
+                            sum += segmentCEA - firstSegmentCEA;
+                        }
+                    }
+                    else
+                    {
+                        sum += segmentCEA;
+                    }
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
