@@ -539,6 +539,7 @@ WHERE
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
+                UpdateChargePrice(ChargingStateID);
             }
         }
 
