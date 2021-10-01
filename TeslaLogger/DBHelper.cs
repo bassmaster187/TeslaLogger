@@ -531,14 +531,36 @@ WHERE
             {
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
                 double sum = 0.0;
+                bool firstSegment = true; 
                 foreach (Tuple<int, int> segment in segments)
                 {
                     double segmentCEA = GetChargeEnergyAddedFromCharging(segment.Item2);
                     Tools.DebugLog($"RecalculateChargeEnergyAdded segment:{segment.Item2} c_e_a:{segmentCEA}");
-                    sum += segmentCEA;
+                    if (firstSegment)
+                    {
+                        double firstSegmentCEA = GetChargeEnergyAddedFromCharging(segment.Item1);
+                        Tools.DebugLog($"RecalculateChargeEnergyAdded 1stsegment:{segment.Item1} c_e_a:{firstSegmentCEA}");
+                        firstSegment = false;
+                        // firstSegmentCEA > 0.67 means we did not just miss the first seconds of the charge session
+                        // the car was probably not unplugged and continued charging
+                        // previous charge session was not combined, so it's allowed to start with c_e_a >> 0.67
+                        if (segmentCEA - firstSegmentCEA > 0 && firstSegmentCEA > 0.67)
+                        {
+                            sum += segmentCEA - firstSegmentCEA;
+                        }
+                        else
+                        {
+                            sum += segmentCEA;
+                        }
+                    }
+                    else
+                    {
+                        sum += segmentCEA;
+                    }
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
+                UpdateChargePrice(ChargingStateID);
             }
         }
 
