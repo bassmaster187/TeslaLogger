@@ -535,7 +535,7 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
-            return false;
+            return true;
         }
 
         internal static bool UseOpenTopoData()
