@@ -228,7 +228,7 @@ namespace TeslaLogger
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
             Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
 
-            Logfile.Log("DBConnectionstring: " + DBHelper.DBConnectionstring);
+            Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
 
             Logfile.Log("KeepOnlineMinAfterUsage: " + KeepOnlineMinAfterUsage);
             Logfile.Log("SuspendAPIMinutes: " + SuspendAPIMinutes);

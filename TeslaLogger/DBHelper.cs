@@ -25,10 +25,10 @@ namespace TeslaLogger
 
         internal static string Database = "teslalogger";
 
-        public static string DBConnectionstring => GetDBConnectionstring();
+        internal static string DBConnectionstring => GetDBConnectionstring();
 
         private static string _DBConnectionstring = string.Empty;
-        private static string GetDBConnectionstring()
+        internal static string GetDBConnectionstring(bool obfuscate = false)
         {
             if (!string.IsNullOrEmpty(_DBConnectionstring))
             {
@@ -69,6 +69,14 @@ namespace TeslaLogger
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
                     Database = m.Groups[1].Captures[0].ToString();
+                }
+            }
+            if (obfuscate && DBConnectionstring.ToLower().Contains("password="))
+            {
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "password=(.+?);");
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    return DBConnectionstring.ToLower().Replace(string.Concat("password=", m.Groups[1].Captures[0].ToString()), string.Concat("password=", Tools.ObfuscateString(m.Groups[1].Captures[0].ToString())));
                 }
             }
             _DBConnectionstring = DBConnectionstring;
