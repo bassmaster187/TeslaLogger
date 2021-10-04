@@ -584,13 +584,44 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void TeslaGen3WCMeter()
+        public void TeslaGen3WCMeterNotCharging()
         {
             var v = new ElectricityMeterTeslaGen3WallConnector("", "");
-            v.mockup_lifetime = "{\"contactor_cycles\":32 \"contactor_cycles_loaded\":0 \"alert_count\":5 \"thermal_foldbacks\":0 \"avg_startup_temp\":5199147.0 \"charge_starts\":32 \"energy_wh\":89012 \"connector_cycles\":5 \"uptime_s\":1297280 \"charging_time_s\":33152}";
+            v.mockup_lifetime = "{\"contactor_cycles\":106,\"contactor_cycles_loaded\":0,\"alert_count\":3,\"thermal_foldbacks\":0,\"avg_startup_temp\":nan,\"charge_starts\":106,\"energy_wh\":750685,\"connector_cycles\":58,\"uptime_s\":11117950,\"charging_time_s\":355626}";
+            v.mockup_vitals = "{\"contactor_closed\":false,\"vehicle_connected\":false,\"session_s\":0,\"grid_v\":231.9,\"grid_hz\":50.071,\"vehicle_current_a\":0.2,\"currentA_a\":0.2,\"currentB_a\":0.1,\"currentC_a\":0.0,\"currentN_a\":0.1,\"voltageA_v\":0.0,\"voltageB_v\":0.0,\"voltageC_v\":0.0,\"relay_coil_v\":11.8,\"pcba_temp_c\":17.9,\"handle_temp_c\":14.8,\"mcu_temp_c\":26.3,\"uptime_s\":784583,\"input_thermopile_uv\":-195,\"prox_v\":0.0,\"pilot_high_v\":11.9,\"pilot_low_v\":11.9,\"session_energy_wh\":2314.100,\"config_status\":5,\"evse_state\":1,\"current_alerts\":[]}";
+            v.mockup_version = "{\"firmware_version\":\"21.8.5+g51eba2369815d7\",\"part_number\":\"1529455-02-D\",\"serial_number\":\"PGT12345678912\"}";
             double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version =  v.GetVersion();
             string ret = v.ToString();
             Console.WriteLine(ret);
+
+            Assert.AreEqual(750.685, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("21.8.5+g51eba2369815d7", version);
+        }
+
+        [TestMethod]
+        public void TeslaGen3WCMeterCharging()
+        {
+            var v = new ElectricityMeterTeslaGen3WallConnector("", "");
+            v.mockup_lifetime = "{\"contactor_cycles\":107,\"contactor_cycles_loaded\":0,\"alert_count\":3,\"thermal_foldbacks\":0,\"avg_startup_temp\":nan,\"charge_starts\":107,\"energy_wh\":751369,\"connector_cycles\":59,\"uptime_s\":11130209,\"charging_time_s\":356356}";
+            v.mockup_vitals = "{\"contactor_closed\":true,\"vehicle_connected\":true,\"session_s\":545,\"grid_v\":228.3,\"grid_hz\":50.130,\"vehicle_current_a\":5.1,\"currentA_a\":5.1,\"currentB_a\":5.1,\"currentC_a\":5.1,\"currentN_a\":0.0,\"voltageA_v\":230.3,\"voltageB_v\":230.3,\"voltageC_v\":228.7,\"relay_coil_v\":6.1,\"pcba_temp_c\":22.7,\"handle_temp_c\":16.6,\"mcu_temp_c\":28.7,\"uptime_s\":733178,\"input_thermopile_uv\":-516,\"prox_v\":1.9,\"pilot_high_v\":4.6,\"pilot_low_v\":4.6,\"session_energy_wh\":506.800,\"config_status\":5,\"evse_state\":11,\"current_alerts\":[]}";
+            v.mockup_version = "{\"firmware_version\":\"21.8.5+g51eba2369815d7\",\"part_number\":\"1529455-02-D\",\"serial_number\":\"PGT12345678912\"}";
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(751.369, kwh);
+            Assert.AreEqual(true, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("21.8.5+g51eba2369815d7", version);
         }
     }
 }
