@@ -28,6 +28,7 @@ if [ $DAY -eq 1 ]; then
 	if test -f "/etc/teslalogger/backup/logfile-$YEAR$MONTH.gz"; then
 		rm /etc/teslalogger/logfile-*.log
 	fi
+	touch /etc/teslalogger/nohup.out
 
 	#echo processing cleanup of files older than $LYEAR$MONTH*
 	if test -f "/etc/teslalogger/backup/logfile-$LYEAR$MONTH.gz"; then
