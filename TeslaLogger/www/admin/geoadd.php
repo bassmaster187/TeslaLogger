@@ -162,6 +162,14 @@ if (isset($id))
 			else
 				$("#esm_gear").val(e.substring(4));
 		}
+		else if (e.startsWith("dsm"))
+		{
+			$("#dsm").attr('checked', 'checked');
+			if (e.substring(4).length == 0)
+				$("#dsm_gear").val("DR->P");
+			else
+				$("#dsm_gear").val(e.substring(4));
+		}
 		else if (e.startsWith("cof"))
 		{
 			$("#cof").attr('checked', 'checked');
@@ -270,6 +278,11 @@ if (isset($id))
 		f += "+esm:"+$("#esm_gear").val();
 	}
 
+	if ($("#dsm").is(':checked'))
+	{
+		f += "+dsm:"+$("#dsm_gear").val();
+	}
+	  
 	if ($("#cof").is(':checked'))
 	{
 		f += "+cof:"+$("#cof_gear").val();
@@ -359,9 +372,17 @@ if (isset($id))
 				<tr><td>High Frequency Logging</td><td> <input id="hfl" type="checkbox" value=""/></td><td>&nbsp;</td><td>Duration</td><td><input size="6" id="hfl_minutes"/>Minutes</td></tr>
 				<tr><td></td><td></td><td>&nbsp;</td><td>Count</td><td><input size="6" id="hfl_count" placeholder="100"/>Count</td></tr>
 				<tr><td><h4 style="margin-top: 20px;">Features</h4></td></tr>
-				<tr><td>Sentry Mode</td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+				<tr><td>Enable Sentry Mode</td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
 					<td>
 						<select id="esm_gear">
+						  <option value="DR->P">D/R → P</option>
+						  <option value="D->P">D → P</option>
+						  <option value="R->P">R → P</option>
+						</select>
+					</td></tr>
+				<tr><td>Disable Sentry Mode</td><td> <input id="dsm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+					<td>
+						<select id="dsm_gear">
 						  <option value="DR->P">D/R → P</option>
 						  <option value="D->P">D → P</option>
 						  <option value="R->P">R → P</option>

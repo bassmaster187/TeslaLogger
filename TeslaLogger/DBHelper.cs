@@ -25,10 +25,10 @@ namespace TeslaLogger
 
         internal static string Database = "teslalogger";
 
-        public static string DBConnectionstring => GetDBConnectionstring();
+        internal static string DBConnectionstring => GetDBConnectionstring();
 
         private static string _DBConnectionstring = string.Empty;
-        private static string GetDBConnectionstring()
+        internal static string GetDBConnectionstring(bool obfuscate = false)
         {
             if (!string.IsNullOrEmpty(_DBConnectionstring))
             {
@@ -69,6 +69,14 @@ namespace TeslaLogger
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
                     Database = m.Groups[1].Captures[0].ToString();
+                }
+            }
+            if (obfuscate && DBConnectionstring.ToLower().Contains("password="))
+            {
+                Match m = Regex.Match(DBConnectionstring.ToLower(), "password=(.+?);");
+                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                {
+                    return DBConnectionstring.ToLower().Replace(string.Concat("password=", m.Groups[1].Captures[0].ToString()), string.Concat("password=", Tools.ObfuscateString(m.Groups[1].Captures[0].ToString())));
                 }
             }
             _DBConnectionstring = DBConnectionstring;
@@ -350,6 +358,253 @@ namespace TeslaLogger
             return true;
         }
 
+        // find gaps in chargingstate.id or drops in charging.charge_energy_added
+        internal void AnalyzeChargingStates()
+        {
+            List<int> recalculate = new List<int>();
+            // find gaps in chargingstate.id
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id
+FROM
+  chargingstate
+WHERE
+  CarID = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int lastID = 0;
+                        if (dr.Read())
+                        {
+                            lastID = (int)dr[0];
+                        }
+                        while(dr.Read())
+                        {
+                            if ((int)dr[0] - lastID > 1)
+                            {
+                                if (!recalculate.Contains((int)dr[0]))
+                                {
+                                    recalculate.Add((int)dr[0]);
+                                    Tools.DebugLog($"AnalyzeChargingStates: ID gap found:{dr[0]}");
+                                }
+                            }
+                            lastID = (int)dr[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            // find drops in charging.charge_energy_added
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id,
+  charging.charge_energy_added,
+  charging.Datum
+FROM
+  chargingstate,
+  charging
+WHERE
+    charging.id >= chargingstate.StartChargingID
+    AND charging.id <= chargingstate.EndChargingID
+    AND chargingstate.CarID = @CarID
+    AND charging.CarID = @CarID
+    AND chargingstate.id NOT IN (@NotIdInParameter)
+ORDER BY
+  chargingstate.id,
+  charging.datum", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
+                        cmd.CommandTimeout = 600;
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int lastID = 0;
+                        double lastCEA = 0.0;
+                        if (dr.Read())
+                        {
+                            lastID = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                        while (dr.Read())
+                        {
+                            if ((int)dr[0] == lastID && (double)dr[1] < lastCEA)
+                            {
+                                if (!recalculate.Contains((int)dr[0]))
+                                {
+                                    recalculate.Add((int)dr[0]);
+                                    Tools.DebugLog($"AnalyzeChargingStates: drop during charging found:{dr[0]}");
+                                }
+                            }
+                            lastID = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            foreach (int ChargingStateID in recalculate)
+            {
+                RecalculateChargeEnergyAdded(ChargingStateID);
+            }
+        }
+
+        private void RecalculateChargeEnergyAdded(int ChargingStateID)
+        {
+            List<Tuple<int, int>> segments = new List<Tuple<int, int>>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  charge_energy_added
+FROM
+  charging
+WHERE
+  CarID = @CarID
+  AND id >= (
+    SELECT
+      StartChargingID
+    FROM
+      chargingstate
+    WHERE
+      CarID = @CarID
+      AND id = @ChargingID
+  )
+  AND id <= (
+    SELECT
+      EndChargingID
+    FROM
+      chargingstate
+    WHERE
+      CarID = @CarID
+      AND id = @ChargingID
+  )", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingID", ChargingStateID);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        int index = 0;
+                        double lastCEA = 0;
+                        // first row
+                        if (dr.Read())
+                        {
+                            index = (int)dr[0];
+                            lastCEA = (double)dr[1];
+                        }
+                        // all rows
+                        while (dr.Read())
+                        {
+                            if (
+                                // charge_energy_added is lower than in the row before
+                                (double)dr[1] < lastCEA
+                                &&
+                                // and the current row is zero or near zero
+                                (double)dr[1] < 0.5)
+                            {
+                                segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
+                                index = ((int)dr[0]);
+                            }
+                            lastCEA = (double)dr[1];
+                        }
+                        segments.Add(new Tuple<int, int>(index, (int)dr[0]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            if (segments.Count > 0)
+            {
+                Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
+                double sum = 0.0;
+                bool firstSegment = true; 
+                foreach (Tuple<int, int> segment in segments)
+                {
+                    double segmentCEA = GetChargeEnergyAddedFromCharging(segment.Item2);
+                    Tools.DebugLog($"RecalculateChargeEnergyAdded segment:{segment.Item2} c_e_a:{segmentCEA}");
+                    if (firstSegment)
+                    {
+                        double firstSegmentCEA = GetChargeEnergyAddedFromCharging(segment.Item1);
+                        Tools.DebugLog($"RecalculateChargeEnergyAdded 1stsegment:{segment.Item1} c_e_a:{firstSegmentCEA}");
+                        firstSegment = false;
+                        // firstSegmentCEA > 0.67 means we did not just miss the first seconds of the charge session
+                        // the car was probably not unplugged and continued charging
+                        // previous charge session was not combined, so it's allowed to start with c_e_a >> 0.67
+                        if (segmentCEA - firstSegmentCEA > 0 && firstSegmentCEA > 0.67)
+                        {
+                            sum += segmentCEA - firstSegmentCEA;
+                        }
+                        else
+                        {
+                            sum += segmentCEA;
+                        }
+                    }
+                    else
+                    {
+                        sum += segmentCEA;
+                    }
+                }
+                Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
+                UpdateChargeEnergyAdded(ChargingStateID, sum);
+                UpdateChargePrice(ChargingStateID);
+            }
+        }
+
+        internal double GetChargeEnergyAddedFromCharging(int ChargingID)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  charge_energy_added
+FROM
+  charging
+WHERE
+  id = @ChargingID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@ChargingID", ChargingID);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        Tools.DebugLog(cmd);
+                        if (dr.Read())
+                        {
+                            Tools.DebugLog(dr);
+                            return (double)dr[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return double.NaN;
+        }
+
         internal bool GetABRP(out string ABRP_token, out int ABRP_mode)
         {
             ABRP_token = "";
@@ -421,6 +676,85 @@ WHERE
             foreach (int ID in emptyChargeEnergy)
             {
                 UpdateChargeEnergyAdded(ID);
+            }
+        }
+
+        internal void UpdateEmptyUnplugDate()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  id,
+  EndDate
+FROM
+  chargingstate
+WHERE
+  CarID = @CarID
+  AND UnplugDate IS NULL
+  AND EndDate IS NOT NULL
+  AND EndDate < (
+    SELECT
+      MAX(EndDate)
+    FROM
+      drivestate
+    WHERE
+      EndDate IS NOT NULL
+  )", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int ChargingStateID)
+                                && DateTime.TryParse(dr[1].ToString(), out DateTime UnplugDate))
+                            {
+                                FillEmptyUnplugDate(ChargingStateID, UnplugDate);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during UpdateEmptyUnplugDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during UpdateEmptyUnplugDate()");
+            }
+        }
+
+        private void FillEmptyUnplugDate(int ChargingStateID, DateTime UnplugDate)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  UnplugDate = @UnplugDate
+WHERE 
+  CarID = @CarID
+  AND id = @ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        cmd.Parameters.AddWithValue("@UnplugDate", UnplugDate);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"FillEmptyUnplugDate({ChargingStateID}): {rowsUpdated} rows updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.FillEmptyUnplugDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FillEmptyUnplugDate()");
             }
         }
 
@@ -504,13 +838,12 @@ WHERE
                         }
                     }
                     GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
-                    List<int> toBeAnalyzed = new List<int>();
-                    toBeAnalyzed.AddRange(IDsToDelete);
-                    toBeAnalyzed.Add(maxID);
-                    AnalyzeCombineCandidates(toBeAnalyzed);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
+                    // TODO analyze how to update charge_energy_added (consider unplug date)
+                    // TODO create new charging state
+                    // TODO mark original states as hidden and update combined_into
                     Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
                     UpdateChargingstate(maxID, startDate, startdID, 0.0, 0.0);
                     // delete all older charging states
@@ -520,47 +853,14 @@ WHERE
                         DeleteChargingstate(chargingState);
                     }
 
-                    // get charging cost calculation data
-                    string ref_cost_currency = string.Empty;
-                    double ref_cost_per_kwh = double.NaN;
-                    bool ref_cost_per_kwh_found = false;
-                    double ref_cost_per_minute = double.NaN;
-                    bool ref_cost_per_minute_found = false;
-                    double ref_cost_per_session = double.NaN;
-                    bool ref_cost_per_session_found = false;
-                    GetChargeCostData(maxID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                    UpdateChargeEnergyAdded(maxID);
+                    RecalculateChargeEnergyAdded(maxID);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                    UpdateChargePrice(maxID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                    UpdateChargePrice(maxID);
 
                     // update chargingsession stats
                     UpdateMaxChargerPower(maxID);
-                }
-            }
-        }
-
-        private void AnalyzeCombineCandidates(List<int> combineCandidates)
-        {
-            // analyze time passed between n.end and n+1.start
-            if (combineCandidates.Count > 1)
-            {
-                Queue<Tuple<int, DateTime, DateTime>> tuples = new Queue<Tuple<int, DateTime, DateTime>>();
-                foreach (int candidate in combineCandidates)
-                {
-                    tuples.Enqueue(GetStartEndFromCharginState(candidate));
-                }
-                if (tuples.Count > 1)
-                {
-                    for (int i = 1; i < tuples.Count; i++)
-                    {
-                        if (tuples.ElementAt(i - 1).Item1 != -1 && tuples.ElementAt(i).Item1 != -1)
-                        {
-                            Tools.DebugLog($"time between id {tuples.ElementAt(i - 1).Item1} and id {tuples.ElementAt(i).Item1}: {(tuples.ElementAt(i - 1).Item3 - tuples.ElementAt(i).Item2).TotalSeconds} seconds");
-                        }
-                    }
                 }
             }
         }
@@ -635,6 +935,7 @@ HAVING
                             MySqlDataReader dr = cmd.ExecuteReader();
                             while (dr.Read() && dr[0] != DBNull.Value)
                             {
+                                Tools.DebugLog(dr);
                                 if (int.TryParse(dr[0].ToString(), out int id))
                                 {
                                     combineCandidates.Enqueue(id);
@@ -899,21 +1200,11 @@ HAVING
                         }
                     }
                 }
-                // get charging cost calculation data
-                string ref_cost_currency = string.Empty;
-                double ref_cost_per_kwh = double.NaN;
-                bool ref_cost_per_kwh_found = false;
-                double ref_cost_per_minute = double.NaN;
-                bool ref_cost_per_minute_found = false;
-                double ref_cost_per_session = double.NaN;
-                bool ref_cost_per_session_found = false;
-                GetChargeCostData(openChargingState, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                UpdateChargeEnergyAdded(openChargingState);
+                RecalculateChargeEnergyAdded(openChargingState);
 
                 // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                UpdateChargePrice(openChargingState, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+                UpdateChargePrice(openChargingState);
             }
 
             car.currentJSON.current_charging = false;
@@ -993,6 +1284,7 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                         {
+                            Tools.DebugLog(dr);
                             if (dr[0].ToString().Equals("Tesla") && (dr[1].ToString().Equals("Tesla") || dr[1].ToString().Equals("Combo")))
                             {
                                 Tools.DebugLog("ChargingStateLocationIsSuC: true");
@@ -1009,6 +1301,19 @@ WHERE
             }
             Tools.DebugLog("ChargingStateLocationIsSuC: false");
             return false;
+        }
+
+        private void UpdateChargePrice(int ChargingStateID)
+        {
+            string ref_cost_currency = string.Empty;
+            double ref_cost_per_kwh = double.NaN;
+            bool ref_cost_per_kwh_found = false;
+            double ref_cost_per_minute = double.NaN;
+            bool ref_cost_per_minute_found = false;
+            double ref_cost_per_session = double.NaN;
+            bool ref_cost_per_session_found = false;
+            GetChargeCostData(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+            UpdateChargePrice(ChargingStateID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
         }
 
         private void UpdateChargePrice(int ChargingStateID, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
@@ -1259,6 +1564,75 @@ WHERE
             }
         }
 
+        internal void UpdateUnplugDate()
+        {
+            int ChargingStateID = GetMaxChargingstateId(out _, out _, out DateTime unplugDate, out DateTime EndDate);
+            if (unplugDate == DateTime.MinValue && EndDate != DateTime.MinValue)
+            {
+                // UnplugDate is unset, so update it!
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  unplugdate = @EndDate
+WHERE 
+  CarID = @CarID
+  AND id = @ChargingStateID", con))
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                            cmd.Parameters.AddWithValue("@EndDate", EndDate);
+                            cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                            Tools.DebugLog(cmd);
+                            int rowsUpdated = cmd.ExecuteNonQuery();
+                            car.Log($"UpdateUnplugDate({ChargingStateID}): {rowsUpdated} rows updated to EndDate {EndDate}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog($"Exception during DBHelper.UpdateUnplugDate(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateUnplugDate()");
+                }
+            }
+        }
+
+        private void UpdateChargeEnergyAdded(int ChargingStateID, double charge_energy_added)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  charge_energy_added=@charge_energy_added
+WHERE 
+  CarID = @CarID
+  AND id=@ChargingStateID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
+            }
+        }
+
         private void UpdateChargeEnergyAdded(int ChargingStateID)
         {
             double charge_energy_added = 0.0;
@@ -1290,6 +1664,7 @@ WHERE
                             {
                                 if (new_charge_energy_added < last_charge_energy_added)
                                 {
+                                    Tools.DebugLog($"UpdateChargeEnergyAdded c_e_a dropped from {last_charge_energy_added} to {new_charge_energy_added}");
                                     charge_energy_added += last_charge_energy_added;
                                 }
                                 last_charge_energy_added = new_charge_energy_added;
@@ -1341,6 +1716,7 @@ WHERE
             {
                 Tools.DebugLog($"UpdateChargeEnergyAdded error - could not calculate charge_energy_added for ID {ChargingStateID}");
             }
+            RecalculateChargeEnergyAdded(ChargingStateID);
         }
 
         private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
@@ -1441,6 +1817,7 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
+                            Tools.DebugLog(dr);
                             if (DateTime.TryParse(dr[0].ToString(), out startDate)
                                 && int.TryParse(dr[1].ToString(), out startdID)
                                 && int.TryParse(dr[2].ToString(), out posID))
@@ -1486,6 +1863,7 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
+                            Tools.DebugLog(dr);
                             if (double.TryParse(dr[0].ToString(), out double odometer))
                             {
                                 return odometer;
@@ -1524,6 +1902,7 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
+                            Tools.DebugLog(dr);
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
                                 openChargingStates.Enqueue(id);
@@ -1609,6 +1988,7 @@ ORDER BY chargingstate.id ASC", con))
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
+                            Tools.DebugLog(dr);
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
                                 chargingStates.Enqueue(id);
@@ -1749,6 +2129,7 @@ ORDER BY id DESC", con))
                         and chargingstate.EndChargingID - chargingstate.StartChargingID > 4
                         and charging_End.battery_level <= 90
                         and chargingstate.CarID = @CarID
+                        and charging_End.charge_energy_added > 5
                         group by economy_Wh_km
                         order by anz desc
                         limit 1 ", con))
@@ -2028,7 +2409,7 @@ ORDER BY id DESC", con))
                     car.Log($"StartChargingState Task newPos: {newPos}");
                     if (!double.IsNaN(poslat) && !double.IsNaN(poslng))
                     {
-                        int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng);
+                        int chargingstateId = GetMaxChargingstateId(out double chglat, out double chglng, out _, out _);
                         if (!double.IsNaN(chglat) && !double.IsNaN(chglng))
                         {
                             car.Log($"StartChargingState Task (poslng, poslat, chglng, chglat) ({poslng}, {poslat}, {chglng}, {chglat})");
@@ -2303,13 +2684,13 @@ ORDER BY id DESC", con))
 
                 int startid = 1;
                 int count = 0;
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000");
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000", 600);
                 if (count > 0)
                 {
                     Logfile.Log($"Positions above 8000m updated: {count}");
                 }
 
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428");
+                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428", 600);
                 if (count > 0)
                 {
                     Logfile.Log($"Positions below -428m updated: {count}");
@@ -2640,16 +3021,19 @@ ORDER BY id DESC", con))
             Logfile.Log("UpdateAllDrivestateData end");
         }
 
-        public void StartDriveState()
+        public void StartDriveState(DateTime now)
         {
+            // driving means that charging must be over
+            UpdateUnplugDate();
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con))
                 {
-                    cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -3059,20 +3443,43 @@ WHERE
             return 0;
         }
 
-        private int GetMaxChargingstateId(out double lat, out double lng)
+        private int GetMaxChargingstateId(out double lat, out double lng, out DateTime UnplugDate, out DateTime EndDate)
         {
+            UnplugDate = DateTime.MinValue;
+            EndDate = DateTime.MinValue;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("select chargingstate.id, lat, lng from chargingstate join pos on chargingstate.pos = pos.id where chargingstate.id in (select max(id) from chargingstate where carid=@CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  chargingstate.id,
+  lat,
+  lng,
+  UnplugDate,
+  EndDate
+FROM
+  chargingstate
+JOIN pos ON
+  chargingstate.pos = pos.id
+WHERE
+  chargingstate.id IN (
+    SELECT
+      MAX(id)
+    FROM
+      chargingstate
+    WHERE
+      carid=@CarID
+  )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value && dr[2] != DBNull.Value)
                     {
-                        double.TryParse(dr[1].ToString(), out lat);
-                        double.TryParse(dr[2].ToString(), out lng);
+                        if (!double.TryParse(dr[1].ToString(), out lat)) { lat = double.NaN; }
+                        if (!double.TryParse(dr[2].ToString(), out lng)) { lng = double.NaN; }
+                        if (!DateTime.TryParse(dr[3].ToString(), out UnplugDate)) { UnplugDate = DateTime.MinValue; }
+                        if (!DateTime.TryParse(dr[4].ToString(), out EndDate)) { EndDate = DateTime.MinValue; }
                         return Convert.ToInt32(dr[0]);
                     }
                 }
@@ -3421,7 +3828,7 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM teslalogger.can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
@@ -4078,7 +4485,7 @@ WHERE
             try
             {
                 var v = ElectricityMeterBase.Instance(car.CarInDB);
-//                 if (v != null && v.IsCharging() == true)
+                if (v != null)
                 {
                     meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
                     meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
@@ -4088,7 +4495,6 @@ WHERE
             {
                 Logfile.Log(ex.ToString());
             }
-
 
             try
             {
@@ -4106,7 +4512,6 @@ WHERE
                          EndChargingID = @EndChargingID,
                          meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
                          meter_utility_kwh_end = @meter_utility_kwh_end
-                         "+((car.GetTeslaAPIState().GetString("charging_state", out string chargingState, 5000) && chargingState.Equals("Disconnected")) ? ",UnplugDate = @UnplugDate" : "")+@"
                         WHERE
                          id=@ChargingStateID
                          AND CarID=@CarID", con))
@@ -4117,9 +4522,6 @@ WHERE
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
-                        if (car.GetTeslaAPIState().GetString("charging_state", out chargingState, 5000) && chargingState.Equals("Disconnected")) {
-                            cmd.Parameters.AddWithValue("@UnplugDate", chargeEnd);
-                        }
                         Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
@@ -4130,6 +4532,15 @@ WHERE
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
+            if (car.GetTeslaAPIState().GetString("charging_state", out string chargingState) && chargingState.Equals("Disconnected"))
+            {
+                UpdateUnplugDate();
+            }
+            else
+            {
+                Tools.DebugLog($"GetTeslaAPIState() charging_state:{chargingState}");
+            }
+
         }
 
     }

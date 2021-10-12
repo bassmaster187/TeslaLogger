@@ -66,13 +66,23 @@ namespace TeslaLogger
         {
             try
             {
-                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd);
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
                 DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
             }
             catch (Exception ex)
             {
                 DebugLog("Exception in SQL DEBUG", ex);
             }
+        }
+
+        public static void DebugLog(MySqlDataReader dr, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
+        {
+            string msg = "RAWSQL:";
+            for (int column = 0; column < dr.FieldCount; column++)
+            {
+                msg += (column==0?"":"|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+            }
+            DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
         }
 
         internal static string ExpandSQLCommand(MySqlCommand cmd)
@@ -525,7 +535,7 @@ namespace TeslaLogger
             {
                 Logfile.Log(ex.ToString());
             }
-            return false;
+            return true;
         }
 
         internal static bool UseOpenTopoData()

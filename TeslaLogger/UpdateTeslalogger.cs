@@ -474,6 +474,23 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                // chargingstate hidden:bool and combined_into:int
+
+                if (!DBHelper.ColumnExists("chargingstate", "hidden"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
@@ -577,6 +594,9 @@ CREATE TABLE superchargerstate(
                 Chmod("cmd_updated.txt", 666);
                 Chmod("MQTTClient.exe.config", 666);
 
+                Logfile.Log("Create backup");
+                Tools.Exec_mono("/bin/bash", "/etc/teslalogger/backup.sh");
+                
                 if (!Tools.Exec_mono("git", "--version", false).Contains("git version"))
                 {
                     Tools.Exec_mono("apt-get", "-y install git");
