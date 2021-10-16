@@ -32,7 +32,9 @@ namespace TeslaLogger
             "sentry_mode_off",
             "sentry_mode_toggle",
             "wake_up",
-            "set_charge_limit"
+            "set_charge_limit",
+            "charge_start",
+            "charge_stop"
         };
 
         public WebServer()
@@ -1061,6 +1063,12 @@ namespace TeslaLogger
                                         }
                                         WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
                                     }
+                                    break;
+                                case "charge_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                    break;
+                                case "charge_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
                                     break;
                                 default:
                                     WriteString(response, "");
