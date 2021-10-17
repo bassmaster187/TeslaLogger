@@ -2652,9 +2652,9 @@ namespace TeslaLogger
             {
                 // speed is converted by InsertPos
                 // power is converted by InsertPos
-                double dodometer_km = DBHelper.MphToKmhRounded(dodometer);
+                double dodometer_km = Math.Round(dodometer / 0.62137119223733);
                 // battery_range_km = range in ml to km
-                double battery_range_km = DBHelper.MphToKmhRounded(irange);
+                double battery_range_km = Math.Round(irange / 0.62137119223733);
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
                 double? outside_temp = car.currentJSON.current_outside_temp;
