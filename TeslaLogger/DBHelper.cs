@@ -3216,7 +3216,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                    cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
+                    cmd.Parameters.AddWithValue("@speed", (int)MphToKmhRounded(speed));
                     cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
@@ -4463,7 +4463,7 @@ WHERE
             }
         }
 
-        internal static int MphToKmhRounded(double speed_mph)
+        internal static double MphToKmhRounded(double speed_mph)
         {
             int speed_floor = (int)(speed_mph * 1.60934);
             // handle special speed_floor as Math.Round is off by +1
@@ -4477,7 +4477,7 @@ WHERE
             {
                 return speed_floor;
             }
-            return (int)Math.Round(speed_mph / 0.62137119223733);
+            return Math.Round(speed_mph / 0.62137119223733);
         }
 
         internal static void MigrateFloorRound()
@@ -4542,7 +4542,7 @@ pos", con))
                     for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
                         int speed_floor = (int)(speed_mph * 1.60934); // old conversion
-                        int speed_round = MphToKmhRounded(speed_mph); // new conversion
+                        int speed_round = (int)MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {
                             DateTime start = DateTime.Now;
