@@ -2631,16 +2631,17 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT DISTINCT
- altitude,
- odometer
+  altitude,
+  odometer
 FROM
- pos
+  pos
 WHERE
- id >= @StartPos
- AND id <= @EndPos
- AND CarID = @CarID
+  id >= @StartPos
+  AND id <= @EndPos
+  AND CarID = @CarID
+  AND CAST(odometer as INT) <> CAST(odometer as DOUBLE)
 ORDER BY
- odometer", con))
+  odometer", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@StartPos", startPosId);
