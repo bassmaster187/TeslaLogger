@@ -3903,7 +3903,7 @@ namespace TeslaLogger
                     }
                 }
 
-                double speed_kmh = DBHelper.MphToKmhRounded(speed_mph);
+                double speed_kmh = (int)DBHelper.MphToKmhRounded(speed_mph);
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                     {
