@@ -2613,17 +2613,17 @@ WHERE
             while (OpenTopoDataService.GetSingleton().GetQueueLength() > 0) {
                 Thread.Sleep(60000);
             }
-            decimal meters_up = 0;
-            decimal meters_down = 0;
-            decimal distance_up_km = 0;
-            decimal distance_down_km = 0;
-            decimal distance_flat_km = 0;
-            decimal height_max = 0;
-            decimal height_min = 0;
+            decimal meters_up = decimal.Zero;
+            decimal meters_down = decimal.Zero;
+            decimal distance_up_km = decimal.Zero;
+            decimal distance_down_km = decimal.Zero;
+            decimal distance_flat_km = decimal.Zero;
+            decimal height_max = decimal.Zero;
+            decimal height_min = decimal.Zero;
             decimal odo_start = decimal.Zero;
-            decimal odo_end = 0;
-            decimal last_altitude = 0;
-            decimal last_odo = 0;
+            decimal odo_end = decimal.Zero;
+            decimal last_altitude = decimal.Zero;
+            decimal last_odo = decimal.Zero;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -2705,7 +2705,46 @@ ORDER BY
             {
                 Tools.DebugLog(ex.ToString());
             }
-
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  drivestate 
+SET 
+  meters_up = @meters_up,
+  meters_down = @meters_down,
+  distance_up_km = @distance_up_km,
+  distance_down_km = @distance_down_km,
+  distance_flat_km = @distance_flat_km,
+  height_max = @height_max,
+  height_min = @height_min
+WHERE 
+  CarID = @CarID
+  AND id = @driveid", con))
+                    {
+                        cmd.Parameters.AddWithValue("@driveid", driveId);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@meters_up", meters_up);
+                        cmd.Parameters.AddWithValue("@meters_down", meters_down);
+                        cmd.Parameters.AddWithValue("@distance_up_km", distance_up_km);
+                        cmd.Parameters.AddWithValue("@distance_down_km", distance_down_km);
+                        cmd.Parameters.AddWithValue("@distance_flat_km", distance_flat_km);
+                        cmd.Parameters.AddWithValue("@height_max", height_max);
+                        cmd.Parameters.AddWithValue("@height_min", height_min);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"UpdateDriveHeightStatistics({driveId}): {rowsUpdated} rows updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.UpdateDriveHeightStatistics(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateDriveHeightStatistics()");
+            }
         }
 
         private static int GetDriveStateByStartPosEndPos(int startPosId, int endPosId)
