@@ -2494,7 +2494,7 @@ ORDER BY id DESC", con))
               {
                   if (StartPos > 0)
                   {
-                      UpdateTripElevation(StartPos, MaxPosId, " (Task)");
+                      UpdateTripElevation(StartPos, MaxPosId, car, " (Task)");
 
                       StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
                       StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
@@ -2503,19 +2503,19 @@ ORDER BY id DESC", con))
               }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
-        public static void UpdateTripElevation(int startPos, int maxPosId, string comment = "")
+        public static void UpdateTripElevation(int startPosId, int endPosId, Car car, string comment = "")
         {
             if (Geofence.GetInstance().RacingMode)
             {
                 return;
             }
 
-            if (startPos == 0 || maxPosId == 0)
+            if (startPosId == 0 || endPosId == 0)
             {
                 return;
             }
 
-            Logfile.Log($"UpdateTripElevation{comment} start:{startPos} ende:{maxPosId}");
+            Logfile.Log($"UpdateTripElevation{comment} start:{startPosId} end:{endPosId}");
 
             string inhalt = "";
             try
@@ -2525,10 +2525,22 @@ ORDER BY id DESC", con))
 
                 using (DataTable dt = new DataTable())
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter($"SELECT id, lat, lng FROM pos where id >= @startPos and id <= @maxPosId and altitude is null and lat is not null and lng is not null", DBConnectionstring))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter($@"
+SELECT
+ id,
+ lat,
+ lng
+FROM
+ pos
+WHERE
+ id >= @startPos
+ AND id <= @maxPosId
+ AND altitude IS NULL
+ AND lat IS NOT NULL
+ AND lng IS NOT NULL", DBConnectionstring))
                     {
-                        da.SelectCommand.Parameters.AddWithValue("@startPos", startPos);
-                        da.SelectCommand.Parameters.AddWithValue("@maxPosId", maxPosId);
+                        da.SelectCommand.Parameters.AddWithValue("@startPos", startPosId);
+                        da.SelectCommand.Parameters.AddWithValue("@maxPosId", endPosId);
                         da.Fill(dt);
 
                         int x = 0;
@@ -2578,89 +2590,189 @@ ORDER BY id DESC", con))
                 Logfile.Log(ex.ToString());
             }
 
-            Logfile.Log($"UpdateTripElevation finished start:{startPos} ende:{maxPosId}");
+            Logfile.Log($"UpdateTripElevation finished start:{startPosId} end:{endPosId}");
+
+            _ = Task.Factory.StartNew(() =>
+            {
+                if (startPosId > 0 && car!= null)
+                {
+                    car.dbHelper.UpdateDriveHeightStatistics(startPosId, endPosId);
+                }
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
-        private static void UpdateTripElevationSubcall(DataTable dt, int Start, int End)
+        internal void UpdateDriveHeightStatistics(int startPosId, int endPosId)
         {
-            string resultContent = null;
-            string url = null;
-
+            int driveId = GetDriveStateByStartPosEndPos(startPosId, endPosId);
+            if (driveId < 0)
+            {
+                Tools.DebugLog($"no drivestate found for startPosId:{startPosId} endPosId:{endPosId}");
+                return;
+            }
+            // wait until all pos altitude values are filled
+            while (OpenTopoDataService.GetSingleton().GetQueueLength() > 0) {
+                Thread.Sleep(60000);
+            }
+            decimal meters_up = decimal.Zero;
+            decimal meters_down = decimal.Zero;
+            decimal distance_up_km = decimal.Zero;
+            decimal distance_down_km = decimal.Zero;
+            decimal distance_flat_km = decimal.Zero;
+            decimal height_max = decimal.Zero;
+            decimal height_min = decimal.Zero;
+            decimal odo_start = decimal.Zero;
+            decimal odo_end = decimal.Zero;
+            decimal last_altitude = decimal.Zero;
+            decimal last_odo = decimal.Zero;
             try
             {
-                Logfile.Log($"UpdateTripElevationSubcall start: {Start} end: {End} count:{dt.Rows.Count}");
-
-                CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
-                StringBuilder sb = new StringBuilder();
-                sb.Append("http://open.mapquestapi.com/elevation/v1/profile?key=");
-                sb.Append(ApplicationSettings.Default.MapQuestKey);
-                sb.Append("&latLngCollection=");
-
-                bool first = true;
-                for (int p = Start; p < End; p++)
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    DataRow dr = dt.Rows[p];
-                    if (!first)
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT DISTINCT
+  altitude,
+  odometer
+FROM
+  pos
+WHERE
+  id >= @StartPos
+  AND id <= @EndPos
+  AND CarID = @CarID
+  AND CAST(odometer as INT) <> CAST(odometer as DOUBLE)
+ORDER BY
+  odometer", con))
                     {
-                        sb.Append(",");
-                    }
-
-                    first = false;
-
-                    double lat = (double)dr[1];
-                    double lng = (double)dr[2];
-
-                    sb.Append(lat.ToString(ci));
-                    sb.Append(",");
-                    sb.Append(lng.ToString(ci));
-                }
-
-                url = sb.ToString();
-
-                using (WebClient webClient = new WebClient())
-                {
-
-                    webClient.Headers.Add("User-Agent: TeslaLogger");
-                    webClient.Encoding = Encoding.UTF8;
-                    resultContent = webClient.DownloadStringTaskAsync(new Uri(url)).Result;
-
-                    dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
-                    System.Diagnostics.Debug.WriteLine("decode");
-
-                    if (!(resultContent.Contains("elevationProfile") && resultContent.Contains("shapePoints")))
-                    {
-                        Logfile.Log("Mapquest Response: " + resultContent);
-                        Logfile.ExceptionWriter(null, url + "\r\n\r\nResultContent:" + resultContent);
-                        return;
-                    }
-
-                    dynamic sp = j["shapePoints"];
-
-                    object[] e = j["elevationProfile"];
-                    for (int i = 0; i < e.Length; i++)
-                    {
-                        dynamic ep = e[i];
-                        int height = ep["height"];
-                        if (height == -32768) // no height data for this point
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@StartPos", startPosId);
+                        cmd.Parameters.AddWithValue("@EndPos", endPosId);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read()
+                            && decimal.TryParse(dr[0].ToString(), out decimal altitude)
+                            && decimal.TryParse(dr[1].ToString(), out decimal odometer)
+                            && odo_start == decimal.Zero)
                         {
-                            continue;
+                            // initialize
+                            odo_start = odometer;
+                            last_odo = odometer;
+                            height_max = altitude;
+                            height_min = altitude;
+                            last_altitude = altitude;
                         }
-
-                        decimal lat = sp[i * 2];
-                        decimal lng = sp[(i * 2) + 1];
-
-                        DataRow[] drs = dt.Select($"lat={lat} and lng={lng}");
-                        foreach (DataRow dr in drs)
+                        while (dr.Read())
                         {
-                            string sql = null;
-                            try
+                            if (decimal.TryParse(dr[0].ToString(), out decimal altitude)
+                                && decimal.TryParse(dr[1].ToString(), out decimal odometer))
                             {
-                                sql = $"update pos set altitude={height} where id={dr[0]}";
-                                ExecuteSQLQuery(sql);
+                                if (last_altitude == altitude)
+                                {
+                                    distance_flat_km += odometer - last_odo;
+                                }
+                                else if (last_altitude > altitude)
+                                {
+                                    distance_down_km += odometer - last_odo;
+                                    meters_down += last_altitude - altitude;
+                                }
+                                else if (last_altitude < altitude)
+                                {
+                                    distance_up_km += odometer - last_odo;
+                                    meters_up += altitude - last_altitude;
+                                }
+                                last_altitude = altitude;
+                                last_odo = odometer;
+                                odo_end = odometer;
+                                if (altitude > height_max)
+                                {
+                                    height_max = altitude;
+                                }
+                                if (altitude < height_min)
+                                {
+                                    height_min = altitude;
+                                }
                             }
-                            catch (Exception ex)
+                        }
+                        decimal odo_distance = odo_end - odo_start;
+                        decimal computed_distance = distance_down_km + distance_up_km + distance_flat_km;
+                        decimal correction_factor = odo_distance / computed_distance;
+                        distance_flat_km *= correction_factor;
+                        distance_up_km *= correction_factor;
+                        distance_down_km *= correction_factor;
+                        Tools.DebugLog($"UpdateDriveHeightStatistics: driveId:{driveId} odo_distance:{odo_distance} computed_distance:{computed_distance} distance_flat_km:{distance_flat_km} distance_up_km:{distance_up_km} distance_down_km:{distance_down_km} meters_up:{meters_up} meters_down:{meters_down} height_max:{height_max} height_min:{height_min}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  drivestate 
+SET 
+  meters_up = @meters_up,
+  meters_down = @meters_down,
+  distance_up_km = @distance_up_km,
+  distance_down_km = @distance_down_km,
+  distance_flat_km = @distance_flat_km,
+  height_max = @height_max,
+  height_min = @height_min
+WHERE 
+  CarID = @CarID
+  AND id = @driveid", con))
+                    {
+                        cmd.Parameters.AddWithValue("@driveid", driveId);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@meters_up", meters_up);
+                        cmd.Parameters.AddWithValue("@meters_down", meters_down);
+                        cmd.Parameters.AddWithValue("@distance_up_km", distance_up_km);
+                        cmd.Parameters.AddWithValue("@distance_down_km", distance_down_km);
+                        cmd.Parameters.AddWithValue("@distance_flat_km", distance_flat_km);
+                        cmd.Parameters.AddWithValue("@height_max", height_max);
+                        cmd.Parameters.AddWithValue("@height_min", height_min);
+                        Tools.DebugLog(cmd);
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+                        car.Log($"UpdateDriveHeightStatistics({driveId}): {rowsUpdated} rows updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during DBHelper.UpdateDriveHeightStatistics(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateDriveHeightStatistics()");
+            }
+        }
+
+        private static int GetDriveStateByStartPosEndPos(int startPosId, int endPosId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ id
+FROM
+ drivestate
+WHERE
+ StartPos = @StartPos
+ AND EndPos = @EndPos", con))
+                    {
+                        cmd.Parameters.AddWithValue("@StartPos", startPosId);
+                        cmd.Parameters.AddWithValue("@EndPos", endPosId);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int driveId))
                             {
-                                Logfile.ExceptionWriter(ex, sql);
+                                return driveId;
                             }
                         }
                     }
@@ -2668,8 +2780,46 @@ ORDER BY id DESC", con))
             }
             catch (Exception ex)
             {
-                Logfile.Log("Mapquest Response: " + resultContent);
-                Logfile.ExceptionWriter(ex, url + "\r\n\r\nResultContent:" + resultContent);
+                Tools.DebugLog(ex.ToString());
+            }
+            return -1;
+        }
+
+        public void UpdateAllDriveHeightStatistics()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+ StartPos,
+ EndPos
+FROM
+ drivestate
+WHERE
+ EndPos > StartPos
+ AND meters_up IS NULL
+ AND CarID = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int startPosId)
+                                && int.TryParse(dr[1].ToString(), out int endPosId))
+                            {
+                                UpdateDriveHeightStatistics(startPosId, endPosId);
+                            } 
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
             }
         }
 
@@ -3066,7 +3216,7 @@ ORDER BY id DESC", con))
                     cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
                     cmd.Parameters.AddWithValue("@lat", latitude.ToString());
                     cmd.Parameters.AddWithValue("@lng", longitude.ToString());
-                    cmd.Parameters.AddWithValue("@speed", MphToKmhRounded(speed));
+                    cmd.Parameters.AddWithValue("@speed", (int)MphToKmhRounded(speed));
                     cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
@@ -4313,7 +4463,7 @@ WHERE
             }
         }
 
-        internal static int MphToKmhRounded(double speed_mph)
+        internal static double MphToKmhRounded(double speed_mph)
         {
             int speed_floor = (int)(speed_mph * 1.60934);
             // handle special speed_floor as Math.Round is off by +1
@@ -4327,7 +4477,7 @@ WHERE
             {
                 return speed_floor;
             }
-            return (int)Math.Round(speed_mph / 0.62137119223733);
+            return Math.Round(speed_mph / 0.62137119223733);
         }
 
         internal static void MigrateFloorRound()
@@ -4392,7 +4542,7 @@ pos", con))
                     for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
                         int speed_floor = (int)(speed_mph * 1.60934); // old conversion
-                        int speed_round = MphToKmhRounded(speed_mph); // new conversion
+                        int speed_round = (int)MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {
                             DateTime start = DateTime.Now;

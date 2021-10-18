@@ -1601,7 +1601,7 @@ namespace TeslaLogger
             catch (Exception) { }
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
-            DBHelper.UpdateTripElevation(from, to, "/admin/UpdateElevation");
+            DBHelper.UpdateTripElevation(from, to, null, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
         }
 

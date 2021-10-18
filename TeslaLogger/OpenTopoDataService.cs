@@ -12,6 +12,7 @@ namespace TeslaLogger
 
         private static OpenTopoDataService _OpenTopoDataService = null;
 
+        // store posID, lat, lng
         private readonly ConcurrentStack<Tuple<long, double, double>> queue = new ConcurrentStack<Tuple<long, double, double>>();
 
         private OpenTopoDataService()

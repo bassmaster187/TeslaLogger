@@ -491,6 +491,58 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                // drivestate statistics for height etc
+
+                if (!DBHelper.ColumnExists("drivestate", "meters_up"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_up DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "meters_down"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_down DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_up_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_up_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_down_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_down_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_flat_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_flat_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_max"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_max DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_min"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_min DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
