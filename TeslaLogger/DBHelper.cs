@@ -2785,6 +2785,22 @@ WHERE
             return -1;
         }
 
+        public static void UpdateAllNullAmpereCharging()
+        {
+            try
+            {
+                string sql = @"update charging set charger_actual_current = charger_power * 1000 / charger_voltage
+                    where charger_voltage > 250 and charger_power > 1 and charger_phases = 1 and charger_actual_current = 0
+                    order by id desc";
+
+                ExecuteSQLQuery(sql, 120);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         public void UpdateAllDriveHeightStatistics()
         {
             try

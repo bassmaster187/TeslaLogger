@@ -343,8 +343,8 @@ namespace TeslaLogger
                     { "redirect_uri", "https://auth.tesla.com/void/callback" },
                     { "response_type", "code" },
                     { "scope", "openid email offline_access" },
-                    { "state", state },
-                    { "login_hint",  car.TeslaName }
+                    { "state", state }
+                    ,{ "login_hint",  car.TeslaName }
                 };
 
                 string json = new JavaScriptSerializer().Serialize(values);
@@ -536,6 +536,13 @@ namespace TeslaLogger
             {
                 string key = m.Groups[1].Value;
                 string value = m.Groups[2].Value;
+
+                if (d.ContainsKey(key))
+                {
+                    car.Log("Key already in directory: " + key);
+                    continue;
+                }
+
                 d.Add(key , value);
 
                 if (key == "transaction_id")
@@ -1797,7 +1804,12 @@ namespace TeslaLogger
                 else
                 {
                     if (battery == "LFP")
-                        WriteCarSettings("0.133", "M3 SR+ LFP");
+                    {
+                        if (year == 2021 || car.DB_Wh_TR > 0 && car.DB_Wh_TR < 0.130)
+                            WriteCarSettings("0.127", "M3 SR+ LFP 2021");
+                        else
+                            WriteCarSettings("0.133", "M3 SR+ LFP");
+                    }
                     else if (year == 2021)
                         WriteCarSettings("0.126", "M3 SR+ 2021");
                     else

@@ -400,6 +400,8 @@ namespace TeslaLogger
                     c.dbHelper.AnalyzeChargingStates();
                     c.dbHelper.UpdateAllDriveHeightStatistics();
                 }
+
+                DBHelper.UpdateAllNullAmpereCharging();
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
 

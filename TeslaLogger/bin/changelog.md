@@ -1,3 +1,10 @@
+# Version 1.48.15
+- turn off name & passwort authentification to Tesla Server because it won't work anymore
+- calculate ampere if tesla server returns 0
+- improve calculation of charge energy added for combined/interrupted charging session
+- remove database password from logs
+- detect more car models
+
 # Version 1.48.14
 - BF: prevent endless loop in reCaptcha service
 
