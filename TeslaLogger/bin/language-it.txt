@@ -231,3 +231,5 @@ Kosten Blockiergebühr=Costo per minuto inattivo
 Summe=Totale
 kWh laut Zähler / Rechnung=Costo per KWh come da fattura
 Wirkungsgrad=Efficienza
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

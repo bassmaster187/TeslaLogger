@@ -60,3 +60,5 @@ Zoom Level=Zoom Level
 Share data anonymously=Daten anonym teilen
 Sleep=Schlafen
 Temperature=Temperatur
+
+TeslaAuthApps=Du kannst folgende Apps verwenden um ein Access Token & Refresh Token vom Tesla Server zu generieren.

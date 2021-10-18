@@ -249,3 +249,5 @@ Kosten Blockiergebühr=充电超时计价
 Summe=汇总
 kWh laut Zähler / Rechnung=计价表千瓦时数 / 收据
 Wirkungsgrad=效率
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

@@ -248,3 +248,5 @@ Kosten Blockiergebühr=Blokeringsgebyr per minut
 Summe=I alt
 kWh laut Zähler / Rechnung=kWh i følge tæller / faktura
 Wirkungsgrad=Effektivitet
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

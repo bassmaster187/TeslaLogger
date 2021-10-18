@@ -166,3 +166,5 @@ Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
 Resume Teslalogger=Fortsett Teslalogger
 Range=Range
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

@@ -289,3 +289,5 @@ Kosten Blockiergebühr=Стоимость за минтуту блокировк
 Summe=Всего
 kWh laut Zähler / Rechnung=кВтч согласно счетчику / счет
 Wirkungsgrad=Эффективность
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

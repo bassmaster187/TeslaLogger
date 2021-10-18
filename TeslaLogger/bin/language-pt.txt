@@ -208,3 +208,5 @@ Kosten Blockiergebühr=Custo de Ociosidade por Minuto
 Summe=Total
 kWh laut Zähler / Rechnung=kWh de acordo com contador/factura
 Wirkungsgrad=Eficiência 
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

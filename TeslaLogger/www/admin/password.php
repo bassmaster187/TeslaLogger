@@ -187,17 +187,26 @@ if (isset($_REQUEST["id"]))
 ?>
 <div>
 <h1><?php t("Bitte Tesla Account Zugangsdaten eingeben"); ?>:</h1>
+<div id="dialog-TokenHelp" title="Info">
+<?php t("TeslaAuthApps"); ?>
+<ul>
+<li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
+<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
+</ul>
+</div>
 <table>
-<tr><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
-<tr><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+<tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
+<tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
+
+<tr style='visibility:collapse'><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
+<tr style='visibility:collapse'><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
+<tr style='visibility:collapse'><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+
 <tr><td><?php t("Car # in account"); ?>:</td><td><input id="carid" value="<?php echo($tesla_carid) ?>" <?php echo($disablecarid) ?>/></td><td>0 = first car!</td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
 
 <tr><td>&nbsp;</td></tr>
-<tr><td colspan="2"><b>Or you can use Tesla Access Token &amp; Refresh Token to login:&nbsp;&nbsp;</b></td><td><img id="TokenHelp" src="img/icon-help-24.png" class="pointer"/></td></tr>
-<tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
-<tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
+<!-- <tr><td colspan="2"><b>Or you can use Tesla Access Token &amp; Refresh Token to login:&nbsp;&nbsp;</b></td><td><img id="TokenHelp" src="img/icon-help-24.png" class="pointer"/></td></tr> -->
 <tr><td>&nbsp;</td></tr>
 
 <tr><td colspan="2">
@@ -246,11 +255,4 @@ else
 <?php
 }
 ?>
-</div>
-<div id="dialog-TokenHelp" title="Info" style="display:none;">
-You can use following apps to get an access token & refresh token from Tesla server:
-<ul>
-<li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
-<li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
-</ul>
 </div>

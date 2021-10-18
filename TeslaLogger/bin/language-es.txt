@@ -255,3 +255,5 @@ Driving=Conduciendo
 Charging=Cargando
 Missing=Perdiendo
 Ø Temperatur=Ø Temperatura
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

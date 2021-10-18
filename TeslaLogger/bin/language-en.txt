@@ -258,3 +258,5 @@ Missing=Missing
 Verbraucht=Consumed
 
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:

@@ -220,3 +220,5 @@ Daten anonym teilen=Data anoniem delen
 TextSuspendTeslalogger=Teslalogger is gestopt! De gegevens worden niet gelogd!
 Resume Teslalogger=Start Teslalogger
 Range=Bereik
+
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
