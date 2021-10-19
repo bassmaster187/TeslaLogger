@@ -266,7 +266,8 @@ namespace TeslaLogger
         internal static void UpdateCarIDNull()
         {
             string[] tables = { "can", "car_version", "charging", "chargingstate", "drivestate", "pos", "shiftstate", "state" };
-            foreach (string table in tables) {
+            foreach (string table in tables)
+            {
                 try
                 {
                     int rows = 0;
@@ -324,7 +325,7 @@ namespace TeslaLogger
             }
 
             return "";
-}
+        }
 
         internal bool SetABRP(string abrp_token, int abrp_mode)
         {
@@ -333,7 +334,7 @@ namespace TeslaLogger
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow)*1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
 
                 if (car.ABRP_mode == -1)
                     return false;
@@ -358,6 +359,22 @@ namespace TeslaLogger
             return true;
         }
 
+        public static void UpdateAllNullAmpereCharging()
+        {
+            try
+            {
+                string sql = @"update charging set charger_actual_current = charger_power * 1000 / charger_voltage
+                     where charger_voltage > 250 and charger_power > 1 and charger_phases = 1 and charger_actual_current = 0
+                     order by id desc";
+
+                ExecuteSQLQuery(sql, 120);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         // find gaps in chargingstate.id or drops in charging.charge_energy_added
         internal void AnalyzeChargingStates()
         {
@@ -377,14 +394,14 @@ WHERE
   CarID = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        MySqlDataReader dr = cmd.ExecuteReader();
                         Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
                         int lastID = 0;
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
                         }
-                        while(dr.Read())
+                        while (dr.Read())
                         {
                             if ((int)dr[0] - lastID > 1)
                             {
@@ -430,8 +447,8 @@ ORDER BY
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
                         cmd.CommandTimeout = 600;
-                        MySqlDataReader dr = cmd.ExecuteReader();
                         Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
                         int lastID = 0;
                         double lastCEA = 0.0;
                         if (dr.Read())
@@ -502,8 +519,8 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingID", ChargingStateID);
-                        MySqlDataReader dr = cmd.ExecuteReader();
                         Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
                         int index = 0;
                         double lastCEA = 0;
                         // first row
@@ -539,7 +556,7 @@ WHERE
             {
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} segments:{string.Join(",", segments.Select(t => string.Format("[{0},{1}]", t.Item1, t.Item2)))}");
                 double sum = 0.0;
-                bool firstSegment = true; 
+                bool firstSegment = true;
                 foreach (Tuple<int, int> segment in segments)
                 {
                     double segmentCEA = GetChargeEnergyAddedFromCharging(segment.Item2);
@@ -588,8 +605,8 @@ WHERE
   id = @ChargingID", con))
                     {
                         cmd.Parameters.AddWithValue("@ChargingID", ChargingID);
-                        MySqlDataReader dr = cmd.ExecuteReader();
                         Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
                             Tools.DebugLog(dr);
@@ -910,13 +927,13 @@ WHERE
 
         private Queue<int> FindCombineCandidates()
         {
-                Queue<int> combineCandidates = new Queue<int>();
-                try
+            Queue<int> combineCandidates = new Queue<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                    {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(@"
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
   chargingstate.id
 FROM
@@ -929,27 +946,27 @@ GROUP BY
   pos.odometer
 HAVING
   COUNT(chargingstate.id) > 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
-                            while (dr.Read() && dr[0] != DBNull.Value)
+                            Tools.DebugLog(dr);
+                            if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                Tools.DebugLog(dr);
-                                if (int.TryParse(dr[0].ToString(), out int id))
-                                {
-                                    combineCandidates.Enqueue(id);
-                                }
+                                combineCandidates.Enqueue(id);
                             }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Tools.DebugLog($"Exception during FindCombineCandidates(): {ex}");
-                    Logfile.ExceptionWriter(ex, "Exception during FindCombineCandidates()");
-                }
-                return combineCandidates;
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog($"Exception during FindCombineCandidates(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during FindCombineCandidates()");
+            }
+            return combineCandidates;
         }
 
         internal void UpdateTeslaToken()
@@ -1346,7 +1363,8 @@ WHERE
                             cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = ChargingStateID;
                             Tools.DebugLog(cmd);
                             MySqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read() && dr[0] != DBNull.Value) {
+                            if (dr.Read() && dr[0] != DBNull.Value)
+                            {
                                 if (double.TryParse(dr[0].ToString(), out charge_energy_added)
                                     && DateTime.TryParse(dr[1].ToString(), out startDate)
                                     && DateTime.TryParse(dr[2].ToString(), out endDate))
@@ -2261,10 +2279,10 @@ ORDER BY id DESC", con))
                         }
                         dr.Close();
                     }
-                    
+
 
                     using (MySqlCommand cmd = new MySqlCommand("SELECT ideal_battery_range_km, battery_range_km, battery_level, lat, lng FROM pos where CarID=@CarID order by id desc limit 1", con))
-                    {                        
+                    {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
@@ -2296,7 +2314,7 @@ ORDER BY id DESC", con))
                         }
                         dr.Close();
                     }
-                    
+
 
                     car.currentJSON.CreateCurrentJSON();
                 }
@@ -2361,7 +2379,7 @@ ORDER BY id DESC", con))
             wh.car.currentJSON.CreateCurrentJSON();
 
             // Check for one minute if meter claims car is really not charging 
-            if  (v != null && v.IsCharging() != true)
+            if (v != null && v.IsCharging() != true)
             {
                 Task.Run(() =>
                 {
@@ -2446,7 +2464,7 @@ ORDER BY id DESC", con))
                     car.Log($"StartChargingState Task GetCurrentState(): {car.GetCurrentState()}");
                 }
             });
-            #pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
+#pragma warning restore CA2008 // Keine Tasks ohne Übergabe eines TaskSchedulers erstellen
         }
 
         public void CloseDriveState(DateTime EndDate)
@@ -2491,16 +2509,16 @@ ORDER BY id DESC", con))
             car.currentJSON.current_power = 0;
 
             _ = Task.Factory.StartNew(() =>
-              {
-                  if (StartPos > 0)
-                  {
-                      UpdateTripElevation(StartPos, MaxPosId, car, " (Task)");
+            {
+                if (StartPos > 0)
+                {
+                    UpdateTripElevation(StartPos, MaxPosId, car, " (Task)");
 
-                      StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
-                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
-                      StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
-                  }
-              }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
+                    StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
+                    StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
+                }
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         public static void UpdateTripElevation(int startPosId, int endPosId, Car car, string comment = "")
@@ -2594,7 +2612,7 @@ WHERE
 
             _ = Task.Factory.StartNew(() =>
             {
-                if (startPosId > 0 && car!= null)
+                if (startPosId > 0 && car != null)
                 {
                     car.dbHelper.UpdateDriveHeightStatistics(startPosId, endPosId);
                 }
@@ -2610,7 +2628,8 @@ WHERE
                 return;
             }
             // wait until all pos altitude values are filled
-            while (OpenTopoDataService.GetSingleton().GetQueueLength() > 0) {
+            while (OpenTopoDataService.GetSingleton().GetQueueLength() > 0)
+            {
                 Thread.Sleep(60000);
             }
             decimal meters_up = decimal.Zero;
@@ -2785,22 +2804,6 @@ WHERE
             return -1;
         }
 
-        public static void UpdateAllNullAmpereCharging()
-        {
-            try
-            {
-                string sql = @"update charging set charger_actual_current = charger_power * 1000 / charger_voltage
-                    where charger_voltage > 250 and charger_power > 1 and charger_phases = 1 and charger_actual_current = 0
-                    order by id desc";
-
-                ExecuteSQLQuery(sql, 120);
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-        }
-
         public void UpdateAllDriveHeightStatistics()
         {
             try
@@ -2828,7 +2831,7 @@ WHERE
                                 && int.TryParse(dr[1].ToString(), out int endPosId))
                             {
                                 UpdateDriveHeightStatistics(startPosId, endPosId);
-                            } 
+                            }
                         }
                     }
                 }
@@ -3403,7 +3406,8 @@ WHERE
             try
             {
                 // get charging_state, must not be older than 5 minutes = 300 seconds = 300000 milliseconds
-                if (car.GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 300000)) {
+                if (car.GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 300000))
+                {
                     if (charging_state[TeslaAPIState.Key.Value].ToString().Equals("Charging"))
                     {
                         // check if charging_state value Charging is not older than 5 minutes
