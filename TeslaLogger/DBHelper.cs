@@ -523,10 +523,12 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         int index = 0;
                         double lastCEA = 0;
+                        int maxid = 0;
                         // first row
                         if (dr.Read())
                         {
                             index = (int)dr[0];
+                            maxid = (int)dr[0];
                             lastCEA = (double)dr[1];
                         }
                         // all rows
@@ -542,9 +544,10 @@ WHERE
                                 segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
                                 index = ((int)dr[0]);
                             }
+                            maxid = (int)dr[0];
                             lastCEA = (double)dr[1];
                         }
-                        segments.Add(new Tuple<int, int>(index, (int)dr[0]));
+                        segments.Add(new Tuple<int, int>(index, maxid));
                     }
                 }
             }
