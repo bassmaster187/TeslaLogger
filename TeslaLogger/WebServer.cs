@@ -297,7 +297,7 @@ namespace TeslaLogger
 
                 dynamic r = new JavaScriptSerializer().DeserializeObject(data);
 
-                if (Tools.IsPropertyExist(r, "delete"))
+                if (Tools.IsPropertyExist(r, "delete") || request?.QueryString?["delete"] == "1")
                 {
                     Logfile.Log("delete Admin Panel Password");
                     
