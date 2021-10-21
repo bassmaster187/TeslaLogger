@@ -543,6 +543,11 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (DBHelper.ColumnType("cars", "tesla_token").Contains("varchar"))
+                {
+                    DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
+                }
+
                 // end of schema update
 
                 if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))

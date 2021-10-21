@@ -3763,6 +3763,25 @@ WHERE
         }
 
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
+        public static string ColumnType(string table, string column)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` where field='" + column + "';", con))
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        return dr["type"].ToString();
+                    }
+                }
+            }
+
+            return "";
+        }
+
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static bool ColumnExists(string table, string column)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
