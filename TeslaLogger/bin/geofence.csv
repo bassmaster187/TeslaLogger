@@ -3,6 +3,7 @@ Supercharger AT-Biberwier, 47.372431,10.886093
 Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
 Supercharger AT-Graz, 47.037058,15.478501
+Supercharger-V3 AT-Eberstalzell,48.039338,13.991089
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
@@ -76,6 +77,7 @@ Supercharger BE-Remouchamps, 50.483878, 5.700335
 Supercharger BE-Verviers, 50.59223, 5.84857
 Supercharger BE-Wavre, 50.7080753,4.5983481
 Supercharger BG-Plovdiv, 42.144727, 24.768828
+Supercharger-V3 BG-Sofia,42.65777,23.313598
 Supercharger CA-Aulac NB,45.871352,-64.280378
 Supercharger CA-Baie-Saint-Paul QC, 47.435844,-70.506266
 Supercharger CA-Belleville ON,44.187802,-77.399167
@@ -191,9 +193,11 @@ Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
 Supercharger-V3 DE-Illertissen, 48.21882, 10.1276145, 15
 Supercharger DE-Jettingen, 48.41105, 10.4403
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
-Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591
+Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
+Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
+Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
@@ -239,6 +243,7 @@ Supercharger-V3 DE-Rhüden,51.947273, 10.1409618, 9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
 Supercharger DE-Rhüden, 51.947221, 10.140505, 12
+Supercharger-V3 DE-Rosenheim,47.817007,12.120582
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger-V3 DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Satteldorf, 49.18119, 10.06933
@@ -277,6 +282,7 @@ Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger-V3 DK-Ikast, 56.122196, 9.172572
+Supercharger-V3 DK-Kirke Såby,55.64015,11.830563
 Supercharger DK-Køge, 55.489014, 12.163153
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
@@ -408,6 +414,8 @@ Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
 Supercharger FR-Nîmes, 43.81655, 4.345061
+Supercharger-V3 FR-Nice,43.727727,7.186527
+Supercharger-V3 FR-Niort,46.29825,-0.375256
 Supercharger FR-Orange, 44.1121375, 4.8517996 
 Supercharger FR-Orgeval, 48.925026, 1.996508
 Supercharger FR-Ostwald, 48.534041, 7.702054
@@ -417,11 +425,13 @@ Supercharger-V3 FR-Perigueux, 45.152424, 0.789938
 Supercharger FR-Poitiers, 46.670356, 0.362651
 Supercharger-V3 FR-Reims-Tinqueux, 49.252931, 3.975959
 Supercharger FR-Rennes, 48.082064, -1.684180
+Supercharger-V3 FR-Rivesaltes,42.775351,2.908241
 Supercharger FR-Rouen, 49.388964, 1.059818
 Supercharger FR-Rouvignies, 50.336704, 3.455931
 Supercharger FR-Rungis, 48.7544317, 2.3510298
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
 Supercharger FR-Saintes, 45.7500261, -0.6616366
+Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
 Supercharger FR-Sallanches, 45.951545, 6.62879
 Supercharger FR-Senlis, 49.208545, 2.606701
 Supercharger FR-Sisteron, 44.226199, 5.913554
@@ -494,6 +504,8 @@ Supercharger GB-Warwick Southbound, 52.219048, -1.50126
 Supercharger GB-Washington, 54.88762, -1.557413
 Supercharger GB-Winchester, 51.16725, -1.328024
 Supercharger GB-Wokingham, 51.42849, -0.898897
+Supercharger GR-Athens,38.034938,23.79096
+Supercharger-V3 GR-Psathopyrgos South,38.324376,21.869179,15
 Supercharger HR-Karlovac, 45.51297, 15.54748
 Supercharger HR-Otočac, 44.89321, 15.18425
 Supercharger HR-Senj, 44.989403, 14.897517
@@ -524,7 +536,9 @@ Supercharger IT-Arezzo, 43.436801, 11.779599
 Supercharger IT-Borca di Cadore, 46.435592, 12.222879
 Supercharger IT-Brennero, 46.99540, 11.50210
 Supercharger IT-Brescia, 45.53224, 10.164969
+Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger IT-Campogalliano, 44.686638,10.851342
+Supercharger-V3 IT-Catania,37.551588,15.066693
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
 Supercharger IT-Cerignola, 41.306389, 15.899738											
@@ -769,7 +783,7 @@ Supercharger US-Baker CA, 35.262512, -116.080666
 Supercharger US-Bay City MI, 43.622212, -83.932216
 Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
 Supercharger US-Birmingham AL, 33.525915,-86.806862
-Supercharger-V3 US-Beaver UT - 525 W,38.248718,-112.653139
+Supercharger-V3 US-Beaver UT - 525 W,38.2489777,-112.652765
 Supercharger US-Bowling Green KY, 36.955168, -86.438863
 Supercharger US-Brewer ME, 44.775854,-68.734722
 Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
@@ -1093,6 +1107,7 @@ Allego DE-Hohenwarsleben, 52.174039, 11.495273, 6
 Allego DE-Ingolstadt Factory Outlet, 48.783821,11.478067
 Allego DE-Itzehoe, 53.959309, 9.495976, 10
 Allego DE-Jettingen-Scheppach, 48.410996, 10.439835
+Allego DE-Kaltenkirchen,53.84585,9.93589,5
 Allego DE-Kleinostheim, 49.994504, 9.070058, 20
 Allego DE-Lauf an der Pegnitz Industriestraße, 49.502758, 11.291502
 Allego DE-Memmingen Media-Markt, 48.0023077, 10.167253
