@@ -34,7 +34,8 @@ namespace TeslaLogger
             "wake_up",
             "set_charge_limit",
             "charge_start",
-            "charge_stop"
+            "charge_stop",
+            "set_charging_amps"
         };
 
         public WebServer()
@@ -1069,6 +1070,18 @@ namespace TeslaLogger
                                     break;
                                 case "charge_stop":
                                     WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                    break;
+                                case "set_charging_amps":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
+                                            car.LastSetChargingAmpsAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
+                                    }
                                     break;
                                 default:
                                     WriteString(response, "");
