@@ -58,6 +58,7 @@ Try to connect to Admin-Panel
 http://localhost:8888/admin/
 
 Go to Settings / MyTesla Credentials / Edit 1st car
+Enter Tesla credentials / Token to connect to your car.
 
 # Docker update / upgrade
 Usually, you update the Teslalogger in admin-panel by clicking on update button.
