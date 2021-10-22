@@ -543,7 +543,7 @@ CREATE TABLE superchargerstate(
                     Logfile.Log("ALTER TABLE OK");
                 }
 
-                if (DBHelper.ColumnType("cars", "tesla_token").Contains("varchar"))
+                if (DBHelper.GetColumnType("cars", "tesla_token").Contains("varchar"))
                 {
                     DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
                 }
