@@ -26,7 +26,7 @@ cp TeslaLogger/TeslaLogger/App.config TeslaLogger/TeslaLogger/bin/TeslaLogger.ex
 
 3. edit TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config with your favorite editor
 
-4. enter your My-Tesla credentials in TeslaName and TeslaPass
+4. Leave TeslaName and TeslaPass alone!
 
 5. enter the DBConnectionstring:
 ```
@@ -36,17 +36,8 @@ Server=database;Database=teslalogger;Uid=root;Password=teslalogger;
 The config file could look like this:
 ```xml
 ....
-            <setting name="TeslaName" serializeAs="String">
-              <value>elon@tesla.com</value>
-            </setting>
-            <setting name="TeslaPasswort" serializeAs="String">
-              <value>123456</value>
-            </setting>
             <setting name="DBConnectionstring" serializeAs="String">
                 <value>Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;</value>
-            </setting>
-            <setting name="Car" serializeAs="String">
-                <value>0</value>
             </setting>
 ....
 ```
@@ -65,6 +56,8 @@ http://localhost:3000 (admin/teslalogger)
 
 Try to connect to Admin-Panel
 http://localhost:8888/admin/
+
+Go to Settings / MyTesla Credentials / Edit 1st car
 
 # Docker update / upgrade
 Usually, you update the Teslalogger in admin-panel by clicking on update button.
