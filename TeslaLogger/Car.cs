@@ -115,6 +115,8 @@ namespace TeslaLogger
         }
 
         public string LastSetChargeLimitAddressName { get => lastSetChargeLimitAddressName; set => lastSetChargeLimitAddressName = value; }
+        public string LastSetChargingAmpsAddressName { get; internal set; }
+
         public string MFA_Code;
         public string Captcha;
         public string Captcha_String;
