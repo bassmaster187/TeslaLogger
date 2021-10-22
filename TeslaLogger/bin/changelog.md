@@ -1,3 +1,6 @@
+# Version 1.48.16
+- Bugfixes
+
 # Version 1.48.15
 - turn off name & passwort authentification to Tesla Server because it won't work anymore
 - calculate ampere if tesla server returns 0
