@@ -181,6 +181,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/wallbox", System.StringComparison.Ordinal):
+                        Wallbox(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword", System.StringComparison.Ordinal):
                         SetAdminPanelPassword(request, response);
                         break;
@@ -284,6 +287,74 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void Wallbox(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("Wallbox");
+
+                string data = GetDataFromRequestInputStream(request);
+
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+                if (Tools.IsPropertyExist(r, "test"))
+                {
+                    Logfile.Log("Test Wallbox");
+
+                    ElectricityMeterBase e = ElectricityMeterBase.Instance(r["type"], r["host"], r["param"]);
+
+                    var obj = new
+                    {
+                        Version = e.GetVersion(),
+                        Utility_kWh = e.GetUtilityMeterReading_kWh(),
+                        Vehicle_kWh = e.GetVehicleMeterReading_kWh()
+                    };
+
+                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+
+                    WriteString(response, ret);
+                }
+                else if (Tools.IsPropertyExist(r, "save"))
+                {
+                    var carid = r["carid"];
+                    
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("update cars set meter_type=@meter_type, meter_host=@meter_host, meter_parameter=@meter_parameter where id=@carid", con))
+                        {
+                            cmd.Parameters.AddWithValue("@carid", r["carid"]);
+                            cmd.Parameters.AddWithValue("@meter_type", r["type"]);
+                            cmd.Parameters.AddWithValue("@meter_host", r["host"]);
+                            cmd.Parameters.AddWithValue("@meter_parameter", r["param"]);
+                            cmd.ExecuteNonQuery();
+
+                            WriteString(response, "OK");
+                        }
+                    }
+                }
+                else if (Tools.IsPropertyExist(r, "load"))
+                {
+                    var carid = r["carid"];
+                    var dr = DBHelper.GetCar(carid);
+                    var obj = new
+                    {
+                        type = dr["meter_type"],
+                        host = dr["meter_host"],
+                        param = dr["meter_parameter"]
+                    };
+
+                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+                    WriteString(response, ret);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                WriteString(response, "error");
             }
         }
 

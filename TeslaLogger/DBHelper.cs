@@ -4684,7 +4684,10 @@ WHERE
                          EndDate = @EndDate,
                          EndChargingID = @EndChargingID,
                          meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
-                         meter_utility_kwh_end = @meter_utility_kwh_end
+                         meter_utility_kwh_end = @meter_utility_kwh_end,
+                         meter_vehicle_kwh_sum = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
+                         meter_utility_kwh_sum = @meter_utility_kwh_end - meter_utility_kwh_start,
+                         cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start
                         WHERE
                          id=@ChargingStateID
                          AND CarID=@CarID", con))

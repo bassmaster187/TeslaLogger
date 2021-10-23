@@ -1,3 +1,6 @@
+# Version 1.48.17
+- Support for wallboxes [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md)
+
 # Version 1.48.16
 - Bugfixes
 
