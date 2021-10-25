@@ -5,7 +5,8 @@ You can connect your Teslalogger to your Wallbox to calculate the efficiency of 
 - go-eCharger
 - Tesla Wallbox Gen 3
 # Settings
-Go to admin panel / Extras / Wallbox
+Go to admin panel and select the car you want to use for the wallbox. Go to Extras / Wallbox.
+Every car has it's own wallbox settings. 
 
 Choose your wallbox and set the host name of your wallbox e.g: http://192.168.1.174
 Make sure you don't forget http:// or https:// at your host settings. Just the IP address won't work!
@@ -14,8 +15,8 @@ Make sure you don't forget http:// or https:// at your host settings. Just the I
 Some types of wallboxes needs some special params to work as expected.
 
 # OpenWB
-## Param:
-LP1 - LP8 Charging point. Default: LP1
+### Param:
+LP1 - LP8 Charging point used for this car. Default: LP1
 
 # go-eCharger
 Please make sure you enable HTTP API v1 in "Internet / Enhanced Settings"
