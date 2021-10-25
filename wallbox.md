@@ -12,8 +12,15 @@ Make sure you don't forget http:// or https:// at your host settings. Just the I
 
 ## Param
 Some types of wallboxes needs some special params to work as expected.
-#### OpenWB
+
+# OpenWB
+## Param:
 LP1 - LP8 Charging point. Default: LP1
+
+# go-eCharger
+Please make sure you enable HTTP API v1 in "Internet / Enhanced Settings"
+<br><img src="https://user-images.githubusercontent.com/6816385/138766186-7c5ff9c7-8225-4094-8444-f5058df24b3c.png" width="220">
+
 
 # Dashboard
 In Charging History you can see the efficiency of charging and percentage of photovoltaics if the wallbox supports this value.
