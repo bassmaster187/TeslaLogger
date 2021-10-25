@@ -43,6 +43,9 @@ require_once("tools.php");
 	
     function btn_test_click()
     {
+        if (!($("#host").val().startsWith("http://") || $("#host").val().startsWith("https://")))
+            alert("Host must start with http: or https: !!!");
+
         var url = "wallbox";
         console.log("url: " + url);
 
@@ -91,8 +94,9 @@ include "menu.php";
 menu("Wallbox Test");
 ?>
 <div>
-    <h1><?php t("Wallbox Test"); ?>:</h1>
+    <h1><?php t("Wallbox"); ?>:  <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md"><img src="img/icon-help-24.png" class="pointer"/></a></h1>
 <div>
+<p>You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.</p>
 <table>
     <tr><td>Type:</td><td>
         <select name="type" id="type">
@@ -104,13 +108,13 @@ menu("Wallbox Test");
         </td></tr>
     <tr><td>Host:</td><td><input id="host" type="text" /></td></tr>
     <tr><td>Param:</td><td><input id="param" type="text" /></td></tr>
-    <tr><td></td><td style="text-align: right;"><button onclick="btn_test_click();"><?php t("Test"); ?> </td></tr>
+    <tr><td></td><td style="text-align: right;"><button onclick="btn_test_click();"><?php t("Test"); ?></td></tr>
     <tr><td></td><td></td></tr>
     <tr><td colspan=2><h1>Info:</h1></td></tr>
     <tr><td>Version:</td><td><span id="Version"></td></span></tr>
     <tr><td>Utility kWh:</td><td><span id="Utility_kWh"></td></span></tr>
     <tr><td>Vehicle kWh:</td><td><span id="Vehicle_kWh"></td></span></tr>
-    <tr><td></td><td style="text-align: right;"><button onclick="btn_save_click();"><?php t("Save"); ?> </td></tr>
+    <tr><td></td><td style="text-align: right;"><button onclick="btn_save_click();"><?php t("Save"); ?></td></tr>
 </table>
 </div>
 </body>
