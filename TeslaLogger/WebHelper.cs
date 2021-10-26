@@ -262,7 +262,7 @@ namespace TeslaLogger
                     };
 
                     httpClientForAuthentification = new HttpClient(handler);
-                    httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(10);
+                    httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(30);
                     httpClientForAuthentification.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
                     httpClientForAuthentification.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
                     //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
@@ -452,6 +452,9 @@ namespace TeslaLogger
                 return "";
             }
 
+            int HttpStatusCode = 0;
+            string resultContent = "";
+
             try
             {
                 Log("Update Tesla Token From Refresh Token!");
@@ -481,11 +484,16 @@ namespace TeslaLogger
                         using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                         {
                             HttpResponseMessage result = client.PostAsync(authHost + "/oauth2/v3/token", content).Result;
-                            string resultContent = result.Content.ReadAsStringAsync().Result;
+                            resultContent = result.Content.ReadAsStringAsync().Result;
 
                             DBHelper.AddMothershipDataToDB("UpdateTeslaTokenFromRefreshToken()", start, (int)result.StatusCode);
 
+                            HttpStatusCode = (int)result.StatusCode;
+
                             car.Log("HttpStatus: " + result.StatusCode.ToString());
+
+                            if (resultContent.Contains("\"error\""))
+                                car.Log("ResultContent UpdateTeslaTokenFromRefreshToken: " + resultContent);
 
                             dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                             string access_token = jsonResult["access_token"];
@@ -504,8 +512,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
-
-                car.ExternalLog("UpdateTeslaTokenFromRefreshToken: " + ex.ToString());
+                car.ExternalLog("UpdateTeslaTokenFromRefreshToken: \r\nHTTP StatusCode: " + HttpStatusCode+ "\r\nresultContent: " + resultContent +"\r\n" + ex.ToString());
             }
             return "";
         }
