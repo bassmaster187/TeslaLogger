@@ -44,7 +44,7 @@ require_once("tools.php");
     function btn_test_click()
     {
         if (!($("#host").val().startsWith("http://") || $("#host").val().startsWith("https://")))
-            alert("Host must start with http: or https: !!!");
+            alert("Host must start with http:// or https://");
 
         var url = "wallbox";
         console.log("url: " + url);
