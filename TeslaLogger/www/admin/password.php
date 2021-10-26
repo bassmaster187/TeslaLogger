@@ -210,9 +210,10 @@ if (isset($_REQUEST["id"]))
 <tr><td>&nbsp;</td></tr>
 
 <tr><td colspan="2">
-<?PHP if ($_REQUEST["id"] != -1)
+<?PHP 
+if ($_REQUEST["id"] != -1)
 	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Löschen"); ?></button>
-	&nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp;
+	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
 	<?PHP }
 ?>
 <button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
