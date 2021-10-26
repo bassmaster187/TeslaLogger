@@ -1626,6 +1626,9 @@ WHERE
         {
             try
             {
+                if (Double.IsNaN(charge_energy_added))
+                    return;
+
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();

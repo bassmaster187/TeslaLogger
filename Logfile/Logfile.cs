@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Web;
 
 namespace TeslaLogger
 {
@@ -9,6 +12,8 @@ namespace TeslaLogger
         private static bool WriteToLogfile = false;
         private static string _logfilepath = null;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
+
+        public static HttpClient httpclient_teslalogger_de = new HttpClient();
         static Logfile()
         {
             if (IsDocker())
@@ -32,6 +37,9 @@ namespace TeslaLogger
 
         public static void Log(string text)
         {
+            if (text.Contains("SqlException"))
+                ExternalLog(text);
+
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
             Console.WriteLine(temp);
 
@@ -180,6 +188,9 @@ namespace TeslaLogger
 
         public static void WriteException(string temp)
         {
+            if (temp.Contains("SqlException"))
+                ExternalLog(temp);
+
             string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
 
             string filepath = Path.Combine(GetExecutingPath(), filename);
@@ -256,6 +267,30 @@ namespace TeslaLogger
             }
 
             return false;
+        }
+
+        internal static void ExternalLog(string text)
+        {
+            try
+            {
+                text = "V:" + Assembly.GetEntryAssembly().GetName().Version + " - " + text;
+                var c = httpclient_teslalogger_de;
+
+                UriBuilder b = new UriBuilder("https://teslalogger.de/log.php");
+                b.Port = -1;
+                var q = HttpUtility.ParseQueryString(b.Query);
+                q["t"] = text;
+                b.Query = q.ToString();
+                string url = b.ToString();
+
+                var result = c.GetAsync(url).Result;
+                var resultContent = result.Content.ReadAsStringAsync().Result;
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("Exception in ExternalLog " + ex.Message);
+            }
         }
     }
 }

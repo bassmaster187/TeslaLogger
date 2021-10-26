@@ -3067,29 +3067,70 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
-                        from pos    
-                        left join chargingstate on pos.id = chargingstate.pos
-                        where pos.id in (SELECT Pos FROM chargingstate) or pos.id in (SELECT StartPos FROM drivestate) or pos.id in (SELECT EndPos FROM drivestate)", con))
+
+                    using (MySqlCommand cmdBucket = new MySqlCommand(@"SELECT distinct Pos FROM chargingstate union distinct SELECT StartPos FROM drivestate union distinct SELECT EndPos FROM drivestate order by Pos", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        int t2 = Environment.TickCount - t;
-                        Logfile.Log($"UpdateAllPOIAddresses Select {t2}ms");
+                        var bucketdr = cmdBucket.ExecuteReader();
+                        var loop = true;
 
-                        while (dr.Read())
+                        do
                         {
-                            count = UpdatePOIAdress(count, dr);
-                        }
-                    }
-                }
+                            StringBuilder bucket = new StringBuilder();
+                            for (int x = 0; x < 100; x++)
+                            {
+                                if (!bucketdr.Read())
+                                {
+                                    loop = false;
+                                    break;
+                                }
 
-                t = Environment.TickCount - t;
-                Logfile.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+                                if (bucket.Length > 0)
+                                    bucket.Append(",");
+
+                                string posid = bucketdr[0].ToString();
+                                bucket.Append(posid);
+                            }
+
+                            count = UpdateAllPOIAddresses(count, bucket.ToString());
+                        }
+                        while (loop);
+                    }
+
+
+                    t = Environment.TickCount - t;
+                    Logfile.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+                }
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static int UpdateAllPOIAddresses(int count, string bucket)
+        {
+            if (bucket.Length == 0)
+                return count;
+
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
+                        from pos    
+                        left join chargingstate on pos.id = chargingstate.pos
+                        where pos.id in (" + bucket + ")", con))
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        count = UpdatePOIAdress(count, dr);
+                    }
+                }
+            }
+
+            return count;
         }
 
         internal void UpdateLastChargingAdress()
