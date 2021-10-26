@@ -2852,39 +2852,6 @@ WHERE
         {
             try
             {
-                /*
-                if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
-                    return;
-                    */
-
-                int startid = 1;
-                int count = 0;
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude > 8000", 600);
-                if (count > 0)
-                {
-                    Logfile.Log($"Positions above 8000m updated: {count}");
-                }
-
-                count = ExecuteSQLQuery($"update pos set altitude=null where altitude < -428", 600);
-                if (count > 0)
-                {
-                    Logfile.Log($"Positions below -428m updated: {count}");
-                }
-
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT max(id) FROM pos where altitude > 0", con))
-                    {
-                        object o = cmd.ExecuteScalar();
-
-                        if (o != null && o != DBNull.Value)
-                        {
-                            startid = Convert.ToInt32(o);
-                        }
-                    }
-                }
-
                 foreach (string f in System.IO.Directory.EnumerateFiles(FileManager.GetSRTMDataPath(), "*.txt"))
                 {
                     try
@@ -2892,7 +2859,6 @@ WHERE
                         if (new System.IO.FileInfo(f).Length < 100)
                         {
                             Logfile.Log("Found Empty SRTM File: " + f);
-                            startid = 1;
 
                             System.IO.File.Delete(f);
                         }
@@ -2902,8 +2868,6 @@ WHERE
                         Logfile.Log(ex.ToString());
                     }
                 }
-
-                // TODO UpdateTripElevation(startid, GetMaxPosid(this)); // get elevation for all points
             }
             catch (Exception ex)
             {
