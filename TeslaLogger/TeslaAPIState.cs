@@ -114,16 +114,26 @@ namespace TeslaLogger
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     _ = car.GetWebHelper().GetOdometerAsync();
                     break;
+                case "is_user_present":
+                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
+                    if (oldvalue is bool && (bool)oldvalue == true && newvalue is bool && (bool)newvalue == false)
+                    {
+                        car.DriveFinished();
+                    }
+                    // car was used, eg. door opened/closed
+                    if (oldvalue != null && newvalue != null && oldvalue != newvalue)
+                    {
+                        car.SetLastCarUsed(DateTime.Now);
+                    }
+                    break;
                 case "locked":
                 case "charge_port_door_open":
-                case "is_user_present":
                 case "df":
                 case "pf":
                 case "dr":
                 case "pr":
                 case "ft":
                 case "rt":
-                    Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
                     // car was used, eg. door opened/closed
                     if (oldvalue != null && newvalue != null && oldvalue != newvalue)
                     {

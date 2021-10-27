@@ -900,7 +900,7 @@ namespace TeslaLogger
             Log("TOKEN: " + Tools.ObfuscateString(webhelper.Tesla_token));
         }
 
-        private void DriveFinished()
+        internal void DriveFinished()
         {
             // finish trip
             SetCurrentState(TeslaState.Start);
