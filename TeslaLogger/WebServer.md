@@ -82,6 +82,10 @@ Allowed commands:
 * sentry_mode_off
 * sentry_mode_toggle
 * wake_up
+* set_charge_limit
+* charge_start
+* charge_stop
+* set_charging_amps
 
 ### /command/_CarID_/_name_?_parameter_
 
