@@ -1,3 +1,6 @@
+# Version 1.49.0
+- Bugfixes and Release
+
 # Version 1.48.18
 - Bugfixes
 
