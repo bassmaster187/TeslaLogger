@@ -37,8 +37,8 @@ namespace TeslaLogger
 
         public static void Log(string text)
         {
-            if (text.Contains("SqlException"))
-                ExternalLog(text);
+            
+            ExternalLog(text);
 
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
             Console.WriteLine(temp);
@@ -188,8 +188,7 @@ namespace TeslaLogger
 
         public static void WriteException(string temp)
         {
-            if (temp.Contains("SqlException"))
-                ExternalLog(temp);
+            ExternalLog(temp);
 
             string filename = "Exception/Exception_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
 
@@ -273,6 +272,12 @@ namespace TeslaLogger
         {
             try
             {
+                if (!text.Contains("SqlException"))
+                    return;
+
+                if (text.Contains("Unable to connect to any of the specified MySQL hosts"))
+                    return;
+
                 text = "V:" + Assembly.GetEntryAssembly().GetName().Version + " - " + text;
                 var c = httpclient_teslalogger_de;
 

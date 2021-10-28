@@ -29,6 +29,7 @@ namespace TeslaLogger
         public string Tesla_vehicle_id = "";
         public string Tesla_Streamingtoken = "";
         public string option_codes = "";
+        public string vehicle_config = "";
         public bool is_sentry_mode = false;
         public string fast_charger_brand = "";
         public string fast_charger_type = "";
@@ -1705,10 +1706,13 @@ namespace TeslaLogger
                         if (state == "offline" || state == "asleep")
                             return state;
 
-                        string resultContent2 = GetCommand("vehicle_config").Result;
+                        string resultContent2 = GetCommand("vehicle_config").Result;                       
 
                         if (resultContent2 == "INSERVICE")
                             return "INSERVICE";
+
+                        if (resultContent2?.Length > 0)
+                            vehicle_config = resultContent2;
 
                         dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
                         dynamic jBadgeResult = jBadge["response"];
@@ -1794,7 +1798,12 @@ namespace TeslaLogger
                             WriteCarSettings("0.139", "M3 LR FL");
                             return;
                         }
-                        else if (car.trim_badging == "p74d")
+                        else if (car.trim_badging == "p74d" && year < 2021)
+                        {
+                            WriteCarSettings("0.152", "M3 LR P");
+                            return;
+                        }
+                        if (car.trim_badging == "p74d" && year >= 2021)
                         {
                             WriteCarSettings("0.158", "M3 LR P 2021");
                             return;
@@ -3776,7 +3785,9 @@ namespace TeslaLogger
                     name += " Raven";
                 }
 
-
+                var obfuscatedVin = car.vin ?? "";
+                if (obfuscatedVin?.Length > 11)
+                    obfuscatedVin = obfuscatedVin.Substring(0, 11);
 
                 Dictionary<string, string> d = new Dictionary<string, string>
                 {
@@ -3787,7 +3798,7 @@ namespace TeslaLogger
                     { "bt", car.Battery },
                     { "n", name },
                     { "eff", car.Wh_TR.ToString(Tools.ciEnUS) },
-                    { "oc", option_codes },
+                    { "oc", vehicle_config },
 
                     { "db_eff", car.DB_Wh_TR.ToString(Tools.ciEnUS)},
                     { "db_eff_cnt", car.DB_Wh_TR_count.ToString(Tools.ciEnUS) },
@@ -3822,8 +3833,8 @@ namespace TeslaLogger
                     { "AWD" , car.AWD ? "1" : "0" },
                     { "MIC" , car.MIC ? "1" : "0" },
                     { "year" , car.year.ToString() },
-                    { "motor" , car.motor }
-
+                    { "motor" , car.motor } ,
+                    { "vin" , obfuscatedVin} // just the first 11 chars of the vin will be sent. The serial number is truncated!
                 };
 
                 using (FormUrlEncodedContent content = new FormUrlEncodedContent(d))

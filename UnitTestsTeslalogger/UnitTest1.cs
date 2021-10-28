@@ -210,7 +210,7 @@ namespace UnitTestsTeslalogger
             wh.car.vin = "5YJ3F7EC1LFXXXXXX";
             wh.car.car_type = "model3";
             wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.158;
+            wh.car.DB_Wh_TR = 0.152;
             wh.car.trim_badging = "";
             wh.UpdateEfficiency();
 
