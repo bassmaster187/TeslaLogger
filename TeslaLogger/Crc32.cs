@@ -18,6 +18,7 @@ namespace DamienG.Security.Cryptography
     /// interface or remember that the result of one Compute call needs to be ~ (XOR) before
     /// being passed in as the seed for the next Compute call.
     /// </remarks>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     public sealed class Crc32 : HashAlgorithm
     {
         public const UInt32 DefaultPolynomial = 0xedb88320u;
@@ -50,6 +51,11 @@ namespace DamienG.Security.Cryptography
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
+            if (array is null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
+
             hash = CalculateHash(table, hash, array, ibStart, cbSize);
         }
 
@@ -74,6 +80,11 @@ namespace DamienG.Security.Cryptography
 
         public static UInt32 Compute(UInt32 polynomial, UInt32 seed, byte[] buffer)
         {
+            if (buffer is null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
+
             return ~CalculateHash(InitializeTable(polynomial), seed, buffer, 0, buffer.Length);
         }
 
