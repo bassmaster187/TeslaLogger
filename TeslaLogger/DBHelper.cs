@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -16,6 +15,8 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
+    [SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class DBHelper
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
@@ -37,9 +38,9 @@ namespace TeslaLogger
             string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
 ? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
 : ApplicationSettings.Default.DBConnectionstring;
-            if (DBConnectionstring.ToLower().Contains("charset="))
+            if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("charset="))
             {
-                Match m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+?);");
+                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "charset(=.+?);");
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
                     DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
@@ -47,7 +48,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    m = Regex.Match(DBConnectionstring.ToLower(), "charset(=.+)$");
+                    m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "charset(=.+)$");
                     if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                     {
                         DBConnectionstring = DBConnectionstring.Replace(m.Groups[1].Captures[0].ToString(), "=utf8mb4");
@@ -55,28 +56,28 @@ namespace TeslaLogger
                     }
                 }
             }
-            if (!DBConnectionstring.ToLower().Contains("charset="))
+            if (!DBConnectionstring.ToLower(Tools.ciEnUS).Contains("charset="))
             {
-                if (!DBConnectionstring.EndsWith(";"))
+                if (!DBConnectionstring.EndsWith(";", StringComparison.Ordinal))
                 {
                     DBConnectionstring += ";";
                 }
                 DBConnectionstring += "charset=utf8mb4";
             }
-            if (DBConnectionstring.ToLower().Contains("database="))
+            if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("database="))
             {
-                Match m = Regex.Match(DBConnectionstring.ToLower(), "database=(.+?);");
+                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "database=(.+?);");
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
                     Database = m.Groups[1].Captures[0].ToString();
                 }
             }
-            if (obfuscate && DBConnectionstring.ToLower().Contains("password="))
+            if (obfuscate && DBConnectionstring.ToLower(Tools.ciEnUS).Contains("password="))
             {
-                Match m = Regex.Match(DBConnectionstring.ToLower(), "password=(.+?);");
+                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "password=(.+?);");
                 if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
                 {
-                    return DBConnectionstring.ToLower().Replace(string.Concat("password=", m.Groups[1].Captures[0].ToString()), string.Concat("password=", Tools.ObfuscateString(m.Groups[1].Captures[0].ToString())));
+                    return DBConnectionstring.ToLower(Tools.ciEnUS).Replace(string.Concat("password=", m.Groups[1].Captures[0].ToString()), string.Concat("password=", Tools.ObfuscateString(m.Groups[1].Captures[0].ToString())));
                 }
             }
             _DBConnectionstring = DBConnectionstring;
@@ -101,7 +102,10 @@ namespace TeslaLogger
                 con.Open();
                 foreach (HttpStatusCode hsc in Enum.GetValues(typeof(HttpStatusCode)))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("insert IGNORE httpcodes (id, text) values (@id, @text)", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT IGNORE
+    httpcodes(id, TEXT)
+VALUES(@id, @text)", con))
                     {
                         cmd.Parameters.AddWithValue("@id", (int)hsc);
                         cmd.Parameters.AddWithValue("@text", hsc.ToString());
@@ -116,7 +120,14 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("update state set EndDate = @enddate, EndPos = @EndPos where EndDate is null and CarID=@CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    state
+SET
+    EndDate = @enddate,
+    EndPos = @EndPos
+WHERE
+    EndDate IS NULL AND CarID = @CarID", con))
                 {
                     cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@EndPos", maxPosid);
@@ -155,7 +166,13 @@ namespace TeslaLogger
             {
                 con.Open();
 
-                using (MySqlCommand cmd1 = new MySqlCommand("select state from state where EndDate is null and CarID=@carid", con))
+                using (MySqlCommand cmd1 = new MySqlCommand(@"
+SELECT
+    state
+FROM
+    state
+WHERE
+    EndDate IS NULL AND CarID = @carid", con))
                 {
                     cmd1.Parameters.AddWithValue("@carid", car.CarInDB);
                     MySqlDataReader dr = cmd1.ExecuteReader();
@@ -173,7 +190,20 @@ namespace TeslaLogger
 
                     car.Log("state: " + state);
 
-                    using (MySqlCommand cmd = new MySqlCommand("insert state (StartDate, state, StartPos, CarID) values (@StartDate, @state, @StartPos, @CarID)", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    state(
+        StartDate,
+        state,
+        StartPos,
+        CarID
+    )
+VALUES(
+    @StartDate,
+    @state,
+    @StartPos,
+    @CarID
+)", con))
                     {
                         cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@state", state);
@@ -209,7 +239,20 @@ namespace TeslaLogger
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert mothership (ts, commandid, duration, httpcode) values (@ts, @commandid, @duration, @httpcode)", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    mothership(
+        ts,
+        commandid,
+        duration,
+        httpcode
+    )
+VALUES(
+    @ts,
+    @commandid,
+    @duration,
+    @httpcode
+)", con))
                 {
                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                     cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
@@ -232,7 +275,18 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total where id= @id", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    cost_total = @cost_total,
+    cost_currency = @cost_currency,
+    cost_per_kwh = @cost_per_kwh,
+    cost_per_session = @cost_per_session,
+    cost_per_minute = @cost_per_minute,
+    cost_idle_fee_total = @cost_idle_fee_total
+WHERE
+    id = @id", con))
                     {
 
                         if (j["cost_total"] == null || j["cost_total"] == "" || j["cost_total"] == "0" || j["cost_total"] == "0.00")
@@ -275,7 +329,13 @@ namespace TeslaLogger
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
                         con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand($"update {table} set carid = 1 where carid is null", con))
+                        using (MySqlCommand cmd = new MySqlCommand($@"
+UPDATE
+    {table}
+SET
+    carid = 1
+WHERE
+    carid IS NULL", con))
                         {
                             cmd.CommandTimeout = 6000;
                             rows = cmd.ExecuteNonQuery();
@@ -305,7 +365,14 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT refresh_token, tesla_token FROM cars where id = @CarID", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    refresh_token,
+    tesla_token
+FROM
+    cars
+WHERE
+    id = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
@@ -342,7 +409,14 @@ namespace TeslaLogger
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set ABRP_token = @token, ABRP_mode = @mode where id = @CarID", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    cars
+SET
+    ABRP_token = @token,
+    ABRP_mode = @mode
+WHERE
+    id = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@token", abrp_token);
@@ -363,9 +437,16 @@ namespace TeslaLogger
         {
             try
             {
-                string sql = @"update charging set charger_actual_current = charger_power * 1000 / charger_voltage
-                     where charger_voltage > 250 and charger_power > 1 and charger_phases = 1 and charger_actual_current = 0
-                     order by id desc";
+                string sql = @"
+UPDATE
+    charging
+SET
+    charger_actual_current = charger_power * 1000 / charger_voltage
+WHERE
+    charger_voltage > 250 AND charger_power > 1 AND charger_phases = 1 AND charger_actual_current = 0
+ORDER BY
+    id
+DESC";
 
                 ExecuteSQLQuery(sql, 120);
             }
@@ -387,11 +468,11 @@ namespace TeslaLogger
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  id
+    id
 FROM
-  chargingstate
+    chargingstate
 WHERE
-  CarID = @CarID", con))
+    CarID = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         Tools.DebugLog(cmd);
