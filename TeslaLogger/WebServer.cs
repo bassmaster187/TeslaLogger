@@ -434,7 +434,7 @@ namespace TeslaLogger
                         abrp_token = r["abrp_token"];
                     }
 
-                    if (!car.dbHelper.SetABRP(abrp_token, abrp_mode))
+                    if (!car.DbHelper.SetABRP(abrp_token, abrp_mode))
                         WriteString(response, "Wrong ABRP Token!");
                     else
                         WriteString(response, "OK");
@@ -454,7 +454,7 @@ namespace TeslaLogger
                 Car car = Car.GetCarByID(CarID);
                 if (car != null)
                 {
-                    car.dbHelper.GetABRP(out string abrp_token, out int abrp_mode);
+                    car.DbHelper.GetABRP(out string abrp_token, out int abrp_mode);
                     var t = new
                     {
                         token = abrp_token,
@@ -476,7 +476,7 @@ namespace TeslaLogger
             int endPosID = 0;
             int width = 240;
             int height = 0;
-            StaticMapProvider.MapType type = StaticMapProvider.MapType.Trip;
+            StaticMapProvider.MapType type = StaticMapProvider.MapType.Trip; // TODO
             StaticMapProvider.MapMode mode = StaticMapProvider.MapMode.Regular;
             if (request.QueryString.HasKeys())
             {
@@ -569,7 +569,7 @@ namespace TeslaLogger
                 {
                     WriteString(response, "Error in map request");
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     // ignore
                 }
@@ -599,8 +599,8 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        car.passwortinfo.Append("Send MFA to Tesla server<br>");
-                        car.MFA_Code = mfa;
+                        car.Passwortinfo.Append("Send MFA to Tesla server<br>");
+                        car.MFACode = mfa;
                         car.waitForMFACode = false;
                     }
                 }
@@ -620,8 +620,8 @@ namespace TeslaLogger
                     Car car = Car.GetCarByID(CarID);
                     if (car != null)
                     {
-                        car.passwortinfo.Append($"Set Captcha: {captcha}<br>");
-                        car.Captcha_String = captcha;
+                        car.Passwortinfo.Append($"Set Captcha: {captcha}<br>");
+                        car.CaptchaString = captcha;
                     }
                 }
             }
@@ -929,7 +929,7 @@ namespace TeslaLogger
 
             var c = Car.GetCarByID(id);
             if (c != null)
-                WriteString(response, c.passwortinfo.ToString());
+                WriteString(response, c.Passwortinfo.ToString());
             else
                 WriteString(response, "CarId not found: " + id);
         }
@@ -993,22 +993,22 @@ namespace TeslaLogger
                     c.webhelper.UpdateEfficiency();
 
                     sb.Append("ModelName:").Append(c.ModelName).Append("\r\n");
-                    sb.Append("Wh_TR:").Append(c.Wh_TR).Append("\r\n").Append("\r\n");
+                    sb.Append("Wh_TR:").Append(c.WhTR).Append("\r\n").Append("\r\n");
 
-                    int maxRange = c.dbHelper.GetAvgMaxRage();
+                    int maxRange = c.DbHelper.GetAvgMaxRage();
                     sb.Append("AvgMaxRage:").Append(maxRange).Append("\r\n").Append("\r\n");
 
-                    sb.Append("display_name:").Append(c.display_name).Append("\r\n");
-                    sb.Append("vin:").Append(c.vin.Substring(0,11)).Append("XXXXXX").Append("\r\n");
-                    sb.Append("car_type:").Append(c.car_type).Append("\r\n");
-                    sb.Append("car_special_type:").Append(c.car_special_type).Append("\r\n");
-                    sb.Append("trim_badging:").Append(c.trim_badging).Append("\r\n");
+                    sb.Append("display_name:").Append(c.DisplayName).Append("\r\n");
+                    sb.Append("vin:").Append(c.Vin.Substring(0,11)).Append("XXXXXX").Append("\r\n");
+                    sb.Append("car_type:").Append(c.CarType).Append("\r\n");
+                    sb.Append("car_special_type:").Append(c.CarSpecialType).Append("\r\n");
+                    sb.Append("trim_badging:").Append(c.TrimBadging).Append("\r\n");
                     
                     c.GetTeslaAPIState().GetBool("has_ludicrous_mode", out bool has_ludicrous_mode);
                     sb.Append("has_ludicrous_mode:").Append(has_ludicrous_mode).Append("\r\n");
-                    sb.Append("DB_Wh_TR:").Append(c.DB_Wh_TR).Append("\r\n").Append("\r\n");
+                    sb.Append("DB_Wh_TR:").Append(c.DBWhTR).Append("\r\n").Append("\r\n");
 
-                    Tools.VINDecoder(c.vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor);
+                    Tools.VINDecoder(c.Vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor);
                     sb.Append("VIN Year:").Append(year).Append("\r\n");
                     sb.Append("VIN carType:").Append(carType).Append("\r\n");
                     sb.Append("VIN AWD:").Append(AWD).Append("\r\n");
@@ -1016,7 +1016,7 @@ namespace TeslaLogger
                     sb.Append("VIN battery:").Append(battery).Append("\r\n");
                     sb.Append("VIN motor:").Append(motor).Append("\r\n");
 
-                    sb.Append("Voltage at 50% SOC:").Append(c.dbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende)).Append("V Date:").Append(startdate).Append("\r\n");
+                    sb.Append("Voltage at 50% SOC:").Append(c.DbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende)).Append("V Date:").Append(startdate).Append("\r\n");
 
                     string vehicle_config = "";
 
@@ -1057,7 +1057,7 @@ namespace TeslaLogger
 
         private static void Dev_DumpJSON(HttpListenerResponse response, bool dumpJSON)
         {
-            foreach (Car car in Car.allcars)
+            foreach (Car car in Car.Allcars)
             {
                 if (car.GetTeslaAPIState().DumpJSON != dumpJSON)
                 {
@@ -1096,7 +1096,7 @@ namespace TeslaLogger
                                     WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
                                     break;
                                 case "auto_conditioning_toggle":
-                                    if (car.currentJSON.current_is_preconditioning)
+                                    if (car.CurrentJSON.current_is_preconditioning)
                                     {
                                         WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
                                     }
@@ -1127,7 +1127,7 @@ namespace TeslaLogger
                                 case "set_charge_limit":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
                                     {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
                                         if (addr != null)
                                         {
                                             car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
@@ -1145,7 +1145,7 @@ namespace TeslaLogger
                                 case "set_charging_amps":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
                                     {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
                                         if (addr != null)
                                         {
                                             car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
@@ -1220,13 +1220,13 @@ namespace TeslaLogger
                             if (c != null)
                             {
                                 c.ExitTeslaLogger("Reconnect!");
-                                c.passwortinfo = new StringBuilder();
+                                c.Passwortinfo = new StringBuilder();
 
                                 c.ThreadJoin();
 
                                 Logfile.Log("Start Reconnect!");
 
-                                Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.car_type, c.car_special_type, c.trim_badging, c.display_name, c.vin, c.TaskerHash, c.Wh_TR);
+                                Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.CarType, c.CarSpecialType, c.TrimBadging, c.DisplayName, c.Vin, c.TaskerHash, c.WhTR);
                             }
 
                             WriteString(response, "OK");
@@ -1404,7 +1404,7 @@ namespace TeslaLogger
                 },
             };
 
-            foreach (Car car in Car.allcars)
+            foreach (Car car in Car.Allcars)
             {
                 Dictionary<string, string> carvalues = new Dictionary<string, string>
                 {
@@ -1567,7 +1567,7 @@ namespace TeslaLogger
 
             try
             {
-                Car c = Car.allcars.FirstOrDefault(r => r.waitForMFACode);
+                Car c = Car.Allcars.FirstOrDefault(r => r.waitForMFACode);
                 if (c != null)
                 {
                     responseString = "WAITFORMFA:" + c.CarInDB;

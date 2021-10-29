@@ -145,7 +145,7 @@ namespace TeslaLogger
                     // charging_state Charging -> Complete - evaluate +occ special flag
                     if (oldvalue.Equals("Charging") && newvalue.Equals("Complete"))
                     {
-                        Address addr = Geofence.GetInstance().GetPOI(car.currentJSON.latitude, car.currentJSON.longitude, false);
+                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
                         if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
                             foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                             {
@@ -173,7 +173,7 @@ namespace TeslaLogger
                     }
                     else if (newvalue.Equals("Disconnected"))
                     {
-                        car.dbHelper.UpdateUnplugDate();
+                        car.DbHelper.UpdateUnplugDate();
                     }
                     break;
                 case "battery_level":
@@ -181,8 +181,8 @@ namespace TeslaLogger
                     if (car.IsParked() && !car.IsCharging())
                     {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} ({oldTS}) -> {newvalue} ({newTS})");
-                        Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{int.Parse(newvalue.ToString())}, speed:0, charging:false, power:0, lat:{car.currentJSON.latitude}, lon:{car.currentJSON.longitude})");
-                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString()), 0, false, 0, car.currentJSON.latitude, car.currentJSON.longitude);
+                        Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{int.Parse(newvalue.ToString(), Tools.ciEnUS)}, speed:0, charging:false, power:0, lat:{car.CurrentJSON.latitude}, lon:{car.CurrentJSON.longitude})");
+                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString(), Tools.ciEnUS), 0, false, 0, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
                     }
                     break;
                 default:

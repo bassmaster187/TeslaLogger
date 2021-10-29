@@ -967,7 +967,7 @@ CREATE TABLE superchargerstate(
 
                 if (!shareDataOnStartup && Tools.IsShareData())
                 {
-                    foreach (Car c in Car.allcars)
+                    foreach (Car c in Car.Allcars)
                     {
                         shareDataOnStartup = true;
                         Logfile.Log("ShareData turned on!");
@@ -1695,9 +1695,9 @@ CREATE TABLE superchargerstate(
         {
             try
             {
-                for (int x = 0; x < Car.allcars.Count; x++)
+                for (int x = 0; x < Car.Allcars.Count; x++)
                 {
-                    Car c = Car.allcars[x];
+                    Car c = Car.Allcars[x];
                     if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
                         return;
                 }

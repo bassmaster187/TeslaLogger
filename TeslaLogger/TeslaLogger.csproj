@@ -69,7 +69,6 @@
     <Compile Include="CaptchaSolver.cs" />
     <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
-    <Compile Include="CarSettings.cs" />
     <Compile Include="Crc32.cs" />
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />

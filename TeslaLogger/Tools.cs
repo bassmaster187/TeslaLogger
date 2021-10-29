@@ -23,8 +23,8 @@ namespace TeslaLogger
     public class Tools
     {
 
-        public static System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
-        public static System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
+        public static readonly System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
+        public static readonly System.Globalization.CultureInfo ciDeDE = new System.Globalization.CultureInfo("de-DE");
         private static int _startSleepingHour = -1;
         private static int _startSleepingMinutes = -1;
         private static string _power = "hp";
@@ -1367,7 +1367,7 @@ WHERE
         private static void HousekeepingCallback(CacheEntryRemovedArguments arguments)
         {
             bool allCarsAsleep = true;
-            foreach (Car car in Car.allcars)
+            foreach (Car car in Car.Allcars)
             {
                 // first car to return false will set allCarsAsleep to false and it'll stay false
                 allCarsAsleep &= car.TLUpdatePossible();

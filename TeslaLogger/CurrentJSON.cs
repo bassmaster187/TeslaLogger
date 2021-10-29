@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     public class CurrentJSON
     {
-        public static Dictionary<int, string> jsonStringHolder = new Dictionary<int, string>();
-
+        public static readonly Dictionary<int, string> jsonStringHolder = new Dictionary<int, string>();
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
@@ -18,8 +19,7 @@ namespace TeslaLogger
         public double current_odometer = 0;
         public double current_ideal_battery_range_km = 0;
         public double current_battery_range_km = 0;
-        public double current_outside_temp = 0;
-        public double current_inside_temp = 0;
+        public double current_outside_temperature = 0;
         public int current_battery_level = 0;
 
         public int current_charger_voltage = 0;
@@ -150,7 +150,7 @@ namespace TeslaLogger
                    { "odometer", current_odometer },
                    { "ideal_battery_range_km", current_ideal_battery_range_km},
                    { "battery_range_km", current_battery_range_km},
-                   { "outside_temp", current_outside_temp},
+                   { "outside_temp", current_outside_temperature},
                    { "battery_level", current_battery_level},
                    { "charger_voltage", current_charger_voltage},
                    { "charger_phases", current_charger_phases},
@@ -162,14 +162,14 @@ namespace TeslaLogger
                    { "time_to_full_charge", current_time_to_full_charge},
                    { "car_version", current_car_version },
                    { "trip_start", current_trip_start.ToString("t",Tools.ciDeDE) },
-                   { "trip_start_dt", current_trip_start.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ") },
+                   { "trip_start_dt", current_trip_start.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", Tools.ciEnUS) },
                    { "trip_max_speed", current_trip_max_speed },
                    { "trip_max_power", current_trip_max_power },
                    { "trip_duration_sec", duration },
                    { "trip_kwh", trip_kwh },
                    { "trip_avg_kwh", trip_avg_wh },
                    { "trip_distance", distance },
-                   { "ts", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")},
+                   { "ts", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ", Tools.ciEnUS)},
                    { "latitude", latitude },
                    { "longitude", longitude },
                    { "charge_limit_soc", charge_limit_soc},
@@ -179,7 +179,7 @@ namespace TeslaLogger
                    { "sentry_mode", current_is_sentry_mode },
                    { "country_code", current_country_code },
                    { "state", current_state },
-                   { "display_name", car.display_name},
+                   { "display_name", car.DisplayName},
                    { "heading", heading}
                 };
 

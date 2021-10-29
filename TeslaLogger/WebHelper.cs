@@ -129,7 +129,7 @@ namespace TeslaLogger
                     if (reply.Contains("not found") || reply.Contains("never!"))
                     {
                         Log("LastTaskerToken not found - Stop using fast TaskerToken request! Reply: " + reply);
-                        car.useTaskerToken = false;
+                        car.UseTaskerToken = false;
                         return;
                     }
 
@@ -138,14 +138,14 @@ namespace TeslaLogger
                     if (ts.TotalDays > 2)
                     {
                         Log("LastTaskerToken: " + reply + " Stop using fast TaskerToken request!");
-                        car.useTaskerToken = false;
+                        car.UseTaskerToken = false;
                     }
                     else
                     {
-                        if (!car.useTaskerToken)
+                        if (!car.UseTaskerToken)
                         {
                             Log("LastTaskerToken: " + reply + " Start using fast TaskerToken request!");
-                            car.useTaskerToken = true;
+                            car.UseTaskerToken = true;
                         }
                     }
                 }
@@ -291,7 +291,7 @@ namespace TeslaLogger
 
             try
             {
-                car.passwortinfo.Append("Start getting Token<br>");
+                car.Passwortinfo.Append("Start getting Token<br>");
 
                 string tempToken = UpdateTeslaTokenFromRefreshToken();
 
@@ -309,14 +309,14 @@ namespace TeslaLogger
                  
                 if (car.TeslaName.Length == 0 || !car.TeslaName.Contains("@"))
                 {
-                    car.passwortinfo.Append("Car inactive!<br>");
+                    car.Passwortinfo.Append("Car inactive!<br>");
                     Log("Car inactive");
                     throw new Exception("Car inactive");
                 }
 
                 if (car.TeslaName.Length == 0 || car.TeslaPasswort.Length == 0)
                 {
-                    car.passwortinfo.Append("ERROR: NO Credentials!<br>");
+                    car.Passwortinfo.Append("ERROR: NO Credentials!<br>");
                     Log("NO Credentials");
                     throw new Exception("NO Credentials");
                 }
@@ -383,7 +383,7 @@ namespace TeslaLogger
 
                     if (resultContent.Contains("authorization_required"))
                     {
-                        car.passwortinfo.Append("ERROR: Wrong Credentials!<br>");
+                        car.Passwortinfo.Append("ERROR: Wrong Credentials!<br>");
 
                         Log("Wrong Credentials");
 
@@ -413,10 +413,10 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
+                car.Passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
                 
                 if (ex.InnerException != null)
-                    car.passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
+                    car.Passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
 
                 if (ex.Message != "NO Credentials")
                     car.ExternalLog("GetToken: " + ex.ToString());
@@ -430,7 +430,7 @@ namespace TeslaLogger
 
         private void GetCaptcha()
         {
-            car.Captcha_String = null;
+            car.CaptchaString = null;
             HttpClient client = GetDefaultHttpClientForAuthentification();
             string url = authHost + "/captcha";
             HttpResponseMessage result = client.GetAsync(url).Result;
@@ -441,14 +441,14 @@ namespace TeslaLogger
 
         private string UpdateTeslaTokenFromRefreshToken()
         {
-            string refresh_token = car.dbHelper.GetRefreshToken(out string tesla_token);
+            string refresh_token = car.DbHelper.GetRefreshToken(out string tesla_token);
 
             if (tesla_token.StartsWith("cn-"))
                 authHost = "https://auth.tesla.cn";
 
             if (String.IsNullOrEmpty(refresh_token))
             {
-                car.passwortinfo.Append("No Refresh Token<br>");
+                car.Passwortinfo.Append("No Refresh Token<br>");
                 Log("No Refresh Token");
                 return "";
             }
@@ -503,7 +503,7 @@ namespace TeslaLogger
                             if (new_refresh_token == refresh_token)
                                 Log("refresh_token not changed");
                             else
-                                car.dbHelper.UpdateRefreshToken(new_refresh_token);
+                                car.DbHelper.UpdateRefreshToken(new_refresh_token);
 
                             return GetTokenAsync4(access_token);
                         }
@@ -566,13 +566,13 @@ namespace TeslaLogger
             d.Add("identity", car.TeslaName);
             d.Add("credential", car.TeslaPasswort);
             
-            if (car.Captcha_String != null)
-                d.Add("captcha", car.Captcha_String);
+            if (car.CaptchaString != null)
+                d.Add("captcha", car.CaptchaString);
 
-            if (car.ReCaptcha_Code != null)
+            if (car.ReCaptchaCode != null)
             {
-                d.Add("g-recaptcha-response", car.ReCaptcha_Code);
-                d.Add("recaptcha", car.ReCaptcha_Code);
+                d.Add("g-recaptcha-response", car.ReCaptchaCode);
+                d.Add("recaptcha", car.ReCaptchaCode);
             }
 
             string resultContent = "";
@@ -641,7 +641,7 @@ namespace TeslaLogger
                             return "NULL";
                         }
 
-                        car.passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
+                        car.Passwortinfo.Append("Waiting for Recaptcha solver. This may take up to one minute!<br>");
                         // car.passwortinfo.Append("*** try to use access token & refresh token instead of email & password!!! ***<br>");
                         car.Log("Waiting for Recaptcha solver!");
 
@@ -650,11 +650,11 @@ namespace TeslaLogger
                         string sitekey = cs.SearchForSitekey(resultContent);
 
                         cs.Send(sitekey, b.ToString());
-                        car.ReCaptcha_Code = cs.Get();
+                        car.ReCaptchaCode = cs.Get();
 
-                        if (car.ReCaptcha_Code != null)
+                        if (car.ReCaptchaCode != null)
                         {
-                            car.passwortinfo.Append("Recaptcha code received<br>");
+                            car.Passwortinfo.Append("Recaptcha code received<br>");
 
                             return GetTokenAsync2(code_challenge, mc, state, code_verifier, Referer, false);
                         }
@@ -662,13 +662,13 @@ namespace TeslaLogger
 
                     if (resultContent.Contains("Captcha does not match"))
                     {
-                        car.passwortinfo.Append("Captcha does not match !!!<br>");
+                        car.Passwortinfo.Append("Captcha does not match !!!<br>");
                         car.Log("Captcha does not match");
                     }
 
                     if (resultContent.Contains("Your account has been locked"))
                     {
-                        car.passwortinfo.Append("Your account has been locked!!!<br>");
+                        car.Passwortinfo.Append("Your account has been locked!!!<br>");
                         car.Log("Your account has been locked !!!");
                     }
 
@@ -683,7 +683,7 @@ namespace TeslaLogger
                         if (result.StatusCode == HttpStatusCode.OK && resultContent.Contains("passcode"))
                         {
                             isMFA = true;
-                            car.passwortinfo.Append("Wait for MFA code<br>");
+                            car.Passwortinfo.Append("Wait for MFA code<br>");
                             car.waitForMFACode = true;
                             code = WaitForMFA_Code(transaction_id, code_challenge, state);
 
@@ -692,7 +692,7 @@ namespace TeslaLogger
                         }
                         else
                         {
-                            car.passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
+                            car.Passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
                             car.Log("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!");
                             ExceptionWriter(null, resultContent);
                         }
@@ -702,7 +702,7 @@ namespace TeslaLogger
                     {
                         if (location == null)
                         {
-                            car.passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
+                            car.Passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
                             car.Log("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?");
                             // car.Log(resultContent);
                         }
@@ -724,9 +724,9 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.Message + "<br>");
+                car.Passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.Message + "<br>");
                 if (ex.InnerException != null)
-                    car.passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
+                    car.Passwortinfo.Append("Exception in GetTokenAsync2 !!!: " + ex.InnerException.Message + "<br>");
 
                 car.ExternalLog("GetTokenAsync2: " + ex.ToString());
 
@@ -766,7 +766,7 @@ namespace TeslaLogger
                 car.Log("Start waiting for captcha code !!!");
                 DateTime timeout = DateTime.UtcNow;
 
-                while (car.Captcha_String == null)
+                while (car.CaptchaString == null)
                 {
                     Thread.Sleep(10);
 
@@ -776,7 +776,7 @@ namespace TeslaLogger
                         car.Log("Wait for captcha code !!!");
                     }
                 }
-                car.Log("Captcha Code: " + car.Captcha_String);
+                car.Log("Captcha Code: " + car.CaptchaString);
             }
             finally
             {
@@ -797,7 +797,7 @@ namespace TeslaLogger
 
                 DateTime timeout = DateTime.UtcNow;
 
-                while (car.MFA_Code == null || car.MFA_Code.Length != 6)
+                while (car.MFACode == null || car.MFACode.Length != 6)
                 {
                     Thread.Sleep(10);
 
@@ -808,7 +808,7 @@ namespace TeslaLogger
                     }
                 }
 
-                car.Log("MFA Code: " + car.MFA_Code);
+                car.Log("MFA Code: " + car.MFACode);
 
                 // while (true)
                 {
@@ -819,7 +819,7 @@ namespace TeslaLogger
                     if (code.Length > 0)
                         return code;
 
-                    car.passwortinfo.Append("Code received from Tesla server<br>");
+                    car.Passwortinfo.Append("Code received from Tesla server<br>");
 
                     System.Threading.Thread.Sleep(500);
                 }
@@ -860,28 +860,28 @@ namespace TeslaLogger
             try
             {
                 var authentificatorDevices = jsonResult["data"];
-                car.passwortinfo.Append("Found " + authentificatorDevices.Length + " Authentificator Devices<br>");
+                car.Passwortinfo.Append("Found " + authentificatorDevices.Length + " Authentificator Devices<br>");
                         
                 for (int ad = 0; ad < authentificatorDevices.Length; ad++)
                 {
                     try
                     {
-                        car.passwortinfo.Append("Try Device:  " + jsonResult["data"][ad]["name"] + "<br>");
+                        car.Passwortinfo.Append("Try Device:  " + jsonResult["data"][ad]["name"] + "<br>");
                         factor_id = jsonResult["data"][ad]["id"];
                         string c = MFA2(code_challenge, state, transaction_id, factor_id);
 
                         if (c.Length > 10)
                         {
-                            car.passwortinfo.Append("factor_id received from Tesla server<br>");
+                            car.Passwortinfo.Append("factor_id received from Tesla server<br>");
                             return c;
                         }
                     }
                     catch (Exception ex)
                     {
-                        car.passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.Message + "<br>");
+                        car.Passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.Message + "<br>");
                                 
                         if (ex.InnerException != null)
-                            car.passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.InnerException.Message + "<br>");
+                            car.Passwortinfo.Append("Exception in MFA1 Try Device!!!: " + ex.InnerException.Message + "<br>");
 
                         car.Log("MFA1 ResultContent: " + resultContent);
                         car.Log(ex.ToString());
@@ -892,7 +892,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.passwortinfo.Append("Exception in MFA1 : "+ ex.Message + "<br>");
+                car.Passwortinfo.Append("Exception in MFA1 : "+ ex.Message + "<br>");
                 car.Log("MFA1 ResultContent: " + resultContent);
                 car.Log(ex.ToString());
                 ExceptionWriter(null, resultContent);
@@ -911,7 +911,7 @@ namespace TeslaLogger
 
             Dictionary<string, string> d = new Dictionary<string, string>();
             d.Add("factor_id", factor_id);
-            d.Add("passcode", car.MFA_Code);
+            d.Add("passcode", car.MFACode);
             d.Add("transaction_id", transaction_id);
 
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
@@ -933,9 +933,9 @@ namespace TeslaLogger
                     if ((bool)o)
                         return MFA3(code_challenge, state, transaction_id);
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
-                    car.passwortinfo.Append("Error: MFA2! <br>");
+                    car.Passwortinfo.Append("Error: MFA2! <br>");
                     car.Log("Error: MFA2 : " + resultContent);
                     ExceptionWriter(null, resultContent);
                 }
@@ -1036,7 +1036,7 @@ namespace TeslaLogger
                     if (Tools.IsPropertyExist(jsonResult, "error"))
                     {
                         string error = jsonResult["error"];
-                        car.passwortinfo.Append("Error: " + error + " <br>");
+                        car.Passwortinfo.Append("Error: " + error + " <br>");
                         car.Log("Error: GetTokenAsync3(): " + error);
                     }
                     else
@@ -1044,9 +1044,9 @@ namespace TeslaLogger
                         string refresh_token = jsonResult["refresh_token"];
                         access_token = jsonResult["access_token"];
 
-                        car.dbHelper.UpdateRefreshToken(refresh_token);
+                        car.DbHelper.UpdateRefreshToken(refresh_token);
 
-                        car.passwortinfo.Append("Access Token received. Everything is OK!!!<br>");
+                        car.Passwortinfo.Append("Access Token received. Everything is OK!!!<br>");
                     }
 
                     // car.Log(resultContent);
@@ -1056,7 +1056,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.passwortinfo.Append("Error: GetTokenAsync3! <br>");
+                car.Passwortinfo.Append("Error: GetTokenAsync3! <br>");
                 car.Log(ex.ToString());
 
                 ExceptionWriter(ex, resultContent);
@@ -1105,7 +1105,7 @@ namespace TeslaLogger
                     if (Tools.IsPropertyExist(jsonResult, "error"))
                     {
                         string error = jsonResult["error"];
-                        car.passwortinfo.Append("Error: " + error + " <br>");
+                        car.Passwortinfo.Append("Error: " + error + " <br>");
                         car.Log("Error: GetTokenAsync4(): " + error);
                         return "NULL";
                     }
@@ -1117,7 +1117,7 @@ namespace TeslaLogger
                         int expires_in = jsonResult["expires_in"];
 
                         Tesla_token = jsonResult["access_token"];
-                        car.dbHelper.UpdateTeslaToken();
+                        car.DbHelper.UpdateTeslaToken();
                         car.LoginRetryCounter = 0;
                         return Tesla_token;
                     }
@@ -1187,13 +1187,13 @@ namespace TeslaLogger
                     ideal_battery_range = battery_range;                    
                 }
 
-                car.currentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
+                car.CurrentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
 
                 string battery_level = r2["battery_level"].ToString();
-                if (battery_level != null && Convert.ToInt32(battery_level) != car.currentJSON.current_battery_level)
+                if (battery_level != null && Convert.ToInt32(battery_level) != car.CurrentJSON.current_battery_level)
                 {
-                    car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
-                    car.currentJSON.CreateCurrentJSON();
+                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.CurrentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
                 if (r2["charger_power"] != null)
@@ -1256,24 +1256,24 @@ namespace TeslaLogger
 
                 if (r2["charge_rate"] != null)
                 {
-                    car.currentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
+                    car.CurrentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
                 }
 
                 if (r2["charge_limit_soc"] != null)
                 {
-                    if (car.currentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
+                    if (car.CurrentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
                     {
-                        car.currentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
-                        car.currentJSON.CreateCurrentJSON();
+                        car.CurrentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
 
                 if (r2["time_to_full_charge"] != null)
                 {
-                    if (car.currentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
+                    if (car.CurrentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
                     {
-                        car.currentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
-                        car.currentJSON.CreateCurrentJSON();
+                        car.CurrentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
 
@@ -1297,7 +1297,7 @@ namespace TeslaLogger
                         Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {ts} / Date: {dtTimestamp}");
                         if (!lastCharging_State.Equals(charging_state))
                         {
-                            car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                            car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                         }
                         return double.TryParse(charger_power, out double dPowerkW) && dPowerkW >= 1.0;
                     }
@@ -1309,17 +1309,17 @@ namespace TeslaLogger
 
                 if (charging_state == "Charging")
                 {
-                    _ = SendDataToAbetterrouteplannerAsync(ts, car.currentJSON.current_battery_level, 0, true, power, car.currentJSON.latitude, car.currentJSON.longitude);
+                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
 
                     lastCharging_State = charging_state;
-                    car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                     return true;
                 }
                 else if (charging_state == "Complete")
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        car.dbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
                         Log("Charging Complete");
                     }
 
@@ -1416,9 +1416,9 @@ namespace TeslaLogger
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                     string display_name = r2["display_name"].ToString();
-                    car.display_name = display_name;
+                    car.DisplayName = display_name;
 
-                    if (car.display_name != display_name)
+                    if (car.DisplayName != display_name)
                     {
                         Log("WriteCarSettings -> Display_Name");
                         car.WriteSettings();
@@ -1440,10 +1440,14 @@ namespace TeslaLogger
                     string vin = r2["vin"].ToString();
                     Log("vin: " + Tools.ObfuscateVIN(vin));
 
-                    if (car.vin != vin)
+                    if (car.Vin != vin)
                     {
-                        car.vin = vin;
-                        Tools.VINDecoder(vin, out car.year, out _, out car.AWD, out car.MIC, out _, out car.motor);
+                        car.Vin = vin;
+                        Tools.VINDecoder(vin, out int year, out _, out bool aWD, out bool mIC, out _, out string motor);
+                        car.Year = year;
+                        car.AWD = aWD;
+                        car.MIC = mIC;
+                        car.Motor = motor;
                         Log("WriteCarsettings -> VIN");
                         car.WriteSettings();
                     }
@@ -1549,18 +1553,18 @@ namespace TeslaLogger
 
         private Dictionary<string, object> SearchCarDictionary(object[] cars)
         {
-            if (car.vin?.Length > 0)
+            if (car.Vin?.Length > 0)
             {
                 for (int x = 0; x < cars.Length; x++)
                 {
                     var cc = (Dictionary<string, object>)cars[x];
                     var ccVin = cc["vin"].ToString();
 
-                    if (ccVin == car.vin)
+                    if (ccVin == car.Vin)
                         return cc;
                 }
 
-                Logfile.Log("Car with VIN: " + car.vin + " not found!");
+                Logfile.Log("Car with VIN: " + car.Vin + " not found!");
                 return null;
             }
             else
@@ -1719,30 +1723,30 @@ namespace TeslaLogger
 
                         if (jBadgeResult != null)
                         {
-                            string car_type = car.car_type;
-                            string car_special_type = car.car_special_type;
-                            string trim_badging = car.trim_badging;
+                            string car_type = car.CarType;
+                            string car_special_type = car.CarSpecialType;
+                            string trim_badging = car.TrimBadging;
 
 
                             if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
                             {
-                                car.car_type = jBadgeResult["car_type"].ToString().ToLower().Trim();
+                                car.CarType = jBadgeResult["car_type"].ToString().ToLower().Trim();
                             }
 
                             if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
                             {
-                                car.car_special_type = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+                                car.CarSpecialType = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
                             }
 
-                            car.trim_badging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
+                            car.TrimBadging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
                                 ? (string)jBadgeResult["trim_badging"].ToString().ToLower().Trim()
                                 : "";
 
                             UpdateEfficiency();
                             lastUpdateEfficiency = DateTime.Now;
 
-                            if (car_type != car.car_type || car_special_type != car.car_special_type || trim_badging != car.trim_badging)
-                                car.dbHelper.WriteCarSettings();
+                            if (car_type != car.CarType || car_special_type != car.CarSpecialType || trim_badging != car.TrimBadging)
+                                car.DbHelper.WriteCarSettings();
                         }
                     }
                 }
@@ -1766,14 +1770,14 @@ namespace TeslaLogger
         {
             //string eff = "0.190052356";
             String vinCarType = "";
-            if (String.IsNullOrEmpty(car.car_type))
-                Tools.VINDecoder(car.vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _);
+            if (String.IsNullOrEmpty(car.CarType))
+                Tools.VINDecoder(car.Vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _);
 
-            if (car.car_type == "model3" || vinCarType == "Model 3")
+            if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.vin, out int year, out _, out bool AWD, out _, out string battery, out string motor);
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out _, out string battery, out string motor);
 
-                int maxRange = car.dbHelper.GetAvgMaxRage();
+                int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
                 {
                     try
@@ -1793,17 +1797,17 @@ namespace TeslaLogger
                             WriteCarSettings("0.158", "M3 LR P");
                             return;
                         }
-                        else if (car.DB_Wh_TR >= 0.135 && car.DB_Wh_TR <= 0.142 && AWD)
+                        else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)
                         {
                             WriteCarSettings("0.139", "M3 LR FL");
                             return;
                         }
-                        else if (car.trim_badging == "p74d" && year < 2021)
+                        else if (car.TrimBadging == "p74d" && year < 2021)
                         {
                             WriteCarSettings("0.152", "M3 LR P");
                             return;
                         }
-                        if (car.trim_badging == "p74d" && year >= 2021)
+                        if (car.TrimBadging == "p74d" && year >= 2021)
                         {
                             WriteCarSettings("0.158", "M3 LR P 2021");
                             return;
@@ -1821,7 +1825,7 @@ namespace TeslaLogger
                 {
                     if (battery == "LFP")
                     {
-                        if (year == 2021 || car.DB_Wh_TR > 0 && car.DB_Wh_TR < 0.130)
+                        if (year == 2021 || car.DBWhTR > 0 && car.DBWhTR < 0.130)
                             WriteCarSettings("0.127", "M3 SR+ LFP 2021");
                         else
                             WriteCarSettings("0.133", "M3 SR+ LFP");
@@ -1833,49 +1837,49 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.car_type == "models2" && car.car_special_type == "base")
+            else if (car.CarType == "models2" && car.CarSpecialType == "base")
             {
-                if (car.trim_badging == "60")
+                if (car.TrimBadging == "60")
                 {
                     WriteCarSettings("0.200", "S 60");
                     return;
                 }
-                else if (car.trim_badging == "60d")
+                else if (car.TrimBadging == "60d")
                 {
                     WriteCarSettings("0.187", "S 60D");
                     return;
                 }
-                else if (car.trim_badging == "75d")
+                else if (car.TrimBadging == "75d")
                 {
-                    if (car.carVoltageAt50SOC > 350)
+                    if (car.CarVoltageAt50SOC > 350)
                         WriteCarSettings("0.186", "S 75D 400V");
                     else
                         WriteCarSettings("0.186", "S 75D");
                     return;
                 }
-                else if (car.trim_badging == "75")
+                else if (car.TrimBadging == "75")
                 {
                     WriteCarSettings("0.195", "S 75");
                     return;
                 }
-                else if (car.trim_badging == "90d")
+                else if (car.TrimBadging == "90d")
                 {
                     WriteCarSettings("0.188", "S 90D");
                     return;
                 }
-                else if (car.trim_badging == "p90")
+                else if (car.TrimBadging == "p90")
                 {
                     WriteCarSettings("0.201", "S P90");
                     return;
                 }
-                else if (car.trim_badging == "p90d")
+                else if (car.TrimBadging == "p90d")
                 {
                     WriteCarSettings("0.201", "S P90D");
                     return;
                 }
-                else if (car.trim_badging == "100d")
+                else if (car.TrimBadging == "100d")
                 {
-                    if (car.DB_Wh_TR <= 0.165)
+                    if (car.DBWhTR <= 0.165)
                     {
                         WriteCarSettings("0.162", "S 100D Raven");
                         return;
@@ -1884,15 +1888,15 @@ namespace TeslaLogger
                     WriteCarSettings("0.193", "S 100D");
                     return;
                 }
-                else if (car.trim_badging == "p100d")
+                else if (car.TrimBadging == "p100d")
                 {
                     WriteCarSettings("0.200", "S P100D");
                     return;
                 }
-                else if (car.trim_badging.Length == 0)
+                else if (car.TrimBadging.Length == 0)
                 {
-                    Tools.VINDecoder(car.vin, out _, out _, out bool AWD, out _, out _, out string motor);
-                    int maxRange = car.dbHelper.GetAvgMaxRage();
+                    Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor);
+                    int maxRange = car.DbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
                         if (motor == "dual performance")
@@ -1916,70 +1920,70 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.car_type == "models" && (car.car_special_type == "base" || car.car_special_type == "signature"))
+            else if (car.CarType == "models" && (car.CarSpecialType == "base" || car.CarSpecialType == "signature"))
             {
-                if (car.trim_badging == "60")
+                if (car.TrimBadging == "60")
                 {
                     WriteCarSettings("0.200", "S 60");
                     return;
                 }
-                else if (car.trim_badging == "70")
+                else if (car.TrimBadging == "70")
                 {
                     WriteCarSettings("0.200", "S 70");
                     return;
                 }
-                else if (car.trim_badging == "70d")
+                else if (car.TrimBadging == "70d")
                 {
                     WriteCarSettings("0.194", "S 70D");
                     return;
                 }
-                else if (car.trim_badging == "p85d")
+                else if (car.TrimBadging == "p85d")
                 {
                     WriteCarSettings("0.201", "S P85D");
                     return;
                 }
-                else if (car.trim_badging == "p85+")
+                else if (car.TrimBadging == "p85+")
                 {
                     WriteCarSettings("0.201", "S P85+");
                     return;
                 }
-                else if (car.trim_badging == "85d")
+                else if (car.TrimBadging == "85d")
                 {
-                    if (car.carVoltageAt50SOC > 300 && car.carVoltageAt50SOC < 350)
+                    if (car.CarVoltageAt50SOC > 300 && car.CarVoltageAt50SOC < 350)
                         WriteCarSettings("0.186", "S 85D 350V");
                     else
                         WriteCarSettings("0.186", "S 85D");
                     return;
                 }
-                else if (car.trim_badging == "p85")
+                else if (car.TrimBadging == "p85")
                 {
                     WriteCarSettings("0.201", "S P85");
                     return;
                 }
-                else if (car.trim_badging == "85")
+                else if (car.TrimBadging == "85")
                 {
-                    if (car.carVoltageAt50SOC > 300 && car.carVoltageAt50SOC < 350)
+                    if (car.CarVoltageAt50SOC > 300 && car.CarVoltageAt50SOC < 350)
                         WriteCarSettings("0.201", "S 85 350V");
                     else
                         WriteCarSettings("0.201", "S 85");
                     return;
                 }
-                else if (car.trim_badging == "90")
+                else if (car.TrimBadging == "90")
                 {
                     WriteCarSettings("0.201", "S 90");
                     return;
                 }
-                else if (car.trim_badging == "90d")
+                else if (car.TrimBadging == "90d")
                 {
                     WriteCarSettings("0.187", "S 90D");
                     return;
                 }
-                else if (car.trim_badging == "p90")
+                else if (car.TrimBadging == "p90")
                 {
                     WriteCarSettings("0.201", "S P90");
                     return;
                 }
-                else if (car.trim_badging == "p90d")
+                else if (car.TrimBadging == "p90d")
                 {
                     WriteCarSettings("0.202", "S P90D");
                     return;
@@ -1990,29 +1994,29 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.car_type == "modelx" && car.car_special_type == "base")
+            else if (car.CarType == "modelx" && car.CarSpecialType == "base")
             {
-                if (car.trim_badging == "75d")
+                if (car.TrimBadging == "75d")
                 {
                     WriteCarSettings("0.224", "X 75D");
                     return;
                 }
-                else if (car.trim_badging == "100d")
+                else if (car.TrimBadging == "100d")
                 {
                     WriteCarSettings("0.217", "X 100D");
                     return;
                 }
-                else if (car.trim_badging == "90d")
+                else if (car.TrimBadging == "90d")
                 {
                     WriteCarSettings("0.212", "X 90D");
                     return;
                 }
-                else if (car.trim_badging == "p100d")
+                else if (car.TrimBadging == "p100d")
                 {
                     WriteCarSettings("0.226", "X P100D");
                     return;
                 }
-                else if (car.trim_badging == "p90d")
+                else if (car.TrimBadging == "p90d")
                 {
                     WriteCarSettings("0.217", "X P90D");
                     return;
@@ -2023,19 +2027,19 @@ namespace TeslaLogger
                     return;
                 }
             }
-            else if (car.car_type == "modely" && car.car_special_type == "base")
+            else if (car.CarType == "modely" && car.CarSpecialType == "base")
             {
-                if (car.trim_badging == "74d")
+                if (car.TrimBadging == "74d")
                 {
                     WriteCarSettings("0.148", "Y LR AWD");
                     return;
                 }
-                else if (car.trim_badging == "p74d")
+                else if (car.TrimBadging == "p74d")
                 {
                     WriteCarSettings("0.148", "Y P");
                     return;
                 }
-                else if (car.trim_badging == "50")
+                else if (car.TrimBadging == "50")
                 {
                     WriteCarSettings("0.136", "Y SR+");
                     return;
@@ -2225,12 +2229,12 @@ namespace TeslaLogger
         private void WriteCarSettings(string eff, string ModelName)
         {
             // TODO eff in double
-            if (car.ModelName != ModelName || car.Wh_TR.ToString(Tools.ciEnUS) != eff)
+            if (car.ModelName != ModelName || car.WhTR.ToString(Tools.ciEnUS) != eff)
             {
                 Log("WriteCarSettings -> ModelName: " + ModelName + " eff: " + eff);
 
                 car.ModelName = ModelName;
-                car.Wh_TR = Convert.ToDouble(eff, Tools.ciEnUS);
+                car.WhTR = Convert.ToDouble(eff, Tools.ciEnUS);
                 car.WriteSettings();
             }
         }
@@ -2254,9 +2258,9 @@ namespace TeslaLogger
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
-                car.currentJSON.latitude = latitude;
-                car.currentJSON.longitude = longitude;
-                car.currentJSON.heading = heading;
+                car.CurrentJSON.latitude = latitude;
+                car.CurrentJSON.longitude = longitude;
+                car.CurrentJSON.heading = heading;
 
                 int speed = 0;
                 if (r2["speed"] != null)
@@ -2296,7 +2300,7 @@ namespace TeslaLogger
                 }
 
 
-                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.currentJSON.current_is_preconditioning)
+                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.CurrentJSON.current_is_preconditioning)
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
@@ -2324,7 +2328,7 @@ namespace TeslaLogger
 
                     _ = SendDataToAbetterrouteplannerAsync(ts, battery_level, speed, false, power, (double)dLatitude, (double)dLongitude);
 
-                    car.dbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
+                    car.DbHelper.InsertPos(ts.ToString(), latitude, longitude, speed, power, odometer.Result, ideal_battery_range_km, battery_range_km, battery_level, outside_temp, elevation);
 
                     if (shift_state == "D" || shift_state == "R" || shift_state == "N")
                     {
@@ -2438,7 +2442,7 @@ namespace TeslaLogger
                     // or
                     // * StreamingPos is true in settings.json and the car is driving
                     // otherwise skip
-                    if (!car.currentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.currentJSON.current_driving))
+                    if (!car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
                     {
                         Thread.Sleep(100);
                         continue;
@@ -2526,7 +2530,6 @@ namespace TeslaLogger
                                             car.Log("Stream Data Error: " + resultContent);
                                             throw new Exception("unhandled error_type: " + error_type);
                                         }
-                                        break;
                                     case "data:update":
                                         string value = j["value"];
                                         StreamDataUpdate(value);
@@ -2685,7 +2688,7 @@ namespace TeslaLogger
                 double battery_range_km = irange / 0.62137119223733;
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
-                double? outside_temp = car.currentJSON.current_outside_temp;
+                double? outside_temp = car.CurrentJSON.current_outside_temperature;
                 if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") &&
                     (latitude != last_latitude_streaming || longitude != last_longitude_streaming || dpower != last_power_streaming))
                 {
@@ -2693,7 +2696,7 @@ namespace TeslaLogger
                     last_longitude_streaming = longitude;
                     last_power_streaming = dpower;
                     Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
-                    car.dbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
+                    car.DbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
             }
         }
@@ -2813,8 +2816,8 @@ namespace TeslaLogger
 
                     if (country_code.Length > 0 && c != null)
                     {
-                        c.currentJSON.current_country_code = country_code;
-                        c.currentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
+                        c.CurrentJSON.current_country_code = country_code;
+                        c.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
                     }
 
                     string road = "";
@@ -3256,7 +3259,7 @@ namespace TeslaLogger
                 if (r2["battery_level"] != null)
                 {
                     battery_level = Convert.ToInt32(r2["battery_level"]);
-                    car.currentJSON.current_battery_level = battery_level;
+                    car.CurrentJSON.current_battery_level = battery_level;
                 }
                 battery_range2ideal_battery_range = (double)ideal_battery_range / Convert.ToDouble(r2["battery_range"]);
                 return (double)ideal_battery_range / (double)0.62137;
@@ -3293,7 +3296,7 @@ namespace TeslaLogger
                             Log("sentry_mode: " + sentry_mode);
                         }
 
-                        car.currentJSON.current_is_sentry_mode = sentry_mode;
+                        car.CurrentJSON.current_is_sentry_mode = sentry_mode;
                     }
                     catch (Exception ex)
                     {
@@ -3314,12 +3317,12 @@ namespace TeslaLogger
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    if (car.currentJSON.current_car_version != car_version)
+                    if (car.CurrentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
-                        car.currentJSON.current_car_version = car_version;
+                        car.CurrentJSON.current_car_version = car_version;
 
-                        car.dbHelper.SetCarVersion(car_version);
+                        car.DbHelper.SetCarVersion(car_version);
 
                         TaskerWakeupfile(true);
                     }
@@ -3369,7 +3372,7 @@ namespace TeslaLogger
                 {
                     if (r2["inside_temp"] != null)
                     {
-                        car.currentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                        car.CurrentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
                     }
                 }
                 catch (Exception) { }
@@ -3378,7 +3381,7 @@ namespace TeslaLogger
                 if (r2["outside_temp"] != null)
                 {
                     outside_temp = (decimal)r2["outside_temp"];
-                    car.currentJSON.current_outside_temp = (double)outside_temp;
+                    car.CurrentJSON.current_outside_temperature = (double)outside_temp;
                 }
                 else
                 {
@@ -3391,12 +3394,12 @@ namespace TeslaLogger
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-                        if (car.currentJSON.current_battery_heater != battery_heater)
+                        if (car.CurrentJSON.current_battery_heater != battery_heater)
                         {
-                            car.currentJSON.current_battery_heater = (bool)battery_heater;
+                            car.CurrentJSON.current_battery_heater = (bool)battery_heater;
 
                             Log("Battery heater: " + battery_heater);
-                            car.currentJSON.CreateCurrentJSON();
+                            car.CurrentJSON.CreateCurrentJSON();
 
                             // write into Database
                             Thread.Sleep(5000);
@@ -3409,11 +3412,11 @@ namespace TeslaLogger
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                if (preconditioning != car.currentJSON.current_is_preconditioning)
+                if (preconditioning != car.CurrentJSON.current_is_preconditioning)
                 {
-                    car.currentJSON.current_is_preconditioning = preconditioning;
+                    car.CurrentJSON.current_is_preconditioning = preconditioning;
                     Log("Preconditioning: " + preconditioning);
-                    car.currentJSON.CreateCurrentJSON();
+                    car.CurrentJSON.CreateCurrentJSON();
 
                     // write into Database
                     Thread.Sleep(5000);
@@ -3767,7 +3770,7 @@ namespace TeslaLogger
                 TimeSpan ts = DateTime.Now - lastTaskerWakeupfile;
 
                 int secBetweenTaskerWakeupFile = 20;
-                if (!car.useTaskerToken)
+                if (!car.UseTaskerToken)
                     secBetweenTaskerWakeupFile = 120;
 
                 if (!force && ts.TotalSeconds < secBetweenTaskerWakeupFile)
@@ -3785,7 +3788,7 @@ namespace TeslaLogger
                     name += " Raven";
                 }
 
-                var obfuscatedVin = car.vin ?? "";
+                var obfuscatedVin = car.Vin ?? "";
                 if (obfuscatedVin?.Length > 11)
                     obfuscatedVin = obfuscatedVin.Substring(0, 11);
 
@@ -3793,47 +3796,47 @@ namespace TeslaLogger
                 {
                     { "t", car.TaskerHash },
                     { "v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() },
-                    { "cv", car.currentJSON.current_car_version },
+                    { "cv", car.CurrentJSON.current_car_version },
                     { "m", car.Model },
                     { "bt", car.Battery },
                     { "n", name },
-                    { "eff", car.Wh_TR.ToString(Tools.ciEnUS) },
+                    { "eff", car.WhTR.ToString(Tools.ciEnUS) },
                     { "oc", vehicle_config },
 
-                    { "db_eff", car.DB_Wh_TR.ToString(Tools.ciEnUS)},
-                    { "db_eff_cnt", car.DB_Wh_TR_count.ToString(Tools.ciEnUS) },
+                    { "db_eff", car.DBWhTR.ToString(Tools.ciEnUS)},
+                    { "db_eff_cnt", car.DBWhTRcount.ToString(Tools.ciEnUS) },
 
                     { "pw", power },
                     { "temp", temperature },
                     { "le", length },
                     { "ln", language },
 
-                    { "CT", car.car_type },
-                    { "CST", car.car_special_type },
-                    { "TB", car.trim_badging },
+                    { "CT", car.CarType },
+                    { "CST", car.CarSpecialType },
+                    { "TB", car.TrimBadging },
 
                     { "G", Tools.GetGrafanaVersion() },
 
                     { "D", Tools.IsDocker() ? "1" : "0" },
                     { "SMT", Tools.UseScanMyTesla() ? "1" : "0" },
-                    { "SMTs", car.dbHelper.GetScanMyTeslaSignalsLastWeek().ToString() },
-                    { "SMTp", car.dbHelper.GetScanMyTeslaPacketsLastWeek().ToString() },
-                    { "TR", car.dbHelper.GetAvgMaxRage().ToString() },
+                    { "SMTs", car.DbHelper.GetScanMyTeslaSignalsLastWeek().ToString() },
+                    { "SMTp", car.DbHelper.GetScanMyTeslaPacketsLastWeek().ToString() },
+                    { "TR", car.DbHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
-                    { "CC", car.currentJSON.current_country_code },
-                    { "ST", car.currentJSON.current_state },
+                    { "CC", car.CurrentJSON.current_country_code },
+                    { "ST", car.CurrentJSON.current_state },
                     { "UP", Tools.GetOnlineUpdateSettings().ToString() },
-                    { "sumkm", car.sumkm.ToString() },
-                    { "avgkm", car.avgkm.ToString() },
-                    { "kwh100km", car.kwh100km.ToString() },
-                    { "avgsocdiff", car.avgsocdiff.ToString() },
-                    { "maxkm", car.maxkm.ToString() },
-                    { "SOC50V", ((int)car.carVoltageAt50SOC).ToString()},
+                    { "sumkm", car.Sumkm.ToString() },
+                    { "avgkm", car.Avgkm.ToString() },
+                    { "kwh100km", car.Kwh100km.ToString() },
+                    { "avgsocdiff", car.Avgsocdiff.ToString() },
+                    { "maxkm", car.Maxkm.ToString() },
+                    { "SOC50V", ((int)car.CarVoltageAt50SOC).ToString()},
                     { "AWD" , car.AWD ? "1" : "0" },
                     { "MIC" , car.MIC ? "1" : "0" },
-                    { "year" , car.year.ToString() },
-                    { "motor" , car.motor } ,
+                    { "year" , car.Year.ToString() },
+                    { "motor" , car.Motor } ,
                     { "vin" , obfuscatedVin} // just the first 11 chars of the vin will be sent. The serial number is truncated!
                 };
 
@@ -3861,10 +3864,10 @@ namespace TeslaLogger
                         { }
 
                         Log("TaskerWakeupfile available! [Webservice]" + resultContent.Replace("wakeupfile", ""));
-                        if (!car.useTaskerToken)
+                        if (!car.UseTaskerToken)
                         {
                             Log("Start using fast TaskerToken request!");
-                            car.useTaskerToken = true;
+                            car.UseTaskerToken = true;
                         }
                         return true;
                     }
@@ -3955,7 +3958,7 @@ namespace TeslaLogger
                     throw new Exception($"SoC < 0! soc:{soc}");
                 }
 
-                if (car.ABRP_mode <= 0 || String.IsNullOrEmpty(car.ABRP_token))
+                if (car.ABRPMode <= 0 || String.IsNullOrEmpty(car.ABRPToken))
                     return;
 
                 lock (httpClientLock)
@@ -3997,14 +4000,14 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
-                    var result = await httpClientABRP.PostAsync("https://api.iternio.com/1/tlm/send?token="  + car.ABRP_token + "&tlm="+ json, null);
+                    var result = await httpClientABRP.PostAsync("https://api.iternio.com/1/tlm/send?token="  + car.ABRPToken + "&tlm="+ json, null);
 
                     DBHelper.AddMothershipDataToDB("SendDataToAbetterrouteplanner", start, (int)result.StatusCode);
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
                         Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
-                        car.ABRP_mode = -1; 
+                        car.ABRPMode = -1; 
                     }
                     else if (result.StatusCode != HttpStatusCode.OK)
                     {

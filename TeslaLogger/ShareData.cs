@@ -124,7 +124,7 @@ namespace TeslaLogger
                     {
                         { "ProtocolVersion", ProtocolVersion }
                     };
-                            string Firmware = car.dbHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
+                            string Firmware = car.DbHelper.GetFirmwareFromDate((DateTime)dr["StartDate"]);
                             d.Add("Firmware", Firmware);
 
                             d.Add("TaskerToken", TaskerToken); // TaskerToken and HostId is the primary key and is used to make sure data won't be imported twice
@@ -249,7 +249,6 @@ namespace TeslaLogger
 
                     return l;
                 }
-                dt.Clear();
             }
         }
 

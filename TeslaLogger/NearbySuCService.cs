@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     public class NearbySuCService
     {
         private static NearbySuCService _NearbySuCService = null;
@@ -51,7 +52,7 @@ namespace TeslaLogger
             ArrayList send = new ArrayList();
 
             // nearby_charging_sites
-            foreach (Car car in Car.allcars)
+            foreach (Car car in Car.Allcars)
             {
                 if (car.IsInService())
                     continue;
@@ -59,7 +60,7 @@ namespace TeslaLogger
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
                     || car.GetCurrentState() == Car.TeslaState.Online)
-                    && car.currentJSON.current_falling_asleep == false)
+                    && car.CurrentJSON.current_falling_asleep == false)
                 {
                     string result = string.Empty;
                     try
