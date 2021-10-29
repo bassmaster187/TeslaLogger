@@ -130,8 +130,8 @@ namespace TeslaLogger
 
                         dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                         DateTime d = DateTime.Parse(j["d"]);
-                        car.currentJSON.lastScanMyTeslaReceived = d;
-                        car.currentJSON.CreateCurrentJSON();
+                        car.CurrentJSON.lastScanMyTeslaReceived = d;
+                        car.CurrentJSON.CreateCurrentJSON();
 
                         Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
 
@@ -151,48 +151,48 @@ namespace TeslaLogger
                             switch (line.Key)
                             {
                                 case "2":
-                                    car.currentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
                                     break;
                                 case "5":
-                                    car.currentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
                                     break;
                                 case "6":
-                                    car.currentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
                                     break;
                                 case "7":
-                                    car.currentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
                                     break;
                                 case "9":
-                                    car.currentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value);
                                     break;
                                 case "11":
-                                    car.currentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value);
                                     break;
                                 case "27":
-                                    car.currentJSON.SMTCellImbalance = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellImbalance = Convert.ToDouble(line.Value);
                                     break;
                                 case "28":
-                                    car.currentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
                                     break;
                                 case "29":
-                                    car.currentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
                                     break;
                                 case "442":
                                     if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
                                     {
-                                        car.currentJSON.SMTSpeed = 0;
+                                        car.CurrentJSON.SMTSpeed = 0;
                                         car.Log("SMT Speed: Signal not Available");
                                     }
                                     else
                                     {
-                                        car.currentJSON.SMTSpeed = Convert.ToDouble(line.Value);
+                                        car.CurrentJSON.SMTSpeed = Convert.ToDouble(line.Value);
                                     }
                                     break;
                                 case "43":
-                                    car.currentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
                                     break;
                                 case "71":
-                                    car.currentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value);
                                     break;
                                 default:
                                     break;

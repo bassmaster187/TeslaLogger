@@ -70,7 +70,7 @@ namespace TeslaLogger
 
                     if (result2 == "CAPCHA_NOT_READY")
                     {
-                        car.passwortinfo.Append("&nbsp;&nbsp;Still waiting for Recaptcha solver.<br>");
+                        car.Passwortinfo.Append("&nbsp;&nbsp;Still waiting for Recaptcha solver.<br>");
                         car.Log("CAPCHA_NOT_READY");
                         System.Threading.Thread.Sleep(5000);
                         continue;

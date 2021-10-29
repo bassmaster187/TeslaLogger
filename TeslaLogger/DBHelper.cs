@@ -125,7 +125,7 @@ namespace TeslaLogger
                 }
             }
 
-            car.currentJSON.CreateCurrentJSON();
+            car.CurrentJSON.CreateCurrentJSON();
         }
 
         public void StartState(string state)
@@ -134,21 +134,21 @@ namespace TeslaLogger
             {
                 if (state == "online")
                 {
-                    car.currentJSON.current_online = true;
-                    car.currentJSON.current_sleeping = false;
+                    car.CurrentJSON.current_online = true;
+                    car.CurrentJSON.current_sleeping = false;
                 }
                 else if (state == "asleep")
                 {
-                    car.currentJSON.current_online = false;
-                    car.currentJSON.current_sleeping = true;
+                    car.CurrentJSON.current_online = false;
+                    car.CurrentJSON.current_sleeping = true;
                 }
                 else if (state == "offline")
                 {
-                    car.currentJSON.current_online = false;
-                    car.currentJSON.current_sleeping = false;
+                    car.CurrentJSON.current_online = false;
+                    car.CurrentJSON.current_sleeping = false;
                 }
 
-                car.currentJSON.CreateCurrentJSON();
+                car.CurrentJSON.CreateCurrentJSON();
             }
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -329,14 +329,14 @@ namespace TeslaLogger
 
         internal bool SetABRP(string abrp_token, int abrp_mode)
         {
-            car.ABRP_token = abrp_token;
-            car.ABRP_mode = abrp_mode;
+            car.ABRPToken = abrp_token;
+            car.ABRPMode = abrp_mode;
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.currentJSON.current_battery_level, 0, true, car.currentJSON.current_power, car.currentJSON.latitude, car.currentJSON.longitude).Wait();
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.latitude, car.CurrentJSON.longitude).Wait();
 
-                if (car.ABRP_mode == -1)
+                if (car.ABRPMode == -1)
                     return false;
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1009,17 +1009,17 @@ HAVING
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@Raven", car.Raven);
-                        cmd.Parameters.AddWithValue("@Wh_TR", car.Wh_TR);
-                        cmd.Parameters.AddWithValue("@DB_Wh_TR", car.DB_Wh_TR);
-                        cmd.Parameters.AddWithValue("@DB_Wh_TR_count", car.DB_Wh_TR_count);
-                        cmd.Parameters.AddWithValue("@car_type", car.car_type);
-                        cmd.Parameters.AddWithValue("@car_special_type", car.car_special_type);
-                        cmd.Parameters.AddWithValue("@trim_badging", car.trim_badging);
+                        cmd.Parameters.AddWithValue("@Wh_TR", car.WhTR);
+                        cmd.Parameters.AddWithValue("@DB_Wh_TR", car.DBWhTR);
+                        cmd.Parameters.AddWithValue("@DB_Wh_TR_count", car.DBWhTRcount);
+                        cmd.Parameters.AddWithValue("@car_type", car.CarType);
+                        cmd.Parameters.AddWithValue("@car_special_type", car.CarSpecialType);
+                        cmd.Parameters.AddWithValue("@trim_badging", car.TrimBadging);
                         cmd.Parameters.AddWithValue("@model_name", car.ModelName);
                         cmd.Parameters.AddWithValue("@Battery", car.Battery);
-                        cmd.Parameters.AddWithValue("@display_name", car.display_name);
+                        cmd.Parameters.AddWithValue("@display_name", car.DisplayName);
                         cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
-                        cmd.Parameters.AddWithValue("@vin", car.vin);
+                        cmd.Parameters.AddWithValue("@vin", car.Vin);
 
                         int done = cmd.ExecuteNonQuery();
 
@@ -1227,12 +1227,12 @@ HAVING
                 UpdateChargePrice(openChargingState);
             }
 
-            car.currentJSON.current_charging = false;
-            car.currentJSON.current_charger_power = 0;
-            car.currentJSON.current_charger_voltage = 0;
-            car.currentJSON.current_charger_phases = 0;
-            car.currentJSON.current_charger_actual_current = 0;
-            car.currentJSON.current_charge_rate_km = 0;
+            car.CurrentJSON.current_charging = false;
+            car.CurrentJSON.current_charger_power = 0;
+            car.CurrentJSON.current_charger_voltage = 0;
+            car.CurrentJSON.current_charger_phases = 0;
+            car.CurrentJSON.current_charger_actual_current = 0;
+            car.CurrentJSON.current_charge_rate_km = 0;
 
             UpdateMaxChargerPower();
 
@@ -2168,8 +2168,8 @@ ORDER BY id DESC", con))
 
                             car.Log($"Economy from DB: {wh_km} Wh/km - count: {anz}");
 
-                            wh.car.DB_Wh_TR = wh_km;
-                            wh.car.DB_Wh_TR_count = anz;
+                            wh.car.DBWhTR = wh_km;
+                            wh.car.DBWhTRcount = anz;
                         }
                     }
                 }
@@ -2225,7 +2225,7 @@ ORDER BY id DESC", con))
 
                             Car c = Car.GetCarByID(carid);
                             if (c != null)
-                                c.dbHelper.UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
+                                c.DbHelper.UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
                         }
                     }
                 }
@@ -2250,37 +2250,37 @@ ORDER BY id DESC", con))
 
                         if (dr.Read())
                         {
-                            car.currentJSON.current_trip_start = (DateTime)dr["StartDate"];
-                            car.currentJSON.current_trip_end = (DateTime)dr["EndDate"];
+                            car.CurrentJSON.current_trip_start = (DateTime)dr["StartDate"];
+                            car.CurrentJSON.current_trip_end = (DateTime)dr["EndDate"];
 
                             if (dr["StartKm"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
+                                car.CurrentJSON.current_trip_km_start = Convert.ToDouble(dr["StartKm"]);
                             }
 
                             if (dr["EndKm"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
+                                car.CurrentJSON.current_trip_km_end = Convert.ToDouble(dr["EndKm"]);
                             }
 
                             if (dr["speed_max"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
+                                car.CurrentJSON.current_trip_max_speed = Convert.ToDouble(dr["speed_max"]);
                             }
 
                             if (dr["power_max"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
+                                car.CurrentJSON.current_trip_max_power = Convert.ToDouble(dr["power_max"]);
                             }
 
                             if (dr["StartRange"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
+                                car.CurrentJSON.current_trip_start_range = Convert.ToDouble(dr["StartRange"]);
                             }
 
                             if (dr["EndRange"] != DBNull.Value)
                             {
-                                car.currentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
+                                car.CurrentJSON.current_trip_end_range = Convert.ToDouble(dr["EndRange"]);
                             }
                         }
                         dr.Close();
@@ -2295,34 +2295,34 @@ ORDER BY id DESC", con))
                         {
                             if (dr["ideal_battery_range_km"] != DBNull.Value)
                             {
-                                car.currentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
+                                car.CurrentJSON.current_ideal_battery_range_km = Convert.ToDouble(dr["ideal_battery_range_km"]);
                             }
 
                             if (dr["battery_range_km"] != DBNull.Value)
                             {
-                                car.currentJSON.current_battery_range_km = Convert.ToDouble(dr["battery_range_km"]);
+                                car.CurrentJSON.current_battery_range_km = Convert.ToDouble(dr["battery_range_km"]);
                             }
 
                             if (dr["battery_level"] != DBNull.Value)
                             {
-                                car.currentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
+                                car.CurrentJSON.current_battery_level = Convert.ToInt32(dr["battery_level"]);
                             }
 
                             if (dr["lat"] != DBNull.Value)
                             {
-                                car.currentJSON.latitude = Convert.ToDouble(dr["lat"]);
+                                car.CurrentJSON.latitude = Convert.ToDouble(dr["lat"]);
                             }
 
                             if (dr["lng"] != DBNull.Value)
                             {
-                                car.currentJSON.longitude = Convert.ToDouble(dr["lng"]);
+                                car.CurrentJSON.longitude = Convert.ToDouble(dr["lng"]);
                             }
                         }
                         dr.Close();
                     }
 
 
-                    car.currentJSON.CreateCurrentJSON();
+                    car.CurrentJSON.CreateCurrentJSON();
                 }
             }
             catch (Exception ex)
@@ -2381,8 +2381,8 @@ ORDER BY id DESC", con))
                 }
             }
 
-            wh.car.currentJSON.current_charging = true;
-            wh.car.currentJSON.CreateCurrentJSON();
+            wh.car.CurrentJSON.current_charging = true;
+            wh.car.CurrentJSON.CreateCurrentJSON();
 
             // Check for one minute if meter claims car is really not charging 
             if (v != null && v.IsCharging() != true)
@@ -2510,9 +2510,9 @@ ORDER BY id DESC", con))
                 UpdateDriveStatistics(StartPos, MaxPosId);
             }
 
-            car.currentJSON.current_driving = false;
-            car.currentJSON.current_speed = 0;
-            car.currentJSON.current_power = 0;
+            car.CurrentJSON.current_driving = false;
+            car.CurrentJSON.current_speed = 0;
+            car.CurrentJSON.current_power = 0;
 
             _ = Task.Factory.StartNew(() =>
             {
@@ -2620,7 +2620,7 @@ WHERE
             {
                 if (startPosId > 0 && car != null)
                 {
-                    car.dbHelper.UpdateDriveHeightStatistics(startPosId, endPosId);
+                    car.DbHelper.UpdateDriveHeightStatistics(startPosId, endPosId);
                 }
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
@@ -3146,7 +3146,7 @@ WHERE
                             Car c = Car.GetCarByID(CarId);
                             if (c != null)
                             {
-                                c.dbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                                c.DbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
                             }
                         }
                         catch (Exception ex)
@@ -3177,24 +3177,24 @@ WHERE
                 }
             }
 
-            car.currentJSON.current_driving = true;
-            car.currentJSON.current_charge_energy_added = 0;
-            car.currentJSON.current_trip_start = DateTime.Now;
-            car.currentJSON.current_trip_end = DateTime.MinValue;
-            car.currentJSON.current_trip_km_start = 0;
-            car.currentJSON.current_trip_km_end = 0;
-            car.currentJSON.current_trip_max_speed = 0;
-            car.currentJSON.current_trip_max_power = 0;
-            car.currentJSON.current_trip_start_range = 0;
-            car.currentJSON.current_trip_end_range = 0;
+            car.CurrentJSON.current_driving = true;
+            car.CurrentJSON.current_charge_energy_added = 0;
+            car.CurrentJSON.current_trip_start = DateTime.Now;
+            car.CurrentJSON.current_trip_end = DateTime.MinValue;
+            car.CurrentJSON.current_trip_km_start = 0;
+            car.CurrentJSON.current_trip_km_end = 0;
+            car.CurrentJSON.current_trip_max_speed = 0;
+            car.CurrentJSON.current_trip_max_power = 0;
+            car.CurrentJSON.current_trip_start_range = 0;
+            car.CurrentJSON.current_trip_end_range = 0;
 
-            car.currentJSON.CreateCurrentJSON();
+            car.CurrentJSON.CreateCurrentJSON();
         }
 
 
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
         {
-            double? inside_temp = car.currentJSON.current_inside_temperature;
+            double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -3263,40 +3263,40 @@ WHERE
                         cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
                     }
 
-                    cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
-                    cmd.Parameters.AddWithValue("@is_preconditioning", car.currentJSON.current_is_preconditioning ? 1 : 0);
-                    cmd.Parameters.AddWithValue("@sentry_mode", car.currentJSON.current_is_sentry_mode ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@is_preconditioning", car.CurrentJSON.current_is_preconditioning ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@sentry_mode", car.CurrentJSON.current_is_sentry_mode ? 1 : 0);
 
                     cmd.ExecuteNonQuery();
 
                     try
                     {
-                        car.currentJSON.current_speed = (int)(speed * 1.60934M);
-                        car.currentJSON.current_power = (int)(power * 1.35962M);
+                        car.CurrentJSON.current_speed = (int)(speed * 1.60934M);
+                        car.CurrentJSON.current_power = (int)(power * 1.35962M);
 
                         if (odometer > 0)
                         {
-                            car.currentJSON.current_odometer = odometer;
+                            car.CurrentJSON.current_odometer = odometer;
                         }
 
                         if (ideal_battery_range_km >= 0)
                         {
-                            car.currentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+                            car.CurrentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
                         }
 
                         if (battery_range_km >= 0)
                         {
-                            car.currentJSON.current_battery_range_km = battery_range_km;
+                            car.CurrentJSON.current_battery_range_km = battery_range_km;
                         }
 
-                        if (car.currentJSON.current_trip_km_start == 0)
+                        if (car.CurrentJSON.current_trip_km_start == 0)
                         {
-                            car.currentJSON.current_trip_km_start = odometer;
-                            car.currentJSON.current_trip_start_range = car.currentJSON.current_ideal_battery_range_km;
+                            car.CurrentJSON.current_trip_km_start = odometer;
+                            car.CurrentJSON.current_trip_start_range = car.CurrentJSON.current_ideal_battery_range_km;
                         }
 
-                        car.currentJSON.current_trip_max_speed = Math.Max(car.currentJSON.current_trip_max_speed, car.currentJSON.current_speed);
-                        car.currentJSON.current_trip_max_power = Math.Max(car.currentJSON.current_trip_max_power, car.currentJSON.current_power);
+                        car.CurrentJSON.current_trip_max_speed = Math.Max(car.CurrentJSON.current_trip_max_speed, car.CurrentJSON.current_speed);
+                        car.CurrentJSON.current_trip_max_power = Math.Max(car.CurrentJSON.current_trip_max_power, car.CurrentJSON.current_power);
 
                     }
                     catch (Exception ex)
@@ -3306,7 +3306,7 @@ WHERE
                 }
             }
 
-            car.currentJSON.CreateCurrentJSON();
+            car.CurrentJSON.CreateCurrentJSON();
         }
 
         private Address GetAddressFromChargingState(int ChargingStateID)
@@ -3420,7 +3420,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
-                        cmd.Parameters.AddWithValue("@battery_heater", car.currentJSON.current_battery_heater ? 1 : 0);
+                        cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
 
                         if (charger_pilot_current != null && int.TryParse(charger_pilot_current, out int i))
                         {
@@ -3458,25 +3458,25 @@ WHERE
             {
                 if (Convert.ToInt32(battery_level) >= 0)
                 {
-                    car.currentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
                 }
 
-                car.currentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
-                car.currentJSON.current_charger_power = Convert.ToInt32(charger_power);
+                car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
+                car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power);
                 if (kmIdeal_Battery_Range >= 0)
                 {
-                    car.currentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
+                    car.CurrentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
                 }
 
                 if (kmBattery_Range >= 0)
                 {
-                    car.currentJSON.current_battery_range_km = kmBattery_Range;
+                    car.CurrentJSON.current_battery_range_km = kmBattery_Range;
                 }
 
-                car.currentJSON.current_charger_voltage = int.Parse(charger_voltage);
-                car.currentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
-                car.currentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
-                car.currentJSON.CreateCurrentJSON();
+                car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage);
+                car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
+                car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
+                car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
             {
@@ -4093,7 +4093,7 @@ WHERE
                             dr.Close();
 
                             WebHelper.ReverseGecocodingAsync(car, lat, lng, true, false).Wait();
-                            return car.currentJSON.current_country_code;
+                            return car.CurrentJSON.current_country_code;
                         }
                     }
                 }
@@ -4561,7 +4561,7 @@ WHERE
                     }
 
                     // update all drivestate statistics
-                    foreach (Car c in Car.allcars)
+                    foreach (Car c in Car.Allcars)
                     {
                         using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                         {
@@ -4583,7 +4583,7 @@ WHERE
                                         && dr[1] != null && int.TryParse(dr[1].ToString(), out int endpos))
                                     {
                                         DateTime start = DateTime.Now;
-                                        c.dbHelper.UpdateDriveStatistics(startpos, endpos, false);
+                                        c.DbHelper.UpdateDriveStatistics(startpos, endpos, false);
                                         c.Log($"UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
                                         migrationlog.Append($"{DateTime.Now} {c.CarInDB}# UpdateDriveStatistics: {startpos} -> {endpos} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
                                     }

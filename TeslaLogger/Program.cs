@@ -391,21 +391,21 @@ namespace TeslaLogger
                 Logfile.Log("UpdateDbInBackground started");
                 DBHelper.UpdateElevationForAllPoints();
                 WebHelper.UpdateAllPOIAddresses();
-                foreach (Car c in Car.allcars)
+                foreach (Car c in Car.Allcars)
                 {
-                    c.dbHelper.CombineChangingStates();
+                    c.DbHelper.CombineChangingStates();
                     c.webhelper.UpdateAllEmptyAddresses();
-                    c.dbHelper.UpdateEmptyChargeEnergy();
-                    c.dbHelper.UpdateEmptyUnplugDate();
-                    c.dbHelper.AnalyzeChargingStates();
-                    c.dbHelper.UpdateAllDriveHeightStatistics();
+                    c.DbHelper.UpdateEmptyChargeEnergy();
+                    c.DbHelper.UpdateEmptyUnplugDate();
+                    c.DbHelper.AnalyzeChargingStates();
+                    c.DbHelper.UpdateAllDriveHeightStatistics();
                 }
 
                 DBHelper.UpdateAllNullAmpereCharging();
                 DBHelper.UpdateIncompleteTrips();
                 DBHelper.UpdateAllChargingMaxPower();
 
-                foreach (Car c in Car.allcars)
+                foreach (Car c in Car.Allcars)
                 {
                     ShareData sd = new ShareData(c);
                     sd.SendAllChargingData();
