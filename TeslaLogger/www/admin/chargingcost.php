@@ -72,7 +72,7 @@ require_once("tools.php");
         $("#cost_per_session").val(json[0]["cost_per_session"]);
         $("#cost_per_minute").val(json[0]["cost_per_minute"]);
         $("#cost_idle_fee_total").val(json[0]["cost_idle_fee_total"]);
-        $("#cost_kwh_meter_invoice").val(json[0]["cost_kwh_meter_invoice"]);
+        $("#cost_kwh_meter_invoice").val(Round(json[0]["cost_kwh_meter_invoice"],2));
 
 		updatecalculation();
 
@@ -90,6 +90,12 @@ require_once("tools.php");
         return +(num.replace(",", "."));
     }
 
+    function Round(value, digits)
+    {
+        var factor = Math.pow(10,digits);
+        return Math.round(value * factor)/factor;
+    }
+
     function updatecalculation()
     {
         $("#minutes_charged").text(minutes);
@@ -99,6 +105,7 @@ require_once("tools.php");
         if (cost_kwh_meter_invoice !== "")
         {
             cost_kwh_meter_invoice = parseLocalNum($("#cost_kwh_meter_invoice").val());
+            cost_kwh_meter_invoice = Round(cost_kwh_meter_invoice, 2);
             var efficiency = kwh_calc / cost_kwh_meter_invoice * 100;
             $("#charge_efficiency").text(efficiency.toFixed(1) + " %");    
             kwh_calc = cost_kwh_meter_invoice;
