@@ -59,7 +59,7 @@ namespace TeslaLogger
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
                     || car.GetCurrentState() == Car.TeslaState.Online)
-                    && car.CurrentJSON.current_falling_asleep == false)
+                    && car.CurrentJSON.CurrentFallingAsleep == false)
                 {
                     string result = string.Empty;
                     try

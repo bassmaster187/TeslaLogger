@@ -1187,12 +1187,12 @@ namespace TeslaLogger
                     ideal_battery_range = battery_range;                    
                 }
 
-                car.CurrentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
+                car.CurrentJSON.CurrentIdealBatteryRangeKM = (double)ideal_battery_range * 1.609344;
 
                 string battery_level = r2["battery_level"].ToString();
-                if (battery_level != null && Convert.ToInt32(battery_level) != car.CurrentJSON.current_battery_level)
+                if (battery_level != null && Convert.ToInt32(battery_level) != car.CurrentJSON.CurrentBatteryLevel)
                 {
-                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.CurrentJSON.CurrentBatteryLevel = Convert.ToInt32(battery_level);
                     car.CurrentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
@@ -1256,23 +1256,23 @@ namespace TeslaLogger
 
                 if (r2["charge_rate"] != null)
                 {
-                    car.CurrentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
+                    car.CurrentJSON.CurrentChargeRateKM = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
                 }
 
                 if (r2["charge_limit_soc"] != null)
                 {
-                    if (car.CurrentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
+                    if (car.CurrentJSON.ChargeLimitSoc != Convert.ToInt32(r2["charge_limit_soc"]))
                     {
-                        car.CurrentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        car.CurrentJSON.ChargeLimitSoc = Convert.ToInt32(r2["charge_limit_soc"]);
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
 
                 if (r2["time_to_full_charge"] != null)
                 {
-                    if (car.CurrentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
+                    if (car.CurrentJSON.CurrentTimeToFullCharge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
                     {
-                        car.CurrentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
+                        car.CurrentJSON.CurrentTimeToFullCharge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
@@ -1309,7 +1309,7 @@ namespace TeslaLogger
 
                 if (charging_state == "Charging")
                 {
-                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
+                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.CurrentBatteryLevel, 0, true, power, car.CurrentJSON.Latitude, car.CurrentJSON.Longitude);
 
                     lastCharging_State = charging_state;
                     car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
@@ -2258,9 +2258,9 @@ namespace TeslaLogger
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
-                car.CurrentJSON.latitude = latitude;
-                car.CurrentJSON.longitude = longitude;
-                car.CurrentJSON.heading = heading;
+                car.CurrentJSON.Latitude = latitude;
+                car.CurrentJSON.Longitude = longitude;
+                car.CurrentJSON.Heading = heading;
 
                 int speed = 0;
                 if (r2["speed"] != null)
@@ -2300,7 +2300,7 @@ namespace TeslaLogger
                 }
 
 
-                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.CurrentJSON.current_is_preconditioning)
+                if (justinsertdb || shift_state == "D" || shift_state == "R" || shift_state == "N" || car.CurrentJSON.CurrentIsPreconditioning)
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
@@ -2442,7 +2442,7 @@ namespace TeslaLogger
                     // or
                     // * StreamingPos is true in settings.json and the car is driving
                     // otherwise skip
-                    if (!car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
+                    if (!car.CurrentJSON.CurrentFallingAsleep && !(Tools.StreamingPos() && car.CurrentJSON.CurrentDriving))
                     {
                         Thread.Sleep(100);
                         continue;
@@ -2689,7 +2689,7 @@ namespace TeslaLogger
                 double battery_range_km = irange / 0.62137119223733;
                 // ideal_battery_range_km = ideal_battery_range_km * car specific factor
                 double ideal_battery_range_km = battery_range_km * battery_range2ideal_battery_range;
-                double? outside_temp = car.CurrentJSON.current_outside_temp;
+                double? outside_temp = car.CurrentJSON.CurrentOutsideTemperature;
                 if (!string.IsNullOrEmpty(shift_state) && shift_state.Equals("D") &&
                     (latitude != last_latitude_streaming || longitude != last_longitude_streaming || dpower != last_power_streaming))
                 {
@@ -2817,8 +2817,8 @@ namespace TeslaLogger
 
                     if (country_code.Length > 0 && c != null)
                     {
-                        c.CurrentJSON.current_country_code = country_code;
-                        c.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
+                        c.CurrentJSON.CurrentCountryCode = country_code;
+                        c.CurrentJSON.CurrentState = r2.ContainsKey("state") ? r2["state"].ToString() : "";
                     }
 
                     string road = "";
@@ -3260,7 +3260,7 @@ namespace TeslaLogger
                 if (r2["battery_level"] != null)
                 {
                     battery_level = Convert.ToInt32(r2["battery_level"]);
-                    car.CurrentJSON.current_battery_level = battery_level;
+                    car.CurrentJSON.CurrentBatteryLevel = battery_level;
                 }
                 battery_range2ideal_battery_range = (double)ideal_battery_range / Convert.ToDouble(r2["battery_range"]);
                 return (double)ideal_battery_range / (double)0.62137;
@@ -3297,7 +3297,7 @@ namespace TeslaLogger
                             Log("sentry_mode: " + sentry_mode);
                         }
 
-                        car.CurrentJSON.current_is_sentry_mode = sentry_mode;
+                        car.CurrentJSON.CurrentIsSentryMode = sentry_mode;
                     }
                     catch (Exception ex)
                     {
@@ -3318,10 +3318,10 @@ namespace TeslaLogger
                 try
                 {
                     string car_version = r2["car_version"].ToString();
-                    if (car.CurrentJSON.current_car_version != car_version)
+                    if (car.CurrentJSON.CurrentCarVersion != car_version)
                     {
                         Log("Car Version: " + car_version);
-                        car.CurrentJSON.current_car_version = car_version;
+                        car.CurrentJSON.CurrentCarVersion = car_version;
 
                         car.DbHelper.SetCarVersion(car_version);
 
@@ -3373,7 +3373,7 @@ namespace TeslaLogger
                 {
                     if (r2["inside_temp"] != null)
                     {
-                        car.CurrentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                        car.CurrentJSON.CurrentInsideTemperature = Convert.ToDouble(r2["inside_temp"]);
                     }
                 }
                 catch (Exception) { }
@@ -3382,7 +3382,7 @@ namespace TeslaLogger
                 if (r2["outside_temp"] != null)
                 {
                     outside_temp = (decimal)r2["outside_temp"];
-                    car.CurrentJSON.current_outside_temp = (double)outside_temp;
+                    car.CurrentJSON.CurrentOutsideTemperature = (double)outside_temp;
                 }
                 else
                 {
@@ -3395,9 +3395,9 @@ namespace TeslaLogger
                     if (r2["battery_heater"] != null)
                     {
                         battery_heater = (bool)r2["battery_heater"];
-                        if (car.CurrentJSON.current_battery_heater != battery_heater)
+                        if (car.CurrentJSON.CurrentBatteryHeater != battery_heater)
                         {
-                            car.CurrentJSON.current_battery_heater = (bool)battery_heater;
+                            car.CurrentJSON.CurrentBatteryHeater = (bool)battery_heater;
 
                             Log("Battery heater: " + battery_heater);
                             car.CurrentJSON.CreateCurrentJSON();
@@ -3413,9 +3413,9 @@ namespace TeslaLogger
 
 
                 bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
-                if (preconditioning != car.CurrentJSON.current_is_preconditioning)
+                if (preconditioning != car.CurrentJSON.CurrentIsPreconditioning)
                 {
-                    car.CurrentJSON.current_is_preconditioning = preconditioning;
+                    car.CurrentJSON.CurrentIsPreconditioning = preconditioning;
                     Log("Preconditioning: " + preconditioning);
                     car.CurrentJSON.CreateCurrentJSON();
 
@@ -3797,7 +3797,7 @@ namespace TeslaLogger
                 {
                     { "t", car.TaskerHash },
                     { "v", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() },
-                    { "cv", car.CurrentJSON.current_car_version },
+                    { "cv", car.CurrentJSON.CurrentCarVersion },
                     { "m", car.Model },
                     { "bt", car.Battery },
                     { "n", name },
@@ -3825,8 +3825,8 @@ namespace TeslaLogger
                     { "TR", car.DbHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
-                    { "CC", car.CurrentJSON.current_country_code },
-                    { "ST", car.CurrentJSON.current_state },
+                    { "CC", car.CurrentJSON.CurrentCountryCode },
+                    { "ST", car.CurrentJSON.CurrentState },
                     { "UP", Tools.GetOnlineUpdateSettings().ToString() },
                     { "sumkm", car.Sumkm.ToString() },
                     { "avgkm", car.Avgkm.ToString() },

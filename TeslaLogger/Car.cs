@@ -115,7 +115,7 @@ namespace TeslaLogger
             set
             {
                 _wh_TR = value;
-                CurrentJSON.Wh_TR = value;
+                CurrentJSON.WhTR = value;
             }
         }
 
@@ -220,7 +220,7 @@ namespace TeslaLogger
         {
             try
             {
-                CurrentJSON.current_odometer = DbHelper.GetLatestOdometer();
+                CurrentJSON.CurrentOdometer = DbHelper.GetLatestOdometer();
                 CurrentJSON.CreateCurrentJSON();
 
                 Monitor.Enter(InitCredentialsLock);
@@ -361,7 +361,7 @@ namespace TeslaLogger
 
                 DbHelper.GetLastTrip();
 
-                CurrentJSON.current_car_version = DbHelper.GetLastCarVersion();
+                CurrentJSON.CurrentCarVersion = DbHelper.GetLastCarVersion();
 
                 DbHelper.GetABRP(out aBRP_token, out aBRP_mode);
 
@@ -468,7 +468,7 @@ namespace TeslaLogger
             finally
             {
                 Log("Restart communication with Tesla Server! 1");
-                CurrentJSON.current_falling_asleep = false;
+                CurrentJSON.CurrentFallingAsleep = false;
                 CurrentJSON.CreateCurrentJSON();
             }
         }
@@ -487,9 +487,9 @@ namespace TeslaLogger
                     Thread.Sleep(t); // alle 5 sek eine positionsmeldung
                 }
 
-                if (odometerLastTrip != CurrentJSON.current_odometer)
+                if (odometerLastTrip != CurrentJSON.CurrentOdometer)
                 {
-                    odometerLastTrip = CurrentJSON.current_odometer;
+                    odometerLastTrip = CurrentJSON.CurrentOdometer;
                     lastOdometerChanged = DateTime.Now;
                 }
                 else
@@ -513,7 +513,7 @@ namespace TeslaLogger
 
                 if (Geofence.GetInstance().RacingMode)
                 {
-                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude);
+                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude);
                     if (a != null)
                     {
                         if (lastRacingPoint == null)
@@ -614,7 +614,7 @@ namespace TeslaLogger
                         webhelper.scanMyTesla.FastMode(true);
                     }
 
-                    double missingOdometer = CurrentJSON.current_odometer - odometerLastTrip;
+                    double missingOdometer = CurrentJSON.CurrentOdometer - odometerLastTrip;
 
                     if (odometerLastTrip != 0)
                     {
@@ -681,13 +681,13 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                             if (!CanFallAsleep(out string reason))
                             {
                                 Log($"Reason:{reason} prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
                             }
-                            else if (CurrentJSON.current_is_preconditioning)
+                            else if (CurrentJSON.CurrentIsPreconditioning)
                             {
                                 Log("preconditioning prevents car to get sleep");
                                 lastCarUsed = DateTime.Now;
@@ -707,7 +707,7 @@ namespace TeslaLogger
                                 try
                                 {
                                     Log("STOP communication with Tesla Server to enter sleep Mode! https://teslalogger.de/faq-1.php");
-                                    CurrentJSON.current_falling_asleep = true;
+                                    CurrentJSON.CurrentFallingAsleep = true;
                                     CurrentJSON.CreateCurrentJSON();
 
                                     for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
@@ -720,7 +720,7 @@ namespace TeslaLogger
                                             break;
                                         }
 
-                                        TimeSpan tsSMT = DateTime.Now - CurrentJSON.lastScanMyTeslaReceived;
+                                        TimeSpan tsSMT = DateTime.Now - CurrentJSON.LastScanMyTeslaReceived;
                                         if (CurrentJSON.SMTSpeed > 5 &&
                                             CurrentJSON.SMTSpeed < 260 &&
                                             CurrentJSON.SMTBatteryPower > 2 &&
@@ -765,7 +765,7 @@ namespace TeslaLogger
                                     if (!goSleepWithWakeup)
                                     {
                                         Log("Restart communication with Tesla Server! 2");
-                                        CurrentJSON.current_falling_asleep = false;
+                                        CurrentJSON.CurrentFallingAsleep = false;
                                         CurrentJSON.CreateCurrentJSON();
                                     }
                                 }
@@ -918,8 +918,8 @@ namespace TeslaLogger
             }
             else
             {
-                CurrentJSON.current_sleeping = false;
-                CurrentJSON.current_online = false;
+                CurrentJSON.CurrentSleeping = false;
+                CurrentJSON.CurrentOnline = false;
                 CurrentJSON.CreateCurrentJSON();
 
                 Log("Unhandled State: " + res);
@@ -947,12 +947,12 @@ namespace TeslaLogger
         {
             // finish trip
             SetCurrentState(TeslaState.Start);
-            CurrentJSON.current_trip_end = DateTime.Now;
-            CurrentJSON.current_trip_km_end = CurrentJSON.current_odometer;
-            CurrentJSON.current_trip_end_range = CurrentJSON.current_ideal_battery_range_km;
+            CurrentJSON.CurrentTripEnd = DateTime.Now;
+            CurrentJSON.CurrentTripKMEnd = CurrentJSON.CurrentOdometer;
+            CurrentJSON.CurrentTripEndRange = CurrentJSON.CurrentIdealBatteryRangeKM;
             webhelper.StopStreaming();
 
-            odometerLastTrip = CurrentJSON.current_odometer;
+            odometerLastTrip = CurrentJSON.CurrentOdometer;
 
             DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
         }
@@ -1044,7 +1044,7 @@ namespace TeslaLogger
         {
             Log("ShiftStateChange: " + oldState + " -> " + newState);
             lastCarUsed = DateTime.Now;
-            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
@@ -1262,15 +1262,15 @@ namespace TeslaLogger
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
-                CurrentJSON.current_falling_asleep = false;
+                CurrentJSON.CurrentFallingAsleep = false;
                 CurrentJSON.CreateCurrentJSON();
             }
             // Start -> Online - Update Car Version after Update
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
                 _ = webhelper.GetOdometerAsync();
-                Tools.DebugLog($"Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.latitude}, lon:{CurrentJSON.longitude})");
-                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.latitude, CurrentJSON.longitude);
+                Tools.DebugLog($"Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.CurrentBatteryLevel}, speed:0, charging:false, power:0, lat:{CurrentJSON.Latitude}, lon:{CurrentJSON.Longitude})");
+                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.CurrentBatteryLevel, 0, false, 0, CurrentJSON.Latitude, CurrentJSON.Longitude);
 
             }
             // any -> Driving
@@ -1283,7 +1283,7 @@ namespace TeslaLogger
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
                 // evaluate +hfl special flag
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
@@ -1315,7 +1315,7 @@ namespace TeslaLogger
             // driving -> any
             if (_oldState == TeslaState.Drive && _newState != TeslaState.Drive)
             {
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.Latitude, CurrentJSON.Longitude, false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)

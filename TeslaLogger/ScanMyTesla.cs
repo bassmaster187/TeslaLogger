@@ -130,7 +130,7 @@ namespace TeslaLogger
 
                         dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                         DateTime d = DateTime.Parse(j["d"]);
-                        car.CurrentJSON.lastScanMyTeslaReceived = d;
+                        car.CurrentJSON.LastScanMyTeslaReceived = d;
                         car.CurrentJSON.CreateCurrentJSON();
 
                         Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
