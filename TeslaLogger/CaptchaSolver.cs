@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class CaptchaSolver
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    internal class CaptchaSolver
     {
         private static string API_KEY = CaptchaSolverKey.key;
         static HttpClient client = null;
         string captcha_id;
         DateTime start = DateTime.Now;
-        Car car;
+        readonly Car car;
 
         public CaptchaSolver(Car c)
         {
@@ -40,7 +38,7 @@ namespace TeslaLogger
 
                 car.ExternalLog("2captcha in");
 
-                var response = client.PostAsync("http://2captcha.com/in.php", formContent).Result;
+                var response = client.PostAsync(new Uri("http://2captcha.com/in.php"), formContent).Result;
                 string result = response.Content.ReadAsStringAsync().Result;
 
                 var r = result.Split('|');
@@ -67,7 +65,7 @@ namespace TeslaLogger
                 }))
                 {
 
-                    var response2 = client.PostAsync("http://2captcha.com/res.php", formContent).Result;
+                    var response2 = client.PostAsync(new Uri("http://2captcha.com/res.php"), formContent).Result;
                     string result2 = response2.Content.ReadAsStringAsync().Result;
 
                     if (result2 == "CAPCHA_NOT_READY")
