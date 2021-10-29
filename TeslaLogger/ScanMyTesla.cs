@@ -130,7 +130,7 @@ namespace TeslaLogger
 
                         dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
                         DateTime d = DateTime.Parse(j["d"]);
-                        car.CurrentJSON.LastScanMyTeslaReceived = d;
+                        car.CurrentJSON.lastScanMyTeslaReceived = d;
                         car.CurrentJSON.CreateCurrentJSON();
 
                         Dictionary<string, object> kv = (Dictionary<string, object>)j["dict"];
@@ -139,7 +139,7 @@ namespace TeslaLogger
                         sb.Append("INSERT INTO `can` (`datum`, `id`, `val`, CarId) VALUES ");
                         bool first = true;
 
-                        string sqlDate = d.ToString("yyyy-MM-dd HH:mm:ss");
+                        string sqlDate = d.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
 
                         foreach (KeyValuePair<string, object> line in kv)
                         {

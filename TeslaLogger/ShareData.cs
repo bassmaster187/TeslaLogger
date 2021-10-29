@@ -249,7 +249,6 @@ namespace TeslaLogger
 
                     return l;
                 }
-                dt.Clear();
             }
         }
 
