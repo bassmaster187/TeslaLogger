@@ -125,14 +125,14 @@ namespace TeslaLogger
 
         internal SortedSet<Address> geofenceList = new SortedSet<Address>(new AddressByLatLng());
         internal SortedSet<Address> geofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
-        private FileSystemWatcher fsw;
+        private readonly FileSystemWatcher fsw;
 
         public bool RacingMode = false;
         private bool _RacingMode = false;
 
         private static int FSWCounter = 0;
 
-        internal Geofence(bool RacingMode)
+        private Geofence(bool RacingMode)
         {
             _RacingMode = RacingMode;
             Logfile.Log("Geofence initialized");
