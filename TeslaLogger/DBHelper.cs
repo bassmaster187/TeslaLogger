@@ -3511,7 +3511,7 @@ VALUES(
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km));
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km);
                     }
 
                     if (battery_range_km == -1)
