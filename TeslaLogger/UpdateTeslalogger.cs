@@ -570,7 +570,7 @@ CREATE TABLE superchargerstate(
                     UpdateDBView();
                 }
 
-                DBHelper.Enable_utf8mb4();
+                DBHelper.EnableUTF8mb4();
 
                 DBHelper.EnableMothership();
 
