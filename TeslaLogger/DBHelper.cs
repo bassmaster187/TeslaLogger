@@ -3172,7 +3172,7 @@ WHERE
                                 {
                                     Logfile.Log(ex.ToString());
                                 }
-                            }, TaskScheduler.FromCurrentSynchronizationContext());
+                            }, TaskScheduler.Default);
                         }
                     }
                 }
@@ -4137,13 +4137,7 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($@"
-SHOW
-    COLUMNS
-FROM
-    '{table}'
-LIKE
-    '{column}'", con))
+                using (MySqlCommand cmd = new MySqlCommand("SHOW COLUMNS FROM `" + table + "` LIKE '" + column + "';", con))
                 {
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())

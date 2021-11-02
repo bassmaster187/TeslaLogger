@@ -116,11 +116,12 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     public class Geofence : IDisposable
     {
-        private static Geofence _geofence = null;
+        private static Object lockObj = new Object();
+        private static Geofence _geofence = null; // Singleton
 
         public static Geofence GetInstance()
         {
-            lock (_geofence)
+            lock (lockObj)
             {
                 if (_geofence == null)
                 {

@@ -51,6 +51,7 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none};
 
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
+        private static bool SQLTRACE = false;
 
         public static void SetThread_enUS()
         {
@@ -64,14 +65,17 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
         {
-            try
+            if (SQLTRACE)
             {
-                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
-            }
-            catch (Exception ex)
-            {
-                DebugLog("Exception in SQL DEBUG", ex);
+                try
+                {
+                    string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                    DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
+                }
+                catch (Exception ex)
+                {
+                    DebugLog("Exception in SQL DEBUG", ex);
+                }
             }
         }
 
