@@ -72,7 +72,7 @@ require_once("tools.php");
         $("#cost_per_session").val(json[0]["cost_per_session"]);
         $("#cost_per_minute").val(json[0]["cost_per_minute"]);
         $("#cost_idle_fee_total").val(json[0]["cost_idle_fee_total"]);
-        $("#cost_kwh_meter_invoice").val(Round(json[0]["cost_kwh_meter_invoice"],2));
+        $("#cost_kwh_meter_invoice").val(json[0]["cost_kwh_meter_invoice"]?Round(json[0]["cost_kwh_meter_invoice"],2):"");
 
 		updatecalculation();
 
