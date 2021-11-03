@@ -9,26 +9,30 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class ScanMyTesla
     {
         private string token;
-        private System.Threading.Thread thread;
+        private Thread thread;
         private bool fastmode = false;
         private bool run = true;
         Car car;
 
         public ScanMyTesla(Car c)
         {
-            this.token = c.TaskerHash;
-            this.car = c;
+            if (c != null)
+            {
+                token = c.TaskerHash;
+                car = c;
 
-            thread = new System.Threading.Thread(new System.Threading.ThreadStart(Start));
-            thread.Start();
+                thread = new Thread(new ThreadStart(Start));
+                thread.Start();
+            }
         }
 
         public void FastMode(bool fast)
         {
-            car.Log("ScanMyTesla FastMode: " + fast.ToString());
+            car.Log($"ScanMyTesla FastMode: {fast}");
             fastmode = fast;
         }
 
@@ -63,7 +67,9 @@ namespace TeslaLogger
                     }
 
                     response = GetDataFromWebservice().Result;
-                    if (response.StartsWith("not found") || response.StartsWith("ERROR:") || response.Contains("Resource Limit Is Reached"))
+                    if (response.StartsWith("not found", StringComparison.Ordinal)
+                        || response.StartsWith("ERROR:", StringComparison.Ordinal)
+                        || response.Contains("Resource Limit Is Reached"))
                     {
                         System.Threading.Thread.Sleep(5000);
                     }

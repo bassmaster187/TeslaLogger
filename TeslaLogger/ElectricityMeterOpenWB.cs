@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     class ElectricityMeterOpenWB : ElectricityMeterBase
     {
         string host;
@@ -33,7 +30,7 @@ namespace TeslaLogger
             {
                 if (p.StartsWith("LP", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    LP = int.Parse(p.Substring(2));
+                    LP = int.Parse(p.Substring(2), Tools.ciDeDE);
                 }
             }
         }

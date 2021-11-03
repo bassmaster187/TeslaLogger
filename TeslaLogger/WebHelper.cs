@@ -54,7 +54,7 @@ namespace TeslaLogger
         const string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         const string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 
-        public ScanMyTesla scanMyTesla;
+        internal ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
 
@@ -68,11 +68,11 @@ namespace TeslaLogger
 
         private double battery_range2ideal_battery_range = 0.8000000416972936;
 
-        public static HttpClient httpclient_teslalogger_de = new HttpClient();
-        static HttpClient httpClientForAuthentification;
-        static HttpClient httpClientABRP = null;
-        HttpClient httpclientTeslaAPI = null;
-        static object httpClientLock = new object();
+        internal static HttpClient httpclient_teslalogger_de = new HttpClient();
+        internal static HttpClient httpClientForAuthentification;
+        internal static HttpClient httpClientABRP = null;
+        internal HttpClient httpclientTeslaAPI = null;
+        internal static object httpClientLock = new object();
 
         bool useCaptcha = false;
 

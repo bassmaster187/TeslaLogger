@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     class ElectricityMeterTeslaGen3WallConnector : ElectricityMeterBase
     {
         string host;

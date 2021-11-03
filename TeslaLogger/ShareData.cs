@@ -8,13 +8,15 @@ using System.Text;
 
 namespace TeslaLogger
 {
+    [SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class ShareData
     {
-        private string TaskerToken;
-        private string TeslaloggerVersion;
+        private readonly string TaskerToken;
+        private readonly string TeslaloggerVersion;
         private static bool logwritten = false;
-        private bool shareData = false;
-        Car car;
+        private readonly bool shareData = false;
+        readonly Car car;
 
         public ShareData(Car car)
         {
