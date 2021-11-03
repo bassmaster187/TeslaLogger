@@ -92,6 +92,9 @@ require_once("tools.php");
 
     function Round(value, digits)
     {
+        if (value === null)
+            return value;
+
         var factor = Math.pow(10,digits);
         return Math.round(value * factor)/factor;
     }
