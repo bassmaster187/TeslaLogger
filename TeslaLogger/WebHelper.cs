@@ -79,7 +79,9 @@ namespace TeslaLogger
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
+#pragma warning disable CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
+#pragma warning restore CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
         }
 
         public WebHelper(Car car)
@@ -87,28 +89,6 @@ namespace TeslaLogger
             this.car = car;
 
             CheckUseTaskerToken();
-        }
-
-        public static string getTLSVersion()
-        {
-            /*
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    DateTime start = DateTime.UtcNow;
-                    string reply = client.DownloadString("https://www.howsmyssl.com/a/check");
-                    Logfile.Log("TLS: "+ reply);
-                    return reply;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            */
-
-            return "";
         }
 
         private void CheckUseTaskerToken()
@@ -1151,7 +1131,7 @@ namespace TeslaLogger
 
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -2248,7 +2228,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("drive_state").Result;
 
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -2769,7 +2749,7 @@ namespace TeslaLogger
                     }
                 }
 
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
 
                 Thread.Sleep(5000); // Sleep to not get banned by Nominatim
 
@@ -3231,7 +3211,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("charge_state").Result;
 
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -3281,7 +3261,7 @@ namespace TeslaLogger
             try
             {
                 resultContent = await GetCommand("vehicle_state");
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -3365,7 +3345,7 @@ namespace TeslaLogger
                     return null;
                 }
 
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -3766,7 +3746,7 @@ namespace TeslaLogger
         {
             try
             {
-                Tools.SetThread_enUS();
+                Tools.SetThreadEnUS();
 
                 Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
 

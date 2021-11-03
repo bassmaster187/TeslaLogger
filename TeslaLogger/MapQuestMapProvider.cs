@@ -106,6 +106,11 @@ namespace TeslaLogger
             }
             // https://open.mapquestapi.com/staticmap/v5/map?key=ulMOOlevG9FunIVobQB2BG2GA0EdCjjH&boundingBox=38.915,-77.072,38.876,-77.001&size=200,150&type=dark
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
+            if (extent == null)
+            {
+                return;
+            }
+
             StringBuilder sb = new StringBuilder();
             _ = sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
             _ = sb.Append(ApplicationSettings.Default.MapQuestKey);

@@ -3657,7 +3657,7 @@ WHERE
 
         internal void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
         {
-            Tools.SetThread_enUS();
+            Tools.SetThreadEnUS();
 
             if (charger_phases.Length == 0)
             {

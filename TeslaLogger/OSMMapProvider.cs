@@ -27,6 +27,10 @@ namespace TeslaLogger
             // workaround for linux mono libgdiplus memory leak
             Dictionary<string, object> job = new Dictionary<string, object>();
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
+            if (extent == null)
+            {
+                return;
+            }
             // calculate center point of map
             double lat_center = (extent.Item1 + extent.Item3) / 2;
             double lng_center = (extent.Item2 + extent.Item4) / 2;

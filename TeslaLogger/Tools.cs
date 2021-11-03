@@ -20,6 +20,8 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public static class Tools
     {
 
@@ -53,7 +55,7 @@ namespace TeslaLogger
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
         private static bool SQLTRACE = false;
 
-        public static void SetThread_enUS()
+        public static void SetThreadEnUS()
         {
             Thread.CurrentThread.CurrentCulture = ciEnUS;
         }
@@ -63,14 +65,14 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
             if (SQLTRACE)
             {
                 try
                 {
                     string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
+                    DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
                 }
                 catch (Exception ex)
                 {
@@ -79,14 +81,17 @@ namespace TeslaLogger
             }
         }
 
-        public static void DebugLog(MySqlDataReader dr, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
+        public static void DebugLog(MySqlDataReader dr, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            string msg = "RAWSQL:";
-            for (int column = 0; column < dr.FieldCount; column++)
+            if (dr != null)
             {
-                msg += (column==0?"":"|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+                string msg = "RAWSQL:";
+                for (int column = 0; column < dr.FieldCount; column++)
+                {
+                    msg += (column == 0 ? "" : "|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+                }
+                DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
             }
-            DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
         }
 
         internal static string ExpandSQLCommand(MySqlCommand cmd)

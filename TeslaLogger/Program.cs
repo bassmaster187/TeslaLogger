@@ -7,6 +7,8 @@ using System.Threading;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class Program
     {
         public static bool VERBOSE = false;
@@ -48,8 +50,6 @@ namespace TeslaLogger
                 InitTLStats();
 
                 UpdateDbInBackground();
-
-                WebHelper.getTLSVersion();
 
                 Logfile.Log("Init finished, now enter main loop");
 
@@ -118,7 +118,7 @@ namespace TeslaLogger
                     int id = 0;
                     try
                     {
-                        id = Convert.ToInt32(r["id"]);
+                        id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                         String Name = r["tesla_name"].ToString();
                         String Password = r["tesla_password"].ToString();
                         int carid = r["tesla_carid"] as Int32? ?? 0;
@@ -247,7 +247,7 @@ namespace TeslaLogger
 
         private static void InitStage1()
         {
-            Tools.SetThread_enUS();
+            Tools.SetThreadEnUS();
             UpdateTeslalogger.Chmod("nohup.out", 666, false);
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
