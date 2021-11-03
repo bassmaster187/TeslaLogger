@@ -12,11 +12,13 @@ using System.IO.Compression;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class UpdateTeslalogger
     {
-        private static readonly string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private static bool shareDataOnStartup = false;
-        private static System.Threading.Timer timer;
+        private static Timer timer;
 
         private static DateTime lastVersionCheck = DateTime.UtcNow;
         internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }

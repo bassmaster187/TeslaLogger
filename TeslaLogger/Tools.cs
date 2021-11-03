@@ -20,7 +20,7 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
-    public class Tools
+    public static class Tools
     {
 
         public static readonly System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
@@ -36,9 +36,9 @@ namespace TeslaLogger
         private static string _Range = "IR";
         private static string _defaultcar = "";
         private static string _defaultcarid = "";
-        public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
+        internal static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
-        public static bool? _StreamingPos = null;
+        internal static bool? _StreamingPos = null;
 
         internal static bool UseNearbySuCService()
         {

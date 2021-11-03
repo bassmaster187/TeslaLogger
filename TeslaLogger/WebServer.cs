@@ -476,7 +476,6 @@ namespace TeslaLogger
             int endPosID = 0;
             int width = 240;
             int height = 0;
-            StaticMapProvider.MapType type = StaticMapProvider.MapType.Trip; // TODO
             StaticMapProvider.MapMode mode = StaticMapProvider.MapMode.Regular;
             if (request.QueryString.HasKeys())
             {
@@ -503,14 +502,7 @@ namespace TeslaLogger
                             }
                             break;
                         case "type":
-                            if ("park".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
-                            {
-                                type = StaticMapProvider.MapType.Park;
-                            }
-                            else if ("charge".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
-                            {
-                                type = StaticMapProvider.MapType.Charge;
-                            }
+                            // TODO
                             break;
                         default:
                             break;

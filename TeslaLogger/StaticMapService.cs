@@ -130,7 +130,7 @@ namespace TeslaLogger
 
         private void Work()
         {
-            Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
+            //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
             if (_StaticMapProvider != null)
             {
                 if (queue.TryDequeue(out Request request))
@@ -139,7 +139,7 @@ namespace TeslaLogger
                     int height = request.Height > 0 ? request.Height : 150;
                     if (request is TripRequest)
                     {
-                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
+                        //Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((TripRequest)request).StartPosID}->{((TripRequest)request).EndPosID}");
                         string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(((TripRequest)request).CarID, ((TripRequest)request).StartPosID, ((TripRequest)request).EndPosID));
                         if (MapFileExistsOrIsTooOld(filename))
                         {
@@ -164,7 +164,7 @@ namespace TeslaLogger
                     }
                     else if (request is POIRequest)
                     {
-                        Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Lat},{((POIRequest)request).Lng}");
+                        //Tools.DebugLog($"StaticMapService:Work() request:{request.Type} {((POIRequest)request).Lat},{((POIRequest)request).Lng}");
                         string filename = System.IO.Path.Combine(GetMapDir(), GetMapFileName(request.Type, ((POIRequest)request).Lat, ((POIRequest)request).Lng));
                         if (MapFileExistsOrIsTooOld(filename))
                         {

@@ -1363,7 +1363,7 @@ namespace TeslaLogger
         }
 
 
-        private void WriteMissingFile(double missingOdometer)
+        private static void WriteMissingFile(double missingOdometer)
         {
             try
             {

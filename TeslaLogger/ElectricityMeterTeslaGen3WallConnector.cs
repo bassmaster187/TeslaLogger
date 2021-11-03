@@ -15,7 +15,6 @@ namespace TeslaLogger
         string parameter;
         internal int LP = 1;
 
-        Guid guid = new Guid();
         static WebClient client;
         internal string mockup_lifetime, mockup_version, mockup_vitals;
 

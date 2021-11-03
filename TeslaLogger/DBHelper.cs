@@ -270,7 +270,7 @@ VALUES(
             }
         }
 
-        internal static void SetCost(string[] args)
+        internal static void SetCost()
         {
             try
             {
@@ -685,7 +685,7 @@ AND id <=(
             }
         }
 
-        internal double GetChargeEnergyAddedFromCharging(int ChargingID)
+        internal static double GetChargeEnergyAddedFromCharging(int ChargingID)
         {
             try
             {
@@ -1179,7 +1179,7 @@ HAVING
                     MySqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        int id = Convert.ToInt32(dr["id"]);
+                        int id = Convert.ToInt32(dr["id"], Tools.ciDeDE);
                         string command = dr[1].ToString();
                         if (!mothershipCommands.ContainsKey(command))
                         {
@@ -1927,7 +1927,7 @@ LIMIT 1", con))
             return referenceID;
         }
 
-        private bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        private static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
         {
             try
             {
@@ -2538,7 +2538,7 @@ LIMIT 1", con))
             ElectricityMeterBase v = null;
             try
             {
-                if (!wh.fast_charger_present)
+                if (wh != null && !wh.fast_charger_present)
                 {
                     v = ElectricityMeterBase.Instance(wh.car.CarInDB);
                     if (v != null)
@@ -2557,10 +2557,12 @@ LIMIT 1", con))
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             int chargingstateid = 0;
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            if (wh != null)
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     chargingstate(
         CarID,
@@ -2586,22 +2588,23 @@ VALUES(
     @meter_vehicle_kwh_start,
     @meter_utility_kwh_start
 )", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
-                    cmd.Parameters.AddWithValue("@StartDate", chargeStart);
-                    cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
-                    cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
-                    cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
-                    cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
-                    cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                    cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
-                    cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
-                    cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
-                    Tools.DebugLog(cmd);
-                    cmd.ExecuteNonQuery();
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
+                        cmd.Parameters.AddWithValue("@StartDate", chargeStart);
+                        cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                        cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
+                        cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
+                        cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
+                        cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
+                        cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                        cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
+                        cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
+                        Tools.DebugLog(cmd);
+                        cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "SELECT LAST_INSERT_ID();";
-                    chargingstateid = Convert.ToInt32(cmd.ExecuteScalar(), Tools.ciEnUS);
+                        cmd.CommandText = "SELECT LAST_INSERT_ID();";
+                        chargingstateid = Convert.ToInt32(cmd.ExecuteScalar(), Tools.ciEnUS);
+                    }
                 }
             }
 
@@ -3451,7 +3454,7 @@ WHERE
         }
 
 
-        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
+        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -3505,31 +3508,31 @@ VALUES(
                     cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
-                    if (ideal_battery_range_km == -1)
+                    if (idealBatteryRangeKm == -1)
                     {
                         cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km);
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", idealBatteryRangeKm);
                     }
 
-                    if (battery_range_km == -1)
+                    if (batteryRangeKm == -1)
                     {
                         cmd.Parameters.AddWithValue("@battery_range_km", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@battery_range_km", battery_range_km);
+                        cmd.Parameters.AddWithValue("@battery_range_km", batteryRangeKm);
                     }
 
-                    if (outside_temp == null)
+                    if (outsideTemp == null)
                     {
                         cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@outside_temp", (double)outside_temp);
+                        cmd.Parameters.AddWithValue("@outside_temp", (double)outsideTemp);
                     }
 
                     if (altitude != null && altitude.Length == 0)
@@ -3541,13 +3544,13 @@ VALUES(
                         cmd.Parameters.AddWithValue("@altitude", altitude);
                     }
 
-                    if (battery_level == -1)
+                    if (batteryLevel == -1)
                     {
                         cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@battery_level", battery_level);
+                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
                     }
 
                     if (inside_temp == null)
@@ -3575,14 +3578,14 @@ VALUES(
                             car.CurrentJSON.current_odometer = odometer;
                         }
 
-                        if (ideal_battery_range_km >= 0)
+                        if (idealBatteryRangeKm >= 0)
                         {
-                            car.CurrentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+                            car.CurrentJSON.current_ideal_battery_range_km = idealBatteryRangeKm;
                         }
 
-                        if (battery_range_km >= 0)
+                        if (batteryRangeKm >= 0)
                         {
-                            car.CurrentJSON.current_battery_range_km = battery_range_km;
+                            car.CurrentJSON.current_battery_range_km = batteryRangeKm;
                         }
 
                         if (car.CurrentJSON.current_trip_km_start == 0)
@@ -5131,7 +5134,7 @@ WHERE
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
-            if (car.GetTeslaAPIState().GetString("charging_state", out string chargingState) && chargingState.Equals("Disconnected"))
+            if (car.GetTeslaAPIState().GetString("charging_state", out string chargingState) && chargingState == "Disconnected")
             {
                 UpdateUnplugDate();
             }
