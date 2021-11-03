@@ -1,91 +1,91 @@
 #Akku Trips.json
-Akku Trips=Voyages
-Start Trip=Départ
-End Trip=Fin
+Akku Trips=Akku Trips
+Start Trip=Start Trip
+End Trip=End Trip
 Time=Date
-StartSOC=DébutSOC
-EndSOC=FinSOC
-SOC diff=Diff SOC 
-Start km=Début km
-End km=Fin km
-Start mi=Début mi
-End mi=Fin mi
-kmDiff=Diff km
-Max Range=Portée Max
-Ø Verbrauch=Ø Consommation
-Tage=Jours
+StartSOC=StartSOC
+EndSOC=EndSOC
+SOC diff=SOC diff
+Start km=Start km
+End km=End km
+Start mi=Start mi
+End mi=End mi
+kmDiff=kmDiff
+Max Range=Max Range
+Ø Verbrauch=Ø Consumption
+Tage=Days
 
 #Degradation.json
 Degradation=Degradation
-Maximalreichweite [km]=Portée Max [km]
-Maximalreichweite [mi]=Portée Max [mi]
-km Stand [km]=Odiomètre [km]
-mi Stand [mi]=Odiomètre [mi]
+Maximalreichweite [km]=Max Range [km]
+Maximalreichweite [mi]=Max Range [mi]
+km Stand [km]=Odometer [km]
+mi Stand [mi]=Odometer [mi]
 Odometer [mi]=
-Max. Reichweite (Monatsmittel) [km]=Portée Max (mensuelle avg) [km]
-Max. Reichweite (Monatsmittel) [mi]=Portée Max (mensuelle avg) [mi]
+Max. Reichweite (Monatsmittel) [km]=Max Rage (monthly avg) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max Rage (monthly avg) [mi]
 
 #Ladehistorie.json
-Ladehistorie=Historique Recharge
-Startdatum=Date de Début
-Enddatum=Date de Fin
-geladen kWh=Charge kWh
-km Stand=Oduomètre
-Adresse=Adresse
-TR km Start=TR Début km
-TR km Ende=TR Fib km
-SOC Ende=Fin SOC
+Ladehistorie=Charging History
+Startdatum=Start Date
+Enddatum=End Date
+geladen kWh=kWh Charged
+km Stand=Odometer
+Adresse=Address
+TR km Start=TR km Start
+TR km Ende=TR km End
+SOC Ende=SOC End
 100% TR=100% TR
 Minuten=Minutes
-TR mi Start=TR mi Début
-TR mi Ende=TR mi Fin
+TR mi Start=TR mi Start
+TR mi Ende=TR mi End
 ØkW=ØkW
 
 #Ladestatistik.json
-Ladestatistik=Statistiques Recharges
-Letzte Ladung=Dernière Recharge
-Ort=Adresse
+Ladestatistik=Charging Statistics
+Letzte Ladung=Last Charging
+Ort=Address
 Ø geladen kWh=Ø Charged kWh
-Ladezeit h=Durée h
+Ladezeit h=Charge Duration h
 Ø SOC=Ø SOC
 Max SOC=Max SOC
-Anzahl Ladungen=Coût
-Anzahl=Coût
-Geladen=Charge
-Ladezeit=Durée
-Anz. Ladungen=Coût
-Ladehub=Plage de recharge
+Anzahl Ladungen=Charging Count
+Anzahl=Count
+Geladen=Charged
+Ladezeit=Charging Time
+Anz. Ladungen=Count
+Ladehub=Charging Range
 
 #SOC Ladestatistik.json
-SOC Ladestatistik=SOC Statistisques Recharges
+SOC Ladestatistik=SOC Charging Statistics
 SOC [%]=SOC [%]
 
 #Laden.json
-Laden=Mise en Charge
-Ladespannung [V]= Voltage [V]
+Laden=Charging
+Ladespannung [V]=Charging Voltage [V]
 Reichweite [mi]=Range [mi]
 Reichweite [km]=Range [km]
-Leistung [kW]=Puissance [kW]
+Leistung [kW]=Power [kW]
 Phasen=Phases
-Stromstärke [A]=Intensité [A]
-Angefordert [A]=Demandé [A]
-Pilot [A]=Pilote [A]
+Stromstärke [A]=Current [A]
+Angefordert [A]=Requested [A]
+Pilot [A]=Pilot [A]
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik= Statistiques Consommation Vampire mensuelles
-TR mi Verlust=TR mi perdu
-kWh Verlust=kWh perdu
-Eur Verlust=Eur perdu
+Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
+TR mi Verlust=TR mi Lost
+kWh Verlust=kWh Lost
+Eur Verlust=Eur Lost
 
 #Trip.json
-Trip=Voyage
-Start=Départ
-Ende=Fin
-Start Adresse=Adresse départ
-Ziel Adresse=Adresse destination
-Ø Verbrauch kWh=Ø Consommation kWh
-Verbraucht kWh=Consommée kWh
-Dauer Min=Durée Min
+Trip=Trip
+Start=Start
+Ende=End
+Start Adresse=Start Address
+Ziel Adresse=Destination Address
+Ø Verbrauch kWh=Ø Consumption kWh
+Verbraucht kWh=Consumed kWh
+Dauer Min=Duration Min
 mi=mi
 km=km
 Ø °C=Ø °C
@@ -102,98 +102,100 @@ min kW=min kW
 Ø km/h=Ø kph
 
 #Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden= Time Laps
-TR mi Verlust pro Stunde=TR mi perdu par heure
-mi Stand=Odiomètre
+Zeitspanne Stunden=Timespan Hours
+TR mi Verlust pro Stunde=TR mi Lost per Hour
+mi Stand=Odometer
 
 #Vampir Drain.json
-Vampir Drain=Consommations Vampires
-Standby Stunden=Veille
-Standby=Veille
-TR km Verlust=TR km Perdu
-TR km Verlust pro Stunde=TR km perdu par heure
+Vampir Drain=Vampir Drain
+Standby Stunden=Standby Hours
+Standby=Standby
+TR km Verlust=TR km Lost
+TR km Verlust pro Stunde=TR km Lost Per Hour
 
 #Verbrauch.json
-Verbrauch=Consommation
+Verbrauch=Consumption
 Höhe [m]=Altitude [m]
 Altitude [m]=Altitude [m]
 Geschwindigkeit [mph]=Speed [mph]
-Geschwindigkeit [km/h]=Vitesse [kph]
-Leistung [PS]=Puissance [HP]
-Außentemperatur [°C]=Température extérieure [°C]
-Außentemperatur [°F]=Température extérieure [°F]
-Innentemperatur [°C]=Température intérieure [°C]
-Innentemperatur [°F]=Température intérieure [°F]
+Geschwindigkeit [km/h]=Speed [kph]
+Leistung [PS]=Power [HP]
+Außentemperatur [°C]=Outside Temperature [°C]
+Außentemperatur [°F]=Outside Temperature [°F]
+Innentemperatur [°C]=Inside Temperature [°C]
+Innentemperatur [°F]=Inside Temperature [°F]
 
-Laden fertig=Recharge terminée
-Schlafen=Sommeille
-Online=Enligne
+Laden fertig=Charging Finished
+Schlafen=Sleeping
+Online=Online
+
 #Visited.json
-Visited=Lieux
+Visited=Visited
 
 #index.php
-Car Info=Information Voiture
+Car Info=Car Info
 Status=Status
-Typical Range=Gamme Typique
-Odometer=Odiomètre
-Car Version=Version voiture
-Last Trip=Dernier voyage
-Duration=Durée
+Typical Range=Typical Range
+Odometer=Odometer
+Car Version=Car Version
+Last Trip=Last Trip
+Duration=Duration
 Distance=Distance
 Max kph=Max kph
 PS=PS
-Current Pos=Position actuelle
-Last Update=Dernière mise à jour
-Charging=Recharge
+Current Pos=Current Pos
+Last Update=Last Update
+Charging=Charging
 Done=Done
-Done at=fait à
-Battery Heater=Température Batterie
-Sentry Mode=Mode Sentinelle
-Preconditioning=Préconditionnement
-Offline=Hors Ligne
-Falling asleep=Endormie
+Done at=Done at
+Battery Heater=Battery Heater
+Sentry Mode=Sentry Mode
+Preconditioning=Preconditioning
+Offline=Offline
+Falling asleep=Falling asleep
+
 #menu.php
 Logfile=Logfile
-Restart=Redémarrage
+Restart=Restart
 Update=Update
-Dashboards=Tableaux de bord
-Fleet Statistic=Statistique
+Dashboards=Dashboards
+Fleet Statistic=Fleet Statistic
 Extras=Extras
-Settings=Réglages
-Backup=Sauvegarde
-Restore=Festauration
-Geofence=Géolocalisation
-Suspend Teslalogger=Suspendre Teslalogger
-Wakeup Teslalogger=Activer Teslalogger
-Dashboard=Tableau de bords
+Settings=Settings
+Backup=Backup
+Restore=Restore
+Geofence=Geofence
+Suspend Teslalogger=Suspend Teslalogger
+Wakeup Teslalogger=Wakeup Teslalogger
+Dashboard=Dashboard
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Identifiants Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Veuillez saisir les informations d'identification de votre compte Tesla
+Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
+Bitte Tesla Account Zugangsdaten eingeben=Please enter your Tesla account credentials
 Email=Email
-Passwort=Mot de passe
-Passwort wiederholen=Répéter le mot de passe
-Speichern=Sauvergarde
+Passwort=Password
+Passwort wiederholen=Repeate Password
+Speichern=Save
 
 #settings.php
-Credentials=Crédits
+Credentials=Credentials
 Language=Language
-Power=Pussance
-Temperatur=Température
-Unit of length=Unité de longueur
-URL Admin Panel=URL panneau d'administration
-All=Tous
+Power=Power
+Temperatur=Temperature
+Unit of length=Unit of length
+URL Admin Panel=URL Admin Panel
+All=All
 Stable=Stable
-None=Rien
-Enable=Autoriser
+None=None
+Enable=Enable
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=URL Grafana
 Teslalogger HTTP Port=Teslalogger HTTP Port
 Zoom Level=Zoom Level
 ScanMyTesla integration=ScanMyTesla integration
-Main Car=Voiture principale
-Car Name=Nom de la voiture
+Main Car=Main Car
+Car Name=Car Name
 ScanMyTesla last received=ScanMyTesla last received
 Tasker Token=Tasker Token
 Tasker URL=Tasker URL
@@ -205,18 +207,18 @@ Bezeichnung=Description
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=All consumptions - ScanMyTesla
-Zelltemperatur [°C]=Température de la cellule [°C]
+Zelltemperatur [°C]=Cell Temperature [°C]
 Zelltemperatur [°F]=Cell Temperature [°F]
 
 #Trip Monatsstatistik.json
 Datum=Date
-Fahrzeit [h]=Durée [h]
+Fahrzeit [h]=Drive Time [h]
 Strecke [km]=Distance [km]
 Strecke [mi]=Distance [mi]
-  Verbraucht [kWh]=Consommation kWh
-Ø Verbrauch [kWh]=Ø Consommation kWh
-Anzahl Trips=Coût Trajet
-Trip Monatsstatistik=Statistiques de voyage mensuelles
+Verbraucht [kWh]=Consumed kWh
+Ø Verbrauch [kWh]=Ø Consumption kWh
+Anzahl Trips=Trips Count
+Trip Monatsstatistik=Trip Monthly Statistics
 
 Zellspannungen 01-20 - ScanMyTesla=Cell Voltages 01-20 - ScanMyTesla
 Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
@@ -224,36 +226,36 @@ Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
 Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
 Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
 
-Ja=Oui
-Nein=Non
+Ja=Yes
+Nein=No
 
-Einschlafen=Sommeille
-Automatic updates=Mise à jour automatique
+Einschlafen=Falling asleep
+Automatic updates=Automatic updates
 
-TextShare=<h1>Partager les courbes de charge / courbes de dégradation de manière anonyme</h1>Nous souhaitons créer une base de données anonyme pour comparer les courbes de dégradation et les courbes de charge. Cela vous permet de comparer votre véhicule avec d'autres à tout moment et de détecter à un stade précoce tout écart inhabituel. Cela peut également être utilisé plus tard pour prouver lors de l'entretien de vente que votre batterie est toujours pleinement efficace. Dans le cas négatif, vous pouvez plus facilement prouver une performance réduite face à Tesla Motors.<br><br>Souhaitez-vous partager vos courbes de charge rapide et vos courbes de dégradation avec d'autres conducteurs Tesla de manière totalement anonyme ? Cette décision peut être modifiée à tout moment dans l'écran des paramètres.
-Daten anonym teilen=Partage des données de manière anonyme
-TextSuspendTeslalogger=Teslalogger a été arrêté ! Les données ne seront pas enregistrées !
-Resume Teslalogger=Résumée Teslalogger
+TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
+Daten anonym teilen=Share data anonymously
+TextSuspendTeslalogger=Teslalogger has been stopped! Data will not be logged!
+Resume Teslalogger=Resume Teslalogger
 Range=Range
 
-Ladekosten=Coût recharges
-Ladesäule=Station de charge
-Währung=Argent
-Kosten pro kWh=Prix du kWh
-Kosten pro Ladung=Coût par recharge
-Kosten pro Minute=Coût par minute
-Kosten Blockiergebühr=Coût d'inactivité par minute
+Ladekosten=Charging Costs
+Ladesäule=Charging Station
+Währung=Currency
+Kosten pro kWh=Cost per kWh
+Kosten pro Ladung=Cost per charge
+Kosten pro Minute=Cost per minute
+Kosten Blockiergebühr=Idle cost per minute
 Summe=Total
-kWh selon le compteur / Facture = kWh selon compteur / facture d'achat
-Wirkungsgrad=Efficacité
+kWh laut Zähler / Rechnung=kWh according to meter / invoice
+Wirkungsgrad=Efficiency
 
 #Timeline Plugin.json
 Parking=Parking
-Driving=Conduite
-Charging=Fecharge
-Missing=Disparue
-Ø Temperatur=Ø Température
-Verbraucht=Consomation
+Driving=Driving
+Charging=Charging
+Missing=Missing
+Ø Temperatur=Ø Temperatur
+Verbraucht=Consumed
 
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 
