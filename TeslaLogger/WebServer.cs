@@ -1355,25 +1355,25 @@ namespace TeslaLogger
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html", System.StringComparison.Ordinal))
             {
                 IEnumerable<string> geofence = Geofence.GetInstance().geofenceList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
+                    a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
                         a.name,
                         a.lat,
                         a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
-                            sp => string.Format("{0}<br/>",
+                            sp => string.Format(Tools.ciEnUS, "{0}<br/>",
                             sp.ToString()))
                         )
                     )
                 );
                 IEnumerable<string> geofenceprivate = Geofence.GetInstance().geofencePrivateList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
+                    a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
                         a.name,
                         a.lat,
                         a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
-                            sp => string.Format("{0}<br/>",
+                            sp => string.Format(Tools.ciEnUS, "{0}<br/>",
                             sp.ToString()))
                         )
                     )
@@ -1393,14 +1393,14 @@ namespace TeslaLogger
         {
             Dictionary<string, string> values = new Dictionary<string, string>
             {
-                { "System.DateTime.Now", DateTime.Now.ToString() },
-                { "System.DateTime.UtcNow", DateTime.UtcNow.ToString() },
-                { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString() },
-                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() },
+                { "System.DateTime.Now", DateTime.Now.ToString(Tools.ciEnUS) },
+                { "System.DateTime.UtcNow", DateTime.UtcNow.ToString(Tools.ciEnUS) },
+                { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString(Tools.ciEnUS) },
+                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString(Tools.ciEnUS) },
                 {
                 "TLMemCacheKey.Housekeeping",
                 MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
-                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString()
+                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString(Tools.ciEnUS))).AbsoluteExpiration.ToString(Tools.ciEnUS)
                     : "null"
                 },
             };
@@ -1410,27 +1410,27 @@ namespace TeslaLogger
                 Dictionary<string, string> carvalues = new Dictionary<string, string>
                 {
                     { $"Car #{car.CarInDB} GetCurrentState()", car.GetCurrentState().ToString() },
-                    { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString() },
+                    { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} GetHighFrequencyLoggingMode()", car.GetHighFrequencyLoggingMode().ToString() },
-                    { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString() },
-                    { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString() },
-                    { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString() },
+                    { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} lastSetChargeLimitAddressName",
-                        car.LastSetChargeLimitAddressName.Equals(string.Empty)
+                        string.IsNullOrEmpty(car.LastSetChargeLimitAddressName)
                         ? "&lt;&gt;"
                         : car.LastSetChargeLimitAddressName
                     },
-                    { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString() },
-                    { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
-                    { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
-                    { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
+                    { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString(true).Replace(Environment.NewLine, "<br />") },
                 };
-                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
+                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);
             }
 

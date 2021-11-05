@@ -1559,7 +1559,7 @@ WHERE
         {
             if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {
-                return await DownloadToFile(uri, path, timeout, overwrite);
+                return await DownloadToFile(uri, path, timeout, overwrite).ConfigureAwait(true);
             }
             return false;
         }
@@ -1715,8 +1715,8 @@ WHERE
                 b.Query = q.ToString();
                 string url = b.ToString();
 
-                var result = c.GetAsync(url).Result;
-                var resultContent = result.Content.ReadAsStringAsync().Result;
+                HttpResponseMessage result = c.GetAsync(new Uri(url)).Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
 
             }
             catch (Exception ex)

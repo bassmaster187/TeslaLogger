@@ -729,7 +729,7 @@ namespace TeslaLogger
             return "";            
         }
 
-        public static IEnumerable<Cookie> GetAllCookies(CookieContainer c)
+        internal static IEnumerable<Cookie> GetAllCookies(CookieContainer c)
         {
             Hashtable k = (Hashtable)c.GetType().GetField("m_domainTable", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(c);
             foreach (DictionaryEntry element in k)
@@ -910,7 +910,7 @@ namespace TeslaLogger
 
             using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
             {
-                HttpResponseMessage result = client.PostAsync("https://auth.tesla.com/oauth2/v3/authorize/mfa/verify", content).Result;
+                HttpResponseMessage result = client.PostAsync(new Uri("https://auth.tesla.com/oauth2/v3/authorize/mfa/verify"), content).Result;
                 string resultContent = result.Content.ReadAsStringAsync().Result;
 
                 LogGetToken(resultContent, "MFA2");
