@@ -689,10 +689,10 @@ namespace UnitTestsTeslalogger
             string ret = v.ToString();
             Console.WriteLine(ret);
 
-            Assert.AreEqual(750.685, kwh);
+            Assert.AreEqual(101.5001, kwh);
             Assert.AreEqual(false, chargign);
             Assert.AreEqual(null, utility_meter_kwh);
-            Assert.AreEqual("21.8.5+g51eba2369815d7", version);
+            Assert.AreEqual("20210909-150410/v1.11.4-DNSfix-ge6b2f6d", version);
         }
 
         [TestMethod]

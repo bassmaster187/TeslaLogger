@@ -1,14 +1,12 @@
+# Version 1.49.1
+- French Language
+- Support for Shelly 3EM
+
 # Version 1.49.0
 - Bugfixes and Release
 
-# Version 1.48.18
-- Bugfixes
-
 # Version 1.48.17
 - Support for wallboxes [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md)
-
-# Version 1.48.16
-- Bugfixes
 
 # Version 1.48.15
 - turn off name & passwort authentification to Tesla Server because it won't work anymore
