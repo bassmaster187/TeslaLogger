@@ -5,6 +5,8 @@ using System.Threading;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class TLStats
     {
 

@@ -18,6 +18,7 @@ using System.Web.Script.Serialization;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class WebServer : IDisposable
     {
         private HttpListener listener = null;
@@ -392,10 +393,12 @@ namespace TeslaLogger
                     File.WriteAllText(file_htaccess, content);
 
                     string password = r["password"];
-                    using (var sha1 = SHA1.Create())
+#pragma warning disable CA5350 // Keine schwachen kryptografischen Algorithmen verwenden
+                    using (SHA1 sha1 = SHA1.Create())
+#pragma warning restore CA5350 // Keine schwachen kryptografischen Algorithmen verwenden
                     {
-                        var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
-                        content = string.Format("{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
+                        byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+                        content = string.Format(Tools.ciEnUS, "{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
                     }
                     string filename_htpasswd = "/etc/teslalogger/.htpasswd";
                     File.WriteAllText(filename_htpasswd, content);
@@ -424,7 +427,7 @@ namespace TeslaLogger
 
                     if (String.IsNullOrEmpty(data))
                     {
-                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"]);
+                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"], Tools.ciEnUS);
                         abrp_token = request.QueryString["abrp_token"];
                     }
                     else
@@ -822,7 +825,7 @@ namespace TeslaLogger
                                     {
                                         // convert date/time into GPX format (insert a "T")
                                         // 2020-01-30 09:19:55 --> 2020-01-30T09:19:55
-                                        string Date = Datum.ToString("yyyy-MM-dd") + "T" + Datum.ToString("HH:mm:ss");
+                                        string Date = Datum.ToString("yyyy-MM-dd", Tools.ciEnUS) + "T" + Datum.ToString("HH:mm:ss", Tools.ciEnUS);
                                         string alt = "";
                                         if (double.TryParse(dr[3].ToString(), out double altitude))
                                         {
@@ -900,7 +903,7 @@ namespace TeslaLogger
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
         }
 
         private static void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -911,7 +914,7 @@ namespace TeslaLogger
 
             if (String.IsNullOrEmpty(data))
             {
-                id = Convert.ToInt32(request.QueryString["id"]);
+                id = Convert.ToInt32(request.QueryString["id"], Tools.ciEnUS);
             }
             else
             {
@@ -1218,7 +1221,9 @@ namespace TeslaLogger
 
                                 Logfile.Log("Start Reconnect!");
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.CarType, c.CarSpecialType, c.TrimBadging, c.DisplayName, c.Vin, c.TaskerHash, c.WhTR);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                             }
 
                             WriteString(response, "OK");
@@ -1259,7 +1264,9 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                                     cmd2.ExecuteNonQuery();
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -1292,7 +1299,9 @@ namespace TeslaLogger
                                     c.ExitTeslaLogger("Credentials changed!");
                                 }
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 Car nc = new Car(dbID, email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 WriteString(response, "OK");
                             }
                         }

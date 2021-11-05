@@ -669,31 +669,31 @@ CREATE TABLE superchargerstate(
                 Chmod("MQTTClient.exe.config", 666);
 
                 Logfile.Log("Create backup");
-                Tools.Exec_mono("/bin/bash", "/etc/teslalogger/backup.sh");
+                Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
                 
-                if (!Tools.Exec_mono("git", "--version", false).Contains("git version"))
+                if (!Tools.ExecMono("git", "--version", false).Contains("git version"))
                 {
-                    Tools.Exec_mono("apt-get", "-y install git");
-                    Tools.Exec_mono("git", "--version");
+                    Tools.ExecMono("apt-get", "-y install git");
+                    Tools.ExecMono("git", "--version");
                 }
 
-                if (!Tools.Exec_mono("optipng", "-version", false).Contains("OptiPNG version"))
+                if (!Tools.ExecMono("optipng", "-version", false).Contains("OptiPNG version"))
                 {
-                    if (Tools.Exec_mono("apt-get", "-y install optipng", false).Contains("apt --fix-broken"))
+                    if (Tools.ExecMono("apt-get", "-y install optipng", false).Contains("apt --fix-broken"))
                     {
                         Logfile.Log("Info: apt-get cannot install optipng");
                     }
                     else
                     {
-                        Tools.Exec_mono("optipng", "-version");
+                        Tools.ExecMono("optipng", "-version");
                     }
                 }
 
-                Tools.Exec_mono("rm", "-rf /etc/teslalogger/git/*");
+                Tools.ExecMono("rm", "-rf /etc/teslalogger/git/*");
 
-                Tools.Exec_mono("rm", "-rf /etc/teslalogger/git");
-                Tools.Exec_mono("mkdir", "/etc/teslalogger/git");
-                Tools.Exec_mono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+                Tools.ExecMono("rm", "-rf /etc/teslalogger/git");
+                Tools.ExecMono("mkdir", "/etc/teslalogger/git");
+                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
 
                 // download update package from github
                 bool httpDownloadSuccessful = false;
@@ -745,7 +745,7 @@ CREATE TABLE superchargerstate(
                             if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-master"))
                             {
                                 Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-master to /etc/teslalogger/git");
-                                Tools.Exec_mono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-master /etc/teslalogger/git");
+                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-master /etc/teslalogger/git");
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
                                     Logfile.Log("update package: download and unzip successful");
@@ -767,7 +767,7 @@ CREATE TABLE superchargerstate(
                     for (int x = 1; x < 10; x++)
                     {
                         Logfile.Log("git clone: try " + x);
-                        Tools.Exec_mono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
+                        Tools.ExecMono("git", "clone --progress https://github.com/bassmaster187/TeslaLogger /etc/teslalogger/git/", true, true);
 
                         if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                         {
@@ -817,7 +817,7 @@ CREATE TABLE superchargerstate(
 
                 Logfile.Log("Rebooting");
 
-                Tools.Exec_mono("reboot", "");
+                Tools.ExecMono("reboot", "");
             }
         }
 
@@ -870,7 +870,7 @@ CREATE TABLE superchargerstate(
                 DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 6000);
                 DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 6000);
             }
-            if (DBHelper.GetColumnType(table, "CarID").Equals("int"))
+            if (DBHelper.GetColumnType(table, "CarID") == "int")
             {
                 Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
                 DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 6000);
@@ -1034,7 +1034,7 @@ CREATE TABLE superchargerstate(
                             continue;
                         }
 
-                        if (line.StartsWith("#"))
+                        if (line.StartsWith("#", StringComparison.Ordinal))
                         {
                             continue;
                         }
@@ -1044,7 +1044,7 @@ CREATE TABLE superchargerstate(
                             continue;
                         }
 
-                        int pos = line.IndexOf("=");
+                        int pos = line.IndexOf("=", StringComparison.Ordinal);
                         string key = line.Substring(0, pos).Trim();
                         string value = line.Substring(pos + 1);
 
@@ -1052,7 +1052,7 @@ CREATE TABLE superchargerstate(
 
                         if (ht.ContainsKey(key))
                         {
-                            Logfile.Log($"Error Key '{key}' already in Dictionary!!!");
+                            Logfile.Log($"INFO: Key '{key}' already in Language Dictionary!");
                             continue;
                         }
 
@@ -1114,7 +1114,7 @@ CREATE TABLE superchargerstate(
                             {
                                 // fallback to wget
                                 Logfile.Log($"fallback o wget to download {grafanaUrl}");
-                                Tools.Exec_mono("wget", $"{grafanaUrl}  --show-progress");
+                                Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
                             }
 
                             if (File.Exists(GrafanaFilename))
@@ -1122,9 +1122,9 @@ CREATE TABLE superchargerstate(
                                 Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
 
                                 if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
-                                    Tools.Exec_mono("dpkg", "-r grafana-rpi");
+                                    Tools.ExecMono("dpkg", "-r grafana-rpi");
 
-                                Tools.Exec_mono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
+                                Tools.ExecMono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
                             }
 
                             Logfile.Log("upgrade Grafana DONE!");
@@ -1139,11 +1139,11 @@ CREATE TABLE superchargerstate(
 
                     // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
-                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp/*");
-                    Tools.Exec_mono("rm", "-rf /etc/teslalogger/tmp");
+                    Tools.ExecMono("rm", "-rf /etc/teslalogger/tmp/*");
+                    Tools.ExecMono("rm", "-rf /etc/teslalogger/tmp");
 
-                    Tools.Exec_mono("mkdir", "/etc/teslalogger/tmp");
-                    Tools.Exec_mono("mkdir", "/etc/teslalogger/tmp/Grafana");
+                    Tools.ExecMono("mkdir", "/etc/teslalogger/tmp");
+                    Tools.ExecMono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
@@ -1161,7 +1161,7 @@ CREATE TABLE superchargerstate(
 
                         if (Range == "RR")
                         {
-                            if (!(f.EndsWith("Akku Trips.json") || f.EndsWith("Speed Consumption.json")))
+                            if (!(f.EndsWith("Akku Trips.json", StringComparison.Ordinal) || f.EndsWith("Speed Consumption.json", StringComparison.Ordinal)))
                             {
                                 s = s.Replace("ideal_battery_range_km", "battery_range_km");
                             }
@@ -1171,11 +1171,11 @@ CREATE TABLE superchargerstate(
                         {
                             //Logfile.Log("Convert to kw");
 
-                            if (f.EndsWith("Verbrauch.json"))
+                            if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("power as 'Leistung [PS]'", "power/1.35962 as 'Leistung [kW]'");
                             }
-                            else if (f.EndsWith("Trip.json"))
+                            else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("max PS", "max kW");
                                 s = s.Replace("min PS", "min kW");
@@ -1191,17 +1191,17 @@ CREATE TABLE superchargerstate(
                         {
                             //Logfile.Log("Convert to fahrenheit");
 
-                            if (f.EndsWith("Laden.json"))
+                            if (f.EndsWith("Laden.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
                             }
-                            else if (f.EndsWith("Trip.json"))
+                            else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("Ø °C", "Ø °F");
 
                                 s = s.Replace(" outside_temp_avg", "outside_temp_avg * 9/5 + 32 as outside_temp_avg");
                             }
-                            else if (f.EndsWith("Verbrauch.json"))
+                            else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("outside_temp as 'Außentemperatur [°C]'", "outside_temp * 9/5 + 32 as 'Außentemperatur [°F]'");
                             }
@@ -1211,7 +1211,7 @@ CREATE TABLE superchargerstate(
                         {
                             //Logfile.Log("Convert to mile");
 
-                            if (f.EndsWith("Akku Trips.json"))
+                            if (f.EndsWith("Akku Trips.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("Start km", "Start mi");
                                 s = s.Replace("End km", "End mi");
@@ -1224,7 +1224,7 @@ CREATE TABLE superchargerstate(
 
                                 s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
                             }
-                            else if (f.EndsWith("Degradation.json"))
+                            else if (f.EndsWith("Degradation.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
                                 s = s.Replace(" AS 'Max. Reichweite (Monatsmittel) [km]'", " / 1.609 AS 'Max. Reichweite (Monatsmittel) [mi]'");
@@ -1232,13 +1232,13 @@ CREATE TABLE superchargerstate(
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
 
                             }
-                            else if (f.EndsWith("Laden.json"))
+                            else if (f.EndsWith("Laden.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" as 'Reichweite [km]',", " / 1.609 as 'Reichweite [mi]',");
 
                                 s = s.Replace("Reichweite [km]", "Reichweite [mi]");
                             }
-                            else if (f.EndsWith("Trip.json"))
+                            else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" speed_max,", "speed_max / 1.609 as speed_max,");
                                 s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609 as avg_consumption_kWh_100km,");
@@ -1250,7 +1250,7 @@ CREATE TABLE superchargerstate(
                                 s = s.Replace("\"Ø km/h\"", "\"Ø mph\"");
                                 s = s.Replace("\"km\"", "\"mi\"");
                             }
-                            else if (f.EndsWith("Vampir Drain.json"))
+                            else if (f.EndsWith("Vampir Drain.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" TP2.odometer,", " TP2.odometer / 1.609 as odometer,");
                                 s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
@@ -1261,18 +1261,18 @@ CREATE TABLE superchargerstate(
                                 s = s.Replace("\"TR km Verlust\"", "\"TR mi Verlust\"");
                                 s = s.Replace("\"TR km Verlust pro Stunde\"", "\"TR mi Verlust pro Stunde\"");
                             }
-                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json"))
+                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" as RangeLost", " / 1.609 as RangeLost");
 
                                 s = s.Replace("TR km Verlust", "TR mi Verlust");
                             }
-                            else if (f.EndsWith("Verbrauch.json"))
+                            else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace(" speed as 'Geschwindigkeit [km/h]'", " speed / 1.609 as 'Geschwindigkeit [mph]'");
                                 s = s.Replace(" ideal_battery_range_km as 'Reichweite [km]'", " ideal_battery_range_km / 1.609 as 'Reichweite [mi]'");
                             }
-                            else if (f.EndsWith("Ladehistorie.json"))
+                            else if (f.EndsWith("Ladehistorie.json", StringComparison.Ordinal))
                             {
                                 s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
 
@@ -1287,32 +1287,32 @@ CREATE TABLE superchargerstate(
 
                             s = ReplaceAliasTags(s, dictLanguage);
 
-                            if (f.EndsWith("Akku Trips.json"))
+                            if (f.EndsWith("Akku Trips.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Akku Trips", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "AVG Max Range","AVG Consumption","AVG Trip Days","AVG SOC Diff"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Degradation.json"))
+                            else if (f.EndsWith("Degradation.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Degradation", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Maximalreichweite [km]", "Maximalreichweite [mi]","mi Stand [mi]","km Stand [km]","Max. Reichweite (Monatsmittel) [km]","Max. Reichweite (Monatsmittel) [mi]"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Firmware.json"))
+                            else if (f.EndsWith("Firmware.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Degradation", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Firmware","Date Installed","Days since previous update","Min Days Between Updates","AVG Days Between Updates","Max Days Between Updates"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Ladehistorie.json"))
+                            else if (f.EndsWith("Ladehistorie.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Ladehistorie", dictLanguage);
                             }
-                            else if (f.EndsWith("Laden.json"))
+                            else if (f.EndsWith("Laden.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Laden", dictLanguage);
 
@@ -1322,30 +1322,30 @@ CREATE TABLE superchargerstate(
                                     "Angefordert [A]", "Pilot [A]", "Zelltemperatur [°C]", "Zelltemperatur [°F]"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Speed Consumption.json"))
+                            else if (f.EndsWith("Speed Consumption.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Speed Consumption", dictLanguage);
                             }
-                            else if (f.EndsWith("Status.json"))
+                            else if (f.EndsWith("Status.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Status", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Current Status","SOC","Reichweite","Außentemperatur","Zelltemperatur","km Stand","Firmware","Nur verfügbar mit ScanMyTesla","N/A","Asleep","Online","Offline","Waking","Driving","Charging"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Trip.json"))
+                            else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Trip", dictLanguage);
                             }
-                            else if (f.EndsWith("Vampir Drain.json"))
+                            else if (f.EndsWith("Vampir Drain.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Vampir Drain", dictLanguage);
                             }
-                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json"))
+                            else if (f.EndsWith("Vampir Drain Monatsstatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Vampir Drain Monatsstatistik", dictLanguage);
                             }
-                            else if (f.EndsWith("Verbrauch.json"))
+                            else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Verbrauch", dictLanguage);
 
@@ -1359,61 +1359,61 @@ CREATE TABLE superchargerstate(
                                     "Außentemperatur [°C]", "Außentemperatur [°F]", "Höhe [m]","Innentemperatur [°C]","Innentemperatur [°F]"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Verbrauchsstatstik.json"))
+                            else if (f.EndsWith("Verbrauchsstatstik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Verbrauchsstatistik", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "km Stand[km]","mi Stand [mi]","Verbrauch Monatsmittel [kWh]","Außentemperatur Monatsmittel [°C]","Außentemperatur Monatsmittel [°F]","Verbrauch Tagesmittel [kWh]","Außentemperatur Tagesmittel [°C]", "Außentemperatur Tagesmittel [°F]"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Visited.json"))
+                            else if (f.EndsWith("Visited.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Visited", dictLanguage);
                             }
-                            else if (f.EndsWith("km Stand.json"))
+                            else if (f.EndsWith("km Stand.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "km Stand", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "km Stand [km]"
                                 }, dictLanguage, true);
                             }
-                            else if (f.EndsWith("Ladestatistik.json"))
+                            else if (f.EndsWith("Ladestatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Ladestatistik", dictLanguage);
                             }
-                            else if (f.EndsWith("SOC Ladestatistik.json"))
+                            else if (f.EndsWith("SOC Ladestatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
                             }
-                            else if (f.EndsWith("Zellspannungen 01-20 - ScanMyTesla.json"))
+                            else if (f.EndsWith("Zellspannungen 01-20 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 01-20 - ScanMyTesla", dictLanguage);
                             }
-                            else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json"))
+                            else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 21-40 - ScanMyTesla", dictLanguage);
                             }
-                            else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json"))
+                            else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 41-60 - ScanMyTesla", dictLanguage);
                             }
-                            else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json"))
+                            else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 61-80 - ScanMyTesla", dictLanguage);
                             }
-                            else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json"))
+                            else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 81-99 - ScanMyTesla", dictLanguage);
                             }
-                            else if (f.EndsWith("SOC Ladestatistik.json"))
+                            else if (f.EndsWith("SOC Ladestatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
                             }
-                            else if (f.EndsWith("Trip Monatsstatistik.json"))
+                            else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Trip Monatsstatistik", dictLanguage);
                             }
-                            else if (f.EndsWith("Alle Verbräuche -ScanMyTesla.json"))
+                            else if (f.EndsWith("Alle Verbräuche -ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Alle Verbräuche - ScanMyTesla", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
@@ -1429,7 +1429,7 @@ CREATE TABLE superchargerstate(
                         if (URL_Admin.Length > 0)
                         {
                             string temp_URL = URL_Admin;
-                            if (!temp_URL.EndsWith("/"))
+                            if (!temp_URL.EndsWith("/", StringComparison.Ordinal))
                             {
                                 temp_URL += "/";
                             }
@@ -1474,7 +1474,7 @@ CREATE TABLE superchargerstate(
 
                     if (!Tools.IsDocker())
                     {
-                        Tools.Exec_mono("service", "grafana-server restart");
+                        Tools.ExecMono("service", "grafana-server restart");
                     }
 
                     CopyLanguageFileToTimelinePanel(language);
@@ -1558,8 +1558,10 @@ CREATE TABLE superchargerstate(
                 title = j["title"];
                 uid = j["uid"];
 
-                if (!URL_Grafana.EndsWith("/"))
+                if (!URL_Grafana.EndsWith("/", StringComparison.Ordinal))
+                {
                     URL_Grafana += "/";
+                }
 
                 link = URL_Grafana + "d/" + uid + "/" + title;
             }
@@ -1749,7 +1751,7 @@ CREATE TABLE superchargerstate(
                         else
                         {
                             Logfile.Log("Rebooting");
-                            Tools.Exec_mono("reboot", "");
+                            Tools.ExecMono("reboot", "");
                         }
                     }
                     else

@@ -158,9 +158,9 @@ namespace TeslaLogger
             return msg;
         }
 
-        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            string temp = "DEBUG : " + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
             AddToBuffer(temp);
             if (Program.VERBOSE)
             {
@@ -239,7 +239,7 @@ namespace TeslaLogger
         private static string ThreadAndDateInfo
         {
             //returns thread number and precise date and time.
-            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff") + "] "; }
+            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff", Tools.ciEnUS) + "] "; }
         }
 
         public static string GetMonoRuntimeVersion()
@@ -264,30 +264,37 @@ namespace TeslaLogger
 
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
         {
-            try
+            if (source != null && target != null)
             {
-                foreach (DirectoryInfo dir in source.GetDirectories())
+                try
                 {
-                    CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
-                }
+                    foreach (DirectoryInfo dir in source.GetDirectories())
+                    {
+                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                    }
 
-                foreach (FileInfo file in source.GetFiles())
+                    foreach (FileInfo file in source.GetFiles())
+                    {
+                        if (excludeFile != null && file.Name == excludeFile)
+                        {
+                            Logfile.Log($"CopyFilesRecursively: skip {excludeFile}");
+                        }
+                        else
+                        {
+                            string p = Path.Combine(target.FullName, file.Name);
+                            Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                            File.Copy(file.FullName, p, true);
+                        }
+                    }
+                }
+                catch (Exception ex)
                 {
-                    if (excludeFile != null && file.Name.Equals(excludeFile))
-                    {
-                        Logfile.Log($"CopyFilesRecursively: skip {excludeFile}");
-                    }
-                    else
-                    {
-                        string p = Path.Combine(target.FullName, file.Name);
-                        Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
-                        File.Copy(file.FullName, p, true);
-                    }
+                    Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
+                Logfile.Log($"CopyFilesRecursively: source or target is null - source:{source} target:{target}");
             }
         }
 
@@ -350,7 +357,7 @@ namespace TeslaLogger
                     AWD = true;
                 }
                 // check made in China
-                if (vin.StartsWith("LRW"))
+                if (vin.StartsWith("LRW", StringComparison.Ordinal))
                 {
                     MIC = true;
                 }
@@ -445,14 +452,17 @@ namespace TeslaLogger
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
-            foreach (DataRow row in table.Rows)
+            if (table != null)
             {
-                childRow = new Dictionary<string, object>();
-                foreach (DataColumn col in table.Columns)
+                foreach (DataRow row in table.Rows)
                 {
-                    childRow.Add(col.ColumnName, row[col]);
+                    childRow = new Dictionary<string, object>();
+                    foreach (DataColumn col in table.Columns)
+                    {
+                        childRow.Add(col.ColumnName, row[col]);
+                    }
+                    parentRow.Add(childRow);
                 }
-                parentRow.Add(childRow);
             }
             return jsSerializer.Serialize(parentRow);
         }
@@ -480,8 +490,8 @@ namespace TeslaLogger
                     string start = j["SleepTimeSpanEnd"];
                     string[] s = start.Split(':');
 
-                    int.TryParse(s[0], out stopSleepingHour);
-                    int.TryParse(s[1], out stopSleepingMinute);
+                    _ = int.TryParse(s[0], out stopSleepingHour);
+                    _ = int.TryParse(s[1], out stopSleepingMinute);
                 }
             }
             catch (Exception ex)
@@ -646,8 +656,8 @@ namespace TeslaLogger
 
                         if (s.Length >= 2)
                         {
-                            int.TryParse(s[0], out startSleepingHour);
-                            int.TryParse(s[1], out startSleepingMinutes);
+                            _ = int.TryParse(s[0], out startSleepingHour);
+                            _ = int.TryParse(s[1], out startSleepingMinutes);
                         }
                     }
                 }
@@ -665,7 +675,7 @@ namespace TeslaLogger
 
         // timeout in seconds
         // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
+        public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
             Logfile.Log("Exec_mono: " + cmd + " " + param);
 
@@ -1033,7 +1043,7 @@ namespace TeslaLogger
 
         internal static string GetOsVersion()
         {
-            if (!_OSVersion.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(_OSVersion))
             {
                 return _OSVersion;
             }
@@ -1503,25 +1513,25 @@ WHERE
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception direcotry");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
-                    Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                    ExecMono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
                 }
             }
         }
 
         private static void LogDiskUsage()
         {
-            _ = Exec_mono("/bin/df", "-k", true, true);
+            _ = ExecMono("/bin/df", "-k", true, true);
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
             }
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
             }
             if (File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
             }
         }
 

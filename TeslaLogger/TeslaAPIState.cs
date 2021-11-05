@@ -7,6 +7,8 @@ using System.Web.Script.Serialization;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class TeslaAPIState
     {
         public enum Key
@@ -77,13 +79,13 @@ namespace TeslaLogger
                         {
                             if (
                                 // olvalue != null and value changed
-                                !(oldvalue == null || value == null || oldvalue.ToString().Equals(value.ToString()))
+                                !(oldvalue == null || value == null || oldvalue.ToString() == value.ToString())
                                 // oldvalue was null and newvalue is not null
                                 || (oldvalue == null && value != null)
                                 )
                             {
                                 storage[name][Key.ValueLastUpdate] = timestamp;
-                                HandleStateChange(name, oldvalue, value, long.Parse(oldTS.ToString()), timestamp);
+                                HandleStateChange(name, oldvalue, value, long.Parse(oldTS.ToString(), Tools.ciEnUS), timestamp);
                             }
                         }
                     }
@@ -1279,7 +1281,7 @@ namespace TeslaLogger
             long maxTS = 0;
             foreach (string property in storage.Keys)
             {
-                if (string.IsNullOrEmpty(source) || source.Equals(property))
+                if (string.IsNullOrEmpty(source) || source == property)
                 {
                     maxTS = (long)((maxTS < (long)storage[property][Key.Timestamp]) ? storage[property][Key.Timestamp] : maxTS);
                 }

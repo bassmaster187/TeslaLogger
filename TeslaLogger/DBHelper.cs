@@ -2607,9 +2607,11 @@ VALUES(
                     }
                 }
             }
-
-            wh.car.CurrentJSON.current_charging = true;
-            wh.car.CurrentJSON.CreateCurrentJSON();
+            if (wh != null)
+            {
+                wh.car.CurrentJSON.current_charging = true;
+                wh.car.CurrentJSON.CreateCurrentJSON();
+            }
 
             // Check for one minute if meter claims car is really not charging 
             if (v != null && v.IsCharging() != true)
