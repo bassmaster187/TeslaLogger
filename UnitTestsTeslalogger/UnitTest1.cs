@@ -678,7 +678,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void Shelly3EM()
         {
-            var v = new ElectricityMeterShelly3EM("", ""); // "http://1zshb9fwtxqs336h.myfritz.net:5000"
+            var v = new ElectricityMeterShelly3EM("", ""); 
             v.mockup_status = "{\"wifi_sta\":{\"connected\":true,\"ssid\":\"badhome\",\"ip\":\"192.168.70.176\",\"rssi\":-78},\"cloud\":{\"enabled\":false,\"connected\":false},\"mqtt\":{\"connected\":false},\"time\":\"16:19\",\"unixtime\":1636125569,\"serial\":7665,\"has_update\":false,\"mac\":\"C45BBE5F71E5\",\"cfg_changed_cnt\":1,\"actions_stats\":{\"skipped\":0},\"relays\":[{\"ison\":false,\"has_timer\":false,\"timer_started\":0,\"timer_duration\":0,\"timer_remaining\":0,\"overpower\":false,\"is_valid\":true,\"source\":\"input\"}],\"emeters\":[{\"power\":0.00,\"pf\":0.14,\"current\":0.01,\"voltage\":236.00,\"is_valid\":true,\"total\":23870.9,\"total_returned\":28.7},{\"power\":0.00,\"pf\":0.00,\"current\":0.01,\"voltage\":236.07,\"is_valid\":true,\"total\":22102.0,\"total_returned\":59.4},{\"power\":7.49,\"pf\":0.49,\"current\":0.07,\"voltage\":235.88,\"is_valid\":true,\"total\":55527.2,\"total_returned\":0.0}],\"total_power\":7.49,\"fs_mounted\":true,\"update\":{\"status\":\"idle\",\"has_update\":false,\"new_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"old_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\"},\"ram_total\":49440,\"ram_free\":30260,\"fs_size\":233681,\"fs_free\":156624,\"uptime\":1141576}";
             v.mockup_shelly = "{\"type\":\"SHEM-3\",\"mac\":\"C45BBE5F71E5\",\"auth\":false,\"fw\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"longid\":1,\"num_outputs\":1,\"num_meters\":0,\"num_emeters\":3,\"report_period\":1}";
 
