@@ -40,18 +40,18 @@ namespace UnitTestsTeslalogger
 
             string temp = WebHelper.ReverseGecocodingAsync(c, 35.677121, 139.751033).Result;
             Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
-            Assert.AreEqual("jp", c.currentJSON.current_country_code);
-            Assert.AreEqual("", c.currentJSON.current_state);
+            Assert.AreEqual("jp", c.CurrentJSON.current_country_code);
+            Assert.AreEqual("", c.CurrentJSON.current_state);
 
             temp = WebHelper.ReverseGecocodingAsync(c, 48.400892, 9.970095).Result;
             Assert.AreEqual("89077 Ulm, Beringerbrücke ", temp);
-            Assert.AreEqual("de", c.currentJSON.current_country_code);
-            Assert.AreEqual("Baden-Württemberg", c.currentJSON.current_state);
+            Assert.AreEqual("de", c.CurrentJSON.current_country_code);
+            Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
 
             temp = WebHelper.ReverseGecocodingAsync(c, 40.773667, -74.039867).Result;
             Assert.AreEqual("us-07047 North Bergen, Jane Street ", temp);
-            Assert.AreEqual("us", c.currentJSON.current_country_code);
-            Assert.AreEqual("New Jersey", c.currentJSON.current_state);
+            Assert.AreEqual("us", c.CurrentJSON.current_country_code);
+            Assert.AreEqual("New Jersey", c.CurrentJSON.current_state);
             
         }
         [TestMethod]
@@ -62,13 +62,13 @@ namespace UnitTestsTeslalogger
             Tools.SetThread_enUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
-            c.dbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
-            int startid = c.dbHelper.GetMaxPosid(true);
-            c.dbHelper.StartDriveState(DateTime.Now);
+            c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
+            int startid = c.DbHelper.GetMaxPosid(true);
+            c.DbHelper.StartDriveState(DateTime.Now);
 
-            c.dbHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
-            int endid = c.dbHelper.GetMaxPosid(true);
-            c.dbHelper.CloseDriveState(DateTime.Now);
+            c.DbHelper.InsertPos(unixTimestamp.ToString(), 35.677121, 139.751033, 0, 0, 2, 0, 0, 0, 0, "0");
+            int endid = c.DbHelper.GetMaxPosid(true);
+            c.DbHelper.CloseDriveState(DateTime.Now);
         }
 
 
@@ -79,13 +79,13 @@ namespace UnitTestsTeslalogger
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models";
-            wh.car.car_special_type = "base";
-            wh.car.trim_badging = "85d";
+            wh.car.CarType = "models";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "85d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 85D", wh.car.ModelName);
-            Assert.AreEqual(0.186, wh.car.Wh_TR);
+            Assert.AreEqual(0.186, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -95,14 +95,14 @@ namespace UnitTestsTeslalogger
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models";
-            wh.car.car_special_type = "base";
-            wh.car.trim_badging = "85d";
-            wh.car.carVoltageAt50SOC = 336;
+            wh.car.CarType = "models";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "85d";
+            wh.car.CarVoltageAt50SOC = 336;
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 85D 350V", wh.car.ModelName);
-            Assert.AreEqual(0.186, wh.car.Wh_TR);
+            Assert.AreEqual(0.186, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -112,13 +112,13 @@ namespace UnitTestsTeslalogger
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models";
-            wh.car.car_special_type = "signature";
-            wh.car.trim_badging = "p85";
+            wh.car.CarType = "models";
+            wh.car.CarSpecialType = "signature";
+            wh.car.TrimBadging = "p85";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S P85", wh.car.ModelName);
-            Assert.AreEqual(0.201, wh.car.Wh_TR);
+            Assert.AreEqual(0.201, wh.car.WhTR);
         }
 
 
@@ -130,14 +130,14 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 515, DateTime.Now.AddMinutes(1));
-            wh.car.car_type = "model3";
-            wh.car.DB_Wh_TR = 0.145;
-            wh.car.trim_badging = "";
-            wh.car.vin = "5YJ3E7EA9KFxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.DBWhTR = 0.145;
+            wh.car.TrimBadging = "";
+            wh.car.Vin = "5YJ3E7EA9KFxxxxxx";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
-            Assert.AreEqual(0.145, wh.car.Wh_TR);
+            Assert.AreEqual(0.145, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -148,15 +148,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 535, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJ3E7EA9KFxxxxxx";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.145;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "5YJ3E7EA9KFxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.145;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
-            Assert.AreEqual(0.145, wh.car.Wh_TR);
+            Assert.AreEqual(0.145, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -168,15 +168,15 @@ namespace UnitTestsTeslalogger
             //2021 Model 3 LR Performance
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJ3E7EC2MFXXXXXX";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.158;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "5YJ3E7EC2MFXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.158;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR P 2021", wh.car.ModelName);
-            Assert.AreEqual(0.158, wh.car.Wh_TR);
+            Assert.AreEqual(0.158, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -188,15 +188,15 @@ namespace UnitTestsTeslalogger
             //2021 Model 3 LR Performance
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 505, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "LRW3E7EL1MCXXXXXX";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.152;
-            wh.car.trim_badging = "p74d";
+            wh.car.Vin = "LRW3E7EL1MCXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.152;
+            wh.car.TrimBadging = "p74d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR P 2021", wh.car.ModelName);
-            Assert.AreEqual(0.158, wh.car.Wh_TR);
+            Assert.AreEqual(0.158, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -207,15 +207,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 491, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJ3F7EC1LFXXXXXX";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.152;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "5YJ3F7EC1LFXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.152;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 LR P", wh.car.ModelName);
-            Assert.AreEqual(0.158, wh.car.Wh_TR);
+            Assert.AreEqual(0.158, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -226,15 +226,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "LRW3E7FA9LCxxxxxx";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.133;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "LRW3E7FA9LCxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.133;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 SR+ LFP", wh.car.ModelName);
-            Assert.AreEqual(0.133, wh.car.Wh_TR);
+            Assert.AreEqual(0.133, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -245,15 +245,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 420, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "LRW3E7FA1MCxxxxxx";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 127;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "LRW3E7FA1MCxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 127;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
-            Assert.AreEqual(0.127, wh.car.Wh_TR);
+            Assert.AreEqual(0.127, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -264,15 +264,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 0, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "LRW3E7FA1MCxxxxxx";
-            wh.car.car_type = "model3";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 127;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "LRW3E7FA1MCxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 127;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
-            Assert.AreEqual(0.127, wh.car.Wh_TR);
+            Assert.AreEqual(0.127, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -284,15 +284,15 @@ namespace UnitTestsTeslalogger
             //2021 Model 3 SR+
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 407, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJ3E7EA3MFXXXXXX";
-            wh.car.car_type = ""; // sometimes empty !!!
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.126;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "5YJ3E7EA3MFXXXXXX";
+            wh.car.CarType = ""; // sometimes empty !!!
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.126;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 SR+ 2021", wh.car.ModelName);
-            Assert.AreEqual(0.126, wh.car.Wh_TR);
+            Assert.AreEqual(0.126, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -301,14 +301,14 @@ namespace UnitTestsTeslalogger
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
             WebHelper wh = c.webhelper;
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.145;
-            wh.car.trim_badging = "75d";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.145;
+            wh.car.TrimBadging = "75d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 75D", wh.car.ModelName);
-            Assert.AreEqual(0.186, wh.car.Wh_TR);
+            Assert.AreEqual(0.186, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -317,15 +317,15 @@ namespace UnitTestsTeslalogger
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
             WebHelper wh = c.webhelper;
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.145;
-            wh.car.trim_badging = "75d";
-            wh.car.carVoltageAt50SOC = 380;
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.145;
+            wh.car.TrimBadging = "75d";
+            wh.car.CarVoltageAt50SOC = 380;
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 75D 400V", wh.car.ModelName);
-            Assert.AreEqual(0.186, wh.car.Wh_TR);
+            Assert.AreEqual(0.186, wh.car.WhTR);
         }
 
 
@@ -336,13 +336,13 @@ namespace UnitTestsTeslalogger
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.trim_badging = "90d";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "90d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 90D", wh.car.ModelName);
-            Assert.AreEqual(0.188, wh.car.Wh_TR);
+            Assert.AreEqual(0.188, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -353,14 +353,14 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 443, DateTime.Now.AddMinutes(1));
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.163;
-            wh.car.trim_badging = "";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.163;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S Raven SR", wh.car.ModelName);
-            Assert.AreEqual(0.163, wh.car.Wh_TR);
+            Assert.AreEqual(0.163, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -371,14 +371,14 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 560, DateTime.Now.AddMinutes(1));
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.169;
-            wh.car.trim_badging = "";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.169;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S Raven LR", wh.car.ModelName);
-            Assert.AreEqual(0.173, wh.car.Wh_TR);
+            Assert.AreEqual(0.173, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -389,15 +389,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 594, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJSA7E28LFXXXXXX";
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.162;
-            wh.car.trim_badging = "100d";
+            wh.car.Vin = "5YJSA7E28LFXXXXXX";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.162;
+            wh.car.TrimBadging = "100d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 100D Raven", wh.car.ModelName);
-            Assert.AreEqual(0.162, wh.car.Wh_TR);
+            Assert.AreEqual(0.162, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -408,15 +408,15 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 546, DateTime.Now.AddMinutes(1));
-            wh.car.vin = "5YJSA7E43LFXXXXXX";
-            wh.car.car_type = "models2";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.173;
-            wh.car.trim_badging = "";
+            wh.car.Vin = "5YJSA7E43LFXXXXXX";
+            wh.car.CarType = "models2";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.173;
+            wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S Raven LR P", wh.car.ModelName);
-            Assert.AreEqual(0.173, wh.car.Wh_TR);
+            Assert.AreEqual(0.173, wh.car.WhTR);
         }
 
 
@@ -427,13 +427,13 @@ namespace UnitTestsTeslalogger
             WebHelper wh = c.webhelper;
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
-            wh.car.car_type = "modelx";
-            wh.car.car_special_type = "base";
-            wh.car.trim_badging = "100d";
+            wh.car.CarType = "modelx";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "100d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("X 100D", wh.car.ModelName);
-            Assert.AreEqual(0.217, wh.car.Wh_TR);
+            Assert.AreEqual(0.217, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -444,14 +444,14 @@ namespace UnitTestsTeslalogger
 
             MemoryCache.Default.Remove("GetAvgMaxRage_0");
             MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
-            wh.car.car_type = "modely";
-            wh.car.car_special_type = "base";
-            wh.car.DB_Wh_TR = 0.148;
-            wh.car.trim_badging = "74d";
+            wh.car.CarType = "modely";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.148;
+            wh.car.TrimBadging = "74d";
             wh.UpdateEfficiency();
 
             Assert.AreEqual("Y LR AWD", wh.car.ModelName);
-            Assert.AreEqual(0.148, wh.car.Wh_TR);
+            Assert.AreEqual(0.148, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -673,6 +673,26 @@ namespace UnitTestsTeslalogger
             var v = new ElectricityMeterGoE("http://192.168.1.222", "");
             string ret = v.ToString();
             Console.WriteLine(ret);
+        }
+
+        [TestMethod]
+        public void Shelly3EM()
+        {
+            var v = new ElectricityMeterShelly3EM("", ""); // "http://1zshb9fwtxqs336h.myfritz.net:5000"
+            v.mockup_status = "{\"wifi_sta\":{\"connected\":true,\"ssid\":\"badhome\",\"ip\":\"192.168.70.176\",\"rssi\":-78},\"cloud\":{\"enabled\":false,\"connected\":false},\"mqtt\":{\"connected\":false},\"time\":\"16:19\",\"unixtime\":1636125569,\"serial\":7665,\"has_update\":false,\"mac\":\"C45BBE5F71E5\",\"cfg_changed_cnt\":1,\"actions_stats\":{\"skipped\":0},\"relays\":[{\"ison\":false,\"has_timer\":false,\"timer_started\":0,\"timer_duration\":0,\"timer_remaining\":0,\"overpower\":false,\"is_valid\":true,\"source\":\"input\"}],\"emeters\":[{\"power\":0.00,\"pf\":0.14,\"current\":0.01,\"voltage\":236.00,\"is_valid\":true,\"total\":23870.9,\"total_returned\":28.7},{\"power\":0.00,\"pf\":0.00,\"current\":0.01,\"voltage\":236.07,\"is_valid\":true,\"total\":22102.0,\"total_returned\":59.4},{\"power\":7.49,\"pf\":0.49,\"current\":0.07,\"voltage\":235.88,\"is_valid\":true,\"total\":55527.2,\"total_returned\":0.0}],\"total_power\":7.49,\"fs_mounted\":true,\"update\":{\"status\":\"idle\",\"has_update\":false,\"new_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"old_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\"},\"ram_total\":49440,\"ram_free\":30260,\"fs_size\":233681,\"fs_free\":156624,\"uptime\":1141576}";
+            v.mockup_shelly = "{\"type\":\"SHEM-3\",\"mac\":\"C45BBE5F71E5\",\"auth\":false,\"fw\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"longid\":1,\"num_outputs\":1,\"num_meters\":0,\"num_emeters\":3,\"report_period\":1}";
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(750.685, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("21.8.5+g51eba2369815d7", version);
         }
 
         [TestMethod]
