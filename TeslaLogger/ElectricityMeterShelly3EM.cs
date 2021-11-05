@@ -89,7 +89,25 @@ namespace TeslaLogger
 
         public override bool? IsCharging()
         {
-            return GetVehicleMeterReading_kWh() > 3000;
+            string j = null;
+            try
+            {
+                j = GetCurrentData();
+
+                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                decimal value1 = jsonResult["emeters"][0]["power"];
+                decimal value2 = jsonResult["emeters"][1]["power"];
+                decimal value3 = jsonResult["emeters"][2]["power"];
+                decimal watt_total = (value1 + value2 + value3);
+
+                return watt_total > 3000;
+            }
+            catch (Exception ex)
+            {
+                Logfile.ExceptionWriter(ex, j);
+            }
+
+            return null;
         }
 
         public override string GetVersion()
