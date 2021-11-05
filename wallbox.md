@@ -4,7 +4,7 @@ You can connect your Teslalogger to your Wallbox to calculate the efficiency of 
 - OpenWB
 - go-eCharger
 - Tesla Wallbox Gen 3
-- Shelly 3EM for all unsupported wallboxes or without meter: https://amzn.to/3nUEuO0
+- Shelly 3EM for all unsupported wallboxes or without build in meter: https://amzn.to/3nUEuO0
 
 # Settings
 Go to admin panel and select the car you want to use for the wallbox. Go to Extras / Wallbox.
