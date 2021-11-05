@@ -75,6 +75,7 @@
     <Compile Include="ElectricityMeterBase.cs" />
     <Compile Include="ElectricityMeterGoE.cs" />
     <Compile Include="ElectricityMeterOpenWB.cs" />
+    <Compile Include="ElectricityMeterShelly3EM.cs" />
     <Compile Include="ElectricityMeterTeslaGen3WallConnector.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />

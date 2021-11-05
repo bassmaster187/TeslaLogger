@@ -30,6 +30,8 @@ namespace TeslaLogger
                 return new ElectricityMeterGoE(host, paramater);
             else if (type == "tesla-gen3")
                 return new ElectricityMeterTeslaGen3WallConnector(host, paramater);
+            else if (type == "shelly3em")
+                return new ElectricityMeterShelly3EM(host, paramater);
 
             return null;
         }
