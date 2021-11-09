@@ -1400,7 +1400,7 @@ namespace TeslaLogger
                 {
                 "TLMemCacheKey.Housekeeping",
                 MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
-                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString(Tools.ciEnUS))).AbsoluteExpiration.ToString(Tools.ciEnUS)
+                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString(Tools.ciEnUS)
                     : "null"
                 },
             };
