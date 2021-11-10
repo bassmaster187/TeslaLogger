@@ -2831,13 +2831,13 @@ namespace TeslaLogger
                     {
                         city = r2["city"].ToString();
                     }
-                    else if (r2.ContainsKey("village"))
-                    {
-                        city = r2["village"].ToString();
-                    }
                     else if (r2.ContainsKey("town"))
                     {
                         city = r2["town"].ToString();
+                    }
+                    else if (r2.ContainsKey("village"))
+                    {
+                        city = r2["village"].ToString();
                     }
 
                     string house_number = "";

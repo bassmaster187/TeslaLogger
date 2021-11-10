@@ -14,47 +14,6 @@ namespace UnitTestsTeslalogger
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethodGeocode()
-        {
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var geofence = new TeslaLogger.Geofence(false);
-            var a = geofence.GetPOI(48.456708, 10.029897);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
-
-            a = geofence.GetPOI(48.456616, 10.030200);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
-
-            a = geofence.GetPOI(48.456790, 10.030014);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
-
-            a = geofence.GetPOI(48.456691, 10.030241);
-            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
-
-            a = geofence.GetPOI(48.456888, 10.029635);
-            Assert.AreEqual(a.name, "EnBW DE-Ulm");
-
-            GeocodeCache.Instance.ClearCache();
-            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
-
-            string temp = WebHelper.ReverseGecocodingAsync(c, 35.677121, 139.751033).Result;
-            Assert.AreEqual("jp-100-0013 千代田区, 内堀通り ", temp);
-            Assert.AreEqual("jp", c.CurrentJSON.current_country_code);
-            Assert.AreEqual("", c.CurrentJSON.current_state);
-
-            temp = WebHelper.ReverseGecocodingAsync(c, 48.400892, 9.970095).Result;
-            Assert.AreEqual("89077 Ulm, Beringerbrücke ", temp);
-            Assert.AreEqual("de", c.CurrentJSON.current_country_code);
-            Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
-
-            temp = WebHelper.ReverseGecocodingAsync(c, 40.773667, -74.039867).Result;
-            Assert.AreEqual("us-07047 North Bergen, Jane Street ", temp);
-            Assert.AreEqual("us", c.CurrentJSON.current_country_code);
-            Assert.AreEqual("New Jersey", c.CurrentJSON.current_state);
-            
-        }
-        [TestMethod]
         public void TestJapanese()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
@@ -505,6 +464,27 @@ namespace UnitTestsTeslalogger
 
             Assert.IsTrue(dashboard.Contains("\"text\": \"BATmobil\","));
             Assert.IsTrue(dashboard.Contains("\"label\": \"Fahrzeug\","));
+        }
+
+        [TestMethod]
+        public void POI()
+        {
+            var geofence = Geofence.GetInstance();
+
+            var a = geofence.GetPOI(48.456708, 10.029897);
+            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+
+            a = geofence.GetPOI(48.456616, 10.030200);
+            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+
+            a = geofence.GetPOI(48.456790, 10.030014);
+            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+
+            a = geofence.GetPOI(48.456691, 10.030241);
+            Assert.AreEqual(a.name, "⚡⚡ Supercharger DE-Ulm");
+
+            a = geofence.GetPOI(48.456888, 10.029635);
+            Assert.AreEqual(a.name, "EnBW DE-Ulm");
         }
 
         [TestMethod]
