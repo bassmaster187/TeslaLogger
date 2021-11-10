@@ -12,6 +12,7 @@ namespace TeslaLogger
     /**
      * https://shelly-api-docs.shelly.cloud/gen1/#shelly-3em
      */
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     class ElectricityMeterShelly3EM : ElectricityMeterBase
     {
         private string host;
@@ -28,22 +29,27 @@ namespace TeslaLogger
             this.paramater = paramater;
 
             if (client == null)
+            {
                 client = new WebClient();
+            }
         }
-
 
         string GetCurrentData()
         {
             try
             {
                 if (mockup_status != null)
+                {
                     return mockup_status;
+                }
 
                 string cacheKey = "3EM_" + guid.ToString();
                 object o = MemoryCache.Default.Get(cacheKey);
 
                 if (o != null)
+                {
                     return (string)o;
+                }
 
                 string url = host + "/status";
                 string lastJSON = client.DownloadString(url);
@@ -121,7 +127,9 @@ namespace TeslaLogger
                     j = client.DownloadString(url);
                 }
                 else
+                {
                     j = mockup_shelly;
+                }
 
                 dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
                 string key = "fw";

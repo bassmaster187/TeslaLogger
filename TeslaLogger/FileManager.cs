@@ -27,13 +27,14 @@ namespace TeslaLogger
     /// For a new file add a new Enum and enter the filename in the constructor
     /// and use the GetFilePath(TLFilename) Method
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
         private static string _ExecutingPath = null;
-        static FileManager()
-        {
-            Filenames = new Dictionary<TLFilename, string>()
+#pragma warning disable CA1810 // Statische Felder für Referenztyp inline initialisieren
+        static FileManager() => Filenames = new Dictionary<TLFilename, string>()
+#pragma warning restore CA1810 // Statische Felder für Referenztyp inline initialisieren
             {
                 { TLFilename.CarSettings,               "car_settings.xml"},
                 { TLFilename.TeslaTokenFilename,        "tesla_token.txt"},
@@ -48,7 +49,6 @@ namespace TeslaLogger
                 { TLFilename.TeslaLoggerExeConfigFilename,"TeslaLogger.exe.config"},
                 { TLFilename.GeocodeCache,              "GeocodeCache.xml"}
             };
-        }
 
         internal static string GetFilePath(TLFilename filename)
         {
@@ -89,7 +89,7 @@ namespace TeslaLogger
         private static string GetGoSleepPath(int carid)
         {
             String filename = Filenames[TLFilename.CmdGoSleepFilename];
-            filename = filename.Replace("ID", carid.ToString());
+            filename = filename.Replace("ID", carid.ToString(Tools.ciDeDE));
 
             if (Tools.IsDocker())
             {
@@ -104,7 +104,7 @@ namespace TeslaLogger
         internal static string GetWakeupTeslaloggerPath(int carid)
         {
             string filename = Filenames[TLFilename.WakeupFilename];
-            filename = filename.Replace("ID", carid.ToString());
+            filename = filename.Replace("ID", carid.ToString(Tools.ciDeDE));
 
             if (Tools.IsDocker())
                 return Path.Combine("/tmp/", filename);
@@ -119,7 +119,7 @@ namespace TeslaLogger
             try
             {
                 string path = GetFilePath(TLFilename.TeslaTokenFilename);
-                if (path != string.Empty)
+                if (!string.IsNullOrEmpty(path))
                 {
                     filecontent = File.ReadAllText(path);
                 }

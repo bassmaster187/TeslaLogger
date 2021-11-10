@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class NearbySuCService
     {
         private static NearbySuCService _NearbySuCService = null;
@@ -134,7 +135,7 @@ namespace TeslaLogger
                     using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                     {
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = client.PostAsync("http://teslalogger.de/share_supercharger.php", content).Result;
+                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger.php"), content).Result;
                         string r = result.Content.ReadAsStringAsync().Result;
                         DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode);
 
@@ -153,8 +154,8 @@ namespace TeslaLogger
             int sucID = int.MinValue;
             bool SuCfound = GetSuperchargerByName(suc["name"].ToString(), out sucID);
             Dictionary<string, object> location = (Dictionary<string, object>)suc["location"];
-            double lat = double.Parse(location["lat"].ToString());
-            double lng = double.Parse(location["long"].ToString());
+            double lat = double.Parse(location["lat"].ToString(), Tools.ciEnUS);
+            double lng = double.Parse(location["long"].ToString(), Tools.ciEnUS);
 
             if (!SuCfound)
             {
@@ -183,7 +184,7 @@ namespace TeslaLogger
                             sendKV.Add("n", suc["name"]);
                             sendKV.Add("lat", lat);
                             sendKV.Add("lng", lng);
-                            sendKV.Add("ts", DateTime.UtcNow.ToString("s"));
+                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
                             sendKV.Add("a", available_stalls);
                             sendKV.Add("t", total_stalls);
 
@@ -191,7 +192,20 @@ namespace TeslaLogger
                             {
                                 con.Open();
                                 // find internal ID of supercharger by name
-                                using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
+                                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    superchargerstate(
+        nameid,
+        ts,
+        available_stalls,
+        total_stalls
+    )
+VALUES(
+    @nameid,
+    @ts,
+    @available_stalls,
+    @total_stalls
+)", con))
                                 {
                                     cmd.Parameters.AddWithValue("@nameid", sucID);
                                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
@@ -221,7 +235,7 @@ namespace TeslaLogger
                     sendKV.Add("n", suc["name"]);
                     sendKV.Add("lat", lat);
                     sendKV.Add("lng", lng);
-                    sendKV.Add("ts", DateTime.UtcNow.ToString("s"));
+                    sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
                     sendKV.Add("a", -1);
                     sendKV.Add("t", -1);
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))

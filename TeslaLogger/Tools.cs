@@ -20,7 +20,9 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
-    public class Tools
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
+    public static class Tools
     {
 
         public static readonly System.Globalization.CultureInfo ciEnUS = new System.Globalization.CultureInfo("en-US");
@@ -36,9 +38,9 @@ namespace TeslaLogger
         private static string _Range = "IR";
         private static string _defaultcar = "";
         private static string _defaultcarid = "";
-        public static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
+        internal static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
-        public static bool? _StreamingPos = null;
+        internal static bool? _StreamingPos = null;
 
         internal static bool UseNearbySuCService()
         {
@@ -51,8 +53,9 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none};
 
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
+        private static bool SQLTRACE = false;
 
-        public static void SetThread_enUS()
+        public static void SetThreadEnUS()
         {
             Thread.CurrentThread.CurrentCulture = ciEnUS;
         }
@@ -62,27 +65,33 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
+        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            try
+            if (SQLTRACE)
             {
-                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
-            }
-            catch (Exception ex)
-            {
-                DebugLog("Exception in SQL DEBUG", ex);
+                try
+                {
+                    string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                    DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
+                }
+                catch (Exception ex)
+                {
+                    DebugLog("Exception in SQL DEBUG", ex);
+                }
             }
         }
 
-        public static void DebugLog(MySqlDataReader dr, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0, [CallerMemberName] string _cmn = null)
+        public static void DebugLog(MySqlDataReader dr, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            string msg = "RAWSQL:";
-            for (int column = 0; column < dr.FieldCount; column++)
+            if (dr != null)
             {
-                msg += (column==0?"":"|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+                string msg = "RAWSQL:";
+                for (int column = 0; column < dr.FieldCount; column++)
+                {
+                    msg += (column == 0 ? "" : "|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
+                }
+                DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
             }
-            DebugLog($"{_cmn}: " + msg, null, _cfp, _cln);
         }
 
         internal static string ExpandSQLCommand(MySqlCommand cmd)
@@ -149,9 +158,9 @@ namespace TeslaLogger
             return msg;
         }
 
-        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string _cfp = null, [CallerLineNumber] int _cln = 0)
+        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string temp = "DEBUG : " + text + " (" + Path.GetFileName(_cfp) + ":" + _cln + ")";
+            string temp = "DEBUG : " + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
             AddToBuffer(temp);
             if (Program.VERBOSE)
             {
@@ -230,7 +239,7 @@ namespace TeslaLogger
         private static string ThreadAndDateInfo
         {
             //returns thread number and precise date and time.
-            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff") + "] "; }
+            get { return "[" + Thread.CurrentThread.ManagedThreadId + " - " + DateTime.Now.ToString("dd/MM HH:mm:ss.ffffff", Tools.ciEnUS) + "] "; }
         }
 
         public static string GetMonoRuntimeVersion()
@@ -255,30 +264,37 @@ namespace TeslaLogger
 
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, string excludeFile = null)
         {
-            try
+            if (source != null && target != null)
             {
-                foreach (DirectoryInfo dir in source.GetDirectories())
+                try
                 {
-                    CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
-                }
+                    foreach (DirectoryInfo dir in source.GetDirectories())
+                    {
+                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                    }
 
-                foreach (FileInfo file in source.GetFiles())
+                    foreach (FileInfo file in source.GetFiles())
+                    {
+                        if (excludeFile != null && file.Name == excludeFile)
+                        {
+                            Logfile.Log($"CopyFilesRecursively: skip {excludeFile}");
+                        }
+                        else
+                        {
+                            string p = Path.Combine(target.FullName, file.Name);
+                            Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
+                            File.Copy(file.FullName, p, true);
+                        }
+                    }
+                }
+                catch (Exception ex)
                 {
-                    if (excludeFile != null && file.Name.Equals(excludeFile))
-                    {
-                        Logfile.Log($"CopyFilesRecursively: skip {excludeFile}");
-                    }
-                    else
-                    {
-                        string p = Path.Combine(target.FullName, file.Name);
-                        Logfile.Log("Copy '" + file.FullName + "' to '" + p + "'");
-                        File.Copy(file.FullName, p, true);
-                    }
+                    Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
+                Logfile.Log($"CopyFilesRecursively: source or target is null - source:{source} target:{target}");
             }
         }
 
@@ -341,7 +357,7 @@ namespace TeslaLogger
                     AWD = true;
                 }
                 // check made in China
-                if (vin.StartsWith("LRW"))
+                if (vin.StartsWith("LRW", StringComparison.Ordinal))
                 {
                     MIC = true;
                 }
@@ -436,14 +452,17 @@ namespace TeslaLogger
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
-            foreach (DataRow row in table.Rows)
+            if (table != null)
             {
-                childRow = new Dictionary<string, object>();
-                foreach (DataColumn col in table.Columns)
+                foreach (DataRow row in table.Rows)
                 {
-                    childRow.Add(col.ColumnName, row[col]);
+                    childRow = new Dictionary<string, object>();
+                    foreach (DataColumn col in table.Columns)
+                    {
+                        childRow.Add(col.ColumnName, row[col]);
+                    }
+                    parentRow.Add(childRow);
                 }
-                parentRow.Add(childRow);
             }
             return jsSerializer.Serialize(parentRow);
         }
@@ -471,8 +490,8 @@ namespace TeslaLogger
                     string start = j["SleepTimeSpanEnd"];
                     string[] s = start.Split(':');
 
-                    int.TryParse(s[0], out stopSleepingHour);
-                    int.TryParse(s[1], out stopSleepingMinute);
+                    _ = int.TryParse(s[0], out stopSleepingHour);
+                    _ = int.TryParse(s[1], out stopSleepingMinute);
                 }
             }
             catch (Exception ex)
@@ -637,8 +656,8 @@ namespace TeslaLogger
 
                         if (s.Length >= 2)
                         {
-                            int.TryParse(s[0], out startSleepingHour);
-                            int.TryParse(s[1], out startSleepingMinutes);
+                            _ = int.TryParse(s[0], out startSleepingHour);
+                            _ = int.TryParse(s[1], out startSleepingMinutes);
                         }
                     }
                 }
@@ -656,7 +675,7 @@ namespace TeslaLogger
 
         // timeout in seconds
         // https://docs.microsoft.com/de-de/dotnet/api/system.diagnostics.process.exitcode?view=netcore-3.1
-        public static string Exec_mono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
+        public static string ExecMono(string cmd, string param, bool logging = true, bool stderr2stdout = false, int timeout = 0)
         {
             Logfile.Log("Exec_mono: " + cmd + " " + param);
 
@@ -1024,7 +1043,7 @@ namespace TeslaLogger
 
         internal static string GetOsVersion()
         {
-            if (!_OSVersion.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(_OSVersion))
             {
                 return _OSVersion;
             }
@@ -1494,25 +1513,25 @@ WHERE
                 Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception direcotry");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
-                    Exec_mono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                    ExecMono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
                 }
             }
         }
 
         private static void LogDiskUsage()
         {
-            _ = Exec_mono("/bin/df", "-k", true, true);
+            _ = ExecMono("/bin/df", "-k", true, true);
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup", true, true);
             }
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
             }
             if (File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out"))
             {
-                _ = Exec_mono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
+                _ = ExecMono("/usr/bin/du", "-sk " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/nohup.out", true, true);
             }
         }
 
@@ -1540,7 +1559,7 @@ WHERE
         {
             if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
             {
-                return await DownloadToFile(uri, path, timeout, overwrite);
+                return await DownloadToFile(uri, path, timeout, overwrite).ConfigureAwait(true);
             }
             return false;
         }
@@ -1696,8 +1715,8 @@ WHERE
                 b.Query = q.ToString();
                 string url = b.ToString();
 
-                var result = c.GetAsync(url).Result;
-                var resultContent = result.Content.ReadAsStringAsync().Result;
+                HttpResponseMessage result = c.GetAsync(new Uri(url)).Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
 
             }
             catch (Exception ex)

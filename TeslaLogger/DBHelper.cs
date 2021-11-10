@@ -270,7 +270,7 @@ VALUES(
             }
         }
 
-        internal static void SetCost(string[] args)
+        internal static void SetCost()
         {
             try
             {
@@ -685,7 +685,7 @@ AND id <=(
             }
         }
 
-        internal double GetChargeEnergyAddedFromCharging(int ChargingID)
+        internal static double GetChargeEnergyAddedFromCharging(int ChargingID)
         {
             try
             {
@@ -1179,7 +1179,7 @@ HAVING
                     MySqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        int id = Convert.ToInt32(dr["id"]);
+                        int id = Convert.ToInt32(dr["id"], Tools.ciDeDE);
                         string command = dr[1].ToString();
                         if (!mothershipCommands.ContainsKey(command))
                         {
@@ -1892,7 +1892,7 @@ LIMIT 1", con))
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            int.TryParse(dr[0].ToString(), out referenceID);
+                            _ = int.TryParse(dr[0].ToString(), out referenceID);
                             if (dr[1] != DBNull.Value)
                             {
                                 ref_cost_currency = dr.GetString(1);
@@ -1927,7 +1927,7 @@ LIMIT 1", con))
             return referenceID;
         }
 
-        private bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        private static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
         {
             try
             {
@@ -2158,9 +2158,9 @@ LIMIT 1", con))
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            int id = Convert.ToInt32(dr["id"]);
-                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
-                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+                            int id = Convert.ToInt32(dr["id"], Tools.ciEnUS);
+                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"], Tools.ciEnUS);
+                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"], Tools.ciEnUS);
 
                             UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
                         }
@@ -2199,9 +2199,9 @@ ORDER BY
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            int id = Convert.ToInt32(dr["id"]);
-                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"]);
-                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"]);
+                            int id = Convert.ToInt32(dr["id"], Tools.ciEnUS);
+                            int StartChargingID = Convert.ToInt32(dr["StartChargingID"], Tools.ciEnUS);
+                            int EndChargingID = Convert.ToInt32(dr["EndChargingID"], Tools.ciEnUS);
 
                             UpdateMaxChargerPower(id, StartChargingID, EndChargingID);
                         }
@@ -2538,7 +2538,7 @@ LIMIT 1", con))
             ElectricityMeterBase v = null;
             try
             {
-                if (!wh.fast_charger_present)
+                if (wh != null && !wh.fast_charger_present)
                 {
                     v = ElectricityMeterBase.Instance(wh.car.CarInDB);
                     if (v != null)
@@ -2557,10 +2557,12 @@ LIMIT 1", con))
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
             int chargingstateid = 0;
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            if (wh != null)
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     chargingstate(
         CarID,
@@ -2586,27 +2588,30 @@ VALUES(
     @meter_vehicle_kwh_start,
     @meter_utility_kwh_start
 )", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
-                    cmd.Parameters.AddWithValue("@StartDate", chargeStart);
-                    cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
-                    cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
-                    cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
-                    cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
-                    cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
-                    cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
-                    cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
-                    cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
-                    Tools.DebugLog(cmd);
-                    cmd.ExecuteNonQuery();
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
+                        cmd.Parameters.AddWithValue("@StartDate", chargeStart);
+                        cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                        cmd.Parameters.AddWithValue("@StartChargingID", chargeID);
+                        cmd.Parameters.AddWithValue("@fast_charger_brand", wh.fast_charger_brand);
+                        cmd.Parameters.AddWithValue("@fast_charger_type", wh.fast_charger_type);
+                        cmd.Parameters.AddWithValue("@conn_charge_cable", wh.conn_charge_cable);
+                        cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
+                        cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
+                        cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
+                        Tools.DebugLog(cmd);
+                        cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "SELECT LAST_INSERT_ID();";
-                    chargingstateid = Convert.ToInt32(cmd.ExecuteScalar());
+                        cmd.CommandText = "SELECT LAST_INSERT_ID();";
+                        chargingstateid = Convert.ToInt32(cmd.ExecuteScalar(), Tools.ciEnUS);
+                    }
                 }
             }
-
-            wh.car.CurrentJSON.current_charging = true;
-            wh.car.CurrentJSON.CreateCurrentJSON();
+            if (wh != null)
+            {
+                wh.car.CurrentJSON.current_charging = true;
+                wh.car.CurrentJSON.CreateCurrentJSON();
+            }
 
             // Check for one minute if meter claims car is really not charging 
             if (v != null && v.IsCharging() != true)
@@ -2915,17 +2920,17 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT DISTINCT
-  altitude,
-  odometer
+    altitude,
+    odometer
 FROM
-  pos
+    pos
 WHERE
-  id >= @StartPos
-  AND id <= @EndPos
-  AND CarID = @CarID
-  AND CAST(odometer as INT) <> CAST(odometer as DOUBLE)
+    id >= @StartPos
+    AND id <= @EndPos
+    AND CarID = @CarID
+    AND CAST(odometer as INT) <> CAST(odometer as DOUBLE)
 ORDER BY
-  odometer", con))
+    odometer", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@StartPos", startPosId);
@@ -2997,18 +3002,18 @@ ORDER BY
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE 
-  drivestate 
+    drivestate 
 SET 
-  meters_up = @meters_up,
-  meters_down = @meters_down,
-  distance_up_km = @distance_up_km,
-  distance_down_km = @distance_down_km,
-  distance_flat_km = @distance_flat_km,
-  height_max = @height_max,
-  height_min = @height_min
+    meters_up = @meters_up,
+    meters_down = @meters_down,
+    distance_up_km = @distance_up_km,
+    distance_down_km = @distance_down_km,
+    distance_flat_km = @distance_flat_km,
+    height_max = @height_max,
+    height_min = @height_min
 WHERE 
-  CarID = @CarID
-  AND id = @driveid", con))
+    CarID = @CarID
+    AND id = @driveid", con))
                     {
                         cmd.Parameters.AddWithValue("@driveid", driveId);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -3041,12 +3046,12 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
- id
+    id
 FROM
- drivestate
+    drivestate
 WHERE
- StartPos = @StartPos
- AND EndPos = @EndPos", con))
+    StartPos = @StartPos
+    AND EndPos = @EndPos", con))
                     {
                         cmd.Parameters.AddWithValue("@StartPos", startPosId);
                         cmd.Parameters.AddWithValue("@EndPos", endPosId);
@@ -3078,14 +3083,14 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
- StartPos,
- EndPos
+    StartPos,
+    EndPos
 FROM
- drivestate
+    drivestate
 WHERE
- EndPos > StartPos
- AND meters_up IS NULL
- AND CarID = @CarID", con))
+    EndPos > StartPos
+    AND meters_up IS NULL
+    AND CarID = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         Tools.DebugLog(cmd);
@@ -3147,8 +3152,8 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            double lat = Convert.ToDouble(dr[0]);
-                            double lng = Convert.ToDouble(dr[1]);
+                            double lat = Convert.ToDouble(dr[0], Tools.ciEnUS);
+                            double lng = Convert.ToDouble(dr[1], Tools.ciEnUS);
                             dr.Close();
 
                             WebHelper.ReverseGecocodingAsync(c, lat, lng).ContinueWith(task =>
@@ -3172,7 +3177,7 @@ WHERE
                                 {
                                     Logfile.Log(ex.ToString());
                                 }
-                            });
+                            }, TaskScheduler.Default);
                         }
                     }
                 }
@@ -3363,8 +3368,8 @@ WHERE
                         {
                             try
                             {
-                                int StartPos = Convert.ToInt32(dr[0]);
-                                int EndPos = Convert.ToInt32(dr[1]);
+                                int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                                int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
 
                                 // TODO UpdateDriveStatistics(StartPos, EndPos, false);
                             }
@@ -3398,9 +3403,9 @@ WHERE
                     {
                         try
                         {
-                            int StartPos = Convert.ToInt32(dr[0]);
-                            int EndPos = Convert.ToInt32(dr[1]);
-                            int CarId = Convert.ToInt32(dr[2]);
+                            int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                            int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
+                            int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
 
                             Car c = Car.GetCarByID(CarId);
                             if (c != null)
@@ -3451,51 +3456,88 @@ WHERE
         }
 
 
-        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double ideal_battery_range_km, double battery_range_km, int battery_level, double? outside_temp, string altitude)
+        public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("insert pos (CarID, Datum, lat, lng, speed, power, odometer, ideal_battery_range_km, battery_range_km, outside_temp, altitude, battery_level, inside_temp, battery_heater, is_preconditioning, sentry_mode) values (@CarID, @Datum, @lat, @lng, @speed, @power, @odometer, @ideal_battery_range_km, @battery_range_km, @outside_temp, @altitude, @battery_level, @inside_temp, @battery_heater, @is_preconditioning, @sentry_mode )", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    pos(
+        CarID,
+        Datum,
+        lat,
+        lng,
+        speed,
+        POWER,
+        odometer,
+        ideal_battery_range_km,
+        battery_range_km,
+        outside_temp,
+        altitude,
+        battery_level,
+        inside_temp,
+        battery_heater,
+        is_preconditioning,
+        sentry_mode
+    )
+VALUES(
+    @CarID,
+    @Datum,
+    @lat,
+    @lng,
+    @speed,
+    @power,
+    @odometer,
+    @ideal_battery_range_km,
+    @battery_range_km,
+    @outside_temp,
+    @altitude,
+    @battery_level,
+    @inside_temp,
+    @battery_heater,
+    @is_preconditioning,
+    @sentry_mode
+)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)));
-                    cmd.Parameters.AddWithValue("@lat", latitude.ToString());
-                    cmd.Parameters.AddWithValue("@lng", longitude.ToString());
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
+                    cmd.Parameters.AddWithValue("@lat", latitude);
+                    cmd.Parameters.AddWithValue("@lng", longitude);
                     cmd.Parameters.AddWithValue("@speed", (int)MphToKmhRounded(speed));
                     cmd.Parameters.AddWithValue("@power", Convert.ToInt32(power * 1.35962M));
                     cmd.Parameters.AddWithValue("@odometer", odometer);
 
-                    if (ideal_battery_range_km == -1)
+                    if (idealBatteryRangeKm == -1)
                     {
                         cmd.Parameters.AddWithValue("@ideal_battery_range_km", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", idealBatteryRangeKm);
                     }
 
-                    if (battery_range_km == -1)
+                    if (batteryRangeKm == -1)
                     {
                         cmd.Parameters.AddWithValue("@battery_range_km", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@battery_range_km", battery_range_km.ToString());
+                        cmd.Parameters.AddWithValue("@battery_range_km", batteryRangeKm);
                     }
 
-                    if (outside_temp == null)
+                    if (outsideTemp == null)
                     {
                         cmd.Parameters.AddWithValue("@outside_temp", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                        cmd.Parameters.AddWithValue("@outside_temp", (double)outsideTemp);
                     }
 
-                    if (altitude.Length == 0)
+                    if (altitude != null && altitude.Length == 0)
                     {
                         cmd.Parameters.AddWithValue("@altitude", DBNull.Value);
                     }
@@ -3504,13 +3546,13 @@ WHERE
                         cmd.Parameters.AddWithValue("@altitude", altitude);
                     }
 
-                    if (battery_level == -1)
+                    if (batteryLevel == -1)
                     {
                         cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@battery_level", battery_level.ToString());
+                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
                     }
 
                     if (inside_temp == null)
@@ -3519,13 +3561,13 @@ WHERE
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@inside_temp", ((double)inside_temp).ToString());
+                        cmd.Parameters.AddWithValue("@inside_temp", (double)inside_temp);
                     }
 
                     cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
                     cmd.Parameters.AddWithValue("@is_preconditioning", car.CurrentJSON.current_is_preconditioning ? 1 : 0);
                     cmd.Parameters.AddWithValue("@sentry_mode", car.CurrentJSON.current_is_sentry_mode ? 1 : 0);
-
+                    Tools.DebugLog(cmd);
                     cmd.ExecuteNonQuery();
 
                     try
@@ -3538,14 +3580,14 @@ WHERE
                             car.CurrentJSON.current_odometer = odometer;
                         }
 
-                        if (ideal_battery_range_km >= 0)
+                        if (idealBatteryRangeKm >= 0)
                         {
-                            car.CurrentJSON.current_ideal_battery_range_km = ideal_battery_range_km;
+                            car.CurrentJSON.current_ideal_battery_range_km = idealBatteryRangeKm;
                         }
 
-                        if (battery_range_km >= 0)
+                        if (batteryRangeKm >= 0)
                         {
-                            car.CurrentJSON.current_battery_range_km = battery_range_km;
+                            car.CurrentJSON.current_battery_range_km = batteryRangeKm;
                         }
 
                         if (car.CurrentJSON.current_trip_km_start == 0)
@@ -3577,15 +3619,15 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
- pos.lat,
- pos.lng
+    pos.lat,
+    pos.lng
 FROM
- chargingstate,
- pos
+    chargingstate,
+    pos
 WHERE
- chargingstate.CarID=@CarID
- AND chargingstate.Pos = pos.id
- AND chargingstate.id=@ChargingStateID", con))
+    chargingstate.CarID = @CarID
+    AND chargingstate.Pos = pos.id
+    AND chargingstate.id = @ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
@@ -3617,7 +3659,7 @@ WHERE
 
         internal void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
         {
-            Tools.SetThread_enUS();
+            Tools.SetThreadEnUS();
 
             if (charger_phases.Length == 0)
             {
@@ -3627,7 +3669,7 @@ WHERE
             double kmIdeal_Battery_Range = ideal_battery_range / (double)0.62137;
             double kmBattery_Range = battery_range / (double)0.62137;
 
-            double powerkW = Convert.ToDouble(charger_power);
+            double powerkW = Convert.ToDouble(charger_power, Tools.ciEnUS);
 
             // default waitbetween2pointsdb
             double waitbetween2pointsdb = 1000.0 / powerkW;
@@ -3637,7 +3679,7 @@ WHERE
                 // get charging_state, must not be older than 5 minutes = 300 seconds = 300000 milliseconds
                 if (car.GetTeslaAPIState().GetState("charging_state", out Dictionary<TeslaAPIState.Key, object> charging_state, 300000))
                 {
-                    if (charging_state[TeslaAPIState.Key.Value].ToString().Equals("Charging"))
+                    if (charging_state[TeslaAPIState.Key.Value].ToString() == "Charging")
                     {
                         // check if charging_state value Charging is not older than 5 minutes
                         long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -3667,16 +3709,49 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("insert charging (CarID, Datum, battery_level, charge_energy_added, charger_power, ideal_battery_range_km, battery_range_km, charger_voltage, charger_phases, charger_actual_current, outside_temp, charger_pilot_current, charge_current_request, battery_heater) values (@CarID, @Datum, @battery_level, @charge_energy_added, @charger_power, @ideal_battery_range_km, @battery_range_km, @charger_voltage, @charger_phases, @charger_actual_current, @outside_temp, @charger_pilot_current, @charge_current_request, @battery_heater)", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    charging(
+        CarID,
+        Datum,
+        battery_level,
+        charge_energy_added,
+        charger_power,
+        ideal_battery_range_km,
+        battery_range_km,
+        charger_voltage,
+        charger_phases,
+        charger_actual_current,
+        outside_temp,
+        charger_pilot_current,
+        charge_current_request,
+        battery_heater
+    )
+VALUES(
+    @CarID,
+    @Datum,
+    @battery_level,
+    @charge_energy_added,
+    @charger_power,
+    @ideal_battery_range_km,
+    @battery_range_km,
+    @charger_voltage,
+    @charger_phases,
+    @charger_actual_current,
+    @outside_temp,
+    @charger_pilot_current,
+    @charge_current_request,
+    @battery_heater
+)", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp)).ToString("yyyy-MM-dd HH:mm:ss"));
+                        cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS));
                         cmd.Parameters.AddWithValue("@battery_level", battery_level);
                         cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                         cmd.Parameters.AddWithValue("@charger_power", charger_power);
-                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmIdeal_Battery_Range.ToString());
-                        cmd.Parameters.AddWithValue("@battery_range_km", kmBattery_Range.ToString());
-                        cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage));
+                        cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmIdeal_Battery_Range);
+                        cmd.Parameters.AddWithValue("@battery_range_km", kmBattery_Range);
+                        cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage, Tools.ciEnUS));
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
                         cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
@@ -3705,9 +3780,9 @@ WHERE
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("@outside_temp", ((double)outside_temp).ToString());
+                            cmd.Parameters.AddWithValue("@outside_temp", (double)outside_temp);
                         }
-
+                        Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -3715,13 +3790,13 @@ WHERE
 
             try
             {
-                if (Convert.ToInt32(battery_level) >= 0)
+                if (Convert.ToInt32(battery_level, Tools.ciEnUS) >= 0)
                 {
-                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
+                    car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level, Tools.ciEnUS);
                 }
 
-                car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added);
-                car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power);
+                car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power, Tools.ciEnUS);
                 if (kmIdeal_Battery_Range >= 0)
                 {
                     car.CurrentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
@@ -3732,9 +3807,9 @@ WHERE
                     car.CurrentJSON.current_battery_range_km = kmBattery_Range;
                 }
 
-                car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage);
-                car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases);
-                car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current);
+                car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -3762,7 +3837,7 @@ WHERE
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        return Convert.ToInt32(dr[0]);
+                        return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
                 }
             }
@@ -3775,13 +3850,19 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select max(id) from pos where CarID=@CarID", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    MAX(id)
+FROM
+    pos
+WHERE
+    CarID = @CarID", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        int pos = Convert.ToInt32(dr[0]);
+                        int pos = Convert.ToInt32(dr[0], Tools.ciEnUS);
                         if (withReverseGeocoding)
                         {
                             UpdateAddress(car, pos);
@@ -3800,16 +3881,31 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("select id,lat,lng from pos where id in (Select max(id) from pos where CarID=@CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    lat,
+    lng
+FROM
+    pos
+WHERE
+    id IN(
+        SELECT
+            MAX(id)
+        FROM
+            pos
+        WHERE
+            CarID = @CarID
+    )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        double.TryParse(dr[1].ToString(), out lat);
-                        double.TryParse(dr[2].ToString(), out lng);
-                        return Convert.ToInt32(dr[0]);
+                        _ = double.TryParse(dr[1].ToString(), out lat);
+                        _ = double.TryParse(dr[2].ToString(), out lng);
+                        return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
                 }
             }
@@ -3823,7 +3919,17 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT id, datum FROM charging WHERE CarID=@CarID ORDER BY datum DESC LIMIT 1", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    datum
+FROM
+    charging
+WHERE
+    CarID = @CarID
+ORDER BY
+    datum DESC
+LIMIT 1", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     Tools.DebugLog(cmd);
@@ -3834,7 +3940,7 @@ WHERE
                         {
                             chargeStart = DateTime.Now;
                         }
-                        return Convert.ToInt32(dr[0]);
+                        return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
                 }
             }
@@ -3851,24 +3957,26 @@ WHERE
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-  chargingstate.id,
-  lat,
-  lng,
-  UnplugDate,
-  EndDate
+    chargingstate.id,
+    lat,
+    lng,
+    UnplugDate,
+    EndDate
 FROM
-  chargingstate
-JOIN pos ON
-  chargingstate.pos = pos.id
+    chargingstate
+JOIN
+    pos
+ON
+    chargingstate.pos = pos.id
 WHERE
-  chargingstate.id IN (
+    chargingstate.id IN(
     SELECT
-      MAX(id)
+        MAX(id)
     FROM
-      chargingstate
+        chargingstate
     WHERE
-      carid=@CarID
-  )", con))
+        carid = @CarID
+)", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     Tools.DebugLog(cmd);
@@ -3879,7 +3987,7 @@ WHERE
                         if (!double.TryParse(dr[2].ToString(), out lng)) { lng = double.NaN; }
                         if (!DateTime.TryParse(dr[3].ToString(), out UnplugDate)) { UnplugDate = DateTime.MinValue; }
                         if (!DateTime.TryParse(dr[4].ToString(), out EndDate)) { EndDate = DateTime.MinValue; }
-                        return Convert.ToInt32(dr[0]);
+                        return Convert.ToInt32(dr[0],Tools.ciEnUS);
                     }
                 }
             }
@@ -3895,11 +4003,23 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("insert car_version (StartDate, version, CarID) values (@StartDate, @version, @CarID)", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    car_version(
+        StartDate,
+        VERSION,
+        CarID
+    )
+VALUES (
+    @StartDate,
+    @version,
+    @CarID
+)", con))
                     {
                         cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@version", car_version);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -3917,9 +4037,19 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"select version from car_version where CarId=@CarID order by id desc limit 1", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    VERSION
+FROM
+    car_version
+WHERE
+    CarId = @CarID
+ORDER BY
+    id DESC
+LIMIT 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -3936,8 +4066,6 @@ WHERE
 
             return "";
         }
-
-
 
         public static string GetVersion()
         {
@@ -3963,7 +4091,13 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM information_schema.tables where table_name = '" + table + "'", con))
+                using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+    *
+FROM
+    information_schema.tables
+WHERE
+    table_name = '{table}'", con))
                 {
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
@@ -3982,7 +4116,14 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($"SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{table}' AND COLUMN_NAME = '{column}'", con))
+                using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+    DATA_TYPE
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    table_name = '{table}'
+    AND COLUMN_NAME = '{column}'", con))
                 {
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
@@ -4014,6 +4155,7 @@ WHERE
             return false;
         }
 
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static int ExecuteSQLQuery(string sql, int timeout = 30)
         {
             try
@@ -4027,7 +4169,7 @@ WHERE
                         {
                             cmd.CommandTimeout = timeout;
                         }
-
+                        Tools.DebugLog(cmd);
                         return cmd.ExecuteNonQuery();
                     }
                 }
@@ -4040,6 +4182,7 @@ WHERE
             }
         }
 
+        [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
         public static object ExecuteSQLScalar(string sql, int timeout = 30)
         {
             try
@@ -4053,7 +4196,7 @@ WHERE
                         {
                             cmd.CommandTimeout = timeout;
                         }
-
+                        Tools.DebugLog(cmd);
                         return cmd.ExecuteScalar();
                     }
                 }
@@ -4066,103 +4209,6 @@ WHERE
             }
         }
 
-        public void CheckForInterruptedCharging(bool logging)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"SELECT chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
-                          charging_End.charge_energy_added,
-                          charging.ideal_battery_range_km AS SOC,
-                          charging_End.ideal_battery_range_km AS EndSOC,
-                          charging_End.battery_level as End_battery_level,
-                          pos.odometer
-                            FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN
-                             pos ON chargingstate.pos = pos.id
-                             LEFT OUTER JOIN
-                             charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                        where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.CarId = @CarID
-                        and charging.charge_energy_added > 1
-                        order by StartDate desc", con))
-                    {
-
-                        double old_odometer = 0;
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
-                        MySqlDataReader dr = cmd.ExecuteReader();
-                        while (dr.Read())
-                        {
-                            double odometer = (double)dr["odometer"];
-                            int chargingstate_id = (int)dr["chargingstate_id"];
-
-                            if (old_odometer != odometer)
-                            {
-                                double lastCharging_start_charge_energy_added = Convert.ToDouble(dr["start_charge_energy_added"]);
-
-                                CombineChargingifNecessary(chargingstate_id, odometer, logging, lastCharging_start_charge_energy_added);
-                                old_odometer = odometer;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.ExceptionWriter(ex, "");
-                throw;
-            }
-        }
-
-        private void CombineChargingifNecessary(int chargingstate_id, double odometer, bool logging, double lastCharging_start_charge_energy_added)
-        {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"SELECT        chargingstate.id as chargingstate_id , StartDate, EndDate, charging.charge_energy_added as start_charge_energy_added,
-                      charging_End.charge_energy_added,
-                      charging.ideal_battery_range_km AS SOC,
-                      charging_End.ideal_battery_range_km AS EndSOC,
-                      charging_End.battery_level as End_battery_level,
-                      pos.odometer, chargingstate.StartChargingID, chargingstate.EndChargingID
-                        FROM charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN
-                         pos ON chargingstate.pos = pos.id
-                         LEFT OUTER JOIN
-                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                    where TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4 and chargingstate.CarId = @CarID
-                    and odometer = @odometer and chargingstate.id < @chargingstate_id
-                    order by StartDate desc", con))
-                {
-
-                    cmd.Parameters.AddWithValue("@odometer", odometer);
-                    cmd.Parameters.AddWithValue("@chargingstate_id", chargingstate_id);
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
-                    int newId = 0;
-                    DateTime newStartdate = DateTime.MinValue;
-                    int newStartChargingID = 0;
-
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        newId = (int)dr["chargingstate_id"];
-                        newStartdate = (DateTime)dr["StartDate"];
-                        newStartChargingID = (int)dr["StartChargingID"];
-
-                        double start_charge_energy_added = Convert.ToDouble(dr["start_charge_energy_added"]);
-                        double charge_energy_added = Convert.ToDouble(dr["charge_energy_added"]);
-
-                        if (charge_energy_added <= lastCharging_start_charge_energy_added)
-                        {
-                            DeleteChargingstate(newId);
-                            UpdateChargingstate(chargingstate_id, newStartdate, newStartChargingID, charge_energy_added, lastCharging_start_charge_energy_added);
-                        }
-                    }
-                }
-            }
-        }
-
         private void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID, double charge_energy_added, double lastCharging_start_charge_energy_added)
         {
             try
@@ -4172,7 +4218,14 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"update chargingstate set StartDate=@StartDate, StartChargingID=@StartChargingID where id = @id", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    StartDate = @StartDate,
+    StartChargingID = @StartChargingID
+WHERE
+    id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
                         cmd.Parameters.AddWithValue("@StartDate", StartDate);
@@ -4184,7 +4237,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
+                Logfile.ExceptionWriter(ex, chargingstate_id.ToString(Tools.ciEnUS));
                 car.Log(ex.ToString());
             }
         }
@@ -4193,12 +4246,17 @@ WHERE
         {
             try
             {
-                car.Log("Delete Chargingstate " + chargingstate_id.ToString());
+                car.Log($"Delete Chargingstate {chargingstate_id}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"delete from chargingstate where id = @id", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+DELETE
+FROM
+    chargingstate
+WHERE
+    id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
                         Tools.DebugLog(cmd);
@@ -4208,7 +4266,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.ExceptionWriter(ex, chargingstate_id.ToString());
+                Logfile.ExceptionWriter(ex, chargingstate_id.ToString(Tools.ciEnUS));
                 car.Log(ex.ToString());
             }
         }
@@ -4227,14 +4285,21 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT count(*) FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    COUNT(*)
+FROM
+    can
+WHERE
+    CarID = @CarID
+    AND datum >= DATE(NOW()) - INTERVAL 7 DAY", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
                         MySqlDataReader r = cmd.ExecuteReader();
                         if (r.Read())
                         {
-                            int count = Convert.ToInt32(r[0]);
+                            int count = Convert.ToInt32(r[0], Tools.ciEnUS);
 
                             MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(4));
                             return count;
@@ -4264,13 +4329,26 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("select count(*) from (SELECT count(*) as cnt FROM can where CarID=@CarID and datum >= DATE(NOW()) - INTERVAL 7 DAY group by UNIX_TIMESTAMP(datum)) as T1", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    COUNT(*)
+FROM
+    (
+    SELECT
+        COUNT(*) AS cnt
+    FROM
+        can
+    WHERE
+        CarID = @CarID
+        AND datum >= DATE(NOW()) - INTERVAL 7 DAY
+    GROUP BY
+        UNIX_TIMESTAMP(datum)) AS T1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader r = cmd.ExecuteReader();
                         if (r.Read())
                         {
-                            int count = Convert.ToInt32(r[0]);
+                            int count = Convert.ToInt32(r[0], Tools.ciEnUS);
 
                             MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(4));
                             return count;
@@ -4300,16 +4378,31 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"SELECT AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'TRmax'
-                        FROM charging
-                        INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID
-                        INNER JOIN pos ON chargingstate.pos = pos.id
-                        LEFT OUTER JOIN charging AS charging_End ON chargingstate.EndChargingID = charging_End.id
-                        WHERE chargingstate.CarID=@CarID and chargingstate.StartDate > SUBDATE(Now(), INTERVAL 60 DAY) AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and pos.odometer > 1
-                    ", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100) AS 'TRmax'
+FROM
+    charging
+INNER JOIN
+    chargingstate
+ON
+    charging.id = chargingstate.StartChargingID
+INNER JOIN
+    pos
+ON
+    chargingstate.pos = pos.id
+LEFT OUTER JOIN
+    charging AS charging_End
+ON
+    chargingstate.EndChargingID = charging_End.id
+WHERE
+    chargingstate.CarID = @CarID
+    AND chargingstate.StartDate > SUBDATE(NOW(), INTERVAL 60 DAY)
+    AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
+    AND pos.odometer > 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
+                        Tools.DebugLog(cmd);
                         MySqlDataReader r = cmd.ExecuteReader();
                         if (r.Read())
                         {
@@ -4319,7 +4412,7 @@ WHERE
                                 return 0;
                             }
 
-                            int count = Convert.ToInt32(r[0]);
+                            int count = Convert.ToInt32(r[0], Tools.ciEnUS);
                             MemoryCache.Default.Add(cacheKey, count, DateTime.Now.AddHours(1));
                             return count;
                         }
@@ -4341,14 +4434,29 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"select lat, lng from pos where id = (select max(id) from pos where CarID=@CarID)", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    lat,
+    lng
+FROM
+    pos
+WHERE
+    id = (
+        SELECT
+            MAX(id)
+        FROM
+            pos
+        WHERE
+            CarID = @CarID
+    )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            double lat = Convert.ToDouble(dr[0]);
-                            double lng = Convert.ToDouble(dr[1]);
+                            double lat = Convert.ToDouble(dr[0], Tools.ciEnUS);
+                            double lng = Convert.ToDouble(dr[1], Tools.ciEnUS);
                             dr.Close();
 
                             WebHelper.ReverseGecocodingAsync(car, lat, lng, true, false).Wait();
@@ -4371,7 +4479,13 @@ WHERE
 
             try
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars order by id", DBConnectionstring))
+                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    cars
+ORDER BY
+    id", DBConnectionstring))
                 {
                     da.Fill(dt);
                 }
@@ -4386,27 +4500,36 @@ WHERE
 
         public static DataRow GetCar(int id)
         {
-            DataTable dt = new DataTable();
-            try
+            using (DataTable dt = new DataTable())
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from cars where id = @id", DBConnectionstring))
+                try
                 {
-                    da.SelectCommand.Parameters.AddWithValue("@id", id);
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    cars
+WHERE
+    id = @id", DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@id", id);
+                        Tools.DebugLog(da.SelectCommand);
+                        da.Fill(dt);
 
-                    da.Fill(dt);
-
-                    if (dt.Rows.Count == 1)
-                        return dt.Rows[0];
+                        if (dt.Rows.Count == 1)
+                            return dt.Rows[0];
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
             }
 
             return null;
         }
 
+        [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen", Justification = "<Pending>")]
         public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
         {
             sumkm = 0;
@@ -4419,14 +4542,31 @@ WHERE
             {
                 using (DataTable dt = new DataTable())
                 {
-                    string sql = @"SELECT sum(km_diff) as sumkm, avg(km_diff) as avgkm, avg(avg_consumption_kwh_100km) as kwh100km , avg(pos.battery_level-posend.battery_level) as avgsocdiff, avg(km_diff / (pos.battery_level-posend.battery_level) * 100) as maxkm 
-                    FROM trip 
-                    join pos on trip.startposid = pos.id 
-                    join pos as posend on trip.endposid = posend.id
-                    where km_diff between 100 and 800 and pos.battery_level is not null and trip.carid=" + car.CarInDB;
+                    string sql = @"
+SELECT
+    SUM(km_diff) AS sumkm,
+    AVG(km_diff) AS avgkm,
+    AVG(avg_consumption_kwh_100km) AS kwh100km,
+    AVG(pos.battery_level - posend.battery_level) AS avgsocdiff,
+    AVG(km_diff / (pos.battery_level - posend.battery_level) * 100) AS maxkm
+FROM
+    trip
+JOIN
+    pos
+ON
+    trip.startposid = pos.id
+JOIN
+    pos AS posend
+ON
+    trip.endposid = posend.id
+WHERE
+    km_diff BETWEEN 100 AND 800
+    AND pos.battery_level IS NOT NULL
+    AND trip.carid =" + car.CarInDB;
 
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                     {
+                        Tools.DebugLog(da.SelectCommand);
                         da.Fill(dt);
 
                         if (dt.Rows.Count == 1)
@@ -4460,12 +4600,29 @@ WHERE
         DataTable GetLatestDC_Charging_with_50PercentSOC()
         {
             DataTable dt = new DataTable();
-            string sql = @"select c1.Datum as sd, c2.Datum as ed, chargingstate.carid from chargingstate 
-                join charging c1 on c1.id = startchargingid 
-                join charging c2 on c2.id = endchargingid
-                where max_charger_power > 30 and c1.battery_level < 50 and c2.battery_level > 50 and chargingstate.carid = @carid
-                order by chargingstate.startdate desc
-                limit 5";
+            string sql = @"
+SELECT
+    c1.Datum AS sd,
+    c2.Datum AS ed,
+    chargingstate.carid
+FROM
+    chargingstate
+JOIN
+    charging c1
+ON
+    c1.id = startchargingid
+JOIN
+    charging c2
+ON
+    c2.id = endchargingid
+WHERE
+    max_charger_power > 30
+    AND c1.battery_level < 50
+    AND c2.battery_level > 50
+    AND chargingstate.carid = @carid
+ORDER BY
+    chargingstate.startdate DESC
+LIMIT 5";
 
             using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
             {
@@ -4485,7 +4642,15 @@ WHERE
             {
                 using (DataTable dt = GetLatestDC_Charging_with_50PercentSOC())
                 {
-                    string sql = "select avg(charger_voltage) from charging where carid = @carid and Datum between @start and @ende and charger_voltage > 300";
+                    string sql = @"
+SELECT
+    AVG(charger_voltage)
+FROM
+    charging
+WHERE
+    carid = @carid
+    AND Datum BETWEEN @start AND @ende
+    AND charger_voltage > 300";
 
                     foreach (DataRow dr in dt.Rows)
                     {
@@ -4500,12 +4665,13 @@ WHERE
                                 cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@start", start);
                                 cmd.Parameters.AddWithValue("@ende", ende);
+                                Tools.DebugLog(cmd);
                                 object ret = cmd.ExecuteScalar();
 
                                 if (ret == DBNull.Value)
                                     continue;
 
-                                return Convert.ToDouble(ret);
+                                return Convert.ToDouble(ret, Tools.ciEnUS);
                             }
                         }
                     }
@@ -4557,7 +4723,7 @@ WHERE
             return false;
         }
 
-        public static void Enable_utf8mb4()
+        public static void EnableUTF8mb4()
         {
             // https://mathiasbynens.be/notes/mysql-utf8mb4
             // check database
@@ -4574,14 +4740,22 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT default_character_set_name, default_collation_name FROM information_schema.schemata WHERE schema_name = '{dbname}'", con))
+                    using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+    default_character_set_name,
+    default_collation_name
+FROM
+    information_schema.schemata
+WHERE SCHEMA_NAME  = '{dbname}'", con))
                     {
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
                             if (dr.HasRows && dr[0] != null && dr[1] != null)
                             {
-                                if (!dr[0].ToString().Equals("utf8mb4") || !dr[1].ToString().Equals("utf8mb4_unicode_ci"))
+                                if (!dr[0].ToString().Equals("utf8mb4", StringComparison.Ordinal)
+                                    || !dr[1].ToString().Equals("utf8mb4_unicode_ci", StringComparison.Ordinal))
                                 {
                                     Enable_utf8mb4_alter_database(dbname);
                                 }
@@ -4605,7 +4779,10 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci");
-                    _ = ExecuteSQLQuery($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", 300);
+                    _ = ExecuteSQLQuery($@"
+ALTER DATABASE {dbname}
+CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci", 300);
                 }
             }
             catch (Exception ex)
@@ -4622,14 +4799,23 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT TABLE_NAME, TABLE_COLLATION FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{dbname}' AND TABLE_TYPE = 'BASE TABLE'", con))
+                    using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+    TABLE_NAME,
+    TABLE_COLLATION
+FROM
+    information_schema.TABLES
+WHERE
+    TABLE_SCHEMA = '{dbname}'
+    AND TABLE_TYPE = 'BASE TABLE'", con))
                     {
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
                             if (dr.HasRows && dr[0] != null && dr[1] != null)
                             {
-                                if (!dr[1].ToString().Equals("utf8mb4_unicode_ci"))
+                                if (!dr[1].ToString().Equals("utf8mb4_unicode_ci", StringComparison.Ordinal))
                                 {
                                     Enable_utf8mb4_alter_table(dbname, dr[0].ToString());
                                 }
@@ -4655,7 +4841,9 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-                    _ = ExecuteSQLQuery($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
+                    _ = ExecuteSQLQuery($@"
+ALTER TABLE {dbname}.{tablename}
+CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
                 }
             }
             catch (Exception ex)
@@ -4672,14 +4860,26 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"SELECT COLUMN_NAME, CHARACTER_SET_NAME, COLLATION_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA = '{dbname}' AND TABLE_NAME = '{tablename}' AND DATA_TYPE = 'varchar'", con))
+                    using (MySqlCommand cmd = new MySqlCommand($@"
+SELECT
+    COLUMN_NAME,
+    CHARACTER_SET_NAME,
+    COLLATION_NAME,
+    COLUMN_TYPE
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_SCHEMA = '{dbname}'
+    AND TABLE_NAME = '{tablename}'
+    AND DATA_TYPE = 'varchar'", con))
                     {
                         MySqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
                             if (dr.HasRows && dr[0] != null && dr[1] != null && dr[2] != null)
                             {
-                                if (!dr[1].ToString().Equals("utf8mb4") || !dr[2].ToString().Equals("utf8mb4_unicode_ci"))
+                                if (!dr[1].ToString().Equals("utf8mb4", StringComparison.Ordinal)
+                                    || !dr[2].ToString().Equals("utf8mb4_unicode_ci", StringComparison.Ordinal))
                                 {
                                     Enable_utf8mb4_alter_column(dbname, tablename, dr[0].ToString(), dr[3].ToString());
                                 }
@@ -4703,7 +4903,9 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL");
-                    _ = ExecuteSQLQuery($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL", 3000);
+                    _ = ExecuteSQLQuery($@"
+ALTER TABLE {dbname}.{tablename}
+CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL", 3000);
                 }
             }
             catch (Exception ex)
@@ -4763,16 +4965,16 @@ WHERE
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
                         con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(
-@"SELECT
-  MAX(speed)
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    MAX(speed)
 FROM
-pos", con))
+    pos", con))
                         {
                             MySqlDataReader dr = cmd.ExecuteReader();
                             if (dr.Read() && dr[0] != DBNull.Value)
                             {
-                                int.TryParse(dr[0].ToString(), out maxspeed_kmh);
+                                _ = int.TryParse(dr[0].ToString(), out maxspeed_kmh);
                             }
                         }
                         con.Close();
@@ -4800,13 +5002,13 @@ pos", con))
                             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                             {
                                 con.Open();
-                                using (MySqlCommand cmd = new MySqlCommand(
-@"UPDATE
-  pos
+                                using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    pos
 SET
-  speed = @speedround
+    speed = @speedround
 WHERE
-  speed = @speedfloor", con))
+    speed = @speedfloor", con))
                                 {
                                     cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
                                     cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
@@ -4825,14 +5027,14 @@ WHERE
                         using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                         {
                             con.Open();
-                            using (MySqlCommand cmd = new MySqlCommand(
-@"SELECT
-  StartPos,
-  EndPos
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    StartPos,
+    EndPos
 FROM
-  drivestate
+    drivestate
 WHERE
-  CarID = @CarID", con))
+    CarID = @CarID", con))
                             {
                                 cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = c.CarInDB;
                                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -4904,19 +5106,19 @@ WHERE
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
-                        UPDATE
-                         chargingstate
-                        SET
-                         EndDate = @EndDate,
-                         EndChargingID = @EndChargingID,
-                         meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
-                         meter_utility_kwh_end = @meter_utility_kwh_end,
-                         meter_vehicle_kwh_sum = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
-                         meter_utility_kwh_sum = @meter_utility_kwh_end - meter_utility_kwh_start,
-                         cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start
-                        WHERE
-                         id=@ChargingStateID
-                         AND CarID=@CarID", con))
+UPDATE
+    chargingstate
+SET
+    EndDate = @EndDate,
+    EndChargingID = @EndChargingID,
+    meter_vehicle_kwh_end = @meter_vehicle_kwh_end,
+    meter_utility_kwh_end = @meter_utility_kwh_end,
+    meter_vehicle_kwh_sum = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
+    meter_utility_kwh_sum = @meter_utility_kwh_end - meter_utility_kwh_start,
+    cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start
+WHERE
+    id = @ChargingStateID
+    AND CarID = @CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@EndDate", chargeEnd);
                         cmd.Parameters.AddWithValue("@EndChargingID", chargeID);
@@ -4934,7 +5136,7 @@ WHERE
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
-            if (car.GetTeslaAPIState().GetString("charging_state", out string chargingState) && chargingState.Equals("Disconnected"))
+            if (car.GetTeslaAPIState().GetString("charging_state", out string chargingState) && chargingState == "Disconnected")
             {
                 UpdateUnplugDate();
             }

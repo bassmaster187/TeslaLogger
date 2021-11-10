@@ -18,6 +18,7 @@ using System.Web.Script.Serialization;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class WebServer : IDisposable
     {
         private HttpListener listener = null;
@@ -392,10 +393,12 @@ namespace TeslaLogger
                     File.WriteAllText(file_htaccess, content);
 
                     string password = r["password"];
-                    using (var sha1 = SHA1.Create())
+#pragma warning disable CA5350 // Keine schwachen kryptografischen Algorithmen verwenden
+                    using (SHA1 sha1 = SHA1.Create())
+#pragma warning restore CA5350 // Keine schwachen kryptografischen Algorithmen verwenden
                     {
-                        var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
-                        content = string.Format("{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
+                        byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+                        content = string.Format(Tools.ciEnUS, "{0}:{{SHA}}{1}", "admin", Convert.ToBase64String(hash));
                     }
                     string filename_htpasswd = "/etc/teslalogger/.htpasswd";
                     File.WriteAllText(filename_htpasswd, content);
@@ -424,7 +427,7 @@ namespace TeslaLogger
 
                     if (String.IsNullOrEmpty(data))
                     {
-                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"]);
+                        abrp_mode = Convert.ToInt32(request.QueryString["abrp_mode"], Tools.ciEnUS);
                         abrp_token = request.QueryString["abrp_token"];
                     }
                     else
@@ -476,7 +479,6 @@ namespace TeslaLogger
             int endPosID = 0;
             int width = 240;
             int height = 0;
-            StaticMapProvider.MapType type = StaticMapProvider.MapType.Trip; // TODO
             StaticMapProvider.MapMode mode = StaticMapProvider.MapMode.Regular;
             if (request.QueryString.HasKeys())
             {
@@ -503,14 +505,7 @@ namespace TeslaLogger
                             }
                             break;
                         case "type":
-                            if ("park".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
-                            {
-                                type = StaticMapProvider.MapType.Park;
-                            }
-                            else if ("charge".Equals(request.QueryString.GetValues(key)[0], System.StringComparison.Ordinal))
-                            {
-                                type = StaticMapProvider.MapType.Charge;
-                            }
+                            // TODO
                             break;
                         default:
                             break;
@@ -830,7 +825,7 @@ namespace TeslaLogger
                                     {
                                         // convert date/time into GPX format (insert a "T")
                                         // 2020-01-30 09:19:55 --> 2020-01-30T09:19:55
-                                        string Date = Datum.ToString("yyyy-MM-dd") + "T" + Datum.ToString("HH:mm:ss");
+                                        string Date = Datum.ToString("yyyy-MM-dd", Tools.ciEnUS) + "T" + Datum.ToString("HH:mm:ss", Tools.ciEnUS);
                                         string alt = "";
                                         if (double.TryParse(dr[3].ToString(), out double altitude))
                                         {
@@ -908,7 +903,7 @@ namespace TeslaLogger
         private static void Debug_TeslaLoggerMessages(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format("<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
+            WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
         }
 
         private static void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
@@ -919,7 +914,7 @@ namespace TeslaLogger
 
             if (String.IsNullOrEmpty(data))
             {
-                id = Convert.ToInt32(request.QueryString["id"]);
+                id = Convert.ToInt32(request.QueryString["id"], Tools.ciEnUS);
             }
             else
             {
@@ -1226,7 +1221,9 @@ namespace TeslaLogger
 
                                 Logfile.Log("Start Reconnect!");
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.CarType, c.CarSpecialType, c.TrimBadging, c.DisplayName, c.Vin, c.TaskerHash, c.WhTR);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                             }
 
                             WriteString(response, "OK");
@@ -1267,7 +1264,9 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                                     cmd2.ExecuteNonQuery();
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -1300,7 +1299,9 @@ namespace TeslaLogger
                                     c.ExitTeslaLogger("Credentials changed!");
                                 }
 
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 Car nc = new Car(dbID, email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 WriteString(response, "OK");
                             }
                         }
@@ -1354,25 +1355,25 @@ namespace TeslaLogger
             if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("html", System.StringComparison.Ordinal))
             {
                 IEnumerable<string> geofence = Geofence.GetInstance().geofenceList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
+                    a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence</td></tr>",
                         a.name,
                         a.lat,
                         a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
-                            sp => string.Format("{0}<br/>",
+                            sp => string.Format(Tools.ciEnUS, "{0}<br/>",
                             sp.ToString()))
                         )
                     )
                 );
                 IEnumerable<string> geofenceprivate = Geofence.GetInstance().geofencePrivateList.Select(
-                    a => string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
+                    a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>geofence-private</td></tr>",
                         a.name,
                         a.lat,
                         a.lng,
                         a.radius,
                         string.Concat(a.specialFlags.Select(
-                            sp => string.Format("{0}<br/>",
+                            sp => string.Format(Tools.ciEnUS, "{0}<br/>",
                             sp.ToString()))
                         )
                     )
@@ -1392,14 +1393,14 @@ namespace TeslaLogger
         {
             Dictionary<string, string> values = new Dictionary<string, string>
             {
-                { "System.DateTime.Now", DateTime.Now.ToString() },
-                { "System.DateTime.UtcNow", DateTime.UtcNow.ToString() },
-                { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString() },
-                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString() },
+                { "System.DateTime.Now", DateTime.Now.ToString(Tools.ciEnUS) },
+                { "System.DateTime.UtcNow", DateTime.UtcNow.ToString(Tools.ciEnUS) },
+                { "System.DateTime.UnixTime", Tools.ToUnixTime(DateTime.Now).ToString(Tools.ciEnUS) },
+                { "UpdateTeslalogger.lastVersionCheck", UpdateTeslalogger.GetLastVersionCheck().ToString(Tools.ciEnUS) },
                 {
                 "TLMemCacheKey.Housekeeping",
                 MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString()) != null
-                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString()
+                    ? "AbsoluteExpiration: " + ((CacheItemPolicy)MemoryCache.Default.Get(Program.TLMemCacheKey.Housekeeping.ToString())).AbsoluteExpiration.ToString(Tools.ciEnUS)
                     : "null"
                 },
             };
@@ -1409,27 +1410,27 @@ namespace TeslaLogger
                 Dictionary<string, string> carvalues = new Dictionary<string, string>
                 {
                     { $"Car #{car.CarInDB} GetCurrentState()", car.GetCurrentState().ToString() },
-                    { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString() },
-                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString() },
+                    { $"Car #{car.CarInDB} GetWebHelper().GetLastShiftState()", car.GetWebHelper().GetLastShiftState().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLogging()", car.GetHighFrequencyLogging().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicks()", car.GetHighFrequencyLoggingTicks().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingTicksLimit()", car.GetHighFrequencyLoggingTicksLimit().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetHighFrequencyLoggingUntil()", car.GetHighFrequencyLoggingUntil().ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} GetHighFrequencyLoggingMode()", car.GetHighFrequencyLoggingMode().ToString() },
-                    { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString() },
-                    { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString() },
-                    { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString() },
+                    { $"Car #{car.CarInDB} GetLastCarUsed()", car.GetLastCarUsed().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetLastOdometerChanged()", car.GetLastOdometerChanged().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetLastTryTokenRefresh()", car.GetLastTryTokenRefresh().ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} lastSetChargeLimitAddressName",
-                        car.LastSetChargeLimitAddressName.Equals(string.Empty)
+                        string.IsNullOrEmpty(car.LastSetChargeLimitAddressName)
                         ? "&lt;&gt;"
                         : car.LastSetChargeLimitAddressName
                     },
-                    { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString() },
-                    { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString() },
-                    { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString() },
-                    { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString() },
+                    { $"Car #{car.CarInDB} GetGoSleepWithWakeup()", car.GetGoSleepWithWakeup().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} GetOdometerLastTrip()", car.GetOdometerLastTrip().ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} WebHelper.lastIsDriveTimestamp", car.GetWebHelper().lastIsDriveTimestamp.ToString(Tools.ciEnUS) },
+                    { $"Car #{car.CarInDB} WebHelper.lastUpdateEfficiency", car.GetWebHelper().lastUpdateEfficiency.ToString(Tools.ciEnUS) },
                     { $"Car #{car.CarInDB} TeslaAPIState", car.GetTeslaAPIState().ToString(true).Replace(Environment.NewLine, "<br />") },
                 };
-                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format("<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
+                string carHTMLtable = "<table>" + string.Concat(carvalues.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}</td><td>{1}</td></tr>", a.Key, a.Value))) + "</table>";
                 values.Add($"Car #{car.CarInDB}", carHTMLtable);
             }
 

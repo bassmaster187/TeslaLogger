@@ -9,26 +9,31 @@ using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class ScanMyTesla
     {
         private string token;
-        private System.Threading.Thread thread;
+        private Thread thread;
         private bool fastmode = false;
         private bool run = true;
         Car car;
 
         public ScanMyTesla(Car c)
         {
-            this.token = c.TaskerHash;
-            this.car = c;
+            if (c != null)
+            {
+                token = c.TaskerHash;
+                car = c;
 
-            thread = new System.Threading.Thread(new System.Threading.ThreadStart(Start));
-            thread.Start();
+                thread = new Thread(new ThreadStart(Start));
+                thread.Start();
+            }
         }
 
         public void FastMode(bool fast)
         {
-            car.Log("ScanMyTesla FastMode: " + fast.ToString());
+            car.Log($"ScanMyTesla FastMode: {fast}");
             fastmode = fast;
         }
 
@@ -63,7 +68,9 @@ namespace TeslaLogger
                     }
 
                     response = GetDataFromWebservice().Result;
-                    if (response.StartsWith("not found") || response.StartsWith("ERROR:") || response.Contains("Resource Limit Is Reached"))
+                    if (response.StartsWith("not found", StringComparison.Ordinal)
+                        || response.StartsWith("ERROR:", StringComparison.Ordinal)
+                        || response.Contains("Resource Limit Is Reached"))
                     {
                         System.Threading.Thread.Sleep(5000);
                     }
@@ -100,8 +107,8 @@ namespace TeslaLogger
                     {
 
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = await client.PostAsync("http://teslalogger.de/get_scanmytesla.php", content);
-                        resultContent = await result.Content.ReadAsStringAsync();
+                        HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+                        resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
 
                         DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
 
@@ -119,12 +126,12 @@ namespace TeslaLogger
 
                         string temp = resultContent;
                         int i = 0;
-                        i = temp.IndexOf("\r\n");
+                        i = temp.IndexOf("\r\n", StringComparison.Ordinal);
                         string id = temp.Substring(0, i);
 
                         temp = temp.Substring(i + 2);
 
-                        i = temp.IndexOf("\r\n");
+                        i = temp.IndexOf("\r\n", StringComparison.Ordinal);
                         string date = temp.Substring(0, i);
                         temp = temp.Substring(i + 2);
 
@@ -151,48 +158,48 @@ namespace TeslaLogger
                             switch (line.Key)
                             {
                                 case "2":
-                                    car.CurrentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "5":
-                                    car.CurrentJSON.SMTCellMinV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellMinV = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "6":
-                                    car.CurrentJSON.SMTCellAvgV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellAvgV = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "7":
-                                    car.CurrentJSON.SMTCellMaxV = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellMaxV = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "9":
-                                    car.CurrentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "11":
-                                    car.CurrentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "27":
-                                    car.CurrentJSON.SMTCellImbalance = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTCellImbalance = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "28":
-                                    car.CurrentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "29":
-                                    car.CurrentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "442":
-                                    if (Convert.ToDouble(line.Value) == 287.6) // SNA - Signal not Available
+                                    if (Convert.ToDouble(line.Value, Tools.ciEnUS) == 287.6) // SNA - Signal not Available
                                     {
                                         car.CurrentJSON.SMTSpeed = 0;
                                         car.Log("SMT Speed: Signal not Available");
                                     }
                                     else
                                     {
-                                        car.CurrentJSON.SMTSpeed = Convert.ToDouble(line.Value);
+                                        car.CurrentJSON.SMTSpeed = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     }
                                     break;
                                 case "43":
-                                    car.CurrentJSON.SMTBatteryPower = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTBatteryPower = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 case "71":
-                                    car.CurrentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value);
+                                    car.CurrentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value, Tools.ciEnUS);
                                     break;
                                 default:
                                     break;
@@ -213,7 +220,7 @@ namespace TeslaLogger
                             sb.Append("',");
                             sb.Append(line.Key);
                             sb.Append(",");
-                            sb.Append(Convert.ToDouble(line.Value).ToString(Tools.ciEnUS));
+                            sb.Append(Convert.ToDouble(line.Value, Tools.ciEnUS).ToString(Tools.ciEnUS));
                             sb.Append(",");
                             sb.Append(car.CarInDB);
                             sb.Append(")");
@@ -222,7 +229,9 @@ namespace TeslaLogger
                         using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
                             con.Open();
+#pragma warning disable CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                             using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
+#pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                             {
                                 cmd.ExecuteNonQuery();
 
@@ -242,7 +251,7 @@ namespace TeslaLogger
                                 catch (Exception)
                                 { }
 
-                                return "insert ok [" + kv.Keys.Count + "] " + d.ToString();
+                                return "insert ok [" + kv.Keys.Count + "] " + d.ToString(Tools.ciEnUS);
                             }
                         }
                     }

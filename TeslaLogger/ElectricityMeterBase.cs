@@ -1,16 +1,10 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    class ElectricityMeterBase
+    abstract class ElectricityMeterBase
     {
-        private string host;
-        private string paramater;
 
         public static ElectricityMeterBase Instance(int carid)
         {

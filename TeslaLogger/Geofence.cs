@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     public class Address
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1717:Nur FlagsAttribute-Enumerationen dürfen Pluralnamen aufweisen", Justification = "<Pending>")]
         public enum SpecialFlags
         {
             OpenChargePort,
@@ -87,21 +89,21 @@ namespace TeslaLogger
 
         public int Compare(Address x, Address y)
         {
-            if (x.lat < y.lat)
+            if (x != null && y != null && x.lat < y.lat)
             {
                 return -1;
             }
-            else if (x.lat > y.lat)
+            else if (x != null && y != null && x.lat > y.lat)
             {
                 return 1;
             }
             else
             {
-                if (x.lng < y.lng)
+                if (x != null && y != null && x.lng < y.lng)
                 {
                     return -1;
                 }
-                else if (x.lng > y.lng)
+                else if (x != null && y != null && x.lng > y.lng)
                 {
                     return 1;
                 }
@@ -110,29 +112,35 @@ namespace TeslaLogger
         }
     }
 
-    public class Geofence
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
+    public class Geofence : IDisposable
     {
-        private static Geofence _geofence = null;
+        private static Object lockObj = new Object();
+        private static Geofence _geofence = null; // Singleton
 
         public static Geofence GetInstance()
         {
-            if (_geofence == null)
+            lock (lockObj)
             {
-                _geofence = new Geofence(ApplicationSettings.Default.RacingMode);
+                if (_geofence == null)
+                {
+                    _geofence = new Geofence(ApplicationSettings.Default.RacingMode);
+                }
+                return _geofence;
             }
-            return _geofence;
         }
 
         internal SortedSet<Address> geofenceList = new SortedSet<Address>(new AddressByLatLng());
         internal SortedSet<Address> geofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
-        private FileSystemWatcher fsw;
-
+        private readonly FileSystemWatcher fsw;
+        private bool isDisposed;
         public bool RacingMode = false;
         private bool _RacingMode = false;
 
         private static int FSWCounter = 0;
 
-        internal Geofence(bool RacingMode)
+        private Geofence(bool RacingMode)
         {
             _RacingMode = RacingMode;
             Logfile.Log("Geofence initialized");
@@ -212,6 +220,7 @@ namespace TeslaLogger
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
         private static int ReadGeofenceFile(SortedSet<Address> list, string filename)
         {
             list.Clear();
@@ -238,7 +247,7 @@ namespace TeslaLogger
 
                             if (args.Length > 3 && args[3] != null && args[3].Length > 0)
                             {
-                                int.TryParse(args[3], out radius);
+                                _ = int.TryParse(args[3], out radius);
                             }
 
                             Address addr = new Address(args[0].Trim(),
@@ -251,20 +260,20 @@ namespace TeslaLogger
                                 string flags = args[4];
                                 ParseSpecialFlags(addr, flags);
                             }
-                            if (filename.Equals(FileManager.GetFilePath(TLFilename.GeofencePrivateFilename)))
+                            if (filename == FileManager.GetFilePath(TLFilename.GeofencePrivateFilename))
                             {
                                 Logfile.Log("GeofencePrivate: Address inserted: " + args[0]);
                             }
 
-                            if (addr.name.StartsWith("Supercharger-V3 ") || addr.name.StartsWith("Ionity "))
+                            if (addr.name.StartsWith("Supercharger-V3 ", StringComparison.Ordinal) || addr.name.StartsWith("Ionity ", StringComparison.Ordinal))
                             {
                                 addr.name = "\u26A1\u26A1\u26A1 " + addr.name;
                             }
-                            else if (addr.name.StartsWith("Supercharger "))
+                            else if (addr.name.StartsWith("Supercharger ", StringComparison.Ordinal))
                             {
                                 addr.name = "\u26A1\u26A1 " + addr.name;
                             }
-                            else if (addr.name.StartsWith("Urbancharger "))
+                            else if (addr.name.StartsWith("Urbancharger ", StringComparison.Ordinal))
                             {
                                 addr.name = "\u26A1 " + addr.name;
                             }
@@ -289,64 +298,64 @@ namespace TeslaLogger
         {
             foreach (string flag in _flags.Split('+'))
             {
-                if (flag.StartsWith("ocp"))
+                if (flag.StartsWith("ocp", StringComparison.Ordinal))
                 {
                     SpecialFlag_OCP(_addr, flag);
                 }
-                else if (flag.StartsWith("hfl"))
+                else if (flag.StartsWith("hfl", StringComparison.Ordinal))
                 {
                     SpecialFlag_HFL(_addr, flag);
                 }
-                else if (flag.StartsWith("esm"))
+                else if (flag.StartsWith("esm", StringComparison.Ordinal))
                 {
                     SpecialFlag_ESM(_addr, flag);
                     _addr.name = "\uD83D\uDC40 " + _addr.name;
                 }
-                else if (flag.StartsWith("dsm"))
+                else if (flag.StartsWith("dsm", StringComparison.Ordinal))
                 {
                     SpecialFlag_DSM(_addr, flag);
                 }
-                else if (flag.Equals("home"))
+                else if (flag == "home")
                 {
                     _addr.IsHome = true;
                     _addr.name = "\uD83C\uDFE0 " + _addr.name;
                 }
-                else if (flag.Equals("work"))
+                else if (flag == "work")
                 {
                     _addr.IsWork = true;
                     _addr.name = "\uD83D\uDCBC " + _addr.name;
                 }
-                else if (flag.Equals("nosleep"))
+                else if (flag == "nosleep")
                 {
                     _addr.NoSleep = true;
                     _addr.name = "\u2615 " + _addr.name;
                 }
-                else if (flag.Equals("charger"))
+                else if (flag == "charger")
                 {
                     _addr.IsCharger = true;
                     _addr.name = "\uD83D\uDD0C " + _addr.name;
                 }
-                else if (flag.StartsWith("occ"))
+                else if (flag.StartsWith("occ", StringComparison.Ordinal))
                 {
                     SpecialFlag_OCC(_addr, flag);
                 }
-                else if (flag.StartsWith("scl"))
+                else if (flag.StartsWith("scl", StringComparison.Ordinal))
                 {
                     SpecialFlag_SCL(_addr, flag);
                 }
-                else if (flag.StartsWith("cof"))
+                else if (flag.StartsWith("cof", StringComparison.Ordinal))
                 {
                     SpecialFlag_COF(_addr, flag);
                 }
-                else if (flag.Equals("ccp"))
+                else if (flag == "ccp")
                 {
                     SpecialFlag_CCP(_addr);
                 }
-                else if (flag.Equals("ccs"))
+                else if (flag == "ccs")
                 {
                     SpecialFlag_CCS(_addr);
                 }
-                else if (flag.Equals("dnc"))
+                else if (flag == "dnc")
                 {
                     SpecialFlag_DNC(_addr);
                 }
@@ -477,7 +486,7 @@ namespace TeslaLogger
             }
         }
 
-        public Address GetPOI(double lat, double lng, bool logDistance = true, string brand = null, int max_power = 0)
+        public Address GetPOI(double lat, double lng, bool logDistance = true, string brand = null, int maxPower = 0)
         {
             Address ret = null;
             double retDistance = 0;
@@ -486,13 +495,13 @@ namespace TeslaLogger
             // look for POI in geofence-private first
             lock (geofencePrivateList)
             {
-                LookupPOIinList(geofencePrivateList, lat, lng, logDistance, brand, max_power, ref ret, ref retDistance, ref found);
+                LookupPOIinList(geofencePrivateList, lat, lng, logDistance, brand, maxPower, ref ret, ref retDistance, ref found);
             }
             if (ret == null)
             {
                 lock (geofenceList)
                 {
-                    LookupPOIinList(geofenceList, lat, lng, logDistance, brand, max_power, ref ret, ref retDistance, ref found);
+                    LookupPOIinList(geofenceList, lat, lng, logDistance, brand, maxPower, ref ret, ref retDistance, ref found);
                 }
             }
 
@@ -564,6 +573,25 @@ namespace TeslaLogger
             double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + (Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0));
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (isDisposed) return;
+            if (disposing)
+            {
+                if (fsw != null)
+                {
+                    fsw.Dispose();
+                }
+            }
+            isDisposed = true;
         }
     }
 }
