@@ -5,11 +5,10 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    internal class GeocodeCache : IDisposable
+    internal class GeocodeCache
     {
         private DataTable dt = new DataTable("cache");
         private static GeocodeCache _instance;
-        private bool isDisposed;
 
         public static GeocodeCache Instance
         {
@@ -94,23 +93,5 @@ namespace TeslaLogger
             dt.Clear();
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (isDisposed) return;
-            if (disposing)
-            {
-                if (dt != null)
-                {
-                    dt.Dispose();
-                }
-            }
-            isDisposed = true;
-        }
     }
 }

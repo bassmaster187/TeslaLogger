@@ -13,7 +13,7 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
-    public class Car : IDisposable
+    public class Car
     {
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
@@ -178,7 +178,6 @@ namespace TeslaLogger
         internal bool waitForRecaptcha;
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
-        private bool isDisposed;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -1606,25 +1605,5 @@ id = @carid", con))
             reason = "";
             return true;
         }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (isDisposed) return;
-            if (disposing)
-            {
-                if (webhelper != null)
-                {
-                    webhelper.Dispose();
-                }
-            }
-            isDisposed = true;
-        }
-
     }
 }
