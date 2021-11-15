@@ -114,7 +114,7 @@ namespace TeslaLogger
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
-    public class Geofence : IDisposable
+    public class Geofence
     {
         private static Object lockObj = new Object();
         private static Geofence _geofence = null; // Singleton
@@ -134,7 +134,6 @@ namespace TeslaLogger
         internal SortedSet<Address> geofenceList = new SortedSet<Address>(new AddressByLatLng());
         internal SortedSet<Address> geofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
         private readonly FileSystemWatcher fsw;
-        private bool isDisposed;
         public bool RacingMode = false;
         private bool _RacingMode = false;
 
@@ -573,25 +572,6 @@ namespace TeslaLogger
             double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + (Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0));
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (isDisposed) return;
-            if (disposing)
-            {
-                if (fsw != null)
-                {
-                    fsw.Dispose();
-                }
-            }
-            isDisposed = true;
         }
     }
 }

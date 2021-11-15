@@ -19,10 +19,9 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    public class WebServer : IDisposable
+    public class WebServer
     {
         private HttpListener listener = null;
-        private bool isDisposed;
 
         private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
@@ -1688,26 +1687,6 @@ namespace TeslaLogger
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to, null, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (isDisposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                listener.Close();
-            }
-            isDisposed = true;
         }
     }
 }
