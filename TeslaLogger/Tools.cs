@@ -1289,9 +1289,9 @@ namespace TeslaLogger
 
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            long freeDiskSpaceNeeded = 1024;
+            long freeDiskSpaceNeeded = 2048;
 
-            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 1GB of free disk space
+            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 2GB of free disk space
                 return;
 
 

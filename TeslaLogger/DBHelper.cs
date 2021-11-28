@@ -540,8 +540,7 @@ ORDER BY
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
                         cmd.CommandTimeout = 600;
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         int lastID = 0;
                         double lastCEA = 0.0;
                         if (dr.Read())
@@ -705,7 +704,6 @@ WHERE
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            Tools.DebugLog(dr);
                             return (double)dr[0];
                         }
                     }
@@ -999,8 +997,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", id);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read())
                         {
                             if (DateTime.TryParse(dr[1].ToString(), out DateTime StartDate)
@@ -1044,11 +1041,9 @@ HAVING
   COUNT(chargingstate.id) > 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
                                 combineCandidates.Enqueue(id);
@@ -1252,7 +1247,7 @@ HAVING
                     cmd.Parameters.AddWithValue("@date", dateTime);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.Trace(cmd);
                     if (dr.Read())
                     {
                         string version = dr[0].ToString();
@@ -1393,11 +1388,9 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@referenceID", ChargingStateID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && dr[1] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (dr[0].ToString().Equals("Tesla", StringComparison.Ordinal) && (dr[1].ToString().Equals("Tesla", StringComparison.Ordinal) || dr[1].ToString().Equals("Combo", StringComparison.Ordinal)))
                             {
                                 Tools.DebugLog("ChargingStateLocationIsSuC: true");
@@ -1457,8 +1450,7 @@ WHERE
                         {
                             cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
                             cmd.Parameters.Add("@referenceID", MySqlDbType.Int32).Value = ChargingStateID;
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.Trace(cmd);
                             if (dr.Read() && dr[0] != DBNull.Value)
                             {
                                 if (double.TryParse(dr[0].ToString(), out charge_energy_added)
@@ -1786,8 +1778,7 @@ ORDER BY
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         double last_charge_energy_added = 0.0;
                         while (dr.Read())
                         {
@@ -1888,8 +1879,7 @@ LIMIT 1", con))
                     {
                         cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = name;
                         cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read())
                         {
                             _ = int.TryParse(dr[0].ToString(), out referenceID);
@@ -1945,11 +1935,9 @@ WHERE
     id = @ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (DateTime.TryParse(dr[0].ToString(), out startDate)
                                 && int.TryParse(dr[1].ToString(), out startdID)
                                 && int.TryParse(dr[2].ToString(), out posID))
@@ -1991,11 +1979,9 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (double.TryParse(dr[0].ToString(), out double odometer))
                             {
                                 return odometer;
@@ -2032,11 +2018,9 @@ ORDER BY
     StartDate ASC", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
                                 openChargingStates.Enqueue(id);
@@ -2112,11 +2096,9 @@ ORDER BY
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@referenceID", referenceID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            Tools.DebugLog(dr);
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
                                 chargingStates.Enqueue(id);
@@ -2154,8 +2136,7 @@ ORDER BY
 LIMIT 1", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.Trace(cmd);
                         if (dr.Read())
                         {
                             int id = Convert.ToInt32(dr["id"], Tools.ciEnUS);
@@ -2731,8 +2712,7 @@ WHERE
     AND CarID = @carid", con))
                 {
                     cmd.Parameters.AddWithValue("@carid", car.CarInDB);
-                    Tools.DebugLog(cmd);
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.Trace(cmd);
                     if (dr.Read())
                     {
                         StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);

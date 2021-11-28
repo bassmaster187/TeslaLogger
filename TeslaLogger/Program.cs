@@ -12,6 +12,8 @@ namespace TeslaLogger
     internal class Program
     {
         public static bool VERBOSE = false;
+        public static bool SQLTRACE = false;
+        public static int SQLTRACELIMIT = 10;
         public static int KeepOnlineMinAfterUsage = 1;
         public static int SuspendAPIMinutes = 30;
 
@@ -215,7 +217,12 @@ namespace TeslaLogger
             if (ApplicationSettings.Default.VerboseMode)
             {
                 VERBOSE = true;
-                Logfile.Log("VerboseMode ON");
+                Logfile.Log("VerboseMode: ON");
+            }
+            if (ApplicationSettings.Default.SQLTrace)
+            {
+                SQLTRACE = true;
+                Logfile.Log("SQLTrace: ON");
             }
         }
 
