@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -53,7 +52,6 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none};
 
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
-        private static bool SQLTRACE = false;
 
         public static void SetThreadEnUS()
         {
@@ -67,7 +65,7 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            if (SQLTRACE)
+            if (Program.SQLTRACE)
             {
                 try
                 {
@@ -1362,7 +1360,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@dbname", DBHelper.Database);
                     try
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
                             Logfile.Log($"Table: {dr[0],20} data:{dr[1],5} MB index:{dr[2],5} MB rows:{dr[3],10}");
@@ -1416,7 +1414,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
                     try
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
                             _ = long.TryParse(dr[0].ToString(), out mothershipCount);
@@ -1447,7 +1445,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
                             }
                             catch (Exception ex)
                             {
@@ -1467,7 +1465,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
                         try
                         {
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
                                 _ = long.TryParse(dr[0].ToString(), out mothershipCount);

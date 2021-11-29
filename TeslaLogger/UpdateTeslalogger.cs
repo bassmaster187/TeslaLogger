@@ -298,7 +298,7 @@ namespace TeslaLogger
                                 cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                                 cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                                 cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
                             }
                         }
                     }
@@ -438,8 +438,7 @@ CREATE TABLE superchargerstate(
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                         {
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read() && dr[0] != DBNull.Value)
                             {
                                 if (int.TryParse(dr[0].ToString(), out int datetime_precision))
@@ -886,7 +885,7 @@ CREATE TABLE superchargerstate(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
                             string charset = dr[0].ToString();
@@ -898,7 +897,7 @@ CREATE TABLE superchargerstate(
                                 Logfile.Log("Chage database charset to utf8mb4");
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    cmd2.ExecuteNonQuery();
+                                    SQLTracer.TraceNQ(cmd2);
                                 }
                             }
                         }

@@ -13,7 +13,8 @@ namespace TeslaLogger
     {
         public static bool VERBOSE = false;
         public static bool SQLTRACE = false;
-        public static int SQLTRACELIMIT = 10;
+        public static bool SQLFULLTRACE = false;
+        public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 1;
         public static int SuspendAPIMinutes = 30;
 
