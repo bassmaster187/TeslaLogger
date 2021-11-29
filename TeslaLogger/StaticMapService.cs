@@ -262,6 +262,7 @@ JOIN pos ON
   chargingstate.pos = pos.id
 ", DBHelper.DBConnectionstring))
                 {
+                    da.SelectCommand.CommandTimeout = 600;
                     SQLTracer.TraceDA(dt, da);
                 }
                 foreach (DataRow dr in dt.Rows)
@@ -304,6 +305,7 @@ WHERE
     drivestate
   )", DBHelper.DBConnectionstring))
                 {
+                    da.SelectCommand.CommandTimeout = 600;
                     SQLTracer.TraceDA(dt, da);
                 }
                 foreach (DataRow dr in dt.Rows)
@@ -330,8 +332,8 @@ FROM
 ORDER BY
   startdate DESC ", con))
                 {
+                    cmd.CommandTimeout = 600;
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-
                     try
                     {
                         while (dr.Read())
