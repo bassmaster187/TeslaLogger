@@ -2,6 +2,8 @@
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -26,12 +28,15 @@ namespace TeslaLogger
                 TimeSpan ts = dtend - dtstart;
                 if (ts.TotalMilliseconds > Program.SQLTRACELIMIT)
                 {
-                    Tools.DebugLog($"SQLTracer.Trace ExecuteReader() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
-                    if (!Program.SQLFULLTRACE)
+                    _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog(cmd);
-                    }
-                    Analyze(cmd);
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteReader() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        if (!Program.SQLFULLTRACE)
+                        {
+                            Tools.DebugLog(cmd);
+                        }
+                        Analyze(cmd);
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return dr;
             }
@@ -55,12 +60,15 @@ namespace TeslaLogger
                 TimeSpan ts = dtend - dtstart;
                 if (ts.TotalMilliseconds > Program.SQLTRACELIMIT)
                 {
-                    Tools.DebugLog($"SQLTracer.Trace ExecuteNonQuery() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
-                    if (!Program.SQLFULLTRACE)
+                    _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog(cmd);
-                    }
-                    Analyze(cmd);
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteNonQuery() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        if (!Program.SQLFULLTRACE)
+                        {
+                            Tools.DebugLog(cmd);
+                        }
+                        Analyze(cmd);
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
             }
@@ -84,12 +92,15 @@ namespace TeslaLogger
                 TimeSpan ts = dtend - dtstart;
                 if (ts.TotalMilliseconds > Program.SQLTRACELIMIT)
                 {
-                    Tools.DebugLog($"SQLTracer.Trace ExecuteScalar() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
-                    if (!Program.SQLFULLTRACE)
+                    _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog(cmd);
-                    }
-                    Analyze(cmd);
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteScalar() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        if (!Program.SQLFULLTRACE)
+                        {
+                            Tools.DebugLog(cmd);
+                        }
+                        Analyze(cmd);
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return o;
             }
@@ -113,12 +124,15 @@ namespace TeslaLogger
                 TimeSpan ts = dtend - dtstart;
                 if (ts.TotalMilliseconds > Program.SQLTRACELIMIT)
                 {
-                    Tools.DebugLog($"SQLTracer.Trace DataAdapter.Fill() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
-                    if (!Program.SQLFULLTRACE)
+                    _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog(da.SelectCommand);
-                    }
-                    Analyze(da.SelectCommand);
+                        Tools.DebugLog($"SQLTracer.Trace DataAdapter.Fill() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        if (!Program.SQLFULLTRACE)
+                        {
+                            Tools.DebugLog(da.SelectCommand);
+                        }
+                        Analyze(da.SelectCommand);
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
             }
@@ -126,7 +140,8 @@ namespace TeslaLogger
 
         private static void Analyze(MySqlCommand cmd)
         {
-            if (cmd.CommandText.ToUpper().Substring(0,12).Contains("SELECT")) {
+            if (cmd.CommandText.ToUpper().Substring(0, 12).Contains("SELECT"))
+            {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
