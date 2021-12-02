@@ -23,7 +23,11 @@ Use your browser to go to:
 
 http://raspberry/admin/password.php
 
-Enter the same credentials as you use in your teslaaccount or app.
+Enter the Access Token & Refresh Token
+
+You can use the following apps to generate an Access Token & Refresh Token from the Tesla server.
+iOS: https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone
+Android: https://play.google.com/store/apps/details?id=net.leveugle.teslatokens
 
 ## Settings & Language
 Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome
