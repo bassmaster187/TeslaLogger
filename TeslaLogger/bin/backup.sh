@@ -23,12 +23,12 @@ if [ $DAY -eq 1 ]; then
 	YEAR=$(date +%Y)
 	LYEAR=$((YEAR-1))
 	#echo processing logfile backup
-	mv /etc/teslalogger/nohup.out /etc/teslalogger/logfile-$YEAR$MONTH.log
+	cp /etc/teslalogger/nohup.out /etc/teslalogger/logfile-$YEAR$MONTH.log
 	gzip -c9 /etc/teslalogger/logfile-*.log > /etc/teslalogger/backup/logfile-$YEAR$MONTH.gz
 	if test -f "/etc/teslalogger/backup/logfile-$YEAR$MONTH.gz"; then
 		rm /etc/teslalogger/logfile-*.log
 	fi
-	touch /etc/teslalogger/nohup.out
+	echo > /etc/teslalogger/nohup.out
 
 	#echo processing cleanup of files older than $LYEAR$MONTH*
 	if test -f "/etc/teslalogger/backup/logfile-$LYEAR$MONTH.gz"; then
