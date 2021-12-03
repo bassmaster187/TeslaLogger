@@ -1170,6 +1170,7 @@ ARAL DE-Braunschweig, 52.322159, 10.478146
 ARAL DE-Dettelbach, 49.778176,10.0658, 20
 ARAL DE-Ettenheim,48.274746,7.785175
 ARAL DE-Geseke,51.597496,8.515457,10
+ARAL DE-Jena,50.877065,11.621512
 ARAL DE-Königslutter Autohof,52.3115495,10.8234685
 ARAL DE-Könnern,51.69016,11.7670125
 ARAL DE-Ladbergen,52.146616,7.735806
@@ -1288,6 +1289,7 @@ EnBW DE-Berlin Alt-Biesdorf,52.506843,13.565857
 EnBW DE-Bielefeld Detmolder Straße, 51.996108,8.59518
 EnBW DE-Bitterfeld, 51.636289,12.19907
 EnBW DE-Bobingen, 48.263993, 10.840595, 20
+EnBW DE-Bochum A40,51.476198,7.153262
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
@@ -1370,6 +1372,7 @@ EnBW DE-Ratingen ROSI's Hohenstein, 51.29020, 6.8045626, 20
 EnBW DE-Reichenau, 47.689002, 9.1260333
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Rutesheim, 48.811969, 8.922083
+EnBW DE-Paderborn, 51.706307,8.729175
 EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Reinsfeld Hochwald Ost, 49.690638, 6.899393
 EnBW DE-Rosenheim, 47.843389,12.08216
@@ -1393,6 +1396,7 @@ EnBW DE-Waldmohr Raststätte Waldmohr, 49.37322,7.374279
 EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wangen im Allgäu, 47.6876032, 9.8384064, 10
 EnBW DE-Wattenheim Rastanlage Pfalz, 49.527487,8.072581
+EnBW DE-Wilhelmshaven,53.5285386,8.0885948
 EnBW DE-Winningen Moseltal Ost, 50.316586, 7.4988, 10
 EnBW DE-Winningen Moseltal West, 50.317548, 7.4978, 10
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
@@ -1637,6 +1641,7 @@ Ionity DE-Lonetal West, 48.583937, 10.175605, 10
 Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
 Ionity DE-Lüneburger Heide West, 53.109317, 9.981663
 Ionity DE-Lutterberg, 51.370342, 9.633558, 8
+Ionity DE-Lutterberg, 51.370434,9.63373,8
 Ionity DE-Mahlberg Ost, 48.308819, 7.791519
 Ionity DE-Mahlberg West, 48.309517, 7.788855
 Ionity DE-Nahetal, 49.92578, 7.936795
@@ -2237,6 +2242,7 @@ DE Mölln VW Riemer, 53.623707, 10.678989
 DE München Messe, 48.136766, 11.691608
 DE Neuwied SWN, 50.431649, 7.457607
 DE Norden WBZ Parkplatz, 53.595065, 7.207816
+DE Nordhausen ELA Ladepark,51.48890770,10.829272
 DE Offenbach Betriebshof OVB, 50.1025541, 8.7788451, 20
 DE Offenbach Honda, 50.08437, 8.839102
 DE Offenburg Shell Tankstelle, 48.464972, 7.931808
