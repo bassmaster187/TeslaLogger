@@ -1286,6 +1286,7 @@ CREATE TABLE superchargerstate(
                             Logfile.Log("Convert to language: " + language);
 
                             s = ReplaceAliasTags(s, dictLanguage);
+                            s = ReplaceValuesTags(s, dictLanguage);
 
                             if (f.EndsWith("Akku Trips.json", StringComparison.Ordinal))
                             {
@@ -1571,6 +1572,27 @@ CREATE TABLE superchargerstate(
             }
         }
 
+        internal static string ReplaceValuesTags(string content, Dictionary<string, string> dictLanguage)
+        {
+            try
+            {
+                Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"(.+)\\\"");
+
+                MatchCollection matches = regexAlias.Matches(content);
+
+                foreach (Match match in matches)
+                {
+                    content = ReplaceValueTag(content, match.Groups[1].Value, dictLanguage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return content;
+        }
+
         private static string ReplaceAliasTags(string content, Dictionary<string, string> dictLanguage)
         {
             try
@@ -1602,6 +1624,20 @@ CREATE TABLE superchargerstate(
 
             Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
+
+            return regexAlias.Replace(content, replace);
+        }
+
+        private static string ReplaceValueTag(string content, string v, Dictionary<string, string> dictLanguage)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"value\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
         }
