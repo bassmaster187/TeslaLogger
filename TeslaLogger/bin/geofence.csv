@@ -798,6 +798,7 @@ Supercharger US-Augusta GA - Belair Frontage Road,33.481707,-82.13021
 Supercharger US-Augusta ME, 44.347861,-69.786019
 Supercharger US-Austin TX,30.329202,-97.706266
 Supercharger US-Baker CA, 35.262512, -116.080666
+Supercharger US-Baker City OR,44.783068,-117.81242
 Supercharger US-Bay City MI, 43.622212, -83.932216
 Supercharger-V3 US-Bishop CA, 37.360582,-118.396552
 Supercharger US-Birmingham AL, 33.525915,-86.806862
@@ -806,9 +807,11 @@ Supercharger US-Bowling Green KY, 36.955168, -86.438863
 Supercharger US-Brewer ME, 44.775854,-68.734722
 Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
 Supercharger US-Bristol TN, 36.591663, -82.261292
+Supercharger-V3 US-Brunswick GA,31.246021,-81.501863
+Supercharger US-Buford GA, 34.061649, -83.994602
 Supercharger US-Buttonwillow CA,35.354621,-119.33163
 Supercharger US-Burleson TX, 32.464365,-97.26451
-Supercharger US-Buford GA, 34.061649, -83.994602
+Supercharger-V3 US-Burley ID,42.561592,-113.790105
 Supercharger-V3 US-Bolingbrook IL, 41.722252, -88.037124
 Supercharger US-Cabazon CA,33.931388,-116.820265
 Supercharger US-Cadillac MI,44.282661,-85.403062
@@ -817,13 +820,16 @@ Supercharger-V3 US-Carlton MN,46.664937,-92.477709
 Supercharger US-Cary NC,35.843593,-78.886314
 Supercharger US-Catoosa OK, 36.167589, -95.766032
 Supercharger US-Cedar City UT,37.605961,-113.1612
+Supercharger US-Centralia WA,46.729893,-122.977271
 Supercharger US-Channelview TX, 29.784662, -95.110606
 Supercharger US-Chantilly VA, 38.913606,-77.486836
 Supercharger US-Charleston WV, 38.35475, -81.642864
 Supercharger-V3 US-Charlton MA (EB),42.139226,-72.025781
 Supercharger-V3 US-Charlton MA (WB),42.156811,-71.962966
+Supercharger US-Charlotte NC - Toringdon Way,35.069109,-80.842119
 Supercharger US-Chattanooga TN,35.038706,-85.195937
 Supercharger-V3 US-Chestertown NY, 43.665431,-73.784933
+Supercharger US-Childress TX,34.435278,-100.2319
 Supercharger-V3 US-Chillicothe OH, 39.358367, -82.977389
 Supercharger US-Childress TX, 34.432503, -100.218625
 Supercharger US-Cincinnati OH Marburg Avenue, 39.162772, -84.426492
@@ -842,6 +848,7 @@ Supercharger US-Corsicana TX, 32.0686, -96.448217
 Supercharger US-Cranberry Township PA, 40.683579, -80.108262
 Supercharger US-Dallas TX - North Central Expressway,32.88102,-96.769588
 Supercharger US-Dayton OH, 39.858615, -84.276928
+Supercharger-V3 US-Daytona Beach FL,29.183465,-81.078799
 Supercharger-V3 US-Deerfield Beach FL,26.317051,-80.119156
 Supercharger US-Denton TX, 33.231528, -97.166391
 Supercharger US-Denver CO, 39.775097,-104.794655
@@ -850,6 +857,7 @@ Supercharger US-Dublin-Amador Plaza CA,37.702516,-121.924675
 Supercharger US-Dublin OH, 40.093198, -83.092261
 Supercharger US-Dubuque IA, 42.487438, -90.664024
 Supercharger US-Duluth MN, 46.784582, -92.102298
+Supercharger-V3 US-Durham NC,35.953016,-78.990961
 Supercharger-V3 US-Douglasville GA,33.726865,-84.735714
 Supercharger US-Effingham IL,39.13713,-88.563387
 Supercharger US-Elko NV, 40.836298, -115.790796
@@ -857,15 +865,20 @@ Supercharger US-Evanston WY, 41.26299,-110.985504
 Supercharger US-Eau Claire WI, 44.770877,-91.437202
 Supercharger US-El Paso TX,31.883934,-106.583629
 Supercharger US-Erie PA, 42.049606,-80.086404
+Supercharger US-Farmington NM,36.766341,-108.144164
+Supercharger US-Fayetteville NC,35.009743,-78.822333
 Supercharger-V3 US-Firebaugh CA,36.639163,-120.625873
 Supercharger US-Florence SC,34.190258,-79.832607
+Supercharger-V3 US-Fort Pierce FL,27.416821,-80.381874
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
 Supercharger US-Frederick MD, 39.384667, -77.405375
 Supercharger US-Freeport ME, 43.858727,-70.104076
 Supercharger-V3 US-Fort Lauderdale FL,26.121011,-80.17706
 Supercharger US-Fort Stockton TX,30.905975,-102.884557
+Supercharger US-Gainesville FL,29.624766,-82.376616
 Supercharger US-Gaithersburg MD, 39.118133,-77.202291
 Supercharger US-Gardnerville NV, 38.696494,-119.548509
+Supercharger-V3 US-Garner NC,35.60857,-78.563043
 Supercharger US-Gaylord MI, 45.025599, -84.722179
 Supercharger US-Giddings TX, 30.178965, -96.906996
 Supercharger US-Glen Allen VA, 37.669845, -77.461682
@@ -874,11 +887,15 @@ Supercharger-V3 US-Gettysburg PA,39.84396,-77.198706
 Supercharger-V3 US-Gilroy Camino Arroyo CA,37.001072,-121.553955
 Supercharger US-Grand Rapids MI,42.914212,-85.533093
 Supercharger-V3 US-Greenfield CA,36.3293,-121.245518
+Supercharger US-Green River UT,38.993552,-110.140555
 Supercharger US-Grove City OH, 39.877185, -83.063419
 Supercharger US-Guilderland NY, 42.688555,-73.85295
+Supercharger-V3 US-Hardeeville SC,32.270501,-81.080986
 Supercharger US-Hays KS, 38.900536, -99.319335
 Supercharger US-Haymarket VA,38.815126, -77.6427411, 30
 Supercharger US-Henrietta TX,33.800589,-98.196653
+Supercharger US-Hickory NC,35.706929,-81.294784
+Supercharger-V3 US-Hillsboro OR,45.538523,-122.866128
 Supercharger US-Houston-North TX, 29.980302, -95.421564
 Supercharger US-Houston TX - Northwest Freeway, 29.867279, -95.538107
 Supercharger US-Huntington WV, 38.410909, -82.487255
@@ -888,6 +905,7 @@ Supercharger US-Hudson MA, 42.395293,-71.595076
 Supercharger US-Independence MO, 39.040819, -94.36928
 Supercharger US-Inyokern CA, 35.646456, -117.812561
 Supercharger US-Jackson TN, 35.660411, -88.855634
+Supercharger-V3 US-Jacksonville FL - Chaffee Road,30.307179,-81.847891
 Supercharger US-Junction TX, 30.509278,-99.774676
 Supercharger US-Kennebunk ME North, 43.409428,-70.558581
 Supercharger US-Kennebunk ME South, 43.411056,-70.560704
@@ -906,6 +924,7 @@ Supercharger US-Lindale TX,32.470712,-95.450594
 Supercharger-V3 US-Long Pine CA, 36.600623, -118.062336
 Supercharger US-Loveland CO, 40.441433,-104.991188
 Supercharger US-Louisville KY, 38.211971, -85.673251
+Supercharger-V3 US-Louisville KY - Preston Highway,38.11187,-85.677328
 Supercharger-V3 US-Las Vegas NV - Linq High Roller, 36.116648, -115.168277
 Supercharger US-Las Vegas NV - Blvd South, 36.070704, -115.172895
 Supercharger US-Las Vegas NM, 35.621984, -105.205447
@@ -927,6 +946,7 @@ Supercharger US-Marshall MI, 42.292068, -84.96416
 Supercharger US-Maumee OH, 41.578401, -83.664689
 Supercharger US-Mauston WI, 43.795476,-90.059363
 Supercharger-V3 US-McDonough GA,33.425901,-84.187713
+Supercharger US-Mebane NC,36.069852,-79.27005
 Supercharger US-Medway ME, 45.609342,-68.522743
 Supercharger US-Memphis TN, 35.097843, -89.859007
 Supercharger US-Mehlville MO, 38.507468, -90.32907
@@ -934,6 +954,7 @@ Supercharger US-Menifee CA, 33.679638, -117.173752
 Supercharger-V3 US-Meriden CT, 41.527346,-72.773551
 Supercharger-V3 US-Michigan City MI, 41.673819, -86.890904
 Supercharger US-Mishawaka IN, 41.717332,-86.188565
+Supercharger US-Moab UT,38.573099,-109.552293
 Supercharger US-Mojave CA, 35.068596, -118.174568
 Supercharger US-Monroe LA, 32.496447,-92.05509
 Supercharger US-Mt. Gilead OH, 40.493768, -82.71308
@@ -947,16 +968,20 @@ Supercharger-V3 US-North Charleston SC,32.872514,-80.015414
 Supercharger US-Oak Creek WI, 42.900051,-87.913746
 Supercharger US-Oakdale MN, 44.964849,-92.961271
 Supercharger US-Ocala FL,29.140929,-82.19403
+Supercharger-V3 US-Ontario OR,44.025563,-116.942069
 Supercharger US-Oshkosh WI, 44.028786,-88.592554
 Supercharger-V3 US-Ozark AR, 35.523836, -93.863559
 Supercharger US-Ozona TX,30.706676,-101.196059
+Supercharger-V3 US-Palm Coast FL,29.47661,-81.206392
 Supercharger US-Parkersburg WV,39.26278,-81.544928
 Supercharger US-Pearl MS, 32.274117,-90.151055
+Supercharger US-Pendleton OR,45.646576,-118.682277
 Supercharger-V3 US-Pismo Beach CA,35.136648,-120.628795
 Supercharger US-Primm NV, 35.610592, -115.387932
 Supercharger US-Rancho Cucamonga CA, 34.113557, -117.529450
 Supercharger US-Rawlins WY, 41.79092, -107.210242
 Supercharger US-Raleigh NC, 35.83554,-78.642814
+Supercharger US-Richfield UT,38.788013,-112.085139
 Supercharger-V3 US-Richmond IN, 39.867882, -84.887238
 Supercharger US-Richmond TX, 29.561532, -95.695252
 Supercharger US-Richmond VA, 37.529808, -77.353916
@@ -964,21 +989,26 @@ Supercharger US-Rochester MN,44.006249,-92.470914
 Supercharger US-Rock Springs WY, 41.580713, -109.262277
 Supercharger US-Rolla MO, 37.939942, -91.801636
 Supercharger US-Roseville CA - Galleria Boulevard, 38.768016, -121.263461
+Supercharger-V3 US-Round Rock TX,30.509775,-97.687696
 Supercharger-V3 US-Rolling Meadows IL, 42.049748, -87.994922
 Supercharger US-Pecos TX,31.40035,-103.487009
 Supercharger US-Portland ME, 43.664543,-70.269452
 Supercharger US-Salina KS, 38.877354, -97.618643
+Supercharger-V3 US-Salem OR,44.938985,-122.987957
 Supercharger US-San Clemente CA, 33.437347, -117.626808
 Supercharger US-San Diego CA, 32.902115,-117.193604
 Supercharger US-San Jose CA - Coleman Avenue, 37.339758,-121.903654
+Supercharger US-San Marcos TX,29.827636,-97.979561
 Supercharger US-Santa Ana CA, 33.775828,-117.872036
 Supercharger US-Santa Fe NM,35.6116,-106.031465
 Supercharger US-Santa Rosa NM,34.94717,-104.648025
+Supercharger US-Schertz TX,29.598375,-98.27598
 Supercharger US-Seabrook NH,42.895343,-70.869288
 Supercharger US-Shreveport LA,32.478711,-93.754368
 Supercharger US-Silverthorne CO, 39.631417, -106.070817
 Supercharger US-Sioux Falls SD, 43.527636,-96.790581
 Supercharger US-Skokie IL, 42.009046,-87.763186
+Supercharger US-Smithfield NC,35.504984,-78.325487
 Supercharger US-Southlake TX, 32.943636, -97.133889
 Supercharger US-Springfield IL, 39.748851, -89.671111
 Supercharger US-Springfield MO, 37.252146, -93.265243
@@ -986,19 +1016,25 @@ Supercharger US-Springfield VA, 38.774594,-77.177393
 Supercharger US-Staunton VA, 38.133369, -79.043456
 Supercharger US-Strongsville OH, 41.343339, -81.824921
 Supercharger US-St. Charles MO, 38.78214, -90.532841
+Supercharger-V3 US-St. George SC,33.195509,-80.599848
+Supercharger US-St. George UT,37.126512,-113.601752
 Supercharger US-Superior CO, 39.954891, -105.164528
 Supercharger US-Syracuse NY,43.10238,-76.187497
 Supercharger US-Tejon Ranch CA, 34.987, -118.946172
 Supercharger US-Temecula CA, 33.524190, -117.152544
 Supercharger US-Terre Haute IN, 39.443344, -87.331722
 Supercharger US-Texarkana TX, 33.459914, -94.077229
+Supercharger US-The Dalles OR,45.611963,-121.208359
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
+Supercharger US-Three Rivers TX,28.521622,-98.185825
 Supercharger US-Toledo OH,41.721536,-83.509201
 Supercharger-V3 US-Traver CA, 36.448943,-119.486536
 Supercharger US-Traverse City MI,44.744824,-85.644033
+Supercharger US-Tremonton UT,41.709934,-112.198557
 Supercharger US-Trinidad CO,37.134148,-104.519374
 Supercharger US-Truth or Consequences NM,33.15523,-107.251652
 Supercharger US-Tucumcari NM, 35.153945, -103.722726
+Supercharger-V3 US-Tumwater WA,46.952976,-122.935158
 Supercharger US-Tupelo MS, 34.311517, -88.70099
 Supercharger-V3 US-Vancouver WA - NE Vancouver Mall Drive, 45.659599, -122.583534
 Supercharger US-Van Horn TX,31.034468,-104.861422
@@ -1013,8 +1049,11 @@ Supercharger US-Wausau WI, 44.931231, -89.661909
 Supercharger US-Webster TX, 29.519295, -95.122049
 Supercharger US-Weatherford OK, 35.538718, -98.660132
 Supercharger US-West Des Moines IA, 41.598957, -93.806328
+Supercharger US-West Palm Beach FL - Garden Road,26.781972,-80.092564
+Supercharger-V3 US-West Palm Beach FL - Palm Beach Outlets,26.726273,-80.087486
 Supercharger US-West Wendover NV, 40.738369, -114.059043
 Supercharger US-Williamsport PA,41.232444,-77.020135
+Supercharger-V3 US-Winter Garden FL,28.552156,-81.584031
 Supercharger US-Wytheville VA, 36.945711, -81.054562
 Supercharger US-Zionsville IL, 39.950588,-86.343793
 
@@ -1028,6 +1067,7 @@ Urbancharger US-Downey CA - Lakewood Boulevard, 33.953499,-118.112814
 Urbancharger US-Fontana CA, 34.150982, -117.471046
 Urbancharger US-Glendale CA, 34.145145, -118.257072
 Urbancharger US-Irvine CA - Michelson Drive,33.673052,-117.844639
+Urbancharger US-Issaquah WA,47.548146,-122.039991
 Urbancharger US-Las Vegas NV - Tivoli Village, 36.168785, -115.286674
 Urbancharger US-Pasadena CA, 34.144859, -118.146439
 Urbancharger US-Rockville MD, 39.086813,-77.149977
@@ -1094,6 +1134,7 @@ Aldi DE-Kirchheim unter Teck, 48.652609, 9.45985
 Aldi DE-Koblenz-Moselweiß, 50.357783, 7.575242
 Aldi DE-Köln, 50.906526, 6.934391
 Aldi DE-Königshofen, 49.542487, 9.733833
+Aldi DE-Langen,49.994933,8.677451,10
 Aldi DE-Leonberg, 48.798462, 8.999601
 Aldi DE-Lorsch, 49.65359, 8.555596
 Aldi DE-Ludwigsburg, 48.879803,9.218476,20
@@ -1115,7 +1156,11 @@ Aldi DE-Rauenberg, 49.27325,8.695788, 20
 Aldi DE-Reutlingen, 48.495184,9.158096, 20
 Aldi DE-Rotheidlen, 47.731574,9.698803,20
 Aldi DE-Seeheim, 49.774399,8.636451
-Aldi-DE Stuttgart, 48.769497,9.142045, 20
+Aldi DE-Stuttgart Bottroper Straße, 48.81756,9.214898,20
+Aldi DE-Stuttgart Feuerbach,48.810917,9.168455,20
+Aldi DE-Stuttgart Galileistraße,48.72103,9.119991,20
+Aldi DE-Stuttgart Sophie-Tschorn-Straße, 48.817315,9.23782
+Aldi DE-Stuttgart Westbahnhof, 48.769497,9.142045, 20
 Aldi DE-Ulm, 48.400669, 9.971991
 Aldi DE-Unterhaching, 48.059676, 11.633342, 20
 Aldi DE-Weilimdorf, 48.821298,9.098822
@@ -1183,6 +1228,7 @@ ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Autohof, 53.502361,11.097974
 
 be.energised AT-Salzburg Flughafen, 47.794119,12.997795
+be.energised DE-Freising,48.383269,11.753238,20
 be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
@@ -1293,6 +1339,7 @@ EnBW DE-Bochum A40,51.476198,7.153262
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
+EnBW DE-Brunnthal,48.041336,11.660908,10
 EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
@@ -1335,6 +1382,7 @@ EnBW DE-Hünxe West, 51.635723,6.74493
 EnBW DE-Immenstaad am Bodensee, 47.66649133, 9.3666571
 EnBW DE-Ingolstadt Goethestraße, 48.772272, 11.45188
 EnBW DE-Jagsttal Ost, 49.322951,9.415858, 20
+EnBW DE-Kamen,51.567098,7.674812,30
 EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
@@ -1381,11 +1429,13 @@ EnBW DE-Schongau, 47.808188, 10.877717
 EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
 EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Sindelfingen Sindelfinger Wald, 48.741321,9.033325
+EnBW DE-Sindelfingen, Neckarstraße,48.703075,9.005068
 EnBW DE-Soester Börde Nord,51.548357,8.132218
 EnBW DE-Sömmerda Leubinger Fürstenhügel, 51.188236,11.162758
 EnBW DE-Straubing Landshuter Straße, 48.867521,12.573991
 EnBW DE-Straubing Ratiborstraße, 48.886335,12.615851
-EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 10
+EnBW DE-Stuttgart Finanzamt,48.774217,9.169022,20
+EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 50
 EnBW DE-Stuttgart Schelmenwasenstraße,48.713234,9.166823
 EnBW DE-Stuhr Proppstraße, 53.011943, 8.7045393, 10
 EnBW DE-Taufkirchen, 48.352605,12.129578,10
@@ -1421,6 +1471,7 @@ EWE-SWB DE-Illertissen, 48.219521,10.126724
 EWE-SWB DE-Marktrodach, 50.256351, 11.397455
 EWE-SWB DE-Moormerland, 53.311881, 7.456651
 EWE-SWB DE-Oldenburg Bremer Heerstraße, 53.119092,8.258616
+EWE-SWB DE-Unterschleißheim,48.28377,11.563749,3
 
 Fastned BE-Oostende luchthaven, 51.205610, 2.871165
 Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
@@ -1518,6 +1569,7 @@ IKEA DE-Freiburg, 48.027564,7.834153,20
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
 IKEA DE-Kaarst, 51.210824, 6.639237
+IKEA DE-Kamen,51.570352,7.669566,5
 IKEA DE-Karlsruhe, 49.00518, 8.441285, 20
 IKEA DE-Koblenz, 50.381728, 7.566886
 IKEA DE-München-Brunnthal, 48.040515, 11.65732
@@ -2003,7 +2055,7 @@ Kaufland DE-Sankt Ingbert, 49.281439, 7.10554
 Kaufland DE-Schwaigern, 49.13824, 9.064656
 Kaufland DE-Schwäbisch-Hall, 49.105002, 9.702927
 Kaufland DE-Schwetzingen, 49.38544, 8.577604
-Kaufland DE-Sindelfingen, 48.704964, 9.017844
+Kaufland DE-Sindelfingen,48.704952,9.017883,60
 Kaufland DE-Steinheim an der Murr, 48.970356, 9.267212
 Kaufland DE-Stuttgart, 48.840477, 9.229187
 Kaufland DE-Tettnang, 47.662622, 9.5714659
@@ -2129,6 +2181,8 @@ Lidl SE-Falkenberg, 56.91611,12.502524
 MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
 MOL CZ-Velké Meziříčí, 49.345539,16.040024
+
+NewMotion DE-Unterschleißheim,48.272108,11.591192
 
 REWE DE-Bremen, 53.136455, 8.739926
 
