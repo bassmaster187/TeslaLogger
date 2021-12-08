@@ -1183,6 +1183,7 @@ ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Autohof, 53.502361,11.097974
 
 be.energised AT-Salzburg Flughafen, 47.794119,12.997795
+be.energised DE-Freising,48.383269,11.753238,20
 be.energised DE-Hallbergmoos Lilienthalstraße, 48.331014,11.73383
 be.energised DE-Kassel Porsche, 51.304914,9.528714
 be.energised DE-Unterschleißheim Audi Kölbl, 48.28313,11.567575
@@ -1293,6 +1294,7 @@ EnBW DE-Bochum A40,51.476198,7.153262
 EnBW DE-Breitengüßbach, 49.973346, 10.87513
 EnBW DE-Bremen Hemmstr., 53.100479, 8.814605
 EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
+EnBW DE-Brunnthal,48.041336,11.660908,10
 EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
@@ -1335,6 +1337,7 @@ EnBW DE-Hünxe West, 51.635723,6.74493
 EnBW DE-Immenstaad am Bodensee, 47.66649133, 9.3666571
 EnBW DE-Ingolstadt Goethestraße, 48.772272, 11.45188
 EnBW DE-Jagsttal Ost, 49.322951,9.415858, 20
+EnBW DE-Kamen,51.567098,7.674812,30
 EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
 EnBW DE-Karlsruhe EnBW InnovationsCampus, 49.014469, 8.310857
 EnBW DE-Karlsruhe Tollhaus, 49.003884, 8.432467, 10
@@ -1421,6 +1424,7 @@ EWE-SWB DE-Illertissen, 48.219521,10.126724
 EWE-SWB DE-Marktrodach, 50.256351, 11.397455
 EWE-SWB DE-Moormerland, 53.311881, 7.456651
 EWE-SWB DE-Oldenburg Bremer Heerstraße, 53.119092,8.258616
+EWE-SWB DE-Unterschleißheim,48.28377,11.563749,3
 
 Fastned BE-Oostende luchthaven, 51.205610, 2.871165
 Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
@@ -1518,6 +1522,7 @@ IKEA DE-Freiburg, 48.027564,7.834153,20
 IKEA DE-Fürth, 49.484779, 11.008938
 IKEA DE-Hoffheim am Taunus, 50.057362, 8.371885
 IKEA DE-Kaarst, 51.210824, 6.639237
+IKEA DE-Kamen,51.570352,7.669566,5
 IKEA DE-Karlsruhe, 49.00518, 8.441285, 20
 IKEA DE-Koblenz, 50.381728, 7.566886
 IKEA DE-München-Brunnthal, 48.040515, 11.65732
@@ -2129,6 +2134,8 @@ Lidl SE-Falkenberg, 56.91611,12.502524
 MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
 MOL CZ-Velké Meziříčí, 49.345539,16.040024
+
+NewMotion DE-Unterschleißheim,48.272108,11.591192
 
 REWE DE-Bremen, 53.136455, 8.739926
 
