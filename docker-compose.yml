@@ -32,7 +32,7 @@ services:
       - TZ=Europe/Berlin
 
   grafana:
-    image: grafana/grafana-dev:8.3.0-41151pre
+    image: grafana/grafana:8.3.1
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
