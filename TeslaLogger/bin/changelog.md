@@ -1,3 +1,6 @@
+# Version 1.49.2
+- bugfixes and improvements
+
 # Version 1.49.1
 - French Language
 - Support for Shelly 3EM
