@@ -1278,6 +1278,11 @@ namespace TeslaLogger
             {
                 // reset lastSetChargeLimitAddressName
                 LastSetChargeLimitAddressName = string.Empty;
+                // combine charging sessions
+                _ = Task.Factory.StartNew(() =>
+                {
+                    dbHelper.CombineChangingStates();
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
