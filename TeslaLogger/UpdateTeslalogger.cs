@@ -562,6 +562,26 @@ CREATE TABLE superchargerstate(
                     DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
                 }
 
+                if (!DBHelper.IndexExists("ix_startpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_endpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_id_ts", "mothership"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)", 1200);
+                    Logfile.Log("ALTER TABLE OK");
+                }
 
 
                 // end of schema update

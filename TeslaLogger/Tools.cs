@@ -63,18 +63,18 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
             if (Program.SQLTRACE)
             {
                 try
                 {
                     string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
+                    DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
                 }
                 catch (Exception ex)
                 {
-                    DebugLog("Exception in SQL DEBUG", ex);
+                    DebugLog("Exception in SQL DEBUG", ex, prefix);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace TeslaLogger
                 {
                     msg += (column == 0 ? "" : "|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
                 }
-                DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
+                DebugLog($"{callerMemberName}: " + msg, null, "", callerFilePath, callerLineNumber);
             }
         }
 
@@ -156,9 +156,9 @@ namespace TeslaLogger
             return msg;
         }
 
-        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+        public static void DebugLog(string text, Exception ex = null, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string temp = "DEBUG : " + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
+            string temp = "DEBUG : " + prefix + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
             AddToBuffer(temp);
             if (Program.VERBOSE)
             {
@@ -1455,29 +1455,6 @@ WHERE
                         }
                     }
                     Thread.Sleep(1000);
-                }
-                // report again
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con))
-                    {
-                        cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
-                        try
-                        {
-                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                            if (dr.Read())
-                            {
-                                _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                                Logfile.Log($"Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: " + mothershipCount);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logfile.Log(ex.ToString());
-                        }
-                        con.Close();
-                    }
                 }
             }
         }

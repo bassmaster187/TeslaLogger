@@ -10,8 +10,11 @@ namespace TeslaLogger
 {
     internal static class SQLTracer
     {
+        private static int ID = 0;
+
         internal static MySqlDataReader TraceDR(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
+            string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
             {
                 return cmd.ExecuteReader();
@@ -21,7 +24,7 @@ namespace TeslaLogger
                 DateTime dtstart = DateTime.UtcNow;
                 if (Program.SQLFULLTRACE)
                 {
-                    Tools.DebugLog(cmd);
+                    Tools.DebugLog(cmd, prefix);
                 }
                 MySqlDataReader dr = cmd.ExecuteReader();
                 DateTime dtend = DateTime.UtcNow;
@@ -30,12 +33,12 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog($"SQLTracer.Trace ExecuteReader() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteReader() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")", null, prefix);
                         if (!Program.SQLFULLTRACE)
                         {
-                            Tools.DebugLog(cmd);
+                            Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd);
+                        Analyze(cmd, prefix);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return dr;
@@ -44,6 +47,7 @@ namespace TeslaLogger
 
         internal static int TraceNQ(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
+            string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
             {
                 return cmd.ExecuteNonQuery();
@@ -53,7 +57,7 @@ namespace TeslaLogger
                 DateTime dtstart = DateTime.UtcNow;
                 if (Program.SQLFULLTRACE)
                 {
-                    Tools.DebugLog(cmd);
+                    Tools.DebugLog(cmd, prefix);
                 }
                 int i = cmd.ExecuteNonQuery();
                 DateTime dtend = DateTime.UtcNow;
@@ -62,12 +66,12 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog($"SQLTracer.Trace ExecuteNonQuery() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteNonQuery() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")", null, prefix);
                         if (!Program.SQLFULLTRACE)
                         {
-                            Tools.DebugLog(cmd);
+                            Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd);
+                        Analyze(cmd, prefix);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
@@ -76,6 +80,7 @@ namespace TeslaLogger
 
         internal static object TraceSc(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
+            string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
             {
                 return cmd.ExecuteScalar();
@@ -85,7 +90,7 @@ namespace TeslaLogger
                 DateTime dtstart = DateTime.UtcNow;
                 if (Program.SQLFULLTRACE)
                 {
-                    Tools.DebugLog(cmd);
+                    Tools.DebugLog(cmd, prefix);
                 }
                 object o = cmd.ExecuteScalar();
                 DateTime dtend = DateTime.UtcNow;
@@ -94,12 +99,12 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog($"SQLTracer.Trace ExecuteScalar() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        Tools.DebugLog($"SQLTracer.Trace ExecuteScalar() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")", null, prefix);
                         if (!Program.SQLFULLTRACE)
                         {
-                            Tools.DebugLog(cmd);
+                            Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd);
+                        Analyze(cmd, prefix);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return o;
@@ -108,6 +113,7 @@ namespace TeslaLogger
 
         internal static int TraceDA(DataTable dt, MySqlDataAdapter da, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
+            string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
             {
                 return da.Fill(dt);
@@ -115,9 +121,10 @@ namespace TeslaLogger
             else
             {
                 DateTime dtstart = DateTime.UtcNow;
+                MySqlCommand cmd = da.SelectCommand;
                 if (Program.SQLFULLTRACE)
                 {
-                    Tools.DebugLog(da.SelectCommand);
+                    Tools.DebugLog(cmd, null, prefix);
                 }
                 int i = da.Fill(dt);
                 DateTime dtend = DateTime.UtcNow;
@@ -126,21 +133,21 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Tools.DebugLog($"SQLTracer.Trace DataAdapter.Fill() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")");
+                        Tools.DebugLog($"SQLTracer.Trace DataAdapter.Fill() took {ts.TotalMilliseconds}ms" + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")", null, prefix);
                         if (!Program.SQLFULLTRACE)
                         {
-                            Tools.DebugLog(da.SelectCommand);
+                            Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(da.SelectCommand);
+                        Analyze(cmd, prefix);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
             }
         }
 
-        private static void Analyze(MySqlCommand cmd)
+        private static void Analyze(MySqlCommand cmd, string prefix)
         {
-            if (cmd.CommandText.ToUpper().Substring(0, 12).Contains("SELECT"))
+            if (cmd.CommandText.Trim().ToUpper(Tools.ciEnUS).Substring(0, 12).Contains("SELECT"))
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
@@ -158,7 +165,7 @@ namespace TeslaLogger
                             }
                             msg += Environment.NewLine;
                         }
-                        Tools.DebugLog("ANALYZE: " + msg);
+                        Tools.DebugLog("ANALYZE: " + msg, null, prefix);
                     }
                 }
             }
