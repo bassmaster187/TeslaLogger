@@ -58,7 +58,7 @@ CREATE TABLE journeys (
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{TEXT_SELECT_CAR}</td><td><form action=""{baseURL}create/start""><select name=""CarID"">");
+            sb.Append($@"<tr><td>{TEXT_SELECT_CAR}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
@@ -123,9 +123,9 @@ CREATE TABLE journeys (
         private static string PageHeader()
         {
             return $@"
-<a href=""{baseURL}"">Index</a>&nbsp;|&nbsp;
-<a href=""{baseURL}create/selectCar"">Create a new Journey</a>&nbsp;|&nbsp;
-<a href=""{baseURL}list"">List and manage Journeys</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysCreateSelectCar}create/selectCar"">Create a new Journey</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysList}list"">List and manage Journeys</a>&nbsp;|&nbsp;
 <br />";
         }
 
