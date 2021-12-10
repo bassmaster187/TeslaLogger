@@ -104,6 +104,7 @@
     <Compile Include="OSMMapProvider.cs" />
     <Compile Include="MapQuestMapProvider.cs" />
     <Compile Include="SQLTracer.cs" />
+    <Compile Include="Journeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
