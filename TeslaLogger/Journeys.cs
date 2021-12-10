@@ -12,7 +12,8 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal static class Journeys
     {
-        public  static class EndPoints { 
+        public static class EndPoints
+        {
             public const string JourneysCreateSelectCar = "/journeys/create/selectCar";
             public const string JourneysCreateStart = "/journeys/create/start";
             public const string JourneysCreateEnd = "/journeys/create/end";
@@ -88,28 +89,13 @@ CREATE TABLE journeys (
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_START}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><select name=""StartPosID"">");
-            int carID = int.MinValue;
-            if (request.QueryString.Count == 1 && request.QueryString.HasKeys())
+            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
+            Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
+            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_START}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
-                foreach (string key in request.QueryString.AllKeys)
-                {
-                    if (request.QueryString.GetValues(key).Length == 1)
-                    {
-                        switch (key)
-                        {
-                            case "CarID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out carID);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     StartPosID,
     StartDate, 
@@ -120,19 +106,19 @@ WHERE
     CarID = @CarID
 ORDER BY
     StartDate", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", CarID);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        cmd.Parameters.AddWithValue("@CarID", carID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        if (int.TryParse(dr[0].ToString(), out int id))
                         {
-                            if (int.TryParse(dr[0].ToString(), out int id))
-                            {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
-                            }
+                            sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
                         }
                     }
                 }
+
             }
             sb.Append($" </select></td><td>");
             sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
@@ -148,32 +134,14 @@ ORDER BY
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_END}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><select name=""EndPosID"">");
-            int CarID = int.MinValue;
-            int StartPosID = int.MinValue;
-            if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
+            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
+            int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
+            Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
+            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_END}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select name=""EndPosID"">");
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
-                foreach (string key in request.QueryString.AllKeys)
-                {
-                    if (request.QueryString.GetValues(key).Length == 1)
-                    {
-                        switch (key)
-                        {
-                            case "CarID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
-                                break;
-                            case "StartPosID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out StartPosID);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     EndPosID,
     EndDate, 
@@ -185,21 +153,21 @@ WHERE
     AND EndPosID > @StartPosID
 ORDER BY
     StartDate", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", CarID);
+                    cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        cmd.Parameters.AddWithValue("@CarID", CarID);
-                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read() && dr[0] != DBNull.Value)
+                        if (int.TryParse(dr[0].ToString(), out int id))
                         {
-                            if (int.TryParse(dr[0].ToString(), out int id))
-                            {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
-                            }
+                            sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
                         }
                     }
                 }
             }
+
             sb.Append($" </select></td><td>");
             sb.Append($@"<button type=""submit"">{TEXT_BUTTON_CREATE}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
@@ -214,32 +182,9 @@ ORDER BY
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            int CarID = int.MinValue;
-            int StartPosID = int.MinValue;
-            int EndPosID = int.MinValue;
-            if (request.QueryString.Count == 3 && request.QueryString.HasKeys())
-            {
-                foreach (string key in request.QueryString.AllKeys)
-                {
-                    if (request.QueryString.GetValues(key).Length == 1)
-                    {
-                        switch (key)
-                        {
-                            case "CarID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
-                                break;
-                            case "StartPosID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out StartPosID);
-                                break;
-                            case "EndPosID":
-                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out EndPosID);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
+            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
+            int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
+            int EndPosID = Convert.ToInt32(GetUrlParameterValue(request, "EndPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID}");
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -289,6 +234,24 @@ ORDER BY
             output.Write(buffer, 0, buffer.Length);
             // You must close the output stream.
             output.Close();
+        }
+
+        private static string GetUrlParameterValue(HttpListenerRequest request, string paramName)
+        {
+            if (request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        if (key.Equals(paramName))
+                        {
+                            return request.QueryString.GetValues(key)[0];
+                        }
+                    }
+                }
+            }
+            return "";
         }
     }
 }
