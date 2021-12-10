@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Net;
 using System.Text;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
@@ -24,7 +25,9 @@ namespace TeslaLogger
         //i18n
         internal static string TEXT_LABEL_SELECT_CAR = "Select Car";
         internal static string TEXT_LABEL_SELECT_START = "Select Start";
+        internal static string TEXT_LABEL_SELECT_END = "Select Destination";
         internal static string TEXT_BUTTON_NEXT = "Next";
+        internal static string TEXT_BUTTON_CREATE = "Create Journey";
 
         internal static void CheckSchema()
         {
@@ -86,7 +89,52 @@ CREATE TABLE journeys (
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_START}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><select name=""StartPosID"">");
-            sb.Append($"</select></td><td>");
+            int carID = int.MinValue;
+            if (request.QueryString.Count == 1 && request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "CarID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out carID);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    StartPosID,
+    StartDate, 
+    Start_address
+FROM
+    trip
+WHERE
+    CarID = @CarID
+ORDER BY
+    StartDate", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", carID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
+                            }
+                        }
+                    }
+                }
+            }
+            sb.Append($" </select></td><td>");
             sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -96,6 +144,65 @@ CREATE TABLE journeys (
             // in: CarID, StartPosID
             // out: CarID, StartPosID, EndPosId
             // action: render End selection HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_END}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><select name=""EndPosID"">");
+            int CarID = int.MinValue;
+            int StartPosID = int.MinValue;
+            if (request.QueryString.Count == 2 && request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "CarID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
+                                break;
+                            case "StartPosID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out StartPosID);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    EndPosID,
+    EndDate, 
+    End_address
+FROM
+    trip
+WHERE
+    CarID = @CarID
+    AND EndPosID > @StartPosID
+ORDER BY
+    StartDate", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
+                            }
+                        }
+                    }
+                }
+            }
+            sb.Append($" </select></td><td>");
+            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_CREATE}</button></form></td></tr>");
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysCreateCreate(HttpListenerRequest request, HttpListenerResponse response)
@@ -103,6 +210,38 @@ CREATE TABLE journeys (
             // in: CarID, StartPosID, EndPosId
             // out: nothing
             // action: create journey table entry, render result selection HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            int CarID = int.MinValue;
+            int StartPosID = int.MinValue;
+            int EndPosID = int.MinValue;
+            if (request.QueryString.Count == 3 && request.QueryString.HasKeys())
+            {
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "CarID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
+                                break;
+                            case "StartPosID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out StartPosID);
+                                break;
+                            case "EndPosID":
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out EndPosID);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID}");
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
