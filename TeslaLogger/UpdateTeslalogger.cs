@@ -695,6 +695,10 @@ CREATE TABLE superchargerstate(
                 Tools.ExecMono("mkdir", "/etc/teslalogger/git");
                 Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
 
+                // run housekeeping to make sure there is enough free disk space
+
+                Tools.Housekeeping();
+
                 // download update package from github
                 bool httpDownloadSuccessful = false;
                 bool zipExtractSuccessful = false;
