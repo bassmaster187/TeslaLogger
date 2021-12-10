@@ -22,7 +22,9 @@ namespace TeslaLogger
             public const string JourneysList = "/journeys/list";
         }
         //i18n
-        internal static string TEXT_SELECT_CAR = "Select Car";
+        internal static string TEXT_LABEL_SELECT_CAR = "Select Car";
+        internal static string TEXT_LABEL_SELECT_START = "Select Start";
+        internal static string TEXT_BUTTON_NEXT = "Next";
 
         internal static void CheckSchema()
         {
@@ -58,18 +60,19 @@ CREATE TABLE journeys (
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{TEXT_SELECT_CAR}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
+            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_CAR}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
                 {
                     int id = id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                     string display_name = r["display_name"] as String ?? "";
-                    sb.Append($@"<option label=""{id}"">{display_name}</option>");
+                    sb.Append($@"<option value=""{id}"" label=""{display_name}"" />");
                 }
                 dt.Clear();
             }
-            sb.Append($"</select></form></td></tr>");
+            sb.Append($"</select></td><td>");
+            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
@@ -78,6 +81,14 @@ CREATE TABLE journeys (
             // in: CarID
             // out: CarID, StartPosID
             // action: render Start selection HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_START}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><select name=""StartPosID"">");
+            sb.Append($"</select></td><td>");
+            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysCreateEnd(HttpListenerRequest request, HttpListenerResponse response)
