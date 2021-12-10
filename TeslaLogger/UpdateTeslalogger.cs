@@ -1095,21 +1095,26 @@ CREATE TABLE superchargerstate(
 
                     Logfile.Log("Start Grafana update");
 
+                    if (!Tools.IsDocker())
+                    {
+                        AllowUnsignedPlugins("/etc/grafana/grafana.ini", true);
+                    }
+
                     string GrafanaVersion = Tools.GetGrafanaVersion();
-                    if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3")
+                    if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0")
                     {
                         Thread threadGrafanaUpdate = new Thread(() =>
                         {
-                            string GrafanaFilename = "grafana_7.2.0_armhf.deb";
+                            string GrafanaFilename = "grafana_8.3.1_armhf.deb";
 
-                            Logfile.Log("upgrade Grafana to 7.2.0!");
+                            Logfile.Log("upgrade Grafana to 8.3.1!");
 
                             if (File.Exists(GrafanaFilename))
                                 File.Delete(GrafanaFilename);
 
                             // use internal downloader
-                            const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb";
-                            const string grafanaFile = "grafana_7.2.0_armhf.deb";
+                            const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_8.3.1_armhf.deb";
+                            const string grafanaFile = "grafana_8.3.1_armhf.deb";
                             if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
                             {
                                 // fallback to wget
@@ -1124,7 +1129,7 @@ CREATE TABLE superchargerstate(
                                 if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
                                     Tools.ExecMono("dpkg", "-r grafana-rpi");
 
-                                Tools.ExecMono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
+                                Tools.ExecMono("dpkg", "-i --force-overwrite grafana_8.3.1_armhf.deb");
                             }
 
                             Logfile.Log("upgrade Grafana DONE!");
@@ -1475,6 +1480,7 @@ CREATE TABLE superchargerstate(
 
                     if (!Tools.IsDocker())
                     {
+                        Tools.ExecMono("grafana-cli", "admin data-migration encrypt-datasource-passwords");
                         Tools.ExecMono("service", "grafana-server restart");
                     }
 
@@ -1491,6 +1497,44 @@ CREATE TABLE superchargerstate(
             {
                 Logfile.Log("End Grafana update");
             }
+        }
+
+        internal static string AllowUnsignedPlugins(string path, bool overwrite)
+        {
+            try
+            {
+                Logfile.Log("Start Grafana.ini -> AllowUnsignedPlugins");
+
+                var content = File.ReadAllText(path);
+                if (content.Contains("[plugins]"))
+                {
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Plugins Section available");
+                    return content;
+                }
+
+                if (content.Contains("allow_loading_unsigned_plugins"))
+                {
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - allow_loading_unsigned_plugins available");
+                    return content;
+                }
+
+                Logfile.Log("Grafana.ini -> AllowUnsignedPlugins");
+
+                content += "[plugins]\r\nallow_loading_unsigned_plugins=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel\r\n";
+
+                if (overwrite)
+                {
+                    File.WriteAllText(path, content);
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Write File");
+                }
+                return content;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
         }
 
         private static void CopyLanguageFileToTimelinePanel(string language)
