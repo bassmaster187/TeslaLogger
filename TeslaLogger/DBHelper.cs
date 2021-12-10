@@ -943,7 +943,7 @@ WHERE
                     // TODO create new charging state
                     // TODO mark original states as hidden and update combined_into
                     Tools.DebugLog($"UpdateChargingState: id:{maxID} to startDate:{startDate} startID:{startdID} posID:{posID}");
-                    UpdateChargingstate(maxID, startDate, startdID, 0.0, 0.0);
+                    UpdateChargingstate(maxID, startDate, startdID);
                     // delete all older charging states
                     foreach (int chargingState in IDsToDelete)
                     {
@@ -1258,7 +1258,7 @@ HAVING
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
                             Tools.DebugLog($"UpdateChargingState: id:{openChargingState} to startDate:{startDate} startID:{startdID} posID:{posID}");
-                            UpdateChargingstate(openChargingState, startDate, startdID, 0.0, 0.0);
+                            UpdateChargingstate(openChargingState, startDate, startdID, double.NegativeInfinity);
                             // delete all older charging states
                             foreach (int chargingState in chargingStates)
                             {
@@ -4121,11 +4121,11 @@ WHERE
             }
         }
 
-        private void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID, double charge_energy_added, double lastCharging_start_charge_energy_added)
+        private void UpdateChargingstate(int chargingstate_id, DateTime StartDate, int StartChargingID, double charge_energy_added = double.NaN)
         {
             try
             {
-                car.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID} / charge_energy_added: {charge_energy_added} / lastCharging_start_charge_energy_added: {lastCharging_start_charge_energy_added}");
+                car.Log($"Update Chargingstate {chargingstate_id} with new StartDate: {StartDate} /  StartChargingID: {StartChargingID} / charge_energy_added: {charge_energy_added}");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -4143,6 +4143,41 @@ WHERE
                         cmd.Parameters.AddWithValue("@StartDate", StartDate);
                         cmd.Parameters.AddWithValue("@StartChargingID", StartChargingID);
                         SQLTracer.TraceNQ(cmd);
+                    }
+                    switch(charge_energy_added) {
+                        case double.NegativeInfinity:
+                            // handle special case: set charge_energy_added to DBNull
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    charge_energy_added = @charge_energy_added,
+WHERE
+    id = @id", con))
+                            {
+                                cmd.Parameters.AddWithValue("@id", chargingstate_id);
+                                cmd.Parameters.AddWithValue("@charge_energy_added", DBNull.Value);
+                                SQLTracer.TraceNQ(cmd);
+                            }
+                            break;
+                        case double.NaN:
+                            // no value set --> do nothing
+                            break;
+                        default:
+                            // some value set --> set value
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    charge_energy_added = @charge_energy_added,
+WHERE
+    id = @id", con))
+                            {
+                                cmd.Parameters.AddWithValue("@id", chargingstate_id);
+                                cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
+                                SQLTracer.TraceNQ(cmd);
+                            }
+                            break;
                     }
                 }
             }
