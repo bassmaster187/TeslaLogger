@@ -2008,7 +2008,6 @@ FROM
 WHERE
     chargingstate.CarID = @CarID
     AND chargingstate.Pos = pos.id
-    AND chargingstate.cost_per_session IS NULL
     AND chargingstate.id <> @referenceID
     AND pos.odometer =(
         SELECT
