@@ -277,6 +277,30 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/logfile", System.StringComparison.Ordinal):
                         GetLogfile(response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysCreateSelectCar, System.StringComparison.Ordinal):
+                        Journeys.JourneysCreateSelectCar(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysCreateStart, System.StringComparison.Ordinal):
+                        Journeys.JourneysCreateStart(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysCreateEnd, System.StringComparison.Ordinal):
+                        Journeys.JourneysCreateEnd(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysCreateCreate, System.StringComparison.Ordinal):
+                        Journeys.JourneysCreateCreate(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysIndex, System.StringComparison.Ordinal):
+                        Journeys.JourneysIndex(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysList, System.StringComparison.Ordinal):
+                        Journeys.JourneysList(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysDelete, System.StringComparison.Ordinal):
+                        Journeys.JourneysDelete(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals(Journeys.EndPoints.JourneysDeleteDelete, System.StringComparison.Ordinal):
+                        Journeys.JourneysDeleteDelete(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
