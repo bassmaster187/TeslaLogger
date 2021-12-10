@@ -4,6 +4,7 @@ Supercharger AT-Bregenz, 47.488583, 9.740172, 30
 Supercharger AT-Flachau, 47.354581, 13.386174
 Supercharger AT-Graz, 47.037058,15.478501
 Supercharger-V3 AT-Eberstalzell,48.039338,13.991089
+Supercharger-V3 AT-Hall in Tirol,47.276897,11.469074
 Supercharger AT-Innsbruck, 47.264882, 11.428380
 Supercharger AT-Kapfenberg, 47.450188, 15.317675
 Supercharger AT-Kitzbühel, 47.459205, 12.386105
@@ -105,6 +106,7 @@ Supercharger-V3 CH-Affoltern, 47.271118, 8.439714, 30
 Supercharger CH-Beckenried, 46.971073, 8.459073
 Supercharger-V3 CH-Bulle, 46.625016, 7.037488
 Supercharger CH-Bussigny, 46.556699, 6.561557
+Supercharger CH-Cadenazzo,46.152065,8.937296,10
 Supercharger CH-Dietikon, 47.418041, 8.396577
 Supercharger CH-Dietlikon, 47.413095, 8.616785
 Supercharger CH-Egerkingen, 47.327028, 7.805489
@@ -117,7 +119,7 @@ Supercharger CH-Melide, 45.95423, 8.95051
 Supercharger CH-Monte Ceneri, 46.13924, 8.9070614
 Supercharger-V3 CH-Obfelden, 47.272009,8.437787, 26
 Supercharger CH-Oftringen, 47.310793,7.935012
-Supercharger CH-Pratteln, 47.524888, 7.680418
+Supercharger CH-Pratteln, 47.524711,7.680202
 Supercharger CH-Quinto, 46.51521, 8.67063
 Supercharger CH-Rubigen, 46.891773, 7.542738
 Supercharger CH-Schaffhausen, 47.720985, 8.646664
@@ -146,6 +148,7 @@ Supercharger DE-Bersteland, 51.949066, 13.787906
 Supercharger DE-Bispingen, 53.104326, 9.981842
 Supercharger DE-Blankenfelde-Mahlow, 52.3089548, 13.444767
 Supercharger-V3 DE-Bochum - Ruhr Park, 51.49506,7.28483
+Supercharger-V3 DE-Böblingen,48.69138,9.003647
 Supercharger-V3 DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Busdorf, 54.477896, 9.544913								   
@@ -324,7 +327,7 @@ Supercharger ES-Murcia, 38.038172, -1.149343
 Supercharger ES-Mérida, 38.921746, -6.375133
 Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger ES-Ponferrada, 42.623851, -6.451837
-Supercharger ES-Reocín, 43.356526,-4.094394
+Supercharger ES-Reocín, 43.355578,-4.094960
 Supercharger ES-Rivabellosa, 42.701171, -2.91951
 Supercharger ES-Sant Cugat, 41.498096,2.072692
 Supercharger ES-Sevilla, 37.391485,-6.009627
@@ -448,7 +451,7 @@ Supercharger FR-Strasbourg, 48.53407, 7.70201
 Supercharger FR-Thiais, 48.7543643, 2.3730657
 Supercharger FR-Toulon, 43.121199, 5.85086
 Supercharger FR-Toulouse, 43.769238, 1.361623
-Supercharger FR-Tours, 47.407325, 0.744827
+Supercharger FR-Tours, 47.406937,0.742856
 Supercharger FR-Troyes - Saint-Parres-aux-Tertres, 48.293229, 4.130685
 Supercharger FR-Val-de-Meuse, 47.99147, 5.51296
 Supercharger FR-Valence, 44.91894, 4.878101
@@ -559,6 +562,7 @@ Supercharger IT-Firenze, 43.810258, 11.17798
 Supercharger IT-Forcola, 46.165099, 9.675995
 Supercharger-V3 IT-Forlì, 44.242877, 12.081828
 Supercharger IT-Forte dei Marmi, 43.956416, 10.194539
+Supercharger IT-Grosseto,42.789221,11.115743
 Supercharger IT-Imperia, 43.892498, 8.039031
 Supercharger IT-Magliano Sabina, 42.372085, 12.471703
 Supercharger IT-Melegnano, 45.34834, 9.282206
@@ -568,6 +572,7 @@ Supercharger IT-Mogliano Veneto, 45.58469, 12.28721
 Supercharger IT-Moncalieri, 44.973333, 7.730113
 Supercharger IT-Morano Calabro, 39.875989, 16.065094
 Supercharger IT-Occhiobello, 44.918787, 11.594051
+Supercharger-V3 IT-Olbia,40.906900,9.515961
 Supercharger-V3 IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
@@ -599,6 +604,7 @@ Supercharger NL-Eindhoven, 51.4069155, 5.479269
 Supercharger NL-Emmeloord, 52.727421, 5.764693
 Supercharger-V3 NL-Emmen,52.724202,6.883345
 Supercharger NL-Gouda, 52.022465, 4.684526
+Supercharger-V3 NL-Hengelo,52.287275,6.773343
 Supercharger NL-Hoorn, 52.650769, 5.038917
 Supercharger NL-Horst, 51.470008, 6.056974
 Supercharger NL-Leiderdorp, 52.160766, 4.549019
@@ -627,6 +633,7 @@ Supercharger NO-Åsane, 60.484345, 5.375959
 Supercharger NO-Aspøya, 63.011584, 7.977743
 Supercharger NO-Aurland, 60.89863, 7.21082
 Supercharger-V3 NO-Bamble, 58.9713, 9.51278, 15
+Supercharger-V3 NO-Bamble,58.971497,9.512768,15
 Supercharger NO-Berkåk, 62.831859, 10.009871
 Supercharger NO-Bismo, 61.883135, 8.267249
 Supercharger-V3 NO-Brekkvasselv, 64.847611,13.015797
@@ -868,6 +875,7 @@ Supercharger US-Erie PA, 42.049606,-80.086404
 Supercharger US-Farmington NM,36.766341,-108.144164
 Supercharger US-Fayetteville NC,35.009743,-78.822333
 Supercharger-V3 US-Firebaugh CA,36.639163,-120.625873
+Supercharger-V3 US-Fishkill NY,41.526741,-73.894409
 Supercharger US-Florence SC,34.190258,-79.832607
 Supercharger-V3 US-Fort Pierce FL,27.416821,-80.381874
 Supercharger US-Fort Wayne IN, 41.138389, -85.163327
@@ -1018,6 +1026,7 @@ Supercharger US-Strongsville OH, 41.343339, -81.824921
 Supercharger US-St. Charles MO, 38.78214, -90.532841
 Supercharger-V3 US-St. George SC,33.195509,-80.599848
 Supercharger US-St. George UT,37.126512,-113.601752
+Supercharger US-South Hill VA,36.748531,-78.103525
 Supercharger US-Superior CO, 39.954891, -105.164528
 Supercharger US-Syracuse NY,43.10238,-76.187497
 Supercharger US-Tejon Ranch CA, 34.987, -118.946172
@@ -1027,6 +1036,7 @@ Supercharger US-Texarkana TX, 33.459914, -94.077229
 Supercharger US-The Dalles OR,45.611963,-121.208359
 Supercharger-V3 US-Thornton CO, 39.914837, -104.9864, 70
 Supercharger US-Three Rivers TX,28.521622,-98.185825
+Supercharger US-Tifton GA,31.448777,-83.532257
 Supercharger US-Toledo OH,41.721536,-83.509201
 Supercharger-V3 US-Traver CA, 36.448943,-119.486536
 Supercharger US-Traverse City MI,44.744824,-85.644033
@@ -1051,6 +1061,7 @@ Supercharger US-Weatherford OK, 35.538718, -98.660132
 Supercharger US-West Des Moines IA, 41.598957, -93.806328
 Supercharger US-West Palm Beach FL - Garden Road,26.781972,-80.092564
 Supercharger-V3 US-West Palm Beach FL - Palm Beach Outlets,26.726273,-80.087486
+Supercharger US-West Nyack NY,41.094726,-73.955692
 Supercharger US-West Wendover NV, 40.738369, -114.059043
 Supercharger US-Williamsport PA,41.232444,-77.020135
 Supercharger-V3 US-Winter Garden FL,28.552156,-81.584031
