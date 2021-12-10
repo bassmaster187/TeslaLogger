@@ -1278,6 +1278,11 @@ namespace TeslaLogger
             {
                 // reset lastSetChargeLimitAddressName
                 LastSetChargeLimitAddressName = string.Empty;
+                // combine charging sessions
+                _ = Task.Factory.StartNew(() =>
+                {
+                    dbHelper.CombineChangingStates();
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
             // any -> charging
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
@@ -1530,7 +1535,7 @@ WHERE
 id = @carid", con))
                     {
                         cmd.Parameters.Add("@carid", MySqlDbType.UByte).Value = CarInDB;
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                         {
                             return freesuc == 1;

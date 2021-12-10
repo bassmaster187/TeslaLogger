@@ -213,8 +213,7 @@ WHERE
   id = @startID ", con))
                 {
                     cmd.Parameters.AddWithValue("@startID", request.StartPosID);
-                    Tools.DebugLog(cmd);
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())
                     {
                         _ = int.TryParse(dr[0].ToString(), out CarID);
@@ -239,8 +238,7 @@ ORDER BY
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
                     da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);
                     da.SelectCommand.Parameters.AddWithValue("@endID", request.EndPosID);
-                    Tools.DebugLog(da.SelectCommand);
-                    da.Fill(dt);
+                    SQLTracer.TraceDA(dt, da);
                 }
             }
             else
@@ -264,7 +262,8 @@ JOIN pos ON
   chargingstate.pos = pos.id
 ", DBHelper.DBConnectionstring))
                 {
-                    da.Fill(dt);
+                    da.SelectCommand.CommandTimeout = 600;
+                    SQLTracer.TraceDA(dt, da);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -280,33 +279,46 @@ JOIN pos ON
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter($@"
 SELECT DISTINCT
-  round(lat, 4) as lat,
-  round(lng, 4) as lng
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
 FROM
-  pos    
-LEFT JOIN
-  chargingstate ON pos.id = chargingstate.pos
-WHERE
-  pos.id IN (
-  SELECT
     pos
-  FROM
+WHERE
+    pos.id IN(
+SELECT
+    pos
+FROM
     chargingstate
-  )
-  OR pos.id IN (
-  SELECT
-    StartPos
-  FROM
-    drivestate
-  )
-  OR pos.id IN (
-  SELECT
+)
+UNION
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+    SELECT
+        StartPos
+    FROM
+        drivestate
+)
+UNION
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+SELECT
     EndPos
-  FROM
+FROM
     drivestate
-  )", DBHelper.DBConnectionstring))
+)", DBHelper.DBConnectionstring))
                 {
-                    da.Fill(dt);
+                    da.SelectCommand.CommandTimeout = 600;
+                    SQLTracer.TraceDA(dt, da);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -332,8 +344,8 @@ FROM
 ORDER BY
   startdate DESC ", con))
                 {
-                    MySqlDataReader dr = cmd.ExecuteReader();
-
+                    cmd.CommandTimeout = 600;
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     try
                     {
                         while (dr.Read())
@@ -422,7 +434,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", CarID);
 
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
 
                         try
                         {
@@ -462,7 +474,7 @@ WHERE
   id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", posID);
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
 
                         try
                         {

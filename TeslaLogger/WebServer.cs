@@ -330,7 +330,7 @@ namespace TeslaLogger
                             cmd.Parameters.AddWithValue("@meter_type", r["type"]);
                             cmd.Parameters.AddWithValue("@meter_host", r["host"]);
                             cmd.Parameters.AddWithValue("@meter_parameter", r["param"]);
-                            cmd.ExecuteNonQuery();
+                            SQLTracer.TraceNQ(cmd);
 
                             WriteString(response, "OK");
                         }
@@ -811,8 +811,7 @@ namespace TeslaLogger
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@to", to);
                             cmd.Parameters.AddWithValue("@CarID", carID);
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             while (dr.Read())
                             {
                                 if (double.TryParse(dr[0].ToString(), out double lat)
@@ -1184,7 +1183,7 @@ namespace TeslaLogger
                         using (var cmd2 = new MySqlCommand("delete from cars where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            cmd2.ExecuteNonQuery();
+                            SQLTracer.TraceNQ(cmd2);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -1208,7 +1207,7 @@ namespace TeslaLogger
                         using (var cmd2 = new MySqlCommand("update cars set tesla_token='', refresh_token='' where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            cmd2.ExecuteNonQuery();
+                            SQLTracer.TraceNQ(cmd2);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -1249,7 +1248,7 @@ namespace TeslaLogger
 
                             using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
                             {
-                                long newid = cmd.ExecuteScalar() as long? ?? 1;
+                                long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
 
                                 using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
@@ -1261,7 +1260,7 @@ namespace TeslaLogger
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                    cmd2.ExecuteNonQuery();
+                                    SQLTracer.TraceNQ(cmd2);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
@@ -1290,7 +1289,7 @@ namespace TeslaLogger
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
 
                                 Car c = Car.GetCarByID(dbID);
                                 if (c != null)
@@ -1519,7 +1518,7 @@ namespace TeslaLogger
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
 
                         cmd.Parameters.AddWithValue("@id", j["id"]);
-                        int done = cmd.ExecuteNonQuery();
+                        int done = SQLTracer.TraceNQ(cmd);
 
                         Logfile.Log("SetCost OK: " + done);
                         WriteString(response, "OK");
@@ -1546,7 +1545,7 @@ namespace TeslaLogger
                     using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@id", id);
-                        da.Fill(dt);
+                        SQLTracer.TraceDA(dt, da);
 
                         responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                     }
@@ -1578,7 +1577,7 @@ namespace TeslaLogger
                     {
                         using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
                         {
-                            da.Fill(dt);
+                            SQLTracer.TraceDA(dt, da);
 
                             responseString = dt.Rows.Count > 0 ? Tools.DataTableToJSONWithJavaScriptSerializer(dt) : "not found!";
                         }
@@ -1673,7 +1672,7 @@ namespace TeslaLogger
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
                             _ = int.TryParse(dr[0].ToString(), out to);
