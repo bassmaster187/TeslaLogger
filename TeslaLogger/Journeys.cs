@@ -333,7 +333,50 @@ WHERE
 
         private static void CalculateConsumption(int journeyId)
         {
-            // TODO
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    double consumption_kWh = 0;
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    trip.consumption_kWh
+FROM
+    trip,
+    journeys
+WHERE
+    trip.StartPosID >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    AND trip.EndPosID <= (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            consumption_kWh += Convert.ToDouble(dr[0].ToString());
+                        }
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE journeys (
+    consumption_kWh
+)
+VALUES (
+    @consumption_kWh
+)
+WHERE
+    journeys.ID = @journeyID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        cmd.Parameters.AddWithValue("@consumption_kWh", consumption_kWh);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
