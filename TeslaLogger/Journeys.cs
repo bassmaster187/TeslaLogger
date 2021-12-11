@@ -55,6 +55,9 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
         internal static string TEXT_TH_ACTIONS = "Actions";
 
+        private static string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+        private static string html2 = "</table></body></html>";
+
         internal static void CheckSchema()
         {
             try
@@ -89,8 +92,6 @@ CREATE TABLE journeys (
             // out: carID
             // action: render car selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
@@ -114,8 +115,6 @@ CREATE TABLE journeys (
             // out: CarID, StartPosID
             // action: render Start selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
@@ -166,8 +165,6 @@ ORDER BY
             // out: CarID, StartPosID, EndPosId
             // action: render End selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
@@ -222,8 +219,6 @@ ORDER BY
             // out: nothing
             // action: create journey table entry, render result selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
@@ -485,8 +480,6 @@ WHERE
             // out: nothing
             // action: render list HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             sb.Append($@"
 <tr>
@@ -582,8 +575,6 @@ ORDER BY
             // out: CarID, StartPosID, EndPosId
             // action: render really delete HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
             try
@@ -634,8 +625,6 @@ WHERE
             // in: CarID, StartPosID, EndPosId
             // out: delete journey, render result HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
             try
@@ -671,8 +660,6 @@ WHERE
             // in: nothing
             // out: render index HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
-            string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -706,7 +693,7 @@ WHERE
                 {
                     if (request.QueryString.GetValues(key).Length == 1)
                     {
-                        if (key.Equals(paramName))
+                        if (key.Equals(paramName, StringComparison.Ordinal))
                         {
                             return request.QueryString.GetValues(key)[0];
                         }
