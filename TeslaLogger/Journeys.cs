@@ -153,6 +153,7 @@ ORDER BY
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+                sb.Append(ex.ToString());
             }
             sb.Append($" </select></td><td>");
             sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_NEXT)}</button></form></td></tr>");
@@ -207,6 +208,7 @@ ORDER BY
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+                sb.Append(ex.ToString());
             }
             sb.Append("</select></td><td>");
             sb.Append($@"{WebUtility.HtmlEncode(TEXT_LABEL_JOURNEY_NAME)}</td><td><input type=""text"" name=""name"" /></td><td>");
@@ -290,6 +292,7 @@ LIMIT 1", con))
                 catch (Exception ex)
                 {
                     Logfile.Log(ex.ToString());
+                    sb.Append(ex.ToString());
                 }
             }
             WriteString(response, html1 + sb.ToString() + html2);
@@ -568,6 +571,7 @@ ORDER BY
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+                sb.Append(ex.ToString());
             }
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -620,6 +624,7 @@ WHERE
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+                sb.Append(ex.ToString());
             }
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -628,11 +633,36 @@ WHERE
         {
             // in: CarID, StartPosID, EndPosId
             // out: delete journey, render result HTML
-            response.AddHeader("Content -Type", "text/html; charset=utf-8");
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
             int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+DELETE
+FROM
+    journeys
+WHERE
+    ID = @journeyID
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyID);
+                        Tools.DebugLog(cmd);
+                        SQLTracer.TraceNQ(cmd);
+                        sb.Append("OK");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                sb.Append(ex.ToString());
+            }
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
@@ -640,7 +670,7 @@ WHERE
         {
             // in: nothing
             // out: render index HTML
-            response.AddHeader("Content -Type", "text/html; charset=utf-8");
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
@@ -650,7 +680,7 @@ WHERE
         private static string PageHeader()
         {
             return $@"
-<a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
+< a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
 <a href=""{EndPoints.JourneysCreateSelectCar}"">Create a new Journey</a>&nbsp;|&nbsp;
 <a href=""{EndPoints.JourneysList}"">List and manage Journeys</a>&nbsp;|&nbsp;
 <br />";
