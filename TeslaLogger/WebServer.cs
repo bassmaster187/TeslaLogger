@@ -310,7 +310,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log($"Localpath: {localpath}\r\n" + ex.ToString());
+                Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
         }
 
