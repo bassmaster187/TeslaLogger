@@ -44,9 +44,11 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGED = "Charged";
         internal static string TEXT_TH_CONSUMPTION_AVG = "Avg. Consumption";
         internal static string TEXT_TH_DURATION_DRIVE = "Driving Duration";
-        internal static string TEXT_TH_DURATION_Charge = "Charging Duration";
+        internal static string TEXT_TH_DURATION_CHARGED = "Charging Duration";
         internal static string TEXT_TH_DISTANCE = "Distance";
         internal static string TEXT_TH_EXPORT = "Export";
+        internal static string TEXT_TH_WH_KM = "Wh/km";
+        internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
 
         internal static void CheckSchema()
         {
@@ -316,14 +318,12 @@ WHERE
                         }
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE journeys (
-    charge_duration_minutes
-)
-VALUES (
-    @charge_duration_minutes
-)
+UPDATE
+    journeys
+SET
+    charge_duration_minutes = @charge_duration_minutes
 WHERE
-    journeys.ID = @journeyID", con))
+    Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charge_duration_minutes", charge_duration_minutes);
@@ -362,14 +362,12 @@ WHERE
                         charged_kwh = (double)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE journeys (
-    charged_kwh
-)
-VALUES (
-    @charged_kwh
-)
+UPDATE
+    journeys
+SET
+    charged_kwh = @charged_kwh
 WHERE
-    journeys.ID = @journeyID", con))
+    Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
@@ -404,17 +402,15 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         Tools.DebugLog(cmd);
-                        drive_duration_minutes += (int)SQLTracer.TraceSc(cmd);
+                        drive_duration_minutes = int.Parse(SQLTracer.TraceSc(cmd).ToString());
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE journeys (
-    drive_duration_minutes
-)
-VALUES (
-    @drive_duration_minutes
-)
+UPDATE
+    journeys
+SET
+    drive_duration_minutes = @drive_duration_minutes
 WHERE
-    journeys.ID = @journeyID", con))
+    Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@drive_duration_minutes", drive_duration_minutes);
@@ -453,14 +449,12 @@ WHERE
                         consumption_kWh = (double)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
-UPDATE journeys (
-    consumption_kWh
-)
-VALUES (
-    @consumption_kWh
-)
+UPDATE
+    journeys
+SET
+    consumption_kWh = @consumption_kWh
 WHERE
-    journeys.ID = @journeyID", con))
+    Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@consumption_kWh", consumption_kWh);
@@ -486,15 +480,19 @@ WHERE
             StringBuilder sb = new StringBuilder();
             sb.Append($@"
 <tr>
+<th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISPLAY_NAME)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_START_POS)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_START_DATE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_END_POS)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_END_DATE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_CONSUMPTION)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGED)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGE_EFF)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_CHARGED)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_WH_KM)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
 </tr>"); // TODO convert to miles if miles are configured
             try
@@ -504,19 +502,21 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    journeys.Id,
-    journeys.CarID,
-    cars.display_name,
-    journeys.StartPosID,
-    tripStart.Start_address,
-    tripStart.StartDate,
-    journeys.EndPosID,
-    tripEnd.End_address,
-    tripEnd.EndDate,
-    journeys.name,
-    journeys.consumption_kwh,
-    journeys.drive_duration_minutes,
-    tripEnd.EndKm - tripStart.StartKm as distance
+    journeys.Id, -- 0
+    journeys.CarID, -- 1
+    cars.display_name, -- 2
+    journeys.StartPosID, -- 3
+    tripStart.Start_address, -- 4
+    tripStart.StartDate, -- 5
+    journeys.EndPosID, -- 6
+    tripEnd.End_address, -- 7
+    tripEnd.EndDate, -- 8
+    journeys.name, -- 9
+    journeys.consumption_kwh, -- 10
+    journeys.drive_duration_minutes, -- 11
+    tripEnd.EndKm - tripStart.StartKm as distance,  -- 12
+    journeys.charge_duration_minutes, -- 13
+    journeys.charged_kwh -- 14
 FROM
     journeys,
     cars,
@@ -534,17 +534,21 @@ ORDER BY
                         {
                             sb.Append($@"
 <tr>
-<td>{WebUtility.HtmlEncode(dr[2].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[4].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[5].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[7].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[8].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[9].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[10].ToString())}</td>
-<td>{WebUtility.HtmlEncode(dr[11].ToString())}</td>
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString()).ToString("0.00"))}km</td>
+<td>{WebUtility.HtmlEncode(dr[9].ToString())}</td><!--journeys.name-->
+<td>{WebUtility.HtmlEncode(dr[2].ToString())}</td><!--cars.display_name-->
+<td>{WebUtility.HtmlEncode(dr[4].ToString())}</td><!--tripStart.Start_address-->
+<td>{WebUtility.HtmlEncode(dr[5].ToString())}</td><!--tripStart.StartDate-->
+<td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
+<td>{WebUtility.HtmlEncode(dr[8].ToString())}</td><!--tripEnd.EndDate-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString()).ToString("0.00"))}kWh</td><!--journeys.consumption_kwh-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString()).ToString("0.00"))}kWh</td><!--journeys.charged_kwh-->
+<td>{WebUtility.HtmlEncode(((double)dr[10]/(double)dr[14]*100).ToString("0.00"))}%</td><!--calculated charge eff-->
+<td>{WebUtility.HtmlEncode(dr[11].ToString())}</td><!--journeys.drive_duration_minutes-->
+<td>{WebUtility.HtmlEncode(dr[13].ToString())}</td><!--journeys.charge_duration_minutes-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString()).ToString("0.00"))}km</td><!--distance-->
+<td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00"))}Wh/km</td><!--calculated Wh/km-->
 <td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
-</tr>"); // TODO converto miles if miles are configured
+</tr>"); // TODO convert to miles if miles are configured
                         }
                     }
                 }
