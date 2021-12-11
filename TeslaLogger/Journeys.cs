@@ -337,7 +337,46 @@ WHERE
 
         private static void CalculateCharged(int journeyId)
         {
-            // TODO
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    double charged_kwh = 0;
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    SUM(chargingstate.charge_energy_added)
+FROM
+    chargingstate,
+    journeys
+WHERE
+    chargingstate.Pos >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.Pos < (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        charged_kwh = (double)SQLTracer.TraceSc(cmd);
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE journeys (
+    charged_kwh
+)
+VALUES (
+    @charged_kwh
+)
+WHERE
+    journeys.ID = @journeyID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void CalculateDriveDuration(int journeyId)
