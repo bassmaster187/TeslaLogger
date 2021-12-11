@@ -30,7 +30,7 @@ namespace TeslaLogger
         internal static string TEXT_LABEL_SELECT_START = "Select Start";
         internal static string TEXT_LABEL_SELECT_END = "Select Destination";
         internal static string TEXT_LABEL_JOURNEY_NAME = "Name";
-        
+
         internal static string TEXT_BUTTON_NEXT = "Next -->";
         internal static string TEXT_BUTTON_CREATE = "Create Journey";
 
@@ -44,6 +44,7 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGED = "Charged";
         internal static string TEXT_TH_CONSUMPTION_AVG = "Avg. Consumption";
         internal static string TEXT_TH_DURATION_DRIVE = "Driving Duration";
+        internal static string TEXT_TH_DRIVE_CHARGE = "Driving vs. Charging";
         internal static string TEXT_TH_DURATION_CHARGED = "Charging Duration";
         internal static string TEXT_TH_DISTANCE = "Distance";
         internal static string TEXT_TH_EXPORT = "Export";
@@ -115,7 +116,8 @@ CREATE TABLE journeys (
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
             sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
-            try {
+            try
+            {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
@@ -314,7 +316,7 @@ WHERE
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            charge_duration_minutes += (int)(DateTime.Parse(dr[0].ToString()) - DateTime.Parse(dr[1].ToString())).TotalMinutes;
+                            charge_duration_minutes += (int)(DateTime.Parse(dr[0].ToString(), Tools.ciEnUS) - DateTime.Parse(dr[1].ToString(), Tools.ciEnUS)).TotalMinutes;
                         }
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
@@ -384,7 +386,8 @@ WHERE
 
         private static void CalculateDriveDuration(int journeyId)
         {
-            try {
+            try
+            {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
@@ -402,7 +405,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         Tools.DebugLog(cmd);
-                        drive_duration_minutes = int.Parse(SQLTracer.TraceSc(cmd).ToString());
+                        drive_duration_minutes = int.Parse(SQLTracer.TraceSc(cmd).ToString(), Tools.ciEnUS);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
@@ -491,6 +494,7 @@ WHERE
 <th>{WebUtility.HtmlEncode(TEXT_TH_CHARGE_EFF)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_CHARGED)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DRIVE_CHARGE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_WH_KM)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
@@ -537,16 +541,17 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(dr[9].ToString())}</td><!--journeys.name-->
 <td>{WebUtility.HtmlEncode(dr[2].ToString())}</td><!--cars.display_name-->
 <td>{WebUtility.HtmlEncode(dr[4].ToString())}</td><!--tripStart.Start_address-->
-<td>{WebUtility.HtmlEncode(dr[5].ToString())}</td><!--tripStart.StartDate-->
+<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[5].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
 <td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
-<td>{WebUtility.HtmlEncode(dr[8].ToString())}</td><!--tripEnd.EndDate-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString()).ToString("0.00"))}kWh</td><!--journeys.consumption_kwh-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString()).ToString("0.00"))}kWh</td><!--journeys.charged_kwh-->
-<td>{WebUtility.HtmlEncode(((double)dr[10]/(double)dr[14]*100).ToString("0.00"))}%</td><!--calculated charge eff-->
-<td>{WebUtility.HtmlEncode(dr[11].ToString())}</td><!--journeys.drive_duration_minutes-->
-<td>{WebUtility.HtmlEncode(dr[13].ToString())}</td><!--journeys.charge_duration_minutes-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString()).ToString("0.00"))}km</td><!--distance-->
-<td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00"))}Wh/km</td><!--calculated Wh/km-->
+<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[8].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
+<td>{WebUtility.HtmlEncode(((double)dr[10] / (double)dr[14] * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated charge eff-->
+<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[11].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.drive_duration_minutes-->
+<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[13].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.charge_duration_minutes-->
+<td>{WebUtility.HtmlEncode(((double)(int)dr[11] / (double)((int)dr[11] + (int)dr[13]) * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated drive vs. charge-->
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
+<td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
 <td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
 </tr>"); // TODO convert to miles if miles are configured
                         }
