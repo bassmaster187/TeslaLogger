@@ -4,6 +4,8 @@ using System.Data;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -27,6 +29,8 @@ namespace TeslaLogger
         internal static string TEXT_LABEL_SELECT_CAR = "Select Car";
         internal static string TEXT_LABEL_SELECT_START = "Select Start";
         internal static string TEXT_LABEL_SELECT_END = "Select Destination";
+        internal static string TEXT_LABEL_JOURNEY_NAME = "Name";
+        
         internal static string TEXT_BUTTON_NEXT = "Next";
         internal static string TEXT_BUTTON_CREATE = "Create Journey";
 
@@ -44,7 +48,8 @@ CREATE TABLE journeys (
     StartPosID INT NOT NULL,
     EndPosID INT NOT NULL,
     consumption_kwh DOUBLE NULL DEFAULT NULL,
-    duration_minutes INT NULL DEFAULT NULL
+    duration_minutes INT NULL DEFAULT NULL,
+    name VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
     PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
@@ -167,8 +172,8 @@ ORDER BY
                     }
                 }
             }
-
-            sb.Append($" </select></td><td>");
+            sb.Append("</select></td><td>");
+            sb.Append($@"{TEXT_LABEL_JOURNEY_NAME}</td><td><input type=""text"" name=""name"" /></td><td>");
             sb.Append($@"<button type=""submit"">{TEXT_BUTTON_CREATE}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
@@ -185,8 +190,73 @@ ORDER BY
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             int EndPosID = Convert.ToInt32(GetUrlParameterValue(request, "EndPosID"), Tools.ciEnUS);
-            Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID}");
+            string name = GetUrlParameterValue(request, "name");
+            Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID} name:{name}");
+            DataRow car = DBHelper.GetCar(CarID);
+            if (car != null && StartPosID < EndPosID && !string.IsNullOrEmpty(name))
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT journeys (
+    CarID,
+    StartPosID,
+    EndPosID,
+    name
+)
+VALUES (
+    @CarID,
+    @StartPosID,
+    @EndPosID,
+    @name
+)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                        cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                        cmd.Parameters.AddWithValue("@name", name);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    Id
+FROM
+    journeys
+WHERE
+    CarID = @CarID
+    AND StartPosID = @StartPosID
+    AND EndPosID = @EndPosID
+    AND name
+ORDER BY
+    Id DESC
+LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                        cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                        cmd.Parameters.AddWithValue("@name", name);
+                        int journeyId = SQLTracer.TraceNQ(cmd);
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            CalculateConsumption(journeyId);
+                            CalculateDuration(journeyId);
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    }
+                    sb.Append("OK");
+                }
+            }
             WriteString(response, html1 + sb.ToString() + html2);
+        }
+
+        private static void CalculateDuration(int journeyId)
+        {
+            // TODO
+        }
+
+        private static void CalculateConsumption(int journeyId)
+        {
+            // TODO
         }
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)

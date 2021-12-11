@@ -86,6 +86,8 @@ namespace TeslaLogger
 
                 // start schema update
 
+                Journeys.CheckSchema();
+
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
