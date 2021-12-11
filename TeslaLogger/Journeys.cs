@@ -573,6 +573,11 @@ ORDER BY
         {
             // in: nothing
             // out: render index HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         private static string PageHeader()
