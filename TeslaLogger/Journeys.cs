@@ -304,11 +304,11 @@ SELECT
     chargingstate.EndDate,
     chargingstate.StartDate
 FROM
-    chargingstate,
-    journeys
+    chargingstate
 WHERE
     chargingstate.Pos >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
     AND chargingstate.Pos < (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.carID = (SELECT CarID FROM journeys WHERE ID = @journeyID)
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
@@ -352,11 +352,11 @@ WHERE
 SELECT
     SUM(chargingstate.charge_energy_added)
 FROM
-    chargingstate,
-    journeys
+    chargingstate
 WHERE
-    chargingstate.Pos >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    chargingstate.Pos > (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
     AND chargingstate.Pos < (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.carID = (SELECT CarID FROM journeys WHERE ID = @journeyID)
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
@@ -396,11 +396,11 @@ WHERE
 SELECT
     SUM(trip.DurationMinutes)
 FROM
-    trip,
-    journeys
+    trip
 WHERE
     trip.StartPosID >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
     AND trip.EndPosID <= (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+    AND trip.carID = (SELECT CarID FROM journeys WHERE ID = @journeyID)
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
@@ -440,11 +440,11 @@ WHERE
 SELECT
     SUM(trip.consumption_kWh)
 FROM
-    trip,
-    journeys
+    trip
 WHERE
     trip.StartPosID >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
     AND trip.EndPosID <= (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+    AND trip.carID = (SELECT CarID FROM journeys WHERE ID = @journeyID)
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
