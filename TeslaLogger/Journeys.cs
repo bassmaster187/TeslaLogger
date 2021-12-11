@@ -30,8 +30,11 @@ namespace TeslaLogger
         internal static string TEXT_LABEL_SELECT_START = "Select Start";
         internal static string TEXT_LABEL_SELECT_END = "Select Destination";
         internal static string TEXT_LABEL_JOURNEY_NAME = "Name";
+        internal static string TEXT_LABEL_REALLY_DELETE = "Really delete";
 
         internal static string TEXT_BUTTON_NEXT = "Next -->";
+        internal static string TEXT_BUTTON_DELETE = "Delete -->";
+        internal static string TEXT_BUTTON_DELETE_DELETE = "Delete!";
         internal static string TEXT_BUTTON_CREATE = "Create Journey";
 
         internal static string TEXT_TH_DISPLAY_NAME = "Car";
@@ -50,6 +53,7 @@ namespace TeslaLogger
         internal static string TEXT_TH_EXPORT = "Export";
         internal static string TEXT_TH_WH_KM = "Wh/km";
         internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
+        internal static string TEXT_TH_ACTIONS = "Actions";
 
         internal static void CheckSchema()
         {
@@ -498,6 +502,7 @@ WHERE
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_WH_KM)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_ACTIONS)}</th>
 </tr>"); // TODO convert to miles if miles are configured
             try
             {
@@ -534,6 +539,7 @@ ORDER BY
     journeys.Id ASC", con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        Tools.DebugLog(cmd);
                         while (dr.Read())
                         {
                             sb.Append($@"
@@ -553,6 +559,7 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
 <td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
 <td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
+<td><form action=""{EndPoints.JourneysDelete}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>
 </tr>"); // TODO convert to miles if miles are configured
                         }
                     }
@@ -570,19 +577,70 @@ ORDER BY
             // in: CarID, StartPosID, EndPosId
             // out: CarID, StartPosID, EndPosId
             // action: render really delete HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    journeys.name,
+    cars.display_name,
+    tripStart.Start_address,
+    tripEnd.End_address
+FROM
+    journeys,
+    cars,
+    trip tripStart,
+    trip tripEnd
+WHERE
+    journeys.CarID = cars.Id
+    AND journeys.StartPosID = tripStart.StartPosID
+    AND journeys.EndPosID = tripEnd.EndPosID
+    AND journeys.ID = @journeyID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            sb.Append($@"
+<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_REALLY_DELETE)}&nbsp;{WebUtility.HtmlEncode(dr[0].ToString())}&nbsp;({WebUtility.HtmlEncode(dr[1].ToString())})&nbsp;-&nbsp;{WebUtility.HtmlEncode(dr[2].ToString())}{WebUtility.HtmlEncode("-->")}{WebUtility.HtmlEncode(dr[3].ToString())}?</td>
+<td><form action=""{EndPoints.JourneysDeleteDelete}""><input type=""hidden"" name=""id"" value=""{journeyID}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE_DELETE)}</button></form></td>
+");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
             // in: CarID, StartPosID, EndPosId
             // out: delete journey, render result HTML
+            response.AddHeader("Content -Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysIndex(HttpListenerRequest request, HttpListenerResponse response)
         {
             // in: nothing
             // out: render index HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            response.AddHeader("Content -Type", "text/html; charset=utf-8");
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
