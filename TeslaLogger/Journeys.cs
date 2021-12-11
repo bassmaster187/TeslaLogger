@@ -31,8 +31,19 @@ namespace TeslaLogger
         internal static string TEXT_LABEL_SELECT_END = "Select Destination";
         internal static string TEXT_LABEL_JOURNEY_NAME = "Name";
         
-        internal static string TEXT_BUTTON_NEXT = "Next";
+        internal static string TEXT_BUTTON_NEXT = "Next -->";
         internal static string TEXT_BUTTON_CREATE = "Create Journey";
+
+        internal static string TEXT_TH_DISPLAY_NAME = "Car";
+        internal static string TEXT_TH_START_POS = "Start";
+        internal static string TEXT_TH_START_DATE = "Start Date";
+        internal static string TEXT_TH_END_POS = "Destination";
+        internal static string TEXT_TH_END_DATE = "End Date";
+        internal static string TEXT_TH_JOURNEY_NAME = "Journey";
+        internal static string TEXT_TH_CONSUMPTION = "Consumption";
+        internal static string TEXT_TH_DURATION = "Duration";
+        internal static string TEXT_TH_DISTANCE = "Distance";
+        internal static string TEXT_TH_EXPORT = "Export";
 
         internal static void CheckSchema()
         {
@@ -69,19 +80,19 @@ CREATE TABLE journeys (
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_CAR}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
                 {
                     int id = id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                     string display_name = r["display_name"] as String ?? "";
-                    sb.Append($@"<option value=""{id}"" label=""{display_name}"" />");
+                    sb.Append($@"<option value=""{id}"" label=""{WebUtility.HtmlEncode(display_name)}"" />");
                 }
                 dt.Clear();
             }
             sb.Append($"</select></td><td>");
-            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
+            sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_NEXT)}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
@@ -96,7 +107,7 @@ CREATE TABLE journeys (
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_START}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -119,14 +130,14 @@ ORDER BY
                     {
                         if (int.TryParse(dr[0].ToString(), out int id))
                         {
-                            sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
+                            sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(dr[1].ToString())} - {WebUtility.HtmlEncode(dr[2].ToString())}"" />");
                         }
                     }
                 }
 
             }
             sb.Append($" </select></td><td>");
-            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_NEXT}</button></form></td></tr>");
+            sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_NEXT)}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
@@ -142,7 +153,7 @@ ORDER BY
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-            sb.Append($@"<tr><td>{TEXT_LABEL_SELECT_END}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select name=""EndPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select name=""EndPosID"">");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -173,8 +184,8 @@ ORDER BY
                 }
             }
             sb.Append("</select></td><td>");
-            sb.Append($@"{TEXT_LABEL_JOURNEY_NAME}</td><td><input type=""text"" name=""name"" /></td><td>");
-            sb.Append($@"<button type=""submit"">{TEXT_BUTTON_CREATE}</button></form></td></tr>");
+            sb.Append($@"{WebUtility.HtmlEncode(TEXT_LABEL_JOURNEY_NAME)}</td><td><input type=""text"" name=""name"" /></td><td>");
+            sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_CREATE)}</button></form></td></tr>");
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
@@ -268,6 +279,19 @@ LIMIT 1", con))
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
+            sb.Append($@"
+<tr>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DISPLAY_NAME)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_START_POS)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_START_DATE)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_END_POS)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_END_DATE)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_CONSUMPTION)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
+</tr>"); // TODO converto miles if miles are configured
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -298,6 +322,23 @@ WHERE
 ORDER BY
     journeys.Id ASC", con))
                 {
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read())
+                    {
+                        sb.Append($@"
+<tr>
+<td>{WebUtility.HtmlEncode(dr[2].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[4].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[5].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[7].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[8].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[9].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[10].ToString())}</td>
+<td>{WebUtility.HtmlEncode(dr[11].ToString())}</td>
+<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString()).ToString("0.00"))}km</td>
+<td><form action=""/export/trip""><input type=""hidden"" name=""CarID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
+</tr>"); // TODO converto miles if miles are configured
+                    }
                 }
             }
             WriteString(response, html1 + sb.ToString() + html2);
@@ -326,8 +367,8 @@ ORDER BY
         {
             return $@"
 <a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
-<a href=""{EndPoints.JourneysCreateSelectCar}create/selectCar"">Create a new Journey</a>&nbsp;|&nbsp;
-<a href=""{EndPoints.JourneysList}list"">List and manage Journeys</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysCreateSelectCar}"">Create a new Journey</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysList}"">List and manage Journeys</a>&nbsp;|&nbsp;
 <br />";
         }
 
