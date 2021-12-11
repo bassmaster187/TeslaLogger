@@ -264,6 +264,43 @@ LIMIT 1", con))
             // in: nothing
             // out: nothing
             // action: render list HTML
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+            string html2 = "</table></body></html>";
+            StringBuilder sb = new StringBuilder();
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    journeys.Id,
+    journeys.CarID,
+    cars.display_name,
+    journeys.StartPosID,
+    tripStart.Start_address,
+    tripStart.StartDate,
+    journeys.EndPosID,
+    tripEnd.End_address,
+    tripEnd.EndDate,
+    journeys.name,
+    journeys.consumption_kwh,
+    journeys.duration_minutes,
+    tripEnd.EndKm - tripStart.StartKm as distance
+FROM
+    journeys,
+    cars,
+    trip tripStart,
+    trip tripEnd
+WHERE
+    journeys.CarID = cars.Id
+    AND journeys.StartPosID = tripStart.StartPosID
+    AND journeys.EndPosID = tripEnd.EndPosID
+ORDER BY
+    journeys.Id ASC", con))
+                {
+                }
+            }
+            WriteString(response, html1 + sb.ToString() + html2);
         }
 
         internal static void JourneysDelete(HttpListenerRequest request, HttpListenerResponse response)
