@@ -246,6 +246,7 @@ VALUES (
                             cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
                             cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
                             cmd.Parameters.AddWithValue("@name", name);
+                            Tools.DebugLog(cmd);
                             SQLTracer.TraceNQ(cmd);
                         }
                         using (MySqlCommand cmd = new MySqlCommand(@"
@@ -257,7 +258,6 @@ WHERE
     CarID = @CarID
     AND StartPosID = @StartPosID
     AND EndPosID = @EndPosID
-    AND name
 ORDER BY
     Id DESC
 LIMIT 1", con))
@@ -266,7 +266,8 @@ LIMIT 1", con))
                             cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
                             cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
                             cmd.Parameters.AddWithValue("@name", name);
-                            int journeyId = SQLTracer.TraceNQ(cmd);
+                            Tools.DebugLog(cmd);
+                            int journeyId = (int)SQLTracer.TraceSc(cmd);
                             _ = Task.Factory.StartNew(() =>
                             {
                                 CalculateConsumption(journeyId);
@@ -307,6 +308,7 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
@@ -325,6 +327,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charge_duration_minutes", charge_duration_minutes);
+                        Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
                 }
@@ -355,6 +358,7 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        Tools.DebugLog(cmd);
                         charged_kwh = (double)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
@@ -369,6 +373,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
+                        Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
                 }
@@ -388,7 +393,7 @@ WHERE
                     int drive_duration_minutes = 0;
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    trip.DurationMinutes
+    SUM(trip.DurationMinutes)
 FROM
     trip,
     journeys
@@ -398,11 +403,8 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read())
-                        {
-                            drive_duration_minutes += Convert.ToInt32(dr[0].ToString());
-                        }
+                        Tools.DebugLog(cmd);
+                        drive_duration_minutes += (int)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE journeys (
@@ -416,6 +418,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@drive_duration_minutes", drive_duration_minutes);
+                        Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
                 }
@@ -436,7 +439,7 @@ WHERE
                     double consumption_kWh = 0;
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    trip.consumption_kWh
+    SUM(trip.consumption_kWh)
 FROM
     trip,
     journeys
@@ -446,11 +449,8 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        while (dr.Read())
-                        {
-                            consumption_kWh += Convert.ToDouble(dr[0].ToString());
-                        }
+                        Tools.DebugLog(cmd);
+                        consumption_kWh = (double)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE journeys (
@@ -464,6 +464,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@consumption_kWh", consumption_kWh);
+                        Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
                 }
@@ -479,7 +480,7 @@ WHERE
             // in: nothing
             // out: nothing
             // action: render list HTML
-            response.AddHeader("Content -Type", "text/html; charset=utf-8");
+            response.AddHeader("Content-Type", "text/html; charset=utf-8");
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
@@ -495,7 +496,7 @@ WHERE
 <th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
-</tr>"); // TODO conver to miles if miles are configured
+</tr>"); // TODO convert to miles if miles are configured
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -514,7 +515,7 @@ SELECT
     tripEnd.EndDate,
     journeys.name,
     journeys.consumption_kwh,
-    journeys.duration_minutes,
+    journeys.drive_duration_minutes,
     tripEnd.EndKm - tripStart.StartKm as distance
 FROM
     journeys,
