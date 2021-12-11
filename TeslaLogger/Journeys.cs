@@ -271,6 +271,8 @@ LIMIT 1", con))
                             {
                                 CalculateConsumption(journeyId);
                                 CalculateDriveDuration(journeyId);
+                                CalculateCharged(journeyId);
+                                CalculateChargeDuration(journeyId);
                             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                         }
                         sb.Append("OK");
@@ -282,6 +284,60 @@ LIMIT 1", con))
                 }
             }
             WriteString(response, html1 + sb.ToString() + html2);
+        }
+
+        private static void CalculateChargeDuration(int journeyId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    int charge_duration_minutes = 0;
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargingstate.EndDate,
+    chargingstate.StartDate
+FROM
+    chargingstate,
+    journeys
+WHERE
+    chargingstate.Pos >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.Pos < (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            charge_duration_minutes += (int)(DateTime.Parse(dr[0].ToString()) - DateTime.Parse(dr[1].ToString())).TotalMinutes;
+                        }
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE journeys (
+    charge_duration_minutes
+)
+VALUES (
+    @charge_duration_minutes
+)
+WHERE
+    journeys.ID = @journeyID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        cmd.Parameters.AddWithValue("@charge_duration_minutes", charge_duration_minutes);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void CalculateCharged(int journeyId)
+        {
+            // TODO
         }
 
         private static void CalculateDriveDuration(int journeyId)
