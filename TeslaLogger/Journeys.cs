@@ -41,7 +41,10 @@ namespace TeslaLogger
         internal static string TEXT_TH_END_DATE = "End Date";
         internal static string TEXT_TH_JOURNEY_NAME = "Journey";
         internal static string TEXT_TH_CONSUMPTION = "Consumption";
-        internal static string TEXT_TH_DURATION = "Duration";
+        internal static string TEXT_TH_CHARGED = "Charged";
+        internal static string TEXT_TH_CONSUMPTION_AVG = "Avg. Consumption";
+        internal static string TEXT_TH_DURATION_DRIVE = "Driving Duration";
+        internal static string TEXT_TH_DURATION_Charge = "Charging Duration";
         internal static string TEXT_TH_DISTANCE = "Distance";
         internal static string TEXT_TH_EXPORT = "Export";
 
@@ -59,7 +62,9 @@ CREATE TABLE journeys (
     StartPosID INT NOT NULL,
     EndPosID INT NOT NULL,
     consumption_kwh DOUBLE NULL DEFAULT NULL,
-    duration_minutes INT NULL DEFAULT NULL,
+    charged_kwh DOUBLE NULL DEFAULT NULL,
+    drive_duration_minutes INT NULL DEFAULT NULL,
+    charge_duration_minutes INT NULL DEFAULT NULL,
     name VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
     PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
@@ -108,10 +113,11 @@ CREATE TABLE journeys (
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
             sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+            try {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     StartPosID,
     StartDate, 
@@ -122,19 +128,23 @@ WHERE
     CarID = @CarID
 ORDER BY
     StartDate", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", CarID);
-                    Tools.DebugLog(cmd);
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    while (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        if (int.TryParse(dr[0].ToString(), out int id))
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(dr[1].ToString())} - {WebUtility.HtmlEncode(dr[2].ToString())}"" />");
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(dr[1].ToString())} - {WebUtility.HtmlEncode(dr[2].ToString())}"" />");
+                            }
                         }
                     }
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
             sb.Append($" </select></td><td>");
             sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_NEXT)}</button></form></td></tr>");
@@ -154,10 +164,12 @@ ORDER BY
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
             sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select name=""EndPosID"">");
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     EndPosID,
     EndDate, 
@@ -169,19 +181,24 @@ WHERE
     AND EndPosID > @StartPosID
 ORDER BY
     StartDate", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", CarID);
-                    cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                    Tools.DebugLog(cmd);
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    while (dr.Read() && dr[0] != DBNull.Value)
                     {
-                        if (int.TryParse(dr[0].ToString(), out int id))
+                        cmd.Parameters.AddWithValue("@CarID", CarID);
+                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
+                            if (int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{dr[1]} - {dr[2]}"" />");
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
             sb.Append("</select></td><td>");
             sb.Append($@"{WebUtility.HtmlEncode(TEXT_LABEL_JOURNEY_NAME)}</td><td><input type=""text"" name=""name"" /></td><td>");
@@ -206,10 +223,12 @@ ORDER BY
             DataRow car = DBHelper.GetCar(CarID);
             if (car != null && StartPosID < EndPosID && !string.IsNullOrEmpty(name))
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT journeys (
     CarID,
     StartPosID,
@@ -222,14 +241,14 @@ VALUES (
     @EndPosID,
     @name
 )", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", CarID);
-                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                        cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
-                        cmd.Parameters.AddWithValue("@name", name);
-                        SQLTracer.TraceNQ(cmd);
-                    }
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", CarID);
+                            cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                            cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                            cmd.Parameters.AddWithValue("@name", name);
+                            SQLTracer.TraceNQ(cmd);
+                        }
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     Id
 FROM
@@ -242,27 +261,74 @@ WHERE
 ORDER BY
     Id DESC
 LIMIT 1", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", CarID);
-                        cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                        cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
-                        cmd.Parameters.AddWithValue("@name", name);
-                        int journeyId = SQLTracer.TraceNQ(cmd);
-                        _ = Task.Factory.StartNew(() =>
                         {
-                            CalculateConsumption(journeyId);
-                            CalculateDuration(journeyId);
-                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                            cmd.Parameters.AddWithValue("@CarID", CarID);
+                            cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
+                            cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
+                            cmd.Parameters.AddWithValue("@name", name);
+                            int journeyId = SQLTracer.TraceNQ(cmd);
+                            _ = Task.Factory.StartNew(() =>
+                            {
+                                CalculateConsumption(journeyId);
+                                CalculateDriveDuration(journeyId);
+                            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                        }
+                        sb.Append("OK");
                     }
-                    sb.Append("OK");
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
                 }
             }
             WriteString(response, html1 + sb.ToString() + html2);
         }
 
-        private static void CalculateDuration(int journeyId)
+        private static void CalculateDriveDuration(int journeyId)
         {
-            // TODO
+            try {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    int drive_duration_minutes = 0;
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    trip.DurationMinutes
+FROM
+    trip,
+    journeys
+WHERE
+    trip.StartPosID >= (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    AND trip.EndPosID <= (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            drive_duration_minutes += Convert.ToInt32(dr[0].ToString());
+                        }
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE journeys (
+    drive_duration_minutes
+)
+VALUES (
+    @drive_duration_minutes
+)
+WHERE
+    journeys.ID = @journeyID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        cmd.Parameters.AddWithValue("@drive_duration_minutes", drive_duration_minutes);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void CalculateConsumption(int journeyId)
@@ -275,7 +341,7 @@ LIMIT 1", con))
             // in: nothing
             // out: nothing
             // action: render list HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
+            response.AddHeader("Content -Type", "text/html; charset=utf-8");
             string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
             string html2 = "</table></body></html>";
             StringBuilder sb = new StringBuilder();
@@ -288,14 +354,16 @@ LIMIT 1", con))
 <th>{WebUtility.HtmlEncode(TEXT_TH_END_DATE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_CONSUMPTION)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION)}</th>
+<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
 <th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
-</tr>"); // TODO converto miles if miles are configured
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+</tr>"); // TODO conver to miles if miles are configured
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(@"
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     journeys.Id,
     journeys.CarID,
@@ -321,11 +389,11 @@ WHERE
     AND journeys.EndPosID = tripEnd.EndPosID
 ORDER BY
     journeys.Id ASC", con))
-                {
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    while (dr.Read())
                     {
-                        sb.Append($@"
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            sb.Append($@"
 <tr>
 <td>{WebUtility.HtmlEncode(dr[2].ToString())}</td>
 <td>{WebUtility.HtmlEncode(dr[4].ToString())}</td>
@@ -336,10 +404,15 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(dr[10].ToString())}</td>
 <td>{WebUtility.HtmlEncode(dr[11].ToString())}</td>
 <td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString()).ToString("0.00"))}km</td>
-<td><form action=""/export/trip""><input type=""hidden"" name=""CarID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
+<td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
 </tr>"); // TODO converto miles if miles are configured
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
             WriteString(response, html1 + sb.ToString() + html2);
         }
