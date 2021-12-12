@@ -513,6 +513,13 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void AllowUnsignedPlugins()
+        {
+            UpdateTeslalogger.AllowUnsignedPlugins("../../grafana.ini", false);
+        }
+
+
+        [TestMethod]
         public void CreateAuthTokenFromRefreshToken()
         {
             /*
