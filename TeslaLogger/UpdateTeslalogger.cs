@@ -1100,47 +1100,7 @@ CREATE TABLE superchargerstate(
                         AllowUnsignedPlugins("/etc/grafana/grafana.ini", true);
                     }
 
-                    string GrafanaVersion = Tools.GetGrafanaVersion();
-                    if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0")
-                    {
-                        Thread threadGrafanaUpdate = new Thread(() =>
-                        {
-                            string GrafanaFilename = "grafana_8.3.1_armhf.deb";
-
-                            Logfile.Log("upgrade Grafana to 8.3.1!");
-
-                            if (File.Exists(GrafanaFilename))
-                                File.Delete(GrafanaFilename);
-
-                            // use internal downloader
-                            const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_8.3.1_armhf.deb";
-                            const string grafanaFile = "grafana_8.3.1_armhf.deb";
-                            if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
-                            {
-                                // fallback to wget
-                                Logfile.Log($"fallback o wget to download {grafanaUrl}");
-                                Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
-                            }
-
-                            if (File.Exists(GrafanaFilename))
-                            {
-                                Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
-
-                                if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
-                                    Tools.ExecMono("dpkg", "-r grafana-rpi");
-
-                                Tools.ExecMono("dpkg", "-i --force-overwrite grafana_8.3.1_armhf.deb");
-                            }
-
-                            Logfile.Log("upgrade Grafana DONE!");
-
-                            Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-                        })
-                        {
-                            Name = "GrafanaUpdate"
-                        };
-                        threadGrafanaUpdate.Start();
-                    }
+                    UpdateGrafanaVersion();
 
                     // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
@@ -1496,6 +1456,53 @@ CREATE TABLE superchargerstate(
             finally
             {
                 Logfile.Log("End Grafana update");
+            }
+        }
+
+        private static void UpdateGrafanaVersion()
+        {
+            string newversion = "8.3.2";
+
+            string GrafanaVersion = Tools.GetGrafanaVersion();
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1")
+            {
+                Thread threadGrafanaUpdate = new Thread(() =>
+                {
+                    string GrafanaFilename = $"grafana_{newversion}_armhf.deb";
+
+                    Logfile.Log($"upgrade Grafana to {newversion}!");
+
+                    if (File.Exists(GrafanaFilename))
+                        File.Delete(GrafanaFilename);
+
+                    // use internal downloader
+                    string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_"+ newversion +"_armhf.deb";
+                    string grafanaFile = $"grafana_{newversion}_armhf.deb";
+                    if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
+                    {
+                        // fallback to wget
+                        Logfile.Log($"fallback o wget to download {grafanaUrl}");
+                        Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
+                    }
+
+                    if (File.Exists(GrafanaFilename))
+                    {
+                        Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
+
+                        if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
+                            Tools.ExecMono("dpkg", "-r grafana-rpi");
+
+                        Tools.ExecMono("dpkg", $"-i --force-overwrite grafana_{newversion}_armhf.deb");
+                    }
+
+                    Logfile.Log("upgrade Grafana DONE!");
+
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                })
+                {
+                    Name = "GrafanaUpdate"
+                };
+                threadGrafanaUpdate.Start();
             }
         }
 
