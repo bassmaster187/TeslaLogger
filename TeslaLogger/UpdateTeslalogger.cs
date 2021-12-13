@@ -916,6 +916,10 @@ CREATE TABLE superchargerstate(
             try
             {
                 string phpinipath = "/etc/php/7.0/apache2/php.ini";
+
+                if (File.Exists(phpinipath))
+                    phpinipath = "/etc/php/7.3/apache2/php.ini";
+
                 if (File.Exists(phpinipath))
                 {
                     string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
@@ -1515,6 +1519,18 @@ CREATE TABLE superchargerstate(
                 var content = File.ReadAllText(path);
                 if (content.Contains("[plugins]"))
                 {
+                    if (!content.Contains("allow_loading_unsigned_plugins"))
+                    {
+                        Logfile.Log("Grafana.ini -> AllowUnsignedPlugins with [plugin] section");
+                        content = content.Replace("[plugins]", "[plugins]\r\nallow_loading_unsigned_plugins=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel\r\n");
+                        if (overwrite)
+                        {
+                            File.WriteAllText(path, content);
+                            Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Write File");
+                        }
+                        return content;
+                    }
+
                     Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Plugins Section available");
                     return content;
                 }
