@@ -18,7 +18,7 @@ namespace UnitTestsTeslalogger
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
 
-            Tools.SetThread_enUS();
+            Tools.SetThreadEnUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
             c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
@@ -501,6 +501,23 @@ namespace UnitTestsTeslalogger
             Assert.IsFalse(s.Contains("km Stand [km]"));
             
         }
+
+        [TestMethod]
+        public void UpdateLanguageNewTable()
+        {
+            Dictionary<string, string> dictLanguage = UpdateTeslalogger.GetLanguageDictionary("ru");
+
+            string s = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            s = UpdateTeslalogger.ReplaceValuesTags(s, dictLanguage);
+            Assert.IsFalse(s.Contains("Start Adresse"));
+        }
+
+        [TestMethod]
+        public void AllowUnsignedPlugins()
+        {
+            UpdateTeslalogger.AllowUnsignedPlugins("../../grafana.ini", false);
+        }
+
 
         [TestMethod]
         public void CreateAuthTokenFromRefreshToken()

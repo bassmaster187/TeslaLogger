@@ -6,4 +6,5 @@ datasources:
     url: database:3306
     database: teslalogger
     user: root
-    password: teslalogger
+    secureJsonData:
+      password: teslalogger
