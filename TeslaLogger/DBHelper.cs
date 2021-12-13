@@ -524,8 +524,7 @@ WHERE
     AND charging.CarID = @CarID
     AND chargingstate.id NOT IN(@NotIdInParameter)
 ORDER BY
-    chargingstate.id,
-    charging.datum", con))
+    chargingstate.id", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
