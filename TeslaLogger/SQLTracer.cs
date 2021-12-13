@@ -38,7 +38,7 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd, prefix);
+                        Analyze(cmd, prefix, ts);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return dr;
@@ -71,7 +71,7 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd, prefix);
+                        Analyze(cmd, prefix, ts);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
@@ -104,7 +104,7 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd, prefix);
+                        Analyze(cmd, prefix, ts);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return o;
@@ -138,14 +138,14 @@ namespace TeslaLogger
                         {
                             Tools.DebugLog(cmd, prefix);
                         }
-                        Analyze(cmd, prefix);
+                        Analyze(cmd, prefix, ts);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
                 return i;
             }
         }
 
-        private static void Analyze(MySqlCommand cmd, string prefix)
+        private static void Analyze(MySqlCommand cmd, string prefix, TimeSpan ts)
         {
             if (cmd.CommandText.Trim().ToUpper(Tools.ciEnUS).Substring(0, 12).Contains("SELECT"))
             {
@@ -154,7 +154,8 @@ namespace TeslaLogger
                     con.Open();
                     using (MySqlCommand ecmd = new MySqlCommand("ANALYZE " + Tools.ExpandSQLCommand(cmd), con))
                     {
-                        ecmd.CommandType = System.Data.CommandType.Text;
+                        ecmd.CommandType = CommandType.Text;
+                        ecmd.CommandTimeout = (int)Math.Max(ts.TotalSeconds * 5, 60);
                         MySqlDataReader dr = ecmd.ExecuteReader();
                         string msg = Environment.NewLine;
                         while (dr.Read())
