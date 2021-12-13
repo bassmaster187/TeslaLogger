@@ -337,6 +337,13 @@ namespace TeslaLogger
                     Logfile.Log("ALTER TABLE OK");
                 }
 
+                if (!DBHelper.IndexExists("ixAnalyzeChargingStates1", "chargingstate"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 ...");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 (id, CarID, StartChargingID, EndChargingID)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
                 if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
                 {
                     Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
