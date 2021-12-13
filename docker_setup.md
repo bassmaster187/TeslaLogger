@@ -69,6 +69,7 @@ docker-compose stop
 git fetch
 git reset --hard origin/master
 git checkout origin/master -- docker-compose.yml
+git checkout origin/master -- TeslaLogger/GrafanaConfig/datasource.yaml
 docker-compose build
 docker-compose up -d
 ```
