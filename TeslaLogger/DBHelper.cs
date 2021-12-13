@@ -877,12 +877,12 @@ WHERE
             // check if combine is disabled globally
             if (!doCombine)
             {
-                Tools.DebugLog("CombineChargingStates disabled globally");
+                Logfile.Log("CombineChargingStates disabled globally");
                 Address addr = GetAddressFromChargingState(sessionid);
                 // combine disabled, but check pos for special flag do combine
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0 && addr.specialFlags.ContainsKey(Address.SpecialFlags.CombineChargingStates))
                 {
-                    Tools.DebugLog($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
+                    Logfile.Log($"CombineChargingStates disabled globally, but enabled at POI '{addr.name}'");
                     doCombine = true;
                 }
             }
@@ -895,7 +895,7 @@ WHERE
                     // check if DoNotCombineChargingStates is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
                     {
-                        Tools.DebugLog($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
+                        Logfile.Log($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
                         doCombine = false;
                     }
                 }
@@ -906,6 +906,8 @@ WHERE
         internal void CombineChangingStates()
         {
             // find candidates to combine
+            Logfile.Log("CombineChangingStates start");
+            int t = Environment.TickCount;
             // find chargingstates with exactly the same odometer -> car did no move between charging states
             Queue<int> combineCandidates = FindCombineCandidates();
             foreach (int candidate in combineCandidates)
@@ -976,6 +978,7 @@ WHERE
                     UpdateMaxChargerPower(maxID);
                 }
             }
+            Logfile.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
         }
 
         private Tuple<int, DateTime, DateTime> GetStartEndFromCharginState(int id)

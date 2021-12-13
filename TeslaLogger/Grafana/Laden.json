@@ -140,6 +140,11 @@
         {
           "alias": "Battery charge Ampere [A]",
           "yaxis": 2
+        },
+        {
+          "$$hashKey": "object:455",
+          "alias": "SoC+kW",
+          "hiddenSeries": true
         }
       ],
       "spaceLength": 10,
@@ -153,7 +158,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  CASE WHEN charger_voltage > 10 THEN charger_voltage else null end as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10  THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum) and CarID = $Car\nORDER BY\n  Datum ASC",
+          "rawSql": "SELECT\n  $__time(Datum),\n  battery_level as 'SOC [%]',\n  charger_power as 'Leistung [kW]',\n  ideal_battery_range_km as 'Reichweite [km]',\n  CASE WHEN charger_voltage > 10 THEN charger_voltage else null end as 'Ladespannung [V]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10  THEN NULL else charger_phases END as 'Phasen',\n  charger_actual_current as 'Stromstärke [A]',\n  outside_temp as 'Außentemperatur [°C]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charge_current_request END as 'Angefordert [A]',\n  CASE WHEN charger_voltage > 280 or charger_voltage < 10 THEN NULL else charger_pilot_current END as 'Pilot [A]',\n  battery_heater * 100 as 'Battery Heater',\n  charger_power + battery_level as 'SoC+kW'\nFROM\n  charging\nWHERE\n  $__timeFilter(Datum) and CarID = $Car\nORDER BY\n  Datum ASC",
           "refId": "A",
           "select": [
             [
@@ -590,5 +595,5 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 110
+  "version": 111
 }

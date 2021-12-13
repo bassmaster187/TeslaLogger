@@ -22,7 +22,7 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    public class WebHelper : IDisposable
+    public class WebHelper
     {
         public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
 
@@ -237,26 +237,24 @@ namespace TeslaLogger
                 {
                     tokenCookieContainer = new CookieContainer();
 
-                    using (HttpClientHandler handler = new HttpClientHandler()
+                    HttpClientHandler handler = new HttpClientHandler()
                     {
                         CookieContainer = tokenCookieContainer,
                         AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                         AllowAutoRedirect = false,
                         UseCookies = true
-                    })
-                    {
+                    };
 
-                        httpClientForAuthentification = new HttpClient(handler);
-                        httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(30);
-                        httpClientForAuthentification.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
-                        httpClientForAuthentification.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
-                        //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
-                        //httpClientForAuthentification.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
-                        httpClientForAuthentification.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                        httpClientForAuthentification.DefaultRequestHeaders.Add("Connection", "keep-alive");
-                        // client.DefaultRequestHeaders.ConnectionClose = true;
-                        httpClientForAuthentification.BaseAddress = new Uri(authHost);
-                    }
+                    httpClientForAuthentification = new HttpClient(handler);
+                    httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(30);
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
+                    //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
+                    //httpClientForAuthentification.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                    httpClientForAuthentification.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                    // client.DefaultRequestHeaders.ConnectionClose = true;
+                    httpClientForAuthentification.BaseAddress = new Uri(authHost);
                 }
             }
 
@@ -3750,7 +3748,6 @@ namespace TeslaLogger
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
         private bool stopStreaming = false;
-        private bool isDisposed;
 
         public bool TaskerWakeupfile(bool force = false)
         {
@@ -4014,33 +4011,6 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 Tools.DebugLog("SendDataToAbetterrouteplannerAsync exception: " + ex.ToString() + Environment.NewLine + ex.StackTrace);
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (isDisposed) return;
-            if (disposing)
-            {
-                if (httpClientForAuthentification != null)
-                {
-                    httpClientForAuthentification.Dispose();
-                }
-                if (httpClientABRP != null)
-                {
-                    httpClientABRP.Dispose();
-                }
-                if (httpclientTeslaAPI != null)
-                {
-                    httpclientTeslaAPI.Dispose();
-                }
-            }
-            isDisposed = true;
         }
     }
 }
