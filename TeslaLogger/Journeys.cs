@@ -667,7 +667,7 @@ WHERE
         private static string PageHeader()
         {
             return $@"
-< a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
+<a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
 <a href=""{EndPoints.JourneysCreateSelectCar}"">Create a new Journey</a>&nbsp;|&nbsp;
 <a href=""{EndPoints.JourneysList}"">List and manage Journeys</a>&nbsp;|&nbsp;
 <br />";
