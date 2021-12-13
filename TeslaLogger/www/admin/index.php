@@ -347,10 +347,16 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if((isDocker() && GrafanaVersion() != "8.3.2") || 
-	(isDocker() && !DatasourceUpdated()))
+	else if(isDocker() && GrafanaVersion() != "8.3.2")
 	{?>
 		$("#InfoText").html("<h1>Please update to latest docker-compose.yml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
+		$(".HeaderT").show();
+		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
+		$("#NegativeButton").hide();
+	<?php
+	} else if (isDocker() && !DatasourceUpdated())
+	{?>
+		$("#InfoText").html("<h1>Please update datasource.yaml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
