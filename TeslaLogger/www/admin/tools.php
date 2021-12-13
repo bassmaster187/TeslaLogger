@@ -86,6 +86,15 @@ function GrafanaVersion()
     return "?";
 }
 
+function DatasourceUpdated()
+{
+    $content = file_get_contents("/tmp/datasource-DOCKER");
+    if (strpos($content, "secureJsonData:") > 0)
+        return true;
+
+    return false;
+}
+
 function startsWith( $haystack, $needle ) {
     $length = strlen( $needle );
     return substr( $haystack, 0, $length ) === $needle;
