@@ -1,3 +1,6 @@
+# Version 1.49.4
+- Bugfix
+
 # Version 1.49.3
 - Grafana 8.3.2 @Docker Users: Make sure you updated your docker-compose.yml and datasource.yaml [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md)
 - Trip Dashboard using the new table
