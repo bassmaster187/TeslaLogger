@@ -14,17 +14,17 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal static class Journeys
     {
-        public static class EndPoints
+        private static Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
-            public const string JourneysCreateSelectCar = "/journeys/create/selectCar";
-            public const string JourneysCreateStart = "/journeys/create/start";
-            public const string JourneysCreateEnd = "/journeys/create/end";
-            public const string JourneysCreateCreate = "/journeys/create/create";
-            public const string JourneysDelete = "/journeys/delete";
-            public const string JourneysDeleteDelete = "/journeys/delete/delete";
-            public const string JourneysIndex = "/journeys";
-            public const string JourneysList = "/journeys/list";
-        }
+            { "JourneysCreateSelectCar", "/journeys/create/selectCar" },
+            { "JourneysCreateStart", "/journeys/create/start" },
+            { "JourneysCreateEnd", "/journeys/create/end" },
+            { "JourneysCreateCreate", "/journeys/create/create" },
+            { "JourneysDelete", "/journeys/delete" },
+            { "JourneysDeleteDelete", "/journeys/delete/delete" },
+            { "JourneysIndex", "/journeys" },
+            { "JourneysList", "/journeys/list" }
+        };
         //i18n
         internal static string TEXT_LABEL_SELECT_CAR = "Select Car";
         internal static string TEXT_LABEL_SELECT_START = "Select Start";
@@ -57,8 +57,9 @@ namespace TeslaLogger
 
         private static string html1 = @"<html>
   <head>
-    <link href=""/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
-    <script src=""/js/select2.min.js""></script>
+    <link href=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
+    <script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js""></script>
+    <script src=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js""></script>
     <script>
 $(document).ready(function() {
     $('.js-select').select2();
@@ -103,7 +104,7 @@ CREATE TABLE journeys (
             // action: render car selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select class=""js-select"" name=""CarID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints["JourneysCreateStart"]}""><select class=""js-select"" name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
@@ -128,7 +129,7 @@ CREATE TABLE journeys (
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints["JourneysCreateEnd"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -179,7 +180,7 @@ ORDER BY
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints["JourneysCreateCreate"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -301,6 +302,38 @@ LIMIT 1", con))
                 }
             }
             WriteString(response, html1 + sb.ToString() + html2);
+        }
+
+        internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            switch (true)
+            {
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysCreateSelectCar"], StringComparison.Ordinal):
+                    JourneysCreateSelectCar(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysCreateStart"], StringComparison.Ordinal):
+                    JourneysCreateStart(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysCreateEnd"], StringComparison.Ordinal):
+                    JourneysCreateEnd(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysDelete"], StringComparison.Ordinal):
+                    JourneysDelete(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysDeleteDelete"], StringComparison.Ordinal):
+                    JourneysDeleteDelete(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysIndex"], StringComparison.Ordinal):
+                    JourneysIndex(request, response);
+                    break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysList"], StringComparison.Ordinal):
+                    JourneysList(request, response);
+                    break;
+                default:
+                    response.StatusCode = (int)HttpStatusCode.NotFound;
+                    WriteString(response, @"URL Not Found!");
+                    break;
+            }
         }
 
         private static void CalculateChargeDuration(int journeyId)
@@ -565,7 +598,7 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
 <td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
 <td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
-<td><form action=""{EndPoints.JourneysDelete}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>
+<td><form action=""{EndPoints["JourneysDelete"]}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>
 </tr>"); // TODO convert to miles if miles are configured
                         }
                     }
@@ -616,7 +649,7 @@ WHERE
                         {
                             sb.Append($@"
 <tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_REALLY_DELETE)}&nbsp;{WebUtility.HtmlEncode(dr[0].ToString())}&nbsp;({WebUtility.HtmlEncode(dr[1].ToString())})&nbsp;-&nbsp;{WebUtility.HtmlEncode(dr[2].ToString())}{WebUtility.HtmlEncode("-->")}{WebUtility.HtmlEncode(dr[3].ToString())}?</td>
-<td><form action=""{EndPoints.JourneysDeleteDelete}""><input type=""hidden"" name=""id"" value=""{journeyID}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE_DELETE)}</button></form></td>
+<td><form action=""{EndPoints["JourneysDeleteDelete"]}""><input type=""hidden"" name=""id"" value=""{journeyID}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE_DELETE)}</button></form></td>
 ");
                         }
                     }
@@ -677,9 +710,9 @@ WHERE
         private static string PageHeader()
         {
             return $@"
-<a href=""{EndPoints.JourneysIndex}"">Index</a>&nbsp;|&nbsp;
-<a href=""{EndPoints.JourneysCreateSelectCar}"">Create a new Journey</a>&nbsp;|&nbsp;
-<a href=""{EndPoints.JourneysList}"">List and manage Journeys</a>&nbsp;|&nbsp;
+<a href=""{EndPoints["JourneysIndex"]}"">Index</a>&nbsp;|&nbsp;
+<a href=""{EndPoints["JourneysCreateSelectCar"]}"">Create a new Journey</a>&nbsp;|&nbsp;
+<a href=""{EndPoints["JourneysList"]}"">List and manage Journeys</a>&nbsp;|&nbsp;
 <br />";
         }
 
@@ -711,6 +744,11 @@ WHERE
                 }
             }
             return "";
+        }
+
+        internal static bool CanHandleRequest(HttpListenerRequest request)
+        {
+            return EndPoints.ContainsValue(request.Url.LocalPath);
         }
     }
 }
