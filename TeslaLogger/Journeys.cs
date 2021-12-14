@@ -55,7 +55,17 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
         internal static string TEXT_TH_ACTIONS = "Actions";
 
-        private static string html1 = "<html><head></head><body>" + PageHeader() + "<table border=\"1\">";
+        private static string html1 = @"<html>
+  <head>
+    <link href=""/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
+    <script src=""/js/select2.min.js""></script>
+    <script>
+$(document).ready(function() {
+    $('.js-select').select2();
+});
+    </script>
+  </head>
+  <body>" + PageHeader() + "<table border=\"1\">";
         private static string html2 = "</table></body></html>";
 
         internal static void CheckSchema()
@@ -93,7 +103,7 @@ CREATE TABLE journeys (
             // action: render car selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select name=""CarID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints.JourneysCreateStart}""><select class=""js-select"" name=""CarID"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
@@ -118,7 +128,7 @@ CREATE TABLE journeys (
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select name=""StartPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints.JourneysCreateEnd}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -169,7 +179,7 @@ ORDER BY
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select name=""EndPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints.JourneysCreateCreate}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
