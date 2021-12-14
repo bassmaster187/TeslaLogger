@@ -467,6 +467,15 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void UpdateDatasource()
+        {
+            var dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            dashboard = UpdateTeslalogger.UpdateDatasourceUID(dashboard, "000000001");
+
+            Assert.IsTrue(dashboard.Contains("\"uid\": \"000000001\""));
+        }
+
+        [TestMethod]
         public void POI()
         {
             var geofence = Geofence.GetInstance();

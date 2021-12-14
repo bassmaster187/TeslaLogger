@@ -1119,6 +1119,10 @@ CREATE TABLE superchargerstate(
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
+                    var DatasourceUID = "000000001";
+                    if (Tools.IsDocker())
+                        DatasourceUID = "PC0C98BF192F75B00";
+
                     UpdateDBView();
 
                     List<String> dashboardlinks = new List<String>();
@@ -1423,6 +1427,8 @@ CREATE TABLE superchargerstate(
 
                         s = UpdateDefaultCar(s, defaultcar, defaultcarid, carLabel);
 
+                        s = UpdateDatasourceUID(s, DatasourceUID);
+
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
                             dashboardlinks.Add(title + "|" + link);
 
@@ -1464,6 +1470,22 @@ CREATE TABLE superchargerstate(
             {
                 Logfile.Log("End Grafana update");
             }
+        }
+
+        internal static string UpdateDatasourceUID(string s, string v)
+        {
+            string pattern = "(\\\"datasource\\\":\\s+{\\s+\\\"type\\\":\\s+\\\"mysql\\\",\\s+\\\"uid\\\":\\s+\\\")(.*?)(\\\")";
+            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            var m = r.Match(s);
+            if (!m.Success)
+            {
+                // Logfile.Log("datasource not found!!!");
+                return s;
+            }            
+
+            s = r.Replace(s, "${1}" + v +"${3}");
+
+            return s;
         }
 
         private static void UpdateGrafanaVersion()

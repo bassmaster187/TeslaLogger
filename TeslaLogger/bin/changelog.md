@@ -1,3 +1,6 @@
+# Version 1.49.5
+- Bugfix for Docker / Dashboard Trips
+
 # Version 1.49.4
 - Bugfix
 
