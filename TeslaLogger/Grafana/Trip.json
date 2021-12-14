@@ -21,8 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 37,
-  "iteration": 1638395290268,
+  "iteration": 1639472336415,
   "links": [
     {
       "icon": "external link",
@@ -37,10 +36,6 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -490,8 +485,7 @@
               {
                 "id": "decimals",
                 "value": 1
-              }
-              ,
+              },
               {
                 "id": "custom.width",
                 "value": 87
@@ -538,8 +532,7 @@
               {
                 "id": "displayName",
                 "value": "Range Diff"
-              }
-              ,
+              },
               {
                 "id": "custom.width",
                 "value": 85
@@ -601,13 +594,13 @@
           }
         ]
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "alias": "",
           "datasource": {
             "type": "mysql",
-            "uid": "PC0C98BF192F75B00"
+            "uid": "000000001"
           },
           "format": "table",
           "group": [],
@@ -657,10 +650,6 @@
           "selected": false,
           "text": "",
           "value": "1"
-        },
-        "datasource": {
-          "type": "mysql",
-          "uid": "PC0C98BF192F75B00"
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
@@ -733,6 +722,6 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 24,
+  "version": 36,
   "weekStart": ""
 }
