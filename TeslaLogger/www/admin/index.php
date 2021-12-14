@@ -89,7 +89,7 @@ else
 				GetCurrentData();
 			}
 		}
-		,5000);
+		,250);
 
 	ShowInfo();
   } );

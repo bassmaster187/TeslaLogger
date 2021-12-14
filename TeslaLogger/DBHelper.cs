@@ -3493,6 +3493,8 @@ VALUES(
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.60934M);
                         car.CurrentJSON.current_power = (int)(power * 1.35962M);
+                        car.CurrentJSON.latitude = latitude;
+                        car.CurrentJSON.longitude = longitude;
 
                         if (odometer > 0)
                         {
