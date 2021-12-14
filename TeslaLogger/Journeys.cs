@@ -60,14 +60,17 @@ namespace TeslaLogger
     <link href=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
     <script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js""></script>
     <script src=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js""></script>
+  </head>
+  <body>" + PageHeader() + "<table border=\"1\">";
+        private static string html2 = @"
+    </table>
     <script>
 $(document).ready(function() {
     $('.js-select').select2();
 });
     </script>
-  </head>
-  <body>" + PageHeader() + "<table border=\"1\">";
-        private static string html2 = "</table></body></html>";
+  </body>
+</html>";
 
         internal static void CheckSchema()
         {
@@ -104,14 +107,14 @@ CREATE TABLE journeys (
             // action: render car selection HTML
             response.AddHeader("Content-Type", "text/html; charset=utf-8");
             StringBuilder sb = new StringBuilder();
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints["JourneysCreateStart"]}""><select class=""js-select"" name=""CarID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_CAR)}</td><td><form action=""{EndPoints["JourneysCreateStart"]}""><select class=""js-select"" name=""CarID"" style=""width: 300px"">");
             using (DataTable dt = DBHelper.GetCars())
             {
                 foreach (DataRow r in dt.Rows)
                 {
                     int id = id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                     string display_name = r["display_name"] as String ?? "";
-                    sb.Append($@"<option value=""{id}"" label=""{WebUtility.HtmlEncode(display_name)}"" />");
+                    sb.Append($@"<option value=""{id}"" label=""{WebUtility.HtmlEncode(display_name)}"">{WebUtility.HtmlEncode(display_name)}</option>");
                 }
                 dt.Clear();
             }
@@ -129,7 +132,7 @@ CREATE TABLE journeys (
             StringBuilder sb = new StringBuilder();
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints["JourneysCreateEnd"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints["JourneysCreateEnd"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"" style=""width: 500px"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -154,7 +157,7 @@ ORDER BY
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"" />");
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
                             }
                         }
                     }
@@ -180,7 +183,7 @@ ORDER BY
             int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
             int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints["JourneysCreateCreate"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"">");
+            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints["JourneysCreateCreate"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"" style=""width: 500px"">");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -207,7 +210,7 @@ ORDER BY
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"" />");
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
                             }
                         }
                     }
