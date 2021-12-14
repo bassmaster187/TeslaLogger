@@ -57,6 +57,7 @@ services:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
+      - ./TeslaLogger/GrafanaConfig/datasource.yaml:/tmp/datasource-DOCKER
       - teslalogger-tmp:/tmp/
     ports:
       - 8888:80
