@@ -668,8 +668,11 @@ CREATE TABLE superchargerstate(
                 Chmod("cmd_updated.txt", 666);
                 Chmod("MQTTClient.exe.config", 666);
 
-                Logfile.Log("Create backup");
-                Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+                if (!File.Exists("NOBACKUPONUPDATE"))
+                {
+                    Logfile.Log("Create backup");
+                    Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+                }
                 
                 if (!Tools.ExecMono("git", "--version", false).Contains("git version"))
                 {
