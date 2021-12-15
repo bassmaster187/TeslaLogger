@@ -8,14 +8,20 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1602141114699,
+  "iteration": 1639583803011,
   "links": [
     {
       "icon": "external link",
@@ -27,12 +33,15 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -62,7 +71,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "format": "time_series",
@@ -93,16 +102,16 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "AVG Max Range",
       "type": "stat"
     },
     {
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -146,7 +155,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "format": "time_series",
@@ -177,16 +186,16 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "AVG Consumption",
       "type": "stat"
     },
     {
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "decimals": 1,
           "mappings": [],
           "thresholds": {
@@ -231,7 +240,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "format": "time_series",
@@ -262,18 +271,20 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "AVG Trip Days",
       "type": "stat"
     },
     {
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "decimals": 1,
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -316,7 +327,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "format": "time_series",
@@ -347,15 +358,381 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "AVG SOC Diff",
       "type": "stat"
     },
     {
-      "columns": [],
-      "datasource": "teslalogger",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "width": 20
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartTripUnix"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Start Trip"
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsLocal"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": false,
+                    "title": "",
+                    "url": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__data.fields.StartDateRAW}&to=${__data.fields.EndDateRAW}&var-Car=$Car"
+                  }
+                ]
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 155
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartSOC"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "StartSOC"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(50, 172, 45, 0.97)",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartOdometer"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Start km"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndTripUnix"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "End Trip"
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsLocal"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 155
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndSOC"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "EndSOC"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-text"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
+                    },
+                    {
+                      "color": "rgba(237, 129, 40, 0.89)",
+                      "value": 5
+                    },
+                    {
+                      "color": "rgb(216, 217, 218)",
+                      "value": 10
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndOdometer"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "End km"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "socDiff"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "SOC diff"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MaxRange"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Max Range"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AVGConsumption"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ø Verbrauch"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TripDays"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tage"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartDateRAW"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndDateRAW"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kmDiff"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 19,
         "w": 24,
@@ -364,288 +741,42 @@
       },
       "id": 2,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "options": {
+        "footer": {
+          "fields": [
+            "StartSOC",
+            "EndSOC",
+            "socDiff",
+            "kmDiff",
+            "MaxRange",
+            "AVGConsumption",
+            "TripDays"
+          ],
+          "reducer": [
+            "mean"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Start Trip"
+          }
+        ]
       },
-      "styles": [
-        {
-          "$$hashKey": "object:141",
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "$$hashKey": "object:142",
-          "alias": "Start Trip",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTooltip": "",
-          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_1}&var-Car=$Car",
-          "mappingType": 1,
-          "pattern": "StartTripUnix",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:143",
-          "alias": "StartSOC",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "StartSOC",
-          "thresholds": [
-            ""
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:144",
-          "alias": "Start km",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "StartOdometer",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:145",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "secondSeq",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:146",
-          "alias": "End Trip",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndTripUnix",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:147",
-          "alias": "EndSOC",
-          "align": "right",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgb(216, 217, 218)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "EndSOC",
-          "thresholds": [
-            "5",
-            "10"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:148",
-          "alias": "End km",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "EndOdometer",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:149",
-          "alias": "SOC diff",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "socDiff",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:150",
-          "alias": "Max Range",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "MaxRange",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:151",
-          "alias": "Ø Verbrauch",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "AVGConsumption",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:152",
-          "alias": "Tage",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "TripDays",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:240",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:251",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:153",
-          "alias": "kmDiff",
-          "align": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 0,
-          "pattern": "kmDiff",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        }
-      ],
+      "pluginVersion": "8.3.2",
       "targets": [
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * wh_tr / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartTrip) * 1000 as StartTripUnix, UNIX_TIMESTAMP(EndTrip) * 1000 as EndTripUnix,\nStartSOC, EndSOC, StartSOC - EndSOC AS socDiff,\nStartOdometer, EndOdometer,\n    EndOdometer - StartOdometer AS kmDiff,\n    \n    (EndOdometer - StartOdometer) / (StartSOC - EndSOC) * 100 AS MaxRange,\n    (StartRange - EndRange) * wh_tr / (EndOdometer - StartOdometer) * 100 AS AVGConsumption,\n    TIMESTAMPDIFF(HOUR, StartTrip, EndTrip) / 24 AS TripDays,\n    UNIX_TIMESTAMP(StartTrip)*1000 as StartDateRAW, UNIX_TIMESTAMP(EndTrip)*1000 as EndDateRAW\nFROM\n    (SELECT \n        (@rowid1:=@rowid1 + 1) firstSeq,\n            # chargingstate.ID AS EndId,\n            chargingstate.EndDate AS StartTrip,\n            charging.battery_level AS StartSOC,\n            charging.ideal_battery_range_km AS StartRange,\n            pos.odometer AS StartOdometer     ,\n            wh_tr\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.EndChargingID\n    INNER JOIN cars on chargingstate.carid = cars.id\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid1:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TEnd\n        JOIN\n    (SELECT \n        (@rowid2:=@rowid2 + 1) secondSeq,\n          #  chargingstate.ID AS StartId,\n            chargingstate.StartDate AS EndTrip,\n            charging.battery_level AS EndSOC,\n            charging.ideal_battery_range_km AS EndRange,\n            pos.odometer AS EndOdometer\n    FROM\n        charging\n    INNER JOIN chargingstate ON charging.id = chargingstate.StartChargingID\n    INNER JOIN pos ON chargingstate.pos = pos.id\n    JOIN (SELECT @rowid2:=0) a\n    WHERE $__timeFilter(chargingstate.StartDate) and chargingstate.CarID = $Car  and\n        TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3  and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\n    ORDER BY StartDate DESC) AS TStart ON TEnd.firstSeq = TStart.secondSeq + 1\n    where (EndOdometer - StartOdometer between 5 and 1000) and ((EndOdometer - StartOdometer) / (StartSOC - EndSOC)) < 10 and StartSOC > EndSOC and EndOdometer - StartOdometer > 20\norder by StartTrip desc",
           "refId": "A",
           "select": [
             [
@@ -668,26 +799,36 @@
         }
       ],
       "title": "Akku Trips",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
+          "selected": false,
           "text": "",
           "value": "1"
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "Car",
+        "label": "",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -697,7 +838,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -736,5 +876,6 @@
   "timezone": "",
   "title": "Akku Trips",
   "uid": "Mlc06BiRk",
-  "version": 204
+  "version": 269,
+  "weekStart": ""
 }
