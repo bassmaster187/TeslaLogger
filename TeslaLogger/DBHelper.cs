@@ -402,7 +402,7 @@ WHERE
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.latitude, car.CurrentJSON.longitude).Wait();
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude()).Wait();
 
                 if (car.ABRPMode == -1)
                     return false;
@@ -2435,12 +2435,12 @@ LIMIT 1", con))
 
                             if (dr["lat"] != DBNull.Value)
                             {
-                                car.CurrentJSON.latitude = Convert.ToDouble(dr["lat"], Tools.ciEnUS);
+                                car.CurrentJSON.SetLatitude(Convert.ToDouble(dr["lat"], Tools.ciEnUS));
                             }
 
                             if (dr["lng"] != DBNull.Value)
                             {
-                                car.CurrentJSON.longitude = Convert.ToDouble(dr["lng"], Tools.ciEnUS);
+                                car.CurrentJSON.SetLongitude(Convert.ToDouble(dr["lng"], Tools.ciEnUS));
                             }
                         }
                         dr.Close();
@@ -3493,8 +3493,7 @@ VALUES(
                     {
                         car.CurrentJSON.current_speed = (int)(speed * 1.60934M);
                         car.CurrentJSON.current_power = (int)(power * 1.35962M);
-                        car.CurrentJSON.latitude = latitude;
-                        car.CurrentJSON.longitude = longitude;
+                        car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
 
                         if (odometer > 0)
                         {

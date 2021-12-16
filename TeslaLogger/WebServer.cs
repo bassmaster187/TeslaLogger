@@ -1123,7 +1123,7 @@ namespace TeslaLogger
                                 case "set_charge_limit":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
                                     {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
                                         if (addr != null)
                                         {
                                             car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
@@ -1141,7 +1141,7 @@ namespace TeslaLogger
                                 case "set_charging_amps":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
                                     {
-                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
                                         if (addr != null)
                                         {
                                             car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");

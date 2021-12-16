@@ -1299,7 +1299,7 @@ namespace TeslaLogger
 
                 if (charging_state == "Charging")
                 {
-                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
+                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
 
                     lastCharging_State = charging_state;
                     car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
@@ -2248,9 +2248,7 @@ namespace TeslaLogger
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
-                car.CurrentJSON.latitude = latitude;
-                car.CurrentJSON.longitude = longitude;
-                car.CurrentJSON.heading = heading;
+                car.CurrentJSON.SetPosition(latitude, longitude, ts);
 
                 int speed = 0;
                 if (r2["speed"] != null)
