@@ -286,8 +286,8 @@ ORDER BY
                         foreach (DataColumn col in dt.Columns)
                         {
                             string name = col.Caption;
-                            name = name.Replace("avg(", "");
-                            name = name.Replace("max(", "");
+                            name = name.Replace("AVG(", "");
+                            name = name.Replace("MAX(", "");
                             name = name.Replace(")", "");
 
                             if (name == "Datum")
