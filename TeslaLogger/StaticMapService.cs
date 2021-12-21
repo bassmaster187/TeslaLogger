@@ -223,7 +223,7 @@ WHERE
             if (CarID != int.MinValue && CarID > 0)
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter(@"
-SELECT
+SELECT DISTINCT
   lat,
   lng
 FROM
@@ -335,7 +335,7 @@ FROM
                 con.Open();
 
                 using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
+SELECT DISTINCT
   startposid,
   endposid,
   carid
@@ -421,7 +421,7 @@ ORDER BY
                     con.Open();
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
-SELECT
+SELECT DISTINCT
   round(lat, 4) as lat,
   round(lng, 4) as lng
 FROM
@@ -465,7 +465,7 @@ WHERE
                     con.Open();
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
-SELECT
+SELECT DISTINCT
   round(lat, 4) as lat,
   round(lng, 4) as lng
 FROM
