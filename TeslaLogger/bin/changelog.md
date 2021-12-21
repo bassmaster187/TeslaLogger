@@ -1,8 +1,5 @@
-# Version 1.49.5
-- Bugfix for Docker / Dashboard Trips
-
-# Version 1.49.4
-- Bugfix
+# Version 1.50.0
+- Bugfixes and Release
 
 # Version 1.49.3
 - Grafana 8.3.2 @Docker Users: Make sure you updated your docker-compose.yml and datasource.yaml [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md)
