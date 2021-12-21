@@ -326,7 +326,7 @@ ORDER BY
 
                 string sql = @"
 SELECT
-    MIN(chargingstate.StartDate) AS DATE,
+    MIN(chargingstate.StartDate) AS Date,
     (SELECT
         LEFT(VERSION, LOCATE(' ', VERSION) - 1)
     FROM
