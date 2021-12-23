@@ -216,6 +216,25 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_SRPlus_LFP_2021_60kWh()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 430, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7FA3MCCxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 138;
+            wh.car.TrimBadging = "50";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
+            Assert.AreEqual(0.138, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_SRPlus_LFP_2021_without_charging()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
