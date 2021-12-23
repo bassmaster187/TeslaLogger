@@ -118,7 +118,7 @@ namespace TeslaLogger
                     break;
                 case "is_user_present":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                    if (oldvalue is bool && (bool)oldvalue == true && newvalue is bool && (bool)newvalue == false)
+                    if (oldvalue is bool && (bool)oldvalue == true && newvalue is bool && (bool)newvalue == false && !car.IsCharging())
                     {
                         car.DriveFinished();
                     }
