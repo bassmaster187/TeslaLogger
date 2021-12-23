@@ -1765,7 +1765,7 @@ namespace TeslaLogger
 
             if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out _, out string battery, out string motor);
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor);
 
                 int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
@@ -1774,7 +1774,10 @@ namespace TeslaLogger
                     {
                         if (!AWD)
                         {
-                            WriteCarSettings("0.145", "M3 LR RWD");
+                            if (MIC)
+                                WriteCarSettings("0.138", "M3 SR+ LFP 2021");
+                            else
+                                WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
                         else if (motor == "3 dual performance" && year == 2021)
