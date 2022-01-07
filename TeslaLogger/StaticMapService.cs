@@ -278,26 +278,52 @@ JOIN pos ON
         {
             using (DataTable dt = new DataTable())
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter($@"SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT pos FROM chargingstate)", DBHelper.DBConnectionstring))
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+SELECT
+    pos
+FROM
+    chargingstate
+)
+UNION ALL
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+    SELECT
+        StartPos
+    FROM
+        drivestate
+)
+UNION ALL
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+SELECT
+    EndPos
+FROM
+    drivestate
+)", DBHelper.DBConnectionstring))
                 {
-                    da.Fill(dt);
-
-                    da.SelectCommand.CommandText = "SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT StartPos FROM drivestate)";
-                    da.Fill(dt);
-
-                    da.SelectCommand.CommandText = "SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT EndPos FROM drivestate)";
-                    da.Fill(dt);
-
-                    using (DataView dv = new DataView(dt))
-                    {
-                        using (DataTable dtDistinct = dv.ToTable(true, new string[] { "lat", "lng" })) // Get Distinct Values
-                        {
-                            foreach (DataRow dr in dtDistinct.Rows)
-                            {
-                                GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
-                            }
-                        }
-                    }
+                    da.SelectCommand.CommandTimeout = 600;
+                    SQLTracer.TraceDA(dt, da);
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
                 }
                 dt.Clear();
             }
