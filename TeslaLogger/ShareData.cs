@@ -64,7 +64,7 @@ namespace TeslaLogger
                     CommandTimeout = 6000
                 })
                 {
-                    cmd.ExecuteNonQuery();
+                    SQLTracer.TraceNQ(cmd);
                 }
             }
 
@@ -128,7 +128,7 @@ ORDER BY
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
                     {
                         da.SelectCommand.CommandTimeout = 600;
-                        da.Fill(dt);
+                        SQLTracer.TraceDA(dt, da);
                         ms = Environment.TickCount - ms;
                         car.Log("ShareData: SELECT chargingstate ms: " + ms);
 
@@ -277,7 +277,7 @@ ORDER BY
                     da.SelectCommand.Parameters.AddWithValue("@startid", startid);
                     da.SelectCommand.Parameters.AddWithValue("@endid", endid);
                     da.SelectCommand.CommandTimeout = 300;
-                    da.Fill(dt);
+                    SQLTracer.TraceDA(dt, da);
 
                     foreach (DataRow dr in dt.Rows)
                     {
@@ -370,7 +370,7 @@ GROUP BY
                     {
                         da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
                         da.SelectCommand.CommandTimeout = 600;
-                        da.Fill(dt);
+                        SQLTracer.TraceDA(dt, da);
                         ms = Environment.TickCount - ms;
                         car.Log("ShareData: SELECT degradation Data ms: " + ms);
 

@@ -299,7 +299,6 @@ JOIN pos ON
                         }
                     }
                 }
-                
                 dt.Clear();
             }
         }

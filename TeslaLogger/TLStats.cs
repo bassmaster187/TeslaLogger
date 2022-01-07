@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
@@ -58,8 +59,32 @@ namespace TeslaLogger
                 _ = sb.Append($"PeakWorkingSet64:    {proc.PeakWorkingSet64,12}{Environment.NewLine}");
                 _ = sb.Append($"PrivateMemorySize64: {proc.PrivateMemorySize64,12}{Environment.NewLine}");
                 _ = sb.Append($"VirtualMemorySize64: {proc.VirtualMemorySize64,12}{Environment.NewLine}");
-                _ = sb.Append($"HandleCount:         {proc.HandleCount,12}{Environment.NewLine}");
-                _ = sb.Append($"StartTime: {proc.StartTime}");
+                _ = sb.Append($"StartTime: {proc.StartTime}{Environment.NewLine}");
+                _ = sb.Append($"Database sizes: DB {DBHelper.Database}{Environment.NewLine}");
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+  TABLE_NAME AS `Table`,
+  ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`
+FROM
+  information_schema.TABLES
+WHERE
+  TABLE_SCHEMA = @dbschema
+  and ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) > 0.9
+ORDER BY
+  (DATA_LENGTH + INDEX_LENGTH)
+DESC", con))
+                    {
+                        cmd.Parameters.AddWithValue("@dbschema", DBHelper.Database);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            _ = sb.Append($"  table {dr[0]} has {dr[1]}mb{Environment.NewLine}");
+                        }
+                    }
+                }
             }
             catch (Exception) { }
             return sb.ToString();

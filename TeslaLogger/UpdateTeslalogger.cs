@@ -86,6 +86,8 @@ namespace TeslaLogger
 
                 // start schema update
 
+                Journeys.CheckSchema();
+
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
@@ -298,7 +300,7 @@ namespace TeslaLogger
                                 cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                                 cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                                 cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
                             }
                         }
                     }
@@ -332,6 +334,13 @@ namespace TeslaLogger
                 {
                     Logfile.Log("alter table chargingstate add index chargingsate_ix_pos (Pos)");
                     DBHelper.ExecuteSQLQuery("alter table chargingstate add index chargingsate_ix_pos (Pos)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ixAnalyzeChargingStates1", "chargingstate"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 ...");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 (id, CarID, StartChargingID, EndChargingID)", 6000);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
@@ -438,8 +447,7 @@ CREATE TABLE superchargerstate(
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                         {
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read() && dr[0] != DBNull.Value)
                             {
                                 if (int.TryParse(dr[0].ToString(), out int datetime_precision))
@@ -563,6 +571,26 @@ CREATE TABLE superchargerstate(
                     DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
                 }
 
+                if (!DBHelper.IndexExists("ix_startpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_endpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_id_ts", "mothership"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)", 1200);
+                    Logfile.Log("ALTER TABLE OK");
+                }
 
 
                 // end of schema update
@@ -889,7 +917,7 @@ CREATE TABLE superchargerstate(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
                             string charset = dr[0].ToString();
@@ -901,7 +929,7 @@ CREATE TABLE superchargerstate(
                                 Logfile.Log("Chage database charset to utf8mb4");
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    cmd2.ExecuteNonQuery();
+                                    SQLTracer.TraceNQ(cmd2);
                                 }
                             }
                         }

@@ -211,7 +211,7 @@ VALUES(
                                     cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                                     cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
                                     cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                    cmd.ExecuteNonQuery();
+                                    SQLTracer.TraceNQ(cmd);
                                 }
                                 con.Close();
                             }
@@ -248,7 +248,7 @@ VALUES(
                             cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                             cmd.Parameters.AddWithValue("@available_stalls", -1);
                             cmd.Parameters.AddWithValue("@total_stalls", -1);
-                            cmd.ExecuteNonQuery();
+                            SQLTracer.TraceNQ(cmd);
                         }
                         con.Close();
                     }
@@ -292,7 +292,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@lat", lat);
                     cmd.Parameters.AddWithValue("@lng", lng);
-                    cmd.ExecuteNonQuery();
+                    SQLTracer.TraceNQ(cmd);
                 }
                 con.Close();
             }
@@ -309,7 +309,7 @@ VALUES(
                 using (MySqlCommand cmd = new MySqlCommand("SELECT id from superchargers where name = @name", con))
                 {
                     cmd.Parameters.AddWithValue("@name", suc);
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value)
                     {
                         if (int.TryParse(dr[0].ToString(), out sucID))
