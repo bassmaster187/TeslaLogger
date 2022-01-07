@@ -213,7 +213,8 @@ WHERE
   id = @startID ", con))
                 {
                     cmd.Parameters.AddWithValue("@startID", request.StartPosID);
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
                         _ = int.TryParse(dr[0].ToString(), out CarID);
@@ -223,7 +224,7 @@ WHERE
             if (CarID != int.MinValue && CarID > 0)
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter(@"
-SELECT DISTINCT
+SELECT
   lat,
   lng
 FROM
@@ -238,7 +239,8 @@ ORDER BY
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
                     da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);
                     da.SelectCommand.Parameters.AddWithValue("@endID", request.EndPosID);
-                    SQLTracer.TraceDA(dt, da);
+                    Tools.DebugLog(da.SelectCommand);
+                    da.Fill(dt);
                 }
             }
             else
@@ -262,8 +264,7 @@ JOIN pos ON
   chargingstate.pos = pos.id
 ", DBHelper.DBConnectionstring))
                 {
-                    da.SelectCommand.CommandTimeout = 600;
-                    SQLTracer.TraceDA(dt, da);
+                    da.Fill(dt);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -277,53 +278,40 @@ JOIN pos ON
         {
             using (DataTable dt = new DataTable())
             {
-                using (MySqlDataAdapter da = new MySqlDataAdapter($@"
-SELECT DISTINCT
-  round(lat, 4) as lat,
-  round(lng, 4) as lng
-FROM
-  pos    
-LEFT JOIN
-  chargingstate ON pos.id = chargingstate.pos
-WHERE
-  pos.id IN (
-  SELECT
-    pos
-  FROM
-    chargingstate
-  )
-  OR pos.id IN (
-  SELECT
-    StartPos
-  FROM
-    drivestate
-  )
-  OR pos.id IN (
-  SELECT
-    EndPos
-  FROM
-    drivestate
-  )", DBHelper.DBConnectionstring))
+                using (MySqlDataAdapter da = new MySqlDataAdapter($@"SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT pos FROM chargingstate)", DBHelper.DBConnectionstring))
                 {
                     da.Fill(dt);
+
+                    da.SelectCommand.CommandText = "SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT StartPos FROM drivestate)";
+                    da.Fill(dt);
+
+                    da.SelectCommand.CommandText = "SELECT DISTINCT round(lat, 4) as lat, round(lng, 4) as lng FROM pos LEFT JOIN chargingstate ON pos.id = chargingstate.pos WHERE pos.id IN ( SELECT EndPos FROM drivestate)";
+                    da.Fill(dt);
+
+                    using (DataView dv = new DataView(dt))
+                    {
+                        using (DataTable dtDistinct = dv.ToTable(true, new string[] { "lat", "lng" })) // Get Distinct Values
+                        {
+                            foreach (DataRow dr in dtDistinct.Rows)
+                            {
+                                GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
+                            }
+                        }
+                    }
                 }
-            foreach (DataRow dr in dt.Rows)
-            {
-                GetSingleton().Enqueue(MapType.Park, (double)dr["lat"], (double)dr["lng"], MapMode.Dark);
+
+                dt.Clear();
             }
-
-            dt.Clear();
         }
-    }
 
-    public static void CreateAllTripMaps(MapMode mapMode = MapMode.Dark)
+        public static void CreateAllTripMaps(MapMode mapMode = MapMode.Dark)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
 
                 using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT DISTINCT
+SELECT
   startposid,
   endposid,
   carid
@@ -332,8 +320,8 @@ FROM
 ORDER BY
   startdate DESC ", con))
                 {
-                    cmd.CommandTimeout = 600;
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
                     try
                     {
                         while (dr.Read())
@@ -409,7 +397,7 @@ ORDER BY
                     con.Open();
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
-SELECT DISTINCT
+SELECT
   round(lat, 4) as lat,
   round(lng, 4) as lng
 FROM
@@ -422,7 +410,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@CarID", CarID);
 
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
 
                         try
                         {
@@ -453,7 +441,7 @@ WHERE
                     con.Open();
 
                     using (MySqlCommand cmd = new MySqlCommand($@"
-SELECT DISTINCT
+SELECT
   round(lat, 4) as lat,
   round(lng, 4) as lng
 FROM
@@ -462,7 +450,7 @@ WHERE
   id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", posID);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        MySqlDataReader dr = cmd.ExecuteReader();
 
                         try
                         {
