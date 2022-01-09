@@ -5,6 +5,7 @@ $lng = $_POST["lng"];
 $radius = $_POST["radius"];
 $flag = $_POST["flag"];
 $id = $_POST["id"];
+$delete= $_POST["delete"];
 
 $Text = str_replace(","," ",$Text);
 $radius = str_replace(",","",$radius);
@@ -39,6 +40,10 @@ if(strpos($flag,"+") !== false)
 else
 {
         $tmp = "\r\n".$Text.",".$lat.",".$lng.",".$radius;
+}
+if(isset($delete))
+{
+        $tmp = "";
 }
 
 // Copy all entries after edited item
