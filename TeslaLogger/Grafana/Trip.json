@@ -266,7 +266,7 @@
                   {
                     "targetBlank": true,
                     "title": "Add Geofence ",
-                    "url": "http://raspberry/admin/geoadd.php?lat=${__cell_0}&lng=${__cell_1}"
+                    "url": "http://raspberry/admin/geoadd.php?lat=${__data.fields.lat}&lng=${__data.fields.lng}"
                   }
                 ]
               },

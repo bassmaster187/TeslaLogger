@@ -293,6 +293,36 @@ if (isset($id))
 	$("#flag").val(f);
   }
   
+	function del()
+  {
+		//alert("Radius: "+ circle.getRadius() + " lat: " + circle.getLatLng().lat + " lng: " + circle.getLatLng().lng);
+		// return;
+		if (confirm('Are you sure you want to delete this geofencing location?')) {
+		  // Save it!
+			if (!$("#text").val())
+				{
+					alert("Error");
+					return;
+				}
+
+			var jqxhr = $.post("geoadd_write.php",
+			{
+				delete: "yes",
+			<?PHP
+				if (isset($_REQUEST["id"]))
+					echo("id: $id");
+				?>
+			}).always(function() {
+			alert("Deleted!");
+			//location.reload();
+			location.href = document.referrer;
+			});
+		} else {
+		  // Do nothing!
+		  return;
+		}
+  }
+		
   function save()
   {
 	//alert("Radius: "+ circle.getRadius() + " lat: " + circle.getLatLng().lat + " lng: " + circle.getLatLng().lng);
@@ -401,6 +431,8 @@ if (isset($id))
 			</table>
 		</div>
 		<button id="btn_save" onclick="save();">Save</button>
+		<button style="color:red;" id="btn_delete" onclick="del();">Delete</button>
+
 	</div>
 	<div id="map" style="height:700px; z-index:0;"></div>
 </div>
