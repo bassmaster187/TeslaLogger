@@ -233,7 +233,7 @@ namespace TeslaLogger
                             using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
 #pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                             {
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
 
                                 try
                                 {
@@ -244,7 +244,7 @@ namespace TeslaLogger
                                         {
                                             cmd2.Parameters.AddWithValue("@id", car.CarInDB);
                                             cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
-                                            cmd2.ExecuteNonQuery();
+                                            SQLTracer.TraceNQ(cmd2);
                                         }
                                     }
                                 }

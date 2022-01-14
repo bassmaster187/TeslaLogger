@@ -118,7 +118,7 @@ namespace TeslaLogger
                     break;
                 case "is_user_present":
                     Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} -> {newvalue}");
-                    if (oldvalue is bool && (bool)oldvalue == true && newvalue is bool && (bool)newvalue == false)
+                    if (oldvalue is bool && (bool)oldvalue == true && newvalue is bool && (bool)newvalue == false && !car.IsCharging())
                     {
                         car.DriveFinished();
                     }
@@ -147,7 +147,7 @@ namespace TeslaLogger
                     // charging_state Charging -> Complete - evaluate +occ special flag
                     if (oldvalue.Equals("Charging") && newvalue.Equals("Complete"))
                     {
-                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.latitude, car.CurrentJSON.longitude, false);
+                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
                         if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0) {
                             foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
                             {
@@ -183,8 +183,8 @@ namespace TeslaLogger
                     if (car.IsParked() && !car.IsCharging())
                     {
                         Tools.DebugLog($"#{car.CarInDB}: TeslaAPIHandleStateChange {name} {oldvalue} ({oldTS}) -> {newvalue} ({newTS})");
-                        Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{int.Parse(newvalue.ToString(), Tools.ciEnUS)}, speed:0, charging:false, power:0, lat:{car.CurrentJSON.latitude}, lon:{car.CurrentJSON.longitude})");
-                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString(), Tools.ciEnUS), 0, false, 0, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
+                        Tools.DebugLog($"TeslaAPIHandleStateChange {name} SendDataToAbetterrouteplannerAsync(utc:{newTS}, soc:{int.Parse(newvalue.ToString(), Tools.ciEnUS)}, speed:0, charging:false, power:0, lat:{car.CurrentJSON.GetLatitude()}, lon:{car.CurrentJSON.GetLongitude()})");
+                        _ = car.webhelper.SendDataToAbetterrouteplannerAsync(newTS, int.Parse(newvalue.ToString(), Tools.ciEnUS), 0, false, 0, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
                     }
                     break;
                 default:
@@ -519,11 +519,11 @@ namespace TeslaLogger
                             {
                                 if (r4.TryGetValue(key, out value))
                                 {
-                                    Logfile.Log($"ParseVehicles: unknown key {key} value <{value}>");
+                                    Logfile.Log($"INFO: ParseVehicles: unknown key {key} value <{value}>");
                                 }
                                 else
                                 {
-                                    Logfile.Log($"ParseVehicles: unknown key {key}");
+                                    Logfile.Log($"INFO: ParseVehicles: unknown key {key}");
                                 }
                                 unknownKeys.Add(key);
                             }
@@ -635,6 +635,7 @@ namespace TeslaLogger
                                 break;
                             // int
                             case "battery_level":
+                            case "charge_amps":
                             case "charge_current_request":
                             case "charge_current_request_max":
                             case "charge_limit_soc":
@@ -647,6 +648,10 @@ namespace TeslaLogger
                             case "charger_voltage":
                             case "max_range_charge_counter":
                             case "minutes_to_full_charge":
+                            case "off_peak_hours_end_time":
+                            case "scheduled_charging_start_time_app":
+                            case "scheduled_departure_time value":
+                            case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
                                 if (r2.TryGetValue(key, out value))
                                 {
@@ -672,11 +677,11 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"ParseChargeState: unknown key {key} value <{value}>");
+                                        Logfile.Log($"INFO: ParseChargeState: unknown key {key} value <{value}>");
                                     }
                                     else
                                     {
-                                        Logfile.Log($"ParseChargeState: unknown key {key}");
+                                        Logfile.Log($"INFO: ParseChargeState: unknown key {key}");
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -766,11 +771,11 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"ParseDriveState: unknown key {key} value <{value}>");
+                                        Logfile.Log($"INFO: ParseDriveState: unknown key {key} value <{value}>");
                                     }
                                     else
                                     {
-                                        Logfile.Log($"ParseDriveState: unknown key {key}");
+                                        Logfile.Log($"INFO: ParseDriveState: unknown key {key}");
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -886,11 +891,11 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"ParseVehicleConfig: unknown key {key} value <{value}>");
+                                        Logfile.Log($"INFO: ParseVehicleConfig: unknown key {key} value <{value}>");
                                     }
                                     else
                                     {
-                                        Logfile.Log($"ParseVehicleConfig: unknown key");
+                                        Logfile.Log($"INFO: ParseVehicleConfig: unknown key");
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -1052,11 +1057,11 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"ParseVehicleState: unknown key {key} value <{value}>");
+                                        Logfile.Log($"INFO: ParseVehicleState: unknown key {key} value <{value}>");
                                     }
                                     else
                                     {
-                                        Logfile.Log($"ParseVehicleState: unknown key {key}");
+                                        Logfile.Log($"INFO: ParseVehicleState: unknown key {key}");
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -1116,11 +1121,11 @@ namespace TeslaLogger
                             {
                                 if (dictionary.TryGetValue(key, out value))
                                 {
-                                    Logfile.Log($"ParseSoftwareUpdate: unknown key {key} value <{value}>");
+                                    Logfile.Log($"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}>");
                                 }
                                 else
                                 {
-                                    Logfile.Log($"ParseSoftwareUpdate: unknown key {key}");
+                                    Logfile.Log($"INFO: ParseSoftwareUpdate: unknown key {key}");
                                 }
                                 unknownKeys.Add($"software_update.{key}");
                             }
@@ -1235,11 +1240,11 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"ParseClimateState: unknown key {key} value <{value}>");
+                                        Logfile.Log($"INFO: ParseClimateState: unknown key {key} value <{value}>");
                                     }
                                     else
                                     {
-                                        Logfile.Log($"ParseClimateState: unknown key {key}");
+                                        Logfile.Log($"INFO: ParseClimateState: unknown key {key}");
                                     }
                                     unknownKeys.Add(key);
                                 }
