@@ -1,5 +1,9 @@
-# Version 1.49.2
-- bugfixes and improvements
+# Version 1.51.2
+- Bugfix: Restart whole thread after access_token has been updated
+
+# Version 1.49.3
+- Grafana 8.3.2 @Docker Users: Make sure you updated your docker-compose.yml and datasource.yaml [LINK](https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md)
+- Trip Dashboard using the new table
 
 # Version 1.49.1
 - French Language

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Web;
 
 namespace TeslaLogger
@@ -276,6 +275,9 @@ namespace TeslaLogger
                     return;
 
                 if (text.Contains("Unable to connect to any of the specified MySQL hosts"))
+                    return;
+
+                if (text.Contains("MySqlException (0x80004005): Too many connections"))
                     return;
 
                 text = "V:" + Assembly.GetEntryAssembly().GetName().Version + " - " + text;

@@ -140,13 +140,26 @@ namespace TeslaLogger {
                 return ((string)(this["UserAgent"]));
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool VerboseMode {
-            get {
+        public bool VerboseMode
+        {
+            get
+            {
                 return ((bool)(this["VerboseMode"]));
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SQLTrace
+        {
+            get
+            {
+                return ((bool)(this["SQLTrace"]));
             }
         }
     }

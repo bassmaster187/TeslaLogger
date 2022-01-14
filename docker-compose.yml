@@ -32,10 +32,11 @@ services:
       - TZ=Europe/Berlin
 
   grafana:
-    image: grafana/grafana:7.2.0
+    image: grafana/grafana:8.3.2
     restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=teslalogger
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel
       - TZ=Europe/Berlin
     ports:
       - 3000:3000
@@ -56,6 +57,7 @@ services:
       - ./TeslaLogger/www:/var/www/html
       - ./TeslaLogger/bin:/etc/teslalogger
       - ./docker/teslalogger/Dockerfile:/tmp/teslalogger-DOCKER
+      - ./TeslaLogger/GrafanaConfig/datasource.yaml:/tmp/datasource-DOCKER
       - teslalogger-tmp:/tmp/
     ports:
       - 8888:80

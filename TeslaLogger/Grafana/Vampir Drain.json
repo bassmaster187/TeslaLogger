@@ -1,21 +1,11 @@
 {
   "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "teslalogger",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
+    "list": []
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1624025382169,
+  "iteration": 1639639553958,
   "links": [
     {
       "icon": "external link",
@@ -27,261 +17,377 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
-      "columns": [],
-      "datasource": "teslalogger",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "displayMode": "auto"
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "string"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartDate"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Startdatum"
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsLocal"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": false,
+                    "title": "",
+                    "url": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__data.fields.StartDateRAW}&to=${__data.fields.EndDateRAW}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 155
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndPos"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartRange"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TR km Start"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndRange"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TR km Ende"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RangeDiff"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TR km Verlust"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TimeDiffHours"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Zeitspanne Stunden"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RangeLostPerHour"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TR km Verlust pro Stunde"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 185
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "odometer"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "km Stand"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 99
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sleephours"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Standby Stunden"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 130
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sleeppercent"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Standby"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndDate"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 155
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsLocal"
+              },
+              {
+                "id": "displayName",
+                "value": "Enddatum"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "StartDateRAW"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EndDateRAW"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 21,
+        "h": 22,
         "w": 24,
         "x": 0,
         "y": 0
       },
       "id": 2,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "options": {
+        "footer": {
+          "fields": [
+            "RangeDiff",
+            "RangeLostPerHour",
+            "TimeDiffHours",
+            "sleephours",
+            "sleeppercent"
+          ],
+          "reducer": [
+            "mean"
+          ],
+          "show": true
+        },
+        "showHeader": true
       },
-      "styles": [
-        {
-          "$$hashKey": "object:143",
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "$$hashKey": "object:144",
-          "alias": "Startdatum",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTooltip": "",
-          "linkUrl": "d/zm7wN6Zgz/verbrauch?orgId=1&from=${__cell_0}&to=${__cell_2}",
-          "mappingType": 1,
-          "pattern": "StartDate",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:145",
-          "alias": "Enddatum",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndDate",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:146",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndPos",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:147",
-          "alias": "TR km Start",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "StartRange",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:148",
-          "alias": "TR km Ende",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "EndRange",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:149",
-          "alias": "TR km Verlust",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "RangeDiff",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:150",
-          "alias": "Zeitspanne Stunden",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "TimeDiffHours",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:151",
-          "alias": "TR km Verlust pro Stunde",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "RangeLostPerHour",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:152",
-          "alias": "km Stand",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "odometer",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:153",
-          "alias": "Standby Stunden",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "sleephours",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "$$hashKey": "object:154",
-          "alias": "Standby",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "sleeppercent",
-          "thresholds": [],
-          "type": "number",
-          "unit": "percent"
-        },
-        {
-          "$$hashKey": "object:155",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "PC0C98BF192F75B00"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n    UNIX_TIMESTAMP(T1.EndDate) * 1000 as StartDate,\r\n    TP1.address as Adresse,\r\n    UNIX_TIMESTAMP(T2.StartDate) * 1000 as EndDate,\r\n    T2.StartPos as EndPos,\r\n    TP2.odometer,\r\n    TP1.ideal_battery_range_km as StartRange,\r\n    TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\r\n    TP1.ideal_battery_range_km - (\r\n        select\r\n            EndRange\r\n    ) as RangeDiff,\r\n    timestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\r\n    (\r\n        select\r\n            RangeDiff / TimeDiffHours\r\n    ) as RangeLostPerHour,\r\n    (\r\n        SELECT\r\n            sum(TIMESTAMPDIFF(MINUTE, StartDate, EndDate) / 60)\r\n        FROM\r\n            state\r\n        where\r\n            (state = 'asleep' or state = 'offline')\r\n            and StartDate >= T1.EndDate\r\n            and EndDate <= T2.StartDate\r\n            and EndDate > StartDate\r\n            and carid=$Car \r\n    ) as sleephours,\r\n    (\r\n        select\r\n            sleephours / TimeDiffHours * 100\r\n    ) as sleeppercent\r\nFROM\r\n    drivestate as T1\r\n    left outer join drivestate as T2 on T1.id + 1 = T2.id\r\n    left outer Join pos as TP1 on T1.EndPos = TP1.id\r\n    left outer join pos as TP2 on T2.StartPos = TP2.id\r\nwhere\r\n    $__timeFilter(T1.EndDate) and T1.carid=$Car \r\n    and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0\r\n    and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60\r\n    and TP2.odometer - TP1.odometer < 1\r\n    and (TP2.odometer - TP1.odometer) >= 0\r\n    and TP2.carid=$Car \r\n    and TP1.carid=$Car \r\norder by T1.EndDate",
+          "rawSql": "SELECT\r\n    UNIX_TIMESTAMP(T1.EndDate) * 1000 as StartDate,\r\n    TP1.address as Adresse,\r\n    UNIX_TIMESTAMP(T2.StartDate) * 1000 as EndDate,\r\n    TP2.odometer,\r\n    TP1.ideal_battery_range_km as StartRange,\r\n    TP2.ideal_battery_range_km + (TP2.odometer - TP1.odometer) as EndRange,\r\n    TP1.ideal_battery_range_km - (\r\n        select\r\n            EndRange\r\n    ) as RangeDiff,\r\n    timestampdiff(MINUTE, T1.EndDate, T2.StartDate) / 60 as TimeDiffHours,\r\n    (\r\n        select\r\n            RangeDiff / TimeDiffHours\r\n    ) as RangeLostPerHour,\r\n    (\r\n        SELECT\r\n            sum(TIMESTAMPDIFF(MINUTE, StartDate, EndDate) / 60)\r\n        FROM\r\n            state\r\n        where\r\n            (state = 'asleep' or state = 'offline')\r\n            and StartDate >= T1.EndDate\r\n            and EndDate <= T2.StartDate\r\n            and EndDate > StartDate\r\n            and carid=$Car \r\n    ) as sleephours,\r\n    (\r\n        select\r\n            sleephours / TimeDiffHours * 100\r\n    ) as sleeppercent,\r\n    T2.StartPos as EndPos,\r\n    UNIX_TIMESTAMP(T1.EndDate) * 1000 as StartDateRAW,\r\n    UNIX_TIMESTAMP(T2.StartDate) * 1000 as EndDateRAW\r\nFROM\r\n    drivestate as T1\r\n    left outer join drivestate as T2 on T1.id + 1 = T2.id\r\n    left outer Join pos as TP1 on T1.EndPos = TP1.id\r\n    left outer join pos as TP2 on T2.StartPos = TP2.id\r\nwhere\r\n    $__timeFilter(T1.EndDate) and T1.carid=$Car \r\n    and TP1.ideal_battery_range_km - TP2.ideal_battery_range_km >= 0\r\n    and timestampdiff(MINUTE, T1.EndDate, T2.StartDate) > 60\r\n    and TP2.odometer - TP1.odometer < 1\r\n    and (TP2.odometer - TP1.odometer) >= 0\r\n    and TP2.carid=$Car \r\n    and TP1.carid=$Car \r\norder by T1.EndDate desc",
           "refId": "A",
           "select": [
             [
@@ -304,26 +410,36 @@
         }
       ],
       "title": "Vampir Drain",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     }
   ],
-  "schemaVersion": 19,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "text": "",
+          "selected": false,
+          "text": "Two weeks",
           "value": "1"
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "Car",
+        "label": "",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -333,7 +449,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -372,5 +487,6 @@
   "timezone": "",
   "title": "Vampir Drain",
   "uid": "zhHx2Fggk",
-  "version": 159
+  "version": 5,
+  "weekStart": ""
 }

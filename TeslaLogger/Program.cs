@@ -12,6 +12,9 @@ namespace TeslaLogger
     internal class Program
     {
         public static bool VERBOSE = false;
+        public static bool SQLTRACE = false;
+        public static bool SQLFULLTRACE = false;
+        public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 1;
         public static int SuspendAPIMinutes = 30;
 
@@ -115,34 +118,39 @@ namespace TeslaLogger
             {
                 foreach (DataRow r in dt.Rows)
                 {
-                    int id = 0;
-                    try
-                    {
-                        id = Convert.ToInt32(r["id"], Tools.ciDeDE);
-                        String Name = r["tesla_name"].ToString();
-                        String Password = r["tesla_password"].ToString();
-                        int carid = r["tesla_carid"] as Int32? ?? 0;
-                        String tesla_token = r["tesla_token"] as String ?? "";
-                        DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
-                        string Model_Name = r["Model_Name"] as String ?? "";
-                        string car_type = r["car_type"] as String ?? "";
-                        string car_special_type = r["car_special_type"] as String ?? "";
-                        string car_trim_badging = r["car_trim_badging"] as String ?? "";
-                        string display_name = r["display_name"] as String ?? "";
-                        string vin = r["vin"] as String ?? "";
-                        string tasker_hash = r["tasker_hash"] as String ?? "";
-                        double? wh_tr = r["wh_tr"] as double?;
-
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                        Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                    }
-                    catch (Exception ex)
-                    {
-                        Logfile.Log(id + "# :" + ex.ToString());
-                    }
+                    StartCarThread(r);
                 }
                 dt.Clear();
+            }
+        }
+
+        internal static void StartCarThread(DataRow r)
+        {
+            int id = 0;
+            try
+            {
+                id = Convert.ToInt32(r["id"], Tools.ciDeDE);
+                String Name = r["tesla_name"].ToString();
+                String Password = r["tesla_password"].ToString();
+                int carid = r["tesla_carid"] as Int32? ?? 0;
+                String tesla_token = r["tesla_token"] as String ?? "";
+                DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
+                string Model_Name = r["Model_Name"] as String ?? "";
+                string car_type = r["car_type"] as String ?? "";
+                string car_special_type = r["car_special_type"] as String ?? "";
+                string car_trim_badging = r["car_trim_badging"] as String ?? "";
+                string display_name = r["display_name"] as String ?? "";
+                string vin = r["vin"] as String ?? "";
+                string tasker_hash = r["tasker_hash"] as String ?? "";
+                double? wh_tr = r["wh_tr"] as double?;
+
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(id + "# :" + ex.ToString());
             }
         }
 
@@ -215,7 +223,12 @@ namespace TeslaLogger
             if (ApplicationSettings.Default.VerboseMode)
             {
                 VERBOSE = true;
-                Logfile.Log("VerboseMode ON");
+                Logfile.Log("VerboseMode: ON");
+            }
+            if (ApplicationSettings.Default.SQLTrace)
+            {
+                SQLTRACE = true;
+                Logfile.Log("SQLTrace: ON");
             }
         }
 

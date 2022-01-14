@@ -280,33 +280,46 @@ JOIN pos ON
             {
                 using (MySqlDataAdapter da = new MySqlDataAdapter($@"
 SELECT DISTINCT
-  round(lat, 4) as lat,
-  round(lng, 4) as lng
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
 FROM
-  pos    
-LEFT JOIN
-  chargingstate ON pos.id = chargingstate.pos
-WHERE
-  pos.id IN (
-  SELECT
     pos
-  FROM
+WHERE
+    pos.id IN(
+SELECT
+    pos
+FROM
     chargingstate
-  )
-  OR pos.id IN (
-  SELECT
-    StartPos
-  FROM
-    drivestate
-  )
-  OR pos.id IN (
-  SELECT
+)
+UNION ALL
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+    SELECT
+        StartPos
+    FROM
+        drivestate
+)
+UNION ALL
+SELECT DISTINCT
+    ROUND(lat, 4) AS lat,
+    ROUND(lng, 4) AS lng
+FROM
+    pos
+WHERE
+    pos.id IN(
+SELECT
     EndPos
-  FROM
+FROM
     drivestate
-  )", DBHelper.DBConnectionstring))
+)", DBHelper.DBConnectionstring))
                 {
-                    da.Fill(dt);
+                    da.SelectCommand.CommandTimeout = 600;
+                    SQLTracer.TraceDA(dt, da);
                 }
                 foreach (DataRow dr in dt.Rows)
                 {

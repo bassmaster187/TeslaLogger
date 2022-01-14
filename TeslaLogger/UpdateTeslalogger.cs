@@ -86,6 +86,8 @@ namespace TeslaLogger
 
                 // start schema update
 
+                Journeys.CheckSchema();
+
                 if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
                     Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
@@ -298,7 +300,7 @@ namespace TeslaLogger
                                 cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                                 cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                                 cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
                             }
                         }
                     }
@@ -332,6 +334,13 @@ namespace TeslaLogger
                 {
                     Logfile.Log("alter table chargingstate add index chargingsate_ix_pos (Pos)");
                     DBHelper.ExecuteSQLQuery("alter table chargingstate add index chargingsate_ix_pos (Pos)", 6000);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ixAnalyzeChargingStates1", "chargingstate"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 ...");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD INDEX ixAnalyzeChargingStates1 (id, CarID, StartChargingID, EndChargingID)", 6000);
                     Logfile.Log("ALTER TABLE OK");
                 }
 
@@ -438,8 +447,7 @@ CREATE TABLE superchargerstate(
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                         {
-                            Tools.DebugLog(cmd);
-                            MySqlDataReader dr = cmd.ExecuteReader();
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read() && dr[0] != DBNull.Value)
                             {
                                 if (int.TryParse(dr[0].ToString(), out int datetime_precision))
@@ -563,6 +571,26 @@ CREATE TABLE superchargerstate(
                     DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
                 }
 
+                if (!DBHelper.IndexExists("ix_startpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_startpos (StartPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_endpos", "drivestate"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)", 600);
+                    Logfile.Log("ALTER TABLE OK");
+                }
+
+                if (!DBHelper.IndexExists("ix_id_ts", "mothership"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)");
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)", 1200);
+                    Logfile.Log("ALTER TABLE OK");
+                }
 
 
                 // end of schema update
@@ -668,8 +696,11 @@ CREATE TABLE superchargerstate(
                 Chmod("cmd_updated.txt", 666);
                 Chmod("MQTTClient.exe.config", 666);
 
-                Logfile.Log("Create backup");
-                Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+                if (!File.Exists("NOBACKUPONUPDATE"))
+                {
+                    Logfile.Log("Create backup");
+                    Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
+                }
                 
                 if (!Tools.ExecMono("git", "--version", false).Contains("git version"))
                 {
@@ -890,7 +921,7 @@ CREATE TABLE superchargerstate(
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
                             string charset = dr[0].ToString();
@@ -902,7 +933,7 @@ CREATE TABLE superchargerstate(
                                 Logfile.Log("Chage database charset to utf8mb4");
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    cmd2.ExecuteNonQuery();
+                                    SQLTracer.TraceNQ(cmd2);
                                 }
                             }
                         }
@@ -920,9 +951,13 @@ CREATE TABLE superchargerstate(
             try
             {
                 string phpinipath = "/etc/php/7.0/apache2/php.ini";
+
+                if (!File.Exists(phpinipath))
+                    phpinipath = "/etc/php/7.3/apache2/php.ini";
+
                 if (File.Exists(phpinipath))
                 {
-                    string phpini = File.ReadAllText("/etc/php/7.0/apache2/php.ini");
+                    string phpini = File.ReadAllText(phpinipath);
                     string newphpini = Regex.Replace(phpini, "(post_max_size\\s*=)(.*)", "$1 150M");
                     newphpini = Regex.Replace(newphpini, "(upload_max_filesize\\s*=)(.*)", "$1 150M");
 
@@ -1099,47 +1134,12 @@ CREATE TABLE superchargerstate(
 
                     Logfile.Log("Start Grafana update");
 
-                    string GrafanaVersion = Tools.GetGrafanaVersion();
-                    if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3")
+                    if (!Tools.IsDocker())
                     {
-                        Thread threadGrafanaUpdate = new Thread(() =>
-                        {
-                            string GrafanaFilename = "grafana_7.2.0_armhf.deb";
-
-                            Logfile.Log("upgrade Grafana to 7.2.0!");
-
-                            if (File.Exists(GrafanaFilename))
-                                File.Delete(GrafanaFilename);
-
-                            // use internal downloader
-                            const string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_7.2.0_armhf.deb";
-                            const string grafanaFile = "grafana_7.2.0_armhf.deb";
-                            if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
-                            {
-                                // fallback to wget
-                                Logfile.Log($"fallback o wget to download {grafanaUrl}");
-                                Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
-                            }
-
-                            if (File.Exists(GrafanaFilename))
-                            {
-                                Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
-
-                                if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
-                                    Tools.ExecMono("dpkg", "-r grafana-rpi");
-
-                                Tools.ExecMono("dpkg", "-i --force-overwrite grafana_7.2.0_armhf.deb");
-                            }
-
-                            Logfile.Log("upgrade Grafana DONE!");
-
-                            Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
-                        })
-                        {
-                            Name = "GrafanaUpdate"
-                        };
-                        threadGrafanaUpdate.Start();
+                        AllowUnsignedPlugins("/etc/grafana/grafana.ini", true);
                     }
+
+                    UpdateGrafanaVersion();
 
                     // TODO Logfile.Log(" Wh/TR km: " + wh.car.Wh_TR);
 
@@ -1150,6 +1150,10 @@ CREATE TABLE superchargerstate(
                     Tools.ExecMono("mkdir", "/etc/teslalogger/tmp/Grafana");
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
+
+                    var DatasourceUID = "000000001";
+                    if (Tools.IsDocker())
+                        DatasourceUID = "PC0C98BF192F75B00";
 
                     UpdateDBView();
 
@@ -1290,6 +1294,7 @@ CREATE TABLE superchargerstate(
                             Logfile.Log("Convert to language: " + language);
 
                             s = ReplaceAliasTags(s, dictLanguage);
+                            s = ReplaceValuesTags(s, dictLanguage);
 
                             if (f.EndsWith("Akku Trips.json", StringComparison.Ordinal))
                             {
@@ -1454,6 +1459,8 @@ CREATE TABLE superchargerstate(
 
                         s = UpdateDefaultCar(s, defaultcar, defaultcarid, carLabel);
 
+                        s = UpdateDatasourceUID(s, DatasourceUID);
+
                         if (!title.Contains("ScanMyTesla") && !title.Contains("Zelltemperaturen") && !title.Contains("SOC ") && !title.Contains("Chargertype") && !title.Contains("Mothership"))
                             dashboardlinks.Add(title + "|" + link);
 
@@ -1478,6 +1485,7 @@ CREATE TABLE superchargerstate(
 
                     if (!Tools.IsDocker())
                     {
+                        Tools.ExecMono("grafana-cli", "admin data-migration encrypt-datasource-passwords");
                         Tools.ExecMono("service", "grafana-server restart");
                     }
 
@@ -1494,6 +1502,119 @@ CREATE TABLE superchargerstate(
             {
                 Logfile.Log("End Grafana update");
             }
+        }
+
+        internal static string UpdateDatasourceUID(string s, string v)
+        {
+            string pattern = "(\\\"datasource\\\":\\s+{\\s+\\\"type\\\":\\s+\\\"mysql\\\",\\s+\\\"uid\\\":\\s+\\\")(.*?)(\\\")";
+            Regex r = new Regex(pattern, RegexOptions.Compiled | RegexOptions.Singleline);
+            var m = r.Match(s);
+            if (!m.Success)
+            {
+                // Logfile.Log("datasource not found!!!");
+                return s;
+            }            
+
+            s = r.Replace(s, "${1}" + v +"${3}");
+
+            return s;
+        }
+
+        private static void UpdateGrafanaVersion()
+        {
+            string newversion = "8.3.2";
+
+            string GrafanaVersion = Tools.GetGrafanaVersion();
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1")
+            {
+                Thread threadGrafanaUpdate = new Thread(() =>
+                {
+                    string GrafanaFilename = $"grafana_{newversion}_armhf.deb";
+
+                    Logfile.Log($"upgrade Grafana to {newversion}!");
+
+                    if (File.Exists(GrafanaFilename))
+                        File.Delete(GrafanaFilename);
+
+                    // use internal downloader
+                    string grafanaUrl = "https://dl.grafana.com/oss/release/grafana_"+ newversion +"_armhf.deb";
+                    string grafanaFile = $"grafana_{newversion}_armhf.deb";
+                    if (!Tools.DownloadToFile(grafanaUrl, grafanaFile, 300, true).Result)
+                    {
+                        // fallback to wget
+                        Logfile.Log($"fallback o wget to download {grafanaUrl}");
+                        Tools.ExecMono("wget", $"{grafanaUrl}  --show-progress");
+                    }
+
+                    if (File.Exists(GrafanaFilename))
+                    {
+                        Logfile.Log(GrafanaFilename + " Sucessfully Downloaded -  Size:" + new FileInfo(GrafanaFilename).Length);
+
+                        if (GrafanaVersion == "6.7.3") // first Raspberry PI4 install
+                            Tools.ExecMono("dpkg", "-r grafana-rpi");
+
+                        Tools.ExecMono("dpkg", $"-i --force-overwrite grafana_{newversion}_armhf.deb");
+                    }
+
+                    Logfile.Log("upgrade Grafana DONE!");
+
+                    Tools.CopyFilesRecursively(new DirectoryInfo("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"), new DirectoryInfo("/var/lib/grafana/plugins"));
+                })
+                {
+                    Name = "GrafanaUpdate"
+                };
+                threadGrafanaUpdate.Start();
+            }
+        }
+
+        internal static string AllowUnsignedPlugins(string path, bool overwrite)
+        {
+            try
+            {
+                Logfile.Log("Start Grafana.ini -> AllowUnsignedPlugins");
+
+                var content = File.ReadAllText(path);
+                if (content.Contains("[plugins]"))
+                {
+                    if (!content.Contains("allow_loading_unsigned_plugins"))
+                    {
+                        Logfile.Log("Grafana.ini -> AllowUnsignedPlugins with [plugin] section");
+                        content = content.Replace("[plugins]", "[plugins]\r\nallow_loading_unsigned_plugins=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel\r\n");
+                        if (overwrite)
+                        {
+                            File.WriteAllText(path, content);
+                            Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Write File");
+                        }
+                        return content;
+                    }
+
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Plugins Section available");
+                    return content;
+                }
+
+                if (content.Contains("allow_loading_unsigned_plugins"))
+                {
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - allow_loading_unsigned_plugins available");
+                    return content;
+                }
+
+                Logfile.Log("Grafana.ini -> AllowUnsignedPlugins");
+
+                content += "[plugins]\r\nallow_loading_unsigned_plugins=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel\r\n";
+
+                if (overwrite)
+                {
+                    File.WriteAllText(path, content);
+                    Logfile.Log("Grafana.ini -> AllowUnsignedPlugins - Write File");
+                }
+                return content;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
         }
 
         private static void CopyLanguageFileToTimelinePanel(string language)
@@ -1575,6 +1696,27 @@ CREATE TABLE superchargerstate(
             }
         }
 
+        internal static string ReplaceValuesTags(string content, Dictionary<string, string> dictLanguage)
+        {
+            try
+            {
+                Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"(.+)\\\"");
+
+                MatchCollection matches = regexAlias.Matches(content);
+
+                foreach (Match match in matches)
+                {
+                    content = ReplaceValueTag(content, match.Groups[1].Value, dictLanguage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return content;
+        }
+
         private static string ReplaceAliasTags(string content, Dictionary<string, string> dictLanguage)
         {
             try
@@ -1606,6 +1748,20 @@ CREATE TABLE superchargerstate(
 
             Regex regexAlias = new Regex("\\\"alias\\\":.*?\\\"" + v + "\\\"");
             string replace = "\"alias\": \"" + dictLanguage[v] + "\"";
+
+            return regexAlias.Replace(content, replace);
+        }
+
+        private static string ReplaceValueTag(string content, string v, Dictionary<string, string> dictLanguage)
+        {
+            if (!dictLanguage.ContainsKey(v))
+            {
+                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                return content;
+            }
+
+            Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"" + v + "\\\"");
+            string replace = "\"value\": \"" + dictLanguage[v] + "\"";
 
             return regexAlias.Replace(content, replace);
         }

@@ -1164,7 +1164,9 @@ Aldi DE-Pforzheim, 48.902632, 8.663465
 Aldi DE-Putzbrunn, 48.081192,11.692257
 Aldi DE-Rastatt, 48.85911, 8.238882, 20
 Aldi DE-Rauenberg, 49.27325,8.695788, 20
-Aldi DE-Reutlingen, 48.495184,9.158096, 20
+Aldi DE-Reutlingen Karl-Henschel-Straße, 48.495184, 9.158096, 20
+Aldi DE-Reutlingen Heubergstraße, 48.512494, 9.217845, 20
+Aldi DE-Reutlingen Föhrstraße, 48.502283, 9.207886, 20
 Aldi DE-Rotheidlen, 47.731574,9.698803,20
 Aldi DE-Seeheim, 49.774399,8.636451
 Aldi DE-Stuttgart Bottroper Straße, 48.81756,9.214898,20
@@ -1314,6 +1316,7 @@ E.ON DE-Gütersloh Süd, 51.864908,8.369761
 E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
 E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Nord, 50.42368,10.349982
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
+E.ON DE-Pfalzfeld, 50.115373, 7.598476
 E.ON DE-Rheinbach Peppenhoven Ost, 50.644491, 6.942145
 E.ON DE-Rheinbach Peppenhoven West, 50.64325, 6.942062
 E.ON DE-Schallstadt Breisgau Ost, 47.970558, 7.72173, 20
@@ -1486,6 +1489,7 @@ EWE-SWB DE-Unterschleißheim,48.28377,11.563749,3
 
 Fastned BE-Oostende luchthaven, 51.205610, 2.871165
 Fastned DE-Blankenfelde-Mahlow, 52.309203, 13.443583, 20
+Fastned DE-Boppard-Buchholz, 50.21377, 7.548003
 Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
 Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
@@ -1970,7 +1974,6 @@ Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
 Innogy DE-Duisburg, 51.484186, 6.763764
 Innogy DE-Fürholzen West, 48.33747, 11.6081
 Innogy DE-Hunsrück Ost, 49.963783, 7.768701
-Innogy DE-Jettingen-Scheppach, 48.411054, 10.440180
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
 Innogy DE-Leipheim, 48.437494, 10.213398
 Innogy DE-Münsterland West, 51.945622, 7.547827

@@ -110,6 +110,10 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 		$output = preg_replace('/.*RunHousekeepingInBackground .*/', "", $output);
 		$output = preg_replace('/.*Table:.*data:.*index:.*rows:.*/', "", $output);
 
+		$output = preg_replace('/.*UpdateChargePrice.*/', "", $output);
+		$output = preg_replace('/.*CopyChargePrice.*/', "", $output);
+		$output = preg_replace('/.*UpdateChargeEnergyAdded.*/', "", $output);
+
 		// $output = preg_replace('/.*TeslaLogger process statistics.*/', "", $output);
 		$output = preg_replace('/.*WorkingSet64:\s+(\d+)+.*/', "", $output);
 		$output = preg_replace('/.*PrivateMemorySize64:\s+(\d+)+.*/', "", $output);

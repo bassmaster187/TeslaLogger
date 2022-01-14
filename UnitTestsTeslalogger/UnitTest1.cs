@@ -18,7 +18,7 @@ namespace UnitTestsTeslalogger
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
 
-            Tools.SetThread_enUS();
+            Tools.SetThreadEnUS();
             long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             unixTimestamp *= 1000;
             c.DbHelper.InsertPos(unixTimestamp.ToString(), 48.456691, 10.030241, 0, 0, 1, 0, 0, 0, 0, "0");
@@ -213,6 +213,25 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
             Assert.AreEqual(0.127, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_SRPlus_LFP_2021_60kWh()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 430, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7FA3MCCxxxxxx";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 138;
+            wh.car.TrimBadging = "50";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
+            Assert.AreEqual(0.138, wh.car.WhTR);
         }
 
         [TestMethod]
@@ -467,6 +486,15 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void UpdateDatasource()
+        {
+            var dashboard = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            dashboard = UpdateTeslalogger.UpdateDatasourceUID(dashboard, "000000001");
+
+            Assert.IsTrue(dashboard.Contains("\"uid\": \"000000001\""));
+        }
+
+        [TestMethod]
         public void POI()
         {
             var geofence = Geofence.GetInstance();
@@ -501,6 +529,23 @@ namespace UnitTestsTeslalogger
             Assert.IsFalse(s.Contains("km Stand [km]"));
             
         }
+
+        [TestMethod]
+        public void UpdateLanguageNewTable()
+        {
+            Dictionary<string, string> dictLanguage = UpdateTeslalogger.GetLanguageDictionary("ru");
+
+            string s = System.IO.File.ReadAllText("../../../TeslaLogger/Grafana/Trip.json");
+            s = UpdateTeslalogger.ReplaceValuesTags(s, dictLanguage);
+            Assert.IsFalse(s.Contains("Start Adresse"));
+        }
+
+        [TestMethod]
+        public void AllowUnsignedPlugins()
+        {
+            UpdateTeslalogger.AllowUnsignedPlugins("../../grafana.ini", false);
+        }
+
 
         [TestMethod]
         public void CreateAuthTokenFromRefreshToken()

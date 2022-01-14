@@ -13,6 +13,7 @@ namespace TeslaLogger
         public bool current_online = false;
         public bool current_sleeping = false;
         public bool current_falling_asleep = false;
+        private long timestamp = 0;
 
         public int current_speed = 0;
         public int current_power = 0;
@@ -45,8 +46,8 @@ namespace TeslaLogger
 
         public int current_trip_duration_sec = 0;
 
-        public double latitude = 0;
-        public double longitude = 0;
+        private double latitude = 0;
+        private double longitude = 0;
         public int charge_limit_soc = 0;
         public int heading = 0;
         public double current_inside_temperature = 0;
@@ -225,6 +226,36 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 current_json = "";
             }
+        }
+
+        public void SetPosition(double lat, double lng, long ts)
+        {
+            if (ts > timestamp)
+            {
+                latitude = lat;
+                longitude = lng;
+                timestamp = ts;
+            }
+        }
+
+        public double GetLatitude()
+        {
+            return latitude;
+        }
+
+        public double GetLongitude()
+        {
+            return longitude;
+        }
+
+        public void SetLatitude(double lat)
+        {
+            latitude = lat;
+        }
+
+        public void SetLongitude(double lng)
+        {
+            longitude = lng;
         }
     }
 }

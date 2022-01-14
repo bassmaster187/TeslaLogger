@@ -394,6 +394,10 @@ namespace TeslaLogger
                     return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri, true);
                 }
             }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
             catch (Exception ex)
             {
                 car.Passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
@@ -498,6 +502,10 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
             catch (Exception ex)
             {
@@ -1113,6 +1121,10 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
             catch (Exception ex)
             {
                 car.Log(ex.ToString());
@@ -1299,7 +1311,7 @@ namespace TeslaLogger
 
                 if (charging_state == "Charging")
                 {
-                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.latitude, car.CurrentJSON.longitude);
+                    _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
 
                     lastCharging_State = charging_state;
                     car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
@@ -1765,7 +1777,7 @@ namespace TeslaLogger
 
             if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out _, out string battery, out string motor);
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor);
 
                 int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
@@ -1774,7 +1786,10 @@ namespace TeslaLogger
                     {
                         if (!AWD)
                         {
-                            WriteCarSettings("0.145", "M3 LR RWD");
+                            if (MIC)
+                                WriteCarSettings("0.138", "M3 SR+ LFP 2021");
+                            else
+                                WriteCarSettings("0.145", "M3 LR RWD");
                             return;
                         }
                         else if (motor == "3 dual performance" && year == 2021)
@@ -2248,9 +2263,7 @@ namespace TeslaLogger
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
 
-                car.CurrentJSON.latitude = latitude;
-                car.CurrentJSON.longitude = longitude;
-                car.CurrentJSON.heading = heading;
+                car.CurrentJSON.SetPosition(latitude, longitude, ts);
 
                 int speed = 0;
                 if (r2["speed"] != null)
@@ -2685,7 +2698,7 @@ namespace TeslaLogger
                     last_latitude_streaming = latitude;
                     last_longitude_streaming = longitude;
                     last_power_streaming = dpower;
-                    Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
+                    //Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
                     car.DbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
             }
@@ -2934,15 +2947,15 @@ namespace TeslaLogger
         {
             try
             {
-                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    con2.Open();
-                    using (MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address, altitude=@altitude where id = @id", con2))
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update pos set address=@address, altitude=@altitude where id = @id", con))
                     {
-                        cmd2.Parameters.AddWithValue("@id", id);
-                        cmd2.Parameters.AddWithValue("@address", address);
-                        cmd2.Parameters.AddWithValue("@altitude", altitude);
-                        cmd2.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@address", address);
+                        cmd.Parameters.AddWithValue("@altitude", altitude);
+                        SQLTracer.TraceNQ(cmd);
 
                         System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + address);
                     }
@@ -2976,7 +2989,7 @@ namespace TeslaLogger
                     ((pos_end.odometer - pos_start.odometer) > 0.1) and (pos_start.address IS null or pos_end.address IS null or pos_start.address = '' or pos_end.address = '')", con))
                 {
 
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {
                         Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
@@ -3030,7 +3043,7 @@ namespace TeslaLogger
                 using (MySqlCommand cmd = new MySqlCommand(@"SELECT pos.id, lat, lng FROM chargingstate join pos on chargingstate.Pos = pos.id where address IS null OR address = '' or pos.id = ''", con))
                 {
 
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     while (dr.Read())
                     {
                         Thread.Sleep(10000); // Sleep to not get banned by Nominatim !
@@ -3079,7 +3092,7 @@ namespace TeslaLogger
 
                     using (MySqlCommand cmdBucket = new MySqlCommand(@"SELECT distinct Pos FROM chargingstate union distinct SELECT StartPos FROM drivestate union distinct SELECT EndPos FROM drivestate order by Pos", con))
                     {
-                        var bucketdr = cmdBucket.ExecuteReader();
+                        var bucketdr = SQLTracer.TraceDR(cmdBucket);
                         var loop = true;
 
                         do
@@ -3130,7 +3143,7 @@ namespace TeslaLogger
                         left join chargingstate on pos.id = chargingstate.pos
                         where pos.id in (" + bucket + ")", con))
                 {
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
 
                     while (dr.Read())
                     {
@@ -3154,7 +3167,7 @@ namespace TeslaLogger
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
 
-                    MySqlDataReader dr = cmd.ExecuteReader();
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     int count = 0;
                     while (dr.Read())
                     {
@@ -3194,7 +3207,7 @@ namespace TeslaLogger
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
                             cmd2.Parameters.AddWithValue("@address", a.name);
-                            cmd2.ExecuteNonQuery();
+                            SQLTracer.TraceNQ(cmd2);
 
                             count++;
                         }

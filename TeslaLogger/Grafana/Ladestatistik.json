@@ -1019,7 +1019,7 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "sum(charging_End.charge_energy_added)",
+      "tableColumn": "",
       "targets": [
         {
           "format": "table",

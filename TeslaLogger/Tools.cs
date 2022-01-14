@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -53,7 +52,6 @@ namespace TeslaLogger
         public enum UpdateType { all, stable, none};
 
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
-        private static bool SQLTRACE = false;
 
         public static void SetThreadEnUS()
         {
@@ -65,18 +63,18 @@ namespace TeslaLogger
             return (long)(dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static void DebugLog(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            if (SQLTRACE)
+            if (Program.SQLTRACE)
             {
                 try
                 {
                     string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
+                    DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
                 }
                 catch (Exception ex)
                 {
-                    DebugLog("Exception in SQL DEBUG", ex);
+                    DebugLog("Exception in SQL DEBUG", ex, prefix);
                 }
             }
         }
@@ -90,7 +88,7 @@ namespace TeslaLogger
                 {
                     msg += (column == 0 ? "" : "|") + dr.GetName(column) + "<" + dr.GetValue(column) + ">";
                 }
-                DebugLog($"{callerMemberName}: " + msg, null, callerFilePath, callerLineNumber);
+                DebugLog($"{callerMemberName}: " + msg, null, "", callerFilePath, callerLineNumber);
             }
         }
 
@@ -158,9 +156,9 @@ namespace TeslaLogger
             return msg;
         }
 
-        public static void DebugLog(string text, Exception ex = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+        public static void DebugLog(string text, Exception ex = null, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
-            string temp = "DEBUG : " + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
+            string temp = "DEBUG : " + prefix + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
             AddToBuffer(temp);
             if (Program.VERBOSE)
             {
@@ -1289,9 +1287,9 @@ namespace TeslaLogger
 
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
-            long freeDiskSpaceNeeded = 1024;
+            long freeDiskSpaceNeeded = 2048;
 
-            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 1GB of free disk space
+            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 2GB of free disk space
                 return;
 
 
@@ -1362,7 +1360,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@dbname", DBHelper.Database);
                     try
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
                             Logfile.Log($"Table: {dr[0],20} data:{dr[1],5} MB index:{dr[2],5} MB rows:{dr[3],10}");
@@ -1416,7 +1414,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
                     try
                     {
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
                             _ = long.TryParse(dr[0].ToString(), out mothershipCount);
@@ -1447,7 +1445,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                cmd.ExecuteNonQuery();
+                                SQLTracer.TraceNQ(cmd);
                             }
                             catch (Exception ex)
                             {
@@ -1457,29 +1455,6 @@ WHERE
                         }
                     }
                     Thread.Sleep(1000);
-                }
-                // report again
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM mothership WHERE ts < @tsdate", con))
-                    {
-                        cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-GetMothershipKeepDays()));
-                        try
-                        {
-                            MySqlDataReader dr = cmd.ExecuteReader();
-                            if (dr.Read())
-                            {
-                                _ = long.TryParse(dr[0].ToString(), out mothershipCount);
-                                Logfile.Log($"Housekeeping: database.mothership older than {GetMothershipKeepDays()} days count: " + mothershipCount);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logfile.Log(ex.ToString());
-                        }
-                        con.Close();
-                    }
                 }
             }
         }

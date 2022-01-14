@@ -513,7 +513,7 @@ namespace TeslaLogger
 
                 if (Geofence.GetInstance().RacingMode)
                 {
-                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude);
+                    Address a = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
                     if (a != null)
                     {
                         if (lastRacingPoint == null)
@@ -681,7 +681,7 @@ namespace TeslaLogger
                             SetCurrentState(TeslaState.Start);
 
                             webhelper.IsDriving(true); // kurz bevor er schlafen geht, eine Positionsmeldung speichern und schauen ob standheizung / standklima / sentry läuft.
-                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
                             if (!CanFallAsleep(out string reason))
                             {
                                 Log($"Reason:{reason} prevents car to get sleep");
@@ -1044,7 +1044,7 @@ namespace TeslaLogger
         {
             Log("ShiftStateChange: " + oldState + " -> " + newState);
             lastCarUsed = DateTime.Now;
-            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+            Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
             // process special flags for POI
             if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
             {
@@ -1269,8 +1269,8 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
                 _ = webhelper.GetOdometerAsync();
-                Tools.DebugLog($"Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.latitude}, lon:{CurrentJSON.longitude})");
-                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.latitude, CurrentJSON.longitude);
+                Tools.DebugLog($"Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.GetLatitude()}, lon:{CurrentJSON.GetLongitude()})");
+                _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
 
             }
             // any -> Driving
@@ -1288,7 +1288,7 @@ namespace TeslaLogger
             if (_oldState != TeslaState.Charge && _newState == TeslaState.Charge)
             {
                 // evaluate +hfl special flag
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
@@ -1320,7 +1320,7 @@ namespace TeslaLogger
             // driving -> any
             if (_oldState == TeslaState.Drive && _newState != TeslaState.Drive)
             {
-                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.latitude, CurrentJSON.longitude, false);
+                Address addr = Geofence.GetInstance().GetPOI(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), false);
                 if (addr != null && addr.specialFlags != null && addr.specialFlags.Count > 0)
                 {
                     foreach (KeyValuePair<Address.SpecialFlags, string> flag in addr.specialFlags)
@@ -1357,6 +1357,27 @@ namespace TeslaLogger
             }
         }
 
+        internal void Restart(string reason, int waitSeconds)
+        {
+            ExitTeslaLogger(reason);
+
+            ThreadJoin();
+
+            Logfile.Log("Restart Car " + CarInDB);
+
+            new Thread(() =>
+            {
+                Thread.Sleep(waitSeconds * 1000);
+
+                var dr = DBHelper.GetCar(CarInDB);
+                if (dr != null)
+                {
+                    Logfile.Log("Start Car " + CarInDB);
+                    Program.StartCarThread(dr);
+                }
+
+            }).Start();
+        }
 
         private void SetCurrentState(TeslaState _newState)
         {
@@ -1535,7 +1556,7 @@ WHERE
 id = @carid", con))
                     {
                         cmd.Parameters.Add("@carid", MySqlDbType.UByte).Value = CarInDB;
-                        MySqlDataReader dr = cmd.ExecuteReader();
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                         {
                             return freesuc == 1;
