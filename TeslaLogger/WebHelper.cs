@@ -394,6 +394,10 @@ namespace TeslaLogger
                     return GetTokenAsync2(code_challenge, m, state, code_verifier, b.Uri, true);
                 }
             }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
             catch (Exception ex)
             {
                 car.Passwortinfo.Append("Error in GetTokenAsync: " + ex.Message + "<br>");
@@ -498,6 +502,10 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
             catch (Exception ex)
             {
@@ -1112,6 +1120,10 @@ namespace TeslaLogger
                         return Tesla_token;
                     }
                 }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
             catch (Exception ex)
             {

@@ -1357,6 +1357,27 @@ namespace TeslaLogger
             }
         }
 
+        internal void Restart(string reason, int waitSeconds)
+        {
+            ExitTeslaLogger(reason);
+
+            ThreadJoin();
+
+            Logfile.Log("Restart Car " + CarInDB);
+
+            new Thread(() =>
+            {
+                Thread.Sleep(waitSeconds * 1000);
+
+                var dr = DBHelper.GetCar(CarInDB);
+                if (dr != null)
+                {
+                    Logfile.Log("Start Car " + CarInDB);
+                    Program.StartCarThread(dr);
+                }
+
+            }).Start();
+        }
 
         private void SetCurrentState(TeslaState _newState)
         {

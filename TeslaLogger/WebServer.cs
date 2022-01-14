@@ -229,6 +229,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
                         GetCurrentJson(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/restart/[0-9]+"):
+                        Restart(request, response);
+                        break;
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/decodecar/[0-9]+"):
                         DecodeCar(request, response);
                         break;
@@ -290,6 +293,27 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void Restart(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/restart/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    Car.GetCarByID(CarID)?.Restart("Webserver Restart",1);
+                    WriteString(response, "OK");
+                }
+                catch (Exception ex)
+                {
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
             }
         }
 
@@ -1215,16 +1239,7 @@ namespace TeslaLogger
                             Car c = Car.GetCarByID(id);
                             if (c != null)
                             {
-                                c.ExitTeslaLogger("Reconnect!");
-                                c.Passwortinfo = new StringBuilder();
-
-                                c.ThreadJoin();
-
-                                Logfile.Log("Start Reconnect!");
-
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                Car nc = new Car(c.CarInDB, c.TeslaName, c.TeslaPasswort, c.CarInAccount, "", DateTime.MinValue, c.ModelName, c.CarType, c.CarSpecialType, c.TrimBadging, c.DisplayName, c.Vin, c.TaskerHash, c.WhTR);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                                c.Restart("Reconnect!",5);
                             }
 
                             WriteString(response, "OK");

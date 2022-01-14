@@ -1063,8 +1063,15 @@ HAVING
                         int done = SQLTracer.TraceNQ(cmd);
 
                         car.Log("update tesla_token OK: " + done);
+
+                        car.ExternalLog("UpdateTeslaToken");
+                        car.Restart("Access Token updated", 60);
                     }
                 }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
             catch (Exception ex)
             {
