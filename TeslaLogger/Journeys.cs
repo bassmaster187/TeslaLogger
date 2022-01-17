@@ -320,6 +320,9 @@ LIMIT 1", con))
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysCreateEnd"], StringComparison.Ordinal):
                     JourneysCreateEnd(request, response);
                     break;
+                case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysCreateCreate"], StringComparison.Ordinal):
+                    JourneysCreateCreate(request, response);
+                    break;
                 case bool _ when request.Url.LocalPath.Equals(EndPoints["JourneysDelete"], StringComparison.Ordinal):
                     JourneysDelete(request, response);
                     break;
