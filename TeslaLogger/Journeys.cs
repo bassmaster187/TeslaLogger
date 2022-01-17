@@ -157,7 +157,7 @@ ORDER BY
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(((DateTime)dr[1]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(((DateTime)dr[1]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
                             }
                         }
                     }
