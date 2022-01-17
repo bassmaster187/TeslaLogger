@@ -595,13 +595,13 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(((DateTime)dr[5]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
 <td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
 <td>{WebUtility.HtmlEncode(((DateTime)dr[8]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
+<td>{WebUtility.HtmlEncode(((Double)dr[10]).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
+<td>{WebUtility.HtmlEncode(((Double)dr[14]).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
 <td>{WebUtility.HtmlEncode(((double)dr[10] / (double)dr[14] * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated charge eff-->
 <td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[11].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.drive_duration_minutes-->
 <td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[13].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.charge_duration_minutes-->
 <td>{WebUtility.HtmlEncode(((double)(int)dr[11] / (double)((int)dr[11] + (int)dr[13]) * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated drive vs. charge-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
+<td>{WebUtility.HtmlEncode(((Double)dr[12]).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
 <td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
 <td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
 <td><form action=""{EndPoints["JourneysDelete"]}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>

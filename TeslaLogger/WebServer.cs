@@ -841,11 +841,15 @@ namespace TeslaLogger
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             while (dr.Read())
                             {
-                                if (double.TryParse(dr[0].ToString(), out double lat)
-                                     && double.TryParse(dr[1].ToString(), out double lng)
-                                     && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
+                                if (dr[0] is Double && 
+                                     dr[1] is Double &&
+                                     dr[2] is DateTime)
                                 {
-                                    string Pos = ($"lat=\"{lat}\" lon=\"{lng}\"");
+                                    double lat = (double)dr[0];
+                                    double lng = (double)dr[1];
+                                    DateTime Datum = (DateTime)dr[2];
+
+                                    string Pos = ($"lat=\"{lat.ToString(Tools.ciEnUS)}\" lon=\"{lng.ToString(Tools.ciEnUS)}\"");
                                     if (!Pos.Equals(PosLast, System.StringComparison.Ordinal))
                                     {
                                         // convert date/time into GPX format (insert a "T")
