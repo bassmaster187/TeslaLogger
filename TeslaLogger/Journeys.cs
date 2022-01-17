@@ -592,9 +592,9 @@ ORDER BY
 <td>{WebUtility.HtmlEncode(dr[9].ToString())}</td><!--journeys.name-->
 <td>{WebUtility.HtmlEncode(dr[2].ToString())}</td><!--cars.display_name-->
 <td>{WebUtility.HtmlEncode(dr[4].ToString())}</td><!--tripStart.Start_address-->
-<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[5].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
+<td>{WebUtility.HtmlEncode(((DateTime)dr[5]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
 <td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
-<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[8].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
+<td>{WebUtility.HtmlEncode(((DateTime)dr[8]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
 <td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
 <td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
 <td>{WebUtility.HtmlEncode(((double)dr[10] / (double)dr[14] * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated charge eff-->
