@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -534,7 +535,7 @@ SELECT
     tripEnd.End_address, 
     tripEnd.EndDate, 
     Round(journeys.consumption_kwh) as consumption_kwh, 
-    journeys.charged_kwh,
+    Round(journeys.charged_kwh,1) as charged_kwh,
     journeys.drive_duration_minutes, 
     journeys.charge_duration_minutes,
     Round(tripEnd.EndKm - tripStart.StartKm,1) as distance
@@ -606,11 +607,10 @@ WHERE
 
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: CarID, StartPosID, EndPosId
-            // out: delete journey, render result HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int journeyID = r["id"];
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -627,16 +627,14 @@ WHERE
                         cmd.Parameters.AddWithValue("@journeyID", journeyID);
                         Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
-                        sb.Append("OK");
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
             }
-            WriteString(response, html1 + sb.ToString() + html2);
+            WriteString(response, "OK");
         }
 
         internal static void JourneysIndex(HttpListenerRequest request, HttpListenerResponse response)

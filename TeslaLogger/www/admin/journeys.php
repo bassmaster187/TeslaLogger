@@ -74,7 +74,15 @@ require_once("tools.php");
 
                     return "";
                 }},
-                { "data": "distance"}
+                { "data": "distance"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        
+                        return "<a href='javascript:delJourney("+row["Id"] +")'>Del</a>";
+                    }
+
+                    return "";
+                }}
             ],
             "ajax": 
             {
@@ -84,6 +92,21 @@ require_once("tools.php");
             }
         });
     });
+
+    function delJourney(id)
+    {
+        if (confirm("Do you really want to delete journey " + id))
+        {
+            var url = "/journeys/delete/delete";
+            var d = {
+                        load: "1",
+                        id: id
+                    };
+            var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+                location.reload();
+            });
+        }
+    }
 	
     function minutesToHHMM(MINUTES)
     {
@@ -120,6 +143,7 @@ menu("Journeys");
         <th>Driving Duration</th>
         <th>Charging Duration</th>
         <th>Distance</th>
+        <th></th>
     </tr>
 </thead>
 </table>

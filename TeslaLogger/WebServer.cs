@@ -958,7 +958,7 @@ namespace TeslaLogger
                 WriteString(response, "CarId not found: " + id);
         }
 
-        private static string GetDataFromRequestInputStream(HttpListenerRequest request)
+        public static string GetDataFromRequestInputStream(HttpListenerRequest request)
         {
             string data;
             using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
