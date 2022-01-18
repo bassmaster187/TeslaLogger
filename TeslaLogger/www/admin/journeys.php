@@ -91,6 +91,66 @@ require_once("tools.php");
                 "data": {url: url, data: JSON.stringify(d)}
             }
         });
+
+        var url = "/journeys/create/start";
+        var d = {
+                    carid: carid
+				};
+        var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+            $("#start").empty();
+            var json = JSON.parse(data);
+            $.each(json, function(){
+                $("#start").append('<option value="'+ this.Key +'">'+ this.Value +'</option>');
+            });
+        });
+
+        $('#start').on('change', function()
+        {
+            $("#end").empty();
+            $("#end").append('<option>Please Wait!</option>');
+
+            var d = {
+                    carid: carid,
+                    StartPosID: this.value
+				};
+            var url = "/journeys/create/end";
+            $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+                $("#end").empty();
+                var json = JSON.parse(data);
+                $.each(json, function(){
+                    $("#end").append('<option value="'+ this.Key +'">'+ this.Value +'</option>');
+                });
+            });
+        });
+
+        $("#btnSave").click(function() {
+            if ($("#name").val().length == 0)
+            {
+                alert("Journey Name Missing!");
+                reutrn;
+            }
+            else if ($("#start").val() == "")
+            {
+                alert("Please Select Start Point!");
+                reutrn;
+            }
+            else if ($("#end").val() == "")
+            {
+                alert("Please Select End Point!");
+                reutrn;
+            }
+
+            var d = {
+                    CarID: carid,
+                    StartPosID: $("#start").val(),
+                    EndPosID: $("#end").val(),
+                    name: $("#name").val()
+				};
+            var url = "/journeys/create/create";
+            $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+                location.reload();
+            });
+        });
     });
 
     function delJourney(id)
@@ -138,14 +198,22 @@ menu("Journeys");
         <th>Start</th>
         <th>Destination</th>
         <th>End</th>
-        <th>Consumption</th>
-        <th>Charged</th>
+        <th>Consumption kWh</th>
+        <th>Charged kWh</th>
         <th>Driving Duration</th>
         <th>Charging Duration</th>
-        <th>Distance</th>
+        <th>Distance km</th>
         <th></th>
     </tr>
 </thead>
+</table>
+
+<h2>New Journey</h2>
+<table>
+    <tr><td>Journey Name:</td><td><input width="100%" id="name"></td></tr>
+    <tr><td>Start</td><td><select width="100%" id="start"><option>Please Wait!</option></select></td></tr>
+    <tr><td>End</td><td><select width="100%" id="end"><option>Please Select Start First!</option></select></td></tr>
+    <tr><td></td><td><button id="btnSave">Save</button></td></tr>
 </table>
 </div>
 </body>
