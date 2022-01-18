@@ -210,7 +210,7 @@ ORDER BY
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
+                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(((DateTime)dr[1]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(((DateTime)dr[1]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
                             }
                         }
                     }
@@ -525,52 +525,19 @@ WHERE
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: nothing
-            // out: nothing
-            // action: render list HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            sb.Append($@"
-<tr>
-<th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DISPLAY_NAME)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_START_POS)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_START_DATE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_END_POS)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_END_DATE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CONSUMPTION)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGED)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGE_EFF)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_CHARGED)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DRIVE_CHARGE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_WH_KM)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_ACTIONS)}</th>
-</tr>"); // TODO convert to miles if miles are configured
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+            string sql = @"
 SELECT
-    journeys.Id, -- 0
-    journeys.CarID, -- 1
-    cars.display_name, -- 2
-    journeys.StartPosID, -- 3
-    tripStart.Start_address, -- 4
-    tripStart.StartDate, -- 5
-    journeys.EndPosID, -- 6
-    tripEnd.End_address, -- 7
-    tripEnd.EndDate, -- 8
-    journeys.name, -- 9
-    journeys.consumption_kwh, -- 10
-    journeys.drive_duration_minutes, -- 11
-    tripEnd.EndKm - tripStart.StartKm as distance,  -- 12
-    journeys.charge_duration_minutes, -- 13
-    journeys.charged_kwh -- 14
+    journeys.Id, 
+    journeys.name,
+    tripStart.Start_address,
+    tripStart.StartDate, 
+    tripEnd.End_address, 
+    tripEnd.EndDate, 
+    Round(journeys.consumption_kwh) as consumption_kwh, 
+    journeys.charged_kwh,
+    journeys.drive_duration_minutes, 
+    journeys.charge_duration_minutes,
+    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance
 FROM
     journeys,
     cars,
@@ -581,41 +548,9 @@ WHERE
     AND journeys.StartPosID = tripStart.StartPosID
     AND journeys.EndPosID = tripEnd.EndPosID
 ORDER BY
-    journeys.Id ASC", con))
-                    {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        Tools.DebugLog(cmd);
-                        while (dr.Read())
-                        {
-                            sb.Append($@"
-<tr>
-<td>{WebUtility.HtmlEncode(dr[9].ToString())}</td><!--journeys.name-->
-<td>{WebUtility.HtmlEncode(dr[2].ToString())}</td><!--cars.display_name-->
-<td>{WebUtility.HtmlEncode(dr[4].ToString())}</td><!--tripStart.Start_address-->
-<td>{WebUtility.HtmlEncode(((DateTime)dr[5]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
-<td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
-<td>{WebUtility.HtmlEncode(((DateTime)dr[8]).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
-<td>{WebUtility.HtmlEncode(((Double)dr[10]).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
-<td>{WebUtility.HtmlEncode(((Double)dr[14]).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
-<td>{WebUtility.HtmlEncode(((double)dr[10] / (double)dr[14] * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated charge eff-->
-<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[11].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.drive_duration_minutes-->
-<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[13].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.charge_duration_minutes-->
-<td>{WebUtility.HtmlEncode(((double)(int)dr[11] / (double)((int)dr[11] + (int)dr[13]) * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated drive vs. charge-->
-<td>{WebUtility.HtmlEncode(((Double)dr[12]).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
-<td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
-<td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
-<td><form action=""{EndPoints["JourneysDelete"]}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>
-</tr>"); // TODO convert to miles if miles are configured
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
-            }
-            WriteString(response, html1 + sb.ToString() + html2);
+    journeys.Id ASC";
+            
+            WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
         }
 
         internal static void JourneysDelete(HttpListenerRequest request, HttpListenerResponse response)
