@@ -56,6 +56,17 @@ require_once("tools.php");
 
                     return "";
                 }},
+                { "render": function(data, type, row, meta){ 
+                    if(type === 'display'){
+                        var distance = row["distance"];
+                        var consumption_kwh = row["consumption_kwh"];
+                        var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
+                        
+                        return parseFloat(avg_consumption).toFixed(1);
+                    }
+
+                    return "";
+                }},
                 { "data": "consumption_kwh"},
                 { "data": "charged_kwh"},
                 { "render": function(data, type, row, meta){
@@ -74,7 +85,14 @@ require_once("tools.php");
 
                     return "";
                 }},
-                { "data": "distance"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        var distance = row["distance"] / <?= $LengthFactor ?>;
+                        return parseFloat(distance).toFixed(1);;
+                    }
+
+                    return "";
+                }},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         
@@ -180,10 +198,13 @@ require_once("tools.php");
 </script>
 </head>
 <body style="padding-top: 5px; padding-left: 10px;">
-<div style="max-width: 1260px;">
+<div>
 <?php 
 include "menu.php";
 menu("Journeys");
+
+// echo("Unit: $LengthUnit<br>");
+// echo("Milefactor: $milefactor");
 ?>
 <div>
     <h1><?php t("Journeys"); ?>:  <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/journeys.md"><img src="img/icon-help-24.png" class="pointer"/></a></h1>
@@ -193,16 +214,17 @@ menu("Journeys");
 <thead>
     <tr>
         <th>Id</th>
-        <th>Journey</th>
-        <th>Origin</th>
-        <th>Start</th>
-        <th>Destination</th>
-        <th>End</th>
-        <th>Consumption kWh</th>
-        <th>Charged kWh</th>
-        <th>Driving Duration</th>
-        <th>Charging Duration</th>
-        <th>Distance km</th>
+        <th><?php t("Journey"); ?></th>
+        <th><?php t("Start Adresse"); ?></th>
+        <th><?php t("Start"); ?></th>
+        <th><?php t("Ziel Adresse"); ?></th>
+        <th><?php t("Ende"); ?></th>
+        <th><?php t("Ø Verbrauch kWh"); ?></th>
+        <th><?php t("Verbraucht kWh"); ?></th>
+        <th><?php t("geladen kWh"); ?></th>
+        <th><?php t("Fahrzeit [h]"); ?></th>
+        <th><?php t("Ladezeit [h]"); ?></th>
+        <th><?php if ($LengthUnit == "mile") t("Strecke [mi]"); else t("Strecke [km]"); ?></th>
         <th></th>
     </tr>
 </thead>
