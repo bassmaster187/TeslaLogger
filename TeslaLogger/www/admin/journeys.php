@@ -92,7 +92,7 @@ require_once("tools.php");
             }
         });
 
-        var url = "/journeys/create/start";
+        var url = "journeys/create/start";
         var d = {
                     carid: carid
 				};
@@ -113,7 +113,7 @@ require_once("tools.php");
                     carid: carid,
                     StartPosID: this.value
 				};
-            var url = "/journeys/create/end";
+            var url = "journeys/create/end";
             $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
                 $("#end").empty();
                 var json = JSON.parse(data);
@@ -146,7 +146,7 @@ require_once("tools.php");
                     EndPosID: $("#end").val(),
                     name: $("#name").val()
 				};
-            var url = "/journeys/create/create";
+            var url = "journeys/create/create";
             $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
                 location.reload();
             });
@@ -157,7 +157,7 @@ require_once("tools.php");
     {
         if (confirm("Do you really want to delete journey " + id))
         {
-            var url = "/journeys/delete/delete";
+            var url = "journeys/delete/delete";
             var d = {
                         load: "1",
                         id: id
