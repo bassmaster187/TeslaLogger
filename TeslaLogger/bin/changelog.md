@@ -1,3 +1,6 @@
+# Version 1.51.3
+- You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires. This feature can be find in: Admin Panel / Extras / Journeys 
+
 # Version 1.51.2
 - Bugfix: Restart whole thread after access_token has been updated
 
