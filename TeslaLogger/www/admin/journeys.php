@@ -207,7 +207,10 @@ menu("Journeys");
 // echo("Milefactor: $milefactor");
 ?>
 <div>
-    <h1><?php t("Journeys"); ?>:  <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/journeys.md"><img src="img/icon-help-24.png" class="pointer"/></a></h1>
+    <h1><?php t("Journeys"); ?></h1>
+    <p>
+        You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires.
+    </p>
 <div>
 
 <table id="myDT">
