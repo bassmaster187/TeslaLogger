@@ -961,7 +961,7 @@ namespace TeslaLogger
         public static string GetDataFromRequestInputStream(HttpListenerRequest request)
         {
             string data;
-            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            using (StreamReader reader = new StreamReader(request.InputStream, Encoding.UTF8))
             {
                 data = reader.ReadToEnd();
             }
