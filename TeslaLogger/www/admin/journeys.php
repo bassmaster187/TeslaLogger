@@ -44,6 +44,10 @@ require_once("tools.php");
                         var sdd = new Date(parseInt(row["StartDate"].substr(6)));
                         return sdd.toLocaleString();
                     }
+                    else if (type === 'sort')
+                    {
+                        return parseInt(row["StartDate"].substr(6));
+                    }
 
                     return "";
                 }},
@@ -53,18 +57,22 @@ require_once("tools.php");
                         var sdd = new Date(parseInt(row["EndDate"].substr(6)));
                         return sdd.toLocaleString();
                     }
+                    else if (type === 'sort')
+                    {
+                        return parseInt(row["StartDate"].substr(6));
+                    }
 
                     return "";
                 }},
                 { "render": function(data, type, row, meta){ 
-                    if(type === 'display'){
+                    if(type === 'display' || type === 'sort'){
                         var distance = row["distance"];
                         var consumption_kwh = row["consumption_kwh"];
                         var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
                         
                         return parseFloat(avg_consumption).toFixed(1);
-                    }
-
+                    } 
+                    
                     return "";
                 }},
                 { "data": "consumption_kwh"},
@@ -74,6 +82,10 @@ require_once("tools.php");
                         var MINUTES = row["drive_duration_minutes"];
                         return minutesToHHMM(MINUTES);
                     }
+                    else if (type === 'sort')
+                    {
+                        return row["drive_duration_minutes"];
+                    }
 
                     return "";
                 }},
@@ -82,11 +94,15 @@ require_once("tools.php");
                         var MINUTES = row["charge_duration_minutes"];
                         return minutesToHHMM(MINUTES);
                     }
+                    else if (type === 'sort')
+                    {
+                        return row["charge_duration_minutes"];
+                    }
 
                     return "";
                 }},
                 { "render": function(data, type, row, meta){
-                    if(type === 'display'){
+                    if(type === 'display' || type === 'sort'){
                         var distance = row["distance"] / <?= $LengthFactor ?>;
                         return parseFloat(distance).toFixed(1);;
                     }
