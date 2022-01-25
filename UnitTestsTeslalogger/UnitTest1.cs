@@ -119,6 +119,26 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR_P_2019()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            //2021 Model 3 LR Performance
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 422, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "5YJ3E7EB1KFXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "p74d";
+            wh.car.DBWhTR = 0.152;
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR P", wh.car.ModelName);
+            Assert.AreEqual(0.152, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_LR_P_2021()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);

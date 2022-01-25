@@ -1779,6 +1779,17 @@ namespace TeslaLogger
             {
                 Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor);
 
+                if (car.TrimBadging == "p74d" && year < 2021)
+                {
+                    WriteCarSettings("0.152", "M3 LR P");
+                    return;
+                }
+                if (car.TrimBadging == "p74d" && year >= 2021)
+                {
+                    WriteCarSettings("0.158", "M3 LR P 2021");
+                    return;
+                }
+
                 int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
                 {
@@ -1805,16 +1816,6 @@ namespace TeslaLogger
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)
                         {
                             WriteCarSettings("0.139", "M3 LR FL");
-                            return;
-                        }
-                        else if (car.TrimBadging == "p74d" && year < 2021)
-                        {
-                            WriteCarSettings("0.152", "M3 LR P");
-                            return;
-                        }
-                        if (car.TrimBadging == "p74d" && year >= 2021)
-                        {
-                            WriteCarSettings("0.158", "M3 LR P 2021");
                             return;
                         }
                     }
