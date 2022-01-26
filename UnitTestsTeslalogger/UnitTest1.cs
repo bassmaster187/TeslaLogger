@@ -251,7 +251,7 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("M3 SR+ LFP 2021", wh.car.ModelName);
-            Assert.AreEqual(0.138, wh.car.WhTR);
+            Assert.AreEqual(0.127, wh.car.WhTR);
         }
 
         [TestMethod]
