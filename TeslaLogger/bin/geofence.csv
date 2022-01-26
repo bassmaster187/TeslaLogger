@@ -111,6 +111,7 @@ Supercharger CH-Dietikon, 47.418041, 8.396577
 Supercharger CH-Dietlikon, 47.413095, 8.616785
 Supercharger CH-Egerkingen, 47.327028, 7.805489
 Supercharger CH-Flüelen, 46.912985, 8.622833
+Supercharger-V3 CH-Kempttahl,47.451881,8.704432
 Supercharger CH-Kriegstetten, 47.175635, 7.59883
 Supercharger CH-Lully, 46.8323911, 6.8590898
 Supercharger CH-Maienfeld, 47.003965, 9.525809
@@ -156,6 +157,7 @@ Supercharger DE-Brinkum, 53.028326, 8.808758
 Supercharger DE-Bruchsal, 49.13837, 8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
+Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
@@ -208,6 +210,7 @@ Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
+Supercharger-V3 DE-Lehre, 52.313216,10.635089
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
@@ -227,13 +230,14 @@ Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
 Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
-Supercharger DE-Nempitz, 51.290095,12.137335, 6
-Supercharger DE-Nempitz,  51.290012,12.137346, 7
+Supercharger DE-Nempitz, 51.290095,12.137335, 7
+Supercharger DE-Nempitz,  51.290012,12.137346, 9
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
 Supercharger-V3 DE-Nossen, 51.08255, 13.27406,30
 Supercharger DE-Nossen, 51.08255, 13.27406,30
+Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V3 DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger-V3 DE-Panketal, 52.620716, 13.541721
@@ -446,7 +450,7 @@ Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
 Supercharger FR-Sallanches, 45.951545, 6.62879
 Supercharger FR-Senlis, 49.208545, 2.606701
-Supercharger FR-Sisteron, 44.226199, 5.913554
+Supercharger FR-Sisteron, 44.2258,5.913
 Supercharger FR-Strasbourg, 48.53407, 7.70201
 Supercharger FR-Thiais, 48.7543643, 2.3730657
 Supercharger FR-Toulon, 43.121199, 5.85086
@@ -687,6 +691,7 @@ Supercharger NO-Rugtvedt, 59.035933, 9.67402
 Supercharger NO-Rygge, 59.38753, 10.751039
 Supercharger NO-Røldal, 59.816824, 6.752226
 Supercharger NO-Sandane, 61.7780226, 6.2131884
+Supercharger-V3 NO-Sandefjord,59.179708,10.209267
 Supercharger NO-Setermoen, 68.860147, 18.346723
 Supercharger-V3 NO-Skaidi, 70.431954, 24.50683
 Supercharger NO-Skarnes, 60.248841, 11.743848
