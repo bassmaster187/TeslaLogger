@@ -1382,25 +1382,8 @@ namespace TeslaLogger
             {
                 try
                 {
-                    HttpClient client = GethttpclientTeslaAPI();
-                    string adresse = apiaddress + "api/1/vehicles";
-                    Task<HttpResponseMessage> resultTask;
-                    HttpResponseMessage result;
-                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-
-                    if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        if (LoginRetry(result))
-                        {
-                            client = GethttpclientTeslaAPI(true);
-
-                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-                        }
-                    }
-
-                    object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    object[] r1temp = (object[])r1;
+                    object[] r1temp;
+                    GetAllVehicles(out resultContent, out r1temp, false);
 
                     if (car.CarInAccount >= r1temp.Length)
                     {
@@ -1530,6 +1513,32 @@ namespace TeslaLogger
                     Thread.Sleep(30000);
                 }
             }
+        }
+
+        internal void GetAllVehicles(out string resultContent, out object[] vehicles, bool throwExceptionOnUnauthorized)
+        {
+            HttpClient client = GethttpclientTeslaAPI();
+            string adresse = apiaddress + "api/1/vehicles";
+            Task<HttpResponseMessage> resultTask;
+            HttpResponseMessage result;
+            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                if (throwExceptionOnUnauthorized)
+                    throw new UnauthorizedAccessException();
+
+                if (LoginRetry(result))
+                {
+                    client = GethttpclientTeslaAPI(true);
+
+                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                }
+            }
+
+            object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+            vehicles = (object[])r1;
         }
 
         private void ListCarsInAccount(object[] cars)
