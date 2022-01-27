@@ -44,11 +44,17 @@ require_once("tools.php");
 	});
 
 	function tokenAvailable() {
-		if ($("#access_token").val() == null || $("#refresh_token").val() == null)
+		if ($("#access_token").val() == null || $("#access_token").val().length < 2)
+		{
+			alert("Please enter the access token!");
 			return false;
+		}
 
-		if ($("#access_token").val().length < 2 || $("#refresh_token").val().length < 2)
+		if ($("#refresh_token").val() == null || $("#refresh_token").val().length < 2)
+		{
+			alert("Please enter the refresh token!");
 			return false;
+		}
 
 		return true;
 	}
@@ -58,6 +64,7 @@ require_once("tools.php");
 		{
 			sendRequest();
 		}
+		/* email authentification not supported anymore
 		else if ($("#email").val() == null || $("#email").val() == "")  {
 			alert("Bitte Email eingeben!");
 		} else if ($("#password1").val() == null || $("#password1").val() == "") {
@@ -67,14 +74,23 @@ require_once("tools.php");
 		} else {			
 			sendRequest();
 		}
+		*/
 	}
 
 	function sendRequest()
 	{
+		var teslacarid = $('#carid option:selected').attr('id');
+
+		if (teslacarid == undefined || teslacarid == "")
+		{
+			alert("Please select a car!");
+			return;
+		}
+
 		var d = {
 					email: $("#email").val(),
 					password: $("#password1").val(),
-					carid: $("#carid").val(),
+					carid: teslacarid,
 					id: dbid,
 					freesuc: $("#freesuc").is(':checked'),
 					access_token: $("#access_token").val(),
@@ -125,6 +141,34 @@ require_once("tools.php");
 		var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
 				window.location.href='password_info.php?id='+dbid;
 			});
+	}
+
+	function CheckAccessToken()
+	{
+		if (!tokenAvailable())
+			return;
+
+		var d = {
+					access_token: $("#access_token").val()
+				};
+
+		var jqxhr = $.post("teslaloggerstream.php", {url: "getcarsfromaccount", data: JSON.stringify(d)}, function(data){
+			$("#carid").empty();
+
+			if (data == "Unauthorized")
+				alert("Unauthorized");
+			else if (data.startsWith("ERROR:"))
+				alert(data);
+			else
+			{
+				var obj = JSON.parse(data);
+				for (var i=0; i < obj.length; i++)
+				{
+					$("#carid").append("<option id='"+obj[i]['Key']+"'>"+obj[i]['Value']+"</option>");
+					$("#btnSave").css("visibility","");
+				}
+			}
+		});
 	}
 </script>
 </head>
@@ -198,11 +242,13 @@ if (isset($_REQUEST["id"]))
 <tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
 <tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
 
+<tr><td colspan="2"><button onclick="CheckAccessToken();" style="float: right;"><?php t("OK"); ?></button></td></tr>
+
 <tr style='visibility:collapse'><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
 <tr style='visibility:collapse'><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
 <tr style='visibility:collapse'><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 
-<tr><td><?php t("Car # in account"); ?>:</td><td><input id="carid" value="<?php echo($tesla_carid) ?>" <?php echo($disablecarid) ?>/></td><td>0 = first car!</td></tr>
+<tr><td><?php t("Car"); ?>:</td><td> <select id="carid"></select></td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
 
 <tr><td>&nbsp;</td></tr>
@@ -216,7 +262,7 @@ if ($_REQUEST["id"] != -1)
 	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
 	<?PHP }
 ?>
-<button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
+<button id="btnSave" style='visibility:collapse' onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
 </table>
 </div>
 <?php
