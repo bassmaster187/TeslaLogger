@@ -157,12 +157,15 @@ require_once("tools.php");
 
 			if (data == "Unauthorized")
 				alert("Unauthorized");
+			else if (data.startsWith("ERROR:"))
+				alert(data);
 			else
 			{
 				var obj = JSON.parse(data);
 				for (var i=0; i < obj.length; i++)
 				{
 					$("#carid").append("<option id='"+obj[i]['Key']+"'>"+obj[i]['Value']+"</option>");
+					$("#btnSave").css("visibility","");
 				}
 			}
 		});

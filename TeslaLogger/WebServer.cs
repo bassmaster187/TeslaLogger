@@ -306,11 +306,31 @@ namespace TeslaLogger
             try
             {
                 Logfile.Log("GetCarsFromAccount");
-                string access_token = "eu-87cdb120e906b27490216bf767d9c26e7b09b6e39f93453cdffc3d5d584d8944";
+                string data = GetDataFromRequestInputStream(request);
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+                string access_token = r["access_token"];
                 var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
                 car.webhelper.Tesla_token = access_token;
 
                 car.webhelper.GetAllVehicles(out string resultContent, out object[] vehicles, true);
+
+                if (vehicles == null)
+                {
+                    if (resultContent?.Contains("error_description") == true)
+                    {
+                        dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        string error = j["error"] ?? "NULL";
+                        string error_description = j["error_description"] ?? "NULL";
+
+                        responseString = "ERROR: " + error + " / Error Description: " + error_description;
+
+                        Logfile.Log(responseString);
+
+                        WriteString(response, responseString);
+                        return;
+                    }
+                }
 
                 Logfile.Log("Found " + vehicles.Length + " Vehicles");
 
