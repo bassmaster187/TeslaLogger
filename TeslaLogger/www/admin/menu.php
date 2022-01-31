@@ -164,6 +164,6 @@ function BackgroudRun($target, $text, $reload=false)
 	);
   }
   </script>
-<script type='text/javascript' src='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='static/functions.js?ver=20150315'></script>
 <?PHP
 }

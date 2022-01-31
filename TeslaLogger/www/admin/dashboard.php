@@ -26,7 +26,7 @@ else
 	<link rel="stylesheet" href="dashboard.css?v=<?=time()?>" />
 	<link rel="stylesheet" href="my_dashboard.css?v=<?=time()?>" />
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script>
 	
 	var nextGetWeather = 0;
