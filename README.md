@@ -35,6 +35,7 @@ Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, P
 Change the language and units and reboot the Teslalogger.
 
 http://raspberry/admin/settings.php
+or sometimes: http://raspberry.local/admin/settings.php
 
 ## Admin Panel
 http://raspberry/admin/
@@ -48,6 +49,7 @@ Password: teslalogger
 
 ## Dashboard
 http://raspberry/admin/dashboard.php
+or http://raspberry.local/admin/dashboard.php
 
 Customizing the Dashboard goes here: [LINK](dashboard.md)
 

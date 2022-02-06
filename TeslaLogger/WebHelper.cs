@@ -1382,25 +1382,8 @@ namespace TeslaLogger
             {
                 try
                 {
-                    HttpClient client = GethttpclientTeslaAPI();
-                    string adresse = apiaddress + "api/1/vehicles";
-                    Task<HttpResponseMessage> resultTask;
-                    HttpResponseMessage result;
-                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-
-                    if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        if (LoginRetry(result))
-                        {
-                            client = GethttpclientTeslaAPI(true);
-
-                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-                        }
-                    }
-
-                    object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                    object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                    object[] r1temp = (object[])r1;
+                    object[] r1temp;
+                    GetAllVehicles(out resultContent, out r1temp, false);
 
                     if (car.CarInAccount >= r1temp.Length)
                     {
@@ -1530,6 +1513,32 @@ namespace TeslaLogger
                     Thread.Sleep(30000);
                 }
             }
+        }
+
+        internal void GetAllVehicles(out string resultContent, out object[] vehicles, bool throwExceptionOnUnauthorized)
+        {
+            HttpClient client = GethttpclientTeslaAPI();
+            string adresse = apiaddress + "api/1/vehicles";
+            Task<HttpResponseMessage> resultTask;
+            HttpResponseMessage result;
+            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                if (throwExceptionOnUnauthorized)
+                    throw new UnauthorizedAccessException();
+
+                if (LoginRetry(result))
+                {
+                    client = GethttpclientTeslaAPI(true);
+
+                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                }
+            }
+
+            object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
+            vehicles = (object[])r1;
         }
 
         private void ListCarsInAccount(object[] cars)
@@ -1779,6 +1788,17 @@ namespace TeslaLogger
             {
                 Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor);
 
+                if (car.TrimBadging == "p74d" && year < 2021)
+                {
+                    WriteCarSettings("0.152", "M3 LR P");
+                    return;
+                }
+                if (car.TrimBadging == "p74d" && year >= 2021)
+                {
+                    WriteCarSettings("0.158", "M3 LR P 2021");
+                    return;
+                }
+
                 int maxRange = car.DbHelper.GetAvgMaxRage();
                 if (maxRange > 430)
                 {
@@ -1805,16 +1825,6 @@ namespace TeslaLogger
                         else if (car.DBWhTR >= 0.135 && car.DBWhTR <= 0.142 && AWD)
                         {
                             WriteCarSettings("0.139", "M3 LR FL");
-                            return;
-                        }
-                        else if (car.TrimBadging == "p74d" && year < 2021)
-                        {
-                            WriteCarSettings("0.152", "M3 LR P");
-                            return;
-                        }
-                        if (car.TrimBadging == "p74d" && year >= 2021)
-                        {
-                            WriteCarSettings("0.158", "M3 LR P 2021");
                             return;
                         }
                     }

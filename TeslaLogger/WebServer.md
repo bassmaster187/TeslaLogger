@@ -1,5 +1,9 @@
 # TeslaLogger internal web server
 
+Ports
+Docker: 5010
+Raspberry: 5000
+
 ## endpoints for admin UI
 
 ### /getchargingstate

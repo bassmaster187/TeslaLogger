@@ -111,6 +111,7 @@ Supercharger CH-Dietikon, 47.418041, 8.396577
 Supercharger CH-Dietlikon, 47.413095, 8.616785
 Supercharger CH-Egerkingen, 47.327028, 7.805489
 Supercharger CH-Flüelen, 46.912985, 8.622833
+Supercharger-V3 CH-Kempttahl,47.451881,8.704432
 Supercharger CH-Kriegstetten, 47.175635, 7.59883
 Supercharger CH-Lully, 46.8323911, 6.8590898
 Supercharger CH-Maienfeld, 47.003965, 9.525809
@@ -156,6 +157,7 @@ Supercharger DE-Brinkum, 53.028326, 8.808758
 Supercharger DE-Bruchsal, 49.13837, 8.56242
 Supercharger-V3 DE-Brunnthal,48.039686,11.661457
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
+Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
@@ -208,6 +210,7 @@ Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
+Supercharger-V3 DE-Lehre, 52.313216,10.635089
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
@@ -227,13 +230,14 @@ Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
 Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
-Supercharger DE-Nempitz, 51.290095,12.137335, 6
-Supercharger DE-Nempitz,  51.290012,12.137346, 7
+Supercharger DE-Nempitz, 51.290095,12.137335, 7
+Supercharger DE-Nempitz,  51.290012,12.137346, 9
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
 Supercharger-V3 DE-Nossen, 51.08255, 13.27406,30
 Supercharger DE-Nossen, 51.08255, 13.27406,30
+Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V3 DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger-V3 DE-Panketal, 52.620716, 13.541721
@@ -446,7 +450,7 @@ Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
 Supercharger FR-Sallanches, 45.951545, 6.62879
 Supercharger FR-Senlis, 49.208545, 2.606701
-Supercharger FR-Sisteron, 44.226199, 5.913554
+Supercharger FR-Sisteron, 44.2258,5.913
 Supercharger FR-Strasbourg, 48.53407, 7.70201
 Supercharger FR-Thiais, 48.7543643, 2.3730657
 Supercharger FR-Toulon, 43.121199, 5.85086
@@ -687,6 +691,7 @@ Supercharger NO-Rugtvedt, 59.035933, 9.67402
 Supercharger NO-Rygge, 59.38753, 10.751039
 Supercharger NO-Røldal, 59.816824, 6.752226
 Supercharger NO-Sandane, 61.7780226, 6.2131884
+Supercharger-V3 NO-Sandefjord,59.179708,10.209267
 Supercharger NO-Setermoen, 68.860147, 18.346723
 Supercharger-V3 NO-Skaidi, 70.431954, 24.50683
 Supercharger NO-Skarnes, 60.248841, 11.743848
@@ -1107,6 +1112,7 @@ Tesla Service Center DE-Feldkirchen, 48.145579, 11.741758
 Tesla Service Center DE-Frankfurt, 50.13310, 8.76581
 Tesla Service Center DE-Hamburg, 53.668606, 9.99489
 Tesla Service Center DE-Kirchheim, 48.15108, 11.74895
+Tesla Service Center DE-Mannheim, 49.444340, 8.574597
 Tesla Service Center DE-Nürnberg,  49.463634, 11.127495
 Tesla Service Center DE-Stuttgart, 48.82695, 9.09938
 Tesla Service Center DK-Aarhus, 56.178148, 10.1370293
@@ -1136,7 +1142,10 @@ Aldi DE-Darmstadt-Arheilgen, 49.906825,8.648799
 Aldi DE-Dinslaken, 51.560813,6.741382, 20
 Aldi DE-Echterdingen, 48.695676,9.168745
 Aldi DE-Eisingen, 49.761243,9.845965, 20
+Aldi Erlange Gundstraße 2,49.583525, 10.965227,10
 Aldi DE-Friedberg, 48.406611, 10.951264, 10
+Aldi DE-Fürth, 49.454280, 11.001354, 10
+Aldi DE-Fürth Magazinstraße 61, 49.454155, 11.001397, 10
 Aldi DE-Heiligenroth Industriegebiet, 50.448115, 7.845324
 Aldi DE-Hünxe, 51.642562, 6.758384
 Aldi DE-Kaarst, 51.218956, 6.633498
@@ -1362,6 +1371,7 @@ EnBW DE-Ebelsbach, 49.9848745, 10.668505
 EnBW DE-Edelzell, 50.529549,9.690535
 EnBW DE-Edesheim Pfälzer Weinstraße Ost, 49.270394,8.153854, 10
 EnBW DE-Edesheim Pfälzer Weinstraße West, 49.26986,8.151913, 10
+EnBW DE-Ellhofen, 49.143621,9.308792
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
 EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
 EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
@@ -1390,6 +1400,7 @@ EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
 EnBW DE-Höhr-Grenzhausen, 50.439177,7.647429
+EnBW DE-Heßdorf, 49.626682,10.923707, 10
 EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Hurlach, 48.12758, 10.834338
 EnBW DE-Hünxe West, 51.635723,6.74493
@@ -1423,6 +1434,7 @@ EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-Mending, 50.382236, 7.269514
 EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
+EnBW DE-München Verdistraße, 48.164862,11.471599
 EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
 EnBW DE-Oberpfälzer Alp Nord, 49.424438,11.690378
@@ -1973,6 +1985,7 @@ Innogy DE-Cloerbruch Süd, 51.236686, 6.510928
 Innogy DE-Dannstadt-Schauernheim, 49.410297, 8.339979
 Innogy DE-Duisburg, 51.484186, 6.763764
 Innogy DE-Fürholzen West, 48.33747, 11.6081
+Innogy DE-Frankfurt am Main, 50.112730, 8.652925
 Innogy DE-Hunsrück Ost, 49.963783, 7.768701
 Innogy DE-Königsforst Ost, 50.899387, 7.152103, 7
 Innogy DE-Leipheim, 48.437494, 10.213398
@@ -1996,6 +2009,8 @@ Familia DE-Quickborn, 53.743005, 9.940652
 Fortum NO-Alta, 69.966743, 23.268569
 Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
 Fortum NO-Sortland, 68.704914, 15.414759
+
+Globus DE-Forchheim Willy-Brandt-Allee 1, 49.706939, 11.070387, 20
 
 Greenway PL-Bielsko-Biała, 49.803432,19.049971
 Greenway PL-Góra Libertowska, 49.980812,19.909254
@@ -2095,12 +2110,14 @@ Kaufland RO-Timisoara, 45.764274, 21.245244
 
 Ladeverbund+ DE-Bad Mergentheim Bahnhof, 49.493046,9.769979
 Ladeverbund+ DE-Bad Mergentheim Oskar-Weitbrecht-Weg, 49.486658,9.790112
+Ladeverbund+ DE-Fürth Espanstraße 10, 49.479663, 11.000589
 Ladeverbund+ DE-Fürth Kurt-Scherzer-Straße, 49.468266,10.958465
 Ladeverbund+ DE-Fürth Nürnberger Straße, 49.465506,11.011214
 Ladeverbund+ DE-Langenzenn Sanktustorstraße, 49.495477,10.795194
 Ladeverbund+ DE-Langenzenn Nürnberger Str, 49.496364,10.804363
 Ladeverbund+ DE-Nürnberg, 49.435375,11.059562
-Ladeverbund+ De-Schwabach, 49.323136,11.042675
+Ladeverbund+ DE-Schwabach, 49.323136,11.042675
+Ladeverbund+ DE-Tauberbischofsheim, 49.630349,9.666165
 Ladeverbund+ DE-Wilhermsdorf, 49.481100,10.716472
 
 
@@ -2186,11 +2203,14 @@ Lidl DE-Mönchengladbach, 51.16474, 6.460774
 Lidl DE-München Landsbergerstr., 48.144648, 11.489481
 Lidl DE-Lorch, 48.79715,9.674889
 Lidl DE-Unterwattenbach, 48.614324,12.224013,20
+Lidl DE-Weikersheim, 49.484656,9.897408
 Lidl DE-Winterthur, 47.498986,8.763822
 
 Lidl FI-Vantaa, 60.261581, 24.87252
 Lidl IT-Peschiera del Garda, 45.43475, 10.680242
 Lidl SE-Falkenberg, 56.91611,12.502524
+
+Mainova DE-Frankfurt am Main Parkhaus Börse, 50.115389, 8.675916
 
 MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
@@ -2249,6 +2269,7 @@ AT Wien Billa Brünner Straße, 48.267452, 16.402954
 AT Raststation Marché Wörthersee,46.629952,14.094825
 
 CH Baden ABB Research, 47.458503, 8.278454
+CH Nendaz Green Motion Charging Station, Rte des Ecluses, 46.182368, 7.291183, 10
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
 CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 8
 CH Raststätte A4 My Stop Süd, 47.271714,8.43764, 6
@@ -2263,6 +2284,7 @@ DE Aachen Quellenhof, 50.781109, 6.090785
 DE Asbach-Bäumenheim Rastpark, 48.67384, 10.825147
 DE Aurich EEZ, 53.496286, 7.494351 
 DE Aurich McDonnald's, 53.471027, 7.46725
+DE Bad Homburg Hessenring, 50.220598, 8.622014
 DE Bad Oldesloe Käthe-Kollwitz-Straße, 53.80728316, 10.3825856
 DE Bad Segeberg EWS-Servicecenter, 53.937808, 10.306605
 DE Berlin Burger King Tempelhof, 52.480339, 13.38459
@@ -2281,6 +2303,7 @@ DE Chemnitz HEOS Solar-Carport, 50.802484, 12.852011
 DE Diepholz Verwaltung Stadtwerke, 52.612027,8.374783
 DE Dresden Volkswagen Gläserne Manufaktur, 51.043755, 13.754082
 DE Frankenthal ATU, 49.545836, 8.352769
+DE Frankfurt am Main Parkhaus Opernturm, 50.116366, 8.67072
 DE Freising Audi Training Center, 48.356508, 11.770911
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
@@ -2326,4 +2349,5 @@ DE Sandersdorf-Brehna The Style Outlets, 51.555325, 12.192875
 DE Stuttgart Flughafen P12, 48.691895, 9.195894
 DE Wetzlar Leica, 50.553084, 8.533377
 ES Gandia, 38.969986, -0.178789
+FR 68510 Sierentz Hyper U et Drive, 47.666180, 7.441494, 10
 IT Vahrn Mautstation Casello Bressanone-Val Pusteria, 46.763952, 11.6430823, 20

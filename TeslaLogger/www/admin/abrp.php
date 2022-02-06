@@ -21,13 +21,13 @@ else
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Abetterrouteplanner</title>
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
-	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<script src="static/jquery/jquery-1.12.4.js"></script>
+	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
+	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
+	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
   	<body style="padding-top: 5px; padding-left: 10px;">
 	

@@ -120,6 +120,7 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php"><?php t("Backup"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php"><?php t("Restore"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php"><?php t("Geofence"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="journeys.php?carid=<?= $current_carid ?>"><?php t("Journeys"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="dashboard.php?carid=<?= $current_carid ?>"><?php t("Dashboard"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="abrp.php?carid=<?= $current_carid ?>">Abetterrouteplanner</a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="wallbox.php?carid=<?= $current_carid ?>">Wallbox</a></li>
@@ -163,6 +164,6 @@ function BackgroudRun($target, $text, $reload=false)
 	);
   }
   </script>
-<script type='text/javascript' src='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='static/functions.js?ver=20150315'></script>
 <?PHP
 }

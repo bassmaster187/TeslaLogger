@@ -203,16 +203,20 @@ namespace TeslaLogger
                 this.TaskerHash = TaskerHash;
                 this.WhTR = WhTR ?? 0.190;
 
-                Allcars.Add(this);
+                if (CarInDB > 0)
+                    Allcars.Add(this);
 
                 DbHelper = new DBHelper(this);
                 webhelper = new WebHelper(this);
 
-                thread = new Thread(Loop)
+                if (CarInDB > 0)
                 {
-                    Name = "Car" + CarInDB
-                };
-                thread.Start();
+                    thread = new Thread(Loop)
+                    {
+                        Name = "Car" + CarInDB
+                    };
+                    thread.Start();
+                }
             }
         }
 

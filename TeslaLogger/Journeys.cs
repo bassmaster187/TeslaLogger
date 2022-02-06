@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -125,14 +126,16 @@ CREATE TABLE journeys (
 
         internal static void JourneysCreateStart(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: CarID
-            // out: CarID, StartPosID
-            // action: render Start selection HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
+            string json = "";
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_START)}</td><td><form action=""{EndPoints["JourneysCreateEnd"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><select class=""js-select"" name=""StartPosID"" style=""width: 500px"">");
+
+            var o = new List<object>();
+            o.Add(new KeyValuePair<string, string>("", "Please Select"));
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -155,10 +158,7 @@ ORDER BY
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
-                            if (int.TryParse(dr[0].ToString(), out int id))
-                            {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
-                            }
+                            o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
                         }
                     }
                 }
@@ -166,11 +166,11 @@ ORDER BY
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
             }
-            sb.Append($" </select></td><td>");
-            sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_NEXT)}</button></form></td></tr>");
-            WriteString(response, html1 + sb.ToString() + html2);
+
+            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+
+            WriteString(response, json);
         }
 
         internal static void JourneysCreateEnd(HttpListenerRequest request, HttpListenerResponse response)
@@ -178,12 +178,21 @@ ORDER BY
             // in: CarID, StartPosID
             // out: CarID, StartPosID, EndPosId
             // action: render End selection HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
-            int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
+
+            string json = "";
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int CarID = r["carid"];
+            Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
+
+            var o = new List<object>();
+            o.Add(new KeyValuePair<string, string>("", "Please Select"));
+
+
+            int StartPosID = Convert.ToInt32(r["StartPosID"]);
             Tools.DebugLog($"JourneysCreateEnd CarID:{CarID} StartPosID:{StartPosID}");
-            sb.Append($@"<tr><td>{WebUtility.HtmlEncode(TEXT_LABEL_SELECT_END)}</td><td><form action=""{EndPoints["JourneysCreateCreate"]}""><input type=""hidden"" name=""CarID"" value=""{CarID}""><input type=""hidden"" name=""StartPosID"" value=""{StartPosID}""><select class=""js-select"" name=""EndPosID"" style=""width: 500px"">");
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -210,7 +219,7 @@ ORDER BY
                         {
                             if (int.TryParse(dr[0].ToString(), out int id))
                             {
-                                sb.Append($@"<option value=""{dr[0]}"" label=""{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}"">{WebUtility.HtmlEncode(DateTime.Parse(dr[1].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))} - {WebUtility.HtmlEncode(dr[2].ToString())}</option>");
+                                o.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString() + " - " + dr[2].ToString()));
                             }
                         }
                     }
@@ -219,12 +228,10 @@ ORDER BY
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
             }
-            sb.Append("</select></td><td>");
-            sb.Append($@"{WebUtility.HtmlEncode(TEXT_LABEL_JOURNEY_NAME)}</td><td><input type=""text"" name=""name"" /></td><td>");
-            sb.Append($@"<button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_CREATE)}</button></form></td></tr>");
-            WriteString(response, html1 + sb.ToString() + html2);
+
+            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            WriteString(response, json);
         }
 
         internal static void JourneysCreateCreate(HttpListenerRequest request, HttpListenerResponse response)
@@ -232,12 +239,14 @@ ORDER BY
             // in: CarID, StartPosID, EndPosId
             // out: nothing
             // action: create journey table entry, render result selection HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            int CarID = Convert.ToInt32(GetUrlParameterValue(request, "CarID"), Tools.ciEnUS);
-            int StartPosID = Convert.ToInt32(GetUrlParameterValue(request, "StartPosID"), Tools.ciEnUS);
-            int EndPosID = Convert.ToInt32(GetUrlParameterValue(request, "EndPosID"), Tools.ciEnUS);
-            string name = GetUrlParameterValue(request, "name");
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int CarID = r["CarID"];
+            int StartPosID = Convert.ToInt32(r["StartPosID"]);
+            int EndPosID = Convert.ToInt32(r["EndPosID"]);
+            string name = r["name"];
+
             Tools.DebugLog($"JourneysCreateCreate CarID:{CarID} StartPosID:{StartPosID} EndPosID:{EndPosID} name:{name}");
             DataRow car = DBHelper.GetCar(CarID);
             if (car != null && StartPosID < EndPosID && !string.IsNullOrEmpty(name))
@@ -295,16 +304,14 @@ LIMIT 1", con))
                                 CalculateChargeDuration(journeyId);
                             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                         }
-                        sb.Append("OK");
                     }
                 }
                 catch (Exception ex)
                 {
                     Logfile.Log(ex.ToString());
-                    sb.Append(ex.ToString());
                 }
             }
-            WriteString(response, html1 + sb.ToString() + html2);
+            WriteString(response, "OK");
         }
 
         internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
@@ -525,52 +532,19 @@ WHERE
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: nothing
-            // out: nothing
-            // action: render list HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            sb.Append($@"
-<tr>
-<th>{WebUtility.HtmlEncode(TEXT_TH_JOURNEY_NAME)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DISPLAY_NAME)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_START_POS)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_START_DATE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_END_POS)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_END_DATE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CONSUMPTION)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGED)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_CHARGE_EFF)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_DRIVE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DURATION_CHARGED)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DRIVE_CHARGE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_DISTANCE)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_WH_KM)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_EXPORT)}</th>
-<th>{WebUtility.HtmlEncode(TEXT_TH_ACTIONS)}</th>
-</tr>"); // TODO convert to miles if miles are configured
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+            string sql = @"
 SELECT
-    journeys.Id, -- 0
-    journeys.CarID, -- 1
-    cars.display_name, -- 2
-    journeys.StartPosID, -- 3
-    tripStart.Start_address, -- 4
-    tripStart.StartDate, -- 5
-    journeys.EndPosID, -- 6
-    tripEnd.End_address, -- 7
-    tripEnd.EndDate, -- 8
-    journeys.name, -- 9
-    journeys.consumption_kwh, -- 10
-    journeys.drive_duration_minutes, -- 11
-    tripEnd.EndKm - tripStart.StartKm as distance,  -- 12
-    journeys.charge_duration_minutes, -- 13
-    journeys.charged_kwh -- 14
+    journeys.Id, 
+    journeys.name,
+    tripStart.Start_address,
+    tripStart.StartDate, 
+    tripEnd.End_address, 
+    tripEnd.EndDate, 
+    Round(journeys.consumption_kwh) as consumption_kwh, 
+    Round(journeys.charged_kwh,1) as charged_kwh,
+    journeys.drive_duration_minutes, 
+    journeys.charge_duration_minutes,
+    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance
 FROM
     journeys,
     cars,
@@ -581,41 +555,9 @@ WHERE
     AND journeys.StartPosID = tripStart.StartPosID
     AND journeys.EndPosID = tripEnd.EndPosID
 ORDER BY
-    journeys.Id ASC", con))
-                    {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        Tools.DebugLog(cmd);
-                        while (dr.Read())
-                        {
-                            sb.Append($@"
-<tr>
-<td>{WebUtility.HtmlEncode(dr[9].ToString())}</td><!--journeys.name-->
-<td>{WebUtility.HtmlEncode(dr[2].ToString())}</td><!--cars.display_name-->
-<td>{WebUtility.HtmlEncode(dr[4].ToString())}</td><!--tripStart.Start_address-->
-<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[5].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripStart.StartDate-->
-<td>{WebUtility.HtmlEncode(dr[7].ToString())}</td><!--tripEnd.End_address-->
-<td>{WebUtility.HtmlEncode(DateTime.Parse(dr[8].ToString(), Tools.ciEnUS).ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS))}</td><!--tripEnd.EndDate-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[10].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.consumption_kwh-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[14].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}kWh</td><!--journeys.charged_kwh-->
-<td>{WebUtility.HtmlEncode(((double)dr[10] / (double)dr[14] * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated charge eff-->
-<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[11].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.drive_duration_minutes-->
-<td>{WebUtility.HtmlEncode(TimeSpan.FromMinutes(int.Parse(dr[13].ToString(), Tools.ciEnUS)).ToString("c", Tools.ciEnUS))}</td><!--journeys.charge_duration_minutes-->
-<td>{WebUtility.HtmlEncode(((double)(int)dr[11] / (double)((int)dr[11] + (int)dr[13]) * 100).ToString("0.00", Tools.ciEnUS))}%</td><!--calculated drive vs. charge-->
-<td>{WebUtility.HtmlEncode(Convert.ToDouble(dr[12].ToString(), Tools.ciEnUS).ToString("0.00", Tools.ciEnUS))}km</td><!--distance-->
-<td>{WebUtility.HtmlEncode(((double)dr[10] * 1000 / (double)dr[12]).ToString("0.00", Tools.ciEnUS))}Wh/km</td><!--calculated Wh/km-->
-<td><form action=""/export/trip""><input type=""hidden"" name=""carID"" value=""{dr[1]}""><input type=""hidden"" name=""from"" value=""{dr[3]}""><input type=""hidden"" name=""to"" value=""{dr[6]}""><button type=""submit"">GPX</button></form></td>
-<td><form action=""{EndPoints["JourneysDelete"]}""><input type=""hidden"" name=""id"" value=""{dr[0]}""><button type=""submit"">{WebUtility.HtmlEncode(TEXT_BUTTON_DELETE)}</button></form></td>
-</tr>"); // TODO convert to miles if miles are configured
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
-            }
-            WriteString(response, html1 + sb.ToString() + html2);
+    journeys.Id ASC";
+            
+            WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
         }
 
         internal static void JourneysDelete(HttpListenerRequest request, HttpListenerResponse response)
@@ -671,11 +613,10 @@ WHERE
 
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: CarID, StartPosID, EndPosId
-            // out: delete journey, render result HTML
-            response.AddHeader("Content-Type", "text/html; charset=utf-8");
-            StringBuilder sb = new StringBuilder();
-            int journeyID = Convert.ToInt32(GetUrlParameterValue(request, "id"), Tools.ciEnUS);
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+            int journeyID = r["id"];
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -692,16 +633,14 @@ WHERE
                         cmd.Parameters.AddWithValue("@journeyID", journeyID);
                         Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
-                        sb.Append("OK");
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
-                sb.Append(ex.ToString());
             }
-            WriteString(response, html1 + sb.ToString() + html2);
+            WriteString(response, "OK");
         }
 
         internal static void JourneysIndex(HttpListenerRequest request, HttpListenerResponse response)

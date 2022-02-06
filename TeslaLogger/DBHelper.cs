@@ -5094,5 +5094,55 @@ WHERE
 
         }
 
+        public static string GetJQueryDataTableJSON(string sql)
+        {
+            string json = "";
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                    {
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        Tools.DebugLog(cmd);
+                        json = DBHelper.GetJQueryDataTableJSON(dr);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return json;
+        }
+
+        public static string GetJQueryDataTableJSON(MySqlDataReader dr)
+        {
+            var o = new Dictionary<String, object>();
+
+            var aaData = new List<object>();
+            o.Add("aaData", aaData);
+
+            int rows = 0;
+            while (dr.Read())
+            {
+                rows++;
+                var r = new Dictionary<String, object>();
+                for (int x = 0; x < dr.FieldCount; x++)
+                {
+                    r.Add(dr.GetName(x), dr.GetValue(x));
+                }
+
+                aaData.Add(r);
+            }
+
+            o.Add("iTotalRecords", rows);
+            o.Add("iTotalDisplayRecords", rows);
+
+            var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            return json;
+        }
     }
 }

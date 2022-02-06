@@ -8,14 +8,14 @@ require_once("tools.php");
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Teslalogger Tesla Zugangsdaten"); ?></title>
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="https://teslalogger.de/teslalogger_style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-	<link rel='stylesheet' id='genericons-css'  href='https://www.impala64.de/blog/tesla/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<link rel='stylesheet' href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<script src="static/jquery/jquery-1.12.4.js"></script>
+	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
+	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
+	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css">
 </head>
 <script>
 function save() {

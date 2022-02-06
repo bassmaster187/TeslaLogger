@@ -178,6 +178,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/getallcars", System.StringComparison.Ordinal):
                         GetAllCars(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccount", System.StringComparison.Ordinal):
+                        GetCarsFromAccount(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
                         break;
@@ -294,6 +297,69 @@ namespace TeslaLogger
             {
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string responseString = "";
+
+            try
+            {
+                Logfile.Log("GetCarsFromAccount");
+                string data = GetDataFromRequestInputStream(request);
+                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+
+                string access_token = r["access_token"];
+                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
+                car.webhelper.Tesla_token = access_token;
+
+                car.webhelper.GetAllVehicles(out string resultContent, out object[] vehicles, true);
+
+                if (vehicles == null)
+                {
+                    if (resultContent?.Contains("error_description") == true)
+                    {
+                        dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        string error = j["error"] ?? "NULL";
+                        string error_description = j["error_description"] ?? "NULL";
+
+                        responseString = "ERROR: " + error + " / Error Description: " + error_description;
+
+                        Logfile.Log(responseString);
+
+                        WriteString(response, responseString);
+                        return;
+                    }
+                }
+
+                Logfile.Log("Found " + vehicles.Length + " Vehicles");
+
+                var o = new List<object>();
+                o.Add(new KeyValuePair<string, string>("", "Please Select"));
+
+                for (int x = 0; x < vehicles.Length; x++)
+                {
+                    var cc = (Dictionary<string, object>)vehicles[x];
+                    var ccVin = cc["vin"].ToString();
+                    var ccDisplayName = cc["display_name"].ToString();
+                    
+                    o.Add(new KeyValuePair<string, string>(x.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
+                }
+
+                responseString = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+
+            }
+            catch (UnauthorizedAccessException)
+            {
+                responseString = "Unauthorized";
+                Logfile.Log("Wrong Access Token!!!");
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            WriteString(response, responseString);
         }
 
         private void Restart(HttpListenerRequest request, HttpListenerResponse response)
@@ -841,11 +907,15 @@ namespace TeslaLogger
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             while (dr.Read())
                             {
-                                if (double.TryParse(dr[0].ToString(), out double lat)
-                                     && double.TryParse(dr[1].ToString(), out double lng)
-                                     && DateTime.TryParse(dr[2].ToString(), out DateTime Datum))
+                                if (dr[0] is Double && 
+                                     dr[1] is Double &&
+                                     dr[2] is DateTime)
                                 {
-                                    string Pos = ($"lat=\"{lat}\" lon=\"{lng}\"");
+                                    double lat = (double)dr[0];
+                                    double lng = (double)dr[1];
+                                    DateTime Datum = (DateTime)dr[2];
+
+                                    string Pos = ($"lat=\"{lat.ToString(Tools.ciEnUS)}\" lon=\"{lng.ToString(Tools.ciEnUS)}\"");
                                     if (!Pos.Equals(PosLast, System.StringComparison.Ordinal))
                                     {
                                         // convert date/time into GPX format (insert a "T")
@@ -954,10 +1024,10 @@ namespace TeslaLogger
                 WriteString(response, "CarId not found: " + id);
         }
 
-        private static string GetDataFromRequestInputStream(HttpListenerRequest request)
+        public static string GetDataFromRequestInputStream(HttpListenerRequest request)
         {
             string data;
-            using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            using (StreamReader reader = new StreamReader(request.InputStream, Encoding.UTF8))
             {
                 data = reader.ReadToEnd();
             }
