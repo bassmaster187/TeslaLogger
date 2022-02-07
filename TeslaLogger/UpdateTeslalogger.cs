@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using System.Threading;
 using System.Net;
 using System.IO.Compression;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -625,6 +626,7 @@ CREATE TABLE superchargerstate(
             catch (Exception ex)
             {
                 Logfile.Log("Error in update: " + ex.ToString());
+                ex.ToExceptionless();
             }
             finally
             {

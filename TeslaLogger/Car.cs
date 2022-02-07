@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Exceptionless;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
@@ -186,36 +188,50 @@ namespace TeslaLogger
         {
             lock (_syncRoot)
             {
-                CurrentJSON = new CurrentJSON(this);
-                teslaAPIState = new TeslaAPIState(this);
-                this.TeslaName = TeslaName;
-                this.TeslaPasswort = TeslaPasswort;
-                this.CarInAccount = CarInAccount;
-                this.CarInDB = CarInDB;
-                this.Tesla_Token = TeslaToken;
-                this.Tesla_Token_Expire = TeslaTokenExpire;
-                this.ModelName = ModelName;
-                this.CarType = cartype;
-                this.CarSpecialType = carspecialtype;
-                this.TrimBadging = cartrimbadging;
-                this.DisplayName = displayname;
-                this.Vin = vin;
-                this.TaskerHash = TaskerHash;
-                this.WhTR = WhTR ?? 0.190;
-
-                if (CarInDB > 0)
-                    Allcars.Add(this);
-
-                DbHelper = new DBHelper(this);
-                webhelper = new WebHelper(this);
-
-                if (CarInDB > 0)
+                try
                 {
-                    thread = new Thread(Loop)
+                    CurrentJSON = new CurrentJSON(this);
+                    teslaAPIState = new TeslaAPIState(this);
+                    this.TeslaName = TeslaName;
+                    this.TeslaPasswort = TeslaPasswort;
+                    this.CarInAccount = CarInAccount;
+                    this.CarInDB = CarInDB;
+                    this.Tesla_Token = TeslaToken;
+                    this.Tesla_Token_Expire = TeslaTokenExpire;
+                    this.ModelName = ModelName;
+                    this.CarType = cartype;
+                    this.CarSpecialType = carspecialtype;
+                    this.TrimBadging = cartrimbadging;
+                    this.DisplayName = displayname;
+                    this.Vin = vin;
+                    this.TaskerHash = TaskerHash;
+                    this.WhTR = WhTR ?? 0.190;
+
+                    if (CarInDB > 0)
+                        Allcars.Add(this);
+
+                    DbHelper = new DBHelper(this);
+                    webhelper = new WebHelper(this);
+
+                    if (CarInDB > 0)
                     {
-                        Name = "Car" + CarInDB
-                    };
-                    thread.Start();
+                        thread = new Thread(Loop)
+                        {
+                            Name = "Car" + CarInDB
+                        };
+                        thread.Start();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().SetUserIdentity(TaskerHash)
+                        .AddObject(ModelName, "ModelName")
+                        .AddObject(cartype, "CarType")
+                        .AddObject(carspecialtype, "CarSpecialType")
+                        .AddObject(cartrimbadging, "CarTrimBadging")
+                        .Submit();
+
+                    ExceptionDispatchInfo.Capture(ex).Throw();
                 }
             }
         }
@@ -287,6 +303,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
                         Thread.Sleep(10000);
                     }
@@ -294,6 +311,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+
                 string temp = ex.ToString();
 
                 if (!temp.Contains("ThreadAbortException"))
@@ -375,7 +394,10 @@ namespace TeslaLogger
             {
                 string temp = ex.ToString();
                 if (!temp.Contains("ThreadAbortException"))
+                {
+                    ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                     Log(ex.ToString());
+                }
             }
         }
 
@@ -395,6 +417,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -835,6 +858,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                             Tools.DebugLog("Exception sleepduration", ex);
                         }
                         Thread.Sleep(sleepduration);
@@ -1471,6 +1495,8 @@ namespace TeslaLogger
 
         public void ExternalLog(string text)
         {
+            ExceptionlessClient.Default.SubmitLog(text);
+
             string temp = TaskerHash + ": " + text;
             Tools.ExternalLog(temp);
         }
@@ -1570,6 +1596,7 @@ id = @carid", con))
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                 Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
@@ -1629,6 +1656,7 @@ id = @carid", con))
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
                 Log(ex.ToString());
             }
 
