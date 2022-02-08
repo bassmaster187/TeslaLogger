@@ -224,12 +224,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().SetUserIdentity(TaskerHash)
-                        .AddObject(ModelName, "ModelName")
-                        .AddObject(cartype, "CarType")
-                        .AddObject(carspecialtype, "CarSpecialType")
-                        .AddObject(cartrimbadging, "CarTrimBadging")
-                        .Submit();
+                    SendException2Exceptionless(ex);
 
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
@@ -303,7 +298,8 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                        SendException2Exceptionless(ex);
+
                         Logfile.ExceptionWriter(ex, "#" + CarInDB + ": main loop");
                         Thread.Sleep(10000);
                     }
@@ -311,7 +307,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                SendException2Exceptionless(ex);
 
                 string temp = ex.ToString();
 
@@ -395,7 +391,8 @@ namespace TeslaLogger
                 string temp = ex.ToString();
                 if (!temp.Contains("ThreadAbortException"))
                 {
-                    ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                    SendException2Exceptionless(ex);
+
                     Log(ex.ToString());
                 }
             }
@@ -417,7 +414,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                SendException2Exceptionless(ex);
+
                 Logfile.Log(ex.ToString());
             }
         }
@@ -858,7 +856,8 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                            SendException2Exceptionless(ex);
+
                             Tools.DebugLog("Exception sleepduration", ex);
                         }
                         Thread.Sleep(sleepduration);
@@ -1596,7 +1595,8 @@ id = @carid", con))
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                SendException2Exceptionless(ex);
+
                 Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
@@ -1656,12 +1656,29 @@ id = @carid", con))
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().SetUserIdentity(TaskerHash).Submit();
+                SendException2Exceptionless(ex);
+
                 Log(ex.ToString());
             }
 
             reason = "";
             return true;
         }
-    }
+
+        internal void SendException2Exceptionless(Exception ex)
+        {
+            CreateExceptionlessClient(ex).Submit();
+        }
+
+        internal EventBuilder CreateExceptionlessClient(Exception ex)
+        {
+            EventBuilder b = ex.ToExceptionless().SetUserIdentity(TaskerHash)
+                        .AddObject(ModelName, "ModelName")
+                        .AddObject(CarType, "CarType")
+                        .AddObject(CarSpecialType, "CarSpecialType")
+                        .AddObject(TrimBadging, "CarTrimBadging");
+
+            return b;
+        }
+    }   
 }
