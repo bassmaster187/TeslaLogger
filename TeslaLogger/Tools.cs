@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -74,6 +75,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     DebugLog("Exception in SQL DEBUG", ex, prefix);
                 }
             }
@@ -215,6 +217,7 @@ namespace TeslaLogger
             }
             catch (Exception ee)
             {
+                ee.ToExceptionless().Submit();
                 //Avoid any situation that the Trace is what crashes you application. While trace can log to a file. Console normally not output to the same place.
                 Logfile.Log("Tracing exception in TraceException(Exception e)" + ee.Message);
             }
@@ -287,6 +290,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
@@ -426,6 +430,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -441,6 +446,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("CopyFile Exception: " + ex.ToString());
             }
         }
@@ -494,6 +500,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -523,6 +530,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             return httpport;
@@ -550,6 +558,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             return true;
@@ -613,6 +622,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             _StreamingPos = false;
@@ -667,6 +677,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -741,6 +752,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
@@ -793,6 +805,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -827,6 +840,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -947,6 +961,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -983,6 +998,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "GetGrafanaVersion");
             }
 
@@ -1003,6 +1019,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "IsDocker");
             }
 
@@ -1032,6 +1049,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "IsShareData");
             }
 
@@ -1075,6 +1093,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1276,6 +1295,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1315,6 +1335,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().Submit();
                             Logfile.Log(ex.ToString());
                         }
                     }

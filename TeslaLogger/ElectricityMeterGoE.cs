@@ -6,6 +6,7 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -46,6 +47,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -76,6 +78,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, j);
             }
 
@@ -97,6 +100,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, j);
             }
 
@@ -118,6 +122,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, j);
             }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -130,6 +131,7 @@ namespace TeslaLogger
             }
             catch (Exception e)
             {
+                e.ToExceptionless().Submit();
                 Logfile.Log($"RestoreToken Exception: {e.Message}");
 
                 return string.Empty;

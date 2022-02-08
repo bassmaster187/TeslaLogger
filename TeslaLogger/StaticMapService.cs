@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
 using static TeslaLogger.StaticMapProvider;
+using Exceptionless;
+
 
 namespace TeslaLogger
 {
@@ -114,6 +116,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().Submit();
                             Tools.DebugLog("StaticMapService: Exception", ex);
                         }
 
@@ -126,6 +129,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("StaticMapService: Exception", ex);
             }
         }
@@ -356,6 +360,7 @@ ORDER BY
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
                         Logfile.Log(ex.ToString());
                     }
@@ -379,6 +384,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             return mapdir;
@@ -446,6 +452,7 @@ WHERE
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().Submit();
                             Logfile.Log(ex.ToString());
                         }
                     }
@@ -453,6 +460,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -493,6 +501,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }

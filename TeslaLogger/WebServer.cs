@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -57,6 +58,8 @@ namespace TeslaLogger
             }
             catch (HttpListenerException hlex)
             {
+                hlex.ToExceptionless().Submit();
+
                 listener = null;
                 if (((UInt32)hlex.HResult) == 0x80004005)
                 {
@@ -69,6 +72,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 listener = null;
                 Logfile.Log(ex.ToString());
             }
@@ -87,6 +91,7 @@ namespace TeslaLogger
             }
             catch (HttpListenerException hlex)
             {
+                hlex.ToExceptionless().Submit();
                 listener = null;
                 if (((UInt32)hlex.HResult) == 0x80004005)
                 {
@@ -99,6 +104,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 listener = null;
                 Logfile.Log(ex.ToString());
             }
@@ -111,6 +117,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -295,6 +302,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
         }
@@ -356,6 +364,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -377,6 +386,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     WriteString(response, ex.ToString());
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
@@ -446,6 +456,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
                 WriteString(response, "error");
             }
@@ -499,6 +510,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }
@@ -647,6 +659,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -990,6 +1003,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 WriteString(response, ex.ToString());
                 Logfile.Log(ex.ToString());
             }
@@ -1057,6 +1071,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     WriteString(response, ex.ToString());
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
@@ -1125,6 +1140,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     WriteString(response, ex.ToString());
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
@@ -1396,6 +1412,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }
@@ -1615,6 +1632,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
                 WriteString(response, "ERROR");
             }
@@ -1642,6 +1660,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1675,6 +1694,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1769,7 +1789,10 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            {
+                ex.ToExceptionless().Submit();
+            }
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to, null, "/admin/UpdateElevation");

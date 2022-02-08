@@ -42,6 +42,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("DumpJSON", ex);
                     }
                 }
@@ -92,6 +93,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }
@@ -223,6 +225,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 state = new Dictionary<Key, object>() {
@@ -261,6 +264,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -293,6 +297,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = int.MinValue;
@@ -325,6 +330,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -358,6 +364,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = string.Empty;
@@ -387,6 +394,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
@@ -405,12 +413,14 @@ namespace TeslaLogger
             }
             catch (ArgumentException aex)
             {
+                aex.ToExceptionless().AddObject(JSON).Submit();
                 Tools.DebugLog("ArgumentException", aex);
                 Tools.DebugLog("JSON: <" + JSON + ">");
                 return false;
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
                 return false;
             }
@@ -537,6 +547,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -698,6 +709,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -794,6 +806,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -916,6 +929,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1084,6 +1098,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1271,6 +1286,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
