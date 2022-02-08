@@ -874,6 +874,8 @@ namespace TeslaLogger
             defaultcar = "";
             defaultcarid = "";
 
+            string json = null;
+
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -884,7 +886,7 @@ namespace TeslaLogger
                     return;
                 }
 
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
                 if (IsPropertyExist(j, "Power"))
@@ -917,7 +919,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "Range"))
                 {
-                    if (j["Range"].ToString().Length > 0)
+                    if (j["Range"]?.ToString()?.Length > 0)
                     {
                         Range = j["Range"];
                     }
@@ -925,7 +927,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "URL_Grafana"))
                 {
-                    if (j["URL_Grafana"].ToString().Length > 0)
+                    if (j["URL_Grafana"]?.ToString()?.Length > 0)
                     {
                         URL_Grafana = j["URL_Grafana"];
                     }
@@ -933,7 +935,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "defaultcar"))
                 {
-                    if (j["defaultcar"].ToString().Length > 0)
+                    if (j["defaultcar"]?.ToString()?.Length > 0)
                     {
                         defaultcar = j["defaultcar"];
                     }
@@ -941,7 +943,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "defaultcarid"))
                 {
-                    if (j["defaultcarid"].ToString().Length > 0)
+                    if (j["defaultcarid"]?.ToString()?.Length > 0)
                     {
                         defaultcarid = j["defaultcarid"];
                     }
@@ -961,13 +963,19 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().AddObject(json, "JSON").Submit();
                 Logfile.Log(ex.ToString());
             }
         }
 
         public static bool IsPropertyExist(dynamic settings, string name)
         {
+            if (settings == null)
+                return false;
+
+            if (!(settings is IDictionary<string, object>))
+                return false;
+
             return settings is IDictionary<string, object> dictionary && dictionary.ContainsKey(name);
         }
 
