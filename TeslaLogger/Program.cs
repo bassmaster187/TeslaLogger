@@ -33,9 +33,9 @@ namespace TeslaLogger
             {
                 try
                 {
-                    ExceptionlessClient.Default.Startup("Fr6JebtLWFka4nFwGXSkZAYEXIKCXn6AYGJb1mzt");
-                    ExceptionlessClient.Default.Configuration.UseFileLogger("C:\\temp\\exceptionless.log");
-                    ExceptionlessClient.Default.Configuration.ServerUrl = "http://ds718plus:5002";
+                    ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey); 
+                    // ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
+                    ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
                     ExceptionlessClient.Default.SubmitLog("Start " + Assembly.GetExecutingAssembly().GetName().Version);
