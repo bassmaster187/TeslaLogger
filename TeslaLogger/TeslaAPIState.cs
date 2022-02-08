@@ -1329,8 +1329,11 @@ namespace TeslaLogger
         void ExceptionlessLogUnknowKey(string text)
         {
             ExceptionlessClient.Default.CreateLog(text)
-                .AddObject(car.ModelName)
                 .SetUserIdentity(car.TaskerHash)
+                .AddObject(car.ModelName, "ModelName")
+                .AddObject(car.CarType, "CarType")
+                .AddObject(car.CarSpecialType, "CarSpecialType")
+                .AddObject(car.TrimBadging, "CarTrimBadging")
                 .Submit();
 
             Logfile.Log(text);
