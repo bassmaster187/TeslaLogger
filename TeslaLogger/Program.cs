@@ -282,11 +282,17 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
-
-            if (File.Exists("BRANCH"))
+            try
             {
-                var branch = File.ReadAllText("BRANCH").Trim();
-                Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+                if (File.Exists("BRANCH"))
+                {
+                    var branch = File.ReadAllText("BRANCH").Trim();
+                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
