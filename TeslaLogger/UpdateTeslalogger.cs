@@ -736,6 +736,18 @@ CREATE TABLE superchargerstate(
                 bool httpDownloadSuccessful = false;
                 bool zipExtractSuccessful = false;
                 string GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/master.zip";
+                string master = "master";
+
+                if (File.Exists("BRANCH"))
+                {
+                    var branch = File.ReadAllText("BRANCH").Trim();
+                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                    GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/"+ branch + ".zip";
+                    master = branch;
+                }
+
+
                 string updatepackage = "/etc/teslalogger/tmp/master.zip";
                 try
                 {
@@ -782,10 +794,10 @@ CREATE TABLE superchargerstate(
                             Logfile.Log($"unzip update package {updatepackage} to /etc/teslalogger/tmp/zip");
                             ZipFile.ExtractToDirectory(updatepackage, "/etc/teslalogger/tmp/zip");
                             // GitHub zip contains folder "TeslaLogger-master" so we have to move files around
-                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-master"))
+                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-"+ master))
                             {
-                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-master to /etc/teslalogger/git");
-                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-master /etc/teslalogger/git");
+                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-"+master+" to /etc/teslalogger/git");
+                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-"+ master +" /etc/teslalogger/git");
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
                                     Logfile.Log("update package: download and unzip successful");
