@@ -693,6 +693,7 @@ CREATE TABLE superchargerstate(
 
             File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
+            ExceptionlessClient.Default.CreateLog("Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
             if (Tools.IsMono())
             {
@@ -752,6 +753,8 @@ CREATE TABLE superchargerstate(
                         wc.DownloadFile(GitHubURL, updatepackage);
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
+
+                        ExceptionlessClient.Default.CreateLog("Update Download successful").Submit();
                     }
                 }
                 catch (Exception ex)
@@ -787,6 +790,8 @@ CREATE TABLE superchargerstate(
                                 {
                                     Logfile.Log("update package: download and unzip successful");
                                     zipExtractSuccessful = true;
+
+                                    ExceptionlessClient.Default.CreateLog("Update Zip Extract Successful").Submit();
                                 }
                             }
                         }
@@ -852,6 +857,9 @@ CREATE TABLE superchargerstate(
                     ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
+
+                ExceptionlessClient.Default.CreateLog("Update finished!").Submit();
+                ExceptionlessClient.Default.ProcessQueue();
 
                 Logfile.Log("End update");
 
