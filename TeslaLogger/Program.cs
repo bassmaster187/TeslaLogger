@@ -321,6 +321,9 @@ namespace TeslaLogger
                 {
                     var branch = File.ReadAllText("BRANCH").Trim();
                     Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                    ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
+                    ExceptionlessClient.Default.SubmitLog("BRANCH: " + branch);
                 }
             }
             catch (Exception ex)
