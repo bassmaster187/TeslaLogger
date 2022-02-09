@@ -1,4 +1,5 @@
 ﻿using System;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -20,6 +21,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Logfile.Log(ex.ToString());
             }
         }
@@ -59,6 +62,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             finally

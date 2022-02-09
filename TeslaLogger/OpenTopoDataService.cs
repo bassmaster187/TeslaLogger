@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -61,6 +62,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("OpenTopoDataService: Exception", ex);
             }
         }

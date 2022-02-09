@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -281,6 +282,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().AddObject(line,"Line").Submit();
                             Logfile.ExceptionWriter(ex, line);
                         }
                     }
