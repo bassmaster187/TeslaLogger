@@ -329,7 +329,9 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    if (ex.Message.Contains("Connection refused"))
+                    if (ex.Message.Contains("Connection refused") 
+                        || ex.Message.Contains("Unable to connect to any of the specified MySQL hosts") 
+                        || ex.Message.Contains("Reading from the stream has failed."))
                     {
                         Logfile.Log($"Wait for DB ({x}/30): Connection refused.");
                     }

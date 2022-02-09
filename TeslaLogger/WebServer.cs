@@ -481,6 +481,8 @@ namespace TeslaLogger
                     {
                         File.Delete(file_htaccess);
                         Logfile.Log("delete: " + file_htaccess);
+                        WriteString(response, "OK");
+                        return;
                     }
                     WriteString(response, "ERROR");
                 }
