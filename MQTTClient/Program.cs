@@ -32,7 +32,13 @@ namespace MQTTClient
                     Logfile.Log("No Topic settings -> MQTT disabled!");
                     return;
                 }
-
+                
+                if (Properties.Settings.Default.ClientID.Length > 0)
+                {
+                    clientid = Properties.Settings.Default.ClientID;
+                    return;
+                }
+                
                 client = new MqttClient(Properties.Settings.Default.MQTTHost);
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
