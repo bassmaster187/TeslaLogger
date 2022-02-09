@@ -730,6 +730,15 @@ CREATE TABLE superchargerstate(
                 bool httpDownloadSuccessful = false;
                 bool zipExtractSuccessful = false;
                 string GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/master.zip";
+
+                if (File.Exists("BRANCH"))
+                {
+                    var branch = File.ReadAllText("BRANCH").Trim();
+                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                    GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/"+ branch + ".zip";
+                }
+
                 string updatepackage = "/etc/teslalogger/tmp/master.zip";
                 try
                 {
