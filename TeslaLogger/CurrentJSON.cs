@@ -129,6 +129,8 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    car.CreateExceptionlessClient(ex).Submit();
+
                     Logfile.Log(ex.ToString());
                     duration = 0;
                 }
@@ -223,6 +225,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.Log(ex.ToString());
                 current_json = "";
             }

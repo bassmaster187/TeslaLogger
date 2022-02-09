@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -314,6 +315,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Logfile.Log(ex.ToString());
             }
         }
@@ -353,6 +356,7 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -389,6 +393,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -428,6 +433,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
             return true;
@@ -455,6 +461,7 @@ DESC";
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -501,6 +508,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
             // find drops in charging.charge_energy_added
@@ -555,6 +563,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
             foreach (int ChargingStateID in recalculate)
@@ -633,6 +642,7 @@ AND id <=(
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
             if (segments.Count > 0)
@@ -698,6 +708,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             return double.NaN;
@@ -729,6 +740,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -767,6 +779,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Tools.DebugLog($"Exception during UpdateEmptyChargeEnergy(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during UpdateEmptyChargeEnergy()");
             }
@@ -817,6 +831,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during UpdateEmptyUnplugDate(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during UpdateEmptyUnplugDate()");
             }
@@ -848,6 +864,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during DBHelper.FillEmptyUnplugDate(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.FillEmptyUnplugDate()");
             }
@@ -998,6 +1016,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.ExceptionWriter(ex, "GetStartEndFromCharginState");
                 car.Log(ex.ToString());
             }
@@ -1041,6 +1061,8 @@ HAVING
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during FindCombineCandidates(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during FindCombineCandidates()");
             }
@@ -1075,6 +1097,8 @@ HAVING
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 car.Log(ex.ToString());
             }
         }
@@ -1111,6 +1135,7 @@ HAVING
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -1169,6 +1194,7 @@ HAVING
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -1199,6 +1225,7 @@ HAVING
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -1368,6 +1395,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during DBHelper.ChargingStateLocationIsSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.ChargingStateLocationIsSuC()");
             }
@@ -1431,6 +1460,8 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    car.CreateExceptionlessClient(ex).Submit();
+
                     Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                     Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                 }
@@ -1471,6 +1502,8 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
+
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                     }
@@ -1513,6 +1546,8 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
+
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                     }
@@ -1554,6 +1589,8 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
+
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                     }
@@ -1587,6 +1624,8 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
+
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                     }
@@ -1620,6 +1659,8 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
+
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
                     }
@@ -1661,6 +1702,8 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    car.CreateExceptionlessClient(ex).Submit();
+
                     Tools.DebugLog($"Exception during DBHelper.UpdateUnplugDate(): {ex}");
                     Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateUnplugDate()");
                 }
@@ -1698,6 +1741,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
             }
@@ -1760,6 +1805,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.ExceptionWriter(ex, "UpdateChargeEnergyAdded");
                 car.Log(ex.ToString());
             }
@@ -1790,6 +1837,8 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    car.CreateExceptionlessClient(ex).Submit();
+
                     Tools.DebugLog($"Exception during DBHelper.UpdateChargeEnergyAdded(): {ex}");
                     Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargeEnergyAdded()");
                 }
@@ -1871,6 +1920,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during FindReferenceChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during FindReferenceChargingState()");
             }
@@ -1910,6 +1961,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
@@ -1952,6 +2005,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
@@ -1991,6 +2046,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during FindOpenChargingStates(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during FindOpenChargingStates()");
             }
@@ -2068,6 +2125,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during FindChargingStatesByOdometer(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during FindChargingStatesByOdometer()");
             }
@@ -2109,6 +2168,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 car.Log(ex.Message);
             }
         }
@@ -2149,6 +2210,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 car.Log(ex.Message);
             }
         }
@@ -2266,6 +2329,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 car.Log(ex.ToString());
             }
         }
@@ -2299,6 +2364,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.ExceptionWriter(ex, "getLatestOdometer");
             }
 
@@ -2342,6 +2409,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Logfile.Log(ex.Message);
             }
         }
@@ -2458,6 +2527,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 car.Log(ex.ToString());
             }
         }
@@ -2484,6 +2555,8 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.Log(ex.ToString());
             }
 
@@ -2791,6 +2864,8 @@ WHERE
                             }
                             catch (Exception ex)
                             {
+                                car.CreateExceptionlessClient(ex).Submit();
+
                                 Logfile.ExceptionWriter(ex, sql);
                             }
                         }
@@ -2800,6 +2875,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Logfile.ExceptionWriter(ex, inhalt);
                 Logfile.Log(ex.ToString());
             }
@@ -2918,6 +2995,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog(ex.ToString());
             }
             try
@@ -2956,6 +3035,8 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
+
                 Tools.DebugLog($"Exception during DBHelper.UpdateDriveHeightStatistics(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateDriveHeightStatistics()");
             }
@@ -2992,6 +3073,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog(ex.ToString());
             }
             return -1;
@@ -3030,6 +3112,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog(ex.ToString());
             }
         }
@@ -3051,12 +3134,14 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Logfile.Log(ex.ToString());
                     }
                 }
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -3103,6 +3188,7 @@ WHERE
                                 }
                                 catch (Exception ex)
                                 {
+                                    ex.ToExceptionless().Submit();
                                     Logfile.Log(ex.ToString());
                                 }
                             }, TaskScheduler.Default);
@@ -3112,6 +3198,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -3271,6 +3358,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -3303,6 +3391,7 @@ WHERE
                             }
                             catch (Exception ex)
                             {
+                                ex.ToExceptionless().Submit();
                                 Logfile.Log(ex.ToString());
                             }
                         }
@@ -3311,6 +3400,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "UpdateIncompleteTrips");
             }
 
@@ -3343,6 +3433,7 @@ WHERE
                         }
                         catch (Exception ex)
                         {
+                            ex.ToExceptionless().Submit();
                             Logfile.Log(ex.ToString());
                         }
                     }
@@ -3529,6 +3620,7 @@ VALUES(
                     }
                     catch (Exception ex)
                     {
+                        car.CreateExceptionlessClient(ex).Submit();
                         car.Log(ex.ToString());
                     }
                 }
@@ -3574,6 +3666,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog($"Exception during GetAddressFromChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during GetAddressFromChargingState()");
             }
@@ -3623,6 +3716,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog("Exception waitbetween2pointsdb", ex);
             }
 
@@ -3739,6 +3833,7 @@ VALUES(
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -3947,6 +4042,7 @@ VALUES (
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, car_version);
             }
         }
@@ -3980,6 +4076,7 @@ LIMIT 1", con))
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, "GetLastCarVersion");
                 car.Log(ex.ToString());
             }
@@ -4095,6 +4192,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("Error in: " + sql);
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
@@ -4121,6 +4219,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("Error in: " + sql);
                 Logfile.ExceptionWriter(ex, sql);
                 throw;
@@ -4189,6 +4288,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, chargingstate_id.ToString(Tools.ciEnUS));
                 car.Log(ex.ToString());
             }
@@ -4217,6 +4317,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, chargingstate_id.ToString(Tools.ciEnUS));
                 car.Log(ex.ToString());
             }
@@ -4260,6 +4361,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
                 car.Log(ex.ToString());
             }
@@ -4309,6 +4411,7 @@ FROM
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, "GetScanMyTeslaPacketsLastWeek");
                 car.Log(ex.ToString());
             }
@@ -4371,6 +4474,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.ExceptionWriter(ex, "GetAvgMaxRage");
                 car.Log(ex.ToString());
             }
@@ -4416,6 +4520,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
 
@@ -4441,6 +4546,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -4472,6 +4578,7 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -4542,6 +4649,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
             }
         }
@@ -4630,6 +4738,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
             return 0;
@@ -4715,6 +4824,7 @@ WHERE SCHEMA_NAME  = '{dbname}'", con))
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -4736,6 +4846,7 @@ COLLATE = utf8mb4_unicode_ci", 300);
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -4776,6 +4887,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -4796,6 +4908,7 @@ CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -4838,6 +4951,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -4858,6 +4972,7 @@ CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -5021,6 +5136,7 @@ WHERE
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception MigrateFloorRound()", ex);
                 }
             }
@@ -5042,6 +5158,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -5080,6 +5197,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
             }
@@ -5112,6 +5230,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 

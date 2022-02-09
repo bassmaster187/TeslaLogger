@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -41,6 +42,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("DumpJSON", ex);
                     }
                 }
@@ -91,6 +93,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }
@@ -222,6 +225,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 state = new Dictionary<Key, object>() {
@@ -260,6 +264,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -292,6 +297,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = int.MinValue;
@@ -324,6 +330,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -357,6 +364,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = string.Empty;
@@ -386,6 +394,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
@@ -404,12 +413,14 @@ namespace TeslaLogger
             }
             catch (ArgumentException aex)
             {
+                aex.ToExceptionless().AddObject(JSON).Submit();
                 Tools.DebugLog("ArgumentException", aex);
                 Tools.DebugLog("JSON: <" + JSON + ">");
                 return false;
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
                 return false;
             }
@@ -519,11 +530,13 @@ namespace TeslaLogger
                             {
                                 if (r4.TryGetValue(key, out value))
                                 {
-                                    Logfile.Log($"INFO: ParseVehicles: unknown key {key} value <{value}>");
+                                    string temp = $"INFO: ParseVehicles: unknown key {key} value <{value}>"; 
+                                    ExceptionlessLogUnknowKey(temp);
                                 }
                                 else
                                 {
-                                    Logfile.Log($"INFO: ParseVehicles: unknown key {key}");
+                                    string temp = $"INFO: ParseVehicles: unknown key {key}";
+                                    ExceptionlessLogUnknowKey(temp);
                                 }
                                 unknownKeys.Add(key);
                             }
@@ -534,6 +547,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -677,11 +691,13 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"INFO: ParseChargeState: unknown key {key} value <{value}>");
+                                        string temp = $"INFO: ParseChargeState: unknown key {key} value <{value}>";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
                                     {
-                                        Logfile.Log($"INFO: ParseChargeState: unknown key {key}");
+                                        string temp = $"INFO: ParseChargeState: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -693,6 +709,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -771,11 +788,13 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"INFO: ParseDriveState: unknown key {key} value <{value}>");
+                                        string temp = $"INFO: ParseDriveState: unknown key {key} value <{value}>";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
                                     {
-                                        Logfile.Log($"INFO: ParseDriveState: unknown key {key}");
+                                        string temp = $"INFO: ParseDriveState: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -787,6 +806,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -891,11 +911,13 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"INFO: ParseVehicleConfig: unknown key {key} value <{value}>");
+                                        string temp = $"INFO: ParseVehicleConfig: unknown key {key} value <{value}>";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
                                     {
-                                        Logfile.Log($"INFO: ParseVehicleConfig: unknown key");
+                                        string temp = $"INFO: ParseVehicleConfig: unknown key";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -907,6 +929,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1057,11 +1080,13 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"INFO: ParseVehicleState: unknown key {key} value <{value}>");
+                                        string temp = $"INFO: ParseVehicleState: unknown key {key} value <{value}>";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
                                     {
-                                        Logfile.Log($"INFO: ParseVehicleState: unknown key {key}");
+                                        string temp = $"INFO: ParseVehicleState: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -1073,6 +1098,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1121,11 +1147,13 @@ namespace TeslaLogger
                             {
                                 if (dictionary.TryGetValue(key, out value))
                                 {
-                                    Logfile.Log($"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}>");
+                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}>";
+                                    ExceptionlessLogUnknowKey(temp);
                                 }
                                 else
                                 {
-                                    Logfile.Log($"INFO: ParseSoftwareUpdate: unknown key {key}");
+                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key}";
+                                    ExceptionlessLogUnknowKey(temp);
                                 }
                                 unknownKeys.Add($"software_update.{key}");
                             }
@@ -1240,11 +1268,13 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        Logfile.Log($"INFO: ParseClimateState: unknown key {key} value <{value}>");
+                                        string temp = $"INFO: ParseClimateState: unknown key {key} value <{value}>";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
                                     {
-                                        Logfile.Log($"INFO: ParseClimateState: unknown key {key}");
+                                        string temp = $"INFO: ParseClimateState: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
                                     }
                                     unknownKeys.Add(key);
                                 }
@@ -1256,6 +1286,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1293,6 +1324,19 @@ namespace TeslaLogger
             }
             long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
             return maxTS > 0 ? now - maxTS : 0;
+        }
+
+        void ExceptionlessLogUnknowKey(string text)
+        {
+            ExceptionlessClient.Default.CreateLog(text)
+                .SetUserIdentity(car.TaskerHash)
+                .AddObject(car.ModelName, "ModelName")
+                .AddObject(car.CarType, "CarType")
+                .AddObject(car.CarSpecialType, "CarSpecialType")
+                .AddObject(car.TrimBadging, "CarTrimBadging")
+                .Submit();
+
+            Logfile.Log(text);
         }
     }
 }

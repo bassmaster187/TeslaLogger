@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -44,6 +45,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("NearbySuCService: Exception", ex);
             }
         }
@@ -105,6 +107,7 @@ namespace TeslaLogger
                                     }
                                     catch (Exception ex)
                                     {
+                                        ex.ToExceptionless().Submit();
                                         Logfile.Log(ex.ToString());
                                     }
                                 }
@@ -116,6 +119,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
                         Tools.DebugLog("NearbySuCService.Work: Exception", ex);
                     }
@@ -145,6 +149,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("ShareSuc: " + ex.Message);
             }
         }

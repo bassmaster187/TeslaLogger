@@ -12,7 +12,7 @@
 	
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
-	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
+	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 	<style>
 	.icon {font-size:30px; color: #2b2b2b; height: 40px; margin-right: 15px;}
@@ -94,7 +94,7 @@
 	$inserted = false;
 	foreach ($csv2 as $value)
 	{
-		if  ($value[1] =="")
+		if  ($value[1] =="" || floatval($value[1]) == 0 || floatval($value[2]) == 0)
 			continue;
 		
 		$name = addslashes($value[0]);
@@ -110,9 +110,9 @@
 	echo("<!-- Start geofence -->\r\n");
 	foreach ($csv as $value)
 	{
-		if  ($value[1] =="")
+		if  ($value[1] =="" || floatval($value[1]) == 0 || floatval($value[2]) == 0)
 			continue;
-		
+
 		$name = addslashes($value[0]);
 		echo("im('$name',$value[1],$value[2]);\r\n");
 	}

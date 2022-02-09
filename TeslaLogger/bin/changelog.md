@@ -1,3 +1,6 @@
+# Version 1.51.5
+- Using [Excptionless](https://exceptionless.com/) to track exceptions.
+
 # Version 1.51.4
 - Easier auth proccess.
 

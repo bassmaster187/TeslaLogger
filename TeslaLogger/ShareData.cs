@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -213,6 +214,7 @@ ORDER BY
                             }
                             catch (Exception ex)
                             {
+                                car.SendException2Exceptionless(ex);
                                 car.Log("ShareData: " + ex.Message);
                             }
                         }
@@ -225,6 +227,8 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                car.SendException2Exceptionless(ex);
+
                 car.Log("Error in ShareData:SendAllChargingData " + ex.Message);
                 Logfile.WriteException(ex.ToString());
             }
@@ -424,6 +428,8 @@ GROUP BY
                         }
                         catch (Exception ex)
                         {
+                            car.SendException2Exceptionless(ex);
+
                             car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                         }
                     }
@@ -433,6 +439,8 @@ GROUP BY
             }
             catch (Exception ex)
             {
+                car.SendException2Exceptionless(ex);
+
                 car.Log("Error in ShareData:SendDegradationData " + ex.Message);
                 Logfile.WriteException(ex.ToString());
             }

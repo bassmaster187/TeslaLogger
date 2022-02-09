@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -97,6 +98,7 @@ CREATE TABLE journeys (
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -165,6 +167,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -227,6 +230,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -308,6 +312,7 @@ LIMIT 1", con))
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -394,6 +399,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -438,6 +444,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -482,6 +489,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -526,6 +534,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -605,6 +614,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
                 sb.Append(ex.ToString());
             }
@@ -638,6 +648,7 @@ WHERE
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             WriteString(response, "OK");

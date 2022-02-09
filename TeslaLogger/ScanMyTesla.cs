@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using MySql.Data.MySqlClient;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -81,6 +82,8 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
+
                     car.Log("Scanmytesla: " + ex.Message);
                     Logfile.WriteException(ex.ToString());
                     System.Threading.Thread.Sleep(20000);
@@ -259,6 +262,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
+
                 Logfile.ExceptionWriter(ex, resultContent);
                 Thread.Sleep(10000);
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exceptionless;
+using System;
 using System.Data;
 using System.IO;
 using System.Net;
@@ -30,6 +31,19 @@ namespace TeslaLogger
         {
             try
             {
+                try
+                {
+                    ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey); 
+                    // ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
+                    ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
+                    ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
+
+                    ExceptionlessClient.Default.SubmitLog("Start " + Assembly.GetExecutingAssembly().GetName().Version);
+                } catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+
                 InitDebugLogging();
 
                 InitStage1();
@@ -66,6 +80,9 @@ namespace TeslaLogger
                 Logfile.ExceptionWriter(ex, "main loop");
                 Logfile.Log("Teslalogger Stopped!");
                 Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
+
+                ex.ToExceptionless().Submit();
+                ExceptionlessClient.Default.ProcessQueue();
             }
             finally
             {
@@ -74,12 +91,16 @@ namespace TeslaLogger
                     try
                     {
                         Logfile.Log("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
+                        ExceptionlessClient.Default.SubmitLog("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
+
                         UpdateTeslalogger.DownloadUpdateAndInstall();
                     }
                     catch (Exception ex)
                     {
                         Logfile.Log(ex.Message);
-                        Logfile.ExceptionWriter(ex, "Emergency DownloadUpdateAndInstall()");
+                        // Logfile.ExceptionWriter(ex, "Emergency DownloadUpdateAndInstall()");
+
+                        ExceptionlessClient.Default.SubmitLog("Emergency DownloadUpdateAndInstall()");
                     }
                 }
             }
@@ -107,6 +128,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -169,6 +191,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -188,6 +211,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -214,6 +238,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -239,9 +264,16 @@ namespace TeslaLogger
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
+
             Logfile.Log("OS Version: " + Tools.GetOsVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS Version", Tools.GetOsVersion());
+
             Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("Update Settings", Tools.GetOnlineUpdateSettings().ToString());
 
             Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
 
@@ -256,6 +288,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, ex.ToString());
             }
         }
@@ -282,6 +315,21 @@ namespace TeslaLogger
             }
             catch (Exception)
             { }
+            try
+            {
+                if (File.Exists("BRANCH"))
+                {
+                    var branch = File.ReadAllText("BRANCH").Trim();
+                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                    ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
+                    ExceptionlessClient.Default.SubmitLog("BRANCH: " + branch);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private static void InitConnectToDB()
@@ -296,12 +344,15 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    if (ex.Message.Contains("Connection refused"))
+                    if (ex.Message.Contains("Connection refused") 
+                        || ex.Message.Contains("Unable to connect to any of the specified MySQL hosts") 
+                        || ex.Message.Contains("Reading from the stream has failed."))
                     {
                         Logfile.Log($"Wait for DB ({x}/30): Connection refused.");
                     }
                     else
                     {
+                        ex.ToExceptionless().Submit();
                         Logfile.Log("DBCONNECTION " + ex.Message);
                     }
 
@@ -320,6 +371,8 @@ namespace TeslaLogger
                 if (Tools.IsDocker())
                 {
                     Logfile.Log("Docker: YES!");
+
+                    ExceptionlessClient.Default.Configuration.DefaultData.Add("Docker", true);
 
                     if (!File.Exists("/etc/teslalogger/settings.json"))
                     {
@@ -347,6 +400,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -391,6 +445,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }

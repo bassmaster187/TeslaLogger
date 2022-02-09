@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using System.Threading;
 using System.Net;
 using System.IO.Compression;
+using Exceptionless;
 
 namespace TeslaLogger
 {
@@ -41,6 +42,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Tools.DebugLog("StopComfortingMessagesThread() exception", ex);
             }
         }
@@ -306,6 +308,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Logfile.Log(ex.ToString());
                     }
                 }
@@ -465,6 +468,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
 
@@ -624,6 +628,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
             }
             finally
@@ -688,6 +693,7 @@ CREATE TABLE superchargerstate(
 
             File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
+            ExceptionlessClient.Default.CreateLog("Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
             if (Tools.IsMono())
             {
@@ -734,6 +740,18 @@ CREATE TABLE superchargerstate(
                 bool httpDownloadSuccessful = false;
                 bool zipExtractSuccessful = false;
                 string GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/master.zip";
+                string master = "master";
+
+                if (File.Exists("BRANCH"))
+                {
+                    var branch = File.ReadAllText("BRANCH").Trim();
+                    Logfile.Log($"YOU ARE USING BRANCH: " + branch);
+
+                    GitHubURL = "https://github.com/bassmaster187/TeslaLogger/archive/refs/heads/"+ branch + ".zip";
+                    master = branch;
+                }
+
+
                 string updatepackage = "/etc/teslalogger/tmp/master.zip";
                 try
                 {
@@ -751,10 +769,13 @@ CREATE TABLE superchargerstate(
                         wc.DownloadFile(GitHubURL, updatepackage);
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
+
+                        ExceptionlessClient.Default.CreateLog("Update Download successful").Submit();
                     }
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log("Exception during download from github: " + ex.ToString());
                     Logfile.ExceptionWriter(ex, "Exception during download from github");
                 }
@@ -777,20 +798,23 @@ CREATE TABLE superchargerstate(
                             Logfile.Log($"unzip update package {updatepackage} to /etc/teslalogger/tmp/zip");
                             ZipFile.ExtractToDirectory(updatepackage, "/etc/teslalogger/tmp/zip");
                             // GitHub zip contains folder "TeslaLogger-master" so we have to move files around
-                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-master"))
+                            if (Directory.Exists("/etc/teslalogger/tmp/zip/TeslaLogger-"+ master))
                             {
-                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-master to /etc/teslalogger/git");
-                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-master /etc/teslalogger/git");
+                                Logfile.Log($"move update files from /etc/teslalogger/tmp/zip/TeslaLogger-"+master+" to /etc/teslalogger/git");
+                                Tools.ExecMono("mv", "/etc/teslalogger/tmp/zip/TeslaLogger-"+ master +" /etc/teslalogger/git");
                                 if (Directory.Exists("/etc/teslalogger/git/TeslaLogger/GrafanaPlugins"))
                                 {
                                     Logfile.Log("update package: download and unzip successful");
                                     zipExtractSuccessful = true;
+
+                                    ExceptionlessClient.Default.CreateLog("Update Zip Extract Successful").Submit();
                                 }
                             }
                         }
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Logfile.Log("Exception during unzip of downloaded update package: " + ex.ToString());
                         Logfile.ExceptionWriter(ex, "Exception during unzip of downloaded update package");
                     }
@@ -834,6 +858,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
 
@@ -845,8 +870,12 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.ToString());
                 }
+
+                ExceptionlessClient.Default.CreateLog("Update finished!").Submit();
+                ExceptionlessClient.Default.ProcessQueue();
 
                 Logfile.Log("End update");
 
@@ -876,6 +905,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -942,6 +972,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -971,6 +1002,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1022,6 +1054,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1047,6 +1080,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1107,6 +1141,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
+                    ex.ToExceptionless().Submit();
                     Logfile.Log(ex.Message);
                     Logfile.ExceptionWriter(ex, content);
                 }
@@ -1478,6 +1513,7 @@ CREATE TABLE superchargerstate(
                     }
                     catch (Exception ex)
                     {
+                        ex.ToExceptionless().Submit();
                         Logfile.Log(ex.ToString());
                     }
 
@@ -1496,6 +1532,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             finally
@@ -1611,6 +1648,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1631,6 +1669,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1649,6 +1688,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1667,6 +1707,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
             return s;
@@ -1692,6 +1733,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -1711,6 +1753,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1732,6 +1775,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1851,6 +1895,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log("chmod " + filename + " " + ex.Message);
             }
         }
@@ -1924,6 +1969,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
+                ex.ToExceptionless().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
