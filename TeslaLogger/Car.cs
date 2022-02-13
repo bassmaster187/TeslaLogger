@@ -1386,15 +1386,16 @@ namespace TeslaLogger
 
         internal void Restart(string reason, int waitSeconds)
         {
-            ExitTeslaLogger(reason);
-
-            ThreadJoin();
-
             Logfile.Log("Restart Car " + CarInDB);
 
             new Thread(() =>
             {
-                Thread.Sleep(waitSeconds * 1000);
+                for (int x = 0; x < waitSeconds; x++)
+                {
+                    Logfile.Log("Restart carthread in " + (waitSeconds - x).ToString() + "sec");
+
+                    Thread.Sleep(1000);
+                }
 
                 var dr = DBHelper.GetCar(CarInDB);
                 if (dr != null)
@@ -1404,6 +1405,10 @@ namespace TeslaLogger
                 }
 
             }).Start();
+
+            ExitTeslaLogger(reason);
+
+            ThreadJoin();
         }
 
         private void SetCurrentState(TeslaState _newState)

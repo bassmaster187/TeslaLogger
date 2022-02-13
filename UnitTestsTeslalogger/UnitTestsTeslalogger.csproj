@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="apache2-ready.conf" />
     <None Include="apache2.conf" />
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

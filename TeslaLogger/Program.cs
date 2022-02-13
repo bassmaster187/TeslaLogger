@@ -156,6 +156,9 @@ namespace TeslaLogger
                 String Password = r["tesla_password"].ToString();
                 int carid = r["tesla_carid"] as Int32? ?? 0;
                 String tesla_token = r["tesla_token"] as String ?? "";
+                if (tesla_token.StartsWith("OVMS:")) // OVMS Cars ar not handled by Teslalogger
+                    return;
+
                 DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
                 string Model_Name = r["Model_Name"] as String ?? "";
                 string car_type = r["car_type"] as String ?? "";

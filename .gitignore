@@ -58,3 +58,5 @@ TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/language.txt
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/settings.json
 TeslaLogger/CaptchaSolverKey.cs
 UnitTestsTeslalogger/grafana.ini
+OVMS/.vs
+TeslaLogger/CaptchaSolverKey.cs
