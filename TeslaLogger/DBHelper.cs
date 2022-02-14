@@ -116,7 +116,7 @@ VALUES(@id, @text)", con))
             }
         }
 
-        UpdateDriveHeightStatisticspublic void CloseState(int maxPosid)
+        public void CloseState(int maxPosid)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
