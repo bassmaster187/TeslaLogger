@@ -8,7 +8,7 @@ namespace TeslaLogger
 {
     public class Logfile
     {
-        private static bool WriteToLogfile = false;
+        public static bool WriteToLogfile = false;
         private static string _logfilepath = null;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
 
@@ -21,7 +21,7 @@ namespace TeslaLogger
             }
         }
 
-        private static string Logfilepath
+        public static string Logfilepath
         {
             get
             {
@@ -31,6 +31,10 @@ namespace TeslaLogger
                 }
 
                 return _logfilepath;
+            }
+            set
+            {
+                _logfilepath = value;
             }
         }
 
