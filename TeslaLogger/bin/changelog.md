@@ -1,3 +1,8 @@
+# Version 1.51.6
+- Bugfixes 
+- New MySql Client [Link](https://github.com/advisories/GHSA-77rm-9x9h-xj3g)
+- Restart car thread after 5 x 404 errors within 10 Minutes 
+
 # Version 1.51.5
 - Using [Excptionless](https://exceptionless.com/) to track exceptions.
 
