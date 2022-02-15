@@ -46,6 +46,7 @@ namespace TeslaLogger
         internal DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
         private static int MapQuestCount = 0;
         private static int NominatimCount = 0;
+        string cacheGUID = Guid.NewGuid().ToString();
 
         string authHost = "https://auth.tesla.com";
         CookieContainer tokenCookieContainer;
@@ -3363,6 +3364,10 @@ namespace TeslaLogger
             {
                 resultContent = await GetCommand("vehicle_state");
                 Tools.SetThreadEnUS();
+
+                if (resultContent == null || resultContent == "NULL")
+                    return lastOdometerKM;
+
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -3536,6 +3541,7 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
+                string cacheKey = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
                 HttpClient client = GethttpclientTeslaAPI();
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
@@ -3545,6 +3551,7 @@ namespace TeslaLogger
 
                 if (result.IsSuccessStatusCode)
                 {
+                    MemoryCache.Default.Remove(cacheKey);
 
                     resultContent = await result.Content.ReadAsStringAsync();
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
@@ -3579,6 +3586,22 @@ namespace TeslaLogger
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", -1, (int)result.StatusCode);
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     Thread.Sleep(5000);
+                }
+                else if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    int HttpNotFoundCounter =  (int)(MemoryCache.Default.Get(cacheKey) ?? 0);
+                    HttpNotFoundCounter++;
+                    MemoryCache.Default.Set(cacheKey, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
+
+                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd +  " Retry: " + HttpNotFoundCounter);
+
+                    Thread.Sleep(1000);
+
+                    if (HttpNotFoundCounter > 5)
+                    {
+                        car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        car.Restart("404 Error", 10);
+                    }
                 }
                 else
                 {
@@ -4052,7 +4075,8 @@ namespace TeslaLogger
                 // plausibility check
                 if (soc < 0)
                 {
-                    throw new Exception($"SoC < 0! soc:{soc}");
+                    // throw new Exception($"SoC < 0! soc:{soc}");
+                    return;
                 }
 
                 if (car.ABRPMode <= 0 || String.IsNullOrEmpty(car.ABRPToken))
