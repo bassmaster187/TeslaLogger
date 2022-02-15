@@ -42,7 +42,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        car.CreateExceptionlessClient(ex).Submit();
                         Tools.DebugLog("DumpJSON", ex);
                     }
                 }
@@ -93,7 +93,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        car.CreateExceptionlessClient(ex).Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }
@@ -225,7 +225,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 state = new Dictionary<Key, object>() {
@@ -264,7 +264,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -297,7 +297,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = int.MinValue;
@@ -330,7 +330,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -364,7 +364,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    car.CreateExceptionlessClient(ex).Submit();
                     Tools.DebugLog("Exception", ex);
                 }
                 value = string.Empty;
@@ -394,7 +394,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        car.CreateExceptionlessClient(ex).Submit();
                         Tools.DebugLog("Exception", ex);
                     }
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
@@ -413,14 +413,14 @@ namespace TeslaLogger
             }
             catch (ArgumentException aex)
             {
-                aex.ToExceptionless().AddObject(JSON).Submit();
+                car.CreateExceptionlessClient(aex).Submit();
                 Tools.DebugLog("ArgumentException", aex);
                 Tools.DebugLog("JSON: <" + JSON + ">");
                 return false;
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog("Exception", ex);
                 return false;
             }
@@ -530,7 +530,7 @@ namespace TeslaLogger
                             {
                                 if (r4.TryGetValue(key, out value))
                                 {
-                                    string temp = $"INFO: ParseVehicles: unknown key {key} value <{value}>"; 
+                                    string temp = $"INFO: ParseVehicles: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                     ExceptionlessLogUnknowKey(temp);
                                 }
                                 else
@@ -626,6 +626,10 @@ namespace TeslaLogger
                             case "not_enough_power_to_heat":
                             case "scheduled_charging_pending":
                             case "trip_charging":
+                            case "supercharger_session_trip_planner":
+                            case "preconditioning_enabled":
+                            case "off_peak_charging_enabled":
+                            case "supports_fan_only_cabin_overheat_protection":                            
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "charge_state");
@@ -642,6 +646,12 @@ namespace TeslaLogger
                             case "managed_charging_start_time":
                             case "scheduled_charging_start_time":
                             case "user_charge_enable_request":
+                            case "scheduled_charging_mode":
+                            case "preconditioning_times":
+                            case "off_peak_charging_times":
+                            case "charge_port_color":
+                            case "hvac_auto_request":
+                            case "cabin_overheat_protection":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "charge_state");
@@ -667,6 +677,7 @@ namespace TeslaLogger
                             case "scheduled_departure_time value":
                             case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
+                            case "scheduled_departure_time":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "charge_state");
@@ -691,7 +702,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseChargeState: unknown key {key} value <{value}>";
+                                        string temp = $"INFO: ParseChargeState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -788,7 +799,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseDriveState: unknown key {key} value <{value}>";
+                                        string temp = $"INFO: ParseDriveState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -866,6 +877,9 @@ namespace TeslaLogger
                             case "plg":
                             case "rhd":
                             case "use_range_badging":
+                            case "pws":
+                            case "has_seat_cooling":
+                            case "dashcam_clip_save_supported":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_config");
@@ -890,6 +904,7 @@ namespace TeslaLogger
                             case "default_charge_to_max":
                             case "exterior_trim":
                             case "front_drive_unit":
+                            case "headlamp_type":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_config");
@@ -901,6 +916,7 @@ namespace TeslaLogger
                             case "seat_type":
                             case "sun_roof_installed":
                             case "key_version":
+                            case "utc_offset":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_config");
@@ -911,7 +927,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseVehicleConfig: unknown key {key} value <{value}>";
+                                        string temp = $"INFO: ParseVehicleConfig: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -929,7 +945,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1021,6 +1037,7 @@ namespace TeslaLogger
                             case "summon_standby_mode_enabled":
                             case "valet_mode":
                             case "valet_pin_needed":
+                            case "dashcam_clip_save_available":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_state");
@@ -1033,6 +1050,7 @@ namespace TeslaLogger
                             case "last_autopark_error":
                             case "sun_roof_state":
                             case "vehicle_name":
+                            case "dashcam_state":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_state");
@@ -1053,6 +1071,7 @@ namespace TeslaLogger
                             case "fp_window":
                             case "rd_window":
                             case "rp_window":
+                            case "santa_mode":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_state");
@@ -1080,7 +1099,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseVehicleState: unknown key {key} value <{value}>";
+                                        string temp = $"INFO: ParseVehicleState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -1147,7 +1166,7 @@ namespace TeslaLogger
                             {
                                 if (dictionary.TryGetValue(key, out value))
                                 {
-                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}>";
+                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                     ExceptionlessLogUnknowKey(temp);
                                 }
                                 else
@@ -1224,6 +1243,8 @@ namespace TeslaLogger
                             case "wiper_blade_heater":
                             case "smart_preconditioning":
                             case "bioweapon_mode":
+                            case "supports_fan_only_cabin_overheat_protection":
+                            case "allow_cabin_overheat_protection":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "climate_state");
@@ -1231,6 +1252,8 @@ namespace TeslaLogger
                                 break;
                             // string
                             case "climate_keeper_mode":
+                            case "hvac_auto_request":
+                            case "cabin_overheat_protection":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "climate_state");
@@ -1268,7 +1291,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseClimateState: unknown key {key} value <{value}>";
+                                        string temp = $"INFO: ParseClimateState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
