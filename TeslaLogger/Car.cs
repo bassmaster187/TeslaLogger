@@ -1386,7 +1386,7 @@ namespace TeslaLogger
 
         internal void Restart(string reason, int waitSeconds)
         {
-            Logfile.Log("Restart Car " + CarInDB);
+            Log("Restart Car " + CarInDB);
 
             new Thread(() =>
             {
@@ -1499,7 +1499,7 @@ namespace TeslaLogger
 
         public void ExternalLog(string text)
         {
-            ExceptionlessClient.Default.SubmitLog(text);
+            CreateExeptionlessLog("Car", text, Exceptionless.Logging.LogLevel.Info).Submit(); ;
 
             string temp = TaskerHash + ": " + text;
             Tools.ExternalLog(temp);
@@ -1682,6 +1682,18 @@ id = @carid", con))
                         .AddObject(CarType, "CarType")
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging");
+
+            return b;
+        }
+
+        internal EventBuilder CreateExeptionlessLog(string source, string message, Exceptionless.Logging.LogLevel logLevel)
+        {
+            EventBuilder b = ExceptionlessClient.Default.CreateLog(source, message, logLevel)
+                .SetUserIdentity(TaskerHash)
+                .AddObject(ModelName, "ModelName")
+                .AddObject(CarType, "CarType")
+                .AddObject(CarSpecialType, "CarSpecialType")
+                .AddObject(TrimBadging, "CarTrimBadging");
 
             return b;
         }

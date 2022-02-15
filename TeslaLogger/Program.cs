@@ -16,7 +16,7 @@ namespace TeslaLogger
         public static bool SQLTRACE = false;
         public static bool SQLFULLTRACE = false;
         public static int SQLTRACELIMIT = 250;
-        public static int KeepOnlineMinAfterUsage = 1;
+        public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
 
         public enum TLMemCacheKey
@@ -38,7 +38,7 @@ namespace TeslaLogger
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
-                    ExceptionlessClient.Default.SubmitLog("Start " + Assembly.GetExecutingAssembly().GetName().Version);
+                    ExceptionlessClient.Default.SubmitLog("Program","Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info);
                 } catch (Exception ex)
                 {
                     Logfile.Log(ex.ToString());
@@ -91,7 +91,7 @@ namespace TeslaLogger
                     try
                     {
                         Logfile.Log("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
-                        ExceptionlessClient.Default.SubmitLog("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
+                        ExceptionlessClient.Default.SubmitLog("Program","Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
 
                         UpdateTeslalogger.DownloadUpdateAndInstall();
                     }
@@ -100,7 +100,7 @@ namespace TeslaLogger
                         Logfile.Log(ex.Message);
                         // Logfile.ExceptionWriter(ex, "Emergency DownloadUpdateAndInstall()");
 
-                        ExceptionlessClient.Default.SubmitLog("Emergency DownloadUpdateAndInstall()");
+                        ExceptionlessClient.Default.SubmitLog("Program", "Emergency DownloadUpdateAndInstall()");
                     }
                 }
             }
@@ -262,7 +262,7 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
-            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", 1);
+            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", 5);
             SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", 30);
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
@@ -326,7 +326,7 @@ namespace TeslaLogger
                     Logfile.Log($"YOU ARE USING BRANCH: " + branch);
 
                     ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
-                    ExceptionlessClient.Default.SubmitLog("BRANCH: " + branch);
+                    ExceptionlessClient.Default.SubmitLog("Program", "BRANCH: " + branch, Exceptionless.Logging.LogLevel.Warn);
                 }
             }
             catch (Exception ex)
