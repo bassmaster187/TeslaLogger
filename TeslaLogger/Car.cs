@@ -885,7 +885,19 @@ namespace TeslaLogger
             // Alle States werden geschlossen
             DbHelper.CloseChargingStates();
             //dbHelper.CloseChargingState();
-            DbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
+            try
+            {
+                DbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.ErrorCode == -2147467259) // {"Duplicate entry 'xxx' for key 'ix_endpos'"}
+                {
+                    webhelper.IsDriving(true);
+                }
+
+                SendException2Exceptionless(ex);
+            }
 
             string res = webhelper.IsOnline().Result;
             lastCarUsed = DateTime.Now;
