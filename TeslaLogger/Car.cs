@@ -885,7 +885,19 @@ namespace TeslaLogger
             // Alle States werden geschlossen
             DbHelper.CloseChargingStates();
             //dbHelper.CloseChargingState();
-            DbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
+            try
+            {
+                DbHelper.CloseDriveState(webhelper.lastIsDriveTimestamp);
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.ErrorCode == -2147467259) // {"Duplicate entry 'xxx' for key 'ix_endpos'"}
+                {
+                    webhelper.IsDriving(true);
+                }
+
+                SendException2Exceptionless(ex);
+            }
 
             string res = webhelper.IsOnline().Result;
             lastCarUsed = DateTime.Now;
@@ -1386,7 +1398,7 @@ namespace TeslaLogger
 
         internal void Restart(string reason, int waitSeconds)
         {
-            Logfile.Log("Restart Car " + CarInDB);
+            Log("Restart Car " + CarInDB);
 
             new Thread(() =>
             {
@@ -1499,7 +1511,7 @@ namespace TeslaLogger
 
         public void ExternalLog(string text)
         {
-            ExceptionlessClient.Default.SubmitLog(text);
+            CreateExeptionlessLog("Car", text, Exceptionless.Logging.LogLevel.Info).Submit(); ;
 
             string temp = TaskerHash + ": " + text;
             Tools.ExternalLog(temp);
@@ -1682,6 +1694,18 @@ id = @carid", con))
                         .AddObject(CarType, "CarType")
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging");
+
+            return b;
+        }
+
+        internal EventBuilder CreateExeptionlessLog(string source, string message, Exceptionless.Logging.LogLevel logLevel)
+        {
+            EventBuilder b = ExceptionlessClient.Default.CreateLog(source, message, logLevel)
+                .SetUserIdentity(TaskerHash)
+                .AddObject(ModelName, "ModelName")
+                .AddObject(CarType, "CarType")
+                .AddObject(CarSpecialType, "CarSpecialType")
+                .AddObject(TrimBadging, "CarTrimBadging");
 
             return b;
         }

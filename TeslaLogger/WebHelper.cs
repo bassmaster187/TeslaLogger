@@ -46,6 +46,7 @@ namespace TeslaLogger
         internal DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
         private static int MapQuestCount = 0;
         private static int NominatimCount = 0;
+        string cacheGUID = Guid.NewGuid().ToString();
 
         string authHost = "https://auth.tesla.com";
         CookieContainer tokenCookieContainer;
@@ -744,7 +745,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
 
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
             }
 
             return "";            
@@ -899,7 +900,7 @@ namespace TeslaLogger
                         car.Log("MFA1 ResultContent: " + resultContent);
                         car.Log(ex.ToString());
 
-                        car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                         car.ExternalLog("MFA1 Try Device: " + ex.ToString());
                     }
@@ -914,7 +915,7 @@ namespace TeslaLogger
 
                 car.ExternalLog("MFA1: " + ex.ToString());
 
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
             }
 
             return "";
@@ -956,7 +957,7 @@ namespace TeslaLogger
                     car.Log("Error: MFA2 : " + resultContent);
                     ExceptionWriter(null, resultContent);
 
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 }
             }
 
@@ -1080,7 +1081,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
 
                 ExceptionWriter(ex, resultContent);
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                 car.ExternalLog("GetTokenAsync3: " + ex.ToString());
             }
@@ -1152,7 +1153,7 @@ namespace TeslaLogger
             {
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                 car.ExternalLog("GetTokenAsync4: " + ex.ToString());
             }
@@ -1362,7 +1363,7 @@ namespace TeslaLogger
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                     ExceptionWriter(ex, resultContent);
                 }
@@ -1525,7 +1526,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                     ExceptionWriter(ex, resultContent);
 
@@ -1796,7 +1797,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     ExceptionWriter(ex, resultContent);
                 }
 
@@ -1805,11 +1806,29 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
             }
 
             return "NULL";
+        }
+
+        void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
+        {
+            string base64 = "";
+            try
+            {
+                if (content != null)
+                {
+                    var t = System.Text.UTF8Encoding.UTF8.GetBytes(content);
+                    base64 = Convert.ToBase64String(t);
+                }
+            } 
+            catch (Exception)
+            {}
+
+            car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64").Submit();
+
         }
 
         public void UpdateEfficiency()
@@ -2395,7 +2414,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     ExceptionWriter(ex, resultContent);
                 }
 
@@ -2663,7 +2682,7 @@ namespace TeslaLogger
                             Logfile.Log("Streaming Error: " + ex.InnerException.Message);
 
                         Logfile.ExceptionWriter(ex, line);
-                        car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     }
 
                     Thread.Sleep(10000);
@@ -3330,7 +3349,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
             }
             return -1;
@@ -3345,6 +3364,10 @@ namespace TeslaLogger
             {
                 resultContent = await GetCommand("vehicle_state");
                 Tools.SetThreadEnUS();
+
+                if (resultContent == null || resultContent == "NULL")
+                    return lastOdometerKM;
+
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
@@ -3366,7 +3389,7 @@ namespace TeslaLogger
                     catch (Exception ex)
                     {
                         if (resultContent != null)
-                            car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                            SubmitExceptionlessClientWithResultContent(ex, resultContent);
 
                         ExceptionWriter(ex, resultContent);
                         Log(ex.Message);
@@ -3397,7 +3420,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     Log(ex.ToString());
                 }
 
@@ -3407,7 +3430,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
                 return lastOdometerKM;
             }
@@ -3506,7 +3529,7 @@ namespace TeslaLogger
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
-                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     ExceptionWriter(ex, resultContent);
                 }
             }
@@ -3518,6 +3541,7 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
+                string cacheKey = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
                 HttpClient client = GethttpclientTeslaAPI();
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
@@ -3527,6 +3551,7 @@ namespace TeslaLogger
 
                 if (result.IsSuccessStatusCode)
                 {
+                    MemoryCache.Default.Remove(cacheKey);
 
                     resultContent = await result.Content.ReadAsStringAsync();
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
@@ -3562,6 +3587,22 @@ namespace TeslaLogger
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     Thread.Sleep(5000);
                 }
+                else if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    int HttpNotFoundCounter =  (int)(MemoryCache.Default.Get(cacheKey) ?? 0);
+                    HttpNotFoundCounter++;
+                    MemoryCache.Default.Set(cacheKey, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
+
+                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd +  " Retry: " + HttpNotFoundCounter);
+
+                    Thread.Sleep(1000);
+
+                    if (HttpNotFoundCounter > 5)
+                    {
+                        car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        car.Restart("404 Error", 10);
+                    }
+                }
                 else
                 {
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
@@ -3569,7 +3610,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
             }
 
@@ -3615,7 +3656,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
             }
 
@@ -3681,7 +3722,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 ExceptionWriter(ex, resultContent);
             }
 
@@ -4034,7 +4075,8 @@ namespace TeslaLogger
                 // plausibility check
                 if (soc < 0)
                 {
-                    throw new Exception($"SoC < 0! soc:{soc}");
+                    // throw new Exception($"SoC < 0! soc:{soc}");
+                    return;
                 }
 
                 if (car.ABRPMode <= 0 || String.IsNullOrEmpty(car.ABRPToken))

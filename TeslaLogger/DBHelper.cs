@@ -1087,7 +1087,7 @@ HAVING
                         car.Log("update tesla_token OK: " + done);
 
                         car.ExternalLog("UpdateTeslaToken");
-                        car.Restart("Access Token updated", 60);
+                        car.Restart("Access Token updated", 30);
                     }
                 }
             }
@@ -1208,7 +1208,7 @@ HAVING
                     return;
                 }
 
-                car.Log("CleanPasswort");
+                // car.Log("CleanPasswort");
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
@@ -1217,7 +1217,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         int done = SQLTracer.TraceNQ(cmd);
 
-                        car.Log("CleanPasswort OK: " + done);
+                        // car.Log("CleanPasswort OK: " + done);
                         CleanPasswortDone = true;
                     }
                 }
@@ -2985,10 +2985,13 @@ ORDER BY
                         }
                         decimal odo_distance = odo_end - odo_start;
                         decimal computed_distance = distance_down_km + distance_up_km + distance_flat_km;
-                        decimal correction_factor = odo_distance / computed_distance;
-                        distance_flat_km *= correction_factor;
-                        distance_up_km *= correction_factor;
-                        distance_down_km *= correction_factor;
+                        if (computed_distance != 0)
+                        {
+                            decimal correction_factor = odo_distance / computed_distance;
+                            distance_flat_km *= correction_factor;
+                            distance_up_km *= correction_factor;
+                            distance_down_km *= correction_factor;
+                        }
                         Tools.DebugLog($"UpdateDriveHeightStatistics: driveId:{driveId} odo_distance:{odo_distance} computed_distance:{computed_distance} distance_flat_km:{distance_flat_km} distance_up_km:{distance_up_km} distance_down_km:{distance_down_km} meters_up:{meters_up} meters_down:{meters_down} height_max:{height_max} height_min:{height_min}");
                     }
                 }
