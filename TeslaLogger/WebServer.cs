@@ -1152,7 +1152,7 @@ namespace TeslaLogger
         private static void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
-            Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
+            _ = Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
             Tools._StreamingPos = null;
             WriteString(response, @"OK");
         }

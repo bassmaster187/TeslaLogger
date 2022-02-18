@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
@@ -364,7 +365,7 @@ namespace TeslaLogger
             }
 
             UpdateTeslalogger.Start();
-            UpdateTeslalogger.UpdateGrafana();
+            _ = Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
         }
 
         private static void InitCheckDocker()
