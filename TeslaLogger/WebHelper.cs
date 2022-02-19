@@ -1361,6 +1361,11 @@ namespace TeslaLogger
                     Log("isCharging = NULL");
                     Thread.Sleep(10000);
                 }
+                else if (ex is TaskCanceledException)
+                {
+                    Log("isCharging: TaskCanceledException");
+                    Thread.Sleep(3000);
+                }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
                     SubmitExceptionlessClientWithResultContent(ex, resultContent);
@@ -1815,8 +1820,16 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                    ExceptionWriter(ex, resultContent);
+                    if (ex is TaskCanceledException)
+                    {
+                        Log("IsOnline: TaskCanceledException");
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                        ExceptionWriter(ex, resultContent);
+                    }
                 }
 
                 return state;
@@ -1824,8 +1837,16 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                ExceptionWriter(ex, resultContent);
+                if (ex is TaskCanceledException)
+                {
+                    Log("IsOnline: TaskCanceledException");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
+                }
             }
 
             return "NULL";
@@ -3369,8 +3390,16 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                ExceptionWriter(ex, resultContent);
+                if (ex is TaskCanceledException)
+                {
+                    Log("GetIdealBatteryRangekm: TaskCanceledException");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
+                }
             }
             return -1;
         }
@@ -3450,8 +3479,17 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                ExceptionWriter(ex, resultContent);
+                if (ex is TaskCanceledException)
+                {
+                    Log("GetOdometerAsync: TaskCanceledException");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
+                }
+
                 return lastOdometerKM;
             }
             //return 0;
@@ -3546,6 +3584,10 @@ namespace TeslaLogger
                 {
                     Log("GetOutsideTempAsync: NULL");
                     return null;
+                }
+                else if (ex is TaskCanceledException)
+                {
+                    Log("GetOutsideTempAsync: TaskCanceledException");
                 }
                 else if (!resultContent.Contains("upstream internal error"))
                 {
