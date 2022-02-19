@@ -547,7 +547,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                car.CreateExceptionlessClient(ex).AddObject(_JSON, "JSON").Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -720,7 +720,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -817,7 +817,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -880,6 +880,7 @@ namespace TeslaLogger
                             case "pws":
                             case "has_seat_cooling":
                             case "dashcam_clip_save_supported":
+                            case "webcam_supported":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_config");
@@ -905,6 +906,8 @@ namespace TeslaLogger
                             case "exterior_trim":
                             case "front_drive_unit":
                             case "headlamp_type":
+                            case "paint_color_override":
+                            case "exterior_trim_override":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_config");
@@ -917,6 +920,7 @@ namespace TeslaLogger
                             case "sun_roof_installed":
                             case "key_version":
                             case "utc_offset":
+                            case "badge_version":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_config");
@@ -1079,6 +1083,10 @@ namespace TeslaLogger
                                 break;
                             // double
                             case "odometer":
+                            case "tpms_pressure_rr":
+                            case "tpms_pressure_rl":
+                            case "tpms_pressure_fr":
+                            case "tpms_pressure_fl":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "double", value, timestamp, "vehicle_state");
@@ -1117,7 +1125,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
@@ -1245,6 +1253,10 @@ namespace TeslaLogger
                             case "bioweapon_mode":
                             case "supports_fan_only_cabin_overheat_protection":
                             case "allow_cabin_overheat_protection":
+                            case "cabin_overheat_protection_actively_cooling":
+                            case "auto_seat_climate_right":
+                            case "auto_seat_climate_left":
+
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "climate_state");
@@ -1309,7 +1321,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;

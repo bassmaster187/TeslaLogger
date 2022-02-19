@@ -131,7 +131,7 @@ namespace TeslaLogger
             }
             catch (Exception e)
             {
-                e.ToExceptionless().Submit();
+                e.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"RestoreToken Exception: {e.Message}");
 
                 return string.Empty;

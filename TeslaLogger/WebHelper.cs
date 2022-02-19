@@ -412,10 +412,10 @@ namespace TeslaLogger
                 if (ex.InnerException != null)
                     car.Passwortinfo.Append("Error in GetTokenAsync: " + ex.InnerException.Message + "<br>");
 
-                if (ex.Message != "NO Credentials")
+                if (ex.Message == "NO Credentials" || ex.Message == "Car inactive")
                 {
-                    //car.ExternalLog("GetToken: " + ex.ToString());
-                    car.CreateExceptionlessClient(ex).Submit();
+                    Log(ex.Message);
+                    return "NULL";
                 }
 
                 Log("Error in GetTokenAsync: " + ex.Message);
@@ -1654,6 +1654,14 @@ namespace TeslaLogger
                 }
 
                 resultContent = await result.Content.ReadAsStringAsync();
+                // resultContent = Tools.ConvertBase64toString("");
+                if (resultContent == null || resultContent == "NULL")
+                {
+                    Log("isOnline = NULL");
+                    Thread.Sleep(5000);
+                    return "NULL";
+                }
+
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                 if (result.IsSuccessStatusCode)
                 {
@@ -1673,12 +1681,22 @@ namespace TeslaLogger
                     TeslaAPI_Commands.TryAdd("vehicles", resultContent);
                 }
 
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
 
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                object[] r2 = (object[])r1;
-                object r3 = r2[car.CarInAccount];
-                Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
+                dynamic r1 = jsonResult["response"];
+                
+                try
+                {
+                    dynamic r5 = r1[car.CarInAccount];
+
+                } catch (IndexOutOfRangeException)
+                {
+                    Log("IndexOutOfRangeException in isOnline!");
+                    return "NULL";
+                }
+
+                dynamic r4 = r1[car.CarInAccount];
+
                 string state = r4["state"].ToString();
                 object[] tokens = (object[])r4["tokens"];
                 Tesla_Streamingtoken = tokens[0].ToString();
@@ -2629,7 +2647,7 @@ namespace TeslaLogger
                 }
                 catch (TaskCanceledException e)
                 {
-                    car.CreateExceptionlessClient(e).AddObject(resultContent, "ResultContent").Submit();
+                    // car.CreateExceptionlessClient(e).AddObject(resultContent, "ResultContent").Submit();
                     DrivingOrChargingByStream = false;
                     System.Diagnostics.Debug.WriteLine(e.Message);
                     Log("Stream: Timeout");
@@ -3038,7 +3056,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "UpdateAddressByPosId");
             }
         }
@@ -3203,7 +3221,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -3295,7 +3313,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
             }
 
@@ -3311,6 +3329,8 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("charge_state").Result;
+                if (resultContent == null || resultContent == "NULL")
+                    return -1;
 
                 Tools.SetThreadEnUS();
                 object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);

@@ -82,7 +82,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
 
                     car.Log("Scanmytesla: " + ex.Message);
                     Logfile.WriteException(ex.ToString());
@@ -262,7 +262,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
 
                 Logfile.ExceptionWriter(ex, resultContent);
                 Thread.Sleep(10000);

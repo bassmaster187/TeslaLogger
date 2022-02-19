@@ -96,7 +96,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Tools.DebugLog("Exception", ex);
                 }
             }
@@ -136,7 +136,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             return false;

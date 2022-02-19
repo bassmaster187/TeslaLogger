@@ -42,7 +42,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("StopComfortingMessagesThread() exception", ex);
             }
         }
@@ -308,7 +308,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        ex.ToExceptionless().FirstCarUserID().Submit();
                         Logfile.Log(ex.ToString());
                     }
                 }
@@ -468,7 +468,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
 
@@ -599,7 +599,7 @@ CREATE TABLE superchargerstate(
                     }
                 } catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                 }
 
                 // end of schema update
@@ -633,7 +633,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
             }
             finally
@@ -776,7 +776,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log("Exception during download from github: " + ex.ToString());
                     Logfile.ExceptionWriter(ex, "Exception during download from github");
                 }
@@ -815,7 +815,7 @@ CREATE TABLE superchargerstate(
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        ex.ToExceptionless().FirstCarUserID().Submit();
                         Logfile.Log("Exception during unzip of downloaded update package: " + ex.ToString());
                         Logfile.ExceptionWriter(ex, "Exception during unzip of downloaded update package");
                     }
@@ -859,7 +859,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
 
@@ -871,7 +871,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
 
@@ -906,7 +906,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -973,7 +973,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1003,7 +1003,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1055,7 +1055,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1081,7 +1081,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1142,7 +1142,7 @@ CREATE TABLE superchargerstate(
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.Message);
                     Logfile.ExceptionWriter(ex, content);
                 }
@@ -1514,7 +1514,7 @@ CREATE TABLE superchargerstate(
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        ex.ToExceptionless().FirstCarUserID().Submit();
                         Logfile.Log(ex.ToString());
                     }
 
@@ -1533,7 +1533,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             finally
@@ -1649,7 +1649,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1670,7 +1670,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1689,7 +1689,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1708,7 +1708,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             return s;
@@ -1734,7 +1734,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "");
             }
         }
@@ -1754,7 +1754,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1776,7 +1776,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1896,7 +1896,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("chmod " + filename + " " + ex.Message);
             }
         }
@@ -1970,7 +1970,7 @@ CREATE TABLE superchargerstate(
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
