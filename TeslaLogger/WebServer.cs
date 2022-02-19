@@ -1088,10 +1088,11 @@ namespace TeslaLogger
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car c = null;
                 try
                 {
                     StringBuilder sb = new StringBuilder();
-                    Car c = Car.GetCarByID(CarID);
+                    c = Car.GetCarByID(CarID);
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
                     string s = c.webhelper.Wakeup().Result;
@@ -1142,8 +1143,21 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    if (ex is TaskCanceledException)
+                    {
+                        Logfile.Log("DecodeCar: TaskCanceledException");
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        if (c != null)
+                            ex.ToExceptionless().SetUserIdentity(c.TaskerHash).Submit();
+                        else
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                    }
+
                     WriteString(response, ex.ToString());
+
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
             }
