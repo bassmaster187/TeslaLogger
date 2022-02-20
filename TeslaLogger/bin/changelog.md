@@ -1,3 +1,6 @@
+# Version 1.51.7
+- Bugfixes 
+
 # Version 1.51.6
 - Bugfixes 
 - New MySql Client [Link](https://github.com/advisories/GHSA-77rm-9x9h-xj3g)

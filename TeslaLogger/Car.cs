@@ -307,12 +307,13 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                SendException2Exceptionless(ex);
-
                 string temp = ex.ToString();
 
                 if (!temp.Contains("ThreadAbortException"))
+                {
+                    SendException2Exceptionless(ex);
                     Log(temp);
+                }
             }
             finally
             {
