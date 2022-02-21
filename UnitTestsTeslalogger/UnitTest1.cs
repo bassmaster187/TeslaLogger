@@ -790,5 +790,11 @@ namespace UnitTestsTeslalogger
             object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
             Assert.IsNotNull(jsonResult);
         }
+
+        [TestMethod]
+        public void CheckExportColumn()
+        {
+            ShareData.UpdateDataTable("chargingstate");
+        }
     }
 }

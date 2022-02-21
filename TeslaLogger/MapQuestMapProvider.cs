@@ -46,7 +46,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 Logfile.Log(ex.ToString());
@@ -91,7 +91,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 Logfile.Log(ex.ToString());
@@ -186,7 +186,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 Logfile.Log("Rows count: " + coords.Rows.Count + " posquery= " + posquery + "\r\n" + ex.ToString());

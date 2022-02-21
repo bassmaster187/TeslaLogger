@@ -55,20 +55,22 @@ namespace TeslaLogger
         }
 
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]
-        private void UpdateDataTable(string table)
+        static internal void UpdateDataTable(string table)
         {
-            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            if (!DBHelper.ColumnExists(table, "export"))
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column IF NOT EXISTS export TINYINT(1) NULL", con)
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    CommandTimeout = 6000
-                })
-                {
-                    SQLTracer.TraceNQ(cmd);
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand($"alter table {table} ADD column export TINYINT(1) NULL", con)
+                    {
+                        CommandTimeout = 6000
+                    })
+                    {
+                        SQLTracer.TraceNQ(cmd);
+                    }
                 }
             }
-
         }
 
         [SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities")]

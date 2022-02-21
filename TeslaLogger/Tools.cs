@@ -75,7 +75,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     DebugLog("Exception in SQL DEBUG", ex, prefix);
                 }
             }
@@ -217,7 +217,7 @@ namespace TeslaLogger
             }
             catch (Exception ee)
             {
-                ee.ToExceptionless().Submit();
+                ee.ToExceptionless().FirstCarUserID().Submit();
                 //Avoid any situation that the Trace is what crashes you application. While trace can log to a file. Console normally not output to the same place.
                 Logfile.Log("Tracing exception in TraceException(Exception e)" + ee.Message);
             }
@@ -290,7 +290,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log("CopyFilesRecursively Exception: " + ex.ToString());
                 }
             }
@@ -430,7 +430,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -446,7 +446,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("CopyFile Exception: " + ex.ToString());
             }
         }
@@ -500,7 +500,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -530,7 +530,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             return httpport;
@@ -558,7 +558,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             return true;
@@ -622,7 +622,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             _StreamingPos = false;
@@ -642,6 +642,7 @@ namespace TeslaLogger
             startSleepingHour = -1;
             startSleepingMinutes = -1;
 
+            string json = "";
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -652,7 +653,7 @@ namespace TeslaLogger
                     return;
                 }
 
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = new JavaScriptSerializer().DeserializeObject(json);
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
@@ -677,7 +678,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().AddObject(json, "JSON").Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -752,7 +753,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Exception " + cmd + " " + ex.Message);
                 return "Exception";
             }
@@ -805,7 +806,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -840,7 +841,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1006,7 +1007,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "GetGrafanaVersion");
             }
 
@@ -1027,7 +1028,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "IsDocker");
             }
 
@@ -1057,7 +1058,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "IsShareData");
             }
 
@@ -1101,7 +1102,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1303,7 +1304,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1343,7 +1344,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            ex.ToExceptionless().Submit();
+                            ex.ToExceptionless().FirstCarUserID().Submit();
                             Logfile.Log(ex.ToString());
                         }
                     }
@@ -1727,6 +1728,45 @@ WHERE
             {
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        public static string ConvertBase64toString(string base64)
+        {
+            return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+        }
+    }
+
+    public static class EventBuilderExtension
+    {
+        static String lastFirstCar;
+        public static EventBuilder FirstCarUserID(this EventBuilder v)
+        {
+            try
+            {
+                if (lastFirstCar != null)
+                    return v.SetUserIdentity(lastFirstCar);
+
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM teslalogger.cars where length(tasker_hash) >= 8 limit 1", con))
+                    {
+                        object o = cmd.ExecuteScalar().ToString();
+                        if (o is String && o.ToString().Length >= 8)
+                        {
+                            lastFirstCar = o.ToString();
+                            return v.SetUserIdentity(o.ToString());
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+
+            return v;
         }
     }
 }

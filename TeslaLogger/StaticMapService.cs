@@ -116,7 +116,7 @@ namespace TeslaLogger
                         }
                         catch (Exception ex)
                         {
-                            ex.ToExceptionless().Submit();
+                            ex.ToExceptionless().FirstCarUserID().Submit();
                             Tools.DebugLog("StaticMapService: Exception", ex);
                         }
 
@@ -129,7 +129,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("StaticMapService: Exception", ex);
             }
         }
@@ -360,7 +360,7 @@ ORDER BY
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        ex.ToExceptionless().FirstCarUserID().Submit();
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
                         Logfile.Log(ex.ToString());
                     }
@@ -384,7 +384,7 @@ ORDER BY
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
             return mapdir;
@@ -452,7 +452,7 @@ WHERE
                         }
                         catch (Exception ex)
                         {
-                            ex.ToExceptionless().Submit();
+                            ex.ToExceptionless().FirstCarUserID().Submit();
                             Logfile.Log(ex.ToString());
                         }
                     }
@@ -460,7 +460,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -501,7 +501,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }

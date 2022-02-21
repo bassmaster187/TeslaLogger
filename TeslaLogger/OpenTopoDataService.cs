@@ -62,7 +62,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("OpenTopoDataService: Exception", ex);
             }
         }

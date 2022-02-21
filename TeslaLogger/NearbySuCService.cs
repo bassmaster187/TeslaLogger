@@ -45,7 +45,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("NearbySuCService: Exception", ex);
             }
         }
@@ -107,7 +107,7 @@ namespace TeslaLogger
                                     }
                                     catch (Exception ex)
                                     {
-                                        ex.ToExceptionless().Submit();
+                                        ex.ToExceptionless().FirstCarUserID().Submit();
                                         Logfile.Log(ex.ToString());
                                     }
                                 }
@@ -119,7 +119,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().Submit();
+                        ex.ToExceptionless().FirstCarUserID().Submit();
                         Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
                         Tools.DebugLog("NearbySuCService.Work: Exception", ex);
                     }
@@ -149,7 +149,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("ShareSuc: " + ex.Message);
             }
         }

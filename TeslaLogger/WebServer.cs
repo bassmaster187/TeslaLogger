@@ -58,7 +58,7 @@ namespace TeslaLogger
             }
             catch (HttpListenerException hlex)
             {
-                hlex.ToExceptionless().Submit();
+                hlex.ToExceptionless().FirstCarUserID().Submit();
 
                 listener = null;
                 if (((UInt32)hlex.HResult) == 0x80004005)
@@ -72,7 +72,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 listener = null;
                 Logfile.Log(ex.ToString());
             }
@@ -91,7 +91,7 @@ namespace TeslaLogger
             }
             catch (HttpListenerException hlex)
             {
-                hlex.ToExceptionless().Submit();
+                hlex.ToExceptionless().FirstCarUserID().Submit();
                 listener = null;
                 if (((UInt32)hlex.HResult) == 0x80004005)
                 {
@@ -104,7 +104,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 listener = null;
                 Logfile.Log(ex.ToString());
             }
@@ -117,7 +117,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -302,7 +302,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
         }
@@ -364,7 +364,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -386,7 +386,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     WriteString(response, ex.ToString());
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
@@ -456,7 +456,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
                 WriteString(response, "error");
             }
@@ -512,7 +512,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }
@@ -661,7 +661,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     Logfile.Log(ex.ToString());
                 }
             }
@@ -1005,7 +1005,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 WriteString(response, ex.ToString());
                 Logfile.Log(ex.ToString());
             }
@@ -1073,7 +1073,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    ex.ToExceptionless().FirstCarUserID().Submit();
                     WriteString(response, ex.ToString());
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
@@ -1088,10 +1088,11 @@ namespace TeslaLogger
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
             {
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car c = null;
                 try
                 {
                     StringBuilder sb = new StringBuilder();
-                    Car c = Car.GetCarByID(CarID);
+                    c = Car.GetCarByID(CarID);
 
                     c.webhelper.lastUpdateEfficiency = DateTime.Now.AddDays(-1);
                     string s = c.webhelper.Wakeup().Result;
@@ -1142,8 +1143,21 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().Submit();
+                    if (ex is TaskCanceledException)
+                    {
+                        Logfile.Log("DecodeCar: TaskCanceledException");
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        if (c != null)
+                            ex.ToExceptionless().SetUserIdentity(c.TaskerHash).Submit();
+                        else
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                    }
+
                     WriteString(response, ex.ToString());
+
                     Logfile.ExceptionWriter(ex, request.Url.LocalPath);
                 }
             }
@@ -1414,7 +1428,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }
@@ -1634,7 +1648,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
                 WriteString(response, "ERROR");
             }
@@ -1662,7 +1676,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1696,7 +1710,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
 
@@ -1793,7 +1807,7 @@ namespace TeslaLogger
             }
             catch (Exception ex) 
             {
-                ex.ToExceptionless().Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
             Logfile.Log($"Admin: UpdateElevation ({from} -> {to}) ...");
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
