@@ -801,7 +801,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "ScanMyTesla"))
                 {
-                    return bool.Parse(j["ScanMyTesla"]);
+                    return bool.Parse(j["ScanMyTesla"].ToString());
                 }
             }
             catch (Exception ex)
@@ -969,14 +969,14 @@ namespace TeslaLogger
             }
         }
 
-        public static bool IsPropertyExist(dynamic settings, string name)
+        public static bool IsPropertyExist(object settings, string name)
         {
             if (settings == null)
                 return false;
 
             if (settings is Newtonsoft.Json.Linq.JObject)
             {
-                return settings.ContainsKey(name);
+                return ((Newtonsoft.Json.Linq.JObject)settings).ContainsKey(name);
             }
 
             if (!(settings is IDictionary<string, object>))
