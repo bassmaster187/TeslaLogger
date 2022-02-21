@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace TeslaLogger
@@ -8,7 +9,7 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
     public class CurrentJSON
     {
-        public static readonly Dictionary<int, string> jsonStringHolder = new Dictionary<int, string>();
+        public static readonly ConcurrentDictionary<int, string> jsonStringHolder = new ConcurrentDictionary<int, string>();
         public bool current_charging = false;
         public bool current_driving = false;
         public bool current_online = false;
