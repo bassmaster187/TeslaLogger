@@ -658,7 +658,7 @@ namespace TeslaLogger
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
                 {
-                    if (bool.Parse(j["SleepTimeSpanEnable"]))
+                    if (bool.Parse(j["SleepTimeSpanEnable"].ToString()))
                     {
                         string start = j["SleepTimeSpanStart"];
                         string[] s = start.Split(':');
