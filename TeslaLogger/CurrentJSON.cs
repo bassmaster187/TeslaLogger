@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace TeslaLogger
@@ -217,7 +218,7 @@ namespace TeslaLogger
                     values.Add("TLGeofenceIsWork", false);
                 }
 
-                current_json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(values);
+                current_json = JsonConvert.SerializeObject(values);
 
                 jsonStringHolder[car.CarInDB] = current_json;
 

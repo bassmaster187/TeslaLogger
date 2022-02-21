@@ -15,9 +15,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Collections;
 using System.Reflection;
-using System.Web;
-using System.Web.Script.Serialization;
 using Exceptionless;
+using Newtonsoft.Json;
+using System.Web;
 
 namespace TeslaLogger
 {
@@ -338,7 +338,7 @@ namespace TeslaLogger
                     ,{ "login_hint",  car.TeslaName }
                 };
 
-                string json = new JavaScriptSerializer().Serialize(values);
+                string json = JsonConvert.SerializeObject(values);
                 using (StringContent content = new StringContent(json.ToString(Tools.ciEnUS), Encoding.UTF8, "application/json"))
                 {
                     UriBuilder b = new UriBuilder(authHost + "/oauth2/v3/authorize");
@@ -464,7 +464,7 @@ namespace TeslaLogger
                 d.Add("refresh_token", refresh_token);
                 d.Add("scope", "openid email offline_access");
 
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+                string json = JsonConvert.SerializeObject(d);
 
                 using (HttpClientHandler handler = new HttpClientHandler()
                 {
@@ -497,7 +497,7 @@ namespace TeslaLogger
                                 car.Log("ResultContent UpdateTeslaTokenFromRefreshToken: " + resultContent);
                             }
 
-                            dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                             string access_token = jsonResult["access_token"];
 
                             string new_refresh_token = jsonResult["refresh_token"];
@@ -868,7 +868,7 @@ namespace TeslaLogger
 
             Log("MFA1 Result: " + resultContent);
 
-            dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                         
             string factor_id = null;
             try
@@ -932,7 +932,7 @@ namespace TeslaLogger
             d.Add("passcode", car.MFACode);
             d.Add("transaction_id", transaction_id);
 
-            string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+            string json = JsonConvert.SerializeObject(d);
 
             using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
             {
@@ -945,7 +945,7 @@ namespace TeslaLogger
 
                 try
                 {
-                    dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                     object o = jsonResult["data"]["valid"];
                             
                     if ((bool)o)
@@ -1034,7 +1034,7 @@ namespace TeslaLogger
                 d.Add("code_verifier", code_verifier);
                 d.Add("redirect_uri", "https://auth.tesla.com/void/callback");
 
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+                string json = JsonConvert.SerializeObject(d);
 
                 DateTime start = DateTime.UtcNow;
 
@@ -1052,7 +1052,7 @@ namespace TeslaLogger
 
                     // car.Log("HttpStatus: " + result.StatusCode.ToString());
 
-                    dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
                     if (Tools.IsPropertyExist(jsonResult, "error"))
                     {
@@ -1101,7 +1101,7 @@ namespace TeslaLogger
                 d.Add("client_id", TESLA_CLIENT_ID);
                 d.Add("client_secret", TESLA_CLIENT_SECRET);
 
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+                string json = JsonConvert.SerializeObject(d);
 
                 DateTime start = DateTime.UtcNow;
 
@@ -1123,7 +1123,7 @@ namespace TeslaLogger
 
                     car.Log("HttpStatus: " + result.StatusCode.ToString());
 
-                    dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                     if (Tools.IsPropertyExist(jsonResult, "error"))
                     {
                         string error = jsonResult["error"];
@@ -1177,9 +1177,8 @@ namespace TeslaLogger
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
                 Tools.SetThreadEnUS();
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                dynamic r2 = jsonResult["response"];
 
                 if (r2["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
                 {
@@ -1415,17 +1414,17 @@ namespace TeslaLogger
             {
                 try
                 {
-                    object[] r1temp;
+                    Newtonsoft.Json.Linq.JArray r1temp;
                     GetAllVehicles(out resultContent, out r1temp, false);
 
-                    if (car.CarInAccount >= r1temp.Length)
+                    if (car.CarInAccount >= r1temp.Count)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
                         ListCarsInAccount(r1temp);
 
                         return "NULL";
                     }
-                    Dictionary<string, object> r2 = SearchCarDictionary(r1temp);
+                    dynamic r2 = SearchCarDictionary(r1temp);
 
                     if (r2 == null)
                         return "NULL";
@@ -1521,7 +1520,7 @@ namespace TeslaLogger
                         scanMyTesla = new ScanMyTesla(car);
 
                         /*
-                        dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
                         token = jsonResult["access_token"];
                         */
 
@@ -1550,7 +1549,7 @@ namespace TeslaLogger
             }
         }
 
-        internal void GetAllVehicles(out string resultContent, out object[] vehicles, bool throwExceptionOnUnauthorized)
+        internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized)
         {
             HttpClient client = GethttpclientTeslaAPI();
             string adresse = apiaddress + "api/1/vehicles";
@@ -1571,20 +1570,19 @@ namespace TeslaLogger
                 }
             }
 
-            object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-            vehicles = (object[])r1;
+            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+            vehicles = jsonResult["response"];
         }
 
-        private void ListCarsInAccount(object[] cars)
+        private void ListCarsInAccount(Newtonsoft.Json.Linq.JArray cars)
         {
             try
             {
                 Log("Existig Cars in Account:");
 
-                for (int x = 0; x < cars.Length; x++)
+                for (int x = 0; x < cars.Count; x++)
                 {
-                    var cc = (Dictionary<string, object>)cars[x];
+                    var cc = cars[x];
                     var ccVin = cc["vin"].ToString();
                     var ccDisplayName = cc["display_name"].ToString();
 
@@ -1599,13 +1597,13 @@ namespace TeslaLogger
             }
         }
 
-        private Dictionary<string, object> SearchCarDictionary(object[] cars)
+        private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
         {
             if (car.Vin?.Length > 0)
             {
-                for (int x = 0; x < cars.Length; x++)
+                for (int x = 0; x < cars.Count; x++)
                 {
-                    var cc = (Dictionary<string, object>)cars[x];
+                    var cc = cars[x];
                     var ccVin = cc["vin"].ToString();
 
                     if (ccVin == car.Vin)
@@ -1616,7 +1614,7 @@ namespace TeslaLogger
                 return null;
             }
             else
-                return (Dictionary<string, object>)cars[car.CarInAccount];
+                return cars[car.CarInAccount];
         }
 
         private void DoGetVehiclesRequest(out string resultContent, HttpClient client, string adresse, out Task<HttpResponseMessage> resultTask, out HttpResponseMessage result)
@@ -1686,7 +1684,7 @@ namespace TeslaLogger
                     TeslaAPI_Commands.TryAdd("vehicles", resultContent);
                 }
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
                 dynamic r1 = jsonResult["response"];
                 
@@ -1703,8 +1701,7 @@ namespace TeslaLogger
                 dynamic r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
-                object[] tokens = (object[])r4["tokens"];
-                Tesla_Streamingtoken = tokens[0].ToString();
+                Tesla_Streamingtoken = r4["tokens"][0];
 
                 try
                 {
@@ -1786,7 +1783,7 @@ namespace TeslaLogger
                         if (resultContent2?.Length > 0)
                             vehicle_config = resultContent2;
 
-                        dynamic jBadge = new JavaScriptSerializer().DeserializeObject(resultContent2);
+                        dynamic jBadge = JsonConvert.DeserializeObject(resultContent2);
                         dynamic jBadgeResult = jBadge["response"];
 
                         if (jBadgeResult != null)
@@ -2356,9 +2353,8 @@ namespace TeslaLogger
                 resultContent = GetCommand("drive_state").Result;
 
                 Tools.SetThreadEnUS();
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                dynamic r2 = jsonResult["response"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
                 decimal dLongitude = (decimal)r2["longitude"];
@@ -2606,7 +2602,7 @@ namespace TeslaLogger
                                 resultContent = resultContent.Trim('\0');
                                 // System.Diagnostics.Debug.WriteLine("Stream: " + resultContent);
 
-                                dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                                dynamic j = JsonConvert.DeserializeObject(resultContent);
 
                                 string msg_type = j["msg_type"];
 
@@ -2833,7 +2829,7 @@ namespace TeslaLogger
                 long ms = Environment.TickCount;
                 resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
 
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                object jsonResult = JsonConvert.DeserializeObject(resultContent);
                 var r1 = ((System.Collections.Generic.Dictionary<string, object>)jsonResult)["results"];
                 var r2 = (object[])r1;
                 var r3 = (System.Collections.Generic.Dictionary<string, object>)r2[0];
@@ -2918,16 +2914,16 @@ namespace TeslaLogger
                     resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
                     DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0);
 
-                    object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                    object r1 = ((Dictionary<string, object>)jsonResult)["address"];
-                    Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                    dynamic r2 = jsonResult["address"];
                     string postcode = "";
                     if (r2.ContainsKey("postcode"))
-                    {
                         postcode = r2["postcode"].ToString();
-                    }
 
-                    string country_code = r2["country_code"].ToString();
+                    string country_code = "";
+                    
+                    if (r2.ContainsKey("country_code"))
+                        country_code = r2["country_code"].ToString();
 
                     if (country_code.Length > 0 && c != null)
                     {
@@ -2937,35 +2933,23 @@ namespace TeslaLogger
 
                     string road = "";
                     if (r2.ContainsKey("road"))
-                    {
                         road = r2["road"].ToString();
-                    }
 
                     string city = "";
                     if (r2.ContainsKey("city"))
-                    {
                         city = r2["city"].ToString();
-                    }
                     else if (r2.ContainsKey("town"))
-                    {
                         city = r2["town"].ToString();
-                    }
                     else if (r2.ContainsKey("village"))
-                    {
                         city = r2["village"].ToString();
-                    }
 
                     string house_number = "";
                     if (r2.ContainsKey("house_number"))
-                    {
                         house_number = r2["house_number"].ToString();
-                    }
 
                     string name = "";
                     if (r2.ContainsKey("name") && r2["name"] != null)
-                    {
                         name = r2["name"].ToString();
-                    }
 
                     string address29 = "";
                     if (r2.ContainsKey("address29") && r2["address29"] != null)
@@ -3354,9 +3338,8 @@ namespace TeslaLogger
                     return -1;
 
                 Tools.SetThreadEnUS();
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                dynamic r2 = jsonResult["response"];
 
                 if (r2["ideal_battery_range"] == null)
                 {
@@ -3417,9 +3400,8 @@ namespace TeslaLogger
                 if (resultContent == null || resultContent == "NULL")
                     return lastOdometerKM;
 
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                dynamic r2 = jsonResult["response"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
 
                 if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
@@ -3515,9 +3497,8 @@ namespace TeslaLogger
                 }
 
                 Tools.SetThreadEnUS();
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                dynamic r2 = jsonResult["response"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 try
                 {
@@ -3816,7 +3797,7 @@ namespace TeslaLogger
                 DBHelper.AddMothershipDataToDB("GetCachedRollupData()", start, 0);
 
                 Tools.SetThread_enUS();
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                object jsonResult = JsonConvert.DeserializeObject(resultContent);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 Dictionary<string, object> r1temp = (Dictionary<string, object>)r1;
                 string OnlineState = r1temp["state"].ToString();
@@ -3873,7 +3854,7 @@ namespace TeslaLogger
                 HttpResponseMessage result = resultTask.Result;
                 resultContent = result.Content.ReadAsStringAsync().Result;
 
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                object jsonResult = JsonConvert.DeserializeObject(resultContent);
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add("name");
@@ -4178,7 +4159,7 @@ namespace TeslaLogger
                     values.Add("heading", heading);
                 }
 
-                string json = new JavaScriptSerializer().Serialize(values);
+                string json = JsonConvert.SerializeObject(values);
 
                 DateTime start = DateTime.UtcNow;
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))

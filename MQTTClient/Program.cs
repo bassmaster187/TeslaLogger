@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using TeslaLogger;
 using uPLibrary.Networking.M2Mqtt;
 
@@ -127,7 +128,7 @@ namespace MQTTClient
 
             try
             {
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 object[] cars = j;
                 foreach (dynamic car in cars)
                 {

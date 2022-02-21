@@ -14,9 +14,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Script.Serialization;
+
 using MySql.Data.MySqlClient;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -453,7 +454,6 @@ namespace TeslaLogger
 
         public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
         {
-            JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
             if (table != null)
@@ -468,7 +468,7 @@ namespace TeslaLogger
                     parentRow.Add(childRow);
                 }
             }
-            return jsSerializer.Serialize(parentRow);
+            return JsonConvert.SerializeObject(parentRow);
         }
 
         internal static void EndSleeping(out int stopSleepingHour, out int stopSleepingMinute)
@@ -487,7 +487,7 @@ namespace TeslaLogger
 
                 string json = File.ReadAllText(filePath);
 
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (bool.Parse(j["SleepTimeSpanEnable"]))
                 {
@@ -517,10 +517,10 @@ namespace TeslaLogger
                     return httpport;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "HTTPPort"))
                 {
-                    int.TryParse(j["HTTPPort"], out httpport);
+                    int.TryParse(j["HTTPPort"].ToString(), out httpport);
 
                     if (httpport == 0)
                     {
@@ -547,7 +547,7 @@ namespace TeslaLogger
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "CombineChargingStates"))
                 {
                     if (bool.TryParse(j["CombineChargingStates"], out bool combineChargingStates))
@@ -578,7 +578,7 @@ namespace TeslaLogger
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "UseOpenTopoData"))
                 {
                     if(bool.TryParse(j["UseOpenTopoData"], out bool useOpenTopoData)) {
@@ -608,7 +608,7 @@ namespace TeslaLogger
                     return false;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
                     if(bool.TryParse(j["StreamingPos"], out bool streamingPos)) {
@@ -654,7 +654,7 @@ namespace TeslaLogger
                 }
 
                 json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "SleepTimeSpanEnable") && IsPropertyExist(j, "SleepTimeSpanStart"))
                 {
@@ -797,7 +797,7 @@ namespace TeslaLogger
                 }
 
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "ScanMyTesla"))
                 {
@@ -825,7 +825,7 @@ namespace TeslaLogger
                 }
 
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "update"))
                 {
@@ -888,7 +888,7 @@ namespace TeslaLogger
                 }
 
                 json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "Power"))
                 {
@@ -974,6 +974,11 @@ namespace TeslaLogger
             if (settings == null)
                 return false;
 
+            if (settings is Newtonsoft.Json.Linq.JObject)
+            {
+                return settings.ContainsKey(name);
+            }
+
             if (!(settings is IDictionary<string, object>))
                 return false;
 
@@ -998,7 +1003,7 @@ namespace TeslaLogger
                         using (WebClient wc = new WebClient())
                         {
                             temp = wc.DownloadString("http://grafana:3000/api/health");
-                            dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
+                            dynamic j = JsonConvert.DeserializeObject(temp);
                             return j["version"];
                         }
                     }
@@ -1631,7 +1636,7 @@ WHERE
                     return days;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "MothershipKeepDays"))
                 {
                     int.TryParse(j["MothershipKeepDays"], out days);
@@ -1661,7 +1666,7 @@ WHERE
                     return Default;
                 }
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, name))
                 {
                     if (int.TryParse(j[name], out value))
@@ -1688,7 +1693,7 @@ WHERE
                 }
 
                 string json = File.ReadAllText(filePath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "MapProvider"))
                 {

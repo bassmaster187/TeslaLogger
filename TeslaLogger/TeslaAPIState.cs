@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -401,7 +402,7 @@ namespace TeslaLogger
             }
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(JSON);
+                object jsonResult = JsonConvert.DeserializeObject(JSON);
                 if (jsonResult == null
                     || jsonResult.GetType() != typeof(Dictionary<string, object>)
                     || !((Dictionary<string, object>)jsonResult).ContainsKey("response")
@@ -449,7 +450,7 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+                object jsonResult = JsonConvert.DeserializeObject(_JSON);
                 object r1 = ((Dictionary<string, object>)jsonResult)["response"];
                 object[] r2 = (object[])r1;
                 object r3 = r2[CarInAccount];
@@ -728,7 +729,7 @@ namespace TeslaLogger
 
         private Dictionary<string, object> ExtractResponse(string _JSON)
         {
-            object jsonResult = new JavaScriptSerializer().DeserializeObject(_JSON);
+            object jsonResult = JsonConvert.DeserializeObject(_JSON);
             object r1 = ((Dictionary<string, object>)jsonResult)["response"];
             Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
             return r2;

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using SRTM;
 using System.Web;
-using System.Web.Script.Serialization;
+
+using Newtonsoft.Json;
 
 namespace UnitTestsTeslalogger
 {
@@ -787,7 +788,7 @@ namespace UnitTestsTeslalogger
         public void CheckJsonString()
         {
             string resultContent = System.IO.File.ReadAllText("../../CheckJsonString.txt");
-            object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+            object jsonResult = JsonConvert.DeserializeObject(resultContent);
             Assert.IsNotNull(jsonResult);
         }
 

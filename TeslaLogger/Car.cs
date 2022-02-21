@@ -1011,7 +1011,7 @@ namespace TeslaLogger
                 Log("new_credentials.json available");
 
                 string json = File.ReadAllText(FileManager.GetFilePath(TLFilename.NewCredentialsFilename));
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 XmlDocument doc = new XmlDocument();
                 doc.Load(FileManager.GetFilePath(TLFilename.TeslaLoggerExeConfigFilename));

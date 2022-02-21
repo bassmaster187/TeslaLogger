@@ -91,9 +91,16 @@ namespace UnitTestsTeslalogger
         public void ApothekeWiblingen()
         {
             string temp = WebHelper.ReverseGecocodingAsync(c, 48.360601, 9.984227).Result;
-            Assert.AreEqual("89079 Ulm, Kapelle ", temp); 
+            Assert.AreEqual("89079 Ulm, Donautalstraße 46", temp); 
             Assert.AreEqual("de", c.CurrentJSON.current_country_code);
             Assert.AreEqual("Baden-Württemberg", c.CurrentJSON.current_state);
+        }
+
+        [TestMethod]
+        public void Lat0Lng0()
+        {
+            string temp = WebHelper.ReverseGecocodingAsync(c, 0, 0).Result;
+            Assert.AreEqual("- ,  ", temp);
         }
     }
 }

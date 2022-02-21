@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -7,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
-using System.Web.Script.Serialization;
+
 
 namespace TeslaLogger
 {
@@ -54,7 +55,7 @@ namespace TeslaLogger
                 {
                     string json = File.ReadAllText(jobfile);
                     File.Delete(jobfile);
-                    object jsonResult = new JavaScriptSerializer().DeserializeObject(json);
+                    object jsonResult = JsonConvert.DeserializeObject(json);
                     if (jsonResult.GetType() == typeof(Dictionary<string, object>))
                     {
                         Dictionary<string, object> job = (Dictionary<string, object>)jsonResult;

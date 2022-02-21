@@ -13,8 +13,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -315,19 +316,19 @@ namespace TeslaLogger
             {
                 Logfile.Log("GetCarsFromAccount");
                 string data = GetDataFromRequestInputStream(request);
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 string access_token = r["access_token"];
                 var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
                 car.webhelper.Tesla_token = access_token;
 
-                car.webhelper.GetAllVehicles(out string resultContent, out object[] vehicles, true);
+                car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);
 
                 if (vehicles == null)
                 {
                     if (resultContent?.Contains("error_description") == true)
                     {
-                        dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        dynamic j = JsonConvert.DeserializeObject(resultContent);
                         string error = j["error"] ?? "NULL";
                         string error_description = j["error_description"] ?? "NULL";
 
@@ -340,21 +341,21 @@ namespace TeslaLogger
                     }
                 }
 
-                Logfile.Log("Found " + vehicles.Length + " Vehicles");
+                Logfile.Log("Found " + vehicles.Count + " Vehicles");
 
                 var o = new List<object>();
                 o.Add(new KeyValuePair<string, string>("", "Please Select"));
 
-                for (int x = 0; x < vehicles.Length; x++)
+                for (int x = 0; x < vehicles.Count; x++)
                 {
-                    var cc = (Dictionary<string, object>)vehicles[x];
+                    var cc = vehicles[x];
                     var ccVin = cc["vin"].ToString();
                     var ccDisplayName = cc["display_name"].ToString();
                     
                     o.Add(new KeyValuePair<string, string>(x.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
                 }
 
-                responseString = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+                responseString = JsonConvert.SerializeObject(o);
 
             }
             catch (UnauthorizedAccessException)
@@ -401,7 +402,7 @@ namespace TeslaLogger
 
                 string data = GetDataFromRequestInputStream(request);
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 if (Tools.IsPropertyExist(r, "test"))
                 {
@@ -416,7 +417,7 @@ namespace TeslaLogger
                         Vehicle_kWh = e.GetVehicleMeterReading_kWh()
                     };
 
-                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+                    string ret = JsonConvert.SerializeObject(obj);
 
                     WriteString(response, ret);
                 }
@@ -450,7 +451,7 @@ namespace TeslaLogger
                         param = dr["meter_parameter"]
                     };
 
-                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+                    string ret = JsonConvert.SerializeObject(obj);
                     WriteString(response, ret);
                 }
             }
@@ -471,7 +472,7 @@ namespace TeslaLogger
                 string data = GetDataFromRequestInputStream(request);
                 string file_htaccess = "/var/www/html/.htaccess";
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 if (Tools.IsPropertyExist(r, "delete") || request?.QueryString?["delete"] == "1")
                 {
@@ -538,7 +539,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                        dynamic r = JsonConvert.DeserializeObject(data);
                         abrp_mode = Convert.ToInt32(r["abrp_mode"]);
                         abrp_token = r["abrp_token"];
                     }
@@ -570,7 +571,7 @@ namespace TeslaLogger
                         mode = abrp_mode
                     };
 
-                    string json = new JavaScriptSerializer().Serialize(t);
+                    string json = JsonConvert.SerializeObject(t);
                     response.AddHeader("Content-Type", "application/json; charset=utf-8");
                     WriteString(response, json);
                     return;
@@ -1029,7 +1030,7 @@ namespace TeslaLogger
             }
             else
             {
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
                 id = Convert.ToInt32(r["id"]);
             }
 
@@ -1296,7 +1297,7 @@ namespace TeslaLogger
 
                 string data = GetDataFromRequestInputStream(request);
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 int id = Convert.ToInt32(r["id"]);
 
@@ -1614,7 +1615,7 @@ namespace TeslaLogger
 
                 Logfile.Log("JSON: " + json);
 
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
@@ -1776,7 +1777,7 @@ namespace TeslaLogger
                         }
                         data.Add("SpecialFlags", specialflags);
                         response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, new JavaScriptSerializer().Serialize(data));
+                        WriteString(response, JsonConvert.SerializeObject(data));
                         return;
                     }
                 }

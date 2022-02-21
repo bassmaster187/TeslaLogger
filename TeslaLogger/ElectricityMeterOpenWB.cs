@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.Caching;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -69,7 +70,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string value = jsonResult["evubezugWh"];
 
                 double v = Double.Parse(value, Tools.ciEnUS);
@@ -93,7 +94,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "llkwhLP" + LP;
                 string value = jsonResult[key];
 
@@ -117,7 +118,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "ladungaktivLP" + LP;
                 string value = jsonResult[key];
 

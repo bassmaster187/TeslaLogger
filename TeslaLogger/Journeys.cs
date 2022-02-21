@@ -6,9 +6,10 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using MySql.Data.MySqlClient;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -130,7 +131,7 @@ CREATE TABLE journeys (
         {
             string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
@@ -171,7 +172,7 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            json = JsonConvert.SerializeObject(o);
 
             WriteString(response, json);
         }
@@ -184,7 +185,7 @@ ORDER BY
 
             string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
@@ -234,7 +235,7 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            json = JsonConvert.SerializeObject(o);
             WriteString(response, json);
         }
 
@@ -244,7 +245,7 @@ ORDER BY
             // out: nothing
             // action: create journey table entry, render result selection HTML
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["CarID"];
             int StartPosID = Convert.ToInt32(r["StartPosID"]);
@@ -624,7 +625,7 @@ WHERE
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int journeyID = r["id"];
             try

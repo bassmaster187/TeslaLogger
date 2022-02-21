@@ -2,9 +2,10 @@
 using System.Threading;
 using System.Collections.Concurrent;
 using System.Net.Http;
-using System.Web.Script.Serialization;
+
 using System.Collections.Generic;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -100,7 +101,7 @@ namespace TeslaLogger
                     // parse result JSON
                     if (!string.IsNullOrEmpty(resultContent))
                     {
-                        object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        object jsonResult = JsonConvert.DeserializeObject(resultContent);
                         if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
                         {
                             if (((Dictionary<string, object>)jsonResult).ContainsKey("status")

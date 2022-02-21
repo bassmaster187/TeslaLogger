@@ -11,8 +11,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -273,7 +274,7 @@ VALUES(
                 Logfile.Log("SetCost");
 
                 string json = System.IO.File.ReadAllText(FileManager.GetSetCostPath);
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -5263,7 +5264,7 @@ WHERE
             o.Add("iTotalRecords", rows);
             o.Add("iTotalDisplayRecords", rows);
 
-            var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            var json = JsonConvert.SerializeObject(o);
             return json;
         }
     }

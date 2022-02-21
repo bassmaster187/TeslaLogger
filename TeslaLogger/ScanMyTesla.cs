@@ -4,9 +4,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using MySql.Data.MySqlClient;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -138,7 +139,7 @@ namespace TeslaLogger
                         string date = temp.Substring(0, i);
                         temp = temp.Substring(i + 2);
 
-                        dynamic j = new JavaScriptSerializer().DeserializeObject(temp);
+                        dynamic j = JsonConvert.DeserializeObject(temp);
                         DateTime d = DateTime.Parse(j["d"]);
                         car.CurrentJSON.lastScanMyTeslaReceived = d;
                         car.CurrentJSON.CreateCurrentJSON();

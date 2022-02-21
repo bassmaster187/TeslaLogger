@@ -5,8 +5,9 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -106,7 +107,7 @@ namespace TeslaLogger
                 j = GetCurrentDataLifetime();
                 j = j.Replace("nan,", "null,");
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "energy_wh";
                 string value = jsonResult[key].ToString();
 
@@ -132,7 +133,7 @@ namespace TeslaLogger
                 j = GetCurrentDataVitals();
                 j = j.Replace("nan,", "null,");
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
 
                 bool vehicle_connected = jsonResult["vehicle_connected"];
 
@@ -153,7 +154,7 @@ namespace TeslaLogger
             {
                 string j = GetCurrentDataVersion();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "firmware_version";
                 string value = jsonResult[key];
                 return value;

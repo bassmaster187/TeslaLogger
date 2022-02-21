@@ -5,8 +5,9 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -80,7 +81,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 decimal value1 = jsonResult["emeters"][0]["total"];
                 decimal value2 = jsonResult["emeters"][1]["total"];
                 decimal value3 = jsonResult["emeters"][2]["total"];
@@ -103,7 +104,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 decimal value1 = jsonResult["emeters"][0]["power"];
                 decimal value2 = jsonResult["emeters"][1]["power"];
                 decimal value3 = jsonResult["emeters"][2]["power"];
@@ -135,7 +136,7 @@ namespace TeslaLogger
                     j = mockup_shelly;
                 }
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "fw";
                 string value = jsonResult[key];
 

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Web.Script.Serialization;
+
 using MySql.Data.MySqlClient;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -79,14 +80,14 @@ namespace TeslaLogger
                             Tools.DebugLog("NearbySuCService: vehicle unavailable");
                             return;
                         }
-                        Dictionary<string, object> jsonResult = (Dictionary<string, object>)new JavaScriptSerializer().DeserializeObject(result);
+                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult.ContainsKey("response"))
                         {
-                            Dictionary<string, object> response = (Dictionary<string, object>)(jsonResult)["response"];
+                            dynamic response = jsonResult["response"];
                             if (response.ContainsKey("superchargers"))
                             {
-                                System.Object[] superchargers = (System.Object[])response["superchargers"];
-                                foreach (object supercharger in superchargers)
+                                dynamic superchargers = response["superchargers"];
+                                foreach (dynamic suc in superchargers)
                                 {
                                     /*
           {
@@ -100,14 +101,13 @@ namespace TeslaLogger
           }
                                      */
 
-                                    Dictionary<string, object> suc = (Dictionary<string, object>)supercharger;
                                     try
                                     {
                                         AddSuperchargerState(suc, send);
                                     }
                                     catch (Exception ex)
                                     {
-                                        ex.ToExceptionless().FirstCarUserID().Submit();
+                                        car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
                                         Logfile.Log(ex.ToString());
                                     }
                                 }
@@ -119,7 +119,7 @@ namespace TeslaLogger
                     }
                     catch (Exception ex)
                     {
-                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
                         Tools.DebugLog($"NearbySuCService.Work: result {new Tools.JsonFormatter(result).Format()}");
                         Tools.DebugLog("NearbySuCService.Work: Exception", ex);
                     }
@@ -131,7 +131,7 @@ namespace TeslaLogger
         {
             try
             {
-                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(send);
+                string json = JsonConvert.SerializeObject(send);
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -154,13 +154,13 @@ namespace TeslaLogger
             }
         }
 
-        private void AddSuperchargerState(Dictionary<string, object> suc, ArrayList send)
+        private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send)
         {
             int sucID = int.MinValue;
             bool SuCfound = GetSuperchargerByName(suc["name"].ToString(), out sucID);
-            Dictionary<string, object> location = (Dictionary<string, object>)suc["location"];
-            double lat = double.Parse(location["lat"].ToString(), Tools.ciEnUS);
-            double lng = double.Parse(location["long"].ToString(), Tools.ciEnUS);
+            dynamic location = suc["location"];
+            double lat = location["lat"];
+            double lng = location["long"];
 
             if (!SuCfound)
             {
@@ -264,7 +264,7 @@ VALUES(
                 && !site_closed)
             {
                 Tools.DebugLog($"SuC: <{suc["name"]}> no info (fields available: available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")})");
-                Tools.DebugLog(new Tools.JsonFormatter(new JavaScriptSerializer().Serialize(suc)).Format());
+                Tools.DebugLog(new Tools.JsonFormatter(JsonConvert.SerializeObject(suc)).Format());
             }
             else
             {
