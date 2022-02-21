@@ -244,8 +244,6 @@ namespace TeslaLogger
                 CreateEmptyWeatherIniFile();
                 CheckBackupCrontab();
 
-                DownloadUpdateAndInstall();
-
             }
             catch (Exception ex)
             {
@@ -260,6 +258,16 @@ namespace TeslaLogger
                     ComfortingMessages.Abort();
                 }
                 catch (Exception) { }
+            }
+
+            try
+            {
+                DownloadUpdateAndInstall();
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("Error in update: " + ex.ToString());
             }
         }
 
