@@ -263,3 +263,11 @@ TeslaAuthApps=You can use following apps to get an access token & refresh token 
 
 #journeys.php
 Ladezeit [h]=Charge Time [h]
+
+#Status.json
+Current Status=Current Status
+SOC=SOC
+Reichweite=Range
+Außentemperatur=Outside Temperature
+Zelltemperatur=Cell Temperature
+Nur verfügbar mit ScanMyTesla=Only available with ScanMyTesla
