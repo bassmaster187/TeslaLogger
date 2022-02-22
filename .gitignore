@@ -44,7 +44,11 @@ TeslaLogger/bin/TASKERTOKEN
 TeslaLogger/bin/weather.ini
 TeslaLogger/copytodocker.cmd
 TeslaLogger/copytonas.cmd
-
+TeslaLogger/bin/backup/*
+TeslaLogger/bin/dashboardlinks.txt
+TeslaLogger/bin/MAP-Data/*
+TeslaLogger/bin/jsontest/*
+TeslaLogger/bin/NOBACKUPONUPDATE*
 
 !UnitTestsTeslalogger/bin/Debug/
 UnitTestsTeslalogger/bin/Debug/*
@@ -56,8 +60,13 @@ TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/maps*/*
 KML_Import/.vs/*
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/language.txt
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/dist/settings.json
+TeslaLogger/GrafanaPlugins/pR0Ps-grafana-trackmap-panel/*
 TeslaLogger/CaptchaSolverKey.cs
 UnitTestsTeslalogger/grafana.ini
 OVMS/.vs
 TeslaLogger/CaptchaSolverKey.cs
 UnitTestsTeslalogger/CheckJsonString.txt
+
+TeslaLogger/mysql/*
+TeslaLogger/www/admin/REDIRECTDOCKERTOHOST*
+TeslaLogger/www/admin/debug-datasource.php
