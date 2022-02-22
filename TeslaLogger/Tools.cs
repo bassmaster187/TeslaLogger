@@ -611,7 +611,7 @@ namespace TeslaLogger
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
-                    if(bool.TryParse(j["StreamingPos"], out bool streamingPos)) {
+                    if(bool.TryParse(j["StreamingPos"].ToString(), out bool streamingPos)) {
                         Logfile.Log("StreamingPos: " + streamingPos);
                         _StreamingPos = streamingPos;
                         return streamingPos;
@@ -1639,7 +1639,7 @@ WHERE
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "MothershipKeepDays"))
                 {
-                    int.TryParse(j["MothershipKeepDays"], out days);
+                    int.TryParse(j["MothershipKeepDays"].ToString(), out days);
 
                     if (days == 0)
                     {
@@ -1669,7 +1669,7 @@ WHERE
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, name))
                 {
-                    if (int.TryParse(j[name], out value))
+                    if (int.TryParse(j[name].ToString(), out value))
                         return value;
                 }
             }
