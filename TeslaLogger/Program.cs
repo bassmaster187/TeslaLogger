@@ -327,7 +327,7 @@ namespace TeslaLogger
                     Logfile.Log($"YOU ARE USING BRANCH: " + branch);
 
                     ExceptionlessClient.Default.Configuration.DefaultData.Add("Branch", branch);
-                    ExceptionlessClient.Default.SubmitLog("Program", "BRANCH: " + branch, Exceptionless.Logging.LogLevel.Warn);
+                    ExceptionlessClient.Default.CreateLog("Program", "BRANCH: " + branch, Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit(); ;
                 }
             }
             catch (Exception ex)
