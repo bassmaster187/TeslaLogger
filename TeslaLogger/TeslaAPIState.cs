@@ -402,15 +402,10 @@ namespace TeslaLogger
             }
             try
             {
-                object jsonResult = JsonConvert.DeserializeObject(JSON);
-                if (jsonResult == null
-                    || jsonResult.GetType() != typeof(Dictionary<string, object>)
-                    || !((Dictionary<string, object>)jsonResult).ContainsKey("response")
-                    || ((Dictionary<string, object>)jsonResult)["response"] == null
-                    || string.IsNullOrEmpty(((Dictionary<string, object>)jsonResult)["response"].ToString()))
-                {
+                dynamic jsonResult = JsonConvert.DeserializeObject(JSON);
+
+                if (!Tools.IsPropertyExist(jsonResult, "response") || string.IsNullOrEmpty(jsonResult["response"].ToString()))
                     return false;
-                }
             }
             catch (ArgumentException aex)
             {
@@ -450,11 +445,10 @@ namespace TeslaLogger
         {
             try
             {
-                object jsonResult = JsonConvert.DeserializeObject(_JSON);
-                object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-                object[] r2 = (object[])r1;
-                object r3 = r2[CarInAccount];
-                Dictionary<string, object> r4 = (Dictionary<string, object>)r3;
+                dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
+                dynamic r1 = jsonResult["response"];
+                dynamic r3 = r1[CarInAccount];
+                Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
                  *      [
                  *         {
@@ -729,10 +723,9 @@ namespace TeslaLogger
 
         private Dictionary<string, object> ExtractResponse(string _JSON)
         {
-            object jsonResult = JsonConvert.DeserializeObject(_JSON);
-            object r1 = ((Dictionary<string, object>)jsonResult)["response"];
-            Dictionary<string, object> r2 = (Dictionary<string, object>)r1;
-            return r2;
+            dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
+            Dictionary<string, object> r1 = jsonResult["response"].ToObject<Dictionary<string, object>>();
+            return r1;
         }
 
         private bool ParseDriveState(string _JSON)
