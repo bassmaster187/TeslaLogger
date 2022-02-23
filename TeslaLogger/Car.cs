@@ -651,7 +651,9 @@ namespace TeslaLogger
                         }
                         else
                         {
-                            Log($"Missing: {missingOdometer} km");
+                            String temp = $"Missing: {missingOdometer} km";
+                            Log(temp);
+                            CreateExeptionlessLog("API", temp, Exceptionless.Logging.LogLevel.Warn).Submit();
                         }
                     }
 
