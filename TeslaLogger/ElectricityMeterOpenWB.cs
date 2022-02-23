@@ -55,6 +55,15 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                if (ex is WebException wx)
+                {
+                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Logfile.Log(wx.Message);
+                        return "";
+                    }
+
+                }
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
