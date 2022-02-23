@@ -2865,9 +2865,12 @@ WHERE
                             }
                             catch (Exception ex)
                             {
-                                car.CreateExceptionlessClient(ex).Submit();
+                                if (car != null)
+                                    car.CreateExceptionlessClient(ex).Submit();
+                                else
+                                    ex.ToExceptionless().FirstCarUserID().Submit();
 
-                                Logfile.ExceptionWriter(ex, sql);
+                                Logfile.ExceptionWriter(ex, sql ?? "NULL");
                             }
                         }
                     }
