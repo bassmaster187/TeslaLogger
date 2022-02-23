@@ -27,6 +27,9 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+
+            map = new FileInfo("maps/P-51,1624-13,5748.png");
+            Assert.IsTrue(map.Exists);
         }
 
         [TestMethod]
@@ -87,7 +90,7 @@ namespace UnitTestsTeslalogger
             string tempfile = Path.GetTempFileName();
             f.CopyTo(tempfile, true);
 
-            var map = new FileInfo("maps/P-51,1576-13,6364.png");
+            var map = new FileInfo("maps/T2-400371-400398.png");
             if (map.Exists)
                 map.Delete();
 
@@ -95,6 +98,9 @@ namespace UnitTestsTeslalogger
 
             string[] args = { "-jobfile", tempfile, "-debug" };
             OSMMapGenerator.Main(args);
+
+            map = new FileInfo("maps/T2-400371-400398.png");
+            Assert.IsTrue(map.Exists);
         }
     }
 }
