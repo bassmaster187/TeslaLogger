@@ -119,6 +119,9 @@ namespace TeslaLogger
                 j = GetCurrentData();
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                if (jsonResult == null)
+                    return null;
+
                 string key = "ladungaktivLP" + LP;
                 string value = jsonResult[key];
 
