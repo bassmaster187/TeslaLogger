@@ -3608,11 +3608,10 @@ namespace TeslaLogger
                     {
                         TeslaAPI_Commands.TryAdd(cmd, resultContent);
                     }
-
-
                     return resultContent;
                 }
-                else if (result.StatusCode == HttpStatusCode.Unauthorized)
+                DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", double.Parse("-1." + (int)result.StatusCode, Tools.ciEnUS), (int)result.StatusCode);
+                if (result.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     LoginRetry(result);
                 }
@@ -3626,7 +3625,6 @@ namespace TeslaLogger
                 }
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
-                    DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", -1, (int)result.StatusCode);
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     Thread.Sleep(5000);
                 }
