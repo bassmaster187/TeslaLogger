@@ -1036,6 +1036,8 @@ namespace TeslaLogger
                             case "valet_mode":
                             case "valet_pin_needed":
                             case "dashcam_clip_save_available":
+                            case "vehicle_self_test_requested":
+                            case "webcam_available":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_state");
@@ -1070,6 +1072,7 @@ namespace TeslaLogger
                             case "rd_window":
                             case "rp_window":
                             case "santa_mode":
+                            case "vehicle_self_test_progress":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_state");
