@@ -4263,7 +4263,7 @@ WHERE
 UPDATE
     chargingstate
 SET
-    charge_energy_added = @charge_energy_added,
+    charge_energy_added = @charge_energy_added 
 WHERE
     id = @id", con))
                             {
@@ -4281,7 +4281,7 @@ WHERE
 UPDATE
     chargingstate
 SET
-    charge_energy_added = @charge_energy_added,
+    charge_energy_added = @charge_energy_added 
 WHERE
     id = @id", con))
                             {

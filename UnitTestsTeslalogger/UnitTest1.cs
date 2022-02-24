@@ -797,5 +797,22 @@ namespace UnitTestsTeslalogger
         {
             ShareData.UpdateDataTable("chargingstate");
         }
+
+        [TestMethod]
+        public void GeocacheBasic()
+        {
+            GeocodeCache.Instance.ClearCache();
+            GeocodeCache.Instance.Insert(10, 20, "Test");
+            string temp = GeocodeCache.Instance.Search(10, 20);
+            Assert.AreEqual("Test", temp);
+            temp = GeocodeCache.Instance.Search(11, 20);
+            Assert.IsNull(temp);
+
+            GeocodeCache.Instance.Insert(10, 20, "Test");
+            temp = GeocodeCache.Instance.Search(10, 20);
+            Assert.AreEqual("Test", temp);
+
+            GeocodeCache.Instance.ClearCache();
+        }
     }
 }
