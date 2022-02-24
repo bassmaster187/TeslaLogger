@@ -447,6 +447,9 @@ namespace TeslaLogger
             {
                 dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
                 dynamic r1 = jsonResult["response"];
+                if (r1 == null)
+                    return false;
+
                 dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
