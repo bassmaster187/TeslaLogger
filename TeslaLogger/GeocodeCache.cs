@@ -72,6 +72,15 @@ namespace TeslaLogger
 
                 Logfile.Log("GeocodeCache:Insert");
             }
+            catch (ConstraintException cex)
+            {
+                if (cex.HResult != -2146232022)  // Column 'lat, lng' is constrained to be unique.  Value 'xx, xx' is already present.
+                {
+                    cex.ToExceptionless().FirstCarUserID().Submit();
+                }
+                
+                Logfile.Log(cex.Message);
+            }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
