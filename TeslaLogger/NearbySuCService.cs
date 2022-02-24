@@ -70,6 +70,9 @@ namespace TeslaLogger
                     try
                     {
                         result = car.webhelper.GetNearbyChargingSites().Result;
+                        if (result == null || result == "NULL")
+                            continue;
+
                         if (result.Contains("Retry later"))
                         {
                             Tools.DebugLog("NearbySuCService: Retry later");
@@ -81,9 +84,15 @@ namespace TeslaLogger
                             return;
                         }
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                        if (jsonResult == null)
+                            continue;
+
                         if (jsonResult.ContainsKey("response"))
                         {
                             dynamic response = jsonResult["response"];
+                            if (response == null)
+                                continue;
+
                             if (response.ContainsKey("superchargers"))
                             {
                                 dynamic superchargers = response["superchargers"];
@@ -113,7 +122,8 @@ namespace TeslaLogger
                                 }
                             }
 
-                            ShareSuc(send);
+                            if (send.Count > 0)
+                                ShareSuc(send);
                         }
                         Thread.Sleep(30000);
                     }
