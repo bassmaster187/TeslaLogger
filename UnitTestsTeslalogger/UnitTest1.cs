@@ -718,7 +718,12 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void GoEMeter()
         {
-            var v = new ElectricityMeterGoE("http://192.168.1.222", "");
+            string url = Settings.Default.ElectricityMeterGoEURL;
+
+            if (string.IsNullOrEmpty(url))
+                Assert.Inconclusive();
+
+            var v = new ElectricityMeterGoE(url, "");
             string ret = v.ToString();
             Console.WriteLine(ret);
         }
