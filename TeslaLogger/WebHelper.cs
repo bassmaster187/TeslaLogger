@@ -500,9 +500,9 @@ namespace TeslaLogger
                             }
 
                             dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                            string access_token = jsonResult["access_token"];
+                            string access_token = jsonResult["access_token"] ?? throw new Exception("access_token Missing");
+                            string new_refresh_token = jsonResult["refresh_token"] ?? throw new Exception("refresh_token Missing");
 
-                            string new_refresh_token = jsonResult["refresh_token"];
                             if (new_refresh_token == null || new_refresh_token.Length < 10)
                             {
                                 Log("new Refresh Token is invalid!!");
@@ -1141,17 +1141,14 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        if (jsonResult.ContainsKey("access_token"))
-                        {
-                            string access_token2 = jsonResult["access_token"];
-                            int created_at = jsonResult["created_at"];
-                            int expires_in = jsonResult["expires_in"];
+                        string access_token2 = jsonResult["access_token"] ?? throw new Exception("access_token Missing");
+                        int created_at = jsonResult["created_at"] ?? throw new Exception("created_at Missing");
+                        int expires_in = jsonResult["expires_in"] ?? throw new Exception("expires_in Missing");
 
-                            Tesla_token = jsonResult["access_token"];
-                            car.DbHelper.UpdateTeslaToken();
-                            car.LoginRetryCounter = 0;
-                            return Tesla_token;
-                        }
+                        Tesla_token = jsonResult["access_token"];
+                        car.DbHelper.UpdateTeslaToken();
+                        car.LoginRetryCounter = 0;
+                        return Tesla_token;
                     }
                 }
             }
