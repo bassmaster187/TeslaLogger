@@ -1179,6 +1179,12 @@ HAVING
         {
             try
             {
+                if (refresh_token == null || refresh_token.Length < 10)
+                {
+                    car.Log("SKIP UpdateRefreshToken !!!");
+                    return;
+                }
+
                 car.Log("UpdateRefreshToken");
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {

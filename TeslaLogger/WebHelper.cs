@@ -501,7 +501,11 @@ namespace TeslaLogger
                             string access_token = jsonResult["access_token"];
 
                             string new_refresh_token = jsonResult["refresh_token"];
-                            if (new_refresh_token == refresh_token)
+                            if (new_refresh_token == null || new_refresh_token.Length < 10)
+                            {
+                                Log("new Refresh Token is invalid!!");
+                            }
+                            else if ( new_refresh_token == refresh_token)
                             {
                                 Log("refresh_token not changed");
                             }
@@ -1133,15 +1137,17 @@ namespace TeslaLogger
                     }
                     else
                     {
+                        if (jsonResult.ContainsKey("access_token"))
+                        {
+                            string access_token2 = jsonResult["access_token"];
+                            int created_at = jsonResult["created_at"];
+                            int expires_in = jsonResult["expires_in"];
 
-                        string access_token2 = jsonResult["access_token"];
-                        int created_at = jsonResult["created_at"];
-                        int expires_in = jsonResult["expires_in"];
-
-                        Tesla_token = jsonResult["access_token"];
-                        car.DbHelper.UpdateTeslaToken();
-                        car.LoginRetryCounter = 0;
-                        return Tesla_token;
+                            Tesla_token = jsonResult["access_token"];
+                            car.DbHelper.UpdateTeslaToken();
+                            car.LoginRetryCounter = 0;
+                            return Tesla_token;
+                        }
                     }
                 }
             }
