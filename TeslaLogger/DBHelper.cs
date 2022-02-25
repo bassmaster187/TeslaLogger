@@ -1074,6 +1074,12 @@ HAVING
         {
             try
             {
+                if (String.IsNullOrEmpty(car.webhelper.Tesla_token))
+                {
+                    car.CreateExeptionlessLog("Tesla Token", "Tesla Token EMPTY!!!", Exceptionless.Logging.LogLevel.Warn).Submit();
+                    return;
+                }
+
                 car.Log("UpdateTeslaToken");
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
@@ -1086,6 +1092,8 @@ HAVING
                         int done = SQLTracer.TraceNQ(cmd);
 
                         car.Log("update tesla_token OK: " + done);
+
+                        car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
                         car.ExternalLog("UpdateTeslaToken");
                         car.Restart("Access Token updated", 30);
