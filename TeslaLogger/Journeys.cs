@@ -362,7 +362,7 @@ LIMIT 1", con))
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    int charge_duration_minutes = 0;
+                    double charge_duration_minutes = 0;
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     chargingstate.EndDate,
@@ -380,8 +380,12 @@ WHERE
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            charge_duration_minutes += (int)(DateTime.Parse(dr[0].ToString(), Tools.ciEnUS) - DateTime.Parse(dr[1].ToString(), Tools.ciEnUS)).TotalMinutes;
+                            DateTime d1 = (DateTime)dr[0];
+                            DateTime d2 = (DateTime)dr[1];
+                            TimeSpan ts = d1 - d2;
+                            charge_duration_minutes += ts.TotalMinutes;
                         }
+                        dr.Close();
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
@@ -392,7 +396,7 @@ WHERE
     Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        cmd.Parameters.AddWithValue("@charge_duration_minutes", charge_duration_minutes);
+                        cmd.Parameters.AddWithValue("@charge_duration_minutes", (int)charge_duration_minutes);
                         Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
