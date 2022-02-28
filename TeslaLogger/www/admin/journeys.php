@@ -41,12 +41,12 @@ require_once("tools.php");
                 { "data": "Start_address"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        var sdd = new Date(parseInt(row["StartDate"].substr(6)));
+                        var sdd = new Date(row["StartDate"]);
                         return sdd.toLocaleString();
                     }
                     else if (type === 'sort')
                     {
-                        return parseInt(row["StartDate"].substr(6));
+                        return new Date(row["StartDate"]).getTime();
                     }
 
                     return "";
@@ -54,12 +54,12 @@ require_once("tools.php");
                 { "data": "End_address"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        var sdd = new Date(parseInt(row["EndDate"].substr(6)));
+                        var sdd = new Date(row["EndDate"]);
                         return sdd.toLocaleString();
                     }
                     else if (type === 'sort')
                     {
-                        return parseInt(row["StartDate"].substr(6));
+                        return new Date(row["EndDate"]).getTime();
                     }
 
                     return "";
