@@ -411,7 +411,11 @@ namespace TeslaLogger
                 {
                     Logfile.Log("Test Wallbox");
 
-                    ElectricityMeterBase e = ElectricityMeterBase.Instance(r["type"], r["host"], r["param"]);
+                    string type = r["type"];
+                    string host = r["host"];
+                    string param = r["param"];
+
+                    ElectricityMeterBase e = ElectricityMeterBase.Instance(type, host, param);
 
                     var obj = new
                     {
@@ -445,7 +449,7 @@ namespace TeslaLogger
                 }
                 else if (Tools.IsPropertyExist(r, "load"))
                 {
-                    var carid = r["carid"];
+                    int carid = r["carid"];
                     var dr = DBHelper.GetCar(carid);
                     var obj = new
                     {

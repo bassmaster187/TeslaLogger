@@ -573,7 +573,7 @@ WHERE
     journeys.CarID = cars.Id
     AND journeys.StartPosID = tripStart.StartPosID
     AND journeys.EndPosID = tripEnd.EndPosID
-    AND cars.Id = ${carid}
+    AND cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
             
