@@ -60,8 +60,8 @@ require_once("tools.php");
         kwh = Number(json[0]["kWh"]);
         $("#charge_energy_added").text(kwh + " kWh");   
         
-        var StartDate = new Date(parseInt(json[0]["StartDate"].substr(6)));    
-        var EndDate = new Date(parseInt(json[0]["EndDate"].substr(6)));   
+        var StartDate = new Date(json[0]["StartDate"]);    
+        var EndDate = new Date(json[0]["EndDate"]);   
 
         minutes = diff_minutes(StartDate, EndDate);
         $("#minutes").text(minutes + " Minutes");       
