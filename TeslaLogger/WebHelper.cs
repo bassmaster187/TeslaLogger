@@ -440,6 +440,8 @@ namespace TeslaLogger
 
         private string UpdateTeslaTokenFromRefreshToken()
         {
+            car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken", Exceptionless.Logging.LogLevel.Info).Submit();
+
             string refresh_token = car.DbHelper.GetRefreshToken(out string tesla_token);
 
             if (tesla_token.StartsWith("cn-", StringComparison.Ordinal))
@@ -523,7 +525,9 @@ namespace TeslaLogger
             {
                 car.Log(ex.ToString());
                 // car.ExternalLog("UpdateTeslaTokenFromRefreshToken: \r\nHTTP StatusCode: " + HttpStatusCode+ "\r\nresultContent: " + resultContent +"\r\n" + ex.ToString());
-                car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent,"ResultContent").Submit();
+                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", "Error getting access token", Exceptionless.Logging.LogLevel.Error).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").Submit();
+                car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent,"ResultContent").MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueue();
             }
             return "";
         }
@@ -1145,7 +1149,7 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException ex)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
@@ -1154,6 +1158,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
                 ExceptionWriter(ex, resultContent);
                 SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                car.CreateExeptionlessLog("GetTokenAsync4", "Error getting access token", Exceptionless.Logging.LogLevel.Error).AddObject(resultContent, "ResultContent").Submit();
 
                 car.ExternalLog("GetTokenAsync4: " + ex.ToString());
             }
