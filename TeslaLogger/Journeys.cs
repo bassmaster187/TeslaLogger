@@ -546,7 +546,12 @@ WHERE
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string sql = @"
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = JsonConvert.DeserializeObject(data);
+
+            int carid = r["carid"];
+
+            string sql = $@"
 SELECT
     journeys.Id, 
     journeys.name,
@@ -568,6 +573,7 @@ WHERE
     journeys.CarID = cars.Id
     AND journeys.StartPosID = tripStart.StartPosID
     AND journeys.EndPosID = tripEnd.EndPosID
+    AND cars.Id = ${carid}
 ORDER BY
     journeys.Id ASC";
             
