@@ -847,5 +847,18 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("Two weeks", display_name);
 
         }
+
+        /*
+        [TestMethod]
+        public void RefreshAuthTokenFromRefrehToken()
+        {
+            // ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "ffffffff", null);
+
+            c.CarInDB = 1;
+            c.webhelper.UpdateTeslaTokenFromRefreshToken();
+        }
+        */
     }
 }

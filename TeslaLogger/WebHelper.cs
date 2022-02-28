@@ -438,7 +438,7 @@ namespace TeslaLogger
             System.IO.File.WriteAllText("captcha.svg", resultContent);
         }
 
-        private string UpdateTeslaTokenFromRefreshToken()
+        internal string UpdateTeslaTokenFromRefreshToken()
         {
             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken", Exceptionless.Logging.LogLevel.Info).Submit();
 

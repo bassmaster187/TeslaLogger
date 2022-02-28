@@ -4765,22 +4765,31 @@ WHERE
             return 0;
         }
 
-        public static object DBNullIfEmptyOrZero(string val)
+        public static object DBNullIfEmptyOrZero(object val)
         {
-            if (val == null || val.Length == 0 || val == "0" || val == "0.00")
-            {
+            if (val is String s && s.Length == 0)
                 return DBNull.Value;
-            }
+
+            if (val == null)
+                return DBNull.Value;
+
+            String temp = val.ToString();
+            if (val.ToString() == "0" || val.ToString() == "0.00")
+                return DBNull.Value;
 
             return val;
         }
 
-        public static object DBNullIfEmpty(string val)
+        public static object DBNullIfEmpty(object val)
         {
-            if (val == null || val.Length == 0)
-            {
+            if (val is String s && s.Length == 0)
                 return DBNull.Value;
-            }
+
+            if (val == null)
+                return DBNull.Value;
+
+            if (val is Newtonsoft.Json.Linq.JValue j && !j.HasValues)
+                return DBNull.Value;
 
             return val;
         }
