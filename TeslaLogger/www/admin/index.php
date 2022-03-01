@@ -126,6 +126,7 @@ else
 			var car_version = jsonData["car_version"];
 			car_version = car_version.substring(0,car_version.lastIndexOf(" "));
 			$('#car_version').text(car_version);
+			$('#car_version_link').attr("href", "https://www.notateslaapp.com/software-updates/version/"+ car_version +"/release-notes");
 
 			if (jsonData["charging"])
 			{
@@ -405,7 +406,7 @@ function ShowInfo()
 	  <tr><td><b><?php t("Typical Range"); ?>:</b></td><td><span id="ideal_battery_range_km">---</span> / <span id="battery_level">---</span> %<span id="full_battery_range_km_span"><br>= <span id="full_battery_range_km">---</span> / 100 %</span>
 </td></tr>
 	  <tr><td><b><?php t("Odometer"); ?>:</b></td><td><span id="odometer">---</span></td></tr>
-	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><span id="car_version">---</span></td></tr>
+	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><a href='' id="car_version_link" target="_blank" title="Release Notes"><span id="car_version"></a></span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
     </table>
