@@ -70,3 +70,4 @@ UnitTestsTeslalogger/CheckJsonString.txt
 TeslaLogger/mysql/*
 TeslaLogger/www/admin/REDIRECTDOCKERTOHOST*
 TeslaLogger/www/admin/debug-datasource.php
+TeslaLogger/bin/geofence-private.csv.backup
