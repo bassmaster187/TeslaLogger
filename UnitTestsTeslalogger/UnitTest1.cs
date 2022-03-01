@@ -837,11 +837,11 @@ namespace UnitTestsTeslalogger
             t.GetBool("in_service", out bool in_service);
             Assert.AreEqual(false, in_service);
 
-            t.GetInt("id", out int id);
-            // Assert.AreEqual(1492912313499558, id); fail
+            t.GetString("id", out string id);
+            Assert.AreEqual("1492912313499558", id);
 
-            t.GetInt("vehicle_id", out int vehicle_id);
-            // Assert.AreEqual(162542655, vehicle_id); 
+            t.GetString("vehicle_id", out string vehicle_id);
+            Assert.AreEqual("162542655", vehicle_id); 
 
             t.GetString("display_name", out string display_name);
             Assert.AreEqual("Two weeks", display_name);
