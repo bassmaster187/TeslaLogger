@@ -55,7 +55,7 @@ if (isset($id))
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
-	<script src="static/leaflet/1.4.0/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	<script src="static/leaflet/1.4.0/leaflet.js"></script>
 	
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
