@@ -1673,6 +1673,13 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
+                if (resultContent.Contains("upstream connect error or disconnect"))
+                {
+                    Log("isOnline Result Content: " + resultContent);
+                    Thread.Sleep(5000);
+                    return "NULL";
+                }
+
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
                 if (result.IsSuccessStatusCode)
                 {
