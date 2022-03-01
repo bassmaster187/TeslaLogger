@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -184,7 +185,7 @@ ORDER BY
                             d.Add("teslalogger_version", TeslaloggerVersion);
                             d.Add("charging", l);
 
-                            string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d);
+                            string json = JsonConvert.SerializeObject(d);
 
                             //string resultContent = "";
                             try
@@ -406,7 +407,7 @@ GROUP BY
                             t.Add(d);
                         }
 
-                        string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(d1);
+                        string json = JsonConvert.SerializeObject(d1);
 
                         try
                         {

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using SRTM;
 using System.Web;
-using System.Web.Script.Serialization;
+
+using Newtonsoft.Json;
 
 namespace UnitTestsTeslalogger
 {
@@ -549,7 +550,7 @@ namespace UnitTestsTeslalogger
                                 }, dictLanguage, true);
 
             Assert.IsFalse(s.Contains("km Stand [km]"));
-            
+
         }
 
         [TestMethod]
@@ -684,7 +685,7 @@ namespace UnitTestsTeslalogger
         {
             var v = new ElectricityMeterOpenWB("http://openwb", "LP1");
             Assert.AreEqual(1, v.LP);
-            string ret =  v.ToString();
+            string ret = v.ToString();
             Console.WriteLine(ret);
         }
 
@@ -717,7 +718,12 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void GoEMeter()
         {
-            var v = new ElectricityMeterGoE("http://192.168.1.222", "");
+            string url = Settings.Default.ElectricityMeterGoEURL;
+
+            if (string.IsNullOrEmpty(url))
+                Assert.Inconclusive();
+
+            var v = new ElectricityMeterGoE(url, "");
             string ret = v.ToString();
             Console.WriteLine(ret);
         }
@@ -725,7 +731,7 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void Shelly3EM()
         {
-            var v = new ElectricityMeterShelly3EM("", ""); 
+            var v = new ElectricityMeterShelly3EM("", "");
             v.mockup_status = "{\"wifi_sta\":{\"connected\":true,\"ssid\":\"badhome\",\"ip\":\"192.168.70.176\",\"rssi\":-78},\"cloud\":{\"enabled\":false,\"connected\":false},\"mqtt\":{\"connected\":false},\"time\":\"16:19\",\"unixtime\":1636125569,\"serial\":7665,\"has_update\":false,\"mac\":\"C45BBE5F71E5\",\"cfg_changed_cnt\":1,\"actions_stats\":{\"skipped\":0},\"relays\":[{\"ison\":false,\"has_timer\":false,\"timer_started\":0,\"timer_duration\":0,\"timer_remaining\":0,\"overpower\":false,\"is_valid\":true,\"source\":\"input\"}],\"emeters\":[{\"power\":0.00,\"pf\":0.14,\"current\":0.01,\"voltage\":236.00,\"is_valid\":true,\"total\":23870.9,\"total_returned\":28.7},{\"power\":0.00,\"pf\":0.00,\"current\":0.01,\"voltage\":236.07,\"is_valid\":true,\"total\":22102.0,\"total_returned\":59.4},{\"power\":7.49,\"pf\":0.49,\"current\":0.07,\"voltage\":235.88,\"is_valid\":true,\"total\":55527.2,\"total_returned\":0.0}],\"total_power\":7.49,\"fs_mounted\":true,\"update\":{\"status\":\"idle\",\"has_update\":false,\"new_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"old_version\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\"},\"ram_total\":49440,\"ram_free\":30260,\"fs_size\":233681,\"fs_free\":156624,\"uptime\":1141576}";
             v.mockup_shelly = "{\"type\":\"SHEM-3\",\"mac\":\"C45BBE5F71E5\",\"auth\":false,\"fw\":\"20210909-150410/v1.11.4-DNSfix-ge6b2f6d\",\"longid\":1,\"num_outputs\":1,\"num_meters\":0,\"num_emeters\":3,\"report_period\":1}";
 
@@ -752,7 +758,7 @@ namespace UnitTestsTeslalogger
             double? kwh = v.GetVehicleMeterReading_kWh();
             var chargign = v.IsCharging();
             var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
-            var version =  v.GetVersion();
+            var version = v.GetVersion();
             string ret = v.ToString();
             Console.WriteLine(ret);
 
@@ -787,7 +793,7 @@ namespace UnitTestsTeslalogger
         public void CheckJsonString()
         {
             string resultContent = System.IO.File.ReadAllText("../../CheckJsonString.txt");
-            object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
+            object jsonResult = JsonConvert.DeserializeObject(resultContent);
             Assert.IsNotNull(jsonResult);
         }
 
@@ -796,5 +802,63 @@ namespace UnitTestsTeslalogger
         {
             ShareData.UpdateDataTable("chargingstate");
         }
+
+        [TestMethod]
+        public void GeocacheBasic()
+        {
+            GeocodeCache.Instance.ClearCache();
+            GeocodeCache.Instance.Insert(10, 20, "Test");
+            string temp = GeocodeCache.Instance.Search(10, 20);
+            Assert.AreEqual("Test", temp);
+            temp = GeocodeCache.Instance.Search(11, 20);
+            Assert.IsNull(temp);
+
+            GeocodeCache.Instance.Insert(10, 20, "Test");
+            temp = GeocodeCache.Instance.Search(10, 20);
+            Assert.AreEqual("Test", temp);
+
+            GeocodeCache.Instance.ClearCache();
+        }
+
+        [TestMethod]
+        public void TeslaApiVehicles()
+        {
+            var json = System.IO.File.ReadAllText("../../TeslaApiVehicles.txt");
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            var t = new TeslaAPIState(c);
+            t.ParseAPI(json, "vehicles");
+            
+            t.GetString("vin", out string vin);
+            Assert.AreEqual("5YJSA7E21JF123456", vin);
+
+            t.GetString("state", out string state);
+            Assert.AreEqual("asleep", state);
+
+            t.GetBool("in_service", out bool in_service);
+            Assert.AreEqual(false, in_service);
+
+            t.GetString("id", out string id);
+            Assert.AreEqual("1492912313499558", id);
+
+            t.GetString("vehicle_id", out string vehicle_id);
+            Assert.AreEqual("162542655", vehicle_id); 
+
+            t.GetString("display_name", out string display_name);
+            Assert.AreEqual("Two weeks", display_name);
+
+        }
+
+        /*
+        [TestMethod]
+        public void RefreshAuthTokenFromRefrehToken()
+        {
+            // ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "ffffffff", null);
+
+            c.CarInDB = 1;
+            c.webhelper.UpdateTeslaTokenFromRefreshToken();
+        }
+        */
     }
 }

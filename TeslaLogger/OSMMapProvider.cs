@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -54,7 +55,7 @@ namespace TeslaLogger
             }
             job.Add("latlng", latlng.ToArray());
             string tempfile = Path.GetTempFileName();
-            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
             arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
@@ -142,7 +143,7 @@ namespace TeslaLogger
             job.Add("lng", lng);
             job.Add("MapCachePath", FileManager.GetMapCachePath());
             string tempfile = Path.GetTempFileName();
-            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
             arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
@@ -206,7 +207,7 @@ namespace TeslaLogger
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
             arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
 
-            File.WriteAllText(tempfile, new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(job), Encoding.UTF8);
+            File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
             using (Process process = new Process
             {
                 StartInfo = new ProcessStartInfo

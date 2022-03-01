@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -7,7 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
-using System.Web.Script.Serialization;
+
 
 namespace TeslaLogger
 {
@@ -54,17 +56,17 @@ namespace TeslaLogger
                 {
                     string json = File.ReadAllText(jobfile);
                     File.Delete(jobfile);
-                    object jsonResult = new JavaScriptSerializer().DeserializeObject(json);
-                    if (jsonResult.GetType() == typeof(Dictionary<string, object>))
+                    dynamic jsonResult = JsonConvert.DeserializeObject(json);
+                    Dictionary<string, object> job = jsonResult.ToObject<Dictionary<string, object>>();
+                    if (job != null)
                     {
-                        Dictionary<string, object> job = (Dictionary<string, object>)jsonResult;
                         int width = Convert.ToInt32(job["width"]);
                         int height = Convert.ToInt32(job["height"]);
                         int zoom = Convert.ToInt32(job["zoom"]);
                         tileSize = Convert.ToInt32(job["tileSize"]);
                         double x_center = Convert.ToDouble(job["x_center"]);
                         double y_center = Convert.ToDouble(job["y_center"]);
-                        MapMode mapmode = (MapMode)job["mapmode"];
+                        MapMode mapmode = (MapMode)Enum.ToObject(typeof(MapMode), job["mapmode"]);
                         MapCachePath = job["MapCachePath"].ToString();
                         if (debug) { Console.WriteLine($"OSMMapGenerator - DrawMap(width:{width}, height:{height}, zoom:{zoom}, x_center:{x_center}, y_center:{y_center}, mapmode:{mapmode})"); }
                         Bitmap map = DrawMap(width, height, zoom, x_center, y_center, mapmode);
@@ -79,12 +81,14 @@ namespace TeslaLogger
                             column.DataType = Type.GetType("System.Double");
                             column.ColumnName = "lng";
                             coords.Columns.Add(column);
-                            if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + ((object[])job["latlng"]).Length); }
-                            for (int index = 0; index < ((object[])job["latlng"]).Length; index += 2)
+                            JArray latlng = (JArray)job["latlng"];
+
+                            if (debug) { Console.WriteLine("OSMMapGenerator - latlng: " + latlng.Count); }
+                            for (int index = 0; index < latlng.Count; index += 2)
                             {
                                 DataRow drow = coords.NewRow();
-                                drow["lat"] = ((object[])job["latlng"])[index];
-                                drow["lng"] = ((object[])job["latlng"])[index + 1];
+                                drow["lat"] = latlng[index];
+                                drow["lng"] = latlng[index + 1];
                                 coords.Rows.Add(drow);
                             }
                             if (debug) { Console.WriteLine("OSMMapGenerator - DrawTrip"); }
@@ -118,7 +122,11 @@ namespace TeslaLogger
                         SaveImage(map, filename);
                     }
                 }
-                catch (Exception ex) { if (debug) { Console.WriteLine("OSMMapGenerator - Exception: " + ex.Message + " " + ex.StackTrace); } }
+                catch (Exception ex)
+                {
+                    if (debug)
+                    { Console.WriteLine("OSMMapGenerator - Exception: " + ex.Message + " " + ex.StackTrace); }
+                }
             }
         }
 

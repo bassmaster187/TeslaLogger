@@ -5,8 +5,9 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -60,6 +61,15 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                if (ex is WebException wx)
+                {
+                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Logfile.Log(wx.Message);
+                        return "";
+                    }
+
+                }
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
@@ -80,7 +90,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 decimal value1 = jsonResult["emeters"][0]["total"];
                 decimal value2 = jsonResult["emeters"][1]["total"];
                 decimal value3 = jsonResult["emeters"][2]["total"];
@@ -103,7 +113,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 decimal value1 = jsonResult["emeters"][0]["power"];
                 decimal value2 = jsonResult["emeters"][1]["power"];
                 decimal value3 = jsonResult["emeters"][2]["power"];
@@ -135,7 +145,7 @@ namespace TeslaLogger
                     j = mockup_shelly;
                 }
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "fw";
                 string value = jsonResult[key];
 

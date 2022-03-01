@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Collections.Concurrent;
 using System.Net.Http;
-using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -78,58 +78,76 @@ namespace TeslaLogger
                 if (queue.TryPopRange(items) > 0)
                 {
                     // build pipe separated query string for opentopodata.org
-                    string[] latlng = new string[items.Length];
-                    for (int i = 0; i < items.Length; i++)
+                    RequestLocations(items, UpdateDB);
+
+                    Thread.Sleep(90000); // sleep 90 seconds (safety marging)
+                }
+            }
+            else
+            {
+                Thread.Sleep(60000); // sleep 60 seconds
+            }
+        }
+        public delegate void RequestLocationsResponse(long id, double elevation);
+        void UpdateDB(long id, double elevation)
+        {
+            // finally update DB
+            _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {id}");
+        }
+
+        internal static void RequestLocations(Tuple<long, double, double>[] items, RequestLocationsResponse response)
+        {
+            string[] latlng = new string[items.Length];
+            for (int i = 0; i < items.Length; i++)
+            {
+                latlng[i] = items[i].Item2.ToString(Tools.ciEnUS) + "," + items[i].Item3.ToString(Tools.ciEnUS);
+            }
+            string queryString = "https://api.opentopodata.org/v1/mapzen?locations=" + string.Join("|", latlng);
+            // query opentopodata.org API
+            string resultContent = string.Empty;
+            using (HttpClient client = new HttpClient
+            {
+                Timeout = TimeSpan.FromSeconds(11)
+            })
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                DateTime start = DateTime.UtcNow;
+                HttpResponseMessage result = client.GetAsync(new Uri(queryString)).Result;
+                resultContent = result.Content.ReadAsStringAsync().Result;
+                DBHelper.AddMothershipDataToDB("OpenTopoData.Query", start, (int)result.StatusCode);
+            }
+            // parse result JSON
+            if (!string.IsNullOrEmpty(resultContent))
+            {
+                dynamic jr = JsonConvert.DeserializeObject(resultContent);
+                var jsonResult = jr.ToObject<Dictionary<string, object>>();
+                if (jsonResult != null)
+                {
+                    if (((Dictionary<string, object>)jsonResult).ContainsKey("status")
+                        && ((Dictionary<string, object>)jsonResult)["status"].Equals("OK")
+                        && ((Dictionary<string, object>)jsonResult).ContainsKey("results"))
                     {
-                        latlng[i] = $"{items[i].Item2},{items[i].Item3}";
-                    }
-                    string queryString = "https://api.opentopodata.org/v1/mapzen?locations=" + string.Join("|", latlng);
-                    // query opentopodata.org API
-                    string resultContent = string.Empty;
-                    using (HttpClient client = new HttpClient
-                    {
-                        Timeout = TimeSpan.FromSeconds(11)
-                    })
-                    {
-                        client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-                        DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = client.GetAsync(new Uri(queryString)).Result;
-                        resultContent = result.Content.ReadAsStringAsync().Result;
-                        DBHelper.AddMothershipDataToDB("OpenTopoData.Query", start, (int)result.StatusCode);
-                    }
-                    // parse result JSON
-                    if (!string.IsNullOrEmpty(resultContent))
-                    {
-                        object jsonResult = new JavaScriptSerializer().DeserializeObject(resultContent);
-                        if (jsonResult != null && jsonResult.GetType() == typeof(Dictionary<string, object>))
+                        dynamic objects = jsonResult["results"];
+                        foreach (dynamic result in objects)
                         {
-                            if (((Dictionary<string, object>)jsonResult).ContainsKey("status")
-                                && ((Dictionary<string, object>)jsonResult)["status"].Equals("OK")
-                                && ((Dictionary<string, object>)jsonResult).ContainsKey("results"))
+                            if (result.ContainsKey("elevation")
+                                && result.ContainsKey("location"))
                             {
-                                object[] objects = (object[])((Dictionary<string, object>)jsonResult)["results"];
-                                foreach (object result in objects) {
-                                    if(((Dictionary<string, object>)result).ContainsKey("elevation")
-                                        && ((Dictionary<string, object>)result).ContainsKey("location"))
+                                if (double.TryParse(result["elevation"].ToString(Tools.ciEnUS), out double elevation)
+                                    && !double.IsNaN(elevation))
+                                {
+                                    Dictionary<string, object> location = result["location"].ToObject<Dictionary<string, object>>();
+                                    if (location.ContainsKey("lat") && location.ContainsKey("lng"))
                                     {
-                                        if (double.TryParse(((Dictionary<string, object>)result)["elevation"].ToString(), out double elevation)
-                                            && !double.IsNaN(elevation))
+                                        if (double.TryParse(location["lat"].ToString(), out double lat)
+                                            && double.TryParse(location["lng"].ToString(), out double lng))
                                         {
-                                            Dictionary<string, object> location = (Dictionary<string, object>)((Dictionary<string, object>)result)["location"];
-                                            if (location.ContainsKey("lat") && location.ContainsKey("lng"))
+                                            // find posID(s) in items
+                                            foreach (Tuple<long, double, double> item in items)
                                             {
-                                                if (double.TryParse(location["lat"].ToString(), out double lat)
-                                                    && double.TryParse(location["lng"].ToString(), out double lng))
+                                                if (item.Item2 == lat && item.Item3 == lng)
                                                 {
-                                                    // find posID(s) in items
-                                                    foreach (Tuple<long, double, double> item in items)
-                                                    {
-                                                        if (item.Item2 == lat && item.Item3 == lng)
-                                                        {
-                                                            // finally update DB
-                                                            _ = DBHelper.ExecuteSQLQuery($"UPDATE pos SET altitude = {elevation} WHERE id = {item.Item1}");
-                                                        }
-                                                    }
+                                                    response(item.Item1, elevation);
                                                 }
                                             }
                                         }
@@ -138,12 +156,7 @@ namespace TeslaLogger
                             }
                         }
                     }
-                    Thread.Sleep(90000); // sleep 90 seconds (safety marging)
                 }
-            }
-            else
-            {
-                Thread.Sleep(60000); // sleep 60 seconds
             }
         }
     }

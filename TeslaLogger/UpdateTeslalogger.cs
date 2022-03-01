@@ -5,12 +5,13 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using System.Web.Script.Serialization;
+
 using System.Threading;
 using System.Net;
 using System.IO.Compression;
 using Exceptionless;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -1828,7 +1829,7 @@ CREATE TABLE superchargers(
             link = "";
             try
             {
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
                 title = j["title"];
                 uid = j["uid"];
 

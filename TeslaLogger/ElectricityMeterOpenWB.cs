@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.Caching;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -54,6 +55,15 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                if (ex is WebException wx)
+                {
+                    if ((wx.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Logfile.Log(wx.Message);
+                        return "";
+                    }
+
+                }
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
@@ -69,7 +79,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string value = jsonResult["evubezugWh"];
 
                 double v = Double.Parse(value, Tools.ciEnUS);
@@ -93,7 +103,7 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "llkwhLP" + LP;
                 string value = jsonResult[key];
 
@@ -117,7 +127,10 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
-                dynamic jsonResult = new JavaScriptSerializer().DeserializeObject(j);
+                dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                if (jsonResult == null)
+                    return null;
+
                 string key = "ladungaktivLP" + LP;
                 string value = jsonResult[key];
 

@@ -1,5 +1,5 @@
-# Version 1.51.7
-- Bugfixes 
+# Version 1.51.9
+- Using Newtonsoft JSON instead of buggy build in Mono JSON Parser.
 
 # Version 1.51.6
 - Bugfixes 

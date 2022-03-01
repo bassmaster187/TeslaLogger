@@ -6,9 +6,10 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using MySql.Data.MySqlClient;
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -130,7 +131,7 @@ CREATE TABLE journeys (
         {
             string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
@@ -171,7 +172,7 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            json = JsonConvert.SerializeObject(o);
 
             WriteString(response, json);
         }
@@ -184,7 +185,7 @@ ORDER BY
 
             string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
@@ -234,7 +235,7 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+            json = JsonConvert.SerializeObject(o);
             WriteString(response, json);
         }
 
@@ -244,7 +245,7 @@ ORDER BY
             // out: nothing
             // action: create journey table entry, render result selection HTML
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["CarID"];
             int StartPosID = Convert.ToInt32(r["StartPosID"]);
@@ -361,7 +362,7 @@ LIMIT 1", con))
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    int charge_duration_minutes = 0;
+                    double charge_duration_minutes = 0;
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     chargingstate.EndDate,
@@ -379,8 +380,12 @@ WHERE
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            charge_duration_minutes += (int)(DateTime.Parse(dr[0].ToString(), Tools.ciEnUS) - DateTime.Parse(dr[1].ToString(), Tools.ciEnUS)).TotalMinutes;
+                            DateTime d1 = (DateTime)dr[0];
+                            DateTime d2 = (DateTime)dr[1];
+                            TimeSpan ts = d1 - d2;
+                            charge_duration_minutes += ts.TotalMinutes;
                         }
+                        dr.Close();
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
@@ -391,7 +396,7 @@ WHERE
     Id = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        cmd.Parameters.AddWithValue("@charge_duration_minutes", charge_duration_minutes);
+                        cmd.Parameters.AddWithValue("@charge_duration_minutes", (int)charge_duration_minutes);
                         Tools.DebugLog(cmd);
                         SQLTracer.TraceNQ(cmd);
                     }
@@ -541,7 +546,12 @@ WHERE
 
         internal static void JourneysList(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string sql = @"
+            string data = WebServer.GetDataFromRequestInputStream(request);
+            dynamic r = JsonConvert.DeserializeObject(data);
+
+            int carid = r["carid"];
+
+            string sql = $@"
 SELECT
     journeys.Id, 
     journeys.name,
@@ -563,6 +573,7 @@ WHERE
     journeys.CarID = cars.Id
     AND journeys.StartPosID = tripStart.StartPosID
     AND journeys.EndPosID = tripEnd.EndPosID
+    AND cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
             
@@ -624,7 +635,7 @@ WHERE
         internal static void JourneysDeleteDelete(HttpListenerRequest request, HttpListenerResponse response)
         {
             string data = WebServer.GetDataFromRequestInputStream(request);
-            dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+            dynamic r = JsonConvert.DeserializeObject(data);
 
             int journeyID = r["id"];
             try

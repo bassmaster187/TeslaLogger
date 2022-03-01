@@ -12,9 +12,9 @@ namespace UnitTestsTeslalogger
     public class SeleniumTests
     {
         [TestMethod]
-        public void TestGefencing()
+        public void TestGeofencing()
         {
-            String dockerPath = @"C:\Docker\TeslaLogger";
+            String dockerPath = @"C:\Docker\TeslaLogger\TeslaLogger";
 
             // Backup current geofence-private.csv
             String geofencePrivatePath = Path.Combine(dockerPath, @"TeslaLogger\bin\geofence-private.csv");

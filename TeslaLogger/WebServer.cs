@@ -13,8 +13,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+
 using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -239,6 +240,9 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
                         GetCurrentJson(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/setcurrentjson/[0-9]+"):
+                        SetCurrentJson(request, response);
+                        break;
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/restart/[0-9]+"):
                         Restart(request, response);
                         break;
@@ -315,19 +319,19 @@ namespace TeslaLogger
             {
                 Logfile.Log("GetCarsFromAccount");
                 string data = GetDataFromRequestInputStream(request);
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 string access_token = r["access_token"];
                 var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
                 car.webhelper.Tesla_token = access_token;
 
-                car.webhelper.GetAllVehicles(out string resultContent, out object[] vehicles, true);
+                car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);
 
                 if (vehicles == null)
                 {
                     if (resultContent?.Contains("error_description") == true)
                     {
-                        dynamic j = new JavaScriptSerializer().DeserializeObject(resultContent);
+                        dynamic j = JsonConvert.DeserializeObject(resultContent);
                         string error = j["error"] ?? "NULL";
                         string error_description = j["error_description"] ?? "NULL";
 
@@ -340,21 +344,21 @@ namespace TeslaLogger
                     }
                 }
 
-                Logfile.Log("Found " + vehicles.Length + " Vehicles");
+                Logfile.Log("Found " + vehicles.Count + " Vehicles");
 
                 var o = new List<object>();
                 o.Add(new KeyValuePair<string, string>("", "Please Select"));
 
-                for (int x = 0; x < vehicles.Length; x++)
+                for (int x = 0; x < vehicles.Count; x++)
                 {
-                    var cc = (Dictionary<string, object>)vehicles[x];
+                    var cc = vehicles[x];
                     var ccVin = cc["vin"].ToString();
                     var ccDisplayName = cc["display_name"].ToString();
                     
                     o.Add(new KeyValuePair<string, string>(x.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
                 }
 
-                responseString = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(o);
+                responseString = JsonConvert.SerializeObject(o);
 
             }
             catch (UnauthorizedAccessException)
@@ -401,13 +405,17 @@ namespace TeslaLogger
 
                 string data = GetDataFromRequestInputStream(request);
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 if (Tools.IsPropertyExist(r, "test"))
                 {
                     Logfile.Log("Test Wallbox");
 
-                    ElectricityMeterBase e = ElectricityMeterBase.Instance(r["type"], r["host"], r["param"]);
+                    string type = r["type"];
+                    string host = r["host"];
+                    string param = r["param"];
+
+                    ElectricityMeterBase e = ElectricityMeterBase.Instance(type, host, param);
 
                     var obj = new
                     {
@@ -416,7 +424,7 @@ namespace TeslaLogger
                         Vehicle_kWh = e.GetVehicleMeterReading_kWh()
                     };
 
-                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+                    string ret = JsonConvert.SerializeObject(obj);
 
                     WriteString(response, ret);
                 }
@@ -441,7 +449,7 @@ namespace TeslaLogger
                 }
                 else if (Tools.IsPropertyExist(r, "load"))
                 {
-                    var carid = r["carid"];
+                    int carid = r["carid"];
                     var dr = DBHelper.GetCar(carid);
                     var obj = new
                     {
@@ -450,7 +458,7 @@ namespace TeslaLogger
                         param = dr["meter_parameter"]
                     };
 
-                    string ret = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
+                    string ret = JsonConvert.SerializeObject(obj);
                     WriteString(response, ret);
                 }
             }
@@ -471,7 +479,7 @@ namespace TeslaLogger
                 string data = GetDataFromRequestInputStream(request);
                 string file_htaccess = "/var/www/html/.htaccess";
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 if (Tools.IsPropertyExist(r, "delete") || request?.QueryString?["delete"] == "1")
                 {
@@ -538,7 +546,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                        dynamic r = JsonConvert.DeserializeObject(data);
                         abrp_mode = Convert.ToInt32(r["abrp_mode"]);
                         abrp_token = r["abrp_token"];
                     }
@@ -570,7 +578,7 @@ namespace TeslaLogger
                         mode = abrp_mode
                     };
 
-                    string json = new JavaScriptSerializer().Serialize(t);
+                    string json = JsonConvert.SerializeObject(t);
                     response.AddHeader("Content-Type", "application/json; charset=utf-8");
                     WriteString(response, json);
                     return;
@@ -1029,7 +1037,7 @@ namespace TeslaLogger
             }
             else
             {
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
                 id = Convert.ToInt32(r["id"]);
             }
 
@@ -1070,6 +1078,30 @@ namespace TeslaLogger
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    WriteString(response, ex.ToString());
+                    Logfile.ExceptionWriter(ex, request.Url.LocalPath);
+                }
+            }
+        }
+
+        private static void SetCurrentJson(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
+
+            Match m = Regex.Match(request.Url.LocalPath, @"/setcurrentjson/([0-9]+)");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                try
+                {
+                    string data = WebServer.GetDataFromRequestInputStream(request);
+
+                    CurrentJSON.jsonStringHolder[CarID] = data;
+                    WriteString(response, "OK");
                 }
                 catch (Exception ex)
                 {
@@ -1296,7 +1328,7 @@ namespace TeslaLogger
 
                 string data = GetDataFromRequestInputStream(request);
 
-                dynamic r = new JavaScriptSerializer().DeserializeObject(data);
+                dynamic r = JsonConvert.DeserializeObject(data);
 
                 int id = Convert.ToInt32(r["id"]);
 
@@ -1614,7 +1646,7 @@ namespace TeslaLogger
 
                 Logfile.Log("JSON: " + json);
 
-                dynamic j = new JavaScriptSerializer().DeserializeObject(json);
+                dynamic j = JsonConvert.DeserializeObject(json);
 
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
@@ -1628,15 +1660,15 @@ namespace TeslaLogger
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"]));
+                            cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"].ToString()));
                         }
 
-                        cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"]));
-                        cmd.Parameters.AddWithValue("@cost_per_kwh", DBHelper.DBNullIfEmpty(j["cost_per_kwh"]));
-                        cmd.Parameters.AddWithValue("@cost_per_session", DBHelper.DBNullIfEmpty(j["cost_per_session"]));
-                        cmd.Parameters.AddWithValue("@cost_per_minute", DBHelper.DBNullIfEmpty(j["cost_per_minute"]));
-                        cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"]));
-                        cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"]));
+                        cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"].Value));
+                        cmd.Parameters.AddWithValue("@cost_per_kwh", DBHelper.DBNullIfEmpty(j["cost_per_kwh"].Value));
+                        cmd.Parameters.AddWithValue("@cost_per_session", DBHelper.DBNullIfEmpty(j["cost_per_session"].Value));
+                        cmd.Parameters.AddWithValue("@cost_per_minute", DBHelper.DBNullIfEmpty(j["cost_per_minute"].Value));
+                        cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"].Value));
+                        cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"].Value));
 
                         cmd.Parameters.AddWithValue("@id", j["id"]);
                         int done = SQLTracer.TraceNQ(cmd);
@@ -1679,6 +1711,8 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+
+            Logfile.Log("JSON: " + responseString);
 
             WriteString(response, responseString);
         }
@@ -1776,7 +1810,7 @@ namespace TeslaLogger
                         }
                         data.Add("SpecialFlags", specialflags);
                         response.AddHeader("Content-Type", "application/json; charset=utf-8");
-                        WriteString(response, new JavaScriptSerializer().Serialize(data));
+                        WriteString(response, JsonConvert.SerializeObject(data));
                         return;
                     }
                 }
