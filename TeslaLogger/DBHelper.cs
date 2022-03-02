@@ -2558,7 +2558,7 @@ LIMIT 1", con))
             {
                 if (wh != null && !wh.fast_charger_present)
                 {
-                    v = ElectricityMeterBase.Instance(wh.car.CarInDB);
+                    v = ElectricityMeterBase.Instance(wh.car);
                     if (v != null)
                     {
                         meter_vehicle_kwh_start = v.GetVehicleMeterReading_kWh();
@@ -5179,7 +5179,7 @@ WHERE
 
             try
             {
-                var v = ElectricityMeterBase.Instance(car.CarInDB);
+                var v = ElectricityMeterBase.Instance(car);
                 if (v != null)
                 {
                     meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();

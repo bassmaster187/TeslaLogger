@@ -132,11 +132,17 @@ namespace TeslaLogger
             try
             {
                 j = GetCurrentDataLifetime();
+                if (string.IsNullOrEmpty(j))
+                    return null;
+
                 j = j.Replace("nan,", "null,");
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "energy_wh";
                 string value = jsonResult[key].ToString();
+
+                if (value == null)
+                    return null;
 
                 double v = Double.Parse(value, Tools.ciEnUS);
                 v = v / 1000.0;

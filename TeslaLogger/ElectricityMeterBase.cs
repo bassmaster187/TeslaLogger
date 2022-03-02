@@ -1,21 +1,34 @@
 ﻿
 using System;
+using Exceptionless;
 
 namespace TeslaLogger
 {
     abstract class ElectricityMeterBase
     {
-
-        public static ElectricityMeterBase Instance(int carid)
+        public static ElectricityMeterBase Instance(Car car)
         {
-            var dr = DBHelper.GetCar(carid);
+            var dr = DBHelper.GetCar(car.CarInDB);
             if (dr != null)
             {
                 string type = dr["meter_type"] as string ?? "";
                 string host = dr["meter_host"] as string ?? "";
                 string parameter = dr["meter_parameter"] as string ?? "";
 
-                return ElectricityMeterBase.Instance(type, host, parameter);
+                var ret = ElectricityMeterBase.Instance(type, host, parameter);
+                string version = "";
+                try
+                {
+                    version = ret.GetVersion();
+                }
+                catch (Exception) { }
+
+                if (!String.IsNullOrEmpty(version))
+                {
+                    car.CreateExeptionlessFeature("Wallbox_" + type).AddObject(version, "Version").Submit();
+                }
+
+                return ret;
             }
 
             return null;

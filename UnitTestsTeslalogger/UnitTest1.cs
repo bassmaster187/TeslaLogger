@@ -710,7 +710,10 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void OpenWBMeterConstructor()
         {
-            var v = ElectricityMeterBase.Instance(1);
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "ffffffff", null);
+            c.CarInDB = 1;
+
+            var v = ElectricityMeterBase.Instance(c);
             var ret = v.ToString();
             Console.WriteLine(ret);
         }
