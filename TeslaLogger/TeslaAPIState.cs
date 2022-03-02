@@ -1098,7 +1098,6 @@ namespace TeslaLogger
                             case "software_update":
                                 if (r2.TryGetValue(key, out value))
                                 {
-                                    Tools.DebugLog($"ParseSoftwareUpdate {value}");
                                     ParseSoftwareUpdate(value, timestamp);
                                 }
                                 break;
