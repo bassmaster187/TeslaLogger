@@ -1685,6 +1685,21 @@ id = @carid", con))
             return true;
         }
 
+        public static void LogActiveCars()
+        {
+            try
+            {
+                if (Car.Allcars == null)
+                    return;
+
+                ExceptionlessClient.Default.CreateFeatureUsage("Active_Cars_" + Car.Allcars.Count).FirstCarUserID().Submit();
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
+
         internal void SendException2Exceptionless(Exception ex)
         {
             CreateExceptionlessClient(ex).Submit();
