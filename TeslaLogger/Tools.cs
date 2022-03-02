@@ -40,7 +40,7 @@ namespace TeslaLogger
         private static string _defaultcar = "";
         private static string _defaultcarid = "";
         internal static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
-        private static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
+        internal static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
         internal static bool? _StreamingPos = null;
 
         internal static bool UseNearbySuCService()
