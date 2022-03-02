@@ -1146,9 +1146,9 @@ namespace TeslaLogger
              *  }
              */
             if (software_update != null
-                && software_update is JObject)
+                && software_update is JObject jo)
             {
-                Dictionary<string, object> dictionary = ((JObject)software_update).ToObject<Dictionary<string, object>>();
+                Dictionary<string, object> dictionary = jo.ToObject<Dictionary<string, object>>();
                 if (dictionary != null)
                 {
                     foreach (string key in dictionary.Keys)

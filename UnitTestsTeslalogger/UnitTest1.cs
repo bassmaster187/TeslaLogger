@@ -848,6 +848,31 @@ namespace UnitTestsTeslalogger
 
         }
 
+        [TestMethod]
+        public void TeslaApiUpdateAvailable()
+        {
+            var json = System.IO.File.ReadAllText("../../vehicle_state_with_update_available.txt");
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            var t = new TeslaAPIState(c);
+            t.ParseAPI(json, "vehicle_state");
+
+            t.GetString("software_update.status", out string status);
+            Assert.AreEqual("available", status);
+
+            t.GetInt("software_update.download_perc", out int download_perc);
+            Assert.AreEqual(100, download_perc);
+
+            t.GetInt("software_update.expected_duration_sec", out int expected_duration_sec);
+            Assert.AreEqual(1500, expected_duration_sec);
+
+            t.GetInt("software_update.install_perc", out int install_perc);
+            Assert.AreEqual(10, install_perc);
+
+            t.GetString("software_update.version", out string version);
+            Assert.AreEqual("2022.4.5.3", version);
+
+        }
+
         /*
         [TestMethod]
         public void RefreshAuthTokenFromRefrehToken()
