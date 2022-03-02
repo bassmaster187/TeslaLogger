@@ -76,6 +76,8 @@ namespace TeslaLogger
         internal HttpClient httpclientTeslaAPI = null;
         internal static object httpClientLock = new object();
 
+        DateTime lastABRPActive = DateTime.MinValue;
+
         bool useCaptcha = false;
 
         static WebHelper()
@@ -4209,6 +4211,15 @@ namespace TeslaLogger
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
                         Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                    }
+                    else if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        var diff = DateTime.UtcNow - lastABRPActive;
+                        if (diff.TotalMinutes > 10)
+                        {
+                            car.CreateExeptionlessFeature("ABRP").Submit();
+                            lastABRPActive = DateTime.UtcNow;
+                        }
                     }
                 }
             }

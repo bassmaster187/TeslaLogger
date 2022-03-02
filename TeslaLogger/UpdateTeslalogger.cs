@@ -1186,6 +1186,12 @@ CREATE TABLE superchargers(
                 File.WriteAllText("view_trip.txt", s);
 
                 DBHelper.ExecuteSQLQuery(s, 300);
+
+                ExceptionlessClient.Default.CreateFeatureUsage("Language_" + language).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage("Power_" + power).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage("Temperature_" + temperature).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage("Length_" + length).FirstCarUserID().Submit();
+                ExceptionlessClient.Default.CreateFeatureUsage("Range_" + Range).FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {
