@@ -1,3 +1,7 @@
+# Version 1.51.10
+- Link to release notes of firmware in admin panel and firmware dashboard
+- Show available firmware updates on admin panel
+
 # Version 1.51.9
 - Using Newtonsoft JSON instead of buggy build in Mono JSON Parser.
 

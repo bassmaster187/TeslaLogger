@@ -894,6 +894,7 @@ namespace TeslaLogger
                 }
 
                 json = File.ReadAllText(filePath);
+
                 dynamic j = JsonConvert.DeserializeObject(json);
 
                 if (IsPropertyExist(j, "Power"))
@@ -970,9 +971,26 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().AddObject(json, "JSON").Submit();
+                ex.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json),"JSON-Base64").Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        public static string ConvertString2Base64(string content)
+        {
+            string base64 = "";
+            try
+            {
+                if (content != null)
+                {
+                    var t = System.Text.UTF8Encoding.UTF8.GetBytes(content);
+                    base64 = Convert.ToBase64String(t);
+                }
+            }
+            catch (Exception)
+            { }
+
+            return base64;
         }
 
         public static bool IsPropertyExist(object settings, string name)

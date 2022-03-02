@@ -1182,6 +1182,12 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("charge_state").Result;
 
+                if (resultContent == "INSERVICE")
+                {
+                    System.Threading.Thread.Sleep(10000);
+                    return false;
+                }
+
                 Task<double?> outside_temp = GetOutsideTempAsync();
 
                 Tools.SetThreadEnUS();
@@ -1666,6 +1672,7 @@ namespace TeslaLogger
 
                 resultContent = await result.Content.ReadAsStringAsync();
                 // resultContent = Tools.ConvertBase64toString("");
+                
                 if (resultContent == null || resultContent == "NULL")
                 {
                     Log("isOnline = NULL");
@@ -1790,44 +1797,7 @@ namespace TeslaLogger
                         if (state == "offline" || state == "asleep")
                             return state;
 
-                        string resultContent2 = GetCommand("vehicle_config").Result;                       
-
-                        if (resultContent2 == "INSERVICE")
-                            return "INSERVICE";
-
-                        if (resultContent2?.Length > 0)
-                            vehicle_config = resultContent2;
-
-                        dynamic jBadge = JsonConvert.DeserializeObject(resultContent2);
-                        dynamic jBadgeResult = jBadge["response"];
-
-                        if (jBadgeResult != null)
-                        {
-                            string car_type = car.CarType;
-                            string car_special_type = car.CarSpecialType;
-                            string trim_badging = car.TrimBadging;
-
-
-                            if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
-                            {
-                                car.CarType = jBadgeResult["car_type"].ToString().ToLower().Trim();
-                            }
-
-                            if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
-                            {
-                                car.CarSpecialType = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
-                            }
-
-                            car.TrimBadging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
-                                ? (string)jBadgeResult["trim_badging"].ToString().ToLower().Trim()
-                                : "";
-
-                            UpdateEfficiency();
-                            lastUpdateEfficiency = DateTime.Now;
-
-                            if (car_type != car.CarType || car_special_type != car.CarSpecialType || trim_badging != car.TrimBadging)
-                                car.DbHelper.WriteCarSettings();
-                        }
+                        CheckVehicleConfig();
                     }
                 }
                 catch (Exception ex)
@@ -1864,22 +1834,65 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
+        void CheckVehicleConfig()
         {
-            string base64 = "";
+            string resultContent2 = "";
             try
             {
-                if (content != null)
+                resultContent2 = GetCommand("vehicle_config").Result;
+
+                if (resultContent2 == "INSERVICE" || resultContent2 == "NULL")
                 {
-                    var t = System.Text.UTF8Encoding.UTF8.GetBytes(content);
-                    base64 = Convert.ToBase64String(t);
+                    System.Threading.Thread.Sleep(5000);
+                    return;
                 }
-            } 
-            catch (Exception)
-            {}
+
+                if (resultContent2?.Length > 0)
+                    vehicle_config = resultContent2;
+
+                dynamic jBadge = JsonConvert.DeserializeObject(resultContent2);
+                dynamic jBadgeResult = jBadge["response"];
+
+                if (jBadgeResult != null)
+                {
+                    string car_type = car.CarType;
+                    string car_special_type = car.CarSpecialType;
+                    string trim_badging = car.TrimBadging;
+
+
+                    if (Tools.IsPropertyExist(jBadgeResult, "car_type"))
+                    {
+                        car.CarType = jBadgeResult["car_type"].ToString().ToLower().Trim();
+                    }
+
+                    if (Tools.IsPropertyExist(jBadgeResult, "car_special_type"))
+                    {
+                        car.CarSpecialType = jBadgeResult["car_special_type"].ToString().ToLower().Trim();
+                    }
+
+                    car.TrimBadging = Tools.IsPropertyExist(jBadgeResult, "trim_badging")
+                        ? (string)jBadgeResult["trim_badging"].ToString().ToLower().Trim()
+                        : "";
+
+                    UpdateEfficiency();
+                    lastUpdateEfficiency = DateTime.Now;
+
+                    if (car_type != car.CarType || car_special_type != car.CarSpecialType || trim_badging != car.TrimBadging)
+                        car.DbHelper.WriteCarSettings();
+                }
+            }
+            catch (Exception ex)
+            {
+                SubmitExceptionlessClientWithResultContent(ex, resultContent2);
+                ExceptionWriter(ex, resultContent2);
+            }
+        }
+
+        void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
+        {
+            string base64 = Tools.ConvertString2Base64(content);
 
             car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64").Submit();
-
         }
 
         public void UpdateEfficiency()
@@ -2366,6 +2379,12 @@ namespace TeslaLogger
             try
             {
                 resultContent = GetCommand("drive_state").Result;
+
+                if (resultContent == "INSERVICE")
+                {
+                    System.Threading.Thread.Sleep(10000);
+                    return false;
+                }
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
