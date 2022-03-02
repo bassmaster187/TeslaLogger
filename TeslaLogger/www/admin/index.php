@@ -250,6 +250,21 @@ else
 
 			$("#trip_duration_sec").text(min + ":" + sec);
 
+			if (jsonData["software_update_status"].length > 0)
+			{
+				$("#SoftwareUpdateRow").show();
+				var temp = jsonData["software_update_status"];
+
+				if (jsonData["software_update_version"].length > 0)
+					temp += ":" + jsonData["software_update_version"];
+
+				$("#software_update").text(temp);
+			}
+			else
+			{
+				$("#SoftwareUpdateRow").hide();
+			}
+
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
 
 			if (!mapInit)
@@ -409,6 +424,7 @@ function ShowInfo()
 	  <tr><td><b><?php t("Car Version"); ?>:</b></td><td><a href='' id="car_version_link" target="_blank" title="Release Notes"><span id="car_version"></a></span></td></tr>
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
+	  <tr id="SoftwareUpdateRow"><td><b><?php t("Software Update"); ?>:</b></td><td><span id="software_update"></span></td></tr>
     </table>
 
 	  <table style="float:left;" class="THeader">
