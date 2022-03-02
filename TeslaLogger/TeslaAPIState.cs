@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -724,7 +725,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private Dictionary<string, object> ExtractResponse(string _JSON)
+        private static Dictionary<string, object> ExtractResponse(string _JSON)
         {
             dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
             Dictionary<string, object> r1 = jsonResult["response"].ToObject<Dictionary<string, object>>();
@@ -1092,9 +1093,12 @@ namespace TeslaLogger
                                     AddValue(key, "double", value, timestamp, "vehicle_state");
                                 }
                                 break;
+
+                            // special case: software update
                             case "software_update":
                                 if (r2.TryGetValue(key, out value))
                                 {
+                                    Tools.DebugLog($"ParseSoftwareUpdate {value}");
                                     ParseSoftwareUpdate(value, timestamp);
                                 }
                                 break;
@@ -1143,9 +1147,9 @@ namespace TeslaLogger
              *  }
              */
             if (software_update != null
-                && software_update is Dictionary<string, object> dictionary
-                && dictionary.Count > 0)
+                && software_update is JObject)
             {
+                Dictionary<string, object> dictionary = ((JObject)software_update).ToObject<Dictionary<string, object>>();
                 foreach (string key in dictionary.Keys)
                 {
                     switch (key)
