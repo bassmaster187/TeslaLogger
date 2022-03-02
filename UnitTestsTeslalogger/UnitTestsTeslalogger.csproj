@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestConfig.cs" />
     <Compile Include="UnitTestMapProvider.cs" />
     <Compile Include="UnitTestOpenTopoDataService.cs" />
     <Compile Include="UnitTestOSMMapGenerator.cs" />
