@@ -550,7 +550,7 @@ namespace TeslaLogger
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "CombineChargingStates"))
                 {
-                    if (bool.TryParse(j["CombineChargingStates"], out bool combineChargingStates))
+                    if (bool.TryParse(j["CombineChargingStates"].ToString(), out bool combineChargingStates))
                     {
                         return combineChargingStates;
                     }
