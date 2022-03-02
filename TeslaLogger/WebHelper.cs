@@ -1433,6 +1433,14 @@ namespace TeslaLogger
                     Newtonsoft.Json.Linq.JArray r1temp;
                     GetAllVehicles(out resultContent, out r1temp, false);
 
+                    if (r1temp == null)
+                    {
+                        if (resultContent != null)
+                            car.Log("GetVehicles: " + resultContent);
+
+                        return "NULL";
+                    }
+
                     if (car.CarInAccount >= r1temp.Count)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
@@ -1639,6 +1647,9 @@ namespace TeslaLogger
             resultTask = client.GetAsync(adresse);
             result = resultTask.Result;
             resultContent = result.Content.ReadAsStringAsync().Result;
+
+            // resultContent = Tools.ConvertBase64toString("eyJSZXNwb25zZSI6bnVsbCwiRXJyb3IgZGVzY3JpcHRpb24iOiIiLCJFcnJvciI6Im5vdCBmb3VuZCJ9"); // {"Response":null,"Error description":"","Error":"not found"}
+
             _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
             DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
 
@@ -4215,7 +4226,7 @@ namespace TeslaLogger
                     else if (result.StatusCode == HttpStatusCode.OK)
                     {
                         var diff = DateTime.UtcNow - lastABRPActive;
-                        if (diff.TotalMinutes > 10)
+                        if (diff.TotalMinutes > 15)
                         {
                             car.CreateExeptionlessFeature("ABRP").Submit();
                             lastABRPActive = DateTime.UtcNow;
