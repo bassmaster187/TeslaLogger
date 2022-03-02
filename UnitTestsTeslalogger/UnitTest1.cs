@@ -870,7 +870,6 @@ namespace UnitTestsTeslalogger
 
             t.GetString("software_update.version", out string version);
             Assert.AreEqual("2022.4.5.3", version);
-
         }
 
         /*

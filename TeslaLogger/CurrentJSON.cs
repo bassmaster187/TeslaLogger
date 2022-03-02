@@ -142,6 +142,8 @@ namespace TeslaLogger
                 }
 
                 car.GetTeslaAPIState().GetBool("charge_port_door_open", out current_charge_port_door_open);
+                car.GetTeslaAPIState().GetString("software_update.status", out string software_update_status);
+                car.GetTeslaAPIState().GetString("software_update.version", out string software_update_version);                
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
@@ -185,7 +187,9 @@ namespace TeslaLogger
                    { "country_code", current_country_code },
                    { "state", current_state },
                    { "display_name", car.DisplayName},
-                   { "heading", heading}
+                   { "heading", heading},
+                   { "software_update_status", software_update_status },
+                   { "software_update_version" , software_update_version}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
