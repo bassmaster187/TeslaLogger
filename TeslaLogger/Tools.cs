@@ -475,6 +475,7 @@ namespace TeslaLogger
         {
             stopSleepingHour = -1;
             stopSleepingMinute = -1;
+            string json = "";
 
             try
             {
@@ -485,22 +486,27 @@ namespace TeslaLogger
                     return;
                 }
 
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
 
                 dynamic j = JsonConvert.DeserializeObject(json);
 
-                if (bool.Parse(j["SleepTimeSpanEnable"]))
+                if (j.ContainsKey("SleepTimeSpanEnable"))
                 {
-                    string start = j["SleepTimeSpanEnd"];
-                    string[] s = start.Split(':');
+                    bool SleepTimeSpanEnable = j["SleepTimeSpanEnable"];
 
-                    _ = int.TryParse(s[0], out stopSleepingHour);
-                    _ = int.TryParse(s[1], out stopSleepingMinute);
+                    if (SleepTimeSpanEnable)
+                    {
+                        string start = j["SleepTimeSpanEnd"];
+                        string[] s = start.Split(':');
+
+                        _ = int.TryParse(s[0], out stopSleepingHour);
+                        _ = int.TryParse(s[1], out stopSleepingMinute);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().AddObject(json,"JSON").Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -550,7 +556,7 @@ namespace TeslaLogger
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "CombineChargingStates"))
                 {
-                    if (bool.TryParse(j["CombineChargingStates"], out bool combineChargingStates))
+                    if (bool.TryParse(j["CombineChargingStates"].ToString(), out bool combineChargingStates))
                     {
                         return combineChargingStates;
                     }
@@ -1657,6 +1663,7 @@ WHERE
         internal static int GetSettingsInt(string name, int Default)
         {
             int value = 0;
+            string json = "";
             try
             {
                 string filePath = FileManager.GetFilePath(TLFilename.SettingsFilename);
@@ -1665,7 +1672,7 @@ WHERE
                     Logfile.Log("settings file not found at " + filePath);
                     return Default;
                 }
-                string json = File.ReadAllText(filePath);
+                json = File.ReadAllText(filePath);
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, name))
                 {
@@ -1676,6 +1683,8 @@ WHERE
             catch (Exception ex)
             {
                 Logfile.Log("GetSettingsInt:" + name +"\r\n"+  ex.ToString());
+
+                ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
             }
             return Default;
         }

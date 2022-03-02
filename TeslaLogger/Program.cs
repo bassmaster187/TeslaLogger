@@ -382,7 +382,7 @@ namespace TeslaLogger
                     if (!File.Exists("/etc/teslalogger/settings.json"))
                     {
                         Logfile.Log("Creating empty settings.json");
-                        File.AppendAllText("/etc/teslalogger/settings.json", "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}");
+                        File.AppendAllText("/etc/teslalogger/settings.json", GetDefaultConfigFileContent());
                         UpdateTeslalogger.Chmod("/etc/teslalogger/settings.json", 666);
                     }
 
@@ -408,6 +408,11 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        public static string GetDefaultConfigFileContent()
+        {
+            return "{\"SleepTimeSpanStart\":\"\",\"SleepTimeSpanEnd\":\"\",\"SleepTimeSpanEnable\":\"false\",\"Power\":\"hp\",\"Temperature\":\"celsius\",\"Length\":\"km\",\"Language\":\"en\",\"URL_Admin\":\"\",\"ScanMyTesla\":\"false\"}";
         }
 
         internal static void RunHousekeepingInBackground()
