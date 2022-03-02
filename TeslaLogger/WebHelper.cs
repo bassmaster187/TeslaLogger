@@ -55,7 +55,7 @@ namespace TeslaLogger
 
         const string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         const string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
-
+        private const string INSERVICE = "INSERVICE";
         internal ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
@@ -1184,7 +1184,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("charge_state").Result;
 
-                if (resultContent == "INSERVICE")
+                if (resultContent == INSERVICE)
                 {
                     System.Threading.Thread.Sleep(10000);
                     return false;
@@ -1843,7 +1843,7 @@ namespace TeslaLogger
             {
                 resultContent2 = GetCommand("vehicle_config").Result;
 
-                if (resultContent2 == "INSERVICE" || resultContent2 == "NULL")
+                if (resultContent2 == INSERVICE || resultContent2 == "NULL")
                 {
                     System.Threading.Thread.Sleep(5000);
                     return;
@@ -2382,7 +2382,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("drive_state").Result;
 
-                if (resultContent == "INSERVICE")
+                if (resultContent == INSERVICE)
                 {
                     System.Threading.Thread.Sleep(10000);
                     return false;
@@ -3433,7 +3433,7 @@ namespace TeslaLogger
                 resultContent = await GetCommand("vehicle_state");
                 Tools.SetThreadEnUS();
 
-                if (resultContent == null || resultContent == "NULL")
+                if (resultContent == null || resultContent == "NULL" || resultContent == INSERVICE)
                     return lastOdometerKM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
@@ -3654,7 +3654,7 @@ namespace TeslaLogger
                 else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
                 {
                     if (car.IsInService())
-                        return "INSERVICE";
+                        return INSERVICE;
                     else
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
 
