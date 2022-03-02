@@ -1149,45 +1149,48 @@ namespace TeslaLogger
                 && software_update is JObject)
             {
                 Dictionary<string, object> dictionary = ((JObject)software_update).ToObject<Dictionary<string, object>>();
-                foreach (string key in dictionary.Keys)
+                if (dictionary != null)
                 {
-                    switch (key)
+                    foreach (string key in dictionary.Keys)
                     {
-                        // int
-                        case "download_perc":
-                        case "expected_duration_sec":
-                        case "install_perc":
-                        case "scheduled_time_ms":
-                        case "warning_time_remaining_ms":
-                            if (dictionary.TryGetValue(key, out object value))
-                            {
-                                AddValue($"software_update.{key}", "int", value, timestamp, "vehicle_state.software_update");
-                            }
-                            break;
-                        // string
-                        case "status":
-                        case "version":
-                            if (dictionary.TryGetValue(key, out value))
-                            {
-                                AddValue($"software_update.{key}", "string", value, timestamp, "vehicle_state.software_update");
-                            }
-                            break;
-                        default:
-                            if (!unknownKeys.Contains($"software_update.{key}"))
-                            {
+                        switch (key)
+                        {
+                            // int
+                            case "download_perc":
+                            case "expected_duration_sec":
+                            case "install_perc":
+                            case "scheduled_time_ms":
+                            case "warning_time_remaining_ms":
+                                if (dictionary.TryGetValue(key, out object value))
+                                {
+                                    AddValue($"software_update.{key}", "int", value, timestamp, "vehicle_state.software_update");
+                                }
+                                break;
+                            // string
+                            case "status":
+                            case "version":
                                 if (dictionary.TryGetValue(key, out value))
                                 {
-                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
-                                    ExceptionlessLogUnknowKey(temp);
+                                    AddValue($"software_update.{key}", "string", value, timestamp, "vehicle_state.software_update");
                                 }
-                                else
+                                break;
+                            default:
+                                if (!unknownKeys.Contains($"software_update.{key}"))
                                 {
-                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key}";
-                                    ExceptionlessLogUnknowKey(temp);
+                                    if (dictionary.TryGetValue(key, out value))
+                                    {
+                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        ExceptionlessLogUnknowKey(temp);
+                                    }
+                                    else
+                                    {
+                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
+                                    }
+                                    unknownKeys.Add($"software_update.{key}");
                                 }
-                                unknownKeys.Add($"software_update.{key}");
-                            }
-                            break;
+                                break;
+                        }
                     }
                 }
             }
