@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -724,7 +725,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private Dictionary<string, object> ExtractResponse(string _JSON)
+        private static Dictionary<string, object> ExtractResponse(string _JSON)
         {
             dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
             Dictionary<string, object> r1 = jsonResult["response"].ToObject<Dictionary<string, object>>();
@@ -1092,6 +1093,8 @@ namespace TeslaLogger
                                     AddValue(key, "double", value, timestamp, "vehicle_state");
                                 }
                                 break;
+
+                            // special case: software update
                             case "software_update":
                                 if (r2.TryGetValue(key, out value))
                                 {
@@ -1143,48 +1146,51 @@ namespace TeslaLogger
              *  }
              */
             if (software_update != null
-                && software_update is Dictionary<string, object> dictionary
-                && dictionary.Count > 0)
+                && software_update is JObject)
             {
-                foreach (string key in dictionary.Keys)
+                Dictionary<string, object> dictionary = ((JObject)software_update).ToObject<Dictionary<string, object>>();
+                if (dictionary != null)
                 {
-                    switch (key)
+                    foreach (string key in dictionary.Keys)
                     {
-                        // int
-                        case "download_perc":
-                        case "expected_duration_sec":
-                        case "install_perc":
-                        case "scheduled_time_ms":
-                        case "warning_time_remaining_ms":
-                            if (dictionary.TryGetValue(key, out object value))
-                            {
-                                AddValue($"software_update.{key}", "int", value, timestamp, "vehicle_state.software_update");
-                            }
-                            break;
-                        // string
-                        case "status":
-                        case "version":
-                            if (dictionary.TryGetValue(key, out value))
-                            {
-                                AddValue($"software_update.{key}", "string", value, timestamp, "vehicle_state.software_update");
-                            }
-                            break;
-                        default:
-                            if (!unknownKeys.Contains($"software_update.{key}"))
-                            {
+                        switch (key)
+                        {
+                            // int
+                            case "download_perc":
+                            case "expected_duration_sec":
+                            case "install_perc":
+                            case "scheduled_time_ms":
+                            case "warning_time_remaining_ms":
+                                if (dictionary.TryGetValue(key, out object value))
+                                {
+                                    AddValue($"software_update.{key}", "int", value, timestamp, "vehicle_state.software_update");
+                                }
+                                break;
+                            // string
+                            case "status":
+                            case "version":
                                 if (dictionary.TryGetValue(key, out value))
                                 {
-                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
-                                    ExceptionlessLogUnknowKey(temp);
+                                    AddValue($"software_update.{key}", "string", value, timestamp, "vehicle_state.software_update");
                                 }
-                                else
+                                break;
+                            default:
+                                if (!unknownKeys.Contains($"software_update.{key}"))
                                 {
-                                    string temp = $"INFO: ParseSoftwareUpdate: unknown key {key}";
-                                    ExceptionlessLogUnknowKey(temp);
+                                    if (dictionary.TryGetValue(key, out value))
+                                    {
+                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        ExceptionlessLogUnknowKey(temp);
+                                    }
+                                    else
+                                    {
+                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key}";
+                                        ExceptionlessLogUnknowKey(temp);
+                                    }
+                                    unknownKeys.Add($"software_update.{key}");
                                 }
-                                unknownKeys.Add($"software_update.{key}");
-                            }
-                            break;
+                                break;
+                        }
                     }
                 }
             }
