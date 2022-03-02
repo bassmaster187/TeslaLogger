@@ -2,7 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UnitTestsTeslalogger" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ElectricityMeterGoEURL" Type="System.String" Scope="User">
+    <Setting Name="ElectricityMeterGoEURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MapQuestKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

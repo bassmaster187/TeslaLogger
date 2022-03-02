@@ -724,7 +724,7 @@ namespace UnitTestsTeslalogger
             string url = Settings.Default.ElectricityMeterGoEURL;
 
             if (string.IsNullOrEmpty(url))
-                Assert.Inconclusive();
+                Assert.Inconclusive("No Settings for Go-E Charger");
 
             var v = new ElectricityMeterGoE(url, "");
             string ret = v.ToString();

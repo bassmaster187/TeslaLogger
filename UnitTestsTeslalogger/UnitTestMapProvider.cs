@@ -70,6 +70,43 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void CreateAllTripMaps()
         {
+            ApplicationSettings.Default.Reload();
+            var k = ApplicationSettings.Default.MapQuestKey;
+            ApplicationSettings.Default.PropertyValues["MapQuestKey"].PropertyValue = "";
+            k = ApplicationSettings.Default.MapQuestKey;
+
+
+
+            StaticMapService.CreateAllTripMaps(StaticMapProvider.MapMode.Dark);
+
+            var inst = StaticMapService.GetSingleton();
+
+            Thread threadStaticMapService = new Thread(() =>
+            {
+                StaticMapService.GetSingleton().Run();
+            })
+            {
+                Name = "StaticMapServiceThread"
+            };
+            threadStaticMapService.Start();
+
+            while (inst.GetQueueLength() > 0)
+                System.Threading.Thread.Sleep(500);
+
+        }
+
+        [TestMethod]
+        public void CreateAllTripMapsMapQuest()
+        {
+            if (String.IsNullOrEmpty(Settings.Default.MapQuestKey))
+                Assert.Inconclusive("No Settings for MapQuestKey");
+
+            ApplicationSettings.Default.Reload();
+            var k = ApplicationSettings.Default.MapQuestKey;
+            ApplicationSettings.Default.PropertyValues["MapQuestKey"].PropertyValue = Settings.Default.MapQuestKey;
+
+            k = ApplicationSettings.Default.MapQuestKey;
+
             StaticMapService.CreateAllTripMaps(StaticMapProvider.MapMode.Dark);
 
             var inst = StaticMapService.GetSingleton();
