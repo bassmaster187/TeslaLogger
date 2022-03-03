@@ -18,6 +18,7 @@ using System.Reflection;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -1721,22 +1722,18 @@ namespace TeslaLogger
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
-                dynamic r1 = jsonResult["response"];
-                
-                try
-                {
-                    dynamic r5 = r1[car.CarInAccount];
+                JArray r1 = jsonResult["response"];
 
-                } catch (IndexOutOfRangeException)
+                if (!(car.CarInAccount < r1.Count))
                 {
                     Log("IndexOutOfRangeException in isOnline!");
                     return "NULL";
                 }
 
-                dynamic r4 = r1[car.CarInAccount];
+                var r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
-                Tesla_Streamingtoken = r4["tokens"][0];
+                Tesla_Streamingtoken = r4["tokens"][0].ToString();
 
                 try
                 {
