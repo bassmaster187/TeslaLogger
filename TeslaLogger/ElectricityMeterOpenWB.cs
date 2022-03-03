@@ -79,8 +79,12 @@ namespace TeslaLogger
             {
                 j = GetCurrentData();
 
+                if (string.IsNullOrEmpty(j))
+                    return null;
+
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
-                string value = jsonResult["evubezugWh"];
+
+                string value = jsonResult["evubezugWh"];               
 
                 double v = Double.Parse(value, Tools.ciEnUS);
                 v = v / 1000;

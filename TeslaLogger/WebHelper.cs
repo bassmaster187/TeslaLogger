@@ -18,6 +18,7 @@ using System.Reflection;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -55,7 +56,7 @@ namespace TeslaLogger
 
         const string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         const string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
-
+        private const string INSERVICE = "INSERVICE";
         internal ScanMyTesla scanMyTesla;
         private string _lastShift_State = "P";
         private static readonly Regex regexAssemblyVersion = new Regex("\n\\[assembly: AssemblyVersion\\(\"([0-9\\.]+)\"", RegexOptions.Compiled);
@@ -75,6 +76,8 @@ namespace TeslaLogger
         internal static HttpClient httpClientABRP = null;
         internal HttpClient httpclientTeslaAPI = null;
         internal static object httpClientLock = new object();
+
+        DateTime lastABRPActive = DateTime.MinValue;
 
         bool useCaptcha = false;
 
@@ -1182,7 +1185,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("charge_state").Result;
 
-                if (resultContent == "INSERVICE")
+                if (resultContent == INSERVICE)
                 {
                     System.Threading.Thread.Sleep(10000);
                     return false;
@@ -1431,6 +1434,14 @@ namespace TeslaLogger
                     Newtonsoft.Json.Linq.JArray r1temp;
                     GetAllVehicles(out resultContent, out r1temp, false);
 
+                    if (r1temp == null)
+                    {
+                        if (resultContent != null)
+                            car.Log("GetVehicles: " + resultContent);
+
+                        return "NULL";
+                    }
+
                     if (car.CarInAccount >= r1temp.Count)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
@@ -1637,6 +1648,9 @@ namespace TeslaLogger
             resultTask = client.GetAsync(adresse);
             result = resultTask.Result;
             resultContent = result.Content.ReadAsStringAsync().Result;
+
+            // resultContent = Tools.ConvertBase64toString("eyJSZXNwb25zZSI6bnVsbCwiRXJyb3IgZGVzY3JpcHRpb24iOiIiLCJFcnJvciI6Im5vdCBmb3VuZCJ9"); // {"Response":null,"Error description":"","Error":"not found"}
+
             _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
             DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
 
@@ -1708,22 +1722,18 @@ namespace TeslaLogger
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
-                dynamic r1 = jsonResult["response"];
-                
-                try
-                {
-                    dynamic r5 = r1[car.CarInAccount];
+                JArray r1 = jsonResult["response"];
 
-                } catch (IndexOutOfRangeException)
+                if (!(car.CarInAccount < r1.Count))
                 {
                     Log("IndexOutOfRangeException in isOnline!");
                     return "NULL";
                 }
 
-                dynamic r4 = r1[car.CarInAccount];
+                var r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
-                Tesla_Streamingtoken = r4["tokens"][0];
+                Tesla_Streamingtoken = r4["tokens"][0].ToString();
 
                 try
                 {
@@ -1841,7 +1851,7 @@ namespace TeslaLogger
             {
                 resultContent2 = GetCommand("vehicle_config").Result;
 
-                if (resultContent2 == "INSERVICE" || resultContent2 == "NULL")
+                if (resultContent2 == INSERVICE || resultContent2 == "NULL")
                 {
                     System.Threading.Thread.Sleep(5000);
                     return;
@@ -2380,7 +2390,7 @@ namespace TeslaLogger
             {
                 resultContent = GetCommand("drive_state").Result;
 
-                if (resultContent == "INSERVICE")
+                if (resultContent == INSERVICE)
                 {
                     System.Threading.Thread.Sleep(10000);
                     return false;
@@ -3431,7 +3441,7 @@ namespace TeslaLogger
                 resultContent = await GetCommand("vehicle_state");
                 Tools.SetThreadEnUS();
 
-                if (resultContent == null || resultContent == "NULL")
+                if (resultContent == null || resultContent == "NULL" || resultContent == INSERVICE)
                     return lastOdometerKM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
@@ -3652,7 +3662,7 @@ namespace TeslaLogger
                 else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
                 {
                     if (car.IsInService())
-                        return "INSERVICE";
+                        return INSERVICE;
                     else
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
 
@@ -4209,6 +4219,15 @@ namespace TeslaLogger
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
                         Logfile.Log("SendDataToAbetterrouteplanner response: " + response);
+                    }
+                    else if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        var diff = DateTime.UtcNow - lastABRPActive;
+                        if (diff.TotalMinutes > 15)
+                        {
+                            car.CreateExeptionlessFeature("ABRP").Submit();
+                            lastABRPActive = DateTime.UtcNow;
+                        }
                     }
                 }
             }

@@ -21,6 +21,8 @@ namespace TeslaLogger
         private bool run = true;
         Car car;
 
+        DateTime lastScanMyTeslaActive = DateTime.MinValue;
+
         public ScanMyTesla(Car c)
         {
             if (c != null)
@@ -123,9 +125,18 @@ namespace TeslaLogger
 
                         if (resultContent.Contains("Resource Limit Is Reached"))
                         {
+                            car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
+
                             car.Log("SMT: Resource Limit Is Reached");
                             Thread.Sleep(25000);
                             return "Resource Limit Is Reached";
+                        }
+
+                        var diff = DateTime.UtcNow - lastScanMyTeslaActive;
+                        if (diff.TotalMinutes > 15)
+                        {
+                            car.CreateExeptionlessFeature("ScanMyTeslaActive").Submit();
+                            lastScanMyTeslaActive = DateTime.UtcNow;
                         }
 
                         string temp = resultContent;

@@ -1036,6 +1036,18 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                if (ex is WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.NameResolutionFailure)
+                    {
+                        return "NRF";
+                    }
+                    else if (we.Status == WebExceptionStatus.ConnectFailure)
+                    {
+                        return "CF";
+                    }
+                }
+
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.ExceptionWriter(ex, "GetGrafanaVersion");
             }

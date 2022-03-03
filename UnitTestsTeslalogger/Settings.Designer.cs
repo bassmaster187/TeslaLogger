@@ -23,15 +23,21 @@ namespace UnitTestsTeslalogger {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ElectricityMeterGoEURL {
             get {
                 return ((string)(this["ElectricityMeterGoEURL"]));
             }
-            set {
-                this["ElectricityMeterGoEURL"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MapQuestKey {
+            get {
+                return ((string)(this["MapQuestKey"]));
             }
         }
     }

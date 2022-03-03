@@ -9,6 +9,10 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class MapQuestMapProvider : StaticMapProvider
     {
+        WebClient _webClient;
+        object _webClientLock = new object();
+
+
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
         {
             if (String.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
@@ -172,26 +176,41 @@ namespace TeslaLogger
 
             try
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.Headers.Add("User-Agent: TeslaLogger");
-                    webClient.Headers.Add("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
 
-                    // Download the Web resource and save it into the current filesystem folder.
-                    webClient.DownloadFile(url, filename);
-                    Logfile.Log("Create File: " + filename);
-                }
+                var webClient = GetWebClient();
+
+                // Download the Web resource and save it into the current filesystem folder.
+                webClient.DownloadFile(url, filename);
+                Logfile.Log("Create File: " + filename);
+                
 
                 System.Threading.Thread.Sleep(1000);
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().AddObject(coords?.Rows?.Count,"Coords Rows Count").Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 Logfile.Log("Rows count: " + coords.Rows.Count + " posquery= " + posquery + "\r\n" + ex.ToString());
             }
 
+        }
+        
+        WebClient GetWebClient()
+        {
+            lock (_webClientLock)
+            {
+                if (_webClient == null)
+                {
+                    var webClient = new MyWebClient();
+                    webClient.Headers.Add("User-Agent: TeslaLogger");
+                    webClient.Headers.Add("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+
+                    _webClient = webClient;
+                }
+            }
+
+            return _webClient;
         }
 
         public override int GetDelayMS()
@@ -205,6 +224,16 @@ namespace TeslaLogger
                 return false;
 
             return true;
+        }
+
+        private class MyWebClient : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest w = base.GetWebRequest(uri);
+                w.Timeout = (int)TimeSpan.FromMinutes(3).TotalMilliseconds;
+                return w;
+            }
         }
     }
 }

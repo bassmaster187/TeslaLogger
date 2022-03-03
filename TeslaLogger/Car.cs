@@ -403,7 +403,7 @@ namespace TeslaLogger
         {
             try
             {
-                var v = ElectricityMeterBase.Instance(CarInDB);
+                var v = ElectricityMeterBase.Instance(this);
                 if (v != null)
                 {
                     Log("Meter Status: " + v.ToString());
@@ -1685,6 +1685,21 @@ id = @carid", con))
             return true;
         }
 
+        public static void LogActiveCars()
+        {
+            try
+            {
+                if (Car.Allcars == null)
+                    return;
+
+                ExceptionlessClient.Default.CreateFeatureUsage("Active_Cars_" + Car.Allcars.Count).FirstCarUserID().Submit();
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
+
         internal void SendException2Exceptionless(Exception ex)
         {
             CreateExceptionlessClient(ex).Submit();
@@ -1704,6 +1719,18 @@ id = @carid", con))
         internal EventBuilder CreateExeptionlessLog(string source, string message, Exceptionless.Logging.LogLevel logLevel)
         {
             EventBuilder b = ExceptionlessClient.Default.CreateLog(source, message, logLevel)
+                .SetUserIdentity(TaskerHash)
+                .AddObject(ModelName, "ModelName")
+                .AddObject(CarType, "CarType")
+                .AddObject(CarSpecialType, "CarSpecialType")
+                .AddObject(TrimBadging, "CarTrimBadging");
+
+            return b;
+        }
+
+        internal EventBuilder CreateExeptionlessFeature(string feature)
+        {
+            EventBuilder b = ExceptionlessClient.Default.CreateFeatureUsage(feature)
                 .SetUserIdentity(TaskerHash)
                 .AddObject(ModelName, "ModelName")
                 .AddObject(CarType, "CarType")
