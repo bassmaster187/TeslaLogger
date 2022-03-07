@@ -176,6 +176,7 @@ Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
+Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
@@ -212,6 +213,7 @@ Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger-V3 DE-Lehre, 52.313216,10.635089
 Supercharger DE-Leonberg, 48.78523, 9.01755
+Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lohne, 52.65768, 8.16927
@@ -225,9 +227,9 @@ Supercharger-V3 DE-Murr, 48.956119,9.245459
 Supercharger DE-Mücke, 50.645442, 8.989816
 Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
-Supercharger DE-Münchberg-Nord, 50.202822,11.776624, 18
 Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
-Supercharger-V3 DE-München - Pasing Arcaden, 48.1479353, 11.46533265
+Supercharger DE-Münchberg-Nord, 50.202822,11.776624, 18
+Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
 Supercharger DE-Nempitz, 51.290095,12.137335, 7
@@ -269,15 +271,19 @@ Supercharger-V3 DE-Türkheim, 48.04251558, 10.6201373
 Supercharger DE-Uckerfelde, 53.23499, 13.98606
 Supercharger-V3 DE-Ulm, 48.4564812, 10.0308326
 Supercharger DE-Ulm, 48.456714, 10.030097, 18
+Supercharger-V3 DE-Vaterstetten, 48.146953,11.790152
+Supercharger-V3 DE-Vaterstetten, 48.146719,11.790205
+Supercharger-V3 DE-Vaterstetten, 48.146472,11.790255
+Supercharger-V3 DE-Vaterstetten, 48.146213,11.790329
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger DE-Weimar, 50.9342158, 11.289809
 Supercharger-V3 DE-Weiterstadt, 49.89679,8.614198
-Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 8
-Supercharger DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
-Supercharger DE-Wernberg-Köblitz, 49.532255,12.135223, 7
 Supercharger-V3 DE-Wernberg-Köblitz, 49.532249, 12.134949, 8
 Supercharger-V3 DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
 Supercharger-V3 DE-Wernberg-Köblitz, 49.532255,12.135223, 7
+Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 8
+Supercharger DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
+Supercharger DE-Wernberg-Köblitz, 49.532255,12.135223, 7
 Supercharger-V3 DE-Weibersbrunn, 49.934777,9.353755
 Supercharger DE-Wertheim, 49.770559, 9.576456
 Supercharger DE-Weyarn, 47.865307, 11.790695
@@ -287,6 +293,7 @@ Supercharger-V3 DE-Wismar, 53.879307, 11.454047
 Supercharger-V3 DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittenburg, 53.507361, 11.096852
 Supercharger DE-Wittlich, 49.97003, 6.86175
+Supercharger-V3 DE-Woringen, 47.923272, 10.209062
 Supercharger-V3 DE-Wörth an der Isar, 48.625626, 12.320216
 Supercharger DE-Zella-Mehlis, 50.64387, 10.68488
 Supercharger-V3 DE-Zusmarshausen, 48.407771,10.599446, 25
