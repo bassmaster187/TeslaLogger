@@ -649,7 +649,7 @@ namespace TeslaLogger
                             Log($"Missing: {missingOdometer} km! - Check: https://teslalogger.de/faq-1.php");
                             WriteMissingFile(missingOdometer);
                             
-                            CreateExeptionlessLog("API", $"Missing: {missingOdometer} km", Exceptionless.Logging.LogLevel.Warn).Submit();
+                            CreateExeptionlessLog("Missing", $"Missing: {missingOdometer} km", Exceptionless.Logging.LogLevel.Warn).Submit();
                         }
                         else
                         {
