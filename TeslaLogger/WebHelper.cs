@@ -1686,7 +1686,7 @@ namespace TeslaLogger
 
                 resultContent = await result.Content.ReadAsStringAsync();
                 // resultContent = Tools.ConvertBase64toString("");
-                
+
                 if (resultContent == null || resultContent == "NULL")
                 {
                     Log("isOnline = NULL");
@@ -1698,6 +1698,13 @@ namespace TeslaLogger
                 {
                     Log("isOnline Result Content: " + resultContent);
                     Thread.Sleep(5000);
+                    return "NULL";
+                }
+
+                if (resultContent.Contains("operation_timedout with 10s timeout"))
+                {
+                    Log("isOnline: operation_timedout with 10s timeout");
+                    Thread.Sleep(20000);
                     return "NULL";
                 }
 
