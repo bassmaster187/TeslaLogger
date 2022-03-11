@@ -1,3 +1,6 @@
+# Version 1.51.11
+- Bugfixes
+
 # Version 1.51.10
 - Link to release notes of firmware in admin panel and firmware dashboard
 - Show available firmware updates on admin panel
