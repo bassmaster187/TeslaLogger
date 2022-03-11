@@ -120,7 +120,7 @@ namespace TeslaLogger
                             car.CreateExeptionlessLog("ScanMyTesla", "GetDataFromWebservice Error Service Unavailable (503)", Exceptionless.Logging.LogLevel.Warn).Submit();
                             car.Log("SMT: Error Service Unavailable (503)");
                             System.Threading.Thread.Sleep(25000);
-                            return "Error: 503";
+                            return "ERROR: 503";
                         }
 
                         resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);

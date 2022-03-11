@@ -716,7 +716,7 @@ namespace TeslaLogger
                         {
                             car.Passwortinfo.Append("Error: GetTokenAsync2 Redirect Location = null!!! Wrong credentials?<br>");
                             car.Log("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!");
-                            ExceptionlessClient.Default.CreateLog("Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!").AddObject(resultContent, "resultContent").Submit();
+                            ExceptionlessClient.Default.CreateLog("Auth", "Error: GetTokenAsync2 HttpStatus: " + result.StatusCode.ToString() + " / Expecting: Redirect !!!").AddObject(resultContent, "resultContent").FirstCarUserID().Submit();
                             ExceptionWriter(null, resultContent);
                         }
                     }
@@ -1023,7 +1023,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    ExceptionlessClient.Default.CreateLog("Error: MFA2 Fail!").AddObject(resultContent, "resultContent").Submit();
+                    ExceptionlessClient.Default.CreateLog("Auth","Error: MFA2 Fail!").AddObject(resultContent, "resultContent").FirstCarUserID().Submit();
                     car.Log("Error: MFA2 Fail!");
                     ExceptionWriter(null, resultContent);
                     return "NULL";
@@ -1783,7 +1783,7 @@ namespace TeslaLogger
 
                         ExceptionWriter(new Exception("unknown state"), resultContent);
 
-                        ExceptionlessClient.Default.CreateLog("unknown state").AddObject(resultContent, "resultContent").Submit();
+                        car.CreateExeptionlessLog("IsOnline", "unknown state", Exceptionless.Logging.LogLevel.Warn).AddObject(resultContent, "resultContent").Submit();
 
                         if (unknownStateCounter == 0)
                         {

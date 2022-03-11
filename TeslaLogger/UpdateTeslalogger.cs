@@ -801,7 +801,7 @@ CREATE TABLE superchargers(
 
             File.AppendAllText("cmd_updated.txt", DateTime.Now.ToLongTimeString());
             Logfile.Log("Start update");
-            ExceptionlessClient.Default.CreateLog("Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
+            ExceptionlessClient.Default.CreateLog("Install", "Start update from " + Assembly.GetExecutingAssembly().GetName().Version).Submit();
 
             if (Tools.IsMono())
             {
@@ -886,7 +886,7 @@ CREATE TABLE superchargers(
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
 
-                        ExceptionlessClient.Default.CreateLog("Update Download successful").Submit();
+                        ExceptionlessClient.Default.CreateLog("Install","Update Download successful").Submit();
                     }
                 }
                 catch (Exception ex)
@@ -923,7 +923,7 @@ CREATE TABLE superchargers(
                                     Logfile.Log("update package: download and unzip successful");
                                     zipExtractSuccessful = true;
 
-                                    ExceptionlessClient.Default.CreateLog("Update Zip Extract Successful").Submit();
+                                    ExceptionlessClient.Default.CreateLog("Install", "Update Zip Extract Successful").FirstCarUserID().Submit();
                                 }
                             }
                         }
@@ -990,7 +990,7 @@ CREATE TABLE superchargers(
                     Logfile.Log(ex.ToString());
                 }
 
-                ExceptionlessClient.Default.CreateLog("Update finished!").Submit();
+                ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
                 ExceptionlessClient.Default.ProcessQueue();
 
                 Logfile.Log("End update");

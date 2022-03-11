@@ -1369,7 +1369,7 @@ namespace TeslaLogger
 
         void ExceptionlessLogUnknowKey(string text)
         {
-            ExceptionlessClient.Default.CreateLog(text)
+            ExceptionlessClient.Default.CreateLog("TeslaApiState", text)
                 .SetUserIdentity(car.TaskerHash)
                 .AddObject(car.ModelName, "ModelName")
                 .AddObject(car.CarType, "CarType")
