@@ -1629,11 +1629,11 @@ namespace TeslaLogger
 
         private static void Setcost(HttpListenerRequest request, HttpListenerResponse response)
         {
+            string json = "";
+
             try
             {
                 Logfile.Log("SetCost");
-
-                string json;
 
                 if (request.QueryString["JSON"] != null)
                 {
@@ -1643,6 +1643,8 @@ namespace TeslaLogger
                 {
                     json = GetDataFromRequestInputStream(request);
                 }
+
+                // json = Tools.ConvertBase64toString("");
 
                 Logfile.Log("JSON: " + json);
 
@@ -1654,13 +1656,13 @@ namespace TeslaLogger
                     using (MySqlCommand cmd = new MySqlCommand("update chargingstate set cost_total = @cost_total, cost_currency=@cost_currency, cost_per_kwh=@cost_per_kwh, cost_per_session=@cost_per_session, cost_per_minute=@cost_per_minute, cost_idle_fee_total=@cost_idle_fee_total, cost_kwh_meter_invoice=@cost_kwh_meter_invoice  where id= @id", con))
                     {
 
-                        if (DBHelper.DBNullIfEmptyOrZero(j["cost_total"]) is DBNull && DBHelper.IsZero(j["cost_per_session"]))
+                        if (DBHelper.DBNullIfEmptyOrZero(j["cost_total"].Value) is DBNull && DBHelper.IsZero(j["cost_per_session"].Value))
                         {
                             cmd.Parameters.AddWithValue("@cost_total", 0);
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"].ToString()));
+                            cmd.Parameters.AddWithValue("@cost_total", DBHelper.DBNullIfEmptyOrZero(j["cost_total"].Value));
                         }
 
                         cmd.Parameters.AddWithValue("@cost_currency", DBHelper.DBNullIfEmpty(j["cost_currency"].Value));
@@ -1670,7 +1672,7 @@ namespace TeslaLogger
                         cmd.Parameters.AddWithValue("@cost_idle_fee_total", DBHelper.DBNullIfEmpty(j["cost_idle_fee_total"].Value));
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"].Value));
 
-                        cmd.Parameters.AddWithValue("@id", j["id"]);
+                        cmd.Parameters.AddWithValue("@id", j["id"].Value);
                         int done = SQLTracer.TraceNQ(cmd);
 
                         Logfile.Log("SetCost OK: " + done);
@@ -1680,7 +1682,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log(ex.ToString());
                 WriteString(response, "ERROR");
             }
