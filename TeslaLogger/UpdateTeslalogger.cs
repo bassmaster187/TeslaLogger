@@ -132,11 +132,13 @@ namespace TeslaLogger
 
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Logfile.Log("DBView Update (Task) started.");
+                    CheckDBViews();
                     if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
                     {
-                        UpdateDBView();
-                        Logfile.Log("DBView Update (Task) finished.");
+                        UpdateDBViews();
                     }
+                    Logfile.Log("DBView Update (Task) finished.");
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
                 // end of view update
@@ -270,6 +272,35 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
             }
+        }
+
+        private static void CheckDBViews()
+        {
+            string viewtrip = string.Empty;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SHOW FULL TABLES", con))
+                    {
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            if (dr[0] != null && dr[0].ToString().Equals("trip") && dr[1] != null)
+                            {
+                                viewtrip = dr[1].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log("CheckDBViews exception: " + ex.ToString());
+            }
+            Logfile.Log("CheckDBViews: trip " + (viewtrip.Equals("VIEW") ? "OK" : $"NOT OK: type {viewtrip}"));
         }
 
         private static void CheckDBSchema_superchargerstate()
@@ -1175,11 +1206,11 @@ CREATE TABLE superchargers(
             }
         }
 
-        private static void UpdateDBView()
+        private static void UpdateDBViews()
         {
             try
             {
-                Logfile.Log("update view: trip");
+                Logfile.Log("UpdateDBViews: trip");
                 DBHelper.ExecuteSQLQuery("DROP VIEW IF EXISTS `trip`");
                 string s = DBViews.Trip;
 
@@ -1312,7 +1343,7 @@ CREATE TABLE superchargers(
                     if (Tools.IsDocker())
                         DatasourceUID = "PC0C98BF192F75B00";
 
-                    UpdateDBView();
+                    UpdateDBViews();
 
                     List<String> dashboardlinks = new List<String>();
 
