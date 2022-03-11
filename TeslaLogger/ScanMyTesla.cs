@@ -114,6 +114,15 @@ namespace TeslaLogger
 
                         DateTime start = DateTime.UtcNow;
                         HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+
+                        if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                        {
+                            car.CreateExeptionlessLog("ScanMyTesla", "GetDataFromWebservice Error Service Unavailable (503)", Exceptionless.Logging.LogLevel.Warn).Submit();
+                            car.Log("SMT: Error Service Unavailable (503)");
+                            System.Threading.Thread.Sleep(25000);
+                            return "Error: 503";
+                        }
+
                         resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
 
                         DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
