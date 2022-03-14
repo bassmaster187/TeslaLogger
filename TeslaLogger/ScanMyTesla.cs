@@ -142,7 +142,7 @@ namespace TeslaLogger
                         }
 
                         var diff = DateTime.UtcNow - lastScanMyTeslaActive;
-                        if (diff.TotalMinutes > 15)
+                        if (diff.TotalMinutes > 60)
                         {
                             car.CreateExeptionlessFeature("ScanMyTeslaActive").Submit();
                             lastScanMyTeslaActive = DateTime.UtcNow;
