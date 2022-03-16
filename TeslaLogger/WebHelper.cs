@@ -4230,7 +4230,7 @@ namespace TeslaLogger
                     else if (result.StatusCode == HttpStatusCode.OK)
                     {
                         var diff = DateTime.UtcNow - lastABRPActive;
-                        if (diff.TotalMinutes > 15)
+                        if (diff.TotalHours > 12)
                         {
                             car.CreateExeptionlessFeature("ABRP").Submit();
                             lastABRPActive = DateTime.UtcNow;
