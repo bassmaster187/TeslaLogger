@@ -897,6 +897,7 @@ namespace TeslaLogger
                 if (ex.ErrorCode == -2147467259) // {"Duplicate entry 'xxx' for key 'ix_endpos'"}
                 {
                     webhelper.IsDriving(true);
+                    Log(ex.Message);
                 }
 
                 SendException2Exceptionless(ex);

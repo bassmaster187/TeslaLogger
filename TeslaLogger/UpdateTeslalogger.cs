@@ -213,11 +213,11 @@ namespace TeslaLogger
                             Logfile.Log("ALTER TABLE OK");
                         }
 
-                        if (!DBHelper.IndexExists("ix_endpos", "drivestate"))
+                        if (DBHelper.IndexExists("ix_endpos", "drivestate"))
                         {
-                            Logfile.Log("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)");
-                            DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD UNIQUE ix_endpos (EndPos)", 600);
-                            Logfile.Log("ALTER TABLE OK");
+                            Logfile.Log("DROP INDEX ix_endpos");
+                            DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate DROP INDEX ix_endpos", 600);
+                            Logfile.Log("DROP INDEX ix_endpos");
                         }
 
                         if (!DBHelper.IndexExists("ix_id_ts", "mothership"))
@@ -225,6 +225,13 @@ namespace TeslaLogger
                             Logfile.Log("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)");
                             DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD UNIQUE ix_id_ts (id, ts)", 1200);
                             Logfile.Log("ALTER TABLE OK");
+                        }
+
+                        if (!DBHelper.IndexExists("ix_endpos2", "drivestate"))
+                        {
+                            Logfile.Log("ALTER TABLE drivestate ADD ix_endpos2(EndPos)");
+                            DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD INDEX ix_endpos2(EndPos)", 600);
+                            Logfile.Log("ALTER TABLE drivestate ADD ix_endpos2(EndPos)");
                         }
                     }
                     catch (Exception ex)

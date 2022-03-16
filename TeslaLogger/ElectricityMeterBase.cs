@@ -19,7 +19,7 @@ namespace TeslaLogger
                 string version = "";
                 try
                 {
-                    version = ret.GetVersion();
+                    version = ret?.GetVersion();
                 }
                 catch (Exception) { }
 
