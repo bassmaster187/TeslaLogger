@@ -261,6 +261,7 @@ Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger-V3 DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
+Supercharger-V3 DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262, 30
@@ -667,6 +668,7 @@ Supercharger NO-Hovden, 59.561243, 7.356849
 Supercharger NO-Indre Arna, 60.421749, 5.467271
 Supercharger NO-Innhavet, 67.962417, 15.929685
 Supercharger NO-Jaren, 59.617769, 11.00302
+Supercharger-V3 NO-Kautokeino, 69.020412,23.048909
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland, 59.836224, 9.579221
 Supercharger NO-Larvik, 59.112393, 10.108783
@@ -1096,6 +1098,7 @@ Urbancharger US-Pasadena CA, 34.144859, -118.146439
 Urbancharger US-Rockville MD, 39.086813,-77.149977
 Urbancharger US-San Bernardino CA, 34.084202, -117.299095
 Urbancharger US-San Diego CA Del Mar Heights Road, 32.952679, -117.235138
+Urbancharger US-San Diego CA - Camino Del Sur,33.019969,-117.126399
 Urbancharger US-Tigard OR, 45.450027,-122.78289
 Urbancharger US-Westminster CA,33.744808,-118.01284
 
