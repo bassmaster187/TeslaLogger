@@ -1731,6 +1731,17 @@ namespace TeslaLogger
 
                 JArray r1 = jsonResult["response"];
 
+                
+                if (r1 == null && resultContent?.Contains("not found") == true)
+                {
+                    Log("IsOnline response = NULL: " + resultContent);
+
+                    car.CreateExeptionlessLog("WebHelper", "IsOnline:Not Found", Exceptionless.Logging.LogLevel.Warn).AddObject(resultContent, "resultContent").Submit();
+                    car.Restart("IsOnline: not found", 60);
+                    
+                    return "NULL";
+                }
+
                 if (!(car.CarInAccount < r1.Count))
                 {
                     Log("IndexOutOfRangeException in isOnline!");
