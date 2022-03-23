@@ -183,9 +183,10 @@ namespace TeslaLogger
 
         public override string GetVersion()
         {
+            string j = "";
             try
             {
-                string j = GetCurrentDataVersion();
+                j = GetCurrentDataVersion();
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
                 string key = "firmware_version";
@@ -194,7 +195,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().AddObject(j,"json").Submit();
                 Logfile.Log(ex.ToString());
             }
 
