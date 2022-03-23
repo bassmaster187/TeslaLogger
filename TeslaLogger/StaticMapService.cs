@@ -217,7 +217,6 @@ WHERE
   id = @startID ", con))
                 {
                     cmd.Parameters.AddWithValue("@startID", request.StartPosID);
-                    Tools.DebugLog(cmd);
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
