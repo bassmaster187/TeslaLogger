@@ -1,3 +1,6 @@
+# Version 1.52.0
+- Tesla changed the authentification proccess. 
+
 # Version 1.51.13
 - Bugfixes
 

@@ -497,12 +497,22 @@ namespace TeslaLogger
 
                             car.Log("HttpStatus: " + result.StatusCode.ToString());
 
-                            if (resultContent.Contains("\"error\""))
+                            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+
+                            if (Tools.IsPropertyExist(jsonResult, "error"))
                             {
+                                string error = jsonResult["error"];
+                                string error_description = jsonResult["error_description"];
+
                                 car.Log("ResultContent UpdateTeslaTokenFromRefreshToken: " + resultContent);
+                                car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", "Error: " + error, Exceptionless.Logging.LogLevel.Error)
+                                    .AddObject(error_description, "error_description")
+                                    .AddObject(HttpStatusCode, "HttpStatusCode")
+                                    .AddObject(resultContent, "resultContent")
+                                    .Submit();
                             }
 
-                            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+
                             string access_token = jsonResult["access_token"] ?? throw new Exception("access_token Missing");
                             string new_refresh_token = jsonResult["refresh_token"] ?? throw new Exception("refresh_token Missing");
 
@@ -519,7 +529,16 @@ namespace TeslaLogger
                                 car.DbHelper.UpdateRefreshToken(new_refresh_token);
                             }
 
-                            return GetTokenAsync4(access_token);
+                            // as of March 21 2022 Tesla returns a bearer token. GetTokenAsync4 is no longer neeaded. 
+                            car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
+                            Tesla_token = jsonResult["access_token"];
+                            car.DbHelper.UpdateTeslaToken();
+                            car.LoginRetryCounter = 0;
+
+                            return Tesla_token;
+
+
+                            // return GetTokenAsync4(access_token);
                         }
                     }
                 }
@@ -1140,6 +1159,7 @@ namespace TeslaLogger
                         string error = jsonResult["error"];
                         car.Passwortinfo.Append("Error: " + error + " <br>");
                         car.Log("Error: GetTokenAsync4(): " + error);
+                        car.CreateExeptionlessLog("GetTokenAsync4", "Error: " + error, Exceptionless.Logging.LogLevel.Error).Submit();
                         return "NULL";
                     }
                     else
