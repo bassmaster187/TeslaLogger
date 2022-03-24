@@ -1698,7 +1698,9 @@ namespace TeslaLogger
                 Logfile.Log("HTTP getchargingstate");
                 using (DataTable dt = new DataTable())
                 {
-                    using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.*, lat, lng, address, charging.charge_energy_added as kWh FROM chargingstate join pos on chargingstate.pos = pos.id join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT chargingstate.*, lat, lng, address, chargingstate.charge_energy_added as kWh 
+                            FROM chargingstate join pos on chargingstate.pos = pos.id 
+                            join charging on chargingstate.EndChargingID = charging.id where chargingstate.id = @id", DBHelper.DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@id", id);
                         SQLTracer.TraceDA(dt, da);
