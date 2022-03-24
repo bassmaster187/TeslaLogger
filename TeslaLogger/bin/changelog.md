@@ -1,8 +1,8 @@
+# Version 1.52.1
+- Bugfixes
+
 # Version 1.52.0
 - Tesla changed the authentification proccess. 
-
-# Version 1.51.13
-- Bugfixes
 
 # Version 1.51.10
 - Link to release notes of firmware in admin panel and firmware dashboard
