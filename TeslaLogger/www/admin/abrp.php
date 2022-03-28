@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <?php
 require_once("language.php");
+require_once("tools.php");
 session_start();
 global $display_name;
-$carid = 1;
+$carid = GetDefaultCarId();
 if (isset($_REQUEST["carid"]))
 {
 	$_SESSION["carid"] = $_REQUEST["carid"];

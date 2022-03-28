@@ -3,7 +3,7 @@
 require_once("language.php");
 require_once("tools.php");
 session_start();
-$carid = 1;
+$carid = GetDefaultCarId();
 if (isset($_REQUEST["carid"]))
 {
 	$_SESSION["carid"] = $_REQUEST["carid"];
@@ -11,7 +11,7 @@ if (isset($_REQUEST["carid"]))
 }
 else
 {
-	$_SESSION["carid"] = 1;
+	$_SESSION["carid"] = $carid;
 }
 
 ?>

@@ -5,7 +5,7 @@
     if (isDocker())
 		$prefix = "/tmp/";
 		
-	$carid = 1;
+	$carid = GetDefaultCarId();
 	
 	if (isset($_REQUEST["id"]) && strlen($_REQUEST["id"]) > 0)
 		$carid = $_REQUEST["id"];
