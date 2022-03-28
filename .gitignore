@@ -71,3 +71,6 @@ TeslaLogger/mysql/*
 TeslaLogger/www/admin/REDIRECTDOCKERTOHOST*
 TeslaLogger/www/admin/debug-datasource.php
 TeslaLogger/bin/geofence-private.csv.backup
+TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/coverage/*
+TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/node_modules/*
+TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/src/*

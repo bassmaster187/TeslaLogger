@@ -456,6 +456,25 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_YP_MIG_First30()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "XP7YGCELONBXXXXXX";
+            wh.car.CarType = "modely"; // ???
+            wh.car.CarSpecialType = "base"; // ???
+            wh.car.DBWhTR = 0.148; // ???
+            wh.car.TrimBadging = "p74d"; // ???
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Y LR AWD", wh.car.ModelName);
+            Assert.AreEqual(0.148, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void VersionCheck()
         {
             Assert.IsFalse(UpdateTeslalogger.UpdateNeeded("1.0.0.0", "1.0.0.0", Tools.UpdateType.all));

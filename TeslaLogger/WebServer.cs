@@ -1148,7 +1148,7 @@ namespace TeslaLogger
                     sb.Append("has_ludicrous_mode:").Append(has_ludicrous_mode).Append("\r\n");
                     sb.Append("DB_Wh_TR:").Append(c.DBWhTR).Append("\r\n").Append("\r\n");
 
-                    Tools.VINDecoder(c.Vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor);
+                    Tools.VINDecoder(c.Vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor, out _);
                     sb.Append("VIN Year:").Append(year).Append("\r\n");
                     sb.Append("VIN carType:").Append(carType).Append("\r\n");
                     sb.Append("VIN AWD:").Append(AWD).Append("\r\n");

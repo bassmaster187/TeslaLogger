@@ -301,12 +301,13 @@ namespace TeslaLogger
             }
         }
 
-        internal static object VINDecoder(string vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor)
+        internal static object VINDecoder(string vin, out int year, out string carType, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG)
         {
             year = 0;
             carType = "";
             AWD = false;
             MIC = false;
+            MIG = false;
             battery = "";
             motor = "";
 
@@ -364,6 +365,11 @@ namespace TeslaLogger
                 {
                     MIC = true;
                 }
+                else if (vin.StartsWith("XP7"))
+                {
+                    MIG = true;
+                }
+
                 // battery type, source https://teslawissen.ch/tesla-vin-nummer-des-fahrzeugs-dekodieren/
                 switch (vin[6])
                 {
