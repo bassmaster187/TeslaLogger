@@ -1505,7 +1505,7 @@ namespace TeslaLogger
                     if (car.Vin != vin)
                     {
                         car.Vin = vin;
-                        Tools.VINDecoder(vin, out int year, out _, out bool aWD, out bool mIC, out _, out string motor);
+                        Tools.VINDecoder(vin, out int year, out _, out bool aWD, out bool mIC, out _, out string motor, out _);
                         car.Year = year;
                         car.AWD = aWD;
                         car.MIC = mIC;
@@ -1948,11 +1948,11 @@ namespace TeslaLogger
             //string eff = "0.190052356";
             String vinCarType = "";
             if (String.IsNullOrEmpty(car.CarType))
-                Tools.VINDecoder(car.Vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _);
+                Tools.VINDecoder(car.Vin, out _, out vinCarType, out bool AWD, out _, out string battery, out _, out _);
 
             if (car.CarType == "model3" || vinCarType == "Model 3")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor);
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
                 if (car.TrimBadging == "p74d" && year < 2021)
                 {
@@ -2077,7 +2077,7 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging.Length == 0)
                 {
-                    Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor);
+                    Tools.VINDecoder(car.Vin, out _, out _, out bool AWD, out _, out _, out string motor, out _);
                     int maxRange = car.DbHelper.GetAvgMaxRage();
                     if (maxRange > 500)
                     {
