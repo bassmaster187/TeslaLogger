@@ -125,4 +125,19 @@ function files_are_equal($a, $b)
 
   return $result;
 }
+
+function GetDefaultCarId()
+{
+    if (file_exists("/etc/teslalogger/settings.json"))
+    {
+        $json = file_get_contents("/etc/teslalogger/settings.json");
+        $json_data = json_decode($json,true);
+
+        if (!empty($carid = $json_data["defaultcarid"]))
+            return $json_data["defaultcarid"];
+    }
+
+    return 1;
+}
+
 ?>

@@ -25,7 +25,7 @@ function menu($title)
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
-        $current_carid = 1;
+        $current_carid = GetDefaultCarId();
 
     $alldashboards = file_get_contents("/etc/teslalogger/dashboardlinks.txt");
 
