@@ -42,7 +42,7 @@ namespace TeslaLogger
         internal void SetLastCarUsed(DateTime dt)
         {
             lastCarUsed = dt;
-            Tools.DebugLog($"lastCarUsed: {lastCarUsed}");
+            Tools.DebugLog("#" + CarInDB + ": " + $"lastCarUsed: {lastCarUsed}");
         }
         private DateTime lastOdometerChanged = DateTime.Now;
         internal DateTime GetLastOdometerChanged() { return lastOdometerChanged; }
