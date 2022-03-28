@@ -569,13 +569,14 @@ ORDER BY
             }
             foreach (int ChargingStateID in recalculate)
             {
-                RecalculateChargeEnergyAdded(ChargingStateID);
+                _ = RecalculateChargeEnergyAdded(ChargingStateID);
             }
         }
 
-        private void RecalculateChargeEnergyAdded(int ChargingStateID)
+        private bool RecalculateChargeEnergyAdded(int ChargingStateID)
         {
             List<Tuple<int, int>> segments = new List<Tuple<int, int>>();
+            bool updatedChargePrice = false;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -680,7 +681,9 @@ AND id <=(
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
                 UpdateChargePrice(ChargingStateID);
+                updatedChargePrice = true;
             }
+            return updatedChargePrice;
         }
 
         internal static double GetChargeEnergyAddedFromCharging(int ChargingID)
@@ -970,10 +973,14 @@ WHERE
                     }
 
                     // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                    RecalculateChargeEnergyAdded(maxID);
+                    bool updatedChargePrice = RecalculateChargeEnergyAdded(maxID);
 
                     // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                    UpdateChargePrice(maxID);
+                    // but only if it's not updated by RecalculateChargeEnergyAdded
+                    if (!updatedChargePrice)
+                    {
+                        UpdateChargePrice(maxID);
+                    }
 
                     // update chargingsession stats
                     UpdateMaxChargerPower(maxID);
@@ -1317,10 +1324,13 @@ HAVING
                     }
                 }
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                RecalculateChargeEnergyAdded(openChargingState);
+                bool updatedChargePrice = RecalculateChargeEnergyAdded(openChargingState);
 
                 // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                UpdateChargePrice(openChargingState);
+                // but only if it's not updated by RecalculateChargeEnergyAdded
+                if (!updatedChargePrice) { 
+                    UpdateChargePrice(openChargingState);
+                }
             }
 
             car.CurrentJSON.current_charging = false;
