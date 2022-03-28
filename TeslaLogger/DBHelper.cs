@@ -627,9 +627,12 @@ AND id <=(
                             if (
                                 // charge_energy_added is lower than in the row before
                                 (double)dr[1] < lastCEA
-                                &&
+                                /*
+                                 * create segments for every drop
+                                 * &&
                                 // and the current row is zero or near zero
-                                (double)dr[1] < 0.5)
+                                (double)dr[1] < 0.5*/
+                                )
                             {
                                 segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
                                 index = ((int)dr[0]);
@@ -674,7 +677,8 @@ AND id <=(
                     }
                     else
                     {
-                        sum += segmentCEA;
+                        double startCEA = GetChargeEnergyAddedFromCharging(segment.Item1);
+                        sum += segmentCEA - startCEA > 0 ? segmentCEA - startCEA : 0;
                     }
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
