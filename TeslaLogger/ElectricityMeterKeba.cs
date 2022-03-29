@@ -25,7 +25,7 @@ namespace TeslaLogger
         }
 
         public ElectricityMeterKeba(string host, string parameter)
-            : this(Dns.GetHostAddresses(host).First(), int.Parse(parameter))
+            : this(Dns.GetHostAddresses(new Uri(host).Host).First(), int.Parse(parameter))
         {
         }
 
