@@ -404,7 +404,7 @@
       "id": 4,
       "lineColor": "#1F60C4",
       "links": [],
-      "maxDataPointDelta": 300,
+      "maxDataPointDelta": 700,
       "maxDataPoints": 50000,
       "pointColor": "royalblue",
       "scrollWheelZoom": true,
