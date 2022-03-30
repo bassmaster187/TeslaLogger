@@ -11,6 +11,7 @@ namespace TeslaLogger
         public static bool WriteToLogfile = false;
         private static string _logfilepath = null;
         private static System.Threading.Mutex mutex = new System.Threading.Mutex(false, "teslaloggerlogfile");
+        public static bool noDate = false;
 
         public static HttpClient httpclient_teslalogger_de = new HttpClient();
         static Logfile()
@@ -44,6 +45,10 @@ namespace TeslaLogger
             ExternalLog(text);
 
             string temp = DateTime.Now.ToString(ciDeDE) + " : " + text;
+
+            if (noDate)
+                temp = text;
+
             Console.WriteLine(temp);
 
             if (WriteToLogfile)

@@ -192,6 +192,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/setpasswordovms", System.StringComparison.Ordinal):
+                        SetPasswordOVMS(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/wallbox", System.StringComparison.Ordinal):
                         Wallbox(request, response);
                         break;
@@ -1454,6 +1457,79 @@ namespace TeslaLogger
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 WriteString(response, "OK");
                             }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void SetPasswordOVMS(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("SetPasswordOVMS");
+
+                string data = GetDataFromRequestInputStream(request);
+
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int id = Convert.ToInt32(r["id"]);                
+                string login = r["login"];
+                string password = r["password"];
+                string carname = r["carname"];
+
+                if (id == -1)
+                {
+                    Logfile.Log("Insert Password");
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
+                        {
+                            long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+
+                            using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_token, display_name) values (@id, @tesla_name, @tesla_password, @tesla_token, @display_name)", con))
+                            {
+                                cmd2.Parameters.AddWithValue("@id", newid);
+                                cmd2.Parameters.AddWithValue("@tesla_name", login);
+                                cmd2.Parameters.AddWithValue("@tesla_password", password);
+                                cmd2.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
+                                cmd2.Parameters.AddWithValue("@display_name", carname);
+                                SQLTracer.TraceNQ(cmd2);
+
+                                WriteString(response, "ID:" + newid);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Logfile.Log("Update Password ID:" + id);
+                    int dbID = Convert.ToInt32(id);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_token=@tesla_token, display_name=@display_name where id=@id", con))
+                        {
+                            cmd.Parameters.AddWithValue("@id", dbID);
+                            cmd.Parameters.AddWithValue("@tesla_name", login);
+                            cmd.Parameters.AddWithValue("@tesla_password", password);
+                            cmd.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
+                            cmd.Parameters.AddWithValue("@display_name", carname);
+
+                            SQLTracer.TraceNQ(cmd);
+
+                            WriteString(response, "OK");
                         }
                     }
                 }

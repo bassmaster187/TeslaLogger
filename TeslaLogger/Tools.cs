@@ -159,6 +159,50 @@ namespace TeslaLogger
             return msg;
         }
 
+        public static void StartOVMS()
+        {
+            string OVMSClientPath = "/etc/teslalogger/OVMS/OVMS.exe";
+
+            try
+            {
+                if (!System.IO.File.Exists(OVMSClientPath))
+                {
+                    Logfile.Log("OVMS.exe not found!");
+                    return;
+                }
+
+                using (System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    EnableRaisingEvents = false
+                })
+                {
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.FileName = "mono";
+                    proc.StartInfo.Arguments = OVMSClientPath + " nodate";
+
+                    proc.Start();
+
+                    while (!proc.StandardOutput.EndOfStream)
+                    {
+                        string line = proc.StandardOutput.ReadLine();
+                        Logfile.Log(line);
+                    }
+
+                    proc.WaitForExit();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+            finally
+            {
+                Logfile.Log("OVMS terminated");
+            }
+        }
+
         public static void DebugLog(string text, Exception ex = null, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string temp = "DEBUG : " + prefix + text + " (" + Path.GetFileName(callerFilePath) + ":" + callerLineNumber + ")";
@@ -1801,7 +1845,7 @@ WHERE
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM teslalogger.cars where length(tasker_hash) >= 8 limit 1", con))
                     {
-                        object o = cmd.ExecuteScalar().ToString();
+                        object o = cmd.ExecuteScalar()?.ToString();
                         if (o is String && o.ToString().Length >= 8)
                         {
                             lastFirstCar = o.ToString();
