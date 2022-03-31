@@ -27,6 +27,7 @@ namespace TeslaLogger
         }
 
         private static WebServer webServer;
+        private static bool OVMSStarted = false;
 
         private static void Main(string[] args)
         {
@@ -157,8 +158,20 @@ namespace TeslaLogger
                 String Password = r["tesla_password"].ToString();
                 int carid = r["tesla_carid"] as Int32? ?? 0;
                 String tesla_token = r["tesla_token"] as String ?? "";
-                if (tesla_token.StartsWith("OVMS:")) // OVMS Cars ar not handled by Teslalogger
+                if (tesla_token.StartsWith("OVMS:")) // OVMS Cars are not handled by Teslalogger
+                {
+                    if (!OVMSStarted)
+                    {
+                        var ovmsThread = new Thread(() =>
+                        {
+                            Tools.StartOVMS();
+                        });
+                        ovmsThread.Start();                        
+                    }
+                        
+                    OVMSStarted = true;
                     return;
+                }
 
                 DateTime tesla_token_expire = r["tesla_token_expire"] as DateTime? ?? DateTime.MinValue;
                 string Model_Name = r["Model_Name"] as String ?? "";

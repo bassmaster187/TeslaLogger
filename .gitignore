@@ -75,3 +75,8 @@ TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/coverage/*
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/node_modules/*
 TeslaLogger/GrafanaPlugins/teslalogger-timeline-panel/src/*
 TeslaLogger/www/admin/test.php
+
+TeslaLogger/bin/OVMS/protocollogging/*
+TeslaLogger/bin/OVMS/OVMS.exe.config
+TeslaLogger/bin/OVMS/geofence-private.csv
+TeslaLogger/copytoOVMS.cmd

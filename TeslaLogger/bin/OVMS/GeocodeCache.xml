@@ -1,0 +1,88 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <cache>
+    <lat>50.830608</lat>
+    <lng>10.948619</lng>
+    <Value>99310 Arnstadt, Riedmauer 20</Value>
+  </cache>
+  <cache>
+    <lat>50.925777</lat>
+    <lng>11.586385</lng>
+    <Value>07743 Jena, Grietgasse </Value>
+  </cache>
+  <cache>
+    <lat>50.924244</lat>
+    <lng>11.583154</lng>
+    <Value>07743 Jena, Erbertstraße 1</Value>
+  </cache>
+  <cache>
+    <lat>50.934544</lat>
+    <lng>11.566374</lng>
+    <Value>07743 Jena, Erfurter Straße 42</Value>
+  </cache>
+  <cache>
+    <lat>53.282852</lat>
+    <lng>10.079947</lng>
+    <Value> Tangendorf, A 7 </Value>
+  </cache>
+  <cache>
+    <lat>55.67437</lat>
+    <lng>9.554387</lng>
+    <Value>dk-7100 Vejle, Østjyske Motorvej </Value>
+  </cache>
+  <cache>
+    <lat>50.88488</lat>
+    <lng>11.317227</lng>
+    <Value>99444 Blankenhain, Neusaalborn </Value>
+  </cache>
+  <cache>
+    <lat>47.483704</lat>
+    <lng>8.527757</lng>
+    <Value>ch-8154 Oberglatt, Pistenende </Value>
+  </cache>
+  <cache>
+    <lat>48.188259</lat>
+    <lng>9.900981</lng>
+    <Value>88487 Walpertshofen, Unterer Wasserfall 1</Value>
+  </cache>
+  <cache>
+    <lat>48.185165</lat>
+    <lng>9.893554</lng>
+    <Value>88487 Mietingen, Laupheimer Straße </Value>
+  </cache>
+  <cache>
+    <lat>47.517818</lat>
+    <lng>8.542642</lng>
+    <Value>ch-8180 Bülach, Schaffhauserstrasse 18</Value>
+  </cache>
+  <cache>
+    <lat>47.521538</lat>
+    <lng>8.541389</lng>
+    <Value>ch-8180 Bülach, Unterer Sonnenhof </Value>
+  </cache>
+  <cache>
+    <lat>48.188286</lat>
+    <lng>9.901365</lng>
+    <Value>88487 Walpertshofen, Unterer Wasserfall 1</Value>
+  </cache>
+  <cache>
+    <lat>48.18478</lat>
+    <lng>9.904349</lng>
+    <Value>88487 Walpertshofen, Rosenweg 7</Value>
+  </cache>
+  <cache>
+    <lat>48.184528</lat>
+    <lng>9.905506</lng>
+    <Value>88487 Walpertshofen, Rosenweg 2</Value>
+  </cache>
+  <cache>
+    <lat>48.189064</lat>
+    <lng>9.904623</lng>
+    <Value>88487 Walpertshofen, Oberer Wasserfall 10</Value>
+  </cache>
+  <cache>
+    <lat>47.518085</lat>
+    <lng>8.542531</lng>
+    <Value>ch-8180 Bülach, Schaffhauserstrasse </Value>
+  </cache>
+</DocumentElement>
