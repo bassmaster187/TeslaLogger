@@ -1843,7 +1843,7 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM teslalogger.cars where length(tasker_hash) >= 8 limit 1", con))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT tasker_hash FROM cars where length(tasker_hash) >= 8 limit 1", con))
                     {
                         object o = cmd.ExecuteScalar()?.ToString();
                         if (o is String && o.ToString().Length >= 8)

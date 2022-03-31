@@ -45,7 +45,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ExceptionlessServerUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://home.pogea.de:5002</Value>
+      <Value Profile="(Default)">https://home.pogea.de:5003</Value>
     </Setting>
     <Setting Name="SQLTrace" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
