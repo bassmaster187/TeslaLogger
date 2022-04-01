@@ -1,3 +1,6 @@
+# Version 1.52.3
+- Support for Support for KEBA KeContact P30 (P20?) wallbox
+
 # Version 1.52.2
 - [OVMSLogger](https://github.com/bassmaster187/OVMSLogger) support by Teslalogger. If you have a car supported by https://www.openvehicles.com/ (e.g. Tesla Roadster), you can start logging it. 
 
