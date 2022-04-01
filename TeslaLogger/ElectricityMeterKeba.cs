@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,12 +11,12 @@ using Newtonsoft.Json;
 namespace TeslaLogger
 {
     [SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    internal class ElectricityMeterKeba : ElectricityMeterBase
+    internal class ElectricityMeterKeba : ElectricityMeterBase, IDisposable
     {
         private readonly UdpClient listener;
         private readonly UdpClient sender;
 
-        public ElectricityMeterKeba(IPAddress address, int port)
+        public ElectricityMeterKeba(IPAddress address, int port = 7090)
         {
             sender = new UdpClient();
             sender.Connect(address, port);
@@ -25,8 +26,14 @@ namespace TeslaLogger
         }
 
         public ElectricityMeterKeba(string host, string parameter)
-            : this(Dns.GetHostAddresses(new Uri(host).Host).First(), int.Parse(parameter))
+            : this(Dns.GetHostAddresses(new Uri(host).Host).First(), int.Parse(parameter, CultureInfo.InvariantCulture))
         {
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)listener)?.Dispose();
+            ((IDisposable)sender)?.Dispose();
         }
 
         public void Send(string cmd)
