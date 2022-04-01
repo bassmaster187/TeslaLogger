@@ -4,6 +4,7 @@ You can connect your Teslalogger to your Wallbox to calculate the efficiency of 
 - OpenWB
 - go-eCharger
 - Tesla Wallbox Gen 3
+- KEBA KeContact P30 (P20?)
 - Shelly 3EM for all unsupported wallboxes or without build in meter: https://amzn.to/3nUEuO0
 
 # Settings
