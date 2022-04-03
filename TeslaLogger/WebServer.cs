@@ -37,7 +37,8 @@ namespace TeslaLogger
             "set_charge_limit",
             "charge_start",
             "charge_stop",
-            "set_charging_amps"
+            "set_charging_amps",
+            "charge_port_door_open"
         };
 
         public WebServer()
@@ -1310,6 +1311,9 @@ namespace TeslaLogger
                                         }
                                         WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
                                     }
+                                    break;
+                                case "charge_port_door_open":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_port_door_open", null).Result);
                                     break;
                                 default:
                                     WriteString(response, "");

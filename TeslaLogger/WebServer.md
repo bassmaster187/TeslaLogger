@@ -86,10 +86,9 @@ Allowed commands:
 * sentry_mode_off
 * sentry_mode_toggle
 * wake_up
-* set_charge_limit
 * charge_start
 * charge_stop
-* set_charging_amps
+* charge_port_door_open
 
 ### /command/_CarID_/_name_?_parameter_
 
@@ -99,6 +98,7 @@ response: JSON (forwarded from Tesla API)
 
 Allowed commands:
 * set_charge_limit
+* set_charging_amps
 
 ## debugging TeslaLogger
 
