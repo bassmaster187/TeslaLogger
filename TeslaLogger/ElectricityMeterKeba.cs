@@ -26,14 +26,15 @@ namespace TeslaLogger
         }
 
         public ElectricityMeterKeba(string host, string parameter)
-            : this(Dns.GetHostAddresses(new Uri(host).Host).First(), int.Parse(parameter, CultureInfo.InvariantCulture))
+            : this(Dns.GetHostAddresses(new Uri(host).Host).First(),
+                string.IsNullOrEmpty(parameter) ? 7090 : int.Parse(parameter, CultureInfo.InvariantCulture))
         {
         }
 
         public void Dispose()
         {
-            ((IDisposable)listener)?.Dispose();
-            ((IDisposable)sender)?.Dispose();
+            ((IDisposable) listener)?.Dispose();
+            ((IDisposable) sender)?.Dispose();
         }
 
         public void Send(string cmd)
