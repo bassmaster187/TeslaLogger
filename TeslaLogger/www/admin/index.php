@@ -486,13 +486,13 @@ function getZoomLevel()
 }
 ?>
 
-  <?PHP
+<?PHP
   global $language;
 
   if (isset($language) && strlen($language) > 1 && $language != "de")
-	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php"));
+	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index-".$language.".php", 0, stream_context_create(["http"=>["timeout"=>3]])));
   else
-	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php"));
+	echo(file_get_contents("https://teslalogger.de/teslalogger_content_index.php", 0, stream_context_create(["http"=>["timeout"=>3]])));
 
   ?>
   </div>
