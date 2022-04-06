@@ -1,3 +1,6 @@
+# Version 1.52.4
+- Slower getting data from ScanMyTesla 
+
 # Version 1.52.3
 - Support for Support for KEBA KeContact P30 (P20?) wallbox
 
