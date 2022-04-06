@@ -56,7 +56,7 @@ namespace TeslaLogger
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(2500);
+                    System.Threading.Thread.Sleep(5000);
 
                     if (!fastmode && response == "not found")
                     {
