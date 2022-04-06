@@ -85,8 +85,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-
+                    car.CreateExceptionlessClient(ex).Submit();
                     car.Log("Scanmytesla: " + ex.Message);
                     Logfile.WriteException(ex.ToString());
                     System.Threading.Thread.Sleep(20000);
@@ -280,6 +279,12 @@ namespace TeslaLogger
                         }
                     }
                 }
+            }
+            catch (TaskCanceledException)
+            {
+                car.CreateExeptionlessLog("ScanMyTesla", "Timeout", Exceptionless.Logging.LogLevel.Warn).Submit();
+                car.Log("Scanmytesla: Timeout");
+                System.Threading.Thread.Sleep(60000);
             }
             catch (Exception ex)
             {
