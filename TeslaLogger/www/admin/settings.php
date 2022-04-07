@@ -307,7 +307,7 @@ if (strlen($taskertoken) > 7)
 <tr><td style="padding-left:20px;" valign="top"><b><?php t("Received Tasker Token"); ?>:</b></td><td>
 <?php
 if (strlen($taskertoken) > 7)
-	echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken);
+	echo file_get_contents("http://teslalogger.de/tasker_date.php?t=".$taskertoken, 0, stream_context_create(["http"=>["timeout"=>2]]));
 ?>
 </td></tr>
 
