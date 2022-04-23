@@ -16,6 +16,7 @@ namespace MQTTClient
         static void Main(string[] args)
         {
             string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
+            int MQTTPort = MqttSettings.MQTT_BROKER_DEFAULT_PORT;
 
             MqttClient client = null;
             try
@@ -28,13 +29,19 @@ namespace MQTTClient
                     return;
                 }
 
+                if (Properties.Settings.Default.MQTTPort > 0)
+                {
+                    MQTTPort = Properties.Settings.Default.MQTTPort;
+                    Logfile.Log("Using user specific MQTT port: " + Properties.Settings.Default.MQTTPort);
+                }
+
                 if (Properties.Settings.Default.Topic.Length == 0)
                 {
                     Logfile.Log("No Topic settings -> MQTT disabled!");
                     return;
                 }
 
-                client = new MqttClient(Properties.Settings.Default.MQTTHost);
+                client = new MqttClient(Properties.Settings.Default.MQTTHost, MQTTPort, false, null, null, MqttSslProtocols.None);
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
                 {

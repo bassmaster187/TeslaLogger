@@ -5,6 +5,9 @@
     <Setting Name="MQTTHost" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MQTTPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1883</Value>
+    </Setting>
     <Setting Name="Topic" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Tesla</Value>
     </Setting>
