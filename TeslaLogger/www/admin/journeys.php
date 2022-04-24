@@ -239,7 +239,7 @@ menu("Journeys");
         <th><?php t("Target Adress"); ?></th>
         <th><?php t("End"); ?></th>
         <th><?php t("Ø Consumption kWh"); ?></th>
-        <th><?php t("Consumption kWh"); ?></th>
+        <th><?php t("Consumed kWh"); ?></th>
         <th><?php t("charged kWh"); ?></th>
         <th><?php t("Drive Time [h]"); ?></th>
         <th><?php t("Charge Time [h]"); ?></th>
