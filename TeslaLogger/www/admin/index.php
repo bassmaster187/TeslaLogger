@@ -185,7 +185,7 @@ else
 			else if (jsonData["sleeping"])
 			{
 				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Schlafen"); ?>");
+				$('#car_status').text("<?php t("Sleeping"); ?>");
 
 				hideSMT();
 			}
@@ -407,7 +407,7 @@ function ShowInfo()
   <table class="HeaderT">
 	  <thead><td colspan="2" class="HeaderStyle"><?php t("Info"); ?></td></thead>
 	  <tr><td colspan="2"><span id="InfoText"></span></td></tr>
-	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("Nein"); ?></button> <button id="PositiveButton"><?php t("Ja"); ?></button></td></tr>
+	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("No"); ?></button> <button id="PositiveButton"><?php t("Yes"); ?></button></td></tr>
     </table>
   </div>
   <div style="float:left;">
@@ -432,8 +432,8 @@ function ShowInfo()
 	  <tr><td width="130px"><b><?php t("Start"); ?>:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
 	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
 	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km">km</span></td></tr>
-	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
-	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm">Wh/km</span></td></tr>
+	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
+	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm">Wh/km</span></td></tr>
 	  <tr><td><b><?php t("Max kph"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh">km/h</span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
 	  </table>
   </div>

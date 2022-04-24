@@ -21,14 +21,12 @@ require("language.php");
     include "menu.php";
     echo(menu("RESTORE DATABASE"));
 ?>
-    Please make sure you backup your Teslalogger before restoring any databases. 
-	Move your backup folder from \\RASPBERRY\teslalogger\backup to your hard drive!<br><br>
-	The restore process may take up to 10 minutes!<br><br>
-	Don't interrupt the restore process in any way! Don't reload the page! Don't close this page! 	
+	<br><br>
+	<?php t("TextRestore"); ?>
 	<br><br>
 	
 <form action="restore_upload.php" method="post" enctype="multipart/form-data">
 
     <input type="file" name="fileToUpload" id="fileToUpload"><br>
-    <input type="submit" value="Restore" name="submit">
+    <input type="submit" value="<?php t("Restore"); ?>" name="submit">
 </form>

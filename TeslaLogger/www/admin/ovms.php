@@ -7,7 +7,7 @@ require_once("tools.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php t("Teslalogger Tesla Zugangsdaten"); ?></title>
+    <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -139,10 +139,10 @@ menu("Credentials");
 <tr><td colspan="2">
 <?PHP 
 if ($_REQUEST["id"] > 0)
-	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Löschen"); ?></button>
+	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
 	<?PHP }
 ?>
-<button id="btnSave" onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
+<button id="btnSave" onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 <?php

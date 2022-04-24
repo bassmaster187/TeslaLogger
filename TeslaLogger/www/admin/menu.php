@@ -102,15 +102,15 @@ function menu($title)
                     <li id="menu-item-4" class="page_item_has_children">
                         <a href="#"><?php t("Fleet Statistic"); ?></a>
                         <ul class='children'>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation_token.php<?PHP echo($ref); ?>">My Degradation</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/mycharging.php<?PHP echo($ref); ?>">My Charging AVG</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation.php<?PHP echo($ref); ?>">Fleet Degradation AVG</a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger.php<?PHP echo($ref); ?>">Fleet Charging AVG</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger_fw.php<?PHP echo($ref); ?>">Fleet Charging MAX (Firmware)</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charging_locations.php<?PHP echo($ref); ?>">Fleet Charging Locations</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/map.php<?PHP echo($ref); ?>">Fleet Fast Charging Map</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/suc-map.php<?PHP echo($ref); ?>">Supercharger Usage</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/firmware.php<?PHP echo($ref); ?>">Firmware Tracker</a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation_token.php<?PHP echo($ref); ?>"><?php t("My Degradation"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/mycharging.php<?PHP echo($ref); ?>"><?php t("My Charging AVG"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/degradation.php<?PHP echo($ref); ?>"><?php t("Fleet Degradation AVG"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger.php<?PHP echo($ref); ?>"><?php t("Fleet Charging AVG"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charger_fw.php<?PHP echo($ref); ?>"><?php t("Fleet Charging MAX (Firmware)"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/charging_locations.php<?PHP echo($ref); ?>"><?php t("Fleet Charging Locations"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/map.php<?PHP echo($ref); ?>"><?php t("Fleet Fast Charging Map"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/suc-map.php<?PHP echo($ref); ?>"><?php t("Supercharger Usage"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://teslalogger.de/firmware.php<?PHP echo($ref); ?>"><?php t("Firmware Tracker"); ?></a></li>
 						</ul>
                     </li>
 					<li id="menu-item-5" class="page_item_has_children">
@@ -122,8 +122,8 @@ function menu($title)
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php"><?php t("Geofence"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="journeys.php?carid=<?= $current_carid ?>"><?php t("Journeys"); ?></a></li>
                             <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="dashboard.php?carid=<?= $current_carid ?>"><?php t("Dashboard"); ?></a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="abrp.php?carid=<?= $current_carid ?>">Abetterrouteplanner</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="wallbox.php?carid=<?= $current_carid ?>">Wallbox</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="abrp.php?carid=<?= $current_carid ?>"><?php t("Abetterrouteplanner"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="wallbox.php?carid=<?= $current_carid ?>"><?php t("Wallbox"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wakeup.php?id=<?= $current_carid ?>"><?php t("Wakeup Teslalogger"); ?>!</a></li>
                             <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep_$current_carid.txt"))
                             {?>

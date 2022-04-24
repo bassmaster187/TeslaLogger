@@ -7,7 +7,7 @@ require_once("tools.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php t("Teslalogger Tesla Zugangsdaten"); ?></title>
+    <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -230,7 +230,7 @@ if (isset($_REQUEST["id"]))
 
 ?>
 <div>
-<h1><?php t("Bitte Tesla Account Zugangsdaten eingeben"); ?>:</h1>
+<h1><?php t("Please enter your Tesla account credentials"); ?>:</h1>
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
 <ul>
@@ -245,8 +245,8 @@ if (isset($_REQUEST["id"]))
 <tr><td colspan="2"><button onclick="CheckAccessToken();" style="float: right;"><?php t("OK"); ?></button></td></tr>
 
 <tr style='visibility:collapse'><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
-<tr style='visibility:collapse'><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr style='visibility:collapse'><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+<tr style='visibility:collapse'><td><?php t("Password"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
+<tr style='visibility:collapse'><td><?php t("Repeat Password"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 
 <tr><td><?php t("Car"); ?>:</td><td> <select id="carid"></select></td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
@@ -258,11 +258,11 @@ if (isset($_REQUEST["id"]))
 <tr><td colspan="2">
 <?PHP 
 if ($_REQUEST["id"] != -1)
-	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Löschen"); ?></button>
+	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
 	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
 	<?PHP }
 ?>
-<button id="btnSave" style='visibility:collapse' onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
+<button id="btnSave" style='visibility:collapse' onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 <?php
@@ -271,9 +271,9 @@ else
 {
 ?>
 <div>
-<h1><?php t("Bitte Fahrzeug auswählen"); ?>:</h1>
+<h1><?php t("Please choose your vehicle"); ?>:</h1>
 <table id="cars" class="">
-<thead><tr><th>ID</th><th>Email</th><th>#</th><th>Name</th><th>Model</th><th>VIN</th><th>Tasker Token</th><th style='text-align:center;'>Free SUC</th><th>Edit</th></tr></thead>
+<thead><tr><th><?php t("ID"); ?></th><th><?php t("Email"); ?></th><th>#</th><th><?php t("Name"); ?></th><th><?php t("Model"); ?></th><th><?php t("VIN"); ?></th><th><?php t("Tasker Token"); ?></th><th style='text-align:center;'><?php t("Free SUC"); ?></th><th><?php t("Edit"); ?></th></tr></thead>
 <tbody>
 <?php
 	//var_dump($url);
@@ -295,7 +295,7 @@ else
 		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td style='text-align:center;'>$freesuccheckbox</td><td><a href='password.php?id=$id'>EDIT</a></td></tr>\r\n");
 	}
 ?>
-<tr><td colspan="6"><button onclick="location.href='password.php?id=-1'">NEW CAR</button></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><button onclick="location.href='password.php?id=-1'"><?php t("NEW CAR"); ?></button></td><td></td><td></td><td></td></tr>
 </tbody>
 </table>
 </div>
