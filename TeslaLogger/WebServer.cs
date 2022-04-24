@@ -388,7 +388,7 @@ namespace TeslaLogger
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 try
                 {
-                    Car.GetCarByID(CarID)?.Restart("Webserver Restart",1);
+                    Car.GetCarByID(CarID)?.Restart("Webserver Restart",0);
                     WriteString(response, "OK");
                 }
                 catch (Exception ex)
@@ -1352,7 +1352,7 @@ namespace TeslaLogger
                             Car c = Car.GetCarByID(id);
                             if (c != null)
                             {
-                                c.ExitTeslaLogger("Car deleted!");
+                                c.ExitCarThread("Car deleted!");
                             }
 
                             WriteString(response, "OK");
@@ -1376,7 +1376,7 @@ namespace TeslaLogger
                             Car c = Car.GetCarByID(id);
                             if (c != null)
                             {
-                                c.Restart("Reconnect!",5);
+                                c.Restart("Reconnect!",0);
                             }
 
                             WriteString(response, "OK");
@@ -1449,7 +1449,7 @@ namespace TeslaLogger
                                 Car c = Car.GetCarByID(dbID);
                                 if (c != null)
                                 {
-                                    c.ExitTeslaLogger("Credentials changed!");
+                                    c.ExitCarThread("Credentials changed!");
                                 }
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
@@ -1568,8 +1568,29 @@ namespace TeslaLogger
                                 return;
                             }
                         }
+                        else
+                        {
+                            Logfile.Log($"Get_CarValue: state not found: GetState({name})");
+                            WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
+                        }
+                    }
+                    else
+                    {
+                        Logfile.Log($"Get_CarValue: car not found: GetCarByID({CarID}");
                     }
                 }
+                else
+                {
+                    Logfile.Log($"Get_CarValue: error: CarID({CarID} name:{name}");
+                }
+            }
+            else if (m.Groups.Count == 3)
+            {
+                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
+            }
+            else
+            {
+                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
             }
             WriteString(response, "");
         }

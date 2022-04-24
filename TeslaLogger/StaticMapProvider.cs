@@ -110,7 +110,7 @@ namespace TeslaLogger
                 double min_lng = Convert.ToDouble(coords.Compute("min(lng)", string.Empty), Tools.ciDeDE);
                 double max_lat = Convert.ToDouble(coords.Compute("max(lat)", string.Empty), Tools.ciDeDE);
                 double max_lng = Convert.ToDouble(coords.Compute("max(lng)", string.Empty), Tools.ciDeDE);
-                Tools.DebugLog($"DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
+                //Tools.DebugLog($"DetermineExtent {min_lat},{min_lng} {max_lat},{max_lng}");
                 return new Tuple<double, double, double, double>(min_lat, min_lng, max_lat, max_lng);
             }
             return null;

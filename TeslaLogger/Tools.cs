@@ -95,6 +95,47 @@ namespace TeslaLogger
             }
         }
 
+        public static void DebugLog(DataTable dt, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        {
+            string msg = callerMemberName + Environment.NewLine;
+            if (dt != null)
+            {
+                // https://stackoverflow.com/questions/15547959/print-contents-of-a-datatable
+                Dictionary<string, int> colWidths = new Dictionary<string, int>();
+
+                foreach (DataColumn col in dt.Columns)
+                {
+                    msg += col.ColumnName;
+                    var maxLabelSize = dt.Rows.OfType<DataRow>()
+                            .Select(m => (m.Field<object>(col.ColumnName)?.ToString() ?? "").Length)
+                            .OrderByDescending(m => m).FirstOrDefault();
+
+                    colWidths.Add(col.ColumnName, maxLabelSize);
+                    for (int i = 0; i < maxLabelSize - col.ColumnName.Length + 10; i++)
+                    {
+                        msg += " ";
+                    }
+                }
+
+                msg += Environment.NewLine;
+
+                foreach (DataRow dataRow in dt.Rows)
+                {
+                    for (int j = 0; j < dataRow.ItemArray.Length; j++)
+                    {
+                        string value = string.IsNullOrEmpty(dataRow.ItemArray[j].ToString()) ? "<NULL>" : dataRow.ItemArray[j].ToString();
+                        msg += value;
+                        for (int i = 0; i < colWidths[dt.Columns[j].ColumnName] - value.Length + 10; i++)
+                        {
+                            msg += " ";
+                        }
+                    }
+                    msg += Environment.NewLine;
+                }
+            }
+            DebugLog(msg, null, "", callerFilePath, callerLineNumber);
+        }
+
         internal static string ExpandSQLCommand(MySqlCommand cmd)
         {
             string msg = string.Empty;

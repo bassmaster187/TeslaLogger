@@ -148,7 +148,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static void StartCarThread(DataRow r)
+        internal static void StartCarThread(DataRow r, Car.TeslaState oldCarState = Car.TeslaState.Start)
         {
             int id = 0;
             try
@@ -184,7 +184,7 @@ namespace TeslaLogger
                 double? wh_tr = r["wh_tr"] as double?;
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)
@@ -496,6 +496,7 @@ namespace TeslaLogger
                         c.DbHelper.UpdateEmptyUnplugDate();
                         c.DbHelper.AnalyzeChargingStates();
                         c.DbHelper.UpdateAllDriveHeightStatistics();
+                        c.DbHelper.FixDuplicateDriveStates();
                     }
 
                     DBHelper.UpdateAllNullAmpereCharging();

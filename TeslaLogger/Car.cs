@@ -15,7 +15,7 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
-    public class Car
+    internal class Car
     {
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
@@ -184,7 +184,7 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR)
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start)
         {
             lock (_syncRoot)
             {
@@ -206,10 +206,12 @@ namespace TeslaLogger
                     this.Vin = vin;
                     this.TaskerHash = TaskerHash;
                     this.WhTR = WhTR ?? 0.190;
+                    this._currentState = currentState;
 
                     if (CarInDB > 0)
+                    {
                         Allcars.Add(this);
-
+                    }
                     DbHelper = new DBHelper(this);
                     webhelper = new WebHelper(this);
 
@@ -334,19 +336,19 @@ namespace TeslaLogger
 
                 if (webhelper.Tesla_token == "NULL")
                 {
-                    ExitTeslaLogger("Tesla_token == NULL");
+                    ExitCarThread("Tesla_token == NULL");
                 }
 
                 LogToken();
 
                 if (DBHelper.DBConnectionstring.Length == 0)
                 {
-                    ExitTeslaLogger("DBHelper.DBConnectionstring.Length == 0");
+                    ExitCarThread("DBHelper.DBConnectionstring.Length == 0");
                 }
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
-                    ExitTeslaLogger("wh.GetVehicles() == NULL");
+                    ExitCarThread("wh.GetVehicles() == NULL");
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);
@@ -421,9 +423,9 @@ namespace TeslaLogger
             }
         }
 
-        internal void ExitTeslaLogger(string v)
+        internal void ExitCarThread(string v)
         {
-            Log("Abort: " + v);
+            Log("ExitCarThread: " + v);
             run = false;
             thread.Abort();
             Allcars.Remove(this);
@@ -1404,6 +1406,8 @@ namespace TeslaLogger
         {
             Log("Restart Car " + CarInDB);
 
+            webhelper.StopStreaming();
+
             new Thread(() =>
             {
                 for (int x = 0; x < waitSeconds; x++)
@@ -1417,12 +1421,12 @@ namespace TeslaLogger
                 if (dr != null)
                 {
                     Logfile.Log("Start Car " + CarInDB);
-                    Program.StartCarThread(dr);
+                    Program.StartCarThread(dr, this.GetCurrentState());
                 }
 
             }).Start();
 
-            ExitTeslaLogger(reason);
+            ExitCarThread(reason);
 
             ThreadJoin();
         }

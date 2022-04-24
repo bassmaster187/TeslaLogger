@@ -141,6 +141,7 @@ namespace TeslaLogger
             {
                 if (queue.TryDequeue(out Request request))
                 {
+                    Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
                     int width = request.Width > 0 ? request.Width : 200;
                     int height = request.Height > 0 ? request.Height : 150;
                     if (request is TripRequest)
@@ -242,8 +243,8 @@ ORDER BY
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
                     da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);
                     da.SelectCommand.Parameters.AddWithValue("@endID", request.EndPosID);
-                    Tools.DebugLog(da.SelectCommand);
-                    da.Fill(dt);
+                    //Tools.DebugLog(da.SelectCommand);
+                    SQLTracer.TraceDA(dt, da);
                 }
             }
             else
