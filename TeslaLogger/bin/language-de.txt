@@ -39,7 +39,7 @@ Housekeeping=Allgemein
 Sleep Attempt=Ruhezustandversuche
 
 #password.php
-Please enter your Tesla account credentials=
+Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Email=E-Mail
 Car=Auto
 Free Supercharging=Kostenloses Supercharging
