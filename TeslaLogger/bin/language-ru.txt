@@ -12,7 +12,7 @@ Start mi=мили в начале
 End mi=мили в конце
 kmDiff=разница [км]
 Max Range=макс. запас хода
-Ø Verbrauch=Ø потребление
+Ø Consumption=Ø потребление
 Tage=Дни
 AVG Max Range=Средний макс. запас хода
 AVG Consumption=Среднее потребление
@@ -39,8 +39,8 @@ Max Days Between Updates=Максимальное количество дней 
 
 #Ladehistorie.json
 Ladehistorie=История зарядок
-Startdatum=дата начала
-Enddatum=дата концa
+StartDate=дата начала
+EndDate=дата концa
 geladen kWh=кВтч заряженo
 km Stand=Одометр
 Adresse=адрес
@@ -81,7 +81,6 @@ Nur verfügbar mit ScanMyTesla=Доступно только со ScanMyTesla
 Asleep=Спит
 Waking=Просыпается
 Driving=Едет
-Charging=Заряжается
 
 #Laden.json
 Laden=зарядкa
@@ -145,7 +144,7 @@ TR km Verlust=Потеряный типичный запаса хода [км]
 TR km Verlust pro Stunde=Потеря типичного запаса хода в час [км]
 
 #Verbrauch.json
-Verbrauch=Расход
+Consumption=Расход
 Höhe [m]=высота [м]
 Geschwindigkeit [mph]=скорость [миль/ч]
 Geschwindigkeit [km/h]=скорость [kм/ч]
@@ -156,7 +155,7 @@ Innentemperatur [°C]=Внутренная температура [°C]
 Innentemperatur [°F]=Внутренная температура [°F]
 
 Laden fertig=Зарядка закончена
-Schlafen=сон
+Sleeping=сон
 Online=онлайн
 
 #Verbrauchsstatstik.json
@@ -209,12 +208,14 @@ Wakeup Teslalogger=Запустить Teslalogger
 Dashboard=Приборная доска
 
 #password.php
-Teslalogger Tesla Zugangsdaten= Teslaлоггер данные для доступа в Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
+Teslalogger Tesla Credentials= Teslaлоггер данные для доступа в Tesla
+Please enter your Tesla account credentials=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
 Email=Электронная почта
-Passwort=пароль
-Passwort wiederholen=повторитe пароль
+Password=пароль
+Repeat Password=повторитe пароль
 Speichern=сохранить
+Delete=удалять
+Please choose your vehicle=Пожалуйста, выберите свой автомобиль
 
 #settings.php
 Credentials=дaнные для авторизaции
@@ -241,7 +242,7 @@ Tasker URL=URL-адрес Tasker
 Received Tasker Token=Последние использование Таскера
 
 #geoadd.php
-Bezeichnung=назвaние
+Description=назвaние
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Все потребление - ScanMyTesla
@@ -249,7 +250,7 @@ Zelltemperatur [°C]=Температура ячейка батареи [°C]
 Zelltemperatur [°F]=Температура ячейка батареи [°F]
 
 #Trip Monatsstatistik.json
-Datum=Дата
+Date=Дата
 Fahrzeit [h]=Время в пути [ч]
 Strecke [km]=Дистaнция [км]
 Strecke [mi]=Дистaнция [миля]
@@ -269,7 +270,6 @@ Nein=нет
 
 Car=Автомобиль
 
-Einschlafen=Засыпает
 Automatic updates=Автоматические обновления
 
 TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими водителями Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
@@ -279,15 +279,133 @@ TextSuspendTeslalogger=Teslalogger остановлен! Данные не со�
 Resume Teslalogger=Включить Teslalogger
 Range=Пробег
 
-Ladekosten=Стоимость зарядок
-Ladesäule=Заряднaя станция
-Währung=валюта
-Kosten pro kWh=Стоимость за кВтч
-Kosten pro Ladung=Одноразовая стоимость
-Kosten pro Minute=Стоимость за минуту зарядки
-Kosten Blockiergebühr=Стоимость за минтуту блокировки зарядной станции
-Summe=Всего
-kWh laut Zähler / Rechnung=кВтч согласно счетчику / счет
-Wirkungsgrad=Эффективность
+Charging Costs=Стоимость зарядок
+Charger=Заряднaя станция
+Currency=валюта
+Cost per kWh=Стоимость за кВтч
+Cost per charge=Одноразовая стоимость
+Cost per minute=Стоимость за минуту зарядки
+Idle cost per minute=Стоимость за минтуту блокировки зарядной станции
+Total=Всего
+kWh according to meter/invoice=кВтч согласно счетчику / счет
+Efficiency=Эффективность
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.
+
+#restore.php
+TextRestore=Убедитесь, что вы сделали резервную копию вашего Teslalogger перед восстановлением каких-либо баз данных. Переместите папку с резервной копией из \\RASPBERRY\teslalogger\backup на жесткий диск!<br><br>Процесс восстановления может занять до 10 минут!<br><br>Ни в коем случае не прерывайте процесс восстановления! Не перезагружайте страницу! Не закрывайте эту страницу!
+
+#journeys.php
+TextJourneys=You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires.
+Journey=Journey
+New Journey=New Journey
+Journey Name=Journey Name
+End=End
+Please Wait=Please Wait!
+Please Select Start First=Please Select Start First!
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner Link
+TextABRP=You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials.
+ABRP1=Create an Abetterrouteplanner account
+ABRP2=Go to Settings
+ABRP3=Choose your car
+ABRP4=Save your car to your account
+ABRP5=Give your car a name
+ABRP6=Click on "Link Generic" to get a ABRP token
+ABRP7=Copy the token and click "Done"
+ABRP8=Insert the token in Teslalogger
+ABRP9=Check if the Teslalogger is connected
+ABRPYT=Check YouTube tutorial for live demo
+ABRPToken=Abetterrouteplanner Token
+
+
+#Missing translation elements
+Setup=Setup
+Enabled=Enabled
+Save=Save
+Set password for Teslalogger's admin panel=Set password for Teslalogger's admin panel
+Name=Name
+Charged=Charged
+Loading=Loading
+Name & Position=Name & Position
+Radius=Radius
+Special Flags=Special Flags
+Type=Type
+Home=Home
+Work=Work
+Copy Charging Costs=Copy Charging Costs
+Don't Combine Charging Sessions=Don't Combine Charging Sessions
+Set Charge Limit=Set Charge Limit
+Set Charge Limit After Charging=Set Charge Limit After Charging
+Open Charge Port=Open Charge Port
+D/R → P=D/R → P
+D → P=D → P
+R → P=R → P
+High Frequency Logging=High Frequency Logging
+Special Count=Special Count
+Special Features=Special Features
+Enable Sentry Mode=Enable Sentry Mode
+Disable Sentry Mode=Disable Sentry Mode
+Turn HVAC off=Turn HVAC off
+No sleep=No sleep
+kW=kW
+OK=OK
+Info=Info
+No=No
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=Software Update
+Journeys=Journeys
+ID=ID
+Start Adress=Start Adress
+Target Adress=Target Adress
+Consumption kWh=Consumption kWh
+charged kWh=charged kWh
+Drive Time [h]=Drive Time [h]
+Charge Time [h]=Charge Time [h]
+Download Logfile=Download Logfile
+Lines=Lines
+Housekeeping=Housekeeping
+Sleep Attempt=Sleep Attempt
+My Degradation=My Degradation
+My Charging AVG=My Charging AVG
+Fleet Degradation AVG=Fleet Degradation AVG
+Fleet Charging AVG=Fleet Charging AVG
+Fleet Charging MAX (Firmware)=Fleet Charging MAX (Firmware)
+Fleet Charging Locations=Fleet Charging Locations
+Fleet Fast Charging Map=Fleet Fast Charging Map
+Supercharger Usage=Supercharger Usage
+Firmware Tracker=Firmware Tracker
+Changelog=Changelog
+Abetterrouteplanner=Abetterrouteplanner
+Please enter your dexters-web.de account credentials=Please enter your dexters-web.de account credentials
+Dexter Login=Dexter Login
+Dexter Password=Dexter Password
+Access Token=Access Token
+Refresh Token=Refresh Token
+Free Supercharging=Free Supercharging
+Reconnect=Reconnect
+NEW CAR=NEW CAR
+Credentials Info=Credentials Info
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Adminpanel
+Temperature=Temperature
+Share data anonymously=Share data anonymously
+Sleep=Sleep
+to=to
+Show calc. 100% range=Show calc. 100% range
+Position by StreamingAPI=Position by StreamingAPI
+Wallbox Test=Wallbox Test
+Host=Host
+Param=Param
+Test=Test
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
