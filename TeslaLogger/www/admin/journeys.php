@@ -234,9 +234,9 @@ menu("Journeys");
     <tr>
         <th><?php t("ID"); ?></th>
         <th><?php t("Journey"); ?></th>
-        <th><?php t("Start Adress"); ?></th>
+        <th><?php t("Start Address"); ?></th>
         <th><?php t("Start"); ?></th>
-        <th><?php t("Target Adress"); ?></th>
+        <th><?php t("Target Address"); ?></th>
         <th><?php t("End"); ?></th>
         <th><?php t("Ø Consumption kWh"); ?></th>
         <th><?php t("Consumed kWh"); ?></th>
