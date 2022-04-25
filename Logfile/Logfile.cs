@@ -278,6 +278,7 @@ namespace TeslaLogger
 
         internal static void ExternalLog(string text)
         {
+            /*
             try
             {
                 if (!text.Contains("SqlException"))
@@ -307,6 +308,7 @@ namespace TeslaLogger
             {
                 Logfile.Log("Exception in ExternalLog " + ex.Message);
             }
+            */
         }
     }
 }

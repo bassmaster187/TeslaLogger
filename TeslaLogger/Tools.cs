@@ -1802,6 +1802,8 @@ WHERE
 
         internal static void ExternalLog(string text)
         {
+            /*
+
             try
             {
                 text = "V:" + Assembly.GetExecutingAssembly().GetName().Version + " - " + text;
@@ -1822,6 +1824,7 @@ WHERE
             {
                 Logfile.Log(ex.ToString());
             }
+            */
         }
 
         public static string ConvertBase64toString(string base64)
