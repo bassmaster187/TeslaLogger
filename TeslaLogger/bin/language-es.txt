@@ -81,8 +81,8 @@ Eur Verlust=Euros Perdidos
 Trip=Viaje
 Start=Inicio
 End=Fin
-Start Adress=Dirección de Inicio
-Target Adress=Dirección de Destino
+Start Address=Dirección de Inicio
+Target Address=Dirección de Destino
 Ø Consumption kWh==Consumo medio (kWh)
 Consumed kWh=kWh Consumidos
 Dauer Min=Duración (min)

@@ -210,8 +210,8 @@ TextRestore=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor 
 #journeys.php
 TextJourneys=Sie können Reisen verwenden, um eine lange Fahrt/Zeit zu kombinieren und alle Werte zusammenzufassen. Dies ist sehr nützlich, um die komplette Ladezeit einer langen Fahrt zu verfolgen oder den Verbrauch von Sommer- oder Winterreifen zu vergleichen.
 Journey=Reise
-Start Adress=Start-Adresse
-Target Adress=Ziel-Adresse
+Start Address=Start-Adresse
+Target Address=Ziel-Adresse
 Consumed kWh=Verbrauchte kWh
 charged kWh=Geladene kWh
 Drive Time [h]=Fahrtzeit [h]

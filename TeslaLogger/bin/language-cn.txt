@@ -81,8 +81,8 @@ Eur Verlust=流失电量金额
 Trip=行程
 Start=起始时间
 End=终止时间
-Start Adress=起始地址
-Target Adress=目的地地址
+Start Address=起始地址
+Target Address=目的地地址
 Ø Consumption kWh==平均消耗 kWh
 Consumption kWh=已消耗 kWh
 Dauer Min=时长分钟
