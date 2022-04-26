@@ -25,7 +25,7 @@ Make sure your database connection string to teslamate and teslalogger is valid 
 <applicationSettings>
     <Teslamate_Import.Settings1>
       <setting name="TeslaloggerDB" serializeAs="String">
-        <value>Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;</value>
+        <value>Server=127.0.0.1;Port=3306;Database=teslalogger;Uid=root;Password=teslalogger;</value>
       </setting>
       <setting name="TeslamateDB" serializeAs="String">
         <value>Host=localhost;Username=teslamate;Password=secret;Database=teslamate</value>
