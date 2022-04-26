@@ -87,9 +87,10 @@ namespace TeslaLogger
 #pragma warning disable CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
 #pragma warning restore CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
+            httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public WebHelper(Car car)
+        internal WebHelper(Car car)
         {
             this.car = car;
 
@@ -1175,7 +1176,7 @@ namespace TeslaLogger
                     }
                 }
             }
-            catch (ThreadAbortException ex)
+            catch (ThreadAbortException)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
             }
@@ -1757,7 +1758,7 @@ namespace TeslaLogger
                     Log("IsOnline response = NULL: " + resultContent);
 
                     car.CreateExeptionlessLog("WebHelper", "IsOnline:Not Found", Exceptionless.Logging.LogLevel.Warn).AddObject(resultContent, "resultContent").Submit();
-                    car.Restart("IsOnline: not found", 60);
+                    car.Restart("IsOnline: not found", 0);
                     
                     return "NULL";
                 }
@@ -2660,12 +2661,12 @@ namespace TeslaLogger
                     ArraySegment<byte> bufferPing = new ArraySegment<byte>(Encoding.ASCII.GetBytes("PING"));
                     ArraySegment<byte> bufferMSG = new ArraySegment<byte>(Encoding.ASCII.GetBytes(connectmsg));
 
-                    if (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                    if (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Open)
                     {
                         ws.SendAsync(bufferMSG, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait();
                     }
 
-                    while (ws.State == System.Net.WebSockets.WebSocketState.Open)
+                    while (!stopStreaming && ws.State == System.Net.WebSockets.WebSocketState.Open)
                     {
                         Thread.Sleep(100);
                         var cts = new CancellationTokenSource(10000);
@@ -2936,7 +2937,7 @@ namespace TeslaLogger
             
         }*/
 
-        public static async Task<string> ReverseGecocodingAsync(Car c, double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
+        internal static async Task<string> ReverseGecocodingAsync(Car c, double latitude, double longitude, bool forceGeocoding = false, bool insertGeocodecache = true)
         {
             string url = "";
             string resultContent = "";
@@ -3723,7 +3724,7 @@ namespace TeslaLogger
                     if (HttpNotFoundCounter > 5)
                     {
                         car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
-                        car.Restart("404 Error", 10);
+                        car.Restart("404 Error", 0);
                     }
                 }
                 else
@@ -3756,7 +3757,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    car.ExitTeslaLogger("Login retrys exeeded!");
+                    car.ExitCarThread("Login retrys exeeded!");
                 }
             }
             return false;
@@ -3991,7 +3992,7 @@ namespace TeslaLogger
         public void StopStreaming()
         {
             Log("Request StopStreaming");
-            //stopStreaming = true;
+            stopStreaming = true;
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
@@ -4160,8 +4161,8 @@ namespace TeslaLogger
             }
             catch (WebException wex)
             {
-                return "Error during online version check: " + wex.Message;
                 wex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
+                return "Error during online version check: " + wex.Message;
             }
             catch (Exception ex)
             {
@@ -4215,6 +4216,7 @@ namespace TeslaLogger
                         c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         c.DefaultRequestHeaders.Connection.Add("keep-alive");
                         c.DefaultRequestHeaders.Add("Authorization", "APIKEY 54ac054f-0412-4747-b788-bcc8c6b60f27");
+                        c.DefaultRequestHeaders.ConnectionClose = true;
                         httpClientABRP = c;
 
                         Logfile.Log("ABRP initialized!");

@@ -86,7 +86,7 @@ namespace TeslaLogger
             return _DBConnectionstring;
         }
 
-        public DBHelper(Car car)
+        internal DBHelper(Car car)
         {
             this.car = car;
         }
@@ -573,6 +573,137 @@ ORDER BY
             }
         }
 
+        internal void FixDuplicateDriveStates()
+        {
+            // find all drivestate with same endpos
+            try
+            {
+                using (DataTable driveStates = new DataTable())
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    drivestate
+WHERE
+    endpos IN(
+    SELECT
+        endpos
+    FROM
+        drivestate
+    WHERE
+        CarID = @CarID
+    GROUP BY
+        endpos
+    HAVING
+        COUNT(*) > 1
+)
+ORDER BY
+    id   
+", DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        SQLTracer.TraceDA(driveStates, da);
+                        Tools.DebugLog(driveStates);
+                        // analyze data table
+                        // foreach unique endpos do
+                        // - search lowest startpos with all computed values outside_temp_avg, speed_max, power_max, ... not null
+                        using (DataTable uniqueEndPosIDs = driveStates.DefaultView.ToTable(true, "EndPos"))
+                        {
+                            foreach (DataRow dr in uniqueEndPosIDs.Rows)
+                            {
+                                if (int.TryParse(dr["EndPos"].ToString(), out int endPosID)) {
+                                    int goodDriveID = int.MinValue;
+                                    List<int> badDriveIDs = new List<int>();
+                                    // find the good drive state entry
+                                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    drivestate
+WHERE
+    CarID = @CarID
+    AND EndPos = @EndPos
+    AND outside_temp_avg IS NOT NULL
+    AND speed_max IS NOT NULL
+    AND power_max IS NOT NULL
+    AND power_min IS NOT NULL
+    AND power_avg IS NOT NULL
+ORDER BY
+    MAX(EndPos - StartPos)
+LIMIT 1
+", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                            cmd.Parameters.AddWithValue("@EndPos", endPosID);
+                                            MySqlDataReader dr2 = SQLTracer.TraceDR(cmd);
+                                            if (dr2.Read())
+                                            {
+                                                _ = int.TryParse(dr2[0].ToString(), out goodDriveID);
+                                            }
+                                        }
+                                    }
+                                    // find the bad drive state entries
+                                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    drivestate
+WHERE
+    CarID = @CarID
+    AND EndPos = @EndPos
+    AND outside_temp_avg IS NULL
+    AND speed_max IS NULL
+    AND power_max IS NULL
+    AND power_min IS NULL
+    AND power_avg IS NULL
+", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                                            cmd.Parameters.AddWithValue("@EndPos", endPosID);
+                                            MySqlDataReader dr2 = SQLTracer.TraceDR(cmd);
+                                            while (dr2.Read())
+                                            {
+                                                if(int.TryParse(dr2[0].ToString(), out int badDriveID))
+                                                {
+                                                    badDriveIDs.Add(badDriveID);
+                                                }
+                                            }
+                                        }
+                                        Tools.DebugLog($"FixDuplicateDriveStates EndPos:{endPosID} goodDriveID:{goodDriveID} badDriveIDs:<{string.Join(", ", badDriveIDs.ToArray())}>");
+                                        if (goodDriveID != int.MinValue && badDriveIDs.Count > 0)
+                                        {
+                                            // delete bad drive IDs
+                                            // TODO
+                                        }
+                                        else if (goodDriveID == int.MinValue)
+                                        {
+                                            Tools.DebugLog($"FixDuplicateDriveStates no good drive ID found for EndPos:{endPosID}");
+                                        }
+                                        else if (badDriveIDs.Count == 0)
+                                        {
+                                            Tools.DebugLog($"FixDuplicateDriveStates no bad drive IDs found for EndPos:{endPosID}");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
         private bool RecalculateChargeEnergyAdded(int ChargingStateID)
         {
             List<Tuple<int, int>> segments = new List<Tuple<int, int>>();
@@ -583,7 +714,7 @@ ORDER BY
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
+                    SELECT
     id,
     charge_energy_added
 FROM
@@ -628,9 +759,12 @@ AND id <=(
                             if (
                                 // charge_energy_added is lower than in the row before
                                 (double)dr[1] < lastCEA
-                                &&
+                                /*
+                                 * create segments for every drop
+                                 * &&
                                 // and the current row is zero or near zero
-                                (double)dr[1] < 0.5)
+                                (double)dr[1] < 0.5*/
+                                )
                             {
                                 segments.Add(new Tuple<int, int>(index, ((int)dr[0]) - 1));
                                 index = ((int)dr[0]);
@@ -675,7 +809,8 @@ AND id <=(
                     }
                     else
                     {
-                        sum += segmentCEA;
+                        double startCEA = GetChargeEnergyAddedFromCharging(segment.Item1);
+                        sum += segmentCEA - startCEA > 0 ? segmentCEA - startCEA : 0;
                     }
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
@@ -1103,7 +1238,7 @@ HAVING
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
                         car.ExternalLog("UpdateTeslaToken");
-                        car.Restart("Access Token updated", 30);
+                        car.Restart("Access Token updated", 0);
                     }
                 }
             }
@@ -2809,7 +2944,7 @@ WHERE
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
-        public static void UpdateTripElevation(int startPosId, int endPosId, Car car, string comment = "")
+        internal static void UpdateTripElevation(int startPosId, int endPosId, Car car, string comment = "")
         {
             if (Geofence.GetInstance().RacingMode)
             {
@@ -3177,7 +3312,7 @@ WHERE
             }
         }
 
-        public static void UpdateAddress(Car c, int posid)
+        internal static void UpdateAddress(Car c, int posid)
         {
             try
             {

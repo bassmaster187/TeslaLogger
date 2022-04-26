@@ -79,7 +79,7 @@ namespace TeslaLogger
         private DateTime lastJSONwrite = DateTime.MinValue;
         Car car;
 
-        public CurrentJSON(Car car)
+        internal CurrentJSON(Car car)
         {
             this.car = car;
         }

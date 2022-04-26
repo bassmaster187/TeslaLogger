@@ -23,7 +23,7 @@ namespace TeslaLogger
 
         DateTime lastScanMyTeslaActive = DateTime.MinValue;
 
-        public ScanMyTesla(Car c)
+        internal ScanMyTesla(Car c)
         {
             if (c != null)
             {

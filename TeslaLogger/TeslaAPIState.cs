@@ -54,7 +54,7 @@ namespace TeslaLogger
         }
         private string DumpJSONSessionDir = string.Empty;
 
-        public TeslaAPIState(Car car)
+        internal TeslaAPIState(Car car)
         {
             this.car = car;
         }
@@ -529,7 +529,7 @@ namespace TeslaLogger
                             {
                                 if (r4.TryGetValue(key, out value))
                                 {
-                                    string temp = $"INFO: ParseVehicles: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                    string temp = $"INFO: ParseVehicles: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                     ExceptionlessLogUnknowKey(temp);
                                 }
                                 else
@@ -701,7 +701,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseChargeState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseChargeState: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -797,7 +797,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseDriveState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseDriveState: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -929,7 +929,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseVehicleConfig: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseVehicleConfig: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -1110,7 +1110,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseVehicleState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseVehicleState: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -1179,7 +1179,7 @@ namespace TeslaLogger
                                 {
                                     if (dictionary.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseSoftwareUpdate: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
@@ -1309,7 +1309,7 @@ namespace TeslaLogger
                                 {
                                     if (r2.TryGetValue(key, out value))
                                     {
-                                        string temp = $"INFO: ParseClimateState: unknown key {key} value <{value}> -" + value?.GetType().ToString();
+                                        string temp = $"INFO: ParseClimateState: unknown key {key} value <{value}> - " + value?.GetType().ToString();
                                         ExceptionlessLogUnknowKey(temp);
                                     }
                                     else
