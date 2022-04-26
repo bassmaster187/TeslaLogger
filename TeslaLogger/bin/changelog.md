@@ -1,4 +1,4 @@
-# Version 1.52.5
+# Version 1.52.6
 - Bugfixes
 
 # Version 1.52.4
