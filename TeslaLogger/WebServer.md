@@ -1,7 +1,9 @@
 # TeslaLogger internal web server
 
 Ports
+
 Docker: 5010
+
 Raspberry: 5000
 
 ## endpoints for admin UI
@@ -16,7 +18,11 @@ TODO
 
 ### /getallcars
 
-TODO
+request: GET /getallcars
+
+response: JSON
+
+Gives main car data, like id, display name, model name, tastker token, VIN...
 
 ### /setpassword
 
@@ -99,6 +105,9 @@ response: JSON (forwarded from Tesla API)
 
 Allowed commands:
 * set_charge_limit
+* set_charging_amps
+
+Example: /command/1/set_charging_amps?16
 
 ## debugging TeslaLogger
 
