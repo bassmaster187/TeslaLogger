@@ -34,7 +34,7 @@ namespace MQTTClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1883")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string MQTTPort {
             get {
                 return ((string)(this["MQTTPort"]));

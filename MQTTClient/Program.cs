@@ -21,23 +21,30 @@ namespace MQTTClient
             MqttClient client = null;
             try
             {
-                Logfile.Log("MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Logfile.Log("MQTT: MqttClient Version: " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 
                 if (Properties.Settings.Default.MQTTHost.Length == 0)
                 {
-                    Logfile.Log("No MQTTHost settings -> MQTT disabled!");
+                    Logfile.Log("MQTT: No MQTTHost settings -> MQTT disabled!");
                     return;
                 }
 
-                if (Properties.Settings.Default.MQTTPort > 0)
+                if (Properties.Settings.Default.MQTTPort.Length > 0)
                 {
-                    MQTTPort = Properties.Settings.Default.MQTTPort;
-                    Logfile.Log("Using user specific MQTT port: " + Properties.Settings.Default.MQTTPort);
+                    try
+                    {
+                        int.TryParse(Properties.Settings.Default.MQTTPort, out MQTTPort);
+                        Logfile.Log("MQTT: Using user specific port: " + Properties.Settings.Default.MQTTPort);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.Message);
+                    }
                 }
 
                 if (Properties.Settings.Default.Topic.Length == 0)
                 {
-                    Logfile.Log("No Topic settings -> MQTT disabled!");
+                    Logfile.Log("MQTT: No Topic settings -> MQTT disabled!");
                     return;
                 }
 
@@ -45,15 +52,22 @@ namespace MQTTClient
 
                 if (Properties.Settings.Default.Name.Length > 0 && Properties.Settings.Default.Password.Length > 0)
                 {
-                    Logfile.Log("Connecting with credentials: " + Properties.Settings.Default.MQTTHost);
+                    Logfile.Log("MQTT: Connecting with credentials: " + Properties.Settings.Default.MQTTHost + ":" + MQTTPort);
                     client.Connect(clientid, Properties.Settings.Default.Name, Properties.Settings.Default.Password);
                 }
                 else
                 {
-                    Logfile.Log("Connecting without credentials: " + Properties.Settings.Default.MQTTHost);
+                    Logfile.Log("MQTT: Connecting without credentials: " + Properties.Settings.Default.MQTTHost + ":" + MQTTPort);
                     client.Connect(clientid);
                 }
-                Logfile.Log("Connected!");
+                if (client.IsConnected)
+                {
+                    Logfile.Log("MQTT: Connected!");
+                }
+                else
+                {
+                    Logfile.Log("MQTT: Connection failed!");
+                }
             }
             catch (Exception ex)
             {
@@ -72,7 +86,7 @@ namespace MQTTClient
 
                     if (!client.IsConnected)
                     {
-                        Logfile.Log("Reconnect");
+                        Logfile.Log("MQTT: Reconnect");
                         client.Connect(clientid);
                     }
 
@@ -135,8 +149,7 @@ namespace MQTTClient
 
             try
             {
-                dynamic j = JsonConvert.DeserializeObject(json);
-                object[] cars = j;
+                dynamic cars = JsonConvert.DeserializeObject(json);
                 foreach (dynamic car in cars)
                 {
                     int id = car["id"];
