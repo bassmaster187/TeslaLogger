@@ -268,7 +268,7 @@ if (isset($id))
 		if ($("#hfl_minutes").val().length > 0)
 			f += $("#hfl_minutes").val() + "m";
 		else if ($("#hfl_count").val().length > 0)
-			f += $("#hfl_count").val() + "c";
+			f += $("#hfl_count").val().replace("c","") + "c";
 		else
 			f += "100c";
 	}
