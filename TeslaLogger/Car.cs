@@ -219,7 +219,7 @@ namespace TeslaLogger
                     {
                         thread = new Thread(Loop)
                         {
-                            Name = "Car" + CarInDB
+                            Name = "Car_" + CarInDB
                         };
                         thread.Start();
                     }
@@ -1407,8 +1407,9 @@ namespace TeslaLogger
             Log("Restart Car " + CarInDB);
 
             webhelper.StopStreaming();
+            webhelper.scanMyTesla?.StopThread();
 
-            new Thread(() =>
+            var t = new Thread(() =>
             {
                 for (int x = 0; x < waitSeconds; x++)
                 {
@@ -1417,6 +1418,8 @@ namespace TeslaLogger
                     Thread.Sleep(1000);
                 }
 
+                webhelper.scanMyTesla.KillThread();
+
                 var dr = DBHelper.GetCar(CarInDB);
                 if (dr != null)
                 {
@@ -1424,7 +1427,9 @@ namespace TeslaLogger
                     Program.StartCarThread(dr, this.GetCurrentState());
                 }
 
-            }).Start();
+            });
+            t.Name = "RestartThread_" + CarInDB;
+            t.Start();
 
             ExitCarThread(reason);
 

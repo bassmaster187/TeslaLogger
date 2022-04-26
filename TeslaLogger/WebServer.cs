@@ -388,7 +388,7 @@ namespace TeslaLogger
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
                 try
                 {
-                    Car.GetCarByID(CarID)?.Restart("Webserver Restart",0);
+                    Car.GetCarByID(CarID)?.Restart("Webserver Restart",5);
                     WriteString(response, "OK");
                 }
                 catch (Exception ex)

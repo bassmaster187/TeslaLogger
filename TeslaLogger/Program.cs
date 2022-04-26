@@ -166,6 +166,7 @@ namespace TeslaLogger
                         {
                             Tools.StartOVMS();
                         });
+                        ovmsThread.Name = "OVMSStartThread";
                         ovmsThread.Start();                        
                     }
                         
@@ -531,6 +532,7 @@ namespace TeslaLogger
             {
                 Priority = ThreadPriority.BelowNormal
             };
+            DBUpdater.Name = "DBUpdaterThread";
             DBUpdater.Start();
         }
     }

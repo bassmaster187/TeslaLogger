@@ -31,6 +31,7 @@ namespace TeslaLogger
                 car = c;
 
                 thread = new Thread(new ThreadStart(Start));
+                thread.Name = "ScanMyTesla_" + car.CarInDB;
                 thread.Start();
             }
         }
@@ -103,182 +104,180 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                using (HttpClient client = new HttpClient())
+                using (FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
                 {
-                    using (FormUrlEncodedContent content = new FormUrlEncodedContent(new[]
+                    new KeyValuePair<string, string>("t", token)
+                }))
+                {
+
+                    DateTime start = DateTime.UtcNow;
+                    HttpResponseMessage result = await WebHelper.httpclient_teslalogger_de.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
                     {
-                        new KeyValuePair<string, string>("t", token)
-                    }))
+                        car.CreateExeptionlessLog("ScanMyTesla", "GetDataFromWebservice Error Service Unavailable (503)", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        car.Log("SMT: Error Service Unavailable (503)");
+                        System.Threading.Thread.Sleep(25000);
+                        return "ERROR: 503";
+                    }
+
+                    resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
+
+                    DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
+
+                    if (resultContent == "not found")
                     {
+                        return "not found";
+                    }
 
-                        DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = await client.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+                    if (resultContent.Contains("Resource Limit Is Reached"))
+                    {
+                        car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
 
-                        if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                        car.Log("SMT: Resource Limit Is Reached");
+                        Thread.Sleep(25000);
+                        return "Resource Limit Is Reached";
+                    }
+
+                    var diff = DateTime.UtcNow - lastScanMyTeslaActive;
+                    if (diff.TotalMinutes > 60)
+                    {
+                        car.CreateExeptionlessFeature("ScanMyTeslaActive").Submit();
+                        lastScanMyTeslaActive = DateTime.UtcNow;
+                    }
+
+                    string temp = resultContent;
+                    int i = 0;
+                    i = temp.IndexOf("\r\n", StringComparison.Ordinal);
+                    string id = temp.Substring(0, i);
+
+                    temp = temp.Substring(i + 2);
+
+                    i = temp.IndexOf("\r\n", StringComparison.Ordinal);
+                    string date = temp.Substring(0, i);
+                    temp = temp.Substring(i + 2);
+
+                    dynamic j = JsonConvert.DeserializeObject(temp);
+                    DateTime d = DateTime.Parse(j["d"].ToString());
+                    car.CurrentJSON.lastScanMyTeslaReceived = d;
+                    car.CurrentJSON.CreateCurrentJSON();
+
+                    Dictionary<string, object> kv = j["dict"].ToObject<Dictionary<string, object>>();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO `can` (`datum`, `id`, `val`, CarId) VALUES ");
+                    bool first = true;
+
+                    string sqlDate = d.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
+
+                    foreach (KeyValuePair<string, object> line in kv)
+                    {
+                        if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
                         {
-                            car.CreateExeptionlessLog("ScanMyTesla", "GetDataFromWebservice Error Service Unavailable (503)", Exceptionless.Logging.LogLevel.Warn).Submit();
-                            car.Log("SMT: Error Service Unavailable (503)");
-                            System.Threading.Thread.Sleep(25000);
-                            return "ERROR: 503";
+                            continue;
                         }
 
-                        resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(true);
-
-                        DBHelper.AddMothershipDataToDB("teslalogger.de/get_scanmytesla.php", start, (int)result.StatusCode);
-
-                        if (resultContent == "not found")
+                        switch (line.Key)
                         {
-                            return "not found";
-                        }
-
-                        if (resultContent.Contains("Resource Limit Is Reached"))
-                        {
-                            car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
-
-                            car.Log("SMT: Resource Limit Is Reached");
-                            Thread.Sleep(25000);
-                            return "Resource Limit Is Reached";
-                        }
-
-                        var diff = DateTime.UtcNow - lastScanMyTeslaActive;
-                        if (diff.TotalMinutes > 60)
-                        {
-                            car.CreateExeptionlessFeature("ScanMyTeslaActive").Submit();
-                            lastScanMyTeslaActive = DateTime.UtcNow;
-                        }
-
-                        string temp = resultContent;
-                        int i = 0;
-                        i = temp.IndexOf("\r\n", StringComparison.Ordinal);
-                        string id = temp.Substring(0, i);
-
-                        temp = temp.Substring(i + 2);
-
-                        i = temp.IndexOf("\r\n", StringComparison.Ordinal);
-                        string date = temp.Substring(0, i);
-                        temp = temp.Substring(i + 2);
-
-                        dynamic j = JsonConvert.DeserializeObject(temp);
-                        DateTime d = DateTime.Parse(j["d"].ToString());
-                        car.CurrentJSON.lastScanMyTeslaReceived = d;
-                        car.CurrentJSON.CreateCurrentJSON();
-
-                        Dictionary<string, object> kv = j["dict"].ToObject<Dictionary<string, object>>();
-
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append("INSERT INTO `can` (`datum`, `id`, `val`, CarId) VALUES ");
-                        bool first = true;
-
-                        string sqlDate = d.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
-
-                        foreach (KeyValuePair<string, object> line in kv)
-                        {
-                            if (line.Value.ToString().Contains("Infinity") || line.Value.ToString().Contains("NaN"))
-                            {
-                                continue;
-                            }
-
-                            switch (line.Key)
-                            {
-                                case "2":
-                                    car.CurrentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "5":
-                                    car.CurrentJSON.SMTCellMinV = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "6":
-                                    car.CurrentJSON.SMTCellAvgV = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "7":
-                                    car.CurrentJSON.SMTCellMaxV = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "9":
-                                    car.CurrentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "11":
-                                    car.CurrentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "27":
-                                    car.CurrentJSON.SMTCellImbalance = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "28":
-                                    car.CurrentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "29":
-                                    car.CurrentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "442":
-                                    if (Convert.ToDouble(line.Value, Tools.ciEnUS) == 287.6) // SNA - Signal not Available
-                                    {
-                                        car.CurrentJSON.SMTSpeed = 0;
-                                        car.Log("SMT Speed: Signal not Available");
-                                    }
-                                    else
-                                    {
-                                        car.CurrentJSON.SMTSpeed = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    }
-                                    break;
-                                case "43":
-                                    car.CurrentJSON.SMTBatteryPower = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                case "71":
-                                    car.CurrentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value, Tools.ciEnUS);
-                                    break;
-                                default:
-                                    break;
-                            }
-
-
-                            if (first)
-                            {
-                                first = false;
-                            }
-                            else
-                            {
-                                sb.Append(",");
-                            }
-
-                            sb.Append("('");
-                            sb.Append(sqlDate);
-                            sb.Append("',");
-                            sb.Append(line.Key);
-                            sb.Append(",");
-                            sb.Append(Convert.ToDouble(line.Value, Tools.ciEnUS).ToString(Tools.ciEnUS));
-                            sb.Append(",");
-                            sb.Append(car.CarInDB);
-                            sb.Append(")");
-                        }
-
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                        {
-                            con.Open();
-#pragma warning disable CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
-                            using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
-#pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
-                            {
-                                SQLTracer.TraceNQ(cmd);
-
-                                try
+                            case "2":
+                                car.CurrentJSON.SMTCellTempAvg = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "5":
+                                car.CurrentJSON.SMTCellMinV = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "6":
+                                car.CurrentJSON.SMTCellAvgV = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "7":
+                                car.CurrentJSON.SMTCellMaxV = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "9":
+                                car.CurrentJSON.SMTACChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "11":
+                                car.CurrentJSON.SMTDCChargeTotal = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "27":
+                                car.CurrentJSON.SMTCellImbalance = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "28":
+                                car.CurrentJSON.SMTBMSmaxCharge = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "29":
+                                car.CurrentJSON.SMTBMSmaxDischarge = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "442":
+                                if (Convert.ToDouble(line.Value, Tools.ciEnUS) == 287.6) // SNA - Signal not Available
                                 {
-                                    using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    car.CurrentJSON.SMTSpeed = 0;
+                                    car.Log("SMT Speed: Signal not Available");
+                                }
+                                else
+                                {
+                                    car.CurrentJSON.SMTSpeed = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                }
+                                break;
+                            case "43":
+                                car.CurrentJSON.SMTBatteryPower = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            case "71":
+                                car.CurrentJSON.SMTNominalFullPack = Convert.ToDouble(line.Value, Tools.ciEnUS);
+                                break;
+                            default:
+                                break;
+                        }
+
+
+                        if (first)
+                        {
+                            first = false;
+                        }
+                        else
+                        {
+                            sb.Append(",");
+                        }
+
+                        sb.Append("('");
+                        sb.Append(sqlDate);
+                        sb.Append("',");
+                        sb.Append(line.Key);
+                        sb.Append(",");
+                        sb.Append(Convert.ToDouble(line.Value, Tools.ciEnUS).ToString(Tools.ciEnUS));
+                        sb.Append(",");
+                        sb.Append(car.CarInDB);
+                        sb.Append(")");
+                    }
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+#pragma warning disable CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
+                        using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
+#pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
+                        {
+                            SQLTracer.TraceNQ(cmd);
+
+                            try
+                            {
+                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con2.Open();
+                                    using (MySqlCommand cmd2 = new MySqlCommand("update cars set lastscanmytesla=@lastscanmytesla where id=@id", con2))
                                     {
-                                        con2.Open();
-                                        using (MySqlCommand cmd2 = new MySqlCommand("update cars set lastscanmytesla=@lastscanmytesla where id=@id", con2))
-                                        {
-                                            cmd2.Parameters.AddWithValue("@id", car.CarInDB);
-                                            cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
-                                            SQLTracer.TraceNQ(cmd2);
-                                        }
+                                        cmd2.Parameters.AddWithValue("@id", car.CarInDB);
+                                        cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
+                                        SQLTracer.TraceNQ(cmd2);
                                     }
                                 }
-                                catch (Exception)
-                                { }
-
-                                return "insert ok [" + kv.Keys.Count + "] " + d.ToString(Tools.ciEnUS);
                             }
+                            catch (Exception)
+                            { }
+
+                            return "insert ok [" + kv.Keys.Count + "] " + d.ToString(Tools.ciEnUS);
                         }
                     }
                 }
+                
             }
             catch (TaskCanceledException)
             {
@@ -295,6 +294,24 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        public void StopThread()
+        {
+            run = false;
+        }
+
+        public void KillThread()
+        {
+            try
+            {
+                thread?.Abort();
+                thread = null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex.ToString());
+            }
         }
     }
 }
