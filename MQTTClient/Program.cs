@@ -36,6 +36,7 @@ namespace MQTTClient
                 if (Properties.Settings.Default.ClientID.Length > 0)
                 {
                     clientid = Properties.Settings.Default.ClientID;
+                    Logfile.Log("MQTT: using user specific ClientID" + clientid);
                     return;
                 }
                 
