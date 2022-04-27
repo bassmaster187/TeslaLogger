@@ -17,6 +17,7 @@ namespace MQTTClient
         {
             string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
             int MQTTPort = MqttSettings.MQTT_BROKER_DEFAULT_PORT;
+            bool subtopics = false;
 
             MqttClient client = null;
             try
@@ -47,6 +48,24 @@ namespace MQTTClient
                     Logfile.Log("MQTT: No Topic settings -> MQTT disabled!");
                     return;
                 }
+
+                if (Properties.Settings.Default.Subtopics.Length > 0)
+                {
+                    try
+                    {
+                        Boolean.TryParse(Properties.Settings.Default.Subtopics, out subtopics);
+                        
+                        if(subtopics)
+                        {
+                            Logfile.Log("MQTT: Subtopics enabled");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.Message);
+                    }
+                }
+
 
                 client = new MqttClient(Properties.Settings.Default.MQTTHost, MQTTPort, false, null, null, MqttSslProtocols.None);
 
@@ -82,7 +101,7 @@ namespace MQTTClient
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(1000);
 
                     if (!client.IsConnected)
                     {
@@ -108,6 +127,16 @@ namespace MQTTClient
 
                             client.Publish(topic, Encoding.UTF8.GetBytes(lastjson[car]),
                                 uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                            
+                            if(subtopics)
+                            { 
+                                var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
+                                foreach(var keyvalue in topics)
+                                {
+                                    client.Publish(topic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                }
+                            }
                         }
                     }
                 }
