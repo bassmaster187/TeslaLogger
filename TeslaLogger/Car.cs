@@ -1518,7 +1518,9 @@ namespace TeslaLogger
 
         public void Log(string text)
         {
-            string temp = "#" + CarInDB + ": " + text;
+            string temp = "#" + CarInDB + ": ";
+            temp += $"[{Thread.CurrentThread.ManagedThreadId}] "; 
+            temp += text;
             Logfile.Log(temp);
         }
 

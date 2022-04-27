@@ -19,6 +19,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Web;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace TeslaLogger
 {
@@ -71,7 +72,7 @@ namespace TeslaLogger
 
         private double battery_range2ideal_battery_range = 0.8000000416972936;
 
-        internal static HttpClient httpclient_teslalogger_de = new HttpClient();
+        internal HttpClient httpclient_teslalogger_de = new HttpClient();
         internal static HttpClient httpClientForAuthentification;
         internal static HttpClient httpClientABRP = null;
         internal HttpClient httpclientTeslaAPI = null;
@@ -87,12 +88,16 @@ namespace TeslaLogger
 #pragma warning disable CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
 #pragma warning restore CA5359 // Deaktivieren Sie die Zertifikatüberprüfung nicht
-            httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
         }
 
         internal WebHelper(Car car)
         {
             this.car = car;
+
+            httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
+            ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.Add(userAgent);
+            httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(" + car.TaskerHash + "; " + Thread.CurrentThread.ManagedThreadId +")"));
 
             CheckUseTaskerToken();
         }
@@ -533,8 +538,20 @@ namespace TeslaLogger
                             // as of March 21 2022 Tesla returns a bearer token. GetTokenAsync4 is no longer neeaded. 
                             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
                             Tesla_token = jsonResult["access_token"];
+                            car.Tesla_Token = Tesla_token;
                             car.DbHelper.UpdateTeslaToken();
                             car.LoginRetryCounter = 0;
+
+                            try
+                            {
+                                var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
+                                string online = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                            }
+                            catch (Exception ex)
+                            {
+                                car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").Submit();
+                                car.Log("Refresh TeslaToken and Streamingtoken: " + ex.ToString());
+                            }
 
                             return Tesla_token;
 
@@ -1688,7 +1705,7 @@ namespace TeslaLogger
 
         private int unknownStateCounter = 0;
 
-        public async Task<string> IsOnline()
+        public async Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
             string resultContent = "";
             try
@@ -1699,11 +1716,12 @@ namespace TeslaLogger
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);
 
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    if (LoginRetry(result))
-                        return "NULL";
-                }
+                if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
+                    return "NULL";
+
+                if (LoginRetry(result))
+                    return "NULL";
+                
 
                 resultContent = await result.Content.ReadAsStringAsync();
                 // resultContent = Tools.ConvertBase64toString("");
@@ -1779,7 +1797,14 @@ namespace TeslaLogger
                 var r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
-                Tesla_Streamingtoken = r4["tokens"][0].ToString();
+                string temp_Tesla_Streamingtoken = r4["tokens"][0].ToString();
+                
+                if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
+                {
+                    Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
+                    car.Log("Tesla_Streamingtoken changed!");
+                }
+                 
 
                 try
                 {
@@ -3759,7 +3784,9 @@ namespace TeslaLogger
                     System.Threading.Thread.Sleep(60000);
 
                     car.LoginRetryCounter++;
-                    Tesla_token = GetToken();
+
+                    string tempToken = UpdateTeslaTokenFromRefreshToken();
+
                     return true;
                 }
                 else

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Reflection;
+using System.Net.Http.Headers;
 
 namespace TeslaLogger
 {
@@ -19,6 +21,7 @@ namespace TeslaLogger
         private Thread thread;
         private bool fastmode = false;
         private bool run = true;
+        internal HttpClient httpclient_teslalogger_de;
         Car car;
 
         DateTime lastScanMyTeslaActive = DateTime.MinValue;
@@ -48,6 +51,13 @@ namespace TeslaLogger
             {
                 return;
             }
+
+            httpclient_teslalogger_de = new HttpClient();
+            httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
+
+            ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.Add(userAgent);
+            httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(" + car.TaskerHash + "; " + Thread.CurrentThread.ManagedThreadId + ")"));
 
             car.Log("Start ScanMyTesla Thread!");
 
@@ -111,7 +121,7 @@ namespace TeslaLogger
                 {
 
                     DateTime start = DateTime.UtcNow;
-                    HttpResponseMessage result = await WebHelper.httpclient_teslalogger_de.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
+                    HttpResponseMessage result = await httpclient_teslalogger_de.PostAsync(new Uri("http://teslalogger.de/get_scanmytesla.php"), content).ConfigureAwait(true);
 
                     if (result.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
                     {

@@ -1238,7 +1238,7 @@ HAVING
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
                         car.ExternalLog("UpdateTeslaToken");
-                        car.Restart("Access Token updated", 0);
+                        // car.Restart("Access Token updated", 0);
                     }
                 }
             }
