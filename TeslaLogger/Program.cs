@@ -491,13 +491,13 @@ namespace TeslaLogger
                     WebHelper.UpdateAllPOIAddresses();
                     foreach (Car c in Car.Allcars)
                     {
+                        c.DbHelper.DeleteDuplicateTrips();
                         c.DbHelper.CombineChangingStates();
                         c.webhelper.UpdateAllEmptyAddresses();
                         c.DbHelper.UpdateEmptyChargeEnergy();
                         c.DbHelper.UpdateEmptyUnplugDate();
                         c.DbHelper.AnalyzeChargingStates();
                         c.DbHelper.UpdateAllDriveHeightStatistics();
-                        c.DbHelper.FixDuplicateDriveStates();
                     }
 
                     DBHelper.UpdateAllNullAmpereCharging();
