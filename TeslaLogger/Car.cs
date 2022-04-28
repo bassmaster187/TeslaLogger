@@ -1518,10 +1518,7 @@ namespace TeslaLogger
 
         public void Log(string text)
         {
-            string temp = "#" + CarInDB + ": ";
-            temp += $"[{Thread.CurrentThread.ManagedThreadId}] "; 
-            temp += text;
-            Logfile.Log(temp);
+            Logfile.Log($"#{CarInDB}[{Thread.CurrentThread.Name}:{Thread.CurrentThread.ManagedThreadId}]: {text}");
         }
 
         public void ExternalLog(string text)
