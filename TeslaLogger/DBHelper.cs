@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace TeslaLogger
 {
@@ -573,7 +574,28 @@ ORDER BY
             }
         }
 
-        internal void FixDuplicateDriveStates()
+        internal void DeleteDuplicateTrips()
+        {
+            try
+            {
+                var sw = new Stopwatch();
+                sw.Start();
+
+                int cnt = ExecuteSQLQuery("delete from drivestate where id in ( " +
+                    "select id from " +
+                    "( SELECT t1.id from drivestate as t1 join drivestate t2 on t1.carid = t2.carid and t1.StartPos >= t2.StartPos and t1.StartDate < t2.EndDate and t1.id > t2.id ) as T3 )", 300);
+                sw.Stop();
+
+                car.Log($"Deleted Duplicate Trips: {cnt} Time: {sw.ElapsedMilliseconds}ms");
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        internal void CheckDuplicateDriveStates()
         {
             // find all drivestate with same endpos
             try
@@ -4018,7 +4040,7 @@ VALUES(
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select count(*) from pos", con))
+                using (MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())

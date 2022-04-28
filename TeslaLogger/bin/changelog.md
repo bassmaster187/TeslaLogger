@@ -1,5 +1,6 @@
-# Version 1.52.6
+# Version 1.52.7
 - Bugfixes
+- Get rid of duplicate trips
 
 # Version 1.52.4
 - Slower getting data from ScanMyTesla 
