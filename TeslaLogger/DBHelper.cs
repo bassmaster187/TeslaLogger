@@ -3823,7 +3823,7 @@ WHERE
                                 && double.TryParse(dr[1].ToString(), out double lng))
                             {
                                 Address addr = Geofence.GetInstance().GetPOI(lat, lng, false);
-                                Tools.DebugLog("GetAddressFromChargingState: " + addr);
+                                // works well enough, no debug output needed at the moment Tools.DebugLog("GetAddressFromChargingState: " + addr);
                                 return addr;
                             }
                         }
@@ -4018,7 +4018,7 @@ VALUES(
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select count(*) from pos", con))
+                using (MySqlCommand cmd = new MySqlCommand("Select max(id) from pos", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())
