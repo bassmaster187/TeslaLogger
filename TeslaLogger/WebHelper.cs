@@ -545,7 +545,18 @@ namespace TeslaLogger
                             try
                             {
                                 var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
-                                string online = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                // restart streaming thread with new token
+                                _ = Task.Factory.StartNew(() =>
+                                {
+                                    Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                    StopStreaming();
+                                    for (int i = 0; i < 100; i++)
+                                    {
+                                        Thread.Sleep(100);
+                                        Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                    }
+                                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                             }
                             catch (Exception ex)
                             {
@@ -1802,9 +1813,8 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    car.Log("Tesla_Streamingtoken changed!");
+                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
-                 
 
                 try
                 {
@@ -2671,7 +2681,6 @@ namespace TeslaLogger
 
                     ws = new System.Net.WebSockets.ClientWebSocket();
 
-                    byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
                     Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/");
 
                     string connectmsg = "{\n" +
@@ -4030,7 +4039,7 @@ namespace TeslaLogger
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
-        private bool stopStreaming = false;
+        private volatile bool stopStreaming = false;
 
         public bool TaskerWakeupfile(bool force = false)
         {
