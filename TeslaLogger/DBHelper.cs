@@ -574,23 +574,40 @@ ORDER BY
             }
         }
 
-        internal void DeleteDuplicateTrips()
+        internal static void DeleteDuplicateTrips()
         {
             try
             {
                 var sw = new Stopwatch();
                 sw.Start();
 
-                int cnt = ExecuteSQLQuery("delete from drivestate where id in ( " +
-                    "select id from " +
-                    "( SELECT t1.id from drivestate as t1 join drivestate t2 on t1.carid = t2.carid and t1.StartPos >= t2.StartPos and t1.StartDate < t2.EndDate and t1.id > t2.id ) as T3 )", 300);
+                int cnt = ExecuteSQLQuery(@"
+DELETE
+FROM
+    drivestate
+WHERE
+    id IN(
+    SELECT
+        id
+    FROM
+        (
+        SELECT
+            t1.id
+        FROM
+            drivestate AS t1
+        JOIN
+            drivestate t2
+        ON
+            t1.carid = t2.carid AND t1.StartPos >= t2.StartPos AND t1.StartDate < t2.EndDate AND t1.id > t2.id
+    ) AS T3
+)", 300);
                 sw.Stop();
 
-                car.Log($"Deleted Duplicate Trips: {cnt} Time: {sw.ElapsedMilliseconds}ms");
+                Logfile.Log($"Deleted Duplicate Trips: {cnt} Time: {sw.ElapsedMilliseconds}ms");
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).Submit();
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
         }
