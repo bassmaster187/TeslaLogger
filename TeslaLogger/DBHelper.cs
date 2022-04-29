@@ -4846,7 +4846,7 @@ WHERE
                             avgsocdiff = Math.Round((double)r["avgsocdiff"], 1);
                             maxkm = Math.Round((double)r["maxkm"], 1);
 
-                            car.Log($"GetAvgConsumption: sumkm:{sumkm} avgkm:{avgkm} kwh/100km:{kwh100km} avgsocdiff:{avgsocdiff} maxkm:{maxkm}");
+                            car.Log($"GetAvgConsumption: sumkm: {sumkm}; avgkm: {avgkm}; kwh/100km: {kwh100km}; avgsocdiff: {avgsocdiff}; maxkm: {maxkm}");
                         }
                     }
                     dt.Clear();
