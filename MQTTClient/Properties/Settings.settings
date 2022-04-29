@@ -1,12 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MQTTClient.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="MQTTHost" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MQTTPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="Topic" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Tesla</Value>
+    </Setting>
+    <Setting Name="Subtopics" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Name" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
