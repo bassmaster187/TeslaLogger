@@ -2671,7 +2671,7 @@ namespace TeslaLogger
 
                     ws = new System.Net.WebSockets.ClientWebSocket();
 
-                    byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
+                    // byte[] byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ApplicationSettings.Default.TeslaName, Tesla_Streamingtoken));
                     Uri serverUri = new Uri($"wss://streaming.vn.teslamotors.com/streaming/");
 
                     string connectmsg = "{\n" +
