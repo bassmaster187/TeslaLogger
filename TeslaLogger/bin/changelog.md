@@ -1,4 +1,4 @@
-# Version 1.52.7
+# Version 1.53.0
 - Bugfixes
 - Get rid of duplicate trips
 
