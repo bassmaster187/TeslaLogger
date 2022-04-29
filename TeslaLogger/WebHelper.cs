@@ -551,10 +551,26 @@ namespace TeslaLogger
                                 {
                                     Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
                                     StopStreaming();
-                                    for (int i = 0; i < 100; i++)
+                                    bool newThreadCreated = false;
+                                    for (int i = 0; i < 100 && !newThreadCreated; i++)
                                     {
-                                        Thread.Sleep(100);
                                         Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        if (streamThread.ThreadState == ThreadState.Stopped)
+                                        {
+                                            newThreadCreated = true;
+                                            streamThread = null;
+                                            StartStreamThread();
+                                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        }
+                                        else
+                                        {
+                                            Thread.Sleep(1000);
+                                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        }
+                                    }
+                                    if (!newThreadCreated)
+                                    {
+                                        car.Log("Failed to restart stream thread");
                                     }
                                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                             }
@@ -2658,7 +2674,7 @@ namespace TeslaLogger
             string resultContent = null;
             byte[] buffer = new byte[1024];
 
-            Log("StartStream");
+            car.Log("StartStream");
             stopStreaming = false;
             string line = "";
             while (!stopStreaming)
