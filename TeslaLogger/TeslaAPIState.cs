@@ -1055,6 +1055,7 @@ namespace TeslaLogger
                             case "sun_roof_state":
                             case "vehicle_name":
                             case "dashcam_state":
+                            case "feature_bitmask":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_state");

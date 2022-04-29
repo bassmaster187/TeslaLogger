@@ -995,7 +995,7 @@ namespace TeslaLogger
             CurrentJSON.current_trip_end = DateTime.Now;
             CurrentJSON.current_trip_km_end = CurrentJSON.current_odometer;
             CurrentJSON.current_trip_end_range = CurrentJSON.current_ideal_battery_range_km;
-            webhelper.StopStreaming();
+            //webhelper.StopStreaming();
 
             odometerLastTrip = CurrentJSON.current_odometer;
 
@@ -1518,10 +1518,7 @@ namespace TeslaLogger
 
         public void Log(string text)
         {
-            string temp = "#" + CarInDB + ": ";
-            temp += $"[{Thread.CurrentThread.ManagedThreadId}] "; 
-            temp += text;
-            Logfile.Log(temp);
+            Logfile.Log($"#{CarInDB}[{Thread.CurrentThread.Name}:{Thread.CurrentThread.ManagedThreadId}]: {text}");
         }
 
         public void ExternalLog(string text)

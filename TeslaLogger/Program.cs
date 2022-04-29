@@ -489,9 +489,9 @@ namespace TeslaLogger
                     Logfile.Log("UpdateDbInBackground started");
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
+                    DBHelper.DeleteDuplicateTrips();
                     foreach (Car c in Car.Allcars)
                     {
-                        c.DbHelper.DeleteDuplicateTrips();
                         c.DbHelper.CombineChangingStates();
                         c.webhelper.UpdateAllEmptyAddresses();
                         c.DbHelper.UpdateEmptyChargeEnergy();

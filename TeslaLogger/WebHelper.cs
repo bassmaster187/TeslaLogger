@@ -545,7 +545,34 @@ namespace TeslaLogger
                             try
                             {
                                 var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
-                                string online = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                // restart streaming thread with new token
+                                _ = Task.Factory.StartNew(() =>
+                                {
+                                    Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                    StopStreaming();
+                                    bool newThreadCreated = false;
+                                    for (int i = 0; i < 100 && !newThreadCreated; i++)
+                                    {
+                                        Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        if (streamThread.ThreadState == ThreadState.Stopped)
+                                        {
+                                            newThreadCreated = true;
+                                            streamThread = null;
+                                            StartStreamThread();
+                                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        }
+                                        else
+                                        {
+                                            Thread.Sleep(1000);
+                                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                                        }
+                                    }
+                                    if (!newThreadCreated)
+                                    {
+                                        car.Log("Failed to restart stream thread");
+                                    }
+                                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                             }
                             catch (Exception ex)
                             {
@@ -1802,9 +1829,8 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    car.Log("Tesla_Streamingtoken changed!");
+                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
-                 
 
                 try
                 {
@@ -2648,7 +2674,7 @@ namespace TeslaLogger
             string resultContent = null;
             byte[] buffer = new byte[1024];
 
-            Log("StartStream");
+            car.Log("StartStream");
             stopStreaming = false;
             string line = "";
             while (!stopStreaming)
@@ -4030,7 +4056,7 @@ namespace TeslaLogger
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
-        private bool stopStreaming = false;
+        private volatile bool stopStreaming = false;
 
         public bool TaskerWakeupfile(bool force = false)
         {
