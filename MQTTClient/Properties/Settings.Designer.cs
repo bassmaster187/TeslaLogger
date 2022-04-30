@@ -76,5 +76,14 @@ namespace MQTTClient.Properties {
                 return ((string)(this["Password"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClientID {
+            get {
+                return ((string)(this["ClientID"]));
+            }
+        }
     }
 }
