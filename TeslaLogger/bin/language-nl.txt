@@ -12,7 +12,7 @@ Start mi=Start mi
 End mi=Einde mi
 kmDiff=kmVerschil
 Max Range=Max Bereik
-Ø Verbrauch=Ø Verbruik
+Ø Consumption=Ø Verbruik
 Tage=Dagen
 
 #Degradation.json
@@ -27,8 +27,8 @@ Max. Reichweite (Monatsmittel) [mi]=Max Rage (maandelijks gem.) [mi]
 
 #Ladehistorie.json
 Ladehistorie=Laadhistorie
-Startdatum=Startdatum
-Enddatum=Einddatum
+StartDate=Startdatum
+EndDate=Einddatum
 geladen kWh=kWh geladen
 km Stand=Kilometerteller
 Adresse=Adres
@@ -114,7 +114,7 @@ TR km Verlust=TR km Verloren
 TR km Verlust pro Stunde=TR km Verloren per uur
 
 #Verbrauch.json
-Verbrauch=Verbruik
+Consumption=Verbruik
 Höhe [m]=Hoogte [m]
 Altitude [m]=Hoogte [m]
 Geschwindigkeit [mph]=Snelheid [mph]
@@ -126,7 +126,7 @@ Innentemperatur [°C]=Binnentemperatuur [°C]
 Innentemperatur [°F]=Binnentemperatuur [°F]
 
 Laden fertig=Laden voltooid
-Schlafen=Slapen
+Sleeping=Slapen
 Online=Online
 
 #Visited.json
@@ -169,12 +169,15 @@ Suspend Teslalogger=Teslalogger opschorten
 Wakeup Teslalogger=Teslalogger wakker maken
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Inloggegevens
-Bitte Tesla Account Zugangsdaten eingeben=Voer altublieft de toegangsgegevens van uw Tesla account in
+Teslalogger Tesla Credentials=Teslalogger Tesla Inloggegevens
+Please enter your Tesla account credentials=Voer altublieft de toegangsgegevens van uw Tesla account in
 Email=Email
-Passwort=Wachtwoord
-Passwort wiederholen=Wachtwoord herhalen
+Password=Wachtwoord
+Repeat Password=Wachtwoord herhalen
 Speichern=Opslaan
+Delete=Verwijderen
+Please choose your vehicle=Veuillez choisir votre véhicule
+
 
 #settings.php
 Credentials=Inloggegevens
@@ -185,7 +188,7 @@ Unit of length=Lengte-eenheid
 URL Admin Panel=URL Admin omgeving
 
 #geoadd.php
-Bezeichnung=Beschrijving
+Description=Beschrijving
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Alle verbruik - ScanMyTesla
@@ -193,7 +196,7 @@ Zelltemperatur [°C]=Cell Temperatuur [°C]
 Zelltemperatur [°F]=Cell Temperatuur [°F]
 
 #Trip Monatsstatistik.json
-Datum=Date
+Date=Date
 Fahrzeit [h]=Rijtijd [h]
 Strecke [km]=Afstand [km]
 Strecke [mi]=Afstand [mi]
@@ -211,7 +214,6 @@ Zellspannungen 81-99 - ScanMyTesla=Celspanning 81-99 - ScanMyTesla
 Ja=Ja
 Nein=Nee
 
-Einschlafen=In slaap vallen
 Automatic updates=Automatiske oppdateringer
 
 TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
@@ -222,3 +224,166 @@ Resume Teslalogger=Start Teslalogger
 Range=Bereik
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.
+
+#restore.php
+TextRestore=Zorg ervoor dat u een back-up van uw Teslalogger maakt voordat u databases herstelt. Verplaats uw back-upmap van \\RASPBERRY\teslalogger\backup naar uw harde schijf!<br><br>Het herstelproces kan tot 10 minuten duren!<br><br>Onderbreek het herstelproces op geen enkele manier! Laad de pagina niet opnieuw! Sluit deze pagina niet!
+
+#journeys.php
+TextJourneys=You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires.
+Journey=Journey
+New Journey=New Journey
+Journey Name=Journey Name
+End=End
+Please Wait=Please Wait!
+Please Select Start First=Please Select Start First!
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner Link
+TextABRP=You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials.
+ABRP1=Create an Abetterrouteplanner account
+ABRP2=Go to Settings
+ABRP3=Choose your car
+ABRP4=Save your car to your account
+ABRP5=Give your car a name
+ABRP6=Click on "Link Generic" to get a ABRP token
+ABRP7=Copy the token and click "Done"
+ABRP8=Insert the token in Teslalogger
+ABRP9=Check if the Teslalogger is connected
+ABRPYT=Check YouTube tutorial for live demo
+ABRPToken=Abetterrouteplanner Token
+
+
+#Missing translation elements
+Setup=Setup
+Enabled=Enabled
+Save=Save
+Set password for Teslalogger's admin panel=Set password for Teslalogger's admin panel
+Name=Name
+Charging Costs=Charging Costs
+Charger=Charger
+Charged=Charged
+Efficiency=Efficiency
+Currency=Currency
+kWh according to meter/invoice=kWh according to meter/invoice
+Cost per kWh=Cost per kWh
+Cost per charge=Cost per charge
+Cost per minute=Cost per minute
+Idle cost per minute=Idle cost per minute
+Total=Total
+Loading=Loading
+Driving=Driving
+Name & Position=Name & Position
+Radius=Radius
+Special Flags=Special Flags
+Type=Type
+Home=Home
+Work=Work
+Copy Charging Costs=Copy Charging Costs
+Don't Combine Charging Sessions=Don't Combine Charging Sessions
+Set Charge Limit=Set Charge Limit
+SOC=SOC
+Set on arrival=Set on arrival
+Set Charge Limit After Charging=Set Charge Limit After Charging
+Open Charge Port=Open Charge Port
+Gear=Gear
+D/R → P=D/R → P
+D → P=D → P
+R → P=R → P
+High Frequency Logging=High Frequency Logging
+Minutes=Minutes
+Special Count=Special Count
+Count=Count
+Special Features=Special Features
+Enable Sentry Mode=Enable Sentry Mode
+Disable Sentry Mode=Disable Sentry Mode
+Turn HVAC off=Turn HVAC off
+No sleep=No sleep
+kW=kW
+OK=OK
+Info=Info
+No=No
+Yes=Yes
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=Software Update
+Journeys=Journeys
+ID=ID
+Start Address=Start Adress
+Target Address=Target Adress
+Ø Consumption kWh=Ø Consumption kWh
+Consumed kWh=Consumed kWh
+charged kWh=charged kWh
+Drive Time [h]=Drive Time [h]
+Charge Time [h]=Charge Time [h]
+Distance [mi]=Distance [mi]
+Distance [km]=Distance [km]
+Download Logfile=Download Logfile
+Lines=Lines
+Housekeeping=Housekeeping
+Sleep Attempt=Sleep Attempt
+My Degradation=My Degradation
+My Charging AVG=My Charging AVG
+Fleet Degradation AVG=Fleet Degradation AVG
+Fleet Charging AVG=Fleet Charging AVG
+Fleet Charging MAX (Firmware)=Fleet Charging MAX (Firmware)
+Fleet Charging Locations=Fleet Charging Locations
+Fleet Fast Charging Map=Fleet Fast Charging Map
+Supercharger Usage=Supercharger Usage
+Firmware Tracker=Firmware Tracker
+Changelog=Changelog
+Dashboard=Dashboard
+Abetterrouteplanner=Abetterrouteplanner
+Please enter your dexters-web.de account credentials=Please enter your dexters-web.de account credentials
+Dexter Login=Dexter Login
+Dexter Password=Dexter Password
+Car Name=Car Name
+Access Token=Access Token
+Refresh Token=Refresh Token
+Car=Car
+Free Supercharging=Free Supercharging
+Reconnect=Reconnect
+Model=Model
+VIN=VIN
+Tasker Token=Tasker Token
+Free SUC=Free SUC
+Edit=Edit
+NEW CAR=NEW CAR
+Credentials Info=Credentials Info
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Adminpanel
+Temperature=Temperature
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=mile
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=Share data anonymously
+Enable=Enable
+All=All
+Stable=Stable
+None=None
+Sleep=Sleep
+to=to
+Show calc. 100% range=Show calc. 100% range
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Teslalogger HTTP Port
+Zoom Level=Zoom Level
+ScanMyTesla integration=ScanMyTesla integration
+Position by StreamingAPI=Position by StreamingAPI
+Main Car=Main Car
+ScanMyTesla last received=ScanMyTesla last received
+Tasker URL=Tasker URL
+Received Tasker Token=Received Tasker Token
+Wallbox Test=Wallbox Test
+Host=Host
+Param=Param
+Test=Test
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh

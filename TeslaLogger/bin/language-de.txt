@@ -1,8 +1,89 @@
-TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten eine anonyme Datenbank aufbauen mit der man Degradationskurven und Ladekurven vergleichen kann. So können Sie jederzeit Ihr Fahrzeug mit anderen vergleichen und eine ungewöhnliche Abweichung frühzeitig feststellen. Diese kann auch später dazu dienen um beim Verkaufsgespräch nachweisen zu können, dass Ihre Batterie noch voll leistungsfähig ist. Im negativen Fall, können Sie eine verminderte Leistungsfähigkeit einfacher gegenüber Tesla Motors nachweisen.<br><br>Möchten Sie vollkommen Anonym ihre Schnellladekurven und Degradationskurven mit anderen Teslafahrer teilen? Diese Entscheidung kann jederzeit in den Einstellungen geändert werden.  
+#Allgemein
+Delete=Löschen
+Save=Speichern
+SOC=SOC
+Minutes=Minuten
+Duration=Dauer
+Count=Zähler
+ID=ID
+Setup=Einrichtung
+Enabled=Aktiviert
+Yes=Ja
+No=Nein
+kW=kW
+PS=PS
+OK=OK
+Date=Datum
+
+#Akku Trips.json
+Akku Trips=Akku Trips
+Start Trip=Start Trip
+End Trip=End Trip
+Time=Datum
+StartSOC=StartSOC
+EndSOC=EndSOC
+SOC diff=SOC diff
+Start km=Start km
+End km=End km
+Start mi=Start mi
+End mi=End mi
+kmDiff=kmDiff
+Max Range=Max Reichweite
+Ø Consumption=Ø Verbrauch
+Tage=Tage
+
+#logfile.php
+Download Logfile=Logdatei herunterladen
+Lines=Zeilen
+Housekeeping=Allgemein
+Sleep Attempt=Ruhezustandversuche
+
+#password.php
+Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
+Email=E-Mail
+Car=Auto
+Free Supercharging=Kostenloses Supercharging
+Reconnect=Wiederverbindung
+Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug
+Name=Name
+Model=Modell
+VIN=VIN
+Tasker Token=Tasker Token
+Free SUC=Kost. SUC
+Edit=Ändern
+NEW CAR=NEUES AUTO ANLEGEN
+
+#adminpanelpassword.php
+Set password for Teslalogger's admin panel=Passwort für die Teslalogger-Administrationskonsole setzen
+Password=Passwort
+Repeat Password=Passwort wiederholen
+
+#menu.php
+Logfile=Logfile
+Restart=Neustart
+Update=Update
+Changelog=Änderungsliste
+Dashboards=Dashboards
+Fleet Statistic=Flottenstatistik
+Extras=Extras
+Settings=Einstellungen
+Backup=Datensicherung
+Restore=Wiederherstellung
+Geofence=Geofence
+Journeys=Reisen
+Suspend Teslalogger=Teslalogger in Ruhezustand
+Wakeup Teslalogger=Teslalogger aufwecken
+Dashboard=Dashboard
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
-TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
-Resume Teslalogger=Teslalogger Starten
-Typical Range=Reichweite
+My Degradation=Meine Degradation
+My Charging AVG=Mein Ladedurchschnitt
+Fleet Degradation AVG=Flottendegradation
+Fleet Charging AVG=Flotten-Ladedurchschnitt
+Fleet Charging MAX (Firmware)=Flotten Lademaximum (Firmware)
+Fleet Charging Locations=Flotten-Ladepunkte
+Fleet Fast Charging Map=Flotten-Schnellladekarte
+Supercharger Usage=Supercharger-Benutzung
+Firmware Tracker=Firmware-Nachverfolgung
 
 #Timeline Plugin.json
 Parking=Parken
@@ -16,49 +97,176 @@ Last Driven=Letzte Fahrt  * * *
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
 
-#Index.php
+#index.php
 Battery Heater=Batterie-Heizung
-Car Version=Fahrzeug Version
-Cell Imbalance=Zellen-Imbalance
-Cell Temp=Zell Temperatur
-Current Pos=Aktuelle Position
-Duration=Dauer
-Distance=Distanz
-Done=Fertig
-Done at=Fertig um
-Falling asleep=Einschlafen
 Car Info=Fahrzeuginfo
-Odometer=KM Stand
+Car Version=Fahrzeug-Version
+Cell Imbalance=Zellen-Imbalance
+Cell Temp=Zelltemperatur
+Consumption=Verbrauch
+Current Pos=Aktuelle Position
+Distance=Distanz
+Done at=Fertig um
+Done=Fertig
+Falling asleep=Ruhezustand
+Info=Info
+Last Trip=Letzte Fahrt
 Last Update=Letztes Update
-Last Trip=Letzter Trip
-Charging=Wird geladen
-Max kph=Max km/h
+Max Charge=
+Max Discharge=
+Max kph=Max. km/h
+Odometer=Kilometerstand
+Offline=Offline
+Online=Online
+Preconditioning=Vorkonditionierung
+Resume Teslalogger=Teslalogger starten
+Sentry Mode=Wächter-Modus
+Sleeping=Schlafen
+Software Update=Software Update
+Status=Status
+TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten eine anonyme Datenbank zum Vergleich von Degradationskurven und Ladekurven erstellen. Damit können Sie Ihr Fahrzeug jederzeit mit anderen vergleichen und ungewöhnliche Abweichungen frühzeitig erkennen. So können Sie auch später beim Verkaufsgespräch nachweisen, dass Ihre Batterie noch voll leistungsfähig ist. Im negativen Fall können Sie gegenüber Tesla Motors leichter eine verminderte Leistung nachweisen. <br><br>Möchten Sie Ihre Schnellladekurven und Degradationskurven völlig anonym mit anderen Tesla-Fahrern teilen? Diese Entscheidung kann jederzeit in den Einstellungen geändert werden.
+TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
+Typical Range=Reichweite
+
 
 #settings.php
+MyTesla=Mein Tesla
+Teslalogger Adminpanel=Teslalogger-Administrationskonsole
+URL Admin Panel=URL Administrationskonsole
 Credentials=Zugangsdaten
 Power=Leistung
 Unit of length=Längenmaß
+km=Kilometer
+mile=Meilen
 Automatic updates=Automatische Updates
+All=Alle
+Stable=Stabil
 Range=Reichweite
-Show calc. 100% range=Zeige errechnete 100%
-Car Name=Fahrzeug Name
-Enable=Enable
+Sleep=Ruhezustand
+to=bis
+Show calc. 100% range=Zeige errechnete 100 %
+Car Name=Fahrzeugname
+Enable=Aktiviert
 Fahrenheit=Fahrenheit
+Celsius=Celsius
+Ideal=Ideal
+Rated=Bewerted
 Language=Sprache
-Main Car=Haupt Fahrzeug
+Main Car=Hauptfahrzeug
 None=Keine
 Received Tasker Token=Empfangenes Tasker Token
-Settings=Einstellungen
 ScanMyTesla last received=ScanMyTesla zuletzt empfangen
-Tasker Token=Tasker Token
 Tasker URL=Tasker URL
-Teslalogger HTTP Port=Teslalogger HTTP Port
-TextShare=<h1>Ladekurven / Degradationskurven anonym teilen</h1>Wir möchten eine anonyme Datenbank zum Vergleich von Degradationskurven und Ladekurven erstellen. Damit können Sie Ihr Fahrzeug jederzeit mit anderen vergleichen und ungewöhnliche Abweichungen frühzeitig erkennen. So können Sie auch später beim Verkaufsgespräch nachweisen, dass Ihre Batterie noch voll leistungsfähig ist. Im negativen Fall können Sie gegenüber Tesla Motors leichter eine verminderte Leistung nachweisen. <br><br>Möchten Sie Ihre Schnellladekurven und Degradationskurven völlig anonym mit anderen Tesla-Fahrern teilen? Diese Entscheidung kann jederzeit in den Einstellungen geändert werden.
-URL Admin Panel=URL Admin Panel
+Teslalogger HTTP Port=Teslalogger HTTP-Port
 URL Grafana=URL Grafana
-Zoom Level=Zoom Level
+Zoom Level=Zoomstufe
+ScanMyTesla integration=ScanMyTesla-Integration
 Share data anonymously=Daten anonym teilen
-Sleep=Schlafen
 Temperature=Temperatur
 
 TeslaAuthApps=Du kannst folgende Apps verwenden um ein Access Token & Refresh Token vom Tesla Server zu generieren.
+
+Battery power [kW]=Akkuleistung (kW)
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Sie können Ihre Wallbox von Teslalogger abfragen lassen, um die Ladeeffizienz oder den Prozentsatz der zum Laden Ihres Autos verwendeten Photovoltaik zu berechnen.
+Type=Typ
+Host=URL
+Param=Parameter
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Fahrzeug kWh
+
+#geoadd.php
+Description=Beschreibung
+Radius=Radius
+Name & Position=Name & Position
+Special Flags=Weitere Eigenschaften
+Home=Zu Hause
+Work=Arbeit
+Charger=Ladesäule
+Copy Charging Costs=Ladekosten kopieren
+Don't Combine Charging Sessions=Ladesitzungen nicht vereinen
+Set Charge Limit=Ladelimit
+Set on arrival=Setzen bei Ankunft
+Set Charge Limit After Charging=Setze Ladelimit nach dem Laden
+Open Charge Port=Ladeklappe öffnen
+High Frequency Logging=Hochfrequentes loggen
+Special Count=Spezieller Zähler
+Special Features=Besondere Eigenschaften
+Enable Sentry Mode=Wächter-Modus einschalten
+Disable Sentry Mode=Wächter-Modus ausschalten
+Turn HVAC off=Klimaanlage ausschalten
+No sleep=Kein Ruhezustand
+Gear=Gang
+D/R → P=D/R → P
+D → P=D → P
+R → P=R → P
+
+#restore.php
+TextRestore=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor Sie Datenbanken wiederherstellen. Verschieben Sie Ihren Sicherungsordner von \\RASPBERRY\teslalogger\backup auf Ihre Festplatte!<br><br>Der Wiederherstellungsvorgang kann bis zu 10 Minuten dauern!<br><br>Unterbrechen Sie den Wiederherstellungsvorgang auf keinen Fall! Seite nicht neu laden! Diese Seite nicht schließen!
+
+#journeys.php
+TextJourneys=Sie können Reisen verwenden, um eine lange Fahrt/Zeit zu kombinieren und alle Werte zusammenzufassen. Dies ist sehr nützlich, um die komplette Ladezeit einer langen Fahrt zu verfolgen oder den Verbrauch von Sommer- oder Winterreifen zu vergleichen.
+Journey=Reise
+Start Address=Start-Adresse
+Target Address=Ziel-Adresse
+Consumed kWh=Verbrauchte kWh
+charged kWh=Geladene kWh
+Drive Time [h]=Fahrtzeit [h]
+Charge Time [h]=Ladezeit [h]
+Distance [mi]=Distanz [mi]
+Distance [km]=Distanz [km]
+New Journey=Neue Reise
+Journey Name=Bezeichnung der Reise
+Start=Beginn
+End=Ende
+Please Wait=Bitte warten!
+Please Select Start First=Bitte zuerst den Beginn wählen!
+
+#abrp.php
+ABRPTitle=Verbindung mit Abetterrouteplanner
+TextABRP=Sie können eine Verbindung von Teslalogger zu Abetterrouteplanner einrichten, um zu vermeiden, dass Sie Ihre Tesla-Anmeldeinformationen an Dritte weitergeben müssen. Ein weiterer Vorteil besteht darin, die Möglichkeit zu minimieren, das Auto daran zu hindern, in den Ruhezustand zu wechseln, wenn mehr als ein Dienst Ihre Anmeldeinformationen verwendet.
+ABRP1=Erstellen Sie ein Abetterrouteplanner-Konto
+ABRP2=Gehen sie zu den Einstellungen
+ABRP3=Wählen Sie Ihr Auto
+ABRP4=Speichern Sie Ihr Auto in Ihrem Konto
+ABRP5=Geben Sie Ihrem Auto einen Namen
+ABRP6=Klicken Sie auf „Link Generic“, um ein ABRP-Token zu erhalten
+ABRP7=Token kopieren und auf „Fertig“ klicken
+ABRP8=Fügen Sie den Token in Teslalogger ein
+ABRP9=Überprüfen Sie, ob der Teslalogger angeschlossen ist
+ABRPYT=Überprüfen Sie das YouTube-Tutorial für eine Live-Demo
+ABRPToken=Abetterrouteplanner-Token
+
+#dashboard.php
+Loading=Wird geladen
+Charged=Geladen
+Efficiency=Wirkungsgrad
+Currency=Währung
+Cost per kWh=Kosten pro kWh
+Cost per charge=Kosten pro Ladung
+Cost per minute=Kosten pro Minute
+Idle cost per minute=Kosten Blockiergebühr
+Total=Summe
+kWh according to meter/invoice=kWh laut Zähler/Rechnung
+
+#password_info.php
+Teslalogger Tesla Credentials=Teslalogger Tesla-Zugangsdaten
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Bitte geben Sie Ihre Zugangsdaten für dexters-web.de ein
+Dexter Login=Dexter-Login
+Dexter Password=Dexter-Passwort
+
+
+#Missing translation elements
+Charging Costs=Charging Costs
+Abetterrouteplanner=Abetterrouteplanner
+Access Token=Access Token
+Refresh Token=Refresh Token
+Credentials Info=Credentials Info
+Position by StreamingAPI=Position by StreamingAPI
+Wallbox Test=Wallbox Test
+Test=Test

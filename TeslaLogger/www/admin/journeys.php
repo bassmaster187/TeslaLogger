@@ -225,36 +225,36 @@ menu("Journeys");
 <div>
     <h1><?php t("Journeys"); ?></h1>
     <p>
-        You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires.
+		<?php t("TextJourneys"); ?>
     </p>
 <div>
 
 <table id="myDT">
 <thead>
     <tr>
-        <th>Id</th>
+        <th><?php t("ID"); ?></th>
         <th><?php t("Journey"); ?></th>
-        <th><?php t("Start Adresse"); ?></th>
+        <th><?php t("Start Address"); ?></th>
         <th><?php t("Start"); ?></th>
-        <th><?php t("Ziel Adresse"); ?></th>
-        <th><?php t("Ende"); ?></th>
-        <th><?php t("Ø Verbrauch kWh"); ?></th>
-        <th><?php t("Verbraucht kWh"); ?></th>
-        <th><?php t("geladen kWh"); ?></th>
-        <th><?php t("Fahrzeit [h]"); ?></th>
-        <th><?php t("Ladezeit [h]"); ?></th>
-        <th><?php if ($LengthUnit == "mile") t("Strecke [mi]"); else t("Strecke [km]"); ?></th>
+        <th><?php t("Target Address"); ?></th>
+        <th><?php t("End"); ?></th>
+        <th><?php t("Ø Consumption kWh"); ?></th>
+        <th><?php t("Consumed kWh"); ?></th>
+        <th><?php t("charged kWh"); ?></th>
+        <th><?php t("Drive Time [h]"); ?></th>
+        <th><?php t("Charge Time [h]"); ?></th>
+        <th><?php if ($LengthUnit == "mile") t("Distance [mi]"); else t("Distance [km]"); ?></th>
         <th></th>
     </tr>
 </thead>
 </table>
 
-<h2>New Journey</h2>
+<h2><?php t("New Journey"); ?></h2>
 <table>
-    <tr><td>Journey Name:</td><td><input width="100%" id="name"></td></tr>
-    <tr><td>Start</td><td><select width="100%" id="start"><option>Please Wait!</option></select></td></tr>
-    <tr><td>End</td><td><select width="100%" id="end"><option>Please Select Start First!</option></select></td></tr>
-    <tr><td></td><td><button id="btnSave">Save</button></td></tr>
+    <tr><td><?php t("Journey Name"); ?>:</td><td><input width="100%" id="name"></td></tr>
+    <tr><td><?php t("Start"); ?></td><td><select width="100%" id="start"><option><?php t("Please Wait"); ?></option></select></td></tr>
+    <tr><td><?php t("End"); ?></td><td><select width="100%" id="end"><option><?php t("Please Select Start First"); ?></option></select></td></tr>
+    <tr><td></td><td><button id="btnSave"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 </body>

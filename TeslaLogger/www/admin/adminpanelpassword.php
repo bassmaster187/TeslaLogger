@@ -7,7 +7,7 @@ require_once("tools.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php t("Teslalogger Tesla Zugangsdaten"); ?></title>
+    <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -72,10 +72,10 @@ if (isDocker())
 <h1><?php t("Set password for Teslalogger's admin panel"); ?>:</h1>
 <table>
 <tr><td><b><?php t("Name"); ?>:</b></td><td>admin</td></tr>
-<tr><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+<tr><td><?php t("Password"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
+<tr><td><?php t("Repeat Password"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 <tr><td colspan="2">
-<button id="deletebutton" onclick="deletepw();" class="redbutton"><?php t("Löschen"); ?></button>
-<button onclick="save();" style="float: right;"><?php t("Speichern"); ?></button></td></tr>
+<button id="deletebutton" onclick="deletepw();" class="redbutton"><?php t("Delete"); ?></button>
+<button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
