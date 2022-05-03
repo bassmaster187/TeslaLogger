@@ -2887,6 +2887,8 @@ namespace TeslaLogger
                         ws.Abort();
                         ws.Dispose();
                     }
+
+                    DrivingOrChargingByStream = false;
                 }
             }
 
@@ -4070,6 +4072,7 @@ namespace TeslaLogger
         {
             Log("Request StopStreaming");
             stopStreaming = true;
+            DrivingOrChargingByStream = false;
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
