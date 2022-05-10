@@ -271,6 +271,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/abrp/[0-9]+/set"):
                         ABRP_Set(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/sucbingo/[0-9]+/info"):
+                        SuCBingo_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/sucbingo/[0-9]+/set"):
+                        SuCBingo_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states", System.StringComparison.Ordinal):
                         Debug_TeslaLoggerStates(request, response);
                         break;
@@ -590,7 +596,68 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-        private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
+        private void SuCBingo_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/set");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    string sucBingo_user = "";
+                    string sucBingo_apiKey = "";
+
+                    if (String.IsNullOrEmpty(data))
+                    {
+                        sucBingo_user = request.QueryString["sucBingo_user"];
+                        sucBingo_apiKey = request.QueryString["sucBingo_apiKey"];
+                    }
+                    else
+                    {
+                        dynamic r = JsonConvert.DeserializeObject(data);
+                        sucBingo_user = r["sucBingo_user"];
+                        sucBingo_apiKey = r["sucBingo_apiKey"];
+                    }
+
+                    if (!car.DbHelper.SetSucBingo(sucBingo_user, sucBingo_apiKey))
+                        WriteString(response, "User and/or ApiKey are wrong!");
+                    else
+                        WriteString(response, "OK");
+
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void SuCBingo_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/info");
+            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+            {
+                _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                Car car = Car.GetCarByID(CarID);
+                if (car != null)
+                {
+                    car.DbHelper.GetSuCBingo(out string sucBingo_user, out int sucBingo_apiKey);
+                    var t = new
+                    {
+                        sucBingo_user = sucBingo_user,
+                        sucBingo_apiKey = sucBingo_apiKey
+                    };
+
+                    string json = JsonConvert.SerializeObject(t);
+                    response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                    WriteString(response, json);
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
         {
             int startPosID = 0;
             int endPosID = 0;
