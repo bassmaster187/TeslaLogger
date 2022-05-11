@@ -1,8 +1,13 @@
-# Version 1.53.1
+# Version MQTT 2.2.0.0
+- Non-standard MQTT brocker port can be defined
+- User specific ClientID can be defined
+- Subtopics can be activated
+More information: https://github.com/bassmaster187/TeslaLogger/blob/master/MQTTClient/readme.md
+
+# Version 1.54.0
 - Bugfixes
 
 # Version 1.53.0
-- Bugfixes
 - Get rid of duplicate trips
 
 # Version 1.52.4

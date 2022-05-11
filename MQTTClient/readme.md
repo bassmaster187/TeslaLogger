@@ -38,7 +38,7 @@ Example:
 ### Subtopics (optional)
 Enable or disable subtopics. Default: "False".
 
-If enabled, json-string from "Topic" (see above) will be splitted into subtopics: e.g. maytesla-2/battery_level
+If enabled, json-string from "Topic" (see above) will be splitted into subtopics: e.g. mytesla-2/battery_level
 
 Example:
 ```
@@ -64,5 +64,16 @@ Example:
 ```
 <setting name="Password" serializeAs="String">
     <value>mypassword123</value>
+</setting>
+```
+
+
+### ClientID (optional)
+User specific MQTT ClientID. Useful if more then one TeslaLogger are connected to the same MQTT brocker.
+
+Example:
+```
+<setting name="ClientID" serializeAs="String">
+    <value>Teslalogger1</value>
 </setting>
 ```

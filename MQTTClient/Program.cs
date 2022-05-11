@@ -43,6 +43,12 @@ namespace MQTTClient
                     }
                 }
 
+                if (Properties.Settings.Default.ClientID.Length > 0)
+                {
+                    clientid = Properties.Settings.Default.ClientID;
+                    Logfile.Log("MQTT: Using user specific ClientID: " + clientid);
+                }
+
                 if (Properties.Settings.Default.Topic.Length == 0)
                 {
                     Logfile.Log("MQTT: No Topic settings -> MQTT disabled!");
@@ -65,7 +71,6 @@ namespace MQTTClient
                         Logfile.Log(ex.Message);
                     }
                 }
-
 
                 client = new MqttClient(Properties.Settings.Default.MQTTHost, MQTTPort, false, null, null, MqttSslProtocols.None);
 

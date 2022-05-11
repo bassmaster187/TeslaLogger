@@ -4129,6 +4129,10 @@ VALUES(
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read())
                     {
+                        object o = dr[0];
+                        if (o == DBNull.Value)
+                            return 0;
+
                         return Convert.ToInt32(dr[0], Tools.ciEnUS);
                     }
                 }
