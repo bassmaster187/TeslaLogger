@@ -444,10 +444,14 @@ WHERE
         internal bool SetSucBingo(string sucBingo_user, string sucBingo_apiKey)
         {
             car.SuCBingoUser = sucBingo_user;
-            car.SucBingoApiKey = sucBingo_apiKey;
+            car.SuCBingoApiKey = sucBingo_apiKey;
 
             try
             {
+                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude()).Wait();
+
+                car.webhelper.SuperchargeBingoCheckin(0.0, 0.0);
+
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();

@@ -141,7 +141,7 @@ namespace TeslaLogger
         public string ABRPToken { get => aBRP_token; set => aBRP_token = value; }
         public int ABRPMode { get => aBRP_mode; set => aBRP_mode = value; }
         public string SuCBingoUser { get => sucBingo_user; set => sucBingo_user = value; }
-        public string SucBingoApiKey { get => sucBingo_apiKey; set => sucBingo_apiKey = value; }
+        public string SuCBingoApiKey { get => sucBingo_apiKey; set => sucBingo_apiKey = value; }
         public CurrentJSON CurrentJSON { get => currentJSON; set => currentJSON = value; }
         public static List<Car> Allcars { get => allcars; }
         public DBHelper DbHelper { get => dbHelper; set => dbHelper = value; }
@@ -1365,6 +1365,16 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+                }
+                GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
+                GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
+                if (fast_charger_present && fast_charger_brand == "Tesla")
+                {
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        Log("any -> charging: Tesla Supercharger, do SuperchargeBingoCheckin");
+                        _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
             }
             // driving -> any

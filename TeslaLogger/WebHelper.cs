@@ -75,6 +75,7 @@ namespace TeslaLogger
         internal HttpClient httpclient_teslalogger_de = new HttpClient();
         internal static HttpClient httpClientForAuthentification;
         internal static HttpClient httpClientABRP = null;
+        internal static HttpClient httpClientSuCBingo = null;
         internal HttpClient httpclientTeslaAPI = null;
         internal static object httpClientLock = new object();
 
@@ -4360,7 +4361,7 @@ namespace TeslaLogger
             }
         }
 
-        internal async Task SuperchargeBingoCheckin((double) latitude, (double) longitude)
+        internal async Task SuperchargeBingoCheckin(double latitude, double longitude)
         {
             try
             {
@@ -4369,11 +4370,12 @@ namespace TeslaLogger
 
                 lock (httpClientLock)
                 {
-                    if (httpclient_supercharge_bingo == null)
+                    if (httpClientSuCBingo == null)
                     {
-                        httpclient_supercharge_bingo = new HttpClient();
-                        httpclient_supercharge_bingo.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        httpclient_supercharge_bingo.DefaultRequestHeaders.ConnectionClose = true;
+                        HttpClient c = new HttpClient();
+                        c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        c.DefaultRequestHeaders.ConnectionClose = true;
+                        httpClientSuCBingo = c;
 
                         Logfile.Log("SuperchargeBingo initialized!");
                     }
@@ -4381,8 +4383,8 @@ namespace TeslaLogger
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                     {
-                        { "user": car.SuCBingoUser },
-                        { "key": car.SuCBingoApiKey},
+                        { "user", car.SuCBingoUser },
+                        { "key", car.SuCBingoApiKey},
                         { "lat", latitude },
                         { "lon", longitude },
                         { "type", "teslalogger" },
@@ -4395,13 +4397,8 @@ namespace TeslaLogger
 
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
-                    var result = await httpclient_supercharge_bingo.PostAsync("https://beta.supercharge.bingo/v1.php/api/v1/checkin", content);
-                    if (result.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        string response = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log("SuperchargeBingoCheckin response: " + response);
-                    }
-                    else if (result.StatusCode != HttpStatusCode.OK)
+                    var result = await httpClientSuCBingo.PostAsync("https://beta.supercharge.bingo/v1.php/api/v1/checkin", content);
+                    if (result.StatusCode != HttpStatusCode.OK)
                     {
                         string response = result.Content.ReadAsStringAsync().Result;
                         Logfile.Log("SuperchargeBingoCheckin response: " + response);

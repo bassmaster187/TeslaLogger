@@ -641,7 +641,7 @@ namespace TeslaLogger
                 Car car = Car.GetCarByID(CarID);
                 if (car != null)
                 {
-                    car.DbHelper.GetSuCBingo(out string sucBingo_user, out int sucBingo_apiKey);
+                    car.DbHelper.GetSuCBingo(out string sucBingo_user, out string sucBingo_apiKey);
                     var t = new
                     {
                         sucBingo_user = sucBingo_user,
