@@ -300,6 +300,9 @@ namespace TeslaLogger
                         Logfile.Log("VERBOSE off");
                         WriteString(response, "VERBOSE off");
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/dev/sucbingo", System.StringComparison.Ordinal):
+                        SuCBingoDev(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/logfile", System.StringComparison.Ordinal):
                         GetLogfile(response);
                         break;
@@ -657,7 +660,54 @@ namespace TeslaLogger
             WriteString(response, "");
         }
 
-private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SuCBingoDev(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            if (request.QueryString.Count == 3 && request.QueryString.HasKeys())
+            {
+                double lat = double.NaN;
+                double lng = double.NaN;
+                int CarID = 0;
+
+                foreach (string key in request.QueryString.AllKeys)
+                {
+                    if (request.QueryString.GetValues(key).Length == 1)
+                    {
+                        switch (key)
+                        {
+                            case "lat":
+                                double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                break;
+                            case "lng":
+                                double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                break;
+                            case "carID":
+                                int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
+                }
+                Car c = null;
+                try
+                {
+                    c = Car.GetCarByID(CarID);
+                    Logfile.Log("SuCBingoDev: lat=" + lat.ToString(Tools.ciEnUS) + " lng=" + lng.ToString(Tools.ciEnUS));
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        _ = c.webhelper.SuperchargeBingoCheckin(lat, lng, true, "Tesla");
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }
+
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+            }
+        }
+
+        private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
         {
             int startPosID = 0;
             int endPosID = 0;

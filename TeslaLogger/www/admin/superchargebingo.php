@@ -78,14 +78,15 @@ else
 </script>
 
 <div id="content" style="max-width:1036px;">
-<h1>Supercharge Bingo Link</h1>
-You can setup a link from Teslalogger to Supercharge Bingo to perform automatic checkin at supercharging. 
+<h1>Supercharge Bingo</h1>
+You can setup a link from Teslalogger to Supercharge Bingo to perform automatic checkins at Superchargers. 
 </div>
 <h1>Setup</h1>
 <ul>
-    <li>Create an Supercharge Bingo account: https://beta.supercharge.bingo/#/register</li>
+    <li>Create a Supercharge Bingo account: https://beta.supercharge.bingo/#/register</li>
     <li>Create API key (must be secure)</li>
     <li>Copy Username and API key and insert it in TeslaLogger</li>
+    <li>Save and restart TeslaLogger</li>
 </ul>
 <h1>Settings</h1>
 <table>
@@ -93,7 +94,7 @@ You can setup a link from Teslalogger to Supercharge Bingo to perform automatic 
     <td>Username:</td><td><input id="user" size="40" value="<?= $sucBingo_user ?>"/></td>
 </tr>
 <tr>
-    <td>API key:</td><td><input id="apikey" size="40" value="<?= $sucBingo_apiKey ?>"/></td>
+    <td>API key:</td><td><input id="apikey" size="100" value="<?= $sucBingo_apiKey ?>"/></td>
 </tr>
 <tr>    
     <td></td><td><button onClick="javascript:Save();">Save</button></td>

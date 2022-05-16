@@ -4361,12 +4361,21 @@ namespace TeslaLogger
             }
         }
 
-        internal async Task SuperchargeBingoCheckin(double latitude, double longitude)
+        internal async Task SuperchargeBingoCheckin(double latitude, double longitude, bool fastcharger, string brand)
         {
             try
             {
-                if (String.IsNullOrEmpty(car.SuCBingoUser) || String.IsNullOrEmpty(car.SuCBingoApiKey))
+                if (!fastcharger || String.IsNullOrEmpty(brand) || brand != "Tesla")
+                {
+                    Logfile.Log("SuperchargeBingo: Not a Tesla Superchager!");
                     return;
+                }
+                    
+                if (String.IsNullOrEmpty(car.SuCBingoUser) || String.IsNullOrEmpty(car.SuCBingoApiKey))
+                {
+                    Logfile.Log("SuperchargeBingo: No credentials defined!");
+                    return;
+                }
 
                 lock (httpClientLock)
                 {
@@ -4377,7 +4386,7 @@ namespace TeslaLogger
                         c.DefaultRequestHeaders.ConnectionClose = true;
                         httpClientSuCBingo = c;
 
-                        Logfile.Log("SuperchargeBingo initialized!");
+                        Logfile.Log("SuperchargeBingo: initialized!");
                     }
                 }
 
@@ -4385,8 +4394,8 @@ namespace TeslaLogger
                     {
                         { "user", car.SuCBingoUser },
                         { "key", car.SuCBingoApiKey},
-                        { "lat", latitude },
-                        { "lon", longitude },
+                        { "lat", latitude.ToString(Tools.ciEnUS) },
+                        { "long", longitude.ToString(Tools.ciEnUS) },
                         { "type", "teslalogger" },
                     };
 
@@ -4394,28 +4403,41 @@ namespace TeslaLogger
 
 
                 string json = JsonConvert.SerializeObject(values);
-
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
+                    Tools.SetThreadEnUS();
                     var result = await httpClientSuCBingo.PostAsync("https://beta.supercharge.bingo/v1.php/api/v1/checkin", content);
-                    if (result.StatusCode != HttpStatusCode.OK)
+                    string response = result.Content.ReadAsStringAsync().Result;
+                    int checkinID = 0;
+                    try
                     {
-                        string response = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log("SuperchargeBingoCheckin response: " + response);
+                        int.TryParse(response, out checkinID);
                     }
-                    else if (result.StatusCode == HttpStatusCode.OK)
+                    catch (Exception ex)
                     {
-                        string response = result.Content.ReadAsStringAsync().Result;
-                        Logfile.Log("SuperchargeBingoCheckin response: " + response);
+                        Logfile.Log(ex.Message);
                     }
+                    finally
+                    {
+                        if (checkinID != 0)
+                        {
+                            Logfile.Log("SuperchargeBingo: Checkin OK, Checkin ID: " + checkinID.ToString());
+                        }
+                        else
+                        {
+                            //Logfile.Log("SuperchargeBingo: Checkin not OK, response: " + response);
+                            dynamic jsonResult = JsonConvert.DeserializeObject(response);
+                            dynamic message = jsonResult["message"];
+                            Logfile.Log("SuperchargeBingo: Checkin Error: " + message);
+                        }
+                    }
+                    
                 }
             }
             catch (Exception ex)
             {
-                //car.CreateExceptionlessClient(ex).Submit();
-
                 Logfile.Log(ex.ToString());
-                Tools.DebugLog("SuperchargeBingoCheckin exception: " + ex.ToString() + Environment.NewLine);
+                Tools.DebugLog("SuperchargeBingo: Checkin exception: " + ex.ToString() + Environment.NewLine);
             }
         }
     }

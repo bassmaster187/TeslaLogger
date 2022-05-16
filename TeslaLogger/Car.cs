@@ -391,6 +391,7 @@ namespace TeslaLogger
                 CurrentJSON.current_car_version = DbHelper.GetLastCarVersion();
 
                 DbHelper.GetABRP(out aBRP_token, out aBRP_mode);
+                DbHelper.GetSuCBingo(out sucBingo_user, out sucBingo_apiKey);
 
                 webhelper.StartStreamThread();
             }
@@ -1308,6 +1309,14 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
                 ResetHighFrequencyLogging();
+
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Log("any -> charging: SuperchargeBingoCheckin");
+                    GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
+                    GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
+                    _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), fast_charger_present, fast_charger_brand);
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
@@ -1365,16 +1374,6 @@ namespace TeslaLogger
                                 break;
                         }
                     }
-                }
-                GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
-                GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
-                if (fast_charger_present && fast_charger_brand == "Tesla")
-                {
-                    _ = Task.Factory.StartNew(() =>
-                    {
-                        Log("any -> charging: Tesla Supercharger, do SuperchargeBingoCheckin");
-                        _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
-                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
             }
             // driving -> any

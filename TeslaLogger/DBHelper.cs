@@ -448,9 +448,7 @@ WHERE
 
             try
             {
-                car.webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, car.CurrentJSON.current_battery_level, 0, true, car.CurrentJSON.current_power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude()).Wait();
-
-                car.webhelper.SuperchargeBingoCheckin(0.0, 0.0);
+                car.webhelper.SuperchargeBingoCheckin(double.NaN, double.NaN, true, "Tesla");
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
