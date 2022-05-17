@@ -154,6 +154,7 @@ namespace TeslaLogger
         public int Year { get => year; set => year = value; }
         public bool AWD { get => aWD; set => aWD = value; }
         public bool MIC { get => mIC; set => mIC = value; }
+        public bool MIG { get => mIG; set => mIG = value; }
         public string Motor { get => motor; set => motor = value; }
         public static object InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
         public double Sumkm { get => sumkm; set => sumkm = value; }
@@ -175,6 +176,7 @@ namespace TeslaLogger
         private int year = 0;
         private bool aWD = false;
         private bool mIC = false;
+        private bool mIG = false;
         private string motor = "";
         internal bool waitForMFACode;
         internal bool waitForRecaptcha;
@@ -366,7 +368,7 @@ namespace TeslaLogger
                 CarVoltageAt50SOC = DbHelper.GetVoltageAt50PercentSOC(out DateTime startdate, out DateTime ende);
                 Log("Voltage at 50% SOC:" + CarVoltageAt50SOC + "V Date:" + startdate.ToString(Tools.ciEnUS));
 
-                string vindecoder = Tools.VINDecoder(Vin, out year, out _, out aWD, out mIC, out _, out motor, out _).ToString();
+                string vindecoder = Tools.VINDecoder(Vin, out year, out _, out aWD, out mIC, out _, out motor, out mIG).ToString();
 
                 webhelper.DeleteWakeupFile();
 

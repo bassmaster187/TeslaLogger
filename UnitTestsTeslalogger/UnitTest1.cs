@@ -438,7 +438,7 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
-        public void Car_Y_LR_AWD()
+        public void Car_Y_LR_AWD_US()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
             WebHelper wh = c.webhelper;
@@ -451,7 +451,45 @@ namespace UnitTestsTeslalogger
             wh.car.TrimBadging = "74d";
             wh.UpdateEfficiency();
 
-            Assert.AreEqual("Y LR AWD", wh.car.ModelName);
+            Assert.AreEqual("Y LR AWD (US)", wh.car.ModelName);
+            Assert.AreEqual(0.148, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_Y_LR_AWD_MIC_2021()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 500, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRWYGCEK3MCXXXXXX";
+            wh.car.CarType = "modely";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.148;
+            wh.car.TrimBadging = "74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Y LR AWD (MIC 2021)", wh.car.ModelName);
+            Assert.AreEqual(0.148, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_Y_LR_AWD_MIC_2022()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRWYGCEKXNCXXXXXX";
+            wh.car.CarType = "modely";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.148;
+            wh.car.TrimBadging = "74d";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("Y LR AWD (MIC 2022)", wh.car.ModelName);
             Assert.AreEqual(0.148, wh.car.WhTR);
         }
 
@@ -466,12 +504,12 @@ namespace UnitTestsTeslalogger
             wh.car.Vin = "XP7YGCELONBXXXXXX";
             wh.car.CarType = "modely"; // ???
             wh.car.CarSpecialType = "base"; // ???
-            wh.car.DBWhTR = 0.148; // ???
+            wh.car.DBWhTR = 0.165; // ???
             wh.car.TrimBadging = "p74d"; // ???
             wh.UpdateEfficiency();
 
-            Assert.AreEqual("Y LR AWD", wh.car.ModelName);
-            Assert.AreEqual(0.148, wh.car.WhTR);
+            Assert.AreEqual("Y P (MIG)", wh.car.ModelName);
+            Assert.AreEqual(0.165, wh.car.WhTR);
         }
 
         [TestMethod]
