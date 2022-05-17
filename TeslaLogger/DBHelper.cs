@@ -448,8 +448,6 @@ WHERE
 
             try
             {
-                car.webhelper.SuperchargeBingoCheckin(double.NaN, double.NaN, true, "Tesla");
-
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();

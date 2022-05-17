@@ -696,7 +696,7 @@ namespace TeslaLogger
                     Logfile.Log("SuCBingoDev: lat=" + lat.ToString(Tools.ciEnUS) + " lng=" + lng.ToString(Tools.ciEnUS));
                     _ = Task.Factory.StartNew(() =>
                     {
-                        _ = c.webhelper.SuperchargeBingoCheckin(lat, lng, true, "Tesla");
+                        _ = c.webhelper.SuperchargeBingoCheckin(lat, lng);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
 

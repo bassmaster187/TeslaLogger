@@ -4361,22 +4361,10 @@ namespace TeslaLogger
             }
         }
 
-        internal async Task SuperchargeBingoCheckin(double latitude, double longitude, bool fastcharger, string brand)
+        internal async Task SuperchargeBingoCheckin(double latitude, double longitude)
         {
             try
             {
-                if (!fastcharger || String.IsNullOrEmpty(brand) || brand != "Tesla")
-                {
-                    Logfile.Log("SuperchargeBingo: Not a Tesla Superchager!");
-                    return;
-                }
-                    
-                if (String.IsNullOrEmpty(car.SuCBingoUser) || String.IsNullOrEmpty(car.SuCBingoApiKey))
-                {
-                    Logfile.Log("SuperchargeBingo: No credentials defined!");
-                    return;
-                }
-
                 lock (httpClientLock)
                 {
                     if (httpClientSuCBingo == null)
@@ -4398,9 +4386,6 @@ namespace TeslaLogger
                         { "long", longitude.ToString(Tools.ciEnUS) },
                         { "type", "teslalogger" },
                     };
-
-                
-
 
                 string json = JsonConvert.SerializeObject(values);
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))

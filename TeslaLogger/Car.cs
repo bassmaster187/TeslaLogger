@@ -1310,13 +1310,20 @@ namespace TeslaLogger
             {
                 ResetHighFrequencyLogging();
 
-                _ = Task.Factory.StartNew(() =>
+                GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
+                GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
+                if (!String.IsNullOrEmpty(SuCBingoUser) && !String.IsNullOrEmpty(SuCBingoApiKey))
                 {
-                    Log("any -> charging: SuperchargeBingoCheckin");
-                    GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
-                    GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
-                    _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude(), fast_charger_present, fast_charger_brand);
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    if (fast_charger_present && fast_charger_brand == "Tesla")
+                    {
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            Log("SuperchargeBingo: Checkin!");
+
+                            _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    }
+                }
             }
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
