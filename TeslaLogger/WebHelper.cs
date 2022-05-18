@@ -1556,10 +1556,11 @@ namespace TeslaLogger
                     if (car.Vin != vin)
                     {
                         car.Vin = vin;
-                        Tools.VINDecoder(vin, out int year, out _, out bool aWD, out bool mIC, out _, out string motor, out _);
+                        Tools.VINDecoder(vin, out int year, out _, out bool aWD, out bool mIC, out _, out string motor, out bool mIG);
                         car.Year = year;
                         car.AWD = aWD;
                         car.MIC = mIC;
+                        car.MIG = mIG;
                         car.Motor = motor;
                         Log("WriteCarsettings -> VIN");
                         car.WriteSettings();
@@ -2276,15 +2277,44 @@ namespace TeslaLogger
             }
             else if (car.CarType == "modely" && car.CarSpecialType == "base")
             {
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool _, out bool MIC, out string _, out string _, out bool MIG);
                 if (car.TrimBadging == "74d")
                 {
-                    WriteCarSettings("0.148", "Y LR AWD");
-                    return;
+                    if (MIC)
+                    {
+                        if (year < 2022)
+                        {
+                            WriteCarSettings("0.148", "Y LR AWD (MIC 2021)"); //LG 74kWh
+                            return;
+                        }else{
+                            WriteCarSettings("0.148", "Y LR AWD (MIC 2022)"); //LG 79kWh
+                            return;
+                        }
+                    }
+                    else if(MIG)
+                    {
+                        WriteCarSettings("0.148", "Y LR AWD (MIG)");
+                        return;
+                    }
+                    else
+                    {
+                        WriteCarSettings("0.148", "Y LR AWD (US)");
+                        return;
+                    }
+                    
                 }
                 else if (car.TrimBadging == "p74d")
                 {
-                    WriteCarSettings("0.148", "Y P");
-                    return;
+                    if (MIG)
+                    {
+                        WriteCarSettings("0.165", "Y P (MIG)");
+                        return;
+                    }
+                    else
+                    {
+                        WriteCarSettings("0.148", "Y P (US)");
+                        return;
+                    }
                 }
                 else if (car.TrimBadging == "50")
                 {

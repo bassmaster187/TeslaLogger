@@ -402,8 +402,6 @@ namespace TeslaLogger
                 int dateCode = (int)vin[9];
                 year = 2010 + dateCode - (int)'A';
                 carType = "n/a";
-                AWD = false;
-                MIC = false;
                 battery = "n/a";
                 motor = "n/a";
                 // handle the skipped 'I' code. We may also need to skip 'O'
@@ -518,7 +516,7 @@ namespace TeslaLogger
                         break;
                 }
 
-                return $"{carType} {year} AWD:{AWD} MIC:{MIC} battery:{battery} motor:{motor}";
+                return $"{carType} {year} AWD:{AWD} MIC:{MIC} battery:{battery} motor:{motor} MIG:{MIG}";
             }
             catch (Exception ex)
             {
