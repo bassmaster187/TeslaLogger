@@ -16,6 +16,7 @@ Supercharger AT-Lermoos, 47.395975, 10.887217
 Supercharger AT-Liezen, 47.559370, 14.252606
 Supercharger AT-Poysdorf, 48.676534, 16.623013
 Supercharger AT-Salzburg, 47.727056, 13.060672
+Supercharger-V3 AT-Salzburg Nord,47.836027,13.059075
 Supercharger AT-St. Anton, 47.131123, 10.271497
 Supercharger AT-St. Anton, 47.130092, 10.269231
 Supercharger AT-St. Georgen, 47.929088, 13.502168
@@ -141,7 +142,7 @@ Supercharger CZ-Vestec, 49.9898398, 14.4907623
 Supercharger DE-Achern, 48.6413, 8.03774
 Supercharger DE-Aichstetten, 47.880376, 10.040434, 7
 Supercharger DE-Aichstetten, 47.880299, 10.04052, 10
-Supercharger-V3 DE-Bad Oeynhausen,52.214135,8.815111
+Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
 Supercharger-V3 DE-Berlin - EUREF-Campus, 52.4808984, 13.3558539
@@ -217,7 +218,7 @@ Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger-V3 DE-Lehre, 52.313216,10.635089
-Supercharger-V3 DE-Leipzig-Flughafen,51.401278,12.180194
+Supercharger-V3 DE-Leipzig-Flughafen,51.401534,12.181377
 Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
@@ -259,7 +260,7 @@ Supercharger-V3 DE-Posthausen, 53.057578,9.165257
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
 Supercharger DE-Regensburg, 48.9947224, 12.150609
-Supercharger-V3 DE-Reichertshofen,48.645235,11.520787
+Supercharger-V3 DE-Reichertshofen,48.645645,11.520604
 Supercharger-V3 DE-Reinfeld, 53.8232, 10.50352
 Supercharger-V3 DE-Rhüden,51.947273, 10.1409618, 9
 Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
@@ -351,6 +352,7 @@ Supercharger-V3 ES-Ondara,38.816859,0.022245
 Supercharger ES-Ponferrada, 42.623851, -6.451837
 Supercharger ES-Reocín, 43.355578,-4.094960
 Supercharger ES-Rivabellosa, 42.701171, -2.91951
+Supercharger-V3 ES-Sagunto,39.672924,-0.266304
 Supercharger ES-Sant Cugat, 41.498096,2.072692
 Supercharger ES-Sevilla, 37.391485,-6.009627
 Supercharger ES-Tarragona, 41.134294, 1.1683
@@ -363,7 +365,7 @@ Supercharger FI-Äänekoski, 62.516741, 25.6913
 Supercharger FI-Akaa, 61.181106, 23.885075
 Supercharger FI-Huittinen, 61.168436, 22.680099
 Supercharger-V3 FI-Huittinen, 61.168436, 22.680099
-Supercharger FI-Jalasjärvi, 62.417805, 22.792112
+Supercharger FI-Jalasjärvi,62.417071,22.791815
 Supercharger-V3 FI-Karesuvanto, 68.450226,22.4814
 Supercharger FI-Koivisto, 62.516908, 25.691666
 Supercharger FI-Kokkola, 63.829282, 23.148487
@@ -387,6 +389,8 @@ Supercharger FR-Aire de Reims-Champagne-Nord, 49.119348, 4.245689
 Supercharger-V3 FR-Aire du Granier, 45.525586, 5.974850
 Supercharger-V3 FR-Aire de l'Abis, 45.524989, 5.976465
 Supercharger-V3 FR-Aire de la Vendée, 46.573233, -1.11793
+Supercharger-V3 FR-Aire des Portes d'Angers,47.498968,-0.491404
+Supercharger-V3 FR-Aire du Jura,46.774663,5.522206
 Supercharger FR-Aix-en-Provence Val de l'Arc, 43.5119793, 5.466397
 Supercharger FR-Aix-en-Provence, 43.5106478, 5.4564393
 Supercharger FR-Albaret-Sainte-Marie,44.870977, 3.252918
@@ -405,6 +409,7 @@ Supercharger FR-Bourges, 47.049393, 2.344843
 Supercharger FR-Buchelay, 48.990144, 1.671559
 Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
 Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
+Supercharger-V3 FR-Blois,47.611942,1.339408
 Supercharger FR-Caen, 49.16398, -0.424802
 Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
 Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
@@ -430,6 +435,8 @@ Supercharger FR-Le Mans, 48.041833, 0.175342
 Supercharger FR-La Seyne-sur-Mer, 43.121199, 5.85086
 Supercharger-V3 FR-Labouheyre, 44.202799, -0.92682
 Supercharger FR-Langon, 44.5424356, -0.2539542
+Supercharger-V3 FR-Laxou,48.691096,6.127684
+Supercharger-V3 FR-Le Mans - Saint-Saturnin,48.052932,0.166434
 Supercharger-V3 FR-Les Herbiers, 46.889368, -1.032994
 Supercharger FR-Lille, 50.583306, 3.08982
 Supercharger FR-Limoges, 45.86723, 1.270344
@@ -466,11 +473,13 @@ Supercharger FR-Rungis, 48.7544317, 2.3510298
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
 Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
+Supercharger-V3 FR-Sallanches,45.952671,6.628494
 Supercharger FR-Sallanches, 45.951545, 6.62879
 Supercharger FR-Senlis, 49.208545, 2.606701
-Supercharger FR-Sisteron, 44.2258,5.913
+Supercharger-V3 FR-Sisteron,44.22584,5.912426,30
+Supercharger FR-Sisteron,44.225891,5.913562,10
 Supercharger FR-Strasbourg, 48.53407, 7.70201
-Supercharger FR-Thiais, 48.7543643, 2.3730657
+Supercharger FR-Thiais,48.754759,2.373078
 Supercharger FR-Toulon, 43.121199, 5.85086
 Supercharger FR-Toulouse, 43.769238, 1.361623
 Supercharger FR-Tours, 47.406937,0.742856
@@ -527,11 +536,13 @@ Supercharger-V3 GB-Park Royal, 51.52681,-0.283526
 Supercharger GB-Perth, 56.386, -3.4792
 Supercharger GB-Reading, 51.420611, -0.988028
 Supercharger GB-Richmond, 54.4421, -1.6713
+Supercharger-V3 GB-Rugby,52.409672,-1.250838
 Supercharger GB-Sarn, 51.535351, -3.577637
 Supercharger GB-Sheffield, 53.314145, -1.281904
 Supercharger GB-South Mimms, 51.687536, -0.223548
 Supercharger GB-Tebay Southbound, 54.453104, -2.605743
 Supercharger GB-Telford, 52.677334, -2.399552
+Supercharger-V3 GB-Trumpington,52.168240,0.109177
 Supercharger GB-Warrington, 53.339515, -2.569358
 Supercharger GB-Warwick Northbound, 52.216118, -1.504695
 Supercharger GB-Warwick Southbound, 52.219048, -1.50126
@@ -548,9 +559,10 @@ Supercharger HR-Split, 43.58737, 16.57636
 Supercharger HR-Vrgorac, 43.20407, 17.37387
 Supercharger HR-Zadar, 44.11418, 15.40711
 Supercharger HR-Zagreb, 45.76705, 16.23365
-Supercharger HU-Debrecen, 47.541266, 21.583575
+Supercharger HU-Debrecen,47.540251,21.585558
 Supercharger HU-Györ, 47.633274, 17.660977
 Supercharger HU-Fót, 47.581808,19.162384
+Supercharger HU-Miskolc,48.058002,20.799201
 Supercharger HU-Sormás, 46.460543, 16.906756
 Supercharger HU-Szeged, 46.274868,20.1024638
 Supercharger HU-Törökbálint, 47.439444, 18.889835
@@ -558,6 +570,8 @@ Supercharger IE-Ballacolla, 52.86704, -7.481818
 Supercharger IE-Birdhill, 52.757747, -8.40932
 Supercharger IE-Castlebellingham Northbound, 53.932462, -6.417717
 Supercharger IE-Castlebellingham Southbound, 53.924106, -6.411373
+Supercharger-V3 IE-Enfield,53.406101,-6.838143
+Supercharger IE-Tralee,52.260703,-9.659141
 Supercharger-V3 IS-Egilsstaðir, 65.259368,-14.406532
 Supercharger IS-Fossvogur, 64.117994, -21.899666
 Supercharger-V3 IS-Kirkjubæjarklaustur, 63.789025,-18.052187
@@ -584,6 +598,7 @@ Supercharger IT-Firenze, 43.810258, 11.17798
 Supercharger IT-Forcola, 46.165099, 9.675995
 Supercharger-V3 IT-Forlì, 44.242877, 12.081828
 Supercharger IT-Forte dei Marmi, 43.956416, 10.194539
+Supercharger-V3 IT-Grandate,45.769049,9.056739
 Supercharger IT-Grosseto,42.789221,11.115743
 Supercharger IT-Imperia, 43.892498, 8.039031
 Supercharger IT-Magliano Sabina, 42.372085, 12.471703
@@ -595,6 +610,7 @@ Supercharger IT-Moncalieri, 44.973333, 7.730113
 Supercharger IT-Morano Calabro, 39.875989, 16.065094
 Supercharger IT-Occhiobello, 44.918787, 11.594051
 Supercharger-V3 IT-Olbia,40.906900,9.515961
+Supercharger IT-Oristano,39.890044,8.599804
 Supercharger-V3 IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
@@ -604,6 +620,7 @@ Supercharger-V3 IT-Roma South West,41.815947,12.4009345
 Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
 Supercharger IT-Sondrio, 46.164535, 9.677329
 Supercharger IT-Tarquinia, 42.183306, 11.788161
+Supercharger-V3 IT-Torino Grugliasco,45.058738,7.612634
 Supercharger IT-Trento, 46.11166, 11.09172
 Supercharger IT-Varazze, 44.35161, 8.56544
 Supercharger IT-Verona, 45.412326, 10.970212
@@ -631,11 +648,13 @@ Supercharger NL-Hoorn, 52.650769, 5.038917
 Supercharger NL-Horst, 51.470008, 6.056974
 Supercharger NL-Leiderdorp, 52.160766, 4.549019
 Supercharger-V3 NL-Leusden, 52.144022, 5.416976
+Supercharger-V3 NL-Meerkerk,51.899474,4.982747
 Supercharger-V3 NL-Middelburg, 51.480275, 3.636485
 Supercharger NL-Naarden, 52.30858, 5.141127
 Supercharger NL-Oosterhout, 51.626423, 4.869517
 Supercharger-V3 NL-Rijswijk, 52.048276, 4.349078
 Supercharger NL-s-Hertogenbosch, 51.7205, 5.3334
+SSupercharger-V3 NL-Sassenheim,52.213205,4.503374
 Supercharger NL-Tilburg, 51.606331, 5.005621
 Supercharger-V3 NL-Uden, 51.671308, 5.60267
 Supercharger NL-Ugchelen, 52.177996, 5.912627
@@ -682,6 +701,7 @@ Supercharger-V3 NO-Kautokeino, 69.020412,23.048909
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland, 59.836224, 9.579221
 Supercharger NO-Larvik, 59.112393, 10.108783
+Supercharger NO-Lasses,59.037499,9.673879
 Supercharger NO-Lavik, 61.103869, 5.51268
 Supercharger NO-Leinstrand, 63.325319, 10.305137
 Supercharger-V3 NO-Leira, 60.969163, 9.29164
@@ -770,6 +790,7 @@ Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
 Supercharger SE-Jäckvik, 66.39067, 16.964868
 Supercharger-V3 SE-Jokkmokk, 66.605774,19.824993
+Supercharger-V3 SE-Jönköping,57.772741,14.199840
 Supercharger SE-Kalmar, 56.673228, 16.321408
 Supercharger SE-Karlstad, 59.381535, 13.467609
 Supercharger SE-Kristianstad, 56.023216, 14.11831
@@ -840,7 +861,7 @@ Supercharger-V3 US-Brighton CO, 39.971947, -104.74852
 Supercharger US-Bristol TN, 36.591663, -82.261292
 Supercharger-V3 US-Brunswick GA,31.246021,-81.501863
 Supercharger US-Buford GA, 34.061649, -83.994602
-Supercharger US-Buttonwillow CA,35.354621,-119.33163
+Supercharger US-Bakersfield CA,35.354621,-119.33163
 Supercharger US-Burleson TX, 32.464365,-97.26451
 Supercharger-V3 US-Burley ID,42.561592,-113.790105
 Supercharger-V3 US-Bolingbrook IL, 41.722252, -88.037124
@@ -1253,6 +1274,7 @@ Allego DE-Schleiz, 50.549278, 11.789369
 Allego DE-Schweitenkirchen, 48.510717, 11.582345, 3
 Allego DE-Trier Wasserweg, 49.76327, 6.65785
 Allego DE-Quirla, 50.865762, 11.772602
+Allego NL-Meerkerk,51.899809,4.982779
 
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Braunschweig, 52.322159, 10.478146
@@ -1546,6 +1568,7 @@ Fastned DE-Wittstock, 53.15744, 12.45124
 Fastned NL-Aalscholver, 52.436005, 5.424898
 Fastned NL-Akermaat, 52.498623, 4.698793
 Fastned NL-Bloemheuvel, 52.049890, 5.461548
+Fastned NL-Bloomendaal,51.912029,4.984937
 Fastned NL-Bospoort, 52.16278, 4.55405
 Fastned NL-Bovenboer, 52.752832, 6.186554
 Fastned NL-De Beerze, 51.324273, 5.223084
@@ -1833,7 +1856,7 @@ Ionity FR-Gueux, 49.244484, 3.923935
 Ionity FR-Hauconcourt, 49.215116, 6.171845
 Ionity FR-Haut Koenigsbourg, 48.231920, 7.402639
 Ionity FR-Jardin des arbres, 47.852405, 2.684731
-Ionity FR-Jura, 46.774589, 5.523009
+Ionity FR-Jura, 46.774589, 5.523009,10
 Ionity FR-l'Isle-d'Abeau, 45.611787, 5.212795
 Ionity FR-Kergoët, 48.273976, -2.187471
 Ionity FR-La Ferté-Bernard, 48.126596, 0.623330
@@ -2358,6 +2381,7 @@ DE Ingolstadt Audi Forum, 48.783595, 11.413007
 DE Karlsruhe BFT/EFA Tankstelle, 48.999479, 8.428314, 10
 DE Kettig Alterauge GmbH, 50.405837, 7.472896
 DE Kirchen (Sieg) Bahnhof, 50.806224, 7.880647
+DE Knetzgau Euro Rastpark, 49.982321,10.555823,5
 DE Köln Brügelmannstraße 3, 50.943937, 6.985898
 DE Köln Leonardo Hotel, 50.926801, 6.904346
 DE Lauenburg Am Schüsselteich, 53.3744745, 10.550709, 10
