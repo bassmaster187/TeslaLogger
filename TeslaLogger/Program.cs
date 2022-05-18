@@ -510,6 +510,7 @@ namespace TeslaLogger
                         ShareData sd = new ShareData(c);
                         sd.SendAllChargingData();
                         sd.SendDegradationData();
+                        sd.SendAllDrivingData();
                     }
 
                     DBHelper.UpdateCarIDNull();
