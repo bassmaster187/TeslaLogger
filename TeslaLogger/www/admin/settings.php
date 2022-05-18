@@ -231,8 +231,8 @@ echo(menu("Settings"));
 <div>
 <table>
 <tr><td><h1 style="margin-top:0px;"><?php t("Credentials"); ?></h1></td><td></td></tr>
-<tr><td>MyTesla</td><td><button onclick="window.location.href='password.php';"><?php t("Credentials"); ?></button></td></tr>
-<tr><td>Teslalogger Adminpanel</td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button></td></tr>
+<tr><td><?php t("MyTesla"); ?></td><td><button onclick="window.location.href='password.php';"><?php t("Credentials"); ?></button></td></tr>
+<tr><td><?php t("Teslalogger Adminpanel"); ?></td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
 	<select id="Language">
@@ -249,14 +249,14 @@ echo(menu("Settings"));
 		<option value="cn">漢語</option>
 	</select>
 	</td></tr>
-	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> PS<br><input id="radio_kw" type="radio" value="kw" name="power" /> kW</td></tr>
+	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td><input id="radio_hp" type="radio" value="hp" name="power" /> <?php t("PS"); ?><br><input id="radio_kw" type="radio" value="kw" name="power" /> <?php t("kW"); ?></td></tr>
 	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <?php t("Celsius"); ?><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <?php t("Fahrenheit"); ?> </td></tr>
-	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> km<br><input id="radio_mile" type="radio" value="mile" name="Length"> mile </td></tr>
-	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td><input id="radio_Ideal" type="radio" value="IR" name="Range"> Ideal<br><input id="radio_Rated" type="radio" value="RR" name="Range"> Rated</td></tr>
+	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td><input id="radio_km" type="radio" value="km" name="Length"> <?php t("km"); ?><br><input id="radio_mile" type="radio" value="mile" name="Length"> <?php t("mile"); ?> </td></tr>
+	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td><input id="radio_Ideal" type="radio" value="IR" name="Range"> <?php t("Ideal"); ?><br><input id="radio_Rated" type="radio" value="RR" name="Range"> <?php t("Rated"); ?></td></tr>
 	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td><input id="checkboxSharedata" type="checkbox" value="sharedata"> <?php t("Enable"); ?></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
 	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td><input id="radio_all" type="radio" value="all" name="update"> <?php t("All"); ?><br><input id="radio_stable" type="radio" value="stable" name="update"> <?php t("Stable"); ?><br><input id="radio_none" type="radio" value="none" name="update"> <?php t("None"); ?></td></tr>
 	<tr><td><b><?php t("Sleep"); ?>:</b></td><td><input id="checkboxSleep" type="checkbox" value="sleep"> <?php t("Enable"); ?></td></tr>
-	<tr><td></td><td><input class="startdate timepicker text-center"></input> to <input class="enddate timepicker text-center"></input></td></tr>
+	<tr><td></td><td><input class="startdate timepicker text-center"></input> <?php t("to"); ?> <input class="enddate timepicker text-center"></input></td></tr>
 	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td><input id="checkbox100pct" type="checkbox" value="100pct"> <?php t("Enable"); ?></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
@@ -316,7 +316,7 @@ if (strlen($taskertoken) > 7)
 
 ?>
 <tr><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
+<tr><td></td><td><button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 
