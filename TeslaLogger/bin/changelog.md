@@ -1,3 +1,6 @@
+# Version 1.54.2
+- Supercharge Bingo integration
+
 # Version 1.54.1
 - Share consumption data
 - detection of Model Y MIG / US / MIC
@@ -6,6 +9,7 @@
 - Non-standard MQTT brocker port can be defined
 - User specific ClientID can be defined
 - Subtopics can be activated
+
 More information: https://github.com/bassmaster187/TeslaLogger/blob/master/MQTTClient/readme.md
 
 # Version 1.53.0
