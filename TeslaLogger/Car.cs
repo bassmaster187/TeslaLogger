@@ -101,6 +101,9 @@ namespace TeslaLogger
         private string aBRP_token = "";
         private int aBRP_mode = 0;
 
+        private string sucBingo_user = "";
+        private string sucBingo_apiKey = "";
+
         private CurrentJSON currentJSON;
 
         private static List<Car> allcars = new List<Car>();
@@ -137,6 +140,8 @@ namespace TeslaLogger
         public string Vin { get => vin; set => vin = value; }
         public string ABRPToken { get => aBRP_token; set => aBRP_token = value; }
         public int ABRPMode { get => aBRP_mode; set => aBRP_mode = value; }
+        public string SuCBingoUser { get => sucBingo_user; set => sucBingo_user = value; }
+        public string SuCBingoApiKey { get => sucBingo_apiKey; set => sucBingo_apiKey = value; }
         public CurrentJSON CurrentJSON { get => currentJSON; set => currentJSON = value; }
         public static List<Car> Allcars { get => allcars; }
         public DBHelper DbHelper { get => dbHelper; set => dbHelper = value; }
@@ -388,6 +393,7 @@ namespace TeslaLogger
                 CurrentJSON.current_car_version = DbHelper.GetLastCarVersion();
 
                 DbHelper.GetABRP(out aBRP_token, out aBRP_mode);
+                DbHelper.GetSuCBingo(out sucBingo_user, out sucBingo_apiKey);
 
                 webhelper.StartStreamThread();
             }
@@ -1311,6 +1317,21 @@ namespace TeslaLogger
             if (_oldState == TeslaState.Charge && _newState != TeslaState.Charge)
             {
                 ResetHighFrequencyLogging();
+
+                GetTeslaAPIState().GetBool("fast_charger_present", out bool fast_charger_present);
+                GetTeslaAPIState().GetString("fast_charger_brand", out string fast_charger_brand);
+                if (!String.IsNullOrEmpty(SuCBingoUser) && !String.IsNullOrEmpty(SuCBingoApiKey))
+                {
+                    if (fast_charger_present && fast_charger_brand == "Tesla")
+                    {
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            Log("SuperchargeBingo: Checkin!");
+
+                            _ = webhelper.SuperchargeBingoCheckin(CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    }
+                }
             }
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
