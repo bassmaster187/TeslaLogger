@@ -1002,6 +1002,12 @@ namespace TeslaLogger
             odometerLastTrip = CurrentJSON.current_odometer;
 
             DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
+
+            Task.Run(() =>
+            {
+                var sd = new ShareData(this);
+                sd.SendAllDrivingData();
+            });
         }
 
 

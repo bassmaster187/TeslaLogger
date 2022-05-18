@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace TeslaLogger
 {
@@ -33,6 +34,7 @@ namespace TeslaLogger
 
             TeslaloggerVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             UpdateDataTable("chargingstate");
+            UpdateDataTable("drivestate");
 
             if (!Tools.IsShareData())
             {
@@ -315,6 +317,137 @@ ORDER BY
 
                     return l;
                 }
+            }
+        }
+
+        public void SendAllDrivingData()
+        {
+            if (!shareData)
+            {
+                return;
+            }
+
+            try
+            {
+                car.Log("ShareData: SendAllDrivingData start");
+
+                int ProtocolVersion = 1;
+                string sql = $@"SELECT 
+    drivestate.id as hostid,
+        (`pos_end`.`odometer` - `pos_start`.`odometer`) AS `km_diff`,
+        (`pos_end`.`odometer` - `pos_start`.`odometer`) / (pos_start.battery_level - pos_end.battery_level) * 100  as max_range_km,
+        pos_start.battery_level as StartSoc,
+        pos_end.battery_level as EndSoc,
+        ((`pos_start`.`ideal_battery_range_km` - `pos_end`.`ideal_battery_range_km`) * `cars`.`wh_tr`) AS `consumption_kWh`,
+        ((((`pos_start`.`ideal_battery_range_km` - `pos_end`.`ideal_battery_range_km`) * `cars`.`wh_tr`) / (`pos_end`.`odometer` - `pos_start`.`odometer`)) * 100) AS `avg_consumption_kWh_100km`,
+        TIMESTAMPDIFF(MINUTE,
+            `drivestate`.`StartDate`,
+            `drivestate`.`EndDate`) AS `DurationMinutes`,
+        round(`pos_start`.`odometer`/5000)*5000 as odometer,
+        `drivestate`.`outside_temp_avg` AS `outside_temp_avg`,
+        `drivestate`.`speed_max` AS `speed_max`,
+        `drivestate`.`power_max` AS `power_max`,
+        `drivestate`.`power_min` AS `power_min`,
+        `drivestate`.`power_avg` AS `power_avg`,
+        (select km_diff / durationminutes * 60) as speed_avg,
+        meters_up, meters_down, distance_up_km, distance_down_km, distance_flat_km,
+        (select version from car_version where car_version.StartDate < drivestate.StartDate and car_version.carid = drivestate.carid order by id desc limit 1) as Firmware
+    FROM
+        (((`drivestate`
+        JOIN `pos` `pos_start` ON ((`drivestate`.`StartPos` = `pos_start`.`id`)))
+        JOIN `pos` `pos_end` ON ((`drivestate`.`EndPos` = `pos_end`.`id`)))
+        JOIN `cars` ON ((`cars`.`id` = `drivestate`.`CarID`)))
+    WHERE
+		drivestate.CarID = {car.CarInDB}
+        and (drivestate.export <> {ProtocolVersion} or drivestate.export is null)
+        and ((`pos_end`.`odometer` - `pos_start`.`odometer`) > 99) 
+        and pos_start.battery_level is not null 
+        and pos_end.battery_level is not null 
+        and `pos_end`.`odometer` - `pos_start`.`odometer` < 1000";
+
+                using (DataTable dt = new DataTable())
+                {
+                    int ms = Environment.TickCount;
+
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBHelper.DBConnectionstring))
+                    {
+                        da.SelectCommand.CommandTimeout = 600;
+                        SQLTracer.TraceDA(dt, da);
+                        ms = Environment.TickCount - ms;
+                        car.Log("ShareData: SELECT drivestate ms: " + ms);
+
+                        if (dt.Rows.Count == 0)
+                            return;
+
+                        Dictionary<string, object> d1 = new Dictionary<string, object>
+                        {
+                            { "ProtocolVersion", ProtocolVersion },
+                            { "TaskerToken", TaskerToken } // TaskerToken is the primary key and is used to make sure data won't be imported twice
+                        };
+
+                        List<object> t = new List<object>();
+                        d1.Add("T", t);
+
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            Dictionary<string, object> d = new Dictionary<string, object>();
+                            foreach (DataColumn col in dt.Columns)
+                            {
+                                d.Add(col.Caption, dr[col.Caption]);   
+                            }
+                            t.Add(d);
+                        }
+
+                        string json = JsonConvert.SerializeObject(d1);
+
+                        try
+                        {
+                            using (HttpClient client = new HttpClient())
+                            {
+                                client.Timeout = TimeSpan.FromSeconds(30);
+                                using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+                                {
+
+                                    DateTime start = DateTime.UtcNow;
+                                    HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_drivestate.php"), content).Result;
+                                    string r = result.Content.ReadAsStringAsync().Result;
+                                    DBHelper.AddMothershipDataToDB("teslalogger.de/share_drivestate.php", start, (int)result.StatusCode);
+
+                                    //resultContent = result.Content.ReadAsStringAsync();
+                                    car.Log("ShareData: " + r);
+
+                                    if (r == "OK" && dt.Rows.Count > 0)
+                                    {
+                                        var ids = from myrow in dt.AsEnumerable() select myrow["hostid"];
+                                        var l =  String.Join(",", ids.ToArray());
+
+                                        DBHelper.ExecuteSQLQuery($"update drivestate set export = {ProtocolVersion} where id in ({l})");
+                                    }
+
+                                    car.Log("ShareData: SendAllDrivingData end");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            car.SendException2Exceptionless(ex);
+
+                            car.Log("Error in ShareData:SendAllDrivingData " + ex.Message);
+                        }
+
+                        dt.Clear();
+
+                        car.Log("ShareData: SendAllDrivingData finished");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                car.SendException2Exceptionless(ex);
+
+                car.Log("Error in ShareData:SendAllDrivingData " + ex.Message);
+                Logfile.WriteException(ex.ToString());
             }
         }
 
