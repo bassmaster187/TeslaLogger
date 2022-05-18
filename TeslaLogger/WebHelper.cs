@@ -4365,6 +4365,8 @@ namespace TeslaLogger
         {
             try
             {
+                DateTime start = DateTime.UtcNow;
+
                 lock (httpClientLock)
                 {
                     if (httpClientSuCBingo == null)
@@ -4393,6 +4395,9 @@ namespace TeslaLogger
                     Tools.SetThreadEnUS();
                     var result = await httpClientSuCBingo.PostAsync("https://beta.supercharge.bingo/v1.php/api/v1/checkin", content);
                     string response = result.Content.ReadAsStringAsync().Result;
+
+                    DBHelper.AddMothershipDataToDB("SuperchargeBingoCheckin()", start, (int)result.StatusCode);
+
                     int checkinID = 0;
                     try
                     {
@@ -4422,6 +4427,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
+                car.SendException2Exceptionless(ex);
                 Tools.DebugLog("SuperchargeBingo: Checkin exception: " + ex.ToString() + Environment.NewLine);
             }
         }
