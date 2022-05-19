@@ -2973,6 +2973,29 @@ WHERE
                     {
                         car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
+
+                    car.Log("fast_charger_present: " + wh.fast_charger_present.ToString());
+                    car.Log("fast_charger_brand: " + wh.fast_charger_brand.ToString());
+                    if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
+                    {
+                        if (wh.fast_charger_present && wh.fast_charger_brand == "Tesla")
+                        {
+                            _ = Task.Factory.StartNew(() =>
+                            {
+                                car.Log("SuperchargeBingo: Checkin!");
+                                _ = GetMaxPosidLatLng(out poslat, out poslng);
+                                _ = wh.SuperchargeBingoCheckin(poslat, poslng);
+                            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                        }
+                        else
+                        {
+                            car.Log("SuperchargeBingo: not a tesla supecharger!");
+                        }
+                    }
+                    else
+                    {
+                        car.Log("SuperchargeBingo: no credentials!");
+                    }
                 }
                 else
                 {
