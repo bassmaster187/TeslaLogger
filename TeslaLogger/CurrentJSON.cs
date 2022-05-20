@@ -33,6 +33,8 @@ namespace TeslaLogger
         public double current_charge_rate_km = 0;
         public double current_time_to_full_charge = 0;
         public bool current_charge_port_door_open = false;
+        public string current_charger_brand = "";
+        public bool current_charger_present = false;
 
         public string current_car_version = "";
 
@@ -167,6 +169,8 @@ namespace TeslaLogger
                    { "charge_rate_km", current_charge_rate_km},
                    { "charge_port_door_open", current_charge_port_door_open },
                    { "time_to_full_charge", current_time_to_full_charge},
+                   { "fast_charger_brand", current_charger_brand},
+                   { "fast_charger_present", current_charger_present},
                    { "car_version", current_car_version },
                    { "trip_start", current_trip_start.ToString("t",Tools.ciDeDE) },
                    { "trip_start_dt", current_trip_start.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", Tools.ciEnUS) },

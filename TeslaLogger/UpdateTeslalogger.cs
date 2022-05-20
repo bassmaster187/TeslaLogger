@@ -762,6 +762,18 @@ CREATE TABLE superchargers(
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
             }
 
+            if (!DBHelper.ColumnExists("cars", "SuCBingo_user"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_user");
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_user` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "SuCBingo_apiKey"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_apiKey");
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_apiKey` VARCHAR(100) NULL DEFAULT NULL", 600);
+            }
+
             if (!DBHelper.ColumnExists("cars", "meter_type"))
             {
                 string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
