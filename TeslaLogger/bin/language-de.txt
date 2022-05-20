@@ -1,3 +1,10 @@
+#Allgemein
+Delete=Löschen
+Save=Speichern
+Settings=Einstellungen
+Setup=Einrichtung
+Enabled=Aktiviert
+
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
 TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
 Resume Teslalogger=Teslalogger Starten
@@ -47,7 +54,6 @@ Language=Sprache
 Main Car=Hauptfahrzeug
 None=Keine
 Received Tasker Token=Empfangenes Tasker Token
-Settings=Einstellungen
 ScanMyTesla last received=ScanMyTesla zuletzt empfangen
 Tasker Token=Tasker Token
 Tasker URL=Tasker URL
@@ -73,7 +79,21 @@ Stable=Stabil
 to=bis
 ScanMyTesla integration=ScanMyTesla-Integration
 Position by StreamingAPI=Position by StreamingAPI
-Save=Speichern
 
 
 TeslaAuthApps=Du kannst folgende Apps verwenden um ein Access Token & Refresh Token vom Tesla Server zu generieren.
+
+#abrp.php
+ABRPTitle=Verbindung mit „A Better Routeplanner“
+TextABRP=Sie können eine Verbindung von Teslalogger zu „A Better Routeplanner“ einrichten, um zu vermeiden, dass Sie Ihre Tesla-Anmeldeinformationen an Dritte weitergeben müssen. Ein weiterer Vorteil besteht darin, die Wahrscheinlichkeit zu minimieren, das Fahrzeug daran zu hindern, in den Ruhezustand zu wechseln, wenn mehr als ein Dienst Ihre Anmeldeinformationen verwendet.
+ABRP1=Erstellen Sie ein „A Better Routeplanner“-Konto
+ABRP2=Gehen sie zu den Einstellungen
+ABRP3=Wählen Sie Ihr Fahrzeug
+ABRP4=Speichern Sie Ihr Fahrzeug
+ABRP5=Geben Sie Ihrem Fahrzeug einen Namen
+ABRP6=Klicken Sie auf „Verknüpfen Teslalogger“, um ein ABRP-Token zu erhalten
+ABRP7=Token kopieren und auf „Fertig“ klicken
+ABRP8=Fügen Sie den Token in Teslalogger ein
+ABRP9=Überprüfen Sie, ob der Teslalogger verbunden ist
+ABRPYT=Sehen Sie sich das YouTube-Einführungsvideo für eine Live-Demonstration an
+ABRPToken=„A Better Routeplanner“-Token
