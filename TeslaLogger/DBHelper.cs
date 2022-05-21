@@ -2974,27 +2974,24 @@ WHERE
                         car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
                     }
 
-                    car.Log("fast_charger_present: " + wh.fast_charger_present.ToString());
-                    car.Log("fast_charger_brand: " + wh.fast_charger_brand.ToString());
-                    if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
+                    Tools.DebugLog("fast_charger_present: " + wh.fast_charger_present.ToString());
+                    Tools.DebugLog("fast_charger_brand: " + wh.fast_charger_brand.ToString());
+                    if (wh.fast_charger_present && wh.fast_charger_brand == "Tesla")
                     {
-                        if (wh.fast_charger_present && wh.fast_charger_brand == "Tesla")
+                        if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
                         {
-                            _ = Task.Factory.StartNew(() =>
-                            {
-                                car.Log("SuperchargeBingo: Checkin!");
-                                _ = GetMaxPosidLatLng(out poslat, out poslng);
-                                _ = wh.SuperchargeBingoCheckin(poslat, poslng);
-                            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                            car.Log("SuperchargeBingo: Checkin!");
+                            _ = GetMaxPosidLatLng(out poslat, out poslng);
+                            _ = wh.SuperchargeBingoCheckin(poslat, poslng);
                         }
                         else
                         {
-                            car.Log("SuperchargeBingo: not a tesla supecharger!");
+                            Tools.DebugLog("SuperchargeBingo: no credentials!");
                         }
                     }
                     else
                     {
-                        car.Log("SuperchargeBingo: no credentials!");
+                        Tools.DebugLog("SuperchargeBingo: not a tesla supecharger!");
                     }
                 }
                 else
