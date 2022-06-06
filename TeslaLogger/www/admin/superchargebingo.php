@@ -78,12 +78,12 @@ else
 </script>
 
 <div id="content" style="max-width:1036px;">
-<h1>Supercharge Bingo</h1>
-You can setup a link from Teslalogger to Supercharge Bingo to perform automatic checkins at Superchargers. 
+<h1>SuperChargeBingo</h1>
+You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers. 
 </div>
 <h1>Setup</h1>
 <ul>
-    <li>Create a Supercharge Bingo account: https://beta.supercharge.bingo/#/register</li>
+    <li>Create a SuperChargeBingo account: https://supercharge.bingo/#/register</li>
     <li>Create API key (must be secure)</li>
     <li>Copy Username and API key and insert it in TeslaLogger</li>
     <li>Save and restart TeslaLogger</li>

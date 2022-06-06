@@ -4423,7 +4423,7 @@ namespace TeslaLogger
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
                     Tools.SetThreadEnUS();
-                    var result = await httpClientSuCBingo.PostAsync("https://beta.supercharge.bingo/v1.php/api/v1/checkin", content);
+                    var result = await httpClientSuCBingo.PostAsync("https://supercharge.bingo/v1.php/api/v1/checkin", content);
                     string response = result.Content.ReadAsStringAsync().Result;
 
                     DBHelper.AddMothershipDataToDB("SuperchargeBingoCheckin()", start, (int)result.StatusCode);
