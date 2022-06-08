@@ -1,6 +1,6 @@
 # Version 1.54.2
 - New statistics: https://teslalogger.de/consumption.php
-- Supercharge Bingo integration
+- [Supercharge Bingo](https://supercharge.bingo) integration
 
 # Version 1.54.1
 - Share consumption data
