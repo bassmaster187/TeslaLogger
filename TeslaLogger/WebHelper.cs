@@ -75,6 +75,7 @@ namespace TeslaLogger
         internal HttpClient httpclient_teslalogger_de = new HttpClient();
         internal static HttpClient httpClientForAuthentification;
         internal static HttpClient httpClientABRP = null;
+        internal static HttpClient httpClientSuCBingo = null;
         internal HttpClient httpclientTeslaAPI = null;
         internal static object httpClientLock = new object();
 
@@ -4387,6 +4388,77 @@ namespace TeslaLogger
 
                 Logfile.Log(ex.ToString());
                 Tools.DebugLog("SendDataToAbetterrouteplannerAsync exception: " + ex.ToString() + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        internal async Task SuperchargeBingoCheckin(double latitude, double longitude)
+        {
+            try
+            {
+                DateTime start = DateTime.UtcNow;
+
+                lock (httpClientLock)
+                {
+                    if (httpClientSuCBingo == null)
+                    {
+                        HttpClient c = new HttpClient();
+                        c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        c.DefaultRequestHeaders.ConnectionClose = true;
+                        httpClientSuCBingo = c;
+
+                        Logfile.Log("SuperchargeBingo: initialized!");
+                    }
+                }
+
+                Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "user", car.SuCBingoUser },
+                        { "key", car.SuCBingoApiKey},
+                        { "lat", latitude.ToString(Tools.ciEnUS) },
+                        { "long", longitude.ToString(Tools.ciEnUS) },
+                        { "type", "teslalogger" },
+                    };
+
+                string json = JsonConvert.SerializeObject(values);
+                using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
+                {
+                    Tools.SetThreadEnUS();
+                    var result = await httpClientSuCBingo.PostAsync("https://supercharge.bingo/v1.php/api/v1/checkin", content);
+                    string response = result.Content.ReadAsStringAsync().Result;
+
+                    DBHelper.AddMothershipDataToDB("SuperchargeBingoCheckin()", start, (int)result.StatusCode);
+
+                    int checkinID = 0;
+                    try
+                    {
+                        int.TryParse(response, out checkinID);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.Message);
+                    }
+                    finally
+                    {
+                        if (checkinID != 0)
+                        {
+                            Logfile.Log("SuperchargeBingo: Checkin OK, Checkin ID: " + checkinID.ToString());
+                        }
+                        else
+                        {
+                            //Logfile.Log("SuperchargeBingo: Checkin not OK, response: " + response);
+                            dynamic jsonResult = JsonConvert.DeserializeObject(response);
+                            dynamic message = jsonResult["message"];
+                            Logfile.Log("SuperchargeBingo: Checkin Error: " + message);
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                car.SendException2Exceptionless(ex);
+                Tools.DebugLog("SuperchargeBingo: Checkin exception: " + ex.ToString() + Environment.NewLine);
             }
         }
     }

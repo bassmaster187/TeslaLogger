@@ -441,6 +441,40 @@ WHERE
             return true;
         }
 
+        internal bool SetSucBingo(string sucBingo_user, string sucBingo_apiKey)
+        {
+            car.SuCBingoUser = sucBingo_user;
+            car.SuCBingoApiKey = sucBingo_apiKey;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    cars
+SET
+    SuCBingo_user = @user,
+    SuCBingo_apiKey = @apikey
+WHERE
+    id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@user", sucBingo_user);
+                        cmd.Parameters.AddWithValue("@apikey", sucBingo_apiKey);
+                        SQLTracer.TraceNQ(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return true;
+        }
+
         public static void UpdateAllNullAmpereCharging()
         {
             try
@@ -911,6 +945,39 @@ WHERE
                         {
                             ABRP_token = dr[0].ToString();
                             ABRP_mode = Convert.ToInt32(dr[1], Tools.ciEnUS);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
+        internal bool GetSuCBingo(out string sucBingo_user, out string sucBingo_apiKey)
+        {
+            sucBingo_user = "";
+            sucBingo_apiKey = "";
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT SuCBingo_user, SuCBingo_apiKey FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            sucBingo_user = dr[0].ToString();
+                            sucBingo_apiKey = dr[1].ToString();
                             return true;
                         }
                     }
@@ -2905,6 +2972,26 @@ WHERE
                     else
                     {
                         car.Log($"StartChargingState Task poslat: {poslat} poslng: {poslng}");
+                    }
+
+                    Tools.DebugLog("fast_charger_present: " + wh.fast_charger_present.ToString());
+                    Tools.DebugLog("fast_charger_brand: " + wh.fast_charger_brand.ToString());
+                    if (wh.fast_charger_present && wh.fast_charger_brand == "Tesla")
+                    {
+                        if (!String.IsNullOrEmpty(car.SuCBingoUser) && !String.IsNullOrEmpty(car.SuCBingoApiKey))
+                        {
+                            car.Log("SuperchargeBingo: Checkin!");
+                            _ = GetMaxPosidLatLng(out poslat, out poslng);
+                            _ = wh.SuperchargeBingoCheckin(poslat, poslng);
+                        }
+                        else
+                        {
+                            Tools.DebugLog("SuperchargeBingo: no credentials!");
+                        }
+                    }
+                    else
+                    {
+                        Tools.DebugLog("SuperchargeBingo: not a tesla supecharger!");
                     }
                 }
                 else
