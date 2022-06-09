@@ -909,6 +909,17 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void TeslaApiVehiclesEmpty()
+        {
+            var json = "{\"response\":[],\"Count\":0}";
+            Car c = new Car(1, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            var t = new TeslaAPIState(c);
+            var ret = t.ParseAPI(json, "vehicles", 0);
+
+            Assert.IsFalse(ret);
+        }
+
+        [TestMethod]
         public void TeslaApiUpdateAvailable()
         {
             var json = System.IO.File.ReadAllText("../../vehicle_state_with_update_available.txt");

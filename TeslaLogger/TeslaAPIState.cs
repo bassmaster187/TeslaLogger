@@ -451,6 +451,9 @@ namespace TeslaLogger
                 if (r1 == null)
                     return false;
 
+                if (r1.Count <= CarInAccount)
+                    return false;
+
                 dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
