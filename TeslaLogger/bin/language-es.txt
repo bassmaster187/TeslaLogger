@@ -1,3 +1,10 @@
+#General
+Delete=Borrar
+Save=Guardar
+Settings=Configuración
+Setup=Configuración
+Enabled=Activado
+
 #Akku Trips.json
 Akku Trips=Trayectos entre Cargas
 Start Trip=Iniciar Viaje
@@ -161,7 +168,6 @@ Update=Actualizar
 Dashboards=Dashboards
 Fleet Statistic=Estadísticas de Flota
 Extras=Extras
-Settings=Configuración
 Backup=Backup
 Restore=Restaurar
 Geofence=Geoperimetraje
@@ -257,3 +263,18 @@ Missing=Perdiendo
 Ø Temperatur=Ø Temperatura
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#abrp.php
+ABRPTitle=Enlace Abetterouteplanner
+TextABRP=Puede configurar un enlace de Teslalogger a Abetterouteplanner para evitar dar sus credenciales de Tesla a un tercero. Otro beneficio es minimizar la posibilidad de evitar que el auto se quede dormido si más de un servicio está usando sus credenciales.
+ABRP1=Crear una cuenta Abetterouteplanner
+ABRP2=Ir a Configuración
+ABRP3=Elige tu coche
+ABRP4=Guarda tu coche en tu cuenta
+ABRP5=Dale un nombre a tu auto
+ABRP6=Haga clic en "Enlace genérico" para obtener un token ABRP
+ABRP7=Copie el token y haga clic en "Listo"
+ABRP8=Insertar el token en Teslalogger
+ABRP9=Verificar si el Teslalogger está conectado
+ABRPYT=Consulte el tutorial de YouTube para una demostración en vivo
+ABRPToken=Token Abetterouteplanner

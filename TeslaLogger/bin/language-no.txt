@@ -1,3 +1,10 @@
+#Generell
+Delete=Slett
+Save=Lagre
+Settings=Innstillinger
+Setup=Oppsett
+Enabled=Aktivert
+
 #Akku Trips.json
 Akku Trips=Akku Trips
 Start Trip=Start Trip
@@ -168,3 +175,18 @@ Resume Teslalogger=Fortsett Teslalogger
 Range=Range
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner-kobling
+TextABRP=Du kan sette opp en kobling fra Teslalogger til Abetterrouteplanner for å unngå å gi Tesla-legitimasjonen din til en tredjepart. En annen fordel er å minimere muligheten for å forhindre at bilen går i dvale hvis mer enn én tjeneste bruker legitimasjonen din.
+ABRP1=Opprett en Abetterrouteplanner-konto
+ABRP2=Gå til Innstillinger
+ABRP3=Velg din bil
+ABRP4=Lagre bilen på kontoen din
+ABRP5=Gi bilen din et navn
+ABRP6=Klikk på "Link Generic" for å få et ABRP-token
+ABRP7=Kopier tokenet og klikk "Ferdig"
+ABRP8=Sett inn token i Teslalogger
+ABRP9=Sjekk om Teslaloggeren er tilkoblet
+ABRPYT=Sjekk YouTube-opplæringen for live demo
+ABRPToken=Abetterrouteplanner-token

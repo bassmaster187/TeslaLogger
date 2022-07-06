@@ -1,4 +1,11 @@
-﻿#Akku Trips.json
+﻿#Allgemein
+Delete=Uitwissen
+Save=Opslaan
+Settings=Instellingen
+Setup=Opstelling
+Enabled=Ingeschakeld
+
+#Akku Trips.json
 Akku Trips=Accu ritten
 Start Trip=Start rit
 End Trip=Einde rit
@@ -161,7 +168,6 @@ Update=Bijwerken
 Dashboards=Dashboards
 Fleet Statistic=Vlootstatistiek
 Extras=Extra's
-Settings=Instellingen
 Backup=Back-up
 Restore=Herstellen
 Geofence=Geofence
@@ -222,3 +228,18 @@ Resume Teslalogger=Start Teslalogger
 Range=Bereik
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner Link
+TextABRP=U kunt een link van Teslalogger naar Abetterrouteplanner instellen om te voorkomen dat u uw Tesla-referenties aan een derde partij geeft. Een ander voordeel is het minimaliseren van de mogelijkheid om te voorkomen dat de auto in slaap valt als meer dan één service uw inloggegevens gebruikt.
+ABRP1=Maak een Abetterrouteplanner-account aan
+ABRP2=Ga naar Instellingen
+ABRP3=Kies uw auto
+ABRP4=Sla uw auto op in uw account
+ABRP5=Geef uw auto een naam
+ABRP6=Klik op "Link Generic" om een ABRP-token te krijgen
+ABRP7=Kopieer de token en klik op "Gereed"
+ABRP8=Plaats het token in Teslalogger
+ABRP9=Controleer of de Teslalogger is aangesloten
+ABRPYT=Bekijk YouTube-tutorial voor live demo
+ABRPToken=Abetterrouteplanner-token
