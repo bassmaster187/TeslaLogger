@@ -80,30 +80,30 @@ else
 </script>
 
 <div id="content" style="max-width:1036px;">
-<h1>Abetterrouteplanner Link</h1>
-You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials. 
+<h1><?php t("ABRPTitle"); ?></h1>
+<?php t("TextABRP"); ?>
 </div>
-<h1>Setup</h1>
+<h1><?php t("Setup"); ?></h1>
 <ul>
-    <li>Create an Abetterrouteplanner account</li>
-    <li>Go to Settings</li>
-    <li>Choose your car</li>
-    <li>Save your car to your account</li>
-    <li>Give your car a name</li>
-    <li>Click on "Link Generic" to get a ABRP token</li>
-    <li>Copy the token and click "Done"</li>
-    <li>Insert the token in Teslalogger</li>
-    <li>Check if the Teslalogger is connected</li>
+	<li><?php t("ABRP1"); ?></li>
+	<li><?php t("ABRP2"); ?></li>
+	<li><?php t("ABRP3"); ?></li>
+	<li><?php t("ABRP4"); ?></li>
+	<li><?php t("ABRP5"); ?></li>
+	<li><?php t("ABRP6"); ?></li>
+	<li><?php t("ABRP7"); ?></li>
+	<li><?php t("ABRP8"); ?></li>
+	<li><?php t("ABRP9"); ?></li>
 </ul>
-Check YouTube tutorial for live demo: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a>
-<h1>Settings</h1>
+<?php t("ABRPYT"); ?>: <a href="https://youtu.be/00s7Y8Iv2iw">YouTube</a>
+<h1><?php t("Settings"); ?></h1>
 <table>
 <tr>
-    <td>Abetterrouteplanner Token:</td><td><input id="token" size="40" value="<?= $token ?>"/></td>
+    <td><?php t("ABRPToken"); ?>:</td><td><input id="token" size="40" value="<?= $token ?>"/></td>
 </tr>
 <tr>
-    <td>Enabled:</td><td><input id="mode" type="checkbox" <?PHP if ($mode === 1) echo("checked");  ?>/></td>
+    <td><?php t("Enabled"); ?>:</td><td><input id="mode" type="checkbox" <?PHP if ($mode === 1) echo("checked");  ?>/></td>
 </tr>
 <tr>    
-    <td></td><td><button onClick="javascript:Save();">Save</button></td>
+    <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
 </tr>

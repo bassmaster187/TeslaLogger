@@ -83,7 +83,7 @@ You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic c
 </div>
 <h1>Setup</h1>
 <ul>
-    <li>Create a SuperChargeBingo account: https://supercharge.bingo/#/register</li>
+    <li>Create a SuperChargeBingo account:https://supercharge.bingo/#/register?pk_campaign=integration&pk_kwd=teslalogger</li>
     <li>Create API key (must be secure)</li>
     <li>Copy Username and API key and insert it in TeslaLogger</li>
     <li>Save and restart TeslaLogger</li>

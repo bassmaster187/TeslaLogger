@@ -1,3 +1,10 @@
+#Général
+Delete=Supprimer
+Save=Speichern
+Settings=Réglages
+Setup=Ameublement
+Enabled=Activé
+
 #Akku Trips.json
 Akku Trips=Trajets
 Start Trip=Départ du trajet
@@ -160,7 +167,6 @@ Update=Mise à jour
 Dashboards=Tableaux de bord
 Fleet Statistic=Statistiques de la flotte
 Extras=Extras
-Settings=Réglages
 Backup=Sauvegarde
 Restore=Restauration
 Geofence=Géolocalisation
@@ -260,3 +266,17 @@ StreamingPosHelp=<h1>Position par StreamingAPI</h1>active les entrées de la bas
 
 TeslaAuthApps=Vous pouvez utiliser les applications suivantes pour obtenir un accès et une actualisation du serveur Tesla:
 
+#abrp.php
+ABRPTitle=Un meilleur lien planificateur d'itinéraire
+TextABRP=Vous pouvez configurer un lien de Teslalogger vers Abetterrouteplanner pour éviter de donner vos informations d'identification Tesla à un tiers. Un autre avantage est de minimiser la possibilité d'empêcher la voiture de se mettre en veille si plus d'un service utilise vos informations d'identification.
+ABRP1=Créer un compte Abetterrouteplanner
+ABRP2=Aller aux paramètres
+ABRP3=Choisissez votre voiture
+ABRP4=Enregistrer votre voiture sur votre compte
+ABRP5=Donnez un nom à votre voiture
+ABRP6=Cliquez sur "Lien générique" pour obtenir un jeton ABRP
+ABRP7=Copiez le jeton et cliquez sur "Terminé"
+ABRP8=Insérer le jeton dans Teslalogger
+ABRP9=Vérifier si le Teslalogger est connecté
+ABRPYT=Consultez le didacticiel YouTube pour une démonstration en direct
+ABRPToken=AbetterrouteplannerToken

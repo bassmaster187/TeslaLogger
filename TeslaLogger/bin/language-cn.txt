@@ -1,3 +1,10 @@
+#一般的
+Delete=刪除
+Save=保存
+Settings=设置
+Setup=设置
+Enabled=启用
+
 #Akku Trips.json
 Akku Trips=充电行程
 Start Trip=行程开始时间
@@ -251,3 +258,18 @@ kWh laut Zähler / Rechnung=计价表千瓦时数 / 收据
 Wirkungsgrad=效率
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner 链接
+TextABRP=您可以设置从 Teslalogger 到 Abetterrouteplanner 的链接，以避免将您的 Tesla 凭证提供给第 3 方。 另一个好处是，如果有多个服务正在使用您的凭据，则可以最大限度地减少阻止汽车进入睡眠状态的可能性。
+ABRP1=创建 Abetterrouteplanner 帐户
+ABRP2=前往设置
+ABRP3=选择你的车
+ABRP4=将您的汽车保存到您的帐户
+ABRP5=给你的车起个名字
+ABRP6=单击“链接通用”以获取 ABRP 令牌
+ABRP7=复制令牌并单击“完成”
+ABRP8=在 Teslalogger 中插入令牌
+ABRP9=检查 Teslalogger 是否已连接
+ABRPYT=查看 YouTube 教程以获取现场演示
+ABRPToken=Abetterrouteplanner 令牌
