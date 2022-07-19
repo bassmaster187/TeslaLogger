@@ -438,6 +438,23 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_X_2021_Plaid()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null); 
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "tamarind";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "p100d";
+            wh.car.Vin = "7SAXCBE62NFxxxxxx";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X 2021 Plaid", wh.car.ModelName);
+            Assert.AreEqual(0.149, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_Y_LR_AWD_US()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
