@@ -454,6 +454,10 @@ namespace TeslaLogger
                 if (r1.Count <= CarInAccount)
                     return false;
 
+                dynamic count = jsonResult["count"];
+                if (count == null | count == 0)
+                    return false;
+
                 dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
@@ -549,7 +553,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(_JSON, "JSON").Submit();
+                car.webhelper.SubmitExceptionlessClientWithResultContent(ex, _JSON);
                 Tools.DebugLog("Exception", ex);
             }
             return false;

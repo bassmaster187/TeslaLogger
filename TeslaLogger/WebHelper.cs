@@ -2003,7 +2003,7 @@ namespace TeslaLogger
             }
         }
 
-        void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
+        public void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
         {
             string base64 = Tools.ConvertString2Base64(content);
 
@@ -2323,8 +2323,7 @@ namespace TeslaLogger
                     return;
                 }
             }
-
-            if (car.CarType == "tamarind" && car.CarSpecialType == "base")
+            else if (car.CarType == "tamarind" && car.CarSpecialType == "base")
             {
                 Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
 
