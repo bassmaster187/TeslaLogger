@@ -1,3 +1,6 @@
+# Version 1.54.3
+- Detecting Model X 2021 Plaid / LR
+
 # Version 1.54.2
 - New statistics: https://teslalogger.de/consumption.php
 - [SuperChargeBingo](https://supercharge.bingo/?pk_campaign=integration&pk_kwd=teslalogger) integration
