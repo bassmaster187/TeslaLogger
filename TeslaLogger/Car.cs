@@ -1283,12 +1283,20 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                       {
-                          Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
-                          string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
-                          Log("set_charge_limit(): " + result);
-                          // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
-                          LastSetChargeLimitAddressName = string.Empty;
-                      }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                          // check if SoC < +occ value
+                          if (teslaAPIState.GetInt("battery_level", out int battery_level) && battery_level < chargelimit)
+                          {
+                              Log($"OnChargeComplete not setting new charge limit! charge limit {chargelimit} is higher than battery_level {battery_level} at '{_addr.name}' ...");
+                          }
+                          else // set chargelimit or fallback if teslaAPIState.GetInt fails
+                          {
+                              Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
+                              string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                              Log("set_charge_limit(): " + result);
+                              // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
+                              LastSetChargeLimitAddressName = string.Empty;
+                          }
+                      }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default); 
                 }
             }
         }
