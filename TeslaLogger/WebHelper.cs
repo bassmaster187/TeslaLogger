@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using System.Web;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
+using System.Globalization;
 
 namespace TeslaLogger
 {
@@ -583,23 +584,31 @@ namespace TeslaLogger
         {
             _ = Task.Factory.StartNew(() =>
             {
-                Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                if (streamThread != null)
+                    Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+
                 StopStreaming();
                 bool newThreadCreated = false;
                 for (int i = 0; i < 100 && !newThreadCreated; i++)
                 {
-                    Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
-                    if (streamThread.ThreadState == ThreadState.Stopped)
+                    if (streamThread != null)
+                        Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+
+                    if (streamThread == null || streamThread.ThreadState == ThreadState.Stopped)
                     {
                         newThreadCreated = true;
                         streamThread = null;
                         StartStreamThread();
-                        Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+                        
+                        if (streamThread != null)
+                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
                     }
                     else
                     {
                         Thread.Sleep(1000);
-                        Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
+
+                        if (streamThread != null)
+                            Tools.DebugLog($"streamThread {streamThread.Name}:{streamThread.ManagedThreadId} state:{streamThread.ThreadState}");
                     }
                 }
                 if (!newThreadCreated)
@@ -1745,21 +1754,35 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                HttpClient client = GethttpclientTeslaAPI();
-                string adresse = apiaddress + "api/1/vehicles";
+                string cacheKey = Tesla_token + "_vehicles";
 
+                HttpResponseMessage result = null;
+
+                object c = MemoryCache.Default.Get(cacheKey);
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(adresse);
 
-                if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
-                    return "NULL";
+                if (c != null)
+                    resultContent = c as String;
+                else
+                {
 
-                if (LoginRetry(result))
-                    return "NULL";
-                
+                    HttpClient client = GethttpclientTeslaAPI();
+                    string adresse = apiaddress + "api/1/vehicles";
 
-                resultContent = await result.Content.ReadAsStringAsync();
-                // resultContent = Tools.ConvertBase64toString("");
+                    result = await client.GetAsync(adresse);
+
+                    if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
+                        return "NULL";
+
+                    if (LoginRetry(result))
+                        return "NULL";
+
+
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    // resultContent = Tools.ConvertBase64toString("");
+                    
+                    MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
+                }
 
                 if (resultContent == null || resultContent == "NULL")
                 {
@@ -1790,14 +1813,19 @@ namespace TeslaLogger
                 }
 
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
-                if (result.IsSuccessStatusCode)
+                if (result != null)
                 {
-                    DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        DBHelper.AddMothershipDataToDB("IsOnline()", start, (int)result.StatusCode);
+                    }
+                    else
+                    {
+                        DBHelper.AddMothershipDataToDB("IsOnline()", -1, (int)result.StatusCode);
+                    }
                 }
-                else
-                {
-                    DBHelper.AddMothershipDataToDB("IsOnline()", -1, (int)result.StatusCode);
-                }
+
+
                 if (TeslaAPI_Commands.ContainsKey("vehicles"))
                 {
                     TeslaAPI_Commands.TryGetValue("vehicles", out string drive_state);
@@ -2992,8 +3020,8 @@ namespace TeslaLogger
             if (int.TryParse(speed, out int ispeed) // speed in mph
                 && double.TryParse(odometer, out double dodometer) // odometer in miles
                 && int.TryParse(soc, out int isoc)
-                && double.TryParse(est_lat, out double latitude)
-                && double.TryParse(est_lng, out double longitude)
+                && double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude)
+                && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
                 && decimal.TryParse(power, out decimal dpower) // power in kW
                 && int.TryParse(range, out int irange))
             {
