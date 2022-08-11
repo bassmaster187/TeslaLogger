@@ -84,7 +84,8 @@ namespace TeslaLogger
 
         bool useCaptcha = false;
 
-        static Dictionary<string,string> vehiclesJSON = new Dictionary<string, string>();
+        static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
+        static int nextAccountId = 1;
 
         static WebHelper()
         {
@@ -587,9 +588,9 @@ namespace TeslaLogger
             Logfile.Log("SearchFornewCars");
             try
             {
-                foreach (KeyValuePair<string, string> s in vehiclesJSON)
+                foreach (KeyValuePair<string, Account> s in vehicles2Account)
                 {
-                    SearchFornewCars(s.Key, s.Value);
+                    SearchFornewCars(s.Key, s.Value.tesla_token);
                 }
             }
             catch (Exception ex)
@@ -1588,6 +1589,7 @@ namespace TeslaLogger
 
                         return "NULL";
                     }
+
                     dynamic r2 = SearchCarDictionary(r1temp);
 
                     if (r2 == null)
@@ -1695,54 +1697,137 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
-
-                    ExceptionWriter(ex, resultContent);
-
-                    while (ex != null)
+                    if (resultContent.Contains("Retry Later"))
                     {
-                        if (!(ex is AggregateException))
+                        int sleep = random.Next(10000) + 10000;
+                        Log("GetVehicles Error: Retry Later - Sleep "+ sleep);
+                        
+                        Thread.Sleep(sleep);
+                    }
+                    else
+                    {
+                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
+
+                        ExceptionWriter(ex, resultContent);
+
+                        while (ex != null)
                         {
-                            Log("GetVehicles Error: " + ex.Message);
+                            if (!(ex is AggregateException))
+                            {
+                                Log("GetVehicles Error: " + ex.Message);
+                            }
+
+                            ex = ex.InnerException;
                         }
 
-                        ex = ex.InnerException;
+                        Thread.Sleep(30000);
                     }
-
-                    Thread.Sleep(30000);
                 }
             }
         }
 
         internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized)
         {
-            HttpClient client = GethttpclientTeslaAPI();
-            string adresse = apiaddress + "api/1/vehicles";
-            Task<HttpResponseMessage> resultTask;
-            HttpResponseMessage result;
-            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-
-            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            int accountid = 0;
+            lock (vehicles2Account)
             {
-                if (throwExceptionOnUnauthorized)
-                    throw new UnauthorizedAccessException();
-
-                if (LoginRetry(result))
+                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
                 {
-                    client = GethttpclientTeslaAPI(true);
-
-                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                    accountid = a.id;
                 }
             }
 
-            lock (vehiclesJSON)
+            string cacheKey = accountid + "_vehicles";
+            object c = MemoryCache.Default.Get(cacheKey);
+            bool checkVehicle2Account = false;
+
+            if (c != null && accountid > 0)
             {
-                if (!vehiclesJSON.ContainsKey(resultContent))
-                    vehiclesJSON.Add(resultContent, car.Tesla_Token);
+                resultContent = c as String;
+            }
+            else
+            {
+                HttpClient client = GethttpclientTeslaAPI();
+                string adresse = apiaddress + "api/1/vehicles";
+                Task<HttpResponseMessage> resultTask;
+                HttpResponseMessage result;
+                DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                if (result.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    if (throwExceptionOnUnauthorized)
+                        throw new UnauthorizedAccessException();
+
+                    if (LoginRetry(result))
+                    {
+                        client = GethttpclientTeslaAPI(true);
+
+                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
+                            checkVehicle2Account = true;
+                        }
+                    }
+                }
             }
 
             dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
             vehicles = jsonResult["response"];
+
+            if (checkVehicle2Account)
+            {
+                InsertVehicles2AccountFromVehiclesResponse(vehicles);
+            }
+        }
+
+        private void InsertVehicles2AccountFromVehiclesResponse(string resultContent)
+        {
+            try
+            {
+                lock (vehicles2Account)
+                {
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                    JArray vehicles = jsonResult["response"];
+                    InsertVehicles2AccountFromVehiclesResponse(vehicles);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless();
+            }
+        }
+
+        private void InsertVehicles2AccountFromVehiclesResponse(JArray vehicles)
+        {
+            lock (vehicles2Account)
+            {
+                bool inserted = false;
+                try
+                {
+                    foreach (dynamic v in vehicles)
+                    {
+                        string vin = v["vin"];
+
+                        if (!vehicles2Account.ContainsKey(vin))
+                        {
+                            Account a = new Account();
+                            a.id = nextAccountId;
+                            a.tesla_token = car.Tesla_Token;
+                            vehicles2Account.Add(vin, a);
+                            inserted = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless();
+                }
+                if (inserted)
+                    nextAccountId++;
+
+            }
         }
 
         private void ListCarsInAccount(Newtonsoft.Json.Linq.JArray cars)
@@ -1812,20 +1897,31 @@ namespace TeslaLogger
         }
 
         private int unknownStateCounter = 0;
+        public static object isOnlineLock = new object();
 
         public async Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
             string resultContent = "";
             try
             {
-                string cacheKey = Tesla_token + "_vehicles";
+                
+                int accountid = 0;
+                lock (vehicles2Account)
+                {
+                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                    {
+                        accountid = a.id;
+                    }
+                }
+
+                string cacheKey = accountid + "_vehicles";
 
                 HttpResponseMessage result = null;
 
                 object c = MemoryCache.Default.Get(cacheKey);
                 DateTime start = DateTime.UtcNow;
 
-                if (c != null)
+                if (c != null && accountid > 0)
                     resultContent = c as String;
                 else
                 {
@@ -1844,9 +1940,8 @@ namespace TeslaLogger
 
                     resultContent = await result.Content.ReadAsStringAsync();
                     // resultContent = Tools.ConvertBase64toString("");
-                    
-                    MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
                 }
+                
 
                 if (resultContent == null || resultContent == "NULL")
                 {
@@ -1871,13 +1966,14 @@ namespace TeslaLogger
 
                 if (resultContent.Contains("Retry later"))
                 {
-                    Log("isOnline: Retry later");
-                    Thread.Sleep(30000);
+                    int sleep = random.Next(10000) + 10000;
+                    Log("isOnline: Retry later - Sleep: " + sleep);
+                    Thread.Sleep(sleep); 
                     return "NULL";
                 }
 
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
-                if (result != null)
+                if (result != null && c == null)
                 {
                     if (result.IsSuccessStatusCode)
                     {
@@ -1913,6 +2009,31 @@ namespace TeslaLogger
                     car.Restart("IsOnline: not found", 0);
                     
                     return "NULL";
+                }
+
+                try
+                {
+                    if (result != null && result.IsSuccessStatusCode && c == null)
+                    {
+                        InsertVehicles2AccountFromVehiclesResponse(resultContent);
+                        if (accountid == 0)
+                        {
+                            lock (vehicles2Account)
+                            {
+                                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                {
+                                    accountid = a.id;
+                                }
+                            }
+
+                            cacheKey = accountid + "_vehicles";
+                        }
+                        MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 }
 
                 if (!(car.CarInAccount < r1.Count))
@@ -3923,7 +4044,8 @@ namespace TeslaLogger
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    Thread.Sleep(5000);
+                    int sleep = random.Next(4000) + 4000;
+                    Thread.Sleep(sleep);
                 }
                 else if (result.StatusCode == HttpStatusCode.NotFound)
                 {
@@ -3940,6 +4062,13 @@ namespace TeslaLogger
                         car.CreateExeptionlessLog("WebHelper", $"404 Error ({cmd}) -> Restart Car Thread", Exceptionless.Logging.LogLevel.Warn).Submit();
                         car.Restart("404 Error", 0);
                     }
+                }
+                else if ((int)result.StatusCode == 429) // TooManyRequests
+                {
+                    int sleep = random.Next(2000) + 7000;
+
+                    Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
+                    Thread.Sleep(sleep);
                 }
                 else
                 {
@@ -4567,5 +4696,11 @@ namespace TeslaLogger
                 Tools.DebugLog("SuperchargeBingo: Checkin exception: " + ex.ToString() + Environment.NewLine);
             }
         }
+    }
+
+    class Account
+    {
+        public int id;
+        public string tesla_token;
     }
 }

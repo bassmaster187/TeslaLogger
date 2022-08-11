@@ -143,6 +143,7 @@ namespace TeslaLogger
                 foreach (DataRow r in dt.Rows)
                 {
                     StartCarThread(r);
+                    Thread.Sleep(500);
                 }
                 dt.Clear();
             }
@@ -491,8 +492,10 @@ namespace TeslaLogger
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
-                    foreach (Car c in Car.Allcars)
+                    
+                    for (int i = 0; i < Car.Allcars.Count; i++)
                     {
+                        Car c = Car.Allcars[i];
                         c.DbHelper.CombineChangingStates();
                         c.webhelper.UpdateAllEmptyAddresses();
                         c.DbHelper.UpdateEmptyChargeEnergy();

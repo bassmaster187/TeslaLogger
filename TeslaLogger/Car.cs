@@ -362,8 +362,10 @@ namespace TeslaLogger
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);
-
-                string online = webhelper.IsOnline().Result;
+                lock (WebHelper.isOnlineLock)
+                {
+                    string online = webhelper.IsOnline().Result;
+                }
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
                 if (DbHelper.GetMaxPosid(false) == 0)
@@ -588,7 +590,11 @@ namespace TeslaLogger
         // else sleep 10000
         private void HandleState_Sleep()
         {
-            string res = webhelper.IsOnline().Result;
+            string res = "";
+            lock (WebHelper.isOnlineLock)
+            {
+                res = webhelper.IsOnline().Result;
+            }
 
             if (res == "online")
             {
@@ -916,7 +922,12 @@ namespace TeslaLogger
                 SendException2Exceptionless(ex);
             }
 
-            string res = webhelper.IsOnline().Result;
+            string res = "";
+            lock (WebHelper.isOnlineLock)
+            {
+                res = webhelper.IsOnline().Result;
+            }
+
             lastCarUsed = DateTime.Now;
             if (res == "online")
             {
@@ -945,7 +956,12 @@ namespace TeslaLogger
                 while (true)
                 {
                     Thread.Sleep(30000);
-                    string res2 = webhelper.IsOnline().Result;
+                    string res2 = "";
+
+                    lock (WebHelper.isOnlineLock)
+                    {
+                        res2 = webhelper.IsOnline().Result;
+                    }
 
                     if (res2 != "offline")
                     {
