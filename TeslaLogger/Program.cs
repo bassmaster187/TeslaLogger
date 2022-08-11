@@ -485,6 +485,7 @@ namespace TeslaLogger
                         Thread.Sleep(5000);
 
                     Thread.Sleep(30000);
+
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
                     DBHelper.UpdateElevationForAllPoints();
@@ -520,6 +521,8 @@ namespace TeslaLogger
                     StaticMapService.CreateAllParkingMaps();
 
                     Car.LogActiveCars();
+
+                    WebHelper.SearchFornewCars();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

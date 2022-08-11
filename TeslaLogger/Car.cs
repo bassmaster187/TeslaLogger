@@ -247,7 +247,9 @@ namespace TeslaLogger
                 CurrentJSON.current_odometer = DbHelper.GetLatestOdometer();
                 CurrentJSON.CreateCurrentJSON();
 
-                Monitor.Enter(InitCredentialsLock);
+                if (ApplicationSettings.Default.InitCredentialsLock)
+                    Monitor.Enter(InitCredentialsLock);
+
                 try
                 {
                     CheckNewCredentials();
@@ -256,7 +258,8 @@ namespace TeslaLogger
                 }
                 finally
                 {
-                    Monitor.Exit(InitCredentialsLock);
+                    if (ApplicationSettings.Default.InitCredentialsLock)
+                        Monitor.Exit(InitCredentialsLock);
                 }
 
                 while (run)
@@ -596,7 +599,7 @@ namespace TeslaLogger
             }
             else
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(ApplicationSettings.Default.SleepInStateSleep); // 10000
                 UpdateTeslalogger.CheckForNewVersion();
             }
         }
@@ -619,7 +622,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(10000);
+                        Thread.Sleep(10000); // 10000
                     }
 
                     //wh.GetCachedRollupData();
@@ -815,7 +818,7 @@ namespace TeslaLogger
 
                     if (doSleep)
                     {
-                        int sleepduration = 5000;
+                        int sleepduration = ApplicationSettings.Default.SleepInStateOnline; // 5000
                         // if charging is starting just now, decrease sleepduration to 0.5 second
                         try
                         {

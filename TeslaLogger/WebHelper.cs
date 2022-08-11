@@ -84,6 +84,8 @@ namespace TeslaLogger
 
         bool useCaptcha = false;
 
+        static Dictionary<string,string> vehiclesJSON = new Dictionary<string, string>();
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -578,6 +580,62 @@ namespace TeslaLogger
                 ExceptionlessClient.Default.ProcessQueue();
             }
             return "";
+        }
+
+        internal static void SearchFornewCars()
+        {
+            Logfile.Log("SearchFornewCars");
+            try
+            {
+                foreach (KeyValuePair<string, string> s in vehiclesJSON)
+                {
+                    SearchFornewCars(s.Key, s.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless();
+            }
+        }
+
+        internal static void SearchFornewCars(string s, string access_token)
+        {    
+            dynamic j = JsonConvert.DeserializeObject(s);
+            dynamic d = j["response"];
+
+            for (int x = 0; x < d.Count; x++)
+            {
+                try
+                {
+                    dynamic i = d[x];
+                    string vin = i["vin"];
+                    string display_name = i["display_name"] ?? "";
+                    // System.Diagnostics.Debug.WriteLine("VIN: " + vin);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        MySqlCommand cmd = new MySqlCommand("select * from cars where vin = @vin", con);
+                        cmd.Parameters.AddWithValue("@vin", vin);
+                        var dr = cmd.ExecuteReader();
+                        if (!dr.Read())
+                        {
+                            String temp = $"Create new Car VIN: {vin} ID: {x} DisplayName: {display_name}";
+                            Logfile.Log(temp);
+                            System.Diagnostics.Debug.WriteLine(temp);
+
+                            var refresh_token = DBHelper.GetRefreshTokenFromAccessToken(access_token);
+                            DBHelper.InsertNewCar("", "", x, false, access_token, refresh_token, vin, display_name);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless();
+                }
+            }
         }
 
         private void RestartStreamThreadWithTask()
@@ -1675,6 +1733,12 @@ namespace TeslaLogger
 
                     DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
                 }
+            }
+
+            lock (vehiclesJSON)
+            {
+                if (!vehiclesJSON.ContainsKey(resultContent))
+                    vehiclesJSON.Add(resultContent, car.Tesla_Token);
             }
 
             dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
