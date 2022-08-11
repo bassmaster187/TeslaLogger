@@ -1866,7 +1866,7 @@ namespace TeslaLogger
                         return cc;
                 }
 
-                Logfile.Log("Car with VIN: " + car.Vin + " not found!");
+                Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
                 return null;
             }
             else
