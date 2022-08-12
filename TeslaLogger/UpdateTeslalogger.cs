@@ -1431,35 +1431,35 @@ CREATE TABLE superchargers(
                                 s = s.Replace("Start km", "Start mi");
                                 s = s.Replace("End km", "End mi");
 
-                                s = s.Replace("EndOdometer - StartOdometer AS kmDiff", "(EndOdometer - StartOdometer) / 1.609 AS kmDiff");
-                                s = s.Replace("StartOdometer,", " StartOdometer / 1.609 as StartOdometer,");
-                                s = s.Replace("EndOdometer,", " EndOdometer / 1.609 as EndOdometer,");
-                                s = s.Replace("100 AS MaxRange", "100 / 1.609 AS MaxRange");
-                                s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609 - StartOdometer/1.609) * 100 AS AVGConsumption");
+                                s = s.Replace("EndOdometer - StartOdometer AS kmDiff", "(EndOdometer - StartOdometer) / 1.609344 AS kmDiff");
+                                s = s.Replace("StartOdometer,", " StartOdometer / 1.609344 as StartOdometer,");
+                                s = s.Replace("EndOdometer,", " EndOdometer / 1.609344 as EndOdometer,");
+                                s = s.Replace("100 AS MaxRange", "100 / 1.609344 AS MaxRange");
+                                s = s.Replace("(EndOdometer - StartOdometer) * 100 AS AVGConsumption", "(EndOdometer/1.609344 - StartOdometer/1.609344) * 100 AS AVGConsumption");
 
                                 s = s.Replace("\"unit\": \"lengthkm\"", "\"unit\": \"lengthmi\"");
                             }
                             else if (f.EndsWith("Degradation.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609 as 'Maximalreichweite [mi]'");
-                                s = s.Replace(" AS 'Max. Reichweite (Monatsmittel) [km]'", " / 1.609 AS 'Max. Reichweite (Monatsmittel) [mi]'");
-                                s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609 as 'mi Stand [mi]'");
+                                s = s.Replace(" as 'Maximalreichweite [km]'", " / 1.609344 as 'Maximalreichweite [mi]'");
+                                s = s.Replace(" AS 'Max. Reichweite (Monatsmittel) [km]'", " / 1.609344 AS 'Max. Reichweite (Monatsmittel) [mi]'");
+                                s = s.Replace("odometer as 'km Stand [km]'", "odometer / 1.609344 as 'mi Stand [mi]'");
                                 s = s.Replace("km Stand [km]", "mi Stand [mi]");
 
                             }
                             else if (f.EndsWith("Laden.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" as 'Reichweite [km]',", " / 1.609 as 'Reichweite [mi]',");
+                                s = s.Replace(" as 'Reichweite [km]',", " / 1.609344 as 'Reichweite [mi]',");
 
                                 s = s.Replace("Reichweite [km]", "Reichweite [mi]");
                             }
                             else if (f.EndsWith("Trip.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" speed_max,", "speed_max / 1.609 as speed_max,");
-                                s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609 as avg_consumption_kWh_100km,");
-                                s = s.Replace(" as avg_kmh", " / 1.609 as avg_kmh");
-                                s = s.Replace(" km_diff,", " km_diff  / 1.609 as km_diff,");
-                                s = s.Replace("StartRange - EndRange as RangeDiff", "(StartRange - EndRange) / 1.609 as RangeDiff");
+                                s = s.Replace(" speed_max,", "speed_max / 1.609344 as speed_max,");
+                                s = s.Replace(" avg_consumption_kWh_100km,", " avg_consumption_kWh_100km * 1.609344 as avg_consumption_kWh_100km,");
+                                s = s.Replace(" as avg_kmh", " / 1.609344 as avg_kmh");
+                                s = s.Replace(" km_diff,", " km_diff  / 1.609344 as km_diff,");
+                                s = s.Replace("StartRange - EndRange as RangeDiff", "(StartRange - EndRange) / 1.609344 as RangeDiff");
 
                                 s = s.Replace("\"max km/h\"", "\"max mph\"");
                                 s = s.Replace("\"Ø km/h\"", "\"Ø mph\"");
@@ -1467,8 +1467,8 @@ CREATE TABLE superchargers(
                             }
                             else if (f.EndsWith("Vampir Drain.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" TP2.odometer,", " TP2.odometer / 1.609 as odometer,");
-                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
+                                s = s.Replace(" TP2.odometer,", " TP2.odometer / 1.609344 as odometer,");
+                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609344 ");
 
                                 s = s.Replace("\"km Stand\"", "\"mi Stand\"");
                                 s = s.Replace("\"TR km Start\"", "\"TR mi Start\"");
@@ -1478,18 +1478,18 @@ CREATE TABLE superchargers(
                             }
                             else if (f.EndsWith("Vampir Drain Monatsstatistik.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" as RangeLost", " / 1.609 as RangeLost");
+                                s = s.Replace(" as RangeLost", " / 1.609344 as RangeLost");
 
                                 s = s.Replace("TR km Verlust", "TR mi Verlust");
                             }
                             else if (f.EndsWith("Verbrauch.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace(" speed as 'Geschwindigkeit [km/h]'", " speed / 1.609 as 'Geschwindigkeit [mph]'");
-                                s = s.Replace(" ideal_battery_range_km as 'Reichweite [km]'", " ideal_battery_range_km / 1.609 as 'Reichweite [mi]'");
+                                s = s.Replace(" speed as 'Geschwindigkeit [km/h]'", " speed / 1.609344 as 'Geschwindigkeit [mph]'");
+                                s = s.Replace(" ideal_battery_range_km as 'Reichweite [km]'", " ideal_battery_range_km / 1.609344 as 'Reichweite [mi]'");
                             }
                             else if (f.EndsWith("Ladehistorie.json", StringComparison.Ordinal))
                             {
-                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609 ");
+                                s = s.Replace("ideal_battery_range_km ", "ideal_battery_range_km / 1.609344 ");
 
                                 s = s.Replace("\"TR km Start\"", "\"TR mi Start\"");
                                 s = s.Replace("\"TR km Ende\"", "\"TR mi Ende\"");

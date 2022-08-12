@@ -3918,7 +3918,7 @@ VALUES(
 
                     try
                     {
-                        car.CurrentJSON.current_speed = (int)(speed * 1.60934M);
+                        car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
                         car.CurrentJSON.current_power = (int)(power * 1.35962M);
                         car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
 
@@ -5321,7 +5321,7 @@ CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8
 
         internal static double MphToKmhRounded(double speed_mph)
         {
-            int speed_floor = (int)(speed_mph * 1.60934);
+            int speed_floor = (int)(speed_mph * 1.609344);
             // handle special speed_floor as Math.Round is off by +1
             if (
                 speed_floor == 30
@@ -5397,7 +5397,7 @@ FROM
 
                     for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
-                        int speed_floor = (int)(speed_mph * 1.60934); // old conversion
+                        int speed_floor = (int)(speed_mph * 1.609344); // old conversion
                         int speed_round = (int)MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {

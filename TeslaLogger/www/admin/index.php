@@ -36,6 +36,7 @@ else
 		#changelog{height:350px; overflow: auto;}
 	</style>
 	<script>
+	var km2mls = 1.609344;
 	var map = null;
 	var marker = null;
 	var mapInit = false;
@@ -102,9 +103,9 @@ else
 		  }).done(function( jsonData ) {
 			if (LengthUnit == "mile")
 			{
-				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / 1.609).toFixed(1) + " mi");
-				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/1.609).toFixed(1) + " mi");
-				$('#odometer').text((jsonData["odometer"] / 1.609).toFixed(1) + " mi");
+				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toFixed(1) + " mi");
+				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toFixed(1) + " mi");
+				$('#odometer').text((jsonData["odometer"] / km2mls).toFixed(1) + " mi");
 			}
 			else
 			{
@@ -151,7 +152,7 @@ else
 				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
 				var str = "";
 				if (LengthUnit == "mile")
-					str = (jsonData["speed"]/ 1.609).toFixed(0) + " mph / "
+					str = (jsonData["speed"]/ km2mls).toFixed(0) + " mph / "
 				else
 					str = jsonData["speed"] + " km/h / ";
 
@@ -206,13 +207,13 @@ else
 
 			if (LengthUnit == "mile")
 			{
-				$("#max_speed").text((jsonData["trip_max_speed"]/ 1.609).toFixed(0));
+				$("#max_speed").text((jsonData["trip_max_speed"]/ km2mls).toFixed(0));
 				$("#lt_kmh").text("mph");
 
-				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"]* 1.609*10)/10);
+				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"]* km2mls*10)/10);
 				$("#lt_whkm").text("wh/mi");
 
-				$("#trip_distance").text(Math.round(jsonData["trip_distance"]/ 1.609 *10)/10);
+				$("#trip_distance").text(Math.round(jsonData["trip_distance"]/ km2mls *10)/10);
 				$("#lt_trip_distance_km").text("mi");
 			}
 			else
