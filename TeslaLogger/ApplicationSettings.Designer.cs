@@ -176,5 +176,41 @@ namespace TeslaLogger {
                 return ((string)(this["ExceptionlessApiKey"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int SleepInStateSleep {
+            get {
+                return ((int)(this["SleepInStateSleep"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int SleepInStateOnline {
+            get {
+                return ((int)(this["SleepInStateOnline"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int SleepInStateCharge {
+            get {
+                return ((int)(this["SleepInStateCharge"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool InitCredentialsLock {
+            get {
+                return ((bool)(this["InitCredentialsLock"]));
+            }
+        }
     }
 }

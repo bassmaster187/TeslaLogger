@@ -143,6 +143,7 @@ namespace TeslaLogger
                 foreach (DataRow r in dt.Rows)
                 {
                     StartCarThread(r);
+                    Thread.Sleep(500);
                 }
                 dt.Clear();
             }
@@ -485,13 +486,16 @@ namespace TeslaLogger
                         Thread.Sleep(5000);
 
                     Thread.Sleep(30000);
+
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
-                    foreach (Car c in Car.Allcars)
+                    
+                    for (int i = 0; i < Car.Allcars.Count; i++)
                     {
+                        Car c = Car.Allcars[i];
                         c.DbHelper.CombineChangingStates();
                         c.webhelper.UpdateAllEmptyAddresses();
                         c.DbHelper.UpdateEmptyChargeEnergy();
@@ -520,6 +524,8 @@ namespace TeslaLogger
                     StaticMapService.CreateAllParkingMaps();
 
                     Car.LogActiveCars();
+
+                    WebHelper.SearchFornewCars();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

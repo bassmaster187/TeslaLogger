@@ -15,7 +15,7 @@ if (file_exists("/etc/teslalogger/settings.json"))
 	$TemperatureUnit = $json_data["Temperature"];
 	$LengthUnit = $json_data["Length"];
 	if ($LengthUnit == "mile")
-		$LengthFactor = 1.60934;
+		$LengthFactor = 1.609344;
 
 	$PowerUnit = $json_data["Power"];
 	$Display100pctEnable = $json_data["Display100pctEnable"];

@@ -53,5 +53,17 @@
     <Setting Name="ExceptionlessApiKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Fr6JebtLWFka4nFwGXSkZAYEXIKCXn6AYGJb1mzt</Value>
     </Setting>
+    <Setting Name="SleepInStateSleep" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="SleepInStateOnline" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="SleepInStateCharge" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="InitCredentialsLock" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

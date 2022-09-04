@@ -247,7 +247,9 @@ namespace TeslaLogger
                 CurrentJSON.current_odometer = DbHelper.GetLatestOdometer();
                 CurrentJSON.CreateCurrentJSON();
 
-                Monitor.Enter(InitCredentialsLock);
+                if (ApplicationSettings.Default.InitCredentialsLock)
+                    Monitor.Enter(InitCredentialsLock);
+
                 try
                 {
                     CheckNewCredentials();
@@ -256,7 +258,8 @@ namespace TeslaLogger
                 }
                 finally
                 {
-                    Monitor.Exit(InitCredentialsLock);
+                    if (ApplicationSettings.Default.InitCredentialsLock)
+                        Monitor.Exit(InitCredentialsLock);
                 }
 
                 while (run)
@@ -359,8 +362,10 @@ namespace TeslaLogger
                 }
 
                 DbHelper.GetEconomy_Wh_km(webhelper);
-
-                string online = webhelper.IsOnline().Result;
+                lock (WebHelper.isOnlineLock)
+                {
+                    string online = webhelper.IsOnline().Result;
+                }
                 Log("Streamingtoken: " + Tools.ObfuscateString(webhelper.Tesla_Streamingtoken));
 
                 if (DbHelper.GetMaxPosid(false) == 0)
@@ -585,7 +590,11 @@ namespace TeslaLogger
         // else sleep 10000
         private void HandleState_Sleep()
         {
-            string res = webhelper.IsOnline().Result;
+            string res = "";
+            lock (WebHelper.isOnlineLock)
+            {
+                res = webhelper.IsOnline().Result;
+            }
 
             if (res == "online")
             {
@@ -596,7 +605,7 @@ namespace TeslaLogger
             }
             else
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(ApplicationSettings.Default.SleepInStateSleep); // 10000
                 UpdateTeslalogger.CheckForNewVersion();
             }
         }
@@ -619,7 +628,7 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        Thread.Sleep(10000);
+                        Thread.Sleep(10000); // 10000
                     }
 
                     //wh.GetCachedRollupData();
@@ -815,7 +824,7 @@ namespace TeslaLogger
 
                     if (doSleep)
                     {
-                        int sleepduration = 5000;
+                        int sleepduration = ApplicationSettings.Default.SleepInStateOnline; // 5000
                         // if charging is starting just now, decrease sleepduration to 0.5 second
                         try
                         {
@@ -913,7 +922,12 @@ namespace TeslaLogger
                 SendException2Exceptionless(ex);
             }
 
-            string res = webhelper.IsOnline().Result;
+            string res = "";
+            lock (WebHelper.isOnlineLock)
+            {
+                res = webhelper.IsOnline().Result;
+            }
+
             lastCarUsed = DateTime.Now;
             if (res == "online")
             {
@@ -942,7 +956,12 @@ namespace TeslaLogger
                 while (true)
                 {
                     Thread.Sleep(30000);
-                    string res2 = webhelper.IsOnline().Result;
+                    string res2 = "";
+
+                    lock (WebHelper.isOnlineLock)
+                    {
+                        res2 = webhelper.IsOnline().Result;
+                    }
 
                     if (res2 != "offline")
                     {
@@ -1283,12 +1302,20 @@ namespace TeslaLogger
                 {
                     _ = Task.Factory.StartNew(() =>
                       {
-                          Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
-                          string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
-                          Log("set_charge_limit(): " + result);
-                          // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
-                          LastSetChargeLimitAddressName = string.Empty;
-                      }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                          // check if SoC < +occ value
+                          if (teslaAPIState.GetInt("battery_level", out int battery_level) && battery_level < chargelimit)
+                          {
+                              Log($"OnChargeComplete not setting new charge limit! charge limit {chargelimit} is higher than battery_level {battery_level} at '{_addr.name}' ...");
+                          }
+                          else // set chargelimit or fallback if teslaAPIState.GetInt fails
+                          {
+                              Log($"OnChargeComplete set charge limit to {chargelimit} at '{_addr.name}' ...");
+                              string result = webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + chargelimit + "}", true).Result;
+                              Log("set_charge_limit(): " + result);
+                              // reset LastSetChargeLimitAddressName so that +scl can set the charge limit again
+                              LastSetChargeLimitAddressName = string.Empty;
+                          }
+                      }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default); 
                 }
             }
         }

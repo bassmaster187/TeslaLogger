@@ -72,6 +72,7 @@ Supercharger BE-Arlon, 49.648129,5.818957
 Supercharger BE-Brugge, 51.16989, 3.19666
 Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
+Supercharger-V3 BE-Hasselt, 50.951748, 5.353142, 17
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
 Supercharger BE-Lokeren, 51.09509, 4.01187
@@ -452,6 +453,7 @@ Supercharger FR-Metz, 49.216512, 6.171239
 Supercharger FR-Mont-Saint-Michel, 48.568171, -1.543283
 Supercharger FR-Montélimar, 44.676319, 4.795763
 Supercharger-V3 FR-Montluçon, 46.378453, 2.586523
+Supercharger-V3 FR-Montpellier, 43.602398, 3.919982, 40
 Supercharger FR-Mougins, 43.6036681, 7.011086
 Supercharger FR-Mulhouse, 47.782016, 7.388299
 Supercharger FR-Nancy, 48.638215, 6.184349
@@ -1282,6 +1284,7 @@ Allego DE-Schweitenkirchen, 48.510717, 11.582345, 3
 Allego DE-Seevetal, 53.396642, 10.042457
 Allego DE-Trier Wasserweg, 49.76327, 6.65785
 Allego DE-Quirla, 50.865762, 11.772602
+Allego FR-Avignon 162 Avenue Pierre Semard, 43.927801,4.834637
 Allego NL-Meerkerk,51.899809,4.982779
 
 ARAL DE-Bochum, 51.501513, 7.258011
@@ -1575,6 +1578,8 @@ Fastned DE-Schweinfurt-West,50.062362, 10.145272
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602 
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
+Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216714, 4.9997043, 30
+Fastned FR-Aire de Saint Ambreuil, 46.691106, 4.844877, 30
 Fastned NL-Aalscholver, 52.436005, 5.424898
 Fastned NL-Akermaat, 52.498623, 4.698793
 Fastned NL-Bloemheuvel, 52.049890, 5.461548
@@ -1892,6 +1897,7 @@ Ionity FR-Montelimar Est, 44.513818, 4.781396
 Ionity FR-Montelimar Ouest, 44.515081, 4.780751, 25
 Ionity FR-Morières, 43.922931, 4.912040
 Ionity FR-Mouxy, 45.673865, 5.929976
+Ionity FR-Narbonne-Vinassan Nord, 43.21611,3.089485, 25
 Ionity FR-Nemours, 48.262403, 2.722228
 Ionity FR-Parcé sur Sarthe Nord, 47.8077, -0.1659
 Ionity FR-Parcé sur Sarthe Sud, 47.802, -0.1699
@@ -2323,20 +2329,20 @@ Lidl CH-Volketswil, 47.379012, 8.67739
 Lidl CH-Winterthur Im Schönengrund, 47.498986,8.763822
 Lidl CH-Winterthur In der Au, 47.486514, 8.70397
 Lidl CH-Wädenswil, 47.236483, 8.635798
-Lidl CZ-Brno-Bohunice, 49.17177845181231, 16.569806491969413, 10
+Lidl CZ-Brno-Bohunice,49.17176,16.569768,10
 Lidl CZ-Olomouc, 49.58213057443877, 17.247866956664744, 10
-Lidl CZ-Plzeň, 49.73126754392657, 13.349577010151757, 30
-Lidl CZ-Praha (Přátelství), 50.039073217125186, 14.58931846751695, 50
-Lidl CZ-Průhonice, 50.0041034261312, 14.565368070737959, 30
-Lidl CZ-Slavkov u Brna, 49.14735476707731, 16.877048095286934, 10
+Lidl CZ-Plzeň,49.731252,13.349315,10
+Lidl CZ-Praha (Přátelství),50.038865,14.589275,10
+Lidl CZ-Průhonice,50.0041,14.565434,10
+Lidl CZ-Slavkov u Brna,49.147355,16.877024,10
 Lidl CZ-Sulice, 49.92305303829503, 14.576235519947913, 30
-Lidl CZ-Valašské Klobouky, 49.14040735296349, 18.011058757025, 30
-Lidl CZ-Velká Chuchle, 50.0190856384435, 14.392961955670662, 10
+Lidl CZ-Valašské Klobouky,49.140743,18.011027,10
+Lidl CZ-Velká Chuchle,50.019092,14.392945,10
 Lidl DE-Aachen Peliserkerstraße,50.7792128,6.1125899
 Lidl DE-Aalen,48.8282154,10.1136837
 Lidl DE-Albstadt,48.2098244,9.0192171
 Lidl DE-Altenmelle, 52.192974,8.353423
-Lidl DE-Amberg,49.44488,11.84267
+Lidl DE-Amberg,49.445041,11.842617,10
 Lidl DE-Ampfing,48.2512625,12.4097702
 Lidl DE-Ansbach, 49.295687,10.570223, 20
 Lidl DE-Anzing, 48.15883,11.854494
@@ -2597,6 +2603,8 @@ AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
 AT Salzburg Mooncity, 47.808874,13.055885,20
 AT Wien Billa Brünner Straße, 48.267452, 16.402954
 AT Raststation Marché Wörthersee,46.629952,14.094825
+
+BE Hasselt Corda Campus Kempische Steenweg 293, 50.951484, 5.353231, 14
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Nendaz Green Motion Charging Station Rte des Ecluses, 46.182368, 7.291183, 10

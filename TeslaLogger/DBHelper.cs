@@ -402,6 +402,40 @@ WHERE
             return "";
         }
 
+        public static string GetRefreshTokenFromAccessToken(string access_token)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    refresh_token
+FROM
+    cars
+WHERE
+    tesla_token = @tesla_token", con))
+                    {
+                        cmd.Parameters.AddWithValue("@tesla_token", access_token);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            string refresh_token = dr[0].ToString();
+                            return refresh_token;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless();
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
+        }
+
         internal bool SetABRP(string abrp_token, int abrp_mode)
         {
             car.ABRPToken = abrp_token;
@@ -3120,6 +3154,9 @@ WHERE
                                 double latitude = (double)dr[1];
                                 double longitude = (double)dr[2];
 
+                                if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+                                    continue;
+
                                 int? height = srtmData.GetElevation(latitude, longitude);
 
                                 if (height != null && height < 8000 && height > -428)
@@ -3881,7 +3918,7 @@ VALUES(
 
                     try
                     {
-                        car.CurrentJSON.current_speed = (int)(speed * 1.60934M);
+                        car.CurrentJSON.current_speed = (int)(speed * 1.609344M);
                         car.CurrentJSON.current_power = (int)(power * 1.35962M);
                         car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
 
@@ -5284,7 +5321,7 @@ CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8
 
         internal static double MphToKmhRounded(double speed_mph)
         {
-            int speed_floor = (int)(speed_mph * 1.60934);
+            int speed_floor = (int)(speed_mph * 1.609344);
             // handle special speed_floor as Math.Round is off by +1
             if (
                 speed_floor == 30
@@ -5360,7 +5397,7 @@ FROM
 
                     for (int speed_mph = (int)Math.Round(maxspeed_kmh * 0.62137119223733) + 1; speed_mph > 0; speed_mph--)
                     {
-                        int speed_floor = (int)(speed_mph * 1.60934); // old conversion
+                        int speed_floor = (int)(speed_mph * 1.609344); // old conversion
                         int speed_round = (int)MphToKmhRounded(speed_mph); // new conversion
                         if (speed_floor != speed_round)
                         {
@@ -5567,6 +5604,40 @@ WHERE
 
             var json = JsonConvert.SerializeObject(o);
             return json;
+        }
+
+        public static long InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
+        {
+            Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
+                {
+                    long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+
+                    using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
+                    {
+                        cmd2.Parameters.AddWithValue("@id", newid);
+                        cmd2.Parameters.AddWithValue("@tesla_name", email);
+                        cmd2.Parameters.AddWithValue("@tesla_password", password);
+                        cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                        cmd2.Parameters.AddWithValue("@display_name", display_name);
+                        cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
+                        cmd2.Parameters.AddWithValue("@tesla_token", access_token);
+                        cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
+                        cmd2.Parameters.AddWithValue("@vin", vin);
+                        SQLTracer.TraceNQ(cmd2);
+
+#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                        Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null);
+#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                    }
+
+                    return newid;
+                }
+            }
         }
     }
 }
