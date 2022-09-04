@@ -72,6 +72,7 @@ Supercharger BE-Arlon, 49.648129,5.818957
 Supercharger BE-Brugge, 51.16989, 3.19666
 Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
+Supercharger-V3 BE-Hasselt, 50.951748, 5.353142, 17
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
 Supercharger BE-Lokeren, 51.09509, 4.01187
@@ -2602,6 +2603,8 @@ AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
 AT Salzburg Mooncity, 47.808874,13.055885,20
 AT Wien Billa Brünner Straße, 48.267452, 16.402954
 AT Raststation Marché Wörthersee,46.629952,14.094825
+
+BE Hasselt Corda Campus Kempische Steenweg 293, 50.951484, 5.353231, 14
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Nendaz Green Motion Charging Station Rte des Ecluses, 46.182368, 7.291183, 10
