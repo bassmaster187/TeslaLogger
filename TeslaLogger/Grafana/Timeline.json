@@ -21,14 +21,28 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1663832090794,
-  "links": [],
-  "liveNow": false,
+  "iteration": 1663838016821,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
   "panels": [
     {
+      "datasource": {
+        "type": "mysql",
+        "uid": "PC0C98BF192F75B00"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false
           },
@@ -176,7 +190,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "000000001"
+            "uid": "PC0C98BF192F75B00"
           },
           "format": "table",
           "group": [],
@@ -223,7 +237,7 @@
         },
         "datasource": {
           "type": "mysql",
-          "uid": "000000001"
+          "uid": "PC0C98BF192F75B00"
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
@@ -250,6 +264,10 @@
           "value": [
             "$__all"
           ]
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "PC0C98BF192F75B00"
         },
         "definition": "select 'Driving' as __text, 1 as __value\nunion select 'Charging' as __text, 2 as __value\nunion select 'Parking' as __text, 3 as __value\nunion select 'Missing' as __text, 4 as __value\nunion select 'Update' as __text, 5 as __value",
         "hide": 0,
@@ -295,6 +313,6 @@
   "timezone": "",
   "title": "Timeline",
   "uid": "SUBgwtigz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
