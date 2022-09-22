@@ -585,6 +585,7 @@ Supercharger-V3 IS-Staðarskáli, 65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar, 64.14496,-21.854711
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
 Supercharger IT-Affi, 45.551296, 10.787143
+Supercharger-V3 IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
 Supercharger-V3 IT-Arese, 45.561371, 9.055905
 Supercharger IT-Arezzo, 43.436801, 11.779599
@@ -593,6 +594,7 @@ Supercharger IT-Brennero, 46.99540, 11.50210
 Supercharger IT-Brescia, 45.53224, 10.164969
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger IT-Campogalliano, 44.686638,10.851342
+Supercharger-V3 IT-Casalecchio di Reno, 44.483936,11.268521, 30
 Supercharger-V3 IT-Catania,37.551588,15.066693
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
@@ -1403,6 +1405,8 @@ ELEN HR-Poreč, 45.22419,1359817
 ELEN HR-Rijeka Gomila, 45.32812,14.442247
 ELEN HR-Vižinada, 45.33017,13.75735
 
+EnelX IT-Ramiola, 44.698924,10.090093
+
 EnBW DE-Allgäuer Tor Ost, 47.847519, 10.282904, 20
 EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
@@ -1445,6 +1449,8 @@ EnBW DE-Igersheim, 49.486855,9.820828
 EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Illertal Ost, 48.124722, 10.112120, 20
 EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
+EnBW DE-Inntal-Ost, 47.610841,12.20169, 10
+EnBW DE-Inntal-West, 47.612646,12.200665, 10
 EnBW DE-Hammersbach Langen-Bergheim Ost, 50.250621,8.994564, 10
 EnBW DE-Hammersbach Langen-Bergheim West, 50.248440,8.99398, 10
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
@@ -1573,6 +1579,7 @@ Fastned DE-Nersingen, 48.41572, 10.09919
 Fastned DE-Paderborn-Mönkeloh, 51.68364, 8.72194
 Fastned DE-Pilsting, 48.691977, 12.673389
 Fastned DE-Plech, 49.66416, 11.47072
+Fastned DE-Rüdenhausen, 49.768333,10.342153
 Fastned DE-Schmidgaden, 49.43777, 12.05351
 Fastned DE-Schweinfurt-West,50.062362, 10.145272
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602 
