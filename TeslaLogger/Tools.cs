@@ -1456,14 +1456,14 @@ namespace TeslaLogger
 
             if (di.Exists)
             {
-                var ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
+                IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
 
-                foreach (var fi in ds)
+                foreach (FileInfo fi in ds)
                 {
                     if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // already deleted enough?
                         return;
 
-                    if ((DateTime.Now - fi.LastWriteTime).TotalDays > 30)
+                    if ((DateTime.Now - fi.LastWriteTime).TotalDays > 14)
                     {
                         try
                         {
