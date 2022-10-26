@@ -80,3 +80,5 @@ TeslaLogger/bin/OVMS/protocollogging/*
 TeslaLogger/bin/OVMS/OVMS.exe.config
 TeslaLogger/bin/OVMS/geofence-private.csv
 TeslaLogger/copytoOVMS.cmd
+
+TeslaLogger/www/admin/plugins/*
