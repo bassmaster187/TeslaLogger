@@ -235,7 +235,7 @@ echo(menu("Settings"));
 <tr><td><?php t("Teslalogger Adminpanel"); ?></td><td><button onclick="window.location.href='adminpanelpassword.php';"><?php t("Credentials"); ?></button></td></tr>
 <tr><td><h1><?php t("Settings"); ?></h1></td><td></td></tr>
 	<tr><td valign="top"><b><?php t("Language"); ?>:</b></td><td>
-	<select id="Language">
+	<select id="Language" style="width:100%;">
 		<option value="da">Dansk</option>
 		<option value="de">Deutsch</option>
 		<option value="en">English</option>
