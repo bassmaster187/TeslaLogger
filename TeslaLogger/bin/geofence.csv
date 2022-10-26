@@ -72,6 +72,7 @@ Supercharger BE-Arlon, 49.648129,5.818957
 Supercharger BE-Brugge, 51.16989, 3.19666
 Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
+Supercharger-V3 BE-Hasselt, 50.951748, 5.353142, 17
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
 Supercharger BE-Kortrijk, 50.80565, 3.27443
 Supercharger BE-Lokeren, 51.09509, 4.01187
@@ -417,6 +418,7 @@ Supercharger-V3 FR-Blois,47.611942,1.339408
 Supercharger FR-Caen, 49.16398, -0.424802
 Supercharger FR-Cagnes-sur-Mer, 43.666446, 7.127372
 Supercharger FR-Châlons-en-Champagne, 48.991982, 4.245320
+Supercharger-V3 FR-Chalon-sur-Saône, 46.796267, 4.835472
 Supercharger FR-Chambéry, 45.593128,5.898171
 Supercharger FR-Chambéry Barberaz, 45.56085, 5.949646
 Supercharger FR-Chapelle sur Erdre, 47.2827707, -1.5500076
@@ -584,6 +586,7 @@ Supercharger-V3 IS-Staðarskáli, 65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar, 64.14496,-21.854711
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
 Supercharger IT-Affi, 45.551296, 10.787143
+Supercharger-V3 IT-Affi, 45.551296, 10.787143
 Supercharger IT-Aosta, 45.73745, 7.371416
 Supercharger-V3 IT-Arese, 45.561371, 9.055905
 Supercharger IT-Arezzo, 43.436801, 11.779599
@@ -592,6 +595,7 @@ Supercharger IT-Brennero, 46.99540, 11.50210
 Supercharger IT-Brescia, 45.53224, 10.164969
 Supercharger-V3 IT-Brindisi,40.619822,17.902674
 Supercharger IT-Campogalliano, 44.686638,10.851342
+Supercharger-V3 IT-Casalecchio di Reno, 44.483936,11.268521, 30
 Supercharger-V3 IT-Catania,37.551588,15.066693
 Supercharger IT-Cavaglià, 45.389435, 8.12998
 Supercharger IT-Ceprano, 41.544226, 13.511958
@@ -1402,6 +1406,8 @@ ELEN HR-Poreč, 45.22419,1359817
 ELEN HR-Rijeka Gomila, 45.32812,14.442247
 ELEN HR-Vižinada, 45.33017,13.75735
 
+EnelX IT-Ramiola, 44.698924,10.090093
+
 EnBW DE-Allgäuer Tor Ost, 47.847519, 10.282904, 20
 EnBW DE-Allgäuer Tor West, 47.848193, 10.280863, 20
 EnBW DE-Am Hockenheimring Ost,  49.316997, 8.57582, 20
@@ -1444,6 +1450,8 @@ EnBW DE-Igersheim, 49.486855,9.820828
 EnBW DE-Illertal West,48.125496,10.10963,20
 EnBW DE-Illertal Ost, 48.124722, 10.112120, 20
 EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
+EnBW DE-Inntal-Ost, 47.610841,12.20169, 10
+EnBW DE-Inntal-West, 47.612646,12.200665, 10
 EnBW DE-Hammersbach Langen-Bergheim Ost, 50.250621,8.994564, 10
 EnBW DE-Hammersbach Langen-Bergheim West, 50.248440,8.99398, 10
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
@@ -1572,11 +1580,13 @@ Fastned DE-Nersingen, 48.41572, 10.09919
 Fastned DE-Paderborn-Mönkeloh, 51.68364, 8.72194
 Fastned DE-Pilsting, 48.691977, 12.673389
 Fastned DE-Plech, 49.66416, 11.47072
+Fastned DE-Rüdenhausen, 49.768333,10.342153
 Fastned DE-Schmidgaden, 49.43777, 12.05351
 Fastned DE-Schweinfurt-West,50.062362, 10.145272
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602 
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
+Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216714, 4.9997043, 30
 Fastned FR-Aire de Saint Ambreuil, 46.691106, 4.844877, 30
 Fastned NL-Aalscholver, 52.436005, 5.424898
 Fastned NL-Akermaat, 52.498623, 4.698793
@@ -2601,6 +2611,8 @@ AT Salburg Gasthaus Fuxn, 47.809708,13.056066,10
 AT Salzburg Mooncity, 47.808874,13.055885,20
 AT Wien Billa Brünner Straße, 48.267452, 16.402954
 AT Raststation Marché Wörthersee,46.629952,14.094825
+
+BE Hasselt Corda Campus Kempische Steenweg 293, 50.951484, 5.353231, 14
 
 CH Baden ABB Research, 47.458503, 8.278454
 CH Nendaz Green Motion Charging Station Rte des Ecluses, 46.182368, 7.291183, 10

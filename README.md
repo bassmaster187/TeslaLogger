@@ -96,9 +96,6 @@ You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving you
 # Donations:
 http://paypal.me/ChristianPogea
 
-You can also use my referral code to buy a Tesla:
-http://ts.la/christian7267
-
 # Screenshots
  [Dashboard](dashboard.md)
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Dashboard.PNG)

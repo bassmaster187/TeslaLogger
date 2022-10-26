@@ -8,14 +8,20 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+        "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 24,
+  "iteration": 1664891370966,
   "links": [
     {
       "icon": "external link",
@@ -27,146 +33,226 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
-      "columns": [],
-      "datasource": "teslalogger",
-      "fontSize": "100%",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "date"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Jahr/Monat"
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sum_duration_h"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fahrzeit [h]"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sum_km"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Strecke [km]"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sum_consumption_kwh"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Verbrauch [kWh]"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_consumption_kwh"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ø Verbrauch [kWh]"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_outside_temp"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ø °C"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cnt"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Anzahl Trips"
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "custom.align"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
-        "h": 21,
-        "w": 13,
+        "h": 15,
+        "w": 14,
         "x": 0,
         "y": 0
       },
       "id": 2,
-      "options": {},
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Jahr/Monat",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+      "options": {
+        "footer": {
+          "fields": [
+            "sum_duration_h",
+            "sum_consumption_kwh",
+            "cnt",
+            "sum_km"
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "date",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
+          "reducer": [
+            "sum"
+          ],
+          "show": true
         },
-        {
-          "alias": "Fahrzeit [h]",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "sum_duration_h",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Strecke [km]",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "sum_km",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Verbrauch [kWh]",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "sum_consumption_kwh",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Ø Verbrauch [kWh]",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "avg_consumption_kwh",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Ø °C",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "avg_outside_temp",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
-        },
-        {
-          "alias": "Anzahl Trips",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "cnt",
-          "thresholds": [],
-          "type": "number",
-          "unit": "locale"
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Jahr/Monat"
         }
-      ],
+        ]
+      },
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "format": "table",
@@ -197,29 +283,37 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Trip Monatsstatistik",
-      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
       "type": "table"
     }
   ],
-  "schemaVersion": 19,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "text": "",
+          "selected": false,
+          "text": "Two weeks",
           "value": "1"
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "Car",
+        "label": "",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -229,7 +323,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -257,5 +350,6 @@
   "timezone": "",
   "title": "Trip Monatsstatistik",
   "uid": "YmpLrqZRz",
-  "version": 3
+  "version": 6,
+  "weekStart": ""
 }
