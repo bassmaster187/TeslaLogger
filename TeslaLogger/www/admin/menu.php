@@ -17,7 +17,7 @@ function full_path()
     return $url;
 }
 
-function menu($title)
+function menu($title, $prefix = "")
 {
     $car = "";
     $tasker_token = "";
@@ -51,13 +51,13 @@ function menu($title)
 ?>
 <header id="masthead" class="site-header" role="banner">
     <div class="header-main">
-        <h1 class="site-title"><a href="index.php?carid=<?=$current_carid?>" rel="home"><img src="logo.jpg" alt="Logo"> <?PHP echo($title); ?></a></h1>
+        <h1 class="site-title"><a href="<?php echo $prefix; ?>index.php?carid=<?=$current_carid?>" rel="home"><img src="logo.jpg" alt="Logo"> <?PHP echo($title); ?></a></h1>
         <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
             <button class="menu-toggle">Primary Menu</button>
             <div class="menu-menuoben-container">
                 <ul id="primary-menu" class="nav-menu">
                     <li id="menu-item-0" class="page_item_has_children">
-                        <a href="index.php"><?PHP echo($display_name);?></a>
+                        <a href="<?php echo $prefix; ?>index.php"><?PHP echo($display_name);?></a>
                         <ul class='children'>
 <?PHP                  
                         if ($jcars !== null)
@@ -69,14 +69,14 @@ function menu($title)
                                 if (strlen($dn) == 0)
                                     $dn = "Car ".$carid;
                                 
-                                echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="index.php?carid='.$carid.'">'.$dn.'</a></li>');
+                                echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="'.$prefix.'index.php?carid='.$carid.'">'.$dn.'</a></li>');
                             }  
                         }    
 ?>
 						</ul>
                     </li>
                     <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1">
-                        <a href="logfile.php"><?php t("Logfile"); ?></a>
+                        <a href="<?php echo $prefix; ?>logfile.php"><?php t("Logfile"); ?></a>
                     </li>
                     <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2">
                         <a href="javascript:BackgroudRun('restartlogger.php', 'Reboot!');"><?php t("Restart"); ?></a>
@@ -116,15 +116,15 @@ function menu($title)
 					<li id="menu-item-5" class="page_item_has_children">
 						<a href="#"><?php t("Extras"); ?></a>
 						<ul class='children'>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="changelog.php"><?php t("Changelog"); ?></a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="backup.php"><?php t("Backup"); ?></a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="restore.php"><?php t("Restore"); ?></a></li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="geofencing.php"><?php t("Geofence"); ?></a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="journeys.php?carid=<?= $current_carid ?>"><?php t("Journeys"); ?></a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="dashboard.php?carid=<?= $current_carid ?>"><?php t("Dashboard"); ?></a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="abrp.php?carid=<?= $current_carid ?>">Abetterrouteplanner</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="superchargebingo.php?carid=<?= $current_carid ?>">SuperChargeBingo</a></li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="wallbox.php?carid=<?= $current_carid ?>">Wallbox</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>changelog.php"><?php t("Changelog"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>backup.php"><?php t("Backup"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>restore.php"><?php t("Restore"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>geofencing.php"><?php t("Geofence"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>journeys.php?carid=<?= $current_carid ?>"><?php t("Journeys"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>dashboard.php?carid=<?= $current_carid ?>"><?php t("Dashboard"); ?></a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>abrp.php?carid=<?= $current_carid ?>">Abetterrouteplanner</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>superchargebingo.php?carid=<?= $current_carid ?>">SuperChargeBingo</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>wallbox.php?carid=<?= $current_carid ?>">Wallbox</a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wakeup.php?id=<?= $current_carid ?>"><?php t("Wakeup Teslalogger"); ?>!</a></li>
                             <?PHP if (!file_exists("/etc/teslalogger/cmd_gosleep_$current_carid.txt"))
                             {?>
@@ -134,7 +134,7 @@ function menu($title)
 						</ul>
                     </li>
                     <li id="menu-item-6" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6">
-                        <a href="settings.php"><?php t("Settings"); ?></a>
+                        <a href="<?php echo $prefix; ?>settings.php"><?php t("Settings"); ?></a>
                     </li>
                 </ul>
             </div>
