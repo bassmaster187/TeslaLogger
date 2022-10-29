@@ -2,6 +2,7 @@ FROM php:7.3-apache-buster
 
 # install packages
 RUN apt-get update && \
+  docker-php-ext-install mysqli && \
   apt-get install -y --no-install-recommends mariadb-client && \
   apt-get clean && \
   apt-get autoremove -y && \
