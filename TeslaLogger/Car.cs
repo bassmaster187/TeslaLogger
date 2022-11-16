@@ -1459,7 +1459,7 @@ namespace TeslaLogger
                     Thread.Sleep(1000);
                 }
 
-                webhelper.scanMyTesla.KillThread();
+                webhelper.scanMyTesla?.KillThread();
 
                 var dr = DBHelper.GetCar(CarInDB);
                 if (dr != null)

@@ -3396,7 +3396,7 @@ namespace TeslaLogger
 
                             try
                             {
-                                if (c.CurrentJSON.current_country_code != "us")
+                                if (country_code != "us")
                                     road = Regex.Replace(road, "^([0-9]+)?\\s?(.+)", "$2 $1").Trim(); // swap house number
                             }
                             catch (Exception ex)
@@ -3417,6 +3417,8 @@ namespace TeslaLogger
                         }
 
                         adresse += postcode + " " + city + ", " + road;
+
+                        System.Diagnostics.Debug.WriteLine("MapquestGeocode: " + adresse);
 
                     }
                     else
@@ -3696,7 +3698,7 @@ namespace TeslaLogger
                 {
                     con.Open();
 
-                    using (MySqlCommand cmdBucket = new MySqlCommand(@"SELECT distinct Pos FROM chargingstate union distinct SELECT StartPos FROM drivestate union distinct SELECT EndPos FROM drivestate order by Pos", con))
+                    using (MySqlCommand cmdBucket = new MySqlCommand(@"SELECT distinct Pos FROM chargingstate union distinct SELECT StartPos FROM drivestate union distinct SELECT EndPos FROM drivestate order by Pos desc", con))
                     {
                         var bucketdr = SQLTracer.TraceDR(cmdBucket);
                         var loop = true;
@@ -3794,31 +3796,29 @@ namespace TeslaLogger
                 int id = (int)dr["id"];
                 string brand = dr["fast_charger_brand"] as String ?? "";
                 int max_power = dr["max_charger_power"] as int? ?? 0;
+                object name = dr[3];
 
                 Address a = Geofence.GetInstance().GetPOI(lat, lng, false, brand, max_power);
                 if (a == null)
                 {
-                    if (dr[3] == DBNull.Value || dr[3].ToString().Length == 0)
+                    if (name == DBNull.Value || name.ToString().Length == 0)
                     {
-                        DBHelper.UpdateAddress(null, id);
+                        String newName = ReverseGecocodingAsync(null, lat, lng, true, true).Result;
+                        if (newName != null && newName.Length > 0)
+                        {
+                            UpdatePosAddressName(id, newName);
+                            count++;
+                        }
+                        else
+                            DBHelper.UpdateAddress(null, id);
                     }
                     return count;
                 }
 
-                if (dr[3] == DBNull.Value || a.name != dr[3].ToString())
+                if (name == DBNull.Value || a.name != name.ToString())
                 {
-                    using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con2.Open();
-                        using (MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2))
-                        {
-                            cmd2.Parameters.AddWithValue("@id", id);
-                            cmd2.Parameters.AddWithValue("@address", a.name);
-                            SQLTracer.TraceNQ(cmd2);
-
-                            count++;
-                        }
-                    }
+                    count++;
+                    UpdatePosAddressName(id, a.name);
                 }
             }
             catch (Exception ex)
@@ -3828,6 +3828,22 @@ namespace TeslaLogger
             }
 
             return count;
+        }
+
+        private static void UpdatePosAddressName(int id, string addressname)
+        {
+            using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con2.Open();
+                using (MySqlCommand cmd2 = new MySqlCommand("update pos set address=@address where id = @id", con2))
+                {
+                    cmd2.Parameters.AddWithValue("@id", id);
+                    cmd2.Parameters.AddWithValue("@address", addressname);
+                    SQLTracer.TraceNQ(cmd2);
+
+
+                }
+            }
         }
 
         private double GetIdealBatteryRangekm(out int battery_level, out double battery_range_km)

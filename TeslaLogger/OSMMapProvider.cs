@@ -54,7 +54,7 @@ namespace TeslaLogger
                 latlng.Add(Convert.ToDouble(coords.Rows[row]["lng"], Tools.ciDeDE));
             }
             job.Add("latlng", latlng.ToArray());
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
@@ -142,7 +142,7 @@ namespace TeslaLogger
             job.Add("lat", lat);
             job.Add("lng", lng);
             job.Add("MapCachePath", FileManager.GetMapCachePath());
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             File.WriteAllText(tempfile, JsonConvert.SerializeObject(job), Encoding.UTF8);
 
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
@@ -203,7 +203,7 @@ namespace TeslaLogger
             job.Add("lat", lat);
             job.Add("lng", lng);
 
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             GetOSMMapGeneratorFilename(out string fileName, out string arguments);
             arguments += "-jobfile " + tempfile + (Program.VERBOSE ? " - debug" : "");
 
@@ -263,6 +263,11 @@ namespace TeslaLogger
         public override bool UseIt()
         {
             return true;
+        }
+
+        static string GetTempFileName()
+        {
+            return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         }
     }
 }

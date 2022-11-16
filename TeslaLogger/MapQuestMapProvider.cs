@@ -20,7 +20,7 @@ namespace TeslaLogger
                 return;
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
+            sb.Append("https://www.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
             sb.Append("&center=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
@@ -65,7 +65,7 @@ namespace TeslaLogger
                 return;
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
+            sb.Append("https://www.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
             sb.Append("&center=");
             sb.Append(lat.ToString(Tools.ciEnUS)).Append(",");
@@ -121,7 +121,7 @@ namespace TeslaLogger
             }
 
             StringBuilder sb = new StringBuilder();
-            _ = sb.Append("http://open.mapquestapi.com/staticmap/v5/map?key=");
+            _ = sb.Append("https://www.mapquestapi.com/staticmap/v5/map?key=");
             _ = sb.Append(ApplicationSettings.Default.MapQuestKey);
             _ = sb.Append("&boundingBox=");
             _ = sb.Append(extent.Item1.ToString(Tools.ciEnUS)).Append(",");

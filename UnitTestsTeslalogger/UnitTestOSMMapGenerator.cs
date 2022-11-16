@@ -16,7 +16,7 @@ namespace UnitTestsTeslalogger
         public void ParkingP1()
         {
             var f = new FileInfo("../../Testfile-P1.txt");
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             f.CopyTo(tempfile,true);
 
             var map = new FileInfo("maps/P-51,1624-13,5748.png");
@@ -36,7 +36,7 @@ namespace UnitTestsTeslalogger
         public void ParkingP2()
         {
             var f = new FileInfo("../../Testfile-P2.txt");
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
             var map = new FileInfo("maps/P-51,1576-13,6364.png");
@@ -53,7 +53,7 @@ namespace UnitTestsTeslalogger
         public void ParkingP3()
         {
             var f = new FileInfo("../../Testfile-P3.txt");
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
             var map = new FileInfo("maps/P-51,1576-13,6364.png");
@@ -70,7 +70,7 @@ namespace UnitTestsTeslalogger
         public void ParkingP4()
         {
             var f = new FileInfo("../../Testfile-P4.txt");
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
             var map = new FileInfo("maps/P-51,1576-13,6364.png");
@@ -87,7 +87,7 @@ namespace UnitTestsTeslalogger
         public void TripT1()
         {
             var f = new FileInfo("../../Testfile-T1.txt");
-            string tempfile = Path.GetTempFileName();
+            string tempfile = GetTempFileName();
             f.CopyTo(tempfile, true);
 
             var map = new FileInfo("maps/T2-400371-400398.png");
@@ -101,6 +101,11 @@ namespace UnitTestsTeslalogger
 
             map = new FileInfo("maps/T2-400371-400398.png");
             Assert.IsTrue(map.Exists);
+        }
+
+        static string GetTempFileName()
+        {
+            return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         }
     }
 }
