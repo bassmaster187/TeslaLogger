@@ -181,16 +181,39 @@ namespace TeslaLogger
         private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send)
         {
             int sucID = int.MinValue;
-            bool SuCfound = GetSuperchargerByName(suc["localizedSiteName"]["value"].ToString(), out sucID);
+            string name = suc["localizedSiteName"]["value"].ToString();
+            name = name.Replace("Tesla Supercharger", "").Trim();
+            bool SuCfound = GetSuperchargerByName(name, out sucID);
             dynamic location = suc["centroid"];
             double lat = location["latitude"];
             double lng = location["longitude"];
+
+            string siteType = suc["siteType"].ToString();
+            if (siteType != "SITE_TYPE_SUPERCHARGER")
+            {
+                System.Diagnostics.Debug.WriteLine("siteType: " + name +" :" + siteType);
+            }
+
+            string accessType = suc["accessType"].ToString();
+            if (accessType != "ACCESS_TYPE_PUBLIC")
+            {
+                System.Diagnostics.Debug.WriteLine("accessType: " + name + " :" + accessType);
+            }
+
+            int maxPowerKw = suc["maxPowerKw"]["value"].ToObject<int>();
+
+            dynamic activeOutages = suc["activeOutages"];
+            int activeOutageCount = activeOutages.Count;
+            if (activeOutageCount > 0)
+            {
+                System.Diagnostics.Debug.WriteLine("Outage: " + name);
+            }
 
             if (!SuCfound)
             {
                 // add new entry to supercharger list in DB
 
-                sucID = AddNewSupercharger(suc["localizedSiteName"]["value"].ToString(), lat, lng);
+                sucID = AddNewSupercharger(name, lat, lng);
             }
 
             if (suc.ContainsKey("availableStalls")
@@ -204,16 +227,17 @@ namespace TeslaLogger
                 {
                     if (total_stalls > 0)
                     {
-                        if (!ContainsSupercharger(send, suc["localizedSiteName"]["value"].ToString()))
+                        if (!ContainsSupercharger(send, name))
                         {
                             Dictionary<string, object> sendKV = new Dictionary<string, object>();
                             send.Add(sendKV);
-                            sendKV.Add("n", suc["localizedSiteName"]["value"]);
+                            sendKV.Add("n", name);
                             sendKV.Add("lat", lat);
                             sendKV.Add("lng", lng);
                             sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
                             sendKV.Add("a", available_stalls);
                             sendKV.Add("t", total_stalls);
+                            sendKV.Add("kw", maxPowerKw);
 
                             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                             {
