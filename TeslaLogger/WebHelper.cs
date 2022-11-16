@@ -78,6 +78,7 @@ namespace TeslaLogger
         internal static HttpClient httpClientABRP = null;
         internal static HttpClient httpClientSuCBingo = null;
         internal HttpClient httpclientTeslaAPI = null;
+        internal HttpClient httpclientTeslaChargingSites = null;
         internal static object httpClientLock = new object();
 
         DateTime lastABRPActive = DateTime.MinValue;
@@ -1561,6 +1562,32 @@ namespace TeslaLogger
                 }
 
                 return httpclientTeslaAPI;
+            }
+        }
+
+        HttpClient GethttpclientTeslaNearbyChargingSites(bool forceNewClient = false)
+        {
+            lock (httpClientLock)
+            {
+                if (forceNewClient && httpclientTeslaChargingSites != null)
+                {
+                    httpclientTeslaChargingSites.Dispose();
+                    httpclientTeslaChargingSites = null;
+                }
+
+                if (httpclientTeslaChargingSites == null)
+                {
+                    httpclientTeslaChargingSites = new HttpClient();
+                    {
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.11.1/12ad93c62a/ios/16.0");
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("User-Agent", "Tesla/1195 CFNetwork/1388 Darwin/22.0.0");
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        httpclientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
+                    }
+                }
+
+                return httpclientTeslaChargingSites;
             }
         }
 
@@ -3307,21 +3334,26 @@ namespace TeslaLogger
                     webClient.Encoding = Encoding.UTF8;
 
                     url = !string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey)
-                        ? "http://open.mapquestapi.com/nominatim/v1/reverse.php"
+                        ? "http://www.mapquestapi.com/geocoding/v1/reverse"
                         : "http://nominatim.openstreetmap.org/reverse";
 
-                    url += "?format=jsonv2&lat=";
-                    url += latitude.ToString();
-                    url += "&lon=";
-                    url += longitude.ToString();
+                    
 
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     {
+                        url += "?location=";
+                        url += latitude.ToString();
+                        url += ",";
+                        url += longitude.ToString();
                         url += "&key=";
                         url += ApplicationSettings.Default.MapQuestKey;
                     }
                     else
                     {
+                        url += "?format=jsonv2&lat=";
+                        url += latitude.ToString();
+                        url += "&lon=";
+                        url += longitude.ToString();
                         url += "&email=mail";
                         url += "@";
                         url += "teslalogger";
@@ -3333,65 +3365,120 @@ namespace TeslaLogger
                     DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0);
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                    dynamic r2 = jsonResult["address"];
-                    string postcode = "";
-                    if (r2.ContainsKey("postcode"))
-                        postcode = r2["postcode"].ToString();
-
-                    string country_code = "";
-                    
-                    if (r2.ContainsKey("country_code"))
-                        country_code = r2["country_code"].ToString();
-
-                    if (country_code.Length > 0 && c != null)
-                    {
-                        c.CurrentJSON.current_country_code = country_code;
-                        c.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
-                    }
-
-                    string road = "";
-                    if (r2.ContainsKey("road"))
-                        road = r2["road"].ToString();
-
-                    string city = "";
-                    if (r2.ContainsKey("city"))
-                        city = r2["city"].ToString();
-                    else if (r2.ContainsKey("town"))
-                        city = r2["town"].ToString();
-                    else if (r2.ContainsKey("village"))
-                        city = r2["village"].ToString();
-
-                    string house_number = "";
-                    if (r2.ContainsKey("house_number"))
-                        house_number = r2["house_number"].ToString();
-
-                    string name = "";
-                    if (r2.ContainsKey("name") && r2["name"] != null)
-                        name = r2["name"].ToString();
-
-                    string address29 = "";
-                    if (r2.ContainsKey("address29") && r2["address29"] != null)
-                    {
-                        address29 = r2["address29"].ToString();
-                    }
-
                     string adresse = "";
 
-                    if (address29.Length > 0)
+                    if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
                     {
-                        adresse += address29 + ", ";
+                        dynamic res = jsonResult["results"];
+                        dynamic res0 = res[0];
+                        dynamic loc = res0["locations"];
+                        dynamic loc0 = loc[0];
+                        string postcode = "";
+
+                        if (loc0.ContainsKey("postalCode"))
+                            postcode = loc0["postalCode"].ToString();
+
+                        string country_code = "";
+
+                        if (loc0.ContainsKey("adminArea1") && loc0["adminArea1Type"].ToString() == "Country")
+                            country_code = loc0["adminArea1"].ToString().ToLower();
+
+                        if (country_code.Length > 0 && c != null)
+                        {
+                            c.CurrentJSON.current_country_code = country_code;
+                            c.CurrentJSON.current_state = loc0.ContainsKey("adminArea3") ? loc0["adminArea3"].ToString() : "";
+                        }
+
+                        string road = "";
+                        if (loc0.ContainsKey("street"))
+                        {
+                            road = loc0["street"].ToString();
+
+                            try
+                            {
+                                if (c.CurrentJSON.current_country_code != "us")
+                                    road = Regex.Replace(road, "^([0-9]+)?\\s?(.+)", "$2 $1").Trim(); // swap house number
+                            }
+                            catch (Exception ex)
+                            {
+                                ex.ToExceptionless().FirstCarUserID().AddObject(road, "road").Submit();
+                            }
+                        }
+                            
+
+                        string city = "";
+
+                        if (loc0.ContainsKey("adminArea5"))
+                            city = loc0["adminArea5"].ToString();
+
+                        if (country_code != "de")
+                        {
+                            adresse += country_code + "-";
+                        }
+
+                        adresse += postcode + " " + city + ", " + road;
+
                     }
-
-                    if (country_code != "de")
+                    else
                     {
-                        adresse += country_code + "-";
-                    }
+                        dynamic r2 = jsonResult["address"];
+                        string postcode = "";
+                        if (r2.ContainsKey("postcode"))
+                            postcode = r2["postcode"].ToString();
 
-                    adresse += postcode + " " + city + ", " + road + " " + house_number;
+                        string country_code = "";
 
-                    if (name.Length > 0)
-                    {
-                        adresse += " / " + name;
+                        if (r2.ContainsKey("country_code"))
+                            country_code = r2["country_code"].ToString();
+
+                        if (country_code.Length > 0 && c != null)
+                        {
+                            c.CurrentJSON.current_country_code = country_code;
+                            c.CurrentJSON.current_state = r2.ContainsKey("state") ? r2["state"].ToString() : "";
+                        }
+
+                        string road = "";
+                        if (r2.ContainsKey("road"))
+                            road = r2["road"].ToString();
+
+                        string city = "";
+                        if (r2.ContainsKey("city"))
+                            city = r2["city"].ToString();
+                        else if (r2.ContainsKey("town"))
+                            city = r2["town"].ToString();
+                        else if (r2.ContainsKey("village"))
+                            city = r2["village"].ToString();
+
+                        string house_number = "";
+                        if (r2.ContainsKey("house_number"))
+                            house_number = r2["house_number"].ToString();
+
+                        string name = "";
+                        if (r2.ContainsKey("name") && r2["name"] != null)
+                            name = r2["name"].ToString();
+
+                        string address29 = "";
+                        if (r2.ContainsKey("address29") && r2["address29"] != null)
+                        {
+                            address29 = r2["address29"].ToString();
+                        }
+
+                        if (address29.Length > 0)
+                        {
+                            adresse += address29 + ", ";
+                        }
+
+                        if (country_code != "de")
+                        {
+                            adresse += country_code + "-";
+                        }
+
+                        adresse += postcode + " " + city + ", " + road + " " + house_number;
+
+                        if (name.Length > 0)
+                        {
+                            adresse += " / " + name;
+                        }
                     }
 
                     System.Diagnostics.Debug.WriteLine(url + "\r\n" + adresse);
@@ -4090,7 +4177,7 @@ namespace TeslaLogger
             {
                 Log("HttpStatusCode = Unauthorized. Password changed or still valid? " + car.LoginRetryCounter);
 
-                if (car.LoginRetryCounter < 2)
+                if (car.LoginRetryCounter < 10)
                 {
                     System.Threading.Thread.Sleep(60000);
 
@@ -4113,12 +4200,40 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                HttpClient client = GethttpclientTeslaAPI();
+                HttpClient client = GethttpclientTeslaNearbyChargingSites();
 
-                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/nearby_charging_sites";
+                string adresse = "https://akamai-apigateway-charging-ownership.tesla.com/graphql?deviceLanguage=en&deviceCountry=US&ttpLocale=en_US&vin=" + car.Vin +"&operationName=GetNearbyChargingSites";
 
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(new Uri(adresse)).ConfigureAwait(false);
+                string data = @"{ ""query"": ""query GetNearbyChargingSites($args: GetNearbyChargingSitesRequestType!) {charging {\n    nearbySites(args: $args) {\n      sitesAndDistances {\n        ...ChargingNearbySitesFragment\n      }\n    }\n  }\n}\n    \n    fragment ChargingNearbySitesFragment on ChargerSiteAndDistanceType {\n  activeOutages {\n    message\n  }\n  availableStalls {\n    value\n  }\n  centroid {\n    ...EnergySvcCoordinateTypeFields\n  }\n  drivingDistanceMiles {\n    value\n  }\n  entryPoint {\n    ...EnergySvcCoordinateTypeFields\n  }\n  haversineDistanceMiles {\n    value\n  }\n  id {\n    text\n  }\n  localizedSiteName {\n    value\n  }\n  maxPowerKw {\n    value\n  }\n  totalStalls {\n    value\n  }\n  siteType\n  accessType\n}\n    \n    fragment EnergySvcCoordinateTypeFields on EnergySvcCoordinateType {\n  latitude\n  longitude\n}\n    "",
+  ""variables"": {
+                    ""args"": {
+                        ""userLocation"": {
+        ""latitude"": " + car.CurrentJSON.GetLatitude().ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
+                        },
+      ""northwestCorner"": {
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 0.7).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 0.8).ToString(Tools.ciEnUS) + @"
+      },
+      ""southeastCorner"": {
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 0.7).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 0.8).ToString(Tools.ciEnUS) + @"
+      },
+      ""openToNonTeslasFilter"": {
+                            ""value"": false
+      },
+      ""languageCode"": ""en"",
+      ""countryCode"": ""US"",
+      ""vin"": """ + car.Vin + @"""
+                    }
+                },
+  ""operationName"": ""GetNearbyChargingSites""
+}";
+
+                StringContent queryString =  new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage result = await client.PostAsync(adresse, queryString );
+
                 resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
                 DBHelper.AddMothershipDataToDB("GetCommand(nearby_charging_sites)", start, (int)result.StatusCode);
                 return resultContent;

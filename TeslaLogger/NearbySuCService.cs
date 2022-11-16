@@ -87,37 +87,51 @@ namespace TeslaLogger
                         if (jsonResult == null)
                             continue;
 
-                        if (jsonResult.ContainsKey("response"))
+                        if (jsonResult.ContainsKey("data"))
                         {
-                            dynamic response = jsonResult["response"];
-                            if (response == null)
+                            dynamic data = jsonResult["data"];
+                            if (data == null)
                                 continue;
 
-                            if (response.ContainsKey("superchargers"))
+                            if (data.ContainsKey("charging"))
                             {
-                                dynamic superchargers = response["superchargers"];
-                                foreach (dynamic suc in superchargers)
-                                {
-                                    /*
-          {
-            "location": { "lat": 33.848756, "long": -84.36434 },
-            "name": "Atlanta, GA - Peachtree Road",
-            "type": "supercharger",
-            "distance_miles": 10.868304,
-            "available_stalls": 4,
-            "total_stalls": 5,
-            "site_closed": false
-          }
-                                     */
+                                dynamic charging = data["charging"];
+                                if (charging == null)
+                                    continue;
 
-                                    try
+                                if (charging.ContainsKey("nearbySites"))
+                                {
+                                    dynamic nearbySites = charging["nearbySites"];
+                                    if (nearbySites == null)
+                                        continue;
+
+                                    if (nearbySites.ContainsKey("sitesAndDistances"))
                                     {
-                                        AddSuperchargerState(suc, send);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
-                                        Logfile.Log(ex.ToString());
+                                        dynamic superchargers = nearbySites["sitesAndDistances"];
+                                        foreach (dynamic suc in superchargers)
+                                        {
+                                            /*
+                  {
+                    "location": { "lat": 33.848756, "long": -84.36434 },
+                    "name": "Atlanta, GA - Peachtree Road",
+                    "type": "supercharger",
+                    "distance_miles": 10.868304,
+                    "available_stalls": 4,
+                    "total_stalls": 5,
+                    "site_closed": false
+                  }
+                                             */
+
+                                            try
+                                            {
+                                                AddSuperchargerState(suc, send);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
+                                                Logfile.Log(ex.ToString());
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -167,36 +181,34 @@ namespace TeslaLogger
         private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send)
         {
             int sucID = int.MinValue;
-            bool SuCfound = GetSuperchargerByName(suc["name"].ToString(), out sucID);
-            dynamic location = suc["location"];
-            double lat = location["lat"];
-            double lng = location["long"];
+            bool SuCfound = GetSuperchargerByName(suc["localizedSiteName"]["value"].ToString(), out sucID);
+            dynamic location = suc["centroid"];
+            double lat = location["latitude"];
+            double lng = location["longitude"];
 
             if (!SuCfound)
             {
                 // add new entry to supercharger list in DB
 
-                sucID = AddNewSupercharger(suc["name"].ToString(), lat, lng);
+                sucID = AddNewSupercharger(suc["localizedSiteName"]["value"].ToString(), lat, lng);
             }
 
-            if (suc.ContainsKey("available_stalls")
-                && suc.ContainsKey("total_stalls")
-                && suc.ContainsKey("site_closed")
-                && bool.TryParse(suc["site_closed"].ToString(), out bool site_closed)
-                && site_closed == false)
+            if (suc.ContainsKey("availableStalls")
+                && suc.ContainsKey("totalStalls")
+                )
             {
 
                 Tools.DebugLog($"SuC: <{suc["name"]}> <{suc["available_stalls"]}> <{suc["total_stalls"]}>");
-                if (int.TryParse(suc["available_stalls"].ToString(), out int available_stalls)
-                    && int.TryParse(suc["total_stalls"].ToString(), out int total_stalls))
+                if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
+                    && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
                 {
                     if (total_stalls > 0)
                     {
-                        if (!ContainsSupercharger(send, suc["name"].ToString()))
+                        if (!ContainsSupercharger(send, suc["localizedSiteName"]["value"].ToString()))
                         {
                             Dictionary<string, object> sendKV = new Dictionary<string, object>();
                             send.Add(sendKV);
-                            sendKV.Add("n", suc["name"]);
+                            sendKV.Add("n", suc["localizedSiteName"]["value"]);
                             sendKV.Add("lat", lat);
                             sendKV.Add("lng", lng);
                             sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
@@ -238,6 +250,7 @@ VALUES(
                     }
                 }
             }
+            /*
             else if (suc.ContainsKey("site_closed")
                 && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
                 && site_closed)
@@ -280,6 +293,7 @@ VALUES(
             {
                 Tools.DebugLog($"suc ContainsKey available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")} site_closed {suc.ContainsKey("site_closed")}");
             }
+            */
 
         }
 
