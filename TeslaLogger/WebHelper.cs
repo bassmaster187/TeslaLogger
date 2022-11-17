@@ -83,6 +83,8 @@ namespace TeslaLogger
 
         DateTime lastABRPActive = DateTime.MinValue;
 
+        internal static int ABRPtimeouts = 0;
+
         bool useCaptcha = false;
 
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
@@ -209,7 +211,6 @@ namespace TeslaLogger
 
             return false;
         }
-        static readonly char[] padding = { '=' };
         private static Random random = new Random();
         public static string RandomString(int length)
         {
@@ -4688,16 +4689,7 @@ namespace TeslaLogger
                 {
                     if (httpClientABRP == null)
                     {
-                        HttpClient c = new HttpClient();
-                        c.Timeout = TimeSpan.FromSeconds(10);
-                        c.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
-                        c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        c.DefaultRequestHeaders.Connection.Add("keep-alive");
-                        c.DefaultRequestHeaders.Add("Authorization", "APIKEY 54ac054f-0412-4747-b788-bcc8c6b60f27");
-                        c.DefaultRequestHeaders.ConnectionClose = true;
-                        httpClientABRP = c;
-
-                        Logfile.Log("ABRP initialized!");
+                        CreateHttpClientABRP();
                     }
                 }
 
@@ -4749,6 +4741,21 @@ namespace TeslaLogger
                     }
                 }
             }
+            catch (TaskCanceledException tce)
+            {
+                car.CreateExceptionlessClient(tce).Submit();
+                Logfile.Log(tce.ToString());
+                ABRPtimeouts++;
+                if (ABRPtimeouts > 10)
+                {
+                    ABRPtimeouts = 0;
+                    lock (httpClientLock)
+                    {
+                        httpClientABRP.Dispose();
+                        CreateHttpClientABRP();
+                    }
+                }
+            }
             catch (Exception ex)
             {
                 car.CreateExceptionlessClient(ex).Submit();
@@ -4756,6 +4763,20 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 Tools.DebugLog("SendDataToAbetterrouteplannerAsync exception: " + ex.ToString() + Environment.NewLine + ex.StackTrace);
             }
+        }
+
+        private static void CreateHttpClientABRP()
+        {
+            HttpClient c = new HttpClient();
+            c.Timeout = TimeSpan.FromSeconds(10);
+            c.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
+            c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            c.DefaultRequestHeaders.Connection.Add("keep-alive");
+            c.DefaultRequestHeaders.Add("Authorization", "APIKEY 54ac054f-0412-4747-b788-bcc8c6b60f27");
+            c.DefaultRequestHeaders.ConnectionClose = true;
+            httpClientABRP = c;
+
+            Logfile.Log("ABRP initialized!");
         }
 
         internal async Task SuperchargeBingoCheckin(double latitude, double longitude)
@@ -4790,7 +4811,7 @@ namespace TeslaLogger
                 using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
                 {
                     Tools.SetThreadEnUS();
-                    var result = await httpClientSuCBingo.PostAsync("https://supercharge.bingo/v1.php/api/v1/checkin", content);
+                    var result = await httpClientSuCBingo.PostAsync(new Uri("https://supercharge.bingo/v1.php/api/v1/checkin"), content).ConfigureAwait(false);
                     string response = result.Content.ReadAsStringAsync().Result;
 
                     DBHelper.AddMothershipDataToDB("SuperchargeBingoCheckin()", start, (int)result.StatusCode);
@@ -4798,7 +4819,7 @@ namespace TeslaLogger
                     int checkinID = 0;
                     try
                     {
-                        int.TryParse(response, out checkinID);
+                        _ = int.TryParse(response, out checkinID);
                     }
                     catch (Exception ex)
                     {
