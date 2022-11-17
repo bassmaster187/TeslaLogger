@@ -493,7 +493,7 @@ namespace TeslaLogger
 
                     using (HttpClient client = new HttpClient(handler))
                     {
-                        client.Timeout = TimeSpan.FromSeconds(30);
+                        client.Timeout = TimeSpan.FromSeconds(300);
                         client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.UserAgent);
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         client.DefaultRequestHeaders.Connection.Add("keep-alive");
@@ -4193,9 +4193,9 @@ namespace TeslaLogger
             {
                 Log("HttpStatusCode = Unauthorized. Password changed or still valid? " + car.LoginRetryCounter);
 
-                if (car.LoginRetryCounter < 10)
+                if (car.LoginRetryCounter < 32)
                 {
-                    System.Threading.Thread.Sleep(60000);
+                    System.Threading.Thread.Sleep(60000 + 30000 * car.LoginRetryCounter);
 
                     car.LoginRetryCounter++;
 
@@ -4205,7 +4205,8 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    car.ExitCarThread("Login retrys exeeded!");
+                    car.CurrentJSON.current_state = "ERROR: Login retries exeeded";
+                    car.ExitCarThread("Login retries exeeded!");
                 }
             }
             return false;
