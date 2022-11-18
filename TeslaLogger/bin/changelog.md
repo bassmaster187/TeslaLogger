@@ -1,3 +1,9 @@
+# Version 1.54.4
+- Using new GraphQL nearby SUC service. https://teslalogger.de/suc-map.php shows now max kW per site
+- BF: MapQuest reverse geocoding and static map creation
+- new vehicles in account are detected automatically and used in teslalogger
+- reduce calls to Tesla API to prevent ban with many cars in account
+
 # Version 1.54.3
 - Detecting Model X 2021 Plaid / LR
 

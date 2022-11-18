@@ -4231,12 +4231,12 @@ namespace TeslaLogger
         ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 0.7).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 0.8).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 2).ToString(Tools.ciEnUS) + @"
       },
       ""southeastCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 0.7).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 0.8).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 2).ToString(Tools.ciEnUS) + @"
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false
@@ -4251,9 +4251,13 @@ namespace TeslaLogger
 
                 StringContent queryString =  new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage result = await client.PostAsync(adresse, queryString );
-
                 resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
                 DBHelper.AddMothershipDataToDB("GetCommand(nearby_charging_sites)", start, (int)result.StatusCode);
+
+                if (!result.IsSuccessStatusCode)
+                {
+                    SubmitExceptionlessClientWithResultContent(null, resultContent);
+                }
                 return resultContent;
             }
             catch (Exception ex)
