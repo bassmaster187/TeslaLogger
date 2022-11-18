@@ -55,9 +55,9 @@ namespace TeslaLogger
         {
             ArrayList send = new ArrayList();
 
-            // nearby_charging_sites
-            foreach (Car car in Car.Allcars)
+            for (int id = 0; id < Car.Allcars.Count; id++)
             {
+                Car car = Car.Allcars[id];
                 if (car.IsInService())
                     continue;
 
@@ -187,6 +187,7 @@ namespace TeslaLogger
             dynamic location = suc["centroid"];
             double lat = location["latitude"];
             double lng = location["longitude"];
+            string Message = "";
 
             string siteType = suc["siteType"].ToString();
             if (siteType != "SITE_TYPE_SUPERCHARGER")
@@ -207,6 +208,18 @@ namespace TeslaLogger
             if (activeOutageCount > 0)
             {
                 System.Diagnostics.Debug.WriteLine("Outage: " + name);
+                foreach (dynamic ao in activeOutages)
+                {
+                    if (ao.ContainsKey("message"))
+                    {
+                        if (Message.Length > 0)
+                            Message += "|";
+
+                        Message += ao["message"].ToString();
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine("Message: " + Message);
             }
 
             if (!SuCfound)
@@ -238,6 +251,7 @@ namespace TeslaLogger
                             sendKV.Add("a", available_stalls);
                             sendKV.Add("t", total_stalls);
                             sendKV.Add("kw", maxPowerKw);
+                            sendKV.Add("m", Message);
 
                             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                             {
