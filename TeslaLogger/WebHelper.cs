@@ -4231,12 +4231,12 @@ namespace TeslaLogger
         ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 2).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 2).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 1).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 1).ToString(Tools.ciEnUS) + @"
       },
       ""southeastCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 2).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 2).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 1).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 1).ToString(Tools.ciEnUS) + @"
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false
@@ -4256,7 +4256,7 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    SubmitExceptionlessClientWithResultContent(null, resultContent);
+                    throw new Exception("NearbyChargingSiteFail");
                 }
                 return resultContent;
             }
