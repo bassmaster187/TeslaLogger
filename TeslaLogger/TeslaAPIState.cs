@@ -1022,6 +1022,11 @@ namespace TeslaLogger
                  *     }
                  * }
                  */
+                CheckTPMS(1, r2);
+                CheckTPMS(2, r2);
+                CheckTPMS(3, r2);
+                CheckTPMS(4, r2);
+
                 if (r2.ContainsKey("timestamp") && long.TryParse(r2["timestamp"].ToString(), out long timestamp))
                 {
                     foreach (string key in r2.Keys)
@@ -1049,6 +1054,16 @@ namespace TeslaLogger
                             case "dashcam_clip_save_available":
                             case "vehicle_self_test_requested":
                             case "webcam_available":
+                            case "tpms_soft_warning_fr":
+                            case "tpms_soft_warning_fl":
+                            case "tpms_soft_warning_rr":
+                            case "tpms_soft_warning_rl":
+                            case "tpms_hard_warning_fr":
+                            case "tpms_hard_warning_fl":
+                            case "tpms_hard_warning_rr":
+                            case "tpms_hard_warning_rl":
+                            case "service_mode_plus":
+                            case "service_mode":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_state");
@@ -1085,6 +1100,10 @@ namespace TeslaLogger
                             case "rp_window":
                             case "santa_mode":
                             case "vehicle_self_test_progress":
+                            case "tpms_last_seen_pressure_time_fl":
+                            case "tpms_last_seen_pressure_time_fr":
+                            case "tpms_last_seen_pressure_time_rr":
+                            case "tpms_last_seen_pressure_time_rl":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "vehicle_state");
@@ -1096,6 +1115,8 @@ namespace TeslaLogger
                             case "tpms_pressure_rl":
                             case "tpms_pressure_fr":
                             case "tpms_pressure_fl":
+                            case "tpms_rcp_rear_value":
+                            case "tpms_rcp_front_value":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "double", value, timestamp, "vehicle_state");
@@ -1136,10 +1157,43 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
+        }
+
+        private void CheckTPMS(int TireID, Dictionary<string, object> r2)
+        {
+            try
+            {
+                string Prefix = "";
+                switch (TireID)
+                {
+                    case 1:
+                        Prefix = "fl"; break;
+                    case 2:
+                        Prefix = "fr"; break;
+                    case 3:
+                        Prefix = "rl"; break;
+                    case 4:
+                        Prefix = "rr"; break;
+                    default:
+                        return;
+                }
+
+                if (r2.ContainsKey("tpms_pressure_"+Prefix) && r2.ContainsKey("tpms_last_seen_pressure_time_" + Prefix) && r2["tpms_last_seen_pressure_time_" + Prefix] != null && r2["tpms_pressure_"+Prefix] != null)
+                {
+                    double fl = (double)r2["tpms_pressure_"+Prefix];
+                    DateTime dtFL = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
+                    car.Log($"TPMS {Prefix}: {fl} {dtFL}");
+                    car.DbHelper.InsertTPMS(TireID, fl, dtFL);
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+            }
         }
 
         private void ParseSoftwareUpdate(object software_update, long timestamp)
@@ -1335,7 +1389,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog("Exception", ex);
             }
             return false;
