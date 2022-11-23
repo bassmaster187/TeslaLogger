@@ -140,6 +140,15 @@ namespace TeslaLogger
                         return "not found";
                     }
 
+                    if (resultContent.Contains("Connect failed: Too many connections"))
+                    {
+                        car.CreateExeptionlessLog("ScanMyTesla", "Too many connections", Exceptionless.Logging.LogLevel.Warn).Submit();
+
+                        car.Log("SMT: Too many connections");
+                        Thread.Sleep(25000);
+                        return "Resource Limit Is Reached";
+                    }
+
                     if (resultContent.Contains("Resource Limit Is Reached"))
                     {
                         car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
