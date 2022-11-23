@@ -126,6 +126,8 @@ namespace TeslaLogger
 
                 CheckDBSchema_superchargerstate();
 
+                CheckDBSchema_TPMS();
+
                 Logfile.Log("DBSchema Update finished.");
 
                 // end of schema update
@@ -280,6 +282,23 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void CheckDBSchema_TPMS()
+        {
+            if (!DBHelper.TableExists("TPMS"))
+            {
+                string sql = @"CREATE TABLE `TPMS` (
+                  `CarId` INT NOT NULL,
+                  `Datum` DATETIME NOT NULL,
+                  `TireId` INT NOT NULL,
+                  `Pressure` DOUBLE NOT NULL,
+                  PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
+
+                Logfile.Log(sql);
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
             }
         }
 

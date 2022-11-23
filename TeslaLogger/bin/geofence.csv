@@ -1290,6 +1290,7 @@ Allego DE-Quirla, 50.865762, 11.772602
 Allego FR-Avignon 162 Avenue Pierre Semard, 43.927801,4.834637
 Allego NL-Meerkerk,51.899809,4.982779
 
+ARAL DE-Bensheim, 49.672869, 8.597024, 10
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Braunschweig, 52.322159, 10.478146
 ARAL DE-Dettelbach, 49.778176,10.0658, 20
@@ -1301,9 +1302,11 @@ ARAL DE-Könnern,51.69016,11.7670125
 ARAL DE-Ladbergen,52.146616,7.735806
 ARAL DE-Lübeck Fackenburger Allee,53.870645,10.6699143
 ARAL DE-Merklingen, 48.516282, 9.759379
+ARAL DE-Montabaur Alleestraße 18, 50.440191, 7.830364, 10
 ARAL DE-Neuenkirchen-Vörden, 52.491559,8.0783, 10
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Schwarmstedt Autohof, 52.673543, 9.688409
+ARAL DE-Tübingen Reutlinger Straße 72, 48.512816, 9.073854, 20
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Autohof, 53.502361,11.097974
 
@@ -1338,6 +1341,8 @@ CEZ CZ-Třinec, 49.660275, 18.672079
 
 Circle K SE-Bjärred,55.722256,13.08846
 Circle K SE-Göteborg,57.707127,11.870444
+
+Citywatt DE-Pfullingen Marktstraße 160 Dehner, 48.480382, 9.229756, 30
 
 Clever DK-Bakkebølle, 54.948667, 11.988156
 Clever DK-Snoghøj, 55.5357, 9.718562
@@ -1556,7 +1561,7 @@ EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
 EWE-SWB DE-Burgwedel, 52.485739, 9.844603
 EWE-SWB DE-Emden, 53.389098,7.230491, 20
 EWE-SWB DE-Friesoythe, 53.014858, 7.851011
-EWE-SWB DE-Illertissen, 48.219521,10.126724
+EWE-SWB DE-Illertissen, 48.219521,10.126724, 10
 EWE-SWB DE-Marktrodach, 50.256351, 11.397455
 EWE-SWB DE-Moormerland, 53.311881, 7.456651
 EWE-SWB DE-Oldenburg Bremer Heerstraße, 53.119092,8.258616
@@ -1774,7 +1779,7 @@ Ionity DE-Hohenwarsleben, 52.173898, 11.49512, 11
 Ionity DE-Holzheim, 48.381890, 10.086035
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
-Ionity DE-Illertissen, 48.219287,10.127852, 10
+Ionity DE-Illertissen, 48.219287,10.127852, 13
 Ionity DE-Katzenfurt Süd, 50.620347, 8.362918, 5
 Ionity DE-Kirchheim (Tal), 50.833695, 9.5707772, 20
 Ionity DE-Köschinger Forst Ost, 48.836599, 11.472234

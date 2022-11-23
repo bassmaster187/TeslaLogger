@@ -8,6 +8,7 @@ using System.Threading;
 using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
+using System.Runtime.Caching;
 
 namespace TeslaLogger
 {
@@ -124,7 +125,7 @@ namespace TeslaLogger
 
                                             try
                                             {
-                                                AddSuperchargerState(suc, send);
+                                                AddSuperchargerState(suc, send, result);
                                             }
                                             catch (Exception ex)
                                             {
@@ -178,7 +179,7 @@ namespace TeslaLogger
             }
         }
 
-        private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send)
+        private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent)
         {
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
@@ -220,6 +221,20 @@ namespace TeslaLogger
                 }
 
                 System.Diagnostics.Debug.WriteLine("Message: " + Message);
+
+                string cacheKey = "SuperchargerStateOutages_" + name;
+                object cacheValue = MemoryCache.Default.Get(cacheKey);
+                if (cacheValue == null)
+                {
+                    string base64 = Tools.ConvertString2Base64(resultContent);
+
+                    ExceptionlessClient.Default.CreateLog("SuperchargerStateOutages", name + " " + Message, Exceptionless.Logging.LogLevel.Info)
+                        .FirstCarUserID()
+                        .AddObject(resultContent, "ResultContent")
+                        .AddObject(base64, "ResultContentBase64").Submit();
+
+                    MemoryCache.Default.Add(cacheKey, true, DateTime.Now.AddHours(1));
+                }
             }
 
             if (!SuCfound)

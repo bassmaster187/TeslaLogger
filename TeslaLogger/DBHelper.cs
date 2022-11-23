@@ -1309,6 +1309,45 @@ WHERE
             return tuple;
         }
 
+        internal void InsertTPMS(int TireId, double pressure, DateTime dtFL)
+        {
+            try
+            {
+                string cacheKey = "TPMS_" + TireId + "_" + car.CarInDB;
+                object cacheValue = MemoryCache.Default.Get(cacheKey);
+                if (cacheValue != null)
+                    return;
+                
+                MemoryCache.Default.Add(cacheKey, true, DateTime.Now.AddMinutes(2));
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"insert TPMS (CarID, Datum, TireID, Pressure) values (@CarID, @Datum, @TireID, @Pressure)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@Datum", dtFL);
+                        cmd.Parameters.AddWithValue("@TireID", TireId);
+                        cmd.Parameters.AddWithValue("@Pressure", pressure);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.ErrorCode == -2147467259) // Duplicate entry
+                    return;
+
+                car.SendException2Exceptionless(ex);
+                car.Log(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                car.SendException2Exceptionless(ex);
+                car.Log(ex.ToString());
+            }
+        }
+
         private Queue<int> FindCombineCandidates()
         {
             Queue<int> combineCandidates = new Queue<int>();
