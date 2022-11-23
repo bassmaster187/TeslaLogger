@@ -265,7 +265,17 @@ namespace TeslaLogger
                         using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
 #pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                         {
-                            SQLTracer.TraceNQ(cmd);
+                            try
+                            {
+                                SQLTracer.TraceNQ(cmd);
+                            }
+                            catch (MySqlException ex)
+                            {
+                                if (ex.Message.Contains("Duplicate entry"))
+                                    car.Log("Scanmytesla: " + ex.Message);
+                                else
+                                    throw;
+                            }
 
                             try
                             {
