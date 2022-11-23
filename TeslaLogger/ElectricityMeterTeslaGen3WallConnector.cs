@@ -167,6 +167,8 @@ namespace TeslaLogger
                 j = j.Replace("nan,", "null,");
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                if (jsonResult == null)
+                    return null;
 
                 bool vehicle_connected = jsonResult["vehicle_connected"];
 
