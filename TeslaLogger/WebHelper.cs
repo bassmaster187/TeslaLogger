@@ -1896,7 +1896,7 @@ namespace TeslaLogger
 
                 Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
 
-                DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); // xxx
+                // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
 
                 return null;
             }
