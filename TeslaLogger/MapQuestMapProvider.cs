@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Net;
 using System.Text;
 using Exceptionless;
@@ -11,6 +12,7 @@ namespace TeslaLogger
     {
         WebClient _webClient;
         object _webClientLock = new object();
+        static bool invalidAppKey = false;
 
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)
@@ -19,6 +21,13 @@ namespace TeslaLogger
             {
                 return;
             }
+
+            if (invalidAppKey)
+            {
+                Logfile.Log("Mapquest invalidAppKey!!!");
+                return;
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append("https://www.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
@@ -50,6 +59,13 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                var wex = ex as WebException;
+                if (wex != null)
+                {
+                    if (IsInvalidAppKey(wex))
+                        return;
+                }
+
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -64,6 +80,13 @@ namespace TeslaLogger
             {
                 return;
             }
+
+            if (invalidAppKey)
+            {
+                Logfile.Log("Mapquest invalidAppKey!!!");
+                return;
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append("https://www.mapquestapi.com/staticmap/v5/map?key=");
             sb.Append(ApplicationSettings.Default.MapQuestKey);
@@ -95,6 +118,13 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                var wex = ex as WebException;
+                if (wex != null)
+                {
+                    if (IsInvalidAppKey(wex))
+                        return;
+                }
+
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -113,6 +143,12 @@ namespace TeslaLogger
             {
                 return;
             }
+            if (invalidAppKey)
+            {
+                Logfile.Log("Mapquest invalidAppKey!!!");
+                return;
+            }
+
             // https://open.mapquestapi.com/staticmap/v5/map?key=ulMOOlevG9FunIVobQB2BG2GA0EdCjjH&boundingBox=38.915,-77.072,38.876,-77.001&size=200,150&type=dark
             Tuple<double, double, double, double> extent = DetermineExtent(coords);
             if (extent == null)
@@ -188,6 +224,13 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
+                var wex = ex as WebException;
+                if (wex != null)
+                {
+                    if (IsInvalidAppKey(wex))
+                        return;
+                }
+
                 ex.ToExceptionless().FirstCarUserID().AddObject(coords?.Rows?.Count,"Coords Rows Count").Submit();
 
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -195,7 +238,38 @@ namespace TeslaLogger
             }
 
         }
-        
+
+        private static bool IsInvalidAppKey(WebException ex)
+        {
+            try
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    HttpWebResponse exh = ex.Response as HttpWebResponse;
+                    if (exh != null && exh.StatusCode == HttpStatusCode.Forbidden)
+                    {
+                        using (Stream stream = ex.Response.GetResponseStream())
+                        {
+                            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                            String responseString = reader.ReadToEnd();
+
+                            if (responseString == "The AppKey submitted with this request is invalid.")
+                            {
+                                invalidAppKey = true;
+                                Logfile.Log("MapQuest: " + responseString);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex2)
+            {
+                Logfile.Log(ex2.ToString());
+            }
+            return false;
+        }
+
         WebClient GetWebClient()
         {
             lock (_webClientLock)

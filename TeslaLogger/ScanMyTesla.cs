@@ -140,6 +140,15 @@ namespace TeslaLogger
                         return "not found";
                     }
 
+                    if (resultContent.Contains("Connect failed: Too many connections"))
+                    {
+                        car.CreateExeptionlessLog("ScanMyTesla", "Too many connections", Exceptionless.Logging.LogLevel.Warn).Submit();
+
+                        car.Log("SMT: Too many connections");
+                        Thread.Sleep(25000);
+                        return "Resource Limit Is Reached";
+                    }
+
                     if (resultContent.Contains("Resource Limit Is Reached"))
                     {
                         car.CreateExeptionlessLog("ScanMyTesla", "Resource Limit Is Reached", Exceptionless.Logging.LogLevel.Warn).Submit();
@@ -265,7 +274,17 @@ namespace TeslaLogger
                         using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), con))
 #pragma warning restore CA2100 // SQL-Abfragen auf Sicherheitsrisiken überprüfen
                         {
-                            SQLTracer.TraceNQ(cmd);
+                            try
+                            {
+                                SQLTracer.TraceNQ(cmd);
+                            }
+                            catch (MySqlException ex)
+                            {
+                                if (ex.Message.Contains("Duplicate entry"))
+                                    car.Log("Scanmytesla: " + ex.Message);
+                                else
+                                    throw;
+                            }
 
                             try
                             {

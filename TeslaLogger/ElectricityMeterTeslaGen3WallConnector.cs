@@ -167,6 +167,8 @@ namespace TeslaLogger
                 j = j.Replace("nan,", "null,");
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                if (jsonResult == null)
+                    return null;
 
                 bool vehicle_connected = jsonResult["vehicle_connected"];
 
@@ -187,8 +189,13 @@ namespace TeslaLogger
             try
             {
                 j = GetCurrentDataVersion();
+                if (j == null)
+                    return "";
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(j);
+                if (jsonResult == null)
+                    return "";
+
                 string key = "firmware_version";
                 string value = jsonResult[key];
                 return value;

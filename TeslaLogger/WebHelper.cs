@@ -1895,6 +1895,9 @@ namespace TeslaLogger
                 }
 
                 Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
+
+                // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
+
                 return null;
             }
             else
@@ -4231,12 +4234,12 @@ namespace TeslaLogger
         ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 1).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 1).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 1.5).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 1.5).ToString(Tools.ciEnUS) + @"
       },
       ""southeastCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 1).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 1).ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 1.5).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 1.5).ToString(Tools.ciEnUS) + @"
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false

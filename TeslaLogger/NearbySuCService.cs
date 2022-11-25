@@ -84,6 +84,12 @@ namespace TeslaLogger
                             Tools.DebugLog("NearbySuCService: vehicle unavailable");
                             return;
                         }
+                        else if (result.Contains("502 Bad Gateway"))
+                        {
+                            Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
+                            return;
+                        }
+
                         dynamic jsonResult = JsonConvert.DeserializeObject(result);
                         if (jsonResult == null)
                             continue;
