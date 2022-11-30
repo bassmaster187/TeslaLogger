@@ -35,10 +35,12 @@ CREATE TABLE kvs(
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
-REPLACE kvs
-    (id, ivalue)
-VALUES
-(@key, @value)", con))
+INSERT INTO kvs SET
+    id = @key,
+    ivalue = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    ivalue = @value", con))
                 {
                     cmd.Parameters.AddWithValue("@id", key);
                     cmd.Parameters.AddWithValue("@value", value);
