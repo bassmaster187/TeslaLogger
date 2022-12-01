@@ -303,7 +303,16 @@ namespace TeslaLogger
             Logfile.Log("StreamingPos: " + Tools.StreamingPos());
             try
             {
-                Logfile.Log($"Free disk space: {Tools.FreeDiskSpaceMB()}mb");
+                long freeDiskSpaceMB = Tools.FreeDiskSpaceMB();
+                Logfile.Log($"Free disk space: {freeDiskSpaceMB}mb");
+                if (freeDiskSpaceMB < 1000)
+                {
+                    Logfile.Log("Disk space is very low! trying to clean up ...");
+                    Tools.LogDiskUsage();
+                    Tools.CleanupBackupFolder();
+                    Tools.CleanupExceptionsDir();
+                    Tools.LogDiskUsage();
+                }
             }
             catch (Exception ex)
             {
