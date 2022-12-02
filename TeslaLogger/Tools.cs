@@ -1619,7 +1619,7 @@ WHERE
             }
         }
 
-        private static void CleanupExceptionsDir()
+        internal static void CleanupExceptionsDir()
         {
             bool filesFoundForDeletion = false;
             int countDeletedFiles = 0;
@@ -1653,7 +1653,7 @@ WHERE
             }
         }
 
-        private static void LogDiskUsage()
+        internal static void LogDiskUsage()
         {
             _ = ExecMono("/bin/df", "-k", true, true);
             if (Directory.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/backup"))
