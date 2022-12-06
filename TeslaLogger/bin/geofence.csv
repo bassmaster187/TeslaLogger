@@ -146,6 +146,7 @@ Supercharger DE-Aichstetten, 47.880299, 10.04052, 10
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
+Supercharger-V3 DE-Bensheim, 49.672353, 8.6022525, 22
 Supercharger-V3 DE-Berlin - EUREF-Campus, 52.4808984, 13.3558539
 Supercharger DE-Bernau am Chiemsee, 47.81445, 12.36792
 Supercharger DE-Bersteland, 51.949066, 13.787906
@@ -167,6 +168,7 @@ Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
+Supercharger-V3 DE-Endsee, 49.445217, 10.246967, 20
 Supercharger-V3 DE-Erfstadt, 50.796478, 6.77994
 Supercharger DE-Erfstadt, 50.796478, 6.77994
 Supercharger-V3 DE-Erlangen, 49.5440686, 11.02870
@@ -250,7 +252,9 @@ Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
 Supercharger-V3 DE-Nossen, 51.08255, 13.27406,30
 Supercharger DE-Nossen, 51.08255, 13.27406,30
+Supercharger-V3 DE-Northeim, 51.731815, 9.972845
 Supercharger-V3 DE-Nörten-Hardenberg, 51.632847, 9.909942
+Supercharger-V3 DE-Nottuln, 51.911333, 7.398475, 16
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V3 DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger DE-Oberhonnefeld, 50.562609,7.525362
@@ -625,6 +629,7 @@ Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
 Supercharger IT-Piacenza, 45.039461, 9.753871
 Supercharger IT-Pollein, 45.737122, 7.372441
+Supercharger-V3 IT-Porto Sant’Elpidio, 43.232212, 13.749903
 Supercharger-V3 IT-Roma South West,41.815947,12.4009345
 Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
 Supercharger IT-Sondrio, 46.164535, 9.677329
@@ -1576,6 +1581,7 @@ Fastned DE-Freiwalde, 51.948979, 13.7877
 Fastned DE-Friedberg, 48.407453, 10.952015
 Fastned DE-Giengen-Herbrechtingen, 48.61561, 10.20539
 Fastned DE-Gladbeck-Ellinghorst, 51.5552, 6.96951
+Fastned DE-Hermsdorf, 50.889906, 11.871882, 20
 Fastned DE-Herbolzheim, 48.22685, 7.75509
 Fastned DE-Hilden, 51.192201,6.935931,3
 Fastned DE-Hilden, 51.192231,6.93605,3

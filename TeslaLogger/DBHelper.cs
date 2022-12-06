@@ -923,7 +923,7 @@ AND id <=(
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
-                UpdateChargePrice(ChargingStateID, false);
+                UpdateChargePrice(ChargingStateID);
                 updatedChargePrice = true;
             }
             return updatedChargePrice;
@@ -1692,7 +1692,7 @@ HAVING
                     {
                         car.Log($"CopyChargePrice enabled for '{addr.name}'");
                         // find reference charge session for addr
-                        int refChargingState = FindReferenceChargingState(addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
+                        int refChargingState = FindReferenceChargingState(ChargingStateID, addr.name, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_session, out ref_cost_per_session_found, out ref_cost_per_minute, out ref_cost_per_minute_found);
                         // if exists, copy curreny, per_kwh, per_minute, per_session to current charging state
                         if (refChargingState != int.MinValue)
                         {
@@ -1745,7 +1745,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int ChargingStateID, bool searchReference = true)
+        private void UpdateChargePrice(int ChargingStateID)
         {
             string ref_cost_currency = string.Empty;
             double ref_cost_per_kwh = double.NaN;
@@ -1754,80 +1754,8 @@ WHERE
             bool ref_cost_per_minute_found = false;
             double ref_cost_per_session = double.NaN;
             bool ref_cost_per_session_found = false;
-            if (searchReference)
-            {
-                GetChargeCostDataFromReference(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-            }
-            else
-            {
-                GetChargeCostDataFromChargingStateID(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-            }
+            GetChargeCostDataFromReference(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
             UpdateChargePrice(ChargingStateID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
-        }
-
-        private void GetChargeCostDataFromChargingStateID(int ChargingStateID, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
-        {
-            ref_cost_currency = string.Empty;
-            ref_cost_per_kwh = double.NaN;
-            ref_cost_per_kwh_found = false;
-            ref_cost_per_minute = double.NaN;
-            ref_cost_per_minute_found = false;
-            ref_cost_per_session = double.NaN;
-            ref_cost_per_session_found = false;
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    chargingstate.cost_currency,
-    chargingstate.cost_per_kwh,
-    chargingstate.cost_per_session,
-    chargingstate.cost_per_minute
-FROM
-    chargingstate
-WHERE
-    chargingstate.id = @ChargingStateID
-", con))
-                    {
-                        cmd.Parameters.Add("@ChargingStateID", MySqlDbType.Int32).Value = ChargingStateID;
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read())
-                        {
-                            if (dr[0] != DBNull.Value)
-                            {
-                                ref_cost_currency = dr.GetString(1);
-                            }
-                            if (double.TryParse(dr[1].ToString(), out ref_cost_per_kwh))
-                            {
-                                ref_cost_per_kwh_found = true;
-                            }
-                            if (double.TryParse(dr[2].ToString(), out ref_cost_per_session))
-                            {
-                                ref_cost_per_session_found = true;
-                            }
-                            if (double.TryParse(dr[3].ToString(), out ref_cost_per_minute))
-                            {
-                                ref_cost_per_minute_found = true;
-                            }
-                            Tools.DebugLog($"GetChargeCostDataFromChargingStateID currency:{dr[0]} cost_per_kwh:{dr[1]} cost_per_session:{dr[2]} cost_per_minute:{dr[3]}");
-                        }
-                        else
-                        {
-                            Tools.DebugLog("GetChargeCostDataFromChargingStateID dr.read failed");
-                        }
-                        con.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                car.CreateExceptionlessClient(ex).Submit();
-
-                Tools.DebugLog($"Exception during GetChargeCostDataFromChargingStateID(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during GetChargeCostDataFromChargingStateID()");
-            }
         }
 
         private void UpdateChargePrice(int ChargingStateID, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
@@ -2263,7 +2191,7 @@ WHERE
             RecalculateChargeEnergyAdded(ChargingStateID);
         }
 
-        private int FindReferenceChargingState(string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
+        private int FindReferenceChargingState(int ChargingStateID, string name, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
         {
             int referenceID = int.MinValue;
             ref_cost_currency = string.Empty;
@@ -2295,12 +2223,14 @@ WHERE
     AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
     AND chargingstate.EndChargingID - chargingstate.StartChargingID > 4
     AND chargingstate.CarID = @CarID
+    AND chargingstate.ID < @ChargingStateID
 ORDER BY
     id DESC
 LIMIT 1", con))
                     {
-                        cmd.Parameters.Add("@addr", MySqlDbType.VarChar).Value = name;
-                        cmd.Parameters.Add("@CarID", MySqlDbType.UByte).Value = car.CarInDB;
+                        cmd.Parameters.AddWithValue("@addr", name);
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
