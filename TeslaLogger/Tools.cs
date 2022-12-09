@@ -404,8 +404,11 @@ namespace TeslaLogger
                 carType = "n/a";
                 battery = "n/a";
                 motor = "n/a";
-                // handle the skipped 'I' code. We may also need to skip 'O'
-                if (dateCode > 73)
+                if (dateCode > 73) // skip I
+                {
+                    year--;
+                }
+                if (dateCode > 79) // skip O
                 {
                     year--;
                 }
