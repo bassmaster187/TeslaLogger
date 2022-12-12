@@ -12,11 +12,10 @@ using System.Runtime.Caching;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class NearbySuCService
     {
-        private static NearbySuCService _NearbySuCService = null;
+        private static NearbySuCService _NearbySuCService;
 
         private NearbySuCService()
         {
@@ -158,7 +157,7 @@ namespace TeslaLogger
             }
         }
 
-        private void ShareSuc(ArrayList send)
+        private static void ShareSuc(ArrayList send)
         {
             try
             {
@@ -185,7 +184,7 @@ namespace TeslaLogger
             }
         }
 
-        private void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent)
+        private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent)
         {
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
@@ -356,7 +355,7 @@ VALUES(
 
         }
 
-        private bool ContainsSupercharger(ArrayList send, string name)
+        private static bool ContainsSupercharger(ArrayList send, string name)
         {
             foreach (object a in send)
             {
@@ -369,7 +368,7 @@ VALUES(
             return false;
         }
 
-        private int AddNewSupercharger(string name, double lat, double lng)
+        private static int AddNewSupercharger(string name, double lat, double lng)
         {
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {

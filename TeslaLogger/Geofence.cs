@@ -34,8 +34,8 @@ namespace TeslaLogger
         public double lng;
         public int radius;
         public Dictionary<SpecialFlags, string> specialFlags;
-        private bool isHome = false;
-        private bool isWork = false;
+        private bool isHome;
+        private bool isWork;
 
         public bool IsHome
         {
@@ -61,8 +61,8 @@ namespace TeslaLogger
             }
         }
 
-        public bool IsCharger { get; set; } = false;
-        public bool NoSleep { get; set; } = false;
+        public bool IsCharger { get; set; }
+        public bool NoSleep { get; set; }
 
         public Address(string name, double lat, double lng, int radius)
         {
@@ -114,11 +114,10 @@ namespace TeslaLogger
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1051:Sichtbare Instanzfelder nicht deklarieren", Justification = "<Pending>")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     public class Geofence
     {
-        private static Object lockObj = new Object();
-        private static Geofence _geofence = null; // Singleton
+        private static Object lockObj = new object();
+        private static Geofence _geofence; // Singleton
 
         public static Geofence GetInstance()
         {
@@ -135,10 +134,10 @@ namespace TeslaLogger
         internal SortedSet<Address> geofenceList = new SortedSet<Address>(new AddressByLatLng());
         internal SortedSet<Address> geofencePrivateList = new SortedSet<Address>(new AddressByLatLng());
         private readonly FileSystemWatcher fsw;
-        public bool RacingMode = false;
-        private bool _RacingMode = false;
+        public bool RacingMode;
+        private bool _RacingMode;
 
-        private static int FSWCounter = 0;
+        private static int FSWCounter;
 
         private Geofence(bool RacingMode)
         {
@@ -509,7 +508,7 @@ namespace TeslaLogger
             return ret;
         }
 
-        private void LookupPOIinList(SortedSet<Address> list, double lat, double lng, bool logDistance, string brand, int max_power, ref Address ret, ref double retDistance, ref int found)
+        private static void LookupPOIinList(SortedSet<Address> list, double lat, double lng, bool logDistance, string brand, int max_power, ref Address ret, ref double retDistance, ref int found)
         {
             double range = 0.2; // apprx 10km
 
@@ -574,6 +573,11 @@ namespace TeslaLogger
             double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + (Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0));
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

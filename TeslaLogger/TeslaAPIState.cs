@@ -24,9 +24,9 @@ namespace TeslaLogger
         }
 
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
-        private HashSet<string> unknownKeys = new HashSet<string>();
-        private Car car;
-        private bool dumpJSON = false;
+        private readonly HashSet<string> unknownKeys = new HashSet<string>();
+        private readonly Car car;
+        private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
         internal bool DumpJSON {
