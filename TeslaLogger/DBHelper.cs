@@ -2000,7 +2000,11 @@ WHERE
                     }
                     catch (Exception ex)
                     {
-                        car.CreateExceptionlessClient(ex).Submit();
+                        var exlc = car.CreateExceptionlessClient(ex);
+                        exlc.AddObject(ref_cost_currency, "ref_cost_currency string");
+                        exlc.AddObject(ref_cost_currency.Length, "ref_cost_currency.Length");
+                        exlc.AddObject(ref_cost_currency.ToArray<char>().Length, "ref_cost_currency.ToArray<char>().Length");
+                        exlc.Submit();
 
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
