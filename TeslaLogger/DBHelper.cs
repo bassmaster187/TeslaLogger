@@ -2000,7 +2000,7 @@ WHERE
                     }
                     catch (Exception ex)
                     {
-                        car.CreateExceptionlessClient(ex).Submit();
+                        car.CreateExceptionlessClient(ex).AddObject(ref_cost_currency, "ref_cost_currency").Submit();
 
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");

@@ -90,6 +90,8 @@ namespace TeslaLogger
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
         static int nextAccountId = 1;
 
+        object getAllVehiclesLock = new object();
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -1756,57 +1758,60 @@ namespace TeslaLogger
 
         internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized)
         {
-            int accountid = 0;
-            lock (vehicles2Account)
+            lock (getAllVehiclesLock)
             {
-                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                int accountid = 0;
+                lock (vehicles2Account)
                 {
-                    accountid = a.id;
-                }
-            }
-
-            string cacheKey = accountid + "_vehicles";
-            object c = MemoryCache.Default.Get(cacheKey);
-            bool checkVehicle2Account = false;
-
-            if (c != null && accountid > 0)
-            {
-                resultContent = c as String;
-            }
-            else
-            {
-                HttpClient client = GethttpclientTeslaAPI();
-                string adresse = apiaddress + "api/1/vehicles";
-                Task<HttpResponseMessage> resultTask;
-                HttpResponseMessage result;
-                DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    if (throwExceptionOnUnauthorized)
-                        throw new UnauthorizedAccessException();
-
-                    if (LoginRetry(result))
+                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
                     {
-                        client = GethttpclientTeslaAPI(true);
+                        accountid = a.id;
+                    }
+                }
 
-                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                string cacheKey = accountid + "_vehicles";
+                object c = MemoryCache.Default.Get(cacheKey);
+                bool checkVehicle2Account = false;
 
-                        if (result.IsSuccessStatusCode)
+                if (c != null && accountid > 0)
+                {
+                    resultContent = c as String;
+                }
+                else
+                {
+                    HttpClient client = GethttpclientTeslaAPI();
+                    string adresse = apiaddress + "api/1/vehicles";
+                    Task<HttpResponseMessage> resultTask;
+                    HttpResponseMessage result;
+                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        if (throwExceptionOnUnauthorized)
+                            throw new UnauthorizedAccessException();
+
+                        if (LoginRetry(result))
                         {
-                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
-                            checkVehicle2Account = true;
+                            client = GethttpclientTeslaAPI(true);
+
+                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                            if (result.IsSuccessStatusCode)
+                            {
+                                MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
+                                checkVehicle2Account = true;
+                            }
                         }
                     }
                 }
-            }
 
-            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-            vehicles = jsonResult["response"];
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                vehicles = jsonResult["response"];
 
-            if (checkVehicle2Account)
-            {
-                InsertVehicles2AccountFromVehiclesResponse(vehicles);
+                if (checkVehicle2Account)
+                {
+                    InsertVehicles2AccountFromVehiclesResponse(vehicles);
+                }
             }
         }
 
@@ -1823,7 +1828,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
             }
         }
 
