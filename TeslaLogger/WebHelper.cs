@@ -4264,7 +4264,7 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new Exception("NearbyChargingSiteFail");
+                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString());
                 }
                 return resultContent;
             }
