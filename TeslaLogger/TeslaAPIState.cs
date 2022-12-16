@@ -24,9 +24,9 @@ namespace TeslaLogger
         }
 
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
-        private HashSet<string> unknownKeys = new HashSet<string>();
-        private Car car;
-        private bool dumpJSON = false;
+        private readonly HashSet<string> unknownKeys = new HashSet<string>();
+        private readonly Car car;
+        private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
         internal bool DumpJSON {
@@ -680,10 +680,9 @@ namespace TeslaLogger
                             case "minutes_to_full_charge":
                             case "off_peak_hours_end_time":
                             case "scheduled_charging_start_time_app":
-                            case "scheduled_departure_time value":
+                            case "scheduled_departure_time":
                             case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
-                            case "scheduled_departure_time":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "charge_state");

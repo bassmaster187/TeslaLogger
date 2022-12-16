@@ -14,7 +14,6 @@ namespace TeslaLogger
 {
     public class OSMMapProvider : StaticMapProvider
     {
-        private static readonly Random random = new Random();
         private static int padding_x = 12;
         private static int padding_y = 12;
         private const int tileSize = 256;
@@ -86,18 +85,18 @@ namespace TeslaLogger
         }
 
         // transform longitude to tile number
-        private double LngToTileX(double lon, int zoom)
+        private static double LngToTileX(double lon, int zoom)
         {
             return ((lon + 180.0) / 360.0) * Math.Pow(2.0, zoom);
         }
 
         // transform latitude to tile number
-        private double LatToTileY(double lat, int zoom)
+        private static double LatToTileY(double lat, int zoom)
         {
             return (1.0 - Math.Log(Math.Tan(lat * Math.PI / 180.0) + 1 / Math.Cos(lat * Math.PI / 180.0)) / Math.PI) / 2.0 * Math.Pow(2.0, zoom);
         }
 
-        private int CalculateZoom(Tuple<double, double, double, double> extent, int width, int height)
+        private static int CalculateZoom(Tuple<double, double, double, double> extent, int width, int height)
         {
             for (int zoom = 18; zoom > 0; zoom--)
             {
@@ -242,7 +241,7 @@ namespace TeslaLogger
             */
         }
 
-        void GetOSMMapGeneratorFilename(out string fileName, out string arguments)
+        private static void GetOSMMapGeneratorFilename(out string fileName, out string arguments)
         {
             fileName = "/usr/bin/mono";
             arguments = "/etc/teslalogger/OSMMapGenerator.exe ";
