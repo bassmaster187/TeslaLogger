@@ -3551,7 +3551,13 @@ WHERE
   id = @id", con2))
                                         {
                                             cmd2.Parameters.AddWithValue("@id", posid);
-                                            cmd2.Parameters.AddWithValue("@adress", task.Result);
+                                            cmd2.Parameters.AddWithValue("@adress", task.Result.Substring(0, 250));
+                                            if (task.Result.Length > 250)
+                                            {
+                                                var exl = (new Exception()).ToExceptionless().FirstCarUserID();
+                                                exl.AddObject(task.Result, $"ReverseGecocodingAsync returned long (l:{task.Result.Length}) address for lat:{lat} lng:{lng}");
+                                                exl.Submit();
+                                            }
                                             SQLTracer.TraceNQ(cmd2);
 
                                             GeocodeCache.Instance.Write();
