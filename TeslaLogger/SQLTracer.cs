@@ -10,9 +10,9 @@ namespace TeslaLogger
 {
     internal static class SQLTracer
     {
-        private static int ID = 0;
+        private static int ID;
 
-        internal static MySqlDataReader TraceDR(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        internal static MySqlDataReader TraceDR(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
@@ -45,7 +45,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static int TraceNQ(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        internal static int TraceNQ(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
@@ -78,7 +78,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static object TraceSc(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        internal static object TraceSc(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
@@ -111,7 +111,7 @@ namespace TeslaLogger
             }
         }
 
-        internal static int TraceDA(DataTable dt, MySqlDataAdapter da, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
+        internal static int TraceDA(DataTable dt, MySqlDataAdapter da, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
