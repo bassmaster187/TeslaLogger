@@ -2587,7 +2587,22 @@ namespace TeslaLogger
                     return;
                 }
             }
-            
+            else if (car.CarType == "lychee" && car.CarSpecialType == "base")
+            {
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.149", "S 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.149", "S 2021 LR");
+                    return;
+                }
+            }
+
             /*
             if (car.Model == "MS")
             {
