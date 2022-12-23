@@ -1196,10 +1196,10 @@ namespace TeslaLogger
 
                 if (r2.ContainsKey("tpms_pressure_"+Prefix) && r2.ContainsKey("tpms_last_seen_pressure_time_" + Prefix) && r2["tpms_last_seen_pressure_time_" + Prefix] != null && r2["tpms_pressure_"+Prefix] != null)
                 {
-                    double fl = (double)r2["tpms_pressure_"+Prefix];
-                    DateTime dtFL = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
-                    car.Log($"TPMS {Prefix}: {fl} {dtFL}");
-                    car.DbHelper.InsertTPMS(TireID, fl, dtFL);
+                    double pressure = (double)r2["tpms_pressure_"+Prefix];
+                    DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
+                    Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
+                    car.DbHelper.InsertTPMS(TireID, pressure, dtPressure);
                 }
             }
             catch (Exception ex)
