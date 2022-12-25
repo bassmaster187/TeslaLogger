@@ -594,7 +594,15 @@ namespace TeslaLogger
             {
                 foreach (KeyValuePair<string, Account> s in vehicles2Account)
                 {
-                    SearchFornewCars(s.Key, s.Value.tesla_token);
+                    try
+                    {
+                        SearchFornewCars(s.Key, s.Value.tesla_token);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                        ex.ToExceptionless();
+                    }
                 }
             }
             catch (Exception ex)
@@ -2254,9 +2262,14 @@ namespace TeslaLogger
 
         public void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
         {
+            CreateExceptionlessClientWithResultContent(ex, content).Submit();
+        }
+
+        public EventBuilder CreateExceptionlessClientWithResultContent(Exception ex, string content)
+        {
             string base64 = Tools.ConvertString2Base64(content);
 
-            car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64").Submit();
+            return car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64");
         }
 
         public void UpdateEfficiency()
@@ -4350,6 +4363,7 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
                 ExceptionWriter(ex, resultContent);
             }
 
