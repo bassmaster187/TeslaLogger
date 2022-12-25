@@ -2593,12 +2593,12 @@ namespace TeslaLogger
 
                 if (motor == "triple 2021 plaid")
                 {
-                    WriteCarSettings("0.149", "S 2021 Plaid");
+                    WriteCarSettings("0.151", "S 2021 Plaid");
                     return;
                 }
                 else
                 {
-                    WriteCarSettings("0.149", "S 2021 LR");
+                    WriteCarSettings("0.151", "S 2021 LR");
                     return;
                 }
             }

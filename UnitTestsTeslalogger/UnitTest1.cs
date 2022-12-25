@@ -468,7 +468,7 @@ namespace UnitTestsTeslalogger
             wh.UpdateEfficiency();
 
             Assert.AreEqual("S 2021 Plaid", wh.car.ModelName);
-            Assert.AreEqual(0.149, wh.car.WhTR);
+            Assert.AreEqual(0.151, wh.car.WhTR);
         }
 
         [TestMethod]
