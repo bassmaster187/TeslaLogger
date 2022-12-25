@@ -596,7 +596,7 @@ namespace TeslaLogger
                 {
                     try
                     {
-                        SearchFornewCars(s.Key, s.Value.tesla_token);
+                        SearchFornewCars(s.Key, s.Value);
                     }
                     catch (Exception ex)
                     {
@@ -612,19 +612,24 @@ namespace TeslaLogger
             }
         }
 
-        internal static void SearchFornewCars(string s, string access_token)
+        internal static void SearchFornewCars(string vin, Account a)
         {    
-            dynamic j = JsonConvert.DeserializeObject(s);
-            dynamic d = j["response"];
+            // dynamic j = JsonConvert.DeserializeObject(s);
+            // dynamic d = j["response"];
 
-            for (int x = 0; x < d.Count; x++)
+            // for (int x = 0; x < d.Count; x++)
             {
                 try
                 {
-                    dynamic i = d[x];
-                    string vin = i["vin"];
-                    string display_name = i["display_name"] ?? "";
+                    // dynamic i = d[x];
+                    // string vin = i["vin"];
+                    // string display_name = i["display_name"] ?? "";
                     // System.Diagnostics.Debug.WriteLine("VIN: " + vin);
+
+                    string display_name = a.display_name;
+                    string access_token = a.tesla_token;
+
+                    int x = 1;
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
@@ -1853,9 +1858,12 @@ namespace TeslaLogger
 
                         if (!vehicles2Account.ContainsKey(vin))
                         {
+                            string display_name = v["display_name"].ToString();
+
                             Account a = new Account();
                             a.id = nextAccountId;
                             a.tesla_token = car.Tesla_Token;
+                            a.display_name = display_name;
                             vehicles2Account.Add(vin, a);
                             inserted = true;
                         }
@@ -4893,5 +4901,6 @@ namespace TeslaLogger
     {
         public int id;
         public string tesla_token;
+        public string display_name;
     }
 }
