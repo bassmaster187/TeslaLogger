@@ -5689,5 +5689,15 @@ WHERE
                 }
             }
         }
+
+        public static DataTable GetAllChargingstates()
+        {
+            var dt = new DataTable();
+
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added FROM chargingstate join pos on chargingstate.pos = pos.id order by address", "Server=192.168.1.105;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;");
+            da.Fill(dt);
+
+            return dt;
+        }
     }
 }

@@ -3548,6 +3548,70 @@ namespace TeslaLogger
             return "";
         }
 
+        public static async Task<string> ReverseGecocodingCountryAsync(double latitude, double longitude)
+        {
+            string url = "";
+            string resultContent = "";
+            try
+            {
+                Tools.SetThreadEnUS();
+
+                Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+
+                using (WebClient webClient = new WebClient())
+                {
+
+                    webClient.Headers.Add("User-Agent: TL 1.1");
+                    webClient.Encoding = Encoding.UTF8;
+
+                    url = "http://nominatim.openstreetmap.org/reverse";
+
+                    url += "?format=jsonv2&lat=";
+                    url += latitude.ToString();
+                    url += "&lon=";
+                    url += longitude.ToString();
+                    url += "&email=mail";
+                    url += "@";
+                    url += "teslalogger";
+                    url += ".de";
+                    
+                    DateTime start = DateTime.UtcNow;
+                    resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
+                    DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0);
+
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                    
+                    dynamic r2 = jsonResult["address"];
+
+                    string country_code = "";
+
+                    if (r2.ContainsKey("country_code"))
+                    {
+                        country_code = r2["country_code"].ToString();
+                        return country_code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().AddObject(resultContent, "ResultContent").AddObject(url, "Url").Submit();
+
+                if (url == null)
+                {
+                    url = "NULL";
+                }
+
+                if (resultContent == null)
+                {
+                    resultContent = "NULL";
+                }
+
+                Logfile.ExceptionWriter(ex, url + "\r\n" + resultContent);
+            }
+
+            return "";
+        }
+
         public void UpdateAllPosAddresses()
         {
             using (SqlConnection con = new SqlConnection(DBHelper.DBConnectionstring))
