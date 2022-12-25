@@ -1,6 +1,9 @@
+# Version 1.54.6
+- Detecting Model S Plaid / LR
+- Bugfixes
+
 # Version 1.54.5
 - TMPS in Trip Dashboard. Signals are colleced after update!
-- Bugfixes
 
 # Version 1.54.4
 - Using new GraphQL nearby SUC service. https://teslalogger.de/suc-map.php shows now max kW per site
