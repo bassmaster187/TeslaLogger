@@ -253,11 +253,11 @@ namespace TeslaLogger
                 && suc.ContainsKey("totalStalls")
                 )
             {
-
-                Tools.DebugLog($"SuC: <{suc["localizedSiteName"]["value"]}> <{suc["available_stalls"]["value"]}> <{suc["total_stalls"]["value"]}>");
                 if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
                     && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
                 {
+                    Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
+
                     if (total_stalls > 0)
                     {
                         if (!ContainsSupercharger(send, name))
