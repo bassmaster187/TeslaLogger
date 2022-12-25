@@ -3551,7 +3551,11 @@ WHERE
   id = @id", con2))
                                         {
                                             cmd2.Parameters.AddWithValue("@id", posid);
-                                            cmd2.Parameters.AddWithValue("@adress", task.Result.Substring(0, 250));
+                                            string address = task.Result;
+                                            if (address.Length > 250)
+                                                address = address.Substring(0, 250);
+                                            
+                                            cmd2.Parameters.AddWithValue("@adress", address);
                                             if (task.Result.Length > 250)
                                             {
                                                 var exl = (new Exception()).ToExceptionless().FirstCarUserID();
