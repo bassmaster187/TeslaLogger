@@ -1120,10 +1120,10 @@ CREATE TABLE superchargers(
                 DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` ADD COLUMN `CarID` TINYINT NULL DEFAULT NULL", 6000);
                 DBHelper.ExecuteSQLQuery($"update {table} set CarID=1", 6000);
             }
-            if (DBHelper.GetColumnType(table, "CarID") == "int")
+            if (DBHelper.GetColumnType(table, "CarID") == "tinyint")
             {
-                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED");
-                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` TINYINT UNSIGNED", 6000);
+                Logfile.Log($"ALTER TABLE `{table}` MODIFY `CarID` INT UNSIGNED");
+                DBHelper.ExecuteSQLQuery($"ALTER TABLE `{table}` MODIFY `CarID` INT UNSIGNED", 6000);
             }
         }
 
