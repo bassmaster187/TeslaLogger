@@ -2774,7 +2774,10 @@ WHERE
     CarID = @carid
 ORDER BY
     StartDate DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -2817,7 +2820,6 @@ LIMIT 1", con))
                         dr.Close();
                     }
 
-
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     ideal_battery_range_km,
@@ -2831,7 +2833,10 @@ WHERE
     CarID = @CarID
 ORDER BY
     id DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
