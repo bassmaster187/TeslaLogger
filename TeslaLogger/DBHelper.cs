@@ -5660,7 +5660,7 @@ WHERE
             return json;
         }
 
-        public static long InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
+        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
         {
             Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -5675,7 +5675,7 @@ WHERE
                         select max(carid) as a from pos
                     ) as t", con))
                 {
-                    long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+                    decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
 
                     using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
                     {
