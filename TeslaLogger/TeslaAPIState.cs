@@ -374,7 +374,7 @@ namespace TeslaLogger
             }
         }
 
-        public bool ParseAPI(string JSON, string source, int CarInAccount = 0)
+        public bool ParseAPI(string JSON, string source)
         {
             if (string.IsNullOrEmpty(JSON))
             {
@@ -434,7 +434,7 @@ namespace TeslaLogger
                 case "vehicle_state":
                     return ParseVehicleState(JSON);
                 case "vehicles":
-                    return ParseVehicles(JSON, CarInAccount);
+                    return ParseVehicles(JSON);
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
@@ -442,7 +442,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private bool ParseVehicles(string _JSON, int CarInAccount)
+        private bool ParseVehicles(string _JSON)
         {
             try
             {
@@ -451,14 +451,11 @@ namespace TeslaLogger
                 if (r1 == null)
                     return false;
 
-                if (r1.Count <= CarInAccount)
+                dynamic r3 = SearchCarDictionary(r1);
+
+                if (r3 == null)
                     return false;
 
-                dynamic count = jsonResult["count"];
-                if (count == null | count == 0)
-                    return false;
-
-                dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
                  *      [
@@ -1453,6 +1450,29 @@ namespace TeslaLogger
                 .Submit();
 
             Logfile.Log(text);
+        }
+
+        private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
+        {
+            if (car.Vin?.Length > 0)
+            {
+                for (int x = 0; x < cars.Count; x++)
+                {
+                    var cc = cars[x];
+                    var ccVin = cc["vin"].ToString();
+
+                    if (ccVin == car.Vin)
+                        return cc;
+                }
+
+                Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
+
+                // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
+
+                return null;
+            }
+
+            return null;
         }
     }
 }

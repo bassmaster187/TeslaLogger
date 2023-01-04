@@ -1625,6 +1625,7 @@ namespace TeslaLogger
                         return "NULL";
                     }
 
+                    /*
                     if (car.CarInAccount >= r1temp.Count)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
@@ -1632,11 +1633,15 @@ namespace TeslaLogger
 
                         return "NULL";
                     }
+                    */
 
                     dynamic r2 = SearchCarDictionary(r1temp);
 
                     if (r2 == null)
+                    {
+                        Log("Car VIN: " + car.Vin + " not exists!");
                         return "NULL";
+                    }
 
                     string OnlineState = r2["state"].ToString();
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
@@ -1921,8 +1926,8 @@ namespace TeslaLogger
 
                 return null;
             }
-            else
-                return cars[car.CarInAccount];
+
+            return null;
         }
 
         private void DoGetVehiclesRequest(out string resultContent, HttpClient client, string adresse, out Task<HttpResponseMessage> resultTask, out HttpResponseMessage result)
@@ -1934,7 +1939,7 @@ namespace TeslaLogger
 
             // resultContent = Tools.ConvertBase64toString("eyJSZXNwb25zZSI6bnVsbCwiRXJyb3IgZGVzY3JpcHRpb24iOiIiLCJFcnJvciI6Im5vdCBmb3VuZCJ9"); // {"Response":null,"Error description":"","Error":"not found"}
 
-            _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
+            _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
             DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
 
             if (TeslaAPI_Commands.ContainsKey("vehicles"))
@@ -2024,7 +2029,7 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
                 if (result != null && c == null)
                 {
                     if (result.IsSuccessStatusCode)
@@ -2063,38 +2068,46 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
+                dynamic r4 = SearchCarDictionary(r1);
+
+                if (r4 == null)
+                {
+                    Log("Vin not found in Response!");
+                    return "NULL";
+                }
+
                 try
                 {
+                    string access_type = r4["access_type"].ToString();
                     if (result != null && result.IsSuccessStatusCode && c == null)
                     {
-                        InsertVehicles2AccountFromVehiclesResponse(resultContent);
-                        if (accountid == 0)
+                        if (access_type == "OWNER")
                         {
-                            lock (vehicles2Account)
+                            InsertVehicles2AccountFromVehiclesResponse(resultContent);
+                            if (accountid == 0)
                             {
-                                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                lock (vehicles2Account)
                                 {
-                                    accountid = a.id;
+                                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                    {
+                                        accountid = a.id;
+                                    }
                                 }
-                            }
 
-                            cacheKey = accountid + "_vehicles";
+                                cacheKey = accountid + "_vehicles";
+                            }
+                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
                         }
-                        MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("access_type: " + access_type);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 }
-
-                if (!(car.CarInAccount < r1.Count))
-                {
-                    Log("IndexOutOfRangeException in isOnline!");
-                    return "NULL";
-                }
-
-                var r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
                 string temp_Tesla_Streamingtoken = r4["tokens"][0].ToString();
