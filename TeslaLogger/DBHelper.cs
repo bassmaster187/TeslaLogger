@@ -2450,6 +2450,14 @@ WHERE
         WHERE
             chargingstate.CarID = @CarID
             AND id = @referenceID
+    )  AND chargingstate.wheel_type =(
+        SELECT
+            wheel_type
+        FROM
+            chargingstate
+        WHERE
+            chargingstate.CarID = @CarID
+            AND id = @referenceID
     )
 ORDER BY
     chargingstate.id ASC", con))
