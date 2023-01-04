@@ -1,6 +1,8 @@
+# Version 1.54.7
+- Bugfixes
+
 # Version 1.54.6
 - Detecting Model S Plaid / LR
-- Bugfixes
 
 # Version 1.54.5
 - TMPS in Trip Dashboard. Signals are colleced after update!

@@ -4386,6 +4386,7 @@ namespace TeslaLogger
                 // SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
                 ExceptionWriter(ex, resultContent);
+                Thread.Sleep(30000);
             }
 
             return "NULL";

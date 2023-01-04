@@ -1742,7 +1742,9 @@ id = @carid", con))
                 if (Car.Allcars == null)
                     return;
 
-                ExceptionlessClient.Default.CreateFeatureUsage("Active_Cars_" + Car.Allcars.Count).FirstCarUserID().Submit();
+                string temp = "Active_Cars_" + Car.Allcars.Count;
+                Logfile.Log(temp);
+                ExceptionlessClient.Default.CreateFeatureUsage(temp).FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {
