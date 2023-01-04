@@ -136,7 +136,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("DBView Update (Task) started.");
                     CheckDBViews();
-                    if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "outside_temp_avg"))
+                    if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "wheel_type"))
                     {
                         UpdateDBViews();
                     }
@@ -613,6 +613,13 @@ CREATE TABLE superchargers(
             }
 
             InsertCarID_Column("drivestate");
+
+            if (!DBHelper.ColumnExists("drivestate", "wheel_type"))
+            {
+                Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
         }
 
         private static void CheckDBSchema_chargingstate()
@@ -710,6 +717,13 @@ CREATE TABLE superchargers(
             }
 
             InsertCarID_Column("chargingstate");
+
+            if (!DBHelper.ColumnExists("chargingstate", "wheel_type"))
+            {
+                Logfile.Log("ALTER TABLE chargingstate ADD Column wheel_type");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
         }
 
         private static void CheckDBSchema_charging()
@@ -867,6 +881,13 @@ CREATE TABLE superchargers(
             {
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "wheel_type"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
         }
 

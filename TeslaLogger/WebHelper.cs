@@ -4615,6 +4615,7 @@ namespace TeslaLogger
                     { "MIC" , car.MIC ? "1" : "0" },
                     { "year" , car.Year.ToString() },
                     { "motor" , car.Motor } ,
+                    { "wt" , car.wheel_type } ,
                     { "vin" , obfuscatedVin} // just the first 11 chars of the vin will be sent. The serial number is truncated!
                 };
 

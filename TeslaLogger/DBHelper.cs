@@ -1442,7 +1442,7 @@ HAVING
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con))
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin, wheel_type=@wheel_type where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@Raven", car.Raven);
@@ -1457,6 +1457,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@display_name", car.DisplayName);
                         cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
                         cmd.Parameters.AddWithValue("@vin", car.Vin);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
 
                         int done = SQLTracer.TraceNQ(cmd);
 
@@ -2927,7 +2928,8 @@ INSERT
         conn_charge_cable,
         fast_charger_present,
         meter_vehicle_kwh_start,
-        meter_utility_kwh_start
+        meter_utility_kwh_start,
+        wheel_type
     )
 VALUES(
     @CarID,
@@ -2939,7 +2941,8 @@ VALUES(
     @conn_charge_cable,
     @fast_charger_present,
     @meter_vehicle_kwh_start,
-    @meter_utility_kwh_start
+    @meter_utility_kwh_start,
+    @wheel_type
 )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
@@ -2952,6 +2955,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
+                        cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
                         SQLTracer.TraceNQ(cmd);
 
                         cmd.CommandText = "SELECT LAST_INSERT_ID();";
@@ -3837,11 +3841,12 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
                 {
                     cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
                     SQLTracer.TraceNQ(cmd);
                 }
             }

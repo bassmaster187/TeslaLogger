@@ -959,6 +959,28 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+
+                    try
+                    {
+                        if (r2.ContainsKey("wheel_type"))
+                        {
+                            string wheel_type = r2["wheel_type"].ToString();
+                            if (wheel_type?.Length > 0)
+                            {
+                                if (car.wheel_type != wheel_type)
+                                {
+                                    car.Log("Wheel type changed: " + wheel_type);
+                                    car.wheel_type = wheel_type;
+                                    car.WriteSettings();
+                                }
+                            }
+                        }
+                    } catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        Tools.DebugLog("Exception", ex);
+                    }
+
                     return true;
                 }
             }
