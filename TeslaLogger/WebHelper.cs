@@ -4377,13 +4377,13 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString());
+                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString());
                 }
                 return resultContent;
             }
             catch (Exception ex)
             {
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                // SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
                 ExceptionWriter(ex, resultContent);
             }
