@@ -931,6 +931,7 @@ namespace TeslaLogger
                             case "rear_seat_heaters":
                             case "rear_seat_type":
                             case "seat_type":
+                            case "steering_wheel_type":
                             case "sun_roof_installed":
                             case "key_version":
                             case "utc_offset":
@@ -1358,6 +1359,8 @@ namespace TeslaLogger
                             case "fan_status":
                             case "left_temp_direction":
                             case "right_temp_direction":
+                            case "seat_fan_front_left":
+                            case "seat_fan_front_right":
                             case "seat_heater_left":
                             case "seat_heater_rear_center":
                             case "seat_heater_rear_left":
