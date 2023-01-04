@@ -677,6 +677,7 @@ namespace TeslaLogger
                             case "minutes_to_full_charge":
                             case "off_peak_hours_end_time":
                             case "scheduled_charging_start_time_app":
+                            case "scheduled_charging_start_time_minutes":
                             case "scheduled_departure_time":
                             case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
@@ -887,9 +888,11 @@ namespace TeslaLogger
                             case "motorized_charge_port":
                             case "plg":
                             case "pws":
+                            case "range_plus_badging":
                             case "rhd":
                             case "supports_qr_pairing":
                             case "use_range_badging":
+                            case "webcam_selfie_supported":
                             case "webcam_supported":
                                 if (r2.TryGetValue(key, out object value))
                                 {
@@ -1078,6 +1081,7 @@ namespace TeslaLogger
                                 break;
                             // string
                             case "autopark_state_v2":
+                            case "autopark_state_v3":
                             case "autopark_style":
                             case "car_version":
                             case "last_autopark_error":
