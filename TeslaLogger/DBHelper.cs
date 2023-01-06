@@ -1442,7 +1442,7 @@ HAVING
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con))
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin, wheel_type=@wheel_type where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@Raven", car.Raven);
@@ -1457,6 +1457,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@display_name", car.DisplayName);
                         cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
                         cmd.Parameters.AddWithValue("@vin", car.Vin);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
 
                         int done = SQLTracer.TraceNQ(cmd);
 
@@ -2000,7 +2001,7 @@ WHERE
                     }
                     catch (Exception ex)
                     {
-                        car.CreateExceptionlessClient(ex).Submit();
+                        car.CreateExceptionlessClient(ex).AddObject(ref_cost_currency, "ref_cost_currency").Submit();
 
                         Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
                         Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
@@ -2449,6 +2450,14 @@ WHERE
         WHERE
             chargingstate.CarID = @CarID
             AND id = @referenceID
+    )  AND chargingstate.wheel_type =(
+        SELECT
+            wheel_type
+        FROM
+            chargingstate
+        WHERE
+            chargingstate.CarID = @CarID
+            AND id = @referenceID
     )
 ORDER BY
     chargingstate.id ASC", con))
@@ -2774,7 +2783,10 @@ WHERE
     CarID = @carid
 ORDER BY
     StartDate DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -2817,7 +2829,6 @@ LIMIT 1", con))
                         dr.Close();
                     }
 
-
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     ideal_battery_range_km,
@@ -2831,7 +2842,10 @@ WHERE
     CarID = @CarID
 ORDER BY
     id DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -2922,7 +2936,8 @@ INSERT
         conn_charge_cable,
         fast_charger_present,
         meter_vehicle_kwh_start,
-        meter_utility_kwh_start
+        meter_utility_kwh_start,
+        wheel_type
     )
 VALUES(
     @CarID,
@@ -2934,7 +2949,8 @@ VALUES(
     @conn_charge_cable,
     @fast_charger_present,
     @meter_vehicle_kwh_start,
-    @meter_utility_kwh_start
+    @meter_utility_kwh_start,
+    @wheel_type
 )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
@@ -2947,6 +2963,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
+                        cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
                         SQLTracer.TraceNQ(cmd);
 
                         cmd.CommandText = "SELECT LAST_INSERT_ID();";
@@ -3551,7 +3568,17 @@ WHERE
   id = @id", con2))
                                         {
                                             cmd2.Parameters.AddWithValue("@id", posid);
-                                            cmd2.Parameters.AddWithValue("@adress", task.Result);
+                                            string address = task.Result;
+                                            if (address.Length > 250)
+                                                address = address.Substring(0, 250);
+                                            
+                                            cmd2.Parameters.AddWithValue("@adress", address);
+                                            if (task.Result.Length > 250)
+                                            {
+                                                var exl = (new Exception()).ToExceptionless().FirstCarUserID();
+                                                exl.AddObject(task.Result, $"ReverseGecocodingAsync returned long (l:{task.Result.Length}) address for lat:{lat} lng:{lng}");
+                                                exl.Submit();
+                                            }
                                             SQLTracer.TraceNQ(cmd2);
 
                                             GeocodeCache.Instance.Write();
@@ -3822,11 +3849,12 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
                 {
                     cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
                     SQLTracer.TraceNQ(cmd);
                 }
             }
@@ -5650,16 +5678,22 @@ WHERE
             return json;
         }
 
-        public static long InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
+        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
         {
             Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
+                using (MySqlCommand cmd = new MySqlCommand(@"
+                    select max(a)+1 from
+                    (
+                        select max(id) as a from cars
+                        union
+                        select max(carid) as a from pos
+                    ) as t", con))
                 {
-                    long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+                    decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
 
                     using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
                     {
@@ -5682,6 +5716,16 @@ WHERE
                     return newid;
                 }
             }
+        }
+
+        public static DataTable GetAllChargingstates()
+        {
+            var dt = new DataTable();
+
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added FROM chargingstate join pos on chargingstate.pos = pos.id order by address", "Server=192.168.1.105;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;");
+            da.Fill(dt);
+
+            return dt;
         }
     }
 }

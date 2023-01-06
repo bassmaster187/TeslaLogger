@@ -215,7 +215,10 @@ SELECT
 FROM
   pos
 WHERE
-  id = @startID ", con))
+  id = @startID ", con)
+                {
+                    CommandTimeout = 6000
+                })
                 {
                     cmd.Parameters.AddWithValue("@startID", request.StartPosID);
                     MySqlDataReader dr = cmd.ExecuteReader();

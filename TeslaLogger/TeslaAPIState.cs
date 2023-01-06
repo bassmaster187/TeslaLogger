@@ -24,9 +24,9 @@ namespace TeslaLogger
         }
 
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
-        private HashSet<string> unknownKeys = new HashSet<string>();
-        private Car car;
-        private bool dumpJSON = false;
+        private readonly HashSet<string> unknownKeys = new HashSet<string>();
+        private readonly Car car;
+        private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
         internal bool DumpJSON {
@@ -374,7 +374,7 @@ namespace TeslaLogger
             }
         }
 
-        public bool ParseAPI(string JSON, string source, int CarInAccount = 0)
+        public bool ParseAPI(string JSON, string source)
         {
             if (string.IsNullOrEmpty(JSON))
             {
@@ -434,7 +434,7 @@ namespace TeslaLogger
                 case "vehicle_state":
                     return ParseVehicleState(JSON);
                 case "vehicles":
-                    return ParseVehicles(JSON, CarInAccount);
+                    return ParseVehicles(JSON);
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
@@ -442,7 +442,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private bool ParseVehicles(string _JSON, int CarInAccount)
+        private bool ParseVehicles(string _JSON)
         {
             try
             {
@@ -451,14 +451,11 @@ namespace TeslaLogger
                 if (r1 == null)
                     return false;
 
-                if (r1.Count <= CarInAccount)
+                dynamic r3 = SearchCarDictionary(r1);
+
+                if (r3 == null)
                     return false;
 
-                dynamic count = jsonResult["count"];
-                if (count == null | count == 0)
-                    return false;
-
-                dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
                  *      [
@@ -680,10 +677,10 @@ namespace TeslaLogger
                             case "minutes_to_full_charge":
                             case "off_peak_hours_end_time":
                             case "scheduled_charging_start_time_app":
-                            case "scheduled_departure_time value":
+                            case "scheduled_charging_start_time_minutes":
+                            case "scheduled_departure_time":
                             case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
-                            case "scheduled_departure_time":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "charge_state");
@@ -771,6 +768,7 @@ namespace TeslaLogger
                             case "timestamp":
                                 break;
                             // string
+                            case "active_route_destination":
                             case "native_type":
                             case "shift_state":
                                 if (r2.TryGetValue(key, out object value))
@@ -779,6 +777,7 @@ namespace TeslaLogger
                                 }
                                 break;
                             // int
+                            case "active_route_energy_at_arrival":
                             case "gps_as_of":
                             case "heading":
                             case "native_location_supported":
@@ -790,6 +789,11 @@ namespace TeslaLogger
                                 }
                                 break;
                             // double
+                            case "active_route_latitude":
+                            case "active_route_longitude":
+                            case "active_route_miles_to_arrival":
+                            case "active_route_minutes_to_arrival":
+                            case "active_route_traffic_minutes_delay":
                             case "latitude":
                             case "longitude":
                             case "native_latitude":
@@ -874,17 +878,21 @@ namespace TeslaLogger
                             // bool
                             case "can_accept_navigation_requests":
                             case "can_actuate_trunks":
+                            case "cop_user_set_temp_supported": // COP = cabin overheat protection
+                            case "dashcam_clip_save_supported":
                             case "ece_restrictions":
                             case "eu_vehicle":
                             case "has_air_suspension":
                             case "has_ludicrous_mode":
+                            case "has_seat_cooling":
                             case "motorized_charge_port":
                             case "plg":
-                            case "rhd":
-                            case "use_range_badging":
                             case "pws":
-                            case "has_seat_cooling":
-                            case "dashcam_clip_save_supported":
+                            case "range_plus_badging":
+                            case "rhd":
+                            case "supports_qr_pairing":
+                            case "use_range_badging":
+                            case "webcam_selfie_supported":
                             case "webcam_supported":
                                 if (r2.TryGetValue(key, out object value))
                                 {
@@ -892,13 +900,21 @@ namespace TeslaLogger
                                 }
                                 break;
                             // string
+                            case "aux_park_lamps":
                             case "car_special_type":
                             case "car_type":
                             case "charge_port_type":
+                            case "default_charge_to_max":
                             case "driver_assist":
                             case "efficiency_package":
                             case "exterior_color":
+                            case "exterior_trim":
+                            case "exterior_trim_override":
+                            case "front_drive_unit":
+                            case "headlamp_type":
                             case "interior_trim_type":
+                            case "paint_color_override":
+                            case "perf_config":
                             case "performance_package":
                             case "rear_drive_unit":
                             case "roof_color":
@@ -906,13 +922,6 @@ namespace TeslaLogger
                             case "third_row_seats":
                             case "trim_badging":
                             case "wheel_type":
-                            case "perf_config":
-                            case "default_charge_to_max":
-                            case "exterior_trim":
-                            case "front_drive_unit":
-                            case "headlamp_type":
-                            case "paint_color_override":
-                            case "exterior_trim_override":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "string", value, timestamp, "vehicle_config");
@@ -922,6 +931,7 @@ namespace TeslaLogger
                             case "rear_seat_heaters":
                             case "rear_seat_type":
                             case "seat_type":
+                            case "steering_wheel_type":
                             case "sun_roof_installed":
                             case "key_version":
                             case "utc_offset":
@@ -949,6 +959,28 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+
+                    try
+                    {
+                        if (r2.ContainsKey("wheel_type"))
+                        {
+                            string wheel_type = r2["wheel_type"].ToString();
+                            if (wheel_type?.Length > 0)
+                            {
+                                if (car.wheel_type != wheel_type)
+                                {
+                                    car.Log("Wheel type changed: " + wheel_type);
+                                    car.wheel_type = wheel_type;
+                                    car.WriteSettings();
+                                }
+                            }
+                        }
+                    } catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        Tools.DebugLog("Exception", ex);
+                    }
+
                     return true;
                 }
             }
@@ -1036,6 +1068,7 @@ namespace TeslaLogger
                             case "timestamp":
                                 break;
                             // bool
+                            case "allow_authorized_mobile_devices_only":
                             case "calendar_supported":
                             case "homelink_nearby":
                             case "is_user_present":
@@ -1047,6 +1080,8 @@ namespace TeslaLogger
                             case "remote_start_supported":
                             case "sentry_mode":
                             case "sentry_mode_available":
+                            case "service_mode":
+                            case "service_mode_plus":
                             case "smart_summon_available":
                             case "summon_standby_mode_enabled":
                             case "valet_mode":
@@ -1062,8 +1097,6 @@ namespace TeslaLogger
                             case "tpms_hard_warning_fl":
                             case "tpms_hard_warning_rr":
                             case "tpms_hard_warning_rl":
-                            case "service_mode_plus":
-                            case "service_mode":
                                 if (r2.TryGetValue(key, out object value))
                                 {
                                     AddValue(key, "bool", value, timestamp, "vehicle_state");
@@ -1071,6 +1104,7 @@ namespace TeslaLogger
                                 break;
                             // string
                             case "autopark_state_v2":
+                            case "autopark_state_v3":
                             case "autopark_style":
                             case "car_version":
                             case "last_autopark_error":
@@ -1132,6 +1166,8 @@ namespace TeslaLogger
                                 break;
                             // TODO
                             case "media_state":
+                            // TODO
+                            case "media_info":
                             case "speed_limit_mode":
                                 break;
                             default:
@@ -1184,10 +1220,10 @@ namespace TeslaLogger
 
                 if (r2.ContainsKey("tpms_pressure_"+Prefix) && r2.ContainsKey("tpms_last_seen_pressure_time_" + Prefix) && r2["tpms_last_seen_pressure_time_" + Prefix] != null && r2["tpms_pressure_"+Prefix] != null)
                 {
-                    double fl = (double)r2["tpms_pressure_"+Prefix];
-                    DateTime dtFL = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
-                    car.Log($"TPMS {Prefix}: {fl} {dtFL}");
-                    car.DbHelper.InsertTPMS(TireID, fl, dtFL);
+                    double pressure = (double)r2["tpms_pressure_"+Prefix];
+                    DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
+                    Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
+                    car.DbHelper.InsertTPMS(TireID, pressure, dtPressure);
                 }
             }
             catch (Exception ex)
@@ -1332,6 +1368,7 @@ namespace TeslaLogger
                                 break;
                             // string
                             case "climate_keeper_mode":
+                            case "cop_activation_temperature": // COP = cabin overheat protection
                             case "hvac_auto_request":
                             case "cabin_overheat_protection":
                                 if (r2.TryGetValue(key, out value))
@@ -1344,6 +1381,8 @@ namespace TeslaLogger
                             case "fan_status":
                             case "left_temp_direction":
                             case "right_temp_direction":
+                            case "seat_fan_front_left":
+                            case "seat_fan_front_right":
                             case "seat_heater_left":
                             case "seat_heater_rear_center":
                             case "seat_heater_rear_left":
@@ -1440,6 +1479,29 @@ namespace TeslaLogger
                 .Submit();
 
             Logfile.Log(text);
+        }
+
+        private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
+        {
+            if (car.Vin?.Length > 0)
+            {
+                for (int x = 0; x < cars.Count; x++)
+                {
+                    var cc = cars[x];
+                    var ccVin = cc["vin"].ToString();
+
+                    if (ccVin == car.Vin)
+                        return cc;
+                }
+
+                Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
+
+                // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
+
+                return null;
+            }
+
+            return null;
         }
     }
 }

@@ -90,6 +90,8 @@ namespace TeslaLogger
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
         static int nextAccountId = 1;
 
+        object getAllVehiclesLock = new object();
+
         static WebHelper()
         {
             //Damit Mono keine Zertifikatfehler wirft :-(
@@ -592,7 +594,15 @@ namespace TeslaLogger
             {
                 foreach (KeyValuePair<string, Account> s in vehicles2Account)
                 {
-                    SearchFornewCars(s.Key, s.Value.tesla_token);
+                    try
+                    {
+                        SearchFornewCars(s.Key, s.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logfile.Log(ex.ToString());
+                        ex.ToExceptionless();
+                    }
                 }
             }
             catch (Exception ex)
@@ -602,19 +612,24 @@ namespace TeslaLogger
             }
         }
 
-        internal static void SearchFornewCars(string s, string access_token)
+        internal static void SearchFornewCars(string vin, Account a)
         {    
-            dynamic j = JsonConvert.DeserializeObject(s);
-            dynamic d = j["response"];
+            // dynamic j = JsonConvert.DeserializeObject(s);
+            // dynamic d = j["response"];
 
-            for (int x = 0; x < d.Count; x++)
+            // for (int x = 0; x < d.Count; x++)
             {
                 try
                 {
-                    dynamic i = d[x];
-                    string vin = i["vin"];
-                    string display_name = i["display_name"] ?? "";
+                    // dynamic i = d[x];
+                    // string vin = i["vin"];
+                    // string display_name = i["display_name"] ?? "";
                     // System.Diagnostics.Debug.WriteLine("VIN: " + vin);
+
+                    string display_name = a.display_name;
+                    string access_token = a.tesla_token;
+
+                    int x = 1;
 
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
@@ -1610,6 +1625,7 @@ namespace TeslaLogger
                         return "NULL";
                     }
 
+                    /*
                     if (car.CarInAccount >= r1temp.Count)
                     {
                         Log("Car # " + car.CarInAccount + " not exists!");
@@ -1617,11 +1633,15 @@ namespace TeslaLogger
 
                         return "NULL";
                     }
+                    */
 
                     dynamic r2 = SearchCarDictionary(r1temp);
 
                     if (r2 == null)
+                    {
+                        Log("Car VIN: " + car.Vin + " not exists!");
                         return "NULL";
+                    }
 
                     string OnlineState = r2["state"].ToString();
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
@@ -1756,57 +1776,60 @@ namespace TeslaLogger
 
         internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized)
         {
-            int accountid = 0;
-            lock (vehicles2Account)
+            lock (getAllVehiclesLock)
             {
-                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                int accountid = 0;
+                lock (vehicles2Account)
                 {
-                    accountid = a.id;
-                }
-            }
-
-            string cacheKey = accountid + "_vehicles";
-            object c = MemoryCache.Default.Get(cacheKey);
-            bool checkVehicle2Account = false;
-
-            if (c != null && accountid > 0)
-            {
-                resultContent = c as String;
-            }
-            else
-            {
-                HttpClient client = GethttpclientTeslaAPI();
-                string adresse = apiaddress + "api/1/vehicles";
-                Task<HttpResponseMessage> resultTask;
-                HttpResponseMessage result;
-                DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
-
-                if (result.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    if (throwExceptionOnUnauthorized)
-                        throw new UnauthorizedAccessException();
-
-                    if (LoginRetry(result))
+                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
                     {
-                        client = GethttpclientTeslaAPI(true);
+                        accountid = a.id;
+                    }
+                }
 
-                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                string cacheKey = accountid + "_vehicles";
+                object c = MemoryCache.Default.Get(cacheKey);
+                bool checkVehicle2Account = false;
 
-                        if (result.IsSuccessStatusCode)
+                if (c != null && accountid > 0)
+                {
+                    resultContent = c as String;
+                }
+                else
+                {
+                    HttpClient client = GethttpclientTeslaAPI();
+                    string adresse = apiaddress + "api/1/vehicles";
+                    Task<HttpResponseMessage> resultTask;
+                    HttpResponseMessage result;
+                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                    if (result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        if (throwExceptionOnUnauthorized)
+                            throw new UnauthorizedAccessException();
+
+                        if (LoginRetry(result))
                         {
-                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
-                            checkVehicle2Account = true;
+                            client = GethttpclientTeslaAPI(true);
+
+                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                            if (result.IsSuccessStatusCode)
+                            {
+                                MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(30));
+                                checkVehicle2Account = true;
+                            }
                         }
                     }
                 }
-            }
 
-            dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-            vehicles = jsonResult["response"];
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                vehicles = jsonResult["response"];
 
-            if (checkVehicle2Account)
-            {
-                InsertVehicles2AccountFromVehiclesResponse(vehicles);
+                if (checkVehicle2Account)
+                {
+                    InsertVehicles2AccountFromVehiclesResponse(vehicles);
+                }
             }
         }
 
@@ -1823,7 +1846,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless();
+                SubmitExceptionlessClientWithResultContent(ex, resultContent);
             }
         }
 
@@ -1840,9 +1863,12 @@ namespace TeslaLogger
 
                         if (!vehicles2Account.ContainsKey(vin))
                         {
+                            string display_name = v["display_name"].ToString();
+
                             Account a = new Account();
                             a.id = nextAccountId;
                             a.tesla_token = car.Tesla_Token;
+                            a.display_name = display_name;
                             vehicles2Account.Add(vin, a);
                             inserted = true;
                         }
@@ -1900,8 +1926,8 @@ namespace TeslaLogger
 
                 return null;
             }
-            else
-                return cars[car.CarInAccount];
+
+            return null;
         }
 
         private void DoGetVehiclesRequest(out string resultContent, HttpClient client, string adresse, out Task<HttpResponseMessage> resultTask, out HttpResponseMessage result)
@@ -1913,7 +1939,7 @@ namespace TeslaLogger
 
             // resultContent = Tools.ConvertBase64toString("eyJSZXNwb25zZSI6bnVsbCwiRXJyb3IgZGVzY3JpcHRpb24iOiIiLCJFcnJvciI6Im5vdCBmb3VuZCJ9"); // {"Response":null,"Error description":"","Error":"not found"}
 
-            _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
+            _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
             DBHelper.AddMothershipDataToDB("GetVehicles()", start, (int)result.StatusCode);
 
             if (TeslaAPI_Commands.ContainsKey("vehicles"))
@@ -2003,7 +2029,7 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
-                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles", car.CarInAccount);
+                _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
                 if (result != null && c == null)
                 {
                     if (result.IsSuccessStatusCode)
@@ -2042,38 +2068,46 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
+                dynamic r4 = SearchCarDictionary(r1);
+
+                if (r4 == null)
+                {
+                    Log("Vin not found in Response!");
+                    return "NULL";
+                }
+
                 try
                 {
+                    string access_type = r4["access_type"].ToString();
                     if (result != null && result.IsSuccessStatusCode && c == null)
                     {
-                        InsertVehicles2AccountFromVehiclesResponse(resultContent);
-                        if (accountid == 0)
+                        if (access_type == "OWNER")
                         {
-                            lock (vehicles2Account)
+                            InsertVehicles2AccountFromVehiclesResponse(resultContent);
+                            if (accountid == 0)
                             {
-                                if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                lock (vehicles2Account)
                                 {
-                                    accountid = a.id;
+                                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                    {
+                                        accountid = a.id;
+                                    }
                                 }
-                            }
 
-                            cacheKey = accountid + "_vehicles";
+                                cacheKey = accountid + "_vehicles";
+                            }
+                            MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
                         }
-                        MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(20));
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("access_type: " + access_type);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 }
-
-                if (!(car.CarInAccount < r1.Count))
-                {
-                    Log("IndexOutOfRangeException in isOnline!");
-                    return "NULL";
-                }
-
-                var r4 = r1[car.CarInAccount];
 
                 string state = r4["state"].ToString();
                 string temp_Tesla_Streamingtoken = r4["tokens"][0].ToString();
@@ -2249,9 +2283,14 @@ namespace TeslaLogger
 
         public void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
         {
+            CreateExceptionlessClientWithResultContent(ex, content).Submit();
+        }
+
+        public EventBuilder CreateExceptionlessClientWithResultContent(Exception ex, string content)
+        {
             string base64 = Tools.ConvertString2Base64(content);
 
-            car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64").Submit();
+            return car.CreateExceptionlessClient(ex).AddObject(content, "ResultContent").AddObject(base64, "ResultContentBase64");
         }
 
         public void UpdateEfficiency()
@@ -2582,7 +2621,22 @@ namespace TeslaLogger
                     return;
                 }
             }
-            
+            else if (car.CarType == "lychee" && car.CarSpecialType == "base")
+            {
+                Tools.VINDecoder(car.Vin, out int year, out _, out bool AWD, out bool MIC, out string battery, out string motor, out _);
+
+                if (motor == "triple 2021 plaid")
+                {
+                    WriteCarSettings("0.151", "S 2021 Plaid");
+                    return;
+                }
+                else
+                {
+                    WriteCarSettings("0.151", "S 2021 LR");
+                    return;
+                }
+            }
+
             /*
             if (car.Model == "MS")
             {
@@ -3528,6 +3582,70 @@ namespace TeslaLogger
             return "";
         }
 
+        public static async Task<string> ReverseGecocodingCountryAsync(double latitude, double longitude)
+        {
+            string url = "";
+            string resultContent = "";
+            try
+            {
+                Tools.SetThreadEnUS();
+
+                Thread.Sleep(5000); // Sleep to not get banned by Nominatim
+
+                using (WebClient webClient = new WebClient())
+                {
+
+                    webClient.Headers.Add("User-Agent: TL 1.1");
+                    webClient.Encoding = Encoding.UTF8;
+
+                    url = "http://nominatim.openstreetmap.org/reverse";
+
+                    url += "?format=jsonv2&lat=";
+                    url += latitude.ToString();
+                    url += "&lon=";
+                    url += longitude.ToString();
+                    url += "&email=mail";
+                    url += "@";
+                    url += "teslalogger";
+                    url += ".de";
+                    
+                    DateTime start = DateTime.UtcNow;
+                    resultContent = await webClient.DownloadStringTaskAsync(new Uri(url));
+                    DBHelper.AddMothershipDataToDB("ReverseGeocoding", start, 0);
+
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                    
+                    dynamic r2 = jsonResult["address"];
+
+                    string country_code = "";
+
+                    if (r2.ContainsKey("country_code"))
+                    {
+                        country_code = r2["country_code"].ToString();
+                        return country_code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().AddObject(resultContent, "ResultContent").AddObject(url, "Url").Submit();
+
+                if (url == null)
+                {
+                    url = "NULL";
+                }
+
+                if (resultContent == null)
+                {
+                    resultContent = "NULL";
+                }
+
+                Logfile.ExceptionWriter(ex, url + "\r\n" + resultContent);
+            }
+
+            return "";
+        }
+
         public void UpdateAllPosAddresses()
         {
             using (SqlConnection con = new SqlConnection(DBHelper.DBConnectionstring))
@@ -4259,14 +4377,16 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new Exception("NearbyChargingSiteFail");
+                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString());
                 }
                 return resultContent;
             }
             catch (Exception ex)
             {
-                SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                // SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
                 ExceptionWriter(ex, resultContent);
+                Thread.Sleep(30000);
             }
 
             return "NULL";
@@ -4407,73 +4527,6 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        public DataTable GetEnergyChartData()
-        {
-            // https://www.energy-charts.de/power/week_2018_46.json
-            string resultContent = "";
-
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
-
-                Task<HttpResponseMessage> resultTask = client.GetAsync("https://www.energy-charts.de/power/week_2018_46.json");
-                HttpResponseMessage result = resultTask.Result;
-                resultContent = result.Content.ReadAsStringAsync().Result;
-
-                object jsonResult = JsonConvert.DeserializeObject(resultContent);
-
-                DataTable dt = new DataTable();
-                dt.Columns.Add("name");
-                dt.Columns.Add("kWh", typeof(decimal));
-                dt.Columns.Add("Datum", typeof(DateTime));
-
-                object[] o1 = (object[])jsonResult;
-                foreach (object o2 in o1)
-                {
-                    Dictionary<string, object> o3 = o2 as Dictionary<string, object>;
-                    object[] name = o3["key"] as object[];
-                    Dictionary<string, object> n2 = name[0] as Dictionary<string, object>;
-                    string realname = n2["de"].ToString();
-
-                    if (realname.Contains("geplant") || realname.Contains("Prognose"))
-                    {
-                        continue;
-                    }
-
-                    object[] values = o3["values"] as object[];
-
-                    decimal lastkWh = 0;
-                    for (int x = values.Length - 1; x >= 0; x--)
-                    {
-                        object[] v2 = values[x] as object[];
-
-                        if (v2[1] != null)
-                        {
-                            if (v2[1] is decimal)
-                            {
-                                lastkWh = (decimal)v2[1];
-                            }
-                            else if (v2[1] is int)
-                            {
-                                lastkWh = Convert.ToDecimal((int)v2[1]);
-                            }
-
-                            DataRow dr = dt.NewRow();
-                            dr["name"] = realname;
-                            dr["kWh"] = lastkWh;
-                            dr["Datum"] = DBHelper.UnixToDateTime((long)v2[0]);
-                            dt.Rows.Add(dr);
-                            break;
-                        }
-                    }
-                }
-
-
-                return dt;
-            }
-
-        }
-
         public void StopStreaming()
         {
             Log("Request StopStreaming");
@@ -4562,6 +4615,7 @@ namespace TeslaLogger
                     { "MIC" , car.MIC ? "1" : "0" },
                     { "year" , car.Year.ToString() },
                     { "motor" , car.Motor } ,
+                    { "wt" , car.wheel_type } ,
                     { "vin" , obfuscatedVin} // just the first 11 chars of the vin will be sent. The serial number is truncated!
                 };
 
@@ -4862,5 +4916,6 @@ namespace TeslaLogger
     {
         public int id;
         public string tesla_token;
+        public string display_name;
     }
 }

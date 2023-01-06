@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
@@ -67,6 +68,7 @@
     </Compile>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestCO2.cs" />
     <Compile Include="UnitTestConfig.cs" />
     <Compile Include="UnitTestGeocodeMapQuest.cs" />
     <Compile Include="UnitTestMapProvider.cs" />

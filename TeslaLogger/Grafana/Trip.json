@@ -566,6 +566,86 @@
                 "value": true
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TPMS FL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 77
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TPMS FR"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 77
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TPMS RL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 77
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TPMS RR"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 77
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "unit",
+                "value": "locale"
+              }
+            ]
           }
         ]
       },
@@ -609,7 +689,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, \noutside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh,\nlat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(EndDate)*1000 as EndDateRAW\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, \noutside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh,\nlat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(EndDate)*1000 as EndDateRAW,\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 1 and TPMS.CarId = trip.CarId) as 'TPMS FL',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 2 and TPMS.CarId = trip.CarId) as 'TPMS FR',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 3 and TPMS.CarId = trip.CarId) as 'TPMS RL',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 4 and TPMS.CarId = trip.CarId) as 'TPMS RR'\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -643,6 +723,7 @@
       "type": "table"
     }
   ],
+  "refresh": "",
   "schemaVersion": 33,
   "style": "dark",
   "tags": [],
@@ -729,6 +810,6 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 37,
+  "version": 41,
   "weekStart": ""
 }
