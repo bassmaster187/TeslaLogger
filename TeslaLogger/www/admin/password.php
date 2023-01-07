@@ -248,7 +248,7 @@ if (isset($_REQUEST["id"]))
 <tr style='visibility:collapse'><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
 <tr style='visibility:collapse'><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 
-<tr><td><?php t("Car"); ?>:</td><td> <select id="carid"></select></td></tr>
+<tr><td><?php t("Car"); ?>:</td><td> <select id="carid" style="width: 100%;"></select></td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
 
 <tr><td>&nbsp;</td></tr>

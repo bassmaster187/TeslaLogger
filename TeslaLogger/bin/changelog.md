@@ -1,4 +1,5 @@
-# Version 1.54.7
+# Version 1.54.8
+- Wheeltype will be stored in trips and chargings. 
 - Bugfixes
 
 # Version 1.54.6

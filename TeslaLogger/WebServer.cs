@@ -367,7 +367,7 @@ namespace TeslaLogger
                     var ccVin = cc["vin"].ToString();
                     var ccDisplayName = cc["display_name"].ToString();
                     
-                    o.Add(new KeyValuePair<string, string>(x.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
+                    o.Add(new KeyValuePair<string, string>(ccVin.ToString(), "VIN: "+ ccVin + " / Name: " + ccDisplayName ));
                 }
 
                 responseString = JsonConvert.SerializeObject(o);
@@ -1502,7 +1502,7 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    int teslacarid = Convert.ToInt32(r["carid"]);
+                    string vin = r["carid"].ToString();
                     string email = r["email"];
                     string password = r["password"];
                     bool freesuc = r["freesuc"];
@@ -1518,16 +1518,21 @@ namespace TeslaLogger
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("select max(id)+1 from cars", con))
+                            using (MySqlCommand cmd = new MySqlCommand(@"select max(a)+1 from
+                                (
+                                    select max(id) as a from cars
+                                    union
+                                    select max(carid) as a from pos
+                                ) as t", con)) // 
                             {
-                                long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+                                decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
                                     cmd2.Parameters.AddWithValue("@tesla_password", password);
-                                    cmd2.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                                    cmd2.Parameters.AddWithValue("@vin", vin);
                                     cmd2.Parameters.AddWithValue("@display_name", "Car " + newid);
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
@@ -1535,7 +1540,7 @@ namespace TeslaLogger
                                     SQLTracer.TraceNQ(cmd2);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+                                    Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
 
                                     WriteString(response, "ID:"+newid);
@@ -1557,7 +1562,7 @@ namespace TeslaLogger
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@tesla_name", email);
                                 cmd.Parameters.AddWithValue("@tesla_password", password);
-                                cmd.Parameters.AddWithValue("@tesla_carid", teslacarid);
+                                // xxx cmd.Parameters.AddWithValue("@tesla_carid", teslacarid); 
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
@@ -1570,7 +1575,7 @@ namespace TeslaLogger
                                 }
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                Car nc = new Car(dbID, email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", "", "", "", null);
+                                Car nc = new Car(dbID, email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 WriteString(response, "OK");
                             }
