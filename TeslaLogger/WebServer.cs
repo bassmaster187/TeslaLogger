@@ -1557,12 +1557,9 @@ namespace TeslaLogger
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_name=@tesla_name, tesla_password=@tesla_password, tesla_carid=@tesla_carid, freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
-                                cmd.Parameters.AddWithValue("@tesla_name", email);
-                                cmd.Parameters.AddWithValue("@tesla_password", password);
-                                // xxx cmd.Parameters.AddWithValue("@tesla_carid", teslacarid); 
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
