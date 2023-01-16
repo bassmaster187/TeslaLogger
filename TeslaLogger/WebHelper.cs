@@ -2283,6 +2283,10 @@ namespace TeslaLogger
 
         public void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
         {
+            string temp = ex.ToString();
+            if (temp.Contains("No route to host"))
+                return;
+
             CreateExceptionlessClientWithResultContent(ex, content).Submit();
         }
 
