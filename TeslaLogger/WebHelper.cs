@@ -2029,6 +2029,14 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
+                if (resultContent.Contains("upstream internal error"))
+                {
+                    int sleep = random.Next(10000) + 10000;
+                    Log("isOnline: upstream internal error - Sleep: " + sleep);
+                    Thread.Sleep(sleep);
+                    return "NULL";
+                }
+
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
                 if (result != null && c == null)
                 {
