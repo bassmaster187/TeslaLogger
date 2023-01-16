@@ -1,6 +1,8 @@
+# Version 1.54.9
+- Bugfixes
+
 # Version 1.54.8
 - Wheeltype will be stored in trips and chargings. 
-- Bugfixes
 
 # Version 1.54.6
 - Detecting Model S Plaid / LR
