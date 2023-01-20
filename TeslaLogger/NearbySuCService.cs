@@ -69,81 +69,117 @@ namespace TeslaLogger
                     string result = string.Empty;
                     try
                     {
-                        result = car.webhelper.GetNearbyChargingSites().Result;
-                        if (result == null || result == "NULL")
-                            continue;
+                        bool logSent = true;
+                        
+                        double lat = car.CurrentJSON.GetLatitude();
+                        double lng = car.CurrentJSON.GetLongitude();
+                        /*
+                        for (double lat = 20; lat < 55; lat += 5)
+                            for(double lng = -124; lng < -61; lng += 5)
+                        */
+                        {
+                            result = car.webhelper.GetNearbyChargingSites(lat, lng).Result;
+                            if (result == null || result == "NULL")
+                            {
+                                continue;
+                            }
 
-                        if (result.Contains("Retry later"))
-                        {
-                            Tools.DebugLog("NearbySuCService: Retry later");
-                            return;
-                        }
-                        else if (result.Contains("vehicle unavailable"))
-                        {
-                            Tools.DebugLog("NearbySuCService: vehicle unavailable");
-                            return;
-                        }
-                        else if (result.Contains("502 Bad Gateway"))
-                        {
-                            Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
-                            return;
-                        }
+                            if (result.Contains("Retry later"))
+                            {
+                                Tools.DebugLog("NearbySuCService: Retry later");
+                                return;
+                            }
+                            else if (result.Contains("vehicle unavailable"))
+                            {
+                                Tools.DebugLog("NearbySuCService: vehicle unavailable");
+                                return;
+                            }
+                            else if (result.Contains("502 Bad Gateway"))
+                            {
+                                Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
+                                return;
+                            }
 
-                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
-                        if (jsonResult == null)
-                            continue;
-
-                        if (jsonResult.ContainsKey("data"))
-                        {
-                            dynamic data = jsonResult["data"];
-                            if (data == null)
+                            dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                            if (jsonResult == null)
                                 continue;
 
-                            if (data.ContainsKey("charging"))
+                            if (jsonResult.ContainsKey("data"))
                             {
-                                dynamic charging = data["charging"];
-                                if (charging == null)
+                                dynamic data = jsonResult["data"];
+                                if (data == null)
                                     continue;
 
-                                if (charging.ContainsKey("nearbySites"))
+                                if (data.ContainsKey("charging"))
                                 {
-                                    dynamic nearbySites = charging["nearbySites"];
-                                    if (nearbySites == null)
+                                    dynamic charging = data["charging"];
+                                    if (charging == null)
                                         continue;
 
-                                    if (nearbySites.ContainsKey("sitesAndDistances"))
+                                    if (charging.ContainsKey("nearbySites"))
                                     {
-                                        dynamic superchargers = nearbySites["sitesAndDistances"];
-                                        foreach (dynamic suc in superchargers)
-                                        {
-                                            /*
-                  {
-                    "location": { "lat": 33.848756, "long": -84.36434 },
-                    "name": "Atlanta, GA - Peachtree Road",
-                    "type": "supercharger",
-                    "distance_miles": 10.868304,
-                    "available_stalls": 4,
-                    "total_stalls": 5,
-                    "site_closed": false
-                  }
-                                             */
+                                        dynamic nearbySites = charging["nearbySites"];
+                                        if (nearbySites == null)
+                                            continue;
 
-                                            try
+                                        if (nearbySites.ContainsKey("sitesAndDistances"))
+                                        {
+                                            car.webhelper.nearbySuCServiceOK++;
+                                            car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
+
+                                            dynamic superchargers = nearbySites["sitesAndDistances"];
+                                            foreach (dynamic suc in superchargers)
                                             {
-                                                AddSuperchargerState(suc, send, result);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
-                                                Logfile.Log(ex.ToString());
+                                                /*
+                      {
+                        "location": { "lat": 33.848756, "long": -84.36434 },
+                        "name": "Atlanta, GA - Peachtree Road",
+                        "type": "supercharger",
+                        "distance_miles": 10.868304,
+                        "available_stalls": 4,
+                        "total_stalls": 5,
+                        "site_closed": false
+                      }
+                                                 */
+
+                                                try
+                                                {
+                                                    AddSuperchargerState(suc, send, result);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
+                                                    Logfile.Log(ex.ToString());
+                                                }
                                             }
                                         }
                                     }
                                 }
+
+                                if (logSent)
+                                {
+                                    string firstname = "";
+                                    try
+                                    {
+                                        if (send.Count > 0)
+                                        {
+                                            dynamic d = send[0];
+                                            firstname = d["n"];
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
+
+                                    car.Log("SuC sent: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
+                                }
+
+                                if (send.Count > 0)
+                                    ShareSuc(send);
+
+                                send.Clear();
                             }
 
-                            if (send.Count > 0)
-                                ShareSuc(send);
+                            Thread.Sleep(1000);
                         }
                         Thread.Sleep(30000);
                     }
