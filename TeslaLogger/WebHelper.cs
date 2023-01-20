@@ -79,6 +79,7 @@ namespace TeslaLogger
         internal static HttpClient httpClientSuCBingo = null;
         internal HttpClient httpclientTeslaAPI = null;
         internal HttpClient httpclientTeslaChargingSites = null;
+        internal string httpclientTeslaChargingSitesToken = "";
         internal static object httpClientLock = new object();
 
         DateTime lastABRPActive = DateTime.MinValue;
@@ -91,6 +92,9 @@ namespace TeslaLogger
         static int nextAccountId = 1;
 
         object getAllVehiclesLock = new object();
+
+        public int nearbySuCServiceFail = 0;
+        public int nearbySuCServiceOK = 0;
 
         static WebHelper()
         {
@@ -1591,6 +1595,14 @@ namespace TeslaLogger
                     httpclientTeslaChargingSites = null;
                 }
 
+                if (Tesla_token != httpclientTeslaChargingSitesToken && httpclientTeslaChargingSites != null)
+                {
+                    car.Log("httpclientTeslaChargingSites using new token!");
+
+                    httpclientTeslaChargingSites.Dispose();
+                    httpclientTeslaChargingSites = null;
+                }
+
                 if (httpclientTeslaChargingSites == null)
                 {
                     httpclientTeslaChargingSites = new HttpClient();
@@ -1600,6 +1612,7 @@ namespace TeslaLogger
                         httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
                         httpclientTeslaChargingSites.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         httpclientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
+                        httpclientTeslaChargingSitesToken = Tesla_token;
                     }
                 }
 
@@ -4346,7 +4359,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public async Task<string> GetNearbyChargingSites()
+        public async Task<string> GetNearbyChargingSites(double lat, double lng)
         {
             string resultContent = "";
             try
@@ -4360,16 +4373,16 @@ namespace TeslaLogger
   ""variables"": {
                     ""args"": {
                         ""userLocation"": {
-        ""latitude"": " + car.CurrentJSON.GetLatitude().ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + lat.ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + lng.ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 1.5).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 1.5).ToString(Tools.ciEnUS) + @"
+        ""latitude"": 90,
+        ""longitude"": -180
       },
       ""southeastCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 1.5).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 1.5).ToString(Tools.ciEnUS) + @"
+        ""latitude"": -90,
+        ""longitude"": 180
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false
@@ -4389,7 +4402,8 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString());
+                    car.webhelper.nearbySuCServiceFail++;
+                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.nearbySuCServiceOK + " - Fail: " + car.webhelper.nearbySuCServiceFail+")");
                 }
                 return resultContent;
             }
@@ -4397,7 +4411,7 @@ namespace TeslaLogger
             {
                 // SubmitExceptionlessClientWithResultContent(ex, resultContent);
                 CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
-                ExceptionWriter(ex, resultContent);
+                car.Log(ex.Message);
                 Thread.Sleep(30000);
             }
 
