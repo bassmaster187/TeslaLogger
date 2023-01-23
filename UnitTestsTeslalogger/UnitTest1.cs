@@ -948,7 +948,7 @@ namespace UnitTestsTeslalogger
             var json = "{\"response\":[],\"Count\":0}";
             Car c = new Car(1, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
             var t = new TeslaAPIState(c);
-            var ret = t.ParseAPI(json, "vehicles", 0);
+            var ret = t.ParseAPI(json, "vehicles");
 
             Assert.IsFalse(ret);
         }
