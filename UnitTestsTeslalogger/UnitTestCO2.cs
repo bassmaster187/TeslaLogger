@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Exceptionless;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TeslaLogger;
 
@@ -44,7 +46,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(320, c);
 
             c = co2.GetData("pt", dateTime);
-            Assert.AreEqual(128, c);
+            Assert.AreEqual(126, c);
 
             c = co2.GetData("es", dateTime);
             Assert.AreEqual(140, c);
@@ -58,6 +60,14 @@ namespace UnitTestsTeslalogger
             c = co2.GetData("hr", dateTime);
             Assert.AreEqual(340, c);
 
+            c = co2.GetData("cz", dateTime);
+            Assert.AreEqual(633, c);
+
+            c = co2.GetData("hu", dateTime);
+            Assert.AreEqual(317, c);
+
+            c = co2.GetData("nl", dateTime);
+            Assert.AreEqual(505, c);
         }
 
         [TestMethod]
@@ -124,6 +134,21 @@ namespace UnitTestsTeslalogger
             }
 
             System.Diagnostics.Debug.WriteLine("Done");
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+            ExceptionlessClient.Default.ProcessQueueAsync().Wait();
+        }
+
+        [AssemblyInitialize()]
+        public static void AssemblyInit(TestContext context)
+        {
+            ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey);
+            ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
+            ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
+            ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
         }
     }
 }
