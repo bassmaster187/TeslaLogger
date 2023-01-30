@@ -16,7 +16,7 @@ namespace TeslaLogger
 {
     public class CO2
     {
-        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "ch", "cz", "de", "dk", "es", "fr", "hr", "hu", "it", "nl", "pt" ,"ro" };
+        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "ch", "cz", "de", "dk", "es", "fr", "hr", "hu", "it", "nl", "no", "pt" ,"ro", "si" };
 
 
         public void GetData()
@@ -49,6 +49,9 @@ namespace TeslaLogger
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int currentWeek = GetWeekOfYear(DateTime.Now);
+            bool writeCache = wi < currentWeek;
+
             string w = wi.ToString("D2");
             int year = dateTime.Year;
 
@@ -58,7 +61,7 @@ namespace TeslaLogger
             if (File.Exists(path))
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename);
+                content = GetEnergyChartData(country, filename, writeCache);
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -105,6 +108,7 @@ namespace TeslaLogger
                     case "Hydro Run-of-River": co2factor = 11; break;
                     case "Biomass": co2factor = 230; break;
                     case "Fossil brown coal / lignite": co2factor = 1150; break;
+                    case "Fossil coal-derived gas": co2factor = 1150; break; // might be wrong ???
                     case "Fossil hard coal": co2factor = 798; break;
                     case "Fossil oil": co2factor = 1125; break;
                     case "Fossil gas": co2factor = 661; break;
@@ -112,10 +116,15 @@ namespace TeslaLogger
                     case "Hydro water reservoir": co2factor = 24; break;
                     case "Hydro pumped storage": co2factor = 0; break;
                     case "Others": co2factor = 700; break;
+                    case "Other renewables": co2factor = 35; break;
                     case "Waste": co2factor = 700; break;
                     case "Wind offshore": co2factor = 13; break;
                     case "Wind onshore": co2factor = 13; break;
                     case "Solar": co2factor = 35; break;
+                    default:
+                        SubmitExceptionlessLog("Utility type not handled: '" + name + "' !!!");
+                        co2factor = 0;
+                        break;
                 }
 
                 if (co2factor > 0)
@@ -140,6 +149,9 @@ namespace TeslaLogger
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int currentWeek = GetWeekOfYear(DateTime.Now);
+            bool writeCache = wi < currentWeek;
+
             string w = wi.ToString("D2");
             int year = dateTime.Year;
 
@@ -149,7 +161,7 @@ namespace TeslaLogger
             if (File.Exists(path))
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename);
+                content = GetEnergyChartData(country, filename, writeCache);
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -205,6 +217,7 @@ namespace TeslaLogger
                     case "Czech Republic": co2factor = 536; break;
                     case "Denmark": co2factor = 218; break;
                     case "France": co2factor = 78; break;
+                    case "Finland": co2factor = 154; break;
                     case "Germany": co2factor = 463; break;
                     case "Greece": co2factor = 437; break;
                     case "Hungary": co2factor = 312; break;
@@ -241,13 +254,12 @@ namespace TeslaLogger
 
                 Log(String.Format("{0,-28}", name) + ": " + wert + "MW " + co2factor + "co2 g/kWh");
             }
-
         }
 
-        public string GetEnergyChartData(string country, string filename)
+        public string GetEnergyChartData(string country, string filename, Boolean writeCache)
         {
             string resultContent = "";
-
+           
             using (WebClient client = new WebClient())
             {
                 // week_2022_51.json
@@ -259,6 +271,8 @@ namespace TeslaLogger
                 try
                 {
                     resultContent = client.DownloadString(url);
+
+                    DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0);
                 }
                 catch (Exception ex)
                 {
@@ -274,12 +288,15 @@ namespace TeslaLogger
                     if (!Directory.Exists("EngergyChartData/" + country))
                         Directory.CreateDirectory("EngergyChartData/"+ country);
 
-                    string path = $"EngergyChartData/{country}/{filename}";
+                    if (writeCache)
+                    {
+                        string path = $"EngergyChartData/{country}/{filename}";
 
-                    if (File.Exists(path))
-                        File.Delete(path);
+                        if (File.Exists(path))
+                            File.Delete(path);
 
-                    File.WriteAllText(path, resultContent);
+                        File.WriteAllText(path, resultContent);
+                    }
                 }
             }
 

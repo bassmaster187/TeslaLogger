@@ -40,7 +40,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(414, c);
 
             c = co2.GetData("it", dateTime);
-            Assert.AreEqual(486, c);
+            Assert.AreEqual(500, c);
 
             c = co2.GetData("ro", dateTime);
             Assert.AreEqual(320, c);
@@ -58,16 +58,22 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(209, c);
 
             c = co2.GetData("hr", dateTime);
-            Assert.AreEqual(340, c);
+            Assert.AreEqual(336, c);
 
             c = co2.GetData("cz", dateTime);
-            Assert.AreEqual(633, c);
+            Assert.AreEqual(620, c);
 
             c = co2.GetData("hu", dateTime);
             Assert.AreEqual(317, c);
 
             c = co2.GetData("nl", dateTime);
             Assert.AreEqual(505, c);
+
+            c = co2.GetData("no", dateTime);
+            Assert.AreEqual(47, c);
+
+            c = co2.GetData("si", dateTime);
+            Assert.AreEqual(291, c);
         }
 
         [TestMethod]
@@ -79,7 +85,7 @@ namespace UnitTestsTeslalogger
             var dt = DBHelper.GetAllChargingstates();
 
             dt.Columns.Add("co2_kwh", typeof(int));
-            dt.Columns.Add("country");
+            // dt.Columns.Add("country");
 
             DateTime dateTime = new DateTime(2022, 12, 21, 22, 00, 00);
 
