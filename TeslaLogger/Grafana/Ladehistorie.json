@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1675151398854,
+  "iteration": 1675157717430,
   "links": [
     {
       "icon": "external link",
@@ -901,8 +901,8 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "max kW"
+            "desc": true,
+            "displayName": "Startdatum"
           }
         ]
       },
@@ -1038,6 +1038,6 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 141,
+  "version": 142,
   "weekStart": ""
 }
