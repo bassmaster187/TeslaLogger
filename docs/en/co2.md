@@ -1,5 +1,7 @@
 # CO2 Calculation (Beta)
 
+![image](https://user-images.githubusercontent.com/6816385/215699322-a54dfaf2-5fb3-4a6b-8888-3639dc67429e.png)
+
 After a reboot Teslalogger tries to calculate the CO2 for the country you have charged your car. After this feature will enter release state, it will be calculated every night.
 
 ## Where is the data from?
