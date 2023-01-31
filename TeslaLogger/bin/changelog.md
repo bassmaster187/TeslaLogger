@@ -1,8 +1,6 @@
-# Version 1.54.10
-- Bugfixes
-
-# Version 1.54.9
-- Bugfixes
+# Version 1.54.11
+- Calculation of CO2 for each charging. [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/co2.md)
+- Dashboard Charging History with CO2 
 
 # Version 1.54.8
 - Wheeltype will be stored in trips and chargings. 
