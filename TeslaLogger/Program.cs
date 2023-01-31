@@ -533,6 +533,8 @@ namespace TeslaLogger
                     StaticMapService.CreateAllChargingMaps();
                     StaticMapService.CreateAllParkingMaps();
 
+                    DBHelper.UpdateCO2();
+
                     Car.LogActiveCars();
 
                     WebHelper.SearchFornewCars();

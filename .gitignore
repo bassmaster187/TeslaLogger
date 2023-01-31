@@ -82,3 +82,5 @@ TeslaLogger/bin/OVMS/geofence-private.csv
 TeslaLogger/copytoOVMS.cmd
 
 TeslaLogger/www/admin/plugins/*
+AnalysisReport.sarif
+upgrade-assistant.clef
