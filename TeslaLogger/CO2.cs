@@ -11,12 +11,13 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualBasic;
 using Exceptionless;
 using System.Reflection;
+using Org.BouncyCastle.Crypto.Modes;
 
 namespace TeslaLogger
 {
     public class CO2
     {
-        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "ch", "cz", "de", "dk", "es", "fr", "hr", "hu", "it", "nl", "no", "pt" ,"ro", "si" };
+        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
 
 
         public void GetData()
@@ -37,6 +38,9 @@ namespace TeslaLogger
         internal int GetData(string country, DateTime dateTime)
         {
             country = country.Trim().ToLower();
+
+            if (country == "gb")
+                country = "uk";
 
             if (!supportedCountries.Contains(country))
             {
@@ -111,6 +115,8 @@ namespace TeslaLogger
                     case "Fossil coal-derived gas": co2factor = 1150; break; // might be wrong ???
                     case "Fossil hard coal": co2factor = 798; break;
                     case "Fossil oil": co2factor = 1125; break;
+                    case "Fossil oil shale": co2factor = 1125; break; // might be wrong ???
+                    case "Fossil peat": co2factor = 230; break; // might be wrong ???
                     case "Fossil gas": co2factor = 661; break;
                     case "Geothermal": co2factor = 38; break;
                     case "Hydro water reservoir": co2factor = 24; break;
@@ -209,6 +215,7 @@ namespace TeslaLogger
 
                 switch (name)
                 {
+                    case "Albania": co2factor = 200; break; // maybe wrong
                     case "Austria": co2factor = 230; break;
                     case "Belgium": co2factor = 185; break;
                     case "Bosnia-Herzegovina": co2factor = 525; break;
@@ -216,20 +223,24 @@ namespace TeslaLogger
                     case "Croatia": co2factor = 307; break; // maybe wrong
                     case "Czech Republic": co2factor = 536; break;
                     case "Denmark": co2factor = 218; break;
+                    case "Estonia": co2factor = 607; break;
                     case "France": co2factor = 78; break;
                     case "Finland": co2factor = 154; break;
                     case "Germany": co2factor = 463; break;
                     case "Greece": co2factor = 437; break;
                     case "Hungary": co2factor = 312; break;
                     case "Italy": co2factor = 351; break;
+                    case "Lithuania": co2factor = 137; break;
                     case "Luxembourg": co2factor = 300; break; // maybe wrong
                     case "Malta": co2factor = 351; break; // maybe wrong
                     case "Moldova": co2factor = 600; break; // maybe wrong
                     case "Montenegro": co2factor = 398; break;
                     case "Netherlands": co2factor = 453; break;
+                    case "North Macedonia": co2factor = 500; break; // maybe wrong
                     case "Norway": co2factor = 30; break;
                     case "Poland": co2factor = 859; break;
                     case "Portugal": co2factor = 219; break;
+                    case "Russia": co2factor = 350; break; // maybe wrong
                     case "Romania": co2factor = 472; break;
                     case "Serbia": co2factor = 537; break;
                     case "Slovenia": co2factor = 275; break;
@@ -238,6 +249,7 @@ namespace TeslaLogger
                     case "Spain": co2factor = 184; break;
                     case "Sweden": co2factor = 44; break;
                     case "Switzerland": co2factor = 44; break;
+                    case "Turkey": co2factor = 402; break;
                     case "Ukraine": co2factor = 190; break; // maybe wrong
                     case "United Kingdom": co2factor = 255; break; 
 

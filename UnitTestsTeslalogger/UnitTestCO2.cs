@@ -74,6 +74,39 @@ namespace UnitTestsTeslalogger
 
             c = co2.GetData("si", dateTime);
             Assert.AreEqual(291, c);
+
+            c = co2.GetData("se", dateTime);
+            Assert.AreEqual(69, c);
+
+            c = co2.GetData("gb", dateTime);
+            Assert.AreEqual(161, c);
+
+            c = co2.GetData("uk", dateTime);
+            Assert.AreEqual(161, c);
+
+            c = co2.GetData("lu", dateTime);
+            Assert.AreEqual(390, c);
+
+            c = co2.GetData("pl", dateTime);
+            Assert.AreEqual(719, c);
+
+            c = co2.GetData("fi", dateTime);
+            Assert.AreEqual(171, c);
+
+            c = co2.GetData("sk", dateTime);
+            Assert.AreEqual(363, c);
+
+            c = co2.GetData("bg", dateTime);
+            Assert.AreEqual(641, c);
+
+            c = co2.GetData("ee", dateTime);
+            Assert.AreEqual(767, c);
+
+            c = co2.GetData("lv", dateTime);
+            Assert.AreEqual(490, c);
+
+            c = co2.GetData("gr", dateTime);
+            Assert.AreEqual(583, c);
         }
 
         [TestMethod]
