@@ -316,7 +316,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
 
                 Logfile.ExceptionWriter(ex, resultContent);
                 Thread.Sleep(10000);

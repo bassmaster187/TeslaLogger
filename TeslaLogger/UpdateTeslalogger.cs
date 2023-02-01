@@ -726,6 +726,20 @@ CREATE TABLE superchargers(
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("chargingstate", "co2_g_kWh"))
+            {
+                Logfile.Log("ALTER TABLE chargingstate ADD Column co2_g_kWh");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `co2_g_kWh` int NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("chargingstate", "country")) 
+            {
+                Logfile.Log("ALTER TABLE chargingstate ADD Column country");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `country` varchar(80) NULL DEFAULT NULL", 600);
+            }
         }
 
         private static void CheckDBSchema_charging()

@@ -1629,6 +1629,24 @@ WHERE
                     }
                     Thread.Sleep(1000);
                 }
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    Logfile.Log($"Housekeeping: OPTIMIZE TABLE mothership");
+                    con.Open();
+                    string SQLcmd = "OPTIMIZE TABLE mothership";
+                    using (MySqlCommand cmd = new MySqlCommand(SQLcmd, con))
+                    {
+                        try
+                        {
+                            SQLTracer.TraceNQ(cmd);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                        con.Close();
+                    }
+                }
             }
         }
 

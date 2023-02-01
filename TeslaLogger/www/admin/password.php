@@ -41,6 +41,12 @@ require_once("tools.php");
 				}
 				});
 		});
+
+		if (dbid > 0)
+		{
+			$("#carid").hide();
+			$("#vinlabel").text("<?php echo $_REQUEST["vin"] ?>");
+		}
 	});
 
 	function tokenAvailable() {
@@ -143,11 +149,47 @@ require_once("tools.php");
 			});
 	}
 
+	function ChangeAccessTokenAndRefreshToken()
+	{
+		var d = {
+					id: dbid,
+					carid: "<?php echo $_REQUEST["vin"] ?>",
+					freesuc: $("#freesuc").is(':checked'),
+					access_token: $("#access_token").val(),
+					refresh_token: $("#refresh_token").val(),
+				};
+
+			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)})
+			.always(function (data) {
+				if (tokenAvailable())
+				{
+					alert("Check Logfile!");
+					window.location.href='logfile.php';
+				}
+				else if (data.includes("ID:"))
+				{
+					window.location.href='password_info.php?id='+data.substr(3);
+				}
+				else
+				{
+					window.location.href='password_info.php?id='+dbid;
+				}
+				});
+
+	}
+
 	function CheckAccessToken()
 	{
 		if (!tokenAvailable())
 			return;
 
+		if (dbid > 0)
+		{
+			ChangeAccessTokenAndRefreshToken()
+			return;
+		}
+
+		// new car
 		var d = {
 					access_token: $("#access_token").val()
 				};
@@ -248,7 +290,7 @@ if (isset($_REQUEST["id"]))
 <tr style='visibility:collapse'><td><?php t("Passwort"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
 <tr style='visibility:collapse'><td><?php t("Passwort wiederholen"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 
-<tr><td><?php t("Car"); ?>:</td><td> <select id="carid"></select></td></tr>
+<tr><td><?php t("Car"); ?>:</td><td> <select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></td></tr>
 <tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
 
 <tr><td>&nbsp;</td></tr>
@@ -292,7 +334,7 @@ else
 			$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
 		
 		
-		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td style='text-align:center;'>$freesuccheckbox</td><td><a href='password.php?id=$id'>EDIT</a></td></tr>\r\n");
+		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td style='text-align:center;'>$freesuccheckbox</td><td><a href='password.php?id=$id&vin=$vin'>EDIT</a></td></tr>\r\n");
 	}
 ?>
 <tr><td colspan="6"><button onclick="location.href='password.php?id=-1'">NEW CAR</button></td><td></td><td></td><td></td></tr>

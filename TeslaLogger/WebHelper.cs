@@ -79,6 +79,7 @@ namespace TeslaLogger
         internal static HttpClient httpClientSuCBingo = null;
         internal HttpClient httpclientTeslaAPI = null;
         internal HttpClient httpclientTeslaChargingSites = null;
+        internal string httpclientTeslaChargingSitesToken = "";
         internal static object httpClientLock = new object();
 
         DateTime lastABRPActive = DateTime.MinValue;
@@ -91,6 +92,9 @@ namespace TeslaLogger
         static int nextAccountId = 1;
 
         object getAllVehiclesLock = new object();
+
+        public int nearbySuCServiceFail = 0;
+        public int nearbySuCServiceOK = 0;
 
         static WebHelper()
         {
@@ -158,7 +162,8 @@ namespace TeslaLogger
                 reply = reply ?? "NULL";
                 Log("Reply: " + reply + "\r\n" + ex.Message);
 
-                car.CreateExceptionlessClient(ex).AddObject(reply, "Reply").Submit();
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    car.CreateExceptionlessClient(ex).AddObject(reply, "Reply").Submit();
             }
         }
 
@@ -1591,6 +1596,14 @@ namespace TeslaLogger
                     httpclientTeslaChargingSites = null;
                 }
 
+                if (Tesla_token != httpclientTeslaChargingSitesToken && httpclientTeslaChargingSites != null)
+                {
+                    car.Log("httpclientTeslaChargingSites using new token!");
+
+                    httpclientTeslaChargingSites.Dispose();
+                    httpclientTeslaChargingSites = null;
+                }
+
                 if (httpclientTeslaChargingSites == null)
                 {
                     httpclientTeslaChargingSites = new HttpClient();
@@ -1600,6 +1613,7 @@ namespace TeslaLogger
                         httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
                         httpclientTeslaChargingSites.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         httpclientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
+                        httpclientTeslaChargingSitesToken = Tesla_token;
                     }
                 }
 
@@ -2029,6 +2043,14 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
+                if (resultContent.Contains("upstream internal error"))
+                {
+                    int sleep = random.Next(10000) + 10000;
+                    Log("isOnline: upstream internal error - Sleep: " + sleep);
+                    Thread.Sleep(sleep);
+                    return "NULL";
+                }
+
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
                 if (result != null && c == null)
                 {
@@ -2283,7 +2305,25 @@ namespace TeslaLogger
 
         public void SubmitExceptionlessClientWithResultContent(Exception ex, string content)
         {
+            if (FilterNetworkoutage(ex))
+                return;                    
+            
             CreateExceptionlessClientWithResultContent(ex, content).Submit();
+        }
+
+        public static bool FilterNetworkoutage(Exception ex)
+        {
+            string temp = ex.ToString();
+            if (temp.Contains("No route to host"))
+                return true;
+            else if (temp.Contains("NameResolutionFailure"))
+                return true;
+            else if (temp.Contains("No such host is known"))
+                return true;
+            else if (temp.Contains("Network is unreachable"))
+                return true;
+
+            return false;
         }
 
         public EventBuilder CreateExceptionlessClientWithResultContent(Exception ex, string content)
@@ -3173,8 +3213,6 @@ namespace TeslaLogger
                 }
                 catch (AggregateException e)
                 {
-                    
-
                     e.Handle(ex =>
                     {
                         if (ex is TaskCanceledException)
@@ -3186,7 +3224,9 @@ namespace TeslaLogger
                         }
                         else
                         {
-                            car.CreateExceptionlessClient(e).AddObject(resultContent, "ResultContent").Submit();
+                            if (!WebHelper.FilterNetworkoutage(ex))
+                                car.CreateExceptionlessClient(e).AddObject(resultContent, "ResultContent").Submit();
+
                             Logfile.Log("Streaming Error: " + ex.Message);
                         }
 
@@ -3218,7 +3258,9 @@ namespace TeslaLogger
                             Logfile.Log("Streaming Error: " + ex.InnerException.Message);
 
                         Logfile.ExceptionWriter(ex, line);
-                        SubmitExceptionlessClientWithResultContent(ex, resultContent);
+
+                        if (!WebHelper.FilterNetworkoutage(ex))
+                            SubmitExceptionlessClientWithResultContent(ex, resultContent);
                     }
 
                     Thread.Sleep(10000);
@@ -4334,7 +4376,7 @@ namespace TeslaLogger
             return false;
         }
 
-        public async Task<string> GetNearbyChargingSites()
+        public async Task<string> GetNearbyChargingSites(double lat, double lng)
         {
             string resultContent = "";
             try
@@ -4348,16 +4390,16 @@ namespace TeslaLogger
   ""variables"": {
                     ""args"": {
                         ""userLocation"": {
-        ""latitude"": " + car.CurrentJSON.GetLatitude().ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + car.CurrentJSON.GetLongitude().ToString(Tools.ciEnUS) + @"
+        ""latitude"": " + lat.ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + lng.ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() + 1.5).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() - 1.5).ToString(Tools.ciEnUS) + @"
+        ""latitude"": 90,
+        ""longitude"": -180
       },
       ""southeastCorner"": {
-        ""latitude"": " + (car.CurrentJSON.GetLatitude() - 1.5).ToString(Tools.ciEnUS) + @",
-        ""longitude"": " + (car.CurrentJSON.GetLongitude() + 1.5).ToString(Tools.ciEnUS) + @"
+        ""latitude"": -90,
+        ""longitude"": 180
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false
@@ -4377,15 +4419,18 @@ namespace TeslaLogger
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString());
+                    car.webhelper.nearbySuCServiceFail++;
+                    throw new Exception("NearbyChargingSiteFail: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.nearbySuCServiceOK + " - Fail: " + car.webhelper.nearbySuCServiceFail+")");
                 }
                 return resultContent;
             }
             catch (Exception ex)
             {
                 // SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
-                ExceptionWriter(ex, resultContent);
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
+
+                car.Log(ex.Message);
                 Thread.Sleep(30000);
             }
 
@@ -4701,12 +4746,16 @@ namespace TeslaLogger
             }
             catch (WebException wex)
             {
-                wex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
+                if (!WebHelper.FilterNetworkoutage(wex))
+                    wex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
+
                 return "Error during online version check: " + wex.Message;
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().AddObject(contents, "ResultContent").Submit();
+
                 Logfile.Log(ex.ToString());
             }
             return "";
