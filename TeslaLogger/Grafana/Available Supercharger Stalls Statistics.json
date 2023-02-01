@@ -76,7 +76,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT ts as time, concat(hour(ts),':00') as metric, $Mode(available_stalls) as value\nFROM superchargerstate join superchargers on superchargers.id = superchargerstate.nameid\nwhere nameid = $Supercharger and $__timeFilter(ts) and DAYOFWEEK(ts) in ($DOW)\ngroup by hour(ts)",
+          "rawSql": "SELECT ts as time, DATE_FORMAT(ts, '%H:00:00.000') as metric, $Mode(available_stalls) as value\nFROM superchargerstate join superchargers on superchargers.id = superchargerstate.nameid\nwhere nameid = $Supercharger and $__timeFilter(ts) and DAYOFWEEK(ts) in ($DOW)\ngroup by hour(ts) \n order by 1",
           "refId": "A",
           "select": [
             [

@@ -1638,6 +1638,10 @@ namespace TeslaLogger
                     return true;
                 }
             }
+            if (IsInService())
+            {
+                return true;
+            }
             return false;
         }
 
