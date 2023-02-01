@@ -1778,7 +1778,7 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    charge_energy_added,
+    case when cost_kwh_meter_invoice is not null then cost_kwh_meter_invoice else charge_energy_added end,
     startdate,
     enddate
 FROM
