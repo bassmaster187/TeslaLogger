@@ -104,6 +104,7 @@ menu("Wallbox Test");
             <option value="go-e">Go e-Charger</option>    
             <option value="openwb">Open WB</option>
             <option value="shelly3em">Shelly 3EM</option>
+            <option value="shellyem">Shelly EM</option>
             <option value="tesla-gen3">Tesla Wallbox Gen 3</option>
             <option value="keba">Keba KeContact P30</option>
         </select>
