@@ -1,0 +1,12 @@
+﻿{
+	"type": "SHEM",
+	"mac": "A4E57CBAC8A3",
+	"auth": false,
+	"fw": "20221027-105518/v1.12.1-ga9117d3",
+	"discoverable": false,
+	"longid": 1,
+	"num_outputs": 1,
+	"num_meters": 0,
+	"num_emeters": 2,
+	"report_period": 1
+}
