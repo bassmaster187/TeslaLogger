@@ -55,10 +55,14 @@ Geladen=Charged
 Ladezeit=Charging Time
 Anz. Ladungen=Count
 Ladehub=Charging Range
+PV=Solar
 
 #SOC Ladestatistik.json
 SOC Ladestatistik=SOC Charging Statistics
 SOC [%]=SOC [%]
+
+#SOC Entladestatistik.json
+SOC Entladestatistik=SOC Discharging Statistics
 
 #Laden.json
 Laden=Charging
@@ -128,6 +132,9 @@ Innentemperatur [°F]=Inside Temperature [°F]
 Laden fertig=Charging Finished
 Schlafen=Sleeping
 Online=Online
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik=Consumption Statistics
 
 #Visited.json
 Visited=Visited
@@ -215,16 +222,20 @@ Datum=Date
 Fahrzeit [h]=Drive Time [h]
 Strecke [km]=Distance [km]
 Strecke [mi]=Distance [mi]
-Verbraucht [kWh]=Consumed kWh
+Verbrauch [kWh]=Consumed kWh
 Ø Verbrauch [kWh]=Ø Consumption kWh
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
+Jahr/Monat=Year/Month
 
 Zellspannungen 01-20 - ScanMyTesla=Cell Voltages 01-20 - ScanMyTesla
 Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
 Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
 Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
 Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
+
+Zellspannungen=Cell Voltages
+Zellspannung=Cell Voltage
 
 Ja=Yes
 Nein=No
