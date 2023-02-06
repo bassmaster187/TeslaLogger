@@ -5695,7 +5695,11 @@ WHERE
                         select max(carid) as a from pos
                     ) as t", con))
                 {
-                    decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
+                    int newid = 1;
+
+                    object oid = SQLTracer.TraceSc(cmd);
+                    if (oid != null)
+                        newid = Convert.ToInt32(oid);
 
                     using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
                     {
