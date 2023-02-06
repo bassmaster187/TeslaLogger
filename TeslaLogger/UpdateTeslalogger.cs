@@ -1630,6 +1630,12 @@ CREATE TABLE superchargers(
                                     "AVG Max Range","AVG Consumption","AVG Trip Days","AVG SOC Diff"
                                 }, dictLanguage, true);
                             }
+                            else if (f.EndsWith("Alle Verbräuche - ScanMyTesla.json", StringComparison.Ordinal))
+                            {
+                                s = ReplaceTitleTag(s, "Alle Verbräuche - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {"Außentemperatur [°C]", "Außentemperatur [°F]",
+                                }, dictLanguage, true);
+                            }
                             else if (f.EndsWith("Degradation.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Degradation", dictLanguage);
@@ -1716,38 +1722,91 @@ CREATE TABLE superchargers(
                             else if (f.EndsWith("Ladestatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Ladestatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl", "SOC Ladestatistik", "SOC Entladestatistik", "Geladen", "Ladezeit", "Anz. Ladungen", "AC", "DC", "PV", "Ladehub"
+                                }, dictLanguage, true);
+
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl", "SOC Entladestatistik"
+                                }, dictLanguage, false);
                             }
                             else if (f.EndsWith("SOC Ladestatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl", "SOC Ladestatistik"
+                                }, dictLanguage, true);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl"
+                                }, dictLanguage, false);
+
+                            }
+                            else if (f.EndsWith("SOC Entladestatistik.json", StringComparison.Ordinal))
+                            {
+                                s = ReplaceTitleTag(s, "SOC Entladestatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl", "SOC Entladestatistik"
+                                }, dictLanguage, true);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Anzahl"
+                                }, dictLanguage, false);
                             }
                             else if (f.EndsWith("Zellspannungen 01-20 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 01-20 - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Zellspannungen"
+                                }, dictLanguage, true);
+
+                                for (int x=1; x < 99; x++)
+                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
                             }
                             else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 21-40 - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Zellspannungen"
+                                }, dictLanguage, true);
+
+                                for (int x = 1; x < 99; x++)
+                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
                             }
                             else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 41-60 - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Zellspannungen"
+                                }, dictLanguage, true);
+
+                                for (int x = 1; x < 99; x++)
+                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
                             }
                             else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 61-80 - ScanMyTesla", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Zellspannungen"
+                                }, dictLanguage, true);
+
+                                for (int x = 1; x < 99; x++)
+                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
                             }
                             else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Zellspannungen 81-99 - ScanMyTesla", dictLanguage);
-                            }
-                            else if (f.EndsWith("SOC Ladestatistik.json", StringComparison.Ordinal))
-                            {
-                                s = ReplaceTitleTag(s, "SOC Ladestatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Zellspannungen"
+                                }, dictLanguage, true);
+
+                                for (int x = 1; x < 99; x++)
+                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
                             }
                             else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
                             {
                                 s = ReplaceTitleTag(s, "Trip Monatsstatistik", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Jahr/Monat", "Fahrzeit [h]", "Strecke [km]", "Strecke [mi]", "Verbrauch [kWh]", "Ø Verbrauch [kWh]"
+                                }, dictLanguage, true);
                             }
                             else if (f.EndsWith("Alle Verbräuche -ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -2150,8 +2209,7 @@ CREATE TABLE superchargers(
 
             if (quoted)
             {
-                content = content.Replace("'" + v + "'", "'" + dictLanguage[v] + "'");
-                return content.Replace("\"" + v + "\"", "\"" + dictLanguage[v] + "\"");
+                return ReplaceLanguageTag(ref content, v, dictLanguage[v]);
             }
             else
             {
@@ -2159,6 +2217,11 @@ CREATE TABLE superchargers(
             }
         }
 
+        private static string ReplaceLanguageTag(ref string content, string oldtext, string newtext)
+        {
+            content = content.Replace("'" + oldtext + "'", "'" + newtext + "'");
+            return content.Replace("\"" + oldtext + "\"", "\"" + newtext + "\"");
+        }
 
         public static void Chmod(string filename, int chmod, bool logging = true)
         {
