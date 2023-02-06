@@ -4,6 +4,7 @@ $TemperatureUnit = "";
 $LengthUnit = "";
 $PowerUnit = "";
 $LengthFactor = 1;
+$URL_Grafana = "";
 
 $Display100pctEnable = "false";
 
@@ -19,7 +20,7 @@ if (file_exists("/etc/teslalogger/settings.json"))
 
 	$PowerUnit = $json_data["Power"];
 	$Display100pctEnable = $json_data["Display100pctEnable"];
-
+	$URL_Grafana = $json_data["URL_Grafana"];
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";

@@ -23,6 +23,8 @@ require_once("tools.php");
         echo("var carid=".$_REQUEST["carid"].";\n");
     else
         echo("var carid=-1;\n");
+
+    echo("var url_grafana='".$URL_Grafana."';\n");
 	?>
 
     $(document).ready(function(){
@@ -36,8 +38,32 @@ require_once("tools.php");
             "order": [[1, "asc"]],
             "pageLength": 15,
             "columns": [
-                { "data": "Id"},
-                { "data": "name"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        var start = new Date(row["StartDate"]);
+                        var ustart = start.getTime();
+
+                        var end = new Date(row["EndDate"]);
+                        var uend = end.getTime();
+
+                        return "<a href='"+url_grafana+"d/JhRusymgk/timeline-plugin?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"&var-Charger=ON'>"+ row["Id"] +"</a>";
+                    }
+                    
+                    return row["Id"];
+                }},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        var start = new Date(row["StartDate"]);
+                        var ustart = start.getTime();
+
+                        var end = new Date(row["EndDate"]);
+                        var uend = end.getTime();
+
+                        return "<a href='"+url_grafana+"d/RG_DxSmgk/visited?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"&var-Charger=ON'>"+ row["name"] +"</a>";
+                    }
+                    
+                    return row["name"];
+                }},
                 { "data": "Start_address"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
@@ -76,7 +102,19 @@ require_once("tools.php");
                     return "";
                 }},
                 { "data": "consumption_kwh"},
-                { "data": "charged_kwh"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        var start = new Date(row["StartDate"]);
+                        var ustart = start.getTime();
+
+                        var end = new Date(row["EndDate"]);
+                        var uend = end.getTime();
+
+                        return "<a href='"+url_grafana+"d/TSmNYvRRk/ladehistorie?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"'>"+ row["charged_kwh"] +"</a>";
+                    }
+                    
+                    return row["charged_kwh"];
+                }},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         var MINUTES = row["drive_duration_minutes"];
@@ -102,10 +140,20 @@ require_once("tools.php");
                     return "";
                 }},
                 { "render": function(data, type, row, meta){
-                    if(type === 'display' || type === 'sort'){
-                        var distance = row["distance"] / <?= $LengthFactor ?>;
-                        return parseFloat(distance).toFixed(1);;
+                    var distance = row["distance"] / <?= $LengthFactor ?>;
+                    var text = parseFloat(distance).toFixed(1);
+
+                    if(type === 'display'){
+                        var start = new Date(row["StartDate"]);
+                        var ustart = start.getTime();
+
+                        var end = new Date(row["EndDate"]);
+                        var uend = end.getTime();
+
+                        return "<a href='"+url_grafana+"d/Y8upc6ZRk/trip?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"'>"+ text +"</a>";
                     }
+                    else if (type === 'sort')
+                        return text;
 
                     return "";
                 }},
