@@ -45,6 +45,7 @@ TeslaLogger/bin/weather.ini
 TeslaLogger/copytodocker.cmd
 TeslaLogger/copytonas.cmd
 TeslaLogger/bin/backup/*
+TeslaLogger/bin/EngergyChartData/*
 TeslaLogger/bin/dashboardlinks.txt
 TeslaLogger/bin/MAP-Data/*
 TeslaLogger/bin/jsontest/*
