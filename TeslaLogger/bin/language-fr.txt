@@ -1,8 +1,8 @@
 #Général
 Delete=Supprimer
-Save=Speichern
+Save=Sauvegarder
 Settings=Réglages
-Setup=Ameublement
+Setup=Installation
 Enabled=Activé
 
 #Akku Trips.json
@@ -26,8 +26,8 @@ Tage=Jours
 Degradation=Dégradation
 Maximalreichweite [km]=Portée Max [km]
 Maximalreichweite [mi]=Portée Max [mi]
-km Stand [km]=Odiomètre [km]
-mi Stand [mi]=Odiomètre [mi]
+km Stand [km]=Odomètre [km]
+mi Stand [mi]=Odomètre [mi]
 Odometer [mi]=
 Max. Reichweite (Monatsmittel) [km]=Portée Max (mensuelle) [km]
 Max. Reichweite (Monatsmittel) [mi]=Portée Max (mensuelle) [mi]
@@ -37,7 +37,7 @@ Ladehistorie=Historique des Recharges
 Startdatum=Date de Début
 Enddatum=Date de Fin
 geladen kWh=Chargé kWh
-km Stand=Odiomètre
+km Stand=Odomètre
 Adresse=Adresse
 TR km Start=TR Début km
 TR km Ende=TR Fin km
@@ -109,9 +109,9 @@ min kW=min kW
 Ø km/h=Ø kph
 
 #Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden= Time Laps
+Zeitspanne Stunden=Durée heure
 TR mi Verlust pro Stunde=TR mi perdu par heure
-mi Stand=Odiomètre
+mi Stand=Odomètre
 
 #Vampir Drain.json
 Vampir Drain=Consommations "Vampires"
@@ -142,7 +142,7 @@ Visited=Lieux
 Car Info=Information sur la Voiture
 Status=Status
 Typical Range=Portée Typique
-Odometer=Odiomètre
+Odometer=Odomètre
 Car Version=Version logiciel
 Last Trip=Dernier trajet
 Duration=Durée
@@ -196,7 +196,7 @@ Enable=Autoriser
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 URL Grafana=URL Grafana
-Teslalogger HTTP Port=Teslalogger HTTP Port
+Teslalogger HTTP Port=Port HTTP Teslalogger
 Zoom level=Niveau de Zoom
 ScanMyTesla integration=Intégrer ScanMyTesla
 Main Car=Voiture principale
