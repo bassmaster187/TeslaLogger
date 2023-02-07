@@ -133,6 +133,8 @@ require_once("tools.php");
 
                     return "";
                 }},
+                { "data": "cost_total"},
+                { "data": "CO2kg"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         
@@ -287,6 +289,8 @@ menu("Journeys");
         <th><?php t("Fahrzeit [h]"); ?></th>
         <th><?php t("Ladezeit [h]"); ?></th>
         <th><?php if ($LengthUnit == "mile") t("Strecke [mi]"); else t("Strecke [km]"); ?></th>
+        <th><?php t("Ladekosten"); ?></th>
+        <th>CO2 [kg]</th>
         <th></th>
     </tr>
 </thead>
