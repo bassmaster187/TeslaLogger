@@ -40,26 +40,14 @@ require_once("tools.php");
             "columns": [
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        var start = new Date(row["StartDate"]);
-                        var ustart = start.getTime();
-
-                        var end = new Date(row["EndDate"]);
-                        var uend = end.getTime();
-
-                        return "<a href='"+url_grafana+"d/JhRusymgk/timeline-plugin?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"&var-Charger=ON'>"+ row["Id"] +"</a>";
+                        return GetGrafanaLink(row, "JhRusymgk", row["Id"], "");
                     }
                     
                     return row["Id"];
                 }},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        var start = new Date(row["StartDate"]);
-                        var ustart = start.getTime();
-
-                        var end = new Date(row["EndDate"]);
-                        var uend = end.getTime();
-
-                        return "<a href='"+url_grafana+"d/RG_DxSmgk/visited?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"&var-Charger=ON'>"+ row["name"] +"</a>";
+                        return GetGrafanaLink(row, "RG_DxSmgk", row["name"], "&var-Charger=ON");
                     }
                     
                     return row["name"];
@@ -104,13 +92,7 @@ require_once("tools.php");
                 { "data": "consumption_kwh"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        var start = new Date(row["StartDate"]);
-                        var ustart = start.getTime();
-
-                        var end = new Date(row["EndDate"]);
-                        var uend = end.getTime();
-
-                        return "<a href='"+url_grafana+"d/TSmNYvRRk/ladehistorie?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"'>"+ row["charged_kwh"] +"</a>";
+                        return GetGrafanaLink(row, "TSmNYvRRk", row["charged_kwh"], "");
                     }
                     
                     return row["charged_kwh"];
@@ -144,13 +126,7 @@ require_once("tools.php");
                     var text = parseFloat(distance).toFixed(1);
 
                     if(type === 'display'){
-                        var start = new Date(row["StartDate"]);
-                        var ustart = start.getTime();
-
-                        var end = new Date(row["EndDate"]);
-                        var uend = end.getTime();
-
-                        return "<a href='"+url_grafana+"d/Y8upc6ZRk/trip?orgId=1&from="+ ustart +"&to="+ uend +"&var-Car="+carid+"'>"+ text +"</a>";
+                        return GetGrafanaLink(row, "Y8upc6ZRk", text, "");
                     }
                     else if (type === 'sort')
                         return text;
@@ -256,6 +232,25 @@ require_once("tools.php");
         var h = (MINUTES-m)/60;
         var HHMM = h.toString() + ":" + (m<10?"0":"") + m.toString();
         return HHMM;
+    }
+
+    function GetGrafanaLink(row, uid, text, parameters)
+    {
+        var start = new Date(row["StartDate"]);
+        var ustart = start.getTime();
+
+        var end = new Date(row["EndDate"]);
+        var uend = end.getTime();
+        var temp = "<a href='";
+        temp += url_grafana;
+        temp += "d/";
+        temp += uid;
+        temp += "/dashboard?orgId=1&from=";
+        temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "'>";
+        temp += text;
+        temp += "</a>";
+
+        return temp;
     }
     
 
