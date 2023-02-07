@@ -843,6 +843,66 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void ShellyEM_CEmpty()
+        {
+            var v = new ElectricityMeterShellyEM("", "");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(56.256099999999996, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
+        public void ShellyEM_C1()
+        {
+            var v = new ElectricityMeterShellyEM("", "C1");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(56.256099999999996, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
+        public void ShellyEM_C2()
+        {
+            var v = new ElectricityMeterShellyEM("", "C2");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(1.231, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
         public void TeslaGen3WCMeterNotCharging()
         {
             var v = new ElectricityMeterTeslaGen3WallConnector("", "");

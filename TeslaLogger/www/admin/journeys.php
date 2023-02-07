@@ -23,6 +23,8 @@ require_once("tools.php");
         echo("var carid=".$_REQUEST["carid"].";\n");
     else
         echo("var carid=-1;\n");
+
+    echo("var url_grafana='".$URL_Grafana."';\n");
 	?>
 
     $(document).ready(function(){
@@ -36,8 +38,20 @@ require_once("tools.php");
             "order": [[1, "asc"]],
             "pageLength": 15,
             "columns": [
-                { "data": "Id"},
-                { "data": "name"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "JhRusymgk", row["Id"], "");
+                    }
+                    
+                    return row["Id"];
+                }},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "RG_DxSmgk", row["name"], "&var-Charger=ON");
+                    }
+                    
+                    return row["name"];
+                }},
                 { "data": "Start_address"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
@@ -76,7 +90,13 @@ require_once("tools.php");
                     return "";
                 }},
                 { "data": "consumption_kwh"},
-                { "data": "charged_kwh"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "TSmNYvRRk", row["charged_kwh"], "");
+                    }
+                    
+                    return row["charged_kwh"];
+                }},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         var MINUTES = row["drive_duration_minutes"];
@@ -102,13 +122,19 @@ require_once("tools.php");
                     return "";
                 }},
                 { "render": function(data, type, row, meta){
-                    if(type === 'display' || type === 'sort'){
-                        var distance = row["distance"] / <?= $LengthFactor ?>;
-                        return parseFloat(distance).toFixed(1);;
+                    var distance = row["distance"] / <?= $LengthFactor ?>;
+                    var text = parseFloat(distance).toFixed(1);
+
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "Y8upc6ZRk", text, "");
                     }
+                    else if (type === 'sort')
+                        return text;
 
                     return "";
                 }},
+                { "data": "cost_total"},
+                { "data": "CO2kg"},
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         
@@ -209,6 +235,25 @@ require_once("tools.php");
         var HHMM = h.toString() + ":" + (m<10?"0":"") + m.toString();
         return HHMM;
     }
+
+    function GetGrafanaLink(row, uid, text, parameters)
+    {
+        var start = new Date(row["StartDate"]);
+        var ustart = start.getTime();
+
+        var end = new Date(row["EndDate"]);
+        var uend = end.getTime();
+        var temp = "<a href='";
+        temp += url_grafana;
+        temp += "d/";
+        temp += uid;
+        temp += "/dashboard?orgId=1&from=";
+        temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "'>";
+        temp += text;
+        temp += "</a>";
+
+        return temp;
+    }
     
 
 </script>
@@ -244,6 +289,8 @@ menu("Journeys");
         <th><?php t("Fahrzeit [h]"); ?></th>
         <th><?php t("Ladezeit [h]"); ?></th>
         <th><?php if ($LengthUnit == "mile") t("Strecke [mi]"); else t("Strecke [km]"); ?></th>
+        <th><?php t("Ladekosten"); ?></th>
+        <th>CO2 [kg]</th>
         <th></th>
     </tr>
 </thead>
