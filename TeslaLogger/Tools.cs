@@ -1638,6 +1638,7 @@ WHERE
                     {
                         try
                         {
+                            cmd.CommandTimeout = 60000;
                             SQLTracer.TraceNQ(cmd);
                         }
                         catch (Exception ex)

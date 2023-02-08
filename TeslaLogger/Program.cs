@@ -535,6 +535,8 @@ namespace TeslaLogger
 
                     DBHelper.UpdateCO2();
 
+                    Journeys.UpdateAllJourneys();
+
                     Car.LogActiveCars();
 
                     WebHelper.SearchFornewCars();

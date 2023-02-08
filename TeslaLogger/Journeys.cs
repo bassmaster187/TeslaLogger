@@ -301,13 +301,7 @@ LIMIT 1", con))
                             cmd.Parameters.AddWithValue("@name", name);
                             Tools.DebugLog(cmd);
                             int journeyId = (int)SQLTracer.TraceSc(cmd);
-                            _ = Task.Factory.StartNew(() =>
-                            {
-                                CalculateConsumption(journeyId);
-                                CalculateDriveDuration(journeyId);
-                                CalculateCharged(journeyId);
-                                CalculateChargeDuration(journeyId);
-                            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                            UpdateJourney(journeyId);
                         }
                     }
                 }
@@ -318,6 +312,17 @@ LIMIT 1", con))
                 }
             }
             WriteString(response, "OK");
+        }
+
+        private static void UpdateJourney(int journeyId)
+        {
+            _ = Task.Factory.StartNew(() =>
+            {
+                CalculateConsumption(journeyId);
+                CalculateDriveDuration(journeyId);
+                CalculateCharged(journeyId);
+                CalculateChargeDuration(journeyId);
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
@@ -718,6 +723,35 @@ WHERE
         internal static bool CanHandleRequest(HttpListenerRequest request)
         {
             return EndPoints.ContainsValue(request.Url.LocalPath);
+        }
+
+        internal static void UpdateAllJourneys()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    journeys", con))
+                    {
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int journeyID))
+                        {
+                            UpdateJourney(journeyID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
         }
     }
 }
