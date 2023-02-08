@@ -7,8 +7,8 @@ namespace TeslaLogger
     internal static class KVS
     {
 
-        internal const int SUCCESS = 0;
-        internal const int FAILURE = 1;
+        internal const int SUCCESS = 1;
+        internal const int FAILURE = 0;
 
         internal static void CheckSchema()
         {
@@ -41,6 +41,114 @@ INSERT INTO kvs SET
 ON DUPLICATE KEY UPDATE
     id = @key,
     ivalue = @value", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@value", value);
+                    int rowsAffected = SQLTracer.TraceNQ(cmd);
+                    if (rowsAffected == 1 // INSERT
+                        || rowsAffected == 2 // DELETE and INSERT
+                       )
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            return FAILURE;
+        }
+
+        internal static int InsertOrUpdate(string key, double value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO kvs SET
+    id = @key,
+    dvalue = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    dvalue = @value", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@value", value);
+                    int rowsAffected = SQLTracer.TraceNQ(cmd);
+                    if (rowsAffected == 1 // INSERT
+                        || rowsAffected == 2 // DELETE and INSERT
+                       )
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            return FAILURE;
+        }
+
+        internal static int InsertOrUpdate(string key, bool value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO kvs SET
+    id = @key,
+    bvalue = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    bvalue = @value", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@value", value);
+                    int rowsAffected = SQLTracer.TraceNQ(cmd);
+                    if (rowsAffected == 1 // INSERT
+                        || rowsAffected == 2 // DELETE and INSERT
+                       )
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            return FAILURE;
+        }
+
+        internal static int InsertOrUpdate(string key, DateTime value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO kvs SET
+    id = @key,
+    ts = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    ts = @value", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@value", value);
+                    int rowsAffected = SQLTracer.TraceNQ(cmd);
+                    if (rowsAffected == 1 // INSERT
+                        || rowsAffected == 2 // DELETE and INSERT
+                       )
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            return FAILURE;
+        }
+
+        internal static int InsertOrUpdate(string key, string value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO kvs SET
+    id = @key,
+    JSON = @value
+ON DUPLICATE KEY UPDATE
+    id = @key,
+    JSON = @value", con))
                 {
                     cmd.Parameters.AddWithValue("@id", key);
                     cmd.Parameters.AddWithValue("@value", value);
