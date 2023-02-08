@@ -301,13 +301,7 @@ LIMIT 1", con))
                             cmd.Parameters.AddWithValue("@name", name);
                             Tools.DebugLog(cmd);
                             int journeyId = (int)SQLTracer.TraceSc(cmd);
-                            _ = Task.Factory.StartNew(() =>
-                            {
-                                CalculateConsumption(journeyId);
-                                CalculateDriveDuration(journeyId);
-                                CalculateCharged(journeyId);
-                                CalculateChargeDuration(journeyId);
-                            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                            UpdateJourney(journeyId);
                         }
                     }
                 }
@@ -318,6 +312,17 @@ LIMIT 1", con))
                 }
             }
             WriteString(response, "OK");
+        }
+
+        private static void UpdateJourney(int journeyId)
+        {
+            _ = Task.Factory.StartNew(() =>
+            {
+                CalculateConsumption(journeyId);
+                CalculateDriveDuration(journeyId);
+                CalculateCharged(journeyId);
+                CalculateChargeDuration(journeyId);
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
@@ -563,17 +568,19 @@ SELECT
     Round(journeys.charged_kwh,1) as charged_kwh,
     journeys.drive_duration_minutes, 
     journeys.charge_duration_minutes,
-    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance
+    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance, 
+    (
+	select round(sum(charge_energy_added * co2_g_kWh) / 1000,1) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
+    ) as CO2kg,
+    (
+	select round(sum(cost_total),2) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
+    ) as cost_total
+    
 FROM
-    journeys,
-    cars,
-    trip tripStart,
-    trip tripEnd
-WHERE
-    journeys.CarID = cars.Id
-    AND journeys.StartPosID = tripStart.StartPosID
-    AND journeys.EndPosID = tripEnd.EndPosID
-    AND cars.Id = {carid}
+    journeys join cars on journeys.CarID = cars.Id
+    join trip tripStart on journeys.StartPosID = tripStart.StartPosID
+    join trip tripEnd on journeys.EndPosID = tripEnd.EndPosID
+WHERE cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
             
@@ -716,6 +723,35 @@ WHERE
         internal static bool CanHandleRequest(HttpListenerRequest request)
         {
             return EndPoints.ContainsValue(request.Url.LocalPath);
+        }
+
+        internal static void UpdateAllJourneys()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    journeys", con))
+                    {
+                        Tools.DebugLog(cmd);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int journeyID))
+                        {
+                            UpdateJourney(journeyID);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
         }
     }
 }
