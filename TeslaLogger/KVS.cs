@@ -299,6 +299,28 @@ WHERE
             value = "{}";
             return FAILURE;
         }
+
+        internal static int Remove(string key)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+DELETE FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    int rowsAffected = SQLTracer.TraceNQ(cmd);
+                    if (rowsAffected == 1) // DELETE
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            return FAILURE;
+        }
     }
 }
 
