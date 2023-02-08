@@ -563,17 +563,19 @@ SELECT
     Round(journeys.charged_kwh,1) as charged_kwh,
     journeys.drive_duration_minutes, 
     journeys.charge_duration_minutes,
-    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance
+    Round(tripEnd.EndKm - tripStart.StartKm,1) as distance, 
+    (
+	select round(sum(charge_energy_added * co2_g_kWh) / 1000,1) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
+    ) as CO2kg,
+    (
+	select round(sum(cost_total),2) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
+    ) as cost_total
+    
 FROM
-    journeys,
-    cars,
-    trip tripStart,
-    trip tripEnd
-WHERE
-    journeys.CarID = cars.Id
-    AND journeys.StartPosID = tripStart.StartPosID
-    AND journeys.EndPosID = tripEnd.EndPosID
-    AND cars.Id = {carid}
+    journeys join cars on journeys.CarID = cars.Id
+    join trip tripStart on journeys.StartPosID = tripStart.StartPosID
+    join trip tripEnd on journeys.EndPosID = tripEnd.EndPosID
+WHERE cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
             

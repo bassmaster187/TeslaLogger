@@ -4342,6 +4342,9 @@ namespace TeslaLogger
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                 }
             }
+            catch (TaskCanceledException) {
+                Log("Timeout: " + cmd);
+            }
             catch (Exception ex)
             {
                 SubmitExceptionlessClientWithResultContent(ex, resultContent);
