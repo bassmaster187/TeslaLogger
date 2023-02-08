@@ -163,6 +163,142 @@ ON DUPLICATE KEY UPDATE
             }
             return FAILURE;
         }
+
+        // defaults to false, check return code for SUCCESS
+        internal static int Get(string key, out bool value) 
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    bvalue
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value && Boolean.TryParse(dr[0].ToString(), out value))
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            value = false;
+            return FAILURE;
+        }
+
+        // defaults to DateTime.MinValue, check return code for SUCCESS
+        internal static int Get(string key, out DateTime value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    ts
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value && DateTime.TryParse(dr[0].ToString(), out value))
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            value = DateTime.MinValue;
+            return FAILURE;
+        }
+
+        // defaults to double.NaN, check return code for SUCCESS
+        internal static int Get(string key, out double value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    dvalue
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value && Double.TryParse(dr[0].ToString(), out value))
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            value = double.NaN;
+            return FAILURE;
+        }
+
+        // defaults to int.MinValue, check return code for SUCCESS
+        internal static int Get(string key, out int value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    ivalue
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out value))
+                    {
+                        return SUCCESS;
+                    }
+                }
+            }
+            value = int.MinValue;
+            return FAILURE;
+        }
+
+        // defaults to {} (empty JSON), check return code for SUCCESS
+        internal static int Get(string key, out string value)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    JSON
+FROM
+    kvs
+WHERE
+    id = @key", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", key);
+                    Tools.DebugLog(cmd);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read() && dr[0] != DBNull.Value)
+                    {
+                        value = dr[0].ToString();
+                        return SUCCESS;
+                    }
+                }
+            }
+            value = "{}";
+            return FAILURE;
+        }
     }
 }
 
