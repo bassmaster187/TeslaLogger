@@ -451,6 +451,7 @@ namespace TeslaLogger
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
+                DBHelper.UpdateCO2();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
             })
             {
@@ -533,7 +534,7 @@ namespace TeslaLogger
                     StaticMapService.CreateAllChargingMaps();
                     StaticMapService.CreateAllParkingMaps();
 
-                    DBHelper.UpdateCO2();
+                    // DBHelper.UpdateCO2();
 
                     Journeys.UpdateAllJourneys();
 

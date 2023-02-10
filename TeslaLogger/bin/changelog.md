@@ -1,3 +1,11 @@
+# Version 1.54.12
+- CO2 and cost column in journeys.
+- Links to Grafana dashboards in journeys
+- Support for Shelly EM [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md)
+- Support more countries for CO2 calculations
+- Dashboard Charging Statistics contains CO2
+
+
 # Version 1.54.11
 - Calculation of CO2 for each charging. [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/co2.md)
 - Dashboard Charging History with CO2 
