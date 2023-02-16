@@ -4397,12 +4397,12 @@ namespace TeslaLogger
         ""longitude"": " + lng.ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": 90,
-        ""longitude"": -180
+        ""latitude"": " + (lat + 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (lng - 2).ToString(Tools.ciEnUS) + @"
       },
       ""southeastCorner"": {
-        ""latitude"": -90,
-        ""longitude"": 180
+        ""latitude"": " + (lat - 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (lng + 2).ToString(Tools.ciEnUS) + @"
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false

@@ -71,11 +71,13 @@ namespace TeslaLogger
                     {
                         bool logSent = true;
                         
+                        
                         double lat = car.CurrentJSON.GetLatitude();
                         double lng = car.CurrentJSON.GetLongitude();
+                        
                         /*
-                        for (double lat = 20; lat < 55; lat += 5)
-                            for(double lng = -124; lng < -61; lng += 5)
+                        for (double lat = 20; lat < 55; lat += 4)
+                            for(double lng = -124; lng < -61; lng += 4)
                         */
                         {
                             result = car.webhelper.GetNearbyChargingSites(lat, lng).Result;
