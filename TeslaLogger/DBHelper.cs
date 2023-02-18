@@ -40,9 +40,19 @@ namespace TeslaLogger
             {
                 return _DBConnectionstring;
             }
-            string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
-? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
-: ApplicationSettings.Default.DBConnectionstring;
+            string DBConnectionstring = "";
+            if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+            {
+                if (Tools.IsDocker())
+                    DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                else
+                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+            }
+            else 
+            {
+                DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
+            }
+
             if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("charset="))
             {
                 Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "charset(=.+?);");
