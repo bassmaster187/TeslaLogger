@@ -1,5 +1,5 @@
-# Version 1.54.13
-- Bugfixes
+# Version 1.54.14
+- Simplify docker install
 
 # Version 1.54.12
 - CO2 and cost column in journeys.
