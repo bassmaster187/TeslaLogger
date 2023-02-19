@@ -335,15 +335,24 @@ namespace TeslaLogger
         private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
         {
             string url = request.QueryString["url"];
+            if (url == null )
+            {
+                string data = GetDataFromRequestInputStream(request);
+                dynamic r = JsonConvert.DeserializeObject(data);
+                url = r["url"];
+            }
+
             var tokens = teslaAuth.GetTokenAfterLoginAsync(url).Result;
 
             var json = JsonConvert.SerializeObject(tokens);
 
-            WriteString(response, url);
+            WriteString(response, json);
         }
 
         private void TeslaAuthURL(HttpListenerResponse response)
         {
+            Logfile.Log("TeslaAuth::GetLoginUrlForBrowser");
+
             teslaAuth = new TeslaAuth();
             var url = teslaAuth.GetLoginUrlForBrowser();
             WriteString(response, url);
