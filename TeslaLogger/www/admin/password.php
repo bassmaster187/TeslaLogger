@@ -212,6 +212,34 @@ require_once("tools.php");
 			}
 		});
 	}
+
+	function BrowserAuth()
+	{
+		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthurl", data: "url"}, function(data){
+			$("#authlink").attr("href", data);
+		});
+		
+		$("#access_token").val("");
+		$("#refresh_token").val("");
+		$("#authresulturl").val("");
+
+		$("#browserauth").show();
+	}
+
+	function GetTokensFromURL()
+	{
+		var d = {
+			url : $("#authresulturl").val()
+		};
+		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthtoken", data: JSON.stringify(d)}, function(data){
+			const obj = JSON.parse(data);
+
+			$("#access_token").val(obj.AccessToken);
+			$("#refresh_token").val(obj.RefreshToken);
+			CheckAccessToken();
+		});
+	}
+
 </script>
 </head>
 <style>
@@ -278,8 +306,35 @@ if (isset($_REQUEST["id"]))
 <ul>
 <li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
 <li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
+<li>In local <a href="javascript:BrowserAuth();">browser</a></li>
 </ul>
+
+<div style="display: none" id="browserauth">
+<hr>
+<h1>Please read all the steps before continuing:</h1>
+<ul>
+<li>Click on the link below titled Tesla Logon which will open a new tab/window for the Tesla Authentication logon page</li>
+<li>Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)</li>
+<li>This will appear to result in a "Page Not Found". This is normal.<li>
+<li>Copy the resulting URL of that webpage into the form below. Within the URL is a one time, temporary code that we can use to generate tokens. We will extract this for you from the link.<li>
+<li>These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce the link straight away on subsequent occassions.</li>
+<li>If you want to use a different account name or logon details, you may need to clear the cookies for your browser.</li>
+<li>We will then get the tokens for the cars on your Tesla account.</li>
+</ul>
+<h2>Step 1:</h2>
+	Fill out this form: <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
+<h2>Step 2:</h2>
+	Copy the resulting url as shown<br>
+	<img src="img/auth_screenshot.png">
+<h2>Step 3:</h2>
+Paste the resulting url into the box below:
+<input id="authresulturl"></input>
+<br>
+<button onclick="GetTokensFromURL();">Get Tokens</button>
+<br><br>
+<hr>
 </div>
+
 <table>
 <tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
 <tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
