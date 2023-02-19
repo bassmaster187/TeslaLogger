@@ -182,6 +182,42 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 460, DateTime.Now.AddMinutes(1));
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "74d";
+            wh.car.Vin = "5YJ3E7EB7KFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR", wh.car.ModelName);
+            Assert.AreEqual(0.152, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_DegradedBattery()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 430, DateTime.Now.AddMinutes(1));
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "74d";
+            wh.car.Vin = "5YJ3E7EB7KFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR", wh.car.ModelName);
+            Assert.AreEqual(0.152, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_LR_P()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);

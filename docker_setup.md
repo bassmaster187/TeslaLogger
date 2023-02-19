@@ -19,30 +19,7 @@ docker-compose version 1.24.1, build 4667896b
 git clone https://github.com/bassmaster187/TeslaLogger
 ```
 
-2. Create a fresh config file:
-```
-cp TeslaLogger/TeslaLogger/App.config TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config
-```
-
-3. edit TeslaLogger/TeslaLogger/bin/TeslaLogger.exe.config with your favorite editor
-
-4. Leave TeslaName and TeslaPass alone!
-
-5. enter the DBConnectionstring:
-```
-Server=database;Database=teslalogger;Uid=root;Password=teslalogger;
-```
-
-The config file could look like this:
-```xml
-....
-            <setting name="DBConnectionstring" serializeAs="String">
-                <value>Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8;</value>
-            </setting>
-....
-```
-
-6. fire up docker containers. Make sure, you got the latest docker & docker-compose version. Many repositories comes with very old versions!
+2. fire up docker containers. Make sure, you got the latest docker & docker-compose version. Many repositories comes with very old versions!
 ```
 cd TeslaLogger
 docker-compose build

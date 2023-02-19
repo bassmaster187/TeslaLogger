@@ -422,6 +422,7 @@ WHERE
                 {
                     con.Open();
                     double charged_kwh = 0;
+                    bool update = false;
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     SUM(chargingstate.charge_energy_added)
@@ -435,20 +436,23 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         Tools.DebugLog(cmd);
-                        charged_kwh = (double)SQLTracer.TraceSc(cmd);
+                        update = double.TryParse(SQLTracer.TraceSc(cmd).ToString(), out charged_kwh);
                     }
-                    using (MySqlCommand cmd = new MySqlCommand(@"
+                    if (update)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 UPDATE
     journeys
 SET
     charged_kwh = @charged_kwh
 WHERE
     Id = @journeyID", con))
-                    {
-                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
-                        Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        {
+                            cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                            cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
+                            Tools.DebugLog(cmd);
+                            SQLTracer.TraceNQ(cmd);
+                        }
                     }
                 }
             }

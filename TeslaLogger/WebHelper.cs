@@ -1661,13 +1661,13 @@ namespace TeslaLogger
                     System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " : " + OnlineState);
 
                     string display_name = r2["display_name"].ToString();
-                    car.DisplayName = display_name;
-
                     if (car.DisplayName != display_name)
                     {
+                        car.DisplayName = display_name;
                         Log("WriteCarSettings -> Display_Name");
                         car.WriteSettings();
                     }
+                    
 
                     Log("display_name: " + display_name);
 
@@ -2352,6 +2352,11 @@ namespace TeslaLogger
                 if (car.TrimBadging == "p74d" && year >= 2021)
                 {
                     WriteCarSettings("0.158", "M3 LR P 2021");
+                    return;
+                }
+                if (car.TrimBadging == "74d" && AWD && year < 2021)
+                {
+                    WriteCarSettings("0.152", "M3 LR");
                     return;
                 }
 
@@ -4397,12 +4402,12 @@ namespace TeslaLogger
         ""longitude"": " + lng.ToString(Tools.ciEnUS) + @"
                         },
       ""northwestCorner"": {
-        ""latitude"": 90,
-        ""longitude"": -180
+        ""latitude"": " + (lat + 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (lng - 2).ToString(Tools.ciEnUS) + @"
       },
       ""southeastCorner"": {
-        ""latitude"": -90,
-        ""longitude"": 180
+        ""latitude"": " + (lat - 2).ToString(Tools.ciEnUS) + @",
+        ""longitude"": " + (lng + 2).ToString(Tools.ciEnUS) + @"
       },
       ""openToNonTeslasFilter"": {
                             ""value"": false
