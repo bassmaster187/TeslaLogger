@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
+using Ubiety.Dns.Core;
+using System.Security.Policy;
 
 namespace TeslaLogger
 {
@@ -24,6 +26,7 @@ namespace TeslaLogger
     public class WebServer
     {
         private HttpListener listener = null;
+        static TeslaAuth teslaAuth = null;
 
         private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
@@ -309,6 +312,12 @@ namespace TeslaLogger
                     case bool _ when Journeys.CanHandleRequest(request):
                         Journeys.HandleRequest(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/teslaauthurl", System.StringComparison.Ordinal):
+                        TeslaAuthURL(response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/teslaauthtoken", System.StringComparison.Ordinal):
+                        TeslaAuthGetToken(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -321,6 +330,23 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            string url = request.QueryString["url"];
+            var tokens = teslaAuth.GetTokenAfterLoginAsync(url).Result;
+
+            var json = JsonConvert.SerializeObject(tokens);
+
+            WriteString(response, url);
+        }
+
+        private void TeslaAuthURL(HttpListenerResponse response)
+        {
+            teslaAuth = new TeslaAuth();
+            var url = teslaAuth.GetLoginUrlForBrowser();
+            WriteString(response, url);
         }
 
         private void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
