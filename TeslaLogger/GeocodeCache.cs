@@ -40,7 +40,7 @@ CREATE TABLE geocodecache(
 
         private static void MigrateSchema0to1()
         {
-            Logfile.Log("GeocodeCache: migrating schema from version 0 to version 1");
+            Logfile.Log("GeocodeCache: migrating schema from version 0 to version 1 ...");
             DataTable dt = new DataTable("cache");
             DataColumn dtlat = dt.Columns.Add("lat", typeof(double));
             DataColumn dtlng = dt.Columns.Add("lng", typeof(double));
@@ -72,6 +72,7 @@ CREATE TABLE geocodecache(
                 Logfile.Log(ex.ToString());
             }
             dt.Dispose();
+            Logfile.Log("GeocodeCache: migrating schema from version 0 to version 1 ... done");
         }
 
         internal static string Search(double lat, double lng)
