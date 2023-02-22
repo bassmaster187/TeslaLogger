@@ -18,6 +18,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using Ubiety.Dns.Core;
 using System.Security.Policy;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -334,19 +335,37 @@ namespace TeslaLogger
 
         private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string url = request.QueryString["url"];
-            if (url == null )
+            try
             {
-                string data = GetDataFromRequestInputStream(request);
-                dynamic r = JsonConvert.DeserializeObject(data);
-                url = r["url"];
+                string url = request.QueryString["url"];
+                if (url == null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    dynamic r = JsonConvert.DeserializeObject(data);
+                    url = r["url"];
+                }
+
+                var tokens = teslaAuth.GetTokenAfterLoginAsync(url).Result;
+
+                var json = JsonConvert.SerializeObject(tokens);
+
+                WriteString(response, json);
             }
+            catch (Exception ex)
+            {
+                Exception e = ex;
+                if (e.InnerException != null)
+                    e = ex.InnerException;
 
-            var tokens = teslaAuth.GetTokenAfterLoginAsync(url).Result;
+                var error = new
+                {
+                    error = e.Message
+                };
 
-            var json = JsonConvert.SerializeObject(tokens);
+                var json = JsonConvert.SerializeObject(error);
 
-            WriteString(response, json);
+                WriteString(response, json);
+            }
         }
 
         private void TeslaAuthURL(HttpListenerResponse response)
