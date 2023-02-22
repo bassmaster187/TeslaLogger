@@ -24,7 +24,16 @@ CREATE TABLE kvs(
     JSON LONGTEXT NULL,
     UNIQUE ix_key(id)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE kvs");
+                DBHelper.ExecuteSQLQuery(@"
+CREATE TABLE kvs(
+    id VARCHAR(64) NOT NULL,
+    ivalue INT NULL,
+    dvalue DOUBLE NULL,
+    bvalue BOOLEAN NULL,
+    ts DATE NULL,
+    JSON LONGTEXT NULL,
+    UNIQUE ix_key(id)
+) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
                 Logfile.Log("CREATE TABLE OK");
             }
         }
