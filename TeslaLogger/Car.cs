@@ -1721,12 +1721,17 @@ id = @carid", con))
                 }
                 if (teslaAPIState.GetInt("ft", out int ft) && ft > 0)
                 {
-                    reason = $"Fron Trunk {ft}";
+                    reason = $"Front Trunk {ft}";
                     return false;
                 }
                 if (teslaAPIState.GetInt("rt", out int rt) && rt > 0)
                 {
                     reason = $"Rear Trunk {rt}";
+                    return false;
+                }
+                if (teslaAPIState.GetBool("in_service", out bool in_service) && in_service == true)
+                {
+                    reason = "IsInService";
                     return false;
                 }
             }

@@ -163,6 +163,7 @@
     <Compile Include="MapQuestMapProvider.cs" />
     <Compile Include="SQLTracer.cs" />
     <Compile Include="Journeys.cs" />
+    <Compile Include="KVS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -110,6 +110,8 @@ namespace TeslaLogger
 
                 Journeys.CheckSchema();
 
+                KVS.CheckSchema();
+
                 CheckDBSchema_mothership();
 
                 CheckDBSchema_mothershipcommands();
