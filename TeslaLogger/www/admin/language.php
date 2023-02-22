@@ -1,4 +1,6 @@
 <?php 
+
+require_once("tools.php");
 $language = "en";
 $TemperatureUnit = "";
 $LengthUnit = "";
@@ -20,7 +22,16 @@ if (file_exists("/etc/teslalogger/settings.json"))
 
 	$PowerUnit = $json_data["Power"];
 	$Display100pctEnable = $json_data["Display100pctEnable"];
-	$URL_Grafana = $json_data["URL_Grafana"];
+
+	if (empty($json_data["URL_Grafana"]))
+	{
+		if (isDocker())
+			$URL_Grafana = "http://localhost:3000/";
+		else
+			$URL_Grafana = "http://raspberry:3000/";
+	}
+	else
+		$URL_Grafana = $json_data["URL_Grafana"];
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";
