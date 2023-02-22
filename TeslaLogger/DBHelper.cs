@@ -3592,8 +3592,6 @@ WHERE
                                                 exl.Submit();
                                             }
                                             SQLTracer.TraceNQ(cmd2);
-
-                                            GeocodeCache.Instance.Write();
                                         }
                                     }
                                 }

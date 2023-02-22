@@ -3420,8 +3420,8 @@ namespace TeslaLogger
                         return a.name;
                     }
 
-                    string value = GeocodeCache.Instance.Search(latitude, longitude);
-                    if (value != null)
+                    string value = GeocodeCache.Search(latitude, longitude);
+                    if (!string.IsNullOrEmpty(value))
                     {
                         Logfile.Log("Reverse geocoding by GeocodeCache");
                         return value;
@@ -3592,7 +3592,7 @@ namespace TeslaLogger
 
                     if (insertGeocodecache)
                     {
-                        GeocodeCache.Instance.Insert(latitude, longitude, adresse);
+                        GeocodeCache.Insert(latitude, longitude, adresse);
                     }
 
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
@@ -3811,8 +3811,6 @@ namespace TeslaLogger
                 }
             }
 
-            GeocodeCache.Instance.Write();
-
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -3846,8 +3844,6 @@ namespace TeslaLogger
                     }
                 }
             }
-
-            GeocodeCache.Instance.Write();
         }
 
         public static void UpdateAllPOIAddresses()

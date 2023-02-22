@@ -92,6 +92,8 @@ namespace TeslaLogger
                 DBHelper.EnableUTF8mb4();
                 CheckDBCharset();
 
+                KVS.CheckSchema();
+
                 CheckDBSchema_can();
 
                 CheckDBSchema_candata();
@@ -110,7 +112,7 @@ namespace TeslaLogger
 
                 Journeys.CheckSchema();
 
-                KVS.CheckSchema();
+                GeocodeCache.CheckSchema();
 
                 CheckDBSchema_mothership();
 
