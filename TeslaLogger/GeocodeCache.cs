@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Runtime.Caching;
-using System.Runtime.ConstrainedExecution;
 using Exceptionless;
-using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
