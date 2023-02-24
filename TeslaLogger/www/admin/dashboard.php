@@ -77,12 +77,12 @@ else
 
 			if (jsonData["charging"])
 			{
-				$('#car_statusLabel').text("<?php t("Wird geladen"); ?>:");
+				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
 				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ jsonData["charger_phases"]+"P");
 			}
 			else if (jsonData["driving"])
 			{
-				$('#car_statusLabel').text("<?php t("Fahren"); ?>:");
+				$('#car_statusLabel').text("<?php t("Driving"); ?>:");
 				$('#car_status').text(jsonData["speed"] + " km/h / " + jsonData["power"]+"PS");
 			}
 			else if (jsonData["online"])
@@ -104,12 +104,12 @@ else
 			else if (jsonData["sleeping"])
 			{
 				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Schlafen"); ?>");
+				$('#car_status').text("<?php t("Sleeping"); ?>");
 			}
 			else if (jsonData["falling_asleep"])
 			{
 				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Einschlafen"); ?>");
+				$('#car_status').text("<?php t("Falling asleep"); ?>");
 			}
 			else
 			{
