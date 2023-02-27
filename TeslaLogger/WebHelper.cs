@@ -3080,8 +3080,9 @@ namespace TeslaLogger
                     // * car is fallig asleep to interrupt the "let the car fall asleep" cycle
                     // or
                     // * StreamingPos is true in settings.json and the car is driving
+                    // * car is in service
                     // otherwise skip
-                    if (!car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
+                    if (!car.IsInService() && !car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
                     {
                         Thread.Sleep(100);
                         continue;
@@ -3310,7 +3311,19 @@ namespace TeslaLogger
             string est_range = v[11];
             string heading = v[12];
 
-            DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
+            DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0]));
+
+            if (int.TryParse(v[3], out int sAPI_battery_level))
+            {
+                if (sAPI_battery_level != car.CurrentJSON.current_battery_level)
+                {
+                    if (double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlatitude)
+                && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude))
+                    {
+                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level);
+                    }
+                }
+            }
 
             if (lastStreamingAPIShiftState != shift_state || (DateTime.UtcNow - lastStreamingAPILog).TotalSeconds > 30)
             {
