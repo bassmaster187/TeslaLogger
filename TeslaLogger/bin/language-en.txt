@@ -1,5 +1,5 @@
 #Akku Trips.json
-Akku Trips=Akku Trips
+Akku Trips=Battery Usage (Driving)
 Start Trip=Start Trip
 End Trip=End Trip
 Time=Date
@@ -19,11 +19,11 @@ Tage=Days
 Degradation=Degradation
 Maximalreichweite [km]=Max Range [km]
 Maximalreichweite [mi]=Max Range [mi]
-km Stand [km]=Odometer [km]
+km Stand [km]=Distance [km]
 mi Stand [mi]=Mileage [mi]
 Odometer [mi]=Odometer [mi]
-Max. Reichweite (Monatsmittel) [km]=Max Rage (monthly avg) [km]
-Max. Reichweite (Monatsmittel) [mi]=Max Rage (monthly avg) [mi]
+Max. Reichweite (Monatsmittel) [km]=Max Range (monthly avg) [km]
+Max. Reichweite (Monatsmittel) [mi]=Max Range (monthly avg) [mi]
 
 #Ladehistorie.json
 Ladehistorie=Charging History
@@ -94,10 +94,10 @@ mi=mi
 km=km
 Ø °C=Avg. °C
 Ø °F=Avg. °F
-max mph=Max mph
+max mph=max mph
 max km/h=max kph
-max PS=Max HP
-min PS=Min HP
+max PS=max HP
+min PS=min HP
 max kW=max kW
 min kW=min kW
 Ø PS=Avg. HP
@@ -182,9 +182,11 @@ Bitte Tesla Account Zugangsdaten eingeben=Please enter your Tesla account creden
 Email=Email
 Passwort=Password
 Passwort wiederholen=Repeate Password
+Löschen=Erase
 Speichern=Save
 
 #settings.php
+Bitte Fahrzeug auswählen=Please, select a car
 Credentials=Credentials
 Language=Language
 Power=Power
