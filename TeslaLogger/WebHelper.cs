@@ -3080,13 +3080,22 @@ namespace TeslaLogger
                     // * car is fallig asleep to interrupt the "let the car fall asleep" cycle
                     // or
                     // * StreamingPos is true in settings.json and the car is driving
+                    // or
                     // * car is in service
                     // otherwise skip
                     if (!car.IsInService() && !car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
                     {
                         Thread.Sleep(100);
                         continue;
-                    }   
+                    }
+
+                    // skip if car is asleep, streaming API will just timeout all the time
+
+                    if (car.GetCurrentState() == Car.TeslaState.Sleep)
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
 
                     // string online = IsOnline().Result;
 
