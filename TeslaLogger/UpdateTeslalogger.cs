@@ -1763,8 +1763,11 @@ CREATE TABLE superchargers(
                                     "Zellspannungen"
                                 }, dictLanguage, true);
 
-                                for (int x=1; x < 99; x++)
-                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                if (dictLanguage.ContainsKey("Zellspannung"))
+                                {
+                                    for (int x = 1; x < 99; x++)
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                }
                             }
                             else if (f.EndsWith("Zellspannungen 21-40 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -1773,8 +1776,11 @@ CREATE TABLE superchargers(
                                     "Zellspannungen"
                                 }, dictLanguage, true);
 
-                                for (int x = 1; x < 99; x++)
-                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                if (dictLanguage.ContainsKey("Zellspannung"))
+                                {
+                                    for (int x = 1; x < 99; x++)
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                }
                             }
                             else if (f.EndsWith("Zellspannungen 41-60 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -1783,8 +1789,11 @@ CREATE TABLE superchargers(
                                     "Zellspannungen"
                                 }, dictLanguage, true);
 
-                                for (int x = 1; x < 99; x++)
-                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                if (dictLanguage.ContainsKey("Zellspannung"))
+                                {
+                                    for (int x = 1; x < 99; x++)
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                }
                             }
                             else if (f.EndsWith("Zellspannungen 61-80 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -1793,8 +1802,11 @@ CREATE TABLE superchargers(
                                     "Zellspannungen"
                                 }, dictLanguage, true);
 
-                                for (int x = 1; x < 99; x++)
-                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                if (dictLanguage.ContainsKey("Zellspannung"))
+                                {
+                                    for (int x = 1; x < 99; x++)
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                }
                             }
                             else if (f.EndsWith("Zellspannungen 81-99 - ScanMyTesla.json", StringComparison.Ordinal))
                             {
@@ -1803,8 +1815,11 @@ CREATE TABLE superchargers(
                                     "Zellspannungen"
                                 }, dictLanguage, true);
 
-                                for (int x = 1; x < 99; x++)
-                                    s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                if (dictLanguage.ContainsKey("Zellspannung"))
+                                {
+                                    for (int x = 1; x < 99; x++)
+                                        s = ReplaceLanguageTag(ref s, $"Zellspannung {x} [v]", dictLanguage["Zellspannung"] + " " + x + " [v]");
+                                }
                             }
                             else if (f.EndsWith("Trip Monatsstatistik.json", StringComparison.Ordinal))
                             {
@@ -2098,7 +2113,7 @@ CREATE TABLE superchargers(
         {
             try
             {
-                Regex regexAlias = new Regex("\\\"value\\\":.*?\\\"(.+)\\\"");
+                Regex regexAlias = new Regex("\\\"displayName\\\",\\s*\\\"value\\\":.*?\\\"(.+)\\\"");
 
                 MatchCollection matches = regexAlias.Matches(content);
 
@@ -2142,7 +2157,7 @@ CREATE TABLE superchargers(
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile! (Alias)");
                 return content;
             }
 
@@ -2156,7 +2171,7 @@ CREATE TABLE superchargers(
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile! (value)");
                 return content;
             }
 
@@ -2170,7 +2185,7 @@ CREATE TABLE superchargers(
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile! (name)");
                 return content;
             }
 
@@ -2184,7 +2199,7 @@ CREATE TABLE superchargers(
         {
             if (!dictLanguage.ContainsKey(v))
             {
-                Logfile.Log("Key '" + v + "' not Found in Translationfile!");
+                Logfile.Log("Key '" + v + "' not Found in Translationfile! (title)");
                 return content;
             }
 
