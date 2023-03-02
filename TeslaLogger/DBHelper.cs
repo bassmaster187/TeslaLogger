@@ -25,9 +25,9 @@ namespace TeslaLogger
     public class DBHelper
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
-        private static bool mothershipEnabled = false;
+        private static bool mothershipEnabled; // defaults to false
         private Car car;
-        bool CleanPasswortDone = false;
+        bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
 
