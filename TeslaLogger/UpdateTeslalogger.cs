@@ -24,6 +24,7 @@ namespace TeslaLogger
         private static Timer timer;
 
         private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
+        private static Object lastTeslaLoggerVersionCheckObj = new object();
         internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
         private static bool _done = false;
@@ -2261,75 +2262,78 @@ CREATE TABLE superchargers(
 
         public static void CheckForNewVersion()
         {
-            try
+            lock (lastTeslaLoggerVersionCheckObj)
             {
-                for (int x = 0; x < Car.Allcars.Count; x++)
+                try
                 {
-                    Car c = Car.Allcars[x];
-                    if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
-                        return;
-                }
-
-                TimeSpan ts = DateTime.UtcNow - lastTeslaLoggerVersionCheck;
-                if (ts.TotalMinutes > 240)
-                {
-                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
-
-                    string online_version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (string.IsNullOrEmpty(online_version))
+                    for (int x = 0; x < Car.Allcars.Count; x++)
                     {
-                        // recheck in 10 Minutes
-                        Logfile.Log("Empty Version String - recheck in 10 minutes");
-                        lastTeslaLoggerVersionCheck = lastTeslaLoggerVersionCheck.AddMinutes(10);
-                        return;
+                        Car c = Car.Allcars[x];
+                        if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
+                            return;
                     }
 
-                    lastTeslaLoggerVersionCheck = DateTime.UtcNow;
-
-                    Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
-
-                    if (UpdateNeeded(currentVersion, online_version, updateType))
+                    TimeSpan ts = DateTime.UtcNow - lastTeslaLoggerVersionCheck;
+                    if (ts.TotalMinutes > 240)
                     {
-                        // if update doesn't work, it will retry tomorrow
-                        lastTeslaLoggerVersionCheck = DateTime.UtcNow.AddDays(1);
+                        lastTeslaLoggerVersionCheck = DateTime.UtcNow;
 
-                        Logfile.Log("---------------------------------------------");
-                        Logfile.Log(" *** New Version Detected *** ");
-                        Logfile.Log("Current Version: " + currentVersion);
-                        Logfile.Log("Online Version: " + online_version);
-                        Logfile.Log("Start update!");
+                        string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                        Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
 
-                        string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
-
-                        if (File.Exists(cmd_updated))
+                        string online_version = WebHelper.GetOnlineTeslaloggerVersion();
+                        if (string.IsNullOrEmpty(online_version))
                         {
-                            File.Delete(cmd_updated);
+                            // recheck in 10 Minutes
+                            Logfile.Log("Empty Version String - recheck in 10 minutes");
+                            lastTeslaLoggerVersionCheck = lastTeslaLoggerVersionCheck.AddMinutes(10);
+                            return;
                         }
 
-                        if (Tools.IsDocker())
+                        Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
+
+                        if (UpdateNeeded(currentVersion, online_version, updateType))
                         {
-                            Logfile.Log("  Docker detected!");
-                            File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
+                            // if update doesn't work, it will retry tomorrow
+                            lastTeslaLoggerVersionCheck = DateTime.UtcNow.AddDays(1);
+
+                            Logfile.Log("---------------------------------------------");
+                            Logfile.Log(" *** New Version Detected *** ");
+                            Logfile.Log("Current Version: " + currentVersion);
+                            Logfile.Log("Online Version: " + online_version);
+                            Logfile.Log("Start update!");
+
+                            string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
+
+                            if (File.Exists(cmd_updated))
+                            {
+                                File.Delete(cmd_updated);
+                            }
+
+                            if (Tools.IsDocker())
+                            {
+                                Logfile.Log("  Docker detected!");
+                                File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
+                            }
+                            else
+                            {
+                                Logfile.Log("Rebooting");
+                                Tools.ExecMono("reboot", "");
+                            }
                         }
                         else
                         {
-                            Logfile.Log("Rebooting");
-                            Tools.ExecMono("reboot", "");
+                            Logfile.Log($"TeslaLogger is up to date (current version: {currentVersion}, latest version online: {online_version}, update policy: {updateType})");
                         }
-                    }
-                    else
-                    {
-                        Logfile.Log($"TeslaLogger is up to date (current version: {currentVersion}, latest version online: {online_version}, update policy: {updateType})");
-                    }
 
-                    return;
+                        return;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
             }
         }
 
