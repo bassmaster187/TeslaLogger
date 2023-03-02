@@ -23,8 +23,8 @@ namespace TeslaLogger
         private static bool shareDataOnStartup = false;
         private static Timer timer;
 
-        private static DateTime lastVersionCheck = DateTime.UtcNow;
-        internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }
+        private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
+        internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
         private static bool _done = false;
 
@@ -2270,7 +2270,7 @@ CREATE TABLE superchargers(
                         return;
                 }
 
-                TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
+                TimeSpan ts = DateTime.UtcNow - lastTeslaLoggerVersionCheck;
                 if (ts.TotalMinutes > 240)
                 {
                     string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -2281,18 +2281,18 @@ CREATE TABLE superchargers(
                     {
                         // recheck in 10 Minutes
                         Logfile.Log("Empty Version String - recheck in 10 minutes");
-                        lastVersionCheck = lastVersionCheck.AddMinutes(10);
+                        lastTeslaLoggerVersionCheck = lastTeslaLoggerVersionCheck.AddMinutes(10);
                         return;
                     }
 
-                    lastVersionCheck = DateTime.UtcNow;
+                    lastTeslaLoggerVersionCheck = DateTime.UtcNow;
 
                     Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
 
                     if (UpdateNeeded(currentVersion, online_version, updateType))
                     {
                         // if update doesn't work, it will retry tomorrow
-                        lastVersionCheck = DateTime.UtcNow.AddDays(1);
+                        lastTeslaLoggerVersionCheck = DateTime.UtcNow.AddDays(1);
 
                         Logfile.Log("---------------------------------------------");
                         Logfile.Log(" *** New Version Detected *** ");
