@@ -629,119 +629,128 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_chargingstate()
         {
-            if (!DBHelper.ColumnExists("chargingstate", "conn_charge_cable"))
+            if (KVS.Get("ChargingStateSchemaVersion", out int chargingStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)", 300);
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_brand"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "conn_charge_cable"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_type"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_brand"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_present"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_type"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "max_charger_power"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_present"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "cost_total"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column cost_total");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                if (!DBHelper.ColumnExists("chargingstate", "max_charger_power"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("chargingstate", "cost_total"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_total");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                         ADD COLUMN `cost_total` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_currency` VARCHAR(3) NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_kwh` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_session` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_minute` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_idle_fee_total` DOUBLE NULL DEFAULT NULL", 600);
-            }
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "cost_kwh_meter_invoice"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column cost_kwh_meter_invoice");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                if (!DBHelper.ColumnExists("chargingstate", "cost_kwh_meter_invoice"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_kwh_meter_invoice");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                         ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
-            }
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "hidden"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "hidden"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_sum"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD meter_vehicle_kwh_sum DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_sum"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD meter_vehicle_kwh_sum DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
 
-                DBHelper.ExecuteSQLQuery("update chargingstate set meter_vehicle_kwh_sum = meter_vehicle_kwh_end - meter_vehicle_kwh_start where meter_vehicle_kwh_sum is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null", 300);
-                DBHelper.ExecuteSQLQuery("update chargingstate set cost_kwh_meter_invoice = meter_vehicle_kwh_end - meter_vehicle_kwh_start where cost_kwh_meter_invoice is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null and charge_energy_added < (meter_vehicle_kwh_end - meter_vehicle_kwh_start)", 300);
+                    DBHelper.ExecuteSQLQuery("update chargingstate set meter_vehicle_kwh_sum = meter_vehicle_kwh_end - meter_vehicle_kwh_start where meter_vehicle_kwh_sum is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null", 300);
+                    DBHelper.ExecuteSQLQuery("update chargingstate set cost_kwh_meter_invoice = meter_vehicle_kwh_end - meter_vehicle_kwh_start where cost_kwh_meter_invoice is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null and charge_energy_added < (meter_vehicle_kwh_end - meter_vehicle_kwh_start)", 300);
 
-                DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
-            }
+                    DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
+                }
 
-            InsertCarID_Column("chargingstate");
+                InsertCarID_Column("chargingstate");
 
-            if (!DBHelper.ColumnExists("chargingstate", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "co2_g_kWh"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column co2_g_kWh");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `co2_g_kWh` int NULL DEFAULT NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "co2_g_kWh"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column co2_g_kWh");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `co2_g_kWh` int NULL DEFAULT NULL", 600);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "country")) 
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column country");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `country` varchar(80) NULL DEFAULT NULL", 600);
+                if (!DBHelper.ColumnExists("chargingstate", "country"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column country");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `country` varchar(80) NULL DEFAULT NULL", 600);
+                }
+
+                KVS.InsertOrUpdate("ChargingStateSchemaVersion", (int)1);
             }
         }
 
