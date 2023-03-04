@@ -555,75 +555,84 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_drivestate()
         {
-            if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
+            if (KVS.Get("DriveStateSchemaVersion", out int driveStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
-                _ = Task.Factory.StartNew(() =>
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
                 {
-                    DBHelper.UpdateAllDrivestateData();
-                    Logfile.Log("CheckDBSchema_drivestate (Task) finished.");
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-            }
+                    Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        DBHelper.UpdateAllDrivestateData();
+                        Logfile.Log("CheckDBSchema_drivestate (Task) finished.");
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }
 
-            if (!DBHelper.ColumnExists("drivestate", "meters_up"))
-            {
-                string sql = "ALTER TABLE drivestate ADD meters_up DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "meters_down"))
-            {
-                string sql = "ALTER TABLE drivestate ADD meters_down DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_up_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_up_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_down_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_down_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_flat_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_flat_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "height_max"))
-            {
-                string sql = "ALTER TABLE drivestate ADD height_max DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "height_min"))
-            {
-                string sql = "ALTER TABLE drivestate ADD height_min DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("drivestate", "meters_up"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_up DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "meters_down"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_down DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_up_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_up_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_down_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_down_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_flat_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_flat_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_max"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_max DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_min"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_min DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            InsertCarID_Column("drivestate");
+                InsertCarID_Column("drivestate");
 
-            if (!DBHelper.ColumnExists("drivestate", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                if (!DBHelper.ColumnExists("drivestate", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                KVS.InsertOrUpdate("DriveStateSchemaVersion", (int)1);
             }
         }
 
