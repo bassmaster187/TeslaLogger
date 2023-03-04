@@ -1252,37 +1252,45 @@ CREATE TABLE superchargers(
 
         public static void CheckDBCharset()
         {
-            try
+            if (KVS.Get("DBCharsetSchemaVersion", out int DBCharsetStateSchemaVersion) == KVS.SUCCESS)
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            { 
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read())
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                         {
-                            string charset = dr[0].ToString();
-
-                            if (charset != "utf8mb4")
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read())
                             {
-                                dr.Close();
+                                string charset = dr[0].ToString();
 
-                                Logfile.Log("Change database charset to utf8mb4");
-                                AssertAlterDB();
-                                using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                if (charset != "utf8mb4")
                                 {
-                                    SQLTracer.TraceNQ(cmd2);
+                                    dr.Close();
+
+                                    Logfile.Log("Change database charset to utf8mb4");
+                                    AssertAlterDB();
+                                    using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                    {
+                                        SQLTracer.TraceNQ(cmd2);
+                                    }
                                 }
                             }
                         }
                     }
+                    KVS.InsertOrUpdate("DBCharsetStateSchemaVersion", (int)1);
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
             }
         }
 
