@@ -365,16 +365,27 @@ namespace TeslaLogger
                 var json = JsonConvert.SerializeObject(error);
 
                 WriteString(response, json);
+
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
             }
         }
 
         private void TeslaAuthURL(HttpListenerResponse response)
         {
-            Logfile.Log("TeslaAuth::GetLoginUrlForBrowser");
+            try
+            {
+                Logfile.Log("TeslaAuth::GetLoginUrlForBrowser");
 
-            teslaAuth = new TeslaAuth();
-            var url = teslaAuth.GetLoginUrlForBrowser();
-            WriteString(response, url);
+                teslaAuth = new TeslaAuth();
+                var url = teslaAuth.GetLoginUrlForBrowser();
+                WriteString(response, url);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
+            }
         }
 
         private void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
@@ -1581,6 +1592,8 @@ namespace TeslaLogger
                             {
                                 decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
 
+                                newid = 1;
+
                                 using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
@@ -1636,7 +1649,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }
