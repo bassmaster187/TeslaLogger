@@ -765,28 +765,36 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_charging()
         {
-            if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
+            if (KVS.Get("ChargingSchemaVersion", out int chargingStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("charging", "battery_heater"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                }
 
-            if (!DBHelper.ColumnExists("charging", "battery_range_km"))
-            {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("charging", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL", 600);
+                }
 
-            InsertCarID_Column("charging");
+                if (!DBHelper.ColumnExists("charging", "battery_range_km"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
+                }
+
+                InsertCarID_Column("charging");
+                KVS.InsertOrUpdate("ChargingSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_car_version()
