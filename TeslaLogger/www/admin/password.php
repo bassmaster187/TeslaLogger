@@ -212,6 +212,62 @@ require_once("tools.php");
 			}
 		});
 	}
+
+	function BrowserAuth()
+	{
+		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthurl", data: "url"}, function(data){
+			$("#authlink").attr("href", data);
+		});
+		
+		$("#access_token").val("");
+		$("#refresh_token").val("");
+		$("#authresulturl").val("");
+
+		$("#browserauth").show();
+	}
+
+	function GetTokensFromURL()
+	{
+		var url = $("#authresulturl").val();
+
+		if (!url.toLowerCase().startsWith('https://'))
+		{
+			alert("This isn't a valid URL!");
+			return;
+		}
+
+		if (!url.toLowerCase().startsWith('https://auth.tesla.'))
+		{
+			alert("This isn't an auth link by Tesla!");
+			return;
+		}
+
+		if (!url.toLowerCase().includes('code='))
+		{
+			alert("The URL doesn't contain the expected format!");
+			return;
+		}
+
+		var d = {
+			url : url
+		};
+		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthtoken", data: JSON.stringify(d)}, function(data){
+			const obj = JSON.parse(data);
+
+			if (obj.error != null)
+			{
+				alert(obj.error);
+				return;
+			}
+
+			$("#browserauth").hide();
+			$("html,body").scrollTop(0);
+			$("#access_token").val(obj.AccessToken);
+			$("#refresh_token").val(obj.RefreshToken);
+			CheckAccessToken();
+		});
+	}
+
 </script>
 </head>
 <style>
@@ -276,10 +332,48 @@ if (isset($_REQUEST["id"]))
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
 <ul>
+<li><?php 
+	$t1=get_text("BA_Browser"); 
+	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
+	$t1=str_replace("}", '</a>', $t1);
+	echo $t1;
+?></li>
 <li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
 <li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
 </ul>
+
+<div style="display: none" id="browserauth">
+<hr>
+<h1><?php t("BA_Read"); ?></h1>
+<ul>
+<li><?php t("BA_Logon"); ?></li>
+<li><?php t("BA_Auth"); ?></li>
+<li><?php t("BA_NotFound"); ?></li>
+<li><?php t("BA_URL"); ?></li>
+<li><?php t("BA_Invalid"); ?></li>
+<li><?php 
+	$t1=get_text("BA_Logoff"); 
+	$t1=str_replace("{", '<a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank">', $t1);
+	$t1=str_replace("}", '</a>', $t1);
+	echo $t1;
+?></li>
+<li><?php t("BA_GetToken"); ?></li>
+<li><?php t("BA_SelectCar"); ?></li>
+</ul>
+<h2><?php t("BA_Step1"); ?></h2>
+	<?php t("BA_FillOut"); ?> <a href="#" id="authlink" target="_blank">Tesla Logon.</a>
+<h2><?php t("BA_Step2"); ?></h2>
+<?php t("BA_CopyUrl"); ?><br>
+	<img src="img/auth_screenshot.png">
+<h2><?php t("BA_Step3"); ?></h2>
+<?php t("BA_Paste"); ?>
+<input id="authresulturl"></input>
+<br>
+<button onclick="GetTokensFromURL();"><?php t("Get Tokens"); ?></button>
+<br><br>
+<hr>
 </div>
+
 <table>
 <tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
 <tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>

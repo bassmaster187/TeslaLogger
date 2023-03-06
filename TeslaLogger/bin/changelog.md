@@ -1,3 +1,6 @@
+# Version 1.54.15
+- 3rd party apps for Tesla tokens are not longer needed. 
+
 # Version 1.54.14
 - Simplify docker install
 
