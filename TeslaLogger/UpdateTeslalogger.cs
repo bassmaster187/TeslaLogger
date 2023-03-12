@@ -514,11 +514,19 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_mothershipcommands()
         {
-            if (!DBHelper.TableExists("mothershipcommands"))
+            if (KVS.Get("MothershipCommandsSchemaVersion", out int mothershipCommandsSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("mothershipcommands"))
+                {
+                    Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("MothershipCommandsSchemaVersion", (int)1);
             }
         }
 
