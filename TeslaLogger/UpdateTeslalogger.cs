@@ -799,14 +799,22 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_car_version()
         {
-            if (!DBHelper.TableExists("car_version"))
+            if (KVS.Get("CarVersionSchemaVersion", out int carVersionSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                // placeholder for future schema migrations
             }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("car_version"))
+                {
+                    Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                }
 
-            InsertCarID_Column("car_version");
+                InsertCarID_Column("car_version");
+                KVS.InsertOrUpdate("CarVersionSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_cars()
