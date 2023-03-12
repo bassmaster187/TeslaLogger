@@ -338,18 +338,26 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_TPMS()
         {
-            if (!DBHelper.TableExists("TPMS"))
+            if (KVS.Get("TPMSSchemaVersion", out int tPMSSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"CREATE TABLE `TPMS` (
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("TPMS"))
+                {
+                    string sql = @"CREATE TABLE `TPMS` (
                   `CarId` INT NOT NULL,
                   `Datum` DATETIME NOT NULL,
                   `TireId` INT NOT NULL,
                   `Pressure` DOUBLE NOT NULL,
                   PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
 
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("TPMSSchemaVersion", (int)1);
             }
         }
 
