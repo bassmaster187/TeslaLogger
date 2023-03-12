@@ -540,16 +540,24 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_httpcodes()
         {
-            if (!DBHelper.TableExists("httpcodes"))
+            if (KVS.Get("HTTPCodesSchemaVersion", out int hTTPCodesSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
-                _ = Task.Factory.StartNew(() =>
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("httpcodes"))
                 {
-                    DBHelper.UpdateHTTPStatusCodes();
-                    Logfile.Log("CheckDBSchema_httpcodes (Task) finished.");
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    Logfile.Log("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        DBHelper.UpdateHTTPStatusCodes();
+                        Logfile.Log("CheckDBSchema_httpcodes (Task) finished.");
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }
+                KVS.InsertOrUpdate("HTTPCodesSchemaVersion", (int)1);
             }
         }
 
