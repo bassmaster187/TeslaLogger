@@ -384,9 +384,15 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_superchargerstate()
         {
-            if (!DBHelper.TableExists("superchargerstate"))
+            if (KVS.Get("SuperchargerStateSchemaVersion", out int superchargerStateSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("superchargerstate"))
+                {
+                    string sql = @"
 CREATE TABLE superchargerstate(
     id INT NOT NULL AUTO_INCREMENT,
     nameid INT NOT NULL,
@@ -395,9 +401,11 @@ CREATE TABLE superchargerstate(
     total_stalls TINYINT NOT NULL,
     PRIMARY KEY(id)
 )";
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("SuperchargerStateSchemaVersion", (int)1);
             }
         }
 
