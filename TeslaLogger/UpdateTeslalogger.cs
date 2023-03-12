@@ -403,9 +403,15 @@ CREATE TABLE superchargerstate(
 
         private static void CheckDBSchema_superchargers()
         {
-            if (!DBHelper.TableExists("superchargers"))
+            if (KVS.Get("SuperchargerSchemaVersion", out int superchargerSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("superchargers"))
+                {
+                    string sql = @"
 CREATE TABLE superchargers(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(250) NOT NULL,
@@ -413,9 +419,11 @@ CREATE TABLE superchargers(
     lng DOUBLE NOT NULL,
     PRIMARY KEY(id)
 )";
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("SuperchargerSchemaVersion", (int)1);
             }
         }
 
