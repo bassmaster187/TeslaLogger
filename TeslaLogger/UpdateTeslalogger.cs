@@ -524,17 +524,25 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_mothership()
         {
-            if (!DBHelper.TableExists("mothership"))
+            if (KVS.Get("MothershipSchemaVersion", out int mothershipSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
+                // placeholder for future schema migrations
             }
-            if (!DBHelper.ColumnExists("mothership", "httpcode"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                if (!DBHelper.TableExists("mothership"))
+                {
+                    Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("mothership", "httpcode"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                }
+                KVS.InsertOrUpdate("MothershipSchemaVersion", (int)1);
             }
         }
 
