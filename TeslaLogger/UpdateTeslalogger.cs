@@ -436,79 +436,87 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_pos()
         {
-            if (!DBHelper.ColumnExists("pos", "battery_level"))
+            if (KVS.Get("PosSchemaVersion", out int posSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("pos", "inside_temp"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "battery_heater"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "sentry_mode"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "battery_range_km"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL", 600);
-            }
-
-            InsertCarID_Column("pos");
-
-            // check datetime precision in pos
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                }
+
+                if (!DBHelper.ColumnExists("pos", "inside_temp"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "sentry_mode"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "battery_range_km"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL", 600);
+                }
+
+                InsertCarID_Column("pos");
+
+                // check datetime precision in pos
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                         {
-                            if (int.TryParse(dr[0].ToString(), out int datetime_precision))
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read() && dr[0] != DBNull.Value)
                             {
-                                if (datetime_precision != 3)
+                                if (int.TryParse(dr[0].ToString(), out int datetime_precision))
                                 {
-                                    // update table
-                                    Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
-                                    AssertAlterDB();
-                                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    if (datetime_precision != 3)
+                                    {
+                                        // update table
+                                        Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
+                                        AssertAlterDB();
+                                        DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+                KVS.InsertOrUpdate("PosSchemaVersion", (int)1);
             }
         }
 
