@@ -320,7 +320,7 @@ LIMIT 1", con))
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            if(long.TryParse(dr[0].ToString(), out long largestTableMB))
+                            if (long.TryParse(dr[0].ToString(), out long largestTableMB))
                             {
                                 return largestTableMB;
                             }
@@ -938,14 +938,22 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_can()
         {
-            if (!DBHelper.TableExists("can"))
+            if (KVS.Get("CanSchemaVersion", out int canSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                // placeholder for future schema migrations
             }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("can"))
+                {
+                    Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                }
 
-            InsertCarID_Column("can");
+                InsertCarID_Column("can");
+                KVS.InsertOrUpdate("CanSchemaVersion", (int)1);
+            }
         }
 
         public static string UpdateApacheConfig(string path = "/etc/apache2/apache2.conf", bool write = true)
@@ -1019,7 +1027,7 @@ CREATE TABLE superchargers(
                     Tools.ExecMono("apt-get", "-y install git");
                     Tools.ExecMono("git", "--version");
                 }
-                
+
                 if (!File.Exists("/usr/bin/optipng") || !Tools.ExecMono("optipng", "-version", false).Contains("OptiPNG version"))
                 {
                     Logfile.Log("Try to install optipng");
@@ -1035,7 +1043,7 @@ CREATE TABLE superchargers(
                         if (ret == null)
                             ret = "NULL";
 
-                        ExceptionlessClient.Default.CreateLog("Install", "optipng: "+ ret  , Exceptionless.Logging.LogLevel.Warn).Submit();
+                        ExceptionlessClient.Default.CreateLog("Install", "optipng: " + ret, Exceptionless.Logging.LogLevel.Warn).Submit();
                     }
                 }
 
@@ -1084,7 +1092,7 @@ CREATE TABLE superchargers(
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
 
-                        ExceptionlessClient.Default.CreateLog("Install","Update Download successful").Submit();
+                        ExceptionlessClient.Default.CreateLog("Install", "Update Download successful").Submit();
                     }
                 }
                 catch (Exception ex)
@@ -1265,7 +1273,7 @@ CREATE TABLE superchargers(
                 // placeholder for future schema migrations
             }
             else // run initial schema check
-            { 
+            {
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
