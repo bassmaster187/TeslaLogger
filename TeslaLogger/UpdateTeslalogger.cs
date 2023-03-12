@@ -426,12 +426,21 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_state()
         {
-            InsertCarID_Column("state");
+            if (KVS.Get("StateSchemaVersion", out int stateSchemaVersion) == KVS.SUCCESS)
+            {
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                InsertCarID_Column("state");
+                KVS.InsertOrUpdate("StateSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_shiftstate()
         {
-            InsertCarID_Column("shiftstate");
+            // this table is currently unused
+            // InsertCarID_Column("shiftstate");
         }
 
         private static void CheckDBSchema_pos()
