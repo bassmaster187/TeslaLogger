@@ -811,10 +811,16 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_cars()
         {
-            if (!DBHelper.TableExists("cars"))
+            if (KVS.Get("CarsSchemaVersion", out int carsSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("create table cars");
-                DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("cars"))
+                {
+                    Logfile.Log("create table cars");
+                    DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
                           `id` int(11) NOT NULL,
                           `tesla_name` varchar(45) DEFAULT NULL,
                           `tesla_password` varchar(45) DEFAULT NULL,
@@ -836,104 +842,107 @@ CREATE TABLE superchargers(
                           PRIMARY KEY (`id`)
                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", 600);
 
-                try
-                {
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    try
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con))
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
-                            cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
-                            cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
-                            cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            SQLTracer.TraceNQ(cmd);
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con))
+                            {
+                                cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
+                                cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
+                                cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
+                                SQLTracer.TraceNQ(cmd);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
+
+                if (!DBHelper.ColumnExists("cars", "vin"))
                 {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
-            }
-
-            if (!DBHelper.ColumnExists("cars", "vin"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column vin");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
+                    Logfile.Log("ALTER TABLE cars ADD Column vin");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "freesuc"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column freesuc");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `freesuc` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "refresh_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column refresh_token");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "SuCBingo_user"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_user");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_user` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "SuCBingo_apiKey"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_apiKey");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_apiKey` VARCHAR(100) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "meter_type"))
+                {
+                    string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+
+                if (DBHelper.GetColumnType("cars", "tesla_token").Contains("varchar"))
+                {
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+                KVS.InsertOrUpdate("CarsSchemaVersion", (int)1);
             }
 
-            if (!DBHelper.ColumnExists("cars", "freesuc"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column freesuc");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `freesuc` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "refresh_token"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column refresh_token");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "ABRP_token"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "SuCBingo_user"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_user");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_user` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "SuCBingo_apiKey"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_apiKey");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_apiKey` VARCHAR(100) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "meter_type"))
-            {
-                string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-
-            if (DBHelper.GetColumnType("cars", "tesla_token").Contains("varchar"))
-            {
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
         }
 
         private static void CheckDBSchema_can()
