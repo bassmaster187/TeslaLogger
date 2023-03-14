@@ -7,8 +7,9 @@ namespace TeslaLogger
     internal static class KVS
     {
 
-        internal const int SUCCESS = 1;
-        internal const int FAILURE = 0;
+        internal const int SUCCESS = 0;
+        internal const int NOT_FOUND = 1;
+        internal const int FAILED = 2;
 
         internal static void CheckSchema()
         {
@@ -62,7 +63,7 @@ ON DUPLICATE KEY UPDATE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
 
         internal static int InsertOrUpdate(string key, double value)
@@ -89,7 +90,7 @@ ON DUPLICATE KEY UPDATE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
 
         internal static int InsertOrUpdate(string key, bool value)
@@ -116,7 +117,7 @@ ON DUPLICATE KEY UPDATE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
 
         internal static int InsertOrUpdate(string key, DateTime value)
@@ -143,7 +144,7 @@ ON DUPLICATE KEY UPDATE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
 
         internal static int InsertOrUpdate(string key, string value)
@@ -170,7 +171,7 @@ ON DUPLICATE KEY UPDATE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
 
         // defaults to false, check return code for SUCCESS
@@ -197,7 +198,7 @@ WHERE
                 }
             }
             value = false;
-            return FAILURE;
+            return NOT_FOUND;
         }
 
         // defaults to DateTime.MinValue, check return code for SUCCESS
@@ -224,7 +225,7 @@ WHERE
                 }
             }
             value = DateTime.MinValue;
-            return FAILURE;
+            return NOT_FOUND;
         }
 
         // defaults to double.NaN, check return code for SUCCESS
@@ -251,7 +252,7 @@ WHERE
                 }
             }
             value = double.NaN;
-            return FAILURE;
+            return NOT_FOUND;
         }
 
         // defaults to int.MinValue, check return code for SUCCESS
@@ -278,7 +279,7 @@ WHERE
                 }
             }
             value = int.MinValue;
-            return FAILURE;
+            return NOT_FOUND;
         }
 
         // defaults to {} (empty JSON), check return code for SUCCESS
@@ -306,7 +307,7 @@ WHERE
                 }
             }
             value = "{}";
-            return FAILURE;
+            return NOT_FOUND;
         }
 
         internal static int Remove(string key)
@@ -328,7 +329,7 @@ WHERE
                     }
                 }
             }
-            return FAILURE;
+            return FAILED;
         }
     }
 }
