@@ -3080,12 +3080,22 @@ namespace TeslaLogger
                     // * car is fallig asleep to interrupt the "let the car fall asleep" cycle
                     // or
                     // * StreamingPos is true in settings.json and the car is driving
+                    // or
+                    // * car is in service
                     // otherwise skip
-                    if (!car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
+                    if (!car.IsInService() && !car.CurrentJSON.current_falling_asleep && !(Tools.StreamingPos() && car.CurrentJSON.current_driving))
                     {
                         Thread.Sleep(100);
                         continue;
-                    }   
+                    }
+
+                    // skip if car is asleep, streaming API will just timeout all the time
+
+                    if (car.GetCurrentState() == Car.TeslaState.Sleep)
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
 
                     // string online = IsOnline().Result;
 
@@ -3310,7 +3320,19 @@ namespace TeslaLogger
             string est_range = v[11];
             string heading = v[12];
 
-            DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0])); 
+            DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0]));
+
+            if (int.TryParse(v[3], out int sAPI_battery_level))
+            {
+                if (sAPI_battery_level != car.CurrentJSON.current_battery_level)
+                {
+                    if (double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlatitude)
+                && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude))
+                    {
+                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level);
+                    }
+                }
+            }
 
             if (lastStreamingAPIShiftState != shift_state || (DateTime.UtcNow - lastStreamingAPILog).TotalSeconds > 30)
             {
@@ -3420,8 +3442,8 @@ namespace TeslaLogger
                         return a.name;
                     }
 
-                    string value = GeocodeCache.Instance.Search(latitude, longitude);
-                    if (value != null)
+                    string value = GeocodeCache.Search(latitude, longitude);
+                    if (!string.IsNullOrEmpty(value))
                     {
                         Logfile.Log("Reverse geocoding by GeocodeCache");
                         return value;
@@ -3592,7 +3614,7 @@ namespace TeslaLogger
 
                     if (insertGeocodecache)
                     {
-                        GeocodeCache.Instance.Insert(latitude, longitude, adresse);
+                        GeocodeCache.Insert(latitude, longitude, adresse);
                     }
 
                     if (!string.IsNullOrEmpty(ApplicationSettings.Default.MapQuestKey))
@@ -3811,8 +3833,6 @@ namespace TeslaLogger
                 }
             }
 
-            GeocodeCache.Instance.Write();
-
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
                 con.Open();
@@ -3846,8 +3866,6 @@ namespace TeslaLogger
                     }
                 }
             }
-
-            GeocodeCache.Instance.Write();
         }
 
         public static void UpdateAllPOIAddresses()

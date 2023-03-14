@@ -25,9 +25,9 @@ namespace TeslaLogger
     public class DBHelper
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
-        private static bool mothershipEnabled = false;
+        private static bool mothershipEnabled; // defaults to false
         private Car car;
-        bool CleanPasswortDone = false;
+        bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
 
@@ -3592,8 +3592,6 @@ WHERE
                                                 exl.Submit();
                                             }
                                             SQLTracer.TraceNQ(cmd2);
-
-                                            GeocodeCache.Instance.Write();
                                         }
                                     }
                                 }
@@ -4029,6 +4027,60 @@ VALUES(
                         car.CurrentJSON.current_trip_max_speed = Math.Max(car.CurrentJSON.current_trip_max_speed, car.CurrentJSON.current_speed);
                         car.CurrentJSON.current_trip_max_power = Math.Max(car.CurrentJSON.current_trip_max_power, car.CurrentJSON.current_power);
 
+                    }
+                    catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        car.Log(ex.ToString());
+                    }
+                }
+            }
+
+            car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        public void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    pos(
+        CarID,
+        Datum,
+        lat,
+        lng,
+        battery_level
+    )
+VALUES(
+    @CarID,
+    @Datum,
+    @lat,
+    @lng,
+    @battery_level
+)", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
+                    cmd.Parameters.AddWithValue("@lat", latitude);
+                    cmd.Parameters.AddWithValue("@lng", longitude);
+
+                    if (batteryLevel == -1)
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
+                    }
+                    SQLTracer.TraceNQ(cmd);
+
+                    try
+                    {
+                        car.CurrentJSON.current_battery_level = batteryLevel;
+                        car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
                     }
                     catch (Exception ex)
                     {

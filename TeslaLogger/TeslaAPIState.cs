@@ -145,6 +145,7 @@ namespace TeslaLogger
                     if (oldvalue != null && newvalue != null && oldvalue != newvalue)
                     {
                         car.SetLastCarUsed(DateTime.Now);
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
                     break;
                 case "charging_state":

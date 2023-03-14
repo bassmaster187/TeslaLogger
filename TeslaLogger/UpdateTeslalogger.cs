@@ -23,8 +23,9 @@ namespace TeslaLogger
         private static bool shareDataOnStartup = false;
         private static Timer timer;
 
-        private static DateTime lastVersionCheck = DateTime.UtcNow;
-        internal static DateTime GetLastVersionCheck() { return lastVersionCheck; }
+        private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
+        private static Object lastTeslaLoggerVersionCheckObj = new object();
+        internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
         private static bool _done = false;
 
@@ -92,6 +93,8 @@ namespace TeslaLogger
                 DBHelper.EnableUTF8mb4();
                 CheckDBCharset();
 
+                KVS.CheckSchema();
+
                 CheckDBSchema_can();
 
                 CheckDBSchema_candata();
@@ -110,7 +113,7 @@ namespace TeslaLogger
 
                 Journeys.CheckSchema();
 
-                KVS.CheckSchema();
+                GeocodeCache.CheckSchema();
 
                 CheckDBSchema_mothership();
 
@@ -317,7 +320,7 @@ LIMIT 1", con))
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
-                            if(long.TryParse(dr[0].ToString(), out long largestTableMB))
+                            if (long.TryParse(dr[0].ToString(), out long largestTableMB))
                             {
                                 return largestTableMB;
                             }
@@ -335,18 +338,26 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_TPMS()
         {
-            if (!DBHelper.TableExists("TPMS"))
+            if (KVS.Get("TPMSSchemaVersion", out int tPMSSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"CREATE TABLE `TPMS` (
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("TPMS"))
+                {
+                    string sql = @"CREATE TABLE `TPMS` (
                   `CarId` INT NOT NULL,
                   `Datum` DATETIME NOT NULL,
                   `TireId` INT NOT NULL,
                   `Pressure` DOUBLE NOT NULL,
                   PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
 
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("TPMSSchemaVersion", (int)1);
             }
         }
 
@@ -381,9 +392,15 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_superchargerstate()
         {
-            if (!DBHelper.TableExists("superchargerstate"))
+            if (KVS.Get("SuperchargerStateSchemaVersion", out int superchargerStateSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("superchargerstate"))
+                {
+                    string sql = @"
 CREATE TABLE superchargerstate(
     id INT NOT NULL AUTO_INCREMENT,
     nameid INT NOT NULL,
@@ -392,17 +409,25 @@ CREATE TABLE superchargerstate(
     total_stalls TINYINT NOT NULL,
     PRIMARY KEY(id)
 )";
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("SuperchargerStateSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_superchargers()
         {
-            if (!DBHelper.TableExists("superchargers"))
+            if (KVS.Get("SuperchargerSchemaVersion", out int superchargerSchemaVersion) == KVS.SUCCESS)
             {
-                string sql = @"
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("superchargers"))
+                {
+                    string sql = @"
 CREATE TABLE superchargers(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(250) NOT NULL,
@@ -410,9 +435,11 @@ CREATE TABLE superchargers(
     lng DOUBLE NOT NULL,
     PRIMARY KEY(id)
 )";
-                Logfile.Log(sql);
-                DBHelper.ExecuteSQLQuery(sql);
-                Logfile.Log("CREATE TABLE OK");
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("SuperchargerSchemaVersion", (int)1);
             }
         }
 
@@ -423,369 +450,450 @@ CREATE TABLE superchargers(
 
         private static void CheckDBSchema_state()
         {
-            InsertCarID_Column("state");
+            if (KVS.Get("StateSchemaVersion", out int stateSchemaVersion) == KVS.SUCCESS)
+            {
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                InsertCarID_Column("state");
+                KVS.InsertOrUpdate("StateSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_shiftstate()
         {
-            InsertCarID_Column("shiftstate");
+            // this table is currently unused
+            // InsertCarID_Column("shiftstate");
         }
 
         private static void CheckDBSchema_pos()
         {
-            if (!DBHelper.ColumnExists("pos", "battery_level"))
+            if (KVS.Get("PosSchemaVersion", out int posSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("pos", "inside_temp"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "battery_heater"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "sentry_mode"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL", 300);
-            }
-
-            if (!DBHelper.ColumnExists("pos", "battery_range_km"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL", 600);
-            }
-
-            InsertCarID_Column("pos");
-
-            // check datetime precision in pos
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                if (!DBHelper.ColumnExists("pos", "battery_level"))
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
+                }
+
+                if (!DBHelper.ColumnExists("pos", "inside_temp"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN inside_temp DOUBLE NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_heater TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "is_preconditioning"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN is_preconditioning TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "sentry_mode"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN sentry_mode TINYINT(1) NULL", 300);
+                }
+
+                if (!DBHelper.ColumnExists("pos", "battery_range_km"))
+                {
+                    Logfile.Log("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN battery_range_km DOUBLE NULL", 600);
+                }
+
+                InsertCarID_Column("pos");
+
+                // check datetime precision in pos
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT datetime_precision FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pos' AND COLUMN_NAME = 'datum' and TABLE_SCHEMA = 'teslalogger'", con))
                         {
-                            if (int.TryParse(dr[0].ToString(), out int datetime_precision))
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read() && dr[0] != DBNull.Value)
                             {
-                                if (datetime_precision != 3)
+                                if (int.TryParse(dr[0].ToString(), out int datetime_precision))
                                 {
-                                    // update table
-                                    Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
-                                    AssertAlterDB();
-                                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    if (datetime_precision != 3)
+                                    {
+                                        // update table
+                                        Logfile.Log("ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;");
+                                        AssertAlterDB();
+                                        DBHelper.ExecuteSQLQuery(@"ALTER TABLE `pos` CHANGE `Datum` `Datum` DATETIME(3) NOT NULL;", 3000);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+                KVS.InsertOrUpdate("PosSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_mothershipcommands()
         {
-            if (!DBHelper.TableExists("mothershipcommands"))
+            if (KVS.Get("MothershipCommandsSchemaVersion", out int mothershipCommandsSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("mothershipcommands"))
+                {
+                    Logfile.Log("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothershipcommands (id int NOT NULL AUTO_INCREMENT, command varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                KVS.InsertOrUpdate("MothershipCommandsSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_mothership()
         {
-            if (!DBHelper.TableExists("mothership"))
+            if (KVS.Get("MothershipSchemaVersion", out int mothershipSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
+                // placeholder for future schema migrations
             }
-            if (!DBHelper.ColumnExists("mothership", "httpcode"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                if (!DBHelper.TableExists("mothership"))
+                {
+                    Logfile.Log("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE mothership (id int NOT NULL AUTO_INCREMENT, ts datetime NOT NULL, commandid int NOT NULL, duration DOUBLE NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                }
+                if (!DBHelper.ColumnExists("mothership", "httpcode"))
+                {
+                    Logfile.Log("ALTER TABLE mothership ADD COLUMN httpcode int NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE mothership ADD COLUMN httpcode int NULL", 600);
+                }
+                KVS.InsertOrUpdate("MothershipSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_httpcodes()
         {
-            if (!DBHelper.TableExists("httpcodes"))
+            if (KVS.Get("HTTPCodesSchemaVersion", out int hTTPCodesSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
-                DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
-                Logfile.Log("CREATE TABLE OK");
-                _ = Task.Factory.StartNew(() =>
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("httpcodes"))
                 {
-                    DBHelper.UpdateHTTPStatusCodes();
-                    Logfile.Log("CheckDBSchema_httpcodes (Task) finished.");
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    Logfile.Log("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE httpcodes (id int NOT NULL, text varchar(50) NOT NULL, PRIMARY KEY(id))");
+                    Logfile.Log("CREATE TABLE OK");
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        DBHelper.UpdateHTTPStatusCodes();
+                        Logfile.Log("CheckDBSchema_httpcodes (Task) finished.");
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }
+                KVS.InsertOrUpdate("HTTPCodesSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_drivestate()
         {
-            if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
+            if (KVS.Get("DriveStateSchemaVersion", out int driveStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
-                _ = Task.Factory.StartNew(() =>
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.ColumnExists("drivestate", "outside_temp_avg"))
                 {
-                    DBHelper.UpdateAllDrivestateData();
-                    Logfile.Log("CheckDBSchema_drivestate (Task) finished.");
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-            }
+                    Logfile.Log("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE drivestate ADD COLUMN outside_temp_avg DOUBLE NULL, ADD COLUMN speed_max INT NULL, ADD COLUMN power_max INT NULL, ADD COLUMN power_min INT NULL, ADD COLUMN power_avg DOUBLE NULL");
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        DBHelper.UpdateAllDrivestateData();
+                        Logfile.Log("CheckDBSchema_drivestate (Task) finished.");
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }
 
-            if (!DBHelper.ColumnExists("drivestate", "meters_up"))
-            {
-                string sql = "ALTER TABLE drivestate ADD meters_up DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "meters_down"))
-            {
-                string sql = "ALTER TABLE drivestate ADD meters_down DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_up_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_up_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_down_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_down_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "distance_flat_km"))
-            {
-                string sql = "ALTER TABLE drivestate ADD distance_flat_km DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "height_max"))
-            {
-                string sql = "ALTER TABLE drivestate ADD height_max DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("drivestate", "height_min"))
-            {
-                string sql = "ALTER TABLE drivestate ADD height_min DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("drivestate", "meters_up"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_up DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "meters_down"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD meters_down DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_up_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_up_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_down_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_down_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "distance_flat_km"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD distance_flat_km DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_max"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_max DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("drivestate", "height_min"))
+                {
+                    string sql = "ALTER TABLE drivestate ADD height_min DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            InsertCarID_Column("drivestate");
+                InsertCarID_Column("drivestate");
 
-            if (!DBHelper.ColumnExists("drivestate", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                if (!DBHelper.ColumnExists("drivestate", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                KVS.InsertOrUpdate("DriveStateSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_chargingstate()
         {
-            if (!DBHelper.ColumnExists("chargingstate", "conn_charge_cable"))
+            if (KVS.Get("ChargingStateSchemaVersion", out int chargingStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)", 300);
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_brand"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "conn_charge_cable"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN conn_charge_cable varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_type"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_brand"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_brand varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "fast_charger_present"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)", 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_type"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_type varchar(50)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "max_charger_power"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "fast_charger_present"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN fast_charger_present TINYINT(1)", 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "cost_total"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column cost_total");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                if (!DBHelper.ColumnExists("chargingstate", "max_charger_power"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE chargingstate ADD COLUMN max_charger_power int NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("chargingstate", "cost_total"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_total");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                         ADD COLUMN `cost_total` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_currency` VARCHAR(3) NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_kwh` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_session` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_per_minute` DOUBLE NULL DEFAULT NULL,
                         ADD COLUMN `cost_idle_fee_total` DOUBLE NULL DEFAULT NULL", 600);
-            }
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "cost_kwh_meter_invoice"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column cost_kwh_meter_invoice");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                if (!DBHelper.ColumnExists("chargingstate", "cost_kwh_meter_invoice"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_kwh_meter_invoice");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                         ADD COLUMN `cost_kwh_meter_invoice` DOUBLE NULL DEFAULT NULL", 600);
-            }
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_start"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD COLUMN meter_vehicle_kwh_start double NULL,  ADD COLUMN meter_vehicle_kwh_end double NULL, ADD COLUMN meter_utility_kwh_start double NULL, ADD COLUMN meter_utility_kwh_end double NULL, ADD COLUMN meter_utility_kwh_sum double NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "hidden"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-            if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "hidden"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD hidden BOOLEAN NOT NULL DEFAULT FALSE ";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+                if (!DBHelper.ColumnExists("chargingstate", "combined_into"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD combined_into INT NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_sum"))
-            {
-                string sql = "ALTER TABLE chargingstate ADD meter_vehicle_kwh_sum DOUBLE NULL DEFAULT NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
+                if (!DBHelper.ColumnExists("chargingstate", "meter_vehicle_kwh_sum"))
+                {
+                    string sql = "ALTER TABLE chargingstate ADD meter_vehicle_kwh_sum DOUBLE NULL DEFAULT NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
 
-                DBHelper.ExecuteSQLQuery("update chargingstate set meter_vehicle_kwh_sum = meter_vehicle_kwh_end - meter_vehicle_kwh_start where meter_vehicle_kwh_sum is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null", 300);
-                DBHelper.ExecuteSQLQuery("update chargingstate set cost_kwh_meter_invoice = meter_vehicle_kwh_end - meter_vehicle_kwh_start where cost_kwh_meter_invoice is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null and charge_energy_added < (meter_vehicle_kwh_end - meter_vehicle_kwh_start)", 300);
+                    DBHelper.ExecuteSQLQuery("update chargingstate set meter_vehicle_kwh_sum = meter_vehicle_kwh_end - meter_vehicle_kwh_start where meter_vehicle_kwh_sum is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null", 300);
+                    DBHelper.ExecuteSQLQuery("update chargingstate set cost_kwh_meter_invoice = meter_vehicle_kwh_end - meter_vehicle_kwh_start where cost_kwh_meter_invoice is null and meter_vehicle_kwh_start is not null and meter_vehicle_kwh_end is not null and charge_energy_added < (meter_vehicle_kwh_end - meter_vehicle_kwh_start)", 300);
 
-                DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
-            }
+                    DBHelper.ExecuteSQLQuery("update chargingstate set meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start where meter_utility_kwh_sum is null and meter_utility_kwh_start is not null and meter_utility_kwh_end is not null", 300);
+                }
 
-            InsertCarID_Column("chargingstate");
+                InsertCarID_Column("chargingstate");
 
-            if (!DBHelper.ColumnExists("chargingstate", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "co2_g_kWh"))
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column co2_g_kWh");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `co2_g_kWh` int NULL DEFAULT NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("chargingstate", "co2_g_kWh"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column co2_g_kWh");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `co2_g_kWh` int NULL DEFAULT NULL", 600);
+                }
 
-            if (!DBHelper.ColumnExists("chargingstate", "country")) 
-            {
-                Logfile.Log("ALTER TABLE chargingstate ADD Column country");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `country` varchar(80) NULL DEFAULT NULL", 600);
+                if (!DBHelper.ColumnExists("chargingstate", "country"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column country");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` ADD COLUMN `country` varchar(80) NULL DEFAULT NULL", 600);
+                }
+
+                KVS.InsertOrUpdate("ChargingStateSchemaVersion", (int)1);
             }
         }
 
         private static void CheckDBSchema_charging()
         {
-            if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
+            if (KVS.Get("ChargingSchemaVersion", out int chargingStateSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                // placeholder for future schema migrations
             }
-
-            if (!DBHelper.ColumnExists("charging", "battery_heater"))
+            else // run initial schema check
             {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("charging", "charger_pilot_current"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_pilot_current INT NULL, ADD COLUMN charge_current_request INT NULL");
+                }
 
-            if (!DBHelper.ColumnExists("charging", "battery_range_km"))
-            {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
-            }
+                if (!DBHelper.ColumnExists("charging", "battery_heater"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_heater TINYINT(1) NULL", 600);
+                }
 
-            InsertCarID_Column("charging");
+                if (!DBHelper.ColumnExists("charging", "battery_range_km"))
+                {
+                    Logfile.Log("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
+                }
+
+                InsertCarID_Column("charging");
+                KVS.InsertOrUpdate("ChargingSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_car_version()
         {
-            if (!DBHelper.TableExists("car_version"))
+            if (KVS.Get("CarVersionSchemaVersion", out int carVersionSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                // placeholder for future schema migrations
             }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("car_version"))
+                {
+                    Logfile.Log("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE car_version (id int NOT NULL AUTO_INCREMENT, StartDate datetime NOT NULL, version varchar(50), PRIMARY KEY(id))");
+                }
 
-            InsertCarID_Column("car_version");
+                InsertCarID_Column("car_version");
+                KVS.InsertOrUpdate("CarVersionSchemaVersion", (int)1);
+            }
         }
 
         private static void CheckDBSchema_cars()
         {
-            if (!DBHelper.TableExists("cars"))
+            if (KVS.Get("CarsSchemaVersion", out int carsSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("create table cars");
-                DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("cars"))
+                {
+                    Logfile.Log("create table cars");
+                    DBHelper.ExecuteSQLQuery(@"CREATE TABLE `cars` (
                           `id` int(11) NOT NULL,
                           `tesla_name` varchar(45) DEFAULT NULL,
                           `tesla_password` varchar(45) DEFAULT NULL,
@@ -807,116 +915,127 @@ CREATE TABLE superchargers(
                           PRIMARY KEY (`id`)
                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", 600);
 
-                try
-                {
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    try
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con))
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                         {
-                            cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
-                            cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
-                            cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            SQLTracer.TraceNQ(cmd);
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO cars (id,tesla_name,tesla_password,tesla_carid, display_name) values (1, @tesla_name, @tesla_password, @tesla_carid, 'Tesla')", con))
+                            {
+                                cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
+                                cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
+                                cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
+                                SQLTracer.TraceNQ(cmd);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
+
+                if (!DBHelper.ColumnExists("cars", "vin"))
                 {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.ToString());
-                }
-            }
-
-            if (!DBHelper.ColumnExists("cars", "vin"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column vin");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
+                    Logfile.Log("ALTER TABLE cars ADD Column vin");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` 
                         ADD COLUMN `vin` VARCHAR(20) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "freesuc"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column freesuc");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `freesuc` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "refresh_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column refresh_token");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_token"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "SuCBingo_user"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_user");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_user` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "SuCBingo_apiKey"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_apiKey");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_apiKey` VARCHAR(100) NULL DEFAULT NULL", 600);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "meter_type"))
+                {
+                    string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
+                    Logfile.Log(sql);
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql, 300);
+                }
+
+                if (DBHelper.GetColumnType("cars", "tesla_token").Contains("varchar"))
+                {
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
+                }
+
+                if (!DBHelper.ColumnExists("cars", "wheel_type"))
+                {
+                    Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+                KVS.InsertOrUpdate("CarsSchemaVersion", (int)1);
             }
 
-            if (!DBHelper.ColumnExists("cars", "freesuc"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column freesuc");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `freesuc` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "lastscanmytesla"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column lastscanmytesla");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `lastscanmytesla` datetime NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "refresh_token"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column refresh_token");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `refresh_token` TEXT NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "ABRP_token"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column ABRP_token");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_token` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "ABRP_mode"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column ABRP_mode");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `ABRP_mode` TINYINT(1) NULL DEFAULT 0", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "SuCBingo_user"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_user");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_user` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "SuCBingo_apiKey"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column SuCBingo_apiKey");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `SuCBingo_apiKey` VARCHAR(100) NULL DEFAULT NULL", 600);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "meter_type"))
-            {
-                string sql = "ALTER TABLE cars ADD COLUMN meter_type varchar(20) NULL, ADD COLUMN meter_host varchar(50) NULL, ADD COLUMN meter_parameter varchar(200) NULL";
-                Logfile.Log(sql);
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(sql, 300);
-            }
-
-            if (DBHelper.GetColumnType("cars", "tesla_token").Contains("varchar"))
-            {
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("alter table cars modify tesla_token TEXT NULL", 120);
-            }
-
-            if (!DBHelper.ColumnExists("cars", "wheel_type"))
-            {
-                Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
-            }
         }
 
         private static void CheckDBSchema_can()
         {
-            if (!DBHelper.TableExists("can"))
+            if (KVS.Get("CanSchemaVersion", out int canSchemaVersion) == KVS.SUCCESS)
             {
-                Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                // placeholder for future schema migrations
             }
+            else // run initial schema check
+            {
+                if (!DBHelper.TableExists("can"))
+                {
+                    Logfile.Log("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                    AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery("CREATE TABLE `can` (`datum` datetime NOT NULL, `id` mediumint NOT NULL, `val` double DEFAULT NULL, PRIMARY KEY(`datum`,`id`) ) ENGINE = InnoDB DEFAULT CHARSET = latin1;");
+                }
 
-            InsertCarID_Column("can");
+                InsertCarID_Column("can");
+                KVS.InsertOrUpdate("CanSchemaVersion", (int)1);
+            }
         }
 
         public static string UpdateApacheConfig(string path = "/etc/apache2/apache2.conf", bool write = true)
@@ -990,7 +1109,7 @@ CREATE TABLE superchargers(
                     Tools.ExecMono("apt-get", "-y install git");
                     Tools.ExecMono("git", "--version");
                 }
-                
+
                 if (!File.Exists("/usr/bin/optipng") || !Tools.ExecMono("optipng", "-version", false).Contains("OptiPNG version"))
                 {
                     Logfile.Log("Try to install optipng");
@@ -1006,7 +1125,7 @@ CREATE TABLE superchargers(
                         if (ret == null)
                             ret = "NULL";
 
-                        ExceptionlessClient.Default.CreateLog("Install", "optipng: "+ ret  , Exceptionless.Logging.LogLevel.Warn).Submit();
+                        ExceptionlessClient.Default.CreateLog("Install", "optipng: " + ret, Exceptionless.Logging.LogLevel.Warn).Submit();
                     }
                 }
 
@@ -1055,7 +1174,7 @@ CREATE TABLE superchargers(
                         Logfile.Log($"update package downloaded to {updatepackage}");
                         httpDownloadSuccessful = true;
 
-                        ExceptionlessClient.Default.CreateLog("Install","Update Download successful").Submit();
+                        ExceptionlessClient.Default.CreateLog("Install", "Update Download successful").Submit();
                     }
                 }
                 catch (Exception ex)
@@ -1231,37 +1350,45 @@ CREATE TABLE superchargers(
 
         public static void CheckDBCharset()
         {
-            try
+            if (KVS.Get("DBCharsetSchemaVersion", out int DBCharsetStateSchemaVersion) == KVS.SUCCESS)
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                // placeholder for future schema migrations
+            }
+            else // run initial schema check
+            {
+                try
                 {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                     {
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read())
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT default_character_set_name FROM information_schema.SCHEMATA WHERE schema_name = 'teslalogger'; ", con))
                         {
-                            string charset = dr[0].ToString();
-
-                            if (charset != "utf8mb4")
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read())
                             {
-                                dr.Close();
+                                string charset = dr[0].ToString();
 
-                                Logfile.Log("Change database charset to utf8mb4");
-                                AssertAlterDB();
-                                using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                if (charset != "utf8mb4")
                                 {
-                                    SQLTracer.TraceNQ(cmd2);
+                                    dr.Close();
+
+                                    Logfile.Log("Change database charset to utf8mb4");
+                                    AssertAlterDB();
+                                    using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
+                                    {
+                                        SQLTracer.TraceNQ(cmd2);
+                                    }
                                 }
                             }
                         }
                     }
+                    KVS.InsertOrUpdate("DBCharsetStateSchemaVersion", (int)1);
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
             }
         }
 
@@ -2274,75 +2401,78 @@ CREATE TABLE superchargers(
 
         public static void CheckForNewVersion()
         {
-            try
+            lock (lastTeslaLoggerVersionCheckObj)
             {
-                for (int x = 0; x < Car.Allcars.Count; x++)
+                try
                 {
-                    Car c = Car.Allcars[x];
-                    if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
-                        return;
-                }
-
-                TimeSpan ts = DateTime.UtcNow - lastVersionCheck;
-                if (ts.TotalMinutes > 240)
-                {
-                    string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
-
-                    string online_version = WebHelper.GetOnlineTeslaloggerVersion();
-                    if (string.IsNullOrEmpty(online_version))
+                    for (int x = 0; x < Car.Allcars.Count; x++)
                     {
-                        // recheck in 10 Minutes
-                        Logfile.Log("Empty Version String - recheck in 10 minutes");
-                        lastVersionCheck = lastVersionCheck.AddMinutes(10);
-                        return;
+                        Car c = Car.Allcars[x];
+                        if (c.GetCurrentState() == Car.TeslaState.Charge || c.GetCurrentState() == Car.TeslaState.Drive)
+                            return;
                     }
 
-                    lastVersionCheck = DateTime.UtcNow;
-
-                    Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
-
-                    if (UpdateNeeded(currentVersion, online_version, updateType))
+                    TimeSpan ts = DateTime.UtcNow - lastTeslaLoggerVersionCheck;
+                    if (ts.TotalMinutes > 240)
                     {
-                        // if update doesn't work, it will retry tomorrow
-                        lastVersionCheck = DateTime.UtcNow.AddDays(1);
+                        lastTeslaLoggerVersionCheck = DateTime.UtcNow;
 
-                        Logfile.Log("---------------------------------------------");
-                        Logfile.Log(" *** New Version Detected *** ");
-                        Logfile.Log("Current Version: " + currentVersion);
-                        Logfile.Log("Online Version: " + online_version);
-                        Logfile.Log("Start update!");
+                        string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                        Logfile.Log($"Checking TeslaLogger online update (current version: {currentVersion}) ...");
 
-                        string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
-
-                        if (File.Exists(cmd_updated))
+                        string online_version = WebHelper.GetOnlineTeslaloggerVersion();
+                        if (string.IsNullOrEmpty(online_version))
                         {
-                            File.Delete(cmd_updated);
+                            // recheck in 10 Minutes
+                            Logfile.Log("Empty Version String - recheck in 10 minutes");
+                            lastTeslaLoggerVersionCheck = lastTeslaLoggerVersionCheck.AddMinutes(10);
+                            return;
                         }
 
-                        if (Tools.IsDocker())
+                        Tools.UpdateType updateType = Tools.GetOnlineUpdateSettings();
+
+                        if (UpdateNeeded(currentVersion, online_version, updateType))
                         {
-                            Logfile.Log("  Docker detected!");
-                            File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
+                            // if update doesn't work, it will retry tomorrow
+                            lastTeslaLoggerVersionCheck = DateTime.UtcNow.AddDays(1);
+
+                            Logfile.Log("---------------------------------------------");
+                            Logfile.Log(" *** New Version Detected *** ");
+                            Logfile.Log("Current Version: " + currentVersion);
+                            Logfile.Log("Online Version: " + online_version);
+                            Logfile.Log("Start update!");
+
+                            string cmd_updated = "/etc/teslalogger/cmd_updated.txt";
+
+                            if (File.Exists(cmd_updated))
+                            {
+                                File.Delete(cmd_updated);
+                            }
+
+                            if (Tools.IsDocker())
+                            {
+                                Logfile.Log("  Docker detected!");
+                                File.WriteAllText("/tmp/teslalogger-cmd-restart.txt", "update");
+                            }
+                            else
+                            {
+                                Logfile.Log("Rebooting");
+                                Tools.ExecMono("reboot", "");
+                            }
                         }
                         else
                         {
-                            Logfile.Log("Rebooting");
-                            Tools.ExecMono("reboot", "");
+                            Logfile.Log($"TeslaLogger is up to date (current version: {currentVersion}, latest version online: {online_version}, update policy: {updateType})");
                         }
-                    }
-                    else
-                    {
-                        Logfile.Log($"TeslaLogger is up to date (current version: {currentVersion}, latest version online: {online_version}, update policy: {updateType})");
-                    }
 
-                    return;
+                        return;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
             }
         }
 

@@ -42,7 +42,7 @@ namespace TeslaLogger
             Charge
         }
 
-        private static StaticMapProvider _StaticMapProvider = null;
+        private static StaticMapProvider _StaticMapProvider; // defaults to null
 
         protected StaticMapProvider()
         {

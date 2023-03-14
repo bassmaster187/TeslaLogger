@@ -51,7 +51,7 @@ ON DUPLICATE KEY UPDATE
     id = @key,
     ivalue = @value", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     cmd.Parameters.AddWithValue("@value", value);
                     int rowsAffected = SQLTracer.TraceNQ(cmd);
                     if (rowsAffected == 1 // INSERT
@@ -78,7 +78,7 @@ ON DUPLICATE KEY UPDATE
     id = @key,
     dvalue = @value", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     cmd.Parameters.AddWithValue("@value", value);
                     int rowsAffected = SQLTracer.TraceNQ(cmd);
                     if (rowsAffected == 1 // INSERT
@@ -105,7 +105,7 @@ ON DUPLICATE KEY UPDATE
     id = @key,
     bvalue = @value", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     cmd.Parameters.AddWithValue("@value", value);
                     int rowsAffected = SQLTracer.TraceNQ(cmd);
                     if (rowsAffected == 1 // INSERT
@@ -132,7 +132,7 @@ ON DUPLICATE KEY UPDATE
     id = @key,
     ts = @value", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     cmd.Parameters.AddWithValue("@value", value);
                     int rowsAffected = SQLTracer.TraceNQ(cmd);
                     if (rowsAffected == 1 // INSERT
@@ -159,7 +159,7 @@ ON DUPLICATE KEY UPDATE
     id = @key,
     JSON = @value", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     cmd.Parameters.AddWithValue("@value", value);
                     int rowsAffected = SQLTracer.TraceNQ(cmd);
                     if (rowsAffected == 1 // INSERT
@@ -187,7 +187,7 @@ FROM
 WHERE
     id = @key", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value && Boolean.TryParse(dr[0].ToString(), out value))
@@ -214,7 +214,7 @@ FROM
 WHERE
     id = @key", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value && DateTime.TryParse(dr[0].ToString(), out value))
@@ -241,7 +241,7 @@ FROM
 WHERE
     id = @key", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value && Double.TryParse(dr[0].ToString(), out value))
@@ -268,7 +268,7 @@ FROM
 WHERE
     id = @key", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out value))
@@ -295,7 +295,7 @@ FROM
 WHERE
     id = @key", con))
                 {
-                    cmd.Parameters.AddWithValue("@id", key);
+                    cmd.Parameters.AddWithValue("@key", key);
                     Tools.DebugLog(cmd);
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                     if (dr.Read() && dr[0] != DBNull.Value)

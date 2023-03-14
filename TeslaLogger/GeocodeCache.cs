@@ -1,123 +1,180 @@
 ﻿using System;
 using System.Data;
 using Exceptionless;
+using MySql.Data.MySqlClient;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class GeocodeCache
     {
-        private DataTable dt = new DataTable("cache");
-        private static GeocodeCache _instance;
-
-        public static GeocodeCache Instance
+        internal static void CheckSchema()
         {
-            get
+            if (!DBHelper.TableExists("geocodecache"))
             {
-                if (_instance == null)
-                {
-                    _instance = new GeocodeCache();
-                }
-
-                return _instance;
+                Logfile.Log(@"
+CREATE TABLE geocodecache(
+    lat DOUBLE NOT NULL,
+    lng DOUBLE NOT NULL,
+    lastUpdate DATE NOT NULL,
+    address LONGTEXT,
+    UNIQUE ix_key(lat, lng)
+) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                DBHelper.ExecuteSQLQuery(@"
+CREATE TABLE geocodecache(
+    lat DOUBLE NOT NULL,
+    lng DOUBLE NOT NULL,
+    lastUpdate DATE NOT NULL,
+    address LONGTEXT,
+    UNIQUE ix_key(lat, lng)
+) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                Logfile.Log("CREATE TABLE OK");
+                KVS.InsertOrUpdate("GeocodeCacheSchemaVersion", (int)1);
+                MigrateSchema0to1();
+            }
+            else if (KVS.Get("GeocodeCacheSchemaVersion", out int geocodeCacheSchemaVersion) == KVS.SUCCESS)
+            {
+                // placeholder for future schema migrations
             }
         }
 
-        public GeocodeCache()
+        private static void MigrateSchema0to1()
         {
-            lock (this)
+            Logfile.Log("GeocodeCache: migrating schema from version 0 to version 1 ...");
+            DataTable dt = new DataTable("cache");
+            DataColumn dtlat = dt.Columns.Add("lat", typeof(double));
+            DataColumn dtlng = dt.Columns.Add("lng", typeof(double));
+            dt.Columns.Add("Value");
+            dt.PrimaryKey = new DataColumn[] { dtlat, dtlng };
+            try
             {
-                DataColumn lat = dt.Columns.Add("lat", typeof(double));
-                DataColumn lng = dt.Columns.Add("lng", typeof(double));
-                dt.Columns.Add("Value");
-
-                dt.PrimaryKey = new DataColumn[] { lat, lng };
-
-                try
+                if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCache)))
                 {
-                    if (System.IO.File.Exists(FileManager.GetFilePath(TLFilename.GeocodeCache)))
-                    {
 #pragma warning disable CA3075 // Unsichere DTD-Verarbeitung in XML
-                        _ = dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
+                    _ = dt.ReadXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
 #pragma warning restore CA3075 // Unsichere DTD-Verarbeitung in XML
-                        Logfile.Log("GeocodeCache Items: " + dt.Rows.Count);
-                    }
-                    else
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        Logfile.Log(FileManager.GetFilePath(TLFilename.GeocodeCache) + " Not found!");
+                        if (Double.TryParse(dr?["lat"].ToString(), out double lat)
+                            && Double.TryParse(dr?["lng"].ToString(), out double lng)
+                            && dr?["value"].ToString().Length > 0)
+                        {
+                            Insert(lat, lng, dr?["value"].ToString());
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.ExceptionWriter(ex, "");
+                    System.IO.File.Delete(FileManager.GetFilePath(TLFilename.GeocodeCache));
                 }
             }
-        }
-
-        public string Search(double lat, double lng)
-        {
-            lock (this)
+            catch (Exception ex)
             {
-                DataRow dr = dt.Rows.Find(new object[] { lat, lng });
-                return dr?["Value"].ToString();
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.ExceptionWriter(ex, "");
+                Logfile.Log(ex.ToString());
             }
+            dt.Dispose();
+            Logfile.Log("GeocodeCache: migrating schema from version 0 to version 1 ... done");
         }
 
-
-        public void Insert(double lat, double lng, string value)
+        internal static string Search(double lat, double lng)
         {
-            lock (this)
+            try
             {
-                try
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    DataRow dr = dt.NewRow();
-                    dr["lat"] = lat;
-                    dr["lng"] = lng;
-                    dr["value"] = value;
-                    dt.Rows.Add(dr);
-
-                    Logfile.Log("GeocodeCache:Insert");
-                }
-                catch (ConstraintException cex)
-                {
-                    if (cex.HResult != -2146232022)  // Column 'lat, lng' is constrained to be unique.  Value 'xx, xx' is already present.
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    address
+FROM
+    geocodecache
+WHERE
+    lat = @lat
+    and lng = @lng", con))
                     {
-                        cex.ToExceptionless().FirstCarUserID().Submit();
+                        cmd.Parameters.AddWithValue("@lat", lat);
+                        cmd.Parameters.AddWithValue("@lng", lng);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            return dr[0].ToString();
+                        }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
+            }
+            return String.Empty;
+        }
 
-                    Logfile.Log(cex.Message);
-                }
-                catch (Exception ex)
+
+        internal static void Insert(double lat, double lng, string address)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.Message);
+                    con.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    geocodecache(
+        lat,
+        lng,
+        lastUpdate,
+        address
+    )
+VALUES(
+        @lat,
+        @lng,
+        @lastUpdate,
+        @address
+)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@lat", lat);
+                        cmd.Parameters.AddWithValue("@lng", lng);
+                        cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@address", address);
+                        SQLTracer.TraceNQ(cmd);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
             }
         }
 
-        public void Write()
+        internal static void Cleanup(int days = 90)
         {
-            lock (this)
+            try
             {
-                try
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    dt.WriteXml(FileManager.GetFilePath(TLFilename.GeocodeCache));
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    Logfile.Log(ex.Message);
+                    con.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+DELETE
+FROM
+    geocodecache
+WHERE
+    lastUpdate < @lastUpdate
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now.AddDays(-days));
+                        SQLTracer.TraceNQ(cmd);
+                    }
                 }
             }
-        }
-
-        internal void ClearCache()
-        {
-            lock (this)
+            catch (Exception ex)
             {
-                dt.Clear();
+                ex.ToExceptionless().Submit();
+                Logfile.Log(ex.ToString());
             }
         }
     }

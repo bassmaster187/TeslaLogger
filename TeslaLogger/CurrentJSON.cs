@@ -10,31 +10,31 @@ namespace TeslaLogger
     public class CurrentJSON
     {
         public static readonly ConcurrentDictionary<int, string> jsonStringHolder = new ConcurrentDictionary<int, string>();
-        public bool current_charging = false;
-        public bool current_driving = false;
-        public bool current_online = false;
-        public bool current_sleeping = false;
-        public bool current_falling_asleep = false;
-        private long timestamp = 0;
+        public bool current_charging; // defaults to false
+        public bool current_driving; // defaults to false
+        public bool current_online; // defaults to false
+        public bool current_sleeping; // defaults to false
+        public bool current_falling_asleep; // defaults to false
+        private long timestamp; // defaults to 0
 
-        public int current_speed = 0;
-        public int current_power = 0;
-        public double current_odometer = 0;
-        public double current_ideal_battery_range_km = 0;
-        public double current_battery_range_km = 0;
-        public double current_outside_temperature = 0;
-        public int current_battery_level = 0;
+        public int current_speed; // defaults to 0
+        public int current_power; // defaults to 0
+        public double current_odometer; // defaults to 0
+        public double current_ideal_battery_range_km; // defaults to 0
+        public double current_battery_range_km; // defaults to 0
+        public double current_outside_temperature; // defaults to 0
+        public int current_battery_level; // defaults to 0
 
-        public int current_charger_voltage = 0;
-        public int current_charger_phases = 0;
-        public int current_charger_actual_current = 0;
-        public double current_charge_energy_added = 0;
-        public int current_charger_power = 0;
-        public double current_charge_rate_km = 0;
-        public double current_time_to_full_charge = 0;
-        public bool current_charge_port_door_open = false;
+        public int current_charger_voltage; // defaults to 0
+        public int current_charger_phases; // defaults to 0
+        public int current_charger_actual_current; // defaults to 0
+        public double current_charge_energy_added; // defaults to 0
+        public int current_charger_power; // defaults to 0
+        public double current_charge_rate_km; // defaults to 0
+        public double current_time_to_full_charge; // defaults to 0
+        public bool current_charge_port_door_open; // defaults to false
         public string current_charger_brand = "";
-        public bool current_charger_present = false;
+        public bool current_charger_present; // defaults to false
 
         public string current_car_version = "";
 

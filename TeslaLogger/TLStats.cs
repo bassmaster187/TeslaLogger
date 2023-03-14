@@ -12,7 +12,7 @@ namespace TeslaLogger
     public class TLStats
     {
 
-        private static TLStats _tLStats = null;
+        private static TLStats _tLStats; // defaults to null
 
         private TLStats ()
         {

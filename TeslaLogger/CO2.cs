@@ -286,7 +286,7 @@ namespace TeslaLogger
 
                     DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     System.Diagnostics.Debug.WriteLine("URL: " + url);
                     throw;
