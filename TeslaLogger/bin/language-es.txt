@@ -4,6 +4,7 @@ Save=Guardar
 Settings=Configuración
 Setup=Configuración
 Enabled=Activado
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Trayectos entre Cargas
@@ -244,17 +245,6 @@ TextSuspendTeslalogger=¡Teslalogger se ha detenido! ¡No se registrarán datos!
 Resume Teslalogger=Rearrancar Teslalogger
 Range=Autonomía
 
-Ladekosten=Costes de Carga
-Ladesäule=Estación de Carga
-Währung=Divisa
-Kosten pro kWh=Coste por kWh
-Kosten pro Ladung=Coste por carga
-Kosten pro Minute=Coste por minuto
-Kosten Blockiergebühr=Coste de inactividad por minuto
-Summe=Total
-kWh laut Zähler / Rechnung=kWh según contador / factura
-Wirkungsgrad=Eficiencia
-
 #Timeline Plugin.json
 Parking=Aparcando
 Driving=Conduciendo
@@ -278,3 +268,18 @@ ABRP8=Insertar el token en Teslalogger
 ABRP9=Verificar si el Teslalogger está conectado
 ABRPYT=Consulte el tutorial de YouTube para una demostración en vivo
 ABRPToken=Token Abetterouteplanner
+
+#chargingcost.php
+Charging Costs=Costes de Carga
+Charged=Cargado
+Charger=Estación de Carga
+Efficiency=Eficiencia
+Currency=Divisa
+kWh according to meter/invoice=kWh según contador/factura
+Cost per kWh=Coste por kWh
+Cost per charge=Coste por carga
+Cost per minute=Coste por minuto
+Idle cost per minute=Coste de inactividad por minuto
+Total=Total
+Date=Fecha
+Minutes=Acta

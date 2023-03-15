@@ -4,6 +4,7 @@ Save=Lagre
 Settings=Innstillinger
 Setup=Oppsett
 Enabled=Aktivert
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Akku Trips
@@ -190,3 +191,18 @@ ABRP8=Sett inn token i Teslalogger
 ABRP9=Sjekk om Teslaloggeren er tilkoblet
 ABRPYT=Sjekk YouTube-opplæringen for live demo
 ABRPToken=Abetterrouteplanner-token
+
+#chargingcost.php
+Charging Costs=Ladekostnader
+Date=Dato
+Charged=Ladet
+Charger=Lader
+Minutes=Minutter
+Efficiency=Effektivitet
+Currency=Valuta
+kWh according to meter/invoice=kWh i henhold til måler/faktura
+Cost per kWh=Kostnad per kWh
+Cost per charge=Kostnad per lading
+Cost per minute=Kostnad per minutt
+Idle cost per minute=Ventekostnad per minutt
+Total=Totalt
