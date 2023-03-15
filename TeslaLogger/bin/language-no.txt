@@ -144,11 +144,11 @@ PS=PS
 Falling asleep=Sovne
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
-Bitte Tesla Account Zugangsdaten eingeben=Dine Tesla account credentials
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Please enter your Tesla account credentials=Dine Tesla account credentials
 Email=Epost
-Passwort=Passord
-Passwort wiederholen=Gjenta passordet
+Password=Passord
+Repeat Password=Gjenta passordet
 Speichern=Lagre
 
 #settings.php
