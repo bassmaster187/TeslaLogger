@@ -4,6 +4,7 @@ Save=Opslaan
 Settings=Instellingen
 Setup=Opstelling
 Enabled=Ingeschakeld
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Accu ritten
@@ -243,3 +244,17 @@ ABRP8=Plaats het token in Teslalogger
 ABRP9=Controleer of de Teslalogger is aangesloten
 ABRPYT=Bekijk YouTube-tutorial voor live demo
 ABRPToken=Abetterrouteplanner-token
+
+#chargingcost.php
+Charging Costs=Laadkosten
+Date=Datum
+Charged=Opgeladen
+Minutes=Minuten
+Efficiency=Efficiëntie
+Currency=Valuta
+kWh according to meter/invoice=kWh volgens meter/factuur
+Cost per kWh=Kosten per kWh
+Cost per charge=Kosten per lading
+Cost per minute=Kosten per minuut
+Idle cost per minute=Kosten blokkeringsvergoeding
+Total=Totaal

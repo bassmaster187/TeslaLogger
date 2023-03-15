@@ -205,17 +205,6 @@ TextSuspendTeslalogger=O Teslalogger foi interrompido! Os dados não serão guar
 Resume Teslalogger=Retomar o Teslalogger
 Range=Autonomia
 
-Ladekosten=Custos de Carregamento
-Ladesäule=Estação de Carregamento
-Währung=Moeda
-Kosten pro kWh=Custo por kWh
-Kosten pro Ladung=Custo por Carregamento
-Kosten pro Minute=Custo por Minuto
-Kosten Blockiergebühr=Custo de Ociosidade por Minuto
-Summe=Total
-kWh laut Zähler / Rechnung=kWh de acordo com contador/factura
-Wirkungsgrad=Eficiência 
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -232,3 +221,19 @@ ABRP8=Inserir o token no Teslalogger
 ABRP9=Verifique se o Teslalogger está conectado
 ABRPYT=Verifique o tutorial do YouTube para demonstração ao vivo
 ABRPToken=Token Abetterouteplanner
+
+#chargingcost.php
+Charging Costs=Custos de Carregamento
+Charger=Estação de carregamento
+Date=Data
+Charged=Carregado
+Efficiency=Eficiência 
+Currency=Moeda
+kWh according to meter/invoice=kWh de acordo com contador/factura
+Cost per kWh=Custo por kWh
+Cost per charge=Custo por Carregamento
+Cost per minute=Custo por Minuto
+Idle cost per minute=Custo de Ociosidade por Minuto
+Total=Total
+Ladesäule=Estação de Carregamento
+Minutes=Acta

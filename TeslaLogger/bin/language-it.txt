@@ -4,6 +4,7 @@ Save=Salvare
 Settings=Impostazioni
 Setup=Impostare
 Enabled=Attivato
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Batteria viaggi
@@ -227,17 +228,6 @@ TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzat
 Resume Teslalogger=Riprendi Teslalogger
 Range=Range
 
-Ladekosten=Costi di ricarica
-Ladesäule=Stazione di ricarica
-Währung=Valuta
-Kosten pro kWh=Costo per KWh
-Kosten pro Ladung= Costo per ricarica
-Kosten pro Minute=Costo per minuto
-Kosten Blockiergebühr=Costo per minuto inattivo
-Summe=Totale
-kWh laut Zähler / Rechnung=Costo per KWh come da fattura
-Wirkungsgrad=Efficienza
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -254,3 +244,18 @@ ABRP8=Inserisci il token in Teslalogger
 ABRP9=Verifica se il Teslalogger è collegato
 ABRPYT=Controlla il tutorial di YouTube per la demo dal vivo
 ABRPToken=Token Atterrouteplanner
+
+#chargingcost.php
+Charging Costs=Costi di ricarica
+Charged=Addebitato
+Date=Data
+Minutes=Minuti
+Charger=Stazione di ricarica
+Efficiency=Efficienza
+Currency=Valuta
+kWh according to meter/invoice=Costo per KWh come da fattura
+Cost per kWh=Costo per KWh
+Cost per charge=Costo per ricarica
+Cost per minute=Costo per minuto
+Idle cost per minute=Costo per minuto inattivo
+Total=Totale

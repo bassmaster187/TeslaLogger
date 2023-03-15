@@ -264,17 +264,6 @@ Daten anonym teilen=Partage des données de manière anonyme
 TextSuspendTeslalogger=Teslalogger a été arrêté ! Les données ne seront pas enregistrées !
 Resume Teslalogger=Reprendre Teslalogger
 
-Ladekosten=Coût recharges
-Ladesäule=Station de recharge
-Währung=Argent
-Kosten pro kWh=Prix du kWh
-Kosten pro Ladung=Coût par recharge
-Kosten pro Minute=Coût par minute
-Kosten Blockiergebühr=Coût d'inactivité par minute
-Summe=Total
-kWh selon le compteur / Facture=kWh selon compteur / facture d'achat
-Wirkungsgrad=Efficacité
-
 #Timeline Plugin.json
 Parking=Stationnement
 Driving=Conduite
@@ -313,3 +302,18 @@ ABRP8=Insérer le jeton dans Teslalogger
 ABRP9=Vérifier si Teslalogger est connecté
 ABRPYT=Consultez le didacticiel YouTube pour une démonstration en direct
 ABRPToken=Jeton Abetterrouteplanner
+
+#chargingcost.php
+Charging Costs=Coût recharges
+Charger=Station de recharge
+Charged=Chargé
+Date=Date
+Minutes=Minutes
+Efficiency=Efficacité
+Currency=Argent
+kWh according to meter/invoice=kWh selon compteur/facture d'achat
+Cost per kWh=Prix du kWh
+Cost per charge=Coût par recharge
+Cost per minute=Coût par minute
+Idle cost per minute=Coût d'inactivité par minute
+Total=Total
