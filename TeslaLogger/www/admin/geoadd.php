@@ -429,7 +429,7 @@ if (isset($id))
 			</table>
 		</div>
 		<button id="btn_save" onclick="save();"><?php t("Save"); ?></button>
-		<button style="color:red;" id="btn_delete" onclick="del();"><?php t("Delete"); ?></button>
+		<button id="btn_delete" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
 
 	</div>
 	<div id="map" style="height:700px; z-index:0;"></div>
