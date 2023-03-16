@@ -4,6 +4,7 @@ Save=保存
 Settings=设置
 Setup=设置
 Enabled=启用
+kWh=千瓦时
 
 #Akku Trips.json
 Akku Trips=充电行程
@@ -246,17 +247,6 @@ TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
 Resume Teslalogger=继续Teslalogger
 Range=里程
 
-Ladekosten=充电成本
-Ladesäule=充电站
-Währung=货币
-Kosten pro kWh=每度电计价
-Kosten pro Ladung=单次充电计价
-Kosten pro Minute=每分钟充电计价
-Kosten Blockiergebühr=充电超时计价
-Summe=汇总
-kWh laut Zähler / Rechnung=计价表千瓦时数 / 收据
-Wirkungsgrad=效率
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -273,3 +263,18 @@ ABRP8=在 Teslalogger 中插入令牌
 ABRP9=检查 Teslalogger 是否已连接
 ABRPYT=查看 YouTube 教程以获取现场演示
 ABRPToken=Abetterrouteplanner 令牌
+
+#chargingcost.php
+Charging Costs=充电成本
+Charged=已充电
+Charger=充电站
+Date=日期
+Efficiency=效率
+Currency=货币
+kWh according to meter/invoice=计价表千瓦时数 / 收据
+Cost per kWh=每度电计价
+Cost per charge=单次充电计价
+Cost per minute=每分钟充电计价
+Idle cost per minute=充电超时计价
+Total=汇总
+Minutes=会议记录

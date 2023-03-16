@@ -176,28 +176,28 @@ require_once("tools.php");
 <body style="padding-top: 5px; padding-left: 10px;">
 <?php 
 include "menu.php";
-echo(menu("Charging Cost"));
+echo(menu("Charging Costs"));
 ?>
 <div>
 <h1 style="color: red;"><span id="errortext"></span></h1>
 <table>
-<tr><td><h1><?php t("Ladekosten"); ?></h1></td><td></td></tr>
-<tr><td><?php t("Ladesäule"); ?>:</td><td colspan="4"><span id="address"></span></td></tr>
-<tr><td><?php t("Datum"); ?>:</td><td colspan="4"><span id="StartDate"></span></td></tr>
-<tr><td><?php t("Dauer"); ?>:</td><td colspan="4"><span id="minutes"></span></td></tr>
-<tr><td><?php t("Geladen"); ?>:</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
-<tr><td><?php t("Wirkungsgrad"); ?>:</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
+<tr><td><h1><?php t("Charging Costs"); ?></h1></td><td></td></tr>
+<tr><td><?php t("Charger"); ?>:</td><td colspan="4"><span id="address"></span></td></tr>
+<tr><td><?php t("Date"); ?>:</td><td colspan="4"><span id="StartDate"></span></td></tr>
+<tr><td><?php t("Duration"); ?>:</td><td colspan="4"><span id="minutes"></span></td></tr>
+<tr><td><?php t("Charged"); ?>:</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
+<tr><td><?php t("Efficiency"); ?>:</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td><?php t("Währung"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
-<tr><td><?php t("kWh laut Zähler / Rechnung"); ?>:</td><td><input id="cost_kwh_meter_invoice" inputmode="decimal" size="4" tabindex="2"></span></td></tr>
-<tr><td><?php t("Kosten pro kWh"); ?>:</td><td><input id="cost_per_kwh" inputmode="decimal" size="4" tabindex="3"></span></td><td> * <span id="kwh_charged"></span> kWh</td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Ladung"); ?>:</td><td><input id="cost_per_session" inputmode="decimal" size="4" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Minute"); ?>:</td><td><input id="cost_per_minute" inputmode="decimal" size="4" tabindex="5"></span></td><td> * <span id="minutes_charged"></span> Minutes</td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
-<tr><td><?php t("Kosten Blockiergebühr"); ?>:</td><td><input id="cost_idle_fee_total" inputmode="decimal" size="4" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
+<tr><td><?php t("Currency"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
+<tr><td><?php t("kWh according to meter/invoice"); ?>:</td><td><input id="cost_kwh_meter_invoice" inputmode="decimal" size="4" tabindex="2"></span></td></tr>
+<tr><td><?php t("Cost per kWh"); ?>:</td><td><input id="cost_per_kwh" inputmode="decimal" size="4" tabindex="3"></span></td><td> * <span id="kwh_charged"></span> <?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
+<tr><td><?php t("Cost per charge"); ?>:</td><td><input id="cost_per_session" inputmode="decimal" size="4" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
+<tr><td><?php t("Cost per minute"); ?>:</td><td><input id="cost_per_minute" inputmode="decimal" size="4" tabindex="5"></span></td><td> * <span id="minutes_charged"></span> <?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
+<tr><td><?php t("Idle cost per minute"); ?>:</td><td><input id="cost_idle_fee_total" inputmode="decimal" size="4" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
 <tr><td colspan="4"><hr></td></tr>
-<tr><td><b><?php t("Summe"); ?>:</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
+<tr><td><b><?php t("Total"); ?>:</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
 <tr><td></td><td></td><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td></td><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
+<tr><td></td><td></td><td></td><td><button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 </div>

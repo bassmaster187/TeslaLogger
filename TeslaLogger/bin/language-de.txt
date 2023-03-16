@@ -157,3 +157,16 @@ Special Flags=Weitere Eigenschaften
 Turn HVAC off=Klimaanlage ausschalten
 Type=Type
 Work=Arbeit
+
+#chargingcost.php
+Charging Costs=Ladekosten
+Date=Datum
+Charged=Geladen
+Efficiency=Wirkungsgrad
+Currency=Währung
+kWh according to meter/invoice=kWh laut Zähler/Rechnung
+Cost per kWh=Kosten pro kWh
+Cost per charge=Kosten pro Ladung
+Cost per minute=Kosten pro Minute
+Idle cost per minute=Kosten Blockiergebühr
+Total=Summe

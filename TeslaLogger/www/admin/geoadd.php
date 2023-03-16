@@ -83,8 +83,6 @@ if (isset($id))
         })
       })
     }).addTo(map);
-	
-	$("button").button();
 
 	$("input").change(function(){OnSpecialFlagsChanged();});
 	$("select").change(function(){OnSpecialFlagsChanged();});
