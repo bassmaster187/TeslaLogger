@@ -116,6 +116,8 @@ textarea {
 
 body {
 	background: #f5f5f5;
+	padding-top: 5px;
+	padding-left: 10px;
 }
 
 a {
@@ -506,6 +508,10 @@ input[type="submit"] {
 	text-transform: uppercase;
 	vertical-align: bottom;
 }
+
+button.redbutton{background-color:#890d24;}
+button.redbutton:hover, .redbutton:focus{background-color:#A62A41;}
+
 
 button:hover,
 button:focus,

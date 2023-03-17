@@ -153,11 +153,11 @@ PS=CV
 Falling asleep=Adormecer
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Credenciais Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Por favor, insira as suas credenciais da conta Tesla
+Teslalogger Tesla Credentials=Teslalogger Credenciais Tesla
+Please enter your Tesla account credentials=Por favor, insira as suas credenciais da conta Tesla
 Email=Email
-Passwort=Palavra-passe
-Passwort wiederholen=Repita Palavra-passe
+Password=Palavra-passe
+Repeat Password=Repita Palavra-passe
 Speichern=Guardar
 
 #settings.php

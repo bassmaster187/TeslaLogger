@@ -177,16 +177,16 @@ Wakeup Teslalogger=Wakeup Teslalogger
 Dashboard=Dashboard
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
-Bitte Tesla Account Zugangsdaten eingeben=Please enter your Tesla account credentials
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Please enter your Tesla account credentials=Please enter your Tesla account credentials
 Email=Email
-Passwort=Password
-Passwort wiederholen=Repeate Password
+Password=Password
+Repeat Password=Repeat Password
 Löschen=Erase
 Speichern=Save
 
 #settings.php
-Bitte Fahrzeug auswählen=Please, select a car
+Please choose your vehicle=Please, select a car
 Credentials=Credentials
 Language=Language
 Power=Power
@@ -301,7 +301,7 @@ ABRPYT=Check YouTube tutorial for live demo
 ABRPToken=Abetterrouteplanner Token
 
 #password.php
-Bitte Fahrzeug auswählen=Please select vehicle
+Please choose your vehicle=Please select vehicle
 BA_Browser=In local {browser} (recommended)
 BA_Read=Please read all the steps before continuing:
 BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page

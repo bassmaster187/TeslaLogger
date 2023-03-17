@@ -178,11 +178,11 @@ Wakeup Teslalogger=Væk Teslalogger
 Dashboard=Dashboard
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
-Bitte Tesla Account Zugangsdaten eingeben=Indtast dine Tesla account credentials
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Please enter your Tesla account credentials=Indtast dine Tesla account credentials
 Email=Email
-Passwort=Password
-Passwort wiederholen=Gentag Password
+Password=Password
+Repeat Password=Gentag Password
 Speichern=Gem
 
 #settings.php

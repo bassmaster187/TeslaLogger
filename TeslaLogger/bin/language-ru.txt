@@ -216,11 +216,11 @@ Wakeup Teslalogger=Запустить Teslalogger
 Dashboard=Приборная доска
 
 #password.php
-Teslalogger Tesla Zugangsdaten= Teslaлоггер данные для доступа в Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
+Teslalogger Tesla Credentials= Teslaлоггер данные для доступа в Tesla
+Please enter your Tesla account credentials=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
 Email=Электронная почта
-Passwort=пароль
-Passwort wiederholen=повторитe пароль
+Password=пароль
+Repeat Password=повторитe пароль
 Speichern=сохранить
 
 #settings.php

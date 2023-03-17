@@ -176,11 +176,11 @@ Suspend Teslalogger=Sospendi Teslalogger
 Wakeup Teslalogger=Attiva Teslalogger
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger credenziali Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Inserite le credenziali Tesla
+Teslalogger Tesla Credentials=Teslalogger credenziali Tesla
+Please enter your Tesla account credentials=Inserite le credenziali Tesla
 Email=Email
-Passwort=Password
-Passwort wiederholen=Ripeti la password
+Password=Password
+Repeat Password=Ripeti la password
 Speichern=Salva
 
 #settings.php
