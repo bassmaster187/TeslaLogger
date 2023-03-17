@@ -13,9 +13,9 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class Program
     {
-        public static bool VERBOSE = false;
-        public static bool SQLTRACE = false;
-        public static bool SQLFULLTRACE = false;
+        public static bool VERBOSE; // defaults to false
+        public static bool SQLTRACE; // defaults to false
+        public static bool SQLFULLTRACE; // defaults to false
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
@@ -452,6 +452,7 @@ namespace TeslaLogger
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
                 DBHelper.UpdateCO2();
+                GeocodeCache.Cleanup();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
             })
             {
@@ -541,6 +542,8 @@ namespace TeslaLogger
                     Car.LogActiveCars();
 
                     WebHelper.SearchFornewCars();
+
+                    GeocodeCache.Cleanup();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

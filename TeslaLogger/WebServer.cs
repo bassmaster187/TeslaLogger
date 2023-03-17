@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
+using Ubiety.Dns.Core;
+using System.Security.Policy;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -24,6 +27,7 @@ namespace TeslaLogger
     public class WebServer
     {
         private HttpListener listener = null;
+        static TeslaAuth teslaAuth = null;
 
         private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
@@ -309,6 +313,12 @@ namespace TeslaLogger
                     case bool _ when Journeys.CanHandleRequest(request):
                         Journeys.HandleRequest(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/teslaauthurl", System.StringComparison.Ordinal):
+                        TeslaAuthURL(response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/teslaauthtoken", System.StringComparison.Ordinal):
+                        TeslaAuthGetToken(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -320,6 +330,61 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                string url = request.QueryString["url"];
+                if (url == null)
+                {
+                    string data = GetDataFromRequestInputStream(request);
+                    dynamic r = JsonConvert.DeserializeObject(data);
+                    url = r["url"];
+                }
+
+                var tokens = teslaAuth.GetTokenAfterLoginAsync(url).Result;
+
+                var json = JsonConvert.SerializeObject(tokens);
+
+                WriteString(response, json);
+            }
+            catch (Exception ex)
+            {
+                Exception e = ex;
+                if (e.InnerException != null)
+                    e = ex.InnerException;
+
+                var error = new
+                {
+                    error = e.Message
+                };
+
+                var json = JsonConvert.SerializeObject(error);
+
+                WriteString(response, json);
+
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
+            }
+        }
+
+        private void TeslaAuthURL(HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("TeslaAuth::GetLoginUrlForBrowser");
+
+                teslaAuth = new TeslaAuth();
+                var url = teslaAuth.GetLoginUrlForBrowser();
+                WriteString(response, url);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -1582,7 +1647,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
                 WriteString(response, "ERROR");
                 Logfile.Log(ex.ToString());
             }

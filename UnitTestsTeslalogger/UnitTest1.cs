@@ -1085,5 +1085,14 @@ namespace UnitTestsTeslalogger
             c.webhelper.UpdateTeslaTokenFromRefreshToken();
         }
         */
+
+        [TestMethod]
+        public void TestAuthTesla()
+        {
+            TeslaAuth t = new TeslaAuth();
+            var url = t.GetLoginUrlForBrowser();
+            string newurl = "https://auth.tesla.com/void/callback?code=1c0939d1421cd504cca7405b76c92b25fb6b2419e88e2231b568c70e7671&state=xqXt8LsGQle0UximPatd&issuer=https%3A%2F%2Fauth.tesla.com%2Foauth2%2Fv3";
+            var tokens = t.GetTokenAfterLoginAsync(newurl).Result;
+        }
     }
 }
