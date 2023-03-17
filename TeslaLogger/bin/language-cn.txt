@@ -179,11 +179,11 @@ Wakeup Teslalogger=唤醒 Teslalogger
 Dashboard=仪表盘
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla 账号信息
-Bitte Tesla Account Zugangsdaten eingeben=请输入Tesla账号信息
+Teslalogger Tesla Credentials=Teslalogger Tesla 账号信息
+Please enter your Tesla account credentials=请输入Tesla账号信息
 Email=邮箱地址
-Passwort=密码
-Passwort wiederholen=再次输入密码
+Password=密码
+Repeat Password=再次输入密码
 Speichern=保存
 
 #settings.php

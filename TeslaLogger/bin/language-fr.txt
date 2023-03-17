@@ -183,17 +183,17 @@ Dashboard=Tableaux de bord
 
 #password.php
 Set password for Teslalogger's admin panel=Définir un mot de passe pour l'administrateur Teslalogger
-Teslalogger Tesla Zugangsdaten=Identifiants Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Veuillez saisir les informations d'identification de votre compte Tesla
+Teslalogger Tesla Credentials=Identifiants Tesla
+Please enter your Tesla account credentials=Veuillez saisir les informations d'identification de votre compte Tesla
 Email=Email
-Passwort=Mot de passe
-Passwort wiederholen=Répéter le mot de passe
+Password=Mot de passe
+Repeat Password=Répéter le mot de passe
 Löschen=Effacer
 Speichern=Sauvergarder
 
 #settings.php
 MyTesla=Voiture Tesla
-Bitte Fahrzeug auswählen=Veuillez sélectionner un véhicule
+Please choose your vehicle=Veuillez sélectionner un véhicule
 Teslalogger Adminpanel=Administrateur Teslalogger
 Credentials=Identifiants
 Language=Langue

@@ -176,11 +176,11 @@ Suspend Teslalogger=Teslalogger opschorten
 Wakeup Teslalogger=Teslalogger wakker maken
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Inloggegevens
-Bitte Tesla Account Zugangsdaten eingeben=Voer altublieft de toegangsgegevens van uw Tesla account in
+Teslalogger Tesla Credentials=Teslalogger Tesla Inloggegevens
+Please enter your Tesla account credentials=Voer altublieft de toegangsgegevens van uw Tesla account in
 Email=Email
-Passwort=Wachtwoord
-Passwort wiederholen=Wachtwoord herhalen
+Password=Wachtwoord
+Repeat Password=Wachtwoord herhalen
 Speichern=Opslaan
 
 #settings.php

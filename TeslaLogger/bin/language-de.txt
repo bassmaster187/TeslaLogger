@@ -81,7 +81,7 @@ ScanMyTesla integration=ScanMyTesla-Integration
 Position by StreamingAPI=Position by StreamingAPI
 
 
-TeslaAuthApps=Du kannst folgende Apps verwenden um ein Access Token & Refresh Token vom Tesla Server zu generieren.
+TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
 
 #abrp.php
 ABRPTitle=Verbindung mit „A Better Routeplanner“
@@ -100,7 +100,10 @@ ABRPToken=„A Better Routeplanner“-Token
 
 #password.php
 Bitte Fahrzeug auswählen=Bitte Fahrzeug auswählen
+Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
 Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
+Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
+Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
 BA_Browser=Im lokalen {Browser} (empfohlen)
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
@@ -113,11 +116,36 @@ BA_GetToken=Wir werden dann die Token für Ihren Tesla-Konto bekommen.
 BA_SelectCar=Wählen Sie das Fahrzeug aus, das Sie für den Teslalogger verwenden möchten.
 BA_Step1=Schritt 1:
 BA_Step2=Schritt 2:
-BA_Step3=schritt 3:
+BA_Step3=Schritt 3:
 BA_FillOut=Bitte ausfüllen:
 BA_CopyUrl=Kopieren Sie die angezeigte URL
-BA_Paste=Fügen Sie die URL hier ein und klicken "Get Tokens" Button:
-Get Tokens=Get Tokens
+BA_Paste=Die URL hier einfügen und auf "Tokens holen" klicken:
+Get Tokens=Tokens holen
+Access Token=Access Token
+Refresh Token=Refresh Token
+OK=OK
+Email=E-Mail
+Car=Fahrzeug
+Free Supercharging=Kostenloses Supercharging
+Reconnect=Reconnect
+ID=ID
+Model=Modell
+VIN=VIN
+Free SUC=Free SUC
+Edit=Ändern
+NEW CAR=NEUES FAHRZEUG
+Do you want to delete?=Wollen Sie das Fahrzeug löschen?
+Please enter the access token!=Bitte das Access Token entragen!
+Please enter the refresh token!=Bitte das Refresh Token entragen!
+Please select a vehicle=Bitte ein Fahrzeug wählen
+Check Logfile!=Bitte die Logdatei prüfen!
+Do you really want to delete this vehicle?=Wollen Sie das Fahrzeug wirklich löschen?
+Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
+Unauthorized=Nicht autorisiert
+This isn't a valid URL!=Dies ist kein gültige URL!
+This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
+The URL doesn't contain the expected format!=Die URL enthält nicht das erwartete Format!
+
 
 #dashboard.php
 Online=Online
@@ -133,7 +161,6 @@ Copy Charging Costs=Ladekosten kopieren
 Count=Count
 D → P=D → P
 D/R → P=D/R → P
-Delete=Delete
 Description=Beschreibung
 Disable Sentry Mode=Wächter-Modus ausschalten
 Don't Combine Charging Sessions=Ladesitzungen nicht vereinen
@@ -170,3 +197,13 @@ Cost per charge=Kosten pro Ladung
 Cost per minute=Kosten pro Minute
 Idle cost per minute=Kosten Blockiergebühr
 Total=Summe
+
+#adminpanelpassword.php
+Admin Panel Credentials=Anmeldedaten für das Admin-Panel
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Passwords do not match!=Passwörter stimmen nicht überein!
+Do you want to delete your password?=Möchten Sie Ihr Passwort löschen?
+Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin-Panel von Teslalogger fest
+Name=Name
+Password=Passwort
+Repeat Password=Passwort wiederholen

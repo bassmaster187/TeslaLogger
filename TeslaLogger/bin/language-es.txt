@@ -177,11 +177,11 @@ Wakeup Teslalogger=Despertar a Teslalogger
 Dashboard=Dashboard
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Credenciales Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Por favor, introduce tus credenciales de Tesla
+Teslalogger Tesla Credentials=Teslalogger Credenciales Tesla
+Please enter your Tesla account credentials=Por favor, introduce tus credenciales de Tesla
 Email=Email
-Passwort=Contraseña
-Passwort wiederholen=Repite Contraseña
+Password=Contraseña
+Repeat Password=Repite Contraseña
 Speichern=Guardar
 
 #settings.php
