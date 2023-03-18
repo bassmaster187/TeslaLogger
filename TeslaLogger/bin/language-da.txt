@@ -201,7 +201,7 @@ Repeat Password=Gentag Password
 Speichern=Gem
 
 #settings.php
-Credentials=Credentials
+Credentials=Legitimationsoplysninger
 Language=Sprog
 Power=Effekt
 Temperatur=Temperatur
