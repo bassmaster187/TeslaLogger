@@ -195,7 +195,7 @@ Special Count=Besonderer Zähler
 Special Features=Besondere Eigenschaften
 Special Flags=Weitere Eigenschaften
 Turn HVAC off=Klimaanlage ausschalten
-Type=Type
+Type=Typ
 Work=Arbeit
 
 #chargingcost.php
