@@ -165,7 +165,7 @@ Software Update=Software Update
 min=min
 Consumption=Forbruk
 Ø Consumption=Ø Forbruk
-Max Wh/km=Max Wh/km
+Wh/km=Wh/km
 Current Pos=Nåværende Pos
 
 #password.php

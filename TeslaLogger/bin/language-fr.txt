@@ -181,7 +181,7 @@ Consumption=Consommation
 Ø Consumption=Ø Consommation
 min=min
 kWh=kWh
-Max Wh/km=Max Wh/km
+Wh/km=Wh/km
 km/h=km/h
 
 #menu.php

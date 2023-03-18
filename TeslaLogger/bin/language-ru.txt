@@ -203,7 +203,6 @@ Falling asleep=Засыпает
 Consumption=Потребление
 Ø Consumption=Ø Потребление
 Wh/km=Втч/км
-Max Wh/km=Максимум Втч/км
 min=Мин
 kW=кВт
 OK=OK

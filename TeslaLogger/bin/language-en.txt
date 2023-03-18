@@ -163,7 +163,7 @@ Offline=Offline
 Falling asleep=Falling asleep
 min=min
 kWh=kWh
-Max Wh/km=Max Wh/km
+Wh/km=Wh/km
 km/h=km/h
 
 #menu.php

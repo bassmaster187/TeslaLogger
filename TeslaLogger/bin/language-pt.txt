@@ -174,7 +174,7 @@ min=min
 Consumption=Consumo
 Ø Consumption=Ø Consumo
 kWh=kWh
-Max Wh/km=Max Wh/km
+Wh/km=Wh/km
 Current Pos=Pos actuais
 
 #password.php

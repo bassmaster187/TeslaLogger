@@ -176,7 +176,7 @@ Software Update=软件更新
 min=min
 Consumption=消费量
 Ø Consumption=Ø 消费量
-Max Wh/km=Max Wh/km
+Wh/km=Wh/km
 
 #menu.php
 Logfile=日志

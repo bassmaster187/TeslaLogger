@@ -175,7 +175,7 @@ Software Update=Software-update
 Consumption=Verbruik
 Ø Consumption=Ø Verbruik
 min=min
-Max Wh/km=Max. Wh/km
+Wh/km=Wh/km
 km/h=km/h
 
 #menu.php
