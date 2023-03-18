@@ -57,10 +57,13 @@ require_once("tools.php");
 				};
 
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+			var loc;
+			if (navigator.languages != undefined) loc = navigator.languages[0]; 
+				else loc = navigator.language;
             var json = JSON.parse(data);
             $("#Version").text(json.Version);
-            $("#Utility_kWh").text(json.Utility_kWh);
-            $("#Vehicle_kWh").text(json.Vehicle_kWh);
+            $("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+            $("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
         });
     }
 
@@ -82,6 +85,7 @@ require_once("tools.php");
             $("#Version").text(json.Version);
             $("#Utility_kWh").text(json.Utility_kWh);
             $("#Vehicle_kWh").text(json.Vehicle_kWh);
+			$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
         });
     }
 
@@ -115,8 +119,8 @@ menu("Wallbox Test");
     <tr><td></td><td></td></tr>
     <tr><td colspan=2><h1><?php t("Info"); ?>:</h1></td></tr>
     <tr><td><?php t("Version"); ?>:</td><td><span id="Version"></td></span></tr>
-    <tr><td><?php t("Utility kWh"); ?>:</td><td><span id="Utility_kWh"></td></span></tr>
-    <tr><td><?php t("Vehicle kWh"); ?>:</td><td><span id="Vehicle_kWh"></td></span></tr>
+    <tr><td><?php t("Utility kWh"); ?>: </td><td><span id="Utility_kWh"></td></span></tr>
+    <tr><td><?php t("Vehicle kWh"); ?>: </td><td><span id="Vehicle_kWh"></td></span></tr>
     <tr><td></td><td style="text-align: right;"><button onclick="btn_save_click();"><?php t("Save"); ?></td></tr>
 </table>
 </div>
