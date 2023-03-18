@@ -102,7 +102,7 @@ require_once("tools.php");
 
 </script>
 </head>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <div style="max-width: 1260px;">
 <?php 
 include "menu.php";

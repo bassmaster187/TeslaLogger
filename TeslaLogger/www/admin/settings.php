@@ -223,7 +223,7 @@ function CarsCombobox($cars, $selected)
   }
 
 </script>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <?php 
 include "menu.php";
 echo(menu("Settings"));

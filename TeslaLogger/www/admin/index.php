@@ -397,7 +397,7 @@ function ShowInfo()
   </script>
 
   </head>
-  <body style="padding-top: 5px; padding-left: 10px;">
+  <body>
   <?php 
     include "menu.php";
     echo(menu("Teslalogger"));
@@ -434,7 +434,7 @@ function ShowInfo()
 	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> <?php t("min"); ?></td></tr>
 	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km"><?php t("km"); ?></span></td></tr>
 	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> <?php t("kWh"); ?></td></tr>
-	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Max Wh/km"); ?></span></td></tr>
+	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Wh/km"); ?></span></td></tr>
 	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh"><?php t("km/h"); ?></span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
   </table>
   </div>

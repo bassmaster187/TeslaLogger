@@ -30,7 +30,7 @@ else
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
-  	<body style="padding-top: 5px; padding-left: 10px;">
+  	<body>
 	
 	<?php 
     include "menu.php";

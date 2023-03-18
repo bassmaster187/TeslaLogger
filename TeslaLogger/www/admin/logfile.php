@@ -42,7 +42,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	<script src="static/leaflet/1.4.0/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 
 	</head>
-  	<body style="padding-top: 5px; padding-left: 10px;">
+  	<body>
 	<script>$( function() {	
 		var objDiv = document.getElementById("log");
 		objDiv.scrollTop = objDiv.scrollHeight;
