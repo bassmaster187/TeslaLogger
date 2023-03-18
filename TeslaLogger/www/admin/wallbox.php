@@ -62,8 +62,13 @@ require_once("tools.php");
 				else loc = navigator.language;
             var json = JSON.parse(data);
             $("#Version").text(json.Version);
-            $("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
-            $("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			
+			if (typeof(json.Utility_kWh) === "number" ) {
+				$("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
+			if (typeof(json.Vehicle_kWh) === "number" ) {
+				$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
         });
     }
 
@@ -81,11 +86,17 @@ require_once("tools.php");
 				};
 
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+			var loc;
+			if (navigator.languages != undefined) loc = navigator.languages[0]; 
+				else loc = navigator.language;
             var json = JSON.parse(data);
             $("#Version").text(json.Version);
-            $("#Utility_kWh").text(json.Utility_kWh);
-            $("#Vehicle_kWh").text(json.Vehicle_kWh);
-			$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			if (typeof(json.Utility_kWh) === "number" ) {
+				$("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
+            if (typeof(json.Vehicle_kWh) === "number" ) {
+				$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
         });
     }
 
