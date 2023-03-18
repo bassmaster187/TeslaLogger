@@ -362,10 +362,10 @@ if (isset($id))
 	}
   </style>
 	</head>
-	<body>
 <?php 
+	<body>
     include "menu.php";
-    echo(menu("Geofence"));
+    echo(menu("Geofencing"));
 ?>
 <div style="max-width: 1260px;">
 	<div style="float:left;">
