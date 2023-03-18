@@ -89,12 +89,12 @@ require_once("tools.php");
 			var loc;
 			if (navigator.languages != undefined) loc = navigator.languages[0]; 
 				else loc = navigator.language;
-            var json = JSON.parse(data);
-            $("#Version").text(json.Version);
+			var json = JSON.parse(data);
+			$("#Version").text(json.Version);
 			if (typeof(json.Utility_kWh) === "number" ) {
 				$("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
 			}
-            if (typeof(json.Vehicle_kWh) === "number" ) {
+			if (typeof(json.Vehicle_kWh) === "number" ) {
 				$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
 			}
         });
