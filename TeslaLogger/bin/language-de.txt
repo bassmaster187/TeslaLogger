@@ -5,10 +5,7 @@ Settings=Einstellungen
 Setup=Einrichtung
 Enabled=Aktiviert
 
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
-TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
-Resume Teslalogger=Teslalogger Starten
-Typical Range=Reichweite
+StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt
 
 #Timeline Plugin.json
 Parking=Parken
@@ -22,23 +19,39 @@ Last Driven=Letzte Fahrt  * * *
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
 
-#Index.php
+#index.php
 Battery Heater=Batterie-Heizung
-Car Version=Fahrzeug Version
+Car Info=Fahrzeuginformationen
+Car Version=Fahrzeug-Version
 Cell Imbalance=Zellen-Imbalance
-Cell Temp=Zell Temperatur
+Cell Temp=Zelltemperatur
+Consumption=Verbrauch
 Current Pos=Aktuelle Position
-Duration=Dauer
 Distance=Distanz
-Done=Fertig
 Done at=Fertig um
+Done=Fertig
+Duration=Dauer
 Falling asleep=Einschlafen
-Car Info=Fahrzeuginfo
-Odometer=KM Stand
+Info=Information
+Last Trip=Letzte Fahrt
 Last Update=Letztes Update
-Last Trip=Letzter Trip
-Charging=Wird geladen
-Max kph=Max km/h
+Max Charge=Max. Ladung
+Max Discharge=Max. Entladung
+Max km/h=Max. km/h
+No=Nein
+Odometer=Kilometerstand
+Resume Teslalogger=Teslalogger starten
+Software Update=Software-Aktualisierung
+Start=Start
+TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
+Typical Range=Reichweite
+Yes=Ja
+Ø Consumption=Ø Verbrauch
+mi=mi
+min=min
+kWh=kWh
+Max Wh/km=Max. Wh/km
+km/h=km/h
 
 #settings.php
 Credentials=Zugangsdaten
@@ -78,7 +91,8 @@ All=Alle
 Stable=Stabil
 to=bis
 ScanMyTesla integration=ScanMyTesla-Integration
-Position by StreamingAPI=Position by StreamingAPI
+Position by StreamingAPI=Position von StreamingAPI
+Saved!=Gespeichert!
 
 
 TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
@@ -137,7 +151,6 @@ NEW CAR=NEUES FAHRZEUG
 Do you want to delete?=Wollen Sie das Fahrzeug löschen?
 Please enter the access token!=Bitte das Access Token entragen!
 Please enter the refresh token!=Bitte das Refresh Token entragen!
-Please select a vehicle=Bitte ein Fahrzeug wählen
 Check Logfile!=Bitte die Logdatei prüfen!
 Do you really want to delete this vehicle?=Wollen Sie das Fahrzeug wirklich löschen?
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
@@ -207,3 +220,31 @@ Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin
 Name=Name
 Password=Passwort
 Repeat Password=Passwort wiederholen
+
+#logfile.php
+Logfile=Protokolldatei
+Download Logfile=Protokolldatei herunterladen
+Lines=Zeilen
+Housekeeping=Wartung
+Update=Aktualisierung
+Sleep Attempt=Schlafversuch
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Sie können Ihren Teslalogger an Ihre Wallbox anschließen, um den Wirkungsgrad des Ladevorgangs oder den prozentualen Anteil der Photovoltaik am Ladevorgang Ihres Fahrzeugs zu berechnen.
+Host=Host
+Param=Param
+Test=Test
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=kWh Fahrzeug
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Sie können einen Link von TeslaLogger zu SuperChargeBingo einrichten, um automatische Checkins an Superchargern durchzuführen.
+Create a SuperChargeBingo account=Erstellen Sie ein SuperChargeBingo-Konto
+Create API key (must be secure)=API-Schlüssel erstellen (muss sicher sein)
+Copy Username and API key and insert it in TeslaLogger=Kopieren Sie Benutzername und API-Schlüssel und fügen Sie sie in TeslaLogger ein.
+Save and restart TeslaLogger=Speichern und Neustart von TeslaLogger
+Username=Benutzername
+API key=API-Schlüssel

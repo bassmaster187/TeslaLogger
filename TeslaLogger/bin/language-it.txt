@@ -149,7 +149,7 @@ Car Version= Versione autovettura
 Last Trip=Ultimo viaggio
 Duration=Durata
 Distance=Distanza
-Max kph= Max Km/h
+Max km/h=Max Km/h
 PS=HP
 Current Pos=Posizione attuale
 Last Update=Ultimo aggiornamento
@@ -161,6 +161,22 @@ Sentry Mode=Sentry Mode
 Preconditioning=Precondizionamento
 Offline=Disconnesso
 Falling asleep=Dormiente
+Driving=Guida
+Sleeping=Dormire
+kW=kW
+OK=OK
+No=No
+Yes=Sì
+Cell Temp=Temperatura della cella
+Max Charge=Carica massima
+Max Discharge=Scarico massimo
+Cell Imbalance=Squilibrio cellulare
+Software Update=Aggiornamento software
+Consumption=Consumo
+Ø Consumption=Ø Consumo
+min=min
+Max Wh/km=Max Wh/km
+km/h=km/h
 
 #menu.php
 Logfile=File di log
@@ -190,9 +206,34 @@ Power=Potenza
 Temperatur=Temperatura
 Unit of length=Unità di misura
 URL Admin Panel=Pannello di controllo
-
-#geoadd.php
-Bezeichnung=Descrizione
+Saved!=Salvati!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Pannello di amministrazione del Teslalogger
+Temperature=Temperatura
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=miglio
+Ideal=Ideale
+Rated=Valutazione
+Share data anonymously=Condividere i dati in modo anonimo
+Enable=Abilitazione
+All=Tutti
+Stable=Stabile
+None=Nessuno
+Sleep=Dormire
+to=a
+Show calc. 100% range=Mostra calc. Intervallo del 100%
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Porta HTTP del Teslalogger
+Zoom Level=Livello di zoom
+ScanMyTesla integration=Integrazione di ScanMyTesla
+Position by StreamingAPI=Posizione da StreamingAPI
+Main Car=Auto principale
+Car Name=Nome dell'auto
+ScanMyTesla last received=ScanMyTesla ha ricevuto l'ultima volta
+Tasker Token=Gettone per borse
+Tasker URL=URL Borse
+Received Tasker Token=Token Tasker ricevuto
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla= Tutti i consumi - ScanMyTesla
@@ -259,3 +300,52 @@ Cost per charge=Costo per ricarica
 Cost per minute=Costo per minuto
 Idle cost per minute=Costo per minuto inattivo
 Total=Totale
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=È possibile collegare il Teslalogger alla Wallbox per calcolare l'efficienza della ricarica o la percentuale di fotovoltaico utilizzata per ricaricare l'auto.
+Host=Host
+Param=Param
+Test=Test
+Type=Tipo
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=È possibile impostare un collegamento da TeslaLogger a SuperChargeBingo per eseguire il check-in automatico presso i Supercharger.
+Create a SuperChargeBingo account=Creare un conto SuperChargeBingo
+Create API key (must be secure)=Creare la chiave API (deve essere sicura)
+Copy Username and API key and insert it in TeslaLogger=Copiare il nome utente e la chiave API e inserirli in TeslaLogger.
+Save and restart TeslaLogger=Salvare e riavviare TeslaLogger
+Username=Nome utente
+API key=Chiave API
+
+#geoadd.php
+Name & Position=Nome
+Description=Descrizione
+Radius=Raggio
+Special Flags=Bandiere speciali
+Home=Casa
+Work=Lavoro
+Copy Charging Costs=Costi di copia
+Don't Combine Charging Sessions=Non combinare le sessioni di ricarica
+Set Charge Limit=Impostazione del limite di carica
+SOC=SOC
+Set on arrival=Set all'arrivo
+Set Charge Limit After Charging=Impostazione del limite di carica dopo la carica
+Open Charge Port=Porta di carica aperta
+Gear=Ingranaggio
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Registrazione ad alta frequenza
+Special Count=Conteggio speciale
+Count=Conteggio
+Special Features=Caratteristiche speciali
+Enable Sentry Mode=Abilita la modalità Sentinella
+Disable Sentry Mode=Disattivare la modalità Sentry
+Turn HVAC off=Spegnere il sistema HVAC
+No sleep=Non si dorme
