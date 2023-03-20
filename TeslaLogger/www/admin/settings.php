@@ -217,13 +217,13 @@ function CarsCombobox($cars, $selected)
 		StreamingPos: $("#StreamingPos").is(':checked')
 
 		}).always(function() {
-		alert("Saved!");
+		alert("<?php t('Saved!'); ?>");
 		location.reload();
 		});		
   }
 
 </script>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <?php 
 include "menu.php";
 echo(menu("Settings"));

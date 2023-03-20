@@ -1,4 +1,4 @@
-#Generel
+﻿#Generel
 Delete=Slet
 Save=Gem
 Settings=Indstillinger
@@ -149,7 +149,7 @@ Car Version=Firmware Version
 Last Trip=Seneste tur
 Duration=Varighed
 Distance=Distance
-Max kph=Max km/t
+Max km/h=Max km/t
 PS=HK
 Current Pos=Aktuel position
 Last Update=Senest opdateret
@@ -161,6 +161,22 @@ Sentry Mode=Sentry Mode
 Preconditioning=Forvarmer
 Offline=Offline
 Falling asleep=Dvale
+Driving=Kørsel
+Sleeping=Sovende
+kW=kW
+OK=OK
+No=Nej
+Yes=Ja
+Cell Temp=Celletemperatur
+Max Charge=Max opladning
+Max Discharge=Max udledning
+Cell Imbalance=Ubalance i cellerne
+Software Update=Opdatering af software
+Consumption=Forbrug
+Ø Consumption=Ø Forbrug
+min=min
+Wh/km=Wh/km
+km/h=km/t
 
 #menu.php
 Logfile=Logfile
@@ -169,7 +185,6 @@ Update=Opdatér
 Dashboards=Dashboards
 Fleet Statistic=Flåde Statistik
 Extras=Ekstra
-Settings=Indstillinger
 Backup=Backup
 Restore=Genskab
 Geofence=Geofence
@@ -186,7 +201,7 @@ Repeat Password=Gentag Password
 Speichern=Gem
 
 #settings.php
-Credentials=Credentials
+Credentials=Legitimationsoplysninger
 Language=Sprog
 Power=Effekt
 Temperatur=Temperatur
@@ -208,9 +223,18 @@ ScanMyTesla last received=Seneste ScanMyTesla
 Tasker Token=Tasker Token
 Tasker URL=Tasker URL
 Received Tasker Token=Modtaget Tasker Token
-
-#geoadd.php
-Bezeichnung=Description
+Saved!=Reddet!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Admin-panel
+Temperature=Temperatur
+mile=mile
+Ideal=Ideel
+Rated=Mærket
+Share data anonymously=Del data anonymt
+Sleep=Søvn
+to=til
+Show calc. 100% range=Vis beregninger. 100% område
+Position by StreamingAPI=Position af StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Alt forbore - ScanMyTesla
@@ -240,7 +264,7 @@ Einschlafen=Dvale
 Automatic updates=Automatiske opdateringer
 
 TextShare=<h1>Del opladningskurver / degraderingskurver anonymt </h1> Vi vil gerne oprette en anonym database for at sammenligne degraderingskurver og opladningskurver. Dette giver dig mulighed for at sammenligne dit køretøj med andre til enhver tid og opdage enhver usædvanlig afvigelse på et tidligt tidspunkt. Denne information kan være nyttig i en salgssituation som dokumentation for batteriets helbred. Ligeledes giver det dig værdifuld information i en eventuel dialog Tesla Motors hvis du oplever reduceret ydelse på batteriet. <br> <br> Vil du dele dine hurtige opladningskurver og degraderingskurver med andre Tesla ejere helt anonymt? Denne beslutning kan når som helst ændres under indstillingsmenuen.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Position af StreamingAPI</h1>aktiverer positionsdatabaseposter fra streaming API'et - afhængigt af bilens modtagelse betyder det op til 5 positioner i sekundet (sammenlignet med en position hvert femte sekund i normal tilstand), hvilket vil øge databasens størrelse betydeligt, øge sliddet på SD-kortet og resultere i store sikkerhedskopier.
 Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger er blevet stoppet! Data vil ikke blive gemt!
 Resume Teslalogger=Genoptag Teslalogger
@@ -277,3 +301,52 @@ Idle cost per minute=Blokeringsgebyr per minut
 Total=I alt
 Charger=Opladningssted
 Minutes=Protokol
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Du kan tilslutte din Teslalogger til din Wallbox for at beregne effektiviteten af opladningen eller den procentdel af solcellerne, der bruges til at oplade din bil.
+Host=Host
+Param=Param
+Test=Test
+Type=Type
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Køretøj kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Du kan oprette et link fra TeslaLogger til SuperChargeBingo for at udføre automatiske checkins ved Superchargers.
+Create a SuperChargeBingo account=Opret en SuperChargeBingo-konto
+Create API key (must be secure)=Opret API-nøgle (skal være sikker)
+Copy Username and API key and insert it in TeslaLogger=Kopier brugernavn og API-nøgle, og indsæt den i TeslaLogger
+Save and restart TeslaLogger=Gem og genstart TeslaLogger
+Username=Brugernavn
+API key=API-nøgle
+
+#geoadd.php
+Name & Position=Navn
+Description=Beskrivelse
+Radius=Radius
+Special Flags=Særlige flag
+Home=Hjem
+Work=Arbejde
+Copy Charging Costs=Udgifter til kopiering af opladning
+Don't Combine Charging Sessions=Kombiner ikke opladningssessioner
+Set Charge Limit=Indstil opladningsgrænse
+SOC=SOC
+Set on arrival=Set ved ankomsten
+Set Charge Limit After Charging=Indstil opladningsgrænse efter opladning
+Open Charge Port=Åben opladningsport
+Gear=Gear
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Logning med høj frekvens
+Special Count=Særlig optælling
+Count=Greve
+Special Features=Særlige funktioner
+Enable Sentry Mode=Aktiver vagttilstand
+Disable Sentry Mode=Deaktivere vagttilstand
+Turn HVAC off=Sluk for HVAC
+No sleep=Ingen søvn
