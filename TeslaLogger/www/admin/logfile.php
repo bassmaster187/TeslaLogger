@@ -42,7 +42,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	<script src="static/leaflet/1.4.0/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 
 	</head>
-  	<body style="padding-top: 5px; padding-left: 10px;">
+  	<body>
 	<script>$( function() {	
 		var objDiv = document.getElementById("log");
 		objDiv.scrollTop = objDiv.scrollHeight;
@@ -53,15 +53,15 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
     include "menu.php";
     echo(menu("Logfile"));
 ?>
-<a href="log.php">Download Logfile</a>
+<a href="log.php"><?php t("Download Logfile"); ?></a>
 
 <form action="logfile.php" style="max-width: 1260px;">
 <table width="100%">
 <tr>
-	<td width="25%" nowrap>Lines: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
-	<td width="25%" nowrap>Housekeeping: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
-	<td width="25%" nowrap>Update: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
-	<td width="25%" nowrap>Sleep Attempt: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
+	<td width="25%" nowrap><?php t("Lines"); ?>: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
+	<td width="25%" nowrap><?php t("Housekeeping"); ?>: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
+	<td width="25%" nowrap><?php t("Update"); ?>: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
+	<td width="25%" nowrap><?php t("Sleep Attempt"); ?>: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
 	<td><input type="submit" value="OK" style="float: right;"></td>
 </tr>
 </table>

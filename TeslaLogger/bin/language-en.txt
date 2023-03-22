@@ -1,4 +1,4 @@
-#Akku Trips.json
+﻿#Akku Trips.json
 Akku Trips=Battery Usage (Driving)
 Start Trip=Start Trip
 End Trip=End Trip
@@ -14,6 +14,7 @@ kmDiff=kmDiff
 Max Range=Max Range
 Ø Verbrauch=Avg. Consumption
 Tage=Days
+Save=Save
 
 #Degradation.json
 Degradation=Degradation
@@ -95,7 +96,7 @@ km=km
 Ø °C=Avg. °C
 Ø °F=Avg. °F
 max mph=max mph
-max km/h=max kph
+max km/h=max km/h
 max PS=max HP
 min PS=min HP
 max kW=max kW
@@ -148,7 +149,7 @@ Car Version=Car Version
 Last Trip=Last Trip
 Duration=Duration
 Distance=Distance
-Max kph=Max kph
+Max km/h=Max km/h
 PS=PS
 Current Pos=Current Pos
 Last Update=Last Update
@@ -160,6 +161,10 @@ Sentry Mode=Sentry Mode
 Preconditioning=Preconditioning
 Offline=Offline
 Falling asleep=Falling asleep
+min=min
+kWh=kWh
+Wh/km=Wh/km
+km/h=km/h
 
 #menu.php
 Logfile=Logfile
@@ -186,7 +191,7 @@ Löschen=Erase
 Speichern=Save
 
 #settings.php
-Please choose your vehicle=Please, select a car
+Please choose your vehicle=Please choose your vehicle
 Credentials=Credentials
 Language=Language
 Power=Power
@@ -210,9 +215,17 @@ Tasker Token=Tasker Token
 Tasker URL=Tasker URL
 Received Tasker Token=Received Tasker Token
 Show calc. 100% range=Show calc. 100% range
-
-#geoadd.php
-Bezeichnung=Description
+Saved!=Saved!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Adminpanel
+Temperature=Temperature
+mile=mile
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=Share data anonymously
+Sleep=Sleep
+to=to
+Position by StreamingAPI=Position by StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=All consumptions - ScanMyTesla
@@ -265,7 +278,6 @@ Wirkungsgrad=Efficiency
 #Timeline Plugin.json
 Parking=Parking
 Driving=Driving
-Charging=Charging
 Missing=Missing
 Ø Temperatur=Avg. Temperature
 Verbraucht=Consumed
@@ -301,7 +313,6 @@ ABRPYT=Check YouTube tutorial for live demo
 ABRPToken=Abetterrouteplanner Token
 
 #password.php
-Please choose your vehicle=Please select vehicle
 BA_Browser=In local {browser} (recommended)
 BA_Read=Please read all the steps before continuing:
 BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
@@ -319,3 +330,71 @@ BA_FillOut=Fill out this form:
 BA_CopyUrl=Copy the resulting url as shown
 BA_Paste=Paste the resulting url into the box and click "Get Tokens" Button:
 Get Tokens=Get Tokens
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.
+Host=Host
+Param=Param
+Test=Test
+Type=Type
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers.
+Setup=Setup
+Create a SuperChargeBingo account=Create a SuperChargeBingo account
+Create API key (must be secure)=Create API key (must be secure)
+Copy Username and API key and insert it in TeslaLogger=Copy Username and API key and insert it in TeslaLogger
+Save and restart TeslaLogger=Save and restart TeslaLogger
+Username=Username
+API key=API key
+
+
+#Hinzugefuegt durch Scriptlauf vom 17.03.2023 22:37:51
+#Missing translation elements
+Sleeping=Sleeping
+kW=kW
+OK=OK
+No=No
+Yes=Yes
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=Software Update
+Consumption=Consumption
+Ø Consumption=Ø Consumption
+
+#geoadd.php
+Name & Position=Name & Position
+Description=Description
+Radius=Radius
+Special Flags=Special Flags
+Home=Home
+Work=Work
+Charger=Charger
+Copy Charging Costs=Copy Charging Costs
+Don't Combine Charging Sessions=Don't Combine Charging Sessions
+Set Charge Limit=Set Charge Limit
+Set on arrival=Set on arrival
+Set Charge Limit After Charging=Set Charge Limit After Charging
+Open Charge Port=Open Charge Port
+Gear=Gear
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=High Frequency Logging
+Minutes=Minutes
+Special Count=Special Count
+Count=Count
+Special Features=Special Features
+Enable Sentry Mode=Enable Sentry Mode
+Disable Sentry Mode=Disable Sentry Mode
+Turn HVAC off=Turn HVAC off
+No sleep=No sleep
+Delete=Delete

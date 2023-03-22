@@ -1,4 +1,4 @@
-#General
+﻿#General
 Delete=Borrar
 Save=Guardar
 Settings=Configuración
@@ -149,7 +149,7 @@ Car Version=Versión del coche
 Last Trip=Último Viaje
 Duration=Duración
 Distance=Distancia
-Max kph=Km/h máximos
+Max km/h=Km/h máximos
 PS=Cv
 Current Pos=Pos. Actual
 Last Update=Última actualización
@@ -161,6 +161,21 @@ Sentry Mode=Modo Centinela
 Preconditioning=Preacondicionando
 Offline=Offline
 Falling asleep=Intentando dormir
+min=min
+Wh/km=Wh/km
+km/h=km/h
+Sleeping=Para dormir
+kW=kW
+OK=OK
+No=No
+Yes=Sí
+Cell Temp=Temperatura de la célula
+Max Charge=Carga máxima
+Max Discharge=Descarga máxima
+Cell Imbalance=Desequilibrio celular
+Software Update=Actualización de software
+Consumption=Consumo
+Ø Consumption=Ø Consumo
 
 #menu.php
 Logfile=Fichero de log
@@ -207,9 +222,18 @@ ScanMyTesla last received=ScanMyTesla última recepción
 Tasker Token=Token Tasker
 Tasker URL=URL Tasker
 Received Tasker Token=Tasker Token Recibido
-
-#geoadd.php
-Bezeichnung=Descripción
+Saved!=¡Salvado!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Panel de administración de Teslalogger
+Temperature=Temperatura
+mile=milla
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=Compartir datos de forma anónima
+Sleep=Dormir
+to=a
+Show calc. 100% range=Mostrar calc. Rango 100%
+Position by StreamingAPI=Posición por StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Todos los consumos - ScanMyTesla
@@ -239,7 +263,7 @@ Einschlafen=Intentando dormir
 Automatic updates=Actualizaciones automáticas
 
 TextShare=<h1>Comparte curvas de carga / degracación de forma anónima</h1>Nos gustaría crear una base de datos anónima para comparar curvas de degradación y carga. Esto permite comparar tu vehículo con otros en cualquier momento y detectar cualquier desviación anómala de forma prematura. Esto también se puede usar más adelante para probar que tu batería aún es plenamente eficiente a la hora de vender el vehículo. En caso contrario, puedes probar un peor rendimiento a Tesla Motors.<br><br>¿Querrías compartir tus curvas de carga rápida y degradación con otros conductores de Tesla de forma completamente anónima? Esta decisión se puede cambiar en cualquier momento en la pantalla de configuración.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Posición por StreamingAPI</h1>permite entradas en la base de datos de posiciones desde la API de streaming - dependiendo de la recepción del coche esto significa hasta 5 posiciones por segundo (comparado con una posición cada cinco segundos en modo normal), esto aumentará mucho el tamaño de tu base de datos, aumentará el desgaste de la tarjeta SD y resultará en enormes copias de seguridad.
 Daten anonym teilen=Compartir datos de forma anónima
 TextSuspendTeslalogger=¡Teslalogger se ha detenido! ¡No se registrarán datos!
 Resume Teslalogger=Rearrancar Teslalogger
@@ -248,7 +272,6 @@ Range=Autonomía
 #Timeline Plugin.json
 Parking=Aparcando
 Driving=Conduciendo
-Charging=Cargando
 Missing=Perdiendo
 Ø Temperatur=Ø Temperatura
 
@@ -283,3 +306,52 @@ Idle cost per minute=Coste de inactividad por minuto
 Total=Total
 Date=Fecha
 Minutes=Acta
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Puedes conectar tu Teslalogger a tu Wallbox para calcular la eficiencia de la carga o el porcentaje de energía fotovoltaica utilizada para cargar tu coche.
+Host=Host
+Param=Param
+Test=Prueba
+Type=Tipo
+Info=Info
+Version=Versión
+Utility kWh=Utility kWh
+Vehicle kWh=Vehículo kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Puede configurar un enlace desde TeslaLogger a SuperChargeBingo para realizar registros automáticos en los Supercargadores.
+Create a SuperChargeBingo account=Crear una cuenta SuperChargeBingo
+Create API key (must be secure)=Crear clave API (debe ser segura)
+Copy Username and API key and insert it in TeslaLogger=Copiar nombre de usuario y la clave de API e insertarlo en TeslaLogger
+Save and restart TeslaLogger=Guardar y reiniciar TeslaLogger
+Username=Nombre de usuario
+API key=Clave API
+
+#geoadd.php
+Name & Position=Nombre
+Description=Descripción
+Radius=Radio
+Special Flags=Banderas especiales
+Home=Inicio
+Work=Trabajo
+Copy Charging Costs=Costes del canon por copia
+Don't Combine Charging Sessions=No combine sesiones de carga
+Set Charge Limit=Fijar límite de carga
+SOC=SOC
+Set on arrival=Set a la llegada
+Set Charge Limit After Charging=Establecer límite de carga después de la carga
+Open Charge Port=Puerto de carga abierto
+Gear=Engranaje
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Registro de alta frecuencia
+Special Count=Recuento especial
+Count=Cuenta
+Special Features=Características especiales
+Enable Sentry Mode=Activar el modo centinela
+Disable Sentry Mode=Desactivar el modo centinela
+Turn HVAC off=Apagar HVAC
+No sleep=No dormir

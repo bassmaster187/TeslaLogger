@@ -1,4 +1,4 @@
-#一般的
+﻿#一般的
 Delete=刪除
 Save=保存
 Settings=设置
@@ -149,7 +149,7 @@ Car Version=车辆版本
 Last Trip=上一次行程
 Duration=时长
 Distance=距离
-Max kph=最大速度（公里每小时）
+Max km/h=最大速度（公里每小时）
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
@@ -161,7 +161,22 @@ Sentry Mode=哨兵模式
 Preconditioning=预处理
 Offline=离线
 Falling asleep=进入休眠
-
+Driving=驾驶
+km/h=km/h
+Sleeping=休眠
+kW=kW
+OK=OK
+No=否
+Yes=是
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=软件更新
+min=min
+Consumption=消费量
+Ø Consumption=Ø 消费量
+Wh/km=Wh/km
 
 #menu.php
 Logfile=日志
@@ -170,7 +185,6 @@ Update=升级
 Dashboards=仪表盘
 Fleet Statistic=车队统计
 Extras=附加功能
-Settings=设置
 Backup=备份
 Restore=还原
 Geofence=电子围栏
@@ -209,9 +223,17 @@ ScanMyTesla last received=ScanMyTesla上一次接收时间
 Tasker Token=Tasker令牌
 Tasker URL=Tasker 网址
 Received Tasker Token=已接收Tasker令牌
-
-#geoadd.php
-Bezeichnung=描述
+Saved!=得救了!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Adminpanel
+mile=英里
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=匿名分享数据
+Sleep=休眠
+to=至
+Show calc. 100% range=Show calc. 100% range
+Position by StreamingAPI=Position by StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=All 电量消耗 - ScanMyTesla
@@ -241,13 +263,13 @@ Einschlafen=进入休眠
 Automatic updates=自动更新
 
 TextShare=<h1>匿名共享充电与电池损耗曲线</h1>我们希望建立一个充电与电池损耗的数据库.便于让用户对比参考，及时发现自己车辆与平均值的异常偏离.这个数据也可以作为车辆二手交易时，电池续航能力良好的证明. 也可以用于向Tesla证明自己车辆性能的下降。<br><br>你是否愿意匿名共享充电与电池损耗曲线给其他Tesla用户？这个设置可以在设置页面随时进行变更.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>流媒体API的位置</h1>从流媒体API中启用位置数据库条目--取决于汽车的接收情况，这意味着每秒最多5个位置（相比之下，正常模式下每5秒一个位置），这将大大增加你的数据库的大小，将增加SD卡的磨损，并导致巨大的备份。
 Daten anonym teilen=匿名共享数据
 TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
 Resume Teslalogger=继续Teslalogger
 Range=里程
 
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+TeslaAuthApps=你可以使用以下应用程序从Tesla服务器获取访问令牌和刷新令牌。
 
 #abrp.php
 ABRPTitle=Abetterrouteplanner 链接
@@ -278,3 +300,52 @@ Cost per minute=每分钟充电计价
 Idle cost per minute=充电超时计价
 Total=汇总
 Minutes=会议记录
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=你可以将你的Teslalogger连接到你的Wallbox，以计算充电效率或用于为你的汽车充电的光伏的百分比。
+Host=Host
+Param=Param
+Test=测试
+Type=类型
+Info=信息
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=你可以设置一个从TeslaLogger到SuperChargeBingo的链接，在超级充电站进行自动签到。
+Create a SuperChargeBingo account=创建一个SuperChargeBingo账户
+Create API key (must be secure)=创建API密钥（必须是安全的）。
+Copy Username and API key and insert it in TeslaLogger=复制用户名和API密钥并将其插入TeslaLogger中。
+Save and restart TeslaLogger=保存并重新启动TeslaLogger
+Username=帐号
+API key=API密钥
+
+#geoadd.php
+Name & Position=姓名和职位
+Description=描述
+Radius=半径
+Special Flags=特殊旗帜
+Home=首页
+Work=工作
+Copy Charging Costs=复印收费的费用
+Don't Combine Charging Sessions=不要合并充电时段
+Set Charge Limit=设置充电限制
+SOC=SOC
+Set on arrival=抵达时的设置
+Set Charge Limit After Charging=充电后设置充电限制
+Open Charge Port=打开充电端口
+Gear=装备
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=高频率记录
+Special Count=特殊计数
+Count=Count
+Special Features=特别之处
+Enable Sentry Mode=启用哨兵模式
+Disable Sentry Mode=禁用哨兵模式
+Turn HVAC off=关掉HVAC
+No sleep=不睡觉

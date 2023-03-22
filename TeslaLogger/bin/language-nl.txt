@@ -149,7 +149,7 @@ Car Version=Auto versie
 Last Trip=Laatste rit
 Duration=Duur
 Distance=Afstand
-Max kph=Max km/h
+Max km/h=Max km/h
 PS=PK
 Current Pos=Huidige positie
 Last Update=Laatste update
@@ -161,6 +161,22 @@ Sentry Mode=Sentry Mode
 Preconditioning=Voorconditionering
 Offline=Offline
 Falling asleep=In slaap vallen
+Driving=Rijden
+Sleeping=Slapen
+kW=kW
+OK=OK
+No=Geen
+Yes=Ja
+Cell Temp=Cel Temp
+Max Charge=Maximale lading
+Max Discharge=Maximale ontlading
+Cell Imbalance=Cel onbalans
+Software Update=Software-update
+Consumption=Verbruik
+Ø Consumption=Ø Verbruik
+min=min
+Wh/km=Wh/km
+km/h=km/h
 
 #menu.php
 Logfile=Logbestand
@@ -190,9 +206,34 @@ Power=Prestaties
 Temperatur=Temperatuur
 Unit of length=Lengte-eenheid
 URL Admin Panel=URL Admin omgeving
-
-#geoadd.php
-Bezeichnung=Beschrijving
+Saved!=Gered!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Admin paneel
+Temperature=Temperatuur
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=mijl
+Ideal=Ideaal
+Rated=Gewaardeerd
+Share data anonymously=Gegevens anoniem delen
+Enable=Schakel  in.
+All=Alle
+Stable=Stabiel
+None=Geen
+Sleep=Slaap
+to=naar
+Show calc. 100% range=Toon calc. 100% bereik
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Teslalogger HTTP-poort
+Zoom Level=Zoom Level
+ScanMyTesla integration=ScanMyTesla integratie
+Position by StreamingAPI=Positie door StreamingAPI
+Main Car=Hoofdwagen
+Car Name=Naam auto
+ScanMyTesla last received=ScanMyTesla ontving laatst
+Tasker Token=Tassen Penning
+Tasker URL=Tassen URL
+Received Tasker Token=Ontvangen Tasker Token
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Alle verbruik - ScanMyTesla
@@ -222,7 +263,7 @@ Einschlafen=In slaap vallen
 Automatic updates=Automatiske oppdateringer
 
 TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Positie door StreamingAPI</h1>maakt positie DB-items van de streaming API mogelijk - afhankelijk van de ontvangst van de auto betekent dit tot 5 posities per seconde (vergeleken met één positie om de vijf seconden in de normale modus), dit zal de grootte van uw database aanzienlijk vergroten, de SD-kaart meer belasten en resulteren in enorme back-ups.
 Daten anonym teilen=Data anoniem delen
 TextSuspendTeslalogger=Teslalogger is gestopt! De gegevens worden niet gelogd!
 Resume Teslalogger=Start Teslalogger
@@ -258,3 +299,53 @@ Cost per charge=Kosten per lading
 Cost per minute=Kosten per minuut
 Idle cost per minute=Kosten blokkeringsvergoeding
 Total=Totaal
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=U kunt uw Teslalogger aansluiten op uw Wallbox om het rendement van het opladen of het percentage fotovoltaïsche energie dat wordt gebruikt om uw auto op te laden, te berekenen.
+Host=Host
+Param=Param
+Test=Test
+Type=Type
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=U kunt een link instellen van TeslaLogger naar SuperChargeBingo om automatisch in te checken bij Superchargers.
+Create a SuperChargeBingo account=Maak een SuperChargeBingo account aan
+Create API key (must be secure)=API-sleutel aanmaken (moet veilig zijn)
+Copy Username and API key and insert it in TeslaLogger=Kopieer gebruikersnaam en API sleutel en plaats deze in TeslaLogger
+Save and restart TeslaLogger=TeslaLogger opslaan en opnieuw opstarten
+Username=Gebruikersnaam
+API key=API sleutel
+
+#geoadd.php
+Name & Position=Naam
+Description=Beschrijving
+Radius=Radius
+Special Flags=Speciale vlaggen
+Home=Home
+Work=Werk
+Charger=Lader
+Copy Charging Costs=Kosten van kopieën
+Don't Combine Charging Sessions=Oplaadsessies niet combineren
+Set Charge Limit=Laadlimiet instellen
+SOC=SOC
+Set on arrival=Ingesteld bij aankomst
+Set Charge Limit After Charging=Laadlimiet instellen na het laden
+Open Charge Port=Open Laadpoort
+Gear=Versnelling
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Hoogfrequent loggen
+Special Count=Speciale telling
+Count=Graaf
+Special Features=Speciale kenmerken
+Enable Sentry Mode=Schildwachtmodus inschakelen
+Disable Sentry Mode=Schildwachtmodus uitschakelen
+Turn HVAC off=Zet HVAC uit
+No sleep=No sleep
