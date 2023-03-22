@@ -113,7 +113,7 @@ select.newJourney {width: 500px;}
                         var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
 						return type === "display" || type === "filter" ? avg_consumption.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) : avg_consumption;
                     }
-                    return "";
+                    return row["charged_kwh"];
                 }},
 
                 {	data: "consumption_kwh",
@@ -293,17 +293,17 @@ select.newJourney {width: 500px;}
             if ($("#name").val().length == 0)
             {
                 alert("<?php t('Journey name missing!'); ?>");
-                reutrn;
+                return;
             }
             else if ($("#start").val() == "")
             {
 				alert("<?php t('Please select start point!'); ?>");
-                reutrn;
+                return;
             }
             else if ($("#end").val() == "")
             {
                 alert("<?php t('Please select end point!'); ?>");
-                reutrn;
+                return;
             }
 
             var d = {
