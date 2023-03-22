@@ -13,12 +13,10 @@ require_once("tools.php");
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
-<!--	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
-	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css"> -->
 	<script src="static/jquery/datatables/1.13.4/datatables.min.js"></script>
 	<link rel='stylesheet' href="static/jquery/datatables/1.13.4/datatables.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	
+
 <style>
 input.newJourney {width: 300px;}
 select.newJourney {width: 500px;}
@@ -113,7 +111,6 @@ select.newJourney {width: 500px;}
                         var distance = row["distance"];
                         var consumption_kwh = row["consumption_kwh"];
                         var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
-						// data = avg_consumption;
 						return type === "display" || type === "filter" ? avg_consumption.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) : avg_consumption;
                     }
                     return "";
