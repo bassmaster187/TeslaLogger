@@ -9,14 +9,20 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1602961255366,
+  "iteration": 1679494069660,
   "links": [
     {
       "icon": "external link",
@@ -25,22 +31,20 @@
       "title": "Admin Panel",
       "tooltip": "",
       "type": "link",
-      "url": "http://raspberry/admin/"
+      "url": "http://192.168.1.161:8888/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "autoZoom": true,
-      "datasource": "teslalogger",
-      "defaultLayer": "OpenStreetMap",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
       },
+      "defaultLayer": "OpenStreetMap",
       "gridPos": {
-        "h": 21,
+        "h": 23,
         "w": 24,
         "x": 0,
         "y": 0
@@ -55,11 +59,15 @@
       "showLayerChanger": true,
       "targets": [
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID = $Car\r\ngroup by UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=$Car\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=$Car&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=$Car\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=$Car&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY time_sec ASC",
+          "rawSql": "SELECT\r\n  avg(UNIX_TIMESTAMP(datum)) as time_sec,\r\n   avg(lat),\r\n   avg(lng),\r\n   0 as type,\r\n   null as address, CarID\r\n   FROM pos\r\n   WHERE $__timeFilter(datum) and CarID in ($Car)\r\ngroup by CarID, UNIX_TIMESTAMP(datum) div 180\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW<br><a href=\"d/BHhxFeZRz/laden?orgId=1&from=', UNIX_TIMESTAMP(StartDate)*1000,'&to=',UNIX_TIMESTAMP(EndDate)*1000,'&var-Car=',chargingstate.CarID,'\">[CHARGING]</a><br><a href=\"d/TSmNYvRRk/ladehistorie?orgId=1&var-Car=',chargingstate.CarID,'&var-Textfilter=',address,'&from=now-2y&to=now\">[CHARGINGHISTORY]</a>') as address, chargingstate.CarID FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE '$Charger' = 'ON' and $__timeFilter(pos.datum) and chargingstate.CarID in ($Car) \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\n\r\n ORDER BY CarID, time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -88,23 +96,30 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "text": "",
-          "value": "1"
+          "selected": true,
+          "text": [
+            ""
+          ],
+          "value": [
+            "1"
+          ]
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "Car",
-        "multi": false,
+        "label": "",
+        "multi": true,
         "name": "Car",
         "options": [],
         "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
@@ -113,22 +128,18 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
-          "tags": [],
           "text": "ON",
           "value": "ON"
         },
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "Charger",
         "options": [
@@ -152,7 +163,7 @@
     ]
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-5y",
     "to": "now"
   },
   "timepicker": {
@@ -183,5 +194,6 @@
   "timezone": "",
   "title": "Visited",
   "uid": "RG_DxSmgk",
-  "version": 28
+  "version": 2,
+  "weekStart": ""
 }
