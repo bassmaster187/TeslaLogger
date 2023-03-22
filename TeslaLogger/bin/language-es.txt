@@ -356,10 +356,6 @@ Disable Sentry Mode=Desactivar el modo centinela
 Turn HVAC off=Apagar HVAC
 No sleep=No dormir
 
-
-#Hinzugefuegt durch Scriptlauf vom 19.03.2023 00:41:17
-#Missing translation elements
-
 #journeys.php
 Journeys=Viajes
 Journey name missing!=Falta el nombre del viaje
