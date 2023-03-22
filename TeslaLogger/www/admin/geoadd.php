@@ -344,7 +344,7 @@ if (isset($id))
 			echo("id: $id");
 		?>     
 	}).always(function() {
-	alert("Saved!");
+	alert("<?php t('Saved!'); ?>");
 	//location.reload();
 	location.href = document.referrer;
 	});		
