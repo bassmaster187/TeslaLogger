@@ -13,9 +13,9 @@ require_once("tools.php");
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
-	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="static/jquery/datatables/1.13.4/datatables.min.js"></script>
+	<link rel='stylesheet' href="static/jquery/datatables/1.13.4/datatables.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css">
 
 	<script>
 	<?php
@@ -27,8 +27,13 @@ require_once("tools.php");
     		if($(this).is('[readonly]')) { return false; }
 		});
 
-		$("#cars").DataTable();
-
+		$("#cars").DataTable({
+			lengthChange: false,
+			bFilter: false,
+			paging: false,
+			info: false
+		});
+		
 		$("#TokenHelp").click(function() {
 			$("#dialog-TokenHelp").dialog({
 				resizable: false,
@@ -371,17 +376,17 @@ if (isset($_REQUEST["id"]))
 </div>
 
 <table>
-<tr><td><?php t("Access Token"); ?>:</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
-<tr><td><?php t("Refresh Token"); ?>:</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
+<tr><td><?php t("Access Token"); ?>:&nbsp;</td><td><input id="access_token" type="text" autocomplete="new-password"></td></tr>
+<tr><td><?php t("Refresh Token"); ?>:&nbsp;</td><td><input id="refresh_token" type="text" autocomplete="new-password"></td></tr>
 
 <tr><td colspan="2"><button onclick="CheckAccessToken();" style="float: right;"><?php t("OK"); ?></button></td></tr>
 
-<tr style='visibility:collapse'><td><b><?php t("Email"); ?>:</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
-<tr style='visibility:collapse'><td><?php t("Password"); ?>:</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
-<tr style='visibility:collapse'><td><?php t("Repeat Password"); ?>:</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
+<tr style='visibility:collapse'><td><b><?php t("Email"); ?>:&nbsp;</b></td><td><input id="email" type="text" autocomplete="new-password" value="<?php echo($email) ?>" <?php echo($disablecarid) ?>/></td></tr>
+<tr style='visibility:collapse'><td><?php t("Password"); ?>:&nbsp;</td><td><input id="password1" type="password" autocomplete="new-password" /></td></tr>
+<tr style='visibility:collapse'><td><?php t("Repeat Password"); ?>:&nbsp;</td><td><input id="password2" type="password" autocomplete="new-password" /></td></tr>
 
-<tr><td><?php t("Car"); ?>:</td><td> <select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></td></tr>
-<tr height="35px"><td><?php t("Free Supercharging"); ?>:</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
+<tr><td><?php t("Car"); ?>:&nbsp;</td><td> <select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></td></tr>
+<tr height="35px"><td><?php t("Free Supercharging"); ?>:&nbsp;</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
 
 <tr><td>&nbsp;</td></tr>
 <!-- <tr><td colspan="2"><b>Or you can use Tesla Access Token &amp; Refresh Token to login:&nbsp;&nbsp;</b></td><td><img id="TokenHelp" src="img/icon-help-24.png" class="pointer"/></td></tr> -->
@@ -405,33 +410,55 @@ else
 <div>
 <h1><?php t("Please choose your vehicle"); ?>:</h1>
 <table id="cars" class="">
-<thead><tr><th><?php t("ID"); ?></th><th><?php t("Email"); ?></th><th>#</th><th><?php t("Name"); ?></th><th><?php t("Model"); ?></th><th><?php t("VIN"); ?></th><th><?php t("Tasker Token"); ?></th><th style='text-align:center;'><?php t("Free SUC"); ?></th><th><?php t("Edit"); ?></th></tr></thead>
-<tbody>
+	<thead>
+		<tr>
+			<th><?php t("ID"); ?></th>
+			<th><?php t("Email"); ?></th>
+			<th>#</th>
+			<th><?php t("Name"); ?></th>
+			<th><?php t("Model"); ?></th>
+			<th><?php t("VIN"); ?></th>
+			<th><?php t("Tasker Token"); ?></th>
+			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
+			<th><?php t("Edit"); ?></th>
+		</tr>
+	</thead>
+	<tbody>
 <?php
-	//var_dump($url);
+		//var_dump($url);
 
-	foreach ($jcars as $k => $v) {
-		$email = $v->{"tesla_name"};
-		$display_name = $v->{"display_name"};
-		$tasker_token = $v->{"tasker_hash"};    
-		$car = $v->{"model_name"};  
-		$id = $v->{"id"};
-		$vin = $v->{"vin"};
-		$tesla_carid = $v->{"tesla_carid"};
-		$freesuc = $v->{"freesuc"};
-		$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
-		if ($freesuc == "1")
-			$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
-		
-		
-		echo("   <tr><td>$id</td><td>$email</td><td>$tesla_carid</td><td>$display_name</td><td>$car</td><td>$vin</td><td>$tasker_token</td><td style='text-align:center;'>$freesuccheckbox</td><td><a href='password.php?id=$id&vin=$vin'>");
-		echo t("Edit");
-		echo ("</a></td></tr>\r\n");
-	}
-?>
-<tr><td colspan="6"><button onclick="location.href='password.php?id=-1'"><?php t("NEW CAR"); ?></button></td><td></td><td></td><td></td></tr>
-</tbody>
+		foreach ($jcars as $k => $v) {
+			$email = $v->{"tesla_name"};
+			$display_name = $v->{"display_name"};
+			$tasker_token = $v->{"tasker_hash"};    
+			$car = $v->{"model_name"};  
+			$id = $v->{"id"};
+			$vin = $v->{"vin"};
+			$tesla_carid = $v->{"tesla_carid"};
+			$freesuc = $v->{"freesuc"};
+			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
+			if ($freesuc == "1")
+				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
+			
+			echo("	<tr>\r\n");
+			echo("		<td>$id</td>\r\n");
+			echo("		<td>$email</td>\r\n");
+			echo("		<td>$tesla_carid</td>\r\n");
+			echo("		<td>$display_name</td>\r\n");
+			echo("		<td>$car</td>\r\n");
+			echo("		<td>$vin</td>\r\n");
+			echo("		<td>$tasker_token</td>\r\n");
+			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
+			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
+			echo t("Edit");
+			echo("</a></td>\r\n");
+			echo("	</tr>\r\n");
+		}
+	?>
+	</tbody>
 </table>
+<p></p>
+<button onclick="location.href='password.php?id=-1'"><?php t("NEW CAR"); ?></button>
 </div>
 <?php
 }
