@@ -2054,10 +2054,10 @@ CREATE TABLE superchargers(
 
         private static void UpdateGrafanaVersion()
         {
-            string newversion = "8.3.2";
+            string newversion = "8.5.22";
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
-            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1")
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1" || GrafanaVersion == "8.3.2")
             {
                 Thread threadGrafanaUpdate = new Thread(() =>
                 {
