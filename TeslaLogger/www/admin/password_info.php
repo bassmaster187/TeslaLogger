@@ -13,9 +13,7 @@ require_once("tools.php");
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
-	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css">
 
 	<script>
 	<?php
@@ -89,7 +87,7 @@ require_once("tools.php");
 
 </script>
 </head>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <div style="max-width: 1260px;">
 <?php 
 include "menu.php";

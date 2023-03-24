@@ -364,7 +364,7 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if(isDocker() && GrafanaVersion() != "8.3.2")
+	else if(isDocker() && GrafanaVersion() != "8.5.22")
 	{?>
 		$("#InfoText").html("<h1>Please update to latest docker-compose.yml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
