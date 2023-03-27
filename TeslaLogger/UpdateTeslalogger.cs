@@ -91,10 +91,10 @@ namespace TeslaLogger
 
                 // start schema update
 
-                DBHelper.EnableUTF8mb4();
-                CheckDBCharset();
-
                 KVS.CheckSchema();
+                DBHelper.EnableUTF8mb4();
+
+                CheckDBCharset();                
 
                 CheckDBSchema_can();
 
