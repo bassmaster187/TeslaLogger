@@ -145,6 +145,7 @@ namespace TeslaLogger
                     if (oldvalue != null && newvalue != null && oldvalue != newvalue)
                     {
                         car.SetLastCarUsed(DateTime.Now);
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
                     break;
                 case "charging_state":
@@ -374,7 +375,7 @@ namespace TeslaLogger
             }
         }
 
-        public bool ParseAPI(string JSON, string source, int CarInAccount = 0)
+        public bool ParseAPI(string JSON, string source)
         {
             if (string.IsNullOrEmpty(JSON))
             {
@@ -434,7 +435,7 @@ namespace TeslaLogger
                 case "vehicle_state":
                     return ParseVehicleState(JSON);
                 case "vehicles":
-                    return ParseVehicles(JSON, CarInAccount);
+                    return ParseVehicles(JSON);
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
@@ -442,7 +443,7 @@ namespace TeslaLogger
             return false;
         }
 
-        private bool ParseVehicles(string _JSON, int CarInAccount)
+        private bool ParseVehicles(string _JSON)
         {
             try
             {
@@ -451,14 +452,11 @@ namespace TeslaLogger
                 if (r1 == null)
                     return false;
 
-                if (r1.Count <= CarInAccount)
+                dynamic r3 = SearchCarDictionary(r1);
+
+                if (r3 == null)
                     return false;
 
-                dynamic count = jsonResult["count"];
-                if (count == null | count == 0)
-                    return false;
-
-                dynamic r3 = r1[CarInAccount];
                 Dictionary<string, object> r4 = r3.ToObject<Dictionary<string, object>>();
                 /* {"response":
                  *      [
@@ -680,6 +678,7 @@ namespace TeslaLogger
                             case "minutes_to_full_charge":
                             case "off_peak_hours_end_time":
                             case "scheduled_charging_start_time_app":
+                            case "scheduled_charging_start_time_minutes":
                             case "scheduled_departure_time":
                             case "scheduled_departure_time_minutes":
                             case "usable_battery_level":
@@ -890,9 +889,11 @@ namespace TeslaLogger
                             case "motorized_charge_port":
                             case "plg":
                             case "pws":
+                            case "range_plus_badging":
                             case "rhd":
                             case "supports_qr_pairing":
                             case "use_range_badging":
+                            case "webcam_selfie_supported":
                             case "webcam_supported":
                                 if (r2.TryGetValue(key, out object value))
                                 {
@@ -931,6 +932,7 @@ namespace TeslaLogger
                             case "rear_seat_heaters":
                             case "rear_seat_type":
                             case "seat_type":
+                            case "steering_wheel_type":
                             case "sun_roof_installed":
                             case "key_version":
                             case "utc_offset":
@@ -958,6 +960,28 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+
+                    try
+                    {
+                        if (r2.ContainsKey("wheel_type"))
+                        {
+                            string wheel_type = r2["wheel_type"].ToString();
+                            if (wheel_type?.Length > 0)
+                            {
+                                if (car.wheel_type != wheel_type)
+                                {
+                                    car.Log("Wheel type changed: " + wheel_type);
+                                    car.wheel_type = wheel_type;
+                                    car.WriteSettings();
+                                }
+                            }
+                        }
+                    } catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        Tools.DebugLog("Exception", ex);
+                    }
+
                     return true;
                 }
             }
@@ -1081,6 +1105,7 @@ namespace TeslaLogger
                                 break;
                             // string
                             case "autopark_state_v2":
+                            case "autopark_state_v3":
                             case "autopark_style":
                             case "car_version":
                             case "last_autopark_error":
@@ -1357,6 +1382,8 @@ namespace TeslaLogger
                             case "fan_status":
                             case "left_temp_direction":
                             case "right_temp_direction":
+                            case "seat_fan_front_left":
+                            case "seat_fan_front_right":
                             case "seat_heater_left":
                             case "seat_heater_rear_center":
                             case "seat_heater_rear_left":
@@ -1453,6 +1480,29 @@ namespace TeslaLogger
                 .Submit();
 
             Logfile.Log(text);
+        }
+
+        private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
+        {
+            if (car.Vin?.Length > 0)
+            {
+                for (int x = 0; x < cars.Count; x++)
+                {
+                    var cc = cars[x];
+                    var ccVin = cc["vin"].ToString();
+
+                    if (ccVin == car.Vin)
+                        return cc;
+                }
+
+                Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
+
+                // DBHelper.ExecuteSQLQuery("delete from cars where id = " + car.CarInDB); 
+
+                return null;
+            }
+
+            return null;
         }
     }
 }

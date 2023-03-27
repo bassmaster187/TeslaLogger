@@ -215,7 +215,10 @@ SELECT
 FROM
   pos
 WHERE
-  id = @startID ", con))
+  id = @startID ", con)
+                {
+                    CommandTimeout = 6000
+                })
                 {
                     cmd.Parameters.AddWithValue("@startID", request.StartPosID);
                     MySqlDataReader dr = cmd.ExecuteReader();
@@ -243,6 +246,7 @@ ORDER BY
                     da.SelectCommand.Parameters.AddWithValue("@CarID", CarID);
                     da.SelectCommand.Parameters.AddWithValue("@startID", request.StartPosID);
                     da.SelectCommand.Parameters.AddWithValue("@endID", request.EndPosID);
+                    da.SelectCommand.CommandTimeout = 6000;
                     //Tools.DebugLog(da.SelectCommand);
                     SQLTracer.TraceDA(dt, da);
                 }

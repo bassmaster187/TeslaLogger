@@ -21,7 +21,7 @@ else
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Supercharge Bingo</title>
+    <title><?php t("SuperChargeBingo"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -30,11 +30,11 @@ else
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
-  	<body style="padding-top: 5px; padding-left: 10px;">
+  	<body>
 	
 	<?php 
     include "menu.php";
-    echo(menu("Supercharge Bingo"));
+    echo(menu("SuperChargeBingo"));
 
     $current_carid = $_SESSION["carid"];
     if (!isset($current_carid))
@@ -78,24 +78,24 @@ else
 </script>
 
 <div id="content" style="max-width:1036px;">
-<h1>SuperChargeBingo</h1>
-You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers. 
+<h1><?php t("SuperChargeBingo"); ?></h1>
+<?php t("SuperChargeBingoComment"); ?>
 </div>
-<h1>Setup</h1>
+<h1><?php t("Setup"); ?></h1>
 <ul>
-    <li>Create a SuperChargeBingo account:https://supercharge.bingo/#/register?pk_campaign=integration&pk_kwd=teslalogger</li>
-    <li>Create API key (must be secure)</li>
-    <li>Copy Username and API key and insert it in TeslaLogger</li>
-    <li>Save and restart TeslaLogger</li>
+    <li><a href="https://supercharge.bingo/#/register?pk_campaign=integration&pk_kwd=teslalogger" target="_blank"><?php t("Create a SuperChargeBingo account"); ?></a></li>
+	<li><?php t("Create API key (must be secure)"); ?></li>
+	<li><?php t("Copy Username and API key and insert it in TeslaLogger"); ?></li>
+	<li><?php t("Save and restart TeslaLogger"); ?></li>
 </ul>
-<h1>Settings</h1>
+<h1><?php t("Settings"); ?></h1>
 <table>
 <tr>
-    <td>Username:</td><td><input id="user" size="40" value="<?= $sucBingo_user ?>"/></td>
+    <td><?php t("Username"); ?>: </td><td><input id="user" size="40" value="<?= $sucBingo_user ?>"/></td>
 </tr>
 <tr>
-    <td>API key:</td><td><input id="apikey" size="100" value="<?= $sucBingo_apiKey ?>"/></td>
+    <td><?php t("API key"); ?>: </td><td><input id="apikey" size="100" value="<?= $sucBingo_apiKey ?>"/></td>
 </tr>
 <tr>    
-    <td></td><td><button onClick="javascript:Save();">Save</button></td>
+    <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
 </tr>

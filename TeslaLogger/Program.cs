@@ -13,9 +13,9 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class Program
     {
-        public static bool VERBOSE = false;
-        public static bool SQLTRACE = false;
-        public static bool SQLFULLTRACE = false;
+        public static bool VERBOSE; // defaults to false
+        public static bool SQLTRACE; // defaults to false
+        public static bool SQLFULLTRACE; // defaults to false
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
@@ -184,9 +184,10 @@ namespace TeslaLogger
                 string vin = r["vin"] as String ?? "";
                 string tasker_hash = r["tasker_hash"] as String ?? "";
                 double? wh_tr = r["wh_tr"] as double?;
+                string wheel_type = r["wheel_type"] as String ?? "";
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState, wheel_type);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)
@@ -450,6 +451,8 @@ namespace TeslaLogger
                 DateTime start = DateTime.Now;
                 Logfile.Log("RunHousekeepingInBackground started");
                 Tools.Housekeeping();
+                DBHelper.UpdateCO2();
+                GeocodeCache.Cleanup();
                 Logfile.Log("RunHousekeepingInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
             })
             {
@@ -532,9 +535,15 @@ namespace TeslaLogger
                     StaticMapService.CreateAllChargingMaps();
                     StaticMapService.CreateAllParkingMaps();
 
+                    // DBHelper.UpdateCO2();
+
+                    Journeys.UpdateAllJourneys();
+
                     Car.LogActiveCars();
 
                     WebHelper.SearchFornewCars();
+
+                    GeocodeCache.Cleanup();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

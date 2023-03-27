@@ -1,9 +1,10 @@
-#一般的
+﻿#一般的
 Delete=刪除
 Save=保存
 Settings=设置
 Setup=设置
 Enabled=启用
+kWh=千瓦时
 
 #Akku Trips.json
 Akku Trips=充电行程
@@ -148,7 +149,7 @@ Car Version=车辆版本
 Last Trip=上一次行程
 Duration=时长
 Distance=距离
-Max kph=最大速度（公里每小时）
+Max km/h=最大速度（公里每小时）
 PS=PS
 Current Pos=当前位置
 Last Update=上一次更新
@@ -160,7 +161,22 @@ Sentry Mode=哨兵模式
 Preconditioning=预处理
 Offline=离线
 Falling asleep=进入休眠
-
+Driving=驾驶
+km/h=km/h
+Sleeping=休眠
+kW=kW
+OK=OK
+No=否
+Yes=是
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=软件更新
+min=min
+Consumption=消费量
+Ø Consumption=Ø 消费量
+Wh/km=Wh/km
 
 #menu.php
 Logfile=日志
@@ -169,7 +185,6 @@ Update=升级
 Dashboards=仪表盘
 Fleet Statistic=车队统计
 Extras=附加功能
-Settings=设置
 Backup=备份
 Restore=还原
 Geofence=电子围栏
@@ -178,11 +193,11 @@ Wakeup Teslalogger=唤醒 Teslalogger
 Dashboard=仪表盘
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla 账号信息
-Bitte Tesla Account Zugangsdaten eingeben=请输入Tesla账号信息
+Teslalogger Tesla Credentials=Teslalogger Tesla 账号信息
+Please enter your Tesla account credentials=请输入Tesla账号信息
 Email=邮箱地址
-Passwort=密码
-Passwort wiederholen=再次输入密码
+Password=密码
+Repeat Password=再次输入密码
 Speichern=保存
 
 #settings.php
@@ -208,9 +223,17 @@ ScanMyTesla last received=ScanMyTesla上一次接收时间
 Tasker Token=Tasker令牌
 Tasker URL=Tasker 网址
 Received Tasker Token=已接收Tasker令牌
-
-#geoadd.php
-Bezeichnung=描述
+Saved!=得救了!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Adminpanel
+mile=英里
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=匿名分享数据
+Sleep=休眠
+to=至
+Show calc. 100% range=Show calc. 100% range
+Position by StreamingAPI=Position by StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=All 电量消耗 - ScanMyTesla
@@ -240,24 +263,13 @@ Einschlafen=进入休眠
 Automatic updates=自动更新
 
 TextShare=<h1>匿名共享充电与电池损耗曲线</h1>我们希望建立一个充电与电池损耗的数据库.便于让用户对比参考，及时发现自己车辆与平均值的异常偏离.这个数据也可以作为车辆二手交易时，电池续航能力良好的证明. 也可以用于向Tesla证明自己车辆性能的下降。<br><br>你是否愿意匿名共享充电与电池损耗曲线给其他Tesla用户？这个设置可以在设置页面随时进行变更.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>流媒体API的位置</h1>从流媒体API中启用位置数据库条目--取决于汽车的接收情况，这意味着每秒最多5个位置（相比之下，正常模式下每5秒一个位置），这将大大增加你的数据库的大小，将增加SD卡的磨损，并导致巨大的备份。
 Daten anonym teilen=匿名共享数据
 TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
 Resume Teslalogger=继续Teslalogger
 Range=里程
 
-Ladekosten=充电成本
-Ladesäule=充电站
-Währung=货币
-Kosten pro kWh=每度电计价
-Kosten pro Ladung=单次充电计价
-Kosten pro Minute=每分钟充电计价
-Kosten Blockiergebühr=充电超时计价
-Summe=汇总
-kWh laut Zähler / Rechnung=计价表千瓦时数 / 收据
-Wirkungsgrad=效率
-
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+TeslaAuthApps=你可以使用以下应用程序从Tesla服务器获取访问令牌和刷新令牌。
 
 #abrp.php
 ABRPTitle=Abetterrouteplanner 链接
@@ -273,3 +285,103 @@ ABRP8=在 Teslalogger 中插入令牌
 ABRP9=检查 Teslalogger 是否已连接
 ABRPYT=查看 YouTube 教程以获取现场演示
 ABRPToken=Abetterrouteplanner 令牌
+
+#chargingcost.php
+Charging Costs=充电成本
+Charged=已充电
+Charger=充电站
+Date=日期
+Efficiency=效率
+Currency=货币
+kWh according to meter/invoice=计价表千瓦时数 / 收据
+Cost per kWh=每度电计价
+Cost per charge=单次充电计价
+Cost per minute=每分钟充电计价
+Idle cost per minute=充电超时计价
+Total=汇总
+Minutes=会议记录
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=你可以将你的Teslalogger连接到你的Wallbox，以计算充电效率或用于为你的汽车充电的光伏的百分比。
+Host=Host
+Param=Param
+Test=测试
+Type=类型
+Info=信息
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=你可以设置一个从TeslaLogger到SuperChargeBingo的链接，在超级充电站进行自动签到。
+Create a SuperChargeBingo account=创建一个SuperChargeBingo账户
+Create API key (must be secure)=创建API密钥（必须是安全的）。
+Copy Username and API key and insert it in TeslaLogger=复制用户名和API密钥并将其插入TeslaLogger中。
+Save and restart TeslaLogger=保存并重新启动TeslaLogger
+Username=帐号
+API key=API密钥
+
+#geoadd.php
+Name & Position=姓名和职位
+Description=描述
+Radius=半径
+Special Flags=特殊旗帜
+Home=首页
+Work=工作
+Copy Charging Costs=复印收费的费用
+Don't Combine Charging Sessions=不要合并充电时段
+Set Charge Limit=设置充电限制
+SOC=SOC
+Set on arrival=抵达时的设置
+Set Charge Limit After Charging=充电后设置充电限制
+Open Charge Port=打开充电端口
+Gear=装备
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=高频率记录
+Special Count=特殊计数
+Count=Count
+Special Features=特别之处
+Enable Sentry Mode=启用哨兵模式
+Disable Sentry Mode=禁用哨兵模式
+Turn HVAC off=关掉HVAC
+No sleep=不睡觉
+
+#journeys.php
+Journeys=旅程
+Journey name missing!=旅程名称丢失!
+Please select=请选择
+Please select start point!=请选择起始点!
+Please select end point!=请选择结束点!
+TextJourneys=你可以用旅程来组合一次长途旅行/时间，并总结出所有的数字。这对于跟踪一次长途旅行的完整充电时间或比较夏季或冬季轮胎的消耗量非常有用。
+ID=身份证
+Journey=旅程
+Start address=起始地址
+Target address=目标地址
+End=结束
+Consumed kWh=消耗的千瓦时
+Charged kWh=充电千瓦时
+Drive time [h]=驾驶时间 [h]
+Charge time [h]=充电时间 [h]
+Distance [mi]=距离 [玫琳]
+Distance [km]=距离 [公里]
+Charging costs=收费成本
+CO2 [kg]=CO2 [kg]
+New Journey=新的旅程
+Journey name=旅程名称
+Please wait=请等待
+Please select start first=请先选择开始
+DelJourney=你真的想删除旅程{id}吗？
+Display _MENU_ records per page=每页显示_MENU_条记录
+Nothing found=没有发现
+Showing _START_ to _END_ of _TOTAL_ entries=显示_TOTAL_条中的_START_至_END_条
+No records available=无记录可查
+(filtered from _MAX_ total records)=(从_MAX_条总记录中过滤)
+Search=搜索
+First=首先
+Last=最后一次
+Next=下一页
+Previous=上一篇

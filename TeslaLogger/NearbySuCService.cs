@@ -69,81 +69,141 @@ namespace TeslaLogger
                     string result = string.Empty;
                     try
                     {
-                        result = car.webhelper.GetNearbyChargingSites().Result;
-                        if (result == null || result == "NULL")
-                            continue;
+                        bool logSent = true;
+                        double requestlat = 0; ;
+                        double requestlng = 0;
 
-                        if (result.Contains("Retry later"))
+                        for (int stage = 0; stage < 2; stage++)
                         {
-                            Tools.DebugLog("NearbySuCService: Retry later");
-                            return;
-                        }
-                        else if (result.Contains("vehicle unavailable"))
-                        {
-                            Tools.DebugLog("NearbySuCService: vehicle unavailable");
-                            return;
-                        }
-                        else if (result.Contains("502 Bad Gateway"))
-                        {
-                            Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
-                            return;
-                        }
+                            double lat = 0;
+                            double lng = 0;
 
-                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
-                        if (jsonResult == null)
-                            continue;
-
-                        if (jsonResult.ContainsKey("data"))
-                        {
-                            dynamic data = jsonResult["data"];
-                            if (data == null)
-                                continue;
-
-                            if (data.ContainsKey("charging"))
+                            if (stage == 0)
                             {
-                                dynamic charging = data["charging"];
-                                if (charging == null)
+                                lat = car.CurrentJSON.GetLatitude();
+                                lng = car.CurrentJSON.GetLongitude();
+                            }
+                            else if (stage == 1) {
+                                lat = requestlat;
+                                lng = requestlng;
+                            }
+
+                            if (lat == 0 ||lng == 0)
+                            {
+                                continue;
+                            }
+
+                            /*
+                            for (double lat = 20; lat < 55; lat += 4)
+                                for(double lng = -124; lng < -61; lng += 4)
+                            */
+                            {
+                                result = car.webhelper.GetNearbyChargingSites(lat, lng).Result;
+                                if (result == null || result == "NULL")
+                                {
+                                    continue;
+                                }
+
+                                if (result.Contains("Retry later"))
+                                {
+                                    Tools.DebugLog("NearbySuCService: Retry later");
+                                    return;
+                                }
+                                else if (result.Contains("vehicle unavailable"))
+                                {
+                                    Tools.DebugLog("NearbySuCService: vehicle unavailable");
+                                    return;
+                                }
+                                else if (result.Contains("502 Bad Gateway"))
+                                {
+                                    Tools.DebugLog("NearbySuCService: 502 Bad Gateway");
+                                    return;
+                                }
+
+                                dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                                if (jsonResult == null)
                                     continue;
 
-                                if (charging.ContainsKey("nearbySites"))
+                                if (jsonResult.ContainsKey("data"))
                                 {
-                                    dynamic nearbySites = charging["nearbySites"];
-                                    if (nearbySites == null)
+                                    dynamic data = jsonResult["data"];
+                                    if (data == null)
                                         continue;
 
-                                    if (nearbySites.ContainsKey("sitesAndDistances"))
+                                    if (data.ContainsKey("charging"))
                                     {
-                                        dynamic superchargers = nearbySites["sitesAndDistances"];
-                                        foreach (dynamic suc in superchargers)
-                                        {
-                                            /*
-                  {
-                    "location": { "lat": 33.848756, "long": -84.36434 },
-                    "name": "Atlanta, GA - Peachtree Road",
-                    "type": "supercharger",
-                    "distance_miles": 10.868304,
-                    "available_stalls": 4,
-                    "total_stalls": 5,
-                    "site_closed": false
-                  }
-                                             */
+                                        dynamic charging = data["charging"];
+                                        if (charging == null)
+                                            continue;
 
-                                            try
+                                        if (charging.ContainsKey("nearbySites"))
+                                        {
+                                            dynamic nearbySites = charging["nearbySites"];
+                                            if (nearbySites == null)
+                                                continue;
+
+                                            if (nearbySites.ContainsKey("sitesAndDistances"))
                                             {
-                                                AddSuperchargerState(suc, send, result);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
-                                                Logfile.Log(ex.ToString());
+                                                car.webhelper.nearbySuCServiceOK++;
+                                                car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
+
+                                                dynamic superchargers = nearbySites["sitesAndDistances"];
+                                                foreach (dynamic suc in superchargers)
+                                                {
+                                                    /*
+                          {
+                            "location": { "lat": 33.848756, "long": -84.36434 },
+                            "name": "Atlanta, GA - Peachtree Road",
+                            "type": "supercharger",
+                            "distance_miles": 10.868304,
+                            "available_stalls": 4,
+                            "total_stalls": 5,
+                            "site_closed": false
+                          }
+                                                     */
+
+                                                    try
+                                                    {
+                                                        AddSuperchargerState(suc, send, result, stage == 0);
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
+                                                        Logfile.Log(ex.ToString());
+                                                    }
+                                                }
                                             }
                                         }
                                     }
-                                }
-                            }
 
-                            if (send.Count > 0)
-                                ShareSuc(send);
+                                    if (logSent)
+                                    {
+                                        string firstname = "";
+                                        try
+                                        {
+                                            if (send.Count > 0)
+                                            {
+                                                dynamic d = send[0];
+                                                firstname = d["n"];
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
+
+                                        if (stage == 0)
+                                            car.Log("SuC sent: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
+                                        else
+                                            car.Log("Request from teslalogger.de: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
+                                    }
+
+                                    if (send.Count > 0)
+                                        ShareSuc(send, stage==0, out requestlat, out requestlng);
+
+                                    send.Clear();
+                                }
+
+                                Thread.Sleep(1000);
+                            }
                         }
                         Thread.Sleep(30000);
                     }
@@ -157,8 +217,11 @@ namespace TeslaLogger
             }
         }
 
-        private static void ShareSuc(ArrayList send)
+        private static void ShareSuc(ArrayList send, bool nextsuc, out double requestlat, out double requestlng)
         {
+            requestlat = 0;
+            requestlng = 0;
+
             try
             {
                 string json = JsonConvert.SerializeObject(send);
@@ -169,11 +232,29 @@ namespace TeslaLogger
                     using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
                     {
                         DateTime start = DateTime.UtcNow;
-                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger.php"), content).Result;
+                        string suffix = "";
+                        if (nextsuc)
+                            suffix = "?nextsuc=1";
+
+                        HttpResponseMessage result = client.PostAsync(new Uri("http://teslalogger.de/share_supercharger2.php"+ suffix), content).Result;
                         string r = result.Content.ReadAsStringAsync().Result;
                         DBHelper.AddMothershipDataToDB("teslalogger.de/share_supercharger.php", start, (int)result.StatusCode);
 
                         Tools.DebugLog("ShareSuc: " + Environment.NewLine + r);
+
+                        string[] ret = r.Split('\n');
+                        if (ret.Length > 0) { 
+                            if (ret[0].StartsWith("NEXTSUC:"))
+                            {
+                                string csv = ret[0].Trim();
+                                csv = csv.Substring(csv.IndexOf(":") + 1);
+                                var c = csv.Split(',');
+                                if (c.Length > 1) { 
+                                    requestlat = Convert.ToDouble(c[0], Tools.ciEnUS);
+                                    requestlng = Convert.ToDouble(c[1], Tools.ciEnUS);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -184,7 +265,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent)
+        private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
         {
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
@@ -273,11 +354,13 @@ namespace TeslaLogger
                             sendKV.Add("kw", maxPowerKw);
                             sendKV.Add("m", Message);
 
-                            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                            if (insertdb)
                             {
-                                con.Open();
-                                // find internal ID of supercharger by name
-                                using (MySqlCommand cmd = new MySqlCommand(@"
+                                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con.Open();
+                                    // find internal ID of supercharger by name
+                                    using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     superchargerstate(
         nameid,
@@ -291,14 +374,15 @@ VALUES(
     @available_stalls,
     @total_stalls
 )", con))
-                                {
-                                    cmd.Parameters.AddWithValue("@nameid", sucID);
-                                    cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
-                                    cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                    SQLTracer.TraceNQ(cmd);
+                                    {
+                                        cmd.Parameters.AddWithValue("@nameid", sucID);
+                                        cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                                        cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
+                                        cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
+                                        SQLTracer.TraceNQ(cmd);
+                                    }
+                                    con.Close();
                                 }
-                                con.Close();
                             }
                         }
                     }

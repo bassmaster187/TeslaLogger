@@ -1,9 +1,10 @@
-#Generell
+﻿#Generell
 Delete=Slett
 Save=Lagre
 Settings=Innstillinger
 Setup=Oppsett
 Enabled=Aktivert
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Akku Trips
@@ -138,16 +139,41 @@ Car Version=Bil versjon
 Last Trip=Siste Trip
 Duration=Varighet
 Distance=Distanse
-Max kph=Maks km/t
+Max km/h=Maks km/t
 PS=PS
 Falling asleep=Sovne
+Charging=Lading
+Done=Ferdig
+Done at=Utført på
+Driving=Kjøring
+km/h=km/t
+Preconditioning=Forbehandling
+Sentry Mode=Vaktmodus
+Battery Heater=Batterivarmer
+Sleeping=Sove
+Offline=Offline
+kW=kW
+OK=OK
+No=Nei
+Yes=Ja
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Last Update=Last Update
+Software Update=Software Update
+min=min
+Consumption=Forbruk
+Ø Consumption=Ø Forbruk
+Wh/km=Wh/km
+Current Pos=Nåværende Pos
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Tesla Credentials
-Bitte Tesla Account Zugangsdaten eingeben=Dine Tesla account credentials
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Please enter your Tesla account credentials=Dine Tesla account credentials
 Email=Epost
-Passwort=Passord
-Passwort wiederholen=Gjenta passordet
+Password=Passord
+Repeat Password=Gjenta passordet
 Speichern=Lagre
 
 #settings.php
@@ -157,9 +183,34 @@ Power=Effekt
 Temperatur=Temperatur
 Unit of length=Enhet lengde
 URL Admin Panel=URL Admin Panel
-
-#geoadd.php
-Bezeichnung=Betegnelse
+Saved!=Lagret!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Teslalogger Administrasjonspanel
+Temperature=Temperatur
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=mil
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=Del data anonymt
+Enable=Aktiver
+All=Alle
+Stable=Stabil
+None=Ingen
+Sleep=Søvn
+to=til
+Show calc. 100% range=Vis beregn. 100% rekkevidde
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Teslalogger HTTP Port
+Zoom Level=Zoom-nivå
+ScanMyTesla integration=ScanMyTesla-integrasjon
+Position by StreamingAPI=Posisjon etter StreamingAPI
+Main Car=Hovedbil
+Car Name=Bilens navn
+ScanMyTesla last received=ScanMyTesla mottok sist
+Tasker Token=Tasker Token
+Tasker URL=Tasker URL
+Received Tasker Token=Received Tasker Token
 
 Ja=Ja
 Nein=Ikke
@@ -168,7 +219,7 @@ Einschlafen=Sovne
 Automatic updates=Automatiske oppdateringer
 
 TextShare=<h1> Del ladekurver / nedbrytningskurver anonymt </h1> Vi ønsker å sette opp en anonym database som du kan sammenligne degraderingskurver og ladekurver med. Så du kan sammenligne kjøretøyet ditt med andre når som helst og identifisere et uvanlig avvik tidlig. Dette kan også brukes senere for å kunne bevise på salgshøyden at batteriet fremdeles er fullt effektivt. I negativt tilfelle er det lettere å bevise en redusert ytelse sammenlignet med Tesla Motors. <br> <br> Vil du dele hurtigladekurver og degraderingskurver anonymt med andre Tesla-drivere? Denne avgjørelsen kan endres når som helst i innstillingene.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Posisjon etter StreamingAPI</h1>aktiverer posisjons DB-oppføringer fra streaming API - avhengig av bilens mottak betyr dette opptil 5 posisjoner per sekund (sammenlignet med en posisjon hvert femte sekund i normal modus), dette vil øke databasens størrelse mye, vil øke slitasjen på SD-kortet og resultere i enorme sikkerhetskopieringer
 Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
 Resume Teslalogger=Fortsett Teslalogger
@@ -190,3 +241,103 @@ ABRP8=Sett inn token i Teslalogger
 ABRP9=Sjekk om Teslaloggeren er tilkoblet
 ABRPYT=Sjekk YouTube-opplæringen for live demo
 ABRPToken=Abetterrouteplanner-token
+
+#chargingcost.php
+Charging Costs=Ladekostnader
+Date=Dato
+Charged=Ladet
+Charger=Lader
+Minutes=Minutter
+Efficiency=Effektivitet
+Currency=Valuta
+kWh according to meter/invoice=kWh i henhold til måler/faktura
+Cost per kWh=Kostnad per kWh
+Cost per charge=Kostnad per lading
+Cost per minute=Kostnad per minutt
+Idle cost per minute=Ventekostnad per minutt
+Total=Totalt
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Du kan koble Teslalogger til Wallbox-ladestasjonen for å beregne ladeeffektiviteten eller prosentandelen av solceller som brukes til å lade bilen.
+Host=Host
+Param=Param
+Test=Test
+Type=Type
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Du kan sette opp en kobling fra TeslaLogger til SuperChargeBingo for å utføre automatiske innsjekkinger på Superchargers.
+Create a SuperChargeBingo account=Opprett en SuperChargeBingo-konto
+Create API key (must be secure)=Opprett API-nøkkel (må være sikker)
+Copy Username and API key and insert it in TeslaLogger=Kopier brukernavn og API-nøkkel og sett den inn i TeslaLogger.
+Save and restart TeslaLogger=Lagre og start TeslaLogger på nytt
+Username=Brukernavn
+API key=API-nøkkel
+
+#geoadd.php
+Description=Betegnelse
+Name & Position=Navn og stilling
+Radius=Radius
+Special Flags=Spesielle flagg
+Home=Hjem
+Work=Arbeid
+Copy Charging Costs=Kostnader for kopiering
+Don't Combine Charging Sessions=Ikke kombiner ladeøkter
+Set Charge Limit=Angi belastningsgrense
+SOC=SOC
+Set on arrival=Innstilt ved ankomst
+Set Charge Limit After Charging=Angi belastningsgrense etter lading
+Open Charge Port=Åpen ladeport
+Gear=Utstyr
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Høyfrekvent logging
+Special Count=Spesiell telling
+Count=Count
+Special Features=Spesielle funksjoner
+Enable Sentry Mode=Aktiver vaktmodus
+Disable Sentry Mode=Deaktiver vaktmodus
+Turn HVAC off=Slå av HVAC
+No sleep=Ingen søvn
+
+#journeys.php
+Journeys=Reiser
+Journey name missing!=Reisens navn mangler!
+Please select=Vennligst velg
+Please select start point!=Vennligst velg startpunkt!
+Please select end point!=Vennligst velg sluttpunkt!
+TextJourneys=Du kan bruke reiser til å kombinere en lang tur / tid og oppsummere alle tall. Dette er veldig nyttig for å spore hele ladetiden for en lang tur eller for å sammenligne forbruket av sommer- eller vinterdekk.
+ID=ID
+Journey=Reise
+Start address=Start adresse
+Target address=Måladresse
+End=Slutt
+Consumed kWh=Forbrukte kWh
+Charged kWh=Ladet kWh
+Drive time [h]=Kjøretid [h]
+Charge time [h]=Ladetid [h]
+Distance [mi]=Avstand [mi]
+Distance [km]=Avstand [km]
+Charging costs=Kostnader for lading
+CO2 [kg]=CO2 [kg]
+New Journey=Ny reise
+Journey name=Reisens navn
+Please wait=Vennligst vent
+Please select start first=Vennligst velg start først
+DelJourney=Vil du virkelig slette reise {id}?
+Display _MENU_ records per page=Vis _MENU_ poster per side
+Nothing found=Nothing found
+Showing _START_ to _END_ of _TOTAL_ entries=Viser _START_ til _END_ av _TOTAL_ oppføringer
+No records available=Ingen registreringer tilgjengelig
+(filtered from _MAX_ total records)=(filtrert fra _MAX_ poster totalt)
+Search=Søk
+First=For det første
+Last=Siste
+Next=Neste
+Previous=Tidligere

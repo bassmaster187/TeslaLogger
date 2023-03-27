@@ -13,9 +13,14 @@ require_once("tools.php");
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
-	<script src="static/jquery/datatables/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="static/jquery/datatables/1.13.4/datatables.min.js"></script>
+	<link rel='stylesheet' href="static/jquery/datatables/1.13.4/datatables.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-	<link rel='stylesheet' href="static/jquery/datatables/1.10.22/css/jquery.dataTables.min.css">
+
+<style>
+input.newJourney {width: 300px;}
+select.newJourney {width: 500px;}
+</style>
 
 	<script>
 	<?php
@@ -23,9 +28,14 @@ require_once("tools.php");
         echo("var carid=".$_REQUEST["carid"].";\n");
     else
         echo("var carid=-1;\n");
+
+    echo("var url_grafana='".$URL_Grafana."';\n");
 	?>
 
     $(document).ready(function(){
+		var loc;
+		if (navigator.languages != undefined) loc = navigator.languages[0];
+			else loc = navigator.language;
         var d = {
                     load: "1",
                     carid: carid
@@ -33,16 +43,45 @@ require_once("tools.php");
         var url = "journeys/list";
 
         var dt = $("#myDT").DataTable({
-            "order": [[1, "asc"]],
+            "language": {
+				"lengthMenu": "<?php t("Display _MENU_ records per page"); ?>",
+				"zeroRecords": "<?php t("Nothing found"); ?>",
+				"info": "<?php t("Showing _START_ to _END_ of _TOTAL_ entries"); ?>",
+				"infoEmpty": "<?php t("No records available"); ?>",
+				"infoFiltered": "<?php t("(filtered from _MAX_ total records)"); ?>",
+				"search": "<?php t("Search"); ?>",
+				paginate: {
+					first: "<?php t("First"); ?>",
+					last: "<?php t("Last"); ?>",
+					next: "<?php t("Next"); ?>",
+					previous: "<?php t("Previous"); ?>"
+				}
+			},
+			"order": [[1, "asc"]],
             "pageLength": 15,
             "columns": [
-                { "data": "Id"},
-                { "data": "name"},
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "JhRusymgk", row["Id"], "");
+                    }
+
+                    return row["Id"];
+                }},
+
+                { "render": function(data, type, row, meta){
+                    if(type === 'display'){
+                        return GetGrafanaLink(row, "RG_DxSmgk", row["name"], "&var-Charger=ON");
+                    }
+
+                    return row["name"];
+                }},
+
                 { "data": "Start_address"},
+
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         var sdd = new Date(row["StartDate"]);
-                        return sdd.toLocaleString();
+                        return sdd.toLocaleTimeString(loc,{ day: '2-digit', month: '2-digit', year: 'numeric' });
                     }
                     else if (type === 'sort')
                     {
@@ -51,33 +90,69 @@ require_once("tools.php");
 
                     return "";
                 }},
+
                 { "data": "End_address"},
+
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
                         var sdd = new Date(row["EndDate"]);
-                        return sdd.toLocaleString();
+                        return sdd.toLocaleTimeString(loc,{ day: '2-digit', month: '2-digit', year: 'numeric' });
                     }
                     else if (type === 'sort')
                     {
                         return new Date(row["EndDate"]).getTime();
                     }
-
                     return "";
                 }},
-                { "render": function(data, type, row, meta){ 
+
+                {	className: 'dt-right',
+					"render": function(data, type, row, meta){
                     if(type === 'display' || type === 'sort'){
                         var distance = row["distance"];
                         var consumption_kwh = row["consumption_kwh"];
                         var avg_consumption = consumption_kwh / distance * 100 * <?= $LengthFactor ?>;
-                        
-                        return parseFloat(avg_consumption).toFixed(1);
-                    } 
-                    
-                    return "";
+						return type === "display" || type === "filter" ? avg_consumption.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) : avg_consumption;
+                    }
+                    return row["charged_kwh"];
                 }},
-                { "data": "consumption_kwh"},
-                { "data": "charged_kwh"},
-                { "render": function(data, type, row, meta){
+
+                {	data: "consumption_kwh",
+					className: 'dt-right',
+					"render": function(data, type, row, meta){
+					if (data == null) {
+						data = 0;
+					}
+					if ((isNaN(data)) || (data === "")) {
+						data = 0;
+					}
+					if (typeof(data) === "number") {
+						var output = data.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1});
+						return type === "display" || type === "filter" ? output : data;
+					}
+					return "";
+				}},
+
+                {	data: "charged_kwh",
+					className: 'dt-right',
+					"render": function(data, type, row, meta){
+					if (data == null) {
+						data = 0;
+					}
+					if ((isNaN(data)) || (data === "")) {
+						data = 0;
+					}
+					if (typeof(data) === "number") {
+						var output = data.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1});
+						if(type === 'display'){
+							output = GetGrafanaLink(row, "TSmNYvRRk", output, "")
+							return type === "display" || type === "filter" ? output : data;
+						}
+					}
+                    return type === "display" || type === "filter" ? data : data;
+				}},
+
+                {	className: 'dt-right',
+					"render": function(data, type, row, meta){
                     if(type === 'display'){
                         var MINUTES = row["drive_duration_minutes"];
                         return minutesToHHMM(MINUTES);
@@ -89,36 +164,76 @@ require_once("tools.php");
 
                     return "";
                 }},
-                { "render": function(data, type, row, meta){
-                    if(type === 'display'){
-                        var MINUTES = row["charge_duration_minutes"];
-                        return minutesToHHMM(MINUTES);
-                    }
-                    else if (type === 'sort')
-                    {
-                        return row["charge_duration_minutes"];
-                    }
+
+                {	className: 'dt-right',
+					"render": function(data, type, row, meta){
+						if(type === 'display'){
+							var MINUTES = row["charge_duration_minutes"];
+							return minutesToHHMM(MINUTES);
+						}
+						else if (type === 'sort')
+						{
+							return row["charge_duration_minutes"];
+						}
+
+						return "";
+                }},
+
+                { 	className: 'dt-right',
+					"render": function(data, type, row, meta){
+						var distance = row["distance"] / <?= $LengthFactor ?>;
+						var output = distance.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1});
+
+						if (type === 'display'){
+							output = GetGrafanaLink(row, "Y8upc6ZRk", output, "");
+							return type === "display" || type === "filter" ? output : distance;
+						}
+						else if (type === 'sort')
+							return type === "display" || type === "filter" ? output : distance;
 
                     return "";
                 }},
-                { "render": function(data, type, row, meta){
-                    if(type === 'display' || type === 'sort'){
-                        var distance = row["distance"] / <?= $LengthFactor ?>;
-                        return parseFloat(distance).toFixed(1);;
-                    }
 
-                    return "";
-                }},
+                {	data: "cost_total",
+					className: 'dt-right',
+					"render": function(data, type, row, meta){
+					if (data == null) {
+						data = 0;
+					}
+					if ((isNaN(data)) || (data === "")) {
+						data = 0;
+					}
+					if (typeof(data) === "number") {
+						var output = data.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1});
+						return output;
+					}
+					return "";
+				}},
+
+                {	data: "CO2kg",
+					className: 'dt-right',
+					"render": function(data, type, row, meta){
+					if (data == null) {
+						data = 0;
+					}
+					if ((isNaN(data)) || (data === "")) {
+						data = 0;
+					}
+					if (typeof(data) === "number") {
+						var output = data.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1});
+						return output;
+					}
+					return "";
+				}},
+
                 { "render": function(data, type, row, meta){
                     if(type === 'display'){
-                        
-                        return "<a href='javascript:delJourney("+row["Id"] +")'>Del</a>";
+                        return "<a href='javascript:delJourney("+row["Id"] +",\""+row["name"] + "\")'><?php t('Delete'); ?></a>";
                     }
-
                     return "";
                 }}
             ],
-            "ajax": 
+            "ajax":
             {
                 "url": "teslaloggerstream.php",
                 "type": "POST",
@@ -133,15 +248,24 @@ require_once("tools.php");
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
             $("#start").empty();
             var json = JSON.parse(data);
+			var dDate;
+			var sLocation;
             $.each(json, function(){
-                $("#start").append('<option value="'+ this.Key +'">'+ this.Value +'</option>');
+				if (this.Value=="Please Select") {
+					sValue = "<?php t("Please select"); ?>";
+				} else {
+					dDate = new Date(this.Value.substring(0,this.Value.search(" - ")));
+					sLocation = this.Value.slice(this.Value.search(" - ")+3);
+					sValue = dDate.toLocaleTimeString(loc,{ day: '2-digit', month: '2-digit', year: 'numeric' }) + " - " + sLocation;
+				}
+                $("#start").append('<option value="'+ this.Key +'">'+ sValue +'</option>');
             });
         });
 
         $('#start').on('change', function()
         {
             $("#end").empty();
-            $("#end").append('<option>Please Wait!</option>');
+            $("#end").append('<option><?php t("Please wait"); ?></option>');
 
             var d = {
                     carid: carid,
@@ -151,8 +275,16 @@ require_once("tools.php");
             $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
                 $("#end").empty();
                 var json = JSON.parse(data);
+				var sValue;
                 $.each(json, function(){
-                    $("#end").append('<option value="'+ this.Key +'">'+ this.Value +'</option>');
+					if (this.Value=="Please Select") {
+						sValue = "<?php t("Please select"); ?>";
+					} else {
+						dDate = new Date(this.Value.substring(0,this.Value.search(" - ")));
+						sLocation = this.Value.slice(this.Value.search(" - ")+3);
+						sValue = dDate.toLocaleTimeString(loc,{ day: '2-digit', month: '2-digit', year: 'numeric' }) + " - " + sLocation;
+					}
+                    $("#end").append('<option value="'+ this.Key +'">'+ sValue +'</option>');
                 });
             });
         });
@@ -160,18 +292,18 @@ require_once("tools.php");
         $("#btnSave").click(function() {
             if ($("#name").val().length == 0)
             {
-                alert("Journey Name Missing!");
-                reutrn;
+                alert("<?php t('Journey name missing!'); ?>");
+                return;
             }
             else if ($("#start").val() == "")
             {
-                alert("Please Select Start Point!");
-                reutrn;
+				alert("<?php t('Please select start point!'); ?>");
+                return;
             }
             else if ($("#end").val() == "")
             {
-                alert("Please Select End Point!");
-                reutrn;
+                alert("<?php t('Please select end point!'); ?>");
+                return;
             }
 
             var d = {
@@ -187,9 +319,11 @@ require_once("tools.php");
         });
     });
 
-    function delJourney(id)
+    function delJourney(id,name)
     {
-        if (confirm("Do you really want to delete journey " + id))
+		var text = "<?php t('DelJourney'); ?>";
+		text = text.replace("{id}",id + " (" + name + ")");
+		if (confirm(text))
         {
             var url = "journeys/delete/delete";
             var d = {
@@ -201,7 +335,7 @@ require_once("tools.php");
             });
         }
     }
-	
+
     function minutesToHHMM(MINUTES)
     {
         var m = MINUTES % 60;
@@ -209,13 +343,32 @@ require_once("tools.php");
         var HHMM = h.toString() + ":" + (m<10?"0":"") + m.toString();
         return HHMM;
     }
-    
+
+    function GetGrafanaLink(row, uid, text, parameters)
+    {
+        var start = new Date(row["StartDate"]);
+        var ustart = start.getTime();
+
+        var end = new Date(row["EndDate"]);
+        var uend = end.getTime();
+        var temp = "<a href='";
+        temp += url_grafana;
+        temp += "/d/";
+        temp += uid;
+        temp += "/dashboard?orgId=1&from=";
+        temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "' target=\"_blank\">";
+        temp += text;
+        temp += "</a>";
+
+        return temp;
+    }
+
 
 </script>
 </head>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <div>
-<?php 
+<?php
 include "menu.php";
 menu("Journeys");
 
@@ -225,38 +378,39 @@ menu("Journeys");
 <div>
     <h1><?php t("Journeys"); ?></h1>
     <p>
-        You can use journeys to combine a long trip / time and summarize all numbers. This is very useful to track the complete charge time of a long trip or to compare the consumption of summer or winter tires.
+		<?php t("TextJourneys"); ?>
     </p>
 <div>
 
 <table id="myDT">
 <thead>
     <tr>
-        <th>Id</th>
+        <th><?php t("ID"); ?></th>
         <th><?php t("Journey"); ?></th>
-        <th><?php t("Start Adresse"); ?></th>
+        <th><?php t("Start address"); ?></th>
         <th><?php t("Start"); ?></th>
-        <th><?php t("Ziel Adresse"); ?></th>
-        <th><?php t("Ende"); ?></th>
-        <th><?php t("Ø Verbrauch kWh"); ?></th>
-        <th><?php t("Verbraucht kWh"); ?></th>
-        <th><?php t("geladen kWh"); ?></th>
-        <th><?php t("Fahrzeit [h]"); ?></th>
-        <th><?php t("Ladezeit [h]"); ?></th>
-        <th><?php if ($LengthUnit == "mile") t("Strecke [mi]"); else t("Strecke [km]"); ?></th>
+        <th><?php t("Target address"); ?></th>
+        <th><?php t("End"); ?></th>
+        <th><?php t("Ø Consumption"); ?> <?php t("kWh"); ?></th>
+        <th><?php t("Consumed kWh"); ?></th>
+        <th><?php t("Charged kWh"); ?></th>
+        <th><?php t("Drive time [h]"); ?></th>
+        <th><?php t("Charge time [h]"); ?></th>
+        <th><?php if ($LengthUnit == "mile") t("Distance [mi]"); else t("Distance [km]"); ?></th>
+        <th><?php t("Charging costs"); ?></th>
+        <th><?php echo str_replace("CO2","CO<sub>2</sub>",get_text("CO2 [kg]")); ?></th>
         <th></th>
     </tr>
 </thead>
 </table>
 
-<h2>New Journey</h2>
+<h2><?php t("New Journey"); ?></h2>
 <table>
-    <tr><td>Journey Name:</td><td><input width="100%" id="name"></td></tr>
-    <tr><td>Start</td><td><select width="100%" id="start"><option>Please Wait!</option></select></td></tr>
-    <tr><td>End</td><td><select width="100%" id="end"><option>Please Select Start First!</option></select></td></tr>
-    <tr><td></td><td><button id="btnSave">Save</button></td></tr>
+    <tr><td><?php t("Journey name"); ?>:&nbsp;</td><td><input class="newJourney" id="name"></td></tr>
+    <tr><td><?php t("Start"); ?>: </td><td><select class="newJourney" id="start"><option><?php t("Please wait"); ?></option></select></td></tr>
+    <tr><td><?php t("End"); ?>: </td><td><select class="newJourney" id="end"><option><?php t("Please select start first"); ?></option></select></td></tr>
+    <tr><td></td><td><button id="btnSave"><?php t("Save"); ?></button></td></tr>
 </table>
 </div>
 </body>
 </html>
-

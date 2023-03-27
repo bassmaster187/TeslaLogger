@@ -7,28 +7,55 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
-
+using System.Runtime.InteropServices;
+using Microsoft.VisualBasic;
+using Exceptionless;
+using System.Reflection;
+using Org.BouncyCastle.Crypto.Modes;
 
 namespace TeslaLogger
 {
     public class CO2
     {
+        HashSet<string> supportedCountries = new HashSet<string> { "at", "be", "bg", "ch", "cz", "de", "dk", "ee", "es", "fi", "fr", "gr", "hr", "hu", "it", "lu", "lv", "nl", "no", "pl", "pt" ,"ro", "se", "si", "sk", "uk" };
+
+
         public void GetData()
         {
-            DateTime dateTime = new DateTime(2022, 12, 21, 22, 00, 00);
-
-            for (int i = 0; i < 1; i++)
-            {
-                DateTime dt = dateTime.AddHours(i);
-                GetData("ro", dt);
-            }
+            
         }
 
-        public int GetData(string country, DateTime dateTime)
+        void Log(string msg) {
+            Logfile.Log(" ** CO2: " + msg);
+        }
+
+        void SubmitExceptionlessLog(string msg)
         {
+            Log(msg);
+            ExceptionlessClient.Default.CreateLog("CO2", msg, Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit();
+        }
+
+        internal int GetData(string country, DateTime dateTime)
+        {
+            country = country.Trim().ToLower();
+
+            if (country == "gb")
+                country = "uk";
+
+            if (!supportedCountries.Contains(country))
+            {
+                SubmitExceptionlessLog("Country not supported: " + country);
+                return 0;
+            }
+
+            Log("Country: " + country + " / Date: " + dateTime.ToString());
+
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int currentWeek = GetWeekOfYear(DateTime.Now);
+            bool writeCache = wi < currentWeek;
+
             string w = wi.ToString("D2");
             int year = dateTime.Year;
 
@@ -38,7 +65,7 @@ namespace TeslaLogger
             if (File.Exists(path))
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename);
+                content = GetEnergyChartData(country, filename, writeCache);
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -58,7 +85,7 @@ namespace TeslaLogger
                 }
             }
 
-            System.Diagnostics.Debug.WriteLine("Date:" + dateTime + " ix:" + ix);
+            Log("Date:" + dateTime + " ix:" + ix);
 
             double co2count = 0;
             double co2sum = 0;
@@ -85,17 +112,25 @@ namespace TeslaLogger
                     case "Hydro Run-of-River": co2factor = 11; break;
                     case "Biomass": co2factor = 230; break;
                     case "Fossil brown coal / lignite": co2factor = 1150; break;
+                    case "Fossil coal-derived gas": co2factor = 1150; break; // might be wrong ???
                     case "Fossil hard coal": co2factor = 798; break;
                     case "Fossil oil": co2factor = 1125; break;
+                    case "Fossil oil shale": co2factor = 1125; break; // might be wrong ???
+                    case "Fossil peat": co2factor = 230; break; // might be wrong ???
                     case "Fossil gas": co2factor = 661; break;
                     case "Geothermal": co2factor = 38; break;
                     case "Hydro water reservoir": co2factor = 24; break;
                     case "Hydro pumped storage": co2factor = 0; break;
                     case "Others": co2factor = 700; break;
+                    case "Other renewables": co2factor = 35; break;
                     case "Waste": co2factor = 700; break;
                     case "Wind offshore": co2factor = 13; break;
                     case "Wind onshore": co2factor = 13; break;
                     case "Solar": co2factor = 35; break;
+                    default:
+                        SubmitExceptionlessLog("Utility type not handled: '" + name + "' !!!");
+                        co2factor = 0;
+                        break;
                 }
 
                 if (co2factor > 0)
@@ -104,13 +139,13 @@ namespace TeslaLogger
                     co2count += wert;
                 }
 
-                System.Diagnostics.Debug.WriteLine(String.Format("{0,-28}", name) + ": "+ wert + "MW "+ co2factor + " CO2 g/kWh");
+                Log(String.Format("{0,-28}", name) + ": "+ wert + "MW "+ co2factor + " CO2 g/kWh");
             }
 
             GetImport(country, dateTime, ref co2sum, ref co2count);
 
             double avgCO2 = co2sum / co2count;
-            System.Diagnostics.Debug.WriteLine("CO2 AVG: " + avgCO2+ "\r\n\r\n");
+            Log("CO2 AVG: " + Math.Round(avgCO2) + " g/kWh\r\n\r\n");
 
             return (int)Math.Round(avgCO2,0);
         }
@@ -120,6 +155,9 @@ namespace TeslaLogger
             string content = "";
 
             int wi = GetWeekOfYear(dateTime);
+            int currentWeek = GetWeekOfYear(DateTime.Now);
+            bool writeCache = wi < currentWeek;
+
             string w = wi.ToString("D2");
             int year = dateTime.Year;
 
@@ -129,7 +167,7 @@ namespace TeslaLogger
             if (File.Exists(path))
                 content = File.ReadAllText(path);
             else
-                content = GetEnergyChartData(country, filename);
+                content = GetEnergyChartData(country, filename, writeCache);
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -177,6 +215,7 @@ namespace TeslaLogger
 
                 switch (name)
                 {
+                    case "Albania": co2factor = 200; break; // maybe wrong
                     case "Austria": co2factor = 230; break;
                     case "Belgium": co2factor = 185; break;
                     case "Bosnia-Herzegovina": co2factor = 525; break;
@@ -184,31 +223,38 @@ namespace TeslaLogger
                     case "Croatia": co2factor = 307; break; // maybe wrong
                     case "Czech Republic": co2factor = 536; break;
                     case "Denmark": co2factor = 218; break;
+                    case "Estonia": co2factor = 607; break;
                     case "France": co2factor = 78; break;
+                    case "Finland": co2factor = 154; break;
                     case "Germany": co2factor = 463; break;
                     case "Greece": co2factor = 437; break;
                     case "Hungary": co2factor = 312; break;
                     case "Italy": co2factor = 351; break;
+                    case "Lithuania": co2factor = 137; break;
                     case "Luxembourg": co2factor = 300; break; // maybe wrong
                     case "Malta": co2factor = 351; break; // maybe wrong
                     case "Moldova": co2factor = 600; break; // maybe wrong
                     case "Montenegro": co2factor = 398; break;
                     case "Netherlands": co2factor = 453; break;
+                    case "North Macedonia": co2factor = 500; break; // maybe wrong
                     case "Norway": co2factor = 30; break;
                     case "Poland": co2factor = 859; break;
                     case "Portugal": co2factor = 219; break;
+                    case "Russia": co2factor = 350; break; // maybe wrong
+                    case "Romania": co2factor = 472; break;
                     case "Serbia": co2factor = 537; break;
                     case "Slovenia": co2factor = 275; break;
                     case "Slovak Republic": co2factor = 331; break;
+                    case "Slovakia": co2factor = 346; break;
                     case "Spain": co2factor = 184; break;
                     case "Sweden": co2factor = 44; break;
                     case "Switzerland": co2factor = 44; break;
+                    case "Turkey": co2factor = 402; break;
                     case "Ukraine": co2factor = 190; break; // maybe wrong
                     case "United Kingdom": co2factor = 255; break; 
 
-
                     default: 
-                        System.Diagnostics.Debug.WriteLine("Country not handled: " + name); 
+                        SubmitExceptionlessLog("AVG for Country not handled: '" + name + "' !!!");
                         break;
                 }
 
@@ -218,15 +264,14 @@ namespace TeslaLogger
                     co2count += wert;
                 }
 
-                System.Diagnostics.Debug.WriteLine(String.Format("{0,-28}", name) + ": " + wert + "MW " + co2factor + "co2 g/kWh");
+                Log(String.Format("{0,-28}", name) + ": " + wert + "MW " + co2factor + "co2 g/kWh");
             }
-
         }
 
-        public string GetEnergyChartData(string country, string filename)
+        public string GetEnergyChartData(string country, string filename, Boolean writeCache)
         {
             string resultContent = "";
-
+           
             using (WebClient client = new WebClient())
             {
                 // week_2022_51.json
@@ -238,8 +283,10 @@ namespace TeslaLogger
                 try
                 {
                     resultContent = client.DownloadString(url);
+
+                    DBHelper.AddMothershipDataToDB("EnergyCharts", start, 0);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     System.Diagnostics.Debug.WriteLine("URL: " + url);
                     throw;
@@ -253,12 +300,15 @@ namespace TeslaLogger
                     if (!Directory.Exists("EngergyChartData/" + country))
                         Directory.CreateDirectory("EngergyChartData/"+ country);
 
-                    string path = $"EngergyChartData/{country}/{filename}";
+                    if (writeCache)
+                    {
+                        string path = $"EngergyChartData/{country}/{filename}";
 
-                    if (File.Exists(path))
-                        File.Delete(path);
+                        if (File.Exists(path))
+                            File.Delete(path);
 
-                    File.WriteAllText(path, resultContent);
+                        File.WriteAllText(path, resultContent);
+                    }
                 }
             }
 

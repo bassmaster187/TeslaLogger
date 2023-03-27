@@ -13,13 +13,12 @@ using System.Net.Http.Headers;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class ScanMyTesla
     {
         private string token;
         private Thread thread;
-        private bool fastmode = false;
+        private bool fastmode; // defaults to false
         private bool run = true;
         internal HttpClient httpclient_teslalogger_de;
         Car car;
@@ -316,7 +315,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
 
                 Logfile.ExceptionWriter(ex, resultContent);
                 Thread.Sleep(10000);

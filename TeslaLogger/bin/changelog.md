@@ -1,6 +1,33 @@
+# Version 1.54.17
+- Bugfixes
+
+# Version 1.54.16
+- Update to Grafana 8.5.22 [security fix](https://grafana.com/blog/2023/03/22/grafana-security-release-new-versions-with-security-fixes-for-cve-2023-1410/)
+- New CO2 Dashboard
+- Dashboard Visited multiple vehicles can be shown at the same time
+
+# Version 1.54.15
+- 3rd party apps for Tesla tokens are not longer needed. 
+
+# Version 1.54.14
+- Simplify docker install
+
+# Version 1.54.12
+- CO2 and cost column in journeys.
+- Links to Grafana dashboards in journeys
+- Support for Shelly EM [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md)
+- Support more countries for CO2 calculations
+- Dashboard Charging Statistics contains CO2
+
+# Version 1.54.11
+- Calculation of CO2 for each charging. [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/co2.md)
+- Dashboard Charging History with CO2 
+
+# Version 1.54.8
+- Wheeltype will be stored in trips and chargings. 
+
 # Version 1.54.6
 - Detecting Model S Plaid / LR
-- Bugfixes
 
 # Version 1.54.5
 - TMPS in Trip Dashboard. Signals are colleced after update!

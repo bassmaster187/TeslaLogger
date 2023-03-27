@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.VisualBasic.Logging;
+using Org.BouncyCastle.Utilities.Net;
 
 namespace TeslaLogger
 {
@@ -23,9 +25,9 @@ namespace TeslaLogger
     public class DBHelper
     {
         private static Dictionary<string, int> mothershipCommands = new Dictionary<string, int>();
-        private static bool mothershipEnabled = false;
+        private static bool mothershipEnabled; // defaults to false
         private Car car;
-        bool CleanPasswortDone = false;
+        bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
 
@@ -38,9 +40,19 @@ namespace TeslaLogger
             {
                 return _DBConnectionstring;
             }
-            string DBConnectionstring = string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring)
-? "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;"
-: ApplicationSettings.Default.DBConnectionstring;
+            string DBConnectionstring = "";
+            if (string.IsNullOrEmpty(ApplicationSettings.Default.DBConnectionstring))
+            {
+                if (Tools.IsDocker())
+                    DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                else
+                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+            }
+            else 
+            {
+                DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
+            }
+
             if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("charset="))
             {
                 Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "charset(=.+?);");
@@ -1442,7 +1454,7 @@ HAVING
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin where id=@id", con))
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set display_name=@display_name, Raven=@Raven, Wh_TR=@Wh_TR, DB_Wh_TR=@DB_Wh_TR, DB_Wh_TR_count=@DB_Wh_TR_count, car_type=@car_type, car_special_type=@car_special_type, car_trim_badging=@trim_badging, model_name=@model_name, Battery=@Battery, tasker_hash=@tasker_hash, vin=@vin, wheel_type=@wheel_type where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@Raven", car.Raven);
@@ -1457,6 +1469,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@display_name", car.DisplayName);
                         cmd.Parameters.AddWithValue("@tasker_hash", car.TaskerHash);
                         cmd.Parameters.AddWithValue("@vin", car.Vin);
+                        cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
 
                         int done = SQLTracer.TraceNQ(cmd);
 
@@ -1775,7 +1788,7 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    charge_energy_added,
+    case when cost_kwh_meter_invoice is not null then cost_kwh_meter_invoice else charge_energy_added end,
     startdate,
     enddate
 FROM
@@ -2449,6 +2462,14 @@ WHERE
         WHERE
             chargingstate.CarID = @CarID
             AND id = @referenceID
+    )  AND chargingstate.wheel_type =(
+        SELECT
+            wheel_type
+        FROM
+            chargingstate
+        WHERE
+            chargingstate.CarID = @CarID
+            AND id = @referenceID
     )
 ORDER BY
     chargingstate.id ASC", con))
@@ -2774,7 +2795,10 @@ WHERE
     CarID = @carid
 ORDER BY
     StartDate DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@carid", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -2817,7 +2841,6 @@ LIMIT 1", con))
                         dr.Close();
                     }
 
-
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     ideal_battery_range_km,
@@ -2831,7 +2854,10 @@ WHERE
     CarID = @CarID
 ORDER BY
     id DESC
-LIMIT 1", con))
+LIMIT 1", con)
+                    {
+                        CommandTimeout = 6000
+                    })
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -2922,7 +2948,8 @@ INSERT
         conn_charge_cable,
         fast_charger_present,
         meter_vehicle_kwh_start,
-        meter_utility_kwh_start
+        meter_utility_kwh_start,
+        wheel_type
     )
 VALUES(
     @CarID,
@@ -2934,7 +2961,8 @@ VALUES(
     @conn_charge_cable,
     @fast_charger_present,
     @meter_vehicle_kwh_start,
-    @meter_utility_kwh_start
+    @meter_utility_kwh_start,
+    @wheel_type
 )", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", wh.car.CarInDB);
@@ -2947,6 +2975,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@fast_charger_present", wh.fast_charger_present);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
+                        cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
                         SQLTracer.TraceNQ(cmd);
 
                         cmd.CommandText = "SELECT LAST_INSERT_ID();";
@@ -3563,8 +3592,6 @@ WHERE
                                                 exl.Submit();
                                             }
                                             SQLTracer.TraceNQ(cmd2);
-
-                                            GeocodeCache.Instance.Write();
                                         }
                                     }
                                 }
@@ -3832,11 +3859,12 @@ WHERE
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID) values (@StartDate, @Pos, @CarID)", con))
+                using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
                 {
                     cmd.Parameters.AddWithValue("@StartDate", now);
                     cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
                     SQLTracer.TraceNQ(cmd);
                 }
             }
@@ -3999,6 +4027,60 @@ VALUES(
                         car.CurrentJSON.current_trip_max_speed = Math.Max(car.CurrentJSON.current_trip_max_speed, car.CurrentJSON.current_speed);
                         car.CurrentJSON.current_trip_max_power = Math.Max(car.CurrentJSON.current_trip_max_power, car.CurrentJSON.current_power);
 
+                    }
+                    catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        car.Log(ex.ToString());
+                    }
+                }
+            }
+
+            car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        public void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT
+    pos(
+        CarID,
+        Datum,
+        lat,
+        lng,
+        battery_level
+    )
+VALUES(
+    @CarID,
+    @Datum,
+    @lat,
+    @lng,
+    @battery_level
+)", con))
+                {
+                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
+                    cmd.Parameters.AddWithValue("@lat", latitude);
+                    cmd.Parameters.AddWithValue("@lng", longitude);
+
+                    if (batteryLevel == -1)
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
+                    }
+                    SQLTracer.TraceNQ(cmd);
+
+                    try
+                    {
+                        car.CurrentJSON.current_battery_level = batteryLevel;
+                        car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
                     }
                     catch (Exception ex)
                     {
@@ -5660,7 +5742,7 @@ WHERE
             return json;
         }
 
-        public static long InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
+        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
         {
             Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -5675,7 +5757,11 @@ WHERE
                         select max(carid) as a from pos
                     ) as t", con))
                 {
-                    long newid = SQLTracer.TraceSc(cmd) as long? ?? 1;
+                    int newid = 1;
+
+                    object oid = SQLTracer.TraceSc(cmd);
+                    if (oid != null)
+                        newid = Convert.ToInt32(oid);
 
                     using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
                     {
@@ -5704,10 +5790,154 @@ WHERE
         {
             var dt = new DataTable();
 
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added FROM chargingstate join pos on chargingstate.pos = pos.id order by address", "Server=192.168.1.105;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;");
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT chargingstate.id, StartDate, EndDate, address, lat, lng, charge_energy_added, country, co2_g_kWh
+                FROM chargingstate join pos on chargingstate.pos = pos.id 
+                order by lat, lng", DBHelper.DBConnectionstring);
             da.Fill(dt);
 
             return dt;
+        }
+
+        internal static void UpdateCO2()
+        {
+            try
+            {
+                Logfile.Log("UpdateCO2");
+
+                CO2 co2 = new CO2();
+
+                double lastLat = 0;
+                double lastLng = 0;
+                string lastCountry = "";
+                string lastAddress = "";
+
+                string calculateCountry = "";
+                DateTime? calculateDate = null;
+
+                var dt = GetAllChargingstates();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Thread.Sleep(10);
+
+                    calculateCountry = "";
+                    calculateDate = null;
+
+                    try
+                    {
+
+                        if (dr["country"] == DBNull.Value)
+                        {
+                            double lat = Convert.ToDouble(dr["lat"]);
+                            double lng = Convert.ToDouble(dr["lng"]);
+                            string address = dr["address"].ToString();
+                            string country = "";
+                            DateTime dateTime = (DateTime)dr["StartDate"];
+
+                            var age = DateTime.Now - dateTime;
+                            if (age.TotalHours < 5) // current data might not be available
+                                continue;
+
+                            if (!String.IsNullOrEmpty(lastCountry))
+                            {
+                                double distance = Geofence.GetDistance(lastLng, lastLat, lng, lat);
+                                if (distance < 5000)
+                                {
+                                    country = lastCountry;
+                                    Logfile.Log($"country from last pos: {country} - distance: {distance}m - Address 1: {lastAddress} / Address 2: {address}");
+                                }
+                            }
+
+                            if (String.IsNullOrEmpty(country))
+                                country = WebHelper.ReverseGecocodingCountryAsync(lat, lng).Result;
+
+                            if (!String.IsNullOrEmpty(country))
+                            {
+                                int id = Convert.ToInt32(dr["id"]);
+                                dr["country"] = country;
+                                dr.AcceptChanges();
+
+                                calculateCountry = country;
+                                calculateDate = dateTime;
+
+                                int c = co2.GetData(country, dateTime);
+                                UpdateChargingStateCountryCO2(id, country, c);
+
+                                lastLat = lat;
+                                lastLng = lng;
+                                lastCountry = country;
+                                lastAddress = address;
+                            }
+                        }
+                        else
+                        {
+                            if (dr["country"].ToString().Length > 0)
+                            {
+                                lastLat = Convert.ToDouble(dr["lat"]);
+                                lastLng = Convert.ToDouble(dr["lng"]);
+                                lastCountry = dr["country"].ToString();
+                                lastAddress = dr["address"].ToString();
+
+                                if (dr["co2_g_kWh"] == DBNull.Value)
+                                {
+                                    int id = Convert.ToInt32(dr["id"]);
+                                    DateTime dateTime = (DateTime)dr["StartDate"];
+
+                                    calculateCountry = lastCountry;
+                                    calculateDate = dateTime;
+
+                                    int c = co2.GetData(lastCountry, dateTime);
+                                    if (c > 0)
+                                    {
+                                        UpdateChargingStateCountryCO2(id, lastCountry, c);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ToExceptionless().FirstCarUserID().AddObject(calculateCountry).AddObject(calculateDate).Submit();
+                    }
+                }
+
+                Logfile.Log("UpdateCO2 finish");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
+
+        private static void UpdateChargingStateCountryCO2(int ChargingStateID, string country, int CO2)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE 
+  chargingstate 
+SET 
+  country = @country, co2_g_kWh = @co2
+WHERE 
+  id = @id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@country", country);
+                        cmd.Parameters.AddWithValue("@id", ChargingStateID);
+                        cmd.Parameters.AddWithValue("@co2", CO2 == 0 ? (object)DBNull.Value : (object)CO2);
+                        int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                        Logfile.Log($"UpdateChargingStateCountry({ChargingStateID}): {rowsUpdated} rows updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.UpdateChargingStateCountryCO2(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargingStateCountryCO2()");
+            }
         }
     }
 }

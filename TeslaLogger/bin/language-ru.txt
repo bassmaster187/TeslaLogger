@@ -1,9 +1,10 @@
-#Общий
+﻿#Общий
 Delete=Удалить
 Save=Сохранять
 Settings=Настройки
 Setup=Настраивать
 Enabled=Включено
+kWh=кВтч
 
 #Akku Trips.json
 Akku Trips=Поездки на одном заряде
@@ -88,7 +89,6 @@ Nur verfügbar mit ScanMyTesla=Доступно только со ScanMyTesla
 Asleep=Спит
 Waking=Просыпается
 Driving=Едет
-Charging=Заряжается
 
 #Laden.json
 Laden=зарядкa
@@ -163,7 +163,7 @@ Innentemperatur [°C]=Внутренная температура [°C]
 Innentemperatur [°F]=Внутренная температура [°F]
 
 Laden fertig=Зарядка закончена
-Schlafen=сон
+Sleeping=сон
 Online=онлайн
 
 #Verbrauchsstatstik.json
@@ -187,7 +187,8 @@ Car Version=Версия прошивки
 Last Trip=Последнaя поездка
 Duration=Продолжительность
 Distance=Расстояние
-Max kph=Максимум км/ч
+Max km/h=Максимум км/ч
+km/h=км/ч
 PS=PS
 Current Pos=Текущая позиция
 Last Update=Последнее обновление
@@ -199,6 +200,19 @@ Sentry Mode=Sentry Mode
 Preconditioning=Подогрев салона
 Offline=не в сети
 Falling asleep=Засыпает
+Consumption=Потребление
+Ø Consumption=Ø Потребление
+Wh/km=Втч/км
+min=Мин
+kW=кВт
+OK=OK
+No=Нет
+Yes=Да
+Cell Temp=Температура клеток
+Max Charge=Максимальная зарядка
+Max Discharge=Максимальная разрядка
+Cell Imbalance=Дисбаланс клеток
+Software Update=Обновление программного обеспечения
 
 #menu.php
 Logfile=Лог-файл
@@ -215,11 +229,11 @@ Wakeup Teslalogger=Запустить Teslalogger
 Dashboard=Приборная доска
 
 #password.php
-Teslalogger Tesla Zugangsdaten= Teslaлоггер данные для доступа в Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
+Teslalogger Tesla Credentials= Teslaлоггер данные для доступа в Tesla
+Please enter your Tesla account credentials=Пожалуйста, введите данные для доступа в свою учетную запись Tesla.
 Email=Электронная почта
-Passwort=пароль
-Passwort wiederholen=повторитe пароль
+Password=пароль
+Repeat Password=повторитe пароль
 Speichern=сохранить
 
 #settings.php
@@ -245,9 +259,18 @@ ScanMyTesla last received=Последние данные от ScanMyTesla
 Tasker Token=Tasker Token
 Tasker URL=URL-адрес Tasker
 Received Tasker Token=Последние использование Таскера
-
-#geoadd.php
-Bezeichnung=назвaние
+Saved!=сохранен!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Панель администратора теслалоггера
+Temperature=Температура
+mile=миля
+Ideal=Идеально
+Rated=Номинальный
+Share data anonymously=Делитесь данными анонимно
+Sleep=Сон
+to=на
+Show calc. 100% range=Показать кальций. 100% диапазон
+Position by StreamingAPI=Позиция StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Все потребление - ScanMyTesla
@@ -279,22 +302,11 @@ Einschlafen=Засыпает
 Automatic updates=Автоматические обновления
 
 TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими водителями Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Позиция StreamingAPI</h1>включает записи в БД позиций из потокового API - в зависимости от приема автомобиля это означает до 5 позиций в секунду (по сравнению с одной позицией каждые пять секунд в обычном режиме), это сильно увеличит размер вашей базы данных, увеличит износ SD-карты и приведет к созданию огромных резервных копий
 Daten anonym teilen=Делитесь данными анонимно
 TextSuspendTeslalogger=Teslalogger остановлен! Данные не сохаряняются!
 Resume Teslalogger=Включить Teslalogger
 Range=Пробег
-
-Ladekosten=Стоимость зарядок
-Ladesäule=Заряднaя станция
-Währung=валюта
-Kosten pro kWh=Стоимость за кВтч
-Kosten pro Ladung=Одноразовая стоимость
-Kosten pro Minute=Стоимость за минуту зарядки
-Kosten Blockiergebühr=Стоимость за минтуту блокировки зарядной станции
-Summe=Всего
-kWh laut Zähler / Rechnung=кВтч согласно счетчику / счет
-Wirkungsgrad=Эффективность
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
@@ -312,3 +324,103 @@ ABRP8=Вставьте токен в Teslalogger
 ABRP9=Проверьте, подключен ли Teslalogger
 ABRPYT=Посмотрите обучающее видео на YouTube, чтобы посмотреть живую демонстрацию
 ABRPToken=Токен Abetterrouteplanner
+
+#chargingcost.php
+Charging Costs=Стоимость зарядок
+Charger=Зарядная станция
+Charged=Заряжено
+Date=Дата
+Efficiency=Эффективность
+Currency=валюта
+kWh according to meter/invoice=кВтч согласно счетчику/счет
+Cost per kWh=Стоимость за кВтч
+Cost per charge=Одноразовая стоимость
+Cost per minute=Стоимость за минуту зарядки
+Idle cost per minute=Стоимость за минтуту блокировки зарядной станции
+Total=Всего
+Ladesäule=Заряднaя станция
+Minutes=Протоколы
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Вы можете подключить свой Teslalogger к Wallbox, чтобы рассчитать эффективность зарядки или процент фотоэлектричества, использованного для зарядки вашего автомобиля.
+Host=Host
+Param=Param
+Test=Тест
+Type=Тип
+Info=Инфо
+Version=Version
+Utility kWh=Utility кВтч
+Vehicle kWh=Автомобиль кВтч
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Вы можете установить ссылку с TeslaLogger на SuperChargeBingo для автоматической регистрации на зарядных станциях Supercharger.
+Create a SuperChargeBingo account=Создайте учетную запись SuperChargeBingo
+Create API key (must be secure)=Создайте ключ API (он должен быть безопасным)
+Copy Username and API key and insert it in TeslaLogger=Скопируйте имя пользователя и ключ API и вставьте их в TeslaLogger
+Save and restart TeslaLogger=Сохраните и перезапустите TeslaLogger
+Username=Имя пользователя
+API key=API-ключ
+
+#geoadd.php
+Name & Position=Имя
+Description=назвaние
+Radius=Радиус
+Special Flags=Специальные флаги
+Home=Главная
+Work=Работа
+Copy Charging Costs=Расходы на копирование
+Don't Combine Charging Sessions=Не совмещайте сеансы зарядки
+Set Charge Limit=Установить лимит заряда
+SOC=SOC
+Set on arrival=Комплект по прибытии
+Set Charge Limit After Charging=Установите предел заряда после зарядки
+Open Charge Port=Открытый зарядный порт
+Gear=Передача
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Высокочастотное протоколирование
+Special Count=Специальный подсчет
+Special Features=Особенности
+Enable Sentry Mode=Включить режим часового
+Disable Sentry Mode=Отключить режим часового
+Turn HVAC off=Выключите HVAC
+No sleep=Не спать
+
+#journeys.php
+Journeys=Путешествия
+Journey name missing!=Название путешествия отсутствует!
+Please select=Пожалуйста, выберите
+Please select start point!=Пожалуйста, выберите начальную точку!
+Please select end point!=Пожалуйста, выберите конечную точку!
+TextJourneys=Вы можете использовать поездки, чтобы объединить длительную поездку/время и суммировать все цифры. Это очень полезно для отслеживания времени полной зарядки аккумулятора во время длительной поездки или для сравнения потребления летних и зимних шин.
+ID=ID
+Journey=Путешествие
+Start address=Начальный адрес
+Target address=Адрес цели
+End=Конец
+Consumed kWh=Потребленные кВт/ч
+Charged kWh=Заряженный кВтч
+Drive time [h]=Время движения [ч]
+Charge time [h]=Время зарядки [ч]
+Distance [mi]=Расстояние [миль]
+Distance [km]=Расстояние [км]
+Charging costs=Расходы на зарядку
+CO2 [kg]=CO2 [кг]
+New Journey=Новое путешествие
+Journey name=Название путешествия
+Please wait=Пожалуйста, подождите
+Please select start first=Пожалуйста, выберите сначала начало
+DelJourney=Вы действительно хотите удалить путешествие {id}?
+Display _MENU_ records per page=Отображение _MENU_ записей на странице
+Nothing found=Ничего не найдено
+Showing _START_ to _END_ of _TOTAL_ entries=Показывает от _START_ до _END_ из _TOTAL_ записей
+No records available=Записи отсутствуют
+(filtered from _MAX_ total records)=(отфильтровано из _MAX_ общего количества записей)
+Search=Поиск
+First=Первый
+Last=Последний
+Next=Следующий
+Previous=Предыдущий

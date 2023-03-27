@@ -4,6 +4,7 @@ Save=Salvare
 Settings=Impostazioni
 Setup=Impostare
 Enabled=Attivato
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Batteria viaggi
@@ -148,7 +149,7 @@ Car Version= Versione autovettura
 Last Trip=Ultimo viaggio
 Duration=Durata
 Distance=Distanza
-Max kph= Max Km/h
+Max km/h=Max Km/h
 PS=HP
 Current Pos=Posizione attuale
 Last Update=Ultimo aggiornamento
@@ -160,6 +161,22 @@ Sentry Mode=Sentry Mode
 Preconditioning=Precondizionamento
 Offline=Disconnesso
 Falling asleep=Dormiente
+Driving=Guida
+Sleeping=Dormire
+kW=kW
+OK=OK
+No=No
+Yes=Sì
+Cell Temp=Temperatura della cella
+Max Charge=Carica massima
+Max Discharge=Scarico massimo
+Cell Imbalance=Squilibrio cellulare
+Software Update=Aggiornamento software
+Consumption=Consumo
+Ø Consumption=Ø Consumo
+min=min
+Wh/km=Wh/km
+km/h=km/h
 
 #menu.php
 Logfile=File di log
@@ -175,11 +192,11 @@ Suspend Teslalogger=Sospendi Teslalogger
 Wakeup Teslalogger=Attiva Teslalogger
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger credenziali Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Inserite le credenziali Tesla
+Teslalogger Tesla Credentials=Teslalogger credenziali Tesla
+Please enter your Tesla account credentials=Inserite le credenziali Tesla
 Email=Email
-Passwort=Password
-Passwort wiederholen=Ripeti la password
+Password=Password
+Repeat Password=Ripeti la password
 Speichern=Salva
 
 #settings.php
@@ -189,9 +206,34 @@ Power=Potenza
 Temperatur=Temperatura
 Unit of length=Unità di misura
 URL Admin Panel=Pannello di controllo
-
-#geoadd.php
-Bezeichnung=Descrizione
+Saved!=Salvati!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Pannello di amministrazione del Teslalogger
+Temperature=Temperatura
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=miglio
+Ideal=Ideale
+Rated=Valutazione
+Share data anonymously=Condividere i dati in modo anonimo
+Enable=Abilitazione
+All=Tutti
+Stable=Stabile
+None=Nessuno
+Sleep=Dormire
+to=a
+Show calc. 100% range=Mostra calc. Intervallo del 100%
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Porta HTTP del Teslalogger
+Zoom Level=Livello di zoom
+ScanMyTesla integration=Integrazione di ScanMyTesla
+Position by StreamingAPI=Posizione da StreamingAPI
+Main Car=Auto principale
+Car Name=Nome dell'auto
+ScanMyTesla last received=ScanMyTesla ha ricevuto l'ultima volta
+Tasker Token=Gettone per borse
+Tasker URL=URL Borse
+Received Tasker Token=Token Tasker ricevuto
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla= Tutti i consumi - ScanMyTesla
@@ -227,17 +269,6 @@ TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzat
 Resume Teslalogger=Riprendi Teslalogger
 Range=Range
 
-Ladekosten=Costi di ricarica
-Ladesäule=Stazione di ricarica
-Währung=Valuta
-Kosten pro kWh=Costo per KWh
-Kosten pro Ladung= Costo per ricarica
-Kosten pro Minute=Costo per minuto
-Kosten Blockiergebühr=Costo per minuto inattivo
-Summe=Totale
-kWh laut Zähler / Rechnung=Costo per KWh come da fattura
-Wirkungsgrad=Efficienza
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -254,3 +285,103 @@ ABRP8=Inserisci il token in Teslalogger
 ABRP9=Verifica se il Teslalogger è collegato
 ABRPYT=Controlla il tutorial di YouTube per la demo dal vivo
 ABRPToken=Token Atterrouteplanner
+
+#chargingcost.php
+Charging Costs=Costi di ricarica
+Charged=Addebitato
+Date=Data
+Minutes=Minuti
+Charger=Stazione di ricarica
+Efficiency=Efficienza
+Currency=Valuta
+kWh according to meter/invoice=Costo per KWh come da fattura
+Cost per kWh=Costo per KWh
+Cost per charge=Costo per ricarica
+Cost per minute=Costo per minuto
+Idle cost per minute=Costo per minuto inattivo
+Total=Totale
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=È possibile collegare il Teslalogger alla Wallbox per calcolare l'efficienza della ricarica o la percentuale di fotovoltaico utilizzata per ricaricare l'auto.
+Host=Host
+Param=Param
+Test=Test
+Type=Tipo
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=È possibile impostare un collegamento da TeslaLogger a SuperChargeBingo per eseguire il check-in automatico presso i Supercharger.
+Create a SuperChargeBingo account=Creare un conto SuperChargeBingo
+Create API key (must be secure)=Creare la chiave API (deve essere sicura)
+Copy Username and API key and insert it in TeslaLogger=Copiare il nome utente e la chiave API e inserirli in TeslaLogger.
+Save and restart TeslaLogger=Salvare e riavviare TeslaLogger
+Username=Nome utente
+API key=Chiave API
+
+#geoadd.php
+Name & Position=Nome
+Description=Descrizione
+Radius=Raggio
+Special Flags=Bandiere speciali
+Home=Casa
+Work=Lavoro
+Copy Charging Costs=Costi di copia
+Don't Combine Charging Sessions=Non combinare le sessioni di ricarica
+Set Charge Limit=Impostazione del limite di carica
+SOC=SOC
+Set on arrival=Set all'arrivo
+Set Charge Limit After Charging=Impostazione del limite di carica dopo la carica
+Open Charge Port=Porta di carica aperta
+Gear=Ingranaggio
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Registrazione ad alta frequenza
+Special Count=Conteggio speciale
+Count=Conteggio
+Special Features=Caratteristiche speciali
+Enable Sentry Mode=Abilita la modalità Sentinella
+Disable Sentry Mode=Disattivare la modalità Sentry
+Turn HVAC off=Spegnere il sistema HVAC
+No sleep=Non si dorme
+
+#journeys.php
+Journeys=Viaggi
+Journey name missing!=Manca il nome del viaggio!
+Please select=Selezionare
+Please select start point!=Selezionare il punto di partenza!
+Please select end point!=Selezionare il punto finale!
+TextJourneys=È possibile utilizzare i viaggi per combinare un lungo viaggio/tempo e riepilogare tutti i numeri. Questo è molto utile per monitorare il tempo di ricarica completo di un lungo viaggio o per confrontare il consumo di pneumatici estivi o invernali.
+ID=ID
+Journey=Viaggio
+Start address=Indirizzo di partenza
+Target address=Indirizzo di destinazione
+End=Fine
+Consumed kWh=kWh consumati
+Charged kWh=kWh caricati
+Drive time [h]=Tempo di guida [h]
+Charge time [h]=Tempo di carica [h]
+Distance [mi]=Distanza [mi]
+Distance [km]=Distanza [km]
+Charging costs=Costi di ricarica
+CO2 [kg]=CO2 [kg]
+New Journey=Nuovo viaggio
+Journey name=Nome del viaggio
+Please wait=Attendere prego
+Please select start first=Selezionare prima l'inizio
+DelJourney=Si vuole davvero cancellare il viaggio {id}?
+Display _MENU_ records per page=Visualizzazione di _MENU_ record per pagina
+Nothing found=Non è stato trovato nulla
+Showing _START_ to _END_ of _TOTAL_ entries=Mostra da _START_ a _END_ di _TOTAL_ voci
+No records available=Nessun record disponibile
+(filtered from _MAX_ total records)=(filtrato da _MAX_ record totali)
+Search=Ricerca
+First=Primo
+Last=Ultimo
+Next=Avanti
+Previous=Precedente

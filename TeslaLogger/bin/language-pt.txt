@@ -1,4 +1,4 @@
-#Em geral
+﻿#Em geral
 Delete=Excluir
 Save=Salve
 Settings=Definições
@@ -148,16 +148,41 @@ Car Version=Versão do Veículo
 Last Trip=Última Viagem
 Duration=Duração
 Distance=Distância
-Max kph=km/h Máximos
+Max km/h=km/h Máximos
 PS=CV
 Falling asleep=Adormecer
+Charging=Carregamento
+Done=Feito
+Done at=Feito em
+Driving=Condução
+km/h=km/h
+Preconditioning=Pré-condicionamento
+Sentry Mode=Modo sentinela
+Battery Heater=Aquecedor a pilhas
+Sleeping=Dormir
+Offline=Offline
+OK=OK
+No=Não
+Yes=Sim
+Cell Temp=Temperatura da célula
+Max Charge=Carga máxima
+Max Discharge=Descarga máxima
+Cell Imbalance=Desequilíbrio celular
+Last Update=Última Actualização
+Software Update=Actualização de software
+min=min
+Consumption=Consumo
+Ø Consumption=Ø Consumo
+kWh=kWh
+Wh/km=Wh/km
+Current Pos=Pos actuais
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Credenciais Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Por favor, insira as suas credenciais da conta Tesla
+Teslalogger Tesla Credentials=Teslalogger Credenciais Tesla
+Please enter your Tesla account credentials=Por favor, insira as suas credenciais da conta Tesla
 Email=Email
-Passwort=Palavra-passe
-Passwort wiederholen=Repita Palavra-passe
+Password=Palavra-passe
+Repeat Password=Repita Palavra-passe
 Speichern=Guardar
 
 #settings.php
@@ -167,9 +192,35 @@ Power=Potência
 Temperatur=Temperatura
 Unit of length=Unidade de distância
 URL Admin Panel=URL Painel Administração 
-
-#geoadd.php
-Bezeichnung=Descrição
+Saved!=Salvo!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Painel de administração do Teslalogger
+kW=kW
+Temperature=Temperatura
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+mile=milha
+Ideal=Ideal
+Rated=Classificado
+Share data anonymously=Partilhar dados de forma anónima
+Enable=Habilitar
+All=Todos
+Stable=Estável
+None=Nenhum
+Sleep=Dormir
+to=para
+Show calc. 100% range=Mostrar cálculo. 100% gama
+URL Grafana=URL Grafana
+Teslalogger HTTP Port=Porta HTTP Teslalogger
+Zoom Level=Nível de Zoom
+ScanMyTesla integration=Integração ScanMyTesla
+Position by StreamingAPI=Posição por StreamingAPI
+Main Car=Carro principal
+Car Name=Nome do carro
+ScanMyTesla last received=ScanMyTesla recebeu pela última vez
+Tasker Token=Ficha de Sacos
+Tasker URL=URL dos sacos
+Received Tasker Token=Ficha Tarefa Recebida
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Consumos Totais - ScanMyTesla
@@ -199,22 +250,11 @@ Einschlafen=Adormecer
 Automatic updates=Actualizações Automáticas
 
 TextShare=<h1>Partilhar curvas de carregamento e degradação anonimamente</h1>Gostaríamos de criar uma base de dados anónima para comparar curvas de carregamento e de degradação das baterias. Isto permite que compare o seu veículo com outros a qualquer momento e detectar antecipadamente qualquer desvio fora do habitual. A funcionalidade também poderá ser usada para justificar o bom estado da bateria numa venda no future. Ou, em sentido contrário, poder provar junto da Tesla no caso de performance reduzida.<br><br>Gostaria de partilhar as suas curvas de carregamentos rápidos e curvas de degradação com outros utilizadores de Teslas de forma totalmente anónima? Esta decisão pode ser alterada a qualquer momento no ecrã de configuração.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Posição por StreamingAPI</h1>permite entradas de posição DB da API de streaming - dependendo da recepção do carro isto significa até 5 posições por segundo (em comparação com uma posição a cada cinco segundos no modo normal), isto aumentará muito o tamanho da sua base de dados, aumentará o desgaste no cartão SD e resultará em enormes cópias de segurança
 Daten anonym teilen=Partilhar dados anonimamente
 TextSuspendTeslalogger=O Teslalogger foi interrompido! Os dados não serão guardados!
 Resume Teslalogger=Retomar o Teslalogger
 Range=Autonomia
-
-Ladekosten=Custos de Carregamento
-Ladesäule=Estação de Carregamento
-Währung=Moeda
-Kosten pro kWh=Custo por kWh
-Kosten pro Ladung=Custo por Carregamento
-Kosten pro Minute=Custo por Minuto
-Kosten Blockiergebühr=Custo de Ociosidade por Minuto
-Summe=Total
-kWh laut Zähler / Rechnung=kWh de acordo com contador/factura
-Wirkungsgrad=Eficiência 
 
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
@@ -232,3 +272,104 @@ ABRP8=Inserir o token no Teslalogger
 ABRP9=Verifique se o Teslalogger está conectado
 ABRPYT=Verifique o tutorial do YouTube para demonstração ao vivo
 ABRPToken=Token Abetterouteplanner
+
+#chargingcost.php
+Charging Costs=Custos de Carregamento
+Charger=Estação de carregamento
+Date=Data
+Charged=Carregado
+Efficiency=Eficiência 
+Currency=Moeda
+kWh according to meter/invoice=kWh de acordo com contador/factura
+Cost per kWh=Custo por kWh
+Cost per charge=Custo por Carregamento
+Cost per minute=Custo por Minuto
+Idle cost per minute=Custo de Ociosidade por Minuto
+Total=Total
+Ladesäule=Estação de Carregamento
+Minutes=Acta
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Pode ligar o seu Teslalogger à sua Wallbox para calcular a eficiência de carregamento ou a percentagem de fotovoltaicos utilizados para carregar o seu carro.
+Host=Host
+Param=Param
+Test=Teste
+Type=Tipo
+Info=Info
+Version=Versão
+Utility kWh=Utilitário kWh
+Vehicle kWh=Veículo kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Pode configurar um link do TeslaLogger para o SuperChargeBingo para efectuar checkins automáticos nos Superchargers.
+Create a SuperChargeBingo account=Criar uma conta SuperChargeBingo
+Create API key (must be secure)=Criar chave API (deve ser segura)
+Copy Username and API key and insert it in TeslaLogger=Copiar nome de utilizador e chave API e inseri-lo no TeslaLogger
+Save and restart TeslaLogger=Guardar e reiniciar o TeslaLogger
+Username=Nome de utilizador
+API key=Chave API
+
+#geoadd.php
+Name & Position=Nome
+Description=Descrição
+Radius=Radius
+Special Flags=Bandeiras especiais
+Home=Início
+Work=Trabalho
+Copy Charging Costs=Custos de cobrança de cópias
+Don't Combine Charging Sessions=Não Combine Sessões de Carregamento
+Set Charge Limit=Definir Limite de Carga
+SOC=SOC
+Set on arrival=Preparar à chegada
+Set Charge Limit After Charging=Definir o limite de carga após o carregamento
+Open Charge Port=Porto de Carga Aberto
+Gear=Equipamento
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Registo de Alta Frequência
+Special Count=Contagem especial
+Count=Conde
+Special Features=Características especiais
+Enable Sentry Mode=Activar o modo sentinela
+Disable Sentry Mode=Desactivar o modo sentinela
+Turn HVAC off=Desligar o AVAC
+No sleep=Sem sono
+
+#journeys.php
+Journeys=Jornadas
+Journey name missing!=Falta o nome da viagem!
+Please select=Por favor seleccione
+Please select start point!=Por favor, seleccione o ponto de partida!
+Please select end point!=Por favor, seleccione o ponto final!
+TextJourneys=Pode utilizar viagens para combinar uma longa viagem / tempo e resumir todos os números. Isto é muito útil para acompanhar o tempo de carga completo de uma viagem longa ou para comparar o consumo de pneus de Verão ou de Inverno.
+ID=ID
+Journey=Viagem
+Start address=Endereço de início
+Target address=Endereço alvo
+End=Fim
+Consumed kWh=kWh consumido
+Charged kWh=KWh carregado
+Drive time [h]=Tempo de condução [h]
+Charge time [h]=Tempo de carga [h]
+Distance [mi]=Distância [mi]
+Distance [km]=Distância [km]
+Charging costs=Custos de tarifação
+CO2 [kg]=CO2 [kg]
+New Journey=Nova Viagem
+Journey name=Nome da viagem
+Please wait=Por favor aguarde
+Please select start first=Por favor, seleccione começar primeiro
+DelJourney=Quer mesmo apagar a viagem {id}?
+Display _MENU_ records per page=Mostrar _MENU_ registos por página
+Nothing found=Nada foi encontrado
+Showing _START_ to _END_ of _TOTAL_ entries=Mostrando _START_ a _END_ de _TOTAL_ entradas
+No records available=Não há registos disponíveis
+(filtered from _MAX_ total records)=(filtrado de _MAX_ registos totais)
+Search=Pesquisa
+First=Primeiro
+Last=Último
+Next=Próximo
+Previous=Anterior

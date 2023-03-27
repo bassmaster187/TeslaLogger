@@ -13,7 +13,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TeslaLogger</RootNamespace>
     <AssemblyName>TeslaLogger</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -132,12 +132,14 @@
     <Compile Include="ElectricityMeterKeba.cs" />
     <Compile Include="ElectricityMeterOpenWB.cs" />
     <Compile Include="ElectricityMeterShelly3EM.cs" />
+    <Compile Include="ElectricityMeterShellyEM.cs" />
     <Compile Include="ElectricityMeterTeslaGen3WallConnector.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GeocodeCache.cs" />
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
+    <Compile Include="TeslaAuth.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Geofence.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="MapQuestMapProvider.cs" />
     <Compile Include="SQLTracer.cs" />
     <Compile Include="Journeys.cs" />
+    <Compile Include="KVS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

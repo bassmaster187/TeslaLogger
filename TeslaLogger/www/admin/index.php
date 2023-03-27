@@ -103,15 +103,15 @@ else
 		  }).done(function( jsonData ) {
 			if (LengthUnit == "mile")
 			{
-				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toFixed(1) + " mi");
-				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toFixed(1) + " mi");
-				$('#odometer').text((jsonData["odometer"] / km2mls).toFixed(1) + " mi");
+				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+				$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
 			}
 			else
 			{
-				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(1) + " km");
-				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toFixed(1) + " km");
-				$('#odometer').text(jsonData["odometer"].toFixed(1) + " km");
+				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 			}
 
 			if (Display100pctEnable == "true") 
@@ -154,10 +154,10 @@ else
 				if (LengthUnit == "mile")
 					str = (jsonData["speed"]/ km2mls).toFixed(0) + " mph / "
 				else
-					str = jsonData["speed"] + " km/h / ";
+					str = jsonData["speed"] + " <?php t("km/h"); ?> / ";
 
 				if (PowerUnit == "kw")
-					str += (jsonData["power"] / 1.35962).toFixed(0) +"kW";
+					str += (jsonData["power"] / 1.35962).toFixed(0) + "kW";
 				else
 					str += jsonData["power"]+"PS";
 
@@ -186,7 +186,7 @@ else
 			else if (jsonData["sleeping"])
 			{
 				$('#car_statusLabel').text("<?php t("Status"); ?>:");
-				$('#car_status').text("<?php t("Schlafen"); ?>");
+				$('#car_status').text("<?php t("Sleeping"); ?>");
 
 				hideSMT();
 			}
@@ -210,18 +210,18 @@ else
 				$("#max_speed").text((jsonData["trip_max_speed"]/ km2mls).toFixed(0));
 				$("#lt_kmh").text("mph");
 
-				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"]* km2mls*10)/10);
+				$("#trip_avg_kwh").text((jsonData["trip_avg_kwh"]* km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 				$("#lt_whkm").text("wh/mi");
 
-				$("#trip_distance").text(Math.round(jsonData["trip_distance"]/ km2mls *10)/10);
+				$("#trip_distance").text((jsonData["trip_distance"]/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 				$("#lt_trip_distance_km").text("mi");
 			}
 			else
 			{
 				$("#max_speed").text(jsonData["trip_max_speed"]);
-				
-				$("#trip_avg_kwh").text(Math.round(jsonData["trip_avg_kwh"] *10)/10);
-				$("#trip_distance").text(Math.round(jsonData["trip_distance"]*10)/10);
+
+				$("#trip_avg_kwh").text(jsonData["trip_avg_kwh"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
+				$("#trip_distance").text(jsonData["trip_distance"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}));
 			}
 
 			if (PowerUnit == "kw")
@@ -236,12 +236,12 @@ else
 			}
 
 			var ts2 = new Date(Date.parse(jsonData["trip_start_dt"]));
-			$("#trip_start").text(ts2.toLocaleString(loc));
+			$("#trip_start").text(ts2.toLocaleTimeString(loc, { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
-			$("#trip_kwh").text(Math.round(jsonData["trip_kwh"] *10)/10);
+			$("#trip_kwh").text((Math.round(jsonData["trip_kwh"] *10)/10).toLocaleString(loc));
 			
 			var ts = new Date(Date.parse(jsonData["ts"]));
-			$("#last_update").text(ts.toLocaleString(loc));
+			$("#last_update").text(ts.toLocaleTimeString(loc, { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
 			var trip_duration_sec = jsonData["trip_duration_sec"];
 			var min = Math.floor(trip_duration_sec / 60);
@@ -364,7 +364,7 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if(isDocker() && GrafanaVersion() != "8.3.2")
+	else if(isDocker() && GrafanaVersion() != "8.5.22")
 	{?>
 		$("#InfoText").html("<h1>Please update to latest docker-compose.yml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
 		$(".HeaderT").show();
@@ -397,7 +397,7 @@ function ShowInfo()
   </script>
 
   </head>
-  <body style="padding-top: 5px; padding-left: 10px;">
+  <body>
   <?php 
     include "menu.php";
     echo(menu("Teslalogger"));
@@ -408,11 +408,11 @@ function ShowInfo()
   <table class="HeaderT">
 	  <thead><td colspan="2" class="HeaderStyle"><?php t("Info"); ?></td></thead>
 	  <tr><td colspan="2"><span id="InfoText"></span></td></tr>
-	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("Nein"); ?></button> <button id="PositiveButton"><?php t("Ja"); ?></button></td></tr>
-    </table>
+	  <tr><td></td><td style="float:right;"><button id="NegativeButton"><?php t("No"); ?></button> <button id="PositiveButton"><?php t("Yes"); ?></button></td></tr>
+  </table>
   </div>
   <div style="float:left;">
-	  <table class="b1 THeader">
+  <table class="b1 THeader">
 	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
@@ -426,22 +426,22 @@ function ShowInfo()
 	  <tr><td><b><?php t("Last Update"); ?>:</b></td><td><span id="last_update">---</span></td></tr>
 	  <tr><td><b>Teslalogger:</b></td><td><?php checkForUpdates();?></td></tr>
 	  <tr id="SoftwareUpdateRow"><td><b><?php t("Software Update"); ?>:</b></td><td><span id="software_update"></span></td></tr>
-    </table>
+<!--  </table>
 
-	  <table style="float:left;" class="THeader">
+  <table style="float:left;" class="THeader"> -->
 	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Last Trip"); ?></td></thead>
 	  <tr><td width="130px"><b><?php t("Start"); ?>:</b></td><td width="180px"><span id="trip_start"></span></td></tr>
-	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> min</td></tr>
-	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km">km</span></td></tr>
-	  <tr><td><b><?php t("Verbrauch"); ?>:</b></td><td><span id="trip_kwh">---</span> kWh</td></tr>
-	  <tr><td><b><?php t("Ø Verbrauch"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm">Wh/km</span></td></tr>
-	  <tr><td><b><?php t("Max kph"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh">km/h</span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
-	  </table>
+	  <tr><td><b><?php t("Duration"); ?>:</b></td><td><span id="trip_duration_sec">---</span> <?php t("min"); ?></td></tr>
+	  <tr><td><b><?php t("Distance"); ?>:</b></td><td><span id="trip_distance">---</span> <span id="lt_trip_distance_km"><?php t("km"); ?></span></td></tr>
+	  <tr><td><b><?php t("Consumption"); ?>:</b></td><td><span id="trip_kwh">---</span> <?php t("kWh"); ?></td></tr>
+	  <tr><td><b><?php t("Ø Consumption"); ?>:</b></td><td><span id="trip_avg_kwh">---</span> <span id="lt_whkm"><?php t("Wh/km"); ?></span></td></tr>
+	  <tr><td><b><?php t("Max km/h"); ?> / <?php t("PS"); ?>:</b></td><td><span id="max_speed">---</span> <span id="lt_kmh"><?php t("km/h"); ?></span> / <span id="max_power">---</span> <span id="lt_trip_PS"><span></td></tr>
+  </table>
   </div>
 
   <table style="float:left;">
-  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
-  <tr><td width="680px"><div id="map" style="height: 400px; z-index:0;" /></td></tr>
+	  <thead style="background-color:#d0d0d0; color:#000000;"><td colspan="2" style="font-weight:bold;"><?php t("Current Pos"); ?></td></thead>
+	  <tr><td width="680px"><div id="map" style="height: 400px; z-index:0;" /></td></tr>
   </table>
 
   <?php

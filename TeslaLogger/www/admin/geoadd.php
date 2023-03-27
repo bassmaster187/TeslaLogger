@@ -50,7 +50,7 @@ if (isset($id))
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger geofencing V1.1</title>
+    <title>Teslalogger Geofencing V1.1</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
@@ -83,8 +83,6 @@ if (isset($id))
         })
       })
     }).addTo(map);
-	
-	$("button").button();
 
 	$("input").change(function(){OnSpecialFlagsChanged();});
 	$("select").change(function(){OnSpecialFlagsChanged();});
@@ -346,7 +344,7 @@ if (isset($id))
 			echo("id: $id");
 		?>     
 	}).always(function() {
-	alert("Saved!");
+	alert("<?php t('Saved!'); ?>");
 	//location.reload();
 	location.href = document.referrer;
 	});		
@@ -367,71 +365,71 @@ if (isset($id))
 	<body>
 <?php 
     include "menu.php";
-    echo(menu("Geofence"));
+    echo(menu("Geofencing"));
 ?>
 <div style="max-width: 1260px;">
 	<div style="float:left;">
 		<div>
-  			<h2 style="margin-top: 0px;">Name & Position</h2>
+  			<h2 style="margin-top: 0px;"><?php t("Name & Position"); ?></h2>
 			<table>
-				<tr><td><?php t("Bezeichnung"); ?>:</td><td><input id="text" value="<?= $poiname ?>"/></td></tr>
+				<tr><td><?php t("Description"); ?>:</td><td><input id="text" value="<?= $poiname ?>"/></td></tr>
 				<tr><td><?php t("Radius"); ?>:</td><td><input id="radius" value="<?= intval($radius) ?>" type="number"/></td></tr>
 			</table>
 		</div>
 		<div>
   			 
 			<table>
-				<tr><td><h2>Special Flags</h2></td><td><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#special-flags-for-pois"><img src="img/icon-help-24.png" /></a></td></tr>
-				<tr><td><h4 style="margin-top: 0px;">Type</h4></td></tr>
-				<tr><td>🏠 Home</td><td><input id="home" type="checkbox" value="home" /></td></tr>
-				<tr><td>💼 Work</td><td> <input id="work" type="checkbox" value="work" /></td></tr>
-				<tr><td>🔌 Charger</td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
-				<tr><td><h4 style="margin-top: 20px;">Charging</h4></td></tr>
-				<tr><td>Copy Charging Costs</td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td>Don't Combine Charging Sessions</td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
-				<tr><td>Set Charge Limit</td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="scl_limit" placeholder="100"/>%</td><td><input id="scl_soa" type="checkbox" value=""/> Set on arrival</td></tr>
-				<tr><td>Set Charge Limit After Charging</td><td> <input id="occ" type="checkbox" value=""/></td><td>&nbsp;</td><td>SOC</td><td><input size="6" id="occ_limit" placeholder="75"/>%</td></tr>
-				<tr><td>Open Charge Port</td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td>Gear</td>
+				<tr><td><h2><?php t("Special Flags"); ?></h2></td><td><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/Geofence.md#special-flags-for-pois"><img src="img/icon-help-24.png" /></a></td></tr>
+				<tr><td><h4 style="margin-top: 0px;"><?php t("Type"); ?></h4></td></tr>
+				<tr><td>🏠 <?php t("Home"); ?></td><td><input id="home" type="checkbox" value="home" /></td></tr>
+				<tr><td>💼 <?php t("Work"); ?></td><td> <input id="work" type="checkbox" value="work" /></td></tr>
+				<tr><td>🔌 <?php t("Charger"); ?></td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
+				<tr><td><h4 style="margin-top: 20px;"><?php t("Charging"); ?></h4></td></tr>
+				<tr><td><?php t("Copy Charging Costs"); ?></td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
+				<tr><td><?php t("Don't Combine Charging Sessions"); ?></td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
+				<tr><td><?php t("Set Charge Limit"); ?></td><td> <input id="scl" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("SOC"); ?></td><td><input size="6" id="scl_limit" placeholder="100"/>%</td><td><input id="scl_soa" type="checkbox" value=""/> <?php t("Set on arrival"); ?></td></tr>
+				<tr><td><?php t("Set Charge Limit After Charging"); ?></td><td> <input id="occ" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("SOC"); ?></td><td><input size="6" id="occ_limit" placeholder="75"/>%</td></tr>
+				<tr><td><?php t("Open Charge Port"); ?></td><td> <input id="ocp" type="checkbox" value=""/></td><td></td><td><?php t("Gear"); ?></td>
 					<td>
   						<select id="ocp_gear">
-						  <option value="DR->P">D/R → P</option>
-						  <option value="D->P">D → P</option>
-						  <option value="R->P">R → P</option>
+						  <option value="DR->P"><?php t("D/R → P"); ?></option>
+						  <option value="D->P"><?php t("D → P"); ?></option>
+						  <option value="R->P"><?php t("R → P"); ?></option>
 						</select>
 					</td></tr>
-				<tr><td>High Frequency Logging</td><td> <input id="hfl" type="checkbox" value=""/></td><td>&nbsp;</td><td>Duration</td><td><input size="6" id="hfl_minutes"/>Minutes</td></tr>
-				<tr><td></td><td></td><td>&nbsp;</td><td>Count</td><td><input size="6" id="hfl_count" placeholder="100"/>Count</td></tr>
-				<tr><td><h4 style="margin-top: 20px;">Features</h4></td></tr>
-				<tr><td>Enable Sentry Mode</td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+				<tr><td><?php t("High Frequency Logging"); ?></td><td> <input id="hfl" type="checkbox" value=""/></td><td>&nbsp;</td><td><?php t("Duration"); ?></td><td><input size="6" id="hfl_minutes"/><?php t("Minutes"); ?></td></tr>
+				<tr><td></td><td></td><td>&nbsp;</td><td><?php t("Special Count"); ?></td><td><input size="6" id="hfl_count" placeholder="100"/><?php t("Count"); ?></td></tr>
+				<tr><td><h4 style="margin-top: 20px;"><?php t("Special Features"); ?></h4></td></tr>
+				<tr><td><?php t("Enable Sentry Mode"); ?></td><td> <input id="esm" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
 					<td>
 						<select id="esm_gear">
-						  <option value="DR->P">D/R → P</option>
-						  <option value="D->P">D → P</option>
-						  <option value="R->P">R → P</option>
+						  <option value="DR->P"><?php t("D/R → P"); ?></option>
+						  <option value="D->P"><?php t("D → P"); ?></option>
+						  <option value="R->P"><?php t("R → P"); ?></option>
 						</select>
 					</td></tr>
-				<tr><td>Disable Sentry Mode</td><td> <input id="dsm" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+				<tr><td><?php t("Disable Sentry Mode"); ?></td><td> <input id="dsm" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
 					<td>
 						<select id="dsm_gear">
-						  <option value="DR->P">D/R → P</option>
-						  <option value="D->P">D → P</option>
-						  <option value="R->P">R → P</option>
+						  <option value="DR->P"><?php t("D/R → P"); ?></option>
+						  <option value="D->P"><?php t("D → P"); ?></option>
+						  <option value="R->P"><?php t("R → P"); ?></option>
 						</select>
 					</td></tr>
-				<tr><td>Turn HVAC off</td><td> <input id="cof" type="checkbox" value="" name="type" /></td><td></td><td>Gear</td>
+				<tr><td><?php t("Turn HVAC off"); ?></td><td> <input id="cof" type="checkbox" value="" name="type" /></td><td></td><td><?php t("Gear"); ?></td>
 					<td>
 						<select id="cof_gear">
-						  <option value="DR->P">D/R → P</option>
-						  <option value="D->P">D → P</option>
-						  <option value="R->P">R → P</option>
+						  <option value="DR->P"><?php t("D/R → P"); ?></option>
+						  <option value="D->P"><?php t("D → P"); ?></option>
+						  <option value="R->P"><?php t("R → P"); ?></option>
 						</select>
 					</td></tr>
-				<tr><td>No sleep</td><td> <input id="nosleep" type="checkbox" value="" name="type" /></td></tr>
+				<tr><td><?php t("No sleep"); ?></td><td> <input id="nosleep" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td colspan=5 ><input style="width: 100%" id="flag" disabled/></td></tr>
 			</table>
 		</div>
-		<button id="btn_save" onclick="save();">Save</button>
-		<button style="color:red;" id="btn_delete" onclick="del();">Delete</button>
+		<button id="btn_save" onclick="save();"><?php t("Save"); ?></button>
+		<button id="btn_delete" onclick="del();" class="redbutton"><?php t("Delete"); ?></button>
 
 	</div>
 	<div id="map" style="height:700px; z-index:0;"></div>

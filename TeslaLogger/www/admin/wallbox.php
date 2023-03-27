@@ -7,7 +7,7 @@ require_once("tools.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php t("Wallbox Test"); ?></title>
+    <title><?php t("Wallbox"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -57,10 +57,18 @@ require_once("tools.php");
 				};
 
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
+			var loc;
+			if (navigator.languages != undefined) loc = navigator.languages[0]; 
+				else loc = navigator.language;
             var json = JSON.parse(data);
             $("#Version").text(json.Version);
-            $("#Utility_kWh").text(json.Utility_kWh);
-            $("#Vehicle_kWh").text(json.Vehicle_kWh);
+			
+			if (typeof(json.Utility_kWh) === "number" ) {
+				$("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
+			if (typeof(json.Vehicle_kWh) === "number" ) {
+				$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
         });
     }
 
@@ -78,16 +86,23 @@ require_once("tools.php");
 				};
 
         var jqxhr = $.post("teslaloggerstream.php", {url: url, data: JSON.stringify(d)}).always(function (data) {
-            var json = JSON.parse(data);
-            $("#Version").text(json.Version);
-            $("#Utility_kWh").text(json.Utility_kWh);
-            $("#Vehicle_kWh").text(json.Vehicle_kWh);
+			var loc;
+			if (navigator.languages != undefined) loc = navigator.languages[0]; 
+				else loc = navigator.language;
+			var json = JSON.parse(data);
+			$("#Version").text(json.Version);
+			if (typeof(json.Utility_kWh) === "number" ) {
+				$("#Utility_kWh").text(json.Utility_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
+			if (typeof(json.Vehicle_kWh) === "number" ) {
+				$("#Vehicle_kWh").text(json.Vehicle_kWh.toLocaleString(loc,{maximumFractionDigits:3, minimumFractionDigits: 3}));
+			}
         });
     }
 
 </script>
 </head>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
 <div style="max-width: 1260px;">
 <?php 
 include "menu.php";
@@ -96,26 +111,27 @@ menu("Wallbox Test");
 <div>
     <h1><?php t("Wallbox"); ?>:  <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/wallbox.md"><img src="img/icon-help-24.png" class="pointer"/></a></h1>
 <div>
-<p>You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.</p>
+<p><?php t("WallboxComment"); ?></p>
 <table>
-    <tr><td>Type:</td><td>
+    <tr><td><?php t("Type"); ?>:</td><td>
         <select name="type" id="type">
         <option value=""></option>
             <option value="go-e">Go e-Charger</option>    
             <option value="openwb">Open WB</option>
             <option value="shelly3em">Shelly 3EM</option>
+            <option value="shellyem">Shelly EM</option>
             <option value="tesla-gen3">Tesla Wallbox Gen 3</option>
             <option value="keba">Keba KeContact P30</option>
         </select>
         </td></tr>
-    <tr><td>Host:</td><td><input id="host" type="text" /></td></tr>
-    <tr><td>Param:</td><td><input id="param" type="text" /></td></tr>
+    <tr><td><?php t("Host"); ?>:</td><td><input id="host" type="text" /></td></tr>
+    <tr><td><?php t("Param"); ?>:</td><td><input id="param" type="text" /></td></tr>
     <tr><td></td><td style="text-align: right;"><button onclick="btn_test_click();"><?php t("Test"); ?></td></tr>
     <tr><td></td><td></td></tr>
-    <tr><td colspan=2><h1>Info:</h1></td></tr>
-    <tr><td>Version:</td><td><span id="Version"></td></span></tr>
-    <tr><td>Utility kWh:</td><td><span id="Utility_kWh"></td></span></tr>
-    <tr><td>Vehicle kWh:</td><td><span id="Vehicle_kWh"></td></span></tr>
+    <tr><td colspan=2><h1><?php t("Info"); ?>:</h1></td></tr>
+    <tr><td><?php t("Version"); ?>:</td><td><span id="Version"></td></span></tr>
+    <tr><td><?php t("Utility kWh"); ?>: </td><td><span id="Utility_kWh"></td></span></tr>
+    <tr><td><?php t("Vehicle kWh"); ?>: </td><td><span id="Vehicle_kWh"></td></span></tr>
     <tr><td></td><td style="text-align: right;"><button onclick="btn_save_click();"><?php t("Save"); ?></td></tr>
 </table>
 </div>

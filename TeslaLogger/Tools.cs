@@ -1442,18 +1442,19 @@ namespace TeslaLogger
             }
         }
 
-        public static void CleanupBackupFolder()
+        public static void CleanupBackupFolder(long freeDiskSpaceNeededMB = 2048, int keepDays = 14)
         {
             if (Tools.IsDocker())
                 return;
 
             bool filesFoundForDeletion = false;
-            int countDeletedFiles = 0;
-            long freeDiskSpaceNeeded = 2048;
+            int countDeletedFiles = 0;            
 
-            if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // Keep 2GB of free disk space
+            if (FreeDiskSpaceMB() > freeDiskSpaceNeededMB)
+            {  // enough space available?
+                Tools.DebugLog($"CleanupBackupFolder: FreeDiskSpaceMB() {FreeDiskSpaceMB()} > freeDiskSpaceNeeded {freeDiskSpaceNeededMB}");
                 return;
-
+            }
 
             DirectoryInfo di = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "backup"));
 
@@ -1461,12 +1462,21 @@ namespace TeslaLogger
             {
                 IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
 
+                FileInfo dsFileSize = di.GetFiles().OrderBy(p => p.Length).Last<FileInfo>();
+                Tools.DebugLog($"CleanupBackupFolder: largest file {dsFileSize.Name} has {dsFileSize.Length} bytes");
+
+                // make sure we can store 10 backups
+                freeDiskSpaceNeededMB = Math.Max(freeDiskSpaceNeededMB, (dsFileSize.Length / 1024 / 1024) * 10);
+
                 foreach (FileInfo fi in ds)
                 {
-                    if (FreeDiskSpaceMB() > freeDiskSpaceNeeded) // already deleted enough?
+                    if (FreeDiskSpaceMB() > freeDiskSpaceNeededMB)
+                    {  // already deleted enough?
+                        Tools.DebugLog($"CleanupBackupFolder: FreeDiskSpaceMB() {FreeDiskSpaceMB()} > freeDiskSpaceNeeded {freeDiskSpaceNeededMB}");
                         return;
+                    }
 
-                    if ((DateTime.Now - fi.LastWriteTime).TotalDays > 14)
+                    if ((DateTime.Now - fi.LastWriteTime).TotalDays >= keepDays)
                     {
                         try
                         {
@@ -1618,6 +1628,25 @@ WHERE
                         }
                     }
                     Thread.Sleep(1000);
+                }
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    Logfile.Log($"Housekeeping: OPTIMIZE TABLE mothership");
+                    con.Open();
+                    string SQLcmd = "OPTIMIZE TABLE mothership";
+                    using (MySqlCommand cmd = new MySqlCommand(SQLcmd, con))
+                    {
+                        try
+                        {
+                            cmd.CommandTimeout = 60000;
+                            SQLTracer.TraceNQ(cmd);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                        }
+                        con.Close();
+                    }
                 }
             }
         }

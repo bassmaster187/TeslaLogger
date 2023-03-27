@@ -182,6 +182,42 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_M3_LR()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 460, DateTime.Now.AddMinutes(1));
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "74d";
+            wh.car.Vin = "5YJ3E7EB7KFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR", wh.car.ModelName);
+            Assert.AreEqual(0.152, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_DegradedBattery()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 430, DateTime.Now.AddMinutes(1));
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "74d";
+            wh.car.Vin = "5YJ3E7EB7KFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR", wh.car.ModelName);
+            Assert.AreEqual(0.152, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_M3_LR_P()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
@@ -843,6 +879,66 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void ShellyEM_CEmpty()
+        {
+            var v = new ElectricityMeterShellyEM("", "");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(56.256099999999996, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
+        public void ShellyEM_C1()
+        {
+            var v = new ElectricityMeterShellyEM("", "C1");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(56.256099999999996, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
+        public void ShellyEM_C2()
+        {
+            var v = new ElectricityMeterShellyEM("", "C2");
+            v.mockup_status = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-status.txt");
+            v.mockup_shelly = System.IO.File.ReadAllText(@"..\..\testdata\shelly-em1-shelly.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var chargign = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(1.231, kwh);
+            Assert.AreEqual(false, chargign);
+            Assert.AreEqual(null, utility_meter_kwh);
+            Assert.AreEqual("20221027-105518/v1.12.1-ga9117d3", version);
+        }
+
+        [TestMethod]
         public void TeslaGen3WCMeterNotCharging()
         {
             var v = new ElectricityMeterTeslaGen3WallConnector("", "");
@@ -900,18 +996,18 @@ namespace UnitTestsTeslalogger
         [TestMethod]
         public void GeocacheBasic()
         {
-            GeocodeCache.Instance.ClearCache();
-            GeocodeCache.Instance.Insert(10, 20, "Test");
-            string temp = GeocodeCache.Instance.Search(10, 20);
+            // xx GeocodeCache.ClearCache();
+            GeocodeCache.Insert(10, 20, "Test");
+            string temp = GeocodeCache.Search(10, 20);
             Assert.AreEqual("Test", temp);
-            temp = GeocodeCache.Instance.Search(11, 20);
+            temp = GeocodeCache.Search(11, 20);
             Assert.IsNull(temp);
 
-            GeocodeCache.Instance.Insert(10, 20, "Test");
-            temp = GeocodeCache.Instance.Search(10, 20);
+            GeocodeCache.Insert(10, 20, "Test");
+            temp = GeocodeCache.Search(10, 20);
             Assert.AreEqual("Test", temp);
 
-            GeocodeCache.Instance.ClearCache();
+            // xx GeocodeCache.ClearCache();
         }
 
         [TestMethod]
@@ -948,7 +1044,7 @@ namespace UnitTestsTeslalogger
             var json = "{\"response\":[],\"Count\":0}";
             Car c = new Car(1, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
             var t = new TeslaAPIState(c);
-            var ret = t.ParseAPI(json, "vehicles", 0);
+            var ret = t.ParseAPI(json, "vehicles");
 
             Assert.IsFalse(ret);
         }
@@ -989,5 +1085,14 @@ namespace UnitTestsTeslalogger
             c.webhelper.UpdateTeslaTokenFromRefreshToken();
         }
         */
+
+        [TestMethod]
+        public void TestAuthTesla()
+        {
+            TeslaAuth t = new TeslaAuth();
+            var url = t.GetLoginUrlForBrowser();
+            string newurl = "https://auth.tesla.com/void/callback?code=1c0939d1421cd504cca7405b76c92b25fb6b2419e88e2231b568c70e7671&state=xqXt8LsGQle0UximPatd&issuer=https%3A%2F%2Fauth.tesla.com%2Foauth2%2Fv3";
+            var tokens = t.GetTokenAfterLoginAsync(newurl).Result;
+        }
     }
 }

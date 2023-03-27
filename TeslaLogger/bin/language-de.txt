@@ -1,14 +1,11 @@
-#Allgemein
+﻿#Allgemein
 Delete=Löschen
 Save=Speichern
 Settings=Einstellungen
 Setup=Einrichtung
 Enabled=Aktiviert
 
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
-TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
-Resume Teslalogger=Teslalogger Starten
-Typical Range=Reichweite
+StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt
 
 #Timeline Plugin.json
 Parking=Parken
@@ -22,23 +19,39 @@ Last Driven=Letzte Fahrt  * * *
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
 
-#Index.php
+#index.php
 Battery Heater=Batterie-Heizung
-Car Version=Fahrzeug Version
+Car Info=Fahrzeuginformationen
+Car Version=Fahrzeug-Version
 Cell Imbalance=Zellen-Imbalance
-Cell Temp=Zell Temperatur
+Cell Temp=Zelltemperatur
+Consumption=Verbrauch
 Current Pos=Aktuelle Position
-Duration=Dauer
 Distance=Distanz
-Done=Fertig
 Done at=Fertig um
+Done=Fertig
+Duration=Dauer
 Falling asleep=Einschlafen
-Car Info=Fahrzeuginfo
-Odometer=KM Stand
+Info=Information
+Last Trip=Letzte Fahrt
 Last Update=Letztes Update
-Last Trip=Letzter Trip
-Charging=Wird geladen
-Max kph=Max km/h
+Max Charge=Max. Ladung
+Max Discharge=Max. Entladung
+Max km/h=Max. km/h
+No=Nein
+Odometer=Kilometerstand
+Resume Teslalogger=Teslalogger starten
+Software Update=Software-Aktualisierung
+Start=Start
+TextSuspendTeslalogger=Teslalogger wurde angehalten! Daten werden nicht geloggt!
+Typical Range=Reichweite
+Yes=Ja
+Ø Consumption=Ø Verbrauch
+mi=mi
+min=min
+kWh=kWh
+Wh/km=Wh/km
+km/h=km/h
 
 #settings.php
 Credentials=Zugangsdaten
@@ -78,10 +91,11 @@ All=Alle
 Stable=Stabil
 to=bis
 ScanMyTesla integration=ScanMyTesla-Integration
-Position by StreamingAPI=Position by StreamingAPI
+Position by StreamingAPI=Position von StreamingAPI
+Saved!=Gespeichert!
 
 
-TeslaAuthApps=Du kannst folgende Apps verwenden um ein Access Token & Refresh Token vom Tesla Server zu generieren.
+TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
 
 #abrp.php
 ABRPTitle=Verbindung mit „A Better Routeplanner“
@@ -97,3 +111,175 @@ ABRP8=Fügen Sie den Token in Teslalogger ein
 ABRP9=Überprüfen Sie, ob der Teslalogger verbunden ist
 ABRPYT=Sehen Sie sich das YouTube-Einführungsvideo für eine Live-Demonstration an
 ABRPToken=„A Better Routeplanner“-Token
+
+#password.php
+Bitte Fahrzeug auswählen=Bitte Fahrzeug auswählen
+Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
+Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
+Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
+Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
+BA_Browser=Im lokalen {Browser} (empfohlen)
+BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
+BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
+BA_Auth=Melden Sie sich mit Ihren Tesla-Zugangsdaten und ggf. MFA an (Tesla merkt sich diese Daten, wenn Sie den Link schon einmal verwendet haben)
+BA_NotFound=Dies führt zu einer "Page Not Found" Seite. Das ist normal.
+BA_URL=Kopieren Sie den Link dieser Webseite in das unten stehende Feld. Im Link ist ein einmaliger, temporärer Code enthalten, den wir zur Generierung von Token verwenden können. Wir werden diesen Code aus dem Link extrahieren.
+BA_Invalid=Diese Links funktionieren in der Regel nur einmal. Wenn also auf unserer Website die Meldung "Invalid Grant" oder eine andere Fehlermeldung erscheint, müssen Sie möglicherweise den Tesla-Logon-Link erneut aufrufen, der einen neuen Link erzeugen sollte.
+BA_Logoff=Wenn Sie ein anderes Konto verwenden möchten, müssen Sie sich {hier} manuell abmelden!
+BA_GetToken=Wir werden dann die Token für Ihren Tesla-Konto bekommen.
+BA_SelectCar=Wählen Sie das Fahrzeug aus, das Sie für den Teslalogger verwenden möchten.
+BA_Step1=Schritt 1:
+BA_Step2=Schritt 2:
+BA_Step3=Schritt 3:
+BA_FillOut=Bitte ausfüllen:
+BA_CopyUrl=Kopieren Sie die angezeigte URL
+BA_Paste=Die URL hier einfügen und auf "Tokens holen" klicken:
+Get Tokens=Tokens holen
+Access Token=Access Token
+Refresh Token=Refresh Token
+OK=OK
+Email=E-Mail
+Car=Fahrzeug
+Free Supercharging=Kostenloses Supercharging
+Reconnect=Reconnect
+ID=ID
+Model=Modell
+VIN=VIN
+Free SUC=Free SUC
+Edit=Ändern
+NEW CAR=NEUES FAHRZEUG
+Do you want to delete?=Wollen Sie das Fahrzeug löschen?
+Please enter the access token!=Bitte das Access Token entragen!
+Please enter the refresh token!=Bitte das Refresh Token entragen!
+Check Logfile!=Bitte die Logdatei prüfen!
+Do you really want to delete this vehicle?=Wollen Sie das Fahrzeug wirklich löschen?
+Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
+Unauthorized=Nicht autorisiert
+This isn't a valid URL!=Dies ist kein gültige URL!
+This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
+The URL doesn't contain the expected format!=Die URL enthält nicht das erwartete Format!
+
+
+#dashboard.php
+Online=Online
+Offline=Offline
+Preconditioning=Vorkonditionierung
+Sentry Mode=Wächter-Modus
+Status=Status
+Sleeping=Schlafen
+
+#geoadd.php
+Charger=Ladesäule
+Copy Charging Costs=Ladekosten kopieren
+Count=Count
+D → P=D → P
+D/R → P=D/R → P
+Description=Beschreibung
+Disable Sentry Mode=Wächter-Modus ausschalten
+Don't Combine Charging Sessions=Ladesitzungen nicht vereinen
+Enable Sentry Mode=Wächter-Modus einschalten
+Gear=Gang
+High Frequency Logging=Hochfrequentes loggen
+Home=Zu Hause
+Minutes=Minuten
+Name & Position=Name & Position
+No sleep=Kein Ruhezustand
+Open Charge Port=Ladeklappe öffnen
+R → P=R → P
+Radius=Radius
+SOC=SOC
+Set Charge Limit After Charging=Setze Ladelimit nach dem Laden
+Set Charge Limit=Ladelimit setzen
+Set on arrival=Setzen bei Ankunft
+Special Count=Besonderer Zähler
+Special Features=Besondere Eigenschaften
+Special Flags=Weitere Eigenschaften
+Turn HVAC off=Klimaanlage ausschalten
+Type=Typ
+Work=Arbeit
+
+#chargingcost.php
+Charging Costs=Ladekosten
+Date=Datum
+Charged=Geladen
+Efficiency=Wirkungsgrad
+Currency=Währung
+kWh according to meter/invoice=kWh laut Zähler/Rechnung
+Cost per kWh=Kosten pro kWh
+Cost per charge=Kosten pro Ladung
+Cost per minute=Kosten pro Minute
+Idle cost per minute=Kosten Blockiergebühr
+Total=Summe
+
+#adminpanelpassword.php
+Admin Panel Credentials=Anmeldedaten für das Admin-Panel
+Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
+Passwords do not match!=Passwörter stimmen nicht überein!
+Do you want to delete your password?=Möchten Sie Ihr Passwort löschen?
+Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin-Panel von Teslalogger fest
+Name=Name
+Password=Passwort
+Repeat Password=Passwort wiederholen
+
+#logfile.php
+Logfile=Protokolldatei
+Download Logfile=Protokolldatei herunterladen
+Lines=Zeilen
+Housekeeping=Wartung
+Update=Aktualisierung
+Sleep Attempt=Schlafversuch
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Sie können Ihren Teslalogger an Ihre Wallbox anschließen, um den Wirkungsgrad des Ladevorgangs oder den prozentualen Anteil der Photovoltaik am Ladevorgang Ihres Fahrzeugs zu berechnen.
+Host=Host
+Param=Param
+Test=Test
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=kWh Fahrzeug
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Sie können einen Link von TeslaLogger zu SuperChargeBingo einrichten, um automatische Checkins an Superchargern durchzuführen.
+Create a SuperChargeBingo account=Erstellen Sie ein SuperChargeBingo-Konto
+Create API key (must be secure)=API-Schlüssel erstellen (muss sicher sein)
+Copy Username and API key and insert it in TeslaLogger=Kopieren Sie Benutzername und API-Schlüssel und fügen Sie sie in TeslaLogger ein.
+Save and restart TeslaLogger=Speichern und Neustart von TeslaLogger
+Username=Benutzername
+API key=API-Schlüssel
+
+#journeys.php
+Journeys=Reisen
+Journey=Reise
+Journey name missing!=Reisename fehlt!
+Please select=Bitte wählen
+Please select start point!=Bitte Startpunkt wählen!
+Please select end point!=Bitte Endpunkt auswählen!
+TextJourneys=Sie können Reisen verwenden, um eine lange Fahrt oder Zeit zu kombinieren und alle Zahlen zusammenzufassen. Dies ist sehr nützlich, um die gesamte Ladezeit einer langen Fahrt zu verfolgen oder den Verbrauch von Sommer- oder Winterreifen zu vergleichen.
+Start address=Startadresse
+Target address=Zieladresse
+End=Ende
+Consumed kWh=Verbrauchte kWh
+Charged kWh=Geladene kWh
+Drive time [h]=Fahrzeit [h]
+Charge time [h]=Aufladezeit [h]
+Distance [mi]=Entfernung [mi]
+Distance [km]=Entfernung [km]
+Charging costs=Ladekosten
+CO2 [kg]=CO2 [kg]
+New Journey=Neue Reise
+Journey name=Name der Reise
+Please wait=Bitte warten
+Please select start first=Bitte wählen Sie zuerst den Startpunkt
+DelJourney=Wollen Sie wirklich Reise Nr. {id} löschen?
+Nothing found=Nichts gefunden
+Display _MENU_ records per page=Zeige _MENU_ Zeilen pro Seite
+Showing _START_ to _END_ of _TOTAL_ entries=Zeige _START_ bis _END_ von _TOTAL_ Einträgen
+No records available=Keine Datensätze verfügbar
+(filtered from _MAX_ total records)=(gefiltert aus _MAX_ Datensätzen)
+Search=Suche
+First=Erster
+Last=Letzter
+Next=Nächste
+Previous=Vorherige

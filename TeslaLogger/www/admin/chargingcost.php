@@ -7,7 +7,7 @@ require_once("tools.php");
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslalogger Set Charging Cost</title>
+    <title><?php t("Charging Costs"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -17,6 +17,8 @@ require_once("tools.php");
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <style>
 .sum {padding-left: 20px; text-align: right;}
+input {width: 100px; padding-right: 10px;}
+input[type=number] {text-align: right;}
 </style>
 
 	<script>
@@ -26,7 +28,7 @@ require_once("tools.php");
 <?php
 
     $url = GetTeslaloggerURL("getchargingstate?id=". $_REQUEST["id"]);
-    
+
     $output = @file_get_contents($url);
     if ($output === false)
     {
@@ -39,12 +41,12 @@ require_once("tools.php");
     {
         echo("    var json = JSON.parse('$output');\n");
     }
-?>    
+?>
 
+	var loc;
 	$( function() {
-        var loc;
-        if (navigator.languages != undefined) 
-            loc = navigator.languages[0]; 
+        if (navigator.languages != undefined)
+            loc = navigator.languages[0];
 		else
             loc = navigator.language;
 
@@ -58,15 +60,15 @@ require_once("tools.php");
         }
 
         kwh = Number(json[0]["kWh"]);
-        $("#charge_energy_added").text(kwh + " kWh");   
-        
-        var StartDate = new Date(json[0]["StartDate"]);    
-        var EndDate = new Date(json[0]["EndDate"]);   
+        kwh_disp = Number(json[0]["kWh"]).toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2});
+        $("#charge_energy_added").text(kwh_disp + " <?php t("kWh"); ?>");
+
+        var StartDate = new Date(json[0]["StartDate"]);
+        var EndDate = new Date(json[0]["EndDate"]);
 
         minutes = diff_minutes(StartDate, EndDate);
-        $("#minutes").text(minutes + " Minutes");       
-        $("#StartDate").text(StartDate.toLocaleString(loc));     
-
+        $("#minutes").text(minutes + " <?php t("Minutes"); ?>");
+        $("#StartDate").text(StartDate.toLocaleTimeString(loc,{ day: '2-digit', month: '2-digit', year: 'numeric' }));
         $("#cost_currency").val(json[0]["cost_currency"]);
         $("#cost_per_kwh").val(json[0]["cost_per_kwh"]);
         $("#cost_per_session").val(json[0]["cost_per_session"]);
@@ -79,7 +81,7 @@ require_once("tools.php");
         $("input").change(function(){updatecalculation();});
 	});
 
-    function diff_minutes(dt2, dt1) 
+    function diff_minutes(dt2, dt1)
     {
         var diff =(dt2.getTime() - dt1.getTime()) / 1000;
         diff /= 60;
@@ -103,47 +105,46 @@ require_once("tools.php");
     {
         $("#minutes_charged").text(minutes);
         var kwh_calc = kwh;
-
         var cost_kwh_meter_invoice = $("#cost_kwh_meter_invoice").val();
         if (cost_kwh_meter_invoice !== "")
         {
             cost_kwh_meter_invoice = parseLocalNum($("#cost_kwh_meter_invoice").val());
             cost_kwh_meter_invoice = Round(cost_kwh_meter_invoice, 2);
             var efficiency = kwh_calc / cost_kwh_meter_invoice * 100;
-            $("#charge_efficiency").text(efficiency.toFixed(1) + " %");    
+            $("#charge_efficiency").text(efficiency.toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " %");
             kwh_calc = cost_kwh_meter_invoice;
         }
         else
             $("#charge_efficiency").text("");
 
-        $("#kwh_charged").text(kwh_calc);
+        $("#kwh_charged").text(kwh_calc.toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
         var cost_per_kwh_sum = kwh_calc * parseLocalNum($("#cost_per_kwh").val());
-        $("#cost_per_kwh_sum").text(cost_per_kwh_sum.toFixed(2));
+        $("#cost_per_kwh_sum").text(cost_per_kwh_sum.toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
 
         var cost_per_session_sum = parseLocalNum($("#cost_per_session").val());
         if (cost_per_session_sum === "")
             cost_per_session_sum = 0;
 
-        $("#cost_per_session_sum").text(Number(cost_per_session_sum).toFixed(2));
+        $("#cost_per_session_sum").text(Number(cost_per_session_sum).toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
 
         var cost_idle_fee_total_sum = parseLocalNum($("#cost_idle_fee_total").val());
         if (cost_idle_fee_total_sum === "")
             cost_idle_fee_total_sum = 0;
-        
-        $("#cost_idle_fee_total_sum").text(Number(cost_idle_fee_total_sum).toFixed(2));
-        
+
+        $("#cost_idle_fee_total_sum").text(Number(cost_idle_fee_total_sum).toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
+
 
         var cost_per_minute_sum = minutes * parseLocalNum($("#cost_per_minute").val());
-        $("#cost_per_minute_sum").text(cost_per_minute_sum.toFixed(2));
+        $("#cost_per_minute_sum").text(cost_per_minute_sum.toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
 
         var cost_total = Number(cost_per_kwh_sum) + Number(cost_per_minute_sum) + Number(cost_per_session_sum) + Number(cost_idle_fee_total_sum);
-        $("#cost_total").text(cost_total.toFixed(2));
+        $("#cost_total").text(cost_total.toLocaleString(loc,{maximumFractionDigits:2, minimumFractionDigits: 2}));
 
         $("#currency").text($("#cost_currency").val());
 
         return cost_total.toFixed(2);
     }
-  
+
     function save()
     {
         var total = updatecalculation();
@@ -158,46 +159,45 @@ require_once("tools.php");
             "cost_kwh_meter_invoice" : $("#cost_kwh_meter_invoice").val().replace(",", "."),
             "cost_total" : total,
         }
-       
+
         var json_string = JSON.stringify(jj);
 
-        var jqxhr = $.post("chargingcost_write.php", 
+        var jqxhr = $.post("chargingcost_write.php",
 		{
             JSON: json_string
 		}).always(function() {
-		alert("Saved!");
+		alert("<?php t('Saved!'); ?>");
 		window.location.href = document.referrer;
-		});		
-            
+		});
+
     }
 
 
 </script>
-<body style="padding-top: 5px; padding-left: 10px;">
-<?php 
+<body>
+<?php
 include "menu.php";
-echo(menu("Charging Cost"));
+echo(menu("Charging Costs"));
 ?>
 <div>
 <h1 style="color: red;"><span id="errortext"></span></h1>
 <table>
-<tr><td><h1><?php t("Ladekosten"); ?></h1></td><td></td></tr>
-<tr><td><?php t("Ladesäule"); ?>:</td><td colspan="4"><span id="address"></span></td></tr>
-<tr><td><?php t("Datum"); ?>:</td><td colspan="4"><span id="StartDate"></span></td></tr>
-<tr><td><?php t("Dauer"); ?>:</td><td colspan="4"><span id="minutes"></span></td></tr>
-<tr><td><?php t("Geladen"); ?>:</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
-<tr><td><?php t("Wirkungsgrad"); ?>:</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
+<tr><td><h1><?php t("Charging Costs"); ?></h1></td><td></td></tr>
+<tr><td><?php t("Charger"); ?>:&nbsp;</td><td colspan="4"><span id="address"></span></td></tr>
+<tr><td><?php t("Date"); ?>:&nbsp;</td><td colspan="4"><span id="StartDate"></span></td></tr>
+<tr><td><?php t("Duration"); ?>:&nbsp;</td><td colspan="4"><span id="minutes"></span></td></tr>
+<tr><td><?php t("Charged"); ?>:&nbsp;</td><td colspan="4"><span id="charge_energy_added"></span></td></tr>
+<tr><td><?php t("Efficiency"); ?>:&nbsp;</td><td colspan="4"><span id="charge_efficiency"></span></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td><?php t("Währung"); ?>:</td><td><input id="cost_currency" size="4" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
-<tr><td><?php t("kWh laut Zähler / Rechnung"); ?>:</td><td><input id="cost_kwh_meter_invoice" size="4" tabindex="2"></span></td></tr>
-<tr><td><?php t("Kosten pro kWh"); ?>:</td><td><input id="cost_per_kwh" size="4" tabindex="3"></span></td><td> * <span id="kwh_charged"></span> kWh</td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Ladung"); ?>:</td><td><input id="cost_per_session" size="4" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Kosten pro Minute"); ?>:</td><td><input id="cost_per_minute" size="4" tabindex="5"></span></td><td> * <span id="minutes_charged"></span> Minutes</td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
-<tr><td><?php t("Kosten Blockiergebühr"); ?>:</td><td><input id="cost_idle_fee_total" size="4" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
+<tr><td><?php t("Currency"); ?>:&nbsp;</td><td><input id="cost_currency" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
+<tr><td><?php t("kWh according to meter/invoice"); ?>:&nbsp;</td><td><input id="cost_kwh_meter_invoice" type="number" step="any" inputmode="decimal" tabindex="2"></span></td></tr>
+<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="any" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
+<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="any" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
+<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="any" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
+<tr><td><?php t("Idle cost per minute"); ?>:&nbsp;</td><td><input id="cost_idle_fee_total" type="number" step="any" inputmode="decimal" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
 <tr><td colspan="4"><hr></td></tr>
-<tr><td><b><?php t("Summe"); ?>:</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
+<tr><td><b><?php t("Total"); ?>:&nbsp;</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
 <tr><td></td><td></td><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td></td><td></td><td><button onclick="save();" style="float: right;">Save</button></td></tr>
+<tr><td></td><td></td><td></td><td><button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
 </table>
-</div>
 </div>

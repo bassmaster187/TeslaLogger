@@ -1,9 +1,12 @@
 <?php 
+
+require_once("tools.php");
 $language = "en";
 $TemperatureUnit = "";
 $LengthUnit = "";
 $PowerUnit = "";
 $LengthFactor = 1;
+$URL_Grafana = "";
 
 $Display100pctEnable = "false";
 
@@ -20,10 +23,21 @@ if (file_exists("/etc/teslalogger/settings.json"))
 	$PowerUnit = $json_data["Power"];
 	$Display100pctEnable = $json_data["Display100pctEnable"];
 
+	if (empty($json_data["URL_Grafana"]))
+	{
+		if (isDocker())
+			$URL_Grafana = "http://localhost:3000/";
+		else
+			$URL_Grafana = "http://raspberry:3000/";
+	}
+	else
+		$URL_Grafana = $json_data["URL_Grafana"];
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";
+$filename_en = "/etc/teslalogger/language-en.txt";
 global $ln;
+global $lnen;
 
 if(file_exists($filename))
 { 
@@ -39,6 +53,21 @@ if(file_exists($filename))
 		$ln[$a[0]] = $a[1];
 	}
 }
+
+if(file_exists($filename_en))
+{ 
+	$lnen = array();
+	// $ln = parse_ini_file($filename);
+	$lines = file($filename_en, FILE_IGNORE_NEW_LINES);
+	foreach ($lines as $l)
+	{
+		$a = explode("=",$l);
+		if (count($a) == 1)
+			continue;
+
+		$lnen[$a[0]] = $a[1];
+	}
+}
 	
 //print_r($ln);
 //echo($ln["Fahrzeuginfo"]);
@@ -46,6 +75,8 @@ if(file_exists($filename))
 function t($t)
 {
 	global $ln;
+	global $lnen;
+
 	if ($ln == null)
 		echo $t;
 	else
@@ -54,8 +85,34 @@ function t($t)
 		{
 			echo($ln[$t]);
 		}
+		else if (isset($lnen[$t]))
+		{
+			echo($lnen[$t]);
+		}
 		else
 			echo $t;
+	}
+};
+
+function get_text($t)
+{
+	global $ln;
+	global $lnen;
+	
+	if ($ln == null)
+		return $t;
+	else
+	{
+		if (isset($ln[$t]))
+		{
+			return($ln[$t]);
+		}
+		else if (isset($lnen[$t]))
+		{
+			return($lnen[$t]);
+		}
+		else
+			return $t;
 	}
 };
 

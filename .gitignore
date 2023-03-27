@@ -45,6 +45,7 @@ TeslaLogger/bin/weather.ini
 TeslaLogger/copytodocker.cmd
 TeslaLogger/copytonas.cmd
 TeslaLogger/bin/backup/*
+TeslaLogger/bin/EngergyChartData/*
 TeslaLogger/bin/dashboardlinks.txt
 TeslaLogger/bin/MAP-Data/*
 TeslaLogger/bin/jsontest/*
@@ -82,3 +83,5 @@ TeslaLogger/bin/OVMS/geofence-private.csv
 TeslaLogger/copytoOVMS.cmd
 
 TeslaLogger/www/admin/plugins/*
+AnalysisReport.sarif
+upgrade-assistant.clef

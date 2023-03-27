@@ -1,9 +1,10 @@
-#General
+﻿#General
 Delete=Borrar
 Save=Guardar
 Settings=Configuración
 Setup=Configuración
 Enabled=Activado
+kWh=kWh
 
 #Akku Trips.json
 Akku Trips=Trayectos entre Cargas
@@ -148,7 +149,7 @@ Car Version=Versión del coche
 Last Trip=Último Viaje
 Duration=Duración
 Distance=Distancia
-Max kph=Km/h máximos
+Max km/h=Km/h máximos
 PS=Cv
 Current Pos=Pos. Actual
 Last Update=Última actualización
@@ -160,6 +161,21 @@ Sentry Mode=Modo Centinela
 Preconditioning=Preacondicionando
 Offline=Offline
 Falling asleep=Intentando dormir
+min=min
+Wh/km=Wh/km
+km/h=km/h
+Sleeping=Para dormir
+kW=kW
+OK=OK
+No=No
+Yes=Sí
+Cell Temp=Temperatura de la célula
+Max Charge=Carga máxima
+Max Discharge=Descarga máxima
+Cell Imbalance=Desequilibrio celular
+Software Update=Actualización de software
+Consumption=Consumo
+Ø Consumption=Ø Consumo
 
 #menu.php
 Logfile=Fichero de log
@@ -176,11 +192,11 @@ Wakeup Teslalogger=Despertar a Teslalogger
 Dashboard=Dashboard
 
 #password.php
-Teslalogger Tesla Zugangsdaten=Teslalogger Credenciales Tesla
-Bitte Tesla Account Zugangsdaten eingeben=Por favor, introduce tus credenciales de Tesla
+Teslalogger Tesla Credentials=Teslalogger Credenciales Tesla
+Please enter your Tesla account credentials=Por favor, introduce tus credenciales de Tesla
 Email=Email
-Passwort=Contraseña
-Passwort wiederholen=Repite Contraseña
+Password=Contraseña
+Repeat Password=Repite Contraseña
 Speichern=Guardar
 
 #settings.php
@@ -206,9 +222,18 @@ ScanMyTesla last received=ScanMyTesla última recepción
 Tasker Token=Token Tasker
 Tasker URL=URL Tasker
 Received Tasker Token=Tasker Token Recibido
-
-#geoadd.php
-Bezeichnung=Descripción
+Saved!=¡Salvado!
+MyTesla=MyTesla
+Teslalogger Adminpanel=Panel de administración de Teslalogger
+Temperature=Temperatura
+mile=milla
+Ideal=Ideal
+Rated=Rated
+Share data anonymously=Compartir datos de forma anónima
+Sleep=Dormir
+to=a
+Show calc. 100% range=Mostrar calc. Rango 100%
+Position by StreamingAPI=Posición por StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
 Alle Verbräuche - ScanMyTesla=Todos los consumos - ScanMyTesla
@@ -238,27 +263,15 @@ Einschlafen=Intentando dormir
 Automatic updates=Actualizaciones automáticas
 
 TextShare=<h1>Comparte curvas de carga / degracación de forma anónima</h1>Nos gustaría crear una base de datos anónima para comparar curvas de degradación y carga. Esto permite comparar tu vehículo con otros en cualquier momento y detectar cualquier desviación anómala de forma prematura. Esto también se puede usar más adelante para probar que tu batería aún es plenamente eficiente a la hora de vender el vehículo. En caso contrario, puedes probar un peor rendimiento a Tesla Motors.<br><br>¿Querrías compartir tus curvas de carga rápida y degradación con otros conductores de Tesla de forma completamente anónima? Esta decisión se puede cambiar en cualquier momento en la pantalla de configuración.
-StreamingPosHelp=<h1>Position by StreamingAPI</h1>enables position DB entries from the streaming API - depending on car's reception this means up to 5 positions per second (compared to one position every five seconds on normal mode), this will increase your database's size a lot, will increase wear on the SD card and result in huge backups
+StreamingPosHelp=<h1>Posición por StreamingAPI</h1>permite entradas en la base de datos de posiciones desde la API de streaming - dependiendo de la recepción del coche esto significa hasta 5 posiciones por segundo (comparado con una posición cada cinco segundos en modo normal), esto aumentará mucho el tamaño de tu base de datos, aumentará el desgaste de la tarjeta SD y resultará en enormes copias de seguridad.
 Daten anonym teilen=Compartir datos de forma anónima
 TextSuspendTeslalogger=¡Teslalogger se ha detenido! ¡No se registrarán datos!
 Resume Teslalogger=Rearrancar Teslalogger
 Range=Autonomía
 
-Ladekosten=Costes de Carga
-Ladesäule=Estación de Carga
-Währung=Divisa
-Kosten pro kWh=Coste por kWh
-Kosten pro Ladung=Coste por carga
-Kosten pro Minute=Coste por minuto
-Kosten Blockiergebühr=Coste de inactividad por minuto
-Summe=Total
-kWh laut Zähler / Rechnung=kWh según contador / factura
-Wirkungsgrad=Eficiencia
-
 #Timeline Plugin.json
 Parking=Aparcando
 Driving=Conduciendo
-Charging=Cargando
 Missing=Perdiendo
 Ø Temperatur=Ø Temperatura
 
@@ -278,3 +291,103 @@ ABRP8=Insertar el token en Teslalogger
 ABRP9=Verificar si el Teslalogger está conectado
 ABRPYT=Consulte el tutorial de YouTube para una demostración en vivo
 ABRPToken=Token Abetterouteplanner
+
+#chargingcost.php
+Charging Costs=Costes de Carga
+Charged=Cargado
+Charger=Estación de Carga
+Efficiency=Eficiencia
+Currency=Divisa
+kWh according to meter/invoice=kWh según contador/factura
+Cost per kWh=Coste por kWh
+Cost per charge=Coste por carga
+Cost per minute=Coste por minuto
+Idle cost per minute=Coste de inactividad por minuto
+Total=Total
+Date=Fecha
+Minutes=Acta
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=Puedes conectar tu Teslalogger a tu Wallbox para calcular la eficiencia de la carga o el porcentaje de energía fotovoltaica utilizada para cargar tu coche.
+Host=Host
+Param=Param
+Test=Prueba
+Type=Tipo
+Info=Info
+Version=Versión
+Utility kWh=Utility kWh
+Vehicle kWh=Vehículo kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=Puede configurar un enlace desde TeslaLogger a SuperChargeBingo para realizar registros automáticos en los Supercargadores.
+Create a SuperChargeBingo account=Crear una cuenta SuperChargeBingo
+Create API key (must be secure)=Crear clave API (debe ser segura)
+Copy Username and API key and insert it in TeslaLogger=Copiar nombre de usuario y la clave de API e insertarlo en TeslaLogger
+Save and restart TeslaLogger=Guardar y reiniciar TeslaLogger
+Username=Nombre de usuario
+API key=Clave API
+
+#geoadd.php
+Name & Position=Nombre
+Description=Descripción
+Radius=Radio
+Special Flags=Banderas especiales
+Home=Inicio
+Work=Trabajo
+Copy Charging Costs=Costes del canon por copia
+Don't Combine Charging Sessions=No combine sesiones de carga
+Set Charge Limit=Fijar límite de carga
+SOC=SOC
+Set on arrival=Set a la llegada
+Set Charge Limit After Charging=Establecer límite de carga después de la carga
+Open Charge Port=Puerto de carga abierto
+Gear=Engranaje
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=Registro de alta frecuencia
+Special Count=Recuento especial
+Count=Cuenta
+Special Features=Características especiales
+Enable Sentry Mode=Activar el modo centinela
+Disable Sentry Mode=Desactivar el modo centinela
+Turn HVAC off=Apagar HVAC
+No sleep=No dormir
+
+#journeys.php
+Journeys=Viajes
+Journey name missing!=Falta el nombre del viaje
+Please select=Seleccione una opción
+Please select start point!=Seleccione el punto de partida.
+Please select end point!=Seleccione el punto final.
+TextJourneys=Puede utilizar viajes para combinar un viaje largo / tiempo y resumir todos los números. Esto es muy útil para realizar un seguimiento del tiempo de carga completa de un viaje largo o para comparar el consumo de los neumáticos de verano o de invierno.
+ID=ID
+Journey=Viaje
+Start address=Dirección de inicio
+Target address=Dirección de destino
+End=Fin
+Consumed kWh=kWh consumidos
+Charged kWh=kWh cargados
+Drive time [h]=Tiempo de conducción [h]
+Charge time [h]=Tiempo de carga [h]
+Distance [mi]=Distancia [mi]
+Distance [km]=Distancia [km]
+Charging costs=Gastos de cobro
+CO2 [kg]=CO2 [kg]
+New Journey=Nuevo viaje
+Journey name=Nombre del viaje
+Please wait=Espere, por favor
+Please select start first=Seleccione primero el inicio
+DelJourney=¿Realmente quieres borrar el viaje {id}?
+Display _MENU_ records per page=Mostrar _MENU_ registros por página
+Nothing found=No se ha encontrado nada
+Showing _START_ to _END_ of _TOTAL_ entries=Mostrando de _START_ a _END_ de _TOTAL_ entradas
+No records available=No hay registros disponibles
+(filtered from _MAX_ total records)=(filtrado a partir de _MAX_ registros totales)
+Search=Buscar en
+First=En primer lugar
+Last=Última
+Next=Siguiente
+Previous=Anterior

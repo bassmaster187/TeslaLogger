@@ -117,7 +117,9 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().Submit();
+                if (!WebHelper.FilterNetworkoutage(ex))
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
                 Logfile.Log(ex.ToString());
             }
 
