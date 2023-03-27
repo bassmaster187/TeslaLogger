@@ -1,8 +1,10 @@
+# Version 1.54.17
+- Bugfixes
+
 # Version 1.54.16
 - Update to Grafana 8.5.22 [security fix](https://grafana.com/blog/2023/03/22/grafana-security-release-new-versions-with-security-fixes-for-cve-2023-1410/)
 - New CO2 Dashboard
 - Dashboard Visited multiple vehicles can be shown at the same time
--
 
 # Version 1.54.15
 - 3rd party apps for Tesla tokens are not longer needed. 
