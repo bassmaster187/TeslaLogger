@@ -20,6 +20,7 @@ namespace TeslaLogger
     internal class UpdateTeslalogger
     {
         private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
+        private const string TPMSSchemaVersion = "TPMSSchemaVersion";
         private static bool shareDataOnStartup = false;
         private static Timer timer;
 
@@ -338,9 +339,15 @@ LIMIT 1", con))
 
         private static void CheckDBSchema_TPMS()
         {
-            if (KVS.Get("TPMSSchemaVersion", out int tPMSSchemaVersion) == KVS.SUCCESS)
+            if (KVS.Get(TPMSSchemaVersion, out int version) == KVS.SUCCESS)
             {
-                // placeholder for future schema migrations
+                if (version <= 1)
+                {
+                    var sql = "create index IX_TPMS_CarId_Datum on TPMS(CarId, Tireid, Datum, pressure)";
+                    Logfile.Log(sql);
+                    DBHelper.ExecuteSQLQuery(sql, 600);
+                    KVS.InsertOrUpdate(TPMSSchemaVersion, (int)2);
+                }
             }
             else // run initial schema check
             {
@@ -357,7 +364,7 @@ LIMIT 1", con))
                     DBHelper.ExecuteSQLQuery(sql);
                     Logfile.Log("CREATE TABLE OK");
                 }
-                KVS.InsertOrUpdate("TPMSSchemaVersion", (int)1);
+                KVS.InsertOrUpdate(TPMSSchemaVersion, (int)1);
             }
         }
 
@@ -471,7 +478,7 @@ CREATE TABLE superchargers(
         {
             if (KVS.Get("PosSchemaVersion", out int posSchemaVersion) == KVS.SUCCESS)
             {
-                // placeholder for future schema migrations
+                
             }
             else // run initial schema check
             {
