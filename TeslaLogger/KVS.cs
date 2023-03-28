@@ -12,7 +12,8 @@ namespace TeslaLogger
 
         internal static void CheckSchema()
         {
-            try {
+            try
+            {
                 if (!DBHelper.TableExists("kvs"))
                 {
                     Logfile.Log(@"
@@ -221,7 +222,7 @@ ON DUPLICATE KEY UPDATE
         }
 
         // defaults to false, check return code for SUCCESS
-        internal static int Get(string key, out bool value) 
+        internal static int Get(string key, out bool value)
         {
             try
             {
@@ -427,4 +428,3 @@ WHERE
         }
     }
 }
-
