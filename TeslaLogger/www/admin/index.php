@@ -80,7 +80,7 @@ else
 
 	var greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'static/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
 
-	if (navigator.languages != undefined) loc = navigator.languages[0]; 
+	if (navigator.languages != undefined) loc = navigator.languages[0];
 			else loc = navigator.language;
 
 	setInterval(function()
@@ -114,7 +114,7 @@ else
 				$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 			}
 
-			if (Display100pctEnable == "true") 
+			if (Display100pctEnable == "true")
 			{
 				$('#full_battery_range_km_span').show();
 			}
@@ -141,8 +141,8 @@ else
 				var datetime = at.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' });
 
 				$('#car_statusLabel').text("<?php t("Charging"); ?>:");
-				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" + 
-				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+ 
+				$('#car_status').html(jsonData["charger_power"] + " kW / +" + jsonData["charge_energy_added"] + " kWh<br>" +
+				jsonData["charger_voltage"]+"V / " + jsonData["charger_actual_current"]+"A / "+
 				jsonData["charger_phases"]+"P<br><?php t("Done"); ?>: "+ hour +"h "+minute+"m <br><?php t("Done at"); ?>: " + datetime +  " / " + jsonData["charge_limit_soc"] +"%");
 
 				updateSMT(jsonData);
@@ -157,9 +157,9 @@ else
 					str = jsonData["speed"] + " <?php t("km/h"); ?> / ";
 
 				if (PowerUnit == "kw")
-					str += (jsonData["power"] / 1.35962).toFixed(0) + "kW";
+					str += (jsonData["power"] / 1.35962).toFixed(0) + " <?php t("kW"); ?>";
 				else
-					str += jsonData["power"]+"PS";
+					str += jsonData["power"] + " <?php t("PS"); ?>";
 
 				$('#car_status').text(str);
 
@@ -226,7 +226,7 @@ else
 
 			if (PowerUnit == "kw")
 			{
-				$("#max_power").text((jsonData["trip_max_power"] / 1.35962).toFixed(0)); 				
+				$("#max_power").text((jsonData["trip_max_power"] / 1.35962).toFixed(0));
 				$("#lt_trip_PS").text("<?php t("kW"); ?>");
 			}
 			else
@@ -239,7 +239,7 @@ else
 			$("#trip_start").text(ts2.toLocaleTimeString(loc, { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
 			$("#trip_kwh").text((Math.round(jsonData["trip_kwh"] *10)/10).toLocaleString(loc));
-			
+
 			var ts = new Date(Date.parse(jsonData["ts"]));
 			$("#last_update").text(ts.toLocaleTimeString(loc, { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
@@ -335,14 +335,14 @@ else
 		}
 
 	}
-  
+
 function ShowInfo()
-{	
-	<?php	
+{
+	<?php
 	$prefix = "/etc/teslalogger/";
     if (isDocker())
 		$prefix = "/tmp/";
-		
+
 	if (file_exists($prefix."cmd_gosleep_$carid.txt"))
 	{?>
 		$("#InfoText").html("<h1><?php t("TextSuspendTeslalogger"); ?></h1>");
@@ -352,9 +352,9 @@ function ShowInfo()
 		$("#NegativeButton").hide();
 	<?php
 	}
-	else if (!file_exists("/etc/teslalogger/sharedata.txt") && 
+	else if (!file_exists("/etc/teslalogger/sharedata.txt") &&
 	!file_exists("/etc/teslalogger/nosharedata.txt") &&
-	!file_exists("/tmp/sharedata.txt") && 
+	!file_exists("/tmp/sharedata.txt") &&
 	!file_exists("/tmp/nosharedata.txt")
 	)
 	{?>
@@ -364,9 +364,14 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if(isDocker() && GrafanaVersion() != "8.3.2")
+	else if(isDocker() && GrafanaVersion() != "8.5.22")
 	{?>
-		$("#InfoText").html("<h1>Please update to latest docker-compose.yml file. Check: <a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>LINK</a></h1>");
+		<?php
+		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}");
+		$t1=str_replace("{", "<a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>", $t1);
+		$t1=str_replace("}", '</a>', $t1);
+		?>
+		$("#InfoText").html("<h1><?php echo $t1; ?></h1>");
 		$(".HeaderT").show();
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
@@ -378,13 +383,13 @@ function ShowInfo()
 		$("#PositiveButton").click(function(){window.location.href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade';});
 		$("#NegativeButton").hide();
 	<?php
-	} 
+	}
 	else if (!files_are_equal("/etc/teslalogger/changelog.md","/tmp/changelog.md"))
 	{?>
 		$.get("changelog_plain.php").success(function(data){
 			$("#InfoText").html(data);
 		});
-		
+
 		$(".HeaderT").show();
 		$("#PositiveButton").text("<?php t("OK"); ?>");
 		$("#PositiveButton").click(function(){window.location.href='changelogread.php';});
@@ -392,13 +397,13 @@ function ShowInfo()
 	<?php
 	}
 	?>
-	
+
 }
   </script>
 
   </head>
   <body>
-  <?php 
+  <?php
     include "menu.php";
     echo(menu("Teslalogger"));
 ?>
@@ -479,10 +484,10 @@ function getZoomLevel()
 	{
 		$content = file_get_contents("/etc/teslalogger/settings.json");
 		$j = json_decode($content);
-		if (!empty($j->{"ZoomLevel"})) 
-			return $j->{"ZoomLevel"};	
+		if (!empty($j->{"ZoomLevel"}))
+			return $j->{"ZoomLevel"};
 	}
-	
+
 	return 15;
 }
 ?>
