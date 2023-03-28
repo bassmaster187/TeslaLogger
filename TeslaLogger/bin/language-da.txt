@@ -38,7 +38,7 @@ Ladehistorie=Opladningshistorik
 Startdatum=Start Dato
 Enddatum=End Dato
 geladen kWh=kWh opladet
-km Stand= Kilometertæller
+km Stand=Kilometertæller
 Adresse=Adresse
 TR km Start=TR km Start
 TR km Ende=TR km Stop
@@ -84,6 +84,9 @@ Vampir Drain Monatsstatistik=Vampire Drain Månedlige statistikker
 TR mi Verlust=TR mi Tabt
 kWh Verlust=kWh Tabt
 Eur Verlust=Eur Tabt
+Zeitspanne Stunden=Tidsrum
+TR mi Verlust pro Stunde=TR mi Tabt pr time
+mi Stand=Kilometertæller
 
 #Trip.json
 Trip=Trip
@@ -108,11 +111,6 @@ min kW=min kW
 Ø kW=Ø kW
 Ø mph=Ø mph
 Ø km/h=Ø km/t
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=Tidsrum
-TR mi Verlust pro Stunde=TR mi Tabt pr time
-mi Stand= Kilometertæller
 
 #Vampir Drain.json
 Vampir Drain=Vampire Drain
@@ -177,6 +175,7 @@ Consumption=Forbrug
 min=min
 Wh/km=Wh/km
 km/h=km/t
+Please update to latest docker-compose.yml file. Check: {LINK}=Opdater venligst til den nyeste docker-compose.yml-fil. Tjek: {LINK}
 
 #menu.php
 Logfile=Logfile
@@ -191,6 +190,16 @@ Geofence=Geofence
 Suspend Teslalogger=Paus Teslalogger
 Wakeup Teslalogger=Væk Teslalogger
 Dashboard=Dashboard
+My Degradation=Min nedbrydning
+My Charging AVG=Min opladning AVG
+Fleet Degradation AVG=Nedbrydning af flåden AVG
+Fleet Charging AVG=Flådeopladning AVG
+Fleet Charging MAX (Firmware)=Fleet Charging MAX (firmware)
+Fleet Charging Locations=Opladningssteder for flåden
+Fleet Fast Charging Map=Kort over hurtig opladning i flåden
+Supercharger Usage=Brug af kompressor
+Firmware Tracker=Sporing af firmware
+Abetterrouteplanner=Abetterrouteplanner
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
@@ -199,6 +208,45 @@ Email=Email
 Password=Password
 Repeat Password=Gentag Password
 Speichern=Gem
+Please enter the access token!=Indtast venligst adgangstoken!
+Please enter the refresh token!=Indtast venligst opdateringstoken!
+Please select a vehicle=Vælg venligst et køretøj
+Check Logfile!=Check Logfile!
+Do you really want to delete this vehicle?=Ønsker du virkelig at slette dette køretøj?
+Check Logfile in one minute!=Tjek logfilen på et minut!
+Unauthorized=Uautoriseret
+This isn't a valid URL!=Dette er ikke en gyldig URL!
+This isn't an auth link by Tesla!=Dette er ikke et auth-link fra Tesla!
+The URL doesn't contain the expected format!=URL-adressen indeholder ikke det forventede format!
+TeslaAuthApps=Du kan bruge følgende apps til at få et adgangstoken
+BA_Browser=I lokal {browser} (anbefales)
+BA_Read=Læs alle trinene, før du fortsætter:
+BA_Logon=Klik på linket nedenfor med titlen <b>Tesla Logon</b>, som åbner en ny fane/et nyt vindue til Tesla Authentication-logon-siden
+BA_Auth=Log på med dine Tesla-oplysninger og MFA, hvis det er nødvendigt (Tesla husker disse oplysninger, hvis du har brugt linket før).
+BA_NotFound=Det ser ud til at resultere i en "Side ikke fundet". Dette er normalt.
+BA_URL=Kopier URL'en til den pågældende webside ind i formularen nedenfor. I URL'en er der en midlertidig kode, som vi kan bruge til at generere tokens. Vi udtrækker den til dig fra linket.
+BA_Invalid=Disse links fungerer typisk kun én gang, så hvis der vises en "Invalid Grant"- eller anden fejlmeddelelse på vores websted, skal du muligvis starte forfra med Tesla Logon-linket, som burde give et nyt link.
+BA_Logoff=Hvis du vil bruge en anden konto, skal du logge af manuelt {her!}
+BA_GetToken=Vi får derefter tokens til din Tesla-konto.
+BA_SelectCar=Vælg den bil, du ønsker at bruge til Teslalogger.
+BA_Step1=Trin 1:
+BA_Step2=Trin 2:
+BA_Step3=Trin 3:
+BA_FillOut=Udfyld denne formular:
+BA_CopyUrl=Kopier den resulterende url som vist
+BA_Paste=Indsæt den resulterende url i feltet, og klik på knappen "Get Tokens":
+Get Tokens=Få tokens
+Access Token=Adgangstoken
+Refresh Token=Opdateringstoken
+Car=Bil
+Free Supercharging=Gratis opladning
+Reconnect=Genforbind
+Please choose your vehicle=Vælg venligst dit køretøj
+Model=Model
+VIN=VIN
+Free SUC=Gratis SUC
+Edit=Rediger
+New car=Ny bil
 
 #settings.php
 Credentials=Legitimationsoplysninger
@@ -269,8 +317,6 @@ Daten anonym teilen=Del data anonymt
 TextSuspendTeslalogger=Teslalogger er blevet stoppet! Data vil ikke blive gemt!
 Resume Teslalogger=Genoptag Teslalogger
 Range=Rækkevidde
-
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
 ABRPTitle=Abetterrouteplanner Link
@@ -350,6 +396,10 @@ Enable Sentry Mode=Aktiver vagttilstand
 Disable Sentry Mode=Deaktivere vagttilstand
 Turn HVAC off=Sluk for HVAC
 No sleep=Ingen søvn
+Are you sure you want to delete this geofencing location?=Er du sikker på, at du vil slette denne geofencing-position?
+Error=Fejl
+Deleted!=Slettet!
+Meter=Meter
 
 #journeys.php
 Journeys=Rejser
@@ -386,3 +436,33 @@ First=Første
 Last=Sidst
 Next=Næste
 Previous=Forrige
+
+#adminpanelpassword.php
+Please enter password!=Indtast venligst adgangskode!
+Passwords do not match!=Adgangskoderne passer ikke sammen!
+Do you want to delete your password?=Ønsker du at slette din adgangskode?
+Set password for Teslalogger's admin panel=Indstil adgangskode til Teslaloggers administrationspanel
+Name=Navn
+
+#changelog.php
+Changelog=Ændringsliste
+
+#logfile.php
+Download Logfile=Download logfil
+Lines=Linjer
+Housekeeping=Rengøring
+Sleep Attempt=Forsøg på at sove
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Indtast venligst dine dexters-web.de kontooplysninger
+Dexter Login=Dexter Login
+Dexter Password=Dexter Adgangskode
+
+#password_info.php
+Credentials Info=Oplysninger om legitimationsoplysninger
+
+#restore.php
+Restore Database=Gendan database
+TextRestore1=Sørg for at tage en sikkerhedskopi af din Teslalogger, før du gendanner databaser. Flyt din sikkerhedskopimappe fra \\RASPBERRY\teslalogger\backup til din harddisk!
+TextRestore2=Gendannelsesprocessen kan tage op til 10 minutter!
+TextRestore3=Du må ikke afbryde gendannelsesprocessen på nogen måde! Du må ikke genindlæse siden! Du må ikke lukke denne side!
