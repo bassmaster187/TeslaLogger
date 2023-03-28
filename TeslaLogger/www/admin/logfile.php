@@ -43,13 +43,13 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 
 	</head>
   	<body>
-	<script>$( function() {	
+	<script>$( function() {
 		var objDiv = document.getElementById("log");
 		objDiv.scrollTop = objDiv.scrollHeight;
 	});
 	</script>
-	
-	<?php 
+
+	<?php
     include "menu.php";
     echo(menu("Logfile"));
 ?>
@@ -62,7 +62,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	<td width="25%" nowrap><?php t("Housekeeping"); ?>: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
 	<td width="25%" nowrap><?php t("Update"); ?>: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
 	<td width="25%" nowrap><?php t("Sleep Attempt"); ?>: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
-	<td><input type="submit" value="OK" style="float: right;"></td>
+	<td><input type="submit" value="<?php t("OK"); ?>" style="float: right;"></td>
 </tr>
 </table>
 </form>
@@ -74,19 +74,19 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
         // Handle the error
 		echo "error";
     }
-	
+
 	$output = str_replace("Start update","<b>Start update</b>", $output);
 	$output = str_replace("End update","<b>End update</b>", $output);
 	$output = str_replace("Rebooting","<b>Rebooting</b>", $output);
 	$output = str_replace("Reboot request!","<b>Reboot request!</b>", $output);
 
 	$output = str_replace("Error: Cloning into '/etc/teslalogger/git'...","...", $output);
-	
+
 	$output = str_replace("Rebooting","<b>Rebooting</b>", $output);
-	
+
 	$output = str_replace("Key","<b>Key</b>", $output);
 	$output = str_replace("not translated!","<b>not translated!</b>", $output);
-	
+
 	$output = preg_replace("/(.*(Exception|Error|No such host is known|= NULL|: NULL|vehicle unavailable|upstream internal error|NameResolutionFailure).*)/", "<font color='red'>$1</font>", $output);
 	$output = preg_replace("/(state: .*)/", "<b>$1</b>", $output);
 	$output = preg_replace("/(http[s]?:\/\/[\w\.\/\-]+)/", "<a href='$1'>$1</a>", $output);
@@ -165,7 +165,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 
 
 	$output = preg_replace("/[\r\n]{2,}/", "\n", $output); // unnecessary new lines
-	
+
 	echo nl2br($output);
 ?>
 </div>
