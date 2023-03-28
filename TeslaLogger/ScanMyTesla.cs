@@ -19,7 +19,7 @@ namespace TeslaLogger
         private string token;
         private Thread thread;
         private bool fastmode; // defaults to false
-        private bool run; // defaults to false
+        private bool run = true;
         internal HttpClient httpclient_teslalogger_de;
         Car car;
 

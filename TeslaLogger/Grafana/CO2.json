@@ -1,0 +1,338 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 46,
+  "iteration": 1679561739398,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh/100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L gasoline / 100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L diesel / 100km"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L gasoline / 100km with solar"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L diesel / 100km with solar"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select sum(charge_energy_added) as \"Charged kWh\", sum(Grid) as \"kWh from grid\", sum(PV) as \"kWh from solar\", \nsum(CO2_Mix)/1000 as \"CO2 kg mix\", sum(CO2_Grid)/1000 as \"CO2 kg with solar\", max(odometer) - min(odometer) as \"km driven\",\nsum(charge_energy_added) / (max(odometer) - min(odometer)) * 100 as \"kWh/100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) as \"CO2 g/km mix\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) as \"CO2 g/km with solar\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km with solar\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km with solar\"\nfrom\n(\nSELECT co2_g_kWh,  \n\tCASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select (meter_utility_kwh_sum / meter_vehicle_kwh_sum)) else 0 END as PV_percent,\n\tcharge_energy_added, \n    charge_energy_added * (1-(select PV_percent)) as Grid, \n    charge_energy_added * (select PV_percent) as PV,\n\t(select Grid) * co2_g_kWh as CO2_Grid,\n    charge_energy_added * co2_g_kWh as CO2_Mix,\n    odometer\n\tFROM chargingstate join pos on chargingstate.pos = pos.id\n\twhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\nand chargingstate.CarId = $Car and odometer > 0\n\t) T",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "CarId"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "TPMS",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "CO2",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CO2 kg"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(min(chargingstate.StartDate)) as time_sec, avg(co2_g_kWh) as \"CO2 g / kWh\", sum(round(co2_g_kWh * chargingstate.charge_energy_added / 1000,1)) as \"CO2 kg\"\nFROM chargingstate\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.CarId = $Car\nGROUP BY YEAR(StartDate), week(StartDate)\nORDER BY StartDate",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "CarId"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "chargingstate",
+          "timeColumn": "Datum",
+          "timeColumnType": "timestamp",
+          "where": []
+        }
+      ],
+      "title": "CO2",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": "1"
+        },
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
+        "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Car",
+        "options": [],
+        "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5y",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "CO2",
+  "uid": "HaVAHvgRz",
+  "version": 25,
+  "weekStart": ""
+}

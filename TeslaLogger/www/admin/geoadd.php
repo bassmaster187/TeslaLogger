@@ -362,8 +362,8 @@ if (isset($id))
 	}
   </style>
 	</head>
-<?php 
 	<body>
+<?php 
     include "menu.php";
     echo(menu("Geofencing"));
 ?>
