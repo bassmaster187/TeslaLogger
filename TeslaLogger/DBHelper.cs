@@ -15,8 +15,6 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using Microsoft.VisualBasic.Logging;
-using Org.BouncyCastle.Utilities.Net;
 
 namespace TeslaLogger
 {
@@ -48,7 +46,7 @@ namespace TeslaLogger
                 else
                     DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
             }
-            else 
+            else
             {
                 DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
             }
@@ -552,6 +550,16 @@ DESC";
         internal void AnalyzeChargingStates()
         {
             List<int> recalculate = new List<int>();
+            int maxGapID = 0;
+            int maxDropID = 0;
+            if (KVS.Get($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}", out int analyzeChargingStatesMaxGapID) == KVS.NOT_FOUND)
+            {
+                analyzeChargingStatesMaxGapID = 0;
+            }
+            if (KVS.Get($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", out int analyzeChargingStatesMaxDropID) == KVS.NOT_FOUND)
+            {
+                analyzeChargingStatesMaxDropID = 0;
+            }
             // find gaps in chargingstate.id
             try
             {
@@ -564,14 +572,18 @@ SELECT
 FROM
     chargingstate
 WHERE
-    CarID = @CarID", con))
+    CarID = @CarID
+    AND id > @AnalyzeChargingStatesMaxGapID
+ORDER BY id", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@AnalyzeChargingStatesMaxGapID", analyzeChargingStatesMaxGapID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         int lastID = 0;
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
+                            if (lastID > maxGapID) { maxGapID = lastID; }
                         }
                         while (dr.Read())
                         {
@@ -580,10 +592,11 @@ WHERE
                                 if (!recalculate.Contains((int)dr[0]))
                                 {
                                     recalculate.Add((int)dr[0]);
-                                    Tools.DebugLog($"AnalyzeChargingStates: ID gap found:{dr[0]}");
+                                    Tools.DebugLog($"AnalyzeChargingStates_{car.CarInDB}: ID gap found:{dr[0]}");
                                 }
                             }
                             lastID = (int)dr[0];
+                            if (lastID > maxGapID) { maxGapID = lastID; }
                         }
                     }
                 }
@@ -613,11 +626,13 @@ WHERE
     AND chargingstate.CarID = @CarID
     AND charging.CarID = @CarID
     AND chargingstate.id NOT IN(@NotIdInParameter)
+    AND chargingstate.id > @AnalyzeChargingStatesMaxDropID
 ORDER BY
     chargingstate.id", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
+                        cmd.Parameters.AddWithValue("@NotIdInParameter", recalculate.Count > 0 ? String.Join(",", recalculate): "0");
+                        cmd.Parameters.AddWithValue("@AnalyzeChargingStatesMaxDropID", analyzeChargingStatesMaxDropID);
                         cmd.CommandTimeout = 600;
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         int lastID = 0;
@@ -625,6 +640,7 @@ ORDER BY
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
+                            if (lastID > maxDropID) { maxDropID = lastID; }
                             lastCEA = (double)dr[1];
                         }
                         while (dr.Read())
@@ -634,11 +650,12 @@ ORDER BY
                                 if (!recalculate.Contains((int)dr[0]))
                                 {
                                     recalculate.Add((int)dr[0]);
-                                    Tools.DebugLog($"AnalyzeChargingStates: drop during charging found:{dr[0]}");
+                                    Tools.DebugLog($"AnalyzeChargingStates_{car.CarInDB}: drop during charging found:{dr[0]}");
                                 }
                             }
                             lastID = (int)dr[0];
                             lastCEA = (double)dr[1];
+                            if (lastID > maxDropID) { maxDropID = lastID; }
                         }
                     }
                 }
@@ -652,6 +669,8 @@ ORDER BY
             {
                 _ = RecalculateChargeEnergyAdded(ChargingStateID);
             }
+            KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}", maxGapID);
+            KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", maxDropID);
         }
 
         internal static void DeleteDuplicateTrips()
@@ -1329,7 +1348,7 @@ WHERE
                 object cacheValue = MemoryCache.Default.Get(cacheKey);
                 if (cacheValue != null)
                     return;
-                
+
                 MemoryCache.Default.Add(cacheKey, true, DateTime.Now.AddMinutes(2));
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -3583,7 +3602,7 @@ WHERE
                                             string address = task.Result;
                                             if (address.Length > 250)
                                                 address = address.Substring(0, 250);
-                                            
+
                                             cmd2.Parameters.AddWithValue("@adress", address);
                                             if (task.Result.Length > 250)
                                             {
