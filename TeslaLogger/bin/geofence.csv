@@ -212,6 +212,7 @@ Supercharger DE-Hilpoltstein,49.161201,11.260685,12
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
 Supercharger DE-Irschenberg, 47.82648, 11.89831
+Supercharger-V3 DE-Irschenberg, 47.826678, 11.898501
 Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
 Supercharger-V3 DE-Illertissen, 48.21882, 10.1276145, 25
 Supercharger DE-Jettingen, 48.41105, 10.4403
@@ -223,6 +224,7 @@ Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
 Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
+Supercharger-V3 DE-Kösching, 48.811333, 11.479899
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
 Supercharger-V3 DE-Lehre, 52.313216,10.635089
@@ -2654,7 +2656,7 @@ TotalEnergies DE-Haag,48.1652,12.16329487,80
 TotalEnergies DE-Hirschberg,49.50792297,8.638197024,80
 TotalEnergies DE-Karlsruhe,48.9858362,8.447499742,80
 TotalEnergies DE-Kirchheim,48.641957,9.433532,80
-TotalEnergies DE-Kösching,48.811149,11.47953615,80
+TotalEnergies DE-Kösching,48.811149,11.47953615
 TotalEnergies DE-Lohfelden,51.28680946,9.529609127,80
 TotalEnergies DE-Mahlberg,48.2751879,7.7865846,80
 TotalEnergies DE-Neuruppin,52.905607,12.748544,80

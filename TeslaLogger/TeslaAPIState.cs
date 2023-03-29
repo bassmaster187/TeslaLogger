@@ -494,6 +494,7 @@ namespace TeslaLogger
                             break;
                         // bool
                         case "in_service":
+                        case "ble_autopair_enrolled":
                         case "calendar_enabled":
                             if (r4.TryGetValue(key, out object value))
                             {
