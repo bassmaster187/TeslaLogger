@@ -1592,6 +1592,8 @@ namespace TeslaLogger
                             {
                                 decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
 
+                                Logfile.Log($"New CarID: {newid}");
+
                                 using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
