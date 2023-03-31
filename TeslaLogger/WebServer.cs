@@ -1593,9 +1593,10 @@ namespace TeslaLogger
                                 //decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
                                 int newid = 1;
                                 object queryresult = SQLTracer.TraceSc(cmd);
-                                if (queryresult != null)
+                                if (queryresult != null && !int.TryParse(queryresult.ToString(), out newid))
                                 {
-                                    _ = int.TryParse(queryresult.ToString(), out newid);
+                                    // assign default id 1 if parsing the queryresult fails
+                                    newid = 1;
                                 }
 
                                 Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
