@@ -32,6 +32,10 @@ if (file_exists("/etc/teslalogger/settings.json"))
 	}
 	else
 		$URL_Grafana = $json_data["URL_Grafana"];
+		if (substr($URL_Grafana,-1) != "/") {
+			$URL_Grafana = $URL_Grafana . "/";
+		}
+	
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";

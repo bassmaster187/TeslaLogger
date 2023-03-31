@@ -191,9 +191,9 @@ echo(menu("Charging Costs"));
 <tr><td>&nbsp;</td></tr>
 <tr><td><?php t("Currency"); ?>:&nbsp;</td><td><input id="cost_currency" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
 <tr><td><?php t("kWh according to meter/invoice"); ?>:&nbsp;</td><td><input id="cost_kwh_meter_invoice" type="number" step="any" inputmode="decimal" tabindex="2"></span></td></tr>
-<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="any" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="any" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="any" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
+<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="0.01" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
+<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="1" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
+<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="0.01" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
 <tr><td><?php t("Idle cost per minute"); ?>:&nbsp;</td><td><input id="cost_idle_fee_total" type="number" step="any" inputmode="decimal" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
 <tr><td colspan="4"><hr></td></tr>
 <tr><td><b><?php t("Total"); ?>:&nbsp;</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
