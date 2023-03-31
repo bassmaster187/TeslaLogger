@@ -1598,7 +1598,7 @@ namespace TeslaLogger
                                     _ = int.TryParse(queryresult.ToString(), out newid);
                                 }
 
-                                Logfile.Log($"New CarID: {newid}");
+                                Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
 
                                 using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
                                 {
