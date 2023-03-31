@@ -1590,7 +1590,13 @@ namespace TeslaLogger
                                     select max(carid) as a from pos
                                 ) as t", con)) // 
                             {
-                                decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
+                                //decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
+                                int newid = 1;
+                                object queryresult = SQLTracer.TraceSc(cmd);
+                                if (queryresult != null)
+                                {
+                                    _ = int.TryParse(queryresult.ToString(), out newid);
+                                }
 
                                 Logfile.Log($"New CarID: {newid}");
 
