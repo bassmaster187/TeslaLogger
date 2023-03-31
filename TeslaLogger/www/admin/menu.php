@@ -94,7 +94,9 @@ function menu($title, $prefix = "")
 							$dlargs = explode("|", $dl);
 							if (strlen($dlargs[0]) > 0) {
 								echo(str_repeat("\t",7));
-								echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="'.$dlargs[1] .'">');
+								$urlpart = $dlargs[1];
+								$urlpart = str_replace("DEBUG Wh/TR","debug-wh-tr",$urlpart);
+								echo('<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . $urlpart .'">');
 								echo str_replace("CO2","CO<sub>2</sub>",$dlargs[0]);
 								echo('</a></li>');
 								echo("\n");
