@@ -64,6 +64,7 @@ ON DUPLICATE KEY UPDATE
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
+                        Tools.DebugLog(cmd);
                         int rowsAffected = SQLTracer.TraceNQ(cmd);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
@@ -99,6 +100,7 @@ ON DUPLICATE KEY UPDATE
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
+                        Tools.DebugLog(cmd);
                         int rowsAffected = SQLTracer.TraceNQ(cmd);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
@@ -134,6 +136,7 @@ ON DUPLICATE KEY UPDATE
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
+                        Tools.DebugLog(cmd);
                         int rowsAffected = SQLTracer.TraceNQ(cmd);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
@@ -169,6 +172,7 @@ ON DUPLICATE KEY UPDATE
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
+                        Tools.DebugLog(cmd);
                         int rowsAffected = SQLTracer.TraceNQ(cmd);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
@@ -204,6 +208,7 @@ ON DUPLICATE KEY UPDATE
                     {
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
+                        Tools.DebugLog(cmd);
                         int rowsAffected = SQLTracer.TraceNQ(cmd);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
