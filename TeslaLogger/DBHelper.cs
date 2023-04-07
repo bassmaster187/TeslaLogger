@@ -550,8 +550,6 @@ DESC";
         internal void AnalyzeChargingStates()
         {
             List<int> recalculate = new List<int>();
-            int maxGapID = 0;
-            int maxDropID = 0;
             if (KVS.Get($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}", out int analyzeChargingStatesMaxGapID) == KVS.NOT_FOUND)
             {
                 analyzeChargingStatesMaxGapID = 0;
@@ -560,6 +558,10 @@ DESC";
             {
                 analyzeChargingStatesMaxDropID = 0;
             }
+            int maxGapID = analyzeChargingStatesMaxGapID;
+            int maxDropID = analyzeChargingStatesMaxDropID;
+            Tools.DebugLog($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}: {analyzeChargingStatesMaxGapID}");
+            Tools.DebugLog($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}: {analyzeChargingStatesMaxDropID}");
             // find gaps in chargingstate.id
             try
             {
@@ -583,7 +585,7 @@ ORDER BY id", con))
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
-                            if (lastID > maxGapID) { maxGapID = lastID; }
+                            maxGapID = Math.Max(lastID, maxGapID);
                         }
                         while (dr.Read())
                         {
@@ -596,7 +598,7 @@ ORDER BY id", con))
                                 }
                             }
                             lastID = (int)dr[0];
-                            if (lastID > maxGapID) { maxGapID = lastID; }
+                            maxGapID = Math.Max(lastID, maxGapID);
                         }
                     }
                 }
@@ -640,7 +642,7 @@ ORDER BY
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
-                            if (lastID > maxDropID) { maxDropID = lastID; }
+                            maxDropID = Math.Max(lastID, maxDropID);
                             lastCEA = (double)dr[1];
                         }
                         while (dr.Read())
@@ -655,7 +657,7 @@ ORDER BY
                             }
                             lastID = (int)dr[0];
                             lastCEA = (double)dr[1];
-                            if (lastID > maxDropID) { maxDropID = lastID; }
+                            maxDropID = Math.Max(lastID, maxDropID);
                         }
                     }
                 }
@@ -954,7 +956,7 @@ AND id <=(
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
-                UpdateChargePrice(ChargingStateID);
+                UpdateChargePrice(ChargingStateID, true);
                 updatedChargePrice = true;
             }
             return updatedChargePrice;
@@ -1777,7 +1779,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int ChargingStateID)
+        private void UpdateChargePrice(int ChargingStateID, bool fromID = false)
         {
             string ref_cost_currency = string.Empty;
             double ref_cost_per_kwh = double.NaN;
@@ -1786,7 +1788,14 @@ WHERE
             bool ref_cost_per_minute_found = false;
             double ref_cost_per_session = double.NaN;
             bool ref_cost_per_session_found = false;
-            GetChargeCostDataFromReference(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+            if (fromID)
+            {
+                GetChargeCostDataFromID(ChargingStateID, out ref_cost_currency, out ref_cost_per_kwh, out ref_cost_per_kwh_found, out ref_cost_per_minute, out ref_cost_per_minute_found, out ref_cost_per_session, out ref_cost_per_session_found);
+            }
+            else
+            {
+                GetChargeCostDataFromReference(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
+            }
             UpdateChargePrice(ChargingStateID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
         }
 
@@ -2299,6 +2308,79 @@ LIMIT 1", con))
 
                 Tools.DebugLog($"Exception during FindReferenceChargingState(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during FindReferenceChargingState()");
+            }
+            return referenceID;
+        }
+
+        private int GetChargeCostDataFromID(int ChargingStateID, out string ref_cost_currency, out double ref_cost_per_kwh, out bool ref_cost_per_kwh_found, out double ref_cost_per_session, out bool ref_cost_per_session_found, out double ref_cost_per_minute, out bool ref_cost_per_minute_found)
+        {
+            int referenceID = int.MinValue;
+            ref_cost_currency = string.Empty;
+            ref_cost_per_kwh = double.NaN;
+            ref_cost_per_kwh_found = false;
+            ref_cost_per_minute = double.NaN;
+            ref_cost_per_minute_found = false;
+            ref_cost_per_session = double.NaN;
+            ref_cost_per_session_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargingstate.id, 
+    chargingstate.cost_currency,
+    chargingstate.cost_per_kwh,
+    chargingstate.cost_per_session,
+    chargingstate.cost_per_minute
+FROM
+    chargingstate
+WHERE
+    chargingstate.CarID = @CarID
+    AND chargingstate.ID = @ChargingStateID
+ORDER BY
+    id DESC
+LIMIT 1", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            _ = int.TryParse(dr[0].ToString(), out referenceID);
+                            if (dr[1] != DBNull.Value)
+                            {
+                                ref_cost_currency = dr.GetString(1);
+                            }
+                            if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
+                            {
+                                ref_cost_per_kwh_found = true;
+                            }
+                            if (double.TryParse(dr[3].ToString(), out ref_cost_per_session))
+                            {
+                                ref_cost_per_session_found = true;
+                            }
+                            if (double.TryParse(dr[4].ToString(), out ref_cost_per_minute))
+                            {
+                                ref_cost_per_minute_found = true;
+                            }
+                            Tools.DebugLog($"GetChargeCostDataFromID({ChargingStateID}, id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
+                        }
+                        else
+                        {
+                            Tools.DebugLog("GetChargeCostDataFromID dr.read failed");
+                        }
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+
+                Tools.DebugLog($"Exception during GetChargeCostDataFromID(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during GetChargeCostDataFromID()");
             }
             return referenceID;
         }
