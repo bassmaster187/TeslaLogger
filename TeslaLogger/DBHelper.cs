@@ -1288,7 +1288,7 @@ WHERE
                     // but only if it's not updated by RecalculateChargeEnergyAdded
                     if (!updatedChargePrice)
                     {
-                        UpdateChargePrice(maxID);
+                        UpdateChargePrice(maxID, true);
                     }
 
                     // update chargingsession stats
