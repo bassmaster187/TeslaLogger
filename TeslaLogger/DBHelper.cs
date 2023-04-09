@@ -1640,6 +1640,7 @@ HAVING
             {
                 // close charging state with enddate, endID from max charging
                 CloseChargingState(openChargingState);
+                UpdateChargePrice(openChargingState);
 
                 // if charging was interrupted, maybe combine it with the previous session
                 if (CombineChangingStatesAt(openChargingState))
@@ -1673,14 +1674,8 @@ HAVING
                     }
                 }
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                bool updatedChargePrice = RecalculateChargeEnergyAdded(openChargingState);
-
-                // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                // but only if it's not updated by RecalculateChargeEnergyAdded
-                if (!updatedChargePrice)
-                {
-                    UpdateChargePrice(openChargingState);
-                }
+                // this will also recalculate charge price
+                _ = RecalculateChargeEnergyAdded(openChargingState);
             }
 
             car.CurrentJSON.current_charging = false;
