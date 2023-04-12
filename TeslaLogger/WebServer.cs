@@ -1583,12 +1583,21 @@ namespace TeslaLogger
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand(@"select max(a)+1 from
-                                (
-                                    select max(id) as a from cars
-                                    union
-                                    select max(carid) as a from pos
-                                ) as t", con)) // 
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    MAX(a) + 1
+FROM
+    (
+    SELECT
+        MAX(id) AS a
+    FROM
+        cars
+    UNION ALL
+	SELECT
+    	MAX(carid) AS a
+	FROM
+  	  pos
+) AS t", con)) // 
                             {
                                 //decimal newid = SQLTracer.TraceSc(cmd) as decimal? ?? 1;
                                 int newid = 1;

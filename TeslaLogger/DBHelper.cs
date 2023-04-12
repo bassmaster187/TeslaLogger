@@ -5846,12 +5846,20 @@ WHERE
                 con.Open();
 
                 using (MySqlCommand cmd = new MySqlCommand(@"
-                    select max(a)+1 from
-                    (
-                        select max(id) as a from cars
-                        union
-                        select max(carid) as a from pos
-                    ) as t", con))
+SELECT
+    MAX(a) +1
+FROM
+    (
+    SELECT
+        MAX(id) AS a
+    FROM
+        cars
+    UNION ALL
+    SELECT
+        MAX(carid) AS a
+    FROM
+        pos
+) AS t", con))
                 {
                     int newid = 1;
 
