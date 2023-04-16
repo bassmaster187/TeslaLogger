@@ -1663,6 +1663,7 @@ id = @carid", con))
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                         {
+                            Tools.DebugLog($"HasFreeSuC: {freesuc == 1}");
                             return freesuc == 1;
                         }
                     }
@@ -1675,6 +1676,7 @@ id = @carid", con))
                 Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
+            Tools.DebugLog("HasFreeSuC: false");
             return false;
         }
 
