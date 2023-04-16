@@ -5781,7 +5781,7 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"GetTeslaAPIState() charging_state:{chargingState}");
+                Tools.DebugLog($"CloseChargingState() charging_state:{chargingState}");
             }
 
         }
