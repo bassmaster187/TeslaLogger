@@ -24,6 +24,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Docker Build and Push to DockerHub
-
-        run: docker build -t flipkill1985/teslalogger:latest .
-             docker push flipkill1985/teslalogger:latest 
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: flipkill1985/teslalogger:latest, flipkill1985/teslalogger:${{ github.run_number }}
+          
