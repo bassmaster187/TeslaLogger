@@ -14,9 +14,9 @@ build-container:
       username: ${{ secrets.DOCKER_USER }}
       password: ${{ secrets.DOCKER_PASSWORD }}
   - name: Docker Build and Push to DockerHub
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: flipkill1985/teslalogger:latest, flipkill1985/teslalogger:${{ github.run_number }}
+    uses: docker/build-push-action@v2
+    with:
+      context: .
+      push: true
+      tags: flipkill1985/teslalogger:latest, flipkill1985/teslalogger:${{ github.run_number }}
           
