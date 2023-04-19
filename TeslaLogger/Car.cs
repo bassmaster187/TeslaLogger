@@ -264,6 +264,8 @@ namespace TeslaLogger
                         Monitor.Exit(InitCredentialsLock);
                 }
 
+                Tools.DebugLog("GetChargingHistoryV2\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
+
                 while (run)
                 {
                     try
