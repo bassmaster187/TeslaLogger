@@ -16,5 +16,5 @@ jobs:
       with:
         context: .
         push: true
-        file: /docker/teslalogger/Dockerfile
+        file: ./docker/teslalogger/Dockerfile
         tags: flipkill1985/teslalogger:latest, flipkill1985/teslalogger:${{ github.run_number }}
