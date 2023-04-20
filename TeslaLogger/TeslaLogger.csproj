@@ -164,6 +164,7 @@
     <Compile Include="SQLTracer.cs" />
     <Compile Include="Journeys.cs" />
     <Compile Include="KVS.cs" />
+    <Compile Include="GetChargingHistoryV2Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
