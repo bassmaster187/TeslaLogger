@@ -52,6 +52,13 @@ namespace TeslaLogger
         {
             try
             {
+                if (!DBHelper.ColumnExists("chargingstate", "freesuc_total"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column freesuc_total");
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
+                    ADD COLUMN `freesuc_total` DOUBLE NULL DEFAULT NULL", 600);
+                }
 
             }
             catch (Exception ex)
@@ -59,7 +66,7 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Tools.DebugLog("GetChargingHistoryV2Service: Exception", ex);
             }
-
-
         }
+
     }
+}

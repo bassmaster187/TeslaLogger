@@ -20,6 +20,7 @@ CREATE TABLE geocodecache(
     address LONGTEXT,
     UNIQUE ix_key(lat, lng)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE geocodecache(
     lat DOUBLE NOT NULL,

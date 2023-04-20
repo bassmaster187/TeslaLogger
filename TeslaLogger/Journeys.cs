@@ -82,6 +82,7 @@ $(document).ready(function() {
                 if (!DBHelper.TableExists("journeys"))
                 {
                     Logfile.Log("CREATE TABLE journeys ...");
+                    UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE journeys (
     id int NOT NULL AUTO_INCREMENT,

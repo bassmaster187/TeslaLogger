@@ -291,7 +291,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void AssertAlterDB()
+        internal static void AssertAlterDB()
         {
             // make sure there is enough disk space available for temp tables
 
@@ -352,6 +352,7 @@ LIMIT 1", con))
                 PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
 
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
@@ -360,6 +361,7 @@ LIMIT 1", con))
             {
                 var sql = "create index IX_TPMS_CarId_Datum on TPMS(CarId, Tireid, Datum, pressure)";
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql, 600);
                 KVS.InsertOrUpdate(TPMSSchemaVersion, (int)2);
             }

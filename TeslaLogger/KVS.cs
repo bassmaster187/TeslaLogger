@@ -26,6 +26,7 @@ CREATE TABLE kvs(
     JSON LONGTEXT NULL,
     UNIQUE ix_key(id)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                    UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE kvs(
     id VARCHAR(64) NOT NULL,

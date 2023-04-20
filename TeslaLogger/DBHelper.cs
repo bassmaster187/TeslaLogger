@@ -5316,6 +5316,7 @@ WHERE SCHEMA_NAME  = '{dbname}'", con))
                 {
                     con.Open();
                     Logfile.Log($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER DATABASE {dbname}
 CHARACTER SET = utf8mb4
@@ -5379,6 +5380,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
@@ -5443,6 +5445,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL", 3000);
