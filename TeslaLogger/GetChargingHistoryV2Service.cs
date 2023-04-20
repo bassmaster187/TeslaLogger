@@ -27,11 +27,14 @@ namespace TeslaLogger
         {
             try
             {
+                // first start: get complete history and sync with DB
+
                 while (true)
                 {
+                    // work() retrieves only the latest charging sessions every 6 hours
                     Work();
-                    // sleep 5 Minutes
-                    Thread.Sleep(300000);
+                    // sleep 6 Hours
+                    Thread.Sleep(21600000);
                 }
             }
             catch (Exception ex)
@@ -45,5 +48,18 @@ namespace TeslaLogger
         {
         }
 
+        internal static void CheckSchema()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("GetChargingHistoryV2Service: Exception", ex);
+            }
+
+
+        }
     }
-}

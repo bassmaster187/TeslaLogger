@@ -132,6 +132,8 @@ namespace TeslaLogger
 
                 CheckDBSchema_TPMS();
 
+                GetChargingHistoryV2Service.CheckSchema();
+
                 Logfile.Log("DBSchema Update finished.");
 
                 // end of schema update
