@@ -1651,7 +1651,7 @@ namespace TeslaLogger
                         httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "Tesla/1195 CFNetwork/1388 Darwin/22.0.0");
                         httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
                         httpclientgetChargingHistoryV2.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(11);
+                        httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                         httpclientgetChargingHistoryV2Token = Tesla_token;
                     }
                 }
@@ -4516,13 +4516,13 @@ namespace TeslaLogger
   ""variables"": {
         ""sortBy"": ""start_datetime"",
         ""sortOrder"": ""DESC"",
-        ""pageNumber"": " + pageNumber.ToString(Tools.ciEnUS) + @"
+        ""pageNumber"": " + pageNumber + @"
                 },
   ""operationName"": ""getChargingHistoryV2""
 }";
 
                 StringContent queryString = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PostAsync(adresse, queryString);
+                HttpResponseMessage result = await client.PostAsync(adresse, queryString).ConfigureAwait(false);
                 resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
                 DBHelper.AddMothershipDataToDB("GetChargingHistoryV2", start, (int)result.StatusCode);
 
@@ -4540,7 +4540,6 @@ namespace TeslaLogger
                     CreateExceptionlessClientWithResultContent(ex, resultContent).AddObject(car.GetCurrentState().ToString(), "CarState").Submit();
 
                 car.Log(ex.Message);
-                Thread.Sleep(30000);
             }
 
             return "{}";

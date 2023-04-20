@@ -76,8 +76,6 @@ namespace TeslaLogger
                 GetAllCars();
 
                 InitNearbySuCService();
-
-                InitGetChargingHistoryV2Service();
             }
             catch (Exception ex)
             {
@@ -109,27 +107,6 @@ namespace TeslaLogger
                     }
                 }
             }
-        }
-
-        private static void InitGetChargingHistoryV2Service()
-        {
-            try
-            {
-                Thread threadGetChargingHistoryV2Service = new Thread(() =>
-                {
-                    GetChargingHistoryV2Service.GetSingleton().Run();
-                })
-                {
-                    Name = "GetChargingHistoryV2ServiceThread"
-                };
-                threadGetChargingHistoryV2Service.Start();
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
-            }
-
         }
 
         private static void InitNearbySuCService()

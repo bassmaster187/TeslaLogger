@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -264,7 +265,14 @@ namespace TeslaLogger
                         Monitor.Exit(InitCredentialsLock);
                 }
 
-                Tools.DebugLog("GetChargingHistoryV2\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
+                //Tools.DebugLog("GetChargingHistoryV2-1\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Log("GetChargingHistoryV2Service initializing ...");
+                    GetChargingHistoryV2Service.LoadAll(this);
+                    //Tools.DebugLog("GetChargingHistoryV2-2\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
+                    Log($"GetChargingHistoryV2Service initialized - sessions:{GetChargingHistoryV2Service.GetSessionCount()}");
+                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
                 while (run)
                 {
