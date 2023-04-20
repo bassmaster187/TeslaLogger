@@ -265,14 +265,14 @@ namespace TeslaLogger
                         Monitor.Exit(InitCredentialsLock);
                 }
 
-                //Tools.DebugLog("GetChargingHistoryV2-1\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
-                _ = Task.Factory.StartNew(() =>
+                Task GetChargingHistoryV2Task = Task.Factory.StartNew(() =>
                 {
                     Log("GetChargingHistoryV2Service initializing ...");
                     GetChargingHistoryV2Service.LoadAll(this);
-                    //Tools.DebugLog("GetChargingHistoryV2-2\n" + new Tools.JsonFormatter(webhelper.GetChargingHistoryV2().Result).Format());
-                    Log($"GetChargingHistoryV2Service initialized - sessions:{GetChargingHistoryV2Service.GetSessionCount()}");
+                    GetChargingHistoryV2Service.SyncAll(this);
+                    Log($"GetChargingHistoryV2Service initialized - sessions: {GetChargingHistoryV2Service.GetSessionCount()}");
                 }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                GetChargingHistoryV2Service.GetChargingHistoryV2Tasks.Add(GetChargingHistoryV2Task);
 
                 while (run)
                 {
@@ -1579,6 +1579,18 @@ namespace TeslaLogger
 
             string temp = TaskerHash + ": " + text;
             Tools.ExternalLog(temp);
+        }
+
+        public static Car GetCarByVIN(string VIN)
+        {
+            foreach (Car car in Allcars)
+            {
+                if (car.vin.Equals(VIN))
+                {
+                    return car;
+                }
+            }
+            return null;
         }
 
         public static Car GetCarByID(int carid)

@@ -5942,5 +5942,75 @@ WHERE
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargingStateCountryCO2()");
             }
         }
+
+        internal int FindChargingStateIDByStartDate(DateTime dtStart)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    CarID = @CarID
+ORDER BY
+    ABS(TIMEDIFF(StartDate, @DTStart)) ASC
+LIMIT 1
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@DTStart", dtStart.ToString("yyyy-MM-dd HH:mm:ss"));
+                        Tools.DebugLog(cmd);
+                        return (int)SQLTracer.TraceSc(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return -1;
+        }
+
+        internal static string GetSuCNameFromChargingStateID(int chargingid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    pos.address
+FROM
+    pos
+JOIN
+    chargingstate ON chargingstate.pos = pos.id
+WHERE
+    chargingstate.id = @chargingid
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chargingid", chargingid);
+                        Tools.DebugLog(cmd);
+                        return (string)SQLTracer.TraceSc(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return string.Empty;
+        }
     }
 }

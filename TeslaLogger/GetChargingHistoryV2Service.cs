@@ -1,33 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
-    public class SuCSession
+    internal class SuCSession
     {
         private string VIN;
         private string chargeSessionId;
+        private string siteLocationName;
         private DateTime chargeStartDateTime;
-        private DateTime chargeStopDateTime;
         private List<Fee> fees = new List<Fee>();
 
-        public SuCSession(dynamic jsonSession)
+        internal SuCSession(dynamic jsonSession)
         {
             if (jsonSession != null
      && jsonSession.ContainsKey("chargeSessionId")
      && jsonSession.ContainsKey("chargeStartDateTime")
-     && jsonSession.ContainsKey("chargeStopDateTime")
+     && jsonSession.ContainsKey("siteLocationName")
      && jsonSession.ContainsKey("fees")
      && jsonSession.ContainsKey("vin")
      )
             {
                 this.chargeSessionId = jsonSession["chargeSessionId"];
                 this.chargeStartDateTime = jsonSession["chargeStartDateTime"];
-                this.chargeStopDateTime = jsonSession["chargeStopDateTime"];
                 this.VIN = jsonSession["vin"];
+                this.siteLocationName = jsonSession["siteLocationName"];
             }
             else
             {
@@ -36,36 +38,78 @@ namespace TeslaLogger
 
         }
 
-        public void AddFee(dynamic jsonFee)
+        internal void AddFee(dynamic jsonFee)
         {
             Fee fee = new Fee(jsonFee);
             fees.Add(fee);
         }
 
-        public double getChargingCosts()
+        internal DateTime GetStart()
         {
-            double chargingCosts = 0.0;
+            return chargeStartDateTime;
+        }
+
+        internal string GetVIN()
+        {
+            return VIN;
+        }
+
+        internal string GetSanitizedSuCName()
+        {
+            if (siteLocationName.Contains(","))
+            {
+                return siteLocationName.Split(',')[0];
+            }
+            return siteLocationName;
+        }
+
+
+        internal Tuple<double, string> GetChargingCosts()
+        {
+            double chargingCosts = double.NaN;
+            string currency = "n/a";
             foreach (Fee fee in fees)
             {
                 if (fee.GetFeeType().Equals("CHARGING") && fee.GetPricingType().Equals("PAYMENT"))
                 {
+                    if (double.IsNaN(chargingCosts)) { chargingCosts = 0.0; }
                     chargingCosts += fee.GetTotalDue();
+                    currency = fee.GetCurrency();
                 }
             }
-            return chargingCosts;
+            return new Tuple<double, string>(chargingCosts, currency);
         }
 
-        public double getParkingCosts()
+        internal Tuple<double, string> GetFreeSuCSavings()
         {
-            double parkingCosts = 0.0;
+            double chargingCosts = double.NaN;
+            string currency = "n/a";
+            foreach (Fee fee in fees)
+            {
+                if (fee.GetFeeType().Equals("CHARGING") && fee.GetPricingType().Equals("NO_CHARGE"))
+                {
+                    if (double.IsNaN(chargingCosts)) { chargingCosts = 0.0; }
+                    chargingCosts += fee.GetRate() * fee.GetUsage();
+                    currency = fee.GetCurrency();
+                }
+            }
+            return new Tuple<double, string>(chargingCosts, currency);
+        }
+
+        internal Tuple<double, string> GetParkingCosts()
+        {
+            double parkingCosts = double.NaN;
+            string currency = "n/a";
             foreach (Fee fee in fees)
             {
                 if (fee.GetFeeType().Equals("PARKING"))
                 {
+                    if (double.IsNaN(parkingCosts)) { parkingCosts = 0.0; }
                     parkingCosts += fee.GetTotalDue();
+                    currency = fee.GetCurrency();
                 }
             }
-            return parkingCosts;
+            return new Tuple<double, string>(parkingCosts, currency);
         }
 
         internal string GetSessionID()
@@ -74,7 +118,7 @@ namespace TeslaLogger
         }
     }
 
-    public class Fee
+    internal class Fee
     {
         private string feeType;
         private string pricingType;
@@ -83,7 +127,7 @@ namespace TeslaLogger
         private int usageBase;
         private double rateBase;
 
-        public Fee(dynamic jsonFee)
+        internal Fee(dynamic jsonFee)
         {
             if (jsonFee != null
                 && jsonFee.ContainsKey("feeType")
@@ -107,12 +151,12 @@ namespace TeslaLogger
             }
         }
 
-        public string GetFeeType()
+        internal string GetFeeType()
         {
             return feeType;
         }
 
-        public string GetPricingType()
+        internal string GetPricingType()
         {
             return pricingType;
         }
@@ -121,11 +165,27 @@ namespace TeslaLogger
         {
             return totalDue;
         }
+
+        internal double GetRate()
+        {
+            return rateBase;
+        }
+
+        internal int GetUsage()
+        {
+            return usageBase;
+        }
+
+        internal string GetCurrency()
+        {
+            return currency;
+        }
     }
 
-    public static class GetChargingHistoryV2Service
+    internal static class GetChargingHistoryV2Service
     {
         private static Dictionary<string, SuCSession> sessions = new Dictionary<string, SuCSession>();
+        internal static List<Task> GetChargingHistoryV2Tasks = new List<Task>();
 
         private static bool ParseJSON(string sjson)
         {
@@ -171,7 +231,6 @@ namespace TeslaLogger
                             if (historyV2.ContainsKey("hasMoreData"))
                             {
                                 dynamic hasMoreData = historyV2["hasMoreData"];
-                                Tools.DebugLog($"hasMoreData: {hasMoreData} compare:{hasMoreData == true}");
                                 nextpage = hasMoreData == true;
                             }
                             else
@@ -212,13 +271,14 @@ namespace TeslaLogger
             if (!sessions.ContainsKey(suCSession.GetSessionID()))
             {
                 sessions.Add(suCSession.GetSessionID(), suCSession);
+                Tools.DebugLog($"GetChargingHistoryV2Service add session: {suCSession.GetVIN()} {suCSession.GetStart()} charging: {suCSession.GetChargingCosts()} freeSuC: {suCSession.GetFreeSuCSavings()} parking: {suCSession.GetParkingCosts()}");
             }
 
         }
 
         internal static void LoadAll(Car car)
         {
-            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll car #{car.CarInDB}");
+            Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll car #{car.CarInDB}");
             int resultPage = 1;
             string result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             if (result == null || result == "{}" || string.IsNullOrEmpty(result))
@@ -246,53 +306,41 @@ namespace TeslaLogger
             while (result != null && ParseJSON(result))
             {
                 resultPage++;
-                Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll car #{car.CarInDB} resultpage {resultPage}");
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll car #{car.CarInDB} resultpage {resultPage}");
                 result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             }
         }
 
-        internal static void LoadAll()
+        internal static void LoadLatest(Car car)
         {
-            for (int id = 0; id < Car.Allcars.Count; id++)
+            Tools.DebugLog($"GetChargingHistoryV2Service.LoadLatest car #{car.CarInDB}");
+            string result = car.webhelper.GetChargingHistoryV2(1).Result;
+            if (result == null || result == "{}" || string.IsNullOrEmpty(result))
             {
-                Car car = Car.Allcars[id];
-                LoadAll(car);
+                Tools.DebugLog("GetChargingHistoryV2Service: result == null");
+                return;
             }
-        }
+            if (result.Contains("Retry later"))
+            {
+                Tools.DebugLog("GetChargingHistoryV2Service: Retry later");
+                return;
+            }
+            else if (result.Contains("vehicle unavailable"))
+            {
+                Tools.DebugLog("GetChargingHistoryV2Service: vehicle unavailable");
+                return;
+            }
+            else if (result.Contains("502 Bad Gateway"))
+            {
+                Tools.DebugLog("GetChargingHistoryV2Service: 502 Bad Gateway");
+                return;
+            }
+            dynamic jsonResult = JsonConvert.DeserializeObject(result);
+            if (jsonResult != null)
+            {
+                _ = ParseJSON(jsonResult);
+            }
 
-        internal static void LoadLatest()
-        {
-            for (int id = 0; id < Car.Allcars.Count; id++)
-            {
-                Car car = Car.Allcars[id];
-                int resultPage = 1;
-                string result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
-                if (result == null || result == "{}" || string.IsNullOrEmpty(result))
-                {
-                    Tools.DebugLog("GetChargingHistoryV2Service: result == null");
-                    return;
-                }
-                if (result.Contains("Retry later"))
-                {
-                    Tools.DebugLog("GetChargingHistoryV2Service: Retry later");
-                    return;
-                }
-                else if (result.Contains("vehicle unavailable"))
-                {
-                    Tools.DebugLog("GetChargingHistoryV2Service: vehicle unavailable");
-                    return;
-                }
-                else if (result.Contains("502 Bad Gateway"))
-                {
-                    Tools.DebugLog("GetChargingHistoryV2Service: 502 Bad Gateway");
-                    return;
-                }
-                dynamic jsonResult = JsonConvert.DeserializeObject(result);
-                if (jsonResult != null)
-                {
-                    _ = ParseJSON(jsonResult);
-                }
-            }
         }
 
         internal static void CheckSchema()
@@ -324,6 +372,27 @@ namespace TeslaLogger
         internal static int GetSessionCount()
         {
             return sessions.Count;
+        }
+
+        internal static void SyncAll(Car car)
+        {
+            Tools.DebugLog("GetChargingHistoryV2Service SyncAll start");
+            foreach (SuCSession session in sessions.Values)
+            {
+                int chargingid = car.DbHelper.FindChargingStateIDByStartDate(session.GetStart());
+                // plausibility check
+                string sucname = DBHelper.GetSuCNameFromChargingStateID(chargingid);
+                string teslasucname = session.GetSanitizedSuCName();
+                if (sucname.Contains(teslasucname))
+                {
+                    // TeslaLogger name matches Tesla's name
+                    Tools.DebugLog($"Update chargingstate {chargingid} with charging: {session.GetChargingCosts()} freeSuC: {session.GetFreeSuCSavings()} parking: {session.GetParkingCosts()}");
+                }
+                else
+                {
+                    (new Exception($"GetChargingHistoryV2Service could not map {sucname} and {teslasucname}")).ToExceptionless().FirstCarUserID().Submit(); ;
+                }
+            }
         }
     }
 }

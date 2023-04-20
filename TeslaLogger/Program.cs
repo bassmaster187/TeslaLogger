@@ -502,6 +502,7 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
+
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
