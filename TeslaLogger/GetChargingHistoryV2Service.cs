@@ -244,7 +244,7 @@ CREATE TABLE teslacharging (
             }
         }
 
-        private static bool GetTeslaChargingSessionByDate(DateTime dt, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json)
+        private static bool GetTeslaChargingSessionByDate(Car car, DateTime dt, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json)
         {
             try
             {
@@ -260,6 +260,8 @@ SELECT
     json
 FROM
     teslacharging
+WHERE
+    VIN = @VIN
 ORDER BY
     ABS(
         chargeStartDateTime - @startDate
@@ -268,6 +270,7 @@ LIMIT 1
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@startDate", dt);
+                        cmd.Parameters.AddWithValue("@VIN", car.Vin);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read()
                             && dr[0] != DBNull.Value
@@ -307,7 +310,7 @@ LIMIT 1
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
                 if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int posID))
                 {
-                    if (GetTeslaChargingSessionByDate(startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
+                    if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
                         Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
                         string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
@@ -317,13 +320,13 @@ LIMIT 1
                             siteLocationName = siteLocationName.Split(',')[0];
                         }
                         if (tlname.Contains(siteLocationName)
-                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 5
+                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN)
                             )
                         {
                             UpdateChargingState(chargingstateid, json, car);
                         }
-                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 5
+                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN))
                         {
                             Tools.DebugLog($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>");
