@@ -241,12 +241,12 @@ INSERT INTO teslacharging SET
         {
             try
             {
-                if (!DBHelper.ColumnExists("chargingstate", "freesuc_total"))
+                if (!DBHelper.ColumnExists("chargingstate", "cost_freesuc_savings_total"))
                 {
                     Logfile.Log("ALTER TABLE chargingstate ADD Column cost_freesuc_savings_total");
                     UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
-                    ADD COLUMN `freesuc_total` DOUBLE NULL DEFAULT NULL", 600);
+                    ADD COLUMN `cost_freesuc_savings_total` DOUBLE NULL DEFAULT NULL", 600);
                 }
                 if (!DBHelper.ColumnExists("chargingstate", "chargeSessionId"))
                 {
