@@ -1,23 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Exceptionless;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
     internal class SuCSession
     {
-        private string VIN;
-        private string chargeSessionId;
-        private string siteLocationName;
-        private DateTime chargeStartDateTime;
-        private List<Fee> fees = new List<Fee>();
+
+        private static bool ChargeSessionIdExists(string chargeSessionId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargeSessionId
+FROM
+    teslacharging
+WHERE
+    chargeSessionId = @chargeSessionId
+", con)) {
+                        cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value && dr[0].ToString().Equals(chargeSessionId))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            return false;
+        }
 
         internal SuCSession(dynamic jsonSession)
         {
+            string VIN;
+            string chargeSessionId;
+            string siteLocationName;
+            DateTime chargeStartDateTime;
             if (jsonSession != null
      && jsonSession.ContainsKey("chargeSessionId")
      && jsonSession.ContainsKey("chargeStartDateTime")
@@ -26,171 +54,48 @@ namespace TeslaLogger
      && jsonSession.ContainsKey("vin")
      )
             {
-                this.chargeSessionId = jsonSession["chargeSessionId"];
-                this.chargeStartDateTime = jsonSession["chargeStartDateTime"];
+                VIN = jsonSession["vin"];
+                chargeSessionId = jsonSession["chargeSessionId"];
+                siteLocationName = jsonSession["siteLocationName"];
+                chargeStartDateTime = jsonSession["chargeStartDateTime"];
                 if (DateTime.TryParse(jsonSession["chargeStartDateTime"].ToString("yyyy-MM-dd HH:mm:ss"), out DateTime isochargeStartDateTime))
                 {
-                    this.chargeStartDateTime = isochargeStartDateTime;
+                    chargeStartDateTime = isochargeStartDateTime;
                 }
-                this.VIN = jsonSession["vin"];
-                this.siteLocationName = jsonSession["siteLocationName"];
             }
             else
             {
                 throw new Exception($"Error parsing session: {new Tools.JsonFormatter(jsonSession.ToString()).Format()}");
             }
-
-        }
-
-        internal void AddFee(dynamic jsonFee)
-        {
-            Fee fee = new Fee(jsonFee);
-            fees.Add(fee);
-        }
-
-        internal DateTime GetStart()
-        {
-            return chargeStartDateTime;
-        }
-
-        internal string GetVIN()
-        {
-            return VIN;
-        }
-
-        internal string GetSanitizedSuCName()
-        {
-            if (siteLocationName.Contains(","))
+            // no try/catch, the calling function has to do that
+            // only insert if chargeSessionId does not exist
+            if (!ChargeSessionIdExists(chargeSessionId))
             {
-                return siteLocationName.Split(',')[0];
-            }
-            return siteLocationName;
-        }
-
-
-        internal Tuple<double, string> GetChargingCosts()
-        {
-            double chargingCosts = double.NaN;
-            string currency = "n/a";
-            foreach (Fee fee in fees)
-            {
-                if (fee.GetFeeType().Equals("CHARGING") && fee.GetPricingType().Equals("PAYMENT"))
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
                 {
-                    if (double.IsNaN(chargingCosts)) { chargingCosts = 0.0; }
-                    chargingCosts += fee.GetTotalDue();
-                    currency = fee.GetCurrency();
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT INTO teslacharging SET
+        chargeSessionId = @chargeSessionId,
+        chargeStartDateTime = @chargeStartDateTime,
+        siteLocationName = @siteLocationName,
+        VIN = @VIN,
+        json = @json", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                        cmd.Parameters.AddWithValue("@chargeStartDateTime", chargeStartDateTime);
+                        cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
+                        cmd.Parameters.AddWithValue("@VIN", VIN);
+                        cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
+                        SQLTracer.TraceNQ(cmd);
+                    }
                 }
             }
-            return new Tuple<double, string>(chargingCosts, currency);
-        }
-
-        internal Tuple<double, string> GetFreeSuCSavings()
-        {
-            double chargingCosts = double.NaN;
-            string currency = "n/a";
-            foreach (Fee fee in fees)
-            {
-                if (fee.GetFeeType().Equals("CHARGING") && fee.GetPricingType().Equals("NO_CHARGE"))
-                {
-                    if (double.IsNaN(chargingCosts)) { chargingCosts = 0.0; }
-                    chargingCosts += fee.GetRate() * fee.GetUsage();
-                    currency = fee.GetCurrency();
-                }
-            }
-            return new Tuple<double, string>(chargingCosts, currency);
-        }
-
-        internal Tuple<double, string> GetParkingCosts()
-        {
-            double parkingCosts = double.NaN;
-            string currency = "n/a";
-            foreach (Fee fee in fees)
-            {
-                if (fee.GetFeeType().Equals("PARKING"))
-                {
-                    if (double.IsNaN(parkingCosts)) { parkingCosts = 0.0; }
-                    parkingCosts += fee.GetTotalDue();
-                    currency = fee.GetCurrency();
-                }
-            }
-            return new Tuple<double, string>(parkingCosts, currency);
-        }
-
-        internal string GetSessionID()
-        {
-            return chargeSessionId;
-        }
-    }
-
-    internal class Fee
-    {
-        private string feeType;
-        private string pricingType;
-        private double totalDue;
-        private string currency;
-        private int usageBase;
-        private double rateBase;
-
-        internal Fee(dynamic jsonFee)
-        {
-            if (jsonFee != null
-                && jsonFee.ContainsKey("feeType")
-                && jsonFee.ContainsKey("currencyCode")
-                && jsonFee.ContainsKey("pricingType")
-                && jsonFee.ContainsKey("totalDue")
-                && jsonFee.ContainsKey("usageBase")
-                && jsonFee.ContainsKey("rateBase")
-                )
-            {
-                this.totalDue = jsonFee["totalDue"];
-                this.feeType = jsonFee["feeType"];
-                this.pricingType = jsonFee["pricingType"];
-                this.currency = jsonFee["currencyCode"];
-                this.usageBase = jsonFee["usageBase"];
-                this.rateBase = jsonFee["rateBase"];
-            }
-            else
-            {
-                throw new Exception($"Error parsing fee: {new Tools.JsonFormatter(jsonFee.ToString()).Format()}");
-            }
-        }
-
-        internal string GetFeeType()
-        {
-            return feeType;
-        }
-
-        internal string GetPricingType()
-        {
-            return pricingType;
-        }
-
-        internal double GetTotalDue()
-        {
-            return totalDue;
-        }
-
-        internal double GetRate()
-        {
-            return rateBase;
-        }
-
-        internal int GetUsage()
-        {
-            return usageBase;
-        }
-
-        internal string GetCurrency()
-        {
-            return currency;
         }
     }
 
     internal static class GetChargingHistoryV2Service
     {
-        private static Dictionary<string, SuCSession> sessions = new Dictionary<string, SuCSession>();
-        internal static List<Task> GetChargingHistoryV2Tasks = new List<Task>();
-
         private static bool ParseJSON(string sjson)
         {
             bool nextpage = false;
@@ -219,7 +124,7 @@ namespace TeslaLogger
                                 {
                                     try
                                     {
-                                        ParseAndAddSession(session);
+                                        _ = new SuCSession(session);
                                     }
                                     catch (Exception ex)
                                     {
@@ -264,21 +169,6 @@ namespace TeslaLogger
             return nextpage;
         }
 
-        private static void ParseAndAddSession(dynamic session)
-        {
-
-            SuCSession suCSession = new SuCSession(session);
-            foreach (dynamic fee in session["fees"])
-            {
-                suCSession.AddFee(fee);
-            }
-            if (!sessions.ContainsKey(suCSession.GetSessionID()))
-            {
-                sessions.Add(suCSession.GetSessionID(), suCSession);
-            }
-
-        }
-
         internal static void LoadAll(Car car)
         {
             Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll car #{car.CarInDB}");
@@ -309,7 +199,8 @@ namespace TeslaLogger
             while (result != null && ParseJSON(result))
             {
                 resultPage++;
-                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll car #{car.CarInDB} resultpage {resultPage}");
+                Thread.Sleep(500); // wait a bit
+                Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll #{car.CarInDB} resultpage {resultPage}");
                 result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             }
         }
@@ -352,7 +243,7 @@ namespace TeslaLogger
             {
                 if (!DBHelper.ColumnExists("chargingstate", "freesuc_total"))
                 {
-                    Logfile.Log("ALTER TABLE chargingstate ADD Column freesuc_total");
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column cost_freesuc_savings_total");
                     UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                     ADD COLUMN `freesuc_total` DOUBLE NULL DEFAULT NULL", 600);
@@ -364,6 +255,22 @@ namespace TeslaLogger
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                     ADD COLUMN `chargeSessionId` VARCHAR(40) NULL DEFAULT NULL", 600);
                 }
+                if (!DBHelper.TableExists("teslacharging"))
+                {
+                    string sql = @"
+CREATE TABLE teslacharging (
+    chargeSessionId VARCHAR(40) NOT NULL,
+    chargeStartDateTime DATETIME NOT NULL,
+    siteLocationName VARCHAR(128) NOT NULL,
+    VIN VARCHAR(20) NOT NULL,
+    json LONGTEXT NOT NULL,
+    UNIQUE ix_chargeSessionId(chargeSessionId)
+)";
+                    Logfile.Log(sql);
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql);
+                    Logfile.Log("CREATE TABLE teslacharging OK");
+                }
             }
             catch (Exception ex)
             {
@@ -372,9 +279,59 @@ namespace TeslaLogger
             }
         }
 
-        internal static int GetSessionCount()
+        private static bool GetTeslaChargingSessionByDate(DateTime dt, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json)
         {
-            return sessions.Count;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargeSessionId,
+    siteLocationName,
+    chargeStartDateTime,
+    VIN,
+    json
+FROM
+    teslacharging
+ORDER BY
+    ABS(
+        chargeStartDateTime - @startDate
+    )
+LIMIT 1
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@startDate", dt);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read()
+                            && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value
+                            && dr[2] != DBNull.Value
+                            && DateTime.TryParse(dr[2].ToString(), out chargeStartDateTime)
+                            && dr[3] != DBNull.Value
+                            && dr[4] != DBNull.Value
+                            )
+                        {
+                            chargeSessionId = dr[0].ToString();
+                            siteLocationName = dr[1].ToString();
+                            VIN = dr[3].ToString();
+                            json = dr[4].ToString();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+            chargeSessionId = string.Empty;
+            siteLocationName = string.Empty;
+            chargeStartDateTime = DateTime.MinValue;
+            VIN = string.Empty;
+            json = string.Empty;
+            return false;
         }
 
         internal static void SyncAll(Car car)
@@ -385,28 +342,26 @@ namespace TeslaLogger
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
                 if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int posID))
                 {
-                    List<SuCSession> candidates = new List<SuCSession>();
-                    foreach (SuCSession session in sessions.Values)
+                    if (GetTeslaChargingSessionByDate(startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
-                        if (Math.Abs((startDate - session.GetStart()).TotalMinutes) < 10)
+                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
+                        // check names, time difference and VIN
+                        if (siteLocationName.Contains(","))
                         {
-                            candidates.Add(session);
+                            siteLocationName = siteLocationName.Split(',')[0];
                         }
-                    }
-                    string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
-                    if (candidates.Count == 0)
-                    {
-                        Tools.DebugLog($"GetChargingHistoryV2Service no candidate for <{chargingstateid}> {tlname} {startDate}");
-                    }
-                    else if (candidates.Count == 1)
-                    {
-                        Tools.DebugLog($"GetChargingHistoryV2Service candidate for <{chargingstateid}> {tlname} {startDate} -> {candidates[1].GetSanitizedSuCName()} {candidates[1].GetStart()}");
-                    }
-                    else if (candidates.Count > 1)
-                    {
-                        foreach (SuCSession candidate in candidates)
+                        if (tlname.Contains(siteLocationName)
+                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 5
+                            && car.Vin.Equals(VIN)
+                            )
                         {
-                            Tools.DebugLog($"GetChargingHistoryV2Service candidates for <{chargingstateid}> {tlname} {startDate} -> {candidate.GetSanitizedSuCName()} {candidate.GetStart()}");
+                            Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
+                            UpdateChargingState(chargingstateid, json, car);
+                        }
+                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 5
+                            && car.Vin.Equals(VIN))
+                        {
+                            (new Exception($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>")).ToExceptionless().FirstCarUserID().Submit();
                         }
                     }
                 }
@@ -418,9 +373,146 @@ namespace TeslaLogger
             Tools.DebugLog("GetChargingHistoryV2Service SyncAll finished");
         }
 
-        private static void UpdateChargingState(Car car, int chargingid, SuCSession session)
+        private static void UpdateChargingState(int chargingstateid, string json, Car car)
         {
+            dynamic session = JsonConvert.DeserializeObject(json);
+            if (session != null
+                && session.ContainsKey("fees")
+                && session.ContainsKey("chargeSessionId")
+                )
+            {
+                double cost_total = double.NaN;
+                string cost_currency = string.Empty;
+                double cost_per_kwh = double.NaN;
+                double cost_for_charging = double.NaN;
+                double cost_idle_fee_total = double.NaN;
+                double cost_kwh_meter_invoice = double.NaN;
+                double cost_freesuc_savings_total = double.NaN;
+                string chargeSessionId = session["chargeSessionId"];
+                bool freesuc = false;
 
+                // parse fees
+                foreach (dynamic fee in session["fees"])
+                {
+                    if (fee.ContainsKey("currencyCode"))
+                    {
+                        cost_currency = fee["currencyCode"].ToString();
+                    }
+                    if (fee.ContainsKey("feeType"))
+                    {
+                        if (fee["feeType"].ToString().Equals("CHARGING"))
+                        {
+                            if (fee.ContainsKey("uom") && fee["uom"].ToString().Equals("kWh"))
+                            {
+                                if (fee.ContainsKey("rateBase"))
+                                {
+                                    _ = double.TryParse(fee["rateBase"].ToString(Tools.ciEnUS), out cost_per_kwh);
+                                }
+                                if (fee.ContainsKey("usageBase"))
+                                {
+                                    _ = double.TryParse(fee["usageBase"].ToString(Tools.ciEnUS), out cost_kwh_meter_invoice);
+                                }
+                                if (fee.ContainsKey("pricingType")
+                                    && fee["pricingType"].ToString().Equals("PAYMENT")
+                                    && fee.ContainsKey("totalDue")
+                                    )
+                                {
+                                    _ = double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out cost_for_charging);
+                                }
+                                if (fee.ContainsKey("pricingType")
+                                    && fee["pricingType"].ToString().Equals("NO_CHARGE")
+                                    )
+                                {
+                                    freesuc = true;
+                                }
+                            }
+                        }
+                        else if (fee["feeType"].ToString().Equals("PARKING"))
+                        {
+                            if (fee.ContainsKey("totalDue"))
+                            {
+                                _ = double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out cost_idle_fee_total);
+                            }
+                        }
+                    }
+                }
+                if (freesuc
+                    && !double.IsNaN(cost_per_kwh)
+                    && !double.IsNaN(cost_kwh_meter_invoice)
+                    )
+                {
+                    cost_freesuc_savings_total = cost_per_kwh * cost_kwh_meter_invoice;
+                }
+                if (!double.IsNaN(cost_for_charging))
+                {
+                    cost_total = cost_for_charging;
+                    if (!double.IsNaN(cost_idle_fee_total))
+                    {
+                        cost_total += cost_idle_fee_total;
+                    }
+                }
+                if (double.IsNaN(cost_total) && !double.IsNaN(cost_idle_fee_total))
+                {
+                    cost_total = cost_idle_fee_total;
+                }
+                Tools.DebugLog($@"UpdateChargingState:
+chargingstateid:{chargingstateid}
+chargeSessionId:{chargeSessionId}
+cost_total:{cost_total}
+cost_currency:{cost_currency}
+cost_per_kwh:{cost_per_kwh}
+cost_for_charging:{cost_for_charging}
+cost_idle_fee_total:{cost_idle_fee_total}
+cost_kwh_meter_invoice:{cost_kwh_meter_invoice}
+cost_freesuc_savings_total:{cost_freesuc_savings_total}
+freesuc:{freesuc}");
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    chargeSessionId = @chargeSessionId
+" + (!double.IsNaN(cost_total) ? ", cost_total = @cost_total" : "") + @"
+" + (!string.IsNullOrEmpty(cost_currency) ? ", cost_currency = @cost_currency" : "") + @"
+" + (!double.IsNaN(cost_per_kwh) ? ", cost_per_kwh = @cost_per_kwh" : "") + @"
+" + (!double.IsNaN(cost_idle_fee_total) ? ", cost_idle_fee_total = @cost_idle_fee_total" : "") + @"
+" + (!double.IsNaN(cost_kwh_meter_invoice) ? ", cost_kwh_meter_invoice = @cost_kwh_meter_invoice" : "") + @"
+" + (!double.IsNaN(cost_freesuc_savings_total) ? ", cost_freesuc_savings_total = @cost_freesuc_savings_total" : "") + @"
+WHERE
+    id = @chargingstateid
+", con))
+                        {
+                            cmd.Parameters.AddWithValue("@chargingstateid", chargingstateid);
+                            cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                            if (!double.IsNaN(cost_total)) { cmd.Parameters.AddWithValue("@cost_total", cost_total); }
+                            if (!string.IsNullOrEmpty(cost_currency)) { cmd.Parameters.AddWithValue("@cost_currency", cost_currency); }
+                            if (!double.IsNaN(cost_per_kwh)) { cmd.Parameters.AddWithValue("@cost_per_kwh", cost_per_kwh); }
+                            if (!double.IsNaN(cost_idle_fee_total)) { cmd.Parameters.AddWithValue("@cost_idle_fee_total", cost_idle_fee_total); }
+                            if (!double.IsNaN(cost_kwh_meter_invoice)) { cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", cost_kwh_meter_invoice); }
+                            if (!double.IsNaN(cost_freesuc_savings_total)) { cmd.Parameters.AddWithValue("@cost_freesuc_savings_total", cost_freesuc_savings_total); }
+                            //Tools.DebugLog(cmd);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                            if (rowsUpdated == 1)
+                            {
+                                car.Log($"ChargingState <{chargingstateid}> updated from GetChargingHistoryV2Service");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                }
+
+            }
+            else
+            {
+                Tools.DebugLog("Error parsing json:" + json);
+            }
         }
     }
 }

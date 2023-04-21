@@ -265,14 +265,13 @@ namespace TeslaLogger
                         Monitor.Exit(InitCredentialsLock);
                 }
 
-                Task GetChargingHistoryV2Task = Task.Factory.StartNew(() =>
+                _ = Task.Factory.StartNew(() =>
                 {
                     Log("GetChargingHistoryV2Service initializing ...");
                     GetChargingHistoryV2Service.LoadAll(this);
                     GetChargingHistoryV2Service.SyncAll(this);
-                    Log($"GetChargingHistoryV2Service initialized - sessions: {GetChargingHistoryV2Service.GetSessionCount()}");
+                    Log($"GetChargingHistoryV2Service initialized");
                 }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                GetChargingHistoryV2Service.GetChargingHistoryV2Tasks.Add(GetChargingHistoryV2Task);
 
                 while (run)
                 {

@@ -1660,6 +1660,18 @@ HAVING
                 {
                     UpdateChargePrice(openChargingState);
                 }
+
+                // get tesla invoice for supercharger
+                if (ChargingStateLocationIsSuC(openChargingState))
+                {
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(300000); // sleep 5 minutes so that the invoice is ready
+                        GetChargingHistoryV2Service.LoadLatest(car);
+                        GetChargingHistoryV2Service.SyncAll(car);
+                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
+                }
             }
 
             car.CurrentJSON.current_charging = false;
