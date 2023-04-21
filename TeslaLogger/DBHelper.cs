@@ -1377,6 +1377,7 @@ FROM
 WHERE
   chargingstate.pos = pos.id
   AND pos.CarID=@CarID
+  AND chargingstate.fast_charger_brand <> 'Tesla'
 GROUP BY
   pos.odometer
 HAVING
