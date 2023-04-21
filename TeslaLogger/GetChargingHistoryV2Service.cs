@@ -28,6 +28,10 @@ namespace TeslaLogger
             {
                 this.chargeSessionId = jsonSession["chargeSessionId"];
                 this.chargeStartDateTime = jsonSession["chargeStartDateTime"];
+                if (DateTime.TryParse(jsonSession["chargeStartDateTime"].ToString("yyyy-MM-dd HH:mm:ss"), out DateTime isochargeStartDateTime))
+                {
+                    this.chargeStartDateTime = isochargeStartDateTime;
+                }
                 this.VIN = jsonSession["vin"];
                 this.siteLocationName = jsonSession["siteLocationName"];
             }
@@ -271,7 +275,6 @@ namespace TeslaLogger
             if (!sessions.ContainsKey(suCSession.GetSessionID()))
             {
                 sessions.Add(suCSession.GetSessionID(), suCSession);
-                Tools.DebugLog($"GetChargingHistoryV2Service add session: {suCSession.GetVIN()} {suCSession.GetStart()} charging: {suCSession.GetChargingCosts()} freeSuC: {suCSession.GetFreeSuCSavings()} parking: {suCSession.GetParkingCosts()}");
             }
 
         }
@@ -377,22 +380,38 @@ namespace TeslaLogger
         internal static void SyncAll(Car car)
         {
             Tools.DebugLog("GetChargingHistoryV2Service SyncAll start");
-            foreach (SuCSession session in sessions.Values)
+            List<SuCSession> sessionsForVIN = sessions.Values.Where(session => session.GetVIN().Equals(car.Vin)).ToList<SuCSession>();
+            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
-                int chargingid = car.DbHelper.FindChargingStateIDByStartDate(session.GetStart());
-                // plausibility check
-                string sucname = DBHelper.GetSuCNameFromChargingStateID(chargingid);
-                string teslasucname = session.GetSanitizedSuCName();
-                if (sucname.Contains(teslasucname))
+                Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
+                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int posID))
                 {
-                    // TeslaLogger name matches Tesla's name
-                    Tools.DebugLog($"Update chargingstate {chargingid} with charging: {session.GetChargingCosts()} freeSuC: {session.GetFreeSuCSavings()} parking: {session.GetParkingCosts()}");
+                    List<SuCSession> candidates = new List<SuCSession>();
+                    foreach (SuCSession session in sessionsForVIN)
+                    {
+                        if (Math.Abs((startDate - session.GetStart()).TotalMinutes) < 10)
+                        {
+                            candidates.Add(session);
+                        }
+                    }
+                    Tools.DebugLog($"GetChargingHistoryV2Service candidates for <{chargingstateid}>: {candidates.Count}");
+                    if (candidates.Count == 1)
+                    {
+                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
+                        Tools.DebugLog($"GetChargingHistoryV2Service candidate for <{chargingstateid}> {tlname} {startDate} -> {candidates[1].GetSanitizedSuCName()} {candidates[1].GetStart()}");
+                    }
                 }
                 else
                 {
-                    (new Exception($"GetChargingHistoryV2Service could not map {sucname} and {teslasucname}")).ToExceptionless().FirstCarUserID().Submit(); ;
+                    Tools.DebugLog($"GetChargingHistoryV2Service GetStartValuesFromChargingState false for {chargingstateid}");
                 }
             }
+            Tools.DebugLog("GetChargingHistoryV2Service SyncAll finished");
+        }
+
+        private static void UpdateChargingState(Car car, int chargingid, SuCSession session)
+        {
+
         }
     }
 }
