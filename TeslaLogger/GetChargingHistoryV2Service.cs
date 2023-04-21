@@ -380,25 +380,34 @@ namespace TeslaLogger
         internal static void SyncAll(Car car)
         {
             Tools.DebugLog("GetChargingHistoryV2Service SyncAll start");
-            List<SuCSession> sessionsForVIN = sessions.Values.Where(session => session.GetVIN().Equals(car.Vin)).ToList<SuCSession>();
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
                 if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int posID))
                 {
                     List<SuCSession> candidates = new List<SuCSession>();
-                    foreach (SuCSession session in sessionsForVIN)
+                    foreach (SuCSession session in sessions.Values)
                     {
                         if (Math.Abs((startDate - session.GetStart()).TotalMinutes) < 10)
                         {
                             candidates.Add(session);
                         }
                     }
-                    Tools.DebugLog($"GetChargingHistoryV2Service candidates for <{chargingstateid}>: {candidates.Count}");
-                    if (candidates.Count == 1)
+                    string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
+                    if (candidates.Count == 0)
                     {
-                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
+                        Tools.DebugLog($"GetChargingHistoryV2Service no candidate for <{chargingstateid}> {tlname} {startDate}");
+                    }
+                    else if (candidates.Count == 1)
+                    {
                         Tools.DebugLog($"GetChargingHistoryV2Service candidate for <{chargingstateid}> {tlname} {startDate} -> {candidates[1].GetSanitizedSuCName()} {candidates[1].GetStart()}");
+                    }
+                    else if (candidates.Count > 1)
+                    {
+                        foreach (SuCSession candidate in candidates)
+                        {
+                            Tools.DebugLog($"GetChargingHistoryV2Service candidates for <{chargingstateid}> {tlname} {startDate} -> {candidate.GetSanitizedSuCName()} {candidate.GetStart()}");
+                        }
                     }
                 }
                 else
