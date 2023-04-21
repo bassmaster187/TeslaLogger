@@ -8,38 +8,6 @@ namespace TeslaLogger
 {
     internal class SuCSession
     {
-
-        private static bool ChargeSessionIdExists(string chargeSessionId)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    chargeSessionId
-FROM
-    teslacharging
-WHERE
-    chargeSessionId = @chargeSessionId
-", con)) {
-                        cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value && dr[0].ToString().Equals(chargeSessionId))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logfile.Log(ex.ToString());
-            }
-            return false;
-        }
-
         internal SuCSession(dynamic jsonSession)
         {
             string VIN;
@@ -68,27 +36,24 @@ WHERE
                 throw new Exception($"Error parsing session: {new Tools.JsonFormatter(jsonSession.ToString()).Format()}");
             }
             // no try/catch, the calling function has to do that
-            // only insert if chargeSessionId does not exist
-            if (!ChargeSessionIdExists(chargeSessionId))
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
             {
-                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT INTO teslacharging SET
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT IGNORE INTO teslacharging SET
         chargeSessionId = @chargeSessionId,
         chargeStartDateTime = @chargeStartDateTime,
         siteLocationName = @siteLocationName,
         VIN = @VIN,
         json = @json", con))
-                    {
-                        cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
-                        cmd.Parameters.AddWithValue("@chargeStartDateTime", chargeStartDateTime);
-                        cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
-                        cmd.Parameters.AddWithValue("@VIN", VIN);
-                        cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
-                        SQLTracer.TraceNQ(cmd);
-                    }
+                {
+                    cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                    cmd.Parameters.AddWithValue("@chargeStartDateTime", chargeStartDateTime);
+                    cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
+                    cmd.Parameters.AddWithValue("@VIN", VIN);
+                    cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
+                    SQLTracer.TraceNQ(cmd);
+
                 }
             }
         }
@@ -344,6 +309,7 @@ LIMIT 1
                 {
                     if (GetTeslaChargingSessionByDate(startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
+                        Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
                         string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
                         // check names, time difference and VIN
                         if (siteLocationName.Contains(","))
@@ -355,13 +321,17 @@ LIMIT 1
                             && car.Vin.Equals(VIN)
                             )
                         {
-                            Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
                             UpdateChargingState(chargingstateid, json, car);
                         }
                         else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 5
                             && car.Vin.Equals(VIN))
                         {
+                            Tools.DebugLog($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>");
                             (new Exception($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>")).ToExceptionless().FirstCarUserID().Submit();
+                        }
+                        else if (!car.Vin.Equals(VIN))
+                        {
+                            Tools.DebugLog($"GetChargingHistoryV2Service {chargeSessionId} VIN does not match car:{car.Vin} session:{VIN}");
                         }
                     }
                 }
