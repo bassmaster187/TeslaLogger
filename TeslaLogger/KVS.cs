@@ -239,7 +239,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && Boolean.TryParse(dr[0].ToString(), out value))
                         {
@@ -274,7 +273,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && DateTime.TryParse(dr[0].ToString(), out value))
                         {
@@ -309,7 +307,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && Double.TryParse(dr[0].ToString(), out value))
                         {
@@ -344,7 +341,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out value))
                         {
@@ -379,7 +375,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
