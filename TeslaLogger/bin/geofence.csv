@@ -233,6 +233,7 @@ Supercharger DE-Leonberg, 48.78523, 9.01755
 Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
 Supercharger-V3 DE-Limburg an der Lahn,50.381161, 8.089549
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
+Supercharger-V3 DE-Linstow, 53.618217, 12.372581
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
@@ -264,6 +265,9 @@ Supercharger-V3 DE-Nottuln, 51.911333, 7.398475, 16
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger-V3 DE-Oberhonnefeld, 50.562609,7.525362
 Supercharger DE-Oberhonnefeld, 50.562609,7.525362
+Supercharger-V3 DE-Öhringen, 49.204604, 9.488676, 13
+Supercharger-V3 DE-Öhringen, 49.204397, 9.488832, 14
+Supercharger-V3 DE-Öhringen, 49.204187, 9.488977, 13
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
 Supercharger-V3 DE-Panketal, 52.620716, 13.541721
 Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
@@ -1464,6 +1468,8 @@ EnBW DE-Friesoythe, 53.016216, 7.852262, 20
 EnBW DE-Gammertingen Bahnhof, 48.250595,9.217022
 EnBW DE-Gammertingen Norma, 48.246655,9.222877
 EnBW DE-Gelsenkirchen, 51.521451, 7.073921
+EnBW DE-Gera Bieblach, 50.8987583, 12.1001272
+EnBW DE-Gera Elsterdamm 5, 50.8681805, 12.07709
 EnBW DE-Giengen an der Brenz, 48.6176632, 10.252562
 EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Großberg, 48.972829,12.065386
@@ -1500,6 +1506,7 @@ EnBW DE-Kehring Elztal Nord, 50.266953,7.224861, 20
 EnBW DE-Kehring Elztal Süd, 50.26568,7.22722, 20
 EnBW DE-Kirchheim Trigema, 50.832535,9.573169, 10
 EnBW DE-Koblenz Autohof Rübenacher Wald, 50.347123, 7.507522
+EnBW DE-Kraftsdorf, 50.8955874, 11.9809509
 EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
 EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
@@ -1511,6 +1518,7 @@ EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
 EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
 EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
+EnBW DE-Meerane, 50.8416292, 12.4449415, 10
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
 EnbW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
 EnbW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
@@ -1579,6 +1587,7 @@ EWE-SWB DE-Emden, 53.389098,7.230491, 20
 EWE-SWB DE-Friesoythe, 53.014858, 7.851011
 EWE-SWB DE-Illertissen, 48.219521,10.126724, 10
 EWE-SWB DE-Marktrodach, 50.256351, 11.397455
+EWE-SWB DE-Meerane, 50.8417537, 12.4448933, 5
 EWE-SWB DE-Moormerland, 53.311881, 7.456651
 EWE-SWB DE-Oldenburg Bremer Heerstraße, 53.119092,8.258616
 EWE-SWB DE-Unterschleißheim,48.28377,11.563749,3
@@ -2585,6 +2594,8 @@ MOL CZ-Velké Meziříčí, 49.345539,16.040024
 
 NewMotion DE-Unterschleißheim,48.272108,11.591192
 
+Pfalzwerke DE-Jena Brüsseler Str. 1, 50.8768364, 11.6186009
+
 REWE DE-Bremen, 53.136455, 8.739926
 
 schneller-strom-tanken DE-Ehingen, 48.284649, 9.721507
@@ -2597,6 +2608,7 @@ schneller-strom-tanken DE-Singen, 47.753819, 8.854614
 schneller-strom-tanken DE-Villingen-Schwenningen, 48.060895, 8.454762
 
 ShellRecharge DE-Berg, 50.372, 11.787795
+ShellRecharge DE-Kraftsdorf, 50.8959477, 11.9793605, 5
 ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
@@ -2625,6 +2637,7 @@ SWU DE-Ulm Wilhelmstraße, 48.404929, 9.9856399
 SWU DE-Neu-Ulm Glacis Galerie, 48.393879, 10.0039061
 
 TEAG DE-Amt Wachsenburg, 50.888332, 10.935136
+TEAG DE-Hermsdorf Rodaer Straße 72, 50.8864278, 11.8501822
 TEAG DE-Schleiz Autohof, 50.551565, 11.789977
 
 TotalEnergies BE-Kalken E17 Dir Antwerpen,51.07041,3.919857,80
@@ -2819,6 +2832,7 @@ DE Freising Audi Training Center, 48.356508, 11.770911
 DE Garbsen Nord, 52.422338, 9.554441
 DE Garbsen Süd,  52.421211, 9.565703
 DE Garching Parking 19, 48.251597, 11.63772
+DE Gera Siemensstraße 55, 50.9080071, 12.0664679
 DE Germering Hagebaumarkt, 48.141285, 11.371643
 DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
