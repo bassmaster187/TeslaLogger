@@ -1580,18 +1580,6 @@ namespace TeslaLogger
             Tools.ExternalLog(temp);
         }
 
-        public static Car GetCarByVIN(string VIN)
-        {
-            foreach (Car car in Allcars)
-            {
-                if (car.vin.Equals(VIN))
-                {
-                    return car;
-                }
-            }
-            return null;
-        }
-
         public static Car GetCarByID(int carid)
         {
             return Allcars.FirstOrDefault(car => car.CarInDB == carid);
