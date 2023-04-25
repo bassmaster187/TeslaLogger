@@ -1669,7 +1669,13 @@ HAVING
                     {
                         Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
                         GetChargingHistoryV2Service.LoadLatest(car);
-                        GetChargingHistoryV2Service.SyncAll(car);
+                        if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                        {
+                            // invoice not ready yet
+                            Thread.Sleep(3600000); // sleep 60 minutes so that the invoice is ready
+                            GetChargingHistoryV2Service.LoadLatest(car);
+                            _ = GetChargingHistoryV2Service.SyncAll(car);
+                        }
                     }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
                 }

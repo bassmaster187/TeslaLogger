@@ -302,9 +302,10 @@ LIMIT 1
             return false;
         }
 
-        internal static void SyncAll(Car car)
+        internal static int SyncAll(Car car)
         {
             Tools.DebugLog("GetChargingHistoryV2Service SyncAll start");
+            int updatedChargingStates = 0;
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
@@ -325,6 +326,7 @@ LIMIT 1
                             )
                         {
                             UpdateChargingState(chargingstateid, json, car);
+                            updatedChargingStates++;
                         }
                         else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN))
@@ -344,6 +346,7 @@ LIMIT 1
                 }
             }
             Tools.DebugLog("GetChargingHistoryV2Service SyncAll finished");
+            return updatedChargingStates;
         }
 
         private static void UpdateChargingState(int chargingstateid, string json, Car car)
