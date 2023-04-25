@@ -30,6 +30,7 @@ namespace TeslaLogger
                 {
                     chargeStartDateTime = isochargeStartDateTime;
                 }
+                Tools.DebugLog($"new SuCSession: <{{vin}}> <{{chargeSessionId}}> <{{siteLocationName}}> <{chargeStartDateTime}>");
             }
             else
             {
@@ -53,7 +54,6 @@ INSERT IGNORE INTO teslacharging SET
                     cmd.Parameters.AddWithValue("@VIN", VIN);
                     cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
                     SQLTracer.TraceNQ(cmd);
-
                 }
             }
         }
