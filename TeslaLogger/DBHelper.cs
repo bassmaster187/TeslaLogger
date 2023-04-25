@@ -1667,7 +1667,7 @@ HAVING
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
-                        Thread.Sleep(300000); // sleep 5 minutes so that the invoice is ready
+                        Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
                         GetChargingHistoryV2Service.LoadLatest(car);
                         GetChargingHistoryV2Service.SyncAll(car);
                     }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
