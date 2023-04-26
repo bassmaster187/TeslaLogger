@@ -93,7 +93,7 @@ INSERT IGNORE INTO teslacharging SET
                                     }
                                     catch (Exception ex)
                                     {
-                                        ex.ToExceptionless().FirstCarUserID().Submit();
+                                        ex.ToExceptionless().FirstCarUserID().AddObject(sjson, "ResultContent").Submit();
                                         Logfile.Log(ex.ToString());
                                     }
                                 }
