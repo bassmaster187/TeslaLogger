@@ -30,7 +30,7 @@ namespace TeslaLogger
                 {
                     chargeStartDateTime = isochargeStartDateTime;
                 }
-                Tools.DebugLog($"new SuCSession: <{{vin}}> <{{chargeSessionId}}> <{{siteLocationName}}> <{chargeStartDateTime}>");
+                Tools.DebugLog($"new SuCSession: <{VIN}> <{chargeSessionId}> <{siteLocationName}> <{chargeStartDateTime}>");
             }
             else
             {
