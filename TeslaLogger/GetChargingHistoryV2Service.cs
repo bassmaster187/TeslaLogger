@@ -194,12 +194,7 @@ INSERT IGNORE INTO teslacharging SET
                 Tools.DebugLog("GetChargingHistoryV2Service: 502 Bad Gateway");
                 return;
             }
-            dynamic jsonResult = JsonConvert.DeserializeObject(result);
-            if (jsonResult != null)
-            {
-                _ = ParseJSON(jsonResult);
-            }
-
+            _ = ParseJSON(result);
         }
 
         internal static void CheckSchema()
