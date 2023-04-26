@@ -1398,6 +1398,7 @@ FROM
 WHERE
   chargingstate.pos = pos.id
   AND pos.CarID=@CarID
+  AND chargingstate.fast_charger_brand <> 'Tesla'
 GROUP BY
   pos.odometer
 HAVING
@@ -1676,6 +1677,23 @@ HAVING
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
                 // this will also recalculate charge price
                 _ = RecalculateChargeEnergyAdded(openChargingState);
+
+                // get tesla invoice for supercharger
+                if (ChargingStateLocationIsSuC(openChargingState))
+                {
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
+                        GetChargingHistoryV2Service.LoadLatest(car);
+                        if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                        {
+                            // invoice not ready yet
+                            Thread.Sleep(3600000); // sleep 60 minutes so that the invoice is ready
+                            GetChargingHistoryV2Service.LoadLatest(car);
+                            _ = GetChargingHistoryV2Service.SyncAll(car);
+                        }
+                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                }
             }
 
             car.CurrentJSON.current_charging = false;
@@ -1732,7 +1750,7 @@ HAVING
             }
         }
 
-        private bool ChargingStateLocationIsSuC(int ChargingStateID)
+        internal bool ChargingStateLocationIsSuC(int ChargingStateID)
         {
             try
             {
@@ -2380,7 +2398,7 @@ LIMIT 1", con))
             return referenceID;
         }
 
-        private static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
         {
             try
             {
@@ -5412,6 +5430,7 @@ WHERE SCHEMA_NAME  = '{dbname}'", con))
                 {
                     con.Open();
                     Logfile.Log($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER DATABASE {dbname}
 CHARACTER SET = utf8mb4
@@ -5475,6 +5494,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
@@ -5539,6 +5559,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL", 3000);
@@ -6043,5 +6064,123 @@ WHERE
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargingStateCountryCO2()");
             }
         }
+
+        internal int FindChargingStateIDByStartDate(DateTime dtStart)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    CarID = @CarID
+    AND ABS(TIMEDIFF(StartDate, @DTStart)) < 1800
+ORDER BY
+    ABS(TIMEDIFF(StartDate, @DTStart)) ASC
+LIMIT 1
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@DTStart", dtStart.ToString("yyyy-MM-dd HH:mm:ss"));
+                        if (int.TryParse(SQLTracer.TraceSc(cmd).ToString(), out int chargingstateid))
+                        {
+                            return chargingstateid;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return -1;
+        }
+
+        internal static string GetSuCNameFromChargingStateID(int chargingstateid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    pos.address
+FROM
+    pos
+JOIN
+    chargingstate ON chargingstate.pos = pos.id
+WHERE
+    chargingstate.id = @chargingid
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chargingid", chargingstateid);
+                        return (string)SQLTracer.TraceSc(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return string.Empty;
+        }
+
+        internal List<int> GetSuCChargingStatesWithEmptyChargeSessionId()
+        {
+            List<int> resultList = new List<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    ChargeSessionId IS NULL
+    AND CarID = @CarID
+    AND fast_charger_brand = @brand
+    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@brand", "Tesla");
+                        cmd.Parameters.AddWithValue("@type1", "Tesla");
+                        cmd.Parameters.AddWithValue("@type2", "Combo");
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            if (dr[0] != null && int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                resultList.Add(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId()");
+            }
+            Tools.DebugLog($"GetSuCChargingStatesWithEmptyChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            return resultList;
+        }
+
     }
 }
