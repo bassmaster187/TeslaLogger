@@ -26,6 +26,7 @@ CREATE TABLE kvs(
     JSON LONGTEXT NULL,
     UNIQUE ix_key(id)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                    UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE kvs(
     id VARCHAR(64) NOT NULL,
@@ -238,7 +239,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && Boolean.TryParse(dr[0].ToString(), out value))
                         {
@@ -273,7 +273,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && DateTime.TryParse(dr[0].ToString(), out value))
                         {
@@ -308,7 +307,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && Double.TryParse(dr[0].ToString(), out value))
                         {
@@ -343,7 +341,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out value))
                         {
@@ -378,7 +375,6 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@key", key);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {

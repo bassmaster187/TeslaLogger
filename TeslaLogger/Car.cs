@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -263,6 +264,14 @@ namespace TeslaLogger
                     if (ApplicationSettings.Default.InitCredentialsLock)
                         Monitor.Exit(InitCredentialsLock);
                 }
+
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Log("GetChargingHistoryV2Service initializing ...");
+                    GetChargingHistoryV2Service.LoadAll(this);
+                    GetChargingHistoryV2Service.SyncAll(this);
+                    Log($"GetChargingHistoryV2Service initialized");
+                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
                 while (run)
                 {
