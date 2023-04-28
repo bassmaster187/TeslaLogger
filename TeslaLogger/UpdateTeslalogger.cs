@@ -15,7 +15,6 @@ using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class UpdateTeslalogger
     {
@@ -131,6 +130,8 @@ namespace TeslaLogger
                 CheckDBSchema_superchargerstate();
 
                 CheckDBSchema_TPMS();
+
+                GetChargingHistoryV2Service.CheckSchema();
 
                 Logfile.Log("DBSchema Update finished.");
 
@@ -289,7 +290,7 @@ namespace TeslaLogger
             }
         }
 
-        private static void AssertAlterDB()
+        internal static void AssertAlterDB()
         {
             // make sure there is enough disk space available for temp tables
 
@@ -350,6 +351,7 @@ LIMIT 1", con))
                 PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
 
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
@@ -358,6 +360,7 @@ LIMIT 1", con))
             {
                 var sql = "create index IX_TPMS_CarId_Datum on TPMS(CarId, Tireid, Datum, pressure)";
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql, 600);
                 KVS.InsertOrUpdate(TPMSSchemaVersion, (int)2);
             }
