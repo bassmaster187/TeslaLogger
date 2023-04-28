@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,7 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1675161656173,
+  "id": 16,
+  "iteration": 1682690657793,
   "links": [
     {
       "icon": "external link",
@@ -38,7 +42,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -47,7 +51,8 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "displayMode": "auto",
+            "inspect": false
           },
           "decimals": 2,
           "displayName": "",
@@ -669,12 +674,12 @@
           }
         ]
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "datasource": {
             "type": "mysql",
-            "uid": "PC0C98BF192F75B00"
+            "uid": "000000001"
           },
           "format": "table",
           "group": [],
@@ -718,7 +723,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -727,7 +732,8 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "displayMode": "auto",
+            "inspect": false
           },
           "decimals": 0,
           "displayName": "",
@@ -878,7 +884,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -921,7 +927,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -930,7 +936,8 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "displayMode": "auto",
+            "inspect": false
           },
           "decimals": 0,
           "displayName": "",
@@ -1057,7 +1064,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -1100,7 +1107,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1159,7 +1166,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -1196,7 +1203,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1255,7 +1262,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -1292,7 +1299,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1351,7 +1358,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -1388,7 +1395,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1447,7 +1454,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -1484,7 +1491,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1543,7 +1550,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -1580,7 +1587,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "description": "",
       "fieldConfig": {
@@ -1640,7 +1647,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -1686,7 +1693,7 @@
       "dashes": false,
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "description": "",
       "fieldConfig": {
@@ -1721,7 +1728,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1817,7 +1824,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1876,7 +1883,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -1913,7 +1920,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -1972,7 +1979,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -2009,7 +2016,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -2068,7 +2075,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -2105,15 +2112,15 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
-      "description": "Only available with ScanMyTesla",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 1,
+          "decimals": 0,
           "mappings": [
             {
               "options": {
@@ -2144,11 +2151,11 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 2,
         "x": 18,
         "y": 18
       },
-      "id": 17,
+      "id": 24,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -2160,19 +2167,23 @@
           "calcs": [
             "sum"
           ],
-          "fields": "/^val$/",
+          "fields": "",
           "values": false
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 9 and carid=$Car\nORDER BY datum DESC LIMIT 1",
+          "rawSql": "SELECT sum(chargingstate.cost_freesuc_savings_total)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car\r\n\r\n",
           "refId": "A",
           "select": [
             [
@@ -2196,13 +2207,13 @@
           ]
         }
       ],
-      "title": "AC Total",
+      "title": "Free SuC Savings",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "description": "Only available with ScanMyTesla",
       "fieldConfig": {
@@ -2241,8 +2252,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 21,
+        "w": 2,
+        "x": 20,
         "y": 18
       },
       "id": 18,
@@ -2262,7 +2273,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -2299,7 +2310,104 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
+      },
+      "description": "Only available with ScanMyTesla",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 22,
+        "y": 18
+      },
+      "id": 17,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^val$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(datum), val \nFROM can\nWHERE $__timeFilter(datum) and id = 9 and carid=$Car\nORDER BY datum DESC LIMIT 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "AC Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -2359,7 +2467,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -2396,7 +2504,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -2455,7 +2563,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -2492,7 +2600,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -2551,7 +2659,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "time_series",
@@ -2587,7 +2695,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 33,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2600,12 +2708,12 @@
         },
         "datasource": {
           "type": "mysql",
-          "uid": "PC0C98BF192F75B00"
+          "uid": "000000001"
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "",
+        "label": "Fahrzeug",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -2622,7 +2730,7 @@
     ]
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-5y",
     "to": "now"
   },
   "timepicker": {
@@ -2653,6 +2761,6 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 3,
+  "version": 36,
   "weekStart": ""
 }
