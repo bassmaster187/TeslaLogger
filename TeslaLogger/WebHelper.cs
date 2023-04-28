@@ -1349,7 +1349,8 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                resultContent = GetCommand("charge_state").Result;
+                // resultContent = GetCommand("charge_state").Result;
+                resultContent = GetCommand("vehicle_data").Result;
 
                 if (resultContent == INSERVICE)
                 {
@@ -1361,7 +1362,7 @@ namespace TeslaLogger
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"];
+                dynamic r2 = jsonResult["response"]["charge_state"];
 
                 if (r2["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
                 {
@@ -2293,7 +2294,8 @@ namespace TeslaLogger
             string resultContent2 = "";
             try
             {
-                resultContent2 = GetCommand("vehicle_config").Result;
+                // resultContent2 = GetCommand("vehicle_config").Result;
+                resultContent2 = GetCommand("vehicle_data").Result;
 
                 if (resultContent2 == INSERVICE || resultContent2 == "NULL")
                 {
@@ -2305,7 +2307,7 @@ namespace TeslaLogger
                     vehicle_config = resultContent2;
 
                 dynamic jBadge = JsonConvert.DeserializeObject(resultContent2);
-                dynamic jBadgeResult = jBadge["response"];
+                dynamic jBadgeResult = jBadge["response"]["vehicle_config"];
 
                 if (jBadgeResult != null)
                 {
@@ -2918,7 +2920,7 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                resultContent = GetCommand("drive_state").Result;
+                resultContent = GetCommand("vehicle_data").Result;
 
                 if (resultContent == INSERVICE)
                 {
@@ -2926,9 +2928,11 @@ namespace TeslaLogger
                     return false;
                 }
 
+                // Log("IsDriving");
+
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"];
+                dynamic r2 = jsonResult["response"]["drive_state"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 decimal dLatitude = (decimal)r2["latitude"];
                 decimal dLongitude = (decimal)r2["longitude"];
@@ -2981,6 +2985,8 @@ namespace TeslaLogger
                 {
                     // var address = ReverseGecocodingAsync(latitude, longitude);
                     //var altitude = AltitudeAsync(latitude, longitude);
+                    // Log("IsDriving2");
+
                     Task<double> odometer = GetOdometerAsync();
                     double? outside_temp = null;
                     Task<double?> t_outside_temp = null;
@@ -4080,13 +4086,15 @@ namespace TeslaLogger
 
             try
             {
-                resultContent = GetCommand("charge_state").Result;
+                // resultContent = GetCommand("charge_state").Result;
+                resultContent = GetCommand("vehicle_data").Result;
+
                 if (resultContent == null || resultContent == "NULL")
                     return -1;
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"];
+                dynamic r2 = jsonResult["response"]["charge_state"];
 
                 if (r2["ideal_battery_range"] == null)
                 {
@@ -4141,14 +4149,15 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                resultContent = await GetCommand("vehicle_state");
+                // resultContent = await GetCommand("vehicle_state");
+                resultContent = await GetCommand("vehicle_data");
                 Tools.SetThreadEnUS();
 
                 if (resultContent == null || resultContent == "NULL" || resultContent == INSERVICE)
                     return lastOdometerKM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"];
+                dynamic r2 = jsonResult["response"]["vehicle_state"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
 
                 if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
@@ -4236,7 +4245,8 @@ namespace TeslaLogger
             string resultContent = null;
             try
             {
-                resultContent = await GetCommand("climate_state");
+                // resultContent = await GetCommand("climate_state");
+                resultContent = await GetCommand("vehicle_data");
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
                     Log("GetOutsideTempAsync: NULL");
@@ -4245,7 +4255,7 @@ namespace TeslaLogger
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"];
+                dynamic r2 = jsonResult["response"]["climate_state"];
                 _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
                 try
                 {
@@ -4334,7 +4344,7 @@ namespace TeslaLogger
                 string cacheKey = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
                 HttpClient client = GethttpclientTeslaAPI();
 
-                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/data_request/" + cmd;
+                string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.GetAsync(adresse);

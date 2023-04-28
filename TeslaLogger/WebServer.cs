@@ -1347,7 +1347,8 @@ namespace TeslaLogger
 
                     for (int retry = 0; retry < 10; retry++)
                     {
-                        vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
+                        // vehicle_config = c.webhelper.GetCommand("vehicle_config").Result;
+                        vehicle_config = c.webhelper.GetCommand("vehicle_data").Result;
                         if (vehicle_config?.Trim()?.StartsWith("{", System.StringComparison.Ordinal) == true)
                             break;
 
