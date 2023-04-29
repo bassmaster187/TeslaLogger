@@ -424,6 +424,7 @@ namespace TeslaLogger
             }
             switch (source)
             {
+                /*
                 case "charge_state":
                     return ParseChargeState(JSON);
                 case "climate_state":
@@ -434,6 +435,14 @@ namespace TeslaLogger
                     return ParseVehicleConfig(JSON);
                 case "vehicle_state":
                     return ParseVehicleState(JSON);
+                */
+                case "vehicle_data":
+                    ParseChargeState(JSON);
+                    ParseClimateState(JSON);
+                    ParseDriveState(JSON);
+                    ParseVehicleConfig(JSON);
+                    ParseVehicleState(JSON);
+                    break;
                 case "vehicles":
                     return ParseVehicles(JSON);
                 default:
@@ -562,7 +571,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "charge_state");
                 /*
                  * {"response":
                  *     {
@@ -731,10 +740,10 @@ namespace TeslaLogger
             return false;
         }
 
-        private static Dictionary<string, object> ExtractResponse(string _JSON)
+        private static Dictionary<string, object> ExtractResponse(string _JSON, string command)
         {
             dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
-            Dictionary<string, object> r1 = jsonResult["response"].ToObject<Dictionary<string, object>>();
+            Dictionary<string, object> r1 = jsonResult["response"][command].ToObject<Dictionary<string, object>>();
             return r1;
         }
 
@@ -742,7 +751,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "drive_state");
                 /*
                  * {"response":
                  *     {
@@ -838,7 +847,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "vehicle_config");
                 /*
                  * {"response":
                  *     {
@@ -998,7 +1007,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "vehicle_state");
                 /*
                  * {"response":
                  *     {
@@ -1300,7 +1309,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "climate_state");
                 /*
                  * {"response":
                  *     {

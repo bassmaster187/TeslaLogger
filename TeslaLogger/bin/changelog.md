@@ -1,5 +1,5 @@
-# Version 1.54.18
-- Bugfixes
+# Version 1.54.19
+- New Tesla API -> older Teslalogger versions won't work anymore!
 
 # Version 1.54.16
 - Update to Grafana 8.5.22 [security fix](https://grafana.com/blog/2023/03/22/grafana-security-release-new-versions-with-security-fixes-for-cve-2023-1410/)
