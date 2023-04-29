@@ -1265,7 +1265,7 @@ WHERE
                             IDsToDelete.Add(similarChargingState);
                         }
                     }
-                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
+                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID, out string _);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
@@ -1658,7 +1658,7 @@ HAVING
                             Tools.DebugLog($"FindSimilarChargingStates: {chargingState}:{odometer}");
                         }
                         // get startdate, startID, posID from oldest
-                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
+                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID, out string _))
                         {
                             car.Log($"Combine charging states {string.Join(", ", chargingStates)} into {openChargingState}");
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -2398,7 +2398,7 @@ LIMIT 1", con))
             return referenceID;
         }
 
-        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID, out string posName)
         {
             try
             {
@@ -2407,22 +2407,32 @@ LIMIT 1", con))
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    StartDate,
-    StartChargingID,
-    Pos
+    chargingstate.StartDate,
+    chargingstate.StartChargingID,
+    chargingstate.pos,
+    pos.address
 FROM
     chargingstate
+JOIN
+    pos ON chargingstate.pos = pos.id
 WHERE
-    id = @ChargingStateID", con))
+    chargingstate.id = @ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read()
+                            && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value
+                            && dr[2] != DBNull.Value
+                            && dr[3] != DBNull.Value
+                            )
                         {
                             if (DateTime.TryParse(dr[0].ToString(), out startDate)
                                 && int.TryParse(dr[1].ToString(), out startdID)
-                                && int.TryParse(dr[2].ToString(), out posID))
+                                && int.TryParse(dr[2].ToString(), out posID)
+                                )
                             {
+                                posName = dr[3].ToString();
                                 return true;
                             }
                         }
@@ -2439,6 +2449,7 @@ WHERE
             startDate = DateTime.MinValue;
             startdID = int.MinValue;
             posID = int.MinValue;
+            posName = string.Empty;
             return false;
         }
 

@@ -304,7 +304,7 @@ LIMIT 1
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
-                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int posID))
+                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _,  out string posName))
                 {
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
@@ -316,7 +316,7 @@ LIMIT 1
                             siteLocationName = siteLocationName.Split(',')[0];
                         }
                         if (tlname.Contains(siteLocationName)
-                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
+                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 20
                             && car.Vin.Equals(VIN)
                             )
                         {
@@ -332,6 +332,10 @@ LIMIT 1
                         else if (!car.Vin.Equals(VIN))
                         {
                             Tools.DebugLog($"GetChargingHistoryV2Service {chargeSessionId} VIN does not match car:{car.Vin} session:{VIN}");
+                        }
+                        else
+                        {
+                            Tools.DebugLog($"GetChargingHistoryV2Service no SuC session found for <{chargingstateid}> <{posName}>");
                         }
                     }
                 }
