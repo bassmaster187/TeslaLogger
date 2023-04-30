@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Exceptionless;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -307,7 +306,7 @@ LIMIT 1
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
-                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _,  out string posName))
+                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName))
                 {
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
