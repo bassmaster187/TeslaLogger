@@ -574,34 +574,7 @@ WHERE
                 if (!string.IsNullOrEmpty(chargesessionidmaster) && chargesessionids.Count > 0)
                 {
                     // load master ID
-                    dynamic masterJSON = null;
-                    try
-                    {
-                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                        {
-                            con.Open();
-                            using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    JSON
-FROM
-    teslacharging
-WHERE
-    chargesessionid = @chargesessionid
-", con))
-                            {
-                                cmd.Parameters.AddWithValue("@chargesessionid", chargesessionidmaster);
-                                MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                                if (dr.Read() && dr[0] != DBNull.Value)
-                                {
-                                    masterJSON = JsonConvert.DeserializeObject(dr[0].ToString());
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Tools.DebugLog(ex.ToString());
-                    }
+                    dynamic masterJSON = LoadJSON(chargesessionidmaster);
                     if (masterJSON != null
                         && masterJSON.ContainsKey("fees")
                         )
@@ -609,34 +582,7 @@ WHERE
                         // load other SuC charging sessions and add their fees to the master
                         foreach (string otherID in chargesessionids)
                         {
-                            dynamic otherJSON = null;
-                            try
-                            {
-                                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                                {
-                                    con.Open();
-                                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    JSON
-FROM
-    teslacharging
-WHERE
-    chargesessionid = @chargesessionid
-", con))
-                                    {
-                                        cmd.Parameters.AddWithValue("@chargesessionid", otherID);
-                                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                                        if (dr.Read() && dr[0] != DBNull.Value)
-                                        {
-                                            otherJSON = JsonConvert.DeserializeObject(dr[0].ToString());
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Tools.DebugLog(ex.ToString());
-                            }
+                            dynamic otherJSON = LoadJSON(otherID);
                             if (otherJSON != null
                                 && otherJSON.ContainsKey("fees")
                                 && masterJSON["vin"].Equals(otherJSON["vin"])
@@ -654,6 +600,39 @@ WHERE
                     }
                 }
             }
+        }
+
+        private static dynamic LoadJSON(string chargesessionid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    JSON
+FROM
+    teslacharging
+WHERE
+    chargesessionid = @chargesessionid
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chargesessionid", chargesessionid);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read() && dr[0] != DBNull.Value)
+                        {
+                            return JsonConvert.DeserializeObject(dr[0].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.DebugLog(ex.ToString());
+            }
+
+            return null;
         }
     }
 }
