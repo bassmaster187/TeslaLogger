@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Exceptionless;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -385,14 +388,34 @@ LIMIT 1
                                 }
                                 if (fee.ContainsKey("usageBase"))
                                 {
-                                    _ = double.TryParse(fee["usageBase"].ToString(Tools.ciEnUS), out cost_kwh_meter_invoice);
+                                    if (double.TryParse(fee["usageBase"].ToString(Tools.ciEnUS), out double cost_kwh_meter_invoice_t))
+                                    {
+                                        if (double.IsNaN(cost_kwh_meter_invoice))
+                                        {
+                                            cost_kwh_meter_invoice = cost_kwh_meter_invoice_t;
+                                        }
+                                        else
+                                        {
+                                            cost_kwh_meter_invoice += cost_kwh_meter_invoice_t;
+                                        }
+                                    }
                                 }
                                 if (fee.ContainsKey("pricingType")
                                     && fee["pricingType"].ToString().Equals("PAYMENT")
                                     && fee.ContainsKey("totalDue")
                                     )
                                 {
-                                    _ = double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out cost_for_charging);
+                                    if (double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out double cost_for_charging_t))
+                                    {
+                                        if (double.IsNaN(cost_for_charging))
+                                        {
+                                            cost_for_charging = cost_for_charging_t;
+                                        }
+                                        else
+                                        {
+                                            cost_for_charging += cost_for_charging_t;
+                                        }
+                                    }
                                 }
                                 if (fee.ContainsKey("pricingType")
                                     && fee["pricingType"].ToString().Equals("NO_CHARGE")
@@ -406,7 +429,17 @@ LIMIT 1
                         {
                             if (fee.ContainsKey("totalDue"))
                             {
-                                _ = double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out cost_idle_fee_total);
+                                if (double.TryParse(fee["totalDue"].ToString(Tools.ciEnUS), out double cost_idle_fee_total_t))
+                                {
+                                    if (double.IsNaN(cost_idle_fee_total))
+                                    {
+                                        cost_idle_fee_total = cost_idle_fee_total_t;
+                                    }
+                                    else
+                                    {
+                                        cost_idle_fee_total += cost_idle_fee_total_t;
+                                    }
+                                }
                             }
                         }
                     }
@@ -487,6 +520,140 @@ WHERE
             else
             {
                 Tools.DebugLog("Error parsing json:" + json);
+            }
+        }
+
+        internal static void CalculateCombinedChargeSessions(Car car)
+        {
+            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithChargeSessionId())
+            {
+                List<string> chargesessionids = new List<string>();
+                string chargesessionidmaster = string.Empty;
+                Tools.DebugLog($"CalculateCombinedChargeSessions: chargingstateid<{chargingstateid}>");
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargingstate.chargesessionid,
+    teslacharging.chargesessionid
+FROM
+    chargingstate,
+    teslacharging
+WHERE
+    chargingstate.id = @chargingstateid AND
+    (
+        (
+            teslacharging.chargeStartDateTime >= chargingstate.startdate
+            AND teslacharging.chargeStartDateTime <= chargingstate.enddate
+        ) OR chargingstate.chargesessionid = teslacharging.chargesessionid
+    )
+", con))
+                        {
+                            cmd.Parameters.AddWithValue("@chargingstateid", chargingstateid);
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            while (dr.Read())
+                            {
+                                if (dr[0] != DBNull.Value
+                                    && dr[1] != DBNull.Value
+                                    && !dr[0].ToString().Equals(dr[1].ToString())
+                                    )
+                                {
+                                    chargesessionidmaster = dr[0].ToString();
+                                    chargesessionids.Add(dr[1].ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.DebugLog(ex.ToString());
+                }
+                if (!string.IsNullOrEmpty(chargesessionidmaster) && chargesessionids.Count > 0)
+                {
+                    // load master ID
+                    dynamic masterJSON = null;
+                    try
+                    {
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    JSON
+FROM
+    teslacharging
+WHERE
+    chargesessionid = @chargesessionid
+", con))
+                            {
+                                cmd.Parameters.AddWithValue("@chargesessionid", chargesessionidmaster);
+                                MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                if (dr.Read() && dr[0] != DBNull.Value)
+                                {
+                                    masterJSON = JsonConvert.DeserializeObject(dr[0].ToString());
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog(ex.ToString());
+                    }
+                    if (masterJSON != null
+                        && masterJSON.ContainsKey("fees")
+                        )
+                    {
+                        // load other SuC charging sessions and add their fees to the master
+                        foreach (string otherID in chargesessionids)
+                        {
+                            dynamic otherJSON = null;
+                            try
+                            {
+                                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con.Open();
+                                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    JSON
+FROM
+    teslacharging
+WHERE
+    chargesessionid = @chargesessionid
+", con))
+                                    {
+                                        cmd.Parameters.AddWithValue("@chargesessionid", otherID);
+                                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                        if (dr.Read() && dr[0] != DBNull.Value)
+                                        {
+                                            otherJSON = JsonConvert.DeserializeObject(dr[0].ToString());
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.DebugLog(ex.ToString());
+                            }
+                            if (otherJSON != null
+                                && otherJSON.ContainsKey("fees")
+                                && masterJSON["vin"].Equals(otherJSON["vin"])
+                                && masterJSON["siteLocationName"].Equals(otherJSON["siteLocationName"])
+                                )
+                            {
+                                foreach (dynamic fee in otherJSON["fees"])
+                                {
+                                    ((JArray)masterJSON["fees"]).Add(fee);
+                                }
+                            }
+                        }
+                        Tools.DebugLog($"CalculateCombinedChargeSessions <{chargingstateid}> <{masterJSON["siteLocationName"]}> <{masterJSON["chargeStartDateTime"]}> fees:{((JArray)masterJSON["fees"]).Count}");
+                        UpdateChargingState(chargingstateid, masterJSON.ToString(), car);
+                    }
+                }
             }
         }
     }

@@ -270,6 +270,7 @@ namespace TeslaLogger
                     Log("GetChargingHistoryV2Service initializing ...");
                     GetChargingHistoryV2Service.LoadAll(this);
                     GetChargingHistoryV2Service.SyncAll(this);
+                    GetChargingHistoryV2Service.CalculateCombinedChargeSessions(this);
                     Log($"GetChargingHistoryV2Service initialized");
                 }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 

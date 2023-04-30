@@ -6193,5 +6193,50 @@ WHERE
             return resultList;
         }
 
+        internal List<int> GetSuCChargingStatesWithChargeSessionId()
+        {
+            List<int> resultList = new List<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    ChargeSessionId IS NOT NULL
+    AND CarID = @CarID
+    AND fast_charger_brand = @brand
+    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@brand", "Tesla");
+                        cmd.Parameters.AddWithValue("@type1", "Tesla");
+                        cmd.Parameters.AddWithValue("@type2", "Combo");
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            if (dr[0] != null && int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                resultList.Add(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId()");
+            }
+            Tools.DebugLog($"GetSuCChargingStatesWithChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            return resultList;
+        }
+
     }
 }
