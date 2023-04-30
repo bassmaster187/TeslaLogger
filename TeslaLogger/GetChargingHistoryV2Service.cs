@@ -417,7 +417,10 @@ LIMIT 1
                                     }
                                 }
                                 if (fee.ContainsKey("pricingType")
-                                    && fee["pricingType"].ToString().Equals("NO_CHARGE")
+                                    && (
+                                        fee["pricingType"].ToString().Equals("NO_CHARGE") // free supercharging
+                                        || fee["pricingType"].ToString().Equals("CREDIT") // charging cerdits
+                                        )
                                     )
                                 {
                                     freesuc = true;
