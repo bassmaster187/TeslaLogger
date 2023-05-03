@@ -122,25 +122,33 @@ namespace TeslaLogger
 
                                 dynamic jsonResult = JsonConvert.DeserializeObject(result);
                                 if (jsonResult == null)
+                                {
                                     continue;
+                                }
 
                                 if (jsonResult.ContainsKey("data"))
                                 {
                                     dynamic data = jsonResult["data"];
                                     if (data == null)
+                                    {
                                         continue;
+                                    }
 
                                     if (data.ContainsKey("charging"))
                                     {
                                         dynamic charging = data["charging"];
                                         if (charging == null)
+                                        {
                                             continue;
+                                        }
 
                                         if (charging.ContainsKey("nearbySites"))
                                         {
                                             dynamic nearbySites = charging["nearbySites"];
                                             if (nearbySites == null)
+                                            {
                                                 continue;
+                                            }
 
                                             if (nearbySites.ContainsKey("sitesAndDistances"))
                                             {
@@ -148,6 +156,10 @@ namespace TeslaLogger
                                                 car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
 
                                                 dynamic superchargers = nearbySites["sitesAndDistances"];
+                                                if (superchargers == null)
+                                                {
+                                                    continue;
+                                                }
                                                 foreach (dynamic suc in superchargers)
                                                 {
                                                     /*
