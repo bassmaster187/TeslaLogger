@@ -1495,7 +1495,7 @@ namespace TeslaLogger
             }
             if (filesFoundForDeletion)
             {
-                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup direcotry Free Disk Space: {FreeDiskSpaceMB()} MB");
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory Free Disk Space: {FreeDiskSpaceMB()} MB");
             }
         }
 
@@ -1677,7 +1677,7 @@ WHERE
             }
             if (filesFoundForDeletion)
             {
-                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception direcotry");
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Exception directory");
                 if (Directory.Exists(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception"))
                 {
                     ExecMono("/usr/bin/du", "-sk " + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "/Exception", true, true);
