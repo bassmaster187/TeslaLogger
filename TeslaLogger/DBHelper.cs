@@ -2277,7 +2277,7 @@ WHERE
     AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
     AND chargingstate.EndChargingID - chargingstate.StartChargingID > 4
     AND chargingstate.CarID = @CarID
-    AND chargingstate.ID < @ChargingStateID
+    AND chargingstate.ID <= @ChargingStateID
 ORDER BY
     id DESC
 LIMIT 1", con))
