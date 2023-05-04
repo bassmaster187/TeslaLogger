@@ -45,12 +45,14 @@ namespace TeslaLogger
             }
         }
 
-        internal static int TraceNQ(MySqlCommand cmd, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+        internal static int TraceNQ(MySqlCommand cmd, out long lastInsertedId, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
             string prefix = "(SQL" + ++ID + ") ";
             if (Program.SQLTRACE == false)
             {
-                return cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                lastInsertedId = cmd.LastInsertedId;
+                return rowsAffected;
             }
             else
             {
@@ -59,7 +61,8 @@ namespace TeslaLogger
                 {
                     Tools.DebugLog(cmd, prefix);
                 }
-                int i = cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                lastInsertedId = cmd.LastInsertedId;
                 DateTime dtend = DateTime.UtcNow;
                 TimeSpan ts = dtend - dtstart;
                 if (ts.TotalMilliseconds > Program.SQLTRACELIMIT)
@@ -74,7 +77,7 @@ namespace TeslaLogger
                         Analyze(cmd, prefix, ts);
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                 }
-                return i;
+                return rowsAffected;
             }
         }
 

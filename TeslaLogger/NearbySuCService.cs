@@ -395,7 +395,7 @@ VALUES(
                                         cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                                         cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
                                         cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                        SQLTracer.TraceNQ(cmd);
+                                        SQLTracer.TraceNQ(cmd, out long _);
                                     }
                                     con.Close();
                                 }
@@ -479,7 +479,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@lat", lat);
                     cmd.Parameters.AddWithValue("@lng", lng);
-                    SQLTracer.TraceNQ(cmd);
+                    SQLTracer.TraceNQ(cmd, out long _);
                 }
                 con.Close();
             }

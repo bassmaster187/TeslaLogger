@@ -518,7 +518,7 @@ namespace TeslaLogger
                             cmd.Parameters.AddWithValue("@meter_type", r["type"]);
                             cmd.Parameters.AddWithValue("@meter_host", r["host"]);
                             cmd.Parameters.AddWithValue("@meter_parameter", r["param"]);
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
 
                             WriteString(response, "OK");
                         }
@@ -1530,7 +1530,7 @@ namespace TeslaLogger
                         using (var cmd2 = new MySqlCommand("delete from cars where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2);
+                            SQLTracer.TraceNQ(cmd2, out long _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -1554,7 +1554,7 @@ namespace TeslaLogger
                         using (var cmd2 = new MySqlCommand("update cars set tesla_token='', refresh_token='' where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2);
+                            SQLTracer.TraceNQ(cmd2, out long _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -1621,7 +1621,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                    SQLTracer.TraceNQ(cmd2);
+                                    SQLTracer.TraceNQ(cmd2, out long _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
@@ -1647,7 +1647,7 @@ FROM
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                SQLTracer.TraceNQ(cmd);
+                                SQLTracer.TraceNQ(cmd, out long _);
 
                                 Car c = Car.GetCarByID(dbID);
                                 if (c != null)
@@ -1706,7 +1706,7 @@ FROM
                                 cmd2.Parameters.AddWithValue("@tesla_password", password);
                                 cmd2.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                                 cmd2.Parameters.AddWithValue("@display_name", carname);
-                                SQLTracer.TraceNQ(cmd2);
+                                SQLTracer.TraceNQ(cmd2, out long _);
 
                                 WriteString(response, "ID:" + newid);
                             }
@@ -1730,7 +1730,7 @@ FROM
                             cmd.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                             cmd.Parameters.AddWithValue("@display_name", carname);
 
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
 
                             WriteString(response, "OK");
                         }
@@ -1973,7 +1973,7 @@ FROM
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"].Value));
 
                         cmd.Parameters.AddWithValue("@id", j["id"].Value);
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out long _);
 
                         Logfile.Log("SetCost OK: " + done);
                         WriteString(response, "OK");

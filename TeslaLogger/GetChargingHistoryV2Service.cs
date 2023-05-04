@@ -55,7 +55,7 @@ INSERT IGNORE INTO teslacharging SET
                     cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
                     cmd.Parameters.AddWithValue("@VIN", VIN);
                     cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
-                    SQLTracer.TraceNQ(cmd);
+                    SQLTracer.TraceNQ(cmd, out long _);
                 }
             }
         }
@@ -505,7 +505,7 @@ WHERE
                             if (!double.IsNaN(cost_kwh_meter_invoice)) { cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", cost_kwh_meter_invoice); }
                             if (!double.IsNaN(cost_freesuc_savings_total)) { cmd.Parameters.AddWithValue("@cost_freesuc_savings_total", cost_freesuc_savings_total); }
                             //Tools.DebugLog(cmd);
-                            int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out long _);
                             if (rowsUpdated == 1)
                             {
                                 car.Log($"ChargingState <{chargingstateid}> updated from GetChargingHistoryV2Service");

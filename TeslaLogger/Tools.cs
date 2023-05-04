@@ -1618,7 +1618,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                SQLTracer.TraceNQ(cmd);
+                                SQLTracer.TraceNQ(cmd, out long _);
                             }
                             catch (Exception ex)
                             {
@@ -1639,7 +1639,7 @@ WHERE
                         try
                         {
                             cmd.CommandTimeout = 60000;
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
                         }
                         catch (Exception ex)
                         {

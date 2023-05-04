@@ -281,7 +281,7 @@ VALUES (
                             cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
                             cmd.Parameters.AddWithValue("@name", name);
                             Tools.DebugLog(cmd);
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
                         }
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
@@ -404,7 +404,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charge_duration_minutes", (int)charge_duration_minutes);
                         Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
@@ -452,7 +452,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@journeyID", journeyId);
                             cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
                             Tools.DebugLog(cmd);
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
                         }
                     }
                 }
@@ -498,7 +498,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@drive_duration_minutes", drive_duration_minutes);
                         Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
@@ -543,7 +543,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@consumption_kWh", consumption_kWh);
                         Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
@@ -665,7 +665,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyID);
                         Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }

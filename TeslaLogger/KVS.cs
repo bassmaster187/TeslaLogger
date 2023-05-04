@@ -66,7 +66,7 @@ ON DUPLICATE KEY UPDATE
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
                         Tools.DebugLog(cmd);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
                            )
@@ -102,7 +102,7 @@ ON DUPLICATE KEY UPDATE
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
                         Tools.DebugLog(cmd);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
                            )
@@ -138,7 +138,7 @@ ON DUPLICATE KEY UPDATE
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
                         Tools.DebugLog(cmd);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
                            )
@@ -174,7 +174,7 @@ ON DUPLICATE KEY UPDATE
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
                         Tools.DebugLog(cmd);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
                            )
@@ -210,7 +210,7 @@ ON DUPLICATE KEY UPDATE
                         cmd.Parameters.AddWithValue("@key", key);
                         cmd.Parameters.AddWithValue("@value", value);
                         Tools.DebugLog(cmd);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1 // INSERT
                             || rowsAffected == 2 // DELETE and INSERT
                            )
@@ -413,7 +413,7 @@ WHERE
     id = @key", con))
                     {
                         cmd.Parameters.AddWithValue("@id", key);
-                        int rowsAffected = SQLTracer.TraceNQ(cmd);
+                        int rowsAffected = SQLTracer.TraceNQ(cmd, out long _);
                         if (rowsAffected == 1) // DELETE
                         {
                             return SUCCESS;

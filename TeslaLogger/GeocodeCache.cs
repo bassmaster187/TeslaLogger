@@ -140,7 +140,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@lng", lng);
                         cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@address", address);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
@@ -168,7 +168,7 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now.AddDays(-days));
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
