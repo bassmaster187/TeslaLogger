@@ -181,6 +181,7 @@ Supercharger-V3 DE-Eschborn, 50.133770, 8.561050
 Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger-V3 DE-Feucht, 49.36501,11.20753
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
+Supercharger-V3 DE-Geiselwind 49.769544, 10.470236, 30
 Supercharger-V3 DE-Gelnhausen,50.188644,9.186141
 Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gensingen, 49.90202, 7.929759
@@ -189,6 +190,7 @@ Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
+Supercharger-V3 DE-Hannover, 52.423275,9.835039, 12
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
@@ -227,6 +229,7 @@ Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
 Supercharger-V3 DE-Kösching, 48.811333, 11.479899
 Supercharger-V3 DE-Lauenau, 52.279023, 9.35083
 Supercharger DE-Lauenau, 52.279023, 9.35083
+Supercharger-V3 DE-Leer, 53.25967, 7.45557, 25
 Supercharger-V3 DE-Lehre, 52.313216,10.635089
 Supercharger-V3 DE-Leipzig-Flughafen,51.401534,12.181377
 Supercharger DE-Leonberg, 48.78523, 9.01755
@@ -252,12 +255,14 @@ Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
 Supercharger DE-Nempitz, 51.290095,12.137335, 7
-Supercharger DE-Nempitz,  51.290012,12.137346, 9
+Supercharger DE-Nempitz, 51.290012,12.137346, 9
+Supercharger DE-Nempitz, 51.290155,12.137455, 4
 Supercharger DE-Neuberg, 50.18194, 9.0067
 Supercharger-V3 DE-Neumünster,54.070285,9.94136
 Supercharger DE-Nürburgring, 50.335528, 6.948887
 Supercharger-V3 DE-Nürburgring Motorsport Hotel, 50.33125646, 6.94542238
 Supercharger-V3 DE-Nossen, 51.08255, 13.27406,30
+Supercharger-V3 DE-Norden, 53.61365, 7.16718, 37
 Supercharger DE-Nossen, 51.08255, 13.27406,30
 Supercharger-V3 DE-Northeim, 51.731815, 9.972845
 Supercharger-V3 DE-Nörten-Hardenberg, 51.632847, 9.909942
@@ -337,6 +342,7 @@ Supercharger DK-Hjørring, 57.455791, 10.04227
 Supercharger-V3 DK-Ikast, 56.122196, 9.172572
 Supercharger-V3 DK-Kirke Såby,55.64015,11.830563
 Supercharger-V3 DK-Kolding,55.512661,9.462733
+Supercharger-V3 DK-Kliplev, 54.940132,9.378715, 30
 Supercharger DK-Køge, 55.489014, 12.163153
 Supercharger DK-Middelfart, 55.511311, 9.765029
 Supercharger DK-Nørre Alslev, 54.899872, 11.896921
@@ -358,6 +364,8 @@ Supercharger ES-Caldes de Malavella, 41.859029, 2.767237
 Supercharger ES-Cúllar, 37.5540305, -2.6139444
 Supercharger ES-Fuengirola, 36.580783, -4.595893
 Supercharger ES-Getafe, 40.290389, -3.696302
+Supercharger ES-Fuenlabrada, 40.2982624, -3.8208906
+Supercharger ES-Alcobendas, 40.5215749, -3.6560602
 Supercharger ES-Girona, 41.998411, 2.817295
 Supercharger ES-Granada, 37.181805, -3.928417
 Supercharger ES-Guarromán, 38.143021, -3.722848
@@ -394,6 +402,7 @@ Supercharger FI-Kokkola, 63.829282, 23.148487
 Supercharger FI-Paimio, 60.442961, 22.605621
 Supercharger FI-Pyhtää, 60.489054, 26.554835
 Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
+Supercharger-V3 Fi-Rovaniemi, 66.501765,25.723048
 Supercharger FI-Vierumäki, 61.112472,25.929927
 Supercharger LI-Schaan, 47.165317, 9.507795
 Supercharger FR-Aire de Cambarette, 43.423964, 5.99017
@@ -711,7 +720,8 @@ Supercharger NO-Bygland, 58.82792, 7.796114
 Supercharger NO-Dombås, 62.074749, 9.12783
 Supercharger NO-Eidfjord, 60.467438, 7.068209
 Supercharger NO-Eidsvoll Verk, 60.312269, 11.145104
-Supercharger NO-Elverum, 60.884053, 11.541698
+Supercharger NO-Elverum, 60.884053, 11.541698, 20
+Supercharger-V3 NO-Fauske, 67.258778,15.400971, 20
 Supercharger NO-Flå, 60.381236, 9.610003
 Supercharger NO-Gol, 60.70232, 8.9862
 Supercharger NO-Gol West, 60.697258,8.953551
@@ -725,6 +735,7 @@ Supercharger NO-Hovden, 59.561243, 7.356849
 Supercharger NO-Indre Arna, 60.421749, 5.467271
 Supercharger NO-Innhavet, 67.962417, 15.929685
 Supercharger NO-Jaren, 59.617769, 11.00302
+Supercharger-V3 NO-Karasjok, 69.471888,25.509338
 Supercharger-V3 NO-Kautokeino, 69.020412,23.048909
 Supercharger NO-Lærdal, 61.064751, 7.510658
 Supercharger NO-Lampeland, 59.836224, 9.579221
@@ -774,6 +785,7 @@ Supercharger-V3 NO-Stryn, 61.904677,6.7258
 Supercharger NO-Storjord, 66.814045, 15.401738
 Supercharger NO-Sundebru, 58.820783, 9.073746
 Supercharger NO-Sørkjosen, 69.792498, 20.93907
+Supercharger-V3 NO-Trondheim, 63.441755,10.457297
 Supercharger-V3 NO-Vestby, 59.602901,10.741182
 Supercharger NO-Vikeså, 58.631954, 6.077949
 Supercharger NO-Vinje, 59.5701306, 7.992551
@@ -1276,6 +1288,7 @@ Allego DE-Essen Messeplatz, 51.431545, 7.000548, 15
 Allego DE-Feldkirchen, 48.141049, 11.73682, 15
 Allego DE-Garten von Ehren, 53.430268, 9.935228
 Allego DE-Gateway-Gardens Frankfurt, 50.055232, 8.587298, 20
+Allego DE-Guxhagen, 51.203438,9.468539
 Allego DE-Hannover-Lahe, 52.419419, 9.832403, 10
 Allego DE-Hermsdorf McDonalds, 50.889717, 11.872576, 10
 Allego DE-Heppenheim, 49.643165, 8.624373
@@ -1309,6 +1322,8 @@ Allego DE-Quirla, 50.865762, 11.772602
 Allego FR-Avignon 162 Avenue Pierre Semard, 43.927801,4.834637
 Allego FR-Géant Casino Montpellier, 43.588535,3.888928
 Allego NL-Meerkerk,51.899809,4.982779
+Allego SE-Gävle, 60.645483,17.146225
+Allego SE-Örkelljunga, 56.285576,13.337159
 
 ARAL DE-Bensheim, 49.672869, 8.597024, 10
 ARAL DE-Bochum, 51.501513, 7.258011
@@ -1485,6 +1500,7 @@ EnBW DE-Hammersbach Langen-Bergheim West, 50.248440,8.99398, 10
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Hellweg Süd,51.593555,8.487382
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
+EnBW DE-Hildesheim Siemensstraße, 52.163101,9.972193
 EnBW DE-Hirschaid, 49.819734,11.000681
 EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
@@ -2588,6 +2604,9 @@ Lidl RO-Târgu Jiu,45.053249,23.282905
 Lidl SE-Falkenberg, 56.91611,12.502524
 Lidl SK-Komárno,47.7644999,18.0946626
 
+Ner NO-Bjerkvik, 68.550885,17.55264
+Mer NO-Tromsø, 69.67366,18.923151
+
 MOL CZ-Bělčice, 49.840839,14.813349
 MOL CZ-Velké Němčice, 49.010451,16.686846,10
 MOL CZ-Velké Meziříčí, 49.345539,16.040024
@@ -2595,6 +2614,8 @@ MOL CZ-Velké Meziříčí, 49.345539,16.040024
 NewMotion DE-Unterschleißheim,48.272108,11.591192
 
 Pfalzwerke DE-Jena Brüsseler Str. 1, 50.8768364, 11.6186009
+
+Recharge FI-Sodankylä, 67.431695,26.57509
 
 REWE DE-Bremen, 53.136455, 8.739926
 
