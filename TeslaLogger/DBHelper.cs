@@ -2571,14 +2571,6 @@ WHERE
         WHERE
             chargingstate.CarID = @CarID
             AND id = @referenceID
-    ) AND chargingstate.fast_charger_brand =(
-        SELECT
-            fast_charger_brand
-        FROM
-            chargingstate
-        WHERE
-            chargingstate.CarID = @CarID
-            AND id = @referenceID
     ) AND chargingstate.fast_charger_type =(
         SELECT
             fast_charger_type
