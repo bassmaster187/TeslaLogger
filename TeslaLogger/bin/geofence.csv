@@ -436,7 +436,8 @@ Supercharger FR-Bayonne, 43.4938044, -1.4524967
 Supercharger FR-Beaune, 47.017319, 4.83779
 Supercharger FR-Bernin, 45.265676, 5.876448
 Supercharger FR-Besançon, 47.234539, 5.901153
-Supercharger FR-Bourges, 47.049393, 2.344843
+Supercharger FR-Bourg-Achard, 49.359627, 0.817716, 30
+Supercharger FR-Bourges, 47.049393, 2.344843 
 Supercharger FR-Buchelay, 48.990144, 1.671559
 Supercharger FR-Brive-la-Gaillarde, 45.16724, 1.483119
 Supercharger FR-Bordeaux Merignac, 44.8342076, -0.6810947
@@ -1342,6 +1343,7 @@ ARAL DE-Montabaur Alleestraße 18, 50.440191, 7.830364, 10
 ARAL DE-Neuenkirchen-Vörden, 52.491559,8.0783, 10
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Schwarmstedt Autohof, 52.673543, 9.688409
+ARAL DE-Stuhr, 53.020699, 8.687762, 15
 ARAL DE-Tübingen Reutlinger Straße 72, 48.512816, 9.073854, 20
 ARAL DE-Uelzen, 52.99585, 10.539363
 ARAL DE-Wittenburg Autohof, 53.502361,11.097974
@@ -1421,6 +1423,7 @@ E.ON DE-Freiburg Raststätte Schauinsland, 48.050037, 7.810182
 E.ON DE-Geiselwind, 49.769102, 10.470809, 7
 E.ON DE-Geisenhausen, 48.555675, 11.588303, 5
 E.ON DE-Gütersloh Süd, 51.864908,8.369761
+E.ON DE-Harsum, 52.207297, 9.965906, 10
 E.ON DE-Itzehoe Finanzamt, 53.926503, 9.527315, 10
 E.ON DE-Mellrichstadt Raststätte Mellrichstädter Höhe Nord, 50.42368,10.349982
 E.ON DE-Neumünster Polizei, 54.07617, 9.96679
@@ -1501,6 +1504,7 @@ EnBW DE-Hammersbach Langen-Bergheim West, 50.248440,8.99398, 10
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Hellweg Süd,51.593555,8.487382
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
+EnBW DE-Hildesheim Albert-Einstein-Strasse, 52.15951567929753, 9.994232402647167, 30
 EnBW DE-Hildesheim Siemensstraße, 52.163101,9.972193
 EnBW DE-Hirschaid, 49.819734,11.000681
 EnBW DE-Hirschberg, 50.427867, 11.795703
