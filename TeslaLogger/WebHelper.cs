@@ -4355,7 +4355,16 @@ DESC", con))
             string resultContent = "";
             try
             {
-                string cacheKey = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
+                string cacheKey = "GetCommand_" + cmd + "_" + cacheGUID;
+                
+                string ret = MemoryCache.Default[cacheKey] as string    ;
+                if (ret != null)
+                {
+                    // Log("GetCommand Cache");
+                    return ret;
+                }
+
+                string cacheKeyNotFound = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
                 HttpClient client = GethttpclientTeslaAPI();
 
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
@@ -4365,9 +4374,13 @@ DESC", con))
 
                 if (result.IsSuccessStatusCode)
                 {
-                    MemoryCache.Default.Remove(cacheKey);
+                    MemoryCache.Default.Remove(cacheKeyNotFound);
 
                     resultContent = await result.Content.ReadAsStringAsync();
+
+                    if (cmd == "vehicle_data")
+                        MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(4));
+
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
                     _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
                     if (TeslaAPI_Commands.ContainsKey(cmd))
@@ -4402,9 +4415,9 @@ DESC", con))
                 }
                 else if (result.StatusCode == HttpStatusCode.NotFound)
                 {
-                    int HttpNotFoundCounter =  (int)(MemoryCache.Default.Get(cacheKey) ?? 0);
+                    int HttpNotFoundCounter =  (int)(MemoryCache.Default.Get(cacheKeyNotFound) ?? 0);
                     HttpNotFoundCounter++;
-                    MemoryCache.Default.Set(cacheKey, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
+                    MemoryCache.Default.Set(cacheKeyNotFound, HttpNotFoundCounter, DateTime.Now.AddMinutes(10));
 
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd +  " Retry: " + HttpNotFoundCounter);
 

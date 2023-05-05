@@ -1,3 +1,6 @@
+# Version 1.54.20
+- reduce Tesla API calls to minimum
+
 # Version 1.54.19
 - New Tesla API -> older Teslalogger versions won't work anymore!
 
