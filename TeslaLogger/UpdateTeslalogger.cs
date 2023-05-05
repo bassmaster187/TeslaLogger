@@ -258,10 +258,13 @@ namespace TeslaLogger
 
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
-                UpdatePHPini();
-                UpdateApacheConfig();
-                CreateEmptyWeatherIniFile();
-                CheckBackupCrontab();
+                _ = Task.Factory.StartNew(() =>
+                {
+                    UpdatePHPini();
+                    UpdateApacheConfig();
+                    CreateEmptyWeatherIniFile();
+                    CheckBackupCrontab();
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
             }
             catch (Exception ex)
@@ -840,7 +843,7 @@ PRIMARY KEY(id)
                             cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                             cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                             cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            SQLTracer.TraceNQ(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
                         }
                     }
                 }
@@ -1274,7 +1277,7 @@ PRIMARY KEY(id)
                                 AssertAlterDB();
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    SQLTracer.TraceNQ(cmd2);
+                                    SQLTracer.TraceNQ(cmd2, out long _);
                                 }
                             }
                         }

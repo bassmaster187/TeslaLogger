@@ -122,25 +122,33 @@ namespace TeslaLogger
 
                                 dynamic jsonResult = JsonConvert.DeserializeObject(result);
                                 if (jsonResult == null)
+                                {
                                     continue;
+                                }
 
                                 if (jsonResult.ContainsKey("data"))
                                 {
                                     dynamic data = jsonResult["data"];
                                     if (data == null)
+                                    {
                                         continue;
+                                    }
 
                                     if (data.ContainsKey("charging"))
                                     {
                                         dynamic charging = data["charging"];
                                         if (charging == null)
+                                        {
                                             continue;
+                                        }
 
                                         if (charging.ContainsKey("nearbySites"))
                                         {
                                             dynamic nearbySites = charging["nearbySites"];
                                             if (nearbySites == null)
+                                            {
                                                 continue;
+                                            }
 
                                             if (nearbySites.ContainsKey("sitesAndDistances"))
                                             {
@@ -148,6 +156,10 @@ namespace TeslaLogger
                                                 car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
 
                                                 dynamic superchargers = nearbySites["sitesAndDistances"];
+                                                if (superchargers == null)
+                                                {
+                                                    continue;
+                                                }
                                                 foreach (dynamic suc in superchargers)
                                                 {
                                                     /*
@@ -170,6 +182,10 @@ namespace TeslaLogger
                                                     {
                                                         car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
                                                         Logfile.Log(ex.ToString());
+                                                        if (ex is InvalidOperationException)
+                                                        {
+                                                            Tools.DebugLog("NearbySuCService.Work: Exception parsing " + result);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -379,7 +395,7 @@ VALUES(
                                         cmd.Parameters.AddWithValue("@ts", DateTime.Now);
                                         cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
                                         cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                        SQLTracer.TraceNQ(cmd);
+                                        SQLTracer.TraceNQ(cmd, out long _);
                                     }
                                     con.Close();
                                 }
@@ -463,7 +479,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@lat", lat);
                     cmd.Parameters.AddWithValue("@lng", lng);
-                    SQLTracer.TraceNQ(cmd);
+                    SQLTracer.TraceNQ(cmd, out long _);
                 }
                 con.Close();
             }

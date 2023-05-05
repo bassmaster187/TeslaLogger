@@ -3796,7 +3796,7 @@ namespace TeslaLogger
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@address", address);
                         cmd.Parameters.AddWithValue("@altitude", altitude);
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
 
                         System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + address);
                     }
@@ -3930,7 +3930,24 @@ namespace TeslaLogger
                 {
                     con.Open();
 
-                    using (MySqlCommand cmdBucket = new MySqlCommand(@"SELECT distinct Pos FROM chargingstate union distinct SELECT StartPos FROM drivestate union distinct SELECT EndPos FROM drivestate order by Pos desc", con))
+                    using (MySqlCommand cmdBucket = new MySqlCommand(@"
+SELECT DISTINCT
+    Pos
+FROM
+    chargingstate
+UNION DISTINCT
+SELECT
+    StartPos
+FROM
+    drivestate
+UNION DISTINCT
+SELECT
+    EndPos
+FROM
+    drivestate
+ORDER BY
+    Pos
+DESC", con))
                     {
                         var bucketdr = SQLTracer.TraceDR(cmdBucket);
                         var loop = true;
@@ -4058,7 +4075,6 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(" Exception in UpdateAllPOIAddresses: " + ex.Message);
             }
-
             return count;
         }
 
@@ -4071,9 +4087,7 @@ namespace TeslaLogger
                 {
                     cmd2.Parameters.AddWithValue("@id", id);
                     cmd2.Parameters.AddWithValue("@address", addressname);
-                    SQLTracer.TraceNQ(cmd2);
-
-
+                    SQLTracer.TraceNQ(cmd2, out long _);
                 }
             }
         }

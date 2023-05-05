@@ -1353,6 +1353,7 @@ namespace TeslaLogger
                             case "timestamp":
                                 break;
                             // bool
+                            case "auto_steering_wheel_heat":
                             case "battery_heater":
                             case "battery_heater_no_power":
                             case "is_auto_conditioning_on":
@@ -1399,6 +1400,7 @@ namespace TeslaLogger
                             case "seat_heater_rear_left":
                             case "seat_heater_rear_right":
                             case "seat_heater_right":
+                            case "steering_wheel_heat_level":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "climate_state");
