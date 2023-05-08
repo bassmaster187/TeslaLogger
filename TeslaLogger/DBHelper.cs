@@ -1815,14 +1815,14 @@ WHERE
             {
                 GetChargeCostDataFromID(
                     ChargingStateID,
-                    out ref_cost_currency,
-                    out ref_cost_per_kwh,
-                    out ref_cost_per_kwh_found,
-                    out ref_cost_per_minute,
-                    out ref_cost_per_minute_found,
-                    out ref_cost_per_session,
-                    out ref_cost_per_session_found,
-                    out freeSuC
+                    ref ref_cost_currency,
+                    ref ref_cost_per_kwh,
+                    ref ref_cost_per_kwh_found,
+                    ref ref_cost_per_minute,
+                    ref ref_cost_per_minute_found,
+                    ref ref_cost_per_session,
+                    ref ref_cost_per_session_found,
+                    ref freeSuC
                     );
             }
             else
@@ -2408,14 +2408,14 @@ LIMIT 1", con))
 
         private int GetChargeCostDataFromID(
             int ChargingStateID,
-            out string ref_cost_currency,
-            out double ref_cost_per_kwh,
-            out bool ref_cost_per_kwh_found,
-            out double ref_cost_per_minute,
-            out bool ref_cost_per_minute_found,
-            out double ref_cost_per_session,
-            out bool ref_cost_per_session_found,
-            out bool freeSuC
+            ref string ref_cost_currency,
+            ref double ref_cost_per_kwh,
+            ref bool ref_cost_per_kwh_found,
+            ref double ref_cost_per_minute,
+            ref bool ref_cost_per_minute_found,
+            ref double ref_cost_per_session,
+            ref bool ref_cost_per_session_found,
+            ref bool freeSuC
             )
         {
             int referenceID = int.MinValue;
@@ -2426,7 +2426,6 @@ LIMIT 1", con))
             ref_cost_per_minute_found = false;
             ref_cost_per_session = double.NaN;
             ref_cost_per_session_found = false;
-            double cost_freesuc_savings_total = double.NaN;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -2469,8 +2468,7 @@ WHERE
                             {
                                 ref_cost_per_minute_found = true;
                             }
-                            if (double.TryParse(dr[5].ToString(), out cost_freesuc_savings_total)
-                                && !double.IsNaN(cost_freesuc_savings_total)
+                            if (double.TryParse(dr[5].ToString(), out double cost_freesuc_savings_total)
                                 && cost_freesuc_savings_total > 0
                                 )
                             {
@@ -2496,7 +2494,6 @@ WHERE
                 Tools.DebugLog($"Exception during GetChargeCostDataFromID(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during GetChargeCostDataFromID()");
             }
-            freeSuC = false;
             return referenceID;
         }
 
