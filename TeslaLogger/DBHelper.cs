@@ -1810,6 +1810,7 @@ WHERE
             bool ref_cost_per_minute_found = false;
             double ref_cost_per_session = double.NaN;
             bool ref_cost_per_session_found = false;
+            bool freeSuC = false;
             if (fromID)
             {
                 GetChargeCostDataFromID(
@@ -1820,7 +1821,9 @@ WHERE
                     out ref_cost_per_minute,
                     out ref_cost_per_minute_found,
                     out ref_cost_per_session,
-                    out ref_cost_per_session_found);
+                    out ref_cost_per_session_found,
+                    out freeSuC
+                    );
             }
             else
             {
@@ -1842,7 +1845,8 @@ WHERE
                 ref_cost_per_minute,
                 ref_cost_per_minute_found,
                 ref_cost_per_session,
-                ref_cost_per_session_found);
+                ref_cost_per_session_found,
+                freeSuC);
         }
 
         private void UpdateChargePrice(
@@ -1853,16 +1857,52 @@ WHERE
             double ref_cost_per_minute,
             bool ref_cost_per_minute_found,
             double ref_cost_per_session,
-            bool ref_cost_per_session_found)
+            bool ref_cost_per_session_found,
+            bool freeSuC)
         {
-            if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
+            if (freeSuC)
+            {
+                // do not recalculate cost_total
+                // GetChargingHistoryV2Service will set the correct values
+                // for cost_total (0.0) and cost_freesuc_savings_total
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    cost_total = @cost_total
+WHERE
+    CarID = @CarID
+    AND id = @ChargingStateID", con))
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                            cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                            cmd.Parameters.AddWithValue("@cost_total", (double)0.0);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out long _);
+                            car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_total 0.0 (freeSuC and/or charging credits)");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+
+                    Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                }
+            }
+            else if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
                 double cost_total = double.NaN;
                 double charge_energy_added = double.NaN;
                 DateTime startDate = DateTime.MinValue;
                 DateTime endDate = DateTime.MinValue;
 
-                // read values from openChargingState
+                // read values from ChargingStateID
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -2374,7 +2414,8 @@ LIMIT 1", con))
             out double ref_cost_per_minute,
             out bool ref_cost_per_minute_found,
             out double ref_cost_per_session,
-            out bool ref_cost_per_session_found
+            out bool ref_cost_per_session_found,
+            out bool freeSuC
             )
         {
             int referenceID = int.MinValue;
@@ -2385,6 +2426,7 @@ LIMIT 1", con))
             ref_cost_per_minute_found = false;
             ref_cost_per_session = double.NaN;
             ref_cost_per_session_found = false;
+            double cost_freesuc_savings_total = double.NaN;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -2396,7 +2438,8 @@ SELECT
     chargingstate.cost_currency,
     chargingstate.cost_per_kwh,
     chargingstate.cost_per_session,
-    chargingstate.cost_per_minute
+    chargingstate.cost_per_minute,
+    chargingstate.cost_freesuc_savings_total
 FROM
     chargingstate
 WHERE
@@ -2426,6 +2469,14 @@ WHERE
                             {
                                 ref_cost_per_minute_found = true;
                             }
+                            if (double.TryParse(dr[5].ToString(), out cost_freesuc_savings_total)
+                                && !double.IsNaN(cost_freesuc_savings_total)
+                                && cost_freesuc_savings_total > 0
+                                )
+                            {
+                                Tools.DebugLog($"cost_freesuc_savings_total:{cost_freesuc_savings_total} --> freeSuC");
+                                freeSuC = true;
+                            }
                             Tools.DebugLog($"GetChargeCostDataFromID raw    {ChargingStateID}, id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
                             Tools.DebugLog($"GetChargeCostDataFromID parsed {ChargingStateID}, id:{referenceID} currency:{ref_cost_currency} cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
                             Tools.DebugLog($"GetChargeCostDataFromID bool   {ChargingStateID}, id:{referenceID} ref_cost_per_kwh_found:{ref_cost_per_kwh_found} ref_cost_per_session_found:{ref_cost_per_session_found} ref_cost_per_minute_found:{ref_cost_per_minute_found}");
@@ -2445,6 +2496,7 @@ WHERE
                 Tools.DebugLog($"Exception during GetChargeCostDataFromID(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during GetChargeCostDataFromID()");
             }
+            freeSuC = false;
             return referenceID;
         }
 
