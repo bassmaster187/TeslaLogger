@@ -232,6 +232,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/passwortinfo", System.StringComparison.Ordinal):
                         passwortinfo(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup", System.StringComparison.Ordinal):
+                        RestoreChargingCostsFromBackup1(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -2151,6 +2154,38 @@ FROM
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to, null, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
+        }
+
+        private static void RestoreChargingCostsFromBackup1(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            // handle GET request
+            // list available backup files
+            // offer upload possibility for backup file
+            List<string> fileList = new List<string>();
+            try
+            {
+                foreach (string fileName in Directory.GetFiles("/etc/teslalogger/backup", "mysqldump2023*"))
+                {
+                    // filter backups: ingore too old and newer than 2023-05-03
+                    Match m = Regex.Match(fileName, "mysqldump2023([0-9]{4})");
+                    if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                    {
+                        if (int.TryParse(m.Groups[1].Captures[0].ToString(), out int monthday)) {
+                            if (monthday < 504)
+                            {
+                                fileList.Add(fileName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+            Tools.DebugLog(string.Join(",", fileList));
+            WriteString(response, "RestoreChargingCostsFromBackup1");
         }
     }
 }
