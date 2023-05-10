@@ -19,6 +19,11 @@ using Newtonsoft.Json;
 using Ubiety.Dns.Core;
 using System.Security.Policy;
 using Newtonsoft.Json.Linq;
+using System.Web;
+using System.Net.Http;
+using System.Xml.Linq;
+using Exceptionless.Models;
+using System.Net.Http.Headers;
 
 namespace TeslaLogger
 {
@@ -235,6 +240,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup", System.StringComparison.Ordinal):
                         RestoreChargingCostsFromBackup1(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup2", System.StringComparison.Ordinal):
+                        RestoreChargingCostsFromBackup2(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -336,7 +344,59 @@ namespace TeslaLogger
             }
         }
 
-        private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
+        private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            if (request.HttpMethod == HttpMethod.Post.Method)
+            {
+                bool removeTempFile = false;
+                string fileName = string.Empty;
+                Tools.DebugLog($"content length: {request.ContentLength64}");
+                // restore from local file or uploaded file?
+                if (request.ContentLength64 < 2048)
+                {
+                    // small content, check if it's restoreFromLocalFile
+                    using (Stream stream = request.InputStream) // here we have data
+                    {
+                        using (var reader = new StreamReader(stream, request.ContentEncoding))
+                        {
+                            string body = reader.ReadToEnd();
+                            if (body.Contains("restoreFromLocalFile="))
+                            {
+                                Match m = Regex.Match(body, "restoreFromLocalFile=(.+)");
+                                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                                {
+                                    fileName = HttpUtility.UrlDecode(m.Groups[1].Captures[0].ToString());
+                                    Tools.DebugLog($"restoreFromLocalFile -> {fileName}");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // large content, read first bytes to analyze
+                    using (Stream stream = request.InputStream) // here we have data
+                    {
+                        byte[] bytes;
+                        using (BinaryReader br = new BinaryReader(stream))
+                        {
+                            bytes = br.ReadBytes((int)100);
+                            string body = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                            Tools.DebugLog($"restoreFromRemoteFile\n{body}");
+                            Tools.DebugLog(BitConverter.ToString(bytes));
+                            if (body.Contains("name=\"restoreFromRemoteFile\";"))
+                            {
+                                string boundary = string.Empty;
+                                removeTempFile = true;
+                            }
+                        }
+                    }
+                }
+            }
+            WriteString(response, "TODO");
+        }
+
+        private static void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -2166,6 +2226,13 @@ FROM
             {
                 foreach (string fileName in Directory.GetFiles("/etc/teslalogger/backup", "mysqldump2023*"))
                 {
+                    // check file
+                    FileInfo fi = new FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        // file has zero bytes
+                        continue;
+                    }
                     // filter backups: ingore too old and newer than 2023-05-03
                     Match m = Regex.Match(fileName, "mysqldump2023([0-9]{4})");
                     if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -2185,7 +2252,19 @@ FROM
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
             Tools.DebugLog(string.Join(",", fileList));
-            WriteString(response, "RestoreChargingCostsFromBackup1");
+            StringBuilder html = new StringBuilder();
+            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup</h2>");
+            if (fileList.Count > 0) {
+                html.Append("<br /><h3>available backups:</h3><br /><ul>");
+                foreach(string fileName in fileList)
+                {
+                    html.Append($@"<li>{fileName}<form action=""RestoreChargingCostsFromBackup2"" method=""POST""><input type=""hidden"" id=""restoreFromLocalFile"" name=""restoreFromLocalFile"" value=""{fileName}""><input type=""submit"" value=""Restore!""></form></li>");
+                }
+                html.Append("</ul>");
+            }
+            html.Append("upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 relesed on 2023-05-04)<form action=\"RestoreChargingCostsFromBackup2\" method=\"POST\" enctype=\"multipart/form-data\"><label for=\"restoreFromRemoteFile\">Select a file:</label><input type=\"file\" id=\"restoreFromRemoteFile\" name=\"restoreFromRemoteFile\"><input type=\"submit\" value=\"Upload and Restore!\"></form>");
+            html.Append("</body></html>");
+            WriteString(response, html.ToString());
         }
     }
 }
