@@ -24,6 +24,7 @@ using System.Net.Http;
 using System.Xml.Linq;
 using Exceptionless.Models;
 using System.Net.Http.Headers;
+using HttpMultipartParser;
 
 namespace TeslaLogger
 {
@@ -346,10 +347,12 @@ namespace TeslaLogger
 
         private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
         {
+            // receive file name or uploaded file
             if (request.HttpMethod == HttpMethod.Post.Method)
             {
-                bool removeTempFile = false;
                 string fileName = string.Empty;
+                bool removeFile = false;
+                string sqlExtract = string.Empty;
                 Tools.DebugLog($"content length: {request.ContentLength64}");
                 // restore from local file or uploaded file?
                 if (request.ContentLength64 < 2048)
@@ -374,24 +377,97 @@ namespace TeslaLogger
                 }
                 else
                 {
-                    // large content, read first bytes to analyze
-                    using (Stream stream = request.InputStream) // here we have data
+                    try
                     {
-                        byte[] bytes;
-                        using (BinaryReader br = new BinaryReader(stream))
+                        // large content, read first bytes to analyze
+                        fileName = "/etc/teslalogger/tmp/restoreFromRemoteFile.gz";
+                        if (File.Exists(fileName))
                         {
-                            bytes = br.ReadBytes((int)100);
-                            string body = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-                            Tools.DebugLog($"restoreFromRemoteFile\n{body}");
-                            Tools.DebugLog(BitConverter.ToString(bytes));
-                            if (body.Contains("name=\"restoreFromRemoteFile\";"))
+                            File.Delete(fileName);
+                        }
+                        using (Stream stream = request.InputStream) // here we have data
+                        {
+                            using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
                             {
-                                string boundary = string.Empty;
-                                removeTempFile = true;
+                                StreamingMultipartFormDataParser parser = new StreamingMultipartFormDataParser(stream);
+                                parser.FileHandler += (name, fName, type, disposition, buffer, bytes, partNumber, additionalProperties) =>
+                                {
+                                    fileStream.Write(buffer, 0, bytes);
+                                };
+                                parser.Run();
+                                removeFile = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.DebugLog(ex.ToString());
+                    }
+                }
+                // filename or file received, now check file
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    // TODO handle filename empty error
+                }
+                else if (File.Exists(fileName))
+                {
+                    // check file
+                    FileInfo fi = new FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        // TODO handle file has zero bytes error
+                    }
+                    else
+                    {
+                        // check needed command line tools
+                        if (!File.Exists("/bin/zcat"))
+                        {
+                            // TODO handle zcat missing error
+                        }
+                        else if (!File.Exists("/bin/grep"))
+                        {
+                            // TODO handle grep missing error
+                        }
+                        else if (!File.Exists("/bin/sed"))
+                        {
+                            // TODO handle sed missing error
+                        }
+                        else
+                        {
+                            // run SQL extract
+                            try
+                            {
+                                string shellScript = "/etc/teslalogger/tmp/SQLExtract.sh";
+                                sqlExtract = "/etc/teslalogger/tmp/SQLExtract.sql";
+                                if (File.Exists(shellScript))
+                                {
+                                    File.Delete(shellScript);
+                                }
+                                if (File.Exists(sqlExtract))
+                                {
+                                    File.Delete(sqlExtract);
+                                }
+                                using (StreamWriter writer = new StreamWriter(shellScript))
+                                {
+                                    writer.WriteLine($"/bin/zcat {fileName} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {sqlExtract}");
+                                }
+                                Tools.ExecMono("/bin/bash", shellScript);
+                            }
+                            catch (Exception ex)
+                            {
+
                             }
                         }
                     }
                 }
+                else
+                {
+                    // TODO handle file not found error
+                }
+            }
+            else
+            {
+                // TODO handle http method error
             }
             WriteString(response, "TODO");
         }
