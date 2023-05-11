@@ -347,129 +347,254 @@ namespace TeslaLogger
 
         private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
         {
+            string errorText = string.Empty;
+            string fileName = string.Empty;
+            bool removeFile = false;
+            string sqlExtract = string.Empty;
+            string sqlCreate = string.Empty;
             // receive file name or uploaded file
             if (request.HttpMethod == HttpMethod.Post.Method)
             {
-                string fileName = string.Empty;
-                bool removeFile = false;
-                string sqlExtract = string.Empty;
-                Tools.DebugLog($"content length: {request.ContentLength64}");
-                // restore from local file or uploaded file?
-                if (request.ContentLength64 < 2048)
-                {
-                    // small content, check if it's restoreFromLocalFile
-                    using (Stream stream = request.InputStream) // here we have data
-                    {
-                        using (var reader = new StreamReader(stream, request.ContentEncoding))
-                        {
-                            string body = reader.ReadToEnd();
-                            if (body.Contains("restoreFromLocalFile="))
-                            {
-                                Match m = Regex.Match(body, "restoreFromLocalFile=(.+)");
-                                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
-                                {
-                                    fileName = HttpUtility.UrlDecode(m.Groups[1].Captures[0].ToString());
-                                    Tools.DebugLog($"restoreFromLocalFile -> {fileName}");
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        // large content, read first bytes to analyze
-                        fileName = "/etc/teslalogger/tmp/restoreFromRemoteFile.gz";
-                        if (File.Exists(fileName))
-                        {
-                            File.Delete(fileName);
-                        }
-                        using (Stream stream = request.InputStream) // here we have data
-                        {
-                            using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
-                            {
-                                StreamingMultipartFormDataParser parser = new StreamingMultipartFormDataParser(stream);
-                                parser.FileHandler += (name, fName, type, disposition, buffer, bytes, partNumber, additionalProperties) =>
-                                {
-                                    fileStream.Write(buffer, 0, bytes);
-                                };
-                                parser.Run();
-                                removeFile = true;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Tools.DebugLog(ex.ToString());
-                    }
-                }
+                RestoreChargingCostsFromBackupReceiveFile(request, ref fileName, ref removeFile);
                 // filename or file received, now check file
-                if (string.IsNullOrEmpty(fileName))
+                if (!string.IsNullOrEmpty(fileName))
                 {
-                    // TODO handle filename empty error
+                    RestoreChargingCostsFromBackupCheckReceivedFile(ref errorText, fileName, ref sqlExtract);
                 }
-                else if (File.Exists(fileName))
+                if (string.IsNullOrEmpty(errorText))
                 {
-                    // check file
-                    FileInfo fi = new FileInfo(fileName);
-                    if (fi.Length == 0)
-                    {
-                        // TODO handle file has zero bytes error
-                    }
-                    else
-                    {
-                        // check needed command line tools
-                        if (!File.Exists("/bin/zcat"))
-                        {
-                            // TODO handle zcat missing error
-                        }
-                        else if (!File.Exists("/bin/grep"))
-                        {
-                            // TODO handle grep missing error
-                        }
-                        else if (!File.Exists("/bin/sed"))
-                        {
-                            // TODO handle sed missing error
-                        }
-                        else
-                        {
-                            // run SQL extract
-                            try
-                            {
-                                string shellScript = "/etc/teslalogger/tmp/SQLExtract.sh";
-                                sqlExtract = "/etc/teslalogger/tmp/SQLExtract.sql";
-                                if (File.Exists(shellScript))
-                                {
-                                    File.Delete(shellScript);
-                                }
-                                if (File.Exists(sqlExtract))
-                                {
-                                    File.Delete(sqlExtract);
-                                }
-                                using (StreamWriter writer = new StreamWriter(shellScript))
-                                {
-                                    writer.WriteLine($"/bin/zcat {fileName} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {sqlExtract}");
-                                }
-                                Tools.ExecMono("/bin/bash", shellScript);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
-                        }
-                    }
+                    // INSERT statement extracted successfully, now extract CREATE TABLE
+                    RestoreChargingCostsFromBackupCreateTable(ref errorText, fileName, ref sqlCreate);
                 }
-                else
+                if (string.IsNullOrEmpty(errorText))
                 {
-                    // TODO handle file not found error
+                    // both SQL files created successfully, now load into DB
+                    RestoreChargingCostsFromBackupLoadDB(ref errorText, sqlExtract, sqlCreate);
                 }
             }
             else
             {
-                // TODO handle http method error
+                errorText = $"http method error";
+            }
+            if (string.IsNullOrEmpty(errorText))
+            {
+                WriteString(response, errorText);
+                return;
             }
             WriteString(response, "TODO");
+        }
+
+        private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
+        {
+            try
+            {
+                UpdateTeslalogger.AssertAlterDB();
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                errorText = ex.ToString();
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupCreateTable(ref string errorText, string fileName, ref string sqlCreate)
+        {
+            try
+            {
+                if (DBHelper.TableExists("chargingstate_bak"))
+                {
+                    string sql1 = @"
+DROP TABLE chargingstate_bak";
+                    Logfile.Log(sql1);
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql1);
+                    Logfile.Log("DROP TABLE chargingstate_bak OK");
+                }
+                string shellScript = "/etc/teslalogger/tmp/SQLCreate.sh";
+                sqlCreate = "/etc/teslalogger/tmp/SQLCreate.sql";
+                if (File.Exists(shellScript))
+                {
+                    File.Delete(shellScript);
+                }
+                if (File.Exists(sqlCreate))
+                {
+                    File.Delete(sqlCreate);
+                }
+                using (StreamWriter writer = new StreamWriter(shellScript))
+                {
+                    writer.WriteLine($"/bin/zcat {fileName}| sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {sqlCreate}");
+                }
+                Tools.ExecMono("/bin/bash", shellScript);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                errorText = ex.ToString();
+            }
+            // check results of SQL create
+            if (!File.Exists(sqlCreate))
+            {
+                errorText = $"SQL create file <{sqlCreate}> does not exist";
+            }
+            else
+            {
+                FileInfo fi = new FileInfo(sqlCreate);
+                if (fi.Length == 0)
+                {
+                    errorText = $"SQL create file <{sqlCreate}> has zero bytes";
+                }
+                else
+                {
+                    if (!File.ReadAllText(sqlCreate).StartsWith("CREATE TABLE `chargingstate_bak`"))
+                    {
+                        errorText = $"SQL create file <{sqlCreate}> does not start with expected content";
+                    }
+                }
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupCheckReceivedFile(ref string errorText, string fileName, ref string sqlExtract)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                errorText = $"fileName is empty";
+            }
+            else if (File.Exists(fileName))
+            {
+                // check file
+                FileInfo fi = new FileInfo(fileName);
+                if (fi.Length == 0)
+                {
+                    errorText = $"file {fileName} has zero bytes";
+                }
+                else
+                {
+                    // check needed command line tools
+                    if (!File.Exists("/bin/zcat"))
+                    {
+                        errorText = $"unabled to find /bin/zcat";
+                    }
+                    else if (!File.Exists("/bin/grep"))
+                    {
+                        errorText = $"unable to find /bin/grep";
+                    }
+                    else if (!File.Exists("/bin/sed"))
+                    {
+                        errorText = $"unable to find /bin/sed";
+                    }
+                    else
+                    {
+                        // run SQL extract
+                        try
+                        {
+                            string shellScript = "/etc/teslalogger/tmp/SQLExtract.sh";
+                            sqlExtract = "/etc/teslalogger/tmp/SQLExtract.sql";
+                            if (File.Exists(shellScript))
+                            {
+                                File.Delete(shellScript);
+                            }
+                            if (File.Exists(sqlExtract))
+                            {
+                                File.Delete(sqlExtract);
+                            }
+                            using (StreamWriter writer = new StreamWriter(shellScript))
+                            {
+                                writer.WriteLine($"/bin/zcat {fileName} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {sqlExtract}");
+                            }
+                            Tools.ExecMono("/bin/bash", shellScript);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                        }
+
+                        // check results of SQL extract
+                        if (!File.Exists(sqlExtract))
+                        {
+                            errorText = $"SQL extract file <{sqlExtract}> does not exist";
+                        }
+                        else
+                        {
+                            fi = new FileInfo(sqlExtract);
+                            if (fi.Length == 0)
+                            {
+                                errorText = $"SQL extract file <{sqlExtract}> has zero bytes";
+                            }
+                            else
+                            {
+                                if (!File.ReadAllText(sqlExtract).StartsWith("INSERT INTO `chargingstate_bak` VALUES"))
+                                {
+                                    errorText = $"SQL extract file <{sqlExtract}> does not start with expected content";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                errorText = $"file <{fileName}> does not exist";
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupReceiveFile(HttpListenerRequest request, ref string fileName, ref bool removeFile)
+        {
+            Tools.DebugLog($"content length: {request.ContentLength64}");
+            // restore from local file or uploaded file?
+            if (request.ContentLength64 < 2048)
+            {
+                // small content, check if it's restoreFromLocalFile
+                using (Stream stream = request.InputStream) // here we have data
+                {
+                    using (var reader = new StreamReader(stream, request.ContentEncoding))
+                    {
+                        string body = reader.ReadToEnd();
+                        if (body.Contains("restoreFromLocalFile="))
+                        {
+                            Match m = Regex.Match(body, "restoreFromLocalFile=(.+)");
+                            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                            {
+                                fileName = HttpUtility.UrlDecode(m.Groups[1].Captures[0].ToString());
+                                Logfile.Log($"restoreFromLocalFile -> {fileName}");
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    // large content, read first bytes to analyze
+                    fileName = "/etc/teslalogger/tmp/restoreFromRemoteFile.gz";
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
+                    }
+                    using (Stream stream = request.InputStream) // here we have data
+                    {
+                        using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                        {
+                            StreamingMultipartFormDataParser parser = new StreamingMultipartFormDataParser(stream);
+                            parser.FileHandler += (name, fName, type, disposition, buffer, bytes, partNumber, additionalProperties) =>
+                            {
+                                fileStream.Write(buffer, 0, bytes);
+                            };
+                            parser.Run();
+                            removeFile = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    fileName = string.Empty;
+                }
+            }
         }
 
         private static void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
