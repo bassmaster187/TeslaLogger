@@ -25,6 +25,7 @@ using System.Xml.Linq;
 using Exceptionless.Models;
 using System.Net.Http.Headers;
 using HttpMultipartParser;
+using System.Runtime.ConstrainedExecution;
 
 namespace TeslaLogger
 {
@@ -371,6 +372,11 @@ namespace TeslaLogger
                     // both SQL files created successfully, now load into DB
                     RestoreChargingCostsFromBackupLoadDB(ref errorText, sqlExtract, sqlCreate);
                 }
+                if (string.IsNullOrEmpty(errorText))
+                {
+                    // chargingstate_bak loaded successfully
+                    RestoreChargingCostsFromBackupCompare(ref errorText);
+                }
             }
             else
             {
@@ -384,17 +390,98 @@ namespace TeslaLogger
             WriteString(response, "TODO");
         }
 
-        private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
+        private static void RestoreChargingCostsFromBackupCompare(ref string errorText)
         {
             try
             {
-                UpdateTeslalogger.AssertAlterDB();
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    StartDate,
+    EndDate,
+    Pos,
+    StartChargingID,
+    EndChargingID,
+    cost_per_session,
+    cost_per_minute
+FROM
+    chargingstate_bak
+ORDER BY
+    id ASC", con))
+                    {
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read()
+                            && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value
+                            && dr[2] != DBNull.Value
+                            && dr[3] != DBNull.Value
+                            && dr[4] != DBNull.Value
+                            && dr[5] != DBNull.Value
+                            && dr[6] != DBNull.Value
+                            && dr[7] != DBNull.Value
+                            )
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id)
+                                && DateTime.TryParse(dr[1].ToString(), out DateTime StartDate)
+                                && DateTime.TryParse(dr[2].ToString(), out DateTime EndDate)
+                                && int.TryParse(dr[3].ToString(), out int Pos)
+                                && int.TryParse(dr[4].ToString(), out int StartChargingID)
+                                && int.TryParse(dr[5].ToString(), out int EndChargingID)
+                                && double.TryParse(dr[6].ToString(), out double cost_per_session)
+                                && double.TryParse(dr[7].ToString(), out double cost_per_minute)
+                                )
+                            {
+                                Tools.DebugLog($"backup chargingstate found -> id:{id} StartDate:{StartDate} EndDate:{EndDate} Pos:{Pos} StartChargingID:{StartChargingID} EndChargingID:{EndChargingID} cost_per_session:{cost_per_session} cost_per_minute:{cost_per_minute}");
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 errorText = ex.ToString();
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
+        {
+            if (File.Exists("/usr/bin/mysql"))
+            {
+                try
+                {
+                    UpdateTeslalogger.AssertAlterDB();
+                    string shellScript = "/etc/teslalogger/tmp/SQLLoad.sh";
+                    if (File.Exists(shellScript))
+                    {
+                        File.Delete(shellScript);
+                    }
+                    using (StreamWriter writer = new StreamWriter(shellScript))
+                    {
+                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database} < {sqlCreate}");
+                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database} < {sqlExtract}");
+                    }
+                    Tools.ExecMono("/bin/bash", shellScript);
+                    if (!DBHelper.TableExists("chargingstate_bak"))
+                    {
+                        errorText = "Database table chargingstate_bak does not exist";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    errorText = ex.ToString();
+                }
+            }
+            else
+            {
+                errorText = $"unabled to find /usr/bin/mysql";
             }
         }
 
@@ -2321,14 +2408,16 @@ FROM
 
         private static void WriteString(HttpListenerResponse response, string responseString)
         {
-            response.ContentEncoding = System.Text.Encoding.UTF8;
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+            response.ContentEncoding = Encoding.UTF8;
+            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
             Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            // You must close the output stream.
-            output.Close();
+            if (output.CanWrite)
+            {
+                output.Write(buffer, 0, buffer.Length);
+                output.Close();
+            }
         }
 
         private static void Admin_GetPOI(HttpListenerRequest request, HttpListenerResponse response)
