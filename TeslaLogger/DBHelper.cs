@@ -80,7 +80,7 @@ namespace TeslaLogger
                 }
                 DBConnectionstring += "charset=utf8mb4";
             }
-            DbConnectionStringBuilder dBConnectionStringBuilder = new DbConnectionStringBuilder();
+            DbConnectionStringBuilder dBConnectionStringBuilder = new MySqlConnectionStringBuilder(DBConnectionstring);
             Database = dBConnectionStringBuilder["database"].ToString();
             User = dBConnectionStringBuilder["uid"].ToString();
             Password = dBConnectionStringBuilder["password"].ToString();
