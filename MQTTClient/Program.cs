@@ -138,7 +138,7 @@ namespace MQTTClient
                                 var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
                                 foreach(var keyvalue in topics)
                                 {
-                                    client.Publish(topic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value),
+                                    client.Publish(topic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                                 }
                             }
