@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Data.Common;
 
 namespace TeslaLogger
 {
@@ -28,6 +29,8 @@ namespace TeslaLogger
         bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
+        internal static string User = "root";
+        internal static string Password = "teslalogger";
 
         internal static string DBConnectionstring => GetDBConnectionstring();
 
@@ -77,14 +80,10 @@ namespace TeslaLogger
                 }
                 DBConnectionstring += "charset=utf8mb4";
             }
-            if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("database="))
-            {
-                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "database=(.+?);");
-                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
-                {
-                    Database = m.Groups[1].Captures[0].ToString();
-                }
-            }
+            DbConnectionStringBuilder dBConnectionStringBuilder = new DbConnectionStringBuilder();
+            Database = dBConnectionStringBuilder["database"].ToString();
+            User = dBConnectionStringBuilder["uid"].ToString();
+            Password = dBConnectionStringBuilder["password"].ToString();
             if (obfuscate && DBConnectionstring.ToLower(Tools.ciEnUS).Contains("password="))
             {
                 Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "password=(.+?);");
