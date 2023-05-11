@@ -348,6 +348,7 @@ namespace TeslaLogger
 
         private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
         {
+            Logfile.Log("RestoreChargingCostsFromBackup2");
             string errorText = string.Empty;
             string fileName = string.Empty;
             bool removeFile = false;
@@ -375,7 +376,7 @@ namespace TeslaLogger
                 if (string.IsNullOrEmpty(errorText))
                 {
                     // chargingstate_bak loaded successfully
-                    RestoreChargingCostsFromBackupCompare(ref errorText);
+                    RestoreChargingCostsFromBackupCompare(response, ref errorText);
                 }
             }
             else
@@ -390,8 +391,11 @@ namespace TeslaLogger
             WriteString(response, "TODO");
         }
 
-        private static void RestoreChargingCostsFromBackupCompare(ref string errorText)
+        private static void RestoreChargingCostsFromBackupCompare(HttpListenerResponse response, ref string errorText)
         {
+            Logfile.Log("RestoreChargingCostsFromBackupCompare");
+            StringBuilder html = new StringBuilder();
+            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup</h2>");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -420,8 +424,6 @@ ORDER BY
                             && dr[3] != DBNull.Value
                             && dr[4] != DBNull.Value
                             && dr[5] != DBNull.Value
-                            && dr[6] != DBNull.Value
-                            && dr[7] != DBNull.Value
                             )
                         {
                             if (int.TryParse(dr[0].ToString(), out int id)
@@ -429,12 +431,43 @@ ORDER BY
                                 && DateTime.TryParse(dr[2].ToString(), out DateTime EndDate)
                                 && int.TryParse(dr[3].ToString(), out int Pos)
                                 && int.TryParse(dr[4].ToString(), out int StartChargingID)
-                                && int.TryParse(dr[5].ToString(), out int EndChargingID)
-                                && double.TryParse(dr[6].ToString(), out double cost_per_session)
-                                && double.TryParse(dr[7].ToString(), out double cost_per_minute)
-                                )
+                                && int.TryParse(dr[5].ToString(), out int EndChargingID))
                             {
-                                Tools.DebugLog($"backup chargingstate found -> id:{id} StartDate:{StartDate} EndDate:{EndDate} Pos:{Pos} StartChargingID:{StartChargingID} EndChargingID:{EndChargingID} cost_per_session:{cost_per_session} cost_per_minute:{cost_per_minute}");
+                                _ = double.TryParse(dr[6].ToString(), out double cost_per_session);
+                                _ = double.TryParse(dr[7].ToString(), out double cost_per_minute);
+                                bool cost_per_session_dbnull = dr[6] == DBNull.Value;
+                                bool cost_per_minute_dbnull = dr[7] == DBNull.Value;
+                                Tools.DebugLog($"backup chargingstate found -> id:{id} StartDate:{StartDate} EndDate:{EndDate} Pos:{Pos} StartChargingID:{StartChargingID} EndChargingID:{EndChargingID} cost_per_session:{cost_per_session} cost_per_minute:{cost_per_minute} cost_per_session_dbnull:<{cost_per_session_dbnull}> cost_per_minute_dbnull:<{cost_per_minute_dbnull}>");
+                                // compare
+                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con2.Open();
+                                    using (MySqlCommand cmd2 = new MySqlCommand(@"
+SELECT
+    cost_per_session,
+    cost_per_minute
+FROM
+    chargingstate
+WHERE
+    id=@id
+    AND StartDate=@StartDate
+    AND EndDate=@EndDate
+    AND Pos=@Pos
+    AND StartChargingID=@StartChargingID
+    AND EndChargingID=@EndChargingID", con2))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@id", id);
+                                        cmd2.Parameters.AddWithValue("@StartDate", StartDate);
+                                        cmd2.Parameters.AddWithValue("@EndDate", EndDate);
+                                        cmd2.Parameters.AddWithValue("@Pos", Pos);
+                                        cmd2.Parameters.AddWithValue("@iStartChargingIDd", StartChargingID);
+                                        cmd2.Parameters.AddWithValue("@EndChargingID", EndChargingID);
+                                        MySqlDataReader dr2 = SQLTracer.TraceDR(cmd2);
+                                        while (dr.Read()) {
+                                            Tools.DebugLog($"compare <{id}> cost_per_session bak:<{cost_per_session}> db:{dr[0]} cost_per_minute bak:<{cost_per_minute}> db:<{dr[1]}>");
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -447,10 +480,16 @@ ORDER BY
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 errorText = ex.ToString();
             }
+            html.Append("</body></html>");
+            if (string.IsNullOrEmpty(errorText))
+            {
+                WriteString(response, html.ToString());
+            }
         }
 
         private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
         {
+            Logfile.Log("RestoreChargingCostsFromBackupLoadDB");
             if (File.Exists("/usr/bin/mysql"))
             {
                 try
@@ -463,8 +502,8 @@ ORDER BY
                     }
                     using (StreamWriter writer = new StreamWriter(shellScript))
                     {
-                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database} < {sqlCreate}");
-                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database} < {sqlExtract}");
+                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlCreate}");
+                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlExtract}");
                     }
                     Tools.ExecMono("/bin/bash", shellScript);
                     if (!DBHelper.TableExists("chargingstate_bak"))
@@ -487,6 +526,7 @@ ORDER BY
 
         private static void RestoreChargingCostsFromBackupCreateTable(ref string errorText, string fileName, ref string sqlCreate)
         {
+            Logfile.Log("RestoreChargingCostsFromBackupCreateTable");
             try
             {
                 if (DBHelper.TableExists("chargingstate_bak"))
@@ -544,6 +584,7 @@ DROP TABLE chargingstate_bak";
 
         private static void RestoreChargingCostsFromBackupCheckReceivedFile(ref string errorText, string fileName, ref string sqlExtract)
         {
+            Logfile.Log("RestoreChargingCostsFromBackupCheckReceivedFile");
             if (string.IsNullOrEmpty(fileName))
             {
                 errorText = $"fileName is empty";
@@ -629,6 +670,7 @@ DROP TABLE chargingstate_bak";
 
         private static void RestoreChargingCostsFromBackupReceiveFile(HttpListenerRequest request, ref string fileName, ref bool removeFile)
         {
+            Logfile.Log("RestoreChargingCostsFromBackupReceiveFile");
             Tools.DebugLog($"content length: {request.ContentLength64}");
             // restore from local file or uploaded file?
             if (request.ContentLength64 < 2048)
@@ -2508,6 +2550,7 @@ FROM
 
         private static void RestoreChargingCostsFromBackup1(HttpListenerRequest _, HttpListenerResponse response)
         {
+            Logfile.Log("RestoreChargingCostsFromBackup1");
             // handle GET request
             // list available backup files
             // offer upload possibility for backup file
