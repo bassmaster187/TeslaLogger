@@ -26,6 +26,7 @@ using Exceptionless.Models;
 using System.Net.Http.Headers;
 using HttpMultipartParser;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TeslaLogger
 {
@@ -354,15 +355,101 @@ namespace TeslaLogger
             Logfile.Log("RestoreChargingCostsFromBackup3");
             string errorText = string.Empty;
             StringBuilder html = new StringBuilder();
+            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 3 of 3</h2><br /><ul>");
             if (request.HttpMethod == HttpMethod.Post.Method)
             {
-                using (Stream stream = request.InputStream) // here we have data
+                try
                 {
-                    using (var reader = new StreamReader(stream, request.ContentEncoding))
+                    using (Stream stream = request.InputStream) // here we have data
                     {
-                        string body = reader.ReadToEnd();
-                        Tools.DebugLog(body);
+                        using (var reader = new StreamReader(stream, request.ContentEncoding))
+                        {
+                            string body = reader.ReadToEnd();
+                            // body contains key=value pairs id=id separated by &
+                            // eg 1834=1834&1835=1835
+                            var kvps = HttpUtility.ParseQueryString(body);
+                            foreach (string sID in kvps.AllKeys)
+                            {
+                                if (int.TryParse(sID, out int id))
+                                {
+                                    Tools.DebugLog($"restore id:{id}");
+                                    int CarID = int.MinValue;
+                                    // get data from chargingstate_bak
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    cost_per_minute =(
+    SELECT
+        cost_per_minute
+    FROM
+        chargingstate_bak
+    WHERE
+        id = @id
+),
+    cost_per_session =(
+    SELECT
+        cost_per_session
+    FROM
+        chargingstate_bak
+    WHERE
+        id = @id
+)WHERE
+    chargingstate.id = @id", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@id", id);
+                                            _ = SQLTracer.TraceNQ(cmd, out _);
+                                        }
+                                    }
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    CarID
+FROM
+    chargingstate
+WHERE
+    id = @id", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@id", id);
+                                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                            if (dr.Read() && dr[0] != DBNull.Value)
+                                            {
+                                                _ = int.TryParse(dr[0].ToString(), out CarID);
+                                            }
+                                        }
+                                    }
+                                    if (CarID > 0)
+                                    {
+                                        Car car = Car.GetCarByID(CarID);
+                                        if (car != null)
+                                        {
+                                            car.DbHelper.UpdateChargePrice(id, true);
+                                            html.Append($"<li>successfully updated id:{id} from backup - cost_total has been recalculated");
+                                        }
+                                        else
+                                        {
+                                            errorText += $"<br/> unable to find car for CarID:{CarID}";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errorText += $"<br/> unable to find CarID for chargingstate.id:{id}";
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    errorText = ex.ToString();
                 }
             }
             else
@@ -374,6 +461,7 @@ namespace TeslaLogger
                 WriteString(response, errorText);
                 return;
             }
+            html.Append("</ul></body></html>");
             WriteString(response, html.ToString());
         }
 

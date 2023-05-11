@@ -1800,7 +1800,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int ChargingStateID, bool fromID = false)
+        internal void UpdateChargePrice(int ChargingStateID, bool fromID = false)
         {
             string ref_cost_currency = string.Empty;
             double ref_cost_per_kwh = double.NaN;
