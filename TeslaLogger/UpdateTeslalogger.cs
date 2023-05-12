@@ -461,7 +461,7 @@ PRIMARY KEY(id)
             {
                 Logfile.Log("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL", 6000);
             }
 
             if (!DBHelper.ColumnExists("pos", "battery_level"))
