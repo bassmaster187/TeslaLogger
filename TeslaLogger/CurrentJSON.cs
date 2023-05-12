@@ -27,9 +27,13 @@ namespace TeslaLogger
 
         public int current_charger_voltage; // defaults to 0
         public int current_charger_phases; // defaults to 0
+        public int current_charger_phases_calc; // defaults to 0
         public int current_charger_actual_current; // defaults to 0
+        public int current_charge_current_request; // defaults to 0
+        public int current_charger_pilot_current; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
         public int current_charger_power; // defaults to 0
+        public int current_charger_power_calc; // defaults to 0
         public double current_charge_rate_km; // defaults to 0
         public double current_time_to_full_charge; // defaults to 0
         public bool current_charge_port_door_open; // defaults to false
@@ -163,9 +167,13 @@ namespace TeslaLogger
                    { "battery_level", current_battery_level},
                    { "charger_voltage", current_charger_voltage},
                    { "charger_phases", current_charger_phases},
+                   { "charger_phases_calc", current_charger_phases_calc },
                    { "charger_actual_current", current_charger_actual_current},
+                   { "charge_current_request", current_charge_current_request},
+                   { "charger_pilot_current", current_charger_pilot_current},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
+                   { "charger_power_calc", current_charger_power_calc},
                    { "charge_rate_km", current_charge_rate_km},
                    { "charge_port_door_open", current_charge_port_door_open },
                    { "time_to_full_charge", current_time_to_full_charge},
