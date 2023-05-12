@@ -16,17 +16,9 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
-using Ubiety.Dns.Core;
-using System.Security.Policy;
-using Newtonsoft.Json.Linq;
 using System.Web;
 using System.Net.Http;
-using System.Xml.Linq;
-using Exceptionless.Models;
-using System.Net.Http.Headers;
 using HttpMultipartParser;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace TeslaLogger
 {
@@ -355,7 +347,14 @@ namespace TeslaLogger
             Logfile.Log("RestoreChargingCostsFromBackup3");
             string errorText = string.Empty;
             StringBuilder html = new StringBuilder();
-            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 3 of 3</h2><br /><ul>");
+            html.Append(@"
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 3 of 3</h2>
+        <br />
+        <ul>");
             if (request.HttpMethod == HttpMethod.Post.Method)
             {
                 try
@@ -429,7 +428,8 @@ WHERE
                                         if (car != null)
                                         {
                                             car.DbHelper.UpdateChargePrice(id, true);
-                                            html.Append($"<li>successfully updated id:{id} from backup - cost_total has been recalculated");
+                                            html.Append($@"
+            <li>successfully updated id:{id} from backup - cost_total has been recalculated</li>");
                                         }
                                         else
                                         {
@@ -461,7 +461,10 @@ WHERE
                 WriteString(response, errorText);
                 return;
             }
-            html.Append("</ul></body></html>");
+            html.Append(@"
+        </ul>
+    </body>
+</html>");
             WriteString(response, html.ToString());
         }
 
@@ -515,7 +518,16 @@ WHERE
         {
             Logfile.Log("RestoreChargingCostsFromBackupCompare");
             int diffs = 0;
-            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 2 of 3</h2><br /><form action=\"RestoreChargingCostsFromBackup3\" method=\"POST\"><ul>");
+            html.Append(@"
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 2 of 3</h2>
+        <br />
+        <form action=""RestoreChargingCostsFromBackup3"" method=""POST"">
+            <ul>
+");
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -610,7 +622,9 @@ WHERE
                                             if (cost_per_session_diff || cost_per_minute_diff)
                                             {
                                                 diffs++;
-                                                html.Append($"<li><input type=\"checkbox\" id=\"{id}\" name=\"{id}\" value=\"{id}\">ID:{id} Start:{StartDate} End:{EndDate} diff:");
+                                                html.Append($@"
+                <li>
+                    <input type=""checkbox"" id=""{id}"" name=""{id}"" value=""{id}"">ID:{id} Start:{StartDate} End:{EndDate} diff:");
                                                 if (cost_per_session_diff)
                                                 {
                                                     html.Append($" cost_per_session DB:{(dr2[0] == DBNull.Value ? "NULL" : cost_per_session2.ToString())} Backup:{(cost_per_session_dbnull ? "NULL" : cost_per_session.ToString())}");
@@ -619,7 +633,8 @@ WHERE
                                                 {
                                                     html.Append($" cost_per_minute DB:{(dr2[1] == DBNull.Value ? "NULL" : cost_per_minute2.ToString())} Backup:{(cost_per_minute_dbnull ? "NULL" : cost_per_minute.ToString())}");
                                                 }
-                                                html.Append("</li>");
+                                                html.Append(@"
+                </li>");
                                             }
                                         }
                                     }
@@ -638,13 +653,20 @@ WHERE
             }
             if (diffs == 0)
             {
-                html.Append("<li>no differences found, nothing to do!");
+                html.Append(@"
+                <li>no differences found, nothing to do!</li>");
             }
             else
             {
-                html.Append("<input type=\"submit\" value=\"Restore!\">");
+                html.Append(@"
+                <input type=\""submit"" value=""Restore!"">");
             }
-            html.Append("</form></ul></body></html>");
+            html.Append(@"
+            </ul>
+        </form>
+    </body>
+</html>
+");
         }
 
         private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
@@ -2746,17 +2768,71 @@ FROM
             }
             Tools.DebugLog("local file list: " + string.Join(",", fileList));
             StringBuilder html = new StringBuilder();
-            html.Append("<html><head></head><body><h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 1 of 3</h2>");
+            html.Append(@"
+<html>
+    <head>
+        <script type=""text/javascript"">
+function checkform() {
+    if(document.getElementById(""restoreFromRemoteFile"").value.length < 6) {
+        alert(""please select a file"");
+        return false;
+    } else {
+        document.myForm.submit();
+    }
+}
+        </script>
+        <style
+.container-box {
+    color: white;
+    background: #666666;
+    opacity: .8;
+    width:100%;
+    height: 100%;
+    text-align:center;
+    display: none;
+}
+.overlay-box {
+    background-color:#fff;
+    width:300px;
+    display: none;
+    margin: auto;
+}
+        </style>
+    </head>
+    <body>
+        <div class=""container-box"">
+            <div class=""overlay-box"">TeslaLogger is processing your file, please be patient<br />this may take some minutes depending on the size of your backup</div>
+        </div>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 1 of 3</h2>
+");
             if (fileList.Count > 0) {
-                html.Append("<br /><h3>available backups:</h3><br /><ul>");
+                html.Append(@"
+        <br /><h3>available backups:</h3>
+        <br />
+        <ul>");
                 foreach(string fileName in fileList)
                 {
-                    html.Append($@"<li>{fileName}<form action=""RestoreChargingCostsFromBackup2"" method=""POST""><input type=""hidden"" id=""restoreFromLocalFile"" name=""restoreFromLocalFile"" value=""{fileName}""><input type=""submit"" value=""Continue with {fileName}""></form></li>");
+                    html.Append($@"
+            <li>{fileName}
+                <form action=""RestoreChargingCostsFromBackup2"" method=""POST"">
+                    <input type=""hidden"" id=""restoreFromLocalFile"" name=""restoreFromLocalFile"" value=""{fileName}"">
+                    <input type=""submit"" value=""Continue with {fileName}"">
+                </form>
+            </li>");
                 }
-                html.Append("</ul>");
+                html.Append(@"
+        </ul>");
             }
-            html.Append("upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 relesed on 2023-05-04)<form action=\"RestoreChargingCostsFromBackup2\" method=\"POST\" enctype=\"multipart/form-data\"><label for=\"restoreFromRemoteFile\">Select a file:</label><input type=\"file\" id=\"restoreFromRemoteFile\" name=\"restoreFromRemoteFile\"><input type=\"submit\" value=\"Upload and continue\"></form>");
-            html.Append("</body></html>");
+            html.Append(@"
+        upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 relesed on 2023-05-04)
+        <form name=""myForm"" action=""RestoreChargingCostsFromBackup2"" method=""POST"" enctype=""multipart/form-data"">
+            <label for=""restoreFromRemoteFile"">Select a file:</label>
+            <input type=\""file"" id=""restoreFromRemoteFile"" name=""restoreFromRemoteFile"">
+            <input type=""button"" onClick=""checkform();"" value=""Upload and continue"">
+        </form>");
+            html.Append(@"
+    </body>
+</html>");
             WriteString(response, html.ToString());
         }
     }
