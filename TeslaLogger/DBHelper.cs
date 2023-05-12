@@ -4100,6 +4100,8 @@ WHERE
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
+            int active_route_energy_at_arrival = int.MinValue;
+            _= car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -4122,7 +4124,8 @@ INSERT
         inside_temp,
         battery_heater,
         is_preconditioning,
-        sentry_mode
+        sentry_mode,
+        active_route_energy_at_arrival
     )
 VALUES(
     @CarID,
@@ -4140,7 +4143,8 @@ VALUES(
     @inside_temp,
     @battery_heater,
     @is_preconditioning,
-    @sentry_mode
+    @sentry_mode,
+    @active_route_energy_at_arrival
 )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -4208,6 +4212,16 @@ VALUES(
                     cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
                     cmd.Parameters.AddWithValue("@is_preconditioning", car.CurrentJSON.current_is_preconditioning ? 1 : 0);
                     cmd.Parameters.AddWithValue("@sentry_mode", car.CurrentJSON.current_is_sentry_mode ? 1 : 0);
+
+                    if (active_route_energy_at_arrival == int.MinValue)
+                    {
+                        cmd.Parameters.AddWithValue("@active_route_energy_at_arrival", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@active_route_energy_at_arrival", active_route_energy_at_arrival);
+                    }
+
                     SQLTracer.TraceNQ(cmd, out long _);
 
                     try

@@ -457,7 +457,13 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_pos()
         {
-            
+            if (!DBHelper.ColumnExists("pos", "active_route_energy_at_arrival"))
+            {
+                Logfile.Log("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
+            }
+
             if (!DBHelper.ColumnExists("pos", "battery_level"))
             {
                 Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
