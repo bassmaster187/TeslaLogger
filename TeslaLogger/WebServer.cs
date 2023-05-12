@@ -521,11 +521,18 @@ WHERE
             html.Append(@"
 <html>
     <head>
+        <script type=""text/javascript"">
+function checkAll() {
+    var elements = document.querySelectorAll('input[type=checkbox]')
+    for (var i = 0 ; i < elements.length ; i++) {
+        elements[i].checked = this.checked;
+    }
+}
     </head>
     <body>
         <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 2 of 3</h2>
         <br />
-        <form action=""RestoreChargingCostsFromBackup3"" method=""POST"">
+        <form name=""myForm"" action=""RestoreChargingCostsFromBackup3"" method=""POST"">
             <ul>
 ");
             try
@@ -659,7 +666,8 @@ WHERE
             else
             {
                 html.Append(@"
-                <input type=\""submit"" value=""Restore!"">");
+                select all: <input type = ""checkbox"" name=""checkAll""> onclick=""checkAll(this);""><br />
+                <input type=""submit"" value=""Restore!"">");
             }
             html.Append(@"
             </ul>
