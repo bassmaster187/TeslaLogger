@@ -25,7 +25,8 @@ namespace TeslaLogger
             CopyChargePrice,
             CombineChargingStates,
             DoNotCombineChargingStates,
-            OnChargeComplete
+            OnChargeComplete,
+            PVChargingAvailable
         }
 
         public string name;
@@ -359,6 +360,10 @@ namespace TeslaLogger
                 {
                     SpecialFlag_DNC(_addr);
                 }
+                else if (flag == "pvc")
+                {
+                    SpecialFlag_PVC(_addr);
+                }
             }
         }
 
@@ -484,6 +489,11 @@ namespace TeslaLogger
                 // default
                 _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, "RND->P");
             }
+        }
+
+        private static void SpecialFlag_PVC(Address _addr)
+        {
+            _addr.specialFlags.Add(Address.SpecialFlags.PVChargingAvailable, "");
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true, string brand = null, int maxPower = 0)
