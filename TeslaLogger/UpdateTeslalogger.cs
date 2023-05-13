@@ -156,6 +156,7 @@ namespace TeslaLogger
 
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Logfile.Log("DBIndex Update (Task) started.");
                     if (!DBHelper.IndexExists("can_ix2", "can"))
                     {
                         Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
@@ -181,14 +182,14 @@ namespace TeslaLogger
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 6000);
                     }
 
                     if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 6000);
                     }
 
                     if (DBHelper.IndexExists("idx_pos_datum", "pos"))
