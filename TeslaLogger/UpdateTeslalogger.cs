@@ -459,24 +459,9 @@ PRIMARY KEY(id)
         {
             if (!DBHelper.ColumnExists("pos", "active_route_energy_at_arrival"))
             {
-                // this may take a while and fail on large tables, so remove indexes first
-                // all indexes will be recreated later
-                if (DBHelper.IndexExists("idx_pos_CarID_id", "pos"))
-                {
-                    Logfile.Log("DROP index pos.idx_pos_CarID_id"); 
-                    AssertAlterDB();
-                    DBHelper.ExecuteSQLQuery("alter table pos drop index idx_pos_CarID_id", 600);
-                }
-
-                if (DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
-                {
-                    Logfile.Log("DROP index pos.idx_pos_CarID_datum");
-                    AssertAlterDB();
-                    DBHelper.ExecuteSQLQuery("alter table pos DROP index idx_pos_CarID_datum", 600);
-                }
                 Logfile.Log("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL", 14400);
+                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL", 60000);
             }
 
             if (!DBHelper.ColumnExists("pos", "battery_level"))
