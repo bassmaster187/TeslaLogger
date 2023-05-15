@@ -353,7 +353,8 @@ select.newJourney {width: 500px;}
         var uend = end.getTime();
         var temp = "<a href='";
         temp += url_grafana;
-        temp += "/d/";
+        temp += temp.endsWith("/") ? "" : "/";
+        temp += "d/";
         temp += uid;
         temp += "/dashboard?orgId=1&from=";
         temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "' target=\"_blank\">";
