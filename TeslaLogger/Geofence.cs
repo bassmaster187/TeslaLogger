@@ -26,7 +26,7 @@ namespace TeslaLogger
             CombineChargingStates,
             DoNotCombineChargingStates,
             OnChargeComplete,
-            PVChargingAvailable
+            TeslaLoggerWallBox
         }
 
         public string name;
@@ -360,9 +360,9 @@ namespace TeslaLogger
                 {
                     SpecialFlag_DNC(_addr);
                 }
-                else if (flag == "pvc")
+                else if (flag == "tlwb")
                 {
-                    SpecialFlag_PVC(_addr);
+                    SpecialFlag_TLWB(_addr);
                 }
             }
         }
@@ -491,9 +491,9 @@ namespace TeslaLogger
             }
         }
 
-        private static void SpecialFlag_PVC(Address _addr)
+        private static void SpecialFlag_TLWB(Address _addr)
         {
-            _addr.specialFlags.Add(Address.SpecialFlags.PVChargingAvailable, "");
+            _addr.specialFlags.Add(Address.SpecialFlags.TeslaLoggerWallBox, "");
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true, string brand = null, int maxPower = 0)
