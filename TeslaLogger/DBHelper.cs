@@ -3348,6 +3348,8 @@ WHERE
                 }
             }
 
+            int rowsUpdated = 0;
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -3364,11 +3366,14 @@ WHERE
                     cmd.Parameters.AddWithValue("@EndDate", EndDate);
                     cmd.Parameters.AddWithValue("@Pos", MaxPosId);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    SQLTracer.TraceNQ(cmd, out long _);
+                    rowsUpdated = SQLTracer.TraceNQ(cmd, out long _);
                 }
             }
 
-            Insert_active_route_energy_at_arrival(MaxPosId); ;
+            if (rowsUpdated > 0)
+            {
+                Insert_active_route_energy_at_arrival(MaxPosId);
+            }
 
             if (StartPos != 0)
             {
@@ -3840,7 +3845,18 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos and CarID=@CarID", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    avg(outside_temp) as outside_temp_avg,
+    max(speed) as speed_max,
+    max(power) as power_max,
+    min(power) as power_min,
+    avg(power) as power_avg
+FROM
+    pos
+WHERE
+    id BETWEEN @startpos AND @endpos
+    AND CarID=@CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@startpos", startPos);
                         cmd.Parameters.AddWithValue("@endpos", endPos);
@@ -3852,7 +3868,18 @@ WHERE
                             using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
                             {
                                 con2.Open();
-                                using (MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2))
+                                using (MySqlCommand cmd2 = new MySqlCommand(@"
+UPDATE
+    drivestate
+SET
+    outside_temp_avg  = @outside_temp_avg,
+    speed_max = @speed_max,
+    power_max = @power_max,
+    power_min = @power_min,
+    power_avg = @power_avg
+WHERE
+    StartPos = @StartPos
+    AND EndPos = @EndPos  ", con2))
                                 {
                                     cmd2.Parameters.AddWithValue("@StartPos", startPos);
                                     cmd2.Parameters.AddWithValue("@EndPos", endPos);
@@ -3874,7 +3901,13 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @startpos", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id = @startpos", con))
                     {
                         cmd.Parameters.AddWithValue("@startpos", startPos);
 
@@ -3886,7 +3919,19 @@ WHERE
                                 DateTime dt1 = (DateTime)dr["Datum"];
                                 dr.Close();
 
-                                using (MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id asc limit 1", con))
+                                using (MySqlCommand cmd2 = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id > @startPos
+    AND ideal_battery_range_km IS NOT NULL
+    AND battery_level IS BOT NULL
+    AND CarID = @CarID
+ORDER BY
+    id ASC
+LIMIT 1", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@startPos", startPos);
                                     cmd2.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -3904,7 +3949,14 @@ WHERE
                                         {
                                             dr.Close();
 
-                                            using (var cmd3 = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @startPos", con))
+                                            using (var cmd3 = new MySqlCommand(@"
+UPDATE
+    pos
+SET
+    ideal_battery_range_km = @ideal_battery_range_km,
+    battery_level = @battery_level
+WHERE
+    id = @startPos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@startPos", startPos);
                                                 cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
@@ -3930,7 +3982,13 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @endpos", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id = @endpos", con))
                     {
                         cmd.Parameters.AddWithValue("@endpos", endPos);
 
@@ -3942,7 +4000,19 @@ WHERE
                                 DateTime dt1 = (DateTime)dr["Datum"];
                                 dr.Close();
 
-                                using (var cmd2 = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id desc limit 1", con))
+                                using (var cmd2 = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id < @endpos
+    AND ideal_battery_range_km IS NOT NULL
+    AND battery_level IS NOT NULL
+    AND CarID = @CarID
+ORDER BY
+    id DESC
+LIMIT 1", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@endpos", endPos);
                                     cmd2.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -3960,7 +4030,14 @@ WHERE
                                         {
                                             dr.Close();
 
-                                            using (var cmd3 = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @endpos", con))
+                                            using (var cmd3 = new MySqlCommand(@"
+UPDATE
+    pos
+SET
+    ideal_battery_range_km = @ideal_battery_range_km,
+    battery_level = @battery_level
+WHERE
+    id = @endpos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@endpos", endPos);
                                                 cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
