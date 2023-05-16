@@ -62,6 +62,7 @@ namespace TeslaLogger
             }
         }
 
+        public bool IsTLWB { get; set; }
         public bool IsCharger { get; set; }
         public bool NoSleep { get; set; }
 
@@ -336,6 +337,10 @@ namespace TeslaLogger
                     _addr.IsCharger = true;
                     _addr.name = "\uD83D\uDD0C " + _addr.name;
                 }
+                else if (flag == "tlwb")
+                {
+                    _addr.IsTLWB = true;
+                }
                 else if (flag.StartsWith("occ", StringComparison.Ordinal))
                 {
                     SpecialFlag_OCC(_addr, flag);
@@ -359,10 +364,6 @@ namespace TeslaLogger
                 else if (flag == "dnc")
                 {
                     SpecialFlag_DNC(_addr);
-                }
-                else if (flag == "tlwb")
-                {
-                    SpecialFlag_TLWB(_addr);
                 }
             }
         }
@@ -489,11 +490,6 @@ namespace TeslaLogger
                 // default
                 _addr.specialFlags.Add(Address.SpecialFlags.OpenChargePort, "RND->P");
             }
-        }
-
-        private static void SpecialFlag_TLWB(Address _addr)
-        {
-            _addr.specialFlags.Add(Address.SpecialFlags.TeslaLoggerWallBox, "");
         }
 
         public Address GetPOI(double lat, double lng, bool logDistance = true, string brand = null, int maxPower = 0)
