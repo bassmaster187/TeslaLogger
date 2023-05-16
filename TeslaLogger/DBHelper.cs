@@ -4096,12 +4096,11 @@ WHERE
             car.CurrentJSON.CreateCurrentJSON();
         }
 
+        int last_active_route_energy_at_arrival = int.MinValue;
 
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
             double? inside_temp = car.CurrentJSON.current_inside_temperature;
-            int active_route_energy_at_arrival = int.MinValue;
-            _= car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -4213,7 +4212,9 @@ VALUES(
 
                     SQLTracer.TraceNQ(cmd, out long posID);
 
-                    if (active_route_energy_at_arrival > 0)
+                    int active_route_energy_at_arrival = int.MinValue;
+                    _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
+                    if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
                     {
                         _ = Task.Factory.StartNew(() =>
                         {
@@ -4234,6 +4235,7 @@ VALUES (
                                     SQLTracer.TraceNQ(cmd2, out long _);
                                 }
                             }
+                            last_active_route_energy_at_arrival = active_route_energy_at_arrival;
                         }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
                     }
 
