@@ -93,7 +93,9 @@ namespace TeslaLogger
                 KVS.CheckSchema();
                 DBHelper.EnableUTF8mb4();
 
-                CheckDBCharset();                
+                CheckDBCharset();
+
+                CheckDBSchema_areaa();
 
                 CheckDBSchema_can();
 
@@ -294,6 +296,16 @@ namespace TeslaLogger
             }
         }
 
+        private static void CheckDBSchema_areaa()
+        {
+            if (!DBHelper.TableExists("active_route_energy_at_arrival"))
+            {
+                Logfile.Log("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
+            }
+        }
+
         internal static void AssertAlterDB()
         {
             // make sure there is enough disk space available for temp tables
@@ -458,13 +470,6 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_pos()
         {
-            if (!DBHelper.ColumnExists("pos", "active_route_energy_at_arrival"))
-            {
-                Logfile.Log("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL");
-                AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN active_route_energy_at_arrival INT NULL DEFAULT NULL", 60000);
-            }
-
             if (!DBHelper.ColumnExists("pos", "battery_level"))
             {
                 Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");

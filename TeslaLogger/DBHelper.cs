@@ -4124,8 +4124,7 @@ INSERT
         inside_temp,
         battery_heater,
         is_preconditioning,
-        sentry_mode,
-        active_route_energy_at_arrival
+        sentry_mode
     )
 VALUES(
     @CarID,
@@ -4143,8 +4142,7 @@ VALUES(
     @inside_temp,
     @battery_heater,
     @is_preconditioning,
-    @sentry_mode,
-    @active_route_energy_at_arrival
+    @sentry_mode
 )", con))
                 {
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -4213,16 +4211,31 @@ VALUES(
                     cmd.Parameters.AddWithValue("@is_preconditioning", car.CurrentJSON.current_is_preconditioning ? 1 : 0);
                     cmd.Parameters.AddWithValue("@sentry_mode", car.CurrentJSON.current_is_sentry_mode ? 1 : 0);
 
-                    if (active_route_energy_at_arrival == int.MinValue)
-                    {
-                        cmd.Parameters.AddWithValue("@active_route_energy_at_arrival", DBNull.Value);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@active_route_energy_at_arrival", active_route_energy_at_arrival);
-                    }
+                    SQLTracer.TraceNQ(cmd, out long posID);
 
-                    SQLTracer.TraceNQ(cmd, out long _);
+                    if (active_route_energy_at_arrival > 0)
+                    {
+                        _ = Task.Factory.StartNew(() =>
+                        {
+                            using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                            {
+                                con2.Open();
+                                using (MySqlCommand cmd2 = new MySqlCommand(@"
+INSERT INTO active_route_energy_at_arrival (
+    posID,
+    val
+)
+VALUES (
+    @posID,
+    @val", con2))
+                                {
+                                    cmd2.Parameters.AddWithValue("@posID", posID);
+                                    cmd2.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
+                                    SQLTracer.TraceNQ(cmd2, out long _);
+                                }
+                            }
+                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    }
 
                     try
                     {
