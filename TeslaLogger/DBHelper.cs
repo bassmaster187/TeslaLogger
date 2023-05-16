@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -3367,6 +3368,8 @@ WHERE
                 }
             }
 
+            Insert_active_route_energy_at_arrival(MaxPosId); ;
+
             if (StartPos != 0)
             {
                 UpdateDriveStatistics(StartPos, MaxPosId);
@@ -4069,18 +4072,21 @@ WHERE
         {
             // driving means that charging must be over
             UpdateUnplugDate();
+            int posID = GetMaxPosid();
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
                 {
                     cmd.Parameters.AddWithValue("@StartDate", now);
-                    cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                    cmd.Parameters.AddWithValue("@Pos", posID);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
                     SQLTracer.TraceNQ(cmd, out long _);
                 }
             }
+
+            Insert_active_route_energy_at_arrival(posID);
 
             car.CurrentJSON.current_driving = true;
             car.CurrentJSON.current_charge_energy_added = 0;
@@ -4212,32 +4218,7 @@ VALUES(
 
                     SQLTracer.TraceNQ(cmd, out long posID);
 
-                    int active_route_energy_at_arrival = int.MinValue;
-                    _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
-                    if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
-                    {
-                        _ = Task.Factory.StartNew(() =>
-                        {
-                            using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
-                            {
-                                con2.Open();
-                                using (MySqlCommand cmd2 = new MySqlCommand(@"
-INSERT INTO active_route_energy_at_arrival (
-    posID,
-    val
-)
-VALUES (
-    @posID,
-    @val", con2))
-                                {
-                                    cmd2.Parameters.AddWithValue("@posID", posID);
-                                    cmd2.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
-                                    SQLTracer.TraceNQ(cmd2, out long _);
-                                }
-                            }
-                            last_active_route_energy_at_arrival = active_route_energy_at_arrival;
-                        }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-                    }
+                    Insert_active_route_energy_at_arrival(posID);
 
                     try
                     {
@@ -4279,6 +4260,36 @@ VALUES (
             }
 
             car.CurrentJSON.CreateCurrentJSON();
+        }
+
+        private void Insert_active_route_energy_at_arrival(long posID)
+        {
+            int active_route_energy_at_arrival = int.MinValue;
+            _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
+            if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
+            {
+                _ = Task.Factory.StartNew(() =>
+                {
+                    using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                    {
+                        con2.Open();
+                        using (MySqlCommand cmd2 = new MySqlCommand(@"
+INSERT INTO active_route_energy_at_arrival (
+    posID,
+    val
+)
+VALUES (
+    @posID,
+    @val", con2))
+                        {
+                            cmd2.Parameters.AddWithValue("@posID", posID);
+                            cmd2.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
+                            SQLTracer.TraceNQ(cmd2, out long _);
+                        }
+                    }
+                    last_active_route_energy_at_arrival = active_route_energy_at_arrival;
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            }
         }
 
         public void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel)
