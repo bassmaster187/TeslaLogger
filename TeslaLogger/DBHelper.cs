@@ -4264,29 +4264,35 @@ VALUES(
 
         private void Insert_active_route_energy_at_arrival(long posID)
         {
+            Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID})");
             int active_route_energy_at_arrival = int.MinValue;
             _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
+            Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival}");
+            Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival}");
             if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
             {
                 _ = Task.Factory.StartNew(() =>
                 {
-                    using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
-                        con2.Open();
-                        using (MySqlCommand cmd2 = new MySqlCommand(@"
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT INTO active_route_energy_at_arrival (
     posID,
     val
 )
 VALUES (
     @posID,
-    @val", con2))
+    @val", con))
                         {
-                            cmd2.Parameters.AddWithValue("@posID", posID);
-                            cmd2.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
-                            SQLTracer.TraceNQ(cmd2, out long _);
+                            cmd.Parameters.AddWithValue("@posID", posID);
+                            cmd.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
+                            Tools.DebugLog(cmd);
+                            SQLTracer.TraceNQ(cmd, out long _);
                         }
                     }
+                    Tools.DebugLog($"active_route_energy_at_arrival2: {active_route_energy_at_arrival}");
+                    Tools.DebugLog($"last_active_route_energy_at_arrival2: {last_active_route_energy_at_arrival}");
                     last_active_route_energy_at_arrival = active_route_energy_at_arrival;
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
