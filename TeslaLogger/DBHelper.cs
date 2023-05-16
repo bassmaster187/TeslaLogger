@@ -1208,7 +1208,7 @@ WHERE
                     // check if DoNotCombineChargingStates is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
                     {
-                        Logfile.Log($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
+                        car.Log($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
                         doCombine = false;
                     }
                 }
@@ -1219,7 +1219,7 @@ WHERE
         internal void CombineChangingStates()
         {
             // find candidates to combine
-            Logfile.Log("CombineChangingStates start");
+            car.Log("CombineChangingStates start");
             int t = Environment.TickCount;
             // find chargingstates with exactly the same odometer -> car did no move between charging states
             Queue<int> combineCandidates = FindCombineCandidates();
@@ -1295,7 +1295,7 @@ WHERE
                     UpdateMaxChargerPower(maxID);
                 }
             }
-            Logfile.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
+            car.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
         }
 
         private Tuple<int, DateTime, DateTime> GetStartEndFromCharginState(int id)
