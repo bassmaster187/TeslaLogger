@@ -522,12 +522,13 @@ WHERE
 <html>
     <head>
         <script type=""text/javascript"">
-function checkAll() {
+function checkAll(cb) {
     var elements = document.querySelectorAll('input[type=checkbox]')
     for (var i = 0 ; i < elements.length ; i++) {
-        elements[i].checked = this.checked;
+        elements[i].checked = cb.checked;
     }
 }
+        </script>
     </head>
     <body>
         <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 2 of 3</h2>
@@ -666,7 +667,7 @@ WHERE
             else
             {
                 html.Append(@"
-                select all: <input type = ""checkbox"" name=""checkAll""> onclick=""checkAll(this);""><br />
+                select all: <input type = ""checkbox"" name=""checkBoxCheckAll"" onclick=""checkAll(this);""><br />
                 <input type=""submit"" value=""Restore!"">");
             }
             html.Append(@"
@@ -685,6 +686,10 @@ WHERE
                 try
                 {
                     UpdateTeslalogger.AssertAlterDB();
+                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                    {
+                        Directory.CreateDirectory("/etc/teslalogger/tmp");
+                    }
                     string shellScript = "/etc/teslalogger/tmp/SQLLoad.sh";
                     if (File.Exists(shellScript))
                     {
@@ -692,8 +697,8 @@ WHERE
                     }
                     using (StreamWriter writer = new StreamWriter(shellScript))
                     {
-                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlCreate}");
-                        writer.WriteLine($"/usr/bin/mysql -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlExtract}");
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlCreate}");
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlExtract}");
                     }
                     Tools.ExecMono("/bin/bash", shellScript);
                     if (!DBHelper.TableExists("chargingstate_bak"))
@@ -728,6 +733,10 @@ DROP TABLE chargingstate_bak";
                     DBHelper.ExecuteSQLQuery(sql1);
                     Logfile.Log("DROP TABLE chargingstate_bak OK");
                 }
+                if (!Directory.Exists("/etc/teslalogger/tmp"))
+                {
+                    Directory.CreateDirectory("/etc/teslalogger/tmp");
+                }
                 string shellScript = "/etc/teslalogger/tmp/SQLCreate.sh";
                 sqlCreate = "/etc/teslalogger/tmp/SQLCreate.sql";
                 if (File.Exists(shellScript))
@@ -740,7 +749,7 @@ DROP TABLE chargingstate_bak";
                 }
                 using (StreamWriter writer = new StreamWriter(shellScript))
                 {
-                    writer.WriteLine($"/bin/zcat {fileName}| sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {sqlCreate}");
+                    writer.WriteLine($"/bin/zcat {fileName} | sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {sqlCreate}");
                 }
                 Tools.ExecMono("/bin/bash", shellScript);
             }
@@ -807,6 +816,10 @@ DROP TABLE chargingstate_bak";
                         // run SQL extract
                         try
                         {
+                            if (!Directory.Exists("/etc/teslalogger/tmp"))
+                            {
+                                Directory.CreateDirectory("/etc/teslalogger/tmp");
+                            }
                             string shellScript = "/etc/teslalogger/tmp/SQLExtract.sh";
                             sqlExtract = "/etc/teslalogger/tmp/SQLExtract.sql";
                             if (File.Exists(shellScript))
@@ -2780,18 +2793,22 @@ FROM
 <html>
     <head>
         <script type=""text/javascript"">
+function showDiv() {
+    document.getElementsByClassName(""container-box"")[0].style.display = ""block"";
+    document.getElementsByClassName(""overlay-box"")[0].style.display = ""block"";
+}
 function checkform() {
     if(document.getElementById(""restoreFromRemoteFile"").value.length < 6) {
         alert(""please select a file"");
         return false;
     } else {
+        showDiv();
         document.myForm.submit();
     }
 }
         </script>
-        <style
+        <style>
 .container-box {
-    color: white;
     background: #666666;
     opacity: .8;
     width:100%;
@@ -2801,7 +2818,7 @@ function checkform() {
 }
 .overlay-box {
     background-color:#fff;
-    width:300px;
+    width:480px;
     display: none;
     margin: auto;
 }
@@ -2809,7 +2826,7 @@ function checkform() {
     </head>
     <body>
         <div class=""container-box"">
-            <div class=""overlay-box"">TeslaLogger is processing your file, please be patient<br />this may take some minutes depending on the size of your backup</div>
+            <div class=""overlay-box"">TeslaLogger is processing your file, please be patient<br /><br />this may take some minutes depending on the size of your backup</div>
         </div>
         <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 1 of 3</h2>
 ");
@@ -2824,7 +2841,7 @@ function checkform() {
             <li>{fileName}
                 <form action=""RestoreChargingCostsFromBackup2"" method=""POST"">
                     <input type=""hidden"" id=""restoreFromLocalFile"" name=""restoreFromLocalFile"" value=""{fileName}"">
-                    <input type=""submit"" value=""Continue with {fileName}"">
+                    <input type=""submit"" onClick=""showDiv();"" value=""Continue with {fileName}"">
                 </form>
             </li>");
                 }
@@ -2832,7 +2849,7 @@ function checkform() {
         </ul>");
             }
             html.Append(@"
-        upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 relesed on 2023-05-04)
+        upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 released on 2023-05-04)
         <form name=""myForm"" action=""RestoreChargingCostsFromBackup2"" method=""POST"" enctype=""multipart/form-data"">
             <label for=""restoreFromRemoteFile"">Select a file:</label>
             <input type=\""file"" id=""restoreFromRemoteFile"" name=""restoreFromRemoteFile"">
