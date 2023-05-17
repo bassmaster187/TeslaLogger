@@ -3435,6 +3435,7 @@ WHERE
                     {
                         da.SelectCommand.Parameters.AddWithValue("@startPos", startPosId);
                         da.SelectCommand.Parameters.AddWithValue("@maxPosId", endPosId);
+                        da.SelectCommand.CommandTimeout = 600;
                         SQLTracer.TraceDA(dt, da);
 
                         int x = 0;
