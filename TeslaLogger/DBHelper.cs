@@ -3481,9 +3481,13 @@ WHERE
                             catch (Exception ex)
                             {
                                 if (car != null)
+                                {
                                     car.CreateExceptionlessClient(ex).Submit();
+                                }
                                 else
+                                {
                                     ex.ToExceptionless().FirstCarUserID().Submit();
+                                }
 
                                 Logfile.ExceptionWriter(ex, sql ?? "NULL");
                             }
@@ -3494,7 +3498,14 @@ WHERE
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).Submit();
+                if (car != null)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                }
+                else
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                }
 
                 Logfile.ExceptionWriter(ex, inhalt);
                 Logfile.Log(ex.ToString());
@@ -4344,12 +4355,14 @@ VALUES(
             Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID})");
             int active_route_energy_at_arrival = int.MinValue;
             _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
-            Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival}");
-            Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival}");
+            Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} >0: {(active_route_energy_at_arrival > 0)}");
+            Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
             if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
             {
+                Tools.DebugLog("create SQL Task");
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Tools.DebugLog("inside SQL Task");
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                     {
                         con.Open();
@@ -4371,7 +4384,7 @@ VALUES (
                     Tools.DebugLog($"active_route_energy_at_arrival2: {active_route_energy_at_arrival}");
                     Tools.DebugLog($"last_active_route_energy_at_arrival2: {last_active_route_energy_at_arrival}");
                     last_active_route_energy_at_arrival = active_route_energy_at_arrival;
-                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
             }
         }
 
