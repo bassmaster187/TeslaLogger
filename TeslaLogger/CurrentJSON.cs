@@ -40,7 +40,6 @@ namespace TeslaLogger
         public bool current_charge_port_door_open; // defaults to false
         public string current_charger_brand = "";
         public bool current_charger_present; // defaults to false
-        public int current_charge_limit_soc;
 
         public string current_car_version = "";
 
@@ -189,7 +188,6 @@ namespace TeslaLogger
                    { "charger_phases_calc", current_charger_phases_calc },
                    { "charger_actual_current", current_charger_actual_current},
                    { "charge_current_request", current_charge_current_request},
-                   { "charge_limit_soc", current_charge_limit_soc },
                    { "charger_pilot_current", current_charger_pilot_current},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},

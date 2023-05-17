@@ -46,7 +46,7 @@ namespace TeslaLogger
             }
         }
 
-        internal virtual void setPower(string charger_power, string charge_energy_added, string battery_level)
+        internal virtual void setPower(int charger_power, string charge_energy_added, string battery_level)
         {
             
         }

@@ -83,6 +83,11 @@ namespace TeslaLogger
 
                 client.Publish(t, charging ? msg1 : msg0);
                 client.Publish($"openWB/set/lp/{LP}/chargeStat", charging ? msg1 : msg0);
+
+                if (!charging)
+                {
+                    SendWatt(0);
+                }
             }
             catch (Exception ex) { Log(ex.ToString()); }
         }
@@ -98,19 +103,26 @@ namespace TeslaLogger
             catch (Exception ex) { Log(ex.ToString()); }
         }
 
-        internal override void setPower(string charger_power, string charge_energy_added, string battery_level)
+        internal override void setPower(int charger_power, string charge_energy_added, string battery_level)
         {
             try
             {
                 base.setPower(charger_power, charge_energy_added, battery_level);
 
-                int Watt = int.Parse(charger_power) * 1000;
+                SendWatt(charger_power);
 
-                byte[] W = Encoding.ASCII.GetBytes(Watt.ToString());
                 byte[] kWh = Encoding.ASCII.GetBytes(charge_energy_added);
-
-                client.Publish($"openWB/set/lp/{LP}/W", W);
                 client.Publish($"openWB/set/lp/{LP}/kWhCounter", kWh);
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        void SendWatt(int Watt)
+        {
+            try
+            {
+                byte[] W = Encoding.ASCII.GetBytes(Watt.ToString());
+                client.Publish($"openWB/set/lp/{LP}/W", W);
             }
             catch (Exception ex) { Log(ex.ToString()); }
         }
