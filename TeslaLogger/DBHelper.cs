@@ -4353,39 +4353,40 @@ VALUES(
 
         private void Insert_active_route_energy_at_arrival(long posID, bool force = false)
         {
-            Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID})");
+            Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID}, force:{force})");
             int active_route_energy_at_arrival = int.MinValue;
-            _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
-            Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} >0: {(active_route_energy_at_arrival > 0)}");
-            Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
-            if (
-                    (active_route_energy_at_arrival > 0
-                    && last_active_route_energy_at_arrival != active_route_energy_at_arrival
-                    )
-               || force)
+            if (force)
             {
-                Tools.DebugLog("create SQL Task");
-                _ = Task.Factory.StartNew(() =>
+                last_active_route_energy_at_arrival = -1;
+            }
+            if (car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival))
+            {
+                Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} >0: {(active_route_energy_at_arrival > 0)}");
+                Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
+                if (active_route_energy_at_arrival > 0
+                    && last_active_route_energy_at_arrival != active_route_energy_at_arrival
+                   )
                 {
-                    Tools.DebugLog("inside SQL Task");
                     try
                     {
                         using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                         {
                             con.Open();
                             using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT active_route_energy_at_arrival (
+INSERT active_route_energy_at_arrival
+(
     posID,
     val
 )
 VALUES (
     @posID,
-    @val", con))
+    @val
+)", con))
                             {
                                 cmd.Parameters.AddWithValue("@posID", posID);
                                 cmd.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
                                 Tools.DebugLog(cmd);
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                _ = SQLTracer.TraceNQ(cmd, out long _);
                             }
                         }
                     }
@@ -4397,7 +4398,7 @@ VALUES (
                     Tools.DebugLog($"active_route_energy_at_arrival2: {active_route_energy_at_arrival}");
                     Tools.DebugLog($"last_active_route_energy_at_arrival2: {last_active_route_energy_at_arrival}");
                     last_active_route_energy_at_arrival = active_route_energy_at_arrival;
-                }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                }
             }
         }
 
