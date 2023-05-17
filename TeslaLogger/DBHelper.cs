@@ -3372,7 +3372,7 @@ WHERE
 
             if (rowsUpdated > 0)
             {
-                Insert_active_route_energy_at_arrival(MaxPosId);
+                Insert_active_route_energy_at_arrival(MaxPosId, true);
             }
 
             if (StartPos != 0)
@@ -4175,7 +4175,7 @@ WHERE
                 }
             }
 
-            Insert_active_route_energy_at_arrival(posID);
+            Insert_active_route_energy_at_arrival(posID, true);
 
             car.CurrentJSON.current_driving = true;
             car.CurrentJSON.current_charge_energy_added = 0;
@@ -4351,14 +4351,18 @@ VALUES(
             car.CurrentJSON.CreateCurrentJSON();
         }
 
-        private void Insert_active_route_energy_at_arrival(long posID)
+        private void Insert_active_route_energy_at_arrival(long posID, bool force = false)
         {
             Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID})");
             int active_route_energy_at_arrival = int.MinValue;
             _ = car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival);
             Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} >0: {(active_route_energy_at_arrival > 0)}");
             Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
-            if (active_route_energy_at_arrival > 0 && last_active_route_energy_at_arrival != active_route_energy_at_arrival)
+            if (
+                    (active_route_energy_at_arrival > 0
+                    && last_active_route_energy_at_arrival != active_route_energy_at_arrival
+                    )
+               || force)
             {
                 Tools.DebugLog("create SQL Task");
                 _ = Task.Factory.StartNew(() =>
