@@ -1355,6 +1355,7 @@ namespace TeslaLogger
                 if (resultContent == INSERVICE)
                 {
                     System.Threading.Thread.Sleep(10000);
+                    car.solarChargingBase?.Charging(false);
                     return false;
                 }
 
@@ -1509,10 +1510,13 @@ namespace TeslaLogger
                         {
                             car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
                         }
+
+                        car.solarChargingBase?.Charging(true);
                         return double.TryParse(charger_power, out double dPowerkW) && dPowerkW >= 1.0;
                     }
                     else
                     {
+                        car.solarChargingBase?.Charging(false);
                         return false;
                     }
                 }
@@ -1523,6 +1527,9 @@ namespace TeslaLogger
 
                     lastCharging_State = charging_state;
                     car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+
+                    car.solarChargingBase?.setPower(charger_power, charge_energy_added, battery_level);
+                    car.solarChargingBase?.Charging(true);
                     return true;
                 }
                 else if (charging_state == "Complete")
@@ -1558,10 +1565,12 @@ namespace TeslaLogger
 
                 if (lastCharging_State == "Charging" && !justCheck)
                 {
+                    car.solarChargingBase?.Charging(true);
                     return true;
                 }
             }
 
+            car.solarChargingBase?.Charging(false);
             return false;
         }
 
