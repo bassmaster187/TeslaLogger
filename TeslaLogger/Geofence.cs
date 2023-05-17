@@ -25,7 +25,8 @@ namespace TeslaLogger
             CopyChargePrice,
             CombineChargingStates,
             DoNotCombineChargingStates,
-            OnChargeComplete
+            OnChargeComplete,
+            TeslaLoggerWallBox
         }
 
         public string name;
@@ -61,6 +62,7 @@ namespace TeslaLogger
             }
         }
 
+        public bool IsTLWB { get; set; }
         public bool IsCharger { get; set; }
         public bool NoSleep { get; set; }
 
@@ -334,6 +336,10 @@ namespace TeslaLogger
                 {
                     _addr.IsCharger = true;
                     _addr.name = "\uD83D\uDD0C " + _addr.name;
+                }
+                else if (flag == "tlwb")
+                {
+                    _addr.IsTLWB = true;
                 }
                 else if (flag.StartsWith("occ", StringComparison.Ordinal))
                 {

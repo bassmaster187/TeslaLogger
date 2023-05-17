@@ -4506,6 +4506,11 @@ VALUES(
                 car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
+                car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_pilot_current = Convert.ToInt32(charger_pilot_current, Tools.ciEnUS);
+                double phases = (car.CurrentJSON.current_charger_power * 1000 + 500) / car.CurrentJSON.current_charger_voltage / car.CurrentJSON.current_charger_actual_current;
+                car.CurrentJSON.current_charger_phases_calc = Convert.ToInt32(Math.Truncate(phases));
+                car.CurrentJSON.current_charger_power_calc = car.CurrentJSON.current_charger_phases_calc * car.CurrentJSON.current_charger_voltage * car.CurrentJSON.current_charger_actual_current;
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
