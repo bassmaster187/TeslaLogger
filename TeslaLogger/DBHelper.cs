@@ -4364,23 +4364,31 @@ VALUES(
                 _ = Task.Factory.StartNew(() =>
                 {
                     Tools.DebugLog("inside SQL Task");
-                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    try
                     {
-                        con.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT INTO active_route_energy_at_arrival (
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT active_route_energy_at_arrival (
     posID,
     val
 )
 VALUES (
     @posID,
     @val", con))
-                        {
-                            cmd.Parameters.AddWithValue("@posID", posID);
-                            cmd.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
-                            Tools.DebugLog(cmd);
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            {
+                                cmd.Parameters.AddWithValue("@posID", posID);
+                                cmd.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
+                                Tools.DebugLog(cmd);
+                                SQLTracer.TraceNQ(cmd, out long _);
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        car.CreateExceptionlessClient(ex).Submit();
+                        car.Log(ex.ToString());
                     }
                     Tools.DebugLog($"active_route_energy_at_arrival2: {active_route_energy_at_arrival}");
                     Tools.DebugLog($"last_active_route_energy_at_arrival2: {last_active_route_energy_at_arrival}");
