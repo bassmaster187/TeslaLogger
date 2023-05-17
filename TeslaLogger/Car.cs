@@ -1710,6 +1710,11 @@ id = @carid", con))
                     reason = "sentry_mode";
                     return false;
                 }
+                if (teslaAPIState.GetString("software_update.status", out string status) && status.Equals("installing", StringComparison.Ordinal))
+                {
+                    reason = "software_update";
+                    return false;
+                }
                 if (teslaAPIState.GetInt("df", out int df) && df > 0)
                 {
                     reason = $"Driver Front Door {df}";
