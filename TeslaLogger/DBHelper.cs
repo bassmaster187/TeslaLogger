@@ -4361,11 +4361,9 @@ VALUES(
             }
             if (car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival))
             {
-                Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} >0: {(active_route_energy_at_arrival > 0)}");
+                Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} {(active_route_energy_at_arrival > 0)}");
                 Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
-                if (active_route_energy_at_arrival > 0
-                    && last_active_route_energy_at_arrival != active_route_energy_at_arrival
-                   )
+                if (last_active_route_energy_at_arrival != active_route_energy_at_arrival)
                 {
                     try
                     {
