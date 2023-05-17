@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
+using System.Threading;
+using System.Net;
 
 namespace TeslaLogger
 {
@@ -13,7 +15,7 @@ namespace TeslaLogger
         string host = "192.168.1.178";
         int port = 1883;
         int LP = 3;
-        string ClientId = "TeslaloggerOpenWB";
+        string ClientId = "Teslalogger-OpenWB";
         static byte[] msg1 = Encoding.ASCII.GetBytes(("1"));
         static byte[] msg0 = Encoding.ASCII.GetBytes(("0"));
         MqttClient client;
@@ -22,6 +24,8 @@ namespace TeslaLogger
         {
             try
             {
+                LogPrefix = "SolarCharging-OpenWB";
+
                 client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
 
                 client.Connect(ClientId);
@@ -34,19 +38,20 @@ namespace TeslaLogger
 
                 if (client.IsConnected)
                 {
-                    car.Log("MQTT: Connected!");
+                    Log("MQTT: Connected!");
                 }
                 else
                 {
-                    car.Log("MQTT: Connection failed!");
+                    Log("MQTT: Connection failed!");
                 }
 
                 client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
+                new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
             }
             catch (Exception ex)
             {
-                car.Log(ex.ToString());
+                Log(ex.ToString());
             }
         }
 
@@ -65,37 +70,77 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                car.Log(ex.ToString());
+                Log(ex.ToString());
             }
         }
 
         public override void Charging(bool charging)
         {
-            base.Charging(charging);
-            string t = $"openWB/set/lp/{LP}/plugStat";
+            try
+            {
+                base.Charging(charging);
+                string t = $"openWB/set/lp/{LP}/plugStat";
 
-            client.Publish(t, charging ? msg1 : msg0);
-            client.Publish($"openWB/set/lp/{LP}/chargeStat", charging ? msg1 : msg0);
+                client.Publish(t, charging ? msg1 : msg0);
+                client.Publish($"openWB/set/lp/{LP}/chargeStat", charging ? msg1 : msg0);
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
         }
 
         public override void Plugged(bool plugged)
         {
-            base.Plugged(plugged);
-            client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
-            client.Publish($"openWB/set/lp/{LP}/boolPlugStat", plugged ? msg1 : msg0);
+            try
+            {
+                base.Plugged(plugged);
+                client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
+                client.Publish($"openWB/set/lp/{LP}/boolPlugStat", plugged ? msg1 : msg0);
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
         }
 
         internal override void setPower(string charger_power, string charge_energy_added, string battery_level)
         {
-            base.setPower(charger_power, charge_energy_added, battery_level);
+            try
+            {
+                base.setPower(charger_power, charge_energy_added, battery_level);
 
-            int Watt = int.Parse(charger_power) * 1000;
+                int Watt = int.Parse(charger_power) * 1000;
 
-            byte[] W = Encoding.ASCII.GetBytes(Watt.ToString());
-            byte[] kWh = Encoding.ASCII.GetBytes(charge_energy_added);
+                byte[] W = Encoding.ASCII.GetBytes(Watt.ToString());
+                byte[] kWh = Encoding.ASCII.GetBytes(charge_energy_added);
 
-            client.Publish($"openWB/set/lp/{LP}/W", W);
-            client.Publish($"openWB/set/lp/{LP}/kWhCounter", kWh);
+                client.Publish($"openWB/set/lp/{LP}/W", W);
+                client.Publish($"openWB/set/lp/{LP}/kWhCounter", kWh);
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        private void MQTTConnectionHandler(MqttClient client)
+        {
+            while (true)
+            {
+                try
+                {
+                    System.Threading.Thread.Sleep(1000);
+
+                    if (!client.IsConnected)
+                    {
+                        Log("MQTT: Reconnect");
+                        client.Connect(ClientId);
+                    }
+                }
+                catch (WebException wex)
+                {
+                    Log(wex.Message);
+                    System.Threading.Thread.Sleep(60000);
+
+                }
+                catch (Exception ex)
+                {
+                    System.Threading.Thread.Sleep(30000);
+                    Log(ex.ToString());
+                }
+            }
         }
     }
 }

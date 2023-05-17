@@ -11,6 +11,7 @@ namespace TeslaLogger
     {
         protected Car car;
         int lastAmpere = -1;
+        protected String LogPrefix = "SolarCharging";
 
         public SolarChargingBase(Car c) 
         { 
@@ -28,20 +29,31 @@ namespace TeslaLogger
         }
 
         public virtual void SetAmpere(int ampere) {
-
-            if (lastAmpere != ampere && car.webhelper != null) 
+            try
             {
-                car.Log("SetAmps: " + ampere);
-                string data = "{\"charging_amps\":" + ampere + "}";
-                string res =  car?.webhelper?.PostCommand("command/set_charging_amps", data, true).Result;
-                car.Log("SetAmps Result: " + res);
-                lastAmpere = ampere;
+                if (lastAmpere != ampere && car.webhelper != null)
+                {
+                    Log("SetAmps: " + ampere);
+                    string data = "{\"charging_amps\":" + ampere + "}";
+                    string res = car?.webhelper?.PostCommand("command/set_charging_amps", data, true).Result;
+                    Log("SetAmps Result: " + res);
+                    lastAmpere = ampere;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
             }
         }
 
         internal virtual void setPower(string charger_power, string charge_energy_added, string battery_level)
         {
             
+        }
+
+        internal virtual void Log(string message)
+        {
+            car.Log(LogPrefix + ": " + message);
         }
     }
 }
