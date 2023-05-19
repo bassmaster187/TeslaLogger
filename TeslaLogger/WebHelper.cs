@@ -1518,7 +1518,11 @@ namespace TeslaLogger
                     }
                     else
                     {
-                        car.solarChargingBase?.Charging(false);
+                        if (charging_state == "Stopped")
+                            car.solarChargingBase?.Plugged(true);
+                        else
+                            car.solarChargingBase?.Charging(false);
+
                         return false;
                     }
                 }

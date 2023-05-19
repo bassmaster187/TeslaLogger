@@ -219,7 +219,7 @@ namespace TeslaLogger
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
 
-                    if (CarInDB == 3)
+                    if (DisplayName == "Teslarossa")
                         solarChargingBase = new SolarChargingOpenWB(this);
 
                     if (CarInDB > 0)

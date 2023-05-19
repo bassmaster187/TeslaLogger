@@ -4,14 +4,17 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using Ubiety.Dns.Core;
 
 namespace TeslaLogger
 {
     internal class SolarChargingBase
     {
         protected Car car;
-        int lastAmpere = -1;
+        protected int lastAmpere = -1;
         protected String LogPrefix = "SolarCharging";
+        protected bool lastPlugged = false;
+        protected bool lastCharging = false;
 
         public SolarChargingBase(Car c) 
         { 
@@ -20,12 +23,20 @@ namespace TeslaLogger
 
         public virtual void Plugged(bool plugged)
         {
-
+            if (plugged != lastPlugged)
+            {
+                Log("Plugged " + plugged);
+                lastPlugged = plugged;
+            }
         }
 
         public virtual void Charging(bool charging)
         {
-
+            if (charging != lastCharging)
+            {
+                Log("Charging " + charging);
+                lastCharging = charging;
+            }
         }
 
         public virtual void SetAmpere(int ampere) {
@@ -49,6 +60,34 @@ namespace TeslaLogger
         internal virtual void setPower(int charger_power, string charge_energy_added, string battery_level)
         {
             
+        }
+
+        internal virtual void StartCharging()
+        {
+            try
+            {
+                Log("StartCharging");
+                string ret = car.webhelper.PostCommand("command/charge_start", null).Result;
+                Log("StartCharging result: " + ret);
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+            }
+        }
+
+        internal virtual void StopCharging()
+        {
+            try
+            {
+                Log("StopCharging");
+                string ret = car.webhelper.PostCommand("command/charge_stop", null).Result;
+                Log("StopCharging result: " + ret);
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+            }
         }
 
         internal virtual void Log(string message)

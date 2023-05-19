@@ -64,7 +64,15 @@ namespace TeslaLogger
                 if (e.Topic == $"openWB/lp/{LP}/AConfigured")
                 {
                     int amp = int.Parse(msg);
-                    SetAmpere(amp);
+                    if (amp == 0)
+                        StopCharging();
+                    else if (lastAmpere == 0 && amp > 0)
+                    {
+                        StartCharging();
+                        SetAmpere(amp);
+                    }
+                    else
+                        SetAmpere(amp);
                 }
                 
             }
@@ -79,6 +87,7 @@ namespace TeslaLogger
             try
             {
                 base.Charging(charging);
+
                 string t = $"openWB/set/lp/{LP}/plugStat";
 
                 client.Publish(t, charging ? msg1 : msg0);
@@ -97,8 +106,11 @@ namespace TeslaLogger
             try
             {
                 base.Plugged(plugged);
-                client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
-                client.Publish($"openWB/set/lp/{LP}/boolPlugStat", plugged ? msg1 : msg0);
+
+                // xxx if (!plugged)
+                    client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
+
+                client.Publish($"openWB/set/lp/{LP}/plugStat", plugged ? msg1 : msg0);
             }
             catch (Exception ex) { Log(ex.ToString()); }
         }
