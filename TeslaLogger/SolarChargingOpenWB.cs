@@ -18,6 +18,8 @@ namespace TeslaLogger
         string ClientId = "Teslalogger-OpenWB";
         static byte[] msg1 = Encoding.ASCII.GetBytes(("1"));
         static byte[] msg0 = Encoding.ASCII.GetBytes(("0"));
+        string user = null;
+        string passwd = null;
         MqttClient client;
 
         public SolarChargingOpenWB(Car c) : base(c)
@@ -28,7 +30,15 @@ namespace TeslaLogger
 
                 client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
 
-                client.Connect(ClientId);
+                if (user != null && passwd != null)
+                {
+                    client.Connect(ClientId, user, passwd);
+                }
+                else
+                {
+                    client.Connect(ClientId);
+                }
+
                 client.Subscribe(new[] {
                     $"openWB/lp/{LP}/AConfigured"
                 },
