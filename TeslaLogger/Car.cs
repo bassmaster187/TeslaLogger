@@ -23,6 +23,7 @@ namespace TeslaLogger
 
         private Address lastRacingPoint = null;
         internal WebHelper webhelper;
+        internal SolarChargingBase solarChargingBase;
 
         internal enum TeslaState
         {
@@ -217,6 +218,9 @@ namespace TeslaLogger
                     this.WhTR = WhTR ?? 0.190;
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
+
+                    if (DisplayName == "Teslarossa")
+                        solarChargingBase = new SolarChargingOpenWB(this);
 
                     if (CarInDB > 0)
                     {

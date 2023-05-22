@@ -25,11 +25,16 @@ namespace TeslaLogger
         public double current_outside_temperature; // defaults to 0
         public int current_battery_level; // defaults to 0
 
+        public string current_charging_state;
         public int current_charger_voltage; // defaults to 0
         public int current_charger_phases; // defaults to 0
+        public int current_charger_phases_calc; // defaults to 0
         public int current_charger_actual_current; // defaults to 0
+        public int current_charge_current_request; // defaults to 0
+        public int current_charger_pilot_current; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
         public int current_charger_power; // defaults to 0
+        public int current_charger_power_calc; // defaults to 0
         public double current_charge_rate_km; // defaults to 0
         public double current_time_to_full_charge; // defaults to 0
         public bool current_charge_port_door_open; // defaults to false
@@ -61,6 +66,12 @@ namespace TeslaLogger
 
         public string current_country_code = "";
         public string current_state = "";
+
+        public string current_TLGeofence = "-";
+        public bool current_TLGeofenceIsHome = false;
+        public bool current_TLGeofenceIsCharger = false;
+        public bool current_TLGeofenceIsWork = false;
+        public bool current_TLGeofenceTLWB = false;
 
         public DateTime lastScanMyTeslaReceived = DateTime.MinValue;
         public double? SMTCellTempAvg = null;
@@ -147,6 +158,16 @@ namespace TeslaLogger
                 car.GetTeslaAPIState().GetString("software_update.status", out string software_update_status);
                 car.GetTeslaAPIState().GetString("software_update.version", out string software_update_version);
 
+                Address addr = Geofence.GetInstance().GetPOI(latitude, longitude, false);
+                if (addr != null && addr.rawName != null)
+                {
+                    current_TLGeofence = addr.rawName;
+                    current_TLGeofenceIsHome = addr.IsHome;
+                    current_TLGeofenceIsCharger = addr.IsCharger;
+                    current_TLGeofenceIsWork = addr.IsWork;
+                    current_TLGeofenceTLWB = addr.IsTLWB;
+                }
+
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
                    { "charging", current_charging},
@@ -161,11 +182,16 @@ namespace TeslaLogger
                    { "battery_range_km", current_battery_range_km},
                    { "outside_temp", current_outside_temperature},
                    { "battery_level", current_battery_level},
+                   { "charging_state", current_charging_state },
                    { "charger_voltage", current_charger_voltage},
                    { "charger_phases", current_charger_phases},
+                   { "charger_phases_calc", current_charger_phases_calc },
                    { "charger_actual_current", current_charger_actual_current},
+                   { "charge_current_request", current_charge_current_request},
+                   { "charger_pilot_current", current_charger_pilot_current},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
+                   { "charger_power_calc", current_charger_power_calc},
                    { "charge_rate_km", current_charge_rate_km},
                    { "charge_port_door_open", current_charge_port_door_open },
                    { "time_to_full_charge", current_time_to_full_charge},
@@ -193,8 +219,13 @@ namespace TeslaLogger
                    { "display_name", car.DisplayName},
                    { "heading", heading},
                    { "software_update_status", software_update_status },
-                   { "software_update_version" , software_update_version }
-                };
+                   { "software_update_version" , software_update_version },
+                   { "TLGeofence", current_TLGeofence },
+                   { "TLGeofenceIsHome", current_TLGeofenceIsHome },
+                   { "TLGeofenceIsCharger", current_TLGeofenceIsCharger },
+                   { "TLGeofenceIsWork", current_TLGeofenceIsWork },
+                   { "TLGeofenceTLWB", current_TLGeofenceTLWB }
+            };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
                 if (ts.TotalMinutes < 5)
@@ -209,22 +240,6 @@ namespace TeslaLogger
                     values.Add("SMTACChargeTotal", SMTACChargeTotal);
                     values.Add("SMTDCChargeTotal", SMTDCChargeTotal);
                     values.Add("SMTNominalFullPack", SMTNominalFullPack);
-                }
-
-                Address addr = Geofence.GetInstance().GetPOI(latitude, longitude, false);
-                if (addr != null && addr.rawName != null)
-                {
-                    values.Add("TLGeofence", addr.rawName);
-                    values.Add("TLGeofenceIsHome", addr.IsHome);
-                    values.Add("TLGeofenceIsCharger", addr.IsCharger);
-                    values.Add("TLGeofenceIsWork", addr.IsWork);
-                }
-                else
-                {
-                    values.Add("TLGeofence", "-");
-                    values.Add("TLGeofenceIsHome", false);
-                    values.Add("TLGeofenceIsCharger", false);
-                    values.Add("TLGeofenceIsWork", false);
                 }
 
                 current_json = JsonConvert.SerializeObject(values);
