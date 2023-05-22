@@ -4353,7 +4353,6 @@ VALUES(
 
         private void Insert_active_route_energy_at_arrival(long posID, bool force = false)
         {
-            Tools.DebugLog($"Insert_active_route_energy_at_arrival(posID:{posID}, force:{force})");
             int active_route_energy_at_arrival = int.MinValue;
             if (force)
             {
@@ -4361,8 +4360,6 @@ VALUES(
             }
             if (car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival))
             {
-                Tools.DebugLog($"active_route_energy_at_arrival: {active_route_energy_at_arrival} {(active_route_energy_at_arrival > 0)}");
-                Tools.DebugLog($"last_active_route_energy_at_arrival: {last_active_route_energy_at_arrival} !=:{(last_active_route_energy_at_arrival != active_route_energy_at_arrival)}");
                 if (last_active_route_energy_at_arrival != active_route_energy_at_arrival)
                 {
                     try
@@ -4393,8 +4390,6 @@ VALUES (
                         car.CreateExceptionlessClient(ex).Submit();
                         car.Log(ex.ToString());
                     }
-                    Tools.DebugLog($"active_route_energy_at_arrival2: {active_route_energy_at_arrival}");
-                    Tools.DebugLog($"last_active_route_energy_at_arrival2: {last_active_route_energy_at_arrival}");
                     last_active_route_energy_at_arrival = active_route_energy_at_arrival;
                 }
             }
