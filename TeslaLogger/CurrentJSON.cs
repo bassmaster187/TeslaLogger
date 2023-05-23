@@ -34,7 +34,7 @@ namespace TeslaLogger
         public int current_charger_pilot_current; // defaults to 0
         public double current_charge_energy_added; // defaults to 0
         public int current_charger_power; // defaults to 0
-        public int current_charger_power_calc; // defaults to 0
+        public int current_charger_power_calc_w; // defaults to 0
         public double current_charge_rate_km; // defaults to 0
         public double current_time_to_full_charge; // defaults to 0
         public bool current_charge_port_door_open; // defaults to false
@@ -191,7 +191,7 @@ namespace TeslaLogger
                    { "charger_pilot_current", current_charger_pilot_current},
                    { "charge_energy_added", current_charge_energy_added},
                    { "charger_power", current_charger_power},
-                   { "charger_power_calc", current_charger_power_calc},
+                   { "charger_power_calc_w", current_charger_power_calc_w},
                    { "charge_rate_km", current_charge_rate_km},
                    { "charge_port_door_open", current_charge_port_door_open },
                    { "time_to_full_charge", current_time_to_full_charge},

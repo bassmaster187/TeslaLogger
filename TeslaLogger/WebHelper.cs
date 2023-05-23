@@ -1419,6 +1419,8 @@ namespace TeslaLogger
                 string charger_actual_current = "";
                 string charge_current_request = "";
                 string charger_pilot_current = "";
+                int charger_phases_calc = 0;
+                int charger_power_calc_w = 0;
 
                 if (r2["charger_voltage"] != null)
                 {
@@ -1487,8 +1489,39 @@ namespace TeslaLogger
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
+                try
+                {
+                    if (fast_charger_present)
+                    {
+                        int.TryParse(charger_phases, out charger_phases_calc);
+                        int.TryParse(charger_power, out charger_power_calc_w);
+                        charger_power_calc_w *= 1000;
+                        car.CurrentJSON.current_charger_phases_calc = charger_phases_calc;
+                        car.CurrentJSON.current_charger_power_calc_w = charger_power_calc_w;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                    else
+                    {
+                        int ipower = 0;
+                        int ivoltage = 0;
+                        int icurrent = 0;
+                        int.TryParse(charger_power, out ipower); ;
+                        int.TryParse(charger_voltage, out ivoltage);
+                        int.TryParse(charger_actual_current, out icurrent);
+                        double dphases = (ipower * 1000 + 500) / ivoltage / icurrent;
+                        int iphases = Convert.ToInt32(Math.Truncate(dphases));
+                        car.CurrentJSON.current_charger_phases_calc = iphases;
+                        car.CurrentJSON.current_charger_power_calc_w =  iphases * ivoltage * icurrent;
+                        car.CurrentJSON.CreateCurrentJSON();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                    car.Log(ex.ToString());
+                }
 
-               double power = 0;
+                double power = 0;
                 if (Double.TryParse(charger_power, out power))
                     power *= -1;
                 
@@ -1508,7 +1541,7 @@ namespace TeslaLogger
                         Log($"Charging! Voltage: {charger_voltage}V / Power: {charger_power}kW / Timestamp: {ts} / Date: {dtTimestamp}");
                         if (!lastCharging_State.Equals(charging_state))
                         {
-                            car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                            car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request, charger_phases_calc.ToString(), charger_power_calc_w.ToString());
                         }
 
                         if (car.CurrentJSON.current_TLGeofenceTLWB)
@@ -1532,11 +1565,11 @@ namespace TeslaLogger
                     _ = SendDataToAbetterrouteplannerAsync(ts, car.CurrentJSON.current_battery_level, 0, true, power, car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude());
 
                     lastCharging_State = charging_state;
-                    car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request);
+                    car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, car.IsHighFrequenceLoggingEnabled(true), charger_pilot_current, charge_current_request, charger_phases_calc.ToString(), charger_power_calc_w.ToString());
 
                     if (car.CurrentJSON.current_TLGeofenceTLWB)
                     {
-                        car.solarChargingBase?.setPower(car.CurrentJSON.current_charger_power_calc, charge_energy_added, battery_level);
+                        car.solarChargingBase?.setPower(charger_power_calc_w, charge_energy_added, battery_level);
                         car.solarChargingBase?.setGrid(car.CurrentJSON.current_charger_actual_current, car.CurrentJSON.current_charger_voltage, car.CurrentJSON.current_charger_phases_calc);
                         car.solarChargingBase?.Charging(true);
                     }
@@ -1546,7 +1579,7 @@ namespace TeslaLogger
                 {
                     if (lastCharging_State != "Complete")
                     {
-                        car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request);
+                        car.DbHelper.InsertCharging(ts.ToString(), battery_level, charge_energy_added, charger_power, (double)ideal_battery_range, (double)battery_range, charger_voltage, charger_phases, charger_actual_current, outside_temp.Result, true, charger_pilot_current, charge_current_request, charger_phases_calc.ToString(), charger_power_calc_w.ToString());
                         Log("Charging Complete");
                     }
 
