@@ -18,6 +18,8 @@ namespace TeslaLogger
         string ClientId = "Teslalogger-OpenWB";
         static byte[] msg1 = Encoding.ASCII.GetBytes(("1"));
         static byte[] msg0 = Encoding.ASCII.GetBytes(("0"));
+        string user = null;
+        string passwd = null;
         MqttClient client;
 
         public SolarChargingOpenWB(Car c) : base(c)
@@ -28,7 +30,15 @@ namespace TeslaLogger
 
                 client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
 
-                client.Connect(ClientId);
+                if (user != null && passwd != null)
+                {
+                    client.Connect(ClientId, user, passwd);
+                }
+                else
+                {
+                    client.Connect(ClientId);
+                }
+
                 client.Subscribe(new[] {
                     $"openWB/lp/{LP}/AConfigured"
                 },
@@ -129,12 +139,62 @@ namespace TeslaLogger
             catch (Exception ex) { Log(ex.ToString()); }
         }
 
+        internal override void setGrid(int chager_voltage, int charger_current, int charger_phases)
+        {
+            base.setGrid(chager_voltage, charger_current, charger_phases);
+
+            SendVoltage(chager_voltage, charger_phases);
+            SendCurrent(chager_voltage, charger_phases);
+        }
+
         void SendWatt(int Watt)
         {
             try
             {
                 byte[] W = Encoding.ASCII.GetBytes(Watt.ToString());
                 client.Publish($"openWB/set/lp/{LP}/W", W);
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        void SendVoltage(int Voltage, int Phases)
+        {
+            try
+            {
+                byte[] V = Encoding.ASCII.GetBytes(Voltage.ToString());
+                if (Phases > 0)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/VPhase1", V);
+                }
+                if (Phases > 1)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/VPhase2", V);
+                }
+                if (Phases > 2)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/VPhase3", V);
+                }
+            }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        void SendCurrent(int Current, int Phases)
+        {
+            try
+            {
+                byte[] A = Encoding.ASCII.GetBytes(Current.ToString());
+                if (Phases > 0)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/APhase1", A);
+                }
+                if (Phases > 1)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/APhase2", A);
+                }
+                if (Phases > 2)
+                {
+                    client.Publish($"openWB/set/lp/{LP}/APhase3", A);
+                }
             }
             catch (Exception ex) { Log(ex.ToString()); }
         }

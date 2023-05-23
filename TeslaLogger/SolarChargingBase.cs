@@ -62,6 +62,11 @@ namespace TeslaLogger
             
         }
 
+        internal virtual void setGrid(int chager_voltage, int charger_current, int charger_phases)
+        {
+
+        }
+
         internal virtual void StartCharging()
         {
             try
