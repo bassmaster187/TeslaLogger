@@ -3,8 +3,7 @@ If for any reason your automatic / manual update doesn't work anymore, you can f
 ### Raspberry: 
 - Open a SSH session (credentials: pi/teslalogger). 
 ```
-cd /etc/teslalogger
-sudo ./update.sh
+sudo /etc/teslalogger/update.sh
 ```
 
 ### Docker:
