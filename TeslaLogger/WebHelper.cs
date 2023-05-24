@@ -1491,29 +1491,37 @@ namespace TeslaLogger
                 }
                 try
                 {
-                    if (fast_charger_present)
+                    if(charging_state == "Charging")
                     {
-                        int.TryParse(charger_phases, out charger_phases_calc);
-                        int.TryParse(charger_power, out charger_power_calc_w);
-                        charger_power_calc_w *= 1000;
-                        car.CurrentJSON.current_charger_phases_calc = charger_phases_calc;
-                        car.CurrentJSON.current_charger_power_calc_w = charger_power_calc_w;
-                        car.CurrentJSON.CreateCurrentJSON();
+                        if (fast_charger_present)
+                        {
+                            int.TryParse(charger_phases, out charger_phases_calc);
+                            int.TryParse(charger_power, out charger_power_calc_w);
+                            charger_power_calc_w *= 1000;
+                            car.CurrentJSON.current_charger_phases_calc = charger_phases_calc;
+                            car.CurrentJSON.current_charger_power_calc_w = charger_power_calc_w;
+                            car.CurrentJSON.CreateCurrentJSON();
+                        }
+                        else
+                        {
+                            int ipower = 0;
+                            int ivoltage = 0;
+                            int icurrent = 0;
+                            int.TryParse(charger_power, out ipower); ;
+                            int.TryParse(charger_voltage, out ivoltage);
+                            int.TryParse(charger_actual_current, out icurrent);
+                            if(ivoltage != 0 && icurrent != 0)
+                            {
+                                double dphases = (ipower * 1000 + 500) / ivoltage / icurrent;
+                                int iphases = Convert.ToInt32(Math.Truncate(dphases));
+                                car.CurrentJSON.current_charger_phases_calc = iphases;
+                                car.CurrentJSON.current_charger_power_calc_w =  iphases * ivoltage * icurrent;
+                                car.CurrentJSON.CreateCurrentJSON();
+                            }
+                            
+                        }
                     }
-                    else
-                    {
-                        int ipower = 0;
-                        int ivoltage = 0;
-                        int icurrent = 0;
-                        int.TryParse(charger_power, out ipower); ;
-                        int.TryParse(charger_voltage, out ivoltage);
-                        int.TryParse(charger_actual_current, out icurrent);
-                        double dphases = (ipower * 1000 + 500) / ivoltage / icurrent;
-                        int iphases = Convert.ToInt32(Math.Truncate(dphases));
-                        car.CurrentJSON.current_charger_phases_calc = iphases;
-                        car.CurrentJSON.current_charger_power_calc_w =  iphases * ivoltage * icurrent;
-                        car.CurrentJSON.CreateCurrentJSON();
-                    }
+                    
                 }
                 catch (Exception ex)
                 {
