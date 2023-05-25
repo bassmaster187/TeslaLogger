@@ -281,6 +281,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/sucbingo/[0-9]+/set"):
                         SuCBingo_Set(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/info"):
+                        MQTT_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/set"):
+                        MQTT_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states", System.StringComparison.Ordinal):
                         Debug_TeslaLoggerStates(request, response);
                         break;
@@ -770,6 +776,35 @@ namespace TeslaLogger
                     Logfile.Log(ex.ToString());
                 }
             }
+        }
+
+        private void MQTT_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/set");
+            if (m.Success)
+            {
+                string data = GetDataFromRequestInputStream(request);
+                if (!String.IsNullOrEmpty(data))
+                {
+                    KVS.InsertOrUpdate("MQTTSettings", data);
+                    WriteString(response, "OK");
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void MQTT_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/info");
+            if (m.Success)
+            {
+                KVS.Get("MQTTSettings", out string json);
+                response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                WriteString(response, json);
+                return;
+            }
+            WriteString(response, "");
         }
 
         private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
