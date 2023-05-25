@@ -1233,7 +1233,7 @@ namespace TeslaLogger
                 {
                     double pressure = (double)r2["tpms_pressure_"+Prefix];
                     DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
-                    Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
+                    //Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
                     car.DbHelper.InsertTPMS(TireID, pressure, dtPressure);
                 }
             }
