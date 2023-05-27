@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ubiety.Dns.Core;
 
@@ -71,9 +72,29 @@ namespace TeslaLogger
         {
             try
             {
-                Log("StartCharging");
-                string ret = car.webhelper.PostCommand("command/charge_start", null).Result;
-                Log("StartCharging result: " + ret);
+                if (car.CurrentJSON.current_sleeping)
+                {
+                    Log("StartCharging: wake up!");
+                    string ret = car.webhelper.PostCommand("command/wake_up", null).Result;
+                    Log("StartCharging wake_up result: " + ret);
+                    var t = new Thread(() =>
+                    {
+                        Logfile.Log("StartCharging: waiting until car wakes up");
+                        for (int x = 0; x < 20; x++)
+                        {
+                            Thread.Sleep(10000);
+                            if(!car.CurrentJSON.current_sleeping)
+                            {
+                                Log("StartCharging: car is online");
+                                string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                                Log("StartCharging charge_start result: " + retcs);
+                            }
+                                
+                        }
+                    });
+                    t.Name = "StartChargingWakeUpThread";
+                    t.Start();
+                }
             }
             catch (Exception ex)
             {
