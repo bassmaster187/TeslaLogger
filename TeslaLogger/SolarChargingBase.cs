@@ -72,29 +72,34 @@ namespace TeslaLogger
         {
             try
             {
-                if (car.CurrentJSON.current_sleeping)
+                if(car.GetCurrentState() == Car.TeslaState.Sleep)
                 {
-                    Log("StartCharging: wake up!");
-                    string ret = car.webhelper.PostCommand("command/wake_up", null).Result;
-                    Log("StartCharging wake_up result: " + ret);
-                    var t = new Thread(() =>
+                    _ = Task.Factory.StartNew(() =>
                     {
-                        Logfile.Log("StartCharging: waiting until car wakes up");
-                        for (int x = 0; x < 20; x++)
+                        Log("StartCharging: wake up!");
+                        string ret = car.webhelper.PostCommand("command/wake_up", null).Result;
+                        Log("StartCharging wake_up result: " + ret);
+
+                        int x = 20;
+                        while (car.GetCurrentState() != Car.TeslaState.Online)
                         {
                             Thread.Sleep(10000);
-                            if(!car.CurrentJSON.current_sleeping)
+                            x--;
+                            if (x == 0)
                             {
-                                Log("StartCharging: car is online");
-                                string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
-                                Log("StartCharging charge_start result: " + retcs);
+                                Log("StartCharging: time out, car is still sleeping. give up...");
+                                return;
                             }
-                                
+                            
                         }
-                    });
-                    t.Name = "StartChargingWakeUpThread";
-                    t.Start();
+                        car.Log(car.webhelper.PostCommand("command/charge_start", null).Result);
+                    }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
                 }
+
+                Log("StartCharging: car is online");
+                string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                Log("StartCharging charge_start result: " + retcs);
+                
             }
             catch (Exception ex)
             {
