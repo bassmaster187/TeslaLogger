@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Security.Cryptography;
+using System.Data.Common;
 
 namespace TeslaLogger
 {
