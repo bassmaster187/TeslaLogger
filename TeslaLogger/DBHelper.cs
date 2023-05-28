@@ -29,6 +29,8 @@ namespace TeslaLogger
         bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
+        internal static string User = "root";
+        internal static string Password = "teslalogger";
 
         internal static string DBConnectionstring => GetDBConnectionstring();
 
@@ -78,14 +80,10 @@ namespace TeslaLogger
                 }
                 DBConnectionstring += "charset=utf8mb4";
             }
-            if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("database="))
-            {
-                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "database=(.+?);");
-                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
-                {
-                    Database = m.Groups[1].Captures[0].ToString();
-                }
-            }
+            DbConnectionStringBuilder dBConnectionStringBuilder = new MySqlConnectionStringBuilder(DBConnectionstring);
+            Database = dBConnectionStringBuilder["database"].ToString();
+            User = dBConnectionStringBuilder["uid"].ToString();
+            Password = dBConnectionStringBuilder["password"].ToString();
             if (obfuscate && DBConnectionstring.ToLower(Tools.ciEnUS).Contains("password="))
             {
                 Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "password=(.+?);");
@@ -1802,7 +1800,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int ChargingStateID, bool fromID = false)
+        internal void UpdateChargePrice(int ChargingStateID, bool fromID = false)
         {
             string ref_cost_currency = string.Empty;
             double ref_cost_per_kwh = double.NaN;

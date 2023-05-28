@@ -16,9 +16,9 @@ using System.Threading.Tasks;
 
 using Exceptionless;
 using Newtonsoft.Json;
-using Ubiety.Dns.Core;
-using System.Security.Policy;
-using Newtonsoft.Json.Linq;
+using System.Web;
+using System.Net.Http;
+using HttpMultipartParser;
 
 namespace TeslaLogger
 {
@@ -232,6 +232,15 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/passwortinfo", System.StringComparison.Ordinal):
                         passwortinfo(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup", System.StringComparison.Ordinal):
+                        RestoreChargingCostsFromBackup1(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup2", System.StringComparison.Ordinal):
+                        RestoreChargingCostsFromBackup2(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup3", System.StringComparison.Ordinal):
+                        RestoreChargingCostsFromBackup3(request, response);
+                        break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
                         Get_CarValue(request, response);
@@ -333,7 +342,594 @@ namespace TeslaLogger
             }
         }
 
-        private void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
+        private static void RestoreChargingCostsFromBackup3(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackup3");
+            string errorText = string.Empty;
+            StringBuilder html = new StringBuilder();
+            html.Append(@"
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 3 of 3</h2>
+        <br />
+        <ul>");
+            if (request.HttpMethod == HttpMethod.Post.Method)
+            {
+                try
+                {
+                    using (Stream stream = request.InputStream) // here we have data
+                    {
+                        using (var reader = new StreamReader(stream, request.ContentEncoding))
+                        {
+                            string body = reader.ReadToEnd();
+                            // body contains key=value pairs id=id separated by &
+                            // eg 1834=1834&1835=1835
+                            var kvps = HttpUtility.ParseQueryString(body);
+                            foreach (string sID in kvps.AllKeys)
+                            {
+                                if (int.TryParse(sID, out int id))
+                                {
+                                    Tools.DebugLog($"restore id:{id}");
+                                    int CarID = int.MinValue;
+                                    // get data from chargingstate_bak
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    cost_per_minute =(
+    SELECT
+        cost_per_minute
+    FROM
+        chargingstate_bak
+    WHERE
+        id = @id
+),
+    cost_per_session =(
+    SELECT
+        cost_per_session
+    FROM
+        chargingstate_bak
+    WHERE
+        id = @id
+)WHERE
+    chargingstate.id = @id", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@id", id);
+                                            _ = SQLTracer.TraceNQ(cmd, out _);
+                                        }
+                                    }
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    CarID
+FROM
+    chargingstate
+WHERE
+    id = @id", con))
+                                        {
+                                            cmd.Parameters.AddWithValue("@id", id);
+                                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                            if (dr.Read() && dr[0] != DBNull.Value)
+                                            {
+                                                _ = int.TryParse(dr[0].ToString(), out CarID);
+                                            }
+                                        }
+                                    }
+                                    if (CarID > 0)
+                                    {
+                                        Car car = Car.GetCarByID(CarID);
+                                        if (car != null)
+                                        {
+                                            car.DbHelper.UpdateChargePrice(id, true);
+                                            html.Append($@"
+            <li>successfully updated id:{id} from backup - cost_total has been recalculated</li>");
+                                        }
+                                        else
+                                        {
+                                            errorText += $"<br/> unable to find car for CarID:{CarID}";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errorText += $"<br/> unable to find CarID for chargingstate.id:{id}";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    errorText = ex.ToString();
+                }
+            }
+            else
+            {
+                errorText = $"http method error";
+            }
+            if (!string.IsNullOrEmpty(errorText))
+            {
+                WriteString(response, errorText);
+                return;
+            }
+            html.Append(@"
+        </ul>
+    </body>
+</html>");
+            WriteString(response, html.ToString());
+        }
+
+        private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackup2");
+            string errorText = string.Empty;
+            string fileName = string.Empty;
+            bool removeFile = false;
+            string sqlExtract = string.Empty;
+            string sqlCreate = string.Empty;
+            StringBuilder html = new StringBuilder();
+            // receive file name or uploaded file
+            if (request.HttpMethod == HttpMethod.Post.Method)
+            {
+                RestoreChargingCostsFromBackupReceiveFile(request, ref fileName, ref removeFile);
+                // filename or file received, now check file
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    RestoreChargingCostsFromBackupCheckReceivedFile(ref errorText, fileName, ref sqlExtract);
+                }
+                if (string.IsNullOrEmpty(errorText))
+                {
+                    // INSERT statement extracted successfully, now extract CREATE TABLE
+                    RestoreChargingCostsFromBackupCreateTable(ref errorText, fileName, ref sqlCreate);
+                }
+                if (string.IsNullOrEmpty(errorText))
+                {
+                    // both SQL files created successfully, now load into DB
+                    RestoreChargingCostsFromBackupLoadDB(ref errorText, sqlExtract, sqlCreate);
+                }
+                if (string.IsNullOrEmpty(errorText))
+                {
+                    // chargingstate_bak loaded successfully
+                    RestoreChargingCostsFromBackupCompare(response, ref errorText, html);
+                }
+            }
+            else
+            {
+                errorText = $"http method error";
+            }
+            if (!string.IsNullOrEmpty(errorText))
+            {
+                WriteString(response, errorText);
+                return;
+            }
+            WriteString(response, html.ToString());
+        }
+
+        private static void RestoreChargingCostsFromBackupCompare(HttpListenerResponse response, ref string errorText, StringBuilder html)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackupCompare");
+            int diffs = 0;
+            html.Append(@"
+<html>
+    <head>
+        <script type=""text/javascript"">
+function checkAll(cb) {
+    var elements = document.querySelectorAll('input[type=checkbox]')
+    for (var i = 0 ; i < elements.length ; i++) {
+        elements[i].checked = cb.checked;
+    }
+}
+        </script>
+    </head>
+    <body>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 2 of 3</h2>
+        <br />
+        <form name=""myForm"" action=""RestoreChargingCostsFromBackup3"" method=""POST"">
+            <ul>
+");
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    StartDate,
+    EndDate,
+    Pos,
+    StartChargingID,
+    EndChargingID,
+    cost_per_session,
+    cost_per_minute
+FROM
+    chargingstate_bak
+ORDER BY
+    id ASC", con))
+                    {
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read()
+                            && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value
+                            && dr[2] != DBNull.Value
+                            && dr[3] != DBNull.Value
+                            && dr[4] != DBNull.Value
+                            && dr[5] != DBNull.Value
+                            )
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int id)
+                                && DateTime.TryParse(dr[1].ToString(), out DateTime StartDate)
+                                && DateTime.TryParse(dr[2].ToString(), out DateTime EndDate)
+                                && int.TryParse(dr[3].ToString(), out int Pos)
+                                && int.TryParse(dr[4].ToString(), out int StartChargingID)
+                                && int.TryParse(dr[5].ToString(), out int EndChargingID))
+                            {
+                                _ = double.TryParse(dr[6].ToString(), out double cost_per_session);
+                                _ = double.TryParse(dr[7].ToString(), out double cost_per_minute);
+                                bool cost_per_session_dbnull = dr[6] == DBNull.Value;
+                                bool cost_per_minute_dbnull = dr[7] == DBNull.Value;
+                                Tools.DebugLog($"backup chargingstate found -> id:{id} StartDate:{StartDate} EndDate:{EndDate} Pos:{Pos} StartChargingID:{StartChargingID} EndChargingID:{EndChargingID} cost_per_session:{cost_per_session} cost_per_minute:{cost_per_minute} cost_per_session_dbnull:<{cost_per_session_dbnull}> cost_per_minute_dbnull:<{cost_per_minute_dbnull}>");
+                                // compare
+                                using (MySqlConnection con2 = new MySqlConnection(DBHelper.DBConnectionstring))
+                                {
+                                    con2.Open();
+                                    using (MySqlCommand cmd2 = new MySqlCommand(@"
+SELECT
+    cost_per_session,
+    cost_per_minute
+FROM
+    chargingstate
+WHERE
+    id=@id
+    AND StartDate=@StartDate
+    AND EndDate=@EndDate
+    AND Pos=@Pos
+    AND StartChargingID=@StartChargingID
+    AND EndChargingID=@EndChargingID", con2))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@id", id);
+                                        cmd2.Parameters.AddWithValue("@StartDate", StartDate);
+                                        cmd2.Parameters.AddWithValue("@EndDate", EndDate);
+                                        cmd2.Parameters.AddWithValue("@Pos", Pos);
+                                        cmd2.Parameters.AddWithValue("@StartChargingID", StartChargingID);
+                                        cmd2.Parameters.AddWithValue("@EndChargingID", EndChargingID);
+                                        MySqlDataReader dr2 = SQLTracer.TraceDR(cmd2);
+                                        while (dr2.Read()) {
+                                            Tools.DebugLog($"compare <{id}> cost_per_session bak:<{cost_per_session}> db:{dr2[0]} cost_per_minute bak:<{cost_per_minute}> db:<{dr2[1]}>");
+                                            bool cost_per_session_diff = false;
+                                            bool cost_per_minute_diff = false;
+                                            double cost_per_session2 = double.NaN;
+                                            double cost_per_minute2 = double.NaN;
+                                            if (cost_per_session_dbnull && dr2[0] != DBNull.Value)
+                                            {
+                                                cost_per_session_diff = true;
+                                            }
+                                            if (double.TryParse(dr2[0].ToString(), out cost_per_session2)
+                                                && cost_per_session != cost_per_session2)
+                                            {
+                                                cost_per_session_diff = true;
+                                            }
+                                            if (cost_per_minute_dbnull && dr2[1] != DBNull.Value)
+                                            {
+                                                cost_per_minute_diff = true;
+                                            }
+                                            if (double.TryParse(dr2[1].ToString(), out cost_per_minute2)
+                                                && cost_per_minute != cost_per_minute2)
+                                            {
+                                                cost_per_minute_diff = true;
+                                            }
+                                            if (cost_per_session_diff || cost_per_minute_diff)
+                                            {
+                                                diffs++;
+                                                html.Append($@"
+                <li>
+                    <input type=""checkbox"" id=""{id}"" name=""{id}"" value=""{id}"">ID:{id} Start:{StartDate} End:{EndDate} diff:");
+                                                if (cost_per_session_diff)
+                                                {
+                                                    html.Append($" cost_per_session DB:{(dr2[0] == DBNull.Value ? "NULL" : cost_per_session2.ToString())} Backup:{(cost_per_session_dbnull ? "NULL" : cost_per_session.ToString())}");
+                                                }
+                                                if (cost_per_minute_diff)
+                                                {
+                                                    html.Append($" cost_per_minute DB:{(dr2[1] == DBNull.Value ? "NULL" : cost_per_minute2.ToString())} Backup:{(cost_per_minute_dbnull ? "NULL" : cost_per_minute.ToString())}");
+                                                }
+                                                html.Append(@"
+                </li>");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                errorText = ex.ToString();
+            }
+            if (diffs == 0)
+            {
+                html.Append(@"
+                <li>no differences found, nothing to do!</li>");
+            }
+            else
+            {
+                html.Append(@"
+                select all: <input type = ""checkbox"" name=""checkBoxCheckAll"" onclick=""checkAll(this);""><br />
+                <input type=""submit"" value=""Restore!"">");
+            }
+            html.Append(@"
+            </ul>
+        </form>
+    </body>
+</html>
+");
+        }
+
+        private static void RestoreChargingCostsFromBackupLoadDB(ref string errorText, string sqlExtract, string sqlCreate)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackupLoadDB");
+            if (File.Exists("/usr/bin/mysql"))
+            {
+                try
+                {
+                    UpdateTeslalogger.AssertAlterDB();
+                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                    {
+                        Directory.CreateDirectory("/etc/teslalogger/tmp");
+                    }
+                    string shellScript = "/etc/teslalogger/tmp/SQLLoad.sh";
+                    if (File.Exists(shellScript))
+                    {
+                        File.Delete(shellScript);
+                    }
+                    using (StreamWriter writer = new StreamWriter(shellScript))
+                    {
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlCreate}");
+                        writer.WriteLine($"/usr/bin/mysql {(Tools.IsDocker() ? "-hdatabase" : "")} -u{DBHelper.User} -p{DBHelper.Password} -D{DBHelper.Database}{(Tools.IsDocker() ? " -hdatabase" : "")} < {sqlExtract}");
+                    }
+                    Tools.ExecMono("/bin/bash", shellScript);
+                    if (!DBHelper.TableExists("chargingstate_bak"))
+                    {
+                        errorText = "Database table chargingstate_bak does not exist";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    errorText = ex.ToString();
+                }
+            }
+            else
+            {
+                errorText = $"unabled to find /usr/bin/mysql";
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupCreateTable(ref string errorText, string fileName, ref string sqlCreate)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackupCreateTable");
+            try
+            {
+                if (DBHelper.TableExists("chargingstate_bak"))
+                {
+                    string sql1 = @"
+DROP TABLE chargingstate_bak";
+                    Logfile.Log(sql1);
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(sql1);
+                    Logfile.Log("DROP TABLE chargingstate_bak OK");
+                }
+                if (!Directory.Exists("/etc/teslalogger/tmp"))
+                {
+                    Directory.CreateDirectory("/etc/teslalogger/tmp");
+                }
+                string shellScript = "/etc/teslalogger/tmp/SQLCreate.sh";
+                sqlCreate = "/etc/teslalogger/tmp/SQLCreate.sql";
+                if (File.Exists(shellScript))
+                {
+                    File.Delete(shellScript);
+                }
+                if (File.Exists(sqlCreate))
+                {
+                    File.Delete(sqlCreate);
+                }
+                using (StreamWriter writer = new StreamWriter(shellScript))
+                {
+                    writer.WriteLine($"/bin/zcat {fileName} | sed -e '/CREATE TABLE `chargingstate`/,/;/!d' | sed -e s/chargingstate/chargingstate_bak/ > {sqlCreate}");
+                }
+                Tools.ExecMono("/bin/bash", shellScript);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                errorText = ex.ToString();
+            }
+            // check results of SQL create
+            if (!File.Exists(sqlCreate))
+            {
+                errorText = $"SQL create file <{sqlCreate}> does not exist";
+            }
+            else
+            {
+                FileInfo fi = new FileInfo(sqlCreate);
+                if (fi.Length == 0)
+                {
+                    errorText = $"SQL create file <{sqlCreate}> has zero bytes";
+                }
+                else
+                {
+                    if (!File.ReadAllText(sqlCreate).StartsWith("CREATE TABLE `chargingstate_bak`"))
+                    {
+                        errorText = $"SQL create file <{sqlCreate}> does not start with expected content";
+                    }
+                }
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupCheckReceivedFile(ref string errorText, string fileName, ref string sqlExtract)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackupCheckReceivedFile");
+            if (string.IsNullOrEmpty(fileName))
+            {
+                errorText = $"fileName is empty";
+            }
+            else if (File.Exists(fileName))
+            {
+                // check file
+                FileInfo fi = new FileInfo(fileName);
+                if (fi.Length == 0)
+                {
+                    errorText = $"file {fileName} has zero bytes";
+                }
+                else
+                {
+                    // check needed command line tools
+                    if (!File.Exists("/bin/zcat"))
+                    {
+                        errorText = $"unabled to find /bin/zcat";
+                    }
+                    else if (!File.Exists("/bin/grep"))
+                    {
+                        errorText = $"unable to find /bin/grep";
+                    }
+                    else if (!File.Exists("/bin/sed"))
+                    {
+                        errorText = $"unable to find /bin/sed";
+                    }
+                    else
+                    {
+                        // run SQL extract
+                        try
+                        {
+                            if (!Directory.Exists("/etc/teslalogger/tmp"))
+                            {
+                                Directory.CreateDirectory("/etc/teslalogger/tmp");
+                            }
+                            string shellScript = "/etc/teslalogger/tmp/SQLExtract.sh";
+                            sqlExtract = "/etc/teslalogger/tmp/SQLExtract.sql";
+                            if (File.Exists(shellScript))
+                            {
+                                File.Delete(shellScript);
+                            }
+                            if (File.Exists(sqlExtract))
+                            {
+                                File.Delete(sqlExtract);
+                            }
+                            using (StreamWriter writer = new StreamWriter(shellScript))
+                            {
+                                writer.WriteLine($"/bin/zcat {fileName} | grep 'INSERT INTO `chargingstate`' | sed -e s/chargingstate/chargingstate_bak/ > {sqlExtract}");
+                            }
+                            Tools.ExecMono("/bin/bash", shellScript);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log(ex.ToString());
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                        }
+
+                        // check results of SQL extract
+                        if (!File.Exists(sqlExtract))
+                        {
+                            errorText = $"SQL extract file <{sqlExtract}> does not exist";
+                        }
+                        else
+                        {
+                            fi = new FileInfo(sqlExtract);
+                            if (fi.Length == 0)
+                            {
+                                errorText = $"SQL extract file <{sqlExtract}> has zero bytes";
+                            }
+                            else
+                            {
+                                if (!File.ReadAllText(sqlExtract).StartsWith("INSERT INTO `chargingstate_bak` VALUES"))
+                                {
+                                    errorText = $"SQL extract file <{sqlExtract}> does not start with expected content";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                errorText = $"file <{fileName}> does not exist";
+            }
+        }
+
+        private static void RestoreChargingCostsFromBackupReceiveFile(HttpListenerRequest request, ref string fileName, ref bool removeFile)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackupReceiveFile");
+            Tools.DebugLog($"content length: {request.ContentLength64}");
+            // restore from local file or uploaded file?
+            if (request.ContentLength64 < 2048)
+            {
+                // small content, check if it's restoreFromLocalFile
+                using (Stream stream = request.InputStream) // here we have data
+                {
+                    using (var reader = new StreamReader(stream, request.ContentEncoding))
+                    {
+                        string body = reader.ReadToEnd();
+                        if (body.Contains("restoreFromLocalFile="))
+                        {
+                            Match m = Regex.Match(body, "restoreFromLocalFile=(.+)");
+                            if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                            {
+                                fileName = HttpUtility.UrlDecode(m.Groups[1].Captures[0].ToString());
+                                Logfile.Log($"restoreFromLocalFile -> {fileName}");
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    // large content, read first bytes to analyze
+                    fileName = "/etc/teslalogger/tmp/restoreFromRemoteFile.gz";
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
+                    }
+                    using (Stream stream = request.InputStream) // here we have data
+                    {
+                        using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                        {
+                            StreamingMultipartFormDataParser parser = new StreamingMultipartFormDataParser(stream);
+                            parser.FileHandler += (name, fName, type, disposition, buffer, bytes, partNumber, additionalProperties) =>
+                            {
+                                fileStream.Write(buffer, 0, bytes);
+                            };
+                            parser.Run();
+                            removeFile = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logfile.Log(ex.ToString());
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    fileName = string.Empty;
+                }
+            }
+        }
+
+        private static void TeslaAuthGetToken(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -2057,14 +2653,16 @@ FROM
 
         private static void WriteString(HttpListenerResponse response, string responseString)
         {
-            response.ContentEncoding = System.Text.Encoding.UTF8;
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+            response.ContentEncoding = Encoding.UTF8;
+            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
             Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            // You must close the output stream.
-            output.Close();
+            if (output != null && output.CanWrite)
+            {
+                output.Write(buffer, 0, buffer.Length);
+                output.Close();
+            }
         }
 
         private static void Admin_GetPOI(HttpListenerRequest request, HttpListenerResponse response)
@@ -2151,6 +2749,116 @@ FROM
             WriteString(response, $"Admin: UpdateElevation ({from} -> {to}) ...");
             DBHelper.UpdateTripElevation(from, to, null, "/admin/UpdateElevation");
             Logfile.Log("Admin: UpdateElevation done");
+        }
+
+        private static void RestoreChargingCostsFromBackup1(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            Logfile.Log("RestoreChargingCostsFromBackup1");
+            // handle GET request
+            // list available backup files
+            // offer upload possibility for backup file
+            List<string> fileList = new List<string>();
+            try
+            {
+                foreach (string fileName in Directory.GetFiles("/etc/teslalogger/backup", "mysqldump2023*"))
+                {
+                    // check file
+                    FileInfo fi = new FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        // file has zero bytes
+                        continue;
+                    }
+                    // filter backups: ingore too old and newer than 2023-05-03
+                    Match m = Regex.Match(fileName, "mysqldump2023([0-9]{4})");
+                    if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
+                    {
+                        if (int.TryParse(m.Groups[1].Captures[0].ToString(), out int monthday)) {
+                            if (monthday < 504)
+                            {
+                                fileList.Add(fileName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+            Tools.DebugLog("local file list: " + string.Join(",", fileList));
+            StringBuilder html = new StringBuilder();
+            html.Append(@"
+<html>
+    <head>
+        <script type=""text/javascript"">
+function showDiv() {
+    document.getElementsByClassName(""container-box"")[0].style.display = ""block"";
+    document.getElementsByClassName(""overlay-box"")[0].style.display = ""block"";
+}
+function checkform() {
+    if(document.getElementById(""restoreFromRemoteFile"").value.length < 6) {
+        alert(""please select a file"");
+        return false;
+    } else {
+        showDiv();
+        document.myForm.submit();
+    }
+}
+        </script>
+        <style>
+.container-box {
+    background: #666666;
+    opacity: .8;
+    width:100%;
+    height: 100%;
+    text-align:center;
+    display: none;
+}
+.overlay-box {
+    background-color:#fff;
+    width:480px;
+    display: none;
+    margin: auto;
+}
+        </style>
+    </head>
+    <body>
+        <div class=""container-box"">
+            <div class=""overlay-box"">TeslaLogger is processing your file, please be patient<br /><br />this may take some minutes depending on the size of your backup</div>
+        </div>
+        <h2>Restore chargingstate cost_per_minute and cost_per_session from backup - step 1 of 3</h2>
+");
+            if (fileList.Count > 0) {
+                html.Append(@"
+        <br /><h3>available backups:</h3>
+        <br />
+        <ul>");
+                foreach(string fileName in fileList)
+                {
+                    html.Append($@"
+            <li>{fileName}
+                <form action=""RestoreChargingCostsFromBackup2"" method=""POST"">
+                    <input type=""hidden"" id=""restoreFromLocalFile"" name=""restoreFromLocalFile"" value=""{fileName}"">
+                    <input type=""submit"" onClick=""showDiv();"" value=""Continue with {fileName}"">
+                </form>
+            </li>");
+                }
+                html.Append(@"
+        </ul>");
+            }
+            html.Append(@"
+        upload your own backup file (make sure it is from a TeslaLogger version before 1.54.20 released on 2023-05-04)
+        <form name=""myForm"" action=""RestoreChargingCostsFromBackup2"" method=""POST"" enctype=""multipart/form-data"">
+            <label for=""restoreFromRemoteFile"">Select a file:</label>
+            <input type=\""file"" id=""restoreFromRemoteFile"" name=""restoreFromRemoteFile"">
+            <input type=""button"" onClick=""checkform();"" value=""Upload and continue"">
+        </form>");
+            html.Append(@"
+    </body>
+</html>");
+            WriteString(response, html.ToString());
         }
     }
 }
