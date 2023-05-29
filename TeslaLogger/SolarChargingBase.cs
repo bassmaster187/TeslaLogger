@@ -68,37 +68,46 @@ namespace TeslaLogger
 
         }
 
-        internal virtual void StartCharging()
+        public virtual void StartCharging()
         {
             try
             {
-                if(car.GetCurrentState() == Car.TeslaState.Sleep)
+                if (car.GetCurrentState() == Car.TeslaState.Sleep )
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
                         Log("StartCharging: wake up!");
-                        string ret = car.webhelper.PostCommand("command/wake_up", null).Result;
+                        string ret = car.webhelper.Wakeup().Result;
                         Log("StartCharging wake_up result: " + ret);
 
                         int x = 20;
-                        while (car.GetCurrentState() != Car.TeslaState.Online)
+                        while (car.GetCurrentState() == Car.TeslaState.Sleep)
                         {
                             Thread.Sleep(10000);
+                            Log("StartCharging: waiting for car...");
                             x--;
-                            if (x == 0)
+                            if (x <= 0)
                             {
                                 Log("StartCharging: time out, car is still sleeping. give up...");
                                 return;
                             }
                             
                         }
-                        car.Log(car.webhelper.PostCommand("command/charge_start", null).Result);
+                        Log("StartCharging: car is online");
+                        string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                        Log("StartCharging charge_start result: " + retcs);
+                        //car.Log(car.webhelper.PostCommand("command/charge_start", null).Result);
                     }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                    
+                }
+                else
+                {
+                    Log("StartCharging: start charging");
+                    string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                    Log("StartCharging charge_start result: " + retcs);
                 }
 
-                Log("StartCharging: car is online");
-                string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
-                Log("StartCharging charge_start result: " + retcs);
+                
                 
             }
             catch (Exception ex)
