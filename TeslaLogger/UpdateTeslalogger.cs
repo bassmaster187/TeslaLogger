@@ -799,9 +799,9 @@ PRIMARY KEY(id)
 
             if (!DBHelper.ColumnExists("charging", "charger_phases_calc"))
             {
-                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc INT NULL");
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc INT NULL");
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
             }
 
             if (!DBHelper.ColumnExists("charging", "charger_power_calc_w"))
@@ -950,6 +950,13 @@ PRIMARY KEY(id)
                 Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "charge_point"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column charge_point");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `charge_point` TINYINT(1) NULL DEFAULT -1", 600);
             }
         }
 
@@ -1346,8 +1353,8 @@ PRIMARY KEY(id)
             Logfile.Log("UpdateFastChargerPresent: power > 24 kW");
             DBHelper.ExecuteSQLQuery("UPDATE chargingstate SET fast_charger_present = 1 WHERE max_charger_power > 24 AND fast_charger_present IS NULL", 300);
 
-            Logfile.Log("UpdateFastChargerPresent: voltage > 300 V");
-            DBHelper.ExecuteSQLQuery("UPDATE chargingstate SET fast_charger_present = 1 WHERE charger_voltage > 300 AND fast_charger_present IS NULL", 300);
+            //Logfile.Log("UpdateFastChargerPresent: voltage > 300 V");
+            //DBHelper.ExecuteSQLQuery("UPDATE chargingstate SET fast_charger_present = 1 WHERE charger_voltage > 300 AND fast_charger_present IS NULL", 300);
 
             Logfile.Log("UpdateFastChargerPresent: voltage = 2, actual_current = 0, power > 0");
             DBHelper.ExecuteSQLQuery(@"

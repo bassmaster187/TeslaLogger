@@ -1514,8 +1514,10 @@ namespace TeslaLogger
                             {
                                 double dphases = (ipower * 1000 + 500) / ivoltage / icurrent;
                                 int iphases = Convert.ToInt32(Math.Truncate(dphases));
-                                car.CurrentJSON.current_charger_phases_calc = iphases;
-                                car.CurrentJSON.current_charger_power_calc_w =  iphases * ivoltage * icurrent;
+                                charger_phases_calc = iphases;
+                                charger_power_calc_w = iphases * ivoltage * icurrent;
+                                car.CurrentJSON.current_charger_phases_calc = charger_phases_calc;
+                                car.CurrentJSON.current_charger_power_calc_w = charger_power_calc_w;
                                 car.CurrentJSON.CreateCurrentJSON();
                             }
                             
