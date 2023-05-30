@@ -465,7 +465,8 @@ LIMIT 1
                 {
                     cost_total = cost_idle_fee_total;
                 }
-                Tools.DebugLog($@"UpdateChargingState:
+                car.Log($@"GetChargingHistoryV2Service -> UpdateChargingState:
+siteLocationName:{(session.ContainsKey("siteLocationName") ? session["siteLocationName"].ToString() : "n/a")}
 chargingstateid:{chargingstateid}
 chargeSessionId:{chargeSessionId}
 cost_total:{cost_total}
