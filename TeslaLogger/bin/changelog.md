@@ -1,5 +1,6 @@
-# Version 1.54.21
+# Version 1.54.22
 - Bugfixes
+- Restore chargingstate from backup
 
 # Version 1.54.20
 - reduce Tesla API calls to minimum
