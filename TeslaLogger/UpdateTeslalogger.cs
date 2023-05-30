@@ -956,7 +956,7 @@ PRIMARY KEY(id)
             {
                 Logfile.Log("ALTER TABLE cars ADD Column charge_point");
                 AssertAlterDB();
-                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `charge_point` TINYINT(1) NULL DEFAULT -1", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `charge_point` INT(2) NULL DEFAULT -1", 600);
             }
         }
 
