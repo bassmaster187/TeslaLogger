@@ -1677,10 +1677,11 @@ namespace TeslaLogger
                 {
                     httpclientTeslaChargingSites = new HttpClient();
                     {
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.11.1/12ad93c62a/ios/16.0");
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("User-Agent", "Tesla/1195 CFNetwork/1388 Darwin/22.0.0");
+                        // https://github.com/ev-map/EVMap/blob/master/app/src/main/java/net/vonforst/evmap/api/availability/TeslaAvailabilityDetector.kt#L444
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("User-Agent", "okhttp/4.9.2");
                         httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpclientTeslaChargingSites.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        httpclientTeslaChargingSites.DefaultRequestHeaders.Add("Accept", "*/*");
                         httpclientTeslaChargingSites.Timeout = TimeSpan.FromSeconds(11);
                         httpclientTeslaChargingSitesToken = Tesla_token;
                     }
@@ -1712,10 +1713,10 @@ namespace TeslaLogger
                 {
                     httpclientgetChargingHistoryV2 = new HttpClient();
                     {
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.11.1/12ad93c62a/ios/16.0");
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "Tesla/1195 CFNetwork/1388 Darwin/22.0.0");
+                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
+                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "okhttp/4.9.2");
                         httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
                         httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
                         httpclientgetChargingHistoryV2Token = Tesla_token;
                     }
