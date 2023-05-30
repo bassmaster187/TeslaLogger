@@ -6119,6 +6119,7 @@ FROM
                     }
                     catch (Exception ex)
                     {
+                        Logfile.Log(ex.ToString());
                         ex.ToExceptionless().FirstCarUserID().AddObject(calculateCountry).AddObject(calculateDate).Submit();
                     }
                 }

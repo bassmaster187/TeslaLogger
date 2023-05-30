@@ -12,6 +12,7 @@ using Microsoft.VisualBasic;
 using Exceptionless;
 using System.Reflection;
 using Org.BouncyCastle.Crypto.Modes;
+using Newtonsoft.Json.Linq;
 
 namespace TeslaLogger
 {
@@ -92,9 +93,27 @@ namespace TeslaLogger
 
             foreach (dynamic d in j)
             {
-                string name = d["name"]["en"];
-                string namede = d["name"]["de"];
-                if (name.Contains("forecast") || name.Contains("consumption") || name.Contains("planned") 
+                string name = "";
+                string namede = "";
+
+                if (d["name"] is JObject && d["name"].ContainsKey("en") && d["name"].ContainsKey("de"))
+                {
+                    name = d["name"]["en"];
+                    namede = d["name"]["de"];
+                }
+                else if (d["name"] is JArray)
+                {
+                    name = d["name"][0]["en"];
+                    namede = d["name"][0]["de"];
+                }
+                else 
+                {
+                    Logfile.Log("Not Handled: (missing name)" + d["name"].ToString());
+                    continue;
+                }
+
+
+                if (name.Contains("forecast") || name.Contains("consumption") || name.Contains("planned") || name.Contains("Day Ahead Auction")
                     || name == "Residual load" || name == "Renewable share of generation" || name == "Renewable share of load" || name == "Import Balance" || name == "Load")
                     continue;
 
