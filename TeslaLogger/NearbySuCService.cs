@@ -352,8 +352,20 @@ namespace TeslaLogger
                 && suc.ContainsKey("totalStalls")
                 )
             {
-                if (suc["availableStalls"].Contains("value")
-                    && suc["totalStalls"].Contains("value"))
+                if (!suc["availableStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at availableStalls");
+                    return;
+                }
+
+                if (!suc["totalStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at totalStalls");
+                    return;
+                }
+
+                if (suc["availableStalls"].HasValues
+                    && suc["totalStalls"].HasValues)
                 {
 
                     if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
@@ -416,7 +428,7 @@ VALUES(
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
+                    Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
             }
             /*
