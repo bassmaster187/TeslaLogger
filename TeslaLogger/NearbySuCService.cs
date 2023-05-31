@@ -430,7 +430,7 @@ VALUES(
                 }
                 else
                 {
-                    Tools.DebugLog("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
+                    Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
             }
             /*
