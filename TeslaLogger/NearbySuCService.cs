@@ -354,10 +354,20 @@ namespace TeslaLogger
                 && suc.ContainsKey("totalStalls")
                 )
             {
-                dynamic availableStalls = suc["availableStalls"];
-                dynamic totalStalls = suc["totalStalls"];
-                if (availableStalls.ContainsKey("value")
-                    && totalStalls.ContainsKey("value"))
+                if (!suc["availableStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at availableStalls");
+                    return;
+                }
+
+                if (!suc["totalStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at totalStalls");
+                    return;
+                }
+
+                if (suc["availableStalls"].HasValues
+                    && suc["totalStalls"].HasValues)
                 {
 
                     if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
