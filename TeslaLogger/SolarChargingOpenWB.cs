@@ -46,7 +46,7 @@ namespace TeslaLogger
                     return;
                 }
                 
-                if(host != null && port != null)
+                if(host != null && port > 0)
                 {
                     client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
 
@@ -145,7 +145,7 @@ namespace TeslaLogger
                 base.Plugged(plugged);
 
                 // xxx if (!plugged)
-                    client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
+                client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
 
                 client.Publish($"openWB/set/lp/{LP}/plugStat", plugged ? msg1 : msg0);
             }

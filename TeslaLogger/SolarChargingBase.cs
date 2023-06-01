@@ -12,7 +12,7 @@ namespace TeslaLogger
     internal class SolarChargingBase
     {
         protected Car car;
-        protected int lastAmpere = -1;
+        protected int lastAmpere = 0;
         protected String LogPrefix = "SolarCharging";
         protected bool lastPlugged = false;
         protected bool lastCharging = false;
@@ -72,13 +72,14 @@ namespace TeslaLogger
         {
             try
             {
+                Log("StartCharging: GetCurrentState " + car.GetCurrentState());
                 if (car.GetCurrentState() == Car.TeslaState.Sleep )
                 {
                     _ = Task.Factory.StartNew(() =>
                     {
                         Log("StartCharging: wake up!");
-                        string ret = car.webhelper.Wakeup().Result;
-                        Log("StartCharging wake_up result: " + ret);
+                        //string ret = car.webhelper.Wakeup().Result;
+                        //Log("StartCharging wake_up result: " + ret);
 
                         int x = 20;
                         while (car.GetCurrentState() == Car.TeslaState.Sleep)
