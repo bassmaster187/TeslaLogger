@@ -51,7 +51,7 @@ namespace TeslaLogger
 
         private static string _OSVersion = string.Empty;
 
-        public enum UpdateType { all, stable, none};
+        public enum UpdateType { all, stable, none };
 
         internal static Queue<Tuple<DateTime, string>> debugBuffer = new Queue<Tuple<DateTime, string>>();
 
@@ -275,7 +275,7 @@ namespace TeslaLogger
                 }
             }
             // ignore failed inserts
-            catch (Exception) {  }
+            catch (Exception) { }
         }
 
         // source: https://stackoverflow.com/questions/6994852
@@ -598,7 +598,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().FirstCarUserID().AddObject(json,"JSON").Submit();
+                ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -709,7 +709,8 @@ namespace TeslaLogger
                 dynamic j = JsonConvert.DeserializeObject(json);
                 if (IsPropertyExist(j, "StreamingPos"))
                 {
-                    if(bool.TryParse(j["StreamingPos"].ToString(), out bool streamingPos)) {
+                    if (bool.TryParse(j["StreamingPos"].ToString(), out bool streamingPos))
+                    {
                         Logfile.Log("StreamingPos: " + streamingPos);
                         _StreamingPos = streamingPos;
                         return streamingPos;
@@ -768,7 +769,7 @@ namespace TeslaLogger
                         }
                     }
                 }
-                
+
                 _startSleepingHour = startSleepingHour;
                 _startSleepingMinutes = startSleepingMinutes;
 
@@ -952,10 +953,10 @@ namespace TeslaLogger
             if (ts.TotalMinutes < 10)
             {
                 power = _power;
-                temperature =_temperature;
-                length =_length;
-                language =_language;
-                URL_Admin =_URL_Admin;
+                temperature = _temperature;
+                length = _length;
+                language = _language;
+                URL_Admin = _URL_Admin;
                 Range = _Range;
                 URL_Grafana = _URL_Grafana;
                 defaultcar = _defaultcar;
@@ -1063,7 +1064,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                ex.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json),"JSON-Base64").Submit();
+                ex.ToExceptionless().AddObject(json, "JSON").AddObject(Tools.ConvertString2Base64(json), "JSON-Base64").Submit();
                 Logfile.Log(ex.ToString());
             }
         }
@@ -1205,7 +1206,7 @@ namespace TeslaLogger
             {
                 return _OSVersion;
             }
-          
+
             string ret = "";
             try
             {
@@ -1448,7 +1449,7 @@ namespace TeslaLogger
                 return;
 
             bool filesFoundForDeletion = false;
-            int countDeletedFiles = 0;            
+            int countDeletedFiles = 0;
 
             if (FreeDiskSpaceMB() > freeDiskSpaceNeededMB)
             {  // enough space available?
@@ -1460,35 +1461,39 @@ namespace TeslaLogger
 
             if (di.Exists)
             {
-                IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
-
-                FileInfo dsFileSize = di.GetFiles().OrderBy(p => p.Length).Last<FileInfo>();
-                Tools.DebugLog($"CleanupBackupFolder: largest file {dsFileSize.Name} has {dsFileSize.Length} bytes");
-
-                // make sure we can store 10 backups
-                freeDiskSpaceNeededMB = Math.Max(freeDiskSpaceNeededMB, (dsFileSize.Length / 1024 / 1024) * 10);
-
-                foreach (FileInfo fi in ds)
+                FileInfo[] files = di.GetFiles();
+                if (files.Length > 0)
                 {
-                    if (FreeDiskSpaceMB() > freeDiskSpaceNeededMB)
-                    {  // already deleted enough?
-                        Tools.DebugLog($"CleanupBackupFolder: FreeDiskSpaceMB() {FreeDiskSpaceMB()} > freeDiskSpaceNeeded {freeDiskSpaceNeededMB}");
-                        return;
-                    }
+                    IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
 
-                    if ((DateTime.Now - fi.LastWriteTime).TotalDays >= keepDays)
+                    FileInfo dsFileSize = di.GetFiles().OrderBy(p => p.Length).Last<FileInfo>();
+                    Tools.DebugLog($"CleanupBackupFolder: largest file {dsFileSize.Name} has {dsFileSize.Length} bytes");
+
+                    // make sure we can store 10 backups
+                    freeDiskSpaceNeededMB = Math.Max(freeDiskSpaceNeededMB, (dsFileSize.Length / 1024 / 1024) * 10);
+
+                    foreach (FileInfo fi in ds)
                     {
-                        try
-                        {
-                            Logfile.Log("Housekeeping: delete file " + fi.Name);
-                            fi.Delete();
-                            filesFoundForDeletion = true;
-                            countDeletedFiles++;
+                        if (FreeDiskSpaceMB() > freeDiskSpaceNeededMB)
+                        {  // already deleted enough?
+                            Tools.DebugLog($"CleanupBackupFolder: FreeDiskSpaceMB() {FreeDiskSpaceMB()} > freeDiskSpaceNeeded {freeDiskSpaceNeededMB}");
+                            return;
                         }
-                        catch (Exception ex)
+
+                        if ((DateTime.Now - fi.LastWriteTime).TotalDays >= keepDays)
                         {
-                            ex.ToExceptionless().FirstCarUserID().Submit();
-                            Logfile.Log(ex.ToString());
+                            try
+                            {
+                                Logfile.Log("Housekeeping: delete file " + fi.Name);
+                                fi.Delete();
+                                filesFoundForDeletion = true;
+                                countDeletedFiles++;
+                            }
+                            catch (Exception ex)
+                            {
+                                ex.ToExceptionless().FirstCarUserID().Submit();
+                                Logfile.Log(ex.ToString());
+                            }
                         }
                     }
                 }
@@ -1755,8 +1760,10 @@ WHERE
                     FileInfo fileInfo = new FileInfo(path);
                     HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false)) {
-                        using (FileStream outputFileStream = File.Create(fileInfo.FullName)) {
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    {
+                        using (FileStream outputFileStream = File.Create(fileInfo.FullName))
+                        {
                             responseContentStream.Seek(0, SeekOrigin.Begin);
                             responseContentStream.CopyTo(outputFileStream);
                             outputFileStream.Close();
@@ -1833,7 +1840,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.Log("GetSettingsInt:" + name +"\r\n"+  ex.ToString());
+                Logfile.Log("GetSettingsInt:" + name + "\r\n" + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().AddObject(json, "JSON").Submit();
             }
@@ -1927,7 +1934,7 @@ WHERE
                         }
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {

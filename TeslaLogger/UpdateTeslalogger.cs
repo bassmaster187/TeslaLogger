@@ -93,7 +93,9 @@ namespace TeslaLogger
                 KVS.CheckSchema();
                 DBHelper.EnableUTF8mb4();
 
-                CheckDBCharset();                
+                CheckDBCharset();
+
+                CheckDBSchema_areaa();
 
                 CheckDBSchema_can();
 
@@ -156,6 +158,7 @@ namespace TeslaLogger
 
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Logfile.Log("DBIndex Update (Task) started.");
                     if (!DBHelper.IndexExists("can_ix2", "can"))
                     {
                         Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
@@ -181,14 +184,14 @@ namespace TeslaLogger
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 6000);
                     }
 
                     if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 6000);
                     }
 
                     if (DBHelper.IndexExists("idx_pos_datum", "pos"))
@@ -290,6 +293,16 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void CheckDBSchema_areaa()
+        {
+            if (!DBHelper.TableExists("active_route_energy_at_arrival"))
+            {
+                Logfile.Log("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
             }
         }
 
@@ -457,7 +470,6 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_pos()
         {
-            
             if (!DBHelper.ColumnExists("pos", "battery_level"))
             {
                 Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
