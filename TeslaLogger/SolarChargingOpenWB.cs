@@ -7,12 +7,14 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
 using System.Threading;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
     internal class SolarChargingOpenWB : SolarChargingBase
     {
-        string host = "192.168.1.178";
+
+        string host = "";
         int port = 1883;
         int LP = 3;
         string ClientId = "Teslalogger-OpenWB";
@@ -28,35 +30,60 @@ namespace TeslaLogger
             {
                 LogPrefix = "SolarCharging-OpenWB";
 
-                client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
-
-                if (user != null && passwd != null)
+                if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
                 {
-                    client.Connect(ClientId, user, passwd);
+                    dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
+                    host = r["mqtt_host"];
+                    port = (int)r["mqtt_port"];
+                    LP = 3;
+                    ClientId = r["mqtt_clientid"];
+                    user = r["mqtt_user"];
+                    passwd = r["mqtt_passwd"];
                 }
                 else
                 {
-                    client.Connect(ClientId);
+                    Log("SolarCharging can't start without settings!");
+                    return;
                 }
-
-                client.Subscribe(new[] {
-                    $"openWB/lp/{LP}/AConfigured"
-                },
-                    new[] {
-                        MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
-                    });
-
-                if (client.IsConnected)
+                
+                if(host != null && port > 0)
                 {
-                    Log("MQTT: Connected!");
+                    client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
+
+                    if (user != null && passwd != null)
+                    {
+                        client.Connect(ClientId, user, passwd);
+                    }
+                    else
+                    {
+                        client.Connect(ClientId);
+                    }
+
+                    client.Subscribe(new[] {
+                        $"openWB/lp/{LP}/AConfigured"
+                    },
+                        new[] {
+                            MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
+                        });
+
+                    if (client.IsConnected)
+                    {
+                        Log("MQTT: Connected!");
+                    }
+                    else
+                    {
+                        Log("MQTT: Connection failed!");
+                    }
+                    client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
+                    new Thread(() => { MQTTConnectionHandler(client); }).Start();
                 }
                 else
                 {
-                    Log("MQTT: Connection failed!");
+                    return;
                 }
+                
 
-                client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-                new Thread(() => { MQTTConnectionHandler(client); }).Start();
+
 
             }
             catch (Exception ex)
@@ -118,7 +145,7 @@ namespace TeslaLogger
                 base.Plugged(plugged);
 
                 // xxx if (!plugged)
-                    client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
+                client.Publish($"openWB/set/lp/{LP}/chargeStat", plugged ? msg1 : msg0);
 
                 client.Publish($"openWB/set/lp/{LP}/plugStat", plugged ? msg1 : msg0);
             }

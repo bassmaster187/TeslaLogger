@@ -93,7 +93,7 @@ namespace TeslaLogger
                 KVS.CheckSchema();
                 DBHelper.EnableUTF8mb4();
 
-                CheckDBCharset();                
+                CheckDBCharset();
 
                 CheckDBSchema_can();
 
@@ -266,7 +266,13 @@ namespace TeslaLogger
                     CheckBackupCrontab();
                 }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
+                _ = Task.Factory.StartNew(() =>
+                {
+                    UpdateFastChargerPresent();
+
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
             }
+
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
@@ -791,6 +797,20 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN battery_range_km DOUBLE NULL", 600);
             }
 
+            if (!DBHelper.ColumnExists("charging", "charger_phases_calc"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_phases_calc TINYINT(1) NULL");
+            }
+
+            if (!DBHelper.ColumnExists("charging", "charger_power_calc_w"))
+            {
+                Logfile.Log("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE charging ADD COLUMN charger_power_calc_w INT NULL");
+            }
+
             InsertCarID_Column("charging"); 
         }
 
@@ -930,6 +950,13 @@ PRIMARY KEY(id)
                 Logfile.Log("ALTER TABLE cars ADD Column wheel_type");
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "charge_point"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column charge_point");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `charge_point` INT(2) NULL DEFAULT -1", 600);
             }
         }
 
@@ -1319,6 +1346,27 @@ PRIMARY KEY(id)
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static void UpdateFastChargerPresent()
+        {
+            Logfile.Log("UpdateFastChargerPresent: power > 24 kW");
+            DBHelper.ExecuteSQLQuery("UPDATE chargingstate SET fast_charger_present = 1 WHERE max_charger_power > 24 AND fast_charger_present IS NULL", 300);
+
+            //Logfile.Log("UpdateFastChargerPresent: voltage > 300 V");
+            //DBHelper.ExecuteSQLQuery("UPDATE chargingstate SET fast_charger_present = 1 WHERE charger_voltage > 300 AND fast_charger_present IS NULL", 300);
+
+            Logfile.Log("UpdateFastChargerPresent: voltage = 2, actual_current = 0, power > 0");
+            DBHelper.ExecuteSQLQuery(@"
+update chargingstate set fast_charger_present = 1 where id in
+(
+    select distinct id from
+    (
+        SELECT CS.id
+        FROM chargingstate CS join charging CG on CG.id between CS.StartChargingID AND CS.EndChargingID and CS.CarID = CG.CarID
+        where CG.charger_voltage = 2 and CG.charger_actual_current = 0 AND CG.charger_power > 0 AND CS.fast_charger_present IS null
+    ) as q
+)", 300);
         }
 
         private static void FileChecker(object state)

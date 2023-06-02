@@ -117,6 +117,8 @@ namespace TeslaLogger
         private bool useTaskerToken = true;
         internal string wheel_type = "";
 
+        private int charge_point = -1;
+
         public double WhTR
         {
             get => _wh_TR;
@@ -194,7 +196,7 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "")
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "", int charge_point = -1)
         {
             lock (_syncRoot)
             {
@@ -218,9 +220,12 @@ namespace TeslaLogger
                     this.WhTR = WhTR ?? 0.190;
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
+                    this.charge_point = charge_point;
 
-                    if (DisplayName == "Teslarossa")
+                    if (charge_point != -1)
+                    {
                         solarChargingBase = new SolarChargingOpenWB(this);
+                    }
 
                     if (CarInDB > 0)
                     {

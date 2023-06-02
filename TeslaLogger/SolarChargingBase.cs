@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Ubiety.Dns.Core;
 
@@ -11,7 +12,7 @@ namespace TeslaLogger
     internal class SolarChargingBase
     {
         protected Car car;
-        protected int lastAmpere = -1;
+        protected int lastAmpere = 0;
         protected String LogPrefix = "SolarCharging";
         protected bool lastPlugged = false;
         protected bool lastCharging = false;
@@ -67,13 +68,48 @@ namespace TeslaLogger
 
         }
 
-        internal virtual void StartCharging()
+        public virtual void StartCharging()
         {
             try
             {
-                Log("StartCharging");
-                string ret = car.webhelper.PostCommand("command/charge_start", null).Result;
-                Log("StartCharging result: " + ret);
+                Log("StartCharging: GetCurrentState " + car.GetCurrentState());
+                if (car.GetCurrentState() == Car.TeslaState.Sleep )
+                {
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        Log("StartCharging: wake up!");
+                        //string ret = car.webhelper.Wakeup().Result;
+                        //Log("StartCharging wake_up result: " + ret);
+
+                        int x = 20;
+                        while (car.GetCurrentState() == Car.TeslaState.Sleep)
+                        {
+                            Thread.Sleep(10000);
+                            Log("StartCharging: waiting for car...");
+                            x--;
+                            if (x <= 0)
+                            {
+                                Log("StartCharging: time out, car is still sleeping. give up...");
+                                return;
+                            }
+                            
+                        }
+                        Log("StartCharging: car is online");
+                        string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                        Log("StartCharging charge_start result: " + retcs);
+                        //car.Log(car.webhelper.PostCommand("command/charge_start", null).Result);
+                    }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                    
+                }
+                else
+                {
+                    Log("StartCharging: start charging");
+                    string retcs = car.webhelper.PostCommand("command/charge_start", null).Result;
+                    Log("StartCharging charge_start result: " + retcs);
+                }
+
+                
+                
             }
             catch (Exception ex)
             {

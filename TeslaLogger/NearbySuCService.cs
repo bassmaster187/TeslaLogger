@@ -9,6 +9,8 @@ using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Runtime.Caching;
+using System.Linq;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -350,33 +352,49 @@ namespace TeslaLogger
                 && suc.ContainsKey("totalStalls")
                 )
             {
-                if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
-                    && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
+                if (!suc["availableStalls"].HasValues)
                 {
-                    Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
+                    Logfile.Log($"SUC: {name} has no values at availableStalls");
+                    return;
+                }
 
-                    if (total_stalls > 0)
+                if (!suc["totalStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at totalStalls");
+                    return;
+                }
+
+                if (suc["availableStalls"].HasValues
+                    && suc["totalStalls"].HasValues)
+                {
+
+                    if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
+                        && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
                     {
-                        if (!ContainsSupercharger(send, name))
-                        {
-                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                            send.Add(sendKV);
-                            sendKV.Add("n", name);
-                            sendKV.Add("lat", lat);
-                            sendKV.Add("lng", lng);
-                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                            sendKV.Add("a", available_stalls);
-                            sendKV.Add("t", total_stalls);
-                            sendKV.Add("kw", maxPowerKw);
-                            sendKV.Add("m", Message);
+                        Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
 
-                            if (insertdb)
+                        if (total_stalls > 0)
+                        {
+                            if (!ContainsSupercharger(send, name))
                             {
-                                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                                send.Add(sendKV);
+                                sendKV.Add("n", name);
+                                sendKV.Add("lat", lat);
+                                sendKV.Add("lng", lng);
+                                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                                sendKV.Add("a", available_stalls);
+                                sendKV.Add("t", total_stalls);
+                                sendKV.Add("kw", maxPowerKw);
+                                sendKV.Add("m", Message);
+
+                                if (insertdb)
                                 {
-                                    con.Open();
-                                    // find internal ID of supercharger by name
-                                    using (MySqlCommand cmd = new MySqlCommand(@"
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        // find internal ID of supercharger by name
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     superchargerstate(
         nameid,
@@ -390,22 +408,27 @@ VALUES(
     @available_stalls,
     @total_stalls
 )", con))
-                                    {
-                                        cmd.Parameters.AddWithValue("@nameid", sucID);
-                                        cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
-                                        cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                        SQLTracer.TraceNQ(cmd, out long _);
+                                        {
+                                            cmd.Parameters.AddWithValue("@nameid", sucID);
+                                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                                            cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
+                                            cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
+                                            SQLTracer.TraceNQ(cmd, out long _);
+                                        }
+                                        con.Close();
                                     }
-                                    con.Close();
                                 }
                             }
                         }
+                        else
+                        {
+                            // TODO how do we handle total_stalls == 0 ?
+                        }
                     }
-                    else
-                    {
-                        // TODO how do we handle total_stalls == 0 ?
-                    }
+                }
+                else
+                {
+                    Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
             }
             /*

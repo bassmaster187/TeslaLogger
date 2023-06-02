@@ -113,6 +113,8 @@ if (isset($id))
 			$("#work").attr('checked', 'checked');
 		else if (e.startsWith("charger"))
 			$("#charger").attr('checked', 'checked');
+		else if (e.startsWith("tlwb"))
+			$("#tlwb").attr('checked', 'checked');
 		else if (e.startsWith("ccp"))
 			$("#ccp").attr('checked', 'checked');
 		else if (e.startsWith("scl"))
@@ -217,6 +219,9 @@ if (isset($id))
 
 	if ($("#charger").is(':checked'))
 		f += "+charger";
+
+	if ($("#tlwb").is(':checked'))
+		f += "+tlwb";
 
 	if ($("#ccp").is(':checked'))
 		f += "+ccp";
@@ -384,6 +389,7 @@ if (isset($id))
 				<tr><td>🏠 <?php t("Home"); ?></td><td><input id="home" type="checkbox" value="home" /></td></tr>
 				<tr><td>💼 <?php t("Work"); ?></td><td> <input id="work" type="checkbox" value="work" /></td></tr>
 				<tr><td>🔌 <?php t("Charger"); ?></td><td> <input id="charger" type="checkbox" value="charger" name="type" /></td></tr>
+				<tr><td>🔌 <?php t("TeslaLoggerWallBox"); ?></td><td> <input id="tlwb" type="checkbox" value="tlwb" name="type" /></td></tr>
 				<tr><td><h4 style="margin-top: 20px;"><?php t("Charging"); ?></h4></td></tr>
 				<tr><td><?php t("Copy Charging Costs"); ?></td><td> <input id="ccp" type="checkbox" value="" name="type" /></td></tr>
 				<tr><td><?php t("Don't Combine Charging Sessions"); ?></td><td> <input id="dnc" type="checkbox" value="" name="type" /></td></tr>
