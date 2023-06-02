@@ -5,7 +5,6 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Ubiety.Dns.Core;
 
 namespace TeslaLogger
 {
