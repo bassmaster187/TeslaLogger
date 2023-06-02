@@ -48,7 +48,7 @@ Please create a manual backup before you proceed!
 
 To restore the correct entries before the faulty version there is a web UI:
 
-Navigate to (http://teslalogger:5000/RestoreChargingCostsFromBackup) (adapt to your settings of hostname and port) and
+Navigate to (http://teslalogger:5000/RestoreChargingCostsFromBackup) (adapt to your settings of hostname and port, for Docker the default port is 5010) and
 follow the steps:
 
 - select a local backup found by TeslaLogger or upload your own backup file
