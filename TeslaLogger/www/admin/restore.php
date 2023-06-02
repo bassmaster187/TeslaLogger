@@ -16,19 +16,21 @@ require("language.php");
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
   </head>
-<body style="padding-top: 5px; padding-left: 10px;">
+<body>
+<div>
 <?php 
     include "menu.php";
-    echo(menu("RESTORE DATABASE"));
+    echo(menu("Restore Database"));
 ?>
-    Please make sure you backup your Teslalogger before restoring any databases. 
-	Move your backup folder from \\RASPBERRY\teslalogger\backup to your hard drive!<br><br>
-	The restore process may take up to 10 minutes!<br><br>
-	Don't interrupt the restore process in any way! Don't reload the page! Don't close this page! 	
-	<br><br>
+	<h1><?php t("Restore Database"); ?></h1>
+	<p><?php t("TextRestore1"); ?></p>
+	<p><?php t("TextRestore2"); ?></p>
+	<p><?php t("TextRestore3"); ?></p>
 	
 <form action="restore_upload.php" method="post" enctype="multipart/form-data">
-
-    <input type="file" name="fileToUpload" id="fileToUpload"><br>
-    <input type="submit" value="Restore" name="submit">
+    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+    <input type="submit" value="<?php t("Restore Database"); ?>" name="submit">
 </form>
+</div>
+</body>
+</html>

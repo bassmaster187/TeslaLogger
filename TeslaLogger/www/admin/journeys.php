@@ -22,7 +22,7 @@ input.newJourney {width: 300px;}
 select.newJourney {width: 500px;}
 </style>
 
-	<script>
+<script>
 	<?php
 	if (isset($_REQUEST["carid"]))
         echo("var carid=".$_REQUEST["carid"].";\n");
@@ -363,25 +363,16 @@ select.newJourney {width: 500px;}
 
         return temp;
     }
-
-
 </script>
 </head>
 <body>
 <div>
 <?php
-include "menu.php";
-menu("Journeys");
-
-// echo("Unit: $LengthUnit<br>");
-// echo("Milefactor: $milefactor");
+	include "menu.php";
+	menu("Journeys");
 ?>
-<div>
     <h1><?php t("Journeys"); ?></h1>
-    <p>
-		<?php t("TextJourneys"); ?>
-    </p>
-<div>
+    <p><?php t("TextJourneys"); ?></p>
 
 <table id="myDT">
 <thead>

@@ -20,13 +20,13 @@ Start mi=Inizio mi
 End mi=Fine mi
 kmDiff=Differenza Km
 Max Range=Max autonomia
-Ø Verbrauch= Ø Consumo
+Ø Verbrauch=Ø Consumo
 Tage=Giorni
 
 #Degradation.json
 Degradation=Degrado
-Maximalreichweite [km]= Autonomia massima [km]
-Maximalreichweite [mi]= Autonomia massima [mi]
+Maximalreichweite [km]=Autonomia massima [km]
+Maximalreichweite [mi]=Autonomia massima [mi]
 km Stand [km]=Contachilometri [km]
 mi Stand [mi]=Contamiglia [mi]
 Odometer [mi]=Contamiglia [mi]
@@ -35,9 +35,9 @@ Max. Reichweite (Monatsmittel) [mi]=Max autonomia (media mensile) [mi]
 
 #Ladehistorie.json
 Ladehistorie=Storia di ricarica
-Startdatum= Data inizio
-Enddatum= Data fine
-geladen kWh= KWh caricati
+Startdatum=Data inizio
+Enddatum=Data fine
+geladen kWh=KWh caricati
 km Stand=Contachilometri
 Adresse=Indirizzo
 TR km Start=TR km Inizio
@@ -54,7 +54,7 @@ Ladestatistik=Statistiche di ricarica
 Letzte Ladung=Ultima ricarica
 Ort=Indirizzo
 Ø geladen kWh=Ø Ricaricato KWh
-Ladezeit h= Durata di ricarica h
+Ladezeit h=Durata di ricarica h
 Ø SOC=Ø SOC
 Max SOC=Max SOC
 Anzahl Ladungen=Numero di ricariche
@@ -62,18 +62,18 @@ Anzahl=Contatore
 Geladen=Caricato
 Ladezeit=Tempo di ricarica
 Anz. Ladungen=Contatore ricariche
-Ladehub= Range di ricarica
+Ladehub=Range di ricarica
 
 #SOC Ladestatistik.json
-SOC Ladestatistik= Statistica di ricarica SOC
+SOC Ladestatistik=Statistica di ricarica SOC
 SOC [%]=SOC [%]
 
 #Laden.json
 Laden=Ricarica
-Ladespannung [V]= Tensione di ricarica [V]
+Ladespannung [V]=Tensione di ricarica [V]
 Reichweite [mi]=Autonomia [mi]
 Reichweite [km]=Autonomia [km]
-Leistung [kW]= Potenza [KW]
+Leistung [kW]=Potenza [KW]
 Phasen=Fasi
 Stromstärke [A]=Corrente [A]
 Angefordert [A]=Corrente richiesta [A]
@@ -81,9 +81,9 @@ Pilot [A]=Pilota [A]
 
 #Vampir Drain Monatsstatistik.json
 Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
-TR mi Verlust= TR mi persi
-kWh Verlust= KWh persi
-Eur Verlust= EUR persi
+TR mi Verlust=TR mi persi
+kWh Verlust=KWh persi
+Eur Verlust=EUR persi
 
 #Trip.json
 Trip=Viaggio
@@ -93,7 +93,7 @@ Start Adresse=Indirizzo di partenza
 Ziel Adresse=Indirizzo di destinazione
 Ø Verbrauch kWh=Ø Consumo KWh
 Verbraucht kWh=Ø Consumato KWh
-Dauer Min= Durata Min.
+Dauer Min=Durata Min.
 mi=mi
 km=km
 Ø °C=Ø °C
@@ -145,7 +145,7 @@ Car Info=Informazioni autovettura
 Status=Status
 Typical Range=Autonomia tipica
 Odometer=Contachilometri
-Car Version= Versione autovettura
+Car Version=Versione autovettura
 Last Trip=Ultimo viaggio
 Duration=Durata
 Distance=Distanza
@@ -177,6 +177,7 @@ Consumption=Consumo
 min=min
 Wh/km=Wh/km
 km/h=km/h
+Please update to latest docker-compose.yml file. Check: {LINK}=Aggiornare il file docker-compose.yml più recente. Controllare: {LINK}
 
 #menu.php
 Logfile=File di log
@@ -190,6 +191,16 @@ Restore=Ristabilire
 Geofence=Geofence
 Suspend Teslalogger=Sospendi Teslalogger
 Wakeup Teslalogger=Attiva Teslalogger
+My Degradation=La mia degradazione
+My Charging AVG=Il mio AVG di ricarica
+Fleet Degradation AVG=Degrado della flotta AVG
+Fleet Charging AVG=Ricarica della flotta AVG
+Fleet Charging MAX (Firmware)=Ricarica flotta MAX (Firmware)
+Fleet Charging Locations=Punti di ricarica della flotta
+Fleet Fast Charging Map=Mappa della ricarica veloce della flotta
+Supercharger Usage=Uso del compressore
+Firmware Tracker=Tracciamento del firmware
+Abetterrouteplanner=Pianificatore di itinerari migliori
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger credenziali Tesla
@@ -198,6 +209,44 @@ Email=Email
 Password=Password
 Repeat Password=Ripeti la password
 Speichern=Salva
+Please enter the access token!=Inserire il token di accesso!
+Please enter the refresh token!=Inserire il token di aggiornamento!
+Please select a vehicle=Selezionare un veicolo
+Check Logfile!=Controllare il file di registro!
+Do you really want to delete this vehicle?=Volete davvero eliminare questo veicolo?
+Check Logfile in one minute!=Controllare il file di registro in un minuto!
+Unauthorized=Non autorizzato
+This isn't a valid URL!=Questo non è un URL valido!
+This isn't an auth link by Tesla!=Questo non è un link di autorizzazione di Tesla!
+The URL doesn't contain the expected format!=L'URL non contiene il formato previsto!
+BA_Browser=Nel {browser} locale (consigliato)
+BA_Read=Leggere tutti i passaggi prima di continuare:
+BA_Logon=Cliccate sul link sottostante intitolato <b>Tesla Logon</b> che aprirà una nuova scheda/finestra per la pagina di logon di Tesla Authentication.
+BA_Auth=Accedere utilizzando le proprie credenziali Tesla e l'MFA, se richiesto (Tesla le ricorderà se si è già utilizzato il link in precedenza).
+BA_NotFound=Il risultato sarà una "Pagina non trovata". Questo è normale.
+BA_URL=Copiate l'URL risultante della pagina web nel modulo sottostante. All'interno dell'URL è presente un codice temporaneo che possiamo utilizzare per generare i token. Lo estrarremo per voi dal link.
+BA_Invalid=Questi collegamenti funzionano in genere una sola volta, quindi se sul nostro sito web appare un messaggio di errore del tipo "Concessione non valida" o altro, potrebbe essere necessario ricominciare con il collegamento Tesla Logon, che dovrebbe produrre un nuovo collegamento.
+BA_Logoff=Se si desidera utilizzare un altro account, è necessario disconnettersi manualmente {qui!}
+BA_GetToken=Otterremo quindi i token per il vostro account Tesla.
+BA_SelectCar=Selezionare l'auto che si desidera utilizzare per Teslalogger.
+BA_Step1=Fase 1:
+BA_Step2=Fase 2:
+BA_Step3=Fase 3:
+BA_FillOut=Compilate questo modulo:
+BA_CopyUrl=Copiare l'url risultante come mostrato
+BA_Paste=Incollare l'url risultante nella casella e fare clic sul pulsante "Ottenere i gettoni":
+Get Tokens=Ottenere i gettoni
+Access Token=Gettone di accesso
+Refresh Token=Gettone di aggiornamento
+Car=Auto
+Free Supercharging=Ricarica gratuita
+Reconnect=Ricollegarsi
+Please choose your vehicle=Scegliere il veicolo
+Model=Modello
+VIN=VIN
+Free SUC=SUC gratuito
+Edit=Modifica
+New car=Auto nuova
 
 #settings.php
 Credentials=Credenziali
@@ -236,7 +285,7 @@ Tasker URL=URL Borse
 Received Tasker Token=Token Tasker ricevuto
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla= Tutti i consumi - ScanMyTesla
+Alle Verbräuche - ScanMyTesla=Tutti i consumi - ScanMyTesla
 Zelltemperatur [°C]=Temperatura celle [°C]
 Zelltemperatur [°F]=Temperature celle [°F]
 
@@ -349,6 +398,10 @@ Enable Sentry Mode=Abilita la modalità Sentinella
 Disable Sentry Mode=Disattivare la modalità Sentry
 Turn HVAC off=Spegnere il sistema HVAC
 No sleep=Non si dorme
+Are you sure you want to delete this geofencing location?=Siete sicuri di voler eliminare questa posizione di geofencing?
+Error=Errore
+Deleted!=Soppresso!
+Meter=Metri
 
 #journeys.php
 Journeys=Viaggi
@@ -385,3 +438,37 @@ First=Primo
 Last=Ultimo
 Next=Avanti
 Previous=Precedente
+
+#adminpanelpassword.php
+Please enter password!=Inserire la password!
+Passwords do not match!=Le password non corrispondono!
+Do you want to delete your password?=Volete cancellare la vostra password?
+Set password for Teslalogger's admin panel=Impostazione della password per il pannello di amministrazione di Teslalogger
+Name=Nome
+
+#changelog.php
+Changelog=Changelog
+
+#dashboard.php
+Dashboard=Cruscotto
+
+#logfile.php
+Download Logfile=Scarica il file di registro
+Lines=Linee
+Housekeeping=Pulizie
+Sleep Attempt=Tentativo di sonno
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Inserisci le credenziali del tuo account dexters-web.de
+Dexter Login=Accesso Dexter
+Dexter Password=Password Dexter
+
+#password_info.php
+Credentials Info=Informazioni sulle credenziali
+
+#restore.php
+Restore Database=Restore Database
+TextRestore1=Assicurarsi di eseguire un backup di Teslalogger prima di ripristinare qualsiasi database. Spostare la cartella di backup da \\RASPBERRY\teslalogger\backup al disco rigido!
+TextRestore2=
+The restore process may take up to 10 minutes!=Il processo di ripristino può richiedere fino a 10 minuti!
+TextRestore3=Non interrompere in alcun modo il processo di ripristino! Non ricaricare la pagina! Non chiudere la pagina!
