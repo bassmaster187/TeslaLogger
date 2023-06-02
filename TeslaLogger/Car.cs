@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -263,6 +264,15 @@ namespace TeslaLogger
                     if (ApplicationSettings.Default.InitCredentialsLock)
                         Monitor.Exit(InitCredentialsLock);
                 }
+
+                _ = Task.Factory.StartNew(() =>
+                {
+                    Log("GetChargingHistoryV2Service initializing ...");
+                    GetChargingHistoryV2Service.LoadAll(this);
+                    GetChargingHistoryV2Service.SyncAll(this);
+                    GetChargingHistoryV2Service.CalculateCombinedChargeSessions(this);
+                    Log($"GetChargingHistoryV2Service initialized");
+                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
                 while (run)
                 {
@@ -1663,6 +1673,7 @@ id = @carid", con))
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != null && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int freesuc))
                         {
+                            Tools.DebugLog($"HasFreeSuC: {freesuc == 1}");
                             return freesuc == 1;
                         }
                     }
@@ -1675,6 +1686,7 @@ id = @carid", con))
                 Tools.DebugLog($"Exception during Car.HasFreeSuC(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during Car.HasFreeSuC()");
             }
+            Tools.DebugLog("HasFreeSuC: false");
             return false;
         }
 
@@ -1696,6 +1708,11 @@ id = @carid", con))
                 if (teslaAPIState.GetBool("sentry_mode", out bool sentry_mode) && sentry_mode)
                 {
                     reason = "sentry_mode";
+                    return false;
+                }
+                if (teslaAPIState.GetString("software_update.status", out string status) && status.Equals("installing", StringComparison.Ordinal))
+                {
+                    reason = "software_update";
                     return false;
                 }
                 if (teslaAPIState.GetInt("df", out int df) && df > 0)

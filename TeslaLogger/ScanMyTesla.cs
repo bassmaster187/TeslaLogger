@@ -275,7 +275,7 @@ namespace TeslaLogger
                         {
                             try
                             {
-                                SQLTracer.TraceNQ(cmd);
+                                SQLTracer.TraceNQ(cmd, out long _);
                             }
                             catch (MySqlException ex)
                             {
@@ -294,7 +294,7 @@ namespace TeslaLogger
                                     {
                                         cmd2.Parameters.AddWithValue("@id", car.CarInDB);
                                         cmd2.Parameters.AddWithValue("@lastscanmytesla", DateTime.Now);
-                                        SQLTracer.TraceNQ(cmd2);
+                                        SQLTracer.TraceNQ(cmd2, out long _);
                                     }
                                 }
                             }

@@ -141,7 +141,7 @@ namespace TeslaLogger
             {
                 if (queue.TryDequeue(out Request request))
                 {
-                    Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
+                    //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
                     int width = request.Width > 0 ? request.Width : 200;
                     int height = request.Height > 0 ? request.Height : 150;
                     if (request is TripRequest)

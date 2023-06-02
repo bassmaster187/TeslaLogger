@@ -21,8 +21,9 @@ else
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
 	<link href="manifest.json" rel="manifest" crossorigin="use-credentials">
-	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-	<title>Teslalogger <?php t("Dashboard"); ?></title>
+	<link rel="icon" type="image/png" href="img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <title>Teslalogger <?php t("Dashboard"); ?></title>
 	<link rel="stylesheet" href="dashboard.css?v=<?=time()?>" />
 	<link rel="stylesheet" href="my_dashboard.css?v=<?=time()?>" />
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>

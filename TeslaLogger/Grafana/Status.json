@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1639668659113,
+  "iteration": 1682151885201,
   "links": [
     {
       "icon": "external link",
@@ -38,7 +41,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -65,7 +68,7 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 6,
+        "w": 3,
         "x": 0,
         "y": 0
       },
@@ -86,7 +89,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -123,7 +126,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -165,7 +168,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 6,
+        "x": 3,
         "y": 0
       },
       "id": 12,
@@ -181,7 +184,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -218,7 +221,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -260,7 +263,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 6,
         "y": 0
       },
       "id": 11,
@@ -276,7 +279,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -313,7 +316,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -348,7 +351,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 12,
+        "x": 9,
         "y": 0
       },
       "id": 13,
@@ -364,7 +367,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -401,7 +404,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "description": "Nur verfügbar mit ScanMyTesla",
       "fieldConfig": {
@@ -441,7 +444,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 15,
+        "x": 12,
         "y": 0
       },
       "id": 14,
@@ -457,7 +460,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -494,7 +497,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -522,8 +525,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 6,
-        "x": 18,
+        "w": 3,
+        "x": 15,
         "y": 0
       },
       "id": 6,
@@ -543,7 +546,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -580,7 +583,185 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurebar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 18,
+        "y": 0
+      },
+      "id": 15,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^text$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT pressure as text FROM TPMS where carid=$Car and TireId = 1 order by Datum desc limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "TPMS FL",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurebar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 16,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^text$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT pressure as text FROM TPMS where carid=$Car and TireId = 2 order by Datum desc limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "TPMS FR",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -607,7 +788,7 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 6,
+        "w": 3,
         "x": 0,
         "y": 2
       },
@@ -629,7 +810,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -666,7 +847,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "fieldConfig": {
         "defaults": {
@@ -693,8 +874,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 6,
-        "x": 18,
+        "w": 3,
+        "x": 15,
         "y": 2
       },
       "id": 8,
@@ -714,7 +895,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "8.5.22",
       "targets": [
         {
           "format": "table",
@@ -746,6 +927,184 @@
         }
       ],
       "title": "Firmware",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurebar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 18,
+        "y": 2
+      },
+      "id": 17,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^text$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT pressure as text FROM TPMS where carid=$Car and TireId = 3 order by Datum desc limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "TPMS RL",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurebar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 21,
+        "y": 2
+      },
+      "id": 18,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^text$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.22",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT pressure as text FROM TPMS where carid=$Car and TireId = 4 order by Datum desc limit 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "candata",
+          "timeColumn": "datum",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "TPMS RR",
       "type": "stat"
     },
     {
@@ -783,9 +1142,10 @@
       "crosshairColor": "#8F070C",
       "datasource": {
         "type": "mysql",
-        "uid": "PC0C98BF192F75B00"
+        "uid": "000000001"
       },
       "display": "timeline",
+      "expandFromQueryS": 0,
       "extendLastValue": true,
       "gridPos": {
         "h": 4,
@@ -940,7 +1300,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 33,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -948,12 +1308,12 @@
       {
         "current": {
           "selected": true,
-          "text": "Two weeks",
+          "text": "",
           "value": "1"
         },
         "datasource": {
           "type": "mysql",
-          "uid": "PC0C98BF192F75B00"
+          "uid": "000000001"
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
@@ -995,6 +1355,6 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 4,
+  "version": 19,
   "weekStart": ""
 }

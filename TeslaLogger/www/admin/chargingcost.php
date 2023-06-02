@@ -145,8 +145,10 @@ input[type=number] {text-align: right;}
         return cost_total.toFixed(2);
     }
 
-    function save()
+    function save(event)
     {
+	event.preventDefault();
+
         var total = updatecalculation();
 
         var jj = {
@@ -181,6 +183,7 @@ echo(menu("Charging Costs"));
 ?>
 <div>
 <h1 style="color: red;"><span id="errortext"></span></h1>
+<form onsubmit="save(event);">
 <table>
 <tr><td><h1><?php t("Charging Costs"); ?></h1></td><td></td></tr>
 <tr><td><?php t("Charger"); ?>:&nbsp;</td><td colspan="4"><span id="address"></span></td></tr>
@@ -198,6 +201,7 @@ echo(menu("Charging Costs"));
 <tr><td colspan="4"><hr></td></tr>
 <tr><td><b><?php t("Total"); ?>:&nbsp;</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>
 <tr><td></td><td></td><td></td><td>&nbsp;</td></tr>
-<tr><td></td><td></td><td></td><td><button onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
+<tr><td></td><td></td><td></td><td><button style="float: right;" tabindex="7"><?php t("Save"); ?></button></td></tr>
 </table>
+</form>
 </div>

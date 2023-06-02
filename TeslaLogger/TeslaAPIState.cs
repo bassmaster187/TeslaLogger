@@ -424,6 +424,7 @@ namespace TeslaLogger
             }
             switch (source)
             {
+                /*
                 case "charge_state":
                     return ParseChargeState(JSON);
                 case "climate_state":
@@ -434,6 +435,14 @@ namespace TeslaLogger
                     return ParseVehicleConfig(JSON);
                 case "vehicle_state":
                     return ParseVehicleState(JSON);
+                */
+                case "vehicle_data":
+                    ParseChargeState(JSON);
+                    ParseClimateState(JSON);
+                    ParseDriveState(JSON);
+                    ParseVehicleConfig(JSON);
+                    ParseVehicleState(JSON);
+                    break;
                 case "vehicles":
                     return ParseVehicles(JSON);
                 default:
@@ -562,7 +571,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "charge_state");
                 /*
                  * {"response":
                  *     {
@@ -731,10 +740,10 @@ namespace TeslaLogger
             return false;
         }
 
-        private static Dictionary<string, object> ExtractResponse(string _JSON)
+        private static Dictionary<string, object> ExtractResponse(string _JSON, string command)
         {
             dynamic jsonResult = JsonConvert.DeserializeObject(_JSON);
-            Dictionary<string, object> r1 = jsonResult["response"].ToObject<Dictionary<string, object>>();
+            Dictionary<string, object> r1 = jsonResult["response"][command].ToObject<Dictionary<string, object>>();
             return r1;
         }
 
@@ -742,7 +751,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "drive_state");
                 /*
                  * {"response":
                  *     {
@@ -838,7 +847,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "vehicle_config");
                 /*
                  * {"response":
                  *     {
@@ -998,7 +1007,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "vehicle_state");
                 /*
                  * {"response":
                  *     {
@@ -1224,7 +1233,7 @@ namespace TeslaLogger
                 {
                     double pressure = (double)r2["tpms_pressure_"+Prefix];
                     DateTime dtPressure = DBHelper.UnixToDateTime((long)r2["tpms_last_seen_pressure_time_"+Prefix] * 1000);
-                    Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
+                    //Tools.DebugLog($"Car{car.CarInDB} TPMS {Prefix}: {pressure} {dtPressure}");
                     car.DbHelper.InsertTPMS(TireID, pressure, dtPressure);
                 }
             }
@@ -1300,7 +1309,7 @@ namespace TeslaLogger
         {
             try
             {
-                Dictionary<string, object> r2 = ExtractResponse(_JSON);
+                Dictionary<string, object> r2 = ExtractResponse(_JSON, "climate_state");
                 /*
                  * {"response":
                  *     {
@@ -1344,6 +1353,7 @@ namespace TeslaLogger
                             case "timestamp":
                                 break;
                             // bool
+                            case "auto_steering_wheel_heat":
                             case "battery_heater":
                             case "battery_heater_no_power":
                             case "is_auto_conditioning_on":
@@ -1390,6 +1400,7 @@ namespace TeslaLogger
                             case "seat_heater_rear_left":
                             case "seat_heater_rear_right":
                             case "seat_heater_right":
+                            case "steering_wheel_heat_level":
                                 if (r2.TryGetValue(key, out value))
                                 {
                                     AddValue(key, "int", value, timestamp, "climate_state");

@@ -1,5 +1,14 @@
-# Version 1.54.18
+# Version 1.54.23
 - Bugfixes
+
+# Version 1.54.22
+- Restore chargingstate from backup [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/faq.md#grafana-dashboard-charging-history--ladehistorie-has-wrong-entries-for-total-costs)
+
+# Version 1.54.20
+- reduce Tesla API calls to minimum
+
+# Version 1.54.19
+- New Tesla API -> older Teslalogger versions won't work anymore!
 
 # Version 1.54.16
 - Update to Grafana 8.5.22 [security fix](https://grafana.com/blog/2023/03/22/grafana-security-release-new-versions-with-security-fixes-for-cve-2023-1410/)

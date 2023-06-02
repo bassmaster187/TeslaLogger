@@ -70,7 +70,7 @@ namespace TeslaLogger
                         CommandTimeout = 6000
                     })
                     {
-                        SQLTracer.TraceNQ(cmd);
+                        SQLTracer.TraceNQ(cmd, out long _);
                     }
                 }
             }
