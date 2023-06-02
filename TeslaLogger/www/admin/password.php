@@ -33,7 +33,7 @@ require_once("tools.php");
 			paging: false,
 			info: false
 		});
-		
+
 		$("#TokenHelp").click(function() {
 			$("#dialog-TokenHelp").dialog({
 				resizable: false,
@@ -82,7 +82,7 @@ require_once("tools.php");
 			alert("Bitte Passwort eingeben!");
 		} else if ($("#password1").val() != $("#password2").val()) {
 			alert("Passwörter stimmen nicht überein!");
-		} else {			
+		} else {
 			sendRequest();
 		}
 		*/
@@ -223,7 +223,7 @@ require_once("tools.php");
 		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthurl", data: "url"}, function(data){
 			$("#authlink").attr("href", data);
 		});
-		
+
 		$("#access_token").val("");
 		$("#refresh_token").val("");
 		$("#authresulturl").val("");
@@ -277,7 +277,7 @@ require_once("tools.php");
 </head>
 <body>
 <div style="max-width: 1260px;">
-<?php 
+<?php
 include "menu.php";
 menu("Credentials");
 	$url = GetTeslaloggerURL("getallcars");
@@ -291,7 +291,7 @@ menu("Credentials");
 		echo("<h1>errortext = 'Error: $error - URL: $url'</h1>");
 		return;
 	}
-	
+
 	if (strpos($allcars, "not found!") === false)
 	{
 		$jcars = json_decode($allcars);
@@ -333,8 +333,8 @@ if (isset($_REQUEST["id"]))
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
 <ul>
-<li><?php 
-	$t1=get_text("BA_Browser"); 
+<li><?php
+	$t1=get_text("BA_Browser");
 	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
 	$t1=str_replace("}", '</a>', $t1);
 	echo $t1;
@@ -352,8 +352,8 @@ if (isset($_REQUEST["id"]))
 <li><?php t("BA_NotFound"); ?></li>
 <li><?php t("BA_URL"); ?></li>
 <li><?php t("BA_Invalid"); ?></li>
-<li><?php 
-	$t1=get_text("BA_Logoff"); 
+<li><?php
+	$t1=get_text("BA_Logoff");
 	$t1=str_replace("{", '<a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank">', $t1);
 	$t1=str_replace("}", '</a>', $t1);
 	echo $t1;
@@ -367,7 +367,7 @@ if (isset($_REQUEST["id"]))
 <?php t("BA_CopyUrl"); ?><br>
 	<img src="img/auth_screenshot.png">
 <h2><?php t("BA_Step3"); ?></h2>
-<?php t("BA_Paste"); ?> 
+<?php t("BA_Paste"); ?>
 <input id="authresulturl"></input>
 <br>
 <button onclick="GetTokensFromURL();"><?php t("Get Tokens"); ?></button>
@@ -393,7 +393,7 @@ if (isset($_REQUEST["id"]))
 <tr><td>&nbsp;</td></tr>
 
 <tr><td colspan="2">
-<?PHP 
+<?PHP
 if ($_REQUEST["id"] != -1)
 	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
 	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
@@ -430,8 +430,8 @@ else
 		foreach ($jcars as $k => $v) {
 			$email = $v->{"tesla_name"};
 			$display_name = $v->{"display_name"};
-			$tasker_token = $v->{"tasker_hash"};    
-			$car = $v->{"model_name"};  
+			$tasker_token = $v->{"tasker_hash"};
+			$car = $v->{"model_name"};
 			$id = $v->{"id"};
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
@@ -439,7 +439,7 @@ else
 			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
 			if ($freesuc == "1")
 				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
-			
+
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
 			echo("		<td>$email</td>\r\n");
@@ -458,7 +458,7 @@ else
 	</tbody>
 </table>
 <p></p>
-<button onclick="location.href='password.php?id=-1'"><?php t("NEW CAR"); ?></button>
+<button onclick="location.href='password.php?id=-1'"><?php t("New car"); ?></button>
 </div>
 <?php
 }

@@ -17,11 +17,11 @@ else
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Abetterrouteplanner</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-title" content="Teslalogger Config">
+	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+	<title><?php t("ABRPTitle"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -30,9 +30,8 @@ else
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
 </head>
-  	<body style="padding-top: 5px; padding-left: 10px;">
-	
-	<?php 
+<body>
+	<?php
     include "menu.php";
     echo(menu("Abetterrouteplanner"));
 
@@ -45,7 +44,7 @@ else
     $token = $jabrp->{"token"};
     $mode = $jabrp->{"mode"};
 
-    echo("<!-- Response of abrp/$current_carid/info:\n"); 
+    echo("<!-- Response of abrp/$current_carid/info:\n");
     var_dump($abrpinfo);
     echo ("-->\n");
 ?>
@@ -68,14 +67,14 @@ else
             console.log("Response of:"+ url + ":" + r);
 
             alert(r);
-            
+
             if (r === "OK")
                 location.href = document.referrer;
         });
     }
 
-    $( function() {	 
-        
+    $( function() {
+
     });
 </script>
 
@@ -99,11 +98,13 @@ else
 <h1><?php t("Settings"); ?></h1>
 <table>
 <tr>
-    <td><?php t("ABRPToken"); ?>:</td><td><input id="token" size="40" value="<?= $token ?>"/></td>
+	<td><?php t("ABRPToken"); ?>:</td><td><input id="token" size="40" value="<?= $token ?>"/></td>
 </tr>
 <tr>
-    <td><?php t("Enabled"); ?>:</td><td><input id="mode" type="checkbox" <?PHP if ($mode === 1) echo("checked");  ?>/></td>
+	<td><?php t("Enabled"); ?>:</td><td><input id="mode" type="checkbox" <?PHP if ($mode === 1) echo("checked");  ?>/></td>
 </tr>
-<tr>    
-    <td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
+<tr>
+	<td></td><td><button onClick="javascript:Save();"><?php t("Save"); ?></button></td>
 </tr>
+</body>
+</html>

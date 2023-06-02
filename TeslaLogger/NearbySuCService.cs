@@ -60,8 +60,8 @@ namespace TeslaLogger
             for (int id = 0; id < Car.Allcars.Count; id++)
             {
                 Car car = Car.Allcars[id];
-                if (car.IsInService())
-                    continue;
+                //if (car.IsInService())
+                //    continue;
 
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
@@ -156,6 +156,7 @@ namespace TeslaLogger
                                             {
                                                 car.webhelper.nearbySuCServiceOK++;
                                                 car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
+                                                //Tools.DebugLog(new Tools.JsonFormatter(nearbySites.ToString()).Format());
 
                                                 dynamic superchargers = nearbySites["sitesAndDistances"];
                                                 if (superchargers == null)
@@ -206,7 +207,7 @@ namespace TeslaLogger
                                             }
                                         }
                                         catch (Exception ex)
-                                        { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
+                                        { Tools.DebugLog(ex.ToString()); }
 
                                         if (stage == 0)
                                             car.Log("SuC sent: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
@@ -285,6 +286,7 @@ namespace TeslaLogger
 
         private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
         {
+            //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
             name = name.Replace("Tesla Supercharger", "").Trim();
@@ -297,13 +299,13 @@ namespace TeslaLogger
             string siteType = suc["siteType"].ToString();
             if (siteType != "SITE_TYPE_SUPERCHARGER")
             {
-                System.Diagnostics.Debug.WriteLine("siteType: " + name +" :" + siteType);
+                Tools.DebugLog("siteType: " + name +" :" + siteType);
             }
 
             string accessType = suc["accessType"].ToString();
             if (accessType != "ACCESS_TYPE_PUBLIC")
             {
-                System.Diagnostics.Debug.WriteLine("accessType: " + name + " :" + accessType);
+                Tools.DebugLog("accessType: " + name + " :" + accessType);
             }
 
             int maxPowerKw = suc["maxPowerKw"]["value"].ToObject<int>();
@@ -312,7 +314,7 @@ namespace TeslaLogger
             int activeOutageCount = activeOutages.Count;
             if (activeOutageCount > 0)
             {
-                System.Diagnostics.Debug.WriteLine("Outage: " + name);
+                Tools.DebugLog("Outage: " + name);
                 foreach (dynamic ao in activeOutages)
                 {
                     if (ao.ContainsKey("message"))
@@ -324,7 +326,7 @@ namespace TeslaLogger
                     }
                 }
 
-                System.Diagnostics.Debug.WriteLine("Message: " + Message);
+                Tools.DebugLog("Message: " + Message);
 
                 string cacheKey = "SuperchargerStateOutages_" + name;
                 object cacheValue = MemoryCache.Default.Get(cacheKey);

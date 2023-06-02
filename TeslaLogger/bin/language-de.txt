@@ -52,6 +52,7 @@ min=min
 kWh=kWh
 Wh/km=Wh/km
 km/h=km/h
+Please update to latest docker-compose.yml file. Check: {LINK}=Bitte aktualisieren Sie auf die neueste docker-compose.yml-Datei. Prüfen: {LINK}
 
 #settings.php
 Credentials=Zugangsdaten
@@ -94,9 +95,6 @@ ScanMyTesla integration=ScanMyTesla-Integration
 Position by StreamingAPI=Position von StreamingAPI
 Saved!=Gespeichert!
 
-
-TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
-
 #abrp.php
 ABRPTitle=Verbindung mit „A Better Routeplanner“
 TextABRP=Sie können eine Verbindung von Teslalogger zu „A Better Routeplanner“ einrichten, um zu vermeiden, dass Sie Ihre Tesla-Anmeldeinformationen an Dritte weitergeben müssen. Ein weiterer Vorteil besteht darin, die Wahrscheinlichkeit zu minimieren, das Fahrzeug daran zu hindern, in den Ruhezustand zu wechseln, wenn mehr als ein Dienst Ihre Anmeldeinformationen verwendet.
@@ -118,6 +116,7 @@ Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
 Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
 Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
+TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
 BA_Browser=Im lokalen {Browser} (empfohlen)
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
@@ -147,7 +146,7 @@ Model=Modell
 VIN=VIN
 Free SUC=Free SUC
 Edit=Ändern
-NEW CAR=NEUES FAHRZEUG
+New car=Neues Fahrzeug
 Do you want to delete?=Wollen Sie das Fahrzeug löschen?
 Please enter the access token!=Bitte das Access Token entragen!
 Please enter the refresh token!=Bitte das Refresh Token entragen!
@@ -159,7 +158,6 @@ This isn't a valid URL!=Dies ist kein gültige URL!
 This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
 The URL doesn't contain the expected format!=Die URL enthält nicht das erwartete Format!
 
-
 #dashboard.php
 Online=Online
 Offline=Offline
@@ -167,6 +165,7 @@ Preconditioning=Vorkonditionierung
 Sentry Mode=Wächter-Modus
 Status=Status
 Sleeping=Schlafen
+Dashboard=Dashboard
 
 #geoadd.php
 Charger=Ladesäule
@@ -197,6 +196,10 @@ Special Flags=Weitere Eigenschaften
 Turn HVAC off=Klimaanlage ausschalten
 Type=Typ
 Work=Arbeit
+Are you sure you want to delete this geofencing location?=Sind Sie sicher, dass Sie diesen Geofencing-Standort löschen möchten?
+Error=Fehler
+Deleted!=Gelöscht!
+Meter=Meter
 
 #chargingcost.php
 Charging Costs=Ladekosten
@@ -220,6 +223,7 @@ Set password for Teslalogger's admin panel=Legen Sie das Passwort für das Admin
 Name=Name
 Password=Passwort
 Repeat Password=Passwort wiederholen
+Please enter password!=Bitte Passwort eingeben!
 
 #logfile.php
 Logfile=Protokolldatei
@@ -283,3 +287,42 @@ First=Erster
 Last=Letzter
 Next=Nächste
 Previous=Vorherige
+
+#changelog.php
+Changelog=Änderungsliste
+
+#menu.php
+Restart=Neustart
+Dashboards=Dashboards
+Fleet Statistic=Flottenstatistik
+My Degradation=Meine Degradation
+My Charging AVG=Meine Aufladungen AVG
+Fleet Degradation AVG=Flotten-Degradation AVG
+Fleet Charging AVG=Flottenaufladung AVG
+Fleet Charging MAX (Firmware)=Flottenladestation MAX (Firmware)
+Fleet Charging Locations=Flotten-Ladestationen
+Fleet Fast Charging Map=Flotten-Schnellladekarte
+Supercharger Usage=Supercharger-Verwendung
+Firmware Tracker=Firmware-Tracker
+Extras=Extras
+Backup=Datensicherung
+Restore=Wiederherstellung
+Geofence=Geofence
+Abetterrouteplanner=Abetteroutenplaner
+Wakeup Teslalogger=Wakeup Teslalogger
+Suspend Teslalogger=Suspend Teslalogger
+km Stand=Kilometerstand
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Bitte geben Sie Ihre dexters-web.de Zugangsdaten ein
+Dexter Login=Dexter Login
+Dexter Password=Dexter Passwort
+
+#password_info.php
+Credentials Info=Credentials Info
+
+#restore.php
+Restore Database=Datenbank wiederherstellen
+TextRestore1=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor Sie Datenbanken wiederherstellen. Verschieben Sie den Sicherungsordner von \\RASPBERRY\teslalogger\backup auf Ihre Festplatte!
+TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
+TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
