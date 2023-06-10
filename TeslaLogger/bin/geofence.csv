@@ -146,6 +146,7 @@ Supercharger CZ-Vestec, 49.9898398, 14.4907623
 Supercharger DE-Achern, 48.6413, 8.03774
 Supercharger DE-Aichstetten, 47.880376, 10.040434, 7
 Supercharger DE-Aichstetten, 47.880299, 10.04052, 10
+Supercharger-V3 DE-Alsfeld, 50.734003,9.241448,40
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
@@ -2689,7 +2690,7 @@ TotalEnergies BE-Total Zolder E314 Dir Aachen,51.011414,5.332598,80
 TotalEnergies BE-Total Zolder E314 Dir Leuven,51.012542,5.331698,80
 TotalEnergies BE-Totalenergies Vilvoorde,50.9190113,4.4259115,80
 TotalEnergies BE-Totalenergies Zwijndrecht,51.20370323,4.318191639,80
-TotalEnergies DE-Alsfeld,50.7334361,9.24147273,80
+TotalEnergies DE-Alsfeld,50.733014,9.242024,40
 TotalEnergies DE-Bad Hersfeld Carl-Benz-Str.,50.85861207,9.722855056,80
 TotalEnergies DE-Barsinghausen,52.333147,9.414582,80
 TotalEnergies DE-Berlin,52.5820515,13.43239003,80
