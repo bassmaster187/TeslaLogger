@@ -67,18 +67,15 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            if (Program.SQLTRACE)
+            try
             {
-                try
-                {
-                    string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    DebugLog("Exception in SQL DEBUG", ex, prefix);
-                }
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                DebugLog("Exception in SQL DEBUG", ex, prefix);
             }
         }
 
@@ -1623,7 +1620,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
                             }
                             catch (Exception ex)
                             {
@@ -1644,7 +1641,7 @@ WHERE
                         try
                         {
                             cmd.CommandTimeout = 60000;
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                         catch (Exception ex)
                         {

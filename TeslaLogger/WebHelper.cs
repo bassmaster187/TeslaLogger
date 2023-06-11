@@ -3797,7 +3797,7 @@ namespace TeslaLogger
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@address", address);
                         cmd.Parameters.AddWithValue("@altitude", altitude);
-                        SQLTracer.TraceNQ(cmd, out long _);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
 
                         System.Diagnostics.Debug.WriteLine("id updateed: " + id + " address: " + address);
                     }
@@ -4088,7 +4088,7 @@ DESC", con))
                 {
                     cmd2.Parameters.AddWithValue("@id", id);
                     cmd2.Parameters.AddWithValue("@address", addressname);
-                    SQLTracer.TraceNQ(cmd2, out long _);
+                    _ = SQLTracer.TraceNQ(cmd2, out _);
                 }
             }
         }
