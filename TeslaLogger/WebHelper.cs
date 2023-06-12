@@ -3373,9 +3373,10 @@ namespace TeslaLogger
                 if (sAPI_battery_level != car.CurrentJSON.current_battery_level)
                 {
                     if (double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlatitude)
-                && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude))
+                        && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude)
+                        && double.TryParse(odometer, out double sAPIodometer))
                     {
-                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level);
+                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level, sAPIodometer);
                     }
                 }
             }

@@ -4392,7 +4392,7 @@ VALUES (
             }
         }
 
-        internal void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel)
+        internal void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel, double odometer)
         {
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
@@ -4430,15 +4430,8 @@ VALUES(
                     {
                         cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
                     }
-                    double odo = GetMaxOdometer();
-                    if (odo > 0)
-                    {
-                        cmd.Parameters.AddWithValue("@odometer", odo);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@odometer", car.CurrentJSON.current_odometer);
-                    }
+                    cmd.Parameters.AddWithValue("@odometer", odometer);
+
                     _ = SQLTracer.TraceNQ(cmd, out _);
 
                     try
@@ -4455,45 +4448,6 @@ VALUES(
             }
 
             car.CurrentJSON.CreateCurrentJSON();
-        }
-
-        private double GetMaxOdometer()
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    odometer
-FROM
-    pos
-WHERE
-    CarID = @CarID
-ORDER BY
-    id DESC
-LIMIT 1
-", con))
-                    {
-                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
-                        {
-                            if (double.TryParse(dr[0].ToString(), out double odo))
-                            {
-                                return odo;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                car.CreateExceptionlessClient(ex).Submit();
-                car.Log(ex.ToString());
-            }
-            return - 1;
         }
 
         private Address GetAddressFromChargingState(int ChargingStateID)
@@ -6583,7 +6537,7 @@ LIMIT 1", con))
                                     if (double.TryParse(dr[0].ToString(), out double lodo)
                                         && lodo > 0)
                                     {
-                                        Tools.DebugLog($"MigratePosOdometerNullValues lowerOdo:{lodo}");
+                                        Tools.DebugLog($"MigratePosOdometerNullValues lowerOdo: {lodo}");
                                         lowerOdo = lodo;
                                     }
                                 }
