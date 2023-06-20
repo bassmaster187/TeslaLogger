@@ -3376,7 +3376,8 @@ namespace TeslaLogger
                         && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude)
                         && double.TryParse(odometer, out double sAPIodometer))
                     {
-                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level, sAPIodometer);
+                        decimal odometerKM = Convert.ToDecimal(sAPIodometer) / 0.62137M;
+                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level, Convert.ToDouble(odometerKM));
                     }
                 }
             }
