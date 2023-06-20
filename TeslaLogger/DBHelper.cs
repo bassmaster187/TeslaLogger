@@ -4392,64 +4392,6 @@ VALUES (
             }
         }
 
-        internal void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel, double odometer)
-        {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-            {
-                con.Open();
-
-                using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT
-    pos(
-        CarID,
-        Datum,
-        lat,
-        lng,
-        battery_level,
-        odometer
-    )
-VALUES(
-    @CarID,
-    @Datum,
-    @lat,
-    @lng,
-    @battery_level,
-    @odometer
-)", con))
-                {
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
-                    cmd.Parameters.AddWithValue("@lat", latitude);
-                    cmd.Parameters.AddWithValue("@lng", longitude);
-
-                    if (batteryLevel == -1)
-                    {
-                        cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
-                    }
-                    cmd.Parameters.AddWithValue("@odometer", odometer);
-
-                    _ = SQLTracer.TraceNQ(cmd, out _);
-
-                    try
-                    {
-                        car.CurrentJSON.current_battery_level = batteryLevel;
-                        car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
-                    }
-                    catch (Exception ex)
-                    {
-                        car.CreateExceptionlessClient(ex).Submit();
-                        car.Log(ex.ToString());
-                    }
-                }
-            }
-
-            car.CurrentJSON.CreateCurrentJSON();
-        }
-
         private Address GetAddressFromChargingState(int ChargingStateID)
         {
             try

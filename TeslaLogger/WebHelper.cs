@@ -3368,20 +3368,6 @@ namespace TeslaLogger
 
             DateTime dt = DBHelper.UnixToDateTime(Convert.ToInt64(v[0]));
 
-            if (int.TryParse(v[3], out int sAPI_battery_level))
-            {
-                if (sAPI_battery_level != car.CurrentJSON.current_battery_level)
-                {
-                    if (double.TryParse(est_lat, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlatitude)
-                        && double.TryParse(est_lng, NumberStyles.Any, CultureInfo.InvariantCulture, out double sAPIlongitude)
-                        && double.TryParse(odometer, out double sAPIodometer))
-                    {
-                        decimal odometerKM = Convert.ToDecimal(sAPIodometer) / 0.62137M;
-                        car.DbHelper.InsertMinimalPos(v[0], sAPIlatitude, sAPIlongitude, sAPI_battery_level, Convert.ToDouble(odometerKM));
-                    }
-                }
-            }
-
             if (lastStreamingAPIShiftState != shift_state || (DateTime.UtcNow - lastStreamingAPILog).TotalSeconds > 30)
             {
                 Log("shift_state: " + shift_state + " Power: " + power + " Datetime: " + dt.ToString(Tools.ciDeDE));
