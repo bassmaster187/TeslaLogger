@@ -39,6 +39,7 @@ input[type=number] {text-align: right;}
     }
     else
     {
+        $output = str_replace( "'", "\'", $output);
         echo("    var json = JSON.parse('$output');\n");
     }
 ?>
