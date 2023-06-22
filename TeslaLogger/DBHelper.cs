@@ -1264,7 +1264,7 @@ WHERE
                             IDsToDelete.Add(similarChargingState);
                         }
                     }
-                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID, out string _);
+                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID, out string _, out object meter_vehicle_kwh_start, out object meter_utility_kwh_start);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
@@ -1657,7 +1657,7 @@ HAVING
                             Tools.DebugLog($"FindSimilarChargingStates: {chargingState}:{odometer}");
                         }
                         // get startdate, startID, posID from oldest
-                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID, out string _))
+                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID, out string _, out object meter_vehicle_kwh_start, out object meter_utility_kwh_start))
                         {
                             car.Log($"Combine charging states {string.Join(", ", chargingStates)} into {openChargingState}");
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -2496,8 +2496,10 @@ WHERE
             return referenceID;
         }
 
-        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID, out string posName)
+        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID, out string posName, out object meter_vehicle_kwh_start, out object meter_utility_kwh_start)
         {
+            meter_vehicle_kwh_start = DBNull.Value;
+            meter_utility_kwh_start = DBNull.Value;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -2508,7 +2510,9 @@ SELECT
     chargingstate.StartDate,
     chargingstate.StartChargingID,
     chargingstate.pos,
-    pos.address
+    pos.address,
+    charginstate.meter_vehicle_kwh_start,
+    charginstate.meter_utility_kwh_start
 FROM
     chargingstate
 JOIN
@@ -2531,6 +2535,8 @@ WHERE
                                 )
                             {
                                 posName = dr[3].ToString();
+                                meter_vehicle_kwh_start = dr[4];
+                                meter_utility_kwh_start = dr[5];
                                 return true;
                             }
                         }
@@ -2541,8 +2547,8 @@ WHERE
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
 
-                Tools.DebugLog($"Exception during CloseChargingState(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during CloseChargingState()");
+                Tools.DebugLog($"Exception during GetStartValuesFromChargingState(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during GetStartValuesFromChargingState()");
             }
             startDate = DateTime.MinValue;
             startdID = int.MinValue;

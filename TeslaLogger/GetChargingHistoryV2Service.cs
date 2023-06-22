@@ -306,7 +306,7 @@ LIMIT 1
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
-                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName))
+                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName, out object _, out object _))
                 {
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
