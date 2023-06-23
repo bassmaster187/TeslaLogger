@@ -1269,6 +1269,8 @@ WHERE
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
                     UpdateChargingstate(maxID, startDate, startdID, meter_vehicle_kwh_start, meter_utility_kwh_start);
+                    // update meter_*_kwh_sum in chargingstate
+                    UpdateMeter_kWh_sum(maxID);
                     // delete all older charging states
                     foreach (int chargingState in IDsToDelete)
                     {
@@ -1291,6 +1293,39 @@ WHERE
                 }
             }
             car.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
+        }
+
+        private void UpdateMeter_kWh_sum(int openChargingState)
+        {
+            try
+            {
+                Tools.DebugLog($"UpdateMeter_kWh_sum id:{openChargingState}");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    meter_vehicle_kwh_sum = meter_vehicle_kwh_end - meter_vehicle_kwh_start,
+    meter_utility_kwh_sum = meter_utility_kwh_end - meter_utility_kwh_start,
+    cost_kwh_meter_invoice = meter_vehicle_kwh_end - meter_vehicle_kwh_start
+WHERE
+    id = @ChargingStateID
+    AND CarID = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Tools.DebugLog($"Exception during UpdateMeter_kWh_sum(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during UpdateMeter_kWh_sum()");
+            }
         }
 
         private Tuple<int, DateTime, DateTime> GetStartEndFromCharginState(int id)
@@ -1659,6 +1694,8 @@ HAVING
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
                             // update current charging state with startdate, startID, pos
                             UpdateChargingstate(openChargingState, startDate, startdID, meter_vehicle_kwh_start, meter_utility_kwh_start, double.NegativeInfinity);
+                            // update meter_*_kwh_sum in chargingstate
+                            UpdateMeter_kWh_sum(openChargingState);
                             // delete all older charging states
                             foreach (int chargingState in chargingStates)
                             {
