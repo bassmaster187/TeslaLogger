@@ -2504,8 +2504,8 @@ SELECT
     chargingstate.StartChargingID,
     chargingstate.pos,
     pos.address,
-    charginstate.meter_vehicle_kwh_start,
-    charginstate.meter_utility_kwh_start
+    chargingstate.meter_vehicle_kwh_start,
+    chargingstate.meter_utility_kwh_start
 FROM
     chargingstate
 JOIN
