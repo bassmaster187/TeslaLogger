@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 using Exceptionless;
 using Newtonsoft.Json;
@@ -103,6 +104,16 @@ namespace TeslaLogger
                     Logfile.Log("MQTT: Connection failed!");
                 }
 
+                foreach (int car in allCars)
+                {
+                    client.Subscribe(new[] {
+                        $"{topic}/car/{car}/command/+"
+                    },
+                        new[] {
+                            MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
+                        });
+                }
+
                 while (true)
                 {
                     Work();                    
@@ -139,7 +150,7 @@ namespace TeslaLogger
                 foreach (int car in allCars)
                 {
                     string temp = null;
-                    string carTopic = topic;
+                    string carTopic = $"{topic}/car/{car}";
                     using (WebClient wc = new WebClient())
                     {
                         temp = wc.DownloadString("http://localhost:5000/currentjson/" + car);
@@ -147,15 +158,9 @@ namespace TeslaLogger
 
                     if (!lastjson.ContainsKey(car) || temp != lastjson[car])
                     {
-                        lastjson[car] = temp;
+                        lastjson[car] = temp;      
 
-                        if (allCars.Count > 1)
-                        {
-                            carTopic = topic + "-" + car;
-                        }
-                                
-
-                        client.Publish(carTopic, Encoding.UTF8.GetBytes(lastjson[car]),
+                        client.Publish(carTopic + "/currentjson", Encoding.UTF8.GetBytes(lastjson[car]),
                             uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                             
                         if(subtopics)
@@ -171,11 +176,52 @@ namespace TeslaLogger
                 }
 
             }
-            catch (Exception wex)
+            catch (Exception ex)
             {
-                Logfile.Log("MQTT: Exeption: " + wex.Message);
+                Logfile.Log("MQTT: Exeption: " + ex.Message);
+                ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(60000);
 
+            }
+        }
+
+        private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            try
+            {
+                var msg = Encoding.ASCII.GetString(e.Message);
+
+                //Example: "teslalogger/car/1/command/set_charge_limit", raw value "13"
+
+                Match m = Regex.Match(e.Topic, $@"{topic}/car/([0-9]+)/(.+)/(.+)");
+                if (m.Success && m.Groups.Count == 5 && m.Groups[2].Captures.Count == 1 && m.Groups[4].Captures.Count == 1)
+                {
+                    if(m.Groups[3].Captures[0].ToString() == "command")
+                    {
+                        _ = int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
+                        string command = m.Groups[4].Captures[0].ToString();
+                        try
+                        {
+                            using (WebClient wc = new WebClient())
+                            {
+                                string json = wc.DownloadString($"http://localhost:5000/command/{CarID}/{command}?{msg}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                            System.Threading.Thread.Sleep(20000);
+                        }
+                    }
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("MQTT: Exeption: " + ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
 

@@ -67,6 +67,8 @@ namespace TeslaLogger
 
                 InitMQTT();
 
+                MQTTClient.StartMQTTClient();
+
                 InitTLStats();
 
                 UpdateDbInBackground();
