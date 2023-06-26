@@ -4988,7 +4988,7 @@ DESC", con))
             catch (TaskCanceledException tce)
             {
                 car.CreateExceptionlessClient(tce).Submit();
-                Logfile.Log(tce.ToString());
+                // Logfile.Log(tce.ToString());
                 ABRPtimeouts++;
                 if (ABRPtimeouts > 10)
                 {
