@@ -51,6 +51,11 @@ docker-compose build
 docker-compose up -d
 ```
 
+If Grafana won't start after upgrade try to give it all permissions. 
+```
+chmod 777 TeslaLogger/GrafanaDB
+```
+
 # Trouble shooting
 1. Init scripts like DB table setup not working
 
