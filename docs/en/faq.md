@@ -57,3 +57,11 @@ follow the steps:
 - selected session values will be restored
 
 No restart needed.
+
+# Connect to your Raspberry with SSH
+You need a SSH client to connect to the shell of your Raspberry. 
+Windows users can use https://www.putty.org/ 
+Mac User can use the terminal
+Host: raspberry or raspberry.local
+Name: pi
+Password: teslalogger
