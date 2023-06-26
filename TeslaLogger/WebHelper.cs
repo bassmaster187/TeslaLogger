@@ -1800,7 +1800,7 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    if (resultContent.Contains("Retry Later"))
+                    if (resultContent.IndexOf("Retry Later", StringComparison.OrdinalIgnoreCase) >=0 )
                     {
                         int sleep = random.Next(10000) + 10000;
                         Log("GetVehicles Error: Retry Later - Sleep "+ sleep);
@@ -2689,7 +2689,7 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging == "50")
                 {
-                    WriteCarSettings("0.136", "Y SR+");
+                    WriteCarSettings("0.142", "Y SR+");
                     return;
                 }
             }
@@ -4781,6 +4781,7 @@ DESC", con))
                     { "TR", car.DbHelper.GetAvgMaxRage().ToString() },
 
                     { "OS", Tools.GetOsVersion() },
+                    { "OSR", Tools.GetOsRelease() },
                     { "CC", car.CurrentJSON.current_country_code },
                     { "ST", car.CurrentJSON.current_state },
                     { "UP", Tools.GetOnlineUpdateSettings().ToString() },
