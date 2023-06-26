@@ -1965,11 +1965,26 @@ PRIMARY KEY(id)
 
         private static void UpdateGrafanaVersion()
         {
-            string newversion = "8.5.22";
+            string newversion = "10.0.1";
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
-            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1" || GrafanaVersion == "8.3.2")
+
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" 
+                || GrafanaVersion == "6.3.5" 
+                || GrafanaVersion == "6.7.3" 
+                || GrafanaVersion == "7.2.0" 
+                || GrafanaVersion == "8.3.1" 
+                || GrafanaVersion == "8.3.2"
+                || GrafanaVersion == "8.5.22"
+                )
             {
+                if (!Tools.GetOsRelease().Contains("buster"))
+                {
+                    Logfile.Log("Grafana update suspended because of old OS:" + Tools.GetOsRelease());
+                    ExceptionlessClient.Default.CreateFeatureUsage("Grafana update suspended").FirstCarUserID().Submit();
+                    return;
+                }
+
                 Thread threadGrafanaUpdate = new Thread(() =>
                 {
                     string GrafanaFilename = $"grafana_{newversion}_armhf.deb";

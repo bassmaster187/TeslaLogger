@@ -328,6 +328,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/teslaauthtoken", System.StringComparison.Ordinal):
                         TeslaAuthGetToken(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/osupgrade", System.StringComparison.Ordinal):
+                        OsUpgrade(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -339,6 +342,25 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void OsUpgrade(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("OsUpgrade");
+                string shellScript = "/etc/teslalogger/upgrade2buster.sh";
+                UpdateTeslalogger.Chmod(shellScript, 777, true);
+                shellScript += " > /etc/teslalogger/oslogfile.txt &";
+                Tools.ExecMono("/bin/bash", shellScript);
+                Logfile.Log("OsUpgrade end");
+                WriteString(response, "OK");
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 

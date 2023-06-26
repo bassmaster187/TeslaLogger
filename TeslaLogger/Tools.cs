@@ -341,6 +341,35 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        public static string GetOsRelease()
+        {
+            try
+            {
+                string path = @"/etc/os-release";
+                if (File.Exists(path))
+                {
+                    var l = File.ReadAllLines(path);
+                    foreach (var line in l)
+                    {
+                        if (line.Contains("PRETTY_NAME"))
+                        {
+                            var a = line.Split('=');
+                            return a[1].Replace("\"","");
+                        }
+                    }
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            catch (Exception ex){
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
+        }
+
         public static bool IsMono()
         {
             return GetMonoRuntimeVersion() != "NULL";
