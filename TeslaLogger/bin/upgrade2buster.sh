@@ -14,5 +14,6 @@ apt-get -y install php.mysql
 apt-get -y autoremove
 apt-get -y autoclean
 cat /etc/os-release
+ldd --version
 reboot now
  
