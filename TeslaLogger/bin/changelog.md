@@ -1,5 +1,5 @@
-# Version 1.54.23
-- Bugfixes
+# Version 1.54.24
+- Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/os_upgrade.md) 
 
 # Version 1.54.22
 - Restore chargingstate from backup [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/faq.md#grafana-dashboard-charging-history--ladehistorie-has-wrong-entries-for-total-costs)

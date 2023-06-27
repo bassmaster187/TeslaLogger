@@ -366,7 +366,7 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if(isDocker() && GrafanaVersion() != "8.5.22")
+	else if(isDocker() && GrafanaVersion() != "10.0.1")
 	{?>
 		<?php
 		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}");

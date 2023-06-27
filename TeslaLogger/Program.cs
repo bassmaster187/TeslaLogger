@@ -317,6 +317,7 @@ namespace TeslaLogger
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
@@ -392,6 +393,8 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+
+            Logfile.Log("OS: " + Tools.GetOsRelease());
         }
 
         private static void InitConnectToDB()
@@ -579,6 +582,8 @@ namespace TeslaLogger
                     WebHelper.SearchFornewCars();
 
                     GeocodeCache.Cleanup();
+
+                    DBHelper.MigratePosOdometerNullValues();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();
