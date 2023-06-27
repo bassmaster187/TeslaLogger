@@ -855,7 +855,7 @@ PRIMARY KEY(id)
                             cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                             cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                             cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                 }
@@ -1289,7 +1289,7 @@ PRIMARY KEY(id)
                                 AssertAlterDB();
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    SQLTracer.TraceNQ(cmd2, out long _);
+                                    _ = SQLTracer.TraceNQ(cmd2, out _);
                                 }
                             }
                         }
@@ -1307,10 +1307,10 @@ PRIMARY KEY(id)
         {
             try
             {
-                string phpinipath = "/etc/php/7.0/apache2/php.ini";
+                string phpinipath = "/etc/php/7.3/apache2/php.ini";
 
                 if (!File.Exists(phpinipath))
-                    phpinipath = "/etc/php/7.3/apache2/php.ini";
+                    phpinipath = "/etc/php/7.0/apache2/php.ini";
 
                 if (File.Exists(phpinipath))
                 {
@@ -1965,11 +1965,26 @@ PRIMARY KEY(id)
 
         private static void UpdateGrafanaVersion()
         {
-            string newversion = "8.5.22";
+            string newversion = "10.0.1";
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
-            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1" || GrafanaVersion == "8.3.2")
+
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" 
+                || GrafanaVersion == "6.3.5" 
+                || GrafanaVersion == "6.7.3" 
+                || GrafanaVersion == "7.2.0" 
+                || GrafanaVersion == "8.3.1" 
+                || GrafanaVersion == "8.3.2"
+                || GrafanaVersion == "8.5.22"
+                )
             {
+                if (!Tools.GetOsRelease().Contains("buster"))
+                {
+                    Logfile.Log("Grafana update suspended because of old OS:" + Tools.GetOsRelease());
+                    ExceptionlessClient.Default.CreateFeatureUsage("Grafana update suspended").FirstCarUserID().Submit();
+                    return;
+                }
+
                 Thread threadGrafanaUpdate = new Thread(() =>
                 {
                     string GrafanaFilename = $"grafana_{newversion}_armhf.deb";

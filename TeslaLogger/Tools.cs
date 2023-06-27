@@ -67,18 +67,15 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            if (Program.SQLTRACE)
+            try
             {
-                try
-                {
-                    string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    DebugLog("Exception in SQL DEBUG", ex, prefix);
-                }
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                DebugLog("Exception in SQL DEBUG", ex, prefix);
             }
         }
 
@@ -342,6 +339,35 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        public static string GetOsRelease()
+        {
+            try
+            {
+                string path = @"/etc/os-release";
+                if (File.Exists(path))
+                {
+                    var l = File.ReadAllLines(path);
+                    foreach (var line in l)
+                    {
+                        if (line.Contains("PRETTY_NAME"))
+                        {
+                            var a = line.Split('=');
+                            return a[1].Replace("\"","");
+                        }
+                    }
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            catch (Exception ex){
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
         }
 
         public static bool IsMono()
@@ -1623,7 +1649,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
                             }
                             catch (Exception ex)
                             {
@@ -1644,7 +1670,7 @@ WHERE
                         try
                         {
                             cmd.CommandTimeout = 60000;
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                         catch (Exception ex)
                         {

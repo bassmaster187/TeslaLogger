@@ -334,6 +334,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/teslaauthtoken", System.StringComparison.Ordinal):
                         TeslaAuthGetToken(request, response);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/osupgrade", System.StringComparison.Ordinal):
+                        OsUpgrade(request, response);
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         WriteString(response, @"URL Not Found!");
@@ -345,6 +348,25 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void OsUpgrade(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("OsUpgrade");
+                string shellScript = "/etc/teslalogger/upgrade2buster.sh";
+                UpdateTeslalogger.Chmod(shellScript, 777, true);
+                shellScript += " > /etc/teslalogger/oslogfile.txt &";
+                Tools.ExecMono("/bin/bash", shellScript);
+                Logfile.Log("OsUpgrade end");
+                WriteString(response, "OK");
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
             }
         }
 
@@ -1120,7 +1142,7 @@ DROP TABLE chargingstate_bak";
                             cmd.Parameters.AddWithValue("@meter_type", r["type"]);
                             cmd.Parameters.AddWithValue("@meter_host", r["host"]);
                             cmd.Parameters.AddWithValue("@meter_parameter", r["param"]);
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
 
                             WriteString(response, "OK");
                         }
@@ -2161,7 +2183,7 @@ DROP TABLE chargingstate_bak";
                         using (var cmd2 = new MySqlCommand("delete from cars where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2, out long _);
+                            _ = SQLTracer.TraceNQ(cmd2, out _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -2185,7 +2207,7 @@ DROP TABLE chargingstate_bak";
                         using (var cmd2 = new MySqlCommand("update cars set tesla_token='', refresh_token='' where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2, out long _);
+                            _ = SQLTracer.TraceNQ(cmd2, out _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -2252,7 +2274,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                    SQLTracer.TraceNQ(cmd2, out long _);
+                                    _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                     Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
@@ -2278,7 +2300,7 @@ FROM
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
 
                                 Car c = Car.GetCarByID(dbID);
                                 if (c != null)
@@ -2337,7 +2359,7 @@ FROM
                                 cmd2.Parameters.AddWithValue("@tesla_password", password);
                                 cmd2.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                                 cmd2.Parameters.AddWithValue("@display_name", carname);
-                                SQLTracer.TraceNQ(cmd2, out long _);
+                                _ = SQLTracer.TraceNQ(cmd2, out _);
 
                                 WriteString(response, "ID:" + newid);
                             }
@@ -2361,7 +2383,7 @@ FROM
                             cmd.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                             cmd.Parameters.AddWithValue("@display_name", carname);
 
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
 
                             WriteString(response, "OK");
                         }
@@ -2604,7 +2626,7 @@ FROM
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"].Value));
 
                         cmd.Parameters.AddWithValue("@id", j["id"].Value);
-                        int done = SQLTracer.TraceNQ(cmd, out long _);
+                        int done = _ = SQLTracer.TraceNQ(cmd, out _);
 
                         Logfile.Log("SetCost OK: " + done);
                         WriteString(response, "OK");
