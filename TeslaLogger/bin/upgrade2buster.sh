@@ -11,8 +11,6 @@ apt-get update
 apt -y --fix-broken install
 apt-get -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" full-upgrade
 apt-get -y install php.mysql
-apt-get -y autoremove
-apt-get -y autoclean
 a2enmod php7.3
 cat /etc/os-release
 ldd --version
