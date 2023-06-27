@@ -13,6 +13,7 @@ apt-get -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-conf
 apt-get -y install php.mysql
 apt-get -y autoremove
 apt-get -y autoclean
+a2enmod php7.3
 cat /etc/os-release
 ldd --version
 reboot now
