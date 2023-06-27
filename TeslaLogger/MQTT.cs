@@ -26,6 +26,7 @@ namespace TeslaLogger
         private bool subtopics = false;
         private string user = null;
         private string password = null;
+        private int httpport = 5000;
 
         MqttClient client = null;
 
@@ -52,6 +53,7 @@ namespace TeslaLogger
 
             try
             {
+                httpport = Tools.GetHttpPort();
                 allCars = GetAllcars();
                 if (KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
                 {
@@ -113,6 +115,9 @@ namespace TeslaLogger
                             MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
                         });
                 }
+                
+                client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
+                new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
                 while (true)
                 {
@@ -153,7 +158,7 @@ namespace TeslaLogger
                     string carTopic = $"{topic}/car/{car}";
                     using (WebClient wc = new WebClient())
                     {
-                        temp = wc.DownloadString("http://localhost:5000/currentjson/" + car);
+                        temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + car);
                     }
 
                     if (!lastjson.ContainsKey(car) || temp != lastjson[car])
@@ -194,17 +199,17 @@ namespace TeslaLogger
                 //Example: "teslalogger/car/1/command/set_charge_limit", raw value "13"
 
                 Match m = Regex.Match(e.Topic, $@"{topic}/car/([0-9]+)/(.+)/(.+)");
-                if (m.Success && m.Groups.Count == 5 && m.Groups[2].Captures.Count == 1 && m.Groups[4].Captures.Count == 1)
+                if (m.Success && m.Groups.Count == 4 && m.Groups[2].Captures.Count == 1 && m.Groups[3].Captures.Count == 1)
                 {
-                    if(m.Groups[3].Captures[0].ToString() == "command")
+                    if(m.Groups[2].Captures[0].ToString() == "command")
                     {
-                        _ = int.TryParse(m.Groups[2].Captures[0].ToString(), out int CarID);
-                        string command = m.Groups[4].Captures[0].ToString();
+                        _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                        string command = m.Groups[3].Captures[0].ToString();
                         try
                         {
                             using (WebClient wc = new WebClient())
                             {
-                                string json = wc.DownloadString($"http://localhost:5000/command/{CarID}/{command}?{msg}");
+                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{CarID}/{command}?{msg}");
                             }
                         }
                         catch (Exception ex)
@@ -216,12 +221,47 @@ namespace TeslaLogger
                     }
                     
                 }
-                
             }
             catch (Exception ex)
             {
                 Logfile.Log("MQTT: Exeption: " + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
+
+        private void MQTTConnectionHandler(MqttClient client)
+        {
+            while (true)
+            {
+                try
+                {
+                    System.Threading.Thread.Sleep(1000);
+
+                    if (!client.IsConnected)
+                    {
+                        if (user != null && password != null)
+                        {
+                            Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
+                            client.Connect(clientid, user, password);
+                        }
+                        else
+                        {
+                            Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
+                            client.Connect(clientid);
+                        }
+                    }
+                }
+                catch (WebException wex)
+                {
+                    Logfile.Log("MQTT: Exeption: " + wex.Message);
+                    System.Threading.Thread.Sleep(60000);
+
+                }
+                catch (Exception ex)
+                {
+                    System.Threading.Thread.Sleep(30000);
+                    Logfile.Log("MQTT: Exeption: " + ex.ToString());
+                }
             }
         }
 

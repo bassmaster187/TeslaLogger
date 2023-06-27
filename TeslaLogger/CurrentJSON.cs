@@ -15,6 +15,7 @@ namespace TeslaLogger
         public bool current_online; // defaults to false
         public bool current_sleeping; // defaults to false
         public bool current_falling_asleep; // defaults to false
+        public bool current_plugged_in; // defaults to false
         private long timestamp; // defaults to 0
 
         public int current_speed; // defaults to 0
@@ -154,6 +155,7 @@ namespace TeslaLogger
                    { "online", current_online },
                    { "sleeping", current_sleeping },
                    { "falling_asleep", current_falling_asleep },
+                   { "plugged_in", current_plugged_in },
                    { "speed", current_speed},
                    { "power", current_power },
                    { "odometer", current_odometer },

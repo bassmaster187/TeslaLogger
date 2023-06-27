@@ -177,12 +177,20 @@ namespace TeslaLogger
                                         break;
                                 }
                             }
+                            
                         }
+                        car.CurrentJSON.current_plugged_in = true;
                     }
                     else if (newvalue.Equals("Disconnected"))
                     {
                         car.DbHelper.UpdateUnplugDate();
+                        car.CurrentJSON.current_plugged_in = false;
                     }
+                    else 
+                    {
+                        car.CurrentJSON.current_plugged_in = true;
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
                     break;
                 case "battery_level":
                     // car is idle and battery level changed -> update ABRP
