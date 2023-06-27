@@ -1,3 +1,6 @@
+# Version 1.54.25
+- Bugfix in upgrade zu Debian Buster
+
 # Version 1.54.24
 - Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/os_upgrade.md) 
 

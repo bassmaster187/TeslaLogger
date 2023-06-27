@@ -1307,10 +1307,10 @@ PRIMARY KEY(id)
         {
             try
             {
-                string phpinipath = "/etc/php/7.3/apache2/php.ini";
+                string phpinipath = "/etc/php/7.0/apache2/php.ini";
 
                 if (!File.Exists(phpinipath))
-                    phpinipath = "/etc/php/7.0/apache2/php.ini";
+                    phpinipath = "/etc/php/7.3/apache2/php.ini";
 
                 if (File.Exists(phpinipath))
                 {
