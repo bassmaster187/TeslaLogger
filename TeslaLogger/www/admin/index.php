@@ -22,7 +22,8 @@ else
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/png" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon.png" sizes="131x133">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
