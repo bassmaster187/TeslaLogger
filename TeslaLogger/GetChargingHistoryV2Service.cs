@@ -259,6 +259,7 @@ FROM
     teslacharging
 WHERE
     VIN = @VIN
+    AND fast_charger_brand = @fast_charger_brand
 ORDER BY
     ABS(
         chargeStartDateTime - @startDate
@@ -266,6 +267,7 @@ ORDER BY
 LIMIT 1
 ", con))
                     {
+                        cmd.Parameters.AddWithValue("@fast_charger_brand", "Tesla".ToString());
                         cmd.Parameters.AddWithValue("@startDate", dt);
                         cmd.Parameters.AddWithValue("@VIN", car.Vin);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
@@ -311,25 +313,12 @@ LIMIT 1
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
                         Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
-                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
-                        // check names, time difference and VIN
-                        if (siteLocationName.Contains(","))
-                        {
-                            siteLocationName = siteLocationName.Split(',')[0];
-                        }
-                        if (tlname.Contains(siteLocationName)
-                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 20
+                        if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN)
                             )
                         {
                             UpdateChargingState(chargingstateid, json, car);
                             updatedChargingStates++;
-                        }
-                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
-                            && car.Vin.Equals(VIN))
-                        {
-                            Tools.DebugLog($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>");
-                            (new Exception($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>")).ToExceptionless().FirstCarUserID().Submit();
                         }
                         else if (!car.Vin.Equals(VIN))
                         {
