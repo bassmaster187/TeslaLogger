@@ -259,8 +259,6 @@ FROM
     teslacharging
 WHERE
     VIN = @VIN
-    AND fast_charger_brand = @fast_charger_brand
-    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
 ORDER BY
     ABS(
         chargeStartDateTime - @startDate
@@ -268,10 +266,7 @@ ORDER BY
 LIMIT 1
 ", con))
                     {
-                        cmd.Parameters.AddWithValue("@fast_charger_brand", "Tesla".ToString());
                         cmd.Parameters.AddWithValue("@startDate", dt);
-                        cmd.Parameters.AddWithValue("@type1", "Tesla");
-                        cmd.Parameters.AddWithValue("@type2", "Combo");
                         cmd.Parameters.AddWithValue("@VIN", car.Vin);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read()
