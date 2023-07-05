@@ -116,6 +116,7 @@ Supercharger CH-Egerkingen, 47.327028, 7.805489
 Supercharger CH-Flüelen, 46.912985, 8.622833
 Supercharger-V3 CH-Kempttahl,47.451881,8.704432
 Supercharger CH-Kriegstetten, 47.175635, 7.59883
+Supercharger-V3 CH-Landquart, 46.9661, 9.552652
 Supercharger CH-Lully, 46.8323911, 6.8590898
 Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
@@ -694,6 +695,7 @@ Supercharger NL-Hoorn, 52.650769, 5.038917
 Supercharger NL-Horst, 51.470008, 6.056974
 Supercharger NL-Leiderdorp, 52.160766, 4.549019
 Supercharger-V3 NL-Leusden, 52.144022, 5.416976
+Supercharger-V3 NL-Maastricht, 50.816519, 5.725658, 20
 Supercharger-V3 NL-Meerkerk,51.899474,4.982747
 Supercharger-V3 NL-Middelburg, 51.480275, 3.636485
 Supercharger NL-Naarden, 52.30858, 5.141127
@@ -1227,6 +1229,9 @@ Tesla Service Center NL-Rotterdam, 51.8648704, 4.4548565
 Tesla Service Center NL-Tilburg, 51.6060617, 4.9964002
 Tesla Service Center US-Palo Alto, 37.394287, -122.150604
 
+Aldi DE-Aachen Neuenhofstraße, 50.760742, 6.152673
+Aldi DE-Aachen Ronder Weg, 50.817262, 6.065772
+Aldi DE-Aachen Süsterfeldstraße, 50.786292, 6.063822
 Aldi DE-Ansbach, 49.293465,10.603837, 20
 Aldi DE-Bad Camberg, 50.296238, 8.254424
 Aldi DE-Bernau am Chiemsee, 47.825325, 12.384109
@@ -2648,6 +2653,7 @@ schneller-strom-tanken DE-Villingen-Schwenningen, 48.060895, 8.454762
 ShellRecharge DE-Berg, 50.372, 11.787795
 ShellRecharge DE-Kraftsdorf, 50.8959477, 11.9793605, 5
 ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
+ShellRecharge NL-Heerlen, 50.823176, 6.019581, 30
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
 
