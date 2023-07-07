@@ -21,6 +21,7 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using System.Globalization;
+using static TeslaLogger.Car;
 
 namespace TeslaLogger
 {
@@ -328,6 +329,7 @@ namespace TeslaLogger
                 {
                     car.Passwortinfo.Append("Car inactive!<br>");
                     Log("Car inactive");
+                    car.SetCurrentState(TeslaState.Inactive);
                     throw new Exception("Car inactive");
                 }
 

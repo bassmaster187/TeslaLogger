@@ -33,7 +33,8 @@ namespace TeslaLogger
             Sleep,
             WaitForSleep,
             Online,
-            GoSleep
+            GoSleep,
+            Inactive
         }
 
         // encapsulate state
@@ -1488,7 +1489,7 @@ namespace TeslaLogger
             ThreadJoin();
         }
 
-        private void SetCurrentState(TeslaState _newState)
+        internal void SetCurrentState(TeslaState _newState)
         {
             if (_currentState != _newState)
             {
@@ -1635,6 +1636,10 @@ namespace TeslaLogger
         public bool TLUpdatePossible()
         {
             if (GetCurrentState() == Car.TeslaState.Sleep)
+            {
+                return true;
+            }
+            else if (GetCurrentState() == Car.TeslaState.Inactive)
             {
                 return true;
             }
