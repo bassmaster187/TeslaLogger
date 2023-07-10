@@ -1,3 +1,6 @@
+# Version 1.54.26
+- Completely new MQTT client. Go to menu extras-MQTT for setup. Old client is still working but not supported any more and can be disabled any time. Please migrage to new client!
+
 # Version 1.54.25
 - Bugfix in upgrade zu Debian Buster
 

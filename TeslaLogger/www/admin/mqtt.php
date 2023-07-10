@@ -11,7 +11,7 @@ global $display_name;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title><?php t("MQTT"); ?></title>
+    <title><?php t("MQTTSettings"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="static/teslalogger_style.css">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
@@ -75,7 +75,22 @@ global $display_name;
 </script>
 
 <div id="content" style="max-width:1036px;">
-<h1><?php t("Settings"); ?></h1>
+<h1><?php t("MQTTSettings"); ?></h1>
+<?php t("MQTTSettingsInfo"); ?>
+<h2><?php t("TopicStructure"); ?></h2>
+    <li><?php t("MQTT1"); ?></li>
+    <li><?php t("MQTT2"); ?></li>
+<h3><?php t("TopicDescription"); ?></h3>
+    <li><?php t("MQTT3"); ?></li>
+    <li><?php t("MQTT4"); ?></li>
+    <li><?php t("MQTT5"); ?></li>
+
+<h2><?php t("ControlTopic"); ?></h2>
+    <li><?php t("MQTT6"); ?></li>
+    <li><a href="https://github.com/bassmaster187/TeslaLogger/blob/master/TeslaLogger/WebServer.md#send-commands-to-car"><?php t("MQTT7"); ?></a></li>
+
+<h5><?php t("RebootAfterSave"); ?><h5>
+</div>
 <table>
 <tr>
     <td><?php t("Host"); ?>: </td><td><input id="host" size="40" value="<?= $mqtt_host ?>"/></td>
