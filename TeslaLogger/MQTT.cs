@@ -22,11 +22,11 @@ namespace TeslaLogger
         private string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
         private string host = "localhost";
         private int port = 1883;
-        private string topic = "Tesla";
+        private string topic = "teslalogger";
         private bool subtopics = false;
         private string user = null;
         private string password = null;
-        private int httpport = 5000;
+        private static int httpport = 5000;
 
         MqttClient client = null;
 
@@ -151,30 +151,33 @@ namespace TeslaLogger
                         client.Connect(clientid);
                     }
                 }
-
-                foreach (int car in allCars)
+                else
                 {
-                    string temp = null;
-                    string carTopic = $"{topic}/car/{car}";
-                    using (WebClient wc = new WebClient())
+                    foreach (int car in allCars)
                     {
-                        temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + car);
-                    }
+                        string temp = null;
+                        string carTopic = $"{topic}/car/{car}";
+                        string jsonTopic = $"{topic}/json/{car}";
+                        using (WebClient wc = new WebClient())
+                        {
+                            temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + car);
+                        }
 
-                    if (!lastjson.ContainsKey(car) || temp != lastjson[car])
-                    {
-                        lastjson[car] = temp;      
+                        if (!lastjson.ContainsKey(car) || temp != lastjson[car])
+                        {
+                            lastjson[car] = temp;
 
-                        client.Publish(carTopic + "/currentjson", Encoding.UTF8.GetBytes(lastjson[car]),
-                            uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-                            
-                        if(subtopics)
-                        { 
-                            var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
-                            foreach(var keyvalue in topics)
-                            {
-                                client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
+                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[car]),
                                 uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
+                            if (subtopics)
+                            {
+                                var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
+                                foreach (var keyvalue in topics)
+                                {
+                                    client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                                }
                             }
                         }
                     }
@@ -274,7 +277,7 @@ namespace TeslaLogger
             {
                 using (WebClient wc = new WebClient())
                 {
-                    json = wc.DownloadString("http://localhost:5000/getallcars");
+                    json = wc.DownloadString($"http://localhost:{httpport}/getallcars");
                 }
             }
             catch (Exception ex)

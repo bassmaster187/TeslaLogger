@@ -115,8 +115,7 @@ namespace TeslaLogger
         {
             try
             {
-                KVS.Get("MQTTSettings", out string mqttSettings);
-                if (mqttSettings != null)
+                if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
                 {
                     Thread mqttThread = new Thread(() =>
                     {

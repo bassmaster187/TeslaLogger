@@ -16,7 +16,7 @@ namespace TeslaLogger
                 try 
                 { 
                     dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
-                    if (!(r["mqtt_host"] > 0))
+                    if ((r["mqtt_host"] > 0))
                     {
                         Logfile.Log("MQTT: Using new MQTT client!");
                         return;
