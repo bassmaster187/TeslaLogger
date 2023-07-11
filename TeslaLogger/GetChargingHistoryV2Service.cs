@@ -453,8 +453,10 @@ LIMIT 1
                     cost_total = cost_idle_fee_total;
                 }
                 car.Log($@"GetChargingHistoryV2Service -> UpdateChargingState:
+teslalogger.chargingstate.id:{chargingstateid}
 siteLocationName:{(session.ContainsKey("siteLocationName") ? session["siteLocationName"].ToString() : "n/a")}
-chargingstateid:{chargingstateid}
+chargeStartDateTime:{(session.ContainsKey("chargeStartDateTime") ? session["chargeStartDateTime"].ToString() : "n/a")}
+chargeStopDateTime:{(session.ContainsKey("chargeStopDateTime") ? session["chargeStopDateTime"].ToString() : "n/a")}
 chargeSessionId:{chargeSessionId}
 cost_total:{cost_total}
 cost_currency:{cost_currency}
