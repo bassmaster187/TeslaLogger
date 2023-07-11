@@ -20,6 +20,7 @@ CREATE TABLE geocodecache(
     address LONGTEXT,
     UNIQUE ix_key(lat, lng)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;");
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE geocodecache(
     lat DOUBLE NOT NULL,
@@ -139,7 +140,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@lng", lng);
                         cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@address", address);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -167,7 +168,7 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@lastUpdate", DateTime.Now.AddDays(-days));
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }

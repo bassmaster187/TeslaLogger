@@ -249,21 +249,21 @@ echo(menu("Settings"));
 		<option value="cn">漢語</option>
 	</select>
 	</td></tr>
-	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td class="TT"><input id="radio_hp" type="radio" value="hp" name="power" /> <?php t("PS"); ?><br><input id="radio_kw" type="radio" value="kw" name="power" /> <?php t("kW"); ?></td></tr>
-	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td class="TT"><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <?php t("Celsius"); ?><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <?php t("Fahrenheit"); ?> </td></tr>
-	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td class="TT"><input id="radio_km" type="radio" value="km" name="Length"> <?php t("km"); ?><br><input id="radio_mile" type="radio" value="mile" name="Length"> <?php t("mile"); ?> </td></tr>
-	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td class="TT"><input id="radio_Ideal" type="radio" value="IR" name="Range"> <?php t("Ideal"); ?><br><input id="radio_Rated" type="radio" value="RR" name="Range"> <?php t("Rated"); ?></td></tr>
-	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td class="TT"><input id="checkboxSharedata" type="checkbox" value="sharedata"> <?php t("Enable"); ?></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
-	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td class="TT"><input id="radio_all" type="radio" value="all" name="update"> <?php t("All"); ?><br><input id="radio_stable" type="radio" value="stable" name="update"> <?php t("Stable"); ?><br><input id="radio_none" type="radio" value="none" name="update"> <?php t("None"); ?></td></tr>
-	<tr><td><b><?php t("Sleep"); ?>:</b></td><td class="TT"><input id="checkboxSleep" type="checkbox" value="sleep"> <?php t("Enable"); ?></td></tr>
+	<tr><td valign="top"><b><?php t("Power"); ?>:</b></td><td class="TT"><input id="radio_hp" type="radio" value="hp" name="power" /> <label for="radio_hp"><?php t("PS"); ?></label><br><input id="radio_kw" type="radio" value="kw" name="power" /> <label for="radio_kw"><?php t("kW"); ?></label></td></tr>
+	<tr><td valign="top"><b><?php t("Temperature"); ?>:</b></td><td class="TT"><input id="radio_celsius" type="radio" value="celsius" name="Temperature"> <label for="radio_celsius"><?php t("Celsius"); ?></label><br><input id="radio_fahrenheit" type="radio" value="fahrenheit" name="Temperature"> <label for="radio_fahrenheit"><?php t("Fahrenheit"); ?></label></td></tr>
+	<tr><td valign="top"><b><?php t("Unit of length"); ?>:</b></td><td class="TT"><input id="radio_km" type="radio" value="km" name="Length"> <label for="radio_km"><?php t("km"); ?></label><br><input id="radio_mile" type="radio" value="mile" name="Length"> <label for="radio_mile"><?php t("mile"); ?></label></td></tr>
+	<tr><td valign="top"><b><?php t("Range"); ?>:</b></td><td class="TT"><input id="radio_Ideal" type="radio" value="IR" name="Range"> <label for="radio_Ideal"><?php t("Ideal"); ?></label><br><input id="radio_Rated" type="radio" value="RR" name="Range"> <label for="radio_Rated"><?php t("Rated"); ?></label></td></tr>
+	<tr><td><b><?php t("Share data anonymously"); ?>:</b></td><td class="TT"><input id="checkboxSharedata" type="checkbox" value="sharedata"> <label for="checkboxSharedata"><?php t("Enable"); ?></label></td><td><img id="ShareDataHelp" src="img/icon-help-24.png" /></td></tr>
+	<tr><td valign="top"><b><?php t("Automatic updates"); ?>:</b></td><td class="TT"><input id="radio_all" type="radio" value="all" name="update"> <label for="radio_all"><?php t("All"); ?></label><br><input id="radio_stable" type="radio" value="stable" name="update"> <label for="radio_stable"><?php t("Stable"); ?></label><br><input id="radio_none" type="radio" value="none" name="update"> <label for="radio_none"><?php t("None"); ?></label></td></tr>
+	<tr><td><b><?php t("Sleep"); ?>:</b></td><td class="TT"><input id="checkboxSleep" type="checkbox" value="sleep"> <label for="checkboxSleep"><?php t("Enable"); ?></label></td></tr>
 	<tr><td></td><td><input class="startdate timepicker text-center"></input> <?php t("to"); ?> <input class="enddate timepicker text-center"></input></td></tr>
-	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td class="TT"><input id="checkbox100pct" type="checkbox" value="100pct"> <?php t("Enable"); ?></td></tr>
+	<tr><td><b><?php t("Show calc. 100% range"); ?>:</b></td><td class="TT"><input id="checkbox100pct" type="checkbox" value="100pct"> <label for="checkbox100pct"><?php t("Enable"); ?></label></td></tr>
 	<tr><td valign="top"><b><?php t("URL Admin Panel"); ?>:</b></td><td><input id="URL_Admin" style="width:100%;" placeholder="http://raspberry/admin/"></td></tr>
 	<tr><td valign="top"><b><?php t("URL Grafana"); ?>:</b></td><td><input id="URL_Grafana" style="width:100%;" placeholder="http://raspberry:3000/"></td></tr>
 	<tr><td valign="top"><b><?php t("Teslalogger HTTP Port"); ?>:</b></td><td><input id="HTTPPort" style="width:100%;" placeholder="5000"></td></tr>
 	<tr><td valign="top"><b><?php t("Zoom Level"); ?>:</b></td><td><input id="ZoomLevel" size="4"></td></tr>
-	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td class="TT"><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <?php t("Enable"); ?></td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png"/></a></td></tr>
-	<tr><td><b><?php t("Position by StreamingAPI"); ?>:</b></td><td class="TT"><input id="StreamingPos" type="checkbox" value="StreamingPos"> <?php t("Enable"); ?></td><td><img id="StreamingPosHelp" src="img/icon-help-24.png" class="pointer"/></td></tr>
+	<tr><td><b><?php t("ScanMyTesla integration"); ?>:</b></td><td class="TT"><input id="checkboxScanMyTesla" type="checkbox" value="ScanMyTesla"> <label for="checkboxScanMyTesla"><?php t("Enable"); ?></label></td><td><a href="https://teslalogger.de/smt.php" target=”_blank”><img src="img/icon-help-24.png"/></a></td></tr>
+	<tr><td><b><?php t("Position by StreamingAPI"); ?>:</b></td><td class="TT"><input id="StreamingPos" type="checkbox" value="StreamingPos"> <label for="StreamingPos"><?php t("Enable"); ?></label></td><td><img id="StreamingPosHelp" src="img/icon-help-24.png" class="pointer"/></td></tr>
 <?php
 
 	$url = GetTeslaloggerURL("getallcars");

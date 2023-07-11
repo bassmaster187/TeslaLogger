@@ -22,7 +22,7 @@ input.newJourney {width: 300px;}
 select.newJourney {width: 500px;}
 </style>
 
-	<script>
+<script>
 	<?php
 	if (isset($_REQUEST["carid"]))
         echo("var carid=".$_REQUEST["carid"].";\n");
@@ -353,7 +353,8 @@ select.newJourney {width: 500px;}
         var uend = end.getTime();
         var temp = "<a href='";
         temp += url_grafana;
-        temp += "/d/";
+        temp += temp.endsWith("/") ? "" : "/";
+        temp += "d/";
         temp += uid;
         temp += "/dashboard?orgId=1&from=";
         temp += ustart +"&to="+ uend +"&var-Car="+carid+ parameters+ "' target=\"_blank\">";
@@ -362,25 +363,16 @@ select.newJourney {width: 500px;}
 
         return temp;
     }
-
-
 </script>
 </head>
 <body>
 <div>
 <?php
-include "menu.php";
-menu("Journeys");
-
-// echo("Unit: $LengthUnit<br>");
-// echo("Milefactor: $milefactor");
+	include "menu.php";
+	menu("Journeys");
 ?>
-<div>
     <h1><?php t("Journeys"); ?></h1>
-    <p>
-		<?php t("TextJourneys"); ?>
-    </p>
-<div>
+    <p><?php t("TextJourneys"); ?></p>
 
 <table id="myDT">
 <thead>

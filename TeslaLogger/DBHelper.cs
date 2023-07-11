@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using Microsoft.VisualBasic.Logging;
-using Org.BouncyCastle.Utilities.Net;
+using System.Data.Common;
 
 namespace TeslaLogger
 {
@@ -30,6 +29,8 @@ namespace TeslaLogger
         bool CleanPasswortDone; // defaults to false
 
         internal static string Database = "teslalogger";
+        internal static string User = "root";
+        internal static string Password = "teslalogger";
 
         internal static string DBConnectionstring => GetDBConnectionstring();
 
@@ -48,7 +49,7 @@ namespace TeslaLogger
                 else
                     DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
             }
-            else 
+            else
             {
                 DBConnectionstring = ApplicationSettings.Default.DBConnectionstring;
             }
@@ -79,14 +80,10 @@ namespace TeslaLogger
                 }
                 DBConnectionstring += "charset=utf8mb4";
             }
-            if (DBConnectionstring.ToLower(Tools.ciEnUS).Contains("database="))
-            {
-                Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "database=(.+?);");
-                if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
-                {
-                    Database = m.Groups[1].Captures[0].ToString();
-                }
-            }
+            DbConnectionStringBuilder dBConnectionStringBuilder = new MySqlConnectionStringBuilder(DBConnectionstring);
+            Database = dBConnectionStringBuilder["database"].ToString();
+            User = dBConnectionStringBuilder["uid"].ToString();
+            Password = dBConnectionStringBuilder["password"].ToString();
             if (obfuscate && DBConnectionstring.ToLower(Tools.ciEnUS).Contains("password="))
             {
                 Match m = Regex.Match(DBConnectionstring.ToLower(Tools.ciEnUS), "password=(.+?);");
@@ -124,7 +121,7 @@ VALUES(@id, @text)", con))
                     {
                         cmd.Parameters.AddWithValue("@id", (int)hsc);
                         cmd.Parameters.AddWithValue("@text", hsc.ToString());
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -148,7 +145,7 @@ WHERE
                     cmd.Parameters.AddWithValue("@enddate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@EndPos", maxPosid);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    SQLTracer.TraceNQ(cmd);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
 
@@ -226,7 +223,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@state", state);
                         cmd.Parameters.AddWithValue("@StartPos", MaxPosid);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -275,7 +272,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@commandid", mothershipCommands[command]);
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@httpcode", httpcode);
-                    SQLTracer.TraceNQ(cmd);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
         }
@@ -321,7 +318,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@cost_per_minute", j["cost_per_minute"]);
                         cmd.Parameters.AddWithValue("@cost_idle_fee_total", j["cost_idle_fee_total"]);
                         cmd.Parameters.AddWithValue("@id", j["id"]);
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
 
                         Logfile.Log("SetCost OK: " + done);
                     }
@@ -357,7 +354,7 @@ WHERE
     carid IS NULL", con))
                         {
                             cmd.CommandTimeout = 6000;
-                            SQLTracer.TraceNQ(cmd);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                     t = Environment.TickCount - t;
@@ -475,7 +472,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@token", abrp_token);
                         cmd.Parameters.AddWithValue("@mode", abrp_mode);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -509,7 +506,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@user", sucBingo_user);
                         cmd.Parameters.AddWithValue("@apikey", sucBingo_apiKey);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -552,6 +549,18 @@ DESC";
         internal void AnalyzeChargingStates()
         {
             List<int> recalculate = new List<int>();
+            if (KVS.Get($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}", out int analyzeChargingStatesMaxGapID) == KVS.NOT_FOUND)
+            {
+                analyzeChargingStatesMaxGapID = 0;
+            }
+            if (KVS.Get($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", out int analyzeChargingStatesMaxDropID) == KVS.NOT_FOUND)
+            {
+                analyzeChargingStatesMaxDropID = 0;
+            }
+            int maxGapID = analyzeChargingStatesMaxGapID;
+            int maxDropID = analyzeChargingStatesMaxDropID;
+            Tools.DebugLog($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}: {analyzeChargingStatesMaxGapID}");
+            Tools.DebugLog($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}: {analyzeChargingStatesMaxDropID}");
             // find gaps in chargingstate.id
             try
             {
@@ -564,14 +573,18 @@ SELECT
 FROM
     chargingstate
 WHERE
-    CarID = @CarID", con))
+    CarID = @CarID
+    AND id > @AnalyzeChargingStatesMaxGapID
+ORDER BY id", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@AnalyzeChargingStatesMaxGapID", analyzeChargingStatesMaxGapID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         int lastID = 0;
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
+                            maxGapID = Math.Max(lastID, maxGapID);
                         }
                         while (dr.Read())
                         {
@@ -580,10 +593,11 @@ WHERE
                                 if (!recalculate.Contains((int)dr[0]))
                                 {
                                     recalculate.Add((int)dr[0]);
-                                    Tools.DebugLog($"AnalyzeChargingStates: ID gap found:{dr[0]}");
+                                    Tools.DebugLog($"AnalyzeChargingStates_{car.CarInDB}: ID gap found:{dr[0]}");
                                 }
                             }
                             lastID = (int)dr[0];
+                            maxGapID = Math.Max(lastID, maxGapID);
                         }
                     }
                 }
@@ -613,11 +627,13 @@ WHERE
     AND chargingstate.CarID = @CarID
     AND charging.CarID = @CarID
     AND chargingstate.id NOT IN(@NotIdInParameter)
+    AND chargingstate.id > @AnalyzeChargingStatesMaxDropID
 ORDER BY
     chargingstate.id", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@NotIdInParameter", String.Join(",", recalculate));
+                        cmd.Parameters.AddWithValue("@NotIdInParameter", recalculate.Count > 0 ? String.Join(",", recalculate) : "0");
+                        cmd.Parameters.AddWithValue("@AnalyzeChargingStatesMaxDropID", analyzeChargingStatesMaxDropID);
                         cmd.CommandTimeout = 600;
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         int lastID = 0;
@@ -625,6 +641,7 @@ ORDER BY
                         if (dr.Read())
                         {
                             lastID = (int)dr[0];
+                            maxDropID = Math.Max(lastID, maxDropID);
                             lastCEA = (double)dr[1];
                         }
                         while (dr.Read())
@@ -634,11 +651,12 @@ ORDER BY
                                 if (!recalculate.Contains((int)dr[0]))
                                 {
                                     recalculate.Add((int)dr[0]);
-                                    Tools.DebugLog($"AnalyzeChargingStates: drop during charging found:{dr[0]}");
+                                    Tools.DebugLog($"AnalyzeChargingStates_{car.CarInDB}: drop during charging found:{dr[0]}");
                                 }
                             }
                             lastID = (int)dr[0];
                             lastCEA = (double)dr[1];
+                            maxDropID = Math.Max(lastID, maxDropID);
                         }
                     }
                 }
@@ -652,6 +670,8 @@ ORDER BY
             {
                 _ = RecalculateChargeEnergyAdded(ChargingStateID);
             }
+            KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxGapID_{car.CarInDB}", maxGapID);
+            KVS.InsertOrUpdate($"AnalyzeChargingStatesMaxDropID_{car.CarInDB}", maxDropID);
         }
 
         internal static void DeleteDuplicateTrips()
@@ -935,7 +955,7 @@ AND id <=(
                 }
                 Tools.DebugLog($"RecalculateChargeEnergyAdded ChargingStateID:{ChargingStateID} sum:{sum}");
                 UpdateChargeEnergyAdded(ChargingStateID, sum);
-                UpdateChargePrice(ChargingStateID);
+                UpdateChargePrice(ChargingStateID, true);
                 updatedChargePrice = true;
             }
             return updatedChargePrice;
@@ -1149,7 +1169,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                         cmd.Parameters.AddWithValue("@UnplugDate", UnplugDate);
-                        int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                        int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                         car.Log($"FillEmptyUnplugDate({ChargingStateID}): {rowsUpdated} rows updated");
                     }
                 }
@@ -1187,7 +1207,7 @@ WHERE
                     // check if DoNotCombineChargingStates is enabled
                     if (addr.specialFlags.ContainsKey(Address.SpecialFlags.DoNotCombineChargingStates))
                     {
-                        Logfile.Log($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
+                        car.Log($"CombineChargingStates enabled globally, but disabled at POI '{addr.name}'");
                         doCombine = false;
                     }
                 }
@@ -1198,7 +1218,7 @@ WHERE
         internal void CombineChangingStates()
         {
             // find candidates to combine
-            Logfile.Log("CombineChangingStates start");
+            car.Log("CombineChangingStates start");
             int t = Environment.TickCount;
             // find chargingstates with exactly the same odometer -> car did no move between charging states
             Queue<int> combineCandidates = FindCombineCandidates();
@@ -1244,7 +1264,7 @@ WHERE
                             IDsToDelete.Add(similarChargingState);
                         }
                     }
-                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID);
+                    GetStartValuesFromChargingState(minID, out DateTime startDate, out int startdID, out int posID, out string _);
                     car.Log($"Combine charging state{(similarChargingStates.Count > 1 ? "s" : "")} {string.Join(", ", IDsToDelete)} into {maxID}");
                     Tools.DebugLog($"GetStartValuesFromChargingState: id:{minID} startDate:{startDate} startID:{startdID} posID:{posID}");
                     // update current charging state with startdate, startID, pos
@@ -1267,14 +1287,14 @@ WHERE
                     // but only if it's not updated by RecalculateChargeEnergyAdded
                     if (!updatedChargePrice)
                     {
-                        UpdateChargePrice(maxID);
+                        UpdateChargePrice(maxID, true);
                     }
 
                     // update chargingsession stats
                     UpdateMaxChargerPower(maxID);
                 }
             }
-            Logfile.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
+            car.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
         }
 
         private Tuple<int, DateTime, DateTime> GetStartEndFromCharginState(int id)
@@ -1329,7 +1349,7 @@ WHERE
                 object cacheValue = MemoryCache.Default.Get(cacheKey);
                 if (cacheValue != null)
                     return;
-                
+
                 MemoryCache.Default.Add(cacheKey, true, DateTime.Now.AddMinutes(2));
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1377,6 +1397,7 @@ FROM
 WHERE
   chargingstate.pos = pos.id
   AND pos.CarID=@CarID
+  AND chargingstate.fast_charger_brand <> 'Tesla'
 GROUP BY
   pos.odometer
 HAVING
@@ -1423,7 +1444,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@tesla_token", car.webhelper.Tesla_token);
                         cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
 
                         car.Log("update tesla_token OK: " + done);
 
@@ -1471,7 +1492,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@vin", car.Vin);
                         cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
 
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
 
                         car.Log("update tesla_token OK: " + done);
                     }
@@ -1492,7 +1513,7 @@ HAVING
                 using (MySqlCommand cmd = new MySqlCommand("insert mothershipcommands (command) values (@command)", con))
                 {
                     cmd.Parameters.AddWithValue("@command", command);
-                    SQLTracer.TraceNQ(cmd);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
         }
@@ -1536,7 +1557,7 @@ HAVING
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
                         cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
 
                         car.Log("UpdateRefreshToken OK: " + done);
                     }
@@ -1565,7 +1586,7 @@ HAVING
                     using (MySqlCommand cmd = new MySqlCommand("update cars set tesla_password = '' where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
-                        int done = SQLTracer.TraceNQ(cmd);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
 
                         // car.Log("CleanPasswort OK: " + done);
                         CleanPasswortDone = true;
@@ -1619,6 +1640,7 @@ HAVING
             {
                 // close charging state with enddate, endID from max charging
                 CloseChargingState(openChargingState);
+                UpdateChargePrice(openChargingState);
 
                 // if charging was interrupted, maybe combine it with the previous session
                 if (CombineChangingStatesAt(openChargingState))
@@ -1635,7 +1657,7 @@ HAVING
                             Tools.DebugLog($"FindSimilarChargingStates: {chargingState}:{odometer}");
                         }
                         // get startdate, startID, posID from oldest
-                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID))
+                        if (chargingStates.Count > 0 && GetStartValuesFromChargingState(chargingStates.First(), out DateTime startDate, out int startdID, out int posID, out string _))
                         {
                             car.Log($"Combine charging states {string.Join(", ", chargingStates)} into {openChargingState}");
                             Tools.DebugLog($"GetStartValuesFromChargingState: id:{chargingStates.First()} startDate:{startDate} startID:{startdID} posID:{posID}");
@@ -1652,13 +1674,24 @@ HAVING
                     }
                 }
                 // calculate chargingstate.charge_energy_added from endchargingid - startchargingid
-                bool updatedChargePrice = RecalculateChargeEnergyAdded(openChargingState);
+                // this will also recalculate charge price
+                _ = RecalculateChargeEnergyAdded(openChargingState);
 
-                // calculate charging price if per_kwh and/or per_minute and/or per_session is available
-                // but only if it's not updated by RecalculateChargeEnergyAdded
-                if (!updatedChargePrice)
+                // get tesla invoice for supercharger
+                if (ChargingStateLocationIsSuC(openChargingState))
                 {
-                    UpdateChargePrice(openChargingState);
+                    _ = Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(600000); // sleep 10 minutes so that the invoice is ready
+                        GetChargingHistoryV2Service.LoadLatest(car);
+                        if (GetChargingHistoryV2Service.SyncAll(car) == 0)
+                        {
+                            // invoice not ready yet
+                            Thread.Sleep(3600000); // sleep 60 minutes so that the invoice is ready
+                            GetChargingHistoryV2Service.LoadLatest(car);
+                            _ = GetChargingHistoryV2Service.SyncAll(car);
+                        }
+                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 }
             }
 
@@ -1683,7 +1716,16 @@ HAVING
             }
         }
 
-        private void GetChargeCostDataFromReference(int ChargingStateID, ref string ref_cost_currency, ref double ref_cost_per_kwh, ref bool ref_cost_per_kwh_found, ref double ref_cost_per_minute, ref bool ref_cost_per_minute_found, ref double ref_cost_per_session, ref bool ref_cost_per_session_found)
+        private void GetChargeCostDataFromReference(
+            int ChargingStateID,
+            ref string ref_cost_currency,
+            ref double ref_cost_per_kwh,
+            ref bool ref_cost_per_kwh_found,
+            ref double ref_cost_per_minute,
+            ref bool ref_cost_per_minute_found,
+            ref double ref_cost_per_session,
+            ref bool ref_cost_per_session_found
+            )
         {
             if (car.HasFreeSuC() && ChargingStateLocationIsSuC(ChargingStateID))
             {
@@ -1716,7 +1758,7 @@ HAVING
             }
         }
 
-        private bool ChargingStateLocationIsSuC(int ChargingStateID)
+        internal bool ChargingStateLocationIsSuC(int ChargingStateID)
         {
             try
             {
@@ -1758,7 +1800,7 @@ WHERE
             return false;
         }
 
-        private void UpdateChargePrice(int ChargingStateID)
+        internal void UpdateChargePrice(int ChargingStateID, bool fromID = false)
         {
             string ref_cost_currency = string.Empty;
             double ref_cost_per_kwh = double.NaN;
@@ -1767,20 +1809,99 @@ WHERE
             bool ref_cost_per_minute_found = false;
             double ref_cost_per_session = double.NaN;
             bool ref_cost_per_session_found = false;
-            GetChargeCostDataFromReference(ChargingStateID, ref ref_cost_currency, ref ref_cost_per_kwh, ref ref_cost_per_kwh_found, ref ref_cost_per_minute, ref ref_cost_per_minute_found, ref ref_cost_per_session, ref ref_cost_per_session_found);
-            UpdateChargePrice(ChargingStateID, ref_cost_currency, ref_cost_per_kwh, ref_cost_per_kwh_found, ref_cost_per_minute, ref_cost_per_minute_found, ref_cost_per_session, ref_cost_per_session_found);
+            bool freeSuC = false;
+            if (fromID)
+            {
+                GetChargeCostDataFromID(
+                    ChargingStateID,
+                    ref ref_cost_currency,
+                    ref ref_cost_per_kwh,
+                    ref ref_cost_per_kwh_found,
+                    ref ref_cost_per_minute,
+                    ref ref_cost_per_minute_found,
+                    ref ref_cost_per_session,
+                    ref ref_cost_per_session_found,
+                    ref freeSuC
+                    );
+            }
+            else
+            {
+                GetChargeCostDataFromReference(
+                    ChargingStateID,
+                    ref ref_cost_currency,
+                    ref ref_cost_per_kwh,
+                    ref ref_cost_per_kwh_found,
+                    ref ref_cost_per_minute,
+                    ref ref_cost_per_minute_found,
+                    ref ref_cost_per_session,
+                    ref ref_cost_per_session_found);
+            }
+            UpdateChargePrice(
+                ChargingStateID,
+                ref_cost_currency,
+                ref_cost_per_kwh,
+                ref_cost_per_kwh_found,
+                ref_cost_per_minute,
+                ref_cost_per_minute_found,
+                ref_cost_per_session,
+                ref_cost_per_session_found,
+                freeSuC);
         }
 
-        private void UpdateChargePrice(int ChargingStateID, string ref_cost_currency, double ref_cost_per_kwh, bool ref_cost_per_kwh_found, double ref_cost_per_minute, bool ref_cost_per_minute_found, double ref_cost_per_session, bool ref_cost_per_session_found)
+        private void UpdateChargePrice(
+            int ChargingStateID,
+            string ref_cost_currency,
+            double ref_cost_per_kwh,
+            bool ref_cost_per_kwh_found,
+            double ref_cost_per_minute,
+            bool ref_cost_per_minute_found,
+            double ref_cost_per_session,
+            bool ref_cost_per_session_found,
+            bool freeSuC)
         {
-            if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
+            if (freeSuC)
+            {
+                // do not recalculate cost_total
+                // GetChargingHistoryV2Service will set the correct values
+                // for cost_total (0.0) and cost_freesuc_savings_total
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    chargingstate
+SET
+    cost_total = @cost_total
+WHERE
+    CarID = @CarID
+    AND id = @ChargingStateID", con))
+                        {
+                            cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                            cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                            cmd.Parameters.AddWithValue("@cost_total", (double)0.0);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
+                            car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_total 0.0 (freeSuC and/or charging credits)");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+
+                    Tools.DebugLog($"Exception during DBHelper.UpdateChargePrice(): {ex}");
+                    Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargePrice()");
+                }
+            }
+            else if (ref_cost_per_kwh_found || ref_cost_per_minute_found || ref_cost_per_session_found)
             {
                 double cost_total = double.NaN;
                 double charge_energy_added = double.NaN;
                 DateTime startDate = DateTime.MinValue;
                 DateTime endDate = DateTime.MinValue;
 
-                // read values from openChargingState
+                // read values from ChargingStateID
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -1849,7 +1970,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_kwh", ref_cost_per_kwh);
-                                int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                                int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                                 car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_kwh {ref_cost_per_kwh}");
                             }
                         }
@@ -1893,7 +2014,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_minute", ref_cost_per_minute);
-                                int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                                int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                                 car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_minute {ref_cost_per_minute}");
                             }
                         }
@@ -1936,7 +2057,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_per_session", ref_cost_per_session);
-                                int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                                int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                                 car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_per_session {ref_cost_per_session}");
                             }
                         }
@@ -1971,7 +2092,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_total", cost_total);
-                                int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                                int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                                 car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_total {cost_total}");
                             }
                         }
@@ -2006,7 +2127,7 @@ WHERE
                                 cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                                 cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                                 cmd.Parameters.AddWithValue("@cost_currency", ref_cost_currency);
-                                int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                                int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                                 car.Log($"UpdateChargePrice: {rowsUpdated} rows updated to cost_currency {ref_cost_currency}");
                             }
                         }
@@ -2049,7 +2170,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                             cmd.Parameters.AddWithValue("@EndDate", EndDate);
                             cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                            int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                             car.Log($"UpdateUnplugDate({ChargingStateID}): {rowsUpdated} rows updated to EndDate {EndDate}");
                         }
                     }
@@ -2088,7 +2209,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                         cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                        int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                        int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                         car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
                     }
                 }
@@ -2184,7 +2305,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                             cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                             cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
-                            int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                             car.Log($"UpdateChargeEnergyAdded({ChargingStateID}): {rowsUpdated} rows updated to charge_energy_added {charge_energy_added}");
                         }
                     }
@@ -2236,7 +2357,7 @@ WHERE
     AND TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3
     AND chargingstate.EndChargingID - chargingstate.StartChargingID > 4
     AND chargingstate.CarID = @CarID
-    AND chargingstate.ID < @ChargingStateID
+    AND chargingstate.ID <= @ChargingStateID
 ORDER BY
     id DESC
 LIMIT 1", con))
@@ -2264,7 +2385,7 @@ LIMIT 1", con))
                             {
                                 ref_cost_per_minute_found = true;
                             }
-                            Tools.DebugLog($"FindReferenceChargingState id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
+                            Tools.DebugLog($"FindReferenceChargingState({ChargingStateID}, {name}) id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
                         }
                         else
                         {
@@ -2284,7 +2405,98 @@ LIMIT 1", con))
             return referenceID;
         }
 
-        private static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID)
+        private int GetChargeCostDataFromID(
+            int ChargingStateID,
+            ref string ref_cost_currency,
+            ref double ref_cost_per_kwh,
+            ref bool ref_cost_per_kwh_found,
+            ref double ref_cost_per_minute,
+            ref bool ref_cost_per_minute_found,
+            ref double ref_cost_per_session,
+            ref bool ref_cost_per_session_found,
+            ref bool freeSuC
+            )
+        {
+            int referenceID = int.MinValue;
+            ref_cost_currency = string.Empty;
+            ref_cost_per_kwh = double.NaN;
+            ref_cost_per_kwh_found = false;
+            ref_cost_per_minute = double.NaN;
+            ref_cost_per_minute_found = false;
+            ref_cost_per_session = double.NaN;
+            ref_cost_per_session_found = false;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargingstate.id, 
+    chargingstate.cost_currency,
+    chargingstate.cost_per_kwh,
+    chargingstate.cost_per_session,
+    chargingstate.cost_per_minute,
+    chargingstate.cost_freesuc_savings_total
+FROM
+    chargingstate
+WHERE
+    chargingstate.CarID = @CarID
+    AND chargingstate.ID = @ChargingStateID
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            _ = int.TryParse(dr[0].ToString(), out referenceID);
+                            if (dr[1] != DBNull.Value)
+                            {
+                                ref_cost_currency = dr.GetString(1);
+                            }
+                            if (double.TryParse(dr[2].ToString(), out ref_cost_per_kwh))
+                            {
+                                ref_cost_per_kwh_found = true;
+                            }
+                            if (double.TryParse(dr[3].ToString(), out ref_cost_per_session))
+                            {
+                                ref_cost_per_session_found = true;
+                            }
+                            if (double.TryParse(dr[4].ToString(), out ref_cost_per_minute))
+                            {
+                                ref_cost_per_minute_found = true;
+                            }
+                            if (double.TryParse(dr[5].ToString(), out double cost_freesuc_savings_total)
+                                && cost_freesuc_savings_total > 0
+                                )
+                            {
+                                Tools.DebugLog($"cost_freesuc_savings_total:{cost_freesuc_savings_total} --> freeSuC");
+                                freeSuC = true;
+                            }
+                            Tools.DebugLog($"GetChargeCostDataFromID raw    {ChargingStateID}, id:{dr[0]} currency:{dr[1]} cost_per_kwh:{dr[2]} cost_per_session:{dr[3]} cost_per_minute:{dr[4]}");
+                            Tools.DebugLog($"GetChargeCostDataFromID parsed {ChargingStateID}, id:{referenceID} currency:{ref_cost_currency} cost_per_kwh:{ref_cost_per_kwh} cost_per_session:{ref_cost_per_session} cost_per_minute:{ref_cost_per_minute}");
+                            Tools.DebugLog($"GetChargeCostDataFromID bool   {ChargingStateID}, id:{referenceID} ref_cost_per_kwh_found:{ref_cost_per_kwh_found} ref_cost_per_session_found:{ref_cost_per_session_found} ref_cost_per_minute_found:{ref_cost_per_minute_found}");
+                        }
+                        else
+                        {
+                            Tools.DebugLog("GetChargeCostDataFromID dr.read failed");
+                        }
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+
+                Tools.DebugLog($"Exception during GetChargeCostDataFromID(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during GetChargeCostDataFromID()");
+            }
+            return referenceID;
+        }
+
+        internal static bool GetStartValuesFromChargingState(int ChargingStateID, out DateTime startDate, out int startdID, out int posID, out string posName)
         {
             try
             {
@@ -2293,22 +2505,32 @@ LIMIT 1", con))
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    StartDate,
-    StartChargingID,
-    Pos
+    chargingstate.StartDate,
+    chargingstate.StartChargingID,
+    chargingstate.pos,
+    pos.address
 FROM
     chargingstate
+JOIN
+    pos ON chargingstate.pos = pos.id
 WHERE
-    id = @ChargingStateID", con))
+    chargingstate.id = @ChargingStateID", con))
                     {
                         cmd.Parameters.AddWithValue("@ChargingStateID", ChargingStateID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read() && dr[0] != DBNull.Value)
+                        if (dr.Read()
+                            && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value
+                            && dr[2] != DBNull.Value
+                            && dr[3] != DBNull.Value
+                            )
                         {
                             if (DateTime.TryParse(dr[0].ToString(), out startDate)
                                 && int.TryParse(dr[1].ToString(), out startdID)
-                                && int.TryParse(dr[2].ToString(), out posID))
+                                && int.TryParse(dr[2].ToString(), out posID)
+                                )
                             {
+                                posName = dr[3].ToString();
                                 return true;
                             }
                         }
@@ -2325,6 +2547,7 @@ WHERE
             startDate = DateTime.MinValue;
             startdID = int.MinValue;
             posID = int.MinValue;
+            posName = string.Empty;
             return false;
         }
 
@@ -2441,14 +2664,6 @@ WHERE
     ) AND chargingstate.conn_charge_cable =(
         SELECT
             conn_charge_cable
-        FROM
-            chargingstate
-        WHERE
-            chargingstate.CarID = @CarID
-            AND id = @referenceID
-    ) AND chargingstate.fast_charger_brand =(
-        SELECT
-            fast_charger_brand
         FROM
             chargingstate
         WHERE
@@ -2930,7 +3145,7 @@ LIMIT 1", con)
             }
 
             int chargeID = GetMaxChargeid(out DateTime chargeStart);
-            int chargingstateid = 0;
+            long chargingstateid = 0;
             if (wh != null)
             {
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -2976,10 +3191,7 @@ VALUES(
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_start", meter_vehicle_kwh_start);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_start", meter_utility_kwh_start);
                         cmd.Parameters.AddWithValue("@wheel_type", wh.car.wheel_type);
-                        SQLTracer.TraceNQ(cmd);
-
-                        cmd.CommandText = "SELECT LAST_INSERT_ID();";
-                        chargingstateid = Convert.ToInt32(SQLTracer.TraceSc(cmd), Tools.ciEnUS);
+                        _ = SQLTracer.TraceNQ(cmd, out chargingstateid);
                     }
                 }
             }
@@ -3019,7 +3231,7 @@ WHERE
     id = @id", con))
                         {
                             cmd.Parameters.AddWithValue("@id", chargingstateid);
-                            SQLTracer.TraceNQ(cmd);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                 });
@@ -3064,7 +3276,7 @@ WHERE
                                     {
                                         cmd.Parameters.AddWithValue("@latestPos", newPos);
                                         cmd.Parameters.AddWithValue("@chargingstateId", chargingstateId);
-                                        int updatedRows = SQLTracer.TraceNQ(cmd);
+                                        int updatedRows = SQLTracer.TraceNQ(cmd, out _);
                                         car.Log($"updated chargingstate {chargingstateId} to pos.id {newPos}");
                                     }
                                 }
@@ -3134,6 +3346,8 @@ WHERE
                 }
             }
 
+            int rowsUpdated = 0;
+
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
@@ -3150,8 +3364,13 @@ WHERE
                     cmd.Parameters.AddWithValue("@EndDate", EndDate);
                     cmd.Parameters.AddWithValue("@Pos", MaxPosId);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    SQLTracer.TraceNQ(cmd);
+                    rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                 }
+            }
+
+            if (rowsUpdated > 0)
+            {
+                Insert_active_route_energy_at_arrival(MaxPosId, true);
             }
 
             if (StartPos != 0)
@@ -3214,7 +3433,8 @@ WHERE
                     {
                         da.SelectCommand.Parameters.AddWithValue("@startPos", startPosId);
                         da.SelectCommand.Parameters.AddWithValue("@maxPosId", endPosId);
-                        SQLTracer.TraceDA(dt, da);
+                        da.SelectCommand.CommandTimeout = 600;
+                        _ = SQLTracer.TraceDA(dt, da);
 
                         int x = 0;
 
@@ -3260,9 +3480,13 @@ WHERE
                             catch (Exception ex)
                             {
                                 if (car != null)
+                                {
                                     car.CreateExceptionlessClient(ex).Submit();
+                                }
                                 else
+                                {
                                     ex.ToExceptionless().FirstCarUserID().Submit();
+                                }
 
                                 Logfile.ExceptionWriter(ex, sql ?? "NULL");
                             }
@@ -3273,7 +3497,14 @@ WHERE
             }
             catch (Exception ex)
             {
-                car.CreateExceptionlessClient(ex).Submit();
+                if (car != null)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                }
+                else
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                }
 
                 Logfile.ExceptionWriter(ex, inhalt);
                 Logfile.Log(ex.ToString());
@@ -3429,7 +3660,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@distance_flat_km", distance_flat_km);
                         cmd.Parameters.AddWithValue("@height_max", height_max);
                         cmd.Parameters.AddWithValue("@height_min", height_min);
-                        int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                        int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                         car.Log($"UpdateDriveHeightStatistics({driveId}): {rowsUpdated} rows updated");
                     }
                 }
@@ -3583,7 +3814,7 @@ WHERE
                                             string address = task.Result;
                                             if (address.Length > 250)
                                                 address = address.Substring(0, 250);
-                                            
+
                                             cmd2.Parameters.AddWithValue("@adress", address);
                                             if (task.Result.Length > 250)
                                             {
@@ -3591,7 +3822,7 @@ WHERE
                                                 exl.AddObject(task.Result, $"ReverseGecocodingAsync returned long (l:{task.Result.Length}) address for lat:{lat} lng:{lng}");
                                                 exl.Submit();
                                             }
-                                            SQLTracer.TraceNQ(cmd2);
+                                            _ = SQLTracer.TraceNQ(cmd2, out _);
                                         }
                                     }
                                 }
@@ -3624,7 +3855,18 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT avg(outside_temp) as outside_temp_avg, max(speed) as speed_max, max(power) as power_max, min(power) as power_min, avg(power) as power_avg FROM pos where id between @startpos and @endpos and CarID=@CarID", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    avg(outside_temp) as outside_temp_avg,
+    max(speed) as speed_max,
+    max(power) as power_max,
+    min(power) as power_min,
+    avg(power) as power_avg
+FROM
+    pos
+WHERE
+    id BETWEEN @startpos AND @endpos
+    AND CarID=@CarID", con))
                     {
                         cmd.Parameters.AddWithValue("@startpos", startPos);
                         cmd.Parameters.AddWithValue("@endpos", endPos);
@@ -3636,7 +3878,18 @@ WHERE
                             using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
                             {
                                 con2.Open();
-                                using (MySqlCommand cmd2 = new MySqlCommand("update drivestate set outside_temp_avg=@outside_temp_avg, speed_max=@speed_max, power_max=@power_max, power_min=@power_min, power_avg=@power_avg where StartPos=@StartPos and EndPos=@EndPos  ", con2))
+                                using (MySqlCommand cmd2 = new MySqlCommand(@"
+UPDATE
+    drivestate
+SET
+    outside_temp_avg  = @outside_temp_avg,
+    speed_max = @speed_max,
+    power_max = @power_max,
+    power_min = @power_min,
+    power_avg = @power_avg
+WHERE
+    StartPos = @StartPos
+    AND EndPos = @EndPos  ", con2))
                                 {
                                     cmd2.Parameters.AddWithValue("@StartPos", startPos);
                                     cmd2.Parameters.AddWithValue("@EndPos", endPos);
@@ -3647,7 +3900,7 @@ WHERE
                                     cmd2.Parameters.AddWithValue("@power_min", dr["power_min"]);
                                     cmd2.Parameters.AddWithValue("@power_avg", dr["power_avg"]);
 
-                                    SQLTracer.TraceNQ(cmd2);
+                                    _ = SQLTracer.TraceNQ(cmd2, out _);
                                 }
                             }
                         }
@@ -3658,7 +3911,13 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @startpos", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id = @startpos", con))
                     {
                         cmd.Parameters.AddWithValue("@startpos", startPos);
 
@@ -3670,7 +3929,19 @@ WHERE
                                 DateTime dt1 = (DateTime)dr["Datum"];
                                 dr.Close();
 
-                                using (MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM pos where id > @startPos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id asc limit 1", con))
+                                using (MySqlCommand cmd2 = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id > @startPos
+    AND ideal_battery_range_km IS NOT NULL
+    AND battery_level IS BOT NULL
+    AND CarID = @CarID
+ORDER BY
+    id ASC
+LIMIT 1", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@startPos", startPos);
                                     cmd2.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -3688,12 +3959,19 @@ WHERE
                                         {
                                             dr.Close();
 
-                                            using (var cmd3 = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @startPos", con))
+                                            using (var cmd3 = new MySqlCommand(@"
+UPDATE
+    pos
+SET
+    ideal_battery_range_km = @ideal_battery_range_km,
+    battery_level = @battery_level
+WHERE
+    id = @startPos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@startPos", startPos);
                                                 cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
                                                 cmd3.Parameters.AddWithValue("@battery_level", battery_level.ToString());
-                                                SQLTracer.TraceNQ(cmd3);
+                                                _ = SQLTracer.TraceNQ(cmd3, out _);
 
                                                 car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                             }
@@ -3714,7 +3992,13 @@ WHERE
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM pos where id = @endpos", con))
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id = @endpos", con))
                     {
                         cmd.Parameters.AddWithValue("@endpos", endPos);
 
@@ -3726,7 +4010,19 @@ WHERE
                                 DateTime dt1 = (DateTime)dr["Datum"];
                                 dr.Close();
 
-                                using (var cmd2 = new MySqlCommand("SELECT * FROM pos where id < @endpos and ideal_battery_range_km is not null and battery_level is not null and CarID=@CarID order by id desc limit 1", con))
+                                using (var cmd2 = new MySqlCommand(@"
+SELECT
+    *
+FROM
+    pos
+WHERE
+    id < @endpos
+    AND ideal_battery_range_km IS NOT NULL
+    AND battery_level IS NOT NULL
+    AND CarID = @CarID
+ORDER BY
+    id DESC
+LIMIT 1", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@endpos", endPos);
                                     cmd2.Parameters.AddWithValue("@CarID", car.CarInDB);
@@ -3744,12 +4040,19 @@ WHERE
                                         {
                                             dr.Close();
 
-                                            using (var cmd3 = new MySqlCommand("update pos set ideal_battery_range_km = @ideal_battery_range_km, battery_level = @battery_level where id = @endpos", con))
+                                            using (var cmd3 = new MySqlCommand(@"
+UPDATE
+    pos
+SET
+    ideal_battery_range_km = @ideal_battery_range_km,
+    battery_level = @battery_level
+WHERE
+    id = @endpos", con))
                                             {
                                                 cmd3.Parameters.AddWithValue("@endpos", endPos);
                                                 cmd3.Parameters.AddWithValue("@ideal_battery_range_km", ideal_battery_range_km.ToString());
                                                 cmd3.Parameters.AddWithValue("@battery_level", battery_level.ToString());
-                                                SQLTracer.TraceNQ(cmd3);
+                                                _ = SQLTracer.TraceNQ(cmd3, out _);
 
                                                 car.Log($"Trip from {dt1} ideal_battery_range_km updated!");
                                             }
@@ -3856,18 +4159,21 @@ WHERE
         {
             // driving means that charging must be over
             UpdateUnplugDate();
+            int posID = GetMaxPosid();
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand("insert drivestate (StartDate, StartPos, CarID, wheel_type) values (@StartDate, @Pos, @CarID, @wheel_type)", con))
                 {
                     cmd.Parameters.AddWithValue("@StartDate", now);
-                    cmd.Parameters.AddWithValue("@Pos", GetMaxPosid());
+                    cmd.Parameters.AddWithValue("@Pos", posID);
                     cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
                     cmd.Parameters.AddWithValue("@wheel_type", car.wheel_type);
-                    SQLTracer.TraceNQ(cmd);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
+
+            Insert_active_route_energy_at_arrival(posID, true);
 
             car.CurrentJSON.current_driving = true;
             car.CurrentJSON.current_charge_energy_added = 0;
@@ -3883,6 +4189,7 @@ WHERE
             car.CurrentJSON.CreateCurrentJSON();
         }
 
+        int last_active_route_energy_at_arrival = int.MinValue;
 
         public void InsertPos(string timestamp, double latitude, double longitude, int speed, decimal power, double odometer, double idealBatteryRangeKm, double batteryRangeKm, int batteryLevel, double? outsideTemp, string altitude)
         {
@@ -3995,7 +4302,10 @@ VALUES(
                     cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
                     cmd.Parameters.AddWithValue("@is_preconditioning", car.CurrentJSON.current_is_preconditioning ? 1 : 0);
                     cmd.Parameters.AddWithValue("@sentry_mode", car.CurrentJSON.current_is_sentry_mode ? 1 : 0);
-                    SQLTracer.TraceNQ(cmd);
+
+                    _ = SQLTracer.TraceNQ(cmd, out long posID);
+
+                    Insert_active_route_energy_at_arrival(posID);
 
                     try
                     {
@@ -4039,58 +4349,47 @@ VALUES(
             car.CurrentJSON.CreateCurrentJSON();
         }
 
-        public void InsertMinimalPos(string timestamp, double latitude, double longitude, int batteryLevel)
+        private void Insert_active_route_energy_at_arrival(long posID, bool force = false)
         {
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            int active_route_energy_at_arrival = int.MinValue;
+            if (force)
             {
-                con.Open();
-
-                using (MySqlCommand cmd = new MySqlCommand(@"
-INSERT
-    pos(
-        CarID,
-        Datum,
-        lat,
-        lng,
-        battery_level
-    )
-VALUES(
-    @CarID,
-    @Datum,
-    @lat,
-    @lng,
-    @battery_level
-)", con))
+                last_active_route_energy_at_arrival = -1;
+            }
+            if (car.GetTeslaAPIState().GetInt("active_route_energy_at_arrival", out active_route_energy_at_arrival))
+            {
+                if (last_active_route_energy_at_arrival != active_route_energy_at_arrival)
                 {
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@Datum", UnixToDateTime(long.Parse(timestamp, Tools.ciEnUS)));
-                    cmd.Parameters.AddWithValue("@lat", latitude);
-                    cmd.Parameters.AddWithValue("@lng", longitude);
-
-                    if (batteryLevel == -1)
-                    {
-                        cmd.Parameters.AddWithValue("@battery_level", DBNull.Value);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@battery_level", batteryLevel);
-                    }
-                    SQLTracer.TraceNQ(cmd);
-
                     try
                     {
-                        car.CurrentJSON.current_battery_level = batteryLevel;
-                        car.CurrentJSON.SetPosition(latitude, longitude, long.Parse(timestamp, Tools.ciEnUS));
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+INSERT active_route_energy_at_arrival
+(
+    posID,
+    val
+)
+VALUES (
+    @posID,
+    @val
+)", con))
+                            {
+                                cmd.Parameters.AddWithValue("@posID", posID);
+                                cmd.Parameters.AddWithValue("@val", active_route_energy_at_arrival);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
                         car.CreateExceptionlessClient(ex).Submit();
                         car.Log(ex.ToString());
                     }
+                    last_active_route_energy_at_arrival = active_route_energy_at_arrival;
                 }
             }
-
-            car.CurrentJSON.CreateCurrentJSON();
         }
 
         private Address GetAddressFromChargingState(int ChargingStateID)
@@ -4266,7 +4565,7 @@ VALUES(
                         {
                             cmd.Parameters.AddWithValue("@outside_temp", (double)outside_temp);
                         }
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -4504,7 +4803,7 @@ VALUES (
                         cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@version", car_version);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -4654,7 +4953,7 @@ WHERE
                         {
                             cmd.CommandTimeout = timeout;
                         }
-                        return SQLTracer.TraceNQ(cmd);
+                        return SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -4715,7 +5014,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
                         cmd.Parameters.AddWithValue("@StartDate", StartDate);
                         cmd.Parameters.AddWithValue("@StartChargingID", StartChargingID);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                     switch (charge_energy_added)
                     {
@@ -4731,7 +5030,7 @@ WHERE
                             {
                                 cmd.Parameters.AddWithValue("@id", chargingstate_id);
                                 cmd.Parameters.AddWithValue("@charge_energy_added", DBNull.Value);
-                                SQLTracer.TraceNQ(cmd);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
                             }
                             break;
                         case double.NaN:
@@ -4749,7 +5048,7 @@ WHERE
                             {
                                 cmd.Parameters.AddWithValue("@id", chargingstate_id);
                                 cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
-                                SQLTracer.TraceNQ(cmd);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
                             }
                             break;
                     }
@@ -4780,7 +5079,7 @@ WHERE
     id = @id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", chargingstate_id);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -5010,7 +5309,7 @@ FROM
 ORDER BY
     id", DBConnectionstring))
                 {
-                    SQLTracer.TraceDA(dt, da);
+                    _ = SQLTracer.TraceDA(dt, da);
                 }
             }
             catch (Exception ex)
@@ -5037,7 +5336,7 @@ WHERE
     id = @id", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@id", id);
-                        SQLTracer.TraceDA(dt, da);
+                        _ = SQLTracer.TraceDA(dt, da);
 
                         if (dt.Rows.Count == 1)
                         {
@@ -5092,7 +5391,7 @@ WHERE
 
                     using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
                     {
-                        SQLTracer.TraceDA(dt, da);
+                        _ = SQLTracer.TraceDA(dt, da);
 
                         if (dt.Rows.Count == 1)
                         {
@@ -5153,7 +5452,7 @@ LIMIT 5";
             using (MySqlDataAdapter da = new MySqlDataAdapter(sql, DBConnectionstring))
             {
                 da.SelectCommand.Parameters.AddWithValue("@carid", car.CarInDB);
-                SQLTracer.TraceDA(dt, da);
+                _ = SQLTracer.TraceDA(dt, da);
             }
 
             return dt;
@@ -5316,6 +5615,7 @@ WHERE SCHEMA_NAME  = '{dbname}'", con))
                 {
                     con.Open();
                     Logfile.Log($"ALTER DATABASE {dbname} CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER DATABASE {dbname}
 CHARACTER SET = utf8mb4
@@ -5379,6 +5679,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", 3000);
@@ -5443,6 +5744,7 @@ WHERE
                 {
                     con.Open();
                     Logfile.Log($"ALTER TABLE {dbname}.{tablename} CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL");
+                    UpdateTeslalogger.AssertAlterDB();
                     _ = ExecuteSQLQuery($@"
 ALTER TABLE {dbname}.{tablename}
 CHANGE {columnname} {columnname} {columntype} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL", 3000);
@@ -5553,7 +5855,7 @@ WHERE
                                 {
                                     cmd.Parameters.Add("speedround", MySqlDbType.Int32).Value = speed_round;
                                     cmd.Parameters.Add("speedfloor", MySqlDbType.Int32).Value = speed_floor;
-                                    int updated_rows = SQLTracer.TraceNQ(cmd);
+                                    int updated_rows = SQLTracer.TraceNQ(cmd, out _);
                                     Logfile.Log($" rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms");
                                     migrationlog.Append($"{DateTime.Now} rows updated: {updated_rows} duration: {(DateTime.Now - start).TotalMilliseconds}ms" + Environment.NewLine);
                                 }
@@ -5669,7 +5971,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -5685,7 +5987,7 @@ WHERE
             }
             else
             {
-                Tools.DebugLog($"GetTeslaAPIState() charging_state:{chargingState}");
+                Tools.DebugLog($"CloseChargingState() charging_state:{chargingState}");
             }
 
         }
@@ -5701,7 +6003,6 @@ WHERE
                     using (MySqlCommand cmd = new MySqlCommand(sql, con))
                     {
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        Tools.DebugLog(cmd);
                         json = DBHelper.GetJQueryDataTableJSON(dr);
                     }
                 }
@@ -5750,12 +6051,20 @@ WHERE
                 con.Open();
 
                 using (MySqlCommand cmd = new MySqlCommand(@"
-                    select max(a)+1 from
-                    (
-                        select max(id) as a from cars
-                        union
-                        select max(carid) as a from pos
-                    ) as t", con))
+SELECT
+    MAX(a) +1
+FROM
+    (
+    SELECT
+        MAX(id) AS a
+    FROM
+        cars
+    UNION ALL
+    SELECT
+        MAX(carid) AS a
+    FROM
+        pos
+) AS t", con))
                 {
                     int newid = 1;
 
@@ -5774,7 +6083,7 @@ WHERE
                         cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                         cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                         cmd2.Parameters.AddWithValue("@vin", vin);
-                        SQLTracer.TraceNQ(cmd2);
+                        _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                         Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null);
@@ -5896,6 +6205,7 @@ WHERE
                     }
                     catch (Exception ex)
                     {
+                        Logfile.Log(ex.ToString());
                         ex.ToExceptionless().FirstCarUserID().AddObject(calculateCountry).AddObject(calculateDate).Submit();
                     }
                 }
@@ -5926,7 +6236,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@country", country);
                         cmd.Parameters.AddWithValue("@id", ChargingStateID);
                         cmd.Parameters.AddWithValue("@co2", CO2 == 0 ? (object)DBNull.Value : (object)CO2);
-                        int rowsUpdated = SQLTracer.TraceNQ(cmd);
+                        int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                         Logfile.Log($"UpdateChargingStateCountry({ChargingStateID}): {rowsUpdated} rows updated");
                     }
                 }
@@ -5937,6 +6247,314 @@ WHERE
 
                 Tools.DebugLog($"Exception during DBHelper.UpdateChargingStateCountryCO2(): {ex}");
                 Logfile.ExceptionWriter(ex, "Exception during DBHelper.UpdateChargingStateCountryCO2()");
+            }
+        }
+
+        internal int FindChargingStateIDByStartDate(DateTime dtStart)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    CarID = @CarID
+    AND ABS(TIMEDIFF(StartDate, @DTStart)) < 1800
+ORDER BY
+    ABS(TIMEDIFF(StartDate, @DTStart)) ASC
+LIMIT 1
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@DTStart", dtStart.ToString("yyyy-MM-dd HH:mm:ss"));
+                        if (int.TryParse(SQLTracer.TraceSc(cmd).ToString(), out int chargingstateid))
+                        {
+                            return chargingstateid;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return -1;
+        }
+
+        internal static string GetSuCNameFromChargingStateID(int chargingstateid)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    pos.address
+FROM
+    pos
+JOIN
+    chargingstate ON chargingstate.pos = pos.id
+WHERE
+    chargingstate.id = @chargingid
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chargingid", chargingstateid);
+                        return (string)SQLTracer.TraceSc(cmd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+
+                Tools.DebugLog($"Exception during DBHelper.FindChargingSessionByStartDate(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.FindChargingSessionByStartDate()");
+            }
+            return string.Empty;
+        }
+
+        internal List<int> GetSuCChargingStatesWithEmptyChargeSessionId()
+        {
+            List<int> resultList = new List<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    ChargeSessionId IS NULL
+    AND CarID = @CarID
+    AND fast_charger_brand = @brand
+    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@brand", "Tesla");
+                        cmd.Parameters.AddWithValue("@type1", "Tesla");
+                        cmd.Parameters.AddWithValue("@type2", "Combo");
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            if (dr[0] != null && int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                resultList.Add(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId()");
+            }
+            Tools.DebugLog($"GetSuCChargingStatesWithEmptyChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            return resultList;
+        }
+
+        internal List<int> GetSuCChargingStatesWithChargeSessionId()
+        {
+            List<int> resultList = new List<int>();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+WHERE
+    ChargeSessionId IS NOT NULL
+    AND CarID = @CarID
+    AND fast_charger_brand = @brand
+    AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@brand", "Tesla");
+                        cmd.Parameters.AddWithValue("@type1", "Tesla");
+                        cmd.Parameters.AddWithValue("@type2", "Combo");
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            if (dr[0] != null && int.TryParse(dr[0].ToString(), out int id))
+                            {
+                                resultList.Add(id);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId()");
+            }
+            Tools.DebugLog($"GetSuCChargingStatesWithChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            return resultList;
+        }
+
+        internal static void MigratePosOdometerNullValues()
+        {
+            Tools.DebugLog("MigratePosOdometerNullValues start");
+            try
+            {
+                // find all pos.id where odometer IS NULL
+                List<Tuple<int, int>> IDs = new List<Tuple<int, int>>();
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id,
+    carid
+FROM
+    pos
+WHERE
+    odometer IS NULL", con))
+                    {
+                        cmd.CommandTimeout = 6000;
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read() && dr[0] != DBNull.Value
+                            && dr[1] != DBNull.Value)
+                        {
+                            if (int.TryParse(dr[0].ToString(), out int posid)
+                                && int.TryParse(dr[1].ToString(), out int carid))
+                            {
+                                IDs.Add(new Tuple<int, int>(posid, carid));
+                            }
+                        }
+                    }
+                }
+                Tools.DebugLog($"MigratePosOdometerNullValues IDs:{IDs.Count}");
+                if (IDs.Count > 0)
+                {
+                    foreach (Tuple<int, int> ID in IDs)
+                    {
+                        Tools.DebugLog($"MigratePosOdometerNullValues Tuple:{ID.Item1},{ID.Item2}");
+                        double lowerOdo = 0;
+                        double higherOdo = 0;
+                        double odo = 0;
+                        //find nearest pos with odometer NOT NULL lower than posid
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    odometer
+FROM
+    pos
+WHERE
+    odometer IS NOT NULL
+    AND CarID = @CarID
+    AND id < @posid
+ORDER BY
+    id DESC
+LIMIT 1", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", ID.Item2);
+                                cmd.Parameters.AddWithValue("@posid", ID.Item1);
+                                cmd.CommandTimeout = 6000;
+                                MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                if (dr.Read() && dr[0] != DBNull.Value)
+                                {
+                                    if (double.TryParse(dr[0].ToString(), out double lodo)
+                                        && lodo > 0)
+                                    {
+                                        Tools.DebugLog($"MigratePosOdometerNullValues lowerOdo: {lodo}");
+                                        lowerOdo = lodo;
+                                    }
+                                }
+                            }
+                        }
+                        //find nearest pos with odometer NOT NULL higher than posid
+                        using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                        {
+                            con.Open();
+                            using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    odometer
+FROM
+    pos
+WHERE
+    odometer IS NOT NULL
+    AND CarID = @CarID
+    AND id > @posid
+ORDER BY
+    id ASC
+LIMIT 1", con))
+                            {
+                                cmd.Parameters.AddWithValue("@CarID", ID.Item2);
+                                cmd.Parameters.AddWithValue("@posid", ID.Item1);
+                                cmd.CommandTimeout = 6000;
+                                MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                                if (dr.Read() && dr[0] != DBNull.Value)
+                                {
+                                    if (double.TryParse(dr[0].ToString(), out double hodo)
+                                        && hodo > 0)
+                                    {
+                                        Tools.DebugLog($"MigratePosOdometerNullValues higherOdo:{hodo}");
+                                        higherOdo = hodo;
+                                    }
+                                }
+                            }
+                        }
+                        // compute average from lower and higher or just take lower?
+                        if (lowerOdo > 0 && higherOdo > 0)
+                        {
+                            odo = (lowerOdo + higherOdo) / 2;
+                        }
+                        else
+                        {
+                            odo = lowerOdo;
+                        }
+                        if (odo > 0)
+                        {
+                            // update pos.odometer
+                            Tools.DebugLog($"MigratePosOdometerNullValues id:{ID.Item1} new odo:{odo}");
+                            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                            {
+                                con.Open();
+                                using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    pos
+SET
+    odometer = @odometer
+WHERE
+    id = @id", con))
+                                {
+                                    cmd.Parameters.AddWithValue("@id", ID.Item1);
+                                    cmd.Parameters.AddWithValue("@odometer", odo);
+                                    int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
+                                    Tools.DebugLog($"MigratePosOdometerNullValues id:{ID.Item1} new odo:{odo} updated:{rowsUpdated}");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
             }
         }
     }

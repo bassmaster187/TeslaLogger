@@ -84,6 +84,9 @@ Vampir Drain Monatsstatistik=Vampire Drain Maandelijkse statistieken
 TR mi Verlust=TR mi Verloren
 kWh Verlust=kWh Verloren
 Eur Verlust=Eur Verloren
+Zeitspanne Stunden=Tijdspanne uren
+TR mi Verlust pro Stunde=TR mi Verloren per uur
+mi Stand=Kilometerteller
 
 #Trip.json
 Trip=Trip
@@ -108,11 +111,6 @@ min kW=min kW
 Ø kW=Ø kW
 Ø mph=Ø mph
 Ø km/h=Ø km/h
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=Tijdspanne uren
-TR mi Verlust pro Stunde=TR mi Verloren per uur
-mi Stand=Kilometerteller
 
 #Vampir Drain.json
 Vampir Drain=Vampire Drain
@@ -177,6 +175,7 @@ Consumption=Verbruik
 min=min
 Wh/km=Wh/km
 km/h=km/h
+Please update to latest docker-compose.yml file. Check: {LINK}=Update naar het laatste docker-compose.yml bestand. Controleer: {LINK}
 
 #menu.php
 Logfile=Logbestand
@@ -190,6 +189,16 @@ Restore=Herstellen
 Geofence=Geofence
 Suspend Teslalogger=Teslalogger opschorten
 Wakeup Teslalogger=Teslalogger wakker maken
+My Degradation=Mijn aftakeling
+My Charging AVG=Mijn opladen AVG
+Fleet Degradation AVG=Vlootafbraak AVG
+Fleet Charging AVG=Vloot Opladen AVG
+Fleet Charging MAX (Firmware)=Vloot Opladen MAX (Firmware)
+Fleet Charging Locations=Vloot oplaadlocaties
+Fleet Fast Charging Map=Vloot snelladen kaart
+Supercharger Usage=Supercharger gebruik
+Firmware Tracker=Firmware Tracker
+Abetterrouteplanner=Abetterrouteplanner
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Tesla Inloggegevens
@@ -198,6 +207,44 @@ Email=Email
 Password=Wachtwoord
 Repeat Password=Wachtwoord herhalen
 Speichern=Opslaan
+Please enter the access token!=Voer het toegangstoken in!
+Please enter the refresh token!=Voer het refresh token in!
+Please select a vehicle=Selecteer een voertuig
+Check Logfile!=Controleer het logboek!
+Do you really want to delete this vehicle?=Wil je dit voertuig echt verwijderen?
+Check Logfile in one minute!=Controleer Logfile in één minuut!
+Unauthorized=Onbevoegde
+This isn't a valid URL!=Dit is geen geldige URL!
+This isn't an auth link by Tesla!=Dit is geen auth link van Tesla!
+The URL doesn't contain the expected format!=De URL bevat niet het verwachte formaat!
+BA_Browser=In lokale {browser} (aanbevolen)
+BA_Read=Lees alle stappen voordat u verder gaat:
+BA_Logon=Klik op de onderstaande link <b>Tesla Logon</b> die een nieuw tabblad/venster zal openen voor de Tesla Authentication logon pagina.
+BA_Auth=Log in met uw Tesla referenties en MFA indien nodig (Tesla zal deze onthouden als u de link eerder hebt gebruikt).
+BA_NotFound=Dit lijkt te resulteren in een "Page Not Found". Dit is normaal.
+BA_URL=Kopieer de resulterende URL van die webpagina in het onderstaande formulier. In de URL staat een eenmalige, tijdelijke code die we kunnen gebruiken om tokens te genereren. Wij zullen deze voor u uit de link halen.
+BA_Invalid=Deze links werken meestal maar één keer, dus als er een "Invalid Grant" of andere foutmelding verschijnt op onze website moet u wellicht opnieuw beginnen met de Tesla Logon link die een nieuwe link zou moeten opleveren.
+BA_Logoff=Als u een ander account wilt gebruiken, moet u zich handmatig afmelden.
+BA_GetToken=Wij krijgen dan de tokens voor uw Tesla account.
+BA_SelectCar=Selecteer de auto die u wilt gebruiken voor Teslalogger.
+BA_Step1=Step 1:
+BA_Step2=Step 2:
+BA_Step3=Stap 3:
+BA_FillOut=Vul dit formulier in:
+BA_CopyUrl=Kopieer de resulterende url zoals weergegeven
+BA_Paste=Plak de resulterende url in het vak en klik op de "Tokens krijgen" knop:
+Get Tokens=Tokens krijgen
+Access Token=Toegangstoken
+Refresh Token=Refresh Token
+Car=Auto
+Free Supercharging=Gratis opladen
+Reconnect=Sluit  opnieuw aan.
+Please choose your vehicle=Kies uw voertuig
+Model=Model
+VIN=VIN
+Free SUC=Gratis SUC
+Edit=Bewerk
+New car=Nieuwe auto
 
 #settings.php
 Credentials=Inloggegevens
@@ -349,6 +396,10 @@ Enable Sentry Mode=Schildwachtmodus inschakelen
 Disable Sentry Mode=Schildwachtmodus uitschakelen
 Turn HVAC off=Zet HVAC uit
 No sleep=No sleep
+Are you sure you want to delete this geofencing location?=Weet je zeker dat je deze geofencing locatie wilt verwijderen?
+Error=Fout
+Deleted!=Verwijderd!
+Meter=Meter
 
 #journeys.php
 Journeys=Reizen
@@ -385,3 +436,36 @@ First=Eerst
 Last=Laatste
 Next=Volgende
 Previous=Vorige
+
+#adminpanelpassword.php
+Please enter password!=Voer het wachtwoord in!
+Passwords do not match!=Wachtwoorden komen niet overeen!
+Do you want to delete your password?=Wilt u uw wachtwoord wissen?
+Set password for Teslalogger's admin panel=Wachtwoord instellen voor het beheerderspaneel van de Teslalogger
+Name=Naam
+
+#changelog.php
+Changelog=Changelog
+
+#dashboard.php
+Dashboard=Dashboard
+
+#logfile.php
+Download Logfile=Logbestand downloaden
+Lines=Lijnen
+Housekeeping=Huishouding
+Sleep Attempt=Slaappoging
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Voer uw dexters-web.de accountgegevens in.
+Dexter Login=Dexter Inloggen
+Dexter Password=Dexter Wachtwoord
+
+#password_info.php
+Credentials Info=Informatie over geloofsbrieven
+
+#restore.php
+Restore Database=Database herstellen
+TextRestore1=Zorg ervoor dat u een back-up maakt van uw Teslalogger voordat u databases herstelt. Verplaats de map met back-ups van de Teslalogger naar uw harde schijf!
+TextRestore2=Het herstelproces kan tot 10 minuten duren!
+TextRestore3=Onderbreek het herstelproces op geen enkele manier! Herlaad de pagina niet! Sluit deze pagina niet!

@@ -35,13 +35,14 @@ namespace TeslaLogger
             {
                 try
                 {
-                    ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey); 
+                    ExceptionlessClient.Default.Startup(ApplicationSettings.Default.ExceptionlessApiKey);
                     // ExceptionlessClient.Default.Configuration.UseFileLogger("exceptionless.log");
                     ExceptionlessClient.Default.Configuration.ServerUrl = ApplicationSettings.Default.ExceptionlessServerUrl;
                     ExceptionlessClient.Default.Configuration.SetVersion(Assembly.GetExecutingAssembly().GetName().Version);
 
-                    ExceptionlessClient.Default.CreateLog("Program","Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
-                } catch (Exception ex)
+                    ExceptionlessClient.Default.CreateLog("Program", "Start " + Assembly.GetExecutingAssembly().GetName().Version, Exceptionless.Logging.LogLevel.Info).FirstCarUserID().Submit();
+                }
+                catch (Exception ex)
                 {
                     Logfile.Log(ex.ToString());
                 }
@@ -93,7 +94,7 @@ namespace TeslaLogger
                     try
                     {
                         Logfile.Log("Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
-                        ExceptionlessClient.Default.SubmitLog("Program","Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
+                        ExceptionlessClient.Default.SubmitLog("Program", "Startup doesn't sucessfully run DownloadUpdateAndInstall() - retry now!");
 
                         UpdateTeslalogger.DownloadUpdateAndInstall();
                     }
@@ -168,9 +169,9 @@ namespace TeslaLogger
                             Tools.StartOVMS();
                         });
                         ovmsThread.Name = "OVMSStartThread";
-                        ovmsThread.Start();                        
+                        ovmsThread.Start();
                     }
-                        
+
                     OVMSStarted = true;
                     return;
                 }
@@ -285,6 +286,7 @@ namespace TeslaLogger
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
@@ -360,6 +362,8 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+
+            Logfile.Log("OS: " + Tools.GetOsRelease());
         }
 
         private static void InitConnectToDB()
@@ -374,8 +378,8 @@ namespace TeslaLogger
                 }
                 catch (Exception ex)
                 {
-                    if (ex.Message.Contains("Connection refused") 
-                        || ex.Message.Contains("Unable to connect to any of the specified MySQL hosts") 
+                    if (ex.Message.Contains("Connection refused")
+                        || ex.Message.Contains("Unable to connect to any of the specified MySQL hosts")
                         || ex.Message.Contains("Reading from the stream has failed."))
                     {
                         Logfile.Log($"Wait for DB ({x}/30): Connection refused.");
@@ -391,7 +395,9 @@ namespace TeslaLogger
             }
 
             UpdateTeslalogger.Start();
-            _ = Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
+            _ = Task.Factory.StartNew(() => {
+                UpdateTeslalogger.UpdateGrafana();
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         private static void InitCheckDocker()
@@ -501,10 +507,11 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
+
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
                     DBHelper.DeleteDuplicateTrips();
-                    
+
                     for (int i = 0; i < Car.Allcars.Count; i++)
                     {
                         Car c = Car.Allcars[i];
@@ -544,6 +551,8 @@ namespace TeslaLogger
                     WebHelper.SearchFornewCars();
 
                     GeocodeCache.Cleanup();
+
+                    DBHelper.MigratePosOdometerNullValues();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

@@ -82,6 +82,7 @@ $(document).ready(function() {
                 if (!DBHelper.TableExists("journeys"))
                 {
                     Logfile.Log("CREATE TABLE journeys ...");
+                    UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"
 CREATE TABLE journeys (
     id int NOT NULL AUTO_INCREMENT,
@@ -157,7 +158,6 @@ ORDER BY
     StartDate", con))
                     {
                         cmd.Parameters.AddWithValue("@CarID", CarID);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
@@ -217,7 +217,6 @@ ORDER BY
                     {
                         cmd.Parameters.AddWithValue("@CarID", CarID);
                         cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value)
                         {
@@ -279,8 +278,7 @@ VALUES (
                             cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
                             cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
                             cmd.Parameters.AddWithValue("@name", name);
-                            Tools.DebugLog(cmd);
-                            SQLTracer.TraceNQ(cmd);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
@@ -299,7 +297,6 @@ LIMIT 1", con))
                             cmd.Parameters.AddWithValue("@StartPosID", StartPosID);
                             cmd.Parameters.AddWithValue("@EndPosID", EndPosID);
                             cmd.Parameters.AddWithValue("@name", name);
-                            Tools.DebugLog(cmd);
                             int journeyId = (int)SQLTracer.TraceSc(cmd);
                             UpdateJourney(journeyId);
                         }
@@ -381,7 +378,6 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read())
                         {
@@ -402,8 +398,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@charge_duration_minutes", (int)charge_duration_minutes);
-                        Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -435,7 +430,6 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        Tools.DebugLog(cmd);
                         update = double.TryParse(SQLTracer.TraceSc(cmd).ToString(), out charged_kwh);
                     }
                     if (update)
@@ -450,8 +444,7 @@ WHERE
                         {
                             cmd.Parameters.AddWithValue("@journeyID", journeyId);
                             cmd.Parameters.AddWithValue("@charged_kwh", charged_kwh);
-                            Tools.DebugLog(cmd);
-                            SQLTracer.TraceNQ(cmd);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                 }
@@ -483,7 +476,6 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        Tools.DebugLog(cmd);
                         drive_duration_minutes = int.Parse(SQLTracer.TraceSc(cmd).ToString(), Tools.ciEnUS);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
@@ -496,8 +488,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@drive_duration_minutes", drive_duration_minutes);
-                        Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -528,7 +519,6 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
-                        Tools.DebugLog(cmd);
                         consumption_kWh = (double)SQLTracer.TraceSc(cmd);
                     }
                     using (MySqlCommand cmd = new MySqlCommand(@"
@@ -541,8 +531,7 @@ WHERE
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyId);
                         cmd.Parameters.AddWithValue("@consumption_kWh", consumption_kWh);
-                        Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -622,7 +611,6 @@ WHERE
     AND journeys.ID = @journeyID", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyID);
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
@@ -663,8 +651,7 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@journeyID", journeyID);
-                        Tools.DebugLog(cmd);
-                        SQLTracer.TraceNQ(cmd);
+                        _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
             }
@@ -742,7 +729,6 @@ SELECT
 FROM
     journeys", con))
                     {
-                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value && int.TryParse(dr[0].ToString(), out int journeyID))
                         {

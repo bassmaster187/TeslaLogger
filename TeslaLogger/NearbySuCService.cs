@@ -9,6 +9,8 @@ using MySql.Data.MySqlClient;
 using Exceptionless;
 using Newtonsoft.Json;
 using System.Runtime.Caching;
+using System.Linq;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -58,8 +60,8 @@ namespace TeslaLogger
             for (int id = 0; id < Car.Allcars.Count; id++)
             {
                 Car car = Car.Allcars[id];
-                if (car.IsInService())
-                    continue;
+                //if (car.IsInService())
+                //    continue;
 
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
@@ -122,32 +124,45 @@ namespace TeslaLogger
 
                                 dynamic jsonResult = JsonConvert.DeserializeObject(result);
                                 if (jsonResult == null)
+                                {
                                     continue;
+                                }
 
                                 if (jsonResult.ContainsKey("data"))
                                 {
                                     dynamic data = jsonResult["data"];
                                     if (data == null)
+                                    {
                                         continue;
+                                    }
 
                                     if (data.ContainsKey("charging"))
                                     {
                                         dynamic charging = data["charging"];
                                         if (charging == null)
+                                        {
                                             continue;
+                                        }
 
                                         if (charging.ContainsKey("nearbySites"))
                                         {
                                             dynamic nearbySites = charging["nearbySites"];
                                             if (nearbySites == null)
+                                            {
                                                 continue;
+                                            }
 
                                             if (nearbySites.ContainsKey("sitesAndDistances"))
                                             {
                                                 car.webhelper.nearbySuCServiceOK++;
                                                 car.Log("nearbySuCServiceOK " + car.webhelper.nearbySuCServiceOK);
+                                                //Tools.DebugLog(new Tools.JsonFormatter(nearbySites.ToString()).Format());
 
                                                 dynamic superchargers = nearbySites["sitesAndDistances"];
+                                                if (superchargers == null)
+                                                {
+                                                    continue;
+                                                }
                                                 foreach (dynamic suc in superchargers)
                                                 {
                                                     /*
@@ -170,6 +185,10 @@ namespace TeslaLogger
                                                     {
                                                         car.CreateExceptionlessClient(ex).AddObject(result, "ResultContent").Submit();
                                                         Logfile.Log(ex.ToString());
+                                                        if (ex is InvalidOperationException)
+                                                        {
+                                                            Tools.DebugLog("NearbySuCService.Work: Exception parsing " + result);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -188,7 +207,7 @@ namespace TeslaLogger
                                             }
                                         }
                                         catch (Exception ex)
-                                        { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
+                                        { Tools.DebugLog(ex.ToString()); }
 
                                         if (stage == 0)
                                             car.Log("SuC sent: " + send.Count + " lat:" + lat + " lng: " + lng + " - " + firstname);
@@ -267,6 +286,7 @@ namespace TeslaLogger
 
         private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
         {
+            //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
             name = name.Replace("Tesla Supercharger", "").Trim();
@@ -279,13 +299,13 @@ namespace TeslaLogger
             string siteType = suc["siteType"].ToString();
             if (siteType != "SITE_TYPE_SUPERCHARGER")
             {
-                System.Diagnostics.Debug.WriteLine("siteType: " + name +" :" + siteType);
+                Tools.DebugLog("siteType: " + name +" :" + siteType);
             }
 
             string accessType = suc["accessType"].ToString();
             if (accessType != "ACCESS_TYPE_PUBLIC")
             {
-                System.Diagnostics.Debug.WriteLine("accessType: " + name + " :" + accessType);
+                Tools.DebugLog("accessType: " + name + " :" + accessType);
             }
 
             int maxPowerKw = suc["maxPowerKw"]["value"].ToObject<int>();
@@ -294,7 +314,7 @@ namespace TeslaLogger
             int activeOutageCount = activeOutages.Count;
             if (activeOutageCount > 0)
             {
-                System.Diagnostics.Debug.WriteLine("Outage: " + name);
+                Tools.DebugLog("Outage: " + name);
                 foreach (dynamic ao in activeOutages)
                 {
                     if (ao.ContainsKey("message"))
@@ -306,7 +326,7 @@ namespace TeslaLogger
                     }
                 }
 
-                System.Diagnostics.Debug.WriteLine("Message: " + Message);
+                Tools.DebugLog("Message: " + Message);
 
                 string cacheKey = "SuperchargerStateOutages_" + name;
                 object cacheValue = MemoryCache.Default.Get(cacheKey);
@@ -334,33 +354,49 @@ namespace TeslaLogger
                 && suc.ContainsKey("totalStalls")
                 )
             {
-                if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
-                    && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
+                if (!suc["availableStalls"].HasValues)
                 {
-                    Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
+                    Logfile.Log($"SUC: {name} has no values at availableStalls");
+                    return;
+                }
 
-                    if (total_stalls > 0)
+                if (!suc["totalStalls"].HasValues)
+                {
+                    Logfile.Log($"SUC: {name} has no values at totalStalls");
+                    return;
+                }
+
+                if (suc["availableStalls"].HasValues
+                    && suc["totalStalls"].HasValues)
+                {
+
+                    if (int.TryParse(suc["availableStalls"]["value"].ToString(), out int available_stalls)
+                        && int.TryParse(suc["totalStalls"]["value"].ToString(), out int total_stalls))
                     {
-                        if (!ContainsSupercharger(send, name))
-                        {
-                            Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                            send.Add(sendKV);
-                            sendKV.Add("n", name);
-                            sendKV.Add("lat", lat);
-                            sendKV.Add("lng", lng);
-                            sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                            sendKV.Add("a", available_stalls);
-                            sendKV.Add("t", total_stalls);
-                            sendKV.Add("kw", maxPowerKw);
-                            sendKV.Add("m", Message);
+                        Tools.DebugLog($"SuC: <{name}> <{available_stalls}> <{total_stalls}>");
 
-                            if (insertdb)
+                        if (total_stalls > 0)
+                        {
+                            if (!ContainsSupercharger(send, name))
                             {
-                                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                Dictionary<string, object> sendKV = new Dictionary<string, object>();
+                                send.Add(sendKV);
+                                sendKV.Add("n", name);
+                                sendKV.Add("lat", lat);
+                                sendKV.Add("lng", lng);
+                                sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
+                                sendKV.Add("a", available_stalls);
+                                sendKV.Add("t", total_stalls);
+                                sendKV.Add("kw", maxPowerKw);
+                                sendKV.Add("m", Message);
+
+                                if (insertdb)
                                 {
-                                    con.Open();
-                                    // find internal ID of supercharger by name
-                                    using (MySqlCommand cmd = new MySqlCommand(@"
+                                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+                                        // find internal ID of supercharger by name
+                                        using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT
     superchargerstate(
         nameid,
@@ -374,22 +410,27 @@ VALUES(
     @available_stalls,
     @total_stalls
 )", con))
-                                    {
-                                        cmd.Parameters.AddWithValue("@nameid", sucID);
-                                        cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
-                                        cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
-                                        SQLTracer.TraceNQ(cmd);
+                                        {
+                                            cmd.Parameters.AddWithValue("@nameid", sucID);
+                                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                                            cmd.Parameters.AddWithValue("@available_stalls", available_stalls);
+                                            cmd.Parameters.AddWithValue("@total_stalls", total_stalls);
+                                            _ = SQLTracer.TraceNQ(cmd, out _);
+                                        }
+                                        con.Close();
                                     }
-                                    con.Close();
                                 }
                             }
                         }
+                        else
+                        {
+                            // TODO how do we handle total_stalls == 0 ?
+                        }
                     }
-                    else
-                    {
-                        // TODO how do we handle total_stalls == 0 ?
-                    }
+                }
+                else
+                {
+                    Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
             }
             /*
@@ -463,7 +504,7 @@ VALUES(
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@lat", lat);
                     cmd.Parameters.AddWithValue("@lng", lng);
-                    SQLTracer.TraceNQ(cmd);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
                 con.Close();
             }

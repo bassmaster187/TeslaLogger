@@ -14,7 +14,7 @@
 		$ret2 =	file_put_contents($logfile, $time . " : Docker detected\r\n", FILE_APPEND);
 		file_put_contents("/tmp/teslalogger-cmd-restart.txt","");
 
-		echo ("OK");
+		echo (t("OK"));
 	}
 	else
 	{
@@ -24,6 +24,6 @@
 			echo "error";
 		}
 		else
-			echo ("OK");
+			echo (t("OK"));
 	}
 ?>

@@ -15,7 +15,6 @@ using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class UpdateTeslalogger
     {
@@ -94,7 +93,9 @@ namespace TeslaLogger
                 KVS.CheckSchema();
                 DBHelper.EnableUTF8mb4();
 
-                CheckDBCharset();                
+                CheckDBCharset();
+
+                CheckDBSchema_areaa();
 
                 CheckDBSchema_can();
 
@@ -132,6 +133,8 @@ namespace TeslaLogger
 
                 CheckDBSchema_TPMS();
 
+                GetChargingHistoryV2Service.CheckSchema();
+
                 Logfile.Log("DBSchema Update finished.");
 
                 // end of schema update
@@ -155,6 +158,7 @@ namespace TeslaLogger
 
                 _ = Task.Factory.StartNew(() =>
                 {
+                    Logfile.Log("DBIndex Update (Task) started.");
                     if (!DBHelper.IndexExists("can_ix2", "can"))
                     {
                         Logfile.Log("alter table can add index can_ix2 (id,carid,datum)");
@@ -180,14 +184,14 @@ namespace TeslaLogger
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_id (CarID, id)");      // used for: select max(id) from pos where CarID=?
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_id (CarID, id)", 6000);
                     }
 
                     if (!DBHelper.IndexExists("idx_pos_CarID_datum", "pos"))
                     {
                         Logfile.Log("alter table pos add index idx_pos_CarID_datum (CarID, Datum)");
                         AssertAlterDB();
-                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 600);
+                        DBHelper.ExecuteSQLQuery("alter table pos add index idx_pos_CarID_datum (CarID, Datum)", 6000);
                     }
 
                     if (DBHelper.IndexExists("idx_pos_datum", "pos"))
@@ -257,10 +261,13 @@ namespace TeslaLogger
 
                 Chmod("/var/www/html/admin/wallpapers", 777);
 
-                UpdatePHPini();
-                UpdateApacheConfig();
-                CreateEmptyWeatherIniFile();
-                CheckBackupCrontab();
+                _ = Task.Factory.StartNew(() =>
+                {
+                    UpdatePHPini();
+                    UpdateApacheConfig();
+                    CreateEmptyWeatherIniFile();
+                    CheckBackupCrontab();
+                }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
 
             }
             catch (Exception ex)
@@ -289,7 +296,17 @@ namespace TeslaLogger
             }
         }
 
-        private static void AssertAlterDB()
+        private static void CheckDBSchema_areaa()
+        {
+            if (!DBHelper.TableExists("active_route_energy_at_arrival"))
+            {
+                Logfile.Log("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("CREATE TABLE active_route_energy_at_arrival (posID INT NOT NULL, val TINYINT NOT NULL);");
+            }
+        }
+
+        internal static void AssertAlterDB()
         {
             // make sure there is enough disk space available for temp tables
 
@@ -350,6 +367,7 @@ LIMIT 1", con))
                 PRIMARY KEY(`CarId`, `Datum`, `TireId`)); ";
 
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
@@ -358,6 +376,7 @@ LIMIT 1", con))
             {
                 var sql = "create index IX_TPMS_CarId_Datum on TPMS(CarId, Tireid, Datum, pressure)";
                 Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql, 600);
                 KVS.InsertOrUpdate(TPMSSchemaVersion, (int)2);
             }
@@ -451,7 +470,6 @@ PRIMARY KEY(id)
 
         private static void CheckDBSchema_pos()
         {
-            
             if (!DBHelper.ColumnExists("pos", "battery_level"))
             {
                 Logfile.Log("ALTER TABLE pos ADD COLUMN battery_level DOUBLE NULL");
@@ -837,7 +855,7 @@ PRIMARY KEY(id)
                             cmd.Parameters.AddWithValue("@tesla_name", ApplicationSettings.Default.TeslaName);
                             cmd.Parameters.AddWithValue("@tesla_password", ApplicationSettings.Default.TeslaPasswort);
                             cmd.Parameters.AddWithValue("@tesla_carid", ApplicationSettings.Default.Car);
-                            SQLTracer.TraceNQ(cmd);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                     }
                 }
@@ -1271,7 +1289,7 @@ PRIMARY KEY(id)
                                 AssertAlterDB();
                                 using (var cmd2 = new MySqlCommand("ALTER DATABASE teslalogger CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci", con))
                                 {
-                                    SQLTracer.TraceNQ(cmd2);
+                                    _ = SQLTracer.TraceNQ(cmd2, out _);
                                 }
                             }
                         }
@@ -1947,11 +1965,26 @@ PRIMARY KEY(id)
 
         private static void UpdateGrafanaVersion()
         {
-            string newversion = "8.5.22";
+            string newversion = "10.0.1";
 
             string GrafanaVersion = Tools.GetGrafanaVersion();
-            if (GrafanaVersion == "5.5.0-d3b39f39pre1" || GrafanaVersion == "6.3.5" || GrafanaVersion == "6.7.3" || GrafanaVersion == "7.2.0" || GrafanaVersion == "8.3.1" || GrafanaVersion == "8.3.2")
+
+            if (GrafanaVersion == "5.5.0-d3b39f39pre1" 
+                || GrafanaVersion == "6.3.5" 
+                || GrafanaVersion == "6.7.3" 
+                || GrafanaVersion == "7.2.0" 
+                || GrafanaVersion == "8.3.1" 
+                || GrafanaVersion == "8.3.2"
+                || GrafanaVersion == "8.5.22"
+                )
             {
+                if (!Tools.GetOsRelease().Contains("buster"))
+                {
+                    Logfile.Log("Grafana update suspended because of old OS:" + Tools.GetOsRelease());
+                    ExceptionlessClient.Default.CreateFeatureUsage("Grafana update suspended").FirstCarUserID().Submit();
+                    return;
+                }
+
                 Thread threadGrafanaUpdate = new Thread(() =>
                 {
                     string GrafanaFilename = $"grafana_{newversion}_armhf.deb";

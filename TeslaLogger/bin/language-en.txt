@@ -81,6 +81,9 @@ Vampir Drain Monatsstatistik=Vampir Drain Monthly Statistics
 TR mi Verlust=TR mi Lost
 kWh Verlust=kWh Lost
 Eur Verlust=Eur Lost
+Zeitspanne Stunden=Timespan Hours
+TR mi Verlust pro Stunde=TR mi Lost per Hour
+mi Stand=Odometer
 
 #Trip.json
 Trip=Trip
@@ -105,11 +108,6 @@ min kW=min kW
 Ø kW=Avg. kW
 Ø mph=Avg. mph
 Ø km/h=Avg. kph
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=Timespan Hours
-TR mi Verlust pro Stunde=TR mi Lost per Hour
-mi Stand=Odometer
 
 #Vampir Drain.json
 Vampir Drain=Vampir Drain
@@ -165,6 +163,19 @@ min=min
 kWh=kWh
 Wh/km=Wh/km
 km/h=km/h
+Sleeping=Sleeping
+kW=kW
+OK=OK
+No=No
+Yes=Yes
+Cell Temp=Cell Temp
+Max Charge=Max Charge
+Max Discharge=Max Discharge
+Cell Imbalance=Cell Imbalance
+Software Update=Software Update
+Consumption=Consumption
+Ø Consumption=Ø Consumption
+Please update to latest docker-compose.yml file. Check: {LINK}=Please update to latest docker-compose.yml file. Check: {LINK}
 
 #menu.php
 Logfile=Logfile
@@ -180,6 +191,16 @@ Geofence=Geofence
 Suspend Teslalogger=Suspend Teslalogger
 Wakeup Teslalogger=Wakeup Teslalogger
 Dashboard=Dashboard
+My Degradation=My Degradation
+My Charging AVG=My Charging AVG
+Fleet Degradation AVG=Fleet Degradation AVG
+Fleet Charging AVG=Fleet Charging AVG
+Fleet Charging MAX (Firmware)=Fleet Charging MAX (Firmware)
+Fleet Charging Locations=Fleet Charging Locations
+Fleet Fast Charging Map=Fleet Fast Charging Map
+Supercharger Usage=Supercharger Usage
+Firmware Tracker=Firmware Tracker
+Abetterrouteplanner=Abetterrouteplanner
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Tesla Credentials
@@ -189,6 +210,44 @@ Password=Password
 Repeat Password=Repeat Password
 Löschen=Erase
 Speichern=Save
+Please enter the access token!=Please enter the access token!
+Please enter the refresh token!=Please enter the refresh token!
+Please select a vehicle=Please select a vehicle
+Check Logfile!=Check Logfile!
+Do you really want to delete this vehicle?=Do you really want to delete this vehicle?
+Check Logfile in one minute!=Check Logfile in one minute!
+Unauthorized=Unauthorized
+This isn't a valid URL!=This isn't a valid URL!
+This isn't an auth link by Tesla!=This isn't an auth link by Tesla!
+The URL doesn't contain the expected format!=The URL doesn't contain the expected format!
+Access Token=Access Token
+Refresh Token=Refresh Token
+Car=Car
+Free Supercharging=Free Supercharging
+Reconnect=Reconnect
+Model=Model
+VIN=VIN
+Free SUC=Free SUC
+Edit=Edit
+New car=New car
+TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
+BA_Browser=In local {browser} (recommended)
+BA_Read=Please read all the steps before continuing:
+BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
+BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
+BA_NotFound=This will appear to result in a "Page Not Found". This is normal.
+BA_URL=Copy the resulting URL of that webpage into the form below. Within the URL is a one time, temporary code that we can use to generate tokens. We will extract this for you from the link.
+BA_Invalid=These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce a new link.
+BA_Logoff=If you want to use a different account, you have to manually log off {here!}
+BA_GetToken=We'll then get the tokens for your Tesla account.
+BA_SelectCar=Select the car you want to use for Teslalogger.
+BA_Step1=Step 1:
+BA_Step2=Step 2:
+BA_Step3=Step 3:
+BA_FillOut=Fill out this form:
+BA_CopyUrl=Copy the resulting url as shown
+BA_Paste=Paste the resulting url into the box and click "Get Tokens" Button:
+Get Tokens=Get Tokens
 
 #settings.php
 Please choose your vehicle=Please choose your vehicle
@@ -284,122 +343,8 @@ Verbraucht=Consumed
 
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>Use StreamingAPI to save the car position in the Teslalogger database. Depending on car's reception, this means up to 5 positions per second (compared to one position every five seconds on normal mode). This will increase your database's size a lot, will increase wear on the SD card and result in huge backups.
 
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
-
 #journeys.php
 Ladezeit [h]=Charge Time [h]
-
-#Status.json
-Current Status=Current Status
-SOC=SOC
-Reichweite=Range
-Außentemperatur=Outside Temperature
-Zelltemperatur=Cell Temperature
-Nur verfügbar mit ScanMyTesla=Only available with ScanMyTesla
-
-#abrp.php
-ABRPTitle=Abetterrouteplanner Link
-TextABRP=You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials.
-ABRP1=Create an Abetterrouteplanner account
-ABRP2=Go to Settings
-ABRP3=Choose your car
-ABRP4=Save your car to your account
-ABRP5=Give your car a name
-ABRP6=Click on "Link Generic" to get a ABRP token
-ABRP7=Copy the token and click "Done"
-ABRP8=Insert the token in Teslalogger
-ABRP9=Check if the Teslalogger is connected
-ABRPYT=Check YouTube tutorial for live demo
-ABRPToken=Abetterrouteplanner Token
-
-#password.php
-BA_Browser=In local {browser} (recommended)
-BA_Read=Please read all the steps before continuing:
-BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
-BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
-BA_NotFound=This will appear to result in a "Page Not Found". This is normal.
-BA_URL=Copy the resulting URL of that webpage into the form below. Within the URL is a one time, temporary code that we can use to generate tokens. We will extract this for you from the link.
-BA_Invalid=These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce a new link.
-BA_Logoff=If you want to use a different account, you have to manually log off {here!}
-BA_GetToken=We'll then get the tokens for your Tesla account.
-BA_SelectCar=Select the car you want to use for Teslalogger.
-BA_Step1=Step 1:
-BA_Step2=Step 2:
-BA_Step3=Step 3:
-BA_FillOut=Fill out this form:
-BA_CopyUrl=Copy the resulting url as shown
-BA_Paste=Paste the resulting url into the box and click "Get Tokens" Button:
-Get Tokens=Get Tokens
-
-#wallbox.php
-Wallbox=Wallbox
-WallboxComment=You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.
-Host=Host
-Param=Param
-Test=Test
-Type=Type
-Info=Info
-Version=Version
-Utility kWh=Utility kWh
-Vehicle kWh=Vehicle kWh
-
-#superchargebingo.php
-SuperChargeBingo=SuperChargeBingo
-SuperChargeBingoComment=You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers.
-Setup=Setup
-Create a SuperChargeBingo account=Create a SuperChargeBingo account
-Create API key (must be secure)=Create API key (must be secure)
-Copy Username and API key and insert it in TeslaLogger=Copy Username and API key and insert it in TeslaLogger
-Save and restart TeslaLogger=Save and restart TeslaLogger
-Username=Username
-API key=API key
-
-
-#Hinzugefuegt durch Scriptlauf vom 17.03.2023 22:37:51
-#Missing translation elements
-Sleeping=Sleeping
-kW=kW
-OK=OK
-No=No
-Yes=Yes
-Cell Temp=Cell Temp
-Max Charge=Max Charge
-Max Discharge=Max Discharge
-Cell Imbalance=Cell Imbalance
-Software Update=Software Update
-Consumption=Consumption
-Ø Consumption=Ø Consumption
-
-#geoadd.php
-Name & Position=Name & Position
-Description=Description
-Radius=Radius
-Special Flags=Special Flags
-Home=Home
-Work=Work
-Charger=Charger
-Copy Charging Costs=Copy Charging Costs
-Don't Combine Charging Sessions=Don't Combine Charging Sessions
-Set Charge Limit=Set Charge Limit
-Set on arrival=Set on arrival
-Set Charge Limit After Charging=Set Charge Limit After Charging
-Open Charge Port=Open Charge Port
-Gear=Gear
-D → P=D → P
-D/R → P=D/R → P
-R → P=R → P
-High Frequency Logging=High Frequency Logging
-Minutes=Minutes
-Special Count=Special Count
-Count=Count
-Special Features=Special Features
-Enable Sentry Mode=Enable Sentry Mode
-Disable Sentry Mode=Disable Sentry Mode
-Turn HVAC off=Turn HVAC off
-No sleep=No sleep
-Delete=Delete
-
-#journeys.php
 Journeys=Journeys
 Journey name missing!=Journey name missing!
 Please select=Please select
@@ -434,3 +379,129 @@ First=First
 Last=Last
 Next=Next
 Previous=Previous
+
+#Status.json
+Current Status=Current Status
+SOC=SOC
+Reichweite=Range
+Außentemperatur=Outside Temperature
+Zelltemperatur=Cell Temperature
+Nur verfügbar mit ScanMyTesla=Only available with ScanMyTesla
+
+#abrp.php
+ABRPTitle=Abetterrouteplanner Link
+TextABRP=You can setup a link from Teslalogger to Abetterrouteplanner to avoid giving your Tesla credentials to a 3rd Party. Another benefit is to minimize the possibility to prevent the car from going to sleep if more than one service is using your credentials.
+ABRP1=Create an Abetterrouteplanner account
+ABRP2=Go to Settings
+ABRP3=Choose your car
+ABRP4=Save your car to your account
+ABRP5=Give your car a name
+ABRP6=Click on "Link Generic" to get a ABRP token
+ABRP7=Copy the token and click "Done"
+ABRP8=Insert the token in Teslalogger
+ABRP9=Check if the Teslalogger is connected
+ABRPYT=Check YouTube tutorial for live demo
+ABRPToken=Abetterrouteplanner Token
+Enabled=Enabled
+
+#wallbox.php
+Wallbox=Wallbox
+WallboxComment=You can connect your Teslalogger to your Wallbox to calculate the efficiency of charging or the percentage of photovoltaics used to charge your car.
+Host=Host
+Param=Param
+Test=Test
+Type=Type
+Info=Info
+Version=Version
+Utility kWh=Utility kWh
+Vehicle kWh=Vehicle kWh
+
+#superchargebingo.php
+SuperChargeBingo=SuperChargeBingo
+SuperChargeBingoComment=You can setup a link from TeslaLogger to SuperChargeBingo to perform automatic checkins at Superchargers.
+Setup=Setup
+Create a SuperChargeBingo account=Create a SuperChargeBingo account
+Create API key (must be secure)=Create API key (must be secure)
+Copy Username and API key and insert it in TeslaLogger=Copy Username and API key and insert it in TeslaLogger
+Save and restart TeslaLogger=Save and restart TeslaLogger
+Username=Username
+API key=API key
+
+#geoadd.php
+Name & Position=Name & Position
+Description=Description
+Radius=Radius
+Special Flags=Special Flags
+Home=Home
+Work=Work
+Charger=Charger
+Copy Charging Costs=Copy Charging Costs
+Don't Combine Charging Sessions=Don't Combine Charging Sessions
+Set Charge Limit=Set Charge Limit
+Set on arrival=Set on arrival
+Set Charge Limit After Charging=Set Charge Limit After Charging
+Open Charge Port=Open Charge Port
+Gear=Gear
+D → P=D → P
+D/R → P=D/R → P
+R → P=R → P
+High Frequency Logging=High Frequency Logging
+Minutes=Minutes
+Special Count=Special Count
+Count=Count
+Special Features=Special Features
+Enable Sentry Mode=Enable Sentry Mode
+Disable Sentry Mode=Disable Sentry Mode
+Turn HVAC off=Turn HVAC off
+No sleep=No sleep
+Delete=Delete
+Are you sure you want to delete this geofencing location?=Are you sure you want to delete this geofencing location?
+Error=Error
+Deleted!=Deleted!
+Meter=Meter
+
+#adminpanelpassword.php
+Please enter password!=Please enter password!
+Passwords do not match!=Passwords do not match!
+Do you want to delete your password?=Do you want to delete your password?
+Set password for Teslalogger's admin panel=Set password for Teslalogger's admin panel
+Name=Name
+
+#changelog.php
+Changelog=Changelog
+
+#chargingcost.php
+Charging Costs=Charging Costs
+Date=Date
+Charged=Charged
+Efficiency=Efficiency
+Currency=Currency
+kWh according to meter/invoice=kWh according to meter/invoice
+Cost per kWh=Cost per kWh
+Cost per charge=Cost per charge
+Cost per minute=Cost per minute
+Idle cost per minute=Idle cost per minute
+Total=Total
+
+#logfile.php
+Download Logfile=Download Logfile
+Lines=Lines
+Housekeeping=Housekeeping
+Sleep Attempt=Sleep Attempt
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Please enter your dexters-web.de account credentials
+Dexter Login=Dexter Login
+Dexter Password=Dexter Password
+
+#password_info.php
+Credentials Info=Credentials Info
+
+#restore.php
+Restore Database=Restore Database
+TextRestore1=Please make sure you backup your Teslalogger before restoring any databases. Move your backup folder from \\RASPBERRY\teslalogger\backup to your hard drive!
+TextRestore2=The restore process may take up to 10 minutes!
+TextRestore3=Don't interrupt the restore process in any way! Don't reload the page! Don't close this page!
+
+#dashboard.php
+Sleeping=Sleeping

@@ -87,6 +87,9 @@ Vampir Drain Monatsstatistik=Statistiques mensuelles des Consommations "Vampire"
 TR mi Verlust=TR mi perdu
 kWh Verlust=kWh perdu
 Eur Verlust=Euro perdu
+Zeitspanne Stunden=Durée heure
+TR mi Verlust pro Stunde=TR mi perdu par heure
+mi Stand=Odomètre
 
 #Trip.json
 Trip=Trajets
@@ -111,11 +114,6 @@ min kW=kW min
 Ø kW=kW moy.
 Ø mph=mi/h moy.
 Ø km/h=km/h moy.
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=Durée heure
-TR mi Verlust pro Stunde=TR mi perdu par heure
-mi Stand=Odomètre
 
 #Vampir Drain.json
 Vampir Drain=Consommations "Vampires"
@@ -183,6 +181,7 @@ min=min
 kWh=kWh
 Wh/km=Wh/km
 km/h=km/h
+Please update to latest docker-compose.yml file. Check: {LINK}=Veuillez mettre à jour le fichier docker-compose.yml. Vérifier : {LINK}
 
 #menu.php
 Logfile=Logfile
@@ -196,6 +195,17 @@ Geofence=Géorepérage
 Suspend Teslalogger=Suspendre Teslalogger
 Wakeup Teslalogger=Activer Teslalogger
 Dashboard=Tableaux de bord
+My Degradation=Ma dégradation
+My Charging AVG=Mon AVG de charge
+Fleet Degradation AVG=Dégradation de la flotte AVG
+Fleet Charging AVG=Chargement du parc automobile AVG
+Fleet Charging MAX (Firmware)=Fleet Charging MAX (Firmware)
+Fleet Charging Locations=Emplacement des bornes de recharge du parc automobile
+Fleet Fast Charging Map=Carte de recharge rapide de la flotte
+Supercharger Usage=Utilisation de la suralimentation
+Firmware Tracker=Suivi des microprogrammes
+Backup=Sauvegarde
+Abetterrouteplanner=Planificateur d'itinéraire
 
 #password.php
 Set password for Teslalogger's admin panel=Définir un mot de passe pour l'administrateur Teslalogger
@@ -206,6 +216,43 @@ Password=Mot de passe
 Repeat Password=Répéter le mot de passe
 Löschen=Effacer
 Speichern=Sauvergarder
+Please enter the access token!=Veuillez saisir le code d'accès !
+Please enter the refresh token!=Veuillez saisir le jeton de rafraîchissement !
+Please select a vehicle=Veuillez sélectionner un véhicule
+Check Logfile!=Vérifier le fichier journal !
+Do you really want to delete this vehicle?=Voulez-vous vraiment supprimer ce véhicule ?
+Check Logfile in one minute!=Vérifier le fichier journal en une minute !
+Unauthorized=Non autorisé
+This isn't a valid URL!=Ce n'est pas une URL valide !
+This isn't an auth link by Tesla!=Ce n'est pas un lien d'authentification de Tesla !
+The URL doesn't contain the expected format!=L'URL ne contient pas le format attendu !
+BA_Browser=Dans le {navigateur} local (recommandé)
+BA_Read=Veuillez lire toutes les étapes avant de continuer :
+BA_Logon=Cliquez sur le lien ci-dessous intitulé <b>Connexion Tesla</b> qui ouvrira un nouvel onglet/fenêtre pour la page de connexion de l'authentification Tesla.
+BA_Auth=Connectez-vous en utilisant vos identifiants Tesla et votre MFA si nécessaire (Tesla s'en souviendra si vous avez déjà utilisé le lien).
+BA_NotFound=Il en résultera apparemment une "page non trouvée". C'est normal.
+BA_URL=Copiez l'URL de cette page web dans le formulaire ci-dessous. L'URL contient un code unique et temporaire que nous pouvons utiliser pour générer des jetons. Nous l'extrairons pour vous du lien.
+BA_Invalid=Ces liens ne fonctionnent généralement qu'une seule fois. Si un message "Invalid Grant" ou un autre message d'erreur apparaît sur notre site web, vous devrez peut-être recommencer avec le lien Tesla Logon, ce qui devrait produire un nouveau lien.
+BA_Logoff=Si vous souhaitez utiliser un autre compte, vous devez vous déconnecter manuellement {ici!}.
+BA_GetToken=Nous obtiendrons alors les jetons pour votre compte Tesla.
+BA_SelectCar=Sélectionnez la voiture que vous souhaitez utiliser pour le Teslalogger.
+BA_Step1=Étape 1 :
+BA_Step2=Étape 2 :
+BA_Step3=Étape 3 :
+BA_FillOut=Remplissez ce formulaire :
+BA_CopyUrl=Copiez l'adresse URL obtenue comme indiqué
+BA_Paste=Collez l'url obtenue dans la boîte et cliquez sur le bouton "Obtenir des jetons" :
+Get Tokens=Obtenir des jetons
+Access Token=Jeton d'accès
+Refresh Token=Jeton de rafraîchissement
+Car=Voiture
+Free Supercharging=Supercharge gratuite
+Reconnect=Se reconnecter
+Model=Modèle
+VIN=VIN
+Free SUC=Gratuité de la CUS
+Edit=Editer
+New car=Voiture neuve
 
 #settings.php
 MyTesla=Voiture Tesla
@@ -293,9 +340,6 @@ StreamingPosHelp=<h1>Position par StreamingAPI</h1>Utilise StreamingAPI pour sau
 
 TeslaAuthApps=Vous pouvez utiliser les applications suivantes pour obtenir un accès et une actualisation du serveur Tesla:
 
-#journeys.php
-Ladezeit [h]=Temps de recharge [h]
-
 #Status.json
 Current Status=Status actuel
 SOC=EDC
@@ -381,8 +425,13 @@ Enable Sentry Mode=Activer le mode sentinelle
 Disable Sentry Mode=Désactiver le mode sentinelle
 Turn HVAC off=Désactiver le chauffage, la ventilation et la climatisation
 No sleep=Pas de sommeil
+Are you sure you want to delete this geofencing location?=Êtes-vous sûr de vouloir supprimer cet emplacement de geofencing ?
+Error=Erreur
+Deleted!=Supprimé !
+Meter=Mètre
 
 #journeys.php
+Ladezeit [h]=Temps de recharge [h]
 Journeys=Voyages
 Journey=Voyage
 Journey name missing!=Nom du voyage manquant !
@@ -417,3 +466,33 @@ First=Première
 Last=Dernière
 Next=Suivant
 Previous=Précédent
+
+#adminpanelpassword.php
+Please enter password!=Veuillez saisir le mot de passe !
+Passwords do not match!=Les mots de passe ne correspondent pas !
+Do you want to delete your password?=Voulez-vous supprimer votre mot de passe ?
+Name=Nom
+
+#changelog.php
+Changelog=Changelog
+
+#logfile.php
+Download Logfile=Télécharger le fichier journal
+Lines=Lignes
+Housekeeping=Entretien ménager
+Sleep Attempt=Tentative de sommeil
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Veuillez saisir les informations d'identification de votre compte dexters-web.de
+Dexter Login=Connexion Dexter
+Dexter Password=Mot de passe Dexter
+
+#password_info.php
+Credentials Info=Infos sur les credentials
+
+#restore.php
+Restore Database=Restaurer la base de données
+TextRestore1=Veillez à sauvegarder votre Teslalogger avant de restaurer les bases de données. Déplacez votre dossier de sauvegarde de \\RASPBERRY\teslalogger\backup sur votre disque dur !
+TextRestore2=Le processus de restauration peut durer jusqu'à 10 minutes !
+TextRestore3=N'interrompez pas le processus de restauration de quelque manière que ce soit ! Ne rechargez pas la page ! Ne fermez pas cette page !
+

@@ -83,6 +83,9 @@ Vampir Drain Monatsstatistik=Estatísticas Perdas Residuais
 TR mi Verlust=TR mi Perdidas
 kWh Verlust=kWh Perdidos 
 Eur Verlust=EUR Perdidos
+Zeitspanne Stunden=Horas de Duração
+TR mi Verlust pro Stunde=TR mi Perdidas por Hora
+mi Stand=Odómetro
 
 #Trip.json
 Trip=Viagem
@@ -107,11 +110,6 @@ min kW=min kW
 Ø kW=Ø kW
 Ø mph=Ø mph
 Ø km/h=Ø km/h
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=Horas de Duração
-TR mi Verlust pro Stunde=TR mi Perdidas por Hora
-mi Stand=Odómetro
 
 #Vampir Drain.json
 Vampir Drain=Perdas Residuais
@@ -176,6 +174,7 @@ Consumption=Consumo
 kWh=kWh
 Wh/km=Wh/km
 Current Pos=Pos actuais
+Please update to latest docker-compose.yml file. Check: {LINK}=Favor actualizar para o ficheiro docker-compose.yml mais recente. Verificar: {LINK}
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Credenciais Tesla
@@ -184,6 +183,45 @@ Email=Email
 Password=Palavra-passe
 Repeat Password=Repita Palavra-passe
 Speichern=Guardar
+Please enter the access token!=Por favor, introduza o código de acesso!
+Please enter the refresh token!=Por favor, introduza o símbolo de actualização!
+Please select a vehicle=Por favor, seleccione um veículo
+Check Logfile!=Verifique o ficheiro de registo!
+Do you really want to delete this vehicle?=Quer mesmo apagar este veículo?
+Check Logfile in one minute!=Verifique o ficheiro de registo dentro de um minuto!
+Unauthorized=Não autorizado
+This isn't a valid URL!=Este não é um URL válido!
+This isn't an auth link by Tesla!=Este não é um auth link de Tesla!
+The URL doesn't contain the expected format!=O URL não contém o formato esperado!
+TeslaAuthApps=Pode utilizar as seguintes aplicações para obter um token de acesso e de actualização a partir do servidor Tesla:
+BA_Browser=No local {browser} (recomendado)
+BA_Read=Por favor, leia todos os passos antes de continuar:
+BA_Logon=Clique no link abaixo intitulado <b>Tesla Logon</b> que abrirá um novo separador/janela para a página de logon do Tesla Authentication
+BA_Auth=Inicie a sessão utilizando as suas credenciais Tesla e AMF se necessário (Tesla lembrar-se-á delas se já tiver utilizado a ligação antes)
+BA_NotFound=Isto parecerá resultar numa "Página Não Encontrada". Isto é normal.
+BA_URL=Copie o URL resultante dessa página web para o formulário abaixo. Dentro do URL é um código temporário único que podemos utilizar para gerar fichas. Extrairemo-lo para si a partir da ligação.
+BA_Invalid=Estas ligações normalmente só funcionam uma vez, portanto, se uma "Invalid Grant" ou outra mensagem de erro aparecer no nosso sítio Web, poderá ter de começar novamente com a ligação Tesla Logon, que deverá produzir uma nova ligação.
+BA_Logoff=Se quiser usar uma conta diferente, tem de fazer o log off manualmente {aqui!}
+BA_GetToken=Receberemos então os tokens para a sua conta Tesla.
+BA_SelectCar=Seleccione o carro que pretende utilizar para o Teslalogger.
+BA_Step1=Passo 1:
+BA_Step2=Passo 2:
+BA_Step3=Passo 3:
+BA_FillOut=Preencha este formulário:
+BA_CopyUrl=Copiar a url resultante, como mostrado
+BA_Paste=Colar a url resultante na caixa e clicar no botão "Obter fichas" Button:
+Get Tokens=Obter fichas
+Access Token=Ficha de Acesso
+Refresh Token=Ficha de Actualização
+Car=Automóvel
+Free Supercharging=Super-carregamento gratuito
+Reconnect=Voltar a ligar
+Please choose your vehicle=Por favor escolha o seu veículo
+Model=Modelo
+VIN=VIN
+Free SUC=SUC grátis
+Edit=Editar
+New car=Carro novo
 
 #settings.php
 Credentials=Credenciais
@@ -255,8 +293,6 @@ Daten anonym teilen=Partilhar dados anonimamente
 TextSuspendTeslalogger=O Teslalogger foi interrompido! Os dados não serão guardados!
 Resume Teslalogger=Retomar o Teslalogger
 Range=Autonomia
-
-TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
 ABRPTitle=Link do Abetterouteplanner
@@ -337,6 +373,10 @@ Enable Sentry Mode=Activar o modo sentinela
 Disable Sentry Mode=Desactivar o modo sentinela
 Turn HVAC off=Desligar o AVAC
 No sleep=Sem sono
+Are you sure you want to delete this geofencing location?=Tem a certeza de que quer apagar este local de geofencing?
+Error=Erro
+Deleted!=Apagado!
+Meter=Metro
 
 #journeys.php
 Journeys=Jornadas
@@ -373,3 +413,59 @@ First=Primeiro
 Last=Último
 Next=Próximo
 Previous=Anterior
+
+#adminpanelpassword.php
+Please enter password!=Por favor introduza a palavra-passe!
+Passwords do not match!=As palavras-passe não coincidem!
+Do you want to delete your password?=Quer apagar a sua palavra-passe?
+Set password for Teslalogger's admin panel=Definir senha para o painel de administração do Teslalogger
+Name=Nome
+
+#changelog.php
+Changelog=Changelog
+
+#dashboard.php
+Dashboard=Painel de instrumentos
+
+#logfile.php
+Download Logfile=Descarregar ficheiro de registo
+Lines=Linhas
+Housekeeping=Administração doméstica
+Update=Actualização
+Sleep Attempt=Tentativa de Sono
+
+#menu.php
+Logfile=ficheiro de registo
+Restart=Reiniciar
+Dashboards=Painel de instrumentos
+Fleet Statistic=Estatísticas da Frota
+My Degradation=A Minha Degradação
+My Charging AVG=O meu AVG de Carregamento
+Fleet Degradation AVG=Degradação da Frota AVG
+Fleet Charging AVG=Carregamento da Frota AVG
+Fleet Charging MAX (Firmware)=Carregamento de Frota MAX (Firmware)
+Fleet Charging Locations=Locais de carregamento da frota
+Fleet Fast Charging Map=Mapa de Carregamento Rápido da Frota
+Supercharger Usage=Utilização do Supercharger
+Firmware Tracker=Rastreador de Firmware
+Extras=Extras
+Backup=Cópia de segurança
+Restore=Restaurar
+Geofence=Geofence
+Abetterrouteplanner=Abetterrouteplanner
+Wakeup Teslalogger=Teslalogger de despertar
+Suspend Teslalogger=Teslalogger Suspenso
+
+#ovms.php
+Please enter your dexters-web.de account credentials=Por favor introduza as suas credenciais de dexters-web.de account
+Dexter Login=Login de Dexter
+Dexter Password=Palavra-passe Dexter
+
+#password_info.php
+Credentials Info=Informações de Credenciais
+
+#restore.php
+Restore Database=Restaurar base de dados
+TextRestore1=Por favor, certifique-se de fazer uma cópia de segurança do seu Teslalogger antes de restaurar quaisquer bases de dados. Mova a sua pasta de cópia de segurança do Registo de Testemunhos de RASPBERRY para o seu disco rígido!
+TextRestore2=O processo de restauração pode demorar até 10 minutos!
+TextRestore3=Não interrompa o processo de restauração de forma alguma! Não recarregue a página! Não feche esta página!

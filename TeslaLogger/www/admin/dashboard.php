@@ -16,46 +16,48 @@ else
 
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-title" content="Teslalogger Dashboard">
 	<link href="manifest.json" rel="manifest" crossorigin="use-credentials">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon.png" sizes="131x133">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <title>Teslalogger Dashboard</title>
+    <title>Teslalogger <?php t("Dashboard"); ?></title>
 	<link rel="stylesheet" href="dashboard.css?v=<?=time()?>" />
 	<link rel="stylesheet" href="my_dashboard.css?v=<?=time()?>" />
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script>
-	
+
 	var nextGetWeather = 0;
 	var loc;
 
 	$( function() {
 	<?php
 		$files = scandir("wallpapers/".$carid);
-		foreach ($files as $i => &$f)		
+		foreach ($files as $i => &$f)
 		{
 			if (stripos($f,".") === 0)
 				continue;
-		
+
 			if (stripos($f,".jpg") > 0 || stripos($f,".png") > 0)
-			{		
+			{
 				echo("$('#error').text('');\n");
 				echo("$('body').css('background-image','url(\"wallpapers/".$carid."/".$f. "\")');\n");
 				break;
 			}
 		}
 	?>
-		if (navigator.languages != undefined) loc = navigator.languages[0]; 
+		if (navigator.languages != undefined) loc = navigator.languages[0];
 			else loc = navigator.language;
 
 		GetCurrentData();
-		
+
 		setInterval(function()
 		{
-			GetCurrentData();	
+			GetCurrentData();
 		}
 		,5000);
 	} );
@@ -64,7 +66,7 @@ else
 	{
 		updateClock();
 		updateWeather();
-	
+
 		$.ajax({
 		  url: "current_json.php",
 		  dataType: "json"
@@ -72,7 +74,7 @@ else
 			$('#display_name').text(jsonData["display_name"]);
 			$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toFixed(0));
 			$('#battery_level').text(jsonData["battery_level"]);
-			
+
 			updateBat(jsonData["battery_level"]);
 
 			if (jsonData["charging"])
@@ -134,27 +136,27 @@ if (file_exists("my_dashboard_jsonData.php"))
 		var currentHours = currentTime.getHours ( );
 		var currentMinutes = currentTime.getMinutes ( );
 		var currentSeconds = currentTime.getSeconds ( );
-		
+
 		currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
 		var currentTimeString = currentHours + ":" + currentMinutes;
-		
-		$('#clock').text(currentTimeString);			
+
+		$('#clock').text(currentTimeString);
 		$('#weekday').text(currentTime.toLocaleString(loc, { weekday: 'long'}));
 		$('#date').text(currentTime.toLocaleString(loc, { month: 'long', day: 'numeric' }));
 	}
-	
+
 	function updateBat($percent)
 	{
 		$batwidth = $('#batimg').width();
 		$batheight = $('#batimg').height();
 		$('#batimg_end').css('height', $batheight);
 		$('#batimg_m').css('height', $batheight );
-		
+
 		$newwidth = $batwidth * 0.92 * $percent / 100;
-		
+
 		$topspace = 4;
 		$leftspace = 7;
-		
+
 		if ($batwidth < 150)
 		{
 			$topspace = 8;
@@ -164,30 +166,30 @@ if (file_exists("my_dashboard_jsonData.php"))
 		{
 			$topspace = 7;
 			$leftspace = 5;
-		}	
-		
+		}
+
 		$('#batimg_m').css('top', $topspace);
 		$('#batimg_end').css('top', $topspace);
-		
+
 		$('#batimg_m').css('width', $newwidth);
 		$('#batimg_m').css('left', $leftspace);
 		$('#batimg_end').css('left', $newwidth + $leftspace);
-		
+
 	}
-	
+
 	function updateWeather()
 	{
 		if (nextGetWeather > Date.now())
 			return;
-	
+
 		nextGetWeather = Date.now() + 600000;
-	
+
 		<?php
 		$weahterinifile = "/etc/teslalogger/weather.ini";
 		if (file_exists($weahterinifile))
 		{
 			$weatherParams = parse_ini_file($weahterinifile);
-			
+
 			if ($weatherParams['appid'] =="12345678901234567890123456789012")
 			{
 				echo("$('#weather').css('display','none');return; <!-- default weather.ini file! Disable Weather Widget -->");
@@ -200,16 +202,16 @@ if (file_exists("my_dashboard_jsonData.php"))
 			echo("$('#weather').css('display','none');return; <!-- weather.ini file not found! Disable Weather Widget -->");
 		}
 		?>
-	
+
 		var minTemp = 100;
 		var maxTemp = -100;
 		var weatherIcon = "partlycloudy.png";
 		var forecast = 'few clouds';
-		
+
 		var now = new Date();
 		var dateForecast = new Date();
 		var dateTemp = new Date();
-		
+
 		if(now.getHours() <= 14) dateForecast.setHours(15,0,0,0);
 			else dateForecast.setHours(18,0,0,0);
 		if(now.getHours() >= 18) {
@@ -218,10 +220,10 @@ if (file_exists("my_dashboard_jsonData.php"))
 		}
 
 		$.getJSON(weatherUrl, function(weatherData){
-			
+
 			var i = 0;
 			while(weatherData.list[i].dt < Math.round(dateForecast.getTime()/1000)) { i++;	}
-			
+
 			forecast = weatherData.list[i].weather[0].main;
 			console.log("forecast: " + forecast);
 			console.log(weatherData.list[i].dt_txt);
@@ -250,7 +252,7 @@ if (file_exists("my_dashboard_jsonData.php"))
 				default:
 				weatherIcon = "unknown.png";
 			}
-				
+
 			i = 0;
 
 			if(dateTemp.getHours() <= 16) {
@@ -270,9 +272,9 @@ if (file_exists("my_dashboard_jsonData.php"))
 					if(weatherData.list[i].main.temp_min < minTemp) minTemp = weatherData.list[i].main.temp_min;
 					if(weatherData.list[i].main.temp_max > maxTemp) maxTemp = weatherData.list[i].main.temp_max;
 					i++;
-				}				
+				}
 			}
-		
+
 			$('#temp').text(Math.round(minTemp) + "°C / " + Math.round(maxTemp) + "°C");
 			$("#weather_icon").attr("src", "img/weather/" + weatherIcon);
 		}).error(function(error)
@@ -280,7 +282,7 @@ if (file_exists("my_dashboard_jsonData.php"))
 			$('#temp').text(error.responseText);
 		});
 	}
-	
+
   function BackgroudRun($target, $text)
   {
 	  $.ajax($target, {
@@ -298,9 +300,9 @@ if (file_exists("my_dashboard_jsonData.php"))
 	);
   }
   </script>
-  </head>
-  <body>
-  <div id="panel">
+</head>
+<body>
+<div id="panel">
 	  <div id="headline"><span id="display_name"> </span><span id="teslalogger">Teslalogger Dashboard</span></div>
 	  <div id="rangeline"><span id="batdiv"><img id="batimg" src="img/bat-icon.png"><img id="batimg_m" src="img/bat-icon-gr.png"><img id="batimg_end" src="img/bat-icon-end.png"></span>
 	  <span id="battery_level" style="">-</span><font id="percent">%</font> <span id="tilde">~</span> <span id="ideal_battery_range_km" style="">-</span><font id="km">km</font></div>
@@ -335,5 +337,5 @@ if (file_exists("my_dashboard.php"))
 ?>
 
 <!-- End of my_dashboard.php -->
-  </body>
+</body>
 </html>

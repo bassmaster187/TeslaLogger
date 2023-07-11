@@ -4,7 +4,7 @@
   "start_url": "dashboard.php",
   "icons": [
     {
-      "src": "img/apple-touch-icon.png",
+      "src": "img/apple-touch-icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     }

@@ -84,6 +84,9 @@ Vampir Drain Monatsstatistik=电量流失 月统计
 TR mi Verlust=里程英里数流失
 kWh Verlust=kWh流失
 Eur Verlust=流失电量金额
+Zeitspanne Stunden=时间段 小时
+TR mi Verlust pro Stunde=TR 每小时里程流失英里数
+mi Stand=里程表
 
 #Trip.json
 Trip=行程
@@ -108,11 +111,6 @@ min kW=最小 kW
 Ø kW=Ø kW
 Ø mph=平均时速（英里）
 Ø km/h=平均时速（公里）
-
-#Vampir Drain Monatsstatistik.json
-Zeitspanne Stunden=时间段 小时
-TR mi Verlust pro Stunde=TR 每小时里程流失英里数
-mi Stand=里程表
 
 #Vampir Drain.json
 Vampir Drain=电量流失
@@ -177,6 +175,7 @@ min=min
 Consumption=消费量
 Ø Consumption=Ø 消费量
 Wh/km=Wh/km
+Please update to latest docker-compose.yml file. Check: {LINK}=请更新到最新的docker-compose.yml文件。检查：{LINK}
 
 #menu.php
 Logfile=日志
@@ -191,6 +190,16 @@ Geofence=电子围栏
 Suspend Teslalogger=暂停 Teslalogger
 Wakeup Teslalogger=唤醒 Teslalogger
 Dashboard=仪表盘
+My Degradation=我的堕落
+My Charging AVG=我的充电AVG
+Fleet Degradation AVG=舰队退化的AVG
+Fleet Charging AVG=车队充电的AVG
+Fleet Charging MAX (Firmware)=车队充电MAX（固件）
+Fleet Charging Locations=车队充电地点
+Fleet Fast Charging Map=舰队快速充电地图
+Supercharger Usage=增压器的使用
+Firmware Tracker=固件跟踪器
+Abetterrouteplanner=完善的路线规划
 
 #password.php
 Teslalogger Tesla Credentials=Teslalogger Tesla 账号信息
@@ -199,6 +208,45 @@ Email=邮箱地址
 Password=密码
 Repeat Password=再次输入密码
 Speichern=保存
+Please enter the access token!=Please enter the access token!
+Please enter the refresh token!=Please enter the refresh token!
+Please select a vehicle=Please select a vehicle
+Check Logfile!=Check Logfile!
+Do you really want to delete this vehicle?=Do you really want to delete this vehicle?
+Check Logfile in one minute!=Check Logfile in one minute!
+Unauthorized=Unauthorized
+This isn't a valid URL!=This isn't a valid URL!
+This isn't an auth link by Tesla!=This isn't an auth link by Tesla!
+The URL doesn't contain the expected format!=The URL doesn't contain the expected format!
+TeslaAuthApps=你可以使用以下应用程序从Tesla服务器获取访问令牌和刷新令牌。
+BA_Browser=在本地{浏览器}（推荐）中
+BA_Read=请在继续之前阅读所有的步骤：
+BA_Logon=点击下面题为<b>特斯拉登录</b>的链接，这将为特斯拉认证登录页面打开一个新标签/窗口。
+BA_Auth=使用你的特斯拉凭证和MFA（如果需要）登录（如果你以前使用过链接，特斯拉会记住这些）。
+BA_NotFound=这将出现 "未找到网页 "的结果。这很正常。
+BA_URL=将该网页的结果URL复制到下面的表格中。在该URL内有一个一次性的临时代码，我们可以用它来生成令牌。我们将为你从链接中提取这个代码。
+BA_Invalid=这些链接通常只起作用一次，所以如果我们的网站上出现 "无效授权 "或其他错误信息，你可能需要从特斯拉登录链接重新开始，这应该产生一个新的链接。
+BA_Logoff=如果你想使用一个不同的账户，你必须手动注销{这里！}。
+BA_GetToken=然后我们将为你的特斯拉账户获取代币。
+BA_SelectCar=选择你想用于Teslalogger的汽车。
+BA_Step1=步骤1：
+BA_Step2=第2步：
+BA_Step3=第3步：
+BA_FillOut=填写这个表格：
+BA_CopyUrl=复制生成的网址，如图所示
+BA_Paste=将得到的网址粘贴到盒子里，然后点击 "获取令牌 "按钮：
+Get Tokens=Get Tokens
+Access Token=Access Token
+Refresh Token=Refresh Token
+Car=Car
+Free Supercharging=Free Supercharging
+Reconnect=Reconnect
+Please choose your vehicle=Please choose your vehicle
+Model=Model
+VIN=VIN
+Free SUC=Free SUC
+Edit=Edit
+New car=New car
 
 #settings.php
 Credentials=账号信息设置
@@ -268,8 +316,6 @@ Daten anonym teilen=匿名共享数据
 TextSuspendTeslalogger=Teslalogger已停止！数据将不会被记录！
 Resume Teslalogger=继续Teslalogger
 Range=里程
-
-TeslaAuthApps=你可以使用以下应用程序从Tesla服务器获取访问令牌和刷新令牌。
 
 #abrp.php
 ABRPTitle=Abetterrouteplanner 链接
@@ -349,6 +395,10 @@ Enable Sentry Mode=启用哨兵模式
 Disable Sentry Mode=禁用哨兵模式
 Turn HVAC off=关掉HVAC
 No sleep=不睡觉
+Are you sure you want to delete this geofencing location?=你确定要删除这个地理围栏位置吗？
+Error=误差
+Deleted!=删掉了!
+Meter=公尺
 
 #journeys.php
 Journeys=旅程
@@ -385,3 +435,33 @@ First=首先
 Last=最后一次
 Next=下一页
 Previous=上一篇
+
+#adminpanelpassword.php
+Please enter password!=请输入密码!
+Passwords do not match!=密码不匹配!
+Do you want to delete your password?=你想删除你的密码吗？
+Set password for Teslalogger's admin panel=为Teslalogger的管理面板设置密码
+Name=命名
+
+#changelog.php
+Changelog=更新日志
+
+#logfile.php
+Download Logfile=下载日志文件
+Lines=线路
+Housekeeping=内务管理
+Sleep Attempt=睡眠尝试
+
+#ovms.php
+Please enter your dexters-web.de account credentials=请输入你的dexters-web.de账户凭证
+Dexter Login=德克斯特登录
+Dexter Password=德克斯特密码
+
+#password_info.php
+Credentials Info=证书信息
+
+#restore.php
+Restore Database=恢复数据库
+TextRestore1=在恢复任何数据库之前，请确保备份你的Teslalogger。将您的备份文件夹从\\RASPBERRY\teslalogger\backup移到您的硬盘上!
+TextRestore2=恢复过程可能需要长达10分钟的时间!
+TextRestore3=不要以任何方式中断恢复过程!不要重新加载这个页面!不要关闭这个页面!

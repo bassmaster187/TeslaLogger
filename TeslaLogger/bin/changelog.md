@@ -1,5 +1,17 @@
-# Version 1.54.18
-- Bugfixes
+# Version 1.54.25
+- Bugfix in upgrade zu Debian Buster
+
+# Version 1.54.24
+- Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/os_upgrade.md) 
+
+# Version 1.54.22
+- Restore chargingstate from backup [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/faq.md#grafana-dashboard-charging-history--ladehistorie-has-wrong-entries-for-total-costs)
+
+# Version 1.54.20
+- reduce Tesla API calls to minimum
+
+# Version 1.54.19
+- New Tesla API -> older Teslalogger versions won't work anymore!
 
 # Version 1.54.16
 - Update to Grafana 8.5.22 [security fix](https://grafana.com/blog/2023/03/22/grafana-security-release-new-versions-with-security-fixes-for-cve-2023-1410/)
