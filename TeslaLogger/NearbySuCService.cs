@@ -165,18 +165,6 @@ namespace TeslaLogger
                                                 }
                                                 foreach (dynamic suc in superchargers)
                                                 {
-                                                    /*
-                          {
-                            "location": { "lat": 33.848756, "long": -84.36434 },
-                            "name": "Atlanta, GA - Peachtree Road",
-                            "type": "supercharger",
-                            "distance_miles": 10.868304,
-                            "available_stalls": 4,
-                            "total_stalls": 5,
-                            "site_closed": false
-                          }
-                                                     */
-
                                                     try
                                                     {
                                                         AddSuperchargerState(suc, send, result, stage == 0);
@@ -286,6 +274,50 @@ namespace TeslaLogger
 
         private static void AddSuperchargerState(Newtonsoft.Json.Linq.JObject suc, ArrayList send, string resultContent, bool insertdb)
         {
+            /* suc:
+             {
+    "activeOutages":
+    [
+    ],
+    "availableStalls":
+    {
+        "value": 8
+    },
+    "centroid":
+    {
+        "latitude": 38.922231,
+        "longitude": -6.375038
+    },
+    "drivingDistanceMiles": null,
+    "entryPoint":
+    {
+        "latitude": 38.922409,
+        "longitude": -6.375284
+    },
+    "haversineDistanceMiles":
+    {
+        "value": 117.37894565724743
+    },
+    "id":
+    {
+        "text": "87e6ef6e-9f25-474c-a164-ba185b970f4d"
+    },
+    "localizedSiteName":
+    {
+        "value": "Merida, Spain"
+    },
+    "maxPowerKw":
+    {
+        "value": 150
+    },
+    "totalStalls":
+    {
+        "value": 10
+    },
+    "siteType": "SITE_TYPE_SUPERCHARGER",
+    "accessType": "ACCESS_TYPE_PUBLIC"
+} 
+             */
             //Tools.DebugLog(new Tools.JsonFormatter(suc.ToString()).Format());
             int sucID = int.MinValue;
             string name = suc["localizedSiteName"]["value"].ToString();
@@ -433,51 +465,6 @@ VALUES(
                     Logfile.Log("Supercharger " + name + " doesn't contain availableStalls.value or totalStalls.value");
                 }
             }
-            /*
-            else if (suc.ContainsKey("site_closed")
-                && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
-                && site_closed)
-            {
-                Tools.DebugLog($"SuC: <{suc["name"]}> site_closed");
-                if (!ContainsSupercharger(send, suc["name"].ToString()))
-                {
-                    Dictionary<string, object> sendKV = new Dictionary<string, object>();
-                    send.Add(sendKV);
-                    sendKV.Add("n", suc["name"]);
-                    sendKV.Add("lat", lat);
-                    sendKV.Add("lng", lng);
-                    sendKV.Add("ts", DateTime.UtcNow.ToString("s", Tools.ciEnUS));
-                    sendKV.Add("a", -1);
-                    sendKV.Add("t", -1);
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con.Open();
-                        // find internal ID of supercharger by name
-                        using (MySqlCommand cmd = new MySqlCommand("INSERT superchargerstate (nameid, ts, available_stalls, total_stalls) values (@nameid, @ts, @available_stalls, @total_stalls) ", con))
-                        {
-                            cmd.Parameters.AddWithValue("@nameid", sucID);
-                            cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@available_stalls", -1);
-                            cmd.Parameters.AddWithValue("@total_stalls", -1);
-                            SQLTracer.TraceNQ(cmd);
-                        }
-                        con.Close();
-                    }
-                }
-            }
-            else if (suc.ContainsKey("site_closed")
-                && bool.TryParse(suc["site_closed"].ToString(), out site_closed)
-                && !site_closed)
-            {
-                Tools.DebugLog($"SuC: <{suc["name"]}> no info (fields available: available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")})");
-                Tools.DebugLog(new Tools.JsonFormatter(JsonConvert.SerializeObject(suc)).Format());
-            }
-            else
-            {
-                Tools.DebugLog($"suc ContainsKey available_stalls {suc.ContainsKey("available_stalls")} total_stalls {suc.ContainsKey("available_stalls")} site_closed {suc.ContainsKey("site_closed")}");
-            }
-            */
-
         }
 
         private static bool ContainsSupercharger(ArrayList send, string name)

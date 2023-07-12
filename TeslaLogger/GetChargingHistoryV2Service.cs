@@ -311,25 +311,12 @@ LIMIT 1
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
                         Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
-                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
-                        // check names, time difference and VIN
-                        if (siteLocationName.Contains(","))
-                        {
-                            siteLocationName = siteLocationName.Split(',')[0];
-                        }
-                        if (tlname.Contains(siteLocationName)
-                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 20
+                        if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN)
                             )
                         {
                             UpdateChargingState(chargingstateid, json, car);
                             updatedChargingStates++;
-                        }
-                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
-                            && car.Vin.Equals(VIN))
-                        {
-                            Tools.DebugLog($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>");
-                            (new Exception($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>")).ToExceptionless().FirstCarUserID().Submit();
                         }
                         else if (!car.Vin.Equals(VIN))
                         {
@@ -466,8 +453,10 @@ LIMIT 1
                     cost_total = cost_idle_fee_total;
                 }
                 car.Log($@"GetChargingHistoryV2Service -> UpdateChargingState:
+teslalogger.chargingstate.id:{chargingstateid}
 siteLocationName:{(session.ContainsKey("siteLocationName") ? session["siteLocationName"].ToString() : "n/a")}
-chargingstateid:{chargingstateid}
+chargeStartDateTime:{(session.ContainsKey("chargeStartDateTime") ? session["chargeStartDateTime"].ToString() : "n/a")}
+chargeStopDateTime:{(session.ContainsKey("chargeStopDateTime") ? session["chargeStopDateTime"].ToString() : "n/a")}
 chargeSessionId:{chargeSessionId}
 cost_total:{cost_total}
 cost_currency:{cost_currency}
