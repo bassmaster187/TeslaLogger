@@ -1229,6 +1229,7 @@ WHERE
                 // check if combine is disabled globally or locally
                 if (!CombineChangingStatesAt(candidate))
                 {
+                    Tools.DebugLog($"CombineChangingStates: skip {candidate} CombineChangingStatesAt is false");
                     continue;
                 }
 
