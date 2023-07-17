@@ -627,7 +627,7 @@ namespace TeslaLogger
         private void HandleState_Charge()
         {
             {
-                if (!webhelper.IsCharging())
+                if (!webhelper.IsCharging(false, IsHighFrequenceLoggingEnabled()))
                 {
                     SetCurrentState(TeslaState.Start);
                     webhelper.IsDriving(true);
