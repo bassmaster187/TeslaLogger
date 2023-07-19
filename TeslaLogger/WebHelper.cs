@@ -1346,13 +1346,13 @@ namespace TeslaLogger
             lastCharging_State = "";
         }
 
-        internal bool IsCharging(bool justCheck = false)
+        internal bool IsCharging(bool justCheck = false, bool noMemcache = false)
         {
             string resultContent = "";
             try
             {
                 // resultContent = GetCommand("charge_state").Result;
-                resultContent = GetCommand("vehicle_data").Result;
+                resultContent = GetCommand("vehicle_data", noMemcache).Result;
 
                 if (resultContent == INSERVICE)
                 {
@@ -4341,7 +4341,7 @@ DESC", con))
             return null;
         }
 
-        public async Task<string> GetCommand(string cmd)
+        public async Task<string> GetCommand(string cmd, bool noMemcache = false)
         {
             string resultContent = "";
             try
@@ -4361,16 +4361,18 @@ DESC", con))
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(adresse);
+                HttpResponseMessage result = await client.GetAsync(new Uri(adresse)).ConfigureAwait(false);
 
                 if (result.IsSuccessStatusCode)
                 {
                     MemoryCache.Default.Remove(cacheKeyNotFound);
 
-                    resultContent = await result.Content.ReadAsStringAsync();
+                    resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    if (cmd == "vehicle_data")
+                    if (cmd == "vehicle_data" && noMemcache == false)
+                    {
                         MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(4));
+                    }
 
                     DBHelper.AddMothershipDataToDB("GetCommand(" + cmd + ")", start, (int)result.StatusCode);
                     _ = car.GetTeslaAPIState().ParseAPI(resultContent, cmd);
