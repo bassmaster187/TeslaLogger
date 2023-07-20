@@ -5047,7 +5047,7 @@ UPDATE
 SET
     StartDate = @StartDate,
     StartChargingID = @StartChargingID,
-    meter_vehicle_kwh_star = @meter_vehicle_kwh_start,
+    meter_vehicle_kwh_start = @meter_vehicle_kwh_start,
     meter_utility_kwh_start = @meter_utility_kwh_start
 WHERE
     id = @id", con))
