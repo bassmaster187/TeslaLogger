@@ -3229,6 +3229,7 @@ namespace TeslaLogger
                                             string v = j["value"];
                                             if (v.Contains("Can't validate token"))
                                             {
+                                                UpdateTeslaTokenFromRefreshToken();
                                                 RestartStreamThreadWithTask();
                                             }
                                         }
