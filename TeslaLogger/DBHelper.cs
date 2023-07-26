@@ -5048,7 +5048,7 @@ UPDATE
 SET
     StartDate = @StartDate,
     StartChargingID = @StartChargingID,
-    meter_vehicle_kwh_star = @meter_vehicle_kwh_start,
+    meter_vehicle_kwh_start = @meter_vehicle_kwh_start,
     meter_utility_kwh_start = @meter_utility_kwh_start
 WHERE
     id = @id", con))
@@ -6461,6 +6461,11 @@ WHERE
             Tools.DebugLog("MigratePosOdometerNullValues start");
             try
             {
+                if (KVS.Get("MigratePosOdometerNullValuesMaxPosID", out int migratePosOdometerNullValuesMaxPosID) == KVS.NOT_FOUND)
+                {
+                    migratePosOdometerNullValuesMaxPosID = 0;
+                }
+                int maxPosID = migratePosOdometerNullValuesMaxPosID;
                 // find all pos.id where odometer IS NULL
                 List<Tuple<int, int>> IDs = new List<Tuple<int, int>>();
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -6473,9 +6478,11 @@ SELECT
 FROM
     pos
 WHERE
-    odometer IS NULL", con))
+    id > @migratePosOdometerNullValuesMaxPosID
+    AND odometer IS NULL", con))
                     {
                         cmd.CommandTimeout = 6000;
+                        cmd.Parameters.AddWithValue("@migratePosOdometerNullValuesMaxPosID", migratePosOdometerNullValuesMaxPosID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         while (dr.Read() && dr[0] != DBNull.Value
                             && dr[1] != DBNull.Value)
@@ -6484,12 +6491,29 @@ WHERE
                                 && int.TryParse(dr[1].ToString(), out int carid))
                             {
                                 IDs.Add(new Tuple<int, int>(posid, carid));
+                                maxPosID = Math.Max(posid, maxPosID);
                             }
                         }
                     }
                 }
                 Tools.DebugLog($"MigratePosOdometerNullValues IDs:{IDs.Count}");
-                if (IDs.Count > 0)
+                if (IDs.Count == 0)
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    MAX(id)
+FROM
+    pos", con))
+                        {
+                            cmd.CommandTimeout = 6000;
+                            maxPosID = (int)SQLTracer.TraceSc(cmd);
+                        }
+                    }
+                }
+                else if (IDs.Count > 0)
                 {
                     foreach (Tuple<int, int> ID in IDs)
                     {
@@ -6594,6 +6618,7 @@ WHERE
                         }
                     }
                 }
+                KVS.InsertOrUpdate("MigratePosOdometerNullValuesMaxPosID", maxPosID);
             }
             catch (Exception ex)
             {
