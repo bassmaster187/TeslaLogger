@@ -77,6 +77,14 @@ namespace TeslaLogger
         public double? SMTSpeed = null;
         public double? SMTBatteryPower = null;
 
+        public string active_route_destination = null;
+        public long? active_route_energy_at_arrival = null;
+        public long? active_route_km_to_arrival = null;
+        public double? active_route_minutes_to_arrival = null;
+        public double? active_route_traffic_minutes_delay = null;
+        public double? active_route_latitude = null;
+        public double? active_route_longitude = null;
+
         public string current_json = "";
         private DateTime lastJSONwrite = DateTime.MinValue;
         Car car;
@@ -193,7 +201,14 @@ namespace TeslaLogger
                    { "display_name", car.DisplayName},
                    { "heading", heading},
                    { "software_update_status", software_update_status },
-                   { "software_update_version" , software_update_version }
+                   { "software_update_version" , software_update_version },
+                   { "active_route_destination" , active_route_destination },
+                   { "active_route_energy_at_arrival" , active_route_energy_at_arrival },
+                   { "active_route_minutes_to_arrival" , active_route_minutes_to_arrival },
+                   { "active_route_traffic_minutes_delay" , active_route_traffic_minutes_delay },
+                   { "active_route_latitude" , active_route_latitude },
+                   { "active_route_longitude" , active_route_longitude }
+
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;

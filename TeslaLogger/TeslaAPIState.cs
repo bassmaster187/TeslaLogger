@@ -832,6 +832,45 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+
+                    try
+                    {
+                        if (r2.ContainsKey("active_route_destination"))
+                            car.CurrentJSON.active_route_destination = r2["active_route_destination"].ToString();
+                        else
+                            car.CurrentJSON.active_route_destination = null;
+
+                        if (r2.ContainsKey("active_route_energy_at_arrival"))
+                            car.CurrentJSON.active_route_energy_at_arrival = (long)r2["active_route_energy_at_arrival"];
+                        else
+                            car.CurrentJSON.active_route_energy_at_arrival = null;
+
+                        if (r2.ContainsKey("active_route_minutes_to_arrival"))
+                            car.CurrentJSON.active_route_minutes_to_arrival = (double)r2["active_route_minutes_to_arrival"];
+                        else
+                            car.CurrentJSON.active_route_minutes_to_arrival = null;
+
+                        if (r2.ContainsKey("active_route_traffic_minutes_delay"))
+                            car.CurrentJSON.active_route_traffic_minutes_delay = (double)r2["active_route_traffic_minutes_delay"];
+                        else
+                            car.CurrentJSON.active_route_traffic_minutes_delay = null;
+
+                        if (r2.ContainsKey("active_route_latitude"))
+                            car.CurrentJSON.active_route_latitude = (double)r2["active_route_latitude"];
+                        else
+                            car.CurrentJSON.active_route_latitude = null;
+
+                        if (r2.ContainsKey("active_route_longitude"))
+                            car.CurrentJSON.active_route_longitude = (double)r2["active_route_longitude"];
+                        else
+                            car.CurrentJSON.active_route_longitude = null;
+                    }
+                    catch (Exception ex)
+                    {
+                         ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("Exception", ex);
+                    }
+
                     return true;
                 }
             }
