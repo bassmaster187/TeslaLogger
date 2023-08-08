@@ -164,7 +164,19 @@ else
 				else
 					str += jsonData["power"] + " <?php t("PS"); ?>";
 
-				$('#car_status').text(str);
+				if (jsonData["active_route_destination"])
+				{
+					var destination = encodeHTML(jsonData["active_route_destination"]);
+					str += "<br>"+"To: " + destination;
+					str += "<br>"+"In: " + Math.round(Number(jsonData["active_route_minutes_to_arrival"])) +  " min / " + jsonData["active_route_energy_at_arrival"]+"% SOC";
+
+					if (jsonData["active_route_traffic_minutes_delay"] != "0.0")
+					{
+						str += "<br>"+"Delay:" + jsonData["active_route_traffic_minutes_delay"] + " min";
+					}
+				}
+
+				$('#car_status').html(str);
 
 				updateSMT(jsonData);
 			}
@@ -285,6 +297,13 @@ else
 			marker = L.marker(p);
 			marker.addTo(map);
 		});
+	}
+
+	function encodeHTML(dirtyString) {
+		var container = document.createElement('div');
+		var text = document.createTextNode(dirtyString);
+		container.appendChild(text);
+		return container.innerHTML; // innerHTML will be a xss safe string
 	}
 
 	function hideSMT()
