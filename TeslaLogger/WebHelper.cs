@@ -1,26 +1,27 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Exceptionless;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Runtime.Caching;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Collections;
-using System.Reflection;
-using Exceptionless;
-using Newtonsoft.Json;
 using System.Web;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
-using System.Globalization;
 using static TeslaLogger.Car;
 
 namespace TeslaLogger
@@ -3103,6 +3104,9 @@ namespace TeslaLogger
         Thread streamThread = null;
         public void StartStreamThread()
         {
+            if (File.Exists("DONTUSESTREAMINGAPI"))
+                return;
+
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
