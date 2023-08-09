@@ -160,10 +160,22 @@ namespace TeslaLogger
                 car.GetTeslaAPIState().GetInt("rd_window", out int rd_window);
                 car.GetTeslaAPIState().GetInt("rp_window", out int rp_window);
 
+                car.GetTeslaAPIState().GetInt("pf", out int pf);
+                car.GetTeslaAPIState().GetInt("pr", out int pr);
+                car.GetTeslaAPIState().GetInt("df", out int df);
+                car.GetTeslaAPIState().GetInt("dr", out int dr);
+
                 car.GetTeslaAPIState().GetInt("ft", out int frunk);
                 car.GetTeslaAPIState().GetInt("rt", out int trunk);
 
+                car.GetTeslaAPIState().GetBool("locked", out bool locked);
+
                 int open_windows = fd_window + fp_window + rd_window + rp_window;
+                int open_doors = 
+                    pf > 0 ? 1 :0 
+                    + pr > 0 ? 1 : 0
+                    + df > 0 ? 1 : 0
+                    + dr > 0 ? 1 : 0;
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
@@ -219,8 +231,10 @@ namespace TeslaLogger
                    { "active_route_latitude" , active_route_latitude },
                    { "active_route_longitude" , active_route_longitude },
                    { "open_windows" , open_windows},
+                   { "open_doors" , open_doors},
                    { "frunk" , frunk},
-                   { "trunk" , trunk}
+                   { "trunk" , trunk},
+                   { "locked" , locked}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;
