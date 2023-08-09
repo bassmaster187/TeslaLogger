@@ -155,6 +155,16 @@ namespace TeslaLogger
                 car.GetTeslaAPIState().GetString("software_update.status", out string software_update_status);
                 car.GetTeslaAPIState().GetString("software_update.version", out string software_update_version);
 
+                car.GetTeslaAPIState().GetInt("fd_window", out int fd_window);
+                car.GetTeslaAPIState().GetInt("fp_window", out int fp_window);
+                car.GetTeslaAPIState().GetInt("rd_window", out int rd_window);
+                car.GetTeslaAPIState().GetInt("rp_window", out int rp_window);
+
+                car.GetTeslaAPIState().GetInt("ft", out int frunk);
+                car.GetTeslaAPIState().GetInt("rt", out int trunk);
+
+                int open_windows = fd_window + fp_window + rd_window + rp_window;
+
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
                    { "charging", current_charging},
@@ -207,8 +217,10 @@ namespace TeslaLogger
                    { "active_route_minutes_to_arrival" , active_route_minutes_to_arrival },
                    { "active_route_traffic_minutes_delay" , active_route_traffic_minutes_delay },
                    { "active_route_latitude" , active_route_latitude },
-                   { "active_route_longitude" , active_route_longitude }
-
+                   { "active_route_longitude" , active_route_longitude },
+                   { "open_windows" , open_windows},
+                   { "frunk" , frunk},
+                   { "trunk" , trunk}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;

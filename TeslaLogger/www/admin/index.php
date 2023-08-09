@@ -281,6 +281,33 @@ else
 				$("#SoftwareUpdateRow").hide();
 			}
 
+			if (jsonData["open_windows"] > 0)
+				$("#window_open").show();
+			else
+				$("#window_open").hide();
+
+			if (jsonData["frunk"] > 0)
+				$("#frunk_open").show();
+			else
+				$("#frunk_open").hide();
+
+			if (jsonData["trunk"] > 0)
+				$("#trunk_open").show();
+			else
+				$("#trunk_open").hide();
+
+			if (jsonData["open_doors"] > 0)
+				$("#door_open").show();
+			else
+				$("#door_open").hide();
+
+			if (jsonData["locked"])
+				$("#unlocked").hide();
+			else
+				$("#unlocked").show();
+
+				
+
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
 
 			if (!mapInit)
@@ -440,7 +467,15 @@ function ShowInfo()
   </div>
   <div style="float:left;">
   <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle">
+	  	<?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span>
+	  		<img id="window_open" class="caricons" src="img/window_open.png" title="Open Window">
+			<img id="frunk_open"class="caricons" src="img/frunk_open.png" title="Frunk Open">
+			<img id="trunk_open"class="caricons" src="img/trunk_open.png" title="Trunk Open">
+			<img id="door_open"class="caricons" src="img/door_open.png" title="Door Open">
+			<img id="unlocked"class="caricons" src="img/unlocked.png" title="Unlocked">
+		</td>
+	  </thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>

@@ -60,6 +60,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
  select {height: 35px;}
 
+ .caricons {
+	float: right; 
+	height: 28px; 
+	margin-right: 4px;
+	display: none;
+ }
+
  .TT {    
 	padding-top: 9px;
 	padding-bottom: 8px;}
