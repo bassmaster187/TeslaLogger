@@ -242,6 +242,16 @@ namespace TeslaLogger
             return false;
         }
 
+        public bool HasValue(string name)
+        {
+            if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool GetBool(string name, out bool value, int maxage = 0)
         {
             lock (TeslaAPIStateLock)

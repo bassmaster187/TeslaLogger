@@ -151,24 +151,28 @@ namespace TeslaLogger
                     duration = 0;
                 }
 
-                car.GetTeslaAPIState().GetBool("charge_port_door_open", out current_charge_port_door_open);
-                car.GetTeslaAPIState().GetString("software_update.status", out string software_update_status);
-                car.GetTeslaAPIState().GetString("software_update.version", out string software_update_version);
+                var apistate = car.GetTeslaAPIState();
 
-                car.GetTeslaAPIState().GetInt("fd_window", out int fd_window);
-                car.GetTeslaAPIState().GetInt("fp_window", out int fp_window);
-                car.GetTeslaAPIState().GetInt("rd_window", out int rd_window);
-                car.GetTeslaAPIState().GetInt("rp_window", out int rp_window);
+                apistate.GetBool("charge_port_door_open", out current_charge_port_door_open);
+                apistate.GetString("software_update.status", out string software_update_status);
+                apistate.GetString("software_update.version", out string software_update_version);
 
-                car.GetTeslaAPIState().GetInt("pf", out int pf);
-                car.GetTeslaAPIState().GetInt("pr", out int pr);
-                car.GetTeslaAPIState().GetInt("df", out int df);
-                car.GetTeslaAPIState().GetInt("dr", out int dr);
+                apistate.GetInt("fd_window", out int fd_window);
+                apistate.GetInt("fp_window", out int fp_window);
+                apistate.GetInt("rd_window", out int rd_window);
+                apistate.GetInt("rp_window", out int rp_window);
 
-                car.GetTeslaAPIState().GetInt("ft", out int frunk);
-                car.GetTeslaAPIState().GetInt("rt", out int trunk);
+                apistate.GetInt("pf", out int pf);
+                apistate.GetInt("pr", out int pr);
+                apistate.GetInt("df", out int df);
+                apistate.GetInt("dr", out int dr);
 
-                car.GetTeslaAPIState().GetBool("locked", out bool locked);
+                apistate.GetInt("ft", out int frunk);
+                apistate.GetInt("rt", out int trunk);
+
+                bool locked = true;
+                if (apistate.HasValue("locked")) // after restart the locked state is false, that tends to confuse
+                    apistate.GetBool("locked", out locked);
 
                 int open_windows = fd_window + fp_window + rd_window + rp_window;
                 int open_doors = 
