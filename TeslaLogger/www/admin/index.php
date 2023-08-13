@@ -27,7 +27,7 @@ else
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=2">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=3">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -270,11 +270,13 @@ else
 			{
 				$("#SoftwareUpdateRow").show();
 				var temp = jsonData["software_update_status"];
+				temp = temp.replaceAll("_", " ");
+				temp = encodeHTML(temp);
 
 				if (jsonData["software_update_version"].length > 0)
-					temp += ":" + jsonData["software_update_version"];
+					temp += ": " + "<a href=\"https://www.notateslaapp.com/software-updates/version/"+ jsonData["software_update_version"]+"/release-notes\">"+ jsonData["software_update_version"]+ "</a>";
 
-				$("#software_update").text(temp);
+				$("#software_update").html(temp);
 			}
 			else
 			{
