@@ -202,7 +202,7 @@ namespace TeslaLogger
             }
         }
 
-        private DataTable TripToCoords(TripRequest request)
+        private static DataTable TripToCoords(TripRequest request)
         {
             DataTable dt = new DataTable();
             int CarID = int.MinValue;
@@ -423,7 +423,7 @@ ORDER BY
             return sb.ToString();
         }
 
-        internal void CreateChargingMapOnChargingCompleted(int CarID)
+        internal static void CreateChargingMapOnChargingCompleted(int CarID)
         {
             try
             {
@@ -469,7 +469,7 @@ WHERE
             }
         }
 
-        internal void CreateParkingMapFromPosid(int posID)
+        internal static void CreateParkingMapFromPosid(int posID)
         {
             try
             {
