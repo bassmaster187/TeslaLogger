@@ -41,7 +41,7 @@ namespace TeslaLogger
         private static string _defaultcarid = "";
         internal static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         internal static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
-        internal static bool? _StreamingPos = null;
+        internal static bool? _StreamingPos; // defaults to null;
 
         internal static bool UseNearbySuCService()
         {
@@ -1805,7 +1805,7 @@ WHERE
                     FileInfo fileInfo = new FileInfo(path);
                     HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
                     {
                         using (FileStream outputFileStream = File.Create(fileInfo.FullName))
                         {

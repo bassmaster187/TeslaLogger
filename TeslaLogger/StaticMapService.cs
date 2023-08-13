@@ -20,8 +20,8 @@ namespace TeslaLogger
             private MapMode mode = MapMode.Regular;
             private MapSpecial special = MapSpecial.None;
             private MapType type = MapType.Trip;
-            private int width = 0;
-            private int height = 0;
+            private int width; // defaults to 0;
+            private int height; // defaults to 0;
 
             internal MapType Type { get => type; set => type = value; }
             internal int Width { get => width; set => width = value; }
@@ -65,8 +65,8 @@ namespace TeslaLogger
             public double Lng { get; }
         }
 
-        private static StaticMapService _StaticMapService = null;
-        private static StaticMapProvider _StaticMapProvider = null;
+        private static StaticMapService _StaticMapService; // defaults to null;
+        private static StaticMapProvider _StaticMapProvider; // defaults to null;
 
         private readonly ConcurrentQueue<Request> queue = new ConcurrentQueue<Request>();
 
