@@ -1510,7 +1510,7 @@ namespace TeslaLogger
                         {
                             try
                             {
-                                Logfile.Log("Housekeeping: delete file " + fi.Name);
+                                Logfile.Log($"Housekeeping: (rule: file older than {keepDays} days) delete file " + fi.Name);
                                 fi.Delete();
                                 filesFoundForDeletion = true;
                                 countDeletedFiles++;
@@ -1522,11 +1522,31 @@ namespace TeslaLogger
                             }
                         }
                     }
+
+                    // finally make sure that we have at least 1GB free
+                    int retries = 0;
+                    while (FreeDiskSpaceMB() < 1024 && retries < 32)
+                    {
+                        retries++;
+                        FileInfo fi = di.GetFiles().OrderBy(p => p.LastWriteTime).First<FileInfo>();
+                        try
+                        {
+                            Logfile.Log("Housekeeping: (rule: at least 1024mb free) delete file " + fi.Name);
+                            fi.Delete();
+                            filesFoundForDeletion = true;
+                            countDeletedFiles++;
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
                 }
             }
             if (filesFoundForDeletion)
             {
-                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory Free Disk Space: {FreeDiskSpaceMB()} MB");
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory, Free Disk Space now: {FreeDiskSpaceMB()} MB");
             }
         }
 
@@ -1560,7 +1580,6 @@ WHERE
   TABLE_SCHEMA = @dbname
   AND TABLE_TYPE = 'BASE TABLE'", con))
                 {
-                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
                     cmd.Parameters.AddWithValue("@dbname", DBHelper.Database);
                     try
                     {
@@ -1571,7 +1590,6 @@ WHERE
                         }
                     }
                     catch (Exception) { }
-
                 }
             }
         }
