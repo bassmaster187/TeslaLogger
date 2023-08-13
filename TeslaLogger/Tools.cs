@@ -1619,6 +1619,7 @@ WHERE
             else
             {
                 // wait another hour to try again
+                Logfile.Log("Housekeeping: at least one car is not asleep, try again in one hour");
                 CreateMemoryCacheItem(1);
             }
         }
