@@ -4357,7 +4357,7 @@ a.post-thumbnail:hover {
 	.b1{ float:left;}
 	.HeaderL { width: unset;}
 	.HeaderT { width: -webkit-fill-available;}
-	.THeader { width: -webkit-fill-available;}
+	.THeader { width: 96vw;}
 	#displayname {display: contents;}
 }
 
