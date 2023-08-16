@@ -26,7 +26,13 @@ docker-compose build
 docker-compose up -d
 ```
 
-after a minute or two, everything should be ready. On some slow machines or NAS, that could take more than 10 Minutes. Especially the database may take longer, so don't give up, if Teslalogger can't connect to the DB at the first startup. 
+after a minute or two, everything should be ready. **On some slow machines or NAS, that could take more than 10 Minutes. I even heard about 30 Minutes.** Especially the database may take longer, so don't give up, if Teslalogger can't connect to the DB at the first startup. 
+
+You have to wait untill you can read this in your mariadb container logs:
+```
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/sqlschema.sql
+```
+
 
 Try to connect to Grafana with you favorite browser:
 http://localhost:3000 (admin/teslalogger)
