@@ -530,6 +530,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisLabel": "km/h",
             "axisPlacement": "auto",
             "fillOpacity": 80,
             "gradientMode": "none",
@@ -549,15 +550,31 @@
           "decimals": 0,
           "mappings": [],
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "light-green",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 60
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "#EF843C",
+                "value": 150
+              },
+              {
+                "color": "#E24D42",
+                "value": 200
               }
             ]
           },
-          "unit": "velocitykmh"
+          "unit": "none"
         },
         "overrides": [
           {
@@ -573,6 +590,10 @@
               {
                 "id": "decimals",
                 "value": 1
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": ""
               }
             ]
           }
@@ -588,7 +609,7 @@
       "options": {
         "barRadius": 0,
         "barWidth": 0.97,
-        "colorByField": "total",
+        "colorByField": "kmh",
         "fullHighlight": false,
         "groupWidth": 0.7,
         "legend": {
@@ -601,7 +622,7 @@
         "showValue": "auto",
         "stacking": "none",
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         },
         "xField": "kmh",
@@ -618,7 +639,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT speed div 10 * 10 as kmh, count(*) / (select count(*) from pos where $__timeFilter(datum) and CarID = $Car) as total\r\nFROM pos \r\nwhere $__timeFilter(datum) and CarID = $Car\r\ngroup by speed div 10 ",
+          "rawSql": "SELECT speed div 10 * 10 as kmh, count(*) / (select count(*) from pos where $__timeFilter(datum) and CarID = $Car) as total\r\nFROM pos \r\nwhere $__timeFilter(datum) and CarID = $Car\r\ngroup by speed div 10 \r\nhaving kmh >= 0",
           "refId": "A",
           "sql": {
             "columns": [
@@ -710,6 +731,6 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 150
+  "version": 151,
   "weekStart": ""
 }
