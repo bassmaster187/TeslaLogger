@@ -148,6 +148,8 @@ Supercharger DE-Achern, 48.6413, 8.03774
 Supercharger DE-Aichstetten, 47.880376, 10.040434, 7
 Supercharger DE-Aichstetten, 47.880299, 10.04052, 10
 Supercharger-V3 DE-Alsfeld, 50.734003,9.241448,40
+Supercharger-V3 DE-Augsburg,48.398906,10.868047,30
+Supercharger-V3 DE-Augsburg,48.398938,10.868306,30
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
@@ -186,8 +188,8 @@ Supercharger-V3 DE-Frechen, 50.917843, 6.83323183, 20
 Supercharger-V3 DE-Feucht, 49.36501,11.20753
 Supercharger-V3 DE-Füssen, 47.567924, 10.675875, 18
 Supercharger DE-Geiselwind, 49.769178, 10.470429, 15
-Supercharger-V3 DE-Geiselwind 49.769544, 10.470236, 30
-Supercharger-V3 DE-Geiselwind 49.769512, 10.470241, 30
+Supercharger-V3 DE-Geiselwind, 49.769526,10.470298, 50
+Supercharger-V3 DE-Geiselwind, 49.769742,10.470259, 50
 Supercharger-V3 DE-Gelnhausen,50.188644,9.186141
 Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gensingen, 49.90202, 7.929759
@@ -202,7 +204,7 @@ Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
 Supercharger-V3 DE-Hermsdorf, 50.889889,11.871397, 30
 Supercharger-V3 DE-Herrieden, 49.257951,10.501761
-Supercharger-V3 DE-Herzsprung, 53.067341,12.533227,20
+Supercharger-V3 DE-Herzsprung,53.067285,12.533197,20
 Supercharger DE-Herzsprung, 53.067341,12.533227,20
 Supercharger DE-Hilden, 51.191193,6.936986, 30
 Supercharger-V3 DE-Hilden, 51.19213, 6.935785, 10
@@ -231,6 +233,7 @@ Supercharger DE-Kamen, 51.5701781, 7.675317
 Supercharger-V3 DE-Kassel,51.313688,9.493689
 Supercharger DE-Kappel-Grafenhausen, 48.281347, 7.77755
 Supercharger-V3 DE-Kaltenkirchen,53.846035,9.936263,20
+Supercharger-V3 DE-Kerpen,50.897831,6.682291
 Supercharger-V3 DE-Kirchheim,50.834803,9.574426, 30
 Supercharger-V3 DE-Kleinostheim,49.9941,9.0705
 Supercharger-V3 DE-Knetzgau, 49.982399, 10.555616
@@ -289,6 +292,7 @@ Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
 Supercharger-V3 DE-Pieding, 47.764000,12.904551, 15
 Supercharger-V3 DE-Plauen, 50.497406,12.170422
+Supercharger-V3 DE-Plattling,48.7887,12.89745
 Supercharger-V3 DE-Posthausen, 53.057578,9.165257
 Supercharger DE-Rade, 53.369702, 9.802181
 Supercharger DE-Rauenberg, 49.273932, 8.695302
@@ -333,6 +337,7 @@ Supercharger DE-Wernberg-Köblitz, 49.532249, 12.134949, 8
 Supercharger DE-Wernberg-Köblitz, 49.53225, 12.1351, 7
 Supercharger DE-Wernberg-Köblitz, 49.532255,12.135223, 7
 Supercharger DE-Wertheim, 49.770559, 9.576456
+Supercharger-V3 DE-Wertheim-Almosenberg,49.772295,9.587571
 Supercharger-V3 DE-Wetzlar, 50.552762, 8.532845, 30
 Supercharger DE-Weyarn, 47.865307, 11.790695
 Supercharger DE-Wiesbaden, 50.0598477, 8.3451326
