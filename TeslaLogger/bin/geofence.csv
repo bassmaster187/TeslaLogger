@@ -151,6 +151,7 @@ Supercharger-V3 DE-Alsfeld, 50.734003,9.241448,40
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger DE-Beelitz, 52.266803, 12.922467
+Supercharger-V3 DE-Bergkamen,51.649452,7.671108,20
 Supercharger-V3 DE-Bensheim, 49.672353, 8.6022525, 22
 Supercharger-V3 DE-Berlin - EUREF-Campus, 52.4808984, 13.3558539
 Supercharger-V3 DE-Berlin Parkhaus Gleisdreieck, 52.501800,13.373985
@@ -193,10 +194,11 @@ Supercharger-V3 DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gensingen, 49.90202, 7.929759
 Supercharger DE-Gramschatzer Wald, 49.91202, 10.00176, 30
 Supercharger-V3 DE-Gramschatzer Wald, 49.912304,10.000582, 30
+Supercharger-V3 DE-Greding,49.041979,11.342705,20
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
-Supercharger-V3 DE-Hannover, 52.423275,9.835039, 12
+Supercharger-V3 DE-Hannover, 52.423275,9.835039, 20
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
@@ -251,8 +253,10 @@ Supercharger DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
 Supercharger DE-Malsfeld, 51.0872578, 9.485137, 20
+Supercharger-V3 DE-Merklingen,48.516376,9.757564
 Supercharger DE-Moers, 51.441816, 6.611833
 Supercharger DE-Mogendorf, 50.4827719, 7.750309
+Supercharger-V3 DE-Montabaur,50.443591,7.830885,20
 Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger-V3 DE-Murr, 48.956119,9.245459
 Supercharger DE-Mücke, 50.645442, 8.989816
@@ -322,6 +326,7 @@ Supercharger-V3 DE-Vaterstetten, 48.146953,11.790152
 Supercharger-V3 DE-Vaterstetten, 48.146719,11.790205
 Supercharger-V3 DE-Vaterstetten, 48.146472,11.790255
 Supercharger-V3 DE-Vaterstetten, 48.146213,11.790329
+Supercharger-V3 DE-Viernheim - Rhein-Neckar-Zentrum,49.528083,8.565772,30
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger-V3 DE-Weibersbrunn, 49.934777,9.353755
 Supercharger DE-Weimar, 50.9342158, 11.289809
@@ -896,6 +901,7 @@ Supercharger SI-Kozina, 45.60492, 13.928521
 Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
 Supercharger SI-Maribor, 46.533005, 15.699246
+Supercharger-V3 SI-Žirovnica,46.40364,14.130519,20
 Supercharger SK-Bratislava, 48.132138, 17.108438
 Supercharger SK-Demänová, 49.054815, 19.579253
 Supercharger-V3 SK-Košice, 48.695151,21.235604
@@ -1518,6 +1524,7 @@ EnBW DE-Gera Bieblach, 50.8987583, 12.1001272
 EnBW DE-Gera Elsterdamm 5, 50.8681805, 12.07709
 EnBW DE-Giengen an der Brenz, 48.6176632, 10.252562
 EnBW DE-Greding West, 49.045512, 11.337622
+EnBW DE-Greding OMV,49.043871,11.349862,10
 EnBW DE-Großberg, 48.972829,12.065386
 EnBW DE-Göttingen West, 51.494746,9.876191
 EnBW DE-Igersheim, 49.486855,9.820828
@@ -2896,7 +2903,7 @@ DE Gerstetten Netto, 48.58969, 10.128094
 DE Hamburg Audi Wichert, 53.548799, 10.036493
 DE Hamburg Deichstr., 53.545081, 9.986616
 DE Hameln Bahnhof, 52.101277,9.374308
-DE Hannover A2 Center, 52.42332, 9.835401
+DE Hannover A2 Center, 52.42332, 9.835401, 10
 DE Hannover-Lahe, 52.419121, 9.832369, 20
 DE Hannover Finca & Bar Celona, 52.414286, 9.642024, 20
 DE Hannover Messeschnellweg Wes,52.323175,9.814137
