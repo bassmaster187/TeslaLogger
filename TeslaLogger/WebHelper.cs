@@ -1,61 +1,63 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Exceptionless;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Runtime.Caching;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Collections;
-using System.Reflection;
-using Exceptionless;
-using Newtonsoft.Json;
 using System.Web;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
-using System.Globalization;
 using static TeslaLogger.Car;
 
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    public class WebHelper
+    public class WebHelper : IDisposable
     {
         public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
 
+        private double lastOdometerKM; // defaults to 0;
         internal string Tesla_token = "";
         internal string Tesla_id = "";
         internal string Tesla_vehicle_id = "";
         internal string Tesla_Streamingtoken = "";
         internal string option_codes = "";
         internal string vehicle_config = "";
-        internal bool is_sentry_mode = false;
+        internal bool is_sentry_mode; // defaults to false;
         internal string fast_charger_brand = "";
         internal string fast_charger_type = "";
         internal string conn_charge_cable = "";
-        internal bool fast_charger_present = false;
+        internal bool fast_charger_present; // defaults to false;
         //private bool stopStreaming = false;
         private string elevation = "";
         private DateTime elevation_time = DateTime.Now;
         internal DateTime lastTokenRefresh = DateTime.Now;
         internal DateTime lastIsDriveTimestamp = DateTime.Now;
         internal DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
-        private static int MapQuestCount = 0;
-        private static int NominatimCount = 0;
+        private static int MapQuestCount; // defaults to 0;
+        private static int NominatimCount; // defaults to 0;
         string cacheGUID = Guid.NewGuid().ToString();
 
         string authHost = "https://auth.tesla.com";
         CookieContainer tokenCookieContainer;
 
-        private bool _drivingOrChargingByStream = false;
+        private bool _drivingOrChargingByStream; // defaults to false;
 
         const string TESLA_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
         const string TESLA_CLIENT_SECRET = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
@@ -67,7 +69,7 @@ namespace TeslaLogger
         internal ConcurrentDictionary<string, string> TeslaAPI_Commands = new ConcurrentDictionary<string, string>();
         internal Car car;
 
-        bool getTokenDebugVerbose = false;
+        bool getTokenDebugVerbose; // defaults to false, only needed for debugging
         private double last_latitude_streaming = double.NaN;
         private double last_longitude_streaming = double.NaN;
         private decimal last_power_streaming = 0;
@@ -75,31 +77,53 @@ namespace TeslaLogger
         private double battery_range2ideal_battery_range = 0.8000000416972936;
 
         internal HttpClient httpclient_teslalogger_de = new HttpClient();
-        internal static HttpClient httpClientForAuthentification;
-        internal static HttpClient httpClientABRP = null;
-        internal static HttpClient httpClientSuCBingo = null;
-        internal HttpClient httpclientTeslaAPI = null;
-        internal HttpClient httpclientTeslaChargingSites = null;
-        internal HttpClient httpclientgetChargingHistoryV2 = null;
+        internal HttpClient httpClientForAuthentification;
+        internal static HttpClient httpClientABRP; // defaults to null;
+        internal HttpClient httpClientSuCBingo; // defaults to null;
+        internal HttpClient httpclientTeslaAPI; // defaults to null;
+        internal HttpClient httpclientTeslaChargingSites; // defaults to null;
+        internal HttpClient httpclientgetChargingHistoryV2; // defaults to null;
         internal string httpclientTeslaChargingSitesToken = "";
         internal string httpclientgetChargingHistoryV2Token = "";
         internal static object httpClientLock = new object();
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Dispose managed resources.
+                httpclient_teslalogger_de.Dispose();
+                httpClientForAuthentification.Dispose();
+                httpClientABRP.Dispose();
+                httpClientSuCBingo.Dispose();
+                httpclientTeslaAPI.Dispose();
+                httpclientTeslaChargingSites.Dispose();
+                httpclientgetChargingHistoryV2.Dispose();
+            }
+            // Free native resources.
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         DateTime lastABRPActive = DateTime.MinValue;
 
-        internal static int ABRPtimeouts = 0;
+        internal static int ABRPtimeouts; // defaults to 0;
 
-        bool useCaptcha = false;
+        bool useCaptcha; // defaults to false;
 
         static Dictionary<string, Account> vehicles2Account = new Dictionary<string, Account>();
         static int nextAccountId = 1;
 
         object getAllVehiclesLock = new object();
 
-        public int nearbySuCServiceFail = 0;
-        private int getChargingHistoryV2Fail = 0;
-        public int nearbySuCServiceOK = 0;
-        private int getChargingHistoryV2OK = 0;
+        internal int nearbySuCServiceFail; // defaults to 0;
+        private int getChargingHistoryV2Fail; // defaults to 0;
+        internal int nearbySuCServiceOK; // defaults to 0;
+        private int getChargingHistoryV2OK; // defaults to 0;
 
         static WebHelper()
         {
@@ -252,7 +276,7 @@ namespace TeslaLogger
             return result.ToString();
         }
 
-        string GetNameValue(string text, string name)
+        static string GetNameValue(string text, string name)
         {
             Regex x = new Regex("name=\\\"" + name + "\\\".+value=\\\"(.+)\\\"");
             var m = x.Match(text);
@@ -2010,8 +2034,10 @@ namespace TeslaLogger
             }
         }
 
-        private int unknownStateCounter = 0;
+        private int unknownStateCounter; // defaults to 0;
+#pragma warning disable CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
         public static object isOnlineLock = new object();
+#pragma warning restore CA2211 // Nicht konstante Felder dürfen nicht sichtbar sein
 
         public async Task<string> IsOnline(bool returnOnUnauthorized = false)
         {
@@ -3100,9 +3126,12 @@ namespace TeslaLogger
             }
         }
 
-        Thread streamThread = null;
+        Thread streamThread; // defaults to null;
         public void StartStreamThread()
         {
+            if (File.Exists("DONTUSESTREAMINGAPI"))
+                return;
+
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
@@ -3346,10 +3375,10 @@ namespace TeslaLogger
             
         }
 
-        string lastStreamingAPIShiftState = null;
+        string lastStreamingAPIShiftState; // defaults to null;
         DateTime lastStreamingAPILog = DateTime.UtcNow;
         DateTime lastStreamingAPIData = DateTime.UtcNow;
-        int vehicleDisconnectedCounter = 0;
+        int vehicleDisconnectedCounter; // defaults to 0;
 
 
         private void StreamDataUpdate(string data)
@@ -4149,8 +4178,6 @@ DESC", con))
             return -1;
         }
 
-        private double lastOdometerKM = 0;
-
         internal async Task<double> GetOdometerAsync()
         {
             string resultContent = "";
@@ -4563,6 +4590,7 @@ DESC", con))
                     car.webhelper.getChargingHistoryV2Fail++;
                     throw new Exception("GetChargingHistoryV2: " + result.StatusCode.ToString() + " CarState: " + car.GetCurrentState().ToString() + " (OK: " + car.webhelper.getChargingHistoryV2OK + " - Fail: " + car.webhelper.getChargingHistoryV2Fail + ")");
                 }
+                getChargingHistoryV2OK++;
                 return resultContent;
             }
             catch (Exception ex)
@@ -4649,7 +4677,7 @@ DESC", con))
         }
 
 
-        public string GetCachedRollupData()
+        public static string GetCachedRollupData()
         {
             /*
             string resultContent = "";
@@ -4720,7 +4748,7 @@ DESC", con))
         }
 
         private DateTime lastTaskerWakeupfile = DateTime.Today;
-        private volatile bool stopStreaming = false;
+        private volatile bool stopStreaming; // defaults to false;
 
         public bool TaskerWakeupfile(bool force = false)
         {

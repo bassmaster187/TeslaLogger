@@ -27,7 +27,7 @@ namespace TeslaLogger
         }
 
         private static WebServer webServer;
-        private static bool OVMSStarted = false;
+        private static bool OVMSStarted; // defaults to false;
 
         private static void Main(string[] args)
         {
@@ -223,7 +223,7 @@ namespace TeslaLogger
             {
                 Thread threadTLStats = new Thread(() =>
                 {
-                    TLStats.GetInstance().run();
+                    TLStats.run();
                 })
                 {
                     Name = "TLStatsThread"

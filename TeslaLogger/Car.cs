@@ -21,7 +21,7 @@ namespace TeslaLogger
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
 
-        private Address lastRacingPoint = null;
+        private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
 
         internal enum TeslaState
@@ -52,13 +52,13 @@ namespace TeslaLogger
         internal DateTime GetLastTryTokenRefresh() { return lastTryTokenRefresh; }
         private string lastSetChargeLimitAddressName = string.Empty;
 
-        private bool goSleepWithWakeup = false;
+        private bool goSleepWithWakeup; // defaults to false;
         internal bool GetGoSleepWithWakeup() { return goSleepWithWakeup; }
         private double odometerLastTrip;
         internal double GetOdometerLastTrip() { return odometerLastTrip; }
-        private bool highFrequencyLogging = false;
+        private bool highFrequencyLogging; // defaults to false;
         internal bool GetHighFrequencyLogging() { return highFrequencyLogging; }
-        private int highFrequencyLoggingTicks = 0;
+        private int highFrequencyLoggingTicks; // defaults to 0;
         internal int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private int highFrequencyLoggingTicksLimit = 100;
         internal int GetHighFrequencyLoggingTicksLimit() { return highFrequencyLoggingTicksLimit; }
@@ -83,10 +83,10 @@ namespace TeslaLogger
         internal int CarInDB;
 
         private string modelName;
-        private bool raven = false;
+        private bool raven; // defaults to false;
         private double _wh_TR = 0.190052356;
-        private double dB_Wh_TR = 0;
-        private int dB_Wh_TR_count = 0;
+        private double dB_Wh_TR; // defaults to 0;
+        private int dB_Wh_TR_count; // defaults to 0;
 
         private string car_type = "";
         private string car_special_type = "";
@@ -101,7 +101,7 @@ namespace TeslaLogger
         private string vin = "";
 
         private string aBRP_token = "";
-        private int aBRP_mode = 0;
+        private int aBRP_mode; // defaults to 0;
 
         private string sucBingo_user = "";
         private string sucBingo_apiKey = "";
@@ -172,19 +172,19 @@ namespace TeslaLogger
         private string captcha_String;
         private string reCaptcha_Code;
 
-        internal int LoginRetryCounter = 0;
-        private double sumkm = 0;
-        private double avgkm = 0;
-        private double kwh100km = 0;
-        private double avgsocdiff = 0;
-        private double maxkm = 0;
-        private double carVoltageAt50SOC = 0;
+        internal int LoginRetryCounter; // defaults to 0;
+        private double sumkm; // defaults to 0;
+        private double avgkm; // defaults to 0;
+        private double kwh100km; // defaults to 0;
+        private double avgsocdiff; // defaults to 0;
+        private double maxkm; // defaults to 0;
+        private double carVoltageAt50SOC; // defaults to 0;
 
         private StringBuilder passwortinfo = new StringBuilder();
-        private int year = 0;
-        private bool aWD = false;
-        private bool mIC = false;
-        private bool mIG = false;
+        private int year; // defaults to 0;
+        private bool aWD; // defaults to false;
+        private bool mIC; // defaults to false;
+        private bool mIG; // defaults to false;
         private string motor = "";
         internal bool waitForMFACode;
         internal bool waitForRecaptcha;
@@ -1049,7 +1049,7 @@ namespace TeslaLogger
         }
 
 
-        private void CheckNewCredentials()
+        private static void CheckNewCredentials()
         {
             /* TODO
             try

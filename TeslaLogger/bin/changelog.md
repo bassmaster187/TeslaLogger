@@ -1,3 +1,7 @@
+# Version 1.54.26
+- Vehicle state icons in admin panel. e.g. open window, unlocked car, open doors, open frunk / trunk
+- Destination route will be displayed in admin panel with ETA and SOC at destination.
+
 # Version 1.54.25
 - Bugfix in upgrade zu Debian Buster
 
