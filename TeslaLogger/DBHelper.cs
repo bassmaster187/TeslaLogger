@@ -3428,8 +3428,8 @@ WHERE
                     UpdateTripElevation(StartPos, MaxPosId, car, " (Task)");
 
                     StaticMapService.GetSingleton().Enqueue(car.CarInDB, StartPos, MaxPosId, 0, 0, StaticMapProvider.MapMode.Dark, StaticMapProvider.MapSpecial.None);
-                    StaticMapService.GetSingleton().CreateParkingMapFromPosid(StartPos);
-                    StaticMapService.GetSingleton().CreateParkingMapFromPosid(MaxPosId);
+                    StaticMapService.CreateParkingMapFromPosid(StartPos);
+                    StaticMapService.CreateParkingMapFromPosid(MaxPosId);
                 }
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
@@ -5988,7 +5988,7 @@ WHERE
             try
             {
                 car.Log($"CloseChargingState id:{openChargingState}");
-                StaticMapService.GetSingleton().CreateChargingMapOnChargingCompleted(car.CarInDB);
+                StaticMapService.CreateChargingMapOnChargingCompleted(car.CarInDB);
                 int chargeID = GetMaxChargeid(out DateTime chargeEnd);
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {

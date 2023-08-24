@@ -28,7 +28,7 @@ namespace TeslaLogger
             return _tLStats;
         }
 
-        public void run()
+        public static void run()
         {
             try
             {
@@ -49,7 +49,7 @@ namespace TeslaLogger
             catch (Exception) { }
         }
 
-        internal string Dump()
+        internal static string Dump()
         {
             StringBuilder sb = new StringBuilder();
             _ = sb.Append($"TeslaLogger process statistics{Environment.NewLine}");

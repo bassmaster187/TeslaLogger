@@ -40,50 +40,50 @@ namespace TeslaLogger
 
         public DateTime current_trip_start = DateTime.MinValue;
         public DateTime current_trip_end = DateTime.MinValue;
-        public double current_trip_km_start = 0;
-        public double current_trip_km_end = 0;
-        public double current_trip_max_speed = 0;
-        public double current_trip_max_power = 0;
-        public double current_trip_start_range = 0;
-        public double current_trip_end_range = 0;
+        public double current_trip_km_start; // defaults to 0;
+        public double current_trip_km_end; // defaults to 0;
+        public double current_trip_max_speed; // defaults to 0;
+        public double current_trip_max_power; // defaults to 0;
+        public double current_trip_start_range; // defaults to 0;
+        public double current_trip_end_range; // defaults to 0;
         public double Wh_TR = 0.19;
 
-        public int current_trip_duration_sec = 0;
+        public int current_trip_duration_sec; // defaults to 0;
 
-        private double latitude = 0;
-        private double longitude = 0;
-        public int charge_limit_soc = 0;
-        public int heading = 0;
-        public double current_inside_temperature = 0;
-        public bool current_battery_heater = false;
-        public bool current_is_sentry_mode = false;
-        public bool current_is_preconditioning = false;
+        private double latitude; // defaults to 0;
+        private double longitude; // defaults to 0;
+        public int charge_limit_soc; // defaults to 0;
+        public int heading; // defaults to 0;
+        public double current_inside_temperature; // defaults to 0;
+        public bool current_battery_heater; // defaults to false;
+        public bool current_is_sentry_mode; // defaults to false;
+        public bool current_is_preconditioning; // defaults to false;
 
         public string current_country_code = "";
         public string current_state = "";
 
         public DateTime lastScanMyTeslaReceived = DateTime.MinValue;
-        public double? SMTCellTempAvg = null;
-        public double? SMTCellMinV = null;
-        public double? SMTCellAvgV = null;
-        public double? SMTCellMaxV = null;
-        public double? SMTCellImbalance = null;
-        public double? SMTBMSmaxCharge = null;
-        public double? SMTBMSmaxDischarge = null;
-        public double? SMTACChargeTotal = null;
-        public double? SMTDCChargeTotal = null;
-        public double? SMTNominalFullPack = null;
+        public double? SMTCellTempAvg; // defaults to null;
+        public double? SMTCellMinV; // defaults to null;
+        public double? SMTCellAvgV; // defaults to null;
+        public double? SMTCellMaxV; // defaults to null;
+        public double? SMTCellImbalance; // defaults to null;
+        public double? SMTBMSmaxCharge; // defaults to null;
+        public double? SMTBMSmaxDischarge; // defaults to null;
+        public double? SMTACChargeTotal; // defaults to null;
+        public double? SMTDCChargeTotal; // defaults to null;
+        public double? SMTNominalFullPack; // defaults to null;
 
-        public double? SMTSpeed = null;
-        public double? SMTBatteryPower = null;
+        public double? SMTSpeed; // defaults to null;
+        public double? SMTBatteryPower; // defaults to null;
 
-        public string active_route_destination = null;
-        public long? active_route_energy_at_arrival = null;
-        public long? active_route_km_to_arrival = null;
-        public double? active_route_minutes_to_arrival = null;
-        public double? active_route_traffic_minutes_delay = null;
-        public double? active_route_latitude = null;
-        public double? active_route_longitude = null;
+        public string active_route_destination; // defaults to null;
+        public long? active_route_energy_at_arrival; // defaults to null;
+        public long? active_route_km_to_arrival; // defaults to null;
+        public double? active_route_minutes_to_arrival; // defaults to null;
+        public double? active_route_traffic_minutes_delay; // defaults to null;
+        public double? active_route_latitude; // defaults to null;
+        public double? active_route_longitude; // defaults to null;
 
         public string current_json = "";
         private DateTime lastJSONwrite = DateTime.MinValue;
