@@ -200,6 +200,7 @@ Supercharger-V3 DE-Greding,49.041979,11.342705,20
 Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
+Supercharger-V3 DE-Hamburg-Wandsbek, 53.586773, 10.098058
 Supercharger-V3 DE-Hannover, 52.423275,9.835039, 20
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
@@ -376,6 +377,8 @@ Supercharger DK-Randers, 56.433685, 10.055412
 Supercharger DK-Rødekro, 55.067331, 9.361081, 20
 Supercharger DK-Rødekro, 55.068085, 9.360869, 20
 Supercharger DK-Slagelse, 55.387922, 11.361762
+Supercharger-V3 DK-Fredericia, 55.534407, 9.717122
+Supercharger-V3 DK-Taastrup-City 2, 55.642954, 12.2748194 
 Supercharger ES-Aguadulce, 37.256871, -4.986068
 Supercharger ES-Albacete, 39.134675, -2.039013
 Supercharger ES-Almaraz, 39.791255, -5.695668
@@ -864,8 +867,9 @@ Supercharger SE-Jäckvik, 66.39067, 16.964868
 Supercharger-V3 SE-Jokkmokk, 66.605774,19.824993
 Supercharger-V3 SE-Jönköping,57.772741,14.199840
 Supercharger SE-Kalmar, 56.673228, 16.321408
+Supercharger-V3 SE-Kalmar-Giraffen, 56.671493, 16.333901
 Supercharger SE-Karlstad, 59.381535, 13.467609
-Supercharger SE-Kristianstad, 56.023216, 14.11831
+Supercharger-V3 SE-Kristianstad, 56.02474, 14.116383
 Supercharger-V3 SE-Kristinehamn, 59.31478, 14.147392
 Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
