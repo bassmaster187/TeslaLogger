@@ -120,6 +120,8 @@ Supercharger-V3 CH-Landquart, 46.9661, 9.552652
 Supercharger CH-Lully, 46.8323911, 6.8590898
 Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
+Supercharger-V3 CH-Martigny, 46.127793, 7.060057, 10
+Supercharger-V3 CH-Martigny, 46.127706, 7.059860, 8
 Supercharger CH-Melide, 45.95423, 8.95051
 Supercharger CH-Monte Ceneri, 46.13924, 8.9070614
 Supercharger-V3 CH-Obfelden, 47.272009,8.437787, 26
@@ -176,6 +178,7 @@ Supercharger-V3 DE-Dasing,48.393731,11.070452
 Supercharger-V3 DE-Denkendorf,48.707,9.306556
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
 Supercharger-V3 DE-Eching,48.306431,11.634784
+Supercharger-V3 DE-Eimeldingen,47.626603,7.599543, 20
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
@@ -535,6 +538,8 @@ Supercharger FR-Rouen, 49.388964, 1.059818
 Supercharger FR-Rouvignies, 50.336704, 3.455931
 Supercharger FR-Rungis, 48.7544317, 2.3510298
 Supercharger FR-Saint-Brieuc, 48.493466, -2.7226299
+Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129633,6.087681,16
+Supercharger-V3 FR-Saint-Julien-en-Genevois,46.129901,6.087538,16
 Supercharger FR-Saintes, 45.7500261, -0.6616366
 Supercharger-V3 FR-Salaise-sur-Sanne,45.3271326,4.805307
 Supercharger-V3 FR-Sallanches,45.952671,6.628494
@@ -1811,7 +1816,7 @@ Ionity CH-Grauholz, 46.990174, 7.475976
 Ionity CH-Heidiland, 47.011751, 9.512371
 Ionity CH-Kemptthal, 47.449367, 8.700137
 Ionity CH-Lully, 46.832458, 6.859379
-Ionity CH-Martigny, 46.127822, 7.059829
+Ionity CH-Martigny, 46.127863, 7.059809, 10
 Ionity CH-Neuenkirch, 47.113372, 8.232328
 Ionity CZ-Beroun (dir. Prague), 49.95581, 14.062759
 Ionity CZ-Lovosice, 50.51188, 14.0527, 5
@@ -2180,6 +2185,8 @@ Fortum NO-Bøde Esso Rønvik, 67.293538, 14.407496
 Fortum NO-Sortland, 68.704914, 15.414759
 
 Globus DE-Forchheim Willy-Brandt-Allee 1, 49.706939, 11.070387, 20
+
+GOFAST CH-Neuchatel Le Verger 1, 47.021254, 7.028924, 8
 
 Greenway PL-Bielsko-Biała, 49.803432,19.049971
 Greenway PL-Góra Libertowska, 49.980812,19.909254
@@ -2864,10 +2871,13 @@ AT Raststation Marché Wörthersee,46.629952,14.094825
 BE Hasselt Corda Campus Kempische Steenweg 293, 50.951484, 5.353231, 14
 
 CH Baden ABB Research, 47.458503, 8.278454
+CH Frutigen Hotel National Destination Charger, 46.588925, 7.647674, 5
 CH Nendaz Green Motion Charging Station Rte des Ecluses, 46.182368, 7.291183, 10
+CH Montezillon L'AUBIER eCarUp, 46.986362, 6.838001, 8
 CH Moosseedorf Shoppyland, 47.017507, 7.492498
 CH Raststätte A4 My Stop Nord, 47.2714,8.439115, 8
 CH Raststätte A4 My Stop Süd, 47.271714,8.43764, 6
+CH Rothenburg Hotel Bären, 47.093469, 8.271122, 8
 CH Winterthur Squash Center Auwiesen, 47.483192, 8.70537
 CH Zürich ABB Oerlikon, 47.411564, 8.54106
 
