@@ -364,7 +364,7 @@ Supercharger-V3 DE-Wuppertal, 51.282426, 7.256019
 Supercharger DE-Zella-Mehlis, 50.64387, 10.68488
 Supercharger-V3 DE-Zusmarshausen, 48.407771,10.599446, 25
 Supercharger DK-Aarhus, 56.178223, 10.139406
-Supercharger-V3 DK-Esbjerg, 55.465678, 8.4418333, 25
+Supercharger-V3 DK-Esbjerg, 55.465749, 8.44405, 25
 Supercharger DK-Haverslev, 56.783428, 9.69082
 Supercharger DK-Hedensted, 55.786395, 9.667926
 Supercharger DK-Hjørring, 57.455791, 10.04227
@@ -1377,8 +1377,10 @@ ARAL DE-Bensheim, 49.672869, 8.597024, 10
 ARAL DE-Bochum, 51.501513, 7.258011
 ARAL DE-Braunschweig, 52.322159, 10.478146
 ARAL DE-Dettelbach, 49.778176,10.0658, 20
+ARAL DE-Elstal, 52.540089, 12.977459
 ARAL DE-Ettenheim,48.274746,7.785175
 ARAL DE-Geseke,51.597496,8.515457,10
+ARAL DE-Heinersdorf, 52.378134, 13.311807
 ARAL DE-Jena,50.877065,11.621512
 ARAL DE-Königslutter Autohof,52.3115495,10.8234685
 ARAL DE-Könnern,51.69016,11.7670125
@@ -1389,6 +1391,7 @@ ARAL DE-Montabaur Alleestraße 18, 50.440191, 7.830364, 10
 ARAL DE-Neuenkirchen-Vörden, 52.491559,8.0783, 10
 ARAL DE-Northeim, 51.731118,9.973121
 ARAL DE-Schwarmstedt Autohof, 52.673543, 9.688409
+ARAL DE-Schwerin, 53.600345, 11.465313
 ARAL DE-Stuhr, 53.020699, 8.687762, 15
 ARAL DE-Tübingen Reutlinger Straße 72, 48.512816, 9.073854, 20
 ARAL DE-Uelzen, 52.99585, 10.539363
@@ -1438,6 +1441,7 @@ Comfortcharge DE-Bremen Fernmeldeturm, 53.095621, 8.791384
 Comfortcharge DE-Bremen Hohle Straße, 53.173716, 8.629969
 Comfortcharge DE-Cloppenburg, 52.844864, 8.047866
 Comfortcharge DE-Essen, 51.451473, 7.09393
+Comfortcharge DE-Gröditz, 51.404193, 13.437055
 Comfortcharge DE-Hameln, 52.104262, 9.377806
 Comfortcharge DE-Hannover Am Immenkampe, 52.357492, 9.671864
 Comfortcharge DE-Hannover Dünenweg, 52.396052, 9.675816
@@ -1516,6 +1520,7 @@ EnBW DE-Bremen Kirchhuchtinger Landstraße, 53.05324, 8.742137
 EnBW DE-Brunnthal,48.041336,11.660908,10
 EnBW DE-Burgauer See, 48.413506, 10.429502
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
+EnBW DE-Dätgen, 54.180464, 9.943138
 EnBW DE-Deffingen, 48.43331249, 10.2931190, 12
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
 EnBW DE-Ebersberg, 48.096569, 11.961316
@@ -1641,6 +1646,7 @@ EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
 EnBW DE-Wörth a.d. Donau,49.000989,12.365447
 EnBW DE-Wülferode West, 52.338094,9.86385
+EnBW DE-Wurzen, 51.381708, 12.739439
 
 EVM DE-Cochem Bahnhofsvorplatz, 50.153328, 7.167515
 EVM DE-Koblenz Altstadt, 50.359981, 7.598084
@@ -1649,6 +1655,8 @@ EVM DE-Koblenz Autohaus Pretz, 50.334257, 7.6065574
 EVM DE-Koblenz Autohof Rübenacher Wald, 50.346812, 7.507836
 EVM DE-Koblenz Contel Hotel, 50.365908, 7.577220
 EVM DE-Koblenz Festung Ehrenbreitstein, 50.367221, 7.617626
+
+EWE-GO DE-Riesa, 51.295464, 13.28629
 
 EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
 EWE-SWB DE-Burgwedel, 52.485739, 9.844603
@@ -2670,6 +2678,7 @@ MOL CZ-Velké Meziříčí, 49.345539,16.040024
 
 NewMotion DE-Unterschleißheim,48.272108,11.591192
 
+Pfalzwerke DE-Dresden Hornbach, 51.078828, 13.689721
 Pfalzwerke DE-Jena Brüsseler Str. 1, 50.8768364, 11.6186009
 
 Recharge FI-Sodankylä, 67.431695,26.57509
@@ -2952,6 +2961,7 @@ DE Oldenburg Media Markt, 53.161348, 8.172719
 DE Passau Media Markt, 48.574479, 13.414943
 DE Paderborn Westfalen Weser Netz, 51.725959, 8.756923, 5
 DE Rheydt New AG, 51.157497, 6.448055
+DE Riesa Stadtwerke Riesa, 51.301571, 13.309787
 DE Ritterhude HEM, 53.185475,8.706381
 DE Roth Autohaus, 49.245669, 11.119321
 DE Schafstritt Nord, 52.257481, 9.306448
