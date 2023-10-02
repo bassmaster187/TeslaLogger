@@ -116,7 +116,9 @@ Supercharger CH-Egerkingen, 47.327028, 7.805489
 Supercharger CH-Flüelen, 46.912985, 8.622833
 Supercharger-V3 CH-Kempttahl,47.451881,8.704432
 Supercharger CH-Kriegstetten, 47.175635, 7.59883
+Supercharger-V3 CH-Kriens, 47.017179, 8.301336, 12
 Supercharger-V3 CH-Landquart, 46.9661, 9.552652
+Supercharger-V3 CH-Lugano, 45.974845, 8.927979, 12
 Supercharger CH-Lully, 46.8323911, 6.8590898
 Supercharger CH-Maienfeld, 47.003965, 9.525809
 Supercharger CH-Martigny, 46.126409, 7.061010
@@ -179,6 +181,7 @@ Supercharger-V3 DE-Denkendorf,48.707,9.306556
 Supercharger DE-Dettelbach, 49.7788313, 10.0686375
 Supercharger-V3 DE-Eching,48.306431,11.634784
 Supercharger-V3 DE-Eimeldingen,47.626603,7.599543, 20
+Supercharger-V3 DE-Eimeldingen, 47.626690, 7.599410, 12
 Supercharger-V3 DE-Ellwangen - Hotel Montana, 48.959163, 10.173781
 Supercharger DE-Ellwangen, 48.955835, 10.182623, 55
 Supercharger DE-Emsbüren, 52.359338, 7.26476
@@ -687,10 +690,12 @@ Supercharger IT-Oristano,39.890044,8.599804
 Supercharger-V3 IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmanova, 45.88421, 13.34502
 Supercharger IT-Palmi, 38.366929, 15.869555
+Supercharger-V3 IT-Parma North, 44.821080, 10.336591, 20
 Supercharger IT-Piacenza, 45.039461, 9.753871
 Supercharger IT-Pollein, 45.737122, 7.372441
-Supercharger-V3 IT-Porto Sant’Elpidio, 43.232212, 13.749903
+Supercharger-V3 IT-Porto Sant’Elpidio, 43.232212, 13.749903, 8
 Supercharger-V3 IT-Roma South West,41.815947,12.4009345
+Supercharger-V3 IT-Rimini, 44.040676, 12.589337, 8
 Supercharger IT-San Giovanni Teatino, 42.399194, 14.16396
 Supercharger IT-Sondrio, 46.164535, 9.677329
 Supercharger IT-Tarquinia, 42.183306, 11.788161
