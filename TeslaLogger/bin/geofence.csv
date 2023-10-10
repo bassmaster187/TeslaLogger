@@ -425,13 +425,16 @@ Supercharger ES-Valencia, 39.542965, -0.451521
 Supercharger ES-Zaragoza, 41.625707, -1.009618
 Supercharger FI-Äänekoski, 62.516741, 25.6913
 Supercharger FI-Akaa, 61.181106, 23.885075
+Supercharger-V3 FI-Hartola, 61.578409,26.009758
 Supercharger FI-Huittinen, 61.168436, 22.680099
 Supercharger-V3 FI-Huittinen, 61.168436, 22.680099
 Supercharger FI-Jalasjärvi,62.417071,22.791815
 Supercharger-V3 FI-Karesuvanto, 68.450226,22.4814
+Supercharger-V3 FI-Kempele, 64.9018031, 25.5353976
 Supercharger FI-Koivisto, 62.516908, 25.691666
 Supercharger FI-Kokkola, 63.829282, 23.148487
 Supercharger FI-Paimio, 60.442961, 22.605621
+Supercharger-V3 FI-Pello, 66.808793,23.996331,20
 Supercharger FI-Pyhtää, 60.489054, 26.554835
 Supercharger FI-Pyhäjärvi, 63.716298, 25.920103
 Supercharger-V3 Fi-Rovaniemi, 66.501765,25.723048
@@ -871,7 +874,7 @@ Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
 Supercharger SE-Jäckvik, 66.39067, 16.964868
 Supercharger-V3 SE-Jokkmokk, 66.605774,19.824993
-Supercharger-V3 SE-Jönköping,57.772741,14.199840
+Supercharger-V3 SE-Jönköping,57.7725393, 14.1998454
 Supercharger SE-Kalmar, 56.673228, 16.321408
 Supercharger-V3 SE-Kalmar-Giraffen, 56.671493, 16.333901
 Supercharger SE-Karlstad, 59.381535, 13.467609
@@ -895,6 +898,7 @@ Supercharger SE-Skellefteå, 64.76235, 21.002864
 Supercharger SE-Slagelse, 55.388, 11.3622
 Supercharger-V3 SE-Sollentuna, 59.496586,17.92444
 Supercharger SE-Sollentuna, 59.496586,17.92444
+Supercharger-V3 SE-Söderhamn, 61.294919, 17.0209945
 Supercharger SE-Stockholm, 59.5006239, 17.926818
 Supercharger SE-Storlien, 63.310045,12.109286
 Supercharger SE-Storuman, 65.092642, 17.107984
@@ -1324,6 +1328,7 @@ Aldi DE-Wiesbaden Siemensstraße, 50.059017,8.338261, 20
 Aldi DE-Wörnitz, 49.2593663, 10.241920
 
 Allego DE-Aichstetten, 47.88045, 10.0406, 7
+Allego DE-Altenburg, 51.0086991, 12.453532
 Allego DE-Barsbüttel Bauhaus, 53.576785,10.194484
 Allego DE-Bernau am Chiemsee, 47.813788,12.366477, 20
 Allego DE-Boppard-Buchholz, 50.212221, 7.553389
@@ -1557,6 +1562,7 @@ EnBW DE-Hammersbach Langen-Bergheim Ost, 50.250621,8.994564, 10
 EnBW DE-Hammersbach Langen-Bergheim West, 50.248440,8.99398, 10
 EnBW DE-Hannover Am Leineufer, 52.414635, 9.643332, 20
 EnBW DE-Hellweg Süd,51.593555,8.487382
+EnBW DE-Herleshausen Brandenburgstraße 99,51.006613,10.175765
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
 EnBW DE-Hildesheim Albert-Einstein-Strasse, 52.15951567929753, 9.994232402647167, 30
 EnBW DE-Hildesheim Siemensstraße, 52.163101,9.972193
@@ -1587,6 +1593,7 @@ EnBW DE-Lonetal Ost, 48.58408, 10.17877, 6
 EnBW DE-Lonetal West, 48.584053, 10.175744, 6
 EnBW DE-Lorsch Ost, 49.644328, 8.554109
 EnBW DE-Lorsch West, 49.643044, 8.551967
+EnBW DE-Lübeck BAUHAUS, 53.862047,10.629666
 EnBW DE-Naumburg Euronics, 51.145178,11.83287
 EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
 EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
