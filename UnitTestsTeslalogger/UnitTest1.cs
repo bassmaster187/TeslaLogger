@@ -474,6 +474,24 @@ namespace UnitTestsTeslalogger
         }
 
         [TestMethod]
+        public void Car_X_100DRaven()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            wh.car.CarType = "modelx";
+            wh.car.CarSpecialType = "base";
+            wh.car.TrimBadging = "100d";
+            wh.car.Raven = true;
+            wh.car.Vin = "5YJXCCE2XLFXXXXXX";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("X 100D", wh.car.ModelName); // Raven suffix will be appended later
+            Assert.AreEqual(0.184, wh.car.WhTR);
+        }
+
+        [TestMethod]
         public void Car_X_2021_Plaid()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null); 

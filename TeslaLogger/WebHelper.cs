@@ -2650,7 +2650,10 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging == "100d")
                 {
-                    WriteCarSettings("0.217", "X 100D");
+                    if (car.Raven)
+                        WriteCarSettings("0.184", "X 100D");
+                    else
+                        WriteCarSettings("0.217", "X 100D");
                     return;
                 }
                 else if (car.TrimBadging == "90d")
