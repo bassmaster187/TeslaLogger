@@ -1796,6 +1796,7 @@ id = @carid", con))
                         .AddObject(CarType, "CarType")
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging")
+                        .AddObject(CurrentJSON.current_car_version, "CarVersion")
                         .AddObject(wheel_type, "wheel_type");
 
             return b;
@@ -1809,6 +1810,7 @@ id = @carid", con))
                 .AddObject(CarType, "CarType")
                 .AddObject(CarSpecialType, "CarSpecialType")
                 .AddObject(TrimBadging, "CarTrimBadging")
+                .AddObject(CurrentJSON.current_car_version, "CarVersion")
                 .AddObject(wheel_type, "wheel_type");
 
             return b;

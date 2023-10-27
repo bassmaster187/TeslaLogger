@@ -1,3 +1,6 @@
+# Version 1.55.0
+- Supporting new API change after Tesla firmware 2023.38.4
+
 # Version 1.54.26
 - Vehicle state icons in admin panel. e.g. open window, unlocked car, open doors, open frunk / trunk
 - Destination route will be displayed in admin panel with ETA and SOC at destination.
