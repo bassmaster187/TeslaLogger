@@ -26,6 +26,7 @@ namespace TeslaLogger
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private readonly HashSet<string> unknownKeys = new HashSet<string>();
         private readonly Car car;
+        private readonly MQTT mqtt;
         private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
@@ -115,6 +116,8 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
+            mqtt.PublishMqttValue(car.Vin, name, newvalue, newTS);
+
             switch (name)
             {
                 case "car_version":
