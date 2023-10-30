@@ -1,5 +1,9 @@
+# Version 1.55.0
+- Supporting new API change after Tesla firmware 2023.38.4
+
 # Version 1.54.26
-- Completely new MQTT client. Go to menu extras-MQTT for setup. Old client is still working but not supported any more and can be disabled any time. Please migrage to new client!
+- Vehicle state icons in admin panel. e.g. open window, unlocked car, open doors, open frunk / trunk
+- Destination route will be displayed in admin panel with ETA and SOC at destination.
 
 # Version 1.54.25
 - Bugfix in upgrade zu Debian Buster
