@@ -1313,6 +1313,8 @@ WHERE
             //   charge_energy_added =
             //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
 
+            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID})");
+
             // get neccessary details for chagingStateID
             double odometer = double.NaN;
             int carID = int.MinValue;
@@ -1339,17 +1341,44 @@ WHERE
 ", con))
                     {
                         cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
+                        Tools.DebugLog(cmd);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
-                            if (double.TryParse(dr[0].ToString(), out odometer)
-                                && int.TryParse(dr[1].ToString(), out carID)
-                                && double.TryParse(dr[2].ToString(), out startChargingChargeEnergyAdded)
-                                && double.TryParse(dr[3].ToString(), out endChargingChargeEnergyAdded)
-                                )
+                            if (double.TryParse(dr[0].ToString(), out odometer))
                             {
-                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) odometer:{odometer} carID:{carID} startChargingChargeEnergyAdded:{startChargingChargeEnergyAdded} endChargingChargeEnergyAdded:{endChargingChargeEnergyAdded}");
+                                if (int.TryParse(dr[1].ToString(), out carID))
+                                {
+                                    if (double.TryParse(dr[2].ToString(), out startChargingChargeEnergyAdded))
+                                    {
+                                        if (double.TryParse(dr[3].ToString(), out endChargingChargeEnergyAdded)
+                                        )
+                                        {
+                                            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) odometer:{odometer} carID:{carID} startChargingChargeEnergyAdded:{startChargingChargeEnergyAdded} endChargingChargeEnergyAdded:{endChargingChargeEnergyAdded}");
+                                        }
+                                        else
+                                        {
+                                            Tools.DebugLog($"FixChargeEnergyAdded error parsing endChargingChargeEnergyAdded:{dr[3]}");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Tools.DebugLog($"FixChargeEnergyAdded error parsing startChargingChargeEnergyAdded:{dr[2]}");
+                                    }
+                                }
+                                else
+                                {
+                                    Tools.DebugLog($"FixChargeEnergyAdded error parsing carID:{dr[1]}");
+                                }
                             }
+                            else
+                            {
+                                Tools.DebugLog($"FixChargeEnergyAdded error parsing odometer:{dr[0]}");
+                            }
+                        }
+                        else
+                        {
+                            Tools.DebugLog($"FixChargeEnergyAdded SQL1 returned no rows");
                         }
                     }
                 }
@@ -1395,17 +1424,38 @@ LIMIT 1
                             cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
                             cmd.Parameters.AddWithValue("@odometer", odometer);
                             cmd.Parameters.AddWithValue("@carID", carID);
+                            Tools.DebugLog(cmd);
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
-                                if (int.TryParse(dr[0].ToString(), out successor)
-                                    && double.TryParse(dr[1].ToString(), out double cea_S)
-                                    && double.TryParse(dr[2].ToString(), out double cea_E)
-                                    )
+                                if (int.TryParse(dr[0].ToString(), out successor))
                                 {
-                                    Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) successor:{successor} start:{dr[3]} end:{dr[4]} cea_E:{cea_E} cea_S:{cea_S} diff:{cea_E-cea_S}");
-                                    //RecalculateChargeEnergyAdded(chagingStateID);
+                                    if (double.TryParse(dr[1].ToString(), out double cea_S))
+                                    {
+                                        if (double.TryParse(dr[2].ToString(), out double cea_E)
+                                        )
+                                        {
+                                            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) successor:{successor} start:{dr[3]} end:{dr[4]} cea_E:{cea_E} cea_S:{cea_S} diff:{cea_E - cea_S}");
+                                            //RecalculateChargeEnergyAdded(chagingStateID);
+                                        }
+                                        else
+                                        {
+                                            Tools.DebugLog($"FixChargeEnergyAdded error parsing cea_E:{dr[2]}");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Tools.DebugLog($"FixChargeEnergyAdded error parsing cea_S:{dr[1]}");
+                                    }
                                 }
+                                else
+                                {
+                                    Tools.DebugLog($"FixChargeEnergyAdded error parsing successor:{dr[0]}");
+                                }
+                            }
+                            else
+                            {
+                                Tools.DebugLog($"FixChargeEnergyAdded SQL2 returned no rows");
                             }
                         }
                     }
