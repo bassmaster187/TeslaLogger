@@ -1374,7 +1374,7 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    id
+    chargingstate.id
 FROM
     chargingstate
     JOIN pos ON pos.id = chargingstate.id
