@@ -1379,7 +1379,7 @@ FROM
     chargingstate
     JOIN pos ON pos.id = chargingstate.id
 WHERE
-    id < @chagingStateID
+    chargingstate.id < @chagingStateID
     AND pos.odometer = @odometer
     AND chargingstate.carid = @carid
 ", con))
