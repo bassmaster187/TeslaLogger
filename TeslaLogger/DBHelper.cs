@@ -1305,10 +1305,10 @@ WHERE
             // which means: it has a chargingSteID before it that
             // - has same odometer
             // - has same carID
-            // - has lover chargingstateid
+            // - has higher chargingstateid
 
             // fix:
-            // - find predecessor chargingstateid and check prerequisites
+            // - find successor chargingstateid and check prerequisites
             // - recalculate charge_energy_added:
             //   charge_energy_added =
             //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
@@ -1366,7 +1366,7 @@ WHERE
                 && !double.IsNaN(endChargingChargeEnergyAdded))
             {
                 // now find predecessor chargingstate
-                int predecessor = int.MinValue;
+                int successor = int.MinValue;
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1374,14 +1374,22 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    chargingstate.id
+    chargingstate.id,
+    chargingS.charge_energy_added,
+    chargingE.charge_energy_added,
+    chargingstate startdate,
+    chargingstate enddate
 FROM
     chargingstate
     JOIN pos ON pos.id = chargingstate.id
+    JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
+    JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
 WHERE
-    chargingstate.id < @chagingStateID
+    chargingstate.id > @chagingStateID
     AND pos.odometer = @odometer
     AND chargingstate.carid = @carid
+ORDER BY chargingstate.id ASC
+LIMIT 1
 ", con))
                         {
                             cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
@@ -1390,10 +1398,13 @@ WHERE
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
-                                if (int.TryParse(dr[0].ToString(), out predecessor))
+                                if (int.TryParse(dr[0].ToString(), out successor)
+                                    && double.TryParse(dr[1].ToString(), out double cea_S)
+                                    && double.TryParse(dr[2].ToString(), out double cea_E)
+                                    )
                                 {
-                                    Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) predecessor:{predecessor}");
-                                    RecalculateChargeEnergyAdded(chagingStateID);
+                                    Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) successor:{successor} start:{dr[3]} end:{dr[4]} cea_E:{cea_E} cea_S:{cea_S} diff:{cea_E-cea_S}");
+                                    //RecalculateChargeEnergyAdded(chagingStateID);
                                 }
                             }
                         }
