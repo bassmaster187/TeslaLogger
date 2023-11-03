@@ -1390,7 +1390,11 @@ WHERE
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
-                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) predecessor:{predecessor}");
+                                if (int.TryParse(dr[0].ToString(), out predecessor))
+                                {
+                                    Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) predecessor:{predecessor}");
+                                    RecalculateChargeEnergyAdded(chagingStateID);
+                                }
                             }
                         }
                     }
