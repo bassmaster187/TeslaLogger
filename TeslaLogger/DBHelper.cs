@@ -1305,7 +1305,7 @@ WHERE
             // which means: it has a chargingSteID before it that
             // - has same odometer
             // - has same carID
-            // - has lover chargingstateid and earlier date
+            // - has lover chargingstateid
 
             // fix:
             // - find predecessor chargingstateid and check prerequisites
@@ -1331,7 +1331,7 @@ SELECT
     chargingE.charge_energy_added
 FROM
     chargingstate
-    JOIN pos ON pos.id = chargingstate.posid
+    JOIN pos ON pos.id = chargingstate.pos
     JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
     JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
 WHERE
@@ -1359,6 +1359,48 @@ WHERE
                 car.CreateExceptionlessClient(ex).Submit();
                 Tools.DebugLog($"Exception in FixChargeEnergyAdded({chagingStateID}): {ex}");
                 Logfile.ExceptionWriter(ex, $"Exception in FixChargeEnergyAdded({chagingStateID})");
+            }
+            if (!double.IsNaN(odometer)
+                && carID > int.MinValue
+                && !double.IsNaN(startChargingChargeEnergyAdded)
+                && !double.IsNaN(endChargingChargeEnergyAdded))
+            {
+                // now find predecessor chargingstate
+                int predecessor = int.MinValue;
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    id
+FROM
+    chargingstate
+    JOIN pos ON pos.id = chargingstate.id
+WHERE
+    id < @chagingStateID
+    AND pos.odometer = @odometer
+    AND chargingstate.carid = @carid
+", con))
+                        {
+                            cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
+                            cmd.Parameters.AddWithValue("@odometer", odometer);
+                            cmd.Parameters.AddWithValue("@carID", carID);
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read())
+                            {
+                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) predecessor:{predecessor}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                    Tools.DebugLog($"Exception in FixChargeEnergyAdded({chagingStateID}): {ex}");
+                    Logfile.ExceptionWriter(ex, $"Exception in FixChargeEnergyAdded({chagingStateID})");
+                }
             }
         }
 
