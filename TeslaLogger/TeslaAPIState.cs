@@ -455,6 +455,8 @@ namespace TeslaLogger
                     break;
                 case "vehicles":
                     return ParseVehicles(JSON);
+                case "vehicle_data?endpoints=location_data":
+                    break;
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
