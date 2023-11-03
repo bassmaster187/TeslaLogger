@@ -1229,7 +1229,7 @@ WHERE
                 // check if combine is disabled globally or locally
                 if (!CombineChangingStatesAt(candidate))
                 {
-                    Tools.DebugLog($"CombineChangingStates: skip {candidate} CombineChangingStatesAt is false");
+                    Logfile.Log($"CombineChangingStates: skip {candidate} CombineChangingStatesAt is false");
                     FixChargeEnergyAdded(candidate);
                     continue;
                 }
@@ -1346,7 +1346,7 @@ WHERE
                                 Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) id:{dr[0]} startdate:{dr[1]} enddate:{dr[2]} carID:{dr[3]} startChargingChargeEnergyAdded:{dr[4]} endChargingChargeEnergyAdded:{dr[5]}");
                                 if (int.TryParse(dr[0].ToString(), out int id) && double.TryParse(dr[4].ToString(), out double cea_S) && double.TryParse(dr[5].ToString(), out double cea_E) && cea_S > 1)
                                 {
-                                    Tools.DebugLog($"FixChargeEnergyAdded update {id} to cea {cea_E - cea_S}");
+                                    Logfile.Log($"FixChargeEnergyAdded update {id} cea_S:{cea_S} cea_E:{cea_E} to cea {cea_E - cea_S}");
                                     UpdateChargeEnergyAdded(id, cea_E - cea_S);
                                     UpdateChargePrice(id, true);
                                 }
