@@ -1344,6 +1344,12 @@ WHERE
                             if (dr.Read())
                             {
                                 Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) id:{dr[0]} startdate:{dr[1]} enddate:{dr[2]} carID:{dr[3]} startChargingChargeEnergyAdded:{dr[4]} endChargingChargeEnergyAdded:{dr[5]}");
+                                if (int.TryParse(dr[0].ToString(), out int id) && double.TryParse(dr[4].ToString(), out double cea_S) && double.TryParse(dr[5].ToString(), out double cea_E) && cea_S > 1)
+                                {
+                                    Tools.DebugLog($"FixChargeEnergyAdded update {id} to cea {cea_E - cea_S}");
+                                    UpdateChargeEnergyAdded(id, cea_E - cea_S);
+                                    UpdateChargePrice(id, true);
+                                }
                             }
                         }
                     }
