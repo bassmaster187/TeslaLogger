@@ -1377,8 +1377,8 @@ SELECT
     chargingstate.id,
     chargingS.charge_energy_added,
     chargingE.charge_energy_added,
-    chargingstate startdate,
-    chargingstate enddate
+    chargingstate.startdate,
+    chargingstate.enddate
 FROM
     chargingstate
     JOIN pos ON pos.id = chargingstate.id
