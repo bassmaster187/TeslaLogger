@@ -1312,6 +1312,54 @@ WHERE
             // - recalculate charge_energy_added:
             //   charge_energy_added =
             //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
+
+            // get neccessary details for chagingStateID
+            double odometer = double.NaN;
+            int carID = int.MinValue;
+            double startChargingChargeEnergyAdded = double.NaN;
+            double endChargingChargeEnergyAdded = double.NaN;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    pos.odometer,
+    chargingstate.carid,
+    chargingS.charge_energy_added,
+    chargingE.charge_energy_added
+FROM
+    chargingstate
+    JOIN pos ON pos.id = chargingstate.posid
+    JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
+    JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
+WHERE
+    chargingstate.id = @chagingStateID
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            if (double.TryParse(dr[0].ToString(), out odometer)
+                                && int.TryParse(dr[1].ToString(), out carID)
+                                && double.TryParse(dr[2].ToString(), out startChargingChargeEnergyAdded)
+                                && double.TryParse(dr[3].ToString(), out endChargingChargeEnergyAdded)
+                                )
+                            {
+                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) odometer:{odometer} carID:{carID} startChargingChargeEnergyAdded:{startChargingChargeEnergyAdded} endChargingChargeEnergyAdded:{endChargingChargeEnergyAdded}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                Tools.DebugLog($"Exception in FixChargeEnergyAdded({chagingStateID}): {ex}");
+                Logfile.ExceptionWriter(ex, $"Exception in FixChargeEnergyAdded({chagingStateID})");
+            }
         }
 
         private void UpdateMeter_kWh_sum(int openChargingState)
