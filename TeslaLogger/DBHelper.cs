@@ -1230,6 +1230,7 @@ WHERE
                 if (!CombineChangingStatesAt(candidate))
                 {
                     Tools.DebugLog($"CombineChangingStates: skip {candidate} CombineChangingStatesAt is false");
+                    FixChargeEnergyAdded(candidate);
                     continue;
                 }
 
@@ -1294,6 +1295,23 @@ WHERE
                 }
             }
             car.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
+        }
+
+        private void FixChargeEnergyAdded(int chagingStateID)
+        {
+            // interrupted charging sessions, eg "PV Überschuss" start with charge_energy_added > 0
+            // this leads to wrong calculation of chargingstate.charge_energy_added
+            // prerequisites: chargingStateID is a combine candidate
+            // which means: it has a chargingSteID before it that
+            // - has same odometer
+            // - has same carID
+            // - has lover chargingstateid and earlier date
+
+            // fix:
+            // - find predecessor chargingstateid and check prerequisites
+            // - recalculate charge_energy_added:
+            //   charge_energy_added =
+            //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
         }
 
         private void UpdateMeter_kWh_sum(int openChargingState)
