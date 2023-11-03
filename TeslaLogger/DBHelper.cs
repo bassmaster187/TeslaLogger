@@ -1301,101 +1301,22 @@ WHERE
         {
             // interrupted charging sessions, eg "PV Überschuss" start with charge_energy_added > 0
             // this leads to wrong calculation of chargingstate.charge_energy_added
-            // prerequisites: chargingStateID is a combine candidate
-            // which means: it has a chargingSteID before it that
-            // - has same odometer
-            // - has same carID
-            // - has higher chargingstateid
 
             // fix:
-            // - find successor chargingstateid and check prerequisites
+            // - find similar chargingstates
+            // - if start charge_energy_added > 1 then:
+            // check if predecessor chargingstate has similar end charge_energy_added
+            // if yes then:
             // - recalculate charge_energy_added:
             //   charge_energy_added =
             //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
 
             Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID})");
 
-            // get neccessary details for chagingStateID
-            double odometer = double.NaN;
-            int carID = int.MinValue;
-            double startChargingChargeEnergyAdded = double.NaN;
-            double endChargingChargeEnergyAdded = double.NaN;
-            try
+            Queue<int> chargingstates = FindSimilarChargingStates(chagingStateID);
+
+            foreach (int chargingstate in chargingstates.OrderBy(x => x))
             {
-                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(@"
-SELECT
-    pos.odometer,
-    chargingstate.carid,
-    chargingS.charge_energy_added,
-    chargingE.charge_energy_added
-FROM
-    chargingstate
-    JOIN pos ON pos.id = chargingstate.pos
-    JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
-    JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
-WHERE
-    chargingstate.id = @chagingStateID
-", con))
-                    {
-                        cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
-                        Tools.DebugLog(cmd);
-                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                        if (dr.Read())
-                        {
-                            if (double.TryParse(dr[0].ToString(), out odometer))
-                            {
-                                if (int.TryParse(dr[1].ToString(), out carID))
-                                {
-                                    if (double.TryParse(dr[2].ToString(), out startChargingChargeEnergyAdded))
-                                    {
-                                        if (double.TryParse(dr[3].ToString(), out endChargingChargeEnergyAdded)
-                                        )
-                                        {
-                                            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) odometer:{odometer} carID:{carID} startChargingChargeEnergyAdded:{startChargingChargeEnergyAdded} endChargingChargeEnergyAdded:{endChargingChargeEnergyAdded}");
-                                        }
-                                        else
-                                        {
-                                            Tools.DebugLog($"FixChargeEnergyAdded error parsing endChargingChargeEnergyAdded:{dr[3]}");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Tools.DebugLog($"FixChargeEnergyAdded error parsing startChargingChargeEnergyAdded:{dr[2]}");
-                                    }
-                                }
-                                else
-                                {
-                                    Tools.DebugLog($"FixChargeEnergyAdded error parsing carID:{dr[1]}");
-                                }
-                            }
-                            else
-                            {
-                                Tools.DebugLog($"FixChargeEnergyAdded error parsing odometer:{dr[0]}");
-                            }
-                        }
-                        else
-                        {
-                            Tools.DebugLog($"FixChargeEnergyAdded SQL1 returned no rows");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                car.CreateExceptionlessClient(ex).Submit();
-                Tools.DebugLog($"Exception in FixChargeEnergyAdded({chagingStateID}): {ex}");
-                Logfile.ExceptionWriter(ex, $"Exception in FixChargeEnergyAdded({chagingStateID})");
-            }
-            if (!double.IsNaN(odometer)
-                && carID > int.MinValue
-                && !double.IsNaN(startChargingChargeEnergyAdded)
-                && !double.IsNaN(endChargingChargeEnergyAdded))
-            {
-                // now find predecessor chargingstate
-                int successor = int.MinValue;
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -1404,58 +1325,25 @@ WHERE
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
     chargingstate.id,
-    chargingS.charge_energy_added,
-    chargingE.charge_energy_added,
     chargingstate.startdate,
-    chargingstate.enddate
+    chargingstate.enddate,
+    chargingstate.carid,
+    chargingS.charge_energy_added,
+    chargingE.charge_energy_added
 FROM
     chargingstate
-    JOIN pos ON pos.id = chargingstate.id
     JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
     JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
 WHERE
-    chargingstate.id > @chagingStateID
-    AND pos.odometer = @odometer
-    AND chargingstate.carid = @carid
-ORDER BY chargingstate.id ASC
-LIMIT 1
+    chargingstate.id = @chagingStateID
 ", con))
                         {
-                            cmd.Parameters.AddWithValue("@chagingStateID", chagingStateID);
-                            cmd.Parameters.AddWithValue("@odometer", odometer);
-                            cmd.Parameters.AddWithValue("@carID", carID);
+                            cmd.Parameters.AddWithValue("@chagingStateID", chargingstate);
                             Tools.DebugLog(cmd);
                             MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                             if (dr.Read())
                             {
-                                if (int.TryParse(dr[0].ToString(), out successor))
-                                {
-                                    if (double.TryParse(dr[1].ToString(), out double cea_S))
-                                    {
-                                        if (double.TryParse(dr[2].ToString(), out double cea_E)
-                                        )
-                                        {
-                                            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) successor:{successor} start:{dr[3]} end:{dr[4]} cea_E:{cea_E} cea_S:{cea_S} diff:{cea_E - cea_S}");
-                                            //RecalculateChargeEnergyAdded(chagingStateID);
-                                        }
-                                        else
-                                        {
-                                            Tools.DebugLog($"FixChargeEnergyAdded error parsing cea_E:{dr[2]}");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Tools.DebugLog($"FixChargeEnergyAdded error parsing cea_S:{dr[1]}");
-                                    }
-                                }
-                                else
-                                {
-                                    Tools.DebugLog($"FixChargeEnergyAdded error parsing successor:{dr[0]}");
-                                }
-                            }
-                            else
-                            {
-                                Tools.DebugLog($"FixChargeEnergyAdded SQL2 returned no rows");
+                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) id:{dr[0]} startdate:{dr[1]} enddate:{dr[2]} carID:{dr[3]} startChargingChargeEnergyAdded:{dr[4]} endChargingChargeEnergyAdded:{dr[5]}");
                             }
                         }
                     }
