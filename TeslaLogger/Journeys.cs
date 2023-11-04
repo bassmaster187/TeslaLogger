@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal static class Journeys
     {
         private static Dictionary<string, string> EndPoints = new Dictionary<string, string>()
@@ -58,7 +57,7 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
         internal static string TEXT_TH_ACTIONS = "Actions";
 
-        private static string html1 = @"<html>
+        private static readonly string html1 = @"<html>
   <head>
     <link href=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
     <script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js""></script>
@@ -105,7 +104,7 @@ CREATE TABLE journeys (
             }
         }
 
-        internal static void JourneysCreateSelectCar(HttpListenerRequest request, HttpListenerResponse response)
+        internal static void JourneysCreateSelectCar(HttpListenerRequest _, HttpListenerResponse response)
         {
             // in: nothing
             // out: carID
@@ -663,7 +662,7 @@ WHERE
             WriteString(response, "OK");
         }
 
-        internal static void JourneysIndex(HttpListenerRequest request, HttpListenerResponse response)
+        internal static void JourneysIndex(HttpListenerRequest _, HttpListenerResponse response)
         {
             // in: nothing
             // out: render index HTML
