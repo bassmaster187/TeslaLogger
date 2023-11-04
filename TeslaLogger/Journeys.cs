@@ -325,7 +325,13 @@ LIMIT 1", con))
                 CalculateDriveDuration(journeyId);
                 CalculateCharged(journeyId);
                 CalculateChargeDuration(journeyId);
+                CalculateFreeSuC(journeyId);
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+        }
+
+        private static void CalculateFreeSuC(int journeyId)
+        {
+            
         }
 
         internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
