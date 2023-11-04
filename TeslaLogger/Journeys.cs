@@ -96,6 +96,13 @@ CREATE TABLE journeys (
     PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
+                if (!DBHelper.ColumnExists("journeys", "freesuc"))
+                {
+                    Logfile.Log("ALTER TABLE journeys ADD Column freesuc");
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `journeys` 
+                    ADD COLUMN `freesuc` DOUBLE NULL DEFAULT NULL", 600);
+                }
             }
             catch (Exception ex)
             {
