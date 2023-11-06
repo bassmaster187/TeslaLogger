@@ -17,8 +17,8 @@ namespace TeslaLogger
     {
         private readonly string TaskerToken;
         private readonly string TeslaloggerVersion;
-        private static bool logwritten = false;
-        private readonly bool shareData = false;
+        private static bool logwritten; // defaults to false;
+        private readonly bool shareData; // defaults to false;
         readonly Car car;
 
         public ShareData(Car car)

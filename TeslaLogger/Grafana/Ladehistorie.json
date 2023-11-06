@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -47,7 +50,10 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -329,8 +335,10 @@
                 "value": 1
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align",
@@ -373,8 +381,10 @@
                 "value": "locale"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align",
@@ -482,6 +492,10 @@
               {
                 "id": "custom.align",
                 "value": "right"
+              },
+              {
+                "id": "noValue",
+                "value": "set"
               }
             ]
           },
@@ -500,8 +514,10 @@
                 "value": 1
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -551,8 +567,10 @@
                 "value": 1
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align",
@@ -588,7 +606,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 74
+                "value": 77
               },
               {
                 "id": "unit",
@@ -656,7 +674,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 94
+                "value": 97
               }
             ]
           },
@@ -728,7 +746,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 52
+                "value": 58
               }
             ]
           },
@@ -848,7 +866,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 137
+                "value": 142
               }
             ]
           },
@@ -887,11 +905,14 @@
       "id": 2,
       "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": [
             "CO2 [kg]",
             "charge_energy_added",
-            "MinuteDiff"
+            "MinuteDiff",
+            "cost_total"
           ],
           "reducer": [
             "sum"
@@ -899,14 +920,9 @@
           "show": true
         },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Startdatum"
-          }
-        ]
+        "sortBy": []
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "alias": "",
@@ -914,11 +930,12 @@
             "type": "mysql",
             "uid": "PC0C98BF192F75B00"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT        UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, \r\n              pos.address, \r\n              chargingstate.charge_energy_added, \r\n              round(co2_g_kWh * chargingstate.charge_energy_added / 1000,1) as \"CO2 [kg]\",\r\n              co2_g_kWh as \"CO2/kWh [g]\",\r\n              CASE WHEN chargingstate.charge_energy_added < cost_kwh_meter_invoice THEN chargingstate.charge_energy_added / cost_kwh_meter_invoice * 100 else NULL END as Eff,\r\n              CASE WHEN (chargingstate.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) > max_charger_power\r\n                  THEN NULL \r\n                  ELSE\r\n                  chargingstate.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 \r\n                  END as kW_avg,\r\n              max_charger_power,\r\n              ifnull(round(cost_total,2), 'set') as cost_total,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging.battery_level as Start_battery_level,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              CASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select 100 -(meter_utility_kwh_sum / meter_vehicle_kwh_sum) * 100) else null END as PV_percent,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share,\r\n              pos.lat, pos.lng, chargingstate.id as HostId, cars.tasker_hash,\r\n              UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDateRAW\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\n                         join cars on cars.id = chargingstate.carid\r\nwhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\r\nand chargingstate.CarId = $Car and (pos.address like '%$Textfilter%') \r\norder by StartDate desc",
+          "rawSql": "SELECT        UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDate, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDate, \r\n              pos.address, \r\n              chargingstate.charge_energy_added, \r\n              round(co2_g_kWh * chargingstate.charge_energy_added / 1000,1) as \"CO2 [kg]\",\r\n              co2_g_kWh as \"CO2/kWh [g]\",\r\n              CASE WHEN chargingstate.charge_energy_added < cost_kwh_meter_invoice THEN chargingstate.charge_energy_added / cost_kwh_meter_invoice * 100 else NULL END as Eff,\r\n              CASE WHEN (chargingstate.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60) > max_charger_power\r\n                  THEN NULL \r\n                  ELSE\r\n                  chargingstate.charge_energy_added / TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) * 60 \r\n                  END as kW_avg,\r\n              max_charger_power,\r\n              cost_total,\r\n              charging.ideal_battery_range_km AS SOC, \r\n              charging_End.ideal_battery_range_km AS EndSOC,\r\n              charging.battery_level as Start_battery_level,\r\n              charging_End.battery_level as End_battery_level,\r\n              (select EndSOC / End_battery_level * 100 ) as CalculatedMaxRange,\r\n              pos.odometer, TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) as MinuteDiff,\r\n              CASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select 100 -(meter_utility_kwh_sum / meter_vehicle_kwh_sum) * 100) else null END as PV_percent,\r\n              (CASE WHEN export > 4 THEN 'Share' else NULL END) as Share,\r\n              pos.lat, pos.lng, chargingstate.id as HostId, cars.tasker_hash,\r\n              UNIX_TIMESTAMP(chargingstate.StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(chargingstate.EndDate)*1000 as EndDateRAW\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\n                         join cars on cars.id = chargingstate.carid\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.EndChargingID - chargingstate.StartChargingID > 2\r\nand chargingstate.CarId = $Car and (pos.address like '%$Textfilter%') \r\norder by StartDate desc",
           "refId": "A",
           "select": [
             [
@@ -930,6 +947,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -953,7 +987,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 33,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -991,7 +1025,7 @@
           "value": ""
         },
         "hide": 0,
-        "label": "Textfilter",
+        "label": "Fahrzeug",
         "name": "Textfilter",
         "options": [
           {
@@ -1038,6 +1072,6 @@
   "timezone": "",
   "title": "Ladehistorie",
   "uid": "TSmNYvRRk",
-  "version": 142,
+  "version": 21,
   "weekStart": ""
 }

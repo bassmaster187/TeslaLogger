@@ -24,8 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 46,
-  "iteration": 1679561739398,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -137,18 +135,19 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
             "type": "mysql",
             "uid": "000000001"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select sum(charge_energy_added) as \"Charged kWh\", sum(Grid) as \"kWh from grid\", sum(PV) as \"kWh from solar\", \nsum(CO2_Mix)/1000 as \"CO2 kg mix\", sum(CO2_Grid)/1000 as \"CO2 kg with solar\", max(odometer) - min(odometer) as \"km driven\",\nsum(charge_energy_added) / (max(odometer) - min(odometer)) * 100 as \"kWh/100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) as \"CO2 g/km mix\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) as \"CO2 g/km with solar\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km with solar\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km with solar\"\nfrom\n(\nSELECT co2_g_kWh,  \n\tCASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select (meter_utility_kwh_sum / meter_vehicle_kwh_sum)) else 0 END as PV_percent,\n\tcharge_energy_added, \n    charge_energy_added * (1-(select PV_percent)) as Grid, \n    charge_energy_added * (select PV_percent) as PV,\n\t(select Grid) * co2_g_kWh as CO2_Grid,\n    charge_energy_added * co2_g_kWh as CO2_Mix,\n    odometer\n\tFROM chargingstate join pos on chargingstate.pos = pos.id\n\twhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\nand chargingstate.CarId = $Car and odometer > 0\n\t) T",
+          "rawSql": "select sum(charge_energy_added) as \"Charged kWh\", sum(Grid) as \"kWh from grid\", sum(PV) as \"kWh from solar\", \nsum(CO2_Mix)/1000 as \"CO2 kg mix\", sum(CO2_Grid)/1000 as \"CO2 kg with solar\", max(odometer) - min(odometer) as \"km driven\",\nsum(charge_energy_added) / (max(odometer) - min(odometer)) * 100 as \"kWh/100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) as \"CO2 g/km mix\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) as \"CO2 g/km with solar\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km\",\nsum(CO2_Mix) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.37 as \"L gasoline / 100km with solar\",\nsum(CO2_Grid) / (max(odometer) - min(odometer)) / 10 / 2.65 as \"L diesel / 100km with solar\"\nfrom\n(\nSELECT co2_g_kWh,  \n\tCASE WHEN meter_vehicle_kwh_sum > meter_utility_kwh_sum THEN (select 1-(meter_utility_kwh_sum / meter_vehicle_kwh_sum)) else 0 END as PV_percent,\n\tcharge_energy_added, \n    charge_energy_added * (1-(select PV_percent)) as Grid, \n    charge_energy_added * (select PV_percent) as PV,\n\t(select Grid) * co2_g_kWh as CO2_Grid,\n    charge_energy_added * co2_g_kWh as CO2_Mix,\n    odometer\n\tFROM chargingstate join pos on chargingstate.pos = pos.id\n\twhere $__timeFilter(chargingstate.StartDate) and TIMESTAMPDIFF(MINUTE, chargingstate.StartDate, chargingstate.EndDate) > 3 and chargingstate.EndChargingID - chargingstate.StartChargingID > 4\nand chargingstate.CarId = $Car and odometer > 0\n\t) T",
           "refId": "A",
           "select": [
             [
@@ -160,6 +159,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "table": "TPMS",
           "timeColumn": "Datum",
           "timeColumnType": "timestamp",
@@ -187,6 +203,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -255,7 +273,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -295,7 +314,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 36,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -333,6 +352,6 @@
   "timezone": "",
   "title": "CO2",
   "uid": "HaVAHvgRz",
-  "version": 25,
+  "version": 26,
   "weekStart": ""
 }

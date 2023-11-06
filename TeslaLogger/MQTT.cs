@@ -23,9 +23,9 @@ namespace TeslaLogger
         private string host = "localhost";
         private int port = 1883;
         private string topic = "teslalogger";
-        private bool subtopics = false;
-        private string user = null;
-        private string password = null;
+        private bool subtopics;
+        private string user;
+        private string password;
         private static int httpport = 5000;
 
         MqttClient client = null;
@@ -87,19 +87,13 @@ namespace TeslaLogger
 
                 client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
 
-                if (user != null && password != null)
-                {
-                    Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
-                    client.Connect(clientid, user, password);
-                }
-                else
-                {
-                    Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
-                    client.Connect(clientid);
-                }
+                ConnectionCheck();
+
                 if (client.IsConnected)
                 {
                     Logfile.Log("MQTT: Connected!");
+                    client.Publish($@"{topic}/status", Encoding.UTF8.GetBytes("online"),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 }
                 else
                 {
@@ -108,20 +102,21 @@ namespace TeslaLogger
 
                 foreach (int car in allCars)
                 {
+                    
                     client.Subscribe(new[] {
-                        $"{topic}/car/{car}/command/+"
+                        $"{topic}/command/{car}/+"
                     },
                         new[] {
                             MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
                         });
                 }
-                
+
                 client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                 new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
                 while (true)
                 {
-                    Work();                    
+                    Work();
                     // sleep 1 second
                     Thread.Sleep(1000);
                 }
@@ -136,28 +131,15 @@ namespace TeslaLogger
 
         internal void Work()
         {
-           try
+            try
             {
-                if (!client.IsConnected)
-                {
-                    if (user != null && password != null)
-                    {
-                        Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
-                        client.Connect(clientid, user, password);
-                    }
-                    else
-                    {
-                        Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
-                        client.Connect(clientid);
-                    }
-                }
-                else
+                if (ConnectionCheck())
                 {
                     foreach (int car in allCars)
                     {
                         string temp = null;
                         string carTopic = $"{topic}/car/{car}";
-                        string jsonTopic = $"{topic}/json/{car}";
+                        string jsonTopic = $"{topic}/json/{car}/currentjson";
                         using (WebClient wc = new WebClient())
                         {
                             temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + car);
@@ -193,26 +175,27 @@ namespace TeslaLogger
             }
         }
 
+
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             try
             {
                 var msg = Encoding.ASCII.GetString(e.Message);
 
-                //Example: "teslalogger/car/1/command/set_charge_limit", raw value "13"
+                //Example: "teslalogger/command/LRW123456/set_charge_limit", raw value "13"
 
-                Match m = Regex.Match(e.Topic, $@"{topic}/car/([0-9]+)/(.+)/(.+)");
-                if (m.Success && m.Groups.Count == 4 && m.Groups[2].Captures.Count == 1 && m.Groups[3].Captures.Count == 1)
+                Match m = Regex.Match(e.Topic, $@"{topic}/command/([0-9]+)/(.+)");
+                if (m.Success && m.Groups.Count == 3 && m.Groups[2].Captures.Count == 1 && m.Groups[3].Captures.Count == 1)
                 {
-                    if(m.Groups[2].Captures[0].ToString() == "command")
+                    if (m.Groups[0].Captures[0].ToString() == "command")
                     {
-                        _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
-                        string command = m.Groups[3].Captures[0].ToString();
+                        string vin = m.Groups[1].Captures[0].ToString();
+                        string command = m.Groups[2].Captures[0].ToString();
                         try
                         {
                             using (WebClient wc = new WebClient())
                             {
-                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{CarID}/{command}?{msg}");
+//                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{CarID}/{command}?{msg}");
                             }
                         }
                         catch (Exception ex)
@@ -222,7 +205,7 @@ namespace TeslaLogger
                             System.Threading.Thread.Sleep(20000);
                         }
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -230,6 +213,44 @@ namespace TeslaLogger
                 Logfile.Log("MQTT: Exeption: " + ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+        }
+
+        private bool ConnectionCheck()
+        {
+            try
+            {
+                if (!client.IsConnected)
+                {
+
+                    if (user != null && password != null)
+                    {
+                        Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
+                        client.Connect(clientid, user, password, false, 0, true, $@"{topic}/status", "offline", true, 30);
+                    }
+                    else
+                    {
+                        Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
+                        client.Connect(clientid, null, null, false, 0, true, $@"{topic}/status", "offline", true, 30);
+                    }
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (WebException wex)
+            {
+                Logfile.Log("MQTT: Exeption: " + wex.Message);
+                System.Threading.Thread.Sleep(60000);
+
+            }
+            catch (Exception ex)
+            {
+                System.Threading.Thread.Sleep(30000);
+                Logfile.Log("MQTT: Exeption: " + ex.ToString());
+            }
+            return false;
         }
 
         private void MQTTConnectionHandler(MqttClient client)
@@ -240,19 +261,7 @@ namespace TeslaLogger
                 {
                     System.Threading.Thread.Sleep(1000);
 
-                    if (!client.IsConnected)
-                    {
-                        if (user != null && password != null)
-                        {
-                            Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
-                            client.Connect(clientid, user, password);
-                        }
-                        else
-                        {
-                            Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
-                            client.Connect(clientid);
-                        }
-                    }
+                    ConnectionCheck();
                 }
                 catch (WebException wex)
                 {
@@ -286,7 +295,7 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(20000);
             }
-            
+
 
             try
             {
@@ -316,6 +325,35 @@ namespace TeslaLogger
 
             return h;
 
+        }
+
+        internal void PublishDiscovery(int CarID)
+        {
+            string carTopic = $"{topic}/car/{CarID}";
+        }
+
+        internal void PublishMqttValue(int CarID, String name, object newvalue, long newTS)
+        {
+            string carTopic = $"{topic}/car/{CarID}";
+            string jsonTopic = $"{topic}/json/{CarID}";
+            try
+            {
+                if(ConnectionCheck())
+                {
+                    client.Publish(carTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    client.Publish(jsonTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("MQTT: Exeption: " + ex.Message);
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                System.Threading.Thread.Sleep(60000);
+
+            }
         }
     }
 }

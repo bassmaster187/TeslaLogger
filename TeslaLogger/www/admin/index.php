@@ -22,11 +22,12 @@ else
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/png" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon.png" sizes="131x133">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=3">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -163,7 +164,19 @@ else
 				else
 					str += jsonData["power"] + " <?php t("PS"); ?>";
 
-				$('#car_status').text(str);
+				if (jsonData["active_route_destination"])
+				{
+					var destination = encodeHTML(jsonData["active_route_destination"]);
+					str += "<br>"+"To: " + destination;
+					str += "<br>"+"In: " + Math.round(Number(jsonData["active_route_minutes_to_arrival"])) +  " min / " + jsonData["active_route_energy_at_arrival"]+"% SOC";
+
+					if (jsonData["active_route_traffic_minutes_delay"] != "0.0")
+					{
+						str += "<br>"+"Delay:" + jsonData["active_route_traffic_minutes_delay"] + " min";
+					}
+				}
+
+				$('#car_status').html(str);
 
 				updateSMT(jsonData);
 			}
@@ -257,16 +270,45 @@ else
 			{
 				$("#SoftwareUpdateRow").show();
 				var temp = jsonData["software_update_status"];
+				temp = temp.replaceAll("_", " ");
+				temp = encodeHTML(temp);
 
 				if (jsonData["software_update_version"].length > 0)
-					temp += ":" + jsonData["software_update_version"];
+					temp += ": " + "<a href=\"https://www.notateslaapp.com/software-updates/version/"+ jsonData["software_update_version"]+"/release-notes\">"+ jsonData["software_update_version"]+ "</a>";
 
-				$("#software_update").text(temp);
+				$("#software_update").html(temp);
 			}
 			else
 			{
 				$("#SoftwareUpdateRow").hide();
 			}
+
+			if (jsonData["open_windows"] > 0)
+				$("#window_open").show();
+			else
+				$("#window_open").hide();
+
+			if (jsonData["frunk"] > 0)
+				$("#frunk_open").show();
+			else
+				$("#frunk_open").hide();
+
+			if (jsonData["trunk"] > 0)
+				$("#trunk_open").show();
+			else
+				$("#trunk_open").hide();
+
+			if (jsonData["open_doors"] > 0)
+				$("#door_open").show();
+			else
+				$("#door_open").hide();
+
+			if (jsonData["locked"])
+				$("#unlocked").hide();
+			else
+				$("#unlocked").show();
+
+				
 
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
 
@@ -284,6 +326,13 @@ else
 			marker = L.marker(p);
 			marker.addTo(map);
 		});
+	}
+
+	function encodeHTML(dirtyString) {
+		var container = document.createElement('div');
+		var text = document.createTextNode(dirtyString);
+		container.appendChild(text);
+		return container.innerHTML; // innerHTML will be a xss safe string
 	}
 
 	function hideSMT()
@@ -420,7 +469,15 @@ function ShowInfo()
   </div>
   <div style="float:left;">
   <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle">
+	  	<?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span>
+	  		<img id="window_open" class="caricons" src="img/window_open.png" title="Open Window">
+			<img id="frunk_open"class="caricons" src="img/frunk_open.png" title="Frunk Open">
+			<img id="trunk_open"class="caricons" src="img/trunk_open.png" title="Trunk Open">
+			<img id="door_open"class="caricons" src="img/door_open.png" title="Door Open">
+			<img id="unlocked"class="caricons" src="img/unlocked.png" title="Unlocked">
+		</td>
+	  </thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>

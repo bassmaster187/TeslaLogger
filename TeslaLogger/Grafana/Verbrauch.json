@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -13,7 +16,10 @@
         "type": "dashboard"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
@@ -25,7 +31,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#508642",
@@ -37,7 +46,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#64b0c8",
@@ -49,7 +61,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#ba43a9",
@@ -63,9 +78,8 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1608549484299,
   "links": [
     {
       "icon": "external link",
@@ -77,13 +91,17 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -115,6 +133,7 @@
         "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.0.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -173,6 +192,10 @@
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "hide": false,
@@ -202,6 +225,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -230,6 +257,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -258,6 +289,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -286,6 +321,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -314,6 +353,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -343,9 +386,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Verbrauch",
       "tooltip": {
         "shared": true,
@@ -354,9 +395,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -364,37 +403,27 @@
         {
           "decimals": 1,
           "format": "locale",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "autoZoom": true,
-      "datasource": "teslalogger",
-      "defaultLayer": "OpenStreetMap",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
       },
+      "defaultLayer": "OpenStreetMap",
       "gridPos": {
         "h": 19,
         "w": 12,
@@ -412,6 +441,10 @@
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "table",
           "group": [
             {
@@ -481,25 +514,172 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Map",
       "type": "pr0ps-trackmap-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "km/h",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 60
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "#EF843C",
+                "value": 150
+              },
+              {
+                "color": "#E24D42",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": ""
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 5,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "kmh",
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xField": "kmh",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT speed div 10 * 10 as kmh, count(*) / (select count(*) from pos where $__timeFilter(datum) and CarID = $Car) as total\r\nFROM pos \r\nwhere $__timeFilter(datum) and CarID = $Car\r\ngroup by speed div 10 \r\nhaving kmh >= 0",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Speed",
+      "type": "barchart"
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
+          "selected": false,
           "text": "",
           "value": "1"
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
@@ -513,7 +693,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -552,5 +731,6 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 149
+  "version": 151,
+  "weekStart": ""
 }

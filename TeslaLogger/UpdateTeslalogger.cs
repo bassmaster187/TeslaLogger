@@ -20,19 +20,19 @@ namespace TeslaLogger
     {
         private const string cmd_restart_path = "/tmp/teslalogger-cmd-restart.txt";
         private const string TPMSSchemaVersion = "TPMSSchemaVersion";
-        private static bool shareDataOnStartup = false;
+        private static bool shareDataOnStartup; // defaults to false;
         private static Timer timer;
 
         private static DateTime lastTeslaLoggerVersionCheck = DateTime.UtcNow;
         private static Object lastTeslaLoggerVersionCheckObj = new object();
         internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
-        private static bool _done = false;
+        private static bool _done; // defaults to false;
 
         public static bool Done { get => _done; }
 
-        private static Thread ComfortingMessages = null;
-        public static bool DownloadUpdateAndInstallStarted = false;
+        private static Thread ComfortingMessages; // defaults to null;
+        public static bool DownloadUpdateAndInstallStarted; // defaults to false;
 
         public static void StopComfortingMessagesThread()
         {
