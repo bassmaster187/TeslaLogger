@@ -1,4 +1,3 @@
-
 # Version 1.55.0
 - Supporting new API change after Tesla firmware 2023.38.4
 
