@@ -1230,6 +1230,8 @@ WHERE
                 // check if combine is disabled globally or locally
                 if (!CombineChangingStatesAt(candidate))
                 {
+                    Logfile.Log($"CombineChangingStates: skip {candidate} CombineChangingStatesAt is false");
+                    FixChargeEnergyAdded(candidate);
                     continue;
                 }
 
@@ -1294,6 +1296,72 @@ WHERE
                 }
             }
             car.Log($"CombineChangingStates took {Environment.TickCount - t}ms");
+        }
+
+        private void FixChargeEnergyAdded(int chagingStateID)
+        {
+            // interrupted charging sessions, eg "PV Überschuss" start with charge_energy_added > 0
+            // this leads to wrong calculation of chargingstate.charge_energy_added
+
+            // fix:
+            // - find similar chargingstates
+            // - if start charge_energy_added > 1 then:
+            // check if predecessor chargingstate has similar end charge_energy_added
+            // if yes then:
+            // - recalculate charge_energy_added:
+            //   charge_energy_added =
+            //     chargingstate.endchargingid.charge_energy_added - chargingstate.startchargingid.charge_energy_added
+
+            Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID})");
+
+            Queue<int> chargingstates = FindSimilarChargingStates(chagingStateID);
+
+            foreach (int chargingstate in chargingstates.OrderBy(x => x))
+            {
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    chargingstate.id,
+    chargingstate.startdate,
+    chargingstate.enddate,
+    chargingstate.carid,
+    chargingS.charge_energy_added,
+    chargingE.charge_energy_added
+FROM
+    chargingstate
+    JOIN charging chargingS ON chargingS.id = chargingstate.startchargingid
+    JOIN charging chargingE ON chargingE.id = chargingstate.endchargingid
+WHERE
+    chargingstate.id = @chagingStateID
+", con))
+                        {
+                            cmd.Parameters.AddWithValue("@chagingStateID", chargingstate);
+                            Tools.DebugLog(cmd);
+                            MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                            if (dr.Read())
+                            {
+                                Tools.DebugLog($"FixChargeEnergyAdded({chagingStateID}) id:{dr[0]} startdate:{dr[1]} enddate:{dr[2]} carID:{dr[3]} startChargingChargeEnergyAdded:{dr[4]} endChargingChargeEnergyAdded:{dr[5]}");
+                                if (int.TryParse(dr[0].ToString(), out int id) && double.TryParse(dr[4].ToString(), out double cea_S) && double.TryParse(dr[5].ToString(), out double cea_E) && cea_S > 1)
+                                {
+                                    Logfile.Log($"FixChargeEnergyAdded update {id} cea_S:{cea_S} cea_E:{cea_E} to cea {cea_E - cea_S}");
+                                    UpdateChargeEnergyAdded(id, cea_E - cea_S);
+                                    UpdateChargePrice(id, true);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    car.CreateExceptionlessClient(ex).Submit();
+                    Tools.DebugLog($"Exception in FixChargeEnergyAdded({chagingStateID}): {ex}");
+                    Logfile.ExceptionWriter(ex, $"Exception in FixChargeEnergyAdded({chagingStateID})");
+                }
+            }
         }
 
         private void UpdateMeter_kWh_sum(int openChargingState)
