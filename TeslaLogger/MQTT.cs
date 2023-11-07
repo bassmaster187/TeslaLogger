@@ -27,8 +27,9 @@ namespace TeslaLogger
         private string user;
         private string password;
         private static int httpport = 5000;
+        private static int heartbeatCounter;
 
-        MqttClient client = null;
+        MqttClient client;
 
         System.Collections.Generic.HashSet<int> allCars;
         System.Collections.Generic.Dictionary<int, string> lastjson = new Dictionary<int, string>();
@@ -83,6 +84,11 @@ namespace TeslaLogger
                     {
                         subtopics = (bool)r["mqtt_subtopics"];
                     }
+                    Logfile.Log("MQTT: Settings found");
+                }
+                else
+                {
+                    Logfile.Log("MQTT: Settings not found!");
                 }
 
                 client = new MqttClient(host, port, false, null, null, MqttSslProtocols.None);
@@ -92,8 +98,6 @@ namespace TeslaLogger
                 if (client.IsConnected)
                 {
                     Logfile.Log("MQTT: Connected!");
-                    client.Publish($@"{topic}/status", Encoding.UTF8.GetBytes("online"),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 }
                 else
                 {
@@ -102,7 +106,7 @@ namespace TeslaLogger
 
                 foreach (int car in allCars)
                 {
-                    
+
                     client.Subscribe(new[] {
                         $"{topic}/command/{car}/+"
                     },
@@ -135,6 +139,16 @@ namespace TeslaLogger
             {
                 if (ConnectionCheck())
                 {
+                    //heartbeat
+                    if (heartbeatCounter % 10 == 0)
+                    {
+                        client.Publish($@"{topic}/status", Encoding.UTF8.GetBytes("online"),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                        heartbeatCounter = 0;
+                    }
+                    heartbeatCounter++;
+
+
                     foreach (int car in allCars)
                     {
                         string temp = null;
@@ -159,8 +173,13 @@ namespace TeslaLogger
                                 {
                                     client.Publish(carTopic + "/" + keyvalue.Key, Encoding.UTF8.GetBytes(keyvalue.Value ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
                                 }
+                                Double.TryParse(topics["latitude"], out double lat);
+                                Double.TryParse(topics["longitude"], out double lon);
+                                PublichGPSTracker(car, lat, lon);
                             }
+
                         }
                     }
                 }
@@ -219,7 +238,7 @@ namespace TeslaLogger
         {
             try
             {
-                if (!client.IsConnected)
+                if (client != null && !client.IsConnected)
                 {
 
                     if (user != null && password != null)
@@ -330,6 +349,44 @@ namespace TeslaLogger
         internal void PublishDiscovery(int CarID)
         {
             string carTopic = $"{topic}/car/{CarID}";
+
+            Dictionary<string, object> device = new Dictionary<string, object>
+            {
+                   { "ids", "VIN1234" },
+                   { "cu", "http://" },
+                   { "mf", "Tesla" },
+                   { "mdl", "Model Y" },
+                   { "name", "Berliner" },
+                   { "sw", "2023.32.10" }
+            };
+
+            Dictionary<string, object> discovery = new Dictionary<string, object>
+            {
+                   { "name", "battery level" },
+                   { "device_class", "battery" },
+                   { "unique_id", "XP7ABCD123456_battery_level" },
+                   { "stat_t", "tl-dev/car/3/battery_level" },         
+                   { "unit_of_measurement", "%" },
+                   { "icon", "mdi:battery-50" },
+                   { "dev", device }
+            };
+        }
+
+        internal void PublichGPSTracker(int CarID, double lat, double lon)
+        {
+            string gpsTrackerTopic = $"{topic}/car/{CarID}/gps_tracker";
+            Dictionary<string, object> gpsTracker = new Dictionary<string, object>
+            {
+                   { "latitude", lat },
+                   { "longitude", lon },
+                   { "gps_accuracy", 1.0 }
+            };
+
+            string json = JsonConvert.SerializeObject(new { latitude = lat , longitude = lon , gps_accuracy = 1.0 });
+
+            client.Publish(gpsTrackerTopic, Encoding.UTF8.GetBytes(json ?? "NULL"),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
         }
 
         internal void PublishMqttValue(int CarID, String name, object newvalue, long newTS)
