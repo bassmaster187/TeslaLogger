@@ -7,6 +7,7 @@ $LengthUnit = "";
 $PowerUnit = "";
 $LengthFactor = 1;
 $URL_Grafana = "";
+$Range = 'IR';
 
 $Display100pctEnable = "false";
 
@@ -35,7 +36,7 @@ if (file_exists("/etc/teslalogger/settings.json"))
 		if (substr($URL_Grafana,-1) != "/") {
 			$URL_Grafana = $URL_Grafana . "/";
 		}
-	
+	$Range = $json_data["Range"];
 }
 
 $filename = "/etc/teslalogger/language-".$language.".txt";
