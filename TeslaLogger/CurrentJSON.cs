@@ -40,42 +40,50 @@ namespace TeslaLogger
 
         public DateTime current_trip_start = DateTime.MinValue;
         public DateTime current_trip_end = DateTime.MinValue;
-        public double current_trip_km_start = 0;
-        public double current_trip_km_end = 0;
-        public double current_trip_max_speed = 0;
-        public double current_trip_max_power = 0;
-        public double current_trip_start_range = 0;
-        public double current_trip_end_range = 0;
+        public double current_trip_km_start; // defaults to 0;
+        public double current_trip_km_end; // defaults to 0;
+        public double current_trip_max_speed; // defaults to 0;
+        public double current_trip_max_power; // defaults to 0;
+        public double current_trip_start_range; // defaults to 0;
+        public double current_trip_end_range; // defaults to 0;
         public double Wh_TR = 0.19;
 
-        public int current_trip_duration_sec = 0;
+        public int current_trip_duration_sec; // defaults to 0;
 
-        private double latitude = 0;
-        private double longitude = 0;
-        public int charge_limit_soc = 0;
-        public int heading = 0;
-        public double current_inside_temperature = 0;
-        public bool current_battery_heater = false;
-        public bool current_is_sentry_mode = false;
-        public bool current_is_preconditioning = false;
+        private double latitude; // defaults to 0;
+        private double longitude; // defaults to 0;
+        public int charge_limit_soc; // defaults to 0;
+        public int heading; // defaults to 0;
+        public double current_inside_temperature; // defaults to 0;
+        public bool current_battery_heater; // defaults to false;
+        public bool current_is_sentry_mode; // defaults to false;
+        public bool current_is_preconditioning; // defaults to false;
 
         public string current_country_code = "";
         public string current_state = "";
 
         public DateTime lastScanMyTeslaReceived = DateTime.MinValue;
-        public double? SMTCellTempAvg = null;
-        public double? SMTCellMinV = null;
-        public double? SMTCellAvgV = null;
-        public double? SMTCellMaxV = null;
-        public double? SMTCellImbalance = null;
-        public double? SMTBMSmaxCharge = null;
-        public double? SMTBMSmaxDischarge = null;
-        public double? SMTACChargeTotal = null;
-        public double? SMTDCChargeTotal = null;
-        public double? SMTNominalFullPack = null;
+        public double? SMTCellTempAvg; // defaults to null;
+        public double? SMTCellMinV; // defaults to null;
+        public double? SMTCellAvgV; // defaults to null;
+        public double? SMTCellMaxV; // defaults to null;
+        public double? SMTCellImbalance; // defaults to null;
+        public double? SMTBMSmaxCharge; // defaults to null;
+        public double? SMTBMSmaxDischarge; // defaults to null;
+        public double? SMTACChargeTotal; // defaults to null;
+        public double? SMTDCChargeTotal; // defaults to null;
+        public double? SMTNominalFullPack; // defaults to null;
 
-        public double? SMTSpeed = null;
-        public double? SMTBatteryPower = null;
+        public double? SMTSpeed; // defaults to null;
+        public double? SMTBatteryPower; // defaults to null;
+
+        public string active_route_destination; // defaults to null;
+        public long? active_route_energy_at_arrival; // defaults to null;
+        public long? active_route_km_to_arrival; // defaults to null;
+        public double? active_route_minutes_to_arrival; // defaults to null;
+        public double? active_route_traffic_minutes_delay; // defaults to null;
+        public double? active_route_latitude; // defaults to null;
+        public double? active_route_longitude; // defaults to null;
 
         public string current_json = "";
         private DateTime lastJSONwrite = DateTime.MinValue;
@@ -143,9 +151,35 @@ namespace TeslaLogger
                     duration = 0;
                 }
 
-                car.GetTeslaAPIState().GetBool("charge_port_door_open", out current_charge_port_door_open);
-                car.GetTeslaAPIState().GetString("software_update.status", out string software_update_status);
-                car.GetTeslaAPIState().GetString("software_update.version", out string software_update_version);
+                var apistate = car.GetTeslaAPIState();
+
+                apistate.GetBool("charge_port_door_open", out current_charge_port_door_open);
+                apistate.GetString("software_update.status", out string software_update_status);
+                apistate.GetString("software_update.version", out string software_update_version);
+
+                apistate.GetInt("fd_window", out int fd_window);
+                apistate.GetInt("fp_window", out int fp_window);
+                apistate.GetInt("rd_window", out int rd_window);
+                apistate.GetInt("rp_window", out int rp_window);
+
+                apistate.GetInt("pf", out int pf);
+                apistate.GetInt("pr", out int pr);
+                apistate.GetInt("df", out int df);
+                apistate.GetInt("dr", out int dr);
+
+                apistate.GetInt("ft", out int frunk);
+                apistate.GetInt("rt", out int trunk);
+
+                bool locked = true;
+                if (apistate.HasValue("locked")) // after restart the locked state is false, that tends to confuse
+                    apistate.GetBool("locked", out locked);
+
+                int open_windows = fd_window + fp_window + rd_window + rp_window;
+                int open_doors = 
+                    pf > 0 ? 1 :0 
+                    + pr > 0 ? 1 : 0
+                    + df > 0 ? 1 : 0
+                    + dr > 0 ? 1 : 0;
 
                 Dictionary<string, object> values = new Dictionary<string, object>
                 {
@@ -193,7 +227,18 @@ namespace TeslaLogger
                    { "display_name", car.DisplayName},
                    { "heading", heading},
                    { "software_update_status", software_update_status },
-                   { "software_update_version" , software_update_version }
+                   { "software_update_version" , software_update_version },
+                   { "active_route_destination" , active_route_destination },
+                   { "active_route_energy_at_arrival" , active_route_energy_at_arrival },
+                   { "active_route_minutes_to_arrival" , active_route_minutes_to_arrival },
+                   { "active_route_traffic_minutes_delay" , active_route_traffic_minutes_delay },
+                   { "active_route_latitude" , active_route_latitude },
+                   { "active_route_longitude" , active_route_longitude },
+                   { "open_windows" , open_windows},
+                   { "open_doors" , open_doors},
+                   { "frunk" , frunk},
+                   { "trunk" , trunk},
+                   { "locked" , locked}
                 };
 
                 TimeSpan ts = DateTime.Now - lastScanMyTeslaReceived;

@@ -24,10 +24,27 @@ namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    public class WebServer
+    public class WebServer : IDisposable
     {
-        private HttpListener listener = null;
-        static TeslaAuth teslaAuth = null;
+        private readonly HttpListener listener; // defaults to null;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Dispose managed resources.
+                listener.Close();
+            }
+            // Free native resources.
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        static TeslaAuth teslaAuth; // defaults to null;
 
         private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
@@ -128,7 +145,7 @@ namespace TeslaLogger
             }
         }
 
-        void WriteFile(HttpListenerResponse response, string path)
+        static void WriteFile(HttpListenerResponse response, string path)
         {
             using (FileStream fs = File.OpenRead(path))
             {
@@ -345,7 +362,7 @@ namespace TeslaLogger
             }
         }
 
-        private void OsUpgrade(HttpListenerRequest request, HttpListenerResponse response)
+        private static void OsUpgrade(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -988,7 +1005,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void TeslaAuthURL(HttpListenerResponse response)
+        private static void TeslaAuthURL(HttpListenerResponse response)
         {
             try
             {
@@ -1006,7 +1023,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
         {
             string responseString = "";
 
@@ -1070,7 +1087,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, responseString);
         }
 
-        private void Restart(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Restart(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
 
@@ -1092,7 +1109,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void Wallbox(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Wallbox(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1165,7 +1182,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1221,7 +1238,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
+        private static void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1257,7 +1274,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
+        private static void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/info");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1282,7 +1299,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void SuCBingo_Set(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SuCBingo_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/set");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1318,7 +1335,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void SuCBingo_Info(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SuCBingo_Info(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/info");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1390,7 +1407,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
         {
             int startPosID = 0;
             int endPosID = 0;
@@ -1500,7 +1517,7 @@ DROP TABLE chargingstate_bak";
             response.OutputStream.Close();
         }
 
-        private void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/mfa/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1521,7 +1538,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/captcha/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1541,7 +1558,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
+        private static void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/captchapic/([0-9]+)");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1795,7 +1812,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void GetLogfile(HttpListenerResponse response)
+        private static void GetLogfile(HttpListenerResponse response)
         {
             try
             {

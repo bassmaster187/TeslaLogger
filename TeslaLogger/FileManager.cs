@@ -32,7 +32,7 @@ namespace TeslaLogger
     internal class FileManager
     {
         private static readonly Dictionary<TLFilename, string> Filenames;
-        private static string _ExecutingPath = null;
+        private static string _ExecutingPath; // defaults to null
 #pragma warning disable CA1810 // Statische Felder für Referenztyp inline initialisieren
         static FileManager() => Filenames = new Dictionary<TLFilename, string>()
 #pragma warning restore CA1810 // Statische Felder für Referenztyp inline initialisieren

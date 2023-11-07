@@ -60,6 +60,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
  select {height: 35px;}
 
+ .caricons {
+	float: right; 
+	height: 28px; 
+	margin-right: 4px;
+	display: none;
+ }
+
  .TT {    
 	padding-top: 9px;
 	padding-bottom: 8px;}
@@ -4338,7 +4345,7 @@ a.post-thumbnail:hover {
 #displayname {display: none;}
 
 @media screen and (max-width: 1055px) {
-	.b1{ float:left;}
+	.b1{ float:left; width: 686px;}
 	.HeaderT { width: 686px;}
 }
 
@@ -4350,7 +4357,7 @@ a.post-thumbnail:hover {
 	.b1{ float:left;}
 	.HeaderL { width: unset;}
 	.HeaderT { width: -webkit-fill-available;}
-	.THeader { width: -webkit-fill-available;}
+	.THeader { width: 96vw;}
 	#displayname {display: contents;}
 }
 
