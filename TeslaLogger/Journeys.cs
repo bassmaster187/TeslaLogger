@@ -619,8 +619,8 @@ SELECT
     ) as CO2kg,
     (
 	select round(sum(cost_total),2) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
-    ) as cost_total
-    
+    ) as cost_total,
+    journeys.freesuc
 FROM
     journeys join cars on journeys.CarID = cars.Id
     join trip tripStart on journeys.StartPosID = tripStart.StartPosID
@@ -628,7 +628,6 @@ FROM
 WHERE cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
-            
             WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
         }
 
