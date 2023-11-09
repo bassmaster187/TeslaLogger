@@ -271,8 +271,12 @@ namespace TeslaLogger
                         break;
                     // send car commands
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
-                        SendCarCommand(request, response);
+                        SendCarCommandID(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/.{17}+/.+"):
+                        SendCarCommandVIN(request, response);
+                        break;
+                    // misc.
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
                         GetCurrentJson(request, response);
                         break;
@@ -2103,12 +2107,106 @@ DROP TABLE chargingstate_bak";
             WriteString(response, $"DumpJSON {dumpJSON}");
         }
 
-        private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
+        private void SendCarCommandID(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
             {
                 _ = int.TryParse(m.Groups[1].Captures[0].ToString(), out int CarID);
+                string command = m.Groups[2].Captures[0].ToString();
+                if (command.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        // check if command is in list of allowed commands
+                        if (AllowedTeslaAPICommands.Contains(command))
+                        {
+                            switch (command)
+                            {
+                                case "auto_conditioning_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    break;
+                                case "auto_conditioning_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    break;
+                                case "auto_conditioning_toggle":
+                                    if (car.CurrentJSON.current_is_preconditioning)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    }
+                                    break;
+                                case "sentry_mode_on":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    break;
+                                case "sentry_mode_off":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    break;
+                                case "sentry_mode_toggle":
+                                    if (car.webhelper.is_sentry_mode)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    }
+                                    break;
+                                case "wake_up":
+                                    WriteString(response, car.webhelper.Wakeup().Result);
+                                    break;
+                                case "set_charge_limit":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
+                                            car.LastSetChargeLimitAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
+                                    }
+                                    break;
+                                case "charge_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                    break;
+                                case "charge_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                    break;
+                                case "set_charging_amps":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
+                                            car.LastSetChargingAmpsAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
+                                    }
+                                    break;
+                                default:
+                                    WriteString(response, "");
+                                    break;
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void SendCarCommandVIN(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/command/(.{17})/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int CarID = Car.GetCarIDFromVIN(m.Groups[1].Captures[0].ToString());
                 string command = m.Groups[2].Captures[0].ToString();
                 if (command.Length > 0 && CarID > 0)
                 {
