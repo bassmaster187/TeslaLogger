@@ -314,6 +314,14 @@ namespace TeslaLogger
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
+
+            if (!DBHelper.IndexExists("VisitedCache_ix_TourCacheId", "VisitedCache"))
+            {
+                var sql = "alter table VisitedCache add index VisitedCache_ix_TourCacheId(TourCacheId)";
+                Logfile.Log(sql);
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql, 6000);
+            }
         }
 
         private static void CheckDBSchema_areaa()
@@ -687,6 +695,14 @@ PRIMARY KEY(id)
                 Logfile.Log(sql);
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(sql, 600);
+            }
+
+            if (!DBHelper.IndexExists("ix_drivestate_carid_startdate", "drivestate"))
+            {
+                var sql = "alter table drivestate add index ix_drivestate_carid_startdate(carid, startdate)";
+                Logfile.Log(sql);
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql, 6000);
             }
         }
 
