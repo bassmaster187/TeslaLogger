@@ -235,6 +235,8 @@ namespace TeslaLogger
                         };
                         thread.Start();
                     }
+
+                    VIN2DBCarID.Add(vin, CarInDB);
                 }
                 catch (Exception ex)
                 {
@@ -243,6 +245,15 @@ namespace TeslaLogger
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
             }
+        }
+
+        public static int GetCarIDFromVIN(string vin)
+        {
+            if (VIN2DBCarID.ContainsKey(vin))
+            {
+                return VIN2DBCarID[vin];
+            }
+            return -1; // -1 means error as CarID in database can only be a positive integer
         }
 
         private void Loop()
