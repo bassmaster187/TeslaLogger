@@ -260,7 +260,10 @@ namespace TeslaLogger
                         break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
-                        Get_CarValue(request, response);
+                        Get_CarValueID(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/.{17}/.+"):
+                        Get_CarValueVIN(request, response);
                         break;
                     // static map service
                     case bool _ when request.Url.LocalPath.Equals("/get/map", System.StringComparison.Ordinal):
@@ -360,6 +363,59 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private static void Get_CarValueVIN(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/get/(.{17})/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int CarID = Car.GetCarIDFromVIN(m.Groups[1].Captures[0].ToString());
+                string name = m.Groups[2].Captures[0].ToString();
+                if (name.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        if (car.GetTeslaAPIState().GetState(name, out Dictionary<TeslaAPIState.Key, object> state))
+                        {
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw", System.StringComparison.Ordinal))
+                            {
+                                WriteString(response, state[TeslaAPIState.Key.Value].ToString());
+                                return;
+                            }
+                            else
+                            {
+                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            Logfile.Log($"Get_CarValueVIN: state not found: GetState({name})");
+                            WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
+                        }
+                    }
+                    else
+                    {
+                        Logfile.Log($"Get_CarValueVIN: car not found: GetCarByID({CarID}");
+                    }
+                }
+                else
+                {
+                    Logfile.Log($"Get_CarValueVIN: error: VIN({m.Groups[1].Captures[0].ToString()} name:{name}");
+                }
+            }
+            else if (m.Groups.Count == 3)
+            {
+                Logfile.Log($"Get_CarValueVIN: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
+            }
+            else
+            {
+                Logfile.Log($"Get_CarValueVIN: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
+            }
+            WriteString(response, "");
         }
 
         private static void OsUpgrade(HttpListenerRequest request, HttpListenerResponse response)
@@ -2380,7 +2436,7 @@ FROM
             }
         }
 
-        private static void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Get_CarValueID(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -2408,27 +2464,27 @@ FROM
                         }
                         else
                         {
-                            Logfile.Log($"Get_CarValue: state not found: GetState({name})");
+                            Logfile.Log($"Get_CarValueID: state not found: GetState({name})");
                             WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
                         }
                     }
                     else
                     {
-                        Logfile.Log($"Get_CarValue: car not found: GetCarByID({CarID}");
+                        Logfile.Log($"Get_CarValueID: car not found: GetCarByID({CarID}");
                     }
                 }
                 else
                 {
-                    Logfile.Log($"Get_CarValue: error: CarID({CarID} name:{name}");
+                    Logfile.Log($"Get_CarValueID: error: CarID({CarID} name:{name}");
                 }
             }
             else if (m.Groups.Count == 3)
             {
-                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
+                Logfile.Log($"Get_CarValueID: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
             }
             else
             {
-                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
+                Logfile.Log($"Get_CarValueID: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
             }
             WriteString(response, "");
         }
