@@ -16,6 +16,9 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
+using System.Data.SqlClient;
+using Microsoft.VisualBasic.Logging;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace TeslaLogger
 {
@@ -6691,6 +6694,156 @@ WHERE
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
+            }
+        }
+
+        public static void GetUniqueTrips()
+        {
+            // reset all data
+            ExecuteSQLQuery("delete FROM teslalogger.VisitedCache"); // xxx
+            ExecuteSQLQuery("update drivestate set TourCacheId = null"); // xxx
+
+
+            var dt = new DataTable();
+            var da = new MySqlDataAdapter(@"SELECT count(*) as anz, max(CarID) as CarID, max(StartDate) as StartDate, max(EndDate) as EndDate, Start_address, End_address, round(km_diff) as km_diff
+		            FROM teslalogger.trip 
+		            where StartDate BETWEEN @start and @end and CarID in ('1') and durationMinutes > 3 and km_diff > 2
+		            group by CarID, LEAST(Start_address, End_address), GREATEST(Start_address, End_address)
+		            order by anz desc", DBConnectionstring);
+            da.SelectCommand.Parameters.AddWithValue("@start", new DateTime(2010, 1, 1));
+            da.SelectCommand.Parameters.AddWithValue("@end", new DateTime(2025, 1, 1));
+
+
+            da.Fill(dt);
+
+            int TourCacheId = 0;
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                TourCacheId++;
+                Logfile.Log($"Start: {dr["Start_address"]} - Ende: {dr["End_address"]} - count: {dr["anz"]} - km diff: {dr["km_diff"]}");
+                CreateVisitedCache2Tour(dr["Start_address"].ToString(), dr["End_address"].ToString(), TourCacheId);
+                CreateVisitedCache((DateTime)dr["StartDate"], (DateTime)dr["EndDate"], Convert.ToInt32(dr["CarID"]), TourCacheId);
+            }
+        }
+
+        private static void CreateVisitedCache2Tour(string a1, string a2, int tourCacheId)
+        {
+            using (var con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (var cmd = new MySqlCommand(@"update drivestate set TourCacheId = @tourCacheId where id in (
+                    SELECT drivestate.id
+                       FROM
+                            `drivestate`
+                            JOIN `pos` `pos_start` ON (`drivestate`.`StartPos` = `pos_start`.`id`)    
+                            JOIN `pos` `pos_end` ON (`drivestate`.`EndPos` = `pos_end`.`id`)
+                            where (pos_start.address = @A1 and pos_end.address = @A2)
+                            or (pos_end.address = @A2 and pos_start.address = @A1)
+                            )", con))
+                {
+                    cmd.Parameters.AddWithValue("@A1", a1);
+                    cmd.Parameters.AddWithValue("@A2", a2);
+                    cmd.Parameters.AddWithValue("@tourCacheId", tourCacheId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void CreateVisitedCache(DateTime StartDate, DateTime EndDate, int carid, int TourCacheId)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            using (var con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (var cmd = new MySqlCommand("select lat, lng, odometer, datum from pos where carid=@carid and Datum between @start and @end and speed > 2 order by datum", con))
+                {
+                    cmd.Parameters.AddWithValue("@carid", carid);
+                    cmd.Parameters.AddWithValue("@start", StartDate);
+                    cmd.Parameters.AddWithValue("@end", EndDate);
+
+                    var lastDirection = 0.0;
+                    var lastLat = Double.NaN;
+                    var lastLng = Double.NaN;
+                    var lastOdometer = Double.NaN;
+                    var lastDatum = DateTime.MinValue;
+
+                    var maxDegree = 80;
+                    int count = 0;
+                    int readed = 0;
+
+                    StringBuilder sbSQL = new StringBuilder();
+                    sbSQL.Append("insert into VisitedCache (TourCacheId, lat, lng) VALUES ");
+
+                    var dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        readed++;
+                        var lat = dr.GetDouble(0);
+                        var lng = dr.GetDouble(1);
+                        var odometer = dr.GetDouble(2);
+                        var Datum = dr.GetDateTime(3);
+
+                        if (lat == 0 || lng == 0)
+                            continue;
+
+                        // get first pos
+                        if (double.IsNaN(lastLat))
+                        {
+                            sbSQL.Append('(').Append(TourCacheId).Append(',').Append(lat.ToString(Tools.ciEnUS)).Append(',').Append(lng.ToString(Tools.ciEnUS)).Append(')');
+                            lastLat = lat;
+                            lastLng = lng;
+                            lastOdometer = odometer;
+                            lastDatum = Datum;
+                            continue;
+                        }
+
+                        if (odometer - lastOdometer < 0.2)
+                            continue;
+
+                        var Direction = Tools.DegreeBearing(lastLat, lastLng, lat, lng);
+
+                        int idelta;
+                        idelta = Math.Abs((int)Direction - (int)lastDirection);
+                        if (idelta > 180)
+                            idelta = 360 - idelta;
+                        if (idelta > maxDegree)
+                        {
+                            goto insertPos;
+                        }
+
+                        
+                        var ts = Datum - lastDatum;
+                        if (ts.TotalMinutes > 10)
+                            goto insertPos;
+                        
+
+                        if (odometer - lastOdometer > 6)
+                            goto insertPos;
+                        
+                        continue;
+
+                        insertPos:
+                        lastLat = lat;
+                        lastLng = lng;
+                        lastOdometer = odometer;
+                        lastDatum = Datum;
+                        lastDirection = Direction;
+                        count++;
+                        sbSQL.Append(',').Append('(').Append(TourCacheId).Append(',').Append(lat.ToString(Tools.ciEnUS)).Append(',').Append(lng.ToString(Tools.ciEnUS)).Append(')');
+
+                        // System.Diagnostics.Debug.WriteLine($"#{count}: lat: {lat}, lng: {lng}, odometer: {odometer}, datum: {Datum}, direction: {Direction}");
+                    }
+
+                    if (count > 4)
+                    {
+                        ExecuteSQLQuery(sbSQL.ToString());
+
+                        Logfile.Log($"VisitedCache Inserted: {count} / {readed}: Time: {(int)sw.Elapsed.TotalMilliseconds}ms");
+                    }
+                }
             }
         }
     }

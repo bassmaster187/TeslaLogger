@@ -73,6 +73,8 @@ namespace TeslaLogger
 
                 Logfile.Log("Init finished, now enter main loop");
 
+                DBHelper.GetUniqueTrips();
+
                 GetAllCars();
 
                 InitNearbySuCService();

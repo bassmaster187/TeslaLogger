@@ -133,6 +133,8 @@ namespace TeslaLogger
 
                 CheckDBSchema_TPMS();
 
+                CheckDBSchema_VisitedCache();
+
                 GetChargingHistoryV2Service.CheckSchema();
 
                 Logfile.Log("DBSchema Update finished.");
@@ -293,6 +295,24 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void CheckDBSchema_VisitedCache()
+        {
+            if (!DBHelper.TableExists("VisitedCache"))
+            {
+                string sql = @"CREATE TABLE `teslalogger`.`VisitedCache` (
+                  `id` INT NOT NULL AUTO_INCREMENT,
+                  `TourCacheId` INT NOT NULL,
+                  `lat` DOUBLE NOT NULL,
+                  `lng` DOUBLE NOT NULL,
+                  PRIMARY KEY (`id`));";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
             }
         }
 
@@ -659,6 +679,14 @@ PRIMARY KEY(id)
                 Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("drivestate", "TourCacheId"))
+            {
+                var sql = "ALTER TABLE `teslalogger`.`drivestate` ADD COLUMN `TourCacheId` INT NULL";
+                Logfile.Log(sql);
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql, 600);
             }
         }
 
