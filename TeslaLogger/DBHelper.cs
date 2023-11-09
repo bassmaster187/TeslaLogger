@@ -6770,7 +6770,7 @@ WHERE
                     var lastOdometer = Double.NaN;
                     var lastDatum = DateTime.MinValue;
 
-                    var maxDegree = 80;
+                    var maxDegree = 15;
                     int count = 0;
                     int readed = 0;
 
@@ -6800,7 +6800,7 @@ WHERE
                             continue;
                         }
 
-                        if (odometer - lastOdometer < 0.2)
+                        if (odometer - lastOdometer < 0.1)
                             continue;
 
                         var Direction = Tools.DegreeBearing(lastLat, lastLng, lat, lng);
