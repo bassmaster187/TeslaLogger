@@ -273,7 +273,7 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
                         SendCarCommandID(request, response);
                         break;
-                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/.{17}+/.+"):
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/.{17}/.+"):
                         SendCarCommandVIN(request, response);
                         break;
                     // misc.
