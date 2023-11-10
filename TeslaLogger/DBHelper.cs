@@ -6702,9 +6702,14 @@ WHERE
             try
             {
                 // reset all data
+                Logfile.Log("GetUniqueTrips - truncate all data");
                 ExecuteSQLQuery("delete FROM teslalogger.VisitedCache"); // xxx
                 ExecuteSQLQuery("update drivestate set TourCacheId = null"); // xxx
 
+                var sw = new Stopwatch();
+                sw.Start();
+
+                Logfile.Log("GetUniqueTrips - fill");
 
                 var dt = new DataTable();
                 var da = new MySqlDataAdapter(@"SELECT count(*) as anz, max(CarID) as CarID, max(StartDate) as StartDate, max(EndDate) as EndDate, Start_address, End_address, round(km_diff) as km_diff
@@ -6714,9 +6719,12 @@ WHERE
 		            order by anz desc", DBConnectionstring);
                 da.SelectCommand.Parameters.AddWithValue("@start", new DateTime(2010, 1, 1));
                 da.SelectCommand.Parameters.AddWithValue("@end", new DateTime(2025, 1, 1));
+                da.SelectCommand.CommandTimeout = 600;
 
 
                 da.Fill(dt);
+
+                Logfile.Log("GetUniqueTrips - fill finished");
 
                 int TourCacheId = 0;
 
@@ -6727,6 +6735,8 @@ WHERE
                     CreateVisitedCache2Tour(dr["Start_address"].ToString(), dr["End_address"].ToString(), TourCacheId);
                     CreateVisitedCache((DateTime)dr["StartDate"], (DateTime)dr["EndDate"], Convert.ToInt32(dr["CarID"]), TourCacheId);
                 }
+
+                Logfile.Log($"GetUniqueTrips finish: {(int)sw.ElapsedMilliseconds}ms");
             }
             catch (Exception ex)
             {
@@ -6737,12 +6747,18 @@ WHERE
 
         private static void CreateVisitedCache2Tour(string a1, string a2, int tourCacheId)
         {
-            try
+            for (int retry = 0; retry < 5; retry++)
             {
-                using (var con = new MySqlConnection(DBConnectionstring))
+                try
                 {
-                    con.Open();
-                    using (var cmd = new MySqlCommand(@"update drivestate set TourCacheId = @tourCacheId where id in (
+                    if (retry > 0)
+                        Logfile.Log("CreateVisitedCache2Tour Retry:" + retry);
+
+
+                    using (var con = new MySqlConnection(DBConnectionstring))
+                    {
+                        con.Open();
+                        using (var cmd = new MySqlCommand(@"update drivestate set TourCacheId = @tourCacheId where id in (
                     SELECT drivestate.id
                        FROM
                             `drivestate`
@@ -6751,18 +6767,29 @@ WHERE
                             where (pos_start.address = @A1 and pos_end.address = @A2)
                             or (pos_end.address = @A2 and pos_start.address = @A1)
                             )", con))
-                    {
-                        cmd.Parameters.AddWithValue("@A1", a1);
-                        cmd.Parameters.AddWithValue("@A2", a2);
-                        cmd.Parameters.AddWithValue("@tourCacheId", tourCacheId);
-                        cmd.ExecuteNonQuery();
+                        {
+                            cmd.Parameters.AddWithValue("@A1", a1);
+                            cmd.Parameters.AddWithValue("@A2", a2);
+                            cmd.Parameters.AddWithValue("@tourCacheId", tourCacheId);
+                            cmd.CommandTimeout = 100;
+                            cmd.ExecuteNonQuery();
+                            return;
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.ToExceptionless().FirstCarUserID().Submit();
-                Logfile.Log(ex.ToString());
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("Lock wait timeout exceeded"))
+                    {
+                        Logfile.Log("CreateVisitedCache2Tour" + ex.Message + " - " + ex.HResult.ToString());
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Logfile.Log(ex.ToString());
+                    }
+                }
             }
         }
 

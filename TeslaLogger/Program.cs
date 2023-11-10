@@ -73,8 +73,6 @@ namespace TeslaLogger
 
                 Logfile.Log("Init finished, now enter main loop");
 
-                DBHelper.GetUniqueTrips();
-
                 GetAllCars();
 
                 InitNearbySuCService();
@@ -509,6 +507,8 @@ namespace TeslaLogger
 
                     DateTime start = DateTime.Now;
                     Logfile.Log("UpdateDbInBackground started");
+
+                    DBHelper.GetUniqueTrips();
 
                     DBHelper.UpdateElevationForAllPoints();
                     WebHelper.UpdateAllPOIAddresses();
