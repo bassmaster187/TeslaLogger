@@ -18,6 +18,7 @@ namespace TeslaLogger
     internal class MQTT
     {
         private static MQTT _Mqtt;
+        private Car car;
 
         private string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
         private string host = "localhost";
@@ -31,7 +32,7 @@ namespace TeslaLogger
 
         MqttClient client;
 
-        System.Collections.Generic.HashSet<int> allCars;
+        System.Collections.Generic.HashSet<string> allCars;
         System.Collections.Generic.Dictionary<int, string> lastjson = new Dictionary<int, string>();
 
         private MQTT()
@@ -104,11 +105,11 @@ namespace TeslaLogger
                     Logfile.Log("MQTT: Connection failed!");
                 }
 
-                foreach (int car in allCars)
+                foreach (string vin in allCars)
                 {
 
                     client.Subscribe(new[] {
-                        $"{topic}/command/{car}/+"
+                        $"{topic}/command/{vin}/+"
                     },
                         new[] {
                             MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
@@ -149,21 +150,24 @@ namespace TeslaLogger
                     heartbeatCounter++;
 
 
-                    foreach (int car in allCars)
+                    foreach (string vin in allCars)
                     {
                         string temp = null;
-                        string carTopic = $"{topic}/car/{car}";
-                        string jsonTopic = $"{topic}/json/{car}/currentjson";
+                        string carTopic = $"{topic}/car/{vin}";
+                        string jsonTopic = $"{topic}/json/{vin}/currentjson";
+
+                        int carId = Car.GetCarIDFromVIN(vin);
+
                         using (WebClient wc = new WebClient())
                         {
-                            temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + car);
+                            temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
                         }
 
-                        if (!lastjson.ContainsKey(car) || temp != lastjson[car])
+                        if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
                         {
-                            lastjson[car] = temp;
+                            lastjson[carId] = temp;
 
-                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[car]),
+                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
                                 uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
                             if (subtopics)
@@ -177,7 +181,7 @@ namespace TeslaLogger
                                 }
                                 Double.TryParse(topics["latitude"], out double lat);
                                 Double.TryParse(topics["longitude"], out double lon);
-                                PublichGPSTracker(car, lat, lon);
+                                PublichGPSTracker(vin, lat, lon);
                             }
 
                         }
@@ -203,7 +207,7 @@ namespace TeslaLogger
 
                 //Example: "teslalogger/command/LRW123456/set_charge_limit", raw value "13"
 
-                Match m = Regex.Match(e.Topic, $@"{topic}/command/([0-9]+)/(.+)");
+                Match m = Regex.Match(e.Topic, $@"{topic}/command/(.{17})/(.+)");
                 if (m.Success && m.Groups.Count == 3 && m.Groups[2].Captures.Count == 1 && m.Groups[3].Captures.Count == 1)
                 {
                     if (m.Groups[0].Captures[0].ToString() == "command")
@@ -214,7 +218,7 @@ namespace TeslaLogger
                         {
                             using (WebClient wc = new WebClient())
                             {
-//                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{CarID}/{command}?{msg}");
+                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{vin}/{command}?{msg}");
                             }
                         }
                         catch (Exception ex)
@@ -296,9 +300,9 @@ namespace TeslaLogger
             }
         }
 
-        private static HashSet<int> GetAllcars()
+        private static HashSet<string> GetAllcars()
         {
-            HashSet<int> h = new HashSet<int>();
+            HashSet<string> h = new HashSet<string>();
             string json = "";
 
             try
@@ -328,7 +332,7 @@ namespace TeslaLogger
                     if (!String.IsNullOrEmpty(vin))
                     {
                         Logfile.Log("MQTT: car found: " + display_name);
-                        h.Add(id);
+                        h.Add(vin);
                     }
                 }
             }
@@ -339,8 +343,8 @@ namespace TeslaLogger
                 System.Threading.Thread.Sleep(20000);
             }
 
-            if (h.Count == 0)
-                h.Add(1);
+//            if (h.Count == 0)
+//                h.Add(1);
 
             return h;
 
@@ -365,16 +369,16 @@ namespace TeslaLogger
                    { "name", "battery level" },
                    { "device_class", "battery" },
                    { "unique_id", "XP7ABCD123456_battery_level" },
-                   { "stat_t", "tl-dev/car/3/battery_level" },         
+                   { "stat_t", $"{topic}/car/{CarID}/battery_level" },         
                    { "unit_of_measurement", "%" },
                    { "icon", "mdi:battery-50" },
                    { "dev", device }
             };
         }
 
-        internal void PublichGPSTracker(int CarID, double lat, double lon)
+        internal void PublichGPSTracker(string vin, double lat, double lon)
         {
-            string gpsTrackerTopic = $"{topic}/car/{CarID}/gps_tracker";
+            string gpsTrackerTopic = $"{topic}/car/{vin}/gps_tracker";
             Dictionary<string, object> gpsTracker = new Dictionary<string, object>
             {
                    { "latitude", lat },
