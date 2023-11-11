@@ -34,4 +34,4 @@ jobs:
         with:
           context: docker/webserver
           push: true
-          tags: ghcr.io/michaellihs/teslalogger-webserver:latest
+          tags: ghcr.io/tbomberg/teslalogger-webserver:latest
