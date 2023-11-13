@@ -18,12 +18,12 @@ namespace TeslaLogger
     internal class MQTT
     {
         private static MQTT _Mqtt;
-        private Car car;
 
         private string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
         private string host = "localhost";
         private int port = 1883;
         private string topic = "teslalogger";
+        private string discoverytopic = "homeassistant";
         private bool subtopics;
         private string user;
         private string password;
@@ -119,6 +119,11 @@ namespace TeslaLogger
                 client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                 new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
+                foreach(string vin in allCars)
+                {
+                    PublishDiscovery(vin);
+                }
+
                 while (true)
                 {
                     Work();
@@ -143,7 +148,7 @@ namespace TeslaLogger
                     //heartbeat
                     if (heartbeatCounter % 10 == 0)
                     {
-                        client.Publish($@"{topic}/status", Encoding.UTF8.GetBytes("online"),
+                        client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                         heartbeatCounter = 0;
                     }
@@ -205,30 +210,27 @@ namespace TeslaLogger
             {
                 var msg = Encoding.ASCII.GetString(e.Message);
 
-                //Example: "teslalogger/command/LRW123456/set_charge_limit", raw value "13"
+                //Example: "teslalogger/command/LRW123456/set_charging_amps", raw value "13"
+                string commandRegex = topic + @"/command/(.{17})/(.+)";
 
-                Match m = Regex.Match(e.Topic, $@"{topic}/command/(.{17})/(.+)");
-                if (m.Success && m.Groups.Count == 3 && m.Groups[2].Captures.Count == 1 && m.Groups[3].Captures.Count == 1)
+                Match m = Regex.Match(e.Topic, commandRegex);
+                if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
                 {
-                    if (m.Groups[0].Captures[0].ToString() == "command")
+                    string vin = m.Groups[1].Captures[0].ToString();
+                    string command = m.Groups[2].Captures[0].ToString();
+                    try
                     {
-                        string vin = m.Groups[1].Captures[0].ToString();
-                        string command = m.Groups[2].Captures[0].ToString();
-                        try
+                        using (WebClient wc = new WebClient())
                         {
-                            using (WebClient wc = new WebClient())
-                            {
-                                string json = wc.DownloadString($"http://localhost:{httpport}/command/{vin}/{command}?{msg}");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
-                            ex.ToExceptionless().FirstCarUserID().Submit();
-                            System.Threading.Thread.Sleep(20000);
+                            string json = wc.DownloadString($"http://localhost:{httpport}/command/{vin}/{command}?{msg}");
                         }
                     }
-
+                    catch (Exception ex)
+                    {
+                        Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
+                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        System.Threading.Thread.Sleep(20000);
+                    }
                 }
             }
             catch (Exception ex)
@@ -248,12 +250,12 @@ namespace TeslaLogger
                     if (user != null && password != null)
                     {
                         Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
-                        client.Connect(clientid, user, password, false, 0, true, $@"{topic}/status", "offline", true, 30);
+                        client.Connect(clientid, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                     }
                     else
                     {
                         Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
-                        client.Connect(clientid, null, null, false, 0, true, $@"{topic}/status", "offline", true, 30);
+                        client.Connect(clientid, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                     }
                     return false;
                 }
@@ -350,41 +352,60 @@ namespace TeslaLogger
 
         }
 
-        internal void PublishDiscovery(int CarID)
+        internal void PublishDiscovery(string vin)
         {
-            string carTopic = $"{topic}/car/{CarID}";
 
-            Dictionary<string, object> device = new Dictionary<string, object>
-            {
-                   { "ids", "VIN1234" },
-                   { "cu", "http://" },
-                   { "mf", "Tesla" },
-                   { "mdl", "Model Y" },
-                   { "name", "Berliner" },
-                   { "sw", "2023.32.10" }
-            };
+            int carId = Car.GetCarIDFromVIN(vin);
+            string model = Car.GetCarByID(carId).CarType;
+            string name = Car.GetCarByID(carId).DisplayName;
+            string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
 
-            Dictionary<string, object> discovery = new Dictionary<string, object>
+            //for each entity one config JSON
+            string entity = "battery_level";
+            string entityName = "Battery Level";
+            string entityUnit = "%";
+            string entityClass = "battery";
+            string entityIcon = "mdi:battery-50";
+
+
+            string entityConfig = JsonConvert.SerializeObject(new
             {
-                   { "name", "battery level" },
-                   { "device_class", "battery" },
-                   { "unique_id", "XP7ABCD123456_battery_level" },
-                   { "stat_t", $"{topic}/car/{CarID}/battery_level" },         
-                   { "unit_of_measurement", "%" },
-                   { "icon", "mdi:battery-50" },
-                   { "dev", device }
-            };
+                name = entityName,
+                unique_id = vin + "_" + "battery_level",
+                stat_t = $"{topic}/car/{vin}/{entity}",
+                icon = entityIcon,
+                unit_of_measurement = entityUnit,
+                device_class = entityClass,
+                dev = new {
+                    ids = vin,
+                    mf = "Tesla",
+                    mdl = model,
+                    name = name,
+                    sw = sw
+                    }
+            });
+
+            client.Publish($"{discoverytopic}/sensor/{vin}/config", Encoding.UTF8.GetBytes(entityConfig),
+                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
+            //speical case: GPS Tracker
+            string dicoveryGPSTracker = JsonConvert.SerializeObject(new
+            {
+                name = name,
+                json_attributes_topic = $"{topic}/car/{vin}/gps_tracker",
+                state_topic = $"{topic}/car/{vin}/TLGeofenceIsHome",
+                payload_home = "true",
+                payload_not_home = "fasle"
+            }) ;
+
+            client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker),
+                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
         }
 
         internal void PublichGPSTracker(string vin, double lat, double lon)
         {
             string gpsTrackerTopic = $"{topic}/car/{vin}/gps_tracker";
-            Dictionary<string, object> gpsTracker = new Dictionary<string, object>
-            {
-                   { "latitude", lat },
-                   { "longitude", lon },
-                   { "gps_accuracy", 1.0 }
-            };
 
             string json = JsonConvert.SerializeObject(new { latitude = lat , longitude = lon , gps_accuracy = 1.0 });
 
