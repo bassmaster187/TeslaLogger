@@ -116,7 +116,8 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
-//            mqtt.PublishMqttValue(car.CarInDB, name, newvalue, newTS);
+            
+            mqtt.PublishMqttValue(car.Vin, name, newvalue);
 
             switch (name)
             {

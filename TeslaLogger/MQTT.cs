@@ -360,33 +360,50 @@ namespace TeslaLogger
             string name = Car.GetCarByID(carId).DisplayName;
             string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
 
-            //for each entity one config JSON
-            string entity = "battery_level";
+            foreach(var entity in MQTTAutoDiscovery.autoDiscovery)
+            {
+                Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity.Key];
+                entitycontainer.TryGetValue("name", out string entityName);
+                entitycontainer.TryGetValue("unit", out string entityUnit);
+                entitycontainer.TryGetValue("class", out string entityClass);
+//                entitycontainer.TryGetValue("class", out string entityIcon);
+
+            
+
+/*
+            foreach (KeyValuePair<string, string> entitycontainer in MQTTAutoDiscovery.autoDiscovery["bla"])
+            {
+                
+            }
+
+                //for each entity one config JSON
+                string entity = "battery_level";
             string entityName = "Battery Level";
             string entityUnit = "%";
             string entityClass = "battery";
             string entityIcon = "mdi:battery-50";
+*/
 
+                string entityConfig = JsonConvert.SerializeObject(new
+                {
+                    name = entityName,
+                    unique_id = vin + "_" + "battery_level",
+                    stat_t = $"{topic}/car/{vin}/{entity}",
+                    unit_of_measurement = entityUnit,
+                    device_class = entityClass,
+                    dev = new {
+                        ids = vin,
+                        mf = "Tesla",
+                        mdl = model,
+                        name = name,
+                        sw = sw
+                        }
+                });
 
-            string entityConfig = JsonConvert.SerializeObject(new
-            {
-                name = entityName,
-                unique_id = vin + "_" + "battery_level",
-                stat_t = $"{topic}/car/{vin}/{entity}",
-                icon = entityIcon,
-                unit_of_measurement = entityUnit,
-                device_class = entityClass,
-                dev = new {
-                    ids = vin,
-                    mf = "Tesla",
-                    mdl = model,
-                    name = name,
-                    sw = sw
-                    }
-            });
+                client.Publish($"{discoverytopic}/sensor/{vin}/config", Encoding.UTF8.GetBytes(entityConfig),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
-            client.Publish($"{discoverytopic}/sensor/{vin}/config", Encoding.UTF8.GetBytes(entityConfig),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+            }
 
             //speical case: GPS Tracker
             string dicoveryGPSTracker = JsonConvert.SerializeObject(new
@@ -414,18 +431,18 @@ namespace TeslaLogger
 
         }
 
-        internal void PublishMqttValue(int CarID, String name, object newvalue, long newTS)
+        internal void PublishMqttValue(string vin, String name, object newvalue)
         {
-            string carTopic = $"{topic}/car/{CarID}";
-            string jsonTopic = $"{topic}/json/{CarID}";
+            string carTopic = $"{topic}/car/{vin}";
+            string jsonTopic = $"{topic}/json/{vin}";
             try
             {
                 if(ConnectionCheck())
                 {
                     client.Publish(carTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-                    client.Publish(jsonTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
-                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+//                    client.Publish(jsonTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
+//                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 }
 
             }
