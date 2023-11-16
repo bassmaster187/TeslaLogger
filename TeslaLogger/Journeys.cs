@@ -14,10 +14,9 @@ using Newtonsoft.Json;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal static class Journeys
     {
-        private static Dictionary<string, string> EndPoints = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> EndPoints = new Dictionary<string, string>()
         {
             { "JourneysCreateSelectCar", "/journeys/create/selectCar" },
             { "JourneysCreateStart", "/journeys/create/start" },
@@ -58,14 +57,14 @@ namespace TeslaLogger
         internal static string TEXT_TH_CHARGE_EFF = "Charge efficiency";
         internal static string TEXT_TH_ACTIONS = "Actions";
 
-        private static string html1 = @"<html>
+        private static readonly string html1 = @"<html>
   <head>
     <link href=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"" type=""text/css"" rel=""stylesheet"" />
     <script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js""></script>
     <script src=""https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js""></script>
   </head>
   <body>" + PageHeader() + "<table border=\"1\">";
-        private static string html2 = @"
+        private static readonly string html2 = @"
     </table>
     <script>
 $(document).ready(function() {
@@ -97,6 +96,13 @@ CREATE TABLE journeys (
     PRIMARY KEY(id))");
                     Logfile.Log("CREATE TABLE OK");
                 }
+                if (!DBHelper.ColumnExists("journeys", "freesuc"))
+                {
+                    Logfile.Log("ALTER TABLE journeys ADD Column freesuc");
+                    UpdateTeslalogger.AssertAlterDB();
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE `journeys` 
+                    ADD COLUMN `freesuc` DOUBLE NULL DEFAULT NULL", 600);
+                }
             }
             catch (Exception ex)
             {
@@ -105,7 +111,7 @@ CREATE TABLE journeys (
             }
         }
 
-        internal static void JourneysCreateSelectCar(HttpListenerRequest request, HttpListenerResponse response)
+        internal static void JourneysCreateSelectCar(HttpListenerRequest _, HttpListenerResponse response)
         {
             // in: nothing
             // out: carID
@@ -117,7 +123,7 @@ CREATE TABLE journeys (
             {
                 foreach (DataRow r in dt.Rows)
                 {
-                    int id = id = Convert.ToInt32(r["id"], Tools.ciDeDE);
+                    int id = Convert.ToInt32(r["id"], Tools.ciDeDE);
                     string display_name = r["display_name"] as String ?? "";
                     sb.Append($@"<option value=""{id}"" label=""{WebUtility.HtmlEncode(display_name)}"">{WebUtility.HtmlEncode(display_name)}</option>");
                 }
@@ -130,14 +136,13 @@ CREATE TABLE journeys (
 
         internal static void JourneysCreateStart(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
             dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
 
-            var o = new List<object>();
+            List<object> o = new List<object>();
             o.Add(new KeyValuePair<string, string>("", "Please Select"));
 
             try
@@ -172,25 +177,20 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = JsonConvert.SerializeObject(o);
+            string json = JsonConvert.SerializeObject(o);
 
             WriteString(response, json);
         }
 
         internal static void JourneysCreateEnd(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // in: CarID, StartPosID
-            // out: CarID, StartPosID, EndPosId
-            // action: render End selection HTML
-
-            string json = "";
             string data = WebServer.GetDataFromRequestInputStream(request);
             dynamic r = JsonConvert.DeserializeObject(data);
 
             int CarID = r["carid"];
             Tools.DebugLog($"JourneysCreateStart CarID:{CarID}");
 
-            var o = new List<object>();
+            List<object> o = new List<object>();
             o.Add(new KeyValuePair<string, string>("", "Please Select"));
 
 
@@ -234,7 +234,11 @@ ORDER BY
                 Logfile.Log(ex.ToString());
             }
 
-            json = JsonConvert.SerializeObject(o);
+            // in: CarID, StartPosID
+            // out: CarID, StartPosID, EndPosId
+            // action: render End selection HTML
+
+            string json = JsonConvert.SerializeObject(o);
             WriteString(response, json);
         }
 
@@ -319,7 +323,55 @@ LIMIT 1", con))
                 CalculateDriveDuration(journeyId);
                 CalculateCharged(journeyId);
                 CalculateChargeDuration(journeyId);
+                CalculateFreeSuC(journeyId);
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+        }
+
+        private static void CalculateFreeSuC(int journeyId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                {
+                    con.Open();
+                    double freesuc = 0;
+                    bool update = false;
+                    using (MySqlCommand cmd = new MySqlCommand(@"
+SELECT
+    SUM(chargingstate.cost_freesuc_savings_total)
+FROM
+    chargingstate
+WHERE
+    chargingstate.Pos > (SELECT StartPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.Pos < (SELECT EndPosID FROM journeys WHERE ID = @journeyID)
+    AND chargingstate.carID = (SELECT CarID FROM journeys WHERE ID = @journeyID)
+", con))
+                    {
+                        cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                        update = double.TryParse(SQLTracer.TraceSc(cmd).ToString(), out freesuc);
+                    }
+                    if (update)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(@"
+UPDATE
+    journeys
+SET
+    freesuc = @freesuc
+WHERE
+    Id = @journeyID", con))
+                        {
+                            cmd.Parameters.AddWithValue("@journeyID", journeyId);
+                            cmd.Parameters.AddWithValue("@freesuc", freesuc);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
         }
 
         internal static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
@@ -567,8 +619,8 @@ SELECT
     ) as CO2kg,
     (
 	select round(sum(cost_total),2) from chargingstate as T1 where T1.CarID = cars.Id and T1.StartDate between tripStart.StartDate and tripEnd.EndDate
-    ) as cost_total
-    
+    ) as cost_total,
+    journeys.freesuc
 FROM
     journeys join cars on journeys.CarID = cars.Id
     join trip tripStart on journeys.StartPosID = tripStart.StartPosID
@@ -576,7 +628,6 @@ FROM
 WHERE cars.Id = {carid}
 ORDER BY
     journeys.Id ASC";
-            
             WriteString(response, DBHelper.GetJQueryDataTableJSON(sql));
         }
 
@@ -663,7 +714,7 @@ WHERE
             WriteString(response, "OK");
         }
 
-        internal static void JourneysIndex(HttpListenerRequest request, HttpListenerResponse response)
+        internal static void JourneysIndex(HttpListenerRequest _, HttpListenerResponse response)
         {
             // in: nothing
             // out: render index HTML
