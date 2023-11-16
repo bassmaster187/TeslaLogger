@@ -15,7 +15,6 @@ using MySql.Data.MySqlClient;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal class Car
     {
         private TeslaState _currentState = TeslaState.Start;
@@ -194,6 +193,8 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
+        private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
+
         public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "")
         {
             lock (_syncRoot)
@@ -234,6 +235,8 @@ namespace TeslaLogger
                         };
                         thread.Start();
                     }
+
+                    VIN2DBCarID.Add(vin, CarInDB);
                 }
                 catch (Exception ex)
                 {
@@ -242,6 +245,15 @@ namespace TeslaLogger
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
             }
+        }
+
+        public static int GetCarIDFromVIN(string vin)
+        {
+            if (VIN2DBCarID.ContainsKey(vin))
+            {
+                return VIN2DBCarID[vin];
+            }
+            return -1; // -1 means error as CarID in database can only be a positive integer
         }
 
         private void Loop()
