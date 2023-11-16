@@ -19,12 +19,14 @@ namespace TeslaLogger
     {
         private static MQTT _Mqtt;
 
-        private string clientid = "6333abad-51f4-430d-9ba5-0047602612d1";
+        private string clientid = "TeslaLoggerMqttClient";
         private string host = "localhost";
         private int port = 1883;
         private string topic = "teslalogger";
-        private string discoverytopic = "homeassistant";
         private bool subtopics;
+        private bool publishJson;
+        private bool discoveryEnable;
+        private string discoverytopic = "homeassistant";
         private string user;
         private string password;
         private static int httpport = 5000;
@@ -77,13 +79,25 @@ namespace TeslaLogger
                     {
                         topic = r["mqtt_topic"];
                     }
-                    if (r["mqtt_clientid"] > 0)
+                    if (r["mqtt_publishjson"] > 0)
                     {
-                        clientid = r["mqtt_clientid"];
+                        publishJson = (bool)r["mqtt_publishjson"];
                     }
                     if (r["mqtt_subtopics"] > 0)
                     {
                         subtopics = (bool)r["mqtt_subtopics"];
+                    }
+                    if (r["mqtt_discoveryenable"] > 0)
+                    {
+                        discoveryEnable = (bool)r["mqtt_discoveryenable"];
+                    }
+                    if (r["mqtt_topic"] > 0)
+                    {
+                        discoverytopic = r["mqtt_topic"];
+                    }
+                    if (r["mqtt_clientid"] > 0)
+                    {
+                        clientid = r["mqtt_clientid"];
                     }
                     Logfile.Log("MQTT: Settings found");
                 }
@@ -119,10 +133,14 @@ namespace TeslaLogger
                 client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                 new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
-                foreach(string vin in allCars)
+                if (discoveryEnable)
                 {
-                    PublishDiscovery(vin);
+                    foreach(string vin in allCars)
+                    {
+                        PublishDiscovery(vin);
+                    }
                 }
+                
 
                 while (true)
                 {
@@ -359,7 +377,7 @@ namespace TeslaLogger
             string model = Car.GetCarByID(carId).CarType;
             string name = Car.GetCarByID(carId).DisplayName;
             string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
-
+/*
             foreach(var entity in MQTTAutoDiscovery.autoDiscovery)
             {
                 Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity.Key];
@@ -370,19 +388,19 @@ namespace TeslaLogger
 
             
 
-/*
+
             foreach (KeyValuePair<string, string> entitycontainer in MQTTAutoDiscovery.autoDiscovery["bla"])
             {
                 
             }
-
+*/
                 //for each entity one config JSON
                 string entity = "battery_level";
-            string entityName = "Battery Level";
-            string entityUnit = "%";
-            string entityClass = "battery";
-            string entityIcon = "mdi:battery-50";
-*/
+                string entityName = "Battery Level";
+                string entityUnit = "%";
+                string entityClass = "battery";
+//                string entityIcon = "mdi:battery-50";
+
 
                 string entityConfig = JsonConvert.SerializeObject(new
                 {
@@ -403,7 +421,7 @@ namespace TeslaLogger
                 client.Publish($"{discoverytopic}/sensor/{vin}/config", Encoding.UTF8.GetBytes(entityConfig),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
-            }
+//            }
 
             //speical case: GPS Tracker
             string dicoveryGPSTracker = JsonConvert.SerializeObject(new

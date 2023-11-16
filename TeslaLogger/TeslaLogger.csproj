@@ -133,6 +133,7 @@
     <Compile Include="CaptchaSolver.cs" />
     <Compile Include="CaptchaSolverKey.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="MQTTAutoDiscovery.cs" />
     <Compile Include="MQTT.cs" />
     <Compile Include="CO2.cs" />
     <Compile Include="Crc32.cs" />
