@@ -4002,6 +4002,7 @@ ORDER BY
     Pos
 DESC", con))
                     {
+                        Tools.DebugLog(cmdBucket);
                         var bucketdr = SQLTracer.TraceDR(cmdBucket);
                         var loop = true;
 
@@ -4031,6 +4032,14 @@ DESC", con))
 
                     t = Environment.TickCount - t;
                     Logfile.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+                }
+            }
+            catch (MySql.Data.MySqlClient.MySqlException mex)
+            {
+                Tools.DebugLog(mex.ToString());
+                Tools.DebugLog("SQLState: <" + mex.SqlState + ">");
+                foreach (var key in mex.Data.Keys) {
+                    Tools.DebugLog("SQL Data key:<" + key + "> value:<" + mex.Data[key] + ">");
                 }
             }
             catch (Exception ex)
