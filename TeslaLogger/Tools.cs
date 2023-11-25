@@ -438,6 +438,10 @@ namespace TeslaLogger
                 {
                     year--;
                 }
+                if (dateCode > 81) // skip Q
+                {
+                    year--;
+                }
                 switch (vin[3])
                 {
                     case 'S':
