@@ -991,7 +991,7 @@ PRIMARY KEY(id)
             return temp;
         }
 
-        public static void DownloadUpdateAndInstall()
+        public static async void DownloadUpdateAndInstall()
         {
             DownloadUpdateAndInstallStarted = true;
 
@@ -1198,7 +1198,7 @@ PRIMARY KEY(id)
                 }
 
                 ExceptionlessClient.Default.CreateLog("Install", "Update finished!").FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
 
                 Logfile.Log("End update");
 

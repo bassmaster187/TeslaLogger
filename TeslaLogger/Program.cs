@@ -85,7 +85,7 @@ namespace TeslaLogger
                 Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
             }
             finally
             {

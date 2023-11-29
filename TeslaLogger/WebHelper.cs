@@ -617,7 +617,7 @@ namespace TeslaLogger
                 // car.ExternalLog("UpdateTeslaTokenFromRefreshToken: \r\nHTTP StatusCode: " + HttpStatusCode+ "\r\nresultContent: " + resultContent +"\r\n" + ex.ToString());
                 car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshToken", "Error getting access token", Exceptionless.Logging.LogLevel.Error).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").Submit();
                 car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent,"ResultContent").MarkAsCritical().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
             }
             return "";
         }
@@ -4002,6 +4002,7 @@ ORDER BY
     Pos
 DESC", con))
                     {
+                        Tools.DebugLog(cmdBucket);
                         var bucketdr = SQLTracer.TraceDR(cmdBucket);
                         var loop = true;
 
@@ -4031,6 +4032,14 @@ DESC", con))
 
                     t = Environment.TickCount - t;
                     Logfile.Log($"UpdateAllPOIAddresses end {t}ms count:{count}");
+                }
+            }
+            catch (MySql.Data.MySqlClient.MySqlException mex)
+            {
+                Tools.DebugLog(mex.ToString());
+                Tools.DebugLog("SQLState: <" + mex.SqlState + ">");
+                foreach (var key in mex.Data.Keys) {
+                    Tools.DebugLog("SQL Data key:<" + key + "> value:<" + mex.Data[key] + ">");
                 }
             }
             catch (Exception ex)
