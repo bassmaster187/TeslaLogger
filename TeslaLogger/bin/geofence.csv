@@ -903,12 +903,19 @@ Supercharger RS-Aleksinac, 43.528816, 21.709413
 Supercharger RS-Belgrade, 44.710065, 20.561113
 Supercharger SE-Arboga, 59.426307, 15.827684
 Supercharger SE-Arvidsjaur, 65.589922, 19.184091
+Supercharger-V3 SE-Björkliden, 68.40734, 18.674918
 Supercharger SE-Borlänge, 60.478804, 15.438655
+Supercharger-V3 SE-Dorotea, 64.261428, 16.417156
 Supercharger SE-Edsbruk, 57.97985, 16.482407
 Supercharger SE-Enköping, 59.659057,17.076919
 Supercharger SE-Falkenberg, 56.931922,12.518628
 Supercharger SE-Grums, 59.365749, 13.14537
+Supercharger SE-Gäddede, 64.5065, 14.1435
 Supercharger SE-Gävle, 60.648513, 17.120583
+Supercharger-V3 SE-Gothenburg South, 57.6519635, 11.9512471
+Supercharger-V3 SE-Haninge, 59.1810494, 18.16069
+Supercharger-V3 SE-Helsingborg, 56.091, 12.76455
+Supercharger-V3 SE-Hogstorp, 58.393909, 11.757387
 Supercharger SE-Hudiksvall, 61.714854, 17.042692
 Supercharger SE-Jung, 58.328002, 13.132237
 Supercharger SE-Jäckvik, 66.39067, 16.964868
@@ -923,7 +930,11 @@ Supercharger SE-Krokom, 63.328793, 14.4301
 Supercharger SE-Kungälv, 57.8581639, 11.9982719
 Supercharger SE-Lagan, 57.028956, 14.014744
 Supercharger-V3 SE-Linköping, 58.435438, 15.590951
+Supercharger-V3 SE-Ljusdal, 61.827747, 16.094661
 Supercharger SE-Löddeköpinge, 55.766399, 12.990671
+Supercharger-V3 SE-Lycksele, 64.596066, 18.674414
+Supercharger-V3 SE-Malung, 60.685489, 13.713506
+Supercharger-V3 SE-Malå, 65.179347, 18.746649
 Supercharger-V3 SE-Mantorp, 58.3656796, 15.2939591, 30
 Supercharger-V3 SE-Mariestad,58.677066,13.815005
 Supercharger-V3 SE-Markaryd, 56.444825, 13.603916
@@ -931,10 +942,12 @@ Supercharger-V3 SE-Halmstad, 56.657389, 12.907444
 Supercharger SE-Markaryd, 56.444825, 13.603916
 Supercharger SE-Mellbystrand, 56.501606,12.95763
 Supercharger SE-Mora, 61.005921, 14.54418
+Supercharger-V3 SE-Nacka, 59.3112373, 18.1760186
 Supercharger SE-Nørre Alslev, 54.899885, 11.89693
 Supercharger SE-Norrköping, 58.62191, 16.154806
 Supercharger-V3 SE-Örebro, 59.297677, 15.206645, 40
 Supercharger SE-Puoltikasvaara, 67.440201, 21.115515
+Supercharger-V3 SE-Sälen, 61.163666, 13.203015
 Supercharger SE-Skellefteå, 64.76235, 21.002864
 Supercharger SE-Slagelse, 55.388, 11.3622
 Supercharger-V3 SE-Sollentuna, 59.496586,17.92444
@@ -943,6 +956,9 @@ Supercharger-V3 SE-Söderhamn, 61.294919, 17.0209945
 Supercharger SE-Stockholm, 59.5006239, 17.926818
 Supercharger SE-Storlien, 63.310045,12.109286
 Supercharger SE-Storuman, 65.092642, 17.107984
+Supercharger-V3 SE-Strängnäs, 59.328208, 17.017658
+Supercharger-V3 SE-Strömstad, 58.946329, 11.19394
+Supercharger-V3 SE-Sundsvall - West, 62.396129, 17.251596
 Supercharger SE-Sundsvall, 62.398468, 17.338902
 Supercharger SE-Sveg, 62.034484, 14.366261
 Supercharger SE-Tanum, 58.722128, 11.344127, 40
@@ -956,7 +972,13 @@ Supercharger SE-Umeå, 63.810547, 20.250437
 Supercharger SE-Uppsala, 59.939144, 17.656107
 Supercharger SE-Ödeshög, 58.227173, 14.668821
 Supercharger SE-Örnsköldsvik, 63.291556, 18.706134
+Supercharger-V3 SE-Övertorneå, 66.383535, 23.654794
+Supercharger-V3 SE-Växjö, 56.884262, 14.763464
 Supercharger-V3 SE-Varberg, 57.167879,12.27554
+Supercharger-V3 SE-Vetlanda, 57.415344, 15.090615
+Supercharger-V3 SE-Ystad, 55.434597, 13.839937
+Supercharger-V3 SE-Ånge, 62.537307, 15.919596
+Supercharger-V3 SE-Åsarna, 62.6408, 14.370883
 Supercharger SI-Kozina, 45.60492, 13.928521
 Supercharger SI-Kozina, 45.607449, 13.931531
 Supercharger SI-Ljubljana, 46.051778, 14.452056
