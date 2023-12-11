@@ -156,7 +156,9 @@ Supercharger-V3 DE-Augsburg,48.398906,10.868047,30
 Supercharger-V3 DE-Augsburg,48.398938,10.868306,30
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
+Supercharger-V3 DE-Baden-Baden, 48.78364, 8.19225
 Supercharger DE-Beelitz, 52.266803, 12.922467
+Supercharger-V3 DE-Berchtesgaden, 47.626649, 13.000651
 Supercharger-V3 DE-Bergkamen,51.649452,7.671108,20
 Supercharger-V3 DE-Bensheim, 49.672353, 8.6022525, 22
 Supercharger-V3 DE-Berlin - EUREF-Campus, 52.4808984, 13.3558539
@@ -172,6 +174,7 @@ Supercharger-V3 DE-Bonn - Bonner Bogen, 50.718553, 7.152138
 Supercharger-V3 DE-Böblingen,48.69138,9.003647
 Supercharger-V3 DE-Braak, 53.6178758, 10.239352
 Supercharger DE-Braak, 53.6178758, 10.239352
+Supercharger-V3 DE-Burgdorf, 52.122814, 10.228904
 Supercharger DE-Busdorf, 54.477896, 9.544913								   
 Supercharger DE-Brinkum, 53.028326, 8.808758
 Supercharger DE-Bruchsal, 49.13837, 8.56242
@@ -207,7 +210,9 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
 Supercharger-V3 DE-Hamburg-Wandsbek, 53.586773, 10.098058
+Supercharger-V3 DE-Hanau, 50.105195, 8.916918
 Supercharger-V3 DE-Hannover, 52.423275,9.835039, 20
+Supercharger-V3 DE-Heede, 52.985372, 7.248233
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
 Supercharger DE-Hengersberg, 48.76555, 13.04668
 Supercharger DE-Herboltzheim, 48.22704, 7.75368
@@ -231,6 +236,7 @@ Supercharger DE-Hilpoltstein,49.161213,11.260555,8
 Supercharger DE-Hilpoltstein,49.161201,11.260685,12
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
+Supercharger-V3 DE-Holzkirchen, 47.8810757, 11.70275368
 Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger-V3 DE-Irschenberg, 47.826678, 11.898501
 Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
@@ -318,7 +324,7 @@ Supercharger-V3 DE-Rhüden,51.947298,10.140858,6
 Supercharger-V3 DE-Rhüden,51.947243,10.140858,6
 Supercharger DE-Rhüden, 51.947221, 10.140505, 12
 Supercharger-V3 DE-Rosenheim,47.817007,12.120582
-Supercharger-V3 DE-Rüsselsheim,49.968394,8.390394
+Supercharger-V3 DE-Rüsselsheim,49.968408, 8.390534
 Supercharger DE-Sangerhausen, 51.450551, 11.3044818
 Supercharger-V3 DE-Satteldorf, 49.18119, 10.06933
 Supercharger DE-Satteldorf, 49.18119, 10.06933
@@ -329,6 +335,7 @@ Supercharger-V3 DE-Schleiz,50.54647989730031,11.803035300128926,20
 Supercharger DE-Schweitenkirchen, 48.510765, 11.582025, 19
 Supercharger-V3 DE-Sindelsdorf, 47.728372, 11.361923
 Supercharger DE-Sindelsdorf, 47.728372, 11.361923
+Supercharger-V3 DE-Solingen, 51.129579, 6.995592
 Supercharger-V3 DE-Soltau-Ost,52.983332,9.925548
 Supercharger DE-Stuhr (Bremen-Brinkum), 53.0284305, 8.8061246
 Supercharger DE-Sulz-Vöhringen, 48.34305, 8.66262, 30
@@ -344,6 +351,7 @@ Supercharger-V3 DE-Vaterstetten, 48.146719,11.790205
 Supercharger-V3 DE-Vaterstetten, 48.146472,11.790255
 Supercharger-V3 DE-Vaterstetten, 48.146213,11.790329
 Supercharger-V3 DE-Viernheim - Rhein-Neckar-Zentrum,49.528083,8.565772,30
+Supercharger-V3 DE-Waiblingen, 48.82149836, 9.29680224
 Supercharger DE-Waldlaubersheim, 49.9240135, 7.825654
 Supercharger-V3 DE-Weibersbrunn, 49.934777,9.353755
 Supercharger DE-Weimar, 50.9342158, 11.289809
