@@ -2983,20 +2983,25 @@ namespace TeslaLogger
                     var rc2 = GetCommand("vehicle_data?endpoints=location_data").Result;
                     if (rc2 == null)
                         return false;
-
-                    dynamic jsonResult2 = JsonConvert.DeserializeObject(rc2);
-                    dynamic r2x = jsonResult2["response"]["drive_state"];
-
-                    if (r2x?.ContainsKey("latitude") == true)
+                    try
                     {
-                        dLatitude = (decimal)r2x["latitude"];
-                        dLongitude = (decimal)r2x["longitude"];
-                        heading = (int)r2x["heading"];
+                        dynamic jsonResult2 = JsonConvert.DeserializeObject(rc2);
+                        dynamic r2x = jsonResult2["response"]["drive_state"];
+
+                        if (r2x?.ContainsKey("latitude") == true)
+                        {
+                            dLatitude = (decimal)r2x["latitude"];
+                            dLongitude = (decimal)r2x["longitude"];
+                            heading = (int)r2x["heading"];
+                        }
+                        else
+                            return false;
                     }
-                    else
-                        return false;
+                    catch (Exception){
+                        resultContent = rc2;
+                        throw;
+                    }
                 }
-                
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
