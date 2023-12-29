@@ -10,7 +10,7 @@ These versions are known to work fine:
 docker -v
 Docker version 19.03.2, build 6a30dfca03
 
-docker compose -v
+docker compose version
 docker compose version 1.24.1, build 4667896b
 ```
 
