@@ -461,10 +461,16 @@ ORDER BY
 
             try
             {
+		Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out _, out _, out _);
+		string bat_range = "ideal_battery_range_km";
+		if (Range == "RR")
+		{
+		    bat_range = "battery_range_km";
+		}
                 int ProtocolVersion = 1;
                 car.Log("ShareData: SendDegradationData start");
 
-                string sql = @"
+                string sql = $@"
 SELECT
     MIN(chargingstate.StartDate) AS Date,
     (SELECT
@@ -479,7 +485,7 @@ SELECT
     LIMIT 1
     ) AS v,
     odometer DIV 500 * 500 AS odo,
-    ROUND(AVG(charging_End.ideal_battery_range_km / charging_End.battery_level * 100), 0) AS 'TR',
+    ROUND(AVG(charging_End.{bat_range} / charging_End.battery_level * 100), 0) AS 'TR',
     ROUND(AVG(pos.outside_temp), 0) AS temp
 FROM
     charging
