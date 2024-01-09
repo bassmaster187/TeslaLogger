@@ -85,7 +85,7 @@ namespace TeslaLogger
                 Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
             }
             finally
             {
@@ -186,9 +186,14 @@ namespace TeslaLogger
                 string tasker_hash = r["tasker_hash"] as String ?? "";
                 double? wh_tr = r["wh_tr"] as double?;
                 string wheel_type = r["wheel_type"] as String ?? "";
+                bool raven = false;
+                if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
+                    raven = true;
+
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState, wheel_type);
+                car.Raven = raven;
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)

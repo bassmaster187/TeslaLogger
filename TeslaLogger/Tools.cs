@@ -438,6 +438,10 @@ namespace TeslaLogger
                 {
                     year--;
                 }
+                if (dateCode > 81) // skip Q
+                {
+                    year--;
+                }
                 switch (vin[3])
                 {
                     case 'S':
@@ -1457,6 +1461,8 @@ namespace TeslaLogger
                 // cleanup backup folder
                 CleanupBackupFolder();
 
+                CreateBackupForDocker();
+
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
@@ -1467,6 +1473,15 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static void CreateBackupForDocker()
+        {
+            if (!IsDocker())
+                return;
+
+            Logfile.Log("Start backup for Docker");
+            Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
         }
 
         public static void CleanupBackupFolder(long freeDiskSpaceNeededMB = 2048, int keepDays = 14)
