@@ -45,13 +45,13 @@ Enter Tesla credentials / Token to connect to your car.
 
 # Docker update / upgrade
 Usually, you update the Teslalogger in admin-panel by clicking on update button.
-If there are updates of the subsystem, you have to get the latest docker compose.yam file.
+If there are updates of the subsystem, you have to get the latest docker-compose.yam file.
 
 ```
 docker compose stop
 git fetch
 git reset --hard origin/master
-git checkout origin/master -- docker compose.yml
+git checkout origin/master -- docker-compose.yml
 git checkout origin/master -- TeslaLogger/GrafanaConfig/datasource.yaml
 docker compose build
 docker compose up -d
