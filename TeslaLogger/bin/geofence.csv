@@ -1613,25 +1613,25 @@ EnBW DE-Brunnthal,48.041336,11.660908,10
 EnBW DE-Brunsbüttel, 53.900785, 9.122634
 EnBW DE-Buchholz in der Nordheide, 53.286876, 9.870790704
 EnBW DE-Burgauer See, 48.413506, 10.429502
+EnBW DE-Buxtehude Rewe, 53.456974, 9.67051
+EnBW DE-Buxtehude, 53.480943, 9.696181
 EnBW DE-Büsum, 54.137559, 8.874535
 EnBW DE-Büttelborn Süd, 49.892555, 8.543881, 20
-EnBW DE-Buxtehude, 53.480943, 9.696181
-EnBW DE-Buxtehude Rewe, 53.456974, 9.67051
 EnBW DE-Cuxhaven, 53.875698, 8.688591
-EnBW DE-Dätgen, 54.180464, 9.943138
 EnBW DE-Deffingen, 48.43331249, 10.2931190, 12
 EnBW DE-Dollenberg Ost, 50.688429, 8.295862, 5
-EnBW DE-Ebersberg, 48.096569, 11.961316
+EnBW DE-Dätgen, 54.180464, 9.943138
 EnBW DE-Ebelsbach, 49.9848745, 10.668505
+EnBW DE-Ebersberg, 48.096569, 11.961316
 EnBW DE-Edelzell, 50.529549,9.690535
 EnBW DE-Edesheim Pfälzer Weinstraße Ost, 49.270394,8.153854, 10
 EnBW DE-Edesheim Pfälzer Weinstraße West, 49.26986,8.151913, 10
+EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
 EnBW DE-Ellhofen, 49.143621,9.308792
 EnBW DE-Ellwangen (Jagst) Rasthof Ellwanger Berge Ost, 48.984851, 10.196098
-EnBW DE-Ehrenberg West, 51.265618, 7.245238, 20
-EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
 EnBW DE-Elmshorn, 53.74573, 9.66126
 EnBW DE-Ems-Vechte-West, 52.527915,7.196439,10
+EnBW DE-Erlangen Hofmannstraße, 49.592873,11.014516, 10
 EnBW DE-Essen Krablerstraße, 51.485605, 6.9962673
 EnBW DE-Fellbach Esslinger Straße, 48.804607,9.268818, 10
 EnBW DE-Friesoythe, 53.016216, 7.852262, 20
@@ -1646,22 +1646,16 @@ EnBW DE-Gera Globus, 50.8880999, 12.1374571
 EnBW DE-Giengen an der Brenz, 48.6176632, 10.252562
 EnBW DE-Glinde, 53.546127, 10.231169
 EnBW DE-Grabow, 53.29823422907, 11.533000265427
-EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Greding OMV,49.043871,11.349862,10
+EnBW DE-Greding West, 49.045512, 11.337622
 EnBW DE-Greifswald, 54.087875718384, 13.39879046936
 EnBW DE-Grevesmühlen, 53.866511, 11.183296
 EnBW DE-Groß-Umstadt, 49.86928, 8.9198, 65
 EnBW DE-Großberg, 48.972829,12.065386
 EnBW DE-Göttingen West, 51.494746,9.876191
 EnBW DE-Güstrow, 53.815456, 12.19278
-EnBW DE-Igersheim, 49.486855,9.820828
-EnBW DE-Illertal West,48.125496,10.10963,20
-EnBW DE-Illertal Ost, 48.124722, 10.112120, 20
-EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
-EnBW DE-Inntal-Ost, 47.610841,12.20169, 10
-EnBW DE-Inntal-West, 47.612646,12.200665, 10
-EnBW DE-Hamburg Penny, 53.584064, 10.058082
 EnBW DE-Hamburg Penny Oberer Landweg, 53.48998, 10.18764
+EnBW DE-Hamburg Penny, 53.584064, 10.058082
 EnBW DE-Hamburg Shell, 53.515415, 10.081894
 EnBW DE-Hamburg-Bergedorf Bauhaus, 53.48247, 10.207571
 EnBW DE-Hamburg-Bramfeld Bauhaus, 53.603546, 10.072077
@@ -1676,6 +1670,7 @@ EnBW DE-Heide, 54.19662, 9.128715
 EnBW DE-Hellweg Süd,51.593555,8.487382
 EnBW DE-Herleshausen Brandenburgstraße 99,51.006613,10.175765
 EnBW DE-Herleshausen Werratal Süd,51.006849,10.180803
+EnBW DE-Heßdorf, 49.626625,10.923328, 30
 EnBW DE-Hildesheim Albert-Einstein-Strasse, 52.15951567929753, 9.994232402647167, 30
 EnBW DE-Hildesheim Siemensstraße, 52.163101,9.972193
 EnBW DE-Himmelpforten, 53.61389, 9.30104
@@ -1683,14 +1678,19 @@ EnBW DE-Hirschaid, 49.819734,11.000681
 EnBW DE-Hirschberg, 50.427867, 11.795703
 EnBW DE-Hofoldinger Forst Süd, 47.9971515, 11.676045, 4
 EnBW DE-Hohenwarsleben, 52.175060, 11.495039, 10
-EnBW DE-Höhr-Grenzhausen, 50.439177,7.647429
-EnBW DE-Heßdorf, 49.626625,10.923328, 30
 EnBW DE-Hunsrück West, 49.963341, 7.765829
 EnBW DE-Hurlach, 48.12758, 10.834338
 EnBW DE-Husum, 54.4893, 9.045069
+EnBW DE-Höhr-Grenzhausen, 50.439177,7.647429
 EnBW DE-Hünxe West, 51.635723,6.74493
+EnBW DE-Igersheim, 49.486855,9.820828
+EnBW DE-Illertal Ost, 48.124722, 10.112120, 20
+EnBW DE-Illertal West,48.125496,10.10963,20
+EnBW DE-Im Hegau West, 47.861344, 8.786230, 25
 EnBW DE-Immenstaad am Bodensee, 47.66649133, 9.3666571
 EnBW DE-Ingolstadt Goethestraße, 48.772272, 11.45188
+EnBW DE-Inntal-Ost, 47.610841,12.20169, 10
+EnBW DE-Inntal-West, 47.612646,12.200665, 10
 EnBW DE-Jagsttal Ost, 49.322951,9.415858, 20
 EnBW DE-Kamen,51.567098,7.674812,30
 EnBW DE-Karlsruhe Durlach Center, 49.0038593, 8.4474905
@@ -1716,80 +1716,80 @@ EnBW DE-Lübeck BAUHAUS, 53.862047,10.629666
 EnBW DE-Lübeck Penny, 53.865476, 10.721
 EnBW DE-Lübz, 53.465291, 12.041725
 EnBW DE-Lüneburg, 53.240270940354, 10.461974929051
-EnBW DE-Naumburg Euronics, 51.145178,11.83287
-EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
-EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
-EnBW DE-Nortorf, 54.164966, 9.854245
-EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
-EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
-EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
 EnBW DE-Meerane, 50.8416292, 12.4449415, 10
+EnBW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
 EnBW DE-Meitingen Nord, 48.557666, 10.852404, 20
-EnbW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
-EnbW DE-Meitingen Euronics, 48.5561974, 10.851761, 10
+EnBW DE-Meitingen OMV, 48.5581413, 10.8526477, 10
 EnBW DE-Memmingen, 47.999336, 10.153201, 10
 EnBW DE-Mending, 50.382236, 7.269514
 EnBW DE-Mölln, 53.622641, 10.682439
 EnBW DE-Mönchengladbach Brunnenstraße, 51.184024, 6.440315
 EnBW DE-München Ottobrunner., 48.10293, 11.625126, 20
 EnBW DE-München Verdistraße, 48.164862,11.471599
+EnBW DE-Naumburg Euronics, 51.145178,11.83287
+EnBW DE-Neu-Ulm Euronics, 48.388100, 10.035964
+EnBW DE-Neu-Ulm Offenhausen, 48.4011969, 10.022689
 EnBW DE-Neubrandenburg, 53.565091, 13.268248
 EnBW DE-Neumünster, 54.053394, 9.968509
 EnBW DE-Norden, 53.582786, 7.225637
 EnBW DE-Norderstedt, 53.7230458, 9.997396
+EnBW DE-Nortorf, 54.164966, 9.854245
+EnBW DE-Nürnberg Eibach, 49.399141, 11.038350, 50
+EnBW DE-Nürnberg Sulzbacherstr., 49.457819, 11.092877, 30
+EnBW DE-Nürnberg Äußere Bayreuther Straße, 49.475267, 11.104242, 10
 EnBW DE-Ob der Tauber Ost, 49.621641,9.730816, 10
 EnBW DE-Ob der Tauber West, 49.626704,9.728129, 10
 EnBW DE-Oberpfälzer Alp Nord, 49.424438,11.690378
 EnBW DE-Ostfildern, 48.70475, 9.249091
 EnBW DE-Otterndorf, 53.805263, 8.884682
+EnBW DE-Paderborn, 51.706307,8.729175
+EnBW DE-Pasewalk, 53.51465, 14.0108
+EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
 EnBW DE-Pfungstadt Ost, 49.812106,8.579272
 EnBW DE-Pfungstadt West, 49.8124703, 8.5769616
 EnBW DE-Porta Westfalica, 52.26012,8.90345
+EnBW DE-Preetz, 54.229092, 10.268012
 EnBW DE-Pritzwalk, 53.159956, 12.174541
 EnBW DE-Ratingen ROSI's Hohenstein, 51.29020, 6.8045626, 20
 EnBW DE-Ratzeburg Hagebaumarkt, 53.699656, 10.741201
 EnBW DE-Ratzeburg Penny, 53.69123, 10.7938
+EnBW DE-Reichenau, 47.689002, 9.1260333
+EnBW DE-Reinfeld (Holstein), 53.8238989, 10.5019212
+EnBW DE-Reinsfeld Hochwald Ost, 49.690638, 6.899393
 EnBW DE-Rellingen, 53.657268, 9.81385
 EnBW DE-Rendsburg, 54.31133, 9.65467
 EnBW DE-Reutlingen Fährstraße 34,48.503274,9.209738,24
-EnBW DE-Reichenau, 47.689002, 9.1260333
+EnBW DE-Rosenheim, 47.843389,12.08216
 EnBW DE-Rostock Bauhaus, 54.107096, 12.057097
 EnBW DE-Rostock CITTI-PARK, 54.12326682057, 12.07438240182
 EnBW DE-Rostock Vitalis Zentrum, 54.134323, 12.069867401194
 EnBW DE-Ruraue Ost, 50.931311, 6.340482
 EnBW DE-Rutesheim, 48.811969, 8.922083
-EnBW DE-Paderborn, 51.706307,8.729175
-EnBW DE-Pasewalk, 53.51465, 14.0108
-EnBW DE-Pforzheim Nord, 48.908018, 8.773701, 20
-EnBW DE-Preetz, 54.229092, 10.268012
-EnBW DE-Reinfeld (Holstein), 53.8238989, 10.5019212
-EnBW DE-Reinsfeld Hochwald Ost, 49.690638, 6.899393
-EnBW DE-Rosenheim, 47.843389,12.08216
 EnBW DE-Saarbrücken Rasthof Goldene Bremm Nord, 49.209456,6.966372
 EnBW DE-Scheeßel, 53.161405659195, 9.4738915128194
 EnBW DE-Schenefeld, 53.59906, 9.843248
 EnBW DE-Schongau, 47.808188, 10.877717
 EnBW DE-Schortens, 53.539121, 7.966783
-EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
-EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Schwentinental, 54.28891, 10.2293
 EnBW DE-Schwerin, 53.597307126114, 11.431819002972
+EnBW DE-Schönbuch Ost, 48.616496, 8.908573, 20
+EnBW DE-Schönbuch West, 48.614523, 8.903131, 20
 EnBW DE-Seevetal Ost, 53.348272102314, 10.039251157124
-EnBW DE-Sindelfingen Sindelfinger Wald, 48.741321,9.033325
 EnBW DE-Sindelfingen Neckarstraße,48.703075,9.005068
+EnBW DE-Sindelfingen Sindelfinger Wald, 48.741321,9.033325
 EnBW DE-Soester Börde Nord,51.548357,8.132218
-EnBW DE-Sömmerda Leubinger Fürstenhügel, 51.188236,11.162758
-EnBW DE-Stade, 53.609386, 9.479149
 EnBW DE-Stade Rewe, 53.582518, 9.499827
+EnBW DE-Stade, 53.609386, 9.479149
 EnBW DE-Stavenhagen, 53.68887, 12.9182485
 EnBW DE-Stelle, 53.38167, 10.11642
 EnBW DE-Stralsund, 54.26972, 13.11314
 EnBW DE-Straubing Landshuter Straße, 48.867521,12.573991
 EnBW DE-Straubing Ratiborstraße, 48.886335,12.615851
+EnBW DE-Stuhr Proppstraße, 53.011943, 8.7045393, 10
 EnBW DE-Stuttgart Finanzamt,48.774217,9.169022,20
 EnBW DE-Stuttgart Schellingstraße, 48.781854, 9.1754455, 50
 EnBW DE-Stuttgart Schelmenwasenstraße,48.713234,9.166823
-EnBW DE-Stuhr Proppstraße, 53.011943, 8.7045393, 10
+EnBW DE-Sömmerda Leubinger Fürstenhügel, 51.188236,11.162758
 EnBW DE-Taufkirchen, 48.352605,12.129578,10
 EnBW DE-Tornesch, 53.71855, 9.75894
 EnBW DE-Ulm, 48.456880, 10.029673, 15
@@ -1797,8 +1797,8 @@ EnBW DE-Unterhaching, 48.056003,11.601168
 EnBW DE-Urbach, 48.810151, 9.570358
 EnBW DE-Vilsbiburg, 48.454281,12.334936
 EnBW DE-Waldmohr Raststätte Waldmohr, 49.37322,7.374279
-EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wangen im Allgäu, 47.6876032, 9.8384064, 10
+EnBW DE-Wangen im Allgäu, 47.694897, 9.828033, 10
 EnBW DE-Wattenheim Rastanlage Pfalz, 49.527487,8.072581
 EnBW DE-Wentorf bei Hamburg, 53.487952, 10.269498
 EnBW DE-Westerstede, 53.263355, 7.9418
@@ -1812,9 +1812,9 @@ EnBW DE-Wittmund Hagebaumarkt, 53.582518562502, 7.7962666562527
 EnBW DE-Wittstock/Dosse, 53.15772, 12.45599
 EnBW DE-Wonnegau Ost, 49.647041, 8.293444
 EnBW DE-Wonnegau West, 49.644547, 8.290185
+EnBW DE-Wurzen, 51.381708, 12.739439
 EnBW DE-Wörth a.d. Donau,49.000989,12.365447
 EnBW DE-Wülferode West, 52.338094,9.86385
-EnBW DE-Wurzen, 51.381708, 12.739439
 EnBW DE-Zeven, 53.27713, 9.293374
 EnBW DE-Zwickau Ost, 50.6804694, 12.5907821, 25
 
