@@ -5302,6 +5302,8 @@ Ionity DE-Bad Camberg West, 50.299926, 8.234700
 Ionity DE-Bad Honnef, 50.647664, 7.334521
 Ionity DE-Bayerischer Wald Nord, 48.931751, 12.708247
 Ionity DE-Bayerischer Wald Süd, 48.931044, 12.705416
+Ionity DE-Berg bei Neumarkt in der Oberpfalz Karl-Schiller-Straße, 49.312948, 11.474745
+Ionity DE-Bingen am Rhein Rasthof Autobahnkreuz Nahetal, 49.92578, 7.936795
 Ionity DE-Bochum, 51.474082, 7.151429
 Ionity DE-Brohltal Ost, 50.440471, 7.225629
 Ionity DE-Brohltal West, 50.441534, 7.223985
@@ -5310,30 +5312,42 @@ Ionity DE-Bruchsal Ost, 49.162694, 8.570788
 Ionity DE-Bruchsal West, 49.16125, 8.567226
 Ionity DE-Buddikate Ost, 53.694396, 10.324738
 Ionity DE-Buddikate West, 53.692558, 10.320428
+Ionity DE-Castrop Rauxel Grutholzallee, 51.566342, 7.317542
 Ionity DE-Dammer Berge Ost, 52.539229, 8.114598
 Ionity DE-Dammer Berge West, 52.540755, 8.112701
 Ionity DE-Demminer Land, 53.855673, 13.333344
+Ionity DE-Denkendorf Hoher Rain, 48.693667, 9.303297
 Ionity DE-Denkendorf Nord, 48.693667, 9.303297
+Ionity DE-Dettelbach Mainfrankenpark, 49.777979, 10.068774
+Ionity DE-Dietingen Autobahn A 81, 48.20593, 8.621045
+Ionity DE-Dietmannsried Glaserstraße, 47.811904, 10.302936
+Ionity DE-Dollenberg Ost, 50.688524, 8.295916, 5
 Ionity DE-Donautal Ost, 48.588065, 13.366667
 Ionity DE-Donautal West, 48.589422, 13.365369
 Ionity DE-Dresdner Tor Nord, 51.063214, 13.571071
 Ionity DE-Dresdner Tor Süd, 51.060227, 13.571959
-Ionity DE-Dollenberg Ost, 50.688524, 8.295916, 5
+Ionity DE-Eching Dieselstraße, 48.310848, 11.646729
 Ionity DE-Eching, 48.3108951, 11.646281
 Ionity DE-Eichenzell, 50.488366, 9.708621, 8
 Ionity DE-Eifel Ost, 50.070186, 6.880905
 Ionity DE-Eifel West, 50.068492, 6.880212
-Ionity DE-e-Mobility-Station Wolfsburg, 52.416656, 10.783389
+Ionity DE-Forst A5 Ost, 49.162694, 8.570788
+Ionity DE-Forst A5 West, 49.16125, 8.567226
 Ionity DE-Frankenhöhe Nord, 49.242629, 10.352944
 Ionity DE-Frankenhöhe Süd, 49.241155, 10.356121
+Ionity DE-Garching bei München Parkring, 48.249323, 11.634365
 Ionity DE-Goldbach Nord, 53.000606, 9.179514
 Ionity DE-Goldbach Süd, 52.998531, 9.181213
+Ionity DE-Gruibingen  Autobahn, 48.605321, 9.632807
 Ionity DE-Gruibingen Süd, 48.605321, 9.632807
 Ionity DE-Haidt Nord, 49.780852, 10.244797
 Ionity DE-Haidt Süd, 49.779352, 10.246493
 Ionity DE-Hamminkeln, 51.739103, 6.595180
 Ionity DE-Harz Ost, 51.926279, 10.143238
 Ionity DE-Harz West, 51.928028, 10.141730
+Ionity DE-Hausen bei Würzburg An der BAB A7 West, 49.945695, 10.016764
+Ionity DE-Heiligengrabe Liebenthaler Dorfstraße, 53.147243, 12.398704
+Ionity DE-Hepberg A9 Köschinger Forst, 48.837085, 11.469313
 Ionity DE-Himmelkron, 50.055972, 11.609148
 Ionity DE-Hohenlohe Nord, 49.207007, 9.639273
 Ionity DE-Hohenlohe Süd, 49.205379, 9.639696
@@ -5341,32 +5355,46 @@ Ionity DE-Hohenwarsleben, 52.173898, 11.49512, 11
 Ionity DE-Holzkirchen Nord, 47.892208, 11.731279
 Ionity DE-Holzkirchen Süd, 47.906573, 11.717379
 Ionity DE-Illertissen, 48.219287,10.127852, 13
+Ionity DE-Kaiserslautern Mainzer Straße, 49.456353, 7.797315
 Ionity DE-Katzenfurt Süd, 50.620347, 8.362918, 5
-Ionity DE-Kirchheim Burger King, 50.8332832, 9.5731819
 Ionity DE-Kirchheim (Tal), 50.833695, 9.5707772, 20
+Ionity DE-Kirchheim Burger King, 50.8332832, 9.5731819
+Ionity DE-Kirchheim Hauptstraße, 50.833347, 9.573252
+Ionity DE-Kirchheim Industriestraße, 50.833837, 9.570775
 Ionity DE-Köschinger Forst Ost, 48.836599, 11.472234
 Ionity DE-Köschinger Forst West, 48.837085, 11.469313
 Ionity DE-Lechwiesen Nord, 48.059266, 10.846791
 Ionity DE-Lechwiesen Süd, 48.058328, 10.847694
 Ionity DE-Lehrter See Nord, 52.388762, 9.99631
 Ionity DE-Lehrter See Süd, 52.386433, 9.998919
+Ionity DE-Leinefelde-Worbis Ernemannstraße, 51.390739, 10.342552
 Ionity DE-Lichtendorf Nord, 51.468319, 7.594014
 Ionity DE-Lichtendorf Süd, 51.467751, 7.596959
+Ionity DE-Linthe Westfalenstraße, 52.160118, 12.779906
 Ionity DE-Lippetal, 51.695845, 7.966201
 Ionity DE-Lonetal Ost, 48.584246, 10.178939, 10
 Ionity DE-Lonetal West, 48.583937, 10.175605, 10
-Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
-Ionity DE-Lüneburger Heide West, 53.109317, 9.981663
 Ionity DE-Lutterberg, 51.370342, 9.633558, 8
 Ionity DE-Lutterberg, 51.370434,9.63373,8
+Ionity DE-Lüneburger Heide Ost, 53.110044, 9.984058
+Ionity DE-Lüneburger Heide West, 53.109317, 9.981663
 Ionity DE-Mahlberg Ost, 48.308819, 7.791519
 Ionity DE-Mahlberg West, 48.309517, 7.788855
+Ionity DE-Meerane Hohe Straße, 50.840764, 12.445016
+Ionity DE-Merklingen Nellinger Str., 48.516511, 9.756944
+Ionity DE-Mühldorf am Inn Äußere Neumarkter Str, 48.262445, 12.542657
 Ionity DE-Nahetal, 49.92578, 7.936795
 Ionity DE-Neckarburg Ost, 48.206218, 8.627155
 Ionity DE-Neckarburg West, 48.20593, 8.621045
 Ionity DE-Nempitz, 51.290114,12.137547, 6
 Ionity DE-Nempitz, 51.290159,12.1376, 6
+Ionity DE-Neuenstein Lohemerfeld, 49.207007, 9.639273
 Ionity DE-Neumarkt, 49.312948, 11.474745, 20
+Ionity DE-Neumünster Prehnsfelder Weg, 54.092671, 9.92914
+Ionity DE-Niederöfflingen An der BAB A1, 50.068492, 6.880212
+Ionity DE-Oberhausen Brammenring, 51.489778, 6.887922
+Ionity DE-Oberkrämer Im Gewerbepark, 52.709772, 13.107945
+Ionity DE-Oelde In d. Geist, 51.812002, 8.131019
 Ionity DE-Ohligser Heide Ost, 51.156807, 6.964803
 Ionity DE-Ohligser Heide West, 51.1579, 6.961815
 Ionity DE-Ohrenbach Ost, 49.485555, 10.213267
@@ -5374,24 +5402,35 @@ Ionity DE-Ohrenbach West, 49.484491, 10.211978
 Ionity DE-Ostetal Nord, 53.299981, 9.532557
 Ionity DE-Ostetal Süd, 53.299087, 9.53517
 Ionity DE-Pilsting, 48.692530, 12.672979
+Ionity DE-Polch Im Roten Tal, 50.306876, 7.306114
+Ionity DE-Porta Westfalica Zum Autohof, 52.209983, 8.872595
 Ionity DE-Reinhardshain Nord, 50.622937, 8.894846
 Ionity DE-Reinhardshain Süd, 50.622096, 8.897196
 Ionity DE-Remscheid Ost, 51.158407, 7.230332
 Ionity DE-Riedener Wald Ost, 49.944184, 10.019955
 Ionity DE-Riedener Wald West, 49.945693, 10.016739
+Ionity DE-Rostock Timmermannsstrat, 54.083283, 12.19232
 Ionity DE-Salzbergen, 52.326149, 7.430067
 Ionity DE-Samerberg Nord, 47.802835, 12.178503
 Ionity DE-Samerberg Süd, 47.801229, 12.177198
 Ionity DE-Sangerhausen, 51.450971, 11.305148
 Ionity DE-Schwabhausen, 50.898384, 10.725625
 Ionity DE-Spessart Nord, 49.898302, 9.394346
+Ionity DE-Staufenberg Triftstraße, 51.370378, 9.633582
 Ionity DE-Thüringer Wald Nord, 50.726454, 10.841634
 Ionity DE-Thüringer Wald Süd, 50.724708, 10.847168
+Ionity DE-Todendorf Buddikate West an der BaB 1, 53.692518, 10.320397
+Ionity DE-Völschow Rastplatz Demminer Land E251, 53.855673, 13.333344
 Ionity DE-Weiskirchen Süd, 50.054708, 8.908177
 Ionity DE-Wernberg-Köblitz, 49.532356, 12.134910, 3
+Ionity DE-Wilsdruff Raststätte Dresdner Tor Süd A4 Richtung Ost, 51.060227, 13.571959
+Ionity DE-Wismar Am Ring, 53.893217, 11.513095
+Ionity DE-Wittlich Straßburgstraße, 49.966871, 6.942735
 Ionity DE-Wolfsburg Allerpark, 52.437710, 10.809069
+Ionity DE-Wolfsburg Braunschweiger Str., 52.416656, 10.783389
 Ionity DE-Wolfsburg Detmeroder Markt, 52.392241, 10.753713
 Ionity DE-Wolfsburg Forum AutoVision, 52.424872, 10.745689
+Ionity DE-Wolfsburg Marignanestraße, 52.392241, 10.753713
 Ionity DE-Wunnenstein Ost, 49.045334, 9.266223
 Ionity DE-Wunnenstein West, 49.044276, 9.261639
 Ionity DK-Aabenraa, 55.065192, 9.366167
