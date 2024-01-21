@@ -4261,8 +4261,844 @@ EVM DE-Koblenz Autohof Rübenacher Wald, 50.346812, 7.507836
 EVM DE-Koblenz Contel Hotel, 50.365908, 7.577220
 EVM DE-Koblenz Festung Ehrenbreitstein, 50.367221, 7.617626
 
+EWE-GO DE-Achim Margarete-Steiff-Allee, 53.018814, 9.069053
+EWE-GO DE-Ahlhorn Ladestraße, 52.899933, 8.209817
+EWE-GO DE-Ahrensburg Hamburger Straße, 53.663758, 10.221137
+EWE-GO DE-Ahrensfelde Zeppelinstraße, 52.596, 13.59898
+EWE-GO DE-Aichstetten Am Waizenhof, 47.87933, 10.03866
+EWE-GO DE-Aichtal Margarete-Steiff-Straße, 48.630262, 9.234999
+EWE-GO DE-Albstadt Truchtelfinger Straße, 48.22179, 9.02682
+EWE-GO DE-Alfter Schöntalweg, 50.71462, 7.03029
+EWE-GO DE-Andernach Hans-Julius-Ahlmann-Straße, 50.4351, 7.42402
+EWE-GO DE-Angersdorf An der Lauchstädter Straße, 51.46354, 11.90678
+EWE-GO DE-Anklam Demminer Landstraße, 53.852939275563, 13.662404123794
+EWE-GO DE-Annaberg-Buchholz Chemnitzer Straße, 50.59183, 13.01108
+EWE-GO DE-Ansbach Nürnberger Straße, 49.30286, 10.58369
+EWE-GO DE-Apen Hauptstraße, 53.21823, 7.805572
+EWE-GO DE-Aschersleben Güstener Straße, 51.76735, 11.48514
+EWE-GO DE-Aue Lößnitzer Straße, 50.59624, 12.70968
+EWE-GO DE-Auetal Altes Feld, 52.233792, 9.246897
+EWE-GO DE-Augsburg Donauwörther Straße, 48.39717, 10.88103
+EWE-GO DE-Augsburg Meraner Straße, 48.38316, 10.93675
+EWE-GO DE-Aurach Ansbacher Straße, 49.252529800049, 10.435430437656
+EWE-GO DE-Aurich Esenser Straße, 53.48767, 7.4972
+EWE-GO DE-Aurich Fischteichweg, 53.467409, 7.483996
+EWE-GO DE-Aurich Korbweidenstraße, 53.445666, 7.507986
+EWE-GO DE-Aurich Leerer Landstraße, 53.464838, 7.486517
+EWE-GO DE-Aurich Marktplatz, 53.470269337499, 7.4839930671885
+EWE-GO DE-Aurich Raiffeisen Straße, 53.45752, 7.49794
+EWE-GO DE-Aurich Zu den Norderstücken, 53.500833, 7.486206
+EWE-GO DE-Aßlar Walbergraben, 50.58404, 8.48065
+EWE-GO DE-Backnang Wanne, 48.93224, 9.43907
+EWE-GO DE-Bad Berleburg Bahnhofstraße, 51.0526, 8.3945
+EWE-GO DE-Bad Driburg Dringenberger Straße, 51.719906, 9.01602
+EWE-GO DE-Bad Dürrheim Carl-Friedrich-Benz-Straße, 48.03193, 8.52901
+EWE-GO DE-Bad Fallingbostel Bockhorner Weg, 52.8519, 9.69259
+EWE-GO DE-Bad Krozingen Freiburger Straße, 47.92316, 7.708327
+EWE-GO DE-Bad Pyrmont Siemensstraße, 51.97642, 9.27835
+EWE-GO DE-Bad Saulgau Herbertinger Straße, 48.02102, 9.48835
+EWE-GO DE-Bad Tölz Demmeljochstraße, 47.748389, 11.565843
+EWE-GO DE-Bad Urach Stuttgarter Straße, 48.49763, 9.38193
+EWE-GO DE-Bad Zwischenahn Am Hogen Hagen, 53.182726, 8.0151
+EWE-GO DE-Bad Zwischenahn Feldlinie, 53.17303, 8.06829
+EWE-GO DE-Bad Zwischenahn Hainbuchenweg, 53.16708, 8.15484
+EWE-GO DE-Bad Zwischenahn Heideweg, 53.1666, 8.15593
+EWE-GO DE-Bad Zwischenahn Langenhof, 53.181964, 8.002596
+EWE-GO DE-Bad Zwischenahn Oldenburger Straße, 53.18097, 8.022766
+EWE-GO DE-Bad Zwischenahn Pastor-Schulze-Straße, 53.182879, 7.998432
+EWE-GO DE-Bakum Bahnhofstraße, 52.73934, 8.19203
+EWE-GO DE-Balingen Am Lindle, 48.276067, 8.850244
+EWE-GO DE-Balingen Charlottenstraße, 48.27298, 8.85608
+EWE-GO DE-Balingen Schloßstraße, 48.271272, 8.850904
+EWE-GO DE-Balingen Stingstrasse, 48.272654, 8.853516
+EWE-GO DE-Bamberg Nürnberger Straße, 49.8829, 10.92225
+EWE-GO DE-Bannewitz Boderitzer Straße, 50.998611, 13.719629
+EWE-GO DE-Barsinghausen Kronskamp, 52.333695, 9.413485
+EWE-GO DE-Barßel Am Krumme Kamp, 53.16032, 7.75623
+EWE-GO DE-Barßel Hafenstraße, 53.168248, 7.742365
+EWE-GO DE-Barßel Oldenburger Straße, 53.151186, 7.711911
+EWE-GO DE-Barßel Theodor-Klinker-Platz, 53.169091, 7.744814
+EWE-GO DE-Barßel Westmarkstraße, 53.166408, 7.736687
+EWE-GO DE-Bassum Bahnhofstraße, 52.846071, 8.73421
+EWE-GO DE-Bayreuth Sophian-Kolb-Straße, 49.95756, 11.60226
+EWE-GO DE-Bebra Gottlieb-Daimler-Straße, 50.962304, 9.790174
+EWE-GO DE-Bendorf Adolph-Kolping-Straße, 50.42631, 7.57001
+EWE-GO DE-Bensheim Wormser Straße, 49.67255, 8.59743
+EWE-GO DE-Bergisch Gladbach Richard-Zanders-Straße, 50.98502, 7.12195
+EWE-GO DE-Bergkamen Werner Straße, 51.6176, 7.65996
+EWE-GO DE-Berlin Charlottenburger Chaussee, 52.526533, 13.23301
+EWE-GO DE-Berlin Markstraße, 52.560723, 13.36446
+EWE-GO DE-Berlin Osdorferstr., 52.41982, 13.31339
+EWE-GO DE-Berlin Wrangelstraße, 52.500314, 13.436509
+EWE-GO DE-Bernburg Ernest-Solvay-Straße, 51.774224, 11.753807
+EWE-GO DE-Berne Bahnhofstr., 53.18423, 8.4765
+EWE-GO DE-Betzdorf Wilhelmstraße, 50.793841, 7.863669
+EWE-GO DE-Beverstedt Schulstraße, 53.435284, 8.818481
+EWE-GO DE-Biedenkopf Georg-Kramer-Straße, 50.90116, 8.53598
+EWE-GO DE-Bingen am Rhein Gustav-Stresemann-Straße, 49.92518, 7.93582
+EWE-GO DE-Bitterfeld-Wolfen Krondorfer Straße, 51.66709, 12.25948
+EWE-GO DE-Blankenburg Lerchenbreite, 51.806369867285, 10.942565948535
+EWE-GO DE-Bochum Dorstener Straße, 51.509154, 7.190543
+EWE-GO DE-Bochum Harpener Hellweg, 51.494124469725, 7.2623078789005
+EWE-GO DE-Bockhorn Am Markt , 53.393614, 8.013657
+EWE-GO DE-Borkum Am Langen Wasser, 53.585224, 6.662317
+EWE-GO DE-Borkum Am Nordufer, 53.563413, 6.751914
+EWE-GO DE-Borkum Ankerstraße, 53.582557, 6.665981
+EWE-GO DE-Borna Am Wilhelmschacht, 51.114577, 12.486104
+EWE-GO DE-Bornheim Am Hellenkreuz, 50.76284, 6.97677
+EWE-GO DE-Brake Bahnhofstraße, 53.33225, 8.47886
+EWE-GO DE-Brake Poggenburger Str., 53.327797, 8.473152
+EWE-GO DE-Brake Postplatz, 53.325732, 8.483893
+EWE-GO DE-Brandenburg an der Havel Rathenower Landstraße, 52.4331, 12.53326
+EWE-GO DE-Bremen Achternrut, 53.174968, 8.617809
+EWE-GO DE-Bremen Altenwall, 53.072071, 8.809978
+EWE-GO DE-Bremen Am Rabenfeld, 53.18169, 8.62328
+EWE-GO DE-Bremen Am Wall, 53.079957, 8.804045
+EWE-GO DE-Bremen Bahnhofsplatz, 53.08312, 8.81212
+EWE-GO DE-Bremen Bennigsenstraße, 53.07106, 8.85763
+EWE-GO DE-Bremen Birkenstr., 53.082078, 8.807639
+EWE-GO DE-Bremen Borgfelder Heerstraße, 53.125346, 8.901607
+EWE-GO DE-Bremen Borgwardstraße, 53.046261, 8.841499
+EWE-GO DE-Bremen Emslandstraße, 53.05812, 8.75732
+EWE-GO DE-Bremen Ernst-Buchholz-Str., 53.045241, 8.847068
+EWE-GO DE-Bremen Europaallee, 53.034585, 8.890396
+EWE-GO DE-Bremen Franz-Mehring-Straße, 53.080073, 8.89185
+EWE-GO DE-Bremen Godehardstraße, 53.058442, 8.888133
+EWE-GO DE-Bremen Haferwende, 53.10759, 8.88265
+EWE-GO DE-Bremen Hans-Bredow-Straße, 53.047928, 8.955671
+EWE-GO DE-Bremen Heidlerchenstraße, 53.191117, 8.5565
+EWE-GO DE-Bremen Hermann Prüser Straße, 53.11291, 8.750305
+EWE-GO DE-Bremen Hindenburgstraße, 53.168553, 8.693656
+EWE-GO DE-Bremen Humboldtstraße, 53.073873, 8.835256
+EWE-GO DE-Bremen Jakobikirchhof, 53.077892, 8.802913
+EWE-GO DE-Bremen Konsul-Smidt-Straße, 53.089446, 8.778177
+EWE-GO DE-Bremen Kronberger Straße, 53.040741, 8.931174
+EWE-GO DE-Bremen Kurfürstenallee, 53.082397, 8.854687
+EWE-GO DE-Bremen Kötnerweide, 53.042029, 8.730349
+EWE-GO DE-Bremen Landrat-Christians-Straße, 53.181388, 8.57469
+EWE-GO DE-Bremen Langemarckstraße, 53.072909, 8.791632
+EWE-GO DE-Bremen Ludwig-Roselius-Allee, 53.072628, 8.925159
+EWE-GO DE-Bremen Mary-Somerville-Straße, 53.105803, 8.86277
+EWE-GO DE-Bremen Max-von-Laue-Straße, 53.104441083986, 8.8551309442284
+EWE-GO DE-Bremen Meinert-Löffler-Str., 53.185933, 8.618667
+EWE-GO DE-Bremen Neukirchstraße, 53.092468, 8.812231
+EWE-GO DE-Bremen Neustadtswall, 53.069922, 8.800178
+EWE-GO DE-Bremen Niedersachsendamm, 53.055319, 8.823485
+EWE-GO DE-Bremen Pappelstraße, 53.066685, 8.793257
+EWE-GO DE-Bremen Parkallee, 53.081894, 8.821592
+EWE-GO DE-Bremen Rembertiring, 53.07825, 8.81829
+EWE-GO DE-Bremen Ricarda-Huch-Straße, 53.102131, 8.816453
+EWE-GO DE-Bremen Schragestraße, 53.136229, 8.74149
+EWE-GO DE-Bremen Seewenjestraße, 53.112082, 8.773929
+EWE-GO DE-Bremen Spittaler Straße, 53.10642, 8.86467
+EWE-GO DE-Bremen Stephanitorsbollwerk, 53.0825, 8.7868
+EWE-GO DE-Bremen Theodor-Heuss-Allee, 53.08733, 8.80967
+EWE-GO DE-Bremen Universitätsallee, 53.10466, 8.851596
+EWE-GO DE-Bremen Unter den Eichen, 53.092053, 8.863478
+EWE-GO DE-Bremen Vegesacker Heerstraße, 53.1741, 8.65268
+EWE-GO DE-Bremen Violenstraße, 53.074875, 8.810713
+EWE-GO DE-Bremen Wachmannstraße, 53.086265, 8.833
+EWE-GO DE-Bremen Wachtstraße, 53.074263, 8.805892
+EWE-GO DE-Bremen Walliser Straße, 53.065589, 8.950011
+EWE-GO DE-Bremenhaven Herwigstraße, 53.522592, 8.586502
+EWE-GO DE-Bremerhaven Am Lunedeich, 53.490792146088, 8.5947598933411
+EWE-GO DE-Bremerhaven Columbusstraße, 53.541284, 8.579268
+EWE-GO DE-Bremerhaven Elbestraße, 53.54533, 8.59184
+EWE-GO DE-Bremerhaven Friedrich-Ebert-Straße, 53.534603, 8.598521
+EWE-GO DE-Bremerhaven Goethestraße, 53.557059, 8.58036
+EWE-GO DE-Bremerhaven Grazer Straße, 53.545379, 8.578428
+EWE-GO DE-Bremerhaven Hermann-Heinrich-Meier-Straße, 53.543668, 8.573967
+EWE-GO DE-Bremerhaven Hinrich-Schmalfeldt-Straße, 53.558855799649, 8.5914092004664
+EWE-GO DE-Bremerhaven Konrad-Adenauer-Platz, 53.53139, 8.591395
+EWE-GO DE-Bremerhaven Nansenstraße, 53.52544, 8.58876
+EWE-GO DE-Bremerhaven Postbrookstraße, 53.53768, 8.63926
+EWE-GO DE-Bremerhaven Rudloffstraße, 53.55961, 8.56624
+EWE-GO DE-Bremerhaven Stresemannstraße, 53.54776, 8.595493
+EWE-GO DE-Bremerhaven Wilhelm-Leuschner-Straße , 53.591976, 8.618082
+EWE-GO DE-Bremerhaven Wurster Straße, 53.5748, 8.59206
+EWE-GO DE-Bremervörde Huddelberg, 53.489183, 9.145516
+EWE-GO DE-Bremervörde Marktstr., 53.48784, 9.14662
+EWE-GO DE-Bremervörde Rudolf-Diesel-Straße, 53.498698, 9.109377
+EWE-GO DE-Bremervörde Zeppelinstraße, 53.49334, 9.12319
+EWE-GO DE-Brockel Hauptstraße, 53.09439, 9.52046
+EWE-GO DE-Brühl Alte Mannheimer Landstraße, 49.41095, 8.54365
+EWE-GO DE-Brühl Hamburger Straße, 50.84542, 6.91379
+EWE-GO DE-Buchen (Odenwald) Carl-Benz-Straße, 49.51089, 9.31495
+EWE-GO DE-Buchholz (Aller) An der Autobahn, 52.67461, 9.68796
+EWE-GO DE-Bunde Kirchring, 53.184979, 7.26795
+EWE-GO DE-Burg Magdeburger Chaussee, 52.258862, 11.842888
+EWE-GO DE-Burgwedel Kokenhorststraße, 52.485707, 9.844581
+EWE-GO DE-Butjadingen Strandallee, 53.581733, 8.37335
+EWE-GO DE-Butjadingen-Tossens Nordseeallee, 53.576541, 8.249842
+EWE-GO DE-Buxtehude Lüneburger Schanze, 53.4618, 9.69557
+EWE-GO DE-Bösel Bahnhof Straße, 53.00481, 7.952996
+EWE-GO DE-Bückeburg Kreuzbreite, 52.26567, 9.07128
+EWE-GO DE-Büdelsdorf Am Ahlmannkai, 54.3094, 9.66411
+EWE-GO DE-Bünde Blankensteinstraße, 52.197517, 8.567737
+EWE-GO DE-Cadenberge Im Park, 53.772254, 9.067529
+EWE-GO DE-Calw Stuttgarter Straße, 48.708264, 8.761328
+EWE-GO DE-Cloppenburg Bahnhofstraße, 52.844876, 8.052646
+EWE-GO DE-Cloppenburg Bether Straße, 52.852107, 8.053923
+EWE-GO DE-Cloppenburg Bürgermeister-Heukamp-Str., 52.846421, 8.04103
+EWE-GO DE-Cloppenburg Bürgermeister-Winkler-Str., 52.8444, 8.0415
+EWE-GO DE-Cloppenburg Emsteker Straße, 52.841286, 8.064705
+EWE-GO DE-Cloppenburg Eschstrasse, 52.842, 8.0408
+EWE-GO DE-Cloppenburg Lankumer Feldweg, 52.839126, 8.060072
+EWE-GO DE-Cloppenburg Max-Planck-Straße, 52.83861, 8.0716
+EWE-GO DE-Cloppenburg Museumstraße, 52.846873, 8.051821
+EWE-GO DE-Cremlingen Im Moorbusche, 52.253729805664, 10.654911000977
+EWE-GO DE-Cuxhaven Abschnede, 53.84446, 8.69848
+EWE-GO DE-Cuxhaven Papenstraße, 53.847867, 8.725617
+EWE-GO DE-Cuxhaven Rohdestraße, 53.862322, 8.69732
+EWE-GO DE-Cuxhaven Vincent-Lübeck-Straße, 53.866367, 8.677472
+EWE-GO DE-Cuxhaven Werner-Kammann-Straße, 53.866548, 8.696553
+EWE-GO DE-Cuxhaven/Altenbruch Über der Braake , 53.82502, 8.776982
+EWE-GO DE-Damme Lindenstraße, 52.522456, 8.193215
+EWE-GO DE-Dannenberg Develangring, 53.0918, 11.08823
+EWE-GO DE-Deggendorf Graflinger Straße, 48.85099, 12.96041
+EWE-GO DE-Delitzsch Dr.-Helmut-Schreyer-Straße, 51.51061, 12.33825
+EWE-GO DE-Delmenhorst Adelheider Straße, 53.032455, 8.622244
+EWE-GO DE-Delmenhorst Am Knick, 53.050757487915, 8.6293138557739
+EWE-GO DE-Delmenhorst Am Stadtbad , 53.046257, 8.621038
+EWE-GO DE-Delmenhorst Am Stadtwall, 53.049124, 8.626478
+EWE-GO DE-Delmenhorst Am Vorwerk, 53.047669, 8.63113
+EWE-GO DE-Delmenhorst Bremer Str., 53.051936, 8.640919
+EWE-GO DE-Delmenhorst Brendelweg, 53.033356, 8.623012
+EWE-GO DE-Delmenhorst Hans-Böckler-Platz, 53.04798, 8.6267
+EWE-GO DE-Delmenhorst Hasporter Damm, 53.03178, 8.654
+EWE-GO DE-Delmenhorst Niedersachsendamm , 53.033446, 8.65904
+EWE-GO DE-Delmenhorst Nordenhamer Straße, 53.058945, 8.648808
+EWE-GO DE-Delmenhorst Oldenburger Straße, 53.048413, 8.608587
+EWE-GO DE-Delmenhorst Wildeshauser Straße, 53.043572, 8.593565
+EWE-GO DE-Detmold Hansaweg, 51.94671, 8.85651
+EWE-GO DE-Dieburg Frankfurter Str., 49.908343, 8.849216
+EWE-GO DE-Diepholz Carl-Schwarze-Straße, 52.60728, 8.36099
+EWE-GO DE-Dillenburg Kasseler Straße, 50.75099, 8.27708
+EWE-GO DE-Dillingen/Saar Merziger Straße, 49.35678, 6.71992
+EWE-GO DE-Dingolfing Laaberstraße, 48.63827, 12.48961
+EWE-GO DE-Dinkelsbühl Luitpoldstraße, 49.067872, 10.329297
+EWE-GO DE-Dinklage Am Markt, 52.66257, 8.12308
+EWE-GO DE-Dissen Versmolder Straße, 52.102106, 8.197373
+EWE-GO DE-Dorsten Endelner Feld, 51.754598, 6.963776
+EWE-GO DE-Dorsten Europaplatz, 51.657855, 6.968666
+EWE-GO DE-Dortmund Evinger Straße, 51.546122, 7.460192
+EWE-GO DE-Dortmund Werkmeisterstraße, 51.524821652222, 7.4936161604919
+EWE-GO DE-Dorum Poststraße, 53.6859, 8.563896
+EWE-GO DE-Dorum Westerbüttel, 53.688562, 8.562909
+EWE-GO DE-Drochtersen Am Sportplatz, 53.705778, 9.382389
+EWE-GO DE-Drochtersen Elbinsel Krautsand, 53.754106, 9.38491
+EWE-GO DE-Drochtersen Sietwender Straße, 53.710657, 9.381782
+EWE-GO DE-Dummerstorf Manfred-Roth-Straße, 54.022709, 12.231404
+EWE-GO DE-Dörpen Bahnhofstraße, 52.9686, 7.3495
+EWE-GO DE-Dötlingen Rittrumer Kirchweg, 52.937851, 8.37914
+EWE-GO DE-Ebersdorf bei Coburg Frankenring, 50.223628194336, 11.052034999023
+EWE-GO DE-Eching Strogenweg, 48.485462, 12.014435
+EWE-GO DE-Edewecht Friedrichsfehner Straße , 53.124702, 8.087392
+EWE-GO DE-Edewecht Hauptstraße, 53.117173, 7.969386
+EWE-GO DE-Einbeck Hansestraße, 51.81822, 9.83595
+EWE-GO DE-Ellhofen Am Autobahnkreuz, 49.14288, 9.30906
+EWE-GO DE-Elsfleth Oberrege, 53.231651, 8.452848
+EWE-GO DE-Elsfleth Rathausplatz, 53.23613, 8.46405
+EWE-GO DE-Emden Am Südbahnhof, 53.360419, 7.216097
+EWE-GO DE-Emmerich am Rhein Reeser Str., 51.832399, 6.264898
+EWE-GO DE-Emsbüren Paxtonstraße, 52.359451666506, 7.2615889584339
+EWE-GO DE-Emsdetten Grevener Damm, 52.16376, 7.54534
+EWE-GO DE-Emstek Am Markt, 52.83403, 8.15509
+EWE-GO DE-Emstek Sülzbührener Straße, 52.811277, 8.216443
+EWE-GO DE-Ennepetal Kölner Straße, 51.2989, 7.31439
+EWE-GO DE-Erding Otto-Hahn-Straße, 48.284153, 11.897225
+EWE-GO DE-Eschwege Landstraße, 51.197428, 10.018592
+EWE-GO DE-Esens Bensersieler Straße , 53.652673, 7.61015
+EWE-GO DE-Esens Bürgermeister-Becker-Straße, 53.643458, 7.610173
+EWE-GO DE-Essen (Oldenburg) Peterstrasse, 52.718109, 7.940655
+EWE-GO DE-Essen Bottroper Straße, 51.48427, 6.97446
+EWE-GO DE-Essen Eleonorastraße, 51.43631, 7.02434
+EWE-GO DE-Essen Ruhrbruchshof, 51.445462, 7.083698
+EWE-GO DE-Esterwegen Hinterm Busch, 53.008628, 7.643346
+EWE-GO DE-Euskirchen Von-Siemens-Straße, 50.65199, 6.80562
+EWE-GO DE-Forchheim Daimler Straße, 49.699737, 11.064802
+EWE-GO DE-Frankenberg Ruhrstraße, 51.06063, 8.7793
+EWE-GO DE-Frankenthal (Pfalz) Wormser Straße, 49.54593, 8.35281
+EWE-GO DE-Fredenbeck Schwingestraße, 53.522749, 9.398336
+EWE-GO DE-Freiberg Häuersteig, 50.89598, 13.33225
+EWE-GO DE-Freising Clemensänger-Ring, 48.3812, 11.75313
+EWE-GO DE-Freudenberg Bühler Höhe, 50.911962, 7.9119
+EWE-GO DE-Freudenstadt Stuttgarter Straße, 48.4622, 8.43583
+EWE-GO DE-Friedrichshafen Ehlersstraße, 47.65895, 9.48656
+EWE-GO DE-Friesoythe Am Alten Hafen, 53.01934, 7.855294
+EWE-GO DE-Friesoythe Am Bahnhof, 53.024556, 7.857549
+EWE-GO DE-Friesoythe Bahnhofstraße, 53.02263, 7.85809
+EWE-GO DE-Friesoythe Großer-Kamp-Ost, 53.02755, 7.853902
+EWE-GO DE-Friesoythe Tecklenburger Straße, 53.018477, 7.862
+EWE-GO DE-Friesoythe Thüler Straße, 53.017229, 7.858597
+EWE-GO DE-Friesoythe Willlohstraße, 53.023119, 7.863223
+EWE-GO DE-Fürstenau Werner-von-Siemens-Straße, 52.5146, 7.68751
+EWE-GO DE-Fürstenwalde Alte Langewahler Chaussee, 52.33733, 14.07626
+EWE-GO DE-Gaggenau Murgtalstraße, 48.82223, 8.29544
+EWE-GO DE-Ganderkesee Bergedorfer Straße, 53.032335, 8.545004
+EWE-GO DE-Ganderkesee Dorfring, 53.078681, 8.5571
+EWE-GO DE-Ganderkesee Grüner Weg, 53.03503, 8.54503
+EWE-GO DE-Ganderkesee Raiffeisenstraße, 53.03635, 8.543601
+EWE-GO DE-Ganderkesee Ring_, 53.031998, 8.546191
+EWE-GO DE-Garbsen Bremer Straße, 52.43098, 9.61502
+EWE-GO DE-Garrel Am Campingplatz, 52.920226, 7.948374
+EWE-GO DE-Garrel Hauptstraße, 52.950611, 8.028961
+EWE-GO DE-Garstedt-Wulfsen Bahnhofstraße, 53.294304, 10.144243
+EWE-GO DE-Geestland An der Burg, 53.625548, 8.84232
+EWE-GO DE-Geestland Dorfmitte, 53.676407, 8.68278
+EWE-GO DE-Geestland Handelspark, 53.627408, 8.810123
+EWE-GO DE-Geldern Weseler Straße, 51.52319, 6.34643
+EWE-GO DE-Gelsenkirchen Grothusstr., 51.521639752567, 7.073401732029
+EWE-GO DE-Gelsenkirchen Wickingstraße, 51.50334, 7.10798
+EWE-GO DE-Georgsmarienhütte Klöcknerstraße, 52.206117246094, 8.0587508007813
+EWE-GO DE-Germersheim Mainzer Straße, 49.227211, 8.371534
+EWE-GO DE-Gerolstein Brunnenstraße, 50.22259, 6.66428
+EWE-GO DE-Geseke Bürener Straße, 51.59906, 8.515398
+EWE-GO DE-Giesen Gutenbergstraße, 52.160178, 9.86677
+EWE-GO DE-Gifhorn Braunschweiger Straße, 52.470474, 10.543189
+EWE-GO DE-Glienicke Nohlstraße, 52.63525, 13.30791
+EWE-GO DE-Glinde Gutenbergstraße, 53.52372, 10.228527
+EWE-GO DE-Goslar Peter-Henlein-Straße, 51.91305, 10.4452
+EWE-GO DE-Greding An der Autobahn, 49.042802295767, 11.342646243497
+EWE-GO DE-Greetsiel Zur Hauener Hooge, 53.501848, 7.091691
+EWE-GO DE-Gronau Siemensstraße, 52.203014, 7.057176
+EWE-GO DE-Großenkneten Wildeshauser Straße, 52.899438, 8.217344
+EWE-GO DE-Großheide Schlossstraße, 53.58573, 7.34646
+EWE-GO DE-Großweitzschen Heiterer Blick, 51.15321, 13.11944
+EWE-GO DE-Gyhum An der Autobahn, 53.194371, 9.289144
+EWE-GO DE-Göttingen Siekweg, 51.52766, 9.88937
+EWE-GO DE-Hage Baantjebur, 53.601228, 7.282605
+EWE-GO DE-Hagen im Bremischen Am Neumarkt, 53.35953, 8.66188
+EWE-GO DE-Halberstadt Im Sülzeteiche, 51.88032, 11.0769
+EWE-GO DE-Haldensleben Johann-Gottlob-Nathusius-Straße, 52.28045, 11.432315
+EWE-GO DE-Halle (Saale) Rosenfelder Straße, 51.50131, 12.03321
+EWE-GO DE-Halle Magdeburger Chaussee, 51.52261, 11.95361
+EWE-GO DE-Hallstadt Emil-Kemmer-Straße, 49.91796, 10.87311
+EWE-GO DE-Haltern am See Marler Straße, 51.72769, 7.18605
+EWE-GO DE-Hamburg Ahrensburger Straße, 53.582379, 10.108181
+EWE-GO DE-Hamburg Barsbütteler Straße, 53.57103, 10.14412
+EWE-GO DE-Hamburg Cuxhavener Straße, 53.473507, 9.846235
+EWE-GO DE-Hamburg Eiffestraße, 53.552314, 10.046026
+EWE-GO DE-Hamburg Luruper Hauptstr., 53.58787, 9.875287
+EWE-GO DE-Hamburg Sieker Landstraße, 53.608176, 10.190549
+EWE-GO DE-Hamburg Stader Straße, 53.47104, 9.92865
+EWE-GO DE-Hamburg Stresemannstraße, 53.56359, 9.9241
+EWE-GO DE-Hanau Lamboystraße, 50.14149, 8.933
+EWE-GO DE-Hannover Hildesheimer Straße, 52.3434, 9.76349
+EWE-GO DE-Hannover Nenndorfer Chaussee, 52.348832992676, 9.690754668457
+EWE-GO DE-Hannover Schulenburger Landstraße, 52.4057, 9.7109
+EWE-GO DE-Hannover Varrelheide, 52.426403, 9.826348
+EWE-GO DE-Haren (Ems) Röchlingstraße, 52.83502, 7.13219
+EWE-GO DE-Haren Bergstraße, 52.786715, 7.280931
+EWE-GO DE-Haren Brinkerweg, 52.79104, 7.2299
+EWE-GO DE-Haren Marienstraße, 52.8337, 7.14605
+EWE-GO DE-Harpstedt Grüne Straße, 52.90884, 8.58933
+EWE-GO DE-Harpstedt Wildeshauser Straße, 52.905709, 8.579201
+EWE-GO DE-Harsefeld Friedrich-Huth, 53.449842, 9.49454
+EWE-GO DE-Harsefeld Friedrich-Tobaben-Platz, 53.452838, 9.504182
+EWE-GO DE-Haselünne Meppener Straße, 52.674284, 7.482998
+EWE-GO DE-Hatten Hauptstr., 53.02124, 8.3493
+EWE-GO DE-Hatten-Sandkrug Astruper Straße, 53.053032, 8.251843
+EWE-GO DE-Hatten-Sandkrug Bahnhofstraße, 53.052532, 8.258071
+EWE-GO DE-Haßfurt Am Sterzelbach, 50.0307295, 10.52903275
+EWE-GO DE-Heidelberg Hebelstraße, 49.398, 8.68201
+EWE-GO DE-Heidenau Hauptstrasse, 53.3183, 9.643383
+EWE-GO DE-Heiligenhafen Heiligenhafen, 54.361958, 10.98308
+EWE-GO DE-Heimsheim Römerstraße, 48.82424, 8.86942
+EWE-GO DE-Helmstedt Dieselstraße, 52.241194, 10.988522
+EWE-GO DE-Hemer Bahnhofstraße, 51.38621, 7.76862
+EWE-GO DE-Hemmoor Am Schulzentrum, 53.686567, 9.157598
+EWE-GO DE-Hennef (Sieg) Alfred-Nobel-Straße, 50.76737, 7.31286
+EWE-GO DE-Hennigsdorf Veltener Straße, 52.65269, 13.20454
+EWE-GO DE-Henstedt-Ulzburg Gutenbergstr., 53.802237, 9.982203
+EWE-GO DE-Herborn Auf den Lüppen, 50.67457, 8.2809
+EWE-GO DE-Herford Bünder Straße, 52.1316, 8.66584
+EWE-GO DE-Herrenberg Ohmstraße, 48.58112, 8.89528
+EWE-GO DE-Hesel Rathausstraße, 53.306766, 7.594466
+EWE-GO DE-Hildesheim Albert-Einstein-Straße, 52.16082, 9.99773
+EWE-GO DE-Hildesheim Bavenstedter Straße, 52.16479, 9.96608
+EWE-GO DE-Hinte Brückstraße, 53.413743, 7.195117
+EWE-GO DE-Hinte Gewerbestraße, 53.41131, 7.204
+EWE-GO DE-Hinte Hans-Böckler-Allee, 53.40023, 7.2095
+EWE-GO DE-Hirschberg an der Bergstraße Goldbeckstraße, 49.50677, 8.63763
+EWE-GO DE-Hof Wunsiedler Straße, 50.28776, 11.923232928192
+EWE-GO DE-Hohenwarsleben Berliner Allee, 52.175379, 11.492611
+EWE-GO DE-Holdorf Große Straße , 52.583808, 8.125221
+EWE-GO DE-Holdorf Zum Hansa Center, 52.598154110887, 8.1161670826603
+EWE-GO DE-Hollern-Twielenfleth Am Deich, 53.602759, 9.560198
+EWE-GO DE-Holzminden Burgbergblick, 51.83767, 9.46463
+EWE-GO DE-Holzwickede Wilhelmstraße, 51.512468363205, 7.6168896551971
+EWE-GO DE-Homberg Hersfelder Str., 51.029625, 9.420599
+EWE-GO DE-Horb am Neckar Rauher Grund, 48.45791, 8.6961
+EWE-GO DE-Horneburg Herbstprinz-Str  , 53.50806, 9.56273
+EWE-GO DE-Horneburg Lange Straße, 53.509454, 9.585062
+EWE-GO DE-Hude (Oldenburg) Parkstraße, 53.112668, 8.456378
+EWE-GO DE-Hude Schützenstraße, 53.10804, 8.4594
+EWE-GO DE-Husum Flensburger Chaussee, 54.486831, 9.075748
+EWE-GO DE-Hönow Altlandsberger Chaussee, 52.54401, 13.64431
+EWE-GO DE-Hünxe Schermbecker Landstraße, 51.66252, 6.66452
+EWE-GO DE-Ibbenbüren Rudolf-Diesel-Straße, 52.260461, 7.713035
+EWE-GO DE-Ihlienworth Mühlenweg, 53.73578, 8.915405
+EWE-GO DE-Ihlienworth Zum Schönenfeld, 53.737832, 8.927792
+EWE-GO DE-Ihlow 1. Kompanieweg, 53.411495, 7.44033
+EWE-GO DE-Ilmenau Auf dem Mittelfeld, 50.691407, 10.924402
+EWE-GO DE-Ingolstadt Münchener Straße, 48.73944, 11.437
+EWE-GO DE-Ingolstadt Nürnberger Straße, 48.771629, 11.435057
+EWE-GO DE-Iserlohn Raiffeisenstraße, 51.38551, 7.67569
+EWE-GO DE-Ismaning Robert-Bürkle-Straße, 48.23159, 11.68767
+EWE-GO DE-Jade-Jaderberg Georgstraße, 53.344931, 8.184257
+EWE-GO DE-Jaderberg Vareler Straße, 53.340668, 8.185791
+EWE-GO DE-Jemgum A'nt Splittland, 53.314118, 7.284842
+EWE-GO DE-Jemgum Am Tief, 53.31549, 7.28106
+EWE-GO DE-Jemgum Hofstraße, 53.26294, 7.38374
+EWE-GO DE-Jever Adolf-Ahlers-Straße, 53.57062, 7.88933
+EWE-GO DE-Jever Alter Markt, 53.574139, 7.905162
+EWE-GO DE-Jever Am Bullhamm, 53.580856, 7.907571
+EWE-GO DE-Jever Am Hillernsen Hamm, 53.579575, 7.903038
+EWE-GO DE-Jever Lindenallee, 53.5716, 7.899674
+EWE-GO DE-Jever Schillerstraße, 53.577754, 7.903472
+EWE-GO DE-Jever Sophienstraße, 53.568216, 7.896066
+EWE-GO DE-Jever Theodor-Pekol-Platz, 53.57291, 7.906728
+EWE-GO DE-Jork Osterjork, 53.533064, 9.681771
+EWE-GO DE-Jüchen Neusser Straße, 51.10303, 6.53077
+EWE-GO DE-Kaarst Neersener Straße, 51.217298, 6.637961
+EWE-GO DE-Kall Werner-Schumacher-Straße, 50.54997, 6.57544
+EWE-GO DE-Kamp-Lintfort Prinzenstraße, 51.508021, 6.544007
+EWE-GO DE-Kehl Königsbergerstraße, 48.577059, 7.812091
+EWE-GO DE-Kelheim Donaupark Ring, 48.91217, 11.871483
+EWE-GO DE-Kerpen Stiftsstraße, 50.86719, 6.67727
+EWE-GO DE-Kiefersfelden Kaiserreich Straße, 47.618974, 12.199542
+EWE-GO DE-Kiel Theodor-Heuss-Ring, 54.302011, 10.1389
+EWE-GO DE-Kirchheim Industriestraße, 50.8323145, 9.5710911875
+EWE-GO DE-Kirchheim unter Teck Marie-Curie-Straße, 48.64444, 9.43077
+EWE-GO DE-Kirchseeon Siriusstraße, 48.08305, 11.85447
+EWE-GO DE-Kitzingen Repperndorfer Str., 49.740033, 10.146425
+EWE-GO DE-Kleinmachnow Stolper Weg, 52.402976, 13.18722
+EWE-GO DE-Korbach An der Kuhbach, 51.280154, 8.859436
+EWE-GO DE-Krefeld Bruchfeld, 51.344489, 6.6275039306641
+EWE-GO DE-Kreuztal Zitzenbachstr., 50.96026, 8.02728
+EWE-GO DE-Krummhörn Hafenstraße, 53.503405, 7.086101
+EWE-GO DE-Krummhörn Rathausstraße, 53.435425, 7.093302
+EWE-GO DE-Köln Aachener Straße, 50.938042, 6.87799
+EWE-GO DE-Köln Edmund-Rumpler-Straße, 50.91209, 7.05331
+EWE-GO DE-Köln Frankfurter Straße, 50.94879, 7.01835
+EWE-GO DE-Köln Istanbulstraße, 50.94341, 6.9946
+EWE-GO DE-Köln Koblenzer Straße, 50.91427, 6.96214
+EWE-GO DE-Köln Spenrather Weg, 50.98087735, 6.844737475
+EWE-GO DE-Köln Venloer Straße, 50.958028, 6.902386
+EWE-GO DE-Köngen Christian-Eisele-Straße, 48.67766, 9.36579
+EWE-GO DE-Königslutter am Elm Am Mühlenhop, 52.311275, 10.825176
+EWE-GO DE-Künzelsau Würzburger Straße, 49.28892, 9.67825
+EWE-GO DE-Laatzen Karlsruher Straße, 52.317672, 9.797413
+EWE-GO DE-Laatzen Kieler Straße, 52.296182, 9.821083
+EWE-GO DE-Ladbergen Espenhof, 52.147358, 7.733911
+EWE-GO DE-Lage Stauffenbergstraße, 51.989836, 8.789856
+EWE-GO DE-Lampertheim Industriestr., 49.593733, 8.482504
+EWE-GO DE-Lamstedt Kövener Kamp, 53.63832, 9.0841
+EWE-GO DE-Landshut Ludwig-Erhard-Straße, 48.53911, 12.09569
+EWE-GO DE-Langen Sievener Straße, 53.6094, 8.59498
+EWE-GO DE-Langenhagen Brüsseler Straße, 52.441937, 9.724022
+EWE-GO DE-Lastrup Am Markt, 52.79599, 7.86396
+EWE-GO DE-Lastrup St. Elisabeth-Straße, 52.7923, 7.863864
+EWE-GO DE-Lastrup Vlämische Straße, 52.797321, 7.865796
+EWE-GO DE-Lathen Große Straße, 52.861625, 7.317643
+EWE-GO DE-Lauingen (Donau) Werner-von-Siemens-Straße, 48.57513, 10.44796
+EWE-GO DE-Leer Am Emsdeich, 53.221834, 7.434542
+EWE-GO DE-Leer Am Schlosspark, 53.23201, 7.49231
+EWE-GO DE-Leer Annenstraße, 53.235045, 7.459196
+EWE-GO DE-Leer Benzstraße, 53.267857, 7.458188
+EWE-GO DE-Leer Bergmannstraße, 53.232950750261, 7.4566009500523
+EWE-GO DE-Leer Blinke, 53.227384, 7.441365
+EWE-GO DE-Leer Burfehner Weg, 53.23805, 7.44319
+EWE-GO DE-Leer Georgstraße, 53.2287, 7.462801
+EWE-GO DE-Leer Groninger Straße, 53.221613, 7.44644
+EWE-GO DE-Leer Heisfelder Str., 53.246786, 7.458617
+EWE-GO DE-Leer Nüttermoorer Straße , 53.259773239304, 7.4585702116581
+EWE-GO DE-Leer Ostersteg, 53.23059, 7.45465
+EWE-GO DE-Leer Papenburger Straße, 53.23425, 7.47631
+EWE-GO DE-Leer Ringstraße, 53.24190210389, 7.4593662269695
+EWE-GO DE-Leer Schleusenweg, 53.216533, 7.44885
+EWE-GO DE-Leer Schmiedestraße, 53.226998, 7.449074
+EWE-GO DE-Lehe Bundesstraße, 53.001914, 7.34414
+EWE-GO DE-Leipzig Handelsstraße, 51.39975, 12.40107
+EWE-GO DE-Leipzig Miltitzer Straße, 51.34768, 12.26337
+EWE-GO DE-Lemwerder Stedinger Straße, 53.159358, 8.610422
+EWE-GO DE-Leverkusen Kölner Straße, 51.05572, 7.002438
+EWE-GO DE-Lichtenfels Bamberger Straße, 50.13384, 11.0453
+EWE-GO DE-Lindau (Bodensee) Robert-Bosch-Straße, 47.54835, 9.72779
+EWE-GO DE-Lindenberg im Allgäu Hans-Liebherr-Straße, 47.59439, 9.86465
+EWE-GO DE-Lindern Vreeser Straße, 52.84577, 7.779999
+EWE-GO DE-Lingen (Ems) Zum Heidhof, 52.497625136719, 7.3276870117187
+EWE-GO DE-Lippstadt Erwitter Straße, 51.650935, 8.34499
+EWE-GO DE-Lohne An der Kirchenziegelei, 52.674654000412, 8.2473420035858
+EWE-GO DE-Lohne Kuestermeyerstraße, 52.665836, 8.23169
+EWE-GO DE-Lohne Meyerhofstraße, 52.670174, 8.235744
+EWE-GO DE-Lohne Vechtaer Straße, 52.671428, 8.234403
+EWE-GO DE-Lohr am Main Jahnstraße, 50.001623, 9.584881
+EWE-GO DE-Loxstedt Nelly Sachs Straße, 53.442232, 8.587099
+EWE-GO DE-Loxstedt Parkstraße, 53.474057, 8.652608
+EWE-GO DE-Ludwigshafen am Rhein In der Mörschgewanne, 49.451745, 8.422115
+EWE-GO DE-Löningen Elberger Straße, 52.73669, 7.75646
+EWE-GO DE-Löningen Poststraße, 52.734376, 7.759257
+EWE-GO DE-Löningen Ringstraße, 52.742508, 7.759159
+EWE-GO DE-Löningen Tabbenstraße, 52.73443, 7.75663
+EWE-GO DE-Lübbecke Thyssenstraße, 52.32146, 8.62589
+EWE-GO DE-Lübbenau/Spreewald LPG-Straße, 51.84966, 13.90757
+EWE-GO DE-Lübeck Bei der Lohmühle, 53.880904, 10.673955
+EWE-GO DE-Lübeck Hinter den Kirschkaten, 53.848088, 10.677746
+EWE-GO DE-Lüdinghausen Valve, 51.76691, 7.45978
+EWE-GO DE-Lüneburg Bei der Pferdehütte, 53.27546, 10.403972
+EWE-GO DE-Lünen Engelswiese, 51.61613, 7.52748
+EWE-GO DE-Magdeburg Werner-von-Siemens-Ring, 52.07965, 11.58167
+EWE-GO DE-Mainz Rheinallee, 50.02362, 8.23437
+EWE-GO DE-Mannheim Neckarauer Str., 49.46119, 8.491173
+EWE-GO DE-Marburg Afföllerstraße, 50.83265, 8.7684
+EWE-GO DE-Marienhafe Am Markt, 53.52274, 7.27187
+EWE-GO DE-Marktoberdorf Brückenstraße, 47.773399, 10.60495
+EWE-GO DE-Marktredwitz Böttgerstraße, 50.0134, 12.09918
+EWE-GO DE-Martfeld Hauptstraße, 52.876632, 9.062726
+EWE-GO DE-Massen-Niederlausitz Ludwig-Erhard-Straße, 51.63656, 13.73728
+EWE-GO DE-Meerane Hohe Straße, 50.841761, 12.44489
+EWE-GO DE-Meißen Fabrikstraße, 51.164993, 13.489314
+EWE-GO DE-Melle Industriestraße, 52.190412132036, 8.3527933577986
+EWE-GO DE-Menden Hämmerstraße, 51.450727, 7.752865
+EWE-GO DE-Mendig Ludwig-Erhard-Straße, 50.382029, 7.269635
+EWE-GO DE-Mering Hertzstraße, 48.273707, 10.97776
+EWE-GO DE-Mettmann Rudolf-Diesel-Straße, 51.25339, 6.95167
+EWE-GO DE-Minden Lübbecker Straße, 52.278228, 8.902649
+EWE-GO DE-Mitterteich Ludwig-Erhard-Straße, 49.936825, 12.222682
+EWE-GO DE-Molbergen Cloppenburger Straße, 52.857769, 7.925987
+EWE-GO DE-Monschau Am Handwerkerzentrum, 50.578287, 6.262254
+EWE-GO DE-Moormerland Borgwardring, 53.311927, 7.456644
+EWE-GO DE-Moormerland Rudolf-Euken Straße, 53.30891, 7.4878
+EWE-GO DE-Murnau am Staffelsee Straßäcker, 47.691457, 11.202509
+EWE-GO DE-Mönchengladbach Adolf-Kempken-Weg, 51.140174, 6.420049
+EWE-GO DE-Mönchengladbach Krefelder Straße, 51.22406, 6.48359
+EWE-GO DE-Mönchengladbach Rahracker, 51.195, 6.44987
+EWE-GO DE-Mühldorf a. Inn Schorsch-Meier-Straße, 48.251455, 12.505295
+EWE-GO DE-Mühlheim am Main Borsigstraße, 50.11896, 8.81724
+EWE-GO DE-Mülheim an der Ruhr Heifeskamp, 51.45895, 6.88406
+EWE-GO DE-Mülheim an der Ruhr Kölner Straße, 51.4006, 6.87678
+EWE-GO DE-München Hanauer Straße, 48.184302, 11.531244
+EWE-GO DE-München Maria-Probst-Straße, 48.19248, 11.584648
+EWE-GO DE-München Regerstr., 48.120927, 11.586545
+EWE-GO DE-München Stäblistraße, 48.08830208275, 11.505084646563
+EWE-GO DE-Münster Weseler Straße, 51.952144, 7.618466
+EWE-GO DE-Naumburg Steinkreuzweg, 51.144798, 11.831375
+EWE-GO DE-Neu Wulmstorf An der Bahn, 53.47335, 9.78575
+EWE-GO DE-Neu Wulmstorf Schlepelsberg, 53.37016, 9.80078
+EWE-GO DE-Neubrandenburg Akeleiweg, 53.518522, 13.260831
+EWE-GO DE-Neuburg an der Donau Am Südpark, 48.71999, 11.17022
+EWE-GO DE-Neuenburg Ladestraße, 53.387146, 7.952031
+EWE-GO DE-Neuenburg Westerstederstraße, 53.386129, 7.953971
+EWE-GO DE-Neuenkirchen Hauptstraße, 53.03231, 9.707059
+EWE-GO DE-Neuharlingersiel Edo-Edzard-Str., 53.7001, 7.70135
+EWE-GO DE-Neuharlingersiel Otzumer Balje, 53.694715, 7.690628
+EWE-GO DE-Neukirchen-Vluyn Pascalstraße, 51.43317, 6.545098
+EWE-GO DE-Neumünster Altonaer Straße, 54.05921, 9.98171
+EWE-GO DE-Neumünster Brückenstraße, 54.08864, 9.97787
+EWE-GO DE-Neuruppin Neustädter Straße, 52.91806, 12.78432
+EWE-GO DE-Neuss Sperberweg, 51.163355599609, 6.7528218642083
+EWE-GO DE-Neustadt bei Coburg Mühlweg, 50.339925, 11.144648
+EWE-GO DE-Neustadt in Holstein Eutiner Straße, 54.099960265625, 10.794669171875
+EWE-GO DE-Neuwied Junkerstücke, 50.442878, 7.501109
+EWE-GO DE-Norden Am Markt, 53.593333, 7.204553
+EWE-GO DE-Norden Am Norder Tief, 53.587219, 7.207825
+EWE-GO DE-Norden Bahnhofstraße, 53.58432, 7.22356
+EWE-GO DE-Norden Gewerbestraße, 53.6027, 7.18537
+EWE-GO DE-Nordenham An der Sielbrücke, 53.503549015625, 8.47405859375
+EWE-GO DE-Nordenham Atenser Allee, 53.492408, 8.471602
+EWE-GO DE-Nordenham Friedrich-Ebert-Straße, 53.48495, 8.48483
+EWE-GO DE-Nordenham Lloydstraße , 53.486858, 8.483736
+EWE-GO DE-Norderney Gorch-Fock-Weg, 53.699774, 7.157872
+EWE-GO DE-Nordhorn Lingener Straße, 52.440904, 7.084487
+EWE-GO DE-Northeim Von Menzel Straße, 51.692586, 9.989711
+EWE-GO DE-Nossen Augustusberg, 51.036467, 13.298203
+EWE-GO DE-Nottuln Beisenbusch, 51.91091565625, 7.39866890625
+EWE-GO DE-Nördlingen Würzburger Straße, 48.85452, 10.48264
+EWE-GO DE-Nörten-Hardenberg Unter dem Pferdestiege, 51.629152916381, 9.9221212498776
+EWE-GO DE-Nürnberg Heisterstraße, 49.42803, 11.06155
+EWE-GO DE-Nürnberg Laufamholzstraße, 49.462117, 11.141015
+EWE-GO DE-Nürnberg Regensburger Straße, 49.42748, 11.143331
+EWE-GO DE-Nürnberg Röthensteig, 49.469914996094, 11.07489000293
+EWE-GO DE-Nürtingen Oberboihinger Straße, 48.63636, 9.34619
+EWE-GO DE-Oberasbach Rothenburger Straße, 49.43522, 10.96685
+EWE-GO DE-Oberhausen Mülheimer Straße, 51.48369, 6.86488
+EWE-GO DE-Oberhausen Weierstraße, 51.52202, 6.83059
+EWE-GO DE-Oberhausen Zum Aquarium, 51.49225, 6.88662
+EWE-GO DE-Ochsenfurt Marktbreiter Str., 49.66481, 10.076182
+EWE-GO DE-Oerel Bohlenstraße, 53.480004, 9.056206
+EWE-GO DE-Oerlenbach An der Heide, 50.145131729883, 10.152019662354
+EWE-GO DE-Ofterdingen Mössinger Straße, 48.41129, 9.03516
+EWE-GO DE-Olching Geiselbullacher Straße, 48.224865, 11.333072
+EWE-GO DE-Oldenburg Alexanderstraße, 53.168715, 8.198708
+EWE-GO DE-Oldenburg Am Küstenkanal, 53.11206, 8.18269
+EWE-GO DE-Oldenburg Am Tegelbusch, 53.160156, 8.16686
+EWE-GO DE-Oldenburg Ammerländer Heerstr., 53.15388, 8.17132
+EWE-GO DE-Oldenburg Berliner Platz, 53.145689, 8.22666
+EWE-GO DE-Oldenburg Bloherfelder Straße, 53.140692, 8.171593
+EWE-GO DE-Oldenburg Bremer Heerstr., 53.1191, 8.25862
+EWE-GO DE-Oldenburg Bremer Heerstraße, 53.107311, 8.27721
+EWE-GO DE-Oldenburg Bremer Straße, 53.132122, 8.222204
+EWE-GO DE-Oldenburg Bürgerbuschweg, 53.17464, 8.20137
+EWE-GO DE-Oldenburg Cloppenburger Str., 53.111815, 8.210354
+EWE-GO DE-Oldenburg Donnerschweer Str., 53.149642, 8.232124
+EWE-GO DE-Oldenburg Edewechter Landstraße, 53.12983, 8.17985
+EWE-GO DE-Oldenburg Escherweg, 53.148783924107, 8.1997219419645
+EWE-GO DE-Oldenburg Großer Kuhlenweg, 53.16115, 8.241581
+EWE-GO DE-Oldenburg Haseler Weg, 53.180093, 8.231748
+EWE-GO DE-Oldenburg Huntestraße, 53.140142, 8.21942
+EWE-GO DE-Oldenburg Nadorster Straße, 53.16456, 8.22514
+EWE-GO DE-Oldenburg Nettelbeckstraße, 53.140647, 8.18857
+EWE-GO DE-Oldenburg Waterender Weg, 53.153883, 8.247718
+EWE-GO DE-Oldenburg Wichelnstraße, 53.138635, 8.195618
+EWE-GO DE-Oldenburg Wilhelmshavener Heerstraße , 53.171456, 8.229156
+EWE-GO DE-Oldenburg in Holstein Dannauer Bruch, 54.29693, 10.86652
+EWE-GO DE-Olpe Am Breithammer, 50.998838, 7.838365
+EWE-GO DE-Oranienburg Sachsenhausener Straße, 52.76523, 13.24563
+EWE-GO DE-Osnabrück Hannoversche Straße, 52.26234, 8.07099
+EWE-GO DE-Osnabrück Pagenstecherstraße, 52.29123, 8.025346
+EWE-GO DE-Osterholz-Scharmbeck Osterholzer Straße, 53.22728, 8.805571
+EWE-GO DE-Osterholz-Scharmbeck Ritterhuder Straße, 53.21706, 8.78012
+EWE-GO DE-Ostfildern Felix-Wankel-Straße, 48.712768, 9.308883
+EWE-GO DE-Ostrhauderfehn Hauptstraße, 53.14022, 7.62303
+EWE-GO DE-Ottendorf-Okrilla Zur Kuhbrücke, 51.173311, 13.845213
+EWE-GO DE-Otterndorf Raiffeisenstraße, 53.8047, 8.880683
+EWE-GO DE-Otterndorf Stader Straße, 53.809324, 8.911704
+EWE-GO DE-Ottersberg Grüne Straße, 53.111286, 9.142561
+EWE-GO DE-Ottersberg Posthausen, 53.060584, 9.17106
+EWE-GO DE-Overath Burghof, 50.942631, 7.297301
+EWE-GO DE-Paderborn Schäferweg, 51.73091, 8.76458
+EWE-GO DE-Papenburg Am Stadtpark, 53.081343, 7.389539
+EWE-GO DE-Papenburg Am Vosseberg, 53.07195, 7.42307
+EWE-GO DE-Papenburg Bahnhofstr., 53.091395, 7.391878
+EWE-GO DE-Papenburg Deverweg, 53.08395, 7.381812
+EWE-GO DE-Papenburg Flachsmeerstraße, 53.083776, 7.43253
+EWE-GO DE-Papenburg Hauptkanal rechts, 53.077617, 7.39395
+EWE-GO DE-Papenburg Kirchstraße, 53.085987, 7.401535
+EWE-GO DE-Papenburg Spillmannsweg, 53.072187, 7.45043
+EWE-GO DE-Parchim Am Sportplatz, 53.417797, 11.828731
+EWE-GO DE-Parsberg Im Grund, 49.176243, 11.728798
+EWE-GO DE-Pentling Ammerholz, 48.973717, 12.06445
+EWE-GO DE-Penzberg Seeshaupter Straße, 47.76572, 11.3593
+EWE-GO DE-Pewsum Schatthausstr., 53.437349, 7.095156
+EWE-GO DE-Pfalzfeld In der Scheib, 50.116164924752, 7.6003602124364
+EWE-GO DE-Pocking Bgm.-Wenig-Str., 48.395047, 13.311973
+EWE-GO DE-Porta Westfalica Zum Autohof , 52.210649, 8.874717
+EWE-GO DE-Quakenbrück Hasestraße, 52.675897, 7.946103
+EWE-GO DE-Radevormwald Wasserturmstraße, 51.198195, 7.372754
+EWE-GO DE-Rastede Bekhauser Esch, 53.295184, 8.138469
+EWE-GO DE-Rastede Gut Rehorn, 53.27079, 8.1719
+EWE-GO DE-Rastede Oldenburger Str. , 53.2466, 8.19858
+EWE-GO DE-Rastede Wemkenstraße, 53.27098, 8.161705
+EWE-GO DE-Ratingen An der Pönt, 51.35073, 6.86515
+EWE-GO DE-Rauenberg Hohenaspen, 49.274329, 8.69562
+EWE-GO DE-Ravensburg Gartenstraße, 47.792447, 9.623541
+EWE-GO DE-Regen Wieshof, 48.96527, 13.13663
+EWE-GO DE-Regensburg Defreggerweg, 49.009522, 12.06309
+EWE-GO DE-Reichenbach Rosa-Luxemburg-Straße, 50.61953, 12.28559
+EWE-GO DE-Reiskirchen Carl-Benz-Str., 50.59837, 8.82213
+EWE-GO DE-Rhauderfehn 1. Südwieke, 53.13563, 7.57352
+EWE-GO DE-Rhauderfehn Hagiusring, 53.134308, 7.57252
+EWE-GO DE-Rhauderfehn Im Gewerbegebiet, 53.14579, 7.562601
+EWE-GO DE-Rheinbach Eulenbach, 50.625645, 6.963187
+EWE-GO DE-Rheinberg An der Neuweide, 51.53587, 6.6069
+EWE-GO DE-Rheinfelden (Baden) Großmattstraße, 47.576, 7.79643
 EWE-GO DE-Riesa, 51.295464, 13.28629
+EWE-GO DE-Rosengarten Am Kiekeberg, 53.440366, 9.905124
+EWE-GO DE-Rosengarten Bürgermeister Glade Straße, 53.36733, 9.930085
+EWE-GO DE-Rosengarten Eckeler Straße, 53.378092, 9.897436
+EWE-GO DE-Rotenburg (Wümme) Verdener Straße, 53.102557, 9.394362
+EWE-GO DE-Rotenburg Hopfengarten, 53.11128, 9.394909
+EWE-GO DE-Rotenburg Verdener Straße, 53.096293, 9.375131
+EWE-GO DE-Rotenburg a.d. Wümme Große Straße, 53.109783, 9.3993
+EWE-GO DE-Rotenburg a.d. Wümme Waldweg, 53.120177, 9.423308
+EWE-GO DE-Rösrath Otto-Brenner-Straße, 50.884844, 7.187906
+EWE-GO DE-Rüdesheim am Rhein Geisenheimer Str., 49.980433, 7.936238
+EWE-GO DE-Rüsselsheim am Main Adam-Opel-Straße, 49.984614, 8.429679
+EWE-GO DE-Saarlouis Provinzialstr., 49.289048, 6.760031
+EWE-GO DE-Salzbergen An der Landesgrenze, 52.32477, 7.43192
+EWE-GO DE-Salzgitter Am Pfingstanger, 52.05012, 10.37879
+EWE-GO DE-Salzgitter Konrad-Adenauer-Straße, 52.15318, 10.34067
+EWE-GO DE-Salzkotten Geseker Straße, 51.666893, 8.589292
+EWE-GO DE-Salzwedel Magdeburger Straße, 52.8413, 11.17207
+EWE-GO DE-Sande Am Gut Sanderbusch, 53.506305, 8.012819
+EWE-GO DE-Sande Am Markt, 53.50285, 8.01159
+EWE-GO DE-Sande Bahnhofstraße, 53.490569001216, 8.0305345950376
+EWE-GO DE-Sande Hauptstraße, 53.496439, 8.024274
+EWE-GO DE-Saterland Marktstraße, 53.10225, 7.67929
+EWE-GO DE-Saterland Schulstraße, 53.098756281316, 7.6785967494681
+EWE-GO DE-Schierling Siemensstraße, 48.839123, 12.117908
+EWE-GO DE-Schifferstadt Am Katzenbaumerschlag, 49.38586, 8.39188
+EWE-GO DE-Schlüchtern Am Dieselrasen, 50.38759, 9.53284
+EWE-GO DE-Schnelldorf Nikolaus-Otto-Straße, 49.171681, 10.24745
+EWE-GO DE-Schneverdingen Osterwaldweg, 53.117471, 9.806268
+EWE-GO DE-Schneverdingen Schulstraße, 53.120206, 9.786683
+EWE-GO DE-Schorfheide An der B167, 52.84172, 13.69673
+EWE-GO DE-Schortens An der alten Bundesstraße, 53.54122, 7.955099
+EWE-GO DE-Schortens Jeversche Str., 53.542513, 7.946119
+EWE-GO DE-Schortens Menkestraße, 53.539121, 7.947793
+EWE-GO DE-Schortens Mühlenweg, 53.53773, 7.94009
+EWE-GO DE-Schortens Oldenburger Straße, 53.537419, 7.967845
+EWE-GO DE-Schortens Rheinstr., 53.53684, 7.9487
+EWE-GO DE-Schrobenhausen Rinderhofer Breite, 48.56416, 11.28907
+EWE-GO DE-Schwabach Am Falbenholzweg, 49.318986, 11.048517
+EWE-GO DE-Schwabmünchen Augsburger Straße, 48.19723, 10.75826
+EWE-GO DE-Schwanewede Blumenthaler Straße, 53.22398, 8.59486
+EWE-GO DE-Schwanewede Hannoversche Str., 53.22636, 8.58243
+EWE-GO DE-Schweinfurt Niederwerrner Straße, 50.048253, 10.209348
+EWE-GO DE-Schwerin Grabenstraße, 53.601677, 11.390567
+EWE-GO DE-Schwäbisch Gmünd Lorcher Straße, 48.790009, 9.766491
+EWE-GO DE-Schönebeck (Elbe) Am Stremsgraben, 52.030013, 11.706609
+EWE-GO DE-Seevetal Jesteburger Straße, 53.38301, 9.97966
+EWE-GO DE-Seevetal Ohlendorfer Straße, 53.343359, 10.030361
+EWE-GO DE-Seevetal Winsener Straße, 53.39071, 10.04401
+EWE-GO DE-Selb Professor-Fritz-Klee-Straße, 50.167539, 12.120109
+EWE-GO DE-Selsingen Hauptstraße, 53.369701, 9.214193
+EWE-GO DE-Senftenberg Güterbahnhofstraße, 51.527426, 14.009129
+EWE-GO DE-Soest Werler Landstraße, 51.564769, 8.087513
+EWE-GO DE-Solingen Frankfurter Damm, 51.185096, 7.055174
+EWE-GO DE-Soltau Vor dem Weiherbusch, 52.972465, 9.85325
+EWE-GO DE-Sottrum Am Umspannwerk, 53.11414, 9.24495
+EWE-GO DE-Sottrum Bremer Straße, 53.113489, 9.230313
+EWE-GO DE-Sottrum Schillerstraße, 53.105144, 9.243092
+EWE-GO DE-Stade Harburger Straße, 53.581962, 9.500561
+EWE-GO DE-Stadland Am Markt, 53.401689, 8.455029
+EWE-GO DE-Stadland Hauptstraße, 53.456664, 8.346959
+EWE-GO DE-Stadtbergen Daimlerstraße, 48.376801, 10.841518
+EWE-GO DE-Stadthagen Jahnstr., 52.309936, 9.19144
+EWE-GO DE-Steinfurt Carl-Benz-Straße, 52.159249, 7.320364
+EWE-GO DE-Steinkirchen Gartenstraße, 53.560933, 9.60685
+EWE-GO DE-Stolberg Eisenbahnstraße, 50.77918, 6.22135
+EWE-GO DE-Stralsund Greifswalder Chaussee, 54.30108, 13.09484
+EWE-GO DE-Strausberg Prötzeler Chaussee, 52.5909, 13.908064
+EWE-GO DE-Stuhr-Moordeich Varreler Landstraße, 53.036759, 8.724239
+EWE-GO DE-Stuttgart Heiligenwiesen, 48.763156069695, 9.2544151958084
+EWE-GO DE-Sundern Schweinsohl, 51.337549, 7.997124
+EWE-GO DE-Syke Herrlichkeit, 52.91471, 8.82726
+EWE-GO DE-Sögel Am Markt, 52.840396, 7.52138
+EWE-GO DE-Sögel Clemenswerth, 52.8366, 7.53631
+EWE-GO DE-Tarmstedt Gartenstraße, 53.228305, 9.082528
+EWE-GO DE-Tarmstedt Hepstedter Straße, 53.22787, 9.07818
+EWE-GO DE-Tarmstedt KleineTrift, 53.230912, 9.08537
+EWE-GO DE-Tettnang Dr.-Klein-Straße, 47.664779, 9.578563
+EWE-GO DE-Torgau Außenring, 51.561782, 12.971131
+EWE-GO DE-Tostedt Zinnhütte, 53.269515, 9.730722
+EWE-GO DE-Tuttlingen Dornierstraße, 47.96781, 8.78696
+EWE-GO DE-Tönisvorst Höhenhöfe, 51.315114, 6.476086
+EWE-GO DE-Tübingen Reutlinger Straße, 48.51358, 9.0712
+EWE-GO DE-Türkheim Schützenstraße, 48.043441416605, 10.622393455178
+EWE-GO DE-Uelzen Nordallee, 52.986991, 10.548136
+EWE-GO DE-Unterhaching Grünwalder Weg, 48.05674, 11.60251
+EWE-GO DE-Unterschleißheim Max-Planck-Straße, 48.28376, 11.563751
+EWE-GO DE-Uplengen Alter Postweg, 53.30787, 7.75389
+EWE-GO DE-Urbach Daimlerstraße, 48.808933549989, 9.5717950750052
+EWE-GO DE-Varel Am Bahnhof, 53.399375, 8.148622
+EWE-GO DE-Varel Am Hafen, 53.407162, 8.16826
+EWE-GO DE-Varel Am Pfarrgarten, 53.393956, 8.140005
+EWE-GO DE-Varel Bleichenpfad, 53.392993, 8.14036
+EWE-GO DE-Varel Edo-Wiemken-Str., 53.45005, 8.119889
+EWE-GO DE-Varel Gertrud-Barthel-Straße, 53.398513, 8.12341
+EWE-GO DE-Varel Gewerbestraße, 53.398179, 8.117255
+EWE-GO DE-Varel Karl-Nieraad-Str., 53.39395, 8.1221
+EWE-GO DE-Vechelde Bodelschwinghstraße, 52.264891, 10.367714
+EWE-GO DE-Vechta Friesenstraße, 52.711096220703, 8.283820241394
+EWE-GO DE-Vechta Füchteler Straße, 52.730935, 8.291008
+EWE-GO DE-Vechta Stukenborg, 52.733144, 8.262765
+EWE-GO DE-Velbert Heiligenhauser Straße, 51.332287, 7.020425
+EWE-GO DE-Verden Hamburger Straße, 52.94841, 9.233362
+EWE-GO DE-Viersen Freiheitsstraße, 51.25313, 6.39887
+EWE-GO DE-Visbek Corveystraße, 52.835764, 8.311329
+EWE-GO DE-Visbek Rechterfelder Straße, 52.836613, 8.313362
+EWE-GO DE-Visbek Rechterfelder Straße, 52.836678, 8.316098
+EWE-GO DE-Visselhövede Goethestraße, 52.985295, 9.579349
+EWE-GO DE-Visselhövede Süderstraße, 52.983839, 9.580985
+EWE-GO DE-Völklingen Saarwiesenstraße, 49.24488, 6.86337
+EWE-GO DE-Waldlaubersheim Auf Dem Stein, 49.92438, 7.82602
+EWE-GO DE-Walsrode Große Schneede, 52.84927, 9.55503
+EWE-GO DE-Wangerland Andelweg, 53.686663, 8.005401
+EWE-GO DE-Wangerland Bäderstraße, 53.63463, 8.01677
+EWE-GO DE-Wangerland Lange Straße, 53.6262, 8.029538
+EWE-GO DE-Wangerland Mellumweg, 53.704126, 8.024118
+EWE-GO DE-Wangerland Zum Hafen, 53.684677, 8.017488
+EWE-GO DE-Wardenburg Friedrichstr., 53.06446, 8.192396
+EWE-GO DE-Wardenburg Oldenburger Straße, 53.06361, 8.19557
+EWE-GO DE-Wasserburg am Inn Bernd-Motzkus-Straße, 48.04916, 12.22232
+EWE-GO DE-Weener Neue Feldstraße, 53.167907, 7.349467
+EWE-GO DE-Weener Osterstraße, 53.16525, 7.356554
+EWE-GO DE-Weener Schulstraße, 53.16566, 7.352425
+EWE-GO DE-Weilburg Viehweg, 50.481145, 8.294473
+EWE-GO DE-Weilerswist Parkallee, 50.747907078125, 6.851316046875
+EWE-GO DE-Weingarten Argonnenstraße, 47.813616, 9.636335
+EWE-GO DE-Weinstadt Kalkofenstraße, 48.81463, 9.36358
+EWE-GO DE-Weiterstadt Max-Planck-Str., 49.897988, 8.5972238743286
+EWE-GO DE-Weißenfels Heinrich-Hertz-Straße, 51.18801, 11.988904
+EWE-GO DE-Wennigsen Im Büntefeld, 52.26635, 9.62635
+EWE-GO DE-Wentorf bei Hamburg Immenberg, 53.48884, 10.27162
+EWE-GO DE-Werder (Havel) Obstzüchterstraße, 52.3645, 12.93706
+EWE-GO DE-Werdohl Gildestraße, 51.26269, 7.78121
+EWE-GO DE-Werdum Raiffeisenplatz, 53.658208, 7.715982
+EWE-GO DE-Werl Neuwerk, 51.562832, 7.900736
+EWE-GO DE-Werlte Marktstraße, 52.852006, 7.676745
+EWE-GO DE-Werlte Unfriedstraße, 52.850166, 7.658131
+EWE-GO DE-Wermelskirchen Bandwirkerstr., 51.13692, 7.19943
+EWE-GO DE-Werne Nordlippestraße, 51.698298699989, 7.672388
+EWE-GO DE-Wernigerode Dornbergsweg, 51.85254, 10.79018
+EWE-GO DE-Wertheim Almosenberg, 49.77108, 9.58765
+EWE-GO DE-Westerholt Closterstraße, 53.58365, 7.46458
+EWE-GO DE-Westerholt Nordener Straße, 53.58969, 7.457914
+EWE-GO DE-Westerstede Am Hamjebusch, 53.256749, 7.935833
+EWE-GO DE-Westerstede Am Markt, 53.25778, 7.92656
+EWE-GO DE-Westerstede Ammerlandallee, 53.25264, 7.932445
+EWE-GO DE-Westerstede An der Hössen, 53.25562, 7.91649
+EWE-GO DE-Westerstede Kuhlenstraße, 53.253433, 7.917767
+EWE-GO DE-Westerstede Lange Str., 53.25892, 7.91971
+EWE-GO DE-Westerstede Zum Stadtpark, 53.256132, 7.926212
+EWE-GO DE-Westoverledingen Bahnhofstr., 53.166, 7.45127
+EWE-GO DE-Westoverledingen Deichstraße, 53.173962, 7.419307
+EWE-GO DE-Weyhe Im Bruch, 52.984732, 8.84356
+EWE-GO DE-Wiefelstede Kirchstraße, 53.25615, 8.11495
+EWE-GO DE-Wiesmoor Hauptstraße, 53.400672, 7.712459
+EWE-GO DE-Wiesmoor Kanalstr II, 53.39487, 7.70292
+EWE-GO DE-Wildenfels Arno-Schmidt-Straße, 50.68072, 12.59116
+EWE-GO DE-Wildeshausen Delmenhorster Straße, 52.902774869048, 8.4444769583328
+EWE-GO DE-Wildeshausen Gildeplatz, 52.896432, 8.438846
+EWE-GO DE-Wildeshausen Glaner Straße, 52.90179, 8.416729
+EWE-GO DE-Wildeshausen Immelmannstraße, 52.89621, 8.413261
+EWE-GO DE-Wildeshausen Westring, 52.895319, 8.413467
+EWE-GO DE-Wilhelmshaven Accumer Landstr. , 53.537572, 8.044674
+EWE-GO DE-Wilhelmshaven An der Junkerei, 53.52394, 8.07672
+EWE-GO DE-Wilhelmshaven Mühlenweg, 53.533115, 8.132104
+EWE-GO DE-Wilhelmshaven Pazifik, 53.582579, 8.139893
+EWE-GO DE-Wilhelmshaven Rathausplatz, 53.527975, 8.110126
+EWE-GO DE-Wilhelmshaven Valoisplatz, 53.51739, 8.116
+EWE-GO DE-Wilhelmshaven Zur Kaiser-Wilhelm-Brücke, 53.51216375293, 8.1343447080568
+EWE-GO DE-Willich Halskestraße, 51.26948, 6.51951
+EWE-GO DE-Winterberg Am Hagenblech, 51.20096, 8.53104
+EWE-GO DE-Wipperfürth Lenneper Straße, 51.121, 7.37709
+EWE-GO DE-Witten Dortmunder Str., 51.442309745361, 7.3521162480469
+EWE-GO DE-Wittmund Am Markt, 53.573875, 7.782784
+EWE-GO DE-Wittmund-Carolinensiel Bahnhofstraße, 53.69119, 7.80789
+EWE-GO DE-Wolfenbüttel Gebrüder-Welger-Straße, 52.16337, 10.52182
+EWE-GO DE-Wolfenbüttel Im Sommerfeld, 52.14564, 10.546204
+EWE-GO DE-Wolfratshausen Pfaffenrieder Straße, 47.90047, 11.42661
+EWE-GO DE-Wolfsburg Lerchenweg, 52.427417, 10.811158
+EWE-GO DE-Worms Doktor-Otto-Röhm-Straße, 49.64975, 8.36206
+EWE-GO DE-Worpswede Bergstraße, 53.220716, 8.928253
+EWE-GO DE-Wunstorf An der Nonnenwiese, 52.42837, 9.4165
+EWE-GO DE-Wurster Nordseeküste Am Mühlenberg, 53.732396, 8.615631
+EWE-GO DE-Wurster Nordseeküste Berliner Straße, 53.686675, 8.572061
+EWE-GO DE-Wurster Nordseeküste Feuerweg, 53.778911, 8.61385
+EWE-GO DE-Wurster Nordseeküste In der Langen Straße, 53.649001, 8.509067
+EWE-GO DE-Wörth an der Donau Im Gewerbepark, 49.00215, 12.36504
+EWE-GO DE-Würzburg Faulenbergstraße, 49.79771, 9.98693
+EWE-GO DE-Zeitz Geußnitzer Straße, 51.03663, 12.16023
+EWE-GO DE-Zetel Neuenburger Straße, 53.41799, 7.972179
+EWE-GO DE-Zeven Kivinanstraße, 53.292162, 9.274971
+EWE-GO DE-Zwickau Oskar-Arnold-Straße, 50.70627, 12.50094
 EWE-GO DE-Zwickau Ost, 50.6807333, 12.591146, 10
+EWE-GO DE-Zülpich Villa Rustica, 50.704799, 6.669532
+EWE-GO DE-Überlingen Abigstraße, 47.774522, 9.186378
 
 EWE-SWB DE-Bremen P&R Grolland, 53.058181, 8.757356
 EWE-SWB DE-Burgwedel, 52.485739, 9.844603
