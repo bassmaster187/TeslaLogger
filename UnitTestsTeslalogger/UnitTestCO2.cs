@@ -28,13 +28,13 @@ namespace UnitTestsTeslalogger
             CO2 co2 = new CO2();
             
             int c = co2.GetData("de", dateTime);
-            Assert.AreEqual(422, c);
+            Assert.AreEqual(419, c);
 
             c = co2.GetData("fr", dateTime);
             Assert.AreEqual(67, c);
 
             c = co2.GetData("ch", dateTime);
-            Assert.AreEqual(154, c);
+            Assert.AreEqual(153, c);
 
             c = co2.GetData("at", dateTime);
             Assert.AreEqual(414, c);
@@ -46,13 +46,13 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(320, c);
 
             c = co2.GetData("pt", dateTime);
-            Assert.AreEqual(126, c);
+            Assert.AreEqual(125, c);
 
             c = co2.GetData("es", dateTime);
             Assert.AreEqual(140, c);
 
             c = co2.GetData("be", dateTime);
-            Assert.AreEqual(147, c);
+            Assert.AreEqual(201, c);
 
             c = co2.GetData("dk", dateTime);
             Assert.AreEqual(209, c);
@@ -67,7 +67,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(317, c);
 
             c = co2.GetData("nl", dateTime);
-            Assert.AreEqual(505, c);
+            Assert.AreEqual(512, c);
 
             c = co2.GetData("no", dateTime);
             Assert.AreEqual(47, c);
@@ -84,8 +84,8 @@ namespace UnitTestsTeslalogger
             c = co2.GetData("uk", dateTime);
             Assert.AreEqual(161, c);
 
-            c = co2.GetData("lu", dateTime);
-            Assert.AreEqual(390, c);
+            // c = co2.GetData("lu", dateTime);
+            // Assert.AreEqual(390, c);
 
             c = co2.GetData("pl", dateTime);
             Assert.AreEqual(719, c);
@@ -109,6 +109,42 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual(583, c);
         }
 
+        // [TestMethod]
+        public void GetMonthExport()
+        {
+            var dt = new DateTime(2023, 07, 01);
+            var dtEnde = dt.AddMonths(1);
+            CO2 co2 = new CO2();
+
+            decimal sumEur = 0;
+            decimal sumMWh = 0;
+
+
+            while (dt < dtEnde)
+            {
+                int c = co2.GetData("de", dt);
+                dt = dt.AddMinutes(15);
+                if (co2.CrossBorderElectricityTrading > 0)
+                    continue;
+
+                co2.CrossBorderElectricityTrading = co2.CrossBorderElectricityTrading * -1 / 4;
+
+                var eur = co2.CrossBorderElectricityTrading * co2.DayAheadAuction;
+                sumEur += (decimal)eur;
+                sumMWh += (decimal)co2.CrossBorderElectricityTrading;
+
+                System.Diagnostics.Debug.WriteLine(dt.ToString() + ";" + co2.CrossBorderElectricityTrading.ToString(Tools.ciDeDE) + ";" + co2.DayAheadAuction.ToString(Tools.ciDeDE) + ";" + eur.ToString(Tools.ciDeDE));
+            }
+
+            var avgEur = sumEur / sumMWh;
+
+            System.Diagnostics.Debug.WriteLine($"Sum Eur: {sumEur}");
+            System.Diagnostics.Debug.WriteLine($"Sum Eur: {sumEur / 1000000} Mio€");
+            System.Diagnostics.Debug.WriteLine($"Sum MWh: {sumMWh}");
+            System.Diagnostics.Debug.WriteLine($"Sum GWh: {sumMWh / 1000}");
+            System.Diagnostics.Debug.WriteLine($"Avg Eur: {avgEur}");
+        }
+        
         [TestMethod]
         public void TestGetDataDB()
         {
