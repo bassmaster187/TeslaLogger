@@ -1879,7 +1879,7 @@ namespace TeslaLogger
                 else
                 {
                     HttpClient client = GethttpclientTeslaAPI();
-                    string adresse = apiaddress + "api/1/vehicles";
+                    string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
                     Task<HttpResponseMessage> resultTask;
                     HttpResponseMessage result;
                     DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
@@ -2067,7 +2067,7 @@ namespace TeslaLogger
                 {
 
                     HttpClient client = GethttpclientTeslaAPI();
-                    string adresse = apiaddress + "api/1/vehicles";
+                    string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     result = await client.GetAsync(adresse);
 
