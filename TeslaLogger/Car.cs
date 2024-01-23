@@ -1021,7 +1021,7 @@ namespace TeslaLogger
 
                 Log("Unhandled State: " + res);
 
-                Thread.Sleep(30000);
+                Thread.Sleep(60000);
             }
         }
 
