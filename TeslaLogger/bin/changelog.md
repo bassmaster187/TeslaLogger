@@ -1,3 +1,9 @@
+# Version 1.56.0
+- Support new Tesla API
+- Attention: MapQuest isn't free anymore! Either you remove the key in your settings, if you used it or you have to provide a credit card to MapQuest. 
+- Dayli backup in docker
+- Support for V4 Supercharger in statistics
+
 # Version 1.55.0
 - Supporting new API change after Tesla firmware 2023.38.4
 
