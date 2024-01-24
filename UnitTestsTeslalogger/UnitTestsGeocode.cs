@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -108,5 +109,50 @@ namespace UnitTestsTeslalogger
             string temp = WebHelper.ReverseGecocodingAsync(c, 0, 0, true).Result;
             Assert.AreEqual("- ,  ", temp);
         }
+
+        [TestMethod]
+        public void ParseGeocodeFile()
+        {
+            var filename = "../../../TeslaLogger/bin/geofence.csv";
+            String line;
+            using (StreamReader file = new StreamReader(filename))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (string.IsNullOrEmpty(line))
+                        continue;
+
+                    var args = line.Split(',');
+                    Assert.IsNotNull(args);
+
+                    // System.Diagnostics.Debug.WriteLine(line);
+
+                    if (args.Length < 3) 
+                        Assert.Fail("Expected format: name, lat, lng, radius: " + line);
+                    else if (args.Length > 4)
+                        Assert.Fail("Expected format: name, lat, lng, radius: " + line);
+
+                    try
+                    {
+                        double.Parse(args[1], Tools.ciEnUS.NumberFormat);
+                        double lng = double.Parse(args[2], Tools.ciEnUS.NumberFormat);
+                    } catch (Exception){ 
+                        Assert.Fail("Can't parse coordinate: " + line); 
+                    }
+
+
+                    if (args.Length == 4)
+                    {
+                        if (!int.TryParse(args[3], out int radius))
+                            Assert.Fail("Can't parse radius: " + line);
+                    }
+
+                    string name = args[0];
+                    if (name.Contains("\""))
+                        Assert.Fail($"'${name}' contains illegal characters: \"");
+
+                }
+            }
+        }           
     }
 }
