@@ -77,4 +77,4 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test UnitTestsTeslalogger\UnitTestsTeslalogger.csproj
+      run: dotnet test --logger trx --results-directory "TestResults" UnitTestsTeslalogger\UnitTestsTeslalogger.csproj
