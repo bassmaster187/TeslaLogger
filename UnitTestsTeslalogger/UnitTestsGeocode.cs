@@ -13,7 +13,7 @@ namespace UnitTestsTeslalogger
     [TestClass]
     public class UnitTestsGeocode
     {
-        Car c = null;
+        static Car c = null;
         Geofence geofence;
 
         [TestInitialize]
@@ -22,10 +22,12 @@ namespace UnitTestsTeslalogger
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
+            GeocodeCache.useGeocodeCache = false;
+
             var geofence = Geofence.GetInstance();
 
             if (c == null)
-                c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
+                c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null); 
 
             geofence = Geofence.GetInstance();
             geofence.geofenceList.Clear();
