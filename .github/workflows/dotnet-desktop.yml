@@ -31,8 +31,14 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
     
+    - name: Setup Nuget
+      uses: Nuget/setup-nuget@v1.0.5
+
+    - name: Restore nuget packages
+      run: nuget restore TeslaLogger.sln
+    
     - name: Build solution
-      run: msbuild TeslaLogger.sln -t:rebuild -property:Configuration=Release
+      run: msbuild TeslaLogger.sln -t:rebuild -property:Configuration=Debug
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
