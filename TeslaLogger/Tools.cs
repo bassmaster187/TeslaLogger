@@ -45,8 +45,7 @@ namespace TeslaLogger
 
         internal static bool UseNearbySuCService()
         {
-            // TODO
-            return true;
+            return Tools.IsShareData();
         }
 
         private static string _OSVersion = string.Empty;
