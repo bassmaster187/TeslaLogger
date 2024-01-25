@@ -51,3 +51,10 @@ jobs:
       with:
         files: |
           **/TestResults/*.trx
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with: 
+        name: Teslalogger
+        path: TeslaLogger\bin\Debug\TeslaLogger.exe
+      
