@@ -68,7 +68,7 @@ Supercharger BE-Aalst, 50.92147, 4.03275
 Supercharger BE-Antwerp, 51.268051, 4.4024, 70
 Supercharger BE-Antwerp-Aartselaar, 51.13699, 4.37719
 Supercharger-V3 BE-Arlon, 49.648129,5.818957
-Supercharger BE-Brugge, 51.16989, 3.19666
+Supercharger-V3 BE-Brugge, 51.16989, 3.19666
 Supercharger BE-Edegem, 51.151055, 4.432582
 Supercharger-V3 BE-Hasselt, 50.951748, 5.353142, 17
 Supercharger BE-Heusden-Zolder, 50.9934, 5.2422
@@ -270,7 +270,7 @@ Supercharger DE-Mogendorf, 50.4827719, 7.750309
 Supercharger-V3 DE-Montabaur,50.443591,7.830885,20
 Supercharger DE-Motten, 50.355621, 9.75384
 Supercharger-V3 DE-Murr, 48.956119,9.245459
-Supercharger DE-Mücke, 50.645442, 8.989816
+Supercharger-V3 DE-Mücke, 50.645442, 8.989816
 Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
 Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
@@ -432,7 +432,7 @@ Supercharger ES-Zaragoza, 41.625707, -1.009618
 Supercharger FI-Äänekoski, 62.516741, 25.6913
 Supercharger FI-Akaa, 61.181106, 23.885075
 Supercharger-V3 FI-Hartola, 61.578409,26.009758
-Supercharger FI-Huittinen, 61.168436, 22.680099
+Supercharger-V3 FI-Huittinen, 61.168436, 22.680099
 Supercharger FI-Jalasjärvi,62.417071,22.791815
 Supercharger-V3 FI-Karesuvanto, 68.450226,22.4814
 Supercharger-V3 FI-Kempele, 64.9018031, 25.5353976
@@ -651,7 +651,7 @@ Supercharger-V3 IS-Kirkjubæjarklaustur, 63.789025,-18.052187
 Supercharger-V3 IS-Staðarskáli, 65.14475,-21.084813
 Supercharger-V3 IS-Vatnagardar, 64.14496,-21.854711
 Supercharger-V3 IT-Adda Sud,45.510724,9.63624
-Supercharger IT-Affi, 45.551296, 10.787143
+Supercharger-V3 IT-Affi, 45.551296, 10.787143
 Supercharger-V3 IT-Afragola - Napoli North, 40.93333064, 14.35741834
 Supercharger IT-Aosta, 45.73745, 7.371416
 Supercharger-V3 IT-Arese, 45.561371, 9.055905
@@ -832,7 +832,6 @@ Supercharger NO-Os, 60.192788, 5.4652
 Supercharger NO-Porsgrunn, 59.122098, 9.707564
 Supercharger NO-Rennebu, 62.832142, 10.010141
 Supercharger NO-Ringdalskogen, 59.112402, 10.108727
-Supercharger NO-Rolvsøy, 59.324292, 10.954448
 Supercharger NO-Rugtvedt, 59.035933, 9.67402
 Supercharger NO-Rygge, 59.38753, 10.751039
 Supercharger NO-Røldal, 59.816824, 6.752226
@@ -847,6 +846,7 @@ Supercharger-V3 NO-Skien,59.206742,9.6090613
 Supercharger NO-Skjåk, 61.88317, 8.267157
 Supercharger NO-Skulestadmo, 60.658297, 6.436256
 Supercharger NO-Svolvær, 68.233132, 14.559828
+Supercharger NO-Solli, 59.324292, 10.954448
 Supercharger NO-Stjørdal, 63.466385, 10.918098
 Supercharger-V3 NO-Stryn, 61.904677,6.7258
 Supercharger NO-Storjord, 66.814045, 15.401738
