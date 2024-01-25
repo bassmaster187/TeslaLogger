@@ -26,6 +26,7 @@ namespace TeslaLogger
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private readonly HashSet<string> unknownKeys = new HashSet<string>();
         private readonly Car car;
+        private readonly MQTT mqtt;
         private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
@@ -115,6 +116,9 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
+            
+//            mqtt.PublishMqttValue(car.Vin, name, newvalue);
+
             switch (name)
             {
                 case "car_version":
@@ -177,12 +181,20 @@ namespace TeslaLogger
                                         break;
                                 }
                             }
+                            
                         }
+                        car.CurrentJSON.current_plugged_in = true;
                     }
                     else if (newvalue.Equals("Disconnected"))
                     {
                         car.DbHelper.UpdateUnplugDate();
+                        car.CurrentJSON.current_plugged_in = false;
                     }
+                    else 
+                    {
+                        car.CurrentJSON.current_plugged_in = true;
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
                     break;
                 case "battery_level":
                     // car is idle and battery level changed -> update ABRP

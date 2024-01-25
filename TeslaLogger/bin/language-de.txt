@@ -243,13 +243,35 @@ Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=kWh Fahrzeug
 
+#mqtt.php
+MQTTSettings=MQTT Einstellungen
+MQTTSettingsInfo=MQTT Host ist erforderlich. Alle andere Einstellungen sind optional
+TopicStructure=Topics sind im folgendem Format:
+MQTT1=Alle Werte in einem JSON: "teslalogger/json/1"
+MQTT2=Alle Werte als Subtopics (wenn aktiviert): "teslalogger/cars/1/ideal_battery_range_km"
+TopicDescription=Beschreibung:
+MQTT3="teslalogger" ist parametrierbar im Feld "Topic"
+MQTT4="1" ist die TeslaLogger CarID
+MQTT5="ideal_battery_range_km" sind einzelne Topics
+
+ControlTopic=Topic zum Steuern:
+MQTT6="teslalogger/car/1/command/set_charge_limit" und "13" als RAW Value
+MQTT7=Unterstützte Kommanden
+
+RebootAfterSave=Nach dem Speichern bitte TeslaLogger neustarten!
+Host=Host
+Port=Port
+Topic=Topic
+Subtopics=Subtopics
+ClientID=ClientID
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Sie können einen Link von TeslaLogger zu SuperChargeBingo einrichten, um automatische Checkins an Superchargern durchzuführen.
 Create a SuperChargeBingo account=Erstellen Sie ein SuperChargeBingo-Konto
 Create API key (must be secure)=API-Schlüssel erstellen (muss sicher sein)
 Copy Username and API key and insert it in TeslaLogger=Kopieren Sie Benutzername und API-Schlüssel und fügen Sie sie in TeslaLogger ein.
-Save and restart TeslaLogger=Speichern und Neustart von TeslaLogger
+Save and restart TeslaLogger=Speichern und TeslaLogger neustarten!
 Username=Benutzername
 API key=API-Schlüssel
 
