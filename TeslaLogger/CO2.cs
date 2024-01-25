@@ -22,9 +22,13 @@ namespace TeslaLogger
             ExceptionlessClient.Default.CreateLog("CO2", msg, Exceptionless.Logging.LogLevel.Warn).FirstCarUserID().Submit();
         }
 
+        public double CrossBorderElectricityTrading = double.NaN;
+        public double DayAheadAuction = double.NaN;
+
         internal int GetData(string country, DateTime dateTime)
         {
             country = country.Trim().ToLower();
+            CrossBorderElectricityTrading = double.NaN;
 
             if (country == "gb")
                 country = "uk";
@@ -42,6 +46,11 @@ namespace TeslaLogger
             int wi = GetWeekOfYear(dateTime);
             int currentWeek = GetWeekOfYear(DateTime.Now);
             bool writeCache = wi < currentWeek;
+            if (!writeCache)
+            {
+                if (DateTime.Now.Year != dateTime.Year)
+                    writeCache = true;
+            }
 
             string w = wi.ToString("D2");
             int year = dateTime.Year;
@@ -53,6 +62,9 @@ namespace TeslaLogger
                 content = File.ReadAllText(path);
             else
                 content = GetEnergyChartData(country, filename, writeCache);
+
+            if (content == null)
+                throw new Exception("No Data for :" + path);
 
             dynamic j = JsonConvert.DeserializeObject(content);
 
@@ -99,11 +111,14 @@ namespace TeslaLogger
                 }
 
 
-                if (name.Contains("forecast") || name.Contains("consumption") || name.Contains("planned") || name.Contains("Day Ahead Auction")
+                if (name.Contains("forecast") || name.Contains("consumption") || name.Contains("planned") 
                     || name == "Residual load" || name == "Renewable share of generation" || name == "Renewable share of load" || name == "Import Balance" || name == "Load")
                     continue;
 
                 dynamic data = d["data"];
+
+                if (data == null)
+                    continue;
 
                 if (data[ix].Type == Newtonsoft.Json.Linq.JTokenType.Null)
                     continue;
@@ -133,7 +148,12 @@ namespace TeslaLogger
                     case "Wind onshore": co2factor = 13; break;
                     case "Solar": co2factor = 35; break;
                     default:
-                        SubmitExceptionlessLog("Utility type not handled: '" + name + "' !!!");
+                        if (name.StartsWith("Day Ahead Auction"))
+                            DayAheadAuction = wert;
+                        else if (name.StartsWith("Cross border electricity trading"))
+                            CrossBorderElectricityTrading = wert;
+                        else
+                            SubmitExceptionlessLog("Utility type not handled: '" + name + "' !!!");
                         co2factor = 0;
                         break;
                 }
@@ -144,7 +164,12 @@ namespace TeslaLogger
                     co2count += wert;
                 }
 
-                Log(String.Format("{0,-28}", name) + ": "+ wert + "MW "+ co2factor + " CO2 g/kWh");
+                if (name.StartsWith("Cross border electricity trading"))
+                    Log(String.Format("{0,-28}", name) + ": " + wert + "MWh");
+                else if (name.StartsWith("Day Ahead Auction"))
+                    Log(String.Format("{0,-28}", name) + ": " + wert + "€ / MWh");
+                else
+                    Log(String.Format("{0,-28}", name) + ": "+ wert + "MWh "+ co2factor + " CO2 g/kWh");
             }
 
             GetImport(country, dateTime, ref co2sum, ref co2count);
@@ -162,6 +187,12 @@ namespace TeslaLogger
             int wi = GetWeekOfYear(dateTime);
             int currentWeek = GetWeekOfYear(DateTime.Now);
             bool writeCache = wi < currentWeek;
+
+            if (!writeCache)
+            {
+                if (DateTime.Now.Year != dateTime.Year)
+                    writeCache = true;
+            }
 
             string w = wi.ToString("D2");
             int year = dateTime.Year;

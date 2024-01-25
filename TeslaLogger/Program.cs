@@ -87,7 +87,7 @@ namespace TeslaLogger
                 Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
             }
             finally
             {
@@ -143,21 +143,16 @@ namespace TeslaLogger
         {
             try
             {
-                if (Tools.UseNearbySuCService())
+                
+                Thread threadNearbySuCService = new Thread(() =>
                 {
-                    Thread threadNearbySuCService = new Thread(() =>
-                    {
-                        NearbySuCService.GetSingleton().Run();
-                    })
-                    {
-                        Name = "NearbySuCServiceThread"
-                    };
-                    threadNearbySuCService.Start();
-                }
-                else
+                    NearbySuCService.GetSingleton().Run();
+                })
                 {
-                    Logfile.Log("NearbySuCService disabled (enable in settings)");
-                }
+                    Name = "NearbySuCServiceThread"
+                };
+                threadNearbySuCService.Start();
+                
             }
             catch (Exception ex)
             {

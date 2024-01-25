@@ -1021,7 +1021,7 @@ namespace TeslaLogger
 
                 Log("Unhandled State: " + res);
 
-                Thread.Sleep(30000);
+                Thread.Sleep(60000);
             }
         }
 
@@ -1647,11 +1647,8 @@ namespace TeslaLogger
 
         public bool TLUpdatePossible()
         {
-            if (GetCurrentState() == Car.TeslaState.Sleep)
-            {
-                return true;
-            }
-            else if (GetCurrentState() == Car.TeslaState.Inactive)
+            var carState = GetCurrentState();
+            if (carState == Car.TeslaState.Sleep || carState == Car.TeslaState.Start || carState == Car.TeslaState.Inactive)
             {
                 return true;
             }

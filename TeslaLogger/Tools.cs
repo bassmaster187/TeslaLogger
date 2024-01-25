@@ -45,8 +45,7 @@ namespace TeslaLogger
 
         internal static bool UseNearbySuCService()
         {
-            // TODO
-            return true;
+            return Tools.IsShareData();
         }
 
         private static string _OSVersion = string.Empty;
@@ -435,6 +434,10 @@ namespace TeslaLogger
                     year--;
                 }
                 if (dateCode > 79) // skip O
+                {
+                    year--;
+                }
+                if (dateCode > 81) // skip Q
                 {
                     year--;
                 }
@@ -1457,6 +1460,8 @@ namespace TeslaLogger
                 // cleanup backup folder
                 CleanupBackupFolder();
 
+                CreateBackupForDocker();
+
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
@@ -1467,6 +1472,15 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static void CreateBackupForDocker()
+        {
+            if (!IsDocker())
+                return;
+
+            Logfile.Log("Start backup for Docker");
+            Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
         }
 
         public static void CleanupBackupFolder(long freeDiskSpaceNeededMB = 2048, int keepDays = 14)
