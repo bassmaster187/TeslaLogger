@@ -42,4 +42,11 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet vstest /Tests:UnitTestsGeocode  UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+      run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          test-results/**/*.trx
