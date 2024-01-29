@@ -1,6 +1,7 @@
 name: .NET Core Desktop
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "master","TeslaFleetAPI"]
   pull_request:
