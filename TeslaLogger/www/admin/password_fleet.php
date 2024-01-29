@@ -290,7 +290,7 @@ if (isset($_REQUEST["id"]))
 Go to Tesla Authentification Page and gain access to Teslalogger. After you got your Access Token / Refresh Token, hit Ok to use the Fleet Api.
 <ul>
 <li>Fleet API: <a href="https://teslalogger.de/fleet-token.php?url=<?php echo $actual_link;?>">From Tesla</a>
-<li>Send command: <a href="https://www.tesla.com/_ak/teslalogger.de">Link</a> (not required for pre 2021 Model S/X)</li>
+<li>Send command: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de">Link</a> (not required for pre 2021 Model S/X)</li>
 </ul>
 <table>
 <tr><td><?php t("Access Token"); ?>:&nbsp;</td><td><input id="access_token" type="text" autocomplete="new-password"
