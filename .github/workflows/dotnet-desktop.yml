@@ -2,12 +2,11 @@ name: .NET Core Desktop
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master","TeslaFleetAPI"]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "TeslaFleetAPI"]
 
 jobs:
-
   build:
 
     strategy:
