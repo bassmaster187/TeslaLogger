@@ -1,5 +1,6 @@
 ﻿using Exceptionless;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -30,7 +31,16 @@ namespace TeslaLogger
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class WebHelper : IDisposable
     {
-        public static readonly string apiaddress = "https://owner-api.teslamotors.com/";
+        public string apiaddress
+        {
+            get
+            {
+                if (car.FleetAPI)
+                    return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
+                else
+                    return "https://owner-api.teslamotors.com/";
+            }
+        }
 
         private double lastOdometerKM; // defaults to 0;
         internal string Tesla_token = "";
@@ -497,6 +507,10 @@ namespace TeslaLogger
 
             string refresh_token = car.DbHelper.GetRefreshToken(out string tesla_token);
 
+            if (car.FleetAPI)
+                return UpdateTeslaTokenFromRefreshTokenFromFleetAPI(refresh_token);
+
+
             if (tesla_token.StartsWith("cn-", StringComparison.Ordinal))
                 authHost = "https://auth.tesla.cn";
 
@@ -622,6 +636,41 @@ namespace TeslaLogger
             return "";
         }
 
+        private string UpdateTeslaTokenFromRefreshTokenFromFleetAPI(string refresh_token)
+        {
+            try
+            {
+                Log("Update Tesla Token From Refresh Token - FleetAPI!");
+                using (var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("refresh_token", refresh_token),
+            }))
+                {
+
+                    var response = httpclient_teslalogger_de.PostAsync(new Uri("https://teslalogger.de/teslaredirect/refresh_token.php"), formContent).Result;
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    dynamic j = JsonConvert.DeserializeObject(result);
+
+                    string access_token = j["access_token"];
+
+                    return access_token;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+            }
+
+            return "";
+        }
+
         internal static void SearchFornewCars()
         {
             Logfile.Log("SearchFornewCars");
@@ -663,6 +712,7 @@ namespace TeslaLogger
 
                     string display_name = a.display_name;
                     string access_token = a.tesla_token;
+                    bool fleetAPI = a.fleetAPI;
 
                     int x = 1;
 
@@ -674,12 +724,12 @@ namespace TeslaLogger
                         var dr = cmd.ExecuteReader();
                         if (!dr.Read())
                         {
-                            String temp = $"Create new Car VIN: {vin} ID: {x} DisplayName: {display_name}";
+                            String temp = $"Create new Car VIN: {vin} ID: {x} DisplayName: {display_name} FleetAPI: {fleetAPI}";
                             Logfile.Log(temp);
                             System.Diagnostics.Debug.WriteLine(temp);
 
                             var refresh_token = DBHelper.GetRefreshTokenFromAccessToken(access_token);
-                            DBHelper.InsertNewCar("", "", x, false, access_token, refresh_token, vin, display_name);
+                            DBHelper.InsertNewCar("", "", x, false, access_token, refresh_token, vin, display_name, fleetAPI);
                         }
                     }
                 }
@@ -1880,6 +1930,10 @@ namespace TeslaLogger
                 {
                     HttpClient client = GethttpclientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
+
+                    if (car.FleetAPI)
+                        adresse = "https://fleet-api.prd.eu.vn.cloud.tesla.com/api/1/vehicles";
+
                     Task<HttpResponseMessage> resultTask;
                     HttpResponseMessage result;
                     DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
@@ -1949,6 +2003,7 @@ namespace TeslaLogger
                             Account a = new Account();
                             a.id = nextAccountId;
                             a.tesla_token = car.Tesla_Token;
+                            a.fleetAPI = car.FleetAPI;
                             a.display_name = display_name;
                             vehicles2Account.Add(vin, a);
                             inserted = true;
@@ -2068,6 +2123,9 @@ namespace TeslaLogger
 
                     HttpClient client = GethttpclientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
+
+                    if (car.FleetAPI)
+                        adresse = "https://fleet-api.prd.eu.vn.cloud.tesla.com/api/1/vehicles";
 
                     result = await client.GetAsync(adresse);
 
@@ -5180,5 +5238,6 @@ DESC", con))
         public int id;
         public string tesla_token;
         public string display_name;
+        public bool fleetAPI;
     }
 }

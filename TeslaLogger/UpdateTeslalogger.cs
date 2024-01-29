@@ -943,6 +943,20 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPIaddress"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPIaddress");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPIaddress` VARCHAR(200) NULL DEFAULT NULL", 600);
+            }
         }
 
         private static void CheckDBSchema_can()

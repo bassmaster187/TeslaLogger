@@ -189,13 +189,14 @@ namespace TeslaLogger
         internal bool waitForRecaptcha;
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
+        internal bool FleetAPI = false;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
         private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "")
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "")
         {
             lock (_syncRoot)
             {
@@ -219,6 +220,7 @@ namespace TeslaLogger
                     this.WhTR = WhTR ?? 0.190;
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
+                    this.FleetAPI = fleetAPI;
 
                     if (CarInDB > 0)
                     {
@@ -234,9 +236,9 @@ namespace TeslaLogger
                             Name = "Car_" + CarInDB
                         };
                         thread.Start();
-                    }
 
-                    VIN2DBCarID.Add(vin, CarInDB);
+                        VIN2DBCarID.Add(vin, CarInDB);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -362,6 +364,9 @@ namespace TeslaLogger
         {
             try
             {
+                if (FleetAPI)
+                    Log("*** Using FLEET API ***");
+
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
                 if (!webhelper.RestoreToken())

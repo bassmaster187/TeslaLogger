@@ -86,3 +86,4 @@ TeslaLogger/www/admin/plugins/*
 AnalysisReport.sarif
 upgrade-assistant.clef
 TeslaLogger/GrafanaDB/*
+*.trx

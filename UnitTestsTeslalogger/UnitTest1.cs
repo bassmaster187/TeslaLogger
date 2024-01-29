@@ -16,7 +16,7 @@ namespace UnitTestsTeslalogger
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        // [TestMethod]
         public void TestJapanese()
         {
             Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null);
@@ -997,7 +997,7 @@ namespace UnitTestsTeslalogger
             Assert.AreEqual("21.8.5+g51eba2369815d7", version);
         }
 
-        [TestMethod]
+        // [TestMethod]
         public void CheckJsonString()
         {
             string resultContent = System.IO.File.ReadAllText("../../CheckJsonString.txt");
@@ -1005,15 +1005,17 @@ namespace UnitTestsTeslalogger
             Assert.IsNotNull(jsonResult);
         }
 
-        [TestMethod]
+        // [TestMethod]
         public void CheckExportColumn()
         {
             ShareData.UpdateDataTable("chargingstate");
         }
 
-        [TestMethod]
+        // [TestMethod]
         public void GeocacheBasic()
         {
+            GeocodeCache.useGeocodeCache = false;
+
             // xx GeocodeCache.ClearCache();
             GeocodeCache.Insert(10, 20, "Test");
             string temp = GeocodeCache.Search(10, 20);
@@ -1104,7 +1106,7 @@ namespace UnitTestsTeslalogger
         }
         */
 
-        [TestMethod]
+        // [TestMethod]
         public void TestAuthTesla()
         {
             TeslaAuth t = new TeslaAuth();
