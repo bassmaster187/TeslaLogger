@@ -7,7 +7,6 @@ on:
     branches: [ "master", "TeslaFleetAPI"]
 
 jobs:
-
   build:
 
     strategy:
