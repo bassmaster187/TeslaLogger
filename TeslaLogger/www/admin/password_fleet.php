@@ -287,7 +287,7 @@ if (isset($_REQUEST["id"]))
 <div>
 <h1><?php t("Please enter your Tesla account credentials"); ?>:</h1>
 <div id="dialog-TokenHelp" title="Info">
-<?php t("TeslaAuthApps"); ?>
+Go to Tesla Authentification Page and gain access to Teslalogger. After you got your Access Token / Refresh Token, hit Ok to use the Fleet Api.
 <ul>
 <li>Fleet API: <a href="https://teslalogger.de/fleet-token.php?url=<?php echo $actual_link;?>">From Tesla</a>
 </ul>
