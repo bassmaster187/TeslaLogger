@@ -1,4 +1,5 @@
 ﻿using Exceptionless;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
 using Newtonsoft.Json;
@@ -235,7 +236,7 @@ namespace TeslaLogger
 
                 TimeSpan ts = DateTime.Now - car.Tesla_Token_Expire;
 
-                if (ts.TotalDays < 30)
+                if (ts.TotalDays < 8)
                 {
                     Tesla_token = car.Tesla_Token;
                     lastTokenRefresh = car.Tesla_Token_Expire;
@@ -582,39 +583,12 @@ namespace TeslaLogger
 
                             string access_token = jsonResult["access_token"] ?? throw new Exception("access_token Missing");
                             string new_refresh_token = jsonResult["refresh_token"] ?? throw new Exception("refresh_token Missing");
-
-                            if (new_refresh_token == null || new_refresh_token.Length < 10)
-                            {
-                                Log("new Refresh Token is invalid!!");
-                            }
-                            else if ( new_refresh_token == refresh_token)
-                            {
-                                Log("refresh_token not changed");
-                            }
-                            else
-                            {
-                                car.DbHelper.UpdateRefreshToken(new_refresh_token);
-                            }
+                            CheckNewRefreshToken(refresh_token, new_refresh_token);
 
                             // as of March 21 2022 Tesla returns a bearer token. GetTokenAsync4 is no longer neeaded. 
                             car.CreateExeptionlessLog("Tesla Token", "UpdateTeslaTokenFromRefreshToken Success", Exceptionless.Logging.LogLevel.Info).Submit();
-                            Tesla_token = jsonResult["access_token"];
-                            car.Tesla_Token = Tesla_token;
-                            car.DbHelper.UpdateTeslaToken();
-                            car.LoginRetryCounter = 0;
-
-                            try
-                            {
-                                var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
-                                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
-                                // restart streaming thread with new token
-                                RestartStreamThreadWithTask();
-                            }
-                            catch (Exception ex)
-                            {
-                                car.CreateExceptionlessClient(ex).AddObject(HttpStatusCode, "HTTP StatusCode").AddObject(resultContent, "ResultContent").Submit();
-                                car.Log("Refresh TeslaToken and Streamingtoken: " + ex.ToString());
-                            }
+                            string Token = jsonResult["access_token"];
+                            SetNewAccessToken(Token);
 
                             return Tesla_token;
 
@@ -637,6 +611,43 @@ namespace TeslaLogger
                 ExceptionlessClient.Default.ProcessQueueAsync();
             }
             return "";
+        }
+
+        private void CheckNewRefreshToken(string refresh_token, string new_refresh_token)
+        {
+            if (new_refresh_token == null || new_refresh_token.Length < 10)
+            {
+                Log("new Refresh Token is invalid!!");
+            }
+            else if (new_refresh_token == refresh_token)
+            {
+                Log("refresh_token not changed");
+            }
+            else
+            {
+                car.DbHelper.UpdateRefreshToken(new_refresh_token);
+            }
+        }
+
+        void SetNewAccessToken(string access_token)
+        {
+            Tesla_token = access_token;
+            car.Tesla_Token = access_token;
+            car.Tesla_Token_Expire = DateTime.Now;
+            car.LoginRetryCounter = 0;
+            car.DbHelper.UpdateTeslaToken();
+
+            try
+            {
+                var c = GethttpclientTeslaAPI(true); // dispose old client and create a new Client with new token.
+                _ = IsOnline(true).Result; // get new Tesla_Streamingtoken;
+                                           // restart streaming thread with new token
+                RestartStreamThreadWithTask();
+            }
+            catch (Exception ex)
+            {
+                car.Log("SetNewAccessToken: " + ex.ToString());
+            }
         }
 
         private string UpdateTeslaTokenFromRefreshTokenFromFleetAPI(string refresh_token)
@@ -665,8 +676,19 @@ namespace TeslaLogger
                     string result = response.Content.ReadAsStringAsync().Result;
                     if (response.IsSuccessStatusCode)
                     {
+                        if (result.Contains("\"error\""))
+                        {
+                            car.Log(result);
+                            return "";
+                        }
+
                         dynamic j = JsonConvert.DeserializeObject(result);
                         string access_token = j["access_token"];
+
+                        string new_refresh_token = j["refresh_token"];
+                        CheckNewRefreshToken(refresh_token, new_refresh_token);
+
+                        SetNewAccessToken(access_token);
                         return access_token;
                     }
                     else
@@ -1409,9 +1431,8 @@ namespace TeslaLogger
                         int created_at = jsonResult["created_at"] ?? throw new Exception("created_at Missing");
                         int expires_in = jsonResult["expires_in"] ?? throw new Exception("expires_in Missing");
 
-                        Tesla_token = jsonResult["access_token"];
-                        car.DbHelper.UpdateTeslaToken();
-                        car.LoginRetryCounter = 0;
+                        String token = jsonResult["access_token"];
+                        SetNewAccessToken(token);
                         return Tesla_token;
                     }
                 }
@@ -1672,6 +1693,9 @@ namespace TeslaLogger
 
                 if (httpclientTeslaAPI == null)
                 {
+                    if (String.IsNullOrEmpty(Tesla_token) || Tesla_token == "NULL")
+                        car.Log("ERROR: Create HTTP Client with wrong Tesla Token!");
+
                     httpclientTeslaAPI = new HttpClient();
                     {
                         httpclientTeslaAPI.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
@@ -4729,6 +4753,8 @@ DESC", con))
 
         public async Task<string> PostCommand(string cmd, string data, bool _json = false)
         {
+            bool proxyServer = car.UseCommandProxyServer();
+
             Log("PostCommand: " + cmd + " - " + data);
             string cacheKey = "PostCommand" + car.CarInDB;
             object cacheValue = MemoryCache.Default.Get(cacheKey);
@@ -4745,7 +4771,19 @@ DESC", con))
             {
                 HttpClient client = GethttpclientTeslaAPI();
                 
-                string url = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
+                string url = apiaddress+ "api/1/vehicles/" + Tesla_id + "/" + cmd;
+
+                if (proxyServer)
+                {
+                    car.Log("Use ProxyServer");
+                    url = "https://teslalogger.de:4444/api/1/vehicles/" + car.Vin + "/" + cmd;
+                }
+                else if (car.FleetAPI) // Old model s / x
+                {
+                    car.Log("Old Model S/X currenty not supported");
+                    url = "https://owner-api.teslamotors.com/api/1/vehicles/" + Tesla_id + "/" + cmd;
+
+                }
 
                 StringContent queryString = null;
                 try
@@ -4776,6 +4814,8 @@ DESC", con))
                             TeslaAPI_Commands.TryAdd(command, resultContent);
                         }
                     }
+
+                    car.Log("Response: " + resultContent);
 
                     return resultContent;
                 }

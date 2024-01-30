@@ -2404,7 +2404,7 @@ FROM
 
                                 Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token, tesla_token_expire) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token, @tesla_token_expire)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -2414,6 +2414,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
+                                    cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
@@ -2434,13 +2435,14 @@ FROM
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token, fleetAPI=@fleetAPI  where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token, fleetAPI=@fleetAPI, tesla_token_expire=@tesla_token_expire where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                                 cmd.Parameters.AddWithValue("@fleetAPI", FleetAPI ? 1 : 0);
+                                cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                 _ = SQLTracer.TraceNQ(cmd, out _);
 
                                 Car c = Car.GetCarByID(dbID);

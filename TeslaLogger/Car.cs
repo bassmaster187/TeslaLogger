@@ -237,6 +237,9 @@ namespace TeslaLogger
                         };
                         thread.Start();
 
+                        if (VIN2DBCarID.ContainsKey(vin))
+                            VIN2DBCarID.Remove(vin);
+
                         VIN2DBCarID.Add(vin, CarInDB);
                     }
                 }
@@ -472,6 +475,9 @@ namespace TeslaLogger
             run = false;
             thread.Abort();
             Allcars.Remove(this);
+
+            if (VIN2DBCarID.ContainsKey(vin))
+                VIN2DBCarID.Remove(vin);
         }
 
         public void ThreadJoin()
@@ -1840,6 +1846,20 @@ id = @carid", con))
                 .AddObject(TrimBadging, "CarTrimBadging");
 
             return b;
+        }
+
+        public bool UseCommandProxyServer()
+        {
+            if (FleetAPI)
+            {
+                if (CarType == "models" || CarType == "modelx" || CarType == "models2")
+                    return false;
+
+                return true;
+            }
+
+
+            return false;
         }
     }   
 }
