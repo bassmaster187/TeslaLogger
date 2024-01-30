@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using ZstdSharp.Unsafe;
 using static TeslaLogger.Car;
 
 namespace TeslaLogger
@@ -96,6 +97,8 @@ namespace TeslaLogger
         internal string httpclientTeslaChargingSitesToken = "";
         internal string httpclientgetChargingHistoryV2Token = "";
         internal static object httpClientLock = new object();
+
+        DateTime lastRefreshToken = DateTime.MinValue;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -640,10 +643,21 @@ namespace TeslaLogger
         {
             try
             {
+                var ts = DateTime.UtcNow - lastRefreshToken;
+                if (ts.TotalMinutes < 5)
+                {
+                    car.Log("ERROR: Refresh Token Spam!!!");
+                    return "";
+                }
+
+                lastRefreshToken = DateTime.UtcNow;
+
                 Log("Update Tesla Token From Refresh Token - FleetAPI!");
                 using (var formContent = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("refresh_token", refresh_token),
+                new KeyValuePair<string, string>("taskertoken", car.TaskerHash),
+                new KeyValuePair<string, string>("vin", car.Vin),
             }))
                 {
 
