@@ -652,7 +652,7 @@ namespace TeslaLogger
 
                 lastRefreshToken = DateTime.UtcNow;
 
-                Log("Update Tesla Token From Refresh Token - FleetAPI!");
+                Log("Update Access Token From Refresh Token - FleetAPI!");
                 using (var formContent = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("refresh_token", refresh_token),
@@ -663,12 +663,17 @@ namespace TeslaLogger
 
                     var response = httpclient_teslalogger_de.PostAsync(new Uri("https://teslalogger.de/teslaredirect/refresh_token.php"), formContent).Result;
                     string result = response.Content.ReadAsStringAsync().Result;
-
-                    dynamic j = JsonConvert.DeserializeObject(result);
-
-                    string access_token = j["access_token"];
-
-                    return access_token;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        dynamic j = JsonConvert.DeserializeObject(result);
+                        string access_token = j["access_token"];
+                        return access_token;
+                    }
+                    else
+                    {
+                        Log("Error getting Access Token from Refreh Token: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        return "";
+                    }
                 }
             }
             catch (ThreadAbortException)
