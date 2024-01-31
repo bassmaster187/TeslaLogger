@@ -1226,6 +1226,7 @@ PRIMARY KEY(id)
         {
             try
             {
+                // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
                 Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
                 Tools.ExecMono("update-ca-certificates", "");
                 Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
