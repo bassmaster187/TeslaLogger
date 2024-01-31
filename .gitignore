@@ -87,3 +87,4 @@ AnalysisReport.sarif
 upgrade-assistant.clef
 TeslaLogger/GrafanaDB/*
 *.trx
+TeslaLogger/NOBACKUPONUPDATE

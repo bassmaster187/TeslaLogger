@@ -4778,11 +4778,9 @@ DESC", con))
                     car.Log("Use ProxyServer");
                     url = "https://teslalogger.de:4444/api/1/vehicles/" + car.Vin + "/" + cmd;
                 }
-                else if (car.FleetAPI) // Old model s / x
+                else if (car.FleetAPI) // pre 2021 Model S / X
                 {
-                    car.Log("Old Model S/X currenty not supported");
-                    url = "https://owner-api.teslamotors.com/api/1/vehicles/" + Tesla_id + "/" + cmd;
-
+                    // Maybe we neet to use the fleet telemetry server in future. Now it seems to work fine.
                 }
 
                 StringContent queryString = null;
