@@ -19,6 +19,7 @@ namespace TeslaLogger
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
+        public static DateTime uptime = DateTime.Now;
 
         public enum TLMemCacheKey
         {
@@ -199,6 +200,8 @@ namespace TeslaLogger
 
         private static void InitWebserver()
         {
+            UpdateTeslalogger.CertUpdate();
+
             try
             {
                 Thread threadWebserver = new Thread(() =>

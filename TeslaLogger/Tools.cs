@@ -1479,6 +1479,10 @@ namespace TeslaLogger
             if (!IsDocker())
                 return;
 
+            var ts = DateTime.Now - Program.uptime;
+            if (ts.TotalHours < 24)
+                return;
+
             Logfile.Log("Start backup for Docker");
             Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
         }

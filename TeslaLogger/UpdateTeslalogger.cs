@@ -1052,7 +1052,7 @@ PRIMARY KEY(id)
 
                 Tools.ExecMono("rm", "-rf /etc/teslalogger/git");
                 Tools.ExecMono("mkdir", "/etc/teslalogger/git");
-                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+                CertUpdate();
 
                 // run housekeeping to make sure there is enough free disk space
 
@@ -1208,6 +1208,20 @@ PRIMARY KEY(id)
             }
         }
 
+        public static void CertUpdate()
+        {
+            try
+            {
+                Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
+                Tools.ExecMono("update-ca-certificates", "");
+                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
 
         private static void CheckBackupCrontab()
         {
