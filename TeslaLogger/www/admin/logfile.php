@@ -188,13 +188,12 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	}
 
 
-	if (!empty($_REQUEST["car"]))
+	if (!empty($carfilter))
 	{
 		// spezific car
-		$car = $_REQUEST["car"];
-		$output = preg_replace('/(.*)(\#'.$car.'\[)(.*)/', "$1#xxxxx[$3", $output);
+		$output = preg_replace('/(.*)(\#'.$carfilter.'\[)(.*)/', "$1#xxxxx[$3", $output);
 		$output = preg_replace('/.*(\#[0-9]+\[).*/', "", $output);
-		$output = preg_replace('/(.*)(\#xxxxx\[)(.*)/', '$1#'.$car.'[$3', $output);
+		$output = preg_replace('/(.*)(\#xxxxx\[)(.*)/', '$1#'.$carfilter.'[$3', $output);
 	}
 
 	$output = preg_replace("/[\r\n]{2,}/", "\n", $output); // unnecessary new lines
