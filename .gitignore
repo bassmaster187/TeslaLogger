@@ -88,3 +88,4 @@ upgrade-assistant.clef
 TeslaLogger/GrafanaDB/*
 *.trx
 TeslaLogger/NOBACKUPONUPDATE
+TeslaLogger/copytodebian.cmd
