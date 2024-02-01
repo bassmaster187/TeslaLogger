@@ -65,3 +65,11 @@ Mac User can use the terminal
 Host: raspberry or raspberry.local
 Name: pi
 Password: teslalogger
+
+# Fleet API
+## Commands to car are not working (e.g. turn on sentry mode)
+If you see such errors in your logfile, you forgot to grant access to your car.
+```
+{„response“:null,„error“:„vehicle rejected request: your public key has not been paired with the vehicle“,„error_description“:„“}
+```
+Go to : https://www.tesla.com/_ak/teslalogger.de and follow the instructions
