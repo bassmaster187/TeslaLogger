@@ -1545,7 +1545,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("update tesla_token OK: " + done);
+                        car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");
 
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
@@ -1645,7 +1645,7 @@ HAVING
         {
             try
             {
-                if (refresh_token == null || refresh_token.Length < 10)
+                if (refresh_token == null || refresh_token.Length < 20)
                 {
                     car.Log("SKIP UpdateRefreshToken !!!");
                     return;
@@ -1661,7 +1661,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("UpdateRefreshToken OK: " + done);
+                        car.Log("UpdateRefreshToken OK: " + done + " - " + refresh_token.Substring(0,20) + "xxxxxxxx");
                     }
                 }
             }

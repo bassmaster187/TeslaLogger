@@ -2307,7 +2307,9 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
+                    Log("Streamingtoken changed: " + Tools.ObfuscateString(Tesla_Streamingtoken));
+
+                    // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
 
                 try
