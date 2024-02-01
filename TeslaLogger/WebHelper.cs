@@ -661,6 +661,14 @@ namespace TeslaLogger
                 if (!car.FleetAPI)
                     return "";
 
+                var state = car.GetCurrentState();
+
+                if (!(state == Car.TeslaState.Charge
+                    || state == Car.TeslaState.Drive
+                    || state == Car.TeslaState.Online))
+                    return "";
+
+
                 var response = GethttpclientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
                 string result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)

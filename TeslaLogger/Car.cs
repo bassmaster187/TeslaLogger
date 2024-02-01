@@ -973,6 +973,9 @@ namespace TeslaLogger
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Online);
+                if (FleetAPI && String.IsNullOrEmpty(FleetApiRegionURL))
+                    webhelper.GetRegion();
+
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 DbHelper.StartState(res);
