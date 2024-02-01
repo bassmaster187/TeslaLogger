@@ -52,6 +52,8 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	<?php
     include "menu.php";
     echo(menu("Logfile"));
+
+	$carfilter = $_REQUEST["c"];
 ?>
 <a href="log.php"><?php t("Download Logfile"); ?></a>
 
@@ -60,9 +62,9 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 <tr>
 	<td width="20%" nowrap><?php t("Lines"); ?>: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
 	<td width="20%" nowrap>car: 
-		<select name="car">
+		<select name="c">
 			<option value="">All</option>
-			<?php
+<?php
 			$allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
 			$jcars = json_decode($allcars);
 
@@ -70,8 +72,12 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
                                 $dn = $v->{"display_name"};
                                 $carid = $v->{"id"};
 
-								echo(str_repeat("\t",7));
-								echo('<option value="'.$carid.'">'.$dn.'</option>'); 
+								echo(str_repeat("\t",3));
+								echo('<option value="'.$carid.'"');
+								if ($carid == $carfilter)
+									echo(" selected");
+
+								echo('>'.$dn.'</option>'); 
 								echo("\n");
                             }
 							?>
