@@ -3398,6 +3398,7 @@ namespace TeslaLogger
                                             if (v.Contains("Can't validate token"))
                                             {
                                                 Tools.DebugLog("StreamingAPI: " + v);
+                                                car.Log("StreamingApi: " + v);
                                                 UpdateTeslaTokenFromRefreshToken();
                                                 RestartStreamThreadWithTask();
                                             }
