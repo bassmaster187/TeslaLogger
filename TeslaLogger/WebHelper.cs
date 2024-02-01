@@ -38,7 +38,11 @@ namespace TeslaLogger
             get
             {
                 if (car.FleetAPI)
-                    return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
+                    if (String.IsNullOrEmpty(car.FleetApiRegionURL))
+                        return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
+                    else
+                        return car.FleetApiRegionURL;
+
                 else
                     return "https://owner-api.teslamotors.com/";
             }
@@ -648,6 +652,60 @@ namespace TeslaLogger
             {
                 car.Log("SetNewAccessToken: " + ex.ToString());
             }
+        }
+
+        public string GetRegion()
+        {
+            try
+            {
+                if (!car.FleetAPI)
+                    return "";
+
+                var response = GethttpclientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
+                string result = response.Content.ReadAsStringAsync().Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    if (result.Contains("\"error\""))
+                    {
+                        car.Log(result);
+                        return "";
+                    }
+
+                    dynamic j = JsonConvert.DeserializeObject(result);
+                    dynamic r = j["response"];
+                    String fleeturl = r["fleet_api_base_url"];
+                    if (fleeturl.StartsWith("https:", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (!fleeturl.EndsWith("/"))
+                            fleeturl += "/";
+
+                        car.FleetApiRegionURL = fleeturl;
+                        car.Log("Fleet URL: " +  fleeturl);
+                        return fleeturl;
+                    }
+                    
+                    return "";
+                }
+                else
+                {
+                    Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                    return "";
+                }
+                
+            }
+            catch (ThreadAbortException)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+            }
+
+            return "";
+
         }
 
         private string UpdateTeslaTokenFromRefreshTokenFromFleetAPI(string refresh_token)
@@ -1975,7 +2033,7 @@ namespace TeslaLogger
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.FleetAPI)
-                        adresse = "https://fleet-api.prd.eu.vn.cloud.tesla.com/api/1/vehicles";
+                        adresse = apiaddress + "api/1/vehicles";
 
                     Task<HttpResponseMessage> resultTask;
                     HttpResponseMessage result;
@@ -2168,7 +2226,7 @@ namespace TeslaLogger
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.FleetAPI)
-                        adresse = "https://fleet-api.prd.eu.vn.cloud.tesla.com/api/1/vehicles";
+                        adresse = apiaddress + "api/1/vehicles";
 
                     result = await client.GetAsync(adresse);
 

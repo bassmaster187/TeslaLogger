@@ -190,6 +190,7 @@ namespace TeslaLogger
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
         internal bool FleetAPI = false;
+        internal string FleetApiRegionURL = "";
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -388,6 +389,9 @@ namespace TeslaLogger
                 {
                     ExitCarThread("DBHelper.DBConnectionstring.Length == 0");
                 }
+
+                webhelper.GetRegion();
+
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
