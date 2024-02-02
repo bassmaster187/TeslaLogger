@@ -714,7 +714,6 @@ namespace TeslaLogger
             }
 
             return "";
-
         }
 
         private string UpdateTeslaTokenFromRefreshTokenFromFleetAPI(string refresh_token)
