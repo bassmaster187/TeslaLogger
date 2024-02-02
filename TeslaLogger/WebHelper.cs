@@ -518,8 +518,7 @@ namespace TeslaLogger
             if (car.FleetAPI)
                 return UpdateTeslaTokenFromRefreshTokenFromFleetAPI(refresh_token);
 
-
-            if (tesla_token.StartsWith("cn-", StringComparison.Ordinal))
+            if (car.oldAPIchinaCar)
                 authHost = "https://auth.tesla.cn";
 
             if (String.IsNullOrEmpty(refresh_token))
@@ -2045,7 +2044,23 @@ namespace TeslaLogger
 
                     Task<HttpResponseMessage> resultTask;
                     HttpResponseMessage result;
-                    DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                    if (!car.oldAPIchinaCar)
+                    { 
+                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+
+                        if (resultContent.Contains("user not allowed in region"))
+                        {
+                            car.oldAPIchinaCar = true;
+                            adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
+                            DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                        }
+                    }
+                    else
+                    {
+                        adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
+                        DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
+                    }
 
                     if (result.StatusCode == HttpStatusCode.Unauthorized)
                     {
@@ -2154,6 +2169,9 @@ namespace TeslaLogger
 
         private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
         {
+            if (cars == null)
+                return null;
+
             if (car.Vin?.Length > 0)
             {
                 for (int x = 0; x < cars.Count; x++)
@@ -2232,6 +2250,9 @@ namespace TeslaLogger
 
                     HttpClient client = GethttpclientTeslaAPI();
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
+                    
+                    if (car.oldAPIchinaCar)
+                        adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
 
                     if (car.FleetAPI)
                         adresse = apiaddress + "api/1/vehicles";

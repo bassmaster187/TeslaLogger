@@ -115,6 +115,7 @@ namespace TeslaLogger
 
         private bool useTaskerToken = true;
         internal string wheel_type = "";
+        internal bool oldAPIchinaCar = false;
 
         public double WhTR
         {
