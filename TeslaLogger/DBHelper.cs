@@ -1661,7 +1661,32 @@ HAVING
                         cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("UpdateRefreshToken OK: " + done + " - " + refresh_token.Substring(0,20) + "xxxxxxxx");
+                        car.Log("UpdateRefreshToken OK: " + done + " - " + refresh_token.Substring(0, 20) + "xxxxxxxx");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                car.Log(ex.ToString());
+            }
+        }
+
+        internal void UpdateFleetAPIaddress(string url)
+        {
+            try
+            {
+                car.Log("UpdateFleetAPIaddress");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("update cars set fleetAPIaddress = @fleetAPIaddress where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@fleetAPIaddress", url);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
+
+                        car.Log("UpdateFleetAPIaddress OK: " + done + " - " + url);
                     }
                 }
             }
@@ -6696,6 +6721,43 @@ WHERE
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        internal bool GetRegion()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT fleetAPIaddress FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            if (dr[0] == DBNull.Value)
+                                return false;
+
+                            string url = dr[0].ToString();
+                            if (String.IsNullOrEmpty(url)) 
+                                return false;
+
+                            car.FleetApiAddress = url;
+                            car.Log("FleetApiAddress: " + url);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
     }
 }

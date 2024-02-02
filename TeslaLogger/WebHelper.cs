@@ -38,10 +38,10 @@ namespace TeslaLogger
             get
             {
                 if (car.FleetAPI)
-                    if (String.IsNullOrEmpty(car.FleetApiRegionURL))
+                    if (String.IsNullOrEmpty(car.FleetApiAddress))
                         return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
                     else
-                        return car.FleetApiRegionURL;
+                        return car.FleetApiAddress;
 
                 else
                     return "https://owner-api.teslamotors.com/";
@@ -687,8 +687,9 @@ namespace TeslaLogger
                         if (!fleeturl.EndsWith("/"))
                             fleeturl += "/";
 
-                        car.FleetApiRegionURL = fleeturl;
-                        car.Log("Fleet URL: " +  fleeturl);
+                        car.FleetApiAddress = fleeturl;
+                        car.Log("FleetApiAddress: " +  fleeturl);
+                        car.DbHelper.UpdateFleetAPIaddress(fleeturl);
                         return fleeturl;
                     }
                     
