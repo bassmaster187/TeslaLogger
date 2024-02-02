@@ -38,11 +38,14 @@ namespace TeslaLogger
             get
             {
                 if (car.FleetAPI)
+                {
                     if (String.IsNullOrEmpty(car.FleetApiAddress))
                         return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
                     else
                         return car.FleetApiAddress;
-
+                }
+                else if (car.oldAPIchinaCar)
+                    return "https://owner-api.vn.cloud.tesla.cn/";
                 else
                     return "https://owner-api.teslamotors.com/";
             }
