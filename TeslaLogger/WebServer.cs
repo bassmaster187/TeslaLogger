@@ -208,7 +208,10 @@ namespace TeslaLogger
                         GetAllCars(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccount", System.StringComparison.Ordinal):
-                        GetCarsFromAccount(request, response);
+                        GetCarsFromAccount(request, response, false);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccountfleetapi", System.StringComparison.Ordinal):
+                        GetCarsFromAccount(request, response, true);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
@@ -1083,7 +1086,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private static void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response, bool fleetAPI)
         {
             string responseString = "";
 
@@ -1094,7 +1097,7 @@ DROP TABLE chargingstate_bak";
                 dynamic r = JsonConvert.DeserializeObject(data);
 
                 string access_token = r["access_token"];
-                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0, false); // TODO Check
+                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0, fleetAPI); // TODO Check
                 car.webhelper.Tesla_token = access_token;
 
                 car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);

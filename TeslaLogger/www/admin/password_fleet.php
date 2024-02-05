@@ -22,7 +22,6 @@ $actual_link = str_replace("&","%26", $actual_link);
 	<script src="static/jquery/datatables/1.13.4/datatables.min.js"></script>
 	<link rel='stylesheet' href="static/jquery/datatables/1.13.4/datatables.min.css">
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
-
 	<script>
 	<?php
 	if (isset($_REQUEST["id"]))
@@ -60,27 +59,25 @@ $actual_link = str_replace("&","%26", $actual_link);
 		}
 	});
 
-	function tokenAvailable() {
-		if ($("#access_token").val() == null || $("#access_token").val().length < 2)
+	// after window is loaded
+	$(window).on('load', function() {
+		<?php
+		if (isset($_GET["AT"]))
 		{
-			alert("<?php t('Please enter the access token!'); ?>");
-			return false;
-		}
-
-		if ($("#refresh_token").val() == null || $("#refresh_token").val().length < 2)
-		{
-			alert("<?php t('Please enter the refresh token!'); ?>");
-			return false;
-		}
-
-		return true;
-	}
+?>
+			CheckAccessToken();
+			$("#carid").prop("disabled", false);
+			$("#btn").prop("disabled", false);
+			$("#checkauth").html("&#9989;");
+			$("#checkAT").html("&#9989;");
+			$("#checkRT").html("&#9989;");
+		
+<?php
+		} ?>	
+	});
 
 	function save() {
-		if (tokenAvailable())
-		{
 			sendRequest();
-		}
 	}
 
 	function sendRequest()
@@ -106,19 +103,11 @@ $actual_link = str_replace("&","%26", $actual_link);
 
 			var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)})
 			.always(function (data) {
-				if (tokenAvailable())
-				{
-					alert("<?php t('Check Logfile!'); ?>");
-					window.location.href='logfile.php';
-				}
-				else if (data.includes("ID:"))
-				{
-					window.location.href='password_info.php?id='+data.substr(3);
-				}
-				else
-				{
-					window.location.href='password_info.php?id='+dbid;
-				}
+					$("#carid").prop("disabled", false);
+					$("#btnSave").hide();
+					$("#checkcar").html("&#9989;");
+					$("#checkfreesuc").html("&#9989;");
+
 				});
 	}
 
@@ -136,18 +125,6 @@ $actual_link = str_replace("&","%26", $actual_link);
 					window.location.href='index.php';
 				});
 		}
-	}
-
-	function reconnect()
-	{
-		var d = {
-					id: dbid,
-					reconnect: 1
-				};
-
-		var jqxhr = $.post("teslaloggerstream.php", {url: "setpassword", data: JSON.stringify(d)}).always(function () {
-				window.location.href='password_info.php?id='+dbid;
-			});
 	}
 
 	function ChangeAccessTokenAndRefreshToken()
@@ -182,9 +159,6 @@ $actual_link = str_replace("&","%26", $actual_link);
 
 	function CheckAccessToken()
 	{
-		if (!tokenAvailable())
-			return;
-
 		if (dbid > 0)
 		{
 			ChangeAccessTokenAndRefreshToken()
@@ -196,7 +170,7 @@ $actual_link = str_replace("&","%26", $actual_link);
 					access_token: $("#access_token").val()
 				};
 
-		var jqxhr = $.post("teslaloggerstream.php", {url: "getcarsfromaccount", data: JSON.stringify(d)}, function(data){
+		var jqxhr = $.post("teslaloggerstream.php", {url: "getcarsfromaccountfleetapi", data: JSON.stringify(d)}, function(data){
 			$("#carid").empty();
 
 			if (data == "Unauthorized")
@@ -214,21 +188,6 @@ $actual_link = str_replace("&","%26", $actual_link);
 			}
 		});
 	}
-
-	function BrowserAuth()
-	{
-		var jqxhr = $.post("teslaloggerstream.php", {url: "teslaauthurl", data: "url"}, function(data){
-			$("#authlink").attr("href", data);
-		});
-
-		$("#access_token").val("");
-		$("#refresh_token").val("");
-		$("#authresulturl").val("");
-
-		$("#browserauth").show();
-	}
-
-
 </script>
 </head>
 <body>
@@ -285,104 +244,49 @@ if (isset($_REQUEST["id"]))
 
 ?>
 <div>
-<h1><?php t("Please enter your Tesla account credentials"); ?>:</h1>
+<h1><?php t("Please enter your Tesla account credentials"); ?>:</h1> 
 <div id="dialog-TokenHelp" title="Info">
-Go to Tesla Authentification Page and gain access to Teslalogger. After you got your Access Token / Refresh Token, hit Ok to use the Fleet Api.
-<ul>
-<li>Fleet API: <a href="https://teslalogger.de/fleet-token.php?url=<?php echo $actual_link;?>">From Tesla</a>
-<li>Send command: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de">Link</a> (not required for pre 2021 Model S/X)</li>
-</ul>
-<table>
-<tr><td><?php t("Access Token"); ?>:&nbsp;</td><td><input id="access_token" type="text" autocomplete="new-password"
+ 
+<br><br>
+<table id="t1">
+<tr><td width="25px">1.</td><td colspan="2">Go to Tesla Authentification Page and gain access to Teslalogger: <a href="https://teslalogger.de/fleet-token.php?url=<?php echo $actual_link;?>">LINK</a></td><td><span id="checkauth"></span></td></tr>
+<tr><td>2.</td><td><?php t("Access Token"); ?>:&nbsp;</td><td><input id="access_token" type="text" disabled
 <?php
 	if (isset($_GET["AT"]))
 		echo ' value="'.$_GET["AT"].'"';
 ?>
-></td></tr>
-<tr><td><?php t("Refresh Token"); ?>:&nbsp;</td><td><input id="refresh_token" type="text" autocomplete="new-password"
+></td><td><span id="checkAT"></span></td></tr>
+<tr><td></td><td><?php t("Refresh Token"); ?>:&nbsp;</td><td><input id="refresh_token" type="text" disabled
 <?php
 	if (isset($_GET["RT"]))
 		echo ' value="'.$_GET["RT"].'"';
 ?>
-></td></tr>
+></td><td><span id="checkRT"></span></td></tr>
 
-<tr><td colspan="2"><button onclick="CheckAccessToken();" style="float: right;"><?php t("OK"); ?></button></td></tr>
 
-<tr><td><?php t("Car"); ?>:&nbsp;</td><td> <select id="carid" style="width: 100%;"></select><span id="vinlabel"></span></td></tr>
-<tr height="35px"><td><?php t("Free Supercharging"); ?>:&nbsp;</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td></tr>
+<tr><td>4.</td><td><?php t("Car"); ?>:&nbsp;</td><td> <select id="carid" style="width: 100%;" disabled></select><span id="vinlabel"></span></td><td><span id="checkcar"></span></td></tr>
+<tr height="35px"><td></td><td><?php t("Free Supercharging"); ?>:&nbsp;</td><td><input id="freesuc" type="checkbox" <?= $freesuc ?> /></td><td><span id="checkfreesuc"></span></td></tr>
 
-<tr><td>&nbsp;</td></tr>
-<!-- <tr><td colspan="2"><b>Or you can use Tesla Access Token &amp; Refresh Token to login:&nbsp;&nbsp;</b></td><td><img id="TokenHelp" src="img/icon-help-24.png" class="pointer"/></td></tr> -->
-<tr><td>&nbsp;</td></tr>
-
-<tr><td colspan="2">
+<tr><td></td><td colspan="2">
 <?PHP
 if ($_REQUEST["id"] != -1)
 	{ ?><button id="deletebutton" onclick="deleteCar();" class="redbutton"><?php t("Delete"); ?></button>
-	<!-- &nbsp;<button onclick="reconnect();"><?php t("Reconnect"); ?></button>&nbsp; -->
 	<?PHP }
 ?>
-<button id="btnSave" style='visibility:collapse' onclick="save();" style="float: right;"><?php t("Save"); ?></button></td></tr>
+<button id="btnSave" onclick="save();" style="float: right; visibility: collapse"><?php t("Save"); ?></button></td></tr>
+<tr><td>5.</td><td colspan="2">If you have a pre-2021 Tesla Model S/X, then you're done and can stop <a href="index.php">here</a>.<td><tr>
+<tr><td></td><td colspan="2">Set Up Third-Party Virtual Key: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de">Link</a> (not required for pre 2021 Model S/X)<td><tr>
 </table>
+
+
+	
+
 </div>
 <?php
 }
 else
 {
 ?>
-<div>
-<h1><?php t("Please choose your vehicle"); ?>:</h1>
-<table id="cars" class="">
-	<thead>
-		<tr>
-			<th><?php t("ID"); ?></th>
-			<th><?php t("Email"); ?></th>
-			<th>#</th>
-			<th><?php t("Name"); ?></th>
-			<th><?php t("Model"); ?></th>
-			<th><?php t("VIN"); ?></th>
-			<th><?php t("Tasker Token"); ?></th>
-			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
-			<th><?php t("Edit"); ?></th>
-		</tr>
-	</thead>
-	<tbody>
-<?php
-		//var_dump($url);
-
-		foreach ($jcars as $k => $v) {
-			$email = $v->{"tesla_name"};
-			$display_name = $v->{"display_name"};
-			$tasker_token = $v->{"tasker_hash"};
-			$car = $v->{"model_name"};
-			$id = $v->{"id"};
-			$vin = $v->{"vin"};
-			$tesla_carid = $v->{"tesla_carid"};
-			$freesuc = $v->{"freesuc"};
-			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
-			if ($freesuc == "1")
-				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
-
-			echo("	<tr>\r\n");
-			echo("		<td>$id</td>\r\n");
-			echo("		<td>$email</td>\r\n");
-			echo("		<td>$tesla_carid</td>\r\n");
-			echo("		<td>$display_name</td>\r\n");
-			echo("		<td>$car</td>\r\n");
-			echo("		<td>$vin</td>\r\n");
-			echo("		<td>$tasker_token</td>\r\n");
-			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
-			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
-			echo t("Edit");
-			echo("</a></td>\r\n");
-			echo("	</tr>\r\n");
-		}
-	?>
-	</tbody>
-</table>
-<p></p>
-<button onclick="location.href='password.php?id=-1'"><?php t("New car"); ?></button>
-</div>
 <?php
 }
 ?>
