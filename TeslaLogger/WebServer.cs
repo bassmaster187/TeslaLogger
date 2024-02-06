@@ -2417,7 +2417,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                    cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                                    cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
