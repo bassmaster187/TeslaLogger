@@ -1,3 +1,6 @@
+# Version 1.56.1
+- Update certificates for Mono
+
 # Version 1.56.0
 - Support new Tesla API
 - Attention: MapQuest isn't free anymore! Either you remove the key in your settings, if you used it or you have to provide a credit card to MapQuest. 

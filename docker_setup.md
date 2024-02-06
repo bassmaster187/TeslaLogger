@@ -1,5 +1,5 @@
 # Docker Setup
-For Synology NAS users, check the hints here: [LINK](docker_setup_synology.md) 
+For Synology NAS users, check the hints here: [LINK DSM 6](docker_setup_synology.md) / [LINK DSM 7](docker_setup_synology_7.md) 
 
 Docker on Raspberry: It won't work if you don't have a 64bit OS as MariaDB requires a 64bit OS!
 
