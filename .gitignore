@@ -86,3 +86,5 @@ TeslaLogger/www/admin/plugins/*
 AnalysisReport.sarif
 upgrade-assistant.clef
 TeslaLogger/GrafanaDB/*
+TeslaLogger/copytodebian.cmd
+TeslaLogger/NOBACKUPONUPDATE
