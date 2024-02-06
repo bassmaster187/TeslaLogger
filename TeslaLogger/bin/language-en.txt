@@ -109,6 +109,16 @@ min kW=min kW
 Ø mph=Avg. mph
 Ø km/h=Avg. kph
 
+#Trip Top Destinations.json
+Trip Top Ziele=Trip Top Destinations
+Letzte Fahrt=Last Trip
+Ø Dauer Min=Ø Duration Min
+Ø Verbrauch kWh/100km=Ø Consumption kWh/100km
+Ø Verbraucht kWh=Ø Consumed kWh
+Anzahl Trips=Trips Count
+Anzahl=Count
+Fahrzeug=Vehicle
+
 #Vampir Drain.json
 Vampir Drain=Vampir Drain
 Standby Stunden=Standby Hours
