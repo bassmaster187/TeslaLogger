@@ -190,7 +190,7 @@ namespace TeslaLogger
         internal bool waitForRecaptcha;
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
-        internal bool FleetAPI = false;
+        internal bool FleetAPI;
         internal string FleetApiAddress = "";
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -370,7 +370,10 @@ namespace TeslaLogger
             try
             {
                 if (FleetAPI)
+                {
                     Log("*** Using FLEET API ***");
+                    CreateExeptionlessFeature("FleetAPI");
+                }
 
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
@@ -1825,8 +1828,8 @@ id = @carid", con))
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging")
                         .AddObject(CurrentJSON.current_car_version, "CarVersion")
-                        .AddObject(wheel_type, "wheel_type");
-
+                        .AddObject(wheel_type, "wheel_type")
+                        .AddObject(FleetAPI, "FleetAPI");
             return b;
         }
 
@@ -1839,7 +1842,8 @@ id = @carid", con))
                 .AddObject(CarSpecialType, "CarSpecialType")
                 .AddObject(TrimBadging, "CarTrimBadging")
                 .AddObject(CurrentJSON.current_car_version, "CarVersion")
-                .AddObject(wheel_type, "wheel_type");
+                .AddObject(wheel_type, "wheel_type")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
         }
@@ -1851,7 +1855,8 @@ id = @carid", con))
                 .AddObject(ModelName, "ModelName")
                 .AddObject(CarType, "CarType")
                 .AddObject(CarSpecialType, "CarSpecialType")
-                .AddObject(TrimBadging, "CarTrimBadging");
+                .AddObject(TrimBadging, "CarTrimBadging")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
         }
