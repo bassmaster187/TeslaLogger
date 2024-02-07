@@ -15,7 +15,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1594681192894,
   "links": [
     {
       "icon": "external link",
@@ -390,7 +389,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT End_address AS DEST, EndLat, EndLng,\n  UNIX_TIMESTAMP(MAX(EndDate))*1000 AS last_driven,\n  (SUM(DurationMinutes)/COUNT(DurationMinutes)) AS avg_duration_minutes,\n  (SUM(km_diff)/COUNT(km_diff)) AS avg_km_diff,\n  (SUM(km_diff)/COUNT(km_diff)) / (SUM(DurationMinutes)/COUNT(DurationMinutes)) * 60 AS avg_kmh,\n  (SUM(avg_consumption_kWh_100km)/COUNT(avg_consumption_kWh_100km)) AS avg_consumption_kWh_100km,\n  (SUM(consumption_kWh)/COUNT(consumption_kWh)) AS avg_consumption_kWh,\n  count(*) as 'Count',\n  UNIX_TIMESTAMP(MAX(StartDate))*1000 as StartDateRAW, \n  UNIX_TIMESTAMP(MAX(EndDate))*1000 as EndDateRAW\nFROM trip\nWHERE $__timeFilter(EndDate) and CarID = $Car\nGROUP BY End_address \nORDER BY count desc\nLIMIT $Count",
+          "rawSql": "SELECT End_address AS DEST, EndLat, EndLng,\n  UNIX_TIMESTAMP(MAX(EndDate))*1000 AS last_driven,\n  (SUM(DurationMinutes)/COUNT(DurationMinutes)) AS avg_duration_minutes,\n  (SUM(km_diff)/COUNT(km_diff)) AS avg_km_diff,\n  (SUM(km_diff)/COUNT(km_diff)) / (SUM(DurationMinutes)/COUNT(DurationMinutes)) * 60 AS avg_kmh,\n  (SUM(avg_consumption_kWh_100km)/COUNT(avg_consumption_kWh_100km)) AS avg_consumption_kWh_100km,\n  (SUM(consumption_kWh)/COUNT(consumption_kWh)) AS avg_consumption_kWh,\n  count(*) as 'Count',\n  UNIX_TIMESTAMP(MAX(StartDate))*1000 as StartDateRAW, \n  UNIX_TIMESTAMP(MAX(EndDate))*1000 as EndDateRAW\nFROM trip\nWHERE $__timeFilter(EndDate) and CarID in ($Car)\nGROUP BY End_address \nORDER BY count desc\nLIMIT $Count",
           "refId": "A",
           "select": [
             [
@@ -449,9 +448,13 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "Tsla",
-          "value": "1"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "mysql",
@@ -459,9 +462,9 @@
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Fahrzeug",
-        "multi": false,
+        "multi": true,
         "name": "Car",
         "options": [],
         "query": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
@@ -482,7 +485,7 @@
         "name": "Count",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "10",
             "value": "10"
           }
