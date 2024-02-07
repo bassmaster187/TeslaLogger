@@ -10,6 +10,7 @@ using SRTM;
 using System.Web;
 
 using Newtonsoft.Json;
+using System.Data;
 
 namespace UnitTestsTeslalogger
 {
@@ -579,6 +580,89 @@ namespace UnitTestsTeslalogger
 
             Assert.AreEqual("Y LR AWD (MIC 2022)", wh.car.ModelName);
             Assert.AreEqual(0.148, wh.car.WhTR);
+        }
+        [TestMethod]
+        public void Car_Y_SR_MIG_BYD()
+        {
+            string[] VINSs = { 
+                "XP7YGCEJ1PB", 
+                "XP7YGCEJ2PB", 
+                "XP7YGCEJ3PB", 
+                "XP7YGCEJ6PB", 
+                "XP7YGCEJ7PB", 
+                "XP7YGCEJ8PB", 
+                "XP7YGCEJ9PB", 
+                "XP7YGCES0RB", 
+                "XP7YGCES1RB", 
+                "XP7YGCES4RB", 
+                "XP7YGCES8PB", 
+                "XP7YGCES9RB" };
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.142;
+                wh.car.TrimBadging = "50";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y SR (MIG BYD)", wh.car.ModelName);
+                Assert.AreEqual(0.142, wh.car.WhTR);
+            }
+        }
+
+        [TestMethod]
+        public void Car_Y_SR_MIG_CATL()
+        {
+            string[] VINSs = { "XP7YGCFS2RB", "XP7YGCFSXRB"};
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.142;
+                wh.car.TrimBadging = "50";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y SR (MIG CATL)", wh.car.ModelName);
+                Assert.AreEqual(0.142, wh.car.WhTR);
+            }
+        }
+
+        [TestMethod]
+        public void Car_Y_SR_MIC()
+        {
+            string[] VINSs = { "LRWYGCFSXPC" };
+
+            foreach (string vin in VINSs)
+            {
+                Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+                WebHelper wh = c.webhelper;
+
+                MemoryCache.Default.Remove("GetAvgMaxRage_0");
+                MemoryCache.Default.Add("GetAvgMaxRage_0", 520, DateTime.Now.AddMinutes(1));
+                wh.car.Vin = vin + "XXXXXX";
+                wh.car.CarType = "modely";
+                wh.car.CarSpecialType = "base";
+                wh.car.DBWhTR = 0.142;
+                wh.car.TrimBadging = "50";
+                wh.UpdateEfficiency();
+
+                Assert.AreEqual("Y SR (MIC)", wh.car.ModelName);
+                Assert.AreEqual(0.142, wh.car.WhTR);
+            }
         }
 
         [TestMethod]

@@ -2872,7 +2872,7 @@ namespace TeslaLogger
             }
             else if (car.CarType == "modely" && car.CarSpecialType == "base")
             {
-                Tools.VINDecoder(car.Vin, out int year, out _, out bool _, out bool MIC, out string _, out string _, out bool MIG);
+                Tools.VINDecoder(car.Vin, out int year, out string ct, out bool AWD, out bool MIC, out string battery, out string motor, out bool MIG);
                 if (car.TrimBadging == "74d")
                 {
                     if (MIC)
@@ -2913,6 +2913,25 @@ namespace TeslaLogger
                 }
                 else if (car.TrimBadging == "50")
                 {
+                    if (MIG)
+                    {
+                        if (!AWD && car.Vin[6] == 'E' && (car.Vin[7] == 'S' || car.Vin[7] == 'J'))
+                        {
+                            WriteCarSettings("0.142", "Y SR (MIG BYD)");
+                            return;
+                        }
+                        else if (battery == "LFP")
+                        {
+                            WriteCarSettings("0.142", "Y SR (MIG CATL)");
+                            return;
+                        }
+                    }
+                    else if (MIC)
+                    {
+                        WriteCarSettings("0.142", "Y SR (MIC)");
+                        return;
+                    }
+
                     WriteCarSettings("0.142", "Y SR+");
                     return;
                 }
