@@ -25,6 +25,7 @@
 
 	<?PHP
 	$csv = array();
+	/*
 	$fp = fopen('/etc/teslalogger/geofence.csv', 'rb');
 	
 	while(!feof($fp)) {
@@ -37,6 +38,7 @@
 		
 	}
 	fclose($fp);
+	*/
 	
 	$i = 0;
 	$csv2 = array();
