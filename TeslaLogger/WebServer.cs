@@ -208,7 +208,10 @@ namespace TeslaLogger
                         GetAllCars(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccount", System.StringComparison.Ordinal):
-                        GetCarsFromAccount(request, response);
+                        GetCarsFromAccount(request, response, false);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccountfleetapi", System.StringComparison.Ordinal):
+                        GetCarsFromAccount(request, response, true);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
@@ -1083,7 +1086,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private static void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response, bool fleetAPI)
         {
             string responseString = "";
 
@@ -1094,7 +1097,7 @@ DROP TABLE chargingstate_bak";
                 dynamic r = JsonConvert.DeserializeObject(data);
 
                 string access_token = r["access_token"];
-                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
+                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0, fleetAPI); // TODO Check
                 car.webhelper.Tesla_token = access_token;
 
                 car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);
@@ -2364,6 +2367,10 @@ DROP TABLE chargingstate_bak";
 
                     string access_token = r["access_token"];
                     string refresh_token = r["refresh_token"];
+                    bool FleetAPI = false;
+
+                    if (r["fleetAPI"] != null)
+                         FleetAPI = r["fleetAPI"];
 
                     if (id == -1)
                     {
@@ -2400,7 +2407,7 @@ FROM
 
                                 Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token, tesla_token_expire) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token, @tesla_token_expire)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -2410,10 +2417,11 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
+                                    cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
+                                    Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null, FleetAPI);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
 
                                     WriteString(response, "ID:"+newid);
@@ -2430,12 +2438,14 @@ FROM
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token, fleetAPI=@fleetAPI, tesla_token_expire=@tesla_token_expire where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
+                                cmd.Parameters.AddWithValue("@fleetAPI", FleetAPI ? 1 : 0);
+                                cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                 _ = SQLTracer.TraceNQ(cmd, out _);
 
                                 Car c = Car.GetCarByID(dbID);
@@ -2445,7 +2455,7 @@ FROM
                                 }
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                Car nc = new Car(dbID, email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
+                                Car nc = new Car(dbID, email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null, FleetAPI);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                                 WriteString(response, "OK");
                             }
@@ -2825,7 +2835,7 @@ FROM
                 {
                     using (DataTable dt = new DataTable())
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI FROM cars order by display_name", DBHelper.DBConnectionstring))
                         {
                             SQLTracer.TraceDA(dt, da);
 

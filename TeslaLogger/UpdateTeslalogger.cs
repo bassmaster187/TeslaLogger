@@ -943,6 +943,20 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPIaddress"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPIaddress");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPIaddress` VARCHAR(200) NULL DEFAULT NULL", 600);
+            }
         }
 
         private static void CheckDBSchema_can()
@@ -1212,6 +1226,7 @@ PRIMARY KEY(id)
         {
             try
             {
+                // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
                 Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
                 Tools.ExecMono("update-ca-certificates", "");
                 Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");

@@ -2,6 +2,9 @@
 <?php
 require("language.php");
 require_once("tools.php");
+
+$actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -341,6 +344,10 @@ if (isset($_REQUEST["id"]))
 ?></li>
 <li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
 <li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
+<li>Tesla Fleet API: <a href="<?php 
+$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
+echo $TeslaFleetURL;
+?>">Tesla Fleet API</a></li>
 </ul>
 
 <div style="display: none" id="browserauth">
@@ -420,6 +427,7 @@ else
 			<th><?php t("VIN"); ?></th>
 			<th><?php t("Tasker Token"); ?></th>
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
+			<th style='text-align:center;'>FleetAPI</th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -435,10 +443,16 @@ else
 			$id = $v->{"id"};
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
+			
 			$freesuc = $v->{"freesuc"};
 			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
 			if ($freesuc == "1")
 				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
+
+			$fleetAPI = $v->{"fleetAPI"};
+			$fleetAPICheckBox = '<input type="checkbox" readonly valign="center" />';
+			if ($fleetAPI == "1")
+				$fleetAPICheckBox = '<input type="checkbox" checked="checked" readonly valign="center" />';
 
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
@@ -449,6 +463,7 @@ else
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
+			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
 			echo t("Edit");
 			echo("</a></td>\r\n");
