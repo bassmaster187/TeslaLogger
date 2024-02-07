@@ -104,6 +104,7 @@
     <Compile Include="UnitTestCO2.cs" />
     <Compile Include="UnitTestConfig.cs" />
     <Compile Include="UnitTestGeocodeMapQuest.cs" />
+    <Compile Include="UnitTestGrafana.cs" />
     <Compile Include="UnitTestMapProvider.cs" />
     <Compile Include="UnitTestOpenTopoDataService.cs" />
     <Compile Include="UnitTestOSMMapGenerator.cs" />
