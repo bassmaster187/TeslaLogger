@@ -3489,8 +3489,52 @@ namespace TeslaLogger
                                             {
                                                 Tools.DebugLog("StreamingAPI: " + v);
                                                 car.Log("StreamingApi: " + v);
-                                                UpdateTeslaTokenFromRefreshToken();
-                                                RestartStreamThreadWithTask();
+
+                                                // Suspend Streaming API
+
+                                                var lastToken = Tesla_Streamingtoken;
+                                                var lastTeslaToken = Tesla_token;
+                                                var TimeOut = DateTime.UtcNow;
+
+                                                while (!stopStreaming)
+                                                {
+                                                    Thread.Sleep(10000);
+
+                                                    if (lastToken != Tesla_Streamingtoken) // maybe token has been update from a different thread
+                                                    {
+                                                        car.Log("Restart Streaming because Streamingtoken changed");
+                                                        break;
+                                                    }
+
+                                                    if (lastTeslaToken != Tesla_token)
+                                                    {
+                                                        car.Log("Restart Streaming because Token changed");
+                                                        break;
+                                                    }
+
+                                                    var ts = DateTime.UtcNow - lastRefreshToken;
+                                                    if (ts.TotalMinutes >= 5)
+                                                    {
+                                                        car.Log("Restart Streaming because get token lock suspended");
+                                                        UpdateTeslaTokenFromRefreshToken();
+                                                        RestartStreamThreadWithTask();
+                                                        break;
+                                                    }
+
+                                                    var to = DateTime.UtcNow - TimeOut;
+                                                    if (ts.TotalMinutes > 10)
+                                                    {
+                                                        car.Log("Restart Streaming because timeout");
+                                                        break;
+                                                    }
+
+                                                    if (car.GetCurrentState() == Car.TeslaState.Sleep)
+                                                    {
+                                                        car.Log("Restart Streaming because car is sleeping");
+                                                        break;
+                                                    }
+                                                }
+                                                car.Log("Exit streaming while loop wait for token refresh");
                                             }
                                         }
                                         else
@@ -4692,7 +4736,7 @@ DESC", con))
                 }
                 else if ((int)result.StatusCode == 429) // TooManyRequests
                 {
-                    int sleep = random.Next(2000) + 7000;
+                    int sleep = random.Next(12000) + 27000;
 
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd + " Sleep: " + sleep + "ms");
                     Thread.Sleep(sleep);
