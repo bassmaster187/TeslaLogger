@@ -542,6 +542,7 @@ namespace TeslaLogger
                         break;
                     case 'E':
                         motor = "Y dual";
+                        break;
                     case 'K':
                     case 'L':
                         motor = "3/Y dual";
