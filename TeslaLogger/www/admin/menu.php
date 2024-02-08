@@ -87,7 +87,7 @@ function menu($title, $prefix = "")
 					</li>
 					<li id="menu-item-7" class="page_item_has_children">
 						<a href="#"><?php t("Dashboards"); ?></a>
-						<ul class='children'>
+						<ul class='children menu-columns'>
 <?PHP
 						$d = explode("\r\n", $alldashboards);
                         foreach($d as $dl) {
