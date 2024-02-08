@@ -552,7 +552,7 @@ namespace TeslaLogger
                     case 'J':
                     case 'S':
                         motor = "3/Y single";
-                    case '
+                        break;
                 }
 
                 return $"{carType} {year} AWD:{AWD} MIC:{MIC} battery:{battery} motor:{motor} MIG:{MIG}";
