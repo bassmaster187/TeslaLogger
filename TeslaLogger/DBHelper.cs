@@ -1672,21 +1672,23 @@ HAVING
             }
         }
 
-        internal void UpdateFleetAPIaddress(string url)
+
+
+        internal void UpdateCarColumn(string column, string value)
         {
             try
             {
-                car.Log("UpdateFleetAPIaddress");
+                car.Log($"Update {column} / Value: {value}");
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("update cars set fleetAPIaddress = @fleetAPIaddress where id=@id", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"update cars set {column} = @value where id=@id", con))
                     {
                         cmd.Parameters.AddWithValue("@id", car.CarInDB);
-                        cmd.Parameters.AddWithValue("@fleetAPIaddress", url);
+                        cmd.Parameters.AddWithValue("@value", value);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("UpdateFleetAPIaddress OK: " + done + " - " + url);
+                        car.Log($"Update {column} OK: " + done + " - " + value);
                     }
                 }
             }

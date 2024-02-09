@@ -1,4 +1,5 @@
 ﻿using Exceptionless;
+using Exceptionless.Logging;
 using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
@@ -691,7 +692,7 @@ namespace TeslaLogger
 
                         car.FleetApiAddress = fleeturl;
                         car.Log("FleetApiAddress: " +  fleeturl);
-                        car.DbHelper.UpdateFleetAPIaddress(fleeturl);
+                        car.DbHelper.UpdateCarColumn("fleetAPIaddress", fleeturl);
                         return fleeturl;
                     }
                     
@@ -744,6 +745,9 @@ namespace TeslaLogger
                     string result = response.Content.ReadAsStringAsync().Result;
                     if (response.IsSuccessStatusCode)
                     {
+                        if (result.Contains("User revoked consent"))
+                            car.CreateExeptionlessLog("User revoked consent", "Teslalogger won't work anymore!", LogLevel.Warn).Submit();
+
                         if (result.Contains("\"error\""))
                         {
                             car.Log(result);
@@ -2055,6 +2059,7 @@ namespace TeslaLogger
                         if (resultContent.Contains("user not allowed in region"))
                         {
                             car.oldAPIchinaCar = true;
+                            car.DbHelper.UpdateCarColumn("oldAPIchinaCar", "1");
                             adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
                             DoGetVehiclesRequest(out resultContent, client, adresse, out resultTask, out result);
                         }
@@ -4970,6 +4975,25 @@ DESC", con))
                     }
 
                     car.Log("Response: " + resultContent);
+
+                    if (resultContent != null)
+                    {
+                        if (resultContent.Contains("vehicle rejected request: your public key has not been paired with the vehicle"))
+                        {
+                            car.DbHelper.UpdateCarColumn("needVirtualKey", "1");
+                            car.CreateExeptionlessLog("NeedVirtualKey", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        }
+                        else if (resultContent.Contains("Tesla Vehicle Command Protocol required"))
+                        {
+                            car.DbHelper.UpdateCarColumn("needFleetAPI", "1");
+                            car.CreateExeptionlessLog("NeedFleetAPI", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        }
+                        else if (resultContent.Contains("Unauthorized missing scopes"))
+                        {
+                            car.DbHelper.UpdateCarColumn("needCommandPermission", "1");
+                            car.CreateExeptionlessLog("NeedCommandPermission", "", Exceptionless.Logging.LogLevel.Warn).Submit();
+                        }
+                    }
 
                     return resultContent;
                 }

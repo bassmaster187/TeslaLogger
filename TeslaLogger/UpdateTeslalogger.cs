@@ -957,6 +957,34 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPIaddress` VARCHAR(200) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "oldAPIchinaCar"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column oldAPIchinaCar");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `oldAPIchinaCar` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needVirtualKey"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needVirtualKey");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needVirtualKey` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needCommandPermission"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needCommandPermission");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needCommandPermission` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needFleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needFleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needFleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
         }
 
         private static void CheckDBSchema_can()
