@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teslalogger geofencing V1.1</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
 	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
   	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
