@@ -372,7 +372,7 @@ namespace TeslaLogger
                 if (FleetAPI)
                 {
                     Log("*** Using FLEET API ***");
-                    CreateExeptionlessFeature("FleetAPI");
+                    CreateExeptionlessFeature("FleetAPI").Submit();
                 }
 
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
