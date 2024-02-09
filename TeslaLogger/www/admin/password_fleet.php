@@ -238,12 +238,15 @@ $actual_link = str_replace("&", "%26", $actual_link);
 					<table id="t1">
 						<tr>
 							<td width="25px">1.</td>
-							<td colspan="2">Log out from your Tesla Account if you are already logged in <a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank">LINK</a></td>
+							<td colspan="2"><?php t("PF_LOGOUT"); ?> <a href="https://www.tesla.com/teslaaccount/owner-xp/auth/logout?redirect=true&locale=en_US" target="_blank"><?php t("PF_LINK"); ?></a><br>
+							<?php t("PF_HELP"); ?>: <a href="https://www.youtube.com/watch?v=CjJPFdaAk44" target="_blank"><img src="https://teslalogger.de/youtube.svg" height="18px"></a><br>
+							<?php t("PF_PERMISSION"); ?>: <a href="https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/tesla-fleet-permission.md" target="_blank"><?php t("PF_LINK"); ?></a>
+							</td>
 							<td></td>
 						</tr>	
 						<tr>
 							<td>2.</td>
-							<td colspan="2">Go to Tesla Authentification Page and gain access to Teslalogger: <a href="https://teslalogger.de/fleet-token.php?url=<?= $actual_link; ?>">LINK</a></td>
+							<td colspan="2"><?php t("PF_LOGIN"); ?>: <a href="https://teslalogger.de/fleet-token.php?url=<?= $actual_link; ?>"><?php t("PF_LINK"); ?></a></td>
 							<td><span id="checkauth"></span></td>
 						</tr>
 						<tr>
@@ -288,11 +291,11 @@ $actual_link = str_replace("&", "%26", $actual_link);
 						</tr>
 						<tr>
 							<td>5.</td>
-							<td colspan="2">If you have a pre-2021 Tesla Model S/X, then you're done and can stop <a href="index.php">here</a>.</td>
+							<td colspan="2"><?php t("PF_OLDSX"); ?> <a href="index.php"><?php t("PF_LINK"); ?></a>.</td>
 						<tr>
 						<tr>
 							<td></td>
-							<td colspan="2">Otherwise set Up Third-Party Virtual Key: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de">LINK</a></td>
+							<td colspan="2"><?php t("PF_VKEY"); ?>: <a target="_blank" href="https://www.tesla.com/_ak/teslalogger.de"><?php t("PF_LINK"); ?></a></td>
 						<tr>
 					</table>
 				</div>

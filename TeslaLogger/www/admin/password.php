@@ -336,6 +336,10 @@ if (isset($_REQUEST["id"]))
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
 <ul>
+<li><?php t("BA_FLEETAPI"); ?>: <a href="<?php 
+$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
+echo $TeslaFleetURL;
+?>"><?php t("PF_LINK"); ?></a></li>
 <li><?php
 	$t1=get_text("BA_Browser");
 	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
@@ -344,12 +348,7 @@ if (isset($_REQUEST["id"]))
 ?></li>
 <li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
 <li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
-<li>Tesla Fleet API: <a href="<?php 
-$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
-echo $TeslaFleetURL;
-?>">Tesla Fleet API</a></li>
 </ul>
-
 <div style="display: none" id="browserauth">
 <hr>
 <h1><?php t("BA_Read"); ?></h1>

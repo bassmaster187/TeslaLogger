@@ -162,10 +162,11 @@ The URL doesn't contain the expected format!=Die URL enthält nicht das erwartet
 #password_fleet.php
 PF_LOGOUT=Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind
 PF_LOGIN=Gehen Sie zur Tesla-Authentifizierungsseite und erlauben Sie Teslalogger auf ihre Daten zuzugreifen
+PF_HELP=Hilfsvideo
+PF_PERMISSION=Info. Welche Rechte werden verwendet und weshalb
 PF_LINK=LINK
 PF_OLDSX=Wenn Sie ein älteres Tesla Model S/X vor 2021 haben, sind Sie fertig und können zurück zur Startseite
 PF_VKEY=Andernfalls richten Sie einen virtuellen Schlüssel eines Drittanbieters ein
-
 
 #dashboard.php
 Online=Online
