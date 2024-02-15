@@ -5463,6 +5463,31 @@ ORDER BY
             return dt;
         }
 
+        public static DataTable GetCarDT(int id)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+                    SELECT
+                        *
+                    FROM
+                        cars
+                    where id="+id, DBConnectionstring))
+                {
+                    _ = SQLTracer.TraceDA(dt, da);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return dt;
+        }
+
         public static DataRow GetCar(int id)
         {
             using (DataTable dt = new DataTable())

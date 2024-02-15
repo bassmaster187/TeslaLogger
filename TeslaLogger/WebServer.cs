@@ -2470,9 +2470,9 @@ FROM
                                     cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
 
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null, FleetAPI);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                                    var dt = DBHelper.GetCarDT(Convert.ToInt32(newid));
+                                    if (dt?.Rows?.Count > 0)
+                                        Program.StartCarThread(dt.Rows[0]);
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -2504,9 +2504,9 @@ FROM
                                     c.ExitCarThread("Credentials changed!");
                                 }
 
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                Car nc = new Car(dbID, email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null, FleetAPI);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                                var dt = DBHelper.GetCarDT(Convert.ToInt32(id));
+                                if (dt?.Rows?.Count > 0) 
+                                    Program.StartCarThread(dt.Rows[0]);
                                 WriteString(response, "OK");
                             }
                         }

@@ -1,5 +1,6 @@
 ﻿using Exceptionless;
 using Exceptionless.Logging;
+using Exceptionless.Models.Data;
 using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
@@ -19,6 +20,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Caching;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -750,7 +752,20 @@ namespace TeslaLogger
 
                         if (result.Contains("\"error\""))
                         {
+                            string error = result;
+
+                            try
+                            {
+                                dynamic j2 = JsonConvert.DeserializeObject(result);
+                                error = j2["error"];
+                            } catch (Exception)
+                            { }
+
+                            car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshTokenFromFleetAPI", error, LogLevel.Error)
+                                .AddObject(result, "Result Content")
+                                .Submit();
                             car.Log(result);
+                            Thread.Sleep(30000);
                             return "";
                         }
 
@@ -765,7 +780,12 @@ namespace TeslaLogger
                     }
                     else
                     {
+                        car.CreateExeptionlessLog("UpdateTeslaTokenFromRefreshTokenFromFleetAPI", response.StatusCode.ToString(), LogLevel.Error)
+                            .AddObject(result, "Result Content")
+                            .Submit();
+
                         Log("Error getting Access Token from Refreh Token: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        Thread.Sleep(30000);
                         return "";
                     }
                 }
@@ -779,6 +799,7 @@ namespace TeslaLogger
                 car.Log(ex.ToString());
                 car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
                 ExceptionlessClient.Default.ProcessQueueAsync();
+                Thread.Sleep(30000);
             }
 
             return "";
@@ -2402,7 +2423,7 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    Log("Streamingtoken changed: " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                    Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
@@ -2514,6 +2535,48 @@ namespace TeslaLogger
             }
 
             return "NULL";
+        }
+
+        void TryGetNewStreamingToken()
+        {
+            car.Log("TryGetNewStreamingToken");
+
+            string resultContent = "";
+            try
+            {
+                resultContent = GetCommand("vehicle_data").Result;
+
+                if (resultContent == INSERVICE)
+                {
+                    System.Threading.Thread.Sleep(10000);
+                    return;
+                }
+
+
+                Tools.SetThreadEnUS();
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
+                string temp_Tesla_Streamingtoken = jsonResult["response"]["tokens"][0].ToString();
+
+                if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
+                {
+                    Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
+                    Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (resultContent == null || resultContent == "NULL")
+                {
+                    Log("TryGetNewStreamingToken = NULL!");
+                    Thread.Sleep(10000);
+                }
+                else
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
+                }
+            }
         }
 
         void CheckVehicleConfig()
@@ -2635,17 +2698,15 @@ namespace TeslaLogger
                     {
                         if (!AWD)
                         {
-                            if (!AWD)
-                            {
-                                if (MIC)
-                                    if (battery == "LFP")
-                                        WriteCarSettings("0.138", "M3 SR+ LFP 2021");
-                                    else
-                                        WriteCarSettings("0.142", "M3 LR RWD 2023");
+                            if (MIC)
+                                if (battery == "LFP")
+                                    WriteCarSettings("0.138", "M3 SR+ LFP 2021");
                                 else
-                                    WriteCarSettings("0.145", "M3 LR RWD 2019");
-                                return;
-                            }
+                                    WriteCarSettings("0.142", "M3 LR RWD 2023");
+                            else
+                                WriteCarSettings("0.145", "M3 LR RWD 2019");
+                            return;
+                            
                         }
                         else if (motor == "3 dual performance" && year == 2021)
                         {
@@ -3194,6 +3255,23 @@ namespace TeslaLogger
                 decimal dLongitude = 0;
                 int heading = 0;
 
+                try
+                {
+                    string temp_Tesla_Streamingtoken = jsonResult["response"]["tokens"][0].ToString();
+
+                    if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
+                    {
+                        Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
+                        Log("Streamingtoken changed (IsDriving): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+
+                        // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
+                    }
+                } catch (Exception ex)
+                {
+                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
+                    ExceptionWriter(ex, resultContent);
+                }
+
                 if (r2.ContainsKey("latitude"))
                 {
                     dLatitude = (decimal)r2["latitude"];
@@ -3228,6 +3306,7 @@ namespace TeslaLogger
 
                 double latitude = (double)dLatitude;
                 double longitude = (double)dLongitude;
+                car.CurrentJSON.heading = heading;
 
                 car.CurrentJSON.SetPosition(latitude, longitude, ts);
 
@@ -3547,7 +3626,6 @@ namespace TeslaLogger
                                                     {
                                                         car.Log("Restart Streaming because get token lock suspended");
                                                         UpdateTeslaTokenFromRefreshToken();
-                                                        RestartStreamThreadWithTask();
                                                         break;
                                                     }
 
@@ -3749,6 +3827,7 @@ namespace TeslaLogger
                     last_latitude_streaming = latitude;
                     last_longitude_streaming = longitude;
                     last_power_streaming = dpower;
+
                     //Tools.DebugLog($"Stream: InsertPos({v[0]}, {latitude}, {longitude}, {ispeed}, {dpower}, {dodometer_km}, {ideal_battery_range_km}, {battery_range_km}, {isoc}, {outside_temp}, String.Empty)");
                     car.DbHelper.InsertPos(v[0], latitude, longitude, ispeed, dpower, dodometer_km, ideal_battery_range_km, battery_range_km, isoc, outside_temp, String.Empty);
                 }
