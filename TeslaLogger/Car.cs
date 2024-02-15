@@ -115,6 +115,7 @@ namespace TeslaLogger
 
         private bool useTaskerToken = true;
         internal string wheel_type = "";
+        internal bool oldAPIchinaCar = false;
 
         public double WhTR
         {
@@ -189,13 +190,15 @@ namespace TeslaLogger
         internal bool waitForRecaptcha;
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
+        internal bool FleetAPI;
+        internal string FleetApiAddress = "";
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
         private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "")
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "")
         {
             lock (_syncRoot)
             {
@@ -219,6 +222,7 @@ namespace TeslaLogger
                     this.WhTR = WhTR ?? 0.190;
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
+                    this.FleetAPI = fleetAPI;
 
                     if (CarInDB > 0)
                     {
@@ -234,9 +238,12 @@ namespace TeslaLogger
                             Name = "Car_" + CarInDB
                         };
                         thread.Start();
-                    }
 
-                    VIN2DBCarID.Add(vin, CarInDB);
+                        if (VIN2DBCarID.ContainsKey(vin))
+                            VIN2DBCarID.Remove(vin);
+
+                        VIN2DBCarID.Add(vin, CarInDB);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -362,6 +369,12 @@ namespace TeslaLogger
         {
             try
             {
+                if (FleetAPI)
+                {
+                    Log("*** Using FLEET API ***");
+                    CreateExeptionlessFeature("FleetAPI").Submit();
+                }
+
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
                 if (!webhelper.RestoreToken())
@@ -380,6 +393,9 @@ namespace TeslaLogger
                 {
                     ExitCarThread("DBHelper.DBConnectionstring.Length == 0");
                 }
+
+                if (!DbHelper.GetRegion())
+                    webhelper.GetRegion();
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
@@ -467,6 +483,9 @@ namespace TeslaLogger
             run = false;
             thread.Abort();
             Allcars.Remove(this);
+
+            if (VIN2DBCarID.ContainsKey(vin))
+                VIN2DBCarID.Remove(vin);
         }
 
         public void ThreadJoin()
@@ -958,6 +977,9 @@ namespace TeslaLogger
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Online);
+                if (FleetAPI && String.IsNullOrEmpty(FleetApiAddress))
+                    webhelper.GetRegion();
+
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 DbHelper.StartState(res);
@@ -1806,8 +1828,8 @@ id = @carid", con))
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging")
                         .AddObject(CurrentJSON.current_car_version, "CarVersion")
-                        .AddObject(wheel_type, "wheel_type");
-
+                        .AddObject(wheel_type, "wheel_type")
+                        .AddObject(FleetAPI, "FleetAPI");
             return b;
         }
 
@@ -1820,7 +1842,8 @@ id = @carid", con))
                 .AddObject(CarSpecialType, "CarSpecialType")
                 .AddObject(TrimBadging, "CarTrimBadging")
                 .AddObject(CurrentJSON.current_car_version, "CarVersion")
-                .AddObject(wheel_type, "wheel_type");
+                .AddObject(wheel_type, "wheel_type")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
         }
@@ -1832,9 +1855,24 @@ id = @carid", con))
                 .AddObject(ModelName, "ModelName")
                 .AddObject(CarType, "CarType")
                 .AddObject(CarSpecialType, "CarSpecialType")
-                .AddObject(TrimBadging, "CarTrimBadging");
+                .AddObject(TrimBadging, "CarTrimBadging")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
+        }
+
+        public bool UseCommandProxyServer()
+        {
+            if (FleetAPI)
+            {
+                if (CarType == "models" || CarType == "modelx" || CarType == "models2")
+                    return false;
+
+                return true;
+            }
+
+
+            return false;
         }
     }   
 }

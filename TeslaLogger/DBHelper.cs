@@ -1546,7 +1546,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("update tesla_token OK: " + done);
+                        car.Log("update tesla_token OK: " + done + " - " + car.webhelper.Tesla_token.Substring(0,20) + "xxxxxx");
 
                         car.CreateExeptionlessLog("Tesla Token", "Update Tesla Token OK", Exceptionless.Logging.LogLevel.Info).Submit();
 
@@ -1569,6 +1569,9 @@ HAVING
 
         internal void WriteCarSettings()
         {
+            if (car.CarInDB == 0) // used for tests
+                return;
+
             try
             {
                 car.Log("UpdateTeslaToken");
@@ -1643,7 +1646,7 @@ HAVING
         {
             try
             {
-                if (refresh_token == null || refresh_token.Length < 10)
+                if (refresh_token == null || refresh_token.Length < 20)
                 {
                     car.Log("SKIP UpdateRefreshToken !!!");
                     return;
@@ -1659,7 +1662,34 @@ HAVING
                         cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log("UpdateRefreshToken OK: " + done);
+                        car.Log("UpdateRefreshToken OK: " + done + " - " + refresh_token.Substring(0, 20) + "xxxxxxxx");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                car.CreateExceptionlessClient(ex).Submit();
+                car.Log(ex.ToString());
+            }
+        }
+
+
+
+        internal void UpdateCarColumn(string column, string value)
+        {
+            try
+            {
+                car.Log($"Update {column} / Value: {value}");
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand($"update cars set {column} = @value where id=@id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@value", value);
+                        int done = SQLTracer.TraceNQ(cmd, out _);
+
+                        car.Log($"Update {column} OK: " + done + " - " + value);
                     }
                 }
             }
@@ -6188,7 +6218,7 @@ WHERE
             return json;
         }
 
-        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name)
+        public static decimal InsertNewCar(string email, string password, int teslacarid, bool freesuc, string access_token, string refresh_token, string vin, string display_name, bool fleetAPI)
         {
             Logfile.Log($"Insert new Car: {display_name}, VIN: {vin}, TeslaCarId: {teslacarid}");
             using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
@@ -6217,7 +6247,7 @@ FROM
                     if (oid != null)
                         newid = Convert.ToInt32(oid);
 
-                    using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin)", con))
+                    using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, tesla_carid, display_name, freesuc, tesla_token, refresh_token, vin, fleetAPI) values (@id, @tesla_name, @tesla_password, @tesla_carid, @display_name, @freesuc,  @tesla_token, @refresh_token, @vin, @fleetAPI)", con))
                     {
                         cmd2.Parameters.AddWithValue("@id", newid);
                         cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -6228,10 +6258,11 @@ FROM
                         cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                         cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                         cmd2.Parameters.AddWithValue("@vin", vin);
+                        cmd2.Parameters.AddWithValue("@fleetAPI", fleetAPI);
                         _ = SQLTracer.TraceNQ(cmd2, out _);
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                        Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null);
+                        Car nc = new Car(Convert.ToInt32(newid), email, password, teslacarid, access_token, DateTime.Now, "", "", "", "", display_name, vin, "", null, fleetAPI);
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                     }
 
@@ -6726,6 +6757,43 @@ WHERE
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        internal bool GetRegion()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT fleetAPIaddress FROM cars where id = @CarID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        if (dr.Read())
+                        {
+                            if (dr[0] == DBNull.Value)
+                                return false;
+
+                            string url = dr[0].ToString();
+                            if (String.IsNullOrEmpty(url)) 
+                                return false;
+
+                            car.FleetApiAddress = url;
+                            car.Log("FleetApiAddress: " + url);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+            return false;
         }
     }
 }

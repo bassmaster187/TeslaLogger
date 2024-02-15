@@ -27,7 +27,7 @@ namespace UnitTestsTeslalogger
             var geofence = Geofence.GetInstance();
 
             if (c == null)
-                c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null); 
+                c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false); 
 
             geofence = Geofence.GetInstance();
             geofence.geofenceList.Clear();
@@ -153,8 +153,50 @@ namespace UnitTestsTeslalogger
                     if (name.Contains("\""))
                         Assert.Fail($"'${name}' contains illegal characters: \"");
 
+                    if (name.IndexOf("supercharger", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (!name.StartsWith("Supercharger"))
+                            Assert.Fail($"'${name}' must start with Supercharger");
+
+                        var s = name.Split(' ');
+                        if (s[0] == "Supercharger-V3" || s[0] == "Supercharger-V4" || s[0] == "Supercharger")
+                        {
+                            CheckCountry(s[1], name);
+                        }
+                        else
+                        {
+                            Assert.Fail("Supercharger must start with 'Supercharger', 'Supercherger-V3' or 'Supercharger-V4' : " + name);
+                        }
+                    }
+                    else if (name.StartsWith("Tesla Service Center"))
+                    {
+                        CheckCountry(name.Substring(21), name);
+                    }
+                    else if (name.StartsWith("Circle K"))
+                    {
+                        CheckCountry(name.Substring(9), name);
+                    }
+                    else if (name.StartsWith("Grønn Kontakt"))
+                    {
+                        CheckCountry(name.Substring(14), name);
+                    }
+                    else if (name.Substring(2,1) == " ")
+                    {
+                        // Unspecific Charger starting with country code
+                    }
+                    else
+                    {
+                        CheckCountry(name.Substring(name.IndexOf(" ")+1), name);
+                    }
                 }
             }
-        }           
+        }
+
+        private static void CheckCountry(string name, string fullname)
+        {
+            var l = name.Split('-');
+            if (l[0].Length != 2)
+                Assert.Fail($"Country ({l}) should be 2 chars: " + fullname);
+        }
     }
 }

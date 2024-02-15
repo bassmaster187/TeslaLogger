@@ -19,6 +19,7 @@ namespace TeslaLogger
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
+        public static DateTime uptime = DateTime.Now;
 
         public enum TLMemCacheKey
         {
@@ -215,9 +216,13 @@ namespace TeslaLogger
                 if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
                     raven = true;
 
+                bool fleetAPI = false;
+                if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
+                    fleetAPI = true;
+
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState, wheel_type);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 car.Raven = raven;
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
@@ -229,6 +234,8 @@ namespace TeslaLogger
 
         private static void InitWebserver()
         {
+            UpdateTeslalogger.CertUpdate();
+
             try
             {
                 Thread threadWebserver = new Thread(() =>

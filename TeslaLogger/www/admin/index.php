@@ -27,7 +27,7 @@ else
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css?v=3">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -533,7 +533,15 @@ function ShowInfo()
 	else
 		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
 
-	$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+	$branch = file_get_contents("/etc/teslalogger/BRANCH");
+
+	if (!empty($branch))
+	{
+		echo("<font color='red'>$branch</font>/");
+		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/$branch/TeslaLogger/Properties/AssemblyInfo.cs");
+	}
+	else
+		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
 
 	if ($installed != $onlineversion)
 	{

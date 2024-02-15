@@ -99,15 +99,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestCO2.cs" />
     <Compile Include="UnitTestConfig.cs" />
     <Compile Include="UnitTestGeocodeMapQuest.cs" />
+    <Compile Include="UnitTestGrafana.cs" />
     <Compile Include="UnitTestMapProvider.cs" />
     <Compile Include="UnitTestOpenTopoDataService.cs" />
     <Compile Include="UnitTestOSMMapGenerator.cs" />
     <Compile Include="UnitTestsGeocode.cs" />
+    <Compile Include="UnitTestWallbox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="apache2-ready.conf" />

@@ -1,13 +1,13 @@
 name: .NET Core Desktop
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "master" ]
+    branches: [ "master","TeslaFleetAPI"]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "TeslaFleetAPI"]
 
 jobs:
-
   build:
 
     strategy:
@@ -42,7 +42,7 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test --filter UnitTestsGeocode --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+      run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
       #run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
 
     - name: Publish Test Results

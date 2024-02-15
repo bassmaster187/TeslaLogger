@@ -943,6 +943,48 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPIaddress"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPIaddress");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPIaddress` VARCHAR(200) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "oldAPIchinaCar"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column oldAPIchinaCar");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `oldAPIchinaCar` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needVirtualKey"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needVirtualKey");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needVirtualKey` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needCommandPermission"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needCommandPermission");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needCommandPermission` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needFleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needFleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needFleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
         }
 
         private static void CheckDBSchema_can()
@@ -1052,7 +1094,7 @@ PRIMARY KEY(id)
 
                 Tools.ExecMono("rm", "-rf /etc/teslalogger/git");
                 Tools.ExecMono("mkdir", "/etc/teslalogger/git");
-                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+                CertUpdate();
 
                 // run housekeeping to make sure there is enough free disk space
 
@@ -1208,6 +1250,21 @@ PRIMARY KEY(id)
             }
         }
 
+        public static void CertUpdate()
+        {
+            try
+            {
+                // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
+                Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
+                Tools.ExecMono("update-ca-certificates", "");
+                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
 
         private static void CheckBackupCrontab()
         {

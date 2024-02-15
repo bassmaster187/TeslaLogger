@@ -32,7 +32,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger Logfile</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -52,16 +52,40 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	<?php
     include "menu.php";
     echo(menu("Logfile"));
+
+	$carfilter = $_REQUEST["c"];
 ?>
 <a href="log.php"><?php t("Download Logfile"); ?></a>
 
 <form action="logfile.php" style="max-width: 1260px;">
 <table width="100%">
 <tr>
-	<td width="25%" nowrap><?php t("Lines"); ?>: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
-	<td width="25%" nowrap><?php t("Housekeeping"); ?>: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
-	<td width="25%" nowrap><?php t("Update"); ?>: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
-	<td width="25%" nowrap><?php t("Sleep Attempt"); ?>: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
+	<td width="20%" nowrap><?php t("Lines"); ?>: <input type="number" name="lines" value="<?= $lines ?>" min="10" max="25000"></td>
+	<td width="20%" nowrap>car: 
+		<select name="c">
+			<option value="">All</option>
+<?php
+			$allcars = file_get_contents(GetTeslaloggerURL("getallcars"),0, stream_context_create(["http"=>["timeout"=>2]]));
+			$jcars = json_decode($allcars);
+
+			foreach($jcars as $k => $v) {
+                                $dn = $v->{"display_name"};
+                                $carid = $v->{"id"};
+
+								echo(str_repeat("\t",3));
+								echo('<option value="'.$carid.'"');
+								if ($carid == $carfilter)
+									echo(" selected");
+
+								echo('>'.$dn.'</option>'); 
+								echo("\n");
+                            }
+							?>
+		</select>
+	</td>
+	<td width="20%" nowrap><?php t("Housekeeping"); ?>: <input type="checkbox" name="hk" value="1" <?= $hk ?>> </td>
+	<td width="20%" nowrap><?php t("Update"); ?>: <input type="checkbox" name="update" value="1" <?= $update ?>> </td>
+	<td width="20%" nowrap><?php t("Sleep Attempt"); ?>: <input type="checkbox" name="sleep" value="1" <?= $sleep ?>> </td>
 	<td><input type="submit" value="<?php t("OK"); ?>" style="float: right;"></td>
 </tr>
 </table>
@@ -87,7 +111,7 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 	$output = str_replace("Key","<b>Key</b>", $output);
 	$output = str_replace("not translated!","<b>not translated!</b>", $output);
 
-	$output = preg_replace("/(.*(Exception|Error|No such host is known|= NULL|: NULL|vehicle unavailable|upstream internal error|NameResolutionFailure).*)/", "<font color='red'>$1</font>", $output);
+	$output = preg_replace("/(.*(Exception|Error|ERROR|No such host is known|= NULL|: NULL|vehicle unavailable|upstream internal error|NameResolutionFailure).*)/", "<font color='red'>$1</font>", $output);
 	$output = preg_replace("/(state: .*)/", "<b>$1</b>", $output);
 	$output = preg_replace("/(http[s]?:\/\/[\w\.\/\-]+)/", "<a href='$1'>$1</a>", $output);
 	$output = preg_replace("/(.*\*\*\* Exit Loop !!!)/", "<font color='red'>$1</font>", $output);
@@ -163,6 +187,14 @@ if (!isset($_REQUEST["sleep"]) && isset($_REQUEST["lines"]))
 		$output = preg_replace('/.*Waiting for car to go to sleep.*/', "", $output);
 	}
 
+
+	if (!empty($carfilter))
+	{
+		// spezific car
+		$output = preg_replace('/(.*)(\#'.$carfilter.'\[)(.*)/', "$1#xxxxx[$3", $output);
+		$output = preg_replace('/.*(\#[0-9]+\[).*/', "", $output);
+		$output = preg_replace('/(.*)(\#xxxxx\[)(.*)/', '$1#'.$carfilter.'[$3', $output);
+	}
 
 	$output = preg_replace("/[\r\n]{2,}/", "\n", $output); // unnecessary new lines
 

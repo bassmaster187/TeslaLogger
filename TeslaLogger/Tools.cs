@@ -489,7 +489,10 @@ namespace TeslaLogger
                 switch (vin[6])
                 {
                     case 'E':
-                        battery = "NMC";
+                        if(MIC)
+                            battery = "NMC";
+                        else
+                            if (vin[7] == 'S') battery = "LFP"; //Y SR MIG BYD
                         break;
                     case 'F':
                         battery = "LFP";
@@ -535,16 +538,21 @@ namespace TeslaLogger
                         motor = "3 dual performance";
                         break;
                     case 'D':
-                    case 'J':
                         motor = "Y single";
                         break;
                     case 'E':
+                        motor = "Y dual";
+                        break;
                     case 'K':
                     case 'L':
-                        motor = "Y dual";
+                        motor = "3/Y dual";
                         break;
                     case 'F':
                         motor = "Y dual performance";
+                        break;
+                    case 'J':
+                    case 'S':
+                        motor = "3/Y single";
                         break;
                 }
 
@@ -1477,6 +1485,10 @@ namespace TeslaLogger
         private static void CreateBackupForDocker()
         {
             if (!IsDocker())
+                return;
+
+            var ts = DateTime.Now - Program.uptime;
+            if (ts.TotalHours < 24)
                 return;
 
             Logfile.Log("Start backup for Docker");
