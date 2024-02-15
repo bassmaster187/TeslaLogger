@@ -58,6 +58,7 @@ namespace TeslaLogger
             "set_charge_limit",
             "charge_start",
             "charge_stop",
+            "charge_start_stop",
             "set_charging_amps"
         };
 
@@ -2305,6 +2306,20 @@ DROP TABLE chargingstate_bak";
                                     break;
                                 case "charge_stop":
                                     WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                    break;
+                                case "charge_start_stop":
+                                    string var = string.Concat(request.QueryString.GetValues(0));
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if(var == "1" || var == "true")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                        }
+                                    }
                                     break;
                                 case "set_charging_amps":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
