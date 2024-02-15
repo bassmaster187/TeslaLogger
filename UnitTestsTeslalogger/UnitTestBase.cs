@@ -99,7 +99,7 @@ namespace UnitTestsTeslalogger
             wh.car.Vin = "5YJ3E7EA9KFxxxxxx";
             wh.UpdateEfficiency();
 
-            Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
+            Assert.AreEqual("M3 LR RWD 2019", wh.car.ModelName);
             Assert.AreEqual(0.145, wh.car.WhTR);
         }
 
@@ -118,8 +118,27 @@ namespace UnitTestsTeslalogger
             wh.car.TrimBadging = "";
             wh.UpdateEfficiency();
 
-            Assert.AreEqual("M3 LR RWD", wh.car.ModelName);
+            Assert.AreEqual("M3 LR RWD 2019", wh.car.ModelName);
             Assert.AreEqual(0.145, wh.car.WhTR);
+        }
+
+        [TestMethod]
+        public void Car_M3_LR_RWD_2023()
+        {
+            Car c = new Car(0, "", "", 0, "", DateTime.Now, "", "", "", "", "", "", "", null, false);
+            WebHelper wh = c.webhelper;
+
+            MemoryCache.Default.Remove("GetAvgMaxRage_0");
+            MemoryCache.Default.Add("GetAvgMaxRage_0", 535, DateTime.Now.AddMinutes(1));
+            wh.car.Vin = "LRW3E7ES7PCXXXXXX";
+            wh.car.CarType = "model3";
+            wh.car.CarSpecialType = "base";
+            wh.car.DBWhTR = 0.142;
+            wh.car.TrimBadging = "";
+            wh.UpdateEfficiency();
+
+            Assert.AreEqual("M3 LR RWD 2023", wh.car.ModelName);
+            Assert.AreEqual(0.142, wh.car.WhTR);
         }
 
         [TestMethod]
