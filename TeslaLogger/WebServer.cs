@@ -58,6 +58,7 @@ namespace TeslaLogger
             "set_charge_limit",
             "charge_start",
             "charge_stop",
+            "charge_start_stop",
             "set_charging_amps"
         };
 
@@ -342,6 +343,12 @@ namespace TeslaLogger
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/dev/sucbingo", System.StringComparison.Ordinal):
                         SuCBingoDev(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/info"):
+                        MQTT_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/set"):
+                        MQTT_Set(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/logfile", System.StringComparison.Ordinal):
                         GetLogfile(response);
@@ -1470,6 +1477,35 @@ DROP TABLE chargingstate_bak";
             }
         }
 
+        private void MQTT_Set(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/set");
+            if (m.Success)
+            {
+                string data = GetDataFromRequestInputStream(request);
+                if (!String.IsNullOrEmpty(data))
+                {
+                    KVS.InsertOrUpdate("MQTTSettings", data);
+                    WriteString(response, "OK");
+                    return;
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private void MQTT_Info(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/info");
+            if (m.Success)
+            {
+                KVS.Get("MQTTSettings", out string json);
+                response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                WriteString(response, json);
+                return;
+            }
+            WriteString(response, "");
+        }
+
         private static void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
         {
             int startPosID = 0;
@@ -2273,6 +2309,20 @@ DROP TABLE chargingstate_bak";
                                     break;
                                 case "charge_stop":
                                     WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                    break;
+                                case "charge_start_stop":
+                                    string var = string.Concat(request.QueryString.GetValues(0));
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if(var == "1" || var == "true")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                        }
+                                    }
                                     break;
                                 case "set_charging_amps":
                                     if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))

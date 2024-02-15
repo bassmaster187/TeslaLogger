@@ -47,7 +47,8 @@ namespace TeslaLogger
                 if (Tools.IsDocker())
                     DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
                 else
-                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                    DBConnectionstring = "Server=192.168.178.105;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+//                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
             }
             else
             {
@@ -5477,6 +5478,39 @@ WHERE
     id = @id", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@id", id);
+                        _ = SQLTracer.TraceDA(dt, da);
+
+                        if (dt.Rows.Count == 1)
+                        {
+                            return dt.Rows[0];
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+
+            return null;
+        }
+
+        public static DataRow GetCar(string vin)
+        {
+            using (DataTable dt = new DataTable())
+            {
+                try
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    cars
+WHERE
+    id = @id", DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@vin", vin);
                         _ = SQLTracer.TraceDA(dt, da);
 
                         if (dt.Rows.Count == 1)

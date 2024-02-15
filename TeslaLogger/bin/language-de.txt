@@ -336,3 +336,6 @@ Restore Database=Datenbank wiederherstellen
 TextRestore1=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor Sie Datenbanken wiederherstellen. Verschieben Sie den Sicherungsordner von \\RASPBERRY\teslalogger\backup auf Ihre Festplatte!
 TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
+
+#dashboard.php
+Sleeping=Sleeping

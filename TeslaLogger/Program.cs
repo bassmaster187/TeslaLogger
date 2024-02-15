@@ -66,6 +66,8 @@ namespace TeslaLogger
 
                 UpdateTeslalogger.StopComfortingMessagesThread();
 
+                InitMQTT();
+
                 MQTTClient.StartMQTTClient();
 
                 InitTLStats();
@@ -108,6 +110,34 @@ namespace TeslaLogger
                     }
                 }
             }
+        }
+
+        private static void InitMQTT()
+        {
+            try
+            {
+                if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
+                {
+                    Thread mqttThread = new Thread(() =>
+                    {
+                        MQTT.GetSingleton().RunMqtt();
+                    })
+                    {
+                        Name = "MqttThread"
+                    };
+                    mqttThread.Start();
+                }
+                else
+                {
+                    Logfile.Log("MQTT disabled (check settings)");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
         }
 
         private static void InitNearbySuCService()
