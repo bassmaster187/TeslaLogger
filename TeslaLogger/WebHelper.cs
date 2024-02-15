@@ -2698,11 +2698,17 @@ namespace TeslaLogger
                     {
                         if (!AWD)
                         {
-                            if (MIC)
-                                WriteCarSettings("0.138", "M3 SR+ LFP 2021");
-                            else
-                                WriteCarSettings("0.145", "M3 LR RWD");
-                            return;
+                            if (!AWD)
+                            {
+                                if (MIC)
+                                    if (battery == "LFP")
+                                        WriteCarSettings("0.138", "M3 SR+ LFP 2021");
+                                    else
+                                        WriteCarSettings("0.142", "M3 LR RWD 2023");
+                                else
+                                    WriteCarSettings("0.145", "M3 LR RWD 2019");
+                                return;
+                            }
                         }
                         else if (motor == "3 dual performance" && year == 2021)
                         {

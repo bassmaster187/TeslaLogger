@@ -886,7 +886,8 @@ Supercharger-V3 RO-Pitești,44.82358585430288,24.909691955626876,46
 Supercharger-V3 RO-Bucharest,44.47895863461448,26.103306971746207,32
 Supercharger-V3 RO-Timișoara,45.755131610991846,21.23298926991955,32
 Supercharger RS-Aleksinac, 43.528816, 21.709413
-Supercharger RS-Belgrade, 44.710065, 20.561113
+Supercharger-V3 RS-Belgrade AVA Shoping Center, 44.711568, 20.562039, 30
+Supercharger RS-Belgrade, 44.7100564, 20.5610539, 30
 Supercharger SE-Arboga, 59.426307, 15.827684
 Supercharger SE-Arvidsjaur, 65.589922, 19.184091
 Supercharger-V3 SE-Björkliden, 68.40734, 18.674918
@@ -4050,7 +4051,7 @@ EnBW DE-Korntal-Münchingen Stuttgarter Str., 48.850184000054, 9.1129279998806
 EnBW DE-Korntal-Münchingen Zuffenhauser Straße, 48.830060014917, 9.1312400018646
 EnBW DE-Kraftsdorf, 50.8955874, 11.9809509
 EnBW DE-Kraichgau Nord, 49.244202585141, 8.8788539785638
-EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 20
+EnBW DE-Kraichgau Süd, 49.240896, 8.879563, 50
 EnBW DE-Krefeld Bauhaus, 51.318214, 6.582751
 EnBW DE-Krefeld Mevissenstr. Bauhaus, 51.34964, 6.52949
 EnBW DE-Krefeld Shell, 51.351963, 6.63886
