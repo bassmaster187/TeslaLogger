@@ -109,6 +109,16 @@ min kW=min kW
 Ø mph=Avg. mph
 Ø km/h=Avg. kph
 
+#Trip Top Destinations.json
+Trip Top Ziele=Trip Top Destinations
+Letzte Fahrt=Last Trip
+Ø Dauer Min=Ø Duration Min
+Ø Verbrauch kWh/100km=Ø Consumption kWh/100km
+Ø Verbraucht kWh=Ø Consumed kWh
+Anzahl Trips=Trips Count
+Anzahl=Count
+Fahrzeug=Vehicle
+
 #Vampir Drain.json
 Vampir Drain=Vampir Drain
 Standby Stunden=Standby Hours
@@ -231,7 +241,7 @@ Free SUC=Free SUC
 Edit=Edit
 New car=New car
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
-BA_Browser=In local {browser} (recommended)
+BA_Browser=In local {browser}
 BA_Read=Please read all the steps before continuing:
 BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
 BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
@@ -247,7 +257,18 @@ BA_Step3=Step 3:
 BA_FillOut=Fill out this form:
 BA_CopyUrl=Copy the resulting url as shown
 BA_Paste=Paste the resulting url into the box and click "Get Tokens" Button:
+BA_FLEETAPI=Tesla Fleet API (recommended)
 Get Tokens=Get Tokens
+
+#password_fleet.php
+PF_LOGOUT=Log out from your Tesla Account if you are already logged in
+PF_LOGIN=Go to the Tesla authentication page and allow Teslalogger to access your data
+PF_LINK=LINK
+PF_HELP=Help video
+PF_PERMISSION=Info, which permissions are used and why
+PF_OLDSX=If you have a pre-2021 Tesla Model S/X, you're done and can go back to the main page
+PF_HERE=here
+PF_VKEY=Otherwise set Up Third-Party Virtual Key
 
 #settings.php
 Please choose your vehicle=Please choose your vehicle
