@@ -50,9 +50,11 @@ namespace TeslaLogger
         {
             "auto_conditioning_start",
             "auto_conditioning_stop",
+            "auto_conditioning_start_stop",
             "auto_conditioning_toggle",
             "sentry_mode_on",
             "sentry_mode_off",
+            "sentry_mode_on_off",
             "sentry_mode_toggle",
             "wake_up",
             "set_charge_limit",
@@ -2255,6 +2257,7 @@ DROP TABLE chargingstate_bak";
                         // check if command is in list of allowed commands
                         if (AllowedTeslaAPICommands.Contains(command))
                         {
+                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
                             switch (command)
                             {
                                 case "auto_conditioning_start":
@@ -2262,6 +2265,20 @@ DROP TABLE chargingstate_bak";
                                     break;
                                 case "auto_conditioning_stop":
                                     WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    break;
+                                case "auto_conditioning_start_stop":
+                                    
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if (var == "1" || var == "true" || var == "on")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                        }
+                                    }
                                     break;
                                 case "auto_conditioning_toggle":
                                     if (car.CurrentJSON.current_is_preconditioning)
@@ -2278,6 +2295,19 @@ DROP TABLE chargingstate_bak";
                                     break;
                                 case "sentry_mode_off":
                                     WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    break;
+                                case "sentry_mode_on_off":
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if (var == "1" || var == "true" || var == "on")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                        }
+                                    }
                                     break;
                                 case "sentry_mode_toggle":
                                     if (car.webhelper.is_sentry_mode)
@@ -2311,10 +2341,9 @@ DROP TABLE chargingstate_bak";
                                     WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
                                     break;
                                 case "charge_start_stop":
-                                    string var = string.Concat(request.QueryString.GetValues(0));
                                     if (request.QueryString.Count == 1)
                                     {
-                                        if(var == "1" || var == "true")
+                                        if(var == "1" || var == "true" || var == "on")
                                         {
                                             WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
                                         }

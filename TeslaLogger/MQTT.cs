@@ -114,25 +114,29 @@ namespace TeslaLogger
                 if (client.IsConnected)
                 {
                     Logfile.Log("MQTT: Connected!");
+                    foreach (string vin in allCars)
+                    {
+
+                        client.Subscribe(new[] {
+                        $"{topic}/command/{vin}/+"
+                        },
+                            new[] {
+                            MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
+                            });
+                    }
+
+                    client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
+                    new Thread(() => { MQTTConnectionHandler(client); }).Start();
+
                 }
                 else
                 {
                     Logfile.Log("MQTT: Connection failed!");
                 }
 
-                foreach (string vin in allCars)
-                {
+                
 
-                    client.Subscribe(new[] {
-                        $"{topic}/command/{vin}/+"
-                    },
-                        new[] {
-                            MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE
-                        });
-                }
 
-                client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-                new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
                 if (discoveryEnable)
                 {
@@ -243,6 +247,7 @@ namespace TeslaLogger
 
                 //Example: "teslalogger/command/LRW123456/set_charging_amps", raw value "13"
                 string commandRegex = topic + @"/command/(.{17})/(.+)";
+                Logfile.Log("MQTT: Client_MqttMsgPublishReceived");
 
                 Match m = Regex.Match(e.Topic, commandRegex);
                 if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -409,7 +414,7 @@ namespace TeslaLogger
         {
 
             int carId = Car.GetCarIDFromVIN(vin);
-            string model = Car.GetCarByID(carId).CarType;
+            string model = "Model " + vin[3]; //Car.GetCarByID(carId).CarType;
             string name = Car.GetCarByID(carId).DisplayName;
             string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
             string type = "sensor";
@@ -425,7 +430,7 @@ namespace TeslaLogger
 
                     entitycontainer.TryGetValue("pl_on", out string entityTextOn);
                     entitycontainer.TryGetValue("pl_off", out string entityTextOff);
-                    entitycontainer.TryGetValue("control_topic", out string entityControlTopic);
+                    entitycontainer.TryGetValue("cmd_topic", out string entityControlTopic);
                     entitycontainer.TryGetValue("unit", out string entityUnit);
                     entitycontainer.TryGetValue("class", out string entityClass);
 
@@ -436,11 +441,11 @@ namespace TeslaLogger
                             name = entityName,
                             uniq_id = vin + "_" + entity,
                             stat_t = $"{topic}/car/{vin}/{entity}",
-                            unit_of_meas = entityUnit,
-                            dev_cla = entityClass,
+                    //        unit_of_meas = entityUnit,
+                    //        dev_cla = entityClass,
                             pl_on = entityTextOn,
                             pl_off = entityTextOff,
-                            cmd_t = $"{topic}/control/{vin}/{entityControlTopic}",
+                            cmd_t = $"{topic}/command/{vin}/{entityControlTopic}",
                             dev = new
                             {
                                 ids = vin,
@@ -458,8 +463,8 @@ namespace TeslaLogger
                             name = entityName,
                             uniq_id = vin + "_" + entity,
                             stat_t = $"{topic}/car/{vin}/{entity}",
-                            unit_of_meas = entityUnit,
-                            dev_cla = entityClass,
+                    //        unit_of_meas = entityUnit,
+                    //        dev_cla = entityClass,
                             pl_on = entityTextOn,
                             pl_off = entityTextOff,
                             dev = new
@@ -477,9 +482,12 @@ namespace TeslaLogger
                 }
                 else if (entityType == "number")
                 {
-                    entitycontainer.TryGetValue("control_topic", out string entityControlTopic);
+                    entitycontainer.TryGetValue("cmd_topic", out string entityControlTopic);
                     entitycontainer.TryGetValue("unit", out string entityUnit);
                     entitycontainer.TryGetValue("class", out string entityClass);
+                    entitycontainer.TryGetValue("min", out string entityMin);
+                    entitycontainer.TryGetValue("max", out string entityMax);
+                    entitycontainer.TryGetValue("step", out string entityStep);
                     if (entityControlTopic != null)
                     {
                         entityConfig = JsonConvert.SerializeObject(new
@@ -489,7 +497,10 @@ namespace TeslaLogger
                             stat_t = $"{topic}/car/{vin}/{entity}",
                             unit_of_meas = entityUnit,
                             dev_cla = entityClass,
-                            cmd_t = $"{topic}/control/{vin}/{entityControlTopic}",
+                            min = entityMin,
+                            max = entityMax,
+                            step = entityStep,
+                            cmd_t = $"{topic}/command/{vin}/{entityControlTopic}",
                             dev = new
                             {
                                 ids = vin,
@@ -498,7 +509,7 @@ namespace TeslaLogger
                                 name = name,
                                 sw = sw
                             }
-                        });
+                        }) ;
                     }
                     else
                     {
@@ -537,7 +548,7 @@ namespace TeslaLogger
                             sw = sw
                         }
                     });
-                    type = "switch";
+                    type = "sensor";
                         
                 }
                 else
@@ -567,7 +578,7 @@ namespace TeslaLogger
                 client.Publish($"{discoverytopic}/{type}/{vin}/{entity}/config", Encoding.UTF8.GetBytes(entityConfig ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
-            Tools.DebugLog("MQTT: AutoDiscovery: " + entity);
+            Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: " + entity);
             }
 
 
@@ -584,7 +595,7 @@ namespace TeslaLogger
             client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker ?? "NULL"),
                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
             
-            Tools.DebugLog("MQTT: AutoDiscovery: device_tracker");
+            Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: device_tracker");
 
         }
 
