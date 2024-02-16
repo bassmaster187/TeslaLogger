@@ -19,7 +19,7 @@ namespace TeslaLogger
     {
         private static MQTT _Mqtt;
 
-        private string clientid = "TeslaLoggerMqttClient";
+        private string clientid;
         private string host = "localhost";
         private int port = 1883;
         private string topic = "teslalogger";
@@ -31,6 +31,7 @@ namespace TeslaLogger
         private string password;
         private static int httpport = 5000;
         private static int heartbeatCounter;
+        private static bool connecting;
 
         MqttClient client;
 
@@ -93,7 +94,7 @@ namespace TeslaLogger
                     }
                     if (r["mqtt_topic"] > 0)
                     {
-                        discoverytopic = r["mqtt_topic"];
+                        discoverytopic = r["mqtt_discoverytopic"];
                     }
                     if (r["mqtt_clientid"] > 0)
                     {
@@ -168,6 +169,7 @@ namespace TeslaLogger
                     {
                         client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                        Tools.DebugLog("MQTT: hearbeat!");
                         heartbeatCounter = 0;
                     }
                     heartbeatCounter++;
@@ -183,7 +185,17 @@ namespace TeslaLogger
 
                         using (WebClient wc = new WebClient())
                         {
-                            temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
+                            try
+                            {
+                                temp = wc.DownloadString($"http://localhost:{httpport}/currentjson/" + carId);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
+                                Tools.DebugLog("MQTT: CurrentJson Exception", ex);
+                                ex.ToExceptionless().FirstCarUserID().Submit();
+                            }
+                            
                         }
 
                         if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
@@ -214,7 +226,8 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: Exeption: " + ex.Message);
+                Logfile.Log("MQTT: Work Exeption: " + ex.Message);
+                Tools.DebugLog("MQTT: Work Exception", ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(60000);
 
@@ -246,14 +259,15 @@ namespace TeslaLogger
                     catch (Exception ex)
                     {
                         Logfile.Log("MQTT: Subcribe exeption: " + ex.Message);
-                        ex.ToExceptionless().FirstCarUserID().Submit();
+                        Tools.DebugLog("MQTT: PublishReceived Exception", ex);
                         System.Threading.Thread.Sleep(20000);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: Exeption: " + ex.ToString());
+                Logfile.Log("MQTT: PublishReceived Exeption: " + ex.ToString());
+                Tools.DebugLog("MQTT: PublishReceived Exception", ex);
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
@@ -262,36 +276,60 @@ namespace TeslaLogger
         {
             try
             {
-                if (client != null && !client.IsConnected)
+                if (client != null)
                 {
-
-                    if (user != null && password != null)
+                    if (client.IsConnected)
                     {
-                        Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
-                        client.Connect(clientid, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                        if (connecting) connecting = false;
+                        return true;
                     }
                     else
                     {
-                        Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
-                        client.Connect(clientid, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                        if (!connecting)
+                        {
+                            string newClientId;
+                            if(clientid != null)
+                            {
+                                newClientId = clientid;
+                            }
+                            else
+                            {
+                                newClientId = Guid.NewGuid().ToString();
+                            }
+                            if (user != null && password != null)
+                            {
+                                Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
+                                client.Connect(newClientId, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                            }
+                            else
+                            {
+                                Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
+                                client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
+                            }
+                            connecting = true;
+                            Tools.DebugLog("MQTT: not connected, connecting = true");
+                            return false;
+                            
+                        }
+                        return false;
                     }
-                    return false;
                 }
-                else
+                else 
                 {
-                    return true;
+                    Logfile.Log("MQTT: ConnectionCheck client is null!");
+                    return false;
                 }
             }
             catch (WebException wex)
             {
-                Logfile.Log("MQTT: Exeption: " + wex.Message);
+                Logfile.Log("MQTT: ConnectionCheck WebExeption: " + wex.Message);
                 System.Threading.Thread.Sleep(60000);
 
             }
             catch (Exception ex)
             {
                 System.Threading.Thread.Sleep(30000);
-                Logfile.Log("MQTT: Exeption: " + ex.ToString());
+                Logfile.Log("MQTT: ConnectionCheck Exeption: " + ex.ToString());
             }
             return false;
         }
@@ -308,14 +346,14 @@ namespace TeslaLogger
                 }
                 catch (WebException wex)
                 {
-                    Logfile.Log("MQTT: Exeption: " + wex.Message);
+                    Logfile.Log("MQTT: MQTTConnectionHandler WebExeption: " + wex.Message);
                     System.Threading.Thread.Sleep(60000);
 
                 }
                 catch (Exception ex)
                 {
                     System.Threading.Thread.Sleep(30000);
-                    Logfile.Log("MQTT: Exeption: " + ex.ToString());
+                    Logfile.Log("MQTT: MQTTConnectionHandler Exeption: " + ex.ToString());
                 }
             }
         }
@@ -334,7 +372,7 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("GetAllCars: " + ex.Message);
+                Logfile.Log("MQTT: GetAllCars: " + ex.Message);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(20000);
             }
@@ -358,13 +396,10 @@ namespace TeslaLogger
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: Exception: " + ex.Message);
+                Logfile.Log("MQTT: HashSet Exception: " + ex.Message);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(20000);
             }
-
-//            if (h.Count == 0)
-//                h.Add(1);
 
             return h;
 
@@ -377,51 +412,164 @@ namespace TeslaLogger
             string model = Car.GetCarByID(carId).CarType;
             string name = Car.GetCarByID(carId).DisplayName;
             string sw = Car.GetCarByID(carId).CurrentJSON.current_car_version;
-/*
-            foreach(var entity in MQTTAutoDiscovery.autoDiscovery)
+            string type = "sensor";
+
+            foreach (string entity in MQTTAutoDiscovery.autoDiscovery.Keys)
             {
-                Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity.Key];
+                string entityConfig;
+                Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity];
                 entitycontainer.TryGetValue("name", out string entityName);
-                entitycontainer.TryGetValue("unit", out string entityUnit);
-                entitycontainer.TryGetValue("class", out string entityClass);
-//                entitycontainer.TryGetValue("class", out string entityIcon);
-
-            
-
-
-            foreach (KeyValuePair<string, string> entitycontainer in MQTTAutoDiscovery.autoDiscovery["bla"])
-            {
-                
-            }
-*/
-                //for each entity one config JSON
-                string entity = "battery_level";
-                string entityName = "Battery Level";
-                string entityUnit = "%";
-                string entityClass = "battery";
-//                string entityIcon = "mdi:battery-50";
-
-
-                string entityConfig = JsonConvert.SerializeObject(new
+                entitycontainer.TryGetValue("type", out string entityType);
+                if (entityType == "onoff")
                 {
-                    name = entityName,
-                    unique_id = vin + "_" + "battery_level",
-                    stat_t = $"{topic}/car/{vin}/{entity}",
-                    unit_of_measurement = entityUnit,
-                    device_class = entityClass,
-                    dev = new {
-                        ids = vin,
-                        mf = "Tesla",
-                        mdl = model,
-                        name = name,
-                        sw = sw
-                        }
-                });
 
-                client.Publish($"{discoverytopic}/sensor/{vin}/config", Encoding.UTF8.GetBytes(entityConfig),
+                    entitycontainer.TryGetValue("pl_on", out string entityTextOn);
+                    entitycontainer.TryGetValue("pl_off", out string entityTextOff);
+                    entitycontainer.TryGetValue("control_topic", out string entityControlTopic);
+                    entitycontainer.TryGetValue("unit", out string entityUnit);
+                    entitycontainer.TryGetValue("class", out string entityClass);
+
+                    if (entityControlTopic != null)
+                    {
+                        entityConfig = JsonConvert.SerializeObject(new
+                        {
+                            name = entityName,
+                            uniq_id = vin + "_" + entity,
+                            stat_t = $"{topic}/car/{vin}/{entity}",
+                            unit_of_meas = entityUnit,
+                            dev_cla = entityClass,
+                            pl_on = entityTextOn,
+                            pl_off = entityTextOff,
+                            cmd_t = $"{topic}/control/{vin}/{entityControlTopic}",
+                            dev = new
+                            {
+                                ids = vin,
+                                mf = "Tesla",
+                                mdl = model,
+                                name = name,
+                                sw = sw
+                            }
+                        });
+                    }
+                    else
+                    {
+                        entityConfig = JsonConvert.SerializeObject(new
+                        {
+                            name = entityName,
+                            uniq_id = vin + "_" + entity,
+                            stat_t = $"{topic}/car/{vin}/{entity}",
+                            unit_of_meas = entityUnit,
+                            dev_cla = entityClass,
+                            pl_on = entityTextOn,
+                            pl_off = entityTextOff,
+                            dev = new
+                            {
+                                ids = vin,
+                                mf = "Tesla",
+                                mdl = model,
+                                name = name,
+                                sw = sw
+                            }
+                        });
+                    }
+                    type = "switch";
+
+                }
+                else if (entityType == "number")
+                {
+                    entitycontainer.TryGetValue("control_topic", out string entityControlTopic);
+                    entitycontainer.TryGetValue("unit", out string entityUnit);
+                    entitycontainer.TryGetValue("class", out string entityClass);
+                    if (entityControlTopic != null)
+                    {
+                        entityConfig = JsonConvert.SerializeObject(new
+                        {
+                            name = entityName,
+                            uniq_id = vin + "_" + entity,
+                            stat_t = $"{topic}/car/{vin}/{entity}",
+                            unit_of_meas = entityUnit,
+                            dev_cla = entityClass,
+                            cmd_t = $"{topic}/control/{vin}/{entityControlTopic}",
+                            dev = new
+                            {
+                                ids = vin,
+                                mf = "Tesla",
+                                mdl = model,
+                                name = name,
+                                sw = sw
+                            }
+                        });
+                    }
+                    else
+                    {
+                        entityConfig = JsonConvert.SerializeObject(new
+                        {
+                            name = entityName,
+                            uniq_id = vin + "_" + entity,
+                            stat_t = $"{topic}/car/{vin}/{entity}",
+                            unit_of_meas = entityUnit,
+                            dev_cla = entityClass,
+                            dev = new
+                            {
+                                ids = vin,
+                                mf = "Tesla",
+                                mdl = model,
+                                name = name,
+                                sw = sw
+                            }
+                        });
+                    }
+                    type = "number";
+                }
+                else if(entityType == "bool")
+                {
+                    entityConfig = JsonConvert.SerializeObject(new
+                    {
+                        name = entityName,
+                        uniq_id = vin + "_" + entity,
+                        stat_t = $"{topic}/car/{vin}/{entity}",
+                        dev = new
+                        {
+                            ids = vin,
+                            mf = "Tesla",
+                            mdl = model,
+                            name = name,
+                            sw = sw
+                        }
+                    });
+                    type = "switch";
+                        
+                }
+                else
+                {
+
+                    entitycontainer.TryGetValue("unit", out string entityUnit);
+                    entitycontainer.TryGetValue("class", out string entityClass);
+                    entityConfig = JsonConvert.SerializeObject(new
+                    {
+                        name = entityName,
+                        uniq_id = vin + "_" + entity,
+                        stat_t = $"{topic}/car/{vin}/{entity}",
+                        unit_of_meas = entityUnit,
+                        dev_cla = entityClass,
+                        dev = new
+                        {
+                            ids = vin,
+                            mf = "Tesla",
+                            mdl = model,
+                            name = name,
+                            sw = sw
+                        }
+                    }); 
+                    type = "sensor";
+                }
+
+                client.Publish($"{discoverytopic}/{type}/{vin}/{entity}/config", Encoding.UTF8.GetBytes(entityConfig ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
-//            }
+            Tools.DebugLog("MQTT: AutoDiscovery: " + entity);
+            }
+
 
             //speical case: GPS Tracker
             string dicoveryGPSTracker = JsonConvert.SerializeObject(new
@@ -433,19 +581,32 @@ namespace TeslaLogger
                 payload_not_home = "fasle"
             }) ;
 
-            client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker),
+            client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker ?? "NULL"),
                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+            
+            Tools.DebugLog("MQTT: AutoDiscovery: device_tracker");
 
         }
 
         internal void PublichGPSTracker(string vin, double lat, double lon)
         {
-            string gpsTrackerTopic = $"{topic}/car/{vin}/gps_tracker";
+            try
+            {
 
-            string json = JsonConvert.SerializeObject(new { latitude = lat , longitude = lon , gps_accuracy = 1.0 });
+                string gpsTrackerTopic = $"{topic}/car/{vin}/gps_tracker";
 
-            client.Publish(gpsTrackerTopic, Encoding.UTF8.GetBytes(json ?? "NULL"),
+                string json = JsonConvert.SerializeObject(new { latitude = lat, longitude = lon, gps_accuracy = 1.0 });
+
+                client.Publish(gpsTrackerTopic, Encoding.UTF8.GetBytes(json ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log("MQTT: PublichGPSTracker Exeption: " + ex.Message);
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                System.Threading.Thread.Sleep(60000);
+
+            }
 
         }
 
@@ -459,14 +620,12 @@ namespace TeslaLogger
                 {
                     client.Publish(carTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-//                    client.Publish(jsonTopic + "/" + name, Encoding.UTF8.GetBytes(newvalue.ToString() ?? "NULL"),
-//                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 }
 
             }
             catch (Exception ex)
             {
-                Logfile.Log("MQTT: Exeption: " + ex.Message);
+                Logfile.Log("MQTT: PublishMqttValue Exeption: " + ex.Message);
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 System.Threading.Thread.Sleep(60000);
 

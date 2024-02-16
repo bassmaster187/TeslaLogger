@@ -26,7 +26,7 @@ namespace TeslaLogger
                 {
                     ex.ToExceptionless().FirstCarUserID().Submit();
 
-                    Logfile.Log(ex.ToString());
+                    Logfile.Log("MQTT: StartMQTTClient Exeption" + ex.ToString());
                 }
             }
             
