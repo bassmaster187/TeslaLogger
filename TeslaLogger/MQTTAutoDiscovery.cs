@@ -64,8 +64,6 @@ namespace TeslaLogger
             autoDiscovery["charger_phases"] = new Dictionary<string, string>();
             autoDiscovery["charger_phases"]["type"] = "sensor";
             autoDiscovery["charger_phases"]["name"] = "Charge phases";
-            autoDiscovery["charger_phases"]["unit"] = "";
-            autoDiscovery["charger_phases"]["class"] = "None";
 
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
@@ -76,68 +74,48 @@ namespace TeslaLogger
             autoDiscovery["time_to_full_charge"] = new Dictionary<string, string>();
             autoDiscovery["time_to_full_charge"]["type"] = "sensor";
             autoDiscovery["time_to_full_charge"]["name"] = "Time to full charge";
-            autoDiscovery["time_to_full_charge"]["unit"] = "";
             autoDiscovery["time_to_full_charge"]["class"] = "duration";
 
             autoDiscovery["car_version"] = new Dictionary<string, string>();
             autoDiscovery["car_version"]["type"] = "sensor";
             autoDiscovery["car_version"]["name"] = "Firmware version";
-            autoDiscovery["car_version"]["unit"] = "";
-            autoDiscovery["car_version"]["class"] = "None";
 
             autoDiscovery["software_update_version"] = new Dictionary<string, string>();
             autoDiscovery["software_update_version"]["type"] = "sensor";
             autoDiscovery["software_update_version"]["name"] = "Firmware update version";
-            autoDiscovery["software_update_version"]["unit"] = "";
-            autoDiscovery["software_update_version"]["class"] = "None";
 
             autoDiscovery["software_update_status"] = new Dictionary<string, string>();
             autoDiscovery["software_update_status"]["type"] = "sensor";
             autoDiscovery["software_update_status"]["name"] = "Firmware update status";
-            autoDiscovery["software_update_status"]["unit"] = "";
-            autoDiscovery["software_update_status"]["class"] = "None";            
 
             autoDiscovery["display_name"] = new Dictionary<string, string>();
             autoDiscovery["display_name"]["type"] = "sensor";
             autoDiscovery["display_name"]["name"] = "Car name";
-            autoDiscovery["display_name"]["unit"] = "";
-            autoDiscovery["display_name"]["class"] = "None";
 
             autoDiscovery["latitude"] = new Dictionary<string, string>();
             autoDiscovery["latitude"]["type"] = "sensor";
             autoDiscovery["latitude"]["name"] = "Latitude";
-            autoDiscovery["latitude"]["unit"] = "";
-            autoDiscovery["latitude"]["class"] = "None";
 
             autoDiscovery["longitude"] = new Dictionary<string, string>();
             autoDiscovery["longitude"]["type"] = "sensor";
             autoDiscovery["longitude"]["name"] = "Longitude";
-            autoDiscovery["longitude"]["unit"] = "";
-            autoDiscovery["longitude"]["class"] = "None";
 
             autoDiscovery["heading"] = new Dictionary<string, string>();
             autoDiscovery["heading"]["type"] = "sensor";
             autoDiscovery["heading"]["name"] = "Heading";
             autoDiscovery["heading"]["unit"] = "°";
-            autoDiscovery["heading"]["class"] = "None";
 
             autoDiscovery["country_code"] = new Dictionary<string, string>();
             autoDiscovery["country_code"]["type"] = "sensor";
             autoDiscovery["country_code"]["name"] = "Country code";
-            autoDiscovery["country_code"]["unit"] = "";
-            autoDiscovery["country_code"]["class"] = "None";
 
             autoDiscovery["state"] = new Dictionary<string, string>();
             autoDiscovery["state"]["type"] = "sensor";
             autoDiscovery["state"]["name"] = "State";
-            autoDiscovery["state"]["unit"] = "";
-            autoDiscovery["state"]["class"] = "None";
 
             autoDiscovery["TLGeofence"] = new Dictionary<string, string>();
             autoDiscovery["TLGeofence"]["type"] = "sensor";
             autoDiscovery["TLGeofence"]["name"] = "Location";
-            autoDiscovery["TLGeofence"]["unit"] = "";
-            autoDiscovery["TLGeofence"]["class"] = "None";
 
             autoDiscovery["odometer"] = new Dictionary<string, string>();
             autoDiscovery["odometer"]["type"] = "sensor";
@@ -172,7 +150,6 @@ namespace TeslaLogger
             autoDiscovery["ts"] = new Dictionary<string, string>();
             autoDiscovery["ts"]["type"] = "sensor";
             autoDiscovery["ts"]["name"] = "Time stamp";
-            autoDiscovery["ts"]["unit"] = "";
             autoDiscovery["ts"]["class"] = "timestamp";
 
             autoDiscovery["speed"] = new Dictionary<string, string>();
@@ -182,98 +159,93 @@ namespace TeslaLogger
             autoDiscovery["speed"]["class"] = "speed";
 
             autoDiscovery["sleeping"] = new Dictionary<string, string>();
-            autoDiscovery["sleeping"]["type"] = "bool";
+            autoDiscovery["sleeping"]["type"] = "sensor";
             autoDiscovery["sleeping"]["name"] = "Sleeping";
 
             autoDiscovery["online"] = new Dictionary<string, string>();
-            autoDiscovery["online"]["type"] = "bool";
+            autoDiscovery["online"]["type"] = "sensor";
             autoDiscovery["online"]["name"] = "Online";
 
             autoDiscovery["driving"] = new Dictionary<string, string>();
-            autoDiscovery["driving"]["type"] = "bool";
+            autoDiscovery["driving"]["type"] = "sensor";
             autoDiscovery["driving"]["name"] = "Driving";
 
             autoDiscovery["falling_asleep"] = new Dictionary<string, string>();
-            autoDiscovery["falling_asleep"]["type"] = "bool";
+            autoDiscovery["falling_asleep"]["type"] = "sensor";
             autoDiscovery["falling_asleep"]["name"] = "Falling Asleep";
 
             autoDiscovery["plugged_in"] = new Dictionary<string, string>();
-            autoDiscovery["plugged_in"]["type"] = "bool";
+            autoDiscovery["plugged_in"]["type"] = "sensor";
             autoDiscovery["plugged_in"]["name"] = "Plugged in";
 
             autoDiscovery["battery_heater"] = new Dictionary<string, string>();
-            autoDiscovery["battery_heater"]["type"] = "bool";
+            autoDiscovery["battery_heater"]["type"] = "sensor";
             autoDiscovery["battery_heater"]["name"] = "Battery heater";
 
             autoDiscovery["locked"] = new Dictionary<string, string>();
-            autoDiscovery["locked"]["type"] = "bool";
+            autoDiscovery["locked"]["type"] = "sensor";
             autoDiscovery["locked"]["name"] = "Locked";
 
             autoDiscovery["open_windows"] = new Dictionary<string, string>();
-            autoDiscovery["open_windows"]["type"] = "bool";
+            autoDiscovery["open_windows"]["type"] = "sensor";
             autoDiscovery["open_windows"]["name"] = "Windows opened";
 
             autoDiscovery["open_doors"] = new Dictionary<string, string>();
-            autoDiscovery["open_doors"]["type"] = "bool";
+            autoDiscovery["open_doors"]["type"] = "sensor";
             autoDiscovery["open_doors"]["name"] = "Doors opened";
 
             autoDiscovery["frunk"] = new Dictionary<string, string>();
-            autoDiscovery["frunk"]["type"] = "bool";
+            autoDiscovery["frunk"]["type"] = "sensor";
             autoDiscovery["frunk"]["name"] = "Frunk opened";
 
             autoDiscovery["trunk"] = new Dictionary<string, string>();
-            autoDiscovery["trunk"]["type"] = "bool";
+            autoDiscovery["trunk"]["type"] = "sensor";
             autoDiscovery["trunk"]["name"] = "Trunk opened";
 
             autoDiscovery["TLGeofenceIsHome"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsHome"]["type"] = "bool";
+            autoDiscovery["TLGeofenceIsHome"]["type"] = "sensor";
             autoDiscovery["TLGeofenceIsHome"]["name"] = "Is Home";
 
             autoDiscovery["TLGeofenceIsWork"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsWork"]["type"] = "bool";
+            autoDiscovery["TLGeofenceIsWork"]["type"] = "sensor";
             autoDiscovery["TLGeofenceIsWork"]["name"] = "Is Work";
 
             autoDiscovery["TLGeofenceIsCharger"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsCharger"]["type"] = "bool";
+            autoDiscovery["TLGeofenceIsCharger"]["type"] = "sensor";
             autoDiscovery["TLGeofenceIsCharger"]["name"] = "Is Charger";
 
             autoDiscovery["charge_port_door_open"] = new Dictionary<string, string>();
-            autoDiscovery["charge_port_door_open"]["type"] = "bool";
+            autoDiscovery["charge_port_door_open"]["type"] = "sensor";
             autoDiscovery["charge_port_door_open"]["name"] = "Charge port opened";
 
             autoDiscovery["fast_charger_present"] = new Dictionary<string, string>();
-            autoDiscovery["fast_charger_present"]["type"] = "bool";
+            autoDiscovery["fast_charger_present"]["type"] = "sensor";
             autoDiscovery["fast_charger_present"]["name"] = "Fast charger";
 
             autoDiscovery["fast_charger_brand"] = new Dictionary<string, string>();
             autoDiscovery["fast_charger_brand"]["type"] = "sensor";
             autoDiscovery["fast_charger_brand"]["name"] = "Fastcharger brand";
-            autoDiscovery["fast_charger_brand"]["unit"] = "";
-            autoDiscovery["fast_charger_brand"]["class"] = "None";
 
             autoDiscovery["sentry_mode"] = new Dictionary<string, string>();
-            autoDiscovery["sentry_mode"]["type"] = "onoff";
+            autoDiscovery["sentry_mode"]["type"] = "switch";
             autoDiscovery["sentry_mode"]["name"] = "Sentry mode";
             autoDiscovery["sentry_mode"]["pl_on"] = "true";
             autoDiscovery["sentry_mode"]["pl_off"] = "false";
             autoDiscovery["sentry_mode"]["cmd_topic"] = "sentry_mode_on_off";
-            autoDiscovery["sentry_mode"]["class"] = "None";
 
             autoDiscovery["is_preconditioning"] = new Dictionary<string, string>();
-            autoDiscovery["is_preconditioning"]["type"] = "onoff";
+            autoDiscovery["is_preconditioning"]["type"] = "switch";
             autoDiscovery["is_preconditioning"]["name"] = "Preconditioning";
             autoDiscovery["is_preconditioning"]["pl_on"] = "true";
             autoDiscovery["is_preconditioning"]["pl_off"] = "false";
             autoDiscovery["is_preconditioning"]["cmd_topic"] = "auto_conditioning_start_stop";
-            autoDiscovery["is_preconditioning"]["class"] = "None";
 
             autoDiscovery["charging"] = new Dictionary<string, string>();
-            autoDiscovery["charging"]["type"] = "onoff";
+            autoDiscovery["charging"]["type"] = "switch";
             autoDiscovery["charging"]["name"] = "Charging";
             autoDiscovery["charging"]["pl_on"] = "true";
             autoDiscovery["charging"]["pl_off"] = "false";
             autoDiscovery["charging"]["cmd_topic"] = "charge_start_stop";
-            autoDiscovery["charging"]["class"] = "None";
 
             autoDiscovery["charge_limit_soc"] = new Dictionary<string, string>();
             autoDiscovery["charge_limit_soc"]["type"] = "number";
@@ -296,8 +268,6 @@ namespace TeslaLogger
             autoDiscovery["trip_start"] = new Dictionary<string, string>();
             autoDiscovery["trip_start"]["type"] = "sensor";
             autoDiscovery["trip_start"]["name"] = "Trip start";
-            autoDiscovery["trip_start"]["unit"] = "";
-            autoDiscovery["trip_start"]["class"] = "None";
 
             autoDiscovery["trip_duration_sec"] = new Dictionary<string, string>();
             autoDiscovery["trip_duration_sec"]["type"] = "sensor";
@@ -308,7 +278,6 @@ namespace TeslaLogger
             autoDiscovery["trip_start_dt"] = new Dictionary<string, string>();
             autoDiscovery["trip_start_dt"]["type"] = "sensor";
             autoDiscovery["trip_start_dt"]["name"] = "Trip timestamp";
-            autoDiscovery["trip_start_dt"]["unit"] = "s";
             autoDiscovery["trip_start_dt"]["class"] = "timestamp";
 
             autoDiscovery["trip_max_speed"] = new Dictionary<string, string>();
@@ -344,8 +313,6 @@ namespace TeslaLogger
             autoDiscovery["active_route_destination"] = new Dictionary<string, string>();
             autoDiscovery["active_route_destination"]["type"] = "sensor";
             autoDiscovery["active_route_destination"]["name"] = "Route destination";
-            autoDiscovery["active_route_destination"]["unit"] = "";
-            autoDiscovery["active_route_destination"]["class"] = "None";
 
             autoDiscovery["active_route_energy_at_arrival"] = new Dictionary<string, string>();
             autoDiscovery["active_route_energy_at_arrival"]["type"] = "sensor";
@@ -368,14 +335,10 @@ namespace TeslaLogger
             autoDiscovery["active_route_latitude"] = new Dictionary<string, string>();
             autoDiscovery["active_route_latitude"]["type"] = "sensor";
             autoDiscovery["active_route_latitude"]["name"] = "Route destination latitude";
-            autoDiscovery["active_route_latitude"]["unit"] = "";
-            autoDiscovery["active_route_latitude"]["class"] = "None";
 
             autoDiscovery["active_route_longitude"] = new Dictionary<string, string>();
             autoDiscovery["active_route_longitude"]["type"] = "sensor";
             autoDiscovery["active_route_longitude"]["name"] = "Route destination longitude";
-            autoDiscovery["active_route_longitude"]["unit"] = "";
-            autoDiscovery["active_route_longitude"]["class"] = "None";
         }
 
     }

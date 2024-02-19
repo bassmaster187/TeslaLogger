@@ -47,8 +47,7 @@ namespace TeslaLogger
                 if (Tools.IsDocker())
                     DBConnectionstring = "Server=database;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
                 else
-                    DBConnectionstring = "Server=192.168.178.105;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
-//                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
+                    DBConnectionstring = "Server=127.0.0.1;Database=teslalogger;Uid=root;Password=teslalogger;CharSet=utf8mb4;";
             }
             else
             {
