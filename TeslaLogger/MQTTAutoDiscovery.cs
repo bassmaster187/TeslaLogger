@@ -79,6 +79,12 @@ namespace TeslaLogger
             autoDiscovery["time_to_full_charge"]["unit"] = "";
             autoDiscovery["time_to_full_charge"]["class"] = "duration";
 
+            autoDiscovery["car_version"] = new Dictionary<string, string>();
+            autoDiscovery["car_version"]["type"] = "sensor";
+            autoDiscovery["car_version"]["name"] = "Firmware version";
+            autoDiscovery["car_version"]["unit"] = "";
+            autoDiscovery["car_version"]["class"] = "None";
+
             autoDiscovery["odometer"] = new Dictionary<string, string>();
             autoDiscovery["odometer"]["type"] = "sensor";
             autoDiscovery["odometer"]["name"] = "Odometer";
@@ -144,6 +150,36 @@ namespace TeslaLogger
             autoDiscovery["locked"] = new Dictionary<string, string>();
             autoDiscovery["locked"]["type"] = "bool";
             autoDiscovery["locked"]["name"] = "Locked";
+
+            autoDiscovery["open_windows"] = new Dictionary<string, string>();
+            autoDiscovery["open_windows"]["type"] = "bool";
+            autoDiscovery["open_windows"]["name"] = "Windows opened";
+
+            autoDiscovery["open_doors"] = new Dictionary<string, string>();
+            autoDiscovery["open_doors"]["type"] = "bool";
+            autoDiscovery["open_doors"]["name"] = "Doors opened";
+
+            autoDiscovery["frunk"] = new Dictionary<string, string>();
+            autoDiscovery["frunk"]["type"] = "bool";
+            autoDiscovery["frunk"]["name"] = "Frunk opened";
+
+            autoDiscovery["trunk"] = new Dictionary<string, string>();
+            autoDiscovery["trunk"]["type"] = "bool";
+            autoDiscovery["trunk"]["name"] = "Trunk opened";
+
+            autoDiscovery["charge_port_door_open"] = new Dictionary<string, string>();
+            autoDiscovery["charge_port_door_open"]["type"] = "bool";
+            autoDiscovery["charge_port_door_open"]["name"] = "Charge port opened";
+
+            autoDiscovery["fast_charger_present"] = new Dictionary<string, string>();
+            autoDiscovery["fast_charger_present"]["type"] = "bool";
+            autoDiscovery["fast_charger_present"]["name"] = "Fast charger";
+
+            autoDiscovery["fast_charger_brand"] = new Dictionary<string, string>();
+            autoDiscovery["fast_charger_brand"]["type"] = "sensor";
+            autoDiscovery["fast_charger_brand"]["name"] = "Fastcharger brand";
+            autoDiscovery["fast_charger_brand"]["unit"] = "";
+            autoDiscovery["fast_charger_brand"]["class"] = "None";
 
             autoDiscovery["sentry_mode"] = new Dictionary<string, string>();
             autoDiscovery["sentry_mode"]["type"] = "onoff";

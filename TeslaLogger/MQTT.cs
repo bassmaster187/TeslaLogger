@@ -128,25 +128,22 @@ namespace TeslaLogger
                     client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                     new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
+                    if (discoveryEnable)
+                    {
+                        foreach(string vin in allCars)
+                        {
+                            PublishDiscovery(vin);
+                        }
+                    }
+
+                    
+
                 }
                 else
                 {
                     Logfile.Log("MQTT: Connection failed!");
                 }
-
                 
-
-
-
-                if (discoveryEnable)
-                {
-                    foreach(string vin in allCars)
-                    {
-                        PublishDiscovery(vin);
-                    }
-                }
-                
-
                 while (true)
                 {
                     Work();
@@ -154,11 +151,13 @@ namespace TeslaLogger
                     Thread.Sleep(1000);
                 }
 
+
             }
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog("MQTT: Exception", ex);
+                Logfile.Log("MQTT: RunMqtt Exeption: " + ex.Message);
+                Tools.DebugLog("MQTT: RunMqtt Exception", ex);
             }
         }
 
@@ -247,7 +246,7 @@ namespace TeslaLogger
 
                 //Example: "teslalogger/command/LRW123456/set_charging_amps", raw value "13"
                 string commandRegex = topic + @"/command/(.{17})/(.+)";
-                Logfile.Log("MQTT: Client_MqttMsgPublishReceived");
+                Tools.DebugLog("MQTT: Client_MqttMsgPublishReceived");
 
                 Match m = Regex.Match(e.Topic, commandRegex);
                 if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -285,7 +284,12 @@ namespace TeslaLogger
                 {
                     if (client.IsConnected)
                     {
-                        if (connecting) connecting = false;
+                        if (connecting)
+                        {
+                            connecting = false;
+                            Tools.DebugLog("MQTT: connected, connecting = false");
+
+                        }
                         return true;
                     }
                     else
@@ -301,6 +305,8 @@ namespace TeslaLogger
                             {
                                 newClientId = Guid.NewGuid().ToString();
                             }
+                            connecting = true;
+                            Tools.DebugLog("MQTT: not connected, connecting = true");
                             if (user != null && password != null)
                             {
                                 Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
@@ -311,8 +317,7 @@ namespace TeslaLogger
                                 Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
                                 client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                             }
-                            connecting = true;
-                            Tools.DebugLog("MQTT: not connected, connecting = true");
+
                             return false;
                             
                         }
@@ -328,13 +333,15 @@ namespace TeslaLogger
             catch (WebException wex)
             {
                 Logfile.Log("MQTT: ConnectionCheck WebExeption: " + wex.Message);
+                connecting = false;
                 System.Threading.Thread.Sleep(60000);
 
             }
             catch (Exception ex)
             {
-                System.Threading.Thread.Sleep(30000);
                 Logfile.Log("MQTT: ConnectionCheck Exeption: " + ex.ToString());
+                connecting = false;
+                System.Threading.Thread.Sleep(60000);
             }
             return false;
         }
