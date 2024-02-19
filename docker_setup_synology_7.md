@@ -60,3 +60,33 @@ These are the URLs you can use, replace "host" with your own NASs hostname:
 
 - Admin: http://host:8888/admin/
 - Grafana: http://ds:3000/
+
+## Update on Synology with Task Scheduler
+1. Login to your DSM Dashboard
+2. Open `Control Panel` and select `Task Scheduler` on the left
+3. `Create` -> `Scheduled Task` -> `User-defined script`
+4. `General` Tab:
+   - Name: `Update Teslalogger`
+   - User: `root`
+   - Untick `Enabled`
+5. `Schedule` Tab:
+   - Tick `Run on the following date`
+   - Repeat: `Do not repeat`
+6. `Task Settings` Tab:
+   - Tick `Send run details by email`
+   - Email: Your Email
+   - User-defined script:
+     ```
+     cd /volume1/docker/TeslaLogger/
+     docker-compose stop
+     git fetch
+     git reset --hard origin/master
+     git checkout origin/master -- docker-compose.yml
+     git checkout origin/master -- TeslaLogger/GrafanaConfig/datasource.yaml
+     docker-compose build
+     docker-compose up -d
+     chmod 777 TeslaLogger/GrafanaDB
+     ```
+7. Hit `Ok`
+8. Select `Update Teslalogger` task
+9. Hit `Run` or right-click `Run`

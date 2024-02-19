@@ -35,6 +35,7 @@ else
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.4.0/leaflet.js"></script>
+	<script src="static/leaflet/1.4.0/leaflet.rotatedMarker.js"></script>
 	<style>
 		#changelog{height:350px; overflow: auto;}
 	</style>
@@ -337,7 +338,15 @@ else
 			if (marker != null)
 				map.removeLayer(marker)
 
-			marker = L.marker(p);
+			var icon = new L.Icon(
+				{
+					iconUrl: "static/images/arrow.png",
+					iconAnchor:   [10, 10],
+					shadowSize: [0,0]
+				}
+			);
+
+			marker = L.marker(p, {icon : icon, rotationAngle: jsonData["heading"] });
 			marker.addTo(map);
 		});
 	}
