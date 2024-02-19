@@ -432,9 +432,9 @@ namespace TeslaLogger
                 Dictionary<string, string> entitycontainer = MQTTAutoDiscovery.autoDiscovery[entity];
                 entitycontainer.TryGetValue("name", out string entityName);
                 entitycontainer.TryGetValue("type", out string entityType);
+
                 if (entityType == "onoff")
                 {
-
                     entitycontainer.TryGetValue("pl_on", out string entityTextOn);
                     entitycontainer.TryGetValue("pl_off", out string entityTextOff);
                     entitycontainer.TryGetValue("cmd_topic", out string entityControlTopic);
@@ -448,8 +448,6 @@ namespace TeslaLogger
                             name = entityName,
                             uniq_id = vin + "_" + entity,
                             stat_t = $"{topic}/car/{vin}/{entity}",
-                    //        unit_of_meas = entityUnit,
-                    //        dev_cla = entityClass,
                             pl_on = entityTextOn,
                             pl_off = entityTextOff,
                             cmd_t = $"{topic}/command/{vin}/{entityControlTopic}",
@@ -470,8 +468,6 @@ namespace TeslaLogger
                             name = entityName,
                             uniq_id = vin + "_" + entity,
                             stat_t = $"{topic}/car/{vin}/{entity}",
-                    //        unit_of_meas = entityUnit,
-                    //        dev_cla = entityClass,
                             pl_on = entityTextOn,
                             pl_off = entityTextOff,
                             dev = new
@@ -560,7 +556,6 @@ namespace TeslaLogger
                 }
                 else
                 {
-
                     entitycontainer.TryGetValue("unit", out string entityUnit);
                     entitycontainer.TryGetValue("class", out string entityClass);
                     entityConfig = JsonConvert.SerializeObject(new
@@ -587,7 +582,6 @@ namespace TeslaLogger
 
             Tools.DebugLog($"MQTT: AutoDiscovery for {vin}: " + entity);
             }
-
 
             //speical case: GPS Tracker
             string dicoveryGPSTracker = JsonConvert.SerializeObject(new
