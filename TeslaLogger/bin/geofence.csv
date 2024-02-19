@@ -300,7 +300,7 @@ Supercharger-V3 DE-Panketal, 52.620716, 13.541721
 Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
 Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
-Supercharger-V3 DE-Pieding, 47.764000,12.904551, 15
+Supercharger-V3 DE-Piding, 47.764000,12.904551, 27
 Supercharger-V3 DE-Plauen, 50.497406,12.170422
 Supercharger-V3 DE-Plattling,48.7887,12.89745
 Supercharger-V3 DE-Posthausen, 53.057578,9.165257
@@ -1936,6 +1936,7 @@ ARAL DE-Merklingen, 48.516282, 9.759379
 ARAL DE-Montabaur Alleestraße 18, 50.440191, 7.830364, 10
 ARAL DE-Neuenkirchen-Vörden, 52.491559,8.0783, 10
 ARAL DE-Northeim, 51.731118,9.973121
+ARAL DE-Piding, 47.764118,12.904173,5
 ARAL DE-Schwarmstedt Autohof, 52.673543, 9.688409
 ARAL DE-Schwerin, 53.600345, 11.465313
 ARAL DE-Stuhr, 53.020699, 8.687762, 15
@@ -3240,6 +3241,7 @@ ELEN HR-Vižinada, 45.33017,13.75735
 
 EnelX IT-Ramiola, 44.698924,10.090093
 
+EnBW CZ-Karlovy Vary, 50.232775,12.8678
 EnBW DE-Aach, 47.840881, 8.852887
 EnBW DE-Achern Fautenbacher Straße, 48.627599512154, 8.0569213389771
 EnBW DE-Achern Güterhallenstraße, 48.62889, 8.06168
@@ -4382,7 +4384,7 @@ EnBW DE-Pfungstadt Ost, 49.812106,8.579272
 EnBW DE-Pfungstadt West, 49.8124703, 8.5769616
 EnBW DE-Philippsburg Rheinschanzinsel, 49.2526653, 8.4371768
 EnBW DE-Philippsburg Rote-Tor-Str., 49.235269, 8.454226
-EnBW DE-Piding Lattenbergstraße, 47.7642445, 12.9035826
+EnBW DE-Piding Lattenbergstraße, 47.7642445, 12.9035826, 10
 EnBW DE-Pirmasens Zweibrücker Str., 49.21469, 7.59586
 EnBW DE-Plankstadt Am Festplatz, 49.396146505181, 8.5914160193734
 EnBW DE-Plankstadt Friedrichstr., 49.3912, 8.59681
