@@ -21,7 +21,6 @@ namespace UnitTestsTeslalogger
         public void TestGetData()
         {
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             DateTime dateTime = new DateTime(2022, 12, 21, 22, 00, 00);
 
@@ -149,7 +148,6 @@ namespace UnitTestsTeslalogger
         public void TestGetDataDB()
         {
             ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             var dt = DBHelper.GetAllChargingstates();
 

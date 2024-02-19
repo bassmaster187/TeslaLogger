@@ -338,10 +338,6 @@ namespace TeslaLogger
             UpdateTeslalogger.Chmod("backup.sh", 777, false);
             UpdateTeslalogger.Chmod("TeslaLogger.exe", 755, false);
 
-#pragma warning disable CA5364 // Verwenden Sie keine veralteten Sicherheitsprotokolle.
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-#pragma warning restore CA5364 // Verwenden Sie keine veralteten Sicherheitsprotokolle.
-
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);

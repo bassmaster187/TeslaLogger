@@ -10,7 +10,6 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Runtime.Caching;
 using System.Linq;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {

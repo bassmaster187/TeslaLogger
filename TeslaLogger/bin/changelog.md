@@ -9,7 +9,7 @@
 - Geofence: Grouping of all public chargers to impove performance
 
 # Version 1.56.1
-- Update certificates for Mono
+- Update certificates for Monoa
 
 # Version 1.56.0
 - Support new Tesla API

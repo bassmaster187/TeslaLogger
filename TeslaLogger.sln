@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeslaLogger", "TeslaLogger\TeslaLogger.csproj", "{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeslaLogger", "TeslaLogger\TeslaLogger.csproj", "{9932F717-1BEE-4D0F-B5B0-FB8665FFE647}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37F4A1BB-79C0-4358-A773-738FC7CE332A}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,11 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTClient", "MQTTClient\MQ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM", "srtm\src\SRTM\SRTM.csproj", "{AE6A978E-8084-48C7-85DD-2E90FCD82F30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logfile", "Logfile\Logfile.csproj", "{B6462053-A913-47B8-8719-CA08EE5B2E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logfile", "Logfile\Logfile.csproj", "{B6462053-A913-47B8-8719-CA08EE5B2E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsTeslalogger", "UnitTestsTeslalogger\UnitTestsTeslalogger.csproj", "{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsTeslalogger", "UnitTestsTeslalogger\UnitTestsTeslalogger.csproj", "{AE80A9DA-E9B1-4BFD-8D2D-A2EA81B8EADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMMapGenerator", "OSMMapGenerator\OSMMapGenerator.csproj", "{852390A2-450B-43B3-A79A-F6C1DD988AE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSMMapGenerator", "OSMMapGenerator\OSMMapGenerator.csproj", "{852390A2-450B-43B3-A79A-F6C1DD988AE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
