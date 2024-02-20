@@ -193,7 +193,7 @@ namespace TeslaLogger
         {
             try
             {
-                Logfile.Log("FileSystemWatcher");
+                Logfile.Log("FileSystemWatcher: file modified: " + e.FullPath);
 
                 fsw.EnableRaisingEvents = false;
                 
