@@ -69,7 +69,7 @@ namespace TeslaLogger
                     Accept = { new MediaTypeWithQualityHeaderValue("application/json") },
                 }
             };
-            // NET8 client.DefaultRequestHeaders.Headers["User-Agent"].ToString().ParseAdd(UserAgent);
+            // NET8 client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
 
             return client;
         }

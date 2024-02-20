@@ -163,8 +163,7 @@ namespace TeslaLogger
 
             httpclient_teslalogger_de.DefaultRequestHeaders.ConnectionClose = true;
             ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
-            // NET8 httpclient_teslalogger_de.DefaultRequestHeaders.Headers["User-Agent"].ToString().Add(userAgent);
-            // NET8 httpclient_teslalogger_de.DefaultRequestHeaders.Headers["User-Agent"].ToString().Add(new ProductInfoHeaderValue("(" + car.TaskerHash + "; " + Thread.CurrentThread.ManagedThreadId +")"));
+            httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
 
             CheckUseTaskerToken();
         }
@@ -330,7 +329,7 @@ namespace TeslaLogger
 
                     httpClientForAuthentification = new HttpClient(handler);
                     httpClientForAuthentification.Timeout = TimeSpan.FromSeconds(30);
-                    // NET8 httpClientForAuthentification.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.Headers["User-Agent"].ToString());
+                    // NET8 httpClientForAuthentification.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
                     httpClientForAuthentification.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/3.4.4-350/fad4a582e/android/8.1.0");
                     //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
                     //httpClientForAuthentification.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
@@ -559,7 +558,8 @@ namespace TeslaLogger
                     using (HttpClient client = new HttpClient(handler))
                     {
                         client.Timeout = TimeSpan.FromSeconds(300);
-                        // NET8 client.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.Headers["User-Agent"].ToString());
+                        ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                        httpclient_teslalogger_de.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
                         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                         client.DefaultRequestHeaders.Connection.Add("keep-alive");
 
@@ -5473,7 +5473,8 @@ DESC", con))
         {
             HttpClient c = new HttpClient();
             c.Timeout = TimeSpan.FromSeconds(10);
-            // NET8 c.DefaultRequestHeaders.Add("User-Agent", ApplicationSettings.Default.Headers["User-Agent"].ToString());
+            ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue("Teslalogger", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            c.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent.ToString());
             c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             c.DefaultRequestHeaders.Connection.Add("keep-alive");
             c.DefaultRequestHeaders.Add("Authorization", "APIKEY 54ac054f-0412-4747-b788-bcc8c6b60f27");
