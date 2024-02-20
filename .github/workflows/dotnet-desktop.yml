@@ -30,6 +30,8 @@ jobs:
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
+      with:
+        vs-version: '17.9'        
     
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.5
