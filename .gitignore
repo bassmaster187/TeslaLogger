@@ -90,3 +90,4 @@ TeslaLogger/GrafanaDB/*
 TeslaLogger/NOBACKUPONUPDATE
 TeslaLogger/copytodebian.cmd
 TeslaLogger/bin/LASTTASKERWAKEUPFILE_*
+MQTTClient/.vs
