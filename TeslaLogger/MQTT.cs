@@ -172,7 +172,7 @@ namespace TeslaLogger
                     {
                         client.Publish($@"{topic}/system/status", Encoding.UTF8.GetBytes("online"),
                                     uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-                        Tools.DebugLog("MQTT: hearbeat!");
+                        //Tools.DebugLog("MQTT: hearbeat!");
                         heartbeatCounter = 0;
                     }
                     heartbeatCounter++;
@@ -288,7 +288,7 @@ namespace TeslaLogger
                         {
                             connecting = false;
                             Tools.DebugLog("MQTT: connected, connecting = false");
-
+                            Logfile.Log("MQTT: Connected!");
                         }
                         return true;
                     }
