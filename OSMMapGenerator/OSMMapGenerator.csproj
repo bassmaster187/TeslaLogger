@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <AssemblyTitle>OSMMapGenerator</AssemblyTitle>
     <Copyright>%24{AuthorCopyright}</Copyright>
     <AssemblyVersion>1.1.%2a</AssemblyVersion>
