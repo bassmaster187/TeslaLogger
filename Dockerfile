@@ -15,8 +15,7 @@ RUN apt-get update && \
 
 RUN mkdir -p /etc/teslalogger
 WORKDIR /etc/teslalogger
-COPY TeslaLogger/bin /etc/teslalogger/ 
-COPY TeslaLogger/bin/Debug/net8.0 /etc/teslalogger
+COPY --chmod=777 TeslaLogger/bin TeslaLogger/bin/Debug/net8.0 /etc/teslalogger/ 
 
 RUN mkdir -p /etc/teslalogger/sqlschema
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
