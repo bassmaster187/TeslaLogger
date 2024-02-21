@@ -41,6 +41,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
+        context: "{{defaultContext}}:TeslaLogger"
         push: true
         tags: user/app:latest
    
