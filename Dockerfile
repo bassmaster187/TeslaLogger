@@ -15,6 +15,7 @@ RUN apt-get update && \
 
 RUN mkdir -p /etc/teslalogger
 WORKDIR /etc/teslalogger
+ADD TeslaLogger/bin /etc/teslalogger/ 
 ADD TeslaLogger/bin/Debug/net8.0 /etc/teslalogger
 
 RUN mkdir -p /etc/teslalogger/sqlschema
