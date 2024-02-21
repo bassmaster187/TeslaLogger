@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <AssemblyTitle>OSMMapGenerator</AssemblyTitle>
     <Copyright>%24{AuthorCopyright}</Copyright>
-    <AssemblyVersion>1.1.%2a</AssemblyVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
