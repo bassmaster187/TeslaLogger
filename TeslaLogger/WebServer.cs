@@ -2486,7 +2486,7 @@ FROM
 
                                 Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token, tesla_token_expire) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token, @tesla_token_expire)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token, tesla_token_expire, fleetAPI) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token, @tesla_token_expire, @fleetAPI)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -2497,6 +2497,7 @@ FROM
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
                                     cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                                    cmd2.Parameters.AddWithValue("@fleetAPI", FleetAPI);
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
 
                                     var dt = DBHelper.GetCarDT(Convert.ToInt32(newid));
