@@ -16,5 +16,6 @@ RUN apt-get update && \
 RUN mkdir -p /etc/teslalogger
 WORKDIR /etc/teslalogger
 ADD TeslaLogger/bin/Debug/net8.0 /etc/teslalogger
+ADD TeslaLogger/sqlschema.sql /etc/teslalogger
 
 ENTRYPOINT ["dotnet", "./TeslaLogger.dll"]
