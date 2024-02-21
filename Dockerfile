@@ -18,6 +18,6 @@ RUN mkdir -p /etc/teslalogger/sqlschema
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
 COPY --chmod=777 TeslaLogger/bin /etc/teslalogger/
 
-WORKDIR /etc/teslalogger/net8.0
+WORKDIR /etc/teslalogger/Debug/net8.0
 
 ENTRYPOINT ["dotnet", "./TeslaLoggerNET8.dll"]
