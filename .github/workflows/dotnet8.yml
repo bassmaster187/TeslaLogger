@@ -47,6 +47,6 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: user/app:latest
+        tags: bassmaster187/teslalogger:latest
    
       
