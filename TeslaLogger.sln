@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grafana", "Grafana", "{4C42
 		TeslaLogger\Grafana\Verbrauch.json = TeslaLogger\Grafana\Verbrauch.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTClient", "MQTTClient\MQTTClient.csproj", "{6333ABAD-51F4-430D-9BA5-0047602612D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTClient", "MQTTClient\MQTTClient.csproj", "{6333ABAD-51F4-430D-9BA5-0047602612D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTM", "srtm\src\SRTM\SRTM.csproj", "{AE6A978E-8084-48C7-85DD-2E90FCD82F30}"
 EndProject
