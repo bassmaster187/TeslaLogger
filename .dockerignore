@@ -1,2 +1,7 @@
 *.vs
 *.github
+**/settings.json
+**/weather.ini
+**/VERSION
+**/cmd_updated.txt
+**/TeslaLogger.dll.config
