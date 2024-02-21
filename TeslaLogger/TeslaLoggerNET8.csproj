@@ -37,8 +37,8 @@
     <None Include="www\admin\settings.php.bak" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logfile\Logfile.csproj" />
-    <ProjectReference Include="..\srtm\src\SRTM\SRTM.csproj" />
+    <ProjectReference Include="..\Logfile\LogfileNET8.csproj" />
+    <ProjectReference Include="..\srtm\src\SRTM\SRTMNET8.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\admin\abrp.php" />

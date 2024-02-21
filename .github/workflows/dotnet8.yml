@@ -22,9 +22,9 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore TeslaLogger.sln
+      run: dotnet restore TeslaLoggerNET8.sln
     - name: Build
-      run: dotnet build --no-restore TeslaLogger.sln
+      run: dotnet build --no-restore TeslaLoggerNET8.sln
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4

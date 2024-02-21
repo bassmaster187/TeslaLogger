@@ -28,7 +28,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logfile\Logfile.csproj" />
+    <ProjectReference Include="..\Logfile\LogfileNET8.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="M2Mqtt" Version="4.3.0" />

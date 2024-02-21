@@ -22,9 +22,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OSMMapGenerator\OSMMapGenerator.csproj" />
-    <ProjectReference Include="..\srtm\src\SRTM\SRTM.csproj" />
-    <ProjectReference Include="..\TeslaLogger\TeslaLogger.csproj" />
+    <ProjectReference Include="..\OSMMapGenerator\OSMMapGeneratorNET8.csproj" />
+    <ProjectReference Include="..\srtm\src\SRTM\SRTMNET8.csproj" />
+    <ProjectReference Include="..\TeslaLogger\TeslaLoggerNET8.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="testdata\shelly-em1-shelly.txt" />
