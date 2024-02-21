@@ -1,4 +1,4 @@
-FROM php:8.3.3-apache-bookworm
+FROM php:7.3-apache-buster
 
 # install packages
 RUN apt-get update && \
@@ -11,4 +11,5 @@ RUN apt-get update && \
   echo "1" > /var/tmp/dockerwebserverversion
 
 ADD TeslaLogger/www /var/www/html
+ADD docker/webserver/php.ini /usr/local/etc/php/
 
