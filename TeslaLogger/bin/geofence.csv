@@ -4905,7 +4905,7 @@ EnBW DE-Wiesloch Meßplatzstr., 49.293157, 8.701533
 EnBW DE-Wietzendorf, 52.944965412447, 9.881728552972
 EnBW DE-Wildau, 52.3179906, 13.605636
 EnBW DE-Wildberg Hohe Gasse, 48.623846, 8.746806
-EnBW DE-Wildenfels, 50.6804795, 12.590721
+EnBW DE-Wildenfels, 50.6804795, 12.590721, 25
 EnBW DE-Wildflecken, 50.377087, 9.914401
 EnBW DE-Wilhelmshaven,53.5285386,8.0885948
 EnBW DE-Winningen Moseltal Ost, 50.316586, 7.4988, 10
@@ -5763,7 +5763,7 @@ EWE-GO DE-Weyhe Im Bruch, 52.984732, 8.84356
 EWE-GO DE-Wiefelstede Kirchstraße, 53.25615, 8.11495
 EWE-GO DE-Wiesmoor Hauptstraße, 53.400672, 7.712459
 EWE-GO DE-Wiesmoor Kanalstr II, 53.39487, 7.70292
-EWE-GO DE-Wildenfels Arno-Schmidt-Straße, 50.68072, 12.59116
+EWE-GO DE-Wildenfels Arno-Schmidt-Straße, 50.68072, 12.59116, 10
 EWE-GO DE-Wildeshausen Delmenhorster Straße, 52.902774869048, 8.4444769583328
 EWE-GO DE-Wildeshausen Gildeplatz, 52.896432, 8.438846
 EWE-GO DE-Wildeshausen Glaner Straße, 52.90179, 8.416729
@@ -5799,7 +5799,6 @@ EWE-GO DE-Zeitz Geußnitzer Straße, 51.03663, 12.16023
 EWE-GO DE-Zetel Neuenburger Straße, 53.41799, 7.972179
 EWE-GO DE-Zeven Kivinanstraße, 53.292162, 9.274971
 EWE-GO DE-Zwickau Oskar-Arnold-Straße, 50.70627, 12.50094
-EWE-GO DE-Zwickau Ost, 50.6807333, 12.591146, 10
 EWE-GO DE-Zülpich Villa Rustica, 50.704799, 6.669532
 EWE-GO DE-Überlingen Abigstraße, 47.774522, 9.186378
 
