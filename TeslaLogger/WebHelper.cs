@@ -4413,7 +4413,7 @@ DESC", con))
                 using (MySqlCommand cmd = new MySqlCommand(@"Select lat, lng, pos.id, address, fast_charger_brand, max_charger_power 
                         from pos    
                         left join chargingstate on pos.id = chargingstate.pos
-                        where pos.id in (" + bucket + ")", con))
+                        where pos.id in (" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(bucket) + ")", con))
                 {
                     MySqlDataReader dr = SQLTracer.TraceDR(cmd);
 
