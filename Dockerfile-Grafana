@@ -1,0 +1,6 @@
+FROM grafana/grafana:10.0.1
+ENV GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=natel-discrete-panel,pr0ps-trackmap-panel,teslalogger-timeline-panel
+COPY TeslaLogger/GrafanaDashboards/ /var/lib/grafana/dashboards/
+COPY TeslaLogger/GrafanaPlugins/ /var/lib/grafana/plugins/
+COPY TeslaLogger/GrafanaConfig/datasource.yaml /etc/grafana/provisioning/datasources/datasource.yml
+COPY TeslaLogger/GrafanaConfig/sample.yaml /etc/grafana/provisioning/dashboards/dashboards.yml
