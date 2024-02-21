@@ -14,14 +14,11 @@ RUN apt-get update && \
  echo "DOCKER" >> /tmp/teslalogger-DOCKER
 
 RUN mkdir -p /etc/teslalogger
-RUN mkdir -p /etc/teslalogger/net8
-WORKDIR /etc/teslalogger
 COPY --chmod=777 TeslaLogger/bin/* /etc/teslalogger/
-COPY --chmod=777 TeslaLogger/bin/Debug/net8.0/* /etc/teslalogger/net8/
 
 RUN mkdir -p /etc/teslalogger/sqlschema
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
 
-WORKDIR /etc/teslalogger/net8
+WORKDIR /etc/teslalogger/net8.0
 
 ENTRYPOINT ["dotnet", "./TeslaLogger.dll"]
