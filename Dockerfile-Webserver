@@ -10,6 +10,6 @@ RUN apt-get update && \
   sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf && \
   echo "1" > /var/tmp/dockerwebserverversion
 
-ADD TeslaLogger/www /var/www/html
-ADD docker/webserver/php.ini /usr/local/etc/php/
-
+COPY TeslaLogger/www /var/www/html
+COPY docker/webserver/php.ini /usr/local/etc/php/
+COPY TeslaLogger/bin /etc/teslalogger/
