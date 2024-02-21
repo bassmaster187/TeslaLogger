@@ -34,10 +34,10 @@ global $display_name;
     $mqtt_passwd = $jmqtt->{"mqtt_passwd"};
     $mqtt_topic = ($jmqtt->{"mqtt_topic"} === null OR $jmqtt->{"mqtt_topic"} === "") ? "teslalogger" : $jmqtt->{"mqtt_topic"};
     $mqtt_publishjson = $jmqtt->{"mqtt_publishjson"};
-    $mqtt_subtopics = $jmqtt->{"mqtt_subtopics"};
+    $mqtt_singletopics = $jmqtt->{"mqtt_singletopics"};
     $mqtt_discoveryenable = $jmqtt->{"mqtt_discoveryenable"};
     $mqtt_discoverytopic = ($jmqtt->{"mqtt_discoverytopic"} === null OR $jmqtt->{"mqtt_discoverytopic"} === "") ? "homeassistant" : $jmqtt->{"mqtt_discoverytopic"};
-    $mqtt_clientid = ($jmqtt->{"mqtt_clientid"} === null OR $jmqtt->{"mqtt_clientid"} === "") ? "TeslaLoggerMqttClient" : $jmqtt->{"mqtt_clientid"};
+    $mqtt_clientid = $jmqtt->{"mqtt_clientid"};
     echo("<!-- Response of mqtt/info:\n"); 
     var_dump($mqttinfo);
     echo ("-->\n");
@@ -47,7 +47,7 @@ global $display_name;
     function Save()
     {
         var publishjson = $("#publishjson").is(':checked') ? 1 : 0;
-        var subtopics = $("#subtopics").is(':checked') ? 1 : 0;
+        var singletopics = $("#singletopics").is(':checked') ? 1 : 0;
         var discoveryenable = $("#discoveryenable").is(':checked') ? 1 : 0;
         var j = {
             "mqtt_host" : $("#host").val(),
@@ -56,7 +56,7 @@ global $display_name;
             "mqtt_passwd" : $("#passwd").val(),
             "mqtt_topic" : $("#topic").val(),
             "mqtt_publishjson" : publishjson,
-            "mqtt_subtopics" : subtopics,
+            "mqtt_singletopics" : singletopics,
             "mqtt_discoveryenable" : discoveryenable,
             "mqtt_discoverytopic" : $("#discovertopic").val(),
             "mqtt_clientid" : $("#clientid").val()
@@ -87,10 +87,12 @@ global $display_name;
 <h2><?php t("TopicStructure"); ?></h2>
     <li><?php t("MQTT1"); ?></li>
     <li><?php t("MQTT2"); ?></li>
-<h3><?php t("TopicDescription"); ?></h3>
     <li><?php t("MQTT3"); ?></li>
     <li><?php t("MQTT4"); ?></li>
     <li><?php t("MQTT5"); ?></li>
+
+<h3><?php t("ADDescription"); ?></h3>
+    <li><?php t("MQTTAD1"); ?></li>
 
 <h2><?php t("ControlTopic"); ?></h2>
     <li><?php t("MQTT6"); ?></li>
@@ -118,7 +120,7 @@ global $display_name;
     <td><?php t("PublishJson"); ?>: </td><td><input id="publishjson" type="checkbox" <?PHP if ($mqtt_publishjson === 1) echo("checked");  ?>/></td>
 </tr>
 <tr>
-    <td><?php t("Subtopics"); ?>: </td><td><input id="subtopics" type="checkbox" <?PHP if ($mqtt_subtopics === 1) echo("checked");  ?>/></td>
+    <td><?php t("Singletopics"); ?>: </td><td><input id="singletopics" type="checkbox" <?PHP if ($mqtt_singletopics === 1) echo("checked");  ?>/></td>
 </tr>
 <tr>
     <td><?php t("AutoDiscovery"); ?>: </td><td><input id="discoveryenable" type="checkbox" <?PHP if ($mqtt_discoveryenable === 1) echo("checked");  ?>/></td>

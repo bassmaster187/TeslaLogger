@@ -23,7 +23,7 @@ namespace TeslaLogger
         private string host = "localhost";
         private int port = 1883;
         private string topic = "teslalogger";
-        private bool subtopics;
+        private bool singletopics;
         private bool publishJson;
         private bool discoveryEnable;
         private string discoverytopic = "homeassistant";
@@ -84,9 +84,9 @@ namespace TeslaLogger
                     {
                         publishJson = (bool)r["mqtt_publishjson"];
                     }
-                    if (r["mqtt_subtopics"] > 0)
+                    if (r["mqtt_singletopics"] > 0)
                     {
-                        subtopics = (bool)r["mqtt_subtopics"];
+                        singletopics = (bool)r["mqtt_singletopics"];
                     }
                     if (r["mqtt_discoveryenable"] > 0)
                     {
@@ -128,7 +128,7 @@ namespace TeslaLogger
                     client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
                     new Thread(() => { MQTTConnectionHandler(client); }).Start();
 
-                    if (discoveryEnable)
+                    if (discoveryEnable && singletopics)
                     {
                         foreach(string vin in allCars)
                         {
@@ -204,11 +204,13 @@ namespace TeslaLogger
                         if (!lastjson.ContainsKey(carId) || temp != lastjson[carId])
                         {
                             lastjson[carId] = temp;
+                            if (publishJson)
+                            {
+                                client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
+                                    uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                            }
 
-                            client.Publish(jsonTopic, Encoding.UTF8.GetBytes(lastjson[carId]),
-                                uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-
-                            if (subtopics)
+                            if (singletopics)
                             {
                                 var topics = JsonConvert.DeserializeObject<Dictionary<string, string>>(temp);
                                 foreach (var keyvalue in topics)
