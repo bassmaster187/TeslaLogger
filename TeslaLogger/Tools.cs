@@ -1980,6 +1980,28 @@ WHERE
         {
             return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64));
         }
+
+        public static string GetNET8Version()
+        {
+            try
+            {
+                var ret = Tools.ExecMono("/home/cli/dotnet", "--info");
+
+                if (ret?.Contains("Version:") == true)
+                {
+                    var m = Regex.Match(ret, "Version:\\s+([0-9\\.]+)");
+                    if (m.Success)
+                        return m.Groups[1].Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+
+            return "";
+        }
     }
 
     public static class EventBuilderExtension
@@ -2009,7 +2031,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                // Logfile.Log(ex.ToString());
             }
 
             return v;
