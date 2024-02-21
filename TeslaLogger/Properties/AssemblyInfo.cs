@@ -12,4 +12,4 @@ using System.Runtime.CompilerServices;
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
 [assembly: Guid("9932f717-1bee-4d0f-b5b0-fb8665ffe647")]
 
-[assembly: InternalsVisibleTo("UnitTestsTeslalogger")]
+[assembly: InternalsVisibleTo("UnitTestsTeslaloggerNET8")]
