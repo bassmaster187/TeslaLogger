@@ -1036,6 +1036,7 @@ PRIMARY KEY(id)
         public static async void DownloadUpdateAndInstall()
         {
             DownloadUpdateAndInstallStarted = true;
+            CheckNET8Installed();
 
             if (File.Exists("cmd_updated.txt"))
             {
@@ -1247,6 +1248,49 @@ PRIMARY KEY(id)
                 Logfile.Log("Rebooting");
 
                 Tools.ExecMono("reboot", "");
+            }
+        }
+
+        private static void CheckNET8Installed()
+        {
+            try
+            {
+                if (Tools.IsMono() && !Tools.IsDocker())
+                {
+                    var net8version = Tools.GetNET8Version();
+                    if (net8version?.Contains("8.") == true)
+                    {
+                        ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(net8version, "DOTNET8").Submit();
+                    }
+                    else
+                    {
+                        var t = new Thread(() =>
+                        {
+                            Logfile.Log("Install .NET 8");
+
+                            Tools.ExecMono("wget", "https://dot.net/v1/dotnet-install.sh -O /home/dotnet-install.sh");
+                            UpdateTeslalogger.Chmod("/home/dotnet-install.sh", 777, true);
+                            Tools.ExecMono("/bin/bash", "/home/dotnet-install.sh --runtime aspnetcore --channel 8.0 --install-dir /home/cli");
+                            //Tools.ExecMono("export", "export DOTNET_ROOT=/home/cli");
+                            //Tools.ExecMono("export", "export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools");
+
+                            var temp = Tools.GetNET8Version();
+                            if (temp?.Contains("8.") == true)
+                            {
+                                Logfile.Log(".NET 8 installed: " + temp);
+                                ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(temp, "DOTNET8").Submit();
+                            }
+                        });
+
+                        t.Name = "DOTNET8InstallThread";
+                        t.Start();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
 
