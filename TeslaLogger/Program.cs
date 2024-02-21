@@ -304,6 +304,12 @@ namespace TeslaLogger
             Logfile.Log("Update Settings: " + Tools.GetOnlineUpdateSettings().ToString());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Update Settings", Tools.GetOnlineUpdateSettings().ToString());
 
+            try
+            {
+                if (Environment.Version?.ToString()?.StartsWith("8.0") == true)
+                    ExceptionlessClient.Default.CreateFeatureUsage("USE_DOTNET8").FirstCarUserID().AddObject(Environment.Version.ToString(), "DOTNET8").Submit();
+            } catch (Exception) { }
+
             Logfile.Log("DBConnectionstring: " + DBHelper.GetDBConnectionstring(true));
 
             Logfile.Log("KeepOnlineMinAfterUsage: " + KeepOnlineMinAfterUsage);
@@ -455,7 +461,7 @@ namespace TeslaLogger
             Thread Housekeeper = new Thread(() =>
             {
                 // wait for DB updates
-                while (!UpdateTeslalogger.Done)
+                while (!UpdateTeslalogger.done.IsCancellationRequested)
                     Thread.Sleep(5000);
 
                 DateTime start = DateTime.Now;
@@ -504,7 +510,7 @@ namespace TeslaLogger
                 try
                 {
                     // wait for DB updates
-                    while (!UpdateTeslalogger.Done)
+                    while (!UpdateTeslalogger.done.IsCancellationRequested)
                         Thread.Sleep(5000);
 
                     Thread.Sleep(30000);

@@ -27,9 +27,7 @@ namespace TeslaLogger
         private static Object lastTeslaLoggerVersionCheckObj = new object();
         internal static DateTime GetLastVersionCheck() { return lastTeslaLoggerVersionCheck; }
 
-        private static bool _done; // defaults to false;
-
-        public static bool Done { get => _done; }
+        internal static CancellationTokenSource done = new CancellationTokenSource();
 
         private static Thread ComfortingMessages; // defaults to null;
         public static bool DownloadUpdateAndInstallStarted; // defaults to false;
@@ -57,9 +55,12 @@ namespace TeslaLogger
             ComfortingMessages = new Thread(() =>
             {
                 Random rnd = new Random();
-                while (!Done)
+                while (!done.IsCancellationRequested)
                 {
                     Thread.Sleep(15000 + rnd.Next(15000));
+                    if (done.IsCancellationRequested)
+                        break;
+
                     switch (rnd.Next(3))
                     {
                         case 0:
@@ -279,8 +280,7 @@ namespace TeslaLogger
             {
                 try
                 {
-                    _done = true;
-                    ComfortingMessages.Abort();
+                    done.Cancel();
                 }
                 catch (Exception) { }
             }
