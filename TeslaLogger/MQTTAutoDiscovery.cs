@@ -162,9 +162,9 @@ namespace TeslaLogger
             autoDiscovery["sleeping"]["type"] = "sensor";
             autoDiscovery["sleeping"]["name"] = "Sleeping";
 
-            autoDiscovery["online"] = new Dictionary<string, string>();
-            autoDiscovery["online"]["type"] = "sensor";
-            autoDiscovery["online"]["name"] = "Online";
+            //autoDiscovery["online"] = new Dictionary<string, string>();
+            //autoDiscovery["online"]["type"] = "sensor";
+            //["online"]["name"] = "Online";
 
             autoDiscovery["driving"] = new Dictionary<string, string>();
             autoDiscovery["driving"]["type"] = "sensor";
@@ -247,9 +247,16 @@ namespace TeslaLogger
             autoDiscovery["charging"]["pl_off"] = "false";
             autoDiscovery["charging"]["cmd_topic"] = "charge_start_stop";
 
+            autoDiscovery["online"] = new Dictionary<string, string>();
+            autoDiscovery["online"]["type"] = "switch";
+            autoDiscovery["online"]["name"] = "Online";
+            autoDiscovery["online"]["pl_on"] = "true";
+            autoDiscovery["online"]["pl_off"] = "false";
+            autoDiscovery["online"]["cmd_topic"] = "wake_up";
+
             autoDiscovery["charge_limit_soc"] = new Dictionary<string, string>();
             autoDiscovery["charge_limit_soc"]["type"] = "number";
-            autoDiscovery["charge_limit_soc"]["name"] = "Charge limit state of charge";
+            autoDiscovery["charge_limit_soc"]["name"] = "Charge limit SoC";
             autoDiscovery["charge_limit_soc"]["cmd_topic"] = "set_charge_limit";
             autoDiscovery["charge_limit_soc"]["class"] = "battery";
             autoDiscovery["charge_limit_soc"]["min"] = "50";
