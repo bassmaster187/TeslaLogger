@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
+using System.Reflection;
 
 namespace TeslaLogger
 {
@@ -216,6 +217,9 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccountfleetapi", System.StringComparison.Ordinal):
                         GetCarsFromAccount(request, response, true);
                         break;
+                    case bool _ when request.Url.LocalPath.Equals("/getversion", System.StringComparison.Ordinal):
+                        GetVersion(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
                         SetPassword(request, response);
                         break;
@@ -379,6 +383,13 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void GetVersion(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            WriteString(response, version);
+
         }
 
         private static void Get_CarValueVIN(HttpListenerRequest request, HttpListenerResponse response)
