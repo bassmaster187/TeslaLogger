@@ -442,7 +442,7 @@ MQTTSettings=MQTT settings
 MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
 
 TopicStructure=Topic structure:
-MQTT1=All values in one JSON: "teslalogger/json/CAR_VIN/currentjson"
+MQTT1=All values in one JSON (if activated): "teslalogger/json/CAR_VIN/currentjson"
 MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
 MQTT3="teslalogger" is parametrizable in field "Topic"
 MQTT4="CAR_VIN" is VIN of your car

@@ -363,24 +363,30 @@ Vehicle kWh=Køretøj kWh
 #mqtt.php
 MQTTSettings=MQTT settings
 MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+
 TopicStructure=Topic structure:
-MQTT1=All values in one JSON: "teslalogger/json/1"
-MQTT2=All values as subtopics (if activated): "teslalogger/cars/1/ideal_battery_range_km"
-TopicDescription=Description:
+MQTT1=All values in one JSON (if activated): "teslalogger/json/CAR_VIN/currentjson"
+MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
 MQTT3="teslalogger" is parametrizable in field "Topic"
-MQTT4="1" is TeslaLogger CarID
+MQTT4="CAR_VIN" is VIN of your car
 MQTT5="ideal_battery_range_km" are single topics
 
+ADDescription=AutoDiscovery:
+MQTTAD1="singletopics" are mandatory for AutoDiscovery!
+
 ControlTopic=Topic for control:
-MQTT6="teslalogger/car/1/command/set_charge_limit" and "13" as RAW value
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" and "13" as RAW value
 MQTT7=Supported commands
 
 RebootAfterSave=Reboot TeslaLogger after save!
 Host=Host
 Port=Port
 Topic=Topic
-Subtopics=Subtopics
+PublishJson=Publish Json
+Singletopics=Publish single topics
 ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
 
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
