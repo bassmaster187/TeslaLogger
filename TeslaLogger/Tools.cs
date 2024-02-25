@@ -45,8 +45,7 @@ namespace TeslaLogger
 
         internal static bool UseNearbySuCService()
         {
-            // TODO
-            return true;
+            return Tools.IsShareData();
         }
 
         private static string _OSVersion = string.Empty;
@@ -490,7 +489,10 @@ namespace TeslaLogger
                 switch (vin[6])
                 {
                     case 'E':
-                        battery = "NMC";
+                        if(MIC)
+                            battery = "NMC";
+                        else
+                            if (vin[7] == 'S') battery = "LFP"; //Y SR MIG BYD
                         break;
                     case 'F':
                         battery = "LFP";
@@ -536,16 +538,21 @@ namespace TeslaLogger
                         motor = "3 dual performance";
                         break;
                     case 'D':
-                    case 'J':
                         motor = "Y single";
                         break;
                     case 'E':
+                        motor = "Y dual";
+                        break;
                     case 'K':
                     case 'L':
-                        motor = "Y dual";
+                        motor = "3/Y dual";
                         break;
                     case 'F':
                         motor = "Y dual performance";
+                        break;
+                    case 'J':
+                    case 'S':
+                        motor = "3/Y single";
                         break;
                 }
 
@@ -1480,6 +1487,10 @@ namespace TeslaLogger
             if (!IsDocker())
                 return;
 
+            var ts = DateTime.Now - Program.uptime;
+            if (ts.TotalHours < 24)
+                return;
+
             Logfile.Log("Start backup for Docker");
             Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
         }
@@ -1969,6 +1980,28 @@ WHERE
         {
             return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64));
         }
+
+        public static string GetNET8Version()
+        {
+            try
+            {
+                var ret = Tools.ExecMono("/home/cli/dotnet", "--info");
+
+                if (ret?.Contains("Version:") == true)
+                {
+                    var m = Regex.Match(ret, "Version:\\s+([0-9\\.]+)");
+                    if (m.Success)
+                        return m.Groups[1].Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+
+            return "";
+        }
     }
 
     public static class EventBuilderExtension
@@ -1998,7 +2031,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                // Logfile.Log(ex.ToString());
             }
 
             return v;

@@ -19,6 +19,7 @@ namespace TeslaLogger
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
+        public static DateTime uptime = DateTime.Now;
 
         public enum TLMemCacheKey
         {
@@ -113,21 +114,16 @@ namespace TeslaLogger
         {
             try
             {
-                if (Tools.UseNearbySuCService())
+                
+                Thread threadNearbySuCService = new Thread(() =>
                 {
-                    Thread threadNearbySuCService = new Thread(() =>
-                    {
-                        NearbySuCService.GetSingleton().Run();
-                    })
-                    {
-                        Name = "NearbySuCServiceThread"
-                    };
-                    threadNearbySuCService.Start();
-                }
-                else
+                    NearbySuCService.GetSingleton().Run();
+                })
                 {
-                    Logfile.Log("NearbySuCService disabled (enable in settings)");
-                }
+                    Name = "NearbySuCServiceThread"
+                };
+                threadNearbySuCService.Start();
+                
             }
             catch (Exception ex)
             {
@@ -190,9 +186,13 @@ namespace TeslaLogger
                 if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
                     raven = true;
 
+                bool fleetAPI = false;
+                if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
+                    fleetAPI = true;
+
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState, wheel_type);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 car.Raven = raven;
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
@@ -204,6 +204,8 @@ namespace TeslaLogger
 
         private static void InitWebserver()
         {
+            UpdateTeslalogger.CertUpdate();
+
             try
             {
                 Thread threadWebserver = new Thread(() =>
@@ -340,6 +342,7 @@ namespace TeslaLogger
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 #pragma warning restore CA5364 // Verwenden Sie keine veralteten Sicherheitsprotokolle.
 
+            Logfile.Log("Runtime: " + Environment.Version.ToString());
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);

@@ -80,6 +80,9 @@ CREATE TABLE geocodecache(
 
         internal static string Search(double lat, double lng)
         {
+            if (!useGeocodeCache)
+                return String.Empty;
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))

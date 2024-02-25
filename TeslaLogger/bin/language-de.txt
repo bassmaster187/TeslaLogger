@@ -117,7 +117,7 @@ Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten einge
 Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
 TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
-BA_Browser=Im lokalen {Browser} (empfohlen)
+BA_Browser=Im lokalen {Browser}
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
 BA_Auth=Melden Sie sich mit Ihren Tesla-Zugangsdaten und ggf. MFA an (Tesla merkt sich diese Daten, wenn Sie den Link schon einmal verwendet haben)
@@ -133,6 +133,7 @@ BA_Step3=Schritt 3:
 BA_FillOut=Bitte ausfüllen:
 BA_CopyUrl=Kopieren Sie die angezeigte URL
 BA_Paste=Die URL hier einfügen und auf "Tokens holen" klicken:
+BA_FLEETAPI=Tesla Fleet API (empfohlen)
 Get Tokens=Tokens holen
 Access Token=Access Token
 Refresh Token=Refresh Token
@@ -157,6 +158,15 @@ Unauthorized=Nicht autorisiert
 This isn't a valid URL!=Dies ist kein gültige URL!
 This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
 The URL doesn't contain the expected format!=Die URL enthält nicht das erwartete Format!
+
+#password_fleet.php
+PF_LOGOUT=Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind
+PF_LOGIN=Gehen Sie zur Tesla-Authentifizierungsseite und erlauben Sie Teslalogger auf ihre Daten zuzugreifen
+PF_HELP=Hilfsvideo
+PF_PERMISSION=Info. Welche Rechte werden verwendet und weshalb
+PF_LINK=LINK
+PF_OLDSX=Wenn Sie ein älteres Tesla Model S/X vor 2021 haben, sind Sie fertig und können zurück zur Startseite
+PF_VKEY=Andernfalls richten Sie einen virtuellen Schlüssel eines Drittanbieters ein
 
 #dashboard.php
 Online=Online
