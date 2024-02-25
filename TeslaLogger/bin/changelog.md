@@ -1,3 +1,18 @@
+# Version 1.57.2
+- Bugfixes
+
+# Version 1.57.1
+- Detect Y SR MIC / MIG / BYD / CATL / SR+
+
+# Version 1.57.0
+- Teslalogger is now supporting the [official](https://developer.tesla.com/docs/fleet-api#overview) Tesla-Fleet API. Especially cars bought after December 2023 should use it! You can migrate your car to use the new API if you go to Settings / MyTesla / Edit / Tesla Fleet API -> go through login process 
+- New Grafana dashboard: Trip Top Destinations
+- BF: Cars located in China are now able to use Teslalogger again
+- Geofence: Grouping of all public chargers to impove performance
+
+# Version 1.56.1
+- Update certificates for Mono
+
 # Version 1.56.0
 - Support new Tesla API
 - Attention: MapQuest isn't free anymore! Either you remove the key in your settings, if you used it or you have to provide a credit card to MapQuest. 

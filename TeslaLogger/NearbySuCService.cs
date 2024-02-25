@@ -41,7 +41,9 @@ namespace TeslaLogger
             {
                 while (true)
                 {
-                    Work();
+                    if (Tools.UseNearbySuCService())
+                        Work();
+                    
                     // sleep 5 Minutes
                     Thread.Sleep(300000);
                 }

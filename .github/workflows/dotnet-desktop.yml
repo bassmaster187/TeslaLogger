@@ -4,7 +4,6 @@ on:
   workflow_dispatch
 
 jobs:
-
   build:
 
     strategy:
@@ -26,7 +25,7 @@ jobs:
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2    
     
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.5
@@ -39,7 +38,8 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+      run: dotnet test --filter "UnitTestsGeocode|UnitTestGrafana|UnitTestBase" --logger trx --logger console UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
+      #run: dotnet vstest /Tests:UnitTestsGeocode /Logger:trx UnitTestsTeslalogger\bin\Debug\UnitTestsTeslalogger.dll
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/composite@v2
@@ -47,3 +47,10 @@ jobs:
       with:
         files: |
           **/TestResults/*.trx
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with: 
+        name: Teslalogger
+        path: TeslaLogger\bin\Debug\TeslaLogger.exe
+      

@@ -943,6 +943,48 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "fleetAPIaddress"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column fleetAPIaddress");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `fleetAPIaddress` VARCHAR(200) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "oldAPIchinaCar"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column oldAPIchinaCar");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `oldAPIchinaCar` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needVirtualKey"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needVirtualKey");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needVirtualKey` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needCommandPermission"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needCommandPermission");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needCommandPermission` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "needFleetAPI"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column needFleetAPI");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needFleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
+            }
         }
 
         private static void CheckDBSchema_can()
@@ -994,6 +1036,7 @@ PRIMARY KEY(id)
         public static async void DownloadUpdateAndInstall()
         {
             DownloadUpdateAndInstallStarted = true;
+            CheckNET8Installed();
 
             if (File.Exists("cmd_updated.txt"))
             {
@@ -1052,7 +1095,7 @@ PRIMARY KEY(id)
 
                 Tools.ExecMono("rm", "-rf /etc/teslalogger/git");
                 Tools.ExecMono("mkdir", "/etc/teslalogger/git");
-                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+                CertUpdate();
 
                 // run housekeeping to make sure there is enough free disk space
 
@@ -1208,6 +1251,64 @@ PRIMARY KEY(id)
             }
         }
 
+        private static void CheckNET8Installed()
+        {
+            try
+            {
+                if (Tools.IsMono() && !Tools.IsDocker())
+                {
+                    var net8version = Tools.GetNET8Version();
+                    if (net8version?.Contains("8.") == true)
+                    {
+                        ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(net8version, "DOTNET8").Submit();
+                    }
+                    else
+                    {
+                        var t = new Thread(() =>
+                        {
+                            Logfile.Log("Install .NET 8");
+
+                            Tools.ExecMono("wget", "https://dot.net/v1/dotnet-install.sh -O /home/dotnet-install.sh");
+                            UpdateTeslalogger.Chmod("/home/dotnet-install.sh", 777, true);
+                            Tools.ExecMono("/bin/bash", "/home/dotnet-install.sh --runtime aspnetcore --channel 8.0 --install-dir /home/cli");
+                            //Tools.ExecMono("export", "export DOTNET_ROOT=/home/cli");
+                            //Tools.ExecMono("export", "export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools");
+
+                            var temp = Tools.GetNET8Version();
+                            if (temp?.Contains("8.") == true)
+                            {
+                                Logfile.Log(".NET 8 installed: " + temp);
+                                ExceptionlessClient.Default.CreateFeatureUsage("DOTNET8").FirstCarUserID().AddObject(temp, "DOTNET8").Submit();
+                            }
+                        });
+
+                        t.Name = "DOTNET8InstallThread";
+                        t.Start();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+        }
+
+        public static void CertUpdate()
+        {
+            try
+            {
+                // https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
+                Tools.ExecMono("sed", "-i 's/^mozilla\\/DST_Root_CA_X3.crt$/!mozilla\\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf");
+                Tools.ExecMono("update-ca-certificates", "");
+                Tools.ExecMono("cert-sync", "/etc/ssl/certs/ca-certificates.crt");
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
 
         private static void CheckBackupCrontab()
         {
