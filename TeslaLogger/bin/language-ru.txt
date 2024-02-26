@@ -398,6 +398,34 @@ Version=Version
 Utility kWh=Utility кВтч
 Vehicle kWh=Автомобиль кВтч
 
+#mqtt.php
+MQTTSettings=Настройки MQTT
+MQTTSettingsInfo=MQTT Host обязателен. Всё остальное опционально
+
+TopicStructure=Структура:
+MQTT1=Все значения в одном JSON (если включено): "teslalogger/json/CAR_VIN/currentjson"
+MQTT2=Все значения по одиночке (если включено): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" изменяется в графе "Topic"
+MQTT4="CAR_VIN" номер VIN машины
+MQTT5="ideal_battery_range_km" одиночные значения
+
+ADDescription=AutoDiscovery:
+MQTTAD1=Для AutoDiscovery надо включить "убилоковать одиночные значения"!
+
+ControlTopic=Управление:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" и "13" как RAW value
+MQTT7=Возможные комманды
+
+RebootAfterSave=После сохранения, перезагрузить TeslaLogger!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson=Публиковать JSON
+Singletopics=Пубилоковать одиночные значения
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Вы можете установить ссылку с TeslaLogger на SuperChargeBingo для автоматической регистрации на зарядных станциях Supercharger.

@@ -903,18 +903,18 @@ namespace TeslaLogger
                                 // charge_port_door_open == true?
                                 if (GetTeslaAPIState().GetBool("charge_port_door_open", out bool bcharge_port_door_open) && bcharge_port_door_open)
                                 {
-                                    Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
+                                    //Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
                                     long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
                                     // check if charge_port_door_open value True is not older than 1 minute
                                     if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                                     {
-                                        Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
+                                        //Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
                                         if (now - valueLastUpdate < 60000)
                                         {
                                             // charge_port_door_open changed to Charging less than 1 minute ago
                                             // reduce sleepduration to 0.5 second
                                             sleepduration = 500;
-                                            Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
+                                            //Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
                                         }
                                     }
                                 }

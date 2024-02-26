@@ -1830,6 +1830,7 @@ HAVING
             car.CurrentJSON.current_charger_voltage = 0;
             car.CurrentJSON.current_charger_phases = 0;
             car.CurrentJSON.current_charger_actual_current = 0;
+            car.CurrentJSON.current_charge_current_request = 0;
             car.CurrentJSON.current_charge_rate_km = 0;
 
             UpdateMaxChargerPower();
@@ -4729,6 +4730,7 @@ VALUES(
                 car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
+                car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -5502,6 +5504,39 @@ WHERE
     id = @id", DBConnectionstring))
                     {
                         da.SelectCommand.Parameters.AddWithValue("@id", id);
+                        _ = SQLTracer.TraceDA(dt, da);
+
+                        if (dt.Rows.Count == 1)
+                        {
+                            return dt.Rows[0];
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+
+            return null;
+        }
+
+        public static DataRow GetCar(string vin)
+        {
+            using (DataTable dt = new DataTable())
+            {
+                try
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    cars
+WHERE
+    id = @id", DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@vin", vin);
                         _ = SQLTracer.TraceDA(dt, da);
 
                         if (dt.Rows.Count == 1)

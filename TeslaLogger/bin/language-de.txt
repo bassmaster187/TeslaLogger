@@ -253,6 +253,34 @@ Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=kWh Fahrzeug
 
+#mqtt.php
+MQTTSettings=MQTT Einstellungen
+MQTTSettingsInfo=MQTT Host ist erforderlich. Alle andere Einstellungen sind optional
+
+TopicStructure=Topics sind im folgenden Format:
+MQTT1=Alle Werte in einem JSON (wenn aktiviert): "teslalogger/json/CAR_VIN/currentjson"
+MQTT2=Alle Werte als Singletopics (wenn aktiviert): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" ist parametrierbar im Feld "Topic"
+MQTT4="CAR_VIN" ist die VIN des Autos
+MQTT5="ideal_battery_range_km" sind einzelne Topics
+
+ADDescription=AutoDiscovery:
+MQTTAD1=Für AutoDiscovery müssen "singletopics" aktiviert sein!
+
+ControlTopic=Topic zum Steuern:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" und "13" als RAW Value
+MQTT7=Unterstützte Kommanden
+
+RebootAfterSave=Nach dem Speichern bitte TeslaLogger neustarten!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson=Json versenden
+Singletopics=Single topics versenden
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Sie können einen Link von TeslaLogger zu SuperChargeBingo einrichten, um automatische Checkins an Superchargern durchzuführen.
@@ -336,3 +364,6 @@ Restore Database=Datenbank wiederherstellen
 TextRestore1=Bitte stellen Sie sicher, dass Sie Ihren Teslalogger sichern, bevor Sie Datenbanken wiederherstellen. Verschieben Sie den Sicherungsordner von \\RASPBERRY\teslalogger\backup auf Ihre Festplatte!
 TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
+
+#dashboard.php
+Sleeping=Sleeping

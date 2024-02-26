@@ -129,6 +129,7 @@ function menu($title, $prefix = "")
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>geofencing.php"><?php t("Geofence"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>journeys.php?carid=<?= $current_carid ?>"><?php t("Journeys"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>dashboard.php?carid=<?= $current_carid ?>"><?php t("Dashboard"); ?></a></li>
+							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>mqtt.php"><?php t("MQTTSettings"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>abrp.php?carid=<?= $current_carid ?>"><?php t("Abetterrouteplanner"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>superchargebingo.php?carid=<?= $current_carid ?>"><?php t("SuperChargeBingo"); ?></a></li>
 							<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="<?php echo $prefix; ?>wallbox.php?carid=<?= $current_carid ?>"><?php t("Wallbox"); ?></a></li>
