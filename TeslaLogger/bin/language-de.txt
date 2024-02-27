@@ -4,7 +4,6 @@ Save=Speichern
 Settings=Einstellungen
 Setup=Einrichtung
 Enabled=Aktiviert
-
 StreamingPosHelp=<h1>Position von StreamingAPI</h1>aktiviert Positions-DB-Einträge von der Streaming-API - je nach Empfang des Fahrzeugs bedeutet dies bis zu 5 Positionen pro Sekunde (im Vergleich zu einer Position alle fünf Sekunden im normalen Modus), was die Größe der Datenbank stark erhöht, den Verschleiß der SD-Karte erhöht und zu großen Backups führt
 
 #Timeline Plugin.json
@@ -15,7 +14,7 @@ Missing=Fehlen
 Ø Temperatur=Ø Temperatur
 
 #Speed Consumption.json
-Last Driven=Letzte Fahrt  * * * 
+Last Driven=Letzte Fahrt  * * *
 Ø Outside Temp C°=Ø Aussen °C
 Ø Consumption kWh=Ø kWh
 
@@ -256,21 +255,17 @@ Vehicle kWh=kWh Fahrzeug
 #mqtt.php
 MQTTSettings=MQTT Einstellungen
 MQTTSettingsInfo=MQTT Host ist erforderlich. Alle andere Einstellungen sind optional
-
 TopicStructure=Topics sind im folgenden Format:
 MQTT1=Alle Werte in einem JSON (wenn aktiviert): "teslalogger/json/CAR_VIN/currentjson"
 MQTT2=Alle Werte als Singletopics (wenn aktiviert): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
 MQTT3="teslalogger" ist parametrierbar im Feld "Topic"
 MQTT4="CAR_VIN" ist die VIN des Autos
 MQTT5="ideal_battery_range_km" sind einzelne Topics
-
 ADDescription=AutoDiscovery:
 MQTTAD1=Für AutoDiscovery müssen "singletopics" aktiviert sein!
-
 ControlTopic=Topic zum Steuern:
 MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" und "13" als RAW Value
 MQTT7=Unterstützte Kommanden
-
 RebootAfterSave=Nach dem Speichern bitte TeslaLogger neustarten!
 Host=Host
 Port=Port
@@ -367,3 +362,26 @@ TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Lad
 
 #dashboard.php
 Sleeping=Sleeping
+Start Trip="Start Trip"
+End Trip="Ende Trip"
+Start km="Start km"
+End km="Ende km"
+Start mi="Start mi"
+End mi="Ende mi"
+kmDiff="km Diff"
+Max Range="Max Reichweite"
+Ø Verbrauch="Ø Verbrauch"
+Tage="Tage"
+
+#Degradation.json
+Degradation="Degradation"
+Maximalreichweite [km]="Max Reichweite [km]"
+Maximalreichweite [mi]="Max Reichweite [mi]"
+km Stand [km]="Entfernung [km]"
+mi Stand [mi]="Verbrauch [mi]"
+Time="Datum"
+EndSOC="Ende SOC"
+StartSOC="Start SOC"
+SOC diff="SOC diff"
+Odometer [mi]="Km Stand [mi]"
+Max. Reichweite (Monatsmittel) [km]="Max Reichweite (monatlicher avg) [km]"
