@@ -13,7 +13,7 @@ You can connect your Teslalogger to your Wallbox to calculate the efficiency of 
 Go to admin panel and select the car you want to use for the wallbox. Go to Extras / Wallbox.
 Every car has it's own wallbox settings. 
 
-Choose your wallbox and set the host name of your wallbox e.g: http://192.168.1.174
+Choose your wallbox and set the host name of your wallbox e.g: http://192.168.1.174 or http://192.168.178.33:7070
 Make sure you don't forget http:// or https:// at your host settings. Just the IP address won't work!
 
 ## Param
