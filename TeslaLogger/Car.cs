@@ -763,6 +763,21 @@ namespace TeslaLogger
                         SetCurrentState(TeslaState.GoSleep);
                         goSleepWithWakeup = true;
                     }
+                    else if (FleetAPI && (CarType == "model3" || Model == "modely"))
+                    {
+                        Log("API not suspended!");
+                        Thread.Sleep(30000);
+                        string res = "";
+                        lock (WebHelper.isOnlineLock)
+                        {
+                            res = webhelper.IsOnline().Result;
+                        }
+                        if (res == "asleep")
+                        {
+                            SetCurrentState(TeslaState.Start);
+                            lastCarUsed = DateTime.Now;
+                        }
+                    }
                     else
                     {
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
