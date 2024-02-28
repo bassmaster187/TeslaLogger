@@ -3470,6 +3470,9 @@ namespace TeslaLogger
             if (File.Exists("DONTUSESTREAMINGAPI"))
                 return;
 
+            if (car.FleetAPI) // Fleet API doesn't support streaming now
+                return; 
+
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
@@ -3600,7 +3603,6 @@ namespace TeslaLogger
                                                 car.Log("StreamingApi: " + v);
 
                                                 // Suspend Streaming API
-
                                                 var lastToken = Tesla_Streamingtoken;
                                                 var lastTeslaToken = Tesla_token;
                                                 var TimeOut = DateTime.UtcNow;
@@ -3608,12 +3610,6 @@ namespace TeslaLogger
                                                 while (!stopStreaming)
                                                 {
                                                     Thread.Sleep(10000);
-
-                                                    if (lastToken != Tesla_Streamingtoken) // maybe token has been update from a different thread
-                                                    {
-                                                        car.Log("Restart Streaming because Streamingtoken changed");
-                                                        break;
-                                                    }
 
                                                     if (lastTeslaToken != Tesla_token)
                                                     {
@@ -3643,6 +3639,8 @@ namespace TeslaLogger
                                                     }
                                                 }
                                                 car.Log("Exit streaming while loop wait for token refresh");
+
+                                                Thread.Sleep(10000);
                                             }
                                         }
                                         else
@@ -5167,6 +5165,9 @@ DESC", con))
 
         public void StopStreaming()
         {
+            if (car.FleetAPI)
+                return;
+
             Log("Request StopStreaming");
             stopStreaming = true;
             DrivingOrChargingByStream = false;

@@ -65,6 +65,9 @@ namespace TeslaLogger
                 //if (car.IsInService())
                 //    continue;
 
+                if (car.FleetAPI) // FleetAPI doesn't support nearby Superchargers
+                    continue;
+
                 if ((car.GetCurrentState() == Car.TeslaState.Charge
                     || car.GetCurrentState() == Car.TeslaState.Drive
                     || car.GetCurrentState() == Car.TeslaState.Online)

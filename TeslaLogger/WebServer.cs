@@ -20,6 +20,7 @@ using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
 using System.Reflection;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
@@ -389,7 +390,6 @@ namespace TeslaLogger
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             WriteString(response, version);
-
         }
 
         private static void Get_CarValueVIN(HttpListenerRequest request, HttpListenerResponse response)
@@ -1120,6 +1120,12 @@ DROP TABLE chargingstate_bak";
                 var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0, fleetAPI); // TODO Check
                 car.webhelper.Tesla_token = access_token;
 
+                if (fleetAPI)
+                {
+                    car.SetCurrentState(Car.TeslaState.Online);
+                    car.webhelper.GetRegion();
+                }
+
                 car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);
 
                 if (vehicles == null)
@@ -1133,6 +1139,7 @@ DROP TABLE chargingstate_bak";
                         responseString = "ERROR: " + error + " / Error Description: " + error_description;
 
                         Logfile.Log(responseString);
+                        car.CreateExeptionlessLog("GetCarsFromAccount", responseString, Exceptionless.Logging.LogLevel.Fatal).Submit();
 
                         WriteString(response, responseString);
                         return;
