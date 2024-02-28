@@ -11,6 +11,7 @@
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url]
 
 [![.NET Core Desktop](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml)
+[![translated](https://hosted.weblate.org/widget/teslalogger/teslalogger/svg-badge.svg)](https://hosted.weblate.org/engage/teslalogger/)
 
 TeslaLogger is a self hosted data logger for your Tesla Model S/3/X/Y. Currently it supports RaspberryPi 3B, 3B+, 4B, Docker and Synology NAS.
 
@@ -41,9 +42,7 @@ Within 2-3 minutes the Raspberry should show up in you network.
 
 ### Settings & Language
 
-Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome
-
-Change the language and units and reboot the Teslalogger.
+Available languages: English, German, Danish, Spanish, Chinese, French, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome: [![translated](https://hosted.weblate.org/widget/teslalogger/teslalogger/svg-badge.svg)](https://hosted.weblate.org/engage/teslalogger/)
 
 [http://raspberry/admin/settings.php](http://raspberry/admin/settings.php)
 or sometimes: [http://raspberry.local/admin/settings.php](http://raspberry.local/admin/settings.php)

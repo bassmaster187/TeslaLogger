@@ -207,7 +207,7 @@ Supercharger DE-Gützkow, 53.943943, 13.396739
 Supercharger DE-Hamburg, 53.460881, 9.940546
 Supercharger-V3 DE-Hamburg - Stillhorn, 53.479701, 10.025150
 Supercharger-V3 DE-Hamburg-Wandsbek, 53.586773, 10.098058
-Supercharger-V3 DE-Hanau, 50.105195, 8.916918
+Supercharger-V3 DE-Hanau, 50.104919, 8.916077, 30
 Supercharger-V3 DE-Hannover, 52.423275,9.835039, 20
 Supercharger-V3 DE-Heede, 52.985372, 7.248233
 Supercharger-V3 DE-Hemsbach, 49.594071, 8.632455, 30
@@ -233,7 +233,7 @@ Supercharger DE-Hilpoltstein,49.161213,11.260555,8
 Supercharger DE-Hilpoltstein,49.161201,11.260685,12
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
-Supercharger-V3 DE-Holzkirchen, 47.8810757, 11.70275368
+Supercharger-V3 DE-Holzkirchen, 47.881386,11.701631
 Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger-V3 DE-Irschenberg, 47.826678, 11.898501
 Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
@@ -528,7 +528,7 @@ Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
 Supercharger FR-Nîmes, 43.81655, 4.345061
-Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 40
+Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
 Supercharger-V3 FR-Nice,43.727727,7.186527
 Supercharger-V3 FR-Niort,46.29825,-0.375256
 Supercharger-V3 FR-Orange, 44.1121375, 4.8517996
@@ -819,6 +819,7 @@ Supercharger NO-Lier North, 59.770833, 10.262139
 Supercharger NO-Lier South, 59.766259, 10.257838
 Supercharger-V3 NO-Liertoppen, 59.80906, 10.299437
 Supercharger NO-Lillehammer, 61.13045, 10.43491
+Supercharger-V3 NO-Lillehammer - Strandtorget, 61.114584,10.447309
 Supercharger NO-Lillesand, 58.236817, 8.299052
 Supercharger NO-Lyngdal, 58.155643, 7.102354
 Supercharger-V3 NO-Maurset, 60.410401, 7.325072
@@ -861,7 +862,7 @@ Supercharger NO-Vinje, 59.5701306, 7.992551
 Supercharger NO-Vinstra, 61.59049, 9.72166
 Supercharger NO-Voss, 60.658184, 6.436238
 Supercharger NO-Ørskog, 62.520404, 6.915983
-Supercharger NO-Øyer, 61.243236, 10.434457
+Supercharger NO-Øyer,61.243388,10.434378,30
 Supercharger NZ-Auckland-Ponsonby, -36.858347,174.754238
 Supercharger PL-Ciechocinek, 52.875248,18.774952
 Supercharger PL-Katowice, 50.254594, 19.046594
@@ -3475,7 +3476,8 @@ EnBW DE-Bruchsal Sötenerstr., 49.128596749966, 8.6011982502655
 EnBW DE-Bruchsal West , 49.160990420608, 8.5670357814025
 EnBW DE-Bruckmühl Albert-Mayer-Straße, 47.881901, 11.933148
 EnBW DE-Brunautal Ost, 53.109298, 9.983996
-EnBW DE-Brunnthal Happy Schuh, 48.041564, 11.661467
+EnBW DE-Brunnthal Hagebaumarkt Zusestraße, 48.0414,11.660789,30
+EnBW DE-Brunnthal Happy Schuh, 48.041564, 11.661467, 20
 EnBW DE-Brunsbüttel, 53.900785, 9.122634
 EnBW DE-Buchen (Odenwald) Eberstadter Straße, 49.52098, 9.328713
 EnBW DE-Buchheim Römerweg, 48.012089, 8.986638
@@ -5845,7 +5847,8 @@ Fastned DE-Stuhr Delmenhorster Straße, 53.012543, 8.702095
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
-Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216714, 4.9997043, 30
+Fastned FR-Aire d'Ambrussum Nord, 43.715234, 4.133395, 30
+Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216718, 5.00188, 30
 Fastned FR-Aire de Saint Ambreuil, 46.691106, 4.844877, 30
 Fastned NL-Aalscholver, 52.436005, 5.424898
 Fastned NL-Akermaat, 52.498623, 4.698793
@@ -6178,7 +6181,7 @@ Ionity FR-Labenne Ouest, 43.586073, -1.420776
 Ionity FR-Lacq Audéjos Nord, 43.418629, -0.584799
 Ionity FR-Lacq Audéjos Sud, 43.421850, -0.598593
 Ionity FR-Langres Noidant, 47.813347, 5.22459
-Ionity FR-Langres Perrogney, 47.815184, 5.223172
+Ionity FR-Langres Perrogney, 47.815431, 5.222586, 30
 Ionity FR-Larzac, 43.985279, 3.183078
 Ionity FR-Lochères, 47.30968, 4.501811
 Ionity FR-Longué la Couaille, 47.4189, -0.1343
@@ -6204,6 +6207,7 @@ Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
 Ionity FR-Saint Léger Est, 45.610095, -0.598651
+Ionity FR-Saint-Rambert Est, 45.276349,4.828025, 30
 Ionity FR-Saint-Rambert Ouest, 45.275563, 4.825571
 Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
@@ -6280,7 +6284,7 @@ Ionity NO-Kjerlingland, 58.23655, 8.29948
 Ionity NO-Klett, 63.324643, 10.306073
 Ionity NO-Leirvik, 59.77503, 5.48611
 Ionity NO-Lura, 58.87322, 5.72126
-Ionity NO-Øyer, 61.24266, 10.4335
+Ionity NO-Øyer,61.243101,10.434776,10
 Ionity NO-Ringdalskogen, 59.11234, 10.11033
 Ionity NO-Røldal, 59.83325, 6.81375
 Ionity NO-Rygge, 59.3871, 10.75119
@@ -6900,6 +6904,7 @@ Ladenetz DE-Wuppertal - Hauptbahnhof, 51.255269, 7.151023, 15
 
 Ladeverbund+ DE-Bad Mergentheim Bahnhof, 49.493046,9.769979
 Ladeverbund+ DE-Bad Mergentheim Oskar-Weitbrecht-Weg, 49.486658,9.790112
+Ladeverbund+ DE-Deggendorf,48.835063,12.960148
 Ladeverbund+ DE-Fürth Espanstraße 10, 49.479663, 11.000589
 Ladeverbund+ DE-Fürth Kurt-Scherzer-Straße, 49.468266,10.958465
 Ladeverbund+ DE-Fürth Nürnberger Straße, 49.465506,11.011214
@@ -7232,7 +7237,7 @@ Lidl DE-Crailsheim Haller Straße 65, 49.142027, 10.048198
 Lidl DE-Cremlingen,52.2521963,10.6404777
 Lidl DE-Cuxhaven Grüner Weg 2, 53.869351, 8.700104
 Lidl DE-Damme Hunteburger Straße 18-20, 52.518822, 8.200549
-Lidl DE-Deggendorf,48.8476283,12.9595757
+Lidl DE-Deggendorf,48.847939,12.959208,20
 Lidl DE-Delmenhorst Bremer Straße 106, 53.053937, 8.649626
 Lidl DE-Denzlingen, 48.067373,7.869201,20
 Lidl DE-Dippoldiswalde Alte Altenberger Str. 36, 50.888738, 13.668053
@@ -8407,6 +8412,7 @@ ShellRecharge DE-Kirchheim, 50.8342519, 9.5744849, 10
 ShellRecharge DE-Kraftsdorf, 50.8959477, 11.9793605, 5
 ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
 ShellRecharge DE-Osnabrück, 52.301747, 7.949302
+ShellRecharge FR-Aire de Béziers-Montblanc Sud, 43.359314, 3.34559, 30
 ShellRecharge NL-Heerlen, 50.823176, 6.019581, 30
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
