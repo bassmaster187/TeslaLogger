@@ -528,7 +528,7 @@ Supercharger FR-Nancy, 48.638215, 6.184349
 Supercharger FR-Nantes - La Chapelle-sur-Erdre, 47.282708, -1.549982
 Supercharger FR-Narbonne, 43.1676432, 2.9859067
 Supercharger FR-Nîmes, 43.81655, 4.345061
-Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 40
+Supercharger-V3 FR-Nîmes - Carré Sud, 43.807991, 4.363603, 50
 Supercharger-V3 FR-Nice,43.727727,7.186527
 Supercharger-V3 FR-Niort,46.29825,-0.375256
 Supercharger-V3 FR-Orange, 44.1121375, 4.8517996
@@ -5847,7 +5847,8 @@ Fastned DE-Stuhr Delmenhorster Straße, 53.012543, 8.702095
 Fastned DE-Uffenheim-Langensteinach, 49.50991, 10.19602
 Fastned DE-Wittenburg, 53.50764, 11.09686
 Fastned DE-Wittstock, 53.15744, 12.45124
-Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216714, 4.9997043, 30
+Fastned FR-Aire d'Ambrussum Nord, 43.715234, 4.133395, 30
+Fastned FR-Aire de Gevrey - Chambertin Ouest, 47.216718, 5.00188, 30
 Fastned FR-Aire de Saint Ambreuil, 46.691106, 4.844877, 30
 Fastned NL-Aalscholver, 52.436005, 5.424898
 Fastned NL-Akermaat, 52.498623, 4.698793
@@ -6180,7 +6181,7 @@ Ionity FR-Labenne Ouest, 43.586073, -1.420776
 Ionity FR-Lacq Audéjos Nord, 43.418629, -0.584799
 Ionity FR-Lacq Audéjos Sud, 43.421850, -0.598593
 Ionity FR-Langres Noidant, 47.813347, 5.22459
-Ionity FR-Langres Perrogney, 47.815184, 5.223172
+Ionity FR-Langres Perrogney, 47.815431, 5.222586, 30
 Ionity FR-Larzac, 43.985279, 3.183078
 Ionity FR-Lochères, 47.30968, 4.501811
 Ionity FR-Longué la Couaille, 47.4189, -0.1343
@@ -6206,6 +6207,7 @@ Ionity FR-Poitiers Jaunay-Clan, 46.704579, 0.371265
 Ionity FR-Portes d'Angers (Sud), 47.50047, -0.49057
 Ionity FR-Rely, 50.573089, 2.377188
 Ionity FR-Saint Léger Est, 45.610095, -0.598651
+Ionity FR-Saint-Rambert Est, 45.276349,4.828025, 30
 Ionity FR-Saint-Rambert Ouest, 45.275563, 4.825571
 Ionity FR-Saugon Ouest, 45.188934, -0.492422
 Ionity FR-Taponas, 46.134416, 4.766841
@@ -8410,6 +8412,7 @@ ShellRecharge DE-Kirchheim, 50.8342519, 9.5744849, 10
 ShellRecharge DE-Kraftsdorf, 50.8959477, 11.9793605, 5
 ShellRecharge DE-Neu-Ulm, 48.3875766, 10.033160
 ShellRecharge DE-Osnabrück, 52.301747, 7.949302
+ShellRecharge FR-Aire de Béziers-Montblanc Sud, 43.359314, 3.34559, 30
 ShellRecharge NL-Heerlen, 50.823176, 6.019581, 30
 
 Smatrics AT-Feldkirchen bei Graz, 47.009115, 15.44097, 20
