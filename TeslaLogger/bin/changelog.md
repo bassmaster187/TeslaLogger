@@ -1,7 +1,8 @@
-# Version 1.57.3
+# Version 1.57.4
 - Bugfixes
-- Completely new MQTT client with MQTT AutoDiscovery and control possibilities. Old MQTT client will still work until new MQTT client is activated, but is not supported any more. Setup: go to Admin->Extras->MQTT Settings
 
+# Version 1.57.3
+- Completely new MQTT client with MQTT AutoDiscovery and control possibilities. Old MQTT client will still work until new MQTT client is activated, but is not supported any more. Setup: go to Admin Panel->Extras->MQTT Settings
 
 # Version 1.57.1
 - Detect Y SR MIC / MIG / BYD / CATL / SR+
