@@ -22,6 +22,7 @@ namespace TeslaLogger
 
         private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
+        internal TelemetryConnection telemetry;
 
         internal enum TeslaState
         {
@@ -230,6 +231,8 @@ namespace TeslaLogger
                     }
                     DbHelper = new DBHelper(this);
                     webhelper = new WebHelper(this);
+
+                    telemetry = new TelemetryConnection(this);
 
                     if (CarInDB > 0)
                     {
