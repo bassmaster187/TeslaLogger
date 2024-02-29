@@ -763,7 +763,7 @@ namespace TeslaLogger
                         SetCurrentState(TeslaState.GoSleep);
                         goSleepWithWakeup = true;
                     }
-                    else if (FleetAPI && (CarType == "model3" || Model == "modely"))
+                    else if (FleetAPI && (CarType == "model3" || CarType == "modely"))
                     {
                         Log("API not suspended!");
                         Thread.Sleep(30000);
