@@ -43,7 +43,10 @@ namespace TeslaLogger
                 if (car.FleetAPI)
                 {
                     if (String.IsNullOrEmpty(car.FleetApiAddress))
-                        return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
+                    {
+                        var ret = GetRegion();
+                        return ret;
+                    }
                     else
                         return car.FleetApiAddress;
                 }
@@ -666,12 +669,14 @@ namespace TeslaLogger
                 if (!car.FleetAPI)
                     return "";
 
+                /*
                 var state = car.GetCurrentState();
-
+                
                 if (!(state == Car.TeslaState.Charge
                     || state == Car.TeslaState.Drive
                     || state == Car.TeslaState.Online))
                     return "";
+                */
 
 
                 var response = GethttpclientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
@@ -697,19 +702,23 @@ namespace TeslaLogger
                         car.DbHelper.UpdateCarColumn("fleetAPIaddress", fleeturl);
                         return fleeturl;
                     }
-                    
+
+
+                    car.CreateExeptionlessLog("GetRegion", "no url", LogLevel.Fatal).AddObject(result, "ResultContent").Submit();
                     return "";
                 }
                 else
                 {
+                    car.CreateExeptionlessLog("GetRegion", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
                     Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
                     return "";
                 }
                 
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException ex)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
             }
             catch (Exception ex)
             {
