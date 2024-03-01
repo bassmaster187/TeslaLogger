@@ -133,6 +133,10 @@ namespace TeslaLogger
 
                 CheckDBSchema_TPMS();
 
+                CheckDBSchema_Battery();
+
+                CheckDBSchema_Cruisestate();
+
                 GetChargingHistoryV2Service.CheckSchema();
 
                 Logfile.Log("DBSchema Update finished.");
@@ -293,6 +297,52 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void CheckDBSchema_Battery()
+        {
+            if (!DBHelper.TableExists("battery"))
+            {
+                string sql = @"CREATE TABLE `battery` (
+                      `CarID` int(11) NOT NULL,
+                      `date` datetime NOT NULL,
+                      `PackVoltage` double DEFAULT NULL,
+                      `PackCurrent` double DEFAULT NULL,
+                      `IsolationResistance` double DEFAULT NULL,
+                      `NumBrickVoltageMax` smallint(6) DEFAULT NULL,
+                      `BrickVoltageMax` double DEFAULT NULL,
+                      `NumBrickVoltageMin` smallint(6) DEFAULT NULL,
+                      `BrickVoltageMin` double DEFAULT NULL,
+                      `ModuleTempMax` double DEFAULT NULL,
+                      `ModuleTempMin` double DEFAULT NULL,
+                      `LifetimeEnergyUsed` double DEFAULT NULL,
+                      `LifetimeEnergyUsedDrive` double DEFAULT NULL,
+                      PRIMARY KEY (`CarID`,`date`)
+                    )";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
+            }
+        }
+
+        private static void CheckDBSchema_Cruisestate()
+        {
+            if (!DBHelper.TableExists("cruisestate"))
+            {
+                string sql = @"CREATE TABLE `cruisestate` (
+                  `CarID` int(11) NOT NULL,
+                  `date` datetime NOT NULL,
+                  `state` tinyint(4) DEFAULT NULL,
+                  PRIMARY KEY (`CarID`,`date`)
+                )";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
             }
         }
 

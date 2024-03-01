@@ -232,7 +232,8 @@ namespace TeslaLogger
                     DbHelper = new DBHelper(this);
                     webhelper = new WebHelper(this);
 
-                    telemetry = new TelemetryConnection(this);
+                    if (FleetAPI)
+                        telemetry = new TelemetryConnection(this);
 
                     if (CarInDB > 0)
                     {
