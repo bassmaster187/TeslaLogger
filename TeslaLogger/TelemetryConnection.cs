@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Reflection;
 
 namespace TeslaLogger
 {
@@ -240,7 +241,7 @@ namespace TeslaLogger
                     car.Log("Connect to Telemetry Server Error: " + ex.Message);
             }
 
-            var s = r.Next(30000, 60000);
+            var s = r.Next(10000, 30000);
             Thread.Sleep(s);
         }
 
@@ -249,7 +250,10 @@ namespace TeslaLogger
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
                     { "vin", car.Vin},
-                    { "token", car.TaskerHash}
+                    { "token", car.TaskerHash},
+                    { "accesstoken", car.Tesla_Token},
+                    { "regionurl", car.webhelper.apiaddress},
+                    { "version", Assembly.GetExecutingAssembly().GetName().Version.ToString()}
                 };
 
             var jLogin = JsonConvert.SerializeObject(login);
