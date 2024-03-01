@@ -68,8 +68,8 @@ namespace TeslaLogger
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
             autoDiscovery["charge_rate_km"]["name"] = "Charge rate";
-            autoDiscovery["charge_rate_km"]["unit"] = "km";
-            autoDiscovery["charge_rate_km"]["class"] = "distance";
+            autoDiscovery["charge_rate_km"]["unit"] = "km/h";
+            autoDiscovery["charge_rate_km"]["class"] = "speed";
 
             autoDiscovery["time_to_full_charge"] = new Dictionary<string, string>();
             autoDiscovery["time_to_full_charge"]["type"] = "sensor";

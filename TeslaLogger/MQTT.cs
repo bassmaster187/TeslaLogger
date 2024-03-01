@@ -512,7 +512,7 @@ namespace TeslaLogger
                 json_attributes_topic = $"{topic}/car/{vin}/gps_tracker",
                 state_topic = $"{topic}/car/{vin}/TLGeofenceIsHome",
                 payload_home = "true",
-                payload_not_home = "fasle"
+                payload_not_home = "false"
             }) ;
 
             client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker ?? "NULL"),
