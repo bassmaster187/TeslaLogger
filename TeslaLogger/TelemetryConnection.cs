@@ -86,8 +86,8 @@ namespace TeslaLogger
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
                         car.Log("Telemetry Server Data: " + j.ToString());
-                        InsertBatteryTable(jData, d);
-                        InsertCruiseStateTable(jData, d);
+                        InsertBatteryTable(jData, d, resultContent);
+                        InsertCruiseStateTable(jData, d, resultContent);
                     }
                 }
                 else
@@ -103,117 +103,131 @@ namespace TeslaLogger
             }
         }
 
-        private void InsertCruiseStateTable(dynamic j, DateTime d)
+        private void InsertCruiseStateTable(dynamic j, DateTime d, string resultContent)
         {
-            foreach (dynamic jj in j)
+            try
             {
-                string key = jj["key"];
-                if (key == "CruiseState")
+                foreach (dynamic jj in j)
                 {
-                    dynamic value = jj["value"];
-                    if (value.ContainsKey("stringValue"))
+                    string key = jj["key"];
+                    if (key == "CruiseState")
                     {
-                        string v1 = value["stringValue"];
-
-                        if (v1 != lastCruiseState)
+                        dynamic value = jj["value"];
+                        if (value.ContainsKey("stringValue"))
                         {
-                            lastCruiseState = v1;
+                            string v1 = value["stringValue"];
 
-                            int? state = null;
-                            switch (v1)
+                            if (v1 != lastCruiseState)
                             {
-                                case "Off":
-                                    state = 0;
-                                    break;
-                                case "On":
-                                    state = 1;
-                                    break;
-                                case "Standby":
-                                    state = -1;
-                                    break;
-                                default:
-                                    car.Log("Unhandled Cruise State: " + v1);
-                                    break;
-                            }
+                                lastCruiseState = v1;
 
-                            if (state != null)
-                            {
-                                using (var con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                int? state = null;
+                                switch (v1)
                                 {
-                                    con.Open();
+                                    case "Off":
+                                        state = 0;
+                                        break;
+                                    case "On":
+                                        state = 1;
+                                        break;
+                                    case "Standby":
+                                        state = -1;
+                                        break;
+                                    default:
+                                        car.Log("Unhandled Cruise State: " + v1);
+                                        break;
+                                }
 
-                                    var cmd = new MySqlCommand("insert into cruisestate (CarId, date, state) values (@carid, @date, @state)", con);
-                                    cmd.Parameters.AddWithValue("@carid", car.CarInDB);
-                                    cmd.Parameters.AddWithValue("@date", d);
-                                    cmd.Parameters.AddWithValue("@state", state);
-                                    cmd.ExecuteNonQuery();
+                                if (state != null)
+                                {
+                                    using (var con = new MySqlConnection(DBHelper.DBConnectionstring))
+                                    {
+                                        con.Open();
+
+                                        var cmd = new MySqlCommand("insert into cruisestate (CarId, date, state) values (@carid, @date, @state)", con);
+                                        cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                                        cmd.Parameters.AddWithValue("@date", d);
+                                        cmd.Parameters.AddWithValue("@state", state);
+                                        cmd.ExecuteNonQuery();
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            catch (Exception ex) { 
+                car.Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
+            }
         }
 
-        private void InsertBatteryTable(dynamic j, DateTime date)
+        private void InsertBatteryTable(dynamic j, DateTime date, string resultContent)
         {
-            var cols = new string[] {"PackVoltage", "PackCurrent", "IsolationResistance", "NumBrickVoltageMax", "BrickVoltageMax",
+            try
+            {
+                var cols = new string[] {"PackVoltage", "PackCurrent", "IsolationResistance", "NumBrickVoltageMax", "BrickVoltageMax",
                 "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive"};
 
-            using (var cmd = new MySqlCommand())
-            {
-                foreach (dynamic jj in j)
+                using (var cmd = new MySqlCommand())
                 {
-                    string key = jj["key"];
-                    if (cols.Any(key.Contains))
+                    foreach (dynamic jj in j)
                     {
-                        string name = jj["key"];
-                        dynamic value = jj["value"];
-                        if (value.ContainsKey("stringValue"))
+                        string key = jj["key"];
+                        if (cols.Any(key.Contains))
                         {
-                            string v1 = value["stringValue"];
-                            double d = double.Parse(v1, Tools.ciEnUS);
-                            cmd.Parameters.AddWithValue("@" + name, d);
+                            string name = jj["key"];
+                            dynamic value = jj["value"];
+                            if (value.ContainsKey("stringValue"))
+                            {
+                                string v1 = value["stringValue"];
+                                double d = double.Parse(v1, Tools.ciEnUS);
+                                cmd.Parameters.AddWithValue("@" + name, d);
+                            }
+                        }
+                    }
+
+                    if (cmd.Parameters.Count > 0)
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@date", date);
+
+                        var sb = new StringBuilder("insert into battery (");
+                        var sbc = new StringBuilder(") values (");
+                        var names = cmd.Parameters.Cast<MySqlParameter>()
+                            .Select(p => p.ParameterName.Substring(1))
+                            .ToArray();
+                        sb.Append(string.Join(", ", names));
+
+                        var values = cmd.Parameters.Cast<MySqlParameter>()
+                            .Select(p => p.ParameterName)
+                            .ToArray();
+                        sbc.Append(string.Join(", ", values));
+                        sbc.Append(")");
+
+                        sb.Append(sbc);
+
+                        sb.Append("\n ON DUPLICATE KEY UPDATE ");
+                        var update = cmd.Parameters.Cast<MySqlParameter>()
+                            .Where(w => w.ParameterName != "@CarID" && w.ParameterName != "@date")
+                            .Select(p => p.ParameterName.Substring(1) + "=" + p.ParameterName)
+                            .ToArray();
+
+                        sb.Append(string.Join(", ", update));
+                        cmd.CommandText = sb.ToString();
+
+                        using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                        {
+                            con.Open();
+                            cmd.Connection = con;
+                            cmd.ExecuteNonQuery();
                         }
                     }
                 }
-
-                if (cmd.Parameters.Count > 0)
-                {
-                    cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-                    cmd.Parameters.AddWithValue("@date", date);
-
-                    var sb = new StringBuilder("insert into battery (");
-                    var sbc = new StringBuilder(") values (");
-                    var names = cmd.Parameters.Cast<MySqlParameter>()
-                        .Select(p => p.ParameterName.Substring(1))
-                        .ToArray();
-                    sb.Append(string.Join(", ", names));
-
-                    var values = cmd.Parameters.Cast<MySqlParameter>()
-                        .Select(p => p.ParameterName)
-                        .ToArray();
-                    sbc.Append(string.Join(", ", values));
-                    sbc.Append(")");
-
-                    sb.Append(sbc);
-
-                    sb.Append("\n ON DUPLICATE KEY UPDATE ");
-                    var update = cmd.Parameters.Cast<MySqlParameter>()
-                        .Where(w => w.ParameterName != "@CarID" && w.ParameterName != "@date")
-                        .Select(p => p.ParameterName.Substring(1) + "=" + p.ParameterName)
-                        .ToArray();
-
-                    sb.Append(string.Join(", ", update));
-                    cmd.CommandText = sb.ToString();
-
-                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
-                    {
-                        con.Open();
-                        cmd.Connection = con;
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+            } catch (Exception ex)
+            {
+                car.Log("Telemetry Error: " + ex.ToString());
+                car.CreateExceptionlessClient(ex).AddObject(resultContent, "ResultContent").Submit();
             }
         }
 
@@ -221,7 +235,7 @@ namespace TeslaLogger
         {
             var s = r.Next(10000, 30000);
             Thread.Sleep(s);
-            car.Log("Connect to telemetry server");
+            car.Log("Connect to Telemetry Server");
 
             if (ws != null)
                 ws.Dispose();
@@ -238,14 +252,22 @@ namespace TeslaLogger
             catch (Exception ex)
             {
                 if (ex is AggregateException ex2)
+                {
                     car.Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
+                    car.CreateExceptionlessClient(ex2).Submit();
+                }
                 else
+                {
                     car.Log("Connect to Telemetry Server Error: " + ex.Message);
+                    car.CreateExceptionlessClient(ex).Submit();
+                }
             }
         }
 
         private void Login()
         {
+            car.Log("Login to Telemetry Server");
+
             Dictionary<string, object> login = new Dictionary<string, object>{
                     { "msg_type", "login"},
                     { "vin", car.Vin},
