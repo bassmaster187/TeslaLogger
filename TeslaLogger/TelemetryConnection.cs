@@ -20,7 +20,7 @@ namespace TeslaLogger
         Thread t;
         CancellationToken ct = new CancellationToken();
         ClientWebSocket ws = null;
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[1024*10];
         Random r = new Random();
 
         String lastCruiseState = "";
@@ -219,6 +219,8 @@ namespace TeslaLogger
 
         private void ConnectToServer()
         {
+            var s = r.Next(10000, 30000);
+            Thread.Sleep(s);
             car.Log("Connect to telemetry server");
 
             if (ws != null)
@@ -240,9 +242,6 @@ namespace TeslaLogger
                 else
                     car.Log("Connect to Telemetry Server Error: " + ex.Message);
             }
-
-            var s = r.Next(10000, 30000);
-            Thread.Sleep(s);
         }
 
         private void Login()

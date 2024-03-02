@@ -232,9 +232,6 @@ namespace TeslaLogger
                     DbHelper = new DBHelper(this);
                     webhelper = new WebHelper(this);
 
-                    if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
-                        telemetry = new TelemetryConnection(this);
-
                     if (CarInDB > 0)
                     {
                         thread = new Thread(Loop)
@@ -282,6 +279,9 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
+
+                    if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        telemetry = new TelemetryConnection(this);
                 }
                 finally
                 {

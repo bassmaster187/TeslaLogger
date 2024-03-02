@@ -215,7 +215,7 @@ namespace TeslaLogger {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ws://teslalogger.de:4500/ws")]
+        [global::System.Configuration.DefaultSettingValueAttribute("wss://teslalogger.de:4501/ws")]
         public string TelemetryServerURL {
             get {
                 return ((string)(this["TelemetryServerURL"]));
