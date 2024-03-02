@@ -6127,6 +6127,7 @@ WHERE
         {
             object meter_vehicle_kwh_end = DBNull.Value;
             object meter_utility_kwh_end = DBNull.Value;
+            object session_price_end = DBNull.Value;
 
             try
             {
@@ -6135,6 +6136,8 @@ WHERE
                 {
                     meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
                     meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
+                    session_price_end = v.GetSessionPrice();
+
                 }
             }
             catch (Exception ex)
@@ -6161,7 +6164,8 @@ SET
     meter_utility_kwh_end = @meter_utility_kwh_end,
     meter_vehicle_kwh_sum = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
     meter_utility_kwh_sum = @meter_utility_kwh_end - meter_utility_kwh_start,
-    cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start
+    cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
+    cost_per_session = @cost_per_session
 WHERE
     id = @ChargingStateID
     AND CarID = @CarID", con))
@@ -6172,6 +6176,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
+                        cmd.Parameters.AddWithValue("@cost_per_session", session_price_end);
                         _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
