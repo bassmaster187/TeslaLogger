@@ -404,7 +404,7 @@ MQTTSettingsInfo=MQTT Host обязателен. Всё остальное оп�
 
 TopicStructure=Структура:
 MQTT1=Все значения в одном JSON (если включено): "teslalogger/json/CAR_VIN/currentjson"
-MQTT2=Все значения по одиночке (если включено): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT2=Все значения по одиночке (если включено): "teslalogger/car/CAR_VIN/ideal_battery_range_km"
 MQTT3="teslalogger" изменяется в графе "Topic"
 MQTT4="CAR_VIN" номер VIN машины
 MQTT5="ideal_battery_range_km" одиночные значения
