@@ -76,7 +76,7 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Data: " + j.ToString());
+                        car.Log("Telemetry Server Data");
                         InsertBatteryTable(jData, d, resultContent);
                         InsertCruiseStateTable(jData, d, resultContent);
                     }
@@ -89,7 +89,7 @@ namespace TeslaLogger
 
                     if (car.Vin.Equals(vin, StringComparison.OrdinalIgnoreCase))
                     {
-                        car.Log("Telemetry Server Data: " + j.ToString());
+                        car.Log("Telemetry Server Alerts");
 
                         foreach (dynamic ji in jData)
                         {
