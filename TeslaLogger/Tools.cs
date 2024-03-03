@@ -1470,10 +1470,58 @@ namespace TeslaLogger
 
                 CreateBackupForDocker();
 
+                CleanupLogfile();
+
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
                 CreateMemoryCacheItem(24);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void CleanupLogfile()
+        {
+            try
+            {
+                var nohup = Path.Combine(Logfile.GetExecutingPath(), "nohup.out");
+                // check if nohup.out is bigger than 10MB
+                if (new FileInfo(nohup).Length > 10000000)
+                {
+                    // check or create logs dir
+                    var LogDir = Path.Combine(Logfile.GetExecutingPath(), "logs");
+                    if (!Directory.Exists(LogDir))
+                    {
+                        Directory.CreateDirectory(Path.Combine(Logfile.GetExecutingPath(), "logs"));
+                    }
+                    var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    // copy to logs dir with timestamp
+                    ExecMono("/bin/cp", nohup + " " + targetFile);
+                    // gzip copied file
+                    ExecMono("bin/gzip", targetFile);
+                    // empty nohup.out
+                    ExecMono("bin/echo", " > " + nohup);
+                    // cleanup old logfile backups
+                    // old means older than 90 days
+                    DirectoryInfo di = new DirectoryInfo(LogDir);
+                    FileInfo[] files = di.GetFiles();
+                    if (files.Length > 0)
+                    {
+                        IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
+                        foreach (FileInfo fi in ds)
+                        {
+                            if ((DateTime.Now - fi.LastWriteTime).TotalDays > 90)
+                            {
+                                Logfile.Log("CleanupLogfile: delete " + fi.FullName + " (" + fi.Length + " bytes)");
+                                fi.Delete();
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
