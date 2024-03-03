@@ -137,6 +137,8 @@ namespace TeslaLogger
 
                 CheckDBSchema_Cruisestate();
 
+                CheckDBSchema_Alerts();
+
                 GetChargingHistoryV2Service.CheckSchema();
 
                 Logfile.Log("DBSchema Update finished.");
@@ -297,6 +299,56 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log("Error in update: " + ex.ToString());
+            }
+        }
+
+        private static void CheckDBSchema_Alerts()
+        {
+            if (!DBHelper.TableExists("alerts"))
+            {
+                string sql = @"CREATE TABLE `alerts` (
+                      `CarID` int(11) NOT NULL,
+                      `startedAt` datetime NOT NULL,
+                      `nameID` int(11) NOT NULL,
+                      `endedAt` datetime DEFAULT NULL,
+                      `ID` int(11) NOT NULL AUTO_INCREMENT,
+                      PRIMARY KEY (`CarID`,`startedAt`,`nameID`),
+                      KEY `ID` (`ID`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1778 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                    ";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
+            }
+
+            if (!DBHelper.TableExists("alert_names"))
+            {
+                string sql = @"CREATE TABLE `alert_names` (
+                      `ID` int(11) NOT NULL AUTO_INCREMENT,
+                      `Name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                      PRIMARY KEY (`ID`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
+            }
+
+            if (!DBHelper.TableExists("alert_audiences"))
+            {
+                string sql = @"CREATE TABLE `alert_audiences` (
+                      `alertsID` int(11) NOT NULL,
+                      `audienceID` tinyint(4) NOT NULL,
+                      PRIMARY KEY (`alertsID`,`audienceID`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE TABLE OK");
             }
         }
 
