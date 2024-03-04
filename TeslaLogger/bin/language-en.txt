@@ -542,3 +542,10 @@ TextRestore3=Don't interrupt the restore process in any way! Don't reload the pa
 
 #dashboard.php
 Sleeping=Sleeping
+
+#Vehicle Alerts
+Fahrzeug Fehler=Vehicle Alerts
+startedAt=Start
+endedAt=End
+Häufigkeit=Frequency
+Fehler=Alerts

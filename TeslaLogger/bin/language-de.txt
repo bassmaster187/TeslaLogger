@@ -385,3 +385,10 @@ StartSOC="Start SOC"
 SOC diff="SOC diff"
 Odometer [mi]="Km Stand [mi]"
 Max. Reichweite (Monatsmittel) [km]="Max Reichweite (monatlicher avg) [km]"
+
+#Vehicle Alerts.json
+Fahrzeug Fehler=Fahrzeug Fehler
+startedAt=Start
+endedAt=Ende
+Häufigkeit=Häufigkeit
+Fehler=Fehler
