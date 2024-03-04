@@ -415,7 +415,7 @@ SET
   tesla_password = NULL,
   tesla_token = NULL,
   refresh_token = NULL,
-  tesla_name = NULL
+  tesla_name = """"
 WHERE
   id = @id", con))
                         {
