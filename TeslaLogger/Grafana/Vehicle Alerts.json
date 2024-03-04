@@ -267,12 +267,12 @@
       {
         "current": {
           "selected": false,
-          "text": "Tessi",
+          "text": "",
           "value": "1"
         },
         "datasource": {
           "type": "mysql",
-          "uid": "PC0C98BF192F75B00"
+          "uid": "000000001"
         },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 and fleetAPI = 1 and car_type not in ('models', 'models2', 'modelx') order by display_name",
         "hide": 0,
