@@ -414,7 +414,8 @@ UPDATE
 SET
   tesla_password = NULL,
   tesla_token = NULL,
-  refresh_token = NULL
+  refresh_token = NULL,
+  tesla_name = NULL
 WHERE
   id = @id", con))
                         {
