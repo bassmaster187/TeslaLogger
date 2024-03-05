@@ -151,7 +151,7 @@ namespace TeslaLogger
                 {
                     Logfile.Log("DBView Update (Task) started.");
                     CheckDBViews();
-                    if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "wheel_type"))
+                    if (!DBHelper.TableExists("trip") || !DBHelper.ColumnExists("trip", "AP_sec_sum"))
                     {
                         UpdateDBViews();
                     }
@@ -761,6 +761,28 @@ PRIMARY KEY(id)
                 Logfile.Log("ALTER TABLE drivestate ADD Column wheel_type");
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `wheel_type` VARCHAR(40) NULL DEFAULT NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("drivestate", "AP_sec_sum"))
+            {
+                Logfile.Log("ALTER TABLE drivestate ADD Column AP_sec_sum");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `AP_sec_sum` int NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `AP_sec_max` int NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_FL` double NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_FR` double NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_RL` double NULL DEFAULT NULL", 600);
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_RR` double NULL DEFAULT NULL", 600);
+
+                new Thread(() =>
+                {
+                    while (Car.Allcars.Count == 0)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    Thread.Sleep(5000);
+                    DBHelper.UpdateAllDrivestateData();
+                }).Start();
             }
         }
 
@@ -1658,6 +1680,13 @@ PRIMARY KEY(id)
 
                         // Logfile.Log("Key insert: " + key);
 
+                        if (value.StartsWith("\"") && value.EndsWith("\""))
+                        {
+                            value = value.Substring(1, value.Length - 2);
+                        }
+
+                        value = value.Replace("\"_QQ_\"", "\"");
+
                         if (ht.ContainsKey(key))
                         {
                             Logfile.Log($"INFO: Key '{key}' already in Language Dictionary!");
@@ -2071,6 +2100,13 @@ PRIMARY KEY(id)
                                 s = ReplaceTitleTag(s, "Alle Verbräuche - ScanMyTesla", dictLanguage);
                                 s = ReplaceLanguageTags(s, new string[] {
                                     "Außentemperatur [°C]","Zelltemperatur [°C]","Alle Verbräuche - ScanMyTesla"
+                                }, dictLanguage, true);
+                            }
+                            else if (f.EndsWith("Vehicle Alerts.json", StringComparison.Ordinal))
+                            {
+                                s = ReplaceTitleTag(s, "Fahrzeug Fehler", dictLanguage);
+                                s = ReplaceLanguageTags(s, new string[] {
+                                    "Fehler", "Häufigkeit"
                                 }, dictLanguage, true);
                             }
                             else

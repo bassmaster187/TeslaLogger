@@ -1,4 +1,4 @@
-{
+﻿{
   "annotations": {
     "list": [
       {
@@ -65,6 +65,10 @@
               {
                 "id": "custom.width",
                 "value": 170
+              },
+              {
+                "id": "displayName",
+                "value": "Start"
               }
             ]
           },
@@ -77,6 +81,10 @@
               {
                 "id": "custom.width",
                 "value": 273
+              },
+              {
+                "id": "displayName",
+                "value": "Name"
               }
             ]
           },
@@ -89,6 +97,22 @@
               {
                 "id": "custom.width",
                 "value": 172
+              },
+              {
+                "id": "displayName",
+                "value": "Ende"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "minutes"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Minuten"
               }
             ]
           }
@@ -145,7 +169,7 @@
           }
         }
       ],
-      "title": "Alerts",
+      "title": "Fehler",
       "type": "table"
     },
     {
@@ -254,7 +278,7 @@
           }
         }
       ],
-      "title": "Frequency",
+      "title": "Häufigkeit",
       "type": "barchart"
     }
   ],
@@ -296,7 +320,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Vehicle Alerts",
+  "title": "Fahrzeug Fehler",
   "uid": "d188aada-81cf-475b-82e3-7c87795ea3e5",
   "version": 12,
   "weekStart": ""

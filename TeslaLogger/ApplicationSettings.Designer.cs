@@ -221,5 +221,14 @@ namespace TeslaLogger {
                 return ((string)(this["TelemetryServerURL"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseTelemetryServer {
+            get {
+                return ((bool)(this["UseTelemetryServer"]));
+            }
+        }
     }
 }

@@ -279,9 +279,15 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
-
-                    if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
-                        telemetry = new TelemetryConnection(this);
+                    if (ApplicationSettings.Default.UseTelemetryServer)
+                    {
+                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                            telemetry = new TelemetryConnection(this);
+                    } 
+                    else
+                    {
+                        Log("Telemetry Connection turned off!");
+                    }
                 }
                 finally
                 {
@@ -769,7 +775,7 @@ namespace TeslaLogger
                     }
                     else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
                     {
-                        Log("API not suspended!");
+                        // Log("API not suspended!");
                         Thread.Sleep(30000);
                         string res = "";
                         lock (WebHelper.isOnlineLock)
