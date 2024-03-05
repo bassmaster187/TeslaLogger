@@ -282,7 +282,11 @@ namespace TeslaLogger
                     if (ApplicationSettings.Default.UseTelemetryServer)
                     {
                         if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        {
                             telemetry = new TelemetryConnection(this);
+                            if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
+                                telemetry.StartConnection();
+                        }
                     } 
                     else
                     {
@@ -1407,6 +1411,12 @@ namespace TeslaLogger
             Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             CurrentJSON.CreateCurrentJSON();
 
+            // any -> Sleep
+            if (_oldState != TeslaState.Sleep && _newState == TeslaState.Sleep)
+            {
+                telemetry?.CloseConnection();
+            }
+
             // any -> Start
             if (_oldState != TeslaState.Start && _newState == TeslaState.Start)
             {
@@ -1420,6 +1430,7 @@ namespace TeslaLogger
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
+                telemetry?.StartConnection();
                 CurrentJSON.current_falling_asleep = false;
                 CurrentJSON.CreateCurrentJSON();
             }

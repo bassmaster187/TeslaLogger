@@ -11,6 +11,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
+using System.Net.Sockets;
 
 namespace TeslaLogger
 {

@@ -201,13 +201,32 @@ namespace TeslaLogger
 
                 var url = request.Url;
 
-             if (url.Segments.Length == 3)
+                if (url.Segments.Length == 3)
                 {
                     switch (url.Segments[1]) {
                         case "getfile/":
                             Admin_Getfile(request, response);
                             return;
                             break;
+                        case "telemetrystart/":
+                            {
+                                int CarID = int.Parse(url.Segments[2]);
+                                Car car = Car.GetCarByID(CarID);
+                                car.telemetry.StartConnection();
+                                WriteString(response, @"OK");
+                                return;
+                            }
+                            break;
+                        case "telemetryclose/":
+                            {
+                                int CarID = int.Parse(url.Segments[2]);
+                                Car car = Car.GetCarByID(CarID);
+                                car.telemetry.CloseConnection();
+                                WriteString(response, @"OK");
+                                return;
+                            }
+                            break;
+
 
                     }
                 }
