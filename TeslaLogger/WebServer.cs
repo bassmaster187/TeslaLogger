@@ -198,9 +198,22 @@ namespace TeslaLogger
                     localpath = "NULL";
                 }
 
+                var url = request.Url;
+
+             if (url.Segments.Length == 3)
+                {
+                    switch (url.Segments[1]) {
+                        case "getfile/":
+                            Admin_Getfile(request, response);
+                            return;
+                            break;
+
+                    }
+                }
+
+
                 switch (true)
                 {
-                    // commands for admin UI
                     case bool _ when request.Url.LocalPath.Equals("/getchargingstate", System.StringComparison.Ordinal):
                         Admin_Getchargingstate(request, response);
                         break;
@@ -385,6 +398,44 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        static string[] allowed_getfiles = new string[] {
+        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini"};
+
+        private void Admin_Getfile(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var u = request.Url;
+            string filename = u.Segments[2].ToString();
+
+            bool allowedFiles = (filename.StartsWith("language-") && filename.EndsWith(".txt"))
+                || allowed_getfiles.Contains(filename);
+
+            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + filename);
+
+            if (!allowedFiles)
+            {
+                response.StatusCode = (int)HttpStatusCode.Forbidden;
+                WriteString(response, @"Forbidden!");
+            }
+
+            string p = FileManager.GetFilePath(filename);
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug\", "");
+                p = p.Replace(@"net8.0\", "");
+            }
+
+            if (File.Exists(p))
+            {
+                string content = File.ReadAllText(p);
+                WriteString(response, content);
+                return;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            WriteString(response, @"File Not Found!");
         }
 
         private static void Admin_SetCarInactive(HttpListenerRequest request, HttpListenerResponse response)
@@ -3013,6 +3064,7 @@ FROM
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
+            response.ContentType = "text/plain; charset=utf-8";
             Stream output = response.OutputStream;
             if (output != null && output.CanWrite)
             {
