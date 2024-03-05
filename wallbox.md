@@ -7,12 +7,13 @@ You can connect your Teslalogger to your Wallbox to calculate the efficiency of 
 - KEBA KeContact P30 (P20?)
 - Shelly 3EM for all unsupported wallboxes or without build in meter: https://amzn.to/3nUEuO0
 - Shelly EM for 1 phase charging
+- EVCC
 
 # Settings
 Go to admin panel and select the car you want to use for the wallbox. Go to Extras / Wallbox.
 Every car has it's own wallbox settings. 
 
-Choose your wallbox and set the host name of your wallbox e.g: http://192.168.1.174
+Choose your wallbox and set the host name of your wallbox e.g: http://192.168.1.174 or http://192.168.178.33:7070
 Make sure you don't forget http:// or https:// at your host settings. Just the IP address won't work!
 
 ## Param
@@ -31,6 +32,10 @@ Please make sure you enable HTTP API v1 in "Internet / Enhanced Settings"
 C1 or empty for channel 1
 
 C2 for channel 2
+
+# EVCC
+### Param:
+Wallbox title from EVCC
 
 # Dashboard
 In Charging History you can see the efficiency of charging and percentage of photovoltaics if the wallbox supports this value.

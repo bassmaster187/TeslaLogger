@@ -43,7 +43,10 @@ namespace TeslaLogger
                 if (car.FleetAPI)
                 {
                     if (String.IsNullOrEmpty(car.FleetApiAddress))
-                        return "https://fleet-api.prd.eu.vn.cloud.tesla.com/";
+                    {
+                        var ret = GetRegion();
+                        return ret;
+                    }
                     else
                         return car.FleetApiAddress;
                 }
@@ -666,12 +669,14 @@ namespace TeslaLogger
                 if (!car.FleetAPI)
                     return "";
 
+                /*
                 var state = car.GetCurrentState();
-
+                
                 if (!(state == Car.TeslaState.Charge
                     || state == Car.TeslaState.Drive
                     || state == Car.TeslaState.Online))
                     return "";
+                */
 
 
                 var response = GethttpclientTeslaAPI().GetAsync(new Uri("https://teslalogger.de:4444/api/1/users/region")).Result;
@@ -697,19 +702,23 @@ namespace TeslaLogger
                         car.DbHelper.UpdateCarColumn("fleetAPIaddress", fleeturl);
                         return fleeturl;
                     }
-                    
+
+
+                    car.CreateExeptionlessLog("GetRegion", "no url", LogLevel.Fatal).AddObject(result, "ResultContent").Submit();
                     return "";
                 }
                 else
                 {
+                    car.CreateExeptionlessLog("GetRegion", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
                     Log("Error getting Region: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
                     return "";
                 }
                 
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException ex)
             {
                 System.Diagnostics.Debug.WriteLine("Thread Stop!");
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
             }
             catch (Exception ex)
             {
@@ -2423,7 +2432,7 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                    //Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
@@ -2560,7 +2569,7 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                    //Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
                 }
 
             }
@@ -2688,6 +2697,11 @@ namespace TeslaLogger
                 if (car.TrimBadging == "74d" && AWD && year < 2021)
                 {
                     WriteCarSettings("0.152", "M3 LR");
+                    return;
+                }
+                if (car.TrimBadging == "74" && !AWD && year == 2019)
+                {
+                    WriteCarSettings("0.145", "M3 LR RWD 2019");
                     return;
                 }
 
@@ -3262,7 +3276,7 @@ namespace TeslaLogger
                     if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                     {
                         Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                        Log("Streamingtoken changed (IsDriving): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                        //Log("Streamingtoken changed (IsDriving): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
                         // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                     }
@@ -3470,6 +3484,9 @@ namespace TeslaLogger
             if (File.Exists("DONTUSESTREAMINGAPI"))
                 return;
 
+            if (car.FleetAPI) // Fleet API doesn't support streaming now
+                return; 
+
             if (streamThread == null)
             {
                 streamThread = new System.Threading.Thread(() => StartStream());
@@ -3600,7 +3617,6 @@ namespace TeslaLogger
                                                 car.Log("StreamingApi: " + v);
 
                                                 // Suspend Streaming API
-
                                                 var lastToken = Tesla_Streamingtoken;
                                                 var lastTeslaToken = Tesla_token;
                                                 var TimeOut = DateTime.UtcNow;
@@ -3608,12 +3624,6 @@ namespace TeslaLogger
                                                 while (!stopStreaming)
                                                 {
                                                     Thread.Sleep(10000);
-
-                                                    if (lastToken != Tesla_Streamingtoken) // maybe token has been update from a different thread
-                                                    {
-                                                        car.Log("Restart Streaming because Streamingtoken changed");
-                                                        break;
-                                                    }
 
                                                     if (lastTeslaToken != Tesla_token)
                                                     {
@@ -3643,6 +3653,8 @@ namespace TeslaLogger
                                                     }
                                                 }
                                                 car.Log("Exit streaming while loop wait for token refresh");
+
+                                                Thread.Sleep(10000);
                                             }
                                         }
                                         else
@@ -5167,6 +5179,9 @@ DESC", con))
 
         public void StopStreaming()
         {
+            if (car.FleetAPI)
+                return;
+
             Log("Request StopStreaming");
             stopStreaming = true;
             DrivingOrChargingByStream = false;

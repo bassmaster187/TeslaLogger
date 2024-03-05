@@ -139,6 +139,7 @@ namespace TeslaLogger
             //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
             if (_StaticMapProvider != null)
             {
+                int queueLength = queue.Count;
                 if (queue.TryDequeue(out Request request))
                 {
                     //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
@@ -197,6 +198,11 @@ namespace TeslaLogger
                                 Thread.Sleep(1000);
                             }
                         }
+                    }
+                    // if the queue reaches zero entries, and we're on RasPi, then restart Grafana to have the new maps visible
+                    if (queueLength == 1 && queue.IsEmpty && !Tools.IsDocker())
+                    {
+                        Tools.ExecMono("service", "grafana-server restart");
                     }
                 }
             }

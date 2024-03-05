@@ -16,6 +16,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Data.Common;
+using System.Security.Cryptography;
 
 namespace TeslaLogger
 {
@@ -1830,6 +1831,7 @@ HAVING
             car.CurrentJSON.current_charger_voltage = 0;
             car.CurrentJSON.current_charger_phases = 0;
             car.CurrentJSON.current_charger_actual_current = 0;
+            car.CurrentJSON.current_charge_current_request = 0;
             car.CurrentJSON.current_charge_rate_km = 0;
 
             UpdateMaxChargerPower();
@@ -3980,6 +3982,25 @@ WHERE
             }
         }
 
+        DateTime? GetDatumFromPos(int PosId)
+        {
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("select Datum from pos where id = @id", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", PosId);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read())
+                    {
+                        return (DateTime)dr[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
         private void UpdateDriveStatistics(int startPos, int endPos, bool logging = false)
         {
             try
@@ -3987,6 +4008,20 @@ WHERE
                 if (logging)
                 {
                     car.Log("UpdateDriveStatistics");
+                }
+
+                DateTime? startDT = GetDatumFromPos(startPos);
+                DateTime? endDT = GetDatumFromPos(endPos);
+                int ap_sec_sum = -1;
+                int ap_sec_max = -1;
+                double TPMS_FL = -1;
+                double TPMS_FR = -1;
+                double TPMS_RL = -1;
+                double TPMS_RR = -1;
+                if (startDT != null && endDT != null)
+                {
+                    GetAutopilotSeconds((DateTime)startDT, (DateTime)endDT, out ap_sec_sum, out ap_sec_max);
+                    GetAVG_TPMS((DateTime)startDT, (DateTime)endDT, out TPMS_FL, out TPMS_FR, out TPMS_RL, out TPMS_RR);
                 }
 
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
@@ -4016,17 +4051,23 @@ WHERE
                             {
                                 con2.Open();
                                 using (MySqlCommand cmd2 = new MySqlCommand(@"
-UPDATE
-    drivestate
-SET
-    outside_temp_avg  = @outside_temp_avg,
-    speed_max = @speed_max,
-    power_max = @power_max,
-    power_min = @power_min,
-    power_avg = @power_avg
-WHERE
-    StartPos = @StartPos
-    AND EndPos = @EndPos  ", con2))
+                                    UPDATE
+                                        drivestate
+                                    SET
+                                        outside_temp_avg  = @outside_temp_avg,
+                                        speed_max = @speed_max,
+                                        power_max = @power_max,
+                                        power_min = @power_min,
+                                        power_avg = @power_avg,
+                                        AP_sec_sum = @ap_sec_sum,
+                                        AP_sec_max = @AP_sec_max,
+                                        TPMS_FL = @TPMS_FL,
+                                        TPMS_FR = @TPMS_FR,
+                                        TPMS_RL = @TPMS_RL,
+                                        TPMS_RR = @TPMS_RR
+                                    WHERE
+                                        StartPos = @StartPos
+                                        AND EndPos = @EndPos  ", con2))
                                 {
                                     cmd2.Parameters.AddWithValue("@StartPos", startPos);
                                     cmd2.Parameters.AddWithValue("@EndPos", endPos);
@@ -4036,6 +4077,23 @@ WHERE
                                     cmd2.Parameters.AddWithValue("@power_max", dr["power_max"]);
                                     cmd2.Parameters.AddWithValue("@power_min", dr["power_min"]);
                                     cmd2.Parameters.AddWithValue("@power_avg", dr["power_avg"]);
+
+                                    if (ap_sec_sum != -1 && ap_sec_max != -1)
+                                    {
+                                        cmd2.Parameters.AddWithValue("@ap_sec_sum", ap_sec_sum);
+                                        cmd2.Parameters.AddWithValue("@AP_sec_max", ap_sec_max);
+                                    }
+                                    else
+                                    {
+                                        cmd2.Parameters.AddWithValue("@ap_sec_sum", DBNull.Value);
+                                        cmd2.Parameters.AddWithValue("@AP_sec_max", DBNull.Value);
+                                    }
+
+                                    cmd2.Parameters.AddWithValue("@TPMS_FL", TPMS_FL > 0 ? (object)TPMS_FL : (object)DBNull.Value);
+                                    cmd2.Parameters.AddWithValue("@TPMS_FR", TPMS_FR > 0 ? (object)TPMS_FR : (object)DBNull.Value);
+                                    cmd2.Parameters.AddWithValue("@TPMS_RL", TPMS_RL > 0 ? (object)TPMS_RL : (object)DBNull.Value);
+                                    cmd2.Parameters.AddWithValue("@TPMS_RR", TPMS_RR > 0 ? (object)TPMS_RR : (object)DBNull.Value);
+
 
                                     _ = SQLTracer.TraceNQ(cmd2, out _);
                                 }
@@ -4074,7 +4132,7 @@ FROM
 WHERE
     id > @startPos
     AND ideal_battery_range_km IS NOT NULL
-    AND battery_level IS BOT NULL
+    AND battery_level IS NOT NULL
     AND CarID = @CarID
 ORDER BY
     id ASC
@@ -4209,6 +4267,42 @@ WHERE
             {
                 car.CreateExceptionlessClient(ex).Submit();
                 car.Log(ex.ToString());
+            }
+        }
+
+        private void GetAVG_TPMS(DateTime startDT, DateTime endDT, out double tPMS_FL, out double tPMS_FR, out double tPMS_RL, out double tPMS_RR)
+        {
+            tPMS_FL = -1;
+            tPMS_FR = -1;
+            tPMS_RL = -1;
+            tPMS_RR = -1;
+
+            if (startDT < new DateTime(2022, 11, 20)) // Feature was introduced later
+                return;
+
+            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(@"Select avg(Pressure) as p, Tireid from TPMS 
+                        where TPMS.Datum > @startdate and TPMS.Datum < @enddate and TPMS.CarId = @carid group by Tireid", con))
+                {
+                    cmd.Parameters.AddWithValue("@startdate", startDT.AddHours(-1));
+                    cmd.Parameters.AddWithValue("@enddate", startDT.AddHours(1));
+                    cmd.Parameters.AddWithValue("@carid", car.CarInDB);
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    while (dr.Read())
+                    {
+                        int Tireid = Convert.ToInt32(dr["Tireid"]);
+                        double p = Convert.ToDouble(dr["p"]);
+                        switch (Tireid)
+                        {
+                            case 1: tPMS_FL = p; break;
+                            case 2: tPMS_FR = p; break;
+                            case 3: tPMS_RL = p; break;
+                            case 4: tPMS_RR = p; break;
+                        }
+                    }
+                }
             }
         }
 
@@ -4729,6 +4823,7 @@ VALUES(
                 car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
+                car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -5520,6 +5615,39 @@ WHERE
             return null;
         }
 
+        public static DataRow GetCar(string vin)
+        {
+            using (DataTable dt = new DataTable())
+            {
+                try
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(@"
+SELECT
+    *
+FROM
+    cars
+WHERE
+    id = @id", DBConnectionstring))
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@vin", vin);
+                        _ = SQLTracer.TraceDA(dt, da);
+
+                        if (dt.Rows.Count == 1)
+                        {
+                            return dt.Rows[0];
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+                    Logfile.Log(ex.ToString());
+                }
+            }
+
+            return null;
+        }
+
         [SuppressMessage("Security", "CA2100:SQL-Abfragen auf Sicherheitsrisiken überprüfen", Justification = "<Pending>")]
         public void GetAvgConsumption(out double sumkm, out double avgkm, out double kwh100km, out double avgsocdiff, out double maxkm)
         {
@@ -6092,6 +6220,7 @@ WHERE
         {
             object meter_vehicle_kwh_end = DBNull.Value;
             object meter_utility_kwh_end = DBNull.Value;
+            object session_price_end = DBNull.Value;
 
             try
             {
@@ -6100,6 +6229,8 @@ WHERE
                 {
                     meter_vehicle_kwh_end = v.GetVehicleMeterReading_kWh();
                     meter_utility_kwh_end = v.GetUtilityMeterReading_kWh();
+                    session_price_end = v.GetSessionPrice();
+
                 }
             }
             catch (Exception ex)
@@ -6126,7 +6257,8 @@ SET
     meter_utility_kwh_end = @meter_utility_kwh_end,
     meter_vehicle_kwh_sum = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
     meter_utility_kwh_sum = @meter_utility_kwh_end - meter_utility_kwh_start,
-    cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start
+    cost_kwh_meter_invoice = @meter_vehicle_kwh_end - meter_vehicle_kwh_start,
+    cost_per_session = @cost_per_session
 WHERE
     id = @ChargingStateID
     AND CarID = @CarID", con))
@@ -6137,6 +6269,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@ChargingStateID", openChargingState);
                         cmd.Parameters.AddWithValue("@meter_vehicle_kwh_end", meter_vehicle_kwh_end);
                         cmd.Parameters.AddWithValue("@meter_utility_kwh_end", meter_utility_kwh_end);
+                        cmd.Parameters.AddWithValue("@cost_per_session", session_price_end);
                         _ = SQLTracer.TraceNQ(cmd, out _);
                     }
                 }
@@ -6782,6 +6915,60 @@ WHERE
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
+            }
+
+            return false;
+        }
+
+        public bool GetAutopilotSeconds(DateTime start, DateTime end, out int sumsec, out int maxsec)
+        {
+            sumsec = -1;
+            maxsec = -1;
+            try
+            {
+                if (start < new DateTime(2024, 2, 20)) // feature introduced later
+                    return false;
+
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring+ ";Allow User Variables=True"))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"select sum(TIME_TO_SEC(TIMEDIFF(enddate, startdate))) as sumsec, max(TIME_TO_SEC(TIMEDIFF(enddate, startdate))) as maxsec from
+                    (
+                    select T1.CarID, T1.date as startdate, T1.state as startstate, T2.date as enddate, T2.state as endstate
+                    from 
+                    (select (@rowid1:=@rowid1 + 1) T1rid, carid, date, state from cruisestate
+                          where carid=@CarID and date between @start and @end order by date
+                        ) as T1
+                        left outer join 
+                        (select (@rowid2:=@rowid2 + 1) T2rid, date, state from  cruisestate
+                          where carid=@CarID and date between @start and @end order by date
+                        ) as T2 on T1rid + 1 = T2rid
+
+                        JOIN (SELECT @rowid1:=0) a
+                        JOIN (SELECT @rowid2:=0) b
+                    ) T3
+                    where startstate = 1 ", con))
+                    {
+                        cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
+                        cmd.Parameters.AddWithValue("@start", start);
+                        cmd.Parameters.AddWithValue("@end", end);
+
+                        var dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            if (dr["sumsec"] != DBNull.Value)
+                                sumsec = Convert.ToInt32(dr["sumsec"]);
+
+                            if (dr["maxsec"] != DBNull.Value)
+                                maxsec = Convert.ToInt32(dr["maxsec"]);
+                            return true;
+                        }
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().Submit();
             }
 
             return false;

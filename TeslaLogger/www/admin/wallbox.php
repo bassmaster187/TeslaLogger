@@ -122,6 +122,7 @@ menu("Wallbox Test");
             <option value="shellyem">Shelly EM</option>
             <option value="tesla-gen3">Tesla Wallbox Gen 3</option>
             <option value="keba">Keba KeContact P30</option>
+            <option value="evcc">EVCC</option>
         </select>
         </td></tr>
     <tr><td><?php t("Host"); ?>:</td><td><input id="host" type="text" /></td></tr>

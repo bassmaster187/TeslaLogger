@@ -1,5 +1,14 @@
-# Version 1.57.2
-- Bugfixes
+# Version 1.57.6
+- Dashboard Trip: percent of drive with Autopilot / TACC and the longes section with Autopilot / TACC (Fleet Telemetry) [screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/AP-TACC-Percent.JPG)
+- We are using now Hosted Weblate for translations. Feel free to contribute your translation: [Weblate](https://hosted.weblate.org/engage/teslalogger/)
+
+# Version 1.57.5
+- Using [official](https://github.com/teslamotors/fleet-telemetry) Tesla Fleet Telemetry Server if your Car is connectet with Tesla-Fleet API (not used by pre 2021 Model S/X)
+- Grafana Dashboard Vehicle Alerts. (depends on Fleet Telemetry - not supported by pre 2021 Model S/X)
+- Cell temperature in charging dashboard (depends on Fleet Telemetry)
+
+# Version 1.57.3
+- Completely new MQTT client with MQTT AutoDiscovery and control possibilities. Old MQTT client will still work until new MQTT client is activated, but is not supported any more. Setup: go to Admin Panel->Extras->MQTT Settings
 
 # Version 1.57.1
 - Detect Y SR MIC / MIG / BYD / CATL / SR+

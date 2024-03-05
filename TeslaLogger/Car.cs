@@ -22,6 +22,7 @@ namespace TeslaLogger
 
         private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
+        internal TelemetryConnection telemetry;
 
         internal enum TeslaState
         {
@@ -278,6 +279,15 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
+                    if (ApplicationSettings.Default.UseTelemetryServer)
+                    {
+                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                            telemetry = new TelemetryConnection(this);
+                    } 
+                    else
+                    {
+                        Log("Telemetry Connection turned off!");
+                    }
                 }
                 finally
                 {
@@ -763,6 +773,21 @@ namespace TeslaLogger
                         SetCurrentState(TeslaState.GoSleep);
                         goSleepWithWakeup = true;
                     }
+                    else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
+                    {
+                        // Log("API not suspended!");
+                        Thread.Sleep(30000);
+                        string res = "";
+                        lock (WebHelper.isOnlineLock)
+                        {
+                            res = webhelper.IsOnline().Result;
+                        }
+                        if (res == "asleep")
+                        {
+                            SetCurrentState(TeslaState.Start);
+                            lastCarUsed = DateTime.Now;
+                        }
+                    }
                     else
                     {
                         // wenn er 15 min online war und nicht geladen oder gefahren ist, dann muss man ihn die möglichkeit geben offline zu gehen
@@ -903,18 +928,18 @@ namespace TeslaLogger
                                 // charge_port_door_open == true?
                                 if (GetTeslaAPIState().GetBool("charge_port_door_open", out bool bcharge_port_door_open) && bcharge_port_door_open)
                                 {
-                                    Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
+                                    //Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
                                     long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
                                     // check if charge_port_door_open value True is not older than 1 minute
                                     if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                                     {
-                                        Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
+                                        //Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
                                         if (now - valueLastUpdate < 60000)
                                         {
                                             // charge_port_door_open changed to Charging less than 1 minute ago
                                             // reduce sleepduration to 0.5 second
                                             sleepduration = 500;
-                                            Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
+                                            //Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
                                         }
                                     }
                                 }
