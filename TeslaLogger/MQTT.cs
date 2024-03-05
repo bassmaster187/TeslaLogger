@@ -196,7 +196,7 @@ namespace TeslaLogger
                             {
                                 Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
                                 Tools.DebugLog("MQTT: CurrentJson Exception", ex);
-                                ex.ToExceptionless().FirstCarUserID().Submit();
+//                                ex.ToExceptionless().FirstCarUserID().Submit();
                             }
                             
                         }
