@@ -20,7 +20,6 @@ using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
 using System.Reflection;
-using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
