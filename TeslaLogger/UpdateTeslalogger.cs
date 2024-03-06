@@ -263,6 +263,12 @@ namespace TeslaLogger
 
                 DBHelper.EnableMothership();
 
+                if (KVS.Get("UpdateAllDrivestateData", out int UpdateAllDrivestateDataInt) == KVS.NOT_FOUND)
+                {
+                    UpdateAllDrivestateDateThread();
+                }
+
+
                 timer = new System.Threading.Timer(FileChecker, null, 10000, 5000);
 
                 Chmod("/var/www/html/admin/wallpapers", 777);
@@ -646,6 +652,28 @@ PRIMARY KEY(id)
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+
+            if (!DBHelper.ColumnExists("pos", "AP"))
+            {
+                Logfile.Log("ALTER TABLE pos ADD COLUMN AP TINYINT(1) NULL");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery("ALTER TABLE pos ADD COLUMN AP TINYINT(1) NULL", 300);
+
+                new Thread(() =>
+                {
+                    while (Car.Allcars.Count == 0)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    Thread.Sleep(5000);
+                    for (int x=0; x<Car.Allcars.Count; x++)
+                    {
+                        Car c = Car.Allcars[x];
+                        DBHelper.UpdateAllPOS_AP_Column(c.CarInDB, new DateTime(2024, 2, 1), DateTime.Now);
+                    }
+                    
+                }).Start();
+            }
         }
 
         private static void CheckDBSchema_mothershipcommands()
@@ -773,17 +801,20 @@ PRIMARY KEY(id)
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_FR` double NULL DEFAULT NULL", 600);
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_RL` double NULL DEFAULT NULL", 600);
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `drivestate` ADD COLUMN `TPMS_RR` double NULL DEFAULT NULL", 600);
-
-                new Thread(() =>
-                {
-                    while (Car.Allcars.Count == 0)
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    Thread.Sleep(5000);
-                    DBHelper.UpdateAllDrivestateData();
-                }).Start();
             }
+        }
+
+        private static void UpdateAllDrivestateDateThread()
+        {
+            new Thread(() =>
+            {
+                while (Car.Allcars.Count == 0)
+                {
+                    Thread.Sleep(1000);
+                }
+                Thread.Sleep(5000);
+                DBHelper.UpdateAllDrivestateData();
+            }).Start();
         }
 
         private static void CheckDBSchema_chargingstate()

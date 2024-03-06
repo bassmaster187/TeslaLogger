@@ -3462,13 +3462,14 @@ WHERE
         {
             int StartPos = 0;
             int MaxPosId = GetMaxPosid();
+            DateTime StartDate = DateTime.MaxValue;
 
             using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
             {
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    StartPos
+    StartPos, StartDate
 FROM
     drivestate
 WHERE
@@ -3480,6 +3481,7 @@ WHERE
                     if (dr.Read())
                     {
                         StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                        StartDate = (DateTime)(dr[1]);
                     }
                     dr.Close();
                 }
@@ -3515,6 +3517,9 @@ WHERE
             if (StartPos != 0)
             {
                 UpdateDriveStatistics(StartPos, MaxPosId);
+
+                if (StartDate != DateTime.MaxValue)
+                    UpdateAllPOS_AP_Column(car.CarInDB, StartDate, EndDate);
             }
 
             car.CurrentJSON.current_driving = false;
@@ -4353,34 +4358,44 @@ WHERE
         public static void UpdateAllDrivestateData()
         {
             Logfile.Log("UpdateAllDrivestateData start");
-
-            using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+            try
             {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate", con))
-                {
-                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
-                    while (dr.Read())
-                    {
-                        try
-                        {
-                            int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
-                            int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
-                            int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
 
-                            Car c = Car.GetCarByID(CarId);
-                            if (c != null)
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate", con))
+                    {
+                        MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                        while (dr.Read())
+                        {
+                            try
                             {
-                                c.DbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                                int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                                int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
+                                int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
+
+                                Car c = Car.GetCarByID(CarId);
+                                if (c != null)
+                                {
+                                    c.DbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ex.ToExceptionless().FirstCarUserID().Submit();
+                                Logfile.Log(ex.ToString());
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            ex.ToExceptionless().FirstCarUserID().Submit();
-                            Logfile.Log(ex.ToString());
-                        }
                     }
+
+                    KVS.InsertOrUpdate("UpdateAllDrivestateData", 1);
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
             }
 
             Logfile.Log("UpdateAllDrivestateData end");
@@ -6972,6 +6987,68 @@ WHERE
             }
 
             return false;
+        }
+
+        internal static void UpdateAllPOS_AP_Column(int carid, DateTime start, DateTime end)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(DBConnectionstring + ";Allow User Variables=True"))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(@"select T1.date as startdate, T1.state as startstate, T2.date as enddate, T2.state as endstate
+                    from 
+                    (select (@rowid1:=@rowid1 + 1) T1rid, carid, date, state from cruisestate
+                          where carid=@carid and date between @start and @end order by date
+                        ) as T1
+                        join 
+                        (select (@rowid2:=@rowid2 + 1) T2rid, date, state, carid from  cruisestate
+                          where carid=@carid and date between @start and @end order by date
+                        ) as T2 on T1rid + 1 = T2rid 
+
+                        JOIN (SELECT @rowid1:=0) a
+                        JOIN (SELECT @rowid2:=0) b", con))
+                    {
+                        cmd.Parameters.AddWithValue("@carid", carid);
+                        cmd.Parameters.AddWithValue("@start", start);
+                        cmd.Parameters.AddWithValue("@end", end);
+
+                        var dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            try
+                            {
+                                using (MySqlConnection con2 = new MySqlConnection(DBConnectionstring))
+                                {
+                                    int state = Convert.ToInt32(dr["startstate"]);
+                                    DateTime startstate = (DateTime)dr["startdate"];
+                                    DateTime endstate = (DateTime)dr["enddate"];
+
+                                    con2.Open();
+                                    using (MySqlCommand cmd2 = new MySqlCommand(@"update pos set ap=@ap where carid=@carid and datum between @start and @end", con2))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@carid", carid);
+                                        cmd2.Parameters.AddWithValue("@ap", state);
+                                        cmd2.Parameters.AddWithValue("@start", startstate);
+                                        cmd2.Parameters.AddWithValue("@end", endstate);
+                                        cmd2.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logfile.Log(ex.ToString());
+                                ex.ToExceptionless().FirstCarUserID().Submit();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
         }
     }
 }
