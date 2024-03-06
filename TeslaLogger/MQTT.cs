@@ -448,6 +448,7 @@ namespace TeslaLogger
                 entitycontainer.TryGetValue("name", out string entityName);
                 entitycontainer.TryGetValue("type", out string entityType);
                 //optional
+                entitycontainer.TryGetValue("icon", out string entityIcon);
                 entitycontainer.TryGetValue("class", out string entityClass);
                 entitycontainer.TryGetValue("unit", out string entityUnit);
                 //type dependent:
@@ -465,6 +466,10 @@ namespace TeslaLogger
                 entityConfig.Add("stat_t", $"{topic}/car/{vin}/{entity}");
 
 
+                if (entityIcon != null)
+                {
+                    entityConfig.Add("icon", entityIcon);
+                }
                 if (entityClass != null)
                 {
                     entityConfig.Add("dev_cla", entityClass);
