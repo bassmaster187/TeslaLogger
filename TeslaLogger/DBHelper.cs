@@ -4043,7 +4043,7 @@ WHERE
                         cmd.Parameters.AddWithValue("@startpos", startPos);
                         cmd.Parameters.AddWithValue("@endpos", endPos);
                         cmd.Parameters.AddWithValue("@CarID", car.CarInDB);
-
+                        cmd.CommandTimeout = 6000;
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read())
                         {
