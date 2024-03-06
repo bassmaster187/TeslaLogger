@@ -39,10 +39,21 @@ if (file_exists("/etc/teslalogger/settings.json"))
 	$Range = $json_data["Range"];
 }
 
-$filename = "/etc/teslalogger/language-".$language.".txt";
-$filename_en = "/etc/teslalogger/language-en.txt";
+$filename = "/tmp/language-$language.txt";
+$filename_en = "/tmp/language-en.txt";
 global $ln;
 global $lnen;
+global $lnloaded;
+
+// get files from Teslalogger
+GetFileFromTeslaloggerAndWriteToTMP("language-$language.txt");
+GetFileFromTeslaloggerAndWriteToTMP("language-en.txt");
+
+$url2 = GetTeslaloggerURL("getfile/language-en.txt");
+$contenturl2 = @file_get_contents($url2);
+file_put_contents($filename2, $contenturl2);
+$lnloaded = true;
+
 
 if(file_exists($filename))
 { 
