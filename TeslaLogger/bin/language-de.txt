@@ -265,7 +265,7 @@ ADDescription=AutoDiscovery:
 MQTTAD1="Für AutoDiscovery müssen "_QQ_"singletopics"_QQ_" aktiviert sein!"
 ControlTopic=Topic zum Steuern:
 MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" und "13" als RAW Value
-MQTT7=Unterstützte Kommanden
+MQTT7="Unterstützte Kommandos"
 RebootAfterSave=Nach dem Speichern bitte TeslaLogger neustarten!
 Host=Host
 Port=Port
@@ -344,7 +344,7 @@ Geofence=Geofence
 Abetterrouteplanner=Abetteroutenplaner
 Wakeup Teslalogger=Wakeup Teslalogger
 Suspend Teslalogger=Suspend Teslalogger
-km Stand=Kilometerstand
+km Stand="km-Stand"
 
 #ovms.php
 Please enter your dexters-web.de account credentials=Bitte geben Sie Ihre dexters-web.de Zugangsdaten ein
@@ -362,12 +362,12 @@ TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Lad
 
 #dashboard.php
 Sleeping=Sleeping
-Start Trip="Start Trip"
-End Trip="Ende Trip"
+Start Trip="Fahrtbeginn"
+End Trip="Fahrtende"
 Start km="Start km"
 End km="Ende km"
-Start mi="Start mi"
-End mi="Ende mi"
+Start mi="Start Meilen"
+End mi="Ende Meilen"
 kmDiff="km Diff"
 Max Range="Max Reichweite"
 Ø Verbrauch="Ø Verbrauch"
@@ -376,14 +376,14 @@ Tage="Tage"
 #Degradation.json
 Degradation="Degradation"
 Maximalreichweite [km]="Max Reichweite [km]"
-Maximalreichweite [mi]="Max Reichweite [mi]"
+Maximalreichweite [mi]="Max Reichweite [Meilen]"
 km Stand [km]="Entfernung [km]"
-mi Stand [mi]="Verbrauch [mi]"
+mi Stand [mi]="Verbrauch [Meilen]"
 Time="Datum"
 EndSOC="Ende SOC"
 StartSOC="Start SOC"
 SOC diff="SOC diff"
-Odometer [mi]="Km Stand [mi]"
+Odometer [mi]="Km Stand [Meilen]"
 Max. Reichweite (Monatsmittel) [km]="Max Reichweite (monatlicher avg) [km]"
 
 #Vehicle Alerts.json
@@ -392,3 +392,33 @@ startedAt=Start
 endedAt=Ende
 Häufigkeit=Häufigkeit
 Fehler=Fehler
+
+#Ladehistorie.json
+Ladehistorie="Lade-Historie"
+Minuten="Minuten"
+100% TR="100% TR"
+Max. Reichweite (Monatsmittel) [mi]="Max Reichweite (monatlicher avg) [Meilen]"
+Startdatum="Start-Datum"
+Enddatum="Ende-Datum"
+geladen kWh="kWh geladen"
+Adresse="Adresse"
+TR km Start="TR km Start"
+TR km Ende="TR km Ende"
+SOC Ende="SOC Ende"
+TR mi Start="TR Meilen Start"
+TR mi Ende="TR Meilen Ende"
+ØkW="ø kW"
+
+#Ladestatistik.json
+Ladestatistik="Lade-Statistik"
+Letzte Ladung="Letzte Ladung"
+Ort="Adresse"
+Ø geladen kWh="ø geladene kWh"
+Ladezeit h="Ladedauer h"
+Ø SOC="ø SOC"
+Max SOC="Max SOC"
+Anzahl Ladungen="Anzahl Ladungen"
+Anzahl="Zähler"
+Geladen="Geladen"
+Ladezeit="Ladedauer"
+Anz. Ladungen="Zähler"
