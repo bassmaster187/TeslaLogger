@@ -203,31 +203,23 @@ namespace TeslaLogger
 
                 if (url.Segments.Length == 3)
                 {
-                    switch (url.Segments[1]) {
+                    switch (url.Segments[1])
+                    {
                         case "getfile/":
                             Admin_Getfile(request, response);
                             return;
-                            break;
+
+                        case "writefile/":
+                            Admin_Writefile(request, response);
+                            return;
+
                         case "telemetrystart/":
-                            {
-                                int CarID = int.Parse(url.Segments[2]);
-                                Car car = Car.GetCarByID(CarID);
-                                car.telemetry.StartConnection();
-                                WriteString(response, @"OK");
-                                return;
-                            }
-                            break;
+                            TelemetryStart(response, url);
+                            return;
+
                         case "telemetryclose/":
-                            {
-                                int CarID = int.Parse(url.Segments[2]);
-                                Car car = Car.GetCarByID(CarID);
-                                car.telemetry.CloseConnection();
-                                WriteString(response, @"OK");
-                                return;
-                            }
-                            break;
-
-
+                            TelemetryClose(response, url);
+                            return;
                     }
                 }
 
@@ -418,6 +410,58 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void Admin_Writefile(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var u = request.Url;
+            string filename = u.Segments[2].ToString();
+
+            bool allowedFiles = allowed_getfiles.Contains(filename);
+
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + filename);
+
+            if (!allowedFiles)
+            {
+                response.StatusCode = (int)HttpStatusCode.Forbidden;
+                WriteString(response, @"Forbidden!");
+            }
+
+            string p = FileManager.GetFilePath(filename);
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug\", "");
+                p = p.Replace(@"net8.0\", "");
+            }
+
+            if (File.Exists(p))
+            {
+                string data = GetDataFromRequestInputStream(request);
+                File.Delete(p);
+                File.WriteAllText(p, data);
+                WriteString(response, "ok");
+                return;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            WriteString(response, @"File Not Found!");
+        }
+
+        private static void TelemetryClose(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.CloseConnection();
+            WriteString(response, @"OK");
+        }
+
+        private static void TelemetryStart(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.StartConnection();
+            WriteString(response, @"OK");
         }
 
         static string[] allowed_getfiles = new string[] {
