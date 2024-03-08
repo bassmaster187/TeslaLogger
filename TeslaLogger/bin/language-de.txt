@@ -361,7 +361,7 @@ TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
 
 #dashboard.php
-Sleeping=Sleeping
+Sleeping="Schlafen"
 Start Trip="Fahrtbeginn"
 End Trip="Fahrtende"
 Start km="Start km"
@@ -422,3 +422,26 @@ Anzahl="Zähler"
 Geladen="Geladen"
 Ladezeit="Ladedauer"
 Anz. Ladungen="Zähler"
+#Akku Trips.json
+Akku Trips="Batterieverbrauch (Fahren)"
+Ladehub="Reichweite der Ladung"
+PV="Solar"
+
+#SOC Ladestatistik.json
+SOC Ladestatistik="SOC Ladestatistik"
+SOC [%]="SOC [%]"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="SOC Entladestatistik"
+
+#Laden.json
+Laden="Laden"
+Ladespannung [V]="Ladespannung [V]"
+Reichweite [mi]="Reichweite [Meilen]"
+Reichweite [km]="Reichweite [km]"
+Leistung [kW]="Leistung [kW]"
+Phasen="Phasen"
+Stromstärke [A]="aktuelle Stromstärke [A]"
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik="Standby Energieverlust Monatsstatistik"
