@@ -38,3 +38,12 @@ With the Fleet Telemetry Server we can get more data from our cars e.g. Autopilo
 - My Tesla Credentials
 - Edit
 - Tesla Fleet API (recommended)
+
+# Revoke permission for Teslalogger
+- Go to your Tesla Account
+- Profile Settings
+- Manage Third Party Apps
+- Teslalogger / Manage
+- Remove Access
+
+https://accounts.tesla.com/de_DE/account-settings/security?tab=tpty-apps
