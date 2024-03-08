@@ -53,6 +53,9 @@ namespace TeslaLogger
         {
             try
             {
+                if (connect)
+                    return;
+
                 car.Log("Telemetry Server start connection");
                 cts = new CancellationTokenSource();
                 connect = true;
@@ -340,6 +343,14 @@ namespace TeslaLogger
                                 string v1 = value["stringValue"];
                                 double d = double.Parse(v1, Tools.ciEnUS);
                                 cmd.Parameters.AddWithValue("@" + name, d);
+
+                                if (key == "ModuleTempMin")
+                                {
+                                    System.Diagnostics.Debug.WriteLine("ModuleTempMin: " + d);
+                                    car.CurrentJSON.lastScanMyTeslaReceived = DateTime.Now;
+                                    car.CurrentJSON.SMTCellTempAvg = d;
+                                    car.CurrentJSON.CreateCurrentJSON();
+                                }
                             }
                         }
                     }
