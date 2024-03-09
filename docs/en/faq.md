@@ -77,3 +77,8 @@ Go to : https://www.tesla.com/_ak/teslalogger.de and follow the instructions
 ## Error in logfile: Tesla Vehicle Command Protocol required
 You have to migrate to the new official Tesla Fleet protocol.
 > {"response":null,"error":"Tesla Vehicle Command Protocol required, please refer to the documentation here: https://developer.tesla.com/docs/fleet-api#2023-10-09-rest-api-vehicle-commands-endpoint-deprecation-warning","error_description":""}
+
+## Fleet API seems to work just for a couple of hours
+There is a known bug on teslas servers. Sometimes the profile is bound to a wrong region. Check if that helps:
+
+https://community.homey.app/t/app-pro-tesla/100824/118?u=ronnyw
