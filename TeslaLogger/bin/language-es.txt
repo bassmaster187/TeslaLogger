@@ -542,3 +542,10 @@ Reichweite="Rango"
 Außentemperatur="Temperatura exterior"
 Zelltemperatur="Temperatura de la celda"
 Nur verfügbar mit ScanMyTesla="Sólo disponible con analizar mi Tesla"
+
+#Vehicle Alerts
+Fahrzeug Fehler="Error del vehículo"
+startedAt="Iniciar"
+endedAt="Finalizar"
+Häufigkeit="Frecuencia"
+Fehler="Alertas"
