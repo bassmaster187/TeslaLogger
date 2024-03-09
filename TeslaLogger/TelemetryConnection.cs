@@ -12,6 +12,7 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Reflection;
 using System.IO;
+using System.Runtime.ConstrainedExecution;
 
 namespace TeslaLogger
 {
@@ -329,6 +330,10 @@ namespace TeslaLogger
                 var cols = new string[] {"PackVoltage", "PackCurrent", "IsolationResistance", "NumBrickVoltageMax", "BrickVoltageMax",
                 "NumBrickVoltageMin", "BrickVoltageMin", "ModuleTempMax", "ModuleTempMin", "LifetimeEnergyUsed", "LifetimeEnergyUsedDrive"};
 
+                double? BrickVoltageMin = null;
+                double? BrickVoltageMax = null;
+                bool currentJSONUpdated = false;
+
                 using (var cmd = new MySqlCommand())
                 {
                     foreach (dynamic jj in j)
@@ -336,23 +341,46 @@ namespace TeslaLogger
                         string key = jj["key"];
                         if (cols.Any(key.Contains))
                         {
-                            string name = jj["key"];
                             dynamic value = jj["value"];
                             if (value.ContainsKey("stringValue"))
                             {
                                 string v1 = value["stringValue"];
                                 double d = double.Parse(v1, Tools.ciEnUS);
-                                cmd.Parameters.AddWithValue("@" + name, d);
+                                cmd.Parameters.AddWithValue("@" + key, d);
 
                                 if (key == "ModuleTempMin")
                                 {
                                     System.Diagnostics.Debug.WriteLine("ModuleTempMin: " + d);
                                     car.CurrentJSON.lastScanMyTeslaReceived = DateTime.Now;
                                     car.CurrentJSON.SMTCellTempAvg = d;
-                                    car.CurrentJSON.CreateCurrentJSON();
+                                    currentJSONUpdated = true;
+                                }
+                                else if (key == "BrickVoltageMin")
+                                {
+                                    System.Diagnostics.Debug.WriteLine("BrickVoltageMin: " + d);
+                                    car.CurrentJSON.lastScanMyTeslaReceived = DateTime.Now;
+                                    car.CurrentJSON.SMTCellMinV = d;
+                                    currentJSONUpdated = true;
+                                    BrickVoltageMin = d;
+                                }
+                                else if (key == "BrickVoltageMax")
+                                {
+                                    System.Diagnostics.Debug.WriteLine("BrickVoltageMax: " + d);
+                                    car.CurrentJSON.lastScanMyTeslaReceived = DateTime.Now;
+                                    car.CurrentJSON.SMTCellMaxV = d;
+                                    currentJSONUpdated = true;
+                                    BrickVoltageMax = d;
                                 }
                             }
                         }
+                    }
+
+                    if (currentJSONUpdated)
+                    {
+                        if (BrickVoltageMax.HasValue && BrickVoltageMin.HasValue)
+                            car.CurrentJSON.SMTCellImbalance = (BrickVoltageMax - BrickVoltageMin) * 1000.0;
+
+                        car.CurrentJSON.CreateCurrentJSON();
                     }
 
                     if (cmd.Parameters.Count > 0)
