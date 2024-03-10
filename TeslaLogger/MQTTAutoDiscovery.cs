@@ -159,41 +159,59 @@ namespace TeslaLogger
             autoDiscovery["speed"]["class"] = "speed";
 
             autoDiscovery["sleeping"] = new Dictionary<string, string>();
-            autoDiscovery["sleeping"]["type"] = "sensor";
+            autoDiscovery["sleeping"]["type"] = "binary_sensor";
             autoDiscovery["sleeping"]["name"] = "Sleeping";
+            autoDiscovery["sleeping"]["pl_on"] = "true";
+            autoDiscovery["sleeping"]["pl_off"] = "false";
+            autoDiscovery["sleeping"]["icon"] = "mdi:sleep";
 
             //autoDiscovery["online"] = new Dictionary<string, string>();
             //autoDiscovery["online"]["type"] = "sensor";
             //["online"]["name"] = "Online";
 
             autoDiscovery["driving"] = new Dictionary<string, string>();
-            autoDiscovery["driving"]["type"] = "sensor";
+            autoDiscovery["driving"]["type"] = "binary_sensor";
             autoDiscovery["driving"]["name"] = "Driving";
+            autoDiscovery["driving"]["pl_on"] = "true";
+            autoDiscovery["driving"]["pl_off"] = "false";
+            autoDiscovery["driving"]["class"] = "moving";
 
             autoDiscovery["falling_asleep"] = new Dictionary<string, string>();
-            autoDiscovery["falling_asleep"]["type"] = "sensor";
+            autoDiscovery["falling_asleep"]["type"] = "binary_sensor";
             autoDiscovery["falling_asleep"]["name"] = "Falling Asleep";
+            autoDiscovery["falling_asleep"]["pl_on"] = "true";
+            autoDiscovery["falling_asleep"]["pl_off"] = "false";
 
             autoDiscovery["plugged_in"] = new Dictionary<string, string>();
-            autoDiscovery["plugged_in"]["type"] = "sensor";
+            autoDiscovery["plugged_in"]["type"] = "binary_sensor";
             autoDiscovery["plugged_in"]["name"] = "Plugged in";
-            autoDiscovery["plugged_in"]["icon"] = "mdi:connection";
+            autoDiscovery["plugged_in"]["pl_on"] = "true";
+            autoDiscovery["plugged_in"]["pl_off"] = "false";
+            autoDiscovery["plugged_in"]["class"] = "plug";
 
             autoDiscovery["battery_heater"] = new Dictionary<string, string>();
-            autoDiscovery["battery_heater"]["type"] = "sensor";
+            autoDiscovery["battery_heater"]["type"] = "binary_sensor";
             autoDiscovery["battery_heater"]["name"] = "Battery heater";
+            autoDiscovery["battery_heater"]["pl_on"] = "true";
+            autoDiscovery["battery_heater"]["pl_off"] = "false";
+            autoDiscovery["battery_heater"]["class"] = "heat";
 
             autoDiscovery["locked"] = new Dictionary<string, string>();
-            autoDiscovery["locked"]["type"] = "sensor";
+            autoDiscovery["locked"]["type"] = "binary_sensor";
             autoDiscovery["locked"]["name"] = "Locked";
+            autoDiscovery["locked"]["pl_on"] = "true";
+            autoDiscovery["locked"]["pl_off"] = "false";
+            autoDiscovery["locked"]["class"] = "lock";
 
             autoDiscovery["open_windows"] = new Dictionary<string, string>();
             autoDiscovery["open_windows"]["type"] = "sensor";
             autoDiscovery["open_windows"]["name"] = "Windows opened";
+            autoDiscovery["open_windows"]["icon"] = "mdi:car-door";
 
             autoDiscovery["open_doors"] = new Dictionary<string, string>();
             autoDiscovery["open_doors"]["type"] = "sensor";
             autoDiscovery["open_doors"]["name"] = "Doors opened";
+            autoDiscovery["open_doors"]["icon"] = "mdi:car-door";
 
             autoDiscovery["frunk"] = new Dictionary<string, string>();
             autoDiscovery["frunk"]["type"] = "sensor";
@@ -204,16 +222,25 @@ namespace TeslaLogger
             autoDiscovery["trunk"]["name"] = "Trunk opened";
 
             autoDiscovery["TLGeofenceIsHome"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsHome"]["type"] = "sensor";
+            autoDiscovery["TLGeofenceIsHome"]["type"] = "binary_sensor";
             autoDiscovery["TLGeofenceIsHome"]["name"] = "Is Home";
+            autoDiscovery["TLGeofenceIsWork"]["pl_on"] = "true";
+            autoDiscovery["TLGeofenceIsWork"]["pl_off"] = "false";
+            autoDiscovery["TLGeofenceIsWork"]["icon"] = "mdi:home";
 
             autoDiscovery["TLGeofenceIsWork"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsWork"]["type"] = "sensor";
+            autoDiscovery["TLGeofenceIsWork"]["type"] = "binary_sensor";
             autoDiscovery["TLGeofenceIsWork"]["name"] = "Is Work";
+            autoDiscovery["TLGeofenceIsWork"]["pl_on"] = "true";
+            autoDiscovery["TLGeofenceIsWork"]["pl_off"] = "false";
+            autoDiscovery["TLGeofenceIsWork"]["icon"] = "mdi:briefcase";
 
             autoDiscovery["TLGeofenceIsCharger"] = new Dictionary<string, string>();
-            autoDiscovery["TLGeofenceIsCharger"]["type"] = "sensor";
+            autoDiscovery["TLGeofenceIsCharger"]["type"] = "binary_sensor";
             autoDiscovery["TLGeofenceIsCharger"]["name"] = "Is Charger";
+            autoDiscovery["TLGeofenceIsCharger"]["pl_on"] = "true";
+            autoDiscovery["TLGeofenceIsCharger"]["pl_off"] = "false";
+            autoDiscovery["TLGeofenceIsWork"]["icon"] = "mdi:ev-station";
 
             autoDiscovery["charge_port_door_open"] = new Dictionary<string, string>();
             autoDiscovery["charge_port_door_open"]["type"] = "binary_sensor";
@@ -224,8 +251,11 @@ namespace TeslaLogger
             autoDiscovery["charge_port_door_open"]["class"] = "opening";
 
             autoDiscovery["fast_charger_present"] = new Dictionary<string, string>();
-            autoDiscovery["fast_charger_present"]["type"] = "sensor";
+            autoDiscovery["fast_charger_present"]["type"] = "binary_sensor";
             autoDiscovery["fast_charger_present"]["name"] = "Fast charger";
+            autoDiscovery["fast_charger_present"]["pl_on"] = "true";
+            autoDiscovery["fast_charger_present"]["pl_off"] = "false";
+            autoDiscovery["fast_charger_present"]["icon"] = "mdi:ev-station";
 
             autoDiscovery["fast_charger_brand"] = new Dictionary<string, string>();
             autoDiscovery["fast_charger_brand"]["type"] = "sensor";
