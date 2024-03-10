@@ -64,6 +64,7 @@ namespace TeslaLogger
             autoDiscovery["charger_phases"] = new Dictionary<string, string>();
             autoDiscovery["charger_phases"]["type"] = "sensor";
             autoDiscovery["charger_phases"]["name"] = "Charge phases";
+            autoDiscovery["charger_phases"]["icon"] = "mdi:lightning-bolt";
 
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
@@ -79,39 +80,50 @@ namespace TeslaLogger
             autoDiscovery["car_version"] = new Dictionary<string, string>();
             autoDiscovery["car_version"]["type"] = "sensor";
             autoDiscovery["car_version"]["name"] = "Firmware version";
+            autoDiscovery["car_version"]["icon"] = "mdi:cellphone-information";
 
             autoDiscovery["software_update_version"] = new Dictionary<string, string>();
             autoDiscovery["software_update_version"]["type"] = "sensor";
             autoDiscovery["software_update_version"]["name"] = "Firmware update version";
+            autoDiscovery["software_update_version"]["icon"] = "mdi:cellphone-arrow-down";
 
             autoDiscovery["software_update_status"] = new Dictionary<string, string>();
             autoDiscovery["software_update_status"]["type"] = "sensor";
             autoDiscovery["software_update_status"]["name"] = "Firmware update status";
+            autoDiscovery["software_update_status"]["icon"] = "mdi:cellphone-arrow-down";
 
             autoDiscovery["display_name"] = new Dictionary<string, string>();
             autoDiscovery["display_name"]["type"] = "sensor";
             autoDiscovery["display_name"]["name"] = "Car name";
+            autoDiscovery["display_name"]["icon"] = "mdi:tag";
 
             autoDiscovery["latitude"] = new Dictionary<string, string>();
             autoDiscovery["latitude"]["type"] = "sensor";
             autoDiscovery["latitude"]["name"] = "Latitude";
+            autoDiscovery["latitude"]["unit"] = "°";
+            autoDiscovery["latitude"]["icon"] = "mdi:latitude";
 
             autoDiscovery["longitude"] = new Dictionary<string, string>();
             autoDiscovery["longitude"]["type"] = "sensor";
             autoDiscovery["longitude"]["name"] = "Longitude";
+            autoDiscovery["longitude"]["unit"] = "°";
+            autoDiscovery["longitude"]["icon"] = "mdi:longitude";
 
             autoDiscovery["heading"] = new Dictionary<string, string>();
             autoDiscovery["heading"]["type"] = "sensor";
             autoDiscovery["heading"]["name"] = "Heading";
             autoDiscovery["heading"]["unit"] = "°";
+            autoDiscovery["heading"]["icon"] = "mdi:compass";
 
             autoDiscovery["country_code"] = new Dictionary<string, string>();
             autoDiscovery["country_code"]["type"] = "sensor";
             autoDiscovery["country_code"]["name"] = "Country code";
+            autoDiscovery["country_code"]["icon"] = "mdi:flag";
 
             autoDiscovery["state"] = new Dictionary<string, string>();
             autoDiscovery["state"]["type"] = "sensor";
             autoDiscovery["state"]["name"] = "State";
+            autoDiscovery["state"]["icon"] = "mdi:map";
 
             autoDiscovery["TLGeofence"] = new Dictionary<string, string>();
             autoDiscovery["TLGeofence"]["type"] = "sensor";
@@ -260,6 +272,7 @@ namespace TeslaLogger
             autoDiscovery["fast_charger_brand"] = new Dictionary<string, string>();
             autoDiscovery["fast_charger_brand"]["type"] = "sensor";
             autoDiscovery["fast_charger_brand"]["name"] = "Fastcharger brand";
+            autoDiscovery["fast_charger_brand"]["icon"] = "mdi:ev-station";
 
             autoDiscovery["sentry_mode"] = new Dictionary<string, string>();
             autoDiscovery["sentry_mode"]["type"] = "switch";
@@ -313,6 +326,7 @@ namespace TeslaLogger
             autoDiscovery["trip_start"] = new Dictionary<string, string>();
             autoDiscovery["trip_start"]["type"] = "sensor";
             autoDiscovery["trip_start"]["name"] = "Trip start";
+            autoDiscovery["trip_start"]["icon"] = "mdi:car-clock";
 
             autoDiscovery["trip_duration_sec"] = new Dictionary<string, string>();
             autoDiscovery["trip_duration_sec"]["type"] = "sensor";
@@ -324,6 +338,7 @@ namespace TeslaLogger
             autoDiscovery["trip_start_dt"]["type"] = "sensor";
             autoDiscovery["trip_start_dt"]["name"] = "Trip timestamp";
             autoDiscovery["trip_start_dt"]["class"] = "timestamp";
+            autoDiscovery["trip_start_dt"]["icon"] = "mdi:car-clock";
 
             autoDiscovery["trip_max_speed"] = new Dictionary<string, string>();
             autoDiscovery["trip_max_speed"]["type"] = "sensor";
@@ -380,10 +395,14 @@ namespace TeslaLogger
             autoDiscovery["active_route_latitude"] = new Dictionary<string, string>();
             autoDiscovery["active_route_latitude"]["type"] = "sensor";
             autoDiscovery["active_route_latitude"]["name"] = "Route destination latitude";
+            autoDiscovery["active_route_latitude"]["unit"] = "°";
+            autoDiscovery["active_route_latitude"]["icon"] = "mdi:latitude";
 
             autoDiscovery["active_route_longitude"] = new Dictionary<string, string>();
             autoDiscovery["active_route_longitude"]["type"] = "sensor";
             autoDiscovery["active_route_longitude"]["name"] = "Route destination longitude";
+            autoDiscovery["active_route_longitude"]["unit"] = "°";
+            autoDiscovery["active_route_longitude"]["icon"] = "mdi:longitude";
         }
 
     }
