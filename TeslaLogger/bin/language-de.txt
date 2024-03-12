@@ -101,7 +101,7 @@ ABRP1=Erstellen Sie ein „A Better Routeplanner“-Konto
 ABRP2=Gehen sie zu den Einstellungen
 ABRP3=Wählen Sie Ihr Fahrzeug
 ABRP4=Speichern Sie Ihr Fahrzeug
-ABRP5=Geben Sie Ihrem Fahrzeug einen Namen
+ABRP5="Geben Sie Ihrem Fahrzeug einen Namen"
 ABRP6=Klicken Sie auf „Verknüpfen Teslalogger“, um ein ABRP-Token zu erhalten
 ABRP7=Token kopieren und auf „Fertig“ klicken
 ABRP8=Fügen Sie den Token in Teslalogger ein
@@ -115,7 +115,7 @@ Please choose your vehicle=Bitte wählen Sie Ihr Fahrzeug aus
 Bitte Tesla Account Zugangsdaten eingeben=Bitte Tesla Account Zugangsdaten eingeben
 Please enter your Tesla account credentials=Bitte geben Sie Ihre Tesla-Zugangsdaten ein
 Please select a vehicle=Bitte wählen Sie ein Fahrzeug aus
-TeslaAuthApps=Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren.
+TeslaAuthApps="Du kannst folgende Apps verwenden, um ein Access Token & Refresh Token vom Tesla-Server zu generieren:"
 BA_Browser=Im lokalen {Browser}
 BA_Read=Bitte lesen Sie alle Schritte, bevor Sie fortfahren:
 BA_Logon=Klicken Sie auf den unten stehenden <b>Tesla Logon</b> Link, der einen neuen Tab für die Tesla-Anmeldeseite öffnet
@@ -124,14 +124,14 @@ BA_NotFound=Dies führt zu einer "Page Not Found" Seite. Das ist normal.
 BA_URL=Kopieren Sie den Link dieser Webseite in das unten stehende Feld. Im Link ist ein einmaliger, temporärer Code enthalten, den wir zur Generierung von Token verwenden können. Wir werden diesen Code aus dem Link extrahieren.
 BA_Invalid=Diese Links funktionieren in der Regel nur einmal. Wenn also auf unserer Website die Meldung "Invalid Grant" oder eine andere Fehlermeldung erscheint, müssen Sie möglicherweise den Tesla-Logon-Link erneut aufrufen, der einen neuen Link erzeugen sollte.
 BA_Logoff=Wenn Sie ein anderes Konto verwenden möchten, müssen Sie sich {hier} manuell abmelden!
-BA_GetToken=Wir werden dann die Token für Ihren Tesla-Konto bekommen.
+BA_GetToken="Wir werden dann die Token für Ihren Tesla-Konto bekommen."
 BA_SelectCar=Wählen Sie das Fahrzeug aus, das Sie für den Teslalogger verwenden möchten.
 BA_Step1=Schritt 1:
 BA_Step2=Schritt 2:
 BA_Step3=Schritt 3:
 BA_FillOut=Bitte ausfüllen:
-BA_CopyUrl=Kopieren Sie die angezeigte URL
-BA_Paste=Die URL hier einfügen und auf "Tokens holen" klicken:
+BA_CopyUrl="Kopieren Sie die angezeigte URL"
+BA_Paste="Die URL hier einfügen und auf "_QQ_"Tokens holen"_QQ_" klicken:"
 BA_FLEETAPI=Tesla Fleet API (empfohlen)
 Get Tokens=Tokens holen
 Access Token=Access Token
@@ -151,12 +151,12 @@ Do you want to delete?=Wollen Sie das Fahrzeug löschen?
 Please enter the access token!=Bitte das Access Token entragen!
 Please enter the refresh token!=Bitte das Refresh Token entragen!
 Check Logfile!=Bitte die Logdatei prüfen!
-Do you really want to delete this vehicle?=Wollen Sie das Fahrzeug wirklich löschen?
+Do you really want to delete this vehicle?="Wollen Sie das Fahrzeug wirklich löschen?"
 Check Logfile in one minute!=Bitte die Logdatei in einer Minute prüfen!
 Unauthorized=Nicht autorisiert
-This isn't a valid URL!=Dies ist kein gültige URL!
+This isn't a valid URL!="Dies ist kein gültige URL!"
 This isn't an auth link by Tesla!=Dies ist ein Autorisierungslink von Tesla!
-The URL doesn't contain the expected format!=Die URL enthält nicht das erwartete Format!
+The URL doesn't contain the expected format!="Die URL enthält nicht das erwartete Format!"
 
 #password_fleet.php
 PF_LOGOUT=Melden Sie sich von Ihrem Tesla-Konto ab, wenn Sie bereits eingeloggt sind
@@ -183,9 +183,9 @@ Count=Count
 D → P=D → P
 D/R → P=D/R → P
 Description=Beschreibung
-Disable Sentry Mode=Wächter-Modus ausschalten
+Disable Sentry Mode="Wächter-Modus ausschalten"
 Don't Combine Charging Sessions=Ladesitzungen nicht vereinen
-Enable Sentry Mode=Wächter-Modus einschalten
+Enable Sentry Mode="Wächter-Modus einschalten"
 Gear=Gang
 High Frequency Logging=Hochfrequentes loggen
 Home=Zu Hause
@@ -205,7 +205,7 @@ Special Flags=Weitere Eigenschaften
 Turn HVAC off=Klimaanlage ausschalten
 Type=Typ
 Work=Arbeit
-Are you sure you want to delete this geofencing location?=Sind Sie sicher, dass Sie diesen Geofencing-Standort löschen möchten?
+Are you sure you want to delete this geofencing location?="Sind Sie sicher, dass Sie diesen Geofencing-Standort löschen möchten?"
 Error=Fehler
 Deleted!=Gelöscht!
 Meter=Meter
@@ -256,21 +256,21 @@ Vehicle kWh=kWh Fahrzeug
 MQTTSettings=MQTT Einstellungen
 MQTTSettingsInfo=MQTT Host ist erforderlich. Alle andere Einstellungen sind optional
 TopicStructure=Topics sind im folgenden Format:
-MQTT1=Alle Werte in einem JSON (wenn aktiviert): "teslalogger/json/CAR_VIN/currentjson"
+MQTT1="Alle Werte in einem JSON (wenn aktiviert): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
 MQTT2=Alle Werte als Singletopics (wenn aktiviert): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
 MQTT3="teslalogger" ist parametrierbar im Feld "Topic"
 MQTT4="CAR_VIN" ist die VIN des Autos
 MQTT5="ideal_battery_range_km" sind einzelne Topics
 ADDescription=AutoDiscovery:
-MQTTAD1=Für AutoDiscovery müssen "singletopics" aktiviert sein!
+MQTTAD1="Für AutoDiscovery müssen "_QQ_"singletopics"_QQ_" aktiviert sein!"
 ControlTopic=Topic zum Steuern:
 MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" und "13" als RAW Value
-MQTT7=Unterstützte Kommanden
+MQTT7="Unterstützte Kommandos"
 RebootAfterSave=Nach dem Speichern bitte TeslaLogger neustarten!
 Host=Host
 Port=Port
 Topic=Topic
-PublishJson=Json versenden
+PublishJson="JSON versenden"
 Singletopics=Single topics versenden
 ClientID=ClientID
 AutoDiscovery=AutoDiscovery
@@ -304,12 +304,12 @@ Charge time [h]=Aufladezeit [h]
 Distance [mi]=Entfernung [mi]
 Distance [km]=Entfernung [km]
 Charging costs=Ladekosten
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=Neue Reise
 Journey name=Name der Reise
 Please wait=Bitte warten
 Please select start first=Bitte wählen Sie zuerst den Startpunkt
-DelJourney=Wollen Sie wirklich Reise Nr. {id} löschen?
+DelJourney="Wollen Sie wirklich Reise Nr. {id} löschen?"
 Nothing found=Nichts gefunden
 Display _MENU_ records per page=Zeige _MENU_ Zeilen pro Seite
 Showing _START_ to _END_ of _TOTAL_ entries=Zeige _START_ bis _END_ von _TOTAL_ Einträgen
@@ -344,7 +344,7 @@ Geofence=Geofence
 Abetterrouteplanner=Abetteroutenplaner
 Wakeup Teslalogger=Wakeup Teslalogger
 Suspend Teslalogger=Suspend Teslalogger
-km Stand=Kilometerstand
+km Stand="km-Stand"
 
 #ovms.php
 Please enter your dexters-web.de account credentials=Bitte geben Sie Ihre dexters-web.de Zugangsdaten ein
@@ -361,13 +361,13 @@ TextRestore2=Der Wiederherstellungsprozess kann bis zu 10 Minuten dauern!
 TextRestore3=Unterbrechen Sie den Wiederherstellungsprozess in keiner Weise! Laden Sie die Seite nicht neu! Schließen Sie diese Seite nicht!
 
 #dashboard.php
-Sleeping=Sleeping
-Start Trip="Start Trip"
-End Trip="Ende Trip"
+Sleeping="Schlafen"
+Start Trip="Fahrtbeginn"
+End Trip="Fahrtende"
 Start km="Start km"
 End km="Ende km"
-Start mi="Start mi"
-End mi="Ende mi"
+Start mi="Start Meilen"
+End mi="Ende Meilen"
 kmDiff="km Diff"
 Max Range="Max Reichweite"
 Ø Verbrauch="Ø Verbrauch"
@@ -376,12 +376,72 @@ Tage="Tage"
 #Degradation.json
 Degradation="Degradation"
 Maximalreichweite [km]="Max Reichweite [km]"
-Maximalreichweite [mi]="Max Reichweite [mi]"
+Maximalreichweite [mi]="Max Reichweite [Meilen]"
 km Stand [km]="Entfernung [km]"
-mi Stand [mi]="Verbrauch [mi]"
+mi Stand [mi]="Verbrauch [Meilen]"
 Time="Datum"
 EndSOC="Ende SOC"
 StartSOC="Start SOC"
 SOC diff="SOC diff"
-Odometer [mi]="Km Stand [mi]"
+Odometer [mi]="Km Stand [Meilen]"
 Max. Reichweite (Monatsmittel) [km]="Max Reichweite (monatlicher avg) [km]"
+
+#Vehicle Alerts.json
+Fahrzeug Fehler=Fahrzeug Fehler
+startedAt=Start
+endedAt=Ende
+Häufigkeit=Häufigkeit
+Fehler=Fehler
+
+#Ladehistorie.json
+Ladehistorie="Lade-Historie"
+Minuten="Minuten"
+100% TR="100% TR"
+Max. Reichweite (Monatsmittel) [mi]="Max Reichweite (monatlicher avg) [Meilen]"
+Startdatum="Start-Datum"
+Enddatum="Ende-Datum"
+geladen kWh="kWh geladen"
+Adresse="Adresse"
+TR km Start="TR km Start"
+TR km Ende="TR km Ende"
+SOC Ende="SOC Ende"
+TR mi Start="TR Meilen Start"
+TR mi Ende="TR Meilen Ende"
+ØkW="ø kW"
+
+#Ladestatistik.json
+Ladestatistik="Lade-Statistik"
+Letzte Ladung="Letzte Ladung"
+Ort="Adresse"
+Ø geladen kWh="ø geladene kWh"
+Ladezeit h="Ladedauer h"
+Ø SOC="ø SOC"
+Max SOC="Max SOC"
+Anzahl Ladungen="Anzahl Ladungen"
+Anzahl="Zähler"
+Geladen="Geladen"
+Ladezeit="Ladedauer"
+Anz. Ladungen="Zähler"
+#Akku Trips.json
+Akku Trips="Batterieverbrauch (Fahren)"
+Ladehub="Reichweite der Ladung"
+PV="Solar"
+
+#SOC Ladestatistik.json
+SOC Ladestatistik="SOC Ladestatistik"
+SOC [%]="SOC [%]"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="SOC Entladestatistik"
+
+#Laden.json
+Laden="Laden"
+Ladespannung [V]="Ladespannung [V]"
+Reichweite [mi]="Reichweite [Meilen]"
+Reichweite [km]="Reichweite [km]"
+Leistung [kW]="Leistung [kW]"
+Phasen="Phasen"
+Stromstärke [A]="aktuelle Stromstärke [A]"
+
+#Vampir Drain Monatsstatistik.json
+Vampir Drain Monatsstatistik="Standby Energieverlust Monatsstatistik"

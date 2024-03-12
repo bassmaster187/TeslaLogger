@@ -68,8 +68,8 @@ namespace TeslaLogger
             autoDiscovery["charge_rate_km"] = new Dictionary<string, string>();
             autoDiscovery["charge_rate_km"]["type"] = "sensor";
             autoDiscovery["charge_rate_km"]["name"] = "Charge rate";
-            autoDiscovery["charge_rate_km"]["unit"] = "km";
-            autoDiscovery["charge_rate_km"]["class"] = "distance";
+            autoDiscovery["charge_rate_km"]["unit"] = "km/h";
+            autoDiscovery["charge_rate_km"]["class"] = "speed";
 
             autoDiscovery["time_to_full_charge"] = new Dictionary<string, string>();
             autoDiscovery["time_to_full_charge"]["type"] = "sensor";
@@ -177,6 +177,7 @@ namespace TeslaLogger
             autoDiscovery["plugged_in"] = new Dictionary<string, string>();
             autoDiscovery["plugged_in"]["type"] = "sensor";
             autoDiscovery["plugged_in"]["name"] = "Plugged in";
+            autoDiscovery["plugged_in"]["icon"] = "mdi:connection";
 
             autoDiscovery["battery_heater"] = new Dictionary<string, string>();
             autoDiscovery["battery_heater"]["type"] = "sensor";
@@ -215,8 +216,12 @@ namespace TeslaLogger
             autoDiscovery["TLGeofenceIsCharger"]["name"] = "Is Charger";
 
             autoDiscovery["charge_port_door_open"] = new Dictionary<string, string>();
-            autoDiscovery["charge_port_door_open"]["type"] = "sensor";
+            autoDiscovery["charge_port_door_open"]["type"] = "binary_sensor";
             autoDiscovery["charge_port_door_open"]["name"] = "Charge port opened";
+            autoDiscovery["charge_port_door_open"]["pl_on"] = "true";
+            autoDiscovery["charge_port_door_open"]["pl_off"] = "false";
+            autoDiscovery["charge_port_door_open"]["icon"] = "mdi:ev-plug-ccs2";
+            autoDiscovery["charge_port_door_open"]["class"] = "opening";
 
             autoDiscovery["fast_charger_present"] = new Dictionary<string, string>();
             autoDiscovery["fast_charger_present"]["type"] = "sensor";
@@ -232,6 +237,7 @@ namespace TeslaLogger
             autoDiscovery["sentry_mode"]["pl_on"] = "true";
             autoDiscovery["sentry_mode"]["pl_off"] = "false";
             autoDiscovery["sentry_mode"]["cmd_topic"] = "sentry_mode_on_off";
+            autoDiscovery["sentry_mode"]["icon"] = "mdi:cctv";
 
             autoDiscovery["is_preconditioning"] = new Dictionary<string, string>();
             autoDiscovery["is_preconditioning"]["type"] = "switch";
@@ -239,6 +245,7 @@ namespace TeslaLogger
             autoDiscovery["is_preconditioning"]["pl_on"] = "true";
             autoDiscovery["is_preconditioning"]["pl_off"] = "false";
             autoDiscovery["is_preconditioning"]["cmd_topic"] = "auto_conditioning_start_stop";
+            autoDiscovery["is_preconditioning"]["icon"] = "mdi:heat-wave";
 
             autoDiscovery["charging"] = new Dictionary<string, string>();
             autoDiscovery["charging"]["type"] = "switch";
@@ -253,6 +260,7 @@ namespace TeslaLogger
             autoDiscovery["online"]["pl_on"] = "true";
             autoDiscovery["online"]["pl_off"] = "false";
             autoDiscovery["online"]["cmd_topic"] = "wake_up";
+            autoDiscovery["online"]["icon"] = "mdi:car-connected";
 
             autoDiscovery["charge_limit_soc"] = new Dictionary<string, string>();
             autoDiscovery["charge_limit_soc"]["type"] = "number";

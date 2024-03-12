@@ -22,6 +22,7 @@ namespace TeslaLogger
 
         private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
+        internal TelemetryConnection telemetry;
 
         internal enum TeslaState
         {
@@ -278,6 +279,19 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
+                    if (ApplicationSettings.Default.UseTelemetryServer)
+                    {
+                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        {
+                            telemetry = new TelemetryConnection(this);
+                            if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
+                                telemetry.StartConnection();
+                        }
+                    } 
+                    else
+                    {
+                        Log("Telemetry Connection turned off!");
+                    }
                 }
                 finally
                 {
@@ -765,7 +779,7 @@ namespace TeslaLogger
                     }
                     else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
                     {
-                        Log("API not suspended!");
+                        // Log("API not suspended!");
                         Thread.Sleep(30000);
                         string res = "";
                         lock (WebHelper.isOnlineLock)
@@ -1397,6 +1411,12 @@ namespace TeslaLogger
             Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             CurrentJSON.CreateCurrentJSON();
 
+            // any -> Sleep
+            if (_oldState != TeslaState.Sleep && _newState == TeslaState.Sleep)
+            {
+                telemetry?.CloseConnection();
+            }
+
             // any -> Start
             if (_oldState != TeslaState.Start && _newState == TeslaState.Start)
             {
@@ -1410,12 +1430,14 @@ namespace TeslaLogger
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
+                telemetry?.StartConnection();
                 CurrentJSON.current_falling_asleep = false;
                 CurrentJSON.CreateCurrentJSON();
             }
             // Start -> Online - Update Car Version after Update
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
+                telemetry?.StartConnection();
                 _ = webhelper.GetOdometerAsync();
                 Tools.DebugLog($"#{CarInDB}:Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.GetLatitude()}, lon:{CurrentJSON.GetLongitude()})");
                 _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());

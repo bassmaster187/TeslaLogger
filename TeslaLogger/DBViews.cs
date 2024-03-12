@@ -34,7 +34,14 @@ VIEW `trip` AS
         `drivestate`.`power_min` AS `power_min`,
         `drivestate`.`power_avg` AS `power_avg`,
         `drivestate`.`CarID` AS `CarID`,
-        `drivestate`.`wheel_type` AS `wheel_type`
+        `drivestate`.`wheel_type` AS `wheel_type`,
+        `AP_sec_sum`,
+        `AP_sec_max`,
+        `TPMS_FL`,
+        `TPMS_FR`,
+        `TPMS_RL`,
+        `TPMS_RR`
+        
     FROM
         ((`drivestate`
         JOIN `pos` `pos_start` ON ((`drivestate`.`StartPos` = `pos_start`.`id`)))

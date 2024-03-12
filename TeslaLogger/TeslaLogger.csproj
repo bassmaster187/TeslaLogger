@@ -156,6 +156,7 @@
     <Compile Include="DBViews.cs" />
     <Compile Include="ElectricityMeterBase.cs" />
     <Compile Include="ElectricityMeterCFos.cs" />
+    <Compile Include="ElectricityMeterEVCC.cs" />
     <Compile Include="ElectricityMeterGoE.cs" />
     <Compile Include="ElectricityMeterKeba.cs" />
     <Compile Include="ElectricityMeterOpenWB.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="MQTTClient.cs" />
     <Compile Include="ScanMyTesla.cs" />
     <Compile Include="ShareData.cs" />
+    <Compile Include="TelemetryConnection.cs" />
     <Compile Include="TeslaAuth.cs" />
     <Compile Include="UpdateTeslalogger.cs" />
     <Compile Include="DBHelper.cs" />

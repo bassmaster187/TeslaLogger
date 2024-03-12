@@ -458,7 +458,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type,\r\n   null as address\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 3 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(T1.time_sec) as time_sec, lat, lng, 4 as type, concat('<b>', address,'</b><br>Date: ',T1.time_sec, '<br>Duration: ', TIMESTAMPDIFF(MINUTE,T1.time_sec, T2.time_sec), 'min')  FROM (\r\n\t    SELECT @rowid:=@rowid+1 as rowid, drivestate.EndDate as time_sec, lat, lng, 4 as type, address \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T1 join \r\n    (\r\n\t    SELECT @rowid2:=@rowid2+1 as rowid, drivestate.StartDate as time_sec \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid2:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T2 on T1.rowid+1=T2.rowid\r\n\r\n ORDER BY time_sec ASC",
+          "rawSql": "SELECT\r\n  $__time(datum),\r\n   lat,\r\n   lng,\r\n   0 as type,\r\n   null as address,\r\n   ap\r\n   FROM pos\r\nWHERE  $__timeFilter(datum) and carid = $Car\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and (fast_charger_brand = 'Tesla' or address like '%Supercharger%')\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car \r\n  and ((fast_charger_brand is not null && fast_charger_brand not in ('Tesla') and fast_charger_present = 1 and address not like '%supercharger%') \r\n  or (fast_charger_present is null and max_charger_power > 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 3 as type, concat('<b>',address, '</b><br>Date: ',pos.datum, '<br>Duration: ', TIMESTAMPDIFF(MINUTE, StartDate, EndDate) ,'min<br>Charged: ',charging.charge_energy_added, 'kWh<br>Max Power:', max_charger_power, 'kW') as address, 0 as ap FROM chargingstate join charging on endchargingid = charging.id join pos on chargingstate.Pos = pos.id\r\n  WHERE $__timeFilter(pos.datum) and chargingstate.CarID = $Car and ((fast_charger_present = 0) or (fast_charger_present is null and max_charger_power < 25 and address not like '%supercharger%'))\r\nUNION\r\n  SELECT UNIX_TIMESTAMP(T1.time_sec) as time_sec, lat, lng, 4 as type, concat('<b>', address,'</b><br>Date: ',T1.time_sec, '<br>Duration: ', TIMESTAMPDIFF(MINUTE,T1.time_sec, T2.time_sec), 'min'), 0 as ap  FROM (\r\n\t    SELECT @rowid:=@rowid+1 as rowid, drivestate.EndDate as time_sec, lat, lng, 4 as type, address \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T1 join \r\n    (\r\n\t    SELECT @rowid2:=@rowid2+1 as rowid, drivestate.StartDate as time_sec \r\n\t    FROM drivestate join pos on drivestate.EndPos = pos.id, (SELECT @rowid2:=0) as init\r\n\t    WHERE $__timeFilter(drivestate.EndDate) and drivestate.CarID = $Car \r\n    ) T2 on T1.rowid+1=T2.rowid\r\n\r\n ORDER BY time_sec ASC",
           "refId": "A",
           "select": [
             [
@@ -502,6 +502,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "table": "pos",
           "timeColumn": "Datum",
           "timeColumnType": "datetime",
@@ -731,6 +748,6 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 151,
+  "version": 152,
   "weekStart": ""
 }

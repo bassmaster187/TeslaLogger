@@ -11,6 +11,7 @@ using Exceptionless;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt;
+using System.Net.Sockets;
 
 namespace TeslaLogger
 {
@@ -196,7 +197,8 @@ namespace TeslaLogger
                             {
                                 Logfile.Log("MQTT: CurrentJson Exeption: " + ex.Message);
                                 Tools.DebugLog("MQTT: CurrentJson Exception", ex);
-                                ex.ToExceptionless().FirstCarUserID().Submit();
+//                                ex.ToExceptionless().FirstCarUserID().Submit();
+                                System.Threading.Thread.Sleep(60000); //wait 60 seconds after exception
                             }
                             
                         }
@@ -305,18 +307,18 @@ namespace TeslaLogger
                             }
                             else
                             {
-                                newClientId = Guid.NewGuid().ToString();
+                                newClientId = Guid.NewGuid().ToString().Substring(0, 18);
                             }
                             connecting = true;
                             Tools.DebugLog("MQTT: not connected, connecting = true");
                             if (user != null && password != null)
                             {
-                                Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port);
+                                Logfile.Log("MQTT: Connecting with credentials: " + host + ":" + port + " with ClientID: " + newClientId);
                                 client.Connect(newClientId, user, password, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                             }
                             else
                             {
-                                Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port);
+                                Logfile.Log("MQTT: Connecting without credentials: " + host + ":" + port + " with ClientID: " + newClientId);
                                 client.Connect(newClientId, null, null, false, 0, true, $@"{topic}/system/status", "offline", true, 30);
                             }
 
@@ -448,6 +450,7 @@ namespace TeslaLogger
                 entitycontainer.TryGetValue("name", out string entityName);
                 entitycontainer.TryGetValue("type", out string entityType);
                 //optional
+                entitycontainer.TryGetValue("icon", out string entityIcon);
                 entitycontainer.TryGetValue("class", out string entityClass);
                 entitycontainer.TryGetValue("unit", out string entityUnit);
                 //type dependent:
@@ -465,6 +468,10 @@ namespace TeslaLogger
                 entityConfig.Add("stat_t", $"{topic}/car/{vin}/{entity}");
 
 
+                if (entityIcon != null)
+                {
+                    entityConfig.Add("icon", entityIcon);
+                }
                 if (entityClass != null)
                 {
                     entityConfig.Add("dev_cla", entityClass);
@@ -512,7 +519,7 @@ namespace TeslaLogger
                 json_attributes_topic = $"{topic}/car/{vin}/gps_tracker",
                 state_topic = $"{topic}/car/{vin}/TLGeofenceIsHome",
                 payload_home = "true",
-                payload_not_home = "fasle"
+                payload_not_home = "false"
             }) ;
 
             client.Publish($"{discoverytopic}/device_tracker/{vin}/config", Encoding.UTF8.GetBytes(dicoveryGPSTracker ?? "NULL"),

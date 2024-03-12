@@ -2432,7 +2432,7 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                    //Log("Streamingtoken changed (IsOnline): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
                     // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                 }
@@ -2569,7 +2569,7 @@ namespace TeslaLogger
                 if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                 {
                     Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                    //Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
                 }
 
             }
@@ -3276,7 +3276,7 @@ namespace TeslaLogger
                     if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
                     {
                         Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                        Log("Streamingtoken changed (IsDriving): " + Tools.ObfuscateString(Tesla_Streamingtoken));
+                        //Log("Streamingtoken changed (IsDriving): " + Tools.ObfuscateString(Tesla_Streamingtoken));
 
                         // can be ignored, is not used at the moment car.Log("Tesla_Streamingtoken changed!");
                     }
