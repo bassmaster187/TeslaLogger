@@ -23,7 +23,7 @@ namespace TeslaLogger
             // Please refere to Home Assistant documentation:
             // https://www.home-assistant.io/integrations/mqtt/#configuration-via-mqtt-discovery
             // https://www.home-assistant.io/integrations/sensor/#device-class
-
+            // https://pictogrammers.com/library/mdi/
 
             autoDiscovery["battery_level"] = new Dictionary<string, string>();
             autoDiscovery["battery_level"]["type"] = "sensor";
@@ -177,10 +177,6 @@ namespace TeslaLogger
             autoDiscovery["sleeping"]["pl_off"] = "false";
             autoDiscovery["sleeping"]["icon"] = "mdi:sleep";
 
-            //autoDiscovery["online"] = new Dictionary<string, string>();
-            //autoDiscovery["online"]["type"] = "sensor";
-            //["online"]["name"] = "Online";
-
             autoDiscovery["driving"] = new Dictionary<string, string>();
             autoDiscovery["driving"]["type"] = "binary_sensor";
             autoDiscovery["driving"]["name"] = "Driving";
@@ -236,9 +232,9 @@ namespace TeslaLogger
             autoDiscovery["TLGeofenceIsHome"] = new Dictionary<string, string>();
             autoDiscovery["TLGeofenceIsHome"]["type"] = "binary_sensor";
             autoDiscovery["TLGeofenceIsHome"]["name"] = "Is Home";
-            autoDiscovery["TLGeofenceIsWork"]["pl_on"] = "true";
-            autoDiscovery["TLGeofenceIsWork"]["pl_off"] = "false";
-            autoDiscovery["TLGeofenceIsWork"]["icon"] = "mdi:home";
+            autoDiscovery["TLGeofenceIsHome"]["pl_on"] = "true";
+            autoDiscovery["TLGeofenceIsHome"]["pl_off"] = "false";
+            autoDiscovery["TLGeofenceIsHome"]["icon"] = "mdi:home";
 
             autoDiscovery["TLGeofenceIsWork"] = new Dictionary<string, string>();
             autoDiscovery["TLGeofenceIsWork"]["type"] = "binary_sensor";
@@ -252,7 +248,7 @@ namespace TeslaLogger
             autoDiscovery["TLGeofenceIsCharger"]["name"] = "Is Charger";
             autoDiscovery["TLGeofenceIsCharger"]["pl_on"] = "true";
             autoDiscovery["TLGeofenceIsCharger"]["pl_off"] = "false";
-            autoDiscovery["TLGeofenceIsWork"]["icon"] = "mdi:ev-station";
+            autoDiscovery["TLGeofenceIsCharger"]["icon"] = "mdi:ev-station";
 
             autoDiscovery["charge_port_door_open"] = new Dictionary<string, string>();
             autoDiscovery["charge_port_door_open"]["type"] = "binary_sensor";
