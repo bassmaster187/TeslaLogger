@@ -4973,7 +4973,10 @@ DESC", con))
                 request.Headers.Add("Authorization", "Bearer " + Tesla_token);
 
                 request.Content = new StringContent("");
-                request.Headers.Host = "fleet-api.prd.na.vn.cloud.tesla.com";
+                if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
+                {
+                    request.Headers.Host = apiaddress.Replace("https://","").Replace("/","");
+                }
                 request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 DateTime start = DateTime.UtcNow;
