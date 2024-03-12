@@ -63,6 +63,26 @@ namespace UnitTestsTeslalogger
             Console.WriteLine(ret);
         }
 
+
+        [TestMethod]
+        public void CFos()
+        {
+            var v = new ElectricityMeterCFos("", "");
+            v.get_dev_info = System.IO.File.ReadAllText(@"..\..\testdata\cfos.txt");
+
+            double? kwh = v.GetVehicleMeterReading_kWh();
+            var charging = v.IsCharging();
+            var utility_meter_kwh = v.GetUtilityMeterReading_kWh();
+            var version = v.GetVersion();
+            string ret = v.ToString();
+            Console.WriteLine(ret);
+
+            Assert.AreEqual(628.277, kwh);
+            Assert.AreEqual(false, charging);
+            Assert.AreEqual(9766.409, utility_meter_kwh);
+            Assert.AreEqual("2.0.1", version);
+        }
+
         [TestMethod]
         public void Shelly3EM()
         {
