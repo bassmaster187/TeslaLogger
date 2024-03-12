@@ -526,29 +526,31 @@ namespace TeslaLogger
                         case "timestamp":
                             break;
                         // bool
-                        case "in_service":
                         case "ble_autopair_enrolled":
                         case "calendar_enabled":
+                        case "in_service":
+                        case "release_notes_supported":
                             if (r4.TryGetValue(key, out object value))
                             {
                                 AddValue(key, "bool", value, 0, "vehicles");
                             }
                             break;
                         // string
-                        case "id":
-                        case "vehicle_id":
-                        case "vin":
-                        case "display_name":
-                        case "option_codes":
-                        case "color":
                         case "access_type":
-                        case "state":
-                        case "id_s":
                         case "backseat_token":
                         case "backseat_token_updated_at":
-                        case "vehicle_config":
-                        case "granular_access":
+                        case "cached_data":
+                        case "color":
                         case "command_signing":
+                        case "display_name":
+                        case "granular_access":
+                        case "id":
+                        case "id_s":
+                        case "option_codes":
+                        case "state":
+                        case "vehicle_config":
+                        case "vehicle_id":
+                        case "vin":
                             if (r4.TryGetValue(key, out value))
                             {
                                 AddValue(key, "string", value, 0, "vehicles");
@@ -556,6 +558,7 @@ namespace TeslaLogger
                             break;
                         // int
                         case "api_version":
+                        case "user_id":
                             if (r4.TryGetValue(key, out value))
                             {
                                 AddValue(key, "int", value, 0, "vehicles");
