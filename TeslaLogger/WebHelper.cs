@@ -4968,8 +4968,8 @@ DESC", con))
             {
                 HttpClient client = GethttpclientgetChargingHistoryV2();
 
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"https://fleet-api.prd.na.vn.cloud.tesla.com/api/1/dx/charging/history?pageNo={pageNumber}");
-
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}");
+                Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
                 request.Headers.Add("Authorization", "Bearer " + Tesla_token);
 
                 request.Content = new StringContent("");
