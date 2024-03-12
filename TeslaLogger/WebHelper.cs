@@ -4971,13 +4971,13 @@ DESC", con))
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{apiaddress}api/1/dx/charging/history?pageNo={pageNumber}");
                 Tools.DebugLog($"GetChargingHistoryV2 request: {request.RequestUri}");
                 request.Headers.Add("Authorization", "Bearer " + Tesla_token);
-
-                request.Content = new StringContent("");
+                request.Method = HttpMethod.Get;
+                // xxx request.Content = new StringContent("");
                 if (apiaddress.StartsWith("https://") && apiaddress.EndsWith("/"))
                 {
                     request.Headers.Host = apiaddress.Replace("https://","").Replace("/","");
                 }
-                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                // request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 DateTime start = DateTime.UtcNow;
                 HttpResponseMessage result = await client.SendAsync(request);
