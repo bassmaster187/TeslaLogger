@@ -39,6 +39,8 @@ namespace TeslaLogger
         {
             if (type == "openwb")
                 return new ElectricityMeterOpenWB(host, paramater);
+            else if (type == "cfos")
+                return new ElectricityMeterCFos(host, paramater);
             else if (type == "go-e")
                 return new ElectricityMeterGoE(host, paramater);
             else if (type == "tesla-gen3")
