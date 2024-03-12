@@ -86,7 +86,7 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Teslarossa",
+          "text": "",
           "value": "1"
         },
         "datasource": "teslalogger",

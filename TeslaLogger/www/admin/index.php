@@ -22,11 +22,12 @@ else
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Teslalogger Config">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/png" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon.png" sizes="131x133">
+	<link rel="icon" type="image/png" href="img/apple-touch-icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <title>Teslalogger</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -34,6 +35,7 @@ else
 	<link rel='stylesheet' id='genericons-css'  href='static/genericons.css?ver=3.0.3' type='text/css' media='all' />
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.4.0/leaflet.js"></script>
+	<script src="static/leaflet/1.4.0/leaflet.rotatedMarker.js"></script>
 	<style>
 		#changelog{height:350px; overflow: auto;}
 	</style>
@@ -46,6 +48,7 @@ else
 	var LengthUnit = "<?php echo($LengthUnit); ?>";
 	var TemperatureUnit = "<?php echo($TemperatureUnit); ?>";
 	var PowerUnit = "<?php echo($PowerUnit); ?>";
+	var Range  = "<?php echo ($Range); ?>";
 
 	var Display100pctEnable = "<?php echo($Display100pctEnable); ?>";
 
@@ -105,14 +108,27 @@ else
 		  }).done(function( jsonData ) {
 			if (LengthUnit == "mile")
 			{
-				$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
-				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+				if ( Range == 'IR'){
+					$('#ideal_battery_range_km').text((jsonData["ideal_battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+					$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+				}
+				else
+				{
+					$('#ideal_battery_range_km').text((jsonData["battery_range_km"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+					$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100/km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
+				}
 				$('#odometer').text((jsonData["odometer"] / km2mls).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("mi"); ?>");
 			}
 			else
 			{
-				$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
-				$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				if ( Range == 'IR'){
+					$('#ideal_battery_range_km').text(jsonData["ideal_battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+					$('#full_battery_range_km').text((jsonData["ideal_battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				}
+				else
+				{	$('#ideal_battery_range_km').text(jsonData["battery_range_km"].toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+					$('#full_battery_range_km').text((jsonData["battery_range_km"]/jsonData["battery_level"]*100).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
+				}
 				$('#odometer').text((jsonData["odometer"]).toLocaleString(loc,{maximumFractionDigits:1, minimumFractionDigits: 1}) + " <?php t("km"); ?>");
 			}
 
@@ -163,7 +179,19 @@ else
 				else
 					str += jsonData["power"] + " <?php t("PS"); ?>";
 
-				$('#car_status').text(str);
+				if (jsonData["active_route_destination"])
+				{
+					var destination = encodeHTML(jsonData["active_route_destination"]);
+					str += "<br>"+"To: " + destination;
+					str += "<br>"+"In: " + Math.round(Number(jsonData["active_route_minutes_to_arrival"])) +  " min / " + jsonData["active_route_energy_at_arrival"]+"% SOC";
+
+					if (jsonData["active_route_traffic_minutes_delay"] != "0.0")
+					{
+						str += "<br>"+"Delay:" + jsonData["active_route_traffic_minutes_delay"] + " min";
+					}
+				}
+
+				$('#car_status').html(str);
 
 				updateSMT(jsonData);
 			}
@@ -257,16 +285,45 @@ else
 			{
 				$("#SoftwareUpdateRow").show();
 				var temp = jsonData["software_update_status"];
+				temp = temp.replaceAll("_", " ");
+				temp = encodeHTML(temp);
 
 				if (jsonData["software_update_version"].length > 0)
-					temp += ":" + jsonData["software_update_version"];
+					temp += ": " + "<a href=\"https://www.notateslaapp.com/software-updates/version/"+ jsonData["software_update_version"]+"/release-notes\">"+ jsonData["software_update_version"]+ "</a>";
 
-				$("#software_update").text(temp);
+				$("#software_update").html(temp);
 			}
 			else
 			{
 				$("#SoftwareUpdateRow").hide();
 			}
+
+			if (jsonData["open_windows"] > 0)
+				$("#window_open").show();
+			else
+				$("#window_open").hide();
+
+			if (jsonData["frunk"] > 0)
+				$("#frunk_open").show();
+			else
+				$("#frunk_open").hide();
+
+			if (jsonData["trunk"] > 0)
+				$("#trunk_open").show();
+			else
+				$("#trunk_open").hide();
+
+			if (jsonData["open_doors"] > 0)
+				$("#door_open").show();
+			else
+				$("#door_open").hide();
+
+			if (jsonData["locked"])
+				$("#unlocked").hide();
+			else
+				$("#unlocked").show();
+
+				
 
 			var p = L.latLng(parseFloat(jsonData["latitude"]), parseFloat(jsonData["longitude"]));
 
@@ -281,9 +338,24 @@ else
 			if (marker != null)
 				map.removeLayer(marker)
 
-			marker = L.marker(p);
+			var icon = new L.Icon(
+				{
+					iconUrl: "static/images/arrow.png",
+					iconAnchor:   [10, 10],
+					shadowSize: [0,0]
+				}
+			);
+
+			marker = L.marker(p, {icon : icon, rotationAngle: jsonData["heading"] });
 			marker.addTo(map);
 		});
+	}
+
+	function encodeHTML(dirtyString) {
+		var container = document.createElement('div');
+		var text = document.createTextNode(dirtyString);
+		container.appendChild(text);
+		return container.innerHTML; // innerHTML will be a xss safe string
 	}
 
 	function hideSMT()
@@ -366,7 +438,7 @@ function ShowInfo()
 		$("#NegativeButton").click(function(){window.location.href='settings_share.php?a=no';});
 	<?php
 	}
-	else if(isDocker() && GrafanaVersion() != "8.5.22")
+	else if(isDocker() && GrafanaVersion() != "10.0.1")
 	{?>
 		<?php
 		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}");
@@ -420,7 +492,15 @@ function ShowInfo()
   </div>
   <div style="float:left;">
   <table class="b1 THeader">
-	  <thead><td colspan="2" class="HeaderL HeaderStyle"><?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span></td></thead>
+	  <thead><td colspan="2" class="HeaderL HeaderStyle">
+	  	<?php t("Car Info"); ?> <span id="displayname">- <?= $display_name ?></span>
+	  		<img id="window_open" class="caricons" src="img/window_open.png" title="Open Window">
+			<img id="frunk_open"class="caricons" src="img/frunk_open.png" title="Frunk Open">
+			<img id="trunk_open"class="caricons" src="img/trunk_open.png" title="Trunk Open">
+			<img id="door_open"class="caricons" src="img/door_open.png" title="Door Open">
+			<img id="unlocked"class="caricons" src="img/unlocked.png" title="Unlocked">
+		</td>
+	  </thead>
 	  <tr><td width="130px"><b><span id="car_statusLabel"></span></b></td><td width="180px"><span id="car_status"></span></td></tr>
 	  <tr id='CellTempRow'><td><b><?php t("Cell Temp"); ?>:</b></td><td><span id="CellTemp"></span></td></tr>
 	  <tr id='BMSMaxChargeRow'><td><b><?php t("Max Charge"); ?>:</b></td><td><span id="BMSMaxCharge"></span></td></tr>
@@ -462,7 +542,15 @@ function ShowInfo()
 	else
 		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
 
-	$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
+	$branch = file_get_contents("/etc/teslalogger/BRANCH");
+
+	if (!empty($branch))
+	{
+		echo("<font color='red'>$branch</font>/");
+		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/$branch/TeslaLogger/Properties/AssemblyInfo.cs");
+	}
+	else
+		$onlineversion = getTeslaloggerVersion("https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/Properties/AssemblyInfo.cs");
 
 	if ($installed != $onlineversion)
 	{

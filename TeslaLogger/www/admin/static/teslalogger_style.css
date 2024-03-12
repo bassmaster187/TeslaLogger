@@ -60,6 +60,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
  select {height: 35px;}
 
+ .caricons {
+	float: right; 
+	height: 28px; 
+	margin-right: 4px;
+	display: none;
+ }
+
  .TT {    
 	padding-top: 9px;
 	padding-bottom: 8px;}
@@ -3592,6 +3599,18 @@ a.post-thumbnail:hover {
 		right: 8px;
 		top: 20px;
 	}
+
+	.primary-navigation ul li:hover > ul.menu-columns,
+	.primary-navigation ul li.focus > ul.menu-columns {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		-webkit-column-gap: 30px;
+		-moz-column-gap: 30px;
+		column-count: 2;
+		column-gap: 30px;
+		left: auto;
+		right: 0;
+	}
 }
 
 @media screen and (min-width: 810px) {
@@ -4040,6 +4059,13 @@ a.post-thumbnail:hover {
 		padding-right: 30px;
 		padding-left: 30px;
 	}
+
+	.primary-navigation ul li:hover > ul.menu-columns,
+	.primary-navigation ul li.focus > ul.menu-columns {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+	}
 }
 
 @media screen and (min-width: 1080px) {
@@ -4338,7 +4364,7 @@ a.post-thumbnail:hover {
 #displayname {display: none;}
 
 @media screen and (max-width: 1055px) {
-	.b1{ float:left;}
+	.b1{ float:left; width: 686px;}
 	.HeaderT { width: 686px;}
 }
 
@@ -4350,7 +4376,7 @@ a.post-thumbnail:hover {
 	.b1{ float:left;}
 	.HeaderL { width: unset;}
 	.HeaderT { width: -webkit-fill-available;}
-	.THeader { width: -webkit-fill-available;}
+	.THeader { width: 96vw;}
 	#displayname {display: contents;}
 }
 

@@ -19,28 +19,49 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Net.Http;
 using HttpMultipartParser;
+using System.Reflection;
+using Microsoft.VisualBasic.Logging;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "brauchen wir nicht")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    public class WebServer
+    public class WebServer : IDisposable
     {
-        private HttpListener listener = null;
-        static TeslaAuth teslaAuth = null;
+        private readonly HttpListener listener; // defaults to null;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Dispose managed resources.
+                listener.Close();
+            }
+            // Free native resources.
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        static TeslaAuth teslaAuth; // defaults to null;
 
         private readonly List<string> AllowedTeslaAPICommands = new List<string>()
         {
             "auto_conditioning_start",
             "auto_conditioning_stop",
+            "auto_conditioning_start_stop",
             "auto_conditioning_toggle",
             "sentry_mode_on",
             "sentry_mode_off",
+            "sentry_mode_on_off",
             "sentry_mode_toggle",
             "wake_up",
             "set_charge_limit",
             "charge_start",
             "charge_stop",
+            "charge_start_stop",
             "set_charging_amps"
         };
 
@@ -128,7 +149,7 @@ namespace TeslaLogger
             }
         }
 
-        void WriteFile(HttpListenerResponse response, string path)
+        static void WriteFile(HttpListenerResponse response, string path)
         {
             using (FileStream fs = File.OpenRead(path))
             {
@@ -178,32 +199,65 @@ namespace TeslaLogger
                     localpath = "NULL";
                 }
 
+                var url = request.Url;
+
+                if (url.Segments.Length == 3)
+                {
+                    switch (url.Segments[1])
+                    {
+                        case "getfile/":
+                            Admin_Getfile(request, response);
+                            return;
+
+                        case "writefile/":
+                            Admin_Writefile(request, response);
+                            return;
+
+                        case "telemetrystart/":
+                            TelemetryStart(response, url);
+                            return;
+
+                        case "telemetryclose/":
+                            TelemetryClose(response, url);
+                            return;
+                    }
+                }
+
+
                 switch (true)
                 {
-                    // commands for admin UI
                     case bool _ when request.Url.LocalPath.Equals("/getchargingstate", System.StringComparison.Ordinal):
-                        Getchargingstate(request, response);
+                        Admin_Getchargingstate(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setcost", System.StringComparison.Ordinal):
-                        Setcost(request, response);
+                        Admin_Setcost(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/getallcars", System.StringComparison.Ordinal):
-                        GetAllCars(request, response);
+                        Admin_GetAllCars(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccount", System.StringComparison.Ordinal):
-                        GetCarsFromAccount(request, response);
+                        Admin_GetCarsFromAccount(request, response, false);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/getcarsfromaccountfleetapi", System.StringComparison.Ordinal):
+                        Admin_GetCarsFromAccount(request, response, true);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/getversion", System.StringComparison.Ordinal):
+                        Admin_GetVersion(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setpassword", System.StringComparison.Ordinal):
-                        SetPassword(request, response);
+                        Admin_SetPassword(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/set_car_inactive", System.StringComparison.Ordinal):
+                        Admin_SetCarInactive(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setpasswordovms", System.StringComparison.Ordinal):
-                        SetPasswordOVMS(request, response);
+                        Admin_SetPasswordOVMS(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/wallbox", System.StringComparison.Ordinal):
-                        Wallbox(request, response);
+                        Admin_Wallbox(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/setadminpanelpassword", System.StringComparison.Ordinal):
-                        SetAdminPanelPassword(request, response);
+                        Admin_SetAdminPanelPassword(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/UpdateElevation", System.StringComparison.Ordinal):
                         Admin_UpdateElevation(request, response);
@@ -221,29 +275,32 @@ namespace TeslaLogger
                         Admin_Update(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/updategrafana", System.StringComparison.Ordinal):
-                        updategrafana(request, response);
+                        Admin_UpdateGrafana(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/admin/downloadlogs", System.StringComparison.Ordinal):
                         Admin_DownloadLogs(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/export/trip", System.StringComparison.Ordinal):
-                        ExportTrip(request, response);
+                        Admin_ExportTrip(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/passwortinfo", System.StringComparison.Ordinal):
-                        passwortinfo(request, response);
+                        Admin_passwortinfo(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup", System.StringComparison.Ordinal):
-                        RestoreChargingCostsFromBackup1(request, response);
+                        Admin_RestoreChargingCostsFromBackup1(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup2", System.StringComparison.Ordinal):
-                        RestoreChargingCostsFromBackup2(request, response);
+                        Admin_RestoreChargingCostsFromBackup2(request, response);
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/RestoreChargingCostsFromBackup3", System.StringComparison.Ordinal):
-                        RestoreChargingCostsFromBackup3(request, response);
+                        Admin_RestoreChargingCostsFromBackup3(request, response);
                         break;
                     // get car values
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/[0-9]+/.+"):
-                        Get_CarValue(request, response);
+                        Get_CarValueID(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/get/.{17}/.+"):
+                        Get_CarValueVIN(request, response);
                         break;
                     // static map service
                     case bool _ when request.Url.LocalPath.Equals("/get/map", System.StringComparison.Ordinal):
@@ -251,8 +308,12 @@ namespace TeslaLogger
                         break;
                     // send car commands
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/[0-9]+/.+"):
-                        SendCarCommand(request, response);
+                        SendCarCommandID(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/command/.{17}/.+"):
+                        SendCarCommandVIN(request, response);
+                        break;
+                    // misc.
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/currentjson/[0-9]+"):
                         GetCurrentJson(request, response);
                         break;
@@ -322,6 +383,12 @@ namespace TeslaLogger
                     case bool _ when request.Url.LocalPath.Equals("/dev/sucbingo", System.StringComparison.Ordinal):
                         SuCBingoDev(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/info"):
+                        MQTT_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/set"):
+                        MQTT_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/logfile", System.StringComparison.Ordinal):
                         GetLogfile(response);
                         break;
@@ -333,6 +400,9 @@ namespace TeslaLogger
                         break;
                     case bool _ when request.Url.LocalPath.Equals("/teslaauthtoken", System.StringComparison.Ordinal):
                         TeslaAuthGetToken(request, response);
+                        break;
+                    case bool _ when request.Url.LocalPath.Equals("/osupgrade", System.StringComparison.Ordinal):
+                        OsUpgrade(request, response);
                         break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -348,7 +418,229 @@ namespace TeslaLogger
             }
         }
 
-        private static void RestoreChargingCostsFromBackup3(HttpListenerRequest request, HttpListenerResponse response)
+        private void Admin_Writefile(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var u = request.Url;
+            string filename = u.Segments[2].ToString();
+
+            bool allowedFiles = allowed_getfiles.Contains(filename);
+
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + filename);
+
+            if (!allowedFiles)
+            {
+                response.StatusCode = (int)HttpStatusCode.Forbidden;
+                WriteString(response, @"Forbidden!");
+            }
+
+            string p = FileManager.GetFilePath(filename);
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug\", "");
+                p = p.Replace(@"net8.0\", "");
+            }
+
+            if (File.Exists(p))
+            {
+                string data = GetDataFromRequestInputStream(request);
+                File.Delete(p);
+                File.WriteAllText(p, data);
+                WriteString(response, "ok");
+                return;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            WriteString(response, @"File Not Found!");
+        }
+
+        private static void TelemetryClose(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.CloseConnection();
+            WriteString(response, @"OK");
+        }
+
+        private static void TelemetryStart(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.StartConnection();
+            WriteString(response, @"OK");
+        }
+
+        static string[] allowed_getfiles = new string[] {
+        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini"};
+
+        private void Admin_Getfile(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var u = request.Url;
+            string filename = u.Segments[2].ToString();
+
+            bool allowedFiles = (filename.StartsWith("language-") && filename.EndsWith(".txt"))
+                || allowed_getfiles.Contains(filename);
+
+            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + filename);
+
+            if (!allowedFiles)
+            {
+                response.StatusCode = (int)HttpStatusCode.Forbidden;
+                WriteString(response, @"Forbidden!");
+            }
+
+            string p = FileManager.GetFilePath(filename);
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug\", "");
+                p = p.Replace(@"net8.0\", "");
+            }
+
+            if (File.Exists(p))
+            {
+                string content = File.ReadAllText(p);
+                WriteString(response, content);
+                return;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            WriteString(response, @"File Not Found!");
+        }
+
+        private static void Admin_SetCarInactive(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("SetCarInactive");
+
+                string data = GetDataFromRequestInputStream(request);
+
+                dynamic r = JsonConvert.DeserializeObject(data);
+
+                int id = Convert.ToInt32(r["id"]);
+
+                if (Tools.IsPropertyExist(r, "deactivatecar"))
+                {
+                    Logfile.Log("Set Car Inactive #" + id);
+
+                    using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+                    {
+                        con.Open();
+
+                        using (var cmd2 = new MySqlCommand(@"
+UPDATE
+  cars
+SET
+  tesla_password = NULL,
+  tesla_token = NULL,
+  refresh_token = NULL,
+  tesla_name = """"
+WHERE
+  id = @id", con))
+                        {
+                            cmd2.Parameters.AddWithValue("@id", id);
+                            _ = SQLTracer.TraceNQ(cmd2, out _);
+
+                            Car c = Car.GetCarByID(id);
+                            if (c != null)
+                            {
+                                c.Log("Set Car Inactive");
+                                c.ExitCarThread("Car deactivated!");
+                            }
+
+                            WriteString(response, "OK");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().MarkAsCritical().Submit();
+                WriteString(response, "ERROR");
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void Admin_GetVersion(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            WriteString(response, version);
+        }
+
+        private static void Get_CarValueVIN(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/get/(.{17})/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int CarID = Car.GetCarIDFromVIN(m.Groups[1].Captures[0].ToString());
+                string name = m.Groups[2].Captures[0].ToString();
+                if (name.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        if (car.GetTeslaAPIState().GetState(name, out Dictionary<TeslaAPIState.Key, object> state))
+                        {
+                            if (request.QueryString.Count == 1 && string.Concat(request.QueryString.GetValues(0)).Equals("raw", System.StringComparison.Ordinal))
+                            {
+                                WriteString(response, state[TeslaAPIState.Key.Value].ToString());
+                                return;
+                            }
+                            else
+                            {
+                                response.AddHeader("Content-Type", "application/json; charset=utf-8");
+                                WriteString(response, "{\"response\":{ \"value\":\"" + state[TeslaAPIState.Key.Value].ToString() + "\", \"timestamp\":" + state[TeslaAPIState.Key.Timestamp] + "} }");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            Logfile.Log($"Get_CarValueVIN: state not found: GetState({name})");
+                            WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
+                        }
+                    }
+                    else
+                    {
+                        Logfile.Log($"Get_CarValueVIN: car not found: GetCarByID({CarID}");
+                    }
+                }
+                else
+                {
+                    Logfile.Log($"Get_CarValueVIN: error: VIN({m.Groups[1].Captures[0].ToString()} name:{name}");
+                }
+            }
+            else if (m.Groups.Count == 3)
+            {
+                Logfile.Log($"Get_CarValueVIN: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
+            }
+            else
+            {
+                Logfile.Log($"Get_CarValueVIN: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
+            }
+            WriteString(response, "");
+        }
+
+        private static void OsUpgrade(HttpListenerRequest _, HttpListenerResponse response)
+        {
+            try
+            {
+                Logfile.Log("OsUpgrade");
+                string shellScript = "/etc/teslalogger/upgrade2buster.sh";
+                UpdateTeslalogger.Chmod(shellScript, 777, true);
+                shellScript += " > /etc/teslalogger/oslogfile.txt &";
+                Tools.ExecMono("/bin/bash", shellScript);
+                Logfile.Log("OsUpgrade end");
+                WriteString(response, "OK");
+
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void Admin_RestoreChargingCostsFromBackup3(HttpListenerRequest request, HttpListenerResponse response)
         {
             Logfile.Log("RestoreChargingCostsFromBackup3");
             string errorText = string.Empty;
@@ -474,7 +766,7 @@ WHERE
             WriteString(response, html.ToString());
         }
 
-        private static void RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_RestoreChargingCostsFromBackup2(HttpListenerRequest request, HttpListenerResponse response)
         {
             Logfile.Log("RestoreChargingCostsFromBackup2");
             string errorText = string.Empty;
@@ -779,7 +1071,7 @@ DROP TABLE chargingstate_bak";
                 }
                 else
                 {
-                    if (!File.ReadAllText(sqlCreate).StartsWith("CREATE TABLE `chargingstate_bak`"))
+                    if (!File.ReadAllText(sqlCreate).StartsWith("CREATE TABLE `chargingstate_bak`", StringComparison.Ordinal))
                     {
                         errorText = $"SQL create file <{sqlCreate}> does not start with expected content";
                     }
@@ -862,7 +1154,7 @@ DROP TABLE chargingstate_bak";
                             }
                             else
                             {
-                                if (!File.ReadAllText(sqlExtract).StartsWith("INSERT INTO `chargingstate_bak` VALUES"))
+                                if (!File.ReadAllText(sqlExtract).StartsWith("INSERT INTO `chargingstate_bak` VALUES", StringComparison.Ordinal))
                                 {
                                     errorText = $"SQL extract file <{sqlExtract}> does not start with expected content";
                                 }
@@ -972,7 +1264,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void TeslaAuthURL(HttpListenerResponse response)
+        private static void TeslaAuthURL(HttpListenerResponse response)
         {
             try
             {
@@ -990,7 +1282,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_GetCarsFromAccount(HttpListenerRequest request, HttpListenerResponse response, bool fleetAPI)
         {
             string responseString = "";
 
@@ -1001,8 +1293,14 @@ DROP TABLE chargingstate_bak";
                 dynamic r = JsonConvert.DeserializeObject(data);
 
                 string access_token = r["access_token"];
-                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0);
+                var car = new Car(-1, "", "", -1, access_token, DateTime.Now, "", "", "", "", "", "", "", 0.0, fleetAPI); // TODO Check
                 car.webhelper.Tesla_token = access_token;
+
+                if (fleetAPI)
+                {
+                    car.SetCurrentState(Car.TeslaState.Online);
+                    car.webhelper.GetRegion();
+                }
 
                 car.webhelper.GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, true);
 
@@ -1017,6 +1315,7 @@ DROP TABLE chargingstate_bak";
                         responseString = "ERROR: " + error + " / Error Description: " + error_description;
 
                         Logfile.Log(responseString);
+                        car.CreateExeptionlessLog("GetCarsFromAccount", responseString, Exceptionless.Logging.LogLevel.Fatal).Submit();
 
                         WriteString(response, responseString);
                         return;
@@ -1054,7 +1353,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, responseString);
         }
 
-        private void Restart(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Restart(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine(request.Url.LocalPath);
 
@@ -1076,7 +1375,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void Wallbox(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_Wallbox(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1120,7 +1419,7 @@ DROP TABLE chargingstate_bak";
                             cmd.Parameters.AddWithValue("@meter_type", r["type"]);
                             cmd.Parameters.AddWithValue("@meter_host", r["host"]);
                             cmd.Parameters.AddWithValue("@meter_parameter", r["param"]);
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
 
                             WriteString(response, "OK");
                         }
@@ -1149,7 +1448,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_SetAdminPanelPassword(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -1205,7 +1504,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
+        private static void ABRP_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/set");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1241,7 +1540,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
+        private static void ABRP_Info(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/abrp/([0-9]+)/info");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1266,7 +1565,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void SuCBingo_Set(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SuCBingo_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/set");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1302,7 +1601,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void SuCBingo_Info(HttpListenerRequest request, HttpListenerResponse response)
+        private static void SuCBingo_Info(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/sucbingo/([0-9]+)/info");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1342,13 +1641,13 @@ DROP TABLE chargingstate_bak";
                         switch (key)
                         {
                             case "lat":
-                                double.TryParse(request.QueryString.GetValues(key)[0], out lat);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lat);
                                 break;
                             case "lng":
-                                double.TryParse(request.QueryString.GetValues(key)[0], out lng);
+                                _ = double.TryParse(request.QueryString.GetValues(key)[0], out lng);
                                 break;
                             case "carID":
-                                int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
+                                _ = int.TryParse(request.QueryString.GetValues(key)[0], out CarID);
                                 break;
                             default:
                                 break;
@@ -1374,7 +1673,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void MQTT_Set(HttpListenerRequest request, HttpListenerResponse response)
+        private static void MQTT_Set(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/set");
             if (m.Success)
@@ -1390,7 +1689,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void MQTT_Info(HttpListenerRequest request, HttpListenerResponse response)
+        private static void MQTT_Info(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/mqtt/info");
             if (m.Success)
@@ -1403,7 +1702,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
+        private static void GetStaticMap(HttpListenerRequest request, HttpListenerResponse response)
         {
             int startPosID = 0;
             int endPosID = 0;
@@ -1513,7 +1812,7 @@ DROP TABLE chargingstate_bak";
             response.OutputStream.Close();
         }
 
-        private void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Set_MFA(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/mfa/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1534,7 +1833,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Set_Captcha(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/captcha/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -1554,7 +1853,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
+        private static void CaptchaPic(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/captchapic/([0-9]+)");
             if (m.Success && m.Groups.Count == 2 && m.Groups[1].Captures.Count == 1)
@@ -1692,7 +1991,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private static void ExportTrip(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_ExportTrip(HttpListenerRequest request, HttpListenerResponse response)
         {
             // source: https://github.com/rowich/Teslalogger2gpx/blob/master/Teslalogger2GPX.ps1
             // parse request
@@ -1808,7 +2107,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private void GetLogfile(HttpListenerResponse response)
+        private static void GetLogfile(HttpListenerResponse response)
         {
             try
             {
@@ -1841,7 +2140,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "<html><head></head><body><table border=\"1\">" + string.Concat(Tools.debugBuffer.Select(a => string.Format(Tools.ciEnUS, "<tr><td>{0}&nbsp;{1}</td></tr>", a.Item1, a.Item2))) + "</table></body></html>");
         }
 
-        private static void passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_passwortinfo(HttpListenerRequest request, HttpListenerResponse response)
         {
             System.Diagnostics.Debug.WriteLine("passwortinfo");
             string data = GetDataFromRequestInputStream(request);
@@ -2012,7 +2311,7 @@ DROP TABLE chargingstate_bak";
             }
         }
 
-        private static void updategrafana(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_UpdateGrafana(HttpListenerRequest request, HttpListenerResponse response)
         {
             Tools.lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
             _ = Task.Run(() => { UpdateTeslalogger.UpdateGrafana(); });
@@ -2043,7 +2342,7 @@ DROP TABLE chargingstate_bak";
             WriteString(response, $"DumpJSON {dumpJSON}");
         }
 
-        private void SendCarCommand(HttpListenerRequest request, HttpListenerResponse response)
+        private void SendCarCommandID(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/command/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -2137,7 +2436,142 @@ DROP TABLE chargingstate_bak";
             WriteString(response, "");
         }
 
-        private static void SetPassword(HttpListenerRequest request, HttpListenerResponse response)
+        private void SendCarCommandVIN(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            Match m = Regex.Match(request.Url.LocalPath, @"/command/(.{17})/(.+)");
+            if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
+            {
+                int CarID = Car.GetCarIDFromVIN(m.Groups[1].Captures[0].ToString());
+                string command = m.Groups[2].Captures[0].ToString();
+                if (command.Length > 0 && CarID > 0)
+                {
+                    Car car = Car.GetCarByID(CarID);
+                    if (car != null)
+                    {
+                        // check if command is in list of allowed commands
+                        if (AllowedTeslaAPICommands.Contains(command))
+                        {
+                            string var = string.Concat(request.QueryString.GetValues(0)).ToLower();
+                            switch (command)
+                            {
+                                case "auto_conditioning_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    break;
+                                case "auto_conditioning_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    break;
+                                case "auto_conditioning_start_stop":
+                                    
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if (var == "1" || var == "true" || var == "on")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                        }
+                                    }
+                                    break;
+                                case "auto_conditioning_toggle":
+                                    if (car.CurrentJSON.current_is_preconditioning)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_stop", null).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/auto_conditioning_start", null).Result);
+                                    }
+                                    break;
+                                case "sentry_mode_on":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    break;
+                                case "sentry_mode_off":
+                                    WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    break;
+                                case "sentry_mode_on_off":
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if (var == "1" || var == "true" || var == "on")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                        }
+                                    }
+                                    break;
+                                case "sentry_mode_toggle":
+                                    if (car.webhelper.is_sentry_mode)
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":false}", true).Result);
+                                    }
+                                    else
+                                    {
+                                        WriteString(response, car.webhelper.PostCommand("command/set_sentry_mode", "{\"on\":true}", true).Result);
+                                    }
+                                    break;
+                                case "wake_up":
+                                    WriteString(response, car.webhelper.Wakeup().Result);
+                                    break;
+                                case "set_charge_limit":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargeLimit))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargeLimit to {newChargeLimit} at '{addr.name}' ...");
+                                            car.LastSetChargeLimitAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charge_limit", "{\"percent\":" + newChargeLimit + "}", true).Result);
+                                    }
+                                    break;
+                                case "charge_start":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                    break;
+                                case "charge_stop":
+                                    WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                    break;
+                                case "charge_start_stop":
+                                    if (request.QueryString.Count == 1)
+                                    {
+                                        if(var == "1" || var == "true" || var == "on")
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_start", null).Result);
+                                        }
+                                        else
+                                        {
+                                            WriteString(response, car.webhelper.PostCommand("command/charge_stop", null).Result);
+                                        }
+                                    }
+                                    break;
+                                case "set_charging_amps":
+                                    if (request.QueryString.Count == 1 && int.TryParse(string.Concat(request.QueryString.GetValues(0)), out int newChargingAmps))
+                                    {
+                                        Address addr = Geofence.GetInstance().GetPOI(car.CurrentJSON.GetLatitude(), car.CurrentJSON.GetLongitude(), false);
+                                        if (addr != null)
+                                        {
+                                            car.Log($"SetChargingAmps to {newChargingAmps} at '{addr.name}' ...");
+                                            car.LastSetChargingAmpsAddressName = addr.name;
+                                        }
+                                        WriteString(response, car.webhelper.PostCommand("command/set_charging_amps", "{\"charging_amps\":" + newChargingAmps + "}", true).Result);
+                                    }
+                                    break;
+                                default:
+                                    WriteString(response, "");
+                                    break;
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+            WriteString(response, "");
+        }
+
+        private static void Admin_SetPassword(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -2161,7 +2595,7 @@ DROP TABLE chargingstate_bak";
                         using (var cmd2 = new MySqlCommand("delete from cars where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2, out long _);
+                            _ = SQLTracer.TraceNQ(cmd2, out _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -2185,7 +2619,7 @@ DROP TABLE chargingstate_bak";
                         using (var cmd2 = new MySqlCommand("update cars set tesla_token='', refresh_token='' where id = @id", con))
                         {
                             cmd2.Parameters.AddWithValue("@id", id);
-                            SQLTracer.TraceNQ(cmd2, out long _);
+                            _ = SQLTracer.TraceNQ(cmd2, out _);
 
                             Car c = Car.GetCarByID(id);
                             if (c != null)
@@ -2206,6 +2640,10 @@ DROP TABLE chargingstate_bak";
 
                     string access_token = r["access_token"];
                     string refresh_token = r["refresh_token"];
+                    bool FleetAPI = false;
+
+                    if (r["fleetAPI"] != null)
+                         FleetAPI = r["fleetAPI"];
 
                     if (id == -1)
                     {
@@ -2242,7 +2680,7 @@ FROM
 
                                 Logfile.Log($"New CarID: {newid} SQL Query result: <{queryresult}>");
 
-                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token)", con))
+                                using (var cmd2 = new MySqlCommand("insert cars (id, tesla_name, tesla_password, vin, display_name, freesuc, tesla_token, refresh_token, tesla_token_expire, fleetAPI) values (@id, @tesla_name, @tesla_password, @vin, @display_name, @freesuc,  @tesla_token, @refresh_token, @tesla_token_expire, @fleetAPI)", con))
                                 {
                                     cmd2.Parameters.AddWithValue("@id", newid);
                                     cmd2.Parameters.AddWithValue("@tesla_name", email);
@@ -2252,11 +2690,13 @@ FROM
                                     cmd2.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                     cmd2.Parameters.AddWithValue("@tesla_token", access_token);
                                     cmd2.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                    SQLTracer.TraceNQ(cmd2, out long _);
+                                    cmd2.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                                    cmd2.Parameters.AddWithValue("@fleetAPI", FleetAPI);
+                                    _ = SQLTracer.TraceNQ(cmd2, out _);
 
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                    Car nc = new Car(Convert.ToInt32(newid), email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                                    var dt = DBHelper.GetCarDT(Convert.ToInt32(newid));
+                                    if (dt?.Rows?.Count > 0)
+                                        Program.StartCarThread(dt.Rows[0]);
 
                                     WriteString(response, "ID:"+newid);
                                 }
@@ -2272,13 +2712,15 @@ FROM
                         {
                             con.Open();
 
-                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token where id=@id", con))
+                            using (MySqlCommand cmd = new MySqlCommand("update cars set freesuc=@freesuc,  tesla_token=@tesla_token, refresh_token=@refresh_token, fleetAPI=@fleetAPI, tesla_token_expire=@tesla_token_expire where id=@id", con))
                             {
                                 cmd.Parameters.AddWithValue("@id", dbID);
                                 cmd.Parameters.AddWithValue("@freesuc", freesuc ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@tesla_token", access_token);
                                 cmd.Parameters.AddWithValue("@refresh_token", refresh_token);
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                cmd.Parameters.AddWithValue("@fleetAPI", FleetAPI ? 1 : 0);
+                                cmd.Parameters.AddWithValue("@tesla_token_expire", DateTime.Now);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
 
                                 Car c = Car.GetCarByID(dbID);
                                 if (c != null)
@@ -2286,9 +2728,9 @@ FROM
                                     c.ExitCarThread("Credentials changed!");
                                 }
 
-#pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                                Car nc = new Car(dbID, email, password, 1, access_token, DateTime.Now, "", "", "", "", "", vin, "", null);
-#pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
+                                var dt = DBHelper.GetCarDT(Convert.ToInt32(id));
+                                if (dt?.Rows?.Count > 0) 
+                                    Program.StartCarThread(dt.Rows[0]);
                                 WriteString(response, "OK");
                             }
                         }
@@ -2303,7 +2745,7 @@ FROM
             }
         }
 
-        private static void SetPasswordOVMS(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_SetPasswordOVMS(HttpListenerRequest request, HttpListenerResponse response)
         {
             try
             {
@@ -2337,7 +2779,7 @@ FROM
                                 cmd2.Parameters.AddWithValue("@tesla_password", password);
                                 cmd2.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                                 cmd2.Parameters.AddWithValue("@display_name", carname);
-                                SQLTracer.TraceNQ(cmd2, out long _);
+                                _ = SQLTracer.TraceNQ(cmd2, out _);
 
                                 WriteString(response, "ID:" + newid);
                             }
@@ -2361,7 +2803,7 @@ FROM
                             cmd.Parameters.AddWithValue("@tesla_token", "OVMS:" + carname);
                             cmd.Parameters.AddWithValue("@display_name", carname);
 
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
 
                             WriteString(response, "OK");
                         }
@@ -2376,7 +2818,7 @@ FROM
             }
         }
 
-        private static void Get_CarValue(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Get_CarValueID(HttpListenerRequest request, HttpListenerResponse response)
         {
             Match m = Regex.Match(request.Url.LocalPath, @"/get/([0-9]+)/(.+)");
             if (m.Success && m.Groups.Count == 3 && m.Groups[1].Captures.Count == 1 && m.Groups[2].Captures.Count == 1)
@@ -2404,27 +2846,27 @@ FROM
                         }
                         else
                         {
-                            Logfile.Log($"Get_CarValue: state not found: GetState({name})");
+                            Logfile.Log($"Get_CarValueID: state not found: GetState({name})");
                             WriteString(response, $"state {name} not found, was the car {CarID} awake since the last TeslaLogger restart or Car Thread restart?");
                         }
                     }
                     else
                     {
-                        Logfile.Log($"Get_CarValue: car not found: GetCarByID({CarID}");
+                        Logfile.Log($"Get_CarValueID: car not found: GetCarByID({CarID}");
                     }
                 }
                 else
                 {
-                    Logfile.Log($"Get_CarValue: error: CarID({CarID} name:{name}");
+                    Logfile.Log($"Get_CarValueID: error: CarID({CarID} name:{name}");
                 }
             }
             else if (m.Groups.Count == 3)
             {
-                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
+                Logfile.Log($"Get_CarValueID: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count} m.Groups[1].Captures.Count:{m.Groups[1].Captures.Count} m.Groups[2].Captures.Count:{m.Groups[2].Captures.Count}");
             }
             else
             {
-                Logfile.Log($"Get_CarValue: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
+                Logfile.Log($"Get_CarValueID: bad request: {request.Url.LocalPath} m.Success:{m.Success} m.Groups.Count:{m.Groups.Count}");
             }
             WriteString(response, "");
         }
@@ -2558,7 +3000,7 @@ FROM
             }
         }
 
-        private static void Setcost(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_Setcost(HttpListenerRequest request, HttpListenerResponse response)
         {
             string json = "";
 
@@ -2604,7 +3046,7 @@ FROM
                         cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", DBHelper.DBNullIfEmpty(j["cost_kwh_meter_invoice"].Value));
 
                         cmd.Parameters.AddWithValue("@id", j["id"].Value);
-                        int done = SQLTracer.TraceNQ(cmd, out long _);
+                        int done = _ = SQLTracer.TraceNQ(cmd, out _);
 
                         Logfile.Log("SetCost OK: " + done);
                         WriteString(response, "OK");
@@ -2619,7 +3061,7 @@ FROM
             }
         }
 
-        private static void Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_Getchargingstate(HttpListenerRequest request, HttpListenerResponse response)
         {
             string id = request.QueryString["id"];
             string responseString = "";
@@ -2652,7 +3094,7 @@ FROM
             WriteString(response, responseString);
         }
 
-        private static void GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
+        private static void Admin_GetAllCars(HttpListenerRequest request, HttpListenerResponse response)
         {
             string responseString = "";
 
@@ -2667,7 +3109,7 @@ FROM
                 {
                     using (DataTable dt = new DataTable())
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI FROM cars order by display_name", DBHelper.DBConnectionstring))
                         {
                             SQLTracer.TraceDA(dt, da);
 
@@ -2692,6 +3134,7 @@ FROM
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             // Get a response stream and write the response to it.
             response.ContentLength64 = buffer.Length;
+            response.ContentType = "text/plain; charset=utf-8";
             Stream output = response.OutputStream;
             if (output != null && output.CanWrite)
             {
@@ -2786,7 +3229,7 @@ FROM
             Logfile.Log("Admin: UpdateElevation done");
         }
 
-        private static void RestoreChargingCostsFromBackup1(HttpListenerRequest _, HttpListenerResponse response)
+        private static void Admin_RestoreChargingCostsFromBackup1(HttpListenerRequest _, HttpListenerResponse response)
         {
             Logfile.Log("RestoreChargingCostsFromBackup1");
             // handle GET request

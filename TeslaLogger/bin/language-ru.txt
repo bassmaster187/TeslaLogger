@@ -102,7 +102,7 @@ Angefordert [A]=Запрошено [A]
 Pilot [A]=Pilot [A]
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik=Ежемесячная статистика потери заряда 
+Vampir Drain Monatsstatistik=Ежемесячная статистика потери заряда
 TR mi Verlust=Типичный потеряный запас хода в милях
 kWh Verlust=кВтч потеряннo
 Eur Verlust=EUR потеряннo
@@ -159,7 +159,6 @@ Außentemperatur [°C]=Наружная температура [°C]
 Außentemperatur [°F]=Наружная температура [°F]
 Innentemperatur [°C]=Внутренная температура [°C]
 Innentemperatur [°F]=Внутренная температура [°F]
-
 Laden fertig=Зарядка закончена
 Sleeping=сон
 Online=онлайн
@@ -248,12 +247,12 @@ Please enter the access token!=Пожалуйста, введите маркер
 Please enter the refresh token!=Пожалуйста, введите маркер обновления!
 Please select a vehicle=Пожалуйста, выберите автомобиль
 Check Logfile!=Проверьте файл журнала!
-Do you really want to delete this vehicle?=Вы действительно хотите удалить этот автомобиль?
+Do you really want to delete this vehicle?="Вы действительно хотите удалить этот автомобиль?"
 Check Logfile in one minute!=Проверьте Logfile за одну минуту!
 Unauthorized=Неавторизованный
-This isn't a valid URL!=Это не действительный URL!
+This isn't a valid URL!="Это не действительный URL!"
 This isn't an auth link by Tesla!=Это не ссылка авторизации от Tesla!
-The URL doesn't contain the expected format!=URL не содержит ожидаемого формата!
+The URL doesn't contain the expected format!="URL не содержит ожидаемого формата!"
 TeslaAuthApps=Вы можете использовать следующие приложения для получения маркера доступа и маркера обновления с сервера Tesla:
 BA_Browser=В локальном {браузере} (рекомендуется)
 BA_Read=Пожалуйста, прочитайте все шаги, прежде чем продолжить:
@@ -263,14 +262,14 @@ BA_NotFound=Это приведет к появлению сообщения "С
 BA_URL=Скопируйте полученный URL этой веб-страницы в форму ниже. В URL-адресе содержится одноразовый временный код, который мы можем использовать для генерации маркеров. Мы извлечем его для вас из ссылки.
 BA_Invalid=Эти ссылки обычно работают только один раз, поэтому если на нашем сайте появится сообщение "Недействительный грант" или другое сообщение об ошибке, вам, возможно, придется заново начать работу со ссылкой Tesla Logon, в результате чего появится новая ссылка.
 BA_Logoff=Если вы хотите использовать другую учетную запись, вы должны вручную выйти из системы {здесь!}.
-BA_GetToken=Затем мы получим токены для вашего счета Tesla.
+BA_GetToken="Затем мы получим токены для вашего счета Tesla."
 BA_SelectCar=Выберите автомобиль, который вы хотите использовать для Teslalogger.
 BA_Step1=Шаг 1:
 BA_Step2=Шаг 2:
 BA_Step3=Шаг 3:
 BA_FillOut=Заполните эту форму:
-BA_CopyUrl=Скопируйте полученный url, как показано на рисунке
-BA_Paste=Вставьте полученный url в поле и нажмите кнопку "Получить токены":
+BA_CopyUrl="Скопируйте полученный URL, как показано на рисунке"
+BA_Paste="Вставьте полученный URL в поле и нажмите кнопку "_QQ_"Получить токены"_QQ_":"
 Get Tokens=Получить токены
 Access Token=Токен доступа
 Refresh Token=Обновить маркер
@@ -320,7 +319,7 @@ Show calc. 100% range=Показать кальций. 100% диапазон
 Position by StreamingAPI=Позиция StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla=Все потребление - ScanMyTesla
+Alle Verbräuche - ScanMyTesla="Все потребление - ScanMyTesla"
 Zelltemperatur [°C]=Температура ячейка батареи [°C]
 Zelltemperatur [°F]=Температура ячейка батареи [°F]
 
@@ -333,21 +332,16 @@ Verbraucht [kWh]=Потребленo кВтч
 Ø Verbrauch [kWh]=Ø потребление кВтч
 Anzahl Trips=Количество поездок
 Trip Monatsstatistik=Ужемесячная статистика поездок
-
-Zellspannungen 01-20 - ScanMyTesla=Напряжение ячеек 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Напряжение ячеек 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Напряжение ячеек 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Напряжение ячеек 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Напряжение ячеек 81-99 - ScanMyTesla
-
+Zellspannungen 01-20 - ScanMyTesla="Напряжение ячеек 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Напряжение ячеек 21-40 - ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Напряжение ячеек 41-60 - ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Напряжение ячеек 61-80 - ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Напряжение ячеек 81-99 - ScanMyTesla"
 Ja=да
 Nein=нет
-
 Car=Автомобиль
-
 Einschlafen=Засыпает
 Automatic updates=Автоматические обновления
-
 TextShare=<h1>Анонимно делитесь диаграммами заряда / графиками деградации </h1> Мы хотели бы создать анонимную базу данных для сравнения графиков деградации и диаграмм заряда. Это позволяет вам в любое время сравнивать свой автомобиль с другими и обнаруживать любые необычные отклонения на ранней стадии. Это также можно использовать позже, чтобы доказать во время разговора о продажах, что ваша батарея по-прежнему полностью работоспособна. В отрицательном случае вам будет легче доказать снижение производительности против Tesla Motors. <br> <br> Хотели бы вы поделиться своими диаграммами быстрой зарядки и графиками деградации с другими водителями Tesla полностью анонимно? Это решение можно изменить в любой момент на экране настроек.
 StreamingPosHelp=<h1>Позиция StreamingAPI</h1>включает записи в БД позиций из потокового API - в зависимости от приема автомобиля это означает до 5 позиций в секунду (по сравнению с одной позицией каждые пять секунд в обычном режиме), это сильно увеличит размер вашей базы данных, увеличит износ SD-карты и приведет к созданию огромных резервных копий
 Daten anonym teilen=Делитесь данными анонимно
@@ -362,7 +356,7 @@ ABRP1=Создайте учетную запись Abetterrouteplanner
 ABRP2=Перейти к настройкам
 ABRP3=Выберите свой автомобиль
 ABRP4=Сохраните свой автомобиль в своей учетной записи
-ABRP5=Дайте вашей машине имя
+ABRP5="Дайте вашей машине имя"
 ABRP6=Нажмите «Общая ссылка», чтобы получить токен ABRP.
 ABRP7=Скопируйте токен и нажмите "Готово"
 ABRP8=Вставьте токен в Teslalogger
@@ -398,6 +392,30 @@ Version=Version
 Utility kWh=Utility кВтч
 Vehicle kWh=Автомобиль кВтч
 
+#mqtt.php
+MQTTSettings=Настройки MQTT
+MQTTSettingsInfo=MQTT Host обязателен. Всё остальное опционально
+TopicStructure=Структура:
+MQTT1="Все значения в одном JSON (если включено): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
+MQTT2=Все значения по одиночке (если включено): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" изменяется в графе "Topic"
+MQTT4="CAR_VIN" номер VIN машины
+MQTT5="ideal_battery_range_km" одиночные значения
+ADDescription=AutoDiscovery:
+MQTTAD1="Для AutoDiscovery надо включить "_QQ_"убилоковать одиночные значения"_QQ_"!"
+ControlTopic=Управление:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" и "13" как RAW value
+MQTT7=Возможные комманды
+RebootAfterSave=После сохранения, перезагрузить TeslaLogger!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson="Публиковать JSON"
+Singletopics=Пубилоковать одиночные значения
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Вы можете установить ссылку с TeslaLogger на SuperChargeBingo для автоматической регистрации на зарядных станциях Supercharger.
@@ -429,11 +447,11 @@ R → P=R → P
 High Frequency Logging=Высокочастотное протоколирование
 Special Count=Специальный подсчет
 Special Features=Особенности
-Enable Sentry Mode=Включить режим часового
-Disable Sentry Mode=Отключить режим часового
+Enable Sentry Mode="Включить режим часового"
+Disable Sentry Mode="Отключить режим часового"
 Turn HVAC off=Выключите HVAC
 No sleep=Не спать
-Are you sure you want to delete this geofencing location?=Вы уверены, что хотите удалить это местоположение геозоны?
+Are you sure you want to delete this geofencing location?="Вы уверены, что хотите удалить это местоположение геозоны?"
 Error=Ошибка
 Deleted!=Удалено!
 Meter=Метр
@@ -457,12 +475,12 @@ Charge time [h]=Время зарядки [ч]
 Distance [mi]=Расстояние [миль]
 Distance [km]=Расстояние [км]
 Charging costs=Расходы на зарядку
-CO2 [kg]=CO2 [кг]
+CO2 [kg]="CO₂ [кг]"
 New Journey=Новое путешествие
 Journey name=Название путешествия
 Please wait=Пожалуйста, подождите
 Please select start first=Пожалуйста, выберите сначала начало
-DelJourney=Вы действительно хотите удалить путешествие {id}?
+DelJourney="Вы действительно хотите удалить путешествие {id}?"
 Display _MENU_ records per page=Отображение _MENU_ записей на странице
 Nothing found=Ничего не найдено
 Showing _START_ to _END_ of _TOTAL_ entries=Показывает от _START_ до _END_ из _TOTAL_ записей

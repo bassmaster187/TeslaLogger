@@ -130,7 +130,6 @@ Außentemperatur [°C]=Buitentemperatuur [°C]
 Außentemperatur [°F]=Buitentemperatuur [°F]
 Innentemperatur [°C]=Binnentemperatuur [°C]
 Innentemperatur [°F]=Binnentemperatuur [°F]
-
 Laden fertig=Laden voltooid
 Schlafen=Slapen
 Online=Online
@@ -211,12 +210,12 @@ Please enter the access token!=Voer het toegangstoken in!
 Please enter the refresh token!=Voer het refresh token in!
 Please select a vehicle=Selecteer een voertuig
 Check Logfile!=Controleer het logboek!
-Do you really want to delete this vehicle?=Wil je dit voertuig echt verwijderen?
+Do you really want to delete this vehicle?="Wil je dit voertuig echt verwijderen?"
 Check Logfile in one minute!=Controleer Logfile in één minuut!
 Unauthorized=Onbevoegde
-This isn't a valid URL!=Dit is geen geldige URL!
+This isn't a valid URL!="Dit is geen geldige URL!"
 This isn't an auth link by Tesla!=Dit is geen auth link van Tesla!
-The URL doesn't contain the expected format!=De URL bevat niet het verwachte formaat!
+The URL doesn't contain the expected format!="De URL bevat niet het verwachte formaat!"
 BA_Browser=In lokale {browser} (aanbevolen)
 BA_Read=Lees alle stappen voordat u verder gaat:
 BA_Logon=Klik op de onderstaande link <b>Tesla Logon</b> die een nieuw tabblad/venster zal openen voor de Tesla Authentication logon pagina.
@@ -225,14 +224,14 @@ BA_NotFound=Dit lijkt te resulteren in een "Page Not Found". Dit is normaal.
 BA_URL=Kopieer de resulterende URL van die webpagina in het onderstaande formulier. In de URL staat een eenmalige, tijdelijke code die we kunnen gebruiken om tokens te genereren. Wij zullen deze voor u uit de link halen.
 BA_Invalid=Deze links werken meestal maar één keer, dus als er een "Invalid Grant" of andere foutmelding verschijnt op onze website moet u wellicht opnieuw beginnen met de Tesla Logon link die een nieuwe link zou moeten opleveren.
 BA_Logoff=Als u een ander account wilt gebruiken, moet u zich handmatig afmelden.
-BA_GetToken=Wij krijgen dan de tokens voor uw Tesla account.
+BA_GetToken="Wij krijgen dan de tokens voor uw Tesla account."
 BA_SelectCar=Selecteer de auto die u wilt gebruiken voor Teslalogger.
 BA_Step1=Step 1:
 BA_Step2=Step 2:
 BA_Step3=Stap 3:
 BA_FillOut=Vul dit formulier in:
-BA_CopyUrl=Kopieer de resulterende url zoals weergegeven
-BA_Paste=Plak de resulterende url in het vak en klik op de "Tokens krijgen" knop:
+BA_CopyUrl="Kopieer de resulterende URL zoals weergegeven"
+BA_Paste="Plak de resulterende URL in het vak en klik op de "_QQ_"Tokens krijgen"_QQ_" knop:"
 Get Tokens=Tokens krijgen
 Access Token=Toegangstoken
 Refresh Token=Refresh Token
@@ -283,7 +282,7 @@ Tasker URL=Tassen URL
 Received Tasker Token=Ontvangen Tasker Token
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla=Alle verbruik - ScanMyTesla
+Alle Verbräuche - ScanMyTesla="Alle verbruik - ScanMyTesla"
 Zelltemperatur [°C]=Cell Temperatuur [°C]
 Zelltemperatur [°F]=Cell Temperatuur [°F]
 
@@ -296,26 +295,21 @@ Verbraucht [kWh]=Verbruikt kWh
 Ø Verbrauch [kWh]=Ø Verbruikt kWh
 Anzahl Trips=Aantal ritten
 Trip Monatsstatistik=Maandelijkse statistieken ritten
-
-Zellspannungen 01-20 - ScanMyTesla=Celspanning 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Celspanning 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Celspanning 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Celspanning 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Celspanning 81-99 - ScanMyTesla
-
+Zellspannungen 01-20 - ScanMyTesla="Celspanning 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Celspanning 21-40 - ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Celspanning 41-60 - ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Celspanning 61-80 - ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Celspanning 81-99 - ScanMyTesla"
 Ja=Ja
 Nein=Nee
-
 Einschlafen=In slaap vallen
 Automatic updates=Automatiske oppdateringer
-
 TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
 StreamingPosHelp=<h1>Positie door StreamingAPI</h1>maakt positie DB-items van de streaming API mogelijk - afhankelijk van de ontvangst van de auto betekent dit tot 5 posities per seconde (vergeleken met één positie om de vijf seconden in de normale modus), dit zal de grootte van uw database aanzienlijk vergroten, de SD-kaart meer belasten en resulteren in enorme back-ups.
 Daten anonym teilen=Data anoniem delen
 TextSuspendTeslalogger=Teslalogger is gestopt! De gegevens worden niet gelogd!
 Resume Teslalogger=Start Teslalogger
 Range=Bereik
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -325,7 +319,7 @@ ABRP1=Maak een Abetterrouteplanner-account aan
 ABRP2=Ga naar Instellingen
 ABRP3=Kies uw auto
 ABRP4=Sla uw auto op in uw account
-ABRP5=Geef uw auto een naam
+ABRP5="Geef uw auto een naam"
 ABRP6=Klik op "Link Generic" om een ABRP-token te krijgen
 ABRP7=Kopieer de token en klik op "Gereed"
 ABRP8=Plaats het token in Teslalogger
@@ -358,6 +352,30 @@ Info=Info
 Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=Vehicle kWh
+
+#mqtt.php
+MQTTSettings=MQTT settings
+MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+TopicStructure=Topic structure:
+MQTT1="All values in one JSON (if activated): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
+MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT4="CAR_VIN" is VIN of your car
+MQTT5="ideal_battery_range_km" are single topics
+ADDescription=AutoDiscovery:
+MQTTAD1=""_QQ_"singletopics"_QQ_" are mandatory for AutoDiscovery!"
+ControlTopic=Topic for control:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" and "13" as RAW value
+MQTT7=Supported commands
+RebootAfterSave=Reboot TeslaLogger after save!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson="Publish JSON"
+Singletopics=Publish single topics
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
 
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
@@ -392,11 +410,11 @@ High Frequency Logging=Hoogfrequent loggen
 Special Count=Speciale telling
 Count=Graaf
 Special Features=Speciale kenmerken
-Enable Sentry Mode=Schildwachtmodus inschakelen
-Disable Sentry Mode=Schildwachtmodus uitschakelen
+Enable Sentry Mode="Schildwachtmodus inschakelen"
+Disable Sentry Mode="Schildwachtmodus uitschakelen"
 Turn HVAC off=Zet HVAC uit
 No sleep=No sleep
-Are you sure you want to delete this geofencing location?=Weet je zeker dat je deze geofencing locatie wilt verwijderen?
+Are you sure you want to delete this geofencing location?="Weet je zeker dat je deze geofencing locatie wilt verwijderen?"
 Error=Fout
 Deleted!=Verwijderd!
 Meter=Meter
@@ -420,12 +438,12 @@ Charge time [h]=Laadtijd [h]
 Distance [mi]=Afstand [mi]
 Distance [km]=Afstand [km]
 Charging costs=Oplaadkosten
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=Nieuwe reis
 Journey name=Naam van de reis
 Please wait=Wacht even.
 Please select start first=Selecteer eerst start
-DelJourney=Wil je echt reis {id} verwijderen?
+DelJourney="Wil je echt reis {id} verwijderen?"
 Display _MENU_ records per page=Geef _MENU_ records per pagina weer
 Nothing found=Niets gevonden.
 Showing _START_ to _END_ of _TOTAL_ entries=Weergave van _START_ tot _END_ van _TOTAL_ inzendingen

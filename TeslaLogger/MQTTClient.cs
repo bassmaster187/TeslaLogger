@@ -1,5 +1,7 @@
 ﻿using System;
 using Exceptionless;
+using Exceptionless;
+using Newtonsoft.Json;
 
 namespace TeslaLogger
 {
@@ -9,6 +11,26 @@ namespace TeslaLogger
     {
         internal static void StartMQTTClient()
         {
+            if(KVS.Get("MQTTSettings", out string mqttSettingsJson) == KVS.SUCCESS)
+            {
+                try 
+                { 
+                    dynamic r = JsonConvert.DeserializeObject(mqttSettingsJson);
+                    if ((r["mqtt_host"] > 0))
+                    {
+                        Logfile.Log("MQTT: Using new MQTT client!");
+                        ExceptionlessClient.Default.CreateFeatureUsage("MQTTClient").FirstCarUserID().Submit();
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToExceptionless().FirstCarUserID().Submit();
+
+                    Logfile.Log("MQTT: StartMQTTClient Exeption" + ex.ToString());
+                }
+            }
+            
             if (!ApplicationSettings.Default.UseMQTT)
             {
                 return;
@@ -18,6 +40,8 @@ namespace TeslaLogger
             {
                 System.Threading.Thread MQTTthread = new System.Threading.Thread(StartMqttClient);
                 MQTTthread.Start();
+                Logfile.Log("MQTT: Using old MQTT client, not recomended!");
+                ExceptionlessClient.Default.CreateFeatureUsage("MQTTClientOld").FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {

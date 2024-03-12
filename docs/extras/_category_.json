@@ -1,0 +1,14 @@
+{
+    "position": 4.5,
+    "label": "Extras",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "Extras"
+    },
+    "customProps": {
+      "description": "This description can be used in the swizzled DocCard"
+    }
+}

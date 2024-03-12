@@ -9,7 +9,7 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Wallbox"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -122,6 +122,7 @@ menu("Wallbox Test");
             <option value="shellyem">Shelly EM</option>
             <option value="tesla-gen3">Tesla Wallbox Gen 3</option>
             <option value="keba">Keba KeContact P30</option>
+            <option value="evcc">EVCC</option>
         </select>
         </td></tr>
     <tr><td><?php t("Host"); ?>:</td><td><input id="host" type="text" /></td></tr>

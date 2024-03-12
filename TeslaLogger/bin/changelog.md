@@ -1,5 +1,48 @@
-# Version 1.54.23
-- Bugfixes
+# Version 1.57.8
+- Dashboard consumption shows the usage of Autopilot / TACC in different colors (Fleet Telemetry). [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Autopilot.PNG)
+
+# Version 1.57.6
+- Dashboard Trip: percent of drive with Autopilot / TACC and the longes section with Autopilot / TACC (Fleet Telemetry) [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/AP-TACC-Percent.JPG)
+- We are using now Hosted Weblate for translations. Feel free to contribute your translation: [Weblate](https://hosted.weblate.org/engage/teslalogger/)
+
+# Version 1.57.5
+- Using [official](https://github.com/teslamotors/fleet-telemetry) Tesla Fleet Telemetry Server if your Car is connectet with Tesla-Fleet API (not used by pre 2021 Model S/X)
+- Grafana Dashboard Vehicle Alerts. (depends on Fleet Telemetry - not supported by pre 2021 Model S/X)
+- Cell temperature in charging dashboard (depends on Fleet Telemetry)
+
+# Version 1.57.3
+- Completely new MQTT client with MQTT AutoDiscovery and control possibilities. Old MQTT client will still work until new MQTT client is activated, but is not supported any more. Setup: go to Admin Panel->Extras->MQTT Settings
+
+# Version 1.57.1
+- Detect Y SR MIC / MIG / BYD / CATL / SR+
+
+# Version 1.57.0
+- Teslalogger is now supporting the [official](https://developer.tesla.com/docs/fleet-api#overview) Tesla-Fleet API. Especially cars bought after December 2023 should use it! You can migrate your car to use the new API if you go to Settings / MyTesla / Edit / Tesla Fleet API -> go through login process 
+- New Grafana dashboard: Trip Top Destinations
+- BF: Cars located in China are now able to use Teslalogger again
+- Geofence: Grouping of all public chargers to impove performance
+
+# Version 1.56.1
+- Update certificates for Mono
+
+# Version 1.56.0
+- Support new Tesla API
+- Attention: MapQuest isn't free anymore! Either you remove the key in your settings, if you used it or you have to provide a credit card to MapQuest. 
+- Dayli backup in docker
+- Support for V4 Supercharger in statistics
+
+# Version 1.55.0
+- Supporting new API change after Tesla firmware 2023.38.4
+
+# Version 1.54.26
+- Vehicle state icons in admin panel. e.g. open window, unlocked car, open doors, open frunk / trunk
+- Destination route will be displayed in admin panel with ETA and SOC at destination.
+
+# Version 1.54.25
+- Bugfix in upgrade zu Debian Buster
+
+# Version 1.54.24
+- Update Grafana to 10.0.1 Note: Grafana 10.0.1 is not compatible with old Raspberry PI3 OS. You have to update it [manually](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/os_upgrade.md) 
 
 # Version 1.54.22
 - Restore chargingstate from backup [Docs](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/faq.md#grafana-dashboard-charging-history--ladehistorie-has-wrong-entries-for-total-costs)

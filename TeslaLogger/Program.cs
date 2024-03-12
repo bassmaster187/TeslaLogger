@@ -19,6 +19,7 @@ namespace TeslaLogger
         public static int SQLTRACELIMIT = 250;
         public static int KeepOnlineMinAfterUsage = 5;
         public static int SuspendAPIMinutes = 30;
+        public static DateTime uptime = DateTime.Now;
 
         public enum TLMemCacheKey
         {
@@ -27,7 +28,7 @@ namespace TeslaLogger
         }
 
         private static WebServer webServer;
-        private static bool OVMSStarted = false;
+        private static bool OVMSStarted; // defaults to false;
 
         private static void Main(string[] args)
         {
@@ -65,6 +66,8 @@ namespace TeslaLogger
 
                 UpdateTeslalogger.StopComfortingMessagesThread();
 
+                InitMQTT();
+
                 MQTTClient.StartMQTTClient();
 
                 InitTLStats();
@@ -85,7 +88,7 @@ namespace TeslaLogger
                 Tools.ExternalLog("Teslalogger Stopped! " + ex.ToString());
 
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                ExceptionlessClient.Default.ProcessQueue();
+                ExceptionlessClient.Default.ProcessQueueAsync();
             }
             finally
             {
@@ -109,25 +112,48 @@ namespace TeslaLogger
             }
         }
 
+        private static void InitMQTT()
+        {
+            try
+            {
+                if(KVS.Get("MQTTSettings", out string mqttSettings) == KVS.SUCCESS)
+                {
+                    Thread mqttThread = new Thread(() =>
+                    {
+                        MQTT.GetSingleton().RunMqtt();
+                    })
+                    {
+                        Name = "MqttThread"
+                    };
+                    mqttThread.Start();
+                }
+                else
+                {
+                    Logfile.Log("MQTT disabled (check settings)");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+
+        }
+
         private static void InitNearbySuCService()
         {
             try
             {
-                if (Tools.UseNearbySuCService())
+                
+                Thread threadNearbySuCService = new Thread(() =>
                 {
-                    Thread threadNearbySuCService = new Thread(() =>
-                    {
-                        NearbySuCService.GetSingleton().Run();
-                    })
-                    {
-                        Name = "NearbySuCServiceThread"
-                    };
-                    threadNearbySuCService.Start();
-                }
-                else
+                    NearbySuCService.GetSingleton().Run();
+                })
                 {
-                    Logfile.Log("NearbySuCService disabled (enable in settings)");
-                }
+                    Name = "NearbySuCServiceThread"
+                };
+                threadNearbySuCService.Start();
+                
             }
             catch (Exception ex)
             {
@@ -188,8 +214,19 @@ namespace TeslaLogger
                 string wheel_type = r["wheel_type"] as String ?? "";
                 int charge_point = Convert.ToInt32(r["charge_point"], Tools.ciDeDE);
 
+                bool raven = false;
+                if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
+                    raven = true;
+
+                bool fleetAPI = false;
+                if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
+                    fleetAPI = true;
+
+
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, oldCarState, wheel_type, charge_point);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type, charge_point);
+                car.Raven = raven;
+
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)
@@ -200,6 +237,8 @@ namespace TeslaLogger
 
         private static void InitWebserver()
         {
+            UpdateTeslalogger.CertUpdate();
+
             try
             {
                 Thread threadWebserver = new Thread(() =>
@@ -224,7 +263,7 @@ namespace TeslaLogger
             {
                 Thread threadTLStats = new Thread(() =>
                 {
-                    TLStats.GetInstance().run();
+                    TLStats.run();
                 })
                 {
                     Name = "TLStatsThread"
@@ -287,6 +326,7 @@ namespace TeslaLogger
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Mono Runtime", Tools.GetMonoRuntimeVersion());
+            ExceptionlessClient.Default.Configuration.DefaultData.Add("OS", Tools.GetOsRelease());
 
             Logfile.Log("Grafana Version: " + Tools.GetGrafanaVersion());
             ExceptionlessClient.Default.Configuration.DefaultData.Add("Grafana Version", Tools.GetGrafanaVersion());
@@ -335,6 +375,7 @@ namespace TeslaLogger
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 #pragma warning restore CA5364 // Verwenden Sie keine veralteten Sicherheitsprotokolle.
 
+            Logfile.Log("Runtime: " + Environment.Version.ToString());
             Logfile.Log("TeslaLogger Version: " + Assembly.GetExecutingAssembly().GetName().Version);
             Logfile.Log("Teslalogger Online Version: " + WebHelper.GetOnlineTeslaloggerVersion());
             Logfile.Log("Logfile Version: " + Assembly.GetAssembly(typeof(Logfile)).GetName().Version);
@@ -362,6 +403,8 @@ namespace TeslaLogger
                 Logfile.Log(ex.ToString());
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
+
+            Logfile.Log("OS: " + Tools.GetOsRelease());
         }
 
         private static void InitConnectToDB()
@@ -549,6 +592,8 @@ namespace TeslaLogger
                     WebHelper.SearchFornewCars();
 
                     GeocodeCache.Cleanup();
+
+                    DBHelper.MigratePosOdometerNullValues();
 
                     Logfile.Log("UpdateDbInBackground finished, took " + (DateTime.Now - start).TotalMilliseconds + "ms");
                     RunHousekeepingInBackground();

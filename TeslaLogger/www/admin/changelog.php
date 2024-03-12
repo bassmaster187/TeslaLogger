@@ -10,7 +10,7 @@ require_once("language.php");
 	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	<title>Teslalogger <?php t("Changelog"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -24,7 +24,8 @@ require_once("language.php");
 
 require_once("Parsedown.php");
 echo('<div id="changelog">');
-$md = file_get_contents("/etc/teslalogger/changelog.md");
+GetFileFromTeslaloggerAndWriteToTMP("changelog.md");
+$md = file_get_contents("/tmp/changelog.md");
 echo Parsedown::instance()->text($md); 
 echo("</div>");
 ?>

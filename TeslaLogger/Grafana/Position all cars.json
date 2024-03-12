@@ -1,0 +1,491 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 39,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "title": "Admin Panel",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://raspberry/admin/"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "autoZoom": true,
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "defaultLayer": "OpenStreetMap",
+      "gridPos": {
+        "h": 22,
+        "w": 22,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "lineColor": "#00000000",
+      "links": [],
+      "maxDataPointDelta": 1,
+      "maxDataPoints": 500,
+      "pointColor": "royalblue",
+      "scrollWheelZoom": true,
+      "showLayerChanger": true,
+      "targets": [
+        {
+          "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 3 as type, \r\nconcat('<a href=\"/d/zm7wN6Zgz/verbrauch?orgId=1&var-Car=', pos.carid,'\"><b>Online:</b></a>', IFNULL(display_name,'') ,'<br>',IFNULL(battery_level,0), '% SOC <br>', IFNULL(address,'')) as address FROM pos \r\njoin cars on pos.carid = cars.id\r\njoin (SELECT max(id) as id FROM pos group by carid) as p2 on p2.id = pos.id\r\njoin (select carid from state where enddate is null and state = 'online') as state on state.carid = pos.CarID\r\nunion\r\nSELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 2 as type, \r\nconcat('<a href=\"/d/zm7wN6Zgz/verbrauch?orgId=1&var-Car=', pos.carid,'\"><b>Fahren:</b></a>', IFNULL(display_name,'') ,'<br>',IFNULL(battery_level,0), '% SOC <br>', speed, ' km/h') as address FROM pos \r\njoin cars on pos.carid = cars.id\r\njoin (SELECT max(id) as id FROM pos group by carid) as p2 on p2.id = pos.id\r\njoin (select carid from drivestate where enddate is null) as state on state.carid = pos.CarID\r\nunion\r\nSELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 1 as type, \r\nconcat('<a href=\"/d/BHhxFeZRz/laden?orgId=1&var-Car=', pos.carid,'\"><b>Laden:</b></a>', IFNULL(display_name,'') ,'<br>',IFNULL(battery_level,0), '% SOC <br>', power * -1, ' kW') as address FROM pos \r\njoin cars on pos.carid = cars.id\r\njoin (SELECT max(id) as id FROM pos group by carid) as p2 on p2.id = pos.id\r\njoin (select carid from chargingstate where enddate is null) as state on state.carid = pos.CarID\r\nunion\r\nSELECT UNIX_TIMESTAMP(pos.datum) as time_sec, lat, lng, 4 as type, \r\nconcat('<a href=\"/d/zm7wN6Zgz/verbrauch?orgId=1&var-Car=', pos.carid,'\"><b>Schlafen:</b></a>', IFNULL(display_name,'') ,'<br>',IFNULL(battery_level,0), '% SOC <br>', IFNULL(address,'')) as address FROM pos \r\njoin cars on pos.carid = cars.id\r\njoin (SELECT max(id) as id FROM pos group by carid) as p2 on p2.id = pos.id\r\njoin (select carid from state where enddate is null and state in ('offline','asleep')) as state on state.carid = pos.CarID\r\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Map",
+      "type": "pr0ps-trackmap-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "select count(*) from cars",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Cars",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 3
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) FROM chargingstate where endDate is null ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Charging",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 6
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) FROM drivestate where endDate is null ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Driving",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 9
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) FROM state where state in ('asleep','offline') and enddate is null",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Sleeping",
+      "type": "stat"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now/d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Position all cars",
+  "uid": "BHhxFexxx",
+  "version": 8,
+  "weekStart": ""
+}

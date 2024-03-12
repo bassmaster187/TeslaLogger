@@ -26,6 +26,7 @@ namespace TeslaLogger
         private readonly SortedDictionary<string, Dictionary<Key, object>> storage = new SortedDictionary<string, Dictionary<Key, object>>();
         private readonly HashSet<string> unknownKeys = new HashSet<string>();
         private readonly Car car;
+        private readonly MQTT mqtt;
         private bool dumpJSON;
         private readonly object TeslaAPIStateLock = new object();
 
@@ -115,6 +116,9 @@ namespace TeslaLogger
 
         private void HandleStateChange(string name, object oldvalue, object newvalue, long oldTS, long newTS)
         {
+            
+//            mqtt.PublishMqttValue(car.Vin, name, newvalue);
+
             switch (name)
             {
                 case "car_version":
@@ -177,12 +181,20 @@ namespace TeslaLogger
                                         break;
                                 }
                             }
+                            
                         }
+                        car.CurrentJSON.current_plugged_in = true;
                     }
                     else if (newvalue.Equals("Disconnected"))
                     {
                         car.DbHelper.UpdateUnplugDate();
+                        car.CurrentJSON.current_plugged_in = false;
                     }
+                    else 
+                    {
+                        car.CurrentJSON.current_plugged_in = true;
+                    }
+                    car.CurrentJSON.CreateCurrentJSON();
                     break;
                 case "battery_level":
                     // car is idle and battery level changed -> update ABRP
@@ -239,6 +251,16 @@ namespace TeslaLogger
                     { Key.Source , "undef" }
                 };
             }
+            return false;
+        }
+
+        public bool HasValue(string name)
+        {
+            if (storage.ContainsKey(name) && storage[name].ContainsKey(Key.Type) && storage[name].ContainsKey(Key.Value))
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -445,6 +467,8 @@ namespace TeslaLogger
                     break;
                 case "vehicles":
                     return ParseVehicles(JSON);
+                case "vehicle_data?endpoints=location_data":
+                    break;
                 default:
                     Logfile.Log($"ParseAPI: unknown source {source}");
                     break;
@@ -523,6 +547,7 @@ namespace TeslaLogger
                         case "backseat_token":
                         case "backseat_token_updated_at":
                         case "vehicle_config":
+                        case "granular_access":
                         case "command_signing":
                             if (r4.TryGetValue(key, out value))
                             {
@@ -832,6 +857,45 @@ namespace TeslaLogger
                                 break;
                         }
                     }
+
+                    try
+                    {
+                        if (r2.ContainsKey("active_route_destination"))
+                            car.CurrentJSON.active_route_destination = r2["active_route_destination"].ToString();
+                        else
+                            car.CurrentJSON.active_route_destination = null;
+
+                        if (r2.ContainsKey("active_route_energy_at_arrival"))
+                            car.CurrentJSON.active_route_energy_at_arrival = (long)r2["active_route_energy_at_arrival"];
+                        else
+                            car.CurrentJSON.active_route_energy_at_arrival = null;
+
+                        if (r2.ContainsKey("active_route_minutes_to_arrival"))
+                            car.CurrentJSON.active_route_minutes_to_arrival = (double)r2["active_route_minutes_to_arrival"];
+                        else
+                            car.CurrentJSON.active_route_minutes_to_arrival = null;
+
+                        if (r2.ContainsKey("active_route_traffic_minutes_delay"))
+                            car.CurrentJSON.active_route_traffic_minutes_delay = (double)r2["active_route_traffic_minutes_delay"];
+                        else
+                            car.CurrentJSON.active_route_traffic_minutes_delay = null;
+
+                        if (r2.ContainsKey("active_route_latitude"))
+                            car.CurrentJSON.active_route_latitude = (double)r2["active_route_latitude"];
+                        else
+                            car.CurrentJSON.active_route_latitude = null;
+
+                        if (r2.ContainsKey("active_route_longitude"))
+                            car.CurrentJSON.active_route_longitude = (double)r2["active_route_longitude"];
+                        else
+                            car.CurrentJSON.active_route_longitude = null;
+                    }
+                    catch (Exception ex)
+                    {
+                         ex.ToExceptionless().FirstCarUserID().Submit();
+                Tools.DebugLog("Exception", ex);
+                    }
+
                     return true;
                 }
             }

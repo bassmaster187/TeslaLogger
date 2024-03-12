@@ -10,6 +10,9 @@
 -->
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url]
 
+[![.NET Core Desktop](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/bassmaster187/TeslaLogger/actions/workflows/dotnet-desktop.yml)
+[![translated](https://hosted.weblate.org/widget/teslalogger/teslalogger/svg-badge.svg)](https://hosted.weblate.org/engage/teslalogger/)
+
 TeslaLogger is a self hosted data logger for your Tesla Model S/3/X/Y. Currently it supports RaspberryPi 3B, 3B+, 4B, Docker and Synology NAS.
 
 - You may purchase a ready to go [Raspberry PI with TeslaLogger installed](https://www.e-mobility-driving-solutions.com/produkt/raspi-teslalogger/?lang=en)
@@ -33,14 +36,13 @@ Within 2-3 minutes the Raspberry should show up in you network.
 - Enter the Access Token & Refresh Token:
 
   You can use the following apps to generate an Access Token & Refresh Token from the Tesla server.
+  - Official Tesla Fleet API. [Permission used by Teslalogger](https://github.com/bassmaster187/TeslaLogger/blob/master/docs/en/tesla-fleet-permission.md)
   - [iOS](https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone)
   - [Android](https://play.google.com/store/apps/details?id=net.leveugle.teslatokens)
 
 ### Settings & Language
 
-Available languages: English, German, Spanish, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome
-
-Change the language and units and reboot the Teslalogger.
+Available languages: English, German, Danish, Spanish, Chinese, French, Italian, Norwegian, Nederlands, Portuguese and Russian - Translations are welcome: [![translated](https://hosted.weblate.org/widget/teslalogger/teslalogger/svg-badge.svg)](https://hosted.weblate.org/engage/teslalogger/)
 
 [http://raspberry/admin/settings.php](http://raspberry/admin/settings.php)
 or sometimes: [http://raspberry.local/admin/settings.php](http://raspberry.local/admin/settings.php)

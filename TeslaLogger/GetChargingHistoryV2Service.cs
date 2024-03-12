@@ -55,7 +55,7 @@ INSERT IGNORE INTO teslacharging SET
                     cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
                     cmd.Parameters.AddWithValue("@VIN", VIN);
                     cmd.Parameters.AddWithValue("@json", jsonSession.ToString());
-                    SQLTracer.TraceNQ(cmd, out long _);
+                    _ = SQLTracer.TraceNQ(cmd, out _);
                 }
             }
         }
@@ -306,30 +306,17 @@ LIMIT 1
             foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
             {
                 Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
-                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName))
+                if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName, out object _, out object _))
                 {
                     if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
                         Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
-                        string tlname = DBHelper.GetSuCNameFromChargingStateID(chargingstateid);
-                        // check names, time difference and VIN
-                        if (siteLocationName.Contains(","))
-                        {
-                            siteLocationName = siteLocationName.Split(',')[0];
-                        }
-                        if (tlname.Contains(siteLocationName)
-                            && Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 20
+                        if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN)
                             )
                         {
                             UpdateChargingState(chargingstateid, json, car);
                             updatedChargingStates++;
-                        }
-                        else if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
-                            && car.Vin.Equals(VIN))
-                        {
-                            Tools.DebugLog($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>");
-                            (new Exception($"GetChargingHistoryV2Service could not map <{tlname}> and <{siteLocationName}>")).ToExceptionless().FirstCarUserID().Submit();
                         }
                         else if (!car.Vin.Equals(VIN))
                         {
@@ -466,8 +453,10 @@ LIMIT 1
                     cost_total = cost_idle_fee_total;
                 }
                 car.Log($@"GetChargingHistoryV2Service -> UpdateChargingState:
+teslalogger.chargingstate.id:{chargingstateid}
 siteLocationName:{(session.ContainsKey("siteLocationName") ? session["siteLocationName"].ToString() : "n/a")}
-chargingstateid:{chargingstateid}
+chargeStartDateTime:{(session.ContainsKey("chargeStartDateTime") ? session["chargeStartDateTime"].ToString() : "n/a")}
+chargeStopDateTime:{(session.ContainsKey("chargeStopDateTime") ? session["chargeStopDateTime"].ToString() : "n/a")}
 chargeSessionId:{chargeSessionId}
 cost_total:{cost_total}
 cost_currency:{cost_currency}
@@ -506,7 +495,7 @@ WHERE
                             if (!double.IsNaN(cost_kwh_meter_invoice)) { cmd.Parameters.AddWithValue("@cost_kwh_meter_invoice", cost_kwh_meter_invoice); }
                             if (!double.IsNaN(cost_freesuc_savings_total)) { cmd.Parameters.AddWithValue("@cost_freesuc_savings_total", cost_freesuc_savings_total); }
                             //Tools.DebugLog(cmd);
-                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out long _);
+                            int rowsUpdated = SQLTracer.TraceNQ(cmd, out _);
                             if (rowsUpdated == 1)
                             {
                                 car.Log($"ChargingState <{chargingstateid}> updated from GetChargingHistoryV2Service");
