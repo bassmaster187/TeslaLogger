@@ -6637,7 +6637,7 @@ WHERE
             return string.Empty;
         }
 
-        internal List<int> GetSuCChargingStatesWithEmptyChargeSessionId()
+        internal List<int> GetSuCChargingStatesWithEmptySessionId()
         {
             List<int> resultList = new List<int>();
             try
@@ -6651,7 +6651,7 @@ SELECT
 FROM
     chargingstate
 WHERE
-    ChargeSessionId IS NULL
+    sessionId IS NULL
     AND CarID = @CarID
     AND fast_charger_brand = @brand
     AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
@@ -6675,14 +6675,14 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithEmptyChargeSessionId()");
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithEmptySessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithEmptySessionId()");
             }
-            Tools.DebugLog($"GetSuCChargingStatesWithEmptyChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            Tools.DebugLog($"GetSuCChargingStatesWithEmptySessionId #{car.CarInDB}:{resultList.Count}");
             return resultList;
         }
 
-        internal List<int> GetSuCChargingStatesWithChargeSessionId()
+        internal List<int> GetSuCChargingStatesWithSessionId()
         {
             List<int> resultList = new List<int>();
             try
@@ -6696,7 +6696,7 @@ SELECT
 FROM
     chargingstate
 WHERE
-    ChargeSessionId IS NOT NULL
+    sessionId IS NOT NULL
     AND CarID = @CarID
     AND fast_charger_brand = @brand
     AND (fast_charger_type = @type1 OR fast_charger_type = @type2)
@@ -6720,10 +6720,10 @@ WHERE
             catch (Exception ex)
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
-                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId(): {ex}");
-                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithChargeSessionId()");
+                Tools.DebugLog($"Exception during DBHelper.GetSuCChargingStatesWithSessionId(): {ex}");
+                Logfile.ExceptionWriter(ex, "Exception during DBHelper.GetSuCChargingStatesWithSessionId()");
             }
-            Tools.DebugLog($"GetSuCChargingStatesWithChargeSessionId #{car.CarInDB}:{resultList.Count}");
+            Tools.DebugLog($"GetSuCChargingStatesWithSessionId #{car.CarInDB}:{resultList.Count}");
             return resultList;
         }
 

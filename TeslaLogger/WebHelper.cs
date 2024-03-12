@@ -1869,14 +1869,10 @@ namespace TeslaLogger
                 if (httpclientgetChargingHistoryV2 == null)
                 {
                     httpclientgetChargingHistoryV2 = new HttpClient();
-                    {
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("x-tesla-user-agent", "TeslaApp/4.19.5-1667/3a5d531cc3/android/27");
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "okhttp/4.9.2");
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Authorization", "Bearer " + Tesla_token);
-                        httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
-                        httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
-                        httpclientgetChargingHistoryV2Token = Tesla_token;
-                    }
+                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("User-Agent", "curl/8.4.0");
+                    httpclientgetChargingHistoryV2.DefaultRequestHeaders.Add("Accept", "*/*");
+                    httpclientgetChargingHistoryV2.Timeout = TimeSpan.FromSeconds(120);
+                    httpclientgetChargingHistoryV2Token = Tesla_token;
                 }
 
                 return httpclientgetChargingHistoryV2;
@@ -4972,21 +4968,17 @@ DESC", con))
             {
                 HttpClient client = GethttpclientgetChargingHistoryV2();
 
-                string adresse = "https://akamai-apigateway-charging-ownership.tesla.com/graphql?deviceLanguage=en&deviceCountry=US&ttpLocale=en_US&vin=" + car.Vin + "&operationName=getChargingHistoryV2";
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"https://fleet-api.prd.na.vn.cloud.tesla.com/api/1/dx/charging/history?pageNo={pageNumber}");
+
+                request.Headers.Add("Authorization", "Bearer " + Tesla_token);
+
+                request.Content = new StringContent("");
+                request.Headers.Host = "fleet-api.prd.na.vn.cloud.tesla.com";
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 DateTime start = DateTime.UtcNow;
-                string data = @"{ ""query"": ""query getChargingHistoryV2($pageNumber: Int!, $sortBy: String, $sortOrder: SortByEnum) {\n  me {\n    charging {\n      historyV2(pageNumber: $pageNumber, sortBy: $sortBy, sortOrder: $sortOrder) {\n        data {\n          ...SparkHistoryItemFragment\n        }\n        totalResults\n        hasMoreData\n        pageNumber\n      }\n    }\n  }\n}\n    \n    fragment SparkHistoryItemFragment on SparkHistoryItem {\n  countryCode\n  programType\n  billingType\n  vin\n  isMsp\n  credit {\n    distance\n    distanceUnit\n  }\n  chargingPackage {\n    distance\n    distanceUnit\n    energyApplied\n  }\n  invoices {\n    fileName\n    contentId\n    invoiceType\n  }\n  chargeSessionId\n  siteLocationName\n  chargeStartDateTime\n  chargeStopDateTime\n  unlatchDateTime\n  fees {\n    ...SparkHistoryFeeFragment\n  }\n  vehicleMakeType\n  sessionId\n  surveyCompleted\n  surveyType\n  postId\n  cabinetId\n  din\n}\n    \n    fragment SparkHistoryFeeFragment on SparkHistoryFee {\n  sessionFeeId\n  feeType\n  payorUid\n  amountDue\n  currencyCode\n  pricingType\n  usageBase\n  usageTier1\n  usageTier2\n  usageTier3\n  usageTier4\n  rateBase\n  rateTier1\n  rateTier2\n  rateTier3\n  rateTier4\n  totalTier1\n  totalTier2\n  totalTier3\n  totalTier4\n  uom\n  isPaid\n  uid\n  totalBase\n  totalDue\n  netDue\n  status\n}\n"",
-  ""variables"": {
-        ""sortBy"": ""start_datetime"",
-        ""sortOrder"": ""DESC"",
-        ""pageNumber"": " + pageNumber + @"
-                },
-  ""operationName"": ""getChargingHistoryV2""
-}";
-
-                StringContent queryString = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PostAsync(adresse, queryString).ConfigureAwait(false);
-                resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                HttpResponseMessage result = await client.SendAsync(request);
+                resultContent = await result.Content.ReadAsStringAsync();
                 DBHelper.AddMothershipDataToDB("GetChargingHistoryV2", start, (int)result.StatusCode);
 
                 if (!result.IsSuccessStatusCode)

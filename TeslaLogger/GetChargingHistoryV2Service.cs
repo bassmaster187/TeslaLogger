@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using Exceptionless;
+using Exceptionless.Models;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
+using MySqlX.XDevAPI.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,11 +16,11 @@ namespace TeslaLogger
         internal SuCSession(dynamic jsonSession)
         {
             string VIN;
-            string chargeSessionId;
+            string sessionId;
             string siteLocationName;
             DateTime chargeStartDateTime;
             if (jsonSession != null
-     && jsonSession.ContainsKey("chargeSessionId")
+     && jsonSession.ContainsKey("sessionId")
      && jsonSession.ContainsKey("chargeStartDateTime")
      && jsonSession.ContainsKey("siteLocationName")
      && jsonSession.ContainsKey("fees")
@@ -25,14 +28,14 @@ namespace TeslaLogger
      )
             {
                 VIN = jsonSession["vin"];
-                chargeSessionId = jsonSession["chargeSessionId"];
+                sessionId = jsonSession["sessionId"];
                 siteLocationName = jsonSession["siteLocationName"];
                 chargeStartDateTime = jsonSession["chargeStartDateTime"];
                 if (DateTime.TryParse(jsonSession["chargeStartDateTime"].ToString("yyyy-MM-dd HH:mm:ss"), out DateTime isochargeStartDateTime))
                 {
                     chargeStartDateTime = isochargeStartDateTime;
                 }
-                Tools.DebugLog($"new SuCSession: <{VIN}> <{chargeSessionId}> <{siteLocationName}> <{chargeStartDateTime}>");
+                Tools.DebugLog($"new SuCSession: <{VIN}> <{sessionId}> <{siteLocationName}> <{chargeStartDateTime}>");
             }
             else
             {
@@ -44,13 +47,13 @@ namespace TeslaLogger
                 con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(@"
 INSERT IGNORE INTO teslacharging SET
-        chargeSessionId = @chargeSessionId,
+        sessionId = @sessionId,
         chargeStartDateTime = @chargeStartDateTime,
         siteLocationName = @siteLocationName,
         VIN = @VIN,
         json = @json", con))
                 {
-                    cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                    cmd.Parameters.AddWithValue("@sessionId", sessionId);
                     cmd.Parameters.AddWithValue("@chargeStartDateTime", chargeStartDateTime);
                     cmd.Parameters.AddWithValue("@siteLocationName", siteLocationName);
                     cmd.Parameters.AddWithValue("@VIN", VIN);
@@ -72,67 +75,42 @@ INSERT IGNORE INTO teslacharging SET
                 Tools.DebugLog("ParseJSON: json == null");
                 return nextpage;
             }
-            if (json.ContainsKey("data"))
+            //Tools.DebugLog($"ParseJSON\n{new Tools.JsonFormatter(json.ToString()).Format()}");
+            if (json.ContainsKey("totalResults"))
             {
-                dynamic data = json["data"];
-                if (data.ContainsKey("me"))
+                dynamic totalResults = json["totalResults"];
+                nextpage = (totalResults > 0);
+                if (totalResults > 0)
                 {
-                    dynamic me = data["me"];
-                    if (me.ContainsKey("charging"))
+                    if (json.ContainsKey("data"))
                     {
-                        dynamic charging = me["charging"];
-                        if (charging.ContainsKey("historyV2"))
-                        {
-                            dynamic historyV2 = charging["historyV2"];
-                            if (historyV2.ContainsKey("data"))
+                        dynamic data = json["data"];
+                        if (data is JArray && data.Count > 0) {
+                            foreach (dynamic session in data)
                             {
-                                dynamic historyV2data = historyV2["data"];
-                                foreach (dynamic session in historyV2data)
+                                try
                                 {
-                                    try
-                                    {
-                                        _ = new SuCSession(session);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        ex.ToExceptionless().FirstCarUserID().AddObject(sjson, "ResultContent").Submit();
-                                        Logfile.Log(ex.ToString());
-                                    }
+                                    _ = new SuCSession(session);
+                                }
+                                catch (Exception ex)
+                                {
+                                    ex.ToExceptionless().FirstCarUserID().AddObject(sjson, "ResultContent").Submit();
+                                    Logfile.Log(ex.ToString());
                                 }
                             }
-                            else
-                            {
-                                Tools.DebugLog("ParseJSON: historyV2.ContainsKey(historyV2data): false");
-                            }
-                            if (historyV2.ContainsKey("hasMoreData"))
-                            {
-                                dynamic hasMoreData = historyV2["hasMoreData"];
-                                nextpage = hasMoreData == true;
-                            }
-                            else
-                            {
-                                Tools.DebugLog("ParseJSON: historyV2.ContainsKey(hasMoreData): false");
-                            }
-                        }
-                        else
-                        {
-                            Tools.DebugLog("ParseJSON: charging.ContainsKey(historyV2): false");
                         }
                     }
                     else
                     {
-                        Tools.DebugLog("ParseJSON: me.ContainsKey(charging): false");
+                        Tools.DebugLog("ParseJSON: json.ContainsKey(data): false");
                     }
-                }
-                else
-                {
-                    Tools.DebugLog("ParseJSON: data.ContainsKey(me): false");
                 }
             }
             else
             {
-                Tools.DebugLog("ParseJSON: json.ContainsKey(data): false");
+                Tools.DebugLog("ParseJSON: historyV2.ContainsKey(totalResults): false");
             }
+
             return nextpage;
         }
 
@@ -166,7 +144,7 @@ INSERT IGNORE INTO teslacharging SET
             while (result != null && ParseJSON(result))
             {
                 resultPage++;
-                Thread.Sleep(500); // wait a bit
+                Thread.Sleep(2500); // wait a bit
                 Tools.DebugLog($"GetChargingHistoryV2Service.LoadAll #{car.CarInDB} resultpage {resultPage}");
                 result = car.webhelper.GetChargingHistoryV2(resultPage).Result;
             }
@@ -210,23 +188,34 @@ INSERT IGNORE INTO teslacharging SET
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
                     ADD COLUMN `cost_freesuc_savings_total` DOUBLE NULL DEFAULT NULL", 600);
                 }
-                if (!DBHelper.ColumnExists("chargingstate", "chargeSessionId"))
+                if (!DBHelper.ColumnExists("chargingstate", "sessionId"))
                 {
-                    Logfile.Log("ALTER TABLE chargingstate ADD Column chargeSessionId");
+                    Logfile.Log("ALTER TABLE chargingstate ADD Column sessionId");
                     UpdateTeslalogger.AssertAlterDB();
                     DBHelper.ExecuteSQLQuery(@"ALTER TABLE `chargingstate` 
-                    ADD COLUMN `chargeSessionId` VARCHAR(40) NULL DEFAULT NULL", 600);
+                    ADD COLUMN `sessionId` VARCHAR(40) NULL DEFAULT NULL", 600);
+                }
+                // new JSON format and IDs with FleetAPI
+                if (DBHelper.ColumnExists("chargingstate", "chargeSessionId"))
+                {
+                    Logfile.Log("ALTER TABLE chargingstate DROP COLUMN chargeSessionId");
+                    DBHelper.ExecuteSQLQuery(@"ALTER TABLE chargingstate DROP COLUMN chargeSessionId", 600);
+                }
+                if (DBHelper.ColumnExists("teslacharging", "chargeSessionId"))
+                {
+                    Logfile.Log("DROP TABLE teslacharging");
+                    DBHelper.ExecuteSQLQuery(@"DROP TABLE teslacharging", 600);
                 }
                 if (!DBHelper.TableExists("teslacharging"))
                 {
                     string sql = @"
 CREATE TABLE teslacharging (
-    chargeSessionId VARCHAR(40) NOT NULL,
+    sessionId VARCHAR(40) NOT NULL,
     chargeStartDateTime DATETIME NOT NULL,
     siteLocationName VARCHAR(128) NOT NULL,
     VIN VARCHAR(20) NOT NULL,
     json LONGTEXT NOT NULL,
-    UNIQUE ix_chargeSessionId(chargeSessionId)
+    UNIQUE ix_sessionId(sessionId)
 )";
                     Logfile.Log(sql);
                     UpdateTeslalogger.AssertAlterDB();
@@ -241,7 +230,7 @@ CREATE TABLE teslacharging (
             }
         }
 
-        private static bool GetTeslaChargingSessionByDate(Car car, DateTime dt, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json)
+        private static bool GetTeslaChargingSessionByDate(Car car, DateTime dt, out string sessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json)
         {
             try
             {
@@ -250,7 +239,7 @@ CREATE TABLE teslacharging (
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    chargeSessionId,
+    sessionId,
     siteLocationName,
     chargeStartDateTime,
     VIN,
@@ -278,7 +267,7 @@ LIMIT 1
                             && dr[4] != DBNull.Value
                             )
                         {
-                            chargeSessionId = dr[0].ToString();
+                            sessionId = dr[0].ToString();
                             siteLocationName = dr[1].ToString();
                             VIN = dr[3].ToString();
                             json = dr[4].ToString();
@@ -291,7 +280,7 @@ LIMIT 1
             {
                 Logfile.Log(ex.ToString());
             }
-            chargeSessionId = string.Empty;
+            sessionId = string.Empty;
             siteLocationName = string.Empty;
             chargeStartDateTime = DateTime.MinValue;
             VIN = string.Empty;
@@ -301,16 +290,16 @@ LIMIT 1
 
         internal static int SyncAll(Car car)
         {
-            Tools.DebugLog("GetChargingHistoryV2Service SyncAll start");
+            Tools.DebugLog($"GetChargingHistoryV2Service SyncAll({car.CarInDB}) start");
             int updatedChargingStates = 0;
-            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptyChargeSessionId())
+            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithEmptySessionId())
             {
-                Tools.DebugLog($"GetChargingHistoryV2Service <{chargingstateid}>");
+                Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) <{chargingstateid}>");
                 if (DBHelper.GetStartValuesFromChargingState(chargingstateid, out DateTime startDate, out int startdID, out int _, out string posName, out object _, out object _))
                 {
-                    if (GetTeslaChargingSessionByDate(car, startDate, out string chargeSessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
+                    if (GetTeslaChargingSessionByDate(car, startDate, out string sessionId, out string siteLocationName, out DateTime chargeStartDateTime, out string VIN, out string json))
                     {
-                        Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{chargeSessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
+                        Tools.DebugLog($"SyncAll <{chargingstateid}> -> <{sessionId}> timediff:{Math.Abs((chargeStartDateTime - startDate).TotalMinutes)}");
                         if (Math.Abs((chargeStartDateTime - startDate).TotalMinutes) < 10
                             && car.Vin.Equals(VIN)
                             )
@@ -320,20 +309,20 @@ LIMIT 1
                         }
                         else if (!car.Vin.Equals(VIN))
                         {
-                            Tools.DebugLog($"GetChargingHistoryV2Service {chargeSessionId} VIN does not match car:{car.Vin} session:{VIN}");
+                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) {sessionId} VIN does not match car:{car.Vin} session:{VIN}");
                         }
                         else
                         {
-                            Tools.DebugLog($"GetChargingHistoryV2Service no SuC session found for <{chargingstateid}> <{posName}>");
+                            Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) no SuC session found for <{chargingstateid}> <{posName}>");
                         }
                     }
                 }
                 else
                 {
-                    Tools.DebugLog($"GetChargingHistoryV2Service GetStartValuesFromChargingState false for {chargingstateid}");
+                    Tools.DebugLog($"GetChargingHistoryV2Service.SyncAll({car.CarInDB}) GetStartValuesFromChargingState false for {chargingstateid}");
                 }
             }
-            Tools.DebugLog("GetChargingHistoryV2Service SyncAll finished");
+            Tools.DebugLog("GetChargingHistoryV2Service.SyncAll({car.CarInDB}) finished");
             return updatedChargingStates;
         }
 
@@ -342,9 +331,10 @@ LIMIT 1
             dynamic session = JsonConvert.DeserializeObject(json);
             if (session != null
                 && session.ContainsKey("fees")
-                && session.ContainsKey("chargeSessionId")
+                && session.ContainsKey("sessionId")
                 )
             {
+                //Tools.DebugLog($"UpdateChargingState\n{new Tools.JsonFormatter(json.ToString()).Format()}");
                 double cost_total = double.NaN;
                 string cost_currency = string.Empty;
                 double cost_per_kwh = double.NaN;
@@ -352,7 +342,7 @@ LIMIT 1
                 double cost_idle_fee_total = double.NaN;
                 double cost_kwh_meter_invoice = double.NaN;
                 double cost_freesuc_savings_total = double.NaN;
-                string chargeSessionId = session["chargeSessionId"];
+                string sessionId = session["sessionId"];
                 bool freesuc = false;
 
                 // parse fees
@@ -366,7 +356,7 @@ LIMIT 1
                     {
                         if (fee["feeType"].ToString().Equals("CHARGING"))
                         {
-                            if (fee.ContainsKey("uom") && fee["uom"].ToString().Equals("kWh"))
+                            if (fee.ContainsKey("uom") && fee["uom"].ToString().Equals("kWh") || fee["uom"].ToString().Equals("kwh"))
                             {
                                 if (fee.ContainsKey("rateBase"))
                                 {
@@ -457,7 +447,7 @@ teslalogger.chargingstate.id:{chargingstateid}
 siteLocationName:{(session.ContainsKey("siteLocationName") ? session["siteLocationName"].ToString() : "n/a")}
 chargeStartDateTime:{(session.ContainsKey("chargeStartDateTime") ? session["chargeStartDateTime"].ToString() : "n/a")}
 chargeStopDateTime:{(session.ContainsKey("chargeStopDateTime") ? session["chargeStopDateTime"].ToString() : "n/a")}
-chargeSessionId:{chargeSessionId}
+sessionId:{sessionId}
 cost_total:{cost_total}
 cost_currency:{cost_currency}
 cost_per_kwh:{cost_per_kwh}
@@ -475,7 +465,7 @@ freesuc:{freesuc}");
 UPDATE
     chargingstate
 SET
-    chargeSessionId = @chargeSessionId
+    sessionId = @sessionId
 " + (!double.IsNaN(cost_total) ? ", cost_total = @cost_total" : "") + @"
 " + (!string.IsNullOrEmpty(cost_currency) ? ", cost_currency = @cost_currency" : "") + @"
 " + (!double.IsNaN(cost_per_kwh) ? ", cost_per_kwh = @cost_per_kwh" : "") + @"
@@ -487,7 +477,7 @@ WHERE
 ", con))
                         {
                             cmd.Parameters.AddWithValue("@chargingstateid", chargingstateid);
-                            cmd.Parameters.AddWithValue("@chargeSessionId", chargeSessionId);
+                            cmd.Parameters.AddWithValue("@sessionId", sessionId);
                             if (!double.IsNaN(cost_total)) { cmd.Parameters.AddWithValue("@cost_total", cost_total); }
                             if (!string.IsNullOrEmpty(cost_currency)) { cmd.Parameters.AddWithValue("@cost_currency", cost_currency); }
                             if (!double.IsNaN(cost_per_kwh)) { cmd.Parameters.AddWithValue("@cost_per_kwh", cost_per_kwh); }
@@ -517,10 +507,10 @@ WHERE
 
         internal static void CalculateCombinedChargeSessions(Car car)
         {
-            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithChargeSessionId())
+            foreach (int chargingstateid in car.DbHelper.GetSuCChargingStatesWithSessionId())
             {
-                List<string> chargesessionids = new List<string>();
-                string chargesessionidmaster = string.Empty;
+                List<string> sessionIds = new List<string>();
+                string sessionIdmaster = string.Empty;
                 Tools.DebugLog($"CalculateCombinedChargeSessions: chargingstateid<{chargingstateid}>");
                 try
                 {
@@ -529,8 +519,8 @@ WHERE
                         con.Open();
                         using (MySqlCommand cmd = new MySqlCommand(@"
 SELECT
-    chargingstate.chargesessionid,
-    teslacharging.chargesessionid
+    chargingstate.sessionId,
+    teslacharging.sessionId
 FROM
     chargingstate,
     teslacharging
@@ -540,7 +530,7 @@ WHERE
         (
             teslacharging.chargeStartDateTime >= chargingstate.startdate
             AND teslacharging.chargeStartDateTime <= chargingstate.enddate
-        ) OR chargingstate.chargesessionid = teslacharging.chargesessionid
+        ) OR chargingstate.sessionId = teslacharging.sessionId
     )
 ", con))
                         {
@@ -553,8 +543,8 @@ WHERE
                                     && !dr[0].ToString().Equals(dr[1].ToString())
                                     )
                                 {
-                                    chargesessionidmaster = dr[0].ToString();
-                                    chargesessionids.Add(dr[1].ToString());
+                                    sessionIdmaster = dr[0].ToString();
+                                    sessionIds.Add(dr[1].ToString());
                                 }
                             }
                         }
@@ -564,16 +554,16 @@ WHERE
                 {
                     Tools.DebugLog(ex.ToString());
                 }
-                if (!string.IsNullOrEmpty(chargesessionidmaster) && chargesessionids.Count > 0)
+                if (!string.IsNullOrEmpty(sessionIdmaster) && sessionIds.Count > 0)
                 {
                     // load master ID
-                    dynamic masterJSON = LoadJSON(chargesessionidmaster);
+                    dynamic masterJSON = LoadJSON(sessionIdmaster);
                     if (masterJSON != null
                         && masterJSON.ContainsKey("fees")
                         )
                     {
                         // load other SuC charging sessions and add their fees to the master
-                        foreach (string otherID in chargesessionids)
+                        foreach (string otherID in sessionIds)
                         {
                             dynamic otherJSON = LoadJSON(otherID);
                             if (otherJSON != null
@@ -595,7 +585,7 @@ WHERE
             }
         }
 
-        private static dynamic LoadJSON(string chargesessionid)
+        private static dynamic LoadJSON(string sessionID)
         {
             try
             {
@@ -608,10 +598,10 @@ SELECT
 FROM
     teslacharging
 WHERE
-    chargesessionid = @chargesessionid
+    sessionId = @sessionId
 ", con))
                     {
-                        cmd.Parameters.AddWithValue("@chargesessionid", chargesessionid);
+                        cmd.Parameters.AddWithValue("@sessionId", sessionID);
                         MySqlDataReader dr = SQLTracer.TraceDR(cmd);
                         if (dr.Read() && dr[0] != DBNull.Value)
                         {
