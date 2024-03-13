@@ -1,0 +1,14 @@
+{
+    "position": 5.5,
+    "label": "Dashboard",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "Dashboards"
+    },
+    "customProps": {
+      "description": "This description can be used in the swizzled DocCard"
+    }
+}

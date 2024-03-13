@@ -109,6 +109,16 @@ min kW=min kW
 Ø mph=Avg. mph
 Ø km/h=Avg. kph
 
+#Trip Top Destinations.json
+Trip Top Ziele=Trip Top Destinations
+Letzte Fahrt=Last Trip
+Ø Dauer Min=Ø Duration Min
+Ø Verbrauch kWh/100km=Ø Consumption kWh/100km
+Ø Verbraucht kWh=Ø Consumed kWh
+Anzahl Trips=Trips Count
+Anzahl=Count
+Fahrzeug=Vehicle
+
 #Vampir Drain.json
 Vampir Drain=Vampir Drain
 Standby Stunden=Standby Hours
@@ -127,7 +137,6 @@ Außentemperatur [°C]=Outside Temperature [°C]
 Außentemperatur [°F]=Outside Temperature [°F]
 Innentemperatur [°C]=Inside Temperature [°C]
 Innentemperatur [°F]=Inside Temperature [°F]
-
 Laden fertig=Charging Finished
 Schlafen=Sleeping
 Online=Online
@@ -214,12 +223,12 @@ Please enter the access token!=Please enter the access token!
 Please enter the refresh token!=Please enter the refresh token!
 Please select a vehicle=Please select a vehicle
 Check Logfile!=Check Logfile!
-Do you really want to delete this vehicle?=Do you really want to delete this vehicle?
+Do you really want to delete this vehicle?="Delete this vehicle?"
 Check Logfile in one minute!=Check Logfile in one minute!
 Unauthorized=Unauthorized
-This isn't a valid URL!=This isn't a valid URL!
+This isn't a valid URL!="Invalid URL."
 This isn't an auth link by Tesla!=This isn't an auth link by Tesla!
-The URL doesn't contain the expected format!=The URL doesn't contain the expected format!
+The URL doesn't contain the expected format!="The URL is not in the expected format!"
 Access Token=Access Token
 Refresh Token=Refresh Token
 Car=Car
@@ -231,7 +240,7 @@ Free SUC=Free SUC
 Edit=Edit
 New car=New car
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
-BA_Browser=In local {browser} (recommended)
+BA_Browser=In local {browser}
 BA_Read=Please read all the steps before continuing:
 BA_Logon=Click on the link below titled <b>Tesla Logon</b> which will open a new tab/window for the Tesla Authentication logon page
 BA_Auth=Log on using your Tesla credentials and MFA if required (Tesla will remember these if you have used the link before)
@@ -239,15 +248,26 @@ BA_NotFound=This will appear to result in a "Page Not Found". This is normal.
 BA_URL=Copy the resulting URL of that webpage into the form below. Within the URL is a one time, temporary code that we can use to generate tokens. We will extract this for you from the link.
 BA_Invalid=These links typically only work once, so if an "Invalid Grant" or other error message appears on our website you may need to start again with the Tesla Logon link which should produce a new link.
 BA_Logoff=If you want to use a different account, you have to manually log off {here!}
-BA_GetToken=We'll then get the tokens for your Tesla account.
+BA_GetToken="Thereafter, tokens are fetched for your Tesla account."
 BA_SelectCar=Select the car you want to use for Teslalogger.
 BA_Step1=Step 1:
 BA_Step2=Step 2:
 BA_Step3=Step 3:
 BA_FillOut=Fill out this form:
-BA_CopyUrl=Copy the resulting url as shown
-BA_Paste=Paste the resulting url into the box and click "Get Tokens" Button:
+BA_CopyUrl="Copy the resulting URL as shown"
+BA_Paste="Paste the resulting URL into the box and click "_QQ_"Get Tokens"_QQ_" Button:"
+BA_FLEETAPI=Tesla Fleet API (recommended)
 Get Tokens=Get Tokens
+
+#password_fleet.php
+PF_LOGOUT=Log out from your Tesla Account if you are already logged in
+PF_LOGIN=Go to the Tesla authentication page and allow Teslalogger to access your data
+PF_LINK=LINK
+PF_HELP=Help video
+PF_PERMISSION=Info, which permissions are used and why
+PF_OLDSX=If you have a pre-2021 Tesla Model S/X, you're done and can go back to the main page
+PF_HERE=here
+PF_VKEY=Otherwise set Up Third-Party Virtual Key
 
 #settings.php
 Please choose your vehicle=Please choose your vehicle
@@ -287,7 +307,7 @@ to=to
 Position by StreamingAPI=Position by StreamingAPI
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla=All consumptions - ScanMyTesla
+Alle Verbräuche - ScanMyTesla="All consumptions — ScanMyTesla"
 Zelltemperatur [°C]=Cell Temperature [°C]
 Zelltemperatur [°F]=Cell Temperature [°F]
 
@@ -301,28 +321,22 @@ Verbrauch [kWh]=Consumed kWh
 Anzahl Trips=Trips Count
 Trip Monatsstatistik=Trip Monthly Statistics
 Jahr/Monat=Year/Month
-
-Zellspannungen 01-20 - ScanMyTesla=Cell Voltages 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Cell Voltages 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Cell Voltages 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Cell Voltages 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Cell Voltages 81-99 - ScanMyTesla
-
+Zellspannungen 01-20 - ScanMyTesla="Cell Voltages 01–20 — ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Cell Voltages 21–40 — ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Cell Voltages 41–60 — ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Cell Voltages 61–80 — ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Cell Voltages 81–99 — ScanMyTesla"
 Zellspannungen=Cell Voltages
 Zellspannung=Cell Voltage
-
 Ja=Yes
 Nein=No
-
 Einschlafen=Falling asleep
 Automatic updates=Automatic updates
-
 TextShare=<h1>Share charge curves / degradation curves anonymously</h1>We would like to create an anonymous database to compare degradation curves and charge curves. This allows you to compare your vehicle with others at any time and to detect any unusual deviation at an early stage. This can also be used later to prove during the sales talk that your battery is still fully efficient. In the negative case, you can more easily prove a reduced performance against Tesla Motors.<br><br>Would you like to share your fast charging curves and degradation curves with other Tesla drivers completely anonymously? This decision can be changed at any time in the settings screen.
 Daten anonym teilen=Share data anonymously
 TextSuspendTeslalogger=Teslalogger has been stopped! Data will not be logged!
 Resume Teslalogger=Resume Teslalogger
 Range=Range
-
 Ladekosten=Charging Costs
 Ladesäule=Charging Station
 Währung=Currency
@@ -340,7 +354,6 @@ Driving=Driving
 Missing=Missing
 Ø Temperatur=Avg. Temperature
 Verbraucht=Consumed
-
 StreamingPosHelp=<h1>Position by StreamingAPI</h1>Use StreamingAPI to save the car position in the Teslalogger database. Depending on car's reception, this means up to 5 positions per second (compared to one position every five seconds on normal mode). This will increase your database's size a lot, will increase wear on the SD card and result in huge backups.
 
 #journeys.php
@@ -363,12 +376,12 @@ Charge time [h]=Charge time [h]
 Distance [mi]=Distance [mi]
 Distance [km]=Distance [km]
 Charging costs=Charging costs
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=New Journey
 Journey name=Journey name
 Please wait=Please wait
 Please select start first=Please select start first
-DelJourney=Do you really want to delete journey {id}?
+DelJourney="Delete journey {id}?"
 Display _MENU_ records per page=Display _MENU_ records per page
 Nothing found=Nothing found
 Showing _START_ to _END_ of _TOTAL_ entries=Showing _START_ to _END_ of _TOTAL_ entries
@@ -395,7 +408,7 @@ ABRP1=Create an Abetterrouteplanner account
 ABRP2=Go to Settings
 ABRP3=Choose your car
 ABRP4=Save your car to your account
-ABRP5=Give your car a name
+ABRP5="Give your vehicle a name"
 ABRP6=Click on "Link Generic" to get a ABRP token
 ABRP7=Copy the token and click "Done"
 ABRP8=Insert the token in Teslalogger
@@ -415,6 +428,30 @@ Info=Info
 Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=Vehicle kWh
+
+#mqtt.php
+MQTTSettings=MQTT settings
+MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+TopicStructure=Topic structure:
+MQTT1="All values in one JSON (if turned on): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
+MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT4="CAR_VIN" is VIN of your car
+MQTT5="ideal_battery_range_km" are single topics
+ADDescription=AutoDiscovery:
+MQTTAD1=""_QQ_"single topics"_QQ_" are mandatory for AutoDiscovery!"
+ControlTopic=Topic for control:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" and "13" as RAW value
+MQTT7=Supported commands
+RebootAfterSave=Reboot TeslaLogger after save!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson="Publish JSON"
+Singletopics=Publish single topics
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
 
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
@@ -450,12 +487,12 @@ Minutes=Minutes
 Special Count=Special Count
 Count=Count
 Special Features=Special Features
-Enable Sentry Mode=Enable Sentry Mode
-Disable Sentry Mode=Disable Sentry Mode
+Enable Sentry Mode="Turn on Sentry Mode"
+Disable Sentry Mode="Turn off Sentry Mode"
 Turn HVAC off=Turn HVAC off
 No sleep=No sleep
 Delete=Delete
-Are you sure you want to delete this geofencing location?=Are you sure you want to delete this geofencing location?
+Are you sure you want to delete this geofencing location?="Delete this geofencing location?"
 Error=Error
 Deleted!=Deleted!
 Meter=Meter
@@ -505,3 +542,10 @@ TextRestore3=Don't interrupt the restore process in any way! Don't reload the pa
 
 #dashboard.php
 Sleeping=Sleeping
+
+#Vehicle Alerts
+Fahrzeug Fehler=Vehicle Alerts
+startedAt=Start
+endedAt=End
+Häufigkeit=Frequency
+Fehler=Alerts

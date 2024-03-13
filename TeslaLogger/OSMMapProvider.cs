@@ -261,7 +261,7 @@ namespace TeslaLogger
 
         public override bool UseIt()
         {
-            return true;
+            return false;
         }
 
         static string GetTempFileName()

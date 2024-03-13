@@ -87,14 +87,17 @@ response: JSON (forwarded from Tesla API)
 Allowed commands:
 * auto_conditioning_start
 * auto_conditioning_stop
+* auto_conditioning_start_stop
 * auto_conditioning_toggle
 * sentry_mode_on
 * sentry_mode_off
+* sentry_mode_on_off
 * sentry_mode_toggle
 * wake_up
 * set_charge_limit
 * charge_start
 * charge_stop
+* charge_start_stop
 * set_charging_amps
 
 ### /command/_CarID_/_name_?_parameter_
@@ -106,8 +109,12 @@ response: JSON (forwarded from Tesla API)
 Allowed commands:
 * set_charge_limit
 * set_charging_amps
+* auto_conditioning_start_stop
+* sentry_mode_on_off
+* charge_start_stop
 
 Example: /command/1/set_charging_amps?16
+Example: /command/1/charge_start_stop?true
 
 ## debugging TeslaLogger
 

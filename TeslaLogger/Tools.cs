@@ -41,12 +41,11 @@ namespace TeslaLogger
         private static string _defaultcarid = "";
         internal static DateTime lastGrafanaSettings = DateTime.UtcNow.AddDays(-1);
         internal static DateTime lastSleepingHourMinutsUpdated = DateTime.UtcNow.AddDays(-1);
-        internal static bool? _StreamingPos = null;
+        internal static bool? _StreamingPos; // defaults to null;
 
         internal static bool UseNearbySuCService()
         {
-            // TODO
-            return true;
+            return Tools.IsShareData();
         }
 
         private static string _OSVersion = string.Empty;
@@ -67,18 +66,15 @@ namespace TeslaLogger
 
         public static void DebugLog(MySqlCommand cmd, string prefix = "", [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0, [CallerMemberName] string callerMemberName = null)
         {
-            if (Program.SQLTRACE)
+            try
             {
-                try
-                {
-                    string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
-                    DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
-                }
-                catch (Exception ex)
-                {
-                    ex.ToExceptionless().FirstCarUserID().Submit();
-                    DebugLog("Exception in SQL DEBUG", ex, prefix);
-                }
+                string msg = "SQL" + Environment.NewLine + ExpandSQLCommand(cmd).Trim();
+                DebugLog($"{callerMemberName}: " + msg, null, prefix, callerFilePath, callerLineNumber);
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                DebugLog("Exception in SQL DEBUG", ex, prefix);
             }
         }
 
@@ -344,6 +340,35 @@ namespace TeslaLogger
             return "NULL";
         }
 
+        public static string GetOsRelease()
+        {
+            try
+            {
+                string path = @"/etc/os-release";
+                if (File.Exists(path))
+                {
+                    var l = File.ReadAllLines(path);
+                    foreach (var line in l)
+                    {
+                        if (line.Contains("PRETTY_NAME"))
+                        {
+                            var a = line.Split('=');
+                            return a[1].Replace("\"","");
+                        }
+                    }
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            catch (Exception ex){
+                Logfile.Log(ex.ToString());
+            }
+
+            return "";
+        }
+
         public static bool IsMono()
         {
             return GetMonoRuntimeVersion() != "NULL";
@@ -412,6 +437,10 @@ namespace TeslaLogger
                 {
                     year--;
                 }
+                if (dateCode > 81) // skip Q
+                {
+                    year--;
+                }
                 switch (vin[3])
                 {
                     case 'S':
@@ -460,7 +489,10 @@ namespace TeslaLogger
                 switch (vin[6])
                 {
                     case 'E':
-                        battery = "NMC";
+                        if(MIC)
+                            battery = "NMC";
+                        else
+                            if (vin[7] == 'S') battery = "LFP"; //Y SR MIG BYD
                         break;
                     case 'F':
                         battery = "LFP";
@@ -506,16 +538,21 @@ namespace TeslaLogger
                         motor = "3 dual performance";
                         break;
                     case 'D':
-                    case 'J':
                         motor = "Y single";
                         break;
                     case 'E':
+                        motor = "Y dual";
+                        break;
                     case 'K':
                     case 'L':
-                        motor = "Y dual";
+                        motor = "3/Y dual";
                         break;
                     case 'F':
                         motor = "Y dual performance";
+                        break;
+                    case 'J':
+                    case 'S':
+                        motor = "3/Y single";
                         break;
                 }
 
@@ -1431,6 +1468,10 @@ namespace TeslaLogger
                 // cleanup backup folder
                 CleanupBackupFolder();
 
+                CreateBackupForDocker();
+
+                CleanupLogfile();
+
                 // run housekeeping regularly:
                 // - after 24h
                 // - but only if car is asleep, otherwise wait another hour
@@ -1441,6 +1482,65 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log(ex.ToString());
             }
+        }
+
+        private static void CleanupLogfile()
+        {
+            try
+            {
+                var nohup = Path.Combine(Logfile.GetExecutingPath(), "nohup.out");
+                // check if nohup.out is bigger than 10MB
+                if (new FileInfo(nohup).Length > 10000000)
+                {
+                    // check or create logs dir
+                    var LogDir = Path.Combine(Logfile.GetExecutingPath(), "logs");
+                    if (!Directory.Exists(LogDir))
+                    {
+                        Directory.CreateDirectory(Path.Combine(Logfile.GetExecutingPath(), "logs"));
+                    }
+                    var targetFile = Path.Combine(Path.Combine(Logfile.GetExecutingPath(), "logs"), $"nohup-{DateTime.UtcNow:yyyyMMddHHmmssfff}");
+                    // copy to logs dir with timestamp
+                    ExecMono("/bin/cp", nohup + " " + targetFile);
+                    // gzip copied file
+                    ExecMono("bin/gzip", targetFile);
+                    // empty nohup.out
+                    ExecMono("bin/echo", " > " + nohup);
+                    // cleanup old logfile backups
+                    // old means older than 90 days
+                    DirectoryInfo di = new DirectoryInfo(LogDir);
+                    FileInfo[] files = di.GetFiles();
+                    if (files.Length > 0)
+                    {
+                        IOrderedEnumerable<FileInfo> ds = di.GetFiles().OrderBy(p => p.LastWriteTime);
+                        foreach (FileInfo fi in ds)
+                        {
+                            if ((DateTime.Now - fi.LastWriteTime).TotalDays > 90)
+                            {
+                                Logfile.Log("CleanupLogfile: delete " + fi.FullName + " (" + fi.Length + " bytes)");
+                                fi.Delete();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToExceptionless().FirstCarUserID().Submit();
+                Logfile.Log(ex.ToString());
+            }
+        }
+
+        private static void CreateBackupForDocker()
+        {
+            if (!IsDocker())
+                return;
+
+            var ts = DateTime.Now - Program.uptime;
+            if (ts.TotalHours < 24)
+                return;
+
+            Logfile.Log("Start backup for Docker");
+            Tools.ExecMono("/bin/bash", "/etc/teslalogger/backup.sh");
         }
 
         public static void CleanupBackupFolder(long freeDiskSpaceNeededMB = 2048, int keepDays = 14)
@@ -1484,7 +1584,7 @@ namespace TeslaLogger
                         {
                             try
                             {
-                                Logfile.Log("Housekeeping: delete file " + fi.Name);
+                                Logfile.Log($"Housekeeping: (rule: file older than {keepDays} days) delete file " + fi.Name);
                                 fi.Delete();
                                 filesFoundForDeletion = true;
                                 countDeletedFiles++;
@@ -1496,11 +1596,31 @@ namespace TeslaLogger
                             }
                         }
                     }
+
+                    // finally make sure that we have at least 1GB free
+                    int retries = 0;
+                    while (FreeDiskSpaceMB() < 1024 && retries < 32)
+                    {
+                        retries++;
+                        FileInfo fi = di.GetFiles().OrderBy(p => p.LastWriteTime).First<FileInfo>();
+                        try
+                        {
+                            Logfile.Log("Housekeeping: (rule: at least 1024mb free) delete file " + fi.Name);
+                            fi.Delete();
+                            filesFoundForDeletion = true;
+                            countDeletedFiles++;
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
                 }
             }
             if (filesFoundForDeletion)
             {
-                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory Free Disk Space: {FreeDiskSpaceMB()} MB");
+                Logfile.Log($"Housekeeping: {countDeletedFiles} file(s) deleted in Backup directory, Free Disk Space now: {FreeDiskSpaceMB()} MB");
             }
         }
 
@@ -1534,7 +1654,6 @@ WHERE
   TABLE_SCHEMA = @dbname
   AND TABLE_TYPE = 'BASE TABLE'", con))
                 {
-                    cmd.Parameters.AddWithValue("@tsdate", DateTime.Now.AddDays(-90));
                     cmd.Parameters.AddWithValue("@dbname", DBHelper.Database);
                     try
                     {
@@ -1545,7 +1664,6 @@ WHERE
                         }
                     }
                     catch (Exception) { }
-
                 }
             }
         }
@@ -1575,6 +1693,7 @@ WHERE
             else
             {
                 // wait another hour to try again
+                Logfile.Log("Housekeeping: at least one car is not asleep, try again in one hour");
                 CreateMemoryCacheItem(1);
             }
         }
@@ -1623,7 +1742,7 @@ WHERE
                             cmd.Parameters.AddWithValue("@maxid", dbupdate);
                             try
                             {
-                                SQLTracer.TraceNQ(cmd, out long _);
+                                _ = SQLTracer.TraceNQ(cmd, out _);
                             }
                             catch (Exception ex)
                             {
@@ -1644,7 +1763,7 @@ WHERE
                         try
                         {
                             cmd.CommandTimeout = 60000;
-                            SQLTracer.TraceNQ(cmd, out long _);
+                            _ = SQLTracer.TraceNQ(cmd, out _);
                         }
                         catch (Exception ex)
                         {
@@ -1760,7 +1879,7 @@ WHERE
                     FileInfo fileInfo = new FileInfo(path);
                     HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(true);
                     _ = response.EnsureSuccessStatusCode();
-                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (Stream responseContentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
                     {
                         using (FileStream outputFileStream = File.Create(fileInfo.FullName))
                         {
@@ -1909,6 +2028,28 @@ WHERE
         {
             return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64));
         }
+
+        public static string GetNET8Version()
+        {
+            try
+            {
+                var ret = Tools.ExecMono("/home/cli/dotnet", "--info");
+
+                if (ret?.Contains("Version:") == true)
+                {
+                    var m = Regex.Match(ret, "Version:\\s+([0-9\\.]+)");
+                    if (m.Success)
+                        return m.Groups[1].Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logfile.Log(ex.ToString());
+                ex.ToExceptionless().FirstCarUserID().Submit();
+            }
+
+            return "";
+        }
     }
 
     public static class EventBuilderExtension
@@ -1938,7 +2079,7 @@ WHERE
             }
             catch (Exception ex)
             {
-                Logfile.Log(ex.ToString());
+                // Logfile.Log(ex.ToString());
             }
 
             return v;

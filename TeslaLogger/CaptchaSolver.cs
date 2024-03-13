@@ -9,7 +9,7 @@ namespace TeslaLogger
     internal class CaptchaSolver
     {
         private static string API_KEY = CaptchaSolverKey.key;
-        static HttpClient client = null;
+        static HttpClient client; // defaults to null;
         string captcha_id;
         DateTime start = DateTime.Now;
         readonly Car car;

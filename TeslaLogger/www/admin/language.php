@@ -7,6 +7,7 @@ $LengthUnit = "";
 $PowerUnit = "";
 $LengthFactor = 1;
 $URL_Grafana = "";
+$Range = 'IR';
 
 $Display100pctEnable = "false";
 
@@ -35,13 +36,17 @@ if (file_exists("/etc/teslalogger/settings.json"))
 		if (substr($URL_Grafana,-1) != "/") {
 			$URL_Grafana = $URL_Grafana . "/";
 		}
-	
+	$Range = $json_data["Range"];
 }
 
-$filename = "/etc/teslalogger/language-".$language.".txt";
-$filename_en = "/etc/teslalogger/language-en.txt";
+$filename = "/tmp/language-$language.txt";
+$filename_en = "/tmp/language-en.txt";
 global $ln;
 global $lnen;
+
+// get files from Teslalogger
+GetFileFromTeslaloggerAndWriteToTMP("language-$language.txt");
+GetFileFromTeslaloggerAndWriteToTMP("language-en.txt");
 
 if(file_exists($filename))
 { 
@@ -54,7 +59,14 @@ if(file_exists($filename))
 		if (count($a) == 1)
 			continue;
 
-		$ln[$a[0]] = $a[1];
+		$tmp = $a[1];
+
+		if ($tmp[0] == '"' && $tmp[strlen($tmp)-1] == '"')
+			$tmp = substr($tmp, 1,-1);
+
+		$tmp = str_replace('"_QQ_"','"', $tmp);
+
+		$ln[$a[0]] = $tmp;
 	}
 }
 

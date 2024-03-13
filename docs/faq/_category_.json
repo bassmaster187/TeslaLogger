@@ -1,0 +1,14 @@
+{
+    "position": 6.5,
+    "label": "FAQ",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "FAQ"
+    },
+    "customProps": {
+      "description": "This description can be used in the swizzled DocCard"
+    }
+}

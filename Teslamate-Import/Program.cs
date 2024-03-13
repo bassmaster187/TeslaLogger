@@ -367,6 +367,8 @@ namespace Teslamate_Import
                 con.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand("select charges.*, car_id from charges join charging_processes on charges.charging_process_id = charging_processes.id order by id", con))
                 {
+                    var timeoutMinutes = 10;
+                    cmd.CommandTimeout = timeoutMinutes * 60;
                     using (var conTL = new MySqlConnection(DBConnectionstring))
                     {
                         conTL.Open();
@@ -433,6 +435,8 @@ namespace Teslamate_Import
                 con.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand("select * from positions order by car_id, id", con))
                 {
+                    var timeoutMinutes = 10;
+                    cmd.CommandTimeout = timeoutMinutes * 60;
                     using (var conTL = new MySqlConnection(DBConnectionstring))
                     {
                         conTL.Open();

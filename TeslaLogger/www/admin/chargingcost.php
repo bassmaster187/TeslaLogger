@@ -9,7 +9,7 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Charging Costs"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -39,6 +39,7 @@ input[type=number] {text-align: right;}
     }
     else
     {
+        $output = str_replace( "'", "\'", $output);
         echo("    var json = JSON.parse('$output');\n");
     }
 ?>
@@ -194,9 +195,9 @@ echo(menu("Charging Costs"));
 <tr><td>&nbsp;</td></tr>
 <tr><td><?php t("Currency"); ?>:&nbsp;</td><td><input id="cost_currency" placeholder="EUR" tabindex="1"></span></td><td></td><td></td></tr>
 <tr><td><?php t("kWh according to meter/invoice"); ?>:&nbsp;</td><td><input id="cost_kwh_meter_invoice" type="number" step="any" inputmode="decimal" tabindex="2"></span></td></tr>
-<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="0.01" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
-<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="1" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
-<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="0.01" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
+<tr><td><?php t("Cost per kWh"); ?>:&nbsp;</td><td><input id="cost_per_kwh" type="number" step="any" inputmode="decimal" tabindex="3"></span></td><td> * <span id="kwh_charged"></span>&nbsp;<?php t("kWh"); ?></td><td class="sum"><span id="cost_per_kwh_sum"></span></td></tr>
+<tr><td><?php t("Cost per charge"); ?>:&nbsp;</td><td><input id="cost_per_session" type="number" step="any" inputmode="decimal" tabindex="4"></span></td><td></td><td class="sum"><span id="cost_per_session_sum"></span></td></tr>
+<tr><td><?php t("Cost per minute"); ?>:&nbsp;</td><td><input id="cost_per_minute" type="number" step="any" inputmode="decimal" tabindex="5"></span></td><td> * <span id="minutes_charged"></span>&nbsp;<?php t("Minutes"); ?></td><td class="sum"><span id="cost_per_minute_sum"></span></td></tr>
 <tr><td><?php t("Idle cost per minute"); ?>:&nbsp;</td><td><input id="cost_idle_fee_total" type="number" step="any" inputmode="decimal" tabindex="6"></span></td><td></td><td class="sum"><span id="cost_idle_fee_total_sum"></span></td></tr>
 <tr><td colspan="4"><hr></td></tr>
 <tr><td><b><?php t("Total"); ?>:&nbsp;</b></td><td></td><td></td><td class="sum"><b><span id="cost_total"></span></b></td><td><b><span id="currency"></span></b></td></tr>

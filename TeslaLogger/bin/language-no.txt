@@ -3,113 +3,113 @@ Delete=Slett
 Save=Lagre
 Settings=Innstillinger
 Setup=Oppsett
-Enabled=Aktivert
+Enabled="Påskrudd"
 kWh=kWh
 
 #Akku Trips.json
-Akku Trips=Akku Trips
-Start Trip=Start Trip
-End Trip=End Trip
-Time=Date
-StartSOC=StartSOC
-EndSOC=EndSOC
-SOC diff=SOC diff
-Start km=Start km
-End km=Ende km
-Start mi=Start mi
-End mi=Ende mi
-kmDiff=kmDiff
-Max Range=Maks Range
-Ø Verbrauch=Ø forbruk
+Akku Trips="Batteribruk (kjøring)"
+Start Trip="Start tur"
+End Trip="Sluttfør tur"
+Time="Dato"
+StartSOC="Start-SOC"
+EndSOC="Slutt-SOC"
+SOC diff="SOC-differanse"
+Start km="Start-km"
+End km="Slutt-km"
+Start mi="Start-mi"
+End mi="Slutt-mi"
+kmDiff="km-differanse"
+Max Range="Maks. rekkevidde"
+Ø Verbrauch="Gj. forbruk"
 Tage=Dager
 
 #Degradation.json
-Degradation=Degradering
+Degradation="Forringelse"
 Maximalreichweite[km]=Maks range [km]
-Maximalreichweite [mi]=Maks range [mi]
-km Stand [km]=Kilometerteller [km]
-mi Stand [mi]=Kilometerteller [mi]
-Odometer [mi]=
+Maximalreichweite [mi]="Maks. rekkevidde [mi]"
+km Stand [km]="Avstand [km]"
+mi Stand [mi]="Avstand [mi]"
+Odometer [mi]="Tripteller [mi]"
 
 #Ladehistorie.json
 Ladehistorie=Ladehistorie
-Startdatum=Start dato
-Enddatum=End dato
-geladen kWh=kWt ladet
-km Stand=Kilometerteller
+Startdatum="Startdato"
+Enddatum="Sluttdato"
+geladen kWh="kWh ladet"
+km Stand="Tripteller"
 Adresse=Adresse
-TR km Start=TR km Start
-TR km Ende=TR km End
-SOC Ende=SoC End
+TR km Start="TR km-start"
+TR km Ende="TR km-slutt"
+SOC Ende="SoC-slutt"
 100% TR=100% TR
 Minuten=Minutter
-TR mi Start=TR mi Start
-TR mi Ende=TR mi End
+TR mi Start="TR mi-start"
+TR mi Ende="TR mi-slutt"
 
 #Ladestatistik.json
 Ladestatistik=Ladestatistikk
 Letzte Ladung=Siste lading
 Ort=Adresse
-Ø geladen kWh=Ø ladet kWt
-Ladezeit h=Ladetid h
-Ø SOC=Ø SoC
-Max SOC=Maks SoC
+Ø geladen kWh="Gj. ladet kWh"
+Ladezeit h="Ladetid t"
+Ø SOC="Gj. SOC"
+Max SOC="Maks. SoC"
 Anzahl Ladungen=Antall ladinger
 
 #SOC Ladestatistik.json
-SOC Ladestatistik=SoC Ladestatistikk
-SOC [%]=SOC [%]
+SOC Ladestatistik="SOC-ladestatistikk"
+SOC [%]="SOC [%]"
 
 #Laden.json
-Laden=Lade
+Laden="Lading"
 Ladespannung [V]=Ladespenning [V]
 Reichweite [mi]=Rekkevidde [mi]
 Reichweite [km]=Rekkevidde [km]
 Leistung [kW]=Effekt [kW]
-Phasen=Phaser
-Stromstärke [A]=Strømstyrke [A]
+Phasen="Faser"
+Stromstärke [A]="Strømtrekk [A]"
 Angefordert [A]=Forespurt [A]
-Pilot [A]=Pilot [A]
+Pilot [A]="Pilot [A]"
 
 #Vampir Drain Monatsstatistik.json
-Vampir Drain Monatsstatistik=Vampir Drain statistikk mnd.
-TR mi Verlust=TR mi tap
+Vampir Drain Monatsstatistik="Månedlig statistikk for vampyrisk utlading"
+TR mi Verlust="TR mi-tap"
 kWh Verlust=kWt tapt
-Eur Verlust=kr tapt
-Zeitspanne Stunden=Varighet Hours
-TR mi Verlust pro Stunde=TR mi tapt per time       
-mi Stand=Kilometerteller
+Eur Verlust="Kr tapt"
+Zeitspanne Stunden="Tidsrom"
+TR mi Verlust pro Stunde="TR mi-tap per time"
+mi Stand="Tripteller"
 
 #Trip.json
-Trip=Trip
+Trip="Tur"
 Start=Start
-Ende=Ende
+Ende="Slutt"
 Start Adresse=Startadresse
-Ziel Adresse=Destinasjonadresse
-Ø Verbrauch kWh=Ø forbruk kWt
-Verbraucht kWh=brukt kWt
-Dauer Min=Tid Min
+Ziel Adresse="Måladresse"
+Ø Verbrauch kWh="kWh gj. forbruk"
+Verbraucht kWh="kWh forbrukt"
+Dauer Min="Varighet (min)"
 mi=mi
 km=km
-Ø °C=Ø °C
-Ø °F=Ø °F
-max mph=Maks mph
-max km/h=maks km/t
-max PS=Maks HP
+Ø °C="Gj. °C"
+Ø °F="Gj. °F"
+max mph="Maks. mph"
+max km/h="Maks. km/t"
+max PS="Maks. hk"
 min PS=Min HP
-max kW=maks kW
-min kW=min kW
-Ø PS=Ø HP
-Ø kW=Ø kW
-Ø mph=Ø mph
-Ø km/h=Ø kph
+max kW="Maks. kW"
+min kW="Min. kW"
+Ø PS="Gj. hk"
+Ø kW="Gj. kW"
+Ø mph="Gj. mph"
+Ø km/h="Gj. km/t"
 
 #Vampir Drain.json
-Vampir Drain=Vampir Drain
-Standby Stunden=Standby timer
-Standby=Standby
-TR km Verlust=TR km tap
-TR km Verlust pro Stunde=TR km tapt per time
+Vampir Drain="Vampyrisk utlading"
+Standby Stunden="Lediggangstidsur"
+Standby="Lediggang"
+TR km Verlust="TR km-tap"
+TR km Verlust pro Stunde="TR km-tap per time"
 
 #Verbrauch.json
 Verbrauch=Forbruk
@@ -117,166 +117,162 @@ Höhe [m]=Høyde [m]
 Altitude [m]=Høyde [m]
 Geschwindigkeit [mph]=Hastighet [mph]
 Geschwindigkeit [km/h]=Hastighet [km/t]
-Leistung [PS]=Effekt [HP]
+Leistung [PS]="Effekt [hk]"
 Außentemperatur [°C]=Utetemperatur [°C]
 Außentemperatur [°F]=Utetemperatur [°F]
-
-Laden fertig=Lade avsluttet
+Laden fertig="Lading fullført"
 Schlafen=Sover
-Online=Online
+Online="Oppkoblet"
 
 #Visited.json
 Visited=Besøkt
 
 #index.php
-Car Info=Bilinfo
+Car Info="Kjøretøyinfo"
 Status=Status
-Typical Range=Typical Range
-Odometer=Kilometerteller
-Car Version=Bil versjon
-Last Trip=Siste Trip
+Typical Range="Typisk rekkevidde"
+Odometer="Tripteller"
+Car Version="Kjøretøyversjon"
+Last Trip="Siste tur"
 Duration=Varighet
-Distance=Distanse
-Max km/h=Maks km/t
-PS=PS
-Falling asleep=Sovne
+Distance="Avstand"
+Max km/h="Maks. km/t"
+PS="Hk"
+Falling asleep="Sovner"
 Charging=Lading
 Done=Ferdig
-Done at=Utført på
+Done at="Ferdig kl."
 Driving=Kjøring
 km/h=km/t
 Preconditioning=Forbehandling
 Sentry Mode=Vaktmodus
 Battery Heater=Batterivarmer
-Sleeping=Sove
-Offline=Offline
+Sleeping="Sover"
+Offline="Frakoblet"
 kW=kW
 OK=OK
 No=Nei
 Yes=Ja
-Cell Temp=Cell Temp
-Max Charge=Max Charge
-Max Discharge=Max Discharge
-Cell Imbalance=Cell Imbalance
-Last Update=Last Update
-Software Update=Software Update
+Cell Temp="Celletemp"
+Max Charge="Maks. lading"
+Max Discharge="Maks. utlading"
+Cell Imbalance="Celleujevnhet"
+Last Update="Siste oppgradering"
+Software Update="Programvareoppgradering"
 min=min
 Consumption=Forbruk
-Ø Consumption=Ø Forbruk
+Ø Consumption="Gj. forbruk"
 Wh/km=Wh/km
-Current Pos=Nåværende Pos
-Please update to latest docker-compose.yml file. Check: {LINK}=Oppdater til den nyeste docker-compose.yml-filen. Sjekk: {LINK}
+Current Pos="Nåværende pos."
+Please update to latest docker-compose.yml file. Check: {LINK}="Oppgrader til den nyeste docker-compose.yml-fil. Sjekk: {LINK}"
 
 #password.php
-Teslalogger Tesla Credentials=Teslalogger Tesla-legitimasjon
-Please enter your Tesla account credentials=Dine Tesla account credentials
-Email=Epost
+Teslalogger Tesla Credentials="Teslalogger-Tesla-identitetsdetaljer"
+Please enter your Tesla account credentials="Skriv inn dine Tesla-kontoidentitetsdetaljer"
+Email="E-post"
 Password=Passord
-Repeat Password=Gjenta passordet
+Repeat Password="Gjenta passord"
 Speichern=Lagre
-Please enter the access token!=Please enter the access token!
-Please enter the refresh token!=Please enter the refresh token!
-Please select a vehicle=Vennligst velg et kjøretøy
-Check Logfile!=Check Logfile!
-Do you really want to delete this vehicle?=Vil du virkelig slette dette kjøretøyet?
-Check Logfile in one minute!=Sjekk loggfilen på ett minutt!
-Unauthorized=Uautorisert
-This isn't a valid URL!=Dette er ikke en gyldig URL!
-This isn't an auth link by Tesla!=Dette er ikke en autorisert lenke fra Tesla!
-The URL doesn't contain the expected format!=Nettadressen inneholder ikke det forventede formatet!
-TeslaAuthApps=Du kan bruke følgende apper for å få et tilgangsbevis
-BA_Browser=I lokal {leser} (anbefales)
-BA_Read=Les alle trinnene før du fortsetter:
-BA_Logon=Klikk på lenken nedenfor med tittelen <b>Tesla Logon</b> som vil åpne en ny fane/vindu for Tesla Authentication-påloggingssiden.
+Please enter the access token!="Skriv inn tilgangssymbolet."
+Please enter the refresh token!="Skriv inn gjenoppfriskingssymbolet."
+Please select a vehicle="Velg et kjøretøy"
+Check Logfile!="Sjekk loggfilen."
+Do you really want to delete this vehicle?="Slett dette kjøretøyet?"
+Check Logfile in one minute!="Sjekk loggfilen om ett minutt."
+Unauthorized="Mangler tilgang"
+This isn't a valid URL!="Ugyldig nettadresse."
+This isn't an auth link by Tesla!="Dette er ikke en identifiseringslenke fra Tesla!"
+The URL doesn't contain the expected format!="Nettadressen inneholder er ikke i forventet format!"
+TeslaAuthApps="Hent gjenoppfrisking- og tilgangssymbol med følgende programmer:"
+BA_Browser="På enheten {browser}"
+BA_Read="Les alle stegene før du fortsetter:"
+BA_Logon="Klikk på lenken nedenfor med tittelen <b>Tesla-innloggng</b> som vil åpne en ny fane/vindu for Tesla identitetsbekreftelse-påloggingssiden."
 BA_Auth=Logg på med Tesla-legitimasjon og MFA om nødvendig (Tesla husker disse hvis du har brukt lenken før).
-BA_NotFound=Dette ser ut til å resultere i en "Side ikke funnet". Dette er normalt.
-BA_URL=Kopier den resulterende nettadressen til nettsiden inn i skjemaet nedenfor. Nettadressen inneholder en midlertidig engangskode som vi kan bruke til å generere tokens. Vi vil trekke denne ut for deg fra lenken.
-BA_Invalid=Disse lenkene fungerer vanligvis bare én gang, så hvis en "Ugyldig tilskudd" eller annen feilmelding vises på nettstedet vårt, må du kanskje starte på nytt med Tesla Logon-lenken som skal gi en ny lenke.
+BA_NotFound="Dette ser ut til å resultere i «Fant ikke siden». Dette er normalt."
+BA_URL="Kopier den resulterende nettadressen til nettsiden inn i skjemaet nedenfor. Nettadressen inneholder en midlertidig engangskode vi kan bruke til å generere symboler. De pakkes ut for deg fra lenken."
+BA_Invalid="Disse lenkene fungerer vanligvis kun én gang, så hvis en «Ugyldig innvilgelse» eller annen feilmelding vises på nettstedet vårt, må du kanskje starte på nytt med Tesla Logon-lenken som skal gi en ny lenke."
 BA_Logoff=Hvis du vil bruke en annen konto, må du logge av manuelt {her!}
-BA_GetToken=Vi henter deretter tokens til Tesla-kontoen din.
-BA_SelectCar=Velg bilen du vil bruke til Teslalogger.
-BA_Step1=Trinn 1:
-BA_Step2=Trinn 2:
-BA_Step3=Trinn 3:
+BA_GetToken="Deretter hentes symboler til Tesla-kontoen din."
+BA_SelectCar="Velg kjøretøyet du vil bruke med Teslalogger."
+BA_Step1="Steg 1:"
+BA_Step2="Steg 2:"
+BA_Step3="Steg 3:"
 BA_FillOut=Fyll ut dette skjemaet:
-BA_CopyUrl=Kopier den resulterende nettadressen som vist
-BA_Paste=Lim inn den resulterende nettadressen i boksen og klikk på "Hent tokens"-knappen:
-Get Tokens=Hent tokens
-Access Token=Access Token
-Refresh Token=Refresh Token
-Car=Bil
+BA_CopyUrl="Kopier den resulterende nettadressen som vist"
+BA_Paste="Lim inn den resulterende nettadressen i boksen og klikk på «Hent symboler»-knappen:"
+Get Tokens="Hent symboler"
+Access Token="Tilgangssymbol"
+Refresh Token="Gjenoppfrisk symbol"
+Car="Kjøretøy"
 Free Supercharging=Gratis superlading
 Reconnect=Koble til igjen
-Please choose your vehicle=Vennligst velg ditt kjøretøy
+Please choose your vehicle="Velg ditt kjøretøy"
 Model=Modell
-VIN=VIN
-Free SUC=Gratis SUC
+VIN="VIN"
+Free SUC="Gratis SUC"
 Edit=Rediger
-New car=Ny bil
+New car="Nytt kjøretøy"
 
 #settings.php
-Credentials=Credentials
+Credentials="Identitetsdetaljer"
 Language=Språk
 Power=Effekt
 Temperatur=Temperatur
-Unit of length=Enhet lengde
-URL Admin Panel=URL Admin Panel
-Saved!=Lagret!
-MyTesla=MyTesla
-Teslalogger Adminpanel=Teslalogger Administrasjonspanel
+Unit of length="Lengdeenhet"
+URL Admin Panel="Administratorpanel-nettadresse"
+Saved!="Lagret"
+MyTesla="MinTesla"
+Teslalogger Adminpanel="Teslalogger-administrasjonspanel"
 Temperature=Temperatur
 Celsius=Celsius
 Fahrenheit=Fahrenheit
 mile=mil
 Ideal=Ideal
-Rated=Rated
+Rated="Vurdert"
 Share data anonymously=Del data anonymt
-Enable=Aktiver
+Enable="Skru på"
 All=Alle
 Stable=Stabil
 None=Ingen
 Sleep=Søvn
 to=til
-Show calc. 100% range=Vis beregn. 100% rekkevidde
-URL Grafana=URL Grafana
-Teslalogger HTTP Port=Teslalogger HTTP Port
-Zoom Level=Zoom-nivå
+Show calc. 100% range="Vis beregnet 100% rekkevidde"
+URL Grafana="Grafana-nettadresse"
+Teslalogger HTTP Port="Teslalogger-HTTP-port"
+Zoom Level="Forstørrelsesnivå"
 ScanMyTesla integration=ScanMyTesla-integrasjon
-Position by StreamingAPI=Posisjon etter StreamingAPI
-Main Car=Hovedbil
-Car Name=Bilens navn
-ScanMyTesla last received=ScanMyTesla mottok sist
-Tasker Token=Tasker Token
-Tasker URL=Tasker URL
-Received Tasker Token=Received Tasker Token
-
+Position by StreamingAPI="Posisjon ifølge StreamingAPI"
+Main Car="Hovedkjøretøy"
+Car Name="Kjøretøyets navn"
+ScanMyTesla last received="«ScanMyTesla» mottok sist"
+Tasker Token="Tasker-symbol"
+Tasker URL="Tasker-nettadresse"
+Received Tasker Token="Mottok Tasker-symbol"
 Ja=Ja
-Nein=Ikke
-
-Einschlafen=Sovne
-Automatic updates=Automatiske oppdateringer
-
-TextShare=<h1> Del ladekurver / nedbrytningskurver anonymt </h1> Vi ønsker å sette opp en anonym database som du kan sammenligne degraderingskurver og ladekurver med. Så du kan sammenligne kjøretøyet ditt med andre når som helst og identifisere et uvanlig avvik tidlig. Dette kan også brukes senere for å kunne bevise på salgshøyden at batteriet fremdeles er fullt effektivt. I negativt tilfelle er det lettere å bevise en redusert ytelse sammenlignet med Tesla Motors. <br> <br> Vil du dele hurtigladekurver og degraderingskurver anonymt med andre Tesla-drivere? Denne avgjørelsen kan endres når som helst i innstillingene.
-StreamingPosHelp=<h1>Posisjon etter StreamingAPI</h1>aktiverer posisjons DB-oppføringer fra streaming API - avhengig av bilens mottak betyr dette opptil 5 posisjoner per sekund (sammenlignet med en posisjon hvert femte sekund i normal modus), dette vil øke databasens størrelse mye, vil øke slitasjen på SD-kortet og resultere i enorme sikkerhetskopieringer
+Nein="Nei"
+Einschlafen="Sovner"
+Automatic updates="Automatiske oppgraderinger"
+TextShare="<h1> Del lade-/ forringelseskurver anonymt </h1> Vi ønsker å sette opp en anonym database som du kan sammenligne forringelse- og ladekurver med. Dette lar deg sammenligne kjøretøyet ditt med andre når som helst og identifisere et uvanlig avvik tidlig. Dette kan også brukes senere for å kunne bevise at batteriet fremdeles er fullt ut effektivt. I negativt fall er det lettere å bevise redusert ytelse ovenfor Tesla Motors. <br> <br> Vil du dele hurtiglading- og forringelseskurver anonymt med andre Tesla-drivere? Denne avgjørelsen kan endres når som helst i innstillingene."
+StreamingPosHelp="<h1>Posisjon etter StreamingAPI</h1>aktiverer posisjons DB-oppføringer fra streaming API — avhengig av bilens mottak betyr dette opptil 5 posisjoner per sekund (sammenlignet med en posisjon hvert femte sekund i normal modus), dette vil øke databasens størrelse mye, vil øke slitasjen på SD-kortet og resultere i enorme sikkerhetskopieringer"
 Daten anonym teilen=Del data anonymt
-TextSuspendTeslalogger=Teslalogger ble stoppet! Data logges ikke!
+TextSuspendTeslalogger="Teslalogger ble stoppet! Data loggføres ikke!"
 Resume Teslalogger=Fortsett Teslalogger
-Range=Range
+Range="Rekkevidde"
 
 #abrp.php
-ABRPTitle=Abetterrouteplanner-kobling
-TextABRP=Du kan sette opp en kobling fra Teslalogger til Abetterrouteplanner for å unngå å gi Tesla-legitimasjonen din til en tredjepart. En annen fordel er å minimere muligheten for å forhindre at bilen går i dvale hvis mer enn én tjeneste bruker legitimasjonen din.
-ABRP1=Opprett en Abetterrouteplanner-konto
+ABRPTitle="Abetterrouteplanner-kobling"
+TextABRP="Du kan sette opp en kobling fra Teslalogger til Abetterrouteplanner for å unngå å gi Tesla-identitetsdetaljene dine til en tredjepart. En annen fordel er å minimere muligheten for å forhindre at bilen går i dvale hvis mer enn én tjeneste bruker identitetsdetaljene dine."
+ABRP1="Opprett en «Abetterrouteplanner»-konto"
 ABRP2=Gå til Innstillinger
-ABRP3=Velg din bil
-ABRP4=Lagre bilen på kontoen din
-ABRP5=Gi bilen din et navn
-ABRP6=Klikk på "Link Generic" for å få et ABRP-token
-ABRP7=Kopier tokenet og klikk "Ferdig"
-ABRP8=Sett inn token i Teslalogger
+ABRP3="Velg ditt kjøretøy"
+ABRP4="Lagre kjøretøyet på kontoen din"
+ABRP5="Gi kjøretøyet ditt et navn"
+ABRP6="Klikk på «Generisk lenke» for å få et ABRP-symbol"
+ABRP7="Kopier symbolet og klikk «Ferdig»"
+ABRP8="Sett inn symbolet i Teslalogger"
 ABRP9=Sjekk om Teslaloggeren er tilkoblet
-ABRPYT=Sjekk YouTube-opplæringen for live demo
-ABRPToken=Abetterrouteplanner-token
+ABRPYT="Sjekk YouTube-opplæringen for sanntidsdemo"
+ABRPToken="«Abetterrouteplanner»-symbol"
 
 #chargingcost.php
 Charging Costs=Ladekostnader
@@ -284,156 +280,267 @@ Date=Dato
 Charged=Ladet
 Charger=Lader
 Minutes=Minutter
-Efficiency=Effektivitet
+Efficiency="Effektivitet"
 Currency=Valuta
 kWh according to meter/invoice=kWh i henhold til måler/faktura
 Cost per kWh=Kostnad per kWh
 Cost per charge=Kostnad per lading
 Cost per minute=Kostnad per minutt
-Idle cost per minute=Ventekostnad per minutt
+Idle cost per minute="Lediggangskostnad per minutt"
 Total=Totalt
 
 #wallbox.php
 Wallbox=Wallbox
 WallboxComment=Du kan koble Teslalogger til Wallbox-ladestasjonen for å beregne ladeeffektiviteten eller prosentandelen av solceller som brukes til å lade bilen.
 Host=Host
-Param=Param
+Param="Param."
 Test=Test
 Type=Type
 Info=Info
-Version=Version
-Utility kWh=Utility kWh
-Vehicle kWh=Vehicle kWh
+Version="Versjon"
+Utility kWh="Nytte-kWh"
+Vehicle kWh="Kjøretøy-kWh"
+
+#mqtt.php
+MQTTSettings="MQTT-innstillinger"
+MQTTSettingsInfo="MQTT-vert kreves. Alle andre innstillinger er valgfrie."
+TopicStructure="Emnestruktur:"
+MQTT1="Alle verdier i én JSON (hvis påslått): «teslalogger/json/CAR_VIN/currentjson»"
+MQTT2="Alle verdier i underemner (hvis påslått): «teslalogger/cars/CAR_VIN/ideal_battery_range_km»"
+MQTT3="«Teslalogger"_QQ_" parametriseres i feltet «Emne»"
+MQTT4="«CAR_VIN» er din bils serienummer"
+MQTT5="«ideal_battery_range_km» er enkeltstående emner"
+ADDescription="Auto-oppdagelse:"
+MQTTAD1="«Enkeltstående emner» kreves for auto-oppdagelse."
+ControlTopic="Emne for kontroll:"
+MQTT6="«teslalogger/command/CAR_VIN/set_charge_limit» og «13» som rå-verdi"
+MQTT7="Støttede kommandoer"
+RebootAfterSave="Utfør omstart av TeslaLogger etter lagring."
+Host="Vert"
+Port=Port
+Topic="Emne"
+PublishJson="Publiser JSON"
+Singletopics="Publiser enkeltstående emner"
+ClientID="Klient-ID"
+AutoDiscovery="Auto-oppdagelse"
+AutoDiscoveryTopic="Auto-oppdagelsesemne"
 
 #superchargebingo.php
-SuperChargeBingo=SuperChargeBingo
-SuperChargeBingoComment=Du kan sette opp en kobling fra TeslaLogger til SuperChargeBingo for å utføre automatiske innsjekkinger på Superchargers.
+SuperChargeBingo="SuperChargeBingo"
+SuperChargeBingoComment="Du kan sette opp en kobling fra TeslaLogger til SuperChargeBingo for å utføre automatiske innsjekkinger på superladere."
 Create a SuperChargeBingo account=Opprett en SuperChargeBingo-konto
 Create API key (must be secure)=Opprett API-nøkkel (må være sikker)
 Copy Username and API key and insert it in TeslaLogger=Kopier brukernavn og API-nøkkel og sett den inn i TeslaLogger.
-Save and restart TeslaLogger=Lagre og start TeslaLogger på nytt
+Save and restart TeslaLogger="Lagre og start TeslaLogger på ny"
 Username=Brukernavn
 API key=API-nøkkel
 
 #geoadd.php
-Description=Betegnelse
-Name & Position=Navn og stilling
+Description="Beskrivelse"
+Name & Position="Navn og stilling"
 Radius=Radius
 Special Flags=Spesielle flagg
 Home=Hjem
 Work=Arbeid
-Copy Charging Costs=Kostnader for kopiering
+Copy Charging Costs="Kopier ladekostnader"
 Don't Combine Charging Sessions=Ikke kombiner ladeøkter
-Set Charge Limit=Angi belastningsgrense
-SOC=SOC
-Set on arrival=Innstilt ved ankomst
-Set Charge Limit After Charging=Angi belastningsgrense etter lading
-Open Charge Port=Åpen ladeport
+Set Charge Limit="Angi ladegrense"
+SOC="SOC"
+Set on arrival="Innstilt ved ankomst"
+Set Charge Limit After Charging="Angi ladegrense etter lading"
+Open Charge Port="Åpne ladeport"
 Gear=Utstyr
-D → P=D → P
-D/R → P=D/R → P
-R → P=R → P
+D → P="D → P"
+D/R → P="D/R → P"
+R → P="R → P"
 High Frequency Logging=Høyfrekvent logging
 Special Count=Spesiell telling
-Count=Count
-Special Features=Spesielle funksjoner
-Enable Sentry Mode=Aktiver vaktmodus
-Disable Sentry Mode=Deaktiver vaktmodus
+Count="Antall"
+Special Features="Spesialfunksjoner"
+Enable Sentry Mode="Skru på vaktmodus"
+Disable Sentry Mode="Skru av vaktmodus"
 Turn HVAC off=Slå av HVAC
 No sleep=Ingen søvn
-Are you sure you want to delete this geofencing location?=Er du sikker på at du vil slette denne geofencing-lokasjonen?
+Are you sure you want to delete this geofencing location?="Slett denne geofencing-lokasjonen?"
 Error=Feil
-Deleted!=Slettet!
-Meter=Meter
+Deleted!="Slettet"
+Meter="Meter"
 
 #journeys.php
 Journeys=Reiser
 Journey name missing!=Reisens navn mangler!
-Please select=Vennligst velg
-Please select start point!=Vennligst velg startpunkt!
-Please select end point!=Vennligst velg sluttpunkt!
-TextJourneys=Du kan bruke reiser til å kombinere en lang tur / tid og oppsummere alle tall. Dette er veldig nyttig for å spore hele ladetiden for en lang tur eller for å sammenligne forbruket av sommer- eller vinterdekk.
+Please select="Velg"
+Please select start point!="Velg startpunkt"
+Please select end point!="Velg sluttpunkt"
+TextJourneys="Du kan bruke reiser til å kombinere en lang tur/tid og oppsummere alle tall. Dette er veldig nyttig for å spore hele ladetiden for en lang tur eller for å sammenligne forbruket av sommer- eller vinterdekk."
 ID=ID
 Journey=Reise
-Start address=Start adresse
+Start address="Startadresse"
 Target address=Måladresse
 End=Slutt
-Consumed kWh=Forbrukte kWh
-Charged kWh=Ladet kWh
+Consumed kWh="kWh forbrukt"
+Charged kWh="kWh ladet"
 Drive time [h]=Kjøretid [h]
 Charge time [h]=Ladetid [h]
 Distance [mi]=Avstand [mi]
 Distance [km]=Avstand [km]
 Charging costs=Kostnader for lading
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=Ny reise
 Journey name=Reisens navn
-Please wait=Vennligst vent
-Please select start first=Vennligst velg start først
-DelJourney=Vil du virkelig slette reise {id}?
-Display _MENU_ records per page=Vis _MENU_ poster per side
-Nothing found=Nothing found
+Please wait="Vent"
+Please select start first="Velg start først"
+DelJourney="Slette reise {id}?"
+Display _MENU_ records per page="Vis _MENU_-oppføringer per side"
+Nothing found="Fant ikke noe"
 Showing _START_ to _END_ of _TOTAL_ entries=Viser _START_ til _END_ av _TOTAL_ oppføringer
 No records available=Ingen registreringer tilgjengelig
 (filtered from _MAX_ total records)=(filtrert fra _MAX_ poster totalt)
 Search=Søk
-First=For det første
+First="Første"
 Last=Siste
 Next=Neste
-Previous=Tidligere
+Previous="Forrige"
 
 #adminpanelpassword.php
-Please enter password!=Vennligst skriv inn passord!
-Passwords do not match!=Passordene stemmer ikke overens!
+Please enter password!="Skriv inn passord"
+Passwords do not match!="Passordene samsvarer ikke"
 Do you want to delete your password?=Vil du slette passordet ditt?
-Set password for Teslalogger's admin panel=Angi passord for Teslaloggers administrasjonspanel
+Set password for Teslalogger's admin panel="Angi passord for Teslalogger-administrasjonspanel"
 Name=Navn
 
 #changelog.php
 Changelog=Endringslogg
 
 #dashboard.php
-Dashboard=Dashbord
+Dashboard="Oversikt"
 
 #logfile.php
 Download Logfile=Last ned loggfil
 Lines=Linjer
 Housekeeping=Rengjøring
-Update=Oppdatering
+Update="Oppgrader"
 Sleep Attempt=Søvnforsøk
 
 #menu.php
-Logfile=loggfil
+Logfile="Loggfil"
 Restart=Start på nytt
-Dashboards=Dashbord
+Dashboards="Oversikt"
 Fleet Statistic=Flåtestatistikk
-My Degradation=Min degradering
-My Charging AVG=Min lading av AVG
-Fleet Degradation AVG=Flåteforringelse AVG
-Fleet Charging AVG=Flåtelading AVG
-Fleet Charging MAX (Firmware)=Flåtelading MAX (fastvare)
+My Degradation="Min. forringelse"
+My Charging AVG="Gj. min. lading"
+Fleet Degradation AVG="Gj. flåteforringelse"
+Fleet Charging AVG="Gj. flåtelading"
+Fleet Charging MAX (Firmware)="Maks. flåtelading (fastvare)"
 Fleet Charging Locations=Ladesteder for flåten
-Fleet Fast Charging Map=Kart for hurtiglading av flåten
+Fleet Fast Charging Map="Hurtigladingskart for flåten"
 Supercharger Usage=Bruk av superlader
-Firmware Tracker=Firmware Tracker
-Extras=Statister
+Firmware Tracker="Fastvaresporer"
+Extras="Statister"
 Backup=Sikkerhetskopiering
-Restore=Gjenopprette
-Geofence=Geofence
-Abetterrouteplanner=En bedre ruteplanlegger
-Wakeup Teslalogger=Wakeup Teslalogger
-Suspend Teslalogger=Suspendere Teslalogger
+Restore="Gjenoppretting"
+Geofence="Geofence"
+Abetterrouteplanner="Abetterrouteplanner"
+Wakeup Teslalogger="Vekk opp Teslalogger"
+Suspend Teslalogger="Sett Teslalogger i hvilemodus"
 
 #ovms.php
-Please enter your dexters-web.de account credentials=Vennligst skriv inn påloggingsinformasjonen for dexters-web.de-kontoen din.
+Please enter your dexters-web.de account credentials="Skriv inn påloggingsinfo for dexters-web.de-kontoen din."
 Dexter Login=Dexter-pålogging
-Dexter Password=Dexter passord
+Dexter Password="Dexter-passord"
 
 #password_info.php
-Credentials Info=Informasjon om legitimasjon
+Credentials Info="Info om identitetsdetaljer"
 
 #restore.php
-Restore Database=Gjenopprette databasen
-TextRestore1=Sørg for at du tar sikkerhetskopi av Teslalogger før du gjenoppretter databaser. Flytt sikkerhetskopimappen fra \\RASPBERRY\teslalogger\backup til harddisken din!
+Restore Database="Gjenopprett database"
+TextRestore1="Sørg for at du tar sikkerhetskopi av Teslalogger før du gjenoppretter noen database. Flytt sikkerhetskopimappen fra \RASPBERRY\teslaloggerbackup til harddisken din!"
 TextRestore2=Gjenopprettingsprosessen kan ta opptil 10 minutter!
 TextRestore3=Ikke avbryt gjenopprettingsprosessen på noen måte! Ikke last inn siden på nytt! Ikke lukk denne siden!
+Zellspannungen 61-80 - ScanMyTesla="Cellespenninger 61–80 — ScanMyTesla"
+Strecke [mi]="Avstand [mi]"
+Strecke [km]="Avstand [km]"
+Maximalreichweite [km]="Maks. rekkevidde [km]"
+Max. Reichweite (Monatsmittel) [km]="Maks. rekkevidde (månedlig gj.) [km]"
+Max. Reichweite (Monatsmittel) [mi]="Maks. rekkevidde (månedlig gj.) [mi]"
+ØkW="Gj. kW"
+Anzahl="Antall"
+Geladen="Ladet"
+Ladezeit="Ladetid"
+Anz. Ladungen="Antall"
+Ladehub="Ladeområde"
+PV="Solenergi"
+
+#SOC Entladestatistik.json
+SOC Entladestatistik="SOC-utladingsstatistikk"
+
+#Trip Top Destinations.json
+Trip Top Ziele="Toppmål"
+Letzte Fahrt="Siste tur"
+Ø Dauer Min="Gj. varighet (min)"
+Ø Verbrauch kWh/100km="Gj. forbruk kWh/100 km"
+Ø Verbraucht kWh="Gj. forbrukt kWh"
+Anzahl Trips="Turantall"
+Fahrzeug="Kjøretøy"
+Innentemperatur [°C]="Innetemperatur [°C]"
+Innentemperatur [°F]="Innetemperatur [°F]"
+
+#Verbrauchsstatistik.json
+Verbrauchsstatistik="Forbruksstatistikk"
+Löschen="Tøm"
+BA_FLEETAPI="Tesla-flåte-API (anbefalt)"
+
+#password_fleet.php
+PF_LOGOUT="Logg ut av din Tesla-konto hvis du allerede er innlogget"
+PF_LINK="LENKE"
+PF_HELP="Hjelpevideo"
+PF_PERMISSION="Info, hvilke tilganger som brukes og hvorfor"
+PF_HERE="her"
+PF_VKEY="Ellers kan du sette opp en virtuell tredjepartsnøkkel"
+PF_LOGIN="Gå til Telsa-identifiseringssiden og tillat at Teslalogger har tilgang til din data"
+PF_OLDSX="Hvis du har en S/X-modell fra før 2021 er du ferdig og kan gå til hovedsiden"
+Zelltemperatur [°C]="Celletemperatur [°C]"
+Zelltemperatur [°F]="Celletemperatur [°F]"
+
+#Trip Monatsstatistik.json
+Datum="Dato"
+Fahrzeit [h]="Kjøretid [t]"
+Verbrauch [kWh]="Forbrukte kWh"
+Ø Verbrauch [kWh]="kWh gj. forbruk"
+Jahr/Monat="År/måned"
+
+#Alle Verbräuche - ScanMyTesla.json
+Alle Verbräuche - ScanMyTesla="Alt forbruk — ScanMyTesla"
+Trip Monatsstatistik="Månedlig turstatistikk"
+Zellspannungen 01-20 - ScanMyTesla="Cellespenninger 01–20 — ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Cellespenninger 21–40 — ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Cellespenninger 41–60 — ScanMyTesla"
+Zellspannungen="Cellespenninger"
+Zellspannung="Cellespenning"
+Ladekosten="Ladekostnader"
+Ladesäule="Ladestasjon"
+Währung="Valuta"
+Kosten pro kWh="Kostnad per kWh"
+Kosten pro Ladung="Kostnad per lading"
+Kosten pro Minute="Kostnad per minutt"
+Kosten Blockiergebühr="Ideell kostnad per minutt"
+Summe="Totalt"
+Missing="Mangler"
+Ø Temperatur="Gj. temperatur"
+Verbraucht="Forbrukt"
+
+#Timeline Plugin.json
+Parking="Parkering"
+Zellspannungen 81-99 - ScanMyTesla="Cellespenninger 81–99 — ScanMyTesla"
+kWh laut Zähler / Rechnung="kWh ifølge teller/faktura"
+Wirkungsgrad="Effektgrad"
+
+#Status.json
+Current Status="Nåværende status"
+Reichweite="Rekkevidde"
+Außentemperatur="Utetemperatur"
+Zelltemperatur="Celletemperatur"
+
+#journeys.php
+Ladezeit [h]="Ladetid [h]"
+Nur verfügbar mit ScanMyTesla="Kun tilgjengelig med ScanMyTesla"

@@ -47,7 +47,10 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
           },
           "decimals": 2,
           "displayName": "",
@@ -358,8 +361,10 @@
                 "value": "locale"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -646,6 +651,66 @@
                 "value": "locale"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP_TACC_perc"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "AP / TACC"
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP / TACC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 93
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP_minutes_max"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "displayName",
+                "value": "AP max"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP max"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 82
+              }
+            ]
           }
         ]
       },
@@ -658,7 +723,9 @@
       "id": 2,
       "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": [
             "consumption_kWh",
             "RangeDiff",
@@ -678,18 +745,19 @@
           }
         ]
       },
-      "pluginVersion": "8.3.2",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
             "type": "mysql",
             "uid": "PC0C98BF192F75B00"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, \noutside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh,\nlat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(EndDate)*1000 as EndDateRAW,\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 1 and TPMS.CarId = trip.CarId) as 'TPMS FL',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 2 and TPMS.CarId = trip.CarId) as 'TPMS FR',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 3 and TPMS.CarId = trip.CarId) as 'TPMS RL',\n(select Round(avg(Pressure),1) from TPMS where TPMS.Datum > Date_add(StartDate, Interval -60 minute) and TPMS.Datum < Date_add(EndDate, Interval 60 minute) and TireId = 4 and TPMS.CarId = trip.CarId) as 'TPMS RR'\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
+          "rawSql": "SELECT UNIX_TIMESTAMP(StartDate)*1000 as StartDate, UNIX_TIMESTAMP(EndDate)*1000 as EndDate,  \nStart_address, End_address, avg_consumption_kWh_100km, consumption_kWh, DurationMinutes, km_diff, StartRange - EndRange as RangeDiff, \noutside_temp_avg, speed_max, power_max, power_min, power_avg, (select km_diff / DurationMinutes * 60) as avg_kmh,\nlat, lng, EndLat, EndLng, UNIX_TIMESTAMP(StartDate)*1000 as StartDateRAW, UNIX_TIMESTAMP(EndDate)*1000 as EndDateRAW, \n(AP_sec_sum/60) / DurationMinutes as 'AP_TACC_perc', AP_sec_max / 60 as AP_minutes_max,\nTPMS_FL as 'TPMS FL', TPMS_FR as 'TPMS FR', TPMS_RL 'TPMS RL', TPMS_RR 'TPMS RR'\nfrom trip WHERE \n  $__timeFilter(StartDate) and km_diff < 1000 and CarID = $Car and (Start_address like '%$Textfilter%' or End_address like '%$Textfilter%')\n\norder by StartDate desc\n",
           "refId": "A",
           "select": [
             [
@@ -701,6 +769,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "timeColumn": "time",
           "where": [
             {
@@ -724,7 +809,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 33,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -742,7 +827,7 @@
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "",
+        "label": "Fahrzeug",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -810,6 +895,6 @@
   "timezone": "",
   "title": "Trip",
   "uid": "Y8upc6ZRk",
-  "version": 41,
+  "version": 48,
   "weekStart": ""
 }

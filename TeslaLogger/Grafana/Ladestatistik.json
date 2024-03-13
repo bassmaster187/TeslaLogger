@@ -24,8 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 16,
-  "iteration": 1682690657793,
   "links": [
     {
       "icon": "external link",
@@ -51,7 +49,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 2,
@@ -240,8 +240,10 @@
                 "value": 1
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -283,8 +285,10 @@
                 "value": "locale"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -391,8 +395,10 @@
                 "value": 1
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -430,8 +436,10 @@
                 "value": "percent"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -653,7 +661,9 @@
       "id": 2,
       "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": [
             "Anzahl",
             "Cost",
@@ -674,7 +684,7 @@
           }
         ]
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
@@ -732,7 +742,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 0,
@@ -788,8 +800,10 @@
                 "value": "locale"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -834,8 +848,11 @@
                 "id": "custom.align"
               },
               {
-                "id": "custom.displayMode",
-                "value": "basic"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge"
+                }
               },
               {
                 "id": "thresholds",
@@ -874,7 +891,9 @@
       "id": 4,
       "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -884,7 +903,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -936,7 +955,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 0,
@@ -987,8 +1008,10 @@
                 "value": "short"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-text"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               },
               {
                 "id": "custom.align"
@@ -1026,8 +1049,11 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "basic"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge"
+                }
               },
               {
                 "id": "thresholds",
@@ -1054,7 +1080,9 @@
       "id": 6,
       "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -1064,7 +1092,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -1166,7 +1194,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -1262,7 +1290,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -1358,7 +1386,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -1454,7 +1482,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -1550,7 +1578,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -1647,7 +1675,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -1728,7 +1756,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1883,7 +1911,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -1979,7 +2007,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -2075,7 +2103,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -2120,6 +2148,13 @@
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
           "decimals": 0,
           "mappings": [
             {
@@ -2147,10 +2182,23 @@
           },
           "unit": "locale"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "amount"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 2,
+        "h": 4,
         "w": 2,
         "x": 18,
         "y": 18
@@ -2159,31 +2207,31 @@
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
             "sum"
           ],
-          "fields": "",
-          "values": false
+          "show": false
         },
-        "textMode": "auto"
+        "showHeader": false,
+        "sortBy": []
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
             "type": "mysql",
             "uid": "000000001"
           },
+          "editorMode": "code",
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT sum(chargingstate.cost_freesuc_savings_total)\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car\r\n\r\n",
+          "rawSql": "SELECT sum(chargingstate.cost_freesuc_savings_total) as amount, chargingstate.cost_currency as currency\r\nFROM            charging inner JOIN chargingstate ON charging.id = chargingstate.StartChargingID INNER JOIN\r\n                         pos ON chargingstate.pos = pos.id \r\n                         LEFT OUTER JOIN\r\n                         charging AS charging_End ON chargingstate.EndChargingID = charging_End.id\r\nwhere $__timeFilter(chargingstate.StartDate) and chargingstate.carid=$Car\r\ngroup by chargingstate.cost_currency\r\nhaving amount > 0 and currency is not null\r\norder by amount desc\r\n",
           "refId": "A",
           "select": [
             [
@@ -2195,6 +2243,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "table": "candata",
           "timeColumn": "datum",
           "timeColumnType": "timestamp",
@@ -2208,7 +2273,7 @@
         }
       ],
       "title": "Free SuC Savings",
-      "type": "stat"
+      "type": "table"
     },
     {
       "datasource": {
@@ -2273,7 +2338,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -2370,7 +2435,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -2446,7 +2511,7 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 18,
+        "x": 20,
         "y": 20
       },
       "id": 20,
@@ -2467,7 +2532,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -2543,7 +2608,7 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 20,
+        "x": 22,
         "y": 20
       },
       "id": 22,
@@ -2563,7 +2628,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -2640,7 +2705,7 @@
         "h": 2,
         "w": 2,
         "x": 22,
-        "y": 20
+        "y": 22
       },
       "id": 21,
       "links": [],
@@ -2659,7 +2724,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "time_series",
@@ -2695,7 +2760,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 36,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2761,6 +2826,6 @@
   "timezone": "",
   "title": "Ladestatistik",
   "uid": "Y4Ptihzgk",
-  "version": 36,
+  "version": 37,
   "weekStart": ""
 }

@@ -2,6 +2,9 @@
 <?php
 require("language.php");
 require_once("tools.php");
+
+$actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 ?>
 <html lang="<?php echo $json_data["Language"]; ?>">
   <head>
@@ -9,7 +12,7 @@ require_once("tools.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php t("Teslalogger Tesla Credentials"); ?></title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
 	<script src="static/jquery/jquery-migrate-1.4.1.min.js"></script>
@@ -333,6 +336,10 @@ if (isset($_REQUEST["id"]))
 <div id="dialog-TokenHelp" title="Info">
 <?php t("TeslaAuthApps"); ?>
 <ul>
+<li><?php t("BA_FLEETAPI"); ?>: <a href="<?php 
+$TeslaFleetURL = str_replace("password.php", "password_fleet.php", $actual_link);
+echo $TeslaFleetURL;
+?>"><?php t("PF_LINK"); ?></a></li>
 <li><?php
 	$t1=get_text("BA_Browser");
 	$t1=str_replace("{", '<a href="javascript:BrowserAuth();">', $t1);
@@ -342,7 +349,6 @@ if (isset($_REQUEST["id"]))
 <li>Android: <a href="https://play.google.com/store/apps/details?id=net.leveugle.teslatokens">Tesla Tokens</a></li>
 <li>iOS: <a href="https://apps.apple.com/us/app/auth-app-for-tesla/id1552058613#?platform=iphone">Auth app for Tesla</a></li>
 </ul>
-
 <div style="display: none" id="browserauth">
 <hr>
 <h1><?php t("BA_Read"); ?></h1>
@@ -420,6 +426,7 @@ else
 			<th><?php t("VIN"); ?></th>
 			<th><?php t("Tasker Token"); ?></th>
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
+			<th style='text-align:center;'>FleetAPI</th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -435,10 +442,16 @@ else
 			$id = $v->{"id"};
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
+			
 			$freesuc = $v->{"freesuc"};
 			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
 			if ($freesuc == "1")
 				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
+
+			$fleetAPI = $v->{"fleetAPI"};
+			$fleetAPICheckBox = '<input type="checkbox" readonly valign="center" />';
+			if ($fleetAPI == "1")
+				$fleetAPICheckBox = '<input type="checkbox" checked="checked" readonly valign="center" />';
 
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
@@ -449,6 +462,7 @@ else
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
+			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
 			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
 			echo t("Edit");
 			echo("</a></td>\r\n");

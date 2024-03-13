@@ -12,7 +12,7 @@ namespace TeslaLogger {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class ApplicationSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static ApplicationSettings defaultInstance = ((ApplicationSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ApplicationSettings())));
@@ -210,6 +210,24 @@ namespace TeslaLogger {
         public bool InitCredentialsLock {
             get {
                 return ((bool)(this["InitCredentialsLock"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("wss://teslalogger.de:4501/ws")]
+        public string TelemetryServerURL {
+            get {
+                return ((string)(this["TelemetryServerURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseTelemetryServer {
+            get {
+                return ((bool)(this["UseTelemetryServer"]));
             }
         }
     }

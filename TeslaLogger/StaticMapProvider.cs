@@ -59,10 +59,10 @@ namespace TeslaLogger
                     if (type.Name == "OSMMapProvider")
                         continue;
 
-                    var a = (StaticMapProvider)Activator.CreateInstance(type);
-                    if (a.UseIt())
+                    StaticMapProvider instanceStaticMapProvider = (StaticMapProvider)Activator.CreateInstance(type);
+                    if (instanceStaticMapProvider.UseIt())
                     {
-                        return a;
+                        _StaticMapProvider = instanceStaticMapProvider;
                     }
 
                     /*if (type.ToString().Contains(Tools.GetMapProvider()))

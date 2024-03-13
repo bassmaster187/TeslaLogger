@@ -12,7 +12,7 @@ End Trip=Fin du trajet
 Time=Date
 StartSOC=EDC Début
 EndSOC=EDC Fin
-SOC diff=EDC diff 
+SOC diff=EDC diff
 Start km=Début km
 End km=Fin km
 Start mi=Début mi
@@ -133,7 +133,6 @@ Außentemperatur [°C]=Température extérieure [°C]
 Außentemperatur [°F]=Température extérieure [°F]
 Innentemperatur [°C]=Température intérieure [°C]
 Innentemperatur [°F]=Température intérieure [°F]
-
 Laden fertig=Recharge terminée
 Schlafen=Sommeil
 Online=En ligne
@@ -220,12 +219,12 @@ Please enter the access token!=Veuillez saisir le code d'accès !
 Please enter the refresh token!=Veuillez saisir le jeton de rafraîchissement !
 Please select a vehicle=Veuillez sélectionner un véhicule
 Check Logfile!=Vérifier le fichier journal !
-Do you really want to delete this vehicle?=Voulez-vous vraiment supprimer ce véhicule ?
+Do you really want to delete this vehicle?="Voulez-vous vraiment supprimer ce véhicule ?"
 Check Logfile in one minute!=Vérifier le fichier journal en une minute !
 Unauthorized=Non autorisé
-This isn't a valid URL!=Ce n'est pas une URL valide !
+This isn't a valid URL!="Ce n'est pas une URL valide !"
 This isn't an auth link by Tesla!=Ce n'est pas un lien d'authentification de Tesla !
-The URL doesn't contain the expected format!=L'URL ne contient pas le format attendu !
+The URL doesn't contain the expected format!="L'URL ne contient pas le format attendu !"
 BA_Browser=Dans le {navigateur} local (recommandé)
 BA_Read=Veuillez lire toutes les étapes avant de continuer :
 BA_Logon=Cliquez sur le lien ci-dessous intitulé <b>Connexion Tesla</b> qui ouvrira un nouvel onglet/fenêtre pour la page de connexion de l'authentification Tesla.
@@ -234,14 +233,14 @@ BA_NotFound=Il en résultera apparemment une "page non trouvée". C'est normal.
 BA_URL=Copiez l'URL de cette page web dans le formulaire ci-dessous. L'URL contient un code unique et temporaire que nous pouvons utiliser pour générer des jetons. Nous l'extrairons pour vous du lien.
 BA_Invalid=Ces liens ne fonctionnent généralement qu'une seule fois. Si un message "Invalid Grant" ou un autre message d'erreur apparaît sur notre site web, vous devrez peut-être recommencer avec le lien Tesla Logon, ce qui devrait produire un nouveau lien.
 BA_Logoff=Si vous souhaitez utiliser un autre compte, vous devez vous déconnecter manuellement {ici!}.
-BA_GetToken=Nous obtiendrons alors les jetons pour votre compte Tesla.
+BA_GetToken="Nous obtiendrons alors les jetons pour votre compte Tesla."
 BA_SelectCar=Sélectionnez la voiture que vous souhaitez utiliser pour le Teslalogger.
 BA_Step1=Étape 1 :
 BA_Step2=Étape 2 :
 BA_Step3=Étape 3 :
 BA_FillOut=Remplissez ce formulaire :
-BA_CopyUrl=Copiez l'adresse URL obtenue comme indiqué
-BA_Paste=Collez l'url obtenue dans la boîte et cliquez sur le bouton "Obtenir des jetons" :
+BA_CopyUrl="Copiez l'adresse URL obtenue comme indiqué"
+BA_Paste="Collez l'URL obtenue dans la boîte et cliquez sur le bouton "_QQ_"Obtenir des jetons"_QQ_" :"
 Get Tokens=Obtenir des jetons
 Access Token=Jeton d'accès
 Refresh Token=Jeton de rafraîchissement
@@ -287,14 +286,14 @@ ScanMyTesla last received=ScanMyTesla reçu pour la dernière fois
 Tasker Token=Clé Tasker
 Tasker URL=URL Tasker
 Received Tasker Token=Clé Tasker reçue
-Show calc. 100% range=Afficher l'autonomie calculée (100%) 
+Show calc. 100% range=Afficher l'autonomie calculée (100%)
 Saved!=Sauvé !
 Temperature=Température
 Sleep=Sommeil
 to=à
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla=Toutes les consommations - ScanMyTesla
+Alle Verbräuche - ScanMyTesla="Toutes les consommations - ScanMyTesla"
 Zelltemperatur [°C]=Température de la cellule [°C]
 Zelltemperatur [°F]=Température de la cellule [°F]
 
@@ -308,21 +307,16 @@ Verbraucht [kWh]=Consommations [kWh]
 Anzahl Trips=Nb de trajet
 Trip Monatsstatistik=Statistiques des trajets mensuels
 Jahr/Monat=Année/Mois
-
-Zellspannungen 01-20 - ScanMyTesla=Tension des cellules 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Tension des cellules 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Tension des cellules 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Tension des cellules 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Tension des cellules 81-99 - ScanMyTesla
-
+Zellspannungen 01-20 - ScanMyTesla="Tension des cellules 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Tension des cellules 21-40 - ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Tension des cellules 41-60 - ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Tension des cellules 61-80 - ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Tension des cellules 81-99 - ScanMyTesla"
 Zellspannungen=Tension des cellules
 Zellspannung=Tension de cellule
-
 Ja=Oui
 Nein=Non
-
 Einschlafen=Sommeil
-
 TextShare=<h1>Partager les courbes de charge / courbes de dégradation de manière anonyme</h1>Nous souhaitons créer une base de données anonyme pour comparer les courbes de dégradation et les courbes de charge. Cela vous permet de comparer votre véhicule avec d'autres à tout moment et de détecter à un stade précoce tout écart inhabituel. Cela peut également être utilisé pour démontrer la pleine efficacité de la batterie lors de la vente du véhicule. Dans le cas contraire, vous pouvez plus facilement prouver une performance réduite face à Tesla Motors.<br><br>Souhaitez-vous partager vos courbes de charge rapide et vos courbes de dégradation avec d'autres conducteurs Tesla de manière totalement anonyme ? Cette décision peut être modifiée à tout moment dans l'écran des paramètres.
 Daten anonym teilen=Partage des données de manière anonyme
 TextSuspendTeslalogger=Teslalogger a été arrêté ! Les données ne seront pas enregistrées !
@@ -334,10 +328,8 @@ Driving=Conduite
 Missing=Perdue
 Ø Temperatur=Température moy.
 Verbraucht=Consommation
-
 Position by StreamingAPI=Position par StreamingAPI
 StreamingPosHelp=<h1>Position par StreamingAPI</h1>Utilise StreamingAPI pour sauvegarder la position de la voiture dans la base de données Teslalogger. Selon la réception de la voiture, cela signifie jusqu'à 5 positions par seconde(comparé à une position toutes les cinq secondes en mode normal). Cela augmentera beaucoup la taille de votre base de données, augmentera l'usure de la carte SD et entraînera d'énormes sauvegardes.
-
 TeslaAuthApps=Vous pouvez utiliser les applications suivantes pour obtenir un accès et une actualisation du serveur Tesla:
 
 #Status.json
@@ -355,7 +347,7 @@ ABRP1=Créer un compte Abetterrouteplanner
 ABRP2=Aller aux paramètres
 ABRP3=Choisissez votre voiture
 ABRP4=Enregistrer votre voiture sur votre compte
-ABRP5=Donnez un nom à votre voiture
+ABRP5="Donnez un nom à votre voiture"
 ABRP6=Cliquez sur "Lien générique" pour obtenir un jeton ABRP
 ABRP7=Copiez le jeton et cliquez sur "Terminé"
 ABRP8=Insérer le jeton dans Teslalogger
@@ -390,6 +382,30 @@ Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=Vehicle kWh
 
+#mqtt.php
+MQTTSettings=MQTT settings
+MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+TopicStructure=Topic structure:
+MQTT1="All values in one JSON (if activated): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
+MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT4="CAR_VIN" is VIN of your car
+MQTT5="ideal_battery_range_km" are single topics
+ADDescription=AutoDiscovery:
+MQTTAD1=""_QQ_"singletopics"_QQ_" are mandatory for AutoDiscovery!"
+ControlTopic=Topic for control:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" and "13" as RAW value
+MQTT7=Supported commands
+RebootAfterSave=Reboot TeslaLogger after save!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson="Publish JSON"
+Singletopics=Publish single topics
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=Vous pouvez établir un lien entre TeslaLogger et SuperChargeBingo pour effectuer des enregistrements automatiques dans les superchargeurs.
@@ -421,11 +437,11 @@ High Frequency Logging=Enregistrement à haute fréquence
 Special Count=Compte spécial
 Count=Compter
 Special Features=Caractéristiques spéciales
-Enable Sentry Mode=Activer le mode sentinelle
-Disable Sentry Mode=Désactiver le mode sentinelle
+Enable Sentry Mode="Activer le mode sentinelle"
+Disable Sentry Mode="Désactiver le mode sentinelle"
 Turn HVAC off=Désactiver le chauffage, la ventilation et la climatisation
 No sleep=Pas de sommeil
-Are you sure you want to delete this geofencing location?=Êtes-vous sûr de vouloir supprimer cet emplacement de geofencing ?
+Are you sure you want to delete this geofencing location?="Êtes-vous sûr de vouloir supprimer cet emplacement de geofencing ?"
 Error=Erreur
 Deleted!=Supprimé !
 Meter=Mètre
@@ -450,12 +466,12 @@ Charge time [h]=Temps de charge [h]
 Distance [mi]=Distance [mi]
 Distance [km]=Distance [km]
 Charging costs=Coûts d'imputation
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=Nouveau voyage
 Journey name=Nom du voyage
 Please wait=Veuillez patienter
 Please select start first=Sélectionnez d'abord le début
-DelJourney=Voulez-vous vraiment supprimer le voyage {id} ?
+DelJourney="Voulez-vous vraiment supprimer le voyage {id} ?"
 Display _MENU_ records per page=Afficher les enregistrements _MENU_ par page
 Nothing found=Rien n'a été trouvé
 Showing _START_ to _END_ of _TOTAL_ entries=Affichage de _START_ à _END_ sur _TOTAL_ entrées
@@ -495,4 +511,5 @@ Restore Database=Restaurer la base de données
 TextRestore1=Veillez à sauvegarder votre Teslalogger avant de restaurer les bases de données. Déplacez votre dossier de sauvegarde de \\RASPBERRY\teslalogger\backup sur votre disque dur !
 TextRestore2=Le processus de restauration peut durer jusqu'à 10 minutes !
 TextRestore3=N'interrompez pas le processus de restauration de quelque manière que ce soit ! Ne rechargez pas la page ! Ne fermez pas cette page !
+
 

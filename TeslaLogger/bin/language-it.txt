@@ -108,7 +108,7 @@ min kW=min kW
 Ø kW=Ø kW
 Ø mph=Ø mph
 Ø km/h=Ø km/h
- 
+
 #Vampir Drain Monatsstatistik.json
 Zeitspanne Stunden=Periodo Ore
 TR mi Verlust pro Stunde=TR mi perse per ora
@@ -132,7 +132,6 @@ Außentemperatur [°C]=Temperatura esterna [°C]
 Außentemperatur [°F]=Temperatura esterna [°F]
 Innentemperatur [°C]=Temperatura interna [°C]
 Innentemperatur [°F]=Temperatura interna [°F]
-
 Laden fertig=Ricarica finita
 Schlafen=Dormiente
 Online=Online
@@ -213,12 +212,12 @@ Please enter the access token!=Inserire il token di accesso!
 Please enter the refresh token!=Inserire il token di aggiornamento!
 Please select a vehicle=Selezionare un veicolo
 Check Logfile!=Controllare il file di registro!
-Do you really want to delete this vehicle?=Volete davvero eliminare questo veicolo?
+Do you really want to delete this vehicle?="Volete davvero eliminare questo veicolo?"
 Check Logfile in one minute!=Controllare il file di registro in un minuto!
 Unauthorized=Non autorizzato
-This isn't a valid URL!=Questo non è un URL valido!
+This isn't a valid URL!="Questo non è un URL valido!"
 This isn't an auth link by Tesla!=Questo non è un link di autorizzazione di Tesla!
-The URL doesn't contain the expected format!=L'URL non contiene il formato previsto!
+The URL doesn't contain the expected format!="L'URL non contiene il formato previsto!"
 BA_Browser=Nel {browser} locale (consigliato)
 BA_Read=Leggere tutti i passaggi prima di continuare:
 BA_Logon=Cliccate sul link sottostante intitolato <b>Tesla Logon</b> che aprirà una nuova scheda/finestra per la pagina di logon di Tesla Authentication.
@@ -227,14 +226,14 @@ BA_NotFound=Il risultato sarà una "Pagina non trovata". Questo è normale.
 BA_URL=Copiate l'URL risultante della pagina web nel modulo sottostante. All'interno dell'URL è presente un codice temporaneo che possiamo utilizzare per generare i token. Lo estrarremo per voi dal link.
 BA_Invalid=Questi collegamenti funzionano in genere una sola volta, quindi se sul nostro sito web appare un messaggio di errore del tipo "Concessione non valida" o altro, potrebbe essere necessario ricominciare con il collegamento Tesla Logon, che dovrebbe produrre un nuovo collegamento.
 BA_Logoff=Se si desidera utilizzare un altro account, è necessario disconnettersi manualmente {qui!}
-BA_GetToken=Otterremo quindi i token per il vostro account Tesla.
+BA_GetToken="Otterremo quindi i token per il vostro account Tesla."
 BA_SelectCar=Selezionare l'auto che si desidera utilizzare per Teslalogger.
 BA_Step1=Fase 1:
 BA_Step2=Fase 2:
 BA_Step3=Fase 3:
 BA_FillOut=Compilate questo modulo:
-BA_CopyUrl=Copiare l'url risultante come mostrato
-BA_Paste=Incollare l'url risultante nella casella e fare clic sul pulsante "Ottenere i gettoni":
+BA_CopyUrl="Copiare l'URL risultante come mostrato"
+BA_Paste="Incollare l'URL risultante nella casella e fare clic sul pulsante "_QQ_"Ottenere i gettoni"_QQ_":"
 Get Tokens=Ottenere i gettoni
 Access Token=Gettone di accesso
 Refresh Token=Gettone di aggiornamento
@@ -285,7 +284,7 @@ Tasker URL=URL Borse
 Received Tasker Token=Token Tasker ricevuto
 
 #Alle Verbräuche - ScanMyTesla.json
-Alle Verbräuche - ScanMyTesla=Tutti i consumi - ScanMyTesla
+Alle Verbräuche - ScanMyTesla="Tutti i consumi - ScanMyTesla"
 Zelltemperatur [°C]=Temperatura celle [°C]
 Zelltemperatur [°F]=Temperature celle [°F]
 
@@ -298,26 +297,21 @@ Verbraucht [kWh]=Consumo KWh
 Ø Verbrauch [kWh]=Ø Consumo KWh
 Anzahl Trips=Conteggio viaggi
 Trip Monatsstatistik=Conteggio viaggi mensile
-
-Zellspannungen 01-20 - ScanMyTesla=Voltaggio celle 01-20 - ScanMyTesla
-Zellspannungen 21-40 - ScanMyTesla=Voltaggio celle 21-40 - ScanMyTesla
-Zellspannungen 41-60 - ScanMyTesla=Voltaggio celle 41-60 - ScanMyTesla
-Zellspannungen 61-80 - ScanMyTesla=Voltaggio celle 61-80 - ScanMyTesla
-Zellspannungen 81-99 - ScanMyTesla=Voltaggio celle 81-99 - ScanMyTesla
-
+Zellspannungen 01-20 - ScanMyTesla="Voltaggio celle 01-20 - ScanMyTesla"
+Zellspannungen 21-40 - ScanMyTesla="Voltaggio celle 21-40 - ScanMyTesla"
+Zellspannungen 41-60 - ScanMyTesla="Voltaggio celle 41-60 - ScanMyTesla"
+Zellspannungen 61-80 - ScanMyTesla="Voltaggio celle 61-80 - ScanMyTesla"
+Zellspannungen 81-99 - ScanMyTesla="Voltaggio celle 81-99 - ScanMyTesla"
 Ja=Si
 Nein=No
-
 Einschlafen=Dormiente
 Automatic updates=Aggiornamenti automatici
-
 TextShare=<h1>Condivisione curve di carica / degradazione in modo anonimo</h1>Vorremmo creare un database anonimo per confrontare le curve di degrado e le curve di carica. Ciò ti consente di confrontare il tuo veicolo con gli altri in qualsiasi momento e di rilevare qualsiasi deviazione insolita in una fase iniziale. Questo può essere utilizzato anche in seguito per dimostrare, durante una eventuale vendita del veicolo, che la batteria è ancora completamente efficiente. In caso negativo, puoi dimostrare più facilmente una prestazione ridotta rispetto a Tesla Motors. <br> <br> Ti piacerebbe condividere le tue curve di ricarica rapida e le curve di degrado con altri proprietari Tesla in modo completamente anonimo? Questa decisione può essere modificata in qualsiasi momento nella schermata delle impostazioni.
 StreamingPosHelp=<h1>Rilevamento della posizione mediante StreamingAPI</h1>Abilita la scrittura della posizione nel DB per mezzo di streaming API - a seconda della posizione della vettura, questo significa fino a 5 posizioni al secondo (rispetto a una posizione ogni 5 secondi in modalità normale), questo implica un notevole incremento delle dimensioni del DB, inoltre, aumenterà l'utilizzo e l'usura della scheda SD e la dimensione dei backup.
 Daten anonym teilen=Condividi i dati anonimamente
 TextSuspendTeslalogger=Teslalogger si è fermato! I dati non verranno memorizzati!
 Resume Teslalogger=Riprendi Teslalogger
 Range=Range
-
 TeslaAuthApps=You can use following apps to get an access token & refresh token from Tesla server:
 
 #abrp.php
@@ -327,7 +321,7 @@ ABRP1=Crea un account Abetterrouteplanner
 ABRP2=Vai a Impostazioni
 ABRP3=Scegli la tua auto
 ABRP4=Salva la tua auto sul tuo account
-ABRP5=Dai un nome alla tua auto
+ABRP5="Dai un nome alla tua auto"
 ABRP6=Clicca su "Link Generic" per ottenere un token ABRP
 ABRP7=Copia il token e fai clic su "Fatto"
 ABRP8=Inserisci il token in Teslalogger
@@ -362,6 +356,30 @@ Version=Version
 Utility kWh=Utility kWh
 Vehicle kWh=Vehicle kWh
 
+#mqtt.php
+MQTTSettings=MQTT settings
+MQTTSettingsInfo=MQTT Host is mandatory. All other settings are optional
+TopicStructure=Topic structure:
+MQTT1="All values in one JSON (if activated): "_QQ_"teslalogger/json/CAR_VIN/currentjson"_QQ_""
+MQTT2=All values as subtopics (if activated): "teslalogger/cars/CAR_VIN/ideal_battery_range_km"
+MQTT3="teslalogger" is parametrizable in field "Topic"
+MQTT4="CAR_VIN" is VIN of your car
+MQTT5="ideal_battery_range_km" are single topics
+ADDescription=AutoDiscovery:
+MQTTAD1=""_QQ_"singletopics"_QQ_" are mandatory for AutoDiscovery!"
+ControlTopic=Topic for control:
+MQTT6="teslalogger/command/CAR_VIN/set_charge_limit" and "13" as RAW value
+MQTT7=Supported commands
+RebootAfterSave=Reboot TeslaLogger after save!
+Host=Host
+Port=Port
+Topic=Topic
+PublishJson="Publish JSON"
+Singletopics=Publish single topics
+ClientID=ClientID
+AutoDiscovery=AutoDiscovery
+AutoDiscoveryTopic=AutoDiscovery Topic
+
 #superchargebingo.php
 SuperChargeBingo=SuperChargeBingo
 SuperChargeBingoComment=È possibile impostare un collegamento da TeslaLogger a SuperChargeBingo per eseguire il check-in automatico presso i Supercharger.
@@ -394,11 +412,11 @@ High Frequency Logging=Registrazione ad alta frequenza
 Special Count=Conteggio speciale
 Count=Conteggio
 Special Features=Caratteristiche speciali
-Enable Sentry Mode=Abilita la modalità Sentinella
-Disable Sentry Mode=Disattivare la modalità Sentry
+Enable Sentry Mode="Abilita la modalità Sentinella"
+Disable Sentry Mode="Disattivare la modalità Sentry"
 Turn HVAC off=Spegnere il sistema HVAC
 No sleep=Non si dorme
-Are you sure you want to delete this geofencing location?=Siete sicuri di voler eliminare questa posizione di geofencing?
+Are you sure you want to delete this geofencing location?="Siete sicuri di voler eliminare questa posizione di geofencing?"
 Error=Errore
 Deleted!=Soppresso!
 Meter=Metri
@@ -422,12 +440,12 @@ Charge time [h]=Tempo di carica [h]
 Distance [mi]=Distanza [mi]
 Distance [km]=Distanza [km]
 Charging costs=Costi di ricarica
-CO2 [kg]=CO2 [kg]
+CO2 [kg]="CO₂ [kg]"
 New Journey=Nuovo viaggio
 Journey name=Nome del viaggio
 Please wait=Attendere prego
 Please select start first=Selezionare prima l'inizio
-DelJourney=Si vuole davvero cancellare il viaggio {id}?
+DelJourney="Si vuole davvero cancellare il viaggio {id}?"
 Display _MENU_ records per page=Visualizzazione di _MENU_ record per pagina
 Nothing found=Non è stato trovato nulla
 Showing _START_ to _END_ of _TOTAL_ entries=Mostra da _START_ a _END_ di _TOTAL_ voci

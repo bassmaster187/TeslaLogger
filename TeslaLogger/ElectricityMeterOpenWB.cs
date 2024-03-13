@@ -14,7 +14,7 @@ namespace TeslaLogger
         string parameter;
         internal int LP = 1;
 
-        Guid guid = new Guid();
+        Guid guid; // defaults to new Guid();
         static WebClient client; 
 
         public ElectricityMeterOpenWB(string host, string parameter)

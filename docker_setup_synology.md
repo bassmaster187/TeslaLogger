@@ -1,4 +1,4 @@
-# Teslalogger Docker Setup on Synology NAS
+# Teslalogger Docker Setup on Synology NAS - DSM 6
 
 ![Image](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/docker-synology.PNG)
 

@@ -195,7 +195,7 @@ namespace TeslaLogger
         {
             try
             {
-                Logfile.Log("FileSystemWatcher");
+                Logfile.Log("FileSystemWatcher: file modified: " + e.FullPath);
 
                 fsw.EnableRaisingEvents = false;
                 
@@ -266,7 +266,9 @@ namespace TeslaLogger
                                 Logfile.Log("GeofencePrivate: Address inserted: " + args[0]);
                             }
 
-                            if (addr.name.StartsWith("Supercharger-V3 ", StringComparison.Ordinal) || addr.name.StartsWith("Ionity ", StringComparison.Ordinal))
+                            if (addr.name.StartsWith("Supercharger-V3 ", StringComparison.Ordinal)
+                                || addr.name.StartsWith("Supercharger-V4 ", StringComparison.Ordinal)
+                                || addr.name.StartsWith("Ionity ", StringComparison.Ordinal))
                             {
                                 addr.name = "\u26A1\u26A1\u26A1 " + addr.name;
                             }
@@ -540,7 +542,7 @@ namespace TeslaLogger
                                 continue;
                             }
 
-                            if (max_power > 150 && !p.name.Contains("V3"))
+                            if (max_power > 150 && (!p.name.Contains("Supercharger-V3") || !p.name.Contains("Supercharger-V4")))
                             {
                                 continue;
                             }

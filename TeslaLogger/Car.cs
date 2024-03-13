@@ -15,15 +15,15 @@ using MySql.Data.MySqlClient;
 namespace TeslaLogger
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     internal class Car
     {
         private TeslaState _currentState = TeslaState.Start;
         internal TeslaState GetCurrentState() { return _currentState; }
 
-        private Address lastRacingPoint = null;
+        private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
         internal SolarChargingBase solarChargingBase;
+        internal TelemetryConnection telemetry;
 
         internal enum TeslaState
         {
@@ -34,7 +34,8 @@ namespace TeslaLogger
             Sleep,
             WaitForSleep,
             Online,
-            GoSleep
+            GoSleep,
+            Inactive
         }
 
         // encapsulate state
@@ -52,13 +53,13 @@ namespace TeslaLogger
         internal DateTime GetLastTryTokenRefresh() { return lastTryTokenRefresh; }
         private string lastSetChargeLimitAddressName = string.Empty;
 
-        private bool goSleepWithWakeup = false;
+        private bool goSleepWithWakeup; // defaults to false;
         internal bool GetGoSleepWithWakeup() { return goSleepWithWakeup; }
         private double odometerLastTrip;
         internal double GetOdometerLastTrip() { return odometerLastTrip; }
-        private bool highFrequencyLogging = false;
+        private bool highFrequencyLogging; // defaults to false;
         internal bool GetHighFrequencyLogging() { return highFrequencyLogging; }
-        private int highFrequencyLoggingTicks = 0;
+        private int highFrequencyLoggingTicks; // defaults to 0;
         internal int GetHighFrequencyLoggingTicks() { return highFrequencyLoggingTicks; }
         private int highFrequencyLoggingTicksLimit = 100;
         internal int GetHighFrequencyLoggingTicksLimit() { return highFrequencyLoggingTicksLimit; }
@@ -83,10 +84,10 @@ namespace TeslaLogger
         internal int CarInDB;
 
         private string modelName;
-        private bool raven = false;
+        private bool raven; // defaults to false;
         private double _wh_TR = 0.190052356;
-        private double dB_Wh_TR = 0;
-        private int dB_Wh_TR_count = 0;
+        private double dB_Wh_TR; // defaults to 0;
+        private int dB_Wh_TR_count; // defaults to 0;
 
         private string car_type = "";
         private string car_special_type = "";
@@ -101,7 +102,7 @@ namespace TeslaLogger
         private string vin = "";
 
         private string aBRP_token = "";
-        private int aBRP_mode = 0;
+        private int aBRP_mode; // defaults to 0;
 
         private string sucBingo_user = "";
         private string sucBingo_apiKey = "";
@@ -116,6 +117,7 @@ namespace TeslaLogger
 
         private bool useTaskerToken = true;
         internal string wheel_type = "";
+        internal bool oldAPIchinaCar = false;
 
         private int charge_point = -1;
 
@@ -174,29 +176,34 @@ namespace TeslaLogger
         private string captcha_String;
         private string reCaptcha_Code;
 
-        internal int LoginRetryCounter = 0;
-        private double sumkm = 0;
-        private double avgkm = 0;
-        private double kwh100km = 0;
-        private double avgsocdiff = 0;
-        private double maxkm = 0;
-        private double carVoltageAt50SOC = 0;
+        internal int LoginRetryCounter; // defaults to 0;
+        private double sumkm; // defaults to 0;
+        private double avgkm; // defaults to 0;
+        private double kwh100km; // defaults to 0;
+        private double avgsocdiff; // defaults to 0;
+        private double maxkm; // defaults to 0;
+        private double carVoltageAt50SOC; // defaults to 0;
 
         private StringBuilder passwortinfo = new StringBuilder();
-        private int year = 0;
-        private bool aWD = false;
-        private bool mIC = false;
-        private bool mIG = false;
+        private int year; // defaults to 0;
+        private bool aWD; // defaults to false;
+        private bool mIC; // defaults to false;
+        private bool mIG; // defaults to false;
         private string motor = "";
         internal bool waitForMFACode;
         internal bool waitForRecaptcha;
         private static object initCredentialsLock = new object();
         private static object _syncRoot = new object();
+        internal bool FleetAPI;
+        internal string FleetApiAddress = "";
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, TeslaState currentState = TeslaState.Start, string wheel_type = "", int charge_point = -1)
+
+        private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
+
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "", int charge_point = -1)
         {
             lock (_syncRoot)
             {
@@ -220,6 +227,7 @@ namespace TeslaLogger
                     this.WhTR = WhTR ?? 0.190;
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
+                    this.FleetAPI = fleetAPI;
                     this.charge_point = charge_point;
 
                     if (charge_point != -1)
@@ -241,6 +249,11 @@ namespace TeslaLogger
                             Name = "Car_" + CarInDB
                         };
                         thread.Start();
+
+                        if (VIN2DBCarID.ContainsKey(vin))
+                            VIN2DBCarID.Remove(vin);
+
+                        VIN2DBCarID.Add(vin, CarInDB);
                     }
                 }
                 catch (Exception ex)
@@ -250,6 +263,15 @@ namespace TeslaLogger
                     ExceptionDispatchInfo.Capture(ex).Throw();
                 }
             }
+        }
+
+        public static int GetCarIDFromVIN(string vin)
+        {
+            if (VIN2DBCarID.ContainsKey(vin))
+            {
+                return VIN2DBCarID[vin];
+            }
+            return -1; // -1 means error as CarID in database can only be a positive integer
         }
 
         private void Loop()
@@ -267,6 +289,19 @@ namespace TeslaLogger
                     CheckNewCredentials();
 
                     InitStage3();
+                    if (ApplicationSettings.Default.UseTelemetryServer)
+                    {
+                        if (FleetAPI && !(CarType == "models" || CarType == "models2" || CarType == "modelx"))
+                        {
+                            telemetry = new TelemetryConnection(this);
+                            if (GetCurrentState() == TeslaState.Online || GetCurrentState() == TeslaState.Drive || GetCurrentState() == TeslaState.Charge)
+                                telemetry.StartConnection();
+                        }
+                    } 
+                    else
+                    {
+                        Log("Telemetry Connection turned off!");
+                    }
                 }
                 finally
                 {
@@ -358,6 +393,12 @@ namespace TeslaLogger
         {
             try
             {
+                if (FleetAPI)
+                {
+                    Log("*** Using FLEET API ***");
+                    CreateExeptionlessFeature("FleetAPI").Submit();
+                }
+
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
                 if (!webhelper.RestoreToken())
@@ -376,6 +417,9 @@ namespace TeslaLogger
                 {
                     ExitCarThread("DBHelper.DBConnectionstring.Length == 0");
                 }
+
+                if (!DbHelper.GetRegion())
+                    webhelper.GetRegion();
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
@@ -463,6 +507,9 @@ namespace TeslaLogger
             run = false;
             thread.Abort();
             Allcars.Remove(this);
+
+            if (VIN2DBCarID.ContainsKey(vin))
+                VIN2DBCarID.Remove(vin);
         }
 
         public void ThreadJoin()
@@ -635,7 +682,7 @@ namespace TeslaLogger
         private void HandleState_Charge()
         {
             {
-                if (!webhelper.IsCharging())
+                if (!webhelper.IsCharging(false, IsHighFrequenceLoggingEnabled()))
                 {
                     SetCurrentState(TeslaState.Start);
                     webhelper.IsDriving(true);
@@ -739,6 +786,21 @@ namespace TeslaLogger
                         Log("STOP communication with Tesla Server to enter sleep Mode! (Timespan Sleep Mode)  https://teslalogger.de/faq-1.php");
                         SetCurrentState(TeslaState.GoSleep);
                         goSleepWithWakeup = true;
+                    }
+                    else if (FleetAPI && (CarType == "model3" || CarType == "modely" || CarType == "lychee" || CarType == "tamarind"))
+                    {
+                        // Log("API not suspended!");
+                        Thread.Sleep(30000);
+                        string res = "";
+                        lock (WebHelper.isOnlineLock)
+                        {
+                            res = webhelper.IsOnline().Result;
+                        }
+                        if (res == "asleep")
+                        {
+                            SetCurrentState(TeslaState.Start);
+                            lastCarUsed = DateTime.Now;
+                        }
                     }
                     else
                     {
@@ -880,18 +942,18 @@ namespace TeslaLogger
                                 // charge_port_door_open == true?
                                 if (GetTeslaAPIState().GetBool("charge_port_door_open", out bool bcharge_port_door_open) && bcharge_port_door_open)
                                 {
-                                    Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
+                                    //Tools.DebugLog($"charge_port_door_open: {charge_port_door_open[TeslaAPIState.Key.Value]}");
                                     long now = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
                                     // check if charge_port_door_open value True is not older than 1 minute
                                     if (long.TryParse(charge_port_door_open[TeslaAPIState.Key.ValueLastUpdate].ToString(), out long valueLastUpdate))
                                     {
-                                        Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
+                                        //Tools.DebugLog($"charge_port_door_open now {now} vlu {valueLastUpdate} diff {now - valueLastUpdate}");
                                         if (now - valueLastUpdate < 60000)
                                         {
                                             // charge_port_door_open changed to Charging less than 1 minute ago
                                             // reduce sleepduration to 0.5 second
                                             sleepduration = 500;
-                                            Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
+                                            //Tools.DebugLog($"charge_port_door_open sleepduration: {sleepduration}");
                                         }
                                     }
                                 }
@@ -954,6 +1016,9 @@ namespace TeslaLogger
             {
                 //Log(res);
                 SetCurrentState(TeslaState.Online);
+                if (FleetAPI && String.IsNullOrEmpty(FleetApiAddress))
+                    webhelper.GetRegion();
+
                 webhelper.IsDriving(true);
                 webhelper.ResetLastChargingState();
                 DbHelper.StartState(res);
@@ -1017,7 +1082,7 @@ namespace TeslaLogger
 
                 Log("Unhandled State: " + res);
 
-                Thread.Sleep(30000);
+                Thread.Sleep(60000);
             }
         }
 
@@ -1057,7 +1122,7 @@ namespace TeslaLogger
         }
 
 
-        private void CheckNewCredentials()
+        private static void CheckNewCredentials()
         {
             /* TODO
             try
@@ -1356,6 +1421,12 @@ namespace TeslaLogger
             Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             CurrentJSON.CreateCurrentJSON();
 
+            // any -> Sleep
+            if (_oldState != TeslaState.Sleep && _newState == TeslaState.Sleep)
+            {
+                telemetry?.CloseConnection();
+            }
+
             // any -> Start
             if (_oldState != TeslaState.Start && _newState == TeslaState.Start)
             {
@@ -1369,12 +1440,14 @@ namespace TeslaLogger
             // sleeping -> any
             if (_oldState == TeslaState.Sleep && _newState != TeslaState.Sleep)
             {
+                telemetry?.StartConnection();
                 CurrentJSON.current_falling_asleep = false;
                 CurrentJSON.CreateCurrentJSON();
             }
             // Start -> Online - Update Car Version after Update
             if (_oldState == TeslaState.Start && _newState == TeslaState.Online)
             {
+                telemetry?.StartConnection();
                 _ = webhelper.GetOdometerAsync();
                 Tools.DebugLog($"#{CarInDB}:Start -> Online SendDataToAbetterrouteplannerAsync(utc:{Tools.ToUnixTime(DateTime.UtcNow) * 1000}, soc:{CurrentJSON.current_battery_level}, speed:0, charging:false, power:0, lat:{CurrentJSON.GetLatitude()}, lon:{CurrentJSON.GetLongitude()})");
                 _ = webhelper.SendDataToAbetterrouteplannerAsync(Tools.ToUnixTime(DateTime.UtcNow) * 1000, CurrentJSON.current_battery_level, 0, false, 0, CurrentJSON.GetLatitude(), CurrentJSON.GetLongitude());
@@ -1497,7 +1570,7 @@ namespace TeslaLogger
             ThreadJoin();
         }
 
-        private void SetCurrentState(TeslaState _newState)
+        internal void SetCurrentState(TeslaState _newState)
         {
             if (_currentState != _newState)
             {
@@ -1643,7 +1716,8 @@ namespace TeslaLogger
 
         public bool TLUpdatePossible()
         {
-            if (GetCurrentState() == Car.TeslaState.Sleep)
+            var carState = GetCurrentState();
+            if (carState == Car.TeslaState.Sleep || carState == Car.TeslaState.Start || carState == Car.TeslaState.Inactive)
             {
                 return true;
             }
@@ -1800,8 +1874,9 @@ id = @carid", con))
                         .AddObject(CarType, "CarType")
                         .AddObject(CarSpecialType, "CarSpecialType")
                         .AddObject(TrimBadging, "CarTrimBadging")
-                        .AddObject(wheel_type, "wheel_type");
-
+                        .AddObject(CurrentJSON.current_car_version, "CarVersion")
+                        .AddObject(wheel_type, "wheel_type")
+                        .AddObject(FleetAPI, "FleetAPI");
             return b;
         }
 
@@ -1813,7 +1888,9 @@ id = @carid", con))
                 .AddObject(CarType, "CarType")
                 .AddObject(CarSpecialType, "CarSpecialType")
                 .AddObject(TrimBadging, "CarTrimBadging")
-                .AddObject(wheel_type, "wheel_type");
+                .AddObject(CurrentJSON.current_car_version, "CarVersion")
+                .AddObject(wheel_type, "wheel_type")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
         }
@@ -1825,9 +1902,24 @@ id = @carid", con))
                 .AddObject(ModelName, "ModelName")
                 .AddObject(CarType, "CarType")
                 .AddObject(CarSpecialType, "CarSpecialType")
-                .AddObject(TrimBadging, "CarTrimBadging");
+                .AddObject(TrimBadging, "CarTrimBadging")
+                .AddObject(FleetAPI, "FleetAPI");
 
             return b;
+        }
+
+        public bool UseCommandProxyServer()
+        {
+            if (FleetAPI)
+            {
+                if (CarType == "models" || CarType == "modelx" || CarType == "models2")
+                    return false;
+
+                return true;
+            }
+
+
+            return false;
         }
     }   
 }

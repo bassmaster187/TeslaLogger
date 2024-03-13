@@ -144,8 +144,12 @@ namespace TeslaLogger
                 //{"locale", "en-US" },
             };
 
+            var url = client.BaseAddress;
+            if (code.StartsWith("CN"))
+                url = new Uri("https://auth.tesla.cn/");
+
             var content = new StringContent(body.ToString(Newtonsoft.Json.Formatting.None), Encoding.UTF8, "application/json");
-            var result = await client.PostAsync(client.BaseAddress + "oauth2/v3/token", content, cancellationToken);
+            var result = await client.PostAsync(url + "oauth2/v3/token", content, cancellationToken);
             if (!result.IsSuccessStatusCode)
             {
                 var failureDetails = result.Content.ReadAsStringAsync().Result;

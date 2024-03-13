@@ -89,7 +89,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -184,7 +184,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -279,7 +279,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -367,7 +367,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -406,7 +406,7 @@
         "type": "mysql",
         "uid": "000000001"
       },
-      "description": "Nur verfügbar mit ScanMyTesla",
+      "description": "Nur verfügbar mit ScanMyTesla oder Fleet API",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -454,20 +454,20 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "fields": "/^Cell Temperature$/",
           "values": false
         },
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT val as 'Zelltemperatur'\nFROM can\nWHERE $__timeFilter(datum) and carid=$Car  and id = 2 and datum > \n(\n    SELECT $__time(StartDate)\n    FROM state \n    WHERE  \n    $__timeFilter(startdate) and carid=$Car \n    \n    union\n    SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \n    union \n    SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n    \n    union\n    SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \n    union\n    SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n    \n    order by time_sec desc\n    Limit 1\n)\nORDER BY datum DESC Limit 1",
+          "rawSql": "select * FROM \n(\n    SELECT val as 'Cell Temperature', datum\n    FROM can\n    WHERE $__timeFilter(datum) and carid=$Car  and id = 2 and datum > \n    (\n        SELECT $__time(StartDate)\n        FROM state \n        WHERE  \n        $__timeFilter(startdate) and carid=$Car \n        \n        union\n        SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \n        union \n        SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n        \n        union\n        SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \n        union\n        SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n        \n        order by time_sec desc\n        Limit 1\n    )\n    union\n    SELECT moduleTempMin as 'Cell Temperature', date as datum FROM battery where carid = $Car and $__timeFilter(date) and moduleTempMin is not null and date > \n    (\n        SELECT $__time(StartDate)\n        FROM state \n        WHERE  \n        $__timeFilter(startdate) and carid=$Car \n        \n        union\n        SELECT $__time(StartDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car \n        union \n        SELECT $__time(EndDate) FROM trip WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL /* end of trip is online */\n        \n        union\n        SELECT $__time(StartDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  \n        union\n        SELECT $__time(EndDate) FROM chargingstate WHERE $__timeFilter(StartDate) and carid=$Car  and EndDate IS NOT NULL  /* end of charging is online */\n        \n        order by time_sec desc\n        Limit 1\n)\n) a\norder by datum\n",
           "refId": "A",
           "select": [
             [
@@ -479,6 +479,23 @@
               }
             ]
           ],
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
           "table": "candata",
           "timeColumn": "datum",
           "timeColumnType": "timestamp",
@@ -546,7 +563,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -631,7 +648,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
@@ -720,7 +737,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
@@ -810,7 +827,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -895,7 +912,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "format": "table",
@@ -980,7 +997,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
@@ -1069,7 +1086,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.22",
+      "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
@@ -1300,7 +1317,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 36,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1318,7 +1335,7 @@
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
-        "label": "",
+        "label": "Car",
         "multi": false,
         "name": "Car",
         "options": [],
@@ -1355,6 +1372,6 @@
   "timezone": "",
   "title": "Status",
   "uid": "8-3cGWmRk",
-  "version": 19,
+  "version": 15,
   "weekStart": ""
 }

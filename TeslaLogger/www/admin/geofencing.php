@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teslalogger geofencing V1.1</title>
 	<link rel="stylesheet" href="static/jquery/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="static/teslalogger_style.css">
+	<link rel="stylesheet" href="static/teslalogger_style.css?v=4">
 	<link rel="stylesheet" href="static/leaflet/1.4.0/leaflet.css" />
+	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.css" />
+  	<link rel="stylesheet" href="static/leaflet/1.4.0/MarkerCluster.Default.css" />
+
    <!-- Make sure you put this AFTER Leaflet's CSS -->
 	<script src="static/leaflet/1.4.0/leaflet.js"></script>
+	<script src="static/leaflet/1.4.0/leaflet.markercluster.js"></script>
 	
 	<script src="static/jquery/jquery-1.12.4.js"></script>
 	<script src="static/jquery/ui/1.12.1/jquery-ui.js"></script>
@@ -22,9 +26,11 @@
 	var greenIcon = null;
 	var markerArray = [];
 	var circle = null;
+	var markers = L.markerClusterGroup();
 
 	<?PHP
 	$csv = array();
+	
 	$fp = fopen('/etc/teslalogger/geofence.csv', 'rb');
 	
 	while(!feof($fp)) {
@@ -37,6 +43,7 @@
 		
 	}
 	fclose($fp);
+	
 	
 	$i = 0;
 	$csv2 = array();
@@ -87,7 +94,7 @@
       })
     }).addTo(map);
 	
-	greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});
+	greenIcon = L.icon({iconUrl: 'img/marker-icon-green.png', shadowUrl: 'https://unpkg.com/leaflet@1.4.0/dist/images/marker-shadow.png', iconAnchor:   [12, 40], popupAnchor:  [0, -25]});	
 	<?PHP
 	
 	echo("<!-- Start geofence private -->\r\n");
@@ -116,6 +123,8 @@
 		$name = addslashes($value[0]);
 		echo("im('$name',$value[1],$value[2]);\r\n");
 	}
+
+	echo "map.addLayer(markers);\r\n";
 	
 	if (!$inserted)
 		echo("map.setView(new L.LatLng(50, 8),6);");
@@ -136,7 +145,8 @@ function im(name, lat, lng)
 	var markerLocation = new L.LatLng(lat, lng);
 	var marker = new L.Marker(markerLocation);
 	marker.bindPopup(name);
-	marker.addTo(map);
+	//marker.addTo(map);
+	markers.addLayer(marker); 
 }
 
 function sf(lat, lng, radius)

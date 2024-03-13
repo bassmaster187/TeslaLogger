@@ -65,5 +65,11 @@
     <Setting Name="InitCredentialsLock" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="TelemetryServerURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">wss://teslalogger.de:4501/ws</Value>
+    </Setting>
+    <Setting Name="UseTelemetryServer" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

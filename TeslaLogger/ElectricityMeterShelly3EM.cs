@@ -22,7 +22,7 @@ namespace TeslaLogger
 
         internal string mockup_status, mockup_shelly;
 
-        Guid guid = new Guid();
+        Guid guid; // defaults to new Guid();
         static WebClient client;
 
         public ElectricityMeterShelly3EM(string host, string paramater)

@@ -2,7 +2,7 @@
 I'm using the free Visual Studio 2019 Community Edition https://visualstudio.microsoft.com/de/vs/ on Windows. You can also use it on MacOS but with a couple of limitations. 
 For web development I'm using the free Visual Studio Code https://code.visualstudio.com/ with a couple of plugins. PHP, JavaScript, CCS, Emmet
 
-I think the best way to setup a dev enviroment is to run a docker on local machine and stop the Teslalogger container. https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md
+I think the best way to setup a dev environment is to run a docker on local machine and stop the Teslalogger container. https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md
 
 If you want to debug the internal WebServer of Teslalogger (HttpListener in WebServer.cs) you have to change some files:
 - GetTeslaloggerURL() in tools.php

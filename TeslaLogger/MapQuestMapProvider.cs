@@ -12,7 +12,7 @@ namespace TeslaLogger
     {
         WebClient _webClient;
         object _webClientLock = new object();
-        static bool invalidAppKey = false;
+        static bool invalidAppKey; // defaults to false;
 
 
         public override void CreateChargingMap(double lat, double lng, int width, int height, MapMode mapmode, MapSpecial special, string filename)

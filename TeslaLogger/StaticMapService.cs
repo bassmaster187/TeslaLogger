@@ -20,8 +20,8 @@ namespace TeslaLogger
             private MapMode mode = MapMode.Regular;
             private MapSpecial special = MapSpecial.None;
             private MapType type = MapType.Trip;
-            private int width = 0;
-            private int height = 0;
+            private int width; // defaults to 0;
+            private int height; // defaults to 0;
 
             internal MapType Type { get => type; set => type = value; }
             internal int Width { get => width; set => width = value; }
@@ -65,8 +65,8 @@ namespace TeslaLogger
             public double Lng { get; }
         }
 
-        private static StaticMapService _StaticMapService = null;
-        private static StaticMapProvider _StaticMapProvider = null;
+        private static StaticMapService _StaticMapService; // defaults to null;
+        private static StaticMapProvider _StaticMapProvider; // defaults to null;
 
         private readonly ConcurrentQueue<Request> queue = new ConcurrentQueue<Request>();
 
@@ -139,6 +139,7 @@ namespace TeslaLogger
             //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
             if (_StaticMapProvider != null)
             {
+                int queueLength = queue.Count;
                 if (queue.TryDequeue(out Request request))
                 {
                     //Tools.DebugLog("StaticMapService:Work() queue:" + queue.Count + " MapProvider:" + _StaticMapProvider);
@@ -198,11 +199,16 @@ namespace TeslaLogger
                             }
                         }
                     }
+                    // if the queue reaches zero entries, and we're on RasPi, then restart Grafana to have the new maps visible
+                    if (queueLength == 1 && queue.IsEmpty && !Tools.IsDocker())
+                    {
+                        Tools.ExecMono("service", "grafana-server restart");
+                    }
                 }
             }
         }
 
-        private DataTable TripToCoords(TripRequest request)
+        private static DataTable TripToCoords(TripRequest request)
         {
             DataTable dt = new DataTable();
             int CarID = int.MinValue;
@@ -423,7 +429,7 @@ ORDER BY
             return sb.ToString();
         }
 
-        internal void CreateChargingMapOnChargingCompleted(int CarID)
+        internal static void CreateChargingMapOnChargingCompleted(int CarID)
         {
             try
             {
@@ -469,7 +475,7 @@ WHERE
             }
         }
 
-        internal void CreateParkingMapFromPosid(int posID)
+        internal static void CreateParkingMapFromPosid(int posID)
         {
             try
             {
