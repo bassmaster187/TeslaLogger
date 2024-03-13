@@ -830,7 +830,7 @@ namespace TeslaLogger
                                     CurrentJSON.current_falling_asleep = true;
                                     CurrentJSON.CreateCurrentJSON();
 
-                                    for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
+                                    for (int x = 0; x < Program.SuspendAPIMinutes * 10; x++)
                                     {
                                         if (webhelper.DrivingOrChargingByStream)
                                         {
