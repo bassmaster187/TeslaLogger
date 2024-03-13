@@ -212,6 +212,8 @@ namespace TeslaLogger
                 string tasker_hash = r["tasker_hash"] as String ?? "";
                 double? wh_tr = r["wh_tr"] as double?;
                 string wheel_type = r["wheel_type"] as String ?? "";
+                int charge_point = Convert.ToInt32(r["charge_point"], Tools.ciDeDE);
+
                 bool raven = false;
                 if (r["raven"] != DBNull.Value && Convert.ToInt32(r["raven"]) == 1)
                     raven = true;
@@ -222,8 +224,9 @@ namespace TeslaLogger
 
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
-                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
+                Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type, charge_point);
                 car.Raven = raven;
+
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)

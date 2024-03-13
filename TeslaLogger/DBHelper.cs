@@ -4700,7 +4700,7 @@ WHERE
         private DateTime lastChargingInsert = DateTime.Today;
 
 
-        internal void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request)
+        internal void InsertCharging(string timestamp, string battery_level, string charge_energy_added, string charger_power, double ideal_battery_range, double battery_range, string charger_voltage, string charger_phases, string charger_actual_current, double? outside_temp, bool forceinsert, string charger_pilot_current, string charge_current_request, string charger_phases_calc, string charger_power_calc_w)
         {
             Tools.SetThreadEnUS();
 
@@ -4761,10 +4761,12 @@ INSERT
         battery_level,
         charge_energy_added,
         charger_power,
+        charger_power_calc_w,
         ideal_battery_range_km,
         battery_range_km,
         charger_voltage,
         charger_phases,
+        charger_phases_calc,
         charger_actual_current,
         outside_temp,
         charger_pilot_current,
@@ -4777,10 +4779,12 @@ VALUES(
     @battery_level,
     @charge_energy_added,
     @charger_power,
+    @charger_power_calc_w,
     @ideal_battery_range_km,
     @battery_range_km,
     @charger_voltage,
     @charger_phases,
+    @charger_phases_calc,
     @charger_actual_current,
     @outside_temp,
     @charger_pilot_current,
@@ -4793,10 +4797,12 @@ VALUES(
                         cmd.Parameters.AddWithValue("@battery_level", battery_level);
                         cmd.Parameters.AddWithValue("@charge_energy_added", charge_energy_added);
                         cmd.Parameters.AddWithValue("@charger_power", charger_power);
+                        cmd.Parameters.AddWithValue("@charger_power_calc_w", charger_power_calc_w);
                         cmd.Parameters.AddWithValue("@ideal_battery_range_km", kmIdeal_Battery_Range);
                         cmd.Parameters.AddWithValue("@battery_range_km", kmBattery_Range);
                         cmd.Parameters.AddWithValue("@charger_voltage", int.Parse(charger_voltage, Tools.ciEnUS));
                         cmd.Parameters.AddWithValue("@charger_phases", charger_phases);
+                        cmd.Parameters.AddWithValue("@charger_phases_calc", charger_phases_calc);
                         cmd.Parameters.AddWithValue("@charger_actual_current", charger_actual_current);
                         cmd.Parameters.AddWithValue("@battery_heater", car.CurrentJSON.current_battery_heater ? 1 : 0);
 
@@ -4840,6 +4846,7 @@ VALUES(
 
                 car.CurrentJSON.current_charge_energy_added = Convert.ToDouble(charge_energy_added, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_power = Convert.ToInt32(charger_power, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_power_calc_w = Convert.ToInt32(charger_power_calc_w, Tools.ciEnUS);
                 if (kmIdeal_Battery_Range >= 0)
                 {
                     car.CurrentJSON.current_ideal_battery_range_km = kmIdeal_Battery_Range;
@@ -4852,8 +4859,10 @@ VALUES(
 
                 car.CurrentJSON.current_charger_voltage = int.Parse(charger_voltage, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_phases = Convert.ToInt32(charger_phases, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_phases_calc = Convert.ToInt32(charger_phases_calc, Tools.ciEnUS);
                 car.CurrentJSON.current_charger_actual_current = Convert.ToInt32(charger_actual_current, Tools.ciEnUS);
                 car.CurrentJSON.current_charge_current_request = Convert.ToInt32(charge_current_request, Tools.ciEnUS);
+                car.CurrentJSON.current_charger_pilot_current = Convert.ToInt32(charger_pilot_current, Tools.ciEnUS);
                 car.CurrentJSON.CreateCurrentJSON();
             }
             catch (Exception ex)
@@ -7074,5 +7083,6 @@ WHERE
                 ex.ToExceptionless().FirstCarUserID().Submit();
             }
         }
+
     }
 }

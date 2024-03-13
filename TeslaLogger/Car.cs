@@ -22,6 +22,7 @@ namespace TeslaLogger
 
         private Address lastRacingPoint; // defaults to null;
         internal WebHelper webhelper;
+        internal SolarChargingBase solarChargingBase;
         internal TelemetryConnection telemetry;
 
         internal enum TeslaState
@@ -118,6 +119,8 @@ namespace TeslaLogger
         internal string wheel_type = "";
         internal bool oldAPIchinaCar = false;
 
+        private int charge_point = -1;
+
         public double WhTR
         {
             get => _wh_TR;
@@ -197,9 +200,10 @@ namespace TeslaLogger
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
 
+
         private static readonly Dictionary<string, int> VIN2DBCarID = new Dictionary<string, int>();
 
-        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "")
+        public Car(int CarInDB, string TeslaName, string TeslaPasswort, int CarInAccount, string TeslaToken, DateTime TeslaTokenExpire, string ModelName, string cartype, string carspecialtype, string cartrimbadging, string displayname, string vin, string TaskerHash, double? WhTR, bool fleetAPI, TeslaState currentState = TeslaState.Start, string wheel_type = "", int charge_point = -1)
         {
             lock (_syncRoot)
             {
@@ -224,6 +228,12 @@ namespace TeslaLogger
                     this._currentState = currentState;
                     this.wheel_type = wheel_type;
                     this.FleetAPI = fleetAPI;
+                    this.charge_point = charge_point;
+
+                    if (charge_point != -1)
+                    {
+                        solarChargingBase = new SolarChargingOpenWB(this);
+                    }
 
                     if (CarInDB > 0)
                     {

@@ -355,6 +355,12 @@ namespace TeslaLogger
                     case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/sucbingo/[0-9]+/set"):
                         SuCBingo_Set(request, response);
                         break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/info"):
+                        MQTT_Info(request, response);
+                        break;
+                    case bool _ when Regex.IsMatch(request.Url.LocalPath, @"/mqtt/set"):
+                        MQTT_Set(request, response);
+                        break;
                     case bool _ when request.Url.LocalPath.Equals("/debug/TeslaLogger/states", System.StringComparison.Ordinal):
                         Debug_TeslaLoggerStates(request, response);
                         break;

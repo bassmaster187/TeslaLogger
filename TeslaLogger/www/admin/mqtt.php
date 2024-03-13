@@ -100,6 +100,7 @@ global $display_name;
 
 <h5><?php t("RebootAfterSave"); ?><h5>
 </div>
+
 <table>
 <tr>
     <td><?php t("Host"); ?>: </td><td><input id="host" size="40" value="<?= $mqtt_host ?>"/></td>
