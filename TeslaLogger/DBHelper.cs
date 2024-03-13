@@ -4404,7 +4404,7 @@ WHERE
                         }
                     }
 
-                    KVS.InsertOrUpdate("UpdateAllDrivestateData", 1);
+                    KVS.InsertOrUpdate("UpdateAllDrivestateData", 2);
                 }
             }
             catch (Exception ex)
@@ -6980,7 +6980,7 @@ WHERE
                     ) T3
                     where startstate = 1 ", con))
                     {
-                        car.Log("SQL: " + cmd.CommandText);
+                        // car.Log("SQL: " + cmd.CommandText);
 
                         var dr = cmd.ExecuteReader();
                         if (dr.Read())

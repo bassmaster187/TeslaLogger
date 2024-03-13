@@ -263,7 +263,7 @@ namespace TeslaLogger
 
                 DBHelper.EnableMothership();
 
-                if (KVS.Get("UpdateAllDrivestateData", out int UpdateAllDrivestateDataInt) == KVS.NOT_FOUND)
+                if (KVS.Get("UpdateAllDrivestateData", out int UpdateAllDrivestateDataInt) == KVS.NOT_FOUND || UpdateAllDrivestateDataInt < 2)
                 {
                     UpdateAllDrivestateDateThread();
                 }
