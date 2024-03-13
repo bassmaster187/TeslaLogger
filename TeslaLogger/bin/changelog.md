@@ -1,3 +1,7 @@
+# Version 1.57.9
+- New Wallbox supported: cFos
+- New Wallbox supported: EVCC
+
 # Version 1.57.8
 - Dashboard consumption shows the usage of Autopilot / TACC in different colors (Fleet Telemetry). [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Autopilot.PNG)
 
