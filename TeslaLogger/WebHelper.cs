@@ -1,9 +1,6 @@
 ﻿using Exceptionless;
 using Exceptionless.Logging;
-using Exceptionless.Models.Data;
-using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -20,19 +17,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Caching;
-using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using ZstdSharp.Unsafe;
 using static TeslaLogger.Car;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     public class WebHelper : IDisposable
     {
@@ -778,10 +772,15 @@ namespace TeslaLogger
                             return "";
                         }
 
-                        dynamic j = JsonConvert.DeserializeObject(result);
-                        string access_token = j["access_token"];
+                        dynamic jsonResult = JsonConvert.DeserializeObject(result);
+                        if (jsonResult.ContainsKey("expires_in"))
+                        {
+                            Tools.DebugLog("access token expires: " + DateTime.Now.AddSeconds(jsonResult["expires_in"]));
+                            // timer callback: UpdateTeslaTokenFromRefreshToken()
+                        }
+                        string access_token = jsonResult["access_token"];
 
-                        string new_refresh_token = j["refresh_token"];
+                        string new_refresh_token = jsonResult["refresh_token"];
                         CheckNewRefreshToken(refresh_token, new_refresh_token);
 
                         SetNewAccessToken(access_token);
