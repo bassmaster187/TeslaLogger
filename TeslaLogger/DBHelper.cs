@@ -4291,7 +4291,7 @@ WHERE
 
         private void GetAVG_TPMS(DateTime startDT, DateTime endDT, out double tPMS_FL, out double tPMS_FR, out double tPMS_RL, out double tPMS_RR)
         {
-            car.Log($"GetAVG_TPMS {startDT.ToString()}");
+            // car.Log($"GetAVG_TPMS {startDT.ToString()}");
             tPMS_FL = -1;
             tPMS_FR = -1;
             tPMS_RL = -1;
@@ -6952,7 +6952,7 @@ WHERE
 
         public bool GetAutopilotSeconds(DateTime start, DateTime end, out int sumsec, out int maxsec)
         {
-            car.Log("GetAutopilotSeconds");
+            // car.Log("GetAutopilotSeconds");
             var svStart = start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
             var svEnd = end.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
 
@@ -6985,7 +6985,7 @@ WHERE
                         var dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            car.Log("GetAutopilotSeconds read:");
+                            // car.Log("GetAutopilotSeconds read:");
 
                             if (dr["sumsec"] != DBNull.Value)
                                 sumsec = Convert.ToInt32(dr["sumsec"]);
