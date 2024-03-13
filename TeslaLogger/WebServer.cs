@@ -220,6 +220,10 @@ namespace TeslaLogger
                         case "telemetryclose/":
                             TelemetryClose(response, url);
                             return;
+
+                        case "updatedrivestatistics/":
+                            UpdateDriveStatistics(response, url);
+                            return;
                     }
                 }
 
@@ -409,6 +413,46 @@ namespace TeslaLogger
             {
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
+            }
+        }
+
+        private void UpdateDriveStatistics(HttpListenerResponse response, Uri url)
+        {
+            Logfile.Log("WebServer UpdateDriveStatistics. " + url.Segments[2].ToString());
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate where id = @id", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", url.Segments[2].ToString());
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read())
+                    {
+                        try
+                        {
+                            int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                            int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
+                            int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
+
+                            Car c = Car.GetCarByID(CarId);
+                            if (c != null)
+                            {
+                                c.DbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                                WriteString(response, @"ok");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"drivestate not found!");
+                    }
+                }
             }
         }
 

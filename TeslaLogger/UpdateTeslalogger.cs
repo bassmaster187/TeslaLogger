@@ -384,6 +384,35 @@ namespace TeslaLogger
                 DBHelper.ExecuteSQLQuery(sql);
                 Logfile.Log("CREATE TABLE OK");
             }
+
+            if (!DBHelper.TableExists("celltemperature"))
+            {
+                string sql = @"CREATE 
+                    VIEW `celltemperature` AS
+                        SELECT 
+                            `can`.`CarID` AS `carid`,
+                            `can`.`datum` AS `date`,
+                            `can`.`val` AS `CellTemperature`,
+                            1 AS `source`
+                        FROM
+                            `can`
+                        WHERE
+                            `can`.`id` = 3 
+                        UNION SELECT 
+                            `battery`.`CarID` AS `carid`,
+                            `battery`.`date` AS `datum`,
+                            `battery`.`ModuleTempMin` AS `CellTemperature`,
+                            2 AS `source`
+                        FROM
+                            `battery`
+                        WHERE
+                            `battery`.`ModuleTempMin` IS NOT NULL";
+
+                Logfile.Log(sql);
+                UpdateTeslalogger.AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(sql);
+                Logfile.Log("CREATE VIEW OK");
+            }
         }
 
         private static void CheckDBSchema_Cruisestate()

@@ -310,6 +310,8 @@ namespace TeslaLogger
                                         cmd.Parameters.AddWithValue("@date", d);
                                         cmd.Parameters.AddWithValue("@state", state);
                                         cmd.ExecuteNonQuery();
+
+                                        car.Log("Telemetry Server: Cruise State");
                                     }
                                 }
                             }
