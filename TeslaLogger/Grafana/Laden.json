@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -11,7 +14,10 @@
         "type": "dashboard"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
@@ -23,7 +29,10 @@
         "type": "tags"
       },
       {
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "enable": true,
         "hide": false,
         "iconColor": "#56A64B",
@@ -37,9 +46,8 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1606521851980,
   "links": [
     {
       "icon": "external link",
@@ -51,13 +59,17 @@
       "url": "http://raspberry/admin/"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "teslalogger",
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
+      },
       "decimals": 2,
       "fill": 0,
       "fillGradient": 0,
@@ -88,56 +100,68 @@
         "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "10.0.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:40",
           "alias": "Ladespannung [V]",
           "fill": 0,
           "yaxis": 2
         },
         {
+          "$$hashKey": "object:41",
           "alias": "Reichweite [km]",
           "yaxis": 2
         },
         {
+          "$$hashKey": "object:42",
           "alias": "Ladespannung [V]",
           "steppedLine": true
         },
         {
+          "$$hashKey": "object:43",
           "alias": "BMS max charge [kW]",
           "fill": 0
         },
         {
+          "$$hashKey": "object:44",
           "alias": "Zelltemperatur [°C]",
           "fill": 0
         },
         {
+          "$$hashKey": "object:45",
           "alias": "Cell imbalance [mV]",
           "fill": 0,
           "steppedLine": true,
           "yaxis": 2
         },
         {
+          "$$hashKey": "object:46",
           "alias": "Pilot [A]",
           "fill": 0
         },
         {
+          "$$hashKey": "object:47",
           "alias": "Leistung [kW]",
           "fill": 1
         },
         {
+          "$$hashKey": "object:48",
           "alias": "SOC [%]",
           "fill": 1
         },
         {
+          "$$hashKey": "object:49",
           "alias": "Battery Heater",
           "color": "#C4162A",
           "fill": 1,
           "steppedLine": true
         },
         {
+          "$$hashKey": "object:50",
           "alias": "Battery charge Ampere [A]",
           "yaxis": 2
         },
@@ -153,6 +177,10 @@
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "hide": false,
@@ -180,6 +208,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -208,6 +240,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -236,6 +272,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -264,6 +304,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -292,6 +336,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -320,6 +368,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -348,6 +400,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -376,6 +432,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -404,6 +464,10 @@
           ]
         },
         {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
@@ -451,7 +515,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "PC0C98BF192F75B00"
+            "uid": "000000001"
           },
           "editorMode": "code",
           "format": "table",
@@ -476,12 +540,39 @@
             ],
             "limit": 50
           }
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(date), ModuleTempMax FROM battery WHERE $__timeFilter(date) and CarID = $Car and ModuleTempMax is not null",
+          "refId": "L",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Laden",
       "tooltip": {
         "shared": true,
@@ -490,45 +581,33 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "locale",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "autoZoom": true,
-      "datasource": "teslalogger",
-      "defaultLayer": "OpenStreetMap",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000001"
       },
+      "defaultLayer": "OpenStreetMap",
       "gridPos": {
         "h": 20,
         "w": 8,
@@ -546,6 +625,10 @@
       "targets": [
         {
           "alias": "",
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
           "format": "table",
           "group": [],
           "metricColumn": "none",
@@ -576,19 +659,22 @@
       "type": "pr0ps-trackmap-panel"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 26,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
+          "selected": true,
           "text": "",
           "value": "1"
         },
-        "datasource": "teslalogger",
+        "datasource": {
+          "type": "mysql",
+          "uid": "000000001"
+        },
         "definition": "select display_name as __text, id as __value from cars where length(vin) > 5 order by display_name",
         "hide": 0,
         "includeAll": false,
@@ -602,7 +688,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -641,5 +726,6 @@
   "timezone": "",
   "title": "Laden",
   "uid": "BHhxFeZRz",
-  "version": 112
+  "version": 113,
+  "weekStart": ""
 }

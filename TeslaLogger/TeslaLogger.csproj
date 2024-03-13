@@ -155,6 +155,7 @@
     <Compile Include="CurrentJSON.cs" />
     <Compile Include="DBViews.cs" />
     <Compile Include="ElectricityMeterBase.cs" />
+    <Compile Include="ElectricityMeterCFos.cs" />
     <Compile Include="ElectricityMeterEVCC.cs" />
     <Compile Include="ElectricityMeterGoE.cs" />
     <Compile Include="ElectricityMeterKeba.cs" />

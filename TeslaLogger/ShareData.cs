@@ -254,16 +254,15 @@ SELECT
     MAX(battery_heater),
     (
     SELECT
-        val
+        CellTemperature
     FROM
-        can
+        CellTemperature
     WHERE
-        can.carid = @CarID
-        AND can.datum < charging.Datum
-        AND can.datum > DATE_ADD(charging.Datum, INTERVAL -3 MINUTE)
-        AND id = 3
+        CellTemperature.carid = @CarID
+        AND CellTemperature.date < charging.Datum
+        AND CellTemperature.date > DATE_ADD(charging.Datum, INTERVAL -4 MINUTE)
     ORDER BY
-        can.datum DESC
+        CellTemperature.date DESC
 LIMIT 1
 ) AS cell_temp
 FROM

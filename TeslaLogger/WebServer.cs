@@ -200,14 +200,29 @@ namespace TeslaLogger
 
                 var url = request.Url;
 
-             if (url.Segments.Length == 3)
+                if (url.Segments.Length == 3)
                 {
-                    switch (url.Segments[1]) {
+                    switch (url.Segments[1])
+                    {
                         case "getfile/":
                             Admin_Getfile(request, response);
                             return;
-                            break;
 
+                        case "writefile/":
+                            Admin_Writefile(request, response);
+                            return;
+
+                        case "telemetrystart/":
+                            TelemetryStart(response, url);
+                            return;
+
+                        case "telemetryclose/":
+                            TelemetryClose(response, url);
+                            return;
+
+                        case "updatedrivestatistics/":
+                            UpdateDriveStatistics(response, url);
+                            return;
                     }
                 }
 
@@ -398,6 +413,98 @@ namespace TeslaLogger
                 ex.ToExceptionless().FirstCarUserID().Submit();
                 Logfile.Log($"WebServer Exception Localpath: {localpath}\r\n" + ex.ToString());
             }
+        }
+
+        private void UpdateDriveStatistics(HttpListenerResponse response, Uri url)
+        {
+            Logfile.Log("WebServer UpdateDriveStatistics. " + url.Segments[2].ToString());
+            using (MySqlConnection con = new MySqlConnection(DBHelper.DBConnectionstring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand("select StartPos,EndPos, carid from drivestate where id = @id", con))
+                {
+                    cmd.Parameters.AddWithValue("@id", url.Segments[2].ToString());
+                    MySqlDataReader dr = SQLTracer.TraceDR(cmd);
+                    if (dr.Read())
+                    {
+                        try
+                        {
+                            int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                            int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
+                            int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
+
+                            Car c = Car.GetCarByID(CarId);
+                            if (c != null)
+                            {
+                                c.DbHelper.UpdateDriveStatistics(StartPos, EndPos, false);
+                                WriteString(response, @"ok");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToExceptionless().FirstCarUserID().Submit();
+                            Logfile.Log(ex.ToString());
+                        }
+                    }
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        WriteString(response, @"drivestate not found!");
+                    }
+                }
+            }
+        }
+
+        private void Admin_Writefile(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var u = request.Url;
+            string filename = u.Segments[2].ToString();
+
+            bool allowedFiles = allowed_getfiles.Contains(filename);
+
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + filename);
+
+            if (!allowedFiles)
+            {
+                response.StatusCode = (int)HttpStatusCode.Forbidden;
+                WriteString(response, @"Forbidden!");
+            }
+
+            string p = FileManager.GetFilePath(filename);
+
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug\", "");
+                p = p.Replace(@"net8.0\", "");
+            }
+
+            if (File.Exists(p))
+            {
+                string data = GetDataFromRequestInputStream(request);
+                File.Delete(p);
+                File.WriteAllText(p, data);
+                WriteString(response, "ok");
+                return;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            WriteString(response, @"File Not Found!");
+        }
+
+        private static void TelemetryClose(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.CloseConnection();
+            WriteString(response, @"OK");
+        }
+
+        private static void TelemetryStart(HttpListenerResponse response, Uri url)
+        {
+            int CarID = int.Parse(url.Segments[2]);
+            Car car = Car.GetCarByID(CarID);
+            car.telemetry.StartConnection();
+            WriteString(response, @"OK");
         }
 
         static string[] allowed_getfiles = new string[] {

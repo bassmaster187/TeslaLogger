@@ -11,6 +11,14 @@ function isDocker()
     return file_exists($dockerfile);
 }
 
+function GetFileFromTeslaloggerAndWriteToTMP($filename)
+{
+    $url = GetTeslaloggerURL("getfile/$filename");
+    $contenturl = @file_get_contents($url);
+    if ($contenturl)
+        file_put_contents("/tmp/$filename", $contenturl);
+}
+
 function GetTeslaloggerHTTPPort()
 {
     $port = 5000;

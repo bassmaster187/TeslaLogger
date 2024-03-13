@@ -1,5 +1,8 @@
+# Version 1.57.8
+- Dashboard consumption shows the usage of Autopilot / TACC in different colors (Fleet Telemetry). [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Autopilot.PNG)
+
 # Version 1.57.6
-- Dashboard Trip: percent of drive with Autopilot / TACC and the longes section with Autopilot / TACC (Fleet Telemetry) [screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/AP-TACC-Percent.JPG)
+- Dashboard Trip: percent of drive with Autopilot / TACC and the longes section with Autopilot / TACC (Fleet Telemetry) [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/AP-TACC-Percent.JPG)
 - We are using now Hosted Weblate for translations. Feel free to contribute your translation: [Weblate](https://hosted.weblate.org/engage/teslalogger/)
 
 # Version 1.57.5

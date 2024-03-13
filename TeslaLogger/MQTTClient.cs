@@ -19,6 +19,7 @@ namespace TeslaLogger
                     if ((r["mqtt_host"] > 0))
                     {
                         Logfile.Log("MQTT: Using new MQTT client!");
+                        ExceptionlessClient.Default.CreateFeatureUsage("MQTTClient").FirstCarUserID().Submit();
                         return;
                     }
                 }
@@ -40,6 +41,7 @@ namespace TeslaLogger
                 System.Threading.Thread MQTTthread = new System.Threading.Thread(StartMqttClient);
                 MQTTthread.Start();
                 Logfile.Log("MQTT: Using old MQTT client, not recomended!");
+                ExceptionlessClient.Default.CreateFeatureUsage("MQTTClientOld").FirstCarUserID().Submit();
             }
             catch (Exception ex)
             {
