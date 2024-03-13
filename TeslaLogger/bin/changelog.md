@@ -1,3 +1,6 @@
+# Version 1.57.9
+- New Wallbox supported: cFos
+
 # Version 1.57.8
 - Dashboard consumption shows the usage of Autopilot / TACC in different colors (Fleet Telemetry). [Screenshot](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/TeslaLogger/screenshots/Autopilot.PNG)
 
@@ -9,6 +12,7 @@
 - Using [official](https://github.com/teslamotors/fleet-telemetry) Tesla Fleet Telemetry Server if your Car is connectet with Tesla-Fleet API (not used by pre 2021 Model S/X)
 - Grafana Dashboard Vehicle Alerts. (depends on Fleet Telemetry - not supported by pre 2021 Model S/X)
 - Cell temperature in charging dashboard (depends on Fleet Telemetry)
+ New Wallbox supported: EVCC
 
 # Version 1.57.3
 - Completely new MQTT client with MQTT AutoDiscovery and control possibilities. Old MQTT client will still work until new MQTT client is activated, but is not supported any more. Setup: go to Admin Panel->Extras->MQTT Settings
