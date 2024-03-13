@@ -94,7 +94,9 @@
   "liveNow": false,
   "panels": [
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "ModuleTempMin": "light-blue"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -383,6 +385,35 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000001"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT $__time(date), ModuleTempMin FROM battery WHERE $__timeFilter(date) and CarID = $Car and ModuleTempMin is not null",
+          "refId": "G",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "thresholds": [],
@@ -681,7 +712,7 @@
       "type": "barchart"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -748,6 +779,6 @@
   "timezone": "",
   "title": "Verbrauch",
   "uid": "zm7wN6Zgz",
-  "version": 152,
+  "version": 153,
   "weekStart": ""
 }
