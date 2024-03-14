@@ -301,6 +301,7 @@ namespace TeslaLogger
                                         state = -2;
                                         break;
                                     default:
+                                        state = -99;
                                         car.Log("Unhandled Cruise State: " + v1);
                                         car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
