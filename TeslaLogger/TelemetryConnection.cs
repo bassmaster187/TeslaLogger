@@ -291,11 +291,19 @@ namespace TeslaLogger
                                     case "On":
                                         state = 1;
                                         break;
+                                    case "Override":
+                                        state = 2;
+                                        break;
                                     case "Standby":
                                         state = -1;
                                         break;
+                                    case "Standstill":
+                                        state = -2;
+                                        break;
                                     default:
+                                        state = -99;
                                         car.Log("Unhandled Cruise State: " + v1);
+                                        car.CreateExeptionlessLog("CruiseStateUnhandled", v1, Exceptionless.Logging.LogLevel.Warn).Submit();
                                         break;
                                 }
 
