@@ -4387,6 +4387,10 @@ WHERE
                             try
                             {
                                 int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                                
+                                if (dr[1] == DBNull.Value) // unfinished trips won't be updated
+                                    continue;
+
                                 int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
                                 int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
 
