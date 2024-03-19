@@ -5607,7 +5607,7 @@ DESC", con))
 
                         if (kpv)
                         {
-                            car.Virtual_key = "1";
+                            car.Virtual_key = true;
                             return true;
                         }
 
@@ -5616,7 +5616,7 @@ DESC", con))
 
                         if (upv)
                         {
-                            car.Virtual_key = "0";
+                            car.Virtual_key = false;
                             return false;
                         }
 

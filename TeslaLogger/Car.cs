@@ -180,7 +180,7 @@ namespace TeslaLogger
             }
         }
 
-        public string Virtual_key
+        public bool Virtual_key
         {
             get => virtual_key;
             set
@@ -188,7 +188,7 @@ namespace TeslaLogger
                 if (virtual_key != value)
                 {
                     virtual_key = value;
-                    dbHelper.UpdateCarColumn("virtualkey", virtual_key);
+                    dbHelper.UpdateCarColumn("virtualkey", value ? "1" : "0");
                 }
             }
         }
@@ -219,7 +219,7 @@ namespace TeslaLogger
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
         private string access_type;
-        private string virtual_key;
+        private bool virtual_key;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
