@@ -460,11 +460,13 @@ namespace TeslaLogger
                 {
                     car.Log("Connect to Telemetry Server Error: " + ex2.InnerException.Message);
                     car.CreateExceptionlessClient(ex2).Submit();
+                    Thread.Sleep(60000);
                 }
                 else
                 {
                     car.Log("Connect to Telemetry Server Error: " + ex.Message);
                     car.CreateExceptionlessClient(ex).Submit();
+                    Thread.Sleep(60000);
                 }
             }
         }

@@ -1,5 +1,8 @@
 ﻿using Exceptionless;
 using Exceptionless.Logging;
+using Exceptionless.Models.Data;
+using Google.Protobuf.WellKnownTypes;
+using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -2395,6 +2398,8 @@ namespace TeslaLogger
                 try
                 {
                     string access_type = r4["access_type"].ToString();
+                    car.Access_type = access_type;
+
                     if (result != null && result.IsSuccessStatusCode && c == null)
                     {
                         if (access_type == "OWNER")
@@ -5571,6 +5576,74 @@ DESC", con))
                 car.SendException2Exceptionless(ex);
                 Tools.DebugLog("SuperchargeBingo: Checkin exception: " + ex.ToString() + Environment.NewLine);
             }
+        }
+
+        public bool? CheckVirtualKey()
+        {
+            try
+            {
+                if (!car.FleetAPI)
+                    return false;
+
+                string json = "{\"vins\": [\"" + car.Vin + "\"]}";
+                using (var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json"))
+                {
+                    Tools.SetThreadEnUS();
+
+                    var response = GethttpclientTeslaAPI().PostAsync(new Uri("https://teslalogger.de:4444/api/1/vehicles/fleet_status"), content).Result;
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (result.Contains("\"error\""))
+                        {
+                            car.Log(result);
+                            return null;
+                        }
+
+                        dynamic j = JsonConvert.DeserializeObject(result);
+                        dynamic r = j["response"];
+                        JArray key_paired_vins = r["key_paired_vins"];
+                        var kpv = key_paired_vins.Any(t => t.Value<String>() == car.Vin);
+
+                        if (kpv)
+                        {
+                            car.Virtual_key = "1";
+                            return true;
+                        }
+
+                        JArray unpaired_vins = r["unpaired_vins"];
+                        var upv = unpaired_vins.Any(t => t.Value<String>() == car.Vin);
+
+                        if (upv)
+                        {
+                            car.Virtual_key = "0";
+                            return false;
+                        }
+
+                        return null;
+                    }
+                    else
+                    {
+                        car.CreateExeptionlessLog("CheckVirtualKey", "Error", LogLevel.Fatal).AddObject((int)response.StatusCode + " / " + response.StatusCode.ToString(), "StatusCode").Submit();
+                        Log("CheckVirtualKey: " + (int)response.StatusCode + " / " + response.StatusCode.ToString());
+                        return null;
+                    }
+                }
+
+            }
+            catch (ThreadAbortException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Thread Stop!");
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
+            }
+            catch (Exception ex)
+            {
+                car.Log(ex.ToString());
+                car.CreateExceptionlessClient(ex).MarkAsCritical().Submit();
+                ExceptionlessClient.Default.ProcessQueueAsync();
+            }
+
+            return null;
         }
     }
 

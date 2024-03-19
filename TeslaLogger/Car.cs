@@ -167,6 +167,31 @@ namespace TeslaLogger
         public string Motor { get => motor; set => motor = value; }
         public static object InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
         public double Sumkm { get => sumkm; set => sumkm = value; }
+        internal string Access_type
+        {
+            get => access_type;
+            set
+            {
+                if (access_type != value)
+                {
+                    access_type = value;
+                    dbHelper.UpdateCarColumn("Access_Type", access_type);
+                }
+            }
+        }
+
+        public string Virtual_key
+        {
+            get => virtual_key;
+            set
+            {
+                if (virtual_key != value)
+                {
+                    virtual_key = value;
+                    dbHelper.UpdateCarColumn("virtualkey", virtual_key);
+                }
+            }
+        }
 
         private string mFA_Code;
         private string captcha;
@@ -193,6 +218,8 @@ namespace TeslaLogger
         private static object _syncRoot = new object();
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
+        private string access_type;
+        private string virtual_key;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -388,6 +415,7 @@ namespace TeslaLogger
                     Log("*** Using FLEET API ***");
                     CreateExeptionlessFeature("FleetAPI").Submit();
                 }
+                
 
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
@@ -410,6 +438,8 @@ namespace TeslaLogger
 
                 if (!DbHelper.GetRegion())
                     webhelper.GetRegion();
+
+                webhelper.CheckVirtualKey();
 
                 if (webhelper.GetVehicles() == "NULL")
                 {

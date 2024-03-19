@@ -1169,6 +1169,20 @@ PRIMARY KEY(id)
                 AssertAlterDB();
                 DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `needFleetAPI` TINYINT UNSIGNED NOT NULL DEFAULT '0'", 600);
             }
+
+            if (!DBHelper.ColumnExists("cars", "access_type"))
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column access_type");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `access_type` varchar(20) NULL", 600);
+            }
+
+            if (!DBHelper.ColumnExists("cars", "virtualkey")) 
+            {
+                Logfile.Log("ALTER TABLE cars ADD Column virtualkey");
+                AssertAlterDB();
+                DBHelper.ExecuteSQLQuery(@"ALTER TABLE `cars` ADD `virtualkey` TINYINT UNSIGNED  NULL DEFAULT '0'", 600);
+            }
         }
 
         private static void CheckDBSchema_can()
