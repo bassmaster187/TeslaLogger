@@ -16,13 +16,13 @@ Supported by all Tesla Motors cars.
 
 ### Vehicle Command Proxy
 The Vehicle Command Proxy is not supported by Model S/X made before 2021. These old cars are using the old Owners API to send commands like "turn on sentry mode". 
-All other cars need a "virtual key" you can send to your car during setup proccess. 
+All other cars need a [Virtual Key](#virtual-keys) you can send to your car during setup proccess. 
 ![fleet-api-access-in-car](https://raw.githubusercontent.com/bassmaster187/TeslaLogger/master/img/fleet-api-access-in-car.jpeg)
 
 https://github.com/teslamotors/vehicle-command
 
 ### Fleet Telemetry Server
-The Fleet Telemetry Server is not supported by Model S/X made before 2021. This additional features are only available on newer cars. 
+The Fleet Telemetry Server is not supported by Model S/X made before 2021. This additional features are only available on newer cars and you need a [Virtual Key](#virtual-keys) you can send to your car during setup proccess. The Access Token must be created by a owner profile - a driver profile won't work. I was told leased cars are currently not supported.
 
 https://github.com/teslamotors/fleet-telemetry
 
@@ -47,3 +47,6 @@ With the Fleet Telemetry Server we can get more data from our cars e.g. Autopilo
 - Remove Access
 
 https://accounts.tesla.com/de_DE/account-settings/security?tab=tpty-apps
+
+# Virtual Keys
+If you forgot to send the virtual keys to your car during setup proccess or you revoked these keys, you can resend them here: [LINK](https://www.tesla.com/_ak/teslalogger.de)

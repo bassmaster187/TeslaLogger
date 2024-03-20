@@ -223,11 +223,15 @@ namespace TeslaLogger
                 if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 1)
                     virtualKey = true;
 
+                string access_type = "";
+                if (r["access_type"] != DBNull.Value)
+                    access_type = r["access_type"].ToString();
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 car.Raven = raven;
-                car.Virtual_key = virtualKey;
+                car._virtual_key = virtualKey;
+                car._access_type  = access_type;
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)
