@@ -470,6 +470,7 @@ namespace TeslaLogger
                     break;
                 case "vehicle_data":
                     ParseChargeState(JSON);
+                    ParseVehicleConfig(JSON);
                     ParseClimateState(JSON);
                     ParseDriveState(JSON);
                     ParseVehicleState(JSON);
