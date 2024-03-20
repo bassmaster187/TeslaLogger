@@ -169,25 +169,25 @@ namespace TeslaLogger
         public double Sumkm { get => sumkm; set => sumkm = value; }
         internal string Access_type
         {
-            get => access_type;
+            get => _access_type;
             set
             {
-                if (access_type != value)
+                if (_access_type != value)
                 {
-                    access_type = value;
-                    dbHelper.UpdateCarColumn("Access_Type", access_type);
+                    _access_type = value;
+                    dbHelper.UpdateCarColumn("Access_Type", _access_type);
                 }
             }
         }
 
         public bool Virtual_key
         {
-            get => virtual_key;
+            get => _virtual_key;
             set
             {
-                if (virtual_key != value)
+                if (_virtual_key != value)
                 {
-                    virtual_key = value;
+                    _virtual_key = value;
                     dbHelper.UpdateCarColumn("virtualkey", value ? "1" : "0");
                 }
             }
@@ -218,8 +218,8 @@ namespace TeslaLogger
         private static object _syncRoot = new object();
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
-        private string access_type;
-        private bool virtual_key;
+        public string _access_type;
+        public bool _virtual_key;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
