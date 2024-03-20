@@ -71,7 +71,7 @@ namespace TeslaLogger
         internal DateTime lastUpdateEfficiency = DateTime.Now.AddDays(-1);
         private static int MapQuestCount; // defaults to 0;
         private static int NominatimCount; // defaults to 0;
-        string cacheGUID = Guid.NewGuid().ToString();
+        private string cacheGUID = Guid.NewGuid().ToString();
 
         string authHost = "https://auth.tesla.com";
         CookieContainer tokenCookieContainer;
@@ -1583,16 +1583,16 @@ namespace TeslaLogger
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"]["charge_state"];
+                dynamic charge_state = jsonResult["response"]["charge_state"];
 
-                if (r2["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
+                if (charge_state["charging_state"] == null || (resultContent != null && resultContent.Contains("vehicle unavailable")))
                 {
                     if (justCheck)
                     {
                         return false;
                     }
 
-                    if (r2["charging_state"] == null)
+                    if (charge_state["charging_state"] == null)
                     {
                         Log("charging_state = null");
                     }
@@ -1606,13 +1606,13 @@ namespace TeslaLogger
                     return lastCharging_State == "Charging";
                 }
 
-                string charging_state = r2["charging_state"].ToString();
-                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+                string charging_state = charge_state["charging_state"].ToString();
+                _ = long.TryParse(charge_state["timestamp"].ToString(), out long ts);
 
 
-                decimal battery_range = (decimal)r2["battery_range"];
+                decimal battery_range = (decimal)charge_state["battery_range"];
 
-                decimal ideal_battery_range = (decimal)r2["ideal_battery_range"];
+                decimal ideal_battery_range = (decimal)charge_state["ideal_battery_range"];
                 if (ideal_battery_range == 999)
                 {
                     ideal_battery_range = battery_range;
@@ -1620,19 +1620,19 @@ namespace TeslaLogger
 
                 car.CurrentJSON.current_ideal_battery_range_km = (double)ideal_battery_range * 1.609344;
 
-                string battery_level = r2["battery_level"].ToString();
+                string battery_level = charge_state["battery_level"].ToString();
                 if (battery_level != null && Convert.ToInt32(battery_level) != car.CurrentJSON.current_battery_level)
                 {
                     car.CurrentJSON.current_battery_level = Convert.ToInt32(battery_level);
                     car.CurrentJSON.CreateCurrentJSON();
                 }
                 string charger_power = "";
-                if (r2["charger_power"] != null)
+                if (charge_state["charger_power"] != null)
                 {
-                    charger_power = r2["charger_power"].ToString();
+                    charger_power = charge_state["charger_power"].ToString();
                 }
 
-                string charge_energy_added = r2["charge_energy_added"].ToString();
+                string charge_energy_added = charge_state["charge_energy_added"].ToString();
 
                 string charger_voltage = "";
                 string charger_phases = "";
@@ -1640,70 +1640,70 @@ namespace TeslaLogger
                 string charge_current_request = "";
                 string charger_pilot_current = "";
 
-                if (r2["charger_voltage"] != null)
+                if (charge_state["charger_voltage"] != null)
                 {
-                    charger_voltage = r2["charger_voltage"].ToString();
+                    charger_voltage = charge_state["charger_voltage"].ToString();
                 }
 
-                if (r2["charger_phases"] != null)
+                if (charge_state["charger_phases"] != null)
                 {
-                    charger_phases = r2["charger_phases"].ToString();
+                    charger_phases = charge_state["charger_phases"].ToString();
                 }
 
-                if (r2["charger_actual_current"] != null)
+                if (charge_state["charger_actual_current"] != null)
                 {
-                    charger_actual_current = r2["charger_actual_current"].ToString();
+                    charger_actual_current = charge_state["charger_actual_current"].ToString();
                 }
 
-                if (r2["charge_current_request"] != null)
+                if (charge_state["charge_current_request"] != null)
                 {
-                    charge_current_request = r2["charge_current_request"].ToString();
+                    charge_current_request = charge_state["charge_current_request"].ToString();
                 }
 
-                if (r2["charger_pilot_current"] != null)
+                if (charge_state["charger_pilot_current"] != null)
                 {
-                    charger_pilot_current = r2["charger_pilot_current"].ToString();
+                    charger_pilot_current = charge_state["charger_pilot_current"].ToString();
                 }
 
-                if (r2["fast_charger_brand"] != null)
+                if (charge_state["fast_charger_brand"] != null)
                 {
-                    fast_charger_brand = r2["fast_charger_brand"].ToString();
+                    fast_charger_brand = charge_state["fast_charger_brand"].ToString();
                 }
 
-                if (r2["fast_charger_type"] != null)
+                if (charge_state["fast_charger_type"] != null)
                 {
-                    fast_charger_type = r2["fast_charger_type"].ToString();
+                    fast_charger_type = charge_state["fast_charger_type"].ToString();
                 }
 
-                if (r2["conn_charge_cable"] != null)
+                if (charge_state["conn_charge_cable"] != null)
                 {
-                    conn_charge_cable = r2["conn_charge_cable"].ToString();
+                    conn_charge_cable = charge_state["conn_charge_cable"].ToString();
                 }
 
-                if (r2["fast_charger_present"] != null)
+                if (charge_state["fast_charger_present"] != null)
                 {
-                    fast_charger_present = bool.Parse(r2["fast_charger_present"].ToString());
+                    fast_charger_present = bool.Parse(charge_state["fast_charger_present"].ToString());
                 }
 
-                if (r2["charge_rate"] != null)
+                if (charge_state["charge_rate"] != null)
                 {
-                    car.CurrentJSON.current_charge_rate_km = Convert.ToDouble(r2["charge_rate"]) * 1.609344;
+                    car.CurrentJSON.current_charge_rate_km = Convert.ToDouble(charge_state["charge_rate"]) * 1.609344;
                 }
 
-                if (r2["charge_limit_soc"] != null)
+                if (charge_state["charge_limit_soc"] != null)
                 {
-                    if (car.CurrentJSON.charge_limit_soc != Convert.ToInt32(r2["charge_limit_soc"]))
+                    if (car.CurrentJSON.charge_limit_soc != Convert.ToInt32(charge_state["charge_limit_soc"]))
                     {
-                        car.CurrentJSON.charge_limit_soc = Convert.ToInt32(r2["charge_limit_soc"]);
+                        car.CurrentJSON.charge_limit_soc = Convert.ToInt32(charge_state["charge_limit_soc"]);
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
 
-                if (r2["time_to_full_charge"] != null)
+                if (charge_state["time_to_full_charge"] != null)
                 {
-                    if (car.CurrentJSON.current_time_to_full_charge != Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS))
+                    if (car.CurrentJSON.current_time_to_full_charge != Convert.ToDouble(charge_state["time_to_full_charge"], Tools.ciEnUS))
                     {
-                        car.CurrentJSON.current_time_to_full_charge = Convert.ToDouble(r2["time_to_full_charge"], Tools.ciEnUS);
+                        car.CurrentJSON.current_time_to_full_charge = Convert.ToDouble(charge_state["time_to_full_charge"], Tools.ciEnUS);
                         car.CurrentJSON.CreateCurrentJSON();
                     }
                 }
@@ -2207,7 +2207,9 @@ namespace TeslaLogger
         private object SearchCarDictionary(Newtonsoft.Json.Linq.JArray cars)
         {
             if (cars == null)
+            {
                 return null;
+            }
 
             if (car.Vin?.Length > 0)
             {
@@ -2217,7 +2219,9 @@ namespace TeslaLogger
                     var ccVin = cc["vin"].ToString();
 
                     if (ccVin == car.Vin)
+                    {
                         return cc;
+                    }
                 }
 
                 Logfile.Log("Car with VIN: " + car.Vin + " not found! Display Name: " + car.DisplayName);
@@ -2267,9 +2271,9 @@ namespace TeslaLogger
                 int accountid = 0;
                 lock (vehicles2Account)
                 {
-                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                    if (vehicles2Account.TryGetValue(car.Vin, out Account account))
                     {
-                        accountid = a.id;
+                        accountid = account.id;
                     }
                 }
 
@@ -2277,11 +2281,13 @@ namespace TeslaLogger
 
                 HttpResponseMessage result = null;
 
-                object c = MemoryCache.Default.Get(cacheKey);
+                object cachedValue = MemoryCache.Default.Get(cacheKey);
                 DateTime start = DateTime.UtcNow;
 
-                if (c != null && accountid > 0)
-                    resultContent = c as String;
+                if (cachedValue != null && accountid > 0)
+                {
+                    resultContent = cachedValue as String;
+                }
                 else
                 {
 
@@ -2289,19 +2295,24 @@ namespace TeslaLogger
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.oldAPIchinaCar)
+                    {
                         adresse = "https://owner-api.vn.cloud.tesla.cn/api/1/products?orders=true";
-
+                    }
                     if (car.FleetAPI)
+                    {
                         adresse = apiaddress + "api/1/vehicles";
-
+                    }
                     result = await client.GetAsync(adresse);
 
                     if (returnOnUnauthorized && result?.StatusCode == HttpStatusCode.Unauthorized)
+                    {
                         return "NULL";
+                    }
 
                     if (LoginRetry(result))
+                    {
                         return "NULL";
-
+                    }
 
                     resultContent = await result.Content.ReadAsStringAsync();
                     // resultContent = Tools.ConvertBase64toString("");
@@ -2346,7 +2357,7 @@ namespace TeslaLogger
                 }
 
                 _ = car.GetTeslaAPIState().ParseAPI(resultContent, "vehicles");
-                if (result != null && c == null)
+                if (result != null && cachedValue == null)
                 {
                     if (result.IsSuccessStatusCode)
                     {
@@ -2371,10 +2382,10 @@ namespace TeslaLogger
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
 
-                JArray r1 = jsonResult["response"];
+                JArray response = jsonResult["response"];
 
 
-                if (r1 == null && resultContent?.Contains("not found") == true)
+                if (response == null && resultContent?.Contains("not found") == true)
                 {
                     Log("IsOnline response = NULL: " + resultContent);
 
@@ -2384,7 +2395,7 @@ namespace TeslaLogger
                     return "NULL";
                 }
 
-                dynamic r4 = SearchCarDictionary(r1);
+                dynamic r4 = SearchCarDictionary(response);
 
                 if (r4 == null)
                 {
@@ -2397,7 +2408,7 @@ namespace TeslaLogger
                     string access_type = r4["access_type"].ToString();
                     car.Access_type = access_type;
 
-                    if (result != null && result.IsSuccessStatusCode && c == null)
+                    if (result != null && result.IsSuccessStatusCode && cachedValue == null)
                     {
                         if (access_type == "OWNER")
                         {
@@ -2406,9 +2417,9 @@ namespace TeslaLogger
                             {
                                 lock (vehicles2Account)
                                 {
-                                    if (vehicles2Account.TryGetValue(car.Vin, out Account a))
+                                    if (vehicles2Account.TryGetValue(car.Vin, out Account account))
                                     {
-                                        accountid = a.id;
+                                        accountid = account.id;
                                     }
                                 }
 
@@ -3230,8 +3241,8 @@ namespace TeslaLogger
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"]["drive_state"];
-                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+                dynamic drive_state = jsonResult["response"]["drive_state"];
+                _ = long.TryParse(drive_state["timestamp"].ToString(), out long ts);
 
                 decimal dLatitude = 0;
                 decimal dLongitude = 0;
@@ -3255,11 +3266,11 @@ namespace TeslaLogger
                     ExceptionWriter(ex, resultContent);
                 }
 
-                if (r2.ContainsKey("latitude"))
+                if (drive_state.ContainsKey("latitude"))
                 {
-                    dLatitude = (decimal)r2["latitude"];
-                    dLongitude = (decimal)r2["longitude"];
-                    heading = (int)r2["heading"];
+                    dLatitude = (decimal)drive_state["latitude"];
+                    dLongitude = (decimal)drive_state["longitude"];
+                    heading = (int)drive_state["heading"];
                 }
                 else
                 {
@@ -3295,21 +3306,21 @@ namespace TeslaLogger
                 car.CurrentJSON.SetPosition(latitude, longitude, ts);
 
                 int speed = 0;
-                if (r2["speed"] != null)
+                if (drive_state["speed"] != null)
                 {
-                    speed = (int)r2["speed"];
+                    speed = (int)drive_state["speed"];
                 }
 
                 int power = 0;
-                if (r2["power"] != null)
+                if (drive_state["power"] != null)
                 {
-                    power = (int)r2["power"];
+                    power = (int)drive_state["power"];
                 }
 
                 string shift_state = "";
-                if (r2["shift_state"] != null)
+                if (drive_state["shift_state"] != null)
                 {
-                    shift_state = r2["shift_state"].ToString();
+                    shift_state = drive_state["shift_state"].ToString();
                     SetLastShiftState(shift_state);
                 }
                 else
@@ -4566,14 +4577,14 @@ DESC", con))
                     return lastOdometerKM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"]["vehicle_state"];
-                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+                dynamic vehicle_state = jsonResult["response"]["vehicle_state"];
+                _ = long.TryParse(vehicle_state["timestamp"].ToString(), out long ts);
 
-                if (r2.ContainsKey("sentry_mode") && r2["sentry_mode"] != null)
+                if (vehicle_state.ContainsKey("sentry_mode") && vehicle_state["sentry_mode"] != null)
                 {
                     try
                     {
-                        bool sentry_mode = (bool)r2["sentry_mode"];
+                        bool sentry_mode = (bool)vehicle_state["sentry_mode"];
                         if (sentry_mode != is_sentry_mode)
                         {
                             is_sentry_mode = sentry_mode;
@@ -4592,18 +4603,18 @@ DESC", con))
                     }
                 }
 
-                if (r2["odometer"] == null)
+                if (vehicle_state["odometer"] == null)
                 {
                     Log("odometer = NULL");
                     return lastOdometerKM;
                 }
 
-                decimal odometer = (decimal)r2["odometer"];
+                decimal odometer = (decimal)vehicle_state["odometer"];
 
 
                 try
                 {
-                    string car_version = r2["car_version"].ToString();
+                    string car_version = vehicle_state["car_version"].ToString();
                     if (car.CurrentJSON.current_car_version != car_version)
                     {
                         Log("Car Version: " + car_version);
@@ -4664,21 +4675,21 @@ DESC", con))
 
                 Tools.SetThreadEnUS();
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                dynamic r2 = jsonResult["response"]["climate_state"];
-                _ = long.TryParse(r2["timestamp"].ToString(), out long ts);
+                dynamic climate_state = jsonResult["response"]["climate_state"];
+                _ = long.TryParse(climate_state["timestamp"].ToString(), out long ts);
                 try
                 {
-                    if (r2["inside_temp"] != null)
+                    if (climate_state["inside_temp"] != null)
                     {
-                        car.CurrentJSON.current_inside_temperature = Convert.ToDouble(r2["inside_temp"]);
+                        car.CurrentJSON.current_inside_temperature = Convert.ToDouble(climate_state["inside_temp"]);
                     }
                 }
                 catch (Exception) { }
 
                 decimal? outside_temp = null;
-                if (r2["outside_temp"] != null)
+                if (climate_state["outside_temp"] != null)
                 {
-                    outside_temp = (decimal)r2["outside_temp"];
+                    outside_temp = (decimal)climate_state["outside_temp"];
                     car.CurrentJSON.current_outside_temperature = (double)outside_temp;
                 }
                 else
@@ -4689,9 +4700,9 @@ DESC", con))
                 try
                 {
                     bool? battery_heater = null;
-                    if (r2["battery_heater"] != null)
+                    if (climate_state["battery_heater"] != null)
                     {
-                        battery_heater = (bool)r2["battery_heater"];
+                        battery_heater = (bool)climate_state["battery_heater"];
                         if (car.CurrentJSON.current_battery_heater != battery_heater)
                         {
                             car.CurrentJSON.current_battery_heater = (bool)battery_heater;
@@ -4709,7 +4720,7 @@ DESC", con))
                 catch (Exception) { }
 
 
-                bool preconditioning = r2["is_preconditioning"] != null && (bool)r2["is_preconditioning"];
+                bool preconditioning = climate_state["is_preconditioning"] != null && (bool)climate_state["is_preconditioning"];
                 if (preconditioning != car.CurrentJSON.current_is_preconditioning)
                 {
                     car.CurrentJSON.current_is_preconditioning = preconditioning;
@@ -4752,11 +4763,11 @@ DESC", con))
             {
                 string cacheKey = "GetCommand_" + cmd + "_" + cacheGUID;
 
-                string ret = MemoryCache.Default[cacheKey] as string;
-                if (ret != null)
+                string cachedValue = MemoryCache.Default[cacheKey] as string;
+                if (cachedValue != null)
                 {
                     // Log("GetCommand Cache");
-                    return ret;
+                    return cachedValue;
                 }
 
                 string cacheKeyNotFound = "HttpNotFoundCounter_" + cmd + "_" + cacheGUID;
