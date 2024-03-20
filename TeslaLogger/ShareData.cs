@@ -122,7 +122,7 @@ WHERE
         fast_charger_present
         OR address LIKE 'Supercharger%'
         OR address LIKE 'Ionity%'
-        OR max_charger_power > 25
+        OR max_charger_power > 19
     )
 ORDER BY
     StartDate";
@@ -256,13 +256,13 @@ SELECT
     SELECT
         CellTemperature
     FROM
-        CellTemperature
+        celltemperature
     WHERE
-        CellTemperature.carid = @CarID
-        AND CellTemperature.date < charging.Datum
-        AND CellTemperature.date > DATE_ADD(charging.Datum, INTERVAL -4 MINUTE)
+        celltemperature.carid = @CarID
+        AND celltemperature.date < charging.Datum
+        AND celltemperature.date > DATE_ADD(charging.Datum, INTERVAL -4 MINUTE)
     ORDER BY
-        CellTemperature.date DESC
+        celltemperature.date DESC
 LIMIT 1
 ) AS cell_temp
 FROM

@@ -156,6 +156,7 @@ Supercharger-V3 DE-Augsburg,48.398938,10.868306,30
 Supercharger-V3 DE-Bad Oeynhausen,52.213278,8.814397
 Supercharger DE-Bad Rappenau, 49.21198, 9.07726
 Supercharger-V3 DE-Baden-Baden, 48.78364, 8.19225
+Supercharger-V3 DE-Bayreuth,49.962203,11.610271,20
 Supercharger DE-Beelitz, 52.266803, 12.922467
 Supercharger-V3 DE-Berchtesgaden, 47.626649, 13.000651
 Supercharger-V3 DE-Bergkamen,51.649452,7.671108,20
@@ -233,12 +234,14 @@ Supercharger DE-Hilpoltstein,49.161213,11.260555,8
 Supercharger DE-Hilpoltstein,49.161201,11.260685,12
 Supercharger DE-Hirschberg, 49.50738, 8.63752
 Supercharger DE-Hohenwarsleben, 52.174053, 11.494502, 15
+Supercharger-V3 DE-Holdorf,52.597843,8.11891
 Supercharger-V3 DE-Holzkirchen, 47.881386,11.701631
 Supercharger DE-Irschenberg, 47.82648, 11.89831
 Supercharger-V3 DE-Irschenberg, 47.826678, 11.898501
 Supercharger-V3 DE-Irxleben, 52.170617, 11.484912
 Supercharger-V3 DE-Illertissen, 48.21882, 10.1276145, 25
 Supercharger DE-Jettingen, 48.41105, 10.4403
+Supercharger-V3 DE-Kaufering,48.08077,10.858599,25
 Supercharger DE-Kaiserslautern, 49.459907, 7.821410
 Supercharger-V3 DE-Karlsruhe, 48.999096,8.428591,30
 Supercharger DE-Kamen, 51.5701781, 7.675317
@@ -260,7 +263,7 @@ Supercharger-V3 DE-Leonberg Glemseck,48.784561, 9.019178
 Supercharger-V3 DE-Limburg an der Lahn,50.381161, 8.089549
 Supercharger-V3 DE-Lippetal, 51.69554, 7.967128
 Supercharger-V3 DE-Linstow, 53.618217, 12.372581
-Supercharger-V3 DE-Lohfelden, 51.271874, 9.5246443
+Supercharger-V3 DE-Lohfelden, 51.271885,9.526877, 20
 Supercharger-V3 DE-Lohne, 52.65768, 8.16927
 Supercharger DE-Lutterberg alt, 51.370977, 9.633306, 10
 Supercharger DE-Lutterberg, 51.370193,9.633918, 20
@@ -276,6 +279,7 @@ Supercharger DE-Mühldorf, 48.27257, 12.54995
 Supercharger-V3 DE-Münchberg-Nord, 50.202822,11.776624, 18
 Supercharger-V3 DE-München - Pasing Arcaden, 48.147909,11.464882
 Supercharger-V3 DE-München - OEZ, 48.184493713, 11.5323986
+Supercharger-V3 DE-München - Sendling, 48.105054,11.536857,30
 Supercharger DE-Nempitz, 51.290154,12.137387, 4
 Supercharger DE-Nempitz, 51.290095,12.137335, 7
 Supercharger DE-Nempitz, 51.290012,12.137346, 9
@@ -292,11 +296,13 @@ Supercharger-V3 DE-Nottuln, 51.911333, 7.398475, 16
 Supercharger-V3 DE-Oberhausen,51.485746,6.886665
 Supercharger DE-Oberhonnefeld, 50.562662, 7.525183, 25
 Supercharger-V3 DE-Oberhonnefeld, 50.562897, 7.524883, 15
+Supercharger-V3 DE-Offenburg,48.469907,7.931822
 Supercharger-V3 DE-Öhringen, 49.204604, 9.488676, 13
 Supercharger-V3 DE-Öhringen, 49.204397, 9.488832, 14
 Supercharger-V3 DE-Öhringen, 49.204187, 9.488977, 13
 Supercharger-V3 DE-Paderborn,51.710867,8.713883
 Supercharger-V3 DE-Panketal, 52.620716, 13.541721
+Supercharger-V3 DE-Peine,52.340081,10.247848,20
 Supercharger-V3 DE-Pfaffenhofen, 48.518322, 11.562151
 Supercharger DE-Pfaffenhofen, 48.518278, 11.562305
 Supercharger DE-Pfalzfeld, 50.1154777, 7.597887
@@ -4369,7 +4375,7 @@ EnBW DE-Paderborn Balhornstr., 51.7125, 8.734013
 EnBW DE-Paderborn, 51.706307,8.729175
 EnBW DE-Pasewalk, 53.51465, 14.0108
 EnBW DE-Peine Penny, 52.31363, 10.22837
-EnBW DE-Peine Wilhelm-Rausch-Str., 52.339914715898, 10.247883629063
+EnBW DE-Peine Wilhelm-Rausch-Str., 52.339914715898, 10.247883629063,20
 EnBW DE-Penig, 50.92168985262, 12.714608773529
 EnBW DE-Pentling Ammerholz, 48.97292, 12.065341
 EnBW DE-Perl In der Dörrwiese, 49.474518, 6.373224
@@ -7789,7 +7795,7 @@ NewMotion DE-Aschaffenburg Schillerstr., 49.986982, 9.140212
 NewMotion DE-Asperg Ludwigsburger Strasse, 48.897212, 9.153987
 NewMotion DE-Bad Segeberg Ziegelstraße, 53.946743, 10.303729
 NewMotion DE-Bakum Harmerstraße, 52.725905, 8.178164
-NewMotion DE-Bayreuth , 49.962784000828, 11.611077999634
+NewMotion DE-Bayreuth , 49.962784000828, 11.611077999634, 10
 NewMotion DE-Berlin Am Juliusturm, 52.536643, 13.22178
 NewMotion DE-Berlin Askanierring, 52.54766, 13.19431
 NewMotion DE-Berlin Bahnhofstraße, 52.386944, 13.407913

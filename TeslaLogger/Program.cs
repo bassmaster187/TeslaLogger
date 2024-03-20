@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace TeslaLogger
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Literale nicht als lokalisierte Parameter übergeben", Justification = "<Pending>")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Keine allgemeinen Ausnahmetypen abfangen", Justification = "<Pending>")]
     internal class Program
     {
@@ -220,10 +219,19 @@ namespace TeslaLogger
                 if (r["fleetAPI"] != DBNull.Value && Convert.ToInt32(r["fleetAPI"]) == 1)
                     fleetAPI = true;
 
+                bool virtualKey = false;
+                if (r["virtualkey"] != DBNull.Value && Convert.ToInt32(r["virtualkey"]) == 1)
+                    virtualKey = true;
+
+                string access_type = "";
+                if (r["access_type"] != DBNull.Value)
+                    access_type = r["access_type"].ToString();
 
 #pragma warning disable CA2000 // Objekte verwerfen, bevor Bereich verloren geht
                 Car car = new Car(id, Name, Password, carid, tesla_token, tesla_token_expire, Model_Name, car_type, car_special_type, car_trim_badging, display_name, vin, tasker_hash, wh_tr, fleetAPI, oldCarState, wheel_type);
                 car.Raven = raven;
+                car._virtual_key = virtualKey;
+                car._access_type  = access_type;
 #pragma warning restore CA2000 // Objekte verwerfen, bevor Bereich verloren geht
             }
             catch (Exception ex)
@@ -317,8 +325,8 @@ namespace TeslaLogger
 
         private static void InitStage2()
         {
-            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", 5);
-            SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", 30);
+            KeepOnlineMinAfterUsage = Tools.GetSettingsInt("KeepOnlineMinAfterUsage", ApplicationSettings.Default.KeepOnlineMinAfterUsage);
+            SuspendAPIMinutes = Tools.GetSettingsInt("SuspendAPIMinutes", ApplicationSettings.Default.SuspendAPIMinutes);
 
             Logfile.Log("Current Culture: " + Thread.CurrentThread.CurrentCulture.ToString());
             Logfile.Log("Mono Runtime: " + Tools.GetMonoRuntimeVersion());

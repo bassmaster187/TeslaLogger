@@ -1689,7 +1689,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@value", value);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log($"Update {column} OK: " + done + " - " + value);
+                        //car.Log($"Update {column} OK: " + done + " - " + value);
                     }
                 }
             }
@@ -4291,7 +4291,7 @@ WHERE
 
         private void GetAVG_TPMS(DateTime startDT, DateTime endDT, out double tPMS_FL, out double tPMS_FR, out double tPMS_RL, out double tPMS_RR)
         {
-            car.Log($"GetAVG_TPMS {startDT.ToString()}");
+            // car.Log($"GetAVG_TPMS {startDT.ToString()}");
             tPMS_FL = -1;
             tPMS_FR = -1;
             tPMS_RL = -1;
@@ -4387,6 +4387,10 @@ WHERE
                             try
                             {
                                 int StartPos = Convert.ToInt32(dr[0], Tools.ciEnUS);
+                                
+                                if (dr[1] == DBNull.Value) // unfinished trips won't be updated
+                                    continue;
+
                                 int EndPos = Convert.ToInt32(dr[1], Tools.ciEnUS);
                                 int CarId = Convert.ToInt32(dr[2], Tools.ciEnUS);
 
@@ -4404,7 +4408,7 @@ WHERE
                         }
                     }
 
-                    KVS.InsertOrUpdate("UpdateAllDrivestateData", 1);
+                    KVS.InsertOrUpdate("UpdateAllDrivestateData", 2);
                 }
             }
             catch (Exception ex)
@@ -6952,10 +6956,7 @@ WHERE
 
         public bool GetAutopilotSeconds(DateTime start, DateTime end, out int sumsec, out int maxsec)
         {
-            car.Log("GetAutopilotSeconds");
-            var svStart = start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
-            var svEnd = end.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
-
+            // car.Log("GetAutopilotSeconds");
             sumsec = -1;
             maxsec = -1;
             try
@@ -6963,42 +6964,51 @@ WHERE
                 if (start < new DateTime(2024, 2, 20)) // feature introduced later
                     return false;
 
+                var svStart = start.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
+                var svEnd = end.ToString("yyyy-MM-dd HH:mm:ss", Tools.ciEnUS);
+
                 using (MySqlConnection con = new MySqlConnection(DBConnectionstring+ ";Allow User Variables=True"))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($@"select sum(TIME_TO_SEC(TIMEDIFF(enddate, startdate))) as sumsec, max(TIME_TO_SEC(TIMEDIFF(enddate, startdate))) as maxsec from
-                    (
-                    select T1.CarID, T1.date as startdate, T1.state as startstate, T2.date as enddate, T2.state as endstate
-                    from 
-                    (select (@rowid1:=@rowid1 + 1) T1rid, carid, date, state from cruisestate JOIN (SELECT @rowid1:=0) a
-                          where carid={car.CarInDB} and date between '{svStart}' and '{svEnd}' order by date
-                        ) as T1
-                        left outer join 
-                        (select (@rowid2:=@rowid2 + 1) T2rid, date, state from  cruisestate JOIN (SELECT @rowid2:=0) b
-                          where carid={car.CarInDB} and date between '{svStart}' and '{svEnd}' order by date
-                        ) as T2 on T1rid + 1 = T2rid
-                    ) T3
-                    where startstate = 1 ", con))
+                    using (MySqlCommand cmd = new MySqlCommand($@"select date, state from cruisestate
+                          where carid={car.CarInDB} and date between '{svStart}' and '{svEnd}' and state in (-1,0,1) order by date", con))
                     {
-                        car.Log("SQL: " + cmd.CommandText);
+                        // car.Log("SQL: " + cmd.CommandText);
+
+                        DateTime? startstate = null;
+                        double sum = 0;
+                        double max = 0;
+                        int count = 0;
 
                         var dr = cmd.ExecuteReader();
-                        if (dr.Read())
+                        while (dr.Read())
                         {
-                            car.Log("GetAutopilotSeconds read:");
+                            count++;
+                            DateTime date = dr.GetDateTime(0);
+                            int state = dr.GetInt32(1);
 
-                            if (dr["sumsec"] != DBNull.Value)
-                                sumsec = Convert.ToInt32(dr["sumsec"]);
+                            if (startstate == null && state == 1)
+                            {
+                                startstate = date;
+                            }
+                            else if (startstate != null &&  state != 1)
+                            {
+                                TimeSpan ts = date - (DateTime)startstate;
+                                double tssec = ts.TotalSeconds;
 
-                            if (dr["maxsec"] != DBNull.Value)
-                                maxsec = Convert.ToInt32(dr["maxsec"]);
-                            
-                            car.Log($"GetAutopilotSeconds sumsec: {sumsec} / maxsec: {maxsec}");
-                            return true;
+                                sum += tssec;
+                                max = Math.Max(tssec, max);
+
+                                startstate = null;
+                                // System.Diagnostics.Debug.WriteLine("Sec: " + tssec);
+                            }
                         }
-                        else
+
+                        if (count > 0)
                         {
-                            car.Log("GetAutopilotSeconds no rows found!");
+                            sumsec = (Int32)sum;
+                            maxsec = (Int32)max;
+                            return true;
                         }
                     }
                 }

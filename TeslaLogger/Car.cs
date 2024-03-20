@@ -167,6 +167,31 @@ namespace TeslaLogger
         public string Motor { get => motor; set => motor = value; }
         public static object InitCredentialsLock { get => initCredentialsLock; set => initCredentialsLock = value; }
         public double Sumkm { get => sumkm; set => sumkm = value; }
+        internal string Access_type
+        {
+            get => _access_type;
+            set
+            {
+                if (_access_type != value)
+                {
+                    _access_type = value;
+                    dbHelper.UpdateCarColumn("Access_Type", value);
+                }
+            }
+        }
+
+        public bool Virtual_key
+        {
+            get => _virtual_key;
+            set
+            {
+                if (_virtual_key != value)
+                {
+                    _virtual_key = value;
+                    dbHelper.UpdateCarColumn("virtualkey", value ? "1" : "0");
+                }
+            }
+        }
 
         private string mFA_Code;
         private string captcha;
@@ -193,6 +218,8 @@ namespace TeslaLogger
         private static object _syncRoot = new object();
         internal bool FleetAPI;
         internal string FleetApiAddress = "";
+        public string _access_type;
+        public bool _virtual_key;
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         internal TeslaAPIState GetTeslaAPIState() { return teslaAPIState; }
@@ -388,6 +415,7 @@ namespace TeslaLogger
                     Log("*** Using FLEET API ***");
                     CreateExeptionlessFeature("FleetAPI").Submit();
                 }
+                
 
                 DbHelper.GetAvgConsumption(out this.sumkm, out this.avgkm, out this.kwh100km, out this.avgsocdiff, out this.maxkm);
 
@@ -410,6 +438,8 @@ namespace TeslaLogger
 
                 if (!DbHelper.GetRegion())
                     webhelper.GetRegion();
+
+                webhelper.CheckVirtualKey();
 
                 if (webhelper.GetVehicles() == "NULL")
                 {
@@ -830,7 +860,7 @@ namespace TeslaLogger
                                     CurrentJSON.current_falling_asleep = true;
                                     CurrentJSON.CreateCurrentJSON();
 
-                                    for (int x = 0; x < ApplicationSettings.Default.SuspendAPIMinutes * 10; x++)
+                                    for (int x = 0; x < Program.SuspendAPIMinutes * 10; x++)
                                     {
                                         if (webhelper.DrivingOrChargingByStream)
                                         {

@@ -3146,7 +3146,7 @@ FROM
                 {
                     using (DataTable dt = new DataTable())
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI FROM cars order by display_name", DBHelper.DBConnectionstring))
+                        using (MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, display_name, tasker_hash, model_name, vin, tesla_name, tesla_carid, lastscanmytesla, freesuc, fleetAPI, needVirtualKey, needCommandPermission, needFleetAPI, access_type, virtualkey FROM cars order by display_name", DBHelper.DBConnectionstring))
                         {
                             SQLTracer.TraceDA(dt, da);
 
