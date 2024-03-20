@@ -15,8 +15,15 @@ RUN apt-get update && \
 
 RUN mkdir -p /etc/teslalogger
 RUN mkdir -p /etc/teslalogger/sqlschema
+RUN mkdir -p /etc/teslalogger/git/TeslaLogger/Grafana
+RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaConfig
+RUN mkdir -p /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
+
 COPY TeslaLogger/sqlschema.sql /etc/teslalogger/sqlschema
 COPY --chmod=777 TeslaLogger/bin /etc/teslalogger/
+COPY TeslaLogger/Grafana /etc/teslalogger/git/TeslaLogger/Grafana
+COPY TeslaLogger/GrafanaConfig /etc/teslalogger/git/TeslaLogger/GrafanaConfig
+COPY TeslaLogger/GrafanaPlugins /etc/teslalogger/git/TeslaLogger/GrafanaPlugins
 
 WORKDIR /etc/teslalogger/Debug/net8.0
 
