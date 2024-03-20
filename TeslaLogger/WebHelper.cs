@@ -1574,7 +1574,7 @@ namespace TeslaLogger
             try
             {
                 // resultContent = GetCommand("charge_state").Result;
-                resultContent = GetCommand("vehicle_data", noMemcache).Result;
+                resultContent = GetCommand("vehicle_data?endpoints=charge_state&let_sleep=true", noMemcache).Result;
 
                 if (resultContent == INSERVICE)
                 {
@@ -2550,55 +2550,13 @@ namespace TeslaLogger
             return "NULL";
         }
 
-        void TryGetNewStreamingToken()
-        {
-            car.Log("TryGetNewStreamingToken");
-
-            string resultContent = "";
-            try
-            {
-                resultContent = GetCommand("vehicle_data").Result;
-
-                if (resultContent == INSERVICE)
-                {
-                    System.Threading.Thread.Sleep(10000);
-                    return;
-                }
-
-
-                Tools.SetThreadEnUS();
-                dynamic jsonResult = JsonConvert.DeserializeObject(resultContent);
-                string temp_Tesla_Streamingtoken = jsonResult["response"]["tokens"][0].ToString();
-
-                if (temp_Tesla_Streamingtoken != Tesla_Streamingtoken)
-                {
-                    Tesla_Streamingtoken = temp_Tesla_Streamingtoken;
-                    //Log("Streamingtoken changed (TryGetNewStreamingToken): " + Tools.ObfuscateString(Tesla_Streamingtoken));
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (resultContent == null || resultContent == "NULL")
-                {
-                    Log("TryGetNewStreamingToken = NULL!");
-                    Thread.Sleep(10000);
-                }
-                else
-                {
-                    SubmitExceptionlessClientWithResultContent(ex, resultContent);
-                    ExceptionWriter(ex, resultContent);
-                }
-            }
-        }
-
         void CheckVehicleConfig()
         {
             string resultContent2 = "";
             try
             {
                 // resultContent2 = GetCommand("vehicle_config").Result;
-                resultContent2 = GetCommand("vehicle_data").Result;
+                resultContent2 = GetCommand("vehicle_data?endpoints=vehicle_config&let_sleep=true").Result;
 
                 if (resultContent2 == INSERVICE || resultContent2 == "NULL")
                 {
@@ -3256,7 +3214,14 @@ namespace TeslaLogger
             string resultContent = "";
             try
             {
-                resultContent = GetCommand("vehicle_data").Result;
+                if (car.FirmwareAtLeastVersion("2023.38.4"))
+                {
+                    resultContent = GetCommand("vehicle_data?endpoints=drive_state%3Blocation_data&let_sleep=true").Result;
+                }
+                else
+                {
+                    resultContent = GetCommand("vehicle_data?endpoints=drive_state&let_sleep=true").Result;
+                }
 
                 if (resultContent == INSERVICE)
                 {
@@ -3302,7 +3267,7 @@ namespace TeslaLogger
                 else
                 {
                     // New API after 2023.38.4 
-                    var rc2 = GetCommand("vehicle_data?endpoints=location_data").Result;
+                    var rc2 = GetCommand("vehicle_data?endpoints=location_data&let_sleep=true").Result;
                     if (rc2 == null)
                         return false;
                     try
@@ -4536,7 +4501,7 @@ DESC", con))
             try
             {
                 // resultContent = GetCommand("charge_state").Result;
-                resultContent = GetCommand("vehicle_data").Result;
+                resultContent = GetCommand("vehicle_data?endpoints=charge_state&let_sleep=true").Result;
 
                 if (resultContent == null || resultContent == "NULL")
                     return -1;
@@ -4597,7 +4562,7 @@ DESC", con))
             try
             {
                 // resultContent = await GetCommand("vehicle_state");
-                resultContent = await GetCommand("vehicle_data");
+                resultContent = await GetCommand("vehicle_data?endpoints=vehicle_state&let_sleep=true");
                 Tools.SetThreadEnUS();
 
                 if (resultContent == null || resultContent == "NULL" || resultContent == INSERVICE)
@@ -4693,7 +4658,7 @@ DESC", con))
             try
             {
                 // resultContent = await GetCommand("climate_state");
-                resultContent = await GetCommand("vehicle_data");
+                resultContent = GetCommand("vehicle_data?endpoints=climate_state&let_sleep=true").Result;
                 if (resultContent == null || resultContent.Length == 0 || resultContent == "NULL")
                 {
                     Log("GetOutsideTempAsync: NULL");
@@ -4803,15 +4768,17 @@ DESC", con))
                 string adresse = apiaddress + "api/1/vehicles/" + Tesla_id + "/" + cmd;
 
                 DateTime start = DateTime.UtcNow;
-                HttpResponseMessage result = await client.GetAsync(new Uri(adresse)).ConfigureAwait(false);
+                Tools.DebugLog($"GetCommand request: {adresse}");
+                HttpResponseMessage result = client.GetAsync(new Uri(adresse)).Result;
 
                 if (result.IsSuccessStatusCode)
                 {
                     MemoryCache.Default.Remove(cacheKeyNotFound);
 
-                    resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    resultContent = await result.Content.ReadAsStringAsync();
+                    //Tools.DebugLog($"GetCommand request: {adresse} result: {new Tools.JsonFormatter(resultContent).Format()}");
 
-                    if (cmd == "vehicle_data" && noMemcache == false)
+                    if (cmd.Contains("vehicle_data") && noMemcache == false)
                     {
                         MemoryCache.Default.Add(cacheKey, resultContent, DateTime.Now.AddSeconds(4));
                     }

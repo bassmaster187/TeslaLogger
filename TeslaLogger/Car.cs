@@ -1941,5 +1941,102 @@ id = @carid", con))
 
             return false;
         }
+
+        internal bool FirmwareAtLeastVersion(string fw)
+        {
+            // parse car's firmware
+            if (GetTeslaAPIState().GetString("car_version", out string carFW))
+            {
+                if (carFW.Contains(" "))
+                {
+                    carFW = carFW.Split(' ')[0];
+                }
+                int year = 0;
+                int week = 0;
+                int version = 0;
+                int patch = 0;
+                if (carFW.Split('.').Length > 0)
+                {
+                    if (carFW.Split('.').Length > 2)
+                    {
+                        year = int.Parse(carFW.Split('.')[0]);
+                        week = int.Parse(carFW.Split('.')[1]);
+                        version = int.Parse(carFW.Split('.')[2]);
+                    }
+                    if (carFW.Split('.').Length == 4)
+                    {
+                        patch = int.Parse(carFW.Split('.')[3]);
+                    }
+                }
+                //Tools.DebugLog($"#{CarInDB} carFW year:{year} week:{week} version:{version} patch:{patch}");
+                // parse firmware version to compare
+                if (fw.Split('.').Length > 0)
+                {
+                    if (int.Parse(fw.Split('.')[0]) < year)
+                    {
+                        // car's FW year is newer than reference year
+                        return true;
+                    }
+                    else if (int.Parse(fw.Split('.')[0]) > year)
+                    {
+                        // car's FW year is older than reference year
+                        return false;
+                    }
+                    else if (int.Parse(fw.Split('.')[0]) == year)
+                    {
+                        // car's FW year is equal to reference year --> compare week
+                        if (int.Parse(fw.Split('.')[1]) < week)
+                        {
+                            // car's FW week is newer than reference week
+                            return true;
+                        }
+                        else if (int.Parse(fw.Split('.')[1]) > week)
+                        {
+                            // car's FW week is older than reference week
+                            return false;
+                        }
+                        else if (int.Parse(fw.Split('.')[1]) == week)
+                        {
+                            // car's FW week is equal to reference week --> compare version
+                            if (int.Parse(fw.Split('.')[2]) < version)
+                            {
+                                // car's FW version is newer than reference version
+                                return true;
+                            }
+                            else if (int.Parse(fw.Split('.')[2]) > version)
+                            {
+                                // car's FW version is older than reference version
+                                return false;
+                            }
+                            else if (int.Parse(fw.Split('.')[2]) == version)
+                            {
+                                // car's FW version is equal to reference version --> compare patch
+                                // do we have a patch?
+                                if (fw.Split('.').Length > 3)
+                                {
+                                    if (int.Parse(fw.Split('.')[3]) <= patch)
+                                    {
+                                        // car's FW patch is newer or equal to than reference patch
+                                        return true;
+                                    }
+                                    else if (int.Parse(fw.Split('.')[3]) > patch)
+                                    {
+                                        // car's FW patch is older than reference patch
+                                        return false;
+                                    }
+                                }
+                                else
+                                {
+                                    // year, week and version are equal, so we have at least the required firmware
+                                    return true;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
     }   
 }
