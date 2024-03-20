@@ -175,7 +175,7 @@ namespace TeslaLogger
                 if (_access_type != value)
                 {
                     _access_type = value;
-                    dbHelper.UpdateCarColumn("Access_Type", _access_type);
+                    dbHelper.UpdateCarColumn("Access_Type", value);
                 }
             }
         }

@@ -1689,7 +1689,7 @@ HAVING
                         cmd.Parameters.AddWithValue("@value", value);
                         int done = SQLTracer.TraceNQ(cmd, out _);
 
-                        car.Log($"Update {column} OK: " + done + " - " + value);
+                        //car.Log($"Update {column} OK: " + done + " - " + value);
                     }
                 }
             }
