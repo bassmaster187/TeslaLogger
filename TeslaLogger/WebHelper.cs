@@ -1,8 +1,5 @@
 ﻿using Exceptionless;
 using Exceptionless.Logging;
-using Exceptionless.Models.Data;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
