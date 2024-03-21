@@ -479,17 +479,16 @@ namespace TeslaLogger
                 p = p.Replace(@"net8.0\", "");
             }
 
-            if (File.Exists(p))
-            {
-                string data = GetDataFromRequestInputStream(request);
-                File.Delete(p);
-                File.WriteAllText(p, data);
-                WriteString(response, "ok");
-                return;
-            }
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
 
-            response.StatusCode = (int)HttpStatusCode.NotFound;
-            WriteString(response, @"File Not Found!");
+            if (File.Exists(p))
+                File.Delete(p);
+
+            string data = GetDataFromRequestInputStream(request);
+                
+            File.WriteAllText(p, data);
+            WriteString(response, "ok");
+            return;
         }
 
         private static void TelemetryClose(HttpListenerResponse response, Uri url)
@@ -534,6 +533,8 @@ namespace TeslaLogger
                 p = p.Replace(@"Debug\", "");
                 p = p.Replace(@"net8.0\", "");
             }
+
+            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
             if (File.Exists(p))
             {
