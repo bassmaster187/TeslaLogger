@@ -2049,7 +2049,7 @@ namespace TeslaLogger
             }
         }
 
-        internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized)
+        internal void GetAllVehicles(out string resultContent, out Newtonsoft.Json.Linq.JArray vehicles, bool throwExceptionOnUnauthorized, bool doNotCache = false)
         {
             lock (getAllVehiclesLock)
             {
@@ -2063,12 +2063,12 @@ namespace TeslaLogger
                 }
 
                 string cacheKey = accountid + "_vehicles";
-                object c = MemoryCache.Default.Get(cacheKey);
+                object cachedValue = MemoryCache.Default.Get(cacheKey);
                 bool checkVehicle2Account = false;
 
-                if (c != null && accountid > 0)
+                if (!doNotCache && cachedValue != null && accountid > 0)
                 {
-                    resultContent = c as String;
+                    resultContent = cachedValue as String;
                 }
                 else
                 {
@@ -2076,7 +2076,9 @@ namespace TeslaLogger
                     string adresse = "https://owner-api.teslamotors.com/api/1/products?orders=true";
 
                     if (car.FleetAPI)
+                    {
                         adresse = apiaddress + "api/1/vehicles";
+                    }
 
                     Task<HttpResponseMessage> resultTask;
                     HttpResponseMessage result;
@@ -4812,19 +4814,23 @@ DESC", con))
                 else if (result.StatusCode == HttpStatusCode.MethodNotAllowed)
                 {
                     if (car.IsInService())
+                    {
                         return INSERVICE;
+                    }
                     else
+                    {
                         Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-
+                    }
                 }
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
                     _ = Task.Factory.StartNew(() =>
                     {
-
+                        Newtonsoft.Json.Linq.JArray r1temp;
+                        GetAllVehicles(out string vehicles, out r1temp, false, true);
+                        Tools.DebugLog($"GetCommand 408 vehicles:{vehicles}");
                     }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
                 }
                 else if (result.StatusCode == HttpStatusCode.NotFound)
                 {
