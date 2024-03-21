@@ -1799,7 +1799,7 @@ PRIMARY KEY(id)
         {
             try
             {
-                if (Tools.IsMono())
+                if (Tools.IsMono() || Tools.IsDocker())
                 {
                     Tools.GrafanaSettings(out string power, out string temperature, out string length, out string language, out string URL_Admin, out string Range, out string URL_Grafana, out string defaultcar, out string defaultcarid);
 
@@ -1821,6 +1821,12 @@ PRIMARY KEY(id)
 
                     Tools.ExecMono("mkdir", "/etc/teslalogger/tmp");
                     Tools.ExecMono("mkdir", "/etc/teslalogger/tmp/Grafana");
+
+                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                        Directory.CreateDirectory("/etc/teslalogger/tmp/Grafana");
+
+                    if (!Directory.Exists("/etc/teslalogger/tmp"))
+                        Directory.CreateDirectory("/etc/teslalogger/tmp/Grafana");
 
                     bool useNewTrackmapPanel = Directory.Exists("/var/lib/grafana/plugins/pR0Ps-grafana-trackmap-panel");
 
