@@ -4825,12 +4825,7 @@ DESC", con))
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    _ = Task.Factory.StartNew(() =>
-                    {
-                        Newtonsoft.Json.Linq.JArray r1temp;
-                        GetAllVehicles(out string vehicles, out r1temp, false, true);
-                        Tools.DebugLog($"GetCommand 408 vehicles:{vehicles}");
-                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    Thread.Sleep(1000);
                 }
                 else if (result.StatusCode == HttpStatusCode.NotFound)
                 {
