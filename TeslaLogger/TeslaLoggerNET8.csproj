@@ -12,12 +12,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <AssemblyTitle>TeslaLogger</AssemblyTitle>
     <Product>TeslaLogger</Product>
     <Copyright>Copyright © 2018 by Christian Pogea</Copyright>
-    <AssemblyVersion>2.57.2.0</AssemblyVersion>
-    <FileVersion>2.57.2.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
   </PropertyGroup>
   <ItemGroup>
