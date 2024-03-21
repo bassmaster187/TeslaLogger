@@ -419,14 +419,14 @@ else
 	<thead>
 		<tr>
 			<th><?php t("ID"); ?></th>
-			<th><?php t("Email"); ?></th>
-			<th>#</th>
 			<th><?php t("Name"); ?></th>
 			<th><?php t("Model"); ?></th>
 			<th><?php t("VIN"); ?></th>
 			<th><?php t("Tasker Token"); ?></th>
 			<th style='text-align:center;'><?php t("Free SUC"); ?></th>
-			<th style='text-align:center;'>FleetAPI</th>
+			<th style='text-align:center;'>Fleet API</th>
+			<th style='text-align:center;'>Virtual Key</th>
+			<th style='text-align:center;'>Access Type</th>
 			<th><?php t("Edit"); ?></th>
 		</tr>
 	</thead>
@@ -435,34 +435,29 @@ else
 		//var_dump($url);
 
 		foreach ($jcars as $k => $v) {
-			$email = $v->{"tesla_name"};
 			$display_name = $v->{"display_name"};
 			$tasker_token = $v->{"tasker_hash"};
 			$car = $v->{"model_name"};
 			$id = $v->{"id"};
 			$vin = $v->{"vin"};
 			$tesla_carid = $v->{"tesla_carid"};
+			$access_type = $v->{"access_type"};
 			
-			$freesuc = $v->{"freesuc"};
-			$freesuccheckbox = '<input type="checkbox" readonly valign="center" />';
-			if ($freesuc == "1")
-				$freesuccheckbox = '<input type="checkbox" checked="checked" readonly valign="center" />';
-
-			$fleetAPI = $v->{"fleetAPI"};
-			$fleetAPICheckBox = '<input type="checkbox" readonly valign="center" />';
-			if ($fleetAPI == "1")
-				$fleetAPICheckBox = '<input type="checkbox" checked="checked" readonly valign="center" />';
+			
+			$freesuccheckbox = GetCheckbox($v->{"freesuc"});
+			$fleetAPICheckBox = GetCheckbox($v->{"fleetAPI"});
+			$virtualKeyCheckBox = GetCheckbox($v->{"virtualkey"});
 
 			echo("	<tr>\r\n");
 			echo("		<td>$id</td>\r\n");
-			echo("		<td>$email</td>\r\n");
-			echo("		<td>$tesla_carid</td>\r\n");
 			echo("		<td>$display_name</td>\r\n");
 			echo("		<td>$car</td>\r\n");
 			echo("		<td>$vin</td>\r\n");
 			echo("		<td>$tasker_token</td>\r\n");
 			echo("		<td style='text-align:center;'>$freesuccheckbox</td>\r\n");
 			echo("		<td style='text-align:center;'>$fleetAPICheckBox</td>\r\n");
+			echo("		<td style='text-align:center;'>$virtualKeyCheckBox</td>\r\n");
+			echo("		<td style='text-align:center;'>$access_type</td>\r\n");
 			echo("		<td><a href='password.php?id=$id&vin=$vin'>");
 			echo t("Edit");
 			echo("</a></td>\r\n");
@@ -478,3 +473,12 @@ else
 }
 ?>
 </div>
+
+<?php
+function GetCheckbox($v)
+{
+	if ($v == "1")
+		return '<input type="checkbox" checked="checked" readonly valign="center" />';
+
+	return '<input type="checkbox" readonly valign="center" />';	
+}
