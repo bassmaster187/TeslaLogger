@@ -12,4 +12,17 @@ using System.Runtime.CompilerServices;
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
 [assembly: Guid("9932f717-1bee-4d0f-b5b0-fb8665ffe647")]
 
+// Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
+//
+//      Hauptversion
+//      Nebenversion
+//      Buildnummer
+//      Revision
+//
+// Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
+// übernehmen, indem Sie "*" eingeben:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.57.10.0")]
+[assembly: AssemblyFileVersion("1.57.10.0")]
 [assembly: InternalsVisibleTo("UnitTestsTeslaloggerNET8")]
+[assembly: InternalsVisibleTo("UnitTestsTeslalogger")]
