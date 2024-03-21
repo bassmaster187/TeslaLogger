@@ -12,4 +12,4 @@ RUN apt-get update && \
 
 COPY TeslaLogger/www /var/www/html
 COPY docker/webserver/php.ini /usr/local/etc/php/
-COPY TeslaLogger/bin /etc/teslalogger/
+
