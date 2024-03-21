@@ -479,6 +479,9 @@ namespace TeslaLogger
                 p = p.Replace(@"net8.0\", "");
             }
 
+            if (filename == "settings.json")
+                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
             System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
 
             if (File.Exists(p))
@@ -508,7 +511,7 @@ namespace TeslaLogger
         }
 
         static string[] allowed_getfiles = new string[] {
-        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini"};
+        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini","dashboardlinks.txt"};
 
         private void Admin_Getfile(HttpListenerRequest request, HttpListenerResponse response)
         {
