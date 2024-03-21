@@ -4820,8 +4820,11 @@ DESC", con))
                 else if (result.StatusCode == HttpStatusCode.RequestTimeout)
                 {
                     Log("Result.Statuscode: " + (int)result.StatusCode + " (" + result.StatusCode.ToString() + ") cmd: " + cmd);
-                    int sleep = random.Next(4000) + 4000;
-                    Thread.Sleep(sleep);
+                    _ = Task.Factory.StartNew(() =>
+                    {
+
+                    }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+
                 }
                 else if (result.StatusCode == HttpStatusCode.NotFound)
                 {
