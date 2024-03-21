@@ -50,7 +50,20 @@ $j = array('SleepTimeSpanStart' => $SleepTimeSpanStart,
 'StreamingPos' => $_POST["StreamingPos"]
 );
 
-file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
+// file_put_contents('/etc/teslalogger/settings.json', json_encode($j));
+
+$url = GetTeslaloggerURL("writefile/settings.json");
+$JSON = json_encode($j);
+
+echo file_get_contents($url, false, stream_context_create([
+    'http' => [
+        'method' => 'POST',
+        'user_agent' => 'PHP',
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\nContent-Length: ".strlen($JSON)."\r\n",
+        'content' => $JSON
+    ]    
+]));
+
 
 if ($_POST["ShareData"] == "true")
     setShareData(true);

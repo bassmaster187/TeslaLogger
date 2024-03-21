@@ -79,8 +79,11 @@ function CarsCombobox($cars, $selected)
 		<?PHP
 		
 		$content = FALSE;
+
+		GetFileFromTeslaloggerAndWriteToTMP("settings.json");
+
 		if (file_exists("/etc/teslalogger/settings.json"))
-			$content = file_get_contents("/etc/teslalogger/settings.json");
+			$content = file_get_contents("/tmp/settings.json");
 		
 		if ($content === FALSE)
 		{
