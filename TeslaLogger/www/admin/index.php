@@ -570,9 +570,9 @@ function getTeslaloggerVersion($path)
 }
 function getZoomLevel()
 {
-	if (file_exists("/etc/teslalogger/settings.json"))
+	if (file_exists("/tmp/settings.json"))
 	{
-		$content = file_get_contents("/etc/teslalogger/settings.json");
+		$content = file_get_contents("/tmp/settings.json");
 		$j = json_decode($content);
 		if (!empty($j->{"ZoomLevel"}))
 			return $j->{"ZoomLevel"};

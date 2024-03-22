@@ -536,6 +536,15 @@ namespace TeslaLogger
                 p = p.Replace(@"net8.0\", "");
             }
 
+            if (!File.Exists(p))
+            {
+                p = p.Replace(@"Debug/", "");
+                p = p.Replace(@"net8.0/", "");
+            }
+
+            if (filename == "settings.json")
+                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
+
             System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
             if (File.Exists(p))

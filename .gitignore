@@ -91,3 +91,4 @@ TeslaLogger/NOBACKUPONUPDATE
 TeslaLogger/copytodebian.cmd
 TeslaLogger/bin/LASTTASKERWAKEUPFILE_*
 MQTTClient/.vs
+TeslaLogger/copyto.net8docker.cmd

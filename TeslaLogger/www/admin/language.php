@@ -11,9 +11,10 @@ $Range = 'IR';
 
 $Display100pctEnable = "false";
 
-if (file_exists("/etc/teslalogger/settings.json"))
+GetFileFromTeslaloggerAndWriteToTMP("settings.json");
+if (file_exists("/tmp/settings.json"))
 {
-	$json = file_get_contents('/etc/teslalogger/settings.json');
+	$json = file_get_contents('/tmp/settings.json');
 	$json_data = json_decode($json,true);
 	$language = $json_data["Language"];
 	$TemperatureUnit = $json_data["Temperature"];

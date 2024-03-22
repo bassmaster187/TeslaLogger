@@ -23,9 +23,9 @@ function GetTeslaloggerHTTPPort()
 {
     $port = 5000;
 
-    if (file_exists("/etc/teslalogger/settings.json"))
+    if (file_exists("/tmp/settings.json"))
 	{
-		$content = file_get_contents("/etc/teslalogger/settings.json");
+		$content = file_get_contents("/tmp/settings.json");
 		$j = json_decode($content);
 		if (!empty($j->{"HTTPPort"})) 
             $port = $j->{"HTTPPort"};	
@@ -136,9 +136,9 @@ function files_are_equal($a, $b)
 
 function GetDefaultCarId()
 {
-    if (file_exists("/etc/teslalogger/settings.json"))
+    if (file_exists("/tmp/settings.json"))
     {
-        $json = file_get_contents("/etc/teslalogger/settings.json");
+        $json = file_get_contents("/tmp/settings.json");
         $json_data = json_decode($json,true);
 
         if (!empty($carid = $json_data["defaultcarid"]))
