@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.Caching;
 
 namespace TeslaLogger
 {
@@ -319,6 +320,19 @@ namespace TeslaLogger
         public void SetLongitude(double lng)
         {
             longitude = lng;
+        }
+
+        internal void ToKVS()
+        {
+            KVS.InsertOrUpdate($"currentJSON_{car.CarInDB}", jsonStringHolder[car.CarInDB]);
+        }
+
+        internal void FromKVS()
+        {
+            if (KVS.Get($"currentJSON_{car.CarInDB}", out string cJSON) == KVS.SUCCESS)
+            {
+                jsonStringHolder[car.CarInDB] = cJSON;
+            }
         }
     }
 }

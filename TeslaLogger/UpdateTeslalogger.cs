@@ -1445,6 +1445,11 @@ PRIMARY KEY(id)
 
                 Logfile.Log("Rebooting");
 
+                foreach (Car car in Car.Allcars)
+                {
+                    car.CurrentJSON.ToKVS();
+                }
+
                 Tools.ExecMono("reboot", "");
             }
         }
@@ -2696,6 +2701,12 @@ PRIMARY KEY(id)
                             else
                             {
                                 Logfile.Log("Rebooting");
+
+                                foreach (Car car in Car.Allcars)
+                                {
+                                    car.CurrentJSON.ToKVS();
+                                }
+
                                 Tools.ExecMono("reboot", "");
                             }
                         }
