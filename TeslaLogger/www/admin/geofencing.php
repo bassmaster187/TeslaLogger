@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+require_once("language.php");
+?>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
@@ -31,25 +34,31 @@
 	<?PHP
 	$csv = array();
 	
-	$fp = fopen('/etc/teslalogger/geofence.csv', 'rb');
 	
-	while(!feof($fp)) {
-		$v = fgetcsv($fp);
-			
-		if ($v != FALSE && count($v) >= 3)
-		{
-			$csv[] = array($v[0],$v[1],$v[2]);
-		}
+	GetFileFromTeslaloggerAndWriteToTMP("geofence-private.csv");
+	GetFileFromTeslaloggerAndWriteToTMP("geofence.csv");
+
+	if (file_exists('/tmp/geofence.csv'))
+	{
+		$fp = fopen('/tmp/geofence.csv', 'rb');
 		
+		while(!feof($fp)) {
+			$v = fgetcsv($fp);
+				
+			if ($v != FALSE && count($v) >= 3)
+			{
+				$csv[] = array($v[0],$v[1],$v[2]);
+			}
+			
+		}
+		fclose($fp);
 	}
-	fclose($fp);
-	
 	
 	$i = 0;
 	$csv2 = array();
-	if (file_exists('/etc/teslalogger/geofence-private.csv'))
+	if (file_exists('/tmp/geofence-private.csv'))
 	{
-		$fp = fopen('/etc/teslalogger/geofence-private.csv', 'rb');
+		$fp = fopen('/tmp/geofence-private.csv', 'rb');
 		while(!feof($fp)) {
 			$v = fgetcsv($fp);
 			

@@ -424,7 +424,9 @@ namespace TeslaLogger
         {
             var lines = Convert.ToInt32(url.Segments[2].ToString());
 
-            string log = ReadEndTokens("nohup.out", lines, System.Text.Encoding.UTF8, "\n");
+            var path = Logfile.Logfilepath;
+
+            string log = ReadEndTokens(path, lines, System.Text.Encoding.UTF8, "\n");
             WriteString(response, log);
         }
 
