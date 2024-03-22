@@ -479,17 +479,19 @@ namespace TeslaLogger
                 p = p.Replace(@"net8.0\", "");
             }
 
-            if (File.Exists(p))
-            {
-                string data = GetDataFromRequestInputStream(request);
-                File.Delete(p);
-                File.WriteAllText(p, data);
-                WriteString(response, "ok");
-                return;
-            }
+            if (filename == "settings.json")
+                p = FileManager.GetFilePath(TLFilename.SettingsFilename);
 
-            response.StatusCode = (int)HttpStatusCode.NotFound;
-            WriteString(response, @"File Not Found!");
+            System.Diagnostics.Debug.WriteLine("Webserver writefile: " + p);
+
+            if (File.Exists(p))
+                File.Delete(p);
+
+            string data = GetDataFromRequestInputStream(request);
+                
+            File.WriteAllText(p, data);
+            WriteString(response, "ok");
+            return;
         }
 
         private static void TelemetryClose(HttpListenerResponse response, Uri url)
@@ -509,7 +511,7 @@ namespace TeslaLogger
         }
 
         static string[] allowed_getfiles = new string[] {
-        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini"};
+        "changelog.md", "geofence.csv","geofence-private.csv","settings.json","weather.ini","dashboardlinks.txt"};
 
         private void Admin_Getfile(HttpListenerRequest request, HttpListenerResponse response)
         {
@@ -534,6 +536,8 @@ namespace TeslaLogger
                 p = p.Replace(@"Debug\", "");
                 p = p.Replace(@"net8.0\", "");
             }
+
+            System.Diagnostics.Debug.WriteLine("Webserver getfile: " + p);
 
             if (File.Exists(p))
             {
