@@ -224,6 +224,8 @@ namespace TeslaLogger
         {
             list.Clear();
             filename = filename.Replace(@"Debug\", "");
+            filename = filename.Replace(@"net8.0\", "");
+            filename = filename.Replace(@"/Debug/net8.0", "");
             int replaceCount = 0;
             if (File.Exists(filename))
             {
