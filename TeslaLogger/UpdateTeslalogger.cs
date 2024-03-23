@@ -1792,6 +1792,7 @@ PRIMARY KEY(id)
         {
             string filename = Path.Combine(FileManager.GetExecutingPath(), "language-" + language + ".txt");
             filename = filename.Replace("\\bin\\Debug", "\\bin");
+            filename = filename.Replace("/Debug/net8.0", "");
             return filename;
         }
 
