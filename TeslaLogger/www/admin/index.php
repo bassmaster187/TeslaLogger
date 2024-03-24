@@ -441,7 +441,7 @@ function ShowInfo()
 	else if(isDocker() && GrafanaVersion() != "10.0.1")
 	{?>
 		<?php
-		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}");
+		$t1=get_text("Please update to latest docker-compose.yml file. Check: {LINK}<br>Grafana 10.0.1 not installed!");
 		$t1=str_replace("{", "<a href='https://github.com/bassmaster187/TeslaLogger/blob/master/docker_setup.md#docker-update--upgrade'>", $t1);
 		$t1=str_replace("}", '</a>', $t1);
 		?>
@@ -541,6 +541,9 @@ function ShowInfo()
 		$installed = file_get_contents("/etc/teslalogger/VERSION");
 	else
 		$installed = getTeslaloggerVersion("/etc/teslalogger/git/TeslaLogger/Properties/AssemblyInfo.cs");
+
+	if (empty($installed))
+		$installed = GetFromTeslalogger("getversion");
 
 	$branch = file_get_contents("/etc/teslalogger/BRANCH");
 

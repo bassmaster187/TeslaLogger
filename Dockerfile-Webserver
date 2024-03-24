@@ -8,7 +8,8 @@ RUN apt-get update && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/* && \
   sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf && \
-  echo "1" > /var/tmp/dockerwebserverversion
+  echo "1" > /var/tmp/dockerwebserverversion && \
+  echo "1" > /var/tmp/dockernet8
 
 COPY TeslaLogger/www /var/www/html
 COPY docker/webserver/php.ini /usr/local/etc/php/

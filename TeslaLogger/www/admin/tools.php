@@ -19,6 +19,13 @@ function GetFileFromTeslaloggerAndWriteToTMP($filename)
         file_put_contents("/tmp/$filename", $contenturl);
 }
 
+function GetFromTeslalogger($path)
+{
+    $url = GetTeslaloggerURL($path);
+    $contenturl = @file_get_contents($url);
+    return $contenturl;
+}
+
 function GetTeslaloggerHTTPPort()
 {
     $port = 5000;
