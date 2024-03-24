@@ -233,6 +233,7 @@ namespace TeslaLogger
                 try
                 {
                     CurrentJSON = new CurrentJSON(this);
+                    CurrentJSON.FromKVS();
                     teslaAPIState = new TeslaAPIState(this);
                     this.TeslaName = TeslaName;
                     this.TeslaPasswort = TeslaPasswort;
@@ -1440,6 +1441,7 @@ namespace TeslaLogger
         {
             Log("change TeslaLogger state: " + _oldState.ToString() + " -> " + _newState.ToString());
             CurrentJSON.CreateCurrentJSON();
+            CurrentJSON.ToKVS();
 
             // any -> Sleep
             if (_oldState != TeslaState.Sleep && _newState == TeslaState.Sleep)
